@@ -70,7 +70,7 @@ Public Class Model
         Return DataService.GetBizObjectErrors()
     End Function
 
-    Public Function GetBizObjectRules()
+    Public Function GetBizObjectRules() Implements IModel.GetBizObjectRules
         Return DataService.GetBizObjectRules()
     End Function
 
@@ -261,7 +261,7 @@ Public Class Model
         Return Service.CheckIfUnique(textValue, tableName, fieldName, targetIdNo)
     End Function
 
-    Public Function IsValid(Of TM)(ByRef dModel As TM)
+    Public Function IsValid(Of TM)(ByRef dModel As TM) Implements IModel.IsValid
         Return DataService.IsValid(dModel)
     End Function
 
@@ -329,6 +329,14 @@ Public Class Model
             tlData.Add(tData)
         Next
         Return tlData
+    End Function
+
+    'Public Function IsValid(dataModel As Object) As Boolean Implements IModel.IsValid
+    '    Throw New NotImplementedException()
+    'End Function
+
+    Private Function IModel_GetBizObjectErrors() As IEnumerable(Of Object) Implements IModel.GetBizObjectErrors
+        Throw New NotImplementedException()
     End Function
 
 End Class

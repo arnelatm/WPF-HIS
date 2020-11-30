@@ -118,7 +118,7 @@
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\Basic.vb" />
-    <Compile Include="BusinessLayer\CkJournal.vb" />
+    <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\DjOiItem.vb" />
     <Compile Include="BusinessLayer\DisbursementJournal.vb" />
     <Compile Include="BusinessLayer\PayrollDeductAccount.vb" />
@@ -140,11 +140,8 @@
     <Compile Include="BusinessLayer\BusinessRules\ValidateAccounts.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateParentId.vb" />
     <Compile Include="BusinessLayer\DepositType.vb" />
-    <Compile Include="BusinessLayer\CdJournal.vb" />
-    <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\ProductCategory.vb" />
     <Compile Include="BusinessLayer\Account.vb" />
-    <Compile Include="BusinessLayer\CkdOiItem.vb" />
     <Compile Include="BusinessLayer\Commands\CommandBase.vb" />
     <Compile Include="BusinessLayer\Commands\EditCommand.vb" />
     <Compile Include="BusinessLayer\Commands\IToolBarCommand.vb" />
@@ -158,7 +155,6 @@
     <Compile Include="BusinessLayer\GeneralJournal.vb" />
     <Compile Include="BusinessLayer\GlLedgerItem.vb" />
     <Compile Include="BusinessLayer\JournalItem.vb" />
-    <Compile Include="BusinessLayer\PcJournal.vb" />
     <Compile Include="BusinessLayer\PurchaseItem.vb" />
     <Compile Include="BusinessLayer\PurchaseJournal.vb" />
     <Compile Include="BusinessLayer\Reconciled.vb" />
@@ -168,13 +164,7 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\BasicDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CkOiItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CkJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CkJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CdJournalItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PcOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DjOiItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CdOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDeductAccountDao.vb" />
     <Compile Include="DataLayer\AdoNet\PensionRateDao.vb" />
@@ -192,11 +182,9 @@
     <Compile Include="DataLayer\AdoNet\ErJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\BankDao.vb" />
     <Compile Include="DataLayer\AdoNet\DepositTypeDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CdJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\AccountDao.vb" />
-    <Compile Include="DataLayer\AdoNet\CkdOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CsrOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CustomerDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoAccounts.vb" />
@@ -209,8 +197,6 @@
     <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollEarnAccountDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PcJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PettyCashJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseJournalItemDao.vb" />
@@ -250,7 +236,6 @@
     <Compile Include="MyEnums.vb" />
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
-    <Compile Include="PresentationLayer\Models\CkJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\DisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\DjOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\OpInvItemModel.vb" />
@@ -265,9 +250,6 @@
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\CkJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\PcJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\CdJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDeductAccountPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionRatePresenter.vb" />
@@ -279,19 +261,11 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\Views\CkOiItemView.vb" />
-    <Compile Include="PresentationLayer\Views\CdOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\DjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\BasicEntry.Designer.vb">
       <DependentUpon>BasicEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\BasicEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CdJournalEntry.designer.vb">
-      <DependentUpon>CdJournalEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CdJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.Designer.vb">
@@ -575,12 +549,10 @@
     <Compile Include="PresentationLayer\Models\ArOpenInvoiceModel.vb" />
     <Compile Include="PresentationLayer\Models\BankModel.vb" />
     <Compile Include="PresentationLayer\Models\DepositTypeModel.vb" />
-    <Compile Include="PresentationLayer\Models\CdJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\EarningModel.vb" />
     <Compile Include="PresentationLayer\Models\ProductCategoryModel.vb" />
     <Compile Include="PresentationLayer\Models\AccountModel.vb" />
-    <Compile Include="PresentationLayer\Models\CkdOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\CsrOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\CustomerModel.vb" />
     <Compile Include="PresentationLayer\Models\DesignationModel.vb" />
@@ -593,7 +565,6 @@
     <Compile Include="PresentationLayer\Models\JournalItemModel.vb" />
     <Compile Include="PresentationLayer\Models\MainModel.vb" />
     <Compile Include="PresentationLayer\Models\ModelAccounts.vb" />
-    <Compile Include="PresentationLayer\Models\PcJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseItemModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ReconciledModel.vb" />
@@ -613,7 +584,6 @@
     <Compile Include="PresentationLayer\Presenters\EarningPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductCategoryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\CkdOiItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CsrOiItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DesignationPresenter.vb" />
@@ -632,7 +602,6 @@
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Views\AccountReconciliationItemView.vb" />
-    <Compile Include="PresentationLayer\Views\CkdOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\CsrOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\DistributionSchemeItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeDeductionView.vb" />
@@ -665,8 +634,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPensionSchemeView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductCategoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\ICkdOiItemsView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\ICkdOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICsrOiItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICsrOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICustomerView.vb" />
@@ -1895,9 +1862,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.resx">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\CdJournalEntry.resx">
-      <DependentUpon>CdJournalEntry.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DeductionEntryTv.resx">
       <DependentUpon>DeductionEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1905,15 +1869,15 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DepositTypeEntryTv.resx">
       <DependentUpon>DepositTypeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.resx">
+      <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
       <DependentUpon>PayGroupEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollTvEntry.resx">
       <DependentUpon>PayrollTvEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.resx">
-      <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.resx">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>

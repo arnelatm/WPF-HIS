@@ -1,28 +1,35 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
-Imports AATM.Libraries.GlobalFuncNSub
 Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
     ' Data access object for DisbursementJournal
     ' ** DAO Pattern
 
-    Public MustInherit Class DisbursementJournalDao
-        Inherits DaoAccounts
+    Public Class DisbursementJournalDao
+        Implements IDao(Of DisbursementJournal), IDaoJournals(Of DisbursementJournal), IDaoOiItem(Of DjOiItem)
 
         Private ReadOnly _db As New Db()
-        Private _tableName As String
+        Private _tableOrViewName As String
         Private _seriesName As String
 
-        Protected Property TableName As String
-            Get
-                Return _tableName
-            End Get
-            Set(value As String)
-                _tableName = value
-            End Set
-        End Property
+        Public Function GetTableOrViewName() As String
+            Return _tableOrViewName
+        End Function
+
+        Public Sub SetTableOrViewName(tableOrViewName As String)
+            _tableOrViewName = tableOrViewName
+        End Sub
+
+        'Protected Property TableName As String
+        '    Get
+        '        Return _tableOrViewName
+        '    End Get
+        '    Set(value As String)
+        '        _tableOrViewName = value
+        '    End Set
+        'End Property
 
         Protected Property SeriesName As String
             Get
@@ -33,11 +40,11 @@ Namespace DataLayer.AdoNet
             End Set
         End Property
 
-        Protected Function DjGetRecordById(idNo) As DisbursementJournal
+        Public Function GetRecordById(idNo) As DisbursementJournal Implements IDao(Of DisbursementJournal).GetRecordById
             Dim sql As String
             Dim data
             Dim params() As Object = {"@IdNo", idNo}
-            If TableName = "CkJournal" Then
+            If GetTableOrViewName() = "CkJournal" Then
                 sql = "SELECT " &
                     "AccountIdNo," &
                     "Amount," &
@@ -60,7 +67,7 @@ Namespace DataLayer.AdoNet
                     "UnApplied," &
                     "VatAmount," &
                     "VatNumber" &
-                    " FROM " & TableName &
+                    " FROM " & GetTableOrViewName() &
                     " WHERE IdNo = @IdNo"
                 data = _db.Read(sql, CkMake, params).FirstOrDefault()
             Else
@@ -84,27 +91,37 @@ Namespace DataLayer.AdoNet
                     "UnApplied," &
                     "VatAmount," &
                     "VatNumber" &
-                    " FROM " & TableName &
+                    " FROM " & GetTableOrViewName() &
                     " WHERE IdNo = @IdNo"
                 data = _db.Read(sql, DjMake, params).FirstOrDefault()
             End If
-            Dim jiDao = GetJiDao()
-            Dim oiDao = GetDjOiItemDao()
-            Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            data.JournalItems = ji
-            data.DjOiItems = oi
+            Dim jiDao = New JournalItemDao
+            Dim oiDao = New DjOiItemDao
+            If GetTableOrViewName() = "CdJournal" Then
+                jiDao.SetTableOrViewName("CdJournalItem_View")
+                oiDao.SetTableOrViewName("CdOiItem_View")
+            ElseIf GetTableOrViewName() = "PcJournal" Then
+                jiDao.SetTableOrViewName("PcJournalItem_View")
+                oiDao.SetTableOrViewName("PcOiItem_View")
+            Else
+                jiDao.SetTableOrViewName("CkJournalItem_View")
+                oiDao.SetTableOrViewName("CkOiItem_View")
+            End If
+            If data Is Nothing Then
+                Debugger.Break()
+            Else
+                Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+                Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+                data.JournalItems = ji
+                data.DjOiItems = oi
+            End If
             Return data
         End Function
 
-        Protected MustOverride Function GetJiDao()
-
-        Protected MustOverride Function GetDjOiItemDao()
-
-        Public Function DjUpdateRecord(ByRef disbursementJournal As DisbursementJournal) As Integer
+        Public Function UpdateRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).UpdateRecord
             Dim sql As String
-            If TableName = "CkJournal" Then
-                sql = " UPDATE " & TableName & " SET " &
+            If GetTableOrViewName() = "CkJournal" Then
+                sql = " UPDATE " & _tableOrViewName & " SET " &
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
@@ -125,8 +142,9 @@ Namespace DataLayer.AdoNet
                     "VatAmount     = @VatAmount," &
                     "VatNumber     = @VatNumber" &
                     " WHERE IdNo = @IdNo"
+                Return _db.Update(sql, CkTake(disbursementJournal))
             Else
-                sql = " UPDATE " & TableName & " SET " &
+                sql = " UPDATE " & GetTableOrViewName() & " SET " &
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
@@ -145,14 +163,14 @@ Namespace DataLayer.AdoNet
                     "VatAmount     = @VatAmount," &
                     "VatNumber     = @VatNumber" &
                     " WHERE IdNo = @IdNo"
+                Return _db.Update(sql, DjTake(disbursementJournal))
             End If
-            Return _db.Update(sql, DjTake(disbursementJournal))
         End Function
 
-        Public Function DjAddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer
+        Public Function DjAddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).AddRecord
             Dim sql As String
-            If TableName = "CkJournal" Then
-                sql = " INSERT INTO " & TableName & " (" &
+            If GetTableOrViewName() = "CkJournal" Then
+                sql = " INSERT INTO " & GetTableOrViewName() & " (" &
                         "AccountIdNo," &
                         "Amount," &
                         "Applied," &
@@ -193,7 +211,7 @@ Namespace DataLayer.AdoNet
                         ")"
                 Return _db.Insert(sql, CkTake(disbursementJournal))
             Else
-                sql = " INSERT INTO " & TableName & " (" &
+                sql = " INSERT INTO " & GetTableOrViewName() & " (" &
                         "AccountIdNo," &
                         "Amount," &
                         "Applied," &
@@ -334,18 +352,18 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function DjUpdateGlReferenceNumber(ByRef bizObj As DisbursementJournal) As Integer
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As DisbursementJournal) As Integer Implements IDaoJournals(Of DisbursementJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & SeriesName & "'"
-            sql2 = "Update [" & _tableName & "] set ReferenceNo = (select value from series where seriesName = '" & SeriesName & "') where IdNo = " & bizObj.IdNo
+            sql2 = "Update [" & _tableOrViewName & "] set ReferenceNo = (select value from series where seriesName = '" & SeriesName & "') where IdNo = " & bizObj.IdNo
             retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function
 
-        Public Function CdGetOpenInvoices(idNo As Integer) As List(Of DjOiItem)
-            Dim oiDao = GetDjOiItemDao()
+        Public Function GetOpenInvoices(idNo As Integer) As List(Of DjOiItem) Implements IDaoOiItem(Of DjOiItem).GetOpenInvoices
+            Dim oiDao = New DjOiItemDao
             Return oiDao.GetOpenInvoices(idNo)
         End Function
 

@@ -56,6 +56,7 @@ Public Interface IModel
     Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String
 
     Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T
+
     Function GetRecordPosition(tableName As String, dno As Integer) As Integer
 
     Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
@@ -84,5 +85,15 @@ Public Interface IModel
     Function UpdateRecord(Of TM)(ByRef modelBiz As TM) As Integer
 
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
+
     Function UpdateTvp(ByRef dtTable As DataTable) As Integer
+
+    'Function IsValid(dataModel As Object) As Boolean
+
+    Function GetBizObjectErrors() As IEnumerable(Of Object)
+
+    Function GetBizObjectRules() As Object
+
+    Function IsValid(Of TM)(ByRef dModel As TM) As Object
+
 End Interface

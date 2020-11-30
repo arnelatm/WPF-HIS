@@ -8,11 +8,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property Amount As Decimal
         Property Applied As Decimal
         Property Cancelled As Boolean
-
-        'Property CheckDate As Date?
-        'Property CheckNumber As String
+        Property CheckDate As Date?
+        Property CheckNumber As String
         Property DateCreated As DateTime?
-
         Property DiscountAccountIdNo As Int16?
         Property DiscountTaken As Decimal
         Property IdNo As Int32

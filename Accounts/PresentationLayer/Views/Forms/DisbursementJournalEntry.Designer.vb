@@ -108,1124 +108,1124 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.DataGridViewDjOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.dgvSequenceDjOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JournalItemIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tlpDisbursement.SuspendLayout
-        CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.DataGridViewDjOiItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsDjOiItems,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
-        '
-        'TranslatorDAC
-        '
-        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
-        'AppDataDAC
-        '
-        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
-        'tlpDisbursement
-        '
-        Me.tlpDisbursement.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.tlpDisbursement, "tlpDisbursement")
-        Me.tlpDisbursement.Controls.Add(Me.lblCheckNumber, 11, 8)
-        Me.tlpDisbursement.Controls.Add(Me.txtCheckNumber, 10, 8)
-        Me.tlpDisbursement.Controls.Add(Me.btnViewGL, 0, 8)
-        Me.tlpDisbursement.Controls.Add(Me.DataGridViewJournalItems, 0, 7)
-        Me.tlpDisbursement.Controls.Add(Me.lblDateCreated, 9, 6)
-        Me.tlpDisbursement.Controls.Add(Me.chkPosted, 11, 5)
-        Me.tlpDisbursement.Controls.Add(Me.dtpDateCreated, 10, 6)
-        Me.tlpDisbursement.Controls.Add(Me.lblPosted, 9, 5)
-        Me.tlpDisbursement.Controls.Add(Me.chkCancelled, 11, 4)
-        Me.tlpDisbursement.Controls.Add(Me.lblCancelled, 9, 4)
-        Me.tlpDisbursement.Controls.Add(Me.lblDiscountAccountIdNo, 0, 4)
-        Me.tlpDisbursement.Controls.Add(Me.lblNotes, 0, 5)
-        Me.tlpDisbursement.Controls.Add(Me.cboPaymentType, 1, 1)
-        Me.tlpDisbursement.Controls.Add(Me.cboAccountIdNo, 1, 2)
-        Me.tlpDisbursement.Controls.Add(Me.lblAccountIdNo, 0, 2)
-        Me.tlpDisbursement.Controls.Add(Me.lblPaymentType, 0, 1)
-        Me.tlpDisbursement.Controls.Add(Me.TxtIdNo, 2, 0)
-        Me.tlpDisbursement.Controls.Add(Me.txtJournalCode, 1, 0)
-        Me.tlpDisbursement.Controls.Add(Me.lblIdNo, 0, 0)
-        Me.tlpDisbursement.Controls.Add(Me.lblReferenceNo, 3, 0)
-        Me.tlpDisbursement.Controls.Add(Me.cboDiscountAccountIdNo, 1, 4)
-        Me.tlpDisbursement.Controls.Add(Me.lblInvoiceNo, 0, 3)
-        Me.tlpDisbursement.Controls.Add(Me.txtORNumber, 1, 3)
-        Me.tlpDisbursement.Controls.Add(Me.lblCheckDate, 3, 3)
-        Me.tlpDisbursement.Controls.Add(Me.txtReferenceNo, 5, 0)
-        Me.tlpDisbursement.Controls.Add(Me.lblSupplierIdNo, 4, 1)
-        Me.tlpDisbursement.Controls.Add(Me.dtpTransactionDate, 8, 0)
-        Me.tlpDisbursement.Controls.Add(Me.txtAmount, 8, 2)
-        Me.tlpDisbursement.Controls.Add(Me.txtVatNumber, 8, 3)
-        Me.tlpDisbursement.Controls.Add(Me.lblAmount, 7, 2)
-        Me.tlpDisbursement.Controls.Add(Me.lblTransactionDate, 7, 0)
-        Me.tlpDisbursement.Controls.Add(Me.lblVatNo, 7, 3)
-        Me.tlpDisbursement.Controls.Add(Me.dtpCheckDate, 5, 3)
-        Me.tlpDisbursement.Controls.Add(Me.txtNotes, 1, 5)
-        Me.tlpDisbursement.Controls.Add(Me.txtVatAmount, 11, 0)
-        Me.tlpDisbursement.Controls.Add(Me.txtApplied, 11, 1)
-        Me.tlpDisbursement.Controls.Add(Me.txtUnapplied, 11, 2)
-        Me.tlpDisbursement.Controls.Add(Me.lblVatAmount, 9, 0)
-        Me.tlpDisbursement.Controls.Add(Me.lblApplied, 9, 1)
-        Me.tlpDisbursement.Controls.Add(Me.CLabel2, 9, 2)
-        Me.tlpDisbursement.Controls.Add(Me.txtDiscountTaken, 11, 3)
-        Me.tlpDisbursement.Controls.Add(Me.lblDiscountTaken, 9, 3)
-        Me.tlpDisbursement.Controls.Add(Me.cboPayeeIdNo, 5, 1)
-        Me.tlpDisbursement.Controls.Add(Me.btnAutoApply, 2, 8)
-        Me.tlpDisbursement.Controls.Add(Me.DataGridViewDjOiItems, 12, 7)
-        Me.tlpDisbursement.Controls.Add(Me.txtPayeeName, 6, 8)
-        Me.tlpDisbursement.Name = "tlpDisbursement"
-        '
-        'lblCheckNumber
-        '
-        Me.lblCheckNumber.DisplayOnly = true
-        Me.lblCheckNumber.EditingMode = false
-        resources.ApplyResources(Me.lblCheckNumber, "lblCheckNumber")
-        Me.lblCheckNumber.Name = "lblCheckNumber"
-        '
-        'txtCheckNumber
-        '
-        Me.txtCheckNumber.BackColor = System.Drawing.Color.White
-        Me.txtCheckNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.tlpDisbursement.SetColumnSpan(Me.txtCheckNumber, 2)
-        Me.txtCheckNumber.ComputedValue = false
-        Me.txtCheckNumber.CustomFormat = Nothing
-        Me.txtCheckNumber.DataBoundControl = true
-        Me.txtCheckNumber.EditingMode = false
-        resources.ApplyResources(Me.txtCheckNumber, "txtCheckNumber")
-        Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
-        Me.txtCheckNumber.LinkedLabel = Me.lblInvoiceNo
-        Me.txtCheckNumber.MaximumValue = Nothing
-        Me.txtCheckNumber.MinimumValue = Nothing
-        Me.txtCheckNumber.Name = "txtCheckNumber"
-        Me.txtCheckNumber.OldValue = Nothing
-        Me.txtCheckNumber.ReadOnly = true
-        Me.txtCheckNumber.ValueIsMandatory = true
-        '
-        'lblInvoiceNo
-        '
-        Me.lblInvoiceNo.DisplayOnly = true
-        Me.lblInvoiceNo.EditingMode = false
-        resources.ApplyResources(Me.lblInvoiceNo, "lblInvoiceNo")
-        Me.lblInvoiceNo.Name = "lblInvoiceNo"
-        '
-        'btnViewGL
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.btnViewGL, 2)
-        Me.btnViewGL.DesignerSelected = false
-        Me.btnViewGL.DisplayOnly = true
-        resources.ApplyResources(Me.btnViewGL, "btnViewGL")
-        Me.btnViewGL.ImageIndex = 0
-        Me.btnViewGL.Name = "btnViewGL"
-        Me.btnViewGL.OriginalImageName = Nothing
-        Me.btnViewGL.SecurityKey = ""
-        '
-        'DataGridViewJournalItems
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridViewJournalItems.AutoGenerateColumns = false
-        Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.DiscountTakenDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.SpecialAccountDataGridViewTextBoxColumn, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn})
-        Me.tlpDisbursement.SetColumnSpan(Me.DataGridViewJournalItems, 12)
-        Me.DataGridViewJournalItems.DataInGridChanged = false
-        Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
-        Me.DataGridViewJournalItems.DgvFooter = Nothing
-        Me.DataGridViewJournalItems.DisplayOnly = false
-        resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
-        Me.DataGridViewJournalItems.Ea = EventAggregator1
-        Me.DataGridViewJournalItems.EditingMode = false
-        Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewJournalItems.FirstRowDeletionEnabled = false
-        Me.DataGridViewJournalItems.FirstRowInsertionEnabled = false
-        Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
-        Me.DataGridViewJournalItems.ReadOnly = true
-        Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
-        Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
-        Me.DataGridViewJournalItems.ShowFooter = false
-        Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewJournalItems.StartTrackingChanges = false
-        '
-        'dgvSequence
-        '
-        Me.dgvSequence.DataPropertyName = "Sequence"
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvSequence.DisplayOnly = true
-        Me.dgvSequence.EditingMode = false
-        Me.dgvSequence.Frozen = true
-        resources.ApplyResources(Me.dgvSequence, "dgvSequence")
-        Me.dgvSequence.Name = "dgvSequence"
-        Me.dgvSequence.ReadOnly = true
-        Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSequence.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'dgvAccountIdNo
-        '
-        Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-        Me.dgvAccountIdNo.Frozen = true
-        resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
-        Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
-        Me.dgvAccountIdNo.ReadOnly = true
-        Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvDebit
-        '
-        Me.dgvDebit.DataPropertyName = "Debit"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.Format = "###,##0.00"
-        Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvDebit.EditingMode = false
-        Me.dgvDebit.Frozen = true
-        resources.ApplyResources(Me.dgvDebit, "dgvDebit")
-        Me.dgvDebit.Name = "dgvDebit"
-        Me.dgvDebit.ReadOnly = true
-        Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvCredit
-        '
-        Me.dgvCredit.DataPropertyName = "Credit"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.Format = "###,##0.00"
-        Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvCredit.EditingMode = false
-        Me.dgvCredit.Frozen = true
-        resources.ApplyResources(Me.dgvCredit, "dgvCredit")
-        Me.dgvCredit.Name = "dgvCredit"
-        Me.dgvCredit.ReadOnly = true
-        Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvRevCostCenterIdNo
-        '
-        Me.dgvRevCostCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
-        resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
-        Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
-        Me.dgvRevCostCenterIdNo.ReadOnly = true
-        Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvNotes
-        '
-        Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvNotes.DataPropertyName = "Notes"
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle5
-        Me.dgvNotes.EditingMode = false
-        resources.ApplyResources(Me.dgvNotes, "dgvNotes")
-        Me.dgvNotes.Name = "dgvNotes"
-        Me.dgvNotes.ReadOnly = true
-        Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvNotes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DiscountTakenDataGridViewTextBoxColumn
-        '
-        Me.DiscountTakenDataGridViewTextBoxColumn.DataPropertyName = "DiscountTaken"
-        resources.ApplyResources(Me.DiscountTakenDataGridViewTextBoxColumn, "DiscountTakenDataGridViewTextBoxColumn")
-        Me.DiscountTakenDataGridViewTextBoxColumn.Name = "DiscountTakenDataGridViewTextBoxColumn"
-        Me.DiscountTakenDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'IdNoDataGridViewTextBoxColumn
-        '
-        Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
-        resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn, "IdNoDataGridViewTextBoxColumn")
-        Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
-        Me.IdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'JournalIdNoDataGridViewTextBoxColumn
-        '
-        Me.JournalIdNoDataGridViewTextBoxColumn.DataPropertyName = "JournalIdNo"
-        resources.ApplyResources(Me.JournalIdNoDataGridViewTextBoxColumn, "JournalIdNoDataGridViewTextBoxColumn")
-        Me.JournalIdNoDataGridViewTextBoxColumn.Name = "JournalIdNoDataGridViewTextBoxColumn"
-        Me.JournalIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'OpenInvoiceIdNoDataGridViewTextBoxColumn
-        '
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.DataPropertyName = "OpenInvoiceIdNo"
-        resources.ApplyResources(Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, "OpenInvoiceIdNoDataGridViewTextBoxColumn")
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Name = "OpenInvoiceIdNoDataGridViewTextBoxColumn"
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'OriginalAmountDataGridViewTextBoxColumn
-        '
-        Me.OriginalAmountDataGridViewTextBoxColumn.DataPropertyName = "OriginalAmount"
-        resources.ApplyResources(Me.OriginalAmountDataGridViewTextBoxColumn, "OriginalAmountDataGridViewTextBoxColumn")
-        Me.OriginalAmountDataGridViewTextBoxColumn.Name = "OriginalAmountDataGridViewTextBoxColumn"
-        Me.OriginalAmountDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'PaidAmountDataGridViewTextBoxColumn
-        '
-        Me.PaidAmountDataGridViewTextBoxColumn.DataPropertyName = "PaidAmount"
-        resources.ApplyResources(Me.PaidAmountDataGridViewTextBoxColumn, "PaidAmountDataGridViewTextBoxColumn")
-        Me.PaidAmountDataGridViewTextBoxColumn.Name = "PaidAmountDataGridViewTextBoxColumn"
-        Me.PaidAmountDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'PayeeTypeDataGridViewTextBoxColumn
-        '
-        Me.PayeeTypeDataGridViewTextBoxColumn.DataPropertyName = "PayeeType"
-        resources.ApplyResources(Me.PayeeTypeDataGridViewTextBoxColumn, "PayeeTypeDataGridViewTextBoxColumn")
-        Me.PayeeTypeDataGridViewTextBoxColumn.Name = "PayeeTypeDataGridViewTextBoxColumn"
-        Me.PayeeTypeDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'SpecialAccountDataGridViewTextBoxColumn
-        '
-        Me.SpecialAccountDataGridViewTextBoxColumn.DataPropertyName = "SpecialAccount"
-        resources.ApplyResources(Me.SpecialAccountDataGridViewTextBoxColumn, "SpecialAccountDataGridViewTextBoxColumn")
-        Me.SpecialAccountDataGridViewTextBoxColumn.Name = "SpecialAccountDataGridViewTextBoxColumn"
-        Me.SpecialAccountDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'AccountNameDataGridViewTextBoxColumn
-        '
-        Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
-        resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
-        Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
-        Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'CancelledDataGridViewCheckBoxColumn
-        '
-        Me.CancelledDataGridViewCheckBoxColumn.DataPropertyName = "Cancelled"
-        resources.ApplyResources(Me.CancelledDataGridViewCheckBoxColumn, "CancelledDataGridViewCheckBoxColumn")
-        Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
-        Me.CancelledDataGridViewCheckBoxColumn.ReadOnly = true
-        '
-        'bsJournalItems
-        '
-        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
-        '
-        'lblDateCreated
-        '
-        Me.lblDateCreated.DisplayOnly = true
-        resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
-        Me.lblDateCreated.EditingMode = false
-        Me.lblDateCreated.Name = "lblDateCreated"
-        '
-        'chkPosted
-        '
-        resources.ApplyResources(Me.chkPosted, "chkPosted")
-        Me.chkPosted.AutoCheck = false
-        Me.chkPosted.BackColor = System.Drawing.Color.White
-        Me.chkPosted.DisplayOnly = true
-        Me.chkPosted.EditingMode = true
-        Me.chkPosted.ForeColor = System.Drawing.Color.Black
-        Me.chkPosted.LinkedLabel = Me.lblPosted
-        Me.chkPosted.Name = "chkPosted"
-        Me.chkPosted.NoLabel = true
-        Me.chkPosted.OldValue = Nothing
-        Me.chkPosted.TabStop = false
-        Me.chkPosted.UseVisualStyleBackColor = false
-        '
-        'lblPosted
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.lblPosted, 2)
-        Me.lblPosted.DisplayOnly = true
-        resources.ApplyResources(Me.lblPosted, "lblPosted")
-        Me.lblPosted.EditingMode = false
-        Me.lblPosted.Name = "lblPosted"
-        '
-        'dtpDateCreated
-        '
-        Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.tlpDisbursement.SetColumnSpan(Me.dtpDateCreated, 2)
-        Me.dtpDateCreated.DefaultValue = Nothing
-        Me.dtpDateCreated.DisplayOnly = true
-        Me.dtpDateCreated.DtpDefaultValue = Nothing
-        Me.dtpDateCreated.EditingMode = false
-        Me.dtpDateCreated.EditsAllowed = false
-        Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
-        Me.dtpDateCreated.LinkedLabel = Nothing
-        resources.ApplyResources(Me.dtpDateCreated, "dtpDateCreated")
-        Me.dtpDateCreated.Name = "dtpDateCreated"
-        Me.dtpDateCreated.ReadOnlyDp = true
-        Me.dtpDateCreated.SecurityKey = Nothing
-        Me.dtpDateCreated.ShowLongDate = false
-        Me.dtpDateCreated.ShowTime = true
-        Me.dtpDateCreated.TabStop = false
-        Me.dtpDateCreated.TargetCalendar = Nothing
-        Me.dtpDateCreated.Value = Nothing
-        Me.dtpDateCreated.ValueIsMandatory = false
-        Me.dtpDateCreated.ValueIsNullable = false
-        '
-        'chkCancelled
-        '
-        resources.ApplyResources(Me.chkCancelled, "chkCancelled")
-        Me.chkCancelled.AutoCheck = false
-        Me.chkCancelled.BackColor = System.Drawing.Color.White
-        Me.chkCancelled.DisplayOnly = true
-        Me.chkCancelled.EditingMode = true
-        Me.chkCancelled.ForeColor = System.Drawing.Color.Black
-        Me.chkCancelled.LinkedLabel = Me.lblCancelled
-        Me.chkCancelled.Name = "chkCancelled"
-        Me.chkCancelled.NoLabel = true
-        Me.chkCancelled.OldValue = Nothing
-        Me.chkCancelled.TabStop = false
-        Me.chkCancelled.UseVisualStyleBackColor = false
-        '
-        'lblCancelled
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.lblCancelled, 2)
-        Me.lblCancelled.DisplayOnly = true
-        resources.ApplyResources(Me.lblCancelled, "lblCancelled")
-        Me.lblCancelled.EditingMode = false
-        Me.lblCancelled.Name = "lblCancelled"
-        '
-        'lblDiscountAccountIdNo
-        '
-        Me.lblDiscountAccountIdNo.DisplayOnly = true
-        Me.lblDiscountAccountIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblDiscountAccountIdNo, "lblDiscountAccountIdNo")
-        Me.lblDiscountAccountIdNo.Name = "lblDiscountAccountIdNo"
-        '
-        'lblNotes
-        '
-        Me.lblNotes.DisplayOnly = true
-        Me.lblNotes.EditingMode = false
-        resources.ApplyResources(Me.lblNotes, "lblNotes")
-        Me.lblNotes.Name = "lblNotes"
-        '
-        'cboPaymentType
-        '
-        Me.cboPaymentType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboPaymentType.BackColor = System.Drawing.Color.White
-        Me.cboPaymentType.ChangingSearchValueOnly = false
-        Me.tlpDisbursement.SetColumnSpan(Me.cboPaymentType, 3)
-        Me.cboPaymentType.CurrentSearchTerm = ""
-        Me.cboPaymentType.DefaultValue = "0"
-        Me.cboPaymentType.DisplayMember = "Name"
-        resources.ApplyResources(Me.cboPaymentType, "cboPaymentType")
-        Me.cboPaymentType.DropDownHeight = 1
-        Me.cboPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.cboPaymentType.EditingMode = false
-        Me.cboPaymentType.FilterRule = Nothing
-        Me.cboPaymentType.ForeColor = System.Drawing.Color.Black
-        Me.cboPaymentType.HideWhenNotEditingOrAdding = false
-        Me.cboPaymentType.LinkedLabel = Me.lblPaymentType
-        Me.cboPaymentType.Name = "cboPaymentType"
-        Me.cboPaymentType.OldValue = 0
-        Me.cboPaymentType.OriginalDataSource = Nothing
-        Me.cboPaymentType.OriginalList = Nothing
-        Me.cboPaymentType.OverrideDropDownStyleList = false
-        Me.cboPaymentType.PreviousSearchTerm = Nothing
-        Me.cboPaymentType.PreviousSelectedIndex = 0
-        Me.cboPaymentType.PropertySelector = Nothing
-        Me.cboPaymentType.ReadOnlyCombo = false
-        Me.cboPaymentType.SearchAnywhere = false
-        Me.cboPaymentType.SuggestBoxHeight = 200
-        Me.cboPaymentType.SuggestListOrderRule = Nothing
-        Me.cboPaymentType.TextToSearch = Nothing
-        Me.cboPaymentType.ValueIsMandatory = false
-        Me.cboPaymentType.ValueIsNullable = false
-        Me.cboPaymentType.ValueIsNumeric = false
-        Me.cboPaymentType.ValueMember = "Code"
-        '
-        'lblPaymentType
-        '
-        Me.lblPaymentType.DisplayOnly = true
-        Me.lblPaymentType.EditingMode = false
-        resources.ApplyResources(Me.lblPaymentType, "lblPaymentType")
-        Me.lblPaymentType.Name = "lblPaymentType"
-        '
-        'cboAccountIdNo
-        '
-        Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
-        Me.cboAccountIdNo.ChangingSearchValueOnly = false
-        Me.tlpDisbursement.SetColumnSpan(Me.cboAccountIdNo, 6)
-        Me.cboAccountIdNo.CurrentSearchTerm = ""
-        Me.cboAccountIdNo.DefaultValue = ""
-        Me.cboAccountIdNo.DisplayMember = "Name"
-        resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
-        Me.cboAccountIdNo.DropDownHeight = 1
-        Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.cboAccountIdNo.EditingMode = false
-        Me.cboAccountIdNo.FilterRule = Nothing
-        Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboAccountIdNo.LinkedLabel = Me.lblAccountIdNo
-        Me.cboAccountIdNo.Name = "cboAccountIdNo"
-        Me.cboAccountIdNo.OldValue = 0
-        Me.cboAccountIdNo.OriginalDataSource = Nothing
-        Me.cboAccountIdNo.OriginalList = Nothing
-        Me.cboAccountIdNo.OverrideDropDownStyleList = false
-        Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboAccountIdNo.PreviousSelectedIndex = 0
-        Me.cboAccountIdNo.PropertySelector = Nothing
-        Me.cboAccountIdNo.ReadOnlyCombo = false
-        Me.cboAccountIdNo.SearchAnywhere = false
-        Me.cboAccountIdNo.SuggestBoxHeight = 200
-        Me.cboAccountIdNo.SuggestListOrderRule = Nothing
-        Me.cboAccountIdNo.TextToSearch = Nothing
-        Me.cboAccountIdNo.ValueIsMandatory = false
-        Me.cboAccountIdNo.ValueIsNullable = false
-        Me.cboAccountIdNo.ValueIsNumeric = false
-        Me.cboAccountIdNo.ValueMember = "IdNo"
-        '
-        'lblAccountIdNo
-        '
-        Me.lblAccountIdNo.DisplayOnly = true
-        Me.lblAccountIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
-        Me.lblAccountIdNo.Name = "lblAccountIdNo"
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = true
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-        Me.TxtIdNo.EditingMode = true
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Me.lblIdNo
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.ReadOnly = true
-        Me.TxtIdNo.ValueIsNumeric = true
-        '
-        'lblIdNo
-        '
-        Me.lblIdNo.DisplayOnly = true
-        Me.lblIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-        Me.lblIdNo.Name = "lblIdNo"
-        '
-        'txtJournalCode
-        '
-        Me.txtJournalCode.BackColor = System.Drawing.Color.White
-        Me.txtJournalCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtJournalCode.ComputedValue = true
-        Me.txtJournalCode.CustomFormat = Nothing
-        Me.txtJournalCode.DataBoundControl = true
-        Me.txtJournalCode.DisplayOnly = true
-        resources.ApplyResources(Me.txtJournalCode, "txtJournalCode")
-        Me.txtJournalCode.EditingMode = true
-        Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
-        Me.txtJournalCode.LinkedLabel = Nothing
-        Me.txtJournalCode.MaximumValue = Nothing
-        Me.txtJournalCode.MinimumValue = Nothing
-        Me.txtJournalCode.Name = "txtJournalCode"
-        Me.txtJournalCode.OldValue = Nothing
-        Me.txtJournalCode.ReadOnly = true
-        Me.txtJournalCode.TabStop = false
-        Me.txtJournalCode.ValueIsMandatory = true
-        '
-        'lblReferenceNo
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.lblReferenceNo, 2)
-        Me.lblReferenceNo.DisplayOnly = true
-        resources.ApplyResources(Me.lblReferenceNo, "lblReferenceNo")
-        Me.lblReferenceNo.EditingMode = false
-        Me.lblReferenceNo.Name = "lblReferenceNo"
-        '
-        'cboDiscountAccountIdNo
-        '
-        Me.cboDiscountAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboDiscountAccountIdNo.BackColor = System.Drawing.Color.White
-        Me.cboDiscountAccountIdNo.ChangingSearchValueOnly = false
-        Me.tlpDisbursement.SetColumnSpan(Me.cboDiscountAccountIdNo, 8)
-        Me.cboDiscountAccountIdNo.CurrentSearchTerm = ""
-        Me.cboDiscountAccountIdNo.DefaultValue = Nothing
-        Me.cboDiscountAccountIdNo.DisplayMember = "Name"
-        resources.ApplyResources(Me.cboDiscountAccountIdNo, "cboDiscountAccountIdNo")
-        Me.cboDiscountAccountIdNo.DropDownHeight = 1
-        Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.cboDiscountAccountIdNo.EditingMode = false
-        Me.cboDiscountAccountIdNo.FilterRule = Nothing
-        Me.cboDiscountAccountIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboDiscountAccountIdNo.FormattingEnabled = true
-        Me.cboDiscountAccountIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboDiscountAccountIdNo.LinkedLabel = Nothing
-        Me.cboDiscountAccountIdNo.Name = "cboDiscountAccountIdNo"
-        Me.cboDiscountAccountIdNo.OldValue = 0
-        Me.cboDiscountAccountIdNo.OriginalDataSource = Nothing
-        Me.cboDiscountAccountIdNo.OriginalList = Nothing
-        Me.cboDiscountAccountIdNo.OverrideDropDownStyleList = false
-        Me.cboDiscountAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboDiscountAccountIdNo.PreviousSelectedIndex = 0
-        Me.cboDiscountAccountIdNo.PropertySelector = Nothing
-        Me.cboDiscountAccountIdNo.ReadOnlyCombo = false
-        Me.cboDiscountAccountIdNo.SearchAnywhere = false
-        Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
-        Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
-        Me.cboDiscountAccountIdNo.TextToSearch = Nothing
-        Me.cboDiscountAccountIdNo.ValueIsMandatory = false
-        Me.cboDiscountAccountIdNo.ValueIsNullable = false
-        Me.cboDiscountAccountIdNo.ValueIsNumeric = false
-        Me.cboDiscountAccountIdNo.ValueMember = "IdNo"
-        '
-        'txtORNumber
-        '
-        Me.txtORNumber.BackColor = System.Drawing.Color.White
-        Me.txtORNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.tlpDisbursement.SetColumnSpan(Me.txtORNumber, 2)
-        Me.txtORNumber.ComputedValue = false
-        Me.txtORNumber.CustomFormat = Nothing
-        Me.txtORNumber.DataBoundControl = true
-        resources.ApplyResources(Me.txtORNumber, "txtORNumber")
-        Me.txtORNumber.EditingMode = false
-        Me.txtORNumber.ForeColor = System.Drawing.Color.Black
-        Me.txtORNumber.LinkedLabel = Me.lblInvoiceNo
-        Me.txtORNumber.MaximumValue = Nothing
-        Me.txtORNumber.MinimumValue = Nothing
-        Me.txtORNumber.Name = "txtORNumber"
-        Me.txtORNumber.OldValue = Nothing
-        Me.txtORNumber.ReadOnly = true
-        Me.txtORNumber.ValueIsMandatory = true
-        '
-        'lblCheckDate
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.lblCheckDate, 2)
-        Me.lblCheckDate.DisplayOnly = true
-        resources.ApplyResources(Me.lblCheckDate, "lblCheckDate")
-        Me.lblCheckDate.EditingMode = false
-        Me.lblCheckDate.Name = "lblCheckDate"
-        '
-        'txtReferenceNo
-        '
-        Me.txtReferenceNo.BackColor = System.Drawing.Color.White
-        Me.txtReferenceNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.tlpDisbursement.SetColumnSpan(Me.txtReferenceNo, 2)
-        Me.txtReferenceNo.ComputedValue = false
-        Me.txtReferenceNo.CustomFormat = Nothing
-        Me.txtReferenceNo.DataBoundControl = true
-        resources.ApplyResources(Me.txtReferenceNo, "txtReferenceNo")
-        Me.txtReferenceNo.EditingMode = false
-        Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
-        Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
-        Me.txtReferenceNo.MaximumValue = Nothing
-        Me.txtReferenceNo.MinimumValue = Nothing
-        Me.txtReferenceNo.Name = "txtReferenceNo"
-        Me.txtReferenceNo.OldValue = Nothing
-        Me.txtReferenceNo.ReadOnly = true
-        Me.txtReferenceNo.ValueIsMandatory = true
-        '
-        'lblSupplierIdNo
-        '
-        Me.lblSupplierIdNo.DisplayOnly = true
-        Me.lblSupplierIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblSupplierIdNo, "lblSupplierIdNo")
-        Me.lblSupplierIdNo.Name = "lblSupplierIdNo"
-        '
-        'dtpTransactionDate
-        '
-        Me.dtpTransactionDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpTransactionDate.DefaultValue = Nothing
-        Me.dtpTransactionDate.DisplayOnly = false
-        Me.dtpTransactionDate.DtpDefaultValue = Nothing
-        Me.dtpTransactionDate.EditingMode = false
-        Me.dtpTransactionDate.EditsAllowed = false
-        Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpTransactionDate.LinkedLabel = Nothing
-        resources.ApplyResources(Me.dtpTransactionDate, "dtpTransactionDate")
-        Me.dtpTransactionDate.Name = "dtpTransactionDate"
-        Me.dtpTransactionDate.ReadOnlyDp = false
-        Me.dtpTransactionDate.SecurityKey = Nothing
-        Me.dtpTransactionDate.ShowLongDate = false
-        Me.dtpTransactionDate.ShowTime = false
-        Me.dtpTransactionDate.TargetCalendar = Nothing
-        Me.dtpTransactionDate.Value = Nothing
-        Me.dtpTransactionDate.ValueIsMandatory = false
-        Me.dtpTransactionDate.ValueIsNullable = false
-        '
-        'txtAmount
-        '
-        Me.txtAmount.BackColor = System.Drawing.Color.White
-        Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAmount.ComputedValue = false
-        Me.txtAmount.CustomFormat = "N2"
-        Me.txtAmount.DataBoundControl = true
-        resources.ApplyResources(Me.txtAmount, "txtAmount")
-        Me.txtAmount.EditingMode = false
-        Me.txtAmount.ForeColor = System.Drawing.Color.Black
-        Me.txtAmount.LinkedLabel = Me.lblAmount
-        Me.txtAmount.MaximumValue = Nothing
-        Me.txtAmount.MinimumValue = Nothing
-        Me.txtAmount.Name = "txtAmount"
-        Me.txtAmount.OldValue = Nothing
-        Me.txtAmount.ReadOnly = true
-        Me.txtAmount.ValueIsMandatory = true
-        Me.txtAmount.ValueIsNumeric = true
-        '
-        'lblAmount
-        '
-        Me.lblAmount.DisplayOnly = true
-        Me.lblAmount.EditingMode = false
-        resources.ApplyResources(Me.lblAmount, "lblAmount")
-        Me.lblAmount.Name = "lblAmount"
-        '
-        'txtVatNumber
-        '
-        Me.txtVatNumber.BackColor = System.Drawing.Color.White
-        Me.txtVatNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtVatNumber.ComputedValue = false
-        Me.txtVatNumber.CustomFormat = Nothing
-        Me.txtVatNumber.DataBoundControl = true
-        resources.ApplyResources(Me.txtVatNumber, "txtVatNumber")
-        Me.txtVatNumber.EditingMode = false
-        Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
-        Me.txtVatNumber.LinkedLabel = Me.lblApplied
-        Me.txtVatNumber.MaximumValue = Nothing
-        Me.txtVatNumber.MinimumValue = Nothing
-        Me.txtVatNumber.Name = "txtVatNumber"
-        Me.txtVatNumber.OldValue = Nothing
-        Me.txtVatNumber.ReadOnly = true
-        Me.txtVatNumber.ValueIsMandatory = true
-        Me.txtVatNumber.ValueIsNumeric = true
-        '
-        'lblApplied
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.lblApplied, 2)
-        Me.lblApplied.DisplayOnly = true
-        resources.ApplyResources(Me.lblApplied, "lblApplied")
-        Me.lblApplied.EditingMode = false
-        Me.lblApplied.Name = "lblApplied"
-        '
-        'lblTransactionDate
-        '
-        Me.lblTransactionDate.DisplayOnly = true
-        resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
-        Me.lblTransactionDate.EditingMode = false
-        Me.lblTransactionDate.Name = "lblTransactionDate"
-        '
-        'lblVatNo
-        '
-        Me.lblVatNo.DisplayOnly = true
-        Me.lblVatNo.EditingMode = false
-        resources.ApplyResources(Me.lblVatNo, "lblVatNo")
-        Me.lblVatNo.Name = "lblVatNo"
-        '
-        'dtpCheckDate
-        '
-        Me.dtpCheckDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.tlpDisbursement.SetColumnSpan(Me.dtpCheckDate, 2)
-        Me.dtpCheckDate.DefaultValue = Nothing
-        Me.dtpCheckDate.DisplayOnly = false
-        Me.dtpCheckDate.DtpDefaultValue = Nothing
-        Me.dtpCheckDate.EditingMode = false
-        Me.dtpCheckDate.EditsAllowed = false
-        Me.dtpCheckDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpCheckDate.LinkedLabel = Nothing
-        resources.ApplyResources(Me.dtpCheckDate, "dtpCheckDate")
-        Me.dtpCheckDate.Name = "dtpCheckDate"
-        Me.dtpCheckDate.ReadOnlyDp = false
-        Me.dtpCheckDate.SecurityKey = Nothing
-        Me.dtpCheckDate.ShowLongDate = false
-        Me.dtpCheckDate.ShowTime = false
-        Me.dtpCheckDate.TargetCalendar = Nothing
-        Me.dtpCheckDate.Value = Nothing
-        Me.dtpCheckDate.ValueIsMandatory = false
-        Me.dtpCheckDate.ValueIsNullable = false
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.tlpDisbursement.SetColumnSpan(Me.txtNotes, 8)
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
-        Me.txtNotes.EditingMode = false
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
-        Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.MaximumValue = Nothing
-        Me.txtNotes.MinimumValue = Nothing
-        Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.ReadOnly = true
-        Me.tlpDisbursement.SetRowSpan(Me.txtNotes, 2)
-        Me.txtNotes.ValueIsMandatory = true
-        '
-        'txtVatAmount
-        '
-        Me.txtVatAmount.BackColor = System.Drawing.Color.White
-        Me.txtVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtVatAmount.ComputedValue = false
-        Me.txtVatAmount.CustomFormat = "N2"
-        Me.txtVatAmount.DataBoundControl = true
-        Me.txtVatAmount.DisplayOnly = true
-        Me.txtVatAmount.EditingMode = true
-        resources.ApplyResources(Me.txtVatAmount, "txtVatAmount")
-        Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
-        Me.txtVatAmount.LinkedLabel = Me.lblApplied
-        Me.txtVatAmount.MaximumValue = Nothing
-        Me.txtVatAmount.MinimumValue = Nothing
-        Me.txtVatAmount.Name = "txtVatAmount"
-        Me.txtVatAmount.OldValue = Nothing
-        Me.txtVatAmount.ReadOnly = true
-        Me.txtVatAmount.TabStop = false
-        Me.txtVatAmount.ValueIsMandatory = true
-        Me.txtVatAmount.ValueIsNumeric = true
-        '
-        'txtApplied
-        '
-        Me.txtApplied.BackColor = System.Drawing.Color.White
-        Me.txtApplied.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtApplied.ComputedValue = false
-        Me.txtApplied.CustomFormat = "N2"
-        Me.txtApplied.DataBoundControl = true
-        Me.txtApplied.DisplayOnly = true
-        Me.txtApplied.EditingMode = true
-        resources.ApplyResources(Me.txtApplied, "txtApplied")
-        Me.txtApplied.ForeColor = System.Drawing.Color.Black
-        Me.txtApplied.LinkedLabel = Me.lblApplied
-        Me.txtApplied.MaximumValue = Nothing
-        Me.txtApplied.MinimumValue = Nothing
-        Me.txtApplied.Name = "txtApplied"
-        Me.txtApplied.OldValue = Nothing
-        Me.txtApplied.ReadOnly = true
-        Me.txtApplied.TabStop = false
-        Me.txtApplied.ValueIsMandatory = true
-        Me.txtApplied.ValueIsNumeric = true
-        '
-        'txtUnapplied
-        '
-        Me.txtUnapplied.BackColor = System.Drawing.Color.White
-        Me.txtUnapplied.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtUnapplied.ComputedValue = false
-        Me.txtUnapplied.CustomFormat = "N2"
-        Me.txtUnapplied.DataBoundControl = true
-        Me.txtUnapplied.DisplayOnly = true
-        Me.txtUnapplied.EditingMode = true
-        resources.ApplyResources(Me.txtUnapplied, "txtUnapplied")
-        Me.txtUnapplied.ForeColor = System.Drawing.Color.Black
-        Me.txtUnapplied.LinkedLabel = Me.CLabel2
-        Me.txtUnapplied.MaximumValue = Nothing
-        Me.txtUnapplied.MinimumValue = Nothing
-        Me.txtUnapplied.Name = "txtUnapplied"
-        Me.txtUnapplied.OldValue = Nothing
-        Me.txtUnapplied.ReadOnly = true
-        Me.txtUnapplied.TabStop = false
-        Me.txtUnapplied.ValueIsMandatory = true
-        Me.txtUnapplied.ValueIsNumeric = true
-        '
-        'CLabel2
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.CLabel2, 2)
-        Me.CLabel2.DisplayOnly = true
-        resources.ApplyResources(Me.CLabel2, "CLabel2")
-        Me.CLabel2.EditingMode = false
-        Me.CLabel2.Name = "CLabel2"
-        '
-        'lblVatAmount
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.lblVatAmount, 2)
-        Me.lblVatAmount.DisplayOnly = true
-        resources.ApplyResources(Me.lblVatAmount, "lblVatAmount")
-        Me.lblVatAmount.EditingMode = false
-        Me.lblVatAmount.Name = "lblVatAmount"
-        '
-        'txtDiscountTaken
-        '
-        Me.txtDiscountTaken.BackColor = System.Drawing.Color.White
-        Me.txtDiscountTaken.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDiscountTaken.ComputedValue = false
-        Me.txtDiscountTaken.CustomFormat = "N2"
-        Me.txtDiscountTaken.DataBoundControl = true
-        Me.txtDiscountTaken.DisplayOnly = true
-        Me.txtDiscountTaken.EditingMode = true
-        resources.ApplyResources(Me.txtDiscountTaken, "txtDiscountTaken")
-        Me.txtDiscountTaken.ForeColor = System.Drawing.Color.Black
-        Me.txtDiscountTaken.LinkedLabel = Me.lblDiscountTaken
-        Me.txtDiscountTaken.MaximumValue = Nothing
-        Me.txtDiscountTaken.MinimumValue = Nothing
-        Me.txtDiscountTaken.Name = "txtDiscountTaken"
-        Me.txtDiscountTaken.OldValue = Nothing
-        Me.txtDiscountTaken.ReadOnly = true
-        Me.txtDiscountTaken.TabStop = false
-        Me.txtDiscountTaken.ValueIsMandatory = true
-        Me.txtDiscountTaken.ValueIsNumeric = true
-        '
-        'lblDiscountTaken
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.lblDiscountTaken, 2)
-        Me.lblDiscountTaken.DisplayOnly = true
-        resources.ApplyResources(Me.lblDiscountTaken, "lblDiscountTaken")
-        Me.lblDiscountTaken.EditingMode = false
-        Me.lblDiscountTaken.Name = "lblDiscountTaken"
-        '
-        'cboPayeeIdNo
-        '
-        Me.cboPayeeIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboPayeeIdNo.BackColor = System.Drawing.Color.White
-        Me.cboPayeeIdNo.ChangingSearchValueOnly = false
-        Me.tlpDisbursement.SetColumnSpan(Me.cboPayeeIdNo, 4)
-        Me.cboPayeeIdNo.CurrentSearchTerm = ""
-        Me.cboPayeeIdNo.DefaultValue = Nothing
-        Me.cboPayeeIdNo.DisplayMember = "Name"
-        resources.ApplyResources(Me.cboPayeeIdNo, "cboPayeeIdNo")
-        Me.cboPayeeIdNo.DropDownHeight = 1
-        Me.cboPayeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.cboPayeeIdNo.EditingMode = false
-        Me.cboPayeeIdNo.FilterRule = Nothing
-        Me.cboPayeeIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboPayeeIdNo.FormattingEnabled = true
-        Me.cboPayeeIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboPayeeIdNo.LinkedLabel = Nothing
-        Me.cboPayeeIdNo.Name = "cboPayeeIdNo"
-        Me.cboPayeeIdNo.OldValue = 0
-        Me.cboPayeeIdNo.OriginalDataSource = Nothing
-        Me.cboPayeeIdNo.OriginalList = Nothing
-        Me.cboPayeeIdNo.OverrideDropDownStyleList = false
-        Me.cboPayeeIdNo.PreviousSearchTerm = Nothing
-        Me.cboPayeeIdNo.PreviousSelectedIndex = -1
-        Me.cboPayeeIdNo.PropertySelector = Nothing
-        Me.cboPayeeIdNo.ReadOnlyCombo = false
-        Me.cboPayeeIdNo.SearchAnywhere = false
-        Me.cboPayeeIdNo.SuggestBoxHeight = 200
-        Me.cboPayeeIdNo.SuggestListOrderRule = Nothing
-        Me.cboPayeeIdNo.TextToSearch = Nothing
-        Me.cboPayeeIdNo.ValueIsMandatory = false
-        Me.cboPayeeIdNo.ValueIsNullable = false
-        Me.cboPayeeIdNo.ValueIsNumeric = false
-        Me.cboPayeeIdNo.ValueMember = "IdNo"
-        '
-        'btnAutoApply
-        '
-        Me.tlpDisbursement.SetColumnSpan(Me.btnAutoApply, 3)
-        Me.btnAutoApply.DesignerSelected = false
-        Me.btnAutoApply.DisplayOnly = true
-        resources.ApplyResources(Me.btnAutoApply, "btnAutoApply")
-        Me.btnAutoApply.ImageIndex = 0
-        Me.btnAutoApply.Name = "btnAutoApply"
-        Me.btnAutoApply.OriginalImageName = Nothing
-        Me.btnAutoApply.SecurityKey = ""
-        '
-        'DataGridViewDjOiItems
-        '
-        Me.DataGridViewDjOiItems.AllowUserToAddRows = false
-        Me.DataGridViewDjOiItems.AllowUserToDeleteRows = false
-        Me.DataGridViewDjOiItems.AllowUserToResizeRows = false
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewDjOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
-        Me.DataGridViewDjOiItems.AutoGenerateColumns = false
-        Me.DataGridViewDjOiItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewDjOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDjOi, Me.dgvInvoiceNo, Me.DgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.DataGridViewTextBoxColumn6, Me.JournalItemIdNo, Me.OpenInvoiceIdNo})
-        Me.DataGridViewDjOiItems.DataInGridChanged = false
-        Me.DataGridViewDjOiItems.DataSource = Me.bsDjOiItems
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewDjOiItems.DefaultCellStyle = DataGridViewCellStyle17
-        Me.DataGridViewDjOiItems.DgvFooter = Nothing
-        Me.DataGridViewDjOiItems.DisplayOnly = false
-        resources.ApplyResources(Me.DataGridViewDjOiItems, "DataGridViewDjOiItems")
-        Me.DataGridViewDjOiItems.Ea = EventAggregator2
-        Me.DataGridViewDjOiItems.EditingMode = false
-        Me.DataGridViewDjOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewDjOiItems.FirstRowDeletionEnabled = false
-        Me.DataGridViewDjOiItems.FirstRowInsertionEnabled = false
-        Me.DataGridViewDjOiItems.Name = "DataGridViewDjOiItems"
-        Me.DataGridViewDjOiItems.ReadOnly = true
-        Me.DataGridViewDjOiItems.SequenceColumn = "dgvSequencePcsOi"
-        Me.DataGridViewDjOiItems.SequenceFieldName = "Sequence"
-        Me.DataGridViewDjOiItems.ShowFooter = false
-        Me.DataGridViewDjOiItems.ShowInsertColumnWhenEditing = false
-        Me.DataGridViewDjOiItems.StartTrackingChanges = false
-        '
-        'bsDjOiItems
-        '
-        Me.bsDjOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DjOiItemModel)
-        '
-        'txtPayeeName
-        '
-        Me.txtPayeeName.BackColor = System.Drawing.Color.White
-        Me.txtPayeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.tlpDisbursement.SetColumnSpan(Me.txtPayeeName, 4)
-        Me.txtPayeeName.ComputedValue = false
-        Me.txtPayeeName.CustomFormat = Nothing
-        Me.txtPayeeName.DataBoundControl = true
-        Me.txtPayeeName.EditingMode = false
-        resources.ApplyResources(Me.txtPayeeName, "txtPayeeName")
-        Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
-        Me.txtPayeeName.LinkedLabel = Me.lblAmount
-        Me.txtPayeeName.MaximumValue = Nothing
-        Me.txtPayeeName.MinimumValue = Nothing
-        Me.txtPayeeName.Name = "txtPayeeName"
-        Me.txtPayeeName.OldValue = Nothing
-        Me.txtPayeeName.ReadOnly = true
-        Me.txtPayeeName.ValueIsMandatory = true
-        '
-        'dgvSequenceDjOi
-        '
-        Me.dgvSequenceDjOi.DataPropertyName = "Sequence"
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-        Me.dgvSequenceDjOi.DefaultCellStyle = DataGridViewCellStyle8
-        Me.dgvSequenceDjOi.DisplayOnly = true
-        Me.dgvSequenceDjOi.EditingMode = true
-        resources.ApplyResources(Me.dgvSequenceDjOi, "dgvSequenceDjOi")
-        Me.dgvSequenceDjOi.Name = "dgvSequenceDjOi"
-        Me.dgvSequenceDjOi.ReadOnly = true
-        '
-        'dgvInvoiceNo
-        '
-        Me.dgvInvoiceNo.DataPropertyName = "InvoiceNo"
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-        Me.dgvInvoiceNo.DefaultCellStyle = DataGridViewCellStyle9
-        Me.dgvInvoiceNo.EditingMode = false
-        resources.ApplyResources(Me.dgvInvoiceNo, "dgvInvoiceNo")
-        Me.dgvInvoiceNo.Name = "dgvInvoiceNo"
-        Me.dgvInvoiceNo.ReadOnly = true
-        Me.dgvInvoiceNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'DgvTransactionDate
-        '
-        Me.DgvTransactionDate.DataPropertyName = "TransactionDate"
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-        Me.DgvTransactionDate.DefaultCellStyle = DataGridViewCellStyle10
-        Me.DgvTransactionDate.EditingMode = false
-        resources.ApplyResources(Me.DgvTransactionDate, "DgvTransactionDate")
-        Me.DgvTransactionDate.Name = "DgvTransactionDate"
-        Me.DgvTransactionDate.ReadOnly = true
-        Me.DgvTransactionDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvJournalCode
-        '
-        Me.dgvJournalCode.DataPropertyName = "JournalCode"
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-        Me.dgvJournalCode.DefaultCellStyle = DataGridViewCellStyle11
-        Me.dgvJournalCode.EditingMode = false
-        resources.ApplyResources(Me.dgvJournalCode, "dgvJournalCode")
-        Me.dgvJournalCode.Name = "dgvJournalCode"
-        Me.dgvJournalCode.ReadOnly = true
-        Me.dgvJournalCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvJournalIdNoAp
-        '
-        Me.dgvJournalIdNoAp.DataPropertyName = "JournalIdNo"
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-        Me.dgvJournalIdNoAp.DefaultCellStyle = DataGridViewCellStyle12
-        Me.dgvJournalIdNoAp.EditingMode = false
-        resources.ApplyResources(Me.dgvJournalIdNoAp, "dgvJournalIdNoAp")
-        Me.dgvJournalIdNoAp.Name = "dgvJournalIdNoAp"
-        Me.dgvJournalIdNoAp.ReadOnly = true
-        Me.dgvJournalIdNoAp.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvPreviousBalance
-        '
-        Me.dgvPreviousBalance.DataPropertyName = "PreviousBalance"
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle13.Format = "###,##0.00"
-        Me.dgvPreviousBalance.DefaultCellStyle = DataGridViewCellStyle13
-        Me.dgvPreviousBalance.EditingMode = false
-        resources.ApplyResources(Me.dgvPreviousBalance, "dgvPreviousBalance")
-        Me.dgvPreviousBalance.Name = "dgvPreviousBalance"
-        Me.dgvPreviousBalance.ReadOnly = true
-        Me.dgvPreviousBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPreviousBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'dgvAmount
-        '
-        Me.dgvAmount.DataPropertyName = "Amount"
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle14.Format = "###,##0.00"
-        Me.dgvAmount.DefaultCellStyle = DataGridViewCellStyle14
-        Me.dgvAmount.EditingMode = false
-        resources.ApplyResources(Me.dgvAmount, "dgvAmount")
-        Me.dgvAmount.Name = "dgvAmount"
-        Me.dgvAmount.ReadOnly = true
-        Me.dgvAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'dgvDiscountTaken
-        '
-        Me.dgvDiscountTaken.DataPropertyName = "DiscountTaken"
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle15.Format = "###,##0.00"
-        Me.dgvDiscountTaken.DefaultCellStyle = DataGridViewCellStyle15
-        Me.dgvDiscountTaken.EditingMode = false
-        resources.ApplyResources(Me.dgvDiscountTaken, "dgvDiscountTaken")
-        Me.dgvDiscountTaken.Name = "dgvDiscountTaken"
-        Me.dgvDiscountTaken.ReadOnly = true
-        Me.dgvDiscountTaken.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDiscountTaken.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'dgvBalance
-        '
-        Me.dgvBalance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvBalance.DataPropertyName = "Balance"
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle16.Format = "###,##0.00"
-        Me.dgvBalance.DefaultCellStyle = DataGridViewCellStyle16
-        Me.dgvBalance.EditingMode = false
-        resources.ApplyResources(Me.dgvBalance, "dgvBalance")
-        Me.dgvBalance.Name = "dgvBalance"
-        Me.dgvBalance.ReadOnly = true
-        Me.dgvBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'DataGridViewTextBoxColumn6
-        '
-        Me.DataGridViewTextBoxColumn6.DataPropertyName = "AccountIdNo"
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
-        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        Me.DataGridViewTextBoxColumn6.ReadOnly = true
-        '
-        'JournalItemIdNo
-        '
-        Me.JournalItemIdNo.DataPropertyName = "JournalItemIdNo"
-        resources.ApplyResources(Me.JournalItemIdNo, "JournalItemIdNo")
-        Me.JournalItemIdNo.Name = "JournalItemIdNo"
-        Me.JournalItemIdNo.ReadOnly = true
-        '
-        'OpenInvoiceIdNo
-        '
-        Me.OpenInvoiceIdNo.DataPropertyName = "OpenInvoiceIdNo"
-        resources.ApplyResources(Me.OpenInvoiceIdNo, "OpenInvoiceIdNo")
-        Me.OpenInvoiceIdNo.Name = "OpenInvoiceIdNo"
-        Me.OpenInvoiceIdNo.ReadOnly = true
-        '
-        'DisbursementJournalEntry
-        '
-        resources.ApplyResources(Me, "$this")
+            Me.dgvSequenceDjOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.JournalItemIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.tlpDisbursement.SuspendLayout()
+            CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.DataGridViewDjOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsDjOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SuspendLayout()
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+            '
+            'tlpDisbursement
+            '
+            Me.tlpDisbursement.BackColor = System.Drawing.Color.Transparent
+            resources.ApplyResources(Me.tlpDisbursement, "tlpDisbursement")
+            Me.tlpDisbursement.Controls.Add(Me.lblCheckNumber, 11, 8)
+            Me.tlpDisbursement.Controls.Add(Me.txtCheckNumber, 10, 8)
+            Me.tlpDisbursement.Controls.Add(Me.btnViewGL, 0, 8)
+            Me.tlpDisbursement.Controls.Add(Me.DataGridViewJournalItems, 0, 7)
+            Me.tlpDisbursement.Controls.Add(Me.lblDateCreated, 9, 6)
+            Me.tlpDisbursement.Controls.Add(Me.chkPosted, 11, 5)
+            Me.tlpDisbursement.Controls.Add(Me.dtpDateCreated, 10, 6)
+            Me.tlpDisbursement.Controls.Add(Me.lblPosted, 9, 5)
+            Me.tlpDisbursement.Controls.Add(Me.chkCancelled, 11, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblCancelled, 9, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblDiscountAccountIdNo, 0, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblNotes, 0, 5)
+            Me.tlpDisbursement.Controls.Add(Me.cboPaymentType, 1, 1)
+            Me.tlpDisbursement.Controls.Add(Me.cboAccountIdNo, 1, 2)
+            Me.tlpDisbursement.Controls.Add(Me.lblAccountIdNo, 0, 2)
+            Me.tlpDisbursement.Controls.Add(Me.lblPaymentType, 0, 1)
+            Me.tlpDisbursement.Controls.Add(Me.TxtIdNo, 2, 0)
+            Me.tlpDisbursement.Controls.Add(Me.txtJournalCode, 1, 0)
+            Me.tlpDisbursement.Controls.Add(Me.lblIdNo, 0, 0)
+            Me.tlpDisbursement.Controls.Add(Me.lblReferenceNo, 3, 0)
+            Me.tlpDisbursement.Controls.Add(Me.cboDiscountAccountIdNo, 1, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblInvoiceNo, 0, 3)
+            Me.tlpDisbursement.Controls.Add(Me.txtORNumber, 1, 3)
+            Me.tlpDisbursement.Controls.Add(Me.lblCheckDate, 3, 3)
+            Me.tlpDisbursement.Controls.Add(Me.txtReferenceNo, 5, 0)
+            Me.tlpDisbursement.Controls.Add(Me.lblSupplierIdNo, 4, 1)
+            Me.tlpDisbursement.Controls.Add(Me.dtpTransactionDate, 8, 0)
+            Me.tlpDisbursement.Controls.Add(Me.txtAmount, 8, 2)
+            Me.tlpDisbursement.Controls.Add(Me.txtVatNumber, 8, 3)
+            Me.tlpDisbursement.Controls.Add(Me.lblAmount, 7, 2)
+            Me.tlpDisbursement.Controls.Add(Me.lblTransactionDate, 7, 0)
+            Me.tlpDisbursement.Controls.Add(Me.lblVatNo, 7, 3)
+            Me.tlpDisbursement.Controls.Add(Me.dtpCheckDate, 5, 3)
+            Me.tlpDisbursement.Controls.Add(Me.txtNotes, 1, 5)
+            Me.tlpDisbursement.Controls.Add(Me.txtVatAmount, 11, 0)
+            Me.tlpDisbursement.Controls.Add(Me.txtApplied, 11, 1)
+            Me.tlpDisbursement.Controls.Add(Me.txtUnapplied, 11, 2)
+            Me.tlpDisbursement.Controls.Add(Me.lblVatAmount, 9, 0)
+            Me.tlpDisbursement.Controls.Add(Me.lblApplied, 9, 1)
+            Me.tlpDisbursement.Controls.Add(Me.CLabel2, 9, 2)
+            Me.tlpDisbursement.Controls.Add(Me.txtDiscountTaken, 11, 3)
+            Me.tlpDisbursement.Controls.Add(Me.lblDiscountTaken, 9, 3)
+            Me.tlpDisbursement.Controls.Add(Me.cboPayeeIdNo, 5, 1)
+            Me.tlpDisbursement.Controls.Add(Me.btnAutoApply, 2, 8)
+            Me.tlpDisbursement.Controls.Add(Me.DataGridViewDjOiItems, 12, 7)
+            Me.tlpDisbursement.Controls.Add(Me.txtPayeeName, 6, 8)
+            Me.tlpDisbursement.Name = "tlpDisbursement"
+            '
+            'lblCheckNumber
+            '
+            Me.lblCheckNumber.DisplayOnly = True
+            Me.lblCheckNumber.EditingMode = False
+            resources.ApplyResources(Me.lblCheckNumber, "lblCheckNumber")
+            Me.lblCheckNumber.Name = "lblCheckNumber"
+            '
+            'txtCheckNumber
+            '
+            Me.txtCheckNumber.BackColor = System.Drawing.Color.White
+            Me.txtCheckNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.tlpDisbursement.SetColumnSpan(Me.txtCheckNumber, 2)
+            Me.txtCheckNumber.ComputedValue = False
+            Me.txtCheckNumber.CustomFormat = Nothing
+            Me.txtCheckNumber.DataBoundControl = True
+            Me.txtCheckNumber.EditingMode = False
+            resources.ApplyResources(Me.txtCheckNumber, "txtCheckNumber")
+            Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
+            Me.txtCheckNumber.LinkedLabel = Me.lblInvoiceNo
+            Me.txtCheckNumber.MaximumValue = Nothing
+            Me.txtCheckNumber.MinimumValue = Nothing
+            Me.txtCheckNumber.Name = "txtCheckNumber"
+            Me.txtCheckNumber.OldValue = Nothing
+            Me.txtCheckNumber.ReadOnly = True
+            Me.txtCheckNumber.ValueIsMandatory = True
+            '
+            'lblInvoiceNo
+            '
+            Me.lblInvoiceNo.DisplayOnly = True
+            Me.lblInvoiceNo.EditingMode = False
+            resources.ApplyResources(Me.lblInvoiceNo, "lblInvoiceNo")
+            Me.lblInvoiceNo.Name = "lblInvoiceNo"
+            '
+            'btnViewGL
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.btnViewGL, 2)
+            Me.btnViewGL.DesignerSelected = False
+            Me.btnViewGL.DisplayOnly = True
+            resources.ApplyResources(Me.btnViewGL, "btnViewGL")
+            Me.btnViewGL.ImageIndex = 0
+            Me.btnViewGL.Name = "btnViewGL"
+            Me.btnViewGL.OriginalImageName = Nothing
+            Me.btnViewGL.SecurityKey = ""
+            '
+            'DataGridViewJournalItems
+            '
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewJournalItems.AutoGenerateColumns = False
+            Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.DiscountTakenDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.SpecialAccountDataGridViewTextBoxColumn, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn})
+            Me.tlpDisbursement.SetColumnSpan(Me.DataGridViewJournalItems, 12)
+            Me.DataGridViewJournalItems.DataInGridChanged = False
+            Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
+            Me.DataGridViewJournalItems.DgvFooter = Nothing
+            Me.DataGridViewJournalItems.DisplayOnly = False
+            resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
+            Me.DataGridViewJournalItems.Ea = EventAggregator1
+            Me.DataGridViewJournalItems.EditingMode = False
+            Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewJournalItems.FirstRowDeletionEnabled = False
+            Me.DataGridViewJournalItems.FirstRowInsertionEnabled = False
+            Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
+            Me.DataGridViewJournalItems.ReadOnly = True
+            Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
+            Me.DataGridViewJournalItems.ShowFooter = False
+            Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewJournalItems.StartTrackingChanges = False
+            '
+            'dgvSequence
+            '
+            Me.dgvSequence.DataPropertyName = "Sequence"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequence.DisplayOnly = True
+            Me.dgvSequence.EditingMode = False
+            Me.dgvSequence.Frozen = True
+            resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+            Me.dgvSequence.Name = "dgvSequence"
+            Me.dgvSequence.ReadOnly = True
+            Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequence.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+            '
+            'dgvAccountIdNo
+            '
+            Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+            Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
+            Me.dgvAccountIdNo.Frozen = True
+            resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
+            Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
+            Me.dgvAccountIdNo.ReadOnly = True
+            Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvDebit
+            '
+            Me.dgvDebit.DataPropertyName = "Debit"
+            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle3.Format = "###,##0.00"
+            Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle3
+            Me.dgvDebit.EditingMode = False
+            Me.dgvDebit.Frozen = True
+            resources.ApplyResources(Me.dgvDebit, "dgvDebit")
+            Me.dgvDebit.Name = "dgvDebit"
+            Me.dgvDebit.ReadOnly = True
+            Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvCredit
+            '
+            Me.dgvCredit.DataPropertyName = "Credit"
+            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle4.Format = "###,##0.00"
+            Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle4
+            Me.dgvCredit.EditingMode = False
+            Me.dgvCredit.Frozen = True
+            resources.ApplyResources(Me.dgvCredit, "dgvCredit")
+            Me.dgvCredit.Name = "dgvCredit"
+            Me.dgvCredit.ReadOnly = True
+            Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvRevCostCenterIdNo
+            '
+            Me.dgvRevCostCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+            Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
+            resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
+            Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
+            Me.dgvRevCostCenterIdNo.ReadOnly = True
+            Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvNotes
+            '
+            Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvNotes.DataPropertyName = "Notes"
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle5
+            Me.dgvNotes.EditingMode = False
+            resources.ApplyResources(Me.dgvNotes, "dgvNotes")
+            Me.dgvNotes.Name = "dgvNotes"
+            Me.dgvNotes.ReadOnly = True
+            Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvNotes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+            '
+            'DiscountTakenDataGridViewTextBoxColumn
+            '
+            Me.DiscountTakenDataGridViewTextBoxColumn.DataPropertyName = "DiscountTaken"
+            resources.ApplyResources(Me.DiscountTakenDataGridViewTextBoxColumn, "DiscountTakenDataGridViewTextBoxColumn")
+            Me.DiscountTakenDataGridViewTextBoxColumn.Name = "DiscountTakenDataGridViewTextBoxColumn"
+            Me.DiscountTakenDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'IdNoDataGridViewTextBoxColumn
+            '
+            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
+            resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn, "IdNoDataGridViewTextBoxColumn")
+            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
+            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'JournalIdNoDataGridViewTextBoxColumn
+            '
+            Me.JournalIdNoDataGridViewTextBoxColumn.DataPropertyName = "JournalIdNo"
+            resources.ApplyResources(Me.JournalIdNoDataGridViewTextBoxColumn, "JournalIdNoDataGridViewTextBoxColumn")
+            Me.JournalIdNoDataGridViewTextBoxColumn.Name = "JournalIdNoDataGridViewTextBoxColumn"
+            Me.JournalIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'OpenInvoiceIdNoDataGridViewTextBoxColumn
+            '
+            Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.DataPropertyName = "OpenInvoiceIdNo"
+            resources.ApplyResources(Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, "OpenInvoiceIdNoDataGridViewTextBoxColumn")
+            Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Name = "OpenInvoiceIdNoDataGridViewTextBoxColumn"
+            Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'OriginalAmountDataGridViewTextBoxColumn
+            '
+            Me.OriginalAmountDataGridViewTextBoxColumn.DataPropertyName = "OriginalAmount"
+            resources.ApplyResources(Me.OriginalAmountDataGridViewTextBoxColumn, "OriginalAmountDataGridViewTextBoxColumn")
+            Me.OriginalAmountDataGridViewTextBoxColumn.Name = "OriginalAmountDataGridViewTextBoxColumn"
+            Me.OriginalAmountDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'PaidAmountDataGridViewTextBoxColumn
+            '
+            Me.PaidAmountDataGridViewTextBoxColumn.DataPropertyName = "PaidAmount"
+            resources.ApplyResources(Me.PaidAmountDataGridViewTextBoxColumn, "PaidAmountDataGridViewTextBoxColumn")
+            Me.PaidAmountDataGridViewTextBoxColumn.Name = "PaidAmountDataGridViewTextBoxColumn"
+            Me.PaidAmountDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'PayeeTypeDataGridViewTextBoxColumn
+            '
+            Me.PayeeTypeDataGridViewTextBoxColumn.DataPropertyName = "PayeeType"
+            resources.ApplyResources(Me.PayeeTypeDataGridViewTextBoxColumn, "PayeeTypeDataGridViewTextBoxColumn")
+            Me.PayeeTypeDataGridViewTextBoxColumn.Name = "PayeeTypeDataGridViewTextBoxColumn"
+            Me.PayeeTypeDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'SpecialAccountDataGridViewTextBoxColumn
+            '
+            Me.SpecialAccountDataGridViewTextBoxColumn.DataPropertyName = "SpecialAccount"
+            resources.ApplyResources(Me.SpecialAccountDataGridViewTextBoxColumn, "SpecialAccountDataGridViewTextBoxColumn")
+            Me.SpecialAccountDataGridViewTextBoxColumn.Name = "SpecialAccountDataGridViewTextBoxColumn"
+            Me.SpecialAccountDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'AccountNameDataGridViewTextBoxColumn
+            '
+            Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
+            resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
+            Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
+            Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'CancelledDataGridViewCheckBoxColumn
+            '
+            Me.CancelledDataGridViewCheckBoxColumn.DataPropertyName = "Cancelled"
+            resources.ApplyResources(Me.CancelledDataGridViewCheckBoxColumn, "CancelledDataGridViewCheckBoxColumn")
+            Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
+            Me.CancelledDataGridViewCheckBoxColumn.ReadOnly = True
+            '
+            'bsJournalItems
+            '
+            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
+            '
+            'lblDateCreated
+            '
+            Me.lblDateCreated.DisplayOnly = True
+            resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
+            Me.lblDateCreated.EditingMode = False
+            Me.lblDateCreated.Name = "lblDateCreated"
+            '
+            'chkPosted
+            '
+            resources.ApplyResources(Me.chkPosted, "chkPosted")
+            Me.chkPosted.AutoCheck = False
+            Me.chkPosted.BackColor = System.Drawing.Color.White
+            Me.chkPosted.DisplayOnly = True
+            Me.chkPosted.EditingMode = True
+            Me.chkPosted.ForeColor = System.Drawing.Color.Black
+            Me.chkPosted.LinkedLabel = Me.lblPosted
+            Me.chkPosted.Name = "chkPosted"
+            Me.chkPosted.NoLabel = True
+            Me.chkPosted.OldValue = Nothing
+            Me.chkPosted.TabStop = False
+            Me.chkPosted.UseVisualStyleBackColor = False
+            '
+            'lblPosted
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.lblPosted, 2)
+            Me.lblPosted.DisplayOnly = True
+            resources.ApplyResources(Me.lblPosted, "lblPosted")
+            Me.lblPosted.EditingMode = False
+            Me.lblPosted.Name = "lblPosted"
+            '
+            'dtpDateCreated
+            '
+            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.tlpDisbursement.SetColumnSpan(Me.dtpDateCreated, 2)
+            Me.dtpDateCreated.DefaultValue = Nothing
+            Me.dtpDateCreated.DisplayOnly = True
+            Me.dtpDateCreated.DtpDefaultValue = Nothing
+            Me.dtpDateCreated.EditingMode = False
+            Me.dtpDateCreated.EditsAllowed = False
+            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.dtpDateCreated.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpDateCreated, "dtpDateCreated")
+            Me.dtpDateCreated.Name = "dtpDateCreated"
+            Me.dtpDateCreated.ReadOnlyDp = True
+            Me.dtpDateCreated.SecurityKey = Nothing
+            Me.dtpDateCreated.ShowLongDate = False
+            Me.dtpDateCreated.ShowTime = True
+            Me.dtpDateCreated.TabStop = False
+            Me.dtpDateCreated.TargetCalendar = Nothing
+            Me.dtpDateCreated.Value = Nothing
+            Me.dtpDateCreated.ValueIsMandatory = False
+            Me.dtpDateCreated.ValueIsNullable = False
+            '
+            'chkCancelled
+            '
+            resources.ApplyResources(Me.chkCancelled, "chkCancelled")
+            Me.chkCancelled.AutoCheck = False
+            Me.chkCancelled.BackColor = System.Drawing.Color.White
+            Me.chkCancelled.DisplayOnly = True
+            Me.chkCancelled.EditingMode = True
+            Me.chkCancelled.ForeColor = System.Drawing.Color.Black
+            Me.chkCancelled.LinkedLabel = Me.lblCancelled
+            Me.chkCancelled.Name = "chkCancelled"
+            Me.chkCancelled.NoLabel = True
+            Me.chkCancelled.OldValue = Nothing
+            Me.chkCancelled.TabStop = False
+            Me.chkCancelled.UseVisualStyleBackColor = False
+            '
+            'lblCancelled
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.lblCancelled, 2)
+            Me.lblCancelled.DisplayOnly = True
+            resources.ApplyResources(Me.lblCancelled, "lblCancelled")
+            Me.lblCancelled.EditingMode = False
+            Me.lblCancelled.Name = "lblCancelled"
+            '
+            'lblDiscountAccountIdNo
+            '
+            Me.lblDiscountAccountIdNo.DisplayOnly = True
+            Me.lblDiscountAccountIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblDiscountAccountIdNo, "lblDiscountAccountIdNo")
+            Me.lblDiscountAccountIdNo.Name = "lblDiscountAccountIdNo"
+            '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.Name = "lblNotes"
+            '
+            'cboPaymentType
+            '
+            Me.cboPaymentType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+            Me.cboPaymentType.BackColor = System.Drawing.Color.White
+            Me.cboPaymentType.ChangingSearchValueOnly = False
+            Me.tlpDisbursement.SetColumnSpan(Me.cboPaymentType, 3)
+            Me.cboPaymentType.CurrentSearchTerm = ""
+            Me.cboPaymentType.DefaultValue = "0"
+            Me.cboPaymentType.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboPaymentType, "cboPaymentType")
+            Me.cboPaymentType.DropDownHeight = 1
+            Me.cboPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboPaymentType.EditingMode = False
+            Me.cboPaymentType.FilterRule = Nothing
+            Me.cboPaymentType.ForeColor = System.Drawing.Color.Black
+            Me.cboPaymentType.HideWhenNotEditingOrAdding = False
+            Me.cboPaymentType.LinkedLabel = Me.lblPaymentType
+            Me.cboPaymentType.Name = "cboPaymentType"
+            Me.cboPaymentType.OldValue = 0
+            Me.cboPaymentType.OriginalDataSource = Nothing
+            Me.cboPaymentType.OriginalList = Nothing
+            Me.cboPaymentType.OverrideDropDownStyleList = False
+            Me.cboPaymentType.PreviousSearchTerm = Nothing
+            Me.cboPaymentType.PreviousSelectedIndex = 0
+            Me.cboPaymentType.PropertySelector = Nothing
+            Me.cboPaymentType.ReadOnlyCombo = False
+            Me.cboPaymentType.SearchAnywhere = False
+            Me.cboPaymentType.SuggestBoxHeight = 200
+            Me.cboPaymentType.SuggestListOrderRule = Nothing
+            Me.cboPaymentType.TextToSearch = Nothing
+            Me.cboPaymentType.ValueIsMandatory = False
+            Me.cboPaymentType.ValueIsNullable = False
+            Me.cboPaymentType.ValueIsNumeric = False
+            Me.cboPaymentType.ValueMember = "Code"
+            '
+            'lblPaymentType
+            '
+            Me.lblPaymentType.DisplayOnly = True
+            Me.lblPaymentType.EditingMode = False
+            resources.ApplyResources(Me.lblPaymentType, "lblPaymentType")
+            Me.lblPaymentType.Name = "lblPaymentType"
+            '
+            'cboAccountIdNo
+            '
+            Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+            Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
+            Me.cboAccountIdNo.ChangingSearchValueOnly = False
+            Me.tlpDisbursement.SetColumnSpan(Me.cboAccountIdNo, 6)
+            Me.cboAccountIdNo.CurrentSearchTerm = ""
+            Me.cboAccountIdNo.DefaultValue = ""
+            Me.cboAccountIdNo.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
+            Me.cboAccountIdNo.DropDownHeight = 1
+            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboAccountIdNo.EditingMode = False
+            Me.cboAccountIdNo.FilterRule = Nothing
+            Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboAccountIdNo.LinkedLabel = Me.lblAccountIdNo
+            Me.cboAccountIdNo.Name = "cboAccountIdNo"
+            Me.cboAccountIdNo.OldValue = 0
+            Me.cboAccountIdNo.OriginalDataSource = Nothing
+            Me.cboAccountIdNo.OriginalList = Nothing
+            Me.cboAccountIdNo.OverrideDropDownStyleList = False
+            Me.cboAccountIdNo.PreviousSearchTerm = Nothing
+            Me.cboAccountIdNo.PreviousSelectedIndex = 0
+            Me.cboAccountIdNo.PropertySelector = Nothing
+            Me.cboAccountIdNo.ReadOnlyCombo = False
+            Me.cboAccountIdNo.SearchAnywhere = False
+            Me.cboAccountIdNo.SuggestBoxHeight = 200
+            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
+            Me.cboAccountIdNo.TextToSearch = Nothing
+            Me.cboAccountIdNo.ValueIsMandatory = False
+            Me.cboAccountIdNo.ValueIsNullable = False
+            Me.cboAccountIdNo.ValueIsNumeric = False
+            Me.cboAccountIdNo.ValueMember = "IdNo"
+            '
+            'lblAccountIdNo
+            '
+            Me.lblAccountIdNo.DisplayOnly = True
+            Me.lblAccountIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
+            Me.lblAccountIdNo.Name = "lblAccountIdNo"
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = True
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.ValueIsNumeric = True
+            '
+            'lblIdNo
+            '
+            Me.lblIdNo.DisplayOnly = True
+            Me.lblIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.Name = "lblIdNo"
+            '
+            'txtJournalCode
+            '
+            Me.txtJournalCode.BackColor = System.Drawing.Color.White
+            Me.txtJournalCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtJournalCode.ComputedValue = True
+            Me.txtJournalCode.CustomFormat = Nothing
+            Me.txtJournalCode.DataBoundControl = True
+            Me.txtJournalCode.DisplayOnly = True
+            resources.ApplyResources(Me.txtJournalCode, "txtJournalCode")
+            Me.txtJournalCode.EditingMode = True
+            Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
+            Me.txtJournalCode.LinkedLabel = Nothing
+            Me.txtJournalCode.MaximumValue = Nothing
+            Me.txtJournalCode.MinimumValue = Nothing
+            Me.txtJournalCode.Name = "txtJournalCode"
+            Me.txtJournalCode.OldValue = Nothing
+            Me.txtJournalCode.ReadOnly = True
+            Me.txtJournalCode.TabStop = False
+            Me.txtJournalCode.ValueIsMandatory = True
+            '
+            'lblReferenceNo
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.lblReferenceNo, 2)
+            Me.lblReferenceNo.DisplayOnly = True
+            resources.ApplyResources(Me.lblReferenceNo, "lblReferenceNo")
+            Me.lblReferenceNo.EditingMode = False
+            Me.lblReferenceNo.Name = "lblReferenceNo"
+            '
+            'cboDiscountAccountIdNo
+            '
+            Me.cboDiscountAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+            Me.cboDiscountAccountIdNo.BackColor = System.Drawing.Color.White
+            Me.cboDiscountAccountIdNo.ChangingSearchValueOnly = False
+            Me.tlpDisbursement.SetColumnSpan(Me.cboDiscountAccountIdNo, 8)
+            Me.cboDiscountAccountIdNo.CurrentSearchTerm = ""
+            Me.cboDiscountAccountIdNo.DefaultValue = Nothing
+            Me.cboDiscountAccountIdNo.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboDiscountAccountIdNo, "cboDiscountAccountIdNo")
+            Me.cboDiscountAccountIdNo.DropDownHeight = 1
+            Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboDiscountAccountIdNo.EditingMode = False
+            Me.cboDiscountAccountIdNo.FilterRule = Nothing
+            Me.cboDiscountAccountIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboDiscountAccountIdNo.FormattingEnabled = True
+            Me.cboDiscountAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboDiscountAccountIdNo.LinkedLabel = Nothing
+            Me.cboDiscountAccountIdNo.Name = "cboDiscountAccountIdNo"
+            Me.cboDiscountAccountIdNo.OldValue = 0
+            Me.cboDiscountAccountIdNo.OriginalDataSource = Nothing
+            Me.cboDiscountAccountIdNo.OriginalList = Nothing
+            Me.cboDiscountAccountIdNo.OverrideDropDownStyleList = False
+            Me.cboDiscountAccountIdNo.PreviousSearchTerm = Nothing
+            Me.cboDiscountAccountIdNo.PreviousSelectedIndex = 0
+            Me.cboDiscountAccountIdNo.PropertySelector = Nothing
+            Me.cboDiscountAccountIdNo.ReadOnlyCombo = False
+            Me.cboDiscountAccountIdNo.SearchAnywhere = False
+            Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
+            Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
+            Me.cboDiscountAccountIdNo.TextToSearch = Nothing
+            Me.cboDiscountAccountIdNo.ValueIsMandatory = False
+            Me.cboDiscountAccountIdNo.ValueIsNullable = False
+            Me.cboDiscountAccountIdNo.ValueIsNumeric = False
+            Me.cboDiscountAccountIdNo.ValueMember = "IdNo"
+            '
+            'txtORNumber
+            '
+            Me.txtORNumber.BackColor = System.Drawing.Color.White
+            Me.txtORNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.tlpDisbursement.SetColumnSpan(Me.txtORNumber, 2)
+            Me.txtORNumber.ComputedValue = False
+            Me.txtORNumber.CustomFormat = Nothing
+            Me.txtORNumber.DataBoundControl = True
+            resources.ApplyResources(Me.txtORNumber, "txtORNumber")
+            Me.txtORNumber.EditingMode = False
+            Me.txtORNumber.ForeColor = System.Drawing.Color.Black
+            Me.txtORNumber.LinkedLabel = Me.lblInvoiceNo
+            Me.txtORNumber.MaximumValue = Nothing
+            Me.txtORNumber.MinimumValue = Nothing
+            Me.txtORNumber.Name = "txtORNumber"
+            Me.txtORNumber.OldValue = Nothing
+            Me.txtORNumber.ReadOnly = True
+            Me.txtORNumber.ValueIsMandatory = True
+            '
+            'lblCheckDate
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.lblCheckDate, 2)
+            Me.lblCheckDate.DisplayOnly = True
+            resources.ApplyResources(Me.lblCheckDate, "lblCheckDate")
+            Me.lblCheckDate.EditingMode = False
+            Me.lblCheckDate.Name = "lblCheckDate"
+            '
+            'txtReferenceNo
+            '
+            Me.txtReferenceNo.BackColor = System.Drawing.Color.White
+            Me.txtReferenceNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.tlpDisbursement.SetColumnSpan(Me.txtReferenceNo, 2)
+            Me.txtReferenceNo.ComputedValue = False
+            Me.txtReferenceNo.CustomFormat = Nothing
+            Me.txtReferenceNo.DataBoundControl = True
+            resources.ApplyResources(Me.txtReferenceNo, "txtReferenceNo")
+            Me.txtReferenceNo.EditingMode = False
+            Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
+            Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
+            Me.txtReferenceNo.MaximumValue = Nothing
+            Me.txtReferenceNo.MinimumValue = Nothing
+            Me.txtReferenceNo.Name = "txtReferenceNo"
+            Me.txtReferenceNo.OldValue = Nothing
+            Me.txtReferenceNo.ReadOnly = True
+            Me.txtReferenceNo.ValueIsMandatory = True
+            '
+            'lblSupplierIdNo
+            '
+            Me.lblSupplierIdNo.DisplayOnly = True
+            Me.lblSupplierIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblSupplierIdNo, "lblSupplierIdNo")
+            Me.lblSupplierIdNo.Name = "lblSupplierIdNo"
+            '
+            'dtpTransactionDate
+            '
+            Me.dtpTransactionDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpTransactionDate.DefaultValue = Nothing
+            Me.dtpTransactionDate.DisplayOnly = False
+            Me.dtpTransactionDate.DtpDefaultValue = Nothing
+            Me.dtpTransactionDate.EditingMode = False
+            Me.dtpTransactionDate.EditsAllowed = False
+            Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpTransactionDate.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpTransactionDate, "dtpTransactionDate")
+            Me.dtpTransactionDate.Name = "dtpTransactionDate"
+            Me.dtpTransactionDate.ReadOnlyDp = False
+            Me.dtpTransactionDate.SecurityKey = Nothing
+            Me.dtpTransactionDate.ShowLongDate = False
+            Me.dtpTransactionDate.ShowTime = False
+            Me.dtpTransactionDate.TargetCalendar = Nothing
+            Me.dtpTransactionDate.Value = Nothing
+            Me.dtpTransactionDate.ValueIsMandatory = False
+            Me.dtpTransactionDate.ValueIsNullable = False
+            '
+            'txtAmount
+            '
+            Me.txtAmount.BackColor = System.Drawing.Color.White
+            Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtAmount.ComputedValue = False
+            Me.txtAmount.CustomFormat = "N2"
+            Me.txtAmount.DataBoundControl = True
+            resources.ApplyResources(Me.txtAmount, "txtAmount")
+            Me.txtAmount.EditingMode = False
+            Me.txtAmount.ForeColor = System.Drawing.Color.Black
+            Me.txtAmount.LinkedLabel = Me.lblAmount
+            Me.txtAmount.MaximumValue = Nothing
+            Me.txtAmount.MinimumValue = Nothing
+            Me.txtAmount.Name = "txtAmount"
+            Me.txtAmount.OldValue = Nothing
+            Me.txtAmount.ReadOnly = True
+            Me.txtAmount.ValueIsMandatory = True
+            Me.txtAmount.ValueIsNumeric = True
+            '
+            'lblAmount
+            '
+            Me.lblAmount.DisplayOnly = True
+            Me.lblAmount.EditingMode = False
+            resources.ApplyResources(Me.lblAmount, "lblAmount")
+            Me.lblAmount.Name = "lblAmount"
+            '
+            'txtVatNumber
+            '
+            Me.txtVatNumber.BackColor = System.Drawing.Color.White
+            Me.txtVatNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtVatNumber.ComputedValue = False
+            Me.txtVatNumber.CustomFormat = Nothing
+            Me.txtVatNumber.DataBoundControl = True
+            resources.ApplyResources(Me.txtVatNumber, "txtVatNumber")
+            Me.txtVatNumber.EditingMode = False
+            Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
+            Me.txtVatNumber.LinkedLabel = Me.lblApplied
+            Me.txtVatNumber.MaximumValue = Nothing
+            Me.txtVatNumber.MinimumValue = Nothing
+            Me.txtVatNumber.Name = "txtVatNumber"
+            Me.txtVatNumber.OldValue = Nothing
+            Me.txtVatNumber.ReadOnly = True
+            Me.txtVatNumber.ValueIsMandatory = True
+            Me.txtVatNumber.ValueIsNumeric = True
+            '
+            'lblApplied
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.lblApplied, 2)
+            Me.lblApplied.DisplayOnly = True
+            resources.ApplyResources(Me.lblApplied, "lblApplied")
+            Me.lblApplied.EditingMode = False
+            Me.lblApplied.Name = "lblApplied"
+            '
+            'lblTransactionDate
+            '
+            Me.lblTransactionDate.DisplayOnly = True
+            resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
+            Me.lblTransactionDate.EditingMode = False
+            Me.lblTransactionDate.Name = "lblTransactionDate"
+            '
+            'lblVatNo
+            '
+            Me.lblVatNo.DisplayOnly = True
+            Me.lblVatNo.EditingMode = False
+            resources.ApplyResources(Me.lblVatNo, "lblVatNo")
+            Me.lblVatNo.Name = "lblVatNo"
+            '
+            'dtpCheckDate
+            '
+            Me.dtpCheckDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.tlpDisbursement.SetColumnSpan(Me.dtpCheckDate, 2)
+            Me.dtpCheckDate.DefaultValue = Nothing
+            Me.dtpCheckDate.DisplayOnly = False
+            Me.dtpCheckDate.DtpDefaultValue = Nothing
+            Me.dtpCheckDate.EditingMode = False
+            Me.dtpCheckDate.EditsAllowed = False
+            Me.dtpCheckDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpCheckDate.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpCheckDate, "dtpCheckDate")
+            Me.dtpCheckDate.Name = "dtpCheckDate"
+            Me.dtpCheckDate.ReadOnlyDp = False
+            Me.dtpCheckDate.SecurityKey = Nothing
+            Me.dtpCheckDate.ShowLongDate = False
+            Me.dtpCheckDate.ShowTime = False
+            Me.dtpCheckDate.TargetCalendar = Nothing
+            Me.dtpCheckDate.Value = Nothing
+            Me.dtpCheckDate.ValueIsMandatory = False
+            Me.dtpCheckDate.ValueIsNullable = False
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.tlpDisbursement.SetColumnSpan(Me.txtNotes, 8)
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.ReadOnly = True
+            Me.tlpDisbursement.SetRowSpan(Me.txtNotes, 2)
+            Me.txtNotes.ValueIsMandatory = True
+            '
+            'txtVatAmount
+            '
+            Me.txtVatAmount.BackColor = System.Drawing.Color.White
+            Me.txtVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtVatAmount.ComputedValue = False
+            Me.txtVatAmount.CustomFormat = "N2"
+            Me.txtVatAmount.DataBoundControl = True
+            Me.txtVatAmount.DisplayOnly = True
+            Me.txtVatAmount.EditingMode = True
+            resources.ApplyResources(Me.txtVatAmount, "txtVatAmount")
+            Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
+            Me.txtVatAmount.LinkedLabel = Me.lblApplied
+            Me.txtVatAmount.MaximumValue = Nothing
+            Me.txtVatAmount.MinimumValue = Nothing
+            Me.txtVatAmount.Name = "txtVatAmount"
+            Me.txtVatAmount.OldValue = Nothing
+            Me.txtVatAmount.ReadOnly = True
+            Me.txtVatAmount.TabStop = False
+            Me.txtVatAmount.ValueIsMandatory = True
+            Me.txtVatAmount.ValueIsNumeric = True
+            '
+            'txtApplied
+            '
+            Me.txtApplied.BackColor = System.Drawing.Color.White
+            Me.txtApplied.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtApplied.ComputedValue = False
+            Me.txtApplied.CustomFormat = "N2"
+            Me.txtApplied.DataBoundControl = True
+            Me.txtApplied.DisplayOnly = True
+            Me.txtApplied.EditingMode = True
+            resources.ApplyResources(Me.txtApplied, "txtApplied")
+            Me.txtApplied.ForeColor = System.Drawing.Color.Black
+            Me.txtApplied.LinkedLabel = Me.lblApplied
+            Me.txtApplied.MaximumValue = Nothing
+            Me.txtApplied.MinimumValue = Nothing
+            Me.txtApplied.Name = "txtApplied"
+            Me.txtApplied.OldValue = Nothing
+            Me.txtApplied.ReadOnly = True
+            Me.txtApplied.TabStop = False
+            Me.txtApplied.ValueIsMandatory = True
+            Me.txtApplied.ValueIsNumeric = True
+            '
+            'txtUnapplied
+            '
+            Me.txtUnapplied.BackColor = System.Drawing.Color.White
+            Me.txtUnapplied.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtUnapplied.ComputedValue = False
+            Me.txtUnapplied.CustomFormat = "N2"
+            Me.txtUnapplied.DataBoundControl = True
+            Me.txtUnapplied.DisplayOnly = True
+            Me.txtUnapplied.EditingMode = True
+            resources.ApplyResources(Me.txtUnapplied, "txtUnapplied")
+            Me.txtUnapplied.ForeColor = System.Drawing.Color.Black
+            Me.txtUnapplied.LinkedLabel = Me.CLabel2
+            Me.txtUnapplied.MaximumValue = Nothing
+            Me.txtUnapplied.MinimumValue = Nothing
+            Me.txtUnapplied.Name = "txtUnapplied"
+            Me.txtUnapplied.OldValue = Nothing
+            Me.txtUnapplied.ReadOnly = True
+            Me.txtUnapplied.TabStop = False
+            Me.txtUnapplied.ValueIsMandatory = True
+            Me.txtUnapplied.ValueIsNumeric = True
+            '
+            'CLabel2
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.CLabel2, 2)
+            Me.CLabel2.DisplayOnly = True
+            resources.ApplyResources(Me.CLabel2, "CLabel2")
+            Me.CLabel2.EditingMode = False
+            Me.CLabel2.Name = "CLabel2"
+            '
+            'lblVatAmount
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.lblVatAmount, 2)
+            Me.lblVatAmount.DisplayOnly = True
+            resources.ApplyResources(Me.lblVatAmount, "lblVatAmount")
+            Me.lblVatAmount.EditingMode = False
+            Me.lblVatAmount.Name = "lblVatAmount"
+            '
+            'txtDiscountTaken
+            '
+            Me.txtDiscountTaken.BackColor = System.Drawing.Color.White
+            Me.txtDiscountTaken.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDiscountTaken.ComputedValue = False
+            Me.txtDiscountTaken.CustomFormat = "N2"
+            Me.txtDiscountTaken.DataBoundControl = True
+            Me.txtDiscountTaken.DisplayOnly = True
+            Me.txtDiscountTaken.EditingMode = True
+            resources.ApplyResources(Me.txtDiscountTaken, "txtDiscountTaken")
+            Me.txtDiscountTaken.ForeColor = System.Drawing.Color.Black
+            Me.txtDiscountTaken.LinkedLabel = Me.lblDiscountTaken
+            Me.txtDiscountTaken.MaximumValue = Nothing
+            Me.txtDiscountTaken.MinimumValue = Nothing
+            Me.txtDiscountTaken.Name = "txtDiscountTaken"
+            Me.txtDiscountTaken.OldValue = Nothing
+            Me.txtDiscountTaken.ReadOnly = True
+            Me.txtDiscountTaken.TabStop = False
+            Me.txtDiscountTaken.ValueIsMandatory = True
+            Me.txtDiscountTaken.ValueIsNumeric = True
+            '
+            'lblDiscountTaken
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.lblDiscountTaken, 2)
+            Me.lblDiscountTaken.DisplayOnly = True
+            resources.ApplyResources(Me.lblDiscountTaken, "lblDiscountTaken")
+            Me.lblDiscountTaken.EditingMode = False
+            Me.lblDiscountTaken.Name = "lblDiscountTaken"
+            '
+            'cboPayeeIdNo
+            '
+            Me.cboPayeeIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+            Me.cboPayeeIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPayeeIdNo.ChangingSearchValueOnly = False
+            Me.tlpDisbursement.SetColumnSpan(Me.cboPayeeIdNo, 4)
+            Me.cboPayeeIdNo.CurrentSearchTerm = ""
+            Me.cboPayeeIdNo.DefaultValue = Nothing
+            Me.cboPayeeIdNo.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboPayeeIdNo, "cboPayeeIdNo")
+            Me.cboPayeeIdNo.DropDownHeight = 1
+            Me.cboPayeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboPayeeIdNo.EditingMode = False
+            Me.cboPayeeIdNo.FilterRule = Nothing
+            Me.cboPayeeIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboPayeeIdNo.FormattingEnabled = True
+            Me.cboPayeeIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPayeeIdNo.LinkedLabel = Nothing
+            Me.cboPayeeIdNo.Name = "cboPayeeIdNo"
+            Me.cboPayeeIdNo.OldValue = 0
+            Me.cboPayeeIdNo.OriginalDataSource = Nothing
+            Me.cboPayeeIdNo.OriginalList = Nothing
+            Me.cboPayeeIdNo.OverrideDropDownStyleList = False
+            Me.cboPayeeIdNo.PreviousSearchTerm = Nothing
+            Me.cboPayeeIdNo.PreviousSelectedIndex = -1
+            Me.cboPayeeIdNo.PropertySelector = Nothing
+            Me.cboPayeeIdNo.ReadOnlyCombo = False
+            Me.cboPayeeIdNo.SearchAnywhere = False
+            Me.cboPayeeIdNo.SuggestBoxHeight = 200
+            Me.cboPayeeIdNo.SuggestListOrderRule = Nothing
+            Me.cboPayeeIdNo.TextToSearch = Nothing
+            Me.cboPayeeIdNo.ValueIsMandatory = False
+            Me.cboPayeeIdNo.ValueIsNullable = False
+            Me.cboPayeeIdNo.ValueIsNumeric = False
+            Me.cboPayeeIdNo.ValueMember = "IdNo"
+            '
+            'btnAutoApply
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.btnAutoApply, 3)
+            Me.btnAutoApply.DesignerSelected = False
+            Me.btnAutoApply.DisplayOnly = True
+            resources.ApplyResources(Me.btnAutoApply, "btnAutoApply")
+            Me.btnAutoApply.ImageIndex = 0
+            Me.btnAutoApply.Name = "btnAutoApply"
+            Me.btnAutoApply.OriginalImageName = Nothing
+            Me.btnAutoApply.SecurityKey = ""
+            '
+            'DataGridViewDjOiItems
+            '
+            Me.DataGridViewDjOiItems.AllowUserToAddRows = False
+            Me.DataGridViewDjOiItems.AllowUserToDeleteRows = False
+            Me.DataGridViewDjOiItems.AllowUserToResizeRows = False
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDjOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+            Me.DataGridViewDjOiItems.AutoGenerateColumns = False
+            Me.DataGridViewDjOiItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewDjOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDjOi, Me.dgvInvoiceNo, Me.DgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.DataGridViewTextBoxColumn6, Me.JournalItemIdNo, Me.OpenInvoiceIdNo})
+            Me.DataGridViewDjOiItems.DataInGridChanged = False
+            Me.DataGridViewDjOiItems.DataSource = Me.bsDjOiItems
+            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle17.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDjOiItems.DefaultCellStyle = DataGridViewCellStyle17
+            Me.DataGridViewDjOiItems.DgvFooter = Nothing
+            Me.DataGridViewDjOiItems.DisplayOnly = False
+            resources.ApplyResources(Me.DataGridViewDjOiItems, "DataGridViewDjOiItems")
+            Me.DataGridViewDjOiItems.Ea = EventAggregator2
+            Me.DataGridViewDjOiItems.EditingMode = False
+            Me.DataGridViewDjOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewDjOiItems.FirstRowDeletionEnabled = False
+            Me.DataGridViewDjOiItems.FirstRowInsertionEnabled = False
+            Me.DataGridViewDjOiItems.Name = "DataGridViewDjOiItems"
+            Me.DataGridViewDjOiItems.ReadOnly = True
+            Me.DataGridViewDjOiItems.SequenceColumn = "dgvSequencePcsOi"
+            Me.DataGridViewDjOiItems.SequenceFieldName = "Sequence"
+            Me.DataGridViewDjOiItems.ShowFooter = False
+            Me.DataGridViewDjOiItems.ShowInsertColumnWhenEditing = False
+            Me.DataGridViewDjOiItems.StartTrackingChanges = False
+            '
+            'dgvSequenceDjOi
+            '
+            Me.dgvSequenceDjOi.DataPropertyName = "Sequence"
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceDjOi.DefaultCellStyle = DataGridViewCellStyle8
+            Me.dgvSequenceDjOi.DisplayOnly = True
+            Me.dgvSequenceDjOi.EditingMode = False
+            resources.ApplyResources(Me.dgvSequenceDjOi, "dgvSequenceDjOi")
+            Me.dgvSequenceDjOi.Name = "dgvSequenceDjOi"
+            Me.dgvSequenceDjOi.ReadOnly = True
+            '
+            'dgvInvoiceNo
+            '
+            Me.dgvInvoiceNo.DataPropertyName = "InvoiceNo"
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            Me.dgvInvoiceNo.DefaultCellStyle = DataGridViewCellStyle9
+            Me.dgvInvoiceNo.EditingMode = False
+            resources.ApplyResources(Me.dgvInvoiceNo, "dgvInvoiceNo")
+            Me.dgvInvoiceNo.Name = "dgvInvoiceNo"
+            Me.dgvInvoiceNo.ReadOnly = True
+            Me.dgvInvoiceNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'DgvTransactionDate
+            '
+            Me.DgvTransactionDate.DataPropertyName = "TransactionDate"
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            Me.DgvTransactionDate.DefaultCellStyle = DataGridViewCellStyle10
+            Me.DgvTransactionDate.EditingMode = False
+            resources.ApplyResources(Me.DgvTransactionDate, "DgvTransactionDate")
+            Me.DgvTransactionDate.Name = "DgvTransactionDate"
+            Me.DgvTransactionDate.ReadOnly = True
+            Me.DgvTransactionDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvJournalCode
+            '
+            Me.dgvJournalCode.DataPropertyName = "JournalCode"
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            Me.dgvJournalCode.DefaultCellStyle = DataGridViewCellStyle11
+            Me.dgvJournalCode.EditingMode = False
+            resources.ApplyResources(Me.dgvJournalCode, "dgvJournalCode")
+            Me.dgvJournalCode.Name = "dgvJournalCode"
+            Me.dgvJournalCode.ReadOnly = True
+            Me.dgvJournalCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvJournalIdNoAp
+            '
+            Me.dgvJournalIdNoAp.DataPropertyName = "JournalIdNo"
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.dgvJournalIdNoAp.DefaultCellStyle = DataGridViewCellStyle12
+            Me.dgvJournalIdNoAp.EditingMode = False
+            resources.ApplyResources(Me.dgvJournalIdNoAp, "dgvJournalIdNoAp")
+            Me.dgvJournalIdNoAp.Name = "dgvJournalIdNoAp"
+            Me.dgvJournalIdNoAp.ReadOnly = True
+            Me.dgvJournalIdNoAp.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvPreviousBalance
+            '
+            Me.dgvPreviousBalance.DataPropertyName = "PreviousBalance"
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.Format = "###,##0.00"
+            Me.dgvPreviousBalance.DefaultCellStyle = DataGridViewCellStyle13
+            Me.dgvPreviousBalance.EditingMode = False
+            resources.ApplyResources(Me.dgvPreviousBalance, "dgvPreviousBalance")
+            Me.dgvPreviousBalance.Name = "dgvPreviousBalance"
+            Me.dgvPreviousBalance.ReadOnly = True
+            Me.dgvPreviousBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPreviousBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvAmount
+            '
+            Me.dgvAmount.DataPropertyName = "Amount"
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle14.Format = "###,##0.00"
+            Me.dgvAmount.DefaultCellStyle = DataGridViewCellStyle14
+            Me.dgvAmount.EditingMode = False
+            resources.ApplyResources(Me.dgvAmount, "dgvAmount")
+            Me.dgvAmount.Name = "dgvAmount"
+            Me.dgvAmount.ReadOnly = True
+            Me.dgvAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvDiscountTaken
+            '
+            Me.dgvDiscountTaken.DataPropertyName = "DiscountTaken"
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle15.Format = "###,##0.00"
+            Me.dgvDiscountTaken.DefaultCellStyle = DataGridViewCellStyle15
+            Me.dgvDiscountTaken.EditingMode = False
+            resources.ApplyResources(Me.dgvDiscountTaken, "dgvDiscountTaken")
+            Me.dgvDiscountTaken.Name = "dgvDiscountTaken"
+            Me.dgvDiscountTaken.ReadOnly = True
+            Me.dgvDiscountTaken.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvDiscountTaken.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'dgvBalance
+            '
+            Me.dgvBalance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvBalance.DataPropertyName = "Balance"
+            DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle16.Format = "###,##0.00"
+            Me.dgvBalance.DefaultCellStyle = DataGridViewCellStyle16
+            Me.dgvBalance.EditingMode = False
+            resources.ApplyResources(Me.dgvBalance, "dgvBalance")
+            Me.dgvBalance.Name = "dgvBalance"
+            Me.dgvBalance.ReadOnly = True
+            Me.dgvBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'DataGridViewTextBoxColumn6
+            '
+            Me.DataGridViewTextBoxColumn6.DataPropertyName = "AccountIdNo"
+            resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
+            Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+            Me.DataGridViewTextBoxColumn6.ReadOnly = True
+            '
+            'JournalItemIdNo
+            '
+            Me.JournalItemIdNo.DataPropertyName = "JournalItemIdNo"
+            resources.ApplyResources(Me.JournalItemIdNo, "JournalItemIdNo")
+            Me.JournalItemIdNo.Name = "JournalItemIdNo"
+            Me.JournalItemIdNo.ReadOnly = True
+            '
+            'OpenInvoiceIdNo
+            '
+            Me.OpenInvoiceIdNo.DataPropertyName = "OpenInvoiceIdNo"
+            resources.ApplyResources(Me.OpenInvoiceIdNo, "OpenInvoiceIdNo")
+            Me.OpenInvoiceIdNo.Name = "OpenInvoiceIdNo"
+            Me.OpenInvoiceIdNo.ReadOnly = True
+            '
+            'bsDjOiItems
+            '
+            Me.bsDjOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DjOiItemModel)
+            '
+            'txtPayeeName
+            '
+            Me.txtPayeeName.BackColor = System.Drawing.Color.White
+            Me.txtPayeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.tlpDisbursement.SetColumnSpan(Me.txtPayeeName, 4)
+            Me.txtPayeeName.ComputedValue = False
+            Me.txtPayeeName.CustomFormat = Nothing
+            Me.txtPayeeName.DataBoundControl = True
+            Me.txtPayeeName.EditingMode = False
+            resources.ApplyResources(Me.txtPayeeName, "txtPayeeName")
+            Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
+            Me.txtPayeeName.LinkedLabel = Me.lblAmount
+            Me.txtPayeeName.MaximumValue = Nothing
+            Me.txtPayeeName.MinimumValue = Nothing
+            Me.txtPayeeName.Name = "txtPayeeName"
+            Me.txtPayeeName.OldValue = Nothing
+            Me.txtPayeeName.ReadOnly = True
+            Me.txtPayeeName.ValueIsMandatory = True
+            '
+            'DisbursementJournalEntry
+            '
+            resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.tlpDisbursement)
         Me.Name = "DisbursementJournalEntry"
         Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)

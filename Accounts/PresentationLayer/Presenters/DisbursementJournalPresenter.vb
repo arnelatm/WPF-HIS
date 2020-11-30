@@ -6,11 +6,12 @@ Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Presenters
 
-    Public MustInherit Class DisbursementJournalPresenter(Of T As IView, TM As New)
-        Inherits AccountsPresenter(Of T, TM)
+    Public Class DisbursementJournalPresenter
+        Inherits AccountsPresenter(Of IDisbursementJournalView, DisbursementJournalModel)
 
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
         Protected CashIdNo As String
@@ -26,12 +27,36 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _defaultPettyCashAccount As Int16
         Private ReadOnly _presenterView
 
-        Public Sub New(view As IView)
+        Public Sub New(view As IView, ByVal tableOrViewName As String)
             MyBase.New(view)
             _presenterView = view
             SortOrderKey = "IdNo"
+            ModelPresenter = New ModelAccounts("DisbursementJournal", tableOrViewName)
+            If tableOrViewName = "CdJournal" Then
+                DjItemModel = New ModelAccounts("DisbursementJournalItem", "CdJournalItem_View")
+                OiItemModel = New ModelAccounts("DjOiItem", "CdOiItem")
+            ElseIf tableOrViewName = "PcJournal" Then
+                DjItemModel = New ModelAccounts("DisbursementJournalItem", "PcJournalItem_View")
+                OiItemModel = New ModelAccounts("DjOiItem", "PcOiItem")
+            Else
+                DjItemModel = New ModelAccounts("DisbursementJournalItem", "CkJournalItem_View")
+                OiItemModel = New ModelAccounts("DjOiItem", "CkOiItem")
+            End If
+            SortOrderKey = "IdNo"
+            TableName = tableOrViewName
+            If tableOrViewName = "PcJournal" Then
+                JournalCode = "PC"
+                ReportName = "Petty Cash Disbursement Journal.Rpt"
+            ElseIf tableOrViewName = "CdJournal" Then
+                JournalCode = "CD"
+                ReportName = "Cash Disbursement Journal.Rpt"
+            Else
+                JournalCode = "CK"
+                ReportName = "Check Disbursement Journal.Rpt"
+            End If
             OriginalModel = New DisbursementJournalModel()
             DataModel = New DisbursementJournalModel
+
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
