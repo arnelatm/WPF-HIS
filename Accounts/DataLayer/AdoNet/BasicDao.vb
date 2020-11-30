@@ -14,18 +14,14 @@ Namespace DataLayer.AdoNet
         Private ReadOnly Db As New Db()
         Private _tableOrViewName As String
 
-        Public Function GetTableOrViewName() As String
-            Return _tableOrViewName
-        End Function
-
-        Public Sub SetTableOrViewName(AutoPropertyValue As String)
-            _tableOrViewName = AutoPropertyValue
+        Public Sub New(ByVal tableName As String)
+            _tableOrViewName = tableName
         End Sub
 
         Public Function GetRecordById(idNo) As Basic Implements IDaoAll(Of Basic).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, Code, Name, NameAra" &
-                    "   FROM " & GetTableOrViewName() &
+                    "   FROM " & _tableOrViewName &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
@@ -38,13 +34,13 @@ Namespace DataLayer.AdoNet
             End If
             Dim sql As String =
                     " SELECT IdNo, Code, Name, NameAra" &
-                    "   FROM " & GetTableOrViewName() & " order by " & sortExpression
+                    "   FROM " & _tableOrViewName & " order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
         Public Function UpdateRecord(ByRef Basic As Basic) As Integer Implements IDaoAll(Of Basic).UpdateRecord
             Dim sql As String =
-                    " UPDATE " & GetTableOrViewName() &
+                    " UPDATE " & _tableOrViewName &
                     "    SET Code = @Code," &
                     "        Name = @Name," &
                     "        NameAra = @NameAra" &
@@ -54,7 +50,7 @@ Namespace DataLayer.AdoNet
 
         Public Function AddRecord(ByRef Basic As Basic) As Integer Implements IDaoAll(Of Basic).AddRecord
             Dim sql As String =
-                    " INSERT INTO " & GetTableOrViewName() &
+                    " INSERT INTO " & _tableOrViewName &
                     " (Code,Name,NameAra) " &
                     " VALUES (@Code,@Name,@NameAra) "
             Return Db.Insert(sql, Take(Basic))

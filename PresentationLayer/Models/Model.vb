@@ -154,6 +154,20 @@ Public Class Model
         End If
     End Function
 
+    Public Function GetLookupNew(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupNew
+        Dim data = Service.GetRecords(tableName, sortKey, fields)
+        Dim lookupSetting = GlobalVariables.LookupSetting()
+        If lookupSetting = "CodeAndName" Then
+            Return ProcessLookupByCodeName(data)
+        ElseIf lookupSetting = "NameAndCode" Then
+            Return ProcessLookupByNameCode(data)
+        ElseIf lookupSetting = "Name" Then
+            Return ProcessLookupByName(data)
+        Else
+            Return ProcessLookupByCodeName(data)
+        End If
+    End Function
+
     Public Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object Implements IModel.GetMaxValueFiltered
         Return Service.GetMaxValueFiltered(searchFieldName, tableName, returnFieldName, filter)
     End Function

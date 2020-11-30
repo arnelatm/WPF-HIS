@@ -599,19 +599,23 @@ Public Class CaComboBox
     Private Sub CodeSearch(value As Object)
         Dim found As Boolean = False
         Dim i = 0
-        For Each item In DataSource
-            If item.Code = value Then
-                SelectedItem = DataSource(i)
-                found = True
-                Exit For
+        If DataSource IsNot Nothing Then
+            For Each item In DataSource
+                If item.Code = value Then
+                    SelectedItem = DataSource(i)
+                    found = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not found Then
+                If value IsNot Nothing Then
+                    Me.Text = value
+                    'MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
+                End If
+                SelectedIndex = -1
             End If
-            i += 1
-        Next
-        If Not found Then
-            If value IsNot Nothing Then
-                Me.Text = value
-                'MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
-            End If
+        Else
             SelectedIndex = -1
         End If
     End Sub

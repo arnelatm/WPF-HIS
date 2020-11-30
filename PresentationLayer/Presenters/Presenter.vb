@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Transactions
@@ -49,31 +50,25 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Private _undoMode As Boolean = False
 
-    Protected Shared Property ModelTblColProp As IModelTblColProp = New ModelTblColProp
-
-    Protected Sub New()
-        'ModelTblColProp = New ModelTblColProp
-        Model = New Model()
-        'ModelDefaultFieldValue = New ModelDefaultFieldValue
-    End Sub
-
     Public Sub New(view As T)
         If view Is Nothing Then
             ''
         Else
             Me.View = view
-
             TableName = GetPropertyValue(Me.View, "MainTableName")
-            'GetPropertyValue(view,"MainTableName")
             If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
                 MessageBox.Show($"'MainTableName' property of the form is not set.")
             End If
             Dim tableColumnPropertyList As List(Of TblColPropModel)
-
             tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
             TableProperties = tableColumnPropertyList.ToArray
-            'TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
         End If
+    End Sub
+
+    Protected Sub New()
+        'ModelTblColProp = New ModelTblColProp
+        Model = New Model()
+        'ModelDefaultFieldValue = New ModelDefaultFieldValue
     End Sub
 
     Delegate Sub FillDataFunc(ByRef dataView As Object, ByRef workRow As DataRow)
@@ -158,9 +153,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Property
 
     Public Property EnumConverter As ResourceEnumConverter
-
-    '<Description("This is the last IdNo of the Displayed record before moving to a different record.")>
-    'Public Property CurrentIdNo As Int32
     Public Property LastIdNo As Int32
 
     Public Property ModelPresenter
@@ -173,8 +165,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Property
 
     Public Property NewlyAddedRecordIdNo As Int32
-
-    'Public Shared Property RecordCount As Integer
     Public Property RecordCount As Integer
 
     Public Property RecordPositionNumber As Integer
@@ -187,16 +177,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Set
     End Property
 
-    'Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
-
-    'Public Shared Property TableName As String
     Public Property TableName As String
-
-    'Public Shared Property TableProperties As Array
     Public Property TableProperties As Array
 
-    'Public Property TableDefaultFieldValues
-    <Description("This is the value of the current IdNo in the TxtIdNo Field ")>
     Public Property TargetIdNo As Int32
         Get
             Return _targetIdNo
@@ -222,6 +205,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Property
 
     Public Property View As T
+    Protected Property LookUpDisplayCode As String
+    Protected Property LookUpDisplayName As String
+    Protected Property LookUpDisplayNameArabic As String
+    Protected Property LookUpFieldsToShow As String()
+    Protected Property LookUpFilterKey As String = Nothing
+    Protected Property LookUpSortExpression As String
+    Protected Property LookUpTableToGet As String
+    Protected Property Model As IModel
+    Protected Shared Property ModelTblColProp As IModelTblColProp = New ModelTblColProp
 
     'Public Sub FindFieldContinue(recIdKey As Integer)
     '    If _debugSwitch Then
@@ -236,9 +228,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '        CancelClose = True
     '    End If
     'End Sub
-
-    Protected Property Model As IModel
-
     Public Shared Function CreateClass(className As String, properties As Dictionary(Of String, Type)) As Type
 
         Dim myDomain As AppDomain = AppDomain.CurrentDomain
@@ -406,7 +395,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetBizObjectErrors()
     End Function
 
-    'Public Shared SecurityModel As New Model
     Public Function GetBizObjectRules()
         Return Model.GetBizObjectRules()
     End Function
@@ -442,12 +430,44 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
+    Public Function GetFilteredLookupListByCodeName(listName As String, filter As String, Optional fieldName As String = Nothing)
+        ComposeLookupParameters(listName)
+        LookUpFilterKey = filter
+        Return GetFilteredLookupByCodeName()
+    End Function
+
     Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer) As Integer
         Try
             Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, SortOrderKey)
         Catch ex As Exception
             Return 0
         End Try
+    End Function
+
+    Public Function GetLookup(listName As String)
+        ComposeLookupParameters(listName)
+        ProcessLookupFields()
+        Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
+    End Function
+
+    Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            If LookUpSortExpression = pDisplayName Then
+                LookUpSortExpression = pDisplayNameArabic
+            End If
+            dFieldName = pDisplayNameArabic
+        Else
+            dFieldName = pDisplayName
+        End If
+        LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
+        Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
+    End Function
+
+    Public Function GetLookupNew(listName As String)
+        ComposeLookupParametersNew(listName)
+        ProcessLookupFields()
+        Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
     End Function
 
     Public Function GetOriginalModel() As TM
@@ -496,6 +516,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    End If
     '    Return PresenterObj.TargetIdNo
     'End Function
+
     Public Function GetRecordDateTimeStamp(idNo As Int32) As Object
         Try
             Return Model.GetRecordDateTimeStamp(idNo, TableName)
@@ -522,18 +543,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    'Public Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
-    '                                             returnFieldName As String) As T _
-    '    Implements IModel.GetRecordFieldWithKeyG
-    '    Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
-    'End Function
-    'Public Function GetMaxValueFiltered(searchFieldName As String, cTableName As String, returnFieldName As String, filter As String) As Object
-    '    Try
-    '        Return Model.GetMaxValueFiltered(searchFieldName, cTableName, returnFieldName, filter)
-    '    Catch ex As Exception
-    '        Return Nothing
-    '    End Try
-    'End Function
     Public Function GetRecordPosition(idNo As Int32)
         Try
             Return Model.GetRecordPosition(TableName, idNo) + 1
@@ -613,47 +622,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
-    Protected Function GetTranslatedSortOrderKey(Of TX)(sortKey As String, ByRef dModel As TX) As String
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            If GlobalVariables.RightToLeftLayout Then
-                Dim stringLength = SortOrderKey.Length
-                Dim suffix = ""
-                Dim nameOfField As String = sortKey
-                If stringLength > 4 And
-                   (SortOrderKey.Substring(stringLength - 4).ToLower() = " asc" OrElse
-                    SortOrderKey.Substring(stringLength - 4).ToLower() = " des") Then
-                    suffix = SortOrderKey.Substring(stringLength - 4)
-                    nameOfField = SortOrderKey.Substring(0, stringLength - 4)
-                End If
-                nameOfField = GetTranslatedField(Of TX)(nameOfField, dModel)
-                sortKey = nameOfField + suffix
-            End If
-        End If
-        Return sortKey
-    End Function
-
-    Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
-        Dim translatedSortOrder As String = dataSortOrder
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            If GlobalVariables.RightToLeftLayout Then
-                Dim stringLength = dataSortOrder.Length
-                Dim suffix = ""
-                Dim nameOfField As String = dataSortOrder
-                If stringLength > 4 And
-                   (dataSortOrder.Substring(stringLength - 4).ToLower() = " asc" OrElse
-                    dataSortOrder.Substring(stringLength - 4).ToLower() = " des") Then
-                    suffix = dataSortOrder.Substring(stringLength - 4)
-                    nameOfField = dataSortOrder.Substring(0, stringLength - 4)
-                End If
-                If PropertyExists(dModel, nameOfField + "ara") Then
-                    nameOfField += "Ara"
-                    translatedSortOrder = nameOfField + suffix
-                End If
-            End If
-        End If
-        Return translatedSortOrder
-    End Function
-
     Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
         Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
@@ -667,9 +635,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Try
             DataModel = New TM
             GlobalVariables.Mapper.Map(DataModel, View)
-            'MakeDefaultValues()
             AddMode = True
-            'EditMode = False
             RaiseEvent BeforeAdd()
         Catch oEx As Exception
             MsgBox("Error:   " + oEx.Message)
@@ -689,9 +655,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 If retValue <= 0 Then
                     Messaging.Show(True, "MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
-                    'If Ea IsNot Nothing Then
-                    '    Ea.PublishEvent(New RecordDeleted2(DataModel))
-                    'End If
                     Messaging.Show(True, "MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
                     ' if deleted stay on that given RecordPositionNumber
                     ' which in this case will be the next record after the deleted record
@@ -832,7 +795,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             End If
         End If
         UndoMode = False
-        'CancelClose = True
     End Sub
 
     Public Overridable Function IsOkToDeleteRecord(idNo As Int32) As Boolean
@@ -862,24 +824,17 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     If result = DialogResult.Yes Then
                         result = Save()
                         If result > 0 Then
-                            'Dim message = Messaging.GetMessage(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
-                            'message = message + Environment.NewLine & CompareDifferences
                             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                             If AddMode Then
                                 RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
-                                'AddMode = False
-                                'Else
-                                'EditMode = False
                             End If
                             retValue = True
                         End If
                     Else
                         If AddMode Then
                             RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
-                            'AddMode = False
                         Else
                             RecordPositionNumber = RecordPositionNumber
-                            'EditMode = False
                         End If
                         retValue = True
                     End If
@@ -888,11 +843,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 End If
             Else
                 retValue = True
-                'If AddMode Then
-                '    AddMode = False
-                'Else
-                '    EditMode = False
-                'End If
             End If
         End If
         If retValue Then
@@ -905,69 +855,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    'Public Sub MakeDefaultValues()
-    '    For Each item In TableDefaultFieldValues
-    '        Select Case item.DataType
-    '            Case DataTypeSelection.StringType
-    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-    '            Case DataTypeSelection.Accountype
-    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-    '            Case DataTypeSelection.IntegerType
-    '                CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
-    '            Case DataTypeSelection.BooleanType
-    '                CallByName(View, item.FieldName, CallType.Set, CBool(item.DefaultValue))
-    '            Case DataTypeSelection.SingleType
-    '                CallByName(View, item.FieldName, CallType.Set, CSng(item.DefaultValue))
-    '            Case DataTypeSelection.DoubleType
-    '                CallByName(View, item.FieldName, CallType.Set, CDbl(item.DefaultValue))
-    '            Case DataTypeSelection.DecimalType
-    '                CallByName(View, item.FieldName, CallType.Set, CDec(item.DefaultValue))
-    '            Case DataTypeSelection.LongType
-    '                CallByName(View, item.FieldName, CallType.Set, CLng(item.DefaultValue))
-    '            Case DataTypeSelection.DateType
-    '                If item.DefaultValue = "today" Then
-    '                    CallByName(View, item.FieldName, CallType.Set, Today())
-    '                ElseIf item.DefaultValue = "yesterday" Then
-    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(-1))
-    '                ElseIf item.DefaultValue = "tomorrow" Then
-    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(1))
-    '                Else
-    '                    CallByName(View, item.FieldName, CallType.Set, CDate(item.DefaultValue))
-    '                End If
-    '            Case DataTypeSelection.ShortType
-    '                CallByName(View, item.FieldName, CallType.Set, CShort(item.DefaultValue))
-    '            Case DataTypeSelection.UIntegerType
-    '                CallByName(View, item.FieldName, CallType.Set, CUInt(item.DefaultValue))
-    '            Case DataTypeSelection.ULongType
-    '                CallByName(View, item.FieldName, CallType.Set, CULng(item.DefaultValue))
-    '            Case DataTypeSelection.UShortType
-    '                CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
-    '            Case Else
-    '                MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in table " & item.TableName & " conversion not handled")
-    '        End Select
-    '    Next item
-    '    Return
-    'End Sub
-    'Public Function MakeEnumComboList(Of TE)()
-    '    If EnumConverter Is Nothing Then
-    '        EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
-    '    End If
-    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
-    '    'Dim enumValues = [Enum].GetValues(GetType(TE))
-    '    'Dim x As Object
-    '    For Each c In [Enum].GetValues(GetType(TE))
-    '        Dim data As New ClassesLibrary.LookupData
-    '        'dim code As String
-    '        data.IdNo = CInt(c)
-    '        'code = GlobalFunctions.GetDescription(c,"")
-    '        data.Code = EnumToCode(c)
-    '        'x = Adapter.GetEnumDescription(c)
-    '        'data.Code = Adaptor.GetEnumDescription(c)
-    '        data.Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
-    '        dataList.Add(data)
-    '    Next
-    '    Return dataList
-    'End Function
     Public Sub OnEventHandler(ByRef e As SelectedButton) Implements ISubscriber(Of SelectedButton).OnEventHandler
         Select Case e.ClickedButton
             Case ButtonClicked.First
@@ -1070,7 +957,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Next
         Messaging.MessageKey = "ValidationErrors"
         Messaging.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'MessageBox.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
 
     Public Sub Undo()
@@ -1142,8 +1028,80 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retVal
     End Function
 
+    Protected Sub ComposeLookupParameters(listName As String)
+        LookUpTableToGet = listName
+        LookUpDisplayName = listName + "Name"
+        LookUpSortExpression = LookUpDisplayName
+        LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
+        LookUpDisplayCode = listName + "Code"
+    End Sub
+
+    Protected Sub ComposeLookupParametersNew(listName As String)
+        LookUpTableToGet = listName
+        LookUpDisplayName = "Name"
+        LookUpSortExpression = LookUpDisplayName
+        LookUpDisplayNameArabic = "NameAra"
+        LookUpDisplayCode = "Code"
+    End Sub
+
     Protected Overridable Function DependentRecordsExist(masterIdNo As Int32) As Integer
         Return 0
+    End Function
+
+    Protected Function GetFilteredLookupByCodeName()
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+    End Function
+
+    Protected Function GetFilteredLookupByName()
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+    End Function
+
+    Protected Function GetFilteredLookupByNameCode()
+        ProcessLookupFields()
+        Return Model.GetFilteredLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+    End Function
+
+    Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
+        Dim translatedSortOrder As String = dataSortOrder
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            If GlobalVariables.RightToLeftLayout Then
+                Dim stringLength = dataSortOrder.Length
+                Dim suffix = ""
+                Dim nameOfField As String = dataSortOrder
+                If stringLength > 4 And
+                   (dataSortOrder.Substring(stringLength - 4).ToLower() = " asc" OrElse
+                    dataSortOrder.Substring(stringLength - 4).ToLower() = " des") Then
+                    suffix = dataSortOrder.Substring(stringLength - 4)
+                    nameOfField = dataSortOrder.Substring(0, stringLength - 4)
+                End If
+                If PropertyExists(dModel, nameOfField + "ara") Then
+                    nameOfField += "Ara"
+                    translatedSortOrder = nameOfField + suffix
+                End If
+            End If
+        End If
+        Return translatedSortOrder
+    End Function
+
+    Protected Function GetTranslatedSortOrderKey(Of TX)(sortKey As String, ByRef dModel As TX) As String
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            If GlobalVariables.RightToLeftLayout Then
+                Dim stringLength = SortOrderKey.Length
+                Dim suffix = ""
+                Dim nameOfField As String = sortKey
+                If stringLength > 4 And
+                   (SortOrderKey.Substring(stringLength - 4).ToLower() = " asc" OrElse
+                    SortOrderKey.Substring(stringLength - 4).ToLower() = " des") Then
+                    suffix = SortOrderKey.Substring(stringLength - 4)
+                    nameOfField = SortOrderKey.Substring(0, stringLength - 4)
+                End If
+                nameOfField = GetTranslatedField(Of TX)(nameOfField, dModel)
+                sortKey = nameOfField + suffix
+            End If
+        End If
+        Return sortKey
     End Function
 
     Protected Overridable Function IsBizDataValid() As Boolean
@@ -1223,16 +1181,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.UpdateRecord(record)
     End Function
 
-    'Public Sub OnBeforeEdit() Handles BeforeEdit()
-    '    Dim type As Type = View.GetType
-    '    If type.GetProperty("Posted") IsNot Nothing Then
-    '        Dim cPosted = CallByName(View, "Posted", CallType.Get)
-    '        If cPosted Then
-    '            Messaging.Show(True, "MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
-    '            CancelEdit = True
-    '        End If
-    '    End If
-    'End Sub
     Protected Function ViewToDataTables(ByRef dataViews As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
                                       ByVal includeFilter As Predicate(Of Object), ByVal Optional dataViewIdNoFieldName As String = "IdNo", ByVal Optional sequenceFieldName As String = "Sequence") As DataRow
         If insertTable IsNot Nothing Then
@@ -1314,6 +1262,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
         Return retValue
     End Function
+
+    Private Sub ProcessLookupFields()
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            If LookUpSortExpression = LookUpDisplayName Then
+                LookUpSortExpression = LookUpDisplayNameArabic
+            End If
+            dFieldName = LookUpDisplayNameArabic
+        Else
+            dFieldName = LookUpDisplayName
+        End If
+        LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
+    End Sub
 
     Private Function RecordHasChanged(idNo As Int32, timeStampedValue As Object) As Boolean
         Dim retValue = False

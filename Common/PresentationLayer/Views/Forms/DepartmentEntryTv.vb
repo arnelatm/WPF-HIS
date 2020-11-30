@@ -10,11 +10,10 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
             MainTableName = "Department"
             TvMainFieldName = "DepartmentName"
             TvSecondaryFieldName = "DepartmentCode"
-            SortOrderKey = "SortKey"
+            SortOrderKey = "DepartmentName"
             ParentFieldName = "ParentIdNo"
             FirstControl = txtDepartmentCode
             ' Add any initialization after the InitializeComponent() call.
@@ -25,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             cacParentIdNo.DataSource = PresenterObj.GetLookup("Department")
-            cacRevCostCenterIdNo.DataSource = PresenterObj.GetLookup("RevCostCenterName")
+            cacRevCostCenterIdNo.DataSource = PresenterObj.GetLookup("RevCostCenter")
         End Sub
 
 #Region "Fields"
@@ -113,7 +112,7 @@ Namespace PresentationLayer.Views.Forms
                 {"IdNo", TxtIdNo},
                 {"ParentIdNo", cacParentIdNo},
                 {"RevCostCenterIdNo", cacRevCostCenterIdNo},
-                {"ParentId", TxtIdNo},
+                {"ParentId", cacParentIdNo},
                 {"Notes", txtNotes}
                 }
         End Sub

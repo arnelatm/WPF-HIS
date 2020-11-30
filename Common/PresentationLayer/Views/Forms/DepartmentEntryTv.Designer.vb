@@ -200,51 +200,51 @@ Namespace PresentationLayer.Views.Forms
         Me.cacParentIdNo.DefaultValue = Nothing
         Me.cacParentIdNo.DisplayMember = "Name"
         Me.cacParentIdNo.DropDownHeight = 1
-        Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cacParentIdNo.EditingMode = false
-        Me.cacParentIdNo.FilterRule = Nothing
-        Me.CFlowLayout1.SetFlowBreak(Me.cacParentIdNo, true)
-        resources.ApplyResources(Me.cacParentIdNo, "cacParentIdNo")
-        Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cacParentIdNo.FormattingEnabled = true
-        Me.cacParentIdNo.HideWhenNotEditingOrAdding = false
-        Me.cacParentIdNo.LinkedLabel = Nothing
-        Me.cacParentIdNo.Name = "cacParentIdNo"
-        Me.cacParentIdNo.OldValue = 0
-        Me.cacParentIdNo.OriginalDataSource = Nothing
-        Me.cacParentIdNo.OriginalList = Nothing
-        Me.cacParentIdNo.OverrideDropDownStyleList = false
-        Me.cacParentIdNo.PreviousSearchTerm = Nothing
-        Me.cacParentIdNo.PreviousSelectedIndex = -1
-        Me.cacParentIdNo.PropertySelector = Nothing
-        Me.cacParentIdNo.ReadOnlyCombo = false
-        Me.cacParentIdNo.SearchAnywhere = false
-        Me.cacParentIdNo.SuggestBoxHeight = 200
-        Me.cacParentIdNo.SuggestListOrderRule = Nothing
-        Me.cacParentIdNo.TextToSearch = Nothing
-        Me.cacParentIdNo.ValueIsMandatory = false
-        Me.cacParentIdNo.ValueIsNullable = false
-        Me.cacParentIdNo.ValueIsNumeric = false
-        Me.cacParentIdNo.ValueMember = "IdNo"
-        '
-        'lblRevCostCenterIdNo
-        '
-        Me.lblRevCostCenterIdNo.DisplayOnly = true
-        Me.lblRevCostCenterIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblRevCostCenterIdNo, "lblRevCostCenterIdNo")
-        Me.lblRevCostCenterIdNo.Name = "lblRevCostCenterIdNo"
-        '
-        'cacRevCostCenterIdNo
-        '
-        Me.cacRevCostCenterIdNo.BackColor = System.Drawing.Color.White
-        Me.cacRevCostCenterIdNo.ChangingSearchValueOnly = false
-        Me.cacRevCostCenterIdNo.CurrentSearchTerm = ""
-        Me.cacRevCostCenterIdNo.DefaultValue = Nothing
-        Me.cacRevCostCenterIdNo.DisplayMember = "Name"
-        Me.cacRevCostCenterIdNo.DropDownHeight = 1
-        Me.cacRevCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cacRevCostCenterIdNo.EditingMode = false
-        Me.cacRevCostCenterIdNo.FilterRule = Nothing
+            Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacParentIdNo.EditingMode = False
+            Me.cacParentIdNo.FilterRule = Nothing
+            Me.CFlowLayout1.SetFlowBreak(Me.cacParentIdNo, True)
+            resources.ApplyResources(Me.cacParentIdNo, "cacParentIdNo")
+            Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cacParentIdNo.FormattingEnabled = True
+            Me.cacParentIdNo.HideWhenNotEditingOrAdding = False
+            Me.cacParentIdNo.LinkedLabel = Nothing
+            Me.cacParentIdNo.Name = "cacParentIdNo"
+            Me.cacParentIdNo.OldValue = 0
+            Me.cacParentIdNo.OriginalDataSource = Nothing
+            Me.cacParentIdNo.OriginalList = Nothing
+            Me.cacParentIdNo.OverrideDropDownStyleList = False
+            Me.cacParentIdNo.PreviousSearchTerm = Nothing
+            Me.cacParentIdNo.PreviousSelectedIndex = -1
+            Me.cacParentIdNo.PropertySelector = Nothing
+            Me.cacParentIdNo.ReadOnlyCombo = False
+            Me.cacParentIdNo.SearchAnywhere = False
+            Me.cacParentIdNo.SuggestBoxHeight = 200
+            Me.cacParentIdNo.SuggestListOrderRule = Nothing
+            Me.cacParentIdNo.TextToSearch = Nothing
+            Me.cacParentIdNo.ValueIsMandatory = False
+            Me.cacParentIdNo.ValueIsNullable = False
+            Me.cacParentIdNo.ValueIsNumeric = False
+            Me.cacParentIdNo.ValueMember = "IdNo"
+            '
+            'lblRevCostCenterIdNo
+            '
+            Me.lblRevCostCenterIdNo.DisplayOnly = True
+            Me.lblRevCostCenterIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblRevCostCenterIdNo, "lblRevCostCenterIdNo")
+            Me.lblRevCostCenterIdNo.Name = "lblRevCostCenterIdNo"
+            '
+            'cacRevCostCenterIdNo
+            '
+            Me.cacRevCostCenterIdNo.BackColor = System.Drawing.Color.White
+            Me.cacRevCostCenterIdNo.ChangingSearchValueOnly = False
+            Me.cacRevCostCenterIdNo.CurrentSearchTerm = ""
+            Me.cacRevCostCenterIdNo.DefaultValue = Nothing
+            Me.cacRevCostCenterIdNo.DisplayMember = "Name"
+            Me.cacRevCostCenterIdNo.DropDownHeight = 1
+            Me.cacRevCostCenterIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cacRevCostCenterIdNo.EditingMode = False
+            Me.cacRevCostCenterIdNo.FilterRule = Nothing
         Me.CFlowLayout1.SetFlowBreak(Me.cacRevCostCenterIdNo, true)
         resources.ApplyResources(Me.cacRevCostCenterIdNo, "cacRevCostCenterIdNo")
         Me.cacRevCostCenterIdNo.ForeColor = System.Drawing.Color.Black

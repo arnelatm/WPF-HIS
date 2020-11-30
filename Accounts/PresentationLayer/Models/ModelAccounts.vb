@@ -11,7 +11,7 @@ Namespace PresentationLayer.Models
 
         End Sub
 
-        Public Sub New(accountName As String, Optional daoTableOrViewName As String = "")
+        Public Sub New(accountName As String, Optional daoTableOrViewName As String = Nothing)
             DataService = New ServiceAccounts(accountName, daoTableOrViewName)
         End Sub
 

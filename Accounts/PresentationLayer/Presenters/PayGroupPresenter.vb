@@ -13,26 +13,10 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IPayGroupView)
             MyBase.New(view)
             TreeViewParentIdField = "ParentIdNo"
-            InitializerWithTv("PayGroup","PayGroup_View")
+            InitializerWithTv("PayGroup", "PayGroup_View")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
-
-        'Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-        '    If CodeToEnum(Of PayGroupTypeSelection)(View.PayGroupType) = PayGroupTypeSelection.Others Then
-
-        '    End If
-        'End Sub
-
-        'Protected Overrides Function IsBizDataValid() As Boolean
-        '    Dim retValue = False
-        '    If MyBase.IsBizDataValid() Then
-        '        If View.PayGroupType = EnumCode(PayGroupTypeSelection.Others) Then
-        '            View.PayGroupType =
-        '        End If
-        '    End If
-        '    Return retValue
-        'End Function
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False

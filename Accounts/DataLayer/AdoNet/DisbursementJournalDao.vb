@@ -12,15 +12,31 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
         Private _tableOrViewName As String
+        Private _jiTableName As String
+        Private _oiTableName As String
         Private _seriesName As String
 
-        Public Function GetTableOrViewName() As String
-            Return _tableOrViewName
-        End Function
-
-        Public Sub SetTableOrViewName(tableOrViewName As String)
-            _tableOrViewName = tableOrViewName
+        Public Sub New(ByVal tableName As String)
+            _tableOrViewName = tableName
+            If tableName = "CdJournal" Then
+                _jiTableName = "CdJournalItem_View"
+                _oiTableName = "CdOiItem"
+            ElseIf tableName = "PcJournal" Then
+                _jiTableName = "PcJournalItem_View"
+                _oiTableName = "CdOiItem"
+            Else
+                _jiTableName = "CkJournalItem_View"
+                _oiTableName = "CdOiItem"
+            End If
         End Sub
+
+        'Public Function GetTableOrViewName() As String
+        '    Return _tableOrViewName
+        'End Function
+
+        'Public Sub SetTableOrViewName(tableOrViewName As String)
+        '    _tableOrViewName = tableOrViewName
+        'End Sub
 
         'Protected Property TableName As String
         '    Get
@@ -44,7 +60,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String
             Dim data
             Dim params() As Object = {"@IdNo", idNo}
-            If GetTableOrViewName() = "CkJournal" Then
+            If _tableOrViewName = "CkJournal" Then
                 sql = "SELECT " &
                     "AccountIdNo," &
                     "Amount," &
@@ -67,7 +83,7 @@ Namespace DataLayer.AdoNet
                     "UnApplied," &
                     "VatAmount," &
                     "VatNumber" &
-                    " FROM " & GetTableOrViewName() &
+                    " FROM " & _tableOrViewName &
                     " WHERE IdNo = @IdNo"
                 data = _db.Read(sql, CkMake, params).FirstOrDefault()
             Else
@@ -91,16 +107,16 @@ Namespace DataLayer.AdoNet
                     "UnApplied," &
                     "VatAmount," &
                     "VatNumber" &
-                    " FROM " & GetTableOrViewName() &
+                    " FROM " & _tableOrViewName &
                     " WHERE IdNo = @IdNo"
                 data = _db.Read(sql, DjMake, params).FirstOrDefault()
             End If
             Dim jiDao = New JournalItemDao
             Dim oiDao = New DjOiItemDao
-            If GetTableOrViewName() = "CdJournal" Then
+            If _tableOrViewName = "CdJournal" Then
                 jiDao.SetTableOrViewName("CdJournalItem_View")
                 oiDao.SetTableOrViewName("CdOiItem_View")
-            ElseIf GetTableOrViewName() = "PcJournal" Then
+            ElseIf _tableOrViewName = "PcJournal" Then
                 jiDao.SetTableOrViewName("PcJournalItem_View")
                 oiDao.SetTableOrViewName("PcOiItem_View")
             Else
@@ -120,7 +136,7 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).UpdateRecord
             Dim sql As String
-            If GetTableOrViewName() = "CkJournal" Then
+            If _tableOrViewName = "CkJournal" Then
                 sql = " UPDATE " & _tableOrViewName & " SET " &
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
@@ -144,7 +160,7 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
                 Return _db.Update(sql, CkTake(disbursementJournal))
             Else
-                sql = " UPDATE " & GetTableOrViewName() & " SET " &
+                sql = " UPDATE " & _tableOrViewName & " SET " &
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
@@ -169,8 +185,8 @@ Namespace DataLayer.AdoNet
 
         Public Function DjAddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).AddRecord
             Dim sql As String
-            If GetTableOrViewName() = "CkJournal" Then
-                sql = " INSERT INTO " & GetTableOrViewName() & " (" &
+            If _tableOrViewName = "CkJournal" Then
+                sql = " INSERT INTO " & _tableOrViewName & " (" &
                         "AccountIdNo," &
                         "Amount," &
                         "Applied," &
@@ -211,7 +227,7 @@ Namespace DataLayer.AdoNet
                         ")"
                 Return _db.Insert(sql, CkTake(disbursementJournal))
             Else
-                sql = " INSERT INTO " & GetTableOrViewName() & " (" &
+                sql = " INSERT INTO " & _tableOrViewName & " (" &
                         "AccountIdNo," &
                         "Amount," &
                         "Applied," &
