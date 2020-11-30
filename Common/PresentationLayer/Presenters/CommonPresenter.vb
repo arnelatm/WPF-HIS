@@ -26,13 +26,7 @@ Namespace PresentationLayer.Presenters
 
         Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
         Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
-        Protected Property LookUpDisplayCode As String
-        Protected Property LookUpDisplayName As String
-        Protected Property LookUpDisplayNameArabic As String
-        Protected Property LookUpFieldsToShow As String()
-        Protected Property LookUpFilterKey As String = Nothing
-        Protected Property LookUpSortExpression As String
-        Protected Property LookUpTableToGet As String
+
         Private Shared Shadows Property CommonModel As IModelCommon
 
         Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
@@ -73,32 +67,6 @@ Namespace PresentationLayer.Presenters
                 dataList.Add(data)
             Next
             Return dataList
-        End Function
-
-        Public Function GetFilteredLookupListByCodeName(listName As String, filter As String, Optional fieldName As String = Nothing)
-            ComposeLookupParameters(listName)
-            LookUpFilterKey = filter
-            Return GetFilteredLookupByCodeName()
-        End Function
-
-        Public Function GetLookup(listName As String)
-            ComposeLookupParameters(listName)
-            ProcessLookupFields()
-            Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
-        End Function
-
-        Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
-            Dim dFieldName As String
-            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-                If LookUpSortExpression = pDisplayName Then
-                    LookUpSortExpression = pDisplayNameArabic
-                End If
-                dFieldName = pDisplayNameArabic
-            Else
-                dFieldName = pDisplayName
-            End If
-            LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
-            Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
         End Function
 
         Public Overrides Sub GoAddRecord()
@@ -181,29 +149,6 @@ Namespace PresentationLayer.Presenters
             Return dataList
         End Function
 
-        Protected Function GetFilteredLookupByCodeName()
-            ProcessLookupFields()
-            Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
-        End Function
-
-        Protected Function GetFilteredLookupByName()
-            ProcessLookupFields()
-            Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
-        End Function
-
-        Protected Function GetFilteredLookupByNameCode()
-            ProcessLookupFields()
-            Return Model.GetFilteredLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
-        End Function
-
-        Private Sub ComposeLookupParameters(listName As String)
-            LookUpTableToGet = listName
-            LookUpDisplayName = listName + "Name"
-            LookUpSortExpression = LookUpDisplayName
-            LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
-            LookUpDisplayCode = listName + "Code"
-        End Sub
-
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             Dim type As Type = View.GetType
             If type.GetProperty("Posted") IsNot Nothing Then
@@ -213,19 +158,6 @@ Namespace PresentationLayer.Presenters
                     CancelEdit = True
                 End If
             End If
-        End Sub
-
-        Private Sub ProcessLookupFields()
-            Dim dFieldName As String
-            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-                If LookUpSortExpression = LookUpDisplayName Then
-                    LookUpSortExpression = LookUpDisplayNameArabic
-                End If
-                dFieldName = LookUpDisplayNameArabic
-            Else
-                dFieldName = LookUpDisplayName
-            End If
-            LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
         End Sub
 
     End Class

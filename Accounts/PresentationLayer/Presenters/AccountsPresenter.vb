@@ -17,12 +17,18 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Sub Initializer(baseClassName As String, Optional tableOrViewName As String = Nothing)
-            Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
+            'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
             TableName = IIf(tableOrViewName Is Nothing, baseClassName, tableOrViewName)
             SortOrderKey = baseClassName + "Name"
-            Dim args As Object() = {baseClassName}
-            Dim t As Type = Type.GetType(presenterModelName)
-            ModelPresenter = Activator.CreateInstance(t, args)
+            ModelPresenter = New ModelAccounts(baseClassName, tableOrViewName)
+            'Dim t As Type = Type.GetType(presenterModelName)
+            'If tableOrViewName Is Nothing Then
+            '    ModelPresenter = Activator.CreateInstance(t)
+            'Else
+            '    'Dim args As Object() = {baseClassName}
+            '    'Dim t As Type = Type.GetType(presenterModelName)
+            '    ModelPresenter = Activator.CreateInstance(t, tableOrViewName)
+            'End If
             OriginalModel = New TM
             DataModel = New TM
             'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Model." + baseClassName + "Model"
@@ -35,6 +41,9 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = baseClassName + "Code"
             TreeViewList = New List(Of TM)
             Initializer(baseClassName, tableOrViewName)
+            If TreeViewParentIdField IsNot Nothing Then
+                SortOrderKey = "SortKey"
+            End If
         End Sub
 
         'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit

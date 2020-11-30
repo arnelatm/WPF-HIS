@@ -63,7 +63,7 @@ Namespace AdoNet
             End Get
         End Property
 
-        Public Overridable Function CreateDao(classBasename As String) As Object Implements IDaoFactory.CreateDao
+        Public Overridable Function CreateDao(classBasename As String, Optional arguements As Object = Nothing) As Object Implements IDaoFactory.CreateDao
             Dim className = $"AATM.DataLayer.AdoNet." + classBasename + "Dao"
             Dim dao As Object
             Dim tType As Type = Type.GetType(className)

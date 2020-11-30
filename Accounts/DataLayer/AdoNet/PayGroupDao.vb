@@ -13,11 +13,16 @@ Namespace DataLayer.AdoNet
         Implements IDaoAll(Of PayGroup)
 
         Private ReadOnly _db As New Db()
+        Private _tableOrViewName As String
+
+        Public Sub New(ByVal tableNameOrView As String)
+            _tableOrViewName = tableNameOrView
+        End Sub
 
         Public Function GetRecordById(idNo) As PayGroup Implements IDaoAll(Of PayGroup).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, PayGroupCode, PayGroupName, PayGroupNameAra, LevelNumber, Notes, SortKey" &
-                    "   FROM [PayGroup_View]" &
+                    "   FROM " & _tableOrViewName &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
@@ -30,7 +35,7 @@ Namespace DataLayer.AdoNet
             End If
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, PayGroupCode, PayGroupName, PayGroupNameAra, LevelNumber, Notes, SortKey" &
-                    "   FROM [PayGroup_View] order by sortKey"
+                    "   FROM " & _tableOrViewName & " order by sortKey"
             Return _db.Read(sql, Make).ToList()
         End Function
 

@@ -8,15 +8,19 @@ Namespace DataLayer.AdoNet
         Inherits DaoFactoryCommon
         Implements IDaoFactoryAccounts
 
-        Public Overloads Function CreateDao(classBaseName As String) As Object Implements IDaoFactoryAccounts.CreateDao
-            Dim className = $"AATM.Accounts.DataLayer.AdoNet." + classBaseName + "Dao"
+        Public Overloads Function CreateDao(accountName As String, Optional arguments As Object = Nothing) As Object Implements IDaoFactoryAccounts.CreateDao
+            Dim className = $"AATM.Accounts.DataLayer.AdoNet." + accountName + "Dao"
             Dim dao As Object
             Dim tType As Type = Type.GetType(className)
             If tType Is Nothing Then
                 MessageBox.Show("Missing Data Access Object " + className)
                 Debugger.Break()
             End If
-            dao = Activator.CreateInstance(tType)
+            If arguments Is Nothing Then
+                dao = Activator.CreateInstance(tType)
+            Else
+                dao = Activator.CreateInstance(tType, arguments)
+            End If
             Return dao
         End Function
 

@@ -32,16 +32,16 @@ Namespace PresentationLayer.Presenters
             _presenterView = view
             SortOrderKey = "IdNo"
             ModelPresenter = New ModelAccounts("DisbursementJournal", tableOrViewName)
-            If tableOrViewName = "CdJournal" Then
-                DjItemModel = New ModelAccounts("DisbursementJournalItem", "CdJournalItem_View")
-                OiItemModel = New ModelAccounts("DjOiItem", "CdOiItem")
-            ElseIf tableOrViewName = "PcJournal" Then
-                DjItemModel = New ModelAccounts("DisbursementJournalItem", "PcJournalItem_View")
-                OiItemModel = New ModelAccounts("DjOiItem", "PcOiItem")
-            Else
-                DjItemModel = New ModelAccounts("DisbursementJournalItem", "CkJournalItem_View")
-                OiItemModel = New ModelAccounts("DjOiItem", "CkOiItem")
-            End If
+            'If tableOrViewName = "CdJournal" Then
+            '    DjItemModel = New ModelAccounts("DisbursementJournalItem", "CdJournalItem_View")
+            '    OiItemModel = New ModelAccounts("DjOiItem", "CdOiItem")
+            'ElseIf tableOrViewName = "PcJournal" Then
+            '    DjItemModel = New ModelAccounts("DisbursementJournalItem", "PcJournalItem_View")
+            '    OiItemModel = New ModelAccounts("DjOiItem", "PcOiItem")
+            'Else
+            '    DjItemModel = New ModelAccounts("DisbursementJournalItem", "CkJournalItem_View")
+            '    OiItemModel = New ModelAccounts("DjOiItem", "CkOiItem")
+            'End If
             SortOrderKey = "IdNo"
             TableName = tableOrViewName
             If tableOrViewName = "PcJournal" Then

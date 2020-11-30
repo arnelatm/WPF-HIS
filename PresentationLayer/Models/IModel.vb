@@ -43,6 +43,8 @@ Public Interface IModel
 
     Function GetLookup(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
+    Function GetLookupNew(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+
     Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
 
     Function GetRecordById(Of TM As New)(idNo As Int32) As TM
