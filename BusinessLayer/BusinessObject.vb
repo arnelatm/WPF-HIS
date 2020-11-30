@@ -20,7 +20,7 @@ Public MustInherit Class BusinessObject
 
     ' adds a business rule to the business object
 
-    Protected Sub AddRule(rule As BusinessRule)
+    Public Sub AddRule(rule As BusinessRule)
         _rules.Add(rule)
     End Sub
 

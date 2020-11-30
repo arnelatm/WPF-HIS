@@ -11,9 +11,9 @@ Namespace DataLayer.AdoNet
         Implements IDaoChild(Of JournalItem)
 
         Private ReadOnly _db As New Db()
-        Protected TableFileName As String = ""
-        Protected DboTvpUpdateFileName As String = ""
-        Protected DboTvpInsertFileName As String = ""
+        Protected _tableOrViewName As String = ""
+        Protected _dboTvpUpdateName As String = ""
+        Protected _dboTvpInsertName As String = ""
 
         Public Function GetRecordsWithIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
             If sortKey Is Nothing Then
@@ -36,7 +36,7 @@ Namespace DataLayer.AdoNet
                     "RevCostCenterIdNo," &
                     "Sequence," &
                     "SpecialAccount" &
-                    " FROM " & TableFileName &
+                    " FROM " & _tableOrViewName &
                     " WHERE JournalIdNo = @JournalIdNo" &
                     " ORDER BY " & sortKey.ToString()
             Dim params() As Object = {"@JournalIdNo", journalIdNo}
@@ -45,12 +45,12 @@ Namespace DataLayer.AdoNet
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, journalItemIdNo As Int32) As Integer _
             Implements IDaoChild(Of JournalItem).DelUpdateTvp
-            Return _db.DelUpdateTvp(DboTvpUpdateFileName, tvpTable, "@MParam", journalItemIdNo)
+            Return _db.DelUpdateTvp(_dboTvpUpdateName, tvpTable, "@MParam", journalItemIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer _
             Implements IDaoChild(Of JournalItem).InsertTvp
-            Return _db.InsertTvp(DboTvpInsertFileName, tvpTable)
+            Return _db.InsertTvp(_dboTvpInsertName, tvpTable)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, JournalItem) =
@@ -72,6 +72,24 @@ Namespace DataLayer.AdoNet
             .Sequence = Extensions.AsInt(Of Int16)(reader("sequence")),
             .SpecialAccount = Extensions.AsString(reader("SpecialAccount"))
             }
+
+        Public Function GetTableOrViewName() As String
+            Return _tableOrViewName
+        End Function
+
+        Public Sub SetTableOrViewName(AutoPropertyValue As String)
+            _tableOrViewName = AutoPropertyValue
+            If _tableOrViewName = "CkJournalItem_View" Then
+                _dboTvpUpdateName = "UpdateCdJournalItemTVP"
+                _dboTvpInsertName = "InsertCdJournalItemTVP"
+            ElseIf _tableOrViewName = "CdJournalItem_View" Then
+                _dboTvpUpdateName = "UpdateCdJournalItemTVP"
+                _dboTvpInsertName = "InsertCdJournalItemTVP"
+            ElseIf _tableOrViewName = "CkJournalItem_View" Then
+                _dboTvpUpdateName = "UpdateCkJournalItemTVP"
+                _dboTvpInsertName = "InsertCkJournalItemTVP"
+            End If
+        End Sub
 
     End Class
 

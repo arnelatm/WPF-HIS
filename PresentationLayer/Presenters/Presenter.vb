@@ -237,7 +237,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    End If
     'End Sub
 
-    Protected Property Model As New Model()
+    Protected Property Model As IModel
 
     Public Shared Function CreateClass(className As String, properties As Dictionary(Of String, Type)) As Type
 

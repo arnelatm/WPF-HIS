@@ -6,9 +6,9 @@
         Inherits JournalItemDao
 
         Public Sub New()
-            TableFileName = "PurchaseJournalItem_View"
-            DboTvpUpdateFileName = "dbo.UpdatePurchaseJournalItemTVP"
-            DboTvpInsertFileName = "dbo.InsertPurchaseJournalItemTVP"
+            _tableOrViewName = "PurchaseJournalItem_View"
+            _dboTvpUpdateName = "dbo.UpdatePurchaseJournalItemTVP"
+            _dboTvpInsertName = "dbo.InsertPurchaseJournalItemTVP"
         End Sub
 
     End Class

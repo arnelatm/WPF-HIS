@@ -35,13 +35,13 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = tableName
             If tableName = "PcJournal" Then
-                PresenterObj = New PcJournalPresenter(Me)
+                PresenterObj = New DisbursementJournalPresenter(Me, "PcJournal")
                 Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
             ElseIf tableName = "CdJournal" Then
-                PresenterObj = New CdJournalPresenter(Me)
+                PresenterObj = New DisbursementJournalPresenter(Me, "CdJournal")
                 Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
             Else
-                PresenterObj = New CkJournalPresenter(Me)
+                PresenterObj = New DisbursementJournalPresenter(Me, "CkJournal")
                 PresenterObj.JournalCode = "CK"
                 Me.Text = Messaging.TranslateCaption("Check Disbursement Journal")
             End If
@@ -89,6 +89,28 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 chkCancelled.Checked = Value
+            End Set
+        End Property
+
+        Public Property CheckDate As DateTime? Implements IDisbursementJournalView.CheckDate
+            Get
+                Return dtpCheckDate.Value
+            End Get
+            Set
+                If Value.HasValue Then
+                    dtpCheckDate.Value = Value
+                Else
+                    dtpCheckDate.Value = Date.Now()
+                End If
+            End Set
+        End Property
+
+        Public Property CheckNumber As String Implements IDisbursementJournalView.CheckNumber
+            Get
+                Return txtCheckNumber.Text
+            End Get
+            Set
+                txtCheckNumber.Text = Value
             End Set
         End Property
 
