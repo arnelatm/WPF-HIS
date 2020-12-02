@@ -8,11 +8,11 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("DisbursementJournal")
-            TableName = "PcJournal"
+            ModelPresenter = New ModelAccounts("Account")
+            TableName = "Account"
             SortOrderKey = "IdNo"
-            OriginalModel = New DisbursementJournalModel()
-            DataModel = New DisbursementJournalModel
+            OriginalModel = New AccountModel()
+            DataModel = New AccountModel()
 
         End Sub
 

@@ -1382,6 +1382,47 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
+            Dim childMdiForm As IncomeStatement
+            childMdiForm = New IncomeStatement("M") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub QuarterlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles QuarterlyToolStripMenuItem1.Click
+            Dim childMdiForm As IncomeStatement
+            childMdiForm = New IncomeStatement("Q") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub SemiAnnuallyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SemiAnnuallyToolStripMenuItem.Click
+            Dim childMdiForm As IncomeStatement
+            childMdiForm = New IncomeStatement("S") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub CustomRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomRangeToolStripMenuItem.Click
+            Dim childMdiForm As IncomeStatement
+            childMdiForm = New IncomeStatement("C") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        'Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
+
+        'End Sub
+
+        'Private Sub IncomeStatementForAGivenMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+        '    Handles ToolStripMenuItemIncomeStatementForAGivenMonth.Click
+        '    ShowEntryForm(IncomeStatementMonthlyReport)
+        'End Sub
+
         'Private Sub btnPrint_ClickButtonArea(sender As Object, e As MouseEventArgs)
         '    Dim cForm As New AccountReconciliationReport(IdNo)
         '    cForm.Show()

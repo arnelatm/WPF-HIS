@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Globalization
 Imports System.Windows.Forms
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.ReportAppServer.DataDefModel
@@ -11,26 +12,28 @@ Public Class CrReportViewer
 
     Private ReadOnly _myCeLocale As CeLocale
 
-    Public Sub New()
+    Public Sub New() 'Optional ByVal ceLocal As CeLocale = CeLocale.ceLocaleEnglish)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
 
-        Dim valArray As Array = [Enum].GetValues(GetType(CeLocale))
-        Dim lstCeLocale As New ListBox
-        For Each obj As Object In valArray
-            lstCeLocale.Items.Add(obj)
-        Next
+        'Dim valArray As Array = [Enum].GetValues(GetType(CeLocale))
+        'Dim lstCeLocale As New ListBox
+        'For Each obj As Object In valArray
+        '    lstCeLocale.Items.Add(obj)
+        'Next
 
-        _myCeLocale = CeLocale.ceLocaleArabicSaudiArabia
+        '_myCeLocale = CeLocale.ceLocaleArabicSaudiArabia
 
-        Try
-            Report.ReportClientDocument.LocaleID = _myCeLocale
-        Catch ex As Exception
-            MessageBox.Show("ERROR: " & ex.Message)
-        End Try
+        '_myCeLocale = ceLocal
+
+        'Try
+        '    Report.ReportClientDocument.LocaleID = _myCeLocale
+        'Catch ex As Exception
+        '    MessageBox.Show("ERROR: " & ex.Message)
+        'End Try
 
     End Sub
 
@@ -65,12 +68,18 @@ Public Class CrReportViewer
 
     Protected Sub ProcessReport()
         WindowState = FormWindowState.Maximized
-        Dim x As Integer = CInt(Report.ReportClientDocument.LocaleID)
+        Dim ceCulture As CeLocale
+        If Me.FormCulture.Name.ToLower().Remove(2) = "ar" Then
+            ceCulture = CeLocale.ceLocaleArabicSaudiArabia
+        Else
+            ceCulture = CeLocale.ceLocaleEnglish
+        End If
+        'Dim x As Integer = CInt(ceCulture)
         With CrystalReportViewer1
             .Visible = True
             .BringToFront()
             .ReportSource = Report
-            .SetProductLocale(x)
+            .SetProductLocale(CInt(ceCulture))
             .Refresh()
         End With
         btnQuit.Visible = True
