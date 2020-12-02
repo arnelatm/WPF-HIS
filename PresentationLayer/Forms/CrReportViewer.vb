@@ -50,10 +50,13 @@ Public Class CrReportViewer
             Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
             If computerName = $"ISPADMIN2" Then
                 reportPaths = ConfigurationManager.AppSettings.Get("ReportPaths2")
+                server = ConfigurationManager.AppSettings.Get("ServerTranslator2")
             ElseIf computerName = "MARCELO-DELL" Then
                 reportPaths = ConfigurationManager.AppSettings.Get("ReportPaths3")
+                server = ConfigurationManager.AppSettings.Get("ServerTranslator3")
             Else
                 reportPaths = ConfigurationManager.AppSettings.Get("ReportPaths1")
+                server = ConfigurationManager.AppSettings.Get("ServerTranslator1")
             End If
         End If
         Report.Load(reportPaths & ReportFileName)
