@@ -61,7 +61,7 @@ Namespace PresentationLayer.Views
 
         Public Property ComputedBankChargeVat As Decimal Implements ISalesDepositView.ComputedBankChargeVat
             Get
-                Return Math.Round(Math.Floor(ComputedBankCharge * _vatRate) / 100D, 2)
+                Return Math.Round(Math.Floor(ComputedBankCharge * _vatRate * 100) / 100, 2)
             End Get
             Set(value As Decimal)
                 _computedBankChargeVat = value
