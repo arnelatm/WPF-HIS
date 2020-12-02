@@ -1226,7 +1226,7 @@ Namespace PresentationLayer.Views.Forms
             'DisbursementJournalEntry
             '
             resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.tlpDisbursement)
+            Me.Controls.Add(Me.tlpDisbursement)
         Me.Name = "DisbursementJournalEntry"
         Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

@@ -803,7 +803,14 @@ Namespace PresentationLayer.Presenters
             Else
                 totalLineAmountInWords = New ToWord(_presenterView.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm(ReportName, _presenterView.IdNo, "PCJournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
+            If TableName = "PcJournal" Then
+                ReportName = "Petty Cash Disbursement Journal.Rpt"
+            ElseIf TableName = "CdJournal" Then
+                ReportName = "Cash Disbursement Journal.Rpt"
+            Else
+                ReportName = "Check Disbursement Journal.Rpt"
+            End If
+            Dim cForm As New ReportForm(ReportName, _presenterView.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 

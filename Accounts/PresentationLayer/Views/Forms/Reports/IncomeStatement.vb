@@ -33,6 +33,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim begDataDate As Date
             Dim language As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+            lastFiscalYearDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
 
             Select Case _period
                 Case "Y"
