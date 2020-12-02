@@ -1,10 +1,12 @@
 ﻿
 
+
+
 CREATE VIEW [dbo].[ARJournalTransaction_View]
 AS
 SELECT        dbo.ArJournalItem.Sequence, dbo.ArJournalItem.JournalIdNo, dbo.ArJournalItem.Debit, dbo.ArJournalItem.Credit, dbo.ArJournalItem.Notes, dbo.ArJournalItem.Posted, dbo.Customer.CustomerCode, 
                          dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, dbo.ArJournal.TransactionDate, dbo.ArJournal.ReferenceNo, dbo.ArJournal.Amount, dbo.ArJournal.InvoiceNo, dbo.ArJournal.InvoiceDate, 
-                         dbo.ArJournal.Notes AS Expr1, dbo.ArJournal.Posted AS Expr2, dbo.ArJournal.Cancelled, dbo.Account.AccountCode, dbo.Account.AccountName, dbo.Account.AccountNameAra, dbo.RevCostCenter.RevCostCenterCode
+                         dbo.ArJournal.Notes AS 'DetailNotes', dbo.ArJournal.Posted AS 'JOurnalPosted', dbo.ArJournal.Cancelled, dbo.Account.AccountCode, dbo.Account.AccountName, dbo.Account.AccountNameAra, dbo.RevCostCenter.RevCostCenterCode
 FROM            dbo.RevCostCenter RIGHT OUTER JOIN
                          dbo.ArJournalItem ON dbo.RevCostCenter.IdNo = dbo.ArJournalItem.RevCostCenterIdNo LEFT OUTER JOIN
                          dbo.Account ON dbo.ArJournalItem.AccountIdNo = dbo.Account.IdNo LEFT OUTER JOIN
