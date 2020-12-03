@@ -350,7 +350,7 @@ Public Class Model
     'End Function
 
     Private Function IModel_GetBizObjectErrors() As IEnumerable(Of Object) Implements IModel.GetBizObjectErrors
-        Throw New NotImplementedException()
+        'Throw New NotImplementedException()
     End Function
 
 End Class

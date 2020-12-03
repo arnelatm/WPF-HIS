@@ -1,3 +1,5 @@
+USE ISPDATA
+GO
 :r c:\temp\Sql\AccountBalance.sql
 :r c:\temp\Sql\customer.sql
 :r c:\temp\Sql\supplier.sql	
@@ -23,11 +25,11 @@
 :r c:\temp\Sql\GeneralJournalItem3.sql
 :r c:\temp\Sql\GeneralJournalItem4.sql
 
-:r c:\temp\Sql\CashDisbursementJournal.sql
-:r c:\temp\Sql\CashDisbursementJournalItem.sql
-:r c:\temp\Sql\CheckDisbursementJournal.sql
+:r c:\temp\Sql\CdJournal.sql
+:r c:\temp\Sql\CdJournalItem.sql
+:r c:\temp\Sql\CkJournal.sql
+:r c:\temp\Sql\CkJournalItem.sql
 
-:r c:\temp\Sql\CheckDisbursementJournalItem.sql
 :r c:\temp\Sql\CashReceiptJournal.sql
 :r c:\temp\Sql\CashReceiptJournalItem.sql
-:r c:\temp\Sql\UpdateChartBegBal.sql
+:r c:\temp\Sql\UpdateAccountBegBal.sql
