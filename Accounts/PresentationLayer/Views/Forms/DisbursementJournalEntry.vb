@@ -416,31 +416,31 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
+        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs)
             If _viewGl Then
                 _viewGl = False
                 DataGridViewJournalItems.Visible = False
                 DataGridViewDjOiItems.Visible = True
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
-                If tlpDisbursement.GetColumn(DataGridViewDjOiItems) <> 0 Then
-                    SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
-                    tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 1)
-                    tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
-                End If
+                'If tlpDisbursement.GetColumn(DataGridViewDjOiItems) <> 0 Then
+                'SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
+                'tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 1)
+                'tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
+                'End If
             Else
                 _viewGl = True
                 DataGridViewJournalItems.Visible = True
                 DataGridViewDjOiItems.Visible = False
                 btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
-                If tlpDisbursement.GetColumn(DataGridViewJournalItems) <> 1 Then
-                    SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
-                    tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 1)
-                    tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 12)
-                End If
+                'If tlpDisbursement.GetColumn(DataGridViewJournalItems) <> 1 Then
+                'SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
+                'tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 1)
+                'tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 12)
+                'End If
             End If
         End Sub
 
-        Private Sub DjOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDjOiItems.CellEndEdit
+        Private Sub DjOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
             With DataGridViewDjOiItems.CurrentCell
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvamount"
@@ -495,15 +495,15 @@ Namespace PresentationLayer.Views.Forms
             Else
                 'tlpDisbursement.SetCellPosition(txtCheckNumber, New TableLayoutPanelCellPosition(11, 8))
                 'tlpDisbursement.SetCellPosition(txtOrNumber, New TableLayoutPanelCellPosition(1, 3))
-                SwapPosition(txtORNumber, txtCheckNumber)
-                tlpDisbursement.SetColumnSpan(lblCheckNumber, 1)
-                SwapPosition(lblInvoiceNo, lblCheckNumber)
+                'SwapPosition(txtORNumber, txtCheckNumber)
+                'tlpDisbursement.SetColumnSpan(lblCheckNumber, 1)
+                'SwapPosition(lblInvoiceNo, lblCheckNumber)
                 dtpCheckDate.Visible = True
                 lblCheckDate.Visible = True
                 lblCheckNumber.Visible = True
                 txtCheckNumber.Visible = True
-                lblInvoiceNo.Visible = False
-                txtORNumber.Visible = False
+                'lblInvoiceNo.Visible = False
+                'txtORNumber.Visible = False
             End If
 
             If PresenterObj.CdAccountCount = 0 Then
@@ -519,11 +519,11 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Private Sub CboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPaymentType.Validated, cboAccountIdNo.Validated
+        Private Sub CboAccountIdNo_ValueChanged(sender As Object, e As EventArgs)
             UpdateFirstLine()
         End Sub
 
-        Private Sub CboPayeeIdNo_Validated(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
+        Private Sub CboPayeeIdNo_Validated(sender As Object, e As EventArgs)
             If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
                 If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                     If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
@@ -541,7 +541,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
+        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs)
             If cboPaymentType.PreviousSelectedIndex <> cboPaymentType.SelectedIndex Then
                 SetPayeeDataSource(PaymentType)
                 UpdateLayout()
@@ -567,7 +567,7 @@ Namespace PresentationLayer.Views.Forms
             Close()
         End Sub
 
-        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
+        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs)
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
@@ -580,7 +580,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
             With DataGridViewJournalItems.CurrentCell
                 Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
                 Select Case .OwningColumn.Name.ToLower()
@@ -691,7 +691,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
+        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs)
             If DataGridViewJournalItems.Visible Then
                 If DataGridViewJournalItems IsNot Nothing Then
                     DataGridViewJournalItems.Focus()
@@ -784,7 +784,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotalVatAmount()
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
+        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs)
             PresenterObj.AutoApplyAmount()
             DataGridViewDjOiItems.Refresh()
             UpdateOiTotals()

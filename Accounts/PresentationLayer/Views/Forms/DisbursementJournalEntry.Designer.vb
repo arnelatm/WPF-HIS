@@ -45,69 +45,65 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.tlpDisbursement = New System.Windows.Forms.TableLayoutPanel()
-        Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-        Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.txtORNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblCheckDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpTransactionDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-        Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblApplied = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblVatNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpCheckDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtApplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtUnapplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.DataGridViewDjOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.tlpDisbursement = New System.Windows.Forms.TableLayoutPanel()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtORNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpTransactionDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblApplied = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtApplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtUnapplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.DataGridViewDjOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequenceDjOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -120,14 +116,19 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.JournalItemIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.dtpCheckDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.lblCheckDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblVatNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsDjOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tlpDisbursement.SuspendLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DataGridViewDjOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsDjOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TranslatorDAC
@@ -138,12 +139,19 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
+            'bsJournalItems
+            '
+            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
+            '
+            'bsDjOiItems
+            '
+            Me.bsDjOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DjOiItemModel)
+            '
             'tlpDisbursement
             '
             Me.tlpDisbursement.BackColor = System.Drawing.Color.Transparent
             resources.ApplyResources(Me.tlpDisbursement, "tlpDisbursement")
-            Me.tlpDisbursement.Controls.Add(Me.lblCheckNumber, 11, 8)
-            Me.tlpDisbursement.Controls.Add(Me.txtCheckNumber, 10, 8)
+            Me.tlpDisbursement.Controls.Add(Me.CLabel1, 0, 8)
             Me.tlpDisbursement.Controls.Add(Me.btnViewGL, 0, 8)
             Me.tlpDisbursement.Controls.Add(Me.DataGridViewJournalItems, 0, 7)
             Me.tlpDisbursement.Controls.Add(Me.lblDateCreated, 9, 6)
@@ -165,16 +173,12 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.Controls.Add(Me.cboDiscountAccountIdNo, 1, 4)
             Me.tlpDisbursement.Controls.Add(Me.lblInvoiceNo, 0, 3)
             Me.tlpDisbursement.Controls.Add(Me.txtORNumber, 1, 3)
-            Me.tlpDisbursement.Controls.Add(Me.lblCheckDate, 3, 3)
             Me.tlpDisbursement.Controls.Add(Me.txtReferenceNo, 5, 0)
             Me.tlpDisbursement.Controls.Add(Me.lblSupplierIdNo, 4, 1)
             Me.tlpDisbursement.Controls.Add(Me.dtpTransactionDate, 8, 0)
             Me.tlpDisbursement.Controls.Add(Me.txtAmount, 8, 2)
-            Me.tlpDisbursement.Controls.Add(Me.txtVatNumber, 8, 3)
             Me.tlpDisbursement.Controls.Add(Me.lblAmount, 7, 2)
             Me.tlpDisbursement.Controls.Add(Me.lblTransactionDate, 7, 0)
-            Me.tlpDisbursement.Controls.Add(Me.lblVatNo, 7, 3)
-            Me.tlpDisbursement.Controls.Add(Me.dtpCheckDate, 5, 3)
             Me.tlpDisbursement.Controls.Add(Me.txtNotes, 1, 5)
             Me.tlpDisbursement.Controls.Add(Me.txtVatAmount, 11, 0)
             Me.tlpDisbursement.Controls.Add(Me.txtApplied, 11, 1)
@@ -188,40 +192,20 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.Controls.Add(Me.btnAutoApply, 2, 8)
             Me.tlpDisbursement.Controls.Add(Me.DataGridViewDjOiItems, 12, 7)
             Me.tlpDisbursement.Controls.Add(Me.txtPayeeName, 6, 8)
+            Me.tlpDisbursement.Controls.Add(Me.dtpCheckDate, 8, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblCheckDate, 7, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblVatNo, 3, 3)
+            Me.tlpDisbursement.Controls.Add(Me.txtVatNumber, 5, 3)
+            Me.tlpDisbursement.Controls.Add(Me.txtCheckNumber, 8, 3)
+            Me.tlpDisbursement.Controls.Add(Me.lblCheckNumber, 7, 3)
             Me.tlpDisbursement.Name = "tlpDisbursement"
             '
-            'lblCheckNumber
+            'CLabel1
             '
-            Me.lblCheckNumber.DisplayOnly = True
-            Me.lblCheckNumber.EditingMode = False
-            resources.ApplyResources(Me.lblCheckNumber, "lblCheckNumber")
-            Me.lblCheckNumber.Name = "lblCheckNumber"
-            '
-            'txtCheckNumber
-            '
-            Me.txtCheckNumber.BackColor = System.Drawing.Color.White
-            Me.txtCheckNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.tlpDisbursement.SetColumnSpan(Me.txtCheckNumber, 2)
-            Me.txtCheckNumber.ComputedValue = False
-            Me.txtCheckNumber.CustomFormat = Nothing
-            Me.txtCheckNumber.DataBoundControl = True
-            Me.txtCheckNumber.EditingMode = False
-            resources.ApplyResources(Me.txtCheckNumber, "txtCheckNumber")
-            Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
-            Me.txtCheckNumber.LinkedLabel = Me.lblInvoiceNo
-            Me.txtCheckNumber.MaximumValue = Nothing
-            Me.txtCheckNumber.MinimumValue = Nothing
-            Me.txtCheckNumber.Name = "txtCheckNumber"
-            Me.txtCheckNumber.OldValue = Nothing
-            Me.txtCheckNumber.ReadOnly = True
-            Me.txtCheckNumber.ValueIsMandatory = True
-            '
-            'lblInvoiceNo
-            '
-            Me.lblInvoiceNo.DisplayOnly = True
-            Me.lblInvoiceNo.EditingMode = False
-            resources.ApplyResources(Me.lblInvoiceNo, "lblInvoiceNo")
-            Me.lblInvoiceNo.Name = "lblInvoiceNo"
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
             '
             'btnViewGL
             '
@@ -415,10 +399,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.CancelledDataGridViewCheckBoxColumn, "CancelledDataGridViewCheckBoxColumn")
             Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
             Me.CancelledDataGridViewCheckBoxColumn.ReadOnly = True
-            '
-            'bsJournalItems
-            '
-            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
             '
             'lblDateCreated
             '
@@ -653,7 +633,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboDiscountAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cboDiscountAccountIdNo.ChangingSearchValueOnly = False
-            Me.tlpDisbursement.SetColumnSpan(Me.cboDiscountAccountIdNo, 8)
+            Me.tlpDisbursement.SetColumnSpan(Me.cboDiscountAccountIdNo, 6)
             Me.cboDiscountAccountIdNo.CurrentSearchTerm = ""
             Me.cboDiscountAccountIdNo.DefaultValue = Nothing
             Me.cboDiscountAccountIdNo.DisplayMember = "Name"
@@ -684,6 +664,13 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.ValueIsNumeric = False
             Me.cboDiscountAccountIdNo.ValueMember = "IdNo"
             '
+            'lblInvoiceNo
+            '
+            Me.lblInvoiceNo.DisplayOnly = True
+            Me.lblInvoiceNo.EditingMode = False
+            resources.ApplyResources(Me.lblInvoiceNo, "lblInvoiceNo")
+            Me.lblInvoiceNo.Name = "lblInvoiceNo"
+            '
             'txtORNumber
             '
             Me.txtORNumber.BackColor = System.Drawing.Color.White
@@ -702,14 +689,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtORNumber.OldValue = Nothing
             Me.txtORNumber.ReadOnly = True
             Me.txtORNumber.ValueIsMandatory = True
-            '
-            'lblCheckDate
-            '
-            Me.tlpDisbursement.SetColumnSpan(Me.lblCheckDate, 2)
-            Me.lblCheckDate.DisplayOnly = True
-            resources.ApplyResources(Me.lblCheckDate, "lblCheckDate")
-            Me.lblCheckDate.EditingMode = False
-            Me.lblCheckDate.Name = "lblCheckDate"
             '
             'txtReferenceNo
             '
@@ -733,8 +712,8 @@ Namespace PresentationLayer.Views.Forms
             'lblSupplierIdNo
             '
             Me.lblSupplierIdNo.DisplayOnly = True
-            Me.lblSupplierIdNo.EditingMode = False
             resources.ApplyResources(Me.lblSupplierIdNo, "lblSupplierIdNo")
+            Me.lblSupplierIdNo.EditingMode = False
             Me.lblSupplierIdNo.Name = "lblSupplierIdNo"
             '
             'dtpTransactionDate
@@ -780,36 +759,9 @@ Namespace PresentationLayer.Views.Forms
             'lblAmount
             '
             Me.lblAmount.DisplayOnly = True
-            Me.lblAmount.EditingMode = False
             resources.ApplyResources(Me.lblAmount, "lblAmount")
+            Me.lblAmount.EditingMode = False
             Me.lblAmount.Name = "lblAmount"
-            '
-            'txtVatNumber
-            '
-            Me.txtVatNumber.BackColor = System.Drawing.Color.White
-            Me.txtVatNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtVatNumber.ComputedValue = False
-            Me.txtVatNumber.CustomFormat = Nothing
-            Me.txtVatNumber.DataBoundControl = True
-            resources.ApplyResources(Me.txtVatNumber, "txtVatNumber")
-            Me.txtVatNumber.EditingMode = False
-            Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
-            Me.txtVatNumber.LinkedLabel = Me.lblApplied
-            Me.txtVatNumber.MaximumValue = Nothing
-            Me.txtVatNumber.MinimumValue = Nothing
-            Me.txtVatNumber.Name = "txtVatNumber"
-            Me.txtVatNumber.OldValue = Nothing
-            Me.txtVatNumber.ReadOnly = True
-            Me.txtVatNumber.ValueIsMandatory = True
-            Me.txtVatNumber.ValueIsNumeric = True
-            '
-            'lblApplied
-            '
-            Me.tlpDisbursement.SetColumnSpan(Me.lblApplied, 2)
-            Me.lblApplied.DisplayOnly = True
-            resources.ApplyResources(Me.lblApplied, "lblApplied")
-            Me.lblApplied.EditingMode = False
-            Me.lblApplied.Name = "lblApplied"
             '
             'lblTransactionDate
             '
@@ -817,35 +769,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
             Me.lblTransactionDate.EditingMode = False
             Me.lblTransactionDate.Name = "lblTransactionDate"
-            '
-            'lblVatNo
-            '
-            Me.lblVatNo.DisplayOnly = True
-            Me.lblVatNo.EditingMode = False
-            resources.ApplyResources(Me.lblVatNo, "lblVatNo")
-            Me.lblVatNo.Name = "lblVatNo"
-            '
-            'dtpCheckDate
-            '
-            Me.dtpCheckDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.tlpDisbursement.SetColumnSpan(Me.dtpCheckDate, 2)
-            Me.dtpCheckDate.DefaultValue = Nothing
-            Me.dtpCheckDate.DisplayOnly = False
-            Me.dtpCheckDate.DtpDefaultValue = Nothing
-            Me.dtpCheckDate.EditingMode = False
-            Me.dtpCheckDate.EditsAllowed = False
-            Me.dtpCheckDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpCheckDate.LinkedLabel = Nothing
-            resources.ApplyResources(Me.dtpCheckDate, "dtpCheckDate")
-            Me.dtpCheckDate.Name = "dtpCheckDate"
-            Me.dtpCheckDate.ReadOnlyDp = False
-            Me.dtpCheckDate.SecurityKey = Nothing
-            Me.dtpCheckDate.ShowLongDate = False
-            Me.dtpCheckDate.ShowTime = False
-            Me.dtpCheckDate.TargetCalendar = Nothing
-            Me.dtpCheckDate.Value = Nothing
-            Me.dtpCheckDate.ValueIsMandatory = False
-            Me.dtpCheckDate.ValueIsNullable = False
             '
             'txtNotes
             '
@@ -887,6 +810,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatAmount.TabStop = False
             Me.txtVatAmount.ValueIsMandatory = True
             Me.txtVatAmount.ValueIsNumeric = True
+            '
+            'lblApplied
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.lblApplied, 2)
+            Me.lblApplied.DisplayOnly = True
+            resources.ApplyResources(Me.lblApplied, "lblApplied")
+            Me.lblApplied.EditingMode = False
+            Me.lblApplied.Name = "lblApplied"
             '
             'txtApplied
             '
@@ -1200,10 +1131,6 @@ Namespace PresentationLayer.Views.Forms
             Me.OpenInvoiceIdNo.Name = "OpenInvoiceIdNo"
             Me.OpenInvoiceIdNo.ReadOnly = True
             '
-            'bsDjOiItems
-            '
-            Me.bsDjOiItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DjOiItemModel)
-            '
             'txtPayeeName
             '
             Me.txtPayeeName.BackColor = System.Drawing.Color.White
@@ -1223,30 +1150,109 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.ReadOnly = True
             Me.txtPayeeName.ValueIsMandatory = True
             '
+            'dtpCheckDate
+            '
+            Me.dtpCheckDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpCheckDate.DefaultValue = Nothing
+            Me.dtpCheckDate.DisplayOnly = False
+            Me.dtpCheckDate.DtpDefaultValue = Nothing
+            Me.dtpCheckDate.EditingMode = False
+            Me.dtpCheckDate.EditsAllowed = False
+            Me.dtpCheckDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpCheckDate.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpCheckDate, "dtpCheckDate")
+            Me.dtpCheckDate.Name = "dtpCheckDate"
+            Me.dtpCheckDate.ReadOnlyDp = False
+            Me.dtpCheckDate.SecurityKey = Nothing
+            Me.dtpCheckDate.ShowLongDate = False
+            Me.dtpCheckDate.ShowTime = False
+            Me.dtpCheckDate.TargetCalendar = Nothing
+            Me.dtpCheckDate.Value = Nothing
+            Me.dtpCheckDate.ValueIsMandatory = False
+            Me.dtpCheckDate.ValueIsNullable = False
+            '
+            'lblCheckDate
+            '
+            Me.lblCheckDate.DisplayOnly = True
+            resources.ApplyResources(Me.lblCheckDate, "lblCheckDate")
+            Me.lblCheckDate.EditingMode = False
+            Me.lblCheckDate.Name = "lblCheckDate"
+            '
+            'lblVatNo
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.lblVatNo, 2)
+            Me.lblVatNo.DisplayOnly = True
+            resources.ApplyResources(Me.lblVatNo, "lblVatNo")
+            Me.lblVatNo.EditingMode = False
+            Me.lblVatNo.Name = "lblVatNo"
+            '
+            'txtVatNumber
+            '
+            Me.txtVatNumber.BackColor = System.Drawing.Color.White
+            Me.txtVatNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.tlpDisbursement.SetColumnSpan(Me.txtVatNumber, 2)
+            Me.txtVatNumber.ComputedValue = False
+            Me.txtVatNumber.CustomFormat = Nothing
+            Me.txtVatNumber.DataBoundControl = True
+            resources.ApplyResources(Me.txtVatNumber, "txtVatNumber")
+            Me.txtVatNumber.EditingMode = False
+            Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
+            Me.txtVatNumber.LinkedLabel = Me.lblApplied
+            Me.txtVatNumber.MaximumValue = Nothing
+            Me.txtVatNumber.MinimumValue = Nothing
+            Me.txtVatNumber.Name = "txtVatNumber"
+            Me.txtVatNumber.OldValue = Nothing
+            Me.txtVatNumber.ReadOnly = True
+            Me.txtVatNumber.ValueIsMandatory = True
+            Me.txtVatNumber.ValueIsNumeric = True
+            '
+            'txtCheckNumber
+            '
+            Me.txtCheckNumber.BackColor = System.Drawing.Color.White
+            Me.txtCheckNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtCheckNumber.ComputedValue = False
+            Me.txtCheckNumber.CustomFormat = Nothing
+            Me.txtCheckNumber.DataBoundControl = True
+            resources.ApplyResources(Me.txtCheckNumber, "txtCheckNumber")
+            Me.txtCheckNumber.EditingMode = False
+            Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
+            Me.txtCheckNumber.LinkedLabel = Me.lblInvoiceNo
+            Me.txtCheckNumber.MaximumValue = Nothing
+            Me.txtCheckNumber.MinimumValue = Nothing
+            Me.txtCheckNumber.Name = "txtCheckNumber"
+            Me.txtCheckNumber.OldValue = Nothing
+            Me.txtCheckNumber.ReadOnly = True
+            Me.txtCheckNumber.ValueIsMandatory = True
+            '
+            'lblCheckNumber
+            '
+            Me.lblCheckNumber.DisplayOnly = True
+            resources.ApplyResources(Me.lblCheckNumber, "lblCheckNumber")
+            Me.lblCheckNumber.EditingMode = False
+            Me.lblCheckNumber.Name = "lblCheckNumber"
+            '
             'DisbursementJournalEntry
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.tlpDisbursement)
-        Me.Name = "DisbursementJournalEntry"
-        Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tlpDisbursement.ResumeLayout(false)
-        Me.tlpDisbursement.PerformLayout
-        CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.DataGridViewDjOiItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsDjOiItems,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.Name = "DisbursementJournalEntry"
+            Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsDjOiItems, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.tlpDisbursement.ResumeLayout(False)
+            Me.tlpDisbursement.PerformLayout()
+            CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DataGridViewDjOiItems, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.ResumeLayout(False)
+            Me.PerformLayout
 
 End Sub
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
-        Friend WithEvents DataGridViewDjOiItems As CDataGridView
         Friend WithEvents bsDjOiItems As Windows.Forms.BindingSource
         Friend WithEvents dgvIdNocadOi As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents dgvJournalItemIdNo As CdgvColumnText
         Friend WithEvents dgvcadIdNo As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents btnViewGL As CButton
         Friend WithEvents CkdIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents JournalItemIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn1 As Windows.Forms.DataGridViewTextBoxColumn
@@ -1255,10 +1261,26 @@ End Sub
         Friend WithEvents DataGridViewTextBoxColumn5 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
         Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents btnAutoApply As CButton
         Friend WithEvents tlpDisbursement As TableLayoutPanel
-        Friend WithEvents txtPayeeName As CTextBox
-        Friend WithEvents lblAmount As CLabel
+        Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents btnViewGL As CButton
+        Friend WithEvents DataGridViewJournalItems As CDataGridView
+        Friend WithEvents dgvSequence As CdgvColumnText
+        Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvDebit As CdgvColumnMoney
+        Friend WithEvents dgvCredit As CdgvColumnMoney
+        Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvNotes As CdgvColumnText
+        Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents JournalIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PaidAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents chkPosted As CCheckBox
         Friend WithEvents lblPosted As CLabel
@@ -1278,18 +1300,15 @@ End Sub
         Friend WithEvents cboDiscountAccountIdNo As CaComboBox
         Friend WithEvents lblInvoiceNo As CLabel
         Friend WithEvents txtORNumber As CTextBox
-        Friend WithEvents lblCheckDate As CLabel
         Friend WithEvents txtReferenceNo As CTextBox
         Friend WithEvents lblSupplierIdNo As CLabel
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents txtAmount As CTextBox
-        Friend WithEvents txtVatNumber As CTextBox
-        Friend WithEvents lblApplied As CLabel
+        Friend WithEvents lblAmount As CLabel
         Friend WithEvents lblTransactionDate As CLabel
-        Friend WithEvents lblVatNo As CLabel
-        Friend WithEvents dtpCheckDate As CCustomDateTimePicker
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents txtVatAmount As CTextBox
+        Friend WithEvents lblApplied As CLabel
         Friend WithEvents txtApplied As CTextBox
         Friend WithEvents txtUnapplied As CTextBox
         Friend WithEvents CLabel2 As CLabel
@@ -1297,25 +1316,8 @@ End Sub
         Friend WithEvents txtDiscountTaken As CTextBox
         Friend WithEvents lblDiscountTaken As CLabel
         Friend WithEvents cboPayeeIdNo As CaComboBox
-        Friend WithEvents DataGridViewJournalItems As CDataGridView
-        Friend WithEvents dgvSequence As CdgvColumnText
-        Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvDebit As CdgvColumnMoney
-        Friend WithEvents dgvCredit As CdgvColumnMoney
-        Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvNotes As CdgvColumnText
-        Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents JournalIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PaidAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
-        Friend WithEvents txtCheckNumber As CTextBox
-        Friend WithEvents lblCheckNumber As CLabel
+        Friend WithEvents btnAutoApply As CButton
+        Friend WithEvents DataGridViewDjOiItems As CDataGridView
         Friend WithEvents dgvSequenceDjOi As CdgvColumnText
         Friend WithEvents dgvInvoiceNo As CdgvColumnText
         Friend WithEvents DgvTransactionDate As CdgvColumnText
@@ -1328,5 +1330,12 @@ End Sub
         Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
         Friend WithEvents JournalItemIdNo As DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNo As DataGridViewTextBoxColumn
+        Friend WithEvents txtPayeeName As CTextBox
+        Friend WithEvents dtpCheckDate As CCustomDateTimePicker
+        Friend WithEvents lblCheckDate As CLabel
+        Friend WithEvents lblVatNo As CLabel
+        Friend WithEvents txtVatNumber As CTextBox
+        Friend WithEvents txtCheckNumber As CTextBox
+        Friend WithEvents lblCheckNumber As CLabel
     End Class
 End Namespace
