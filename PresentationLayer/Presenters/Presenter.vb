@@ -525,6 +525,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
+    Public Function GetRecordField(cTableName As String, returnFieldName As String) As Object
+        Try
+            Return Model.GetRecordField(cTableName, returnFieldName)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Function GetRecordFieldWithKey(searchValue As String, cTableName As String, searchFieldName As String,
                                           returnFieldName As String) _
         As String

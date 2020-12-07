@@ -206,6 +206,10 @@ Public Class Model
         Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
     End Function
 
+    Public Function GetRecordField(tableName As String, returnFieldName As String) As Object Implements IModel.GetRecordField
+        Return Service.GetRecordField(tableName, returnFieldName)
+    End Function
+
     Public Function GetRecordPosition(tableName As String, dno As Integer) As Integer Implements IModel.GetRecordPosition
         Return Service.GetRecordPosition(tableName, dno)
     End Function

@@ -98,4 +98,6 @@ Public Interface IModel
 
     Function IsValid(Of TM)(ByRef dModel As TM) As Object
 
+    Function GetRecordField(tableName As String, returnFieldName As String) As Object
+
 End Interface

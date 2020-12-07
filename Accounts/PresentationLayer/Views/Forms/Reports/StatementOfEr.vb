@@ -26,8 +26,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-
-            Dim cForm As New ReportForm("Statement of Employee Loans.rpt", dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo")
+            Dim cForm As New ReportFormNew("Statement of Employee Loans.rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "EmployeeDisplayName")
             cForm.Show()
         End Sub
 

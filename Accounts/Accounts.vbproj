@@ -274,6 +274,12 @@
     <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormNew.Designer.vb">
+      <DependentUpon>ReportFormNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IBasicView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemsView.vb" />
@@ -1983,6 +1989,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IncomeStatement.resx">
       <DependentUpon>IncomeStatement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormNew.resx">
+      <DependentUpon>ReportFormNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportForm.resx">
       <DependentUpon>ReportForm.vb</DependentUpon>

@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             ' Add any initialization after the InitializeComponent() call.
             Text = fileName
             ReportFileName = fileName
+            MainTableName = "Account"
             GetReportProperties()
             For i = 0 To args.Length - 1 Step 2
                 Dim value = args(i)
@@ -22,9 +23,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         End Sub
 
-        Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-
-        End Sub
+        Public Property MainTableName As String
 
     End Class
 
