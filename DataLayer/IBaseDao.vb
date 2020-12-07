@@ -34,6 +34,8 @@
 
     Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) As Object
 
+    Function GetRecordField(tableName As String, returnFieldName As String) As Object
+
     Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
                                     searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) _
         As String

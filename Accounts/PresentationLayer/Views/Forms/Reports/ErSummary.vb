@@ -2,6 +2,7 @@
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms.Reports
+
     Public Class ErSummary
 
         Public Property MainTableName As String
@@ -19,13 +20,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             PresenterObj = New ReportPresenter(Me)
             Dim currentDate = Now()
             ' returns previous month last day
-            Dim endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year,currentDate.Month,0)
+            Dim endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, currentDate.Month, 0)
             dtpEndingDate.Value = endDate
-            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(endDate.Year,endDate.Month,1)
+            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(endDate.Year, endDate.Month, 1)
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim cForm As New ReportForm("Summary of Employee Loans.Rpt") 
+            Dim cForm As New ReportFormNew("Summary of Employee Loans.Rpt", FormCulture)
             cForm.Show()
         End Sub
 
@@ -34,4 +35,5 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
     End Class
+
 End Namespace

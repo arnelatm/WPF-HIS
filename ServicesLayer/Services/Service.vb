@@ -233,6 +233,10 @@ Namespace Services
             Return BaseDao.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
         End Function
 
+        Public Function GetRecordField(tableName As String, returnFieldName As String) As Object Implements IService.GetRecordField
+            Return BaseDao.GetRecordField(tableName, returnFieldName)
+        End Function
+
         Public Function GetRecordPosition(tableName As String, idNo As Int32) As Integer Implements IService.GetRecordPosition
             Return BaseDao.GetRecordPosition(tableName, idNo)
         End Function

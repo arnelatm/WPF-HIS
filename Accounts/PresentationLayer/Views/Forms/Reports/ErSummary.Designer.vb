@@ -78,34 +78,34 @@
         Me.dtpEndingDate.ReadOnlyDp = false
         Me.dtpEndingDate.SecurityKey = Nothing
         Me.dtpEndingDate.ShowLongDate = false
-        Me.dtpEndingDate.ShowTime = false
-        Me.dtpEndingDate.Size = New System.Drawing.Size(107, 25)
-        Me.dtpEndingDate.TabIndex = 24
-        Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"),System.Globalization.Calendar)
-        Me.dtpEndingDate.Value = Nothing
-        Me.dtpEndingDate.ValueIsMandatory = false
-        Me.dtpEndingDate.ValueIsNullable = false
-        '
-        'dtpBeginningDate
-        '
-        Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpBeginningDate.DefaultValue = Nothing
-        Me.dtpBeginningDate.DisplayOnly = false
-        Me.dtpBeginningDate.DtpDefaultValue = Nothing
-        Me.dtpBeginningDate.EditingMode = true
-        Me.dtpBeginningDate.EditsAllowed = false
-        Me.CFlowLayout1.SetFlowBreak(Me.dtpBeginningDate, true)
-        Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpBeginningDate.LinkedLabel = Nothing
-        Me.dtpBeginningDate.Location = New System.Drawing.Point(184, 11)
-        Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.dtpBeginningDate.Name = "dtpBeginningDate"
-        Me.dtpBeginningDate.ReadOnlyDp = false
-        Me.dtpBeginningDate.SecurityKey = Nothing
-        Me.dtpBeginningDate.ShowLongDate = false
-        Me.dtpBeginningDate.ShowTime = false
-        Me.dtpBeginningDate.Size = New System.Drawing.Size(107, 25)
-        Me.dtpBeginningDate.TabIndex = 23
+        Me.dtpEndingDate.ShowTime = False
+            Me.dtpEndingDate.Size = New System.Drawing.Size(112, 25)
+            Me.dtpEndingDate.TabIndex = 24
+            Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpEndingDate.Value = Nothing
+            Me.dtpEndingDate.ValueIsMandatory = False
+            Me.dtpEndingDate.ValueIsNullable = False
+            '
+            'dtpBeginningDate
+            '
+            Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpBeginningDate.DefaultValue = Nothing
+            Me.dtpBeginningDate.DisplayOnly = False
+            Me.dtpBeginningDate.DtpDefaultValue = Nothing
+            Me.dtpBeginningDate.EditingMode = True
+            Me.dtpBeginningDate.EditsAllowed = False
+            Me.CFlowLayout1.SetFlowBreak(Me.dtpBeginningDate, True)
+            Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpBeginningDate.LinkedLabel = Nothing
+            Me.dtpBeginningDate.Location = New System.Drawing.Point(184, 11)
+            Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpBeginningDate.Name = "dtpBeginningDate"
+            Me.dtpBeginningDate.ReadOnlyDp = False
+            Me.dtpBeginningDate.SecurityKey = Nothing
+            Me.dtpBeginningDate.ShowLongDate = False
+            Me.dtpBeginningDate.ShowTime = False
+            Me.dtpBeginningDate.Size = New System.Drawing.Size(112, 25)
+            Me.dtpBeginningDate.TabIndex = 23
         Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"),System.Globalization.Calendar)
         Me.dtpBeginningDate.Value = Nothing
         Me.dtpBeginningDate.ValueIsMandatory = false

@@ -63,10 +63,10 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         Else
             Me.View = view
 
-            TableName = GetPropertyValue(Me.View, "MainTableName")
+            TableName = GetPropertyValue(Me.View, "TableName")
             'GetPropertyValue(view,"MainTableName")
             If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
-                MessageBox.Show($"'MainTableName' property of the form is not set.")
+                MessageBox.Show($"'TableName' property of the form is not set.")
             End If
             Dim tableColumnPropertyList As List(Of TblColPropModel)
 

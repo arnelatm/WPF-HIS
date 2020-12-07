@@ -232,6 +232,12 @@
             'Return System.Text.Encoding.ASCII.GetString(retValue)
         End Function
 
+        Public Function GetRecordField(tableName As String, returnFieldName As String) As Object Implements IBaseDao.GetRecordField
+            Dim sql As String = " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] "
+            Dim retVal = _db.Scalar(sql)
+            Return retVal
+        End Function
+
         Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
                                                searchFieldName1 As String, searchFieldName2 As String,
                                                returnFieldName As String) As String _
