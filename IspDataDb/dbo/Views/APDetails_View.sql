@@ -10,6 +10,8 @@
 
 
 
+
+
 CREATE VIEW [dbo].[APDetails_View]	
   AS
 (SELECT 'AP' AS 'JournalCode'
@@ -41,14 +43,14 @@ UNION
       ,[Debit]
       ,[Credit]
 	  ,[RevCostCenterIdNo]
-      ,ai.[Notes]
+      ,LTrim(ai.[Notes])+' Chk#'+[CheckNumber] 
 	  ,ai.[Posted]
 	  ,[PayeeIdNo]
-	  ,[ReferenceNo]
+	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PaymentType]
-	  ,b.Notes AS 'MainNote'
+	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
   FROM [CkJournalItem] ai
   LEFT OUTER JOIN CkJournal b
   on ai.JournalIdNo = b.IDNo
@@ -66,7 +68,7 @@ UNION
       ,ai.[Notes]
 	  ,ai.[Posted]
 	  ,[PayeeIdNo]
-	  ,[ReferenceNo]
+	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PaymentType]
@@ -88,7 +90,7 @@ UNION
       ,ai.[Notes]
 	  ,ai.[Posted]
 	  ,b.[PayeeIdNo]
-	  ,b.[ReferenceNo]
+	  ,b.[ORNumber]
 	  ,b.[TransactionDate]
       ,b.[ReferenceNo]
 	  ,b.[PaymentType]
@@ -107,14 +109,14 @@ UNION
       ,[Debit]
       ,[Credit]
 	  ,[RevCostCenterIdNo]
-      ,ai.[Notes]
+      ,LTrim(ai.[Notes])+' Chk#'+[CheckNumber] 
 	  ,ai.[Posted]
 	  ,[PayorIdNo]
-	  ,[ReferenceNo]
+	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PayorType]
-	  ,b.Notes AS 'MainNote'
+	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
   FROM [CashReceiptJournalItem] as ai
   LEFT OUTER JOIN dbo.CashReceiptJournal as b
   on ai.JournalIdNo = b.IDNo

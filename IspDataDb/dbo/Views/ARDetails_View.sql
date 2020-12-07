@@ -10,6 +10,9 @@
 
 
 
+
+
+
 CREATE VIEW [dbo].[ARDetails_View]	
   AS
 (SELECT 'AR' AS 'JournalCode'
@@ -41,14 +44,14 @@ UNION
       ,[Debit]
       ,[Credit]
 	  ,[RevCostCenterIdNo]
-      ,a.[Notes]
+      ,LTrim(a.[Notes])+IIf([CheckNumber]='','',' Chk#'+[CheckNumber])
 	  ,a.[Posted]
 	  ,[PayorIdNo]
-	  ,[ReferenceNo]
+	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PayorType]
-	  ,b.Notes AS 'MainNote'
+	  ,LTrim(b.Notes)+IIf([CheckNumber]='','',' Chk#'+[CheckNumber]) AS 'MainNote'
   FROM [dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IDNo
@@ -63,14 +66,14 @@ UNION
       ,[Debit]
       ,[Credit]
 	  ,[RevCostCenterIdNo]
-      ,a.[Notes]
+      ,LTrim(a.[Notes])+IIf([CheckNumber]='','',' Chk#'+[CheckNumber])
 	  ,a.[Posted]
 	  ,[PayeeIdNo]
-	  ,[ReferenceNo]
+	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PaymentType]
-	  ,b.Notes AS 'MainNote'
+	  ,LTrim(b.Notes)+IIf([CheckNumber]='','',' Chk#'+[CheckNumber])
   FROM [dbo].[CkJournalItem] A
   LEFT OUTER JOIN dbo.CkJournal b
   on a.JournalIdNo = b.IDNo
@@ -88,7 +91,7 @@ UNION
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[PayeeIdNo]
-	  ,[ReferenceNo]
+	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PaymentType]
@@ -110,7 +113,7 @@ UNION
       ,a.[Notes]
 	  ,a.[Posted]
 	  ,[PayeeIdNo]
-	  ,[ReferenceNo]
+	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,[PaymentType]
