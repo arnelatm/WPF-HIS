@@ -662,12 +662,6 @@
     <Compile Include="PresentationLayer\Views\PensionRateView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollEarnAccountView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
-    <Compile Include="PresentationLayer\Views\LeaveView.Designer.vb">
-      <DependentUpon>LeaveView.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\LeaveView.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\SalesDepositView.vb" />
     <Compile Include="Reports\Account Reconciliation Report.vb">
       <AutoGen>True</AutoGen>
@@ -2020,9 +2014,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.resx">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
-      <DependentUpon>LeaveView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Account Reconciliation Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

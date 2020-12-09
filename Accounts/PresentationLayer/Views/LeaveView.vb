@@ -47,10 +47,10 @@ Namespace PresentationLayer.Views
 
         Public Property LeaveAllowed As Int16 Implements ILeaveView.LeaveAllowed
             Get
-                Return txtLeaveNameAra.Text
+                Return txtLeaveAllowed.Text
             End Get
             Set
-                txtLeaveNameAra.Text = Value
+                txtLeaveAllowed.Text = Value
             End Set
         End Property
 
