@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim curCulture = CultureInfo.CurrentCulture
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             Dim cForm As New ReportFormNew("Statement of Accounts Payable.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate",
-                                        cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", language, "Language", cboSupplierIdNo.Text, "DisplayName")
+                                        cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
             cForm.Show()
         End Sub
 

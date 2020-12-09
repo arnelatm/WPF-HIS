@@ -48,7 +48,6 @@ Namespace PresentationLayer.Views.Forms
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.tlpDisbursement = New System.Windows.Forms.TableLayoutPanel()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -151,7 +150,6 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.tlpDisbursement.BackColor = System.Drawing.Color.Transparent
             resources.ApplyResources(Me.tlpDisbursement, "tlpDisbursement")
-            Me.tlpDisbursement.Controls.Add(Me.CLabel1, 0, 8)
             Me.tlpDisbursement.Controls.Add(Me.btnViewGL, 0, 8)
             Me.tlpDisbursement.Controls.Add(Me.DataGridViewJournalItems, 0, 7)
             Me.tlpDisbursement.Controls.Add(Me.lblDateCreated, 9, 6)
@@ -199,13 +197,6 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.Controls.Add(Me.txtCheckNumber, 8, 3)
             Me.tlpDisbursement.Controls.Add(Me.lblCheckNumber, 7, 3)
             Me.tlpDisbursement.Name = "tlpDisbursement"
-            '
-            'CLabel1
-            '
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.Name = "CLabel1"
             '
             'btnViewGL
             '
@@ -1245,9 +1236,9 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.DataGridViewDjOiItems, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
-            Me.PerformLayout
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
         Friend WithEvents bsDjOiItems As Windows.Forms.BindingSource
         Friend WithEvents dgvIdNocadOi As Windows.Forms.DataGridViewTextBoxColumn
@@ -1262,7 +1253,6 @@ End Sub
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
         Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents tlpDisbursement As TableLayoutPanel
-        Friend WithEvents CLabel1 As CLabel
         Friend WithEvents btnViewGL As CButton
         Friend WithEvents DataGridViewJournalItems As CDataGridView
         Friend WithEvents dgvSequence As CdgvColumnText

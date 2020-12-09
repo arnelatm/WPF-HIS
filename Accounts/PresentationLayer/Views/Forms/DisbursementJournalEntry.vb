@@ -416,22 +416,24 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs)
+        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If _viewGl Then
                 _viewGl = False
-                DataGridViewJournalItems.Visible = False
-                DataGridViewDjOiItems.Visible = True
+                'DataGridViewJournalItems.Visible = False
+                'DataGridViewDjOiItems.Visible = True
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
                 'If tlpDisbursement.GetColumn(DataGridViewDjOiItems) <> 0 Then
                 'SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
                 'tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 1)
                 'tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
                 'End If
+                ShowOpenInvoicesDataGrid()
             Else
                 _viewGl = True
-                DataGridViewJournalItems.Visible = True
-                DataGridViewDjOiItems.Visible = False
+                'DataGridViewJournalItems.Visible = True
+                'DataGridViewDjOiItems.Visible = False
                 btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+                ShowJournalItemDataGrid()
                 'If tlpDisbursement.GetColumn(DataGridViewJournalItems) <> 1 Then
                 'SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
                 'tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 1)
@@ -784,7 +786,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotalVatAmount()
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs)
+        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
             PresenterObj.AutoApplyAmount()
             DataGridViewDjOiItems.Refresh()
             UpdateOiTotals()
