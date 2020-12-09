@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As Leave Implements IDaoAll(Of Leave).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, LeaveCode, LeaveName, LeaveNameAra, PaidPercent, Cumulative, MaxCarryOver, MaxLimit, NoMaxLimit, Notes " &
+                    " SELECT IdNo, LeaveCode, LeaveName, LeaveNameAra, LeaveAllowed, PaidPercent, Cumulative, MaxCarryOver, MaxLimit, NoMaxLimit, Notes " &
                     "   FROM [Leave]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -39,6 +39,7 @@ Namespace DataLayer.AdoNet
                     " SET LeaveCode = @LeaveCode," &
                     " LeaveName = @LeaveName," &
                     " LeaveNameAra = @LeaveNameAra," &
+                    " LeaveAllowed = @LeaveAllowed," &
                     " PaidPercent = @PaidPercent," &
                     " Cumulative = @Cumulative," &
                     " MaxCarryOver = @MaxCarryOver," &
@@ -52,8 +53,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Leave As Leave) As Integer Implements IDaoAll(Of Leave).AddRecord
             Dim sql As String =
                     " INSERT INTO [Leave] " &
-                    " (LeaveCode,LeaveName,LeaveNameAra,PaidPercent,Cumulative,MaxCarryOver,MaxLimit,NoMaxLimit,Notes) " &
-                    " VALUES (@LeaveCode,@LeaveName,@LeaveNameAra,@PaidPercent,@Cumulative,@MaxCarryOver,@MaxLimit,@NoMaxLimit,@Notes) "
+                    " (LeaveCode,LeaveName,LeaveNameAra,LeaveAllowed,PaidPercent,Cumulative,MaxCarryOver,MaxLimit,NoMaxLimit,Notes) " &
+                    " VALUES (@LeaveCode,@LeaveName,@LeaveNameAra,@LeaveAllowed,@PaidPercent,@Cumulative,@MaxCarryOver,@MaxLimit,@NoMaxLimit,@Notes) "
             Return Db.Insert(sql, Take(Leave))
         End Function
 
@@ -64,6 +65,7 @@ Namespace DataLayer.AdoNet
             .LeaveCode = Extensions.AsString(reader("LeaveCode")),
             .LeaveName = Extensions.AsString(reader("LeaveName")),
             .LeaveNameAra = Extensions.AsString(reader("LeaveNameAra")),
+            .LeaveAllowed = Extensions.AsString(reader("LeaveAllowed")),
             .PaidPercent = Extensions.AsDecimal(reader("PaidPercent")),
             .Cumulative = Extensions.AsBool(reader("Cumulative")),
             .MaxCarryOver = Extensions.AsInt(Of Int16)(reader("MaxCarryOver")),
@@ -78,6 +80,7 @@ Namespace DataLayer.AdoNet
                                     "@LeaveCode", Leave.LeaveCode,
                                     "@LeaveName", Leave.LeaveName,
                                     "@LeaveNameAra", Leave.LeaveNameAra,
+                                    "@LeaveAllowed", Leave.LeaveAllowed,
                                     "@PaidPercent", Leave.PaidPercent,
                                     "@Cumulative", Leave.Cumulative,
                                     "@MaxCarryOver", Leave.MaxCarryOver,

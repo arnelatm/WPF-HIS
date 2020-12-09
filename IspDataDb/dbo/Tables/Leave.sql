@@ -3,7 +3,7 @@
     [LeaveCode]     VARCHAR (3)    NULL,
     [LeaveName]     VARCHAR (100)  NOT NULL,
     [LeaveNameAra]  NVARCHAR (100) NOT NULL,
-    [NumberOfDays]  SMALLINT       NULL,
+    [LeaveAllowed]  SMALLINT       NULL,
     [PaidPercent]   DECIMAL (5, 2) NULL,
     [MaxCarryOver]  SMALLINT       NULL,
     [Cumulative]    BIT            NULL,
@@ -13,6 +13,8 @@
     [DateTimeStamp] ROWVERSION     NULL,
     CONSTRAINT [PK_AbsenceLeave] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

@@ -1,6 +1,7 @@
 ﻿
 
 
+
 CREATE VIEW [dbo].[EmployeePhone_View]
 AS
 SELECT        dbo.PhoneType.PhoneTypeCode, dbo.PhoneType.PhoneTypeName, dbo.PhoneType.PhoneTypeNameAra, dbo.EmployeePhone.CountryTelIdNo, dbo.EmployeePhone.IdNo, dbo.EmployeePhone.EmployeeIdNo, 
@@ -8,13 +9,13 @@ SELECT        dbo.PhoneType.PhoneTypeCode, dbo.PhoneType.PhoneTypeName, dbo.Phon
                          dbo.PhoneType.PhoneTypeName COLLATE SQL_Latin1_General_CP1_CS_AS +
 						 Case 
 							When dbo.EmployeePhone.CountryTelIdNo IS NULL then ' '
-							Else ' ' + Trim(dbo.Country.CountryTelCode)
+							Else ' ' + LTrim(dbo.Country.CountryTelCode)
 						 End +
 						 ' (' + dbo.EmployeePhone.AreaCode + ') ' + dbo.EmployeePhone.PhoneNumber AS FullPhone, 
                          dbo.PhoneType.PhoneTypeName COLLATE Arabic_CI_AS + 
 						 Case 
 							When dbo.EmployeePhone.CountryTelIdNo IS NULL then ' '
-							Else ' ' + Trim(dbo.Country.CountryTelCode)
+							Else ' ' + LTrim(dbo.Country.CountryTelCode)
 						 End +
 						 ' (' + dbo.EmployeePhone.AreaCode + ') ' + dbo.EmployeePhone.PhoneNumber AS FullPhoneAra, dbo.Country.CountryTelCode
 FROM            dbo.EmployeePhone INNER JOIN
