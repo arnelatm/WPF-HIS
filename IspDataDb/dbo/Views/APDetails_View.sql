@@ -12,6 +12,8 @@
 
 
 
+
+
 CREATE VIEW [dbo].[APDetails_View]	
   AS
 (SELECT 'AP' AS 'JournalCode'
@@ -30,6 +32,7 @@ CREATE VIEW [dbo].[APDetails_View]
       ,b.[ReferenceNo] Collate Arabic_CI_AS AS 'ReferenceNo'
 	  ,b.[TransactionType] Collate SQL_Latin1_General_CP1_CI_AS AS 'TransactionType'
 	  ,b.Notes Collate Arabic_CI_AS AS 'MainNote'
+	  ,0 as 'DiscountTaken'
   FROM [ApJournalItem] aS ai
   LEFT OUTER JOIN ApJournal AS b
   on ai.JournalIdNo = b.IDNo 
@@ -51,6 +54,7 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
+	  ,b.DiscountTaken
   FROM [CkJournalItem] ai
   LEFT OUTER JOIN CkJournal b
   on ai.JournalIdNo = b.IDNo
@@ -73,6 +77,7 @@ UNION
       ,[ReferenceNo]
 	  ,[PaymentType]
 	  ,b.Notes AS 'MainNote'
+	  ,b.DiscountTaken
   FROM [CdJournalItem] ai
   LEFT OUTER JOIN dbo.CdJournal b
   on ai.JournalIdNo = b.IDNo
@@ -95,6 +100,7 @@ UNION
       ,b.[ReferenceNo]
 	  ,b.[PaymentType]
 	  ,b.Notes AS 'MainNote'
+	  ,b.DiscountTaken
   FROM [PcJournalItem] as ai
   LEFT OUTER JOIN PcJournal as b
   on ai.JournalIdNo = b.IDNo
@@ -117,6 +123,7 @@ UNION
       ,[ReferenceNo]
 	  ,[PayorType]
 	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
+	  ,b.[DiscountTaken]	  
   FROM [CashReceiptJournalItem] as ai
   LEFT OUTER JOIN dbo.CashReceiptJournal as b
   on ai.JournalIdNo = b.IDNo
@@ -148,5 +155,6 @@ UNION
 		else 'D'
 	   end 
 	  ,'Beginning Balance'
+	  ,0
   FROM [dbo].Supplier 
 )
