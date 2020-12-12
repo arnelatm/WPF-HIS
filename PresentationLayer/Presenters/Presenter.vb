@@ -922,12 +922,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                             Ea.PublishEvent(New RecordSaved(DataModel))
                         End If
                     End If
+                Else
+                    retVal = -1
                 End If
             End If
         End If
-        If retVal <= 0 Then
+        If retVal < 0 Then
             Dim lErrors = GetBizObjectErrors()
-            If Ea IsNot Nothing Then
+            If Ea IsNot Nothing And lErrors IsNot Nothing Then
                 Ea.PublishEvent(New PassErrorList(lErrors))
             End If
             Beep()

@@ -66,10 +66,6 @@ Public Class Model
         Return modelObject
     End Function
 
-    Public Function GetBizObjectErrors()
-        Return DataService.GetBizObjectErrors()
-    End Function
-
     Public Function GetBizObjectRules() Implements IModel.GetBizObjectRules
         Return DataService.GetBizObjectRules()
     End Function
@@ -291,6 +287,10 @@ Public Class Model
         Throw New NotImplementedException
     End Sub
 
+    Public Function GetBizObjectErrors() As IEnumerable(Of Object) Implements IModel.GetBizObjectErrors
+        Return DataService.GetBizObjectErrors()
+    End Function
+
     Public Function UpdateRecord(Of TM)(ByRef dataModel As TM) As Integer _
                                                 Implements IModel.UpdateRecord
         Dim updateResult As Integer
@@ -353,9 +353,9 @@ Public Class Model
     '    Throw New NotImplementedException()
     'End Function
 
-    Private Function IModel_GetBizObjectErrors() As IEnumerable(Of Object) Implements IModel.GetBizObjectErrors
-        'Throw New NotImplementedException()
-    End Function
+    'Private Function IModel_GetBizObjectErrors() As IEnumerable(Of Object) Implements IModel.GetBizObjectErrors
+    '    Return DataService.GetBizObjectErrors()
+    'End Function
 
 End Class
 

@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -27,14 +28,12 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
-            Dim cForm As New ReportForm("Summary of Accounts Payable.Rpt", dtpBeginningDate.Value, "BeginningDate",
-                                        dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance", language, "Language"
-            )
-            cForm.Show()
+            If dtpBeginningDate.Value <= dtpEndingDate.Value Then
+                Dim cForm As New ReportFormNew("Summary of Accounts Payable.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance")
+                cForm.Show()
+            Else
+                Messaging.Show(True, "MsgBegDateLessThanEndDate")
+            End If
         End Sub
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
