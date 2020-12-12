@@ -402,7 +402,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Public Function GetBizObjectErrors() As List(Of String)
+    Public Function GetBizObjectErrors() As IEnumerable(Of Object)
         Return Model.GetBizObjectErrors()
     End Function
 
@@ -1061,7 +1061,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         If additionalMessage IsNot Nothing Then
             _errorList = additionalMessage + Environment.NewLine
         End If
-        For Each bizError In Model.GetBizObjectErrors()
+        For Each bizError In GetBizObjectErrors()
             If _errorList.Contains(bizError & Environment.NewLine) Then
                 ' don't add duplicate message
             Else
