@@ -59,6 +59,7 @@ Public Class CrReportViewer
                 server = ConfigurationManager.AppSettings.Get("ServerTranslator1")
             End If
         End If
+        MessageBox.Show(reportPaths & ReportFileName)
         Report.Load(reportPaths & ReportFileName)
 
         If Report.DataSourceConnections.Count > 0 Then

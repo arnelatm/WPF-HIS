@@ -630,6 +630,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Function
 
+    Public Function GetRecords(ByVal tableName As String, ByVal sortOrder As String, ByVal ParamArray fieldNames() As String)
+        Return Model.GetRecords(tableName, sortOrder, fieldNames)
+    End Function
+
     Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
         Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function

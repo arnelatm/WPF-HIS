@@ -45,6 +45,16 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
+        Public Function GetEmployeesInPayGroup(Optional sortExpression As String = Nothing) As List(Of Employee)
+            If sortExpression Is Nothing Then
+                sortExpression = "EmployeeName ASC"
+            End If
+            Dim sql As String =
+                    " SELECT IdNo, EmployeeCode, EmployeeName, EmployeeNameAra, PayGroupIdNo " &
+                    "   FROM [Employee] order by " & sortExpression
+            Return _db.Read(sql, Make).ToList()
+        End Function
+
         Public Function UpdateRecord(ByRef employee As Employee) As Integer Implements IDaoAll(Of Employee).UpdateRecord
             Dim sql As String =
                     " UPDATE [Employee] SET " &
