@@ -126,6 +126,8 @@ Namespace PresentationLayer.Views.Forms
             Me.SemiAnnuallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.CustomRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.TransactionDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.IGroupReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.CashIncomePerDoctorServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemindex = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
@@ -152,6 +154,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.NumberOfCashPatientsPerDoctorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -552,7 +555,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemReports
             '
-            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.StatementOfEmployeeLoansToolStripMenuItem, Me.ToolStripMenuItemStateOfEmployeeLoans, Me.SummaryOfAccountsPayableToolStripMenuItem1, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatementForAGivenYear, Me.TransactionDetailToolStripMenuItem})
+            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.StatementOfEmployeeLoansToolStripMenuItem, Me.ToolStripMenuItemStateOfEmployeeLoans, Me.SummaryOfAccountsPayableToolStripMenuItem1, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatementForAGivenYear, Me.TransactionDetailToolStripMenuItem, Me.IGroupReportsToolStripMenuItem})
             Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
             resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
             '
@@ -668,6 +671,17 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.TransactionDetailToolStripMenuItem.Name = "TransactionDetailToolStripMenuItem"
             resources.ApplyResources(Me.TransactionDetailToolStripMenuItem, "TransactionDetailToolStripMenuItem")
+            '
+            'IGroupReportsToolStripMenuItem
+            '
+            Me.IGroupReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashIncomePerDoctorServiceToolStripMenuItem, Me.NumberOfCashPatientsPerDoctorToolStripMenuItem})
+            Me.IGroupReportsToolStripMenuItem.Name = "IGroupReportsToolStripMenuItem"
+            resources.ApplyResources(Me.IGroupReportsToolStripMenuItem, "IGroupReportsToolStripMenuItem")
+            '
+            'CashIncomePerDoctorServiceToolStripMenuItem
+            '
+            Me.CashIncomePerDoctorServiceToolStripMenuItem.Name = "CashIncomePerDoctorServiceToolStripMenuItem"
+            resources.ApplyResources(Me.CashIncomePerDoctorServiceToolStripMenuItem, "CashIncomePerDoctorServiceToolStripMenuItem")
             '
             'ToolStripMenuItemHelp
             '
@@ -806,6 +820,11 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'NumberOfCashPatientsPerDoctorToolStripMenuItem
+            '
+            Me.NumberOfCashPatientsPerDoctorToolStripMenuItem.Name = "NumberOfCashPatientsPerDoctorToolStripMenuItem"
+            resources.ApplyResources(Me.NumberOfCashPatientsPerDoctorToolStripMenuItem, "NumberOfCashPatientsPerDoctorToolStripMenuItem")
+            '
             'Main
             '
             Me.AllowDrop = True
@@ -813,9 +832,9 @@ Namespace PresentationLayer.Views.Forms
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.Controls.Add(Me.ToolStrip)
             Me.Controls.Add(Me.Account)
-        Me.IsMdiContainer = true
-        Me.Name = "Main"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+            Me.IsMdiContainer = True
+            Me.Name = "Main"
+            Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
@@ -953,5 +972,8 @@ End Sub
         Friend WithEvents PensionSchemesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents SalesDepositTypesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PayrollEntryToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents IGroupReportsToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents CashIncomePerDoctorServiceToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents NumberOfCashPatientsPerDoctorToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

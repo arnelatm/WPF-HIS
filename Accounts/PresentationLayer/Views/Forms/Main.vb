@@ -1414,6 +1414,22 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub CashIncomePerDoctorServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CashIncomePerDoctorServiceToolStripMenuItem.Click
+            Dim childMdiForm As CashIncomePerDoctorPerService
+            childMdiForm = New CashIncomePerDoctorPerService With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub NumberOfCashPatientsPerDoctorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NumberOfCashPatientsPerDoctorToolStripMenuItem.Click
+            Dim childMdiForm As NumberOfCashPatientsPerDoctorPerDay
+            childMdiForm = New NumberOfCashPatientsPerDoctorPerDay With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
 
         'End Sub
