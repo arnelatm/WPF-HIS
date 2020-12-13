@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
                 currentNode.ExpandAll()
             End If
             If currentNode.Parent.Level = 1 And currentNode.Nodes.Count = 0 Then
-                LoadEmployees(currentNode, 1)
+                LoadEmployees(currentNode)
                 currentNode.ExpandAll()
             End If
         End Sub
@@ -66,15 +66,19 @@ Namespace PresentationLayer.Views.Forms
             Next payGroup
         End Sub
 
-        Private Sub LoadEmployees(ByRef node As TreeNode, ByVal payGroupIdNo As Int16?)
-            If payGroupIdNo IsNot Nothing Then
-                For Each employee In _employees
-                    node.Nodes.Add(New TreeNode With {.Text = employee.Name,
-                                                       .Tag = employee.idNo,
-                                                       .Name = employee.idNo
-                                                     }
-                                  )
-                Next employee
+        Private Sub LoadEmployees(ByRef node As TreeNode)
+            If node.Tag IsNot Nothing Then
+                Dim employees = PresenterObj.GetRecords("Employee", "EmployeeName", {"IdNo", "PayGroupIdNo"})
+                'Dim payGroupEmployees =
+                'For Each employee In _employees
+                '    If employee.PayGroupIdNo = node.Tag Then
+                '        node.Nodes.Add(New TreeNode With {.Text = employee.Name,
+                '                                       .Tag = employee.idNo,
+                '                                       .Name = employee.idNo
+                '                                     }
+                '                  )
+                '    End If
+                'Next employee
             End If
         End Sub
 
