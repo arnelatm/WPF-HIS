@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Views.Forms
 
@@ -68,17 +69,25 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub LoadEmployees(ByRef node As TreeNode)
             If node.Tag IsNot Nothing Then
-                Dim employees = PresenterObj.GetRecords("Employee", "EmployeeName", {"IdNo", "PayGroupIdNo"})
-                'Dim payGroupEmployees =
-                'For Each employee In _employees
-                '    If employee.PayGroupIdNo = node.Tag Then
-                '        node.Nodes.Add(New TreeNode With {.Text = employee.Name,
-                '                                       .Tag = employee.idNo,
-                '                                       .Name = employee.idNo
-                '                                     }
-                '                  )
-                '    End If
-                'Next employee
+                Dim Data = PresenterObj.GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "PayGroupIdNo"})
+                Dim tlData As New List(Of ClassesLibrary.LookupData)
+                For i = 1 To Int(Data.Count / 3)
+                    Dim tData As New ClassesLibrary.LookupData With {
+                        .IdNo = Data(i * 3 - 3),
+                        .Name = Data(i * 3 - 2),
+                        .Code = Data(i * 3 - 1)
+                    }
+                    tlData.Add(tData)
+                Next
+                For Each employee In Data
+                    If employee.PayGroupIdNo = node.Tag Then
+                        node.Nodes.Add(New TreeNode With {.Text = employee.Name,
+                                                   .Tag = employee.idNo,
+                                                   .Name = employee.Name
+                                                 }
+                              )
+                    End If
+                Next employee
             End If
         End Sub
 

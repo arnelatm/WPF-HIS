@@ -30,24 +30,24 @@ Namespace AdoNet
 
             If conn Is Nothing Then
                 ConnectionString = GlobalVariables.DacConnectionString
-                'Dim connectionName As String = "ISPDATA"
+                Dim connectionName As String = "ISPDATA"
                 'ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
-                'If ConnectionString Is Nothing Then
-                '    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                '    If computerName = $"ISPADMIN2" Then
-                '        connectionName = "ISPDATA2"
-                '    ElseIf computerName = $"MARCELO-DELL" Then
-                '        connectionName = "ISPDATA3"
-                '    End If
-                '    ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
-                'End If
-                'Else
-                'if conn = "TRANSLATIONS" THEN
-                '    Debugger.Break()
-                'End If
-                'ConnectionString = ConfigurationManager.ConnectionStrings(conn).ConnectionString
-                'Dim x = ConnectionString
-                'MessageBox.Show(x)
+                If ConnectionString Is Nothing Then
+                    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                    If computerName = $"ISPADMIN2" Then
+                        connectionName = "ISPDATA2"
+                    ElseIf computerName = $"MARCELO-DELL" Then
+                        connectionName = "ISPDATA3"
+                    End If
+                    ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
+                End If
+            Else
+                If conn = "TRANSLATIONS" Then
+                    Debugger.Break()
+                End If
+                ConnectionString = ConfigurationManager.ConnectionStrings(conn).ConnectionString
+                Dim x = ConnectionString
+                MessageBox.Show(x)
             End If
         End Sub
 
