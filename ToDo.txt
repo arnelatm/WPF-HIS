@@ -2,3 +2,44 @@
 
 10. Add all default values to jOURNAL ENTRIES especially the dates
 11. Check all Single data type and change to Double (if need to increase accuracy)
+
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Inline Function (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the function.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE FUNCTION [dbo].[ErStatementDetails]
+(	
+	@EmployeeIdNo Integer, 
+	@BeginningDate Date,
+	@EndingDate Date
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	SELECT        dbo.ErDetails_View.JournalCode, dbo.ErDetails_View.IdNo, dbo.ErDetails_View.Sequence, dbo.ErDetails_View.JournalIdNo, dbo.ErDetails_View.AccountIdNo, dbo.ErDetails_View.Debit, dbo.ErDetails_View.Credit, 
+                         dbo.ErDetails_View.RevCostCenterIdNo, dbo.ErDetails_View.Notes, dbo.ErDetails_View.Posted, dbo.ErDetails_View.EmployeeIdNo, dbo.ErDetails_View.InvoiceNo, dbo.ErDetails_View.TransactionDate, dbo.ErDetails_View.ReferenceNo, 
+                         dbo.ErDetails_View.TransactionType, dbo.Account.SpecialAccount, dbo.ErDetails_View.MainNote
+	FROM            dbo.ErDetails_View INNER JOIN
+                         dbo.Account ON dbo.ErDetails_View.AccountIdNo = dbo.Account.IDNo
+	WHERE        (dbo.Account.SpecialAccount = 'EL') and 
+)
+GO
