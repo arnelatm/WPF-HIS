@@ -28,8 +28,14 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+            Dim cForm
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
-                Dim cForm As New ReportFormNew("Statement of Accounts Payable.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
+                If Strings.Left(FormCulture.Name, 2) = "ar" Then
+                    cForm = New ReportFormNew("Statement of Accounts Payable Arabic.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
+                Else
+                    cForm = New ReportFormNew("Statement of Accounts Payable.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
+
+                End If
                 cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateLessThanEndDate")

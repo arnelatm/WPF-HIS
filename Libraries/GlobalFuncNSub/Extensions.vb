@@ -14,6 +14,7 @@ Public Module Extensions
         Return stringValue.Substring(strLength - noOfCharacters)
     End Function
 
+
     <Extension()>
     Public Function Interpolate(ByVal template As String, ParamArray values As Expression(Of Func(Of Object, String))()) As String
         Dim result As String = template
