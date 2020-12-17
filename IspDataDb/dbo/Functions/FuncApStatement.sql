@@ -18,18 +18,25 @@ RETURN
 (
 	-- Add the SELECT statement with parameter references here
 		
-	SELECT dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.IdNo, dbo.ApDetails_View.Sequence, dbo.ApDetails_View.JournalIdNo, dbo.ApDetails_View.AccountIdNo, dbo.ApDetails_View.Debit, dbo.ApDetails_View.Credit, 
-           dbo.ApDetails_View.RevCostCenterIdNo, dbo.ApDetails_View.Notes, dbo.ApDetails_View.Posted, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
-           dbo.ApDetails_View.TransactionType, dbo.Account.SpecialAccount, dbo.ApDetails_View.MainNote
+	(SELECT 0 AS 'Discount', dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.JournalIdNo, Sum(dbo.ApDetails_View.Credit-dbo.ApDetails_View.Debit) as 'Amount', dbo.ApDetails_View.Notes,
+           dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
+           dbo.ApDetails_View.TransactionType, dbo.APDetails_View.MainNote
 	FROM   dbo.ApDetails_View INNER JOIN dbo.Account ON dbo.ApDetails_View.AccountIdNo = dbo.Account.IDNo
-	WHERE  (dbo.Account.SpecialAccount = 'AP') and dbo.ApDetails_View.SupplierIdNo = @SupplierIdNo and dbo.ApDetails_View.TransactionDate >= @BeginningDate and dbo.ApDetails_View.TransactionDate <= @EndingDate
-
+	WHERE  (dbo.Account.SpecialAccount = 'AP' or dbo.Account.SpecialAccount='PD') and SUPPLIERIDNO=@SupplierIdNo AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<@EndingDate
+	Group By dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.JournalIdNo,dbo.ApDetails_View.Notes, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
+             dbo.ApDetails_View.TransactionType, dbo.APDetails_View.MainNote)
 	Union
-
-	SELECT 'BB' , 0, 1, 0, 0, 
-			iIf((Select sum(debit-credit)  from ApStatement_View where SupplierIdNo = @SupplierIdNo and transactiondate < @BeginningDate)>0,(Select sum(debit-credit)  from ApStatement_View where SupplierIdNo = @SupplierIdNo and transactiondate < @BeginningDate),0),
-			iIf((Select sum(debit-credit)  from ApStatement_View where SupplierIdNo = @SupplierIdNo and transactiondate < @BeginningDate)<0,(Select sum(debit-credit)  from ApStatement_View where SupplierIdNo = @SupplierIdNo and transactiondate < @BeginningDate),0),
-			0, 'Beginning Balance', 0, @SupplierIdNo, 'Beg.Bal.', DateAdd(day,-1,@BeginningDate), 'Beg.Bal.', 
-           'B', 'AP', 'Beginning Balance'
-	
+	(SELECT 1,dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.JournalIdNo, Sum(dbo.ApDetails_View.Debit-dbo.ApDetails_View.Credit), dbo.ApDetails_View.Notes,
+           dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
+           dbo.ApDetails_View.TransactionType, dbo.APDetails_View.MainNote
+	FROM   dbo.ApDetails_View INNER JOIN dbo.Account ON dbo.ApDetails_View.AccountIdNo = dbo.Account.IDNo
+	WHERE  dbo.Account.SpecialAccount='PD' and SUPPLIERIDNO=@SupplierIdNo  AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<@EndingDate
+	Group By dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.JournalIdNo,dbo.ApDetails_View.Notes, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
+             dbo.ApDetails_View.TransactionType, dbo.APDetails_View.MainNote
+	)
+	Union
+	(SELECT 0,'BB',0, ISNULL((Select sum(credit-debit) from ApStatement_View where SupplierIdNo = @SupplierIdNo and transactiondate < @BeginningDate),0), 'Beginning Balance',
+           @SupplierIdNo , '' , DateAdd(Day,-1,@BeginningDate), '',
+           'B', 'Beginning Balance'
+	)
 )
