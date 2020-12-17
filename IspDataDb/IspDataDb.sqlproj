@@ -388,6 +388,9 @@
     <Build Include="dbo\Tables\ChartBalance.sql" />
     <Build Include="dbo\Views\SalesJournalTransaction_View.sql" />
     <Build Include="dbo\Views\PcJournalTransaction_View.sql" />
+    <Build Include="dbo\Functions\FuncErStatement.sql" />
+    <Build Include="dbo\Functions\FuncArStatement.sql" />
+    <Build Include="dbo\Functions\FuncApStatement.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
