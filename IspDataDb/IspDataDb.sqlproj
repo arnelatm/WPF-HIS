@@ -393,6 +393,7 @@
     <Build Include="dbo\Functions\FuncApStatement.sql" />
     <Build Include="dbo\Functions\FuncArStatementOld.sql" />
     <Build Include="dbo\Functions\FuncApStatementOld.sql" />
+    <Build Include="dbo\Functions\FuncArSummary.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
