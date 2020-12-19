@@ -13,6 +13,7 @@
 
 
 
+
 CREATE VIEW [dbo].[ARDetails_View]	
   AS
 (SELECT 'AR' AS 'JournalCode'
@@ -50,7 +51,7 @@ UNION
 	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-	  ,[PayorType]
+	  ,'P'
 	  ,LTrim(b.Notes)+IIf([CheckNumber]='','',' Chk#'+[CheckNumber]) AS 'MainNote'
   FROM [dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
@@ -72,7 +73,7 @@ UNION
 	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-	  ,[PaymentType]
+	  ,'R'
 	  ,LTrim(b.Notes)+IIf([CheckNumber]='','',' Chk#'+[CheckNumber])
   FROM [dbo].[CkJournalItem] A
   LEFT OUTER JOIN dbo.CkJournal b
@@ -94,7 +95,7 @@ UNION
 	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-	  ,[PaymentType]
+	  ,'R'
 	  ,b.Notes AS 'MainNote'
   FROM [dbo].[CdJournalItem] A
   LEFT OUTER JOIN dbo.CdJournal b
@@ -116,7 +117,7 @@ UNION
 	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-	  ,[PaymentType]
+	  ,'R'
 	  ,b.Notes AS 'MainNote'
   FROM [dbo].[PcJournalItem] A
   LEFT OUTER JOIN dbo.PcJournal b
@@ -144,10 +145,7 @@ UNION
 	  ,'Beg.Bal.'
 	  ,(Select LastPostingDate from LastPosting where TransactionName = 'First Record')
       ,'Beg.Bal.'
-	  ,case 
-		when OpeningBalance >=0 then 'D'
-		else 'C'
-	   end 
+	  ,'B'
 	  ,'Beginning Balance'
   FROM [dbo].Customer 
 )
