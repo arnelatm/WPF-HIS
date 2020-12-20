@@ -14,6 +14,10 @@
 
 
 
+
+
+
+
 CREATE VIEW [dbo].[APDetails_View]	
   AS
 (SELECT 'AP' AS 'JournalCode'
@@ -43,8 +47,8 @@ UNION
       ,[Sequence]
 	  ,[JournalIdNo]
       ,ai.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+      ,ai.[Debit]
+      ,ai.[Credit]
 	  ,[RevCostCenterIdNo]
       ,LTrim(ai.[Notes])+' Chk#'+[CheckNumber] 
 	  ,ai.[Posted]
@@ -52,7 +56,7 @@ UNION
 	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-	  ,[PaymentType]
+	  ,'P'
 	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
 	  ,b.DiscountTaken
   FROM [CkJournalItem] ai
@@ -66,8 +70,8 @@ UNION
       ,[Sequence]
 	  ,[JournalIdNo]
       ,ai.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
+      ,ai.[Debit]
+      ,ai.[Credit]
 	  ,[RevCostCenterIdNo]
       ,ai.[Notes]
 	  ,ai.[Posted]
@@ -75,7 +79,7 @@ UNION
 	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-	  ,[PaymentType]
+	  ,'P'
 	  ,b.Notes AS 'MainNote'
 	  ,b.DiscountTaken
   FROM [CdJournalItem] ai
@@ -98,7 +102,7 @@ UNION
 	  ,b.[ORNumber]
 	  ,b.[TransactionDate]
       ,b.[ReferenceNo]
-	  ,b.[PaymentType]
+	  ,'P'
 	  ,b.Notes AS 'MainNote'
 	  ,b.DiscountTaken
   FROM [PcJournalItem] as ai
@@ -121,7 +125,7 @@ UNION
 	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-	  ,[PayorType]
+	  ,'R'
 	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
 	  ,b.[DiscountTaken]	  
   FROM [CashReceiptJournalItem] as ai
@@ -140,7 +144,7 @@ UNION
 		else 0
 	   end 
       ,case 
-		when OpeningBalance > 0 then OpeningBalance 
+		when OpeningBalance >= 0 then OpeningBalance 
 		else 0
 	   end 
 	  ,0
@@ -150,10 +154,7 @@ UNION
 	  ,'Beg.Bal.'
 	  ,(Select LastPostingDate from LastPosting where TransactionName = 'First Record')
       ,'Beg.Bal.'
-	  ,case 
-		when OpeningBalance >=0 then 'C'
-		else 'D'
-	   end 
+	  ,'B'
 	  ,'Beginning Balance'
 	  ,0
   FROM [dbo].Supplier 
