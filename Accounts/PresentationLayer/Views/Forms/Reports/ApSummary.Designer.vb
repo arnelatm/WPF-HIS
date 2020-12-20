@@ -79,7 +79,7 @@
         Me.dtpEndingDate.Name = "dtpEndingDate"
         Me.dtpEndingDate.ReadOnlyDp = false
         Me.dtpEndingDate.SecurityKey = Nothing
-        Me.dtpEndingDate.ShowLongDate = False
+            Me.dtpEndingDate.ShowLongDate = False
             Me.dtpEndingDate.ShowTime = False
             Me.dtpEndingDate.Size = New System.Drawing.Size(112, 25)
             Me.dtpEndingDate.TabIndex = 24
@@ -146,6 +146,8 @@
             Me.chkIncludeZeroBalances.Appearance = System.Windows.Forms.Appearance.Button
             Me.chkIncludeZeroBalances.BackColor = System.Drawing.Color.White
             Me.chkIncludeZeroBalances.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkIncludeZeroBalances.Checked = True
+            Me.chkIncludeZeroBalances.CheckState = System.Windows.Forms.CheckState.Checked
             Me.chkIncludeZeroBalances.DisplayOnly = False
             Me.chkIncludeZeroBalances.EditingMode = True
             Me.chkIncludeZeroBalances.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -159,6 +161,7 @@
             Me.chkIncludeZeroBalances.OldValue = Nothing
             Me.chkIncludeZeroBalances.Size = New System.Drawing.Size(25, 21)
             Me.chkIncludeZeroBalances.TabIndex = 31
+            Me.chkIncludeZeroBalances.Text = " "
             Me.chkIncludeZeroBalances.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.chkIncludeZeroBalances.UseVisualStyleBackColor = False
             '
@@ -221,12 +224,12 @@
             Me.ClientSize = New System.Drawing.Size(332, 189)
             Me.Controls.Add(Me.CLabel2)
             Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnOk)
-        Me.Controls.Add(Me.CFlowLayout1)
-        Me.Controls.Add(Me.CLabel1)
-        Me.Name = "ApSummary"
-        Me.Text = "Summary of A.R."
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.Controls.Add(Me.btnOk)
+            Me.Controls.Add(Me.CFlowLayout1)
+            Me.Controls.Add(Me.CLabel1)
+            Me.Name = "ApSummary"
+            Me.Text = "Summary of A.P."
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
 

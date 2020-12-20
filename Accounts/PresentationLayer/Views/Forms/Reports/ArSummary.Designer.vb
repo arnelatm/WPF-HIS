@@ -31,54 +31,56 @@
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout1.SuspendLayout
-        Me.SuspendLayout
-        '
-        'CLabel3
-        '
-        Me.CLabel3.DisplayOnly = true
-        Me.CLabel3.EditingMode = false
-        Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel3.Location = New System.Drawing.Point(11, 38)
-        Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel3.Name = "CLabel3"
-        Me.CLabel3.Size = New System.Drawing.Size(171, 25)
-        Me.CLabel3.TabIndex = 21
-        Me.CLabel3.Text = "Ending Date:"
-        Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblBeginningDate
-        '
-        Me.lblBeginningDate.DisplayOnly = true
-        Me.lblBeginningDate.EditingMode = false
-        Me.lblBeginningDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblBeginningDate.Location = New System.Drawing.Point(11, 11)
-        Me.lblBeginningDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblBeginningDate.Name = "lblBeginningDate"
-        Me.lblBeginningDate.Size = New System.Drawing.Size(171, 25)
-        Me.lblBeginningDate.TabIndex = 20
-        Me.lblBeginningDate.Text = "Beginning Date :"
-        Me.lblBeginningDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'dtpEndingDate
-        '
-        Me.dtpEndingDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpEndingDate.DefaultValue = Nothing
-        Me.dtpEndingDate.DisplayOnly = false
-        Me.dtpEndingDate.DtpDefaultValue = Nothing
-        Me.dtpEndingDate.EditingMode = true
-        Me.dtpEndingDate.EditsAllowed = false
-        Me.CFlowLayout1.SetFlowBreak(Me.dtpEndingDate, true)
-        Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpEndingDate.LinkedLabel = Nothing
-        Me.dtpEndingDate.Location = New System.Drawing.Point(184, 38)
-        Me.dtpEndingDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.dtpEndingDate.Name = "dtpEndingDate"
-        Me.dtpEndingDate.ReadOnlyDp = false
-        Me.dtpEndingDate.SecurityKey = Nothing
-        Me.dtpEndingDate.ShowLongDate = false
-        Me.dtpEndingDate.ShowTime = False
+            Me.lblIncludeZeroBalances = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkIncludeZeroBalances = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout1.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'CLabel3
+            '
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.EditingMode = False
+            Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel3.Location = New System.Drawing.Point(11, 38)
+            Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel3.Name = "CLabel3"
+            Me.CLabel3.Size = New System.Drawing.Size(171, 25)
+            Me.CLabel3.TabIndex = 21
+            Me.CLabel3.Text = "Ending Date:"
+            Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'lblBeginningDate
+            '
+            Me.lblBeginningDate.DisplayOnly = True
+            Me.lblBeginningDate.EditingMode = False
+            Me.lblBeginningDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblBeginningDate.Location = New System.Drawing.Point(11, 11)
+            Me.lblBeginningDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblBeginningDate.Name = "lblBeginningDate"
+            Me.lblBeginningDate.Size = New System.Drawing.Size(171, 25)
+            Me.lblBeginningDate.TabIndex = 20
+            Me.lblBeginningDate.Text = "Beginning Date :"
+            Me.lblBeginningDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'dtpEndingDate
+            '
+            Me.dtpEndingDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpEndingDate.DefaultValue = Nothing
+            Me.dtpEndingDate.DisplayOnly = False
+            Me.dtpEndingDate.DtpDefaultValue = Nothing
+            Me.dtpEndingDate.EditingMode = True
+            Me.dtpEndingDate.EditsAllowed = False
+            Me.CFlowLayout1.SetFlowBreak(Me.dtpEndingDate, True)
+            Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpEndingDate.LinkedLabel = Nothing
+            Me.dtpEndingDate.Location = New System.Drawing.Point(184, 38)
+            Me.dtpEndingDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpEndingDate.Name = "dtpEndingDate"
+            Me.dtpEndingDate.ReadOnlyDp = False
+            Me.dtpEndingDate.SecurityKey = Nothing
+            Me.dtpEndingDate.ShowLongDate = False
+            Me.dtpEndingDate.ShowTime = False
             Me.dtpEndingDate.Size = New System.Drawing.Size(112, 25)
             Me.dtpEndingDate.TabIndex = 24
             Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"), System.Globalization.Calendar)
@@ -118,10 +120,12 @@
             Me.CFlowLayout1.Controls.Add(Me.dtpBeginningDate)
             Me.CFlowLayout1.Controls.Add(Me.CLabel3)
             Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
+            Me.CFlowLayout1.Controls.Add(Me.lblIncludeZeroBalances)
+            Me.CFlowLayout1.Controls.Add(Me.chkIncludeZeroBalances)
             Me.CFlowLayout1.Location = New System.Drawing.Point(12, 37)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10)
-            Me.CFlowLayout1.Size = New System.Drawing.Size(311, 74)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(311, 95)
             Me.CFlowLayout1.TabIndex = 26
             '
             'CLabel2
@@ -136,7 +140,7 @@
             Me.CLabel2.Name = "CLabel2"
             Me.CLabel2.Size = New System.Drawing.Size(321, 25)
             Me.CLabel2.TabIndex = 26
-            Me.CLabel2.Text = "Summary of Accounts Payable"
+            Me.CLabel2.Text = "Summary of Accounts Receivable"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             '
             'CLabel1
@@ -157,7 +161,7 @@
             Me.btnOk.DesignerSelected = False
             Me.btnOk.DisplayOnly = True
             Me.btnOk.ImageIndex = 0
-            Me.btnOk.Location = New System.Drawing.Point(69, 115)
+            Me.btnOk.Location = New System.Drawing.Point(70, 138)
             Me.btnOk.Name = "btnOk"
             Me.btnOk.OriginalImageName = Nothing
             Me.btnOk.SecurityKey = ""
@@ -170,7 +174,7 @@
             Me.btnCancel.DesignerSelected = False
             Me.btnCancel.DisplayOnly = True
             Me.btnCancel.ImageIndex = 0
-            Me.btnCancel.Location = New System.Drawing.Point(175, 115)
+            Me.btnCancel.Location = New System.Drawing.Point(176, 138)
             Me.btnCancel.Name = "btnCancel"
             Me.btnCancel.OriginalImageName = Nothing
             Me.btnCancel.SecurityKey = ""
@@ -178,18 +182,55 @@
             Me.btnCancel.TabIndex = 28
             Me.btnCancel.Text = "Cancel"
             '
+            'lblIncludeZeroBalances
+            '
+            Me.lblIncludeZeroBalances.DisplayOnly = True
+            Me.lblIncludeZeroBalances.EditingMode = False
+            Me.lblIncludeZeroBalances.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblIncludeZeroBalances.Location = New System.Drawing.Point(11, 65)
+            Me.lblIncludeZeroBalances.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblIncludeZeroBalances.Name = "lblIncludeZeroBalances"
+            Me.lblIncludeZeroBalances.Size = New System.Drawing.Size(171, 25)
+            Me.lblIncludeZeroBalances.TabIndex = 32
+            Me.lblIncludeZeroBalances.Text = "Include Zero Balances?"
+            Me.lblIncludeZeroBalances.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'chkIncludeZeroBalances
+            '
+            Me.chkIncludeZeroBalances.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkIncludeZeroBalances.BackColor = System.Drawing.Color.White
+            Me.chkIncludeZeroBalances.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkIncludeZeroBalances.Checked = True
+            Me.chkIncludeZeroBalances.CheckState = System.Windows.Forms.CheckState.Checked
+            Me.chkIncludeZeroBalances.DisplayOnly = False
+            Me.chkIncludeZeroBalances.EditingMode = True
+            Me.chkIncludeZeroBalances.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.chkIncludeZeroBalances.ForeColor = System.Drawing.Color.Black
+            Me.chkIncludeZeroBalances.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.chkIncludeZeroBalances.LinkedLabel = Me.lblIncludeZeroBalances
+            Me.chkIncludeZeroBalances.Location = New System.Drawing.Point(184, 65)
+            Me.chkIncludeZeroBalances.Margin = New System.Windows.Forms.Padding(1)
+            Me.chkIncludeZeroBalances.Name = "chkIncludeZeroBalances"
+            Me.chkIncludeZeroBalances.NoLabel = True
+            Me.chkIncludeZeroBalances.OldValue = Nothing
+            Me.chkIncludeZeroBalances.Size = New System.Drawing.Size(25, 21)
+            Me.chkIncludeZeroBalances.TabIndex = 33
+            Me.chkIncludeZeroBalances.Text = " "
+            Me.chkIncludeZeroBalances.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkIncludeZeroBalances.UseVisualStyleBackColor = False
+            '
             'ArSummary
             '
-            Me.ClientSize = New System.Drawing.Size(326, 152)
+            Me.ClientSize = New System.Drawing.Size(326, 175)
             Me.Controls.Add(Me.CLabel2)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnOk)
-        Me.Controls.Add(Me.CFlowLayout1)
-        Me.Controls.Add(Me.CLabel1)
-        Me.Name = "ArSummary"
-        Me.Text = "Summary of A.P."
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
+            Me.Controls.Add(Me.btnCancel)
+            Me.Controls.Add(Me.btnOk)
+            Me.Controls.Add(Me.CFlowLayout1)
+            Me.Controls.Add(Me.CLabel1)
+            Me.Name = "ArSummary"
+            Me.Text = "Summary of A.R."
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
 
 End Sub
@@ -202,5 +243,7 @@ End Sub
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents lblIncludeZeroBalances As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents chkIncludeZeroBalances As Libraries.CBaseControlsLibrary.CCheckBox
     End Class
 End NameSpace
