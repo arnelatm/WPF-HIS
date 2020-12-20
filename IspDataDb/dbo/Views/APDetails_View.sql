@@ -18,8 +18,11 @@
 
 
 
+
+
 CREATE VIEW [dbo].[APDetails_View]	
   AS
+With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting where TransactionName = 'First Record')
 (SELECT 'AP' AS 'JournalCode'
 	  ,ai.[IdNo]
       ,ai.[Sequence]
@@ -37,6 +40,7 @@ CREATE VIEW [dbo].[APDetails_View]
 	  ,b.[TransactionType] Collate SQL_Latin1_General_CP1_CI_AS AS 'TransactionType'
 	  ,b.Notes Collate Arabic_CI_AS AS 'MainNote'
 	  ,0 as 'DiscountTaken'
+	  ,b.DueDate
   FROM [ApJournalItem] aS ai
   LEFT OUTER JOIN ApJournal AS b
   on ai.JournalIdNo = b.IDNo 
@@ -59,6 +63,7 @@ UNION
 	  ,'P'
 	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
 	  ,b.DiscountTaken
+	  ,[TransactionDate]
   FROM [CkJournalItem] ai
   LEFT OUTER JOIN CkJournal b
   on ai.JournalIdNo = b.IDNo
@@ -82,6 +87,7 @@ UNION
 	  ,'P'
 	  ,b.Notes AS 'MainNote'
 	  ,b.DiscountTaken
+	  ,[TransactionDate]
   FROM [CdJournalItem] ai
   LEFT OUTER JOIN dbo.CdJournal b
   on ai.JournalIdNo = b.IDNo
@@ -105,6 +111,7 @@ UNION
 	  ,'P'
 	  ,b.Notes AS 'MainNote'
 	  ,b.DiscountTaken
+	  ,[TransactionDate]
   FROM [PcJournalItem] as ai
   LEFT OUTER JOIN PcJournal as b
   on ai.JournalIdNo = b.IDNo
@@ -127,7 +134,8 @@ UNION
       ,[ReferenceNo]
 	  ,'R'
 	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
-	  ,b.[DiscountTaken]	  
+	  ,b.[DiscountTaken]
+	  ,[TransactionDate]
   FROM [CashReceiptJournalItem] as ai
   LEFT OUTER JOIN dbo.CashReceiptJournal as b
   on ai.JournalIdNo = b.IDNo
@@ -152,10 +160,11 @@ UNION
       ,1
 	  ,IdNo
 	  ,'Beg.Bal.'
-	  ,(Select LastPostingDate from LastPosting where TransactionName = 'First Record')
+	  ,(Select FirstRecordDate from FirstRecord)
       ,'Beg.Bal.'
 	  ,'B'
 	  ,'Beginning Balance'
 	  ,0
+	  ,(Select FirstRecordDate from FirstRecord)
   FROM [dbo].Supplier 
 )
