@@ -3,6 +3,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
+
     Public Class ArSummary
 
         Public Property MainTableName As String
@@ -27,7 +28,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
-                Dim cForm As New ReportFormNew("Summary of Accounts Receivable.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate")
+                Dim cForm As New ReportFormNew("Summary of Accounts Receivable.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalances")
                 cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateLessThanEndDate")
@@ -39,4 +40,5 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
     End Class
+
 End Namespace
