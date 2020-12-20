@@ -14,8 +14,10 @@
 
 
 
+
 CREATE VIEW [dbo].[ARDetails_View]	
   AS
+With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting where TransactionName = 'First Record')
 (SELECT 'AR' AS 'JournalCode'
 	  ,a.[IdNo]
       ,[Sequence]
@@ -32,6 +34,7 @@ CREATE VIEW [dbo].[ARDetails_View]
       ,[ReferenceNo] COLLATE Arabic_CI_AS AS 'ReferenceNo'
 	  ,[TransactionType] COLLATE SQL_Latin1_General_CP1_CI_AS AS 'TransactionType'
 	  ,b.Notes COLLATE Arabic_CI_AS AS 'MainNote'
+	  ,DueDate
   FROM [dbo].[ArJournalItem] a
   RIGHT OUTER JOIN dbo.ArJournal b
   on a.JournalIdNo = b.IDNo 
@@ -53,6 +56,7 @@ UNION
       ,[ReferenceNo]
 	  ,'P'
 	  ,LTrim(b.Notes)+IIf([CheckNumber]='','',' Chk#'+[CheckNumber]) AS 'MainNote'
+	  ,[TransactionDate]
   FROM [dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IDNo
@@ -75,6 +79,7 @@ UNION
       ,[ReferenceNo]
 	  ,'R'
 	  ,LTrim(b.Notes)+IIf([CheckNumber]='','',' Chk#'+[CheckNumber])
+	  ,[TransactionDate]
   FROM [dbo].[CkJournalItem] A
   LEFT OUTER JOIN dbo.CkJournal b
   on a.JournalIdNo = b.IDNo
@@ -97,6 +102,7 @@ UNION
       ,[ReferenceNo]
 	  ,'R'
 	  ,b.Notes AS 'MainNote'
+	  ,[TransactionDate]
   FROM [dbo].[CdJournalItem] A
   LEFT OUTER JOIN dbo.CdJournal b
   on a.JournalIdNo = b.IDNo
@@ -119,6 +125,7 @@ UNION
       ,[ReferenceNo]
 	  ,'R'
 	  ,b.Notes AS 'MainNote'
+	  ,[TransactionDate]
   FROM [dbo].[PcJournalItem] A
   LEFT OUTER JOIN dbo.PcJournal b
   on a.JournalIdNo = b.IDNo
@@ -143,9 +150,10 @@ UNION
       ,1
 	  ,IdNo
 	  ,'Beg.Bal.'
-	  ,(Select LastPostingDate from LastPosting where TransactionName = 'First Record')
+	  ,(Select FirstRecordDate from FirstRecord)
       ,'Beg.Bal.'
 	  ,'B'
 	  ,'Beginning Balance'
+	  ,(Select FirstRecordDate from FirstRecord)
   FROM [dbo].Customer 
 )

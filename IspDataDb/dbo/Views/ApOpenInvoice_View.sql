@@ -3,6 +3,7 @@
 
 
 
+
 CREATE VIEW [dbo].[ApOpenInvoice_View]
 AS
 SELECT			dbo.ApOpenInvoice.IdNo,
@@ -24,7 +25,8 @@ SELECT			dbo.ApOpenInvoice.IdNo,
 				dbo.Account.AccountCode, 
 				dbo.Account.AccountName, 
 				dbo.Account.AccountNameAra, 
-                dbo.Account.SpecialAccount
+                dbo.Account.SpecialAccount,
+				dbo.ApDetails_View.DueDate
 FROM            dbo.ApOpenInvoice 
 				LEFT OUTER JOIN dbo.APDetails_View 
 				ON dbo.ApOpenInvoice.JournalItemIdNo = dbo.APDetails_View.IdNo AND dbo.ApOpenInvoice.JournalCode = dbo.APDetails_View.JournalCode Collate SQL_Latin1_General_CP1_CI_AS
