@@ -574,10 +574,11 @@ Public Class Dac
         If idNo <> 0 Then
             Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
             cmd = "SELECT TranslatedCaption FROM TranslatedMessages_View where MessageIdNo = " + idNo.ToString() + " and Lower(CultureInfoCode) = '" + textDisplayLanguage.TrimEnd + "'"
-            translatedCaption = ExecScalar(Of String)(cmd)
-            If translatedCaption Is Nothing Then
+            Dim result = ExecScalar(Of Object)(cmd)
+            translatedCaption = result.ToString()
+            If translatedCaption Is Nothing Or translatedCaption = "" Then
                 cmd = "SELECT Caption FROM OriginalMessages where IdNo = " + idNo.ToString()
-                translatedCaption = ExecScalar(Of String)(cmd)
+                translatedCaption = ExecScalar(Of Object)(cmd).ToString()
             End If
         End If
         Return translatedCaption

@@ -9,6 +9,9 @@ Imports System.Windows.Forms
 
 Public Module GlobalFunctions
 
+    '''<summary>
+    '''Converts a given date value to short date string in the requested targetculture
+    '''</summary>
     Public Function CalendarDateToShortDateString(dateValue As DateTime?, targetCulture As CultureInfo) As String
         If dateValue Is Nothing Then
             Return Nothing
@@ -27,6 +30,9 @@ Public Module GlobalFunctions
         Return shortDateString
     End Function
 
+    '''<summary>
+    '''Checks if the given CultureInfo supports the Hijri Calendar
+    '''</summary>
     Function CultureSupportHijri(targetCulture As CultureInfo)
         Dim returnValue = False
         For Each optionalCalendar In targetCulture.OptionalCalendars
@@ -37,6 +43,9 @@ Public Module GlobalFunctions
         Return returnValue
     End Function
 
+    '''<summary>
+    '''Checks if the given CultureInfo supports the Um-Al-Qura Calendar
+    '''</summary>
     Function CultureSupportUmAlQura(targetCulture As CultureInfo)
         Dim returnValue = False
         For Each optionalCalendar In targetCulture.OptionalCalendars
@@ -48,6 +57,9 @@ Public Module GlobalFunctions
         Return returnValue
     End Function
 
+    '''<summary>
+    '''Converts the given Date String to the requested TargetCulture
+    '''</summary>
     Public Function DateStringSpecificCultureToDate(dateString As String, targetCultureInfo As CultureInfo) As Date?
         Dim retDate As Date?
         Dim curCulture = CultureInfo.CurrentCulture
@@ -62,6 +74,9 @@ Public Module GlobalFunctions
         Return retDate
     End Function
 
+    '''<summary>
+    '''Converts a given Date Value to the desired shortDateString for the targetCulture
+    '''</summary>
     Public Function DateToSpecificCultureShortDateString(dateValue As DateTime?, targetCulture As CultureInfo) As String
         If dateValue Is Nothing Then
             Return Nothing
@@ -82,6 +97,10 @@ Public Module GlobalFunctions
         Return shortDateString
     End Function
 
+    '''<summary>
+    '''Converts a string in the format 'yyyymmdd' to a gregorian date
+    '''<para>minValue is returned and the MaxValue is passed by reference</para>
+    '''</summary>
     Public Function DtoS(ByVal dateValue As Date) As String
         Dim retValue As String
         Dim curCulture = CultureInfo.CurrentCulture
@@ -102,18 +121,30 @@ Public Module GlobalFunctions
         Return list
     End Function
 
+    '''<summary>
+    '''Converts a given Decimal Amount  into a string Currency format
+    '''</summary>
     Public Function FormatMoney(ByVal amount As Decimal) As String
         Return amount.ToString("N", GlobalVariables.DefaultCurrencyFormatInfo)
     End Function
 
+    '''<summary>
+    '''Converts a given Decimal Amount  into a string Number format
+    '''</summary>
     Public Function FormatDecimalNumber(ByVal number As Decimal) As String
         Return number.ToString("N", GlobalVariables.DefaultNumberFormatInfo)
     End Function
 
+    '''<summary>
+    '''Converts a given Decimal Amount into a string Decimal format with the desired decimal places
+    '''</summary>
     Public Function FormatDecimalNumber(ByVal number As Decimal, ByVal decimalPlaces As Int16) As String
         Return number.ToString("F" + decimalPlaces.ToString().Trim)
     End Function
 
+    '''<summary>
+    '''Converts a given serial date (year,month,day) into a gregorian date regardless of current culture
+    '''</summary>
     Public Function GbDateSerial(ByVal year As Int16, ByVal month As Int16, ByVal day As Int16) As Date?
         Dim value As Date?
         Dim curCulture = CultureInfo.CurrentCulture
@@ -123,10 +154,16 @@ Public Module GlobalFunctions
         Return value
     End Function
 
+    '''<summary>
+    '''Get the Calendar Name for a given Calendar
+    '''</summary>
     Function GetCalendarName(cal As Calendar) As String
         Return cal.ToString().Replace("System.Globalization.", "")
     End Function
 
+    '''<summary>
+    '''Gets the description for a given enum
+    '''</summary>
     Public Function GetDescription(ByVal enumValue As Object, ByVal defDesc As String) As String
         If enumValue Is Nothing Then
             Return Nothing
@@ -141,6 +178,9 @@ Public Module GlobalFunctions
         Return defDesc
     End Function
 
+    '''<summary>
+    '''Converts a given Enum Value to its Coded Value
+    '''</summary>
     Public Function EnumToCode(ByVal enumValue As Object) As String
         If enumValue Is Nothing Then
             Return Nothing
@@ -154,6 +194,9 @@ Public Module GlobalFunctions
         Return Nothing
     End Function
 
+    '''<summary>
+    '''Converts the Coded Value of an Enum to its Enum Value
+    '''</summary>
     Public Function CodeToEnum(Of T)(description As String) As T
         Dim type = GetType(T)
         If Not type.IsEnum Then
@@ -175,6 +218,9 @@ Public Module GlobalFunctions
         Return Nothing
     End Function
 
+    '''<summary>
+    '''Get the month name for the given culture
+    '''</summary>
     Function GetMonthNameInCulture(monthNumber As Integer, ByRef targetCulture As CultureInfo,
                                    ByRef currentCulture As CultureInfo)
         If Mid(currentCulture.Name, 1, 2).ToLower() = Mid(targetCulture.Name, 1, 2).ToLower() Then
@@ -191,14 +237,23 @@ Public Module GlobalFunctions
         End If
     End Function
 
+    '''<summary>
+    '''Get the month names for the target Culture
+    '''</summary>
     Function GetMonthNamesInCulture(ByRef targetCulture As CultureInfo)
         Return targetCulture.DateTimeFormat.MonthGenitiveNames()
     End Function
 
+    '''<summary>
+    '''Get the property name for the current expression
+    '''</summary>
     Public Function GetPropertyName(Of T)(expression As Expression(Of Func(Of T))) As String
         Return DirectCast(expression.Body, MemberExpression).Member.Name
     End Function
 
+    '''<summary>
+    '''Get the value of a property in the target object
+    '''</summary>
     Public Function GetPropertyValue(obj As Object, propName As String) As Object
         Dim propValue As Object = Nothing
         Try
@@ -218,6 +273,9 @@ Public Module GlobalFunctions
         Return propValue
     End Function
 
+    '''<summary>
+    '''Get the Arabic Translated property field name for the requested property
+    '''</summary>
     Public Function GetTranslatedField(propertyName As String) As String
         If GlobalVariables.RightToLeftLayout Then
             Return propertyName + "Ara"
@@ -231,10 +289,16 @@ Public Module GlobalFunctions
         'Return propertyName
     End Function
 
+    '''<summary>
+    ''' Returns the current Vat Percentage for sales
+    '''</summary>
     Public Function GetVatPercentage()
         Return 0.15D
     End Function
 
+    '''<summary>
+    '''Returns the day number in a given date for the gregorian calendar
+    '''</summary>
     Public Function GregorianDay(ByVal pDate As Date?) As Int16
         Dim value As Int16
         Dim curCulture = CultureInfo.CurrentCulture
@@ -244,6 +308,9 @@ Public Module GlobalFunctions
         Return value
     End Function
 
+    '''<summary>
+    '''Returns the month number for the gregorian calendar for a given date
+    '''</summary>
     Public Function GregorianMonth(ByVal pDate As Date?) As Int16
         Dim value As Int16
         Dim curCulture = CultureInfo.CurrentCulture
@@ -253,8 +320,11 @@ Public Module GlobalFunctions
         Return value
     End Function
 
+    '''<summary>
+    '''Returns the month name for the gregorian calendar for a given month number
+    '''</summary>
     Public Function GregorianMonthName(ByVal pMonthNumber As Int16) As String
-        Dim value As Int16
+        Dim value As String
         Dim curCulture = CultureInfo.CurrentCulture
         CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
         value = Microsoft.VisualBasic.DateAndTime.MonthName(pMonthNumber)
@@ -262,6 +332,9 @@ Public Module GlobalFunctions
         Return value
     End Function
 
+    '''<summary>
+    '''Returns the year in the gregorian calendar for a given date
+    '''</summary>
     Public Function GregorianYear(ByVal pDate As Date?) As Int16
         Dim value As Int16
         Dim curCulture = CultureInfo.CurrentCulture
@@ -271,6 +344,9 @@ Public Module GlobalFunctions
         Return value
     End Function
 
+    '''<summary>
+    '''Converts a Date to Gregorian Date given the year,month,and day.
+    '''</summary>
     Public Function GregorianDateSerial(ByVal nYear As Integer, nMonth As Integer, nDay As Integer) As DateTime
         Dim value As DateTime
         Dim curCulture = CultureInfo.CurrentCulture
@@ -280,7 +356,10 @@ Public Module GlobalFunctions
         Return value
     End Function
 
-    Public Function HijriMonthInEnglish(iMonth As Int16)
+    '''<summary>
+    '''Returns the Hijri month (in English) for the given month number.
+    '''</summary>
+    Public Function HijriMonthInEnglish(iMonth As Int16) As String
         Dim strMonth As String
         Select Case iMonth
             Case 1
@@ -313,6 +392,9 @@ Public Module GlobalFunctions
         Return strMonth
     End Function
 
+    '''<summary>
+    '''Checks if a given culture code is a valid culture
+    '''</summary>
     Public Function IsCultureOk(ByVal cultureCode As String) As Boolean
         Dim cultures As CultureInfo() = CultureInfo.GetCultures(CultureTypes.AllCultures And Not CultureTypes.NeutralCultures)
         Dim culture = cultures.FirstOrDefault(Function(c) c.Name.Equals(cultureCode, StringComparison.OrdinalIgnoreCase))
@@ -324,6 +406,9 @@ Public Module GlobalFunctions
         Return True
     End Function
 
+    '''<summary>
+    '''Checks if a given date (in string format) is valid for the given target culture
+    '''</summary>
     Public Function IsDateValidForTargetCulture(strDate As String, ByRef targetCulture As CultureInfo) As Boolean
         ' checks if the strDate is a valid date in the
         ' targetculture format
@@ -339,6 +424,9 @@ Public Module GlobalFunctions
         Return retVal
     End Function
 
+    '''<summary>
+    '''Checks if a given value is empty
+    '''</summary>
     Public Function IsEmpty(value) As Boolean
         If value Is Nothing Then
             Return True
@@ -372,6 +460,9 @@ Public Module GlobalFunctions
         Return False
     End Function
 
+    '''<summary>
+    '''Checks if a given culture string is a Right To Left Culture
+    '''</summary>
     Public Function IsRightToLeft(ByVal pCultureInfoString As String) As Boolean
         Dim isCultureRightToLeft As Boolean
         Dim curCulture = CultureInfo.CurrentCulture
@@ -395,7 +486,10 @@ Public Module GlobalFunctions
         Return isCultureRightToLeft
     End Function
 
-    Public Function NeedToTranslateText(textDisplayLanguage)
+    ''' <summary>
+    ''' Checks if there is a need to translate a given text
+    ''' </summary>
+    Public Function NeedToTranslateText(textDisplayLanguage) As Boolean
         If textDisplayLanguage = GlobalVariables.OriginalAppTextLanguage Or (Strings.Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
             Return False
         Else
@@ -431,6 +525,9 @@ Public Module GlobalFunctions
         Return strReturnString
     End Function
 
+    '''<summary>
+    '''Converts a Double number to zero if null
+    '''</summary>
     Public Function NullValue(argDbl As Double) As Double
         Dim dblReturnDouble As Double
         If argDbl.Equals(DBNull.Value) Then
@@ -442,10 +539,13 @@ Public Module GlobalFunctions
         Else
             dblReturnDouble = Convert.ToDouble(argDbl)
         End If
-
         Return dblReturnDouble
     End Function
 
+    '''<summary>
+    '''Converts a given number in string format to the desired number format.
+    '''<para>returns zero(0) if not convertible to number.</para>
+    '''</summary>
     Public Function NumParser(Of T As Structure)(ByRef numString As String) As T
         Try
             Return Parser(Of T).Parser(numString)
@@ -486,6 +586,9 @@ Public Module GlobalFunctions
         End Try
     End Function
 
+    '''<summary>
+    '''Checks two objects if they are the same (no changes)
+    '''</summary>
     Public Function ChangesMade(ByVal fromObject As Object, ByVal toObject As Object)
         If ObjectsCompare(fromObject, toObject) Then
             Return False
@@ -493,6 +596,9 @@ Public Module GlobalFunctions
         Return True
     End Function
 
+    '''<summary>
+    '''Compares two objects if the same
+    '''</summary>
     Public Function ObjectsCompare(ByVal fromObject As Object, ByVal toObject As Object)
         Dim objectsCompareResult = True
         Dim propList = fromObject.GetType().GetProperties()
@@ -563,8 +669,11 @@ Public Module GlobalFunctions
         Return objectsCompareResult
     End Function
 
+    '''<summary>
+    '''converts a date string to double digits say 1/1/2012 -> 01/01/2012
+    '''</summary>
     Public Function PadWithZeroSingleDigitDate(shortDate As String) As String
-        ' appends zero to single digit no. say 1/1/200 will be changed to 01/01/2000
+        ' appends zero to single digit no. say 1/1/2000 will be changed to 01/01/2000
         Dim newShortDate As String
         If shortDate Is Nothing OrElse shortDate = "" Then
             newShortDate = Nothing
@@ -574,6 +683,9 @@ Public Module GlobalFunctions
         Return newShortDate
     End Function
 
+    '''<summary>
+    '''Checks if a given property exists in the queried object
+    '''</summary>
     Public Function PropertyExists(queriedObject As Object, propertyName As String) As Boolean
         Dim objType As Type = queriedObject.GetType()
         If _
@@ -690,6 +802,10 @@ Public Module GlobalFunctions
     '        End Try
     '    End If
     'End Function
+
+    '''<summary>
+    '''Sets the current culture to the given culture Code
+    '''</summary>
     Public Sub SetCulture(ByVal cultureCode As String)
         If IsCultureOk(cultureCode) Then
             CultureInfo.CurrentCulture = New CultureInfo(cultureCode, False)
@@ -709,6 +825,10 @@ Public Module GlobalFunctions
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
     End Sub
 
+    '''<summary>
+    '''Returns the minimum and maximum value for a given typecode
+    '''<para>minValue is returned and the MaxValue is passed by reference</para>
+    '''</summary>
     Public Function GetMinMaxValue(typeCode As TypeCode, ByRef nMaxValue As Double) As Double
         Dim nMinValue As Double
         Select Case typeCode
@@ -752,6 +872,9 @@ Public Module GlobalFunctions
         Return nMinValue
     End Function
 
+    '''<summary>
+    '''Converts an object to its type
+    '''</summary>
     Public Function ConvertObjectToType(ByVal value As Object)
         Dim result
         Dim typeCode As TypeCode = value.GetTypeCode()
@@ -796,6 +919,9 @@ Public Module GlobalFunctions
         Return result
     End Function
 
+    '''<summary>
+    '''Checks if the given typeCodeValue is an integer
+    '''</summary>
     Public Function NumTypeIsInteger(ByVal typeCodeVal As TypeCode) As Boolean
         If typeCodeVal = TypeCode.Byte OrElse typeCodeVal = TypeCode.Int16 OrElse typeCodeVal = TypeCode.Int32 OrElse typeCodeVal = TypeCode.Int64 _
             OrElse typeCodeVal = TypeCode.UInt16 OrElse typeCodeVal = TypeCode.UInt32 OrElse typeCodeVal = TypeCode.UInt64 Then

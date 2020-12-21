@@ -30,11 +30,14 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             Dim cForm
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
+                Dim reportName As String
+                Dim reportTitle As String
+                reportName = Messaging.TranslateCaption("Statement of Accounts Payable")
+                reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"beginningDate", dtpBeginningDate.Value.ToString, "endingDate", dtpEndingDate.Value.ToString})
                 If Strings.Left(FormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew("Statement of Accounts Payable Arabic.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
+                    cForm = New ReportFormNew("Statement of Accounts Payable Arabic.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value.ToString(), "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
                 Else
-                    cForm = New ReportFormNew("Statement of Accounts Payable.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
-
+                    cForm = New ReportFormNew("Statement of Accounts Payable.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
                 End If
                 cForm.Show()
             Else

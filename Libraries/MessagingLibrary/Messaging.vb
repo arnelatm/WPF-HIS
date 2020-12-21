@@ -1,4 +1,7 @@
-﻿Public Class Messaging
+﻿Imports System.Globalization
+Imports AATM.Libraries.GlobalFuncNSub
+
+Public Class Messaging
 
     Private Shared ReadOnly DataAccessControl As New Dac
 
@@ -26,6 +29,9 @@
     End Function
 
     Public Overloads Shared Function GetMessageCaption(ByVal key As String) As String
+        If key Is Nothing Then
+            Return ""
+        End If
         Return DataAccessControl.GetMessageCaption(key)
     End Function
 
@@ -174,7 +180,10 @@
         Return MessagingForm.Show(message, caption + " [" + MessageKey + "]", buttons, icon, defaultButton)
     End Function
 
-    Public Shared Function TranslateCaption(cCaption As String)
+    Public Shared Function TranslateCaption(cCaption As String) As String
+        If cCaption Is Nothing Then
+            Return ""
+        End If
         Return DataAccessControl.TranslateCaption(cCaption)
     End Function
 
@@ -203,14 +212,32 @@
         Dim cCaption = Messaging.GetMessageCaption(key)
         Dim message = Messaging.ReplaceValues(cMessage, variables)
         Dim caption = Messaging.TranslateCaption(cCaption)
-        'for each value in variables
-        '    dim cvalue as string = "{" + value(0) + "}"
-        '    if not message.contains(cvalue) then
-        '        messaging.show(true, "invalid translation for message " & key)
-        '    end if
-        'next
+        'For Each value In variables
+        '    Dim cvalue As String = "{" + value(0) + "}"
+        '    If Not message.Contains(cvalue) Then
+        '        Messaging.Show(True, "invalid translation for message " & key)
+        '    End If
+        'Next
         Messaging.Show(message, caption)
         Return message
+    End Function
+
+    Public Overloads Shared Function GetParametrizedMessage(ByVal translate As Boolean, ByVal key As String, ByVal variables As String())
+        Dim cMessage = Messaging.GetMessage(translate, key)
+        Return Messaging.ReplaceValues(cMessage, variables)
+    End Function
+
+    Public Shared Function SelectReportName(ByVal reportName As String, ByVal beginningDate As Date, ByVal endingDate As Date, ByVal FormCulture As Globalization.CultureInfo)
+        If GregorianDay(beginningDate) = 1 And GregorianDay(endingDate) = 31 And GregorianMonth(beginningDate) = 1 And GregorianMonth(endingDate) = 12 And GregorianYear(beginningDate) = GregorianYear(endingDate) Then
+            Return Messaging.GetParametrizedMessage(True, "RptForTheYear", {"reportName", reportName, "year", GregorianYear(endingDate).ToString})
+        ElseIf GregorianDay(beginningDate) = 1 And GregorianDay(DateAdd("d", 1, endingDate)) = 1 And GregorianMonth(beginningDate) = GregorianMonth(endingDate) And GregorianYear(beginningDate) = GregorianYear(endingDate) Then
+            Dim monthName As String
+            monthName = GlobalFunctions.GregorianMonthName(GregorianMonth(endingDate))
+            Return Messaging.GetParametrizedMessage(True, "RptForTheMonth", {"reportName", reportName, "monthName", monthName})
+        End If
+        Dim bDate = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
+        Dim eDate = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
+        Return Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
     End Function
 
     'Public Shared Function IsDateRangeValid(text As String, targetDate As Date, startDate As Date, endDate As Date) As DialogResult

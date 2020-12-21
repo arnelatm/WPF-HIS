@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ReportFormNew
 
-        Public Sub New(ByVal fileName As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
+        Public Sub New(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
 
             ' This call is required by the designer.
             InitializeComponent()
@@ -20,13 +20,12 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim language As String
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
             PresenterObj = New ReportPresenter(Me)
-            'Dim companyName =
-            'Dim companyNameAra =
             For i = 0 To args.Length - 1 Step 2
                 Dim value = args(i)
                 Report.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
             Next
             Report.SetParameterValue("Language", language)
+            Report.SetParameterValue("ReportTitle", reportTitle)
             Report.SetParameterValue("EstablishmentName", PresenterObj.GetRecordField("Establishment", "EstablishmentName"))
             Report.SetParameterValue("EstablishmentNameAra", PresenterObj.GetRecordField("Establishment", "EstablishmentNameAra"))
             Report.DataSourceConnections.Clear()

@@ -234,7 +234,7 @@ Namespace PresentationLayer.Presenters
                             Exit For
                         ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {lineNumber, "lineNumber"})
+                            Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                         Else
                             cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
