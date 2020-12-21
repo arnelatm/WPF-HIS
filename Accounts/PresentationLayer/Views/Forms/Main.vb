@@ -1430,6 +1430,11 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem1.Click
+            Dim cForm As New ReportFormTest("Blank Report.Rpt")
+            cForm.Show()
+        End Sub
+
         'Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
 
         'End Sub

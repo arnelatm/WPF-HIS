@@ -86,6 +86,7 @@ Public Class CrReportViewer
             .SetProductLocale(CInt(ceCulture))
             .Refresh()
         End With
+
         btnQuit.Visible = True
 
     End Sub

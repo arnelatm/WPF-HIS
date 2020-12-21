@@ -248,7 +248,7 @@ Select 1
 Go Top
 Do While Not Eof()
 *!*		IF CustOrig.Custcode='C84' THEN
-*!*			SET STEP ON 
+*!*			SET STEP ON
 *!*		ENDIF
 	If custorig.CustCode <> "E" Then
 		Select 2
@@ -293,7 +293,7 @@ Do While Not Eof()
 			Replace DateCreate  With custorig.firstran
 		Else
 			Replace DateCreate  With custorig.DateAdded
-		ENDIF
+		Endif
 	Endif
 	Select 1
 	Skip
@@ -423,7 +423,7 @@ Zap
 *!*	Do While Not Eof()
 *!*		cCustCode = customer.CustCode
 *!*	*!*		IF cCustCode='C77' THEN
-*!*	*!*			SET STEP ON 
+*!*	*!*			SET STEP ON
 *!*	*!*		ENDIF
 *!*		nAmount = customer.OpBalance
 *!*		If nAmount <> 0 Then
@@ -504,7 +504,7 @@ Zap
 * create ER beginning balances *
 ********************************
 
-CLOSE DATABASES
+Close Databases
 
 Select 2
 
@@ -524,7 +524,7 @@ Zap
 *!*	Do While Not Eof()
 *!*		cCustCode = customer.CustCode
 *!*	*!*		IF cCustCode='C77' THEN
-*!*	*!*			SET STEP ON 
+*!*	*!*			SET STEP ON
 *!*	*!*		ENDIF
 *!*		nAmount = customer.INIT_BAL
 *!*		If nAmount <> 0 AND cCustCode = "E" Then
@@ -954,7 +954,7 @@ Do While Not Eof()
 	Replace GnJournal.TransDate With genrjour.Date
 	Replace GnJournal.Reference With genrjour.Reference
 	Replace GnJournal.Notes With genrjour.Descript
-	Replace GnJournal.Closing WITH genrjour.Closing
+	Replace GnJournal.Closing With genrjour.Closing
 	Replace GnJournal.Posted With Iif(genrjour.Posted="P",.T.,.F.)
 	Replace GnJournal.Cancelled With genrjour.Cancelled
 	Replace GnJournal.DtCreated With genrjour.DateAdded
@@ -1393,13 +1393,13 @@ Do While Not Eof()
 	Else
 		If CReceipt.PayType = "C" Then
 			cPaymType = "A"
-		ELSE
-			IF cPaymType = "S" then
- 				cPaymType = "R"
-			else
-		 		cPaymType = "O"
-	 			cPayee = CReceipt.Payor
-	 	 ENDIF
+		Else
+			If cPaymType = "S" Then
+				cPaymType = "R"
+			Else
+				cPaymType = "O"
+				cPayee = CReceipt.Payor
+			Endif
 		Endif
 	Endif
 	If cPaymType = "A" Or cPaymType = "C"
@@ -1498,6 +1498,39 @@ Enddo
 
 Close All
 
+*************************************************
+* create Ap Open invoices for beginning balances*
+*************************************************
+Select 1
+Use c:\temp\ApJourItm.Dbf Alias ApJourItm
+Index On Str(JourIdNo,7)+Str(Sequence,7) Tag apjIdNo
+Go Top
+Use c:\temp\Supplier.Dbf 
+Go Top
+nCtr = 0
+nAmount = 0
+Do While Not Eof()
+	nAmount = supplier.OpBalance
+	If nAmount <> 0 Then
+		Select ApOpnInv
+		nCtr = nCtr + 1
+		Append Blank
+		Replace ApOpnInv.IdNo With nCtr
+		Replace ApOpnInv.JournalCd With "BB"
+		Replace ApOpnInv.JourIdNo With supplier.IdNo
+		Replace ApOpnInv.JrItIdNo With supplier.IdNo
+		Replace ApOpnInv.SuppIdNo With supplier.IdNo
+		Replace ApOpnInv.Date With Date(2016,12,31)
+		Replace ApOpnInv.Amount With supplier.OpBalance
+		Skip
+	Endif
+	Select supplier
+	Skip
+Enddo
+SELECT 1
+USE
+SELECT 2
+Use
 ***************************
 * create Ap Open invoices *
 ***************************
@@ -1512,7 +1545,7 @@ nCtr = ApOpnInv.IdNo
 Select 3
 Use c:\temp\ApJournal.Dbf  Exclusive Alias ApJournal
 Go Top
-nCtr = 0
+nCtr = 1000
 Do While Not Eof()
 	apjIdNo = ApJournal.IdNo
 	Select ApJourItm
@@ -2108,37 +2141,37 @@ Close Databases
 
 Create Table c:\temp\ChartNBal.Dbf ;
 	(IdNo Integer(6),;
-	Year INT(4),;
-	AcctIdNo INT(7),;
+	Year Int(4),;
+	AcctIdNo Int(7),;
 	ByDebit numeric(10,2),;
 	ByCredit numeric(10,2))
 nCtr = 0
 Select 1
-Use y:\acctbackup\chartBal.Dbf Alias ChartBal Exclusive
-SELECT 2
-USE c:\temp\ChartNBal ALIAS ChartNBal
-SELECT 1
-GO Top
+Use Y:\acctbackup\ChartBal.Dbf Alias ChartBal Exclusive
+Select 2
+Use c:\temp\ChartNBal Alias ChartNBal
+Select 1
+Go Top
 Do While Not Eof()
 	nCtr = nCtr + 1
-	SELECT ChartNBal
+	Select ChartNBal
 	Append Blank
 	Replace ChartNBal.IdNo With nCtr
-	Replace ChartNBal.AcctIdNo WITH VAL(ChartBal.AcctCode)
-	Replace ChartNBal.Year With VAL(ChartBal.Year)
+	Replace ChartNBal.AcctIdNo With Val(ChartBal.ACCTCODE)
+	Replace ChartNBal.Year With Val(ChartBal.Year)
 	Replace ChartNBal.ByDebit With ChartBal.ByDebit
 	Replace ChartNBal.ByCredit With ChartBal.ByCredit
 	Select ChartBal
 	Skip
-ENDDO
+Enddo
 
-CLOSE DataBase
+Close Database
 
 Set Deleted On
 Set Exclusive On
 Set Safety Off
 Set Date YMD
-SET CENTURY ON
+Set Century On
 
 cFields = "[IdNo], [SupplierCode], [SupplierName], [SupplierNameAra], [ContactPerson], [ContactDesignation], [Street], [District], [TownCity], [ProvinceState], [CountryCode], [POBox], "
 cFields = cFields + "[ZipCode], [Phone1], [Phone2], [Mobile], [Fax], [Email], [Website], [VATNumber], [CRNumber], [AccountStatus], [APAccountIdNo], [ExpAccountIdNo], [CreditLimit], [SettlementDueDays], [SettlementDiscount], "
@@ -2193,10 +2226,10 @@ DbfToSql(cFields, "CrJournal","CashReceiptJournal")
 cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
 DbfToSql(cFields,"CrJourItm","CashReceiptJournalItem")
 
-cFields = "[IdNo],[CadIdNo],[ApOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
-DbfToSql(cFields,"CadOiItm","CaOiItem")
+cFields = "[IdNo],[DjIdNo],[ApOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
+DbfToSql(cFields,"CadOiItm","CdOiItem")
 
-cFields = "[IdNo],[CkdIdNo],[ApOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
+cFields = "[IdNo],[DjIdNo],[ApOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
 DbfToSql(cFields,"CkdOiItm","CkOiItem")
 
 cFields = "[IdNo],[JournalCode],[JournalIdNo],[JournalItemIdNo],[PaidAmount],[DiscountTaken]"
@@ -2212,23 +2245,23 @@ DbfToSql(cFields,"ArOpInvo","ArOpenInvoice")
 cFields = "[IdNo],[Year],[AccountIdNo],[Debit],[Credit]"
 DbfToSql(cFields,"ChartNBal","AccountBalance")
 
-SET DELETED Off
-CLOSE Data
-Use y:\acctbackup\chart.dbf
+Set Deleted Off
+Close Data
+Use Y:\acctbackup\Chart.Dbf
 Go Top
 lnfh = Fcreate("C:\TEMP\SQL\UpdateAccountBegBal.sql")
 lctr = 0
 nFctr = 0
 Do While Not Eof()
-	cByDebit = STR(Chart.ByDebit,10,2)
-	cByCredit = STR(Chart.ByCredit,10,2)
-	
-	cText = "UPDATE Account SET ByDebit = " + cByDebit + ", ByCredit = " + cByCredit + " WHERE idno = " + Chart.AcctCode
+	cByDebit = Str(Chart.ByDebit,10,2)
+	cByCredit = Str(Chart.ByCredit,10,2)
+
+	cText = "UPDATE Account SET ByDebit = " + cByDebit + ", ByCredit = " + cByCredit + " WHERE idno = " + Chart.ACCTCODE
 	Fputs(lnfh,cText)
 	Skip
 Enddo
 Fclose(lnfh)
-CLOSE ALL
+Close All
 Cancel
 
 

@@ -128,6 +128,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TransactionDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.IGroupReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.CashIncomePerDoctorServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.NumberOfCashPatientsPerDoctorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemindex = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
@@ -154,7 +155,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.NumberOfCashPatientsPerDoctorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.TestToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -674,7 +675,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'IGroupReportsToolStripMenuItem
             '
-            Me.IGroupReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashIncomePerDoctorServiceToolStripMenuItem, Me.NumberOfCashPatientsPerDoctorToolStripMenuItem})
+            Me.IGroupReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashIncomePerDoctorServiceToolStripMenuItem, Me.NumberOfCashPatientsPerDoctorToolStripMenuItem, Me.TestToolStripMenuItem1})
             Me.IGroupReportsToolStripMenuItem.Name = "IGroupReportsToolStripMenuItem"
             resources.ApplyResources(Me.IGroupReportsToolStripMenuItem, "IGroupReportsToolStripMenuItem")
             '
@@ -682,6 +683,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.CashIncomePerDoctorServiceToolStripMenuItem.Name = "CashIncomePerDoctorServiceToolStripMenuItem"
             resources.ApplyResources(Me.CashIncomePerDoctorServiceToolStripMenuItem, "CashIncomePerDoctorServiceToolStripMenuItem")
+            '
+            'NumberOfCashPatientsPerDoctorToolStripMenuItem
+            '
+            Me.NumberOfCashPatientsPerDoctorToolStripMenuItem.Name = "NumberOfCashPatientsPerDoctorToolStripMenuItem"
+            resources.ApplyResources(Me.NumberOfCashPatientsPerDoctorToolStripMenuItem, "NumberOfCashPatientsPerDoctorToolStripMenuItem")
             '
             'ToolStripMenuItemHelp
             '
@@ -820,10 +826,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'NumberOfCashPatientsPerDoctorToolStripMenuItem
+            'TestToolStripMenuItem1
             '
-            Me.NumberOfCashPatientsPerDoctorToolStripMenuItem.Name = "NumberOfCashPatientsPerDoctorToolStripMenuItem"
-            resources.ApplyResources(Me.NumberOfCashPatientsPerDoctorToolStripMenuItem, "NumberOfCashPatientsPerDoctorToolStripMenuItem")
+            Me.TestToolStripMenuItem1.Name = "TestToolStripMenuItem1"
+            resources.ApplyResources(Me.TestToolStripMenuItem1, "TestToolStripMenuItem1")
             '
             'Main
             '
@@ -835,8 +841,8 @@ Namespace PresentationLayer.Views.Forms
             Me.IsMdiContainer = True
             Me.Name = "Main"
             Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ToolStrip.ResumeLayout(false)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
         Me.Account.ResumeLayout(false)
         Me.Account.PerformLayout
@@ -975,5 +981,6 @@ End Sub
         Friend WithEvents IGroupReportsToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents CashIncomePerDoctorServiceToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents NumberOfCashPatientsPerDoctorToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents TestToolStripMenuItem1 As ToolStripMenuItem
     End Class
 End NameSpace
