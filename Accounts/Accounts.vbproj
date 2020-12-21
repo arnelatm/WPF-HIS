@@ -286,6 +286,12 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\CashIncomePerDoctorPerService.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormTest.Designer.vb">
+      <DependentUpon>ReportFormTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.Designer.vb">
       <DependentUpon>ReportFormIGroup.vb</DependentUpon>
     </Compile>
@@ -2013,6 +2019,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IncomeStatement.resx">
       <DependentUpon>IncomeStatement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormTest.resx">
+      <DependentUpon>ReportFormTest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.resx">
       <DependentUpon>ReportFormIGroup.vb</DependentUpon>
