@@ -29,10 +29,14 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
                 Dim cForm
+                Dim reportName As String
+                Dim reportTitle As String
+                reportName = Messaging.TranslateCaption("Statement of Employee Loans")
+                reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"beginningDate", dtpBeginningDate.Value.ToString, "endingDate", dtpEndingDate.Value.ToString})
                 If Strings.Left(FormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew("Statement of Employee Loans Arabic.rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "EmployeeDisplayName")
+                    cForm = New ReportFormNew("Statement of Employee Loans Arabic.rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "EmployeeDisplayName")
                 Else
-                    cForm = New ReportFormNew("Statement of Employee Loans.rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "EmployeeDisplayName")
+                    cForm = New ReportFormNew("Statement of Employee Loans.rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "EmployeeDisplayName")
                 End If
                 cForm.Show()
             Else

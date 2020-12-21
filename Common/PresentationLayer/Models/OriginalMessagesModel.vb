@@ -3,7 +3,7 @@
     Public Class OriginalMessagesModel
         Inherits CommonModel
 
-        Public Property IdNo As Int16
+        Public Property IdNo As Int32
         Public Property Caption As String
         Public Property IdNoTranslated As Integer
         Public Property LanguageIdNo As Int16

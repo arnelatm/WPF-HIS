@@ -28,7 +28,10 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
-                Dim cForm As New ReportFormNew("Summary of Accounts Receivable.Rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalances")
+                Dim reportName = Messaging.TranslateCaption("Summary of Accounts Receivable")
+                Dim reportTitle As String
+                reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, FormCulture)
+                Dim cForm As New ReportFormNew("Summary of Accounts Receivable.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalances")
                 cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateLessThanEndDate")

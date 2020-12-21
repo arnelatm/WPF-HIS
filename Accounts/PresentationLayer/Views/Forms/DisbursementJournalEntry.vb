@@ -510,11 +510,11 @@ Namespace PresentationLayer.Views.Forms
 
             If PresenterObj.CdAccountCount = 0 Then
                 If txtJournalCode.Text = "PC" Then
-                    Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"Petty Cash", "specialAccountName"})
+                    Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"specialAccountName", "Petty Cash"})
                 ElseIf txtJournalCode.Text = "CD" Then
-                    Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"Cash", "specialAccountName"})
+                    Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"specialAccountName", "Cash"})
                 Else
-                    Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"Checking Account", "specialAccountName"})
+                    Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"specialAccountName", "Checking Account"})
                 End If
                 PresenterObj.GoQuit()
             End If

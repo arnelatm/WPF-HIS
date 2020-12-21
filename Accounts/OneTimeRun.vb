@@ -65,6 +65,10 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgTotalArMismatch", "Sorry, total header A.R. does not match total details A.R.!", "Invalid Entry")
         Messaging.AddMessage("MsgValidationCompareEqual", "{propertyName} must be equal to {otherPropertyName}", "Validation Error")
         Messaging.AddMessage("MsgValidationCompareNotEqual", "{propertyName} must not be equal to {otherPropertyName}", "Validation Error")
+        Messaging.AddMessage("RptForTheMonth", "{reportName} for the Month of {monthName}", "")
+        Messaging.AddMessage("RptForTheYear", "{reportName} for the Year Ending {year}", "")
+        Messaging.AddMessage("RptForThePeriod", "{reportName} for the period {beginningDate} to {endingDate}", "")
+        Messaging.AddMessage("RptAging", "Aging of {report} as of {endingDate}", "")
     End Sub
 
     'Public Shared Sub CreateEnums()
