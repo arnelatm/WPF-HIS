@@ -134,7 +134,7 @@ Public Class Cash_Disbursement_Journal
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_CashDisbursementJournalIdNo() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_JournalIdNo() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(0)
         End Get
