@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -66,9 +67,16 @@ Namespace PresentationLayer.Views.Forms.Reports
                 AccountBalanceYear = Year(lastFiscalYearDate)
                 begDataDate = DateSerial(AccountBalanceYear, 1, 1)
             End If
-            Dim cForm As New ReportForm("Balance Sheet.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", language, "Language", _period, "Period")
+            Dim reportName = Messaging.TranslateCaption("Balance Sheet")
+            Dim reportTitle As String
+            Dim cForm
+            If _period = "Y" Or _period = "M" Or _period = "C" Then
+                reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, FormCulture)
+                cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", language, "Language", _period, "Period")
+            Else
+                cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", language, "Language", _period, "Period")
+            End If
             cForm.Show()
-
             CultureInfo.CurrentCulture = curCulture
 
         End Sub
