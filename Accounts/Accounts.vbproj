@@ -2894,6 +2894,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app-Ispadmin2.config" />
+    <None Include="app-Ibn-server.config" />
+    <None Include="app-Marcelo-Dell.config" />
     <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
