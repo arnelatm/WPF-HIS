@@ -18,7 +18,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             MainTableName = "Account"
             GetReportProperties()
             Dim language As String
+            Dim establishmentName As String
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            If language <> "ar" Then
+                establishmentName = PresenterObj.GetRecordField("Establishment", "EstablishmentName")
+            Else
+                establishmentName = PresenterObj.GetRecordField("Establishment", "EstablishmentNameAra")
+            End If
             PresenterObj = New ReportPresenter(Me)
             For i = 0 To args.Length - 1 Step 2
                 Dim value = args(i)
@@ -26,8 +32,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Next
             Report.SetParameterValue("Language", language)
             Report.SetParameterValue("ReportTitle", reportTitle)
-            Report.SetParameterValue("EstablishmentName", PresenterObj.GetRecordField("Establishment", "EstablishmentName"))
-            Report.SetParameterValue("EstablishmentNameAra", PresenterObj.GetRecordField("Establishment", "EstablishmentNameAra"))
+            Report.SetParameterValue("EstablishmentName", establishmentName)
             Report.DataSourceConnections.Clear()
             ProcessReport()
 
