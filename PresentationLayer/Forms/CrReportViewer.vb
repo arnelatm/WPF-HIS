@@ -1,5 +1,4 @@
 ﻿Imports System.Configuration
-Imports System.Globalization
 Imports System.Windows.Forms
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.ReportAppServer.DataDefModel
