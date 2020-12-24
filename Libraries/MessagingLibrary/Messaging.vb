@@ -235,7 +235,7 @@ Public Class Messaging
         ElseIf periodCode = "M" Then
             Dim monthName As String
             monthName = GlobalFunctions.GregorianMonthName(GregorianMonth(endingDate))
-            Return Messaging.GetParametrizedMessage(True, "RptForTheMonth", {"reportName", reportName, "monthName", monthName})
+            Return Messaging.GetParametrizedMessage(True, "RptForTheMonth", {"reportName", reportName, "monthName", monthName, "year", Year(endingDate).ToString()})
         ElseIf periodCode = "Q" Then
             Dim nMonth = GregorianMonth(endingDate)
             Dim quarter = Int(nMonth / 3 + 0.8)
