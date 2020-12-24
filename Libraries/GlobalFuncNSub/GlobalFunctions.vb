@@ -930,6 +930,38 @@ Public Module GlobalFunctions
         Return False
     End Function
 
+    Public Function GetBegEndDates(ByVal periodCode As String, ByRef beginningDate As Date, ByVal endingDate As Date)
+        Dim begDate As Date
+        Dim endDate As Date
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        Select Case periodCode
+            Case "Y"
+                begDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), 1, 1)
+                endDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), 12, 31)
+            Case "M"
+                begDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), Month(endingDate), 1)
+                endDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), Month(endingDate) + 1, 0)
+            Case "Q"
+                Dim nMonth = Month(endDate)
+                Dim quarter = Int(nMonth / 3 + 0.8)
+                begDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), quarter * 3 - 2, 1)
+                Dim quarterEndDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), quarter * 3, 1)
+                quarterEndDate = GregorianDateSerial(Year(quarterEndDate), Month(quarterEndDate), DateTime.DaysInMonth(Year(quarterEndDate), Month(quarterEndDate)))
+                endingDate = quarterEndDate
+            Case "S"
+                Dim nMonth = Month(endingDate)
+                Dim semester = Int(nMonth / 6 + 0.9)
+                beginningDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), semester * 6 - 5, 1)
+                Dim semesterEndDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), semester * 6, 1)
+                semesterEndDate = DateSerial(Year(semesterEndDate), Month(semesterEndDate), DateTime.DaysInMonth(Year(semesterEndDate), Month(semesterEndDate)))
+                endingDate = semesterEndDate
+            Case "C"
+                begDate = beginningDate
+                endDate = endingDate
+        End Select
+        Return endDate
+    End Function
+
     'Public Function CompareValues(source, Target) As Boolean
     '    Dim retVal As Boolean = False
     '    Dim source1 As New List(Of String)
