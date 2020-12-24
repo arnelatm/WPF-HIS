@@ -119,6 +119,8 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemBalanceSheet = New System.Windows.Forms.ToolStripMenuItem()
             Me.YearlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             Me.MonthlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.QuarterlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.SemestralToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemIncomeStatementForAGivenYear = New System.Windows.Forms.ToolStripMenuItem()
             Me.YearlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
             Me.MonthlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -129,6 +131,7 @@ Namespace PresentationLayer.Views.Forms
             Me.IGroupReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.CashIncomePerDoctorServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.NumberOfCashPatientsPerDoctorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.TestToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemindex = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
@@ -155,7 +158,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.TestToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -623,7 +625,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemBalanceSheet
             '
-            Me.ToolStripMenuItemBalanceSheet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.YearlyToolStripMenuItem1, Me.MonthlyToolStripMenuItem1})
+            Me.ToolStripMenuItemBalanceSheet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.YearlyToolStripMenuItem1, Me.MonthlyToolStripMenuItem1, Me.QuarterlyToolStripMenuItem2, Me.SemestralToolStripMenuItem1})
             Me.ToolStripMenuItemBalanceSheet.Name = "ToolStripMenuItemBalanceSheet"
             resources.ApplyResources(Me.ToolStripMenuItemBalanceSheet, "ToolStripMenuItemBalanceSheet")
             '
@@ -636,6 +638,16 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.MonthlyToolStripMenuItem1.Name = "MonthlyToolStripMenuItem1"
             resources.ApplyResources(Me.MonthlyToolStripMenuItem1, "MonthlyToolStripMenuItem1")
+            '
+            'QuarterlyToolStripMenuItem2
+            '
+            Me.QuarterlyToolStripMenuItem2.Name = "QuarterlyToolStripMenuItem2"
+            resources.ApplyResources(Me.QuarterlyToolStripMenuItem2, "QuarterlyToolStripMenuItem2")
+            '
+            'SemestralToolStripMenuItem1
+            '
+            Me.SemestralToolStripMenuItem1.Name = "SemestralToolStripMenuItem1"
+            resources.ApplyResources(Me.SemestralToolStripMenuItem1, "SemestralToolStripMenuItem1")
             '
             'ToolStripMenuItemIncomeStatementForAGivenYear
             '
@@ -688,6 +700,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.NumberOfCashPatientsPerDoctorToolStripMenuItem.Name = "NumberOfCashPatientsPerDoctorToolStripMenuItem"
             resources.ApplyResources(Me.NumberOfCashPatientsPerDoctorToolStripMenuItem, "NumberOfCashPatientsPerDoctorToolStripMenuItem")
+            '
+            'TestToolStripMenuItem1
+            '
+            Me.TestToolStripMenuItem1.Name = "TestToolStripMenuItem1"
+            resources.ApplyResources(Me.TestToolStripMenuItem1, "TestToolStripMenuItem1")
             '
             'ToolStripMenuItemHelp
             '
@@ -826,11 +843,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'TestToolStripMenuItem1
-            '
-            Me.TestToolStripMenuItem1.Name = "TestToolStripMenuItem1"
-            resources.ApplyResources(Me.TestToolStripMenuItem1, "TestToolStripMenuItem1")
-            '
             'Main
             '
             Me.AllowDrop = True
@@ -842,11 +854,11 @@ Namespace PresentationLayer.Views.Forms
             Me.Name = "Main"
             Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.ToolStrip.ResumeLayout(false)
-        Me.ToolStrip.PerformLayout
-        Me.Account.ResumeLayout(false)
-        Me.Account.PerformLayout
-        Me.contextMenuStripMember.ResumeLayout(false)
+            Me.ToolStrip.ResumeLayout(False)
+            Me.ToolStrip.PerformLayout()
+            Me.Account.ResumeLayout(False)
+            Me.Account.PerformLayout()
+            Me.contextMenuStripMember.ResumeLayout(false)
         Me.contextMenuStrip1.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
@@ -982,5 +994,7 @@ End Sub
         Friend WithEvents CashIncomePerDoctorServiceToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents NumberOfCashPatientsPerDoctorToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents TestToolStripMenuItem1 As ToolStripMenuItem
+        Friend WithEvents QuarterlyToolStripMenuItem2 As ToolStripMenuItem
+        Friend WithEvents SemestralToolStripMenuItem1 As ToolStripMenuItem
     End Class
 End NameSpace

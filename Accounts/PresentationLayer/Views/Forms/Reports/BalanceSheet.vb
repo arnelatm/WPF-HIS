@@ -36,36 +36,11 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim language As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             lastFiscalYearDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
-
-            Select Case _period
-                Case "Y"
-                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 1, 1)
-                    dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 12, 31)
-                    endingDate = dtpEndingDate.Value
-                Case "M"
-                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value), 1)
-                    dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value) + 1, 0)
-                    endingDate = dtpEndingDate.Value
-                Case "Q"
-                    Dim nMonth = Month(dtpEndingDate.Value)
-                    Dim quarter = Int(nMonth / 3 + 0.8)
-                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), quarter * 3 - 2, 1)
-                    Dim quarterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), quarter * 3, 1)
-                    quarterEndDate = DateSerial(Year(quarterEndDate), Month(quarterEndDate), DateTime.DaysInMonth(Year(quarterEndDate), Month(quarterEndDate)))
-                    dtpEndingDate.Value = quarterEndDate
-                    endingDate = quarterEndDate
-                Case "S"
-                    Dim nMonth = Month(dtpEndingDate.Value)
-                    Dim semester = Int(nMonth / 6 + 0.9)
-                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), semester * 6 - 5, 1)
-                    Dim semesterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), semester * 6, 1)
-                    semesterEndDate = DateSerial(Year(semesterEndDate), Month(semesterEndDate), DateTime.DaysInMonth(Year(semesterEndDate), Month(semesterEndDate)))
-                    dtpEndingDate.Value = semesterEndDate
-                    endingDate = semesterEndDate
-                Case "C"
-                    beginningDate = dtpBeginningDate.Value
-                    endingDate = dtpEndingDate.Value
-            End Select
+            beginningDate = IIf(dtpBeginningDate.Value Is Nothing, dtpEndingDate.Value, dtpBeginningDate.Value)
+            endingDate = dtpEndingDate.Value
+            AdjustBeginningEndDates(_period, beginningDate, endingDate)
+            dtpEndingDate.Value = endingDate
+            dtpBeginningDate.Value = beginningDate
             If beginningDate < lastFiscalYearDate Then
                 AccountBalanceYear = Year(beginningDate)
                 begDataDate = beginningDate
@@ -77,7 +52,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportTitle As String
             Dim cForm
             reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, FormCulture, _period)
-            cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", language, "Language", _period, "Period")
+            cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", endingDate, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", language, "Language", _period, "Period")
             cForm.Show()
             CultureInfo.CurrentCulture = curCulture
 

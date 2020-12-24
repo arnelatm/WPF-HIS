@@ -1435,6 +1435,23 @@ Namespace PresentationLayer.Views.Forms
             cForm.Show()
         End Sub
 
+
+        Private Sub QuarterlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles QuarterlyToolStripMenuItem2.Click
+            Dim childMdiForm As BalanceSheet
+            childMdiForm = New BalanceSheet("Q") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub SemestralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SemestralToolStripMenuItem1.Click
+            Dim childMdiForm As BalanceSheet
+            childMdiForm = New BalanceSheet("S") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
 
         'End Sub
