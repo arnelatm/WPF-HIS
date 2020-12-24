@@ -228,6 +228,8 @@ Public Class Messaging
     End Function
 
     Public Shared Function SelectReportName(ByVal reportName As String, ByVal beginningDate As Date, ByVal endingDate As Date, ByVal FormCulture As Globalization.CultureInfo, Optional ByVal periodCode As String = "")
+        Dim curCulture = CultureInfo.CurrentCulture
+
         If periodCode = "Y" Then
             Return Messaging.GetParametrizedMessage(True, "RptForTheYear", {"reportName", reportName, "year", GregorianYear(endingDate).ToString})
         ElseIf periodCode = "M" Then
@@ -269,8 +271,8 @@ Public Class Messaging
                 Return Messaging.GetParametrizedMessage(True, "RptForTheMonth", {"reportName", reportName, "monthName", monthName})
             End If
         End If
-        bDate = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
-        eDate = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
+        Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
+        Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
         Return Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
     End Function
 

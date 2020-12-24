@@ -29,6 +29,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim beginningDate As Date
+            Dim endingDate As Date
             Dim lastFiscalYearDate As Date
             Dim AccountBalanceYear As Integer
             Dim begDataDate As Date
@@ -40,9 +41,11 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Case "Y"
                     beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 1, 1)
                     dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 12, 31)
+                    endingDate = dtpEndingDate.Value
                 Case "M"
                     beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value), 1)
                     dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value) + 1, 0)
+                    endingDate = dtpEndingDate.Value
                 Case "Q"
                     Dim nMonth = Month(dtpEndingDate.Value)
                     Dim quarter = Int(nMonth / 3 + 0.8)
@@ -50,6 +53,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                     Dim quarterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), quarter * 3, 1)
                     quarterEndDate = DateSerial(Year(quarterEndDate), Month(quarterEndDate), DateTime.DaysInMonth(Year(quarterEndDate), Month(quarterEndDate)))
                     dtpEndingDate.Value = quarterEndDate
+                    endingDate = quarterEndDate
                 Case "S"
                     Dim nMonth = Month(dtpEndingDate.Value)
                     Dim semester = Int(nMonth / 6 + 0.9)
@@ -57,8 +61,10 @@ Namespace PresentationLayer.Views.Forms.Reports
                     Dim semesterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), semester * 6, 1)
                     semesterEndDate = DateSerial(Year(semesterEndDate), Month(semesterEndDate), DateTime.DaysInMonth(Year(semesterEndDate), Month(semesterEndDate)))
                     dtpEndingDate.Value = semesterEndDate
+                    endingDate = semesterEndDate
                 Case "C"
                     beginningDate = dtpBeginningDate.Value
+                    endingDate = dtpEndingDate.Value
             End Select
             If beginningDate < lastFiscalYearDate Then
                 AccountBalanceYear = Year(beginningDate)
@@ -70,12 +76,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportName = Messaging.TranslateCaption("Balance Sheet")
             Dim reportTitle As String
             Dim cForm
-            If _period = "Y" Or _period = "M" Or _period = "C" Then
-                reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, FormCulture)
-                cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", language, "Language", _period, "Period")
-            Else
-                cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", language, "Language", _period, "Period")
-            End If
+            reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, FormCulture, _period)
+            cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", language, "Language", _period, "Period")
             cForm.Show()
             CultureInfo.CurrentCulture = curCulture
 
