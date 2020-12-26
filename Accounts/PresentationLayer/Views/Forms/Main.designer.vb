@@ -127,7 +127,7 @@ Namespace PresentationLayer.Views.Forms
             Me.QuarterlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             Me.SemiAnnuallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.CustomRangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.TransactionDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.AccountActivityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.IGroupReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.CashIncomePerDoctorServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.NumberOfCashPatientsPerDoctorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -558,7 +558,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemReports
             '
-            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.StatementOfEmployeeLoansToolStripMenuItem, Me.ToolStripMenuItemStateOfEmployeeLoans, Me.SummaryOfAccountsPayableToolStripMenuItem1, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatementForAGivenYear, Me.TransactionDetailToolStripMenuItem, Me.IGroupReportsToolStripMenuItem})
+            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.StatementOfEmployeeLoansToolStripMenuItem, Me.ToolStripMenuItemStateOfEmployeeLoans, Me.SummaryOfAccountsPayableToolStripMenuItem1, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatementForAGivenYear, Me.AccountActivityToolStripMenuItem, Me.IGroupReportsToolStripMenuItem})
             Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
             resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
             '
@@ -680,10 +680,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CustomRangeToolStripMenuItem.Name = "CustomRangeToolStripMenuItem"
             resources.ApplyResources(Me.CustomRangeToolStripMenuItem, "CustomRangeToolStripMenuItem")
             '
-            'TransactionDetailToolStripMenuItem
+            'AccountActivityToolStripMenuItem
             '
-            Me.TransactionDetailToolStripMenuItem.Name = "TransactionDetailToolStripMenuItem"
-            resources.ApplyResources(Me.TransactionDetailToolStripMenuItem, "TransactionDetailToolStripMenuItem")
+            Me.AccountActivityToolStripMenuItem.Name = "AccountActivityToolStripMenuItem"
+            resources.ApplyResources(Me.AccountActivityToolStripMenuItem, "AccountActivityToolStripMenuItem")
             '
             'IGroupReportsToolStripMenuItem
             '
@@ -858,12 +858,12 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStrip.PerformLayout()
             Me.Account.ResumeLayout(False)
             Me.Account.PerformLayout()
-            Me.contextMenuStripMember.ResumeLayout(false)
-        Me.contextMenuStrip1.ResumeLayout(false)
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.contextMenuStripMember.ResumeLayout(False)
+            Me.contextMenuStrip1.ResumeLayout(False)
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
 
 #End Region
 
@@ -974,7 +974,7 @@ End Sub
         Friend WithEvents CustomToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents YearlyToolStripMenuItem1 As ToolStripMenuItem
         Friend WithEvents MonthlyToolStripMenuItem1 As ToolStripMenuItem
-        Friend WithEvents TransactionDetailToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents AccountActivityToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents YearlyToolStripMenuItem2 As ToolStripMenuItem
         Friend WithEvents MonthlyToolStripMenuItem2 As ToolStripMenuItem
         Friend WithEvents QuarterlyToolStripMenuItem1 As ToolStripMenuItem

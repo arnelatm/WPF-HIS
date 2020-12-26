@@ -28,8 +28,8 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim beginningDate As Date
-            Dim endingDate As Date
+            Dim beginningDate As Date?
+            Dim endingDate As Date?
             Dim lastFiscalYearDate As Date
             Dim AccountBalanceYear As Integer
             Dim begDataDate As Date
@@ -51,9 +51,19 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportName = Messaging.TranslateCaption("Balance Sheet")
             Dim reportTitle As String
             Dim cForm
-            reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, FormCulture, _period)
-            cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", endingDate, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate")
-            cForm.Show()
+            Dim valid As Boolean = True
+            If beginningDate Is Nothing Or endingDate Is Nothing Then
+                Messaging.Show(True, "MsgDatesCannotBeEmpty")
+                valid = False
+            ElseIf beginningDate > endingDate Then
+                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
+                valid = False
+            End If
+            If valid Then
+                reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, FormCulture, _period)
+                cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", endingDate, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate")
+                cForm.Show()
+            End If
             CultureInfo.CurrentCulture = curCulture
 
         End Sub
@@ -67,25 +77,20 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub BalanceSheet_BeforeLoad() Handles MyBase.BeforeLoad
-            Dim currentDate = Now()
-            Dim endDate As Date
             lblBegDateCaption.Visible = False
             dtpBeginningDate.Visible = False
+            AdjustBeginningEndDates(_period, dtpBeginningDate.Value, dtpEndingDate.Value)
             Select Case _period
                 Case "Y"
-                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year - 1, 12, 31)
                     Text = "Balance Sheet for the Year"
                     lblEndDateCaption.Text = "Year End Date:"
                 Case "M"
-                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
                     Text = "Balance Sheet for the Month"
                     lblEndDateCaption.Text = "Month End Date:"
                 Case "Q"
-                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
                     Text = "Balance Sheet for the Quarter"
                     lblEndDateCaption.Text = "Quarterly End Date:"
                 Case "S"
-                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
                     Text = "Balance Sheet for the Semester"
                     lblEndDateCaption.Text = "Semester End Date:"
                 Case "C"
@@ -93,14 +98,11 @@ Namespace PresentationLayer.Views.Forms.Reports
                     lblEndDateCaption.Visible = True
                     dtpEndingDate.Visible = True
                     dtpBeginningDate.Visible = True
-                    endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, Month(currentDate), 0)
                     Text = "Balance Sheet for Custom Period"
                     lblEndDateCaption.Text = "Period Beginning Date:"
                     lblEndDateCaption.Text = "Period End Date:"
-
             End Select
             lblTitle.Text = Text
-            dtpEndingDate.Value = endDate
         End Sub
 
     End Class

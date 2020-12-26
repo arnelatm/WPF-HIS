@@ -34,7 +34,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim cForm As New ReportFormNew("Summary of Employee Loans.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalances")
                 cForm.Show()
             Else
-                Messaging.Show(True, "MsgBegDateLessThanEndDate")
+                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If
         End Sub
 

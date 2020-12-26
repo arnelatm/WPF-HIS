@@ -930,16 +930,25 @@ Public Module GlobalFunctions
         Return False
     End Function
 
-    Public Sub AdjustBeginningEndDates(ByVal periodCode As String, ByRef beginningDate As Date, ByRef endingDate As Date)
+    Public Sub AdjustBeginningEndDates(ByVal periodCode As String, ByRef beginningDate As Date?, ByRef endingDate As Date?)
         CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
         Select Case periodCode
             Case "Y"
+                If endingDate Is Nothing Then
+                    endingDate = DateAdd("yyyy", -1, Now())
+                End If
                 beginningDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), 1, 1)
                 endingDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), 12, 31)
             Case "M"
+                If endingDate Is Nothing Then
+                    endingDate = DateAdd("m", -1, Now())
+                End If
                 beginningDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), Month(endingDate), 1)
                 endingDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), Month(endingDate) + 1, 0)
             Case "Q"
+                If endingDate Is Nothing Then
+                    endingDate = DateAdd("m", -3, Now())
+                End If
                 Dim nMonth = Month(endingDate)
                 Dim quarter = Int(nMonth / 3 + 0.8)
                 beginningDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), quarter * 3 - 2, 1)
@@ -947,12 +956,22 @@ Public Module GlobalFunctions
                 quarterEndDate = GregorianDateSerial(Year(quarterEndDate), Month(quarterEndDate), DateTime.DaysInMonth(Year(quarterEndDate), Month(quarterEndDate)))
                 endingDate = quarterEndDate
             Case "S"
+                If endingDate Is Nothing Then
+                    endingDate = DateAdd("m", -6, Now())
+                End If
                 Dim nMonth = Month(endingDate)
                 Dim semester = Int(nMonth / 6 + 0.9)
                 beginningDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), semester * 6 - 5, 1)
                 Dim semesterEndDate = GlobalFunctions.GregorianDateSerial(Year(endingDate), semester * 6, 1)
                 semesterEndDate = DateSerial(Year(semesterEndDate), Month(semesterEndDate), DateTime.DaysInMonth(Year(semesterEndDate), Month(semesterEndDate)))
                 endingDate = semesterEndDate
+            Case "C"
+                If beginningDate Is Nothing Then
+                    beginningDate = Now()
+                End If
+                If endingDate Is Nothing Then
+                    endingDate = Now()
+                End If
         End Select
     End Sub
 
