@@ -32,8 +32,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
                 Dim reportName As String
                 Dim reportTitle As String
+                Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+                Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 reportName = Messaging.TranslateCaption("Statement of Accounts Payable")
-                reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"beginningDate", dtpBeginningDate.Value.ToString, "endingDate", dtpEndingDate.Value.ToString})
+                reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
                 If Strings.Left(FormCulture.Name, 2) = "ar" Then
                     cForm = New ReportFormNew("Statement of Accounts Payable Arabic.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value.ToString(), "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
                 Else

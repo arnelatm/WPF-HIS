@@ -32,12 +32,14 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim cForm
                 Dim reportName As String
                 Dim reportTitle As String
+                Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+                Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 reportName = Messaging.TranslateCaption("Statement of Accounts Receivable")
-                reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"beginningDate", dtpBeginningDate.Value.ToString, "endingDate", dtpEndingDate.Value.ToString})
+                reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
                 If Strings.Left(FormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew("Statement of Accounts Receivable Arabic.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value.ToString(), "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "SupplierIdNo", cboCustomerIdNo.Text, "DisplayName")
+                    cForm = New ReportFormNew("Statement of Accounts Receivable Arabic.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
                 Else
-                    cForm = New ReportFormNew("Statement of Accounts Receivable.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "SupplierIdNo", cboCustomerIdNo.Text, "DisplayName")
+                    cForm = New ReportFormNew("Statement of Accounts Receivable.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
                 End If
                 cForm.Show()
             Else
