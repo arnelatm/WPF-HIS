@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportTitle As String
             Dim cForm
             reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, FormCulture, _period)
-            cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", endingDate, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", language, "Language", _period, "Period")
+            cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", endingDate, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate")
             cForm.Show()
             CultureInfo.CurrentCulture = curCulture
 

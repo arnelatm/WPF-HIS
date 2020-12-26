@@ -212,12 +212,6 @@ Public Class Messaging
         Dim cCaption = Messaging.GetMessageCaption(key)
         Dim message = Messaging.ReplaceValues(cMessage, variables)
         Dim caption = Messaging.TranslateCaption(cCaption)
-        'For Each value In variables
-        '    Dim cvalue As String = "{" + value(0) + "}"
-        '    If Not message.Contains(cvalue) Then
-        '        Messaging.Show(True, "invalid translation for message " & key)
-        '    End If
-        'Next
         Messaging.Show(message, caption)
         Return message
     End Function
