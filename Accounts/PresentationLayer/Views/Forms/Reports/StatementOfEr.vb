@@ -40,7 +40,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 End If
                 cForm.Show()
             Else
-                Messaging.Show(True, "MsgBegDateLessThanEndDate")
+                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If
         End Sub
 

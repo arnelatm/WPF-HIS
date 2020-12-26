@@ -15,7 +15,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgAlreadyPosted", "Sorry this record has already been posted!", "Disallowed operation")
         Messaging.AddMessage("MsgAppliedAmtExceedsBalance", "Error in line {lineNumber}. Applied amount and discount exceeds balance.", "Invalid Payment")
         Messaging.AddMessage("MsgBlankAccountIDNotAllowed", "Error in line <{lineNumber}>. Cannot save entries with debit/credit amounts when account ID is blank.", "Invalid Entry")
-        Messaging.AddMessage("MsgBegDateLessThanEndDate", "Beginning date cannot be greater than ending date.", "Invalid Entry")
+        Messaging.AddMessage("MsgBegDateMustBeLessThanEndDate", "Beginning date must be less than ending date.", "Invalid Entry")
         Messaging.AddMessage("MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "Disallowed operation")
         Messaging.AddMessage("MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
         Messaging.AddMessage("MsgCashAccountsNotAllowed", "Error on line <{lineNumber}>. Cash accounts not allowed for this transaction.", "Invalid Entry")
@@ -71,6 +71,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("RptForTheYear", "{reportName} for the Year Ending {year}", "")
         Messaging.AddMessage("RptForThePeriod", "{reportName} for the period {beginningDate} to {endingDate}", "")
         Messaging.AddMessage("RptAging", "Aging of {report} as of {endingDate}", "")
+        Messaging.AddMessage("MsgDatesCannotBeEmpty", "Dates cannot be empty, please enter the dates", "Invalid Enry")
     End Sub
 
     'Public Shared Sub CreateEnums()

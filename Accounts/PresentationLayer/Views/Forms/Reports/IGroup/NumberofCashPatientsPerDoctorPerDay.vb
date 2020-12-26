@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim cForm As New ReportFormIGroup("Number of Patients per Doctor per Day.Rpt", FormCulture, cBegDate, "BeginningDate", cEndDate, "EndingDate")
                 cForm.Show()
             Else
-                Messaging.Show(True, "MsgBegDateLessThanEndDate")
+                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If
         End Sub
 
