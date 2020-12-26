@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -28,37 +29,16 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim beginningDate As Date
+            Dim endingDate As Date
             Dim lastFiscalYearDate As Date
             Dim AccountBalanceYear As Integer
             Dim begDataDate As Date
             Dim language As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             lastFiscalYearDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
-
-            Select Case _period
-                Case "Y"
-                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 1, 1)
-                    dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 12, 31)
-                Case "M"
-                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value), 1)
-                    dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), Month(dtpEndingDate.Value) + 1, 0)
-                Case "Q"
-                    Dim nMonth = Month(dtpEndingDate.Value)
-                    Dim quarter = Int(nMonth / 3 + 0.8)
-                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), quarter * 3 - 2, 1)
-                    Dim quarterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), quarter * 3, 1)
-                    quarterEndDate = DateSerial(Year(quarterEndDate), Month(quarterEndDate), DateTime.DaysInMonth(Year(quarterEndDate), Month(quarterEndDate)))
-                    dtpEndingDate.Value = quarterEndDate
-                Case "S"
-                    Dim nMonth = Month(dtpEndingDate.Value)
-                    Dim semester = Int(nMonth / 6 + 0.9)
-                    beginningDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), semester * 6 - 5, 1)
-                    Dim semesterEndDate = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), semester * 6, 1)
-                    semesterEndDate = DateSerial(Year(semesterEndDate), Month(semesterEndDate), DateTime.DaysInMonth(Year(semesterEndDate), Month(semesterEndDate)))
-                    dtpEndingDate.Value = semesterEndDate
-                Case "C"
-                    beginningDate = dtpBeginningDate.Value
-            End Select
+            beginningDate = IIf(dtpBeginningDate.Value Is Nothing, dtpEndingDate.Value, dtpBeginningDate.Value)
+            endingDate = dtpEndingDate.Value
+            AdjustBeginningEndDates(_period, beginningDate, endingDate)
             If beginningDate < lastFiscalYearDate Then
                 AccountBalanceYear = Year(beginningDate)
                 begDataDate = beginningDate
@@ -66,9 +46,12 @@ Namespace PresentationLayer.Views.Forms.Reports
                 AccountBalanceYear = Year(lastFiscalYearDate)
                 begDataDate = DateSerial(AccountBalanceYear, 1, 1)
             End If
-            Dim cForm As New ReportForm("Income Statement.Rpt", beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", language, "Language", _period, "Period")
+            Dim reportName = Messaging.TranslateCaption("Income Statement")
+            Dim reportTitle As String
+            Dim cForm
+            reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, FormCulture, _period)
+            cForm = New ReportFormNew("Income Statement.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate")
             cForm.Show()
-
             CultureInfo.CurrentCulture = curCulture
 
         End Sub
