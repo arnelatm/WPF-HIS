@@ -136,7 +136,7 @@
             Me.lblTitle.Name = "lblTitle"
             Me.lblTitle.Size = New System.Drawing.Size(339, 25)
             Me.lblTitle.TabIndex = 26
-            Me.lblTitle.Text = "Balance Sheet Yearly"
+            Me.lblTitle.Text = "Balance Sheet"
             Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             '
             'CLabel1
@@ -201,8 +201,8 @@
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.CLabel1)
         Me.Name = "BalanceSheet"
-        Me.Text = "Balance Sheet Yearly"
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.Text = "Balance Sheet"
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
 

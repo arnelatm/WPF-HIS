@@ -333,6 +333,18 @@ Public Module GlobalFunctions
     End Function
 
     '''<summary>
+    '''Returns the month name for the gregorian calendar for a given month number
+    '''</summary>
+    Public Function GregorianMonthNameArabic(ByVal pMonthNumber As Int16) As String
+        Dim value As String
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("ar-AE", False)
+        value = Microsoft.VisualBasic.DateAndTime.MonthName(pMonthNumber)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+    '''<summary>
     '''Returns the year in the gregorian calendar for a given date
     '''</summary>
     Public Function GregorianYear(ByVal pDate As Date?) As Int16

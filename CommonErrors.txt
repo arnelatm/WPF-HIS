@@ -3,3 +3,5 @@
    ' Problem in the TreeView, sort order must be 'SortKey' you must provide the table name for the program
    ' Use the Optional parameter for InitializerWithTV(classname, tablename (optional))
 2 Mapping Error for Nullable Value:  Please check in DAO that you defined the property as "AsNullable(Of X?)"  x? must be a nullable value
+3 Form Handle Error when showing Arabic forms.  Problem in OnLoad function or minimize code before form is shown. One time transferred
+  OnLoad code to Shown code.

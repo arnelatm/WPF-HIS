@@ -46,7 +46,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 AccountBalanceYear = Year(lastFiscalYearDate)
                 begDataDate = DateSerial(AccountBalanceYear, 1, 1)
             End If
-            Dim reportName = Messaging.TranslateCaption("Income Statement")
+            Dim reportName = Messaging.TranslateCaption("Profit And Loss Statement")
             Dim reportTitle As String
             Dim cForm
             Dim valid As Boolean = True
@@ -74,31 +74,25 @@ Namespace PresentationLayer.Views.Forms.Reports
             RunTranslator(FormIdNo)
         End Sub
 
-        Private Sub IncomeStatement_BeforeLoad() Handles MyBase.BeforeLoad
+        Private Sub IncomeStatement_Shown() Handles MyBase.Shown
             AdjustBeginningEndDates(_period, dtpBeginningDate.Value, dtpEndingDate.Value)
             lblBegDateCaption.Visible = False
             dtpBeginningDate.Visible = False
+            Dim title = Messaging.TranslateCaption("Profit And Loss Statement")
             Select Case _period
                 Case "Y"
-                    Text = "Income Statement for the Year"
-                    lblEndDateCaption.Text = "Year End Date:"
+                    title = Messaging.TranslateCaption("Yearly") + " " + title
                 Case "M"
-                    Text = "Income Statement for the Month"
-                    lblEndDateCaption.Text = "Month End Date:"
+                    title = Messaging.TranslateCaption("Monthly") + " " + title
                 Case "Q"
-                    Text = "Income Statement for the Quarter"
-                    lblEndDateCaption.Text = "Quarterly End Date:"
+                    title = Messaging.TranslateCaption("Quarterly") + " " + title
                 Case "S"
-                    Text = "Income Statement for the Semester"
-                    lblEndDateCaption.Text = "Semester End Date:"
+                    title = Messaging.TranslateCaption("Semestral") + " " + title
                 Case "C"
                     lblBegDateCaption.Visible = True
                     lblEndDateCaption.Visible = True
                     dtpEndingDate.Visible = True
                     dtpBeginningDate.Visible = True
-                    Text = "Income Statement for Custom Period"
-                    lblEndDateCaption.Text = "Period Beginning Date:"
-                    lblEndDateCaption.Text = "Period End Date:"
             End Select
             lblTitle.Text = Text
         End Sub

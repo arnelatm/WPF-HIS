@@ -97,7 +97,7 @@
             Me.lblBegDateCaption.Name = "lblBegDateCaption"
             Me.lblBegDateCaption.Size = New System.Drawing.Size(171, 25)
             Me.lblBegDateCaption.TabIndex = 25
-            Me.lblBegDateCaption.Text = "Ending Date:"
+            Me.lblBegDateCaption.Text = "Beginning Date:"
             Me.lblBegDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'dtpBeginningDate
@@ -137,7 +137,7 @@
             Me.lblTitle.Name = "lblTitle"
             Me.lblTitle.Size = New System.Drawing.Size(339, 25)
             Me.lblTitle.TabIndex = 26
-            Me.lblTitle.Text = "Trial Balance Yearly"
+            Me.lblTitle.Text = "Trial Balance"
             Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             '
             'CLabel1
@@ -181,7 +181,7 @@
             '
             'btnTranslate
             '
-            Me.btnTranslate.DesignerSelected = False
+            Me.btnTranslate.DesignerSelected = True
             Me.btnTranslate.DisplayOnly = True
             Me.btnTranslate.ImageIndex = 0
             Me.btnTranslate.Location = New System.Drawing.Point(12, 131)
@@ -189,21 +189,21 @@
             Me.btnTranslate.OriginalImageName = Nothing
             Me.btnTranslate.SecurityKey = ""
             Me.btnTranslate.Size = New System.Drawing.Size(89, 25)
-            Me.btnTranslate.TabIndex = 29
+            Me.btnTranslate.TabIndex = 30
             Me.btnTranslate.Text = "Translate"
             '
             'TrialBalance
             '
             Me.ClientSize = New System.Drawing.Size(337, 171)
-        Me.Controls.Add(Me.btnTranslate)
-        Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnOk)
-        Me.Controls.Add(Me.CFlowLayout1)
-        Me.Controls.Add(Me.CLabel1)
+            Me.Controls.Add(Me.btnTranslate)
+            Me.Controls.Add(Me.lblTitle)
+            Me.Controls.Add(Me.btnCancel)
+            Me.Controls.Add(Me.btnOk)
+            Me.Controls.Add(Me.CFlowLayout1)
+            Me.Controls.Add(Me.CLabel1)
         Me.Name = "TrialBalance"
-        Me.Text = "Trial Balance Yearly"
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.Text = "Trial Balance"
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
 
@@ -215,8 +215,8 @@ End Sub
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents btnTranslate As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents dtpBeginningDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblBegDateCaption As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents btnTranslate As Libraries.CBaseControlsLibrary.CButton
     End Class
 End NameSpace

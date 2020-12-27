@@ -31,9 +31,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
                 Dim reportName = Messaging.TranslateCaption("Summary of Accounts Payable")
                 Dim reportTitle As String
-                Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-                Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-                reportTitle = Messaging.SelectReportName(reportName, bDate, eDate, FormCulture, "C")
+                reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, FormCulture)
                 Dim cForm As New ReportFormNew("Summary of Accounts Payable.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance")
                 cForm.Show()
             Else

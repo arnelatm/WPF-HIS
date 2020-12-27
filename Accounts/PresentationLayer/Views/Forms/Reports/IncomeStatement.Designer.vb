@@ -96,7 +96,7 @@
             Me.lblBegDateCaption.Name = "lblBegDateCaption"
             Me.lblBegDateCaption.Size = New System.Drawing.Size(171, 25)
             Me.lblBegDateCaption.TabIndex = 25
-            Me.lblBegDateCaption.Text = "Ending Date:"
+            Me.lblBegDateCaption.Text = "Beginning Date:"
             Me.lblBegDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'dtpBeginningDate
@@ -136,7 +136,7 @@
             Me.lblTitle.Name = "lblTitle"
             Me.lblTitle.Size = New System.Drawing.Size(339, 25)
             Me.lblTitle.TabIndex = 26
-            Me.lblTitle.Text = "Income Statement Yearly"
+            Me.lblTitle.Text = "Profit And Loss Statement"
             Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             '
             'CLabel1
@@ -194,16 +194,16 @@
             'IncomeStatement
             '
             Me.ClientSize = New System.Drawing.Size(337, 171)
-        Me.Controls.Add(Me.btnTranslate)
-        Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnOk)
-        Me.Controls.Add(Me.CFlowLayout1)
-        Me.Controls.Add(Me.CLabel1)
-        Me.Name = "IncomeStatement"
-        Me.Text = "Income Statement Yearly"
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
+            Me.Controls.Add(Me.btnTranslate)
+            Me.Controls.Add(Me.lblTitle)
+            Me.Controls.Add(Me.btnCancel)
+            Me.Controls.Add(Me.btnOk)
+            Me.Controls.Add(Me.CFlowLayout1)
+            Me.Controls.Add(Me.CLabel1)
+            Me.Name = "IncomeStatement"
+            Me.Text = "Profit And Loss Statement"
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
 
 End Sub

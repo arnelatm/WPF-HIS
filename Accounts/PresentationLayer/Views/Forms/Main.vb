@@ -1435,7 +1435,6 @@ Namespace PresentationLayer.Views.Forms
             cForm.Show()
         End Sub
 
-
         Private Sub QuarterlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles QuarterlyToolStripMenuItem2.Click
             Dim childMdiForm As BalanceSheet
             childMdiForm = New BalanceSheet("Q") With {

@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 AccountBalanceYear = Year(lastFiscalYearDate)
                 begDataDate = lastFiscalYearDate
             End If
-            Dim reportName = Messaging.TranslateCaption("Balance Sheet")
+            Dim reportName = Messaging.TranslateCaption("Trial Balance")
             Dim reportTitle As String
             Dim cForm
             Dim valid As Boolean = True
@@ -72,37 +72,31 @@ Namespace PresentationLayer.Views.Forms.Reports
             Close()
         End Sub
 
-        Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
-            RunTranslator(FormIdNo)
-        End Sub
-
-        Private Sub TrialBalance_BeforeLoad() Handles MyBase.BeforeLoad
+        Private Sub TrialBalance_Shown() Handles MyBase.Shown
             lblBegDateCaption.Visible = False
             dtpBeginningDate.Visible = False
             AdjustBeginningEndDates(_period, dtpBeginningDate.Value, dtpEndingDate.Value)
+            Dim title = Messaging.TranslateCaption("Trial Balance")
             Select Case _period
                 Case "Y"
-                    Text = "Trial Balance for the Year"
-                    lblEndDateCaption.Text = "Year End Date:"
+                    title = Messaging.TranslateCaption("Yearly") + " " + title
                 Case "M"
-                    Text = "Trial Balance for the Month"
-                    lblEndDateCaption.Text = "Month End Date:"
+                    title = Messaging.TranslateCaption("Monthly") + " " + title
                 Case "Q"
-                    Text = "Trial Balance for the Quarter"
-                    lblEndDateCaption.Text = "Quarterly End Date:"
+                    title = Messaging.TranslateCaption("Quarterly") + " " + title
                 Case "S"
-                    Text = "Trial Balance for the Semester"
-                    lblEndDateCaption.Text = "Semester End Date:"
+                    title = Messaging.TranslateCaption("Semestral") + " " + title
                 Case "C"
                     lblBegDateCaption.Visible = True
                     lblEndDateCaption.Visible = True
                     dtpEndingDate.Visible = True
                     dtpBeginningDate.Visible = True
-                    Text = "Trial Balance for Custom Period"
-                    lblBegDateCaption.Text = "Period Beginning Date:"
-                    lblEndDateCaption.Text = "Period End Date:"
             End Select
             lblTitle.Text = Text
+        End Sub
+
+        Private Sub btnTranslate_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
+            RunTranslator(FormIdNo)
         End Sub
 
     End Class
