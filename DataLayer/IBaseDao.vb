@@ -52,6 +52,8 @@
 
     Function GetRecords(tableName As String, sortKey As String, ParamArray fieldNames() As String) As Object
 
+    Function GetFields(tableName As String, sortKey As String, ParamArray fieldNames() As String) As Object
+
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
 
     Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType

@@ -55,6 +55,10 @@ Namespace PresentationLayer.Views.Forms
                 LoadEmployees(currentNode)
                 currentNode.ExpandAll()
             End If
+
+            If currentNode.Parent.Level > 1 Then
+
+            End If
         End Sub
 
         Private Sub LoadPayGroups(ByRef node As TreeNode)
@@ -69,20 +73,23 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub LoadEmployees(ByRef node As TreeNode)
             If node.Tag IsNot Nothing Then
-                Dim Data = PresenterObj.GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "PayGroupIdNo"})
-                Dim tlData As New List(Of ClassesLibrary.LookupData)
+                Dim Data = PresenterObj.GetFields("Employee", "EmployeeName", {"IdNo", "EmployeeName", "PayGroupIdNo"})
+                Dim lEmployeePayGroups As New List(Of EmployeePayGroups)
                 For i = 1 To Int(Data.Count / 3)
-                    Dim tData As New ClassesLibrary.LookupData With {
-                        .IdNo = Data(i * 3 - 3),
-                        .Name = Data(i * 3 - 2),
-                        .Code = Data(i * 3 - 1)
-                    }
-                    tlData.Add(tData)
+                    Dim tData As New EmployeePayGroups
+                    tData.IdNo = Data(i * 3 - 3)
+                    tData.Name = Data(i * 3 - 2)
+                    If Data(i * 3 - 1) Is DBNull.Value Then
+                        tData.PayGroupIdNo = 0
+                    Else
+                        tData.PayGroupIdNo = Data(i * 3 - 1)
+                    End If
+                    lEmployeePayGroups.Add(tData)
                 Next
-                For Each employee In Data
+                For Each employee In lEmployeePayGroups
                     If employee.PayGroupIdNo = node.Tag Then
                         node.Nodes.Add(New TreeNode With {.Text = employee.Name,
-                                                   .Tag = employee.idNo,
+                                                   .Tag = employee.IdNo,
                                                    .Name = employee.Name
                                                  }
                               )
@@ -90,6 +97,13 @@ Namespace PresentationLayer.Views.Forms
                 Next employee
             End If
         End Sub
+
+
+        Private Class EmployeePayGroups
+            Public IdNo As Int16
+            Public Name As String
+            Public PayGroupIdNo As Int16?
+        End Class
 
     End Class
 

@@ -234,6 +234,30 @@ Public Class Model
         Return tlData
     End Function
 
+    Public Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fields() As String) Implements IModel.GetFields
+        Dim data = DataService.GetFields(tableName, sortKey, fields)
+        'Dim tlData = New List(Of ClassesLibrary.LookupData)
+        'If fields.Count = 3 Then
+        '    For i = 1 To Int(data.Count / 3)
+        '        Dim tData As New ClassesLibrary.LookupData With {
+        '            .IdNo = If(data(i * 3 - 3).Equals(DBNull.Value), 0, CInt(data(i * 3 - 3))),
+        '            .Name = data(i * 3 - 2) & " | " & data(i * 3 - 3),
+        '            .Code = If(data(i * 3 - 1).Equals(DBNull.Value), "", data(i * 3 - 1))
+        '        }
+        '        tlData.Add(tData)
+        '    Next
+        'Else
+        '    For i = 1 To Int(data.Count / 2)
+        '        Dim tData As New ClassesLibrary.LookupData With {
+        '            .IdNo = If(data(i * 2 - 2).Equals(DBNull.Value), 0, CInt(data(i * 2 - 2))),
+        '            .Name = data(i * 2 - 1) & " | " & data(i * 2 - 2)
+        '        }
+        '        tlData.Add(tData)
+        '    Next
+        'End If
+        Return data
+    End Function
+
     Public Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IModel.GetRecordsWithIdNo
         Dim data = DataService.GetRecordsWithIdNo(Of TM)(idNo, sortKey)
         Return data

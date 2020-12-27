@@ -1,4 +1,5 @@
-﻿CREATE View ArOpenInvoice_View as
+﻿
+CREATE View [dbo].[ArOpenInvoice_View] as
 (SELECT      a.IdNo, 
 			a.JournalCode, 
 			a.JournalItemIdNo, 
@@ -18,7 +19,8 @@
 			c.AccountName, 
 			c.AccountNameAra, 
 			c.SpecialAccount, 
-			cs.CustomerCode
+			cs.CustomerCode,
+			d.DueDate
 FROM        dbo.ArOpenInvoice a
 			Left Join dbo.ArCollections_View co
 			on a.IdNo = co.IdNo

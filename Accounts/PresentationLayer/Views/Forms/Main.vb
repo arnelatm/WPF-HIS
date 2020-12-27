@@ -1453,13 +1453,15 @@ Namespace PresentationLayer.Views.Forms
 
 
         Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AgingOfAccountsPayableToolStripMenuItem.Click
-            Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Payable")
+            Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Payable as of ")
+            reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim cForm As New ReportFormNew("Aging of Accounts Payable.Rpt", reportTitle, CultureInfo.CurrentCulture)
             cForm.Show()
         End Sub
 
         Private Sub AccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsReceivableToolStripMenuItem.Click
             Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Receivable")
+            reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim cForm As New ReportFormNew("Aging of Accounts Receivable.Rpt", reportTitle, CultureInfo.CurrentCulture)
             cForm.Show()
         End Sub
