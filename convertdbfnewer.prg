@@ -1879,8 +1879,40 @@ Enddo
 
 Close All
 
-
-
+*************************************************
+* create Ar Open invoices for beginning balances*
+*************************************************
+Select 1
+Use c:\temp\ArOpnInv
+Go Top
+SELECT 2
+Use c:\temp\Customer.Dbf 
+Go Top
+nCtr = 0
+nAmount = 0
+Do While Not Eof()
+	nAmount = Customer.OpBalance
+	If nAmount <> 0 Then
+		Select ArOpnInv
+		nCtr = nCtr + 1
+		Append Blank
+		Replace ArOpnInv.IdNo With nCtr
+		Replace ArOpnInv.JournalCd With "BB"
+		Replace ArOpnInv.JourIdNo With Customer.IdNo
+		Replace ArOpnInv.JrItIdNo With Customer.IdNo
+		Replace ArOpnInv.CustIdNo With Customer.IdNo
+		Replace ArOpnInv.Date With Date(2016,12,31)
+		Replace ArOpnInv.Amount With Customer.OpBalance
+		Skip
+	Endif
+	Select Customer
+	Skip
+Enddo
+SELECT 1
+USE
+SELECT 2
+Use
+CLOSE All
 
 ***************************
 * create Ar Open invoices *
@@ -1896,7 +1928,6 @@ nCtr = ArOpnInv.IdNo
 Select 3
 Use c:\temp\ArJournal.Dbf  Exclusive Alias ArJournal
 Go Top
-nCtr = 0
 Do While Not Eof()
 	arjIdNo = ArJournal.IdNo
 	Select ArJourItm

@@ -34,7 +34,7 @@ Namespace PresentationLayer.Views.Forms
     Partial Public Class Main
         Implements IUserView
 
-        Private _formCurrentCulture As CultureInfo
+        'Private _formCurrentCulture As CultureInfo
         Private _logStatus As LoginStatus
         Public Shared AccountsMapper As IMapper
         Public Property MainTableName As String
@@ -113,24 +113,24 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Protected Property FormCultureInfo As CultureInfo
+        'Protected Property FormCultureInfo As CultureInfo
 
-        Protected Property FormCurrentCulture As CultureInfo
-            Get
-                Return _formCurrentCulture
-            End Get
-            Set(value As CultureInfo)
-                _formCurrentCulture = value
-                If value.TextInfo.IsRightToLeft Then
-                    RightToLeftLayout = True
-                    RightToLeft = RightToLeft.Yes
-                Else
-                    RightToLeftLayout = False
-                    RightToLeft = RightToLeft.No
-                End If
-                RaiseEvent FormCultureChanged()
-            End Set
-        End Property
+        'Protected Property FormCurrentCulture As CultureInfo
+        '    Get
+        '        Return _formCurrentCulture
+        '    End Get
+        '    Set(value As CultureInfo)
+        '        _formCurrentCulture = value
+        '        If value.TextInfo.IsRightToLeft Then
+        '            RightToLeftLayout = True
+        '            RightToLeft = RightToLeft.Yes
+        '        Else
+        '            RightToLeftLayout = False
+        '            RightToLeft = RightToLeft.No
+        '        End If
+        '        RaiseEvent FormCultureChanged()
+        '    End Set
+        'End Property
 
         ''' <summary>
         '''     Opens the about dialog window.
@@ -1449,6 +1449,19 @@ Namespace PresentationLayer.Views.Forms
                 .MdiParent = Me
                 }
             childMdiForm.Show()
+        End Sub
+
+
+        Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AgingOfAccountsPayableToolStripMenuItem.Click
+            Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Payable")
+            Dim cForm As New ReportFormNew("Aging of Accounts Payable.Rpt", reportTitle, CultureInfo.CurrentCulture)
+            cForm.Show()
+        End Sub
+
+        Private Sub AccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsReceivableToolStripMenuItem.Click
+            Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Receivable")
+            Dim cForm As New ReportFormNew("Aging of Accounts Receivable.Rpt", reportTitle, CultureInfo.CurrentCulture)
+            cForm.Show()
         End Sub
 
         'Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
