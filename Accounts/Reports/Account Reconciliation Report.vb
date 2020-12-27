@@ -27,7 +27,7 @@ Public Class Account_Reconciliation_Report
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "Account Reconciliation Report.rpt"
+            Return "Account Reconciliation.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class Account_Reconciliation_Report
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "AATM.Accounts.Account Reconciliation Report.rpt"
+            Return "AATM.Accounts.Account Reconciliation.rpt"
         End Get
         Set
             'Do nothing

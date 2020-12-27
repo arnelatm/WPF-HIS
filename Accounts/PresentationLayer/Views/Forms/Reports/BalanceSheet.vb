@@ -76,31 +76,25 @@ Namespace PresentationLayer.Views.Forms.Reports
             RunTranslator(FormIdNo)
         End Sub
 
-        Private Sub BalanceSheet_BeforeLoad() Handles MyBase.BeforeLoad
+        Private Sub BalanceSheet_Shown() Handles MyBase.Shown
             lblBegDateCaption.Visible = False
             dtpBeginningDate.Visible = False
             AdjustBeginningEndDates(_period, dtpBeginningDate.Value, dtpEndingDate.Value)
+            Dim title = Messaging.TranslateCaption("Balance Sheet")
             Select Case _period
                 Case "Y"
-                    Text = "Balance Sheet for the Year"
-                    lblEndDateCaption.Text = "Year End Date:"
+                    title = Messaging.TranslateCaption("Yearly") + " " + title
                 Case "M"
-                    Text = "Balance Sheet for the Month"
-                    lblEndDateCaption.Text = "Month End Date:"
+                    title = Messaging.TranslateCaption("Monthly") + " " + title
                 Case "Q"
-                    Text = "Balance Sheet for the Quarter"
-                    lblEndDateCaption.Text = "Quarterly End Date:"
+                    title = Messaging.TranslateCaption("Quarterly") + " " + title
                 Case "S"
-                    Text = "Balance Sheet for the Semester"
-                    lblEndDateCaption.Text = "Semester End Date:"
+                    title = Messaging.TranslateCaption("Semestral") + " " + title
                 Case "C"
                     lblBegDateCaption.Visible = True
                     lblEndDateCaption.Visible = True
                     dtpEndingDate.Visible = True
                     dtpBeginningDate.Visible = True
-                    Text = "Balance Sheet for Custom Period"
-                    lblEndDateCaption.Text = "Period Beginning Date:"
-                    lblEndDateCaption.Text = "Period End Date:"
             End Select
             lblTitle.Text = Text
         End Sub
