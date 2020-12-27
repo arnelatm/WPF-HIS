@@ -132,6 +132,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CashIncomePerDoctorServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.NumberOfCashPatientsPerDoctorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.TestToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.AccountsReceivableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.AgingOfAccountsPayableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemindex = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
@@ -558,7 +560,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemReports
             '
-            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.StatementOfEmployeeLoansToolStripMenuItem, Me.ToolStripMenuItemStateOfEmployeeLoans, Me.SummaryOfAccountsPayableToolStripMenuItem1, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatementForAGivenYear, Me.AccountActivityToolStripMenuItem, Me.IGroupReportsToolStripMenuItem})
+            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.StatementOfEmployeeLoansToolStripMenuItem, Me.ToolStripMenuItemStateOfEmployeeLoans, Me.SummaryOfAccountsPayableToolStripMenuItem1, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatementForAGivenYear, Me.AccountActivityToolStripMenuItem, Me.IGroupReportsToolStripMenuItem, Me.AccountsReceivableToolStripMenuItem, Me.AgingOfAccountsPayableToolStripMenuItem})
             Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
             resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
             '
@@ -705,6 +707,16 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.TestToolStripMenuItem1.Name = "TestToolStripMenuItem1"
             resources.ApplyResources(Me.TestToolStripMenuItem1, "TestToolStripMenuItem1")
+            '
+            'AccountsReceivableToolStripMenuItem
+            '
+            Me.AccountsReceivableToolStripMenuItem.Name = "AccountsReceivableToolStripMenuItem"
+            resources.ApplyResources(Me.AccountsReceivableToolStripMenuItem, "AccountsReceivableToolStripMenuItem")
+            '
+            'AgingOfAccountsPayableToolStripMenuItem
+            '
+            Me.AgingOfAccountsPayableToolStripMenuItem.Name = "AgingOfAccountsPayableToolStripMenuItem"
+            resources.ApplyResources(Me.AgingOfAccountsPayableToolStripMenuItem, "AgingOfAccountsPayableToolStripMenuItem")
             '
             'ToolStripMenuItemHelp
             '
@@ -996,5 +1008,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents TestToolStripMenuItem1 As ToolStripMenuItem
         Friend WithEvents QuarterlyToolStripMenuItem2 As ToolStripMenuItem
         Friend WithEvents SemestralToolStripMenuItem1 As ToolStripMenuItem
+        Friend WithEvents AccountsReceivableToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents AgingOfAccountsPayableToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace
