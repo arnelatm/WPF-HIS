@@ -119,7 +119,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnInitialize_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
-
+            Dim employeeIdNo As Int16
+            Dim 
         End Sub
 
     End Class

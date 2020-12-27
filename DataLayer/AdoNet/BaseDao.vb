@@ -313,6 +313,16 @@
             Return _db.SqlRead(sql)
         End Function
 
+
+        Public Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetFields
+            Dim fields = String.Join(",", fieldNames)
+            If Strings.Right(fields, 1) = "," Then
+                fields = Strings.Left(fields, Len(fields) - 1)
+            End If
+            Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
+            Return _db.SqlRead(sql)
+        End Function
+
         Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer _
                                                                                             Implements IBaseDao.GetSortedRecordPosition
             Dim sql As String =

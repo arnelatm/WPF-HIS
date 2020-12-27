@@ -356,6 +356,14 @@ Public Module GlobalFunctions
         Return value
     End Function
 
+    Public Function GregorianLongDate(ByVal dateToConvert As Date?, ByVal targetCulture As CultureInfo)
+        If Strings.Left(targetCulture.Name, 2) = "ar" Then
+            Return GregorianMonthNameArabic(GregorianMonth(dateToConvert)) + " " + GregorianDay(dateToConvert).ToString() + ", " + GregorianYear(dateToConvert).ToString()
+        Else
+            Return GregorianMonthName(GregorianMonth(dateToConvert)) + " " + GregorianDay(dateToConvert).ToString() + ", " + GregorianYear(dateToConvert).ToString()
+        End If
+    End Function
+
     '''<summary>
     '''Converts a Date to Gregorian Date given the year,month,and day.
     '''</summary>

@@ -390,11 +390,11 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo.TabIndex = 150
         Me.lblIdNo.Text = "ID No."
         Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'btnInitialize
-        '
-        Me.btnInitialize.DesignerSelected = false
-        Me.btnInitialize.DisplayOnly = true
+            '
+            'btnInitialize
+            '
+            Me.btnInitialize.DesignerSelected = True
+            Me.btnInitialize.DisplayOnly = true
         Me.btnInitialize.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnInitialize.ImageIndex = 0
         Me.btnInitialize.Location = New System.Drawing.Point(3, 131)

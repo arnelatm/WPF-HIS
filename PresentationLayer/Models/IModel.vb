@@ -63,6 +63,8 @@ Public Interface IModel
 
     Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
+    Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fields() As String)
+
     Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) As List(Of TM)
 
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
