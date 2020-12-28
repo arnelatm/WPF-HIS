@@ -1274,7 +1274,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDjOiItems.SequenceFieldName = "Sequence"
             Me.DataGridViewDjOiItems.ShowFooter = False
             Me.DataGridViewDjOiItems.ShowInsertColumnWhenEditing = False
-            Me.DataGridViewDjOiItems.Size = New System.Drawing.Size(954, 332)
+            Me.DataGridViewDjOiItems.Size = New System.Drawing.Size(661, 332)
             Me.DataGridViewDjOiItems.StartTrackingChanges = False
             Me.DataGridViewDjOiItems.TabIndex = 1
             Me.DataGridViewDjOiItems.Visible = False
@@ -1573,7 +1573,7 @@ Namespace PresentationLayer.Views.Forms
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-            Me.ClientSize = New System.Drawing.Size(1021, 618)
+            Me.ClientSize = New System.Drawing.Size(1680, 618)
             Me.Controls.Add(Me.tlpDisbursement)
             Me.MinimumSize = New System.Drawing.Size(945, 590)
             Me.Name = "DisbursementJournalEntry"
