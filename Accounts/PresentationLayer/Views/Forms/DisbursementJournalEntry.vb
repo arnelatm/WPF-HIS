@@ -792,6 +792,13 @@ Namespace PresentationLayer.Views.Forms
             UpdateOiTotals()
         End Sub
 
+        Private Sub DataGridViewJournalItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellContentClick
+
+        End Sub
+
+        Private Sub tlpDisbursement_Paint(sender As Object, e As PaintEventArgs) Handles tlpDisbursement.Paint
+
+        End Sub
     End Class
 
 End Namespace
