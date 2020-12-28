@@ -396,6 +396,8 @@
     <Build Include="dbo\Functions\FuncApSummary.sql" />
     <Build Include="dbo\Tables\PayrollEarning.sql" />
     <Build Include="dbo\Tables\PayrollDeduction.sql" />
+    <Build Include="dbo\Tables\Attendance.sql" />
+    <Build Include="dbo\Views\Attendance_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
