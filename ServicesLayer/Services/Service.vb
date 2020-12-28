@@ -245,10 +245,9 @@ Namespace Services
             Return BaseDao.GetRecords(tableName, sortKey, fields)
         End Function
 
-        Public Overloads Function GetFields(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetFields
-            Return BaseDao.GetFields(tableName, sortKey, fields)
-        End Function
-
+        'Public Overloads Function GetFields(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetFields
+        '    Return BaseDao.GetFields(tableName, sortKey, fields)
+        'End Function
 
         Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer Implements IService.GetSortedRecordPosition
             Return BaseDao.GetSortedRecordPosition(idNo, tableName, sortOrder)

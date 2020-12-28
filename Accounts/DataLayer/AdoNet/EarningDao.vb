@@ -8,7 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class EarningDao
-        Implements IDao(Of Earning)
+        Implements IDao(Of Earning), IDaoAll(Of Earning)
 
         Private ReadOnly _db As New Db()
 
@@ -117,6 +117,31 @@ Namespace DataLayer.AdoNet
                                     "@Unit", earning.Unit,
                                     "@UsePayGroups", earning.UsePayGroups
                                 }
+        End Function
+
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Earning) Implements IDaoAll(Of Earning).GetAll
+            Dim sql As String =
+                    "SELECT " &
+                    "AccountIdNo," &
+                    "BasePaymentIdNo," &
+                    "CalculationType," &
+                    "DefaultQuantity," &
+                    "EarningCode," &
+                    "EarningName," &
+                    "EarningNameAra," &
+                    "EarningType," &
+                    "IdNo," &
+                    "IncludeInEOS," &
+                    "IncludeInPension," &
+                    "Multiplier," &
+                    "MultiplierType," &
+                    "Notes," &
+                    "Rate," &
+                    "Taxable," &
+                    "Unit," &
+                    "UsePayGroups" &
+                    " FROM [Earning]"
+            Return _db.Read(sql, Make).ToList()
         End Function
 
     End Class

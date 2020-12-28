@@ -598,9 +598,9 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName})
+                Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName})
             Else
-                Return Model.GetRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField})
+                Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField})
             End If
         Else
             newSortOrderKey = "SortKey"

@@ -394,10 +394,10 @@ Namespace PresentationLayer.Views.Forms
             'btnInitialize
             '
             Me.btnInitialize.DesignerSelected = True
-            Me.btnInitialize.DisplayOnly = true
-        Me.btnInitialize.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnInitialize.ImageIndex = 0
-        Me.btnInitialize.Location = New System.Drawing.Point(3, 131)
+            Me.btnInitialize.DisplayOnly = True
+            Me.btnInitialize.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.btnInitialize.ImageIndex = 0
+            Me.btnInitialize.Location = New System.Drawing.Point(3, 131)
         Me.btnInitialize.Name = "btnInitialize"
         Me.btnInitialize.OriginalImageName = Nothing
         Me.btnInitialize.SecurityKey = ""

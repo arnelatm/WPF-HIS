@@ -128,13 +128,22 @@
             Return _db.Scalar(sql, params)
         End Function
 
-        Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetFilteredRecords
+        Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetFilteredRecords
             Dim fields = String.Join(",", fieldNames)
             Dim sql As String
             If filterKey Is Nothing Or filterKey = "" Then
-                sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fields & " from [" & tableName & "]"
+                Else
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
+                End If
             Else
-                sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
+                Else
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
+
+                End If
             End If
             Return _db.SqlRead(sql)
         End Function
@@ -304,24 +313,37 @@
             Return _db.Scalar(sql)
         End Function
 
-        Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetRecords
+        Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetRecords
             Dim fields = String.Join(",", fieldNames)
             If Strings.Right(fields, 1) = "," Then
                 fields = Strings.Left(fields, Len(fields) - 1)
             End If
-            Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
-            Return _db.SqlRead(sql)
-        End Function
-
-
-        Public Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetFields
-            Dim fields = String.Join(",", fieldNames)
-            If Strings.Right(fields, 1) = "," Then
-                fields = Strings.Left(fields, Len(fields) - 1)
+            Dim sql As String
+            If sortKey Is Nothing Or sortKey = "" Then
+                sql = " SELECT " & fields & " from [" & tableName & "]"
+            Else
+                sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
             End If
-            Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
             Return _db.SqlRead(sql)
         End Function
+
+        'Public Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetFields
+        '    Dim fields = String.Join(",", fieldNames)
+        '    If Strings.Right(fields, 1) = "," Then
+        '        fields = Strings.Left(fields, Len(fields) - 1)
+        '    End If
+        '    Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
+        '    Return _db.SqlRead(sql)
+        'End Function
+
+        'Public Function GetFieldsFiltered(tableName As String, sortKey As String, filter As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetFieldsFiltered
+        '    Dim fields = String.Join(",", fieldNames)
+        '    If Strings.Right(fields, 1) = "," Then
+        '        fields = Strings.Left(fields, Len(fields) - 1)
+        '    End If
+        '    Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey & " where " & filter
+        '    Return _db.SqlRead(sql)
+        'End Function
 
         Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer _
                                                                                             Implements IBaseDao.GetSortedRecordPosition
