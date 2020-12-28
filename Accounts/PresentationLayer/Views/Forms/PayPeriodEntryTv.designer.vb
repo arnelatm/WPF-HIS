@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPayPeriodCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPayPeriodCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CacPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnInitialize = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -143,7 +143,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Controls.Add(Me.lblEndDate, 2, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodCode, 3, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblPayPeriodCode, 2, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.CacPayCycleIdNo, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.cboPayCycleIdNo, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblPayCycleIdNo, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 1, 1)
@@ -203,211 +203,211 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpEndDate.Name = "dtpEndDate"
         Me.dtpEndDate.ReadOnlyDp = false
         Me.dtpEndDate.SecurityKey = Nothing
-        Me.dtpEndDate.ShowLongDate = false
-        Me.dtpEndDate.ShowTime = false
-        Me.dtpEndDate.Size = New System.Drawing.Size(107, 25)
-        Me.dtpEndDate.TabIndex = 6
-        Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"),System.Globalization.Calendar)
-        Me.dtpEndDate.Value = Nothing
-        Me.dtpEndDate.ValueIsMandatory = false
-        Me.dtpEndDate.ValueIsNullable = false
-        '
-        'lblStartDate
-        '
-        Me.lblStartDate.DisplayOnly = true
-        Me.lblStartDate.EditingMode = false
-        Me.lblStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblStartDate.Location = New System.Drawing.Point(1, 102)
-        Me.lblStartDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblStartDate.Name = "lblStartDate"
-        Me.lblStartDate.Size = New System.Drawing.Size(142, 23)
-        Me.lblStartDate.TabIndex = 157
-        Me.lblStartDate.Text = "Start Date"
-        Me.lblStartDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtPayPeriodNameAra
-        '
-        Me.txtPayPeriodNameAra.BackColor = System.Drawing.Color.White
-        Me.txtPayPeriodNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayPeriodNameAra, 3)
-        Me.txtPayPeriodNameAra.ComputedValue = false
-        Me.txtPayPeriodNameAra.CustomFormat = Nothing
-        Me.txtPayPeriodNameAra.DataBoundControl = true
-        Me.txtPayPeriodNameAra.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPayPeriodNameAra.EditingMode = false
-        Me.txtPayPeriodNameAra.EnglishControl = Me.txtPayPeriodName
-        Me.txtPayPeriodNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtPayPeriodNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtPayPeriodNameAra.LinkedLabel = Nothing
-        Me.txtPayPeriodNameAra.Location = New System.Drawing.Point(145, 77)
-        Me.txtPayPeriodNameAra.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtPayPeriodNameAra.MaximumValue = Nothing
-        Me.txtPayPeriodNameAra.MinimumValue = Nothing
-        Me.txtPayPeriodNameAra.Name = "txtPayPeriodNameAra"
-        Me.txtPayPeriodNameAra.OldValue = Nothing
-        Me.txtPayPeriodNameAra.ReadOnly = true
-        Me.txtPayPeriodNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.txtPayPeriodNameAra.Size = New System.Drawing.Size(432, 23)
-        Me.txtPayPeriodNameAra.TabIndex = 4
-        '
-        'lblPayPeriodNameAra
-        '
-        Me.lblPayPeriodNameAra.DisplayOnly = true
-        Me.lblPayPeriodNameAra.EditingMode = false
-        Me.lblPayPeriodNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPayPeriodNameAra.Location = New System.Drawing.Point(1, 77)
-        Me.lblPayPeriodNameAra.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblPayPeriodNameAra.Name = "lblPayPeriodNameAra"
-        Me.lblPayPeriodNameAra.Size = New System.Drawing.Size(142, 23)
-        Me.lblPayPeriodNameAra.TabIndex = 167
-        Me.lblPayPeriodNameAra.Text = "Name (Arabic)"
-        Me.lblPayPeriodNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblPayPeriodName
-        '
-        Me.lblPayPeriodName.DisplayOnly = true
-        Me.lblPayPeriodName.EditingMode = false
-        Me.lblPayPeriodName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPayPeriodName.Location = New System.Drawing.Point(1, 52)
-        Me.lblPayPeriodName.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblPayPeriodName.Name = "lblPayPeriodName"
-        Me.lblPayPeriodName.Size = New System.Drawing.Size(142, 23)
-        Me.lblPayPeriodName.TabIndex = 164
-        Me.lblPayPeriodName.Text = "Name"
-        Me.lblPayPeriodName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblEndDate
-        '
-        Me.lblEndDate.DisplayOnly = true
-        Me.lblEndDate.EditingMode = false
-        Me.lblEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblEndDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblEndDate.Location = New System.Drawing.Point(289, 102)
-        Me.lblEndDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblEndDate.Name = "lblEndDate"
-        Me.lblEndDate.Size = New System.Drawing.Size(142, 23)
-        Me.lblEndDate.TabIndex = 161
-        Me.lblEndDate.Text = "End Date"
-        Me.lblEndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtPayPeriodCode
-        '
-        Me.txtPayPeriodCode.BackColor = System.Drawing.Color.White
-        Me.txtPayPeriodCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPayPeriodCode.ComputedValue = false
-        Me.txtPayPeriodCode.CustomFormat = Nothing
-        Me.txtPayPeriodCode.DataBoundControl = true
-        Me.txtPayPeriodCode.EditingMode = false
-        Me.txtPayPeriodCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtPayPeriodCode.ForeColor = System.Drawing.Color.Black
-        Me.txtPayPeriodCode.LinkedLabel = Nothing
-        Me.txtPayPeriodCode.Location = New System.Drawing.Point(433, 27)
-        Me.txtPayPeriodCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtPayPeriodCode.MaximumValue = Nothing
-        Me.txtPayPeriodCode.MinimumValue = Nothing
-        Me.txtPayPeriodCode.Name = "txtPayPeriodCode"
-        Me.txtPayPeriodCode.OldValue = Nothing
-        Me.txtPayPeriodCode.ReadOnly = true
-        Me.txtPayPeriodCode.Size = New System.Drawing.Size(72, 23)
-        Me.txtPayPeriodCode.TabIndex = 2
-        Me.txtPayPeriodCode.ValueIsMandatory = true
-        '
-        'lblPayPeriodCode
-        '
-        Me.lblPayPeriodCode.DisplayOnly = true
-        Me.lblPayPeriodCode.EditingMode = false
-        Me.lblPayPeriodCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPayPeriodCode.Location = New System.Drawing.Point(289, 27)
-        Me.lblPayPeriodCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblPayPeriodCode.Name = "lblPayPeriodCode"
-        Me.lblPayPeriodCode.Size = New System.Drawing.Size(78, 23)
-        Me.lblPayPeriodCode.TabIndex = 168
-        Me.lblPayPeriodCode.Text = "Code"
-        Me.lblPayPeriodCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'CacPayCycleIdNo
-        '
-        Me.CacPayCycleIdNo.BackColor = System.Drawing.Color.White
-        Me.CacPayCycleIdNo.ChangingSearchValueOnly = false
-        Me.TableLayoutPanel1.SetColumnSpan(Me.CacPayCycleIdNo, 3)
-        Me.CacPayCycleIdNo.CurrentSearchTerm = ""
-        Me.CacPayCycleIdNo.DefaultValue = Nothing
-        Me.CacPayCycleIdNo.DisplayMember = "Name"
-        Me.CacPayCycleIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CacPayCycleIdNo.DropDownHeight = 200
-        Me.CacPayCycleIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CacPayCycleIdNo.EditingMode = true
-        Me.CacPayCycleIdNo.FilterRule = Nothing
-        Me.CacPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CacPayCycleIdNo.ForeColor = System.Drawing.Color.Black
-        Me.CacPayCycleIdNo.FormattingEnabled = true
-        Me.CacPayCycleIdNo.HideWhenNotEditingOrAdding = false
-        Me.CacPayCycleIdNo.LinkedLabel = Nothing
-        Me.CacPayCycleIdNo.Location = New System.Drawing.Point(145, 1)
-        Me.CacPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.CacPayCycleIdNo.Name = "CacPayCycleIdNo"
-        Me.CacPayCycleIdNo.OldValue = 0
-        Me.CacPayCycleIdNo.OriginalDataSource = Nothing
-        Me.CacPayCycleIdNo.OriginalList = Nothing
-        Me.CacPayCycleIdNo.OverrideDropDownStyleList = false
-        Me.CacPayCycleIdNo.PreviousSearchTerm = Nothing
-        Me.CacPayCycleIdNo.PreviousSelectedIndex = -1
-        Me.CacPayCycleIdNo.PropertySelector = Nothing
-        Me.CacPayCycleIdNo.ReadOnlyCombo = false
-        Me.CacPayCycleIdNo.SearchAnywhere = false
-        Me.CacPayCycleIdNo.Size = New System.Drawing.Size(432, 24)
-        Me.CacPayCycleIdNo.SuggestBoxHeight = 200
-        Me.CacPayCycleIdNo.SuggestListOrderRule = Nothing
-        Me.CacPayCycleIdNo.TabIndex = 1
-        Me.CacPayCycleIdNo.TextToSearch = Nothing
-        Me.CacPayCycleIdNo.ValueIsMandatory = false
-        Me.CacPayCycleIdNo.ValueIsNullable = false
-        Me.CacPayCycleIdNo.ValueIsNumeric = false
-        Me.CacPayCycleIdNo.ValueMember = "IdNo"
-        '
-        'lblPayCycleIdNo
-        '
-        Me.lblPayCycleIdNo.DisplayOnly = true
-        Me.lblPayCycleIdNo.EditingMode = false
-        Me.lblPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPayCycleIdNo.Location = New System.Drawing.Point(1, 1)
-        Me.lblPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblPayCycleIdNo.Name = "lblPayCycleIdNo"
-        Me.lblPayCycleIdNo.Size = New System.Drawing.Size(142, 23)
-        Me.lblPayCycleIdNo.TabIndex = 156
-        Me.lblPayCycleIdNo.Text = "Pay Cycle "
-        Me.lblPayCycleIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblIdNo
-        '
-        Me.lblIdNo.DisplayOnly = true
-        Me.lblIdNo.EditingMode = false
-        Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblIdNo.Location = New System.Drawing.Point(1, 27)
-        Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblIdNo.Name = "lblIdNo"
-        Me.lblIdNo.Size = New System.Drawing.Size(142, 23)
-        Me.lblIdNo.TabIndex = 150
-        Me.lblIdNo.Text = "ID No."
-        Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.dtpEndDate.ShowLongDate = False
+            Me.dtpEndDate.ShowTime = False
+            Me.dtpEndDate.Size = New System.Drawing.Size(114, 25)
+            Me.dtpEndDate.TabIndex = 6
+            Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpEndDate.Value = Nothing
+            Me.dtpEndDate.ValueIsMandatory = False
+            Me.dtpEndDate.ValueIsNullable = False
+            '
+            'lblStartDate
+            '
+            Me.lblStartDate.DisplayOnly = True
+            Me.lblStartDate.EditingMode = False
+            Me.lblStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblStartDate.Location = New System.Drawing.Point(1, 102)
+            Me.lblStartDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblStartDate.Name = "lblStartDate"
+            Me.lblStartDate.Size = New System.Drawing.Size(142, 23)
+            Me.lblStartDate.TabIndex = 157
+            Me.lblStartDate.Text = "Start Date"
+            Me.lblStartDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtPayPeriodNameAra
+            '
+            Me.txtPayPeriodNameAra.BackColor = System.Drawing.Color.White
+            Me.txtPayPeriodNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayPeriodNameAra, 3)
+            Me.txtPayPeriodNameAra.ComputedValue = False
+            Me.txtPayPeriodNameAra.CustomFormat = Nothing
+            Me.txtPayPeriodNameAra.DataBoundControl = True
+            Me.txtPayPeriodNameAra.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtPayPeriodNameAra.EditingMode = False
+            Me.txtPayPeriodNameAra.EnglishControl = Me.txtPayPeriodName
+            Me.txtPayPeriodNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPayPeriodNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtPayPeriodNameAra.LinkedLabel = Nothing
+            Me.txtPayPeriodNameAra.Location = New System.Drawing.Point(145, 77)
+            Me.txtPayPeriodNameAra.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPayPeriodNameAra.MaximumValue = Nothing
+            Me.txtPayPeriodNameAra.MinimumValue = Nothing
+            Me.txtPayPeriodNameAra.Name = "txtPayPeriodNameAra"
+            Me.txtPayPeriodNameAra.OldValue = Nothing
+            Me.txtPayPeriodNameAra.ReadOnly = True
+            Me.txtPayPeriodNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtPayPeriodNameAra.Size = New System.Drawing.Size(432, 23)
+            Me.txtPayPeriodNameAra.TabIndex = 4
+            '
+            'lblPayPeriodNameAra
+            '
+            Me.lblPayPeriodNameAra.DisplayOnly = True
+            Me.lblPayPeriodNameAra.EditingMode = False
+            Me.lblPayPeriodNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayPeriodNameAra.Location = New System.Drawing.Point(1, 77)
+            Me.lblPayPeriodNameAra.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayPeriodNameAra.Name = "lblPayPeriodNameAra"
+            Me.lblPayPeriodNameAra.Size = New System.Drawing.Size(142, 23)
+            Me.lblPayPeriodNameAra.TabIndex = 167
+            Me.lblPayPeriodNameAra.Text = "Name (Arabic)"
+            Me.lblPayPeriodNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'lblPayPeriodName
+            '
+            Me.lblPayPeriodName.DisplayOnly = True
+            Me.lblPayPeriodName.EditingMode = False
+            Me.lblPayPeriodName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayPeriodName.Location = New System.Drawing.Point(1, 52)
+            Me.lblPayPeriodName.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayPeriodName.Name = "lblPayPeriodName"
+            Me.lblPayPeriodName.Size = New System.Drawing.Size(142, 23)
+            Me.lblPayPeriodName.TabIndex = 164
+            Me.lblPayPeriodName.Text = "Name"
+            Me.lblPayPeriodName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'lblEndDate
+            '
+            Me.lblEndDate.DisplayOnly = True
+            Me.lblEndDate.EditingMode = False
+            Me.lblEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblEndDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblEndDate.Location = New System.Drawing.Point(289, 102)
+            Me.lblEndDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblEndDate.Name = "lblEndDate"
+            Me.lblEndDate.Size = New System.Drawing.Size(142, 23)
+            Me.lblEndDate.TabIndex = 161
+            Me.lblEndDate.Text = "End Date"
+            Me.lblEndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtPayPeriodCode
+            '
+            Me.txtPayPeriodCode.BackColor = System.Drawing.Color.White
+            Me.txtPayPeriodCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPayPeriodCode.ComputedValue = False
+            Me.txtPayPeriodCode.CustomFormat = Nothing
+            Me.txtPayPeriodCode.DataBoundControl = True
+            Me.txtPayPeriodCode.EditingMode = False
+            Me.txtPayPeriodCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPayPeriodCode.ForeColor = System.Drawing.Color.Black
+            Me.txtPayPeriodCode.LinkedLabel = Nothing
+            Me.txtPayPeriodCode.Location = New System.Drawing.Point(433, 27)
+            Me.txtPayPeriodCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPayPeriodCode.MaximumValue = Nothing
+            Me.txtPayPeriodCode.MinimumValue = Nothing
+            Me.txtPayPeriodCode.Name = "txtPayPeriodCode"
+            Me.txtPayPeriodCode.OldValue = Nothing
+            Me.txtPayPeriodCode.ReadOnly = True
+            Me.txtPayPeriodCode.Size = New System.Drawing.Size(72, 23)
+            Me.txtPayPeriodCode.TabIndex = 2
+            Me.txtPayPeriodCode.ValueIsMandatory = True
+            '
+            'lblPayPeriodCode
+            '
+            Me.lblPayPeriodCode.DisplayOnly = True
+            Me.lblPayPeriodCode.EditingMode = False
+            Me.lblPayPeriodCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayPeriodCode.Location = New System.Drawing.Point(289, 27)
+            Me.lblPayPeriodCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayPeriodCode.Name = "lblPayPeriodCode"
+            Me.lblPayPeriodCode.Size = New System.Drawing.Size(78, 23)
+            Me.lblPayPeriodCode.TabIndex = 168
+            Me.lblPayPeriodCode.Text = "Code"
+            Me.lblPayPeriodCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'cboPayCycleIdNo
+            '
+            Me.cboPayCycleIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPayCycleIdNo.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboPayCycleIdNo, 3)
+            Me.cboPayCycleIdNo.CurrentSearchTerm = ""
+            Me.cboPayCycleIdNo.DefaultValue = Nothing
+            Me.cboPayCycleIdNo.DisplayMember = "Name"
+            Me.cboPayCycleIdNo.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboPayCycleIdNo.DropDownHeight = 200
+            Me.cboPayCycleIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboPayCycleIdNo.EditingMode = True
+            Me.cboPayCycleIdNo.FilterRule = Nothing
+            Me.cboPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPayCycleIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboPayCycleIdNo.FormattingEnabled = True
+            Me.cboPayCycleIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPayCycleIdNo.LinkedLabel = Nothing
+            Me.cboPayCycleIdNo.Location = New System.Drawing.Point(145, 1)
+            Me.cboPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboPayCycleIdNo.Name = "cboPayCycleIdNo"
+            Me.cboPayCycleIdNo.OldValue = 0
+            Me.cboPayCycleIdNo.OriginalDataSource = Nothing
+            Me.cboPayCycleIdNo.OriginalList = Nothing
+            Me.cboPayCycleIdNo.OverrideDropDownStyleList = False
+            Me.cboPayCycleIdNo.PreviousSearchTerm = Nothing
+            Me.cboPayCycleIdNo.PreviousSelectedIndex = -1
+            Me.cboPayCycleIdNo.PropertySelector = Nothing
+            Me.cboPayCycleIdNo.ReadOnlyCombo = False
+            Me.cboPayCycleIdNo.SearchAnywhere = False
+            Me.cboPayCycleIdNo.Size = New System.Drawing.Size(432, 24)
+            Me.cboPayCycleIdNo.SuggestBoxHeight = 200
+            Me.cboPayCycleIdNo.SuggestListOrderRule = Nothing
+            Me.cboPayCycleIdNo.TabIndex = 1
+            Me.cboPayCycleIdNo.TextToSearch = Nothing
+            Me.cboPayCycleIdNo.ValueIsMandatory = False
+            Me.cboPayCycleIdNo.ValueIsNullable = False
+            Me.cboPayCycleIdNo.ValueIsNumeric = False
+            Me.cboPayCycleIdNo.ValueMember = "IdNo"
+            '
+            'lblPayCycleIdNo
+            '
+            Me.lblPayCycleIdNo.DisplayOnly = True
+            Me.lblPayCycleIdNo.EditingMode = False
+            Me.lblPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayCycleIdNo.Location = New System.Drawing.Point(1, 1)
+            Me.lblPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayCycleIdNo.Name = "lblPayCycleIdNo"
+            Me.lblPayCycleIdNo.Size = New System.Drawing.Size(142, 23)
+            Me.lblPayCycleIdNo.TabIndex = 156
+            Me.lblPayCycleIdNo.Text = "Pay Cycle "
+            Me.lblPayCycleIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'lblIdNo
+            '
+            Me.lblIdNo.DisplayOnly = True
+            Me.lblIdNo.EditingMode = False
+            Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblIdNo.Location = New System.Drawing.Point(1, 27)
+            Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Size = New System.Drawing.Size(142, 23)
+            Me.lblIdNo.TabIndex = 150
+            Me.lblIdNo.Text = "ID No."
+            Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'btnInitialize
             '
-            Me.btnInitialize.DesignerSelected = True
+            Me.btnInitialize.DesignerSelected = False
             Me.btnInitialize.DisplayOnly = True
             Me.btnInitialize.Dock = System.Windows.Forms.DockStyle.Fill
             Me.btnInitialize.ImageIndex = 0
             Me.btnInitialize.Location = New System.Drawing.Point(3, 131)
-        Me.btnInitialize.Name = "btnInitialize"
-        Me.btnInitialize.OriginalImageName = Nothing
-        Me.btnInitialize.SecurityKey = ""
-        Me.btnInitialize.Size = New System.Drawing.Size(138, 48)
-        Me.btnInitialize.TabIndex = 169
-        Me.btnInitialize.Text = "Initialize Payroll"
-        '
-        'CButton2
-        '
-        Me.CButton2.DesignerSelected = false
+            Me.btnInitialize.Name = "btnInitialize"
+            Me.btnInitialize.OriginalImageName = Nothing
+            Me.btnInitialize.SecurityKey = ""
+            Me.btnInitialize.Size = New System.Drawing.Size(138, 48)
+            Me.btnInitialize.TabIndex = 169
+            Me.btnInitialize.Text = "Initialize Payroll"
+            '
+            'CButton2
+            '
+            Me.CButton2.DesignerSelected = false
         Me.CButton2.DisplayOnly = true
         Me.CButton2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CButton2.ImageIndex = 0
@@ -461,7 +461,7 @@ End Sub
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents lblPayPeriodName As CLabel
-        Friend WithEvents CacPayCycleIdNo As CaComboBox
+        Friend WithEvents cboPayCycleIdNo As CaComboBox
         Friend WithEvents dtpStartDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents dtpEndDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblPayPeriodNameAra As CLabel

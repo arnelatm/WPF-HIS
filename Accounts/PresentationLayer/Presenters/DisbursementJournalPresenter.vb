@@ -808,7 +808,8 @@ Namespace PresentationLayer.Presenters
             ElseIf TableName = "CdJournal" Then
                 ReportName = "Cash Disbursement Journal.Rpt"
             Else
-                ReportName = "Check Disbursement Journal.Rpt"
+                'ReportName = "Check Disbursement Journal.Rpt"
+                ReportName = "Check Printing.Rpt"
             End If
             Dim cForm As New ReportForm(ReportName, _presenterView.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
             cForm.Show()

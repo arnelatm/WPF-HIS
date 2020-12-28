@@ -173,6 +173,7 @@
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\DjOiItem.vb" />
     <Compile Include="BusinessLayer\DisbursementJournal.vb" />
+    <Compile Include="BusinessLayer\Attendance.vb" />
     <Compile Include="BusinessLayer\Payroll.vb" />
     <Compile Include="BusinessLayer\PayrollDeductAccount.vb" />
     <Compile Include="BusinessLayer\PayrollDetails.vb" />
@@ -292,6 +293,7 @@
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
     <Compile Include="PresentationLayer\Models\DisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\DjOiItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\AttendanceModel.vb" />
     <Compile Include="PresentationLayer\Models\OpInvItemModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePhoneModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductAccountModel.vb" />
@@ -305,6 +307,7 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\AttendancePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDeductAccountPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionRatePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayPeriodPresenter.vb" />
@@ -326,6 +329,12 @@
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\AttendanceEntry.designer.vb">
+      <DependentUpon>AttendanceEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\AttendanceEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay.designer.vb">
@@ -694,6 +703,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IAttendanceView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePhoneView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductAccountsView.vb" />
@@ -941,6 +951,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.resx">
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\AttendanceEntry.resx">
+      <DependentUpon>AttendanceEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
@@ -1209,9 +1223,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
-    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\Application.myapp">
@@ -1219,6 +1233,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Forms.EmployeeEntryTv.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.AttendanceModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CadOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CashReceiptJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CsrOiItemModel.datasource" />
