@@ -39,8 +39,8 @@ Public Class CFormEntryNew
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = True
-        Ea = PresenterObj.Ea
-        Ea.SubscribeEvent(Me)
+        'Ea = PresenterObj.Ea
+        'Ea.SubscribeEvent(Me)
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -96,7 +96,7 @@ Public Class CFormEntryNew
         Return FieldsDictionary
     End Function
 
-    Public Sub gotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+    Public Sub GotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         If GotoTargetRecordWorker.CancellationPending Then
             e.Cancel = True
             Return
@@ -208,7 +208,7 @@ Public Class CFormEntryNew
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Public Sub showWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+    Public Sub ShowWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
         'Dim progress As Int32 = 0
         'Dim IdNoTarget as Int32 = 0
         'waitMessageSetter.RunWorkerAsync(e.Argument)
@@ -294,42 +294,54 @@ Public Class CFormEntryNew
                     If thisControl.ValueIsNumeric Then
                         If Not ValidateNumber(cCtrl) Then
                             validationsPassed = False
-                        Else
-                            validationsPassed = True
                         End If
-                    ElseIf GetPropertyValue(cCtrl, "ValueIsUnique") Then
-                        Dim fldName As String = cCtrl.Name.Substring(3)
-                        Dim fieldDescription As String
-                        If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-                            fieldDescription = fldName
-                        Else
-                            Dim cTextCtrl As CTextBox
-                            cTextCtrl = cCtrl
-                            fieldDescription = GetPropertyValue(cTextCtrl.LinkedLabel, "Text")
-                        End If
-                        Dim recordIsNotUnique = False
-                        If PresenterObj.AddMode Then
-                            If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
-                                recordIsNotUnique = True
-                            End If
-                        Else
-                            originalValue = PresenterObj.GetOriginalValue(cCtrl)
-                            ' if value did not change no need to check for duplicate values.
-                            If cCtrl.Text <> originalValue Then
-                                If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
-                                    recordIsNotUnique = True
-                                End If
-                            End If
-                        End If
-                        If recordIsNotUnique Then
-                            _MBUniqueConstraintViolated.Show(Me, {cCtrl.Text, fieldDescription})
-                            validationsPassed = False
+                    End If
+                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
+                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+                    End If
+                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
+                        If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
+                            validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
                         End If
                     End If
                 End If
             End If
         Next
         PresenterObj.AutoValidationsPassed = validationsPassed
+        Return validationsPassed
+    End Function
+
+    Private Function ValueIsUnique(cCtrl As Control, validationsPassed As Boolean) As Boolean
+        Dim originalValue As String
+
+        Dim fldName As String = cCtrl.Name.Substring(3)
+        Dim fieldDescription As String
+        If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
+            fieldDescription = fldName
+        Else
+            Dim cTextCtrl As CTextBox
+            cTextCtrl = cCtrl
+            fieldDescription = GetPropertyValue(cTextCtrl.LinkedLabel, "Text")
+        End If
+        Dim recordIsNotUnique = False
+        If PresenterObj.AddMode Then
+            If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
+                recordIsNotUnique = True
+            End If
+        Else
+            originalValue = PresenterObj.GetOriginalValue(cCtrl)
+            ' if value did not change no need to check for duplicate values.
+            If cCtrl.Text <> originalValue Then
+                If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
+                    recordIsNotUnique = True
+                End If
+            End If
+        End If
+        If recordIsNotUnique Then
+            Messaging.ShowParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldName", cCtrl.Text, "fieldDescription", fieldDescription})
+            validationsPassed = False
+            Return validationsPassed
+        End If
         Return validationsPassed
     End Function
 
@@ -344,16 +356,17 @@ Public Class CFormEntryNew
             Dim x As Type = y.PropertyType
             Dim u As Type = Nullable.GetUnderlyingType(x)
             If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
-                If u IsNot Nothing Then
-                    Return True
-                Else
-                    If Type.GetTypeCode(x) = TypeCode.String Then
-                        Return True
-                    Else
-                        MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
-                        Return False
-                    End If
-                End If
+                Return True
+                'If u IsNot Nothing Then
+                '    Return True
+                'Else
+                '    If Type.GetTypeCode(x) = TypeCode.String Then
+                '        Return True
+                '    Else
+                '        MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
+                '        Return True
+                '    End If
+                'End If
             Else
                 Dim num As Double
                 Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
@@ -476,7 +489,7 @@ Public Class CFormEntryNew
         Debugger.Break()
     End Sub
 
-    Protected Overridable Sub OnTextDisplayLanguageChanged() Handles MyBase.TextDisplayLanguageChanged
+    Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
         CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             GlobalVariables.RightToLeftLayout = True
@@ -510,7 +523,6 @@ Public Class CFormEntryNew
             btnSave.Enabled = False
             btnFind.Enabled = False
             btnPrint.Enabled = False
-            'PresenterObj.RecordPositionNumber = 0
             If Not PresenterObj.AddMode Then
                 btnUndo.Enabled = False
                 btnSave.Enabled = False
@@ -706,6 +718,7 @@ Public Class CFormEntryNew
                 ' Visible property stored in first element of the array
                 HideButton(btnDebug)
             End If
+            UpdateButtonDisplays(False, False)
         End If
     End Sub
 
@@ -794,12 +807,12 @@ Public Class CFormEntryNew
                 SetPropertyValue(ctrl, "EditingMode", onOff)
             End If
         Next
-        FirstControl.Focus()
         If onOff Then
             InputsTurnedOn()
         Else
             InputsTurnedOff()
         End If
+        FirstControl.Focus()
     End Sub
 
     Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
@@ -973,6 +986,11 @@ Public Class CFormEntryNew
         Return False
     End Function
 
+    Public Shared Sub EnableDoubleBuff(ByVal cont As System.Windows.Forms.Control)
+        Dim DemoProp As System.Reflection.PropertyInfo = GetType(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Instance)
+        DemoProp.SetValue(cont, True, Nothing)
+    End Sub
+
     '#Region "Temporary Events"
 
     '    Public Event InputsTurnedOff()
@@ -980,4 +998,5 @@ Public Class CFormEntryNew
     '    Public Event InputsTurnedOn()
 
     '#End Region
+
 End Class

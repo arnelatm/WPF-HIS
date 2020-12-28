@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CacPayCycleIdNo.DataSource = PresenterObj.GetLookup("PayCycle")
+            cboPayCycleIdNo.DataSource = PresenterObj.GetLookup("PayCycle")
         End Sub
 
 #Region "Fields"
@@ -42,10 +42,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayCycleIdNo As Int16 Implements IPayPeriodView.PayCycleIdNo
             Get
-                Return CacPayCycleIdNo.GetValue()
+                Return cboPayCycleIdNo.GetValue()
             End Get
             Set
-                CacPayCycleIdNo.SetValue(Value)
+                cboPayCycleIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -103,11 +103,11 @@ Namespace PresentationLayer.Views.Forms
                 {"EndDate", dtpEndDate},
                 {"Description", txtPayPeriodName},
                 {"IdNo", TxtIdNo},
-                {"PayCycleIdNo", CacPayCycleIdNo}
+                {"PayCycleIdNo", cboPayCycleIdNo}
                 }
         End Sub
 
-        Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CacPayCycleIdNo.SelectedIndexChanged
+        Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayCycleIdNo.SelectedIndexChanged
             If PresenterObj.AddMode Then
                 Dim payFrequency As PayFrequencySelection
                 Dim payCycleDaoObject As New PayCycleDao
@@ -121,7 +121,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnInitialize_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
-            Dim activeEmployees = PresenterObj.GetFilteredRecords("Employee", "EmployeeName", "Active=1", {"IdNo"})
+            Dim payFrequency = PresenterObj.GetFieldWithIdNo(cboPayCycleIdNo.SelectedValue, "PayCycle", "PayFrequency")
+            Dim employeeFilter = "Active = 1 and EarningType = 'R' and PayCycleIdNo = " & cboPayCycleIdNo.SelectedValue.ToString()
+            Dim activeEmployees = PresenterObj.GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo"})
             Dim earningDao = New EarningDao
             Dim earnings = earningDao.GetAll()
             For Each emp In activeEmployees
