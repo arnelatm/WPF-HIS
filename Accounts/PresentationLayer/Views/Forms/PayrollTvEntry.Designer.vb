@@ -59,17 +59,17 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel2.SuspendLayout
         Me.CTabControl1.SuspendLayout
         Me.SuspendLayout
-        '
-        'trvTreeView
-        '
-        Me.trvTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-        '
-        'trvPayroll
-        '
-        Me.trvPayroll.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.trvPayroll.LineColor = System.Drawing.Color.Empty
-        Me.trvPayroll.Location = New System.Drawing.Point(0, 0)
-        Me.trvPayroll.Name = "trvPayroll"
+            '
+            'trvTreeView
+            '
+            Me.trvTreeView.LineColor = System.Drawing.Color.Black
+            Me.trvTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
+            '
+            'trvPayroll
+            '
+            Me.trvPayroll.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.trvPayroll.Location = New System.Drawing.Point(0, 0)
+            Me.trvPayroll.Name = "trvPayroll"
         TreeNode1.Name = "Nodes()"
         TreeNode1.Text = "Payroll"
         Me.trvPayroll.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
