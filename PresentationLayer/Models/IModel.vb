@@ -33,7 +33,9 @@ Public Interface IModel
 
     Function GetFilteredLookupByNameCode(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
-    Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+    Function GetFilteredLookupRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+
+    Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As Object
 
     Function GetHRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.HLookupData)
 
@@ -41,7 +43,7 @@ Public Interface IModel
 
     Function GetLastSortKey(searchValue As String, tableName As String) As String
 
-    Function GetLookup(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+    Function GetLookup(tableName As String, sortKey As String, ByVal ParamArray fields() As String)
 
     Function GetLookupNew(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
@@ -61,7 +63,9 @@ Public Interface IModel
 
     Function GetRecordPosition(tableName As String, dno As Integer) As Integer
 
-    Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+    Function GetLookupRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object
+
+    Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object
 
     Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fields() As String)
 

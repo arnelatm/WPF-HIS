@@ -1,4 +1,6 @@
-﻿Imports AATM.Accounts.DataLayer.AdoNet
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -119,9 +121,50 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnInitialize_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
-            Dim employeeIdNo As Int16
-            Dim 
+            Dim activeEmployees = PresenterObj.GetFilteredRecords("Employee", "EmployeeName", "Active=1", {"IdNo"})
+            Dim earningDao = New EarningDao
+            Dim earnings = earningDao.GetAll()
+            For Each emp In activeEmployees
+                Dim phoneDao = New EmployeePhoneDao
+                'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(emp, "sequence")
+                Dim filter As String
+                filter = "EmployeeIdNo = " & emp.ToString()
+                Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
+                For Each employeeEarning In employeeEarnings
+
+                Next
+            Next
+            'For i = 1 To Int(Data.Count / 3)
+            '    Dim tData As New ActiveEmployee
+            '    tData.IdNo = Data(i * 3 - 3)
+            '    If Data(i * 3 - 1) Is DBNull.Value Then
+            '        tData.PayGroupIdNo = 0
+            '    Else
+            '        tData.PayGroupIdNo = Data(i * 3 - 1)
+            '    End If
+            '    lEmployeePayGroups.Add(tData)
+            'Next
+            'For Each employee In lEmployeePayGroups
+            '    If employee.PayGroupIdNo = node.Tag Then
+            '        node.Nodes.Add(New TreeNode With {.Text = employee.Name,
+            '                                   .Tag = employee.IdNo,
+            '                                   .Name = employee.Name
+            '                                 }
+            '              )
+            '    End If
+            'Next employee
         End Sub
+
+        Private Class ActiveEmployee
+            Public IdNo As Int16
+        End Class
+
+        Private Class ActiveEmployees
+            Public EmployeeIdNo As Int16
+            Public EmployeeName As String
+            Public EmployeeNameAra As String
+            Public Active As Boolean
+        End Class
 
     End Class
 

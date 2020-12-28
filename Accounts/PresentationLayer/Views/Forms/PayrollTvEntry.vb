@@ -73,7 +73,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub LoadEmployees(ByRef node As TreeNode)
             If node.Tag IsNot Nothing Then
-                Dim Data = PresenterObj.GetFields("Employee", "EmployeeName", {"IdNo", "EmployeeName", "PayGroupIdNo"})
+                Dim Data = PresenterObj.GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "PayGroupIdNo"})
                 Dim lEmployeePayGroups As New List(Of EmployeePayGroups)
                 For i = 1 To Int(Data.Count / 3)
                     Dim tData As New EmployeePayGroups
@@ -97,7 +97,6 @@ Namespace PresentationLayer.Views.Forms
                 Next employee
             End If
         End Sub
-
 
         Private Class EmployeePayGroups
             Public IdNo As Int16

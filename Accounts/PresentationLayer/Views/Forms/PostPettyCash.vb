@@ -18,9 +18,6 @@ Namespace PresentationLayer.Views.Forms
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("BA,CS,CK")
             cboStartIdNo.DataSource = PresenterObj.GetLookupData("ReferenceNo", "ReferenceNo", "TransactionDate", "PcJournal", "ReferenceNo", "Posted=0")
             cboEndIdNo.DataSource = PresenterObj.GetLookupData("ReferenceNo", "ReferenceNo", "TransactionDate", "PcJournal", "ReferenceNo", "Posted=0")
-            'cboStartIdNo.DataSource = PresenterObj.GetRecords("PcJournal", "ReferenceNo", "TransactionDate")
-            'cboEndIdNo.DataSource = PresenterObj.GetRecords("PcJournal", "ReferenceNo", "TransactionDate")
-            ' Add any initialization after the InitializeComponent() call.
 
         End Sub
 
