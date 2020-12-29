@@ -94,6 +94,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PayPeriodAttendance As List(Of Attendance) Implements IPayPeriodView.PayPeriodAttendance
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As List(Of Attendance))
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateFieldsDictionary()

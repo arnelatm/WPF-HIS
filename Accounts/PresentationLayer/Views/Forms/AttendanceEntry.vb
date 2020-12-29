@@ -105,6 +105,24 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PayPeriodIdNo As Short Implements IAttendanceView.PayPeriodIdNo
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Short)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property Sequence As Short Implements IAttendanceView.Sequence
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Short)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateFieldsDictionary()

@@ -43,6 +43,15 @@ Namespace PresentationLayer.Views.Forms
         Public Property PayPeriodNameAra As String Implements IPayPeriodView.PayPeriodNameAra
         Public Property StartDate As Date Implements IPayPeriodView.StartDate
 
+        Public Property PayPeriodAttendance As List(Of BusinessLayer.Attendance) Implements IPayPeriodView.PayPeriodAttendance
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As List(Of BusinessLayer.Attendance))
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 #End Region
 
         Protected Sub PayrollTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles trvTreeView.AfterSelect

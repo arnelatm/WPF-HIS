@@ -747,6 +747,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPensionProviderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISupplierView.vb" />
+    <Compile Include="PresentationLayer\Views\AttendanceView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollDeductAccountView.vb" />
     <Compile Include="PresentationLayer\Views\PensionRateView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollEarnAccountView.vb" />
@@ -1224,9 +1225,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
-    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\Application.myapp">
