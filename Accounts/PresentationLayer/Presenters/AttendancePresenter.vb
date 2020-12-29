@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IAttendanceView)
             MyBase.New(view)
 
-            InitializerWithTv("Attendance")
+            Initializer("PayPeriod")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 

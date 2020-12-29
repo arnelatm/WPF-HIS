@@ -29,7 +29,11 @@ Namespace PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AttendanceEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
             Me.dtpStartDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
@@ -55,6 +59,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDaysAbsentWithPay = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvDaysAbsentWithoutPay = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvDaysOff = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.TotalDays = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -308,17 +313,17 @@ Namespace PresentationLayer.Views.Forms
             Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.CDataGridView1.AutoGenerateColumns = False
             Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.CDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvEmployeeName, Me.dgvEmployeeNameAra, Me.dgvDaysPresent, Me.dgvDaysAbsentWithPay, Me.dgvDaysAbsentWithoutPay, Me.dgvDaysOff, Me.IdNoDataGridViewTextBoxColumn})
+            Me.CDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvEmployeeName, Me.dgvEmployeeNameAra, Me.dgvDaysPresent, Me.dgvDaysAbsentWithPay, Me.dgvDaysAbsentWithoutPay, Me.dgvDaysOff, Me.TotalDays, Me.IdNoDataGridViewTextBoxColumn})
             Me.CDataGridView1.DataInGridChanged = False
             Me.CDataGridView1.DataSource = Me.AttendanceModelBindingSource
-            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle6
             Me.CDataGridView1.DgvFooter = Nothing
             Me.CDataGridView1.DisplayOnly = False
             Me.CDataGridView1.Ea = Nothing
@@ -341,6 +346,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvEmployeeName
             '
+            Me.dgvEmployeeName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvEmployeeName.DataPropertyName = "EmployeeName"
             resources.ApplyResources(Me.dgvEmployeeName, "dgvEmployeeName")
             Me.dgvEmployeeName.Name = "dgvEmployeeName"
@@ -348,6 +354,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvEmployeeNameAra
             '
+            Me.dgvEmployeeNameAra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvEmployeeNameAra.DataPropertyName = "EmployeeNameAra"
             resources.ApplyResources(Me.dgvEmployeeNameAra, "dgvEmployeeNameAra")
             Me.dgvEmployeeNameAra.Name = "dgvEmployeeNameAra"
@@ -356,6 +363,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvDaysPresent
             '
             Me.dgvDaysPresent.DataPropertyName = "DaysPresent"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvDaysPresent.DefaultCellStyle = DataGridViewCellStyle2
             Me.dgvDaysPresent.EditingMode = False
             resources.ApplyResources(Me.dgvDaysPresent, "dgvDaysPresent")
             Me.dgvDaysPresent.Name = "dgvDaysPresent"
@@ -365,6 +375,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvDaysAbsentWithPay
             '
             Me.dgvDaysAbsentWithPay.DataPropertyName = "DaysAbsentWithPay"
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.dgvDaysAbsentWithPay.DefaultCellStyle = DataGridViewCellStyle3
             Me.dgvDaysAbsentWithPay.EditingMode = False
             resources.ApplyResources(Me.dgvDaysAbsentWithPay, "dgvDaysAbsentWithPay")
             Me.dgvDaysAbsentWithPay.Name = "dgvDaysAbsentWithPay"
@@ -374,6 +387,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvDaysAbsentWithoutPay
             '
             Me.dgvDaysAbsentWithoutPay.DataPropertyName = "DaysAbsentWithoutPay"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvDaysAbsentWithoutPay.DefaultCellStyle = DataGridViewCellStyle4
             Me.dgvDaysAbsentWithoutPay.EditingMode = False
             resources.ApplyResources(Me.dgvDaysAbsentWithoutPay, "dgvDaysAbsentWithoutPay")
             Me.dgvDaysAbsentWithoutPay.Name = "dgvDaysAbsentWithoutPay"
@@ -383,11 +399,21 @@ Namespace PresentationLayer.Views.Forms
             'dgvDaysOff
             '
             Me.dgvDaysOff.DataPropertyName = "DaysOff"
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvDaysOff.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvDaysOff.EditingMode = False
             resources.ApplyResources(Me.dgvDaysOff, "dgvDaysOff")
             Me.dgvDaysOff.Name = "dgvDaysOff"
             Me.dgvDaysOff.ReadOnly = True
             Me.dgvDaysOff.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'TotalDays
+            '
+            Me.TotalDays.EditingMode = False
+            resources.ApplyResources(Me.TotalDays, "TotalDays")
+            Me.TotalDays.Name = "TotalDays"
+            Me.TotalDays.ReadOnly = True
             '
             'IdNoDataGridViewTextBoxColumn
             '
@@ -440,6 +466,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvDaysAbsentWithPay As CdgvColumnText
         Friend WithEvents dgvDaysAbsentWithoutPay As CdgvColumnText
         Friend WithEvents dgvDaysOff As CdgvColumnText
+        Friend WithEvents TotalDays As CdgvColumnText
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End Namespace

@@ -36,6 +36,7 @@ Namespace PresentationLayer.Views.Forms
 
         'Private _formCurrentCulture As CultureInfo
         Private _logStatus As LoginStatus
+
         Public Shared AccountsMapper As IMapper
         Public Property MainTableName As String
         Protected Shared Property Service As New Service
@@ -1374,14 +1375,6 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PayrollEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem.Click
-            Dim childMdiForm As PayrollTvEntry
-            childMdiForm = New PayrollTvEntry With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
-
         Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
             Dim childMdiForm As IncomeStatement
             childMdiForm = New IncomeStatement("M") With {
@@ -1451,7 +1444,6 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-
         Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AgingOfAccountsPayableToolStripMenuItem.Click
             Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Payable as of ")
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
@@ -1464,6 +1456,22 @@ Namespace PresentationLayer.Views.Forms
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim cForm As New ReportFormNew("Aging of Accounts Receivable.Rpt", reportTitle, CultureInfo.CurrentCulture)
             cForm.Show()
+        End Sub
+
+        Private Sub PayPeriodAttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayPeriodAttendanceToolStripMenuItem.Click
+            Dim childMdiForm As AttendanceEntry
+            childMdiForm = New AttendanceEntry With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub PayrollEntryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem1.Click
+            Dim childMdiForm As PayrollTvEntry
+            childMdiForm = New PayrollTvEntry With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
         End Sub
 
         'Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click

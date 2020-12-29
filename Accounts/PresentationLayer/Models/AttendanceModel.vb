@@ -14,6 +14,7 @@
         Public Property DaysAbsentWithPay As Decimal
         Public Property DaysAbsentWithoutPay As Decimal
         Public Property DaysOff As Decimal
+        Public Property DaysTotal As Decimal
         Property Errors As List(Of String)
 
     End Class

@@ -103,6 +103,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ClosePettyCashAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClosingEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayrollEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayPeriodAttendanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemStatementOfAccountsPayable = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemStatementOfAccountsReceivable = New System.Windows.Forms.ToolStripMenuItem()
@@ -160,6 +161,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayrollEntryToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -555,8 +557,14 @@ Namespace PresentationLayer.Views.Forms
             '
             'PayrollEntryToolStripMenuItem
             '
+            Me.PayrollEntryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PayPeriodAttendanceToolStripMenuItem, Me.PayrollEntryToolStripMenuItem1})
             Me.PayrollEntryToolStripMenuItem.Name = "PayrollEntryToolStripMenuItem"
             resources.ApplyResources(Me.PayrollEntryToolStripMenuItem, "PayrollEntryToolStripMenuItem")
+            '
+            'PayPeriodAttendanceToolStripMenuItem
+            '
+            Me.PayPeriodAttendanceToolStripMenuItem.Name = "PayPeriodAttendanceToolStripMenuItem"
+            resources.ApplyResources(Me.PayPeriodAttendanceToolStripMenuItem, "PayPeriodAttendanceToolStripMenuItem")
             '
             'ToolStripMenuItemReports
             '
@@ -855,6 +863,11 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'PayrollEntryToolStripMenuItem1
+            '
+            Me.PayrollEntryToolStripMenuItem1.Name = "PayrollEntryToolStripMenuItem1"
+            resources.ApplyResources(Me.PayrollEntryToolStripMenuItem1, "PayrollEntryToolStripMenuItem1")
+            '
             'Main
             '
             Me.AllowDrop = True
@@ -1010,5 +1023,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents SemestralToolStripMenuItem1 As ToolStripMenuItem
         Friend WithEvents AccountsReceivableToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents AgingOfAccountsPayableToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents PayPeriodAttendanceToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents PayrollEntryToolStripMenuItem1 As ToolStripMenuItem
     End Class
 End NameSpace

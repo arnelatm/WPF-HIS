@@ -808,10 +808,27 @@ Namespace PresentationLayer.Presenters
             ElseIf TableName = "CdJournal" Then
                 ReportName = "Cash Disbursement Journal.Rpt"
             Else
-                'ReportName = "Check Disbursement Journal.Rpt"
-                ReportName = "Check Printing.Rpt"
+                ReportName = "Check Disbursement Journal.Rpt"
             End If
             Dim cForm As New ReportForm(ReportName, _presenterView.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
+            cForm.Show()
+        End Sub
+
+        Public Sub PrintCheck()
+            Dim transactionAmountInWords As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            If language = "ar" Then
+                transactionAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToArabic()
+            Else
+                transactionAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToEnglish()
+            End If
+            ReportName = "Check Printing.Rpt"
+            Dim cForm As New ReportForm(ReportName, _presenterView.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords")
             cForm.Show()
         End Sub
 
