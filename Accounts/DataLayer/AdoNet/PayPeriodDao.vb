@@ -20,8 +20,9 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            Dim attendance As List(Of Attendance) = AttendanceDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            data.RegularEmployeeDeductions = attendance
+            Dim attendanceDao = New AttendanceDao
+            Dim attendance As List(Of Attendance) = attendanceDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            data.PayPeriodAttendance = attendance
 
         End Function
 
@@ -30,9 +31,8 @@ Namespace DataLayer.AdoNet
             If sortExpression = Nothing Then
                 sortExpression = "StartDate ASC"
             End If
-            Dim sql As String =
-                    " SELECT IdNo, PayPeriodName, PayPeriodNameAra, StartDate, EndDate" &
-                    "   FROM [PayPeriod] " & "order by " & sortExpression
+            Dim sql As String = "SELECT IdNo, PayPeriodName, PayPeriodNameAra, StartDate, EndDate" &
+                    " FROM [PayPeriod] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
