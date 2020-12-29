@@ -122,6 +122,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.btnPrintCheck = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tlpDisbursement.SuspendLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -201,6 +202,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.Controls.Add(Me.lblApplied, 9, 1)
             Me.tlpDisbursement.Controls.Add(Me.lblPosted, 9, 5)
             Me.tlpDisbursement.Controls.Add(Me.lblVatAmount, 9, 0)
+            Me.tlpDisbursement.Controls.Add(Me.btnPrintCheck, 10, 8)
             Me.tlpDisbursement.Dock = System.Windows.Forms.DockStyle.Left
             Me.tlpDisbursement.Location = New System.Drawing.Point(0, 53)
             Me.tlpDisbursement.Name = "tlpDisbursement"
@@ -1574,6 +1576,20 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatAmount.Text = "Vat Amount"
             Me.lblVatAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
+            'btnPrintCheck
+            '
+            Me.tlpDisbursement.SetColumnSpan(Me.btnPrintCheck, 2)
+            Me.btnPrintCheck.DesignerSelected = False
+            Me.btnPrintCheck.DisplayOnly = True
+            Me.btnPrintCheck.ImageIndex = 0
+            Me.btnPrintCheck.Location = New System.Drawing.Point(883, 528)
+            Me.btnPrintCheck.Name = "btnPrintCheck"
+            Me.btnPrintCheck.OriginalImageName = Nothing
+            Me.btnPrintCheck.SecurityKey = ""
+            Me.btnPrintCheck.Size = New System.Drawing.Size(142, 31)
+            Me.btnPrintCheck.TabIndex = 291
+            Me.btnPrintCheck.Text = "Print Check"
+            '
             'DisbursementJournalEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1684,5 +1700,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtVatNumber As CTextBox
         Friend WithEvents txtCheckNumber As CTextBox
         Friend WithEvents lblCheckNumber As CLabel
+        Friend WithEvents btnPrintCheck As CButton
     End Class
 End Namespace

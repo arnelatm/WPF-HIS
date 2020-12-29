@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
+
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -14,6 +16,7 @@
         Public Property PayPeriodName As String
         Public Property PayPeriodNameAra As String
         Public Property StartDate As Date
+        Public Property PayPeriodAttendance As List(Of Attendance)
     End Class
 
 End Namespace

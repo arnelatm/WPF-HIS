@@ -13,8 +13,8 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
 
-            MainTableName = "Attendance"
-            SortOrderKey = "AttendanceName"
+            MainTableName = "PayPeriod"
+            SortOrderKey = "PayPeriodName"
             FirstControl = TxtIdNo
             PresenterObj = New AttendancePresenter(Me)
             Ea = PresenterObj.Ea
@@ -96,7 +96,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-
+        Public Property DaysTotal As Decimal Implements IAttendanceView.DaysTotal
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Decimal)
+                Throw New NotImplementedException()
+            End Set
+        End Property
 
 #End Region
 

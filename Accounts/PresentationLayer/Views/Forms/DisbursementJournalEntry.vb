@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -37,13 +38,16 @@ Namespace PresentationLayer.Views.Forms
             If tableName = "PcJournal" Then
                 PresenterObj = New DisbursementJournalPresenter(Me, "PcJournal")
                 Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
+                btnPrintCheck.Visible = False
             ElseIf tableName = "CdJournal" Then
                 PresenterObj = New DisbursementJournalPresenter(Me, "CdJournal")
                 Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
+                btnPrintCheck.Visible = False
             Else
                 PresenterObj = New DisbursementJournalPresenter(Me, "CkJournal")
                 PresenterObj.JournalCode = "CK"
                 Me.Text = Messaging.TranslateCaption("Check Disbursement Journal")
+                btnPrintCheck.Visible = True
             End If
             txtJournalCode.Text = PresenterObj.JournalCode
             SortOrderKey = "IdNo"
@@ -799,6 +803,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub tlpDisbursement_Paint(sender As Object, e As PaintEventArgs) Handles tlpDisbursement.Paint
 
         End Sub
+
+        Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
+            PresenterObj.PrintCheck()
+        End Sub
+
     End Class
 
 End Namespace

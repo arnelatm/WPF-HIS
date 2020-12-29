@@ -19,7 +19,10 @@ Namespace DataLayer.AdoNet
                     "   FROM [PayPeriod]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
+            Dim attendance As List(Of Attendance) = AttendanceDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            data.RegularEmployeeDeductions = attendance
+
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PayPeriod) _

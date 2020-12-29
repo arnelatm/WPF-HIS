@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DaysAbsentWithPay As Decimal
         Property DaysAbsentWithoutPay As Decimal
         Property DaysOff As Decimal
-
+        Property DaysTotal As Decimal
 
     End Interface
 

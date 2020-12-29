@@ -638,9 +638,6 @@
   <data name="dgvEmployeeName.MinimumWidth" type="System.Int32, mscorlib">
     <value>300</value>
   </data>
-  <data name="dgvEmployeeName.Width" type="System.Int32, mscorlib">
-    <value>300</value>
-  </data>
   <metadata name="dgvEmployeeNameAra.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -653,14 +650,35 @@
   <data name="dgvDaysPresent.HeaderText" xml:space="preserve">
     <value>Days Present</value>
   </data>
+  <data name="dgvDaysPresent.Width" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
   <data name="dgvDaysAbsentWithPay.HeaderText" xml:space="preserve">
     <value>Days Absent With Pay</value>
+  </data>
+  <data name="dgvDaysAbsentWithPay.Width" type="System.Int32, mscorlib">
+    <value>75</value>
   </data>
   <data name="dgvDaysAbsentWithoutPay.HeaderText" xml:space="preserve">
     <value>Days Absent Without Pay</value>
   </data>
+  <data name="dgvDaysAbsentWithoutPay.Width" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
   <data name="dgvDaysOff.HeaderText" xml:space="preserve">
     <value>Days Off</value>
+  </data>
+  <data name="dgvDaysOff.Width" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <metadata name="TotalDays.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="TotalDays.HeaderText" xml:space="preserve">
+    <value>Total Days</value>
+  </data>
+  <data name="TotalDays.Width" type="System.Int32, mscorlib">
+    <value>75</value>
   </data>
   <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>IdNo</value>
@@ -741,7 +759,7 @@
     <value>16, 288</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Leaves Maintenance Form</value>
+    <value>Employee Attendance  Entry</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
     <value>StoreCaptions1</value>
@@ -813,6 +831,12 @@
     <value>dgvDaysOff</value>
   </data>
   <data name="&gt;&gt;dgvDaysOff.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TotalDays.Name" xml:space="preserve">
+    <value>TotalDays</value>
+  </data>
+  <data name="&gt;&gt;TotalDays.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">

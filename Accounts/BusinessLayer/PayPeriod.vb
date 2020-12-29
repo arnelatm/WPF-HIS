@@ -23,6 +23,7 @@ Namespace BusinessLayer
         Public Property PayPeriodName As String
         Public Property PayPeriodNameAra As String
         Public Property StartDate As Date
+        Public Property PayPeriodAttendance As List(Of Attendance)
     End Class
 
 End Namespace

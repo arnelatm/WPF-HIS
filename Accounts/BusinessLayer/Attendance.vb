@@ -19,7 +19,7 @@ Namespace BusinessLayer
         Public Property DaysAbsentWithPay As Decimal
         Public Property DaysAbsentWithoutPay As Decimal
         Public Property DaysOff As Decimal
-
+        Public Property DaysTotal As Decimal
     End Class
 
 End Namespace

@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -11,6 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayPeriodName As String
         Property PayPeriodNameAra As String
         Property StartDate As Date
+        Property PayPeriodAttendance As List(Of Attendance)
     End Interface
 
 End Namespace
