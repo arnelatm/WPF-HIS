@@ -48,11 +48,11 @@ Namespace PresentationLayer.Views.Forms
         Public Property PayPeriodNameAra As String Implements IPayPeriodView.PayPeriodNameAra
         Public Property StartDate As Date Implements IPayPeriodView.StartDate
 
-        Public Property PayPeriodAttendance As List(Of BusinessLayer.Attendance) Implements IPayPeriodView.PayPeriodAttendance
+        Public Property PayPeriodAttendance As List(Of BusinessLayer.AttendanceItem) Implements IPayPeriodView.PayPeriodAttendance
             Get
                 Throw New NotImplementedException()
             End Get
-            Set(value As List(Of BusinessLayer.Attendance))
+            Set(value As List(Of BusinessLayer.AttendanceItem))
                 Throw New NotImplementedException()
             End Set
         End Property

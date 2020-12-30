@@ -5,16 +5,16 @@ Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
-    ' Data access object for Attendance
+    ' Data access object for AttendanceItem
     ' ** DAO Pattern
 
-    Public Class AttendanceDao
+    Public Class AttendanceItemDao
         Inherits DaoAccounts
-        Implements IDaoChild(Of Attendance)
+        Implements IDaoChild(Of AttendanceItem)
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordsWithIdNo(payPeriodIdNo, Optional sortExpression = Nothing) As List(Of Attendance) Implements IDaoChild(Of Attendance).GetRecordsWithIdNo
+        Public Function GetRecordsWithIdNo(payPeriodIdNo, Optional sortExpression = Nothing) As List(Of AttendanceItem) Implements IDaoChild(Of AttendanceItem).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
@@ -30,31 +30,33 @@ Namespace DataLayer.AdoNet
                     "IdNo," &
                     "PayPeriodIdNo," &
                     "Sequence" &
-                    " FROM [Attendance_View]" &
+                    " FROM [AttendanceItem_View]" &
                     " WHERE PayPeriodIdNo = @PayPeriodIdNo " &
                     " ORDER BY " & sortExpression
             Dim params() As Object = {"@payPeriodIdNo", payPeriodIdNo}
-            Return Db.Read(sql, Make, params).ToList()
+            Dim dta = Db.Read(sql, Make, params).ToList()
+            Return dta
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of Attendance).DelUpdateTvp
-            Return Db.DelUpdateTvp("UpdateAttendanceTVP", tvpTable, "@MParam", groupIdNo)
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of AttendanceItem).DelUpdateTvp
+            Return Db.DelUpdateTvp("UpdateAttendanceItemTVP", tvpTable, "@MParam", groupIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of Attendance).InsertTvp
-            Return Db.InsertTvp("InsertAttendanceTVP", tvpTable)
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of AttendanceItem).InsertTvp
+            Return Db.InsertTvp("InsertAttendanceItemTVP", tvpTable)
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, Attendance) =
+        Private Shared ReadOnly Make As Func(Of IDataReader, AttendanceItem) =
                                     Function(reader) _
-            New Attendance() With {
+            New AttendanceItem() With {
             .DaysAbsentWithoutPay = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysAbsentWithoutPay")),
             .DaysAbsentWithPay = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysAbsentWithPay")),
             .DaysOff = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysOff")),
             .DaysPresent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysPresent")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("IdNo")),
-            .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("IdNo")),
+            .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
+            .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .PayPeriodIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayPeriodIdNo")),
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayPeriodIdNo"))
            }

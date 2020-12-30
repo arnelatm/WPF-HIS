@@ -173,7 +173,7 @@
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\DjOiItem.vb" />
     <Compile Include="BusinessLayer\DisbursementJournal.vb" />
-    <Compile Include="BusinessLayer\Attendance.vb" />
+    <Compile Include="BusinessLayer\AttendanceItem.vb" />
     <Compile Include="BusinessLayer\Payroll.vb" />
     <Compile Include="BusinessLayer\PayrollDeductAccount.vb" />
     <Compile Include="BusinessLayer\PayrollDetails.vb" />
@@ -218,7 +218,7 @@
     <Compile Include="BusinessLayer\PensionProvider.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
-    <Compile Include="DataLayer\AdoNet\AttendanceDao.vb" />
+    <Compile Include="DataLayer\AdoNet\AttendanceItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\BasicDao.vb" />
     <Compile Include="DataLayer\AdoNet\DjOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
@@ -294,7 +294,7 @@
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
     <Compile Include="PresentationLayer\Models\DisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\DjOiItemModel.vb" />
-    <Compile Include="PresentationLayer\Models\AttendanceModel.vb" />
+    <Compile Include="PresentationLayer\Models\AttendanceItemModel.vb" />
     <Compile Include="PresentationLayer\Models\OpInvItemModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePhoneModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductAccountModel.vb" />
@@ -319,6 +319,7 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\AttendanceItemView.vb" />
     <Compile Include="PresentationLayer\Views\DjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\BasicEntry.Designer.vb">
       <DependentUpon>BasicEntry.vb</DependentUpon>
@@ -330,12 +331,6 @@
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\AttendanceEntry.designer.vb">
-      <DependentUpon>AttendanceEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\AttendanceEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay.designer.vb">
@@ -368,6 +363,7 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormNew.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IAttendanceItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IBasicView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDjOiItemsView.vb" />
@@ -427,12 +423,6 @@
     <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayrollTvEntry.designer.vb">
-      <DependentUpon>PayrollTvEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayrollTvEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.designer.vb">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>
     </Compile>
@@ -473,12 +463,6 @@
       <DependentUpon>PayPeriodEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayPeriodEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayrollEntry.Designer.vb">
-      <DependentUpon>PayrollEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayrollEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.designer.vb">
@@ -704,7 +688,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IAccountReconciliationView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApJournalView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IAttendanceView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IAttendanceItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePhoneView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductAccountsView.vb" />
@@ -747,7 +731,12 @@
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPensionProviderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISupplierView.vb" />
-    <Compile Include="PresentationLayer\Views\AttendanceView.vb" />
+    <Compile Include="PresentationLayer\Views\LeaveView.Designer.vb">
+      <DependentUpon>LeaveView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\LeaveView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\PayrollDeductAccountView.vb" />
     <Compile Include="PresentationLayer\Views\PensionRateView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollEarnAccountView.vb" />
@@ -955,15 +944,8 @@
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\AttendanceEntry.resx">
-      <DependentUpon>AttendanceEntry.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
       <DependentUpon>PayGroupEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollTvEntry.resx">
-      <DependentUpon>PayrollTvEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.resx">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>
@@ -990,9 +972,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayPeriodEntryTv.resx">
       <DependentUpon>PayPeriodEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollEntry.resx">
-      <DependentUpon>PayrollEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.ar-SA.resx">
       <DependentUpon>PensionProviderEntryTv.vb</DependentUpon>
@@ -1112,6 +1091,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.resx">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
+      <DependentUpon>LeaveView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Account Activity Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

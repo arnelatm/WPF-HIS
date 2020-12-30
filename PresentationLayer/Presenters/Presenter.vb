@@ -20,7 +20,7 @@ Imports KellermanSoftware.CompareNetObjects
 ''' <remarks>
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
-''' <typeparam name="T">Type of view.</typeparam>
+''' <typeparam name="T">Type of itemView.</typeparam>
 Public MustInherit Class Presenter(Of T As IView, TM As New)
     Implements ISubscriber(Of SelectedButton)
 
@@ -50,11 +50,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Private _undoMode As Boolean = False
 
-    Public Sub New(view As T)
-        If view Is Nothing Then
+    Public Sub New(itemView As T)
+        If itemView Is Nothing Then
             ''
         Else
-            Me.View = view
+            Me.View = itemView
             TableName = GetPropertyValue(Me.View, "MainTableName")
             If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
                 MessageBox.Show($"'MainTableName' property of the form is not set.")
