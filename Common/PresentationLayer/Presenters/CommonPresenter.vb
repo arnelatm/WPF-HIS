@@ -19,8 +19,8 @@ Namespace PresentationLayer.Presenters
             ModelDefaultFieldValue = New ModelDefaultFieldValue
         End Sub
 
-        Public Sub New(view As IView)
-            MyBase.New(view)
+        Public Sub New(itemView As IView)
+            MyBase.New(itemView)
             TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
         End Sub
 

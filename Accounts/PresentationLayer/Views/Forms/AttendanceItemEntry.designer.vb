@@ -3,7 +3,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class AttendanceItemEntry
+    Partial Class AttendanceEntry
         Inherits CFormEntryNew
 
         'Form overrides dispose to clean up the component list.
@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AttendanceItemEntry))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AttendanceEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -422,12 +422,12 @@ Namespace PresentationLayer.Views.Forms
             Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
             Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
             '
-            'AttendanceItemEntry
+            'AttendanceEntry
             '
             resources.ApplyResources(Me, "$this")
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
             Me.Controls.Add(Me.TableLayoutPanel1)
-            Me.Name = "AttendanceItemEntry"
+            Me.Name = "AttendanceEntry"
             Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.TableLayoutPanel1.ResumeLayout(False)

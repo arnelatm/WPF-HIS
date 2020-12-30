@@ -4,7 +4,7 @@
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class AttendanceModel
+    Public Class AttendanceItemModel
 
         Public Property IdNo As Int32
         Public Property EmployeeIdNo As Int32

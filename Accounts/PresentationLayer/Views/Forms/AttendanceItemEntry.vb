@@ -4,8 +4,8 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class AttendanceEntry
-        Implements IAttendanceView
+    Public Class AttendanceItemEntry
+        Implements IAttendanceItemView
 
         Public Sub New()
 
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements IAttendanceView.IdNo
+        Public Property IdNo As Int32 Implements IAttendanceItemView.IdNo
             Get
                 Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
@@ -33,7 +33,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DaysPresent As Decimal Implements IAttendanceView.DaysPresent
+        Public Property DaysPresent As Decimal Implements IAttendanceItemView.DaysPresent
             Get
                 Return NumParser(Of Decimal)(TxtIdNo.Text)
             End Get
@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DaysAbsentWithPay As Decimal Implements IAttendanceView.DaysAbsentWithPay
+        Public Property DaysAbsentWithPay As Decimal Implements IAttendanceItemView.DaysAbsentWithPay
             Get
                 Return NumParser(Of Decimal)(TxtIdNo.Text)
             End Get
@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DaysAbsentWithoutPay As Decimal Implements IAttendanceView.DaysAbsentWithoutPay
+        Public Property DaysAbsentWithoutPay As Decimal Implements IAttendanceItemView.DaysAbsentWithoutPay
             Get
                 Return NumParser(Of Decimal)(TxtIdNo.Text)
             End Get
@@ -60,7 +60,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DaysOff As Decimal Implements IAttendanceView.DaysOff
+        Public Property DaysOff As Decimal Implements IAttendanceItemView.DaysOff
             Get
                 Return NumParser(Of Decimal)(TxtIdNo.Text)
             End Get
@@ -69,7 +69,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeIdNo As Integer Implements IAttendanceView.EmployeeIdNo
+        Public Property EmployeeIdNo As Integer Implements IAttendanceItemView.EmployeeIdNo
             Get
                 Throw New NotImplementedException()
             End Get
@@ -78,7 +78,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeName As String Implements IAttendanceView.EmployeeName
+        Public Property EmployeeName As String Implements IAttendanceItemView.EmployeeName
             Get
                 Throw New NotImplementedException()
             End Get
@@ -87,7 +87,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeNameAra As String Implements IAttendanceView.EmployeeNameAra
+        Public Property EmployeeNameAra As String Implements IAttendanceItemView.EmployeeNameAra
             Get
                 Throw New NotImplementedException()
             End Get
@@ -96,7 +96,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DaysTotal As Decimal Implements IAttendanceView.DaysTotal
+        Public Property DaysTotal As Decimal Implements IAttendanceItemView.DaysTotal
             Get
                 Throw New NotImplementedException()
             End Get
@@ -105,7 +105,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayPeriodIdNo As Short Implements IAttendanceView.PayPeriodIdNo
+        Public Property PayPeriodIdNo As Short Implements IAttendanceItemView.PayPeriodIdNo
             Get
                 Throw New NotImplementedException()
             End Get
@@ -114,7 +114,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Sequence As Short Implements IAttendanceView.Sequence
+        Public Property Sequence As Short Implements IAttendanceItemView.Sequence
             Get
                 Throw New NotImplementedException()
             End Get

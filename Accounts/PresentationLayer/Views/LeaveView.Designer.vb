@@ -34,18 +34,18 @@
             Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLeaveNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDeductionCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtLeaveAllowed = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPaidPercent = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPercent = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkCumulative = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtMaxCarryOver = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.chkCumulative = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
             '
@@ -61,7 +61,7 @@
             Me.CFlowLayout1.Controls.Add(Me.lblNameAra)
             Me.CFlowLayout1.Controls.Add(Me.txtLeaveNameAra)
             Me.CFlowLayout1.Controls.Add(Me.CLabel1)
-            Me.CFlowLayout1.Controls.Add(Me.txtDeductionCode)
+            Me.CFlowLayout1.Controls.Add(Me.txtLeaveAllowed)
             Me.CFlowLayout1.Controls.Add(Me.CLabel2)
             Me.CFlowLayout1.Controls.Add(Me.txtPaidPercent)
             Me.CFlowLayout1.Controls.Add(Me.lblPercent)
@@ -242,28 +242,28 @@
             Me.CLabel1.Text = "Number of Leaves Allowed"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtDeductionCode
+            'txtLeaveAllowed
             '
-            Me.txtDeductionCode.BackColor = System.Drawing.Color.White
-            Me.txtDeductionCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDeductionCode.ComputedValue = False
-            Me.txtDeductionCode.CustomFormat = Nothing
-            Me.txtDeductionCode.DataBoundControl = True
-            Me.txtDeductionCode.EditingMode = True
-            Me.CFlowLayout1.SetFlowBreak(Me.txtDeductionCode, True)
-            Me.txtDeductionCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtDeductionCode.ForeColor = System.Drawing.Color.Black
-            Me.txtDeductionCode.LinkedLabel = Nothing
-            Me.txtDeductionCode.Location = New System.Drawing.Point(168, 111)
-            Me.txtDeductionCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtDeductionCode.MaximumValue = Nothing
-            Me.txtDeductionCode.MinimumValue = Nothing
-            Me.txtDeductionCode.Name = "txtDeductionCode"
-            Me.txtDeductionCode.OldValue = Nothing
-            Me.txtDeductionCode.ReadOnly = True
-            Me.txtDeductionCode.Size = New System.Drawing.Size(62, 23)
-            Me.txtDeductionCode.TabIndex = 167
-            Me.txtDeductionCode.ValueIsMandatory = True
+            Me.txtLeaveAllowed.BackColor = System.Drawing.Color.White
+            Me.txtLeaveAllowed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtLeaveAllowed.ComputedValue = False
+            Me.txtLeaveAllowed.CustomFormat = Nothing
+            Me.txtLeaveAllowed.DataBoundControl = True
+            Me.txtLeaveAllowed.EditingMode = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtLeaveAllowed, True)
+            Me.txtLeaveAllowed.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtLeaveAllowed.ForeColor = System.Drawing.Color.Black
+            Me.txtLeaveAllowed.LinkedLabel = Nothing
+            Me.txtLeaveAllowed.Location = New System.Drawing.Point(168, 111)
+            Me.txtLeaveAllowed.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtLeaveAllowed.MaximumValue = Nothing
+            Me.txtLeaveAllowed.MinimumValue = Nothing
+            Me.txtLeaveAllowed.Name = "txtLeaveAllowed"
+            Me.txtLeaveAllowed.OldValue = Nothing
+            Me.txtLeaveAllowed.ReadOnly = True
+            Me.txtLeaveAllowed.Size = New System.Drawing.Size(62, 23)
+            Me.txtLeaveAllowed.TabIndex = 167
+            Me.txtLeaveAllowed.ValueIsMandatory = True
             '
             'CLabel2
             '
@@ -329,6 +329,28 @@
             Me.CLabel3.TabIndex = 172
             Me.CLabel3.Text = "Cumulative"
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'chkCumulative
+            '
+            Me.chkCumulative.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkCumulative.BackColor = System.Drawing.Color.White
+            Me.chkCumulative.DisplayOnly = False
+            Me.chkCumulative.EditingMode = True
+            Me.chkCumulative.FlatAppearance.BorderSize = 0
+            Me.chkCumulative.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.CFlowLayout1.SetFlowBreak(Me.chkCumulative, True)
+            Me.chkCumulative.ForeColor = System.Drawing.Color.Black
+            Me.chkCumulative.LinkedLabel = Nothing
+            Me.chkCumulative.Location = New System.Drawing.Point(168, 161)
+            Me.chkCumulative.Margin = New System.Windows.Forms.Padding(1)
+            Me.chkCumulative.Name = "chkCumulative"
+            Me.chkCumulative.NoLabel = True
+            Me.chkCumulative.OldValue = Nothing
+            Me.chkCumulative.Size = New System.Drawing.Size(23, 23)
+            Me.chkCumulative.TabIndex = 271
+            Me.chkCumulative.Text = "  "
+            Me.chkCumulative.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkCumulative.UseVisualStyleBackColor = True
             '
             'CLabel4
             '
@@ -441,26 +463,6 @@
             Me.txtNotes.TabIndex = 177
             Me.txtNotes.ValueIsMandatory = True
             '
-            'chkCumulative
-            '
-            Me.chkCumulative.Appearance = System.Windows.Forms.Appearance.Button
-            Me.chkCumulative.AutoSize = True
-            Me.chkCumulative.DisplayOnly = False
-            Me.chkCumulative.EditingMode = True
-            Me.chkCumulative.FlatAppearance.BorderSize = 0
-            Me.chkCumulative.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.CFlowLayout1.SetFlowBreak(Me.chkCumulative, True)
-            Me.chkCumulative.LinkedLabel = Nothing
-            Me.chkCumulative.Location = New System.Drawing.Point(168, 161)
-            Me.chkCumulative.Margin = New System.Windows.Forms.Padding(1)
-            Me.chkCumulative.Name = "chkCumulative"
-            Me.chkCumulative.OldValue = Nothing
-            Me.chkCumulative.Size = New System.Drawing.Size(23, 23)
-            Me.chkCumulative.TabIndex = 271
-            Me.chkCumulative.Text = "  "
-            Me.chkCumulative.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.chkCumulative.UseVisualStyleBackColor = True
-            '
             'LeaveView
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -484,7 +486,7 @@
         Friend WithEvents lblNameAra As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtLeaveNameAra As Libraries.CBaseControlsLibrary.CTextBoxArabic
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtDeductionCode As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtLeaveAllowed As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPaidPercent As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel

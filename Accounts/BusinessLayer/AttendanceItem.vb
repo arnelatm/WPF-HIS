@@ -4,7 +4,7 @@ Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class Attendance
+    Public Class AttendanceItem
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern

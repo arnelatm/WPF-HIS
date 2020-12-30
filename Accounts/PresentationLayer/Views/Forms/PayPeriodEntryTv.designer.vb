@@ -47,11 +47,9 @@ Namespace PresentationLayer.Views.Forms
             Me.btnInitialize = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CButton3 = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.bsAttendance = New System.Windows.Forms.BindingSource(Me.components)
             Me.CTabControl1 = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tbcPayroll = New System.Windows.Forms.TabPage()
-            Me.TabPage2 = New System.Windows.Forms.TabPage()
-            Me.dgvAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewPayPeriodAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.EmployeeNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -60,13 +58,15 @@ Namespace PresentationLayer.Views.Forms
             Me.DaysAbsentWithPayDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DaysOffDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsPayPeriodAttendance = New System.Windows.Forms.BindingSource(Me.components)
+            Me.TabPage2 = New System.Windows.Forms.TabPage()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
-            CType(Me.bsAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CTabControl1.SuspendLayout()
             Me.tbcPayroll.SuspendLayout()
-            CType(Me.dgvAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.DataGridViewPayPeriodAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsPayPeriodAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TreeViewTableName
@@ -454,10 +454,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CButton3.TabIndex = 171
             Me.CButton3.Text = "View Payroll Report"
             '
-            'bsAttendance
-            '
-            Me.bsAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceModel)
-            '
             'CTabControl1
             '
             Me.TableLayoutPanel1.SetColumnSpan(Me.CTabControl1, 4)
@@ -472,7 +468,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'tbcPayroll
             '
-            Me.tbcPayroll.Controls.Add(Me.dgvAttendance)
+            Me.tbcPayroll.Controls.Add(Me.DataGridViewPayPeriodAttendance)
             Me.tbcPayroll.Location = New System.Drawing.Point(4, 22)
             Me.tbcPayroll.Name = "tbcPayroll"
             Me.tbcPayroll.Padding = New System.Windows.Forms.Padding(3)
@@ -481,25 +477,15 @@ Namespace PresentationLayer.Views.Forms
             Me.tbcPayroll.Text = "TabPage1"
             Me.tbcPayroll.UseVisualStyleBackColor = True
             '
-            'TabPage2
-            '
-            Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-            Me.TabPage2.Name = "TabPage2"
-            Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-            Me.TabPage2.Size = New System.Drawing.Size(130, 74)
-            Me.TabPage2.TabIndex = 1
-            Me.TabPage2.Text = "TabPage2"
-            Me.TabPage2.UseVisualStyleBackColor = True
-            '
-            'dgvAttendance
+            'DataGridViewPayPeriodAttendance
             '
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.dgvAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-            Me.dgvAttendance.AutoGenerateColumns = False
-            Me.dgvAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.dgvAttendance.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.EmployeeNameDataGridViewTextBoxColumn, Me.EmployeeNameAraDataGridViewTextBoxColumn, Me.DaysPresentDataGridViewTextBoxColumn, Me.DaysAbsentWithPayDataGridViewTextBoxColumn, Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn, Me.DaysOffDataGridViewTextBoxColumn})
-            Me.dgvAttendance.DataInGridChanged = False
-            Me.dgvAttendance.DataSource = Me.bsAttendance
+            Me.DataGridViewPayPeriodAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewPayPeriodAttendance.AutoGenerateColumns = False
+            Me.DataGridViewPayPeriodAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewPayPeriodAttendance.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.EmployeeNameDataGridViewTextBoxColumn, Me.EmployeeNameAraDataGridViewTextBoxColumn, Me.DaysPresentDataGridViewTextBoxColumn, Me.DaysAbsentWithPayDataGridViewTextBoxColumn, Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn, Me.DaysOffDataGridViewTextBoxColumn})
+            Me.DataGridViewPayPeriodAttendance.DataInGridChanged = False
+            Me.DataGridViewPayPeriodAttendance.DataSource = Me.bsPayPeriodAttendance
             DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -507,24 +493,24 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
             DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.dgvAttendance.DefaultCellStyle = DataGridViewCellStyle2
-            Me.dgvAttendance.DgvFooter = Nothing
-            Me.dgvAttendance.DisplayOnly = False
-            Me.dgvAttendance.Ea = Nothing
-            Me.dgvAttendance.EditingMode = False
-            Me.dgvAttendance.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.dgvAttendance.FirstRowDeletionEnabled = True
-            Me.dgvAttendance.FirstRowInsertionEnabled = True
-            Me.dgvAttendance.Location = New System.Drawing.Point(6, 6)
-            Me.dgvAttendance.Name = "dgvAttendance"
-            Me.dgvAttendance.ReadOnly = True
-            Me.dgvAttendance.SequenceColumn = "dgvSequence"
-            Me.dgvAttendance.SequenceFieldName = "Sequence"
-            Me.dgvAttendance.ShowFooter = False
-            Me.dgvAttendance.ShowInsertColumnWhenEditing = True
-            Me.dgvAttendance.Size = New System.Drawing.Size(745, 346)
-            Me.dgvAttendance.StartTrackingChanges = False
-            Me.dgvAttendance.TabIndex = 171
+            Me.DataGridViewPayPeriodAttendance.DefaultCellStyle = DataGridViewCellStyle2
+            Me.DataGridViewPayPeriodAttendance.DgvFooter = Nothing
+            Me.DataGridViewPayPeriodAttendance.DisplayOnly = False
+            Me.DataGridViewPayPeriodAttendance.Ea = Nothing
+            Me.DataGridViewPayPeriodAttendance.EditingMode = False
+            Me.DataGridViewPayPeriodAttendance.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPayPeriodAttendance.FirstRowDeletionEnabled = True
+            Me.DataGridViewPayPeriodAttendance.FirstRowInsertionEnabled = True
+            Me.DataGridViewPayPeriodAttendance.Location = New System.Drawing.Point(6, 6)
+            Me.DataGridViewPayPeriodAttendance.Name = "DataGridViewPayPeriodAttendance"
+            Me.DataGridViewPayPeriodAttendance.ReadOnly = True
+            Me.DataGridViewPayPeriodAttendance.SequenceColumn = "dgvSequence"
+            Me.DataGridViewPayPeriodAttendance.SequenceFieldName = "Sequence"
+            Me.DataGridViewPayPeriodAttendance.ShowFooter = False
+            Me.DataGridViewPayPeriodAttendance.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewPayPeriodAttendance.Size = New System.Drawing.Size(745, 346)
+            Me.DataGridViewPayPeriodAttendance.StartTrackingChanges = False
+            Me.DataGridViewPayPeriodAttendance.TabIndex = 171
             '
             'IdNoDataGridViewTextBoxColumn
             '
@@ -582,6 +568,20 @@ Namespace PresentationLayer.Views.Forms
             Me.DaysOffDataGridViewTextBoxColumn.Name = "DaysOffDataGridViewTextBoxColumn"
             Me.DaysOffDataGridViewTextBoxColumn.ReadOnly = True
             '
+            'bsPayPeriodAttendance
+            '
+            Me.bsPayPeriodAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
+            '
+            'TabPage2
+            '
+            Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+            Me.TabPage2.Name = "TabPage2"
+            Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+            Me.TabPage2.Size = New System.Drawing.Size(760, 211)
+            Me.TabPage2.TabIndex = 1
+            Me.TabPage2.Text = "TabPage2"
+            Me.TabPage2.UseVisualStyleBackColor = True
+            '
             'PayPeriodEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -595,10 +595,10 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.ResumeLayout(False)
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
-            CType(Me.bsAttendance, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CTabControl1.ResumeLayout(False)
             Me.tbcPayroll.ResumeLayout(False)
-            CType(Me.dgvAttendance, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DataGridViewPayPeriodAttendance, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPayPeriodAttendance, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -625,11 +625,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents btnInitialize As CButton
         Friend WithEvents CButton2 As CButton
         Friend WithEvents CButton3 As CButton
-        Friend WithEvents bsAttendance As BindingSource
+        Friend WithEvents bsPayPeriodAttendance As BindingSource
         Friend WithEvents CTabControl1 As CTabControl
         Friend WithEvents tbcPayroll As TabPage
         Friend WithEvents TabPage2 As TabPage
-        Friend WithEvents dgvAttendance As CDataGridView
+        Friend WithEvents DataGridViewPayPeriodAttendance As CDataGridView
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents EmployeeNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

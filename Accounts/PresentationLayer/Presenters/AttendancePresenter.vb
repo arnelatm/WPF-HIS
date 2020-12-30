@@ -9,10 +9,10 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class AttendancePresenter
-        Inherits AccountsPresenter(Of IAttendanceView, AttendanceModel)
+        Inherits AccountsPresenter(Of IAttendanceItemView, AttendanceItemModel)
 
-        Public Sub New(view As IAttendanceView)
-            MyBase.New(view)
+        Public Sub New(itemView As IAttendanceItemView)
+            MyBase.New(itemView)
 
             Initializer("PayPeriod")
             Ea = New EventAggregator()

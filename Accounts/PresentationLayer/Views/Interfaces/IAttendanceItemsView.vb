@@ -3,10 +3,10 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface ICkdOiItemsView
+    Public Interface IAttendanceItemsView
         Inherits IView
 
-        Property CkdOiItems As IList(Of CkdOiItemModel)
+        Property AttendanceItems As IList(Of AttendanceItemModel)
 
     End Interface
 

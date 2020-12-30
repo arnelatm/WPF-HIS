@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
         ''' <summary>
         '''     Constructor.
         ''' </summary>
-        ''' <param name="view">The view</param>
+        ''' <param name="view">The itemView</param>
         Public Sub New(ByVal view As IUserView)
             MyBase.New(view)
             ModelPresenter = New Model("User")

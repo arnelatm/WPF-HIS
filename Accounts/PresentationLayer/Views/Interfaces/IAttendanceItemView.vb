@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IAttendanceView
+    Public Interface IAttendanceItemView
         Inherits IView
 
         Property IdNo As Int32

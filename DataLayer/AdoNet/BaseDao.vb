@@ -135,7 +135,7 @@
                 If sortKey Is Nothing Or sortKey = "" Then
                     sql = " SELECT " & fields & " from [" & tableName & "]"
                 Else
-                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
+                    sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
                 End If
             Else
                 If sortKey Is Nothing Or sortKey = "" Then

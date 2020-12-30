@@ -10,6 +10,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class PayPeriodEntryTv
         Implements IPayPeriodView
 
+        Private _payPeriodAttendance As New List(Of AttendanceItemView)
+
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
@@ -94,16 +96,40 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayPeriodAttendance As List(Of Attendance) Implements IPayPeriodView.PayPeriodAttendance
+        Public Property PayPeriodAttendance As List(Of AttendanceItemView) Implements IPayPeriodView.PayPeriodAttendance
             Get
-                Throw New NotImplementedException()
+                Return _payPeriodAttendance
             End Get
-            Set(value As List(Of Attendance))
-                Throw New NotImplementedException()
+            Set
+                _payPeriodAttendance = Value
+                BindPayPeriodAttendance()
             End Set
         End Property
 
 #End Region
+
+        Private Sub BindPayPeriodAttendance()
+            SuspendLayout()
+            bsPayPeriodAttendance.DataSource = Nothing
+            DataGridViewPayPeriodAttendance.Refresh()
+            bsPayPeriodAttendance.DataSource = PayPeriodAttendance
+            bsPayPeriodAttendance.AllowNew = True
+            'bsPayPeriodAttendance.Sort = "Sequence"
+            With DataGridViewPayPeriodAttendance
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsPayPeriodAttendance
+                .Refresh()
+            End With
+            'With DataGridViewPayPeriodAttendance.Columns
+            '    dgvEarningIdNo.DataSource = _PayPeriodAttendanceByName
+            '    dgvEarningIdNo.DisplayMember = "Name"
+            '    dgvEarningIdNo.ValueMember = "IdNo"
+            '    dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+            '    dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+            'End With
+            ResumeLayout()
+        End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
@@ -129,7 +155,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub btnInitialize_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
+        Private Sub btnInitialize_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
             Dim payFrequency = PresenterObj.GetFieldWithIdNo(cboPayCycleIdNo.SelectedValue, "PayCycle", "PayFrequency")
             Dim employeeFilter = "Active = 1 and EarningType = 'R' and PayCycleIdNo = " & cboPayCycleIdNo.SelectedValue.ToString()
             Dim activeEmployees = PresenterObj.GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo"})

@@ -12,8 +12,8 @@ Namespace PresentationLayer.Presenters
         'Private Property ModelArOpenInvoice ' As IModelOpenInvoice
         'Private Property ModelCashCode ' As IModelCashCode
 
-        Public Sub New(view As T)
-            MyBase.New(view)
+        Public Sub New(itemView As T)
+            MyBase.New(itemView)
         End Sub
 
         Public Overrides Sub Initializer(baseClassName As String, Optional tableOrViewName As String = Nothing)

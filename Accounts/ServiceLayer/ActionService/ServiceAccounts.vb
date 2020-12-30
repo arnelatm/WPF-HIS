@@ -43,7 +43,7 @@ Namespace ServiceLayer.ActionService
             If DataDao IsNot Nothing Then
                 If accountName = "Basic" Then
                     If daoTableOrViewName Is Nothing Then
-                        MessageBox.Show("Please provide BasicDao table or view name.")
+                        MessageBox.Show("Please provide BasicDao table or itemView name.")
                         Debugger.Break()
                     End If
                 ElseIf accountName = "JournalItem" Then

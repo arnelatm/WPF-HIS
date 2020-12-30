@@ -16,7 +16,7 @@ Namespace PresentationLayer.Models
         Public Property PayPeriodName As String
         Public Property PayPeriodNameAra As String
         Public Property StartDate As Date
-        Public Property PayPeriodAttendance As List(Of AttendanceModel)
+        Public Property PayPeriodAttendance As List(Of AttendanceItemModel)
     End Class
 
 End Namespace

@@ -73,7 +73,7 @@ Namespace PresentationLayer.Views.Forms
             'Me.toolStripButtonLogout.Enabled = False
             'Me.logoutToolStripMenuItem.Enabled = False
 
-            ' Create two Presenters. Note: the form is the view.
+            ' Create two Presenters. Note: the form is the itemView.
             '_membersPresenter = New MembersPresenter(Me)
             '_ordersPresenter = New OrdersPresenter(Me)
         End Sub
@@ -1458,21 +1458,21 @@ Namespace PresentationLayer.Views.Forms
             cForm.Show()
         End Sub
 
-        Private Sub PayPeriodAttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayPeriodAttendanceToolStripMenuItem.Click
-            Dim childMdiForm As AttendanceEntry
-            childMdiForm = New AttendanceEntry With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
+        'Private Sub PayPeriodAttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayPeriodAttendanceToolStripMenuItem.Click
+        '    Dim childMdiForm As AttendanceItemEntry
+        '    childMdiForm = New AttendanceItemEntry With {
+        '        .MdiParent = Me
+        '        }
+        '    childMdiForm.Show()
+        'End Sub
 
-        Private Sub PayrollEntryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem1.Click
-            Dim childMdiForm As PayrollTvEntry
-            childMdiForm = New PayrollTvEntry With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
+        'Private Sub PayrollEntryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem1.Click
+        '    Dim childMdiForm As PayrollTvEntry
+        '    childMdiForm = New PayrollTvEntry With {
+        '        .MdiParent = Me
+        '        }
+        '    childMdiForm.Show()
+        'End Sub
 
         'Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
 
