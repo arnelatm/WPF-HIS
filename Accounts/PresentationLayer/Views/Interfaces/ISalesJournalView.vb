@@ -20,7 +20,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DateCreated As DateTime?
         Property Posted As Boolean
         Property SalesDeposits As List(Of SalesDepositView)
-        Property JournalItems As List(Of JournalItemView)
+        Property JournalItems As List(Of IJournalItemView)
 
     End Interface
 

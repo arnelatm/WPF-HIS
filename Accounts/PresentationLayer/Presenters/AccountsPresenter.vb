@@ -20,7 +20,11 @@ Namespace PresentationLayer.Presenters
             'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
             TableName = IIf(tableOrViewName Is Nothing, baseClassName, tableOrViewName)
             SortOrderKey = baseClassName + "Name"
-            ModelPresenter = New ModelAccounts(baseClassName, tableOrViewName)
+            If tableOrViewName Is Nothing Then
+                ModelPresenter = New ModelAccounts(baseClassName)
+            Else
+                ModelPresenter = New ModelAccounts(baseClassName, tableOrViewName)
+            End If
             'Dim t As Type = Type.GetType(presenterModelName)
             'If tableOrViewName Is Nothing Then
             '    ModelPresenter = Activator.CreateInstance(t)

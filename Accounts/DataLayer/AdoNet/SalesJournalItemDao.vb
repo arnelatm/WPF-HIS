@@ -4,9 +4,10 @@
         Inherits JournalItemDao
 
         Public Sub New()
-            _tableOrViewName = "SalesJournalItem_View"
-            _dboTvpUpdateName = "dbo.UpdateSalesJournalItemTVP"
-            _dboTvpInsertName = "dbo.InsertSalesJournalItemTVP"
+            MyBase.New()
+            TableOrViewName = "SalesJournalItem_View"
+            DboTvpUpdateName = "dbo.UpdateSalesJournalItemTVP"
+            DboTvpInsertName = "dbo.InsertSalesJournalItemTVP"
         End Sub
 
     End Class

@@ -18,6 +18,6 @@ Public Interface IDaoFactory
     ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup)
     ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject)
 
-    Function CreateDao(classBasename As String, Optional arguements As Object = Nothing)
+    Function CreateDao(classBasename As String, ParamArray arguments As Object())
 
 End Interface

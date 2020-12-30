@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayPeriodName As String
         Property PayPeriodNameAra As String
         Property StartDate As Date
-        Property PayPeriodAttendance As List(Of AttendanceItemView)
+        Property PayPeriodAttendance As List(Of IAttendanceItemView)
     End Interface
 
 End Namespace

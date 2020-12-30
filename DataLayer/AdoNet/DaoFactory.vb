@@ -63,7 +63,7 @@ Namespace AdoNet
             End Get
         End Property
 
-        Public Overridable Function CreateDao(classBasename As String, Optional arguements As Object = Nothing) As Object Implements IDaoFactory.CreateDao
+        Public Overridable Function CreateDao(classBasename As String, ParamArray arguments As Object()) As Object Implements IDaoFactory.CreateDao
             Dim className = $"AATM.DataLayer.AdoNet." + classBasename + "Dao"
             Dim dao As Object
             Dim tType As Type = Type.GetType(className)
@@ -71,7 +71,11 @@ Namespace AdoNet
                 MessageBox.Show("Missing Data Access Object " + className)
                 Debugger.Break()
             End If
-            dao = Activator.CreateInstance(tType)
+            If arguments Is Nothing Then
+                dao = Activator.CreateInstance(tType)
+            Else
+                dao = Activator.CreateInstance(tType, arguments)
+            End If
             Return dao
         End Function
 

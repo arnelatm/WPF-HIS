@@ -8,7 +8,7 @@ Namespace BusinessLayer
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Sub New()
+        Public Sub New(ParamArray arguments As Object())
             ' establish business rules
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("TransactionDate"))
@@ -23,6 +23,10 @@ Namespace BusinessLayer
                 AddRule(New ValidateIfRequired("DiscountAccountIdNo", "DiscountTaken", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateCompareIfTrue(PaymentType = "A", "Amount", "Applied", ValidationOperator.Equal, ValidationDataType.Decimal))
                 AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
+            End If
+            If arguments Is Nothing Or arguments.Length > 0 Then
+                AddRule(New ValidateRequired("CheckDate"))
+                AddRule(New ValidateRequired("CheckNumber"))
             End If
         End Sub
 

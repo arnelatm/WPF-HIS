@@ -7,18 +7,6 @@ Namespace DataLayer
     Public Interface IDaoFactoryCommon
         Inherits IDaoFactory
 
-        'Function CreateDao(classBasename As String)
-        'ReadOnly Property CommonDao As ICommonDao
-        'ReadOnly Property CountryDao As ICountryDao
-        'ReadOnly Property BranchDao As IBranchDao
-        'ReadOnly Property RevCostCenterDao As IRevCostCenterDao
-        'ReadOnly Property RevCostCenterDao As IRevCostCenterDao
-        'ReadOnly Property DepartmentDao As IDepartmentDao
-        'ReadOnly Property ReligionDao As IReligionDao
-        'ReadOnly Property RevenueGroupDao As IRevenueGroupDao
-        'ReadOnly Property PhoneTypeDao As IPhoneTypeDao
-        'ReadOnly Property OriginalMessagesDao As IOriginalMessagesDao
-        'ReadOnly Property TranslatedMessagesDao As ITranslatedMessagesDao
     End Interface
 
 End Namespace

@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class PayPeriodEntryTv
         Implements IPayPeriodView
 
-        Private _payPeriodAttendance As New List(Of AttendanceItemView)
+        Private _payPeriodAttendance As New List(Of IAttendanceItemView)
 
         Public Sub New()
             ' This call is required by the designer.
@@ -96,7 +96,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayPeriodAttendance As List(Of AttendanceItemView) Implements IPayPeriodView.PayPeriodAttendance
+        Public Property PayPeriodAttendance As List(Of IAttendanceItemView) Implements IPayPeriodView.PayPeriodAttendance
             Get
                 Return _payPeriodAttendance
             End Get

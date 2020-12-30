@@ -206,7 +206,7 @@ Namespace PresentationLayer.Presenters
             If View.JournalItems IsNot Nothing Then
                 View.JournalItems.Clear()
             Else
-                View.JournalItems = New List(Of JournalItemView)
+                View.JournalItems = New List(Of IJournalItemView)
             End If
             Dim item As New JournalItemView With {
                     .JournalIdNo = View.IdNo,

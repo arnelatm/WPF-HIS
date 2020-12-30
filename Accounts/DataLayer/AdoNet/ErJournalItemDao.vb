@@ -6,9 +6,9 @@
         Inherits JournalItemDao
 
         Public Sub New()
-            _tableOrViewName = "ErJournalItem_View"
-            _dboTvpUpdateName = "dbo.UpdateErJournalItemTVP"
-            _dboTvpInsertName = "dbo.InsertErJournalItemTVP"
+            TableOrViewName = "ErJournalItem_View"
+            DboTvpUpdateName = "dbo.UpdateErJournalItemTVP"
+            DboTvpInsertName = "dbo.InsertErJournalItemTVP"
         End Sub
 
     End Class
