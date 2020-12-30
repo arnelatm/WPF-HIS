@@ -218,6 +218,7 @@
     <Compile Include="BusinessLayer\PensionProvider.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CdJournalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\AttendanceItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\BasicDao.vb" />
     <Compile Include="DataLayer\AdoNet\DjOiItemDao.vb" />

@@ -11,9 +11,18 @@ Namespace DataLayer.AdoNet
         Implements IDaoChild(Of JournalItem)
 
         Private ReadOnly _db As New Db()
-        Protected _tableOrViewName As String = ""
-        Protected _dboTvpUpdateName As String = ""
-        Protected _dboTvpInsertName As String = ""
+        Protected TableOrViewName As String = ""
+        Protected DboTvpUpdateName As String = ""
+        Protected DboTvpInsertName As String = ""
+
+        Public Sub New()
+        End Sub
+
+        Public Sub New(args As Object())
+            TableOrViewName = args(0)
+            DboTvpUpdateName = args(1)
+            DboTvpInsertName = args(2)
+        End Sub
 
         Public Function GetRecordsWithIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
             If sortKey Is Nothing Then
@@ -36,7 +45,7 @@ Namespace DataLayer.AdoNet
                     "RevCostCenterIdNo," &
                     "Sequence," &
                     "SpecialAccount" &
-                    " FROM " & _tableOrViewName &
+                    " FROM " & TableOrViewName &
                     " WHERE JournalIdNo = @JournalIdNo" &
                     " ORDER BY " & sortKey.ToString()
             Dim params() As Object = {"@JournalIdNo", journalIdNo}
@@ -45,12 +54,12 @@ Namespace DataLayer.AdoNet
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, journalItemIdNo As Int32) As Integer _
             Implements IDaoChild(Of JournalItem).DelUpdateTvp
-            Return _db.DelUpdateTvp(_dboTvpUpdateName, tvpTable, "@MParam", journalItemIdNo)
+            Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", journalItemIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer _
             Implements IDaoChild(Of JournalItem).InsertTvp
-            Return _db.InsertTvp(_dboTvpInsertName, tvpTable)
+            Return _db.InsertTvp(DboTvpInsertName, tvpTable)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, JournalItem) =
@@ -74,20 +83,20 @@ Namespace DataLayer.AdoNet
             }
 
         Public Function GetTableOrViewName() As String
-            Return _tableOrViewName
+            Return TableOrViewName
         End Function
 
         Public Sub SetTableOrViewName(AutoPropertyValue As String)
-            _tableOrViewName = AutoPropertyValue
-            If _tableOrViewName = "CkJournalItem_View" Then
-                _dboTvpUpdateName = "UpdateCdJournalItemTVP"
-                _dboTvpInsertName = "InsertCdJournalItemTVP"
-            ElseIf _tableOrViewName = "CdJournalItem_View" Then
-                _dboTvpUpdateName = "UpdateCdJournalItemTVP"
-                _dboTvpInsertName = "InsertCdJournalItemTVP"
-            ElseIf _tableOrViewName = "CkJournalItem_View" Then
-                _dboTvpUpdateName = "UpdateCkJournalItemTVP"
-                _dboTvpInsertName = "InsertCkJournalItemTVP"
+            TableOrViewName = AutoPropertyValue
+            If TableOrViewName = "CkJournalItem_View" Then
+                DboTvpUpdateName = "UpdateCdJournalItemTVP"
+                DboTvpInsertName = "InsertCdJournalItemTVP"
+            ElseIf TableOrViewName = "CdJournalItem_View" Then
+                DboTvpUpdateName = "UpdateCdJournalItemTVP"
+                DboTvpInsertName = "InsertCdJournalItemTVP"
+            ElseIf TableOrViewName = "CkJournalItem_View" Then
+                DboTvpUpdateName = "UpdateCkJournalItemTVP"
+                DboTvpInsertName = "InsertCkJournalItemTVP"
             End If
         End Sub
 

@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _footer As DgvFooter
-        Private _journalItems As List(Of JournalItemView)
+        Private _journalItems As List(Of IJournalItemView)
         Private _revCostCenterByCode
 
         Public Sub New()
@@ -123,7 +123,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of JournalItemView) Implements IArJournalView.JournalItems
+        Public Property JournalItems As List(Of IJournalItemView) Implements IArJournalView.JournalItems
             Get
                 Return _journalItems
             End Get

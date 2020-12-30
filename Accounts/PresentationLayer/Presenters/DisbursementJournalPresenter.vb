@@ -31,29 +31,33 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             _presenterView = view
             SortOrderKey = "IdNo"
-            ModelPresenter = New ModelAccounts("DisbursementJournal", tableOrViewName)
-            'If tableOrViewName = "CdJournal" Then
-            '    DjItemModel = New ModelAccounts("DisbursementJournalItem", "CdJournalItem_View")
-            '    OiItemModel = New ModelAccounts("DjOiItem", "CdOiItem")
-            'ElseIf tableOrViewName = "PcJournal" Then
-            '    DjItemModel = New ModelAccounts("DisbursementJournalItem", "PcJournalItem_View")
-            '    OiItemModel = New ModelAccounts("DjOiItem", "PcOiItem")
-            'Else
-            '    DjItemModel = New ModelAccounts("DisbursementJournalItem", "CkJournalItem_View")
-            '    OiItemModel = New ModelAccounts("DjOiItem", "CkOiItem")
-            'End If
-            SortOrderKey = "IdNo"
-            TableName = tableOrViewName
-            If tableOrViewName = "PcJournal" Then
-                JournalCode = "PC"
-                ReportName = "Petty Cash Disbursement Journal.Rpt"
-            ElseIf tableOrViewName = "CdJournal" Then
+            Dim args As Object
+            Dim djArgs As Object
+            Dim oiArgs As Object
+            If tableOrViewName = "CdJournal" Then
+                djArgs = {"CdJournalItem_View", "UpdateCdJournalItemTVP", "InsertCdJournalItemTVP"}
+                oiArgs = {"CdOiItem_View", "UpdateCdOiItemTVP", "InsertCdOiItemTVP"}
+                args = {"CdJournal", "CD", djArgs, oiArgs}
                 JournalCode = "CD"
                 ReportName = "Cash Disbursement Journal.Rpt"
-            Else
+            ElseIf tableOrViewName = "CkJournal" Then
+                djArgs = {"CkJournalItem_View", "UpdateCkJournalItemTVP", "InsertCkJournalItemTVP"}
+                oiArgs = {"CkOiItem_View", "UpdateCkOiItemTVP", "InsertCkOiItemTVP"}
+                args = {"CkJournal", "CK", djArgs, oiArgs}
                 JournalCode = "CK"
                 ReportName = "Check Disbursement Journal.Rpt"
+            Else
+                djArgs = {"PcJournalItem_View", "UpdatePcJournalItemTVP", "InsertPcJournalItemTVP"}
+                oiArgs = {"PcOiItem_View", "UpdatePcOiItemTVP", "InsertPcOiItemTVP"}
+                args = {"PcJournal", "PC", djArgs, oiArgs}
+                ReportName = "Petty Cash Disbursement Journal.Rpt"
+                JournalCode = "PC"
             End If
+            DjItemModel = New ModelAccounts("JournalItem", djArgs)
+            OiItemModel = New ModelAccounts("DjOiItem", oiArgs)
+            ModelPresenter = New ModelAccounts("DisbursementJournal", args)
+            SortOrderKey = "IdNo"
+            TableName = tableOrViewName
             OriginalModel = New DisbursementJournalModel()
             DataModel = New DisbursementJournalModel
 
@@ -293,7 +297,7 @@ Namespace PresentationLayer.Presenters
             If _presenterView.JournalItems IsNot Nothing Then
                 _presenterView.JournalItems.Clear()
             Else
-                _presenterView.JournalItems = New List(Of JournalItemView)
+                _presenterView.JournalItems = New List(Of IJournalItemView)
             End If
             Dim item As New JournalItemView With {
                     .JournalIdNo = _presenterView.IdNo,
@@ -316,7 +320,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                    ViewToDataTables(_presenterView.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalitemFillData, AddressOf JournalItemFilter)
+                    ViewToDataTables(_presenterView.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
                     _presenterView.UnApplied = 0
                     _presenterView.Applied = _presenterView.Amount
                     If DtOiInsertTable IsNot Nothing Then
@@ -328,14 +332,14 @@ Namespace PresentationLayer.Presenters
                 Else
                     _presenterView.TotalDebits = 0
                     MakeJournalItem()
-                    ViewToDataTables(_presenterView.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalitemFillData, AddressOf JournalItemFilter)
+                    ViewToDataTables(_presenterView.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
                     ViewToDataTables(_presenterView.DjOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf DjFillData, AddressOf DjOiItemFilter)
                     _presenterView.TotalCredits = _presenterView.TotalDebits
                 End If
             End If
         End Sub
 
-        Private Sub JournalitemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+        Private Sub JournalItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("AccountIdNo") = itemDataView.AccountIdNo
             workRow("Credit") = itemDataView.Credit
             workRow("Debit") = itemDataView.Debit
@@ -381,46 +385,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        'If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-        '    SetAsideJournalItems()
-        '    _presenterView.UnApplied = 0
-        '    _presenterView.Applied = _presenterView.Amount
-        'Else
-        '    MakeJournalItem()
-        '    SetAsideJournalItems()
-        '    Dim nRowCount As Integer
-        '    If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-        '        ' if AP Entry generate paid open invoices
-        '        nRowCount = 1
-        '        _presenterView.TotalDebits = 0
-        '        _presenterView.TotalCredits = 0
-        '        For Each ji In _presenterView.DjOiItems
-        '            If ji.Amount <> 0 Or ji.DiscountTaken <> 0 Then
-        '                Dim workRow As DataRow
-        '                If ji.IdNo <= 0 Then
-        '                    workRow = DtOiInsertTable.NewRow()
-        '                Else
-        '                    workRow = DtOiUpdateTable.NewRow()
-        '                    workRow("IdNo") = ji.IdNo
-        '                End If
-        '                workRow("Amount") = ji.Amount
-        '                workRow("ApOpenInvoiceIdNo") = ji.ApOpenInvoiceIdNo
-        '                workRow("DjIdNo") = _presenterView.IdNo
-        '                workRow("DiscountTaken") = ji.DiscountTaken
-        '                workRow("Sequence") = nRowCount
-        '                If ji.IdNo <= 0 Then
-        '                    DtOiInsertTable.Rows.Add(workRow)
-        '                Else
-        '                    DtOiUpdateTable.Rows.Add(workRow)
-        '                End If
-        '                nRowCount += 1
-        '            End If
-        '            _presenterView.TotalDebits += ji.Amount
-        '        Next
-        '        _presenterView.TotalCredits = _presenterView.TotalDebits
-        '    End If
-        'End If
-
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
             If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 _presenterView.TotalDebits = 0
@@ -432,21 +396,6 @@ Namespace PresentationLayer.Presenters
             End If
             _presenterView.UnApplied = _presenterView.Amount - _presenterView.Applied
         End Sub
-
-        'Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-        '    Dim passedValue As Integer = retVal
-        '    retVal = UpdateChildData(DjItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
-        '    If retVal >= 0 Then
-        '        retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "DjIdNo")
-        '        If retVal >= 0 Then
-        '            retVal = SaveOpenInvoices()
-        '        End If
-        '    End If
-        '    If retVal >= 0 And IsEmpty(_presenterView.ReferenceNo) Then
-        '        GlobalVariables.Mapper.Map(_presenterView, DataModel)
-        '        retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
-        '    End If
-        'End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False

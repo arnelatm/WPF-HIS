@@ -159,7 +159,7 @@ Namespace PresentationLayer.Presenters
         Public Sub UpdateFirstLine()
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
-                    View.JournalItems = New List(Of JournalItemView) From {
+                    View.JournalItems = New List(Of IJournalItemView) From {
                         NewJournalItem()
                     }
                 End If

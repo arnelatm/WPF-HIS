@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TransactionType As String
         Property VatAmount As Decimal
         Property VatNumber As String
-        Property JournalItems As List(Of JournalItemView)
+        Property JournalItems As List(Of IJournalItemView)
 
     End Interface
 

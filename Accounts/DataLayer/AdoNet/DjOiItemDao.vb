@@ -12,9 +12,18 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Protected _tableOrViewName As String = ""
-        Protected _dboTvpUpdateName As String = ""
-        Protected _dboTvpInsertName As String = ""
+        Protected TableOrViewName As String = ""
+        Protected DboTvpUpdateName As String = ""
+        Protected DboTvpInsertName As String = ""
+
+        Public Sub New()
+        End Sub
+
+        Public Sub New(args As Object())
+            TableOrViewName = args(0)
+            DboTvpUpdateName = args(1)
+            DboTvpInsertName = args(2)
+        End Sub
 
         Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of DjOiItem) Implements IDaoChild(Of DjOiItem).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
@@ -35,7 +44,7 @@ Namespace DataLayer.AdoNet
                     "PreviousBalance," &
                     "Sequence," &
                     "TransactionDate" &
-                    " FROM " & _tableOrViewName &
+                    " FROM " & TableOrViewName &
                     " WHERE DjIdNo = " & idNo &
                     " ORDER BY " & sortExpression
             Dim x = _db.Read(sql, Make).ToList()
@@ -43,11 +52,11 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, djIdNo As Int32) As Integer Implements IDaoChild(Of DjOiItem).DelUpdateTvp
-            Return _db.DelUpdateTvp(_dboTvpUpdateName, tvpTable, "@MParam", djIdNo)
+            Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", djIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of DjOiItem).InsertTvp
-            Return _db.InsertTvp(_dboTvpInsertName, tvpTable)
+            Return _db.InsertTvp(DboTvpInsertName, tvpTable)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, DjOiItem) =
@@ -98,38 +107,38 @@ Namespace DataLayer.AdoNet
             }
 
         Public Function GetTableOrViewName() As String
-            Return _tableOrViewName
+            Return TableOrViewName
         End Function
 
-        Public Sub SetTableOrViewName(AutoPropertyValue As String)
-            _tableOrViewName = AutoPropertyValue
-            If _tableOrViewName = "CdOiItem" Then
-                _dboTvpUpdateName = "dbo.UpdateCdOiItemTVP"
-                _dboTvpInsertName = "dbo.InsertCdOiItemTVP"
-            ElseIf _tableOrViewName = "PcOiItem" Then
-                _dboTvpUpdateName = "dbo.UpdatePcOiItemTVP"
-                _dboTvpInsertName = "dbo.InsertPcOiItemTVP"
-            ElseIf _tableOrViewName = "CkOiItem" Then
-                _dboTvpUpdateName = "dbo.UpdateCkOiItemTVP"
-                _dboTvpInsertName = "dbo.InsertCkOiItemTVP"
-            End If
-        End Sub
+        'Public Sub SetTableOrViewName(AutoPropertyValue As String)
+        '    TableOrViewName = AutoPropertyValue
+        '    If _tableOrViewName = "CdOiItem" Then
+        '        _dboTvpUpdateName = "dbo.UpdateCdOiItemTVP"
+        '        _dboTvpInsertName = "dbo.InsertCdOiItemTVP"
+        '    ElseIf _tableOrViewName = "PcOiItem" Then
+        '        _dboTvpUpdateName = "dbo.UpdatePcOiItemTVP"
+        '        _dboTvpInsertName = "dbo.InsertPcOiItemTVP"
+        '    ElseIf _tableOrViewName = "CkOiItem" Then
+        '        _dboTvpUpdateName = "dbo.UpdateCkOiItemTVP"
+        '        _dboTvpInsertName = "dbo.InsertCkOiItemTVP"
+        '    End If
+        'End Sub
 
-        Public Function GetDboTvpUpdateName() As String
-            Return _dboTvpUpdateName
-        End Function
+        'Public Function GetDboTvpUpdateName() As String
+        '    Return _dboTvpUpdateName
+        'End Function
 
-        Public Sub SetDboTvpUpdateName(AutoPropertyValue As String)
-            _dboTvpUpdateName = AutoPropertyValue
-        End Sub
+        'Public Sub SetDboTvpUpdateName(AutoPropertyValue As String)
+        '    _dboTvpUpdateName = AutoPropertyValue
+        'End Sub
 
-        Public Function GetDboTvpInsertName() As String
-            Return _dboTvpInsertName
-        End Function
+        'Public Function GetDboTvpInsertName() As String
+        '    Return _dboTvpInsertName
+        'End Function
 
-        Public Sub SetDboTvpInsertName(AutoPropertyValue As String)
-            _dboTvpInsertName = AutoPropertyValue
-        End Sub
+        'Public Sub SetDboTvpInsertName(AutoPropertyValue As String)
+        '    _dboTvpInsertName = AutoPropertyValue
+        'End Sub
 
     End Class
 

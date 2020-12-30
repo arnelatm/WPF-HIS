@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
         Implements IDaoAll(Of Basic)
 
         Private ReadOnly Db As New Db()
-        Private _tableOrViewName As String
+        Private ReadOnly _tableOrViewName As String
 
         Public Sub New(ByVal tableName As String)
             _tableOrViewName = tableName

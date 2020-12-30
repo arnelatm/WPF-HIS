@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Forms
         Private _apFooter As DgvFooter
         Private _csrOiItems As List(Of CsrOiItemView)
         Private _jiFooter As DgvFooter
-        Private _journalItems As List(Of JournalItemView)
+        Private _journalItems As List(Of IJournalItemView)
         Private _revCostCenterByCode
         Private _viewGl As Boolean = False
 
@@ -164,7 +164,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of JournalItemView) Implements ICashReceiptJournalView.JournalItems
+        Public Property JournalItems As List(Of IJournalItemView) Implements ICashReceiptJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
