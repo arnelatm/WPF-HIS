@@ -54,8 +54,8 @@ Namespace PresentationLayer.Presenters
                 JournalCode = "PC"
             End If
             DjItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
-            OiItemModel = New ModelAccounts("DjOiItem", oiArgs)
-            ModelPresenter = New ModelAccounts("DisbursementJournal", args)
+            OiItemModel = New ModelAccounts("DjOiItem", Nothing, oiArgs)
+            ModelPresenter = New ModelAccounts("DisbursementJournal", JournalCode, args)
             SortOrderKey = "IdNo"
             TableName = tableOrViewName
             OriginalModel = New DisbursementJournalModel()
