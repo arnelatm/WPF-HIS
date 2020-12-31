@@ -15,15 +15,14 @@ Namespace ServiceLayer.ActionService
 
         Protected Service As Object
 
-        Public Sub New(accountName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
-            Dim bizObjectName
-            'If accountName.Length > 11 AndAlso accountName.Right(11) = "JournalItem" Then
-            'bizObjectName = $"AATM.Accounts.BusinessLayer.JournalItem"
-            'ElseIf accountName.Length > 6 AndAlso accountName.Right(6) = "OiItem" Then
-            'bizObjectName = $"AATM.Accounts.BusinessLayer.DjOiItem"
-            'Else
-            bizObjectName = $"AATM.Accounts.BusinessLayer." + accountName
-            'End If
+        Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
+            CreateBusinessObject(objectName, bizParam)
+            CreateDao(objectName, daoParam)
+        End Sub
+
+        Private Sub CreateBusinessObject(objectName As String, bizParam As Object)
+            Dim bizObjectName As String
+            bizObjectName = $"AATM.Accounts.BusinessLayer." + objectName
             If bizParam IsNot Nothing AndAlso bizParam.Length > 0 Then
                 DataBo = Activator.CreateInstance(Type.GetType(bizObjectName), bizParam)
             Else
@@ -33,20 +32,23 @@ Namespace ServiceLayer.ActionService
                 MessageBox.Show("Missing Business Object " + bizObjectName)
                 Debugger.Break()
             End If
+        End Sub
+
+        Private Sub CreateDao(objectName As String, daoParam As Object)
             If daoParam IsNot Nothing AndAlso daoParam.Length > 0 Then
-                DataDao = DaoFactoryAccounts.CreateDao(accountName, daoParam)
+                DataDao = DaoFactoryAccounts.CreateDao(objectName, daoParam)
             Else
-                DataDao = DaoFactoryAccounts.CreateDao(accountName)
+                DataDao = DaoFactoryAccounts.CreateDao(objectName)
             End If
             If DataDao IsNot Nothing Then
-                If accountName = "Basic" Then
+                If objectName = "Basic" Then
                     If daoParam Is Nothing AndAlso daoParam.Length > 0 Then
                         MessageBox.Show("Please provide BasicDao table or itemView name.")
                         Debugger.Break()
                     End If
                 End If
             Else
-                MessageBox.Show("Missing Data Access Object " + accountName.Trim() + "dao")
+                MessageBox.Show("Missing Data Access Object " + objectName.Trim() + "dao")
                 Debugger.Break()
             End If
         End Sub
