@@ -12,6 +12,7 @@ Namespace BusinessRules
 
             MyBase.New(propertyName)
             [Error] = propertyName & " is a required field."
+
         End Sub
 
         Public Sub New(propertyName As String, errorMessage As String)

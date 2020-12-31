@@ -340,7 +340,8 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetOpenInvoices(idNo As Integer) As List(Of DjOiItem) Implements IDaoOiItem(Of DjOiItem).GetOpenInvoices
-            Dim oiDao = New DjOiItemDao
+
+            Dim oiDao = New DjOiItemDao({"CdOiIte"})
             Return oiDao.GetOpenInvoices(idNo)
         End Function
 

@@ -53,7 +53,7 @@ Namespace PresentationLayer.Presenters
                 ReportName = "Petty Cash Disbursement Journal.Rpt"
                 JournalCode = "PC"
             End If
-            DjItemModel = New ModelAccounts("JournalItem", djArgs)
+            DjItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
             OiItemModel = New ModelAccounts("DjOiItem", oiArgs)
             ModelPresenter = New ModelAccounts("DisbursementJournal", args)
             SortOrderKey = "IdNo"

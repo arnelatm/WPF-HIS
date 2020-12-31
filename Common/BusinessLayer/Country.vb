@@ -16,7 +16,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateLength("CountryCode", 2, 2))
                 AddRule(New ValidateLength("IsoA3", 3, 3))
                 AddRule(New ValidateRegex("IsoN", "\d{3}"))
-                AddRule(New ValidateRegex("CountryTelIdNo", "\d{1,7}"))
+                AddRule(New ValidateRegex("CountryTelCode", "\d{1,7}"))
             End If
         End Sub
 
