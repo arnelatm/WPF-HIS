@@ -14,8 +14,18 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _apJournalItemModel As New ModelAccounts("JournalItem", {"ApJournalItem_View", "dbo.UpdateApJournalItemTVP", "dbo.InsertApJournalItemTVP"})
-        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
+        Private ReadOnly _apJournalItemModel As New ModelAccounts("JournalItem", Nothing, {"ApJournalItem_View", "dbo.UpdateApJournalItemTVP", "dbo.InsertApJournalItemTVP"})
+        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice", Nothing, )
+
+        '    If _tableOrViewName = "CdOiItem" Then
+        '        _dboTvpUpdateName = "dbo.UpdateCdOiItemTVP"
+        '        _dboTvpInsertName = "dbo.InsertCdOiItemTVP"
+        '    ElseIf _tableOrViewName = "PcOiItem" Then
+        '        _dboTvpUpdateName = "dbo.UpdatePcOiItemTVP"
+        '        _dboTvpInsertName = "dbo.InsertPcOiItemTVP"
+        '    ElseIf _tableOrViewName = "CkOiItem" Then
+        '        _dboTvpUpdateName = "dbo.UpdateCkOiItemTVP"
+        '        _dboTvpInsertName = "dbo.InsertCkOiItemTVP"
 
         Public Sub New(view As IApJournalView)
             MyBase.New(view)
