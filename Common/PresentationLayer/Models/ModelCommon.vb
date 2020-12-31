@@ -7,8 +7,8 @@ Namespace PresentationLayer.Models
         Inherits Model
         Implements IModelCommon
 
-        Public Sub New(accountName As String)
-            DataService = New ServiceCommon(accountName)
+        Public Sub New(accountName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
+            DataService = New ServiceCommon(accountName, bizParam, daoParam)
         End Sub
 
         Public Sub New()

@@ -1314,4 +1314,17 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
+    Public Function MakeEnumComboList(Of TE)()
+        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim data As New ClassesLibrary.LookupData With {
+                .IdNo = CInt(c),
+                .Code = EnumToCode(c),
+                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+            }
+            dataList.Add(data)
+        Next
+        Return dataList
+    End Function
+
 End Class

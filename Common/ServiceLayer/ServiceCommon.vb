@@ -17,7 +17,7 @@ Namespace ServiceLayer
             CreateDao(objectName, daoParam)
         End Sub
 
-        Private Sub CreateBusinessObject(objectName As String, bizParam As Object)
+        Protected Overrides Sub CreateBusinessObject(objectName As String, Optional bizParam As Object = Nothing)
             Dim bizObject = $"AATM.Common.BusinessLayer." + objectName
             DataBo = Activator.CreateInstance(Type.GetType(bizObject))
             If DataBo Is Nothing Then
@@ -26,11 +26,11 @@ Namespace ServiceLayer
             End If
         End Sub
 
-        Private Sub CreateDao(objectName As String, daoParam As Object)
-            If daoParam Is Nothing Or daoParam.Length = 0 Then
+        Protected Overrides Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing)
+            If daoParam Is Nothing OrElse daoParam.Length = 0 Then
                 DataDao = DaoFactoryCommonFactory.CreateDao(objectName)
             Else
-                DataDao = DaoFactoryCommonFactory.CreateDao(objectName, daoTableOrViewName)
+                DataDao = DaoFactoryCommonFactory.CreateDao(objectName, daoParam)
             End If
             If DataDao Is Nothing Then
                 MessageBox.Show("Missing Data Access Object " + objectName.Trim() + "dao")

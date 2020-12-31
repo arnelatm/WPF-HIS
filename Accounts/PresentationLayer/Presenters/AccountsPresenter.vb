@@ -16,14 +16,14 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
         End Sub
 
-        Public Overrides Sub Initializer(baseClassName As String, Optional tableOrViewName As String = Nothing)
+        Public Overrides Sub Initializer(objectName As String, Optional tableOrViewName As String = Nothing, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
             'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
-            TableName = IIf(tableOrViewName Is Nothing, baseClassName, tableOrViewName)
-            SortOrderKey = baseClassName + "Name"
+            TableName = IIf(tableOrViewName Is Nothing, objectName, tableOrViewName)
+            SortOrderKey = objectName + "Name"
             If tableOrViewName Is Nothing Then
-                ModelPresenter = New ModelAccounts(baseClassName)
+                ModelPresenter = New ModelAccounts(objectName)
             Else
-                ModelPresenter = New ModelAccounts(baseClassName, tableOrViewName)
+                ModelPresenter = New ModelAccounts(objectName, tableOrViewName)
             End If
             'Dim t As Type = Type.GetType(presenterModelName)
             'If tableOrViewName Is Nothing Then

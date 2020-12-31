@@ -12,8 +12,8 @@ Public Class Model
     Private Shared ReadOnly LoginService As New ServiceLogin()
     Private Shared ReadOnly Service As New Service()
 
-    Public Sub New(accountName As String)
-        DataService = New Service(accountName)
+    Public Sub New(accountName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
+        DataService = New Service(accountName, bizParam, daoParam)
     End Sub
 
     Public Sub New()

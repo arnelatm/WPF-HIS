@@ -74,13 +74,13 @@ Namespace PresentationLayer.Presenters
             MakeDefaultValues()
         End Sub
 
-        Public Overridable Sub Initializer(baseClassName As String, Optional tableOrViewName As String = Nothing)
+        Public Overridable Sub Initializer(objectName As String, Optional tableOrViewName As String = Nothing, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
             Dim presenterModelName = $"AATM.Common.PresentationLayer.Models.ModelCommon"
-            TableName = IIf(tableOrViewName Is Nothing, baseClassName, tableOrViewName)
-            SortOrderKey = baseClassName + "Name"
-            Dim args As Object() = {baseClassName}
+            TableName = IIf(tableOrViewName Is Nothing, objectName, tableOrViewName)
+            SortOrderKey = objectName + "Name"
+            Dim args As Object() = {objectName}
             Dim t As Type = Type.GetType(presenterModelName)
-            ModelPresenter = Activator.CreateInstance(t, args)
+            ModelPresenter = Activator.CreateInstance(t, bizParams, daoParams)
             OriginalModel = New TM
             DataModel = New TM
         End Sub
@@ -136,18 +136,18 @@ Namespace PresentationLayer.Presenters
             Return
         End Sub
 
-        Public Function MakeEnumComboList(Of TE)()
-            Dim dataList As New List(Of ClassesLibrary.LookupData)
-            For Each c In [Enum].GetValues(GetType(TE))
-                Dim data As New ClassesLibrary.LookupData With {
-                    .IdNo = CInt(c),
-                    .Code = EnumToCode(c),
-                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-                }
-                dataList.Add(data)
-            Next
-            Return dataList
-        End Function
+        'Public Function MakeEnumComboList(Of TE)()
+        '    Dim dataList As New List(Of ClassesLibrary.LookupData)
+        '    For Each c In [Enum].GetValues(GetType(TE))
+        '        Dim data As New ClassesLibrary.LookupData With {
+        '            .IdNo = CInt(c),
+        '            .Code = EnumToCode(c),
+        '            .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+        '        }
+        '        dataList.Add(data)
+        '    Next
+        '    Return dataList
+        'End Function
 
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             Dim type As Type = View.GetType

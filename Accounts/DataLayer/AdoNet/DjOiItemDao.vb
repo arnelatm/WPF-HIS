@@ -20,9 +20,9 @@ Namespace DataLayer.AdoNet
         End Sub
 
         Public Sub New(dataNames As Object())
-            TableOrViewName = dataNames(0)
-            DboTvpUpdateName = dataNames(1)
-            DboTvpInsertName = dataNames(2)
+            TableOrViewName = dataNames(0).ToString()
+            DboTvpUpdateName = dataNames(1).ToString()
+            DboTvpInsertName = dataNames(2).ToString()
         End Sub
 
         Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of DjOiItem) Implements IDaoChild(Of DjOiItem).GetRecordsWithIdNo

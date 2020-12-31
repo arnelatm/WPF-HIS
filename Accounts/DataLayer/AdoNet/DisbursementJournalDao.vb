@@ -14,15 +14,15 @@ Namespace DataLayer.AdoNet
         Private ReadOnly _db As New Db()
         Protected TableOrViewName As String
         Protected SeriesName As String
-        Protected JiArgs As Object
-        Protected OiArgs As Object
+        Protected JiDataNames As Object
+        Protected OiDataNames As Object
 
-        Public Sub New(args As Object())
-            Me.Args = args
-            TableOrViewName = args(0)
-            SeriesName = args(1)
-            JiArgs = args(2)
-            OiArgs = args(3)
+        Public Sub New(dataNames As Object())
+            Me.Args = dataNames
+            TableOrViewName = dataNames(0)
+            SeriesName = dataNames(1)
+            JiDataNames = dataNames(2)
+            OiDataNames = dataNames(3)
         End Sub
 
         Public Function GetRecordById(idNo) As DisbursementJournal Implements IDao(Of DisbursementJournal).GetRecordById
@@ -82,8 +82,8 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
                 data = _db.Read(sql, DjMake, params).FirstOrDefault()
             End If
-            jiDao = New JournalItemDao(JiArgs)
-            oiDao = New DjOiItemDao(OiArgs)
+            jiDao = New JournalItemDao(JiDataNames)
+            oiDao = New DjOiItemDao(OiDataNames)
             If data Is Nothing Then
                 Debugger.Break()
             Else
@@ -340,8 +340,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetOpenInvoices(idNo As Integer) As List(Of DjOiItem) Implements IDaoOiItem(Of DjOiItem).GetOpenInvoices
-
-            Dim oiDao = New DjOiItemDao({"CdOiIte"})
+            Dim oiDao = New DjOiItemDao(JiDataNames)
             Return oiDao.GetOpenInvoices(idNo)
         End Function
 
