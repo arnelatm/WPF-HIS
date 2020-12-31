@@ -19,10 +19,10 @@ Namespace DataLayer.AdoNet
         Public Sub New()
         End Sub
 
-        Public Sub New(args As Object())
-            TableOrViewName = args(0)
-            DboTvpUpdateName = args(1)
-            DboTvpInsertName = args(2)
+        Public Sub New(dataNames As Object())
+            TableOrViewName = dataNames(0)
+            DboTvpUpdateName = dataNames(1)
+            DboTvpInsertName = dataNames(2)
         End Sub
 
         Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of DjOiItem) Implements IDaoChild(Of DjOiItem).GetRecordsWithIdNo
@@ -106,9 +106,9 @@ Namespace DataLayer.AdoNet
             .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
             }
 
-        Public Function GetTableOrViewName() As String
-            Return TableOrViewName
-        End Function
+        'Public Function GetTableOrViewName() As String
+        '    Return TableOrViewName
+        'End Function
 
         'Public Sub SetTableOrViewName(AutoPropertyValue As String)
         '    TableOrViewName = AutoPropertyValue

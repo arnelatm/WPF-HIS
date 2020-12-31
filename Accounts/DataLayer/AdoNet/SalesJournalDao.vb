@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim jiDao = New SalesJournalItemDao
+            Dim jiDao = New JournalItemDao({"SalesJournalItem_View", "dbo.UpdateSalesJournalItemTVP", "dbo.InsertSalesJournalItemTVP"})
             Dim sdDao = New SalesDepositDao
             Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
             Dim sd = sdDao.GetRecordsWithIdNo(data.IdNo, "sequence")

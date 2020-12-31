@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _apJournalItemModel As New ModelAccounts("ApJournalItem")
+        Private ReadOnly _apJournalItemModel As New ModelAccounts("JournalItem", {"ApJournalItem_View", "dbo.UpdateApJournalItemTVP", "dbo.InsertApJournalItemTVP"})
         Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
 
         Public Sub New(view As IApJournalView)
@@ -24,6 +24,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New ApJournalModel()
             DataModel = New ApJournalModel
+
             GlobalVariables.EventAggregator.SubscribeEvent(Me)
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)

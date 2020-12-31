@@ -20,11 +20,10 @@ Namespace BusinessRules
 
         Public Overrides Function Validate(businessObject As BusinessObject) As Boolean
             Dim bo = GetPropertyValue(businessObject)
-            Dim boS As String
-            If bo Is Nothing Then
-                boS = Nothing
-            Else
-                boS = bo.ToString()
+            Dim boS = If(bo Is Nothing, Nothing, bo.ToString())
+            If boS Is Nothing Then
+                MessageBox.Show("Invalid Field " + [Property] + " in rule <'" + [Error] + "'>" + " in class <" + ToString() + $"> please take screen shot and report to developer for correction!")
+                Return True
             End If
             Dim bok = Regex.Match(boS, Pattern).Success
             Return bok

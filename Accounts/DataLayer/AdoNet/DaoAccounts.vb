@@ -10,6 +10,9 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
+        Public Sub New()
+        End Sub
+
     End Class
 
 End Namespace

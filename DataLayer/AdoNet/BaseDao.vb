@@ -8,6 +8,9 @@
         Private _lastFindParms As Object
         Private _lastFindQuery As String
 
+        Public Sub New()
+        End Sub
+
         Public Function CheckIfUnique(searchValue As String, tableName As String, searchFieldName As String,
                                       currentIdNo As Int64) As String _
             Implements IBaseDao.CheckIfUnique

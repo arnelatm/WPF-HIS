@@ -105,7 +105,7 @@ Namespace DataLayer.AdoNet
             Return Db.InsertTvp(DboTvpInsertFileName, tvpTable)
         End Function
 
-        Public Function GetGlLedger(ByRef AccountIdNo As Int16, transactionDate As Date, Optional sortExpression As String = "TransactionDate") _
+        Public Function GetGlLedger(ByRef accountIdNo As Int16, transactionDate As Date, Optional sortExpression As String = "TransactionDate") _
             As List(Of GlLedgerItem)
             Dim sql As String =
                     "SELECT " &

@@ -30,7 +30,7 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim jiDao = New ErJournalItemDao
+            Dim jiDao = New JournalItemDao({"ErJournalItem_View", "dbo.UpdateErJournalItemTVP", "dbo.InsertErJournalItemTVP"})
             data.JournalItems = jiDao.GetRecordsWithIdNo(idNo, "Sequence")
             For Each item In data.JournalItems
                 data.TotalDebits += item.Debit

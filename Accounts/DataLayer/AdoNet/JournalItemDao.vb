@@ -15,13 +15,13 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateName As String = ""
         Protected DboTvpInsertName As String = ""
 
-        Public Sub New()
+        Public Sub New(ByVal dataNames As Object())
+            TableOrViewName = dataNames(0).ToString()
+            DboTvpUpdateName = dataNames(1).ToString()
+            DboTvpInsertName = dataNames(2).ToString()
         End Sub
 
-        Public Sub New(args As Object())
-            TableOrViewName = args(0)
-            DboTvpUpdateName = args(1)
-            DboTvpInsertName = args(2)
+        Public Sub New()
         End Sub
 
         Public Function GetRecordsWithIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
@@ -82,9 +82,9 @@ Namespace DataLayer.AdoNet
             .SpecialAccount = Extensions.AsString(reader("SpecialAccount"))
             }
 
-        Public Function GetTableOrViewName() As String
-            Return TableOrViewName
-        End Function
+        'Public Function GetTableOrViewName() As String
+        '    Return TableOrViewName
+        'End Function
 
         Public Sub SetTableOrViewName(AutoPropertyValue As String)
             TableOrViewName = AutoPropertyValue
