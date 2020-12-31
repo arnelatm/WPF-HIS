@@ -19,8 +19,7 @@ Namespace ServiceLayer.ActionService
             CreateBusinessObject(objectName, bizParam)
             CreateDao(objectName, daoParam)
         End Sub
-
-        Private Sub CreateBusinessObject(objectName As String, bizParam As Object)
+        Protected Overrides Sub CreateBusinessObject(objectName As String, Optional bizParam As Object = Nothing)
             Dim bizObjectName As String
             bizObjectName = $"AATM.Accounts.BusinessLayer." + objectName
             If bizParam IsNot Nothing AndAlso bizParam.Length > 0 Then
@@ -34,7 +33,7 @@ Namespace ServiceLayer.ActionService
             End If
         End Sub
 
-        Private Sub CreateDao(objectName As String, daoParam As Object)
+        Protected Overrides Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing)
             If daoParam IsNot Nothing AndAlso daoParam.Length > 0 Then
                 DataDao = DaoFactoryAccounts.CreateDao(objectName, daoParam)
             Else

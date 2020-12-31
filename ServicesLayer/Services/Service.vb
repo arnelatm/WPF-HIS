@@ -18,24 +18,44 @@ Namespace Services
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
+        'Protected Shared ReadOnly DaoFactory As IDaoFactory = DaoFactories.GetFactory(Provider)
 
-        Public Sub New(accountName As String)
-            Dim securityGroup As New SecurityGroup
-            Dim bizObject = $"AATM.BusinessLayer.BusinessObjects." + accountName
-            Dim dao = accountName + "Dao"
-            'DataBo = Activator.CreateInstance(Type.GetType(bizObject))
-            DataBo = GetInstance(bizObject)
-            If DataBo Is Nothing Then
-                MessageBox.Show("Missing Business Object " + bizObject)
-            End If
-            DataDao = Me.GetType().GetProperty(dao, BindingFlags.NonPublic Or BindingFlags.Instance).GetValue(Me)
-            If DataDao Is Nothing Then
-                MessageBox.Show("Missing Data Access Object " + dao)
-                Debugger.Break()
-            End If
+        Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
+            'Dim securityGroup As New SecurityGroup
+            CreateBusinessObject(objectName, bizParam)
+            CreateDao(objectName, daoParam)
         End Sub
 
         Public Sub New()
+        End Sub
+
+        Protected Overridable Sub CreateBusinessObject(objectName As String, Optional bizParam As Object = Nothing)
+            Dim bizObject = $"AATM.BusinessLayer.BusinessObjects." + objectName
+
+            Dim tType = Type.GetType(bizObject)
+            If bizParam IsNot Nothing AndAlso bizParam.Length > 0 Then
+                DataBo = GetInstance(bizObject)
+            Else
+                DataBo = GetInstance(bizObject)
+                'DataBo = Activator.CreateInstance(tType)
+            End If
+            If DataBo Is Nothing Then
+                MessageBox.Show("Missing Business Object " + bizObject)
+            End If
+        End Sub
+
+        Protected Overridable Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing)
+            'If daoParam Is Nothing Or daoParam.Length = 0 Then
+            '    DataDao = Factory.CreateDao(objectName)
+            'Else
+            '    DataDao = Factory.CreateDao(objectName, daoParam)
+            'End If
+            Dim dao = objectName + "Dao"
+            DataDao = Me.GetType().GetProperty(dao, BindingFlags.NonPublic Or BindingFlags.Instance).GetValue(Me)
+            If DataDao Is Nothing Then
+                MessageBox.Show("Missing Data Access Object " + objectName)
+                Debugger.Break()
+            End If
         End Sub
 
         Public Property DataBo As Object

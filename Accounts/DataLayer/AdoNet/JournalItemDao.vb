@@ -86,19 +86,19 @@ Namespace DataLayer.AdoNet
         '    Return TableOrViewName
         'End Function
 
-        Public Sub SetTableOrViewName(AutoPropertyValue As String)
-            TableOrViewName = AutoPropertyValue
-            If TableOrViewName = "CkJournalItem_View" Then
-                DboTvpUpdateName = "UpdateCdJournalItemTVP"
-                DboTvpInsertName = "InsertCdJournalItemTVP"
-            ElseIf TableOrViewName = "CdJournalItem_View" Then
-                DboTvpUpdateName = "UpdateCdJournalItemTVP"
-                DboTvpInsertName = "InsertCdJournalItemTVP"
-            ElseIf TableOrViewName = "CkJournalItem_View" Then
-                DboTvpUpdateName = "UpdateCkJournalItemTVP"
-                DboTvpInsertName = "InsertCkJournalItemTVP"
-            End If
-        End Sub
+        'Public Sub SetTableOrViewName(AutoPropertyValue As String)
+        '    TableOrViewName = AutoPropertyValue
+        '    If TableOrViewName = "CkJournalItem_View" Then
+        '        DboTvpUpdateName = "UpdateCdJournalItemTVP"
+        '        DboTvpInsertName = "InsertCdJournalItemTVP"
+        '    ElseIf TableOrViewName = "CdJournalItem_View" Then
+        '        DboTvpUpdateName = "UpdateCdJournalItemTVP"
+        '        DboTvpInsertName = "InsertCdJournalItemTVP"
+        '    ElseIf TableOrViewName = "CkJournalItem_View" Then
+        '        DboTvpUpdateName = "UpdateCkJournalItemTVP"
+        '        DboTvpInsertName = "InsertCkJournalItemTVP"
+        '    End If
+        'End Sub
 
     End Class
 

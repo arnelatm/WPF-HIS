@@ -11,8 +11,8 @@ Namespace PresentationLayer.Models
 
         End Sub
 
-        Public Sub New(accountName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
-            DataService = New ServiceAccounts(accountName, bizParam, daoParam)
+        Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
+            DataService = New ServiceAccounts(objectName, bizParam, daoParam)
         End Sub
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IModelAccounts.UpdateGlReferenceNumber
@@ -39,9 +39,9 @@ Namespace PresentationLayer.Models
         '    Return updateResult
         'End Function
 
-        Public Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer Implements IModelAccounts.AddApOpenInvoice
-            Throw New NotImplementedException()
-        End Function
+        'Public Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer Implements IModelAccounts.AddApOpenInvoice
+        '    Throw New NotImplementedException()
+        'End Function
 
         Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM) Implements IModelAccounts.GetCustomerOpenInvoices
             Return DataService.GetOpenInvoices(Of TM)(idNo)
@@ -57,75 +57,5 @@ Namespace PresentationLayer.Models
         End Function
 
     End Class
-
-    'Public Class ModelOpenInvoice
-    '    Inherits ModelAccounts
-    '    Implements IModelOpenInvoice
-
-    '    'Protected Property ServiceOpenInvoice
-    '    Public Sub New()
-
-    '    End Sub
-
-    '    Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.AddInvoicePayment
-    '        Dim updateResult As Integer
-    '        updateResult = DataService.AddInvoicePayment(idNo, amount, discountTaken)
-    '        Return updateResult
-    '    End Function
-
-    '    Public Function RemoveInvoiceCollection(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer Implements IModelOpenInvoice.RemoveInvoiceCollection
-    '        Dim updateResult As Integer
-    '        updateResult = DataService.RemoveInvoiceCollection(idNo, amount, discountTaken)
-    '        Return updateResult
-    '    End Function
-
-    '    Public Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer Implements IModelOpenInvoice(Of TM).AddApOpenInvoice
-    '        Throw New NotImplementedException()
-    '    End Function
-
-    '    Private Function GetCustomerOpenInvoices(idNo As Int32) As List(Of TM) Implements IModelOpenInvoice(Of TM).GetCustomerOpenInvoices
-    '        Return DataService.GetCustomerOpenInvoices(idNo)
-    '    End Function
-
-    '    Private Function GetSupplierOpenInvoices(idNo As Int32) As List(Of TM) Implements IModelOpenInvoice(Of TM).GetSupplierOpenInvoices
-    '        Return DataService.GetSupplierOpenInvoices(idNo)
-    '    End Function
-    'End Class
-
-    'Public Class ModelApOpenInvoice
-    '    Inherits ModelOpenInvoice
-
-    '    Public Sub New()
-    '        DataService = New ServiceApOpenInvoice()
-    '    End Sub
-
-    'End Class
-
-    'Public Class ModelArOpenInvoice
-    '    Inherits ModelOpenInvoice
-
-    '    Public Sub New()
-    '        DataService = New ServiceArOpenInvoice()
-    '    End Sub
-
-    'End Class
-
-    'Public Class ModelDistributionScheme
-    '    Inherits ModelOpenInvoice
-
-    '    Public Sub New()
-    '        DataService = New ServiceDistributionScheme()
-    '    End Sub
-
-    'End Class
-
-    'Public Class ModelDistributionSchemeItem
-    '    Inherits ModelOpenInvoice
-
-    '    Public Sub New()
-    '        DataService = New ServiceDistributionSchemeItem()
-    '    End Sub
-
-    'End Class
 
 End Namespace

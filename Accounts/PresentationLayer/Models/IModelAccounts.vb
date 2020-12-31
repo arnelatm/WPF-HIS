@@ -5,7 +5,7 @@ Namespace PresentationLayer.Models
     Public Interface IModelAccounts
         Inherits IModelCommon
 
-        Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer
+        'Function AddApOpenInvoice(journalItemModel As JournalItemModel, journalCode As String) As Integer
 
         'Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Integer
 

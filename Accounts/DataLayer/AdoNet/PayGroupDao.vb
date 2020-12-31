@@ -15,8 +15,8 @@ Namespace DataLayer.AdoNet
         Private ReadOnly _db As New Db()
         Private _tableOrViewName As String
 
-        Public Sub New(ByVal tableNameOrView As String)
-            _tableOrViewName = tableNameOrView
+        Public Sub New(ByVal tableNameOrView As Object)
+            _tableOrViewName = tableNameOrView.ToString()
         End Sub
 
         Public Function GetRecordById(idNo) As PayGroup Implements IDaoAll(Of PayGroup).GetRecordById
