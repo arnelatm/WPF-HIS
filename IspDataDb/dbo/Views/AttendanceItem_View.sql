@@ -1,11 +1,11 @@
-﻿CREATE VIEW dbo.Attendance_View
+﻿CREATE VIEW dbo.AttendanceItem_View
 AS
-SELECT        dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Attendance.IdNo, dbo.Attendance.EmployeeIdNo, dbo.Attendance.PayPeriodIdNo, dbo.Attendance.DaysPresent, 
-                         dbo.Attendance.DaysAbsentWithPay, dbo.Attendance.DaysAbsentWithoutPay, dbo.Attendance.DaysOff
+SELECT        dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.AttendanceItem.IdNo, dbo.AttendanceItem.EmployeeIdNo, dbo.AttendanceItem.PayPeriodIdNo, 
+                         dbo.AttendanceItem.DaysPresent, dbo.AttendanceItem.DaysAbsentWithPay, dbo.AttendanceItem.DaysAbsentWithoutPay, dbo.AttendanceItem.DaysOff, dbo.AttendanceItem.Sequence
 FROM            dbo.Employee INNER JOIN
-                         dbo.Attendance ON dbo.Employee.IdNo = dbo.Attendance.EmployeeIdNo
+                         dbo.AttendanceItem ON dbo.Employee.IdNo = dbo.AttendanceItem.EmployeeIdNo
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Attendance_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'AttendanceItem_View';
 
 
 GO
@@ -90,12 +90,12 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Attendance"
+         Begin Table = "AttendanceItem"
             Begin Extent = 
-               Top = 6
-               Left = 274
-               Bottom = 226
-               Right = 487
+               Top = 3
+               Left = 280
+               Bottom = 281
+               Right = 493
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -126,5 +126,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Attendance_View';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'AttendanceItem_View';
 

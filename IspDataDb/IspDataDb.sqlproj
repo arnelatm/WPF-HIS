@@ -396,8 +396,11 @@
     <Build Include="dbo\Functions\FuncApSummary.sql" />
     <Build Include="dbo\Tables\PayrollEarning.sql" />
     <Build Include="dbo\Tables\PayrollDeduction.sql" />
-    <Build Include="dbo\Tables\Attendance.sql" />
-    <Build Include="dbo\Views\Attendance_View.sql" />
+    <Build Include="dbo\Tables\AttendanceItem.sql" />
+    <Build Include="dbo\Views\AttendanceItem_View.sql" />
+    <Build Include="dbo\Stored Procedures\InsertAttendanceItemTVP.sql" />
+    <Build Include="dbo\User Defined Types\AttendanceItemUpdate.sql" />
+    <Build Include="dbo\User Defined Types\AttendanceItemInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
