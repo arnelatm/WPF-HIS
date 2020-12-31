@@ -50,16 +50,17 @@ Namespace PresentationLayer.Views.Forms
             Me.CTabControl1 = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tbcPayroll = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayPeriodAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.EmployeeNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.EmployeeNameAraDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DaysPresentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DaysAbsentWithPayDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DaysOffDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPayPeriodAttendance = New System.Windows.Forms.BindingSource(Me.components)
             Me.TabPage2 = New System.Windows.Forms.TabPage()
+            Me.EmployeeNameDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.EmployeeNameAraDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DaysPresentDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DaysAbsentWithPayDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DaysOffDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.DaysTotal = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -483,7 +484,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayPeriodAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPayPeriodAttendance.AutoGenerateColumns = False
             Me.DataGridViewPayPeriodAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPayPeriodAttendance.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.EmployeeNameDataGridViewTextBoxColumn, Me.EmployeeNameAraDataGridViewTextBoxColumn, Me.DaysPresentDataGridViewTextBoxColumn, Me.DaysAbsentWithPayDataGridViewTextBoxColumn, Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn, Me.DaysOffDataGridViewTextBoxColumn})
+            Me.DataGridViewPayPeriodAttendance.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EmployeeNameDataGridViewTextBoxColumn, Me.EmployeeNameAraDataGridViewTextBoxColumn, Me.DaysPresentDataGridViewTextBoxColumn, Me.DaysAbsentWithPayDataGridViewTextBoxColumn, Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn, Me.DaysOffDataGridViewTextBoxColumn, Me.DaysTotal, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewPayPeriodAttendance.DataInGridChanged = False
             Me.DataGridViewPayPeriodAttendance.DataSource = Me.bsPayPeriodAttendance
             DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -512,62 +513,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayPeriodAttendance.StartTrackingChanges = False
             Me.DataGridViewPayPeriodAttendance.TabIndex = 171
             '
-            'IdNoDataGridViewTextBoxColumn
-            '
-            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
-            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'EmployeeIdNoDataGridViewTextBoxColumn
-            '
-            Me.EmployeeIdNoDataGridViewTextBoxColumn.DataPropertyName = "EmployeeIdNo"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn.HeaderText = "EmployeeIdNo"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn.Name = "EmployeeIdNoDataGridViewTextBoxColumn"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'EmployeeNameDataGridViewTextBoxColumn
-            '
-            Me.EmployeeNameDataGridViewTextBoxColumn.DataPropertyName = "EmployeeName"
-            Me.EmployeeNameDataGridViewTextBoxColumn.HeaderText = "EmployeeName"
-            Me.EmployeeNameDataGridViewTextBoxColumn.Name = "EmployeeNameDataGridViewTextBoxColumn"
-            Me.EmployeeNameDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'EmployeeNameAraDataGridViewTextBoxColumn
-            '
-            Me.EmployeeNameAraDataGridViewTextBoxColumn.DataPropertyName = "EmployeeNameAra"
-            Me.EmployeeNameAraDataGridViewTextBoxColumn.HeaderText = "EmployeeNameAra"
-            Me.EmployeeNameAraDataGridViewTextBoxColumn.Name = "EmployeeNameAraDataGridViewTextBoxColumn"
-            Me.EmployeeNameAraDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'DaysPresentDataGridViewTextBoxColumn
-            '
-            Me.DaysPresentDataGridViewTextBoxColumn.DataPropertyName = "DaysPresent"
-            Me.DaysPresentDataGridViewTextBoxColumn.HeaderText = "DaysPresent"
-            Me.DaysPresentDataGridViewTextBoxColumn.Name = "DaysPresentDataGridViewTextBoxColumn"
-            Me.DaysPresentDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'DaysAbsentWithPayDataGridViewTextBoxColumn
-            '
-            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.DataPropertyName = "DaysAbsentWithPay"
-            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.HeaderText = "DaysAbsentWithPay"
-            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.Name = "DaysAbsentWithPayDataGridViewTextBoxColumn"
-            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'DaysAbsentWithoutPayDataGridViewTextBoxColumn
-            '
-            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.DataPropertyName = "DaysAbsentWithoutPay"
-            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.HeaderText = "DaysAbsentWithoutPay"
-            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.Name = "DaysAbsentWithoutPayDataGridViewTextBoxColumn"
-            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'DaysOffDataGridViewTextBoxColumn
-            '
-            Me.DaysOffDataGridViewTextBoxColumn.DataPropertyName = "DaysOff"
-            Me.DaysOffDataGridViewTextBoxColumn.HeaderText = "DaysOff"
-            Me.DaysOffDataGridViewTextBoxColumn.Name = "DaysOffDataGridViewTextBoxColumn"
-            Me.DaysOffDataGridViewTextBoxColumn.ReadOnly = True
-            '
             'bsPayPeriodAttendance
             '
             Me.bsPayPeriodAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
@@ -581,6 +526,92 @@ Namespace PresentationLayer.Views.Forms
             Me.TabPage2.TabIndex = 1
             Me.TabPage2.Text = "TabPage2"
             Me.TabPage2.UseVisualStyleBackColor = True
+            '
+            'EmployeeNameDataGridViewTextBoxColumn
+            '
+            Me.EmployeeNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.EmployeeNameDataGridViewTextBoxColumn.DataPropertyName = "EmployeeName"
+            Me.EmployeeNameDataGridViewTextBoxColumn.EditingMode = False
+            Me.EmployeeNameDataGridViewTextBoxColumn.HeaderText = "Employee Name"
+            Me.EmployeeNameDataGridViewTextBoxColumn.Name = "EmployeeNameDataGridViewTextBoxColumn"
+            Me.EmployeeNameDataGridViewTextBoxColumn.ReadOnly = True
+            Me.EmployeeNameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'EmployeeNameAraDataGridViewTextBoxColumn
+            '
+            Me.EmployeeNameAraDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.EmployeeNameAraDataGridViewTextBoxColumn.DataPropertyName = "EmployeeNameAra"
+            Me.EmployeeNameAraDataGridViewTextBoxColumn.EditingMode = False
+            Me.EmployeeNameAraDataGridViewTextBoxColumn.HeaderText = "Employee Name"
+            Me.EmployeeNameAraDataGridViewTextBoxColumn.Name = "EmployeeNameAraDataGridViewTextBoxColumn"
+            Me.EmployeeNameAraDataGridViewTextBoxColumn.ReadOnly = True
+            Me.EmployeeNameAraDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.EmployeeNameAraDataGridViewTextBoxColumn.Visible = False
+            '
+            'DaysPresentDataGridViewTextBoxColumn
+            '
+            Me.DaysPresentDataGridViewTextBoxColumn.DataPropertyName = "DaysPresent"
+            Me.DaysPresentDataGridViewTextBoxColumn.EditingMode = False
+            Me.DaysPresentDataGridViewTextBoxColumn.HeaderText = "Days Present"
+            Me.DaysPresentDataGridViewTextBoxColumn.Name = "DaysPresentDataGridViewTextBoxColumn"
+            Me.DaysPresentDataGridViewTextBoxColumn.ReadOnly = True
+            Me.DaysPresentDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DaysPresentDataGridViewTextBoxColumn.Width = 75
+            '
+            'DaysAbsentWithPayDataGridViewTextBoxColumn
+            '
+            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.DataPropertyName = "DaysAbsentWithPay"
+            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.EditingMode = False
+            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.HeaderText = "Days Absent With Pay"
+            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.Name = "DaysAbsentWithPayDataGridViewTextBoxColumn"
+            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.ReadOnly = True
+            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.Width = 75
+            '
+            'DaysAbsentWithoutPayDataGridViewTextBoxColumn
+            '
+            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.DataPropertyName = "DaysAbsentWithoutPay"
+            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.EditingMode = False
+            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.HeaderText = "Days Absent Without Pay"
+            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.Name = "DaysAbsentWithoutPayDataGridViewTextBoxColumn"
+            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.ReadOnly = True
+            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.Width = 75
+            '
+            'DaysOffDataGridViewTextBoxColumn
+            '
+            Me.DaysOffDataGridViewTextBoxColumn.DataPropertyName = "DaysOff"
+            Me.DaysOffDataGridViewTextBoxColumn.EditingMode = False
+            Me.DaysOffDataGridViewTextBoxColumn.HeaderText = "Days Off"
+            Me.DaysOffDataGridViewTextBoxColumn.Name = "DaysOffDataGridViewTextBoxColumn"
+            Me.DaysOffDataGridViewTextBoxColumn.ReadOnly = True
+            Me.DaysOffDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DaysOffDataGridViewTextBoxColumn.Width = 75
+            '
+            'DaysTotal
+            '
+            Me.DaysTotal.DataPropertyName = "DaysTotal"
+            Me.DaysTotal.EditingMode = False
+            Me.DaysTotal.HeaderText = "Days Total"
+            Me.DaysTotal.Name = "DaysTotal"
+            Me.DaysTotal.ReadOnly = True
+            Me.DaysTotal.Width = 75
+            '
+            'EmployeeIdNoDataGridViewTextBoxColumn
+            '
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.DataPropertyName = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.HeaderText = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.Name = "EmployeeIdNoDataGridViewTextBoxColumn"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.Visible = False
+            '
+            'IdNoDataGridViewTextBoxColumn
+            '
+            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
+            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.IdNoDataGridViewTextBoxColumn.Visible = False
             '
             'PayPeriodEntryTv
             '
@@ -630,13 +661,14 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents tbcPayroll As TabPage
         Friend WithEvents TabPage2 As TabPage
         Friend WithEvents DataGridViewPayPeriodAttendance As CDataGridView
-        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents EmployeeNameDataGridViewTextBoxColumn As CdgvColumnText
+        Friend WithEvents EmployeeNameAraDataGridViewTextBoxColumn As CdgvColumnText
+        Friend WithEvents DaysPresentDataGridViewTextBoxColumn As CdgvColumnText
+        Friend WithEvents DaysAbsentWithPayDataGridViewTextBoxColumn As CdgvColumnText
+        Friend WithEvents DaysAbsentWithoutPayDataGridViewTextBoxColumn As CdgvColumnText
+        Friend WithEvents DaysOffDataGridViewTextBoxColumn As CdgvColumnText
+        Friend WithEvents DaysTotal As CdgvColumnText
         Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents EmployeeNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents EmployeeNameAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DaysPresentDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DaysAbsentWithPayDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DaysAbsentWithoutPayDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DaysOffDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End Namespace

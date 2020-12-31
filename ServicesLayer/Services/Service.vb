@@ -30,14 +30,33 @@ Namespace Services
         End Sub
 
         Protected Overridable Sub CreateBusinessObject(objectName As String, Optional bizParam As Object = Nothing)
+            'Dim bizObjectName As String
+            'bizObjectName = $"AATM.BusinessLayer.BusinessObjects." + objectName
+            'If bizParam Is Nothing OrElse bizParam.Length = 0 Then
+            '    DataBo = Activator.CreateInstance(Type.GetType(bizObjectName))
+            'Else
+            '    DataBo = Activator.CreateInstance(Type.GetType(bizObjectName), bizParam)
+            'End If
+            'If DataBo Is Nothing Then
+            '    MessageBox.Show("Missing Business Object " + objectName)
+            'End If
+            'Dim bizObject = $"AATM.BusinessLayer.BusinessObjects." + objectName
+            'Dim tType = Type.GetType(bizObject)
+            'If bizParam IsNot Nothing AndAlso bizParam.Length > 0 Then
+            '    DataBo = CreateInstance(bizObject)
+            'Else
+            '    DataBo = CreateInstance(bizObject, bizParam)
+            '    'DataBo = Activator.CreateInstance(tType)
+            'End If
+            'If DataBo Is Nothing Then
+            '    MessageBox.Show("Missing Business Object " + bizObject)
+            'End If
             Dim bizObject = $"AATM.BusinessLayer.BusinessObjects." + objectName
-
             Dim tType = Type.GetType(bizObject)
             If bizParam IsNot Nothing AndAlso bizParam.Length > 0 Then
-                DataBo = GetInstance(bizObject)
+                DataBo = CreateInstance(bizObject)
             Else
-                DataBo = GetInstance(bizObject)
-                'DataBo = Activator.CreateInstance(tType)
+                DataBo = CreateInstance(bizObject, bizParam)
             End If
             If DataBo Is Nothing Then
                 MessageBox.Show("Missing Business Object " + bizObject)
@@ -45,13 +64,11 @@ Namespace Services
         End Sub
 
         Protected Overridable Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing)
-            'If daoParam Is Nothing Or daoParam.Length = 0 Then
-            '    DataDao = Factory.CreateDao(objectName)
-            'Else
-            '    DataDao = Factory.CreateDao(objectName, daoParam)
-            'End If
-            Dim dao = objectName + "Dao"
-            DataDao = Me.GetType().GetProperty(dao, BindingFlags.NonPublic Or BindingFlags.Instance).GetValue(Me)
+            If daoParam Is Nothing OrElse daoParam.Length = 0 Then
+                DataDao = Factory.CreateDao(objectName)
+            Else
+                DataDao = Factory.CreateDao(objectName, daoParam)
+            End If
             If DataDao Is Nothing Then
                 MessageBox.Show("Missing Data Access Object " + objectName)
                 Debugger.Break()
@@ -60,7 +77,6 @@ Namespace Services
 
         Public Property DataBo As Object
         Public Property DataDao As Object
-        'Public Property SecurityDao = Factory.SecurityDao
 
         Private ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup)
             Get
@@ -92,12 +108,18 @@ Namespace Services
             Return DefaultFieldValueDao.GetTableDefaultValues(tableName)
         End Function
 
-        Public Function GetInstance(ByVal strFullyQualifiedName As String) As Object
+        Public Function CreateInstance(ByVal strFullyQualifiedName As String, Optional instanceParameters As Object = Nothing) As Object
             Dim type As Type = Type.[GetType](strFullyQualifiedName)
             If type IsNot Nothing Then Return Activator.CreateInstance(type)
             For Each asm In AppDomain.CurrentDomain.GetAssemblies()
                 type = asm.[GetType](strFullyQualifiedName)
-                If type IsNot Nothing Then Return Activator.CreateInstance(type)
+                If type IsNot Nothing Then
+                    If instanceParameters Is Nothing OrElse instanceParameters.Length = 0 Then
+                        Return Activator.CreateInstance(type)
+                    Else
+                        Return Activator.CreateInstance(type, instanceParameters)
+                    End If
+                End If
             Next
             Return Nothing
         End Function
