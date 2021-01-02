@@ -37,6 +37,14 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
+        ' This event handler provides custom item-creation behavior.
+        Private Sub journalItemsBindingSource_AddingNew(
+                                                        ByVal sender As Object,
+                                                        ByVal e As AddingNewEventArgs) _
+            Handles bsJournalItems.AddingNew
+            e.NewObject = New JournalItemView
+        End Sub
+
 #Region "Fields"
 
         Public Property AccountIdNo As Int16? Implements IArJournalView.AccountIdNo

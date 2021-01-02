@@ -180,12 +180,12 @@ Namespace PresentationLayer.Presenters
                     item.AccountIdNo = View.AccountIdNo
                     Dim tranType As String = CodeToEnum(Of TransactionTypeSelection)(View.TransactionType)
                     If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
-                        If item.Credit = 0 Then
+                        If item.Credit = 0 Or CountApItems() <= 1 Then
                             item.Credit = View.Amount
                             item.Debit = 0
                         End If
                     Else
-                        If item.Debit = 0 Then
+                        If item.Debit = 0 Or CountApItems() <= 1 Then
                             item.Credit = 0
                             item.Debit = View.Amount
                         End If
@@ -195,6 +195,16 @@ Namespace PresentationLayer.Presenters
                 Next
             End If
         End Sub
+
+        Private Function CountApItems()
+            Dim nCount = 0
+            For Each item In View.JournalItems
+                If item.SpecialAccount = "AP" Then
+                    nCount = nCount + 1
+                End If
+            Next
+            Return nCount
+        End Function
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String

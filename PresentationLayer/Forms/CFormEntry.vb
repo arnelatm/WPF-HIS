@@ -727,10 +727,21 @@ Public Class CFormEntry
             Else
                 Beep()
             End If
-            'Else
-            '    e.Handled = False
+        ElseIf e.KeyCode = Keys.Enter Then
+
+            e.Handled = False
         End If
     End Sub
+
+    'Private Sub CFormEntry_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
+    '    If e.KeyChar = ChrW(Keys.F10) Then
+    '        e.Handled = True
+    '    ElseIf e.KeyChar = ChrW(Keys.F2) Then
+    '        e.Handled = True
+    '    Else
+    '        e.Handled = False
+    '    End If
+    'End Sub
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

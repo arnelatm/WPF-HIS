@@ -472,6 +472,18 @@ Public Class CTextBox
         End If
     End Sub
 
+    Private Sub CTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            'e.SuppressKeyPress = True
+            'e.Handled = True
+            'Me.SelectNextControl(Me, True, True, True, True)
+            SendKeys.Send("{TAB}")
+            e.Handled = True
+            e.SuppressKeyPress = True
+            'SendWait("{TAB}")
+        End If
+    End Sub
+
     'Private Sub CTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
     '    If e.KeyCode = Keys.Enter Then
     '        e.SuppressKeyPress = True
@@ -507,12 +519,12 @@ Public Class CTextBox
     '    End If
     'End Sub
 
-    Private Sub CTextBox_LostFocus(ByVal sender As Object,
-        ByVal e As EventArgs) Handles MyBase.LostFocus
-        If CustomFormat IsNot Nothing Then
-            Text = String.Format("{0:" + CustomFormat + "}", Convert.ToDecimal(NumParser(Of Decimal)(Text)))
-        End If
-    End Sub
+    'Private Sub CTextBox_LostFocus(ByVal sender As Object,
+    '    ByVal e As EventArgs) Handles MyBase.LostFocus
+    '    If CustomFormat IsNot Nothing Then
+    '        Text = String.Format("{0:" + CustomFormat + "}", Convert.ToDecimal(NumParser(Of Decimal)(Text)))
+    '    End If
+    'End Sub
 
     'Private Sub CTextBox_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.GotFocus
     '    If Not _contextHandlerOn Then

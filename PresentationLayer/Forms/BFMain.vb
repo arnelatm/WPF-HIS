@@ -203,7 +203,7 @@ Public Class BfMain
 
     Protected Sub RunTranslator(ByVal nFormIdNo)
         Dim frm As New TranslationTableManager()
-        frm.FormIdNoToTranslate = FormIdNo
+        frm.FormIdNoToTranslate = nFormIdNo
         frm.AppDataDAC = AppDataDAC
         frm.TranslatorDAC = TranslatorDAC
         frm.Show()

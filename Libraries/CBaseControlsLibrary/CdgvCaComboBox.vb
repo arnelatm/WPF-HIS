@@ -17,6 +17,7 @@ Public Class CDgvCaComboBox
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
 
     Private _editingMode As Boolean = True
+
     'Private _viewable As Boolean
     'Private _selectable As Boolean
     Private _editable As Boolean
@@ -137,6 +138,8 @@ Public Class CDgvCaComboBox
             If e.KeyCode = Keys.Enter Then
                 e.Handled = True
                 SendKeys.SendWait("{TAB}")
+            Else
+                e.Handled = False
             End If
         End If
     End Sub
