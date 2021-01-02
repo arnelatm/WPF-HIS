@@ -309,7 +309,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.DefaultValue = "0"
             Me.cboPayorType.DisplayMember = "Name"
             Me.cboPayorType.DropDownHeight = 1
-            Me.cboPayorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboPayorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayorType.EditingMode = False
             Me.cboPayorType.FilterRule = Nothing
             resources.ApplyResources(Me.cboPayorType, "cboPayorType")
@@ -350,7 +350,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorIdNo.DefaultValue = Nothing
             Me.cboPayorIdNo.DisplayMember = "Name"
             Me.cboPayorIdNo.DropDownHeight = 1
-            Me.cboPayorIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboPayorIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayorIdNo.EditingMode = False
             Me.cboPayorIdNo.FilterRule = Nothing
             resources.ApplyResources(Me.cboPayorIdNo, "cboPayorIdNo")
@@ -417,7 +417,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DefaultValue = ""
             Me.cboAccountIdNo.DisplayMember = "Name"
             Me.cboAccountIdNo.DropDownHeight = 1
-            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboAccountIdNo.EditingMode = False
             Me.cboAccountIdNo.FilterRule = Nothing
             resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
@@ -477,7 +477,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.DefaultValue = Nothing
             Me.cboDiscountAccountIdNo.DisplayMember = "Name"
             Me.cboDiscountAccountIdNo.DropDownHeight = 1
-            Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboDiscountAccountIdNo.EditingMode = False
             Me.cboDiscountAccountIdNo.FilterRule = Nothing
             Me.floHeader1.SetFlowBreak(Me.cboDiscountAccountIdNo, True)
@@ -727,6 +727,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.ForeColor = System.Drawing.Color.Black
             Me.chkCancelled.LinkedLabel = Me.lblCancelled
             Me.chkCancelled.Name = "chkCancelled"
+            Me.chkCancelled.NoLabel = True
             Me.chkCancelled.OldValue = Nothing
             Me.chkCancelled.UseVisualStyleBackColor = False
             '
@@ -748,6 +749,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.ForeColor = System.Drawing.Color.Black
             Me.chkPosted.LinkedLabel = Me.lblPosted
             Me.chkPosted.Name = "chkPosted"
+            Me.chkPosted.NoLabel = True
             Me.chkPosted.OldValue = Nothing
             Me.chkPosted.UseVisualStyleBackColor = False
             '
@@ -807,6 +809,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
+            Me.DataGridViewJournalItems.DgvFooter = Nothing
             Me.DataGridViewJournalItems.DisplayOnly = False
             resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
             Me.DataGridViewJournalItems.Ea = EventAggregator1
@@ -817,6 +820,8 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
+            Me.DataGridViewJournalItems.ShowFooter = False
             Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
             Me.DataGridViewJournalItems.StartTrackingChanges = False
             '
@@ -987,6 +992,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewCsrOiItems.DefaultCellStyle = DataGridViewCellStyle17
+            Me.DataGridViewCsrOiItems.DgvFooter = Nothing
             Me.DataGridViewCsrOiItems.DisplayOnly = False
             Me.DataGridViewCsrOiItems.Ea = EventAggregator2
             Me.DataGridViewCsrOiItems.EditingMode = False
@@ -997,6 +1003,8 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewCsrOiItems.Name = "DataGridViewCsrOiItems"
             Me.DataGridViewCsrOiItems.ReadOnly = True
             Me.DataGridViewCsrOiItems.SequenceColumn = "dgvSequenceCsrOi"
+            Me.DataGridViewCsrOiItems.SequenceFieldName = "Sequence"
+            Me.DataGridViewCsrOiItems.ShowFooter = False
             Me.DataGridViewCsrOiItems.ShowInsertColumnWhenEditing = False
             Me.DataGridViewCsrOiItems.StartTrackingChanges = False
             '
@@ -1165,10 +1173,10 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floFullEntryArea.ResumeLayout(False)
             Me.floPurchaseJournalHeader.ResumeLayout(False)
-            Me.floHeader1.ResumeLayout(false)
-        Me.floHeader1.PerformLayout
-        Me.floHeader2.ResumeLayout(false)
-        Me.floHeader2.PerformLayout
+            Me.floHeader1.ResumeLayout(False)
+            Me.floHeader1.PerformLayout()
+            Me.floHeader2.ResumeLayout(False)
+            Me.floHeader2.PerformLayout
         Me.floPurchaseJournalItems.ResumeLayout(false)
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit

@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _payorOrigWidth As Integer
         Private _accountsByCode
 
-        Private _apFooter As DgvFooter
+        Private _arFooter As DgvFooter
         Private _csrOiItems As List(Of CsrOiItemView)
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of IJournalItemView)
@@ -119,16 +119,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property CsrOiItems As List(Of CsrOiItemView) Implements ICashReceiptJournalView.CsrOiItems
-            Get
-                Return _csrOiItems
-            End Get
-            Set(value As List(Of CsrOiItemView))
-                _csrOiItems = value
-                BindCsrOiItem()
-            End Set
-        End Property
-
         Public Property DateCreated As DateTime? Implements ICashReceiptJournalView.DateCreated
             Get
                 Return dtpDateCreated.Value
@@ -206,7 +196,11 @@ Namespace PresentationLayer.Views.Forms
                 Return cboPayorIdNo.GetNullableValue(Of Int32)
             End Get
             Set
-                cboPayorIdNo.SetValue(Value)
+                If cboPayorIdNo.DataSource IsNot Nothing Then
+                    cboPayorIdNo.SetValue(Value)
+                Else
+                    cboPayorIdNo.SelectedValue = Nothing
+                End If
             End Set
         End Property
 
@@ -226,6 +220,16 @@ Namespace PresentationLayer.Views.Forms
             Set
                 cboPayorType.SetValue(Value)
                 SetPayorProperty(Value)
+            End Set
+        End Property
+
+        Public Property CsrOiItems As List(Of CsrOiItemView) Implements ICashReceiptJournalView.CsrOiItems
+            Get
+                Return _csrOiItems
+            End Get
+            Set(value As List(Of CsrOiItemView))
+                _csrOiItems = value
+                BindCsrOiItem()
             End Set
         End Property
 
@@ -296,6 +300,7 @@ Namespace PresentationLayer.Views.Forms
             ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
             PayorType = eventType.Model.PayorType
             SetPayorDataSource(PayorType)
+            cboPayorType.SelectedValue = IIf(PayorType = Nothing, 0, PayorType)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -338,6 +343,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+            MyBase.RecordPositionChanged(e)
+            UpdateLayout()
             UpdateTotals()
         End Sub
 
@@ -451,14 +458,14 @@ Namespace PresentationLayer.Views.Forms
             _jiFooter.ColumnToSum("dgvCredit") = True
             _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
 
-            _apFooter = New DgvFooter(DataGridViewCsrOiItems) With {
+            _arFooter = New DgvFooter(DataGridViewCsrOiItems) With {
                 .AutoCalc = True
             }
-            _apFooter.ColumnToSum("dgvAmount") = True
-            _apFooter.ColumnToSum("dgvDiscountTaken") = True
-            _apFooter.ColumnToSum("dgvBalance") = True
-            _apFooter.ColumnToSum("dgvPreviousBalance") = True
-            _apFooter.SetText("dgvJournalIdNoAp", "Totals")
+            _arFooter.ColumnToSum("dgvAmount") = True
+            _arFooter.ColumnToSum("dgvDiscountTaken") = True
+            _arFooter.ColumnToSum("dgvBalance") = True
+            _arFooter.ColumnToSum("dgvPreviousBalance") = True
+            _arFooter.SetText("dgvJournalIdNoAp", "Totals")
 
         End Sub
 
@@ -466,22 +473,45 @@ Namespace PresentationLayer.Views.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated
+        Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated, cboPayorIdNo.SelectedIndexChanged
             If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Or CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.Customer Then
                 If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
-                    If cboPayorIdNo.PreviousSelectedIndex <> cboPayorIdNo.SelectedIndex Then
-                        bsCsrOiItems.Clear()
-                        UpdateOiTotals()
-                    End If
+                    'If cboPayorIdNo.PreviousSelectedIndex <> cboPayorIdNo.SelectedIndex Then
+                    bsCsrOiItems.Clear()
+                    UpdateOiTotals()
+                    'End If
                     PresenterObj.AddCustomerOpenInvoices()
                     BindCsrOiItem()
                 End If
             End If
         End Sub
 
-        Private Sub CboPayorType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectedIndexChanged
-            If cboPayorType.Focused Then
-                SetPayorProperty(cboPayorType.SelectedValue)
+        Private Sub UpdateLayout()
+            SuspendLayout()
+            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPayorType.SelectedValue)
+            If paymentTypeEnum = ReceiptTypeSelection.AccountsReceivable Then
+                'ShowOpenInvoicesDataGrid()
+            Else
+                'ShowJournalItemDataGrid()
+                Applied = Amount
+                UnApplied = 0
+                DiscountTaken = 0
+            End If
+            ShowPayor(paymentTypeEnum)
+            ResumeLayout()
+        End Sub
+
+        Private Sub ShowPayor(paymentTypeEnum)
+            If paymentTypeEnum <> PaymentTypeSelection.Others Then
+                cboPayorIdNo.Visible = True
+                txtPayorName.Visible = False
+                'tlpDisbursement.SetCellPosition(txtPayorName, New TableLayoutPanelCellPosition(6, 8))
+                'tlpDisbursement.SetCellPosition(cboPayorIdNo, New TableLayoutPanelCellPosition(5, 1))
+            Else
+                cboPayorIdNo.Visible = False
+                txtPayorName.Visible = True
+                'tlpDisbursement.SetCellPosition(cboPayorIdNo, New TableLayoutPanelCellPosition(12, 8))
+                'tlpDisbursement.SetCellPosition(txtPayorName, New TableLayoutPanelCellPosition(5, 1))
             End If
         End Sub
 
@@ -604,16 +634,19 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-
             If DataGridViewJournalItems.Visible Then
-                DataGridViewJournalItems.Focus()
-                If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
-                    DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                If DataGridViewJournalItems IsNot Nothing Then
+                    DataGridViewJournalItems.Focus()
+                    If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
+                        DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                    End If
                 End If
             Else
-                DataGridViewCsrOiItems.Focus()
-                If DataGridViewCsrOiItems.CurrentCell IsNot Nothing Then
-                    DataGridViewCsrOiItems.CurrentCell = DataGridViewCsrOiItems(5, 0)
+                If DataGridViewJournalItems IsNot Nothing Then
+                    If DataGridViewCsrOiItems.CurrentCell IsNot Nothing Then
+                        DataGridViewCsrOiItems.Focus()
+                        DataGridViewCsrOiItems.CurrentCell = DataGridViewCsrOiItems(5, 0)
+                    End If
                 End If
             End If
         End Sub
@@ -661,10 +694,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateOiTotals()
             If PayorType = EnumToCode(ReceiptTypeSelection.AccountsReceivable) Then
-                If _apFooter IsNot Nothing Then
-                    _apFooter.CalculateTotals()
-                    Applied = _apFooter.Value("dgvAmount")
-                    DiscountTaken = _apFooter.Value("dgvDiscountTaken")
+                If _arFooter IsNot Nothing Then
+                    _arFooter.CalculateTotals()
+                    Applied = _arFooter.Value("dgvAmount")
+                    DiscountTaken = _arFooter.Value("dgvDiscountTaken")
                     UnApplied = Amount - Applied
                 End If
             Else
@@ -681,6 +714,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             UpdateTotals()
         End Sub
+
+        Private Sub CboPayorType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectedIndexChanged
+            SetPayorProperty(cboPayorType.SelectedValue)
+            UpdateLayout()
+        End Sub
+
 
     End Class
 

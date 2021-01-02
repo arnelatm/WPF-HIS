@@ -13,14 +13,14 @@ Namespace DataLayer.AdoNet
         Public ReadOnly Property Args As Object()
         Private ReadOnly _db As New Db()
         Protected TableOrViewName As String
-        Protected SeriesName As String
+        Protected JournalCode As String
         Protected JiDataNames As Object
         Protected OiDataNames As Object
 
         Public Sub New(dataNames As Object())
             Me.Args = dataNames
             TableOrViewName = dataNames(0)
-            SeriesName = dataNames(1)
+            JournalCode = dataNames(1)
             JiDataNames = dataNames(2)
             OiDataNames = dataNames(3)
         End Sub
@@ -229,9 +229,9 @@ Namespace DataLayer.AdoNet
             End If
         End Function
 
-        Private Shared ReadOnly DjMake As Func(Of IDataReader, DisbursementJournal) =
+        Private ReadOnly DjMake As Func(Of IDataReader, DisbursementJournal) =
                                     Function(reader) _
-            New DisbursementJournal() With {
+            New DisbursementJournal(JournalCode) With {
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
@@ -253,9 +253,9 @@ Namespace DataLayer.AdoNet
             .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
-        Private Shared ReadOnly CkMake As Func(Of IDataReader, DisbursementJournal) =
+        Private ReadOnly CkMake As Func(Of IDataReader, DisbursementJournal) =
                             Function(reader) _
-            New DisbursementJournal() With {
+            New DisbursementJournal(JournalCode) With {
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
@@ -333,8 +333,8 @@ Namespace DataLayer.AdoNet
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & SeriesName & "'"
-            sql2 = "Update [" & TableOrViewName & "] set ReferenceNo = (select value from series where seriesName = '" & SeriesName & "') where IdNo = " & bizObj.IdNo
+            sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & JournalCode & "'"
+            sql2 = "Update [" & TableOrViewName & "] set ReferenceNo = (select value from series where seriesName = '" & JournalCode & "') where IdNo = " & bizObj.IdNo
             retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
             Return retVal
         End Function

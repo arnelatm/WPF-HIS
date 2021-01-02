@@ -556,12 +556,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs)
-            If cboPaymentType.PreviousSelectedIndex <> cboPaymentType.SelectedIndex Then
-                SetPayeeDataSource(PaymentType)
-                UpdateLayout()
-            End If
-        End Sub
 
         Private Sub UpdateLayout()
             SuspendLayout()
@@ -784,19 +778,18 @@ Namespace PresentationLayer.Views.Forms
             UpdateOiTotals()
         End Sub
 
-        Private Sub UpdateTotalVatAmount()
-            Dim tVatAmount As Decimal = 0
-            For Each row In DataGridViewJournalItems.Rows
-                If PresenterObj.IsInputVatAccount(row.Cells("dgvAccountIdNo").Value) Then
-                    tVatAmount = tVatAmount + row.Cells("dgvDebit").Value - row.Cells("dgvCredit").Value
-                End If
-            Next
-            VatAmount = tVatAmount
-        End Sub
-
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs)
             UpdateTotals()
             UpdateTotalVatAmount()
+        End Sub
+
+        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
+            SetPayeeDataSource(PaymentType)
+            UpdateLayout()
+        End Sub
+
+        Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
+            PresenterObj.PrintCheck()
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
@@ -805,16 +798,14 @@ Namespace PresentationLayer.Views.Forms
             UpdateOiTotals()
         End Sub
 
-        Private Sub DataGridViewJournalItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellContentClick
-
-        End Sub
-
-        Private Sub tlpDisbursement_Paint(sender As Object, e As PaintEventArgs) Handles tlpDisbursement.Paint
-
-        End Sub
-
-        Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
-            PresenterObj.PrintCheck()
+        Private Sub UpdateTotalVatAmount()
+            Dim tVatAmount As Decimal = 0
+            For Each row In DataGridViewJournalItems.Rows
+                If PresenterObj.IsInputVatAccount(row.Cells("dgvAccountIdNo").Value) Then
+                    tVatAmount = tVatAmount + row.Cells("dgvDebit").Value - row.Cells("dgvCredit").Value
+                End If
+            Next
+            VatAmount = tVatAmount
         End Sub
 
     End Class
