@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _gjJournalItemModel As New ModelAccounts("GeneralJournalItem")
+        Private ReadOnly _gjJournalItemModel As New ModelAccounts("JournalItem", Nothing, {"GeneralJournalItem_View", "UpdateGeneralJournalItemTVP", "InsertGeneralJournalItemTVP"})
         Private ReadOnly _closingEntry As Boolean
 
         Public Sub New(view As IGeneralJournalView, closingEntry As Boolean)
