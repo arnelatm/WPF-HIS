@@ -690,7 +690,11 @@ Public Class CaComboBox
         End If
     End Sub
 
-    Private Sub cboAccountIdNo_Enter(sender As Object, e As EventArgs) Handles Me.Enter
+    Private Sub caComboBox_Enter(sender As Object, e As EventArgs) Handles Me.Enter
+        PreviousSelectedIndex = SelectedIndex
+    End Sub
+
+    Private Sub cboPaymentType_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles Me.SelectionChangeCommitted
         PreviousSelectedIndex = SelectedIndex
     End Sub
 

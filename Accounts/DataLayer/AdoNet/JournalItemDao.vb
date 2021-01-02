@@ -16,9 +16,21 @@ Namespace DataLayer.AdoNet
         Protected DboTvpInsertName As String = ""
 
         Public Sub New(ByVal dataNames As Object())
+            'TableOrViewName = AutoPropertyValue
+            'If TableOrViewName = "CkJournalItem_View" Then
+            '    DboTvpUpdateName = "UpdateCdJournalItemTVP"
+            '    DboTvpInsertName = "InsertCdJournalItemTVP"
+            'ElseIf TableOrViewName = "CdJournalItem_View" Then
+            '    DboTvpUpdateName = "UpdateCdJournalItemTVP"
+            '    DboTvpInsertName = "InsertCdJournalItemTVP"
+            'ElseIf TableOrViewName = "CkJournalItem_View" Then
+            '    DboTvpUpdateName = "UpdateCkJournalItemTVP"
+            '    DboTvpInsertName = "InsertCkJournalItemTVP"
+            'End If
             TableOrViewName = dataNames(0).ToString()
             DboTvpUpdateName = dataNames(1).ToString()
             DboTvpInsertName = dataNames(2).ToString()
+
         End Sub
 
         Public Sub New()
