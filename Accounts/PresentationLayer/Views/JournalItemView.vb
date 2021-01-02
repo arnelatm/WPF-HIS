@@ -10,6 +10,10 @@ Namespace PresentationLayer.Views
         Private _debit As Decimal
         Private _credit As Decimal
 
+        Public Sub New()
+
+        End Sub
+
         'Public Property Ea As EventAggregator
 
         Public Property AccountIdNo As Int16? Implements IJournalItemView.AccountIdNo

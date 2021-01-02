@@ -2,6 +2,10 @@
 Namespace PresentationLayer.Models
 
     Public Class JournalItemModel
+
+        Public Sub New()
+        End Sub
+
         Public Property AccountIdNo As Int16?
         Public Property AccountName As String
         Public Property Cancelled As Boolean
