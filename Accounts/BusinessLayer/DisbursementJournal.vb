@@ -6,9 +6,10 @@ Namespace BusinessLayer
 
     Public Class DisbursementJournal
         Inherits AATM.BusinessLayer.BusinessObject
+        Private Const JournalCode = 0
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Sub New(ParamArray arguments As Object())
+        Public Sub New(ParamArray parameter As Object())
             ' establish business rules
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("TransactionDate"))
@@ -23,11 +24,12 @@ Namespace BusinessLayer
                 AddRule(New ValidateIfRequired("DiscountAccountIdNo", "DiscountTaken", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateCompareIfTrue(PaymentType = "A", "Amount", "Applied", ValidationOperator.Equal, ValidationDataType.Decimal))
                 AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
+                If parameter(JournalCode) = "CK" Then
+                    AddRule(New ValidateRequired("CheckDate"))
+                    AddRule(New ValidateRequired("CheckNumber"))
+                End If
             End If
-            If arguments Is Nothing Or arguments.Length > 0 Then
-                AddRule(New ValidateRequired("CheckDate"))
-                AddRule(New ValidateRequired("CheckNumber"))
-            End If
+
         End Sub
 
         Public Property AccountIdNo As Int16?
