@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _erJournalItemModel As New ModelAccounts("ErJournalItem")
+        Private ReadOnly _erJournalItemModel As New ModelAccounts("JournalItem")
 
         Public Sub New(view As IErJournalView)
             MyBase.New(view)

@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _advancesToCustomerAccountIdNo As Int16
 
         Private ReadOnly _csrOiItemModel As New ModelAccounts("CsrOiItem")
-        Private ReadOnly _csrJournalItemModel As New ModelAccounts("CashReceiptJournalItem")
+        Private ReadOnly _csrJournalItemModel As New ModelAccounts("JournalItem")
 
         Public Sub New(view As ICashReceiptJournalView)
             MyBase.New(view)
