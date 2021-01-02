@@ -322,8 +322,8 @@ Public Class CMyComboBox
 
     Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Enter Then
-            e.Handled = True
             SendKeys.SendWait("{TAB}")
+            e.Handled = True
         End If
     End Sub
 

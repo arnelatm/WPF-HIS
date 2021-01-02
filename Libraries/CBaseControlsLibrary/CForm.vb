@@ -128,14 +128,14 @@ Public Class CForm
     End Sub
 
     ' The form will handle all key events before the control with
-    ' focus handles them
-    Private Sub CForm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.SuppressKeyPress = True
-            e.Handled = True
-            SendKeys.Send("{TAB}")
-        End If
-    End Sub
+    '' focus handles them
+    'Private Sub CForm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    '    If e.KeyCode = Keys.Enter Then
+    '        'e.SuppressKeyPress = True
+    '        'e.Handled = True
+    '        SendKeys.Send("{TAB}")
+    '    End If
+    'End Sub
 
     Private Sub CForm_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
         If e.Modifiers = Keys.Control Then
@@ -143,21 +143,21 @@ Public Class CForm
                 Case Keys.V
                     'paste already working (builtin) no need to Paste Text again.
                     'PasteText(e)
-                    e.SuppressKeyPress = True
+                    'e.SuppressKeyPress = True
                 Case Keys.C
                     CopyText()
-                    e.SuppressKeyPress = True
+                    'e.SuppressKeyPress = True
                 Case Keys.X
                     CutText()
-                    e.SuppressKeyPress = True
+                    'e.SuppressKeyPress = True
                 Case Keys.A
                     SelectAllText()
-                    e.SuppressKeyPress = True
+                    'e.SuppressKeyPress = True
                 Case Else
-                    e.SuppressKeyPress = False
+                    'e.SuppressKeyPress = False
             End Select
         Else
-            e.SuppressKeyPress = False
+            'e.SuppressKeyPress = False
         End If
     End Sub
 

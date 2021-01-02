@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -44,6 +45,14 @@ Namespace PresentationLayer.Views.Forms
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
+        End Sub
+
+        ' This event handler provides custom item-creation behavior.
+        Private Sub journalItemsBindingSource_AddingNew(
+                                                        ByVal sender As Object,
+                                                        ByVal e As AddingNewEventArgs) _
+            Handles bsJournalItems.AddingNew
+            e.NewObject = New JournalItemView
         End Sub
 
 #Region "Fields"
