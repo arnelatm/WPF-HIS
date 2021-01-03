@@ -248,7 +248,7 @@ Public Class CDataGridView
             Dim currentColumnIndex As Int16
             currentColumnIndex = CurrentCell.ColumnIndex()
             If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
-                If CurrentCell.RowIndex()+1 < RowCount() Then
+                If CurrentCell.RowIndex() + 1 < RowCount() Then
                     CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
                     Return True
                 End If
@@ -335,7 +335,12 @@ Public Class CDataGridView
         If myBindingSource IsNot Nothing Then
             Dim row = CurrentRow.Index() + 1
             myBindingSource.AddNew()
-            CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
+            CurrentCell = Rows(row).Cells(0)
+            If CurrentRow.DataBoundItem IsNot Nothing Then
+                CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
+            Else
+                Debugger.Break()
+            End If
             CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
         End If
     End Sub

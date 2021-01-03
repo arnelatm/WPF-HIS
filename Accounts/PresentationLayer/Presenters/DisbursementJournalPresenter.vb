@@ -27,7 +27,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _defaultPettyCashAccount As Int16
         Private ReadOnly _presenterView
 
-        Public Sub New(view As IView, ByVal tableOrViewName As String)
+        Public Sub New(view As IDisbursementJournalView, ByVal tableOrViewName As String)
             MyBase.New(view)
             _presenterView = view
             SortOrderKey = "IdNo"
@@ -819,22 +819,19 @@ Namespace PresentationLayer.Presenters
         Public Sub UpdateFirstLine()
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
-                    If View.JournalItems.Count() = 0 Then
-                        View.JournalItems = New List(Of IJournalItemView) From {
+                    View.JournalItems = New List(Of IJournalItemView) From {
                             NewJournalItem()
                             }
-                    Else
-                        For Each item In View.JournalItems
-                            item.JournalIdNo = View.IdNo
-                            item.Sequence = 1
-                            item.AccountIdNo = View.AccountIdNo
-                            item.Credit = View.Amount
-                            item.Debit = 0
-                            item.RevCostCenterIdNo = 0
-                            Exit For
-                        Next
-                    End If
                 End If
+                For Each item In View.JournalItems
+                    item.JournalIdNo = View.IdNo
+                    item.Sequence = 1
+                    item.AccountIdNo = View.AccountIdNo
+                    item.Credit = View.Amount
+                    item.Debit = 0
+                    item.RevCostCenterIdNo = 0
+                    Exit For
+                Next
             End If
         End Sub
 
