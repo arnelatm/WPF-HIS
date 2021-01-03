@@ -227,11 +227,11 @@ Namespace PresentationLayer.Views.Forms
             Me.btnViewGL.Dock = System.Windows.Forms.DockStyle.Fill
             Me.btnViewGL.Font = New System.Drawing.Font("Tahoma", 8.0!)
             Me.btnViewGL.ImageIndex = 0
-            Me.btnViewGL.Location = New System.Drawing.Point(3, 528)
+            Me.btnViewGL.Location = New System.Drawing.Point(3, 521)
             Me.btnViewGL.Name = "btnViewGL"
             Me.btnViewGL.OriginalImageName = Nothing
             Me.btnViewGL.SecurityKey = ""
-            Me.btnViewGL.Size = New System.Drawing.Size(138, 31)
+            Me.btnViewGL.Size = New System.Drawing.Size(138, 38)
             Me.btnViewGL.TabIndex = 249
             Me.btnViewGL.Text = "View Journal Entry"
             '
@@ -268,7 +268,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
             Me.DataGridViewJournalItems.ShowFooter = False
             Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1022, 332)
+            Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1022, 325)
             Me.DataGridViewJournalItems.StartTrackingChanges = False
             Me.DataGridViewJournalItems.TabIndex = 287
             '
@@ -1218,11 +1218,11 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply.Dock = System.Windows.Forms.DockStyle.Fill
             Me.btnAutoApply.Font = New System.Drawing.Font("Tahoma", 8.0!)
             Me.btnAutoApply.ImageIndex = 0
-            Me.btnAutoApply.Location = New System.Drawing.Point(147, 528)
+            Me.btnAutoApply.Location = New System.Drawing.Point(147, 521)
             Me.btnAutoApply.Name = "btnAutoApply"
             Me.btnAutoApply.OriginalImageName = Nothing
             Me.btnAutoApply.SecurityKey = ""
-            Me.btnAutoApply.Size = New System.Drawing.Size(162, 31)
+            Me.btnAutoApply.Size = New System.Drawing.Size(162, 38)
             Me.btnAutoApply.TabIndex = 250
             Me.btnAutoApply.Text = "Auto Apply Invoices"
             '
@@ -1261,7 +1261,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDjOiItems.SequenceFieldName = "Sequence"
             Me.DataGridViewDjOiItems.ShowFooter = False
             Me.DataGridViewDjOiItems.ShowInsertColumnWhenEditing = False
-            Me.DataGridViewDjOiItems.Size = New System.Drawing.Size(661, 332)
+            Me.DataGridViewDjOiItems.Size = New System.Drawing.Size(661, 325)
             Me.DataGridViewDjOiItems.StartTrackingChanges = False
             Me.DataGridViewDjOiItems.TabIndex = 1
             Me.DataGridViewDjOiItems.Visible = False
@@ -1429,7 +1429,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
             Me.txtPayeeName.LinkedLabel = Me.lblAmount
-            Me.txtPayeeName.Location = New System.Drawing.Point(491, 526)
+            Me.txtPayeeName.Location = New System.Drawing.Point(491, 519)
             Me.txtPayeeName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayeeName.MaximumValue = Nothing
             Me.txtPayeeName.MinimumValue = Nothing
@@ -1582,7 +1582,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnPrintCheck.DesignerSelected = False
             Me.btnPrintCheck.DisplayOnly = True
             Me.btnPrintCheck.ImageIndex = 0
-            Me.btnPrintCheck.Location = New System.Drawing.Point(883, 528)
+            Me.btnPrintCheck.Location = New System.Drawing.Point(883, 521)
             Me.btnPrintCheck.Name = "btnPrintCheck"
             Me.btnPrintCheck.OriginalImageName = Nothing
             Me.btnPrintCheck.SecurityKey = ""
