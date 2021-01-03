@@ -816,6 +816,41 @@ Namespace PresentationLayer.Presenters
             Next item
         End Sub
 
+        Public Sub UpdateFirstLine()
+            If EditMode Or AddMode Then
+                If View.JournalItems.Count() = 0 Then
+                    If View.JournalItems.Count() = 0 Then
+                        View.JournalItems = New List(Of IJournalItemView) From {
+                            NewJournalItem()
+                            }
+                    Else
+                        For Each item In View.JournalItems
+                            item.JournalIdNo = View.IdNo
+                            item.Sequence = 1
+                            item.AccountIdNo = View.AccountIdNo
+                            item.Credit = View.Amount
+                            item.Debit = 0
+                            item.RevCostCenterIdNo = 0
+                            Exit For
+                        Next
+                    End If
+                End If
+            End If
+        End Sub
+
+        Private Function NewJournalItem()
+            Dim item As New JournalItemView With {
+                    .JournalIdNo = View.IdNo,
+                    .Sequence = 1,
+                    .AccountIdNo = View.AccountIdNo,
+                    .Credit = View.Amount,
+                    .Debit = 0,
+                    .RevCostCenterIdNo = 0,
+                    .Notes = ""
+                    }
+            Return item
+        End Function
+
     End Class
 
 End Namespace

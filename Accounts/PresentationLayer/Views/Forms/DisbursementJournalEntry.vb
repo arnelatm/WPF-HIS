@@ -534,28 +534,47 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Private Sub CboAccountIdNo_ValueChanged(sender As Object, e As EventArgs)
-            UpdateFirstLine()
+        Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboPaymentType.Validated, txtAmount.Validated
+            PresenterObj.UpdateFirstLine()
+            UpdateTotals()
+            DataGridViewJournalItems.Refresh()
         End Sub
 
-        Private Sub CboPayeeIdNo_Validated(sender As Object, e As EventArgs)
-            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
-                If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                    If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
+        'Private Sub CboPayeeIdNo_Validated(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
+        '    If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
+        '        If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+        '            If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
+        '                bsDjOiItems.Clear()
+        '                UpdateOiTotals()
+        '            End If
+        '            PresenterObj.AddSupplierOpenInvoices()
+        '            BindDjOiItem()
+        '        End If
+        '        Dim lVatNumber As String
+        '        lVatNumber = PresenterObj.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
+        '        If Not String.IsNullOrEmpty(lVatNumber) Then
+        '            VatNumber = lVatNumber
+        '        End If
+        '    End If
+        'End Sub
+
+        Private Sub PayeeIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboPayeeIdNo.SelectionChangeCommitted, cboPayeeIdNo.Validated
+            If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
+                If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
+                    If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                         bsDjOiItems.Clear()
                         UpdateOiTotals()
+                        PresenterObj.AddSupplierOpenInvoices()
+                        BindDjOiItem()
                     End If
-                    PresenterObj.AddSupplierOpenInvoices()
-                    BindDjOiItem()
-                End If
-                Dim lVatNumber As String
-                lVatNumber = PresenterObj.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
-                If Not String.IsNullOrEmpty(lVatNumber) Then
-                    VatNumber = lVatNumber
+                    Dim lVatNumber As String
+                    lVatNumber = PresenterObj.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
+                    If Not String.IsNullOrEmpty(lVatNumber) Then
+                        VatNumber = lVatNumber
+                    End If
                 End If
             End If
         End Sub
-
 
         Private Sub UpdateLayout()
             SuspendLayout()
@@ -666,6 +685,8 @@ Namespace PresentationLayer.Views.Forms
                 tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 1)
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
             End If
+            DataGridViewJournalItems.DataSource = bsJournalItems
+            DataGridViewJournalItems.Refresh()
             cboDiscountAccountIdNo.Enabled = False
         End Sub
 
@@ -718,39 +739,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UpdateFirstLine()
-            If PresenterObj.EditMode Or PresenterObj.AddMode Then
-                If bsJournalItems IsNot Nothing Then
-                    If bsJournalItems.Count() = 0 Then
-                        bsJournalItems.Add(New JournalItemView With {
-                                              .JournalIdNo = IdNo,
-                                              .Sequence = 1,
-                                              .AccountIdNo = AccountIdNo,
-                                              .Credit = Amount,
-                                              .Debit = 0,
-                                              .RevCostCenterIdNo = 0})
-                    Else
-                        For Each item In bsJournalItems
-                            item.JournalIdNo = IdNo
-                            item.Sequence = 1
-                            If cboAccountIdNo.Text Is Nothing Or cboAccountIdNo.Text = "" Then
-                                item.AccountIdNo = Nothing
-                            Else
-                                item.AccountIdNo = AccountIdNo
-                            End If
-                            item.Credit = Amount
-                            item.Debit = 0
-                            item.RevCostCenterIdNo = 0
-                            DataGridViewJournalItems.Refresh()
-                            Exit For
-                        Next
-                    End If
-                End If
-                'BindJournalItem()
-                UpdateJiTotals()
-            End If
-        End Sub
-
         Private Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
                 _jiFooter.CalculateTotals()
@@ -783,9 +771,12 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotalVatAmount()
         End Sub
 
-        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedIndexChanged
-            SetPayeeDataSource(PaymentType)
-            UpdateLayout()
+        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedValueChanged
+            'If cboPaymentType.PreviousSelectedIndex <> cboPaymentType.SelectedIndex Then
+            If cboPaymentType.Focused() Then
+                SetPayeeDataSource(PaymentType)
+                UpdateLayout()
+            End If
         End Sub
 
         Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
