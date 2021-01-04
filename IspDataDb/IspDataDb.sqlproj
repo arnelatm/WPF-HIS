@@ -139,7 +139,6 @@
     <Build Include="dbo\Tables\SalesJournalItem.sql" />
     <Build Include="dbo\Tables\EmployeeDetails.sql" />
     <Build Include="dbo\Tables\EmployeeLoanJournal.sql" />
-    <Build Include="dbo\Tables\CadOiItem.sql" />
     <Build Include="dbo\Tables\ReceiptDetails.sql" />
     <Build Include="dbo\Views\Account_View.sql" />
     <Build Include="dbo\Views\SalesDeposit_View.sql" />

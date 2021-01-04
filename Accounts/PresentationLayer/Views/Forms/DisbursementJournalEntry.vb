@@ -58,12 +58,36 @@ Namespace PresentationLayer.Views.Forms
             Ea.SubscribeEvent(Me)
         End Sub
 
-        'This Event handler() provides custom item-creation behavior.
-        Private Sub journalItemsBindingSource_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
-            'CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
-            'CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
+        ''This Event handler() provides custom item-creation behavior.
+        'Private Sub journalItemsBindingSource_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+        '    'CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
+        '    'CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
+        '    Me.JournalItems.Add(New JournalItemView)
+        '    e.NewObject = New JournalItemView
+        'End Sub
+
+        'Private Sub journalItemsBindingSource_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+        '    Dim drv As DataGridViewRow = DirectCast(bsJournalItems.AddNew(), DataGridViewRow)
+        '    drv.BeginEdit()
+
+        '    drv.Row.BeginEdit()
+
+        '    drv.Row("IsSelected") = IsChecked
+
+        '    drv.Row.EndEdit()
+
+        '    drv.DataView.Table.Rows.Add(drv.Row)
+
+        'End Sub
+
+        Private Sub BindingSource1_AddingNew(ByVal sender As System.Object, ByVal e As System.ComponentModel.AddingNewEventArgs) Handles bsJournalItems.AddingNew
+            'Dim drv As DataGridViewRow = DirectCast(bsJournalItems.AddNew(), DataGridViewRow)
+            ''drv.Row.Item(0) = "some value"
+            'e.NewObject = drv
             Me.JournalItems.Add(New JournalItemView)
             e.NewObject = New JournalItemView
+            ' move to new record
+            bsJournalItems.MoveLast()
         End Sub
 
 #Region "Field Items"
@@ -429,7 +453,6 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-
         Private Sub BindDjOiItem()
             SuspendLayout()
             bsDjOiItems.DataSource = Nothing
@@ -533,7 +556,6 @@ Namespace PresentationLayer.Views.Forms
                 End Select
             End With
         End Sub
-
 
         'Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboPaymentType.Validated, txtAmount.Validated
 
@@ -735,7 +757,9 @@ Namespace PresentationLayer.Views.Forms
                     If DataGridViewDjOiItems IsNot Nothing Then
                         If DataGridViewDjOiItems.CurrentCell Is Nothing Then
                             DataGridViewDjOiItems.Focus()
-                            DataGridViewDjOiItems.CurrentCell = DataGridViewDjOiItems(DataGridViewDjOiItems.Columns("dgvAmount").Index(), 0)
+                            If DataGridViewDjOiItems.CurrentCell IsNot Nothing Then
+                                DataGridViewDjOiItems.CurrentCell = DataGridViewDjOiItems(DataGridViewDjOiItems.Columns("dgvAmount").Index(), 0)
+                            End If
                         End If
                     End If
                 End If

@@ -166,11 +166,11 @@ Namespace PresentationLayer.Presenters
             Dim apOpenInvoiceIdNo As Integer
             apOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
                                                              "JournalItemIdNo", "IdNo")
-            If Model.CountRecordWithKey(apOpenInvoiceIdNo, "CadOiItem", "ApOpenInvoiceIdNo") > 0 Then
+            If Model.CountRecordWithKey(apOpenInvoiceIdNo, "CdOiItem", "ApOpenInvoiceIdNo") > 0 Then
                 Return True
-            ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "CkdOiItem", "ApOpenInvoiceIdNo") > 0 Then
+            ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "CkOiItem", "ApOpenInvoiceIdNo") > 0 Then
                 Return True
-            ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "PcsOiItem", "ApOpenInvoiceIdNo") > 0 Then
+            ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "PcOiItem", "ApOpenInvoiceIdNo") > 0 Then
                 Return True
             End If
             Return False

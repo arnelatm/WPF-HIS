@@ -128,7 +128,7 @@ Namespace PresentationLayer.Presenters
             End If
             For Each oldItem In oldJournalItem
                 ' deletion of paid A.P. entries not allowed (see UserDeletingRow - sub  below) therefore all entries here are unpaid
-                ' so no problem on deletion of related ApOpenInvoice and Payment invoices ('CkrOiItem','CadOiItem','pcsOiItem')
+                ' so no problem on deletion of related ApOpenInvoice and Payment invoices ('CkOiItem','CdOiItem','PcOiItem')
                 If IsAccountsPayableAccount(oldItem.AccountIdNo) Then
                     deletedRecord = IsNothing(newJournalItem.Find(Function(c) c.IdNo = oldItem.IdNo))
                     If deletedRecord Then
@@ -180,6 +180,7 @@ Namespace PresentationLayer.Presenters
                             item.Debit = View.Amount
                         End If
                     End If
+                    ' AP accounts are liabilities accounts so no revenue cost centers
                     item.RevCostCenterIdNo = 0
                     Exit For
                 Next
@@ -189,7 +190,7 @@ Namespace PresentationLayer.Presenters
         Private Function CountApItems()
             Dim nCount = 0
             For Each item In View.JournalItems
-                If item.SpecialAccount = "AP" Then
+                If item.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
                     nCount = nCount + 1
                 End If
             Next
@@ -238,12 +239,12 @@ Namespace PresentationLayer.Presenters
                         End If
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {lineNumber, "lineNumber"})
+                            Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         ElseIf specialAccount IsNot Nothing AndAlso cashAccounts.Contains(specialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {lineNumber, "lineNumber"})
+                            Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                         Else
                             cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")

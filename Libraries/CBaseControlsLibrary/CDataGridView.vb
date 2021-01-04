@@ -244,7 +244,7 @@ Public Class CDataGridView
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
         Dim key As Keys = keyData And Keys.KeyCode
         'MyBase.ProcessDialogKey(keyData)
-        If key = Keys.Enter Then
+        If key = Keys.Enter And CurrentCell IsNot Nothing Then
             Dim currentColumnIndex As Int16
             currentColumnIndex = CurrentCell.ColumnIndex()
             If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
@@ -298,29 +298,34 @@ Public Class CDataGridView
     End Sub
 
     Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
-        If EditingMode Then
-            With CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvinsertcolumn"
-                        'If (CurrentRow.Index() <> NewRowIndex()) Then
-                        'If Ea IsNot Nothing Then
-                        '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
-                        'End If
-                        If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
-                            Dim myBindingSource = CType(DataSource, BindingSource)
-                            Dim current = myBindingSource.Current
-                            Dim dataList = current.BlankCopy()
-                            myBindingSource.Insert(.RowIndex(), dataList)
-                            ReSequenceDgvAfterInsert()
-                            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
-                        Else
-                            Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
-                        End If
-                        'End If
+        Try
+            If EditingMode Then
+                With CurrentCell
+                    Select Case .OwningColumn.Name.ToLower()
+                        Case $"dgvinsertcolumn"
+                            'If (CurrentRow.Index() <> NewRowIndex()) Then
+                            'If Ea IsNot Nothing Then
+                            '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
+                            'End If
+                            If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
+                                Dim myBindingSource = CType(DataSource, BindingSource)
+                                Dim current = myBindingSource.Current
+                                Dim dataList = current.BlankCopy()
+                                myBindingSource.Insert(.RowIndex(), dataList)
+                                ReSequenceDgvAfterInsert()
+                                CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
+                            Else
+                                Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
+                            End If
+                            'End If
 
-                End Select
-            End With
-        End If
+                    End Select
+                End With
+            End If
+        Catch ex As Exception
+            Windows.MessageBox.Show("error")
+        End Try
+
     End Sub
 
     'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEnter
@@ -329,21 +334,26 @@ Public Class CDataGridView
     '        SendKeys.Send("{Tab}")
     '    End If
     'End Sub
+    'Private Sub AddNewRow()
+    '    Dim myBindingSource = CType(DataSource, BindingSource)
+    '    If myBindingSource IsNot Nothing Then
+    '        Dim row = CurrentRow.Index() + 1
+    '        Try
+    '            myBindingSource.AddNew()
+    '        Catch ex As Exception
 
-    Private Sub AddNewRow()
-        Dim myBindingSource = CType(DataSource, BindingSource)
-        If myBindingSource IsNot Nothing Then
-            Dim row = CurrentRow.Index() + 1
-            myBindingSource.AddNew()
-            CurrentCell = Rows(row).Cells(0)
-            If CurrentRow.DataBoundItem IsNot Nothing Then
-                CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
-            Else
-                Debugger.Break()
-            End If
-            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
-        End If
-    End Sub
+    '        End Try
+    '        'myBindingSource.MoveLast()
+    '        If CurrentRow IsNot Nothing AndAlso CurrentRow.DataBoundItem IsNot Nothing Then
+    '            CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
+    '            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
+    '        End If
+    '        'If CurrentRow IsNot Nothing AndAlso CurrentRow.DataBoundItem IsNot Nothing Then
+    '        '    CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
+    '        '    CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
+    '        'End If
+    '    End If
+    'End Sub
 
     Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
         If StartTrackingChanges Then
@@ -544,33 +554,35 @@ Public Class CDataGridView
     '    SendKeys.Send("{UP}")
     'End Sub
     Private Overloads Sub OnKeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        Dim iColumn As Integer = CurrentCell.ColumnIndex
-        Dim iRow As Integer = Math.Min(CurrentCell.RowIndex, RowCount() - 1)
         Try
-            Select Case e.KeyData
-                Case Keys.Enter
-                    SendKeys.Send("{TAB}")
-                    e.Handled = True
-                Case Keys.Tab
-                    If EditingMode Then
-                        If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
-                            ' if on the last editable column, move to the first editable column on the next row
-                            Dim r = Math.Min(iRow + 1, RowCount() - 1)
-                            Dim vc = FirstVisibleColumn
-                            Dim ec = FirstEditableColumn
-                            Dim c = If(ec > 0, ec, vc)
-                            CurrentCell = Me(c, r)
-                            e.Handled = True
+            If CurrentCell IsNot Nothing Then
+                Dim iColumn As Integer = CurrentCell.ColumnIndex
+                Dim iRow As Integer = Math.Min(CurrentCell.RowIndex, RowCount() - 1)
+                Select Case e.KeyData
+                    Case Keys.Enter
+                        SendKeys.Send("{TAB}")
+                        e.Handled = True
+                    Case Keys.Tab
+                        If EditingMode Then
+                            If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
+                                ' if on the last editable column, move to the first editable column on the next row
+                                Dim r = Math.Min(iRow + 1, RowCount() - 1)
+                                Dim vc = FirstVisibleColumn
+                                Dim ec = FirstEditableColumn
+                                Dim c = If(ec > 0, ec, vc)
+                                CurrentCell = Me(c, r)
+                                e.Handled = True
+                            End If
                         End If
-                    End If
 
-                Case Else
-                    e.Handled = False
-            End Select
+                    Case Else
+                        e.Handled = False
+                End Select
+            End If
         Catch ex As Exception
             Forms.MessageBox.Show(ex.Message)
         End Try
-        Return
+        'Return
     End Sub
 
     'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
@@ -627,13 +639,13 @@ Public Class CDataGridView
     '    End If
     'End Sub
 
-    Private Sub DataGridView_BeginEdit(ByVal sender As Object, ByVal e As DataGridViewCellCancelEventArgs) Handles Me.CellBeginEdit
-        If Me.CurrentCell.RowIndex = RowCount() - 1 Then
-            If Me.AllowUserToAddRows Then
-                AddNewRow()
-            End If
-        End If
-    End Sub
+    'Private Sub DataGridView_BeginEdit(ByVal sender As Object, ByVal e As DataGridViewCellCancelEventArgs) Handles Me.CellBeginEdit
+    '    If Me.CurrentCell.RowIndex = RowCount() - 1 Then
+    '        If Me.AllowUserToAddRows Then
+    '            AddNewRow()
+    '        End If
+    '    End If
+    'End Sub
 
     'Public Property GridParentChanged As Boolean
     '    Set(value As Boolean)

@@ -180,17 +180,17 @@ Namespace PresentationLayer.Presenters
                     '        retValue = JournalItemDataIsValid()
                     '    End If
                     'ElseIf CodeToEnum(Of PaymentTypeSelection)(View.DepositType) = PaymentTypeSelection.AccountsPayable Then
-                    '    If CadOiItemDataIsValid() Then
+                    '    If CdOiItemDataIsValid() Then
                     '        retValue = True
                     '    Else
                     '        retValue = False
                     '        Dim index As Int16 = 0
-                    '        For Each item In View.CadOiItems
+                    '        For Each item In View.CdOiItems
                     '            If item.Errors IsNot Nothing Then
-                    '                View.CadOiItems(index).Errors = item.Errors
+                    '                View.CdOiItems(index).Errors = item.Errors
                     '            Else
-                    '                If View.CadOiItems(index).Errors IsNot Nothing Then
-                    '                    View.CadOiItems(index).Errors.Clear()
+                    '                If View.CdOiItems(index).Errors IsNot Nothing Then
+                    '                    View.CdOiItems(index).Errors.Clear()
                     '                End If
                     '            End If
                     '            index += 1
