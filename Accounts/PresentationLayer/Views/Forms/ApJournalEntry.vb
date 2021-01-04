@@ -415,8 +415,8 @@ Namespace PresentationLayer.Views.Forms
                     Case $"dgvaccountidno"
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
-                            If nIndex < JournalItems.Count() Then
-                                JournalItems(nIndex).AccountIdNo = newValue
+                            If nIndex < bsJournalItems.Count() Then
+                                bsJournalItems(nIndex).AccountIdNo = newValue
                                 With DataGridViewJournalItems.CurrentRow
                                     Dim currentVatAmount As Decimal
                                     If PresenterObj.IsInputVatAccount(newValue) Then
@@ -431,13 +431,13 @@ Namespace PresentationLayer.Views.Forms
                         End If
                     Case $"dgvdebit"
                         Dim newValue = .CurrentCell.Value
-                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() And nIndex < JournalItems.Count() Then
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() And nIndex < bsJournalItems.Count() Then
                             If newValue > 0 Then
-                                JournalItems(nIndex).Credit = 0
+                                bsJournalItems(nIndex).Credit = 0
                                 bsJournalItems(nIndex).Credit = 0
                             ElseIf newValue < 0 Then
-                                JournalItems(nIndex).Credit = newValue * -1
-                                JournalItems(nIndex).Debit = 0
+                                bsJournalItems(nIndex).Credit = newValue * -1
+                                bsJournalItems(nIndex).Debit = 0
                             End If
                             If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
                                 .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
@@ -448,12 +448,12 @@ Namespace PresentationLayer.Views.Forms
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
                         Dim newValue = .CurrentCell.Value
-                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() And nIndex < JournalItems.Count() Then
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() And nIndex < bsJournalItems.Count() Then
                             If newValue > 0 Then
-                                JournalItems(nIndex).Debit = 0
+                                bsJournalItems(nIndex).Debit = 0
                             ElseIf newValue < 0 Then
-                                JournalItems(nIndex).Debit = newValue * -1
-                                JournalItems(nIndex).Credit = 0
+                                bsJournalItems(nIndex).Debit = newValue * -1
+                                bsJournalItems(nIndex).Credit = 0
                             End If
                             If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
                                 .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
