@@ -7,7 +7,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views
 
     Public Class SalesDepositView
-        Implements ISalesDepositView, ISelfDuplicating
+        Implements ISalesDepositView
 
         Private ReadOnly _vatRate As Decimal = GlobalVariables.VatRate() / 100D
         Private _computedBankCharge As Decimal = 0D
@@ -116,10 +116,6 @@ Namespace PresentationLayer.Views
         'Public Function GetComputedBankChargeVat(pBankCharge)
         '    Return Math.Round(pBankCharge * _vatRate, 2)
         'End Function
-
-        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
-            Return New SalesDepositView
-        End Function
 
     End Class
 

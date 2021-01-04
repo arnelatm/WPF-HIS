@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private ReadOnly _apJournalItemModel As New ModelAccounts("JournalItem", Nothing, {"ApJournalItem_View", "dbo.UpdateApJournalItemTVP", "dbo.InsertApJournalItemTVP"})
-        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice", Nothing, )
+        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
 
         Public Sub New(view As IApJournalView)
             MyBase.New(view)
@@ -187,7 +187,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Function CountApItems()
+        Public Function CountApItems()
             Dim nCount = 0
             For Each item In View.JournalItems
                 If item.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
@@ -216,10 +216,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
-                Dim cPayeeType As String
                 Dim cashAccounts As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount) + "|" + EnumToCode(SpecialAccountSelection.CheckingAccount)
-                Dim specialAccount As String
-                Dim account As AccountModel
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("AP Journal", "LastPosting", "TransactionName", "LastPostingDate")
@@ -228,9 +225,7 @@ Namespace PresentationLayer.Presenters
                 Else
                     Dim nTotalAp As Decimal = 0
                     For Each item In View.JournalItems
-                        account = GetAccount(item.AccountIdNo)
-                        specialAccount = account.SpecialAccount
-                        If specialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
+                        If item.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
                             If View.TransactionType = "I" Or View.TransactionType = "C" Then
                                 nTotalAp = nTotalAp + item.Credit - item.Debit
                             Else
@@ -242,13 +237,12 @@ Namespace PresentationLayer.Presenters
                             Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
-                        ElseIf specialAccount IsNot Nothing AndAlso cashAccounts.Contains(specialAccount) Then
+                        ElseIf item.SpecialAccount IsNot Nothing AndAlso cashAccounts.Contains(item.SpecialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
                             Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                         Else
-                            cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
-                            If Not String.IsNullOrEmpty(cPayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Supplier Then
+                            If Not String.IsNullOrEmpty(item.PayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(item.PayeeType) <> PayeeTypeSelection.Supplier Then
                                 Dim lineNumber = Format(item.Sequence, "0")
                                 Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee Loans")
                                 Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
@@ -273,7 +267,9 @@ Namespace PresentationLayer.Presenters
                     .Credit = View.Amount,
                     .Debit = 0,
                     .RevCostCenterIdNo = 0,
-                    .Notes = ""
+                    .Notes = "",
+                    .SpecialAccount = Nothing,
+                    .PayeeType = Nothing
                     }
             Return item
         End Function
@@ -285,7 +281,7 @@ Namespace PresentationLayer.Presenters
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()

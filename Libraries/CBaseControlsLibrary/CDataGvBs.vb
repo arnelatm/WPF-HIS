@@ -177,30 +177,45 @@ Public Class CDataGvBs
 
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
         Dim key As Keys = keyData And Keys.KeyCode
-        If key = Keys.Enter Then
+        If key = Keys.Enter And CurrentCell IsNot Nothing Then
             Dim currentColumnIndex As Int16
             currentColumnIndex = CurrentCell.ColumnIndex()
-            If currentColumnIndex < LastEditableColumn Then
-                ' Handle the ENTER key as if it were a tab ARROW key
-                Return ProcessTabKey(keyData)
-            Else  'If currentColumnIndex = LastEditableColumn Then
-                ' go to next row on the first editable column
-                Dim row As Integer = CurrentCell.RowIndex()
-                Dim myBindingSource = CType(DataSource, BindingSource)
-                Dim current = myBindingSource.Current
-                Dim isLastRow As Boolean = (CurrentCell.RowIndex = RowCount() - 1)
-                If isLastRow Then
-                    Dim dataList = current.BlankCopy()
-                    Dim obj = myBindingSource.DataSource
-                    Dim myRow = CurrentRow
-                    myBindingSource.RemoveAt(myBindingSource.Count - 1)
-                    CallByName(dataList, "Sequence", CallType.Set, row + 1)
-                    myBindingSource.Add(dataList)
-                    CurrentCell = Me(FirstEditableColumn, row + 1)
+            If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
+                If CurrentCell.RowIndex() + 1 < RowCount() Then
+                    CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
+                    Return True
                 End If
             End If
+            Me.ProcessTabKey(keyData)
+            Return True
+        Else
+            Return MyBase.ProcessDialogKey(keyData)
         End If
-        Return MyBase.ProcessDialogKey(keyData)
+        'Dim key As Keys = keyData And Keys.KeyCode
+        'If key = Keys.Enter Then
+        '    Dim currentColumnIndex As Int16
+        '    currentColumnIndex = CurrentCell.ColumnIndex()
+        '    If currentColumnIndex < LastEditableColumn Then
+        '        ' Handle the ENTER key as if it were a tab ARROW key
+        '        Return ProcessTabKey(keyData)
+        '    Else  'If currentColumnIndex = LastEditableColumn Then
+        '        ' go to next row on the first editable column
+        '        Dim row As Integer = CurrentCell.RowIndex()
+        '        Dim myBindingSource = CType(DataSource, BindingSource)
+        '        Dim current = myBindingSource.Current
+        '        Dim isLastRow As Boolean = (CurrentCell.RowIndex = RowCount() - 1)
+        '        If isLastRow Then
+        '            Dim dataList = current.BlankCopy()
+        '            Dim obj = myBindingSource.DataSource
+        '            Dim myRow = CurrentRow
+        '            myBindingSource.RemoveAt(myBindingSource.Count - 1)
+        '            CallByName(dataList, "Sequence", CallType.Set, row + 1)
+        '            myBindingSource.Add(dataList)
+        '            CurrentCell = Me(FirstEditableColumn, row + 1)
+        '        End If
+        '    End If
+        'End If
+        'Return MyBase.ProcessDialogKey(keyData)
     End Function
 
     Private Sub CDataGridView_DefaultValuesNeeded(sender As Object, e As DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
@@ -228,21 +243,28 @@ Public Class CDataGvBs
         With CurrentCell
             Select Case .OwningColumn.Name.ToLower()
                 Case $"dgvinsertcolumn"
-                    'If (CurrentRow.Index() <> NewRowIndex()) Then
-                    'If Ea IsNot Nothing Then
-                    '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
+                    Dim myBindingSource = CType(DataSource, BindingSource)
+                    Dim dataList = myBindingSource.AddNew()
+                    myBindingSource.RemoveAt(myBindingSource.Count() - 1)
+                    myBindingSource.Position = .RowIndex
+                    myBindingSource.Insert(.RowIndex(), dataList)
+                    ReSequenceDgvAfterInsert()
+                    CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
+                    ''If (CurrentRow.Index() <> NewRowIndex()) Then
+                    ''If Ea IsNot Nothing Then
+                    ''    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
+                    ''End If
+                    'If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
+                    '    Dim myBindingSource = CType(DataSource, BindingSource)
+                    '    Dim current = myBindingSource.Current
+                    '    Dim dataList = current.BlankCopy()
+                    '    myBindingSource.Insert(.RowIndex(), dataList)
+                    '    ReSequenceDgvAfterInsert()
+                    '    CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
+                    'Else
+                    '    Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
                     'End If
-                    If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
-                        Dim myBindingSource = CType(DataSource, BindingSource)
-                        Dim current = myBindingSource.Current
-                        Dim dataList = current.BlankCopy()
-                        myBindingSource.Insert(.RowIndex(), dataList)
-                        ReSequenceDgvAfterInsert()
-                        CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
-                    Else
-                        Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
-                    End If
-                    'End If
+                    ''End If
 
             End Select
         End With
