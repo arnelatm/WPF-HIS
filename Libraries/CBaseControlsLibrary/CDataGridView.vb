@@ -243,7 +243,6 @@ Public Class CDataGridView
 
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
         Dim key As Keys = keyData And Keys.KeyCode
-        'MyBase.ProcessDialogKey(keyData)
         If key = Keys.Enter And CurrentCell IsNot Nothing Then
             Dim currentColumnIndex As Int16
             currentColumnIndex = CurrentCell.ColumnIndex()
@@ -309,8 +308,9 @@ Public Class CDataGridView
                             'End If
                             If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
                                 Dim myBindingSource = CType(DataSource, BindingSource)
-                                Dim current = myBindingSource.Current
-                                Dim dataList = current.BlankCopy()
+                                Dim dataList = myBindingSource.AddNew()
+                                myBindingSource.RemoveAt(myBindingSource.Count() - 1)
+                                myBindingSource.Position = .RowIndex
                                 myBindingSource.Insert(.RowIndex(), dataList)
                                 ReSequenceDgvAfterInsert()
                                 CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))

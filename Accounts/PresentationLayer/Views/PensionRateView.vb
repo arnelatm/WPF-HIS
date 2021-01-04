@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views
 
     Public Class PensionRateView
-        Implements IPensionRateView, ISelfDuplicating
+        Implements IPensionRateView
 
         Public Property EmployeeShare As Decimal Implements IPensionRateView.EmployeeShare
         Public Property EmployerShare As Decimal Implements IPensionRateView.EmployerShare
@@ -16,10 +16,6 @@ Namespace PresentationLayer.Views
         Public Property MaxAmount As Decimal Implements IPensionRateView.MaxAmount
         Public Property PensionSchemeIdNo As Int16 Implements IPensionRateView.PensionSchemeIdNo
         Public Property Sequence As Int16 Implements IPensionRateView.Sequence
-
-        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
-            Return New PensionRateView
-        End Function
 
     End Class
 

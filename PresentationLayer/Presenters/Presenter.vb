@@ -955,9 +955,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         msg = Messaging.GetMessage(True, "AskIfUserWantsToSaveOrContinueEdits",
                                  "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
                                  "Please Confirm.")
-        result = Messaging.Show(msg & Environment.NewLine & CompareDifferences, "Please Confirm", MessageBoxButtons.YesNoCancel,
+        If GlobalVariables.ShowDataDifferenceWhenSaving Then
+            result = Messaging.Show(msg & Environment.NewLine & CompareDifferences, "Please Confirm", MessageBoxButtons.YesNoCancel,
                                 MessageBoxIcon.Question,
                                 MessageBoxDefaultButton.Button3)
+        Else
+            result = Messaging.Show(msg & Environment.NewLine, "Please Confirm", MessageBoxButtons.YesNoCancel,
+                                    MessageBoxIcon.Question,
+                                    MessageBoxDefaultButton.Button3)
+        End If
         Return result
     End Function
 

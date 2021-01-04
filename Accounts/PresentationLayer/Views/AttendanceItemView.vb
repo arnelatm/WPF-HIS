@@ -5,8 +5,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views
 
     Public Class AttendanceItemView
-        Implements IAttendanceItemView, ISelfDuplicating
-
+        Implements IAttendanceItemView
         Private _credit As Decimal
 
         'Private _daysTotal As Decimal
@@ -32,10 +31,6 @@ Namespace PresentationLayer.Views
         Public Property IdNo As Int32 Implements IAttendanceItemView.IdNo
         Public Property PayPeriodIdNo As Int16 Implements IAttendanceItemView.PayPeriodIdNo
         Public Property Sequence As Int16 Implements IAttendanceItemView.Sequence
-
-        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
-            Return New AttendanceItemView
-        End Function
 
     End Class
 

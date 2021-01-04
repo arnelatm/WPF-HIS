@@ -20,6 +20,7 @@ Public Class GlobalVariables
     Private Shared _useOriginalAppTextLanguageForEnglish As Nullable(Of Boolean)
     Private Shared _lookupSetting As String = "CodeAndName"
     Private Shared _vatRate As Decimal = 0D
+    Private Shared _showDataDifferenceWhenSaving As Boolean?
 
     'Private Shared _defaultMirroredLanguageIdNo As Int32
     Private Shared _defaultMirroredCultureInfoStr As String
@@ -426,6 +427,19 @@ Public Class GlobalVariables
                 _lookupSetting = "CodeAndName"
                 Return _lookupSetting
             End Try
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property ShowDataDifferenceWhenSaving() As Boolean
+        Get
+            Try
+                If _showDataDifferenceWhenSaving Is Nothing Then
+                    Return ConfigurationManager.AppSettings("ShowDataDifferenceWhenSaving")
+                End If
+            Catch
+                _showDataDifferenceWhenSaving = False
+            End Try
+            Return False
         End Get
     End Property
 

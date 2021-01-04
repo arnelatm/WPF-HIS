@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views
 
     Public Class JournalItemView
-        Implements IJournalItemView, ISelfDuplicating
+        Implements IJournalItemView
 
         Private _debit As Decimal
         Private _credit As Decimal
@@ -13,21 +13,21 @@ Namespace PresentationLayer.Views
         Private _sequence As Integer
 
         Public Sub New()
-            AccountIdNo = 0
-            AccountName = ""
-            Cancelled = False
-            Credit = 0
-            Debit = 0
-            DiscountTaken = 0
-            IdNo = 0
-            JournalIdNo = 0
-            Notes = ""
-            OpenInvoiceIdNo = 0
-            OriginalAmount = 0
-            PaidAmount = 0
-            PayeeType = ""
-            RevCostCenterIdNo = 0
-            Sequence = 0
+            'AccountIdNo = 0
+            'AccountName = ""
+            'Cancelled = False
+            'Credit = 0
+            'Debit = 0
+            'DiscountTaken = 0
+            'IdNo = 0
+            'JournalIdNo = 0
+            'Notes = ""
+            'OpenInvoiceIdNo = 0
+            'OriginalAmount = 0
+            'PaidAmount = 0
+            'PayeeType = ""
+            'RevCostCenterIdNo = 0
+            'Sequence = 0
         End Sub
 
         'Public Property Ea As EventAggregator
@@ -103,10 +103,6 @@ Namespace PresentationLayer.Views
         Public Property SpecialAccount As String Implements IJournalItemView.SpecialAccount
 
         Public Property Errors As List(Of String) Implements IView.Errors
-
-        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
-            Return New JournalItemView
-        End Function
 
     End Class
 

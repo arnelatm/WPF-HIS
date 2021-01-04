@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views
 
     Public Class PayrollDeductAccountView
-        Implements IPayrollDeductAccountView, ISelfDuplicating
+        Implements IPayrollDeductAccountView
 
         Public Property AccountIdNo As Int16 Implements IPayrollDeductAccountView.AccountIdNo
         Public Property AccountName As String Implements IPayrollDeductAccountView.AccountName
@@ -15,10 +15,6 @@ Namespace PresentationLayer.Views
         Public Property PayGroupIdNo As Int16 Implements IPayrollDeductAccountView.PayGroupIdNo
         Public Property PayGroupName As String Implements IPayrollDeductAccountView.PayGroupName
         Public Property Sequence As Int16 Implements IPayrollDeductAccountView.Sequence
-
-        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
-            Return New PayrollDeductAccountView
-        End Function
 
     End Class
 

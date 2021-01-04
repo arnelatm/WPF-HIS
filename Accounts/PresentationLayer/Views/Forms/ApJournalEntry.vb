@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -20,6 +22,7 @@ Namespace PresentationLayer.Views.Forms
         Private _footer As DgvFooter
         Private _journalItems As List(Of IJournalItemView)
         Private _revCostCentersByCode
+        Private myPresenter As New ApJournalPresenter(Me)
 
         Public Sub New()
             MyBase.New()
@@ -379,7 +382,7 @@ Namespace PresentationLayer.Views.Forms
             '_footer.Dispose()
         End Sub
 
-        Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
+        Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated, cboTransactionType.SelectionChangeCommitted
             PresenterObj.UpdateFirstLine()
             'BindJournalItem()
             UpdateTotals()
@@ -391,8 +394,8 @@ Namespace PresentationLayer.Views.Forms
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
-                    ' don't allow edits for first line entries accountidno and amounts
-                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Then
+                    ' don't allow edits for first line entries account id no and amounts if only single
+                    If cColumnName = $"dgvaccountidno" Or ((cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit") AndAlso PresenterObj.CountApItems() <= 1) Then
                         Beep()
                         e.Cancel = True
                         DataGridViewJournalItems.EndEdit()
@@ -417,6 +420,8 @@ Namespace PresentationLayer.Views.Forms
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
                             If nIndex < bsJournalItems.Count() Then
                                 bsJournalItems(nIndex).AccountIdNo = newValue
+                                Dim account As AccountModel
+                                account = PresenterObj.GetAccount(newValue)
                                 With DataGridViewJournalItems.CurrentRow
                                     Dim currentVatAmount As Decimal
                                     If PresenterObj.IsInputVatAccount(newValue) Then
@@ -425,6 +430,8 @@ Namespace PresentationLayer.Views.Forms
                                         currentVatAmount = 0
                                     End If
                                     .Cells("ItemVatAmount").Value = currentVatAmount
+                                    bsJournalItems(nIndex).SpecialAccount = account.SpecialAccount
+                                    bsJournalItems(nIndex).PayeeType = account.PayeeType
                                 End With
                                 UpdateTotalVatAmount()
                             End If

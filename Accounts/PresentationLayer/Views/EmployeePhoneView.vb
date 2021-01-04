@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views
 
     Public Class EmployeePhoneView
-        Implements IEmployeePhoneView, ISelfDuplicating
+        Implements IEmployeePhoneView
 
         Private _fullPhone As String
 
@@ -42,10 +42,6 @@ Namespace PresentationLayer.Views
         Public Property PhoneTypeIdNo As Int16 Implements IEmployeePhoneView.PhoneTypeIdNo
         Public Property PhoneTypeName As String Implements IEmployeePhoneView.PhoneTypeName
         Public Property PhoneTypeNameAra As String Implements IEmployeePhoneView.PhoneTypeNameAra
-
-        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
-            Return New EmployeePhoneView
-        End Function
 
     End Class
 

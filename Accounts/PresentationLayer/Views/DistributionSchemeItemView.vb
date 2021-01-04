@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views
 
     Public Class DistributionSchemeItemView
-        Implements IDistributionSchemeItemView, ISelfDuplicating
+        Implements IDistributionSchemeItemView
 
         Public Property IdNo As Int32 Implements IDistributionSchemeItemView.IdNo
 
@@ -20,10 +20,6 @@ Namespace PresentationLayer.Views
         Public Property Percentage As Decimal Implements IDistributionSchemeItemView.Percentage
 
         Public Property Errors As List(Of String) Implements IView.Errors
-
-        Public Function BlankCopy() As Object Implements ISelfDuplicating.BlankCopy
-            Return New DistributionSchemeItemView
-        End Function
 
     End Class
 
