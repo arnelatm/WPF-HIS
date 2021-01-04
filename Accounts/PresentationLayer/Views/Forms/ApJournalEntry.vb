@@ -391,6 +391,7 @@ Namespace PresentationLayer.Views.Forms
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
+                    ' don't allow edits for first line entries accountidno and amounts
                     If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Then
                         Beep()
                         e.Cancel = True
@@ -409,9 +410,9 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
             Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
+                Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
-                        Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
                             If nIndex < JournalItems.Count() Then
@@ -426,17 +427,38 @@ Namespace PresentationLayer.Views.Forms
                                     .Cells("ItemVatAmount").Value = currentVatAmount
                                 End With
                                 UpdateTotalVatAmount()
-                                'BindJournalItem()
                             End If
                         End If
                     Case $"dgvdebit"
-                        If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
-                            .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
+                        Dim newValue = .CurrentCell.Value
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() And nIndex < JournalItems.Count() Then
+                            If newValue > 0 Then
+                                JournalItems(nIndex).Credit = 0
+                                bsJournalItems(nIndex).Credit = 0
+                            ElseIf newValue < 0 Then
+                                JournalItems(nIndex).Credit = newValue * -1
+                                JournalItems(nIndex).Debit = 0
+                            End If
+                            If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
+                                .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
+                            End If
                         End If
                         UpdateTotals()
                         UpdateTotalVatAmount()
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
+                        Dim newValue = .CurrentCell.Value
+                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() And nIndex < JournalItems.Count() Then
+                            If newValue > 0 Then
+                                JournalItems(nIndex).Debit = 0
+                            ElseIf newValue < 0 Then
+                                JournalItems(nIndex).Debit = newValue * -1
+                                JournalItems(nIndex).Credit = 0
+                            End If
+                            If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
+                                .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
+                            End If
+                        End If
                         If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
                             .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
                         End If

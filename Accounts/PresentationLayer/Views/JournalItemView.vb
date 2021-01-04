@@ -9,9 +9,25 @@ Namespace PresentationLayer.Views
 
         Private _debit As Decimal
         Private _credit As Decimal
+        Private _lastRow As Integer
+        Private _sequence As Integer
 
         Public Sub New()
-
+            AccountIdNo = 0
+            AccountName = ""
+            Cancelled = False
+            Credit = 0
+            Debit = 0
+            DiscountTaken = 0
+            IdNo = 0
+            JournalIdNo = 0
+            Notes = ""
+            OpenInvoiceIdNo = 0
+            OriginalAmount = 0
+            PaidAmount = 0
+            PayeeType = ""
+            RevCostCenterIdNo = 0
+            Sequence = 0
         End Sub
 
         'Public Property Ea As EventAggregator
@@ -71,7 +87,18 @@ Namespace PresentationLayer.Views
         Public Property PayeeType As String Implements IJournalItemView.PayeeType
 
         Public Property RevCostCenterIdNo As Int16 Implements IJournalItemView.RevCostCenterIdNo
+
         Public Property Sequence As Int16 Implements IJournalItemView.Sequence
+            Get
+                Return _sequence
+            End Get
+            Set(value As Int16)
+                _sequence = value
+                If value > _lastRow Then
+                    _lastRow = value + 1
+                End If
+            End Set
+        End Property
 
         Public Property SpecialAccount As String Implements IJournalItemView.SpecialAccount
 

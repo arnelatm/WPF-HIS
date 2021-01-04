@@ -135,6 +135,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
+            Me.DataGridViewJournalItems.DgvFooter = Nothing
             Me.DataGridViewJournalItems.DisplayOnly = False
             Me.DataGridViewJournalItems.Dock = System.Windows.Forms.DockStyle.Left
             Me.DataGridViewJournalItems.Ea = EventAggregator1
@@ -146,6 +147,8 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
+            Me.DataGridViewJournalItems.ShowFooter = False
             Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
             Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1023, 275)
             Me.DataGridViewJournalItems.StartTrackingChanges = False
@@ -157,6 +160,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             Me.dgvSequence.HeaderText = "Seq."
             Me.dgvSequence.MinimumWidth = 50
@@ -517,7 +521,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTransactionDate.Location = New System.Drawing.Point(477, 16)
             Me.lblTransactionDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblTransactionDate.Name = "lblTransactionDate"
-            Me.lblTransactionDate.Size = New System.Drawing.Size(141, 23)
+            Me.lblTransactionDate.Size = New System.Drawing.Size(130, 23)
             Me.lblTransactionDate.TabIndex = 5
             Me.lblTransactionDate.Text = "Transaction Date:"
             Me.lblTransactionDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -534,14 +538,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpTransactionDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
             Me.dtpTransactionDate.LinkedLabel = Nothing
-            Me.dtpTransactionDate.Location = New System.Drawing.Point(619, 15)
+            Me.dtpTransactionDate.Location = New System.Drawing.Point(608, 15)
             Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpTransactionDate.Name = "dtpTransactionDate"
             Me.dtpTransactionDate.ReadOnlyDp = False
             Me.dtpTransactionDate.SecurityKey = Nothing
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(123, 24)
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(130, 24)
             Me.dtpTransactionDate.TabIndex = 2
             Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpTransactionDate.Value = Nothing
@@ -571,7 +575,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSupplierIdNo.DefaultValue = Nothing
             Me.cboSupplierIdNo.DisplayMember = "Name"
             Me.cboSupplierIdNo.DropDownHeight = 1
-            Me.cboSupplierIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboSupplierIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboSupplierIdNo.EditingMode = False
             Me.cboSupplierIdNo.FilterRule = Nothing
             Me.cboSupplierIdNo.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -627,7 +631,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboTransactionType.DefaultValue = "0"
             Me.cboTransactionType.DisplayMember = "Name"
             Me.cboTransactionType.DropDownHeight = 1
-            Me.cboTransactionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboTransactionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboTransactionType.EditingMode = False
             Me.cboTransactionType.FilterRule = Nothing
             Me.cboTransactionType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -704,7 +708,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceDate.Location = New System.Drawing.Point(477, 67)
             Me.lblInvoiceDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblInvoiceDate.Name = "lblInvoiceDate"
-            Me.lblInvoiceDate.Size = New System.Drawing.Size(141, 23)
+            Me.lblInvoiceDate.Size = New System.Drawing.Size(130, 23)
             Me.lblInvoiceDate.TabIndex = 257
             Me.lblInvoiceDate.Text = "Supplier Doc. Date:"
             Me.lblInvoiceDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -720,14 +724,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpInvoiceDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpInvoiceDate.ForeColor = System.Drawing.Color.Black
             Me.dtpInvoiceDate.LinkedLabel = Nothing
-            Me.dtpInvoiceDate.Location = New System.Drawing.Point(619, 66)
+            Me.dtpInvoiceDate.Location = New System.Drawing.Point(608, 66)
             Me.dtpInvoiceDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpInvoiceDate.Name = "dtpInvoiceDate"
             Me.dtpInvoiceDate.ReadOnlyDp = False
             Me.dtpInvoiceDate.SecurityKey = Nothing
             Me.dtpInvoiceDate.ShowLongDate = False
             Me.dtpInvoiceDate.ShowTime = False
-            Me.dtpInvoiceDate.Size = New System.Drawing.Size(123, 24)
+            Me.dtpInvoiceDate.Size = New System.Drawing.Size(130, 24)
             Me.dtpInvoiceDate.TabIndex = 6
             Me.dtpInvoiceDate.TargetCalendar = CType(resources.GetObject("dtpInvoiceDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpInvoiceDate.Value = Nothing
@@ -766,7 +770,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDueDate.SecurityKey = Nothing
             Me.dtpDueDate.ShowLongDate = False
             Me.dtpDueDate.ShowTime = False
-            Me.dtpDueDate.Size = New System.Drawing.Size(123, 24)
+            Me.dtpDueDate.Size = New System.Drawing.Size(130, 24)
             Me.dtpDueDate.TabIndex = 7
             Me.dtpDueDate.TargetCalendar = CType(resources.GetObject("dtpDueDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpDueDate.Value = Nothing
@@ -779,10 +783,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceNo.EditingMode = False
             Me.lblInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblInvoiceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblInvoiceNo.Location = New System.Drawing.Point(286, 93)
+            Me.lblInvoiceNo.Location = New System.Drawing.Point(293, 93)
             Me.lblInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblInvoiceNo.Name = "lblInvoiceNo"
-            Me.lblInvoiceNo.Size = New System.Drawing.Size(332, 23)
+            Me.lblInvoiceNo.Size = New System.Drawing.Size(325, 23)
             Me.lblInvoiceNo.TabIndex = 254
             Me.lblInvoiceNo.Text = "Supplier Invoice/Reference No.:"
             Me.lblInvoiceNo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -833,7 +837,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DefaultValue = ""
             Me.cboAccountIdNo.DisplayMember = "Name"
             Me.cboAccountIdNo.DropDownHeight = 1
-            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboAccountIdNo.EditingMode = False
             Me.cboAccountIdNo.FilterRule = Nothing
             Me.CFlowLayout3.SetFlowBreak(Me.cboAccountIdNo, True)
@@ -1034,7 +1038,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpSettlementDueDate.SecurityKey = Nothing
             Me.dtpSettlementDueDate.ShowLongDate = False
             Me.dtpSettlementDueDate.ShowTime = False
-            Me.dtpSettlementDueDate.Size = New System.Drawing.Size(123, 24)
+            Me.dtpSettlementDueDate.Size = New System.Drawing.Size(130, 24)
             Me.dtpSettlementDueDate.TabIndex = 3
             Me.dtpSettlementDueDate.TargetCalendar = CType(resources.GetObject("dtpSettlementDueDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpSettlementDueDate.Value = Nothing
@@ -1047,7 +1051,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel5.EditingMode = False
             Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel5.Location = New System.Drawing.Point(138, 90)
+            Me.CLabel5.Location = New System.Drawing.Point(145, 90)
             Me.CLabel5.Margin = New System.Windows.Forms.Padding(0)
             Me.CLabel5.Name = "CLabel5"
             Me.CLabel5.Size = New System.Drawing.Size(23, 23)
@@ -1066,7 +1070,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSettlementDiscount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtSettlementDiscount.ForeColor = System.Drawing.Color.Black
             Me.txtSettlementDiscount.LinkedLabel = Nothing
-            Me.txtSettlementDiscount.Location = New System.Drawing.Point(162, 91)
+            Me.txtSettlementDiscount.Location = New System.Drawing.Point(169, 91)
             Me.txtSettlementDiscount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtSettlementDiscount.MaximumValue = Nothing
             Me.txtSettlementDiscount.MinimumValue = Nothing
@@ -1084,7 +1088,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.SetFlowBreak(Me.lblPercent, True)
             Me.lblPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPercent.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPercent.Location = New System.Drawing.Point(207, 90)
+            Me.lblPercent.Location = New System.Drawing.Point(214, 90)
             Me.lblPercent.Margin = New System.Windows.Forms.Padding(0)
             Me.lblPercent.Name = "lblPercent"
             Me.lblPercent.Size = New System.Drawing.Size(16, 23)

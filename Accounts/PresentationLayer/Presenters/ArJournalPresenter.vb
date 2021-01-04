@@ -227,7 +227,7 @@ Namespace PresentationLayer.Presenters
                         End If
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Messaging.ShowParametrizedMessage(True, "MsgCannotSaveBlankAccountID", {lineNumber, "lineNumber"})
+                            Messaging.ShowParametrizedMessage(True, "MsgCannotSaveBlankAccountID", {"lineNumber", lineNumber})
 
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
