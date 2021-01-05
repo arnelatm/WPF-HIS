@@ -69,7 +69,7 @@ Public Class BfMain
     Public Property CancelClose As Boolean
 
     'Public Shadows Event Load(sender As Object, e As EventArgs)
-    Public Property PresenterObj
+    Public Overridable Property PresenterObj
 
     Public Property Errors As List(Of String) Implements IView.Errors
 

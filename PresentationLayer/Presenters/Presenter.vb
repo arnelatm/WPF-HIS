@@ -44,10 +44,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _editMode As Boolean = False
     Private _errorList As String = ""
     Private _recordPositionNumber As Integer = 0
-
-    'Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
     Private _targetIdNo As Int32 = 0
-
     Private _undoMode As Boolean = False
 
     Public Sub New(itemView As T)
@@ -57,7 +54,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Me.View = itemView
             TableName = GetPropertyValue(Me.View, "MainTableName")
             If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
-                MessageBox.Show($"'MainTableName' property of the form is not set.")
+                MessageBox.Show($"'TableName' property is not set in the Form.")
             End If
             Dim tableColumnPropertyList As List(Of TblColPropModel)
             tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)

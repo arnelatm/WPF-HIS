@@ -20,11 +20,9 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IApJournalView)
             MyBase.New(view)
             ModelPresenter = New ModelAccounts("ApJournal")
-            TableName = "ApJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New ApJournalModel()
             DataModel = New ApJournalModel
-
             GlobalVariables.EventAggregator.SubscribeEvent(Me)
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
@@ -93,8 +91,8 @@ Namespace PresentationLayer.Presenters
             retVal = UpdateChildData(_apJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
                 Dim newJournalItem As List(Of JournalItemModel)
+                newJournalItem = _apJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                 If AddMode Then
-                    newJournalItem = _apJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                     For Each item In newJournalItem
                         If IsAccountsPayableAccount(item.AccountIdNo) Then
                             retVal = AddApOpenInvoice(item, "AP")
@@ -104,7 +102,6 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                 Else
-                    newJournalItem = _apJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                     retVal = RemoveDeletedApOpenInvoices(retVal, newJournalItem)
                     If retVal >= 0 Then
                         retVal = AddNewApOpenInvoices(retVal, newJournalItem)
@@ -164,8 +161,18 @@ Namespace PresentationLayer.Presenters
                         NewJournalItem()
                     }
                 End If
+                Dim account As AccountModel
                 For Each item In View.JournalItems
-                    item.JournalIdNo = View.IdNo
+                    If View.AccountIdNo IsNot Nothing Then
+                        account = GetAccount(View.AccountIdNo)
+                        item.JournalIdNo = View.IdNo
+                        item.SpecialAccount = account.SpecialAccount
+                        item.PayeeType = account.PayeeType
+                    Else
+                        item.JournalIdNo = 0
+                        item.SpecialAccount = ""
+                        item.PayeeType = ""
+                    End If
                     item.Sequence = 1
                     item.AccountIdNo = View.AccountIdNo
                     Dim tranType As String = CodeToEnum(Of TransactionTypeSelection)(View.TransactionType)
