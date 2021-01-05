@@ -17,25 +17,26 @@ Namespace PresentationLayer.Views.Forms
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
+
+        Private Property MyPresenter As ApJournalPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _footer As DgvFooter
         Private _journalItems As List(Of IJournalItemView)
         Private _revCostCentersByCode
-        Private myPresenter As New ApJournalPresenter(Me)
 
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
-            PresenterObj = New ApJournalPresenter(Me)
-            Ea = PresenterObj.Ea
+            MyPresenter = New ApJournalPresenter(Me)
+            PresenterObj = MyPresenter
+            Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
         End Sub
 
@@ -120,11 +121,7 @@ Namespace PresentationLayer.Views.Forms
                 Return dtpInvoiceDate.Value
             End Get
             Set
-                'If String.IsNullOrEmpty(Value) Then
-                '    dtpInvoiceDate.Value = Date.Now()
-                'Else
                 dtpInvoiceDate.Value = Value
-                'End If
             End Set
         End Property
 
@@ -271,16 +268,16 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCentersByCode = PresenterObj.GetLookup("RevCostCenter")
+            _accountsByCode = MyPresenter.GetDetailAccountList()
+            _revCostCentersByCode = MyPresenter.GetLookup("RevCostCenter")
             cboSupplierIdNo.BeginUpdate()
-            cboSupplierIdNo.DataSource = PresenterObj.GetLookup("Supplier")
+            cboSupplierIdNo.DataSource = MyPresenter.GetLookup("Supplier")
             cboSupplierIdNo.EndUpdate()
             cboTransactionType.BeginUpdate()
-            cboTransactionType.DataSource = PresenterObj.MakeEnumComboList(Of TransactionTypeSelection)
+            cboTransactionType.DataSource = MyPresenter.MakeEnumComboList(Of TransactionTypeSelection)
             cboTransactionType.EndUpdate()
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsPayable))
+            cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsPayable))
             cboAccountIdNo.EndUpdate()
         End Sub
 
@@ -308,7 +305,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            'MyBase.RecordPositionChanged(e)
             UpdateTotals()
         End Sub
 
@@ -382,9 +378,8 @@ Namespace PresentationLayer.Views.Forms
             '_footer.Dispose()
         End Sub
 
-        Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated, cboTransactionType.SelectionChangeCommitted
-            PresenterObj.UpdateFirstLine()
-            'BindJournalItem()
+        Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated, cboTransactionType.SelectionChangeCommitted, cboAccountIdNo.SelectionChangeCommitted
+            MyPresenter.UpdateFirstLine()
             UpdateTotals()
             DataGridViewJournalItems.Refresh()
         End Sub
@@ -394,8 +389,8 @@ Namespace PresentationLayer.Views.Forms
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
-                    ' don't allow edits for first line entries account id no and amounts if only single
-                    If cColumnName = $"dgvaccountidno" Or ((cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit") AndAlso PresenterObj.CountApItems() <= 1) Then
+                    ' don't allow edits for first line entries account id no and amounts if only single AP
+                    If cColumnName = $"dgvaccountidno" Or ((cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit") AndAlso MyPresenter.CountApItems() <= 1) Then
                         Beep()
                         e.Cancel = True
                         DataGridViewJournalItems.EndEdit()
@@ -421,10 +416,10 @@ Namespace PresentationLayer.Views.Forms
                             If nIndex < bsJournalItems.Count() Then
                                 bsJournalItems(nIndex).AccountIdNo = newValue
                                 Dim account As AccountModel
-                                account = PresenterObj.GetAccount(newValue)
+                                account = MyPresenter.GetAccount(newValue)
                                 With DataGridViewJournalItems.CurrentRow
                                     Dim currentVatAmount As Decimal
-                                    If PresenterObj.IsInputVatAccount(newValue) Then
+                                    If MyPresenter.IsInputVatAccount(newValue) Then
                                         currentVatAmount = .Cells("dgvDebit").Value - .Cells("dgvCredit").Value
                                     Else
                                         currentVatAmount = 0
@@ -446,7 +441,7 @@ Namespace PresentationLayer.Views.Forms
                                 bsJournalItems(nIndex).Credit = newValue * -1
                                 bsJournalItems(nIndex).Debit = 0
                             End If
-                            If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
+                            If MyPresenter.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
                                 .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
                             End If
                         End If
@@ -462,18 +457,17 @@ Namespace PresentationLayer.Views.Forms
                                 bsJournalItems(nIndex).Debit = newValue * -1
                                 bsJournalItems(nIndex).Credit = 0
                             End If
-                            If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
+                            If MyPresenter.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
                                 .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
                             End If
                         End If
-                        If PresenterObj.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
+                        If MyPresenter.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
                             .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
                         End If
                         UpdateTotals()
                         UpdateTotalVatAmount()
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
-
                 End Select
             End With
         End Sub
@@ -504,7 +498,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateDueDate()
             If cboSupplierIdNo.Text IsNot Nothing Then
                 Dim supplierPaymentDueDays =
-                        PresenterObj.GetSupplierPaymentDueDays(cboSupplierIdNo.SelectedValue)
+                        MyPresenter.GetSupplierPaymentDueDays(cboSupplierIdNo.SelectedValue)
                 DueDate = DateAdd("d", supplierPaymentDueDays, TransactionDate)
             Else
                 dtpDueDate.Value = TransactionDate
@@ -514,9 +508,9 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateEarlySettlementValues()
             If cboSupplierIdNo.Text IsNot Nothing Then
                 Dim supplierSettlementDueDays =
-                        PresenterObj.GetSupplierSettlementDueDays(cboSupplierIdNo.SelectedValue)
+                        MyPresenter.GetSupplierSettlementDueDays(cboSupplierIdNo.SelectedValue)
                 Dim supplierSettlementDiscount As Decimal
-                supplierSettlementDiscount = PresenterObj.GetSupplierSettlementDiscount(cboSupplierIdNo.SelectedValue)
+                supplierSettlementDiscount = MyPresenter.GetSupplierSettlementDiscount(cboSupplierIdNo.SelectedValue)
                 SettlementDueDate = DateAdd("d", supplierSettlementDueDays, TransactionDate)
                 txtSettlementDiscount.Text = supplierSettlementDiscount
             Else
@@ -528,7 +522,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateRowVatAmounts()
             Dim vatAmt As Integer
             For Each glRow As DataGridViewRow In DataGridViewJournalItems.Rows
-                If PresenterObj.IsInputVatAccount(glRow.Cells("dgvAccountIdNo").Value) Then
+                If MyPresenter.IsInputVatAccount(glRow.Cells("dgvAccountIdNo").Value) Then
                     vatAmt = glRow.Cells("dgvDebit").Value - glRow.Cells("dgvCredit").Value
                     glRow.Cells("ItemVatAmount").Value = vatAmt
                 End If
@@ -538,8 +532,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                'TotalDebits = _footer.Value("dgvDebit")
-                'TotalCredits = _footer.Value("dgvCredit")
             End If
         End Sub
 
@@ -553,7 +545,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateVatNumber()
             If cboSupplierIdNo.Text IsNot Nothing Then
-                VatNumber = PresenterObj.GetSupplierVatNumber(cboSupplierIdNo.SelectedValue)
+                VatNumber = MyPresenter.GetSupplierVatNumber(cboSupplierIdNo.SelectedValue)
             Else
                 VatNumber = ""
             End If
@@ -568,10 +560,10 @@ Namespace PresentationLayer.Views.Forms
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
-            ElseIf PresenterObj.EditMode Then
+            ElseIf MyPresenter.EditMode Then
                 Dim jiIdNo As Integer
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
-                If PresenterObj.ApPaymentExists("AP", jiIdNo) Then
+                If MyPresenter.ApPaymentExists("AP", jiIdNo) Then
                     'ElseIf
                     ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
                     Messaging.Show(True, "MsgDeletePaidEntryNotAllowed")
