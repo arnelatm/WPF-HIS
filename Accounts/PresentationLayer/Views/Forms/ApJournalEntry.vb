@@ -519,16 +519,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UpdateRowVatAmounts()
-            Dim vatAmt As Integer
-            For Each glRow As DataGridViewRow In DataGridViewJournalItems.Rows
-                If MyPresenter.IsInputVatAccount(glRow.Cells("dgvAccountIdNo").Value) Then
-                    vatAmt = glRow.Cells("dgvDebit").Value - glRow.Cells("dgvCredit").Value
-                    glRow.Cells("ItemVatAmount").Value = vatAmt
-                End If
-            Next
-        End Sub
-
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
