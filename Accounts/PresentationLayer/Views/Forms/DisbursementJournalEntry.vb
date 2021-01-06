@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
+Imports Sytem.Windows.Input
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -9,6 +10,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports Microsoft.VisualBasic.Devices
 
 Namespace PresentationLayer.Views.Forms
 
@@ -65,6 +67,17 @@ Namespace PresentationLayer.Views.Forms
             '' move to new record
             'bsJournalItems.MoveLast()
         End Sub
+
+        Private ReadOnly Property OpenInvoiceMode As Boolean
+            Get
+                Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedValue)
+                If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
+                    Return True
+                Else
+                    Return False
+                End If
+            End Get
+        End Property
 
 #Region "Field Items"
 
@@ -237,6 +250,7 @@ Namespace PresentationLayer.Views.Forms
             Set(value As List(Of DjOiItemView))
                 _djOiItems = value
                 BindDjOiItem()
+                'bsJournalItems.ResetBindings(True)
             End Set
         End Property
 
@@ -405,7 +419,6 @@ Namespace PresentationLayer.Views.Forms
                 lblCheckNumber.Visible = True
                 txtCheckNumber.Visible = True
             End If
-
             If MyPresenter.CdAccountCount = 0 Then
                 If txtJournalCode.Text = "PC" Then
                     Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"specialAccountName", "Petty Cash"})
@@ -416,7 +429,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 MyPresenter.GoQuit()
             End If
-
+            'BindDjOiItem()
         End Sub
 
         Private Sub BindDjOiItem()
@@ -473,6 +486,49 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
+        End Sub
+
+        Public Overloads Sub Dispose()
+            Close()
+        End Sub
+
+        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.SelectionChangeCommitted, cboPayeeIdNo.Validated
+            If OpenInvoiceMode Then
+                bsDjOiItems.Clear()
+                UpdateOiTotals()
+                MyPresenter.AddSupplierOpenInvoices()
+                'BindDjOiItem()
+                bsJournalItems.ResetBindings(False)
+                UpdateVatNumber()
+            Else
+                If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
+                    UpdateVatNumber()
+                Else
+                    VatNumber = ""
+                End If
+            End If
+        End Sub
+
+        Private Sub TxtAmount_Validated(sender As Object, e As EventArgs) Handles txtAmount.Validated
+            If OpenInvoiceMode Then
+                UpdateOiTotals()
+            End If
+            UpdateFirstLine()
+        End Sub
+
+        Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectionChangeCommitted, cboPaymentType.Validated
+            SetPayeeDataSource(PaymentType)
+            UpdateLayout()
+            UpdateFirstLine()
+        End Sub
+
+        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+            UpdateTotals()
+            UpdateTotalVatAmount()
+        End Sub
+
+        Private Sub AccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectionChangeCommitted, cboAccountIdNo.Validated
+            UpdateFirstLine()
         End Sub
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
@@ -573,203 +629,38 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
-            If _viewGl Then
-                _viewGl = False
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
-                ShowOpenInvoicesDataGrid()
-            Else
-                _viewGl = True
-                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
-                ShowJournalItemDataGrid()
-            End If
-        End Sub
-
-        'Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboPaymentType.Validated, txtAmount.Validated
-
-        'End Sub
-
-        'Private Sub CboPayeeIdNo_Validated(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated
-        '    If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
-        '        If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
-        '            If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
-        '                bsDjOiItems.Clear()
-        '                UpdateOiTotals()
-        '            End If
-        '            MyPresenter.AddSupplierOpenInvoices()
-        '            BindDjOiItem()
-        '        End If
-        '        Dim lVatNumber As String
-        '        lVatNumber = MyPresenter.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
-        '        If Not String.IsNullOrEmpty(lVatNumber) Then
-        '            VatNumber = lVatNumber
-        '        End If
-        '    End If
-        'End Sub
-
-        Private Sub PayeeIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboPayeeIdNo.SelectionChangeCommitted, cboPayeeIdNo.Validated
-            If cboPayeeIdNo.PreviousSelectedIndex <> cboPayeeIdNo.SelectedIndex Then
-                If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
-                    If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                        bsDjOiItems.Clear()
-                        UpdateOiTotals()
-                        MyPresenter.AddSupplierOpenInvoices()
-                        BindDjOiItem()
+        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
+            If OpenInvoiceMode Then
+                If DataGridViewDjOiItems IsNot Nothing AndAlso DataGridViewDjOiItems.Visible Then
+                    If DataGridViewDjOiItems.CurrentCell Is Nothing Then
+                        DataGridViewDjOiItems.Focus()
+                        DataGridViewDjOiItems.CurrentCell = DataGridViewDjOiItems(DataGridViewDjOiItems.Columns("dgvAmount").Index(), 0)
                     End If
-                    Dim lVatNumber As String
-                    lVatNumber = MyPresenter.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
-                    If Not String.IsNullOrEmpty(lVatNumber) Then
-                        VatNumber = lVatNumber
+                End If
+            Else
+                If DataGridViewJournalItems IsNot Nothing AndAlso DataGridViewJournalItems.Visible Then
+                    If DataGridViewJournalItems.CurrentCell Is Nothing Then
+                        DataGridViewJournalItems.Focus()
+                        DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
                     End If
                 End If
             End If
         End Sub
 
-        Private Sub UpdateLayout()
-            SuspendLayout()
-            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedValue)
-            If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
-                ShowOpenInvoicesDataGrid()
+        Private Sub UpdateTotals()
+            If OpenInvoiceMode Then
+                UpdateJiTotals()
             Else
-                ShowJournalItemDataGrid()
-                Applied = Amount
-                UnApplied = 0
-                DiscountTaken = 0
-            End If
-            ShowPayee(paymentTypeEnum)
-            ResumeLayout()
-        End Sub
-
-        Public Overloads Sub Dispose()
-            Close()
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOff()
-            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                btnViewGL.Visible = True
-            Else
-                btnViewGL.Visible = False
-            End If
-            btnAutoApply.Visible = False
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOn()
-            MyPresenter.AddSupplierOpenInvoices()
-            BindDjOiItem()
-            btnViewGL.Visible = False
-            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                btnAutoApply.Visible = True
-            Else
-                btnAutoApply.Visible = False
-            End If
-        End Sub
-
-        Private Sub SetPayeeDataSource(ByVal cPaymentType As String)
-            Dim cbDataSource = Nothing
-            cboPayeeIdNo.DataSource = cbDataSource
-            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
-            If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
-                cbDataSource = MyPresenter.GetLookup("Supplier")
-            Else
-                If paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    cbDataSource = MyPresenter.GetLookup("Supplier")
-                ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    cbDataSource = MyPresenter.GetLookup("Employee")
-                ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                    cbDataSource = MyPresenter.GetLookup("Customer")
-                End If
-            End If
-            cboPayeeIdNo.DataSource = cbDataSource
-        End Sub
-
-        Private Sub ShowJournalItemDataGrid()
-            MyPresenter.UpdateFirstLine()
-            UpdateTotals()
-            DataGridViewJournalItems.Visible = True
-            DataGridViewDjOiItems.Visible = False
-            If tlpDisbursement.GetCellPosition(DataGridViewJournalItems) <> New TableLayoutPanelCellPosition(0, 7) Then
-                tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 12)
-                tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 1)
-                GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
-            End If
-            DataGridViewJournalItems.DataSource = bsJournalItems
-            DataGridViewJournalItems.Refresh()
-            cboDiscountAccountIdNo.Enabled = False
-        End Sub
-
-        Private Sub ShowOpenInvoicesDataGrid()
-            DataGridViewJournalItems.Visible = False
-            DataGridViewDjOiItems.Visible = True
-            If tlpDisbursement.GetCellPosition(DataGridViewDjOiItems) <> New TableLayoutPanelCellPosition(0, 7) Then
-                tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 1)
-                tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
-                GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
-            End If
-            cboDiscountAccountIdNo.Enabled = True
-        End Sub
-
-        Private Sub ShowPayee(paymentTypeEnum)
-            If paymentTypeEnum <> PaymentTypeSelection.Others Then
-                cboPayeeIdNo.Visible = True
-                txtPayeeName.Visible = False
-                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(6, 8))
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(5, 1))
-            Else
-                cboPayeeIdNo.Visible = False
-                txtPayeeName.Visible = True
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(12, 8))
-                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(5, 1))
-            End If
-        End Sub
-
-        Private Sub TxtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 UpdateOiTotals()
             End If
         End Sub
 
-        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            UpdateTotals()
-            UpdateTotalVatAmount()
-        End Sub
-
-        Private Sub CboPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectedValueChanged
-            'If cboPaymentType.PreviousSelectedIndex <> cboPaymentType.SelectedIndex Then
-            If cboPaymentType.Focused() Then
-                SetPayeeDataSource(PaymentType)
-                UpdateLayout()
-            End If
-        End Sub
-
-        Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
-            MyPresenter.PrintCheck()
-        End Sub
-
-        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
-            MyPresenter.AutoApplyAmount()
-            DataGridViewDjOiItems.Refresh()
-            UpdateOiTotals()
-        End Sub
-
-        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If DataGridViewJournalItems IsNot Nothing Then
-                If DataGridViewJournalItems.Visible Then
-                    If DataGridViewJournalItems IsNot Nothing Then
-                        If DataGridViewJournalItems.CurrentCell Is Nothing Then
-                            DataGridViewJournalItems.Focus()
-                            DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
-                        End If
-                    End If
-                Else
-                    If DataGridViewDjOiItems IsNot Nothing Then
-                        If DataGridViewDjOiItems.CurrentCell Is Nothing Then
-                            DataGridViewDjOiItems.Focus()
-                            If DataGridViewDjOiItems.CurrentCell IsNot Nothing Then
-                                DataGridViewDjOiItems.CurrentCell = DataGridViewDjOiItems(DataGridViewDjOiItems.Columns("dgvAmount").Index(), 0)
-                            End If
-                        End If
-                    End If
-                End If
+        Private Sub UpdateOiTotals()
+            If _apFooter IsNot Nothing Then
+                _apFooter.CalculateTotals()
+                Applied = _apFooter.Value("dgvAmount")
+                DiscountTaken = _apFooter.Value("dgvDiscountTaken")
+                UnApplied = Amount - Applied
             End If
         End Sub
 
@@ -779,25 +670,8 @@ Namespace PresentationLayer.Views.Forms
                 TotalDebits = _jiFooter.Value("dgvDebit")
                 TotalCredits = _jiFooter.Value("dgvCredit")
             End If
-        End Sub
-
-        Private Sub UpdateOiTotals()
-            If PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Then
-                If _apFooter IsNot Nothing Then
-                    _apFooter.CalculateTotals()
-                    Applied = _apFooter.Value("dgvAmount")
-                    DiscountTaken = _apFooter.Value("dgvDiscountTaken")
-                    UnApplied = Amount - Applied
-                End If
-            Else
-                Applied = Amount
-                UnApplied = 0
-            End If
-        End Sub
-
-        Private Sub UpdateTotals()
-            UpdateJiTotals()
-            UpdateOiTotals()
+            Applied = Amount
+            UnApplied = 0
         End Sub
 
         Private Sub UpdateTotalVatAmount()
@@ -827,6 +701,127 @@ Namespace PresentationLayer.Views.Forms
                 Dim jiIdNo As Integer
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
             End If
+        End Sub
+
+        Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
+            MyPresenter.PrintCheck()
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
+            MyPresenter.AutoApplyAmount()
+            DataGridViewDjOiItems.Refresh()
+            UpdateOiTotals()
+        End Sub
+
+        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
+            If _viewGl Then
+                _viewGl = False
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+                ShowOpenInvoicesDataGrid()
+            Else
+                _viewGl = True
+                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+                ShowJournalItemDataGrid()
+            End If
+        End Sub
+
+        Private Sub UpdateLayout()
+            SuspendLayout()
+            If OpenInvoiceMode Then
+                ShowOpenInvoicesDataGrid()
+            Else
+                ShowJournalItemDataGrid()
+                Applied = Amount
+                UnApplied = 0
+                DiscountTaken = 0
+            End If
+            ShowPayee()
+            ResumeLayout()
+        End Sub
+
+        Private Sub ShowPayee()
+            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedValue)
+            If paymentTypeEnum <> PaymentTypeSelection.Others Then
+                cboPayeeIdNo.Visible = True
+                txtPayeeName.Visible = False
+                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(6, 8))
+                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(5, 1))
+            Else
+                cboPayeeIdNo.Visible = False
+                txtPayeeName.Visible = True
+                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(12, 8))
+                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(5, 1))
+            End If
+        End Sub
+
+        Protected Overrides Sub InputsTurnedOff()
+            If OpenInvoiceMode Then
+                btnViewGL.Visible = True
+            Else
+                btnViewGL.Visible = False
+            End If
+            btnAutoApply.Visible = False
+        End Sub
+
+        Protected Overrides Sub InputsTurnedOn()
+            MyPresenter.AddSupplierOpenInvoices()
+            'BindDjOiItem()
+            bsJournalItems.ResetBindings(False)
+            btnViewGL.Visible = False
+            If OpenInvoiceMode Then
+                btnAutoApply.Visible = True
+            Else
+                btnAutoApply.Visible = False
+            End If
+        End Sub
+
+        Private Sub ShowJournalItemDataGrid()
+            UpdateFirstLine()
+            UpdateTotals()
+            DataGridViewJournalItems.Visible = True
+            DataGridViewDjOiItems.Visible = False
+            If tlpDisbursement.GetCellPosition(DataGridViewJournalItems) <> New TableLayoutPanelCellPosition(0, 7) Then
+                tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 12)
+                tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 1)
+                GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
+            End If
+            DataGridViewJournalItems.DataSource = bsJournalItems
+            DataGridViewJournalItems.Refresh()
+            cboDiscountAccountIdNo.Enabled = False
+        End Sub
+
+        Private Sub ShowOpenInvoicesDataGrid()
+            DataGridViewJournalItems.Visible = False
+            DataGridViewDjOiItems.Visible = True
+            If tlpDisbursement.GetCellPosition(DataGridViewDjOiItems) <> New TableLayoutPanelCellPosition(0, 7) Then
+                tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 1)
+                tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
+                GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
+            End If
+            cboDiscountAccountIdNo.Enabled = True
+        End Sub
+
+        Private Sub SetPayeeDataSource(ByVal cPaymentType As String)
+            Dim cbDataSource = Nothing
+            cboPayeeIdNo.DataSource = cbDataSource
+            If OpenInvoiceMode Then
+                cbDataSource = MyPresenter.GetLookup("Supplier")
+            Else
+                Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
+                If paymentTypeEnum = PaymentTypeSelection.Supplier Then
+                    cbDataSource = MyPresenter.GetLookup("Supplier")
+                ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
+                    cbDataSource = MyPresenter.GetLookup("Employee")
+                ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
+                    cbDataSource = MyPresenter.GetLookup("Customer")
+                End If
+            End If
+            cboPayeeIdNo.DataSource = cbDataSource
+        End Sub
+
+        Private Sub UpdateFirstLine()
+            MyPresenter.UpdateFirstLine()
+            bsJournalItems.ResetBindings(False)
         End Sub
 
     End Class

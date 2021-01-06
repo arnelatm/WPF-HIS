@@ -685,11 +685,13 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
-            If View.CsrOiItems IsNot Nothing And View.CsrOiItems.Any() Then
+            ' ReSharper disable once VBUseMethodAny.1
+            If View.CsrOiItems IsNot Nothing And View.CsrOiItems.Count() > 0 Then
                 DtCsrOiUpdateTable.Clear()
                 _csrOiItemModel.DelUpdateTvp(DtCsrOiUpdateTable, idNo)
             End If
-            If View.JournalItems IsNot Nothing And View.JournalItems.Any() Then
+            ' ReSharper disable once VBUseMethodAny.1
+            If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
                 DtUpdateTable.Clear()
                 _csrJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
