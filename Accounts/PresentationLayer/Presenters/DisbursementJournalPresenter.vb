@@ -208,77 +208,53 @@ Namespace PresentationLayer.Presenters
             If EditMode Then
                 If _presenterView.PayeeIdNo = OriginalModel.PayeeIdNo AndAlso _presenterView.PaymentType = OriginalModel.PaymentType Then
                     ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
-                    For Each origItem In OriginalModel.DjOiitems
-                        Dim itemFound = False
-                        For Each item In dModel
-                            If item.ApOpenInvoiceIdNo = origItem.ApOpenInvoiceIdNo Then
-                                itemFound = True
-                                Exit For
-                            End If
-                        Next
-                        If Not itemFound Then
-                            If origItem.JournalCode = JournalCode And origItem.JournalIdNo = _presenterView.IdNo Then
-                                ' ignore advance payments if applied to this entry.
-                            Else
-                                nSeq += 1
-                                Dim item As New DjOiItemModel With {
-                                        .AccountIdNo = origItem.AccountIdNo,
-                                        .Amount = origItem.Amount,
-                                        .ApOpenInvoiceIdNo = origItem.ApOpenInvoiceIdNo,
-                                        .Balance = origItem.Balance,
-                                        .DiscountTaken = origItem.DiscountTaken,
-                                        .InvoiceNo = origItem.InvoiceNo,
-                                        .JournalCode = origItem.JournalCode,
-                                        .JournalIdNo = origItem.JournalIdNo,
-                                        .PreviousBalance = origItem.PreviousBalance,
-                                        .Sequence = nSeq,
-                                        .TransactionDate = origItem.TransactionDate
-                                        }
-                                If dModel Is Nothing Then
-                                    dModel = New List(Of DjOiItemModel)
-                                End If
-                                dModel.Add(item)
-                            End If
-                        End If
-                    Next
+                    AddOpenInvoices(True, OriginalModel.DjOiItems, dModel, nSeq)
+                    nSeq = dModel.Count()
                 End If
             End If
             Dim unpaidInvoices = GetSupplierOpenInvoices(_presenterView.PayeeIdNo)
-            For Each unpaidInvoice In unpaidInvoices
+            AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
+            GlobalVariables.Mapper.Map(dModel, dView)
+            Return dView
+        End Function
+
+        Private Function AddOpenInvoices(original As Boolean, source As List(Of DjOiItemModel), target As List(Of DjOiItemModel), nSeq As Integer) As Integer
+            For Each invoice In source
                 Dim itemFound = False
-                For Each item In dModel
-                    If item.ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo Then
+                For Each item In target
+                    If item.ApOpenInvoiceIdNo = invoice.ApOpenInvoiceIdNo Then
                         itemFound = True
                         Exit For
                     End If
                 Next
                 If Not itemFound Then
-                    If unpaidInvoice.JournalCode = JournalCode And unpaidInvoice.JournalIdNo = _presenterView.IdNo Then
+                    If invoice.JournalCode = JournalCode And invoice.JournalIdNo = _presenterView.IdNo Then
                         ' ignore advance payments if applied to this entry.
                     Else
                         nSeq += 1
-                        Dim item As New DjOiItemModel With {
-                            .AccountIdNo = unpaidInvoice.AccountIdNo,
-                            .Amount = unpaidInvoice.Amount,
-                            .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
-                            .Balance = unpaidInvoice.Balance,
-                            .DiscountTaken = unpaidInvoice.DiscountTaken,
-                            .InvoiceNo = unpaidInvoice.InvoiceNo,
-                            .JournalCode = unpaidInvoice.JournalCode,
-                            .JournalIdNo = unpaidInvoice.JournalIdNo,
-                            .PreviousBalance = unpaidInvoice.Balance,
-                            .Sequence = nSeq,
-                            .TransactionDate = unpaidInvoice.TransactionDate
-                            }
-                        If dModel Is Nothing Then
-                            dModel = New List(Of DjOiItemModel)
-                        End If
-                        dModel.Add(item)
+                        target.Add(GetOpenInvoice(original, nSeq, invoice))
                     End If
                 End If
             Next
-            GlobalVariables.Mapper.Map(dModel, dView)
-            Return dView
+            Return nSeq
+        End Function
+
+        Private Function GetOpenInvoice(original As Boolean, nSeq As Integer, invoice As Object) As DjOiItemModel
+            Dim item As DjOiItemModel
+            item = New DjOiItemModel With {
+                .AccountIdNo = invoice.AccountIdNo,
+                .Amount = invoice.Amount,
+                .ApOpenInvoiceIdNo = invoice.ApOpenInvoiceIdNo,
+                .Balance = invoice.Balance,
+                .DiscountTaken = invoice.DiscountTaken,
+                .InvoiceNo = invoice.InvoiceNo,
+                .JournalCode = invoice.JournalCode,
+                .JournalIdNo = invoice.JournalIdNo,
+                .PreviousBalance = IIf(original, invoice.PreviousBalance, invoice.Balance),
+                .Sequence = nSeq,
+                .TransactionDate = invoice.TransactionDate
+                }
+            Return item
         End Function
 
         Protected Property CashCount As Int16
