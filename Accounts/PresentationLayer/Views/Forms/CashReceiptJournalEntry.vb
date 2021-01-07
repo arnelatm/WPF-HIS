@@ -5,7 +5,6 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -588,7 +587,7 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub SetPayorDataSource(ByVal cPayorType As String)
+        Private Sub SetPayorDataSource(cPayorType As String)
             SuspendLayout()
             cboPayorIdNo.Visible = True
             cboPayorIdNo.Width = _payorOrigWidth
@@ -596,6 +595,7 @@ Namespace PresentationLayer.Views.Forms
             cboPayorIdNo.DisplayMember = "Name"
             txtPayorName.Visible = False
             txtPayorName.Width = 0
+            Dim curValue As Int32? = cboPayorIdNo.SelectedValue
             Dim cbDataSource = Nothing
             cboPayorIdNo.DataSource = cbDataSource
             Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cPayorType)
@@ -624,6 +624,11 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End If
             cboPayorIdNo.DataSource = cbDataSource
+            If curValue IsNot Nothing Then
+                cboPayorIdNo.SelectedValue = curValue
+            Else
+                cboPayorIdNo.SelectedValue = -1
+            End If
             ResumeLayout()
         End Sub
 
@@ -638,13 +643,15 @@ Namespace PresentationLayer.Views.Forms
                 If DataGridViewJournalItems IsNot Nothing Then
                     DataGridViewJournalItems.Focus()
                     If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
+                        ' if after focus and currentcell is not empty
                         DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
                     End If
                 End If
             Else
                 If DataGridViewJournalItems IsNot Nothing Then
+                    DataGridViewCsrOiItems.Focus()
                     If DataGridViewCsrOiItems.CurrentCell IsNot Nothing Then
-                        DataGridViewCsrOiItems.Focus()
+                        ' if after focus and currentcell is not empty
                         DataGridViewCsrOiItems.CurrentCell = DataGridViewCsrOiItems(5, 0)
                     End If
                 End If
@@ -719,7 +726,6 @@ Namespace PresentationLayer.Views.Forms
             SetPayorProperty(cboPayorType.SelectedValue)
             UpdateLayout()
         End Sub
-
 
     End Class
 

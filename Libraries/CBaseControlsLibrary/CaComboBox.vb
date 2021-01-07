@@ -161,16 +161,7 @@ Public Class CaComboBox
     'Public Property BorderColor As Color
     Public Property PreviousSearchTerm As String
 
-    Private _previousSelectedIndex As Integer = -1
-
-    Public Property PreviousSelectedIndex As Integer
-        Get
-            Return _previousSelectedIndex
-        End Get
-        Set(value As Integer)
-            _previousSelectedIndex = value
-        End Set
-    End Property
+    Public Property PreviousSelectedIndex As Integer = -1
 
     Public Property PropertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
         Get
@@ -731,9 +722,9 @@ Public Class CaComboBox
     End Sub
 
     Private Sub caCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Me.SelectedIndexChanged
-        If PreviousSelectedIndex > -1 AndAlso PreviousSelectedIndex <> SelectedIndex Then
-            PreviousSelectedIndex = SelectedIndex
-        End If
+        'If PreviousSelectedIndex > -1 AndAlso PreviousSelectedIndex <> SelectedIndex Then
+        PreviousSelectedIndex = SelectedIndex
+        'End If
     End Sub
 
     'Private Sub OnSelectionChange(sender As Object, e As EventArgs) Handles Me.SelectedIndexChanged
