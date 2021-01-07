@@ -1,26 +1,4 @@
-﻿JOURNAL
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-CREATE VIEW [dbo].[APDetails_View]	
+﻿CREATE VIEW [dbo].[APDetails_View]	
   AS
 With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting where TransactionName = 'First Record')
 (SELECT 'AP' AS 'JournalCode'

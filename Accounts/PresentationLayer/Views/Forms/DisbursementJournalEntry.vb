@@ -535,8 +535,8 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboPayeeIdNo.SelectedIndex = -1
             End If
-            UpdateLayout()
             UpdateFirstLine()
+            UpdateLayout()
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
@@ -580,8 +580,8 @@ Namespace PresentationLayer.Views.Forms
                                         currentVatAmount = 0
                                     End If
                                     .Cells("ItemVatAmount").Value = currentVatAmount
-                                    bsJournalItems(nIndex).SpecialAccount = account.SpecialAccount
-                                    bsJournalItems(nIndex).PayeeType = account.PayeeType
+                                    .Cells("SpecialAccount").Value = account.SpecialAccount
+                                    .Cells("PayeeType").Value = account.PayeeType
                                 End With
                                 UpdateTotalVatAmount()
                             End If
@@ -754,6 +754,7 @@ Namespace PresentationLayer.Views.Forms
                 ShowOpenInvoicesDataGrid()
             Else
                 ShowJournalItemDataGrid()
+                BindJournalItem()
                 Applied = Amount
                 UnApplied = 0
                 DiscountTaken = 0
@@ -850,7 +851,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateFirstLine()
             MyPresenter.UpdateFirstLine()
-            bsJournalItems.ResetBindings(False)
+            bsJournalItems.ResetBindings(True)
         End Sub
 
     End Class
