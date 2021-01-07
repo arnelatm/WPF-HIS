@@ -247,8 +247,8 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As List(Of DjOiItemView))
                 _djOiItems = value
-                BindDjOiItem()
-                'bsJournalItems.ResetBindings(True)
+                'BindDjOiItem()
+                bsJournalItems.ResetBindings(False)
             End Set
         End Property
 
@@ -673,9 +673,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateTotals()
             If OpenInvoiceMode Then
-                UpdateJiTotals()
-            Else
                 UpdateOiTotals()
+            Else
+                UpdateJiTotals()
             End If
         End Sub
 
@@ -696,6 +696,7 @@ Namespace PresentationLayer.Views.Forms
             End If
             Applied = Amount
             UnApplied = 0
+            DataGridViewJournalItems.Refresh()
         End Sub
 
         Private Sub UpdateTotalVatAmount()
