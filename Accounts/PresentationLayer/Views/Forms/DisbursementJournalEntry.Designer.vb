@@ -234,7 +234,8 @@ Namespace PresentationLayer.Views.Forms
             Me.btnViewGL.OriginalImageName = Nothing
             Me.btnViewGL.SecurityKey = ""
             Me.btnViewGL.Size = New System.Drawing.Size(138, 38)
-            Me.btnViewGL.TabIndex = 249
+            Me.btnViewGL.TabIndex = 24
+            Me.btnViewGL.TabStop = False
             Me.btnViewGL.Text = "View Journal Entry"
             '
             'DataGridViewJournalItems
@@ -272,7 +273,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
             Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1022, 325)
             Me.DataGridViewJournalItems.StartTrackingChanges = False
-            Me.DataGridViewJournalItems.TabIndex = 287
+            Me.DataGridViewJournalItems.TabIndex = 15
             '
             'dgvSequence
             '
@@ -508,7 +509,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.NoLabel = True
             Me.chkPosted.OldValue = Nothing
             Me.chkPosted.Size = New System.Drawing.Size(23, 21)
-            Me.chkPosted.TabIndex = 8
+            Me.chkPosted.TabIndex = 22
             Me.chkPosted.TabStop = False
             Me.chkPosted.Text = " "
             Me.chkPosted.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -550,7 +551,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated.ShowLongDate = False
             Me.dtpDateCreated.ShowTime = True
             Me.dtpDateCreated.Size = New System.Drawing.Size(146, 25)
-            Me.dtpDateCreated.TabIndex = 9
+            Me.dtpDateCreated.TabIndex = 23
             Me.dtpDateCreated.TabStop = False
             Me.dtpDateCreated.TargetCalendar = Nothing
             Me.dtpDateCreated.Value = Nothing
@@ -576,7 +577,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.NoLabel = True
             Me.chkCancelled.OldValue = Nothing
             Me.chkCancelled.Size = New System.Drawing.Size(23, 21)
-            Me.chkCancelled.TabIndex = 7
+            Me.chkCancelled.TabIndex = 21
             Me.chkCancelled.TabStop = False
             Me.chkCancelled.Text = " "
             Me.chkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -716,7 +717,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.Size = New System.Drawing.Size(442, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
-            Me.cboAccountIdNo.TabIndex = 6
+            Me.cboAccountIdNo.TabIndex = 7
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.ValueIsMandatory = False
             Me.cboAccountIdNo.ValueIsNullable = False
@@ -895,7 +896,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtORNumber.OldValue = Nothing
             Me.txtORNumber.ReadOnly = True
             Me.txtORNumber.Size = New System.Drawing.Size(134, 23)
-            Me.txtORNumber.TabIndex = 8
+            Me.txtORNumber.TabIndex = 9
             Me.txtORNumber.ValueIsMandatory = True
             '
             'txtReferenceNo
@@ -981,7 +982,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.OldValue = Nothing
             Me.txtAmount.ReadOnly = True
             Me.txtAmount.Size = New System.Drawing.Size(118, 23)
-            Me.txtAmount.TabIndex = 7
+            Me.txtAmount.TabIndex = 8
             Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtAmount.ValueIsMandatory = True
             Me.txtAmount.ValueIsNumeric = True
@@ -1039,7 +1040,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.ReadOnly = True
             Me.tlpDisbursement.SetRowSpan(Me.txtNotes, 2)
             Me.txtNotes.Size = New System.Drawing.Size(676, 50)
-            Me.txtNotes.TabIndex = 11
+            Me.txtNotes.TabIndex = 14
             Me.txtNotes.ValueIsMandatory = True
             '
             'txtVatAmount
@@ -1062,7 +1063,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatAmount.OldValue = Nothing
             Me.txtVatAmount.ReadOnly = True
             Me.txtVatAmount.Size = New System.Drawing.Size(89, 23)
-            Me.txtVatAmount.TabIndex = 3
+            Me.txtVatAmount.TabIndex = 17
             Me.txtVatAmount.TabStop = False
             Me.txtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtVatAmount.ValueIsMandatory = True
@@ -1105,7 +1106,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtApplied.OldValue = Nothing
             Me.txtApplied.ReadOnly = True
             Me.txtApplied.Size = New System.Drawing.Size(89, 23)
-            Me.txtApplied.TabIndex = 4
+            Me.txtApplied.TabIndex = 18
             Me.txtApplied.TabStop = False
             Me.txtApplied.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtApplied.ValueIsMandatory = True
@@ -1131,7 +1132,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnapplied.OldValue = Nothing
             Me.txtUnapplied.ReadOnly = True
             Me.txtUnapplied.Size = New System.Drawing.Size(89, 23)
-            Me.txtUnapplied.TabIndex = 5
+            Me.txtUnapplied.TabIndex = 19
             Me.txtUnapplied.TabStop = False
             Me.txtUnapplied.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtUnapplied.ValueIsMandatory = True
@@ -1174,7 +1175,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDiscountTaken.OldValue = Nothing
             Me.txtDiscountTaken.ReadOnly = True
             Me.txtDiscountTaken.Size = New System.Drawing.Size(89, 23)
-            Me.txtDiscountTaken.TabIndex = 6
+            Me.txtDiscountTaken.TabIndex = 20
             Me.txtDiscountTaken.TabStop = False
             Me.txtDiscountTaken.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtDiscountTaken.ValueIsMandatory = True
@@ -1253,7 +1254,8 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply.OriginalImageName = Nothing
             Me.btnAutoApply.SecurityKey = ""
             Me.btnAutoApply.Size = New System.Drawing.Size(162, 38)
-            Me.btnAutoApply.TabIndex = 250
+            Me.btnAutoApply.TabIndex = 25
+            Me.btnAutoApply.TabStop = False
             Me.btnAutoApply.Text = "Auto Apply Invoices"
             '
             'DataGridViewDjOiItems
@@ -1293,7 +1295,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDjOiItems.ShowInsertColumnWhenEditing = False
             Me.DataGridViewDjOiItems.Size = New System.Drawing.Size(661, 325)
             Me.DataGridViewDjOiItems.StartTrackingChanges = False
-            Me.DataGridViewDjOiItems.TabIndex = 1
+            Me.DataGridViewDjOiItems.TabIndex = 16
             Me.DataGridViewDjOiItems.Visible = False
             '
             'dgvSequenceDjOi
@@ -1467,7 +1469,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.OldValue = Nothing
             Me.txtPayeeName.ReadOnly = True
             Me.txtPayeeName.Size = New System.Drawing.Size(349, 23)
-            Me.txtPayeeName.TabIndex = 5
+            Me.txtPayeeName.TabIndex = 6
             Me.txtPayeeName.ValueIsMandatory = True
             '
             'dtpCheckDate
@@ -1488,7 +1490,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpCheckDate.ShowLongDate = False
             Me.dtpCheckDate.ShowTime = False
             Me.dtpCheckDate.Size = New System.Drawing.Size(112, 25)
-            Me.dtpCheckDate.TabIndex = 285
+            Me.dtpCheckDate.TabIndex = 13
             Me.dtpCheckDate.TargetCalendar = Nothing
             Me.dtpCheckDate.Value = Nothing
             Me.dtpCheckDate.ValueIsMandatory = False
@@ -1547,7 +1549,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatNumber.OldValue = Nothing
             Me.txtVatNumber.ReadOnly = True
             Me.txtVatNumber.Size = New System.Drawing.Size(140, 23)
-            Me.txtVatNumber.TabIndex = 9
+            Me.txtVatNumber.TabIndex = 10
             Me.txtVatNumber.ValueIsMandatory = True
             Me.txtVatNumber.ValueIsNumeric = True
             '
@@ -1571,7 +1573,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber.OldValue = Nothing
             Me.txtCheckNumber.ReadOnly = True
             Me.txtCheckNumber.Size = New System.Drawing.Size(118, 23)
-            Me.txtCheckNumber.TabIndex = 289
+            Me.txtCheckNumber.TabIndex = 11
             Me.txtCheckNumber.ValueIsMandatory = True
             '
             'lblCheckNumber
@@ -1618,6 +1620,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnPrintCheck.SecurityKey = ""
             Me.btnPrintCheck.Size = New System.Drawing.Size(142, 31)
             Me.btnPrintCheck.TabIndex = 291
+            Me.btnPrintCheck.TabStop = False
             Me.btnPrintCheck.Text = "Print Check"
             '
             'DisbursementJournalEntry
