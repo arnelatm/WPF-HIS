@@ -490,7 +490,10 @@ Namespace PresentationLayer.Views.Forms
             If DataGridViewJournalItems IsNot Nothing Then
                 If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
                     DataGridViewJournalItems.Focus()
-                    DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                    If DataGridViewJournalItems IsNot Nothing Then
+                        ' if afterfocus and not empty
+                        DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                    End If
                 End If
             End If
         End Sub

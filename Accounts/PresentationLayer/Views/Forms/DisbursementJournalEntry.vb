@@ -190,7 +190,8 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _journalItems = Value
-                BindJournalItem()
+                bsJournalItems.ResetBindings(False)
+                'BindJournalItem()
             End Set
         End Property
 
@@ -429,7 +430,8 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 MyPresenter.GoQuit()
             End If
-            'BindDjOiItem()
+            BindDjOiItem()
+            BindJournalItem()
         End Sub
 
         Private Sub BindDjOiItem()
@@ -494,18 +496,23 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.SelectionChangeCommitted, cboPayeeIdNo.Validated
             If OpenInvoiceMode Then
-                bsDjOiItems.Clear()
-                UpdateOiTotals()
-                MyPresenter.AddSupplierOpenInvoices()
-                'BindDjOiItem()
-                bsJournalItems.ResetBindings(False)
-                UpdateVatNumber()
+                UpdateOpenInvoicesDisplay()
             Else
                 If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
                     UpdateVatNumber()
                 Else
                     VatNumber = ""
                 End If
+            End If
+        End Sub
+
+        Private Sub UpdateOpenInvoicesDisplay()
+            If OpenInvoiceMode Then
+                bsDjOiItems.Clear()
+                UpdateOiTotals()
+                MyPresenter.AddSupplierOpenInvoices()
+                BindDjOiItem()
+                UpdateVatNumber()
             End If
         End Sub
 
@@ -518,6 +525,16 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectionChangeCommitted, cboPaymentType.Validated
             SetPayeeDataSource(PaymentType)
+            If OpenInvoiceMode Then
+                If cboPayeeIdNo.SelectedIndex <> cboPayeeIdNo.PreviousSelectedIndex Then
+                    UpdateOpenInvoicesDisplay()
+                End If
+                If cboPayeeIdNo.SelectedIndex = -1 Then
+                    bsDjOiItems.Clear()
+                End If
+            Else
+                cboPayeeIdNo.SelectedIndex = -1
+            End If
             UpdateLayout()
             UpdateFirstLine()
         End Sub
@@ -634,14 +651,20 @@ Namespace PresentationLayer.Views.Forms
                 If DataGridViewDjOiItems IsNot Nothing AndAlso DataGridViewDjOiItems.Visible Then
                     If DataGridViewDjOiItems.CurrentCell Is Nothing Then
                         DataGridViewDjOiItems.Focus()
-                        DataGridViewDjOiItems.CurrentCell = DataGridViewDjOiItems(DataGridViewDjOiItems.Columns("dgvAmount").Index(), 0)
+                        If DataGridViewDjOiItems.CurrentCell IsNot Nothing Then
+                            ' if after focus and currentcell is not empty
+                            DataGridViewDjOiItems.CurrentCell = DataGridViewDjOiItems(DataGridViewDjOiItems.Columns("dgvAmount").Index(), 0)
+                        End If
                     End If
                 End If
             Else
                 If DataGridViewJournalItems IsNot Nothing AndAlso DataGridViewJournalItems.Visible Then
                     If DataGridViewJournalItems.CurrentCell Is Nothing Then
                         DataGridViewJournalItems.Focus()
-                        DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                        If DataGridViewJournalItems.CurrentCell Is Nothing Then
+                            ' if after focus and currentcell is not empty
+                            DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                        End If
                     End If
                 End If
             End If
@@ -764,7 +787,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
-            MyPresenter.AddSupplierOpenInvoices()
             'BindDjOiItem()
             bsJournalItems.ResetBindings(False)
             btnViewGL.Visible = False
@@ -773,6 +795,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 btnAutoApply.Visible = False
             End If
+            MyPresenter.AddSupplierOpenInvoices()
         End Sub
 
         Private Sub ShowJournalItemDataGrid()
@@ -803,6 +826,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SetPayeeDataSource(ByVal cPaymentType As String)
             Dim cbDataSource = Nothing
+            Dim curValue As Int32? = cboPayeeIdNo.SelectedValue
             cboPayeeIdNo.DataSource = cbDataSource
             If OpenInvoiceMode Then
                 cbDataSource = MyPresenter.GetLookup("Supplier")
@@ -817,6 +841,11 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End If
             cboPayeeIdNo.DataSource = cbDataSource
+            If curValue IsNot Nothing Then
+                cboPayeeIdNo.SelectedValue = curValue
+            Else
+                cboPayeeIdNo.SelectedValue = -1
+            End If
         End Sub
 
         Private Sub UpdateFirstLine()
