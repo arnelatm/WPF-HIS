@@ -199,6 +199,88 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Function GetSupplierOpenInvoices(dView As List(Of DjOiItemView)) As List(Of DjOiItemView)
+            Dim dModel As New List(Of DjOiItemModel)
+            Dim dOriginalModel As New List(Of DjOiItemModel)
+            Dim nSeq As Integer
+            GlobalVariables.Mapper.Map(dView, dModel)
+            nSeq = dView.Count()
+            If EditMode Then
+                If _presenterView.PayeeIdNo = OriginalModel.PayeeIdNo AndAlso _presenterView.PaymentType = OriginalModel.PaymentType Then
+                    ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
+                    For Each origItem In OriginalModel.DjOiitems
+                        Dim itemFound = False
+                        For Each item In dModel
+                            If item.ApOpenInvoiceIdNo = origItem.ApOpenInvoiceIdNo Then
+                                itemFound = True
+                                Exit For
+                            End If
+                        Next
+                        If Not itemFound Then
+                            If origItem.JournalCode = JournalCode And origItem.JournalIdNo = _presenterView.IdNo Then
+                                ' ignore advance payments if applied to this entry.
+                            Else
+                                nSeq += 1
+                                Dim item As New DjOiItemModel With {
+                                        .AccountIdNo = origItem.AccountIdNo,
+                                        .Amount = origItem.Amount,
+                                        .ApOpenInvoiceIdNo = origItem.ApOpenInvoiceIdNo,
+                                        .Balance = origItem.Balance,
+                                        .DiscountTaken = origItem.DiscountTaken,
+                                        .InvoiceNo = origItem.InvoiceNo,
+                                        .JournalCode = origItem.JournalCode,
+                                        .JournalIdNo = origItem.JournalIdNo,
+                                        .PreviousBalance = origItem.PreviousBalance,
+                                        .Sequence = nSeq,
+                                        .TransactionDate = origItem.TransactionDate
+                                        }
+                                If dModel Is Nothing Then
+                                    dModel = New List(Of DjOiItemModel)
+                                End If
+                                dModel.Add(item)
+                            End If
+                        End If
+                    Next
+                End If
+            End If
+            Dim unpaidInvoices = GetSupplierOpenInvoices(_presenterView.PayeeIdNo)
+            For Each unpaidInvoice In unpaidInvoices
+                Dim itemFound = False
+                For Each item In dModel
+                    If item.ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo Then
+                        itemFound = True
+                        Exit For
+                    End If
+                Next
+                If Not itemFound Then
+                    If unpaidInvoice.JournalCode = JournalCode And unpaidInvoice.JournalIdNo = _presenterView.IdNo Then
+                        ' ignore advance payments if applied to this entry.
+                    Else
+                        nSeq += 1
+                        Dim item As New DjOiItemModel With {
+                            .AccountIdNo = unpaidInvoice.AccountIdNo,
+                            .Amount = unpaidInvoice.Amount,
+                            .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
+                            .Balance = unpaidInvoice.Balance,
+                            .DiscountTaken = unpaidInvoice.DiscountTaken,
+                            .InvoiceNo = unpaidInvoice.InvoiceNo,
+                            .JournalCode = unpaidInvoice.JournalCode,
+                            .JournalIdNo = unpaidInvoice.JournalIdNo,
+                            .PreviousBalance = unpaidInvoice.Balance,
+                            .Sequence = nSeq,
+                            .TransactionDate = unpaidInvoice.TransactionDate
+                            }
+                        If dModel Is Nothing Then
+                            dModel = New List(Of DjOiItemModel)
+                        End If
+                        dModel.Add(item)
+                    End If
+                End If
+            Next
+            GlobalVariables.Mapper.Map(dModel, dView)
+            Return dView
+        End Function
+
         Protected Property CashCount As Int16
 
         Public ReadOnly Property DefaultPettyCashAccount As Int16

@@ -1,16 +1,13 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
-Imports Sytem.Windows.Input
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
-Imports Microsoft.VisualBasic.Devices
 
 Namespace PresentationLayer.Views.Forms
 
@@ -494,6 +491,25 @@ Namespace PresentationLayer.Views.Forms
             Close()
         End Sub
 
+        Private Sub UpdateOpenInvoicesDisplay()
+            If OpenInvoiceMode Then
+                If PresenterObj.AddMode Or cboPayeeIdNo.SelectedIndex <> cboPayeeIdNo.PreviousSelectedIndex Then
+                    DjOiItems.Clear()
+                End If
+                bsDjOiItems.DataSource = MyPresenter.GetSupplierOpenInvoices(DjOiItems)
+                bsDjOiItems.ResetBindings(True)
+                UpdateOiTotals()
+                UpdateVatNumber()
+            End If
+        End Sub
+
+        Private Sub TxtAmount_Validated(sender As Object, e As EventArgs) Handles txtAmount.Validated
+            If OpenInvoiceMode Then
+                UpdateOiTotals()
+            End If
+            UpdateFirstLine()
+        End Sub
+
         Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.SelectionChangeCommitted, cboPayeeIdNo.Validated
             If OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
@@ -506,37 +522,22 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UpdateOpenInvoicesDisplay()
-            If OpenInvoiceMode Then
-                bsDjOiItems.Clear()
-                UpdateOiTotals()
-                MyPresenter.AddSupplierOpenInvoices()
-                BindDjOiItem()
-                UpdateVatNumber()
-            End If
-        End Sub
-
-        Private Sub TxtAmount_Validated(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            If OpenInvoiceMode Then
-                UpdateOiTotals()
-            End If
-            UpdateFirstLine()
-        End Sub
-
         Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectionChangeCommitted, cboPaymentType.Validated
-            SetPayeeDataSource(PaymentType)
-            If OpenInvoiceMode Then
-                If cboPayeeIdNo.SelectedIndex <> cboPayeeIdNo.PreviousSelectedIndex Then
-                    UpdateOpenInvoicesDisplay()
+            If cboPaymentType.SelectedIndex <> cboPaymentType.PreviousSelectedIndex Then
+                SetPayeeDataSource(PaymentType)
+                If OpenInvoiceMode Then
+                    If cboPayeeIdNo.SelectedIndex <> cboPayeeIdNo.PreviousSelectedIndex Then
+                        UpdateOpenInvoicesDisplay()
+                    End If
+                    If cboPayeeIdNo.SelectedIndex = -1 Then
+                        bsDjOiItems.Clear()
+                    End If
+                Else
+                    cboPayeeIdNo.SelectedIndex = -1
                 End If
-                If cboPayeeIdNo.SelectedIndex = -1 Then
-                    bsDjOiItems.Clear()
-                End If
-            Else
-                cboPayeeIdNo.SelectedIndex = -1
+                UpdateFirstLine()
+                UpdateLayout()
             End If
-            UpdateFirstLine()
-            UpdateLayout()
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
@@ -797,6 +798,7 @@ Namespace PresentationLayer.Views.Forms
                 btnAutoApply.Visible = False
             End If
             MyPresenter.AddSupplierOpenInvoices()
+            bsDjOiItems.ResetBindings(False)
         End Sub
 
         Private Sub ShowJournalItemDataGrid()
