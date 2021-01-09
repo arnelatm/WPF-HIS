@@ -27,11 +27,11 @@ Partial Class CFormEntry
         Me.FormToolStrip = New System.Windows.Forms.ToolStrip()
         Me.btnFirst = New System.Windows.Forms.ToolStripButton()
         Me.btnPrev = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tssNavigator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbCurrentRecord = New System.Windows.Forms.ToolStripLabel()
         Me.btnOf = New System.Windows.Forms.ToolStripButton()
         Me.tsbTotalRecords = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tssnavigator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnNext = New System.Windows.Forms.ToolStripButton()
         Me.btnLast = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -78,7 +78,7 @@ Partial Class CFormEntry
         '
         'FormToolStrip
         '
-        Me.FormToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnFirst, Me.btnPrev, Me.ToolStripSeparator1, Me.tsbCurrentRecord, Me.btnOf, Me.tsbTotalRecords, Me.ToolStripSeparator2, Me.btnNext, Me.btnLast, Me.ToolStripSeparator3, Me.btnDelete, Me.ToolStripSeparator6, Me.btnAdd, Me.btnEdit, Me.ToolStripSeparator4, Me.btnSave, Me.btnFind, Me.btnUndo, Me.btnDebug, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.btnPrint, Me.toolStripSeparator, Me.toolStripSeparator5, Me.OpenToolStripButton, Me.NewToolStripButton, Me.HelpToolStripButton, Me.btnArabic, Me.btnTranslate, Me.btnOriginal, Me.btnQuit})
+        Me.FormToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnFirst, Me.btnPrev, Me.tssNavigator2, Me.tsbCurrentRecord, Me.btnOf, Me.tsbTotalRecords, Me.tssnavigator1, Me.btnNext, Me.btnLast, Me.ToolStripSeparator3, Me.btnDelete, Me.ToolStripSeparator6, Me.btnAdd, Me.btnEdit, Me.ToolStripSeparator4, Me.btnSave, Me.btnFind, Me.btnUndo, Me.btnDebug, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.btnPrint, Me.toolStripSeparator, Me.toolStripSeparator5, Me.OpenToolStripButton, Me.NewToolStripButton, Me.HelpToolStripButton, Me.btnArabic, Me.btnTranslate, Me.btnOriginal, Me.btnQuit})
         Me.FormToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.FormToolStrip.Name = "FormToolStrip"
         Me.FormToolStrip.Size = New System.Drawing.Size(865, 25)
@@ -104,10 +104,10 @@ Partial Class CFormEntry
         Me.btnPrev.Size = New System.Drawing.Size(23, 22)
         Me.btnPrev.Text = "Go to previous record"
         '
-        'ToolStripSeparator1
+        'tssNavigator2
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        Me.tssNavigator2.Name = "tssNavigator2"
+        Me.tssNavigator2.Size = New System.Drawing.Size(6, 25)
         '
         'tsbCurrentRecord
         '
@@ -131,10 +131,10 @@ Partial Class CFormEntry
         Me.tsbTotalRecords.Size = New System.Drawing.Size(0, 22)
         Me.tsbTotalRecords.ToolTipText = "Total Number of records"
         '
-        'ToolStripSeparator2
+        'tssnavigator1
         '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        Me.tssnavigator1.Name = "tssnavigator1"
+        Me.tssnavigator1.Size = New System.Drawing.Size(6, 25)
         '
         'btnNext
         '
@@ -367,11 +367,10 @@ Partial Class CFormEntry
     Public WithEvents FormToolStrip As Windows.Forms.ToolStrip
     Friend WithEvents btnFirst As Windows.Forms.ToolStripButton
     Friend WithEvents btnPrev As Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
-    Friend WithEvents tsbCurrentRecord As Windows.Forms.ToolStripLabel
+    Friend WithEvents tssNavigator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents btnOf As Windows.Forms.ToolStripButton
     Friend WithEvents tsbTotalRecords As Windows.Forms.ToolStripLabel
-    Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents tssnavigator1 As Windows.Forms.ToolStripSeparator
     Friend WithEvents btnNext As Windows.Forms.ToolStripButton
     Protected WithEvents btnLast As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator3 As Windows.Forms.ToolStripSeparator
@@ -380,7 +379,6 @@ Partial Class CFormEntry
     Protected WithEvents btnEdit As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator4 As Windows.Forms.ToolStripSeparator
     Public WithEvents btnSave As Windows.Forms.ToolStripButton
-    Friend WithEvents btnFind As Windows.Forms.ToolStripButton
     Friend WithEvents btnUndo As Windows.Forms.ToolStripButton
     Friend WithEvents btnDebug As Windows.Forms.ToolStripButton
     Friend WithEvents CutToolStripButton As Windows.Forms.ToolStripButton
@@ -397,4 +395,6 @@ Partial Class CFormEntry
     Friend WithEvents btnOriginal As Windows.Forms.ToolStripButton
     Friend WithEvents btnQuit As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator6 As Windows.Forms.ToolStripSeparator
+    Public WithEvents btnFind As Windows.Forms.ToolStripButton
+    Public WithEvents tsbCurrentRecord As Windows.Forms.ToolStripLabel
 End Class

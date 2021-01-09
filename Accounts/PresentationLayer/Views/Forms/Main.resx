@@ -137,7 +137,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAUABBwFAAQcBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAUgBBwFIAQcBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -3734,13 +3734,13 @@
     <value>Closing Entry</value>
   </data>
   <data name="PayPeriodAttendanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="PayPeriodAttendanceToolStripMenuItem.Text" xml:space="preserve">
     <value>Pay Period AttendanceItem</value>
   </data>
   <data name="PayrollEntryToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>218, 22</value>
   </data>
   <data name="PayrollEntryToolStripMenuItem1.Text" xml:space="preserve">
     <value>Payroll Entry</value>
@@ -3937,6 +3937,12 @@
   <data name="AgingOfAccountsPayableToolStripMenuItem.Text" xml:space="preserve">
     <value>Aging of Accounts Payable</value>
   </data>
+  <data name="CheckPrintingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 22</value>
+  </data>
+  <data name="CheckPrintingToolStripMenuItem.Text" xml:space="preserve">
+    <value>Check Printing</value>
+  </data>
   <data name="ToolStripMenuItemReports.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 20</value>
   </data>
@@ -4081,7 +4087,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAUABBwFAAQcBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAUgBBwFIAQcBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4126,7 +4132,7 @@
 </value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1198, 17</value>
+    <value>17, 56</value>
   </metadata>
   <data name="toolStripMenuItem3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4904,6 +4910,12 @@
   <data name="&gt;&gt;PayPeriodAttendanceToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;PayrollEntryToolStripMenuItem1.Name" xml:space="preserve">
+    <value>PayrollEntryToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;PayrollEntryToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolStripMenuItemReports.Name" xml:space="preserve">
     <value>ToolStripMenuItemReports</value>
   </data>
@@ -5234,10 +5246,10 @@
   <data name="&gt;&gt;toolStripMenuItem19.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PayrollEntryToolStripMenuItem1.Name" xml:space="preserve">
-    <value>PayrollEntryToolStripMenuItem1</value>
+  <data name="&gt;&gt;CheckPrintingToolStripMenuItem.Name" xml:space="preserve">
+    <value>CheckPrintingToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;PayrollEntryToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;CheckPrintingToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
