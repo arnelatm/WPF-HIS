@@ -98,6 +98,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.txtPayeeName.BackColor = System.Drawing.Color.White
             Me.txtPayeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.tlpDisbursement.SetColumnSpan(Me.txtPayeeName, 5)
             Me.txtPayeeName.ComputedValue = False
             Me.txtPayeeName.CustomFormat = "N2"
             Me.txtPayeeName.DataBoundControl = True
@@ -113,7 +114,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.Name = "txtPayeeName"
             Me.txtPayeeName.OldValue = Nothing
             Me.txtPayeeName.ReadOnly = True
-            Me.txtPayeeName.Size = New System.Drawing.Size(118, 23)
+            Me.txtPayeeName.Size = New System.Drawing.Size(548, 23)
             Me.txtPayeeName.TabIndex = 292
             Me.txtPayeeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtPayeeName.ValueIsMandatory = True
@@ -125,7 +126,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblAmount.EditingMode = False
             Me.lblAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblAmount.Location = New System.Drawing.Point(316, 30)
+            Me.lblAmount.Location = New System.Drawing.Point(313, 30)
             Me.lblAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblAmount.Name = "lblAmount"
             Me.lblAmount.Size = New System.Drawing.Size(236, 24)
@@ -159,7 +160,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.Location = New System.Drawing.Point(121, 82)
+            Me.txtNotes.Location = New System.Drawing.Point(118, 82)
             Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNotes.MaximumValue = Nothing
             Me.txtNotes.MinimumValue = Nothing
@@ -206,7 +207,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.HideWhenNotEditingOrAdding = False
             Me.cboPayeeIdNo.IntegralHeight = False
             Me.cboPayeeIdNo.LinkedLabel = Nothing
-            Me.cboPayeeIdNo.Location = New System.Drawing.Point(121, 56)
+            Me.cboPayeeIdNo.Location = New System.Drawing.Point(118, 56)
             Me.cboPayeeIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPayeeIdNo.Name = "cboPayeeIdNo"
             Me.cboPayeeIdNo.OldValue = 0
@@ -274,7 +275,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.HideWhenNotEditingOrAdding = False
             Me.cboPaymentType.IntegralHeight = False
             Me.cboPaymentType.LinkedLabel = Me.lblPaymentType
-            Me.cboPaymentType.Location = New System.Drawing.Point(121, 30)
+            Me.cboPaymentType.Location = New System.Drawing.Point(118, 30)
             Me.cboPaymentType.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPaymentType.Name = "cboPaymentType"
             Me.cboPaymentType.OldValue = 0
@@ -307,7 +308,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
             Me.txtCheckNumber.LinkedLabel = Nothing
-            Me.txtCheckNumber.Location = New System.Drawing.Point(121, 1)
+            Me.txtCheckNumber.Location = New System.Drawing.Point(118, 1)
             Me.txtCheckNumber.Margin = New System.Windows.Forms.Padding(1)
             Me.txtCheckNumber.MaximumValue = Nothing
             Me.txtCheckNumber.MinimumValue = Nothing
@@ -324,7 +325,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckDate.EditingMode = False
             Me.lblCheckDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblCheckDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblCheckDate.Location = New System.Drawing.Point(316, 1)
+            Me.lblCheckDate.Location = New System.Drawing.Point(313, 1)
             Me.lblCheckDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCheckDate.Name = "lblCheckDate"
             Me.lblCheckDate.Size = New System.Drawing.Size(236, 25)
@@ -343,7 +344,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
             Me.txtAmount.LinkedLabel = Me.lblAmount
-            Me.txtAmount.Location = New System.Drawing.Point(554, 30)
+            Me.txtAmount.Location = New System.Drawing.Point(551, 30)
             Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAmount.MaximumValue = Nothing
             Me.txtAmount.MinimumValue = Nothing
@@ -366,7 +367,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpCheckDate.EditsAllowed = False
             Me.dtpCheckDate.ForeColor = System.Drawing.Color.Black
             Me.dtpCheckDate.LinkedLabel = Nothing
-            Me.dtpCheckDate.Location = New System.Drawing.Point(554, 1)
+            Me.dtpCheckDate.Location = New System.Drawing.Point(551, 1)
             Me.dtpCheckDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpCheckDate.Name = "dtpCheckDate"
             Me.dtpCheckDate.ReadOnlyDp = False
@@ -382,10 +383,10 @@ Namespace PresentationLayer.Views.Forms
             '
             'btnPrintCheck
             '
-            Me.btnPrintCheck.DesignerSelected = True
+            Me.btnPrintCheck.DesignerSelected = False
             Me.btnPrintCheck.DisplayOnly = True
             Me.btnPrintCheck.ImageIndex = 0
-            Me.btnPrintCheck.Location = New System.Drawing.Point(556, 109)
+            Me.btnPrintCheck.Location = New System.Drawing.Point(553, 109)
             Me.btnPrintCheck.Name = "btnPrintCheck"
             Me.btnPrintCheck.OriginalImageName = Nothing
             Me.btnPrintCheck.SecurityKey = ""

@@ -796,6 +796,11 @@
       <DependentUpon>Check Disbursement Journal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Check Printing Independent.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check Printing Independent.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Clinic Cost Summary.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1143,6 +1148,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Check Disbursement Journal.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check Printing Independent.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check Printing Independent.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Clinic Cost Summary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Clinic Cost Summary.vb</LastGenOutput>
@@ -1220,9 +1229,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
-    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\Application.myapp">
@@ -1346,6 +1355,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="PresentationLayer\app-Ibn-server.config" />
     <None Include="Reports\Statement of Accounts Payable Arabic.rpt" />
     <None Include="Resources\YellowGradientBackgroundLarge.jpg" />
   </ItemGroup>

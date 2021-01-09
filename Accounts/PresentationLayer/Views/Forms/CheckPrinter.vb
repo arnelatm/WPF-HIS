@@ -162,6 +162,7 @@ Namespace PresentationLayer.Views.Forms
             PaymentType = eventType.Model.PaymentType
             SetPayeeDataSource(PaymentType)
             cboPaymentType.SelectedValue = IIf(PaymentType = Nothing, 0, PaymentType)
+            ShowPayee()
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -178,7 +179,9 @@ Namespace PresentationLayer.Views.Forms
             btnDelete.Visible = False
             btnAdd.Visible = False
             btnFind.Visible = False
+            dtpCheckDate.Value = Today
             TurnOnInputs()
+            ShowPayee()
         End Sub
 
         Public Overloads Sub Dispose()
@@ -190,10 +193,11 @@ Namespace PresentationLayer.Views.Forms
                 SetPayeeDataSource(PaymentType)
             End If
             txtPayeeName.Text = cboPayeeIdNo.Text
+            ShowPayee()
         End Sub
 
         Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
-            Dim transactionAmountInWords As String
+            Dim checkAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
@@ -203,9 +207,9 @@ Namespace PresentationLayer.Views.Forms
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
-                transactionAmountInWords = New ToWord(txtAmount.Text, currencies(0)).ConvertToArabic()
+                checkAmountInWords = New ToWord(txtAmount.Text, currencies(0)).ConvertToArabic()
             Else
-                transactionAmountInWords = New ToWord(txtAmount.Text, currencies(0)).ConvertToEnglish()
+                checkAmountInWords = New ToWord(txtAmount.Text, currencies(0)).ConvertToEnglish()
             End If
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedValue)
             If paymentTypeEnum = PaymentTypeSelection.Others Then
@@ -214,7 +218,7 @@ Namespace PresentationLayer.Views.Forms
                 payee = Strings.Left(cboPayeeIdNo.Text, cboPayeeIdNo.Text.IndexOf("|", StringComparison.Ordinal))
             End If
             reportName = "Check Printing Independent.Rpt"
-            Dim cForm As New ReportForm(reportName, transactionAmountInWords, "transactionAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", Convert.ToDecimal(txtAmount.Text), "CheckAmount", language, "Language")
+            Dim cForm As New ReportForm(reportName, checkAmountInWords, "CheckAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", Convert.ToDecimal(txtAmount.Text), "CheckAmount", language, "Language")
             cForm.Show()
         End Sub
 
@@ -223,13 +227,13 @@ Namespace PresentationLayer.Views.Forms
             If paymentTypeEnum <> PaymentTypeSelection.Others Then
                 cboPayeeIdNo.Visible = True
                 txtPayeeName.Visible = False
-                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(6, 8))
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(5, 1))
+                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(0, 5))
+                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(1, 3))
             Else
                 cboPayeeIdNo.Visible = False
                 txtPayeeName.Visible = True
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(12, 8))
-                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(5, 1))
+                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(0, 5))
+                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(1, 3))
             End If
         End Sub
 
