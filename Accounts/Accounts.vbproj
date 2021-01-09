@@ -796,11 +796,6 @@
       <DependentUpon>Check Disbursement Journal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\Check Printing Independent.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Check Printing Independent.rpt</DependentUpon>
-    </Compile>
     <Compile Include="Reports\Clinic Cost Summary.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1147,10 +1142,6 @@
     <EmbeddedResource Include="Reports\Check Disbursement Journal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Check Disbursement Journal.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Check Printing Independent.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Check Printing Independent.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Clinic Cost Summary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
