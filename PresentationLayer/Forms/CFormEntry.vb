@@ -227,16 +227,16 @@ Public Class CFormEntry
         'showWaitForm.ReportProgress(progress)
     End Sub
 
-    'Private Sub TurnOffInputs()
-    '    Inputs(False)
-    '    InputsTurnedOff()
-    'End Sub
+    Protected Sub TurnOffInputs()
+        Inputs(False)
+        InputsTurnedOff()
+    End Sub
 
-    'Private Sub TurnOnInputs()
-    '    Inputs(True)
-    '    InputsTurnedOn()
-    '    FirstControl.Focus()
-    'End Sub
+    Protected Sub TurnOnInputs()
+        Inputs(True)
+        InputsTurnedOn()
+        FirstControl.Focus()
+    End Sub
 
     Protected Overridable Sub InputsTurnedOn()
     End Sub
@@ -784,6 +784,17 @@ Public Class CFormEntry
                 ' Visible property stored in first element of the array
                 HideButton(btnDebug)
             End If
+            If HideNavigatorButtons Then
+                btnFirst.Visible = False
+                btnNext.Visible = False
+                btnLast.Visible = False
+                btnPrev.Visible = False
+                tsbCurrentRecord.Visible = False
+                tsbTotalRecords.Visible = False
+                tssNavigator2.Visible = False
+                tssnavigator1.Visible = False
+                btnOf.Visible = False
+            End If
             UpdateButtonDisplays(False, False)
         End If
     End Sub
@@ -865,7 +876,7 @@ Public Class CFormEntry
         Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
     End Function
 
-    Private Sub Inputs(onOff As Boolean)
+    Public Sub Inputs(onOff As Boolean)
         Dim allCtrl As New List(Of Control)
         Dim ctrl As Control
         For Each ctrl In FindControlRecursive(allCtrl, Me)
@@ -1056,6 +1067,8 @@ Public Class CFormEntry
         Dim DemoProp As System.Reflection.PropertyInfo = GetType(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Instance)
         DemoProp.SetValue(cont, True, Nothing)
     End Sub
+
+    Public Property HideNavigatorButtons As Boolean
 
     '#Region "Temporary Events"
 

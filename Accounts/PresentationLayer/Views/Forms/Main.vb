@@ -1458,6 +1458,14 @@ Namespace PresentationLayer.Views.Forms
             cForm.Show()
         End Sub
 
+        Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckPrintingToolStripMenuItem.Click
+            Dim childMdiForm As CheckPrinter
+            childMdiForm = New CheckPrinter("S") With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub PayPeriodAttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayPeriodAttendanceToolStripMenuItem.Click
         '    Dim childMdiForm As AttendanceItemEntry
         '    childMdiForm = New AttendanceItemEntry With {
