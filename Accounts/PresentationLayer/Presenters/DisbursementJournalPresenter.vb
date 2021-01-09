@@ -822,7 +822,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub PrintCheck()
-            Dim transactionAmountInWords As String
+            Dim checkAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
@@ -830,14 +830,30 @@ Namespace PresentationLayer.Presenters
             language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
-                transactionAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToArabic()
+                checkAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToArabic()
             Else
-                transactionAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToEnglish()
+                checkAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToEnglish()
             End If
             ReportName = "Check Printing.Rpt"
-            Dim cForm As New ReportForm(ReportName, _presenterView.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords")
+            Dim cForm As New ReportForm(ReportName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language")
             cForm.Show()
         End Sub
+
+        Private Function GetPayeeName(ByVal payeeIdNo? As Int32)
+            Dim payee As String
+            Dim cbDataSource = Nothing
+            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
+            If paymentTypeEnum = PaymentTypeSelection.AccountsPayable OrElse paymentTypeEnum = PaymentTypeSelection.Supplier Then
+                payee = GetFieldWithIdNo(View.PayeeIdNo, "Supplier", "SupplierName")
+            ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
+                payee = GetFieldWithIdNo(View.PayeeIdNo, "Employee", "EmployeeName")
+            ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
+                payee = GetFieldWithIdNo(View.PayeeIdNo, "Customer", "CustomerName")
+            Else
+                payee = View.PayeeName
+            End If
+            Return payee
+        End Function
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
             ' ReSharper disable once VBUseMethodAny.1
