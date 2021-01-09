@@ -217,7 +217,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 payee = Strings.Left(cboPayeeIdNo.Text, cboPayeeIdNo.Text.IndexOf("|", StringComparison.Ordinal))
             End If
-            reportName = "Check Printing Independent.Rpt"
+            reportName = "Check Printing.Rpt"
             Dim cForm As New ReportForm(reportName, checkAmountInWords, "CheckAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", Convert.ToDecimal(txtAmount.Text), "CheckAmount", language, "Language")
             cForm.Show()
         End Sub
