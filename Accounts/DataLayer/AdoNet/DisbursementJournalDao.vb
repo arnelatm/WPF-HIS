@@ -144,7 +144,7 @@ Namespace DataLayer.AdoNet
             End If
         End Function
 
-        Public Function DjAddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).AddRecord
+        Public Function AddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).AddRecord
             Dim sql As String
             If TableOrViewName = "CkJournal" Then
                 sql = " INSERT INTO " & TableOrViewName & " (" &
