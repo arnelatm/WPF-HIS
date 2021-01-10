@@ -59,10 +59,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
             e.NewObject = New JournalItemView
-            'Me.JournalItems.Add(New JournalItemView)
-            'e.NewObject = New JournalItemView
-            '' move to new record
-            'bsJournalItems.MoveLast()
+            ' work arround for error on datagrid entry on lastrow please do not remove.
+            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
+                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+            End If
         End Sub
 
         Private ReadOnly Property OpenInvoiceMode As Boolean
@@ -187,8 +190,8 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _journalItems = Value
-                bsJournalItems.ResetBindings(False)
-                'BindJournalItem()
+                'bsJournalItems.ResetBindings(True)
+                BindJournalItem()
             End Set
         End Property
 
@@ -247,8 +250,8 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As List(Of DjOiItemView))
                 _djOiItems = value
-                'BindDjOiItem()
-                bsJournalItems.ResetBindings(False)
+                BindDjOiItem()
+                'bsJournalItems.ResetBindings(True)
             End Set
         End Property
 
@@ -465,10 +468,10 @@ Namespace PresentationLayer.Views.Forms
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems
-                .Refresh()
+                '.Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
-                .Refresh()
+                '.Refresh()
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -510,7 +513,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.SelectionChangeCommitted, cboPayeeIdNo.Validated
+        Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated, cboPayeeIdNo.SelectionChangeCommitted
             If OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
             Else
@@ -571,6 +574,7 @@ Namespace PresentationLayer.Views.Forms
                         If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
                             If nIndex < JournalItems.Count() Then
                                 bsJournalItems(nIndex).AccountIdNo = newValue
+                                bsJournalItems.ResetItem(nIndex)
                                 Dim account As AccountModel
                                 account = MyPresenter.GetAccount(newValue)
                                 With DataGridViewJournalItems.CurrentRow
@@ -580,9 +584,9 @@ Namespace PresentationLayer.Views.Forms
                                     Else
                                         currentVatAmount = 0
                                     End If
-                                    .Cells("ItemVatAmount").Value = currentVatAmount
-                                    .Cells("SpecialAccount").Value = account.SpecialAccount
-                                    .Cells("PayeeType").Value = account.PayeeType
+                                    '.Cells("dgvVatAmount").Value = currentVatAmount
+                                    '.Cells("dgvSpecialAccount").Value = account.SpecialAccount
+                                    '.Cells("dgvPayeeType").Value = account.PayeeType
                                 End With
                                 UpdateTotalVatAmount()
                             End If
@@ -598,7 +602,7 @@ Namespace PresentationLayer.Views.Forms
                                 bsJournalItems(nIndex).Debit = 0
                             End If
                             If MyPresenter.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
-                                .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
+                                .CurrentRow.Cells("dgvVatAmount").Value = bsJournalItems(nIndex).Debit - bsJournalItems(nIndex).Credit
                             End If
                         End If
                         UpdateJiTotals()
@@ -614,7 +618,7 @@ Namespace PresentationLayer.Views.Forms
                                 bsJournalItems(nIndex).Credit = 0
                             End If
                             If MyPresenter.IsInputVatAccount(.CurrentRow.Cells("dgvAccountIdNo").Value) Then
-                                .CurrentRow.Cells("ItemVatAmount").Value = .CurrentRow.Cells("dgvDebit").Value - .CurrentRow.Cells("dgvCredit").Value
+                                .CurrentRow.Cells("dgvVatAmount").Value = bsJournalItems(nIndex).Debit - bsJournalItems(nIndex).Credit
                             End If
                         End If
                         UpdateJiTotals()
@@ -702,7 +706,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotalVatAmount()
             Dim tVatAmount As Decimal = 0
             For Each row In DataGridViewJournalItems.Rows
-                tVatAmount += row.cells("ItemVatAmount").Value
+                tVatAmount += row.cells("dgvVatAmount").Value
             Next
             VatAmount = tVatAmount
         End Sub
@@ -813,7 +817,7 @@ Namespace PresentationLayer.Views.Forms
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
             End If
             DataGridViewJournalItems.DataSource = bsJournalItems
-            DataGridViewJournalItems.Refresh()
+            'DataGridViewJournalItems.Refresh()
             cboDiscountAccountIdNo.Enabled = False
         End Sub
 
@@ -854,8 +858,17 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateFirstLine()
             MyPresenter.UpdateFirstLine()
-            bsJournalItems.ResetBindings(True)
+            If Not OpenInvoiceMode Then
+                bsJournalItems.ResetBindings(True)
+                UpdateJiTotals()
+            End If
         End Sub
+
+        'Private Sub DataGridViewJournalItems_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles DataGridViewJournalItems.RowsAdded
+        '    If DataGridViewJournalItems.Focused Then
+        '        bsJournalItems.ResetBindings(False)
+        '    End If
+        'End Sub
 
     End Class
 
