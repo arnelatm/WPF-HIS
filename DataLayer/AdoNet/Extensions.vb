@@ -107,8 +107,14 @@ Namespace AdoNet
         ' transform object into string data type
 
         <Extension>
-        Public Function AsString(item As Object, Optional ByVal defaultString As String = Nothing) As String
-            If item Is Nothing OrElse item.Equals(DBNull.Value) Then
+        Public Function AsString(item As Object, Optional ByVal defaultString As String = "") As String
+            'If item.Equals(DBNull.Value) Then
+            'Debugger.Break()
+            'End If
+            If item Is Nothing Then
+                Return defaultString
+            End If
+            If item.Equals(DBNull.Value) Then
                 Return defaultString
             End If
             Return item.ToString().Trim()
