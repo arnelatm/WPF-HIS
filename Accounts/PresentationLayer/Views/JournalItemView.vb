@@ -13,21 +13,6 @@ Namespace PresentationLayer.Views
         Private _sequence As Integer
 
         Public Sub New()
-            'AccountIdNo = 0
-            'AccountName = ""
-            'Cancelled = False
-            'Credit = 0
-            'Debit = 0
-            'DiscountTaken = 0
-            'IdNo = 0
-            'JournalIdNo = 0
-            'Notes = ""
-            'OpenInvoiceIdNo = 0
-            'OriginalAmount = 0
-            'PaidAmount = 0
-            'PayeeType = ""
-            'RevCostCenterIdNo = 0
-            'Sequence = 0
         End Sub
 
         'Public Property Ea As EventAggregator

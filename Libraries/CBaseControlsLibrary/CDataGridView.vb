@@ -275,10 +275,12 @@ Public Class CDataGridView
         End If
     End Function
 
-    Private Sub CDataGridView_DefaultValuesNeeded(sender As Object, e As DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
+
+    Private Sub cDataGridView_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
         If EditMode And (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
+            Dim nRowColumn = Columns(SequenceColumn).Index()
             With e.Row
-                .Cells(SequenceColumn).Value = RowCount()
+                .Cells(nRowColumn).Value = RowCount()
             End With
         End If
     End Sub

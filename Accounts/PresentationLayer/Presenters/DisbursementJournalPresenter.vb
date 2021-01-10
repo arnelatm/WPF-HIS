@@ -395,6 +395,14 @@ Namespace PresentationLayer.Presenters
                     _presenterView.TotalCredits = _presenterView.TotalDebits
                 End If
             End If
+            For Each item In _presenterView.JournalItems
+                If item.Equals(DBNull.Value) Then
+                    item.Notes = ""
+                End If
+                If item.Notes Is Nothing Then
+                    item.Notes = ""
+                End If
+            Next
         End Sub
 
         Private Sub JournalItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)

@@ -864,6 +864,16 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub DjEntry_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles DataGridViewJournalItems.DefaultValuesNeeded
+            If MyPresenter.EditMode Then
+                ' need to do this because Notes default to db.null which causes errors when saving
+                Dim nRowColumn = DataGridViewJournalItems.Columns("dgvNotes").Index()
+                With e.Row
+                    .Cells(nRowColumn).Value = ""
+                End With
+            End If
+        End Sub
+
         'Private Sub DataGridViewJournalItems_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles DataGridViewJournalItems.RowsAdded
         '    If DataGridViewJournalItems.Focused Then
         '        bsJournalItems.ResetBindings(False)
