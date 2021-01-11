@@ -22,6 +22,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TotalDebits As Decimal
         Property TransactionDate As Date?
         Property TransactionType As String
+        Property VatAmount As Decimal
         Property JournalItems As List(Of IJournalItemView)
 
     End Interface
