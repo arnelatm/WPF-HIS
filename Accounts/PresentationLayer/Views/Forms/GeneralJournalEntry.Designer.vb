@@ -313,7 +313,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.BackgroundColor = System.Drawing.SystemColors.Window
             Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn})
-            Me.DataGridViewJournalItems.DataInGridChanged = False
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
             DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
@@ -331,7 +330,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
-            Me.DataGridViewJournalItems.StartTrackingChanges = False
             '
             'dgvSequence
             '

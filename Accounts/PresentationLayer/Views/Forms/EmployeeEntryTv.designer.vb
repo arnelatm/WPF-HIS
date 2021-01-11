@@ -1095,9 +1095,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPhoneDisplay.ColumnHeadersVisible = false
         Me.DataGridViewPhoneDisplay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequencePhoneDisplay, Me.FullPhone, Me.FullPhoneAra, Me.AreaCodeDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.CountryTelIdNoDataGridViewTextBoxColumn, Me.PhoneNumberDataGridViewTextBoxColumn, Me.PhoneTypeIdNoDataGridViewTextBoxColumn})
         Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewPhoneDisplay, 2)
-        Me.DataGridViewPhoneDisplay.DataInGridChanged = false
-        Me.DataGridViewPhoneDisplay.DataSource = Me.bsPhones
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewPhoneDisplay.DataSource = Me.bsPhones
+            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
@@ -1123,12 +1122,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPhoneDisplay.ShowFooter = false
         Me.DataGridViewPhoneDisplay.ShowInsertColumnWhenEditing = true
         Me.DataGridViewPhoneDisplay.Size = New System.Drawing.Size(363, 205)
-        Me.DataGridViewPhoneDisplay.StartTrackingChanges = false
-        Me.DataGridViewPhoneDisplay.TabIndex = 291
-        '
-        'dgvSequencePhoneDisplay
-        '
-        Me.dgvSequencePhoneDisplay.DataPropertyName = "Sequence"
+            Me.DataGridViewPhoneDisplay.TabIndex = 291
+            '
+            'dgvSequencePhoneDisplay
+            '
+            Me.dgvSequencePhoneDisplay.DataPropertyName = "Sequence"
         Me.dgvSequencePhoneDisplay.HeaderText = "Seq"
         Me.dgvSequencePhoneDisplay.Name = "dgvSequencePhoneDisplay"
         Me.dgvSequencePhoneDisplay.ReadOnly = true
@@ -1870,9 +1868,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewEarnings.BackgroundColor = System.Drawing.Color.White
         Me.DataGridViewEarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceEarning, Me.dgvEarningIdNo, Me.dgvEarningAmount, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
-        Me.DataGridViewEarnings.DataInGridChanged = false
-        Me.DataGridViewEarnings.DataSource = Me.bsEarnings
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewEarnings.DataSource = Me.bsEarnings
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
@@ -1896,12 +1893,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewEarnings.ShowFooter = true
         Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = true
         Me.DataGridViewEarnings.Size = New System.Drawing.Size(400, 344)
-        Me.DataGridViewEarnings.StartTrackingChanges = false
-        Me.DataGridViewEarnings.TabIndex = 0
-        '
-        'dgvSequenceEarning
-        '
-        Me.dgvSequenceEarning.DataPropertyName = "Sequence"
+            Me.DataGridViewEarnings.TabIndex = 0
+            '
+            'dgvSequenceEarning
+            '
+            Me.dgvSequenceEarning.DataPropertyName = "Sequence"
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
         Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle4
@@ -2010,9 +2006,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDeductions.AutoGenerateColumns = false
         Me.DataGridViewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDeduction, Me.dgvDeductionIdNo, Me.dgvDeductionAmount, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14})
-        Me.DataGridViewDeductions.DataInGridChanged = false
-        Me.DataGridViewDeductions.DataSource = Me.bsDeductions
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewDeductions.DataSource = Me.bsDeductions
+            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
@@ -2036,12 +2031,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDeductions.ShowFooter = false
         Me.DataGridViewDeductions.ShowInsertColumnWhenEditing = true
         Me.DataGridViewDeductions.Size = New System.Drawing.Size(400, 344)
-        Me.DataGridViewDeductions.StartTrackingChanges = false
-        Me.DataGridViewDeductions.TabIndex = 1
-        '
-        'dgvSequenceDeduction
-        '
-        Me.dgvSequenceDeduction.DataPropertyName = "Sequence"
+            Me.DataGridViewDeductions.TabIndex = 1
+            '
+            'dgvSequenceDeduction
+            '
+            Me.dgvSequenceDeduction.DataPropertyName = "Sequence"
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
         Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle8
@@ -2184,9 +2178,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPhones.AutoGenerateColumns = false
         Me.DataGridViewPhones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewPhones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPhoneTypeIdNo, Me.dgvCountryTelIdNo, Me.dgvAreaCode, Me.PhoneNumber, Me.dgvFullPhone, Me.dgvFullPhoneAra, Me.dgvCountryTelCode, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
-        Me.DataGridViewPhones.DataInGridChanged = false
-        Me.DataGridViewPhones.DataSource = Me.bsPhones
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewPhones.DataSource = Me.bsPhones
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
@@ -2210,12 +2203,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPhones.ShowFooter = false
         Me.DataGridViewPhones.ShowInsertColumnWhenEditing = true
         Me.DataGridViewPhones.Size = New System.Drawing.Size(806, 388)
-        Me.DataGridViewPhones.StartTrackingChanges = false
-        Me.DataGridViewPhones.TabIndex = 273
-        '
-        'dgvSequence
-        '
-        Me.dgvSequence.DataPropertyName = "Sequence"
+            Me.DataGridViewPhones.TabIndex = 273
+            '
+            'dgvSequence
+            '
+            Me.dgvSequence.DataPropertyName = "Sequence"
         DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
         Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle12

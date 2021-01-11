@@ -281,9 +281,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDistributionSchemeItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewDistributionSchemeItems.AutoGenerateColumns = false
         Me.DataGridViewDistributionSchemeItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewDistributionSchemeItems.DataInGridChanged = false
-        Me.DataGridViewDistributionSchemeItems.DataSource = Me.bsDistributionSchemeItems
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewDistributionSchemeItems.DataSource = Me.bsDistributionSchemeItems
+            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
@@ -298,11 +297,10 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDistributionSchemeItems.Name = "DataGridViewDistributionSchemeItems"
         Me.DataGridViewDistributionSchemeItems.ReadOnly = true
         Me.DataGridViewDistributionSchemeItems.SequenceColumn = "dgvSequence"
-        Me.DataGridViewDistributionSchemeItems.StartTrackingChanges = false
-        '
-        'dgvIdNo
-        '
-        Me.dgvIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+            '
+            'dgvIdNo
+            '
+            Me.dgvIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.dgvIdNo.DataPropertyName = "IdNo"
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black

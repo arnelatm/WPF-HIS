@@ -454,9 +454,6 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            If Not DataGridViewReconciliationItems.DataBindings Is Nothing Then
-                DataGridViewReconciliationItems.DataInGridChanged = False
-            End If
             UpdateTotals()
         End Sub
 

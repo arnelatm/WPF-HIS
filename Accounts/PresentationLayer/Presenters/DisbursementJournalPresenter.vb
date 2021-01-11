@@ -919,17 +919,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function UpdateInputVatAmount()
-            Dim tiVatAmount As Decimal = 0
-            Dim InputVatAccount As String = EnumToCode(SpecialAccountSelection.VatInput)
-            For Each item In View.JournalItems
-                If item.SpecialAccount = InputVatAccount Then
-                    tiVatAmount = tiVatAmount + item.Debit - item.Credit
-                End If
-            Next
-            View.VatAmount = tiVatAmount
-        End Function
-
         Private Function NewJournalItem()
             Dim item As New JournalItemView With {
                     .JournalIdNo = View.IdNo,

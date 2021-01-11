@@ -485,7 +485,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayPeriodAttendance.AutoGenerateColumns = False
             Me.DataGridViewPayPeriodAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPayPeriodAttendance.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EmployeeNameDataGridViewTextBoxColumn, Me.EmployeeNameAraDataGridViewTextBoxColumn, Me.DaysPresentDataGridViewTextBoxColumn, Me.DaysAbsentWithPayDataGridViewTextBoxColumn, Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn, Me.DaysOffDataGridViewTextBoxColumn, Me.DaysTotal, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
-            Me.DataGridViewPayPeriodAttendance.DataInGridChanged = False
             Me.DataGridViewPayPeriodAttendance.DataSource = Me.bsPayPeriodAttendance
             DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
@@ -510,7 +509,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayPeriodAttendance.ShowFooter = False
             Me.DataGridViewPayPeriodAttendance.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPayPeriodAttendance.Size = New System.Drawing.Size(745, 346)
-            Me.DataGridViewPayPeriodAttendance.StartTrackingChanges = False
             Me.DataGridViewPayPeriodAttendance.TabIndex = 171
             '
             'bsPayPeriodAttendance

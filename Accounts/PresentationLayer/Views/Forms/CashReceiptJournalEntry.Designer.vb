@@ -799,7 +799,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.AutoGenerateColumns = False
             Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotesDescription, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn1, Me.DiscountTakenDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn1, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn1, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.SpecialAccountDataGridViewTextBoxColumn})
-            Me.DataGridViewJournalItems.DataInGridChanged = False
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
             DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
@@ -823,7 +822,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
             Me.DataGridViewJournalItems.ShowFooter = False
             Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewJournalItems.StartTrackingChanges = False
             '
             'dgvSequence
             '
@@ -982,7 +980,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewCsrOiItems.AutoGenerateColumns = False
             Me.DataGridViewCsrOiItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewCsrOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceCsrOi, Me.dgvInvoiceNo, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.AccountIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
-            Me.DataGridViewCsrOiItems.DataInGridChanged = False
             Me.DataGridViewCsrOiItems.DataSource = Me.bsCsrOiItems
             DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
@@ -1006,7 +1003,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewCsrOiItems.SequenceFieldName = "Sequence"
             Me.DataGridViewCsrOiItems.ShowFooter = False
             Me.DataGridViewCsrOiItems.ShowInsertColumnWhenEditing = False
-            Me.DataGridViewCsrOiItems.StartTrackingChanges = False
             '
             'dgvSequenceCsrOi
             '

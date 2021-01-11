@@ -189,17 +189,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
-            DataGridViewDistributionSchemeItems.StartTrackingChanges = True
             If PresenterObj.AddMode Then
                 dtpValidityStartDate.Value = Date.Now()
                 dtpValidityEndDate.Value = Date.Now()
                 bsDistributionSchemeItems.Clear()
                 DataGridViewDistributionSchemeItems.Refresh()
             End If
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOff()
-            DataGridViewDistributionSchemeItems.StartTrackingChanges = False
         End Sub
 
         'Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully

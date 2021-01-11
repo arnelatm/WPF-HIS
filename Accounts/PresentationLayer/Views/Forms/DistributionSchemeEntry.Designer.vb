@@ -286,9 +286,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDistributionSchemeItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridViewDistributionSchemeItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewDistributionSchemeItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvIdNo, Me.dgvDistributionSchemeIdNo, Me.dgvSequence, Me.dgvRevCostCenterIdNo, Me.dgvRevCostCenterName, Me.Percentage})
-        Me.DataGridViewDistributionSchemeItems.DataInGridChanged = false
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle7.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -302,11 +301,10 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDistributionSchemeItems.Name = "DataGridViewDistributionSchemeItems"
         Me.DataGridViewDistributionSchemeItems.ReadOnly = true
         Me.DataGridViewDistributionSchemeItems.SequenceColumn = "dgvSequence"
-        Me.DataGridViewDistributionSchemeItems.StartTrackingChanges = false
-        '
-        'dgvIdNo
-        '
-        Me.dgvIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+            '
+            'dgvIdNo
+            '
+            Me.dgvIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.dgvIdNo.DataPropertyName = "IdNo"
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black

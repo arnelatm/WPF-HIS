@@ -32,8 +32,6 @@ Public Class CDataGvBs
 
     Public Event DeletingRow(ByVal cancel As Boolean)
 
-    Public Property DataInGridChanged As Boolean = False
-
     <Bindable(True)>
     <Category("Custom")>
     <DefaultValue(GetType(Boolean))>
@@ -118,8 +116,6 @@ Public Class CDataGvBs
     <Description("Set to True to specify that insert column is visible when editing.")>
     <Browsable(True)>
     Public Property ShowInsertColumnWhenEditing As Boolean = True
-
-    Public Property StartTrackingChanges As Boolean = False
 
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
@@ -227,7 +223,6 @@ Public Class CDataGvBs
     End Sub
 
     Private Sub CDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
-        DataInGridChanged = True
         ReSequenceDgvAfterDelete()
         RaiseEvent ChangesMade(Me, EventArgs.Empty)
     End Sub
@@ -271,13 +266,8 @@ Public Class CDataGvBs
     End Sub
 
     Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
-        If StartTrackingChanges Then
-            DataInGridChanged = True
-            RaiseEvent ChangesMade(Me, EventArgs.Empty)
-            CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
-        Else
-            DataInGridChanged = False
-        End If
+        RaiseEvent ChangesMade(Me, EventArgs.Empty)
+        CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
     End Sub
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
@@ -330,11 +320,6 @@ Public Class CDataGvBs
     '    End If
     'End Sub
     Private Sub DataGridViewGroupAccesses_CurrentCellChanged(sender As Object, e As EventArgs) Handles MyBase.CurrentCellChanged
-        If StartTrackingChanges Then
-            DataInGridChanged = True
-        Else
-            DataInGridChanged = False
-        End If
         If _dgvInsertColumnIndex <= 0 Then Exit Sub
         If (CurrentRow IsNot Nothing) AndAlso EditingMode AndAlso (_dgvInsertColumnIndex >= 1) Then
             CurrentRow.Cells(_dgvInsertColumnIndex).Value = Images.InsertRowImage
