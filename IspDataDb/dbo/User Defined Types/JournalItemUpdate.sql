@@ -4,8 +4,8 @@
     [Debit]             MONEY          NOT NULL,
     [IDNo]              INT            NOT NULL,
     [JournalIDNo]       INT            NOT NULL,
-    [Notes]             NVARCHAR (100) NOT NULL,
-    [RevCostCenterIdNo] INT            NOT NULL,
+    [Notes]             NVARCHAR (300) NULL,
+    [RevCostCenterIdNo] INT            NULL,
     [Sequence]          INT            NOT NULL,
     PRIMARY KEY CLUSTERED ([IDNo] ASC));
 

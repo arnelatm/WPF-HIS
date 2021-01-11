@@ -995,6 +995,24 @@ Public Module GlobalFunctions
         End Select
     End Sub
 
+    Public Function MoveToGridView(ByVal dgv As DataGridView, ByVal columnName As String)
+        If dgv IsNot Nothing AndAlso dgv.Visible Then
+            If dgv.CurrentCell Is Nothing Then
+                dgv.Focus()
+                If dgv.CurrentCell Is Nothing Then
+                    If dgv.Columns(columnName) IsNot Nothing Then
+                        dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
+                    End If
+                End If
+            Else
+                If dgv.Columns(columnName) IsNot Nothing Then
+                    dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
+                End If
+            End If
+        End If
+
+    End Function
+
     'Public Function CompareValues(source, Target) As Boolean
     '    Dim retVal As Boolean = False
     '    Dim source1 As New List(Of String)
