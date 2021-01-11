@@ -40,11 +40,15 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         ' This event handler provides custom item-creation behavior.
-        Private Sub journalItemsBindingSource_AddingNew(
-                                                        ByVal sender As Object,
-                                                        ByVal e As AddingNewEventArgs) _
-            Handles bsJournalItems.AddingNew
+        Private Sub journalItemsBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
             e.NewObject = New JournalItemView
+            ' work arround for error on datagrid entry on lastrow please do not remove.
+            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
+                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+            End If
         End Sub
 
 #Region "Fields"
@@ -234,6 +238,24 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboTransactionType.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property VatAmount As Decimal Implements IApJournalView.VatAmount
+            Get
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
+            End Get
+            Set
+                txtVatAmount.Text = FormatMoney(Value)
+            End Set
+        End Property
+
+        Public Property VatNumber As String Implements IApJournalView.VatNumber
+            Get
+                Return txtVatNumber.Text
+            End Get
+            Set
+                txtVatNumber.Text = Value
             End Set
         End Property
 

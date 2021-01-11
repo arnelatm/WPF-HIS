@@ -30,6 +30,7 @@ Namespace DataLayer.AdoNet
                     "SettlementDueDate," &
                     "TransactionDate," &
                     "TransactionType" &
+                    "VatAmount" &
                     " FROM [ArJournal]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -59,7 +60,8 @@ Namespace DataLayer.AdoNet
                     "SettlementDiscount = @SettlementDiscount," &
                     "SettlementDueDate = @SettlementDueDate," &
                     "TransactionDate = @TransactionDate," &
-                    "TransactionType = @TransactionType" &
+                    "TransactionType = @TransactionType," &
+                    "VatAmount = @VatAmount" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(arJournal))
         End Function
@@ -79,7 +81,8 @@ Namespace DataLayer.AdoNet
                     "SettlementDiscount," &
                     "SettlementDueDate," &
                     "TransactionDate," &
-                    "TransactionType" &
+                    "TransactionType," &
+                    "VatAmount" &
                     ") VALUES (" &
                     "@AccountIdNo," &
                     "@Amount," &
@@ -93,7 +96,8 @@ Namespace DataLayer.AdoNet
                     "@SettlementDiscount," &
                     "@SettlementDueDate," &
                     "@TransactionDate," &
-                    "@TransactionType" &
+                    "@TransactionType," &
+                    "@VatAmount" &
                     ")"
             Return _db.Insert(sql, Take(arJournal))
         End Function
@@ -115,7 +119,8 @@ Namespace DataLayer.AdoNet
             .SettlementDiscount = Extensions.AsDecimal(reader("SettlementDiscount")),
             .SettlementDueDate = Extensions.AsDate(reader("SettlementDueDate")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-            .TransactionType = Extensions.AsString(reader("TransactionType"))
+            .TransactionType = Extensions.AsString(reader("TransactionType")),
+            .VatAmount = Extensions.AsDecimal(reader("VatAmount"))
             }
 
         Private Function Take(arJournal As ArJournal) As Object()
@@ -133,7 +138,8 @@ Namespace DataLayer.AdoNet
                                     "@SettlementDiscount", arJournal.SettlementDiscount,
                                     "@SettlementDueDate", arJournal.SettlementDueDate,
                                     "@TransactionDate", arJournal.TransactionDate,
-                                    "@TransactionType", arJournal.TransactionType
+                                    "@TransactionType", arJournal.TransactionType,
+                                    "@VatAmount", arJournal.VatAmount
                                  }
         End Function
 

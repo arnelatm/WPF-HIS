@@ -12,6 +12,7 @@
     [InvoiceNo]          VARCHAR (15)   NOT NULL,
     [InvoiceDate]        DATE           NULL,
     [Notes]              NVARCHAR (255) NOT NULL,
+    [VatAmount]          MONEY          NOT NULL,
     [Posted]             BIT            NULL,
     [Cancelled]          BIT            NULL,
     [DateCreated]        DATETIME       CONSTRAINT [DF_ArJournal_DateCreated] DEFAULT (getdate()) NULL,
