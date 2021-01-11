@@ -785,7 +785,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReconciliationItems.BackgroundColor = System.Drawing.SystemColors.Window
             Me.DataGridViewReconciliationItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewReconciliationItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvReferenceNo, Me.dgvJournalIdNo, Me.dgvDocumentNumber, Me.dgvDebit, Me.dgvCredit, Me.dgvCleared, Me.dgvPayDescription, Me.dgvAccountReconciliationIdNo})
-            Me.DataGridViewReconciliationItems.DataInGridChanged = False
             Me.DataGridViewReconciliationItems.DataSource = Me.bsAccountReconciliationItems
             DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
@@ -806,7 +805,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReconciliationItems.ReadOnly = True
             Me.DataGridViewReconciliationItems.SequenceColumn = "dgvSequence"
             Me.DataGridViewReconciliationItems.ShowInsertColumnWhenEditing = False
-            Me.DataGridViewReconciliationItems.StartTrackingChanges = False
             '
             'dgvSequence
             '

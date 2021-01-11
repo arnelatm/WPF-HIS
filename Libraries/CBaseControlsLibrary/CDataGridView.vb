@@ -35,8 +35,6 @@ Public Class CDataGridView
 
     Public Property DgvFooter As DgvFooter
 
-    Public Property DataInGridChanged As Boolean = False
-
     '<Bindable(True)>
     '<Category("Custom")>
     '<DefaultValue(GetType(Boolean))>
@@ -169,8 +167,6 @@ Public Class CDataGridView
     <Browsable(True)>
     Public Property ShowInsertColumnWhenEditing As Boolean = True
 
-    Public Property StartTrackingChanges As Boolean = False
-
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return True
@@ -275,7 +271,6 @@ Public Class CDataGridView
         End If
     End Function
 
-
     Private Sub cDataGridView_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
         If EditMode And (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
             Dim nRowColumn = Columns(SequenceColumn).Index()
@@ -286,10 +281,13 @@ Public Class CDataGridView
     End Sub
 
     Private Sub CDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
-        DataInGridChanged = True
         ReSequenceDgvAfterDelete()
         RaiseEvent ChangesMade(Me, EventArgs.Empty)
     End Sub
+
+    'Private Sub DataGridViewJournalItems_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles MyBase.RowsAdded
+    '    Dim x = 1
+    'End Sub
 
     Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
         If Not EditingMode Then
@@ -308,7 +306,9 @@ Public Class CDataGridView
                             'If Ea IsNot Nothing Then
                             '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
                             'End If
-                            If .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
+                            If .RowIndex() = NewRowIndex() Then
+                                Beep()
+                            ElseIf .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
                                 Dim myBindingSource = CType(DataSource, BindingSource)
                                 Dim dataList = myBindingSource.AddNew()
                                 myBindingSource.RemoveAt(myBindingSource.Count() - 1)
@@ -357,15 +357,10 @@ Public Class CDataGridView
     '    End If
     'End Sub
 
-    Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
-        If StartTrackingChanges Then
-            DataInGridChanged = True
-            RaiseEvent ChangesMade(Me, EventArgs.Empty)
-            CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
-        Else
-            DataInGridChanged = False
-        End If
-    End Sub
+    'Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
+    '    RaiseEvent ChangesMade(Me, EventArgs.Empty)
+    '    CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
+    'End Sub
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
@@ -417,11 +412,6 @@ Public Class CDataGridView
     '    End If
     'End Sub
     Private Sub DataGridViewGroupAccesses_CurrentCellChanged(sender As Object, e As EventArgs) Handles MyBase.CurrentCellChanged
-        If StartTrackingChanges Then
-            DataInGridChanged = True
-        Else
-            DataInGridChanged = False
-        End If
         If _dgvInsertColumnIndex <= 0 Then Exit Sub
         If (CurrentRow IsNot Nothing) AndAlso EditingMode AndAlso (_dgvInsertColumnIndex >= 1) Then
             CurrentRow.Cells(_dgvInsertColumnIndex).Value = Images.InsertRowImage

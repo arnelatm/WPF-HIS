@@ -1,5 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
@@ -206,6 +208,17 @@ Namespace PresentationLayer.Presenters
             Return _
                 Model.GetRecordFieldWith2Key(idNo, journalCode, "ArOpenInvoice", "JournalItemIdNo", "JournalCode",
                                              "IdNo")
+        End Function
+
+        Public Function UpdateInputVatAmount(journalItems As List(Of IJournalItemView))
+            Dim tiVatAmount As Decimal = 0
+            Dim InputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
+            For Each item In journalItems
+                If item.SpecialAccount = InputVatAccount Then
+                    tiVatAmount = tiVatAmount + item.Debit - item.Credit
+                End If
+            Next
+            Return tiVatAmount
         End Function
 
     End Class

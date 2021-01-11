@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of IJournalItemView)
         Private _djOiItems As List(Of DjOiItemView)
-        Private _revCostCenterByCode
+        Private _revCostCentersByCode
         Private _viewGl As Boolean = False
 
         Public Sub New(ByVal tableName As String)
@@ -345,7 +345,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = MyPresenter.GetDetailAccountList()
-            _revCostCenterByCode = MyPresenter.GetLookup("RevCostCenter")
+            _revCostCentersByCode = MyPresenter.GetLookup("RevCostCenter")
             cboPaymentType.DataSource = MyPresenter.MakeEnumComboList(Of PaymentTypeSelection)
             If MainTableName = "CdJournal" Then
                 cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
@@ -481,7 +481,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DataSource = _revCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -545,7 +545,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             UpdateTotals()
-            MyPresenter.UpdateInputVatAmount()
+            UpdateInputVatAmount()
         End Sub
 
         Private Sub AccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectionChangeCommitted, cboAccountIdNo.Validated
@@ -571,51 +571,55 @@ Namespace PresentationLayer.Views.Forms
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
                         Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
-                            If nIndex < bsJournalItems.Count() Then
-                                JournalItems(nIndex).AccountIdNo = newValue
-                                Dim account As AccountModel
-                                account = MyPresenter.GetAccount(newValue)
-                                With DataGridViewJournalItems.CurrentRow
-                                    JournalItems(nIndex).SpecialAccount = account.SpecialAccount
-                                    JournalItems(nIndex).PayeeType = account.PayeeType
-                                End With
-                            End If
+                        If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
+                            bsJournalItems.AddNew()
+                            JournalItems(nIndex).AccountIdNo = newValue
+                            ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                            ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                            bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
                         End If
-                        MyPresenter.UpdateInputVatAmount()
+                        JournalItems(nIndex).AccountIdNo = newValue
+                        Dim account As AccountModel
+                        account = MyPresenter.GetAccount(newValue)
+                        With DataGridViewJournalItems.CurrentRow
+                            JournalItems(nIndex).SpecialAccount = account.SpecialAccount
+                            JournalItems(nIndex).PayeeType = account.PayeeType
+                        End With
+                        UpdateInputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
+                        DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
                         Dim newValue = .CurrentCell.Value
-                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() And nIndex < bsJournalItems.Count() Then
-                            If newValue > 0 Then
-                                JournalItems(nIndex).Credit = 0
-                                JournalItems(nIndex).Credit = 0
-                            ElseIf newValue < 0 Then
-                                JournalItems(nIndex).Credit = newValue * -1
-                                JournalItems(nIndex).Debit = 0
-                            End If
+                        If newValue > 0 Then
+                            JournalItems(nIndex).Credit = 0
+                            JournalItems(nIndex).Credit = 0
+                        ElseIf newValue < 0 Then
+                            JournalItems(nIndex).Credit = newValue * -1
+                            JournalItems(nIndex).Debit = 0
                         End If
                         UpdateJiTotals()
-                        MyPresenter.UpdateInputVatAmount()
+                        UpdateInputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
                         Dim newValue = .CurrentCell.Value
-                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() And nIndex < bsJournalItems.Count() Then
-                            If newValue > 0 Then
-                                JournalItems(nIndex).Debit = 0
-                            ElseIf newValue < 0 Then
-                                JournalItems(nIndex).Debit = newValue * -1
-                                JournalItems(nIndex).Credit = 0
-                            End If
+                        If newValue > 0 Then
+                            JournalItems(nIndex).Debit = 0
+                        ElseIf newValue < 0 Then
+                            JournalItems(nIndex).Debit = newValue * -1
+                            JournalItems(nIndex).Credit = 0
                         End If
                         UpdateJiTotals()
-                        MyPresenter.UpdateInputVatAmount()
+                        UpdateInputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
                 End Select
             End With
+        End Sub
+
+        Private Sub UpdateInputVatAmount()
+            VatAmount = MyPresenter.UpdateInputVatAmount(JournalItems)
         End Sub
 
         Private Sub DjOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDjOiItems.CellEndEdit
@@ -676,18 +680,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewJournalItems.Refresh()
         End Sub
 
-        'Private Sub UpdateTotalVatAmount()
-        '    For Each item In JournalItems
-        '        If MyPresenter.IsInputVatAccount(item.SpecialAccount) Then
-        '    Next
-
-        '    'Dim tVatAmount As Decimal = 0
-        '    'For Each row In DataGridViewJournalItems.Rows
-        '    '    tVatAmount += row.cells("dgvVatAmount").Value
-        '    'Next
-        '    'VatAmount = tVatAmount
-        'End Sub
-
         Private Sub UpdateVatNumber()
             If cboPayeeIdNo.Text IsNot Nothing Then
                 VatNumber = MyPresenter.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
@@ -703,9 +695,6 @@ Namespace PresentationLayer.Views.Forms
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
-            ElseIf MyPresenter.EditMode Then
-                Dim jiIdNo As Integer
-                jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
             End If
         End Sub
 
@@ -840,22 +829,6 @@ Namespace PresentationLayer.Views.Forms
                 UpdateJiTotals()
             End If
         End Sub
-
-        Private Sub DjEntry_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles DataGridViewJournalItems.DefaultValuesNeeded
-            If MyPresenter.EditMode Then
-                ' need to do this because Notes default to db.null which causes errors when saving
-                Dim nRowColumn = DataGridViewJournalItems.Columns("dgvNotes").Index()
-                With e.Row
-                    .Cells(nRowColumn).Value = ""
-                End With
-            End If
-        End Sub
-
-        'Private Sub DataGridViewJournalItems_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles DataGridViewJournalItems.RowsAdded
-        '    If DataGridViewJournalItems.Focused Then
-        '        bsJournalItems.ResetBindings(False)
-        '    End If
-        'End Sub
 
     End Class
 

@@ -685,9 +685,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPayrollDeductAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewPayrollDeductAccounts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPayGroupIdNo, Me.dgvAccountIdNo, Me.dgvIdNo, Me.AccountNameDataGridViewTextBoxColumn, Me.DeductionIdNoDataGridViewTextBoxColumn, Me.PayGroupNameDataGridViewTextBoxColumn})
         Me.tloPostingAccounts.SetColumnSpan(Me.DataGridViewPayrollDeductAccounts, 3)
-        Me.DataGridViewPayrollDeductAccounts.DataInGridChanged = false
-        Me.DataGridViewPayrollDeductAccounts.DataSource = Me.bsPayrollDeductAccounts
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewPayrollDeductAccounts.DataSource = Me.bsPayrollDeductAccounts
+            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
@@ -708,12 +707,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPayrollDeductAccounts.SequenceColumn = "dgvSequence"
         Me.DataGridViewPayrollDeductAccounts.SequenceFieldName = "Sequence"
         Me.DataGridViewPayrollDeductAccounts.ShowFooter = false
-        Me.DataGridViewPayrollDeductAccounts.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewPayrollDeductAccounts.StartTrackingChanges = false
-        '
-        'dgvSequence
-        '
-        Me.dgvSequence.DataPropertyName = "Sequence"
+        Me.DataGridViewPayrollDeductAccounts.ShowInsertColumnWhenEditing = True
+            '
+            'dgvSequence
+            '
+            Me.dgvSequence.DataPropertyName = "Sequence"
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
         Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2

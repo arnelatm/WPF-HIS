@@ -301,7 +301,6 @@
             Me.DataGridViewGroupAccesses.AutoGenerateColumns = False
             Me.DataGridViewGroupAccesses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewGroupAccesses.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvIdNo, Me.DgvSecurityGroupIdNo, Me.DgvSecurityObjectIdNo, Me.DgvSecurityObjectName, Me.DgvVisible, Me.DgvEditable})
-            Me.DataGridViewGroupAccesses.DataInGridChanged = False
             Me.DataGridViewGroupAccesses.DataSource = Me.bsGroupAccesses
             DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
@@ -323,12 +322,11 @@
             Me.DataGridViewGroupAccesses.SequenceColumn = "dgvSequence"
             Me.DataGridViewGroupAccesses.ShowInsertColumnWhenEditing = False
             Me.DataGridViewGroupAccesses.Size = New System.Drawing.Size(655, 368)
-            Me.DataGridViewGroupAccesses.StartTrackingChanges = false
-        Me.DataGridViewGroupAccesses.TabIndex = 178
-        '
-        'DgvIdNo
-        '
-        Me.DgvIdNo.DataPropertyName = "IdNo"
+            Me.DataGridViewGroupAccesses.TabIndex = 178
+            '
+            'DgvIdNo
+            '
+            Me.DgvIdNo.DataPropertyName = "IdNo"
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
         Me.DgvIdNo.DefaultCellStyle = DataGridViewCellStyle2

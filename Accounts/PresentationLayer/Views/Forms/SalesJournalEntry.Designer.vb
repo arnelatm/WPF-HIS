@@ -452,9 +452,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.AutoGenerateColumns = false
         Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.DataGridViewCheckBoxColumn3, Me.DataGridViewCheckBoxColumn2, Me.dgvJournalIdNo, Me.ItemVatAmount})
-        Me.DataGridViewJournalItems.DataInGridChanged = false
-        Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
@@ -475,12 +474,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
         Me.DataGridViewJournalItems.ShowFooter = false
-        Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewJournalItems.StartTrackingChanges = false
-        '
-        'dgvSequence
-        '
-        Me.dgvSequence.DataPropertyName = "Sequence"
+        Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
+            '
+            'dgvSequence
+            '
+            Me.dgvSequence.DataPropertyName = "Sequence"
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
         Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
@@ -600,9 +598,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewSalesDeposits.AutoGenerateColumns = false
         Me.DataGridViewSalesDeposits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewSalesDeposits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSc, Me.dgvDepositTypeIdNo, Me.dgvSaleAmount, Me.dgvDepositAmount, Me.dgvVatAmount, Me.dgvActualBankCharge, Me.dgvRate, Me.dgvComputedBankCharge, Me.dgvComputedVat, Me.dgvBankChargeDifference, Me.dgvVatDifference, Me.DataGridViewTextBoxColumn1, Me.DgvSalesJournalIdNo})
-        Me.DataGridViewSalesDeposits.DataInGridChanged = false
-        Me.DataGridViewSalesDeposits.DataSource = Me.bsSalesDeposits
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewSalesDeposits.DataSource = Me.bsSalesDeposits
+            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle18.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
@@ -623,12 +620,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewSalesDeposits.SequenceColumn = "dgvSequenceSc"
         Me.DataGridViewSalesDeposits.SequenceFieldName = "Sequence"
         Me.DataGridViewSalesDeposits.ShowFooter = false
-        Me.DataGridViewSalesDeposits.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewSalesDeposits.StartTrackingChanges = false
-        '
-        'bsSalesDeposits
-        '
-        Me.bsSalesDeposits.DataSource = GetType(AATM.Accounts.PresentationLayer.Views.SalesDepositView)
+        Me.DataGridViewSalesDeposits.ShowInsertColumnWhenEditing = True
+            '
+            'bsSalesDeposits
+            '
+            Me.bsSalesDeposits.DataSource = GetType(AATM.Accounts.PresentationLayer.Views.SalesDepositView)
         '
         'floJournalItemsFooter
         '

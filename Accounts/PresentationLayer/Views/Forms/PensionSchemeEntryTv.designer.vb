@@ -290,9 +290,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPensionRates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewPensionRates.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvLowRange, Me.dgvHighRange, Me.dgvEmployeeShare, Me.dgvEmployerShare, Me.dgvMaxAmount, Me.DataGridViewTextBoxColumn1, Me.IdNoDataGridViewTextBoxColumn})
         Me.tlpPostingAccounts.SetColumnSpan(Me.DataGridViewPensionRates, 3)
-        Me.DataGridViewPensionRates.DataInGridChanged = false
-        Me.DataGridViewPensionRates.DataSource = Me.bsPensionRates
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewPensionRates.DataSource = Me.bsPensionRates
+            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle8.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
@@ -313,12 +312,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPensionRates.SequenceColumn = "dgvSequence"
         Me.DataGridViewPensionRates.SequenceFieldName = "Sequence"
         Me.DataGridViewPensionRates.ShowFooter = false
-        Me.DataGridViewPensionRates.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewPensionRates.StartTrackingChanges = false
-        '
-        'txtPensionSchemeNameAra
-        '
-        Me.txtPensionSchemeNameAra.BackColor = System.Drawing.Color.White
+        Me.DataGridViewPensionRates.ShowInsertColumnWhenEditing = True
+            '
+            'txtPensionSchemeNameAra
+            '
+            Me.txtPensionSchemeNameAra.BackColor = System.Drawing.Color.White
         Me.txtPensionSchemeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tlpPensionScheme.SetColumnSpan(Me.txtPensionSchemeNameAra, 3)
         Me.txtPensionSchemeNameAra.ComputedValue = false
