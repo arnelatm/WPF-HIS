@@ -1,10 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -41,14 +39,7 @@ Namespace PresentationLayer.Views.Forms
 
         ' This event handler provides custom item-creation behavior.
         Private Sub JournalItemsBindingSource_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
-            e.NewObject = New JournalItemView
-            ' work arround for error on datagrid entry on lastrow please do not remove.
-            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
-            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
-            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
-                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-            End If
+            MyPresenter.AddNewItemOnBindingSource(Of JournalItemView)(e, bsJournalItems, DataGridViewJournalItems)
         End Sub
 
 #Region "Fields"
@@ -107,11 +98,7 @@ Namespace PresentationLayer.Views.Forms
                 Return dtpDueDate.Value
             End Get
             Set
-                'If Value.HasValue Then
-                '    dtpDueDate.Value = Date.Now()
-                'Else
                 dtpDueDate.Value = Value
-                'End If
             End Set
         End Property
 
@@ -250,23 +237,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property VatAmount As Decimal Implements IArJournalView.VatAmount
-            Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
-            End Get
-            Set
-                txtVatAmount.Text = FormatMoney(Value)
-            End Set
-        End Property
-
-        Public Property VatAmount As Decimal Implements IArJournalView.VatAmount
-            Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
-            End Get
-            Set
-                txtVatAmount.Text = FormatMoney(Value)
-            End Set
-        End Property
 
 #End Region
 
@@ -332,7 +302,7 @@ Namespace PresentationLayer.Views.Forms
                 '.Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
-                .Refresh()
+                '.Refresh()
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -430,13 +400,13 @@ Namespace PresentationLayer.Views.Forms
                         bsJournalItems.ResetItem(nIndex)
                         DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
-                        MyPresenter.MakeDebitAmount(JournalItems, .CurrentCell.Value)
+                        MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
                         UpdateTotals()
                         UpdateOutputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
-                        MyPresenter.MakeCreditAmount(JournalItems, .CurrentCell.Value)
+                        MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
                         UpdateTotals()
                         UpdateOutputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
@@ -494,9 +464,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UserDeletingRow(ByVal sender As Object,
-                                            ByVal e As DataGridViewRowCancelEventArgs) _
-            Handles DataGridViewJournalItems.UserDeletingRow
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
             Dim arJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(arJournalRow) Then
                 ' Do not allow the user to delete the first row.

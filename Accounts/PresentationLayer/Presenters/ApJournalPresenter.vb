@@ -158,21 +158,11 @@ Namespace PresentationLayer.Presenters
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
                     View.JournalItems = New List(Of IJournalItemView) From {
-                        NewJournalItem()
+                        FirstJournalItem()
                     }
                 End If
-                Dim account As AccountModel
                 For Each item In View.JournalItems
-                    If View.AccountIdNo IsNot Nothing Then
-                        account = GetAccount(View.AccountIdNo)
-                        item.JournalIdNo = View.IdNo
-                        item.SpecialAccount = account.SpecialAccount
-                        item.PayeeType = account.PayeeType
-                    Else
-                        item.JournalIdNo = 0
-                        item.SpecialAccount = ""
-                        item.PayeeType = ""
-                    End If
+                    MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
                     item.Sequence = 1
                     item.AccountIdNo = View.AccountIdNo
                     Dim tranType As String = CodeToEnum(Of TransactionTypeSelection)(View.TransactionType)
@@ -266,11 +256,11 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Function NewJournalItem()
+        Private Function FirstJournalItem()
             Dim item As New JournalItemView With {
                     .JournalIdNo = View.IdNo,
-                    .Sequence = 0,
-                    .AccountIdNo = Nothing,
+                    .Sequence = 1,
+                    .AccountIdNo = View.AccountIdNo,
                     .Credit = View.Amount,
                     .Debit = 0,
                     .RevCostCenterIdNo = 0,

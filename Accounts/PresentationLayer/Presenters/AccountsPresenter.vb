@@ -232,16 +232,16 @@ Namespace PresentationLayer.Presenters
             Return toVatAmount
         End Function
 
-        Public Sub MakeSpAcctNPayType(journalItems As List(Of IJournalItemView), accountIdNo As Int16, nIndex As Int16)
-            Dim account As AccountModel
-            journalItems(nIndex).AccountIdNo = accountIdNo
-            account = GetAccount(accountIdNo)
-            journalItems(nIndex).SpecialAccount = account.SpecialAccount
-            journalItems(nIndex).PayeeType = account.PayeeType
-        End Sub
+        'Public Sub MakeSpAcctNPayType(journalItems As List(Of IJournalItemView), accountIdNo As Int16, nIndex As Int16)
+        '    Dim account As AccountModel
+        '    journalItems(nIndex).AccountIdNo = accountIdNo
+        '    account = GetAccount(accountIdNo)
+        '    journalItems(nIndex).SpecialAccount = account.SpecialAccount
+        '    journalItems(nIndex).PayeeType = account.PayeeType
+        'End Sub
 
-        Public Sub MakeDebitAmount(journalItem As IJournalItemView, amount As Decimal)
-            If amount > 0 Then
+        Public Sub MakeDebitAmount(journalItem As IJournalItemView, amount As Decimal?)
+            If amount Is Nothing OrElse amount >= 0 Then
                 journalItem.Credit = 0
             ElseIf amount < 0 Then
                 journalItem.Credit = amount * -1
@@ -249,8 +249,8 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub MakeCreditAmount(journalItem As IJournalItemView, amount As Decimal)
-            If amount > 0 Then
+        Public Sub MakeCreditAmount(journalItem As IJournalItemView, amount As Decimal?)
+            If amount Is Nothing OrElse amount >= 0 Then
                 journalItem.Debit = 0
             ElseIf amount < 0 Then
                 journalItem.Debit = amount * -1
@@ -258,12 +258,29 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub MakePayTypeAndSpecialAccount(journalItem As IJournalItemView, accountIdNo As Int16)
+        Public Sub MakePayTypeAndSpecialAccount(journalItem As IJournalItemView, accountIdNo As Int16?)
             Dim account As AccountModel
-            account = GetAccount(accountIdNo)
-            journalItem.AccountIdNo = accountIdNo
-            journalItem.SpecialAccount = account.SpecialAccount
-            journalItem.PayeeType = account.PayeeType
+            If accountIdNo Is Nothing Or accountIdNo <= 0 Then
+                journalItem.JournalIdNo = 0
+                journalItem.SpecialAccount = Nothing
+                journalItem.PayeeType = Nothing
+            Else
+                account = GetAccount(accountIdNo)
+                journalItem.AccountIdNo = accountIdNo
+                journalItem.SpecialAccount = account.SpecialAccount
+                journalItem.PayeeType = account.PayeeType
+            End If
+        End Sub
+
+        Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView)
+            e.NewObject = New TS
+            ' work arround for error on datagrid entry on lastrow please do not remove.
+            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+            If dataGridView.Rows.Count = bindingSource.Count Then
+                bindingSource.RemoveAt(bindingSource.Count - 1)
+            End If
         End Sub
 
     End Class

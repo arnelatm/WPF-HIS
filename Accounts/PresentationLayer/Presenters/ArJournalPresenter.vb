@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -159,20 +158,11 @@ Namespace PresentationLayer.Presenters
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
                     View.JournalItems = New List(Of IJournalItemView) From {
-                        NewJournalItem()
+                        FirstJournalItem()
                     }
                 End If
                 For Each item In View.JournalItems
-                    If View.AccountIdNo IsNot Nothing Then
-                        account = GetAccount(View.AccountIdNo)
-                        item.JournalIdNo = View.IdNo
-                        item.SpecialAccount = account.SpecialAccount
-                        item.PayeeType = account.PayeeType
-                    Else
-                        item.JournalIdNo = 0
-                        item.SpecialAccount = ""
-                        item.PayeeType = ""
-                    End If
+                    MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
                     item.Sequence = 1
                     item.AccountIdNo = View.AccountIdNo
                     Dim tranType As String = CodeToEnum(Of TransactionTypeSelection)(View.TransactionType)
@@ -266,11 +256,11 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Function NewJournalItem()
+        Private Function FirstJournalItem()
             Dim item As New JournalItemView With {
                     .JournalIdNo = View.IdNo,
                     .Sequence = 0,
-                    .AccountIdNo = Nothing,
+                    .AccountIdNo = View.AccountIdNo,
                     .Debit = View.Amount,
                     .Credit = 0,
                     .RevCostCenterIdNo = 0,
@@ -304,7 +294,7 @@ Namespace PresentationLayer.Presenters
             Else
                 totalArAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalCreditAmountInWords", totalArAmount, "TotalLineAmountInWords", language, "Language")
+            Dim cForm As New ReportForm("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalArAmountInWords", totalArAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 

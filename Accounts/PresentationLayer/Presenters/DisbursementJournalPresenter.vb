@@ -104,6 +104,15 @@ Namespace PresentationLayer.Presenters
 
         Public Property JournalCode As String
 
+        Protected Property CashCount As Int16
+
+        Public ReadOnly Property DefaultPettyCashAccount As Int16
+            Get
+                Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
+            End Get
+        End Property
+
+
         Public ReadOnly Property CdAccountCount As Int16
             Get
                 Dim specialAccount As String
@@ -148,232 +157,6 @@ Namespace PresentationLayer.Presenters
             End Get
         End Property
 
-        Public Sub AddSupplierOpenInvoices()
-            If _presenterView.PayeeIdNo <> 0 Then
-                Dim unpaidInvoices = GetSupplierOpenInvoices(_presenterView.PayeeIdNo)
-                Dim nSeq As Integer
-                If AddMode Then
-                    _presenterView.DjOiItems.Clear()
-                End If
-                If _presenterView.DjOiItems IsNot Nothing Then
-                    nSeq = _presenterView.DjOiItems.Count()
-                Else
-                    nSeq = 0
-                End If
-                For Each unpaidInvoice In unpaidInvoices
-                    Dim itemFound = False
-                    If _presenterView.DjOiItems IsNot Nothing Then
-                        For Each item In _presenterView.DjOiItems
-                            If item.ApOpenInvoiceIdNo = unpaidInvoice.IdNo Then
-                                itemFound = True
-                                Exit For
-                            End If
-                        Next
-                    End If
-                    If Not itemFound Then
-
-                        If unpaidInvoice.JournalCode = JournalCode And unpaidInvoice.JournalIdNo = _presenterView.IdNo Then
-                            ' ignore advance payments if applied to this entry.
-                        Else
-                            nSeq += 1
-                            Dim item As New DjOiItemView With {
-                                    .AccountIdNo = unpaidInvoice.AccountIdNo,
-                                    .Amount = unpaidInvoice.Amount,
-                                    .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
-                                    .Balance = unpaidInvoice.Balance,
-                                    .DiscountTaken = unpaidInvoice.DiscountTaken,
-                                    .InvoiceNo = unpaidInvoice.InvoiceNo,
-                                    .JournalCode = unpaidInvoice.JournalCode,
-                                    .JournalIdNo = unpaidInvoice.JournalIdNo,
-                                    .PreviousBalance = unpaidInvoice.Balance,
-                                    .Sequence = nSeq,
-                                    .TransactionDate = unpaidInvoice.TransactionDate
-                                    }
-                            If _presenterView.DjOiItems Is Nothing Then
-                                _presenterView.DjOiItems = New List(Of DjOiItemView)
-                            End If
-                            _presenterView.DjOiItems.Add(item)
-                        End If
-                    End If
-                Next
-            End If
-        End Sub
-
-        Public Function GetSupplierOpenInvoices(dView As List(Of DjOiItemView)) As List(Of DjOiItemView)
-            Dim dModel As New List(Of DjOiItemModel)
-            Dim dOriginalModel As New List(Of DjOiItemModel)
-            Dim nSeq As Integer
-            GlobalVariables.Mapper.Map(dView, dModel)
-            nSeq = dView.Count()
-            If EditMode Then
-                If _presenterView.PayeeIdNo = OriginalModel.PayeeIdNo AndAlso _presenterView.PaymentType = OriginalModel.PaymentType Then
-                    ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
-                    AddOpenInvoices(True, OriginalModel.DjOiItems, dModel, nSeq)
-                    nSeq = dModel.Count()
-                End If
-            End If
-            Dim unpaidInvoices = GetSupplierOpenInvoices(_presenterView.PayeeIdNo)
-            AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
-            GlobalVariables.Mapper.Map(dModel, dView)
-            Return dView
-        End Function
-
-        Private Function AddOpenInvoices(original As Boolean, source As List(Of DjOiItemModel), target As List(Of DjOiItemModel), nSeq As Integer) As Integer
-            For Each invoice In source
-                Dim itemFound = False
-                For Each item In target
-                    If item.ApOpenInvoiceIdNo = invoice.ApOpenInvoiceIdNo Then
-                        itemFound = True
-                        Exit For
-                    End If
-                Next
-                If Not itemFound Then
-                    If invoice.JournalCode = JournalCode And invoice.JournalIdNo = _presenterView.IdNo Then
-                        ' ignore advance payments if applied to this entry.
-                    Else
-                        nSeq += 1
-                        target.Add(GetOpenInvoice(original, nSeq, invoice))
-                    End If
-                End If
-            Next
-            Return nSeq
-        End Function
-
-        Private Function GetOpenInvoice(original As Boolean, nSeq As Integer, invoice As Object) As DjOiItemModel
-            Dim item As DjOiItemModel
-            item = New DjOiItemModel With {
-                .AccountIdNo = invoice.AccountIdNo,
-                .Amount = invoice.Amount,
-                .ApOpenInvoiceIdNo = invoice.ApOpenInvoiceIdNo,
-                .Balance = invoice.Balance,
-                .DiscountTaken = invoice.DiscountTaken,
-                .InvoiceNo = invoice.InvoiceNo,
-                .JournalCode = invoice.JournalCode,
-                .JournalIdNo = invoice.JournalIdNo,
-                .PreviousBalance = IIf(original, invoice.PreviousBalance, invoice.Balance),
-                .Sequence = nSeq,
-                .TransactionDate = invoice.TransactionDate
-                }
-            Return item
-        End Function
-
-        Protected Property CashCount As Int16
-
-        Public ReadOnly Property DefaultPettyCashAccount As Int16
-            Get
-                Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
-            End Get
-        End Property
-
-        Public Function OiItemDataIsValid() As Boolean
-            Dim retVal = True
-            Dim index As Int16 = 0
-            For Each item In _presenterView.DjOiItems
-                If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
-                    If (item.Amount + item.DiscountTaken > item.PreviousBalance And item.PreviousBalance > 0) Or
-                       (item.Amount + item.DiscountTaken < item.PreviousBalance And item.PreviousBalance < 0) Then
-                        Dim lineNumber = item.Sequence.ToString()
-                        Dim variables = {"lineNumber", lineNumber}
-                        Dim message = Messaging.GetMessage(True, "MsgAppliedAmtExceedsBalance", "Error in line {lineNumber}. Applied amount and discount exceeds balance.", "Invalid Payment")
-                        Dim caption = Messaging.TranslateCaption("Invalid Payment")
-                        message = Messaging.ReplaceValues(message, variables)
-                        Messaging.Show(message, caption)
-                        If _presenterView.DjOiItems(index).Errors Is Nothing Then
-                            _presenterView.DjOiItems(index).Errors = New List(Of String)
-                        End If
-                        _presenterView.DjOiItems(index).Errors.Add(message)
-                        'dataGridView.Rows(item.Sequence - 1).ErrorText = errorMsg
-                        retVal = False
-                        Exit For
-                    Else
-                        ' clear error message
-                        'dataGridView.Rows(item.Sequence - 1).ErrorText = ""
-                        If _presenterView.DjOiItems(index).Errors IsNot Nothing Then
-                            _presenterView.DjOiItems(index).Errors.Clear()
-                        End If
-                    End If
-                End If
-                index += 1
-            Next
-            If retVal Then
-                If _presenterView.UnApplied <> 0 Then
-                    Dim totalBalance As Decimal = 0D
-                    For Each item In _presenterView.DjOiItems
-                        totalBalance += item.Balance
-                    Next
-                    If totalBalance > 0 Then
-                        If _presenterView.UnApplied > 0 Then
-                            Messaging.Show(True, "MsgPaymentNotFullyApplied")
-                            retVal = False
-                        Else
-                            Messaging.Show(True, "MsgPaymentIsOverApplied")
-                            retVal = False
-                        End If
-                    Else
-                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance",
-                                           MessageBoxButtons.YesNo,
-                                           MessageBoxIcon.Warning,
-                                           MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                            retVal = True
-                        Else
-                            retVal = False
-                        End If
-                    End If
-                Else
-                    retVal = True
-                End If
-            End If
-            Return retVal
-        End Function
-
-        Public Function GetAdvancePaymentOpenIdNo(ByVal pJournalCode As String, ByVal idNo As Int32) As Integer
-            Dim retVal As String
-            retVal = Model.GetRecordFieldWith2Key(idNo, pJournalCode, "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
-            Return retVal
-        End Function
-
-        Public Function GetDjOiItems(djOiIdNo As Int32) As List(Of DjOiItemModel)
-            Return OiItemModel.GetRecordsWithIdNo(Of DjOiItemModel)(djOiIdNo, "Sequence")
-        End Function
-
-        Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return DjItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
-        End Function
-
-        Public Function GetPaymentType(ByRef idNo As Int32) As String
-            Dim retVal As String
-            retVal = Model.GetRecordFieldWithKey(idNo, "PcJournal", "IdNo", "PaymentType")
-            Return retVal
-        End Function
-
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of DjOiItemModel)
-            Return ModelPresenter.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
-        End Function
-
-        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
-            _presenterView.TransactionDate = Date.Now()
-            If _presenterView.JournalItems IsNot Nothing Then
-                _presenterView.JournalItems.Clear()
-            Else
-                _presenterView.JournalItems = New List(Of IJournalItemView)
-            End If
-            Dim item As New JournalItemView With {
-                    .JournalIdNo = _presenterView.IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = Nothing,
-                    .Credit = _presenterView.Amount,
-                    .Debit = 0,
-                    .RevCostCenterIdNo = 0,
-                    .Notes = ""
-                    }
-            _presenterView.JournalItems.Add(item)
-            If _presenterView.DjOiItems IsNot Nothing Then
-                _presenterView.DjOiItems.Clear()
-            Else
-                _presenterView.DjOiItems = New List(Of DjOiItemView)
-            End If
-
-        End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
@@ -405,52 +188,6 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Private Sub JournalItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
-            workRow("AccountIdNo") = itemDataView.AccountIdNo
-            workRow("Credit") = itemDataView.Credit
-            workRow("Debit") = itemDataView.Debit
-            workRow("JournalIdNo") = _presenterView.idNo
-            workRow("Notes") = itemDataView.Notes
-            workRow("RevCostCenteridNo") = itemDataView.DiscountTaken
-        End Sub
-
-        Public Function JournalItemFilter(ByVal obj As Object) As Boolean
-            If (obj.Debit = 0 AndAlso obj.Credit = 0 AndAlso obj.Sequence <> 1) Then
-                Return False
-            End If
-            Return True
-        End Function
-
-        Private Sub DjFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
-            workRow("Amount") = itemDataView.Amount
-            workRow("ApOpenInvoiceIdNo") = itemDataView.ApOpenInvoiceIdNo
-            workRow("DjIdNo") = _presenterView.idNo
-            workRow("DiscountTaken") = itemDataView.DiscountTaken
-            _presenterView.TotalDebits += itemDataView.Amount + itemDataView.DiscountTaken
-        End Sub
-
-        Public Function DjOiItemFilter(ByVal obj As Object) As Boolean
-            If (obj.Amount = 0 AndAlso obj.DiscountTaken = 0) Then
-                Return False
-            End If
-            Return True
-        End Function
-
-        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(DjItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
-            If retVal >= 0 Then
-                retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "DjIdNo")
-                If retVal >= 0 Then
-                    retVal = SaveOpenInvoices()
-                End If
-            End If
-            If retVal >= 0 And IsEmpty(_presenterView.ReferenceNo) Then
-                GlobalVariables.Mapper.Map(_presenterView, DataModel)
-                retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
-            End If
-        End Sub
-
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
             If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 _presenterView.TotalDebits = 0
@@ -463,13 +200,55 @@ Namespace PresentationLayer.Presenters
             _presenterView.UnApplied = _presenterView.Amount - _presenterView.Applied
         End Sub
 
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(DjItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            If retVal >= 0 Then
+                retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "DjIdNo")
+                If retVal >= 0 Then
+                    retVal = SaveOpenInvoices()
+                End If
+            End If
+            If retVal >= 0 And IsEmpty(_presenterView.ReferenceNo) Then
+                retVal = UpdateGlReferenceNumber()
+            End If
+        End Sub
+
+        Public Sub UpdateFirstLine()
+            If EditMode Or AddMode Then
+                If View.JournalItems.Count() = 0 Then
+                    View.JournalItems = New List(Of IJournalItemView) From {
+                            FirstJournalItem()
+                            }
+                End If
+                For Each item In View.JournalItems
+                    item.JournalIdNo = View.IdNo
+                    item.Sequence = 1
+                    item.AccountIdNo = View.AccountIdNo
+                    item.Credit = View.Amount
+                    item.Debit = 0
+                    item.RevCostCenterIdNo = 0
+                    MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
+                    Exit For
+                Next
+            End If
+        End Sub
+
+        Public Function UpdateGlReferenceNumber() As String
+            Dim retValue As String
+            GlobalVariables.Mapper.Map(View, DataModel)
+            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            Return retValue
+        End Function
+
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Petty Cash Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
-                If IsDateRangeValid("Petty Cash Disbursement", _presenterView.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                Dim dateFieldName = Messaging.TranslateCaption("Transacton Date")
+                If IsDateRangeValid(dateFieldName, _presenterView.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 ElseIf CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
                     If _presenterView.JournalItems Is Nothing OrElse _presenterView.JournalItems.Count() = 0 Then
@@ -497,66 +276,142 @@ Namespace PresentationLayer.Presenters
                         Next
                     End If
                 End If
+                If retValue >= 0 Then
+                    Dim nonApArEmpLoan As Boolean = False
+                    nonApArEmpLoan = GlobalFunctions.CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Others Or
+                                 GlobalFunctions.CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Supplier
+                    For Each item In View.JournalItems
+                        If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                            Dim lineNumber As String = item.Sequence.ToString()
+                            Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
+                            retValue = False
+                            Exit For
+                        End If
+                    Next
+                End If
             End If
             Return retValue
         End Function
 
-        Private Function JournalItemDataIsValid() As Boolean
-            Dim retValue As Boolean = True
-            Dim account As AccountModel
-            Dim specialAccount As String = ""
+        Private Function FirstJournalItem()
+            Dim item As New JournalItemView With {
+                    .JournalIdNo = View.IdNo,
+                    .Sequence = 1,
+                    .AccountIdNo = View.AccountIdNo,
+                    .Credit = View.Amount,
+                    .Debit = 0,
+                    .RevCostCenterIdNo = 0,
+                    .SpecialAccount = Nothing,
+                    .PayeeType = Nothing,
+                    .Notes = ""
+                    }
+            Return item
+        End Function
+
+        Public Overrides Sub GoPrintRecord()
+            Dim transactionAmountInWords As String
+            Dim totalLineAmountInWords As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            If language = "ar" Then
+                transactionAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToArabic()
+            Else
+                transactionAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToEnglish()
+            End If
+            _presenterView.TotalCredits = 0
             For Each item In _presenterView.JournalItems
-                If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                    If item.AccountIdNo IsNot Nothing OrElse item.AccountIdNo <> 0 Then
-                        account = GetAccount(item.AccountIdNo)
-                        specialAccount = account.SpecialAccount
-                    End If
-                    If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
-                        MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
-                        retValue = False
-                        Exit For
-                    End If
-                    If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) = PaymentTypeSelection.Employee Then
-                        If specialAccount IsNot Nothing AndAlso "AP|AR".Contains(specialAccount) Then
-                            Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} accounts not allowed for this transaction!", caption)
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            retValue = False
-                            Exit For
-                        End If
-                    ElseIf CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) = PaymentTypeSelection.CustomerRefund Then
-                        If specialAccount IsNot Nothing AndAlso "AP|EL".Contains(specialAccount) Then
-                            Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            retValue = False
-                            Exit For
-                        End If
+                _presenterView.TotalCredits = _presenterView.TotalCredits + item.Credit
+            Next
+            If language = "ar" Then
+                totalLineAmountInWords = New ToWord(_presenterView.TotalCredits, currencies(0)).ConvertToArabic()
+            Else
+                totalLineAmountInWords = New ToWord(_presenterView.TotalCredits, currencies(0)).ConvertToEnglish()
+            End If
+            If TableName = "PcJournal" Then
+                ReportName = "Petty Cash Disbursement Journal.Rpt"
+            ElseIf TableName = "CdJournal" Then
+                ReportName = "Cash Disbursement Journal.Rpt"
+            Else
+                ReportName = "Check Disbursement Journal.Rpt"
+            End If
+            Dim cForm As New ReportForm(ReportName, _presenterView.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
+            cForm.Show()
+        End Sub
+
+        Public Sub PrintCheck()
+            Dim checkAmountInWords As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            If language = "ar" Then
+                checkAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToArabic()
+            Else
+                checkAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToEnglish()
+            End If
+            ReportName = "Check Printing.Rpt"
+            Dim cForm As New ReportForm(ReportName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language")
+            cForm.Show()
+        End Sub
+
+        Private Function GetPayeeName(ByVal payeeIdNo? As Int32)
+            Dim payee As String
+            Dim cbDataSource = Nothing
+            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
+            If paymentTypeEnum = PaymentTypeSelection.AccountsPayable OrElse paymentTypeEnum = PaymentTypeSelection.Supplier Then
+                payee = GetFieldWithIdNo(View.PayeeIdNo, "Supplier", "SupplierName")
+            ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
+                payee = GetFieldWithIdNo(View.PayeeIdNo, "Employee", "EmployeeName")
+            ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
+                payee = GetFieldWithIdNo(View.PayeeIdNo, "Customer", "CustomerName")
+            Else
+                payee = View.PayeeName
+            End If
+            Return payee
+        End Function
+
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            ' ReSharper disable once VBUseMethodAny.1
+            If _presenterView.DjOiItems IsNot Nothing And _presenterView.DjOiItems.Count() > 0 Then
+                DtOiUpdateTable.Clear()
+                OiItemModel.DelUpdateTvp(DtOiUpdateTable, idNo)
+            End If
+            ' ReSharper disable once VBUseMethodAny.1
+            If _presenterView.JournalItems IsNot Nothing And _presenterView.JournalItems.Count() > 0 Then
+                DtUpdateTable.Clear()
+                DjItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
+        End Sub
+
+        Public Sub AutoApplyAmount()
+            Dim amountToApply = _presenterView.Amount
+            'Dim appliedAmount As Decimal = 0D
+            For Each item In _presenterView.DjOiItems
+                If amountToApply = 0D Then
+                    item.Amount = 0D
+                    item.DiscountTaken = 0D
+                    item.Balance = item.PreviousBalance
+                Else
+                    If item.PreviousBalance <= amountToApply Then
+                        amountToApply -= item.PreviousBalance
+                        item.Amount = item.PreviousBalance
+                        item.DiscountTaken = 0D
+                        item.Balance = 0D
                     Else
-                        If specialAccount IsNot Nothing AndAlso "AP|EL|AR".Contains(specialAccount) Then
-                            Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
-                            Dim caption = "Invalid Entry"
-                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
-                            caption = Messaging.TranslateCaption(caption)
-                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            retValue = False
-                            Exit For
-                        End If
+                        item.Amount = amountToApply
+                        item.DiscountTaken = 0D
+                        item.Balance = item.PreviousBalance - amountToApply
+                        amountToApply = 0D
                     End If
                 End If
-            Next
-            Return retValue
-        End Function
+            Next item
+        End Sub
 
         Private Sub MakeJournalItem()
             If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) = PaymentTypeSelection.AccountsPayable Then
@@ -795,143 +650,313 @@ Namespace PresentationLayer.Presenters
             Return 0
         End Function
 
-        Public Overrides Sub GoPrintRecord()
-            Dim transactionAmountInWords As String
-            Dim totalLineAmountInWords As String
-            Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
-                transactionAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToArabic()
-            Else
-                transactionAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToEnglish()
-            End If
-            _presenterView.TotalCredits = 0
+        Private Function JournalItemDataIsValid() As Boolean
+            Dim retValue As Boolean = True
             For Each item In _presenterView.JournalItems
-                _presenterView.TotalCredits = _presenterView.TotalCredits + item.Credit
-            Next
-            If language = "ar" Then
-                totalLineAmountInWords = New ToWord(_presenterView.TotalCredits, currencies(0)).ConvertToArabic()
-            Else
-                totalLineAmountInWords = New ToWord(_presenterView.TotalCredits, currencies(0)).ConvertToEnglish()
-            End If
-            If TableName = "PcJournal" Then
-                ReportName = "Petty Cash Disbursement Journal.Rpt"
-            ElseIf TableName = "CdJournal" Then
-                ReportName = "Cash Disbursement Journal.Rpt"
-            Else
-                ReportName = "Check Disbursement Journal.Rpt"
-            End If
-            Dim cForm As New ReportForm(ReportName, _presenterView.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
-            cForm.Show()
-        End Sub
-
-        Public Sub PrintCheck()
-            Dim checkAmountInWords As String
-            Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
-                checkAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToArabic()
-            Else
-                checkAmountInWords = New ToWord(_presenterView.Amount, currencies(0)).ConvertToEnglish()
-            End If
-            ReportName = "Check Printing.Rpt"
-            Dim cForm As New ReportForm(ReportName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language")
-            cForm.Show()
-        End Sub
-
-        Private Function GetPayeeName(ByVal payeeIdNo? As Int32)
-            Dim payee As String
-            Dim cbDataSource = Nothing
-            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
-            If paymentTypeEnum = PaymentTypeSelection.AccountsPayable OrElse paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                payee = GetFieldWithIdNo(View.PayeeIdNo, "Supplier", "SupplierName")
-            ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                payee = GetFieldWithIdNo(View.PayeeIdNo, "Employee", "EmployeeName")
-            ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                payee = GetFieldWithIdNo(View.PayeeIdNo, "Customer", "CustomerName")
-            Else
-                payee = View.PayeeName
-            End If
-            Return payee
-        End Function
-
-        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
-            ' ReSharper disable once VBUseMethodAny.1
-            If _presenterView.DjOiItems IsNot Nothing And _presenterView.DjOiItems.Count() > 0 Then
-                DtOiUpdateTable.Clear()
-                OiItemModel.DelUpdateTvp(DtOiUpdateTable, idNo)
-            End If
-            ' ReSharper disable once VBUseMethodAny.1
-            If _presenterView.JournalItems IsNot Nothing And _presenterView.JournalItems.Count() > 0 Then
-                DtUpdateTable.Clear()
-                DjItemModel.DelUpdateTvp(DtUpdateTable, idNo)
-            End If
-        End Sub
-
-        Public Sub AutoApplyAmount()
-            Dim amountToApply = _presenterView.Amount
-            'Dim appliedAmount As Decimal = 0D
-            For Each item In _presenterView.DjOiItems
-                If amountToApply = 0D Then
-                    item.Amount = 0D
-                    item.DiscountTaken = 0D
-                    item.Balance = item.PreviousBalance
-                Else
-                    If item.PreviousBalance <= amountToApply Then
-                        amountToApply -= item.PreviousBalance
-                        item.Amount = item.PreviousBalance
-                        item.DiscountTaken = 0D
-                        item.Balance = 0D
+                If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                    If (item.AccountIdNo Is Nothing OrElse item.AccountIdNo = 0) AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                        MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                        retValue = False
+                        Exit For
+                    End If
+                    If CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) = PaymentTypeSelection.Employee Then
+                        If CodeToEnum(Of SpecialAccountSelection)(item.specialAccount) = SpecialAccountSelection.AccountsPayable Or
+                           CodeToEnum(Of SpecialAccountSelection)(item.specialAccount) = SpecialAccountSelection.AccountsReceivable Then
+                            Dim lineNumber = Format(item.Sequence, "0")
+                            Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Accounts Payables")
+                            Dim caption = "Invalid Entry"
+                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
+                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed", "Error on line {lineNumber}. Sorry {entryNames} accounts not allowed for this transaction!", caption)
+                            caption = Messaging.TranslateCaption(caption)
+                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            retValue = False
+                            Exit For
+                        End If
+                    ElseIf CodeToEnum(Of PaymentTypeSelection)(_presenterView.PaymentType) = PaymentTypeSelection.CustomerRefund Then
+                        If CodeToEnum(Of SpecialAccountSelection)(item.specialAccount) = SpecialAccountSelection.AccountsPayable Or
+                           CodeToEnum(Of SpecialAccountSelection)(item.specialAccount) = SpecialAccountSelection.EmployeeLoan Then
+                            Dim lineNumber = Format(item.Sequence, "0")
+                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee")
+                            Dim caption = "Invalid Entry"
+                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
+                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
+                            caption = Messaging.TranslateCaption(caption)
+                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            retValue = False
+                            Exit For
+                        End If
                     Else
-                        item.Amount = amountToApply
-                        item.DiscountTaken = 0D
-                        item.Balance = item.PreviousBalance - amountToApply
-                        amountToApply = 0D
+                        If CodeToEnum(Of SpecialAccountSelection)(item.specialAccount) = SpecialAccountSelection.AccountsPayable Or
+                           CodeToEnum(Of SpecialAccountSelection)(item.specialAccount) = SpecialAccountSelection.AccountsReceivable Or
+                           CodeToEnum(Of SpecialAccountSelection)(item.specialAccount) = SpecialAccountSelection.EmployeeLoan Then
+                            Dim lineNumber = Format(item.Sequence, "0")
+                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
+                            Dim caption = "Invalid Entry"
+                            Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
+                            Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")
+                            caption = Messaging.TranslateCaption(caption)
+                            Messaging.Show(message, caption, variables, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            retValue = False
+                            Exit For
+                        End If
                     End If
                 End If
-            Next item
-        End Sub
+            Next
+            Return retValue
+        End Function
 
-        Public Sub UpdateFirstLine()
-            If EditMode Or AddMode Then
-                If View.JournalItems.Count() = 0 Then
-                    View.JournalItems = New List(Of IJournalItemView) From {
-                            NewJournalItem()
-                            }
+        Public Function OiItemDataIsValid() As Boolean
+            Dim retVal = True
+            Dim index As Int16 = 0
+            For Each item In _presenterView.DjOiItems
+                If item.Amount <> 0 Or item.DiscountTaken <> 0 Then
+                    If (item.Amount + item.DiscountTaken > item.PreviousBalance And item.PreviousBalance > 0) Or
+                       (item.Amount + item.DiscountTaken < item.PreviousBalance And item.PreviousBalance < 0) Then
+                        Dim lineNumber = item.Sequence.ToString()
+                        Dim variables = {"lineNumber", lineNumber}
+                        Dim message = Messaging.GetMessage(True, "MsgAppliedAmtExceedsBalance", "Error in line {lineNumber}. Applied amount and discount exceeds balance.", "Invalid Payment")
+                        Dim caption = Messaging.TranslateCaption("Invalid Payment")
+                        message = Messaging.ReplaceValues(message, variables)
+                        Messaging.Show(message, caption)
+                        If _presenterView.DjOiItems(index).Errors Is Nothing Then
+                            _presenterView.DjOiItems(index).Errors = New List(Of String)
+                        End If
+                        _presenterView.DjOiItems(index).Errors.Add(message)
+                        'dataGridView.Rows(item.Sequence - 1).ErrorText = errorMsg
+                        retVal = False
+                        Exit For
+                    Else
+                        ' clear error message
+                        'dataGridView.Rows(item.Sequence - 1).ErrorText = ""
+                        If _presenterView.DjOiItems(index).Errors IsNot Nothing Then
+                            _presenterView.DjOiItems(index).Errors.Clear()
+                        End If
+                    End If
                 End If
-                For Each item In View.JournalItems
-                    item.JournalIdNo = View.IdNo
-                    item.Sequence = 1
-                    item.AccountIdNo = View.AccountIdNo
-                    item.Credit = View.Amount
-                    item.Debit = 0
-                    item.RevCostCenterIdNo = 0
-                    MakeSpAcctNPayType(item, accountId, nIndex)
-                    Exit For
-                Next
+                index += 1
+            Next
+            If retVal Then
+                If _presenterView.UnApplied <> 0 Then
+                    Dim totalBalance As Decimal = 0D
+                    For Each item In _presenterView.DjOiItems
+                        totalBalance += item.Balance
+                    Next
+                    If totalBalance > 0 Then
+                        If _presenterView.UnApplied > 0 Then
+                            Messaging.Show(True, "MsgPaymentNotFullyApplied")
+                            retVal = False
+                        Else
+                            Messaging.Show(True, "MsgPaymentIsOverApplied")
+                            retVal = False
+                        End If
+                    Else
+                        If Messaging.Show(True, "AskMakeExcessPaymentAdvance",
+                                           MessageBoxButtons.YesNo,
+                                           MessageBoxIcon.Warning,
+                                           MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                            retVal = True
+                        Else
+                            retVal = False
+                        End If
+                    End If
+                Else
+                    retVal = True
+                End If
             End If
-        End Sub
+            Return retVal
+        End Function
 
-        Private Function NewJournalItem()
+        Public Function GetAdvancePaymentOpenIdNo(ByVal pJournalCode As String, ByVal idNo As Int32) As Integer
+            Dim retVal As String
+            retVal = Model.GetRecordFieldWith2Key(idNo, pJournalCode, "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
+            Return retVal
+        End Function
+
+        Public Function GetDjOiItems(djOiIdNo As Int32) As List(Of DjOiItemModel)
+            Return OiItemModel.GetRecordsWithIdNo(Of DjOiItemModel)(djOiIdNo, "Sequence")
+        End Function
+
+        Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
+            Return DjItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+        End Function
+
+        Public Function GetPaymentType(ByRef idNo As Int32) As String
+            Dim retVal As String
+            retVal = Model.GetRecordFieldWithKey(idNo, "PcJournal", "IdNo", "PaymentType")
+            Return retVal
+        End Function
+
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of DjOiItemModel)
+            Return ModelPresenter.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
+        End Function
+
+        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
+            _presenterView.TransactionDate = Date.Now()
+            If _presenterView.JournalItems IsNot Nothing Then
+                _presenterView.JournalItems.Clear()
+            Else
+                _presenterView.JournalItems = New List(Of IJournalItemView)
+            End If
             Dim item As New JournalItemView With {
-                    .JournalIdNo = View.IdNo,
+                    .JournalIdNo = _presenterView.IdNo,
                     .Sequence = 1,
-                    .AccountIdNo = View.AccountIdNo,
-                    .Credit = View.Amount,
+                    .AccountIdNo = Nothing,
+                    .Credit = _presenterView.Amount,
                     .Debit = 0,
                     .RevCostCenterIdNo = 0,
                     .Notes = ""
                     }
+            _presenterView.JournalItems.Add(item)
+            If _presenterView.DjOiItems IsNot Nothing Then
+                _presenterView.DjOiItems.Clear()
+            Else
+                _presenterView.DjOiItems = New List(Of DjOiItemView)
+            End If
+
+        End Sub
+
+
+        Private Sub JournalItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("AccountIdNo") = itemDataView.AccountIdNo
+            workRow("Credit") = itemDataView.Credit
+            workRow("Debit") = itemDataView.Debit
+            workRow("JournalIdNo") = _presenterView.idNo
+            workRow("Notes") = itemDataView.Notes
+            workRow("RevCostCenteridNo") = itemDataView.DiscountTaken
+        End Sub
+
+        Public Function JournalItemFilter(ByVal obj As Object) As Boolean
+            If (obj.Debit = 0 AndAlso obj.Credit = 0 AndAlso obj.Sequence <> 1) Then
+                Return False
+            End If
+            Return True
+        End Function
+
+        Private Sub DjFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("Amount") = itemDataView.Amount
+            workRow("ApOpenInvoiceIdNo") = itemDataView.ApOpenInvoiceIdNo
+            workRow("DjIdNo") = _presenterView.idNo
+            workRow("DiscountTaken") = itemDataView.DiscountTaken
+            _presenterView.TotalDebits += itemDataView.Amount + itemDataView.DiscountTaken
+        End Sub
+
+        Public Function DjOiItemFilter(ByVal obj As Object) As Boolean
+            If (obj.Amount = 0 AndAlso obj.DiscountTaken = 0) Then
+                Return False
+            End If
+            Return True
+        End Function
+
+
+        Public Sub AddSupplierOpenInvoices()
+            If _presenterView.PayeeIdNo <> 0 Then
+                Dim unpaidInvoices = GetSupplierOpenInvoices(_presenterView.PayeeIdNo)
+                Dim nSeq As Integer
+                If AddMode Then
+                    _presenterView.DjOiItems.Clear()
+                End If
+                If _presenterView.DjOiItems IsNot Nothing Then
+                    nSeq = _presenterView.DjOiItems.Count()
+                Else
+                    nSeq = 0
+                End If
+                For Each unpaidInvoice In unpaidInvoices
+                    Dim itemFound = False
+                    If _presenterView.DjOiItems IsNot Nothing Then
+                        For Each item In _presenterView.DjOiItems
+                            If item.ApOpenInvoiceIdNo = unpaidInvoice.IdNo Then
+                                itemFound = True
+                                Exit For
+                            End If
+                        Next
+                    End If
+                    If Not itemFound Then
+
+                        If unpaidInvoice.JournalCode = JournalCode And unpaidInvoice.JournalIdNo = _presenterView.IdNo Then
+                            ' ignore advance payments if applied to this entry.
+                        Else
+                            nSeq += 1
+                            Dim item As New DjOiItemView With {
+                                    .AccountIdNo = unpaidInvoice.AccountIdNo,
+                                    .Amount = unpaidInvoice.Amount,
+                                    .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
+                                    .Balance = unpaidInvoice.Balance,
+                                    .DiscountTaken = unpaidInvoice.DiscountTaken,
+                                    .InvoiceNo = unpaidInvoice.InvoiceNo,
+                                    .JournalCode = unpaidInvoice.JournalCode,
+                                    .JournalIdNo = unpaidInvoice.JournalIdNo,
+                                    .PreviousBalance = unpaidInvoice.Balance,
+                                    .Sequence = nSeq,
+                                    .TransactionDate = unpaidInvoice.TransactionDate
+                                    }
+                            If _presenterView.DjOiItems Is Nothing Then
+                                _presenterView.DjOiItems = New List(Of DjOiItemView)
+                            End If
+                            _presenterView.DjOiItems.Add(item)
+                        End If
+                    End If
+                Next
+            End If
+        End Sub
+
+        Public Function GetSupplierOpenInvoices(dView As List(Of DjOiItemView)) As List(Of DjOiItemView)
+            Dim dModel As New List(Of DjOiItemModel)
+            Dim dOriginalModel As New List(Of DjOiItemModel)
+            Dim nSeq As Integer
+            GlobalVariables.Mapper.Map(dView, dModel)
+            nSeq = dView.Count()
+            If EditMode Then
+                If _presenterView.PayeeIdNo = OriginalModel.PayeeIdNo AndAlso _presenterView.PaymentType = OriginalModel.PaymentType Then
+                    ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
+                    AddOpenInvoices(True, OriginalModel.DjOiItems, dModel, nSeq)
+                    nSeq = dModel.Count()
+                End If
+            End If
+            Dim unpaidInvoices = GetSupplierOpenInvoices(_presenterView.PayeeIdNo)
+            AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
+            GlobalVariables.Mapper.Map(dModel, dView)
+            Return dView
+        End Function
+
+        Private Function AddOpenInvoices(original As Boolean, source As List(Of DjOiItemModel), target As List(Of DjOiItemModel), nSeq As Integer) As Integer
+            For Each invoice In source
+                Dim itemFound = False
+                For Each item In target
+                    If item.ApOpenInvoiceIdNo = invoice.ApOpenInvoiceIdNo Then
+                        itemFound = True
+                        Exit For
+                    End If
+                Next
+                If Not itemFound Then
+                    If invoice.JournalCode = JournalCode And invoice.JournalIdNo = _presenterView.IdNo Then
+                        ' ignore advance payments if applied to this entry.
+                    Else
+                        nSeq += 1
+                        target.Add(GetOpenInvoice(original, nSeq, invoice))
+                    End If
+                End If
+            Next
+            Return nSeq
+        End Function
+
+        Private Function GetOpenInvoice(original As Boolean, nSeq As Integer, invoice As Object) As DjOiItemModel
+            Dim item As DjOiItemModel
+            item = New DjOiItemModel With {
+                .AccountIdNo = invoice.AccountIdNo,
+                .Amount = invoice.Amount,
+                .ApOpenInvoiceIdNo = invoice.ApOpenInvoiceIdNo,
+                .Balance = invoice.Balance,
+                .DiscountTaken = invoice.DiscountTaken,
+                .InvoiceNo = invoice.InvoiceNo,
+                .JournalCode = invoice.JournalCode,
+                .JournalIdNo = invoice.JournalIdNo,
+                .PreviousBalance = IIf(original, invoice.PreviousBalance, invoice.Balance),
+                .Sequence = nSeq,
+                .TransactionDate = invoice.TransactionDate
+                }
             Return item
         End Function
+
 
     End Class
 

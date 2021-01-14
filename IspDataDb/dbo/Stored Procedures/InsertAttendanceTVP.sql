@@ -10,7 +10,7 @@
 
 
 CREATE PROC [dbo].[InsertAttendanceTVP]
-  @MParam AttendanceInsert READONLY
+  @MParam AttendanceItemInsert READONLY
 AS 
 INSERT  INTO Attendance (DaysAbsentWithoutPay,DaysAbsentWithPay,DaysOff,DaysPresent,EmployeeIdNo,PayPeriodIdNo,Sequence)
         SELECT  DaysAbsentWithoutPay, DaysAbsentWithPay, DaysOff, DaysPresent, EmployeeIdNo, PayPeriodIdNo, Sequence FROM @MParam

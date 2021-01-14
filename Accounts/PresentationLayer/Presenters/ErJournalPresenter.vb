@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -102,26 +101,41 @@ Namespace PresentationLayer.Presenters
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
                     View.JournalItems = New List(Of IJournalItemView) From {
-                        NewJournalItem()
+                        FirstJournalItem()
                     }
                 End If
                 For Each item In View.JournalItems
-                    item.JournalIdNo = View.IdNo
+                    MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
                     item.Sequence = 1
                     item.AccountIdNo = View.AccountIdNo
                     Dim tranType As String = CodeToEnum(Of TransactionTypeSelection)(View.TransactionType)
-                    If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Credit Then
-                        item.Debit = View.Amount
-                        item.Credit = 0
+                    If tranType = TransactionTypeSelection.Invoice Or tranType = TransactionTypeSelection.Debit Then
+                        If item.Debit = 0 Or CountErItems() <= 1 Then
+                            item.Debit = View.Amount
+                            item.Credit = 0
+                        End If
                     Else
-                        item.Debit = 0
-                        item.Credit = View.Amount
+                        If item.Credit = 0 Or CountErItems() <= 1 Then
+                            item.Debit = 0
+                            item.Credit = View.Amount
+                        End If
                     End If
+                    ' ER accounts are asset accounts so no revenue cost centers
                     item.RevCostCenterIdNo = 0
                     Exit For
                 Next
             End If
         End Sub
+
+        Public Function CountErItems()
+            Dim nCount = 0
+            For Each item In View.JournalItems
+                If item.SpecialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
+                    nCount = nCount + 1
+                End If
+            Next
+            Return nCount
+        End Function
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
@@ -142,46 +156,50 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
-                Dim cPayeeType As String
                 Dim cashAccount As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount)
-                Dim specialAccount As String
-                Dim account As AccountModel
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("ER Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Employee Receivable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
+                    Dim nTotalEr As Decimal = 0
                     For Each item In View.JournalItems
-                        account = GetAccount(item.AccountIdNo)
-                        specialAccount = account.SpecialAccount
+                        If item.SpecialAccount = EnumToCode(SpecialAccountSelection.EmployeeLoan) Then
+                            If View.TransactionType = "I" Or View.TransactionType = "D" Then
+                                nTotalEr = nTotalEr + item.Debit - item.Credit
+                            Else
+                                nTotalEr = nTotalEr + item.Credit - item.Debit
+                            End If
+                        End If
                         If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
-                            MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+                            Dim lineNumber As String = item.Sequence.ToString()
+                            Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
-                        ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
+                        ElseIf item.SpecialAccount IsNot Nothing AndAlso cashAccount.Contains(item.SpecialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Dim caption = "Invalid Entry!"
-                            Dim message = Messaging.GetMessage(True, "MsgCashAccountsNotAllowed")
-                            message = message.Interpolate(Function(x) lineNumber)
-                            Messaging.Show(message, caption)
+                            Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                         Else
-                            cPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
-                            If Not String.IsNullOrEmpty(cPayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(cPayeeType) <> PayeeTypeSelection.Employee Then
+                            If Not String.IsNullOrEmpty(item.PayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(item.PayeeType) <> PayeeTypeSelection.Employee Then
                                 Dim lineNumber = Format(item.Sequence, "0")
-                                Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")
+                                Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivable")
                                 Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
                                 retValue = False
                             End If
                         End If
                     Next
+                    If nTotalEr <> View.Amount Then
+                        Messaging.Show(True, "MsgTotalErMismatch")
+                        retValue = False
+                    End If
                 End If
             End If
             Return retValue
         End Function
 
-        Private Function NewJournalItem()
+        Private Function FirstJournalItem()
             Dim item As New JournalItemView With {
                     .JournalIdNo = View.IdNo,
                     .Sequence = 0,
@@ -189,19 +207,21 @@ Namespace PresentationLayer.Presenters
                     .Debit = View.Amount,
                     .Credit = 0,
                     .RevCostCenterIdNo = 0,
-                    .Notes = ""
+                    .Notes = "",
+                    .SpecialAccount = Nothing,
+                    .PayeeType = Nothing
                     }
             Return item
         End Function
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmount As String
-            Dim totalCreditAmount As String
+            Dim totalErAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
             If language = "ar" Then
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
@@ -213,11 +233,11 @@ Namespace PresentationLayer.Presenters
                 View.TotalCredits = View.TotalCredits + item.Credit
             Next
             If language = "ar" Then
-                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
+                totalErAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
-                totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
+                totalErAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm("Employee Receivable Journal.Rpt", View.IdNo, "ErJournalIdNo", transactionAmount, "ERAmountInWords", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
+            Dim cForm As New ReportForm("Employee Receivable Journal.Rpt", View.IdNo, "ErJournalIdNo", transactionAmount, "ERAmountInWords", totalErAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 

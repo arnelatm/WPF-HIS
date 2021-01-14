@@ -12,13 +12,15 @@
     [InvoiceNo]          VARCHAR (15)   NOT NULL,
     [InvoiceDate]        DATE           NULL,
     [Notes]              NVARCHAR (255) NOT NULL,
-    [VatAmount]          MONEY          NOT NULL,
+    [VatAmount]          MONEY          NULL,
     [Posted]             BIT            NULL,
     [Cancelled]          BIT            NULL,
     [DateCreated]        DATETIME       CONSTRAINT [DF_ArJournal_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]      ROWVERSION     NOT NULL,
     CONSTRAINT [PK_ArJournal] PRIMARY KEY CLUSTERED ([IDNo] ASC)
 );
+
+
 
 
 
