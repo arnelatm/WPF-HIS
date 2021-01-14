@@ -221,6 +221,51 @@ Namespace PresentationLayer.Presenters
             Return tiVatAmount
         End Function
 
+        Public Function UpdateOutputVatAmount(journalItems As List(Of IJournalItemView))
+            Dim toVatAmount As Decimal = 0
+            Dim OutputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
+            For Each item In journalItems
+                If item.SpecialAccount = OutputVatAccount Then
+                    toVatAmount = toVatAmount + item.Credit - item.Debit
+                End If
+            Next
+            Return toVatAmount
+        End Function
+
+        Public Sub MakeSpAcctNPayType(journalItems As List(Of IJournalItemView), accountIdNo As Int16, nIndex As Int16)
+            Dim account As AccountModel
+            journalItems(nIndex).AccountIdNo = accountIdNo
+            account = GetAccount(accountIdNo)
+            journalItems(nIndex).SpecialAccount = account.SpecialAccount
+            journalItems(nIndex).PayeeType = account.PayeeType
+        End Sub
+
+        Public Sub MakeDebitAmount(journalItems As List(Of IJournalItemView), amount As Decimal, nIndex As Int16)
+            If amount > 0 Then
+                journalItems(nIndex).Credit = 0
+            ElseIf amount < 0 Then
+                journalItems(nIndex).Credit = amount * -1
+                journalItems(nIndex).Debit = 0
+            End If
+        End Sub
+
+        Public Sub MakeCreditAmount(journalItems As List(Of IJournalItemView), amount As Decimal, nIndex As Int16)
+            If amount > 0 Then
+                journalItems(nIndex).Debit = 0
+            ElseIf amount < 0 Then
+                journalItems(nIndex).Debit = amount * -1
+                journalItems(nIndex).Credit = 0
+            End If
+        End Sub
+
+        Public Sub MakePayTypeAndSpecialAccount(journalItem As IJournalItemView, accountIdNo As Int16)
+            Dim account As AccountModel
+            account = GetAccount(accountIdNo)
+            journalItem.AccountIdNo = accountIdNo
+            journalItem.SpecialAccount = account.SpecialAccount
+            journalItem.PayeeType = account.PayeeType
+        End Sub
+
     End Class
 
 End Namespace

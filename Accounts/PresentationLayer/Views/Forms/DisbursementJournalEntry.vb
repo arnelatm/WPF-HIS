@@ -570,45 +570,26 @@ Namespace PresentationLayer.Views.Forms
                 Dim nIndex = .CurrentRow.Index
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
-                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
                         If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
                             bsJournalItems.AddNew()
-                            JournalItems(nIndex).AccountIdNo = newValue
+                            JournalItems(nIndex).AccountIdNo = accountId
                             ' adding a new row to the bindingsource adds a new empty row at the end with null values
                             ' therefore there is a need to remove that row because it causes errors when moving to that empty row
                             bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
                         End If
-                        JournalItems(nIndex).AccountIdNo = newValue
-                        Dim account As AccountModel
-                        account = MyPresenter.GetAccount(newValue)
-                        With DataGridViewJournalItems.CurrentRow
-                            JournalItems(nIndex).SpecialAccount = account.SpecialAccount
-                            JournalItems(nIndex).PayeeType = account.PayeeType
-                        End With
+                        MyPresenter.MakeSpAcctNPayType(JournalItems, accountId, nIndex)
                         UpdateInputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
                         DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
-                        Dim newValue = .CurrentCell.Value
-                        If newValue > 0 Then
-                            JournalItems(nIndex).Credit = 0
-                            JournalItems(nIndex).Credit = 0
-                        ElseIf newValue < 0 Then
-                            JournalItems(nIndex).Credit = newValue * -1
-                            JournalItems(nIndex).Debit = 0
-                        End If
+                        MyPresenter.MakeDebitAmount(JournalItems, .CurrentCell.Value, nIndex)
                         UpdateJiTotals()
                         UpdateInputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
-                        Dim newValue = .CurrentCell.Value
-                        If newValue > 0 Then
-                            JournalItems(nIndex).Debit = 0
-                        ElseIf newValue < 0 Then
-                            JournalItems(nIndex).Debit = newValue * -1
-                            JournalItems(nIndex).Credit = 0
-                        End If
+                        MyPresenter.MakeCreditAmount(JournalItems, .CurrentCell.Value, nIndex)
                         UpdateJiTotals()
                         UpdateInputVatAmount()
                         bsJournalItems.ResetItem(nIndex)

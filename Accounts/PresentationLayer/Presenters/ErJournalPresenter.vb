@@ -47,12 +47,6 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        'Public Sub OnAfterSave() Handles MyBase.AfterSave
-        '    If IsEmpty(View.ReferenceNo) Then
-        '        UpdateGlReferenceNumber()
-        '    End If
-        'End Sub
-
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()
@@ -96,9 +90,9 @@ Namespace PresentationLayer.Presenters
         Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_erJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
-            If retVal > 0 Then
+            If retVal >= 0 Then
                 If IsEmpty(View.ReferenceNo) Then
-                    UpdateGlReferenceNumber()
+                    retVal = UpdateGlReferenceNumber()
                 End If
             End If
             Return retVal

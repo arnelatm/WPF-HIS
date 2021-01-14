@@ -26,13 +26,13 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
-            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ArJournalEntry))
             Me.floArJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
@@ -80,6 +80,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpSettlementDueDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
@@ -115,24 +117,24 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewJournalItems
             '
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewJournalItems.AutoGenerateColumns = False
             Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvPaidAmount, Me.dgvDiscountTaken, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.dgvIdNo, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.SpecialAccountDataGridViewTextBoxColumn})
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
-            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle12
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle6
             Me.DataGridViewJournalItems.DgvFooter = Nothing
             Me.DataGridViewJournalItems.DisplayOnly = False
             Me.DataGridViewJournalItems.Dock = System.Windows.Forms.DockStyle.Left
-            Me.DataGridViewJournalItems.Ea = EventAggregator2
+            Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewJournalItems.FirstRowDeletionEnabled = False
@@ -150,9 +152,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvSequence
             '
             Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             Me.dgvSequence.HeaderText = "Seq."
@@ -175,11 +177,11 @@ Namespace PresentationLayer.Views.Forms
             'dgvDebit
             '
             Me.dgvDebit.DataPropertyName = "Debit"
-            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle9.Format = "###,##0.00"
-            Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle3.Format = "###,##0.00"
+            Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle3
             Me.dgvDebit.EditingMode = False
             Me.dgvDebit.HeaderText = "Debit"
             Me.dgvDebit.Name = "dgvDebit"
@@ -190,11 +192,11 @@ Namespace PresentationLayer.Views.Forms
             'dgvCredit
             '
             Me.dgvCredit.DataPropertyName = "Credit"
-            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle10.Format = "###,##0.00"
-            Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle10
+            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle4.Format = "###,##0.00"
+            Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle4
             Me.dgvCredit.EditingMode = False
             Me.dgvCredit.HeaderText = "Credit"
             Me.dgvCredit.Name = "dgvCredit"
@@ -217,9 +219,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvNotes.DataPropertyName = "Notes"
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle11
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvNotes.EditingMode = False
             Me.dgvNotes.HeaderText = "Notes"
             Me.dgvNotes.Name = "dgvNotes"
@@ -316,7 +318,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCancelled.EditingMode = False
             Me.lblCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblCancelled.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblCancelled.Location = New System.Drawing.Point(11, 61)
+            Me.lblCancelled.Location = New System.Drawing.Point(11, 86)
             Me.lblCancelled.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCancelled.Name = "lblCancelled"
             Me.lblCancelled.Size = New System.Drawing.Size(97, 23)
@@ -338,13 +340,15 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.ForeColor = System.Drawing.Color.Black
             Me.chkPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkPosted.LinkedLabel = Me.lblPosted
-            Me.chkPosted.Location = New System.Drawing.Point(110, 86)
+            Me.chkPosted.Location = New System.Drawing.Point(110, 111)
             Me.chkPosted.Margin = New System.Windows.Forms.Padding(1)
             Me.chkPosted.Name = "chkPosted"
             Me.chkPosted.NoLabel = True
             Me.chkPosted.OldValue = Nothing
             Me.chkPosted.Size = New System.Drawing.Size(23, 21)
             Me.chkPosted.TabIndex = 6
+            Me.chkPosted.TabStop = False
+            Me.chkPosted.Text = " "
             Me.chkPosted.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.chkPosted.UseVisualStyleBackColor = False
             '
@@ -354,7 +358,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPosted.EditingMode = False
             Me.lblPosted.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPosted.Location = New System.Drawing.Point(11, 86)
+            Me.lblPosted.Location = New System.Drawing.Point(11, 111)
             Me.lblPosted.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPosted.Name = "lblPosted"
             Me.lblPosted.Size = New System.Drawing.Size(97, 23)
@@ -865,6 +869,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.CLabel5)
             Me.CFlowLayout2.Controls.Add(Me.txtSettlementDiscount)
             Me.CFlowLayout2.Controls.Add(Me.lblPercent)
+            Me.CFlowLayout2.Controls.Add(Me.lblVatAmount)
+            Me.CFlowLayout2.Controls.Add(Me.txtVatAmount)
             Me.CFlowLayout2.Controls.Add(Me.lblCancelled)
             Me.CFlowLayout2.Controls.Add(Me.chkCancelled)
             Me.CFlowLayout2.Controls.Add(Me.lblPosted)
@@ -876,6 +882,46 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Padding = New System.Windows.Forms.Padding(10)
             Me.CFlowLayout2.Size = New System.Drawing.Size(246, 192)
             Me.CFlowLayout2.TabIndex = 1
+            '
+            'lblVatAmount
+            '
+            Me.lblVatAmount.DisplayOnly = True
+            Me.lblVatAmount.EditingMode = False
+            Me.lblVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblVatAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblVatAmount.Location = New System.Drawing.Point(11, 61)
+            Me.lblVatAmount.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblVatAmount.Name = "lblVatAmount"
+            Me.lblVatAmount.Size = New System.Drawing.Size(97, 23)
+            Me.lblVatAmount.TabIndex = 286
+            Me.lblVatAmount.Text = "Vat Amount"
+            Me.lblVatAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtVatAmount
+            '
+            Me.txtVatAmount.BackColor = System.Drawing.Color.White
+            Me.txtVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtVatAmount.ComputedValue = False
+            Me.txtVatAmount.CustomFormat = Nothing
+            Me.txtVatAmount.DataBoundControl = True
+            Me.txtVatAmount.EditingMode = False
+            Me.CFlowLayout2.SetFlowBreak(Me.txtVatAmount, True)
+            Me.txtVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
+            Me.txtVatAmount.LinkedLabel = Me.lblAmount
+            Me.txtVatAmount.Location = New System.Drawing.Point(110, 61)
+            Me.txtVatAmount.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtVatAmount.MaximumValue = Nothing
+            Me.txtVatAmount.MinimumValue = Nothing
+            Me.txtVatAmount.Name = "txtVatAmount"
+            Me.txtVatAmount.OldValue = Nothing
+            Me.txtVatAmount.ReadOnly = True
+            Me.txtVatAmount.Size = New System.Drawing.Size(122, 23)
+            Me.txtVatAmount.TabIndex = 268
+            Me.txtVatAmount.TabStop = False
+            Me.txtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtVatAmount.ValueIsMandatory = True
+            Me.txtVatAmount.ValueIsNumeric = True
             '
             'CLabel2
             '
@@ -926,6 +972,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpSettlementDueDate.ShowTime = False
             Me.dtpSettlementDueDate.Size = New System.Drawing.Size(130, 24)
             Me.dtpSettlementDueDate.TabIndex = 3
+            Me.dtpSettlementDueDate.TabStop = False
             Me.dtpSettlementDueDate.TargetCalendar = CType(resources.GetObject("dtpSettlementDueDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpSettlementDueDate.Value = Nothing
             Me.dtpSettlementDueDate.ValueIsMandatory = False
@@ -965,6 +1012,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSettlementDiscount.ReadOnly = True
             Me.txtSettlementDiscount.Size = New System.Drawing.Size(35, 23)
             Me.txtSettlementDiscount.TabIndex = 4
+            Me.txtSettlementDiscount.TabStop = False
             Me.txtSettlementDiscount.ValueIsMandatory = True
             Me.txtSettlementDiscount.ValueIsNumeric = True
             '
@@ -997,13 +1045,15 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.ForeColor = System.Drawing.Color.Black
             Me.chkCancelled.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkCancelled.LinkedLabel = Me.lblCancelled
-            Me.chkCancelled.Location = New System.Drawing.Point(110, 61)
+            Me.chkCancelled.Location = New System.Drawing.Point(110, 86)
             Me.chkCancelled.Margin = New System.Windows.Forms.Padding(1)
             Me.chkCancelled.Name = "chkCancelled"
             Me.chkCancelled.NoLabel = True
             Me.chkCancelled.OldValue = Nothing
             Me.chkCancelled.Size = New System.Drawing.Size(23, 21)
             Me.chkCancelled.TabIndex = 5
+            Me.chkCancelled.TabStop = False
+            Me.chkCancelled.Text = " "
             Me.chkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.chkCancelled.UseVisualStyleBackColor = False
             '
@@ -1013,7 +1063,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateAdded.EditingMode = False
             Me.lblDateAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblDateAdded.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDateAdded.Location = New System.Drawing.Point(11, 111)
+            Me.lblDateAdded.Location = New System.Drawing.Point(11, 136)
             Me.lblDateAdded.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDateAdded.Name = "lblDateAdded"
             Me.lblDateAdded.Size = New System.Drawing.Size(40, 26)
@@ -1031,7 +1081,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated.EditsAllowed = False
             Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
             Me.dtpDateCreated.LinkedLabel = Nothing
-            Me.dtpDateCreated.Location = New System.Drawing.Point(53, 111)
+            Me.dtpDateCreated.Location = New System.Drawing.Point(53, 136)
             Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpDateCreated.Name = "dtpDateCreated"
             Me.dtpDateCreated.ReadOnlyDp = True
@@ -1040,6 +1090,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated.ShowTime = True
             Me.dtpDateCreated.Size = New System.Drawing.Size(150, 25)
             Me.dtpDateCreated.TabIndex = 285
+            Me.dtpDateCreated.TabStop = False
             Me.dtpDateCreated.TargetCalendar = Nothing
             Me.dtpDateCreated.Value = Nothing
             Me.dtpDateCreated.ValueIsMandatory = False
@@ -1137,5 +1188,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
+        Friend WithEvents lblVatAmount As CLabel
+        Friend WithEvents txtVatAmount As CTextBox
     End Class
 End NameSpace
