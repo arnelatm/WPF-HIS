@@ -425,18 +425,18 @@ Namespace PresentationLayer.Views.Forms
                             ' therefore there is a need to remove that row because it causes errors when moving to that empty row
                             bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
                         End If
-                        MyPresenter.MakeSpAcctNPayType(JournalItems, accountId, nIndex)
+                        MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
                         UpdateOutputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
                         DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
-                        MyPresenter.MakeDebitAmount(JournalItems, .CurrentCell.Value, nIndex)
+                        MyPresenter.MakeDebitAmount(JournalItems, .CurrentCell.Value)
                         UpdateTotals()
                         UpdateOutputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
-                        MyPresenter.MakeCreditAmount(JournalItems, .CurrentCell.Value, nIndex)
+                        MyPresenter.MakeCreditAmount(JournalItems, .CurrentCell.Value)
                         UpdateTotals()
                         UpdateOutputVatAmount()
                         bsJournalItems.ResetItem(nIndex)
