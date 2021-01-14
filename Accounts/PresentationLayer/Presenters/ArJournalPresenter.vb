@@ -162,7 +162,6 @@ Namespace PresentationLayer.Presenters
                         NewJournalItem()
                     }
                 End If
-                Dim account As AccountModel
                 For Each item In View.JournalItems
                     If View.AccountIdNo IsNot Nothing Then
                         account = GetAccount(View.AccountIdNo)

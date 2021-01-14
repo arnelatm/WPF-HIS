@@ -241,7 +241,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub cboParentIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboParentIdNo.SelectedIndexChanged
+        Private Sub CboParentIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboParentIdNo.SelectedIndexChanged
             If PresenterObj.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
                 cboAccountGroup.DisplayOnly = False
             Else

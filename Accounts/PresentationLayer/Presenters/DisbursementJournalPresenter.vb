@@ -914,6 +914,7 @@ Namespace PresentationLayer.Presenters
                     item.Credit = View.Amount
                     item.Debit = 0
                     item.RevCostCenterIdNo = 0
+                    MakeSpAcctNPayType(item, accountId, nIndex)
                     Exit For
                 Next
             End If
