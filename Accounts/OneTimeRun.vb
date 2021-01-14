@@ -63,6 +63,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open")
         Messaging.AddMessage("MsgTotalApMismatch", "Sorry, total header A.P. does not match total details A.P.!", "Invalid Entry")
         Messaging.AddMessage("MsgTotalArMismatch", "Sorry, total header A.R. does not match total details A.R.!", "Invalid Entry")
+        Messaging.AddMessage("MsgTotalErMismatch", "Sorry, total header Employee Loans does not match total details Employee Loans!", "Invalid Entry")
         Messaging.AddMessage("MsgValidationCompareEqual", "{propertyName} must be equal to {otherPropertyName}", "Validation Error")
         Messaging.AddMessage("MsgValidationCompareNotEqual", "{propertyName} must not be equal to {otherPropertyName}", "Validation Error")
         Messaging.AddMessage("RptForTheMonth", "{reportName} for the Month of {monthName} {year}", "")

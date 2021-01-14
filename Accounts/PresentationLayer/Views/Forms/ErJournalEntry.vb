@@ -3,7 +3,6 @@ Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -15,17 +14,18 @@ Namespace PresentationLayer.Views.Forms
 
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
+
+        Private Property MyPresenter As ArJournalPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _footer As DgvFooter
         Private _journalItems As List(Of IJournalItemView)
-        Private _revCostCenterByCode
+        Private _revCostCentersByCode
 
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "ErJournal"
             SortOrderKey = "IdNo"
@@ -34,15 +34,11 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New ErJournalPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-
         End Sub
 
         ' This event handler provides custom item-creation behavior.
-        Private Sub journalItemsBindingSource_AddingNew(
-                                                        ByVal sender As Object,
-                                                        ByVal e As AddingNewEventArgs) _
-            Handles bsJournalItems.AddingNew
-            e.NewObject = New JournalItemView
+        Private Sub JournalItemsBindingSource_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+            MyPresenter.AddNewItemOnBindingSource(Of JournalItemView)(e, bsJournalItems, DataGridViewJournalItems)
         End Sub
 
 #Region "Fields"
@@ -190,7 +186,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
+            _revCostCentersByCode = PresenterObj.GetLookup("RevCostCenter")
             cboEmployeeIdNo.BeginUpdate()
             cboEmployeeIdNo.DataSource = PresenterObj.GetLookup("Employee")
             cboEmployeeIdNo.EndUpdate()
@@ -223,6 +219,17 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
+        Private Sub ErJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            _footer = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
+            _footer.ColumnToSum("dgvDebit") = True
+            _footer.ColumnToSum("dgvCredit") = True
+            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
+            _footer.SetText("DgvAccountIdNo", "Totals ->")
+        End Sub
+
         Private Sub BindJournalItem()
             SuspendLayout()
             bsJournalItems.DataSource = Nothing
@@ -230,10 +237,10 @@ Namespace PresentationLayer.Views.Forms
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems
-                .Refresh()
+                '.Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
-                .Refresh()
+                '.Refresh()
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -243,7 +250,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DataSource = _revCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -274,20 +281,8 @@ Namespace PresentationLayer.Views.Forms
             _footer.Dispose()
         End Sub
 
-        Private Sub ErJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _footer = New DgvFooter(DataGridViewJournalItems) With {
-                .AutoCalc = True
-            }
-            _footer.ColumnToSum("dgvDebit") = True
-            _footer.ColumnToSum("dgvCredit") = True
-            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
-            _footer.SetText("DgvAccountIdNo", "Totals ->")
-        End Sub
-
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
             PresenterObj.UpdateFirstLine()
-            'BindJournalItem()
             UpdateTotals()
             DataGridViewJournalItems.Refresh()
         End Sub
@@ -297,7 +292,8 @@ Namespace PresentationLayer.Views.Forms
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
-                    If cColumnName = $"dgvaccountidno" Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+                    ' don't allow edits for first line entries account id no and amounts if only single ER
+                    If cColumnName = $"dgvaccountidno" Or ((cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit") AndAlso MyPresenter.CountErItems() <= 1) Then
                         Beep()
                         e.Cancel = True
                         DataGridViewJournalItems.EndEdit()
@@ -315,21 +311,29 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
             Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
+                Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
                     Case $"dgvaccountidno"
-                        Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
-                        Dim newValue = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        If nIndex + 1 <= DataGridViewJournalItems.RowCount() Then
-                            If nIndex < JournalItems.Count() Then
-                                JournalItems(nIndex).AccountIdNo = newValue
-                                'BindJournalItem()
-                            End If
+                        Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
+                            bsJournalItems.AddNew()
+                            JournalItems(nIndex).AccountIdNo = accountId
+                            ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                            ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                            bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
                         End If
+                        MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
+                        bsJournalItems.ResetItem(nIndex)
+                        DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
+                        MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
                         UpdateTotals()
+                        bsJournalItems.ResetItem(nIndex)
                         SendKeys.Send("{TAB}")
                     Case $"dgvcredit"
+                        MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
                         UpdateTotals()
+                        bsJournalItems.ResetItem(nIndex)
                     Case $"dgvnotes"
                         SendKeys.Send("{DOWN}")
                 End Select
@@ -346,23 +350,23 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If DataGridViewJournalItems IsNot Nothing Then
-                DataGridViewJournalItems.Focus()
-            End If
+            MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
         End Sub
 
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                'TotalDebits = _footer.Value("dgvDebit")
-                'TotalCredits = _footer.Value("dgvCredit")
             End If
         End Sub
 
-        Private Sub UserDeletingRow(ByVal sender As Object,
-                                            ByVal e As DataGridViewRowCancelEventArgs) _
-            Handles DataGridViewJournalItems.UserDeletingRow
-            If PresenterObj.EditMode Then
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
+            Dim erJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
+            If DataGridViewJournalItems.SelectedRows.Contains(erJournalRow) Then
+                ' Do not allow the user to delete the first row.
+                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
+                ' Cancel the deletion
+                e.Cancel = True
+            ElseIf MyPresenter.EditMode Then
                 Dim jiIdNo As Integer
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
                 If PresenterObj.ArCollectionExists("ER", jiIdNo) Then

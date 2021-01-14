@@ -19,6 +19,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("CustomerIdNo"))
                 AddRule(New ValidateRequired("InvoiceNo"))
                 AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
+                AddRule(New ValidateRequired("TransactionType"))
             End If
         End Sub
 
