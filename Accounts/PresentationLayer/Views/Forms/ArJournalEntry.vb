@@ -250,6 +250,24 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property VatAmount As Decimal Implements IArJournalView.VatAmount
+            Get
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
+            End Get
+            Set
+                txtVatAmount.Text = FormatMoney(Value)
+            End Set
+        End Property
+
+        Public Property VatAmount As Decimal Implements IArJournalView.VatAmount
+            Get
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
+            End Get
+            Set
+                txtVatAmount.Text = FormatMoney(Value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()

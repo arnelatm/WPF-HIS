@@ -119,8 +119,9 @@ Namespace DataLayer.AdoNet
             .SettlementDiscount = Extensions.AsDecimal(reader("SettlementDiscount")),
             .SettlementDueDate = Extensions.AsDate(reader("SettlementDueDate")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-            .TransactionType = Extensions.AsString(reader("TransactionType")),
-            .VatAmount = Extensions.AsString(reader("VatAmount"))
+            .TransactionType = Extensions.AsString(reader("TransactionType"))
+            .VatAmount = Extensions.AsDecimal(reader("VatAmount"))
+        .VatAmount = Extensions.AsDecimal(reader("VatAmount"))
             }
 
         Private Function Take(arJournal As ArJournal) As Object()
