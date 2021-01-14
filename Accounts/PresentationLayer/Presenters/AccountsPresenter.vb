@@ -240,21 +240,21 @@ Namespace PresentationLayer.Presenters
             journalItems(nIndex).PayeeType = account.PayeeType
         End Sub
 
-        Public Sub MakeDebitAmount(journalItems As List(Of IJournalItemView), amount As Decimal, nIndex As Int16)
+        Public Sub MakeDebitAmount(journalItem As IJournalItemView, amount As Decimal)
             If amount > 0 Then
-                journalItems(nIndex).Credit = 0
+                journalItem.Credit = 0
             ElseIf amount < 0 Then
-                journalItems(nIndex).Credit = amount * -1
-                journalItems(nIndex).Debit = 0
+                journalItem.Credit = amount * -1
+                journalItem.Debit = 0
             End If
         End Sub
 
-        Public Sub MakeCreditAmount(journalItems As List(Of IJournalItemView), amount As Decimal, nIndex As Int16)
+        Public Sub MakeCreditAmount(journalItem As IJournalItemView, amount As Decimal)
             If amount > 0 Then
-                journalItems(nIndex).Debit = 0
+                journalItem.Debit = 0
             ElseIf amount < 0 Then
-                journalItems(nIndex).Debit = amount * -1
-                journalItems(nIndex).Credit = 0
+                journalItem.Debit = amount * -1
+                journalItem.Credit = 0
             End If
         End Sub
 
