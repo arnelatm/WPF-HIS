@@ -5,7 +5,6 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Presenters
@@ -24,7 +23,6 @@ Namespace PresentationLayer.Presenters
         Protected OiItemModel
         Protected DjItemModel
 
-        Private ReadOnly _defaultPettyCashAccount As Int16
         Private ReadOnly _presenterView
 
         Public Sub New(view As IDisbursementJournalView, ByVal tableOrViewName As String)
@@ -106,22 +104,27 @@ Namespace PresentationLayer.Presenters
 
         Protected Property CashCount As Int16
 
-        Public ReadOnly Property DefaultPettyCashAccount As Int16
+        Public ReadOnly Property DefaultAccount As Int16
             Get
-                Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
+                Dim specialAccount As Int16
+                If JournalCode = "PC" Then
+                    specialAccount = SpecialAccountSelection.PettyCashAccount
+                ElseIf JournalCode = "CD" Then
+                    specialAccount = SpecialAccountSelection.Cash
+                Else
+                    specialAccount = SpecialAccountSelection.CheckingAccount
+                End If
+                Return GetRecordFieldWithKey(EnumToCode(specialAccount), "Account", "SpecialAccount", "IdNo")
             End Get
         End Property
-
 
         Public ReadOnly Property CdAccountCount As Int16
             Get
                 Dim specialAccount As String
                 If JournalCode = "PC" Then
                     specialAccount = EnumToCode(SpecialAccountSelection.PettyCashAccount)
-                    Return ModelPresenter.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
                 ElseIf JournalCode = "CK" Then
                     specialAccount = EnumToCode(SpecialAccountSelection.CheckingAccount)
-                    Return ModelPresenter.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
                 Else
                     Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
                     Dim cdAccounts = GetAccountTypesList(accounts)
@@ -156,7 +159,6 @@ Namespace PresentationLayer.Presenters
                 Return CInt(retVal)
             End Get
         End Property
-
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
@@ -815,7 +817,6 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-
         Private Sub JournalItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("AccountIdNo") = itemDataView.AccountIdNo
             workRow("Credit") = itemDataView.Credit
@@ -846,7 +847,6 @@ Namespace PresentationLayer.Presenters
             End If
             Return True
         End Function
-
 
         Public Sub AddSupplierOpenInvoices()
             If _presenterView.PayeeIdNo <> 0 Then
@@ -956,7 +956,6 @@ Namespace PresentationLayer.Presenters
                 }
             Return item
         End Function
-
 
     End Class
 

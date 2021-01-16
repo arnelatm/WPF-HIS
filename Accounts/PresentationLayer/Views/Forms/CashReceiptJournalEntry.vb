@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views.Forms
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
 
+        Private Property MyPresenter As CashReceiptJournalPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Private ReadOnly _payorOrigWidth As Integer
@@ -28,6 +29,7 @@ Namespace PresentationLayer.Views.Forms
         Private _journalItems As List(Of IJournalItemView)
         Private _revCostCenterByCode
         Private _viewGl As Boolean = False
+        Private _defaultAccount As Int16
 
         Public Sub New()
             MyBase.New()
@@ -40,18 +42,22 @@ Namespace PresentationLayer.Views.Forms
 
             _payorOrigWidth = cboPayorIdNo.Width
             _nfi.NumberDecimalDigits = 2
-            PresenterObj = New CashReceiptJournalPresenter(Me)
+            MyPresenter = New CashReceiptJournalPresenter(Me)
+            PresenterObj = MyPresenter
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
         End Sub
 
-        ' This event handler provides custom item-creation behavior.
-        Private Sub journalItemsBindingSource_AddingNew(
-                                                        ByVal sender As Object,
-                                                        ByVal e As AddingNewEventArgs) _
-            Handles bsJournalItems.AddingNew
+        Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
             e.NewObject = New JournalItemView
+            ' work arround for error on datagrid entry on lastrow please do not remove.
+            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
+                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+            End If
         End Sub
 
 #Region "Fields"
@@ -342,9 +348,39 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            MyBase.RecordPositionChanged(e)
             UpdateLayout()
             UpdateTotals()
+        End Sub
+
+        Private Sub CashReceiptJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            KeyPreview = True
+            _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
+                .AutoCalc = True
+            }
+            _jiFooter.ColumnToSum("dgvDebit") = True
+            _jiFooter.ColumnToSum("dgvCredit") = True
+            _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
+
+            _arFooter = New DgvFooter(DataGridViewCsrOiItems) With {
+                .AutoCalc = True
+            }
+            _arFooter.ColumnToSum("dgvAmount") = True
+            _arFooter.ColumnToSum("dgvDiscountTaken") = True
+            _arFooter.ColumnToSum("dgvBalance") = True
+            _arFooter.ColumnToSum("dgvPreviousBalance") = True
+            _arFooter.SetText("dgvJournalIdNoAp", "Totals")
+
+            If MyPresenter.CrAccountCount = 1 Then
+                cboAccountIdNo.DisplayOnly = True
+                cboAccountIdNo.TabStop = False
+            ElseIf MyPresenter.CrAccountCount = 0 Then
+                Dim accountName As String
+                accountName = Messaging.TranslateCaption("Cash")
+                Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
+                MyPresenter.GoQuit()
+            End If
+            BindJournalItem()
+            BindCsrOiItem()
         End Sub
 
         Private Sub BindCsrOiItem()
@@ -381,10 +417,10 @@ Namespace PresentationLayer.Views.Forms
             bsJournalItems.DataSource = JournalItems
             bsJournalItems.AllowNew = True
             With DataGridViewJournalItems
-                .Refresh()
+                '.Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsJournalItems
-                .Refresh()
+                '.Refresh()
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
@@ -403,17 +439,45 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
-            If _viewGl Then
-                _viewGl = False
-                DataGridViewJournalItems.Visible = False
-                DataGridViewCsrOiItems.Visible = True
-                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+        Public Overloads Sub Dispose()
+            Close()
+        End Sub
+
+        Private Sub TxtAmount_Validated(sender As Object, e As EventArgs) Handles txtAmount.Validated
+            If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+                UpdateOiTotals()
+            End If
+            UpdateFirstLine()
+        End Sub
+
+        Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated, cboPayorIdNo.SelectionChangeCommitted
+            If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Or CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.Customer Then
+                If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+                    bsCsrOiItems.Clear()
+                    UpdateOiTotals()
+                    PresenterObj.AddCustomerOpenInvoices()
+                    BindCsrOiItem()
+                End If
+            End If
+        End Sub
+
+        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
+            If DataGridViewJournalItems.Visible Then
+                If DataGridViewJournalItems IsNot Nothing Then
+                    DataGridViewJournalItems.Focus()
+                    If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
+                        ' if after focus and currentcell is not empty
+                        DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
+                    End If
+                End If
             Else
-                _viewGl = True
-                DataGridViewJournalItems.Visible = True
-                DataGridViewCsrOiItems.Visible = False
-                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+                If DataGridViewJournalItems IsNot Nothing Then
+                    DataGridViewCsrOiItems.Focus()
+                    If DataGridViewCsrOiItems.CurrentCell IsNot Nothing Then
+                        ' if after focus and currentcell is not empty
+                        DataGridViewCsrOiItems.CurrentCell = DataGridViewCsrOiItems(5, 0)
+                    End If
+                End If
             End If
         End Sub
 
@@ -448,41 +512,8 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub CashReceiptJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            KeyPreview = True
-            _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
-                .AutoCalc = True
-            }
-            _jiFooter.ColumnToSum("dgvDebit") = True
-            _jiFooter.ColumnToSum("dgvCredit") = True
-            _jiFooter.SetText("DgvAccountIdNo", "Totals ->")
-
-            _arFooter = New DgvFooter(DataGridViewCsrOiItems) With {
-                .AutoCalc = True
-            }
-            _arFooter.ColumnToSum("dgvAmount") = True
-            _arFooter.ColumnToSum("dgvDiscountTaken") = True
-            _arFooter.ColumnToSum("dgvBalance") = True
-            _arFooter.ColumnToSum("dgvPreviousBalance") = True
-            _arFooter.SetText("dgvJournalIdNoAp", "Totals")
-
-        End Sub
-
         Private Sub CboAccountIdNo_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated, cboPayorType.Validated, cboAccountIdNo.Validated
             UpdateFirstLine()
-        End Sub
-
-        Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated, cboPayorIdNo.SelectedIndexChanged
-            If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Or CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.Customer Then
-                If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
-                    'If cboPayorIdNo.PreviousSelectedIndex <> cboPayorIdNo.SelectedIndex Then
-                    bsCsrOiItems.Clear()
-                    UpdateOiTotals()
-                    'End If
-                    PresenterObj.AddCustomerOpenInvoices()
-                    BindCsrOiItem()
-                End If
-            End If
         End Sub
 
         Private Sub UpdateLayout()
@@ -512,10 +543,6 @@ Namespace PresentationLayer.Views.Forms
                 'tlpDisbursement.SetCellPosition(cboPayorIdNo, New TableLayoutPanelCellPosition(12, 8))
                 'tlpDisbursement.SetCellPosition(txtPayorName, New TableLayoutPanelCellPosition(5, 1))
             End If
-        End Sub
-
-        Public Overloads Sub Dispose()
-            Close()
         End Sub
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
@@ -632,32 +659,6 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub TxtAmount_ValueChanged(sender As Object, e As EventArgs) Handles txtAmount.Validated
-            If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.AccountsReceivable Then
-                UpdateOiTotals()
-            End If
-        End Sub
-
-        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If DataGridViewJournalItems.Visible Then
-                If DataGridViewJournalItems IsNot Nothing Then
-                    DataGridViewJournalItems.Focus()
-                    If DataGridViewJournalItems.CurrentCell IsNot Nothing Then
-                        ' if after focus and currentcell is not empty
-                        DataGridViewJournalItems.CurrentCell = DataGridViewJournalItems(DataGridViewJournalItems.Columns("dgvRevCostCenterIdNo").Index(), 0)
-                    End If
-                End If
-            Else
-                If DataGridViewJournalItems IsNot Nothing Then
-                    DataGridViewCsrOiItems.Focus()
-                    If DataGridViewCsrOiItems.CurrentCell IsNot Nothing Then
-                        ' if after focus and currentcell is not empty
-                        DataGridViewCsrOiItems.CurrentCell = DataGridViewCsrOiItems(5, 0)
-                    End If
-                End If
-            End If
-        End Sub
-
         Private Sub UpdateFirstLine()
             If PresenterObj.EditMode Or PresenterObj.AddMode Then
                 If bsJournalItems IsNot Nothing Then
@@ -725,6 +726,20 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CboPayorType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectedIndexChanged
             SetPayorProperty(cboPayorType.SelectedValue)
             UpdateLayout()
+        End Sub
+
+        Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
+            If _viewGl Then
+                _viewGl = False
+                DataGridViewJournalItems.Visible = False
+                DataGridViewCsrOiItems.Visible = True
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+            Else
+                _viewGl = True
+                DataGridViewJournalItems.Visible = True
+                DataGridViewCsrOiItems.Visible = False
+                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+            End If
         End Sub
 
     End Class

@@ -6,15 +6,16 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports System.ComponentModel
 
 Namespace PresentationLayer.Presenters
 
     Public Class CashReceiptJournalPresenter
         Inherits AccountsPresenter(Of ICashReceiptJournalView, CashReceiptJournalModel)
 
+        Protected DtInsertTable As New DataTable
         Protected DtCsrOiInsertTable As New DataTable
         Protected DtCsrOiUpdateTable As New DataTable
-        Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
         Private ReadOnly _advancesToCustomerAccountIdNo As Int16
@@ -29,42 +30,51 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New CashReceiptJournalModel()
             DataModel = New CashReceiptJournalModel
+
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
             _advancesToCustomerAccountIdNo = GetCustomerAdvancesAccountIdNo()
 
-            DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
-            DtInsertTable.Columns.Add("Credit", GetType(Decimal))
-            DtInsertTable.Columns.Add("Debit", GetType(Decimal))
-            DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Notes", GetType(String))
-            DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtInsertTable, {{"AccountIdNo", GetType(Int16)},
+                                            {"Credit", GetType(Decimal)},
+                                            {"Debit", GetType(Decimal)},
+                                            {"JournalIdNo", GetType(Int32)},
+                                            {"Notes", GetType(String)},
+                                            {"RevCostCenterIdNo", GetType(Int16)},
+                                            {"Sequence", GetType(Int16)}})
 
-            DtUpdateTable.Columns.Add("AccountIdNo", GetType(Int16))
-            DtUpdateTable.Columns.Add("Credit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("Debit", GetType(Decimal))
-            DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Notes", GetType(String))
-            DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtUpdateTable, {{"AccountIdNo", GetType(Int16)},
+                                            {"Credit", GetType(Decimal)},
+                                            {"Debit", GetType(Decimal)},
+                                            {"IdNo", GetType(Int32)},
+                                            {"JournalIdNo", GetType(Int32)},
+                                            {"Notes", GetType(String)},
+                                            {"RevCostCenterIdNo", GetType(Int16)},
+                                            {"Sequence", GetType(Int16)}})
 
-            DtCsrOiInsertTable.Columns.Add("Amount", GetType(Decimal))
-            DtCsrOiInsertTable.Columns.Add("ArOpenInvoiceIdNo", GetType(Int32))
-            DtCsrOiInsertTable.Columns.Add("CsrIdNo", GetType(Int32))
-            DtCsrOiInsertTable.Columns.Add("DiscountTaken", GetType(Decimal))
-            DtCsrOiInsertTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtCsrOiInsertTable, {{"Amount", GetType(Decimal)},
+                                                 {"ArOpenInvoiceIdNo", GetType(Int32)},
+                                                 {"CsrIdNo", GetType(Int32)},
+                                                 {"DiscountTaken", GetType(Decimal)},
+                                                 {"Sequence", GetType(Int16)}})
 
-            DtCsrOiUpdateTable.Columns.Add("Amount", GetType(Decimal))
-            DtCsrOiUpdateTable.Columns.Add("ArOpenInvoiceIdNo", GetType(Int32))
-            DtCsrOiUpdateTable.Columns.Add("CsrIdNo", GetType(Int32))
-            DtCsrOiUpdateTable.Columns.Add("DiscountTaken", GetType(Decimal))
-            DtCsrOiUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtCsrOiUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            CreateDataTable(DtCsrOiUpdateTable, {{"Amount", GetType(Decimal)},
+                                                 {"ArOpenInvoiceIdNo", GetType(Int32)},
+                                                 {"CsrIdNo", GetType(Int32)},
+                                                 {"DiscountTaken", GetType(Decimal)},
+                                                 {"IdNo", GetType(Int32)},
+                                                 {"Sequence", GetType(Int16)}})
 
         End Sub
+
+        Public ReadOnly Property CrAccountCount As Int16
+            Get
+                Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
+                Dim cdAccounts = GetAccountTypesList(accounts)
+                Return cdAccounts.Count()
+            End Get
+        End Property
 
         Public Sub AddCustomerOpenInvoices()
             If View.PayorIdNo <> 0 Then
@@ -226,43 +236,45 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
-                SetAsideJournalItems()
-                View.UnApplied = 0
-                View.Applied = View.Amount
-            Else
-                MakeJournalItem()
-                SetAsideJournalItems()
-                Dim nRowCount As Integer
-                If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
-                    ' if AR Entry generate paid open invoices
-                    nRowCount = 1
-                    View.TotalDebits = 0
-                    View.TotalCredits = 0
-                    For Each ji In View.CsrOiItems
-                        If ji.Amount <> 0 Or ji.DiscountTaken <> 0 Then
-                            Dim workRow As DataRow
-                            If ji.IdNo <= 0 Then
-                                workRow = DtCsrOiInsertTable.NewRow()
-                            Else
-                                workRow = DtCsrOiUpdateTable.NewRow()
-                                workRow("IdNo") = ji.IdNo
+            If Not CancelSave Then
+                If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
+                    SetAsideJournalItems()
+                    View.UnApplied = 0
+                    View.Applied = View.Amount
+                Else
+                    MakeJournalItem()
+                    SetAsideJournalItems()
+                    Dim nRowCount As Integer
+                    If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
+                        ' if AR Entry generate paid open invoices
+                        nRowCount = 1
+                        View.TotalDebits = 0
+                        View.TotalCredits = 0
+                        For Each ji In View.CsrOiItems
+                            If ji.Amount <> 0 Or ji.DiscountTaken <> 0 Then
+                                Dim workRow As DataRow
+                                If ji.IdNo <= 0 Then
+                                    workRow = DtCsrOiInsertTable.NewRow()
+                                Else
+                                    workRow = DtCsrOiUpdateTable.NewRow()
+                                    workRow("IdNo") = ji.IdNo
+                                End If
+                                workRow("Amount") = ji.Amount
+                                workRow("ArOpenInvoiceIdNo") = ji.ArOpenInvoiceIdNo
+                                workRow("CsrIdNo") = View.IdNo
+                                workRow("DiscountTaken") = ji.DiscountTaken
+                                workRow("Sequence") = nRowCount
+                                If ji.IdNo <= 0 Then
+                                    DtCsrOiInsertTable.Rows.Add(workRow)
+                                Else
+                                    DtCsrOiUpdateTable.Rows.Add(workRow)
+                                End If
+                                nRowCount += 1
                             End If
-                            workRow("Amount") = ji.Amount
-                            workRow("ArOpenInvoiceIdNo") = ji.ArOpenInvoiceIdNo
-                            workRow("CsrIdNo") = View.IdNo
-                            workRow("DiscountTaken") = ji.DiscountTaken
-                            workRow("Sequence") = nRowCount
-                            If ji.IdNo <= 0 Then
-                                DtCsrOiInsertTable.Rows.Add(workRow)
-                            Else
-                                DtCsrOiUpdateTable.Rows.Add(workRow)
-                            End If
-                            nRowCount += 1
-                        End If
-                        View.TotalDebits += ji.Amount
-                    Next
-                    View.TotalCredits = View.TotalDebits
+                            View.TotalDebits += ji.Amount
+                        Next
+                        View.TotalCredits = View.TotalDebits
+                    End If
                 End If
             End If
         End Sub
@@ -299,8 +311,9 @@ Namespace PresentationLayer.Presenters
             If MyBase.IsBizDataValid() Then
                 Dim dateToday As DateTime = Now()
                 retValue = True
+                Dim dateFieldName = Messaging.TranslateCaption("Transacton Date")
                 Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Cash Receipt", "LastPosting", "TransactionName", "LastPostingDate")
-                If IsDateRangeValid("Cash Disbursement", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
+                If IsDateRangeValid(dateFieldName, View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 ElseIf CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
                     If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
