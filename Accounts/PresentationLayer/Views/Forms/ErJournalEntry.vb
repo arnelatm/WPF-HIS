@@ -15,7 +15,7 @@ Namespace PresentationLayer.Views.Forms
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
 
-        Private Property MyPresenter As ArJournalPresenter
+        Private Property MyPresenter As ErJournalPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _footer As DgvFooter

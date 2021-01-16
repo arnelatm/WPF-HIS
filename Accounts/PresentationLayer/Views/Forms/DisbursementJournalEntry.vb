@@ -26,6 +26,8 @@ Namespace PresentationLayer.Views.Forms
         Private _djOiItems As List(Of DjOiItemView)
         Private _revCostCentersByCode
         Private _viewGl As Boolean = False
+        Private _currentSpecialAccount As Int16
+        Private _defaultAccount As Int16
 
         Public Sub New(ByVal tableName As String)
             MyBase.New()
@@ -49,6 +51,7 @@ Namespace PresentationLayer.Views.Forms
                 btnPrintCheck.Visible = True
             End If
             PresenterObj = MyPresenter
+            _defaultAccount = MyPresenter.DefaultAccount
             txtJournalCode.Text = MyPresenter.JournalCode
             SortOrderKey = "IdNo"
             FirstControl = cboPaymentType
@@ -409,6 +412,7 @@ Namespace PresentationLayer.Views.Forms
                 cboAccountIdNo.DisplayOnly = True
                 cboAccountIdNo.TabStop = False
             End If
+            cboAccountIdNo.SelectedValue = _defaultAccount
             If MainTableName <> "CkJournal" Then
                 dtpCheckDate.Visible = False
                 lblCheckDate.Visible = False
