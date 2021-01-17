@@ -106,40 +106,6 @@ Namespace DataLayer.AdoNet
             .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
             }
 
-        'Public Function GetTableOrViewName() As String
-        '    Return TableOrViewName
-        'End Function
-
-        'Public Sub SetTableOrViewName(AutoPropertyValue As String)
-        '    TableOrViewName = AutoPropertyValue
-        '    If _tableOrViewName = "CdOiItem" Then
-        '        _dboTvpUpdateName = "dbo.UpdateCdOiItemTVP"
-        '        _dboTvpInsertName = "dbo.InsertCdOiItemTVP"
-        '    ElseIf _tableOrViewName = "PcOiItem" Then
-        '        _dboTvpUpdateName = "dbo.UpdatePcOiItemTVP"
-        '        _dboTvpInsertName = "dbo.InsertPcOiItemTVP"
-        '    ElseIf _tableOrViewName = "CkOiItem" Then
-        '        _dboTvpUpdateName = "dbo.UpdateCkOiItemTVP"
-        '        _dboTvpInsertName = "dbo.InsertCkOiItemTVP"
-        '    End If
-        'End Sub
-
-        'Public Function GetDboTvpUpdateName() As String
-        '    Return _dboTvpUpdateName
-        'End Function
-
-        'Public Sub SetDboTvpUpdateName(AutoPropertyValue As String)
-        '    _dboTvpUpdateName = AutoPropertyValue
-        'End Sub
-
-        'Public Function GetDboTvpInsertName() As String
-        '    Return _dboTvpInsertName
-        'End Function
-
-        'Public Sub SetDboTvpInsertName(AutoPropertyValue As String)
-        '    _dboTvpInsertName = AutoPropertyValue
-        'End Sub
-
     End Class
 
 End Namespace

@@ -19,6 +19,8 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("AccountIdNo"))
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payor Name must not be blank.", {"PayorName", "PayorIdNo"}))
                 AddRule(New ValidateRequired("PayeeName", $"Payor Name must not be blank.", {"PayorName", "PayorIdNo"}))
+                AddRule(New ValidateVatNumber("VatNumber"))
+                AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateIfRequired("DiscountAccountIdNo", "DiscountTaken", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
             End If
@@ -47,6 +49,8 @@ Namespace BusinessLayer
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
         Public Property UnApplied As Decimal
+        Public Property VatAmount As Decimal
+        Public Property VatNumber As String
 
     End Class
 

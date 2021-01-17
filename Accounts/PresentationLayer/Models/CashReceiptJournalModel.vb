@@ -31,6 +31,8 @@ Namespace PresentationLayer.Models
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
         Public Property UnApplied As Decimal
+        Public Property VatAmount As Decimal
+        Public Property VatNumber As String
     End Class
 
 End Namespace
