@@ -33,7 +33,9 @@ Namespace DataLayer.AdoNet
                     "Posted," &
                     "ReferenceNo," &
                     "TransactionDate," &
-                    "UnApplied" &
+                    "UnApplied," &
+                    "VatAmount," &
+                    "VatNumber" &
                     " FROM [CashReceiptJournal]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -67,7 +69,9 @@ Namespace DataLayer.AdoNet
                     "Posted        = @Posted," &
                     "ReferenceNo   = @ReferenceNo," &
                     "TransactionDate = @TransactionDate," &
-                    "UnApplied     = @UnApplied" &
+                    "UnApplied     = @UnApplied," &
+                    "VatAmount     = @VatAmount," &
+                    "VatNumber     = @VatNumber" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(cashReceiptJournal))
         End Function
@@ -91,7 +95,9 @@ Namespace DataLayer.AdoNet
                     "Posted," &
                     "ReferenceNo," &
                     "TransactionDate," &
-                    "UnApplied" &
+                    "UnApplied," &
+                    "VatAmount," &
+                    "VatNumber" &
                     ") VALUES (" &
                     "@AccountIdNo," &
                     "@Amount," &
@@ -109,7 +115,9 @@ Namespace DataLayer.AdoNet
                     "@Posted," &
                     "@ReferenceNo," &
                     "@TransactionDate," &
-                    "@UnApplied" &
+                    "@UnApplied," &
+                    "@VatAmount," &
+                    "@VatNumber" &
                     ")"
             Return _db.Insert(sql, Take(cashReceiptJournal))
         End Function
@@ -135,7 +143,9 @@ Namespace DataLayer.AdoNet
             .Posted = Extensions.AsBool(reader("Posted")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-            .UnApplied = Extensions.AsDecimal(reader("UnApplied"))
+            .UnApplied = Extensions.AsDecimal(reader("UnApplied")),
+            .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
+            .VatNumber = Extensions.AsDecimal(reader("VatNumber"))
             }
 
         Private Function Take(cashReceiptJournal As CashReceiptJournal) As Object()
@@ -158,7 +168,9 @@ Namespace DataLayer.AdoNet
                                     "@Posted", cashReceiptJournal.Posted,
                                     "@ReferenceNo", cashReceiptJournal.ReferenceNo,
                                     "@TransactionDate", cashReceiptJournal.TransactionDate,
-                                    "@UnApplied", cashReceiptJournal.UnApplied
+                                    "@UnApplied", cashReceiptJournal.UnApplied,
+                                    "@VatAmount", cashReceiptJournal.VatAmount,
+                                    "@VatNumber", cashReceiptJournal.VatNumber
                                 }
         End Function
 

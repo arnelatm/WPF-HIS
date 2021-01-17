@@ -1290,7 +1290,7 @@ Namespace PresentationLayer.Views.Forms
             'btnPrintCheck
             '
             Me.tlpDisbursement.SetColumnSpan(Me.btnPrintCheck, 2)
-            Me.btnPrintCheck.DesignerSelected = False
+            Me.btnPrintCheck.DesignerSelected = True
             Me.btnPrintCheck.DisplayOnly = True
             Me.btnPrintCheck.ImageIndex = 0
             Me.btnPrintCheck.Location = New System.Drawing.Point(772, 522)

@@ -788,6 +788,25 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
+        Public Function GetSupplierOpenInvoices(dView As List(Of DjOiItemView)) As List(Of DjOiItemView)
+            Dim dModel As New List(Of DjOiItemModel)
+            Dim dOriginalModel As New List(Of DjOiItemModel)
+            Dim nSeq As Integer
+            GlobalVariables.Mapper.Map(dView, dModel)
+            nSeq = dView.Count()
+            If EditMode Then
+                If _presenterView.PayeeIdNo = OriginalModel.PayeeIdNo AndAlso _presenterView.PaymentType = OriginalModel.PaymentType Then
+                    ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
+                    AddOpenInvoices(True, OriginalModel.DjOiItems, dModel, nSeq)
+                    nSeq = dModel.Count()
+                End If
+            End If
+            Dim unpaidInvoices = GetSupplierOpenInvoices(_presenterView.PayeeIdNo)
+            AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
+            GlobalVariables.Mapper.Map(dModel, dView)
+            Return dView
+        End Function
+
         Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of DjOiItemModel)
             Return ModelPresenter.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
         End Function
@@ -898,25 +917,6 @@ Namespace PresentationLayer.Presenters
                 Next
             End If
         End Sub
-
-        Public Function GetSupplierOpenInvoices(dView As List(Of DjOiItemView)) As List(Of DjOiItemView)
-            Dim dModel As New List(Of DjOiItemModel)
-            Dim dOriginalModel As New List(Of DjOiItemModel)
-            Dim nSeq As Integer
-            GlobalVariables.Mapper.Map(dView, dModel)
-            nSeq = dView.Count()
-            If EditMode Then
-                If _presenterView.PayeeIdNo = OriginalModel.PayeeIdNo AndAlso _presenterView.PaymentType = OriginalModel.PaymentType Then
-                    ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
-                    AddOpenInvoices(True, OriginalModel.DjOiItems, dModel, nSeq)
-                    nSeq = dModel.Count()
-                End If
-            End If
-            Dim unpaidInvoices = GetSupplierOpenInvoices(_presenterView.PayeeIdNo)
-            AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
-            GlobalVariables.Mapper.Map(dModel, dView)
-            Return dView
-        End Function
 
         Private Function AddOpenInvoices(original As Boolean, source As List(Of DjOiItemModel), target As List(Of DjOiItemModel), nSeq As Integer) As Integer
             For Each invoice In source

@@ -367,6 +367,8 @@ Namespace PresentationLayer.Views.Forms
          {"Amount", txtAmount},
          {"Applied", txtApplied},
          {"Cancelled", chkCancelled},
+         {"CheckDate", dtpCheckDate},
+         {"CheckNumber", txtCheckNumber},
          {"DateCreated", dtpDateCreated},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
@@ -500,7 +502,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateOpenInvoicesDisplay()
             If OpenInvoiceMode Then
-                If PresenterObj.AddMode Or cboPayeeIdNo.SelectedIndex <> cboPayeeIdNo.PreviousSelectedIndex Then
+                If MyPresenter.AddMode Or cboPayeeIdNo.SelectedIndex <> cboPayeeIdNo.PreviousSelectedIndex Then
                     DjOiItems.Clear()
                 End If
                 bsDjOiItems.DataSource = MyPresenter.GetSupplierOpenInvoices(DjOiItems)
@@ -547,16 +549,19 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
-            UpdateTotals()
-            UpdateInputVatAmount()
-        End Sub
-
-        Private Sub AccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectionChangeCommitted, cboAccountIdNo.Validated
+        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectionChangeCommitted, cboAccountIdNo.Validated
             UpdateFirstLine()
         End Sub
 
-        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
+        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
+            If OpenInvoiceMode Then
+                MoveToGridView(DataGridViewDjOiItems, "dgvAmount")
+            Else
+                MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
+            End If
+        End Sub
+
+        Private Sub DgvJi_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
@@ -569,7 +574,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
+        Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
                 Dim nIndex = .CurrentRow.Index
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
@@ -603,10 +608,6 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub UpdateInputVatAmount()
-            VatAmount = MyPresenter.UpdateInputVatAmount(JournalItems)
-        End Sub
-
         Private Sub DjOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDjOiItems.CellEndEdit
             With DataGridViewDjOiItems.CurrentCell
                 Dim nIndex = DataGridViewDjOiItems.CurrentRow.Index
@@ -629,11 +630,21 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If OpenInvoiceMode Then
-                MoveToGridView(DataGridViewDjOiItems, "dgvAmount")
-            Else
-                MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
+        Private Sub UpdateInputVatAmount()
+            VatAmount = MyPresenter.UpdateInputVatAmount(JournalItems)
+        End Sub
+
+        Private Sub UpdateOutputVatAmount()
+            VatAmount = MyPresenter.UpdateOutputVatAmount(JournalItems)
+        End Sub
+
+        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+            UpdateTotals()
+            Dim payeeTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedIndex)
+            If payeeTypeEnum = PaymentTypeSelection.AccountsPayable Or payeeTypeEnum = PaymentTypeSelection.Supplier Then
+                UpdateInputVatAmount()
+            ElseIf payeeTypeEnum = PaymentTypeSelection.CustomerRefund Then
+                UpdateOutputVatAmount()
             End If
         End Sub
 
@@ -709,8 +720,10 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             If OpenInvoiceMode Then
                 ShowOpenInvoicesDataGrid()
+                cboDiscountAccountIdNo.Enabled = False
             Else
                 ShowJournalItemDataGrid()
+                cboDiscountAccountIdNo.Enabled = True
                 BindJournalItem()
                 Applied = Amount
                 UnApplied = 0
@@ -769,7 +782,6 @@ Namespace PresentationLayer.Views.Forms
             End If
             DataGridViewJournalItems.DataSource = bsJournalItems
             'DataGridViewJournalItems.Refresh()
-            cboDiscountAccountIdNo.Enabled = False
         End Sub
 
         Private Sub ShowOpenInvoicesDataGrid()
@@ -780,7 +792,6 @@ Namespace PresentationLayer.Views.Forms
                 tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
             End If
-            cboDiscountAccountIdNo.Enabled = True
         End Sub
 
         Private Sub SetPayeeDataSource(ByVal cPaymentType As String)

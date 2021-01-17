@@ -72,8 +72,7 @@ Namespace DataLayer.AdoNet
             .TransactionDate = Extensions.AsDate((reader("TransactionDate")))
             }
 
-        Public Function GetOpenInvoices(idNo As Int32) _
-            As List(Of CsrOiItem) Implements IDaoOiItem(Of CsrOiItem).GetOpenInvoices
+        Public Function GetOpenInvoices(idNo As Int32) As List(Of CsrOiItem) Implements IDaoOiItem(Of CsrOiItem).GetOpenInvoices
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &

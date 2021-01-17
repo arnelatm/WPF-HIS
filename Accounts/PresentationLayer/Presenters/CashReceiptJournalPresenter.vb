@@ -6,7 +6,6 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports System.ComponentModel
 
 Namespace PresentationLayer.Presenters
 
@@ -19,9 +18,9 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
 
         Private ReadOnly _advancesToCustomerAccountIdNo As Int16
-
+        Private djArgs = {"CashReceiptJournalItem_View", "UpdateCashReceiptJournalItemTVP", "InsertCashReceiptJournalItemTVP"}
+        Private ReadOnly _csrJournalItemModel As New ModelAccounts("JournalItem", Nothing, djArgs)
         Private ReadOnly _csrOiItemModel As New ModelAccounts("CsrOiItem")
-        Private ReadOnly _csrJournalItemModel As New ModelAccounts("JournalItem")
 
         Public Sub New(view As ICashReceiptJournalView)
             MyBase.New(view)
@@ -67,6 +66,20 @@ Namespace PresentationLayer.Presenters
                                                  {"Sequence", GetType(Int16)}})
 
         End Sub
+
+        Public Property JournalCode As String
+
+        Public ReadOnly Property DefaultAccount As Int16
+            Get
+                Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
+                Dim cdAccounts = GetAccountTypesList(accounts)
+                If cdAccounts.Count() > 0 Then
+                    Return cdAccounts(0).IdNo
+                Else
+                    Return Nothing
+                End If
+            End Get
+        End Property
 
         Public ReadOnly Property CrAccountCount As Int16
             Get
@@ -207,6 +220,25 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
+        Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)
+            Dim dModel As New List(Of CsrOiItemModel)
+            Dim dOriginalModel As New List(Of CsrOiItemModel)
+            Dim nSeq As Integer
+            GlobalVariables.Mapper.Map(dView, dModel)
+            nSeq = dView.Count()
+            If EditMode Then
+                If View.PayorIdNo = OriginalModel.PayorIdNo AndAlso View.PayorType = OriginalModel.PayorType Then
+                    ' need to add the original items because if items are already paid in the original data they will not be added if there is already a full or partial payment
+                    AddOpenInvoices(True, OriginalModel.CsrOiItems, dModel, nSeq)
+                    nSeq = dModel.Count()
+                End If
+            End If
+            Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
+            AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
+            GlobalVariables.Mapper.Map(dModel, dView)
+            Return dView
+        End Function
+
         Public Function GetCustomerOpenInvoices(ByRef customerIdNo As Int32) As List(Of CsrOiItemModel)
             Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
         End Function
@@ -303,6 +335,26 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
                 GlobalVariables.Mapper.Map(View, DataModel)
                 retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            End If
+        End Sub
+
+        Public Sub UpdateFirstLine()
+            If EditMode Or AddMode Then
+                If View.JournalItems.Count() = 0 Then
+                    View.JournalItems = New List(Of IJournalItemView) From {
+                            FirstJournalItem()
+                            }
+                End If
+                For Each item In View.JournalItems
+                    item.JournalIdNo = View.IdNo
+                    item.Sequence = 1
+                    item.AccountIdNo = View.AccountIdNo
+                    item.Credit = View.Amount
+                    item.Debit = 0
+                    item.RevCostCenterIdNo = 0
+                    MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
+                    Exit For
+                Next
             End If
         End Sub
 
@@ -670,6 +722,21 @@ Namespace PresentationLayer.Presenters
             End If
         End Function
 
+        Private Function FirstJournalItem()
+            Dim item As New JournalItemView With {
+                    .JournalIdNo = View.IdNo,
+                    .Sequence = 1,
+                    .AccountIdNo = View.AccountIdNo,
+                    .Credit = View.Amount,
+                    .Debit = 0,
+                    .RevCostCenterIdNo = 0,
+                    .SpecialAccount = Nothing,
+                    .PayeeType = Nothing,
+                    .Notes = ""
+                    }
+            Return item
+        End Function
+
         Public Overrides Sub GoPrintRecord()
             Dim transactionAmount As String
             Dim totalCreditAmount As String
@@ -709,6 +776,69 @@ Namespace PresentationLayer.Presenters
                 _csrJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
+
+        Public Sub AutoApplyAmount()
+            Dim amountToApply = View.Amount
+            'Dim appliedAmount As Decimal = 0D
+            For Each item In View.CsrOiItems
+                If amountToApply = 0D Then
+                    item.Amount = 0D
+                    item.DiscountTaken = 0D
+                    item.Balance = item.PreviousBalance
+                Else
+                    If item.PreviousBalance <= amountToApply Then
+                        amountToApply -= item.PreviousBalance
+                        item.Amount = item.PreviousBalance
+                        item.DiscountTaken = 0D
+                        item.Balance = 0D
+                    Else
+                        item.Amount = amountToApply
+                        item.DiscountTaken = 0D
+                        item.Balance = item.PreviousBalance - amountToApply
+                        amountToApply = 0D
+                    End If
+                End If
+            Next item
+        End Sub
+
+        Private Function AddOpenInvoices(original As Boolean, source As List(Of CsrOiItemModel), target As List(Of CsrOiItemModel), nSeq As Integer) As Integer
+            For Each invoice In source
+                Dim itemFound = False
+                For Each item In target
+                    If item.ArOpenInvoiceIdNo = invoice.ArOpenInvoiceIdNo Then
+                        itemFound = True
+                        Exit For
+                    End If
+                Next
+                If Not itemFound Then
+                    If invoice.JournalCode = JournalCode And invoice.JournalIdNo = View.IdNo Then
+                        ' ignore advance payments if applied to this entry.
+                    Else
+                        nSeq += 1
+                        target.Add(GetOpenInvoice(original, nSeq, invoice))
+                    End If
+                End If
+            Next
+            Return nSeq
+        End Function
+
+        Private Function GetOpenInvoice(original As Boolean, nSeq As Integer, invoice As Object) As CsrOiItemModel
+            Dim item As CsrOiItemModel
+            item = New CsrOiItemModel With {
+                .AccountIdNo = invoice.AccountIdNo,
+                .Amount = invoice.Amount,
+                .ArOpenInvoiceIdNo = invoice.ArOpenInvoiceIdNo,
+                .Balance = invoice.Balance,
+                .DiscountTaken = invoice.DiscountTaken,
+                .InvoiceNo = invoice.InvoiceNo,
+                .JournalCode = invoice.JournalCode,
+                .JournalIdNo = invoice.JournalIdNo,
+                .PreviousBalance = IIf(original, invoice.PreviousBalance, invoice.Balance),
+                .Sequence = nSeq,
+                .TransactionDate = invoice.TransactionDate
+                }
+            Return item
+        End Function
 
     End Class
 
