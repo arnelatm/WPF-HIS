@@ -770,6 +770,8 @@ Namespace PresentationLayer.Views.Forms
             End If
             MyPresenter.AddSupplierOpenInvoices()
             bsDjOiItems.ResetBindings(False)
+            UpdateJiTotals()
+            UpdateOiTotals()
         End Sub
 
         Private Sub ShowJournalItemDataGrid()
@@ -783,6 +785,9 @@ Namespace PresentationLayer.Views.Forms
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
             End If
             DataGridViewJournalItems.DataSource = bsJournalItems
+            If DataGridViewJournalItems.DgvFooter IsNot Nothing Then
+                DataGridViewJournalItems.DgvFooter.Refresh()
+            End If
         End Sub
 
         Private Sub ShowOpenInvoicesDataGrid()
@@ -792,6 +797,9 @@ Namespace PresentationLayer.Views.Forms
                 tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 1)
                 tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
+            End If
+            If DataGridViewDjOiItems.DgvFooter IsNot Nothing Then
+                DataGridViewDjOiItems.DgvFooter.Refresh()
             End If
         End Sub
 

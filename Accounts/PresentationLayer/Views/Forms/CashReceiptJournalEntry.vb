@@ -731,6 +731,8 @@ Namespace PresentationLayer.Views.Forms
             End If
             MyPresenter.AddCustomerOpenInvoices()
             bsCsrOiItems.ResetBindings(False)
+            UpdateJiTotals()
+            UpdateOiTotals()
         End Sub
 
         Private Sub ShowJournalItemDataGrid()

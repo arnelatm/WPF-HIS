@@ -19,8 +19,8 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
         Protected ReportName As String
 
-        Protected OiItemModel
-        Protected DjItemModel
+        Private OiItemModel
+        Private _journalItemModel
 
         Public Sub New(view As IDisbursementJournalView, ByVal tableOrViewName As String)
             MyBase.New(view)
@@ -47,7 +47,7 @@ Namespace PresentationLayer.Presenters
                 ReportName = "Petty Cash Disbursement Journal.Rpt"
                 JournalCode = "PC"
             End If
-            DjItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
+            _journalItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
             OiItemModel = New ModelAccounts("DjOiItem", Nothing, oiArgs)
             ModelPresenter = New ModelAccounts("DisbursementJournal", JournalCode, args)
             TableName = tableOrViewName
@@ -183,7 +183,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(DjItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            retVal = UpdateChildData(_journalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
                 retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "DjIdNo")
                 If retVal >= 0 Then
@@ -329,7 +329,7 @@ Namespace PresentationLayer.Presenters
             ' ReSharper disable once VBUseMethodAny.1
             If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
                 DtUpdateTable.Clear()
-                DjItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+                _journalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 
@@ -721,7 +721,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return DjItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _journalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetSupplierOpenInvoices(dView As List(Of DjOiItemView)) As List(Of DjOiItemView)
