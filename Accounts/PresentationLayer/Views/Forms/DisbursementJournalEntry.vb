@@ -722,10 +722,10 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             If OpenInvoiceMode Then
                 ShowOpenInvoicesDataGrid()
-                cboDiscountAccountIdNo.Enabled = False
+                cboDiscountAccountIdNo.Enabled = True
             Else
                 ShowJournalItemDataGrid()
-                cboDiscountAccountIdNo.Enabled = True
+                cboDiscountAccountIdNo.Enabled = False
                 BindJournalItem()
                 Applied = Amount
                 UnApplied = 0

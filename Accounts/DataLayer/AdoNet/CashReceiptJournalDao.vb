@@ -145,7 +145,7 @@ Namespace DataLayer.AdoNet
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
             .UnApplied = Extensions.AsDecimal(reader("UnApplied")),
             .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
-            .VatNumber = Extensions.AsDecimal(reader("VatNumber"))
+            .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
         Private Function Take(cashReceiptJournal As CashReceiptJournal) As Object()

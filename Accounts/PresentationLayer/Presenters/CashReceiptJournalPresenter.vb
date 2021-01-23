@@ -547,6 +547,7 @@ Namespace PresentationLayer.Presenters
             If Model.CountRecordWithKey(idNo, "ArOpenInvoice", "IdNo") > 0 Then
                 Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
             End If
+            Return 0
         End Function
 
         Private Function JournalItemDataIsValid() As Boolean

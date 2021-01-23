@@ -18,7 +18,6 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("PayorType"))
                 AddRule(New ValidateRequired("AccountIdNo"))
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payor Name must not be blank.", {"PayorName", "PayorIdNo"}))
-                AddRule(New ValidateRequired("PayeeName", $"Payor Name must not be blank.", {"PayorName", "PayorIdNo"}))
                 AddRule(New ValidateVatNumber("VatNumber"))
                 AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateIfRequired("DiscountAccountIdNo", "DiscountTaken", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))

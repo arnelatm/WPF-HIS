@@ -685,10 +685,10 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             If OpenInvoiceMode Then
                 ShowOpenInvoicesDataGrid()
-                cboDiscountAccountIdNo.Enabled = False
+                cboDiscountAccountIdNo.Enabled = True
             Else
                 ShowJournalItemDataGrid()
-                cboDiscountAccountIdNo.Enabled = True
+                cboDiscountAccountIdNo.Enabled = False
                 BindJournalItem()
                 Applied = Amount
                 UnApplied = 0
@@ -701,15 +701,21 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ShowPayor()
             Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cboPayorType.SelectedValue)
             If payorTypeEnum = ReceiptTypeSelection.Others Or payorTypeEnum = ReceiptTypeSelection.NotSpecified Then
-                cboPayorIdNo.Width = 0
                 cboPayorIdNo.Visible = False
                 txtPayorName.Visible = True
+                txtPayorName.Width = _payorOrigWidth
                 cboPayorIdNo.SelectedIndex = -1
+                cboPayorIdNo.Width = 0
             Else
-                cboPayorIdNo.Width = _payorOrigWidth
                 cboPayorIdNo.Visible = True
                 txtPayorName.Visible = False
+                cboPayorIdNo.Width = _payorOrigWidth
+                txtPayorName.Width = 0
             End If
+
+            'cboPayorIdNo.ValueMember = "IdNo"
+            'cboPayorIdNo.DisplayMember = "Name"           
+
         End Sub
 
         Protected Overrides Sub InputsTurnedOff()
