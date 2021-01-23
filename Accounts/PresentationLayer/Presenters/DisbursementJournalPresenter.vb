@@ -13,7 +13,6 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of IDisbursementJournalView, DisbursementJournalModel)
 
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
-        Protected CashIdNo As String
         Protected DtInsertTable As New DataTable
         Protected DtOiInsertTable As New DataTable
         Protected DtOiUpdateTable As New DataTable
@@ -104,19 +103,19 @@ Namespace PresentationLayer.Presenters
 
         Protected Property CashCount As Int16
 
-        Public ReadOnly Property DefaultAccount As Int16
-            Get
-                Dim specialAccount As Int16
-                If JournalCode = "PC" Then
-                    specialAccount = SpecialAccountSelection.PettyCashAccount
-                ElseIf JournalCode = "CD" Then
-                    specialAccount = SpecialAccountSelection.Cash
-                Else
-                    specialAccount = SpecialAccountSelection.CheckingAccount
-                End If
-                Return GetRecordFieldWithKey(EnumToCode(specialAccount), "Account", "SpecialAccount", "IdNo")
-            End Get
-        End Property
+        'Public ReadOnly Property DefaultAccount As Int16
+        '    Get
+        '        Dim specialAccount As SpecialAccountSelection
+        '        If JournalCode = "PC" Then
+        '            specialAccount = SpecialAccountSelection.PettyCashAccount
+        '        ElseIf JournalCode = "CD" Then
+        '            specialAccount = SpecialAccountSelection.Cash
+        '        Else
+        '            specialAccount = SpecialAccountSelection.CheckingAccount
+        '        End If
+        '        Return GetRecordFieldWithKey(EnumToCode(specialAccount), "Account", "SpecialAccount", "IdNo")
+        '    End Get
+        'End Property
 
         Public ReadOnly Property CdAccountCount As Int16
             Get
@@ -138,7 +137,7 @@ Namespace PresentationLayer.Presenters
             Get
                 Dim retVal As String = Nothing
                 If _presenterView.AccountIdNo = 0 Then
-                    If CdAccountCount = 1 Then
+                    If CdAccountCount >= 1 Then
                         If JournalCode = "PC" Then
                             retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
                         ElseIf JournalCode = "CK" Then
@@ -832,6 +831,9 @@ Namespace PresentationLayer.Presenters
                 _presenterView.DjOiItems.Clear()
             Else
                 _presenterView.DjOiItems = New List(Of DjOiItemView)
+            End If
+            If _presenterView.AccountIdNo <= 0 Then
+                _presenterView.AccountIdNo = DefaultDisbursementAccount
             End If
 
         End Sub

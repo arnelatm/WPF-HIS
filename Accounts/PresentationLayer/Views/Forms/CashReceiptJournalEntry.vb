@@ -40,7 +40,7 @@ Namespace PresentationLayer.Views.Forms
 
             MyPresenter = New CashReceiptJournalPresenter(Me)
             PresenterObj = MyPresenter
-            _defaultAccount = MyPresenter.DefaultAccount
+            _defaultAccount = MyPresenter.DefaultReceiptAccount
             FirstControl = cboPayorType
             _payorOrigWidth = cboPayorIdNo.Width
             _nfi.NumberDecimalDigits = 2
@@ -112,16 +112,13 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CheckDate As DateTime? Implements ICashReceiptJournalView.CheckDate
             Get
-                If String.IsNullOrEmpty(dtpCheckDate.Text) Then
-                    Return Nothing
-                End If
-                Return Convert.ToDateTime(dtpCheckDate.Text)
+                Return dtpCheckDate.Value
             End Get
-            Set(value As DateTime?)
-                If value Is Nothing Then
-                    dtpCheckDate.Value = Nothing
+            Set
+                If Value.HasValue Then
+                    dtpCheckDate.Value = Value
                 Else
-                    dtpCheckDate.Value = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
+                    dtpCheckDate.Value = Date.Now()
                 End If
             End Set
         End Property
@@ -339,15 +336,10 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateDataSources()
             _accountsByCode = MyPresenter.GetDetailAccountList()
             _revCostCentersByCode = MyPresenter.GetLookup("RevCostCenter")
-            cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount), "AccountName")
-            cboAccountIdNo.EndUpdate()
-            cboPayorType.BeginUpdate()
             cboPayorType.DataSource = MyPresenter.MakeEnumComboList(Of ReceiptTypeSelection)
-            cboPayorType.EndUpdate()
-            cboDiscountAccountIdNo.BeginUpdate()
+            cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount), "AccountName")
+
             cboDiscountAccountIdNo.DataSource = MyPresenter.GetAccountTypesList("RD")
-            cboDiscountAccountIdNo.EndUpdate()
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -403,7 +395,11 @@ Namespace PresentationLayer.Views.Forms
             If MyPresenter.CrAccountCount = 1 Then
                 cboAccountIdNo.DisplayOnly = True
                 cboAccountIdNo.TabStop = False
-            ElseIf MyPresenter.CrAccountCount = 0 Then
+            End If
+            If cboAccountIdNo.SelectedValue <= 0 Then
+                cboAccountIdNo.SelectedValue = _defaultAccount
+            End If
+            If MyPresenter.CrAccountCount = 0 Then
                 Dim accountName As String
                 accountName = Messaging.TranslateCaption("Cash")
                 Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
@@ -481,6 +477,7 @@ Namespace PresentationLayer.Views.Forms
                 bsCsrOiItems.DataSource = MyPresenter.GetCustomerOpenInvoices(CsrOiItems)
                 bsCsrOiItems.ResetBindings(True)
                 UpdateOiTotals()
+                'UpdateVatNumber()
             End If
         End Sub
 
@@ -674,14 +671,13 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If _viewGl Then
                 _viewGl = False
-                DataGridViewJournalItems.Visible = False
-                DataGridViewCsrOiItems.Visible = True
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
+                ShowOpenInvoicesDataGrid()
             Else
                 _viewGl = True
+                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
                 DataGridViewJournalItems.Visible = True
                 DataGridViewCsrOiItems.Visible = False
-                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
             End If
         End Sub
 
@@ -748,19 +744,18 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ShowOpenInvoicesDataGrid()
             DataGridViewJournalItems.Visible = False
             DataGridViewCsrOiItems.Visible = True
-            cboDiscountAccountIdNo.Enabled = True
-        End Sub
+	End Sub
 
         Private Sub SetPayorDataSource(cPayorType As String)
-            SuspendLayout()
-            cboPayorIdNo.Visible = True
-            cboPayorIdNo.Width = _payorOrigWidth
-            cboPayorIdNo.ValueMember = "IdNo"
-            cboPayorIdNo.DisplayMember = "Name"
-            txtPayorName.Visible = False
-            txtPayorName.Width = 0
-            Dim curValue As Int32? = cboPayorIdNo.SelectedValue
+            'SuspendLayout()
+            'cboPayorIdNo.Visible = True
+            'cboPayorIdNo.Width = _payorOrigWidth
+            'cboPayorIdNo.ValueMember = "IdNo"
+            'cboPayorIdNo.DisplayMember = "Name"
+            'txtPayorName.Visible = False
+            'txtPayorName.Width = 0
             Dim cbDataSource = Nothing
+            Dim curValue As Int32? = cboPayorIdNo.SelectedValue
             cboPayorIdNo.DataSource = cbDataSource
             If OpenInvoiceMode Then
                 cbDataSource = MyPresenter.GetLookup("Customer")
@@ -780,7 +775,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboPayorIdNo.SelectedValue = -1
             End If
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
         Private Sub UpdateFirstLine()

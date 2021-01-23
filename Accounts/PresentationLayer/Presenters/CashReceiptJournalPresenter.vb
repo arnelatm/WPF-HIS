@@ -12,15 +12,17 @@ Namespace PresentationLayer.Presenters
     Public Class CashReceiptJournalPresenter
         Inherits AccountsPresenter(Of ICashReceiptJournalView, CashReceiptJournalModel)
 
+        Private ReadOnly _advancesToCustomerAccountIdNo As Int16
         Protected DtInsertTable As New DataTable
         Protected DtCsrOiInsertTable As New DataTable
         Protected DtCsrOiUpdateTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Protected ReportName As String
 
-        Private ReadOnly _advancesToCustomerAccountIdNo As Int16
         Private djArgs = {"CashReceiptJournalItem_View", "UpdateCashReceiptJournalItemTVP", "InsertCashReceiptJournalItemTVP"}
         Private ReadOnly _csrJournalItemModel As New ModelAccounts("JournalItem", Nothing, djArgs)
         Private ReadOnly _csrOiItemModel As New ModelAccounts("CsrOiItem")
+	Private ReadOnly _presenterView
 
         Public Sub New(view As ICashReceiptJournalView)
             MyBase.New(view)
@@ -69,6 +71,34 @@ Namespace PresentationLayer.Presenters
 
         Public Property JournalCode As String
 
+        Public ReadOnly Property CrAccountCount As Int16
+            Get
+                Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
+                Dim cdAccounts = GetAccountTypesList(accounts)
+                Return cdAccounts.Count()
+            End Get
+        End Property
+
+        Public ReadOnly Property DefaultDisbursementAccount As Int16
+            Get
+                Dim retVal As String = Nothing
+                If View.AccountIdNo = 0 Then
+                    If CrAccountCount >= 1 Then
+                        retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.Bank), "Account", "SpecialAccount", "IdNo")
+                        If retVal Is Nothing Then
+                            GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.Cash), "Account", "SpecialAccount", "IdNo")
+                        End If
+                    Else
+                        Return 0
+                    End If
+                End If
+                If retVal Is Nothing Then
+                    Return 0
+                End If
+                Return CInt(retVal)
+            End Get
+        End Property
+
         Public ReadOnly Property DefaultAccount As Int16
             Get
                 Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
@@ -78,14 +108,6 @@ Namespace PresentationLayer.Presenters
                 Else
                     Return Nothing
                 End If
-            End Get
-        End Property
-
-        Public ReadOnly Property CrAccountCount As Int16
-            Get
-                Dim accounts = EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount)
-                Dim cdAccounts = GetAccountTypesList(accounts)
-                Return cdAccounts.Count()
             End Get
         End Property
 
