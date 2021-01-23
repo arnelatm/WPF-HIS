@@ -26,7 +26,6 @@ Namespace PresentationLayer.Views.Forms
         Private _djOiItems As List(Of DjOiItemView)
         Private _revCostCentersByCode
         Private _viewGl As Boolean = False
-        Private _currentSpecialAccount As Int16
         Private _defaultAccount As Int16
 
         Public Sub New(ByVal tableName As String)
@@ -36,6 +35,7 @@ Namespace PresentationLayer.Views.Forms
             EnableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = tableName
+            SortOrderKey = "IdNo"
             If tableName = "PcJournal" Then
                 MyPresenter = New DisbursementJournalPresenter(Me, "PcJournal")
                 Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
@@ -51,9 +51,9 @@ Namespace PresentationLayer.Views.Forms
                 btnPrintCheck.Visible = True
             End If
             PresenterObj = MyPresenter
-            _defaultAccount = MyPresenter.DefaultAccount
+            _defaultAccount = MyPresenter.DefaultDisbursementAccount
             txtJournalCode.Text = MyPresenter.JournalCode
-            SortOrderKey = "IdNo"
+
             FirstControl = cboPaymentType
             _nfi.NumberDecimalDigits = 2
             Ea = MyPresenter.Ea
@@ -414,7 +414,9 @@ Namespace PresentationLayer.Views.Forms
                 cboAccountIdNo.DisplayOnly = True
                 cboAccountIdNo.TabStop = False
             End If
-            cboAccountIdNo.SelectedValue = _defaultAccount
+            If cboAccountIdNo.SelectedValue <= 0 Then
+                cboAccountIdNo.SelectedValue = _defaultAccount
+            End If
             If MainTableName <> "CkJournal" Then
                 dtpCheckDate.Visible = False
                 lblCheckDate.Visible = False
@@ -610,7 +612,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DjOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDjOiItems.CellEndEdit
             With DataGridViewDjOiItems.CurrentCell
-                Dim nIndex = DataGridViewDjOiItems.CurrentRow.Index
+                'Dim nIndex = DataGridViewDjOiItems.CurrentRow.Index
                 Select Case .OwningColumn.Name.ToLower()
                     Case $"dgvamount"
                         Dim selectedRow As DjOiItemView
@@ -735,16 +737,17 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ShowPayee()
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedValue)
-            If paymentTypeEnum <> PaymentTypeSelection.Others Then
+            If paymentTypeEnum = PaymentTypeSelection.Others Or paymentTypeEnum = ReceiptTypeSelection.NotSpecified Then
+                cboPayeeIdNo.Visible = False
+                txtPayeeName.Visible = True
+                cboPayeeIdNo.SelectedIndex = -1
+                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(12, 8))
+                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(5, 1))
+            Else
                 cboPayeeIdNo.Visible = True
                 txtPayeeName.Visible = False
                 tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(6, 8))
                 tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(5, 1))
-            Else
-                cboPayeeIdNo.Visible = False
-                txtPayeeName.Visible = True
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(12, 8))
-                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(5, 1))
             End If
         End Sub
 
@@ -758,7 +761,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
-            'BindDjOiItem()
             bsJournalItems.ResetBindings(False)
             btnViewGL.Visible = False
             If OpenInvoiceMode Then
@@ -781,7 +783,6 @@ Namespace PresentationLayer.Views.Forms
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
             End If
             DataGridViewJournalItems.DataSource = bsJournalItems
-            'DataGridViewJournalItems.Refresh()
         End Sub
 
         Private Sub ShowOpenInvoicesDataGrid()
