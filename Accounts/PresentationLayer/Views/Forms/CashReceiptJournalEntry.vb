@@ -40,7 +40,7 @@ Namespace PresentationLayer.Views.Forms
 
             MyPresenter = New CashReceiptJournalPresenter(Me)
             PresenterObj = MyPresenter
-            _defaultAccount = MyPresenter.DefaultReceiptAccount
+            '_defaultAccount = MyPresenter.DefaultReceiptAccount
             FirstControl = cboPayorType
             _payorOrigWidth = cboPayorIdNo.Width
             _nfi.NumberDecimalDigits = 2
@@ -744,7 +744,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ShowOpenInvoicesDataGrid()
             DataGridViewJournalItems.Visible = False
             DataGridViewCsrOiItems.Visible = True
-	End Sub
+        End Sub
 
         Private Sub SetPayorDataSource(cPayorType As String)
             'SuspendLayout()
