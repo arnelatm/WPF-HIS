@@ -370,8 +370,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            UpdateLayout()
-            UpdateTotals()
+            UpdateDisplay()
         End Sub
 
         Private Sub CashReceiptJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -514,7 +513,7 @@ Namespace PresentationLayer.Views.Forms
                     cboPayorIdNo.SelectedIndex = -1
                 End If
                 UpdateFirstLine()
-                UpdateLayout()
+                UpdateDisplay()
             End If
         End Sub
 
@@ -676,18 +675,18 @@ Namespace PresentationLayer.Views.Forms
             Else
                 _viewGl = True
                 btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
-                DataGridViewJournalItems.Visible = True
-                DataGridViewCsrOiItems.Visible = False
+                ShowJournalItemDataGrid()
             End If
         End Sub
 
-        Private Sub UpdateLayout()
+        Private Sub UpdateDisplay()
             SuspendLayout()
             If OpenInvoiceMode Then
                 ShowOpenInvoicesDataGrid()
                 cboDiscountAccountIdNo.Enabled = True
             Else
                 ShowJournalItemDataGrid()
+                btnViewGL.Visible = False
                 cboDiscountAccountIdNo.Enabled = False
                 BindJournalItem()
                 Applied = Amount
@@ -695,6 +694,7 @@ Namespace PresentationLayer.Views.Forms
                 DiscountTaken = 0
             End If
             ShowPayor()
+            UpdateTotals()
             ResumeLayout()
         End Sub
 
@@ -712,15 +712,12 @@ Namespace PresentationLayer.Views.Forms
                 cboPayorIdNo.Width = _payorOrigWidth
                 txtPayorName.Width = 0
             End If
-
-            'cboPayorIdNo.ValueMember = "IdNo"
-            'cboPayorIdNo.DisplayMember = "Name"           
-
         End Sub
 
         Protected Overrides Sub InputsTurnedOff()
             If OpenInvoiceMode Then
                 btnViewGL.Visible = True
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
             Else
                 btnViewGL.Visible = False
             End If
@@ -737,8 +734,7 @@ Namespace PresentationLayer.Views.Forms
             End If
             MyPresenter.AddCustomerOpenInvoices()
             bsCsrOiItems.ResetBindings(False)
-            UpdateJiTotals()
-            UpdateOiTotals()
+            UpdateDisplay()
         End Sub
 
         Private Sub ShowJournalItemDataGrid()
@@ -755,13 +751,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SetPayorDataSource(cPayorType As String)
-            'SuspendLayout()
-            'cboPayorIdNo.Visible = True
-            'cboPayorIdNo.Width = _payorOrigWidth
-            'cboPayorIdNo.ValueMember = "IdNo"
-            'cboPayorIdNo.DisplayMember = "Name"
-            'txtPayorName.Visible = False
-            'txtPayorName.Width = 0
             Dim cbDataSource = Nothing
             Dim curValue As Int32? = cboPayorIdNo.SelectedValue
             cboPayorIdNo.DataSource = cbDataSource
@@ -783,7 +772,6 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboPayorIdNo.SelectedValue = -1
             End If
-            'ResumeLayout()
         End Sub
 
         Private Sub UpdateFirstLine()
