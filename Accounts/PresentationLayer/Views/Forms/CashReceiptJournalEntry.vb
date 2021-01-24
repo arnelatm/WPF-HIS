@@ -27,7 +27,6 @@ Namespace PresentationLayer.Views.Forms
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of IJournalItemView)
         Private _revCostCentersByCode
-        Private _viewGl As Boolean = False
         Private _defaultAccount As Int16
 
         Public Sub New()
@@ -668,13 +667,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
-            If _viewGl Then
-                _viewGl = False
+            If DataGridViewJournalItems.Visible Then
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
                 ShowOpenInvoicesDataGrid()
             Else
-                _viewGl = True
-                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
+                btnViewGL.Text = Messaging.TranslateCaption("Show Journal Entry")
                 ShowJournalItemDataGrid()
             End If
         End Sub
