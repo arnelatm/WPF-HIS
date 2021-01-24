@@ -388,8 +388,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            UpdateLayout()
-            UpdateTotals()
+            UpdateDisplay()
         End Sub
 
         Private Sub DjJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -547,7 +546,7 @@ Namespace PresentationLayer.Views.Forms
                     cboPayeeIdNo.SelectedIndex = -1
                 End If
                 UpdateFirstLine()
-                UpdateLayout()
+                UpdateDisplay()
             End If
         End Sub
 
@@ -718,13 +717,14 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UpdateLayout()
+        Private Sub UpdateDisplay()
             SuspendLayout()
             If OpenInvoiceMode Then
                 ShowOpenInvoicesDataGrid()
                 cboDiscountAccountIdNo.Enabled = True
             Else
                 ShowJournalItemDataGrid()
+                btnViewGL.Visible = False
                 cboDiscountAccountIdNo.Enabled = False
                 BindJournalItem()
                 Applied = Amount
@@ -732,6 +732,7 @@ Namespace PresentationLayer.Views.Forms
                 DiscountTaken = 0
             End If
             ShowPayee()
+            UpdateTotals()
             ResumeLayout()
         End Sub
 
@@ -754,6 +755,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub InputsTurnedOff()
             If OpenInvoiceMode Then
                 btnViewGL.Visible = True
+                btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
             Else
                 btnViewGL.Visible = False
             End If
@@ -770,8 +772,7 @@ Namespace PresentationLayer.Views.Forms
             End If
             MyPresenter.AddSupplierOpenInvoices()
             bsDjOiItems.ResetBindings(False)
-            UpdateJiTotals()
-            UpdateOiTotals()
+            UpdateDisplay()
         End Sub
 
         Private Sub ShowJournalItemDataGrid()
