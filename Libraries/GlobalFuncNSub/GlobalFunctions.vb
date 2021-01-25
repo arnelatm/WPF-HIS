@@ -1000,13 +1000,15 @@ Public Module GlobalFunctions
             If dgv.CurrentCell Is Nothing Then
                 dgv.Focus()
                 If dgv.CurrentCell Is Nothing Then
-                    If dgv.Columns(columnName) IsNot Nothing Then
+                    If dgv.Columns(columnName) IsNot Nothing And dgv.Rows.Count() > 0 Then
                         dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
                     End If
                 End If
             Else
                 If dgv.Columns(columnName) IsNot Nothing Then
-                    dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
+                    If dgv.Columns(columnName) IsNot Nothing And dgv.Rows.Count() > 0 Then
+                        dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
+                    End If
                 End If
             End If
         End If

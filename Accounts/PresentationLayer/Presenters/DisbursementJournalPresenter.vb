@@ -743,8 +743,12 @@ Namespace PresentationLayer.Presenters
             Return dView
         End Function
 
-        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32) As List(Of DjOiItemModel)
-            Return ModelPresenter.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
+        Public Function GetSupplierOpenInvoices(ByRef supplierIdNo As Int32?) As List(Of DjOiItemModel)
+            If supplierIdNo Is Nothing Then
+                Return New List(Of DjOiItemModel)
+            Else
+                Return ModelPresenter.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
+            End If
         End Function
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
