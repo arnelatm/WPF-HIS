@@ -499,21 +499,17 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectionChangeCommitted, cboPayorType.Validated
-            If cboPayorType.SelectedIndex <> cboPayorType.PreviousSelectedIndex Then
-                SetPayorDataSource(PayorType)
-                If OpenInvoiceMode Then
-                    If cboPayorIdNo.SelectedIndex <> cboPayorIdNo.PreviousSelectedIndex Then
-                        UpdateOpenInvoicesDisplay()
-                    End If
-                    If cboPayorIdNo.SelectedIndex = -1 Then
-                        bsCsrOiItems.Clear()
-                    End If
-                Else
-                    cboPayorIdNo.SelectedIndex = -1
+            SetPayorDataSource(PayorType)
+            If OpenInvoiceMode Then
+                UpdateOpenInvoicesDisplay()
+                If cboPayorIdNo.SelectedIndex = -1 Then
+                    bsCsrOiItems.Clear()
                 End If
-                UpdateFirstLine()
-                UpdateDisplay()
+            Else
+                cboPayorIdNo.SelectedIndex = -1
             End If
+            UpdateFirstLine()
+            UpdateDisplay()
         End Sub
 
         Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectionChangeCommitted, cboAccountIdNo.Validated
@@ -660,7 +656,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
+        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs)
             MyPresenter.AutoApplyAmount()
             DataGridViewCsrOiItems.Refresh()
             UpdateOiTotals()
@@ -692,6 +688,13 @@ Namespace PresentationLayer.Views.Forms
             End If
             ShowPayor()
             UpdateTotals()
+            If MyPresenter.EditMode Or MyPresenter.AddMode Then
+                If OpenInvoiceMode Then
+                    btnAutoApply.Visible = True
+                Else
+                    btnAutoApply.Visible = False
+                End If
+            End If
             ResumeLayout()
         End Sub
 
@@ -724,14 +727,14 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub InputsTurnedOn()
             bsJournalItems.ResetBindings(False)
             btnViewGL.Visible = False
+            MyPresenter.AddCustomerOpenInvoices()
+            bsCsrOiItems.ResetBindings(False)
+            UpdateDisplay()
             If OpenInvoiceMode Then
                 btnAutoApply.Visible = True
             Else
                 btnAutoApply.Visible = False
             End If
-            MyPresenter.AddCustomerOpenInvoices()
-            bsCsrOiItems.ResetBindings(False)
-            UpdateDisplay()
         End Sub
 
         Private Sub ShowJournalItemDataGrid()

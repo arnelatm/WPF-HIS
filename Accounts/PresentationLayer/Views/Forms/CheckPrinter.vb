@@ -189,9 +189,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectionChangeCommitted, cboPaymentType.Validated
-            If cboPaymentType.SelectedIndex <> cboPaymentType.PreviousSelectedIndex Then
-                SetPayeeDataSource(PaymentType)
-            End If
+            'If cboPaymentType.SelectedIndex <> cboPaymentType.PreviousSelectedIndex Then
+            SetPayeeDataSource(PaymentType)
+            'End If
             txtPayeeName.Text = cboPayeeIdNo.Text
             ShowPayee()
         End Sub

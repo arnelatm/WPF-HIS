@@ -699,8 +699,12 @@ Namespace PresentationLayer.Presenters
             Return dView
         End Function
 
-        Public Function GetCustomerOpenInvoices(ByRef customerIdNo As Int32) As List(Of CsrOiItemModel)
-            Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
+        Public Function GetCustomerOpenInvoices(ByRef customerIdNo As Int32?) As List(Of CsrOiItemModel)
+            If customerIdNo Is Nothing Then
+                Return New List(Of CsrOiItemModel)
+            Else
+                Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
+            End If
         End Function
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
