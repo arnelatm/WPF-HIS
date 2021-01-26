@@ -26,6 +26,7 @@ Namespace PresentationLayer.Views.Forms
         Private _djOiItems As List(Of DjOiItemView)
         Private _revCostCentersByCode
         Private _defaultAccount As Int16
+        Private _bankTransfer As Boolean
 
         Public Sub New(ByVal tableName As String)
             MyBase.New()
@@ -152,6 +153,15 @@ Namespace PresentationLayer.Views.Forms
                 Else
                     dtpDateCreated.Value = Date.Now()
                 End If
+            End Set
+        End Property
+
+        Public Property PayType As String Implements IDisbursementJournalView.PayType
+            Get
+                Return cboPayType.GetValue()
+            End Get
+            Set
+                cboPayType.SetValue(Value)
             End Set
         End Property
 
@@ -333,6 +343,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+
 #End Region
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
@@ -349,8 +360,13 @@ Namespace PresentationLayer.Views.Forms
             _accountsByCode = MyPresenter.GetDetailAccountList()
             _revCostCentersByCode = MyPresenter.GetLookup("RevCostCenter")
             cboPaymentType.DataSource = MyPresenter.MakeEnumComboList(Of PaymentTypeSelection)
+            cboPayType.DataSource = MyPresenter.MakeEnumComboList(Of PayTypeSelection)
             If MainTableName = "CdJournal" Then
-                cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
+                If _bankTransfer Then
+                    cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
+                Else
+                    cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
+                End If
             ElseIf MainTableName = "PcJournal" Then
                 cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.PettyCashAccount))
             Else
@@ -369,6 +385,7 @@ Namespace PresentationLayer.Views.Forms
          {"CheckDate", dtpCheckDate},
          {"CheckNumber", txtCheckNumber},
          {"DateCreated", dtpDateCreated},
+         {"PayType", cboPayType},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
          {"IdNo", TxtIdNo},
@@ -742,13 +759,15 @@ Namespace PresentationLayer.Views.Forms
                 cboPayeeIdNo.Visible = False
                 txtPayeeName.Visible = True
                 cboPayeeIdNo.SelectedIndex = -1
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(12, 8))
-                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(5, 1))
+                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(12, 9))
+                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(1, 2))
+                tlpDisbursement.SetColumnSpan(txtPayeeName, 8)
             Else
                 cboPayeeIdNo.Visible = True
                 txtPayeeName.Visible = False
-                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(6, 8))
-                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(5, 1))
+                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(6, 9))
+                tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(1, 2))
+                tlpDisbursement.SetColumnSpan(txtPayeeName, 3)
             End If
         End Sub
 
@@ -780,7 +799,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
             DataGridViewJournalItems.Visible = True
             DataGridViewDjOiItems.Visible = False
-            If tlpDisbursement.GetCellPosition(DataGridViewJournalItems) <> New TableLayoutPanelCellPosition(0, 7) Then
+            If tlpDisbursement.GetCellPosition(DataGridViewJournalItems) <> New TableLayoutPanelCellPosition(0, 8) Then
                 tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 12)
                 tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 1)
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
@@ -794,7 +813,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ShowOpenInvoicesDataGrid()
             DataGridViewJournalItems.Visible = False
             DataGridViewDjOiItems.Visible = True
-            If tlpDisbursement.GetCellPosition(DataGridViewDjOiItems) <> New TableLayoutPanelCellPosition(0, 7) Then
+            If tlpDisbursement.GetCellPosition(DataGridViewDjOiItems) <> New TableLayoutPanelCellPosition(0, 8) Then
                 tlpDisbursement.SetColumnSpan(DataGridViewJournalItems, 1)
                 tlpDisbursement.SetColumnSpan(DataGridViewDjOiItems, 12)
                 GlobalSubs.SwapPosition(DataGridViewJournalItems, DataGridViewDjOiItems)
@@ -835,6 +854,7 @@ Namespace PresentationLayer.Views.Forms
                 UpdateJiTotals()
             End If
         End Sub
+
 
     End Class
 

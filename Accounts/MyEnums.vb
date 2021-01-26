@@ -107,6 +107,13 @@ Public Enum DeductionComputation
     <EnumCode("T")> TabledBased
 End Enum
 
+Public Enum PayTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("1")> BankTransfer
+    <EnumCode("2")> CheckPayment
+    <EnumCode("3")> Others
+End Enum
+
 Public Enum EarningTypeSelection
     <EnumCode("R")> Regular
     <EnumCode("O")> Overtime

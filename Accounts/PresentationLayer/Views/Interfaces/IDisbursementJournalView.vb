@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property CheckDate As Date?
         Property CheckNumber As String
         Property DateCreated As DateTime?
+        Property PayType As String
         Property DiscountAccountIdNo As Int16?
         Property DiscountTaken As Decimal
         Property IdNo As Int32

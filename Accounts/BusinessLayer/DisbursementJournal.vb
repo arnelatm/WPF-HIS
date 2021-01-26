@@ -40,6 +40,7 @@ Namespace BusinessLayer
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
+        Public Property PayType As String
         Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal
         Public Property IdNo As Int32

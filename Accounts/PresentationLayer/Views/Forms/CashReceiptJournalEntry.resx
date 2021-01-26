@@ -90128,9 +90128,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>986, 629</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>1002, 668</value>
   </data>
