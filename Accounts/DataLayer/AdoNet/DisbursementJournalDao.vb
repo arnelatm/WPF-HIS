@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
@@ -31,7 +32,7 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim jiDao
             Dim oiDao
-            If TableOrViewName = "CkJournal" Then
+            If TableOrViewName = "CdJournal" Then
                 sql = "SELECT " &
                     "AccountIdNo," &
                     "Amount," &
@@ -57,7 +58,7 @@ Namespace DataLayer.AdoNet
                     "VatNumber" &
                     " FROM " & TableOrViewName &
                     " WHERE IdNo = @IdNo"
-                data = _db.Read(sql, CkMake, params).FirstOrDefault()
+                data = _db.Read(sql, CdMake, params).FirstOrDefault()
             Else
                 sql = "SELECT " &
                     "AccountIdNo," &
@@ -82,7 +83,7 @@ Namespace DataLayer.AdoNet
                     "VatNumber" &
                     " FROM " & TableOrViewName &
                     " WHERE IdNo = @IdNo"
-                data = _db.Read(sql, DjMake, params).FirstOrDefault()
+                data = _db.Read(sql, PcMake, params).FirstOrDefault()
             End If
             jiDao = New JournalItemDao(JiDataNames)
             oiDao = New DjOiItemDao(OiDataNames)
@@ -99,7 +100,7 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).UpdateRecord
             Dim sql As String
-            If TableOrViewName = "CkJournal" Then
+            If TableOrViewName = "CdJournal" Then
                 sql = " UPDATE " & TableOrViewName & " SET " &
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
@@ -122,7 +123,7 @@ Namespace DataLayer.AdoNet
                     "VatAmount     = @VatAmount," &
                     "VatNumber     = @VatNumber" &
                     " WHERE IdNo = @IdNo"
-                Return _db.Update(sql, CkTake(disbursementJournal))
+                Return _db.Update(sql, CdTake(disbursementJournal))
             Else
                 sql = " UPDATE " & TableOrViewName & " SET " &
                     "AccountIdNo   = @AccountIdNo," &
@@ -144,13 +145,13 @@ Namespace DataLayer.AdoNet
                     "VatAmount     = @VatAmount," &
                     "VatNumber     = @VatNumber" &
                     " WHERE IdNo = @IdNo"
-                Return _db.Update(sql, DjTake(disbursementJournal))
+                Return _db.Update(sql, PcTake(disbursementJournal))
             End If
         End Function
 
         Public Function AddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).AddRecord
             Dim sql As String
-            If TableOrViewName = "CkJournal" Then
+            If TableOrViewName = "CdJournal" Then
                 sql = " INSERT INTO " & TableOrViewName & " (" &
                         "AccountIdNo," &
                         "Amount," &
@@ -192,7 +193,7 @@ Namespace DataLayer.AdoNet
                         "@VatAmount," &
                         "@VatNumber" &
                         ")"
-                Return _db.Insert(sql, CkTake(disbursementJournal))
+                Return _db.Insert(sql, CdTake(disbursementJournal))
             Else
                 sql = " INSERT INTO " & TableOrViewName & " (" &
                         "AccountIdNo," &
@@ -233,11 +234,11 @@ Namespace DataLayer.AdoNet
                         "@VatAmount," &
                         "@VatNumber" &
                         ")"
-                Return _db.Insert(sql, DjTake(disbursementJournal))
+                Return _db.Insert(sql, PcTake(disbursementJournal))
             End If
         End Function
 
-        Private ReadOnly DjMake As Func(Of IDataReader, DisbursementJournal) =
+        Private ReadOnly PcMake As Func(Of IDataReader, DisbursementJournal) =
                                     Function(reader) _
             New DisbursementJournal(JournalCode) With {
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
@@ -262,7 +263,7 @@ Namespace DataLayer.AdoNet
             .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
-        Private ReadOnly CkMake As Func(Of IDataReader, DisbursementJournal) =
+        Private ReadOnly CdMake As Func(Of IDataReader, DisbursementJournal) =
                             Function(reader) _
             New DisbursementJournal(JournalCode) With {
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
@@ -289,7 +290,7 @@ Namespace DataLayer.AdoNet
             .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
-        Private Function DjTake(disbursementJournal As DisbursementJournal) As Object()
+        Private Function PcTake(disbursementJournal As DisbursementJournal) As Object()
             Return New Object() {
                                     "@AccountIdNo", disbursementJournal.AccountIdNo,
                                     "@Amount", disbursementJournal.Amount,
@@ -314,7 +315,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Private Function CkTake(disbursementJournal As DisbursementJournal) As Object()
+        Private Function CdTake(disbursementJournal As DisbursementJournal) As Object()
             Return New Object() {
                                     "@AccountIdNo", disbursementJournal.AccountIdNo,
                                     "@Amount", disbursementJournal.Amount,
@@ -345,9 +346,49 @@ Namespace DataLayer.AdoNet
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
-            sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & JournalCode & "'"
-            sql2 = "Update [" & TableOrViewName & "] set ReferenceNo = (select value from series where seriesName = '" & JournalCode & "') where IdNo = " & bizObj.IdNo
-            retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+            Dim seriesName As String
+            If bizObj.PayType = GlobalFunctions.EnumToCode(PayTypeSelection.BankTransfer) Then
+                seriesName = "BTJournal"
+                sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & seriesName & "'"
+                sql2 = "Update [" & TableOrViewName & "] set ReferenceNo = (select value from series where seriesName = '" & seriesName & "') where IdNo = " & bizObj.IdNo
+                retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+            ElseIf bizObj.PayType = GlobalFunctions.EnumToCode(PayTypeSelection.CheckPayment) Then
+                seriesName = "CKJournal"
+                sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & seriesName & "'"
+                sql2 = "Update [" & TableOrViewName & "] set ReferenceNo = (select value from series where seriesName = '" & seriesName & "') where IdNo = " & bizObj.IdNo
+                retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+            Else
+                Dim transactionDate = bizObj.TransactionDate
+                Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
+                Dim maxlength As Int16
+                Dim prefix As String
+                If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
+                    seriesName = "GJ"
+                    maxlength = 4
+                    prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
+                    Dim sql As String = "INSERT INTO [Series] " &
+                        " (SeriesName,Value,MaxLength,Prefix,Description)" &
+                        " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
+                    Dim params() As Object = {"@SeriesName", series,
+                                              "@Value", 0,
+                                              "@MaxLength", 4,
+                                              "@Prefix", prefix,
+                                              "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
+                                             }
+                    retVal = _db.Insert(sql, params)
+                    If retVal < 0 Then
+                        Return retVal
+                    End If
+                Else
+                    prefix = _db.Scalar("select prefix from series where seriesName = '" & series & "'")
+                    maxlength = _db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
+                End If
+                sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
+                sql2 = "Update [CDJournal] set ReferenceNo = Concat( '" & prefix & "', RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
+                       ")) where IdNo = " & bizObj.IdNo
+                retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+                Return retVal
+            End If
             Return retVal
         End Function
 

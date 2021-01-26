@@ -17,7 +17,6 @@ Namespace PresentationLayer.Presenters
         Protected DtOiInsertTable As New DataTable
         Protected DtOiUpdateTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Protected ReportName As String
 
         Private OiItemModel
         Private _journalItemModel
@@ -33,18 +32,15 @@ Namespace PresentationLayer.Presenters
                 oiArgs = {"CdOiItem_View", "UpdateCdOiItemTVP", "InsertCdOiItemTVP"}
                 args = {"CdJournal", "CD", djArgs, oiArgs}
                 JournalCode = "CD"
-                ReportName = "Cash Disbursement Journal.Rpt"
             ElseIf tableOrViewName = "CkJournal" Then
                 djArgs = {"CkJournalItem_View", "UpdateCkJournalItemTVP", "InsertCkJournalItemTVP"}
                 oiArgs = {"CkOiItem_View", "UpdateCkOiItemTVP", "InsertCkOiItemTVP"}
                 args = {"CkJournal", "CK", djArgs, oiArgs}
                 JournalCode = "CK"
-                ReportName = "Check Disbursement Journal.Rpt"
             Else
                 djArgs = {"PcJournalItem_View", "UpdatePcJournalItemTVP", "InsertPcJournalItemTVP"}
                 oiArgs = {"PcOiItem_View", "UpdatePcOiItemTVP", "InsertPcOiItemTVP"}
                 args = {"PcJournal", "PC", djArgs, oiArgs}
-                ReportName = "Petty Cash Disbursement Journal.Rpt"
                 JournalCode = "PC"
             End If
             _journalItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
@@ -309,14 +305,19 @@ Namespace PresentationLayer.Presenters
             Else
                 totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
+            Dim reportName As String = ""
             If TableName = "PcJournal" Then
-                ReportName = "Petty Cash Disbursement Journal.Rpt"
-            ElseIf TableName = "CdJournal" Then
-                ReportName = "Cash Disbursement Journal.Rpt"
+                reportName = "Petty Cash Disbursement Journal.Rpt"
             Else
-                ReportName = "Check Disbursement Journal.Rpt"
+                If View.PayType = EnumToCode(PayTypeSelection.BankTransfer) Then
+                    reportName = "Bank Transfer Journal.Rpt"
+                ElseIf View.PayType = EnumToCode(PayTypeSelection.CheckPayment) Then
+                    reportName = "Check Disbursement Journal.Rpt"
+                Else
+                    reportName = "Cash Disbursement Journal.Rpt"
+                End If
             End If
-            Dim cForm As New ReportForm(ReportName, View.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
+            Dim cForm As New ReportForm(reportName, View.IdNo, "JournalIdNo", transactionAmountInWords, "transactionAmountInWords", totalLineAmountInWords, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 
@@ -913,8 +914,7 @@ Namespace PresentationLayer.Presenters
             Else
                 checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            ReportName = "Check Printing.Rpt"
-            Dim cForm As New ReportForm(ReportName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language")
+            Dim cForm As New ReportForm("Check Printing.Rpt", checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language")
             cForm.Show()
         End Sub
 

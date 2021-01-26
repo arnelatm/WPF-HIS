@@ -92,16 +92,16 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
         Me.PettyCashToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCashDisbursementEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AccountsPayableEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AccountsReceivableEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCashReceiptEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EmployeeReceivableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemGeneralJournalEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SalesJournalEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AccountReconciliationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClosePettyCashAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClosingEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.BankTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.AccountsPayableEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.AccountsReceivableEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCashReceiptEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.EmployeeReceivableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemGeneralJournalEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.SalesJournalEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.AccountReconciliationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ClosePettyCashAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ClosingEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayrollEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayPeriodAttendanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayrollEntryToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -163,7 +163,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.BankTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -493,7 +492,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTransactions
             '
-            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PettyCashToolStripMenuItem, Me.ToolStripMenuItemCashDisbursementEntry, Me.BankTransferToolStripMenuItem, Me.AccountsPayableEntryToolStripMenuItem, Me.AccountsReceivableEntryToolStripMenuItem, Me.ToolStripMenuItem8, Me.ToolStripMenuItemCashReceiptEntry, Me.EmployeeReceivableToolStripMenuItem, Me.ToolStripMenuItemGeneralJournalEntry, Me.SalesJournalEntryToolStripMenuItem, Me.AccountReconciliationToolStripMenuItem, Me.ClosePettyCashAccountToolStripMenuItem, Me.ClosingEntryToolStripMenuItem, Me.PayrollEntryToolStripMenuItem})
+            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PettyCashToolStripMenuItem, Me.ToolStripMenuItemCashDisbursementEntry, Me.BankTransferToolStripMenuItem, Me.AccountsPayableEntryToolStripMenuItem, Me.AccountsReceivableEntryToolStripMenuItem, Me.ToolStripMenuItemCashReceiptEntry, Me.EmployeeReceivableToolStripMenuItem, Me.ToolStripMenuItemGeneralJournalEntry, Me.SalesJournalEntryToolStripMenuItem, Me.AccountReconciliationToolStripMenuItem, Me.ClosePettyCashAccountToolStripMenuItem, Me.ClosingEntryToolStripMenuItem, Me.PayrollEntryToolStripMenuItem})
             Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
             resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
             '
@@ -507,6 +506,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemCashDisbursementEntry.Name = "ToolStripMenuItemCashDisbursementEntry"
             resources.ApplyResources(Me.ToolStripMenuItemCashDisbursementEntry, "ToolStripMenuItemCashDisbursementEntry")
             '
+            'BankTransferToolStripMenuItem
+            '
+            Me.BankTransferToolStripMenuItem.Name = "BankTransferToolStripMenuItem"
+            resources.ApplyResources(Me.BankTransferToolStripMenuItem, "BankTransferToolStripMenuItem")
+            '
             'AccountsPayableEntryToolStripMenuItem
             '
             Me.AccountsPayableEntryToolStripMenuItem.Name = "AccountsPayableEntryToolStripMenuItem"
@@ -516,11 +520,6 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.AccountsReceivableEntryToolStripMenuItem.Name = "AccountsReceivableEntryToolStripMenuItem"
             resources.ApplyResources(Me.AccountsReceivableEntryToolStripMenuItem, "AccountsReceivableEntryToolStripMenuItem")
-            '
-            'ToolStripMenuItem8
-            '
-            Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
-            resources.ApplyResources(Me.ToolStripMenuItem8, "ToolStripMenuItem8")
             '
             'ToolStripMenuItemCashReceiptEntry
             '
@@ -875,11 +874,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'BankTransferToolStripMenuItem
-            '
-            Me.BankTransferToolStripMenuItem.Name = "BankTransferToolStripMenuItem"
-            resources.ApplyResources(Me.BankTransferToolStripMenuItem, "BankTransferToolStripMenuItem")
-            '
             'Main
             '
             Me.AllowDrop = True
@@ -989,7 +983,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemBanks As ToolStripMenuItem
         Friend WithEvents AccountsPayableEntryToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents AccountsReceivableEntryToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItem8 As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemItems As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCategories As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCaptionsBatchEdit As ToolStripMenuItem
