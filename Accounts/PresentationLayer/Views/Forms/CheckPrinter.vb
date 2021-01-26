@@ -152,6 +152,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DiscountAccountIdNo As Short? Implements IDisbursementJournalView.DiscountAccountIdNo
 
+        Public Property PayType As String Implements IDisbursementJournalView.PayType
+
+
 #End Region
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
