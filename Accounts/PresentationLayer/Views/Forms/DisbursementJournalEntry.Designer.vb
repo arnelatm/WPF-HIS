@@ -1659,7 +1659,7 @@ Namespace PresentationLayer.Views.Forms
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-            Me.ClientSize = New System.Drawing.Size(997, 645)
+            Me.ClientSize = New System.Drawing.Size(988, 645)
             Me.Controls.Add(Me.tlpDisbursement)
             Me.MinimumSize = New System.Drawing.Size(945, 590)
             Me.Name = "DisbursementJournalEntry"

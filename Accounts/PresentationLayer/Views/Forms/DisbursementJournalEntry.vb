@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
@@ -36,24 +35,19 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = tableName
             SortOrderKey = "IdNo"
-            If tableName = "PcJournal" Then
+            If tableName = "CdJournal" Then
+                MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
+                DisplayPrintCheckButton(PayType)
+                Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
+            Else
+                tableName = "PcJournal"
                 MyPresenter = New DisbursementJournalPresenter(Me, "PcJournal")
                 Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
                 btnPrintCheck.Visible = False
-            ElseIf tableName = "CdJournal" Then
-                MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
-                Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
-                btnPrintCheck.Visible = False
-            Else
-                MyPresenter = New DisbursementJournalPresenter(Me, "CkJournal")
-                MyPresenter.JournalCode = "CK"
-                Me.Text = Messaging.TranslateCaption("Check Disbursement Journal")
-                btnPrintCheck.Visible = True
             End If
             PresenterObj = MyPresenter
             _defaultAccount = MyPresenter.DefaultDisbursementAccount
             txtJournalCode.Text = MyPresenter.JournalCode
-
             FirstControl = cboPaymentType
             _nfi.NumberDecimalDigits = 2
             Ea = MyPresenter.Ea
@@ -432,17 +426,6 @@ Namespace PresentationLayer.Views.Forms
             If cboAccountIdNo.SelectedValue <= 0 Then
                 cboAccountIdNo.SelectedValue = _defaultAccount
             End If
-            If MainTableName <> "CkJournal" Then
-                dtpCheckDate.Visible = False
-                lblCheckDate.Visible = False
-                lblCheckNumber.Visible = False
-                txtCheckNumber.Visible = False
-            Else
-                dtpCheckDate.Visible = True
-                lblCheckDate.Visible = True
-                lblCheckNumber.Visible = True
-                txtCheckNumber.Visible = True
-            End If
             If MyPresenter.CdAccountCount = 0 Then
                 If txtJournalCode.Text = "PC" Then
                     Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"specialAccountName", "Petty Cash"})
@@ -453,6 +436,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 MyPresenter.GoQuit()
             End If
+            DisplayCheckInfo()
             BindDjOiItem()
             BindJournalItem()
         End Sub
@@ -560,6 +544,35 @@ Namespace PresentationLayer.Views.Forms
             End If
             UpdateFirstLine()
             UpdateDisplay()
+        End Sub
+
+        Private Sub CboPayType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayType.SelectionChangeCommitted, cboPayType.Validated
+            DisplayPrintCheckButton(cboPayType.SelectedValue)
+            DisplayCheckInfo()
+        End Sub
+
+        Private Sub DisplayCheckInfo()
+            If cboPayType.SelectedValue = EnumToCode(PayTypeSelection.CheckPayment) Then
+                dtpCheckDate.Visible = True
+                lblCheckDate.Visible = True
+                lblCheckNumber.Visible = True
+                txtCheckNumber.Visible = True
+            Else
+                dtpCheckDate.Visible = False
+                lblCheckDate.Visible = False
+                lblCheckNumber.Visible = False
+                txtCheckNumber.Visible = False
+            End If
+        End Sub
+
+        Private Sub DisplayPrintCheckButton(ByVal cPayType As String)
+            If cPayType = EnumToCode(PayTypeSelection.BankTransfer) Then
+                btnPrintCheck.Visible = False
+            ElseIf cPayType = EnumToCode(PayTypeSelection.CheckPayment) Then
+                btnPrintCheck.Visible = True
+            Else
+                btnPrintCheck.Visible = False
+            End If
         End Sub
 
         Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectionChangeCommitted, cboAccountIdNo.Validated
@@ -749,8 +762,9 @@ Namespace PresentationLayer.Views.Forms
                     btnAutoApply.Visible = False
                 End If
             End If
+            DisplayPrintCheckButton(PayType)
+            DisplayCheckInfo()
             ResumeLayout()
-
         End Sub
 
         Private Sub ShowPayee()

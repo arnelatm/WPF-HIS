@@ -17,6 +17,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("Notes"))
                 AddRule(New ValidateRequired("PaymentType"))
                 AddRule(New ValidateRequired("AccountIdNo"))
+                AddRule(New ValidateRequired("PayType"))
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateRequired("PayeeName", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateVatNumber("VatNumber"))
@@ -24,10 +25,8 @@ Namespace BusinessLayer
                 AddRule(New ValidateIfRequired("DiscountAccountIdNo", "DiscountTaken", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateCompareIfTrue(PaymentType = "A", "Amount", "Applied", ValidationOperator.Equal, ValidationDataType.Decimal))
                 AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
-                If parameter(JournalCode) = "CK" Then
-                    AddRule(New ValidateRequired("CheckDate"))
-                    AddRule(New ValidateRequired("CheckNumber"))
-                End If
+                AddRule(New ValidateIfRequired("CheckDate", "PayType", ValidationDataType.String, ValidationOperator.Equal, "2"))
+                AddRule(New ValidateIfRequired("CheckNumber", "PayType", ValidationDataType.String, ValidationOperator.Equal, "2"))
             End If
 
         End Sub
