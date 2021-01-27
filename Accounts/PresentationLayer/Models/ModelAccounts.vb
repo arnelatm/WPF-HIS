@@ -56,6 +56,14 @@ Namespace PresentationLayer.Models
             Return DataService.GetAcctReconItems(Of TM)(AccountIdNo, reconciliationDate, sortExpression)
         End Function
 
+        Public Function GenerateCode(idNo As Integer) As String Implements IModelAccounts.GenerateCode
+            Return DataService.GenerateCode(idNo)
+        End Function
+
+        Public Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer Implements IModelAccounts.UpdateVatNumber
+            Return DataService.UpdateVatNumber(vatNumber, idNo)
+        End Function
+
     End Class
 
 End Namespace

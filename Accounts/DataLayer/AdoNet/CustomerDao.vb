@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class CustomerDao
         Inherits CommonDao
-        Implements IDaoAll(Of Customer), IDaoContacts(Of Customer)
+        Implements IDaoAll(Of Customer), IDaoContacts(Of Customer), IDaoAutoCode
 
         Private ReadOnly Db As New Db()
 
@@ -194,6 +194,10 @@ Namespace DataLayer.AdoNet
                 End If
             End If
             Return retVal
+        End Function
+
+        Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
+            Return GetCode(Db, "Customer", "CustomerCode", "IdNo", idNo)
         End Function
 
     End Class

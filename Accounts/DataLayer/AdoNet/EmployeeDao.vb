@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeDao
         Inherits CommonDao
-        Implements IDaoAll(Of Employee)
+        Implements IDaoAll(Of Employee), IDaoAutoCode
 
         Private ReadOnly _db As New Db()
 
@@ -186,6 +186,10 @@ Namespace DataLayer.AdoNet
                                     "@TownCity", employee.TownCity,
                                     "@ZipCode", employee.ZipCode
                                 }
+        End Function
+
+        Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
+            Return GetCode(_db, "Employee", "EmployeeCode", "IdNo", idNo)
         End Function
 
     End Class

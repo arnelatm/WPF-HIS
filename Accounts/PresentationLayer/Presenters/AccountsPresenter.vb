@@ -63,9 +63,13 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Sub
 
-        Public Function GetSupplierVatNumber(idNo As String)
-            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")
-        End Function
+        Public Sub SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
+            If IsEmpty(currentVatNumber) Or override Then
+                If idNo IsNot Nothing Then
+                    currentVatNumber = GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")
+                End If
+            End If
+        End Sub
 
         Public Function GetSupplierPaymentDueDays(idNo As String)
             Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")

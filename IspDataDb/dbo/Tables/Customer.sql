@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Customer] (
     [IdNo]               INT            IDENTITY (1, 1) NOT NULL,
-    [CustomerCode]       NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    [CustomerCode]       NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [CustomerName]       NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [CustomerNameAra]    NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [ContactPerson]      NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -39,10 +39,17 @@
     [Active]             BIT            NULL,
     [DateCreated]        DATETIME2 (7)  CONSTRAINT [DF_Customer2_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]      ROWVERSION     NULL,
-    CONSTRAINT [PK_CustomerDetailsIDNo2] PRIMARY KEY CLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_CustomerName2] UNIQUE NONCLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_CustomerNameAra2] UNIQUE NONCLUSTERED ([IdNo] ASC)
+    CONSTRAINT [PK_CustomerDetailsIDNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
+    CONSTRAINT [IX_CustomerName] UNIQUE NONCLUSTERED ([CustomerName] ASC),
+    CONSTRAINT [IX_CustomerNameAra] UNIQUE NONCLUSTERED ([CustomerNameAra] ASC)
 );
 
 
+
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerCode]
+    ON [dbo].[Customer]([CustomerCode] ASC);
 

@@ -491,7 +491,7 @@ Namespace PresentationLayer.Views.Forms
                 UpdateOpenInvoicesDisplay()
             Else
                 If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.SupplierRefund Then
-                    UpdateVatNumber()
+                    MyPresenter.SetSupplierVatNumber(VatNumber, PayorIdNo, True)
                 Else
                     VatNumber = ""
                 End If
@@ -638,13 +638,13 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewJournalItems.Refresh()
         End Sub
 
-        Private Sub UpdateVatNumber()
-            If cboPayorIdNo.Text IsNot Nothing Then
-                VatNumber = MyPresenter.GetSupplierVatNumber(cboPayorIdNo.SelectedValue)
-            Else
-                VatNumber = ""
-            End If
-        End Sub
+        'Private Sub UpdateVatNumber()
+        '    If cboPayorIdNo.Text IsNot Nothing Then
+        '        VatNumber = MyPresenter.GetSupplierVatNumber(cboPayorIdNo.SelectedValue)
+        '    Else
+        '        VatNumber = ""
+        '    End If
+        'End Sub
 
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
             Dim crJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)

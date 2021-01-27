@@ -21,6 +21,10 @@ Namespace PresentationLayer.Models
 
         Function GetAcctReconItems(Of TM)(AccountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
+        Function GenerateCode(idNo As Integer) As String
+
+        Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer
+
     End Interface
 
     'Public Interface IModelOpenInvoice

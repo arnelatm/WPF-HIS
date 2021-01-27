@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -24,6 +25,13 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnSuccessfulUpdate(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             retVal = ModelPresenter.UpdateOpeningBalance(DataModel)
+        End Sub
+
+        Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Integer = retVal
+            If retVal >= 0 And GlobalFunctions.IsEmpty(View.CustomerCode) Then
+                retVal = ModelPresenter.GenerateCode(View.IdNo)
+            End If
         End Sub
 
     End Class

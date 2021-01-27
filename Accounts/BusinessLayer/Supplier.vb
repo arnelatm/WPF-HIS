@@ -14,7 +14,7 @@ Namespace BusinessLayer
                 ' establish business rules
                 AddRule(New ValidateRequired("SupplierName"))
                 AddRule(New ValidateRequired("SupplierNameAra"))
-                AddRule(New ValidateRequired("SupplierCode"))
+                'AddRule(New ValidateRequired("SupplierCode"))
                 AddRule(New ValidateEmail("Email"))
                 AddRule(New ValidateVatNumber("VatNumber"))
             End If

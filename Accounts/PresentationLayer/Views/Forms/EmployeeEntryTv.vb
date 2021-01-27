@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
             TvMainFieldName = "EmployeeName"
             TvSecondaryFieldName = "EmployeeCode"
             SortOrderKey = "EmployeeName"
-            FirstControl = txtEmployeeCode
+            FirstControl = txtEmployeeName
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             ' Add any initialization after the InitializeComponent() call.
             EmployeeTabControl.RightToLeftLayout = GlobalVariables.RightToLeftLayout
