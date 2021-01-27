@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class DisbursementJournalDao
-        Implements IDao(Of DisbursementJournal), IDaoJournals(Of DisbursementJournal), IDaoOiItem(Of DjOiItem)
+        Implements IDao(Of DisbursementJournal), IDaoJournals(Of DisbursementJournal), IDaoOiItem(Of DjOiItem), IDaoAutoVatUpdate
 
         Public ReadOnly Property Args As Object()
         Private ReadOnly _db As New Db()
@@ -66,7 +66,6 @@ Namespace DataLayer.AdoNet
                     "Applied," &
                     "Cancelled," &
                     "DateCreated," &
-                    "PayType," &
                     "DiscountAccountIdNo," &
                     "DiscountTaken," &
                     "IdNo," &
@@ -108,7 +107,7 @@ Namespace DataLayer.AdoNet
                     "Cancelled     = @Cancelled," &
                     "CheckDate     = @CheckDate," &
                     "CheckNumber   = @CheckNumber," &
-                    "PayType = @PayType," &
+                    "PayType       = @PayType," &
                     "DiscountAccountIdNo = @DiscountAccountIdNo," &
                     "DiscountTaken = @DiscountTaken," &
                     "Notes         = @Notes," &
@@ -130,7 +129,6 @@ Namespace DataLayer.AdoNet
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
                     "Cancelled     = @Cancelled," &
-                    "PayType    = @PayType," &
                     "DiscountAccountIdNo = @DiscountAccountIdNo," &
                     "DiscountTaken = @DiscountTaken," &
                     "Notes         = @Notes," &
@@ -178,6 +176,8 @@ Namespace DataLayer.AdoNet
                         "@Amount," &
                         "@Applied," &
                         "@Cancelled," &
+                        "@CheckDate," &
+                        "@CheckNumber," &
                         "@PayType," &
                         "@DiscountAccountIdNo," &
                         "@DiscountTaken," &
@@ -200,7 +200,6 @@ Namespace DataLayer.AdoNet
                         "Amount," &
                         "Applied," &
                         "Cancelled," &
-                        "PayType," &
                         "DiscountAccountIdNo," &
                         "DiscountTaken," &
                         "Notes," &
@@ -219,7 +218,6 @@ Namespace DataLayer.AdoNet
                         "@Amount," &
                         "@Applied," &
                         "@Cancelled," &
-                        "@PayType," &
                         "@DiscountAccountIdNo," &
                         "@DiscountTaken," &
                         "@Notes," &
@@ -246,7 +244,6 @@ Namespace DataLayer.AdoNet
             .Applied = Extensions.AsDecimal(reader("Applied")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
-            .PayType = Extensions.AsString(reader("PayType")),
             .DiscountAccountIdNo = Extensions.AsNullable(Of Int16?)(reader("DiscountAccountIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
@@ -297,7 +294,6 @@ Namespace DataLayer.AdoNet
                                     "@Applied", disbursementJournal.Applied,
                                     "@Cancelled", disbursementJournal.Cancelled,
                                     "@DateCreated", disbursementJournal.DateCreated,
-                                    "@PayType", disbursementJournal.PayType,
                                     "@DiscountAccountIdNo", disbursementJournal.DiscountAccountIdNo,
                                     "@DiscountTaken", disbursementJournal.DiscountTaken,
                                     "@IdNo", disbursementJournal.IdNo,
@@ -347,12 +343,12 @@ Namespace DataLayer.AdoNet
             Dim sql1 As String
             Dim sql2 As String
             Dim seriesName As String
-            If bizObj.PayType = GlobalFunctions.EnumToCode(PayTypeSelection.BankTransfer) Then
+            If TableOrViewName = "CdJournal" AndAlso bizObj.PayType = GlobalFunctions.EnumToCode(PayTypeSelection.BankTransfer) Then
                 seriesName = "BTJournal"
                 sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & seriesName & "'"
                 sql2 = "Update [" & TableOrViewName & "] set ReferenceNo = (select value from series where seriesName = '" & seriesName & "') where IdNo = " & bizObj.IdNo
                 retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
-            ElseIf bizObj.PayType = GlobalFunctions.EnumToCode(PayTypeSelection.CheckPayment) Then
+            ElseIf TableOrViewName = "CdJournal" AndAlso bizObj.PayType = GlobalFunctions.EnumToCode(PayTypeSelection.CheckPayment) Then
                 seriesName = "CKJournal"
                 sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & seriesName & "'"
                 sql2 = "Update [" & TableOrViewName & "] set ReferenceNo = (select value from series where seriesName = '" & seriesName & "') where IdNo = " & bizObj.IdNo
@@ -395,6 +391,14 @@ Namespace DataLayer.AdoNet
         Public Function GetOpenInvoices(idNo As Integer) As List(Of DjOiItem) Implements IDaoOiItem(Of DjOiItem).GetOpenInvoices
             Dim oiDao = New DjOiItemDao(JiDataNames)
             Return oiDao.GetOpenInvoices(idNo)
+        End Function
+
+        Public Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer Implements IDaoAutoVatUpdate.UpdateVatNumber
+            Dim retVal As Boolean
+            Dim sql1 As String
+            sql1 = "Update Supplier set VatNumber = '" & vatNumber & "' where IdNo = " & idNo.ToString() & " and (VatNumber IS NULL or VatNumber = '')"
+            retVal = _db.ExecuteSqlTransaction("UpdateVatNumber", sql1, "")
+            Return retVal
         End Function
 
     End Class

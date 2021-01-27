@@ -48,4 +48,16 @@ Namespace DataLayer
 
     End Interface
 
+    Public Interface IDaoAutoCode
+
+        Function GenerateCode(idNo As Integer) As String
+
+    End Interface
+
+    Public Interface IDaoAutoVatUpdate
+
+        Function UpdateVatNumber(ByVal vatNumber As String, ByVal idNo As Integer) As Integer
+
+    End Interface
+
 End Namespace

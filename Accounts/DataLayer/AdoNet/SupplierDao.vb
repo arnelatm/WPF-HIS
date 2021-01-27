@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class SupplierDao
         Inherits CommonDao
-        Implements IDaoAll(Of Supplier), IDaoContacts(Of Supplier)
+        Implements IDaoAll(Of Supplier), IDaoContacts(Of Supplier), IDaoAutoCode
 
         Private ReadOnly Db As New Db()
 
@@ -117,7 +117,7 @@ Namespace DataLayer.AdoNet
 
         Public Function AddRecord(ByRef supplier As Supplier) As Integer Implements IDaoAll(Of Supplier).AddRecord
             Dim sql As String =
-                    "INSERT INTO [Supplier] " &
+                    "INSERT INTO [Supplier] (" &
                     "AccountStatus," &
                     "Active," &
                     "ApAccountIdNo," &
@@ -287,6 +287,10 @@ Namespace DataLayer.AdoNet
                 End If
             End If
             Return retVal
+        End Function
+
+        Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
+            Return GetCode(Db, "Supplier", "SupplierCode", "IdNo", idNo)
         End Function
 
     End Class

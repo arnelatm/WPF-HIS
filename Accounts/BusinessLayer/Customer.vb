@@ -14,7 +14,7 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("CustomerName"))
                 AddRule(New ValidateRequired("CustomerNameAra"))
-                AddRule(New ValidateRequired("CustomerCode"))
+                'AddRule(New ValidateRequired("CustomerCode"))
                 AddRule(New ValidateEmail("Email"))
             End If
         End Sub

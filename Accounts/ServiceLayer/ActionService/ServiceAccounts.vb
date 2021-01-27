@@ -19,6 +19,7 @@ Namespace ServiceLayer.ActionService
             CreateBusinessObject(objectName, bizParam)
             CreateDao(objectName, daoParam)
         End Sub
+
         Protected Overrides Sub CreateBusinessObject(objectName As String, Optional bizParam As Object = Nothing)
             Dim bizObjectName As String
             bizObjectName = $"AATM.Accounts.BusinessLayer." + objectName
@@ -89,6 +90,14 @@ Namespace ServiceLayer.ActionService
             Implements IServiceAccounts.UpdateOpeningBalance
             GlobalVariables.Mapper.Map(model, DataBo)
             Return DataDao.UpdateOpeningBalance(DataBo)
+        End Function
+
+        Public Function GenerateCode(ByVal idNo As Integer) As String Implements IServiceAccounts.GenerateCode
+            Return DataDao.GenerateCode(idNo)
+        End Function
+
+        Public Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer Implements IServiceAccounts.UpdateVatNumber
+            Return DataDao.UpdateVatNumber(vatNumber, idNo)
         End Function
 
         'Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.AddInvoicePayment

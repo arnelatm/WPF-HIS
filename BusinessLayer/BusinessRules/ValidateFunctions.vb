@@ -6,8 +6,13 @@
                                            pDataType As ValidationDataType, pOperator As ValidationOperator,
                                            pValue As Object) As Boolean
             Try
-                Dim propValue As String =
-                        businessObject.GetType().GetProperty(pProperty).GetValue(businessObject, Nothing).ToString()
+                Dim boPropValue As Object = businessObject.GetType().GetProperty(pProperty).GetValue(businessObject, Nothing)
+                Dim propValue As String
+                If boPropValue Is Nothing Then
+                    propValue = Nothing
+                Else
+                    propValue = boPropValue.ToString()
+                End If
 
                 Select Case pDataType
                     Case ValidationDataType.Integer

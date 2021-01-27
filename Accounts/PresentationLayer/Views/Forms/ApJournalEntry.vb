@@ -359,7 +359,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CboSupplierIdNo_Validated(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated
             UpdateDueDate()
             UpdateEarlySettlementValues()
-            UpdateVatNumber()
+            MyPresenter.SetSupplierVatNumber(VatNumber, IdNo, True)
         End Sub
 
         Private Sub CboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboSupplierIdNo.Validating
@@ -490,14 +490,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-            End If
-        End Sub
-
-        Private Sub UpdateVatNumber()
-            If cboSupplierIdNo.Text IsNot Nothing Then
-                VatNumber = MyPresenter.GetSupplierVatNumber(cboSupplierIdNo.SelectedValue)
-            Else
-                VatNumber = ""
             End If
         End Sub
 

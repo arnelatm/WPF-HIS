@@ -118,19 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TreeViewTableName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
-  <data name="TreeViewTableName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TreeViewTableName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 53</value>
-  </data>
   <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 559</value>
   </data>
@@ -88599,7 +88590,7 @@
     <value>150</value>
   </data>
   <data name="lblIdNo.Text" xml:space="preserve">
-    <value>Customer Id No.</value>
+    <value>ID No.</value>
   </data>
   <data name="lblIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -88653,16 +88644,16 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCustomerCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
+    <value>122, 23</value>
   </data>
   <data name="lblCustomerCode.TabIndex" type="System.Int32, mscorlib">
     <value>151</value>
   </data>
   <data name="lblCustomerCode.Text" xml:space="preserve">
-    <value>Customer Code</value>
+    <value>Code</value>
   </data>
   <data name="lblCustomerCode.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblCustomerCode.Name" xml:space="preserve">
     <value>lblCustomerCode</value>
@@ -88680,13 +88671,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtCustomerCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 11</value>
+    <value>352, 11</value>
   </data>
   <data name="txtCustomerCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtCustomerCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 23</value>
+    <value>128, 23</value>
   </data>
   <data name="txtCustomerCode.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -88710,7 +88701,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>436, 11</value>
+    <value>482, 11</value>
   </data>
   <data name="lblVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -88743,13 +88734,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>508, 11</value>
+    <value>554, 11</value>
   </data>
   <data name="txtVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtVatNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 23</value>
+    <value>157, 23</value>
   </data>
   <data name="txtVatNumber.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -88782,7 +88773,7 @@
     <value>210</value>
   </data>
   <data name="lblCustomerName.Text" xml:space="preserve">
-    <value>Customer Name</value>
+    <value>Name</value>
   </data>
   <data name="lblCustomerName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -88842,7 +88833,7 @@
     <value>212</value>
   </data>
   <data name="lblCustomerNameAra.Text" xml:space="preserve">
-    <value>Customer Name (Arabic)</value>
+    <value>Name (Arabic)</value>
   </data>
   <data name="lblCustomerNameAra.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -90600,7 +90591,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="dtpDateAccountOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 24</value>
+    <value>129, 24</value>
   </data>
   <data name="dtpDateAccountOpen.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -90713,6 +90704,9 @@
   </data>
   <data name="chkActive.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
+  </data>
+  <data name="chkActive.Text" xml:space="preserve">
+    <value> </value>
   </data>
   <data name="chkActive.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>

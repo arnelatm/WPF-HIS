@@ -189,6 +189,11 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
                 retVal = UpdateGlReferenceNumber()
             End If
+            If retVal >= 0 AndAlso
+               (View.PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Or View.PaymentType = EnumToCode(PaymentTypeSelection.Supplier)) AndAlso
+               Not IsEmpty(View.VatNumber) Then
+                ModelPresenter.UpdateVatNumber(View.VatNumber, View.PayeeIdNo)
+            End If
         End Sub
 
         Public Sub UpdateFirstLine()

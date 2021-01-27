@@ -22,7 +22,7 @@ Namespace PresentationLayer.Views.Forms
             TvMainFieldName = "CustomerName"
             TvSecondaryFieldName = "CustomerCode"
             SortOrderKey = "CustomerName"
-            FirstControl = txtCustomerCode
+            FirstControl = txtCustomerName
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New CustomerPresenter(Me)
             Ea = PresenterObj.Ea

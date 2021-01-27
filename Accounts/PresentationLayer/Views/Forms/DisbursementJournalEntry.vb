@@ -44,6 +44,10 @@ Namespace PresentationLayer.Views.Forms
                 MyPresenter = New DisbursementJournalPresenter(Me, "PcJournal")
                 Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
                 btnPrintCheck.Visible = False
+                cboPayType.Visible = False
+                lblPayType.Visible = False
+                txtCheckNumber.Visible = False
+                dtpCheckDate.Visible = False
             End If
             PresenterObj = MyPresenter
             _defaultAccount = MyPresenter.DefaultDisbursementAccount
@@ -337,7 +341,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-
 #End Region
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
@@ -509,7 +512,7 @@ Namespace PresentationLayer.Views.Forms
                 bsDjOiItems.DataSource = MyPresenter.GetSupplierOpenInvoices(DjOiItems)
                 bsDjOiItems.ResetBindings(True)
                 UpdateOiTotals()
-                UpdateVatNumber()
+                'UpdateVatNumber()
             End If
         End Sub
 
@@ -523,12 +526,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CboPayeeIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.Validated, cboPayeeIdNo.SelectionChangeCommitted
             If OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
+            End If
+            If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                MyPresenter.SetSupplierVatNumber(VatNumber, PayeeIdNo, True)
             Else
-                If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Then
-                    UpdateVatNumber()
-                Else
-                    VatNumber = ""
-                End If
+                VatNumber = ""
             End If
         End Sub
 
@@ -552,7 +554,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DisplayCheckInfo()
-            If cboPayType.SelectedValue = EnumToCode(PayTypeSelection.CheckPayment) Then
+            If MainTableName = "CdJournal" AndAlso cboPayType.SelectedValue = EnumToCode(PayTypeSelection.CheckPayment) Then
                 dtpCheckDate.Visible = True
                 lblCheckDate.Visible = True
                 lblCheckNumber.Visible = True
@@ -701,13 +703,13 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewJournalItems.Refresh()
         End Sub
 
-        Private Sub UpdateVatNumber()
-            If cboPayeeIdNo.Text IsNot Nothing Then
-                VatNumber = MyPresenter.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
-            Else
-                VatNumber = ""
-            End If
-        End Sub
+        'Private Sub UpdateVatNumber()
+        '    If cboPayeeIdNo.Text IsNot Nothing Then
+        '        VatNumber = MyPresenter.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
+        '    Else
+        '        VatNumber = ""
+        '    End If
+        'End Sub
 
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
             Dim cdJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
@@ -868,7 +870,6 @@ Namespace PresentationLayer.Views.Forms
                 UpdateJiTotals()
             End If
         End Sub
-
 
     End Class
 

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Supplier] (
     [IdNo]               INT            IDENTITY (1, 1) NOT NULL,
-    [SupplierCode]       VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    [SupplierCode]       VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [SupplierName]       VARCHAR (50)   COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [SupplierNameAra]    NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [ContactPerson]      NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -21,7 +21,7 @@
     [VATNumber]          VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [CRNumber]           VARCHAR (20)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [AccountStatus]      CHAR (1)       COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [APAccountIdNo]      SMALLINT       NOT NULL,
+    [APAccountIdNo]      SMALLINT       NULL,
     [ExpAccountIdNo]     SMALLINT       NULL,
     [CreditLimit]        MONEY          NULL,
     [SettlementDueDays]  SMALLINT       NULL,
@@ -39,8 +39,7 @@
     [DateCreated]        DATETIME2 (7)  CONSTRAINT [DF_Supplier_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]      ROWVERSION     NULL,
     CONSTRAINT [PK_SupplierDetailsIDNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_SupplierName] UNIQUE NONCLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_SupplierNameAra] UNIQUE NONCLUSTERED ([IdNo] ASC)
+    CONSTRAINT [IX_SupplierNameAra] UNIQUE NONCLUSTERED ([SupplierNameAra] ASC)
 );
 
 
@@ -50,4 +49,16 @@
 
 
 
+
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierName]
+    ON [dbo].[Supplier]([SupplierName] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierCode]
+    ON [dbo].[Supplier]([SupplierCode] ASC);
 
