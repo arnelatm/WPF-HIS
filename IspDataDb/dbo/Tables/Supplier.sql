@@ -38,9 +38,10 @@
     [Active]             BIT            NULL,
     [DateCreated]        DATETIME2 (7)  CONSTRAINT [DF_Supplier_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]      ROWVERSION     NULL,
-    CONSTRAINT [PK_SupplierDetailsIDNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_SupplierNameAra] UNIQUE NONCLUSTERED ([SupplierNameAra] ASC)
+    CONSTRAINT [PK_SupplierIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
@@ -61,4 +62,9 @@ CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierName]
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierCode]
     ON [dbo].[Supplier]([SupplierCode] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_SupplierNameAra]
+    ON [dbo].[Supplier]([SupplierNameAra] ASC);
 

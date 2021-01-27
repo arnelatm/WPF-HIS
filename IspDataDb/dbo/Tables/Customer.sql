@@ -37,12 +37,12 @@
     [Notes]              NVARCHAR (255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [OpeningBalance]     MONEY          NULL,
     [Active]             BIT            NULL,
-    [DateCreated]        DATETIME2 (7)  CONSTRAINT [DF_Customer2_DateCreated] DEFAULT (getdate()) NULL,
+    [DateCreated]        DATETIME2 (7)  CONSTRAINT [DF_Customer_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]      ROWVERSION     NULL,
-    CONSTRAINT [PK_CustomerDetailsIDNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_CustomerName] UNIQUE NONCLUSTERED ([CustomerName] ASC),
-    CONSTRAINT [IX_CustomerNameAra] UNIQUE NONCLUSTERED ([CustomerNameAra] ASC)
+    CONSTRAINT [PK_CustomerIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
@@ -52,4 +52,14 @@
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerCode]
     ON [dbo].[Customer]([CustomerCode] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerNameAra]
+    ON [dbo].[Customer]([CustomerNameAra] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_CustomerName]
+    ON [dbo].[Customer]([CustomerName] ASC);
 
