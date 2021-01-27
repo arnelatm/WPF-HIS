@@ -42,7 +42,7 @@
     [Active]              BIT           NULL,
     [Create_Date]         DATETIME      NULL,
     [DateTimeStamp]       ROWVERSION    NULL,
-    CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED ([IdNo] ASC)
+    CONSTRAINT [PK_EmployeeIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
 
 
@@ -58,4 +58,21 @@
 
 
 
+
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeNameAra]
+    ON [dbo].[Employee]([EmployeeNameAra] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeName]
+    ON [dbo].[Employee]([EmployeeName] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_EmployeeCode]
+    ON [dbo].[Employee]([EmployeeCode] ASC);
 
