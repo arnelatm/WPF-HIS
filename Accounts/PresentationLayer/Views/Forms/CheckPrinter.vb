@@ -154,6 +154,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayType As String Implements IDisbursementJournalView.PayType
 
+        Public Property PcClosed As Boolean Implements IDisbursementJournalView.PcClosed
 
 #End Region
 

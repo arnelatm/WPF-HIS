@@ -12,7 +12,6 @@ Namespace PresentationLayer.Models
         Public Property Credit As Decimal
         Public Property DiscountTaken As Decimal
         Public Property Debit As Decimal
-        Public Errors As List(Of String)
         Public Property IdNo As Int32
         Public Property JournalIdNo As Int32
         Public Property Notes As String

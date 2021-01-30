@@ -177,6 +177,7 @@
     <Compile Include="BusinessLayer\Payroll.vb" />
     <Compile Include="BusinessLayer\PayrollDeductAccount.vb" />
     <Compile Include="BusinessLayer\PayrollDetails.vb" />
+    <Compile Include="BusinessLayer\PcJournal.vb" />
     <Compile Include="BusinessLayer\PensionRate.vb" />
     <Compile Include="BusinessLayer\PensionScheme.vb" />
     <Compile Include="BusinessLayer\EmployeePhone.vb" />
@@ -292,6 +293,7 @@
     <Compile Include="PresentationLayer\Models\OpInvItemModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePhoneModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductAccountModel.vb" />
+    <Compile Include="PresentationLayer\Models\PcJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionRateModel.vb" />
     <Compile Include="PresentationLayer\Models\PayCycle.vb" />
     <Compile Include="PresentationLayer\Models\PayGroupModel.vb" />
@@ -337,6 +339,12 @@
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PettyCashClosing.designer.vb">
+      <DependentUpon>PettyCashClosing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PettyCashClosing.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay.designer.vb">
@@ -991,6 +999,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.resx">
       <DependentUpon>PensionProviderEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PettyCashClosing.resx">
+      <DependentUpon>PettyCashClosing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.resx">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>

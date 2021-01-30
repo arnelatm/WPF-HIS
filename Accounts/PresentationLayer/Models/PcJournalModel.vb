@@ -1,25 +1,23 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Libraries
 
-    ''' <summary>
-    '''     The Model in MVP design pattern.
-    '''     Implements IModel and communicates with WCF Service.
-    ''' </summary>
-    Public Class DisbursementJournalModel
+Namespace PresentationLayer.Models
+
+    Public Class PcJournalModel
+
+        Public Sub New()
+        End Sub
+
 
         Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
-        Public Property DjOiItems As List(Of DjOiItemModel)
         Public Property Cancelled As Boolean
-        Public Property CheckDate As Date?
-        Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
         Public Property PayType As String
         Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal
-        Public Property Errors As List(Of String)
         Public Property IdNo As Int32
-        Public Property JournalItems As List(Of JournalItemModel)
         Public Property Notes As String
         Public Property OrNumber As String
         Public Property PayeeIdNo As Int32?
@@ -36,5 +34,6 @@
         Public Property VatNumber As String
 
     End Class
+
 
 End Namespace
