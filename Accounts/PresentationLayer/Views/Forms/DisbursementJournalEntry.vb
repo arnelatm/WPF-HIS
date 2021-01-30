@@ -39,6 +39,8 @@ Namespace PresentationLayer.Views.Forms
                 MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
                 DisplayPrintCheckButton(PayType)
                 Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
+                chkPcClosed.Visible = False
+                lblPcClosed.Visible = False
             Else
                 tableName = "PcJournal"
                 MyPresenter = New DisbursementJournalPresenter(Me, "PcJournal")
@@ -129,6 +131,15 @@ Namespace PresentationLayer.Views.Forms
                 Else
                     dtpCheckDate.Value = Date.Now()
                 End If
+            End Set
+        End Property
+
+        Public Property PcClosed As Boolean Implements IDisbursementJournalView.PcClosed
+            Get
+                Return chkPcClosed.Checked
+            End Get
+            Set
+                chkPcClosed.Checked = Value
             End Set
         End Property
 
@@ -380,6 +391,7 @@ Namespace PresentationLayer.Views.Forms
          {"Applied", txtApplied},
          {"Cancelled", chkCancelled},
          {"CheckDate", dtpCheckDate},
+         {"Closed", chkPcClosed},
          {"CheckNumber", txtCheckNumber},
          {"DateCreated", dtpDateCreated},
          {"PayType", cboPayType},
@@ -615,9 +627,11 @@ Namespace PresentationLayer.Views.Forms
                             ' therefore there is a need to remove that row because it causes errors when moving to that empty row
                             bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
                         End If
-                        MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
-                        UpdateInputVatAmount()
-                        bsJournalItems.ResetItem(nIndex)
+                        If JournalItems.Count() - 1 <= nIndex Then
+                            MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
+                            UpdateInputVatAmount()
+                            bsJournalItems.ResetItem(nIndex)
+                        End If
                         DataGridViewJournalItems.Refresh()
                     Case $"dgvdebit"
                         MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)

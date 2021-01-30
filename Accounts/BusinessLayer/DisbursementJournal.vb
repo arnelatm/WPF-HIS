@@ -51,6 +51,7 @@ Namespace BusinessLayer
         Public Property PayeeIdNo As Int32?
         Public Property PayeeName As String
         Public Property PaymentType As String
+        Public Property PcClosed As Boolean
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
         Public Property TotalCredits As Decimal

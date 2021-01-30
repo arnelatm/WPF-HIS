@@ -20,6 +20,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayeeIdNo As Int32?
         Property PayeeName As String
         Property PaymentType As String
+        Property PcClosed As Boolean
         Property Posted As Boolean
         Property ReferenceNo As String
         Property TotalCredits As Decimal
