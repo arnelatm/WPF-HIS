@@ -400,6 +400,7 @@
     <Build Include="dbo\Stored Procedures\InsertAttendanceItemTVP.sql" />
     <Build Include="dbo\User Defined Types\AttendanceItemUpdate.sql" />
     <Build Include="dbo\User Defined Types\AttendanceItemInsert.sql" />
+    <Build Include="dbo\Functions\FuncBalanceSheet.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

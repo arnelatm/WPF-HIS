@@ -1,12 +1,25 @@
-﻿CREATE VIEW dbo.PcJournal_View
+﻿
+CREATE VIEW [dbo].[PcJournal_View]
 AS
-SELECT        dbo.PcJournal.IdNo, dbo.PcJournal.TransactionDate, dbo.PcJournal.ReferenceNo, dbo.PcJournal.Amount, dbo.PcJournal.AccountIdNo, dbo.PcJournal.PaymentType, dbo.PcJournal.PayeeIdNo, dbo.PcJournal.PayeeName, 
-                         dbo.PcJournal.ORNumber, dbo.PcJournal.DiscountTaken, dbo.PcJournal.DiscountAccountIdNo, dbo.PcJournal.Applied, dbo.PcJournal.UnApplied, dbo.PcJournal.VatNumber, dbo.PcJournal.VatAmount, dbo.PcJournal.Notes, 
-                         dbo.PcJournal.Posted, dbo.PcJournal.DateCreated, dbo.PcJournal.Cancelled, dbo.PcJournal.DateTimeStamp, dbo.currency_conversion(dbo.PcJournal.Amount) AS WordAmount, dbo.Bank.BankCode, dbo.Bank.BankNameAra, 
-                         dbo.BankAccount.BranchName
-FROM            dbo.Bank LEFT OUTER JOIN
-                         dbo.BankAccount ON dbo.Bank.IdNo = dbo.BankAccount.BankIdNo RIGHT OUTER JOIN
-                         dbo.PcJournal ON dbo.BankAccount.AccountIdNo = dbo.PcJournal.AccountIdNo
+SELECT			a.IdNo, a.TransactionDate, a.ReferenceNo, a.Amount, a.AccountIdNo, a.PaymentType, a.PayeeIdNo,
+				case 
+					when a.PaymentType = 'A' or a.PaymentTYpe = 'S' then s.SupplierName
+					when a.PaymentType = 'R' then c.CustomerName
+					when a.PaymentType = 'E' then e.EMployeeName
+					else a.PayeeName
+				End as PayeeName,
+				case 
+					when a.PaymentType = 'A' or a.PaymentTYpe = 'S' then s.SupplierNameAra
+					when a.PaymentType = 'R' then c.CustomerNameAra
+					when a.PaymentType = 'E' then e.EMployeeNameAra
+					else a.PayeeName
+				End as PayeeNameAra,
+				a.ORNumber, a.DiscountTaken, a.DiscountAccountIdNo, a.Applied, a.UnApplied, a.VatNumber, a.VatAmount, a.Notes, 
+				a.Posted, a.DateCreated, a.Cancelled, a.DateTimeStamp
+FROM			PcJournal a
+				Left Outer Join Supplier S on a.PayeeIdNo = s.IdNo and (a.PaymentType = 'A' or a.PaymentType = 'S')
+				Left Outer Join Customer C on a.PayeeIdNo = c.IdNo and a.PaymentType = 'R' 
+				Left Outer Join Employee E on a.PayeeIdNo = e.IdNo and a.PaymentType = 'E'
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PcJournal_View';
 
