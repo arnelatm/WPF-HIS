@@ -1012,7 +1012,7 @@ Use c:\temp\supplier.Dbf Exclusive Alias supplier
 Index On SuppCode Tag SuppCode
 Select 3
 Use Y:\acctbackup\CDisburs.Dbf Index Y:\acctbackup\CDisburs.Cdx Exclusive Alias CDisburs
-Set Order To CDVHPSDT   && POSTED+DTOS(DATE)
+*!*	Set Order To CDVHPSDT   && POSTED+DTOS(DATE)
 *!*	Set Filter To "-" $ Reference Or (Year(CDisburs.Date)>2019 And Val(CDisburs.Reference) > 20000)
 Go Top
 Select 4
@@ -1515,11 +1515,16 @@ Use c:\temp\CadOiItm Alias CadOiItm
 
 Select CDJournal
 Do While Not Eof("CdJournal")
-	cdDate = Iif(Eof("CdJournal"),Date()+10000,CDJournal.TransDate)
-	If CDJournal.PaymType = "A" Then
+
+*!*		cdDate = Iif(Eof("CdJournal"),Date()+10000,CDJournal.TransDate)
+	cdDate = CDJournal.TransDate
+
+*!*		If cdDate <= ckDate And Not Eof("CdJournal") Then
+	If CDJournal.PayType = "A" Then
+
 		rPayAmount = CDJournal.Amount
 		rDscTknAmt = CDJournal.DiscTaken
-		trantype  = CDJournal.PaymType
+		trantype  = CDJournal.PayType
 		rTotApPay = rPayAmount+rDscTknAmt
 		sIdNo = CDJournal.PayeeIdNo
 		cdIdNo = CDJournal.IdNo
@@ -1529,7 +1534,7 @@ Do While Not Eof("CdJournal")
 		Seek Str(sIdNo,5,0)
 
 		negAmount = 0
-		* look for negative amounts and apply them if the date is less than the current date
+* look for negative amounts and apply them if the date is less than the current date
 		Do While ApOpnInv.SuppIdNo = sIdNo And ApOpnInv.Date <= cdDate  And Not Eof("ApOpnInv")
 			If ApOpnInv.Amount < 0 And ApOpnInv.Date <= cdDate  Then
 				lNegAmount = ApOpnInv.Amount

@@ -972,9 +972,12 @@ Create Table c:\temp\CDJournal.Dbf (IdNo Integer(6),;
 	Reference c(15),;
 	Amount N(10,2),;
 	AcctIdNo Int(7),;
+	PaymType c(1),;
 	PayType c(1),;
 	PayeeIdNo Int(7),;
 	PayeeName Varchar(50),;
+	CheckNo   Varchar(10),;
+	CheckDate Date(8),;
 	OrNumber Varchar(15),;
 	DiscTaken numeric(10,2),;
 	DiscActId Integer(7) Null,;
@@ -1010,7 +1013,7 @@ Index On SuppCode Tag SuppCode
 Select 3
 Use Y:\acctbackup\CDisburs.Dbf Index Y:\acctbackup\CDisburs.Cdx Exclusive Alias CDisburs
 Set Order To CDVHPSDT   && POSTED+DTOS(DATE)
-Set Filter To "-" $ Reference Or (Year(CDisburs.Date)>2019 And Val(CDisburs.Reference) > 20000)
+*!*	Set Filter To "-" $ Reference Or (Year(CDisburs.Date)>2019 And Val(CDisburs.Reference) > 20000)
 Go Top
 Select 4
 Use Y:\acctbackup\JOURITEM.Dbf Index Y:\acctbackup\JOURITEM.Cdx Exclusive Alias JOURITEM
@@ -1108,10 +1111,12 @@ Do While Not Eof()
 	Replace CDJournal.Reference With CDisburs.Reference
 	Replace CDJournal.Amount With CDisburs.Amount
 	Replace CDJournal.AcctIdNo With Val(CDisburs.CashCode)
-	Replace CDJournal.PayType With cPaymType
+	Replace CDJournal.PaymType With cPaymType
 	Replace CDJournal.PayeeIdNo With nIdNo
 	Replace CDJournal.PayeeName With cPayee
 	Replace CDJournal.OrNumber With CDisburs.O_r_no
+	Replace CDJournal.CheckNo With CDisburs.Check_No
+	Replace CDJournal.CheckDate With CDisburs.Check_Date
 	Replace CDJournal.DiscTaken With CDisburs.DiscTaken
 	If nDiscAcId > 0 Then
 		Replace CDJournal.DiscActId With nDiscAcId
@@ -1128,183 +1133,19 @@ Do While Not Eof()
 	Replace CDJournal.Posted With Iif(CDisburs.Posted="P",.T.,.F.)
 	Replace CDJournal.Cancelled With CDisburs.Cancelled
 	Replace CDJournal.DtCreated With CDisburs.DateAdded
-
-	Select CDisburs
-	Skip
-Enddo
-Close Databases
-
-****************************************************************
-* create CheckDisbursement Journal/Items *
-************************************************************
-
-Create Table c:\temp\CkJournal.Dbf (IdNo Integer(6),;
-	TransDate Date(8),;
-	Reference c(15),;
-	Amount N(10,2),;
-	AcctIdNo Int(7),;
-	PayType c(1),;
-	PayeeIdNo Int(7),;
-	PayeeName Varchar(50),;
-	CheckNo   Varchar(10),;
-	CheckDate Date(8),;
-	OrNumber Varchar(15),;
-	DiscTaken numeric(10,2),;
-	DiscActId Integer(7) Null,;
-	Applied numeric(10,2),;
-	UnApplied numeric(10,2),;
-	VatNumber Varchar(15),;
-	VatAmount numeric(10,2),;
-	Notes Varchar(254),;
-	Posted Logical,;
-	DtCreated Date(8),;
-	Cancelled Logical)
-
-Use
-
-Create Table c:\temp\CkJourItm.Dbf ;
-	(IdNo Integer(6),;
-	Sequence Int(7),;
-	JourIdNo Int(7),;
-	AcctIdNo Int(7),;
-	Debit numeric(10,2),;
-	Credit numeric(10,2),;
-	ProfIdNo Int(7),;
-	Notes c(254),;
-	Posted Logical)
-Use
-
-Select 1
-Use c:\temp\customer.Dbf Exclusive Alias customer
-Index On CustCode Tag CustCode
-Select 2
-Use c:\temp\supplier.Dbf Exclusive Alias supplier
-Index On SuppCode Tag SuppCode
-Select 3
-Use Y:\acctbackup\CDisburs.Dbf Index Y:\acctbackup\CDisburs.Cdx Exclusive Alias CDisburs
-Set Order To CDVHPSDT   && POSTED+DTOS(DATE)
-Set Filter To Not ("-" $ Reference Or (Year(CDisburs.Date)>2019 And Val(CDisburs.Reference) > 20000))
-Go Top
-Select 4
-Use Y:\acctbackup\JOURITEM.Dbf Index Y:\acctbackup\JOURITEM.Cdx Exclusive Alias JOURITEM
-Set Order To JRITJCTN   && JOURCODE+TRANNO
-Go Top
-Select 5
-Use c:\temp\CkJournal.Dbf  Exclusive Alias CkJournal
-Zap
-Set Order To
-Select 6
-Use c:\temp\CkJourItm Exclusive Alias CkJourItm
-Zap
-Select CDisburs
-Go Top
-ctr = 0
-Do While Not Eof()
-	cPayeeCode = CDisburs.PayeeCod
-	cTranno = CDisburs.TRANNO
-	cPaymType = ""
-	cPayee = ""
-	nIdNo = 0
-	If CDisburs.Apply_To = "I" Then
-		cPaymType = "A"
+	If Not ("-" $ Reference Or (Year(CDisburs.Date)>2019 And Val(CDisburs.Reference) > 20000)) Then
+		Replace CDJournal.PayType With "1"
 	Else
-		If CDisburs.PayType = "S" Then
-			cPaymType = "S"
+		If "-" $ Reference Or Year(CDisburs.Date)< 2019
+			Replace CDJournal.PayType With "1"
 		Else
-			cPaymType = "O"
-			cPayee = CDisburs.Payee
-		Endif
-	Endif
-	If cPaymType = "A" Or cPaymType = "S"
-		Select supplier
-		Seek cPayeeCode
-		If Not Eof()
-			nIdNo = supplier.IdNo
-		Endif
-	Endif
-	Select JOURITEM
-	Seek "CD"+cTranno
-	SEQ = 0
-	nVATAMT = 0
-	cVATNO = ""
-	nAcctIdNo = 0
-	nDiscAcId = 0
-	nPVatAmt = 0
-	Do While TRANNO = cTranno And JOURCODE="CD" And Not Eof()
-		If SEQ = 0 Then
-			nAcctIdNo = Val(JOURITEM.ACCTCODE)
-		Endif
-		SEQ = SEQ + 1
-		Select CkJourItm
-		If JOURITEM.VATAMT > nPVatAmt Then
-			nPVatAmt = JOURITEM.VATAMT
-			If Not Empty(JOURITEM.VAT_NO) Then
-				cVATNO = JOURITEM.VAT_NO
-			Endif
-		Endif
-		nVATAMT = nVATAMT + JOURITEM.VATAMT
-		Append Blank
-		ctr = ctr + 1
-		Replace CkJourItm.IdNo With ctr
-		Replace CkJourItm.Sequence With SEQ
-		Replace CkJourItm.JourIdNo With Val(JOURITEM.TRANNO)
-		Replace CkJourItm.AcctIdNo With Val(JOURITEM.ACCTCODE)
-		Replace CkJourItm.Debit With JOURITEM.Debit
-		Replace CkJourItm.Credit With JOURITEM.Credit
-		If JOURITEM.DEPTCODE = "S" Then
-			Replace CkJourItm.ProfIdNo With 1000 + Val(Substr(JOURITEM.DEPTCODE,2))
-		Else
-			Replace CkJourItm.ProfIdNo With Val(JOURITEM.DEPTCODE)
-		Endif
-		Replace CkJourItm.Notes With JOURITEM.Descript
-		Replace CkJourItm.Posted With Iif(JOURITEM.Posted="P",.T.,.F.)
-		If Round(CkJourItm.Debit,2) <> 0 Or Round(CkJourItm.Credit,2) <> 0 Then
-			If JOURITEM.ACCTCODE = "210" Or JOURITEM.ACCTCODE = "204" Or JOURITEM.ACCTCODE = "205" Or JOURITEM.ACCTCODE = "203" Then
-				nDiscAcId = 411
+			If Val(CDisburs.Reference) > 20000 Then
+				Replace CDJournal.PayType With "2"
 			Else
-				If JOURITEM.ACCTCODE = "202" Then
-					nDiscAcId = 489
-				Else
-					If JOURITEM.ACCTCODE = "112" Then
-						nDiscAcId = 527
-					Endif
-				Endif
+				Replace CDJournal.PayType With "1"
 			Endif
 		Endif
-		Select JOURITEM
-		Skip
-	Enddo
-	Select CkJournal
-	Append Blank
-	Replace CkJournal.IdNo With Val(cTranno)
-	Replace CkJournal.TransDate With CDisburs.Date
-	Replace CkJournal.Reference With CDisburs.Reference
-	Replace CkJournal.Amount With CDisburs.Amount
-	Replace CkJournal.AcctIdNo With Val(CDisburs.CashCode)
-	Replace CkJournal.PayType With cPaymType
-	Replace CkJournal.PayeeIdNo With nIdNo
-	Replace CkJournal.PayeeName With cPayee
-	Replace CkJournal.OrNumber With CDisburs.O_r_no
-	Replace CkJournal.CheckNo With CDisburs.Check_No
-	Replace CkJournal.CheckDate With CDisburs.Check_Date
-
-	Replace CkJournal.DiscTaken With CDisburs.DiscTaken
-	If nDiscAcId > 0 Then
-		Replace CkJournal.DiscActId With nDiscAcId
-	Else
-		Replace CkJournal.DiscActId With Null
 	Endif
-	If CDisburs.Apply_To = "I" Then
-		Replace CkJournal.Applied With CDisburs.AplAmt
-	Endif
-	Replace CkJournal.UnApplied With CDisburs.ToAply
-	Replace CkJournal.VatNumber With cVATNO
-	Replace CkJournal.VatAmount With nVATAMT
-	Replace CkJournal.Notes With Trim(CDisburs.Descript)
-	Replace CkJournal.Posted With Iif(CDisburs.Posted="P",.T.,.F.)
-	Replace CkJournal.Cancelled With CDisburs.Cancelled
-	Replace CkJournal.DtCreated With CDisburs.DateAdded
-
 	Select CDisburs
 	Skip
 Enddo
@@ -1504,8 +1345,8 @@ Close All
 Select 1
 Use c:\temp\ApOpnInv
 Go Top
-SELECT 2
-Use c:\temp\Supplier.Dbf 
+Select 2
+Use c:\temp\supplier.Dbf
 Go Top
 nCtr = 0
 nAmount = 0
@@ -1527,9 +1368,9 @@ Do While Not Eof()
 	Select supplier
 	Skip
 Enddo
-SELECT 1
-USE
-SELECT 2
+Select 1
+Use
+Select 2
 Use
 ***************************
 * create Ap Open invoices *
@@ -1646,23 +1487,19 @@ Create Table c:\temp\CadOiItm.Dbf ;
 	DiscTakn numeric(10,2))
 
 
-Select 2
-Create Table c:\temp\CkdOiItm.Dbf ;
-	(IdNo Integer(6),;
-	CkdIdNo Int(7),;
-	ApOpIdNo Int(7),;
-	Sequence Int(7),;
-	Amount numeric(10,2),;
-	DiscTakn numeric(10,2))
+*!*	Select 2
+*!*	Create Table c:\temp\CkdOiItm.Dbf ;
+*!*		(IdNo Integer(6),;
+*!*		CkdIdNo Int(7),;
+*!*		ApOpIdNo Int(7),;
+*!*		Sequence Int(7),;
+*!*		Amount numeric(10,2),;
+*!*		DiscTakn numeric(10,2))
 Close All
 
 Select 1
 Use c:\temp\CDJournal.Dbf Alias CDJournal Exclusive
 Index On TransDate Tag cdDate
-Go Top
-Select 2
-Use c:\temp\CkJournal.Dbf Alias CkJournal Exclusive
-Index On TransDate Tag ckDate
 Go Top
 Select 3
 Use c:\temp\ApOpnInv Alias ApOpnInv Exclusive
@@ -1672,426 +1509,423 @@ switch = 0
 Select 4
 Use c:\temp\CadOiItm Alias CadOiItm
 
-Select 5
-Use c:\temp\CkdOiItm Alias CkdOiItm
+*!*	Select 5
+*!*	Use c:\temp\CkdOiItm Alias CkdOiItm
 
 
 Select CDJournal
-Do While Not (Eof("CdJournal") And Eof("CkJournal"))
-
+Do While Not Eof("CdJournal")
 	cdDate = Iif(Eof("CdJournal"),Date()+10000,CDJournal.TransDate)
-	ckDate = Iif(Eof("CkJournal"),Date()+10000,CkJournal.TransDate)
+	If CDJournal.PayType = "A" Then
+		rPayAmount = CDJournal.Amount
+		rDscTknAmt = CDJournal.DiscTaken
+		trantype  = CDJournal.PayType
+		rTotApPay = rPayAmount+rDscTknAmt
+		sIdNo = CDJournal.PayeeIdNo
+		cdIdNo = CDJournal.IdNo
+		nSeq = 0
 
-	If cdDate <= ckDate And Not Eof("CdJournal") Then
-		If CDJournal.PayType = "A" Then
+		Select ApOpnInv
+		Seek Str(sIdNo,5,0)
 
-			rPayAmount = CDJournal.Amount
-			rDscTknAmt = CDJournal.DiscTaken
-			trantype  = CDJournal.PayType
-			rTotApPay = rPayAmount+rDscTknAmt
-			sIdNo = CDJournal.PayeeIdNo
-			cdIdNo = CDJournal.IdNo
-			nSeq = 0
-
+		negAmount = 0
+		* look for negative amounts and apply them if the date is less than the current date
+		Do While ApOpnInv.SuppIdNo = sIdNo And ApOpnInv.Date <= cdDate  And Not Eof("ApOpnInv")
+			If ApOpnInv.Amount < 0 And ApOpnInv.Date <= cdDate  Then
+				lNegAmount = ApOpnInv.Amount
+				negAmount = negAmount + lNegAmount * -1
+				Replace ApOpnInv.PaidAmt With  ApOpnInv.PaidAmt + lNegAmount
+				Replace ApOpnInv.Amount With 0
+				nApOpnIdNo = ApOpnInv.IdNo
+				Select CadOiItm
+				nSeq = nSeq + 1
+				Append Blank
+				Replace IdNo With nCtr
+				Replace CadIdNo With cdIdNo
+				Replace ApOpIdNo With nApOpnIdNo
+				Replace Sequence With nSeq
+				Replace Amount With lNegAmount
+				Replace DiscTakn With 0
+				nCtr = nCtr + 1
+			Endif
 			Select ApOpnInv
-			Seek Str(sIdNo,5,0)
-
-			negAmount = 0
-* look for negative amounts and apply them if the date is less than the current date
-			Do While ApOpnInv.SuppIdNo = sIdNo And ApOpnInv.Date <= cdDate  And Not Eof("ApOpnInv")
-				If ApOpnInv.Amount < 0 And ApOpnInv.Date <= cdDate  Then
-					lNegAmount = ApOpnInv.Amount
-					negAmount = negAmount + lNegAmount * -1
-					Replace ApOpnInv.PaidAmt With  ApOpnInv.PaidAmt + lNegAmount
-					Replace ApOpnInv.Amount With 0
-					nApOpnIdNo = ApOpnInv.IdNo
-					Select CadOiItm
-					nSeq = nSeq + 1
-					Append Blank
-					Replace IdNo With nCtr
-					Replace CadIdNo With cdIdNo
-					Replace ApOpIdNo With nApOpnIdNo
-					Replace Sequence With nSeq
-					Replace Amount With lNegAmount
-					Replace DiscTakn With 0
-					nCtr = nCtr + 1
-				Endif
-				Select ApOpnInv
-				Skip
-			Enddo
-
-			Seek Str(sIdNo,5,0)
-			rPayAmount = rPayAmount + negAmount
-			rTotApPay = rTotApPay + negAmount
-
-			Select ApOpnInv
-			Seek Str(sIdNo,5,0)
-			Do While ApOpnInv.SuppIdNo = sIdNo And rTotApPay <> 0 And Not Eof("ApOpnInv")
-* if Open invoice not yet paid
-				If ApOpnInv.Amount <> 0 Then
-					If ApOpnInv.Amount <= rTotApPay Then
-*  if open invoice amount is less than Payment Amount
-						If rPayAmount <= ApOpnInv.Amount Then
-							m.AplAmt = rPayAmount
-							rTotApPay = rTotApPay - rPayAmount
-							rPayAmount = 0
-							m.AplDsc = ApOpnInv.Amount - m.AplAmt
-							rDscTknAmt = rDscTknAmt - m.AplDsc
-							rTotApPay = rTotApPay - m.AplDsc
-						Else
-							m.AplAmt = ApOpnInv.Amount
-							m.AplDsc = 0
-							rTotApPay = rTotApPay - m.AplAmt
-							rPayAmount = rPayAmount - m.AplAmt
-						Endif
-
-						Replace ApOpnInv.PaidAmt With ApOpnInv.PaidAmt + m.AplAmt
-						Replace ApOpnInv.DiscTakn With ApOpnInv.DiscTakn + m.AplDsc
-						Replace ApOpnInv.Amount With 0
-					Else
-* discount and payment is more than the openinvoice amount			
-						m.AplAmt = rPayAmount
-						m.AplDsc = rDscTknAmt
-						Replace ApOpnInv.PaidAmt With ApOpnInv.PaidAmt + m.AplAmt
-						Replace ApOpnInv.DiscTakn With ApOpnInv.DiscTakn + m.AplDsc
-						Replace ApOpnInv.Amount  With ApOpnInv.Amount - rTotApPay
-						rTotApPay = 0
-					Endif
-					nApOpnIdNo = ApOpnInv.IdNo
-					Select CadOiItm
-					nSeq = nSeq + 1
-					Append Blank
-					Replace IdNo With nCtr
-					Replace CadIdNo With cdIdNo
-					Replace ApOpIdNo With nApOpnIdNo
-					Replace Sequence With nSeq
-					Replace Amount With m.AplAmt
-					Replace DiscTakn With m.AplDsc
-					nCtr = nCtr + 1
-				Endif
-				Select ApOpnInv
-				Skip
-			Enddo
-		Endif
-		Select CDJournal
-		If Eof()
-			cdDate = Date() + 10000
-		Else
 			Skip
-		Endif
-	Else
-		If CkJournal.PayType = "A" Then
-			rPayAmount = CkJournal.Amount
-			rDscTknAmt = CkJournal.DiscTaken
-			trantype  = CkJournal.PayType
-			rTotApPay = rPayAmount + rDscTknAmt
-			sIdNo = CkJournal.PayeeIdNo
-			ckIdNo = CkJournal.IdNo
-			nSeq = 0
-			Select ApOpnInv
-			Seek Str(sIdNo,5,0)
+		Enddo
 
-			negAmount = 0
-* look for negative amounts and apply them if the date is less than the current date
-			Do While ApOpnInv.SuppIdNo = sIdNo And ApOpnInv.Date <= cdDate  And Not Eof("ApOpnInv")
-				If ApOpnInv.Amount < 0 And ApOpnInv.Date <= cdDate  Then
-					lNegAmount = ApOpnInv.Amount
-					negAmount = negAmount + lNegAmount * -1
-					Replace ApOpnInv.PaidAmt With  ApOpnInv.PaidAmt + lNegAmount
-					Replace ApOpnInv.Amount With 0
-					nApOpnIdNo = ApOpnInv.IdNo
-					Select CkdOiItm
-					nSeq = nSeq + 1
-					Append Blank
-					Replace IdNo With nCtr
-					Replace CkdIdNo With ckIdNo
-					Replace ApOpIdNo With nApOpnIdNo
-					Replace Sequence With nSeq
-					Replace Amount With lNegAmount
-					Replace DiscTakn With 0
-					nCtr = nCtr + 1
-				Endif
-				Select ApOpnInv
-				Skip
-			Enddo
+		Seek Str(sIdNo,5,0)
+		rPayAmount = rPayAmount + negAmount
+		rTotApPay = rTotApPay + negAmount
 
-			Seek Str(sIdNo,5,0)
-			rPayAmount = rPayAmount + negAmount
-			rTotApPay = rTotApPay + negAmount
-
-			Do While ApOpnInv.SuppIdNo = sIdNo And rTotApPay <> 0 And Not Eof("ApOpnInv")
+		Select ApOpnInv
+		Seek Str(sIdNo,5,0)
+		Do While ApOpnInv.SuppIdNo = sIdNo And rTotApPay <> 0 And Not Eof("ApOpnInv")
 * if Open invoice not yet paid
-				If ApOpnInv.Amount <> 0 Then
-					If ApOpnInv.Amount <= rTotApPay Then
+			If ApOpnInv.Amount <> 0 Then
+				If ApOpnInv.Amount <= rTotApPay Then
 *  if open invoice amount is less than Payment Amount
-						If rPayAmount <= ApOpnInv.Amount Then
-							m.AplAmt = rPayAmount
-							rTotApPay = rTotApPay - rPayAmount
-							rPayAmount = 0
-							m.AplDsc = ApOpnInv.Amount - m.AplAmt
-							rDscTknAmt = rDscTknAmt - m.AplDsc
-							rTotApPay = rTotApPay - m.AplDsc
-						Else
-							m.AplAmt = ApOpnInv.Amount
-							m.AplDsc = 0
-							rTotApPay = rTotApPay - m.AplAmt
-							rPayAmount = rPayAmount - m.AplAmt
-						Endif
-						Replace ApOpnInv.PaidAmt With ApOpnInv.PaidAmt + m.AplAmt
-						Replace ApOpnInv.DiscTakn With ApOpnInv.DiscTakn + m.AplDsc
-						Replace ApOpnInv.Amount With 0
-					Else
-* discount and payment is more than the openinvoice amount			
+					If rPayAmount <= ApOpnInv.Amount Then
 						m.AplAmt = rPayAmount
-						m.AplDsc = rDscTknAmt
-						Replace ApOpnInv.PaidAmt With ApOpnInv.PaidAmt + m.AplAmt
-						Replace ApOpnInv.DiscTakn With ApOpnInv.DiscTakn + m.AplDsc
-						Replace ApOpnInv.Amount  With ApOpnInv.Amount - rTotApPay
-						rTotApPay = 0
+						rTotApPay = rTotApPay - rPayAmount
+						rPayAmount = 0
+						m.AplDsc = ApOpnInv.Amount - m.AplAmt
+						rDscTknAmt = rDscTknAmt - m.AplDsc
+						rTotApPay = rTotApPay - m.AplDsc
+					Else
+						m.AplAmt = ApOpnInv.Amount
+						m.AplDsc = 0
+						rTotApPay = rTotApPay - m.AplAmt
+						rPayAmount = rPayAmount - m.AplAmt
 					Endif
-					nApOpnIdNo = ApOpnInv.IdNo
-					Select CkdOiItm
-					nSeq = nSeq + 1
-					Append Blank
-					Replace IdNo With nCtr
-					Replace CkdIdNo With ckIdNo
-					Replace ApOpIdNo With nApOpnIdNo
-					Replace Sequence With nSeq
-					Replace Amount With m.AplAmt
-					Replace DiscTakn With m.AplDsc
-					nCtr = nCtr + 1
-				Endif
-				Select ApOpnInv
-				Skip
-			Enddo
-		Endif
-		Select CkJournal
-		If Eof()
-			ckDate = Date() + 10000
-		Else
-			Skip
-		Endif
-	Endif
-	If Eof("CkJournal") And Eof("CdJournal") Then
-		Exit
-	Endif
-Enddo
 
-Close All
+					Replace ApOpnInv.PaidAmt With ApOpnInv.PaidAmt + m.AplAmt
+					Replace ApOpnInv.DiscTakn With ApOpnInv.DiscTakn + m.AplDsc
+					Replace ApOpnInv.Amount With 0
+				Else
+* discount and payment is more than the openinvoice amount			
+					m.AplAmt = rPayAmount
+					m.AplDsc = rDscTknAmt
+					Replace ApOpnInv.PaidAmt With ApOpnInv.PaidAmt + m.AplAmt
+					Replace ApOpnInv.DiscTakn With ApOpnInv.DiscTakn + m.AplDsc
+					Replace ApOpnInv.Amount  With ApOpnInv.Amount - rTotApPay
+					rTotApPay = 0
+				Endif
+				nApOpnIdNo = ApOpnInv.IdNo
+				Select CadOiItm
+				nSeq = nSeq + 1
+				Append Blank
+				Replace IdNo With nCtr
+				Replace CadIdNo With cdIdNo
+				Replace ApOpIdNo With nApOpnIdNo
+				Replace Sequence With nSeq
+				Replace Amount With m.AplAmt
+				Replace DiscTakn With m.AplDsc
+				nCtr = nCtr + 1
+			Endif
+			Select ApOpnInv
+			Skip
+		Enddo
+*!*			Endif
+*!*		Select CDJournal
+*!*			If Eof()
+*!*				cdDate = Date() + 10000
+*!*			Else
+*!*				Skip
+*!*			Endif
+*!*		Else
+*!*			If CkJournal.PayType = "A" Then
+*!*				rPayAmount = CkJournal.Amount
+*!*				rDscTknAmt = CkJournal.DiscTaken
+*!*				trantype  = CkJournal.PayType
+*!*				rTotApPay = rPayAmount + rDscTknAmt
+*!*				sIdNo = CkJournal.PayeeIdNo
+*!*				ckIdNo = CkJournal.IdNo
+*!*				nSeq = 0
+*!*				Select ApOpnInv
+*!*				Seek Str(sIdNo,5,0)
+
+*!*				negAmount = 0
+*!*	* look for negative amounts and apply them if the date is less than the current date
+*!*				Do While ApOpnInv.SuppIdNo = sIdNo And ApOpnInv.Date <= cdDate  And Not Eof("ApOpnInv")
+*!*					If ApOpnInv.Amount < 0 And ApOpnInv.Date <= cdDate  Then
+*!*						lNegAmount = ApOpnInv.Amount
+*!*						negAmount = negAmount + lNegAmount * -1
+*!*						Replace ApOpnInv.PaidAmt With  ApOpnInv.PaidAmt + lNegAmount
+*!*						Replace ApOpnInv.Amount With 0
+*!*						nApOpnIdNo = ApOpnInv.IdNo
+*!*						Select CkdOiItm
+*!*						nSeq = nSeq + 1
+*!*						Append Blank
+*!*						Replace IdNo With nCtr
+*!*						Replace CkdIdNo With ckIdNo
+*!*						Replace ApOpIdNo With nApOpnIdNo
+*!*						Replace Sequence With nSeq
+*!*						Replace Amount With lNegAmount
+*!*						Replace DiscTakn With 0
+*!*						nCtr = nCtr + 1
+*!*					Endif
+*!*					Select ApOpnInv
+*!*					Skip
+*!*				Enddo
+
+*!*				Seek Str(sIdNo,5,0)
+*!*				rPayAmount = rPayAmount + negAmount
+*!*				rTotApPay = rTotApPay + negAmount
+
+*!*				Do While ApOpnInv.SuppIdNo = sIdNo And rTotApPay <> 0 And Not Eof("ApOpnInv")
+*!*	* if Open invoice not yet paid
+*!*					If ApOpnInv.Amount <> 0 Then
+*!*						If ApOpnInv.Amount <= rTotApPay Then
+*!*	*  if open invoice amount is less than Payment Amount
+*!*							If rPayAmount <= ApOpnInv.Amount Then
+*!*								m.AplAmt = rPayAmount
+*!*								rTotApPay = rTotApPay - rPayAmount
+*!*								rPayAmount = 0
+*!*								m.AplDsc = ApOpnInv.Amount - m.AplAmt
+*!*								rDscTknAmt = rDscTknAmt - m.AplDsc
+*!*								rTotApPay = rTotApPay - m.AplDsc
+*!*							Else
+*!*								m.AplAmt = ApOpnInv.Amount
+*!*								m.AplDsc = 0
+*!*								rTotApPay = rTotApPay - m.AplAmt
+*!*								rPayAmount = rPayAmount - m.AplAmt
+*!*							Endif
+*!*							Replace ApOpnInv.PaidAmt With ApOpnInv.PaidAmt + m.AplAmt
+*!*							Replace ApOpnInv.DiscTakn With ApOpnInv.DiscTakn + m.AplDsc
+*!*							Replace ApOpnInv.Amount With 0
+*!*						Else
+*!*	* discount and payment is more than the openinvoice amount			
+*!*							m.AplAmt = rPayAmount
+*!*							m.AplDsc = rDscTknAmt
+*!*							Replace ApOpnInv.PaidAmt With ApOpnInv.PaidAmt + m.AplAmt
+*!*							Replace ApOpnInv.DiscTakn With ApOpnInv.DiscTakn + m.AplDsc
+*!*							Replace ApOpnInv.Amount  With ApOpnInv.Amount - rTotApPay
+*!*							rTotApPay = 0
+*!*						Endif
+*!*						nApOpnIdNo = ApOpnInv.IdNo
+*!*						Select CkdOiItm
+*!*						nSeq = nSeq + 1
+*!*						Append Blank
+*!*						Replace IdNo With nCtr
+*!*						Replace CkdIdNo With ckIdNo
+*!*						Replace ApOpIdNo With nApOpnIdNo
+*!*						Replace Sequence With nSeq
+*!*						Replace Amount With m.AplAmt
+*!*						Replace DiscTakn With m.AplDsc
+*!*						nCtr = nCtr + 1
+*!*					Endif
+*!*					Select ApOpnInv
+*!*					Skip
+*!*				Enddo
+*!*			Endif
+*!*			Select CkJournal
+*!*			If Eof()
+*!*				ckDate = Date() + 10000
+*!*			Else
+*!*				Skip
+*!*			Endif
+*!*		Endif
+*!*		If Eof("CkJournal") And Eof("CdJournal") Then
+*!*			Exit
+*!*		Endif
+		ENDIF
+		SELECT CDJournal
+		Skip
+	Enddo
+
+	Close All
 
 *************************************************
 * create Ar Open invoices for beginning balances*
 *************************************************
-Select 1
-Use c:\temp\ArOpnInv
-Go Top
-SELECT 2
-Use c:\temp\Customer.Dbf 
-Go Top
-nCtr = 0
-nAmount = 0
-Do While Not Eof()
-	nAmount = Customer.OpBalance
-	If nAmount <> 0 Then
-		Select ArOpnInv
-		nCtr = nCtr + 1
-		Append Blank
-		Replace ArOpnInv.IdNo With nCtr
-		Replace ArOpnInv.JournalCd With "BB"
-		Replace ArOpnInv.JourIdNo With Customer.IdNo
-		Replace ArOpnInv.JrItIdNo With Customer.IdNo
-		Replace ArOpnInv.CustIdNo With Customer.IdNo
-		Replace ArOpnInv.Date With Date(2016,12,31)
-		Replace ArOpnInv.Amount With Customer.OpBalance
+	Select 1
+	Use c:\temp\ArOpnInv
+	Go Top
+	Select 2
+	Use c:\temp\customer.Dbf
+	Go Top
+	nCtr = 0
+	nAmount = 0
+	Do While Not Eof()
+		nAmount = customer.OpBalance
+		If nAmount <> 0 Then
+			Select ArOpnInv
+			nCtr = nCtr + 1
+			Append Blank
+			Replace ArOpnInv.IdNo With nCtr
+			Replace ArOpnInv.JournalCd With "BB"
+			Replace ArOpnInv.JourIdNo With customer.IdNo
+			Replace ArOpnInv.JrItIdNo With customer.IdNo
+			Replace ArOpnInv.CustIdNo With customer.IdNo
+			Replace ArOpnInv.Date With Date(2016,12,31)
+			Replace ArOpnInv.Amount With customer.OpBalance
+			Skip
+		Endif
+		Select customer
 		Skip
-	Endif
-	Select Customer
-	Skip
-Enddo
-SELECT 1
-USE
-SELECT 2
-Use
-CLOSE All
+	Enddo
+	Select 1
+	Use
+	Select 2
+	Use
+	Close All
 
 ***************************
 * create Ar Open invoices *
 ***************************
-Select 1
-Use c:\temp\ArJourItm.Dbf Alias ArJourItm
-Index On Str(JourIdNo,7)+Str(Sequence,7) Tag arjIdNo
-Go Top
-Select 2
-Use c:\temp\ArOpnInv
-Go Bottom
-nCtr = ArOpnInv.IdNo
-Select 3
-Use c:\temp\ArJournal.Dbf  Exclusive Alias ArJournal
-Go Top
-nCtr = 0
-Do While Not Eof()
-	arjIdNo = ArJournal.IdNo
-	Select ArJourItm
-	Seek Str(arjIdNo,7)+Str(1,7)
-	arjItIdNo = 0
-	arSw = 0
-	Do While ArJourItm.JourIdNo = arjIdNo And Not Eof("arjouritm")
-		If ArJourItm.AcctIdNo = 112 Or ArJourItm.AcctIdNo = 114 Then
-			arjItIdNo = ArJourItm.IdNo
-			nAcctIdNo = ArJourItm.AcctIdNo
-			arSw = 1
-			Exit
-		Endif
+	Select 1
+	Use c:\temp\ArJourItm.Dbf Alias ArJourItm
+	Index On Str(JourIdNo,7)+Str(Sequence,7) Tag arjIdNo
+	Go Top
+	Select 2
+	Use c:\temp\ArOpnInv
+	Go Bottom
+	nCtr = ArOpnInv.IdNo
+	Select 3
+	Use c:\temp\ArJournal.Dbf  Exclusive Alias ArJournal
+	Go Top
+	Do While Not Eof()
+		arjIdNo = ArJournal.IdNo
 		Select ArJourItm
-		Skip
-	Enddo
+		Seek Str(arjIdNo,7)+Str(1,7)
+		arjItIdNo = 0
+		arSw = 0
+		Do While ArJourItm.JourIdNo = arjIdNo And Not Eof("arjouritm")
+			If ArJourItm.AcctIdNo = 112 Or ArJourItm.AcctIdNo = 114 Then
+				arjItIdNo = ArJourItm.IdNo
+				nAcctIdNo = ArJourItm.AcctIdNo
+				arSw = 1
+				Exit
+			Endif
+			Select ArJourItm
+			Skip
+		Enddo
 *!*		If arSw = 0 And Not ArJournal.Cancelled
 *!*			Set Step On
 *!*		Endif
-	Select ArOpnInv
-	nCtr = nCtr + 1
-	Append Blank
-	Replace ArOpnInv.IdNo With nCtr
-	Replace ArOpnInv.JournalCd With "AR"
-	Replace ArOpnInv.JourIdNo With arjIdNo
-	Replace ArOpnInv.JrItIdNo With arjItIdNo
-	Replace ArOpnInv.CustIdNo With ArJournal.CustIdNo
-	Replace ArOpnInv.Date With ArJournal.TransDate
-	If ArJournal.TransType = "I" Or ArJournal.TransType = "D" Then
-		Replace ArOpnInv.Amount With ArJournal.Amount
-	Else
-		Replace ArOpnInv.Amount With ArJournal.Amount * -1
-	Endif
-	Select ArJournal
-	Skip
-Enddo
-Use
+		Select ArOpnInv
+		nCtr = nCtr + 1
+		Append Blank
+		Replace ArOpnInv.IdNo With nCtr
+		Replace ArOpnInv.JournalCd With "AR"
+		Replace ArOpnInv.JourIdNo With arjIdNo
+		Replace ArOpnInv.JrItIdNo With arjItIdNo
+		Replace ArOpnInv.CustIdNo With ArJournal.CustIdNo
+		Replace ArOpnInv.Date With ArJournal.TransDate
+		If ArJournal.TransType = "I" Or ArJournal.TransType = "D" Then
+			Replace ArOpnInv.Amount With ArJournal.Amount
+		Else
+			Replace ArOpnInv.Amount With ArJournal.Amount * -1
+		Endif
+		Select ArJournal
+		Skip
+	Enddo
+	Use
 
-Close Data
+	Close Data
 
 **********************************************
 * create CashReceipt AR Paid Invoices /Items *
 * CsrOiItem                                  *
 **********************************************
 
-Select 1
-Create Table c:\temp\CsrOiItm.Dbf ;
-	(IdNo Integer(6),;
-	CsrIdNo Int(7),;
-	ArOpIdNo Int(7),;
-	Sequence Int(7),;
-	Amount numeric(10,2),;
-	DiscTakn numeric(10,2))
-Use
-Select 1
-Use c:\temp\CrJournal.Dbf Alias CrJournal Exclusive
-Index On TransDate Tag crDate
+	Select 1
+	Create Table c:\temp\CsrOiItm.Dbf ;
+		(IdNo Integer(6),;
+		CsrIdNo Int(7),;
+		ArOpIdNo Int(7),;
+		Sequence Int(7),;
+		Amount numeric(10,2),;
+		DiscTakn numeric(10,2))
+	Use
+	Select 1
+	Use c:\temp\CrJournal.Dbf Alias CrJournal Exclusive
+	Index On TransDate Tag crDate
 
-Select 2
-Use c:\temp\ArOpnInv Alias ArOpnInv Exclusive
-Index On Str(CustIdNo,5,0) + Str(Year(Date),4) + Str(Month(Date),2) + Str(Day(Date),2) Tag crDate
-nCtr = 1
-switch = 0
-Select 3
-Use c:\temp\CsrOiItm Alias CsrOiItm
+	Select 2
+	Use c:\temp\ArOpnInv Alias ArOpnInv Exclusive
+	Index On Str(CustIdNo,5,0) + Str(Year(Date),4) + Str(Month(Date),2) + Str(Day(Date),2) Tag crDate
+	nCtr = 1
+	switch = 0
+	Select 3
+	Use c:\temp\CsrOiItm Alias CsrOiItm
 
-Select 4
-Use Y:\acctbackup\JOURITEM.Dbf Index Y:\acctbackup\JOURITEM.Cdx Exclusive Alias JOURITEM
-Set Order To JRITJCTN   && JOURCODE+TRANNO
-Set Filter To JOURCODE="CR"
-Go Top
-Select 5
-Use c:\temp\ApOpnInv Alias ApOpnInv
+	Select 4
+	Use Y:\acctbackup\JOURITEM.Dbf Index Y:\acctbackup\JOURITEM.Cdx Exclusive Alias JOURITEM
+	Set Order To JRITJCTN   && JOURCODE+TRANNO
+	Set Filter To JOURCODE="CR"
+	Go Top
+	Select 5
+	Use c:\temp\ApOpnInv Alias ApOpnInv
 
-Select CrJournal
-Go Top
-Do While Not Eof()
-	If CrJournal.PayType = "A" Then
-		rPayAmount = CrJournal.Amount
-		rDscTknAmt = CrJournal.DiscTaken
-		trantype  = CrJournal.PayType
-		rTotArPay = rPayAmount+rDscTknAmt
-		cIdNo = CrJournal.PayeeIdNo
-		crIdNo = CrJournal.IdNo
-		nSeq = 0
-		Select ArOpnInv
-		Seek Str(cIdNo,5,0)
-		dDate = CrJournal.TransDate
-		negAmount = 0
+	Select CrJournal
+	Go Top
+	Do While Not Eof()
+		If CrJournal.PayType = "A" Then
+			rPayAmount = CrJournal.Amount
+			rDscTknAmt = CrJournal.DiscTaken
+			trantype  = CrJournal.PayType
+			rTotArPay = rPayAmount+rDscTknAmt
+			cIdNo = CrJournal.PayeeIdNo
+			crIdNo = CrJournal.IdNo
+			nSeq = 0
+			Select ArOpnInv
+			Seek Str(cIdNo,5,0)
+			dDate = CrJournal.TransDate
+			negAmount = 0
 * look for negative amounts and apply them if the date is less than the current date
-		Do While ArOpnInv.CustIdNo = cIdNo And ArOpnInv.Date <= dDate  And Not Eof("ArOpnInv")
-			If ArOpnInv.Amount < 0 And ArOpnInv.Date <= dDate  Then
-				lNegAmount = ArOpnInv.Amount
-				negAmount = negAmount + lNegAmount * -1
-				Replace ArOpnInv.PaidAmt With  ArOpnInv.PaidAmt + lNegAmount
-				Replace ArOpnInv.Amount With 0
-				nArOpnIdNo = ArOpnInv.IdNo
-				Select CsrOiItm
-				nSeq = nSeq + 1
-				Append Blank
-				Replace IdNo With nCtr
-				Replace CsrIdNo With crIdNo
-				Replace ArOpIdNo With nArOpnIdNo
-				Replace Sequence With nSeq
-				Replace Amount With lNegAmount
-				Replace DiscTakn With 0
-				nCtr = nCtr + 1
-			Endif
-			Select ArOpnInv
-			Skip
-		Enddo
-
-		Seek Str(cIdNo,5,0)
-		rPayAmount = rPayAmount + negAmount
-		rTotArPay = rTotArPay + negAmount
-		Do While ArOpnInv.CustIdNo = cIdNo And rTotArPay <> 0 And Not Eof("ArOpnInv")
-* if Open invoice not yet paid
-			If ArOpnInv.Amount <> 0 Then
-				If ArOpnInv.Amount <= rTotArPay Then
-*  if open invoice amount is less than Payment Amount
-					If rPayAmount <= ArOpnInv.Amount Then
-						m.AplAmt = rPayAmount
-						rTotArPay = rTotArPay - rPayAmount
-						rPayAmount = 0
-						m.AplDsc = ArOpnInv.Amount - m.AplAmt
-						rDscTknAmt = rDscTknAmt - m.AplDsc
-						rTotArPay = rTotArPay - m.AplDsc
-					Else
-						m.AplAmt = ArOpnInv.Amount
-						m.AplDsc = 0
-						rTotArPay = rTotArPay - m.AplAmt
-						rPayAmount = rPayAmount - m.AplAmt
-
-					Endif
-					Replace ArOpnInv.PaidAmt With ArOpnInv.PaidAmt + m.AplAmt
-					Replace ArOpnInv.DiscTakn With ArOpnInv.DiscTakn + m.AplDsc
+			Do While ArOpnInv.CustIdNo = cIdNo And ArOpnInv.Date <= dDate  And Not Eof("ArOpnInv")
+				If ArOpnInv.Amount < 0 And ArOpnInv.Date <= dDate  Then
+					lNegAmount = ArOpnInv.Amount
+					negAmount = negAmount + lNegAmount * -1
+					Replace ArOpnInv.PaidAmt With  ArOpnInv.PaidAmt + lNegAmount
 					Replace ArOpnInv.Amount With 0
-* already fully paid so exit the loop
-				Else
-* discount and payment is more than the openinvoice amount			
-					m.AplAmt = rPayAmount
-					m.AplDsc = rDscTknAmt
-					Replace ArOpnInv.PaidAmt With ArOpnInv.PaidAmt + m.AplAmt
-					Replace ArOpnInv.DiscTakn With ArOpnInv.DiscTakn + m.AplDsc
-					Replace ArOpnInv.Amount  With ArOpnInv.Amount - rTotArPay
-					rTotArPay = 0
+					nArOpnIdNo = ArOpnInv.IdNo
+					Select CsrOiItm
+					nSeq = nSeq + 1
+					Append Blank
+					Replace IdNo With nCtr
+					Replace CsrIdNo With crIdNo
+					Replace ArOpIdNo With nArOpnIdNo
+					Replace Sequence With nSeq
+					Replace Amount With lNegAmount
+					Replace DiscTakn With 0
+					nCtr = nCtr + 1
 				Endif
-				nArOpnIdNo = ArOpnInv.IdNo
-				Select CsrOiItm
-				nSeq = nSeq + 1
-				Append Blank
-				Replace IdNo With nCtr
-				Replace CsrIdNo With crIdNo
-				Replace ArOpIdNo With nArOpnIdNo
-				Replace Sequence With nSeq
-				Replace Amount With m.AplAmt
-				Replace DiscTakn With m.AplDsc
-				nCtr = nCtr + 1
-			Endif
-			Select ArOpnInv
-			Skip
-		Enddo
-	Else
+				Select ArOpnInv
+				Skip
+			Enddo
+
+			Seek Str(cIdNo,5,0)
+			rPayAmount = rPayAmount + negAmount
+			rTotArPay = rTotArPay + negAmount
+			Do While ArOpnInv.CustIdNo = cIdNo And rTotArPay <> 0 And Not Eof("ArOpnInv")
+* if Open invoice not yet paid
+				If ArOpnInv.Amount <> 0 Then
+					If ArOpnInv.Amount <= rTotArPay Then
+*  if open invoice amount is less than Payment Amount
+						If rPayAmount <= ArOpnInv.Amount Then
+							m.AplAmt = rPayAmount
+							rTotArPay = rTotArPay - rPayAmount
+							rPayAmount = 0
+							m.AplDsc = ArOpnInv.Amount - m.AplAmt
+							rDscTknAmt = rDscTknAmt - m.AplDsc
+							rTotArPay = rTotArPay - m.AplDsc
+						Else
+							m.AplAmt = ArOpnInv.Amount
+							m.AplDsc = 0
+							rTotArPay = rTotArPay - m.AplAmt
+							rPayAmount = rPayAmount - m.AplAmt
+
+						Endif
+						Replace ArOpnInv.PaidAmt With ArOpnInv.PaidAmt + m.AplAmt
+						Replace ArOpnInv.DiscTakn With ArOpnInv.DiscTakn + m.AplDsc
+						Replace ArOpnInv.Amount With 0
+* already fully paid so exit the loop
+					Else
+* discount and payment is more than the openinvoice amount			
+						m.AplAmt = rPayAmount
+						m.AplDsc = rDscTknAmt
+						Replace ArOpnInv.PaidAmt With ArOpnInv.PaidAmt + m.AplAmt
+						Replace ArOpnInv.DiscTakn With ArOpnInv.DiscTakn + m.AplDsc
+						Replace ArOpnInv.Amount  With ArOpnInv.Amount - rTotArPay
+						rTotArPay = 0
+					Endif
+					nArOpnIdNo = ArOpnInv.IdNo
+					Select CsrOiItm
+					nSeq = nSeq + 1
+					Append Blank
+					Replace IdNo With nCtr
+					Replace CsrIdNo With crIdNo
+					Replace ArOpIdNo With nArOpnIdNo
+					Replace Sequence With nSeq
+					Replace Amount With m.AplAmt
+					Replace DiscTakn With m.AplDsc
+					nCtr = nCtr + 1
+				Endif
+				Select ArOpnInv
+				Skip
+			Enddo
+		Else
 *!*			If CrJournal.PayType = "R" Then
 *!*	* Supplier Refund
 
@@ -2131,170 +1965,170 @@ Do While Not Eof()
 
 
 *!*			Endif
-	Endif
-	Select CrJournal
-	Skip
-Enddo
+		Endif
+		Select CrJournal
+		Skip
+	Enddo
 
-Close All
+	Close All
 
 * Finalize ApOpInvo Table
 
-Create Table c:\temp\ApOpInvo.Dbf ;
-	(IdNo Integer(6),;
-	JournalCd Char(2),;
-	JourIdNo Int(7),;
-	JrItIdNo Int(7),;
-	PaidAmt  numeric(10,2),;
-	DiscTakn numeric(10,2))
-Append From c:\temp\ApOpnInv.Dbf
-Delete File c:\temp\ApOpnInv.Dbf
-Close All
+	Create Table c:\temp\ApOpInvo.Dbf ;
+		(IdNo Integer(6),;
+		JournalCd Char(2),;
+		JourIdNo Int(7),;
+		JrItIdNo Int(7),;
+		PaidAmt  numeric(10,2),;
+		DiscTakn numeric(10,2))
+	Append From c:\temp\ApOpnInv.Dbf
+	Delete File c:\temp\ApOpnInv.Dbf
+	Close All
 
 * Finalize ArOpInvo Table
 
-Create Table c:\temp\ArOpInvo.Dbf ;
-	(IdNo Integer(6),;
-	JournalCd Char(2),;
-	JourIdNo Int(7),;
-	JrItIdNo Int(7),;
-	PaidAmt  numeric(10,2),;
-	DiscTakn numeric(10,2))
-Append From c:\temp\ArOpnInv.Dbf
+	Create Table c:\temp\ArOpInvo.Dbf ;
+		(IdNo Integer(6),;
+		JournalCd Char(2),;
+		JourIdNo Int(7),;
+		JrItIdNo Int(7),;
+		PaidAmt  numeric(10,2),;
+		DiscTakn numeric(10,2))
+	Append From c:\temp\ArOpnInv.Dbf
 * Delete File c:\temp\ArOpnInv.Dbf
-Close All
+	Close All
 
 *******************************************************************************
 * Dbf to Sql
 *******************************************************************************
 
-Close Databases
+	Close Databases
 
 
-Create Table c:\temp\ChartNBal.Dbf ;
-	(IdNo Integer(6),;
-	Year Int(4),;
-	AcctIdNo Int(7),;
-	ByDebit numeric(10,2),;
-	ByCredit numeric(10,2))
-nCtr = 0
-Select 1
-Use Y:\acctbackup\ChartBal.Dbf Alias ChartBal Exclusive
-Select 2
-Use c:\temp\ChartNBal Alias ChartNBal
-Select 1
-Go Top
-Do While Not Eof()
-	nCtr = nCtr + 1
-	Select ChartNBal
-	Append Blank
-	Replace ChartNBal.IdNo With nCtr
-	Replace ChartNBal.AcctIdNo With Val(ChartBal.ACCTCODE)
-	Replace ChartNBal.Year With Val(ChartBal.Year)
-	Replace ChartNBal.ByDebit With ChartBal.ByDebit
-	Replace ChartNBal.ByCredit With ChartBal.ByCredit
-	Select ChartBal
-	Skip
-Enddo
+	Create Table c:\temp\ChartNBal.Dbf ;
+		(IdNo Integer(6),;
+		Year Int(4),;
+		AcctIdNo Int(7),;
+		ByDebit numeric(10,2),;
+		ByCredit numeric(10,2))
+	nCtr = 0
+	Select 1
+	Use Y:\acctbackup\ChartBal.Dbf Alias ChartBal Exclusive
+	Select 2
+	Use c:\temp\ChartNBal Alias ChartNBal
+	Select 1
+	Go Top
+	Do While Not Eof()
+		nCtr = nCtr + 1
+		Select ChartNBal
+		Append Blank
+		Replace ChartNBal.IdNo With nCtr
+		Replace ChartNBal.AcctIdNo With Val(ChartBal.ACCTCODE)
+		Replace ChartNBal.Year With Val(ChartBal.Year)
+		Replace ChartNBal.ByDebit With ChartBal.ByDebit
+		Replace ChartNBal.ByCredit With ChartBal.ByCredit
+		Select ChartBal
+		Skip
+	Enddo
 
-Close Database
+	Close Database
 
-Set Deleted On
-Set Exclusive On
-Set Safety Off
-Set Date YMD
-Set Century On
+	Set Deleted On
+	Set Exclusive On
+	Set Safety Off
+	Set Date YMD
+	Set Century On
 
-cFields = "[IdNo], [SupplierCode], [SupplierName], [SupplierNameAra], [ContactPerson], [ContactDesignation], [Street], [District], [TownCity], [ProvinceState], [CountryCode], [POBox], "
-cFields = cFields + "[ZipCode], [Phone1], [Phone2], [Mobile], [Fax], [Email], [Website], [VATNumber], [CRNumber], [AccountStatus], [APAccountIdNo], [ExpAccountIdNo], [CreditLimit], [SettlementDueDays], [SettlementDiscount], "
-cFields = cFields + "[PaymentDueDays], [DateAccountOpen], [BankAccountName], [BankAccountNo], [BankIdNo], [IBAN], [PaymentMethod], [Notes], [OpeningBalance], [Active], [DateCreated]"
-DbfToSql(cFields,"Supplier","Supplier")
+	cFields = "[IdNo], [SupplierCode], [SupplierName], [SupplierNameAra], [ContactPerson], [ContactDesignation], [Street], [District], [TownCity], [ProvinceState], [CountryCode], [POBox], "
+	cFields = cFields + "[ZipCode], [Phone1], [Phone2], [Mobile], [Fax], [Email], [Website], [VATNumber], [CRNumber], [AccountStatus], [APAccountIdNo], [ExpAccountIdNo], [CreditLimit], [SettlementDueDays], [SettlementDiscount], "
+	cFields = cFields + "[PaymentDueDays], [DateAccountOpen], [BankAccountName], [BankAccountNo], [BankIdNo], [IBAN], [PaymentMethod], [Notes], [OpeningBalance], [Active], [DateCreated]"
+	DbfToSql(cFields,"Supplier","Supplier")
 
-cFields = "[IdNo],[CustomerCode],[CustomerName],[CustomerNameAra],[ContactPerson],[ContactDesignation],[Street],[District],[TownCity],[ProvinceState],[CountryCode],[POBox],[ZipCode],[Phone1],[Phone2],[Mobile],[Fax],[Email],"
-cFields = cFields + "[Website],[VATNumber],[CRNumber],[AccountStatus],[ARAccountIdNo],[RevAccountIdNo],[DiscountSchemeIdNo],[CreditLimit],[SettlementDueDays],[SettlementDiscount],[PaymentDueDays],[DateAccountOpen],[BankAccountName],[BankAccountNo],[BankIdNo],"
-cFields = cFields + "[IBAN],[PaymentMethod],[Notes],[OpeningBalance],[Active],[DateCreated]"
-DbfToSql(cFields,"Customer","Customer")
+	cFields = "[IdNo],[CustomerCode],[CustomerName],[CustomerNameAra],[ContactPerson],[ContactDesignation],[Street],[District],[TownCity],[ProvinceState],[CountryCode],[POBox],[ZipCode],[Phone1],[Phone2],[Mobile],[Fax],[Email],"
+	cFields = cFields + "[Website],[VATNumber],[CRNumber],[AccountStatus],[ARAccountIdNo],[RevAccountIdNo],[DiscountSchemeIdNo],[CreditLimit],[SettlementDueDays],[SettlementDiscount],[PaymentDueDays],[DateAccountOpen],[BankAccountName],[BankAccountNo],[BankIdNo],"
+	cFields = cFields + "[IBAN],[PaymentMethod],[Notes],[OpeningBalance],[Active],[DateCreated]"
+	DbfToSql(cFields,"Customer","Customer")
 
-cFields = "[IDNo],[SupplierIdNo],[TransactionDate],[ReferenceNo],[TransactionType],[Amount],[AccountIdNo],[DueDate],[SettlementDueDate],[SettlementDiscount],[InvoiceNo],[InvoiceDate],[VatNumber],[VatAmount],[Notes],[Posted],[Cancelled],[DateCreated]"
-DbfToSql(cFields,"ApJournal","ApJournal")
+	cFields = "[IDNo],[SupplierIdNo],[TransactionDate],[ReferenceNo],[TransactionType],[Amount],[AccountIdNo],[DueDate],[SettlementDueDate],[SettlementDiscount],[InvoiceNo],[InvoiceDate],[VatNumber],[VatAmount],[Notes],[Posted],[Cancelled],[DateCreated]"
+	DbfToSql(cFields,"ApJournal","ApJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
-DbfToSql(cFields,"ApJourItm","ApJournalItem")
+	cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
+	DbfToSql(cFields,"ApJourItm","ApJournalItem")
 
-cFields = "[IDNo],[CustomerIdNo],[TransactionDate],[ReferenceNo],[TransactionType],[Amount],[AccountIdNo],[DueDate],[SettlementDueDate],[SettlementDiscount],[InvoiceNo],[InvoiceDate],[Notes],[Posted],[Cancelled],[DateCreated]"
-DbfToSql(cFields,"ArJournal","ArJournal")
+	cFields = "[IDNo],[CustomerIdNo],[TransactionDate],[ReferenceNo],[TransactionType],[Amount],[AccountIdNo],[DueDate],[SettlementDueDate],[SettlementDiscount],[InvoiceNo],[InvoiceDate],[Notes],[Posted],[Cancelled],[DateCreated]"
+	DbfToSql(cFields,"ArJournal","ArJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
-DbfToSql(cFields,"ArJourItm","ArJournalItem")
+	cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
+	DbfToSql(cFields,"ArJourItm","ArJournalItem")
 
-cFields = "[IDNo],[EmployeeIdNo],[TransactionDate],[ReferenceNo],[TransactionType],[Amount],[AccountIdNo],[Notes],[Posted],[Cancelled],[DateCreated]"
-DbfToSql(cFields,"ErJournal","ErJournal")
+	cFields = "[IDNo],[EmployeeIdNo],[TransactionDate],[ReferenceNo],[TransactionType],[Amount],[AccountIdNo],[Notes],[Posted],[Cancelled],[DateCreated]"
+	DbfToSql(cFields,"ErJournal","ErJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
-DbfToSql(cFields,"ErJourItm","ErJournalItem")
+	cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
+	DbfToSql(cFields,"ErJourItm","ErJournalItem")
 
-cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Notes],[Posted],[ClosingJournal],[Cancelled],[DateCreated]"
-DbfToSql(cFields,"GnJournal","GeneralJournal")
+	cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Notes],[Posted],[ClosingJournal],[Cancelled],[DateCreated]"
+	DbfToSql(cFields,"GnJournal","GeneralJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
-DbfToSql(cFields,"GnJourItm","GeneralJournalItem")
+	cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
+	DbfToSql(cFields,"GnJourItm","GeneralJournalItem")
 
-cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Amount],[AccountIdNo],[PaymentType],[PayeeIdNo],[PayeeName],[ORNumber],[DiscountTaken],[DiscountAccountIdNo],[Applied],[UnApplied],[VatNumber],[VatAmount],[Notes],[Posted],[DateCreated],[Cancelled]"
-DbfToSql(cFields,"CdJournal","CdJournal")
+	cFields = "IdNo,TransactionDate,ReferenceNo,Amount,AccountIdNo,PaymentType,PayType,PayeeIdNo,PayeeName,CheckNumber,CheckDate,ORNumber,DiscountTaken,DiscountAccountIdNo,Applied,UnApplied,VatNumber,VatAmount,Notes,Posted,DateCreated,Cancelled"
+	DbfToSql(cFields,"CdJournal","CdJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
-DbfToSql(cFields,"CdJourItm","CdJournalItem")
+	cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
+	DbfToSql(cFields,"CdJourItm","CdJournalItem")
 
-cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Amount],[AccountIdNo],[PaymentType],[PayeeIdNo],[PayeeName],[CheckNumber],[CheckDate],[ORNumber],[DiscountTaken],[DiscountAccountIdNo],[Applied],[UnApplied],[VatNumber],[VatAmount],[Notes],[Posted],"
-cFields = cFields + "[DateCreated],[Cancelled]"
-DbfToSql(cFields,"CkJournal","CkJournal")
+*!*	cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Amount],[AccountIdNo],[PaymentType],[PayeeIdNo],[PayeeName],[CheckNumber],[CheckDate],[ORNumber],[DiscountTaken],[DiscountAccountIdNo],[Applied],[UnApplied],[VatNumber],[VatAmount],[Notes],[Posted],"
+*!*	cFields = cFields + "[DateCreated],[Cancelled]"
+*!*	DbfToSql(cFields,"CkJournal","CkJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
-DbfToSql(cFields,"CkJourItm","CkJournalItem")
+*!*	cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
+*!*	DbfToSql(cFields,"CkJourItm","CkJournalItem")
 
-cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Amount],[AccountIdNo],[PayorType],[PayorIdNo],[Payorname],[CheckNumber],[CheckDate],[ORNumber],[DiscountTaken],[DiscountAccountIdNo],[Applied],[UnApplied],[Notes],[Posted],[DateCreated],[Cancelled]"
-DbfToSql(cFields, "CrJournal","CashReceiptJournal")
+	cFields = "[IdNo],[TransactionDate],[ReferenceNo],[Amount],[AccountIdNo],[PayorType],[PayorIdNo],[Payorname],[CheckNumber],[CheckDate],[ORNumber],[DiscountTaken],[DiscountAccountIdNo],[Applied],[UnApplied],[Notes],[Posted],[DateCreated],[Cancelled]"
+	DbfToSql(cFields, "CrJournal","CashReceiptJournal")
 
-cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
-DbfToSql(cFields,"CrJourItm","CashReceiptJournalItem")
+	cFields = "[IdNo],[Sequence],[JournalIdNo],[AccountIdNo],[Debit],[Credit],[RevCostCenterIdNo],[Notes],[Posted]"
+	DbfToSql(cFields,"CrJourItm","CashReceiptJournalItem")
 
-cFields = "[IdNo],[DjIdNo],[ApOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
-DbfToSql(cFields,"CadOiItm","CdOiItem")
+	cFields = "[IdNo],[DjIdNo],[ApOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
+	DbfToSql(cFields,"CadOiItm","CdOiItem")
 
-cFields = "[IdNo],[DjIdNo],[ApOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
-DbfToSql(cFields,"CkdOiItm","CkOiItem")
+	cFields = "[IdNo],[DjIdNo],[ApOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
+	DbfToSql(cFields,"CkdOiItm","CkOiItem")
 
-cFields = "[IdNo],[JournalCode],[JournalIdNo],[JournalItemIdNo],[PaidAmount],[DiscountTaken]"
-DbfToSql(cFields,"ApOpInvo","ApOpenInvoice")
+	cFields = "[IdNo],[JournalCode],[JournalIdNo],[JournalItemIdNo],[PaidAmount],[DiscountTaken]"
+	DbfToSql(cFields,"ApOpInvo","ApOpenInvoice")
 
 
-cFields = "[IdNo],[CsrIdNo],[ArOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
-DbfToSql(cFields,"CsrOiItm","CsrOiItem")
+	cFields = "[IdNo],[CsrIdNo],[ArOpenInvoiceIdNo],[Sequence],[Amount],[DiscountTaken]"
+	DbfToSql(cFields,"CsrOiItm","CsrOiItem")
 
-cFields = "[IdNo],[JournalCode],[JournalIdNo],[JournalItemIdNo],[PaidAmount],[DiscountTaken]"
-DbfToSql(cFields,"ArOpInvo","ArOpenInvoice")
+	cFields = "[IdNo],[JournalCode],[JournalIdNo],[JournalItemIdNo],[PaidAmount],[DiscountTaken]"
+	DbfToSql(cFields,"ArOpInvo","ArOpenInvoice")
 
-cFields = "[IdNo],[Year],[AccountIdNo],[Debit],[Credit]"
-DbfToSql(cFields,"ChartNBal","AccountBalance")
+	cFields = "[IdNo],[Year],[AccountIdNo],[Debit],[Credit]"
+	DbfToSql(cFields,"ChartNBal","AccountBalance")
 
-Set Deleted Off
-Close Data
-Use Y:\acctbackup\Chart.Dbf
-Go Top
-lnfh = Fcreate("C:\TEMP\SQL\UpdateAccountBegBal.sql")
-lctr = 0
-nFctr = 0
-Do While Not Eof()
-	cByDebit = Str(Chart.ByDebit,10,2)
-	cByCredit = Str(Chart.ByCredit,10,2)
+	Set Deleted Off
+	Close Data
+	Use Y:\acctbackup\Chart.Dbf
+	Go Top
+	lnfh = Fcreate("C:\TEMP\SQL\UpdateAccountBegBal.sql")
+	lctr = 0
+	nFctr = 0
+	Do While Not Eof()
+		cByDebit = Str(Chart.ByDebit,10,2)
+		cByCredit = Str(Chart.ByCredit,10,2)
 
-	cText = "UPDATE Account SET ByDebit = " + cByDebit + ", ByCredit = " + cByCredit + " WHERE idno = " + Chart.ACCTCODE
-	Fputs(lnfh,cText)
-	Skip
-Enddo
-Fclose(lnfh)
-Close All
-Cancel
+		cText = "UPDATE Account SET ByDebit = " + cByDebit + ", ByCredit = " + cByCredit + " WHERE idno = " + Chart.ACCTCODE
+		Fputs(lnfh,cText)
+		Skip
+	Enddo
+	Fclose(lnfh)
+	Close All
+	Cancel
 
 
 *********************************************
