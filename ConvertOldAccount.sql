@@ -9,7 +9,6 @@ GO
 :r c:\temp\Sql\ArOpenInvoice.sql
 
 :r c:\temp\Sql\CdOiItem.sql
-:r c:\temp\Sql\CkOiItem.sql
 :r c:\temp\Sql\CsrOiItem.sql
 
 :r c:\temp\Sql\ArJournal.sql
@@ -27,8 +26,6 @@ GO
 
 :r c:\temp\Sql\CdJournal.sql
 :r c:\temp\Sql\CdJournalItem.sql
-:r c:\temp\Sql\CkJournal.sql
-:r c:\temp\Sql\CkJournalItem.sql
 
 :r c:\temp\Sql\CashReceiptJournal.sql
 :r c:\temp\Sql\CashReceiptJournalItem.sql

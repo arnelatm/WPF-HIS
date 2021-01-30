@@ -109,8 +109,8 @@ End Enum
 
 Public Enum PayTypeSelection
     <EnumCode("")> NotSpecified
-    <EnumCode("1")> BankTransfer
-    <EnumCode("2")> CheckPayment
+    <EnumCode("1")> CheckPayment
+    <EnumCode("2")> BankTransfer
     <EnumCode("3")> Others
 End Enum
 

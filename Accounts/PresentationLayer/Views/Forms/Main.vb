@@ -1466,7 +1466,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BankTransferToolStripMenuItem.Click
+        Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm
             childMdiForm = New DisbursementJournalEntry("CdJournal") With {
                 .MdiParent = Me
