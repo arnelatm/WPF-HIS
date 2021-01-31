@@ -6,7 +6,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IPcJournalsView
         Inherits IView
 
-        Property PcJournals As IList(Of PcJournalModel)
+        Property PcJournals As List(Of IPcJournalView)
 
     End Interface
 

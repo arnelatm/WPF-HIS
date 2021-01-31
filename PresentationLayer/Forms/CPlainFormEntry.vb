@@ -11,10 +11,8 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
-Public Class CFormEntry
-    Implements ISubscriber(Of RecordPositionChanged),
-               ISubscriber(Of EditModeChanged),
-               ISubscriber(Of AddModeChanged),
+Public Class CPlainFormEntry
+    Implements ISubscriber(Of EditModeChanged),
                ISubscriber(Of ValidatingData),
                ISubscriber(Of PassErrorList),
                ISubscriber(Of QuitView),
@@ -32,7 +30,6 @@ Public Class CFormEntry
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
     Protected SortOrderKey As String = "IdNo"
-    Protected SingleData As Boolean = False
     Private _debugSwitch As Byte = 0
 
     Public Sub New()
@@ -112,16 +109,6 @@ Public Class CFormEntry
         button.Visible = False
     End Sub
 
-    Public Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
-        If e.AddMode Then
-            Inputs(True)
-            UpdateButtonDisplays(False, True)
-        Else
-            Inputs(False)
-            UpdateButtonDisplays(False, False)
-        End If
-    End Sub
-
     Public Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
         If e.EditMode Then
             Inputs(True)
@@ -165,27 +152,8 @@ Public Class CFormEntry
         Dispose()
     End Sub
 
-    Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
-        If Not SingleData Then
-            UpdateRecordCounter()
-            UpdateButtonDisplays(False, False)
-            MyErrorProvider.ClearAllErrorMessages()
-            MyErrorProvider.Clear()
-            Inputs(False)
-            RecordPositionChanged(e)
-        End If
-    End Sub
-
     Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
         RecordSaved(e)
-    End Sub
-
-    'Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted) Implements ISubscriber(Of RecordDeleted).OnEventHandler
-    '    RecordDeleted(e)
-    'End Sub
-
-    Public Sub OnEventHandlerAddedRecord(ByRef e As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
-        BeforeAssignment()
     End Sub
 
     Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
@@ -514,60 +482,54 @@ Public Class CFormEntry
     End Sub
 
     Protected Sub UpdateButtonDisplays(editing As Boolean, adding As Boolean)
-        If SingleData Then
-            btnAdd.Visible = False
-            btnFind.Visible = False
-            HideNavigatorButtons = True
-        Else
-            If RecordCount = 0 Then
-                btnFirst.Enabled = False
-                btnPrev.Enabled = False
-                btnNext.Enabled = False
-                btnLast.Enabled = False
-                btnEdit.Enabled = False
-                btnDelete.Enabled = False
+        If RecordCount = 0 Then
+            btnFirst.Enabled = False
+            btnPrev.Enabled = False
+            btnNext.Enabled = False
+            btnLast.Enabled = False
+            btnEdit.Enabled = False
+            btnDelete.Enabled = False
+            btnUndo.Enabled = False
+            btnSave.Enabled = False
+            btnFind.Enabled = False
+            btnPrint.Enabled = False
+            If Not PresenterObj.AddMode Then
                 btnUndo.Enabled = False
                 btnSave.Enabled = False
-                btnFind.Enabled = False
-                btnPrint.Enabled = False
-                If Not PresenterObj.AddMode Then
-                    btnUndo.Enabled = False
-                    btnSave.Enabled = False
-                    Messaging.Show(True, "MsgNoRecordsFound", "No records found for this table!", "Empty Table")
-                Else
-                    btnSave.Enabled = True
-                    btnUndo.Enabled = True
-                End If
+                Messaging.Show(True, "MsgNoRecordsFound", "No records found for this table!", "Empty Table")
             Else
-                If PresenterObj.RecordPositionNumber = 1 Then
-                    btnFirst.Enabled = False
-                    btnPrev.Enabled = False
-                Else
-                    btnFirst.Enabled = True
-                    btnPrev.Enabled = True
-                End If
-                If PresenterObj.RecordPositionNumber >= RecordCount Then
-                    btnLast.Enabled = False
-                    btnNext.Enabled = False
-                Else
-                    btnLast.Enabled = True
-                    btnNext.Enabled = True
-                End If
-                If editing OrElse adding Then
-                    btnEdit.Enabled = False
-                    btnAdd.Enabled = False
-                    btnDelete.Enabled = False
-                    btnUndo.Enabled = True
-                    btnSave.Enabled = True
-                    btnPrint.Enabled = False
-                Else
-                    btnEdit.Enabled = True
-                    btnDelete.Enabled = True
-                    btnAdd.Enabled = True
-                    btnUndo.Enabled = False
-                    btnSave.Enabled = False
-                    btnPrint.Enabled = True
-                End If
+                btnSave.Enabled = True
+                btnUndo.Enabled = True
+            End If
+        Else
+            If PresenterObj.RecordPositionNumber = 1 Then
+                btnFirst.Enabled = False
+                btnPrev.Enabled = False
+            Else
+                btnFirst.Enabled = True
+                btnPrev.Enabled = True
+            End If
+            If PresenterObj.RecordPositionNumber >= RecordCount Then
+                btnLast.Enabled = False
+                btnNext.Enabled = False
+            Else
+                btnLast.Enabled = True
+                btnNext.Enabled = True
+            End If
+            If editing OrElse adding Then
+                btnEdit.Enabled = False
+                btnAdd.Enabled = False
+                btnDelete.Enabled = False
+                btnUndo.Enabled = True
+                btnSave.Enabled = True
+                btnPrint.Enabled = False
+            Else
+                btnEdit.Enabled = True
+                btnDelete.Enabled = True
+                btnAdd.Enabled = True
+                btnUndo.Enabled = False
+                btnSave.Enabled = False
+                btnPrint.Enabled = True
             End If
         End If
     End Sub
@@ -586,7 +548,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs)
 
         RunButtonRoutine(ButtonClicked.Add)
     End Sub
@@ -606,7 +568,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+    Private Sub BtnDelete_Click(sender As Object, e As EventArgs)
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
@@ -621,28 +583,28 @@ Public Class CFormEntry
         RunButtonRoutine(ButtonClicked.Edit)
     End Sub
 
-    Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+    Private Sub BtnFind_Click(sender As Object, e As EventArgs)
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.Find)
     End Sub
 
-    Private Sub BtnFirst_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
+    Private Sub BtnFirst_Click(sender As Object, e As EventArgs)
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.First)
     End Sub
 
-    Private Sub BtnLast_Click(sender As Object, e As EventArgs) Handles btnLast.Click
+    Private Sub BtnLast_Click(sender As Object, e As EventArgs)
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         RunButtonRoutine(ButtonClicked.Last)
     End Sub
 
-    Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+    Private Sub BtnNext_Click(sender As Object, e As EventArgs)
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
@@ -656,7 +618,7 @@ Public Class CFormEntry
         SwitchUiLanguage(True)
     End Sub
 
-    Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
+    Private Sub BtnPrev_Click(sender As Object, e As EventArgs)
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
@@ -707,7 +669,7 @@ Public Class CFormEntry
         RunButtonRoutine(ButtonClicked.Undo)
     End Sub
 
-    Private Sub CFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
+    Private Sub CPlainFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         If CancelClose Then
             e.Cancel = True
         Else
@@ -715,11 +677,11 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub CFormEntry_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub CPlainFormEntry_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         CloseForm()
     End Sub
 
-    Private Sub CFormEntry_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub CPlainFormEntry_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If e.KeyCode = Keys.F10 Then
             If btnSave.Enabled Then
                 e.SuppressKeyPress = True
@@ -742,7 +704,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    'Private Sub CFormEntry_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
+    'Private Sub CPlainFormEntry_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
     '    If e.KeyChar = ChrW(Keys.F10) Then
     '        e.Handled = True
     '    ElseIf e.KeyChar = ChrW(Keys.F2) Then
@@ -752,7 +714,7 @@ Public Class CFormEntry
     '    End If
     'End Sub
 
-    Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub CPlainFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
 
@@ -763,10 +725,8 @@ Public Class CFormEntry
             Inputs(False)
 
             Try
-                If Not SingleData Then
-                    RecordCount = PresenterObj.GetRecordCount()
-                    PresenterObj.RecordPositionNumber = RecordCount
-                End If
+                RecordCount = PresenterObj.GetRecordCount()
+                PresenterObj.RecordPositionNumber = RecordCount
             Catch ex As Exception
                 MessageBox.Show(ex.Message + Name)
                 Debugger.Break()
@@ -797,7 +757,7 @@ Public Class CFormEntry
                 ' Visible property stored in first element of the array
                 HideButton(btnDebug)
             End If
-            If SingleData Or HideNavigatorButtons Then
+            If HideNavigatorButtons Then
                 btnFirst.Visible = False
                 btnNext.Visible = False
                 btnLast.Visible = False

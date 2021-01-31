@@ -38,9 +38,9 @@ Namespace DataLayer.AdoNet
                     "PaymentType," &
                     "ReferenceNo," &
                     "TransactionDate" &
-                    " FROM " & TableOrViewName &
-                    " WHERE Not Closed " &
-                    " ORDER BY " & sortKey.ToString()
+                    " FROM PcJournal_View" &
+                    " WHERE PcClosed=0 " &
+                    " ORDER BY IdNo"
             Return _db.Read(sql, Make).ToList()
         End Function
 
@@ -67,7 +67,7 @@ Namespace DataLayer.AdoNet
             New PcJournal() With {
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .CdJournalIdNo = Extensions.AsInt(Of Int32)(reader("CdJournalIdNo")),
-            .PcClosed = Extensions.AsBool(reader("Closed")),
+            .PcClosed = Extensions.AsBool(reader("PcClosed")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .PayeeName = Extensions.AsString(reader("PayeeName")),

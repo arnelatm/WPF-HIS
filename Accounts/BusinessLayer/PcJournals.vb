@@ -13,7 +13,7 @@ Namespace BusinessLayer
             'If createRules Then
         End Sub
 
-        Public Property JournalItems As List(Of JournalItem)
+        Public Property PcJournals As List(Of PcJournal)
 
     End Class
 
