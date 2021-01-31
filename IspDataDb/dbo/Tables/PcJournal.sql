@@ -18,12 +18,15 @@
     [VatAmount]           MONEY          NULL,
     [Notes]               NVARCHAR (254) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [PcClosed]            BIT            NULL,
+    [CdJournalIdNo]       INT            NULL,
     [Posted]              BIT            NULL,
     [DateCreated]         DATETIME       CONSTRAINT [DF_PcJournal_DateCreated] DEFAULT (getdate()) NULL,
     [Cancelled]           BIT            NULL,
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_PcJournal1] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

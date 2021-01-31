@@ -11,11 +11,11 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Views.Forms
 
     Public Class PettyCashClosing
-
+        Implements IPcJournalsView
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
 
-        Private Property MyPresenter As DisbursementJournalPresenter
+        Private Property MyPresenter As ClosePettyCashPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Public Sub New()
@@ -25,19 +25,22 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "PcJournal"
             SortOrderKey = "IdNo"
-            MyPresenter = New DisbursementJournalPresenter(Me, "PcJournal")
+            MyPresenter = New ClosePettyCashPresenter(Me)
             PresenterObj = MyPresenter
             _nfi.NumberDecimalDigits = 2
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
+            Me.HideNavigatorButtons = True
         End Sub
 
-
-#Region "Field Items"
-
-
-#End Region
-
+        Private Property PcJournals As IList(Of Models.PcJournalModel) Implements IPcJournalsView.PcJournals
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As IList(Of Models.PcJournalModel))
+                Throw New NotImplementedException()
+            End Set
+        End Property
 
     End Class
 

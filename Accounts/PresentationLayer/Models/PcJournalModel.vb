@@ -8,7 +8,6 @@ Namespace PresentationLayer.Models
         Public Sub New()
         End Sub
 
-
         Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
@@ -22,6 +21,7 @@ Namespace PresentationLayer.Models
         Public Property OrNumber As String
         Public Property PayeeIdNo As Int32?
         Public Property PayeeName As String
+        Public Property PayeeNameAra As String
         Public Property PaymentType As String
         Public Property PcClosed As Boolean
         Public Property Posted As Boolean
@@ -34,6 +34,5 @@ Namespace PresentationLayer.Models
         Public Property VatNumber As String
 
     End Class
-
 
 End Namespace

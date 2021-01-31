@@ -162,6 +162,8 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+            Me.ClosePettyCashFundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -491,7 +493,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTransactions
             '
-            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PettyCashToolStripMenuItem, Me.ToolStripMenuItemCashDisbursementEntry, Me.AccountsPayableEntryToolStripMenuItem, Me.AccountsReceivableEntryToolStripMenuItem, Me.ToolStripMenuItemCashReceiptEntry, Me.EmployeeReceivableToolStripMenuItem, Me.ToolStripMenuItemGeneralJournalEntry, Me.SalesJournalEntryToolStripMenuItem, Me.AccountReconciliationToolStripMenuItem, Me.ClosePettyCashAccountToolStripMenuItem, Me.ClosingEntryToolStripMenuItem, Me.PayrollEntryToolStripMenuItem})
+            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PettyCashToolStripMenuItem, Me.ToolStripMenuItemCashDisbursementEntry, Me.AccountsPayableEntryToolStripMenuItem, Me.AccountsReceivableEntryToolStripMenuItem, Me.ToolStripMenuItemCashReceiptEntry, Me.EmployeeReceivableToolStripMenuItem, Me.ToolStripMenuItemGeneralJournalEntry, Me.SalesJournalEntryToolStripMenuItem, Me.AccountReconciliationToolStripMenuItem, Me.ClosePettyCashAccountToolStripMenuItem, Me.ClosingEntryToolStripMenuItem, Me.PayrollEntryToolStripMenuItem, Me.ToolStripSeparator2, Me.ClosePettyCashFundToolStripMenuItem})
             Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
             resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
             '
@@ -868,6 +870,16 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'ToolStripSeparator2
+            '
+            Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+            resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
+            '
+            'ClosePettyCashFundToolStripMenuItem
+            '
+            Me.ClosePettyCashFundToolStripMenuItem.Name = "ClosePettyCashFundToolStripMenuItem"
+            resources.ApplyResources(Me.ClosePettyCashFundToolStripMenuItem, "ClosePettyCashFundToolStripMenuItem")
+            '
             'Main
             '
             Me.AllowDrop = True
@@ -1025,5 +1037,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents PayPeriodAttendanceToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PayrollEntryToolStripMenuItem1 As ToolStripMenuItem
         Friend WithEvents CheckPrintingToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+        Friend WithEvents ClosePettyCashFundToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

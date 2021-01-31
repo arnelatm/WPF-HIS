@@ -889,7 +889,9 @@ Public Class CFormEntry
         Else
             InputsTurnedOff()
         End If
-        FirstControl.Focus()
+        If FirstControl IsNot Nothing Then
+            FirstControl.Focus()
+        End If
     End Sub
 
     Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
