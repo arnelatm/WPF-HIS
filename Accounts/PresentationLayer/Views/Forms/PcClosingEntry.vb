@@ -10,7 +10,7 @@ Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class DisbursementJournalEntry
+    Public Class PcClosingEntry
         Implements IDisbursementJournalView, ISubscriber(Of BeforeAssignment)
 
         Public TxtTotalCredits As Decimal
@@ -546,7 +546,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectionChangeCommitted, cboPaymentType.Validated
+        Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) 
             SetPayeeDataSource(PaymentType)
             If OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
@@ -601,7 +601,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub DgvJi_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewJournalItems.CellBeginEdit
+        Private Sub DgvJi_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) 
             If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
@@ -614,7 +614,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
+        Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) 
             With DataGridViewJournalItems
                 Dim nIndex = .CurrentRow.Index
                 Select Case .CurrentCell.OwningColumn.Name.ToLower()
@@ -679,7 +679,7 @@ Namespace PresentationLayer.Views.Forms
             VatAmount = MyPresenter.UpdateOutputVatAmount(JournalItems)
         End Sub
 
-        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) 
             UpdateTotals()
             Dim payeeTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedIndex)
             If payeeTypeEnum = PaymentTypeSelection.AccountsPayable Or payeeTypeEnum = PaymentTypeSelection.Supplier Then
@@ -725,7 +725,7 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) 
             Dim cdJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(cdJournalRow) Then
                 ' Do not allow the user to delete the first row.

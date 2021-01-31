@@ -964,7 +964,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return result
     End Function
 
-    Public Sub SaveOriginalValues()
+    Public Overridable Sub SaveOriginalValues()
         GlobalVariables.Mapper.Map(Of T, TM)(Me.View, Me.OriginalModel)
     End Sub
 
