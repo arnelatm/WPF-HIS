@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Forms
 
             MainTableName = "PcJournal"
             SortOrderKey = "IdNo"
-            PresenterObj = New PostPettyCashPresenter(Me)
+            PresenterObj = New ClosePettyCashPresenter(Me)
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("BA,CS,CK")
             cboStartIdNo.DataSource = PresenterObj.GetLookupData("ReferenceNo", "ReferenceNo", "TransactionDate", "PcJournal", "ReferenceNo", "Posted=0")
             cboEndIdNo.DataSource = PresenterObj.GetLookupData("ReferenceNo", "ReferenceNo", "TransactionDate", "PcJournal", "ReferenceNo", "Posted=0")

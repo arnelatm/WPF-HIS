@@ -1,25 +1,15 @@
-﻿
-CREATE VIEW [dbo].[PcJournal_View]
+﻿CREATE VIEW dbo.PcJournal_View
 AS
-SELECT			a.IdNo, a.TransactionDate, a.ReferenceNo, a.Amount, a.AccountIdNo, a.PaymentType, a.PayeeIdNo,
-				case 
-					when a.PaymentType = 'A' or a.PaymentTYpe = 'S' then s.SupplierName
-					when a.PaymentType = 'R' then c.CustomerName
-					when a.PaymentType = 'E' then e.EMployeeName
-					else a.PayeeName
-				End as PayeeName,
-				case 
-					when a.PaymentType = 'A' or a.PaymentTYpe = 'S' then s.SupplierNameAra
-					when a.PaymentType = 'R' then c.CustomerNameAra
-					when a.PaymentType = 'E' then e.EMployeeNameAra
-					else a.PayeeName
-				End as PayeeNameAra,
-				a.ORNumber, a.DiscountTaken, a.DiscountAccountIdNo, a.Applied, a.UnApplied, a.VatNumber, a.VatAmount, a.Notes, 
-				a.Posted, a.DateCreated, a.Cancelled, a.DateTimeStamp
-FROM			PcJournal a
-				Left Outer Join Supplier S on a.PayeeIdNo = s.IdNo and (a.PaymentType = 'A' or a.PaymentType = 'S')
-				Left Outer Join Customer C on a.PayeeIdNo = c.IdNo and a.PaymentType = 'R' 
-				Left Outer Join Employee E on a.PayeeIdNo = e.IdNo and a.PaymentType = 'E'
+SELECT        a.IdNo, a.TransactionDate, a.ReferenceNo, a.Amount, a.AccountIdNo, a.PaymentType, a.PayeeIdNo, CASE WHEN a.PaymentType = 'A' OR
+                         a.PaymentTYpe = 'S' THEN s.SupplierName WHEN a.PaymentType = 'R' THEN c.CustomerName WHEN a.PaymentType = 'E' THEN e.EMployeeName ELSE a.PayeeName END AS PayeeName, 
+                         CASE WHEN a.PaymentType = 'A' OR
+                         a.PaymentTYpe = 'S' THEN s.SupplierNameAra WHEN a.PaymentType = 'R' THEN c.CustomerNameAra WHEN a.PaymentType = 'E' THEN e.EMployeeNameAra ELSE a.PayeeName END AS PayeeNameAra, a.ORNumber, 
+                         a.DiscountTaken, a.DiscountAccountIdNo, a.Applied, a.UnApplied, a.VatNumber, a.VatAmount, a.Notes, a.Posted, a.DateCreated, a.Cancelled, a.DateTimeStamp, a.PcClosed, a.CdJournalIdNo
+FROM            dbo.PcJournal AS a LEFT OUTER JOIN
+                         dbo.Supplier AS S ON a.PayeeIdNo = S.IdNo AND (a.PaymentType = 'A' OR
+                         a.PaymentType = 'S') LEFT OUTER JOIN
+                         dbo.Customer AS C ON a.PayeeIdNo = C.IdNo AND a.PaymentType = 'R' LEFT OUTER JOIN
+                         dbo.Employee AS E ON a.PayeeIdNo = E.IdNo AND a.PaymentType = 'E'
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PcJournal_View';
 
@@ -30,7 +20,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[52] 4[28] 2[2] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -96,32 +86,42 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "PcJournal"
+         Begin Table = "a"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 335
+               Bottom = 565
                Right = 245
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "BankAccount"
+         Begin Table = "S"
             Begin Extent = 
-               Top = 6
-               Left = 283
-               Bottom = 329
-               Right = 453
+               Top = 297
+               Left = 828
+               Bottom = 503
+               Right = 1022
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Bank"
+         Begin Table = "C"
             Begin Extent = 
-               Top = 18
-               Left = 607
-               Bottom = 278
-               Right = 780
+               Top = 6
+               Left = 836
+               Bottom = 136
+               Right = 1040
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "E"
+            Begin Extent = 
+               Top = 153
+               Left = 829
+               Bottom = 283
+               Right = 1027
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -137,7 +137,7 @@ Begin DesignProperties =
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 1440
-         Alias = 900
+         Alias = 2535
          Table = 1170
          Output = 720
          Append = 1400
@@ -153,4 +153,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PcJournal_View';
+
+
 

@@ -1474,6 +1474,14 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClosePettyCashFundToolStripMenuItem.Click
+            Dim childMdiForm
+            childMdiForm = New PettyCashClosing() With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub PayPeriodAttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayPeriodAttendanceToolStripMenuItem.Click
         '    Dim childMdiForm As AttendanceItemEntry
         '    childMdiForm = New AttendanceItemEntry With {
