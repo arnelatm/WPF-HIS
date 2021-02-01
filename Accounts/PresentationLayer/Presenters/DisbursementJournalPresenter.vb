@@ -32,11 +32,11 @@ Namespace PresentationLayer.Presenters
                 oiArgs = {"CdOiItem_View", "UpdateCdOiItemTVP", "InsertCdOiItemTVP"}
                 args = {"CdJournal", "CD", djArgs, oiArgs}
                 JournalCode = "CD"
-            ElseIf tableOrViewName = "CkJournal" Then
-                djArgs = {"CkJournalItem_View", "UpdateCkJournalItemTVP", "InsertCkJournalItemTVP"}
-                oiArgs = {"CkOiItem_View", "UpdateCkOiItemTVP", "InsertCkOiItemTVP"}
-                args = {"CkJournal", "CK", djArgs, oiArgs}
-                JournalCode = "CK"
+                'ElseIf tableOrViewName = "CkJournal" Then
+                '    djArgs = {"CkJournalItem_View", "UpdateCkJournalItemTVP", "InsertCkJournalItemTVP"}
+                '    oiArgs = {"CkOiItem_View", "UpdateCkOiItemTVP", "InsertCkOiItemTVP"}
+                '    args = {"CkJournal", "CK", djArgs, oiArgs}
+                '    JournalCode = "CK"
             Else
                 djArgs = {"PcJournalItem_View", "UpdatePcJournalItemTVP", "InsertPcJournalItemTVP"}
                 oiArgs = {"PcOiItem_View", "UpdatePcOiItemTVP", "InsertPcOiItemTVP"}
@@ -779,7 +779,7 @@ Namespace PresentationLayer.Presenters
             Else
                 View.DjOiItems = New List(Of DjOiItemView)
             End If
-            If View.AccountIdNo <= 0 Then
+            If View.AccountIdNo Is Nothing Or View.AccountIdNo <= 0 Then
                 View.AccountIdNo = DefaultDisbursementAccount
             End If
 

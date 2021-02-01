@@ -39,7 +39,7 @@ Namespace DataLayer.AdoNet
                     "ReferenceNo," &
                     "TransactionDate" &
                     " FROM PcJournal_View" &
-                    " WHERE PcClosed=0 " &
+                    " WHERE IsNull(PcClosed,0) = 0 " &
                     " ORDER BY IdNo"
             Return _db.Read(sql, Make).ToList()
         End Function

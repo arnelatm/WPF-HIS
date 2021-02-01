@@ -30,8 +30,8 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             HideNavigatorButtons = True
             MainTableName = tableName
-            MyPresenter = New DisbursementJournalPresenter(Me, "CkJournal")
-            MyPresenter.JournalCode = "CK"
+            MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
+            MyPresenter.JournalCode = "CD"
             Me.Text = Messaging.TranslateCaption("Check Disbursement Journal")
             btnPrintCheck.Visible = True
             PresenterObj = MyPresenter

@@ -64,6 +64,11 @@ Namespace PresentationLayer.Models
             Return DataService.UpdateVatNumber(vatNumber, idNo)
         End Function
 
+        Public Function GetOpenPettyCash()
+            Dim data = DataService.GetOpenPettyCash()
+            Return data
+        End Function
+
     End Class
 
 End Namespace

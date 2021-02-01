@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -34,33 +34,36 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosing))
             Me.DataGridViewPcJournals = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.PcClosedDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-            Me.dgvTransactionDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvPcClosed = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvReference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvPayeeType = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvPayeeName = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvPayeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvPayeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.bsPcJournals = New System.Windows.Forms.BindingSource(Me.components)
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPayee = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblPayee = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DataGridViewPcJournals, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPcJournals, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,17 +85,17 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPcJournals.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPcJournals.AutoGenerateColumns = False
             Me.DataGridViewPcJournals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPcJournals.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PcClosedDataGridViewCheckBoxColumn, Me.dgvTransactionDate, Me.dgvIdNo, Me.dgvReference, Me.dgvPayeeType, Me.dgvPayeeName, Me.dgvPayeeNameAra, Me.dgvAmount, Me.dgvNotes})
+            Me.DataGridViewPcJournals.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvPcClosed, Me.dgvTransactionDate, Me.dgvIdNo, Me.dgvReference, Me.dgvPayeeType, Me.dgvPayeeName, Me.dgvAmount, Me.dgvNotes, Me.dgvPayeeNameAra})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewPcJournals, 8)
             Me.DataGridViewPcJournals.DataSource = Me.bsPcJournals
-            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPcJournals.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPcJournals.DefaultCellStyle = DataGridViewCellStyle10
             Me.DataGridViewPcJournals.DgvFooter = Nothing
             Me.DataGridViewPcJournals.DisplayOnly = False
             Me.DataGridViewPcJournals.Dock = System.Windows.Forms.DockStyle.Fill
@@ -108,33 +111,39 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPcJournals.SequenceFieldName = "Sequence"
             Me.DataGridViewPcJournals.ShowFooter = False
             Me.DataGridViewPcJournals.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewPcJournals.Size = New System.Drawing.Size(977, 476)
+            Me.DataGridViewPcJournals.Size = New System.Drawing.Size(977, 450)
             Me.DataGridViewPcJournals.TabIndex = 4
             '
-            'PcClosedDataGridViewCheckBoxColumn
+            'dgvPcClosed
             '
-            Me.PcClosedDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-            Me.PcClosedDataGridViewCheckBoxColumn.DataPropertyName = "PcClosed"
-            Me.PcClosedDataGridViewCheckBoxColumn.HeaderText = "Close?"
-            Me.PcClosedDataGridViewCheckBoxColumn.MinimumWidth = 50
-            Me.PcClosedDataGridViewCheckBoxColumn.Name = "PcClosedDataGridViewCheckBoxColumn"
-            Me.PcClosedDataGridViewCheckBoxColumn.ReadOnly = True
-            Me.PcClosedDataGridViewCheckBoxColumn.Width = 50
+            Me.dgvPcClosed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+            Me.dgvPcClosed.DataPropertyName = "PcClosed"
+            Me.dgvPcClosed.HeaderText = "Close?"
+            Me.dgvPcClosed.MinimumWidth = 50
+            Me.dgvPcClosed.Name = "dgvPcClosed"
+            Me.dgvPcClosed.ReadOnly = True
+            Me.dgvPcClosed.Width = 50
             '
             'dgvTransactionDate
             '
             Me.dgvTransactionDate.DataPropertyName = "TransactionDate"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvTransactionDate.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvTransactionDate.DisplayOnly = True
+            Me.dgvTransactionDate.EditingMode = False
             Me.dgvTransactionDate.HeaderText = "Date"
             Me.dgvTransactionDate.Name = "dgvTransactionDate"
             Me.dgvTransactionDate.ReadOnly = True
+            Me.dgvTransactionDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvTransactionDate.Width = 80
             '
             'dgvIdNo
             '
             Me.dgvIdNo.DataPropertyName = "IdNo"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvIdNo.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.dgvIdNo.DefaultCellStyle = DataGridViewCellStyle3
             Me.dgvIdNo.EditingMode = False
             Me.dgvIdNo.HeaderText = "IdNo"
             Me.dgvIdNo.Name = "dgvIdNo"
@@ -145,9 +154,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvReference
             '
             Me.dgvReference.DataPropertyName = "ReferenceNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvReference.DefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvReference.DefaultCellStyle = DataGridViewCellStyle4
             Me.dgvReference.EditingMode = False
             Me.dgvReference.HeaderText = "Reference No"
             Me.dgvReference.Name = "dgvReference"
@@ -158,9 +167,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvPayeeType
             '
             Me.dgvPayeeType.DataPropertyName = "PaymentType"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvPayeeType.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvPayeeType.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvPayeeType.EditingMode = False
             Me.dgvPayeeType.HeaderText = "Payee Type"
             Me.dgvPayeeType.Name = "dgvPayeeType"
@@ -171,29 +180,15 @@ Namespace PresentationLayer.Views.Forms
             'dgvPayeeName
             '
             Me.dgvPayeeName.DataPropertyName = "PayeeName"
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            Me.dgvPayeeName.DefaultCellStyle = DataGridViewCellStyle5
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.dgvPayeeName.DefaultCellStyle = DataGridViewCellStyle6
             Me.dgvPayeeName.EditingMode = False
             Me.dgvPayeeName.HeaderText = "PayeeName"
             Me.dgvPayeeName.Name = "dgvPayeeName"
             Me.dgvPayeeName.ReadOnly = True
             Me.dgvPayeeName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvPayeeName.Width = 150
-            '
-            'dgvPayeeNameAra
-            '
-            Me.dgvPayeeNameAra.DataPropertyName = "PayeeNameAra"
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.dgvPayeeNameAra.DefaultCellStyle = DataGridViewCellStyle6
-            Me.dgvPayeeNameAra.EditingMode = False
-            Me.dgvPayeeNameAra.HeaderText = "PayeeNameAra"
-            Me.dgvPayeeNameAra.Name = "dgvPayeeNameAra"
-            Me.dgvPayeeNameAra.ReadOnly = True
-            Me.dgvPayeeNameAra.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvPayeeNameAra.Visible = False
-            Me.dgvPayeeNameAra.Width = 150
             '
             'dgvAmount
             '
@@ -223,6 +218,20 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvNotes.ReadOnly = True
             Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             '
+            'dgvPayeeNameAra
+            '
+            Me.dgvPayeeNameAra.DataPropertyName = "PayeeNameAra"
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            Me.dgvPayeeNameAra.DefaultCellStyle = DataGridViewCellStyle9
+            Me.dgvPayeeNameAra.EditingMode = False
+            Me.dgvPayeeNameAra.HeaderText = "PayeeNameAra"
+            Me.dgvPayeeNameAra.Name = "dgvPayeeNameAra"
+            Me.dgvPayeeNameAra.ReadOnly = True
+            Me.dgvPayeeNameAra.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPayeeNameAra.Visible = False
+            Me.dgvPayeeNameAra.Width = 150
+            '
             'bsPcJournals
             '
             Me.bsPcJournals.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PcJournalModel)
@@ -239,6 +248,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.TableLayoutPanel1.Controls.Add(Me.CButton1, 1, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPayeeName, 1, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.lblPayee, 0, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.lblTransactionDate, 0, 0)
@@ -254,17 +264,68 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.lblAmount, 6, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.txtAmount, 7, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.btnSelectAll, 0, 6)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 58)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-            Me.TableLayoutPanel1.RowCount = 6
+            Me.TableLayoutPanel1.RowCount = 7
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(983, 575)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(983, 589)
             Me.TableLayoutPanel1.TabIndex = 5
+            '
+            'CButton1
+            '
+            Me.CButton1.DesignerSelected = False
+            Me.CButton1.DisplayOnly = True
+            Me.CButton1.ImageIndex = 0
+            Me.CButton1.Location = New System.Drawing.Point(122, 562)
+            Me.CButton1.Name = "CButton1"
+            Me.CButton1.OriginalImageName = Nothing
+            Me.CButton1.SecurityKey = ""
+            Me.CButton1.Size = New System.Drawing.Size(90, 24)
+            Me.CButton1.TabIndex = 15
+            Me.CButton1.Text = "Unselect All"
+            '
+            'txtPayeeName
+            '
+            Me.txtPayeeName.BackColor = System.Drawing.Color.White
+            Me.txtPayeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayeeName, 7)
+            Me.txtPayeeName.ComputedValue = False
+            Me.txtPayeeName.CustomFormat = Nothing
+            Me.txtPayeeName.DataBoundControl = True
+            Me.txtPayeeName.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtPayeeName.EditingMode = True
+            Me.txtPayeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
+            Me.txtPayeeName.LinkedLabel = Nothing
+            Me.txtPayeeName.Location = New System.Drawing.Point(120, 54)
+            Me.txtPayeeName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPayeeName.MaximumValue = Nothing
+            Me.txtPayeeName.MinimumValue = Nothing
+            Me.txtPayeeName.Name = "txtPayeeName"
+            Me.txtPayeeName.OldValue = Nothing
+            Me.txtPayeeName.Size = New System.Drawing.Size(862, 23)
+            Me.txtPayeeName.TabIndex = 13
+            '
+            'lblPayee
+            '
+            Me.lblPayee.AutoSize = True
+            Me.lblPayee.DisplayOnly = True
+            Me.lblPayee.EditingMode = False
+            Me.lblPayee.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayee.Location = New System.Drawing.Point(1, 54)
+            Me.lblPayee.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayee.Name = "lblPayee"
+            Me.lblPayee.Size = New System.Drawing.Size(48, 17)
+            Me.lblPayee.TabIndex = 12
+            Me.lblPayee.Text = "Payee"
+            Me.lblPayee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'lblTransactionDate
             '
@@ -380,20 +441,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Size = New System.Drawing.Size(862, 23)
             Me.txtNotes.TabIndex = 0
             '
-            'CLabel1
-            '
-            Me.CLabel1.AutoSize = True
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(1, 79)
-            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(45, 17)
-            Me.CLabel1.TabIndex = 4
-            Me.CLabel1.Text = "Notes"
-            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
             'CLabel2
             '
             Me.CLabel2.AutoSize = True
@@ -483,6 +530,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.ComputedValue = False
             Me.txtAmount.CustomFormat = Nothing
             Me.txtAmount.DataBoundControl = True
+            Me.txtAmount.DisplayOnly = True
             Me.txtAmount.EditingMode = True
             Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
@@ -493,51 +541,45 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.MinimumValue = Nothing
             Me.txtAmount.Name = "txtAmount"
             Me.txtAmount.OldValue = Nothing
+            Me.txtAmount.ReadOnly = True
             Me.txtAmount.Size = New System.Drawing.Size(112, 23)
             Me.txtAmount.TabIndex = 11
+            Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtAmount.ValueIsNumeric = True
             '
-            'lblPayee
+            'CLabel1
             '
-            Me.lblPayee.AutoSize = True
-            Me.lblPayee.DisplayOnly = True
-            Me.lblPayee.EditingMode = False
-            Me.lblPayee.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayee.Location = New System.Drawing.Point(1, 54)
-            Me.lblPayee.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayee.Name = "lblPayee"
-            Me.lblPayee.Size = New System.Drawing.Size(48, 17)
-            Me.lblPayee.TabIndex = 12
-            Me.lblPayee.Text = "Payee"
-            Me.lblPayee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.AutoSize = True
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 79)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(45, 17)
+            Me.CLabel1.TabIndex = 4
+            Me.CLabel1.Text = "Notes"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtPayeeName
+            'btnSelectAll
             '
-            Me.txtPayeeName.BackColor = System.Drawing.Color.White
-            Me.txtPayeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayeeName, 7)
-            Me.txtPayeeName.ComputedValue = False
-            Me.txtPayeeName.CustomFormat = Nothing
-            Me.txtPayeeName.DataBoundControl = True
-            Me.txtPayeeName.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtPayeeName.EditingMode = True
-            Me.txtPayeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
-            Me.txtPayeeName.LinkedLabel = Nothing
-            Me.txtPayeeName.Location = New System.Drawing.Point(120, 54)
-            Me.txtPayeeName.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayeeName.MaximumValue = Nothing
-            Me.txtPayeeName.MinimumValue = Nothing
-            Me.txtPayeeName.Name = "txtPayeeName"
-            Me.txtPayeeName.OldValue = Nothing
-            Me.txtPayeeName.Size = New System.Drawing.Size(862, 23)
-            Me.txtPayeeName.TabIndex = 13
+            Me.btnSelectAll.DesignerSelected = False
+            Me.btnSelectAll.DisplayOnly = True
+            Me.btnSelectAll.ImageIndex = 0
+            Me.btnSelectAll.Location = New System.Drawing.Point(3, 562)
+            Me.btnSelectAll.Name = "btnSelectAll"
+            Me.btnSelectAll.OriginalImageName = Nothing
+            Me.btnSelectAll.SecurityKey = ""
+            Me.btnSelectAll.Size = New System.Drawing.Size(90, 24)
+            Me.btnSelectAll.TabIndex = 14
+            Me.btnSelectAll.Text = "Select All"
             '
             'PettyCashClosing
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-            Me.ClientSize = New System.Drawing.Size(1004, 645)
+            Me.ClientSize = New System.Drawing.Size(1008, 659)
             Me.Controls.Add(Me.TableLayoutPanel1)
             Me.MinimumSize = New System.Drawing.Size(945, 590)
             Me.Name = "PettyCashClosing"
@@ -576,18 +618,20 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblCheckNumber As CLabel
         Friend WithEvents txtCheckNumber As CTextBox
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents PcClosedDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
-        Friend WithEvents dgvTransactionDate As DataGridViewTextBoxColumn
-        Friend WithEvents dgvIdNo As CdgvColumnText
-        Friend WithEvents dgvReference As CdgvColumnText
-        Friend WithEvents dgvPayeeType As CdgvColumnText
-        Friend WithEvents dgvPayeeName As CdgvColumnText
-        Friend WithEvents dgvPayeeNameAra As CdgvColumnText
-        Friend WithEvents dgvAmount As CdgvColumnMoney
-        Friend WithEvents dgvNotes As CdgvColumnText
         Friend WithEvents lblAmount As CLabel
         Friend WithEvents txtAmount As CTextBox
         Friend WithEvents txtPayeeName As CTextBox
         Friend WithEvents lblPayee As CLabel
+        Friend WithEvents CButton1 As CButton
+        Friend WithEvents btnSelectAll As CButton
+        Friend WithEvents dgvPcClosed As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvTransactionDate As CdgvColumnText
+        Friend WithEvents dgvIdNo As CdgvColumnText
+        Friend WithEvents dgvReference As CdgvColumnText
+        Friend WithEvents dgvPayeeType As CdgvColumnText
+        Friend WithEvents dgvPayeeName As CdgvColumnText
+        Friend WithEvents dgvAmount As CdgvColumnMoney
+        Friend WithEvents dgvNotes As CdgvColumnText
+        Friend WithEvents dgvPayeeNameAra As CdgvColumnText
     End Class
 End Namespace
