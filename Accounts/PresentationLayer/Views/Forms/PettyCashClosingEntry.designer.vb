@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class PettyCashClosing
+    Partial Class PettyCashClosingEntry
         Inherits CFormEntry
 
         'Form overrides dispose to clean up the component list.
@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosing))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosingEntry))
             Me.DataGridViewPcJournals = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvPcClosed = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -64,6 +64,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DataGridViewPcJournals, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPcJournals, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -265,6 +267,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.txtAmount, 7, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 4)
             Me.TableLayoutPanel1.Controls.Add(Me.btnSelectAll, 0, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 5, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboPayType, 6, 1)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 58)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 7
@@ -383,7 +387,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cboAccountIdNo.ChangingSearchValueOnly = False
-            Me.TableLayoutPanel1.SetColumnSpan(Me.cboAccountIdNo, 7)
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboAccountIdNo, 4)
             Me.cboAccountIdNo.CurrentSearchTerm = ""
             Me.cboAccountIdNo.DefaultValue = Nothing
             Me.cboAccountIdNo.DisplayMember = "Name"
@@ -409,7 +413,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SearchAnywhere = False
-            Me.cboAccountIdNo.Size = New System.Drawing.Size(862, 24)
+            Me.cboAccountIdNo.Size = New System.Drawing.Size(405, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TabIndex = 5
@@ -574,6 +578,58 @@ Namespace PresentationLayer.Views.Forms
             Me.btnSelectAll.TabIndex = 14
             Me.btnSelectAll.Text = "Select All"
             '
+            'CLabel3
+            '
+            Me.CLabel3.AutoSize = True
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.EditingMode = False
+            Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel3.Location = New System.Drawing.Point(527, 28)
+            Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel3.Name = "CLabel3"
+            Me.CLabel3.Size = New System.Drawing.Size(68, 17)
+            Me.CLabel3.TabIndex = 16
+            Me.CLabel3.Text = "Pay Type"
+            Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'cboPayType
+            '
+            Me.cboPayType.BackColor = System.Drawing.SystemColors.ControlLight
+            Me.cboPayType.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboPayType, 2)
+            Me.cboPayType.CurrentSearchTerm = ""
+            Me.cboPayType.DefaultValue = Nothing
+            Me.cboPayType.DisplayMember = "Name"
+            Me.cboPayType.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboPayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboPayType.EditingMode = True
+            Me.cboPayType.FilterRule = Nothing
+            Me.cboPayType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPayType.FormattingEnabled = True
+            Me.cboPayType.HideWhenNotEditingOrAdding = False
+            Me.cboPayType.LinkedLabel = Nothing
+            Me.cboPayType.Location = New System.Drawing.Point(641, 28)
+            Me.cboPayType.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboPayType.Name = "cboPayType"
+            Me.cboPayType.OldValue = 0
+            Me.cboPayType.OriginalDataSource = Nothing
+            Me.cboPayType.OriginalList = Nothing
+            Me.cboPayType.OverrideDropDownStyleList = False
+            Me.cboPayType.PreviousSearchTerm = Nothing
+            Me.cboPayType.PreviousSelectedIndex = -1
+            Me.cboPayType.PropertySelector = Nothing
+            Me.cboPayType.ReadOnlyCombo = False
+            Me.cboPayType.SearchAnywhere = False
+            Me.cboPayType.Size = New System.Drawing.Size(341, 24)
+            Me.cboPayType.SuggestBoxHeight = 200
+            Me.cboPayType.SuggestListOrderRule = Nothing
+            Me.cboPayType.TabIndex = 17
+            Me.cboPayType.TextToSearch = Nothing
+            Me.cboPayType.ValueIsMandatory = False
+            Me.cboPayType.ValueIsNullable = False
+            Me.cboPayType.ValueIsNumeric = False
+            Me.cboPayType.ValueMember = "IdNo"
+            '
             'PettyCashClosing
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -633,5 +689,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvAmount As CdgvColumnMoney
         Friend WithEvents dgvNotes As CdgvColumnText
         Friend WithEvents dgvPayeeNameAra As CdgvColumnText
+        Friend WithEvents CLabel3 As CLabel
+        Friend WithEvents cboPayType As CaComboBox
     End Class
 End Namespace

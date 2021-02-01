@@ -11,14 +11,14 @@ Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class PettyCashClosing
+    Public Class PettyCashClosingEntry
         Implements IPettyCashClosingView
 
         Private Property MyPresenter As PettyCashClosingPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _pcJournals As New List(Of IPcJournalView)
         Private _journalItems As New List(Of IJournalItemView)
-        Private _jiFooter As DgvFooter
+        Private _pcFooter As DgvFooter
 
         Public Sub New()
             MyBase.New()
@@ -197,7 +197,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
-
+            cboPayType.DataSource = MyPresenter.MakeEnumComboList(Of PayTypeSelection)
         End Sub
 
         Private Property PcJournals As List(Of IPcJournalView) Implements IPettyCashClosingView.PcJournals
@@ -239,17 +239,18 @@ Namespace PresentationLayer.Views.Forms
             MyPresenter.UpdateViewDisplay(0)
             DataGridViewPcJournals.Refresh()
             BindPcJournals()
-            _jiFooter = New DgvFooter(DataGridViewPcJournals) With {
+            _pcFooter = New DgvFooter(DataGridViewPcJournals) With {
                 .AutoCalc = True
             }
-            _jiFooter.ColumnToSum("dgvAmount") = True
-            _jiFooter.SetText("DgvPayeeName", "Totals ->")
+            _pcFooter.ColumnToSum("dgvAmount") = True
+            _pcFooter.SetText("DgvPayeeName", "Totals ->")
         End Sub
 
         Private Sub PettyCashClosing_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             MyPresenter.GoAddRecord()
             MyPresenter.GetOpenPettyCash()
             bsPcJournals.ResetBindings(True)
+            _pcFooter.CalculateTotals()
         End Sub
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
@@ -262,7 +263,8 @@ Namespace PresentationLayer.Views.Forms
             bsPcJournals.ResetBindings(False)
         End Sub
 
-        Private Sub Dgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcJournals.CellValueChanged
+
+        Private Sub Dgv_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcJournals.CellClick
             With DataGridViewPcJournals
                 If .CurrentRow IsNot Nothing Then
                     Dim nIndex = .CurrentRow.Index

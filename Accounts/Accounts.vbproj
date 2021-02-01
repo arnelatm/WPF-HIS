@@ -347,10 +347,10 @@
     <Compile Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PettyCashClosing.designer.vb">
-      <DependentUpon>PettyCashClosing.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\PettyCashClosingEntry.designer.vb">
+      <DependentUpon>PettyCashClosingEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PettyCashClosing.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PettyCashClosingEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay.designer.vb">
@@ -1008,8 +1008,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.resx">
       <DependentUpon>PensionProviderEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PettyCashClosing.resx">
-      <DependentUpon>PettyCashClosing.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PettyCashClosingEntry.resx">
+      <DependentUpon>PettyCashClosingEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductCategoryEntryTv.resx">
       <DependentUpon>ProductCategoryEntryTv.vb</DependentUpon>
@@ -1239,9 +1239,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
-    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\Application.myapp">
