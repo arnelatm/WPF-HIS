@@ -1032,10 +1032,10 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ToolStripMenuItem8_Click(sender As Object, e As EventArgs)
-            Dim childMdiForm = New DisbursementJournalEntry("CkJournal") With {.MdiParent = Me}
-            childMdiForm.Show()
-        End Sub
+        'Private Sub ToolStripMenuItem8_Click(sender As Object, e As EventArgs)
+        '    Dim childMdiForm = New DisbursementJournalEntry("CkJournal") With {.MdiParent = Me}
+        '    childMdiForm.Show()
+        'End Sub
 
         Private Sub ItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemItems.Click
             Dim childMdiForm As PurchaseItemEntry

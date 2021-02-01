@@ -171,6 +171,7 @@
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\Basic.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
+    <Compile Include="BusinessLayer\PettyCashClosing.vb" />
     <Compile Include="BusinessLayer\DjOiItem.vb" />
     <Compile Include="BusinessLayer\DisbursementJournal.vb" />
     <Compile Include="BusinessLayer\AttendanceItem.vb" />
@@ -253,6 +254,7 @@
     <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollEarnAccountDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PettyCashClosingDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReconciledDao.vb" />
@@ -289,6 +291,7 @@
     <Compile Include="MyEnums.vb" />
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
+    <Compile Include="PresentationLayer\Models\PettyCashClosingModel.vb" />
     <Compile Include="PresentationLayer\Models\DisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\DjOiItemModel.vb" />
     <Compile Include="PresentationLayer\Models\AttendanceItemModel.vb" />
@@ -688,7 +691,7 @@
     <Compile Include="PresentationLayer\Presenters\GeneralJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneralJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\MainPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\ClosePettyCashPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PettyCashClosingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalPresenter.vb" />
@@ -707,7 +710,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IApJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IAttendanceItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePhoneView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPcJournalsView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPettyCashClosingView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPcJournalView.vb" />
@@ -1236,10 +1239,10 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
-    <None Include="appMarcelo-Dell - Copy.config" />
+    <None Include="app.config" />
+    <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

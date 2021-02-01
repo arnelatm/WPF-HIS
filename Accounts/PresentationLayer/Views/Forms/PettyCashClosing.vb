@@ -12,13 +12,12 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Views.Forms
 
     Public Class PettyCashClosing
-        Implements IDisbursementJournalView, IPcJournalsView
-        Public TxtTotalCredits As Decimal
-        Public TxtTotalDebits As Decimal
+        Implements IPettyCashClosingView
 
-        Private Property MyPresenter As DisbursementJournalPresenter
+        Private Property MyPresenter As PettyCashClosingPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _pcJournals As New List(Of IPcJournalView)
+        Private _journalItems As New List(Of IJournalItemView)
         Private _jiFooter As DgvFooter
 
         Public Sub New()
@@ -26,11 +25,10 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "PcJournal"
+            MainTableName = "CdJournal"
             SortOrderKey = "IdNo"
-            MyPresenter = New DisbursementJournalPresenter(Me, "PcJournal")
-            Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
-            Dim x = New ClosePettyCashPresenter(Me)
+            Me.Text = Messaging.TranslateCaption("Petty Cash Closing Journal")
+            MyPresenter = New PettyCashClosingPresenter(Me)
             PresenterObj = MyPresenter
             _nfi.NumberDecimalDigits = 2
             Ea = MyPresenter.Ea
@@ -41,7 +39,7 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Field Items"
 
-        Public Property AccountIdNo As Int16? Implements IDisbursementJournalView.AccountIdNo
+        Public Property AccountIdNo As Int16? Implements IPettyCashClosingView.AccountIdNo
             Get
                 Return cboAccountIdNo.GetNullableValue(Of Int16)
             End Get
@@ -50,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Amount As Decimal Implements IDisbursementJournalView.Amount
+        Public Property Amount As Decimal Implements IPettyCashClosingView.Amount
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
             End Get
@@ -60,7 +58,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Applied As Decimal Implements IDisbursementJournalView.Applied
+        Public Property Applied As Decimal Implements IPettyCashClosingView.Applied
             Get
                 Return txtAmount.Text
             End Get
@@ -69,7 +67,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Cancelled As Boolean Implements IDisbursementJournalView.Cancelled
+        Public Property Cancelled As Boolean Implements IPettyCashClosingView.Cancelled
             Get
                 Return False
             End Get
@@ -78,7 +76,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property CheckDate As DateTime? Implements IDisbursementJournalView.CheckDate
+        Public Property CheckDate As DateTime? Implements IPettyCashClosingView.CheckDate
             Get
                 Return dtpTransactionDate.Value
             End Get
@@ -87,7 +85,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PcClosed As Boolean Implements IDisbursementJournalView.PcClosed
+        Public Property PcClosed As Boolean Implements IPettyCashClosingView.PcClosed
             Get
                 Return True
             End Get
@@ -95,7 +93,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property CheckNumber As String Implements IDisbursementJournalView.CheckNumber
+        Public Property CheckNumber As String Implements IPettyCashClosingView.CheckNumber
             Get
                 Return txtCheckNumber.Text
             End Get
@@ -104,7 +102,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DateCreated As DateTime? Implements IDisbursementJournalView.DateCreated
+        Public Property DateCreated As DateTime? Implements IPettyCashClosingView.DateCreated
             Get
                 Return Date.Now()
             End Get
@@ -112,7 +110,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayType As String Implements IDisbursementJournalView.PayType
+        Public Property PayType As String Implements IPettyCashClosingView.PayType
             Get
                 Return "1"
             End Get
@@ -121,16 +119,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DiscountAccountIdNo As Int16? Implements IDisbursementJournalView.DiscountAccountIdNo
-            Get
-                Return Nothing
-            End Get
-            Set
-                
-            End Set
-        End Property
-
-        Public Property DiscountTaken As Decimal Implements IDisbursementJournalView.DiscountTaken
+        Public Property IdNo As Int32 Implements IPettyCashClosingView.IdNo
             Get
                 Return 0
             End Get
@@ -139,24 +128,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Int32 Implements IDisbursementJournalView.IdNo
-            Get
-                Return 0
-            End Get
-            Set
-
-            End Set
-        End Property
-
-        Public Property JournalItems As List(Of IJournalItemView) Implements IDisbursementJournalView.JournalItems
-            Get
-                Return _journalItems
-            End Get
-            Set
-            End Set
-        End Property
-
-        Public Property Notes As String Implements IDisbursementJournalView.Notes
+        Public Property Notes As String Implements IPettyCashClosingView.Notes
             Get
                 Return txtNotes.Text
             End Get
@@ -165,16 +137,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ORNumber As String Implements IDisbursementJournalView.OrNumber
-            Get
-                Return ""
-            End Get
-            Set
-
-            End Set
-        End Property
-
-        Public Property PayeeIdNo As Int32? Implements IDisbursementJournalView.PayeeIdNo
+        Public Property PayeeIdNo As Int32? Implements IPettyCashClosingView.PayeeIdNo
             Get
                 Return 0
             End Get
@@ -182,7 +145,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayeeName As String Implements IDisbursementJournalView.PayeeName
+        Public Property PayeeName As String Implements IPettyCashClosingView.PayeeName
             Get
                 Return txtPayeeName.Text
             End Get
@@ -191,7 +154,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaymentType As String Implements IDisbursementJournalView.PaymentType
+        Public Property PaymentType As String Implements IPettyCashClosingView.PaymentType
             Get
                 Return "O"
             End Get
@@ -199,18 +162,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DjOiItems As List(Of DjOiItemView) Implements IDisbursementJournalView.DjOiItems
-            Get
-                Return _djOiItems
-            End Get
-            Set(value As List(Of DjOiItemView))
-                _djOiItems = value
-                BindDjOiItem()
-                'bsJournalItems.ResetBindings(True)
-            End Set
-        End Property
-
-        Public Property Posted As Boolean Implements IDisbursementJournalView.Posted
+        Public Property Posted As Boolean Implements IPettyCashClosingView.Posted
             Get
                 Return False
             End Get
@@ -219,7 +171,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ReferenceNo As String Implements IDisbursementJournalView.ReferenceNo
+        Public Property ReferenceNo As String Implements IPettyCashClosingView.ReferenceNo
             Get
                 Return txtReferenceNo.Text
             End Get
@@ -228,25 +180,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property TotalCredits As Decimal Implements IDisbursementJournalView.TotalCredits
-            Get
-                Return txtAmount.Text
-            End Get
-            Set(value As Decimal)
-
-            End Set
-        End Property
-
-        Public Property TotalDebits As Decimal Implements IDisbursementJournalView.TotalDebits
-            Get
-                Return txtAmount.Text
-            End Get
-            Set(value As Decimal)
-
-            End Set
-        End Property
-
-        Public Property TransactionDate As Date? Implements IDisbursementJournalView.TransactionDate
+        Public Property TransactionDate As Date? Implements IPettyCashClosingView.TransactionDate
             Get
                 Return dtpTransactionDate.Value
             End Get
@@ -259,36 +193,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property UnApplied As Decimal Implements IDisbursementJournalView.UnApplied
-            Get
-                Return 0D
-            End Get
-            Set
-
-            End Set
-        End Property
-
-        Public Property VatAmount As Decimal Implements IDisbursementJournalView.VatAmount
-            Get
-                Return 0D
-            End Get
-            Set
-
-            End Set
-        End Property
-
-        Public Property VatNumber As String Implements IDisbursementJournalView.VatNumber
-            Get
-                Return 0D
-            End Get
-            Set
-
-            End Set
-        End Property
-
 #End Region
 
-        Private Property PcJournals As List(Of IPcJournalView) Implements IPcJournalsView.PcJournals
+        Protected Overrides Sub CreateDataSources()
+            cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
+
+        End Sub
+
+        Private Property PcJournals As List(Of IPcJournalView) Implements IPettyCashClosingView.PcJournals
             Get
                 Return _pcJournals
             End Get
@@ -316,13 +228,12 @@ Namespace PresentationLayer.Views.Forms
                 dgvPayeeName.DisplayOnly = True
                 dgvPayeeNameAra.DisplayOnly = True
                 dgvReference.DisplayOnly = True
-                dgvTransactionDate.ReadOnly = True
+                dgvTransactionDate.DisplayOnly = True
                 dgvAmount.DisplayOnly = True
                 dgvPayeeType.DisplayOnly = True
             End With
             ResumeLayout()
         End Sub
-
 
         Private Sub PcClosing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             MyPresenter.UpdateViewDisplay(0)
@@ -333,6 +244,35 @@ Namespace PresentationLayer.Views.Forms
             }
             _jiFooter.ColumnToSum("dgvAmount") = True
             _jiFooter.SetText("DgvPayeeName", "Totals ->")
+        End Sub
+
+        Private Sub PettyCashClosing_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            MyPresenter.GoAddRecord()
+            MyPresenter.GetOpenPettyCash()
+            bsPcJournals.ResetBindings(True)
+        End Sub
+
+        Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
+            MyPresenter.SelectChoice(True)
+            bsPcJournals.ResetBindings(False)
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            MyPresenter.SelectChoice(False)
+            bsPcJournals.ResetBindings(False)
+        End Sub
+
+        Private Sub Dgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcJournals.CellValueChanged
+            With DataGridViewPcJournals
+                If .CurrentRow IsNot Nothing Then
+                    Dim nIndex = .CurrentRow.Index
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                        Case $"dgvpcclosed"
+                            txtAmount.Text = MyPresenter.TotalSelection()
+                            txtAmount.Refresh()
+                    End Select
+                End If
+            End With
         End Sub
 
     End Class

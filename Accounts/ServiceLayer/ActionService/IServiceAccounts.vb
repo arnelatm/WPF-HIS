@@ -23,6 +23,8 @@ Namespace ServiceLayer.ActionService
 
         Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer
 
+        Function GetOpenPettyCash()
+
         'Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
     End Interface

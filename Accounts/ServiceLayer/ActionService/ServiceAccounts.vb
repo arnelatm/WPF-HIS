@@ -1,6 +1,7 @@
 ﻿Imports System.Reflection
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
 Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
@@ -98,6 +99,13 @@ Namespace ServiceLayer.ActionService
 
         Public Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer Implements IServiceAccounts.UpdateVatNumber
             Return DataDao.UpdateVatNumber(vatNumber, idNo)
+        End Function
+
+        Public Function GetOpenPettyCash() Implements IServiceAccounts.GetOpenPettyCash
+            Dim records = DataDao.GetOpenPettyCash()
+            Dim model As New List(Of PcJournalModel)
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
         End Function
 
         'Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.AddInvoicePayment

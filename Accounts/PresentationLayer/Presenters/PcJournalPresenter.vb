@@ -10,13 +10,13 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Namespace PresentationLayer.Presenters
 
     Public Class PcJournalPresenter
-        Inherits AccountsPresenter(Of IPcJournalsView, PcJournalModel)
+        Inherits AccountsPresenter(Of IPettyCashClosingView, PcJournalModel)
 
         Protected DtUpdateTable As New DataTable
 
         Private _pcJournalModel
 
-        Public Sub New(view As IPcJournalsView)
+        Public Sub New(view As IPettyCashClosingView)
             MyBase.New(view)
             ModelPresenter = New ModelAccounts("PcJournals")
             TableName = "PcJournal_View"

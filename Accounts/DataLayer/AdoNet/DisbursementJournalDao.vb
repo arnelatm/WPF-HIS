@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class DisbursementJournalDao
-        Implements IDao(Of DisbursementJournal), IDaoJournals(Of DisbursementJournal), IDaoOiItem(Of DjOiItem), IDaoAutoVatUpdate
+        Implements IDao(Of BusinessLayer.DisbursementJournal), IDaoJournals(Of BusinessLayer.DisbursementJournal), IDaoOiItem(Of DjOiItem), IDaoAutoVatUpdate
 
         Public ReadOnly Property Args As Object()
         Private ReadOnly _db As New Db()
@@ -26,7 +26,7 @@ Namespace DataLayer.AdoNet
             OiDataNames = dataNames(3)
         End Sub
 
-        Public Function GetRecordById(idNo) As DisbursementJournal Implements IDao(Of DisbursementJournal).GetRecordById
+        Public Function GetRecordById(idNo) As BusinessLayer.DisbursementJournal Implements IDao(Of BusinessLayer.DisbursementJournal).GetRecordById
             Dim sql As String
             Dim data
             Dim params() As Object = {"@IdNo", idNo}
@@ -98,7 +98,7 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-        Public Function UpdateRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).UpdateRecord
+        Public Function UpdateRecord(ByRef disbursementJournal As BusinessLayer.DisbursementJournal) As Integer Implements IDao(Of BusinessLayer.DisbursementJournal).UpdateRecord
             Dim sql As String
             If TableOrViewName = "CdJournal" Then
                 sql = " UPDATE " & TableOrViewName & " SET " &
@@ -149,7 +149,7 @@ Namespace DataLayer.AdoNet
             End If
         End Function
 
-        Public Function AddRecord(ByRef disbursementJournal As DisbursementJournal) As Integer Implements IDao(Of DisbursementJournal).AddRecord
+        Public Function AddRecord(ByRef disbursementJournal As BusinessLayer.DisbursementJournal) As Integer Implements IDao(Of BusinessLayer.DisbursementJournal).AddRecord
             Dim sql As String
             If TableOrViewName = "CdJournal" Then
                 sql = " INSERT INTO " & TableOrViewName & " (" &
@@ -240,7 +240,7 @@ Namespace DataLayer.AdoNet
             End If
         End Function
 
-        Private ReadOnly PcMake As Func(Of IDataReader, DisbursementJournal) =
+        Private ReadOnly PcMake As Func(Of IDataReader, BusinessLayer.DisbursementJournal) =
                                     Function(reader) _
             New DisbursementJournal(JournalCode) With {
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
@@ -265,7 +265,7 @@ Namespace DataLayer.AdoNet
             .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
-        Private ReadOnly CdMake As Func(Of IDataReader, DisbursementJournal) =
+        Private ReadOnly CdMake As Func(Of IDataReader, BusinessLayer.DisbursementJournal) =
                             Function(reader) _
             New DisbursementJournal(JournalCode) With {
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
@@ -292,7 +292,7 @@ Namespace DataLayer.AdoNet
             .VatNumber = Extensions.AsString(reader("VatNumber"))
             }
 
-        Private Function PcTake(disbursementJournal As DisbursementJournal) As Object()
+        Private Function PcTake(disbursementJournal As BusinessLayer.DisbursementJournal) As Object()
             Return New Object() {
                                     "@AccountIdNo", disbursementJournal.AccountIdNo,
                                     "@Amount", disbursementJournal.Amount,
@@ -317,7 +317,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Private Function CdTake(disbursementJournal As DisbursementJournal) As Object()
+        Private Function CdTake(disbursementJournal As BusinessLayer.DisbursementJournal) As Object()
             Return New Object() {
                                     "@AccountIdNo", disbursementJournal.AccountIdNo,
                                     "@Amount", disbursementJournal.Amount,
@@ -344,7 +344,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function UpdateGlReferenceNumber(ByRef bizObj As DisbursementJournal) As Integer Implements IDaoJournals(Of DisbursementJournal).UpdateGlReferenceNumber
+        Public Function UpdateGlReferenceNumber(ByRef bizObj As BusinessLayer.DisbursementJournal) As Integer Implements IDaoJournals(Of BusinessLayer.DisbursementJournal).UpdateGlReferenceNumber
             Dim retVal As Boolean
             Dim sql1 As String
             Dim sql2 As String
@@ -375,7 +375,7 @@ Namespace DataLayer.AdoNet
                                               "@Value", 0,
                                               "@MaxLength", 4,
                                               "@Prefix", prefix,
-                                              "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
+                                              "@Description", "GL Series for " & Year(transactionDate).ToString() & Microsoft.VisualBasic.Strings.Right("00" + Month(transactionDate).ToString, 2)
                                              }
                     retVal = _db.Insert(sql, params)
                     If retVal < 0 Then
