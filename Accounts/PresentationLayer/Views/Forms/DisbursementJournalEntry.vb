@@ -36,12 +36,14 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = tableName
             SortOrderKey = "IdNo"
             If tableName = "CdJournal" Then
+                ViewDisplayName = "CdJournalEntry"
                 MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
                 DisplayPrintCheckButton(PayType)
                 Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
                 chkPcClosed.Visible = False
                 lblPcClosed.Visible = False
             Else
+                ViewDisplayName = "PcJournalEntry"
                 tableName = "PcJournal"
                 MyPresenter = New DisbursementJournalPresenter(Me, "PcJournal")
                 Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")

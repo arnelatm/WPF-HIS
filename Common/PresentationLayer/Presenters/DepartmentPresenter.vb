@@ -14,7 +14,15 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IDepartmentView)
             MyBase.New(view)
             TreeViewParentIdField = "ParentIdNo"
-            InitializerWithTv("Department", "Department_View")
+            'InitializerWithTv("Department")
+            'TableName = "Department"
+            SortOrderKey = "DepartmentName"
+            TreeViewMainField = "DepartmentName"
+            TreeViewSecondaryField = "DepartmentCode"
+            ModelPresenter = New ModelCommon("Department")
+            OriginalModel = New DepartmentModel()
+            DataModel = New DepartmentModel
+            TreeViewList = New List(Of DepartmentModel)
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub

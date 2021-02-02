@@ -14,10 +14,6 @@ Namespace PresentationLayer.Presenters
             TableName = "PayrollDeductAccount"
             SortOrderKey = "Sequence"
             DataModel = New PayrollDeductAccountModel
-            'Initializer("PayrollDeductAccount")
-            'Ea = New EventAggregator()
-            'Ea.SubscribeEvent(Me)
-
         End Sub
 
         '''' <summary>

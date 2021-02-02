@@ -46,6 +46,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _recordPositionNumber As Integer = 0
     Private _targetIdNo As Int32 = 0
     Private _undoMode As Boolean = False
+    Private _tableName As String
 
     Public Sub New(itemView As T)
         If itemView Is Nothing Then
@@ -175,6 +176,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Property
 
     Public Property TableName As String
+        Get
+            Return _tableName
+        End Get
+        Set(value As String)
+            _tableName = value
+        End Set
+    End Property
+
     Public Property TableProperties As Array
 
     Public Property TargetIdNo As Int32

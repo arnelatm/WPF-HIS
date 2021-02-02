@@ -202,7 +202,7 @@
     <value>157</value>
   </data>
   <data name="lblTableName.Text" xml:space="preserve">
-    <value>Table Name</value>
+    <value>View Name</value>
   </data>
   <data name="lblTableName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -219,142 +219,142 @@
   <data name="&gt;&gt;lblTableName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource" xml:space="preserve">
     <value>ApJournal</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource1" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource1" xml:space="preserve">
     <value>ArJournal</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource2" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource2" xml:space="preserve">
     <value>CashDisbursementJournal</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource3" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource3" xml:space="preserve">
     <value>CashReceiptJournal</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource4" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource4" xml:space="preserve">
     <value>ProductCategory</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource5" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource5" xml:space="preserve">
     <value>CkJournal</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource6" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource6" xml:space="preserve">
     <value>Customer</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource7" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource7" xml:space="preserve">
     <value>Employee</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource8" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource8" xml:space="preserve">
     <value>ErJournal</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource9" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource9" xml:space="preserve">
     <value>GeneralJournal</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource10" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource10" xml:space="preserve">
     <value>Supplier</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource11" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource11" xml:space="preserve">
     <value>Patient</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource12" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource12" xml:space="preserve">
     <value>PcJournal</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource13" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource13" xml:space="preserve">
     <value>SalesJournal</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource14" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource14" xml:space="preserve">
     <value>SecurityGroup</value>
   </data>
-  <data name="cboTableName.AutoCompleteCustomSource15" xml:space="preserve">
+  <data name="cboViewName.AutoCompleteCustomSource15" xml:space="preserve">
     <value>User</value>
   </data>
-  <data name="cboTableName.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="cboViewName.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Popup</value>
   </data>
-  <data name="cboTableName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboViewName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboTableName.Items" xml:space="preserve">
+  <data name="cboViewName.Items" xml:space="preserve">
     <value>ApJournal</value>
   </data>
-  <data name="cboTableName.Items1" xml:space="preserve">
+  <data name="cboViewName.Items1" xml:space="preserve">
     <value>ArJournal</value>
   </data>
-  <data name="cboTableName.Items2" xml:space="preserve">
+  <data name="cboViewName.Items2" xml:space="preserve">
     <value>CdJournal</value>
   </data>
-  <data name="cboTableName.Items3" xml:space="preserve">
+  <data name="cboViewName.Items3" xml:space="preserve">
     <value>CashReceiptJournal</value>
   </data>
-  <data name="cboTableName.Items4" xml:space="preserve">
+  <data name="cboViewName.Items4" xml:space="preserve">
     <value>CkJournal</value>
   </data>
-  <data name="cboTableName.Items5" xml:space="preserve">
+  <data name="cboViewName.Items5" xml:space="preserve">
     <value>Customer</value>
   </data>
-  <data name="cboTableName.Items6" xml:space="preserve">
+  <data name="cboViewName.Items6" xml:space="preserve">
     <value>Employee</value>
   </data>
-  <data name="cboTableName.Items7" xml:space="preserve">
+  <data name="cboViewName.Items7" xml:space="preserve">
     <value>ErJournal</value>
   </data>
-  <data name="cboTableName.Items8" xml:space="preserve">
+  <data name="cboViewName.Items8" xml:space="preserve">
     <value>GeneralJournal</value>
   </data>
-  <data name="cboTableName.Items9" xml:space="preserve">
+  <data name="cboViewName.Items9" xml:space="preserve">
     <value>Patient</value>
   </data>
-  <data name="cboTableName.Items10" xml:space="preserve">
+  <data name="cboViewName.Items10" xml:space="preserve">
     <value>PayCycle</value>
   </data>
-  <data name="cboTableName.Items11" xml:space="preserve">
+  <data name="cboViewName.Items11" xml:space="preserve">
     <value>PayGroup</value>
   </data>
-  <data name="cboTableName.Items12" xml:space="preserve">
+  <data name="cboViewName.Items12" xml:space="preserve">
     <value>PayPeriod</value>
   </data>
-  <data name="cboTableName.Items13" xml:space="preserve">
+  <data name="cboViewName.Items13" xml:space="preserve">
     <value>PcJournal</value>
   </data>
-  <data name="cboTableName.Items14" xml:space="preserve">
+  <data name="cboViewName.Items14" xml:space="preserve">
     <value>PettyCashClosing</value>
   </data>
-  <data name="cboTableName.Items15" xml:space="preserve">
+  <data name="cboViewName.Items15" xml:space="preserve">
     <value>ProductCategory</value>
   </data>
-  <data name="cboTableName.Items16" xml:space="preserve">
+  <data name="cboViewName.Items16" xml:space="preserve">
     <value>SalesJournal</value>
   </data>
-  <data name="cboTableName.Items17" xml:space="preserve">
+  <data name="cboViewName.Items17" xml:space="preserve">
     <value>SecurityGroup</value>
   </data>
-  <data name="cboTableName.Items18" xml:space="preserve">
+  <data name="cboViewName.Items18" xml:space="preserve">
     <value>Supplier</value>
   </data>
-  <data name="cboTableName.Items19" xml:space="preserve">
+  <data name="cboViewName.Items19" xml:space="preserve">
     <value>User</value>
   </data>
-  <data name="cboTableName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboViewName.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 36</value>
   </data>
-  <data name="cboTableName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboViewName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboTableName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboViewName.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cboTableName.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboViewName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;cboTableName.Name" xml:space="preserve">
-    <value>cboTableName</value>
+  <data name="&gt;&gt;cboViewName.Name" xml:space="preserve">
+    <value>cboViewName</value>
   </data>
-  <data name="&gt;&gt;cboTableName.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboViewName.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboTableName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboViewName.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;cboTableName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboViewName.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="lblFieldName.Font" type="System.Drawing.Font, System.Drawing">

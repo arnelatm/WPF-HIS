@@ -8,13 +8,13 @@ Namespace PresentationLayer.Views
     Public Class SecurityGroupView
         Implements ISecurityGroupView
 
-        Public Property MainTableName As String = ""
+        'Public Property MainTableName As String = ""
 
         Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()
-            MainTableName = "SecurityGroup"
+            'MainTableName = "SecurityGroup"
 
             ' Add any initialization after the InitializeComponent() call.
 

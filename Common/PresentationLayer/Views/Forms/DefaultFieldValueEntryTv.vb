@@ -13,10 +13,10 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             FormTitleCaption = "Default Field Values Maintenance Form"
             MainTableName = "DefaultFieldValue"
-            TvMainFieldName = "TableName"
+            TvMainFieldName = "ViewName"
             TvSecondaryFieldName = "FieldName"
-            SortOrderKey = "TableName, FieldName"
-            FirstControl = cboTableName
+            SortOrderKey = "ViewName, FieldName"
+            FirstControl = cboViewName
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DefaultFieldValuePresenter(Me)
             Ea = PresenterObj.Ea
@@ -43,12 +43,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property TableName As String Implements IDefaultFieldValueView.TableName
+        Public Property ViewName As String Implements IDefaultFieldValueView.ViewName
             Get
-                Return cboTableName.Text
+                Return cboViewName.Text
             End Get
             Set
-                cboTableName.Text = Value
+                cboViewName.Text = Value
             End Set
         End Property
 
@@ -152,7 +152,7 @@ Namespace PresentationLayer.Views.Forms
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"FieldName", txtFieldName},
-                {"TableName", cboTableName},
+                {"ViewName", cboViewName},
                 {"DataType", cboDataType},
                 {"IdNo", TxtIdNo},
                 {"Length", txtLength},

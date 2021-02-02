@@ -42,7 +42,6 @@ Namespace PresentationLayer.Views.Forms
             Me.SecurityGroupView.GroupAccesses = Nothing
             Me.SecurityGroupView.IdNo = CType(0, Short)
             Me.SecurityGroupView.Location = New System.Drawing.Point(306, 53)
-            Me.SecurityGroupView.MainTableName = "SecurityGroup"
             Me.SecurityGroupView.Name = "SecurityGroupView"
             Me.SecurityGroupView.Notes = ""
             Me.SecurityGroupView.ParentIdNo = Nothing

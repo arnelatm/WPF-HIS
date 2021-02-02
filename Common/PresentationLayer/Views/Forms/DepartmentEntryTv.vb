@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            MainTableName = "Department"
+            MainTableName = "Department_View"
             TvMainFieldName = "DepartmentName"
             TvSecondaryFieldName = "DepartmentCode"
             SortOrderKey = "DepartmentName"

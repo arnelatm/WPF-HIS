@@ -594,17 +594,19 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboPayType
             '
-            Me.cboPayType.BackColor = System.Drawing.SystemColors.ControlLight
+            Me.cboPayType.BackColor = System.Drawing.Color.White
             Me.cboPayType.ChangingSearchValueOnly = False
             Me.TableLayoutPanel1.SetColumnSpan(Me.cboPayType, 2)
             Me.cboPayType.CurrentSearchTerm = ""
             Me.cboPayType.DefaultValue = Nothing
             Me.cboPayType.DisplayMember = "Name"
             Me.cboPayType.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboPayType.DropDownHeight = 200
             Me.cboPayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboPayType.EditingMode = True
             Me.cboPayType.FilterRule = Nothing
             Me.cboPayType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPayType.ForeColor = System.Drawing.Color.Black
             Me.cboPayType.FormattingEnabled = True
             Me.cboPayType.HideWhenNotEditingOrAdding = False
             Me.cboPayType.LinkedLabel = Nothing
@@ -630,7 +632,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.ValueIsNumeric = False
             Me.cboPayType.ValueMember = "IdNo"
             '
-            'PettyCashClosing
+            'PettyCashClosingEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
@@ -638,7 +640,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ClientSize = New System.Drawing.Size(1008, 659)
             Me.Controls.Add(Me.TableLayoutPanel1)
             Me.MinimumSize = New System.Drawing.Size(945, 590)
-            Me.Name = "PettyCashClosing"
+            Me.Name = "PettyCashClosingEntry"
             Me.Text = "Petty Cash Closing"
             Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
