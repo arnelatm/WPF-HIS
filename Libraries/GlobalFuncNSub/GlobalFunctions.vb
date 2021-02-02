@@ -517,14 +517,6 @@ Public Module GlobalFunctions
         End If
     End Function
 
-    'Public Function GetPropertyValue(ByRef obj As Object, ByVal propName As String) As Object
-    '    Dim objType As Type = obj.GetType()
-    '    Dim pInfo As PropertyInfo = objType.GetProperty("MainTableName")
-    '    Dim pInfos As PropertyInfo() = objType.GetProperties()
-    '    Dim propValue As Object = pInfo.GetValue(obj, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
-    '    Return propValue
-    'End Function
-
     ''' <summary>
     '''     handles null or blank values for string type
     ''' </summary>

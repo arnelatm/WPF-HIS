@@ -316,18 +316,21 @@
     <value>PcJournal</value>
   </data>
   <data name="cboTableName.Items14" xml:space="preserve">
-    <value>ProductCategory</value>
+    <value>PettyCashClosing</value>
   </data>
   <data name="cboTableName.Items15" xml:space="preserve">
-    <value>SalesJournal</value>
+    <value>ProductCategory</value>
   </data>
   <data name="cboTableName.Items16" xml:space="preserve">
-    <value>SecurityGroup</value>
+    <value>SalesJournal</value>
   </data>
   <data name="cboTableName.Items17" xml:space="preserve">
-    <value>Supplier</value>
+    <value>SecurityGroup</value>
   </data>
   <data name="cboTableName.Items18" xml:space="preserve">
+    <value>Supplier</value>
+  </data>
+  <data name="cboTableName.Items19" xml:space="preserve">
     <value>User</value>
   </data>
   <data name="cboTableName.Location" type="System.Drawing.Point, System.Drawing">

@@ -981,22 +981,7 @@ Public Class CFormEntry
                                     SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807D)
                             End Select
 
-                            'If row.FldType.ToLower = "money" Then
-                            '    SetPropertyValue(cCtrl, "Maxlength", 19)
-                            'Else
-                            '    SetPropertyValue(cCtrl, "Maxlength", row.MaxLength)
-                            'End If
-
                             SetPropertyValue(cCtrl, "ValueIsNumeric", True)
-                            'If CommonDaoOld.IsFieldUnique(MainTableName, fldName) Then
-                            '    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CTextBoxArabic Then
-                            '        SetPropertyValue(cCtrl, "ValueIsUnique", True)
-                            '    End If
-                            'Else
-                            '    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CTextBoxArabic Then
-                            '        SetPropertyValue(cCtrl, "ValueIsUnique", False)
-                            '    End If
-                            'End If
                         Else
                             'If cCtrl.Name.ToLower() = "txtnotes" then
                             '    debugger.Break()
@@ -1015,18 +1000,8 @@ Public Class CFormEntry
                                         MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
                                     Else
                                         MyErrorProvider.Controls.AddMandatory(cCtrl, GetPropertyValue(cCtrl, "LinkedLabel"))
-                                        'MyErrorProvider.Controls.AddMandatory(cCtrl, thisCtrl.LinkedLabel.Text)
                                     End If
                                 End If
-                                'If CommonDaoOld.IsFieldUnique(MainTableName, fldName) Then
-                                '    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CTextBoxArabic Then
-                                '        SetPropertyValue(cCtrl, "ValueIsUnique", True)
-                                '    End If
-                                'Else
-                                '    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CTextBoxArabic Then
-                                '        SetPropertyValue(cCtrl, "ValueIsUnique", False)
-                                '    End If
-                                'End If
                             End If
                         End If
                         Exit For

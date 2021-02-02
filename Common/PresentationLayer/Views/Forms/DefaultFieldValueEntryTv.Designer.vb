@@ -142,9 +142,9 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.cboTableName, "cboTableName")
         Me.cboTableName.ForeColor = System.Drawing.Color.Black
         Me.cboTableName.FormattingEnabled = true
-        Me.cboTableName.HideWhenNotEditingOrAdding = false
-        Me.cboTableName.Items.AddRange(New Object() {resources.GetString("cboTableName.Items"), resources.GetString("cboTableName.Items1"), resources.GetString("cboTableName.Items2"), resources.GetString("cboTableName.Items3"), resources.GetString("cboTableName.Items4"), resources.GetString("cboTableName.Items5"), resources.GetString("cboTableName.Items6"), resources.GetString("cboTableName.Items7"), resources.GetString("cboTableName.Items8"), resources.GetString("cboTableName.Items9"), resources.GetString("cboTableName.Items10"), resources.GetString("cboTableName.Items11"), resources.GetString("cboTableName.Items12"), resources.GetString("cboTableName.Items13"), resources.GetString("cboTableName.Items14"), resources.GetString("cboTableName.Items15"), resources.GetString("cboTableName.Items16"), resources.GetString("cboTableName.Items17"), resources.GetString("cboTableName.Items18")})
-        Me.cboTableName.LinkedLabel = Nothing
+        Me.cboTableName.HideWhenNotEditingOrAdding = False
+            Me.cboTableName.Items.AddRange(New Object() {resources.GetString("cboTableName.Items"), resources.GetString("cboTableName.Items1"), resources.GetString("cboTableName.Items2"), resources.GetString("cboTableName.Items3"), resources.GetString("cboTableName.Items4"), resources.GetString("cboTableName.Items5"), resources.GetString("cboTableName.Items6"), resources.GetString("cboTableName.Items7"), resources.GetString("cboTableName.Items8"), resources.GetString("cboTableName.Items9"), resources.GetString("cboTableName.Items10"), resources.GetString("cboTableName.Items11"), resources.GetString("cboTableName.Items12"), resources.GetString("cboTableName.Items13"), resources.GetString("cboTableName.Items14"), resources.GetString("cboTableName.Items15"), resources.GetString("cboTableName.Items16"), resources.GetString("cboTableName.Items17"), resources.GetString("cboTableName.Items18"), resources.GetString("cboTableName.Items19")})
+            Me.cboTableName.LinkedLabel = Nothing
         Me.cboTableName.MaximumValue = Nothing
         Me.cboTableName.MinimumValue = Nothing
         Me.cboTableName.Name = "cboTableName"
