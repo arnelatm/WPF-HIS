@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblTableName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboTableName = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
+        Me.cboViewName = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
         Me.lblFieldName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblDataType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboDataType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -99,7 +99,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblTableName)
-        Me.floDataDisplay.Controls.Add(Me.cboTableName)
+        Me.floDataDisplay.Controls.Add(Me.cboViewName)
         Me.floDataDisplay.Controls.Add(Me.lblFieldName)
         Me.floDataDisplay.Controls.Add(Me.txtFieldName)
         Me.floDataDisplay.Controls.Add(Me.lblDataType)
@@ -129,34 +129,34 @@ Namespace PresentationLayer.Views.Forms
         Me.lblTableName.EditingMode = false
         resources.ApplyResources(Me.lblTableName, "lblTableName")
         Me.lblTableName.Name = "lblTableName"
-        '
-        'cboTableName
-        '
-        Me.cboTableName.AutoCompleteCustomSource.AddRange(New String() {resources.GetString("cboTableName.AutoCompleteCustomSource"), resources.GetString("cboTableName.AutoCompleteCustomSource1"), resources.GetString("cboTableName.AutoCompleteCustomSource2"), resources.GetString("cboTableName.AutoCompleteCustomSource3"), resources.GetString("cboTableName.AutoCompleteCustomSource4"), resources.GetString("cboTableName.AutoCompleteCustomSource5"), resources.GetString("cboTableName.AutoCompleteCustomSource6"), resources.GetString("cboTableName.AutoCompleteCustomSource7"), resources.GetString("cboTableName.AutoCompleteCustomSource8"), resources.GetString("cboTableName.AutoCompleteCustomSource9"), resources.GetString("cboTableName.AutoCompleteCustomSource10"), resources.GetString("cboTableName.AutoCompleteCustomSource11"), resources.GetString("cboTableName.AutoCompleteCustomSource12"), resources.GetString("cboTableName.AutoCompleteCustomSource13"), resources.GetString("cboTableName.AutoCompleteCustomSource14"), resources.GetString("cboTableName.AutoCompleteCustomSource15")})
-        Me.cboTableName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cboTableName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.cboTableName.BackColor = System.Drawing.Color.White
-        Me.cboTableName.DefaultValue = Nothing
-        Me.cboTableName.DisplayOnly = false
-        Me.cboTableName.EditingMode = true
-        resources.ApplyResources(Me.cboTableName, "cboTableName")
-        Me.cboTableName.ForeColor = System.Drawing.Color.Black
-        Me.cboTableName.FormattingEnabled = true
-        Me.cboTableName.HideWhenNotEditingOrAdding = False
-            Me.cboTableName.Items.AddRange(New Object() {resources.GetString("cboTableName.Items"), resources.GetString("cboTableName.Items1"), resources.GetString("cboTableName.Items2"), resources.GetString("cboTableName.Items3"), resources.GetString("cboTableName.Items4"), resources.GetString("cboTableName.Items5"), resources.GetString("cboTableName.Items6"), resources.GetString("cboTableName.Items7"), resources.GetString("cboTableName.Items8"), resources.GetString("cboTableName.Items9"), resources.GetString("cboTableName.Items10"), resources.GetString("cboTableName.Items11"), resources.GetString("cboTableName.Items12"), resources.GetString("cboTableName.Items13"), resources.GetString("cboTableName.Items14"), resources.GetString("cboTableName.Items15"), resources.GetString("cboTableName.Items16"), resources.GetString("cboTableName.Items17"), resources.GetString("cboTableName.Items18"), resources.GetString("cboTableName.Items19")})
-            Me.cboTableName.LinkedLabel = Nothing
-        Me.cboTableName.MaximumValue = Nothing
-        Me.cboTableName.MinimumValue = Nothing
-        Me.cboTableName.Name = "cboTableName"
-        Me.cboTableName.OldValue = 0
-        Me.cboTableName.OriginalDataSource = Nothing
-        Me.cboTableName.OriginalDropDownStyle = 1
-        Me.cboTableName.OriginalList = Nothing
-        Me.cboTableName.PreviousSelectedIndex = -1
-        Me.cboTableName.ReadOnlyCombo = false
-        Me.cboTableName.ValueIsMandatory = false
-        Me.cboTableName.ValueIsNullable = false
-        Me.cboTableName.ValueIsNumeric = false
+            '
+            'cboViewName
+            '
+            Me.cboViewName.AutoCompleteCustomSource.AddRange(New String() {resources.GetString("cboViewName.AutoCompleteCustomSource"), resources.GetString("cboViewName.AutoCompleteCustomSource1"), resources.GetString("cboViewName.AutoCompleteCustomSource2"), resources.GetString("cboViewName.AutoCompleteCustomSource3"), resources.GetString("cboViewName.AutoCompleteCustomSource4"), resources.GetString("cboViewName.AutoCompleteCustomSource5"), resources.GetString("cboViewName.AutoCompleteCustomSource6"), resources.GetString("cboViewName.AutoCompleteCustomSource7"), resources.GetString("cboViewName.AutoCompleteCustomSource8"), resources.GetString("cboViewName.AutoCompleteCustomSource9"), resources.GetString("cboViewName.AutoCompleteCustomSource10"), resources.GetString("cboViewName.AutoCompleteCustomSource11"), resources.GetString("cboViewName.AutoCompleteCustomSource12"), resources.GetString("cboViewName.AutoCompleteCustomSource13"), resources.GetString("cboViewName.AutoCompleteCustomSource14"), resources.GetString("cboViewName.AutoCompleteCustomSource15")})
+            Me.cboViewName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+            Me.cboViewName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+            Me.cboViewName.BackColor = System.Drawing.Color.White
+            Me.cboViewName.DefaultValue = Nothing
+            Me.cboViewName.DisplayOnly = False
+            Me.cboViewName.EditingMode = True
+            resources.ApplyResources(Me.cboViewName, "cboViewName")
+            Me.cboViewName.ForeColor = System.Drawing.Color.Black
+            Me.cboViewName.FormattingEnabled = True
+            Me.cboViewName.HideWhenNotEditingOrAdding = False
+            Me.cboViewName.Items.AddRange(New Object() {resources.GetString("cboViewName.Items"), resources.GetString("cboViewName.Items1"), resources.GetString("cboViewName.Items2"), resources.GetString("cboViewName.Items3"), resources.GetString("cboViewName.Items4"), resources.GetString("cboViewName.Items5"), resources.GetString("cboViewName.Items6"), resources.GetString("cboViewName.Items7"), resources.GetString("cboViewName.Items8"), resources.GetString("cboViewName.Items9"), resources.GetString("cboViewName.Items10"), resources.GetString("cboViewName.Items11"), resources.GetString("cboViewName.Items12"), resources.GetString("cboViewName.Items13"), resources.GetString("cboViewName.Items14"), resources.GetString("cboViewName.Items15"), resources.GetString("cboViewName.Items16"), resources.GetString("cboViewName.Items17"), resources.GetString("cboViewName.Items18"), resources.GetString("cboViewName.Items19")})
+            Me.cboViewName.LinkedLabel = Nothing
+            Me.cboViewName.MaximumValue = Nothing
+            Me.cboViewName.MinimumValue = Nothing
+            Me.cboViewName.Name = "cboViewName"
+            Me.cboViewName.OldValue = 0
+            Me.cboViewName.OriginalDataSource = Nothing
+        Me.cboViewName.OriginalDropDownStyle = 1
+        Me.cboViewName.OriginalList = Nothing
+        Me.cboViewName.PreviousSelectedIndex = -1
+        Me.cboViewName.ReadOnlyCombo = false
+        Me.cboViewName.ValueIsMandatory = false
+        Me.cboViewName.ValueIsNullable = false
+        Me.cboViewName.ValueIsNumeric = false
         '
         'lblFieldName
         '
@@ -369,6 +369,6 @@ End Sub
         Friend WithEvents lblDecimalPart As CLabel
         Friend WithEvents txtDecimalPart As CTextBox
         Friend WithEvents cboDataType As CaComboBox
-        Friend WithEvents cboTableName As CComboBox
+        Friend WithEvents cboViewName As CComboBox
     End Class
 End NameSpace

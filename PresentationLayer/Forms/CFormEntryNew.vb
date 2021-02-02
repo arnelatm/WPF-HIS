@@ -695,7 +695,6 @@ Public Class CFormEntryNew
                 Debugger.Break()
             End Try
 
-            'TableDefaultFieldValues = PresenterObj.GetDefaultFieldValues()
             Dim rules = PresenterObj.GetBizObjectRules()
             For Each rule In rules
                 Dim control As Control = Nothing

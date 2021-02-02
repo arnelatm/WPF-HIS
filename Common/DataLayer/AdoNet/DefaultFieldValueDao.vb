@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordById(idNo) As DefaultFieldValue Implements IDaoAll(Of DefaultFieldValue).GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, TableName, FieldName, DataType, Length, DecimalPart, LinkedTable, LinkedField, DefaultValue" &
+                    " SELECT IdNo, ViewName, FieldName, DataType, Length, DecimalPart, LinkedTable, LinkedField, DefaultValue" &
                     "   FROM [DefaultFieldValue]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "FieldName"
             End If
             Dim sql As String =
-                    " SELECT IdNo, TableName, FieldName, DataType, Length" &
+                    " SELECT IdNo, ViewName, FieldName, DataType, Length" &
                     "   FROM [DefaultFieldValue] " & "order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -35,7 +35,7 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef DefaultFieldValue As DefaultFieldValue) As Integer Implements IDaoAll(Of DefaultFieldValue).UpdateRecord
             Dim sql As String =
                     "UPDATE [DefaultFieldValue] " &
-                    "SET TableName = @TableName," &
+                    "SET ViewName = @ViewName," &
                     "FieldName = @FieldName," &
                     "DataType = @DataType," &
                     "Length = @Length," &
@@ -51,8 +51,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef DefaultFieldValue As DefaultFieldValue) As Integer Implements IDaoAll(Of DefaultFieldValue).AddRecord
             Dim sql As String =
                     " INSERT INTO [DefaultFieldValue] " &
-                    " (TableName,FieldName,DataType,Length,DecimalPart,LinkedTable,LinkedField,DefaultValue) " &
-                    " VALUES (@TableName,@FieldName,@DataType,@Length,@DecimalPart,@LinkedTable,@LinkedField,@DefaultValue) "
+                    " (ViewName,FieldName,DataType,Length,DecimalPart,LinkedTable,LinkedField,DefaultValue) " &
+                    " VALUES (@ViewName,@FieldName,@DataType,@Length,@DecimalPart,@LinkedTable,@LinkedField,@DefaultValue) "
             Return _db.Insert(sql, Take(DefaultFieldValue))
         End Function
 
@@ -60,7 +60,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New DefaultFieldValue() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .TableName = Extensions.AsString(reader("TableName")),
+            .ViewName = Extensions.AsString(reader("ViewName")),
             .FieldName = Extensions.AsString(reader("FieldName")),
             .DataType = Extensions.AsInt(Of Byte)(reader("DataType")),
             .Length = Extensions.AsInt(Of Byte)(reader("Length")),
@@ -73,7 +73,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(DefaultFieldValue As DefaultFieldValue) As Object()
             Return New Object() {
                                     "@IdNo", DefaultFieldValue.IdNo,
-                                    "@TableName", DefaultFieldValue.TableName,
+                                    "@ViewName", DefaultFieldValue.ViewName,
                                     "@FieldName", DefaultFieldValue.FieldName,
                                     "@DataType", DefaultFieldValue.DataType,
                                     "@Length", DefaultFieldValue.Length,

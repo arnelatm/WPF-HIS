@@ -24,6 +24,8 @@ Public Class CForm
 
     Public Property MenuFormName As String
 
+    Public Property ViewDisplayName As String
+
     Private Sub CForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim allControls As New List(Of Control)
 

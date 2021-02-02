@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views.Interface
     Public Interface IDefaultFieldValueView
         Inherits IView
         Property IdNo As Int16
-        Property TableName As String
+        Property ViewName As String
         Property FieldName As String
         Property DataType As Byte
         Property Length As Byte

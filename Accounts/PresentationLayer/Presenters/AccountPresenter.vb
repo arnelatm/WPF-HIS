@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IAccountView)
             MyBase.New(view)
             ModelPresenter = New ModelAccounts("Account")
-            TableName = "Account_View"
+            'TableName = "Account_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "AccountName"
             TreeViewSecondaryField = "AccountCode"

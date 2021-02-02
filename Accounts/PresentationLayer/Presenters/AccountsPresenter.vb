@@ -18,15 +18,13 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
         End Sub
 
-        Public Overrides Sub Initializer(objectName As String, Optional tableOrViewName As String = Nothing, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
-            'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
-            TableName = IIf(tableOrViewName Is Nothing, objectName, tableOrViewName)
+        Public Overrides Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
+            TableName = objectName
             SortOrderKey = objectName + "Name"
-            If tableOrViewName Is Nothing Then
-                ModelPresenter = New ModelAccounts(objectName)
-            Else
-                ModelPresenter = New ModelAccounts(objectName, tableOrViewName)
-            End If
+            'If objectName Is Nothing Then
+            '    ModelPresenter = New ModelAccounts(objectName)
+            'Else
+            ModelPresenter = New ModelAccounts(objectName, bizParams, daoParams)
             'Dim t As Type = Type.GetType(presenterModelName)
             'If tableOrViewName Is Nothing Then
             '    ModelPresenter = Activator.CreateInstance(t)
@@ -36,17 +34,18 @@ Namespace PresentationLayer.Presenters
             '    ModelPresenter = Activator.CreateInstance(t, tableOrViewName)
             'End If
             OriginalModel = New TM
-            DataModel = New TM
+            Model = New TM
+            'End If
             'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Model." + baseClassName + "Model"
             'OriginalModel = Activator.CreateInstance(Type.GetType(presenterModelName))
             'DataModel = Activator.CreateInstance(Type.GetType(presenterModelName))
         End Sub
 
-        Public Overrides Sub InitializerWithTv(baseClassName As String, Optional tableOrViewName As String = Nothing)
+        Public Overrides Sub InitializerWithTv(baseClassName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
             TreeViewMainField = baseClassName + "Name"
             TreeViewSecondaryField = baseClassName + "Code"
             TreeViewList = New List(Of TM)
-            Initializer(baseClassName, tableOrViewName)
+            Initializer(baseClassName, bizParams, daoParams)
             If TreeViewParentIdField IsNot Nothing Then
                 SortOrderKey = "SortKey"
             End If

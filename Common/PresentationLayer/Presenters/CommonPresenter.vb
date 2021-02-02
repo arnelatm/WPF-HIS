@@ -21,11 +21,17 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As IView)
             MyBase.New(itemView)
-            TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
+            Dim viewName As String
+            If DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName IsNot Nothing Then
+                viewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName
+            Else
+                viewName = DirectCast(itemView, System.Windows.Forms.Control).Name
+            End If
+            ViewDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(viewName)
         End Sub
 
         Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
-        Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
+        Public Shared Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
 
         Private Shared Shadows Property CommonModel As IModelCommon
 
@@ -74,26 +80,43 @@ Namespace PresentationLayer.Presenters
             MakeDefaultValues()
         End Sub
 
-        Public Overridable Sub Initializer(objectName As String, Optional tableOrViewName As String = Nothing, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
-            Dim presenterModelName = $"AATM.Common.PresentationLayer.Models.ModelCommon"
-            TableName = IIf(tableOrViewName Is Nothing, objectName, tableOrViewName)
+        Public Overridable Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
+            'Dim presenterModelName = $"AATM.Common.PresentationLayer.Models.ModelCommon." + objectName
+
+            'Dim args As Object() = {objectName}
+            'Dim t As Type = Type.GetType(presenterModelName)
+            'If bizParams Is Nothing AndAlso daoParams Is Nothing Then
+            '    MyBase.ModelPresenter = Activator.CreateInstance(t)
+            'Else
+            '    MyBase.ModelPresenter = Activator.CreateInstance(t, bizParams, daoParams)
+            'End If
+
+            Dim className = $"AATM.Common.PresentationLayer.Models.ModelCommon"
+            TableName = objectName
             SortOrderKey = objectName + "Name"
-            Dim args As Object() = {objectName}
-            Dim t As Type = Type.GetType(presenterModelName)
-            ModelPresenter = Activator.CreateInstance(t, bizParams, daoParams)
+            Dim ModelPresenter As Object
+            Dim tType As Type = Type.GetType(className)
+            If tType Is Nothing Then
+                MessageBox.Show("Missing Data Access Object " + className + "!")
+            End If
+            If bizParams Is Nothing AndAlso daoParams Is Nothing Then
+                ModelPresenter = Activator.CreateInstance(tType, {objectName, bizParams, daoParams})
+            Else
+                ModelPresenter = Activator.CreateInstance(tType, {objectName})
+            End If
             OriginalModel = New TM
             DataModel = New TM
         End Sub
 
-        Public Overridable Sub InitializerWithTv(baseClassName As String, Optional tableOrViewName As String = Nothing)
+        Public Overridable Sub InitializerWithTv(baseClassName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
             TreeViewMainField = baseClassName + "Name"
             TreeViewSecondaryField = baseClassName + "Code"
             TreeViewList = New List(Of TM)
-            Initializer(baseClassName, tableOrViewName)
+            Initializer(baseClassName, bizParams, daoParams)
         End Sub
 
         Public Sub MakeDefaultValues()
-            For Each item In TableDefaultFieldValues
+            For Each item In ViewDefaultFieldValues
                 Select Case item.DataType
                     Case DataTypeSelection.StringType
                         CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
@@ -130,7 +153,7 @@ Namespace PresentationLayer.Presenters
                     Case DataTypeSelection.UShortType
                         CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
                     Case Else
-                        MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in table " & item.TableName & " conversion not handled")
+                        MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in form/view " & item.ViewName & " conversion not handled")
                 End Select
             Next item
             Return

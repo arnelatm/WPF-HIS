@@ -7,7 +7,7 @@ Namespace PresentationLayer.Models
     Public Class DefaultFieldValueModel
         Inherits CommonModel
         Public Property IdNo As Int16
-        Public Property TableName As String
+        Public Property ViewName As String
         Public Property FieldName As String
         Public Property DataType As Byte
         Public Property Length As Byte
