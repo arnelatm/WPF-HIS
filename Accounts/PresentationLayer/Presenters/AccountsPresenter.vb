@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
             '    ModelPresenter = Activator.CreateInstance(t, tableOrViewName)
             'End If
             OriginalModel = New TM
-            Model = New TM
+            DataModel = New TM
             'End If
             'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Model." + baseClassName + "Model"
             'OriginalModel = Activator.CreateInstance(Type.GetType(presenterModelName))

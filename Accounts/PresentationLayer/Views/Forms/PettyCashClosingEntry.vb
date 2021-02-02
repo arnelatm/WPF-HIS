@@ -193,7 +193,37 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property JournalItems As List(Of IJournalItemView) Implements IPettyCashClosingView.JournalItems
+            Get
+                Return _journalItems
+            End Get
+            Set
+                CreateJournalItems()
+                'bsJournalItems.ResetBindings(True)
+                'BindJournalItem()
+            End Set
+        End Property
+
 #End Region
+
+        Public Sub CreateJournalItems()
+            JournalItems = New List(Of IJournalItemView)
+            Dim x = New JournalItemView
+            x.AccountIdNo = AccountIdNo
+            x.Credit = Amount
+            x.Debit = 0
+            x.Notes = ""
+            x.Sequence = 1
+            x.JournalIdNo = 0
+            JournalItems.Add(x)
+            x.AccountIdNo = 113
+            x.Credit = 0
+            x.Debit = Amount
+            x.Notes = ""
+            x.Sequence = 2
+            x.JournalIdNo = 0
+            JournalItems.Add(x)
+        End Sub
 
         Protected Overrides Sub CreateDataSources()
             cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))

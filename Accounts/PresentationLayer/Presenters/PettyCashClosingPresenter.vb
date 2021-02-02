@@ -12,6 +12,7 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of IPettyCashClosingView, PettyCashClosingModel)
 
         Private _jiFooter As DgvFooter
+        Protected DtInsertTable As New DataTable
 
         Public Sub New(view As IView)
             MyBase.New(view)
@@ -22,6 +23,16 @@ Namespace PresentationLayer.Presenters
             DataModel = New PettyCashClosingModel()
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
+
+
+            CreateDataTable(DtInsertTable, {{"AccountIdNo", GetType(Int16)},
+                                            {"Credit", GetType(Decimal)},
+                                            {"Debit", GetType(Decimal)},
+                                            {"JournalIdNo", GetType(Int32)},
+                                            {"Notes", GetType(String)},
+                                            {"RevCostCenterIdNo", GetType(Int16)},
+                                            {"Sequence", GetType(Int16)}
+                                            })
         End Sub
 
         Public Sub GetOpenPettyCash()
@@ -56,6 +67,38 @@ Namespace PresentationLayer.Presenters
             Next item
             Return total
         End Function
+
+        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+            'ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
+
+            If DtInsertTable IsNot Nothing Then
+                DtInsertTable.Clear()
+            End If
+            Dim nRowCount As Int16 = 1
+            Dim workRow As DataRow = Nothing
+            'For Each dataView In dataViews
+            '    If includeFilter.Invoke(dataView) Then
+            '        Dim idNo As Integer = CallByName(dataView, dataViewIdNoFieldName, CallType.Get)
+            '        If idNo <= 0 Then
+            '            workRow = insertTable.NewRow()
+            '        Else
+            '            workRow = updateTable.NewRow()
+            '            workRow(dataViewIdNoFieldName) = idNo
+            '        End If
+            '        workRow(sequenceFieldName) = nRowCount
+            '        fillSub.Invoke(dataView, workRow)
+            '        If idNo <= 0 Then
+            '            insertTable.Rows.Add(workRow)
+            '        Else
+            '            updateTable.Rows.Add(workRow)
+            '        End If
+            '        nRowCount += 1
+            '    End If
+            'Next
+
+        End Sub
+
+
 
     End Class
 
