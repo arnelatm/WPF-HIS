@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IView)
             MyBase.New(view)
             ModelPresenter = New ModelAccounts("PettyCashClosing")
-            TableName = "CdJournal"
+            TableName = "PettyCashClosing"
             SortOrderKey = "IdNo"
             OriginalModel = New PettyCashClosingModel()
             DataModel = New PettyCashClosingModel()

@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views
     Public Class LeaveView
         Implements ILeaveView
 
-        Public Property MainTableName As String = "Leave"
+        'Public Property MainTableName As String = "Leave"
 
         Public Property IdNo As Int16 Implements ILeaveView.IdNo
             Get

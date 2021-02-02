@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "CdJournal"
+            MainTableName = "PettyCashClosing"
             SortOrderKey = "IdNo"
             Me.Text = Messaging.TranslateCaption("Petty Cash Closing Journal")
             MyPresenter = New PettyCashClosingPresenter(Me)
@@ -263,8 +263,7 @@ Namespace PresentationLayer.Views.Forms
             bsPcJournals.ResetBindings(False)
         End Sub
 
-
-        Private Sub Dgv_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcJournals.CellClick
+        Private Sub Dgv_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcJournals.CellValueChanged
             With DataGridViewPcJournals
                 If .CurrentRow IsNot Nothing Then
                     Dim nIndex = .CurrentRow.Index

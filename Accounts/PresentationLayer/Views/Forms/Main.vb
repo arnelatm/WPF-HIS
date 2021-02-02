@@ -1154,13 +1154,13 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ClosePettyCashAccountToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClosePettyCashAccountToolStripMenuItem.Click
-            Dim childMdiForm As PostPettyCash
-            childMdiForm = New PostPettyCash With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
+        'Private Sub ClosePettyCashAccountToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClosePettyCashAccountToolStripMenuItem.Click
+        '    Dim childMdiForm As PostPettyCash
+        '    childMdiForm = New PostPettyCash With {
+        '        .MdiParent = Me
+        '        }
+        '    childMdiForm.Show()
+        'End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
             Dim childMdiForm As StatementOfAr
