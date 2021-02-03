@@ -4,7 +4,7 @@ SELECT        a.IdNo, a.TransactionDate, a.ReferenceNo, a.Amount, a.AccountIdNo,
                          a.PaymentTYpe = 'S' THEN s.SupplierName WHEN a.PaymentType = 'R' THEN c.CustomerName WHEN a.PaymentType = 'E' THEN e.EMployeeName ELSE a.PayeeName END AS PayeeName, 
                          CASE WHEN a.PaymentType = 'A' OR
                          a.PaymentTYpe = 'S' THEN s.SupplierNameAra WHEN a.PaymentType = 'R' THEN c.CustomerNameAra WHEN a.PaymentType = 'E' THEN e.EMployeeNameAra ELSE a.PayeeName END AS PayeeNameAra, a.ORNumber, 
-                         a.DiscountTaken, a.DiscountAccountIdNo, a.Applied, a.UnApplied, a.VatNumber, a.VatAmount, a.Notes, a.Posted, a.DateCreated, a.Cancelled, a.DateTimeStamp, a.PcClosed, a.CdJournalIdNo
+                         a.DiscountTaken, a.DiscountAccountIdNo, a.Applied, a.UnApplied, a.VatNumber, a.VatAmount, a.Notes, a.Posted, a.DateCreated, a.Cancelled, a.DateTimeStamp, a.PcClosed, a.CdJournalIdNo, a.PayType
 FROM            dbo.PcJournal AS a LEFT OUTER JOIN
                          dbo.Supplier AS S ON a.PayeeIdNo = S.IdNo AND (a.PaymentType = 'A' OR
                          a.PaymentType = 'S') LEFT OUTER JOIN
