@@ -887,6 +887,9 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub DataGridViewDjOiItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDjOiItems.CellContentClick
+
+        End Sub
     End Class
 
 End Namespace
