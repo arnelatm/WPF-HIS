@@ -13,7 +13,7 @@ Namespace BusinessLayer
             ' establish business rules
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("TransactionDate"))
-                AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
+                AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationDataType.Date))
                 AddRule(New ValidateRequired("Notes"))
                 AddRule(New ValidateRequired("PaymentType"))
                 AddRule(New ValidateRequired("AccountIdNo"))
@@ -50,6 +50,7 @@ Namespace BusinessLayer
         Public Property OrNumber As String
         Public Property PayeeIdNo As Int32?
         Public Property PayeeName As String
+        Public Property PayeeType As String
         Public Property PaymentType As String
         Public Property PcClosed As Boolean
         Public Property Posted As Boolean

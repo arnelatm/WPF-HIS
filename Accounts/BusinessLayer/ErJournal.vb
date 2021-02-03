@@ -13,7 +13,7 @@ Namespace BusinessLayer
             'If createRules Then
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("TransactionDate"))
-                AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
+                AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationDataType.Date))
                 AddRule(New ValidateRequired("Notes"))
                 AddRule(New ValidateRequired("AccountIdNo"))
                 AddRule(New ValidateRequired("EmployeeIdNo"))
@@ -34,7 +34,7 @@ Namespace BusinessLayer
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
         Public Property TransactionType As String
-	    Public Property JournalItems As List(Of JournalItem)
+        Public Property JournalItems As List(Of JournalItem)
     End Class
 
 End Namespace

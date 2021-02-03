@@ -14,7 +14,6 @@
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
-        Public Property PayType As String
         Public Property DiscountAccountIdNo As Int16?
         Public Property DiscountTaken As Decimal
         Public Property Errors As List(Of String)
@@ -25,6 +24,7 @@
         Public Property PayeeIdNo As Int32?
         Public Property PayeeName As String
         Public Property PaymentType As String
+        Public Property PayType As String
         Public Property PcClosed As Boolean
         Public Property Posted As Boolean
         Public Property ReferenceNo As String

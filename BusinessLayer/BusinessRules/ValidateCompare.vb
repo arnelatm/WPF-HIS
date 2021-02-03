@@ -53,8 +53,7 @@ Namespace BusinessRules
         Public Overrides Function Validate(businessObject As BusinessObject) As Boolean
             Try
                 Dim propValue1 = businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing)
-                Dim propValue2 = businessObject.GetType().GetProperty(OtherPropertyName).GetValue(businessObject,
-                                                                                                  Nothing)
+                Dim propValue2 = businessObject.GetType().GetProperty(OtherPropertyName).GetValue(businessObject, Nothing)
 
                 Select Case DataType
                     Case ValidationDataType.Integer

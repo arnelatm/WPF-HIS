@@ -66,6 +66,8 @@ Namespace PresentationLayer.Views.Forms
             Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DataGridViewPcJournals, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPcJournals, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,15 +108,15 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPcJournals.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewPcJournals.FirstRowDeletionEnabled = True
             Me.DataGridViewPcJournals.FirstRowInsertionEnabled = True
-            Me.DataGridViewPcJournals.Location = New System.Drawing.Point(3, 106)
+            Me.DataGridViewPcJournals.Location = New System.Drawing.Point(3, 107)
             Me.DataGridViewPcJournals.Name = "DataGridViewPcJournals"
             Me.DataGridViewPcJournals.ReadOnly = True
             Me.DataGridViewPcJournals.SequenceColumn = "dgvSequence"
             Me.DataGridViewPcJournals.SequenceFieldName = "Sequence"
             Me.DataGridViewPcJournals.ShowFooter = False
-            Me.DataGridViewPcJournals.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewPcJournals.ShowInsertColumnWhenEditing = False
             Me.DataGridViewPcJournals.Size = New System.Drawing.Size(977, 450)
-            Me.DataGridViewPcJournals.TabIndex = 4
+            Me.DataGridViewPcJournals.TabIndex = 10
             '
             'dgvPcClosed
             '
@@ -251,8 +253,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.Controls.Add(Me.CButton1, 1, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtPayeeName, 1, 3)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblPayee, 0, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtPayeeName, 6, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblPayee, 5, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.lblTransactionDate, 0, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpTransactionDate, 1, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.lblAccountIdNo, 0, 1)
@@ -269,6 +271,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.btnSelectAll, 0, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 5, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.cboPayType, 6, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.CLabel4, 0, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboPcAccountIdNo, 1, 3)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 58)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 7
@@ -279,6 +283,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(983, 589)
             Me.TableLayoutPanel1.TabIndex = 5
             '
@@ -287,11 +292,11 @@ Namespace PresentationLayer.Views.Forms
             Me.CButton1.DesignerSelected = False
             Me.CButton1.DisplayOnly = True
             Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(122, 562)
+            Me.CButton1.Location = New System.Drawing.Point(122, 563)
             Me.CButton1.Name = "CButton1"
             Me.CButton1.OriginalImageName = Nothing
             Me.CButton1.SecurityKey = ""
-            Me.CButton1.Size = New System.Drawing.Size(90, 24)
+            Me.CButton1.Size = New System.Drawing.Size(90, 23)
             Me.CButton1.TabIndex = 15
             Me.CButton1.Text = "Unselect All"
             '
@@ -299,7 +304,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.txtPayeeName.BackColor = System.Drawing.Color.White
             Me.txtPayeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayeeName, 7)
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayeeName, 2)
             Me.txtPayeeName.ComputedValue = False
             Me.txtPayeeName.CustomFormat = Nothing
             Me.txtPayeeName.DataBoundControl = True
@@ -308,14 +313,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
             Me.txtPayeeName.LinkedLabel = Nothing
-            Me.txtPayeeName.Location = New System.Drawing.Point(120, 54)
+            Me.txtPayeeName.Location = New System.Drawing.Point(641, 54)
             Me.txtPayeeName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayeeName.MaximumValue = Nothing
             Me.txtPayeeName.MinimumValue = Nothing
             Me.txtPayeeName.Name = "txtPayeeName"
             Me.txtPayeeName.OldValue = Nothing
-            Me.txtPayeeName.Size = New System.Drawing.Size(862, 23)
-            Me.txtPayeeName.TabIndex = 13
+            Me.txtPayeeName.Size = New System.Drawing.Size(341, 23)
+            Me.txtPayeeName.TabIndex = 8
             '
             'lblPayee
             '
@@ -323,7 +328,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayee.DisplayOnly = True
             Me.lblPayee.EditingMode = False
             Me.lblPayee.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayee.Location = New System.Drawing.Point(1, 54)
+            Me.lblPayee.Location = New System.Drawing.Point(527, 54)
             Me.lblPayee.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayee.Name = "lblPayee"
             Me.lblPayee.Size = New System.Drawing.Size(48, 17)
@@ -363,7 +368,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
             Me.dtpTransactionDate.Size = New System.Drawing.Size(112, 25)
-            Me.dtpTransactionDate.TabIndex = 2
+            Me.dtpTransactionDate.TabIndex = 0
             Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpTransactionDate.Value = Nothing
             Me.dtpTransactionDate.ValueIsMandatory = False
@@ -436,14 +441,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.Location = New System.Drawing.Point(120, 79)
+            Me.txtNotes.Location = New System.Drawing.Point(120, 80)
             Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNotes.MaximumValue = Nothing
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.Size = New System.Drawing.Size(862, 23)
-            Me.txtNotes.TabIndex = 0
+            Me.txtNotes.TabIndex = 9
             '
             'CLabel2
             '
@@ -477,7 +482,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReferenceNo.Name = "txtReferenceNo"
             Me.txtReferenceNo.OldValue = Nothing
             Me.txtReferenceNo.Size = New System.Drawing.Size(86, 23)
-            Me.txtReferenceNo.TabIndex = 7
+            Me.txtReferenceNo.TabIndex = 1
             '
             'lblCheckNumber
             '
@@ -511,7 +516,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber.Name = "txtCheckNumber"
             Me.txtCheckNumber.OldValue = Nothing
             Me.txtCheckNumber.Size = New System.Drawing.Size(112, 23)
-            Me.txtCheckNumber.TabIndex = 8
+            Me.txtCheckNumber.TabIndex = 2
             '
             'lblAmount
             '
@@ -547,7 +552,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.OldValue = Nothing
             Me.txtAmount.ReadOnly = True
             Me.txtAmount.Size = New System.Drawing.Size(112, 23)
-            Me.txtAmount.TabIndex = 11
+            Me.txtAmount.TabIndex = 3
             Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtAmount.ValueIsNumeric = True
             '
@@ -557,7 +562,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(1, 79)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 80)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
             Me.CLabel1.Size = New System.Drawing.Size(45, 17)
@@ -570,11 +575,11 @@ Namespace PresentationLayer.Views.Forms
             Me.btnSelectAll.DesignerSelected = False
             Me.btnSelectAll.DisplayOnly = True
             Me.btnSelectAll.ImageIndex = 0
-            Me.btnSelectAll.Location = New System.Drawing.Point(3, 562)
+            Me.btnSelectAll.Location = New System.Drawing.Point(3, 563)
             Me.btnSelectAll.Name = "btnSelectAll"
             Me.btnSelectAll.OriginalImageName = Nothing
             Me.btnSelectAll.SecurityKey = ""
-            Me.btnSelectAll.Size = New System.Drawing.Size(90, 24)
+            Me.btnSelectAll.Size = New System.Drawing.Size(90, 23)
             Me.btnSelectAll.TabIndex = 14
             Me.btnSelectAll.Text = "Select All"
             '
@@ -625,12 +630,66 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.Size = New System.Drawing.Size(341, 24)
             Me.cboPayType.SuggestBoxHeight = 200
             Me.cboPayType.SuggestListOrderRule = Nothing
-            Me.cboPayType.TabIndex = 17
+            Me.cboPayType.TabIndex = 6
             Me.cboPayType.TextToSearch = Nothing
             Me.cboPayType.ValueIsMandatory = False
             Me.cboPayType.ValueIsNullable = False
             Me.cboPayType.ValueIsNumeric = False
             Me.cboPayType.ValueMember = "IdNo"
+            '
+            'CLabel4
+            '
+            Me.CLabel4.AutoSize = True
+            Me.CLabel4.DisplayOnly = True
+            Me.CLabel4.EditingMode = False
+            Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel4.Location = New System.Drawing.Point(1, 54)
+            Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel4.Name = "CLabel4"
+            Me.CLabel4.Size = New System.Drawing.Size(111, 17)
+            Me.CLabel4.TabIndex = 18
+            Me.CLabel4.Text = "Petty Cash Acct."
+            Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'cboPcAccountIdNo
+            '
+            Me.cboPcAccountIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPcAccountIdNo.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboPcAccountIdNo, 4)
+            Me.cboPcAccountIdNo.CurrentSearchTerm = ""
+            Me.cboPcAccountIdNo.DefaultValue = Nothing
+            Me.cboPcAccountIdNo.DisplayMember = "Name"
+            Me.cboPcAccountIdNo.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboPcAccountIdNo.DropDownHeight = 200
+            Me.cboPcAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboPcAccountIdNo.EditingMode = True
+            Me.cboPcAccountIdNo.FilterRule = Nothing
+            Me.cboPcAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPcAccountIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboPcAccountIdNo.FormattingEnabled = True
+            Me.cboPcAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPcAccountIdNo.LinkedLabel = Nothing
+            Me.cboPcAccountIdNo.Location = New System.Drawing.Point(120, 54)
+            Me.cboPcAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboPcAccountIdNo.Name = "cboPcAccountIdNo"
+            Me.cboPcAccountIdNo.OldValue = 0
+            Me.cboPcAccountIdNo.OriginalDataSource = Nothing
+            Me.cboPcAccountIdNo.OriginalList = Nothing
+            Me.cboPcAccountIdNo.OverrideDropDownStyleList = False
+            Me.cboPcAccountIdNo.PreviousSearchTerm = Nothing
+            Me.cboPcAccountIdNo.PreviousSelectedIndex = -1
+            Me.cboPcAccountIdNo.PropertySelector = Nothing
+            Me.cboPcAccountIdNo.ReadOnlyCombo = False
+            Me.cboPcAccountIdNo.SearchAnywhere = False
+            Me.cboPcAccountIdNo.Size = New System.Drawing.Size(405, 24)
+            Me.cboPcAccountIdNo.SuggestBoxHeight = 200
+            Me.cboPcAccountIdNo.SuggestListOrderRule = Nothing
+            Me.cboPcAccountIdNo.TabIndex = 7
+            Me.cboPcAccountIdNo.TextToSearch = Nothing
+            Me.cboPcAccountIdNo.ValueIsMandatory = False
+            Me.cboPcAccountIdNo.ValueIsNullable = False
+            Me.cboPcAccountIdNo.ValueIsNumeric = False
+            Me.cboPcAccountIdNo.ValueMember = "IdNo"
             '
             'PettyCashClosingEntry
             '
@@ -693,5 +752,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvPayeeNameAra As CdgvColumnText
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents cboPayType As CaComboBox
+        Friend WithEvents CLabel4 As CLabel
+        Friend WithEvents cboPcAccountIdNo As CaComboBox
     End Class
 End Namespace

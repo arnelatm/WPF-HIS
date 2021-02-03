@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _pcJournals As New List(Of IPcJournalView)
         Private _journalItems As New List(Of IJournalItemView)
+        Private _defaultAccount As Int16
         Private _pcFooter As DgvFooter
 
         Public Sub New()
@@ -34,6 +35,7 @@ Namespace PresentationLayer.Views.Forms
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
             FirstControl = dtpTransactionDate
+            _defaultAccount = MyPresenter.DefaultPcAccount()
             SingleData = True
         End Sub
 
@@ -112,10 +114,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayType As String Implements IPettyCashClosingView.PayType
             Get
-                Return "1"
+                Return cboPayType.GetValue()
             End Get
             Set
-
+                cboPayType.SetValue(Value)
             End Set
         End Property
 
@@ -162,6 +164,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PcAccountIdNo As Int16? Implements IPettyCashClosingView.PcAccountIdNo
+            Get
+                Return cboPcAccountIdNo.GetNullableValue(Of Int16)
+            End Get
+            Set
+                cboPcAccountIdNo.SetValue(Value)
+            End Set
+        End Property
+
         Public Property Posted As Boolean Implements IPettyCashClosingView.Posted
             Get
                 Return False
@@ -198,7 +209,6 @@ Namespace PresentationLayer.Views.Forms
                 Return _journalItems
             End Get
             Set
-                CreateJournalItems()
                 'bsJournalItems.ResetBindings(True)
                 'BindJournalItem()
             End Set
@@ -206,27 +216,9 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Public Sub CreateJournalItems()
-            JournalItems = New List(Of IJournalItemView)
-            Dim x = New JournalItemView
-            x.AccountIdNo = AccountIdNo
-            x.Credit = Amount
-            x.Debit = 0
-            x.Notes = ""
-            x.Sequence = 1
-            x.JournalIdNo = 0
-            JournalItems.Add(x)
-            x.AccountIdNo = 113
-            x.Credit = 0
-            x.Debit = Amount
-            x.Notes = ""
-            x.Sequence = 2
-            x.JournalIdNo = 0
-            JournalItems.Add(x)
-        End Sub
-
         Protected Overrides Sub CreateDataSources()
             cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
+            cboPcAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.PettyCashAccount))
             cboPayType.DataSource = MyPresenter.MakeEnumComboList(Of PayTypeSelection)
         End Sub
 
@@ -274,12 +266,21 @@ Namespace PresentationLayer.Views.Forms
             }
             _pcFooter.ColumnToSum("dgvAmount") = True
             _pcFooter.SetText("DgvPayeeName", "Totals ->")
+
         End Sub
 
         Private Sub PettyCashClosing_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             MyPresenter.GoAddRecord()
             MyPresenter.GetOpenPettyCash()
+            If cboPcAccountIdNo.SelectedValue Is Nothing Or cboPcAccountIdNo.SelectedValue <= 0 Then
+                cboPcAccountIdNo.SelectedValue = _defaultAccount
+            End If
+            If MyPresenter.PcAccountCount = 1 Then
+                cboPcAccountIdNo.DisplayOnly = True
+                cboPcAccountIdNo.TabStop = False
+            End If
             bsPcJournals.ResetBindings(True)
+            cboPcAccountIdNo.Refresh()
             _pcFooter.CalculateTotals()
         End Sub
 
@@ -305,6 +306,10 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End With
         End Sub
+
+        'Private Sub cboPcAccountIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPcAccountIdNo.SelectedIndexChanged
+        '    _pcAccountIdNo = cboPcAccountIdNo.SelectedValue
+        'End Sub
 
     End Class
 

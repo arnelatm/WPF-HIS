@@ -913,7 +913,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Function Save()
         Dim retVal As Integer = 0
-        If EditMode AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then
+        If EditMode AndAlso (Not AddMode) AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then
             Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
         Else
             RaiseEvent BeforeValidate()

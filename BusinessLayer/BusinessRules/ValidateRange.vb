@@ -12,13 +12,12 @@ Namespace BusinessRules
         Private Property Min As Object
         Private Property Max As Object
 
-        Public Sub New(propertyName As String, min As Object, max As Object, [operator] As ValidationOperator,
-                       dataType As ValidationDataType)
+        Public Sub New(propertyName As String, min As Object, max As Object, dataType As ValidationDataType)
             MyBase.New(propertyName)
             Me.Min = min
             Me.Max = max
 
-            Me.Operator = [operator]
+            Me.Operator = [Operator]
             Me.DataType = dataType
 
             [Error] = propertyName & " must be between " & Me.Min.ToString() & " and " & Me.Max.ToString()
@@ -26,7 +25,7 @@ Namespace BusinessRules
 
         Public Sub New(propertyName As String, errorMessage As String, min As Object, max As Object,
                        [operator] As ValidationOperator, dataType As ValidationDataType)
-            Me.New(propertyName, min, max, [operator], dataType)
+            Me.New(propertyName, min, max, dataType)
             [Error] = errorMessage
         End Sub
 
