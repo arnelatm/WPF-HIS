@@ -112,7 +112,7 @@ Namespace PresentationLayer.Presenters
         Public ReadOnly Property DefaultDisbursementAccount As Int16
             Get
                 Dim retVal As String = Nothing
-                If View.AccountIdNo = 0 Then
+                If View.AccountIdNo Is Nothing Or View.AccountIdNo <= 0 Then
                     If CdAccountCount >= 1 Then
                         If JournalCode = "PC" Then
                             retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")

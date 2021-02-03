@@ -36,6 +36,7 @@ Namespace DataLayer.AdoNet
                     "PayeeName," &
                     "PayeeNameAra," &
                     "PaymentType," &
+                    "PayType," &
                     "ReferenceNo," &
                     "TransactionDate" &
                     " FROM PcJournal_View" &
@@ -73,6 +74,7 @@ Namespace DataLayer.AdoNet
             .PayeeName = Extensions.AsString(reader("PayeeName")),
             .PayeeNameAra = Extensions.AsString(reader("PayeeNameAra")),
             .PaymentType = Extensions.AsString(reader("PaymentType")),
+            .PayType = Extensions.AsString(reader("PayType")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
             }

@@ -10,7 +10,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property Applied As Decimal
         Property Cancelled As Boolean
         Property DateCreated As DateTime?
-        Property PayType As String
         Property DiscountAccountIdNo As Int16?
         Property DiscountTaken As Decimal
         Property IdNo As Int32
@@ -20,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayeeName As String
         Property PayeeNameAra As String
         Property PaymentType As String
+        Property PayType As String
         Property PcClosed As Boolean
         Property Posted As Boolean
         Property ReferenceNo As String

@@ -13,13 +13,14 @@ Namespace BusinessLayer
             ' establish business rules
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("TransactionDate"))
-                AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
+                AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationDataType.Date))
+                AddRule(New ValidateContent("Amount", 0, ValidationOperator.GreaterThan, ValidationDataType.Decimal))
                 AddRule(New ValidateRequired("Notes"))
-                AddRule(New ValidateRequired("PaymentType"))
+                AddRule(New ValidateRequired("PayType"))
                 AddRule(New ValidateRequired("AccountIdNo"))
+                AddRule(New ValidateRequired("PcAccountIdNo"))
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateRequired("PayeeName", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
-                AddRule(New ValidateRequired("PayType"))
                 AddRule(New ValidateIfRequired("CheckDate", "PayType", ValidationDataType.String, ValidationOperator.Equal, "2"))
                 AddRule(New ValidateIfRequired("CheckNumber", "PayType", ValidationDataType.String, ValidationOperator.Equal, "2"))
             End If
@@ -33,13 +34,14 @@ Namespace BusinessLayer
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
-        Public Property PayType As String
         Public Property IdNo As Int32
         Public Property Notes As String
         Public Property OrNumber As String
         Public Property PayeeIdNo As Int32?
         Public Property PayeeName As String
         Public Property PaymentType As String
+        Public Property PayType As String
+        Public Property PcAccountIdNo As Int16?
         Public Property PcClosed As Boolean
         Public Property Posted As Boolean
         Public Property ReferenceNo As String

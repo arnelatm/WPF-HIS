@@ -13,13 +13,14 @@
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property DateCreated As DateTime?
-        Public Property PayType As String
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
         Public Property Notes As String
         Public Property PayeeIdNo As Int32?
         Public Property PayeeName As String
         Public Property PaymentType As String
+        Public Property PayType As String
+        Public Property PcAccountIdNo As Int16?
         Public Property PcClosed As Boolean
         Public Property Posted As Boolean
         Public Property ReferenceNo As String

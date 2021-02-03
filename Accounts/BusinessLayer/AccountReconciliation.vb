@@ -15,7 +15,7 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("AccountIdNo"))
                 AddRule(New ValidateRequired("ReconciliationDate"))
-                AddRule(New ValidateRange("ReconciliationDate", Date.MinValue, Date.Today, ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
+                AddRule(New ValidateRange("ReconciliationDate", Date.MinValue, Date.Today, ValidationDataType.Date))
             End If
         End Sub
 

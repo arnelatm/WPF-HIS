@@ -57,7 +57,7 @@ Namespace PresentationLayer.Views.Forms
             _defaultAccount = MyPresenter.DefaultDisbursementAccount
             txtJournalCode.Text = MyPresenter.JournalCode
             FirstControl = cboPaymentType
-            _nfi.NumberDecimalDigits = 2
+            '_nfi.NumberDecimalDigits = 2
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
         End Sub
@@ -440,7 +440,7 @@ Namespace PresentationLayer.Views.Forms
                 cboAccountIdNo.DisplayOnly = True
                 cboAccountIdNo.TabStop = False
             End If
-            If cboAccountIdNo.SelectedValue <= 0 Then
+            If cboAccountIdNo.SelectedValue Is Nothing Or cboAccountIdNo.SelectedValue <= 0 Then
                 cboAccountIdNo.SelectedValue = _defaultAccount
             End If
             If MyPresenter.CdAccountCount = 0 Then

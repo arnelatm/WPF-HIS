@@ -229,7 +229,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.tlpDisbursement.Size = New System.Drawing.Size(984, 592)
+            Me.tlpDisbursement.Size = New System.Drawing.Size(948, 577)
             Me.tlpDisbursement.TabIndex = 5
             '
             'cboPayType
@@ -314,13 +314,15 @@ Namespace PresentationLayer.Views.Forms
             Me.btnViewGL.Name = "btnViewGL"
             Me.btnViewGL.OriginalImageName = Nothing
             Me.btnViewGL.SecurityKey = ""
-            Me.btnViewGL.Size = New System.Drawing.Size(141, 40)
+            Me.btnViewGL.Size = New System.Drawing.Size(141, 25)
             Me.btnViewGL.TabIndex = 24
             Me.btnViewGL.TabStop = False
             Me.btnViewGL.Text = "View Journal Entry"
             '
             'DataGridViewJournalItems
             '
+            Me.DataGridViewJournalItems.AllowUserToAddRows = False
+            Me.DataGridViewJournalItems.AllowUserToDeleteRows = False
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewJournalItems.AutoGenerateColumns = False
@@ -351,7 +353,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
             Me.DataGridViewJournalItems.ShowFooter = False
             Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewJournalItems.Size = New System.Drawing.Size(978, 325)
+            Me.DataGridViewJournalItems.Size = New System.Drawing.Size(939, 325)
             Me.DataGridViewJournalItems.TabIndex = 15
             '
             'dgvSequence
@@ -832,19 +834,18 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatAmount.CustomFormat = "N2"
             Me.txtVatAmount.DataBoundControl = True
             Me.txtVatAmount.DisplayOnly = True
-            Me.txtVatAmount.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtVatAmount.EditingMode = True
             Me.txtVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
             Me.txtVatAmount.LinkedLabel = Me.lblApplied
-            Me.txtVatAmount.Location = New System.Drawing.Point(835, 1)
+            Me.txtVatAmount.Location = New System.Drawing.Point(844, 1)
             Me.txtVatAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtVatAmount.MaximumValue = Nothing
             Me.txtVatAmount.MinimumValue = Nothing
             Me.txtVatAmount.Name = "txtVatAmount"
             Me.txtVatAmount.OldValue = Nothing
             Me.txtVatAmount.ReadOnly = True
-            Me.txtVatAmount.Size = New System.Drawing.Size(148, 23)
+            Me.txtVatAmount.Size = New System.Drawing.Size(100, 23)
             Me.txtVatAmount.TabIndex = 17
             Me.txtVatAmount.TabStop = False
             Me.txtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -875,19 +876,18 @@ Namespace PresentationLayer.Views.Forms
             Me.txtApplied.CustomFormat = "N2"
             Me.txtApplied.DataBoundControl = True
             Me.txtApplied.DisplayOnly = True
-            Me.txtApplied.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtApplied.EditingMode = True
             Me.txtApplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtApplied.ForeColor = System.Drawing.Color.Black
             Me.txtApplied.LinkedLabel = Me.lblApplied
-            Me.txtApplied.Location = New System.Drawing.Point(835, 28)
+            Me.txtApplied.Location = New System.Drawing.Point(844, 28)
             Me.txtApplied.Margin = New System.Windows.Forms.Padding(1)
             Me.txtApplied.MaximumValue = Nothing
             Me.txtApplied.MinimumValue = Nothing
             Me.txtApplied.Name = "txtApplied"
             Me.txtApplied.OldValue = Nothing
             Me.txtApplied.ReadOnly = True
-            Me.txtApplied.Size = New System.Drawing.Size(148, 23)
+            Me.txtApplied.Size = New System.Drawing.Size(100, 23)
             Me.txtApplied.TabIndex = 18
             Me.txtApplied.TabStop = False
             Me.txtApplied.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -902,19 +902,18 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnapplied.CustomFormat = "N2"
             Me.txtUnapplied.DataBoundControl = True
             Me.txtUnapplied.DisplayOnly = True
-            Me.txtUnapplied.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtUnapplied.EditingMode = True
             Me.txtUnapplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtUnapplied.ForeColor = System.Drawing.Color.Black
             Me.txtUnapplied.LinkedLabel = Me.CLabel2
-            Me.txtUnapplied.Location = New System.Drawing.Point(835, 55)
+            Me.txtUnapplied.Location = New System.Drawing.Point(844, 55)
             Me.txtUnapplied.Margin = New System.Windows.Forms.Padding(1)
             Me.txtUnapplied.MaximumValue = Nothing
             Me.txtUnapplied.MinimumValue = Nothing
             Me.txtUnapplied.Name = "txtUnapplied"
             Me.txtUnapplied.OldValue = Nothing
             Me.txtUnapplied.ReadOnly = True
-            Me.txtUnapplied.Size = New System.Drawing.Size(148, 23)
+            Me.txtUnapplied.Size = New System.Drawing.Size(100, 23)
             Me.txtUnapplied.TabIndex = 19
             Me.txtUnapplied.TabStop = False
             Me.txtUnapplied.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -945,19 +944,18 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDiscountTaken.CustomFormat = "N2"
             Me.txtDiscountTaken.DataBoundControl = True
             Me.txtDiscountTaken.DisplayOnly = True
-            Me.txtDiscountTaken.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtDiscountTaken.EditingMode = True
             Me.txtDiscountTaken.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDiscountTaken.ForeColor = System.Drawing.Color.Black
             Me.txtDiscountTaken.LinkedLabel = Me.lblDiscountTaken
-            Me.txtDiscountTaken.Location = New System.Drawing.Point(835, 82)
+            Me.txtDiscountTaken.Location = New System.Drawing.Point(844, 82)
             Me.txtDiscountTaken.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDiscountTaken.MaximumValue = Nothing
             Me.txtDiscountTaken.MinimumValue = Nothing
             Me.txtDiscountTaken.Name = "txtDiscountTaken"
             Me.txtDiscountTaken.OldValue = Nothing
             Me.txtDiscountTaken.ReadOnly = True
-            Me.txtDiscountTaken.Size = New System.Drawing.Size(148, 23)
+            Me.txtDiscountTaken.Size = New System.Drawing.Size(100, 23)
             Me.txtDiscountTaken.TabIndex = 20
             Me.txtDiscountTaken.TabStop = False
             Me.txtDiscountTaken.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -992,7 +990,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply.Name = "btnAutoApply"
             Me.btnAutoApply.OriginalImageName = Nothing
             Me.btnAutoApply.SecurityKey = ""
-            Me.btnAutoApply.Size = New System.Drawing.Size(132, 40)
+            Me.btnAutoApply.Size = New System.Drawing.Size(132, 25)
             Me.btnAutoApply.TabIndex = 25
             Me.btnAutoApply.TabStop = False
             Me.btnAutoApply.Text = "Auto Apply Invoices"
@@ -1024,7 +1022,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDjOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewDjOiItems.FirstRowDeletionEnabled = False
             Me.DataGridViewDjOiItems.FirstRowInsertionEnabled = False
-            Me.DataGridViewDjOiItems.Location = New System.Drawing.Point(987, 218)
+            Me.DataGridViewDjOiItems.Location = New System.Drawing.Point(948, 218)
             Me.DataGridViewDjOiItems.Name = "DataGridViewDjOiItems"
             Me.DataGridViewDjOiItems.ReadOnly = True
             Me.DataGridViewDjOiItems.SequenceColumn = "dgvSequencePcsOi"
@@ -1330,13 +1328,12 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.SetColumnSpan(Me.btnPrintCheck, 2)
             Me.btnPrintCheck.DesignerSelected = False
             Me.btnPrintCheck.DisplayOnly = True
-            Me.btnPrintCheck.Dock = System.Windows.Forms.DockStyle.Fill
             Me.btnPrintCheck.ImageIndex = 0
             Me.btnPrintCheck.Location = New System.Drawing.Point(791, 549)
             Me.btnPrintCheck.Name = "btnPrintCheck"
             Me.btnPrintCheck.OriginalImageName = Nothing
             Me.btnPrintCheck.SecurityKey = ""
-            Me.btnPrintCheck.Size = New System.Drawing.Size(190, 40)
+            Me.btnPrintCheck.Size = New System.Drawing.Size(151, 25)
             Me.btnPrintCheck.TabIndex = 291
             Me.btnPrintCheck.TabStop = False
             Me.btnPrintCheck.Text = "Print Check"
@@ -1528,7 +1525,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.ForeColor = System.Drawing.Color.Black
             Me.chkCancelled.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkCancelled.LinkedLabel = Me.lblCancelled
-            Me.chkCancelled.Location = New System.Drawing.Point(835, 108)
+            Me.chkCancelled.Location = New System.Drawing.Point(844, 108)
             Me.chkCancelled.Margin = New System.Windows.Forms.Padding(1)
             Me.chkCancelled.Name = "chkCancelled"
             Me.chkCancelled.NoLabel = True
@@ -1646,7 +1643,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.ForeColor = System.Drawing.Color.Black
             Me.chkPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkPosted.LinkedLabel = Me.lblPosted
-            Me.chkPosted.Location = New System.Drawing.Point(835, 164)
+            Me.chkPosted.Location = New System.Drawing.Point(844, 164)
             Me.chkPosted.Margin = New System.Windows.Forms.Padding(1)
             Me.chkPosted.Name = "chkPosted"
             Me.chkPosted.NoLabel = True
@@ -1686,7 +1683,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPcClosed.ForeColor = System.Drawing.Color.Black
             Me.chkPcClosed.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkPcClosed.LinkedLabel = Me.lblPcClosed
-            Me.chkPcClosed.Location = New System.Drawing.Point(835, 137)
+            Me.chkPcClosed.Location = New System.Drawing.Point(844, 137)
             Me.chkPcClosed.Margin = New System.Windows.Forms.Padding(1)
             Me.chkPcClosed.Name = "chkPcClosed"
             Me.chkPcClosed.NoLabel = True
@@ -1703,7 +1700,7 @@ Namespace PresentationLayer.Views.Forms
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-            Me.ClientSize = New System.Drawing.Size(988, 645)
+            Me.ClientSize = New System.Drawing.Size(947, 630)
             Me.Controls.Add(Me.tlpDisbursement)
             Me.MinimumSize = New System.Drawing.Size(945, 590)
             Me.Name = "DisbursementJournalEntry"

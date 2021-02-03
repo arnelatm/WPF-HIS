@@ -12,12 +12,13 @@ Namespace PresentationLayer.Views.Interfaces
         Property CheckDate As Date?
         Property CheckNumber As String
         Property DateCreated As DateTime?
-        Property PayType As String
         Property IdNo As Int32
         Property Notes As String
         Property PayeeIdNo As Int32?
         Property PayeeName As String
         Property PaymentType As String
+        Property PayType As String
+        Property PcAccountIdNo As Int16?
         Property PcClosed As Boolean
         Property Posted As Boolean
         Property ReferenceNo As String
