@@ -27,7 +27,7 @@ Namespace PresentationLayer.Presenters
             DataModel = New PettyCashClosingModel()
             Dim djArgs = {"CdJournalItem_View", "", "InsertCdJournalItemTVP"}
             _journalItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
-            djArgs = {"CdJournalItem_View", "UpdatePcJournalTVP", ""}
+            djArgs = {"CdJournalItem_View", "UpdatePcJournalsTVP", ""}
             _pcJournalsModel = New ModelAccounts("PcJournals", Nothing, djArgs)
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)

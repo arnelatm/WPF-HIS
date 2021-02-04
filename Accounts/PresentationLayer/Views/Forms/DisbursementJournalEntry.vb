@@ -123,6 +123,20 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property CdJournalIdNo As Int32? Implements IDisbursementJournalView.CdJournalIdNo
+            Get
+                If txtCdJournalIdNo.Text <> "" Then
+                    Return Convert.ToInt16(txtCdJournalIdNo.Text)
+                Else
+                    Return 0
+                End If
+            End Get
+            Set
+                txtCdJournalIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
+
+
         Public Property CheckDate As DateTime? Implements IDisbursementJournalView.CheckDate
             Get
                 Return dtpCheckDate.Value

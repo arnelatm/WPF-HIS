@@ -59,7 +59,8 @@ Namespace PresentationLayer.Views.Forms
         Public Property Applied As Decimal Implements IDisbursementJournalView.Applied
 
         Public Property Cancelled As Boolean Implements IDisbursementJournalView.Cancelled
-        'Public Property CdJournalIdNo As Int32? Implements IDisbursementJournalView.CdJournalIdNo
+
+        Public Property CdJournalIdNo As Int32? Implements IDisbursementJournalView.CdJournalIdNo
 
         Public Property CheckDate As DateTime? Implements IDisbursementJournalView.CheckDate
             Get

@@ -259,7 +259,7 @@ Namespace DataLayer.AdoNet
             .PayeeIdNo = Extensions.AsNullable(Of Int32?)(reader("PayeeIdNo")),
             .PayeeName = Extensions.AsString(reader("PayeeName")),
             .PaymentType = Extensions.AsString(reader("PaymentType")),
-            .PcClosed = Extensions.AsBool(reader("Cancelled")),
+            .PcClosed = Extensions.AsBool(reader("PcClosed")),
             .Posted = Extensions.AsBool(reader("Posted")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
