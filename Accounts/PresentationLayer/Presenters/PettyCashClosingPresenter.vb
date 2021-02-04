@@ -14,7 +14,9 @@ Namespace PresentationLayer.Presenters
 
         Private _jiFooter As DgvFooter
         Protected DtInsertTable As New DataTable
+        Protected DtUpdateTable As New DataTable
         Private _journalItemModel
+        Private _pcJournalsModel
 
         Public Sub New(view As IView)
             MyBase.New(view)
@@ -23,8 +25,10 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New PettyCashClosingModel()
             DataModel = New PettyCashClosingModel()
-            Dim djArgs = {"CdJournalItem_View", "UpdateCdJournalItemTVP", "InsertCdJournalItemTVP"}
+            Dim djArgs = {"CdJournalItem_View", "", "InsertCdJournalItemTVP"}
             _journalItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
+            djArgs = {"CdJournalItem_View", "UpdatePcJournalTVP", ""}
+            _pcJournalsModel = New ModelAccounts("PcJournals", Nothing, djArgs)
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 
@@ -36,6 +40,12 @@ Namespace PresentationLayer.Presenters
                                             {"RevCostCenterIdNo", GetType(Int16)},
                                             {"Sequence", GetType(Int16)}
                                             })
+
+            CreateDataTable(DtUpdateTable, {{"CdJournalIdNo", GetType(Int32)},
+                                            {"IdNo", GetType(Int32)},
+                                            {"PcClosed", GetType(Boolean)}
+                                            })
+
         End Sub
 
         Public Sub GetOpenPettyCash()
@@ -91,6 +101,17 @@ Namespace PresentationLayer.Presenters
                 DtInsertTable.Rows.Add(workRow)
                 nRowCount += 1
             Next
+            workRow = Nothing
+            For Each dataView In View.PcJournals
+                If dataView.PcClosed Then
+                    Dim idNo As Integer = dataView.IdNo
+                    workRow = DtUpdateTable.NewRow()
+                    workRow("CdJournalIdNo") = View.IdNo
+                    workRow("IdNo") = dataView.IdNo
+                    workRow("PcClosed") = True
+                    DtUpdateTable.Rows.Add(workRow)
+                End If
+            Next
         End Sub
 
         Public Sub CreateJournalItems()
@@ -113,32 +134,32 @@ Namespace PresentationLayer.Presenters
             View.JournalItems.Add(x)
         End Sub
 
-        Private Sub MakeJournalItem()
-            Dim aAccountIdNo As Int16() = {}
-            Dim aAmount() As Decimal = {}
-            Dim aAdded() As Boolean = {}
-            View.JournalItems.Clear()
-            Dim item As New JournalItemView With {
-                    .JournalIdNo = View.IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = View.AccountIdNo,
-                    .Credit = If(View.Amount < 0, 0, View.Amount),
-                    .Debit = If(View.Amount < 0, View.Amount * -1, 0),
-                    .RevCostCenterIdNo = 0,
-                    .Notes = ""
-                    }
-            View.JournalItems.Add(item)
-            item = New JournalItemView With {
-                    .JournalIdNo = View.IdNo,
-                    .Sequence = 1,
-                    .AccountIdNo = 113,
-                    .Credit = If(View.Amount < 0, View.Amount * -1, 0),
-                    .Debit = If(View.Amount < 0, 0, View.Amount),
-                    .RevCostCenterIdNo = 0,
-                    .Notes = ""
-                    }
-            View.JournalItems.Add(item)
-        End Sub
+        'Private Sub MakeJournalItem()
+        '    Dim aAccountIdNo As Int16() = {}
+        '    Dim aAmount() As Decimal = {}
+        '    Dim aAdded() As Boolean = {}
+        '    View.JournalItems.Clear()
+        '    Dim item As New JournalItemView With {
+        '            .JournalIdNo = View.IdNo,
+        '            .Sequence = 1,
+        '            .AccountIdNo = View.AccountIdNo,
+        '            .Credit = If(View.Amount < 0, 0, View.Amount),
+        '            .Debit = If(View.Amount < 0, View.Amount * -1, 0),
+        '            .RevCostCenterIdNo = 0,
+        '            .Notes = ""
+        '            }
+        '    View.JournalItems.Add(item)
+        '    item = New JournalItemView With {
+        '            .JournalIdNo = View.IdNo,
+        '            .Sequence = 1,
+        '            .AccountIdNo = 113,
+        '            .Credit = If(View.Amount < 0, View.Amount * -1, 0),
+        '            .Debit = If(View.Amount < 0, 0, View.Amount),
+        '            .RevCostCenterIdNo = 0,
+        '            .Notes = ""
+        '            }
+        '    View.JournalItems.Add(item)
+        'End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer
@@ -147,6 +168,9 @@ Namespace PresentationLayer.Presenters
                 row.Item("JournalIdNo") = passedValue
             Next
             retVal = _journalItemModel.InsertTvp(DtInsertTable)
+            If retVal >= 0 Then
+                retVal = _pcJournalsModel.DelUpdateTvp(DtUpdateTable, passedValue)
+            End If
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
                 View.IdNo = passedValue
                 retVal = UpdateGlReferenceNumber(passedValue)
