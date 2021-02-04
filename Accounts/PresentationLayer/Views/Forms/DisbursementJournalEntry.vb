@@ -40,8 +40,6 @@ Namespace PresentationLayer.Views.Forms
                 MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
                 DisplayPrintCheckButton(PayType)
                 Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
-                chkPcClosed.Visible = False
-                lblPcClosed.Visible = False
             Else
                 ViewDisplayName = "PcJournalEntry"
                 tableName = "PcJournal"
@@ -58,8 +56,10 @@ Namespace PresentationLayer.Views.Forms
             txtJournalCode.Text = MyPresenter.JournalCode
             FirstControl = cboPaymentType
             '_nfi.NumberDecimalDigits = 2
+            Height = 761
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
+
         End Sub
 
         Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
@@ -548,7 +548,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectionChangeCommitted, cboPaymentType.Validated
+        Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.Validated, cboPaymentType.SelectionChangeCommitted
             SetPayeeDataSource(PaymentType)
             If OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
@@ -562,7 +562,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateDisplay()
         End Sub
 
-        Private Sub CboPayType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayType.SelectionChangeCommitted, cboPayType.Validated
+        Private Sub CboPayType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayType.Validated, cboPayType.SelectionChangeCommitted
             DisplayPrintCheckButton(cboPayType.SelectedValue)
             DisplayCheckInfo()
         End Sub
@@ -591,7 +591,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectionChangeCommitted, cboAccountIdNo.Validated
+        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
             UpdateFirstLine()
         End Sub
 
@@ -888,6 +888,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DataGridViewDjOiItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDjOiItems.CellContentClick
+
+        End Sub
+
+        Private Sub chkPcClosed_CheckedChanged(sender As Object, e As EventArgs) Handles chkPcClosed.CheckedChanged
 
         End Sub
     End Class

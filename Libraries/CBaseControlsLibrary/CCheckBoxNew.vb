@@ -19,6 +19,7 @@ Public Class CCheckBoxNew
         UseVisualStyleBackColor = True
         FlatStyle = FlatStyle.Flat
         TextAlign = ContentAlignment.MiddleRight
+        BackColor = System.Drawing.Color.Transparent
         Size = New Size(24, 24)
         Margin = New Padding(1)
         FlatAppearance.BorderSize = 0
@@ -41,11 +42,11 @@ Public Class CCheckBoxNew
             If value Then
                 Me.Enabled = False
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
                 Me.Enabled = True
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                'BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
         End Set
     End Property
@@ -77,16 +78,16 @@ Public Class CCheckBoxNew
                 If DisplayOnly Then
                     AutoCheck = False
                     ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Else
                     AutoCheck = True
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    'BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
             Else
                 AutoCheck = False
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End Set
     End Property
@@ -120,10 +121,10 @@ Public Class CCheckBoxNew
         _oldValue = Text
         If EditingMode And Not DisplayOnly Then
             ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+            'BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
         Else
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
@@ -132,10 +133,10 @@ Public Class CCheckBoxNew
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
         If EditingMode And Not DisplayOnly Then
             ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            ' BackColor = GlobalVariables.DefaultFormControlBackgroundColor
         Else
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
