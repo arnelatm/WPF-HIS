@@ -11,6 +11,7 @@
         Public Property Applied As Decimal
         Public Property DjOiItems As List(Of DjOiItemModel)
         Public Property Cancelled As Boolean
+        Public Property CdJournalIdNo As Int32?
         Public Property CheckDate As Date?
         Public Property CheckNumber As String
         Public Property DateCreated As DateTime?

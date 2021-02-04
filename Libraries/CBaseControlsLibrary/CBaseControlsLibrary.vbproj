@@ -92,6 +92,9 @@
     </Compile>
     <Compile Include="CButtonActionList.vb" />
     <Compile Include="CButtonDesigner.vb" />
+    <Compile Include="CCheckBoxNew.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="cDataGridViewWithFooter.vb">
       <SubType>Component</SubType>
     </Compile>

@@ -65,6 +65,7 @@ Namespace DataLayer.AdoNet
                     "Amount," &
                     "Applied," &
                     "Cancelled," &
+                    "CdJournalIdNo," &
                     "DateCreated," &
                     "DiscountAccountIdNo," &
                     "DiscountTaken," &
@@ -130,6 +131,7 @@ Namespace DataLayer.AdoNet
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
                     "Cancelled     = @Cancelled," &
+                    "CdJournalIdNo = @CdJournalIdNo," &
                     "DiscountAccountIdNo = @DiscountAccountIdNo," &
                     "DiscountTaken = @DiscountTaken," &
                     "Notes         = @Notes," &
@@ -247,6 +249,7 @@ Namespace DataLayer.AdoNet
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
+            .CdJournalIdNo = Extensions.AsInt(Of Int32)(reader("CdJournalIdNO")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .DiscountAccountIdNo = Extensions.AsNullable(Of Int16?)(reader("DiscountAccountIdNo")),
             .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
@@ -298,6 +301,7 @@ Namespace DataLayer.AdoNet
                                     "@Amount", disbursementJournal.Amount,
                                     "@Applied", disbursementJournal.Applied,
                                     "@Cancelled", disbursementJournal.Cancelled,
+                                    "@CdJournalIdNo", disbursementJournal.CdJournalIdNo,
                                     "@DateCreated", disbursementJournal.DateCreated,
                                     "@DiscountAccountIdNo", disbursementJournal.DiscountAccountIdNo,
                                     "@DiscountTaken", disbursementJournal.DiscountTaken,

@@ -45,8 +45,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of PcJournal).DelUpdateTvp
-            Return 0
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, cdJournalIdNo As Integer) As Integer Implements IDaoChild(Of PcJournal).DelUpdateTvp
+            Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", cdJournalIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of PcJournal).InsertTvp
