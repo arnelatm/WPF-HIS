@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Amount As Decimal
         Property Applied As Decimal
         Property Cancelled As Boolean
+        Property CdJournalIdNo As Int32?
         Property CheckDate As Date?
         Property CheckNumber As String
         Property DateCreated As DateTime?

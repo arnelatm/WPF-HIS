@@ -125,6 +125,8 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnPrintCheck = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tlpDisbursement.SuspendLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -199,11 +201,13 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.Controls.Add(Me.dtpTransactionDate, 8, 0)
             Me.tlpDisbursement.Controls.Add(Me.lblSupplierIdNo, 0, 2)
             Me.tlpDisbursement.Controls.Add(Me.CLabel2, 9, 2)
-            Me.tlpDisbursement.Controls.Add(Me.chkPosted, 9, 4)
-            Me.tlpDisbursement.Controls.Add(Me.chkCancelled, 10, 4)
-            Me.tlpDisbursement.Controls.Add(Me.chkPcClosed, 11, 4)
-            Me.tlpDisbursement.Controls.Add(Me.lblDateCreated, 9, 6)
-            Me.tlpDisbursement.Controls.Add(Me.dtpDateCreated, 10, 6)
+            Me.tlpDisbursement.Controls.Add(Me.chkPosted, 9, 6)
+            Me.tlpDisbursement.Controls.Add(Me.chkCancelled, 10, 6)
+            Me.tlpDisbursement.Controls.Add(Me.chkPcClosed, 11, 6)
+            Me.tlpDisbursement.Controls.Add(Me.lblDateCreated, 9, 5)
+            Me.tlpDisbursement.Controls.Add(Me.dtpDateCreated, 10, 5)
+            Me.tlpDisbursement.Controls.Add(Me.lblCdJournalIdNo, 9, 4)
+            Me.tlpDisbursement.Controls.Add(Me.txtCdJournalIdNo, 11, 4)
             Me.tlpDisbursement.Location = New System.Drawing.Point(0, 53)
             Me.tlpDisbursement.Name = "tlpDisbursement"
             Me.tlpDisbursement.Padding = New System.Windows.Forms.Padding(10)
@@ -1475,13 +1479,14 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.chkPosted.ForeColor = System.Drawing.Color.Black
             Me.chkPosted.LinkedLabel = Nothing
-            Me.chkPosted.Location = New System.Drawing.Point(855, 118)
+            Me.chkPosted.Location = New System.Drawing.Point(855, 174)
             Me.chkPosted.Margin = New System.Windows.Forms.Padding(1)
             Me.chkPosted.Name = "chkPosted"
             Me.chkPosted.NoLabel = True
             Me.chkPosted.OldValue = Nothing
             Me.chkPosted.Size = New System.Drawing.Size(56, 17)
             Me.chkPosted.TabIndex = 293
+            Me.chkPosted.TabStop = False
             Me.chkPosted.Text = "Posted"
             Me.chkPosted.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.chkPosted.UseVisualStyleBackColor = False
@@ -1496,13 +1501,14 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.chkCancelled.ForeColor = System.Drawing.Color.Black
             Me.chkCancelled.LinkedLabel = Nothing
-            Me.chkCancelled.Location = New System.Drawing.Point(926, 118)
+            Me.chkCancelled.Location = New System.Drawing.Point(926, 174)
             Me.chkCancelled.Margin = New System.Windows.Forms.Padding(1)
             Me.chkCancelled.Name = "chkCancelled"
             Me.chkCancelled.NoLabel = True
             Me.chkCancelled.OldValue = Nothing
             Me.chkCancelled.Size = New System.Drawing.Size(70, 17)
             Me.chkCancelled.TabIndex = 294
+            Me.chkCancelled.TabStop = False
             Me.chkCancelled.Text = "Cancelled"
             Me.chkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.chkCancelled.UseVisualStyleBackColor = False
@@ -1517,13 +1523,14 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPcClosed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.chkPcClosed.ForeColor = System.Drawing.Color.Black
             Me.chkPcClosed.LinkedLabel = Nothing
-            Me.chkPcClosed.Location = New System.Drawing.Point(998, 118)
+            Me.chkPcClosed.Location = New System.Drawing.Point(998, 174)
             Me.chkPcClosed.Margin = New System.Windows.Forms.Padding(1)
             Me.chkPcClosed.Name = "chkPcClosed"
             Me.chkPcClosed.NoLabel = True
             Me.chkPcClosed.OldValue = Nothing
             Me.chkPcClosed.Size = New System.Drawing.Size(61, 17)
             Me.chkPcClosed.TabIndex = 295
+            Me.chkPcClosed.TabStop = False
             Me.chkPcClosed.Text = "Closed?"
             Me.chkPcClosed.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.chkPcClosed.UseVisualStyleBackColor = False
@@ -1534,7 +1541,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated.EditingMode = False
             Me.lblDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
             Me.lblDateCreated.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDateCreated.Location = New System.Drawing.Point(855, 174)
+            Me.lblDateCreated.Location = New System.Drawing.Point(855, 147)
             Me.lblDateCreated.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDateCreated.Name = "lblDateCreated"
             Me.lblDateCreated.Size = New System.Drawing.Size(69, 25)
@@ -1553,7 +1560,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated.EditsAllowed = False
             Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
             Me.dtpDateCreated.LinkedLabel = Nothing
-            Me.dtpDateCreated.Location = New System.Drawing.Point(935, 174)
+            Me.dtpDateCreated.Location = New System.Drawing.Point(935, 147)
             Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(10, 1, 1, 1)
             Me.dtpDateCreated.Name = "dtpDateCreated"
             Me.dtpDateCreated.ReadOnlyDp = True
@@ -1623,6 +1630,41 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Size = New System.Drawing.Size(1111, 34)
             Me.CFlowLayout1.TabIndex = 6
+            '
+            'lblCdJournalIdNo
+            '
+            Me.lblCdJournalIdNo.AutoSize = True
+            Me.tlpDisbursement.SetColumnSpan(Me.lblCdJournalIdNo, 2)
+            Me.lblCdJournalIdNo.DisplayOnly = True
+            Me.lblCdJournalIdNo.EditingMode = False
+            Me.lblCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblCdJournalIdNo.Location = New System.Drawing.Point(855, 118)
+            Me.lblCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblCdJournalIdNo.Name = "lblCdJournalIdNo"
+            Me.lblCdJournalIdNo.Size = New System.Drawing.Size(121, 17)
+            Me.lblCdJournalIdNo.TabIndex = 296
+            Me.lblCdJournalIdNo.Text = "Disbursement No."
+            Me.lblCdJournalIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtCdJournalIdNo
+            '
+            Me.txtCdJournalIdNo.BackColor = System.Drawing.SystemColors.ControlLight
+            Me.txtCdJournalIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtCdJournalIdNo.ComputedValue = False
+            Me.txtCdJournalIdNo.CustomFormat = Nothing
+            Me.txtCdJournalIdNo.DataBoundControl = True
+            Me.txtCdJournalIdNo.EditingMode = True
+            Me.txtCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtCdJournalIdNo.LinkedLabel = Nothing
+            Me.txtCdJournalIdNo.Location = New System.Drawing.Point(998, 118)
+            Me.txtCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtCdJournalIdNo.MaximumValue = Nothing
+            Me.txtCdJournalIdNo.MinimumValue = Nothing
+            Me.txtCdJournalIdNo.Name = "txtCdJournalIdNo"
+            Me.txtCdJournalIdNo.OldValue = Nothing
+            Me.txtCdJournalIdNo.Size = New System.Drawing.Size(100, 23)
+            Me.txtCdJournalIdNo.TabIndex = 297
+            Me.txtCdJournalIdNo.TabStop = False
             '
             'DisbursementJournalEntry
             '
@@ -1742,5 +1784,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkCancelled As CCheckBoxNew
         Friend WithEvents chkPcClosed As CCheckBoxNew
         Friend WithEvents CFlowLayout1 As CFlowLayout
+        Friend WithEvents lblCdJournalIdNo As CLabel
+        Friend WithEvents txtCdJournalIdNo As CTextBox
     End Class
 End Namespace

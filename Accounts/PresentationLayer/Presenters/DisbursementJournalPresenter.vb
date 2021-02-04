@@ -165,6 +165,17 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
+        Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
+            Dim type As Type = View.GetType
+            If JournalCode = "PC" AndAlso type.GetProperty("PcClosed") IsNot Nothing Then
+                Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
+                If cPcClosed Then
+                    Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed", $"This record has already been closed. Edits not allowed!", "Closed Petty Cash")
+                    CancelEdit = True
+                End If
+            End If
+        End Sub
+
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
             If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 View.TotalDebits = 0

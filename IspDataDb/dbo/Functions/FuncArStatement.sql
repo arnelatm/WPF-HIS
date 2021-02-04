@@ -22,7 +22,7 @@ RETURN
            dbo.ArDetails_View.CustomerIdNo, dbo.ArDetails_View.InvoiceNo, dbo.ArDetails_View.TransactionDate, dbo.ArDetails_View.ReferenceNo, 
            dbo.ArDetails_View.TransactionType, dbo.ArDetails_View.MainNote
 	FROM   dbo.ArDetails_View INNER JOIN dbo.Account ON dbo.ArDetails_View.AccountIdNo = dbo.Account.IDNo
-	WHERE  (dbo.Account.SpecialAccount = 'AR' or dbo.Account.SpecialAccount='SD') and CustomerIDNO=@CustomerIdNo AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<=@EndingDate
+	WHERE  (dbo.Account.SpecialAccount = 'AR' or dbo.Account.SpecialAccount='SD') and CustomerIDNO=@CustomerIdNo AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<@EndingDate
 	Group By dbo.ArDetails_View.JournalCode, dbo.ArDetails_View.JournalIdNo,dbo.ArDetails_View.Notes, dbo.ArDetails_View.CustomerIdNo, dbo.ArDetails_View.InvoiceNo, dbo.ArDetails_View.TransactionDate, dbo.ArDetails_View.ReferenceNo, 
              dbo.ArDetails_View.TransactionType, dbo.ArDetails_View.MainNote)
 	Union
@@ -30,7 +30,7 @@ RETURN
            dbo.ArDetails_View.CustomerIdNo, dbo.ArDetails_View.InvoiceNo, dbo.ArDetails_View.TransactionDate, dbo.ArDetails_View.ReferenceNo, 
            dbo.ArDetails_View.TransactionType, dbo.ArDetails_View.MainNote
 	FROM   dbo.ArDetails_View INNER JOIN dbo.Account ON dbo.ArDetails_View.AccountIdNo = dbo.Account.IDNo
-	WHERE  dbo.Account.SpecialAccount='SD' and CustomerIDNO=@CustomerIdNo  AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<=@EndingDate
+	WHERE  dbo.Account.SpecialAccount='SD' and CustomerIDNO=@CustomerIdNo  AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<@EndingDate
 	Group By dbo.ArDetails_View.JournalCode, dbo.ArDetails_View.JournalIdNo,dbo.ArDetails_View.Notes, dbo.ArDetails_View.CustomerIdNo, dbo.ArDetails_View.InvoiceNo, dbo.ArDetails_View.TransactionDate, dbo.ArDetails_View.ReferenceNo, 
              dbo.ArDetails_View.TransactionType, dbo.ArDetails_View.MainNote
 	)
