@@ -73,6 +73,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("RptForThePeriod", "{reportName} for the period {beginningDate} to {endingDate}", "")
         Messaging.AddMessage("RptAging", "Aging of {report} as of {endingDate}", "")
         Messaging.AddMessage("MsgDatesCannotBeEmpty", "Dates cannot be empty, please enter the dates", "Invalid Enry")
+        Messaging.AddMessage("MsgDeleteEntryNotAllowed", "Sorry, deletion of {description} entries not allowed!", "Delete Error")
+
     End Sub
 
     'Public Shared Sub CreateEnums()

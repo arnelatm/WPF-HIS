@@ -121,12 +121,12 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPcClosed = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.lblCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnPrintCheck = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.lblCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tlpDisbursement.SuspendLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1575,6 +1575,42 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated.ValueIsMandatory = False
             Me.dtpDateCreated.ValueIsNullable = False
             '
+            'lblCdJournalIdNo
+            '
+            Me.lblCdJournalIdNo.AutoSize = True
+            Me.tlpDisbursement.SetColumnSpan(Me.lblCdJournalIdNo, 2)
+            Me.lblCdJournalIdNo.DisplayOnly = True
+            Me.lblCdJournalIdNo.EditingMode = False
+            Me.lblCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblCdJournalIdNo.Location = New System.Drawing.Point(855, 118)
+            Me.lblCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblCdJournalIdNo.Name = "lblCdJournalIdNo"
+            Me.lblCdJournalIdNo.Size = New System.Drawing.Size(121, 17)
+            Me.lblCdJournalIdNo.TabIndex = 296
+            Me.lblCdJournalIdNo.Text = "Disbursement No."
+            Me.lblCdJournalIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtCdJournalIdNo
+            '
+            Me.txtCdJournalIdNo.BackColor = System.Drawing.Color.White
+            Me.txtCdJournalIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtCdJournalIdNo.ComputedValue = False
+            Me.txtCdJournalIdNo.CustomFormat = Nothing
+            Me.txtCdJournalIdNo.DataBoundControl = True
+            Me.txtCdJournalIdNo.EditingMode = True
+            Me.txtCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtCdJournalIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtCdJournalIdNo.LinkedLabel = Nothing
+            Me.txtCdJournalIdNo.Location = New System.Drawing.Point(998, 118)
+            Me.txtCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtCdJournalIdNo.MaximumValue = Nothing
+            Me.txtCdJournalIdNo.MinimumValue = Nothing
+            Me.txtCdJournalIdNo.Name = "txtCdJournalIdNo"
+            Me.txtCdJournalIdNo.OldValue = Nothing
+            Me.txtCdJournalIdNo.Size = New System.Drawing.Size(100, 23)
+            Me.txtCdJournalIdNo.TabIndex = 297
+            Me.txtCdJournalIdNo.TabStop = False
+            '
             'btnViewGL
             '
             Me.btnViewGL.DesignerSelected = False
@@ -1626,45 +1662,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.btnAutoApply)
             Me.CFlowLayout1.Controls.Add(Me.btnPrintCheck)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Bottom
-            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 936)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 943)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(1111, 34)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(1111, 27)
             Me.CFlowLayout1.TabIndex = 6
-            '
-            'lblCdJournalIdNo
-            '
-            Me.lblCdJournalIdNo.AutoSize = True
-            Me.tlpDisbursement.SetColumnSpan(Me.lblCdJournalIdNo, 2)
-            Me.lblCdJournalIdNo.DisplayOnly = True
-            Me.lblCdJournalIdNo.EditingMode = False
-            Me.lblCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblCdJournalIdNo.Location = New System.Drawing.Point(855, 118)
-            Me.lblCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblCdJournalIdNo.Name = "lblCdJournalIdNo"
-            Me.lblCdJournalIdNo.Size = New System.Drawing.Size(121, 17)
-            Me.lblCdJournalIdNo.TabIndex = 296
-            Me.lblCdJournalIdNo.Text = "Disbursement No."
-            Me.lblCdJournalIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtCdJournalIdNo
-            '
-            Me.txtCdJournalIdNo.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.txtCdJournalIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtCdJournalIdNo.ComputedValue = False
-            Me.txtCdJournalIdNo.CustomFormat = Nothing
-            Me.txtCdJournalIdNo.DataBoundControl = True
-            Me.txtCdJournalIdNo.EditingMode = True
-            Me.txtCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtCdJournalIdNo.LinkedLabel = Nothing
-            Me.txtCdJournalIdNo.Location = New System.Drawing.Point(998, 118)
-            Me.txtCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtCdJournalIdNo.MaximumValue = Nothing
-            Me.txtCdJournalIdNo.MinimumValue = Nothing
-            Me.txtCdJournalIdNo.Name = "txtCdJournalIdNo"
-            Me.txtCdJournalIdNo.OldValue = Nothing
-            Me.txtCdJournalIdNo.Size = New System.Drawing.Size(100, 23)
-            Me.txtCdJournalIdNo.TabIndex = 297
-            Me.txtCdJournalIdNo.TabStop = False
             '
             'DisbursementJournalEntry
             '

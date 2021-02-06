@@ -45,7 +45,8 @@ Namespace PresentationLayer.Presenters
                                             {"IdNo", GetType(Int32)},
                                             {"PcClosed", GetType(Boolean)}
                                             })
-
+            QuitOnSave = True
+            AskBeforeSave = True
         End Sub
 
         Public Sub GetOpenPettyCash()
@@ -112,6 +113,7 @@ Namespace PresentationLayer.Presenters
                     DtUpdateTable.Rows.Add(workRow)
                 End If
             Next
+            View.PcClosed = True
         End Sub
 
         Public Sub CreateJournalItems()

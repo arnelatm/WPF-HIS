@@ -10,7 +10,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class ArJournalPresenter
-        Inherits AccountsPresenter(Of IArJournalView, ArJournalModel)
+        Inherits TransactionsPresenter(Of IArJournalView, ArJournalModel)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable

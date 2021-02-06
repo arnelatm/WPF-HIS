@@ -10,7 +10,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Namespace PresentationLayer.Presenters
 
     Public Class DisbursementJournalPresenter
-        Inherits AccountsPresenter(Of IDisbursementJournalView, DisbursementJournalModel)
+        Inherits TransactionsPresenter(Of IDisbursementJournalView, DisbursementJournalModel)
 
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
         Protected DtInsertTable As New DataTable
@@ -167,12 +167,10 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             Dim type As Type = View.GetType
-            If JournalCode = "PC" AndAlso type.GetProperty("PcClosed") IsNot Nothing Then
-                Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
-                If cPcClosed Then
-                    Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed", $"This record has already been closed. Edits not allowed!", "Closed Petty Cash")
-                    CancelEdit = True
-                End If
+            Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
+            If cPcClosed Then
+                Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed", $"This record has already been closed. Edits not allowed!", "Closed Petty Cash")
+                CancelEdit = True
             End If
         End Sub
 
@@ -948,6 +946,25 @@ Namespace PresentationLayer.Presenters
                 payee = View.PayeeName
             End If
             Return payee
+        End Function
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim type As Type = View.GetType
+            Dim retVal As Boolean = True
+            If MyBase.IsOkToDeleteRecord() Then
+                If type.GetProperty("PcClosed") IsNot Nothing Then
+                    Dim cPosted = CallByName(View, "PcClosed", CallType.Get)
+                    If cPosted Then
+                        Dim description As String = ""
+                        description = Messaging.TranslateCaption("Petty Cash Replenishment")
+                        Messaging.ShowParametrizedMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                        retVal = False
+                    End If
+                End If
+            Else
+                retVal = False
+            End If
+            Return retVal
         End Function
 
     End Class

@@ -1,15 +1,18 @@
-﻿CREATE VIEW dbo.PcJournal_View
+﻿
+CREATE VIEW [dbo].[PcJournal_View]
 AS
 SELECT        a.IdNo, a.TransactionDate, a.ReferenceNo, a.Amount, a.AccountIdNo, a.PaymentType, a.PayeeIdNo, CASE WHEN a.PaymentType = 'A' OR
                          a.PaymentTYpe = 'S' THEN s.SupplierName WHEN a.PaymentType = 'R' THEN c.CustomerName WHEN a.PaymentType = 'E' THEN e.EMployeeName ELSE a.PayeeName END AS PayeeName, 
                          CASE WHEN a.PaymentType = 'A' OR
                          a.PaymentTYpe = 'S' THEN s.SupplierNameAra WHEN a.PaymentType = 'R' THEN c.CustomerNameAra WHEN a.PaymentType = 'E' THEN e.EMployeeNameAra ELSE a.PayeeName END AS PayeeNameAra, a.ORNumber, 
                          a.DiscountTaken, a.DiscountAccountIdNo, a.Applied, a.UnApplied, a.VatNumber, a.VatAmount, a.Notes, a.Posted, a.DateCreated, a.Cancelled, a.DateTimeStamp, a.PcClosed, a.CdJournalIdNo, a.PayType
-FROM            dbo.PcJournal AS a LEFT OUTER JOIN
-                         dbo.Supplier AS S ON a.PayeeIdNo = S.IdNo AND (a.PaymentType = 'A' OR
-                         a.PaymentType = 'S') LEFT OUTER JOIN
-                         dbo.Customer AS C ON a.PayeeIdNo = C.IdNo AND a.PaymentType = 'R' LEFT OUTER JOIN
-                         dbo.Employee AS E ON a.PayeeIdNo = E.IdNo AND a.PaymentType = 'E'
+FROM            dbo.PcJournal AS a 
+				LEFT OUTER JOIN dbo.Supplier AS S 
+					ON a.PayeeIdNo = S.IdNo AND (a.PaymentType = 'A' OR a.PaymentType = 'S') 
+				LEFT OUTER JOIN dbo.Customer AS C 
+					ON a.PayeeIdNo = C.IdNo AND a.PaymentType = 'R' 
+				LEFT OUTER JOIN dbo.Employee AS E 
+					ON a.PayeeIdNo = E.IdNo AND a.PaymentType = 'E'
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PcJournal_View';
 
@@ -20,7 +23,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[52] 4[28] 2[2] 3) )"
+         Configuration = "(H (1[30] 4[56] 2[3] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -82,7 +85,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = 0
+         Top = -2304
          Left = 0
       End
       Begin Tables = 
@@ -98,30 +101,30 @@ Begin DesignProperties =
          End
          Begin Table = "S"
             Begin Extent = 
-               Top = 297
-               Left = 828
-               Bottom = 503
-               Right = 1022
+               Top = 15
+               Left = 973
+               Bottom = 221
+               Right = 1167
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "C"
             Begin Extent = 
-               Top = 6
-               Left = 836
-               Bottom = 136
-               Right = 1040
+               Top = 312
+               Left = 470
+               Bottom = 690
+               Right = 674
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "E"
             Begin Extent = 
-               Top = 153
-               Left = 829
-               Bottom = 283
-               Right = 1027
+               Top = 146
+               Left = 594
+               Bottom = 276
+               Right = 792
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -153,6 +156,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PcJournal_View';
+
+
 
 
 

@@ -84,7 +84,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
 
     Public Event AfterRecordRetrieval(values As TM)
 
-    Public Event AfterSave(retVal As Integer)
+    Public Event AfterSave()
 
     Public Event BeforeAdd()
 
@@ -671,7 +671,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retValue = 0
         Dim currentIdNo = CallByName(View, IdFieldName, CallType.Get)
-        If IsOkToDeleteRecord(currentIdNo) Then
+        If IsOkToDeleteRecord() Then
             If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 RaiseEvent BeforeDelete()
                 retValue = DeleteRecord(currentIdNo)
@@ -824,9 +824,9 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         'CancelClose = True
     End Sub
 
-    Public Overridable Function IsOkToDeleteRecord(idNo As Int32) As Boolean
+    Public Overridable Function IsOkToDeleteRecord() As Boolean
         Dim retValue As Boolean = False
-        If Not DependentRecordsExist(idNo) Then
+        If Not DependentRecordsExist() Then
             retValue = True
         End If
         Return retValue
@@ -968,7 +968,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
                         'Else
                         '    Messaging.Show(true,"MsgRecordHasBeenSaved", "Record has been successfully saved!")
                     Else
-                        RaiseEvent AfterSave(retVal)
+                        RaiseEvent AfterSave()
                         If Ea IsNot Nothing Then
                             Ea.PublishEvent(New RecordSaved(DataModel))
                         End If
@@ -1088,8 +1088,8 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         Return retVal
     End Function
 
-    Protected Overridable Function DependentRecordsExist(masterIdNo As Int32) As Integer
-        Return 0
+    Protected Overridable Function DependentRecordsExist() As Boolean
+        Return False
     End Function
 
     Protected Overridable Function IsBizDataValid() As Boolean

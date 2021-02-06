@@ -685,6 +685,9 @@ Public Class CFormEntry
         If ValidateNumericValues() Then
             RunButtonRoutine(ButtonClicked.Save)
         End If
+        If PresenterObj.SaveSuccessful AndAlso PresenterObj.QuitOnSave Then
+            PresenterObj.GoQuit()
+        End If
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click

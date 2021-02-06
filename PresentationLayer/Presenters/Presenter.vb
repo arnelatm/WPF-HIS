@@ -83,7 +83,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event AfterRecordRetrieval(values As TM)
 
-    Public Event AfterSave(retVal As Integer)
+    Public Event AfterSave()
 
     Public Event BeforeAdd()
 
@@ -128,6 +128,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Get
     End Property
 
+    Public Property QuitOnSave As Boolean = False
+    Public Property AskBeforeSave As Boolean = False
+    Public Property SaveSuccessful As Boolean = False
     Public Property AutoValidationsPassed As Boolean = False
     Public Property CancelDelete As Boolean = False
     Public Property CancelEdit As Boolean = False
@@ -673,7 +676,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retValue = 0
         Dim currentIdNo = CallByName(View, IdFieldName, CallType.Get)
-        If IsOkToDeleteRecord(currentIdNo) Then
+        If IsOkToDeleteRecord() Then
             If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 RaiseEvent BeforeDelete()
                 retValue = DeleteRecord(currentIdNo)
@@ -700,13 +703,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Public Sub GoEditRecord()
-        RaiseEvent BeforeEdit()
-        If CancelEdit Then
-            CancelEdit = False
-        Else
-            EditMode = True
+        If IsOkToEditRecord() Then
+            RaiseEvent BeforeEdit()
+            If CancelEdit Then
+                CancelEdit = False
+            Else
+                EditMode = True
+            End If
+            'RaiseEvent AfterEdit()
         End If
-        'RaiseEvent AfterEdit()
     End Sub
 
     Public Sub GoFindRecord()
@@ -772,33 +777,60 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Overridable Sub GoSaveRecord()
-        Dim retVal As Integer
+        Dim continueSave As Boolean = True
         Dim addAnother = False
-        retVal = Save()
-        If retVal > 0 Then
-            Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
-            If AddMode Then
-                If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
-                                  "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-                                  MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                    addAnother = True
-                Else
-                    Dim idNo = CallByName(View, IdFieldName, CallType.Get)
-                    RecordPositionNumber = GetSortedRecordPosition(idNo)
+        If AskBeforeSave Then
+            If Not MessageBeforeSave() Then
+                continueSave = False
+            End If
+        End If
+        If continueSave Then
+            Dim retVal As Integer
+            retVal = Save()
+            If retVal > 0 Then
+                SaveSuccessful = True
+                Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+                If Not QuitOnSave Then
+                    If AddMode Then
+                        If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
+                                      "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                                      MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                            addAnother = True
+                        Else
+                            Dim idNo = CallByName(View, IdFieldName, CallType.Get)
+                            RecordPositionNumber = GetSortedRecordPosition(idNo)
+                        End If
+                    Else
+                        RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
+                    End If
+                    If AddMode Then
+                        AddMode = False
+                    Else
+                        EditMode = False
+                    End If
+                    If addAnother Then
+                        GoAddRecord()
+                    End If
                 End If
             Else
-                RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
-            End If
-            If AddMode Then
-                AddMode = False
-            Else
-                EditMode = False
-            End If
-            If addAnother Then
-                GoAddRecord()
+                SaveSuccessful = False
             End If
         End If
     End Sub
+
+    Public Overridable Function MessageBeforeSave() As Boolean
+        Dim retVal As Boolean = False
+        Dim message = "Are you sure you want to {action} this {itemName} entry?"
+        Dim caption = "Please confirm."
+        Dim action As String = Messaging.TranslateCaption("save")
+        Dim itemName As String = Messaging.TranslateCaption("transaction")
+        Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+        'message = message.Interpolate(Function(x) action, Function(x) itemName)
+        If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            retVal = True
+        End If
+        Return retVal
+    End Function
 
     Public Sub GoTranslate()
         'Dim frm As New TranslationTableManager()
@@ -822,9 +854,13 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         UndoMode = False
     End Sub
 
-    Public Overridable Function IsOkToDeleteRecord(idNo As Int32) As Boolean
+    Public Overridable Function IsOkToEditRecord() As Boolean
+        Return True
+    End Function
+
+    Public Overridable Function IsOkToDeleteRecord() As Boolean
         Dim retValue As Boolean = False
-        If Not DependentRecordsExist(idNo) Then
+        If Not DependentRecordsExist() Then
             retValue = True
         End If
         Return retValue
@@ -839,7 +875,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Overridable Function OkToMove() As Boolean
         Dim retValue As Boolean = False
-        If Not (EditMode OrElse AddMode) Then
+        If QuitOnSave Then
+            retValue = True
+        ElseIf Not (EditMode OrElse AddMode) Then
             retValue = True
         Else
             Dim result As DialogResult
@@ -934,7 +972,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                         'Else
                         '    Messaging.Show(true,"MsgRecordHasBeenSaved", "Record has been successfully saved!")
                     Else
-                        RaiseEvent AfterSave(retVal)
+                        RaiseEvent AfterSave()
                         If Ea IsNot Nothing Then
                             Ea.PublishEvent(New RecordSaved(DataModel))
                         End If
@@ -1077,8 +1115,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         LookUpDisplayCode = "Code"
     End Sub
 
-    Protected Overridable Function DependentRecordsExist(masterIdNo As Int32) As Integer
-        Return 0
+    Protected Overridable Function DependentRecordsExist() As Boolean
+        Return False
     End Function
 
     Protected Function GetFilteredLookupByCodeName()
@@ -1312,14 +1350,16 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private Function RecordHasChanged(idNo As Int32, timeStampedValue As Object) As Boolean
         Dim retValue = False
         Try
-            Dim newDateTimeStamp As Object
-            newDateTimeStamp = Model.GetRecordDateTimeStamp(idNo, TableName, DateTimeStampField)
-            For i = 0 To 7
-                If timeStampedValue(i) <> newDateTimeStamp(i) Then
-                    retValue = True
-                    Exit For
-                End If
-            Next
+            If timeStampedValue IsNot Nothing Then
+                Dim newDateTimeStamp As Object
+                newDateTimeStamp = Model.GetRecordDateTimeStamp(idNo, TableName, DateTimeStampField)
+                For i = 0 To 7
+                    If timeStampedValue(i) <> newDateTimeStamp(i) Then
+                        retValue = True
+                        Exit For
+                    End If
+                Next
+            End If
         Catch ex As Exception
             Return Nothing
         End Try
