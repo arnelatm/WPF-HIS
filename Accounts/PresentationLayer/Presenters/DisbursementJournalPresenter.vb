@@ -932,6 +932,23 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
+        Public Sub PrintPcReplenishment()
+            Dim transactionAmountInWords As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            If language = "ar" Then
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            Else
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            End If
+            Dim cForm As New ReportForm("Petty Cash Replenishment Report.Rpt", transactionAmountInWords, "TransactionAmountInWords", View.IdNo, "JournalIdNo", language, "Language")
+            cForm.Show()
+        End Sub
+
         Private Function GetPayeeName(ByVal payeeIdNo? As Int32)
             Dim payee As String
             Dim cbDataSource = Nothing

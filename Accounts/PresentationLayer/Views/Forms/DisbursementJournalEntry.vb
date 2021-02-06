@@ -46,6 +46,7 @@ Namespace PresentationLayer.Views.Forms
                 MyPresenter = New DisbursementJournalPresenter(Me, "PcJournal")
                 Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
                 btnPrintCheck.Visible = False
+                btnPrintPcReplenishment.Visible = False
                 cboPayType.Visible = False
                 lblPayType.Visible = False
                 txtCheckNumber.Visible = False
@@ -602,6 +603,11 @@ Namespace PresentationLayer.Views.Forms
             Else
                 btnPrintCheck.Visible = False
             End If
+            If ViewDisplayName = "CdJournalEntry" And PcClosed Then
+                btnPrintPcReplenishment.Visible = True
+            Else
+                btnPrintPcReplenishment.Visible = False
+            End If
         End Sub
 
         Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
@@ -737,7 +743,7 @@ Namespace PresentationLayer.Views.Forms
         '        VatNumber = MyPresenter.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
         '    Else
         '        VatNumber = ""
-        '    End If
+        '    End Ifbtn
         'End Sub
 
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
@@ -752,6 +758,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
             MyPresenter.PrintCheck()
+        End Sub
+
+        Private Sub btnPrintPcReplenishment_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintPcReplenishment.ClickButtonArea
+            MyPresenter.PrintPcReplenishment()
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
