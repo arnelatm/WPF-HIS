@@ -50,6 +50,7 @@ Namespace DataLayer.AdoNet
                     "PayeeIdNo," &
                     "PayeeName," &
                     "PaymentType," &
+                    "PcClosed," &
                     "Posted," &
                     "ReferenceNo," &
                     "TransactionDate," &
@@ -117,6 +118,7 @@ Namespace DataLayer.AdoNet
                     "PayeeIdNo     = @PayeeIdNo," &
                     "PayeeName     = @PayeeName," &
                     "PaymentType   = @PaymentType," &
+                    "PcClosed      = @PcClosed," &
                     "Posted        = @Posted," &
                     "ReferenceNo   = @ReferenceNo," &
                     "TransactionDate = @TransactionDate," &
@@ -169,6 +171,7 @@ Namespace DataLayer.AdoNet
                         "PayeeIdNo," &
                         "PayeeName," &
                         "PaymentType," &
+                        "PcClosed," &
                         "Posted," &
                         "ReferenceNo," &
                         "TransactionDate," &
@@ -190,6 +193,7 @@ Namespace DataLayer.AdoNet
                         "@PayeeIdNo," &
                         "@PayeeName," &
                         "@PaymentType," &
+                        "@PcClosed," &
                         "@Posted," &
                         "@ReferenceNo," &
                         "@TransactionDate," &
@@ -287,6 +291,7 @@ Namespace DataLayer.AdoNet
             .PayeeIdNo = Extensions.AsNullable(Of Int32?)(reader("PayeeIdNo")),
             .PayeeName = Extensions.AsString(reader("PayeeName")),
             .PaymentType = Extensions.AsString(reader("PaymentType")),
+            .PcClosed = Extensions.AsBool(reader("PcClosed")),
             .Posted = Extensions.AsBool(reader("Posted")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
@@ -339,6 +344,7 @@ Namespace DataLayer.AdoNet
                                     "@PayeeIdNo", disbursementJournal.PayeeIdNo,
                                     "@PayeeName", disbursementJournal.PayeeName,
                                     "@PaymentType", disbursementJournal.PaymentType,
+                                    "@PcClosed", disbursementJournal.PcClosed,
                                     "@Posted", disbursementJournal.Posted,
                                     "@ReferenceNo", disbursementJournal.ReferenceNo,
                                     "@TransactionDate", disbursementJournal.TransactionDate,

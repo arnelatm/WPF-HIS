@@ -20,6 +20,7 @@ Namespace PresentationLayer.Views.Forms
         Private _journalItems As New List(Of IJournalItemView)
         Private _defaultAccount As Int16
         Private _pcFooter As DgvFooter
+        Private _pcClosed As Boolean = True
 
         Public Sub New()
             MyBase.New()
@@ -92,6 +93,7 @@ Namespace PresentationLayer.Views.Forms
                 Return True
             End Get
             Set
+                _pcClosed = True
             End Set
         End Property
 

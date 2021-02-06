@@ -93,6 +93,7 @@ Namespace DataLayer.AdoNet
                         "CheckDate," &
                         "CheckNumber," &
                         "PayType," &
+                        "PcClosed," &
                         "Notes," &
                         "ORNumber," &
                         "PayeeIdNo," &
@@ -109,6 +110,7 @@ Namespace DataLayer.AdoNet
                         "@CheckDate," &
                         "@CheckNumber," &
                         "@PayType," &
+                        "@PcClosed," &
                         "@Notes," &
                         "@ORNumber," &
                         "@PayeeIdNo," &
@@ -153,6 +155,7 @@ Namespace DataLayer.AdoNet
                                     "@CheckNumber", pettyCashClosing.CheckNumber,
                                     "@DateCreated", pettyCashClosing.DateCreated,
                                     "@PayType", pettyCashClosing.PayType,
+                                    "@PcClosed", pettyCashClosing.PcClosed,
                                     "@IdNo", pettyCashClosing.IdNo,
                                     "@Notes", pettyCashClosing.Notes,
                                     "@ORNumber", pettyCashClosing.OrNumber,

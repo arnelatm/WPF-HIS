@@ -21,8 +21,8 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("PcAccountIdNo"))
                 AddRule(New ValidateRequired("PayeeIdNo", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
                 AddRule(New ValidateRequired("PayeeName", $"Payeee Name must not be blank.", {"PayeeName", "PayeeIdNo"}))
-                AddRule(New ValidateIfRequired("CheckDate", "PayType", ValidationDataType.String, ValidationOperator.Equal, "2"))
-                AddRule(New ValidateIfRequired("CheckNumber", "PayType", ValidationDataType.String, ValidationOperator.Equal, "2"))
+                AddRule(New ValidateIfRequired("CheckDate", "PayType", ValidationDataType.String, ValidationOperator.Equal, "1"))
+                AddRule(New ValidateIfRequired("CheckNumber", "PayType", ValidationDataType.String, ValidationOperator.Equal, "1"))
             End If
 
         End Sub

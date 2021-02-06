@@ -56,7 +56,7 @@ Namespace PresentationLayer.Views.Forms
             txtJournalCode.Text = MyPresenter.JournalCode
             FirstControl = cboPaymentType
             '_nfi.NumberDecimalDigits = 2
-            Height = 761
+            Height = 655
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
 
@@ -135,7 +135,6 @@ Namespace PresentationLayer.Views.Forms
                 txtCdJournalIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
-
 
         Public Property CheckDate As DateTime? Implements IDisbursementJournalView.CheckDate
             Get
@@ -766,7 +765,7 @@ Namespace PresentationLayer.Views.Forms
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
                 ShowOpenInvoicesDataGrid()
             Else
-                btnViewGL.Text = Messaging.TranslateCaption("Show Journal Entry")
+                btnViewGL.Text = Messaging.TranslateCaption("Hide Journal Entry")
                 ShowJournalItemDataGrid()
             End If
         End Sub
@@ -901,13 +900,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub DataGridViewDjOiItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDjOiItems.CellContentClick
-
-        End Sub
-
-        Private Sub chkPcClosed_CheckedChanged(sender As Object, e As EventArgs) Handles chkPcClosed.CheckedChanged
-
-        End Sub
     End Class
 
 End Namespace
