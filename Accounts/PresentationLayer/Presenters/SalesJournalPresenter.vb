@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
 
         Private ReadOnly _salesDepositModel As New ModelAccounts("SalesDeposit")
-        Private ReadOnly _salesJournalItemModel As New ModelAccounts("SalesJournalItem")
+        Private ReadOnly _salesJournalItemModel As New ModelAccounts("JournalItem", Nothing, {"SalesJournalItem_View", "dbo.UpdateSalesJournalItemTVP", "dbo.InsertSalesJournalItemTVP"})
 
         Private _depositTypesModel As List(Of DepositTypeModel)
         Private ReadOnly _oldSalesDepositTypeItem As List(Of SalesDepositModel)

@@ -127,6 +127,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnPrintCheck = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.btnPrintPcReplenishment = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tlpDisbursement.SuspendLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1643,7 +1644,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'btnPrintCheck
             '
-            Me.btnPrintCheck.DesignerSelected = False
+            Me.btnPrintCheck.DesignerSelected = True
             Me.btnPrintCheck.DisplayOnly = True
             Me.btnPrintCheck.ImageIndex = 0
             Me.btnPrintCheck.Location = New System.Drawing.Point(288, 3)
@@ -1661,11 +1662,25 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.btnViewGL)
             Me.CFlowLayout1.Controls.Add(Me.btnAutoApply)
             Me.CFlowLayout1.Controls.Add(Me.btnPrintCheck)
+            Me.CFlowLayout1.Controls.Add(Me.btnPrintPcReplenishment)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Bottom
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 943)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Size = New System.Drawing.Size(1111, 27)
             Me.CFlowLayout1.TabIndex = 6
+            '
+            'btnPrintPcReplenishment
+            '
+            Me.btnPrintPcReplenishment.DesignerSelected = False
+            Me.btnPrintPcReplenishment.DisplayOnly = True
+            Me.btnPrintPcReplenishment.ImageIndex = 0
+            Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(445, 3)
+            Me.btnPrintPcReplenishment.Name = "btnPrintPcReplenishment"
+            Me.btnPrintPcReplenishment.OriginalImageName = Nothing
+            Me.btnPrintPcReplenishment.SecurityKey = ""
+            Me.btnPrintPcReplenishment.Size = New System.Drawing.Size(285, 25)
+            Me.btnPrintPcReplenishment.TabIndex = 292
+            Me.btnPrintPcReplenishment.Text = "Print Petty Cash Replenishment Report"
             '
             'DisbursementJournalEntry
             '
@@ -1787,5 +1802,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents lblCdJournalIdNo As CLabel
         Friend WithEvents txtCdJournalIdNo As CTextBox
+        Friend WithEvents btnPrintPcReplenishment As CButton
     End Class
 End Namespace
