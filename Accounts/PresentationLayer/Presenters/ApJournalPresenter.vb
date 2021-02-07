@@ -298,6 +298,41 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
+        Public Sub UpdateDueDate()
+            If View.SupplierIdNo IsNot Nothing Then
+                If View.DueDate Is Nothing Then
+                    Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)
+                    View.DueDate = DateAdd("d", supplierPaymentDueDays, View.TransactionDate)
+                End If
+            Else
+                View.DueDate = Nothing
+            End If
+        End Sub
+
+        Public Sub UpdateEarlySettlementValues()
+            If View.SupplierIdNo IsNot Nothing Then
+                Dim supplierSettlementDueDays As Integer
+                Dim supplierSettlementDiscount As Decimal
+                supplierSettlementDueDays = GetSupplierSettlementDueDays(View.SupplierIdNo)
+                supplierSettlementDiscount = GetSupplierSettlementDiscount(View.SupplierIdNo)
+                View.SettlementDueDate = DateAdd("d", supplierSettlementDueDays, View.TransactionDate)
+                View.SettlementDiscount = supplierSettlementDiscount
+            Else
+                View.SettlementDueDate = Nothing
+                View.SettlementDiscount = 0
+            End If
+        End Sub
+
+        Public Sub UpdateSupplierDate()
+            If View.TransactionDate IsNot Nothing Then
+                If View.InvoiceDate Is Nothing Then
+                    View.InvoiceDate = View.TransactionDate
+                End If
+            Else
+                View.InvoiceDate = Nothing
+            End If
+        End Sub
+
     End Class
 
 End Namespace

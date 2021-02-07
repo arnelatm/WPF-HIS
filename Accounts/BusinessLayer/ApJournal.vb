@@ -20,7 +20,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("InvoiceNo"))
                 AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
                 AddRule(New ValidateVatNumber("VatNumber"))
-                AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationOperator.RequiredIfNotZero, ValidationDataType.Decimal, 0))
+                AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
                 AddRule(New ValidateRequired("TransactionType"))
             End If
         End Sub
