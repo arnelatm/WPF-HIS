@@ -114,7 +114,7 @@ Do While Not Eof()
 		Replace APAcctIdNo With 210
 	Endif
 	Replace CredLimit   With SUPPORIG.credlimt
-	Replace SetDueDays   With 0
+	Replace SetDueDays   With SUPPORIG.CredTerm
 	Replace SetDisc   With 0
 	Replace PaymentDd   With 0
 	If SUPPORIG.firstran < Date(1994,01,01) Then
@@ -271,7 +271,7 @@ Do While Not Eof()
 			Replace ArAcctIdNo With 112
 		Endif
 		Replace CredLimit   With custorig.credlimt
-		Replace SetDueDays   With 0
+		Replace SetDueDays   With custorig.CredTerm
 		Replace SetDisc   With 0
 		Replace PaymentDd   With 0
 		If custorig.firstran < Date(1994,01,01) Then
@@ -1516,10 +1516,10 @@ Use c:\temp\CadOiItm Alias CadOiItm
 Select CDJournal
 Do While Not Eof("CdJournal")
 	cdDate = Iif(Eof("CdJournal"),Date()+10000,CDJournal.TransDate)
-	If CDJournal.PayType = "A" Then
+	If CDJournal.PaymType = "A" Then
 		rPayAmount = CDJournal.Amount
 		rDscTknAmt = CDJournal.DiscTaken
-		trantype  = CDJournal.PayType
+		trantype  = CDJournal.PaymType
 		rTotApPay = rPayAmount+rDscTknAmt
 		sIdNo = CDJournal.PayeeIdNo
 		cdIdNo = CDJournal.IdNo

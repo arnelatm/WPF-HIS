@@ -300,10 +300,8 @@ Namespace PresentationLayer.Presenters
 
         Public Sub UpdateDueDate()
             If View.SupplierIdNo IsNot Nothing Then
-                If View.DueDate Is Nothing Then
-                    Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)
-                    View.DueDate = DateAdd("d", supplierPaymentDueDays, View.TransactionDate)
-                End If
+                Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)
+                View.DueDate = DateAdd("d", supplierPaymentDueDays, View.TransactionDate)
             Else
                 View.DueDate = Nothing
             End If
