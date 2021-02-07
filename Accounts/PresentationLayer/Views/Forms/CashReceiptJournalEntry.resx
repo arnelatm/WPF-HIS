@@ -118,557 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>146, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 95</value>
+    <value>281, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 134</value>
+    <value>411, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 173</value>
+    <value>535, 17</value>
   </metadata>
-  <data name="&gt;&gt;floHeader1.Name" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;floHeader1.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floHeader1.Parent" xml:space="preserve">
-    <value>floPurchaseJournalHeader</value>
-  </data>
-  <data name="&gt;&gt;floHeader1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;floHeader2.Name" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;floHeader2.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floHeader2.Parent" xml:space="preserve">
-    <value>floPurchaseJournalHeader</value>
-  </data>
-  <data name="&gt;&gt;floHeader2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="floPurchaseJournalHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="floPurchaseJournalHeader.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 0, 3</value>
-  </data>
-  <data name="floPurchaseJournalHeader.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 0, 5</value>
-  </data>
-  <data name="floPurchaseJournalHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>974, 202</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="floPurchaseJournalHeader.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;floPurchaseJournalHeader.Name" xml:space="preserve">
-    <value>floPurchaseJournalHeader</value>
-  </data>
-  <data name="&gt;&gt;floPurchaseJournalHeader.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floPurchaseJournalHeader.Parent" xml:space="preserve">
-    <value>floFullEntryArea</value>
-  </data>
-  <data name="&gt;&gt;floPurchaseJournalHeader.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewJournalItems.Name" xml:space="preserve">
-    <value>DataGridViewJournalItems</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewJournalItems.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewJournalItems.Parent" xml:space="preserve">
-    <value>floPurchaseJournalItems</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewJournalItems.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewCsrOiItems.Name" xml:space="preserve">
-    <value>DataGridViewCsrOiItems</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewCsrOiItems.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewCsrOiItems.Parent" xml:space="preserve">
-    <value>floPurchaseJournalItems</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewCsrOiItems.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="floPurchaseJournalItems.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
-    <value>TopDown</value>
-  </data>
-  <data name="floPurchaseJournalItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 211</value>
-  </data>
-  <data name="floPurchaseJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>974, 310</value>
-  </data>
-  <data name="floPurchaseJournalItems.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;floPurchaseJournalItems.Name" xml:space="preserve">
-    <value>floPurchaseJournalItems</value>
-  </data>
-  <data name="&gt;&gt;floPurchaseJournalItems.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floPurchaseJournalItems.Parent" xml:space="preserve">
-    <value>floFullEntryArea</value>
-  </data>
-  <data name="&gt;&gt;floPurchaseJournalItems.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btnViewGL.Name" xml:space="preserve">
-    <value>btnViewGL</value>
-  </data>
-  <data name="&gt;&gt;btnViewGL.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnViewGL.Parent" xml:space="preserve">
-    <value>floFooter</value>
-  </data>
-  <data name="&gt;&gt;btnViewGL.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="floFooter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 527</value>
-  </data>
-  <data name="floFooter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 31</value>
-  </data>
-  <data name="floFooter.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;floFooter.Name" xml:space="preserve">
-    <value>floFooter</value>
-  </data>
-  <data name="&gt;&gt;floFooter.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floFooter.Parent" xml:space="preserve">
-    <value>floFullEntryArea</value>
-  </data>
-  <data name="&gt;&gt;floFooter.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="btnAutoApply.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="btnAutoApply.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <data name="btnAutoApply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 527</value>
-  </data>
-  <data name="btnAutoApply.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 31</value>
-  </data>
-  <data name="btnAutoApply.TabIndex" type="System.Int32, mscorlib">
-    <value>251</value>
-  </data>
-  <data name="btnAutoApply.Text" xml:space="preserve">
-    <value>Auto Apply Invoices</value>
-  </data>
-  <data name="&gt;&gt;btnAutoApply.Name" xml:space="preserve">
-    <value>btnAutoApply</value>
-  </data>
-  <data name="&gt;&gt;btnAutoApply.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnAutoApply.Parent" xml:space="preserve">
-    <value>floFullEntryArea</value>
-  </data>
-  <data name="&gt;&gt;btnAutoApply.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="floFullEntryArea.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="floFullEntryArea.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 53</value>
-  </data>
-  <data name="floFullEntryArea.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 530</value>
-  </data>
-  <data name="floFullEntryArea.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 565</value>
-  </data>
-  <data name="floFullEntryArea.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;floFullEntryArea.Name" xml:space="preserve">
-    <value>floFullEntryArea</value>
-  </data>
-  <data name="&gt;&gt;floFullEntryArea.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floFullEntryArea.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;floFullEntryArea.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblIdNo.Name" xml:space="preserve">
-    <value>lblIdNo</value>
-  </data>
-  <data name="&gt;&gt;lblIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblIdNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtJournalCode.Name" xml:space="preserve">
-    <value>txtJournalCode</value>
-  </data>
-  <data name="&gt;&gt;txtJournalCode.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtJournalCode.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;txtJournalCode.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.Name" xml:space="preserve">
-    <value>TxtIdNo</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.Name" xml:space="preserve">
-    <value>lblReferenceNo</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblReferenceNo.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtReferenceNo.Name" xml:space="preserve">
-    <value>txtReferenceNo</value>
-  </data>
-  <data name="&gt;&gt;txtReferenceNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtReferenceNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;txtReferenceNo.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblTransactionDate.Name" xml:space="preserve">
-    <value>lblTransactionDate</value>
-  </data>
-  <data name="&gt;&gt;lblTransactionDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblTransactionDate.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblTransactionDate.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;dtpTransactionDate.Name" xml:space="preserve">
-    <value>dtpTransactionDate</value>
-  </data>
-  <data name="&gt;&gt;dtpTransactionDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dtpTransactionDate.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;dtpTransactionDate.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblInvoiceDate.Name" xml:space="preserve">
-    <value>lblInvoiceDate</value>
-  </data>
-  <data name="&gt;&gt;lblInvoiceDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblInvoiceDate.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblInvoiceDate.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cboPayorType.Name" xml:space="preserve">
-    <value>cboPayorType</value>
-  </data>
-  <data name="&gt;&gt;cboPayorType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboPayorType.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;cboPayorType.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lblSupplierIdNo.Name" xml:space="preserve">
-    <value>lblSupplierIdNo</value>
-  </data>
-  <data name="&gt;&gt;lblSupplierIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblSupplierIdNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblSupplierIdNo.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;cboPayorIdNo.Name" xml:space="preserve">
-    <value>cboPayorIdNo</value>
-  </data>
-  <data name="&gt;&gt;cboPayorIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboPayorIdNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;cboPayorIdNo.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;txtPayorName.Name" xml:space="preserve">
-    <value>txtPayorName</value>
-  </data>
-  <data name="&gt;&gt;txtPayorName.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtPayorName.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;txtPayorName.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Name" xml:space="preserve">
-    <value>lblAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Name" xml:space="preserve">
-    <value>cboAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;txtAmount.Name" xml:space="preserve">
-    <value>txtAmount</value>
-  </data>
-  <data name="&gt;&gt;txtAmount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtAmount.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;txtAmount.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;lblDiscountAccountIdNo.Name" xml:space="preserve">
-    <value>lblDiscountAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;lblDiscountAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblDiscountAccountIdNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblDiscountAccountIdNo.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;cboDiscountAccountIdNo.Name" xml:space="preserve">
-    <value>cboDiscountAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;cboDiscountAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboDiscountAccountIdNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;cboDiscountAccountIdNo.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;lblVatNumber.Name" xml:space="preserve">
-    <value>lblVatNumber</value>
-  </data>
-  <data name="&gt;&gt;lblVatNumber.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblVatNumber.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblVatNumber.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;txtVatNumber.Name" xml:space="preserve">
-    <value>txtVatNumber</value>
-  </data>
-  <data name="&gt;&gt;txtVatNumber.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtVatNumber.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;txtVatNumber.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;lblCheckNumber.Name" xml:space="preserve">
-    <value>lblCheckNumber</value>
-  </data>
-  <data name="&gt;&gt;lblCheckNumber.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCheckNumber.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblCheckNumber.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;txtCheckNumber.Name" xml:space="preserve">
-    <value>txtCheckNumber</value>
-  </data>
-  <data name="&gt;&gt;txtCheckNumber.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtCheckNumber.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;txtCheckNumber.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;lblCheckDate.Name" xml:space="preserve">
-    <value>lblCheckDate</value>
-  </data>
-  <data name="&gt;&gt;lblCheckDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCheckDate.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblCheckDate.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;dtpCheckDate.Name" xml:space="preserve">
-    <value>dtpCheckDate</value>
-  </data>
-  <data name="&gt;&gt;dtpCheckDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dtpCheckDate.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;dtpCheckDate.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;lblInvoiceNo.Name" xml:space="preserve">
-    <value>lblInvoiceNo</value>
-  </data>
-  <data name="&gt;&gt;lblInvoiceNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblInvoiceNo.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblInvoiceNo.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;txtORNumber.Name" xml:space="preserve">
-    <value>txtORNumber</value>
-  </data>
-  <data name="&gt;&gt;txtORNumber.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtORNumber.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;txtORNumber.ZOrder" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Name" xml:space="preserve">
-    <value>lblNotes</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
-    <value>txtNotes</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Parent" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>27</value>
-  </data>
-  <data name="floHeader1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
-  </data>
-  <data name="floHeader1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>685, 188</value>
-  </data>
-  <data name="floHeader1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;floHeader1.Name" xml:space="preserve">
-    <value>floHeader1</value>
-  </data>
-  <data name="&gt;&gt;floHeader1.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floHeader1.Parent" xml:space="preserve">
-    <value>floPurchaseJournalHeader</value>
-  </data>
-  <data name="&gt;&gt;floHeader1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -679,8 +144,9 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 23</value>
+    <value>126, 23</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
@@ -706,7 +172,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtJournalCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 1</value>
+    <value>129, 1</value>
   </data>
   <data name="txtJournalCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -736,13 +202,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 1</value>
+    <value>156, 1</value>
   </data>
   <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 23</value>
+    <value>83, 23</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -766,13 +232,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 1</value>
+    <value>241, 1</value>
   </data>
   <data name="lblReferenceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
+    <value>118, 23</value>
   </data>
   <data name="lblReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -799,13 +265,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>366, 1</value>
+    <value>361, 1</value>
   </data>
   <data name="txtReferenceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 23</value>
+    <value>91, 23</value>
   </data>
   <data name="txtReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -829,7 +295,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTransactionDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>446, 1</value>
+    <value>454, 1</value>
   </data>
   <data name="lblTransactionDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -859,7 +325,7 @@
     <value>5</value>
   </data>
   <data name="dtpTransactionDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>553, 1</value>
+    <value>561, 1</value>
   </data>
   <data name="dtpTransactionDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -895,7 +361,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblInvoiceDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 23</value>
+    <value>126, 23</value>
   </data>
   <data name="lblInvoiceDate.TabIndex" type="System.Int32, mscorlib">
     <value>257</value>
@@ -925,13 +391,13 @@
     <value>False</value>
   </data>
   <data name="cboPayorType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 28</value>
+    <value>129, 28</value>
   </data>
   <data name="cboPayorType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboPayorType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 24</value>
+    <value>163, 24</value>
   </data>
   <data name="cboPayorType.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -955,13 +421,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblSupplierIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 28</value>
+    <value>294, 28</value>
   </data>
   <data name="lblSupplierIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblSupplierIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 23</value>
+    <value>65, 23</value>
   </data>
   <data name="lblSupplierIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -991,13 +457,13 @@
     <value>False</value>
   </data>
   <data name="cboPayorIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>366, 28</value>
+    <value>361, 28</value>
   </data>
   <data name="cboPayorIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboPayorIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 24</value>
+    <value>314, 24</value>
   </data>
   <data name="cboPayorIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1024,7 +490,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>446, 54</value>
+    <value>454, 54</value>
   </data>
   <data name="lblAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1054,7 +520,7 @@
     <value>14</value>
   </data>
   <data name="txtPayorName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>668, 28</value>
+    <value>677, 28</value>
   </data>
   <data name="txtPayorName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1090,7 +556,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 24</value>
+    <value>126, 24</value>
   </data>
   <data name="lblAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>266</value>
@@ -1120,13 +586,13 @@
     <value>False</value>
   </data>
   <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 54</value>
+    <value>129, 54</value>
   </data>
   <data name="cboAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 24</value>
+    <value>323, 24</value>
   </data>
   <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1147,13 +613,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtAmount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>558, 54</value>
+    <value>566, 54</value>
   </data>
   <data name="txtAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtAmount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 23</value>
+    <value>109, 23</value>
   </data>
   <data name="txtAmount.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1186,7 +652,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblDiscountAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 24</value>
+    <value>126, 24</value>
   </data>
   <data name="lblDiscountAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>281</value>
@@ -1216,13 +682,13 @@
     <value>False</value>
   </data>
   <data name="cboDiscountAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 80</value>
+    <value>129, 80</value>
   </data>
   <data name="cboDiscountAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboDiscountAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 24</value>
+    <value>323, 24</value>
   </data>
   <data name="cboDiscountAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1246,7 +712,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>446, 80</value>
+    <value>454, 80</value>
   </data>
   <data name="lblVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1279,7 +745,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtVatNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>558, 80</value>
+    <value>566, 80</value>
   </data>
   <data name="txtVatNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1318,7 +784,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCheckNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 23</value>
+    <value>126, 23</value>
   </data>
   <data name="lblCheckNumber.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1345,7 +811,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtCheckNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 106</value>
+    <value>129, 106</value>
   </data>
   <data name="txtCheckNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1375,13 +841,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblCheckDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 106</value>
+    <value>241, 106</value>
   </data>
   <data name="lblCheckDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCheckDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 23</value>
+    <value>98, 23</value>
   </data>
   <data name="lblCheckDate.TabIndex" type="System.Int32, mscorlib">
     <value>259</value>
@@ -1405,7 +871,7 @@
     <value>22</value>
   </data>
   <data name="dtpCheckDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 106</value>
+    <value>341, 106</value>
   </data>
   <data name="dtpCheckDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1435,13 +901,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblInvoiceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>466, 106</value>
+    <value>455, 106</value>
   </data>
   <data name="lblInvoiceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblInvoiceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 23</value>
+    <value>109, 23</value>
   </data>
   <data name="lblInvoiceNo.TabIndex" type="System.Int32, mscorlib">
     <value>254</value>
@@ -1468,7 +934,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtORNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>558, 106</value>
+    <value>566, 106</value>
   </data>
   <data name="txtORNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1504,7 +970,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 40</value>
+    <value>126, 40</value>
   </data>
   <data name="lblNotes.TabIndex" type="System.Int32, mscorlib">
     <value>161</value>
@@ -1531,7 +997,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 133</value>
+    <value>129, 133</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1540,7 +1006,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>515, 40</value>
+    <value>544, 40</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1557,194 +1023,26 @@
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
     <value>27</value>
   </data>
-  <data name="&gt;&gt;lblApplied.Name" xml:space="preserve">
-    <value>lblApplied</value>
+  <data name="floHeader1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
   </data>
-  <data name="&gt;&gt;lblApplied.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="floHeader1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>685, 188</value>
   </data>
-  <data name="&gt;&gt;lblApplied.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;lblApplied.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtApplied.Name" xml:space="preserve">
-    <value>txtApplied</value>
-  </data>
-  <data name="&gt;&gt;txtApplied.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtApplied.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;txtApplied.ZOrder" xml:space="preserve">
+  <data name="floHeader1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;lblUnapplied.Name" xml:space="preserve">
-    <value>lblUnapplied</value>
+  <data name="&gt;&gt;floHeader1.Name" xml:space="preserve">
+    <value>floHeader1</value>
   </data>
-  <data name="&gt;&gt;lblUnapplied.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblUnapplied.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;lblUnapplied.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtUnapplied.Name" xml:space="preserve">
-    <value>txtUnapplied</value>
-  </data>
-  <data name="&gt;&gt;txtUnapplied.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtUnapplied.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;txtUnapplied.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblDiscountTaken.Name" xml:space="preserve">
-    <value>lblDiscountTaken</value>
-  </data>
-  <data name="&gt;&gt;lblDiscountTaken.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblDiscountTaken.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;lblDiscountTaken.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;txtDiscountTaken.Name" xml:space="preserve">
-    <value>txtDiscountTaken</value>
-  </data>
-  <data name="&gt;&gt;txtDiscountTaken.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtDiscountTaken.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;txtDiscountTaken.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lblVatAmount.Name" xml:space="preserve">
-    <value>lblVatAmount</value>
-  </data>
-  <data name="&gt;&gt;lblVatAmount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblVatAmount.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;lblVatAmount.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;txtVatAmount.Name" xml:space="preserve">
-    <value>txtVatAmount</value>
-  </data>
-  <data name="&gt;&gt;txtVatAmount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtVatAmount.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;txtVatAmount.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.Name" xml:space="preserve">
-    <value>lblCancelled</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;chkCancelled.Name" xml:space="preserve">
-    <value>chkCancelled</value>
-  </data>
-  <data name="&gt;&gt;chkCancelled.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkCancelled.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;chkCancelled.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.Name" xml:space="preserve">
-    <value>lblPosted</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;chkPosted.Name" xml:space="preserve">
-    <value>chkPosted</value>
-  </data>
-  <data name="&gt;&gt;chkPosted.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkPosted.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;chkPosted.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;lblDateCreated.Name" xml:space="preserve">
-    <value>lblDateCreated</value>
-  </data>
-  <data name="&gt;&gt;lblDateCreated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblDateCreated.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;dtpDateCreated.Name" xml:space="preserve">
-    <value>dtpDateCreated</value>
-  </data>
-  <data name="&gt;&gt;dtpDateCreated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dtpDateCreated.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;dtpDateCreated.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="floHeader2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>699, 8</value>
-  </data>
-  <data name="floHeader2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 188</value>
-  </data>
-  <data name="floHeader2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;floHeader2.Name" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;floHeader2.Type" xml:space="preserve">
+  <data name="&gt;&gt;floHeader1.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;floHeader2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;floHeader1.Parent" xml:space="preserve">
     <value>floPurchaseJournalHeader</value>
   </data>
-  <data name="&gt;&gt;floHeader2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;floHeader1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="lblApplied.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -2232,6 +1530,54 @@
   <data name="&gt;&gt;dtpDateCreated.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="floHeader2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>699, 8</value>
+  </data>
+  <data name="floHeader2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>263, 188</value>
+  </data>
+  <data name="floHeader2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;floHeader2.Name" xml:space="preserve">
+    <value>floHeader2</value>
+  </data>
+  <data name="&gt;&gt;floHeader2.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;floHeader2.Parent" xml:space="preserve">
+    <value>floPurchaseJournalHeader</value>
+  </data>
+  <data name="&gt;&gt;floHeader2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="floPurchaseJournalHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="floPurchaseJournalHeader.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 0, 3</value>
+  </data>
+  <data name="floPurchaseJournalHeader.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 0, 5</value>
+  </data>
+  <data name="floPurchaseJournalHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>974, 202</value>
+  </data>
+  <data name="floPurchaseJournalHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;floPurchaseJournalHeader.Name" xml:space="preserve">
+    <value>floPurchaseJournalHeader</value>
+  </data>
+  <data name="&gt;&gt;floPurchaseJournalHeader.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;floPurchaseJournalHeader.Parent" xml:space="preserve">
+    <value>floFullEntryArea</value>
+  </data>
+  <data name="&gt;&gt;floPurchaseJournalHeader.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="dgvSequence.HeaderText" xml:space="preserve">
     <value>Seq.</value>
   </data>
@@ -2320,7 +1666,7 @@
     <value>False</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 212</value>
+    <value>675, 17</value>
   </metadata>
   <data name="DataGridViewJournalItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -2410,7 +1756,7 @@
     <value>False</value>
   </data>
   <metadata name="bsCsrOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 251</value>
+    <value>808, 17</value>
   </metadata>
   <data name="DataGridViewCsrOiItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>968, 3</value>
@@ -2431,6 +1777,30 @@
     <value>floPurchaseJournalItems</value>
   </data>
   <data name="&gt;&gt;DataGridViewCsrOiItems.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="floPurchaseJournalItems.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+    <value>TopDown</value>
+  </data>
+  <data name="floPurchaseJournalItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 211</value>
+  </data>
+  <data name="floPurchaseJournalItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>974, 310</value>
+  </data>
+  <data name="floPurchaseJournalItems.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;floPurchaseJournalItems.Name" xml:space="preserve">
+    <value>floPurchaseJournalItems</value>
+  </data>
+  <data name="&gt;&gt;floPurchaseJournalItems.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;floPurchaseJournalItems.Parent" xml:space="preserve">
+    <value>floFullEntryArea</value>
+  </data>
+  <data name="&gt;&gt;floPurchaseJournalItems.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="btnViewGL.Font" type="System.Drawing.Font, System.Drawing">
@@ -2458,6 +1828,84 @@
     <value>floFooter</value>
   </data>
   <data name="&gt;&gt;btnViewGL.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="floFooter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 527</value>
+  </data>
+  <data name="floFooter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 31</value>
+  </data>
+  <data name="floFooter.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;floFooter.Name" xml:space="preserve">
+    <value>floFooter</value>
+  </data>
+  <data name="&gt;&gt;floFooter.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;floFooter.Parent" xml:space="preserve">
+    <value>floFullEntryArea</value>
+  </data>
+  <data name="&gt;&gt;floFooter.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnAutoApply.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="btnAutoApply.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="btnAutoApply.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 527</value>
+  </data>
+  <data name="btnAutoApply.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 31</value>
+  </data>
+  <data name="btnAutoApply.TabIndex" type="System.Int32, mscorlib">
+    <value>251</value>
+  </data>
+  <data name="btnAutoApply.Text" xml:space="preserve">
+    <value>Auto Apply Invoices</value>
+  </data>
+  <data name="&gt;&gt;btnAutoApply.Name" xml:space="preserve">
+    <value>btnAutoApply</value>
+  </data>
+  <data name="&gt;&gt;btnAutoApply.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnAutoApply.Parent" xml:space="preserve">
+    <value>floFullEntryArea</value>
+  </data>
+  <data name="&gt;&gt;btnAutoApply.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="floFullEntryArea.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="floFullEntryArea.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 53</value>
+  </data>
+  <data name="floFullEntryArea.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1000, 530</value>
+  </data>
+  <data name="floFullEntryArea.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1000, 565</value>
+  </data>
+  <data name="floFullEntryArea.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;floFullEntryArea.Name" xml:space="preserve">
+    <value>floFullEntryArea</value>
+  </data>
+  <data name="&gt;&gt;floFullEntryArea.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;floFullEntryArea.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;floFullEntryArea.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

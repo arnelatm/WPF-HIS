@@ -8,7 +8,6 @@
         GreaterThanOrEqual
         LessThan
         LessThanOrEqual
-        RequiredIfNotZero
     End Enum
 
 End Namespace

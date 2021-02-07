@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "ArJournal"
             SortOrderKey = "IdNo"
-            FirstControl = txtReferenceNo
+            FirstControl = dtpTransactionDate
             _nfi.NumberDecimalDigits = 2
             MyPresenter = New ArJournalPresenter(Me)
             PresenterObj = MyPresenter
@@ -39,7 +39,14 @@ Namespace PresentationLayer.Views.Forms
 
         ' This event handler provides custom item-creation behavior.
         Private Sub JournalItemsBindingSource_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
-            MyPresenter.AddNewItemOnBindingSource(Of JournalItemView)(e, bsJournalItems, DataGridViewJournalItems)
+            e.NewObject = New JournalItemView
+            ' work around for error on datagrid entry on lastrow please do not remove.
+            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
+                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+            End If
         End Sub
 
 #Region "Fields"
@@ -179,11 +186,7 @@ Namespace PresentationLayer.Views.Forms
                 Return dtpSettlementDueDate.Value
             End Get
             Set
-                If Value Is Nothing Then
-                    dtpSettlementDueDate.Value = Date.Now()
-                Else
-                    dtpSettlementDueDate.Value = Value
-                End If
+                dtpSettlementDueDate.Value = Value
             End Set
         End Property
 
@@ -215,7 +218,6 @@ Namespace PresentationLayer.Views.Forms
                 Else
                     dtpTransactionDate.Value = Value
                 End If
-                UpdateDueDate()
             End Set
         End Property
 
@@ -236,7 +238,6 @@ Namespace PresentationLayer.Views.Forms
                 txtVatAmount.Text = FormatMoney(Value)
             End Set
         End Property
-
 
 #End Region
 
@@ -329,8 +330,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboCustomerIdNo_Validated(sender As Object, e As EventArgs) Handles cboCustomerIdNo.Validated
-            UpdateDueDate()
-            UpdateEarlySettlementValues()
+            MyPresenter.UpdateDueDate()
+            MyPresenter.UpdateEarlySettlementValues()
         End Sub
 
         Private Sub CboCustomerIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboCustomerIdNo.Validating
@@ -417,8 +418,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
-            UpdateDueDate()
-            UpdateEarlySettlementValues()
+            MyPresenter.UpdateDueDate()
+            MyPresenter.UpdateEarlySettlementValues()
         End Sub
 
         Private Function PaymentOrDiscountMade()
@@ -432,30 +433,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
-        End Sub
-
-        Private Sub UpdateDueDate()
-            If cboCustomerIdNo.Text IsNot Nothing Then
-                Dim customerPaymentDueDays =
-                        MyPresenter.GetCustomerPaymentDueDays(cboCustomerIdNo.SelectedValue)
-                DueDate = DateAdd("d", customerPaymentDueDays, TransactionDate)
-            Else
-                dtpDueDate.Value = TransactionDate
-            End If
-        End Sub
-
-        Private Sub UpdateEarlySettlementValues()
-            If cboCustomerIdNo.Text IsNot Nothing Then
-                Dim customerSettlementDueDays =
-                        MyPresenter.GetCustomerSettlementDueDays(cboCustomerIdNo.SelectedValue)
-                Dim customerSettlementDiscount As Decimal
-                customerSettlementDiscount = MyPresenter.GetCustomerSettlementDiscount(cboCustomerIdNo.SelectedValue)
-                SettlementDueDate = DateAdd("d", customerSettlementDueDays, TransactionDate)
-                txtSettlementDiscount.Text = customerSettlementDiscount
-            Else
-                dtpSettlementDueDate.Value = TransactionDate
-                txtSettlementDiscount.Text = 0
-            End If
         End Sub
 
         Private Sub UpdateTotals()
