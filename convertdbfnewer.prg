@@ -116,7 +116,7 @@ Do While Not Eof()
 	Replace CredLimit   With SUPPORIG.credlimt
 	Replace SetDueDays   With 0
 	Replace SetDisc   With 0
-	Replace PaymentDd   With 0
+	Replace PaymentDd   With SUPPORIG.CredTerm
 	If SUPPORIG.firstran < Date(1994,01,01) Then
 		Replace DateAccOp   With SUPPORIG.DateAdded
 	Else
@@ -273,7 +273,7 @@ Do While Not Eof()
 		Replace CredLimit   With custorig.credlimt
 		Replace SetDueDays   With 0
 		Replace SetDisc   With 0
-		Replace PaymentDd   With 0
+		Replace PaymentDd   With custorig.CredTerm
 		If custorig.firstran < Date(1994,01,01) Then
 			Replace DateAccOp With custorig.DateAdded
 		Else
