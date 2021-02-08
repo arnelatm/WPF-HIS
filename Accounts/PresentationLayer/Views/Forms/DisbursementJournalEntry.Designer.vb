@@ -300,8 +300,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewJournalItems
             '
-            Me.DataGridViewJournalItems.AllowUserToAddRows = False
-            Me.DataGridViewJournalItems.AllowUserToDeleteRows = False
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewJournalItems.AutoGenerateColumns = False
@@ -1644,7 +1642,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'btnPrintCheck
             '
-            Me.btnPrintCheck.DesignerSelected = True
+            Me.btnPrintCheck.DesignerSelected = False
             Me.btnPrintCheck.DisplayOnly = True
             Me.btnPrintCheck.ImageIndex = 0
             Me.btnPrintCheck.Location = New System.Drawing.Point(288, 3)

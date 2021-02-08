@@ -8,7 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class EmployeeDeductionDao
-        Inherits DaoAccounts
+        Inherits AccountsDao
         Implements IDaoChild(Of EmployeeDeduction)
 
         Private ReadOnly _db As New Db()

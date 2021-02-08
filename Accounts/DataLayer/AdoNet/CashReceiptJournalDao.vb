@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class CashReceiptJournalDao
-        Inherits DaoAccounts
+        Inherits AccountsDao
         Implements IDao(Of CashReceiptJournal), IDaoJournals(Of CashReceiptJournal), IDaoOiItem(Of CsrOiItem)
 
         Private ReadOnly _db As New Db()

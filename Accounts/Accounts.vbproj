@@ -245,7 +245,7 @@
     <Compile Include="DataLayer\AdoNet\AccountDao.vb" />
     <Compile Include="DataLayer\AdoNet\CsrOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\CustomerDao.vb" />
-    <Compile Include="DataLayer\AdoNet\DaoAccounts.vb" />
+    <Compile Include="DataLayer\AdoNet\AccountsDao.vb" />
     <Compile Include="DataLayer\AdoNet\ApJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\ApOpenInvoiceDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoFactoryAccounts.vb" />
@@ -270,7 +270,7 @@
     <Compile Include="DataLayer\AdoNet\EmployeeDao.vb" />
     <Compile Include="DataLayer\AdoNet\GeneralJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\JournalItemDao.vb" />
-    <Compile Include="DataLayer\IDaoAccounts.vb" />
+    <Compile Include="DataLayer\IAccountsDao.vb" />
     <Compile Include="DataLayer\IDaoFactoryAccounts.vb" />
     <Compile Include="LocalizedEnumConverter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -1239,9 +1239,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\Application.myapp">
