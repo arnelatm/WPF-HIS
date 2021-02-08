@@ -113,6 +113,9 @@ Namespace PresentationLayer.Presenters
                     retVal = UpdateGlReferenceNumber()
                 End If
             End If
+            If retVal >= 0 AndAlso Not IsEmpty(View.VatNumber) Then
+                ModelPresenter.UpdateVatNumber(View.VatNumber, View.SupplierIdNo)
+            End If
         End Sub
 
         Private Function RemoveDeletedApOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer

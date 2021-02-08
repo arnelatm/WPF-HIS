@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class PensionRateDao
-        Inherits DaoAccounts
+        Inherits AccountsDao
         Implements IDaoChild(Of PensionRate)
 
         Private ReadOnly _db As New Db()

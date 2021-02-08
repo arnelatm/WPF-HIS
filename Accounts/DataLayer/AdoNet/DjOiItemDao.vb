@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class DjOiItemDao
-        Inherits DaoAccounts
+        Inherits AccountsDao
         Implements IDaoChild(Of DjOiItem), IDaoOiItem(Of DjOiItem)
 
         Private ReadOnly _db As New Db()

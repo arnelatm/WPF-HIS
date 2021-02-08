@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
         Public Sub New()
         End Sub
 
-        Protected Function GetCode(db As Db, tableName As String, codeFieldName As String, idFieldName As String, idNo As Integer)
+        Protected Function GetCode(db As Db, tableName As String, codeFieldName As String, idFieldName As String, idNo As Integer) Implements ICommonDao.GetCode
             Dim sql1 As String
             Dim sql2 As String
             Dim retVal As Integer

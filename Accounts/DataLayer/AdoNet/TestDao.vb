@@ -24,7 +24,7 @@ Namespace DataLayer.AdoNet
         '    DboTvpInsertName = dataProperties(2).ToString()
         'End Sub
 
-        'Inherits DaoAccounts
+        'Inherits AccountsDao
         'Implements IDaoChild(Of JournalItem)
 
         'Private ReadOnly _db As New Db()

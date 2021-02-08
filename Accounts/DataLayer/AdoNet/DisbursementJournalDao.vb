@@ -9,7 +9,8 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class DisbursementJournalDao
-        Implements IDao(Of BusinessLayer.DisbursementJournal), IDaoJournals(Of BusinessLayer.DisbursementJournal), IDaoOiItem(Of DjOiItem), IDaoAutoVatUpdate
+        Inherits AccountsDao
+        Implements IDao(Of BusinessLayer.DisbursementJournal), IDaoJournals(Of BusinessLayer.DisbursementJournal), IDaoOiItem(Of DjOiItem)
 
         Public ReadOnly Property Args As Object()
         Private ReadOnly _db As New Db()
@@ -407,14 +408,6 @@ Namespace DataLayer.AdoNet
         Public Function GetOpenInvoices(idNo As Integer) As List(Of DjOiItem) Implements IDaoOiItem(Of DjOiItem).GetOpenInvoices
             Dim oiDao = New DjOiItemDao(JiDataNames)
             Return oiDao.GetOpenInvoices(idNo)
-        End Function
-
-        Public Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer Implements IDaoAutoVatUpdate.UpdateVatNumber
-            Dim retVal As Boolean
-            Dim sql1 As String
-            sql1 = "Update Supplier set VatNumber = '" & vatNumber & "' where IdNo = " & idNo.ToString() & " and (VatNumber IS NULL or VatNumber = '')"
-            retVal = _db.ExecuteSqlTransaction("UpdateVatNumber", sql1, "")
-            Return retVal
         End Function
 
     End Class

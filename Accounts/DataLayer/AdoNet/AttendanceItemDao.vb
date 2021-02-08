@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class AttendanceItemDao
-        Inherits DaoAccounts
+        Inherits AccountsDao
         Implements IDaoChild(Of AttendanceItem)
 
         Private ReadOnly Db As New Db()

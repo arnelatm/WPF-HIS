@@ -3,8 +3,10 @@ Imports AATM.Common.DataLayer
 
 Namespace DataLayer
 
-    Public Interface IDaoAccounts
+    Public Interface IAccountsDao
         Inherits ICommonDao
+
+        Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer
 
     End Interface
 
@@ -54,10 +56,10 @@ Namespace DataLayer
 
     End Interface
 
-    Public Interface IDaoAutoVatUpdate
+    'Public Interface IDaoAutoVatUpdate
 
-        Function UpdateVatNumber(ByVal vatNumber As String, ByVal idNo As Integer) As Integer
+    '    Function UpdateVatNumber(ByVal vatNumber As String, ByVal idNo As Integer) As Integer
 
-    End Interface
+    'End Interface
 
 End Namespace

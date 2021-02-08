@@ -66,9 +66,9 @@ Namespace PresentationLayer.Presenters
             If IsEmpty(currentVatNumber) Or override Then
                 If idNo IsNot Nothing Then
                     Dim supplierVatNumber = GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")
-                    If Not IsEmpty(supplierVatNumber) Then
-                        currentVatNumber = supplierVatNumber
-                    End If
+                    currentVatNumber = supplierVatNumber
+                Else
+                    currentVatNumber = Nothing
                 End If
             End If
         End Sub
