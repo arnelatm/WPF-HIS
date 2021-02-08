@@ -274,64 +274,64 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboViewName.Items" xml:space="preserve">
-    <value>ApJournal</value>
+    <value>ApJournalEntry</value>
   </data>
   <data name="cboViewName.Items1" xml:space="preserve">
-    <value>ArJournal</value>
+    <value>ArJournalEntry</value>
   </data>
   <data name="cboViewName.Items2" xml:space="preserve">
-    <value>CdJournal</value>
+    <value>CdJournalEntry</value>
   </data>
   <data name="cboViewName.Items3" xml:space="preserve">
-    <value>CashReceiptJournal</value>
+    <value>CashReceiptJournalEntry</value>
   </data>
   <data name="cboViewName.Items4" xml:space="preserve">
-    <value>CkJournal</value>
+    <value>CkJournalEntry</value>
   </data>
   <data name="cboViewName.Items5" xml:space="preserve">
-    <value>Customer</value>
+    <value>CustomerEntryTv</value>
   </data>
   <data name="cboViewName.Items6" xml:space="preserve">
-    <value>Employee</value>
+    <value>EmployeeEntryTv</value>
   </data>
   <data name="cboViewName.Items7" xml:space="preserve">
-    <value>ErJournal</value>
+    <value>ErJournalEntry</value>
   </data>
   <data name="cboViewName.Items8" xml:space="preserve">
-    <value>GeneralJournal</value>
+    <value>GeneralJournalEntry</value>
   </data>
   <data name="cboViewName.Items9" xml:space="preserve">
-    <value>Patient</value>
+    <value>PatientEntryTv</value>
   </data>
   <data name="cboViewName.Items10" xml:space="preserve">
-    <value>PayCycle</value>
+    <value>PayCycleEntryTv</value>
   </data>
   <data name="cboViewName.Items11" xml:space="preserve">
-    <value>PayGroup</value>
+    <value>PayGroupEntryTv</value>
   </data>
   <data name="cboViewName.Items12" xml:space="preserve">
-    <value>PayPeriod</value>
+    <value>PayPeriodEntryTv</value>
   </data>
   <data name="cboViewName.Items13" xml:space="preserve">
-    <value>PcJournal</value>
+    <value>PcJournalEntry</value>
   </data>
   <data name="cboViewName.Items14" xml:space="preserve">
-    <value>PettyCashClosing</value>
+    <value>PettyCashClosingEntry</value>
   </data>
   <data name="cboViewName.Items15" xml:space="preserve">
-    <value>ProductCategory</value>
+    <value>ProductCategoryEntry</value>
   </data>
   <data name="cboViewName.Items16" xml:space="preserve">
-    <value>SalesJournal</value>
+    <value>SalesJournalEntry</value>
   </data>
   <data name="cboViewName.Items17" xml:space="preserve">
-    <value>SecurityGroup</value>
+    <value>SecurityGroupEntryTv</value>
   </data>
   <data name="cboViewName.Items18" xml:space="preserve">
-    <value>Supplier</value>
+    <value>SupplierEntryTv</value>
   </data>
   <data name="cboViewName.Items19" xml:space="preserve">
-    <value>User</value>
+    <value>UserEntryTv</value>
   </data>
   <data name="cboViewName.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 36</value>

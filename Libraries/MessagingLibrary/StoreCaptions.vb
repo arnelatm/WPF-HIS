@@ -22,33 +22,33 @@
     Public Captions As New Collection
 
     Function StoreCaptions(ByVal frm As Object) As Collection
-        Dim FormIdNo As Int16
+        Dim SystemViewIdNo As Int16
         _dAc1 = frm.TranslatorDAC
         frm.Tag = frm.Text
         InsertForm(frm.Name)
-        FormIdNo = GetFormIdNo(frm.Name)
+        SystemViewIdNo = GetSystemViewIdNo(frm.Name)
         InsertWord(frm.Text)
-        InsertFormItem(FormIdNo, frm.Text)
+        InsertFormItem(SystemViewIdNo, frm.Text)
         Dim t As String
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
             If TypeOf cCtrl Is MenuStrip Then
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
-                SetMenuStripItems(menuStrip.Items, subMenuName, FormIdNo)
+                SetMenuStripItems(menuStrip.Items, subMenuName, SystemViewIdNo)
             ElseIf TypeOf cCtrl Is ToolStrip Then
                 Dim subMenuName = ""
                 Dim toolStrip As ToolStrip = cCtrl
                 Dim c As ToolStrip
                 c = cCtrl
                 For Each obj As Object In c.Items
-                    TranslateToolStrip(FormIdNo, c, obj)
+                    TranslateToolStrip(SystemViewIdNo, c, obj)
                 Next
             ElseIf TypeOf cCtrl Is DataGridView Then
                 Dim c As DataGridView
                 c = cCtrl
                 For Each col As DataGridViewColumn In c.Columns
-                    TranslateDataGridView(FormIdNo, c, col)
+                    TranslateDataGridView(SystemViewIdNo, c, col)
                 Next
             ElseIf TypeOf cCtrl Is DataGrid Then
                 t = CType(cCtrl, DataGrid).CaptionText
@@ -77,7 +77,7 @@
                             cCtrl.Tag = t
                             Captions.Add(cCtrl.Text, cCtrl.Name)
                             InsertWord(t)
-                            InsertFormItem(FormIdNo, t)
+                            InsertFormItem(SystemViewIdNo, t)
                         End If
                     End If
                 Catch ex As Exception
@@ -89,7 +89,7 @@
         Return Captions
     End Function
 
-    Private Sub TranslateToolStrip(formIdNo As Short, c As ToolStrip, obj As Object)
+    Private Sub TranslateToolStrip(SystemViewIdNo As Short, c As ToolStrip, obj As Object)
         Dim t As String
         Try
             obj.Tag = {obj.Text, obj.ToolTipText}
@@ -97,7 +97,7 @@
                 t = obj.Text
                 Captions.Add(t, c.Name + "." + obj.Name + ".Text")
                 InsertWord(t)
-                InsertFormItem(formIdNo, t)
+                InsertFormItem(SystemViewIdNo, t)
             Else
                 ' add an empty place holder
                 Captions.Add("", c.Name + "." + obj.Name + ".Text")
@@ -106,7 +106,7 @@
                 t = obj.ToolTipText
                 Captions.Add(t, c.Name + "." + obj.Name + ".ToolTipText")
                 InsertWord(t)
-                InsertFormItem(formIdNo, t)
+                InsertFormItem(SystemViewIdNo, t)
             Else
                 Captions.Add("", c.Name + "." + obj.Name + ".ToolTipText")
             End If
@@ -115,14 +115,14 @@
         End Try
     End Sub
 
-    Private Sub TranslateDataGridView(formIdNo As Short, c As DataGridView, obj As Object)
+    Private Sub TranslateDataGridView(SystemViewIdNo As Short, c As DataGridView, obj As Object)
         Dim t As String
         Try
             For Each col As DataGridViewColumn In c.Columns
                 t = col.HeaderText
                 Captions.Add(t, c.Name + "." + col.HeaderText)
                 InsertWord(t)
-                InsertFormItem(formIdNo, t)
+                InsertFormItem(SystemViewIdNo, t)
             Next
         Catch ex As Exception
 
@@ -133,7 +133,7 @@
     '    InsertMessage(message)
     'End Sub
 
-    Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, formIdNo As Int16)
+    Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, SystemViewIdNo As Int16)
         Try
             For Each obj As Object In dropDownItems
                 Dim subMenu = TryCast(obj, ToolStripMenuItem)
@@ -142,17 +142,17 @@
                     If Not String.IsNullOrEmpty(obj.Text) Then
                         Captions.Add(obj.text, subMenuName)
                         InsertWord(obj.Text)
-                        InsertFormItem(formIdNo, obj.Text)
+                        InsertFormItem(SystemViewIdNo, obj.Text)
                         obj.Tag = obj.Text
                     End If
                     If subMenu.HasDropDownItems Then
-                        SetMenuStripItems(subMenu.DropDownItems, subMenuName, formIdNo)
+                        SetMenuStripItems(subMenu.DropDownItems, subMenuName, SystemViewIdNo)
                     End If
                     't = obj.Text
                     'If Not String.IsNullOrEmpty(t) Then
                     '    Captions.Add(obj.text, subMenuName + "." + obj.Name)
                     '    InsertWord(obj.Text)
-                    '    InsertFormItem(formIdNo, obj.Text)
+                    '    InsertFormItem(SystemViewIdNo, obj.Text)
                     'End If
                 End If
             Next
@@ -188,32 +188,32 @@
         End If
     End Sub
 
-    Friend Sub InsertFormItem(ByVal formIdNo As Int16, ByVal item As String)
+    Friend Sub InsertFormItem(ByVal SystemViewIdNo As Int16, ByVal item As String)
         Dim cmd As String
         Dim captionIdNo As Int32
         cmd = "Select IdNo From OriginalCaptions where Caption = '" + item.ToString().TrimEnd() + "'"
         captionIdNo = _dAc1.ExecScalar(Of Int32)(cmd)
-        cmd = "SELECT COUNT(*) FROM FormItems where CaptionIdNo = " + captionIdNo.ToString() + " and FormIdNo = " + formIdNo.ToString()
+        cmd = "SELECT COUNT(*) FROM SystemViewItem where CaptionIdNo = " + captionIdNo.ToString() + " and SystemViewIdNo = " + SystemViewIdNo.ToString()
         Dim howMany As Integer = _dAc1.ExecScalar(Of Int16)(cmd)
         If howMany = 0 Then
-            cmd = "INSERT INTO FormItems (FormIdNo, CaptionIdNO) values ( " + formIdNo.ToString() + "," + captionIdNo.ToString() + ")"
+            cmd = "INSERT INTO SystemView (SystemViewIdNo, CaptionIdNO) values ( " + SystemViewIdNo.ToString() + "," + captionIdNo.ToString() + ")"
             _dAc1.ExecCmd(cmd)
         End If
     End Sub
 
     Friend Sub InsertForm(ByVal formName As String)
         Dim cmd As String
-        cmd = "SELECT COUNT(*) FROM SystemForms where FormName ='" + formName + "'"
+        cmd = "SELECT COUNT(*) FROM SystemView where SystemViewName ='" + formName + "'"
         Dim howMany As Int16 = _dAc1.ExecScalar(Of Int16)(cmd)
         If howMany = 0 Then
-            cmd = "INSERT INTO SystemForms (FormName) values ( '" + formName + "')"
+            cmd = "INSERT INTO SystemView (SystemViewName) values ( '" + formName + "')"
             _dAc1.ExecCmd(cmd)
         End If
     End Sub
 
-    Friend Function GetFormIdNo(ByVal formName As String) As Int16
+    Friend Function GetSystemViewIdNo(ByVal formName As String) As Int16
         Dim cmd As String
-        cmd = "SELECT IdNo FROM SystemForms where FormName ='" + formName + "'"
+        cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + formName + "'"
         Return _dAc1.ExecScalar(Of Int16)(cmd)
     End Function
 

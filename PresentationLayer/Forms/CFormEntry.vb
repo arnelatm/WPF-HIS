@@ -702,7 +702,7 @@ Public Class CFormEntry
             Debugger.Break()
         End If
 
-        RunTranslator(FormIdNo)
+        RunTranslator(SystemViewIdNo)
 
     End Sub
 

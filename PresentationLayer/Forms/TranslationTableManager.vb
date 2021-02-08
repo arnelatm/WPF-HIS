@@ -19,7 +19,7 @@ Public Class TranslationTableManager
 
     Private _originalAppTextLanguage As String
     Public Property Editing As Boolean
-    Public Property FormIdNoToTranslate As Int16
+    Public Property SystemViewIdNoToTranslate As Int16
 
     Private Event GridClick()
 
@@ -44,8 +44,8 @@ Public Class TranslationTableManager
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             StoreCaptions1.StoreCaptions(Me)
-            Cmd = "Select IdNo from systemForms where FormName ='" + Name + "'"
-            FormIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+            Cmd = "Select IdNo from SystemView where SystemViewName ='" + Name + "'"
+            SystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
             LoadLanguages(cmbLanguage)
             'Dim defaultMirroredLanguageIdNo As Int16
             'Cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
@@ -269,10 +269,10 @@ Public Class TranslationTableManager
             SuspendLayout()
             If language.ToLower = "original" Then
                 Dim dsColumn As DataSet
-                If FormIdNoToTranslate = 0 Then
+                If SystemViewIdNoToTranslate = 0 Then
                     dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM OriginalCaptions")
                 Else
-                    dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM FormItemsOriginal_View where FormIdNo = " + FormIdNoToTranslate.ToString())
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM SystemViewItemOriginal_View where SystemView IdNo = " + SystemViewIdNoToTranslate.ToString())
                 End If
                 If dsColumn.Tables(0).Rows.Count = 0 Then
                     MessageBox.Show("No Data Found")
@@ -292,12 +292,12 @@ Public Class TranslationTableManager
                 DataGrid1.Columns(1).ReadOnly = True
             Else
                 Dim dsColumn As DataSet
-                If FormIdNoToTranslate = 0 Then
+                If SystemViewIdNoToTranslate = 0 Then
 
                     dsColumn = TranslatorDAC.ReturnDs("Select Caption, translatedCaption FROM TranslatedCaption_View Where LanguageIdNo = " + cmbLanguage.SelectedValue.ToString())
                 Else
-                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translatedCaption FROM FormItemsOriginal_View Where LanguageIdNo=" + cmbLanguage.SelectedValue.ToString() +
-                                                      " and FormIdNo = " + FormIdNoToTranslate.ToString())
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption, translatedCaption FROM SystemViewItemOriginal_View Where LanguageIdNo=" + cmbLanguage.SelectedValue.ToString() +
+                                                      " and SystemViewIdNo = " + SystemViewIdNoToTranslate.ToString())
                 End If
                 Dv = TransTable.DefaultView
                 Dv.Sort = "original"
