@@ -86,7 +86,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
-            RunTranslator(FormIdNo)
+            RunTranslator(SystemViewIdNo)
         End Sub
 
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel

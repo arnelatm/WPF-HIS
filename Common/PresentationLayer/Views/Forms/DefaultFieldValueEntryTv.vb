@@ -146,6 +146,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             cboDataType.DataSource = PresenterObj.MakeEnumComboList(Of DataTypeSelection)
+            cboViewName.DataSource = PresenterObj.GetLookup("SystemView")
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()

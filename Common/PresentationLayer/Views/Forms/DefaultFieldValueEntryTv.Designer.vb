@@ -150,8 +150,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboViewName.Name = "cboViewName"
             Me.cboViewName.OldValue = 0
             Me.cboViewName.OriginalDataSource = Nothing
-        Me.cboViewName.OriginalDropDownStyle = 1
-        Me.cboViewName.OriginalList = Nothing
+            Me.cboViewName.OriginalDropDownStyle = 1
+            Me.cboViewName.OriginalList = Nothing
         Me.cboViewName.PreviousSelectedIndex = -1
         Me.cboViewName.ReadOnlyCombo = false
         Me.cboViewName.ValueIsMandatory = false

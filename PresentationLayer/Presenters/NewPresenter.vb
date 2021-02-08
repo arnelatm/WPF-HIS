@@ -803,7 +803,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
 
     Public Sub GoTranslate()
         'Dim frm As New TranslationTableManager()
-        'frm.FormIdNoToTranslate = FormIdNo
+        'frm.SystemViewIdNoToTranslate = SystemViewIdNo
         'frm.AppDataDAC = AppDataDAC
         'frm.TranslatorDAC = TranslatorDAC
         'frm.Show()
