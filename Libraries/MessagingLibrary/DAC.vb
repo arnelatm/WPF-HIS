@@ -184,6 +184,7 @@ Public Class Dac
         Catch ex As Exception
             status = "Error"
             ErrorMessage(ex, NonQueryError)
+            Debugger.Break()
         Finally
             If Cn.state = ConnectionState.Open Then Cn.close()
         End Try

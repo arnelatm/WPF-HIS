@@ -104,8 +104,8 @@ Namespace Services
             Return DataBo.GetRules()
         End Function
 
-        Public Function GetDefaultFieldValues(ByVal viewName As String) Implements IService.GetDefaultFieldValues
-            Return DefaultFieldValueDao.GetTableDefaultValues(viewName)
+        Public Function GetDefaultFieldValues(ByVal systemViewName As String) Implements IService.GetDefaultFieldValues
+            Return DefaultFieldValueDao.GetTableDefaultValues(systemViewName)
         End Function
 
         Public Function CreateInstance(ByVal strFullyQualifiedName As String, Optional instanceParameters As Object = Nothing) As Object

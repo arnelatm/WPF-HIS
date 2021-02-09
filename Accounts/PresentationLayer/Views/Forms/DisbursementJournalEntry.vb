@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
                 Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
             Else
                 ViewDisplayName = "PcJournalEntry"
-                tableName = "PcJournal"
+                'tableName = "PcJournal"
                 MyPresenter = New DisbursementJournalPresenter(Me, "PcJournal")
                 Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
                 btnPrintCheck.Visible = False

@@ -12,18 +12,18 @@ Namespace AdoNet
         Public Function GetRecordById(idNo) As DefaultFieldValue _
             Implements IDefaultFieldValueDao.GetRecordById
             Dim sql As String =
-                    " SELECT IdNo, ViewName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField" &
-                    "   FROM [DefaultFieldValue]" &
+                    " SELECT IdNo, SystemViewName, SystemViewNameAra, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField" &
+                    "   FROM [DefaultFieldValue_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "ViewName") As List(Of DefaultFieldValue) _
+        Public Function GetAll(Optional sortExpression As String = "SystemViewName") As List(Of DefaultFieldValue) _
             Implements IDefaultFieldValueDao.GetAll
             Dim sql As String =
-                    " SELECT IdNo, ViewName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
-                    "   FROM [DefaultFieldValue] " & "order by " & sortExpression
+                    " SELECT IdNo, SystemViewName, SystemViewNameAra, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
+                    "   FROM [DefaultFieldValue_View] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
@@ -31,8 +31,7 @@ Namespace AdoNet
             Implements IDefaultFieldValueDao.UpdateRecord
             Dim sql As String =
                     " UPDATE [DefaultFieldValue]" &
-                    "    SET ViewName = @ViewName," &
-                    "        FieldName = @FieldName," &
+                    "    SET FieldName = @FieldName," &
                     "        DataType = @DataType," &
                     "        Length = @Length," &
                     "        DecimalPart = @DecimalPart," &
@@ -43,11 +42,11 @@ Namespace AdoNet
             Return Db.Update(sql, Take(defaultFieldValue))
         End Function
 
-        Public Function GetDefaultFieldValues(viewName As String) As List(Of DefaultFieldValue) _
+        Public Function GetDefaultFieldValues(systemViewName As String) As List(Of DefaultFieldValue) _
             Implements IDefaultFieldValueDao.GetTableDefaultValues
             Dim sql As String =
-                    " SELECT IdNo, ViewName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
-                    "   FROM [DefaultFieldValue] where ViewName = '" & viewName & "'"
+                    " SELECT IdNo, SystemViewName, SystemViewNameAra , FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
+                    "   FROM [DefaultFieldValue_View] where SystemViewName = '" & systemViewName & "'"
             Dim data = Db.Read(sql, Make).ToList()
             Return data
         End Function
@@ -56,8 +55,8 @@ Namespace AdoNet
             Implements IDefaultFieldValueDao.AddRecord
             Dim sql As String =
                     " INSERT INTO [DefaultFieldValue] " &
-                    " (ViewName, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField) " &
-                    " VALUES (@ViewName, @FieldName, @DataType, @Length, @DecimalPart, @DefaultValue, @LinkedTable, @LinkedField) "
+                    " (FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField) " &
+                    " VALUES (@FieldName, @DataType, @Length, @DecimalPart, @DefaultValue, @LinkedTable, @LinkedField) "
             Return Db.Insert(sql, Take(defaultFieldValue))
         End Function
 
@@ -65,7 +64,8 @@ Namespace AdoNet
                                     Function(reader) _
             New DefaultFieldValue() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .ViewName = Extensions.AsString(reader("ViewName")),
+            .SystemViewName = Extensions.AsString(reader("SystemViewName")),
+            .SystemViewNameAra = Extensions.AsString(reader("SystemViewNameAra")),
             .FieldName = Extensions.AsString(reader("FieldName")),
             .DataType = Extensions.AsInt(Of Byte)(reader("DataType")),
             .Length = Extensions.AsInt(Of Byte)(reader("Length")),
@@ -78,7 +78,8 @@ Namespace AdoNet
         Private Function Take(defaultFieldValue As DefaultFieldValue) As Object()
             Return New Object() {
                                     "@IdNo", defaultFieldValue.IdNo,
-                                    "@ViewName", defaultFieldValue.ViewName,
+                                    "@SystemViewName", defaultFieldValue.SystemViewName,
+                                    "@SystemViewNameAra", defaultFieldValue.SystemViewNameAra,
                                     "@FieldName", defaultFieldValue.FieldName,
                                     "@DataType", defaultFieldValue.DataType,
                                     "@Length", defaultFieldValue.Length,

@@ -21,13 +21,13 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As IView)
             MyBase.New(itemView)
-            Dim viewName As String
+            Dim systemViewName As String
             If DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName IsNot Nothing Then
-                viewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName
+                systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName
             Else
-                viewName = DirectCast(itemView, System.Windows.Forms.Control).Name
+                systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name
             End If
-            ViewDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(viewName)
+            ViewDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(systemViewName)
         End Sub
 
         Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
@@ -153,7 +153,7 @@ Namespace PresentationLayer.Presenters
                     Case DataTypeSelection.UShortType
                         CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
                     Case Else
-                        MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in form/view " & item.ViewName & " conversion not handled")
+                        MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in form/view " & item.SystemViewName & " conversion not handled")
                 End Select
             Next item
             Return

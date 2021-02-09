@@ -73,14 +73,15 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
-            RunTranslator(SystemViewIdNo)
+            RunTranslator(VSystemViewIdNo)
         End Sub
 
         Private Sub BalanceSheet_Shown() Handles MyBase.Shown
             lblBegDateCaption.Visible = False
             dtpBeginningDate.Visible = False
             AdjustBeginningEndDates(_period, dtpBeginningDate.Value, dtpEndingDate.Value)
-            Dim title = Messaging.TranslateCaption("Balance Sheet")
+            Dim title As String
+            title = Messaging.TranslateCaption("Balance Sheet")
             Select Case _period
                 Case "Y"
                     title = Messaging.TranslateCaption("Yearly") + " " + title
@@ -96,7 +97,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                     dtpEndingDate.Visible = True
                     dtpBeginningDate.Visible = True
             End Select
-            lblTitle.Text = Text
+            lblTitle.Text = title
         End Sub
 
     End Class

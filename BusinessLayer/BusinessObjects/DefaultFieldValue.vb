@@ -10,12 +10,14 @@ Namespace BusinessObjects
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             ' establish business rules
-            AddRule(New ValidateRequired("ViewName"))
+            AddRule(New ValidateRequired("SystemViewName"))
             AddRule(New ValidateRequired("FieldName"))
         End Sub
 
         Public Property IdNo As Int16
-        Public Property ViewName As String
+        Public Property SystemViewIdNo As Int16
+        Public Property SystemViewName As String
+        Public Property SystemViewNameAra As String
         Public Property FieldName As String
         Public Property DataType As Byte
         Public Property Length As Byte
