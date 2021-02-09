@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "SalesJournal"
             SortOrderKey = "IdNo"
-            FirstControl = txtReferenceNo
+            FirstControl = dtpTransactionDate
 
             _nfi.NumberDecimalDigits = 2
             PresenterObj = New SalesJournalPresenter(Me)

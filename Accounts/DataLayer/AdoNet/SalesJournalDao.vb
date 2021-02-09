@@ -102,13 +102,12 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function UpdateGlReferenceNumber(ByRef bizObj As SalesJournal) As Integer Implements IDaoJournals(Of SalesJournal).UpdateGlReferenceNumber
-            Dim retVal As Boolean
             Dim sql As String
             Dim transactionDate = bizObj.TransactionDate
             Dim referenceNo As String
             referenceNo = "S" + Right("00" + Month(transactionDate).ToString, 2) & "-" & Right("00" + DateAndTime.Day(transactionDate).ToString, 2)
             sql = "Update [SalesJournal] set ReferenceNo = '" & referenceNo & "' where IdNo = " & bizObj.IdNo
-            retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql, "")
+            Dim retVal As Boolean = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql, "")
             Return retVal
         End Function
 

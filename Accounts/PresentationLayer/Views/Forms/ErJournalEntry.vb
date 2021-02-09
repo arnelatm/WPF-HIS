@@ -29,16 +29,24 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "ErJournal"
             SortOrderKey = "IdNo"
-            FirstControl = txtReferenceNo
+            FirstControl = dtpTransactionDate
             _nfi.NumberDecimalDigits = 2
-            PresenterObj = New ErJournalPresenter(Me)
-            Ea = PresenterObj.Ea
+            MyPresenter = New ErJournalPresenter(Me)
+            PresenterObj = MyPresenter
+            Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
         End Sub
 
         ' This event handler provides custom item-creation behavior.
-        Private Sub JournalItemsBindingSource_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
-            MyPresenter.AddNewItemOnBindingSource(Of JournalItemView)(e, bsJournalItems, DataGridViewJournalItems)
+        Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+            e.NewObject = New JournalItemView
+            ' work around for error on datagrid entry on lastrow please do not remove.
+            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
+                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+            End If
         End Sub
 
 #Region "Fields"
@@ -185,16 +193,16 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCentersByCode = PresenterObj.GetLookup("RevCostCenter")
+            _accountsByCode = MyPresenter.GetDetailAccountList()
+            _revCostCentersByCode = MyPresenter.GetLookup("RevCostCenter")
             cboEmployeeIdNo.BeginUpdate()
-            cboEmployeeIdNo.DataSource = PresenterObj.GetLookup("Employee")
+            cboEmployeeIdNo.DataSource = MyPresenter.GetLookup("Employee")
             cboEmployeeIdNo.EndUpdate()
             cboTransactionType.BeginUpdate()
-            cboTransactionType.DataSource = PresenterObj.MakeEnumComboList(Of TransactionTypeSelection)
+            cboTransactionType.DataSource = MyPresenter.MakeEnumComboList(Of TransactionTypeSelection)
             cboTransactionType.EndUpdate()
             cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.EmployeeLoan))
+            cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.EmployeeLoan))
             cboAccountIdNo.EndUpdate()
         End Sub
 
@@ -282,7 +290,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
-            PresenterObj.UpdateFirstLine()
+            MyPresenter.UpdateFirstLine()
             UpdateTotals()
             DataGridViewJournalItems.Refresh()
         End Sub
@@ -359,7 +367,8 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) _
+        Handles DataGridViewJournalItems.UserDeletingRow
             Dim erJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(erJournalRow) Then
                 ' Do not allow the user to delete the first row.
@@ -369,7 +378,7 @@ Namespace PresentationLayer.Views.Forms
             ElseIf MyPresenter.EditMode Then
                 Dim jiIdNo As Integer
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
-                If PresenterObj.ArCollectionExists("ER", jiIdNo) Then
+                If MyPresenter.ArCollectionExists("ER", jiIdNo) Then
                     ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
                     Messaging.Show(True, "MsgDeleteCollEntryNotAllowed")
                     ' Cancel the deletion

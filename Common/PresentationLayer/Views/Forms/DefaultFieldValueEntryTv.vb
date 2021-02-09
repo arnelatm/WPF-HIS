@@ -12,11 +12,11 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             FormTitleCaption = "Default Field Values Maintenance Form"
-            MainTableName = "DefaultFieldValue"
-            TvMainFieldName = "ViewName"
+            MainTableName = "DefaultFieldValue_View"
+            TvMainFieldName = "SystemViewName"
             TvSecondaryFieldName = "FieldName"
-            SortOrderKey = "ViewName, FieldName"
-            FirstControl = cboViewName
+            SortOrderKey = "SystemViewName, FieldName"
+            FirstControl = cboSystemViewIdNo
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New DefaultFieldValuePresenter(Me)
             Ea = PresenterObj.Ea
@@ -34,6 +34,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property SystemViewIdNo As Int16 Implements IDefaultFieldValueView.SystemViewIdNo
+            Get
+                Return cboSystemViewIdNo.GetValue()
+            End Get
+            Set
+                cboSystemViewIdNo.SetValue(Value)
+                txtSystemViewName.Text = cboSystemViewIdNo.Text
+            End Set
+        End Property
+
         Public Property FieldName As String Implements IDefaultFieldValueView.FieldName
             Get
                 Return txtFieldName.Text
@@ -43,12 +53,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ViewName As String Implements IDefaultFieldValueView.ViewName
+        Public Property SystemViewName As String Implements IDefaultFieldValueView.SystemViewName
             Get
-                Return cboViewName.Text
+                Return txtSystemViewName.Text
             End Get
             Set
-                cboViewName.Text = Value
+                txtSystemViewName.Text = Value
+            End Set
+        End Property
+
+        Public Property SystemViewNameAra As String Implements IDefaultFieldValueView.SystemViewNameAra
+            Get
+                Return txtSystemViewNameAra.Text
+            End Get
+            Set
+                txtSystemViewNameAra.Text = Value
             End Set
         End Property
 
@@ -146,14 +165,16 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             cboDataType.DataSource = PresenterObj.MakeEnumComboList(Of DataTypeSelection)
-            cboViewName.DataSource = PresenterObj.GetLookup("SystemView")
+            cboSystemViewIdNo.DataSource = PresenterObj.GetLookup("SystemView")
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
             FieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"FieldName", txtFieldName},
-                {"ViewName", cboViewName},
+                {"SystemViewIdNo", cboSystemViewIdNo},
+                {"SystemViewName", txtSystemViewName},
+                {"SystemViewNameAra", txtSystemViewNameAra},
                 {"DataType", cboDataType},
                 {"IdNo", TxtIdNo},
                 {"Length", txtLength},
@@ -161,6 +182,11 @@ Namespace PresentationLayer.Views.Forms
                 {"LinkedTable", txtLinkedTable},
                 {"LinkedField", txtLinkedField}
                 }
+        End Sub
+
+        Private Sub CboSystemViewIdNo_Changed(sender As Object, e As EventArgs) Handles cboSystemViewIdNo.Validated, cboSystemViewIdNo.SelectionChangeCommitted
+            txtSystemViewName.Text = cboSystemViewIdNo.Text
+            txtSystemViewNameAra.Text = cboSystemViewIdNo.Text
         End Sub
 
     End Class

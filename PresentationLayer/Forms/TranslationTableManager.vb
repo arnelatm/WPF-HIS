@@ -45,7 +45,7 @@ Public Class TranslationTableManager
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             StoreCaptions1.StoreCaptions(Me)
             Cmd = "Select IdNo from SystemView where SystemViewName ='" + Name + "'"
-            SystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
+            VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
             LoadLanguages(cmbLanguage)
             'Dim defaultMirroredLanguageIdNo As Int16
             'Cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"

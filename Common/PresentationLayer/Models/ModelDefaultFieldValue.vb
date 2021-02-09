@@ -26,10 +26,10 @@ Namespace PresentationLayer.Models
         '    Return DefaultFieldValueService.GetDefaultFieldValue(tableName)
         'End Function
 
-        Public Function GetDefaultFieldValues(viewName As String) As List(Of DefaultFieldValueModel) _
+        Public Function GetDefaultFieldValues(systemViewName As String) As List(Of DefaultFieldValueModel) _
             Implements IModelDefaultFieldValue.GetDefaultFieldValue
             Dim dfvService = New DefaultFieldValueService
-            Dim data = dfvService.GetDefaultFieldValues(viewName)
+            Dim data = dfvService.GetDefaultFieldValues(systemViewName)
             Dim result = New List(Of DefaultFieldValueModel)
             For Each item In data
                 Dim dM = New DefaultFieldValueModel

@@ -37,7 +37,7 @@ Namespace PresentationLayer.Views.Forms
             Ea.SubscribeEvent(Me)
         End Sub
 
-        Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+        Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
             e.NewObject = New JournalItemView
             ' work around for error on datagrid entry on lastrow please do not remove.
             ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
@@ -462,9 +462,8 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UserDeletingRow(ByVal sender As Object,
-                                            ByVal e As DataGridViewRowCancelEventArgs) _
-            Handles DataGridViewJournalItems.UserDeletingRow
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) _
+            	Handles DataGridViewJournalItems.UserDeletingRow
             Dim apJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(apJournalRow) Then
                 ' Do not allow the user to delete the first row.

@@ -40,7 +40,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim passedValue As Integer = retVal
+            'Dim passedValue As Integer = retVal
             If retVal >= 0 And GlobalFunctions.IsEmpty(View.SupplierCode) Then
                 retVal = ModelPresenter.GenerateCode(View.IdNo)
             End If

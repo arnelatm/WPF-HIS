@@ -38,7 +38,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         ' This event handler provides custom item-creation behavior.
-        Private Sub JournalItemsBindingSource_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+        Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
             e.NewObject = New JournalItemView
             ' work around for error on datagrid entry on lastrow please do not remove.
             ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
@@ -329,7 +329,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboCustomerIdNo_Validated(sender As Object, e As EventArgs) Handles cboCustomerIdNo.Validated, cboCustomerIdNo.SelectionChangeCommitted
+        Private Sub CboCustomerIdNo_Changed(sender As Object, e As EventArgs) Handles cboCustomerIdNo.Validated, cboCustomerIdNo.SelectionChangeCommitted
             MyPresenter.UpdateDueDate()
             MyPresenter.UpdateEarlySettlementValues()
         End Sub
@@ -441,7 +441,8 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) _
+		Handles DataGridViewJournalItems.UserDeletingRow
             Dim arJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(arJournalRow) Then
                 ' Do not allow the user to delete the first row.

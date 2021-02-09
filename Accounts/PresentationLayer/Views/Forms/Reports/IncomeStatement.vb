@@ -71,7 +71,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
-            RunTranslator(SystemViewIdNo)
+            RunTranslator(VSystemViewIdNo)
         End Sub
 
         Private Sub IncomeStatement_Shown() Handles MyBase.Shown
@@ -94,7 +94,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                     dtpEndingDate.Visible = True
                     dtpBeginningDate.Visible = True
             End Select
-            lblTitle.Text = Text
+            lblTitle.Text = title
         End Sub
 
     End Class

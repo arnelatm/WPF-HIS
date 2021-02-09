@@ -17,7 +17,7 @@ Public Class BfMain
     Private _textDisplayLanguage As String
 
     Protected CaptionCollection As New Collection
-    Protected SystemViewIdNo As Int16
+    Protected VSystemViewIdNo As Int16
     Protected InitializationMode As Boolean = True
     Protected LtrCultureInfoStr = GlobalVariables.DefaultUnmirroredCultureInfoStr
     Protected RtlCultureInfoStr = GlobalVariables.DefaultMirroredCultureInfoStr
@@ -296,7 +296,7 @@ Public Class BfMain
         If useOriginal Then
             UserOriginalCaptions()
         Else
-            cmd = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + SystemViewIdNo.ToString()
+            cmd = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + VSystemViewIdNo.ToString()
             Dim translations As DataSet
             translations = TranslatorDAC.ReturnDs(cmd)
             Dv = translations.Tables(0).DefaultView
@@ -549,7 +549,7 @@ Public Class BfMain
             CaptionCollection = StoreCaptions1.StoreCaptions(Me)
             DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
             cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + Name + "'"
-            SystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
+            VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
             TranslateForm()
         End If
     End Sub
@@ -772,7 +772,7 @@ Public Class BfMain
     '                useOriginal = True
     '            End If
     '        Else
-    '            cmd = "select translated from formItemsOriginal_view where LanguageIdNo = " + desiredLanguageIdNo.ToString() + " and SystemViewIdNo = " + SystemViewIdNo.ToString()
+    '            cmd = "select translated from formItemsOriginal_view where LanguageIdNo = " + desiredLanguageIdNo.ToString() + " and VSystemViewIdNo = " + VSystemViewIdNo.ToString()
     '        End If
     '    End If
     '    If useOriginal Then

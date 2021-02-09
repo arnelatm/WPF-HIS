@@ -92,11 +92,11 @@ Namespace PresentationLayer.Views.Forms.Reports
                     dtpEndingDate.Visible = True
                     dtpBeginningDate.Visible = True
             End Select
-            lblTitle.Text = Text
+            lblTitle.Text = title
         End Sub
 
         Private Sub btnTranslate_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
-            RunTranslator(SystemViewIdNo)
+            RunTranslator(VSystemViewIdNo)
         End Sub
 
     End Class

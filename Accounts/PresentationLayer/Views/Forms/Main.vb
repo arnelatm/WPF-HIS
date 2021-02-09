@@ -398,7 +398,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripButtonTranslate_Click(sender As Object, e As EventArgs) Handles ToolStripButtonTranslate.Click
             Dim frm As New TranslationTableManager With {
-                .SystemViewIdNoToTranslate = SystemViewIdNo,
+                .SystemViewIdNoToTranslate = VSystemViewIdNo,
                 .AppDataDAC = AppDataDAC,
                 .TranslatorDAC = TranslatorDAC
             }
@@ -979,7 +979,7 @@ Namespace PresentationLayer.Views.Forms
 
         'Private Sub ToolStripButtonTranslate_Click(sender As Object, e As EventArgs) Handles ToolStripButtonTranslate.Click
         '    Dim frm As New TranslationTableManager()
-        '    frm.SystemViewIdNoToTranslate = SystemViewIdNo
+        '    frm.SystemViewIdNoToTranslate = VSystemViewIdNo
         '    frm.AppDataDAC = AppDataDAC
         '    frm.TranslatorDAC = TranslatorDAC
         '    frm.Show()

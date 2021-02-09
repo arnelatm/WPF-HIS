@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 299</value>
+    <value>300, 276</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -186,175 +186,67 @@
   <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblTableName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblSystemViewIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblTableName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblSystemViewIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 36</value>
   </data>
-  <data name="lblTableName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblSystemViewIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblTableName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblSystemViewIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 23</value>
   </data>
-  <data name="lblTableName.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblSystemViewIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>157</value>
   </data>
-  <data name="lblTableName.Text" xml:space="preserve">
+  <data name="lblSystemViewIdNo.Text" xml:space="preserve">
     <value>View Name</value>
   </data>
-  <data name="lblTableName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblSystemViewIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblTableName.Name" xml:space="preserve">
-    <value>lblTableName</value>
+  <data name="&gt;&gt;lblSystemViewIdNo.Name" xml:space="preserve">
+    <value>lblSystemViewIdNo</value>
   </data>
-  <data name="&gt;&gt;lblTableName.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblSystemViewIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblTableName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblSystemViewIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;lblTableName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblSystemViewIdNo.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="cboViewName.AutoCompleteCustomSource" xml:space="preserve">
-    <value>ApJournal</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource1" xml:space="preserve">
-    <value>ArJournal</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource2" xml:space="preserve">
-    <value>CashDisbursementJournal</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource3" xml:space="preserve">
-    <value>CashReceiptJournal</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource4" xml:space="preserve">
-    <value>ProductCategory</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource5" xml:space="preserve">
-    <value>CkJournal</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource6" xml:space="preserve">
-    <value>Customer</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource7" xml:space="preserve">
-    <value>Employee</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource8" xml:space="preserve">
-    <value>ErJournal</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource9" xml:space="preserve">
-    <value>GeneralJournal</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource10" xml:space="preserve">
-    <value>Supplier</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource11" xml:space="preserve">
-    <value>Patient</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource12" xml:space="preserve">
-    <value>PcJournal</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource13" xml:space="preserve">
-    <value>SalesJournal</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource14" xml:space="preserve">
-    <value>SecurityGroup</value>
-  </data>
-  <data name="cboViewName.AutoCompleteCustomSource15" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="cboViewName.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Popup</value>
-  </data>
-  <data name="cboViewName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboSystemViewIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboViewName.Items" xml:space="preserve">
-    <value>ApJournalEntry</value>
+  <data name="cboSystemViewIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="cboViewName.Items1" xml:space="preserve">
-    <value>ArJournalEntry</value>
-  </data>
-  <data name="cboViewName.Items2" xml:space="preserve">
-    <value>CdJournalEntry</value>
-  </data>
-  <data name="cboViewName.Items3" xml:space="preserve">
-    <value>CashReceiptJournalEntry</value>
-  </data>
-  <data name="cboViewName.Items4" xml:space="preserve">
-    <value>CkJournalEntry</value>
-  </data>
-  <data name="cboViewName.Items5" xml:space="preserve">
-    <value>CustomerEntryTv</value>
-  </data>
-  <data name="cboViewName.Items6" xml:space="preserve">
-    <value>EmployeeEntryTv</value>
-  </data>
-  <data name="cboViewName.Items7" xml:space="preserve">
-    <value>ErJournalEntry</value>
-  </data>
-  <data name="cboViewName.Items8" xml:space="preserve">
-    <value>GeneralJournalEntry</value>
-  </data>
-  <data name="cboViewName.Items9" xml:space="preserve">
-    <value>PatientEntryTv</value>
-  </data>
-  <data name="cboViewName.Items10" xml:space="preserve">
-    <value>PayCycleEntryTv</value>
-  </data>
-  <data name="cboViewName.Items11" xml:space="preserve">
-    <value>PayGroupEntryTv</value>
-  </data>
-  <data name="cboViewName.Items12" xml:space="preserve">
-    <value>PayPeriodEntryTv</value>
-  </data>
-  <data name="cboViewName.Items13" xml:space="preserve">
-    <value>PcJournalEntry</value>
-  </data>
-  <data name="cboViewName.Items14" xml:space="preserve">
-    <value>PettyCashClosingEntry</value>
-  </data>
-  <data name="cboViewName.Items15" xml:space="preserve">
-    <value>ProductCategoryEntry</value>
-  </data>
-  <data name="cboViewName.Items16" xml:space="preserve">
-    <value>SalesJournalEntry</value>
-  </data>
-  <data name="cboViewName.Items17" xml:space="preserve">
-    <value>SecurityGroupEntryTv</value>
-  </data>
-  <data name="cboViewName.Items18" xml:space="preserve">
-    <value>SupplierEntryTv</value>
-  </data>
-  <data name="cboViewName.Items19" xml:space="preserve">
-    <value>UserEntryTv</value>
-  </data>
-  <data name="cboViewName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboSystemViewIdNo.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 36</value>
   </data>
-  <data name="cboViewName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboSystemViewIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboViewName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboSystemViewIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cboViewName.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboSystemViewIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;cboViewName.Name" xml:space="preserve">
-    <value>cboViewName</value>
+  <data name="&gt;&gt;cboSystemViewIdNo.Name" xml:space="preserve">
+    <value>cboSystemViewIdNo</value>
   </data>
-  <data name="&gt;&gt;cboViewName.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;cboSystemViewIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboViewName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboSystemViewIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;cboViewName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboSystemViewIdNo.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="lblFieldName.Font" type="System.Drawing.Font, System.Drawing">
@@ -798,6 +690,66 @@
   <data name="&gt;&gt;txtDefaultValue.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="txtSystemViewNameAra.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtSystemViewNameAra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 238</value>
+  </data>
+  <data name="txtSystemViewNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtSystemViewNameAra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtSystemViewNameAra.TabIndex" type="System.Int32, mscorlib">
+    <value>170</value>
+  </data>
+  <data name="txtSystemViewNameAra.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtSystemViewNameAra.Name" xml:space="preserve">
+    <value>txtSystemViewNameAra</value>
+  </data>
+  <data name="&gt;&gt;txtSystemViewNameAra.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtSystemViewNameAra.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtSystemViewNameAra.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="txtSystemViewName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtSystemViewName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 263</value>
+  </data>
+  <data name="txtSystemViewName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtSystemViewName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtSystemViewName.TabIndex" type="System.Int32, mscorlib">
+    <value>171</value>
+  </data>
+  <data name="txtSystemViewName.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtSystemViewName.Name" xml:space="preserve">
+    <value>txtSystemViewName</value>
+  </data>
+  <data name="&gt;&gt;txtSystemViewName.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtSystemViewName.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtSystemViewName.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -811,7 +763,7 @@
     <value>10, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 299</value>
+    <value>605, 276</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -862,7 +814,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>905, 352</value>
+    <value>905, 329</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>320, 235</value>

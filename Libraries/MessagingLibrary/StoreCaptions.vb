@@ -196,7 +196,7 @@
         cmd = "SELECT COUNT(*) FROM SystemViewItem where CaptionIdNo = " + captionIdNo.ToString() + " and SystemViewIdNo = " + SystemViewIdNo.ToString()
         Dim howMany As Integer = _dAc1.ExecScalar(Of Int16)(cmd)
         If howMany = 0 Then
-            cmd = "INSERT INTO SystemView (SystemViewIdNo, CaptionIdNO) values ( " + SystemViewIdNo.ToString() + "," + captionIdNo.ToString() + ")"
+            cmd = "INSERT INTO SystemViewItem (SystemViewIdNo, CaptionIdNO) values ( " + SystemViewIdNo.ToString() + "," + captionIdNo.ToString() + ")"
             _dAc1.ExecCmd(cmd)
         End If
     End Sub

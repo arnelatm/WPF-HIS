@@ -14,9 +14,9 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
 
             ModelPresenter = New ModelCommon("DefaultFieldValue")
-            TableName = "DefaultFieldValue"
-            SortOrderKey = "ViewName + FieldName"
-            TreeViewMainField = "ViewName"
+            'TableName = "DefaultFieldValue"
+            SortOrderKey = "SystemViewName + FieldName"
+            TreeViewMainField = "SystemViewName"
             TreeViewSecondaryField = "FieldName"
             OriginalModel = New DefaultFieldValueModel()
             DataModel = New DefaultFieldValueModel
