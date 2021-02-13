@@ -20,7 +20,7 @@ Namespace PresentationLayer
         Public Sub New(view As ISecurityGroupView)
             MyBase.New(view)
             ModelPresenter = New Model("SecurityGroup")
-            TableName = "SecurityGroup_View"
+            'TableName = "SecurityGroup_View"
             SortOrderKey = "SecurityGroupName"
             TreeViewMainField = "SecurityGroupName"
             TreeViewSecondaryField = "SecurityGroupCode"
