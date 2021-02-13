@@ -272,7 +272,7 @@ Public Class TranslationTableManager
                 If SystemViewIdNoToTranslate = 0 Then
                     dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM OriginalCaptions")
                 Else
-                    dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM SystemViewItemOriginal_View where SystemView IdNo = " + SystemViewIdNoToTranslate.ToString())
+                    dsColumn = TranslatorDAC.ReturnDs("Select Caption FROM SystemViewItemOriginal_View where SystemViewIdNo = " + SystemViewIdNoToTranslate.ToString())
                 End If
                 If dsColumn.Tables(0).Rows.Count = 0 Then
                     MessageBox.Show("No Data Found")

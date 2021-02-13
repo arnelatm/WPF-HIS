@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views
     Public Class SecurityGroupView
         Implements ISecurityGroupView
 
-        'Public Property MainTableName As String = ""
+        Public Property MainTableName As String = "SecurityGroup_View"
 
         Public Sub New()
 

@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
 
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "SecurityGroup"
+            MainTableName = "SecurityGroup_View"
             TvMainFieldName = "SecurityGroupName"
             TvSecondaryFieldName = "SecurityGroupCode"
             SortOrderKey = "SecurityGroupName"
