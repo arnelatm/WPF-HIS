@@ -16,7 +16,12 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordsWithIdNo(payPeriodIdNo, Optional sortExpression = Nothing) As List(Of AttendanceItem) Implements IDaoChild(Of AttendanceItem).GetRecordsWithIdNo
             If sortExpression Is Nothing Then
-                sortExpression = "Sequence"
+                sortExpression = "EmployeeName"
+            End If
+            If GlobalVariables.RightToLeftLayout Then
+                If sortExpression = "EmployeeName" Then
+                    sortExpression = "EmployeeNameAra"
+                End If
             End If
             Dim sql As String =
                     "SELECT " &
@@ -24,6 +29,7 @@ Namespace DataLayer.AdoNet
                     "DaysAbsentWithPay," &
                     "DaysOff," &
                     "DaysPresent," &
+                    "DaysTotal," &
                     "EmployeeIdNo," &
                     "EmployeeName," &
                     "EmployeeNameAra," &
@@ -53,12 +59,13 @@ Namespace DataLayer.AdoNet
             .DaysAbsentWithPay = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysAbsentWithPay")),
             .DaysOff = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysOff")),
             .DaysPresent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysPresent")),
+            .DaysTotal = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysTotal")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .PayPeriodIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayPeriodIdNo")),
-            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayPeriodIdNo"))
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("Sequence"))
            }
 
     End Class

@@ -8,17 +8,14 @@ Public Class CdgvColumnDecimal
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
-    Private _decimalPlaces As Int16 = 2
-    Private _length As Int16 = 9
 
     Public Sub New()
-        Dim cFormat As String = ""
         CellTemplate = New CdgvCellDecimal
         DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
     End Sub
 
-    Public Sub SetFormat(length, decimalPlaces)
-        DefaultCellStyle.Format = Strings.StrDup(length - decimalPlaces - 2, "#") + "0." + Strings.StrDup(decimalPlaces, "0")
+    Public Sub SetFormat(ByVal length As UInt16, ByVal decimalPlaces As UInt16)
+        DefaultCellStyle.Format = StrDup(length - decimalPlaces - 2, "#") + "0." + StrDup(decimalPlaces, "0")
     End Sub
 
     <Category("Custom Properties")>
@@ -39,35 +36,35 @@ Public Class CdgvColumnDecimal
         End Set
     End Property
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
-    <EditorBrowsable(EditorBrowsableState.Always), Bindable(True)>
-    <Description("Set to the number of decimal places to display.")>
-    <Browsable(True)>
-    Public Property DecimalPlaces As Int16
-        Get
-            Return _decimalPlaces
-        End Get
-        Set(value As Int16)
-            _decimalPlaces = value
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    '<EditorBrowsable(EditorBrowsableState.Always), Bindable(True)>
+    '<Description("Set to the number of decimal places to display.")>
+    '<Browsable(True)>
+    'Public Property DecimalPlaces As Int16
+    '    Get
+    '        Return _decimalPlaces
+    '    End Get
+    '    Set(value As Int16)
+    '        _decimalPlaces = value
+    '    End Set
+    'End Property
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
-    <EditorBrowsable(EditorBrowsableState.Always), Bindable(True)>
-    <Description("Set to the total length of the number including decimal places and period.")>
-    <Browsable(True)>
-    Public Property Length As Int16
-        Get
-            Return _length
-        End Get
-        Set(value As Int16)
-            _length = value
-        End Set
-    End Property
+    '<Category("Custom Properties")>
+    '<DefaultValue(False)>
+    '<DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    '<EditorBrowsable(EditorBrowsableState.Always), Bindable(True)>
+    '<Description("Set to the total length of the number including decimal places and period.")>
+    '<Browsable(True)>
+    'Public Property Length As Int16
+    '    Get
+    '        Return _length
+    '    End Get
+    '    Set(value As Int16)
+    '        _length = value
+    '    End Set
+    'End Property
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
