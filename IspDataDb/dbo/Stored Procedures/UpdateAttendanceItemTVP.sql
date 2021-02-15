@@ -9,7 +9,7 @@
 
 
 
-CREATE PROCEDURE  [dbo].[UpdateAttendanceTVP]
+CREATE PROCEDURE  [dbo].[UpdateAttendanceItemTVP]
   @MParam AttendanceItemUpdate READONLY, @GroupIdNo as INT
 AS 
 
@@ -28,7 +28,7 @@ SET a.DaysAbsentWithoutPay = b.DaysAbsentWithoutPay,
 	a.EmployeeIdNo = b.EmployeeIdNo,
 	a.PayPeriodIdNo = @GroupIdNo,
 	a.[Sequence] = b.[Sequence]
-from Attendance a INNER JOIN @MParam As b
+from AttendanceItem a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
 
 END

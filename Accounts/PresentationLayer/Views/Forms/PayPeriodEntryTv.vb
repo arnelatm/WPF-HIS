@@ -19,12 +19,13 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = "PayPeriod"
             TvMainFieldName = "PayPeriodName"
             TvSecondaryFieldName = "PayPeriodCode"
-            SortOrderKey = "SortKey"
+            SortOrderKey = "EndDate"
             FirstControl = txtPayPeriodName
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New PayPeriodPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -157,20 +158,27 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnInitialize_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
             Dim payFrequency = PresenterObj.GetFieldWithIdNo(cboPayCycleIdNo.SelectedValue, "PayCycle", "PayFrequency")
-            Dim employeeFilter = "Active = 1 and EarningType = 'R' and PayCycleIdNo = " & cboPayCycleIdNo.SelectedValue.ToString()
-            Dim activeEmployees = PresenterObj.GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo"})
+            Dim employeeFilter = "Active = 1 and PayCycleIdNo = " & cboPayCycleIdNo.SelectedValue.ToString()
+            Dim activeEmployees = PresenterObj.GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "EmployeeName"})
             Dim earningDao = New EarningDao
             Dim earnings = earningDao.GetAll()
-            For Each emp In activeEmployees
-                Dim phoneDao = New EmployeePhoneDao
+            Dim NumberOfEmployees = Int(activeEmployees.Count() / 2)
+            For i = 1 To NumberOfEmployees
                 'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(emp, "sequence")
-                Dim filter As String
-                filter = "EmployeeIdNo = " & emp.ToString()
-                Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
-                For Each employeeEarning In employeeEarnings
+                'Dim filter As String
+                'filter = "EmployeeIdNo = " & emp.ToString()
+                'Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
+                Dim empAttendance As New AttendanceItemView
+                empAttendance.PayPeriodIdNo = IdNo
+                empAttendance.EmployeeIdNo = activeEmployees(i * 2 - 2)
+                empAttendance.EmployeeName = activeEmployees(i * 2 - 1)
+                empAttendance.Sequence = i
+                _payPeriodAttendance.Add(empAttendance)
+                'For Each employeeEarning In employeeEarnings
 
-                Next
+                'Next
             Next
+            bsPayPeriodAttendance.ResetBindings(False)
             'For i = 1 To Int(Data.Count / 3)
             '    Dim tData As New ActiveEmployee
             '    tData.IdNo = Data(i * 3 - 3)

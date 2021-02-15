@@ -27,7 +27,14 @@ Namespace PresentationLayer.Views.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayPeriodEntryTv))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtPayPeriodName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -50,8 +57,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CTabControl1 = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tbcPayroll = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayPeriodAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.bsPayPeriodAttendance = New System.Windows.Forms.BindingSource(Me.components)
-            Me.TabPage2 = New System.Windows.Forms.TabPage()
             Me.EmployeeNameDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.EmployeeNameAraDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.DaysPresentDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -61,6 +66,8 @@ Namespace PresentationLayer.Views.Forms
             Me.DaysTotal = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsPayPeriodAttendance = New System.Windows.Forms.BindingSource(Me.components)
+            Me.TabPage2 = New System.Windows.Forms.TabPage()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -75,7 +82,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
             Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 258)
             Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 686)
+            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 610)
             '
             'TranslatorDAC
             '
@@ -144,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(856, 686)
+            Me.floDataDisplay.Size = New System.Drawing.Size(804, 610)
             Me.floDataDisplay.TabIndex = 147
             '
             'TableLayoutPanel1
@@ -183,7 +190,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(774, 418)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(774, 568)
             Me.TableLayoutPanel1.TabIndex = 169
             '
             'dtpStartDate
@@ -464,7 +471,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CTabControl1.Location = New System.Drawing.Point(3, 177)
             Me.CTabControl1.Name = "CTabControl1"
             Me.CTabControl1.SelectedIndex = 0
-            Me.CTabControl1.Size = New System.Drawing.Size(768, 238)
+            Me.CTabControl1.Size = New System.Drawing.Size(768, 388)
             Me.CTabControl1.TabIndex = 172
             '
             'tbcPayroll
@@ -473,7 +480,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tbcPayroll.Location = New System.Drawing.Point(4, 22)
             Me.tbcPayroll.Name = "tbcPayroll"
             Me.tbcPayroll.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbcPayroll.Size = New System.Drawing.Size(760, 212)
+            Me.tbcPayroll.Size = New System.Drawing.Size(760, 362)
             Me.tbcPayroll.TabIndex = 0
             Me.tbcPayroll.Text = "TabPage1"
             Me.tbcPayroll.UseVisualStyleBackColor = True
@@ -486,14 +493,14 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayPeriodAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPayPeriodAttendance.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EmployeeNameDataGridViewTextBoxColumn, Me.EmployeeNameAraDataGridViewTextBoxColumn, Me.DaysPresentDataGridViewTextBoxColumn, Me.DaysAbsentWithPayDataGridViewTextBoxColumn, Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn, Me.DaysOffDataGridViewTextBoxColumn, Me.DaysTotal, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewPayPeriodAttendance.DataSource = Me.bsPayPeriodAttendance
-            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPayPeriodAttendance.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPayPeriodAttendance.DefaultCellStyle = DataGridViewCellStyle9
             Me.DataGridViewPayPeriodAttendance.DgvFooter = Nothing
             Me.DataGridViewPayPeriodAttendance.DisplayOnly = False
             Me.DataGridViewPayPeriodAttendance.Ea = Nothing
@@ -511,24 +518,13 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayPeriodAttendance.Size = New System.Drawing.Size(745, 346)
             Me.DataGridViewPayPeriodAttendance.TabIndex = 171
             '
-            'bsPayPeriodAttendance
-            '
-            Me.bsPayPeriodAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
-            '
-            'TabPage2
-            '
-            Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-            Me.TabPage2.Name = "TabPage2"
-            Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-            Me.TabPage2.Size = New System.Drawing.Size(760, 211)
-            Me.TabPage2.TabIndex = 1
-            Me.TabPage2.Text = "TabPage2"
-            Me.TabPage2.UseVisualStyleBackColor = True
-            '
             'EmployeeNameDataGridViewTextBoxColumn
             '
             Me.EmployeeNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.EmployeeNameDataGridViewTextBoxColumn.DataPropertyName = "EmployeeName"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.EmployeeNameDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
             Me.EmployeeNameDataGridViewTextBoxColumn.EditingMode = False
             Me.EmployeeNameDataGridViewTextBoxColumn.HeaderText = "Employee Name"
             Me.EmployeeNameDataGridViewTextBoxColumn.Name = "EmployeeNameDataGridViewTextBoxColumn"
@@ -539,6 +535,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.EmployeeNameAraDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.EmployeeNameAraDataGridViewTextBoxColumn.DataPropertyName = "EmployeeNameAra"
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.EmployeeNameAraDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
             Me.EmployeeNameAraDataGridViewTextBoxColumn.EditingMode = False
             Me.EmployeeNameAraDataGridViewTextBoxColumn.HeaderText = "Employee Name"
             Me.EmployeeNameAraDataGridViewTextBoxColumn.Name = "EmployeeNameAraDataGridViewTextBoxColumn"
@@ -549,6 +548,9 @@ Namespace PresentationLayer.Views.Forms
             'DaysPresentDataGridViewTextBoxColumn
             '
             Me.DaysPresentDataGridViewTextBoxColumn.DataPropertyName = "DaysPresent"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.DaysPresentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
             Me.DaysPresentDataGridViewTextBoxColumn.EditingMode = False
             Me.DaysPresentDataGridViewTextBoxColumn.HeaderText = "Days Present"
             Me.DaysPresentDataGridViewTextBoxColumn.Name = "DaysPresentDataGridViewTextBoxColumn"
@@ -559,6 +561,9 @@ Namespace PresentationLayer.Views.Forms
             'DaysAbsentWithPayDataGridViewTextBoxColumn
             '
             Me.DaysAbsentWithPayDataGridViewTextBoxColumn.DataPropertyName = "DaysAbsentWithPay"
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.DaysAbsentWithPayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
             Me.DaysAbsentWithPayDataGridViewTextBoxColumn.EditingMode = False
             Me.DaysAbsentWithPayDataGridViewTextBoxColumn.HeaderText = "Days Absent With Pay"
             Me.DaysAbsentWithPayDataGridViewTextBoxColumn.Name = "DaysAbsentWithPayDataGridViewTextBoxColumn"
@@ -569,6 +574,9 @@ Namespace PresentationLayer.Views.Forms
             'DaysAbsentWithoutPayDataGridViewTextBoxColumn
             '
             Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.DataPropertyName = "DaysAbsentWithoutPay"
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle6
             Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.EditingMode = False
             Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.HeaderText = "Days Absent Without Pay"
             Me.DaysAbsentWithoutPayDataGridViewTextBoxColumn.Name = "DaysAbsentWithoutPayDataGridViewTextBoxColumn"
@@ -579,6 +587,9 @@ Namespace PresentationLayer.Views.Forms
             'DaysOffDataGridViewTextBoxColumn
             '
             Me.DaysOffDataGridViewTextBoxColumn.DataPropertyName = "DaysOff"
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            Me.DaysOffDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle7
             Me.DaysOffDataGridViewTextBoxColumn.EditingMode = False
             Me.DaysOffDataGridViewTextBoxColumn.HeaderText = "Days Off"
             Me.DaysOffDataGridViewTextBoxColumn.Name = "DaysOffDataGridViewTextBoxColumn"
@@ -589,6 +600,9 @@ Namespace PresentationLayer.Views.Forms
             'DaysTotal
             '
             Me.DaysTotal.DataPropertyName = "DaysTotal"
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            Me.DaysTotal.DefaultCellStyle = DataGridViewCellStyle8
             Me.DaysTotal.EditingMode = False
             Me.DaysTotal.HeaderText = "Days Total"
             Me.DaysTotal.Name = "DaysTotal"
@@ -611,10 +625,24 @@ Namespace PresentationLayer.Views.Forms
             Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn.Visible = False
             '
+            'bsPayPeriodAttendance
+            '
+            Me.bsPayPeriodAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
+            '
+            'TabPage2
+            '
+            Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+            Me.TabPage2.Name = "TabPage2"
+            Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+            Me.TabPage2.Size = New System.Drawing.Size(760, 212)
+            Me.TabPage2.TabIndex = 1
+            Me.TabPage2.Text = "TabPage2"
+            Me.TabPage2.UseVisualStyleBackColor = True
+            '
             'PayPeriodEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(1260, 739)
+            Me.ClientSize = New System.Drawing.Size(1106, 663)
             Me.Controls.Add(Me.floDataDisplay)
             Me.Name = "PayPeriodEntryTv"
             Me.Text = "Pay Period Maintenance Form"

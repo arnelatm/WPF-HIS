@@ -509,8 +509,14 @@ Public Module GlobalFunctions
     ''' <summary>
     ''' Checks if there is a need to translate a given text
     ''' </summary>
-    Public Function NeedToTranslateText(textDisplayLanguage) As Boolean
-        If textDisplayLanguage = GlobalVariables.OriginalAppTextLanguage Or (Strings.Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
+    Public Function NeedToTranslateText(ByVal textDisplayLanguage As String, Optional pTargetCulture As String = Nothing) As Boolean
+        Dim targetCulture As String
+        If pTargetCulture Is Nothing Then
+            targetCulture = textDisplayLanguage
+        Else
+            targetCulture = pTargetCulture
+        End If
+        If targetCulture = GlobalVariables.OriginalAppTextLanguage Or (Strings.Left(textDisplayLanguage, 2) = "en" And GlobalVariables.UseOriginalAppTextLanguageForEnglish) Then
             Return False
         Else
             Return True
