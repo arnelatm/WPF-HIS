@@ -180,11 +180,11 @@ Public Class Messaging
         Return MessagingForm.Show(message, caption + " [" + MessageKey + "]", buttons, icon, defaultButton)
     End Function
 
-    Public Shared Function TranslateCaption(cCaption As String) As String
+    Public Shared Function TranslateCaption(cCaption As String, Optional targetCulture As String = Nothing) As String
         If cCaption Is Nothing Then
             Return ""
         End If
-        Return DataAccessControl.TranslateCaption(cCaption)
+        Return DataAccessControl.TranslateCaption(cCaption, targetCulture)
     End Function
 
     Public Shared Function ReplaceValues(ByVal message As String, variables As String()) As String

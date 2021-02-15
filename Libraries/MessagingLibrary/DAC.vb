@@ -587,19 +587,24 @@ Public Class Dac
         Return translatedCaption
     End Function
 
-    Public Function TranslateCaption(textToTranslate As String)
+    Public Function TranslateCaption(textToTranslate As String, Optional pTargetCulture As String = Nothing)
         Dim translatedText = textToTranslate
-        Dim textDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name.ToLower()
-        If NeedToTranslateText(textDisplayLanguage) Then
+        Dim targetCulture As String
+        If pTargetCulture IsNot Nothing Then
+            targetCulture = pTargetCulture.TrimEnd()
+        Else
+            targetCulture = GlobalVariables.AppCurrentCultureInfo.Name.ToLower().TrimEnd()
+        End If
+        If NeedToTranslateText(targetCulture) Then
             Dim cmd As String
-            cmd = "SELECT Concat(Coalesce(TranslatedCaption,''), '~', Caption) FROM Captions_View where Caption = '" & textToTranslate.Trim() & "' and CultureInfoCode = '" + textDisplayLanguage.TrimEnd + "'"
+            cmd = "SELECT Concat(Coalesce(TranslatedCaption,''), '~', Caption) FROM Captions_View where Caption = '" & textToTranslate.Trim() & "' and CultureInfoCode = '" + targetCulture + "'"
             translatedText = ExecScalar(Of String)(cmd)
             'If Strings.Left(translatedText, 1) <> "~" Then
             '    translatedText = Strings.Mid(translatedText, 2)
             'End If
 
             If translatedText IsNot Nothing AndAlso Strings.Left(translatedText, 1) <> "~" Then
-                If GlobalVariables.RightToLeftLayout Then
+                If GlobalVariables.RightToLeftLayout Or pTargetCulture IsNot Nothing Then
                     translatedText = Strings.Left(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture))
                 Else
                     translatedText = Strings.Mid(translatedText, translatedText.IndexOf("~", StringComparison.CurrentCulture) + 1)
