@@ -108,6 +108,8 @@
     <Compile Include="CdgvCaComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CDGVCellDecimal.vb" />
+    <Compile Include="CdgvColumnDecimal.vb" />
     <Compile Include="CdgvEcbComboBox.vb">
       <SubType>Component</SubType>
     </Compile>

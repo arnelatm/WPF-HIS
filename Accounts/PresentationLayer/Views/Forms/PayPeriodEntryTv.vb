@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IPayPeriodView
 
         Private _payPeriodAttendance As New List(Of IAttendanceItemView)
+        Private Property MyPresenter As PayPeriodPresenter
 
         Public Sub New()
             ' This call is required by the designer.
@@ -22,14 +23,16 @@ Namespace PresentationLayer.Views.Forms
             SortOrderKey = "EndDate"
             FirstControl = txtPayPeriodName
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New PayPeriodPresenter(Me)
-            Ea = PresenterObj.Ea
+            MyPresenter = New PayPeriodPresenter(Me)
+            PresenterObj = MyPresenter
+            Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
+            dgvDaysPresent.SetFormat(7, 4)
 
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cboPayCycleIdNo.DataSource = PresenterObj.GetLookup("PayCycle")
+            cboPayCycleIdNo.DataSource = MyPresenter.GetLookup("PayCycle")
         End Sub
 
 #Region "Fields"
@@ -123,11 +126,8 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             'With DataGridViewPayPeriodAttendance.Columns
-            '    dgvEarningIdNo.DataSource = _PayPeriodAttendanceByName
-            '    dgvEarningIdNo.DisplayMember = "Name"
-            '    dgvEarningIdNo.ValueMember = "IdNo"
-            '    dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-            '    dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+            '    dgvDaysPresent.DecimalPlaces = 4
+            '    dgvDaysPresent.Length = 7
             'End With
             ResumeLayout()
         End Sub
@@ -144,41 +144,44 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayCycleIdNo.SelectedIndexChanged
-            If PresenterObj.AddMode Then
+            If MyPresenter.AddMode Then
                 Dim payFrequency As PayFrequencySelection
                 Dim payCycleDaoObject As New PayCycleDao
                 Dim payCycleRecord = payCycleDaoObject.GetRecordById(PayCycleIdNo)
                 payFrequency = CodeToEnum(Of PayFrequencySelection)(payCycleRecord.PayFrequency)
                 Select Case payFrequency
                     Case PayFrequencySelection.Monthly
-                        PresenterObj.InitializeMonthlyPayroll(payCycleRecord)
+                        MyPresenter.InitializeMonthlyPayroll(payCycleRecord)
                 End Select
             End If
         End Sub
 
         Private Sub btnInitialize_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
-            Dim payFrequency = PresenterObj.GetFieldWithIdNo(cboPayCycleIdNo.SelectedValue, "PayCycle", "PayFrequency")
-            Dim employeeFilter = "Active = 1 and PayCycleIdNo = " & cboPayCycleIdNo.SelectedValue.ToString()
-            Dim activeEmployees = PresenterObj.GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "EmployeeName"})
-            Dim earningDao = New EarningDao
-            Dim earnings = earningDao.GetAll()
-            Dim NumberOfEmployees = Int(activeEmployees.Count() / 2)
-            For i = 1 To NumberOfEmployees
-                'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(emp, "sequence")
-                'Dim filter As String
-                'filter = "EmployeeIdNo = " & emp.ToString()
-                'Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
-                Dim empAttendance As New AttendanceItemView
-                empAttendance.PayPeriodIdNo = IdNo
-                empAttendance.EmployeeIdNo = activeEmployees(i * 2 - 2)
-                empAttendance.EmployeeName = activeEmployees(i * 2 - 1)
-                empAttendance.Sequence = i
-                _payPeriodAttendance.Add(empAttendance)
-                'For Each employeeEarning In employeeEarnings
-
-                'Next
-            Next
+            MyPresenter.InitializeAttendance()
             bsPayPeriodAttendance.ResetBindings(False)
+
+            'Dim payFrequency = MyPresenter.GetFieldWithIdNo(cboPayCycleIdNo.SelectedValue, "PayCycle", "PayFrequency")
+            'Dim employeeFilter = "Active = 1 and PayCycleIdNo = " & cboPayCycleIdNo.SelectedValue.ToString()
+            'Dim activeEmployees = MyPresenter.GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "EmployeeName"})
+            'Dim earningDao = New EarningDao
+            'Dim earnings = earningDao.GetAll()
+            'Dim NumberOfEmployees = Int(activeEmployees.Count() / 2)
+            'For i = 1 To NumberOfEmployees
+            '    'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(emp, "sequence")
+            '    'Dim filter As String
+            '    'filter = "EmployeeIdNo = " & emp.ToString()
+            '    'Dim employeeEarnings = MyPresenter.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
+            '    Dim empAttendance As New AttendanceItemView
+            '    empAttendance.PayPeriodIdNo = IdNo
+            '    empAttendance.EmployeeIdNo = activeEmployees(i * 2 - 2)
+            '    empAttendance.EmployeeName = activeEmployees(i * 2 - 1)
+            '    empAttendance.Sequence = i
+            '    _payPeriodAttendance.Add(empAttendance)
+            '    'For Each employeeEarning In employeeEarnings
+
+            '    'Next
+            'Next
+            'bsPayPeriodAttendance.ResetBindings(False)
             'For i = 1 To Int(Data.Count / 3)
             '    Dim tData As New ActiveEmployee
             '    tData.IdNo = Data(i * 3 - 3)
