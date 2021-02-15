@@ -81,6 +81,56 @@ Namespace PresentationLayer.Presenters
             'Next
         End Sub
 
+        Public Sub InitializeAttendance()
+            Dim payFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
+            Dim employeeFilter = "Active = 1 and PayCycleIdNo = " & View.PayCycleIdNo.ToString()
+            Dim activeEmployees = GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "EmployeeName"})
+            'Dim earningDao = New EarningDao
+            'Dim earnings = earningDao.GetAll()
+            Dim NumberOfEmployees = Int(activeEmployees.Count() / 2)
+            Dim numberOfDays As Long
+            Dim daysOff As Int16
+            numberOfDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
+            daysOff = FridaysInPeriod(View.StartDate, View.EndDate)
+            For i = 1 To NumberOfEmployees
+                'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(emp, "sequence")
+                'Dim filter As String
+                'filter = "EmployeeIdNo = " & emp.ToString()
+                'Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
+                Dim empAttendance As New AttendanceItemView
+                empAttendance.PayPeriodIdNo = View.IdNo
+                empAttendance.DaysPresent = numberOfDays - daysOff
+                empAttendance.DaysOff = daysOff
+                empAttendance.EmployeeIdNo = activeEmployees(i * 2 - 2)
+                empAttendance.EmployeeName = activeEmployees(i * 2 - 1)
+                empAttendance.Sequence = i
+                empAttendance.DaysTotal = numberOfDays
+                View.PayPeriodAttendance.Add(empAttendance)
+                'For Each employeeEarning In employeeEarnings
+
+                'Next
+            Next
+            'For i = 1 To Int(Data.Count / 3)
+            '    Dim tData As New ActiveEmployee
+            '    tData.IdNo = Data(i * 3 - 3)
+            '    If Data(i * 3 - 1) Is DBNull.Value Then
+            '        tData.PayGroupIdNo = 0
+            '    Else
+            '        tData.PayGroupIdNo = Data(i * 3 - 1)
+            '    End If
+            '    lEmployeePayGroups.Add(tData)
+            'Next
+            'For Each employee In lEmployeePayGroups
+            '    If employee.PayGroupIdNo = node.Tag Then
+            '        node.Nodes.Add(New TreeNode With {.Text = employee.Name,
+            '                                   .Tag = employee.IdNo,
+            '                                   .Name = employee.Name
+            '                                 }
+            '              )
+            '    End If
+            'Next employee
+        End Sub
+
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_attendanceItemModel, DtUpdateTable, DtInsertTable, passedValue, "PayPeriodIdNo")
@@ -100,6 +150,18 @@ Namespace PresentationLayer.Presenters
             '    Return False
             'End If
             Return True
+        End Function
+
+        Public Shared Function FridaysInPeriod(ByVal begDate As Date, endDate As Date) As Integer
+            Dim count As Integer
+            Dim d As DateTime = begDate
+            Do Until d = endDate
+                If d.DayOfWeek = DayOfWeek.Friday Then
+                    count += 1
+                End If
+                d = d.AddDays(1)
+            Loop
+            Return count
         End Function
 
     End Class
