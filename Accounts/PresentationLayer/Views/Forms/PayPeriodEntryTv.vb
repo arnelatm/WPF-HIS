@@ -28,7 +28,11 @@ Namespace PresentationLayer.Views.Forms
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
             dgvDaysPresent.SetFormat(7, 4)
-
+            dgvDaysAbsentWithPay.SetFormat(7, 4)
+            dgvDaysOff.SetFormat(7, 4)
+            dgvDaysAbsentWoPay.SetFormat(7, 4)
+            dgvDaysTotal.SetFormat(7, 4)
+            dgvDaysTotal.DisplayOnly = True
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -118,18 +122,20 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewPayPeriodAttendance.Refresh()
             bsPayPeriodAttendance.DataSource = PayPeriodAttendance
             bsPayPeriodAttendance.AllowNew = True
-            'bsPayPeriodAttendance.Sort = "Sequence"
             With DataGridViewPayPeriodAttendance
                 .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsPayPeriodAttendance
+                If RightToLeftLayout = True Then
+                    dgvEmployeeNameAra.Visible = True
+                    dgvEmployeeName.Visible = False
+                Else
+                    dgvEmployeeName.Visible = True
+                    dgvEmployeeNameAra.Visible = False
+                End If
                 .Refresh()
             End With
-            'With DataGridViewPayPeriodAttendance.Columns
-            '    dgvDaysPresent.DecimalPlaces = 4
-            '    dgvDaysPresent.Length = 7
-            'End With
-            ResumeLayout()
+
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
