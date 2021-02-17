@@ -1,7 +1,8 @@
 ﻿CREATE VIEW dbo.AttendanceItem_View
 AS
 SELECT        dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.AttendanceItem.IdNo, dbo.AttendanceItem.EmployeeIdNo, dbo.AttendanceItem.PayPeriodIdNo, 
-                         dbo.AttendanceItem.DaysPresent, dbo.AttendanceItem.DaysAbsentWithPay, dbo.AttendanceItem.DaysAbsentWithoutPay, dbo.AttendanceItem.DaysOff, dbo.AttendanceItem.Sequence
+                         dbo.AttendanceItem.DaysPresent, dbo.AttendanceItem.DaysAbsentWithPay, dbo.AttendanceItem.DaysAbsentWithoutPay, dbo.AttendanceItem.DaysOff, 
+                         dbo.AttendanceItem.DaysPresent + dbo.AttendanceItem.DaysAbsentWithPay + dbo.AttendanceItem.DaysAbsentWithoutPay + dbo.AttendanceItem.DaysOff AS DaysTotal, dbo.AttendanceItem.Overtime
 FROM            dbo.Employee INNER JOIN
                          dbo.AttendanceItem ON dbo.Employee.IdNo = dbo.AttendanceItem.EmployeeIdNo
 GO
@@ -14,7 +15,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[74] 4[8] 2[1] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -84,7 +85,7 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 226
+               Bottom = 299
                Right = 236
             End
             DisplayFlags = 280
@@ -127,4 +128,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'AttendanceItem_View';
+
+
 

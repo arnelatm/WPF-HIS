@@ -405,7 +405,6 @@
     <Build Include="dbo\User Defined Types\PcJournalsUpdate.sql" />
     <Build Include="dbo\Tables\Attendance_1.sql" />
     <Build Include="dbo\Views\Attendance_View_1.sql" />
-    <Build Include="dbo\Stored Procedures\InsertAttendanceTVP_1.sql" />
     <Build Include="dbo\Tables\SystemViewItem.sql" />
     <Build Include="dbo\Tables\SystemView.sql" />
     <Build Include="dbo\Views\SystemViewItemOriginal_View.sql" />
