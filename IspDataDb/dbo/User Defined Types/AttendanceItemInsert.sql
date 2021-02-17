@@ -4,6 +4,7 @@
     [DaysOff]              DECIMAL (18) NOT NULL,
     [DaysPresent]          DECIMAL (18) NOT NULL,
     [EmployeeIdNo]         INT          NOT NULL,
-    [PayPeriodIdNo]        SMALLINT     NOT NULL,
-    [Sequence]             INT          NOT NULL);
+    [PayPeriodIdNo]        SMALLINT     NOT NULL);
+
+
 

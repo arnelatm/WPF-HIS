@@ -6,6 +6,7 @@
     [EmployeeIdNo]         INT          NOT NULL,
     [IDNo]                 INT          NOT NULL,
     [PayPeriodIdNo]        SMALLINT     NOT NULL,
-    [Sequence]             INT          NOT NULL,
     PRIMARY KEY CLUSTERED ([IDNo] ASC));
+
+
 

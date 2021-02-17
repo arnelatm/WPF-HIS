@@ -2,11 +2,13 @@
     [IdNo]                 INT            IDENTITY (1, 1) NOT NULL,
     [EmployeeIdNo]         INT            NULL,
     [PayPeriodIdNo]        SMALLINT       NULL,
-    [DaysPresent]          DECIMAL (5, 2) NULL,
-    [DaysAbsentWithPay]    DECIMAL (5, 2) NULL,
-    [DaysAbsentWithoutPay] DECIMAL (5, 2) NULL,
-    [DaysOff]              DECIMAL (5, 2) NULL,
-    [Sequence]             SMALLINT       NULL,
+    [DaysPresent]          DECIMAL (8, 4) NULL,
+    [DaysAbsentWithPay]    DECIMAL (8, 4) NULL,
+    [DaysAbsentWithoutPay] DECIMAL (8, 4) NULL,
+    [DaysOff]              DECIMAL (8, 4) NULL,
+    [Overtime]             DECIMAL (8, 4) NULL,
     CONSTRAINT [PK_AttendanceItem] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
