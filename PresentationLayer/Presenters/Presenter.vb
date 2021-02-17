@@ -1271,7 +1271,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     workRow = updateTable.NewRow()
                     workRow(dataViewIdNoFieldName) = idNo
                 End If
-                workRow(sequenceFieldName) = nRowCount
+                If sequenceFieldName <> "" Then
+                    workRow(sequenceFieldName) = nRowCount
+                End If
                 fillSub.Invoke(dataView, workRow)
                 If idNo <= 0 Then
                     insertTable.Rows.Add(workRow)

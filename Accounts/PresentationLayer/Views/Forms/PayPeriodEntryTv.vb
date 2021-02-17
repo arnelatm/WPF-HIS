@@ -3,6 +3,7 @@ Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -10,7 +11,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class PayPeriodEntryTv
         Implements IPayPeriodView
 
-        Private _payPeriodAttendance As New List(Of IAttendanceItemView)
+        Private _payPeriodAttendance As New List(Of AttendanceItemView)
         Private Property MyPresenter As PayPeriodPresenter
 
         Public Sub New()
@@ -33,6 +34,8 @@ Namespace PresentationLayer.Views.Forms
             dgvDaysAbsentWoPay.SetFormat(7, 4)
             dgvDaysTotal.SetFormat(7, 4)
             dgvDaysTotal.DisplayOnly = True
+            dgvEmployeeName.DisplayOnly = True
+            dgvEmployeeNameAra.DisplayOnly = True
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -104,7 +107,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayPeriodAttendance As List(Of IAttendanceItemView) Implements IPayPeriodView.PayPeriodAttendance
+        Public Property PayPeriodAttendance As List(Of AttendanceItemView) Implements IPayPeriodView.PayPeriodAttendance
             Get
                 Return _payPeriodAttendance
             End Get
@@ -219,6 +222,21 @@ Namespace PresentationLayer.Views.Forms
             Public EmployeeNameAra As String
             Public Active As Boolean
         End Class
+
+        Private Sub DataGridViewAttendance_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayPeriodAttendance.CellEndEdit
+            With DataGridViewPayPeriodAttendance
+                Dim nIndex = .CurrentRow.Index
+                PayPeriodAttendance(nIndex).DaysTotal = PayPeriodAttendance(nIndex).DaysOff + PayPeriodAttendance(nIndex).DaysAbsentWithPay + PayPeriodAttendance(nIndex).DaysAbsentWithoutPay + PayPeriodAttendance(nIndex).DaysPresent
+            End With
+        End Sub
+
+        Protected Overrides Sub InputsTurnedOn()
+            btnInitialize.Enabled = True
+        End Sub
+
+        Protected Overrides Sub InputsTurnedOff()
+            btnInitialize.Enabled = False
+        End Sub
 
     End Class
 

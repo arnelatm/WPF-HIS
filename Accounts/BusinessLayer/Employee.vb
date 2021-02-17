@@ -34,6 +34,7 @@ Namespace BusinessLayer
         Public Property DepartmentIdNo As Int16?
         Public Property DesignationIdNo As Int16?
         Public Property District As String
+        Public Property DutyHours As Decimal
         Public Property Email As String
         Public Property EmployeeCode As String
         Public Property EmployeeName As String

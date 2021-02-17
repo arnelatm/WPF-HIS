@@ -136,6 +136,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property DutyHours As Decimal Implements IEmployeeView.DutyHours
+            Get
+                If txtDutyHours.Text <> "" Then
+                    Return Convert.ToSingle(txtDutyHours.Text)
+                Else
+                    Return 0
+                End If
+            End Get
+            Set
+                txtDutyHours.Text = FormatDecimalNumber(Value)
+            End Set
+        End Property
+
         Public Property Email As String Implements IEmployeeView.Email
             Get
                 Return txtEmail.Text
@@ -467,6 +480,7 @@ Namespace PresentationLayer.Views.Forms
          {"DepartmentIdNo", cacDepartmentIdNo},
          {"DesignationIdNo", cacDesignationIdNo},
          {"District", txtDistrict},
+         {"DutyHours", txtDutyHours},
          {"Email", txtEmail},
          {"EmployeeCode", txtEmployeeCode},
          {"EmployeeName", txtEmployeeName},

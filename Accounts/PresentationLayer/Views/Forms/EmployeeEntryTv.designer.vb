@@ -24,38 +24,38 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayCycleidNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayCycleidNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
@@ -170,6 +170,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floMain = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblDutyHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout6.SuspendLayout()
             CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -228,6 +230,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout6.Controls.Add(Me.cboPayCycleidNo)
             Me.CFlowLayout6.Controls.Add(Me.lblPayGroupIdNo)
             Me.CFlowLayout6.Controls.Add(Me.cboPayGroupIdNo)
+            Me.CFlowLayout6.Controls.Add(Me.lblDutyHours)
+            Me.CFlowLayout6.Controls.Add(Me.txtDutyHours)
             Me.CFlowLayout6.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout6.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout6.Name = "CFlowLayout6"
@@ -2461,12 +2465,49 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.Size = New System.Drawing.Size(820, 82)
             Me.CFlowLayout4.TabIndex = 6
             '
+            'lblDutyHours
+            '
+            Me.lblDutyHours.DisplayOnly = True
+            Me.lblDutyHours.EditingMode = False
+            Me.lblDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblDutyHours.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblDutyHours.Location = New System.Drawing.Point(4, 208)
+            Me.lblDutyHours.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblDutyHours.Name = "lblDutyHours"
+            Me.lblDutyHours.Size = New System.Drawing.Size(185, 23)
+            Me.lblDutyHours.TabIndex = 292
+            Me.lblDutyHours.Text = "Duty Hours"
+            Me.lblDutyHours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            '
+            'txtDutyHours
+            '
+            Me.txtDutyHours.BackColor = System.Drawing.Color.White
+            Me.txtDutyHours.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDutyHours.ComputedValue = False
+            Me.txtDutyHours.CustomFormat = Nothing
+            Me.txtDutyHours.DataBoundControl = True
+            Me.txtDutyHours.EditingMode = False
+            Me.CFlowLayout6.SetFlowBreak(Me.txtDutyHours, True)
+            Me.txtDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDutyHours.ForeColor = System.Drawing.Color.Black
+            Me.txtDutyHours.LinkedLabel = Me.lblDutyHours
+            Me.txtDutyHours.Location = New System.Drawing.Point(191, 208)
+            Me.txtDutyHours.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDutyHours.MaximumValue = Nothing
+            Me.txtDutyHours.MinimumValue = Nothing
+            Me.txtDutyHours.Name = "txtDutyHours"
+            Me.txtDutyHours.OldValue = Nothing
+            Me.txtDutyHours.ReadOnly = True
+            Me.txtDutyHours.Size = New System.Drawing.Size(93, 23)
+            Me.txtDutyHours.TabIndex = 291
+            Me.txtDutyHours.ValueIsNumeric = True
+            '
             'EmployeeEntryTv
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.ClientSize = New System.Drawing.Size(1134, 567)
-        Me.Controls.Add(Me.floMain)
-        Me.MinimumSize = New System.Drawing.Size(1150, 470)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.ClientSize = New System.Drawing.Size(1134, 567)
+            Me.Controls.Add(Me.floMain)
+            Me.MinimumSize = New System.Drawing.Size(1150, 470)
         Me.Name = "EmployeeEntryTv"
         Me.Text = "Employee Maintenance Form"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
@@ -2650,6 +2691,8 @@ End Sub
         Friend WithEvents cboPaymentMethod As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblPayGroupIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cboPayGroupIdNo As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents lblDutyHours As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtDutyHours As Libraries.CBaseControlsLibrary.CTextBox
     End Class
 
 End Namespace

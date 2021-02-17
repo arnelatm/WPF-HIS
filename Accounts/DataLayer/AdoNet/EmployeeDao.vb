@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordById(idNo) As Employee Implements IDaoAll(Of Employee).GetRecordById
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
-                    " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
+                    " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, DutyHours, HiredDate, ReleasedDate, " &
                     " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active" &
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
@@ -67,6 +67,7 @@ Namespace DataLayer.AdoNet
                     " DepartmentIdNo = @DepartmentIdNo," &
                     " DesignationIdNo = @DesignationIdNo," &
                     " District = @District," &
+                    " DutyHours = @DutyHours," &
                     " Email = @Email," &
                     " EmployeeCode = @EmployeeCode," &
                     " EmployeeName = @EmployeeName," &
@@ -101,10 +102,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active)" &
+                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod,  @Active)"
+                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod,  @Active)"
             Return _db.Insert(sql, Take(employee))
         End Function
 
@@ -120,6 +121,7 @@ Namespace DataLayer.AdoNet
             .DepartmentIdNo = Extensions.AsNullable(Of Int16?)(reader("DepartmentIdNo")),
             .DesignationIdNo = Extensions.AsNullable(Of Int16?)(reader("DesignationIdNo")),
             .District = Extensions.AsString(reader("District")),
+            .DutyHours = Extensions.AsString(reader("DutyHours")),
             .Email = Extensions.AsString(reader("Email")),
             .EmployeeCode = Extensions.AsString(reader("EmployeeCode")),
             .EmployeeName = Extensions.AsString(reader("EmployeeName")),
@@ -159,6 +161,7 @@ Namespace DataLayer.AdoNet
                                     "@DepartmentIdNo", employee.DepartmentIdNo,
                                     "@DesignationIdNo", employee.DesignationIdNo,
                                     "@District", employee.District,
+                                    "@DutyHours", employee.DutyHours,
                                     "@Email", employee.Email,
                                     "@EmployeeCode", employee.EmployeeCode,
                                     "@EmployeeName", employee.EmployeeName,

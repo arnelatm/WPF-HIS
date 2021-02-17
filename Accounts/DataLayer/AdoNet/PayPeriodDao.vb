@@ -1,7 +1,10 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries
+Imports AutoMapper
 
 Namespace DataLayer.AdoNet
     ' Data access object for PayPeriod
@@ -21,7 +24,7 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Dim attendanceDao = New AttendanceItemDao
-            Dim attendance As List(Of AttendanceItem) = attendanceDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim attendance As List(Of AttendanceItem) = attendanceDao.GetRecordsWithIdNo(data.IdNo, "EmployeeName")
             data.PayPeriodAttendance = attendance
             Return data
         End Function
