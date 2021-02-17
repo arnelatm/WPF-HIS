@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DepartmentIdNo As Int16?
         Property DesignationIdNo As Int16?
         Property District As String
+        Property DutyHours As Decimal
         Property Email As String
         Property EmployeeCode As String
         Property EmployeeName As String

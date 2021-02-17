@@ -35,10 +35,9 @@ Namespace DataLayer.AdoNet
                     "EmployeeNameAra," &
                     "IdNo," &
                     "PayPeriodIdNo," &
-                    "Sequence" &
+                    "ROW_NUMBER() over(Order by " & sortExpression & ") As 'Sequence'" &
                     " FROM [AttendanceItem_View]" &
-                    " WHERE PayPeriodIdNo = @PayPeriodIdNo " &
-                    " ORDER BY " & sortExpression
+                    " WHERE PayPeriodIdNo = @PayPeriodIdNo "
             Dim params() As Object = {"@payPeriodIdNo", payPeriodIdNo}
             Dim dta = Db.Read(sql, Make, params).ToList()
             Return dta

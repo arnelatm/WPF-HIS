@@ -28,8 +28,7 @@ Namespace PresentationLayer.Presenters
                                             {"DaysOff", GetType(Decimal)},
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
-                                            {"PayPeriodIdNo", GetType(Int32)},
-                                            {"Sequence", GetType(Int16)}
+                                            {"PayPeriodIdNo", GetType(Int32)}
                                            })
 
             CreateDataTable(DtUpdateTable, {{"DaysAbsentWithoutPay", GetType(Decimal)},
@@ -38,8 +37,7 @@ Namespace PresentationLayer.Presenters
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
-                                            {"PayPeriodIdNo", GetType(Int32)},
-                                            {"Sequence", GetType(Int16)}
+                                            {"PayPeriodIdNo", GetType(Int32)}
                                            })
 
         End Sub
@@ -69,7 +67,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                ViewToDataTables(View.PayPeriodAttendance, DtInsertTable, DtUpdateTable, AddressOf AttendanceItemFillData, AddressOf AttendanceItemFilter)
+                ViewToDataTables(View.PayPeriodAttendance, DtInsertTable, DtUpdateTable, AddressOf AttendanceItemFillData, AddressOf AttendanceItemFilter, "IdNo", "")
             End If
             'For Each item In View.PayPeriodAttendance
             '    If item.Equals(DBNull.Value) Then

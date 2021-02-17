@@ -13,6 +13,7 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("PayPeriodName"))
                 AddRule(New ValidateRequired("PayPeriodCode"))
+                AddRule(New ValidateCompare("StartDate", "EndDate", ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
             End If
         End Sub
 
