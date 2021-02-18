@@ -100,25 +100,28 @@ Namespace PresentationLayer.Presenters
                 'Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
                 Dim empAttendance As New AttendanceItemView
                 Dim dateHired As Date
-                Dim dateReleased As Date
+                Dim dateReleased As Date?
                 empAttendance.PayPeriodIdNo = View.IdNo
                 empAttendance.EmployeeIdNo = activeEmployees(i * 4 - 4)
                 empAttendance.EmployeeName = activeEmployees(i * 4 - 3)
                 empAttendance.Sequence = i
                 dateHired = activeEmployees(i * 4 - 2)
-                dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), View.EndDate, activeEmployees(i * 4 - 1))
-                If dateHired <= View.StartDate Or dateReleased <= View.EndDate Then
-                    empAttendance.DaysPresent = numberOfDays - daysOff
-                    empAttendance.DaysOff = daysOff
-                    empAttendance.DaysTotal = numberOfDays
-                Else
-                    Dim rDate As Date
-                    rDate = IIf(dateReleased < View.EndDate, dateReleased, View.EndDate)
-                    empAttendance.DaysTotal = DateDiff(DateInterval.Day, dateHired, rDate) + 1
-                    empAttendance.DaysOff = FridaysInPeriod(dateHired, rDate)
-                    empAttendance.DaysPresent = empAttendance.DaysTotal - empAttendance.DaysOff
+                dateReleased = activeEmployees(i * 4 - 1)
+                'IIf(IsDBNull(activeEmployees(i * 4 - 1)), DateAndTime.DateAdd(DateInterval.Day, 365, Now()), activeEmployees(i * 4 - 1))
+                If dateHired <= View.StartDate And (IsDBNull(dateReleased) Or dateReleased >= View.StartDate) Then
+                    If dateHired <= View.StartDate Or dateReleased <= View.EndDate Then
+                        empAttendance.DaysPresent = numberOfDays - daysOff
+                        empAttendance.DaysOff = daysOff
+                        empAttendance.DaysTotal = numberOfDays
+                    Else
+                        Dim rDate As Date?
+                        rDate = IIf(dateReleased < View.EndDate, dateReleased, View.EndDate)
+                        empAttendance.DaysTotal = DateDiff(DateInterval.Day, dateHired, rDate) + 1
+                        empAttendance.DaysOff = FridaysInPeriod(dateHired, rDate)
+                        empAttendance.DaysPresent = empAttendance.DaysTotal - empAttendance.DaysOff
+                    End If
+                    View.PayPeriodAttendance.Add(empAttendance)
                 End If
-                View.PayPeriodAttendance.Add(empAttendance)
                 'For Each employeeEarning In employeeEarnings
 
                 'Next
