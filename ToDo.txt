@@ -3,7 +3,9 @@
 10. Add all default values to jOURNAL ENTRIES especially the dates
 11. Check all Single data type and change to Double (if need to increase accuracy)
 
-
+update employee set hireddate = create_date where hireddate is null
+update employee set hireddate = create_date where hireddate is null
+update employee set paycycleidno = 1 
 -- ================================================
 -- Template generated from Template Explorer using:
 -- Create Inline Function (New Menu).SQL

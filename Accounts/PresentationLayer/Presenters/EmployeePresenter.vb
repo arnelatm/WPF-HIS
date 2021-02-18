@@ -99,6 +99,9 @@ Namespace PresentationLayer.Presenters
                 ViewToDataTables(View.RegularEmployeeDeductions, DtDeductInsertTable, DtDeductUpdateTable, AddressOf DeductionFillData, AddressOf DeductionFilter)
                 ViewToDataTables(View.RegularEmployeeEarnings, DtEarnInsertTable, DtEarnUpdateTable, AddressOf EarningFillData, AddressOf EarningFilter)
                 ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
+                If IsEmpty(View.HiredDate) Then
+                    View.HiredDate = Today()
+                End If
             End If
         End Sub
 

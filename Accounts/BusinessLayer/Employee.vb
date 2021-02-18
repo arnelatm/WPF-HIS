@@ -16,6 +16,7 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("EmployeeName"))
                 AddRule(New ValidateRequired("EmployeeNameAra"))
+                AddRule(New ValidateRequired("HiredDate"))
                 'AddRule(New ValidateRequired("EmployeeCode"))
                 AddRule(New ValidateRequired("PaymentMethod"))
                 AddRule(New ValidateEmail("Email"))

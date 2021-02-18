@@ -198,20 +198,22 @@ Public Class CDataGridView
     End Sub
 
     Public Sub ReSequenceDgvAfterDelete()
-        Dim i = CurrentCell.RowIndex()
-        Dim myBindingSource = CType(DataSource, BindingSource)
-        Try
-            If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
-                For Each record In myBindingSource
-                    Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
-                    If sequence > i + 1 Then
-                        CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
-                    End If
-                Next
-            End If
-        Catch
-            ' missing member
-        End Try
+        If CurrentCell IsNot Nothing Then
+            Dim i = CurrentCell.RowIndex()
+            Dim myBindingSource = CType(DataSource, BindingSource)
+            Try
+                If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
+                    For Each record In myBindingSource
+                        Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
+                        If sequence > i + 1 Then
+                            CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
+                        End If
+                    Next
+                End If
+            Catch
+                ' missing member
+            End Try
+        End If
 
     End Sub
 
