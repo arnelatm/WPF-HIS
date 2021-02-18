@@ -33,6 +33,7 @@ Namespace PresentationLayer.Views.Forms
             dgvDaysOff.SetFormat(7, 4)
             dgvDaysAbsentWoPay.SetFormat(7, 4)
             dgvDaysTotal.SetFormat(7, 4)
+            dgvOvertime.SetFormat(8, 2)
             dgvDaysTotal.DisplayOnly = True
             dgvEmployeeName.DisplayOnly = True
             dgvEmployeeNameAra.DisplayOnly = True

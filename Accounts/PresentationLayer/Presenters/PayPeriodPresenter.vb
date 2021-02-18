@@ -28,6 +28,7 @@ Namespace PresentationLayer.Presenters
                                             {"DaysOff", GetType(Decimal)},
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
+                                            {"Overtime", GetType(Decimal)},
                                             {"PayPeriodIdNo", GetType(Int32)}
                                            })
 
@@ -37,6 +38,7 @@ Namespace PresentationLayer.Presenters
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
+                                            {"Overtime", GetType(Decimal)},
                                             {"PayPeriodIdNo", GetType(Int32)}
                                            })
 
@@ -82,27 +84,40 @@ Namespace PresentationLayer.Presenters
         Public Sub InitializeAttendance()
             Dim payFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "Active = 1 and PayCycleIdNo = " & View.PayCycleIdNo.ToString()
-            Dim activeEmployees = GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "EmployeeName"})
+            Dim activeEmployees = GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"})
             'Dim earningDao = New EarningDao
             'Dim earnings = earningDao.GetAll()
-            Dim NumberOfEmployees = Int(activeEmployees.Count() / 2)
+            Dim numberOfEmployees = Int(activeEmployees.Count() / 4)
             Dim numberOfDays As Long
             Dim daysOff As Int16
             numberOfDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
             daysOff = FridaysInPeriod(View.StartDate, View.EndDate)
-            For i = 1 To NumberOfEmployees
+            For i = 1 To numberOfEmployees
+
                 'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(emp, "sequence")
                 'Dim filter As String
                 'filter = "EmployeeIdNo = " & emp.ToString()
                 'Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
                 Dim empAttendance As New AttendanceItemView
+                Dim dateHired As Date
+                Dim dateReleased As Date
                 empAttendance.PayPeriodIdNo = View.IdNo
-                empAttendance.DaysPresent = numberOfDays - daysOff
-                empAttendance.DaysOff = daysOff
-                empAttendance.EmployeeIdNo = activeEmployees(i * 2 - 2)
-                empAttendance.EmployeeName = activeEmployees(i * 2 - 1)
+                empAttendance.EmployeeIdNo = activeEmployees(i * 4 - 4)
+                empAttendance.EmployeeName = activeEmployees(i * 4 - 3)
                 empAttendance.Sequence = i
-                empAttendance.DaysTotal = numberOfDays
+                dateHired = activeEmployees(i * 4 - 2)
+                dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), View.EndDate, activeEmployees(i * 4 - 1))
+                If dateHired <= View.StartDate Or dateReleased <= View.EndDate Then
+                    empAttendance.DaysPresent = numberOfDays - daysOff
+                    empAttendance.DaysOff = daysOff
+                    empAttendance.DaysTotal = numberOfDays
+                Else
+                    Dim rDate As Date
+                    rDate = IIf(dateReleased < View.EndDate, dateReleased, View.EndDate)
+                    empAttendance.DaysTotal = DateDiff(DateInterval.Day, dateHired, rDate) + 1
+                    empAttendance.DaysOff = FridaysInPeriod(dateHired, rDate)
+                    empAttendance.DaysPresent = empAttendance.DaysTotal - empAttendance.DaysOff
+                End If
                 View.PayPeriodAttendance.Add(empAttendance)
                 'For Each employeeEarning In employeeEarnings
 
@@ -140,6 +155,7 @@ Namespace PresentationLayer.Presenters
             workRow("DaysOff") = itemDataView.DaysOff
             workRow("DaysPresent") = itemDataView.DaysPresent
             workRow("EmployeeIdNo") = itemDataView.EmployeeIdNo
+            workRow("Overtime") = itemDataView.Overtime
             workRow("PayPeriodIdNo") = View.IdNo
         End Sub
 

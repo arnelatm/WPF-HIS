@@ -6,9 +6,11 @@
     [DaysAbsentWithPay]    DECIMAL (8, 4) NULL,
     [DaysAbsentWithoutPay] DECIMAL (8, 4) NULL,
     [DaysOff]              DECIMAL (8, 4) NULL,
-    [Overtime]             DECIMAL (8, 4) NULL,
+    [Overtime]             DECIMAL (8, 2) NULL,
     CONSTRAINT [PK_AttendanceItem] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

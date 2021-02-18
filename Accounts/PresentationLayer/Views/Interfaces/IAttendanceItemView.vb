@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DaysAbsentWithoutPay As Decimal
         Property DaysOff As Decimal
         Property DaysTotal As Decimal
+        Property Overtime As Decimal
         Property PayPeriodIdNo As Int16
         Property Sequence As Int16
     End Interface

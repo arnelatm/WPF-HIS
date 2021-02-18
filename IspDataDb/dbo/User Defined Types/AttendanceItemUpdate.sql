@@ -1,11 +1,12 @@
 ﻿CREATE TYPE [dbo].[AttendanceItemUpdate] AS TABLE (
-    [DaysAbsentWithoutPay] DECIMAL (18) NOT NULL,
-    [DaysAbsentWithPay]    DECIMAL (18) NOT NULL,
-    [DaysOff]              DECIMAL (18) NOT NULL,
-    [DaysPresent]          DECIMAL (18) NOT NULL,
-    [EmployeeIdNo]         INT          NOT NULL,
-    [IDNo]                 INT          NOT NULL,
-    [PayPeriodIdNo]        SMALLINT     NOT NULL,
+    [DaysAbsentWithoutPay] DECIMAL (8,4) NOT NULL,
+    [DaysAbsentWithPay]    DECIMAL (8,4) NOT NULL,
+    [DaysOff]              DECIMAL (8,4) NOT NULL,
+    [DaysPresent]          DECIMAL (8,4) NOT NULL,
+    [EmployeeIdNo]         INT           NOT NULL,
+    [IDNo]                 INT           NOT NULL,
+    [Overtime]             DECIMAL (8,2) NOT NULL,
+    [PayPeriodIdNo]        SMALLINT      NOT NULL,
     PRIMARY KEY CLUSTERED ([IDNo] ASC));
 
 

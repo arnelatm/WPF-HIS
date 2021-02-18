@@ -67,6 +67,8 @@ Namespace PresentationLayer.Views
         Public Property EmployeeNameAra As String Implements IAttendanceItemView.EmployeeNameAra
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Int32 Implements IAttendanceItemView.IdNo
+        Public Property Overtime As Decimal Implements IAttendanceItemView.Overtime
+
         Public Property PayPeriodIdNo As Int16 Implements IAttendanceItemView.PayPeriodIdNo
         Public Property Sequence As Int16 Implements IAttendanceItemView.Sequence
 
