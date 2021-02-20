@@ -5,6 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
 
@@ -12,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IPayPeriodView
 
         Private _payPeriodAttendance As New List(Of AttendanceItemView)
+        Private _payrollEarning As New List(Of PayrollEarningView)
         Private Property MyPresenter As PayPeriodPresenter
 
         Public Sub New()
@@ -37,6 +39,7 @@ Namespace PresentationLayer.Views.Forms
             dgvDaysTotal.DisplayOnly = True
             dgvEmployeeName.DisplayOnly = True
             dgvEmployeeNameAra.DisplayOnly = True
+            dgvDaysAbsentWoPay.DisplayOnly = True
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -227,11 +230,16 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DataGridViewAttendance_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayPeriodAttendance.CellEndEdit
             With DataGridViewPayPeriodAttendance
                 Dim nIndex = .CurrentRow.Index
-                PayPeriodAttendance(nIndex).DaysTotal = PayPeriodAttendance(nIndex).DaysOff + PayPeriodAttendance(nIndex).DaysAbsentWithPay + PayPeriodAttendance(nIndex).DaysAbsentWithoutPay + PayPeriodAttendance(nIndex).DaysPresent
+                PayPeriodAttendance(nIndex).DaysAbsentWithoutPay = PayPeriodAttendance(nIndex).DaysTotal - PayPeriodAttendance(nIndex).DaysOff - PayPeriodAttendance(nIndex).DaysAbsentWithPay - PayPeriodAttendance(nIndex).DaysPresent
             End With
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
+            If PayPeriodAttendance.Count() = 0 Then
+                btnInitialize.Text = Messaging.TranslateCaption("Initialize Attendance")
+            Else
+                btnInitialize.Text = Messaging.TranslateCaption("Re-Process Attendance")
+            End If
             btnInitialize.Enabled = True
         End Sub
 

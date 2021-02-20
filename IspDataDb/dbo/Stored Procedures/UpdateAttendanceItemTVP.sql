@@ -18,9 +18,9 @@ BEGIN
 
 -- Delete non existent records
 DELETE A
-FROM [DBO].Attendance A WHERE A.PayPeriodIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
+FROM [DBO].AttendanceItem A WHERE A.PayPeriodIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
 
--- Update existing Attendances
+-- Update existing AttendanceItem
 UPDATE a 
 SET a.DaysAbsentWithoutPay = b.DaysAbsentWithoutPay,
 	a.DaysAbsentWithPay = b.DaysAbsentWithPay,

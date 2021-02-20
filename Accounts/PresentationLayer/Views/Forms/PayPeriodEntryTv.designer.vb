@@ -59,8 +59,6 @@ Namespace PresentationLayer.Views.Forms
             Me.tbcPayPeriod = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tbpAttendance = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayPeriodAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.bsPayPeriodAttendance = New System.Windows.Forms.BindingSource(Me.components)
-            Me.TabPage2 = New System.Windows.Forms.TabPage()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -72,6 +70,8 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDaysTotal = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
             Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsPayPeriodAttendance = New System.Windows.Forms.BindingSource(Me.components)
+            Me.TabPage2 = New System.Windows.Forms.TabPage()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -436,11 +436,11 @@ Namespace PresentationLayer.Views.Forms
             Me.btnInitialize.SecurityKey = ""
             Me.btnInitialize.Size = New System.Drawing.Size(187, 40)
             Me.btnInitialize.TabIndex = 169
-            Me.btnInitialize.Text = "Initialize Payroll"
+            Me.btnInitialize.Text = "Initialize Attendance"
             '
             'CButton2
             '
-            Me.CButton2.DesignerSelected = False
+            Me.CButton2.DesignerSelected = True
             Me.CButton2.DisplayOnly = True
             Me.CButton2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CButton2.ImageIndex = 0
@@ -523,20 +523,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayPeriodAttendance.Size = New System.Drawing.Size(745, 346)
             Me.DataGridViewPayPeriodAttendance.TabIndex = 171
             '
-            'bsPayPeriodAttendance
-            '
-            Me.bsPayPeriodAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
-            '
-            'TabPage2
-            '
-            Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-            Me.TabPage2.Name = "TabPage2"
-            Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-            Me.TabPage2.Size = New System.Drawing.Size(760, 361)
-            Me.TabPage2.TabIndex = 1
-            Me.TabPage2.Text = "TabPage2"
-            Me.TabPage2.UseVisualStyleBackColor = True
-            '
             'dgvSequence
             '
             Me.dgvSequence.DataPropertyName = "Sequence"
@@ -544,7 +530,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
             Me.dgvSequence.DisplayOnly = True
-            Me.dgvSequence.EditingMode = True
+            Me.dgvSequence.EditingMode = False
             Me.dgvSequence.HeaderText = "Seq"
             Me.dgvSequence.Name = "dgvSequence"
             Me.dgvSequence.ReadOnly = True
@@ -582,6 +568,8 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvOvertime.DataPropertyName = "Overtime"
             DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
             Me.dgvOvertime.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvOvertime.EditingMode = False
             Me.dgvOvertime.HeaderText = "Overtime Hours"
@@ -681,6 +669,20 @@ Namespace PresentationLayer.Views.Forms
             Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
             Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn.Visible = False
+            '
+            'bsPayPeriodAttendance
+            '
+            Me.bsPayPeriodAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
+            '
+            'TabPage2
+            '
+            Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+            Me.TabPage2.Name = "TabPage2"
+            Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+            Me.TabPage2.Size = New System.Drawing.Size(760, 361)
+            Me.TabPage2.TabIndex = 1
+            Me.TabPage2.Text = "TabPage2"
+            Me.TabPage2.UseVisualStyleBackColor = True
             '
             'PayPeriodEntryTv
             '
