@@ -55,6 +55,13 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property MultiplierType As Char Implements IDeductionView.MultiplierType
+            Get
+                Return cboMultiplierType.GetValue()
+            End Get
+            Set
+                cboMultiplierType.SetValue(Value)
+            End Set
+        End Property
 
         Public Property AccountIdNo As Int16 Implements IDeductionView.AccountIdNo
             Get
@@ -188,7 +195,7 @@ Namespace PresentationLayer.Views.Forms
             cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
             cboMultiplierType.DataSource = PresenterObj.MakeEnumComboList(Of MultiplierTypeSelection)
-            cboBasePaymentIdNo.DataSource = PresenterObj.GetLookup("Deduction")
+            cboBasePaymentIdNo.DataSource = PresenterObj.GetLookup("Earning")
             cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
             _accountsByCode = PresenterObj.GetDetailAccountList()
             _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
