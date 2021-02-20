@@ -6,6 +6,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports CrystalDecisions.Shared.Json
 
 Namespace PresentationLayer.Presenters
 
@@ -14,7 +15,11 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Protected DtEarnInsertTable As New DataTable
+        Protected DtEarnUpdateTable As New DataTable
         Private _attendanceItemModel
+        Private _reinitialize As Boolean = False
+        Private _payrollEarning
 
         Public Sub New(view As IPayPeriodView)
             MyBase.New(view)
@@ -39,6 +44,19 @@ Namespace PresentationLayer.Presenters
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
                                             {"Overtime", GetType(Decimal)},
+                                            {"PayPeriodIdNo", GetType(Int32)}
+                                           })
+
+            CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
+                                            {"EarningIdNo", GetType(Int16)},
+                                            {"EmployeeIdNo", GetType(Int32)},
+                                            {"PayPeriodIdNo", GetType(Int32)}
+                                           })
+
+            CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
+                                            {"EarningIdNo", GetType(Int16)},
+                                            {"EmployeeIdNo", GetType(Int32)},
+                                            {"IdNo", GetType(Int32)},
                                             {"PayPeriodIdNo", GetType(Int32)}
                                            })
 
@@ -83,49 +101,76 @@ Namespace PresentationLayer.Presenters
 
         Public Sub InitializeAttendance()
             Dim payFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
-            Dim employeeFilter = "Active = 1 and PayCycleIdNo = " & View.PayCycleIdNo.ToString()
+            Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString()
             Dim activeEmployees = GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"})
             'Dim earningDao = New EarningDao
             'Dim earnings = earningDao.GetAll()
             Dim numberOfEmployees = Int(activeEmployees.Count() / 4)
-            Dim numberOfDays As Long
-            Dim daysOff As Int16
-            numberOfDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
-            daysOff = FridaysInPeriod(View.StartDate, View.EndDate)
+            Dim daysInPeriod As Int16
+            Dim daysOffInPeriod As Int16
+            Dim seq As Int16
+            Dim dateHired As Date
+            Dim dateReleased As Date?
+            Dim empId As Int32
+            Dim empName As String
+            Dim empFound As Boolean = False
+            seq = View.PayPeriodAttendance.Count() + 1
+            daysInPeriod = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
+            daysOffInPeriod = FridaysInPeriod(View.StartDate, View.EndDate)
+            If View.PayPeriodAttendance.Any() Then
+                _reinitialize = True
+            Else
+                _reinitialize = False
+            End If
             For i = 1 To numberOfEmployees
-
                 'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(emp, "sequence")
                 'Dim filter As String
                 'filter = "EmployeeIdNo = " & emp.ToString()
                 'Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
-                Dim empAttendance As New AttendanceItemView
-                Dim dateHired As Date
-                Dim dateReleased As Date?
-                empAttendance.PayPeriodIdNo = View.IdNo
-                empAttendance.EmployeeIdNo = activeEmployees(i * 4 - 4)
-                empAttendance.EmployeeName = activeEmployees(i * 4 - 3)
-                empAttendance.Sequence = i
+
+                empId = activeEmployees(i * 4 - 4)
+                empName = activeEmployees(i * 4 - 3)
                 dateHired = activeEmployees(i * 4 - 2)
-                dateReleased = activeEmployees(i * 4 - 1)
-                'IIf(IsDBNull(activeEmployees(i * 4 - 1)), DateAndTime.DateAdd(DateInterval.Day, 365, Now()), activeEmployees(i * 4 - 1))
-                If dateHired <= View.StartDate And (IsDBNull(dateReleased) Or dateReleased >= View.StartDate) Then
-                    If dateHired <= View.StartDate Or dateReleased <= View.EndDate Then
-                        empAttendance.DaysPresent = numberOfDays - daysOff
-                        empAttendance.DaysOff = daysOff
-                        empAttendance.DaysTotal = numberOfDays
+                dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), Nothing, activeEmployees(i * 4 - 1))
+
+                If _reinitialize Then
+                    Dim empAttendance As AttendanceItemView
+                    empAttendance = View.PayPeriodAttendance.Find(Function(c) c.EmployeeIdNo = empId)
+                    If empAttendance Is Nothing Then
+                        empFound = False
                     Else
-                        Dim rDate As Date?
-                        rDate = IIf(dateReleased < View.EndDate, dateReleased, View.EndDate)
-                        empAttendance.DaysTotal = DateDiff(DateInterval.Day, dateHired, rDate) + 1
-                        empAttendance.DaysOff = FridaysInPeriod(dateHired, rDate)
-                        empAttendance.DaysPresent = empAttendance.DaysTotal - empAttendance.DaysOff
+                        empFound = True
+                        'empAttendance.DaysTotal = DateDiff(DateInterval.Day, dateHired, eDate) + 1
+                        'empAttendance.DaysOff = FridaysInPeriod(dateHired, eDate)
+                        If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
+                            UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
+                            If empAttendance.DaysAbsentWithoutPay <> empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent Then
+                                empAttendance.DaysAbsentWithoutPay = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent
+                            End If
+                        Else
+                            View.PayPeriodAttendance.Remove(empAttendance)
+                        End If
                     End If
-                    View.PayPeriodAttendance.Add(empAttendance)
+                End If
+                If empFound Then
+                    Continue For
+                End If
+
+                If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
+                    AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
+                    seq = seq + 1
                 End If
                 'For Each employeeEarning In employeeEarnings
 
                 'Next
             Next
+            If _reinitialize Then
+                Dim i As Int16 = 1
+                For Each item In View.PayPeriodAttendance
+                    item.Sequence = i
+                    i = i + 1
+                Next
+            End If
             'For i = 1 To Int(Data.Count / 3)
             '    Dim tData As New ActiveEmployee
             '    tData.IdNo = Data(i * 3 - 3)
@@ -145,6 +190,47 @@ Namespace PresentationLayer.Presenters
             '              )
             '    End If
             'Next employee
+        End Sub
+
+        Public Sub AddEmployeeAttendance(ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal empName As String, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16, ByVal seq As Int16)
+            Dim empAttendance As New AttendanceItemView
+            Dim daysOff As Int16
+            Dim daysTotal As Int16
+            ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
+            empAttendance.DaysTotal = daysTotal
+            empAttendance.DaysOff = daysOff
+            empAttendance.DaysPresent = daysTotal - daysOff
+            empAttendance.PayPeriodIdNo = View.IdNo
+            empAttendance.EmployeeIdNo = empId
+            empAttendance.EmployeeName = empName
+            empAttendance.Sequence = seq
+            View.PayPeriodAttendance.Add(empAttendance)
+        End Sub
+
+        Public Sub UpdateEmployeeAttendance(ByRef empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
+            Dim daysOff As Int16
+            Dim daysTotal As Int16
+            ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
+            empAttendance.DaysTotal = daysTotal
+            empAttendance.DaysOff = daysOff
+        End Sub
+
+        Private Sub ComputeTotalDaysNOff(ByRef daysTotal As Int16, ByRef daysOff As Int16, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
+            Dim eDate As Date
+            If dateHired <= View.StartDate AndAlso (dateReleased Is Nothing OrElse dateReleased > View.EndDate) Then
+                daysOff = daysOffInPeriod
+                daysTotal = daysInPeriod
+            Else
+                If dateReleased Is Nothing OrElse dateReleased > View.EndDate Then
+                    eDate = View.EndDate
+                Else
+                    Dim dDate As Date ' need to do this because Date? type is not accepted by DateAdd function
+                    dDate = dateReleased
+                    eDate = DateAndTime.DateAdd(DateInterval.Day, -1, dDate)
+                End If
+                daysTotal = DateDiff(DateInterval.Day, dateHired, eDate) + 1
+                daysOff = FridaysInPeriod(dateHired, eDate)
+            End If
         End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
