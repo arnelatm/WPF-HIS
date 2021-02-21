@@ -8,7 +8,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views.Forms
 
     Public Class PayrollEntry
-        Implements IPayPeriodView
+        Implements IPayrollDetailView
 
         Protected TvMainFieldName As String
         Protected TvSecondaryFieldName As String
@@ -38,22 +38,31 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property EndDate As Date Implements IPayPeriodView.EndDate
-        Public Property IdNo As Int32 Implements IPayPeriodView.IdNo
 
-        Public Property PayCycleIdNo As Int16 Implements IPayPeriodView.PayCycleIdNo
-
-        Public Property PayPeriodCode As String Implements IPayPeriodView.PayPeriodCode
-        Public Property PayPeriodName As String Implements IPayPeriodView.PayPeriodName
-        Public Property PayPeriodNameAra As String Implements IPayPeriodView.PayPeriodNameAra
-        Public Property StartDate As Date Implements IPayPeriodView.StartDate
-
-        Public Property PayPeriodAttendance As List(Of BusinessLayer.AttendanceItem) Implements IPayPeriodView.PayPeriodAttendance
+        Public Property IdNo As Int32 Implements IPayrollDetailView.IdNo
             Get
-                Throw New NotImplementedException()
+                Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
-            Set(value As List(Of BusinessLayer.AttendanceItem))
-                Throw New NotImplementedException()
+            Set
+                TxtIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
+
+        Public Property EmployeeIdNo As Int32 Implements IPayrollDetailView.EmployeeIdNo
+            Get
+                Return NumParser(Of Int16)(txtEmployeeIdNo.Text)
+            End Get
+            Set
+                txtEmployeeIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
+
+        Public Property PayrollIdNo As Int16 Implements IPayrollDetailView.PayrollIdNo
+            Get
+                Return NumParser(Of Int16)(txtIdNo.Text)
+            End Get
+            Set
+                txtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 

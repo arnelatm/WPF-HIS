@@ -84,7 +84,7 @@ Namespace PresentationLayer.Views.Forms
             Me.LeavesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayCyclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.PayPeriodsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayrollsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PensionProvidersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PensionSchemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
@@ -102,7 +102,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ClosePettyCashAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ClosingEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayrollEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.PayPeriodAttendanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayrollAttendanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayrollEntryToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
             Me.ClosePettyCashFundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -437,7 +437,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPayroll
             '
-            Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EarningsToolStripMenuItem, Me.DeductionsToolStripMenuItem, Me.LeavesToolStripMenuItem, Me.PayGroupsToolStripMenuItem, Me.PayCyclesToolStripMenuItem, Me.PayPeriodsToolStripMenuItem, Me.PensionProvidersToolStripMenuItem, Me.PensionSchemesToolStripMenuItem})
+            Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EarningsToolStripMenuItem, Me.DeductionsToolStripMenuItem, Me.LeavesToolStripMenuItem, Me.PayGroupsToolStripMenuItem, Me.PayCyclesToolStripMenuItem, Me.PayrollsToolStripMenuItem, Me.PensionProvidersToolStripMenuItem, Me.PensionSchemesToolStripMenuItem})
             Me.ToolStripMenuItemPayroll.Name = "ToolStripMenuItemPayroll"
             resources.ApplyResources(Me.ToolStripMenuItemPayroll, "ToolStripMenuItemPayroll")
             '
@@ -466,10 +466,10 @@ Namespace PresentationLayer.Views.Forms
             Me.PayCyclesToolStripMenuItem.Name = "PayCyclesToolStripMenuItem"
             resources.ApplyResources(Me.PayCyclesToolStripMenuItem, "PayCyclesToolStripMenuItem")
             '
-            'PayPeriodsToolStripMenuItem
+            'PayrollsToolStripMenuItem
             '
-            Me.PayPeriodsToolStripMenuItem.Name = "PayPeriodsToolStripMenuItem"
-            resources.ApplyResources(Me.PayPeriodsToolStripMenuItem, "PayPeriodsToolStripMenuItem")
+            Me.PayrollsToolStripMenuItem.Name = "PayrollsToolStripMenuItem"
+            resources.ApplyResources(Me.PayrollsToolStripMenuItem, "PayrollsToolStripMenuItem")
             '
             'PensionProvidersToolStripMenuItem
             '
@@ -554,14 +554,14 @@ Namespace PresentationLayer.Views.Forms
             '
             'PayrollEntryToolStripMenuItem
             '
-            Me.PayrollEntryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PayPeriodAttendanceToolStripMenuItem, Me.PayrollEntryToolStripMenuItem1})
+            Me.PayrollEntryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PayrollAttendanceToolStripMenuItem, Me.PayrollEntryToolStripMenuItem1})
             Me.PayrollEntryToolStripMenuItem.Name = "PayrollEntryToolStripMenuItem"
             resources.ApplyResources(Me.PayrollEntryToolStripMenuItem, "PayrollEntryToolStripMenuItem")
             '
-            'PayPeriodAttendanceToolStripMenuItem
+            'PayrollAttendanceToolStripMenuItem
             '
-            Me.PayPeriodAttendanceToolStripMenuItem.Name = "PayPeriodAttendanceToolStripMenuItem"
-            resources.ApplyResources(Me.PayPeriodAttendanceToolStripMenuItem, "PayPeriodAttendanceToolStripMenuItem")
+            Me.PayrollAttendanceToolStripMenuItem.Name = "PayrollAttendanceToolStripMenuItem"
+            resources.ApplyResources(Me.PayrollAttendanceToolStripMenuItem, "PayrollAttendanceToolStripMenuItem")
             '
             'PayrollEntryToolStripMenuItem1
             '
@@ -1021,7 +1021,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents LeavesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PayGroupsToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PayCyclesToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents PayPeriodsToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents PayrollsToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PensionProvidersToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PensionSchemesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents SalesDepositTypesToolStripMenuItem As ToolStripMenuItem
@@ -1034,7 +1034,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents SemestralToolStripMenuItem1 As ToolStripMenuItem
         Friend WithEvents AccountsReceivableToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents AgingOfAccountsPayableToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents PayPeriodAttendanceToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents PayrollAttendanceToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PayrollEntryToolStripMenuItem1 As ToolStripMenuItem
         Friend WithEvents CheckPrintingToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents ToolStripSeparator2 As ToolStripSeparator

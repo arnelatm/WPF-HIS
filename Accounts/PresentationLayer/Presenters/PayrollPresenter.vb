@@ -10,8 +10,8 @@ Imports CrystalDecisions.Shared.Json
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PayPeriodPresenter
-        Inherits AccountsPresenter(Of IPayPeriodView, PayPeriodModel)
+    Public Class PayrollPresenter
+        Inherits AccountsPresenter(Of IPayrollView, PayrollModel)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -21,9 +21,9 @@ Namespace PresentationLayer.Presenters
         Private _reinitialize As Boolean = False
         Private _payrollEarning
 
-        Public Sub New(view As IPayPeriodView)
+        Public Sub New(view As IPayrollView)
             MyBase.New(view)
-            InitializerWithTv("PayPeriod")
+            InitializerWithTv("Payroll")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
             _attendanceItemModel = New ModelAccounts("AttendanceItem", Nothing, Nothing)
@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"Overtime", GetType(Decimal)},
-                                            {"PayPeriodIdNo", GetType(Int32)}
+                                            {"PayrollIdNo", GetType(Int32)}
                                            })
 
             CreateDataTable(DtUpdateTable, {{"DaysAbsentWithoutPay", GetType(Decimal)},
@@ -44,52 +44,52 @@ Namespace PresentationLayer.Presenters
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
                                             {"Overtime", GetType(Decimal)},
-                                            {"PayPeriodIdNo", GetType(Int32)}
+                                            {"PayrollIdNo", GetType(Int32)}
                                            })
 
-            CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
-                                            {"EarningIdNo", GetType(Int16)},
-                                            {"EmployeeIdNo", GetType(Int32)},
-                                            {"PayPeriodIdNo", GetType(Int32)}
-                                           })
+            'CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
+            '                                {"EarningIdNo", GetType(Int16)},
+            '                                {"EmployeeIdNo", GetType(Int32)},
+            '                                {"PayrollIdNo", GetType(Int32)}
+            '                               })
 
-            CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
-                                            {"EarningIdNo", GetType(Int16)},
-                                            {"EmployeeIdNo", GetType(Int32)},
-                                            {"IdNo", GetType(Int32)},
-                                            {"PayPeriodIdNo", GetType(Int32)}
-                                           })
+            'CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
+            '                                {"EarningIdNo", GetType(Int16)},
+            '                                {"EmployeeIdNo", GetType(Int32)},
+            '                                {"IdNo", GetType(Int32)},
+            '                                {"PayrollIdNo", GetType(Int32)}
+            '                               })
 
         End Sub
 
         Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycle)
             If View.StartDate = Nothing And View.EndDate = Nothing Then
                 Dim nIdNoMax As Int32
-                Dim maxRecord As PayPeriodModel
+                Dim maxRecord As PayrollModel
                 Dim payMonthText As String = "Payroll for the Month of"
-                Dim payPeriodText As String = "Payroll for the Period"
-                nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "PayPeriod", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
-                maxRecord = ModelPresenter.GetRecordById(Of PayPeriodModel)(nIdNoMax)
+                Dim PayrollText As String = "Payroll for the Period"
+                nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
+                maxRecord = ModelPresenter.GetRecordById(Of PayrollModel)(nIdNoMax)
                 View.StartDate = maxRecord.EndDate.AddDays(1)
                 Dim arabicCulture As New CultureInfo("ar-ae", False)
                 If View.StartDate.Day = 1 Then
                     View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
-                    View.PayPeriodName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
-                    View.PayPeriodNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
+                    View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+                    View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
                 Else
                     View.EndDate = maxRecord.EndDate.AddMonths(1)
-                    View.PayPeriodName = payPeriodText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
-                    View.PayPeriodNameAra = Messaging.TranslateCaption(payPeriodText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+                    View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
+                    View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
                 End If
-                View.PayPeriodCode = "M" + View.EndDate.ToString("yyMM")
+                View.PayrollCode = "M" + View.EndDate.ToString("yyMM")
             End If
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                ViewToDataTables(View.PayPeriodAttendance, DtInsertTable, DtUpdateTable, AddressOf AttendanceItemFillData, AddressOf AttendanceItemFilter, "IdNo", "")
+                ViewToDataTables(View.PayrollAttendance, DtInsertTable, DtUpdateTable, AddressOf AttendanceItemFillData, AddressOf AttendanceItemFilter, "IdNo", "")
             End If
-            'For Each item In View.PayPeriodAttendance
+            'For Each item In View.PayrollAttendance
             '    If item.Equals(DBNull.Value) Then
             '        item.Notes = ""
             '    End If
@@ -114,10 +114,10 @@ Namespace PresentationLayer.Presenters
             Dim empId As Int32
             Dim empName As String
             Dim empFound As Boolean = False
-            seq = View.PayPeriodAttendance.Count() + 1
+            seq = View.PayrollAttendance.Count() + 1
             daysInPeriod = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
             daysOffInPeriod = FridaysInPeriod(View.StartDate, View.EndDate)
-            If View.PayPeriodAttendance.Any() Then
+            If View.PayrollAttendance.Any() Then
                 _reinitialize = True
             Else
                 _reinitialize = False
@@ -135,7 +135,7 @@ Namespace PresentationLayer.Presenters
 
                 If _reinitialize Then
                     Dim empAttendance As AttendanceItemView
-                    empAttendance = View.PayPeriodAttendance.Find(Function(c) c.EmployeeIdNo = empId)
+                    empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empId)
                     If empAttendance Is Nothing Then
                         empFound = False
                     Else
@@ -148,7 +148,7 @@ Namespace PresentationLayer.Presenters
                                 empAttendance.DaysAbsentWithoutPay = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent
                             End If
                         Else
-                            View.PayPeriodAttendance.Remove(empAttendance)
+                            View.PayrollAttendance.Remove(empAttendance)
                         End If
                     End If
                 End If
@@ -166,7 +166,7 @@ Namespace PresentationLayer.Presenters
             Next
             If _reinitialize Then
                 Dim i As Int16 = 1
-                For Each item In View.PayPeriodAttendance
+                For Each item In View.PayrollAttendance
                     item.Sequence = i
                     i = i + 1
                 Next
@@ -200,11 +200,11 @@ Namespace PresentationLayer.Presenters
             empAttendance.DaysTotal = daysTotal
             empAttendance.DaysOff = daysOff
             empAttendance.DaysPresent = daysTotal - daysOff
-            empAttendance.PayPeriodIdNo = View.IdNo
+            empAttendance.PayrollIdNo = View.IdNo
             empAttendance.EmployeeIdNo = empId
             empAttendance.EmployeeName = empName
             empAttendance.Sequence = seq
-            View.PayPeriodAttendance.Add(empAttendance)
+            View.PayrollAttendance.Add(empAttendance)
         End Sub
 
         Public Sub UpdateEmployeeAttendance(ByRef empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
@@ -235,7 +235,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_attendanceItemModel, DtUpdateTable, DtInsertTable, passedValue, "PayPeriodIdNo")
+            retVal = UpdateChildData(_attendanceItemModel, DtUpdateTable, DtInsertTable, passedValue, "PayrollIdNo")
         End Sub
 
         Private Sub AttendanceItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
@@ -245,7 +245,7 @@ Namespace PresentationLayer.Presenters
             workRow("DaysPresent") = itemDataView.DaysPresent
             workRow("EmployeeIdNo") = itemDataView.EmployeeIdNo
             workRow("Overtime") = itemDataView.Overtime
-            workRow("PayPeriodIdNo") = View.IdNo
+            workRow("PayrollIdNo") = View.IdNo
         End Sub
 
         Public Function AttendanceItemFilter(ByVal obj As Object) As Boolean

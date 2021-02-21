@@ -69,7 +69,7 @@ Namespace PresentationLayer.Views
         Public Property IdNo As Int32 Implements IAttendanceItemView.IdNo
         Public Property Overtime As Decimal Implements IAttendanceItemView.Overtime
 
-        Public Property PayPeriodIdNo As Int16 Implements IAttendanceItemView.PayPeriodIdNo
+        Public Property PayrollIdNo As Int16 Implements IAttendanceItemView.PayrollIdNo
         Public Property Sequence As Int16 Implements IAttendanceItemView.Sequence
 
     End Class

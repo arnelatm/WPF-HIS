@@ -1343,9 +1343,9 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PayPeriodsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayPeriodsToolStripMenuItem.Click
-            Dim childMdiForm As PayPeriodEntryTv
-            childMdiForm = New PayPeriodEntryTv With {
+        Private Sub PayrollsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollsToolStripMenuItem.Click
+            Dim childMdiForm As PayrollEntryTv
+            childMdiForm = New PayrollEntryTv With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()
@@ -1482,7 +1482,15 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        'Private Sub PayPeriodAttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayPeriodAttendanceToolStripMenuItem.Click
+        Private Sub PayrollEntryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem1.Click
+            'Dim childMdiForm
+            'childMdiForm = New PayrollEntry() With {
+            '    .MdiParent = Me
+            '    }
+            'childMdiForm.Show()
+        End Sub
+
+        'Private Sub PayrollAttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollAttendanceToolStripMenuItem.Click
         '    Dim childMdiForm As AttendanceItemEntry
         '    childMdiForm = New AttendanceItemEntry With {
         '        .MdiParent = Me

@@ -1,4 +1,4 @@
-﻿Public Class PayrollDetails
+﻿Public Class PayrollDetail
     Inherits AATM.BusinessLayer.BusinessObject
 
     ' ** Enterprise Design Pattern: Identity field pattern
@@ -9,7 +9,7 @@
     End Sub
 
     Public Property IdNo As Int32
-    Public Property PayPeriodIdNo As Int16
+    Public Property PayrollIdNo As Int16
     Public Property EmployeeIdNo As Int16
 
 End Class

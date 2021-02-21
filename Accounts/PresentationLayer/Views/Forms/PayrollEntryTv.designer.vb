@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class PayPeriodEntryTv
+    Partial Class PayrollEntryTv
         Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayPeriodEntryTv))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayrollEntryTv))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -38,27 +38,27 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtPayPeriodName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.dtpStartDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.dtpEndDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayPeriodNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.lblPayPeriodNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPayPeriodName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblPayrollNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayPeriodCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblPayPeriodCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnInitialize = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CButton3 = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.tbcPayPeriod = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
+            Me.tbcPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tbpAttendance = New System.Windows.Forms.TabPage()
-            Me.DataGridViewPayPeriodAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewPayrollAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
@@ -70,15 +70,15 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDaysTotal = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
             Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPayPeriodAttendance = New System.Windows.Forms.BindingSource(Me.components)
+            Me.bsPayrollAttendance = New System.Windows.Forms.BindingSource(Me.components)
             Me.TabPage2 = New System.Windows.Forms.TabPage()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
-            Me.tbcPayPeriod.SuspendLayout()
+            Me.tbcPayroll.SuspendLayout()
             Me.tbpAttendance.SuspendLayout()
-            CType(Me.DataGridViewPayPeriodAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsPayPeriodAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.DataGridViewPayrollAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsPayrollAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TreeViewTableName
@@ -121,29 +121,29 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.TabStop = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
-            'txtPayPeriodName
+            'txtPayrollName
             '
-            Me.txtPayPeriodName.BackColor = System.Drawing.Color.White
-            Me.txtPayPeriodName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayPeriodName, 3)
-            Me.txtPayPeriodName.ComputedValue = False
-            Me.txtPayPeriodName.CustomFormat = Nothing
-            Me.txtPayPeriodName.DataBoundControl = True
-            Me.txtPayPeriodName.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtPayPeriodName.EditingMode = False
-            Me.txtPayPeriodName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayPeriodName.ForeColor = System.Drawing.Color.Black
-            Me.txtPayPeriodName.LinkedLabel = Nothing
-            Me.txtPayPeriodName.Location = New System.Drawing.Point(194, 52)
-            Me.txtPayPeriodName.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayPeriodName.MaximumValue = Nothing
-            Me.txtPayPeriodName.MinimumValue = Nothing
-            Me.txtPayPeriodName.Name = "txtPayPeriodName"
-            Me.txtPayPeriodName.OldValue = Nothing
-            Me.txtPayPeriodName.ReadOnly = True
-            Me.txtPayPeriodName.Size = New System.Drawing.Size(579, 23)
-            Me.txtPayPeriodName.TabIndex = 3
-            Me.txtPayPeriodName.ValueIsMandatory = True
+            Me.txtPayrollName.BackColor = System.Drawing.Color.White
+            Me.txtPayrollName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayrollName, 3)
+            Me.txtPayrollName.ComputedValue = False
+            Me.txtPayrollName.CustomFormat = Nothing
+            Me.txtPayrollName.DataBoundControl = True
+            Me.txtPayrollName.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtPayrollName.EditingMode = False
+            Me.txtPayrollName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPayrollName.ForeColor = System.Drawing.Color.Black
+            Me.txtPayrollName.LinkedLabel = Nothing
+            Me.txtPayrollName.Location = New System.Drawing.Point(194, 52)
+            Me.txtPayrollName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPayrollName.MaximumValue = Nothing
+            Me.txtPayrollName.MinimumValue = Nothing
+            Me.txtPayrollName.Name = "txtPayrollName"
+            Me.txtPayrollName.OldValue = Nothing
+            Me.txtPayrollName.ReadOnly = True
+            Me.txtPayrollName.Size = New System.Drawing.Size(579, 23)
+            Me.txtPayrollName.TabIndex = 3
+            Me.txtPayrollName.ValueIsMandatory = True
             '
             'floDataDisplay
             '
@@ -168,21 +168,21 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.dtpStartDate, 1, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpEndDate, 3, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.lblStartDate, 0, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodNameAra, 1, 4)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblPayPeriodNameAra, 0, 4)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblPayPeriodName, 0, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtPayrollNameAra, 1, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblPayrollNameAra, 0, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblPayrollName, 0, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.lblEndDate, 2, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodCode, 3, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblPayPeriodCode, 2, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtPayrollCode, 3, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblPayrollCode, 2, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.cboPayCycleIdNo, 1, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.lblPayCycleIdNo, 0, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 1, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodName, 1, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtPayrollName, 1, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.btnInitialize, 0, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.CButton2, 1, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.CButton3, 2, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.tbcPayPeriod, 0, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.tbcPayroll, 0, 7)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 13)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 8
@@ -258,56 +258,56 @@ Namespace PresentationLayer.Views.Forms
             Me.lblStartDate.Text = "Start Date"
             Me.lblStartDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtPayPeriodNameAra
+            'txtPayrollNameAra
             '
-            Me.txtPayPeriodNameAra.BackColor = System.Drawing.Color.White
-            Me.txtPayPeriodNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayPeriodNameAra, 3)
-            Me.txtPayPeriodNameAra.ComputedValue = False
-            Me.txtPayPeriodNameAra.CustomFormat = Nothing
-            Me.txtPayPeriodNameAra.DataBoundControl = True
-            Me.txtPayPeriodNameAra.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtPayPeriodNameAra.EditingMode = False
-            Me.txtPayPeriodNameAra.EnglishControl = Me.txtPayPeriodName
-            Me.txtPayPeriodNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayPeriodNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtPayPeriodNameAra.LinkedLabel = Nothing
-            Me.txtPayPeriodNameAra.Location = New System.Drawing.Point(194, 77)
-            Me.txtPayPeriodNameAra.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayPeriodNameAra.MaximumValue = Nothing
-            Me.txtPayPeriodNameAra.MinimumValue = Nothing
-            Me.txtPayPeriodNameAra.Name = "txtPayPeriodNameAra"
-            Me.txtPayPeriodNameAra.OldValue = Nothing
-            Me.txtPayPeriodNameAra.ReadOnly = True
-            Me.txtPayPeriodNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-            Me.txtPayPeriodNameAra.Size = New System.Drawing.Size(579, 23)
-            Me.txtPayPeriodNameAra.TabIndex = 4
+            Me.txtPayrollNameAra.BackColor = System.Drawing.Color.White
+            Me.txtPayrollNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayrollNameAra, 3)
+            Me.txtPayrollNameAra.ComputedValue = False
+            Me.txtPayrollNameAra.CustomFormat = Nothing
+            Me.txtPayrollNameAra.DataBoundControl = True
+            Me.txtPayrollNameAra.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtPayrollNameAra.EditingMode = False
+            Me.txtPayrollNameAra.EnglishControl = Me.txtPayrollName
+            Me.txtPayrollNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPayrollNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtPayrollNameAra.LinkedLabel = Nothing
+            Me.txtPayrollNameAra.Location = New System.Drawing.Point(194, 77)
+            Me.txtPayrollNameAra.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPayrollNameAra.MaximumValue = Nothing
+            Me.txtPayrollNameAra.MinimumValue = Nothing
+            Me.txtPayrollNameAra.Name = "txtPayrollNameAra"
+            Me.txtPayrollNameAra.OldValue = Nothing
+            Me.txtPayrollNameAra.ReadOnly = True
+            Me.txtPayrollNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtPayrollNameAra.Size = New System.Drawing.Size(579, 23)
+            Me.txtPayrollNameAra.TabIndex = 4
             '
-            'lblPayPeriodNameAra
+            'lblPayrollNameAra
             '
-            Me.lblPayPeriodNameAra.DisplayOnly = True
-            Me.lblPayPeriodNameAra.EditingMode = False
-            Me.lblPayPeriodNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayPeriodNameAra.Location = New System.Drawing.Point(1, 77)
-            Me.lblPayPeriodNameAra.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayPeriodNameAra.Name = "lblPayPeriodNameAra"
-            Me.lblPayPeriodNameAra.Size = New System.Drawing.Size(142, 23)
-            Me.lblPayPeriodNameAra.TabIndex = 167
-            Me.lblPayPeriodNameAra.Text = "Name (Arabic)"
-            Me.lblPayPeriodNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayrollNameAra.DisplayOnly = True
+            Me.lblPayrollNameAra.EditingMode = False
+            Me.lblPayrollNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayrollNameAra.Location = New System.Drawing.Point(1, 77)
+            Me.lblPayrollNameAra.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayrollNameAra.Name = "lblPayrollNameAra"
+            Me.lblPayrollNameAra.Size = New System.Drawing.Size(142, 23)
+            Me.lblPayrollNameAra.TabIndex = 167
+            Me.lblPayrollNameAra.Text = "Name (Arabic)"
+            Me.lblPayrollNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'lblPayPeriodName
+            'lblPayrollName
             '
-            Me.lblPayPeriodName.DisplayOnly = True
-            Me.lblPayPeriodName.EditingMode = False
-            Me.lblPayPeriodName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayPeriodName.Location = New System.Drawing.Point(1, 52)
-            Me.lblPayPeriodName.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayPeriodName.Name = "lblPayPeriodName"
-            Me.lblPayPeriodName.Size = New System.Drawing.Size(142, 23)
-            Me.lblPayPeriodName.TabIndex = 164
-            Me.lblPayPeriodName.Text = "Name"
-            Me.lblPayPeriodName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayrollName.DisplayOnly = True
+            Me.lblPayrollName.EditingMode = False
+            Me.lblPayrollName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayrollName.Location = New System.Drawing.Point(1, 52)
+            Me.lblPayrollName.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayrollName.Name = "lblPayrollName"
+            Me.lblPayrollName.Size = New System.Drawing.Size(142, 23)
+            Me.lblPayrollName.TabIndex = 164
+            Me.lblPayrollName.Text = "Name"
+            Me.lblPayrollName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'lblEndDate
             '
@@ -323,40 +323,40 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEndDate.Text = "End Date"
             Me.lblEndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtPayPeriodCode
+            'txtPayrollCode
             '
-            Me.txtPayPeriodCode.BackColor = System.Drawing.Color.White
-            Me.txtPayPeriodCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayPeriodCode.ComputedValue = False
-            Me.txtPayPeriodCode.CustomFormat = Nothing
-            Me.txtPayPeriodCode.DataBoundControl = True
-            Me.txtPayPeriodCode.EditingMode = False
-            Me.txtPayPeriodCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayPeriodCode.ForeColor = System.Drawing.Color.Black
-            Me.txtPayPeriodCode.LinkedLabel = Nothing
-            Me.txtPayPeriodCode.Location = New System.Drawing.Point(580, 27)
-            Me.txtPayPeriodCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayPeriodCode.MaximumValue = Nothing
-            Me.txtPayPeriodCode.MinimumValue = Nothing
-            Me.txtPayPeriodCode.Name = "txtPayPeriodCode"
-            Me.txtPayPeriodCode.OldValue = Nothing
-            Me.txtPayPeriodCode.ReadOnly = True
-            Me.txtPayPeriodCode.Size = New System.Drawing.Size(72, 23)
-            Me.txtPayPeriodCode.TabIndex = 2
-            Me.txtPayPeriodCode.ValueIsMandatory = True
+            Me.txtPayrollCode.BackColor = System.Drawing.Color.White
+            Me.txtPayrollCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPayrollCode.ComputedValue = False
+            Me.txtPayrollCode.CustomFormat = Nothing
+            Me.txtPayrollCode.DataBoundControl = True
+            Me.txtPayrollCode.EditingMode = False
+            Me.txtPayrollCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPayrollCode.ForeColor = System.Drawing.Color.Black
+            Me.txtPayrollCode.LinkedLabel = Nothing
+            Me.txtPayrollCode.Location = New System.Drawing.Point(580, 27)
+            Me.txtPayrollCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPayrollCode.MaximumValue = Nothing
+            Me.txtPayrollCode.MinimumValue = Nothing
+            Me.txtPayrollCode.Name = "txtPayrollCode"
+            Me.txtPayrollCode.OldValue = Nothing
+            Me.txtPayrollCode.ReadOnly = True
+            Me.txtPayrollCode.Size = New System.Drawing.Size(72, 23)
+            Me.txtPayrollCode.TabIndex = 2
+            Me.txtPayrollCode.ValueIsMandatory = True
             '
-            'lblPayPeriodCode
+            'lblPayrollCode
             '
-            Me.lblPayPeriodCode.DisplayOnly = True
-            Me.lblPayPeriodCode.EditingMode = False
-            Me.lblPayPeriodCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPayPeriodCode.Location = New System.Drawing.Point(387, 27)
-            Me.lblPayPeriodCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPayPeriodCode.Name = "lblPayPeriodCode"
-            Me.lblPayPeriodCode.Size = New System.Drawing.Size(78, 23)
-            Me.lblPayPeriodCode.TabIndex = 168
-            Me.lblPayPeriodCode.Text = "Code"
-            Me.lblPayPeriodCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayrollCode.DisplayOnly = True
+            Me.lblPayrollCode.EditingMode = False
+            Me.lblPayrollCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPayrollCode.Location = New System.Drawing.Point(387, 27)
+            Me.lblPayrollCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPayrollCode.Name = "lblPayrollCode"
+            Me.lblPayrollCode.Size = New System.Drawing.Size(78, 23)
+            Me.lblPayrollCode.TabIndex = 168
+            Me.lblPayrollCode.Text = "Code"
+            Me.lblPayrollCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'cboPayCycleIdNo
             '
@@ -466,21 +466,21 @@ Namespace PresentationLayer.Views.Forms
             Me.CButton3.TabIndex = 171
             Me.CButton3.Text = "View Payroll Report"
             '
-            'tbcPayPeriod
+            'tbcPayroll
             '
-            Me.TableLayoutPanel1.SetColumnSpan(Me.tbcPayPeriod, 4)
-            Me.tbcPayPeriod.Controls.Add(Me.tbpAttendance)
-            Me.tbcPayPeriod.Controls.Add(Me.TabPage2)
-            Me.tbcPayPeriod.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.tbcPayPeriod.Location = New System.Drawing.Point(3, 177)
-            Me.tbcPayPeriod.Name = "tbcPayPeriod"
-            Me.tbcPayPeriod.SelectedIndex = 0
-            Me.tbcPayPeriod.Size = New System.Drawing.Size(768, 388)
-            Me.tbcPayPeriod.TabIndex = 172
+            Me.TableLayoutPanel1.SetColumnSpan(Me.tbcPayroll, 4)
+            Me.tbcPayroll.Controls.Add(Me.tbpAttendance)
+            Me.tbcPayroll.Controls.Add(Me.TabPage2)
+            Me.tbcPayroll.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.tbcPayroll.Location = New System.Drawing.Point(3, 177)
+            Me.tbcPayroll.Name = "tbcPayroll"
+            Me.tbcPayroll.SelectedIndex = 0
+            Me.tbcPayroll.Size = New System.Drawing.Size(768, 388)
+            Me.tbcPayroll.TabIndex = 172
             '
             'tbpAttendance
             '
-            Me.tbpAttendance.Controls.Add(Me.DataGridViewPayPeriodAttendance)
+            Me.tbpAttendance.Controls.Add(Me.DataGridViewPayrollAttendance)
             Me.tbpAttendance.Location = New System.Drawing.Point(4, 22)
             Me.tbpAttendance.Name = "tbpAttendance"
             Me.tbpAttendance.Padding = New System.Windows.Forms.Padding(3)
@@ -489,15 +489,15 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpAttendance.Text = "Attendance"
             Me.tbpAttendance.UseVisualStyleBackColor = True
             '
-            'DataGridViewPayPeriodAttendance
+            'DataGridViewPayrollAttendance
             '
-            Me.DataGridViewPayPeriodAttendance.AllowUserToAddRows = False
+            Me.DataGridViewPayrollAttendance.AllowUserToAddRows = False
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPayPeriodAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-            Me.DataGridViewPayPeriodAttendance.AutoGenerateColumns = False
-            Me.DataGridViewPayPeriodAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPayPeriodAttendance.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvEmployeeName, Me.dgvEmployeeNameAra, Me.dgvOvertime, Me.dgvDaysPresent, Me.dgvDaysAbsentWithPay, Me.dgvDaysAbsentWoPay, Me.dgvDaysOff, Me.dgvDaysTotal, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
-            Me.DataGridViewPayPeriodAttendance.DataSource = Me.bsPayPeriodAttendance
+            Me.DataGridViewPayrollAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewPayrollAttendance.AutoGenerateColumns = False
+            Me.DataGridViewPayrollAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewPayrollAttendance.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvEmployeeName, Me.dgvEmployeeNameAra, Me.dgvOvertime, Me.dgvDaysPresent, Me.dgvDaysAbsentWithPay, Me.dgvDaysAbsentWoPay, Me.dgvDaysOff, Me.dgvDaysTotal, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewPayrollAttendance.DataSource = Me.bsPayrollAttendance
             DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -505,23 +505,23 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
             DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPayPeriodAttendance.DefaultCellStyle = DataGridViewCellStyle11
-            Me.DataGridViewPayPeriodAttendance.DgvFooter = Nothing
-            Me.DataGridViewPayPeriodAttendance.DisplayOnly = False
-            Me.DataGridViewPayPeriodAttendance.Ea = Nothing
-            Me.DataGridViewPayPeriodAttendance.EditingMode = False
-            Me.DataGridViewPayPeriodAttendance.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DataGridViewPayPeriodAttendance.FirstRowDeletionEnabled = True
-            Me.DataGridViewPayPeriodAttendance.FirstRowInsertionEnabled = True
-            Me.DataGridViewPayPeriodAttendance.Location = New System.Drawing.Point(6, 6)
-            Me.DataGridViewPayPeriodAttendance.Name = "DataGridViewPayPeriodAttendance"
-            Me.DataGridViewPayPeriodAttendance.ReadOnly = True
-            Me.DataGridViewPayPeriodAttendance.SequenceColumn = "dgvSequence"
-            Me.DataGridViewPayPeriodAttendance.SequenceFieldName = "Sequence"
-            Me.DataGridViewPayPeriodAttendance.ShowFooter = False
-            Me.DataGridViewPayPeriodAttendance.ShowInsertColumnWhenEditing = False
-            Me.DataGridViewPayPeriodAttendance.Size = New System.Drawing.Size(745, 346)
-            Me.DataGridViewPayPeriodAttendance.TabIndex = 171
+            Me.DataGridViewPayrollAttendance.DefaultCellStyle = DataGridViewCellStyle11
+            Me.DataGridViewPayrollAttendance.DgvFooter = Nothing
+            Me.DataGridViewPayrollAttendance.DisplayOnly = False
+            Me.DataGridViewPayrollAttendance.Ea = Nothing
+            Me.DataGridViewPayrollAttendance.EditingMode = False
+            Me.DataGridViewPayrollAttendance.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPayrollAttendance.FirstRowDeletionEnabled = True
+            Me.DataGridViewPayrollAttendance.FirstRowInsertionEnabled = True
+            Me.DataGridViewPayrollAttendance.Location = New System.Drawing.Point(6, 6)
+            Me.DataGridViewPayrollAttendance.Name = "DataGridViewPayrollAttendance"
+            Me.DataGridViewPayrollAttendance.ReadOnly = True
+            Me.DataGridViewPayrollAttendance.SequenceColumn = "dgvSequence"
+            Me.DataGridViewPayrollAttendance.SequenceFieldName = "Sequence"
+            Me.DataGridViewPayrollAttendance.ShowFooter = False
+            Me.DataGridViewPayrollAttendance.ShowInsertColumnWhenEditing = False
+            Me.DataGridViewPayrollAttendance.Size = New System.Drawing.Size(745, 346)
+            Me.DataGridViewPayrollAttendance.TabIndex = 171
             '
             'dgvSequence
             '
@@ -670,9 +670,9 @@ Namespace PresentationLayer.Views.Forms
             Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn.Visible = False
             '
-            'bsPayPeriodAttendance
+            'bsPayrollAttendance
             '
-            Me.bsPayPeriodAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
+            Me.bsPayrollAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
             '
             'TabPage2
             '
@@ -684,54 +684,54 @@ Namespace PresentationLayer.Views.Forms
             Me.TabPage2.Text = "TabPage2"
             Me.TabPage2.UseVisualStyleBackColor = True
             '
-            'PayPeriodEntryTv
+            'PayrollEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1106, 663)
             Me.Controls.Add(Me.floDataDisplay)
-            Me.Name = "PayPeriodEntryTv"
-            Me.Text = "Pay Period Maintenance Form"
+            Me.Name = "PayrollEntryTv"
+            Me.Text = "Payroll Maintenance Form"
             Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
             Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
-            Me.tbcPayPeriod.ResumeLayout(False)
+            Me.tbcPayroll.ResumeLayout(False)
             Me.tbpAttendance.ResumeLayout(False)
-            CType(Me.DataGridViewPayPeriodAttendance, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsPayPeriodAttendance, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DataGridViewPayrollAttendance, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPayrollAttendance, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
         End Sub
         Friend WithEvents TxtIdNo As CTextBox
-        Friend WithEvents txtPayPeriodName As CTextBox
+        Friend WithEvents txtPayrollName As CTextBox
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents lblPayCycleIdNo As CLabel
         Friend WithEvents lblStartDate As CLabel
         Friend WithEvents lblEndDate As CLabel
-        Friend WithEvents _MBPayPeriodCannotBeParentToItself As LocalizableMessageBox
+        Friend WithEvents _MBPayrollCannotBeParentToItself As LocalizableMessageBox
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
-        Friend WithEvents lblPayPeriodName As CLabel
+        Friend WithEvents lblPayrollName As CLabel
         Friend WithEvents cboPayCycleIdNo As CaComboBox
         Friend WithEvents dtpStartDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
         Friend WithEvents dtpEndDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents lblPayPeriodNameAra As CLabel
-        Friend WithEvents txtPayPeriodNameAra As CTextBoxArabic
-        Friend WithEvents lblPayPeriodCode As CLabel
-        Friend WithEvents txtPayPeriodCode As CTextBox
+        Friend WithEvents lblPayrollNameAra As CLabel
+        Friend WithEvents txtPayrollNameAra As CTextBoxArabic
+        Friend WithEvents lblPayrollCode As CLabel
+        Friend WithEvents txtPayrollCode As CTextBox
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents btnInitialize As CButton
         Friend WithEvents CButton2 As CButton
         Friend WithEvents CButton3 As CButton
-        Friend WithEvents bsPayPeriodAttendance As BindingSource
-        Friend WithEvents tbcPayPeriod As CTabControl
+        Friend WithEvents bsPayrollAttendance As BindingSource
+        Friend WithEvents tbcPayroll As CTabControl
         Friend WithEvents tbpAttendance As TabPage
         Friend WithEvents TabPage2 As TabPage
-        Friend WithEvents DataGridViewPayPeriodAttendance As CDataGridView
+        Friend WithEvents DataGridViewPayrollAttendance As CDataGridView
         Friend WithEvents dgvSequence As CdgvColumnText
         Friend WithEvents dgvEmployeeName As CdgvColumnText
         Friend WithEvents dgvEmployeeNameAra As CdgvColumnText

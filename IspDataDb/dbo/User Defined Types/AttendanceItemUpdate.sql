@@ -6,7 +6,7 @@
     [EmployeeIdNo]         INT           NOT NULL,
     [IDNo]                 INT           NOT NULL,
     [Overtime]             DECIMAL (8,2) NOT NULL,
-    [PayPeriodIdNo]        SMALLINT      NOT NULL,
+    [PayrollIdNo]        SMALLINT      NOT NULL,
     PRIMARY KEY CLUSTERED ([IDNo] ASC));
 
 
