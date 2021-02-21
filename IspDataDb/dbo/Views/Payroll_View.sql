@@ -1,9 +1,10 @@
-﻿CREATE VIEW dbo.Payroll_View
+﻿
+CREATE VIEW [dbo].[Payroll_View]
 AS
-SELECT        dbo.PayCycle.IdNo, dbo.PayCycle.PayCycleCode, dbo.PayCycle.PayCycleName, dbo.PayCycle.PayFrequency, dbo.PayCycle.PayCycleNameAra, dbo.PayPeriod.IdNo AS Expr1, dbo.PayPeriod.StartDate, dbo.PayPeriod.EndDate, 
-                         dbo.PayPeriod.PayPeriodName, dbo.PayPeriod.PayPeriodNameAra, dbo.PayPeriod.PayPeriodCode
+SELECT        dbo.PayCycle.IdNo, dbo.PayCycle.PayCycleCode, dbo.PayCycle.PayCycleName, dbo.PayCycle.PayFrequency, dbo.PayCycle.PayCycleNameAra, dbo.Payroll.IdNo AS Expr1, dbo.Payroll.StartDate, dbo.Payroll.EndDate, 
+                         dbo.Payroll.PayrollName, dbo.Payroll.PayrollNameAra, dbo.Payroll.PayrollCode
 FROM            dbo.PayCycle INNER JOIN
-                         dbo.PayPeriod ON dbo.PayCycle.IdNo = dbo.PayPeriod.PayCycleIdNo
+                         dbo.Payroll ON dbo.PayCycle.IdNo = dbo.Payroll.PayCycleIdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Payroll_View';
 
@@ -127,4 +128,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Payroll_View';
+
+
 

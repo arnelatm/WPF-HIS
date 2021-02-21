@@ -320,7 +320,7 @@
     <Build Include="dbo\User Defined Types\EmployeePhoneUpdate.sql" />
     <Build Include="dbo\User Defined Types\EmployeePhoneInsert.sql" />
     <Build Include="dbo\Tables\PayrollDeductAccount.sql" />
-    <Build Include="dbo\Tables\PayPeriod.sql" />
+    <Build Include="dbo\Tables\Payroll.sql" />
     <Build Include="dbo\Tables\PayCycle.sql" />
     <Build Include="dbo\Tables\Setting.sql" />
     <Build Include="dbo\Tables\PensionProvider.sql" />
@@ -403,13 +403,15 @@
     <Build Include="dbo\Functions\FuncBalanceSheet.sql" />
     <Build Include="dbo\Stored Procedures\UpdatePcJournalsTVP.sql" />
     <Build Include="dbo\User Defined Types\PcJournalsUpdate.sql" />
-    <Build Include="dbo\Tables\Attendance_1.sql" />
-    <Build Include="dbo\Views\Attendance_View_1.sql" />
     <Build Include="dbo\Tables\SystemViewItem.sql" />
     <Build Include="dbo\Tables\SystemView.sql" />
     <Build Include="dbo\Views\SystemViewItemOriginal_View.sql" />
     <Build Include="dbo\Views\DefaultFieldValue_View.sql" />
     <Build Include="dbo\Stored Procedures\UpdateAttendanceItemTVP.sql" />
+    <Build Include="dbo\Tables\PayrollDetail.sql" />
+    <Build Include="dbo\Tables\PayPeriod_1.sql" />
+    <Build Include="dbo\User Defined Types\AttendanceItemUpdatex.sql" />
+    <Build Include="dbo\User Defined Types\AttendanceItemInsertx.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

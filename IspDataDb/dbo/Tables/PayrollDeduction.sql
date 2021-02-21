@@ -6,3 +6,5 @@
     [Amount]        MONEY NULL
 );
 
+
+

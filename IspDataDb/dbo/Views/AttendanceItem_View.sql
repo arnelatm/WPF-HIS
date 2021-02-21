@@ -1,6 +1,6 @@
 ﻿CREATE VIEW dbo.AttendanceItem_View
 AS
-SELECT        dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.AttendanceItem.IdNo, dbo.AttendanceItem.EmployeeIdNo, dbo.AttendanceItem.PayPeriodIdNo, 
+SELECT        dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.AttendanceItem.IdNo, dbo.AttendanceItem.EmployeeIdNo, dbo.AttendanceItem.PayrollIdNo, 
                          dbo.AttendanceItem.DaysPresent, dbo.AttendanceItem.DaysAbsentWithPay, dbo.AttendanceItem.DaysAbsentWithoutPay, dbo.AttendanceItem.DaysOff, 
                          dbo.AttendanceItem.DaysPresent + dbo.AttendanceItem.DaysAbsentWithPay + dbo.AttendanceItem.DaysAbsentWithoutPay + dbo.AttendanceItem.DaysOff AS DaysTotal, dbo.AttendanceItem.Overtime
 FROM            dbo.Employee INNER JOIN

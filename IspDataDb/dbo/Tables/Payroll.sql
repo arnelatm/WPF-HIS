@@ -1,8 +1,14 @@
 ﻿CREATE TABLE [dbo].[Payroll] (
-    [IdNo]        INT            NULL,
-    [StartDate]   DATE           NULL,
-    [EndDate]     DATE           NULL,
-    [PayrollType] CHAR (1)       NULL,
-    [Notes]       NVARCHAR (100) NOT NULL
+    [IdNo]           SMALLINT      IDENTITY (1, 1) NOT NULL,
+    [PayCycleIdNo]   SMALLINT      NOT NULL,
+    [StartDate]      DATE          NOT NULL,
+    [EndDate]        DATE          NOT NULL,
+    [PayrollName]    VARCHAR (50)  NULL,
+    [PayrollNameAra] NVARCHAR (50) NULL,
+    [PayrollCode]    VARCHAR (6)   NULL,
+    [DateTimeStamp]  ROWVERSION    NULL,
+    CONSTRAINT [PK__PayrollID] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

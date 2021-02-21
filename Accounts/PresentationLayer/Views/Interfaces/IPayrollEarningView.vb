@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeeIdNo As Int32
         Property EarningIdNo As Int16
         Property IdNo As Int32
-        Property PayPeriodIdNo As Int32
+        Property PayrollIdNo As Int32
 
     End Interface
 

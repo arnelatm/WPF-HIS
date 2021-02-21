@@ -205,7 +205,7 @@ End Namespace
 'Patient
 'PayCycle
 'PayGroup
-'PayPeriod
+'Payroll
 'PcJournal
 'ProductCategory
 'SalesJournal

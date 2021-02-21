@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views
         Public Property EmployeeIdNo As Int32 Implements IPayrollEarningView.EmployeeIdNo
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Int32 Implements IPayrollEarningView.IdNo
-        Public Property PayPeriodIdNo As Int32 Implements IPayrollEarningView.PayPeriodIdNo
+        Public Property PayrollIdNo As Int32 Implements IPayrollEarningView.PayrollIdNo
 
     End Class
 

@@ -9,24 +9,24 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class PayPeriodEntryTv
-        Implements IPayPeriodView
+    Public Class PayrollEntryTv
+        Implements IPayrollView
 
-        Private _payPeriodAttendance As New List(Of AttendanceItemView)
+        Private _PayrollAttendance As New List(Of AttendanceItemView)
         Private _payrollEarning As New List(Of PayrollEarningView)
-        Private Property MyPresenter As PayPeriodPresenter
+        Private Property MyPresenter As PayrollPresenter
 
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
 
-            MainTableName = "PayPeriod"
-            TvMainFieldName = "PayPeriodName"
-            TvSecondaryFieldName = "PayPeriodCode"
+            MainTableName = "Payroll"
+            TvMainFieldName = "PayrollName"
+            TvSecondaryFieldName = "PayrollCode"
             SortOrderKey = "EndDate"
-            FirstControl = txtPayPeriodName
+            FirstControl = txtPayrollName
             ' Add any initialization after the InitializeComponent() call.
-            MyPresenter = New PayPeriodPresenter(Me)
+            MyPresenter = New PayrollPresenter(Me)
             PresenterObj = MyPresenter
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements IPayPeriodView.IdNo
+        Public Property IdNo As Int32 Implements IPayrollView.IdNo
             Get
                 Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
@@ -57,7 +57,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayCycleIdNo As Int16 Implements IPayPeriodView.PayCycleIdNo
+        Public Property PayCycleIdNo As Int16 Implements IPayrollView.PayCycleIdNo
             Get
                 Return cboPayCycleIdNo.GetValue()
             End Get
@@ -66,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property StartDate As Date Implements IPayPeriodView.StartDate
+        Public Property StartDate As Date Implements IPayrollView.StartDate
             Get
                 Return dtpStartDate.Value
             End Get
@@ -75,7 +75,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EndDate As Date Implements IPayPeriodView.EndDate
+        Public Property EndDate As Date Implements IPayrollView.EndDate
             Get
                 Return dtpEndDate.Value
             End Get
@@ -84,55 +84,55 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayPeriodName As String Implements IPayPeriodView.PayPeriodName
+        Public Property PayrollName As String Implements IPayrollView.PayrollName
             Get
-                Return txtPayPeriodName.Text
+                Return txtPayrollName.Text
             End Get
             Set(value As String)
-                txtPayPeriodName.Text = value
+                txtPayrollName.Text = value
             End Set
         End Property
 
-        Public Property PayPeriodNameAra As String Implements IPayPeriodView.PayPeriodNameAra
+        Public Property PayrollNameAra As String Implements IPayrollView.PayrollNameAra
             Get
-                Return txtPayPeriodNameAra.Text
+                Return txtPayrollNameAra.Text
             End Get
             Set(value As String)
-                txtPayPeriodNameAra.Text = value
+                txtPayrollNameAra.Text = value
             End Set
         End Property
 
-        Public Property PayPeriodCode As String Implements IPayPeriodView.PayPeriodCode
+        Public Property PayrollCode As String Implements IPayrollView.PayrollCode
             Get
-                Return txtPayPeriodCode.Text
+                Return txtPayrollCode.Text
             End Get
             Set(value As String)
-                txtPayPeriodCode.Text = value
+                txtPayrollCode.Text = value
             End Set
         End Property
 
-        Public Property PayPeriodAttendance As List(Of AttendanceItemView) Implements IPayPeriodView.PayPeriodAttendance
+        Public Property PayrollAttendance As List(Of AttendanceItemView) Implements IPayrollView.PayrollAttendance
             Get
-                Return _payPeriodAttendance
+                Return _PayrollAttendance
             End Get
             Set
-                _payPeriodAttendance = Value
-                BindPayPeriodAttendance()
+                _PayrollAttendance = Value
+                BindPayrollAttendance()
             End Set
         End Property
 
 #End Region
 
-        Private Sub BindPayPeriodAttendance()
+        Private Sub BindPayrollAttendance()
             SuspendLayout()
-            bsPayPeriodAttendance.DataSource = Nothing
-            DataGridViewPayPeriodAttendance.Refresh()
-            bsPayPeriodAttendance.DataSource = PayPeriodAttendance
-            bsPayPeriodAttendance.AllowNew = True
-            With DataGridViewPayPeriodAttendance
+            bsPayrollAttendance.DataSource = Nothing
+            DataGridViewPayrollAttendance.Refresh()
+            bsPayrollAttendance.DataSource = PayrollAttendance
+            bsPayrollAttendance.AllowNew = True
+            With DataGridViewPayrollAttendance
                 .Refresh()
                 .AutoGenerateColumns = False
-                .DataSource = bsPayPeriodAttendance
+                .DataSource = bsPayrollAttendance
                 If RightToLeftLayout = True Then
                     dgvEmployeeNameAra.Visible = True
                     dgvEmployeeName.Visible = False
@@ -150,7 +150,7 @@ Namespace PresentationLayer.Views.Forms
                 {
                 {"StartDate", dtpStartDate},
                 {"EndDate", dtpEndDate},
-                {"Description", txtPayPeriodName},
+                {"Description", txtPayrollName},
                 {"IdNo", TxtIdNo},
                 {"PayCycleIdNo", cboPayCycleIdNo}
                 }
@@ -171,7 +171,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnInitialize_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
             MyPresenter.InitializeAttendance()
-            bsPayPeriodAttendance.ResetBindings(False)
+            bsPayrollAttendance.ResetBindings(False)
 
             'Dim payFrequency = MyPresenter.GetFieldWithIdNo(cboPayCycleIdNo.SelectedValue, "PayCycle", "PayFrequency")
             'Dim employeeFilter = "Active = 1 and PayCycleIdNo = " & cboPayCycleIdNo.SelectedValue.ToString()
@@ -185,16 +185,16 @@ Namespace PresentationLayer.Views.Forms
             '    'filter = "EmployeeIdNo = " & emp.ToString()
             '    'Dim employeeEarnings = MyPresenter.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
             '    Dim empAttendance As New AttendanceItemView
-            '    empAttendance.PayPeriodIdNo = IdNo
+            '    empAttendance.PayrollIdNo = IdNo
             '    empAttendance.EmployeeIdNo = activeEmployees(i * 2 - 2)
             '    empAttendance.EmployeeName = activeEmployees(i * 2 - 1)
             '    empAttendance.Sequence = i
-            '    _payPeriodAttendance.Add(empAttendance)
+            '    _PayrollAttendance.Add(empAttendance)
             '    'For Each employeeEarning In employeeEarnings
 
             '    'Next
             'Next
-            'bsPayPeriodAttendance.ResetBindings(False)
+            'bsPayrollAttendance.ResetBindings(False)
             'For i = 1 To Int(Data.Count / 3)
             '    Dim tData As New ActiveEmployee
             '    tData.IdNo = Data(i * 3 - 3)
@@ -227,15 +227,15 @@ Namespace PresentationLayer.Views.Forms
             Public Active As Boolean
         End Class
 
-        Private Sub DataGridViewAttendance_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayPeriodAttendance.CellEndEdit
-            With DataGridViewPayPeriodAttendance
+        Private Sub DataGridViewAttendance_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayrollAttendance.CellEndEdit
+            With DataGridViewPayrollAttendance
                 Dim nIndex = .CurrentRow.Index
-                PayPeriodAttendance(nIndex).DaysAbsentWithoutPay = PayPeriodAttendance(nIndex).DaysTotal - PayPeriodAttendance(nIndex).DaysOff - PayPeriodAttendance(nIndex).DaysAbsentWithPay - PayPeriodAttendance(nIndex).DaysPresent
+                PayrollAttendance(nIndex).DaysAbsentWithoutPay = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysPresent
             End With
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
-            If PayPeriodAttendance.Count() = 0 Then
+            If PayrollAttendance.Count() = 0 Then
                 btnInitialize.Text = Messaging.TranslateCaption("Initialize Attendance")
             Else
                 btnInitialize.Text = Messaging.TranslateCaption("Re-Process Attendance")

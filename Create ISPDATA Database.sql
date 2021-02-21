@@ -3648,21 +3648,21 @@ RETURN
 		  AccountCode <= @EndAccountCode
 )
 GO
-/****** Object:  Table [dbo].[PayPeriod]    Script Date: 02/12/2020 15:42:52 ******/
+/****** Object:  Table [dbo].[Payroll]    Script Date: 02/12/2020 15:42:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[PayPeriod](
+CREATE TABLE [dbo].[Payroll](
 	[IdNo] [smallint] IDENTITY(1,1) NOT NULL,
 	[PayCycleIdNo] [smallint] NOT NULL,
 	[StartDate] [date] NOT NULL,
 	[EndDate] [date] NOT NULL,
-	[PayPeriodName] [varchar](50) NULL,
-	[PayPeriodNameAra] [nvarchar](50) NULL,
-	[PayPeriodCode] [varchar](6) NULL,
+	[PayrollName] [varchar](50) NULL,
+	[PayrollNameAra] [nvarchar](50) NULL,
+	[PayrollCode] [varchar](6) NULL,
 	[DateTimeStamp] [timestamp] NULL,
- CONSTRAINT [PK__PayPeriodID] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK__PayrollID] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -3694,10 +3694,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[Payroll_View]
 AS
-SELECT        dbo.PayCycle.IdNo, dbo.PayCycle.PayCycleCode, dbo.PayCycle.PayCycleName, dbo.PayCycle.PayFrequency, dbo.PayCycle.PayCycleNameAra, dbo.PayPeriod.IdNo AS Expr1, dbo.PayPeriod.StartDate, dbo.PayPeriod.EndDate, 
-                         dbo.PayPeriod.PayPeriodName, dbo.PayPeriod.PayPeriodNameAra, dbo.PayPeriod.PayPeriodCode
+SELECT        dbo.PayCycle.IdNo, dbo.PayCycle.PayCycleCode, dbo.PayCycle.PayCycleName, dbo.PayCycle.PayFrequency, dbo.PayCycle.PayCycleNameAra, dbo.Payroll.IdNo AS Expr1, dbo.Payroll.StartDate, dbo.Payroll.EndDate, 
+                         dbo.Payroll.PayrollName, dbo.Payroll.PayrollNameAra, dbo.Payroll.PayrollCode
 FROM            dbo.PayCycle INNER JOIN
-                         dbo.PayPeriod ON dbo.PayCycle.IdNo = dbo.PayPeriod.PayCycleIdNo
+                         dbo.Payroll ON dbo.PayCycle.IdNo = dbo.Payroll.PayCycleIdNo
 GO
 /****** Object:  Table [dbo].[PayGroup]    Script Date: 02/12/2020 15:42:52 ******/
 SET ANSI_NULLS ON
@@ -10088,7 +10088,7 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "PayPeriod"
+         Begin Table = "Payroll"
             Begin Extent = 
                Top = 75
                Left = 249

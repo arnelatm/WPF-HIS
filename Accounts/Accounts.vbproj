@@ -171,22 +171,21 @@
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\Basic.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
+    <Compile Include="BusinessLayer\Payoll.vb" />
+    <Compile Include="BusinessLayer\PayrollDetail.vb" />
     <Compile Include="BusinessLayer\PayrollEarning.vb" />
     <Compile Include="BusinessLayer\PettyCashClosing.vb" />
     <Compile Include="BusinessLayer\DjOiItem.vb" />
     <Compile Include="BusinessLayer\DisbursementJournal.vb" />
     <Compile Include="BusinessLayer\AttendanceItem.vb" />
     <Compile Include="BusinessLayer\PcJournals.vb" />
-    <Compile Include="BusinessLayer\Payroll.vb" />
     <Compile Include="BusinessLayer\PayrollDeductAccount.vb" />
-    <Compile Include="BusinessLayer\PayrollDetails.vb" />
     <Compile Include="BusinessLayer\PcJournal.vb" />
     <Compile Include="BusinessLayer\PensionRate.vb" />
     <Compile Include="BusinessLayer\PensionScheme.vb" />
     <Compile Include="BusinessLayer\EmployeePhone.vb" />
     <Compile Include="BusinessLayer\PayCycle.vb" />
     <Compile Include="BusinessLayer\PayGroup.vb" />
-    <Compile Include="BusinessLayer\PayPeriod.vb" />
     <Compile Include="BusinessLayer\PayrollEarnAccount.vb" />
     <Compile Include="BusinessLayer\Leave.vb" />
     <Compile Include="BusinessLayer\Deduction.vb" />
@@ -226,13 +225,14 @@
     <Compile Include="DataLayer\AdoNet\BasicDao.vb" />
     <Compile Include="DataLayer\AdoNet\DjOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PayrollDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\PcJournalsDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDeductAccountDao.vb" />
     <Compile Include="DataLayer\AdoNet\PensionRateDao.vb" />
     <Compile Include="DataLayer\AdoNet\PensionSchemeDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeePhoneDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayCycleDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PayPeriodDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PayrollDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\LeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\DeductionDao.vb" />
@@ -293,6 +293,7 @@
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollEarningModel.vb" />
+    <Compile Include="PresentationLayer\Models\PayrollDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\PettyCashClosingModel.vb" />
     <Compile Include="PresentationLayer\Models\DisbursementJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\DjOiItemModel.vb" />
@@ -304,7 +305,7 @@
     <Compile Include="PresentationLayer\Models\PensionRateModel.vb" />
     <Compile Include="PresentationLayer\Models\PayCycle.vb" />
     <Compile Include="PresentationLayer\Models\PayGroupModel.vb" />
-    <Compile Include="PresentationLayer\Models\PayPeriodModel.vb" />
+    <Compile Include="PresentationLayer\Models\PayrollModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollEarnAccountModel.vb" />
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
@@ -316,7 +317,7 @@
     <Compile Include="PresentationLayer\Presenters\PcJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDeductAccountPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionRatePresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\PayPeriodPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PayrollPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayCyclePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollEarnAccountPresenter.vb" />
@@ -324,6 +325,14 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PayrollDetailEntry.Designer.vb">
+      <DependentUpon>PayrollDetailEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayrollDetailEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDetailView.vb" />
+    <Compile Include="PresentationLayer\Views\PayrollDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollEarningView.vb" />
     <Compile Include="PresentationLayer\Views\AttendanceItemView.vb" />
     <Compile Include="PresentationLayer\Views\DjOiItemView.vb" />
@@ -482,10 +491,10 @@
     <Compile Include="PresentationLayer\Views\Forms\EarningEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayPeriodEntryTv.designer.vb">
-      <DependentUpon>PayPeriodEntryTv.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\PayrollEntryTv.designer.vb">
+      <DependentUpon>PayrollEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayPeriodEntryTv.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PayrollEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.designer.vb">
@@ -720,7 +729,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPcJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPensionRatesView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPensionRateView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPayPeriodView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayrollView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayCycleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollEarnAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayGroupView.vb" />
@@ -979,6 +988,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
       <DependentUpon>PayGroupEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollDetailEntry.resx">
+      <DependentUpon>PayrollDetailEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.resx">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1001,8 +1013,8 @@
       <DependentUpon>EarningEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayPeriodEntryTv.resx">
-      <DependentUpon>PayPeriodEntryTv.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollEntryTv.resx">
+      <DependentUpon>PayrollEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PensionProviderEntryTv.ar-SA.resx">
