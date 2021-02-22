@@ -171,7 +171,7 @@
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\Basic.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
-    <Compile Include="BusinessLayer\Payoll.vb" />
+    <Compile Include="BusinessLayer\Payroll.vb" />
     <Compile Include="BusinessLayer\PayrollDetail.vb" />
     <Compile Include="BusinessLayer\PayrollEarning.vb" />
     <Compile Include="BusinessLayer\PettyCashClosing.vb" />
@@ -310,6 +310,7 @@
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TransactionsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />
@@ -332,7 +333,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDetailView.vb" />
-    <Compile Include="PresentationLayer\Views\PayrollDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollEarningView.vb" />
     <Compile Include="PresentationLayer\Views\AttendanceItemView.vb" />
     <Compile Include="PresentationLayer\Views\DjOiItemView.vb" />

@@ -1,15 +1,26 @@
-﻿Public Class PayrollDetail
-    Inherits AATM.BusinessLayer.BusinessObject
+﻿Imports AATM.BusinessLayer.BusinessRules
 
-    ' ** Enterprise Design Pattern: Identity field pattern
-    Public Sub New()
-        ' establish business rules
-        If GetRules().Count() = 0 Then
-        End If
-    End Sub
+Namespace BusinessLayer
 
-    Public Property IdNo As Int32
-    Public Property PayrollIdNo As Int16
-    Public Property EmployeeIdNo As Int16
+    Public Class PayrollDetail
+        Inherits AATM.BusinessLayer.BusinessObject
 
-End Class
+        ' ** Enterprise Design Pattern: Identity field pattern
+        Public Sub New()
+            ' establish business rules
+            If GetRules().Count() = 0 Then
+                AddRule(New ValidateRequired("PayrollName"))
+                AddRule(New ValidateRequired("PayrollCode"))
+                AddRule(New ValidateCompare("StartDate", "EndDate", ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
+            End If
+        End Sub
+
+        Public Property IdNo As Int32
+        Public Property PayrollIdNo As Int16
+        Public Property EmployeeCode As String
+        Public Property EmployeeIdNo As Int32
+        Public Property EmployeeName As String
+        Public Property EmployeeNameAra As String
+    End Class
+
+End Namespace
