@@ -10,56 +10,71 @@ Namespace DataLayer.AdoNet
 
     Public Class PayrollDetailDao
         Inherits AccountsDao
-        Implements IDaoChild(Of PayrollDetail)
+        Implements IDao(Of PayrollDetail), IDaoAll(Of PayrollDetail)
 
-        Private ReadOnly Db As New Db()
+        Private ReadOnly _db As New Db()
 
-        Public Function GetRecordsWithIdNo(PayrollIdNo, Optional sortExpression = Nothing) As List(Of PayrollDetail) Implements IDaoChild(Of PayrollDetail).GetRecordsWithIdNo
+        Public Function GetRecordById(idNo) As PayrollDetail Implements IDao(Of PayrollDetail).GetRecordById
             Dim sql As String =
                     "SELECT " &
-                    "DaysAbsentWithoutPay," &
-                    "DaysAbsentWithPay," &
-                    "DaysOff," &
-                    "DaysPresent," &
-                    "DaysTotal," &
+                    "EmployeeCode," &
                     "EmployeeIdNo," &
                     "EmployeeName," &
                     "EmployeeNameAra," &
                     "IdNo," &
-                    "Overtime," &
-                    "PayrollIdNo," &
-                    "ROW_NUMBER() over(Order by " & sortExpression & ") As 'Sequence'" &
+                    "PayrollIdNo" &
                     " FROM [PayrollDetail_View]" &
-                    " WHERE PayrollIdNo = @PayrollIdNo "
-            Dim params() As Object = {"@PayrollIdNo", PayrollIdNo}
-            Dim dta = Db.Read(sql, Make, params).ToList()
-            Return dta
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim peaDao = New PayrollEarnAccountDao()
+            'data.PayrollEarnAccounts = peaDao.GetRecordsWithIdNo(idNo, "Sequence")
+            Return data
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of PayrollDetail).DelUpdateTvp
-            Return Db.DelUpdateTvp("UpdatePayrollDetailTVP", tvpTable, "@MParam", groupIdNo)
+        Public Function UpdateRecord(ByRef PayrollDetail As PayrollDetail) As Integer Implements IDao(Of PayrollDetail).UpdateRecord
+            Dim sql As String = " UPDATE [PayrollDetail] Set" &
+                    " EmployeeIdNo = @EmployeeIdNo," &
+                    " PayrollIdNo = @PayrollIdNo," &
+                    " WHERE IdNo = @IdNo"
+            Return _db.Update(sql, Take(PayrollDetail))
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of PayrollDetail).InsertTvp
-            Return Db.InsertTvp("InsertPayrollDetailTVP", tvpTable)
+        Public Function AddRecord(ByRef PayrollDetail As PayrollDetail) As Integer Implements IDao(Of PayrollDetail).AddRecord
+            Dim sql As String =
+                    " INSERT INTO [PayrollDetail] " &
+                    " (EmployeeIdNo,PayrollIdNo) " &
+                    " VALUES (@EmployeeIdNo,@PayrollIdNo) "
+            Return _db.Insert(sql, Take(PayrollDetail))
+        End Function
+
+        Private Function Take(PayrollDetail As PayrollDetail) As Object()
+            Return New Object() {
+                                    "@EmployeeIdNo", PayrollDetail.EmployeeIdNo,
+                                    "@PayrollIdNo", PayrollDetail.PayrollIdNo,
+                                    "@IdNo", PayrollDetail.IdNo
+                                }
+        End Function
+
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PayrollDetail) Implements IDaoAll(Of PayrollDetail).GetAll
+            Dim sql As String =
+                    "SELECT " &
+                    "EmployeeIdNo," &
+                    "PayrollIdNo," &
+                    " FROM [PayrollDetail]"
+            Return _db.Read(sql, Make).ToList()
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PayrollDetail) =
                                     Function(reader) _
             New PayrollDetail() With {
-            .DaysAbsentWithoutPay = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysAbsentWithoutPay")),
-            .DaysAbsentWithPay = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysAbsentWithPay")),
-            .DaysOff = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysOff")),
-            .DaysPresent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysPresent")),
-            .DaysTotal = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysTotal")),
-            .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
+            .EmployeeCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeCode")),
+            .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("EmployeeIdNo")),
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Overtime = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Overtime")),
-            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayrollIdNo")),
-            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("Sequence"))
-           }
+            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("PayrollIdNo"))
+            }
 
     End Class
 

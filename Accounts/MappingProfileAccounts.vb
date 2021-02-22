@@ -81,6 +81,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of PayGroupModel, IPayGroupView).ReverseMap()
         CreateMap(Of Payroll, PayrollModel)().ReverseMap()
         CreateMap(Of PayrollModel, IPayrollView).ReverseMap()
+        CreateMap(Of PayrollDetail, PayrollDetailModel)().ReverseMap()
+        CreateMap(Of PayrollDetailModel, IPayrollDetailView).ReverseMap()
         CreateMap(Of IPayrollDeductAccountView, PayrollDeductAccountModel)()
         CreateMap(Of PayrollDeductAccount, PayrollDeductAccountModel)().ReverseMap()
         CreateMap(Of PayrollDeductAccountModel, PayrollDeductAccountView)()

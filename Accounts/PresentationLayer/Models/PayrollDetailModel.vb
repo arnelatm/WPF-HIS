@@ -12,6 +12,9 @@ Namespace PresentationLayer.Models
         Public Property IdNo As Int32
         Public Property PayrollIdNo As Int16
         Public Property EmployeeIdNo As Int32
+        Public Property EmployeeName As String
+        Public Property EmployeeNameAra As String
+        Public Property EmployeeCode As String
 
     End Class
 
