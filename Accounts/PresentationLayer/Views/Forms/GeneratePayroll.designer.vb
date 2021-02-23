@@ -31,19 +31,19 @@ Namespace PresentationLayer.Views.Forms
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPayroll = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpBeginningDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpEndingDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-            Me.lblPayroll = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
@@ -94,73 +94,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
             Me.CFlowLayout1.Name = "CFlowLayout1"
             '
-            'CLabel2
-            '
-            Me.CLabel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            resources.ApplyResources(Me.CLabel2, "CLabel2")
-            Me.CLabel2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-            Me.CLabel2.Name = "CLabel2"
-            '
-            'lblBeginningDate
-            '
-            Me.lblBeginningDate.DisplayOnly = True
-            Me.lblBeginningDate.EditingMode = False
-            resources.ApplyResources(Me.lblBeginningDate, "lblBeginningDate")
-            Me.lblBeginningDate.Name = "lblBeginningDate"
-            '
-            'dtpBeginningDate
-            '
-            Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpBeginningDate.DefaultValue = Nothing
-            Me.dtpBeginningDate.DisplayOnly = False
-            Me.dtpBeginningDate.DtpDefaultValue = Nothing
-            Me.dtpBeginningDate.EditingMode = True
-            Me.dtpBeginningDate.EditsAllowed = False
-            Me.CFlowLayout1.SetFlowBreak(Me.dtpBeginningDate, True)
-            Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpBeginningDate.LinkedLabel = Nothing
-            resources.ApplyResources(Me.dtpBeginningDate, "dtpBeginningDate")
-            Me.dtpBeginningDate.Name = "dtpBeginningDate"
-            Me.dtpBeginningDate.ReadOnlyDp = False
-            Me.dtpBeginningDate.SecurityKey = Nothing
-            Me.dtpBeginningDate.ShowLongDate = False
-            Me.dtpBeginningDate.ShowTime = False
-            Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpBeginningDate.Value = Nothing
-            Me.dtpBeginningDate.ValueIsMandatory = False
-            Me.dtpBeginningDate.ValueIsNullable = False
-            '
-            'CLabel3
-            '
-            Me.CLabel3.DisplayOnly = True
-            Me.CLabel3.EditingMode = False
-            resources.ApplyResources(Me.CLabel3, "CLabel3")
-            Me.CLabel3.Name = "CLabel3"
-            '
-            'dtpEndingDate
-            '
-            Me.dtpEndingDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpEndingDate.DefaultValue = Nothing
-            Me.dtpEndingDate.DisplayOnly = False
-            Me.dtpEndingDate.DtpDefaultValue = Nothing
-            Me.dtpEndingDate.EditingMode = True
-            Me.dtpEndingDate.EditsAllowed = False
-            Me.CFlowLayout1.SetFlowBreak(Me.dtpEndingDate, True)
-            Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpEndingDate.LinkedLabel = Nothing
-            resources.ApplyResources(Me.dtpEndingDate, "dtpEndingDate")
-            Me.dtpEndingDate.Name = "dtpEndingDate"
-            Me.dtpEndingDate.ReadOnlyDp = False
-            Me.dtpEndingDate.SecurityKey = Nothing
-            Me.dtpEndingDate.ShowLongDate = False
-            Me.dtpEndingDate.ShowTime = False
-            Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpEndingDate.Value = Nothing
-            Me.dtpEndingDate.ValueIsMandatory = False
-            Me.dtpEndingDate.ValueIsNullable = False
-            '
             'lblPayroll
             '
             Me.lblPayroll.DisplayOnly = True
@@ -209,6 +142,25 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.CLabel1, "CLabel1")
             Me.CLabel1.Name = "CLabel1"
             '
+            'txtPayrollIdNo
+            '
+            Me.txtPayrollIdNo.BackColor = System.Drawing.Color.White
+            Me.txtPayrollIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPayrollIdNo.ComputedValue = False
+            Me.txtPayrollIdNo.CustomFormat = Nothing
+            Me.txtPayrollIdNo.DataBoundControl = True
+            Me.txtPayrollIdNo.DisplayOnly = True
+            Me.txtPayrollIdNo.EditingMode = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtPayrollIdNo, True)
+            resources.ApplyResources(Me.txtPayrollIdNo, "txtPayrollIdNo")
+            Me.txtPayrollIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtPayrollIdNo.LinkedLabel = Nothing
+            Me.txtPayrollIdNo.MaximumValue = Nothing
+            Me.txtPayrollIdNo.MinimumValue = Nothing
+            Me.txtPayrollIdNo.Name = "txtPayrollIdNo"
+            Me.txtPayrollIdNo.OldValue = Nothing
+            Me.txtPayrollIdNo.ReadOnly = True
+            '
             'CLabel4
             '
             Me.CLabel4.DisplayOnly = True
@@ -216,37 +168,97 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.CLabel4, "CLabel4")
             Me.CLabel4.Name = "CLabel4"
             '
-            'txtPayrollIdNo
-            '
-            Me.txtPayrollIdNo.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.txtPayrollIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayrollIdNo.ComputedValue = False
-            Me.txtPayrollIdNo.CustomFormat = Nothing
-            Me.txtPayrollIdNo.DataBoundControl = True
-            Me.txtPayrollIdNo.EditingMode = True
-            Me.CFlowLayout1.SetFlowBreak(Me.txtPayrollIdNo, True)
-            resources.ApplyResources(Me.txtPayrollIdNo, "txtPayrollIdNo")
-            Me.txtPayrollIdNo.LinkedLabel = Nothing
-            Me.txtPayrollIdNo.MaximumValue = Nothing
-            Me.txtPayrollIdNo.MinimumValue = Nothing
-            Me.txtPayrollIdNo.Name = "txtPayrollIdNo"
-            Me.txtPayrollIdNo.OldValue = Nothing
-            '
             'cboPayCycleIdNo
             '
-            Me.cboPayCycleIdNo.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.cboPayCycleIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.cboPayCycleIdNo.ComputedValue = False
-            Me.cboPayCycleIdNo.CustomFormat = Nothing
-            Me.cboPayCycleIdNo.DataBoundControl = True
+            Me.cboPayCycleIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPayCycleIdNo.ChangingSearchValueOnly = False
+            Me.cboPayCycleIdNo.CurrentSearchTerm = ""
+            Me.cboPayCycleIdNo.DefaultValue = Nothing
+            Me.cboPayCycleIdNo.DisplayMember = "Name"
+            Me.cboPayCycleIdNo.DisplayOnly = True
+            Me.cboPayCycleIdNo.DropDownHeight = 200
+            Me.cboPayCycleIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayCycleIdNo.EditingMode = True
-            Me.CFlowLayout1.SetFlowBreak(Me.cboPayCycleIdNo, True)
+            Me.cboPayCycleIdNo.FilterRule = Nothing
             resources.ApplyResources(Me.cboPayCycleIdNo, "cboPayCycleIdNo")
+            Me.cboPayCycleIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboPayCycleIdNo.FormattingEnabled = True
+            Me.cboPayCycleIdNo.HideWhenNotEditingOrAdding = False
             Me.cboPayCycleIdNo.LinkedLabel = Nothing
-            Me.cboPayCycleIdNo.MaximumValue = Nothing
-            Me.cboPayCycleIdNo.MinimumValue = Nothing
             Me.cboPayCycleIdNo.Name = "cboPayCycleIdNo"
-            Me.cboPayCycleIdNo.OldValue = Nothing
+            Me.cboPayCycleIdNo.OldValue = 0
+            Me.cboPayCycleIdNo.OriginalDataSource = Nothing
+            Me.cboPayCycleIdNo.OriginalList = Nothing
+            Me.cboPayCycleIdNo.OverrideDropDownStyleList = False
+            Me.cboPayCycleIdNo.PreviousSearchTerm = Nothing
+            Me.cboPayCycleIdNo.PreviousSelectedIndex = -1
+            Me.cboPayCycleIdNo.PropertySelector = Nothing
+            Me.cboPayCycleIdNo.ReadOnlyCombo = True
+            Me.cboPayCycleIdNo.SearchAnywhere = False
+            Me.cboPayCycleIdNo.SuggestBoxHeight = 200
+            Me.cboPayCycleIdNo.SuggestListOrderRule = Nothing
+            Me.cboPayCycleIdNo.TextToSearch = Nothing
+            Me.cboPayCycleIdNo.ValueIsMandatory = False
+            Me.cboPayCycleIdNo.ValueIsNullable = False
+            Me.cboPayCycleIdNo.ValueIsNumeric = False
+            Me.cboPayCycleIdNo.ValueMember = "IdNo"
+            '
+            'lblBeginningDate
+            '
+            Me.lblBeginningDate.DisplayOnly = True
+            Me.lblBeginningDate.EditingMode = False
+            resources.ApplyResources(Me.lblBeginningDate, "lblBeginningDate")
+            Me.lblBeginningDate.Name = "lblBeginningDate"
+            '
+            'dtpBeginningDate
+            '
+            Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpBeginningDate.DefaultValue = Nothing
+            Me.dtpBeginningDate.DisplayOnly = True
+            Me.dtpBeginningDate.DtpDefaultValue = Nothing
+            Me.dtpBeginningDate.EditingMode = True
+            Me.dtpBeginningDate.EditsAllowed = False
+            Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpBeginningDate.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpBeginningDate, "dtpBeginningDate")
+            Me.dtpBeginningDate.Name = "dtpBeginningDate"
+            Me.dtpBeginningDate.ReadOnlyDp = False
+            Me.dtpBeginningDate.SecurityKey = Nothing
+            Me.dtpBeginningDate.ShowLongDate = False
+            Me.dtpBeginningDate.ShowTime = False
+            Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpBeginningDate.Value = Nothing
+            Me.dtpBeginningDate.ValueIsMandatory = False
+            Me.dtpBeginningDate.ValueIsNullable = False
+            '
+            'CLabel3
+            '
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.EditingMode = False
+            resources.ApplyResources(Me.CLabel3, "CLabel3")
+            Me.CLabel3.Name = "CLabel3"
+            '
+            'dtpEndingDate
+            '
+            Me.dtpEndingDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpEndingDate.DefaultValue = Nothing
+            Me.dtpEndingDate.DisplayOnly = True
+            Me.dtpEndingDate.DtpDefaultValue = Nothing
+            Me.dtpEndingDate.EditingMode = True
+            Me.dtpEndingDate.EditsAllowed = False
+            Me.CFlowLayout1.SetFlowBreak(Me.dtpEndingDate, True)
+            Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpEndingDate.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpEndingDate, "dtpEndingDate")
+            Me.dtpEndingDate.Name = "dtpEndingDate"
+            Me.dtpEndingDate.ReadOnlyDp = False
+            Me.dtpEndingDate.SecurityKey = Nothing
+            Me.dtpEndingDate.ShowLongDate = False
+            Me.dtpEndingDate.ShowTime = False
+            Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpEndingDate.Value = Nothing
+            Me.dtpEndingDate.ValueIsMandatory = False
+            Me.dtpEndingDate.ValueIsNullable = False
             '
             'CLabel5
             '
@@ -262,14 +274,26 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollName.ComputedValue = False
             Me.txtPayrollName.CustomFormat = Nothing
             Me.txtPayrollName.DataBoundControl = True
+            Me.txtPayrollName.DisplayOnly = True
             Me.txtPayrollName.EditingMode = True
             Me.CFlowLayout1.SetFlowBreak(Me.txtPayrollName, True)
             resources.ApplyResources(Me.txtPayrollName, "txtPayrollName")
+            Me.txtPayrollName.ForeColor = System.Drawing.Color.Black
             Me.txtPayrollName.LinkedLabel = Nothing
             Me.txtPayrollName.MaximumValue = Nothing
             Me.txtPayrollName.MinimumValue = Nothing
             Me.txtPayrollName.Name = "txtPayrollName"
             Me.txtPayrollName.OldValue = Nothing
+            Me.txtPayrollName.ReadOnly = True
+            '
+            'CLabel2
+            '
+            Me.CLabel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            resources.ApplyResources(Me.CLabel2, "CLabel2")
+            Me.CLabel2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+            Me.CLabel2.Name = "CLabel2"
             '
             'GeneratePayroll
             '
@@ -299,8 +323,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtPayrollIdNo As CTextBox
         Friend WithEvents CLabel4 As CLabel
-        Friend WithEvents cboPayCycleIdNo As CTextBox
         Friend WithEvents CLabel5 As CLabel
         Friend WithEvents txtPayrollName As CTextBox
+        Friend WithEvents cboPayCycleIdNo As CaComboBox
     End Class
 End Namespace

@@ -164,6 +164,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.GeneratePayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -554,7 +555,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'PayrollEntryToolStripMenuItem
             '
-            Me.PayrollEntryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PayrollAttendanceToolStripMenuItem, Me.PayrollEntryToolStripMenuItem1})
+            Me.PayrollEntryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PayrollAttendanceToolStripMenuItem, Me.GeneratePayrollToolStripMenuItem, Me.PayrollEntryToolStripMenuItem1})
             Me.PayrollEntryToolStripMenuItem.Name = "PayrollEntryToolStripMenuItem"
             resources.ApplyResources(Me.PayrollEntryToolStripMenuItem, "PayrollEntryToolStripMenuItem")
             '
@@ -880,6 +881,11 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'GeneratePayrollToolStripMenuItem
+            '
+            Me.GeneratePayrollToolStripMenuItem.Name = "GeneratePayrollToolStripMenuItem"
+            resources.ApplyResources(Me.GeneratePayrollToolStripMenuItem, "GeneratePayrollToolStripMenuItem")
+            '
             'Main
             '
             Me.AllowDrop = True
@@ -1039,5 +1045,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CheckPrintingToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
         Friend WithEvents ClosePettyCashFundToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents GeneratePayrollToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace
