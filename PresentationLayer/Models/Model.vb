@@ -107,6 +107,10 @@ Public Class Model
         Return Service.GetFieldWithIdNo(idNo, tableName, returnFieldName)
     End Function
 
+    Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object Implements IModel.GetFieldsWithIdNo
+        Return Service.GetFieldsWithIdNo(idNo, tableName, fields)
+    End Function
+
     Public Function GetFilteredLookupByCodeName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByCodeName
         Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
         Return ProcessLookupByCodeName(data)

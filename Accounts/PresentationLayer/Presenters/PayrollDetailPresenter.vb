@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿Imports System.Dynamic
+Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -18,6 +19,7 @@ Namespace PresentationLayer.Presenters
         'Protected DtEarnInsertTable As New DataTable
         'Protected DtEarnUpdateTable As New DataTable
         Private _attendanceItemModel
+
         Private _reinitialize As Boolean = False
         Private _PayrollDetailEarning
 
@@ -34,7 +36,6 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
             _attendanceItemModel = New ModelAccounts("AttendanceItem", Nothing, Nothing)
 
-
             'CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
             '                                {"EarningIdNo", GetType(Int16)},
             '                                {"EmployeeIdNo", GetType(Int32)},
@@ -48,6 +49,14 @@ Namespace PresentationLayer.Presenters
             '                                {"PayrollDetailIdNo", GetType(Int32)}
             '                               })
 
+        End Sub
+
+        Public Sub DisplayPayrollDetails(ByRef startDate As Date?, ByRef endDate As Date?, ByRef payDescription As String)
+            Dim payroll As Object = New ExpandoObject
+            payroll = ModelPresenter.GetFieldsWithIdNo(View.PayrollIdNo, "Payroll", "StartDate,EndDate,PayrollName")
+            startDate = CType(payroll.StartDate, Date)
+            endDate = CType(payroll.EndDate, Date)
+            payDescription = payroll.PayrollName
         End Sub
 
         'Public Sub InitializeMonthlyPayrollDetail(payCycleRecord As PayCycle)

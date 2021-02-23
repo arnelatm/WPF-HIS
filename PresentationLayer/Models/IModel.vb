@@ -27,6 +27,8 @@ Public Interface IModel
 
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
+    Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object
+
     Function GetFilteredLookupByCodeName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
 
     Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)

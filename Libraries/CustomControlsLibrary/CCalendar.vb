@@ -280,7 +280,10 @@ Public Class CCalendar
     End Sub
 
     Private Sub CreateCalendar()
-        Me.YearsEdit.Value = _Year
+        If _Year <= 0 Then
+            _Year = 1
+        End If
+        Me.YearsEdit.Value = Math.Max(_Year, 1)
         Me.cboMonths.SelectedIndex = _Month - 1
         SetCalendarDay()
         BuildDays(_Month, _Year)

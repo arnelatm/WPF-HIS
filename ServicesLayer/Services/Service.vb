@@ -239,6 +239,10 @@ Namespace Services
             Return BaseDao.GetFieldWithIdNo(idNo, tableName, returnFieldName)
         End Function
 
+        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object Implements IService.GetFieldsWithIdNo
+            Return BaseDao.GetFieldsWithIdNo(idNo, tableName, fields)
+        End Function
+
         Public Function GetFilteredRecords(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetFilteredRecords
             Return BaseDao.GetFilteredRecords(tableName, sortKey, filterKey, fields)
         End Function
