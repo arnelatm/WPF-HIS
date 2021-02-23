@@ -1484,7 +1484,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub PayrollEntryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem1.Click
             Dim childMdiForm
-            childMdiForm = New PayrollDetailEntry() With {
+            childMdiForm = New PayrollDetailEntry(1) With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()

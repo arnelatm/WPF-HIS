@@ -1,4 +1,6 @@
-﻿Public Interface IBaseDao
+﻿Imports System.Dynamic
+
+Public Interface IBaseDao
 
     'Function CheckIfUnique(control As Control, tableName As String, fieldName As String, targetIdNo As Int32)
     Function CheckIfUnique(searchValue As String, tableName As String, searchFieldName As String, currentIdNo As Long) _
@@ -21,6 +23,8 @@
     Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
+
+    Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject
 
     Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ParamArray fieldNames() As String) As Object
 

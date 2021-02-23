@@ -1,4 +1,6 @@
-﻿Namespace AdoNet
+﻿Imports System.Dynamic
+
+Namespace AdoNet
 
     Public Class BaseDao
         Implements IBaseDao
@@ -130,6 +132,27 @@
             Dim params() As Object = {"@IdNo", idNo}
             Return _db.Scalar(sql, params)
         End Function
+
+        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject Implements IBaseDao.GetFieldsWithIdNo
+            Dim sql As String =
+                    " Select top 1 " & fieldsList & " FROM [" & tableName & "] " &
+                    " Where IdNo = @IdNo "
+            Dim params() As Object = {"@IdNo", idNo}
+            Dim values As Object
+            values = _db.SqlRead(sql, params)
+            Dim fields = fieldsList.Split(",")
+            Dim obj As New ExpandoObject
+            Dim i As Int16 = 0
+            For Each item In fields
+                CreateDynamicObject(obj, item, values(i))
+                i = i + 1
+            Next
+            Return obj
+        End Function
+
+        Public Sub CreateDynamicObject(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As String)
+            CType(obj, IDictionary(Of String, Object))(propertyName) = propertyValue
+        End Sub
 
         Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetFilteredRecords
             Dim fields = String.Join(",", fieldNames)

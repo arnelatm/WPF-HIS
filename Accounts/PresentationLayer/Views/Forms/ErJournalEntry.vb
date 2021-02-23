@@ -285,10 +285,6 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
-        Private Overloads Sub Dispose()
-            _footer.Dispose()
-        End Sub
-
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
             MyPresenter.UpdateFirstLine()
             UpdateTotals()
@@ -326,7 +322,7 @@ Namespace PresentationLayer.Views.Forms
                         If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
                             bsJournalItems.AddNew()
                             JournalItems(nIndex).AccountIdNo = accountId
-                            ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                            ' adding a new row to the BindingSource adds a new empty row at the end with null values
                             ' therefore there is a need to remove that row because it causes errors when moving to that empty row
                             bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
                         End If

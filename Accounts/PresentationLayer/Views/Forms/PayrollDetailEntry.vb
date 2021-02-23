@@ -1,35 +1,33 @@
-﻿Imports System.ComponentModel
+﻿Imports System.Dynamic
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class PayrollDetailEntry
         Implements IPayrollDetailView
 
-        Protected TvMainFieldName As String
-        Protected TvSecondaryFieldName As String
-        Protected TvSortKey As String
         'Private _bypassSelectedChange As Boolean = False
         'Private _employees
-        'Private _payGroups 
+        'Private _payGroups
+        Private Property MyPresenter As PayrollDetailPresenter
 
-        Public Sub New()
+        Public Sub New(ByVal payrollIdNo As Int16)
 
             ' This call is required by the designer.
             InitializeComponent()
             ' GlobalVariables.EventAggregator.SubscribeEvent(Me)
             ' Add any initialization after the InitializeComponent() call.
+            Me.PayrollIdNo = payrollIdNo
             MainTableName = "PayrollDetail_View"
             TvMainFieldName = "EmployeeName"
             TvSecondaryFieldName = "EmployeeCode"
             SortOrderKey = "SortKey"
             FirstControl = cboEmployeeIdNo
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New PayrollDetailPresenter(Me)
+            MyPresenter = New PayrollDetailPresenter(Me)
+            PresenterObj = MyPresenter
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
             '_employees = PresenterObj.GetLookup("Employee")
@@ -37,7 +35,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #Region "Fields"
-
 
         Public Property IdNo As Int32 Implements IPayrollDetailView.IdNo
             Get
@@ -50,10 +47,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property EmployeeIdNo As Int32 Implements IPayrollDetailView.EmployeeIdNo
             Get
-                Return NumParser(Of Int16)(cboEmployeeIdNo.Text)
+                Return cboEmployeeIdNo.GetNullableValue(Of Int32)
             End Get
             Set
-                cboEmployeeIdNo.Text = Convert.ToString(Value)
+                cboEmployeeIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -84,7 +81,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-
         Public Property PayrollIdNo As Int16 Implements IPayrollDetailView.PayrollIdNo
             Get
                 Return NumParser(Of Int16)(txtPayrollIdNo.Text)
@@ -95,6 +91,12 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #End Region
+
+        Protected Overrides Sub CreateDataSources()
+            cboEmployeeIdNo.BeginUpdate()
+            cboEmployeeIdNo.DataSource = MyPresenter.GetLookup("Employee")
+            cboEmployeeIdNo.EndUpdate()
+        End Sub
 
         'Public Sub DisplayTree(ByRef treeViewData As Object)
         '    Dim root As TreeNode = trvPayroll.Nodes(0)
@@ -250,13 +252,9 @@ Namespace PresentationLayer.Views.Forms
         '    Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
         'End Function
 
-        'Private Sub BfTvEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        '    If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-        '        trvPayroll.Nodes(0).Text = MainTableName
-        '        trvPayroll.ExpandAll()
-        '        DisplayTreeViewData()
-        '    End If
-        'End Sub
+        Private Sub PayrollDetailEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            MyPresenter.DisplayPayrollDetails(dtpStartDate.Value, dtpEndDate.Value, txtPayPeriodName.Text)
+        End Sub
 
         'Private Sub BfTvEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         '    _bypassSelectedChange = True

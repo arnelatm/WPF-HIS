@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class PayrollEntryTv
         Implements IPayrollView
 
-        Private _PayrollAttendance As New List(Of AttendanceItemView)
+        Private _payrollAttendance As New List(Of AttendanceItemView)
         Private _payrollEarning As New List(Of PayrollEarningView)
         Private Property MyPresenter As PayrollPresenter
 
@@ -113,10 +113,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayrollAttendance As List(Of AttendanceItemView) Implements IPayrollView.PayrollAttendance
             Get
-                Return _PayrollAttendance
+                Return _payrollAttendance
             End Get
             Set
-                _PayrollAttendance = Value
+                _payrollAttendance = Value
                 BindPayrollAttendance()
             End Set
         End Property

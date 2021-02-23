@@ -54,6 +54,8 @@ Namespace Services
 
         Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
+        Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object
+
         Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
 
         Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
