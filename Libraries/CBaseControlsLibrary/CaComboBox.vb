@@ -572,14 +572,16 @@ Public Class CaComboBox
         Dim returnValue As Int32
         Dim found As Boolean = False
         Dim i = 0
-        For Each item In DataSource
-            If item.IdNo = value Then
-                SelectedItem = DataSource(i)
-                found = True
-                Exit For
-            End If
-            i += 1
-        Next
+        If DataSource IsNot Nothing Then
+            For Each item In DataSource
+                If item.IdNo = value Then
+                    SelectedItem = DataSource(i)
+                    found = True
+                    Exit For
+                End If
+                i += 1
+            Next
+        End If
         If Not found Then
             SelectedIndex = -1
             returnValue = Nothing
