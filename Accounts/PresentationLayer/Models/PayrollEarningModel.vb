@@ -14,7 +14,7 @@ Namespace PresentationLayer.Models
         Public Property EarningIdNo As Int16
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
-        Public Property PayrollIdNo As Int32
+        Public Property PayrollIdNo As Int16
 
     End Class
 

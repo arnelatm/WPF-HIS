@@ -16,7 +16,7 @@ Namespace BusinessLayer
         Public Property EmployeeIdNo As Int32
         Public Property EarningIdNo As Int16
         Public Property IdNo As Int32
-        Public Property PayrollIdNo As Int32
+        Public Property PayrollIdNo As Int16
 
     End Class
 
