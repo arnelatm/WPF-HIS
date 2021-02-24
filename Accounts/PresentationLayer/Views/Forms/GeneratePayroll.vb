@@ -20,6 +20,9 @@ Namespace PresentationLayer.Views.Forms
             SortOrderKey = "IdNo"
             PresenterObj = New GeneratePayrollPresenter(Me)
 
+            ProgressBar.Minimum = 0
+            ProgressBar.Maximum = 100
+
         End Sub
 
         Private Sub GeneratePayroll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -48,20 +51,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim payEarnings As New List(Of PayrollEarningView)
-            Dim dtInsertTable As New DataTable
-            Dim dtUpdateTable As New DataTable
-            payEarnings = PresenterObj.GenerateEarnings(cboPayrollIdNo.SelectedValue, dtpBeginningDate.Value, dtpEndingDate.Value)
-
-            'CreateDataTable(DtUpdateTable, {{"DaysAbsentWithoutPay", GetType(Decimal)},
-            '                                {"DaysAbsentWithPay", GetType(Decimal)},
-            '                                {"DaysOff", GetType(Decimal)},
-            '                                {"DaysPresent", GetType(Decimal)},
-            '                                {"EmployeeIdNo", GetType(Int32)},
-            '                                {"IdNo", GetType(Int32)},
-            '                                {"Overtime", GetType(Decimal)},
-            '                                {"PayrollIdNo", GetType(Int32)}
-            '                               })
+            PresenterObj.GeneratePayroll(cboPayrollIdNo.SelectedValue, dtpBeginningDate.Value, dtpEndingDate.Value, ProgressBar)
         End Sub
 
     End Class

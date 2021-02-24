@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class PayrollEarningDao
         Inherits AccountsDao
-        Implements IDaoChild(Of PayrollEarning)
+        Implements IDaoChild(Of PayrollEarning), IDaoTvp(Of PayrollEarning)
 
         Private ReadOnly Db As New Db()
 
@@ -35,6 +35,10 @@ Namespace DataLayer.AdoNet
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of PayrollEarning).InsertTvp
             Return Db.InsertTvp("InsertPayrollEarningTVP", tvpTable)
+        End Function
+
+        Public Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal groupIdNo As Integer) As Integer Implements IDaoTvp(Of PayrollEarning).UpdateInsertTvp
+            Return Db.UpdateInsertTvp("UpdateInsertPayrollEarningTVP", updateTvpTable, insertTvpTable, groupIdNo)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PayrollEarning) =

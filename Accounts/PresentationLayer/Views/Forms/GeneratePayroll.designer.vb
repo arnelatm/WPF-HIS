@@ -44,6 +44,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.ProgressBar = New System.Windows.Forms.ProgressBar()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
@@ -68,7 +69,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'btnOk
             '
-            Me.btnOk.DesignerSelected = True
+            Me.btnOk.DesignerSelected = False
             Me.btnOk.DisplayOnly = True
             Me.btnOk.ImageIndex = 0
             resources.ApplyResources(Me.btnOk, "btnOk")
@@ -294,9 +295,15 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
             Me.CLabel2.Name = "CLabel2"
             '
+            'ProgressBar
+            '
+            resources.ApplyResources(Me.ProgressBar, "ProgressBar")
+            Me.ProgressBar.Name = "ProgressBar"
+            '
             'GeneratePayroll
             '
             resources.ApplyResources(Me, "$this")
+            Me.Controls.Add(Me.ProgressBar)
             Me.Controls.Add(Me.CLabel2)
             Me.Controls.Add(Me.btnCancel)
             Me.Controls.Add(Me.btnOk)
@@ -325,5 +332,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel5 As CLabel
         Friend WithEvents txtPayrollName As CTextBox
         Friend WithEvents cboPayCycleIdNo As CaComboBox
+        Friend WithEvents ProgressBar As ProgressBar
     End Class
 End Namespace

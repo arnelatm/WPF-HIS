@@ -307,12 +307,13 @@ Namespace PresentationLayer.Views.Forms
                 Case CalculationTypeSelection.Factor
                     cboBasePaymentIdNo.Visible = True
                     cboMultiplierType.Visible = True
-                    cboUnit.Visible = False
+                    cboUnit.Visible = True
                     lblBasePayment.Visible = True
                     lblDefaultQty.Visible = True
                     lblMultiplier.Visible = True
                     lblPayRate.Visible = False
-                    lblRate.Visible = False
+                    lblRate.Visible = True
+                    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = True
                     txtRate.Visible = False
