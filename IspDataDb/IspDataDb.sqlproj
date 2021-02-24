@@ -411,6 +411,10 @@
     <Build Include="dbo\Tables\PayrollDetail.sql" />
     <Build Include="dbo\Tables\PayPeriod_1.sql" />
     <Build Include="dbo\Views\PayrollDetail_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdatePayrollEarningTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertPayrollEarningTVP.sql" />
+    <Build Include="dbo\User Defined Types\PayrollEarningUpdate.sql" />
+    <Build Include="dbo\User Defined Types\PayrollEarningInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

@@ -225,6 +225,7 @@
     <Compile Include="DataLayer\AdoNet\BasicDao.vb" />
     <Compile Include="DataLayer\AdoNet\DjOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PayrollEarningDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\PcJournalsDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDeductAccountDao.vb" />
@@ -1271,9 +1272,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
-    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\Application.myapp">
