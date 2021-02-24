@@ -208,6 +208,8 @@ Public Enum PayRateUnitSelection
     <EnumCode("R")> SemiYear
     <EnumCode("Y")> Year
     <EnumCode("U")> Unit
+    <EnumCode("A")> AbsencesWithoutPay
+    <EnumCode("O")> OvertimeHours
 End Enum
 
 Public Enum PayrollPaymentMethodSelection

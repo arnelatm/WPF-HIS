@@ -38,3 +38,10 @@ Public Interface IDaoChild(Of TBiz)
     Function InsertTvp(ByRef tvpTable As DataTable) As Integer
 
 End Interface
+
+Public Interface IDaoTvp(Of TBiz)
+    ' gets a specific record data
+
+    Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
+
+End Interface

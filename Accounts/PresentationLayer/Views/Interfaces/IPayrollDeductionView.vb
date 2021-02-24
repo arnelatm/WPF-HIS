@@ -1,0 +1,16 @@
+﻿Imports AATM.PresentationLayer.Views
+
+Namespace PresentationLayer.Views.Interfaces
+
+    Public Interface IPayrollDeductionView
+        Inherits IView
+
+        Property Amount As Decimal
+        Property EmployeeIdNo As Int32
+        Property DeductionIdNo As Int16
+        Property IdNo As Int32
+        Property PayrollIdNo As Int16
+
+    End Interface
+
+End Namespace

@@ -670,7 +670,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMultiplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 130</value>
+    <value>1, 132</value>
   </data>
   <data name="lblMultiplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -709,7 +709,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDefaultQty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 79</value>
+    <value>1, 80</value>
   </data>
   <data name="lblDefaultQty.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -847,7 +847,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDefaultQuantity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 79</value>
+    <value>235, 80</value>
   </data>
   <data name="txtDefaultQuantity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -883,7 +883,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBasePayment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 104</value>
+    <value>1, 105</value>
   </data>
   <data name="lblBasePayment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -919,7 +919,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboBasePaymentIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 104</value>
+    <value>235, 105</value>
   </data>
   <data name="cboBasePaymentIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -949,7 +949,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtMultiplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 130</value>
+    <value>235, 132</value>
   </data>
   <data name="txtMultiplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -982,7 +982,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboMultiplierType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>326, 130</value>
+    <value>326, 132</value>
   </data>
   <data name="cboMultiplierType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1024,7 +1024,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblPayRate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
+    <value>24, 25</value>
   </data>
   <data name="lblPayRate.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
