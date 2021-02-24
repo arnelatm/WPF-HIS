@@ -1,4 +1,7 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
@@ -97,16 +100,16 @@ Namespace PresentationLayer.Presenters
             Return GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDueDays")
         End Function
 
-        Public Function IsAccountsPayableAccount(ByVal AccountIdNo As Int16)
-            Return GetRecordFieldWithKey(AccountIdNo, "Account", "IdNo", "SpecialAccount") = "AP"
+        Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int16)
+            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "AP"
         End Function
 
-        Public Function IsAccountsReceivableAccount(ByVal AccountIdNo As Int16)
-            Return GetRecordFieldWithKey(AccountIdNo, "Account", "IdNo", "SpecialAccount") = "AR"
+        Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int16)
+            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "AR"
         End Function
 
-        Public Function IsInputVatAccount(ByVal AccountIdNo As Int16)
-            Return GetRecordFieldWithKey(AccountIdNo, "Account", "IdNo", "SpecialAccount") = "VI"
+        Public Function IsInputVatAccount(ByVal accountIdNo As Int16)
+            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "VI"
         End Function
 
         Public Function GetAdvancesToSupplierAccountIdNo()
@@ -189,6 +192,7 @@ Namespace PresentationLayer.Presenters
             If Model.CountRecordWithKey(idNo, "CsrOiItem", "ArOpenInvoiceIdNo") = 0 Then
                 Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
             End If
+            Return 0
         End Function
 
         Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
@@ -218,9 +222,9 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateInputVatAmount(journalItems As List(Of IJournalItemView))
             Dim tiVatAmount As Decimal = 0
-            Dim InputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
+            Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
             For Each item In journalItems
-                If item.SpecialAccount = InputVatAccount Then
+                If item.SpecialAccount = inputVatAccount Then
                     tiVatAmount = tiVatAmount + item.Debit - item.Credit
                 End If
             Next
@@ -229,9 +233,9 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateOutputVatAmount(journalItems As List(Of IJournalItemView))
             Dim toVatAmount As Decimal = 0
-            Dim OutputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
+            Dim outputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
             For Each item In journalItems
-                If item.SpecialAccount = OutputVatAccount Then
+                If item.SpecialAccount = outputVatAccount Then
                     toVatAmount = toVatAmount + item.Credit - item.Debit
                 End If
             Next
@@ -280,7 +284,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView)
             e.NewObject = New TS
-            ' work arround for error on datagrid entry on lastrow please do not remove.
+            ' work around for error on datagrid entry on lastrow please do not remove.
             ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
             ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
             ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again

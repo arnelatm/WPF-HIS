@@ -68,7 +68,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'btnOk
             '
-            Me.btnOk.DesignerSelected = False
+            Me.btnOk.DesignerSelected = True
             Me.btnOk.DisplayOnly = True
             Me.btnOk.ImageIndex = 0
             resources.ApplyResources(Me.btnOk, "btnOk")
@@ -177,7 +177,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.DisplayMember = "Name"
             Me.cboPayCycleIdNo.DisplayOnly = True
             Me.cboPayCycleIdNo.DropDownHeight = 200
-            Me.cboPayCycleIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayCycleIdNo.EditingMode = True
             Me.cboPayCycleIdNo.FilterRule = Nothing
             resources.ApplyResources(Me.cboPayCycleIdNo, "cboPayCycleIdNo")

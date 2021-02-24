@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"Overtime", GetType(Decimal)},
-                                            {"PayrollIdNo", GetType(Int32)}
+                                            {"PayrollIdNo", GetType(Int16)}
                                            })
 
             CreateDataTable(DtUpdateTable, {{"DaysAbsentWithoutPay", GetType(Decimal)},
@@ -44,7 +44,7 @@ Namespace PresentationLayer.Presenters
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
                                             {"Overtime", GetType(Decimal)},
-                                            {"PayrollIdNo", GetType(Int32)}
+                                            {"PayrollIdNo", GetType(Int16)}
                                            })
 
             'CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
