@@ -2,22 +2,32 @@
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
     Public Class GeneratePayrollPresenter
-        Inherits AccountsPresenter(Of IView, AccountModel)
+        Inherits AccountsPresenter(Of IView, PayrollModel)
+
+        Private _dtInsertTable As New DataTable
+        Private _dtUpdateTable As New DataTable
 
         Public Sub New(view As IView)
             MyBase.New(view)
             TableName = "Account"
-            ModelPresenter = New ModelAccounts("Account")
-            TableName = "Account"
+            ModelPresenter = New ModelAccounts("Payroll")
+            TableName = "Payroll"
             SortOrderKey = "IdNo"
-            OriginalModel = New AccountModel()
-            DataModel = New AccountModel()
+            OriginalModel = New PayrollModel()
+            DataModel = New PayrollModel()
+            CreateDataTable(_dtInsertTable, {{"Amount", GetType(Decimal)},
+                                            {"EarningIdNo", GetType(Int16)},
+                                            {"EmployeeIdNo", GetType(Int32)},
+                                            {"PayrollIdNo", GetType(Int16)}
+                                           })
+
         End Sub
 
         Public Sub GenerateEarnings(ByVal payrollIdNo As Int16, ByVal startDate As Date, ByVal endDate As Date)
@@ -31,6 +41,7 @@ Namespace PresentationLayer.Presenters
             Dim empEarnings As List(Of EmployeeEarning)
             Dim regularEarning = EnumToCode(EarningTypeSelection.Regular)
             Dim fixedEarning = EnumToCode(CalculationTypeSelection.Fixed)
+            Dim payrollEarningDao = New Payr
             attendance = attendanceItemDao.GetRecordsWithIdNo(payrollIdNo)
             For Each employeeAttendance In attendance
                 'Dim earning As New PayrollEarning
@@ -52,18 +63,9 @@ Namespace PresentationLayer.Presenters
                     End If
                 Next
             Next
-            'Dim payEarningView As New List(Of PayrollEarningView)
-            'GlobalVariables.Mapper.Map(payEarnings, payEarningView)
-            Dim dtInsertTable As New DataTable
-            Dim dtUpdateTable As New DataTable
-            CreateDataTable(dtInsertTable, {{"Amount", GetType(Decimal)},
-                                            {"EarningIdNo", GetType(Int16)},
-                                            {"EmployeeIdNo", GetType(Int32)},
-                                            {"PayrollIdNo", GetType(Int16)}
-                                           })
 
-            ViewToDataTables(payEarnings, dtInsertTable, dtUpdateTable, AddressOf PayrollEarningFillData, AddressOf PayrollEarningFilter, "IdNo", "")
-
+            ViewToDataTables(payEarnings, _dtInsertTable, _dtUpdateTable, AddressOf PayrollEarningFillData, AddressOf PayrollEarningFilter, "IdNo", "")
+            employeeEarningDao.
         End Sub
 
         Public Function PayrollEarningFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
