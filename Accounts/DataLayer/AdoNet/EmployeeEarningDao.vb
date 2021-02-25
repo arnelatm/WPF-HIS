@@ -29,7 +29,9 @@ Namespace DataLayer.AdoNet
                     "EarningType," &
                     "EmployeeIdNo," &
                     "IdNo," &
-                    "Sequence" &
+                    "Rate," &
+                    "Sequence," &
+                    "Unit" &
                     " FROM [EmployeeEarning_View]" &
                     " WHERE EmployeeIdNo = @IdNo and " & filter &
                     " ORDER BY " & sortExpression
@@ -56,7 +58,9 @@ Namespace DataLayer.AdoNet
             .EarningType = AATM.DataLayer.AdoNet.Extensions.AsChar(reader("EarningType")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence"))
+            .Rate = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Rate")),
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence")),
+            .Unit = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Unit"))
            }
 
     End Class

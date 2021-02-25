@@ -16,6 +16,8 @@ Namespace PresentationLayer.Views
         Public Property EmployeeIdNo As Int32 Implements IEmployeeEarningView.EmployeeIdNo
         Public Property IdNo As Int32 Implements IEmployeeEarningView.IdNo
         Public Property Sequence As Int16 Implements IEmployeeEarningView.Sequence
+        Public Property Rate As Decimal Implements IEmployeeEarningView.Rate
+        Public Property Unit As String Implements IEmployeeEarningView.Unit
         Public Property Errors As List(Of String) Implements IView.Errors
 
     End Class

@@ -41,11 +41,13 @@ Namespace PresentationLayer.Presenters
             CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
                                              {"EarningIdNo", GetType(Int16)},
                                              {"EmployeeIdNo", GetType(Int32)},
+                                             {"Rate", GetType(Decimal)},
                                              {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtDeductInsertTable, {{"Amount", GetType(Decimal)},
                                               {"DeductionIdNo", GetType(Int16)},
                                               {"EmployeeIdNo", GetType(Int32)},
+                                              {"Rate", GetType(Decimal)},
                                               {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtPhoneInsertTable, {{"AreaCode", GetType(String)},
@@ -59,12 +61,14 @@ Namespace PresentationLayer.Presenters
                                             {"EarningIdNo", GetType(Int16)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
+                                            {"Rate", GetType(Decimal)},
                                             {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtDeductUpdateTable, {{"Amount", GetType(Decimal)},
                                               {"DeductionIdNo", GetType(Int16)},
                                               {"EmployeeIdNo", GetType(Int32)},
                                               {"IdNo", GetType(Int32)},
+                                              {"Rate", GetType(Decimal)},
                                               {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtPhoneUpdateTable, {{"AreaCode", GetType(String)},
@@ -109,12 +113,14 @@ Namespace PresentationLayer.Presenters
             workRow("Amount") = itemDataView.Amount
             workRow("EarningIdNo") = itemDataView.EarningIdNo
             workRow("EmployeeIdNo") = View.IdNo
+            workRow("Rate") = itemDataView.Rate
         End Sub
 
         Private Sub DeductionFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("Amount") = itemDataView.Amount
             workRow("DeductionIdNo") = itemDataView.DeductionIdNo
             workRow("EmployeeIdNo") = View.IdNo
+            workRow("Rate") = itemDataView.Rate
         End Sub
 
         Private Sub PhoneFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
@@ -126,14 +132,14 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function DeductionFilter(ByVal obj As Object) As Boolean
-            If obj.Amount > 0 Then
+            If obj.Amount <> 0 Or obj.Rate <> 0 Then
                 Return True
             End If
             Return False
         End Function
 
         Public Function EarningFilter(ByVal obj As EmployeeEarningView) As Boolean
-            If obj.Amount > 0 Then
+            If obj.Amount <> 0 Or obj.Rate <> 0 Then
                 Return True
             End If
             Return False
