@@ -13,7 +13,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property DeductionType As Char
         Property EmployeeIdNo As Int32
         Property IdNo As Int32
+        Property Rate As Decimal
         Property Sequence As Int16
+        Property Unit As String
 
     End Interface
 

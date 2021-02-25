@@ -28,7 +28,9 @@ Namespace DataLayer.AdoNet
                     "DeductionType," &
                     "EmployeeIdNo," &
                     "IdNo," &
-                    "Sequence" &
+                    "Rate," &
+                    "Sequence," &
+                    "Unit" &
                     " FROM [EmployeeDeduction_View]" &
                     " WHERE EmployeeIdNo = @IdNo And " & filter &
                     " ORDER BY " & sortExpression
@@ -55,7 +57,9 @@ Namespace DataLayer.AdoNet
             .DeductionType = AATM.DataLayer.AdoNet.Extensions.AsChar(reader("DeductionType")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence"))
+            .Rate = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Rate")),
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence")),
+            .Unit = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Unit"))
             }
 
     End Class

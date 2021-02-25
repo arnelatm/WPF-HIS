@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private _regularEmployeeDeductions As List(Of EmployeeDeductionView)
         Private _regularEmployeeEarnings As List(Of EmployeeEarningView)
         Private _employeePhones As List(Of EmployeePhoneView)
+        Private _unit
         Private _phoneTypes
 
         Private ReadOnly _nfi As NumberFormatInfo
@@ -480,6 +481,7 @@ Namespace PresentationLayer.Views.Forms
             _earningsByName = PresenterObj.GetFilteredLookupListByCodeName("Earning", "EarningType='" + EnumToCode(EarningTypeSelection.Regular) + "'")
             _phoneTypes = PresenterObj.GetLookup("PhoneType")
             _countryTelCodes = PresenterObj.GetIntPhoneCodes()
+            _unit = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
         End Sub
 
         Protected Overrides Sub CreateFieldsDictionary()
@@ -537,7 +539,7 @@ Namespace PresentationLayer.Views.Forms
             Dim nTotal As Decimal
             nTotal = DataGridViewEarnings.GetColumnTotal("dgvEarningAmount") -
                      DataGridViewDeductions.GetColumnTotal("dgvDeductionAmount")
-            txtNetTotal.Text = nTotal.ToString("N", _nfi)
+            'txtNetTotal.Text = nTotal.ToString("N", _nfi)
         End Sub
 
         Private Sub BindEmployeeDeduction()
@@ -581,6 +583,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvUnit.DataSource = _unit
+                dgvDedUnit.DataSource = _unit
+                dgvUnit.ReadOnly = True
+                dgvDedUnit.ReadOnly = True
             End With
             ResumeLayout()
         End Sub

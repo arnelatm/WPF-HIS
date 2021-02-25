@@ -15,8 +15,9 @@
         Public Property EmployeeIdNo As Int32
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
+        Public Property Rate As Decimal
         Public Property Sequence As Int16
-
+        Public Property Unit As String
     End Class
 
 End Namespace
