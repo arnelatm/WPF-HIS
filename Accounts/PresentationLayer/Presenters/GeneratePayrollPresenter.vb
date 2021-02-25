@@ -20,6 +20,15 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _employeeDeductionDao = New EmployeeDeductionDao
         Private ReadOnly _employeeEarningDao = New EmployeeEarningDao
         Private ReadOnly _earningsDao = New EarningDao
+        Private ReadOnly _regularEarning = EnumToCode(EarningTypeSelection.Regular)
+        Private ReadOnly _fixedAmount = EnumToCode(CalculationTypeSelection.FixedAmount)
+        Private ReadOnly _fixedRate = EnumToCode(CalculationTypeSelection.FixedRate)
+        Private ReadOnly _factor = EnumToCode(CalculationTypeSelection.Factor)
+        Private ReadOnly _variable = EnumToCode(CalculationTypeSelection.Variable)
+        Private ReadOnly _global = EnumToCode(CalculationTypeSelection.Global)
+        Private ReadOnly _regularDeduction = EnumToCode(DeductionTypeSelection.Regular)
+        Private ReadOnly _factoredDeduction = EnumToCode(CalculationTypeSelection.Factor)
+        Private ReadOnly _overtimeHours = EnumToCode(PayRateUnitSelection.OvertimeHours)
 
         Public Sub New(view As IView)
             MyBase.New(view)
@@ -79,64 +88,84 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub AddDeduction(employeeAttendance As AttendanceItem, empDeduction As EmployeeDeduction, payrollIdNo As Short)
+        Private Sub AddDeduction(employeeIdNo As Int32, amount As Decimal, payrollIdNo As Short, deductionIdNo As Short)
             Dim insertDataRow As DataRow
             insertDataRow = _dtDeductionInsertTable.NewRow()
-            insertDataRow("Amount") = empDeduction.Amount
-            insertDataRow("DeductionIdNo") = empDeduction.DeductionIdNo
-            insertDataRow("EmployeeIdNo") = employeeAttendance.EmployeeIdNo
+            insertDataRow("Amount") = amount
+            insertDataRow("DeductionIdNo") = deductionIdNo
+            insertDataRow("EmployeeIdNo") = employeeIdNo
             insertDataRow("PayrollIdNo") = payrollIdNo
             _dtDeductionInsertTable.Rows.Add(insertDataRow)
         End Sub
 
-        Private Sub AddEarning(employeeAttendance As AttendanceItem, empEarning As EmployeeEarning, payrollIdNo As Short)
+        Private Sub AddEarning(employeeIdNo As Int32, amount As Decimal, payrollIdNo As Short, earningIdNo As Short)
             Dim insertDataRow As DataRow
             insertDataRow = _dtEarningInsertTable.NewRow()
-            insertDataRow("Amount") = empEarning.Amount
-            insertDataRow("EarningIdNo") = empEarning.EarningIdNo
-            insertDataRow("EmployeeIdNo") = employeeAttendance.EmployeeIdNo
+            insertDataRow("Amount") = amount
+            insertDataRow("EarningIdNo") = earningIdNo
+            insertDataRow("EmployeeIdNo") = employeeIdNo
             insertDataRow("PayrollIdNo") = payrollIdNo
             _dtEarningInsertTable.Rows.Add(insertDataRow)
         End Sub
 
         Private Sub GenerateDeductions(ByRef employeeAttendance As AttendanceItem, payrollIdNo As Short)
-            Dim empDeductions As List(Of EmployeeDeduction)
             Dim deductionsDao = New DeductionDao
-            Dim regularDeduction = EnumToCode(DeductionTypeSelection.Regular)
-            Dim fixedDeduction = EnumToCode(CalculationTypeSelection.Fixed)
-            Dim factoredDeduction = EnumToCode(CalculationTypeSelection.Factor)
-            empDeductions = New List(Of EmployeeDeduction)
-            empDeductions = _employeeDeductionDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
+            Dim amount As Decimal
+            Dim empDeductions As List(Of EmployeeDeduction) = _employeeDeductionDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
             For Each empDeduction In empDeductions
                 Dim deduction As Deduction
                 deduction = deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
-                If deduction.DeductionType = regularDeduction Then
-                    If deduction.CalculationType = fixedDeduction Then
-                        AddDeduction(employeeAttendance, empDeduction, payrollIdNo)
+                If deduction.DeductionType = _regularDeduction Then
+                    If deduction.CalculationType = _fixedAmount Then
+                        amount = empDeduction.Amount
+                        AddDeduction(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, deduction.IdNo)
                     End If
                 End If
             Next
         End Sub
 
         Private Sub GenerateEarnings(ByRef employeeAttendance As AttendanceItem, payrollIdNo As Short)
-            Dim empEarnings As List(Of EmployeeEarning)
-            Dim earningsDao = New EarningDao
-            Dim employeeEarningDao = New EmployeeEarningDao
-            Dim regularEarning = EnumToCode(EarningTypeSelection.Regular)
-            Dim fixedEarning = EnumToCode(CalculationTypeSelection.Fixed)
-            Dim factoredEarning = EnumToCode(CalculationTypeSelection.Factor)
-            empEarnings = New List(Of EmployeeEarning)
-            empEarnings = employeeEarningDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
+            GenerateRegularEarnings(employeeAttendance, payrollIdNo)
+            GenerateOvertime(employeeAttendance, payrollIdNo)
+        End Sub
+
+        Private Sub GenerateRegularEarnings(employeeAttendance As AttendanceItem, payrollIdNo As Short)
+            Dim empEarnings As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
+            Dim amount As Decimal
             For Each empEarning In empEarnings
                 Dim earning As Earning
-                earning = earningsDao.GetRecordById(empEarning.EarningIdNo)
-                If earning.EarningType = regularEarning Then
-                    If earning.CalculationType = fixedEarning Then
-                        AddEarning(employeeAttendance, empEarning, payrollIdNo)
-                    End If
+                earning = _earningsDao.GetRecordById(empEarning.EarningIdNo)
+                If earning.EarningType = _regularEarning Then
+                    amount = ComputeEarningAmount(empEarning, earning, employeeAttendance)
+                    AddEarning(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, earning.IdNo)
                 End If
             Next
         End Sub
+
+        Private Sub GenerateOvertime(employeeAttendance As AttendanceItem, payrollIdNo As Short)
+            'Dim overtime As List(Of Earning) = _earningsDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
+            'Dim amount As Decimal
+            'For Each empEarning In empEarnings
+            '    Dim earning As Earning
+            '    earning = _earningsDao.GetRecordById(empEarning.EarningIdNo)
+            '    If earning.EarningType = _regularEarning Then
+            '        amount = ComputeEarningAmount(empEarning, earning, employeeAttendance)
+            '        AddEarning(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, earning.IdNo)
+            '    End If
+            'Next
+        End Sub
+
+        Private Function ComputeEarningAmount(empEarning As EmployeeEarning, earning As Earning, employeeAttendance As AttendanceItem) As Decimal
+            Dim amount As Decimal
+            If earning.CalculationType = _fixedAmount Then
+                amount = empEarning.Amount
+            ElseIf earning.CalculationType = _fixedRate Then
+                If earning.Unit = _overtimeHours Then
+                    amount = empEarning.Amount * employeeAttendance.Overtime
+                End If
+            End If
+            Return amount
+        End Function
 
         Private Sub GenerateEmployeePayroll(ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef progressBar As ProgressBar)
             Dim payrollEarningDao = New PayrollEarningDao
@@ -157,62 +186,67 @@ Namespace PresentationLayer.Presenters
             progressBar.Visible = False
         End Sub
 
-        Private Sub MakeDeductions(employeeAttendance As AttendanceItem, empDeduction As EmployeeDeduction, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
-            Dim deduct As PayrollDeduction = payDeductions.Find(Function(value As PayrollDeduction)
-                                                                    Return value.EmployeeIdNo = empDeduction.EmployeeIdNo And value.DeductionIdNo = empDeduction.DeductionIdNo
-                                                                End Function)
-            If deduct Is Nothing Then
-                AddDeduction(employeeAttendance, empDeduction, payrollIdNo)
+        Private Sub MakeDeductions(employeeIdNo As Int32, amount As Decimal, empDeduction As EmployeeDeduction, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
+            Dim deduction As PayrollDeduction = payDeductions.Find(Function(value As PayrollDeduction)
+                                                                       Return value.EmployeeIdNo = empDeduction.EmployeeIdNo And value.DeductionIdNo = empDeduction.DeductionIdNo
+                                                                   End Function)
+            If deduction Is Nothing Then
+                AddDeduction(employeeIdNo, amount, payrollIdNo, empDeduction.DeductionIdNo)
             Else
-                UpdateDeduction(empDeduction, deduct, payrollIdNo)
+                UpdateDeduction(amount, deduction)
             End If
         End Sub
 
-        Private Sub MakeEarnings(employeeAttendance As AttendanceItem, empEarning As EmployeeEarning, payEarnings As List(Of PayrollEarning), payrollIdNo As Short)
-            Dim earn As PayrollEarning = payEarnings.Find(Function(value As PayrollEarning)
-                                                              Return value.EmployeeIdNo = empEarning.EmployeeIdNo And value.EarningIdNo = empEarning.EarningIdNo
-                                                          End Function)
-            If earn Is Nothing Then
-                AddEarning(employeeAttendance, empEarning, payrollIdNo)
+        Private Sub MakeEarnings(employeeIdNo As Int32, amount As Decimal, empEarning As EmployeeEarning, payEarnings As List(Of PayrollEarning), payrollIdNo As Short)
+            Dim earning As PayrollEarning = payEarnings.Find(Function(value As PayrollEarning)
+                                                                 Return value.EmployeeIdNo = empEarning.EmployeeIdNo And value.EarningIdNo = empEarning.EarningIdNo
+                                                             End Function)
+            If earning Is Nothing Then
+                AddEarning(employeeIdNo, amount, payrollIdNo, empEarning.EarningIdNo)
             Else
-                UpdateEarning(empEarning, earn, payrollIdNo)
+                UpdateEarning(amount, earning)
             End If
         End Sub
 
         Private Sub ReGenerateDeduction(ByRef employeeAttendance As AttendanceItem, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
             Dim empDeductions As List(Of EmployeeDeduction)
-            Dim regularDeduction = EnumToCode(DeductionTypeSelection.Regular)
-            Dim factoredDeduction = EnumToCode(CalculationTypeSelection.Factor)
-            Dim fixedDeduction = EnumToCode(CalculationTypeSelection.Fixed)
-            Dim earningAdjustment = EnumToCode(DeductionTypeSelection.EarningsAdjustment)
+            Dim amount As Decimal
             empDeductions = _employeeDeductionDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
             For Each empDeduction In empDeductions
                 Dim deduction As Deduction
                 deduction = _deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
-                'If deduction.DeductionType = regularDeduction Then
-                '    If deduction.CalculationType = factoredDeduction Then
-                '        If deduction.
-                '    ElseIf deduction.CalculationType = fixedDeduction Then
-                '        MakeDeductions(employeeAttendance, empDeduction, payDeductions, payrollIdNo)
-                '        End If
-                '    End If
+                If deduction.DeductionType = _regularDeduction Then
+                    'If deduction.CalculationType = factoredDeduction Then
+                    '    If deduction.
+                    'ElseIf deduction.CalculationType = fixedDeduction Then
+                    '    MakeDeductions(employeeAttendance, empDeduction, payDeductions, payrollIdNo)
+                    '    End If
+                    'End If
+                End If
+                MakeDeductions(employeeAttendance.EmployeeIdNo, amount, empDeduction, payDeductions, payrollIdNo)
             Next
         End Sub
 
         Private Sub ReGenerateEarning(ByRef employeeAttendance As AttendanceItem, payEarnings As List(Of PayrollEarning), payrollIdNo As Short)
             Dim empEarnings As List(Of EmployeeEarning)
-            Dim regularEarning = EnumToCode(EarningTypeSelection.Regular)
-            Dim fixedEarning = EnumToCode(CalculationTypeSelection.Fixed)
+            Dim amount As Decimal
             empEarnings = _employeeEarningDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
             For Each empEarning In empEarnings
                 Dim earning As Earning
                 earning = _earningsDao.GetRecordById(empEarning.EarningIdNo)
-                If earning.EarningType = regularEarning Then
-                    If earning.CalculationType = fixedEarning Then
-                        MakeEarnings(employeeAttendance, empEarning, payEarnings, payrollIdNo)
+                If earning.EarningType = _regularEarning Then
+                    If earning.CalculationType = _fixedAmount Then
+                        amount = empEarning.Amount
+                    ElseIf earning.CalculationType = _fixedRate Then
+                        If earning.Unit = _overtimeHours Then
+
+                        End If
+
                     End If
+                    MakeEarnings(employeeAttendance.EmployeeIdNo, amount, empEarning, payEarnings, payrollIdNo)
                 End If
             Next
+
         End Sub
 
         Private Sub ReGenerateEmployeePayroll(ByRef payEarnings As List(Of PayrollEarning), ByRef payDeductions As List(Of PayrollDeduction), ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef progressBar As ProgressBar)
@@ -236,26 +270,30 @@ Namespace PresentationLayer.Presenters
             progressBar.Visible = False
         End Sub
 
-        Private Sub UpdateDeduction(empDeduction As EmployeeDeduction, earn As PayrollDeduction, payrollIdNo As Short)
-            Dim updateDataRow As DataRow
-            updateDataRow = _dtDeductionUpdateTable.NewRow()
-            updateDataRow("Amount") = empDeduction.Amount
-            updateDataRow("DeductionIdNo") = empDeduction.DeductionIdNo
-            updateDataRow("EmployeeIdNo") = empDeduction.EmployeeIdNo
-            updateDataRow("IdNo") = earn.IdNo
-            updateDataRow("PayrollIdNo") = payrollIdNo
-            _dtDeductionUpdateTable.Rows.Add(updateDataRow)
+        Private Sub UpdateDeduction(amount As Decimal, deduction As PayrollDeduction)
+            If amount <> 0 Then
+                Dim updateDataRow As DataRow
+                updateDataRow = _dtDeductionUpdateTable.NewRow()
+                updateDataRow("Amount") = amount
+                updateDataRow("DeductionIdNo") = deduction.DeductionIdNo
+                updateDataRow("EmployeeIdNo") = deduction.EmployeeIdNo
+                updateDataRow("IdNo") = deduction.IdNo
+                updateDataRow("PayrollIdNo") = deduction.PayrollIdNo
+                _dtDeductionUpdateTable.Rows.Add(updateDataRow)
+            End If
         End Sub
 
-        Private Sub UpdateEarning(empEarning As EmployeeEarning, earn As PayrollEarning, payrollIdNo As Short)
-            Dim updateDataRow As DataRow
-            updateDataRow = _dtEarningUpdateTable.NewRow()
-            updateDataRow("Amount") = empEarning.Amount
-            updateDataRow("EarningIdNo") = empEarning.EarningIdNo
-            updateDataRow("EmployeeIdNo") = empEarning.EmployeeIdNo
-            updateDataRow("IdNo") = earn.IdNo
-            updateDataRow("PayrollIdNo") = payrollIdNo
-            _dtEarningUpdateTable.Rows.Add(updateDataRow)
+        Private Sub UpdateEarning(amount As Decimal, earning As PayrollEarning)
+            If amount <> 0 Then
+                Dim updateDataRow As DataRow
+                updateDataRow = _dtEarningUpdateTable.NewRow()
+                updateDataRow("Amount") = amount
+                updateDataRow("EarningIdNo") = earning.IdNo
+                updateDataRow("EmployeeIdNo") = earning.EmployeeIdNo
+                updateDataRow("IdNo") = earning.IdNo
+                updateDataRow("PayrollIdNo") = earning.PayrollIdNo
+                _dtEarningUpdateTable.Rows.Add(updateDataRow)
+            End If
         End Sub
 
     End Class

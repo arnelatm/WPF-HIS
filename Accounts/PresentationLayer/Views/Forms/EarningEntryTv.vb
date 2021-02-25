@@ -327,18 +327,33 @@ Namespace PresentationLayer.Views.Forms
             Dim cellPos As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(1, 3)
             lblFactoredUnit.Visible = False
             Select Case curCalculationType
-                Case CalculationTypeSelection.Fixed
+                Case CalculationTypeSelection.FixedAmount
+                    cboBasePaymentIdNo.Visible = False
+                    cboMultiplierType.Visible = False
+                    cboUnit.Visible = False
+                    lblBasePayment.Visible = False
+                    lblDefaultQuantity.Visible = False
+                    lblMultiplier.Visible = False
+                    lblPayRate.Visible = False
+                    lblRate.Visible = False
+                    'lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                    'lblPayRate.Text = Messaging.TranslateCaption("/")
+                    txtDefaultQuantity.Visible = False
+                    txtMultiplier.Visible = False
+                    txtRate.Visible = False
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig)
+                Case CalculationTypeSelection.FixedRate
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
                     cboUnit.Visible = True
                     lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = False
+                    lblDefaultQuantity.Visible = True
                     lblMultiplier.Visible = False
                     lblPayRate.Visible = True
                     lblRate.Visible = True
                     lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
                     'lblPayRate.Text = Messaging.TranslateCaption("/")
-                    txtDefaultQuantity.Visible = False
+                    txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrig)

@@ -33,8 +33,8 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = txtEmployeeName
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             ' Add any initialization after the InitializeComponent() call.
-            EmployeeTabControl.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-            EmployeeTabControl.RightToLeft = RightToLeft.Inherit
+            tbcEmployee.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+            tbcEmployee.RightToLeft = RightToLeft.Inherit
             PresenterObj = New EmployeePresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
@@ -327,6 +327,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property OtRatePerHour As Decimal Implements IEmployeeView.OtRatePerHour
+            Get
+                If txtOtRatePerHour.Text <> "" Then
+                    Return Convert.ToSingle(txtOtRatePerHour.Text)
+                Else
+                    Return 0
+                End If
+            End Get
+            Set
+                txtOtRatePerHour.Text = FormatDecimalNumber(Value)
+            End Set
+        End Property
+
         Public Property PayCycleIdNo As Int16? Implements IEmployeeView.PayCycleIdNo
             Get
                 Return cboPayCycleidNo.GetNullableValue(Of Int16)
@@ -612,12 +625,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DisplayPhoneTab()
-            If Not EmployeeTabControl.Controls.Contains(tbpPhones) Then
-                tbpPhones.Parent = EmployeeTabControl
+            If Not tbcEmployee.Controls.Contains(tbpPhones) Then
+                tbpPhones.Parent = tbcEmployee
                 'EmployeeTabControl.TabPages.Add(tbpPhones)
                 'tbpPhones.Controls.Add(DataGridViewPhones)
             End If
-            EmployeeTabControl.SelectTab(tbpPhones)
+            tbcEmployee.SelectTab(tbpPhones)
         End Sub
 
         Private Sub tbpPhones_Leave(sender As Object, e As EventArgs) Handles tbpPhones.Leave
@@ -648,7 +661,7 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub EarningsOnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit
+        Private Sub EarningsOnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
             DisplayNetEarnings()
             'With DataGridViewEarnings
             '    Select Case .CurrentCell.OwningColumn.Name.ToLower()
@@ -659,7 +672,7 @@ Namespace PresentationLayer.Views.Forms
             'End With
         End Sub
 
-        Private Sub DeductionsOnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDeductions.CellEndEdit
+        Private Sub DeductionsOnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
             DisplayNetEarnings()
             'With DataGridViewEarnings
             '    Select Case .CurrentCell.OwningColumn.Name.ToLower()

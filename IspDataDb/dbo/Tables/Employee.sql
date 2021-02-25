@@ -39,12 +39,15 @@
     [PaySalariedOrHourly] CHAR (1)       NULL,
     [PayRateType]         CHAR (1)       NULL,
     [PayRateAmount]       MONEY          NULL,
+    [OTRatePerHour]       DECIMAL (7, 2) NULL,
     [DutyHours]           DECIMAL (5, 2) NULL,
     [Active]              BIT            NULL,
     [Create_Date]         DATETIME       NULL,
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_EmployeeIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

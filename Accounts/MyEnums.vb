@@ -21,10 +21,11 @@ Public Enum AccountStatusSelection
 End Enum
 
 Public Enum CalculationTypeSelection
+    <EnumCode("A")> FixedAmount
     <EnumCode("F")> Factor
-    <EnumCode("X")> Fixed
-    <EnumCode("G")> [Global]
+    <EnumCode("R")> FixedRate
     <EnumCode("V")> Variable
+    <EnumCode("G")> [Global]
 End Enum
 
 'Public Enum PayRateTypeSelection
