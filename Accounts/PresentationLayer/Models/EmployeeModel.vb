@@ -29,6 +29,7 @@
         Public Property NationalityCode As String
         Public Property Notes As String
         Public Property OpeningBalance As Decimal
+        Public Property OtRatePerHour As Decimal
         Public Property PayCycleIdNo As Int16?
         Public Property PayGroupIdNo As Int16?
         Public Property PaymentMethod As Char

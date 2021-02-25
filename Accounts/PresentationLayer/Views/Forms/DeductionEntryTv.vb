@@ -291,7 +291,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateCalculationTabDisplay()
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             Select Case curCalculationType
-                Case CalculationTypeSelection.Fixed
+                Case CalculationTypeSelection.FixedAmount
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
                     cboUnit.Visible = True
