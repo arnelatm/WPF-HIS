@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DeductionType As Char
         Property DefaultQuantity As Decimal
         Property IdNo As Int16
-        Property Multiplier As Decimal
+        Property Multiplier As String
         Property MultiplierType As Char
         Property Notes As String
         Property Rate As Decimal

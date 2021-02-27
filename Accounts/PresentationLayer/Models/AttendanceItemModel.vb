@@ -15,7 +15,8 @@
         Public Property DaysAbsentWithoutPay As Decimal
         Public Property DaysOff As Decimal
         Public Property DaysTotal As Decimal
-        Public Property Overtime As Decimal
+        Public Property Overtime1 As Decimal
+        Public Property Overtime2 As Decimal
         Public Property PayrollIdNo As Int16
         Public Property Sequence As Int16
         Property Errors As List(Of String)

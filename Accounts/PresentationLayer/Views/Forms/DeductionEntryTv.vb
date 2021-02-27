@@ -45,7 +45,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Multiplier As Decimal Implements IDeductionView.Multiplier
+        Public Property Multiplier As String Implements IDeductionView.Multiplier
             Get
                 Return txtMultiplier.Text
             End Get
@@ -267,13 +267,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.DataSource = _accountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
-                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvAccountIdNo.AutoComplete = True
                 dgvPayGroupIdNo.DataSource = _payGroupsByCode
                 dgvPayGroupIdNo.DisplayMember = "Name"
                 dgvPayGroupIdNo.ValueMember = "idNo"
-                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()

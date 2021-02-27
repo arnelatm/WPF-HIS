@@ -88,7 +88,7 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .IncludeInEos = Extensions.AsBool(reader("IncludeInEos")),
             .IncludeInPension = Extensions.AsBool(reader("IncludeInPension")),
-            .Multiplier = Extensions.AsDouble(reader("Multiplier")),
+            .Multiplier = Extensions.AsString(reader("Multiplier")),
             .MultiplierType = Extensions.AsString(reader("MultiplierType")),
             .Notes = Extensions.AsString(reader("Notes")),
             .Rate = Extensions.AsDouble(reader("Rate")),
