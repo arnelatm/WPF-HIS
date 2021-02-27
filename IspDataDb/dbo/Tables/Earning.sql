@@ -9,7 +9,7 @@
     [BasePaymentIdNo]  SMALLINT        NULL,
     [CalculationType]  CHAR (1)        NULL,
     [DefaultQuantity]  DECIMAL (10, 4) NULL,
-    [Multiplier]       DECIMAL (10, 4) NULL,
+    [Multiplier]       VARCHAR (10)    NULL,
     [MultiplierType]   CHAR (1)        NULL,
     [IncludeInEos]     BIT             NULL,
     [IncludeInPension] BIT             NULL,
@@ -21,6 +21,8 @@
     [DateTimeStamp]    ROWVERSION      NULL,
     CONSTRAINT [PK_Earning] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
