@@ -29,7 +29,7 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            data.AccountReconciliationItems = GetRecordsWithIdNo(idNo, "Sequence")
+            data.AccountReconciliationItems = GetRecordsWithGroupIdNo(idNo, "Sequence")
             Return data
         End Function
 
@@ -85,8 +85,8 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of AccountReconciliationItem) _
-            Implements IDaoChild(Of AccountReconciliationItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of AccountReconciliationItem) _
+            Implements IDaoChild(Of AccountReconciliationItem).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If

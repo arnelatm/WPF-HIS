@@ -16,8 +16,8 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateSalesDepositTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertSalesDepositTVP"
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) _
-            As List(Of SalesDeposit) Implements IDaoChild(Of SalesDeposit).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) _
+            As List(Of SalesDeposit) Implements IDaoChild(Of SalesDeposit).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If

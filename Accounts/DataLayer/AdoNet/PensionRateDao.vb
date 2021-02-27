@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "UpdatePensionRateTvp"
         Protected DboTvpInsertFileName As String = "InsertPensionRateTvp"
 
-        Public Function GetRecordsWithIdNo(pensionSchemeIdNo, Optional sortKey = Nothing) As List(Of PensionRate) Implements IDaoChild(Of PensionRate).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(pensionSchemeIdNo, Optional sortKey = Nothing) As List(Of PensionRate) Implements IDaoChild(Of PensionRate).GetRecordsWithGroupIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If

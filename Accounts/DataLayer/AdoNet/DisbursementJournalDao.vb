@@ -93,8 +93,8 @@ Namespace DataLayer.AdoNet
             If data Is Nothing Then
                 Debugger.Break()
             Else
-                Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-                Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+                Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+                Dim oi = oiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
                 data.JournalItems = ji
                 data.DjOiItems = oi
             End If

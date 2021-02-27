@@ -45,7 +45,7 @@ Namespace PresentationLayer
         End Sub
 
         Private Sub OnBeforeAdd() Handles MyBase.BeforeAdd
-            Dim gaModel = Model.GetRecordsWithIdNo(Of GroupAccessModel)(0, "SecurityObjectName")
+            Dim gaModel = Model.GetRecordsWithGroupIdNo(Of GroupAccessModel)(0, "SecurityObjectName")
             Dim gaView = New List(Of GroupAccessView)
             View.GroupAccesses = GlobalVariables.Mapper.Map(gaModel, gaView)
         End Sub

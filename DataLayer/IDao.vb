@@ -11,6 +11,13 @@
 
 End Interface
 
+Public Interface IDaoGetRecordByIdNo(Of TBiz)
+
+    ' gets a specific record data
+    Function GetRecordByIdNo(idNo) As List(Of TBiz)
+
+End Interface
+
 Public Interface IDaoRead(Of TBiz)
 
     ' gets a specific record data
@@ -31,7 +38,7 @@ End Interface
 Public Interface IDaoChild(Of TBiz)
     ' gets a specific record data
 
-    Function GetRecordsWithIdNo(idNo, Optional ByVal sortExpression = Nothing) As List(Of TBiz)
+    Function GetRecordsWithGroupIdNo(idNo, Optional ByVal sortExpression = Nothing) As List(Of TBiz)
 
     Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
 

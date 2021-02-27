@@ -419,6 +419,8 @@
     <Build Include="dbo\Stored Procedures\UpdateInsertPayrollDeductionTVP.sql" />
     <Build Include="dbo\User Defined Types\PayrollDeductionUpdate.sql" />
     <Build Include="dbo\User Defined Types\PayrollDeductionInsert.sql" />
+    <Build Include="dbo\Stored Procedures\UpdatePayrollDeductionTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertPayrollDeductionTVP.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

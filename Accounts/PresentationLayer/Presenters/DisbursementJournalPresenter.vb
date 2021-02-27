@@ -732,11 +732,11 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetDjOiItems(djOiIdNo As Int32) As List(Of DjOiItemModel)
-            Return OiItemModel.GetRecordsWithIdNo(Of DjOiItemModel)(djOiIdNo, "Sequence")
+            Return OiItemModel.GetRecordsWithGroupIdNo(Of DjOiItemModel)(djOiIdNo, "Sequence")
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return _journalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _journalItemModel.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetSupplierOpenInvoices(dView As List(Of DjOiItemView)) As List(Of DjOiItemView)

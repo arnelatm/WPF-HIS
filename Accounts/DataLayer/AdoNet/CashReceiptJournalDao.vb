@@ -42,8 +42,8 @@ Namespace DataLayer.AdoNet
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim jiDao = New JournalItemDao({"CashReceiptJournalItem_View", "dbo.UpdateCashReceiptJournalItemTVP", "dbo.InsertCashReceiptJournalItemTVP"})
             Dim oiDao = New CsrOiItemDao
-            Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            Dim oi = oiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+            Dim oi = oiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
             data.JournalItems = ji
             data.CsrOiItems = oi
             Return data

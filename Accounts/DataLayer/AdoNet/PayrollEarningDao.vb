@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of PayrollEarning) Implements IDaoChild(Of PayrollEarning).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PayrollEarning) Implements IDaoChild(Of PayrollEarning).GetRecordsWithGroupIdNo
             Dim sql As String =
                     " SELECT " &
                     "Amount," &

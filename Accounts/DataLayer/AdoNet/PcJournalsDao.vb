@@ -22,7 +22,7 @@ Namespace DataLayer.AdoNet
         Public Sub New()
         End Sub
 
-        Public Function GetRecordsWithIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of PcJournal) Implements IDaoChild(Of PcJournal).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of PcJournal) Implements IDaoChild(Of PcJournal).GetRecordsWithGroupIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If

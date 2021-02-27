@@ -3,6 +3,7 @@
     [DeductionIdNo] SMALLINT   NOT NULL,
     [EmployeeIdNo]  INT        NOT NULL,
     [IDNo]          INT        NOT NULL,
+    [Rate]          DECIMAL    NOT NULL,
     [Sequence]      INT        NOT NULL,
     PRIMARY KEY CLUSTERED ([IDNo] ASC));
 

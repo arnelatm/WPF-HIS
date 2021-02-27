@@ -66,7 +66,7 @@ Namespace PresentationLayer.Presenters
         ''' </summary>
         ''' <param name="journalIdNo">JournalIdNo id to display.</param>
         Public Shadows Sub Display(journalIdNo As Int32)
-            View.JournalItems = ModelPresenter.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            View.JournalItems = ModelPresenter.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
         'Public Sub MakeJournalItems(ByVal idNo As Int32, ByVal AccountIdNo As Int16, ByVal totalSales As Decimal)

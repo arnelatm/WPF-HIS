@@ -297,8 +297,8 @@ Public Class Model
     '    End If
     '    Return tlData
     'End Function
-    Public Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IModel.GetRecordsWithIdNo
-        Dim data = DataService.GetRecordsWithIdNo(Of TM)(idNo, sortKey)
+    Public Function GetRecordsWithGroupIdNo(Of TM As New)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IModel.GetRecordsWithGroupIdNo
+        Dim data = DataService.GetRecordsWithGroupIdNo(Of TM)(idNo, sortKey)
         Return data
     End Function
 
@@ -306,9 +306,9 @@ Public Class Model
         Return Service.GetSortedRecordPosition(idNo, tableName, sortOrderKey)
     End Function
 
-    Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType _
-        Implements IModel.GetSqlValue
-        Return Service.GetSqlValue(Of TType)(sqlStatement, tableName, condition)
+    Public Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType _
+        Implements IModel.GetFieldValue
+        Return Service.GetFieldValue(Of TType)(sqlStatement, tableName, condition)
     End Function
 
     Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList _

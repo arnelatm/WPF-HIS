@@ -177,6 +177,7 @@ CREATE TYPE [dbo].[EmployeeDeductionInsert] AS TABLE(
 	[Amount] [money] NULL,
 	[DeductionIdNo] [smallint] NOT NULL,
 	[EmployeeIdNo] [int] NOT NULL,
+	[Rate] decimal NOT NULL,
 	[Sequence] [int] NOT NULL
 )
 GO
@@ -186,6 +187,7 @@ CREATE TYPE [dbo].[EmployeeDeductionUpdate] AS TABLE(
 	[DeductionIdNo] [smallint] NOT NULL,
 	[EmployeeIdNo] [int] NOT NULL,
 	[IDNo] [int] NOT NULL,
+	[Rate] decimal NOT NULL,
 	[Sequence] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED 
 (

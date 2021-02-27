@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
         Protected TableFileName As String = "Reconciled"
         Protected DboTvpInsertFileName As String = "dbo.InsertReconciledTVP"
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of Reconciled) Implements IDaoChild(Of Reconciled).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of Reconciled) Implements IDaoChild(Of Reconciled).GetRecordsWithGroupIdNo
             Throw New NotImplementedException
         End Function
 

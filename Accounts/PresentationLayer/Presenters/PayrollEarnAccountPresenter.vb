@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
         '''' </summary>
         '''' <param name="earningIdNo">EarningIdNo id to display.</param>
         Public Overloads Sub Display(earningIdNo As Int32)
-            View.PayrollEarnAccounts = Model.GetRecordsWithIdNo(Of PayrollEarnAccountModel)(earningIdNo, "EarningIdNo")
+            View.PayrollEarnAccounts = Model.GetRecordsWithGroupIdNo(Of PayrollEarnAccountModel)(earningIdNo, "EarningIdNo")
         End Sub
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

@@ -25,7 +25,7 @@ Namespace PresentationLayer.Presenters
         ''' </summary>
         ''' <param name="DistributionSchemeIdNo">DistributionSchemeIdNo id to display.</param>
         Public Shadows Sub Display(distributionSchemeIdNo As Int32)
-            View.DistributionSchemeItems = Model.GetRecordsWithIdNo(Of DistributionSchemeItemModel)(distributionSchemeIdNo, "Sequence")
+            View.DistributionSchemeItems = Model.GetRecordsWithGroupIdNo(Of DistributionSchemeItemModel)(distributionSchemeIdNo, "Sequence")
         End Sub
 
         'Public Overrides Function ChangesMade() As Boolean

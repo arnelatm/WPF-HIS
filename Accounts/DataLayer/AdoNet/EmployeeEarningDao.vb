@@ -1,5 +1,4 @@
 ﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
@@ -10,28 +9,29 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeEarningDao
         Inherits AccountsDao
-        Implements IDaoChild(Of EmployeeEarning)
+        Implements IDaoChild(Of EmployeeEarning), IDaoGetRecordByIdNo(Of EmployeeEarning)
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of EmployeeEarning) Implements IDaoChild(Of EmployeeEarning).GetRecordsWithIdNo
+        Const FieldList As String = "Amount," &
+                                    "EarningCode," &
+                                    "EarningIdNo," &
+                                    "EarningName," &
+                                    "EarningNameAra," &
+                                    "EarningType," &
+                                    "EmployeeIdNo," &
+                                    "IdNo," &
+                                    "Rate," &
+                                    "Sequence," &
+                                    "Unit"
+
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of EmployeeEarning) Implements IDaoChild(Of EmployeeEarning).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
             Dim filter = "EarningType='" + GlobalFunctions.EnumToCode(EarningTypeSelection.Regular) + "'"
             Dim sql As String =
-                    " SELECT " &
-                    "Amount," &
-                    "EarningCode," &
-                    "EarningIdNo," &
-                    "EarningName," &
-                    "EarningNameAra," &
-                    "EarningType," &
-                    "EmployeeIdNo," &
-                    "IdNo," &
-                    "Rate," &
-                    "Sequence," &
-                    "Unit" &
+                    " SELECT " & FieldList &
                     " FROM [EmployeeEarning_View]" &
                     " WHERE EmployeeIdNo = @IdNo and " & filter &
                     " ORDER BY " & sortExpression
@@ -45,6 +45,15 @@ Namespace DataLayer.AdoNet
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of EmployeeEarning).InsertTvp
             Return Db.InsertTvp("InsertEmployeeEarningTVP", tvpTable)
+        End Function
+
+        Public Function GetRecordByIdNo(idNo As Object) As List(Of EmployeeEarning) Implements IDaoGetRecordByIdNo(Of EmployeeEarning).GetRecordByIdNo
+            Dim sql As String =
+                    " SELECT Top 1 " & FieldList &
+                    " FROM [EmployeeEarning_View]" &
+                    " WHERE IdNo = @IdNo "
+            Dim params() As Object = {"@IdNo", idNo}
+            Return Db.Read(sql, Make, params).ToList()
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeEarning) =

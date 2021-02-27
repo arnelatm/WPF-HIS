@@ -51,7 +51,7 @@ Namespace DataLayer.AdoNet
                 Debugger.Break()
             Else
                 Dim pcDao = New PcJournalsDao()
-                data.PcJournals = pcDao.GetRecordsWithIdNo(0)
+                data.PcJournals = pcDao.GetRecordsWithGroupIdNo(0)
             End If
             Return data
         End Function

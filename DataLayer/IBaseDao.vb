@@ -22,6 +22,8 @@ Public Interface IBaseDao
 
     Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 
+    Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject
+
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
     Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject
@@ -58,7 +60,7 @@ Public Interface IBaseDao
 
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
 
-    Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
+    Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
 
     Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
 

@@ -91,7 +91,7 @@ Namespace PresentationLayer.Presenters
             retVal = UpdateChildData(_apJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
                 Dim newJournalItem As List(Of JournalItemModel)
-                newJournalItem = _apJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
+                newJournalItem = _apJournalItemModel.GetRecordsWithGroupIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                 If AddMode Then
                     For Each item In newJournalItem
                         If IsAccountsPayableAccount(item.AccountIdNo) Then

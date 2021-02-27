@@ -18,8 +18,8 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateCsrOiItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertCsrOiItemTVP"
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) _
-            As List(Of CsrOiItem) Implements IDaoChild(Of CsrOiItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) _
+            As List(Of CsrOiItem) Implements IDaoChild(Of CsrOiItem).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If

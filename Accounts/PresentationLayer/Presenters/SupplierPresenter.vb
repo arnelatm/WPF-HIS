@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetSupplierBalance(idNo As Integer)
-            Return Model.GetSqlValue(Of Decimal)("Sum(Credit-Debit)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString())
+            Return Model.GetFieldValue(Of Decimal)("Sum(Credit-Debit)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString())
         End Function
 
         Private Function FunctionOnSuccessfulUpdate() Handles MyBase.RecordUpdatedSuccessfully

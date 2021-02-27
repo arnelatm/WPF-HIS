@@ -45,7 +45,7 @@ Namespace PresentationLayer.Presenters
         ''' </summary>
         ''' <param name="journalIdNo">JournalIdNo id to display.</param>
         Public Overloads Sub Display(journalIdNo As Int32)
-            View.JournalItems = Model.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            View.JournalItems = Model.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

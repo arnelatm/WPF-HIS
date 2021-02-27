@@ -48,7 +48,7 @@ Namespace DataLayer.AdoNet
 
         'End Sub
 
-        'Public Function GetRecordsWithIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+        'Public Function GetRecordsWithGroupIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithGroupIdNo
         '    If sortKey Is Nothing Then
         '        sortKey = "Sequence"
         '    End If

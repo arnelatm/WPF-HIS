@@ -83,19 +83,19 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetEmployeeBalance(idNo As Integer)
-            Return Model.GetSqlValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
+            Return Model.GetFieldValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
         End Function
 
         Public Function GetEmployeeDeductions(ByVal idNo As Int32) As List(Of EmployeeDeductionModel)
-            Return _employeeDeductionModel.GetRecordsWithIdNo(Of EmployeeDeductionModel)(idNo, "Sequence")
+            Return _employeeDeductionModel.GetRecordsWithGroupIdNo(Of EmployeeDeductionModel)(idNo, "Sequence")
         End Function
 
         Public Function GetEmployeeEarnings(ByVal idNo As Int32) As List(Of EmployeeEarningModel)
-            Return _employeeEarningModel.GetRecordsWithIdNo(Of EmployeeEarningModel)(idNo, "Sequence")
+            Return _employeeEarningModel.GetRecordsWithGroupIdNo(Of EmployeeEarningModel)(idNo, "Sequence")
         End Function
 
         Public Function GetEmployeePhones(ByVal idNo As Int16) As List(Of EmployeePhoneModel)
-            Return _employeePhoneModel.GetRecordsWithIdNo(Of EmployeePhoneModel)(idNo, "Sequence")
+            Return _employeePhoneModel.GetRecordsWithGroupIdNo(Of EmployeePhoneModel)(idNo, "Sequence")
         End Function
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave

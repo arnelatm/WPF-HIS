@@ -46,8 +46,8 @@ Namespace AdoNet
         '    Return Db.Read(sql, Make, params).ToList()
         'End Function
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) _
-            As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) _
+            As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "IdNo"
             End If

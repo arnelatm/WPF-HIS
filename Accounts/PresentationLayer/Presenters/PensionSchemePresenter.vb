@@ -82,7 +82,7 @@ Namespace PresentationLayer.Presenters
         'End Function
 
         'Public Function GetPensionRates(pensionSchemeIdNo As Int32) As List(Of PensionRateModel)
-        '    Return _pensionRateModel.GetRecordsWithIdNo(Of PensionRateModel)(pensionSchemeIdNo, "Sequence")
+        '    Return _pensionRateModel.GetRecordsWithGroupIdNo(Of PensionRateModel)(pensionSchemeIdNo, "Sequence")
         'End Function
 
         'Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd

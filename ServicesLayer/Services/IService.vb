@@ -50,7 +50,7 @@ Namespace Services
 
         Function GetFilteredRecords(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) As Object
 
-        Function GetRecordsWithIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) As List(Of TM)
+        Function GetRecordsWithGroupIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) As List(Of TM)
 
         Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
@@ -60,7 +60,7 @@ Namespace Services
 
         Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
 
-        Function GetSqlValue(Of TType)(ByVal sqlStatement As String, tableName As String, condition As String) As TType
+        Function GetFieldValue(Of TType)(ByVal sqlStatement As String, tableName As String, condition As String) As TType
 
         Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
 

@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim peaDao = New PayrollEarnAccountDao()
-            'data.PayrollEarnAccounts = peaDao.GetRecordsWithIdNo(idNo, "Sequence")
+            'data.PayrollEarnAccounts = peaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
             Return data
         End Function
 

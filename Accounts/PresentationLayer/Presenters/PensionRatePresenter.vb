@@ -24,7 +24,7 @@ Namespace PresentationLayer.Presenters
         ''' </summary>
         ''' <param name="pensionSchemeIdNo">PensionSchemeIdNo id to display.</param>
         Public Shadows Sub Display(pensionSchemeIdNo As Int32)
-            View.PensionRates = Model.GetRecordsWithIdNo(Of PensionRateModel)(pensionSchemeIdNo, "Sequence")
+            View.PensionRates = Model.GetRecordsWithGroupIdNo(Of PensionRateModel)(pensionSchemeIdNo, "Sequence")
         End Sub
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

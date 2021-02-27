@@ -90,7 +90,7 @@ Namespace PresentationLayer.Presenters
                 Next
             Else
                 Dim oldReconciliationItems As New List(Of AccountReconciliationItemModel)
-                oldReconciliationItems = ModelPresenter.GetRecordsWithIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
+                oldReconciliationItems = ModelPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
                 For Each acctReconItem In allAcctReconItems
                     Dim found As Boolean = False
                     For Each item As AccountReconciliationItemModel In oldReconciliationItems

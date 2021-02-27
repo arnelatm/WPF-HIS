@@ -24,7 +24,7 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Dim attendanceDao = New AttendanceItemDao
-            Dim attendance As List(Of AttendanceItem) = attendanceDao.GetRecordsWithIdNo(data.IdNo, "EmployeeName")
+            Dim attendance As List(Of AttendanceItem) = attendanceDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
             data.PayrollAttendance = attendance
             Return data
         End Function

@@ -180,7 +180,7 @@ Namespace PresentationLayer.Views.Forms
             'Dim earnings = earningDao.GetAll()
             'Dim NumberOfEmployees = Int(activeEmployees.Count() / 2)
             'For i = 1 To NumberOfEmployees
-            '    'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(emp, "sequence")
+            '    'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithGroupIdNo(emp, "sequence")
             '    'Dim filter As String
             '    'filter = "EmployeeIdNo = " & emp.ToString()
             '    'Dim employeeEarnings = MyPresenter.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})

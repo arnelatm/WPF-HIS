@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim prDao = New PensionRateDao()
-            data.PensionRates = prDao.GetRecordsWithIdNo(idNo, "Sequence")
+            data.PensionRates = prDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
             Return data
         End Function
 

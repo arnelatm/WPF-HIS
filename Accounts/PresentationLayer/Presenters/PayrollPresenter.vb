@@ -154,7 +154,7 @@ Namespace PresentationLayer.Presenters
                 _reinitialize = False
             End If
             For i = 1 To numberOfEmployees
-                'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(emp, "sequence")
+                'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithGroupIdNo(emp, "sequence")
                 'Dim filter As String
                 'filter = "EmployeeIdNo = " & emp.ToString()
                 'Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
