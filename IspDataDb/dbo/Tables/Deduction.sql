@@ -10,7 +10,7 @@
     [BasePaymentIdNo]  SMALLINT        NULL,
     [CalculationType]  CHAR (1)        NULL,
     [DefaultQuantity]  DECIMAL (10, 4) NULL,
-    [Multiplier]       DECIMAL (10, 4) NULL,
+    [Multiplier]       VARCHAR (10)    NULL,
     [MultiplierType]   CHAR (1)        NULL,
     [Rate]             MONEY           NULL,
     [Unit]             CHAR (1)        NULL,
@@ -19,6 +19,8 @@
     [DateTimeStamp]    ROWVERSION      NULL,
     CONSTRAINT [PK_Deduction] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
