@@ -65,12 +65,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Multiplier As Decimal Implements IEarningView.Multiplier
+        Public Property Multiplier As String Implements IEarningView.Multiplier
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtMultiplier.Text), _nfi)
+                Return txtMultiplier.Text  ' Convert.ToDecimal(NumParser(Of Decimal)(txtMultiplier.Text), _nfi)
             End Get
             Set
-                txtMultiplier.Text = Value.ToString("F4")
+                txtMultiplier.Text = Value  'Value.ToString("F4")
             End Set
         End Property
 
@@ -296,13 +296,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.DataSource = _accountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
-                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvAccountIdNo.AutoComplete = True
                 dgvPayGroupIdNo.DataSource = _payGroupsByCode
                 dgvPayGroupIdNo.DisplayMember = "Name"
                 dgvPayGroupIdNo.ValueMember = "idNo"
-                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
@@ -323,8 +320,8 @@ Namespace PresentationLayer.Views.Forms
             tlpCalculation.Visible = False
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
-            Dim cellPosOrig As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
-            Dim cellPos As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(1, 3)
+            Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
+            Dim cellPosUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(1, 3)
             lblFactoredUnit.Visible = False
             Select Case curCalculationType
                 Case CalculationTypeSelection.FixedAmount
@@ -341,7 +338,8 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = False
                     txtRate.Visible = False
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig)
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    tlpCalculation.SetColumnSpan(cboUnit, 1)
                 Case CalculationTypeSelection.FixedRate
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
@@ -356,7 +354,8 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig)
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    tlpCalculation.SetColumnSpan(cboUnit, 1)
                 Case CalculationTypeSelection.Factor
                     cboBasePaymentIdNo.Visible = True
                     cboMultiplierType.Visible = True
@@ -367,7 +366,8 @@ Namespace PresentationLayer.Views.Forms
                     lblPayRate.Visible = False
                     lblRate.Visible = False
                     lblFactoredUnit.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPos)
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosUnit)
+                    tlpCalculation.SetColumnSpan(cboUnit, 3)
                     cboUnit.Visible = True
                     'SwapPosition(cboFactoredUnit,cboUnit)
                     txtDefaultQuantity.Visible = True
@@ -386,7 +386,8 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig)
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    tlpCalculation.SetColumnSpan(cboUnit, 1)
                 Case CalculationTypeSelection.Global
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
@@ -400,7 +401,8 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrig)
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    tlpCalculation.SetColumnSpan(cboUnit, 1)
             End Select
             tlpCalculation.Visible = True
             floCalculation.Visible = True

@@ -34,7 +34,8 @@ Namespace DataLayer.AdoNet
                     "EmployeeName," &
                     "EmployeeNameAra," &
                     "IdNo," &
-                    "Overtime," &
+                    "Overtime1," &
+                    "Overtime2," &
                     "PayrollIdNo," &
                     "ROW_NUMBER() over(Order by " & sortExpression & ") As 'Sequence'" &
                     " FROM [AttendanceItem_View]" &
@@ -64,7 +65,8 @@ Namespace DataLayer.AdoNet
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Overtime = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Overtime")),
+            .Overtime1 = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Overtime1")),
+            .Overtime2 = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Overtime2")),
             .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayrollIdNo")),
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("Sequence"))
            }
