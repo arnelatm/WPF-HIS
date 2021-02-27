@@ -2,7 +2,9 @@
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
@@ -560,6 +562,12 @@ Namespace PresentationLayer.Views.Forms
                 dgvDeductionIdNo.ValueMember = "IdNo"
                 dgvDeductionIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvDedUnit.DataSource = _unit
+                dgvDedUnit.DisplayOnly = True
+                dgvDedUnit.ValueMember = "Code"
+                dgvDedUnit.DisplayMember = "Name"
+                dgvDedUnit.DisplayStyleForCurrentCellOnly = True
+                dgvSequenceDeduction.DisplayOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -584,9 +592,11 @@ Namespace PresentationLayer.Views.Forms
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvUnit.DataSource = _unit
-                dgvDedUnit.DataSource = _unit
-                dgvUnit.ReadOnly = True
-                dgvDedUnit.ReadOnly = True
+                dgvUnit.ValueMember = "Code"
+                dgvUnit.DisplayMember = "Name"
+                dgvUnit.DisplayStyleForCurrentCellOnly = True
+                dgvUnit.DisplayOnly = True
+                dgvSequenceEarning.DisplayOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -695,6 +705,54 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DataGridViewPhoneDisplay_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
             DisplayPhoneTab()
+        End Sub
+
+        Private Sub DgvEarning_OnBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewEarnings.CellBeginEdit
+            With DataGridViewEarnings
+                Dim nIndex = .CurrentRow.Index
+                Select Case .CurrentCell.OwningColumn.Name
+                    Case $"dgvEarningAmount"
+                        Dim earnIdNo = RegularEmployeeEarnings(nIndex).EarningIdNo
+                        Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
+                        If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+                            Messaging.Show(True, $"MsgAmountChangeNotAllowed")
+                            .CancelEdit()
+                        End If
+
+                    Case $"dgvEarningRate"
+                        Dim earnIdNo = RegularEmployeeEarnings(nIndex).EarningIdNo
+                        Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
+                        If calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
+                            Messaging.Show(True, $"MsgRateChangeNotAllowed")
+                            .CancelEdit()
+                        End If
+
+                End Select
+            End With
+        End Sub
+
+        Private Sub DgvDeduction_OnBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDeductions.CellBeginEdit
+            With DataGridViewEarnings
+                Dim nIndex = .CurrentRow.Index
+                Select Case .CurrentCell.OwningColumn.Name
+                    Case "dgvDeductionAmount"
+                        Dim earnIdNo = RegularEmployeeEarnings(nIndex).EarningIdNo
+                        Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
+                        If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+                            Messaging.Show(True, $"MsgAmountChangeNotAllowed")
+                            .CancelEdit()
+                        End If
+
+                    Case "dgvDeductionRate"
+                        Dim earnIdNo = RegularEmployeeEarnings(nIndex).EarningIdNo
+                        Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
+                        If calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
+                            Messaging.Show(True, $"MsgRateChangeNotAllowed")
+                            .CancelEdit()
+                        End If
+
+                End Select
+            End With
         End Sub
 
     End Class

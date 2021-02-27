@@ -8,34 +8,34 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class DeductionDao
-        Implements IDao(Of Deduction)
+        Implements IDao(Of Deduction), IDaoGetRecords(Of Deduction)
 
         Private ReadOnly _db As New Db()
 
+        Const FieldList As String = "AccountIdNo," &
+                                    "BasePaymentIdNo," &
+                                    "CalculationType," &
+                                    "DefaultQuantity," &
+                                    "DeductionCode," &
+                                    "DeductionName," &
+                                    "DeductionNameAra," &
+                                    "DeductionType," &
+                                    "IdNo," &
+                                    "Multiplier," &
+                                    "MultiplierType," &
+                                    "Notes," &
+                                    "Rate," &
+                                    "Unit," &
+                                    "UsePayGroups"
+
         Public Function GetRecordById(idNo) As Deduction Implements IDao(Of Deduction).GetRecordById
-            Dim sql As String =
-                    "SELECT " &
-                    "AccountIdNo," &
-                    "BasePaymentIdNo," &
-                    "CalculationType," &
-                    "DefaultQuantity," &
-                    "DeductionCode," &
-                    "DeductionName," &
-                    "DeductionNameAra," &
-                    "DeductionType," &
-                    "IdNo," &
-                    "Multiplier," &
-                    "MultiplierType," &
-                    "Notes," &
-                    "Rate," &
-                    "Unit," &
-                    "UsePayGroups" &
-                    " FROM [Deduction]" &
-                    " WHERE IdNo = @IdNo"
+            Dim sql As String = "SELECT " & FieldList &
+                                " FROM [Deduction]" &
+                                " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim pdaDao = New PayrollDeductAccountDao()
-            data.PayrollDeductAccounts = pdaDao.GetRecordsWithIdNo(idNo, "Sequence")
+            data.PayrollDeductAccounts = pdaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
             Return data
         End Function
 
@@ -105,6 +105,13 @@ Namespace DataLayer.AdoNet
                                     "@Unit", Deduction.Unit,
                                     "@UsePayGroups", Deduction.UsePayGroups
                                 }
+        End Function
+
+        Public Function GetRecords(Optional filter As String = Nothing) As List(Of Deduction) Implements IDaoGetRecords(Of Deduction).GetRecords
+            Dim sql As String = "SELECT " & FieldList &
+                                " FROM [Deduction]" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return _db.Read(sql, Make).ToList()
         End Function
 
     End Class

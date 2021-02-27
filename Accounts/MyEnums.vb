@@ -86,7 +86,7 @@ Public Enum DeductionTypeSelection
     <EnumCode("V")> Voluntary
     <EnumCode("F")> Fines
     <EnumCode("S")> SalaryLoans
-    <EnumCode("E")> EarningsAdjustment
+    <EnumCode("A")> AbsencesDeduction
     <EnumCode("O")> Others
     <EnumCode("P")> Pension
     '<EnumCode("T")> IncomeTax

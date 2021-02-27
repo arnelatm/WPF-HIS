@@ -20,6 +20,7 @@ UPDATE a
 SET a.Amount = B.Amount,
 	a.EmployeeIdNo = @GroupIdNo,
 	a.DeductionIdNo = B.DeductionIdNo,
+	a.Rate = B.Rate,
 	a.[Sequence] = B.[Sequence]
 from EmployeeDeduction a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo

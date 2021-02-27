@@ -30,8 +30,8 @@ Namespace DataLayer.AdoNet
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim jiDao = New JournalItemDao({"SalesJournalItem_View", "dbo.UpdateSalesJournalItemTVP", "dbo.InsertSalesJournalItemTVP"})
             Dim sdDao = New SalesDepositDao
-            Dim ji = jiDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            Dim sd = sdDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+            Dim sd = sdDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
             data.JournalItems = ji
             data.SalesDeposits = sd
             'For Each item In data.SalesDeposits
@@ -111,9 +111,9 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        'Public Function GetRecordsWithIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+        'Public Function GetRecordsWithGroupIdNo(idNo As Integer, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithGroupIdNo
         '    Dim jiDao = New SalesJournalItemDao()
-        '    Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
+        '    Return jiDao.GetRecordsWithGroupIdNo(idNo, sortExpression)
         'End Function
 
         'Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp

@@ -17,7 +17,7 @@ Namespace AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            data.GroupAccesses = GetRecordsWithIdNo(idNo, "SecurityObjectName")
+            data.GroupAccesses = GetRecordsWithGroupIdNo(idNo, "SecurityObjectName")
             Return data
         End Function
 
@@ -81,8 +81,8 @@ Namespace AdoNet
                                     "@SecurityGroupNameAra", securityGroup.SecurityGroupNameAra}
         End Function
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) _
-            As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) _
+            As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "IdNo"
             End If

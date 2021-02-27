@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
         '''' </summary>
         '''' <param name="csrOiIdNo">CsrOiIdNo id to display.</param>
         Public Shadows Sub Display(csrOiIdNo As Int32)
-            View.CsrOiItems = Model.GetRecordsWithIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
+            View.CsrOiItems = Model.GetRecordsWithGroupIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
         End Sub
 
         Public Function GetCustomerOpenInvoices(ByVal customerIdNo As Int32) As List(Of CsrOiItemModel)

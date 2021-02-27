@@ -36,7 +36,7 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim jiDao = New JournalItemDao({"ArJournalItem_View", "dbo.UpdateArJournalItemTVP", "dbo.InsertArJournalItemTVP"})
-            data.JournalItems = jiDao.GetRecordsWithIdNo(idNo, "Sequence")
+            data.JournalItems = jiDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
             For Each item In data.JournalItems
                 data.TotalDebits += item.Debit
                 data.TotalCredits += item.Credit
@@ -178,9 +178,9 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        'Public Function GetRecordsWithIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithIdNo
+        'Public Function GetRecordsWithGroupIdNo(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of JournalItem) Implements IDaoChild(Of JournalItem).GetRecordsWithGroupIdNo
         '    Dim jiDao = New ArJournalItemDao()
-        '    Return jiDao.GetRecordsWithIdNo(idNo, sortExpression)
+        '    Return jiDao.GetRecordsWithGroupIdNo(idNo, sortExpression)
         'End Function
 
         'Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Int32) As Integer Implements IDaoChild(Of JournalItem).DelUpdateTvp

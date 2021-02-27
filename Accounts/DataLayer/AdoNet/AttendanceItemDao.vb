@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordsWithIdNo(PayrollIdNo, Optional sortExpression = Nothing) As List(Of AttendanceItem) Implements IDaoChild(Of AttendanceItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(PayrollIdNo, Optional sortExpression = Nothing) As List(Of AttendanceItem) Implements IDaoChild(Of AttendanceItem).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "EmployeeName"
             End If

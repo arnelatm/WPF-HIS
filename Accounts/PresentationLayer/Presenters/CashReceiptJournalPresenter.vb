@@ -673,11 +673,11 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetCsrOiItems(csrOiIdNo As Int32) As List(Of CsrOiItemModel)
-            Return _openInvItemModel.GetRecordsWithIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
+            Return _openInvItemModel.GetRecordsWithGroupIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return _journalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _journalItemModel.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)

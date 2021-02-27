@@ -77,7 +77,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgEmptyEmployeeAttendance", "Sorry, employee attendance not yet generated.  You must first generate attendance before generating payroll!", "Generate Error")
         Messaging.AddMessage("AskIfRegeneratePayroll", "Payroll has already been generated. Are you sure you want to re-generate and update previous payroll?", "Please Confirm!")
         Messaging.AddMessage("MsgPayrollGenerationCompleted", "Payroll Generation Completed!", "Finished")
-
+        Messaging.AddMessage("MsgAmountChangeNotAllowed", "Sorry, you can't change the amount field for 'fixed rate' entries. You are only allowed to change the rate field.", "Warning")
+        Messaging.AddMessage("MsgRateChangeNotAllowed", "Sorry, you can't change the rate field for 'fixed amount' entries. You are only allowed to change the amount field.", "Warning")
     End Sub
 
     'Public Shared Sub CreateEnums()

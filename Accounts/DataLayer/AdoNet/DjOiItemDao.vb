@@ -25,7 +25,7 @@ Namespace DataLayer.AdoNet
             DboTvpInsertName = dataNames(2).ToString()
         End Sub
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of DjOiItem) Implements IDaoChild(Of DjOiItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of DjOiItem) Implements IDaoChild(Of DjOiItem).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If

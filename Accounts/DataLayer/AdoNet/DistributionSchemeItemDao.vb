@@ -50,7 +50,7 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make).ToList()
         'End Function
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If

@@ -150,6 +150,22 @@ Namespace AdoNet
             Return obj
         End Function
 
+        Private Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IBaseDao.GetRecordFieldsFiltered
+            Dim sql As String =
+                    " Select " & fieldList & " FROM [" & tableName & "] " &
+                    " Where " & filter
+            Dim values As Object
+            values = _db.SqlRead(sql)
+            Dim fields = fieldList.Split(",")
+            Dim obj As New ExpandoObject
+            Dim i As Int16 = 0
+            For Each item In fields
+                CreateDynamicObject(obj, item, values(i))
+                i = i + 1
+            Next
+            Return obj
+        End Function
+
         Public Sub CreateDynamicObject(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As String)
             CType(obj, IDictionary(Of String, Object))(propertyName) = propertyValue
         End Sub
@@ -390,14 +406,15 @@ Namespace AdoNet
         '        End Try
         '    End Using
         'End Sub
-        Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) _
+
+        Public Function GetFieldValue(Of TType)(returnFieldName As String, tableName As String, condition As String) _
             As TType _
-            Implements IBaseDao.GetSqlValue
+            Implements IBaseDao.GetFieldValue
             Dim sql As String =
-                    " Select " & sqlStatement & " FROM [" & tableName & "] " &
+                    " Select " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & condition
             Dim x = _db.Scalar(sql)
-            If IsDBNull(x) Then
+            If IsDBNull(x) Or x Is Nothing Then
                 Return Nothing
             End If
             Return Convert.ChangeType(x, GetType(TType))

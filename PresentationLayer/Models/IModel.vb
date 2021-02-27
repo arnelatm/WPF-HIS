@@ -71,11 +71,11 @@ Public Interface IModel
 
     Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fields() As String)
 
-    Function GetRecordsWithIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) As List(Of TM)
+    Function GetRecordsWithGroupIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) As List(Of TM)
 
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
 
-    Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
+    Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
 
     Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
 

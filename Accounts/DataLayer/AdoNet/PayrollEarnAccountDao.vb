@@ -21,7 +21,7 @@ Namespace DataLayer.AdoNet
             DboTvpInsertFileName = "dbo.InsertPayrollEarnAccountTVP"
         End Sub
 
-        Public Function GetRecordsWithIdNo(earningIdNo, Optional sortKey = Nothing) As List(Of PayrollEarnAccount) Implements IDaoChild(Of PayrollEarnAccount).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(earningIdNo, Optional sortKey = Nothing) As List(Of PayrollEarnAccount) Implements IDaoChild(Of PayrollEarnAccount).GetRecordsWithGroupIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If

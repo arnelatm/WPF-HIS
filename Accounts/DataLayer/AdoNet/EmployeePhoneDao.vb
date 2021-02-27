@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordsWithIdNo(idNo, Optional sortExpression = Nothing) As List(Of EmployeePhone) Implements IDaoChild(Of EmployeePhone).GetRecordsWithIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of EmployeePhone) Implements IDaoChild(Of EmployeePhone).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If

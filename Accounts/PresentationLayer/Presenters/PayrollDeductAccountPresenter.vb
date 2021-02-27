@@ -21,7 +21,7 @@ Namespace PresentationLayer.Presenters
         '''' </summary>
         '''' <param name="DeductionIdNo">DeductionIdNo id to display.</param>
         Public Overloads Sub Display(DeductionIdNo As Int32)
-            View.PayrollDeductAccounts = Model.GetRecordsWithIdNo(Of PayrollDeductAccountModel)(DeductionIdNo, "DeductionIdNo")
+            View.PayrollDeductAccounts = Model.GetRecordsWithGroupIdNo(Of PayrollDeductAccountModel)(DeductionIdNo, "DeductionIdNo")
         End Sub
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,

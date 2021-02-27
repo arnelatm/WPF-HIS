@@ -25,9 +25,9 @@ Namespace DataLayer.AdoNet
             Dim deductionDao = New EmployeeDeductionDao
             Dim earningDao = New EmployeeEarningDao
             Dim phoneDao = New EmployeePhoneDao
-            Dim d As List(Of EmployeeDeduction) = deductionDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            Dim e As List(Of EmployeeEarning) = earningDao.GetRecordsWithIdNo(data.IdNo, "sequence")
-            Dim p As List(Of EmployeePhone) = phoneDao.GetRecordsWithIdNo(data.IdNo, "sequence")
+            Dim d As List(Of EmployeeDeduction) = deductionDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+            Dim e As List(Of EmployeeEarning) = earningDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+            Dim p As List(Of EmployeePhone) = phoneDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
             data.RegularEmployeeDeductions = d
             data.RegularEmployeeEarnings = e
             data.EmployeePhones = p

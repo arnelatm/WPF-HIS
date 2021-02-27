@@ -29,6 +29,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _regularDeduction = EnumToCode(DeductionTypeSelection.Regular)
         Private ReadOnly _factoredDeduction = EnumToCode(CalculationTypeSelection.Factor)
         Private ReadOnly _overtimeHours = EnumToCode(PayRateUnitSelection.OvertimeHours)
+        Private ReadOnly _absenceDeductions As List(Of Deduction)
 
         Public Sub New(view As IView)
             MyBase.New(view)
@@ -60,12 +61,17 @@ Namespace PresentationLayer.Presenters
                                                     {"IdNo", GetType(Int32)},
                                                     {"PayrollIdNo", GetType(Int16)}
                                                    })
+
+            _absenceDeductions = New List(Of Deduction)
+            Dim absencesDeductions = _deductionsDao.GetRecords("DeductionType = '" & EnumToCode(DeductionTypeSelection.AbsencesDeduction) & "'")
+            GlobalVariables.Mapper.Map(absencesDeductions, _absenceDeductions)
+
         End Sub
 
         Public Sub GeneratePayroll(ByVal payrollIdNo As Int16, ByVal startDate As Date, ByVal endDate As Date, ByRef progressBar As ProgressBar)
             Dim attendance As List(Of AttendanceItem)
             Dim attendanceItemDao = New AttendanceItemDao
-            attendance = attendanceItemDao.GetRecordsWithIdNo(payrollIdNo)
+            attendance = attendanceItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
             If attendance.Count() = 0 Then
                 Messaging.Show(True, "MsgEmptyEmployeeAttendance")
             Else
@@ -73,8 +79,8 @@ Namespace PresentationLayer.Presenters
                 Dim payrollEarningDao = New PayrollEarningDao
                 Dim payEarnings As List(Of PayrollEarning)
                 Dim payDeductions As List(Of PayrollDeduction)
-                payDeductions = payrollDeductionDao.GetRecordsWithIdNo(payrollIdNo)
-                payEarnings = payrollEarningDao.GetRecordsWithIdNo(payrollIdNo)
+                payDeductions = payrollDeductionDao.GetRecordsWithGroupIdNo(payrollIdNo)
+                payEarnings = payrollEarningDao.GetRecordsWithGroupIdNo(payrollIdNo)
                 If payEarnings.Count() = 0 Then
                     GenerateEmployeePayroll(payrollIdNo, attendance, progressBar)
                 Else
@@ -91,7 +97,7 @@ Namespace PresentationLayer.Presenters
         Private Sub AddDeduction(employeeIdNo As Int32, amount As Decimal, payrollIdNo As Short, deductionIdNo As Short)
             Dim insertDataRow As DataRow
             insertDataRow = _dtDeductionInsertTable.NewRow()
-            insertDataRow("Amount") = amount
+            insertDataRow("Amount") = Math.Round(amount, 2)
             insertDataRow("DeductionIdNo") = deductionIdNo
             insertDataRow("EmployeeIdNo") = employeeIdNo
             insertDataRow("PayrollIdNo") = payrollIdNo
@@ -101,20 +107,56 @@ Namespace PresentationLayer.Presenters
         Private Sub AddEarning(employeeIdNo As Int32, amount As Decimal, payrollIdNo As Short, earningIdNo As Short)
             Dim insertDataRow As DataRow
             insertDataRow = _dtEarningInsertTable.NewRow()
-            insertDataRow("Amount") = amount
+            insertDataRow("Amount") = Math.Round(amount, 2)
             insertDataRow("EarningIdNo") = earningIdNo
             insertDataRow("EmployeeIdNo") = employeeIdNo
             insertDataRow("PayrollIdNo") = payrollIdNo
             _dtEarningInsertTable.Rows.Add(insertDataRow)
         End Sub
 
-        Private Sub GenerateDeductions(ByRef employeeAttendance As AttendanceItem, payrollIdNo As Short)
-            Dim deductionsDao = New DeductionDao
+        Private Sub GenerateAbsencesDeductions(ByRef employeeAttendance As AttendanceItem, payrollIdNo As Short)
+            Dim daysAbsentWithoutPay = employeeAttendance.DaysAbsentWithoutPay
+            If daysAbsentWithoutPay <> 0 Then
+                Dim empDeductions As List(Of EmployeeDeduction) = _employeeDeductionDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
+                For Each deduction In _absenceDeductions
+                    AddNComputeDeduction(employeeAttendance, daysAbsentWithoutPay, deduction, payrollIdNo)
+                Next
+            End If
+        End Sub
+
+        Private Sub AddNComputeDeduction(employeeAttendance As AttendanceItem, daysAbsentWithoutPay As Decimal, deduction As Deduction, payrollIdNo As Short)
             Dim amount As Decimal
-            Dim empDeductions As List(Of EmployeeDeduction) = _employeeDeductionDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
+            If deduction.CalculationType = _fixedAmount Then
+                amount = deduction.Rate
+            ElseIf deduction.CalculationType = _fixedRate Then
+                amount = deduction.Rate * daysAbsentWithoutPay
+            ElseIf deduction.CalculationType = _factor Then
+                Dim idNo As Int16
+                idNo = _employeeEarningDao.GetFieldValue(Of Int32)("IdNo", "EmployeeEarning", "EmployeeIdNo = " & employeeAttendance.EmployeeIdNo & " and EarningIdNo = " & deduction.BasePaymentIdNo)
+                Dim basePayment As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordByIdNo(idNo)
+                If basePayment(0) IsNot Nothing Then
+                    If deduction.MultiplierType = EnumToCode(MultiplierTypeSelection.PercentOfBasePaymentRate) Then
+                        amount = Math.Round(Math.Round(basePayment(0).Amount * deduction.Multiplier / 100, 2) * daysAbsentWithoutPay, 2)
+                    Else
+                        amount = Math.Round(Math.Round(basePayment(0).Amount * deduction.Multiplier, 2) * daysAbsentWithoutPay, 2)
+                    End If
+                Else
+                    amount = 0
+                End If
+            Else
+                amount = 0
+            End If
+            If amount <> 0 Then
+                AddDeduction(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, deduction.IdNo)
+            End If
+        End Sub
+
+        Private Sub GenerateDeductions(ByRef employeeAttendance As AttendanceItem, payrollIdNo As Short)
+            Dim amount As Decimal
+            Dim empDeductions As List(Of EmployeeDeduction) = _employeeDeductionDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
             For Each empDeduction In empDeductions
                 Dim deduction As Deduction
-                deduction = deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
+                deduction = _deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
                 If deduction.DeductionType = _regularDeduction Then
                     If deduction.CalculationType = _fixedAmount Then
                         amount = empDeduction.Amount
@@ -130,7 +172,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub GenerateRegularEarnings(employeeAttendance As AttendanceItem, payrollIdNo As Short)
-            Dim empEarnings As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
+            Dim empEarnings As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
             Dim amount As Decimal
             For Each empEarning In empEarnings
                 Dim earning As Earning
@@ -143,7 +185,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub GenerateOvertime(employeeAttendance As AttendanceItem, payrollIdNo As Short)
-            'Dim overtime As List(Of Earning) = _earningsDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
+            'Dim overtime As List(Of Earning) = _earningsDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
             'Dim amount As Decimal
             'For Each empEarning In empEarnings
             '    Dim earning As Earning
@@ -169,6 +211,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GenerateEmployeePayroll(ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef progressBar As ProgressBar)
             Dim payrollEarningDao = New PayrollEarningDao
+            Dim payrollDeductionDao = New PayrollDeductionDao
             _dtEarningInsertTable.Clear()
             _dtDeductionInsertTable.Clear()
             progressBar.Value = 0
@@ -178,9 +221,14 @@ Namespace PresentationLayer.Presenters
             For Each employeeAttendance In attendance
                 GenerateEarnings(employeeAttendance, payrollIdNo)
                 GenerateDeductions(employeeAttendance, payrollIdNo)
+                If employeeAttendance.EmployeeIdNo = 386 Then
+                    Debugger.Break()
+                End If
+                GenerateAbsencesDeductions(employeeAttendance, payrollIdNo)
                 progressBar.Value = progressBar.Value + 1
             Next
             payrollEarningDao.InsertTvp(_dtEarningInsertTable)
+            payrollDeductionDao.InsertTvp(_dtDeductionInsertTable)
             progressBar.Value = progressBar.Value + 2
             Messaging.Show(True, "MsgPayrollGenerationCompleted")
             progressBar.Visible = False
@@ -211,7 +259,7 @@ Namespace PresentationLayer.Presenters
         Private Sub ReGenerateDeduction(ByRef employeeAttendance As AttendanceItem, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
             Dim empDeductions As List(Of EmployeeDeduction)
             Dim amount As Decimal
-            empDeductions = _employeeDeductionDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
+            empDeductions = _employeeDeductionDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
             For Each empDeduction In empDeductions
                 Dim deduction As Deduction
                 deduction = _deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
@@ -230,7 +278,7 @@ Namespace PresentationLayer.Presenters
         Private Sub ReGenerateEarning(ByRef employeeAttendance As AttendanceItem, payEarnings As List(Of PayrollEarning), payrollIdNo As Short)
             Dim empEarnings As List(Of EmployeeEarning)
             Dim amount As Decimal
-            empEarnings = _employeeEarningDao.GetRecordsWithIdNo(employeeAttendance.EmployeeIdNo)
+            empEarnings = _employeeEarningDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
             For Each empEarning In empEarnings
                 Dim earning As Earning
                 earning = _earningsDao.GetRecordById(empEarning.EarningIdNo)

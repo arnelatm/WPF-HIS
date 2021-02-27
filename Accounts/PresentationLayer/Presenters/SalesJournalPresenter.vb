@@ -79,11 +79,11 @@ Namespace PresentationLayer.Presenters
         End Property
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return _salesJournalItemModel.GetRecordsWithIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _salesJournalItemModel.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetSalesDeposits(salesDepositTypeIdNo As Int32) As List(Of SalesDepositModel)
-            Return _salesDepositModel.GetRecordsWithIdNo(Of SalesDepositModel)(salesDepositTypeIdNo, "Sequence")
+            Return _salesDepositModel.GetRecordsWithGroupIdNo(Of SalesDepositModel)(salesDepositTypeIdNo, "Sequence")
         End Function
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd

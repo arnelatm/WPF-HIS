@@ -554,9 +554,9 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetSqlValue(Of TType)(sqlStatement As String, cTableName As String, condition As String) As TType
+    Public Function GetFieldValue(Of TType)(sqlStatement As String, cTableName As String, condition As String) As TType
         Try
-            Return Model.GetSqlValue(Of TType)(sqlStatement, cTableName, condition)
+            Return Model.GetFieldValue(Of TType)(sqlStatement, cTableName, condition)
         Catch ex As Exception
             Return Nothing
         End Try

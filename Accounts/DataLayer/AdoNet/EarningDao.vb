@@ -8,37 +8,38 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class EarningDao
-        Implements IDao(Of Earning), IDaoAll(Of Earning)
+        Implements IDao(Of Earning), IDaoAll(Of Earning), IDaoGetRecords(Of Earning)
+
+        Private Const FieldList = "AccountIdNo," &
+                                  "BasePaymentIdNo," &
+                                  "CalculationType," &
+                                  "DefaultQuantity," &
+                                  "EarningCode," &
+                                  "EarningName," &
+                                  "EarningNameAra," &
+                                  "EarningType," &
+                                  "IdNo," &
+                                  "IncludeInEOS," &
+                                  "IncludeInPension," &
+                                  "Multiplier," &
+                                  "MultiplierType," &
+                                  "Notes," &
+                                  "Rate," &
+                                  "Taxable," &
+                                  "Unit," &
+                                  "UsePayGroups"
 
         Private ReadOnly _db As New Db()
 
         Public Function GetRecordById(idNo) As Earning Implements IDao(Of Earning).GetRecordById
-            Dim sql As String =
-                    "SELECT " &
-                    "AccountIdNo," &
-                    "BasePaymentIdNo," &
-                    "CalculationType," &
-                    "DefaultQuantity," &
-                    "EarningCode," &
-                    "EarningName," &
-                    "EarningNameAra," &
-                    "EarningType," &
-                    "IdNo," &
-                    "IncludeInEOS," &
-                    "IncludeInPension," &
-                    "Multiplier," &
-                    "MultiplierType," &
-                    "Notes," &
-                    "Rate," &
-                    "Taxable," &
-                    "Unit," &
-                    "UsePayGroups" &
-                    " FROM [Earning]" &
-                    " WHERE IdNo = @IdNo"
+            Dim sql As String = "SELECT " &
+                                FieldList &
+                                " FROM [Earning]" &
+                                " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim peaDao = New PayrollEarnAccountDao()
-            data.PayrollEarnAccounts = peaDao.GetRecordsWithIdNo(idNo, "Sequence")
+            data.PayrollEarnAccounts = peaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
             Return data
         End Function
 
@@ -141,6 +142,14 @@ Namespace DataLayer.AdoNet
                     "Unit," &
                     "UsePayGroups" &
                     " FROM [Earning]"
+            Return _db.Read(sql, Make).ToList()
+        End Function
+
+        Public Function GetRecords(Optional filter As String = Nothing) As List(Of Earning) Implements IDaoGetRecords(Of Earning).GetRecords
+            Dim sql As String = "SELECT " &
+                                FieldList &
+                                " FROM [Earning]" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
             Return _db.Read(sql, Make).ToList()
         End Function
 

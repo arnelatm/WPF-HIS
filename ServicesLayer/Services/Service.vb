@@ -160,8 +160,8 @@ Namespace Services
             Return modelPresenter
         End Function
 
-        Public Function GetRecordsWithIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithIdNo
-            Dim bizData = DataDao.GetRecordsWithIdNo(idNo, sortKey)
+        Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo
+            Dim bizData = DataDao.GetRecordsWithGroupIdNo(idNo, sortKey)
             Dim dataModel As New List(Of TM)
             GlobalVariables.Mapper.Map(bizData, dataModel)
             Return dataModel
@@ -299,8 +299,8 @@ Namespace Services
             Return BaseDao.GetSortedRecordPosition(idNo, tableName, sortOrder)
         End Function
 
-        Public Function GetSqlValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType Implements IService.GetSqlValue
-            Return BaseDao.GetSqlValue(Of TType)(sqlStatement, tableName, condition)
+        Public Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType Implements IService.GetFieldValue
+            Return BaseDao.GetFieldValue(Of TType)(sqlStatement, tableName, condition)
         End Function
 
         Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean Implements IService.HasRecordChanged
