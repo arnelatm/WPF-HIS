@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property CalculationType As Char
         Property DefaultQuantity As Decimal
         Property EarningCode As String
+        Property EarningGroup As Boolean
         Property EarningName As String
         Property EarningNameAra As String
         Property EarningType As Char

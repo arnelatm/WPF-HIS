@@ -119,6 +119,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+
+        Public Property EarningGroup As Boolean Implements IEarningView.EarningGroup
+            Get
+                Return chkEarningGroup.Checked
+            End Get
+            Set
+                chkEarningGroup.Checked = Value
+            End Set
+        End Property
+
         Public Property EarningName As String Implements IEarningView.EarningName
             Get
                 Return txtEarningName.Text

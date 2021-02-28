@@ -353,6 +353,19 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = False
                     txtRate.Visible = False
+                Case CalculationTypeSelection.Table
+                    cboBasePaymentIdNo.Visible = True
+                    cboMultiplierType.Visible = False
+                    cboUnit.Visible = False
+                    lblBasePayment.Visible = True
+                    lblDefaultQty.Visible = False
+                    lblMultiplier.Visible = False
+                    lblPayRate.Visible = False
+                    lblRate.Visible = False
+                    lblRate.Text = ""
+                    txtDefaultQuantity.Visible = False
+                    txtMultiplier.Visible = False
+                    txtRate.Visible = False
             End Select
         End Sub
 
