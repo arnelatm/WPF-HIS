@@ -216,7 +216,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpStartDate.SecurityKey = Nothing
             Me.dtpStartDate.ShowLongDate = False
             Me.dtpStartDate.ShowTime = False
-            Me.dtpStartDate.Size = New System.Drawing.Size(107, 25)
+            Me.dtpStartDate.Size = New System.Drawing.Size(113, 25)
             Me.dtpStartDate.TabIndex = 5
             Me.dtpStartDate.TargetCalendar = CType(resources.GetObject("dtpStartDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpStartDate.Value = Nothing
@@ -665,7 +665,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
             Me.dgvOvertime1.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvOvertime1.EditingMode = False
-            Me.dgvOvertime1.HeaderText = "Overtime 1"
+            Me.dgvOvertime1.HeaderText = "Regular Overtime"
             Me.dgvOvertime1.Name = "dgvOvertime1"
             Me.dgvOvertime1.ReadOnly = True
             Me.dgvOvertime1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -680,7 +680,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
             Me.dgvOvertime2.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvOvertime2.EditingMode = False
-            Me.dgvOvertime2.HeaderText = "Overtime 2"
+            Me.dgvOvertime2.HeaderText = "Special Overtime"
             Me.dgvOvertime2.Name = "dgvOvertime2"
             Me.dgvOvertime2.ReadOnly = True
             Me.dgvOvertime2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]

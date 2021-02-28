@@ -24,8 +24,11 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _global = EnumToCode(CalculationTypeSelection.Global)
         Private ReadOnly _overtimeHours1 = EnumToCode(PayRateUnitSelection.OvertimeHours1)
         Private ReadOnly _overtimeHours2 = EnumToCode(PayRateUnitSelection.OvertimeHours2)
-        Private ReadOnly _regularDeduction = EnumToCode(DeductionTypeSelection.Regular)
+        Private ReadOnly _regularDeductionType = EnumToCode(DeductionTypeSelection.Regular)
+        Private ReadOnly _absencesDeductionType = EnumToCode(DeductionTypeSelection.AbsencesDeduction)
         Private ReadOnly _regularEarning = EnumToCode(EarningTypeSelection.Regular)
+
+        Private ReadOnly _absencesDeduction = EnumToCode(CalculationTypeSelection.DaysAbsent)
         Private ReadOnly _variable = EnumToCode(CalculationTypeSelection.Variable)
         Private _dtDeductionInsertTable As New DataTable
         Private _dtDeductionUpdateTable As New DataTable
@@ -33,6 +36,9 @@ Namespace PresentationLayer.Presenters
         Private _dtEarningUpdateTable As New DataTable
         Private _endDate As Date
         Private _multiplier As New DataTable ' used for calculation of expression
+        Private _deductionComputationMethod As String = "1"
+        Private _daysInTheMonth As Int16
+        Private _payCycle As PayCycle
 
         Public Sub New(view As IView)
             MyBase.New(view)
@@ -69,6 +75,8 @@ Namespace PresentationLayer.Presenters
             Dim absencesDeductions = _deductionsDao.GetRecords("DeductionType = '" & EnumToCode(DeductionTypeSelection.AbsencesDeduction) & "'")
             GlobalVariables.Mapper.Map(absencesDeductions, _absenceDeductions)
 
+            _deductionComputationMethod = GetAppSetting($"PYCM", "Payroll", "Deduction Computation Method")
+
         End Sub
 
         Public Sub GeneratePayroll(ByVal payrollIdNo As Int16, ByVal startDate As Date, ByVal endDate As Date, ByRef progressBar As ProgressBar)
@@ -82,20 +90,25 @@ Namespace PresentationLayer.Presenters
                 Dim payrollEarningDao = New PayrollEarningDao
                 Dim payEarnings As List(Of PayrollEarning)
                 Dim payDeductions As List(Of PayrollDeduction)
-                payDeductions = payrollDeductionDao.GetRecordsWithGroupIdNo(payrollIdNo)
-                payEarnings = payrollEarningDao.GetRecordsWithGroupIdNo(payrollIdNo)
-                If payEarnings.Count() = 0 Then
-                    GenerateEmployeePayroll(payrollIdNo, attendance, progressBar)
-                Else
-                    If Messaging.Show(True, "AskIfRegeneratePayroll",
+                Dim payCycleIdNo = GetFieldWithIdNo(payrollIdNo, "Payroll", "PayCycleIdNo")
+                Dim payFrequency = GetFieldWithIdNo(payCycleIdNo, "PayCycle", "PayFrequency")
+                If payFrequency = EnumToCode(PayFrequencySelection.Monthly) Then
+                    _endDate = endDate
+                    _daysInTheMonth = DateTime.DaysInMonth(Year(endDate), Month(endDate))
+                    payDeductions = payrollDeductionDao.GetRecordsWithGroupIdNo(payrollIdNo)
+                    payEarnings = payrollEarningDao.GetRecordsWithGroupIdNo(payrollIdNo)
+                    If payEarnings.Count() = 0 Then
+                        GenerateEmployeePayroll(payrollIdNo, attendance, progressBar)
+                    Else
+                        If Messaging.Show(True, "AskIfRegeneratePayroll",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                        ReGenerateEmployeePayroll(payEarnings, payDeductions, payrollIdNo, attendance, progressBar)
+                            ReGenerateEmployeePayroll(payEarnings, payDeductions, payrollIdNo, attendance, progressBar)
+                        End If
                     End If
                 End If
             End If
-            _endDate = endDate
         End Sub
 
         Private Sub AddDeduction(employeeIdNo As Int32, amount As Decimal, payrollIdNo As Short, deductionIdNo As Short)
@@ -131,18 +144,7 @@ Namespace PresentationLayer.Presenters
                     Dim basePayment As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordByIdNo(idNo)
                     If daysAbsentWithoutPay > 0D Then
                         Dim daysToCompute As Decimal
-
-                        If daysAbsentWithoutPay <= 15D Then
-                            daysToCompute = daysAbsentWithoutPay
-                        Else
-                            daysToCompute = 30D - (CDec(DateTime.DaysInMonth(Year(_endDate), Month(_endDate))) - daysAbsentWithoutPay)
-                        End If
-                        Dim multiplier = CType(_multiplier.Compute(deduction.Multiplier, 0), Decimal)
-                        If deduction.MultiplierType = EnumToCode(MultiplierTypeSelection.PercentOfBasePaymentRate) Then
-                            amount = Math.Round(basePayment(0).Amount * multiplier / 100 * daysToCompute, 2)
-                        Else
-                            amount = Math.Round(basePayment(0).Amount * multiplier * daysToCompute, 2)
-                        End If
+                        amount = ComputeDeductionAmount(deduction, daysAbsentWithoutPay, basePayment)
                     Else
                         amount = 0
                     End If
@@ -154,6 +156,43 @@ Namespace PresentationLayer.Presenters
                 AddDeduction(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, deduction.IdNo)
             End If
         End Sub
+
+        Private Function ComputeDeductionAmount(deduction As Deduction, daysAbsentWithoutPay As Decimal, basePayment As List(Of EmployeeEarning)) As Decimal
+            Dim daysToCompute As Decimal
+            Dim amount As Decimal
+            If deduction.DeductionType = EnumToCode(DeductionTypeSelection.AbsencesDeduction) Then
+                If _deductionComputationMethod = "DaysInMonth" Then
+                    daysToCompute = daysAbsentWithoutPay
+                    amount = Math.Round(basePayment(0).Amount / _daysInTheMonth * daysToCompute, 2)
+                ElseIf _deductionComputationMethod = "30Days" Then
+                    If daysAbsentWithoutPay <= 15D Then
+                        daysToCompute = daysAbsentWithoutPay
+                    Else
+                        daysToCompute = 30D - (CDec(DateTime.DaysInMonth(Year(_endDate), Month(_endDate))) - daysAbsentWithoutPay)
+                    End If
+                    amount = Math.Round(basePayment(0).Amount / 30D * daysToCompute, 2)
+                Else
+                    Dim multiplier As Decimal
+                    multiplier = CType(_multiplier.Compute(deduction.Multiplier, 0), Decimal)
+                    If deduction.MultiplierType = EnumToCode(MultiplierTypeSelection.PercentOfBasePaymentRate) Then
+                        amount = Math.Round(basePayment(0).Amount * multiplier / 100 * daysToCompute, 2)
+                    Else
+                        amount = Math.Round(basePayment(0).Amount * multiplier * daysToCompute, 2)
+                    End If
+                End If
+            Else
+                Dim multiplier As Decimal
+                daysToCompute = daysAbsentWithoutPay
+                amount = Math.Round(basePayment(0).Amount / 30D * daysToCompute, 2)
+                multiplier = CType(_multiplier.Compute(deduction.Multiplier, 0), Decimal)
+                If deduction.MultiplierType = EnumToCode(MultiplierTypeSelection.PercentOfBasePaymentRate) Then
+                    amount = Math.Round(basePayment(0).Amount * multiplier / 100 * daysToCompute, 2)
+                Else
+                    amount = Math.Round(basePayment(0).Amount * multiplier * daysToCompute, 2)
+                End If
+            End If
+            Return amount
+        End Function
 
         Private Function ComputeEarningAmount(empEarning As EmployeeEarning, earning As Earning, employeeAttendance As AttendanceItem) As Decimal
             Dim amount As Decimal
@@ -187,13 +226,14 @@ Namespace PresentationLayer.Presenters
                 Next
             End If
         End Sub
+
         Private Sub GenerateDeductions(ByRef employeeAttendance As AttendanceItem, payrollIdNo As Short)
             Dim amount As Decimal
             Dim empDeductions As List(Of EmployeeDeduction) = _employeeDeductionDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
             For Each empDeduction In empDeductions
                 Dim deduction As Deduction
                 deduction = _deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
-                If deduction.DeductionType = _regularDeduction Then
+                If deduction.DeductionType = _regularDeductionType Then
                     If deduction.CalculationType = _fixedAmount Then
                         amount = empDeduction.Amount
                         AddDeduction(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, deduction.IdNo)
@@ -219,9 +259,6 @@ Namespace PresentationLayer.Presenters
             For Each employeeAttendance In attendance
                 GenerateEarnings(employeeAttendance, payrollIdNo)
                 GenerateDeductions(employeeAttendance, payrollIdNo)
-                'If employeeAttendance.EmployeeIdNo = 405 Then
-                '    Debugger.Break()
-                'End If
                 GenerateAbsencesDeductions(employeeAttendance, payrollIdNo)
                 progressBar.Value = progressBar.Value + 1
             Next
@@ -257,6 +294,7 @@ Namespace PresentationLayer.Presenters
                 End If
             Next
         End Sub
+
         Private Sub MakeDeductions(employeeIdNo As Int32, amount As Decimal, empDeduction As EmployeeDeduction, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
             Dim deduction As PayrollDeduction = payDeductions.Find(Function(value As PayrollDeduction)
                                                                        Return value.EmployeeIdNo = empDeduction.EmployeeIdNo And value.DeductionIdNo = empDeduction.DeductionIdNo
@@ -286,7 +324,7 @@ Namespace PresentationLayer.Presenters
             For Each empDeduction In empDeductions
                 Dim deduction As Deduction
                 deduction = _deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
-                If deduction.DeductionType = _regularDeduction Then
+                If deduction.DeductionType = _regularDeductionType Then
                     'If deduction.CalculationType = factoredDeduction Then
                     '    If deduction.
                     'ElseIf deduction.CalculationType = fixedDeduction Then

@@ -26,6 +26,7 @@ Public Enum CalculationTypeSelection
     <EnumCode("R")> FixedRate
     <EnumCode("V")> Variable
     <EnumCode("G")> [Global]
+    <EnumCode("D")> DaysAbsent
 End Enum
 
 'Public Enum PayRateTypeSelection

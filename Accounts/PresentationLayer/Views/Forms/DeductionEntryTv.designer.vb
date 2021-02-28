@@ -733,6 +733,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
             Me.dgvPayGroupIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            Me.dgvPayGroupIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvPayGroupIdNo, "dgvPayGroupIdNo")
             Me.dgvPayGroupIdNo.Name = "dgvPayGroupIdNo"
             Me.dgvPayGroupIdNo.ReadOnly = True
@@ -745,6 +746,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
             Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle4
+            Me.dgvAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
             Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
             Me.dgvAccountIdNo.ReadOnly = True

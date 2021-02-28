@@ -63,6 +63,9 @@
   <PropertyGroup>
     <StartupObject>AATM.Accounts.PresentationLayer.Views.Forms.Main</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
@@ -276,6 +279,12 @@
     <Compile Include="DataLayer\AdoNet\JournalItemDao.vb" />
     <Compile Include="DataLayer\IAccountsDao.vb" />
     <Compile Include="DataLayer\IDaoFactoryAccounts.vb" />
+    <Compile Include="Form2.Designer.vb">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LocalizedEnumConverter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -293,6 +302,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="MyEnums.vb" />
+    <Compile Include="NewSettings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>NewSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductionModel.vb" />
@@ -955,6 +969,12 @@
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
     <Compile Include="MappingProfileAccounts.vb" />
+    <Compile Include="SetSettings.Designer.vb">
+      <DependentUpon>SetSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SetSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AccountStrings.resx">
@@ -1272,16 +1292,20 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Trial Balance.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="SetSettings.resx">
+      <DependentUpon>SetSettings.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
-    <None Include="appMarcelo-Dell.config" />
+    <None Include="appMarcelo-Dell - Copy.config" />
+    <None Include="app.config" />
     <None Include="appOrig.config" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -1306,6 +1330,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="NewSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>NewSettings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -1428,5 +1456,6 @@
   <ItemGroup>
     <None Include="Resources\GreenGradientBackgroundLarge.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
