@@ -23,7 +23,19 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPayrollView)
             MyBase.New(view)
-            InitializerWithTv("Payroll")
+            TreeViewMainField = "PayrollName"
+            TreeViewSecondaryField = "PayrollCode"
+            TreeViewList = New List(Of Payroll)
+
+            TableName = "Payroll"
+            SortOrderKey = "EndDate"
+            ModelPresenter = New ModelAccounts("Payroll")
+            OriginalModel = New PayrollModel
+            DataModel = New PayrollModel
+            If TreeViewParentIdField IsNot Nothing Then
+                SortOrderKey = "EndDate"
+            End If
+
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
             _attendanceItemModel = New ModelAccounts("AttendanceItem", Nothing, Nothing)
@@ -66,56 +78,60 @@ Namespace PresentationLayer.Presenters
 
         Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycle)
             If View.StartDate = Nothing And View.EndDate = Nothing Then
-                Dim nIdNoMax As Int32
-                Dim maxRecord As PayrollModel
-                Dim payMonthText As String = "Payroll for the Month of"
-                Dim PayrollText As String = "Payroll for the Period"
-                nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
-                maxRecord = ModelPresenter.GetRecordById(Of PayrollModel)(nIdNoMax)
-                View.StartDate = maxRecord.EndDate.AddDays(1)
-                Dim arabicCulture As New CultureInfo("ar-ae", False)
-                If View.StartDate.Day = 1 Then
-                    View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
-                    View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
-                    View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
-                Else
-                    View.EndDate = maxRecord.EndDate.AddMonths(1)
-                    View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
-                    View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+                If payCycleRecord.PayCycleCode = "Month" Then
+                    Dim nIdNoMax As Int32
+                    Dim maxRecord As PayrollModel
+                    Dim payMonthText As String = "Payroll for the Month of"
+                    Dim PayrollText As String = "Payroll for the Period"
+                    nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
+                    maxRecord = ModelPresenter.GetRecordById(Of PayrollModel)(nIdNoMax)
+                    View.StartDate = maxRecord.EndDate.AddDays(1)
+                    Dim arabicCulture As New CultureInfo("ar-ae", False)
+                    If View.StartDate.Day = 1 Then
+                        View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
+                        View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+                        View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
+                    Else
+                        View.EndDate = maxRecord.EndDate.AddMonths(1)
+                        View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
+                        View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+                    End If
+                    View.PayrollCode = "M" + View.EndDate.ToString("yyMM")
                 End If
-                View.PayrollCode = "M" + View.EndDate.ToString("yyMM")
             End If
         End Sub
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
-            Dim nIdNoMax As Int32
-            Dim maxRecord As PayrollModel
-            Dim payMonthText As String = "Payroll for the Month of"
-            Dim PayrollText As String = "Payroll for the Period"
-            nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
-            If nIdNoMax = 0 Then
-                Dim now As Date = Today()
-                View.EndDate = DateAdd(DateInterval.Day, DateAndTime.Day(now) * -1, now)
-                View.StartDate = DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate)
-            Else
-                maxRecord = ModelPresenter.GetRecordById(Of PayrollModel)(nIdNoMax)
-                View.StartDate = maxRecord.EndDate.AddDays(1)
-                If View.StartDate.Day = 1 Then
-                    View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
-                Else
-                    View.EndDate = maxRecord.EndDate.AddMonths(1)
-                End If
-            End If
-            View.PayCycleIdNo = 1
-            Dim arabicCulture As New CultureInfo("ar-ae", False)
-            If View.StartDate.Day = 1 AndAlso DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate) = View.StartDate Then
-                View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
-                View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
-            Else
-                View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
-                View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
-            End If
-            View.PayrollCode = "M" + View.EndDate.ToString("yyMM")
+
+            'Dim nIdNoMax As Int32
+            'Dim maxRecord As PayrollModel
+            'Dim payMonthText As String = "Payroll for the Month of"
+            'Dim PayrollText As String = "Payroll for the Period"
+            'nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
+            'If nIdNoMax = 0 Then
+            '    Dim now As Date = Today()
+            '    View.EndDate = DateAdd(DateInterval.Day, DateAndTime.Day(now) * -1, now)
+            '    View.StartDate = DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate)
+            'Else
+            '    maxRecord = ModelPresenter.GetRecordById(Of PayrollModel)(nIdNoMax)
+            '    View.StartDate = maxRecord.EndDate.AddDays(1)
+            '    If View.StartDate.Day = 1 Then
+            '        View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
+            '    Else
+            '        View.EndDate = maxRecord.EndDate.AddMonths(1)
+            '    End If
+            'End If
+            'View.PayCycleIdNo = 1
+            'Dim arabicCulture As New CultureInfo("ar-ae", False)
+            'If View.StartDate.Day = 1 AndAlso DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate) = View.StartDate Then
+            '    View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+            '    View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
+            'Else
+            '    View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
+            '    View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+            'End If
+            'View.PayrollCode = "M" + View.EndDate.ToString("yyMM")
+
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave

@@ -103,6 +103,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ClosingEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayrollEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayrollAttendanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.GeneratePayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayrollEntryToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
             Me.ClosePettyCashFundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -164,7 +165,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.GeneratePayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -236,7 +237,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemFile
             '
-            Me.ToolStripMenuItemFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemLogin, Me.ToolStripMenuItemLogout, Me.toolStripMenuItem1, Me.ToolStripMenuItemExit})
+            Me.ToolStripMenuItemFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemLogin, Me.ToolStripMenuItemLogout, Me.toolStripMenuItem1, Me.SettingsToolStripMenuItem, Me.ToolStripMenuItemExit})
             Me.ToolStripMenuItemFile.Name = "ToolStripMenuItemFile"
             resources.ApplyResources(Me.ToolStripMenuItemFile, "ToolStripMenuItemFile")
             '
@@ -564,6 +565,11 @@ Namespace PresentationLayer.Views.Forms
             Me.PayrollAttendanceToolStripMenuItem.Name = "PayrollAttendanceToolStripMenuItem"
             resources.ApplyResources(Me.PayrollAttendanceToolStripMenuItem, "PayrollAttendanceToolStripMenuItem")
             '
+            'GeneratePayrollToolStripMenuItem
+            '
+            Me.GeneratePayrollToolStripMenuItem.Name = "GeneratePayrollToolStripMenuItem"
+            resources.ApplyResources(Me.GeneratePayrollToolStripMenuItem, "GeneratePayrollToolStripMenuItem")
+            '
             'PayrollEntryToolStripMenuItem1
             '
             Me.PayrollEntryToolStripMenuItem1.Name = "PayrollEntryToolStripMenuItem1"
@@ -881,10 +887,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'GeneratePayrollToolStripMenuItem
+            'SettingsToolStripMenuItem
             '
-            Me.GeneratePayrollToolStripMenuItem.Name = "GeneratePayrollToolStripMenuItem"
-            resources.ApplyResources(Me.GeneratePayrollToolStripMenuItem, "GeneratePayrollToolStripMenuItem")
+            Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+            resources.ApplyResources(Me.SettingsToolStripMenuItem, "SettingsToolStripMenuItem")
             '
             'Main
             '
@@ -1046,5 +1052,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
         Friend WithEvents ClosePettyCashFundToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents GeneratePayrollToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

@@ -340,6 +340,19 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
+                Case CalculationTypeSelection.DaysAbsent
+                    cboBasePaymentIdNo.Visible = True
+                    cboMultiplierType.Visible = False
+                    cboUnit.Visible = False
+                    lblBasePayment.Visible = True
+                    lblDefaultQty.Visible = False
+                    lblMultiplier.Visible = False
+                    lblPayRate.Visible = False
+                    lblRate.Visible = False
+                    lblRate.Text = ""
+                    txtDefaultQuantity.Visible = False
+                    txtMultiplier.Visible = False
+                    txtRate.Visible = False
             End Select
         End Sub
 

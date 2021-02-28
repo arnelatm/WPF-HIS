@@ -53,6 +53,30 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("BooleanType")>  _
+        Public Property PayrollComputation() As Global.AATM.Common.DataTypeSelection
+            Get
+                Return CType(Me("PayrollComputation"),Global.AATM.Common.DataTypeSelection)
+            End Get
+            Set
+                Me("PayrollComputation") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Color() As String
+            Get
+                Return CType(Me("Color"),String)
+            End Get
+            Set
+                Me("Color") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

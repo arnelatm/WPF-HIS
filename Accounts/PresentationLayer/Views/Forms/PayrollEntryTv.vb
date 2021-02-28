@@ -158,15 +158,25 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayCycleIdNo.SelectedIndexChanged
-            If MyPresenter.AddMode Then
-                Dim payFrequency As PayFrequencySelection
-                Dim payCycleDaoObject As New PayCycleDao
-                Dim payCycleRecord = payCycleDaoObject.GetRecordById(PayCycleIdNo)
+            Dim payFrequency As PayFrequencySelection
+            Dim payCycleDaoObject As New PayCycleDao
+            Dim payCycleRecord = payCycleDaoObject.GetRecordById(PayCycleIdNo)
+            If payCycleRecord IsNot Nothing Then
                 payFrequency = CodeToEnum(Of PayFrequencySelection)(payCycleRecord.PayFrequency)
-                Select Case payFrequency
-                    Case PayFrequencySelection.Monthly
+                If MyPresenter.AddMode Then
+                    If PayFrequencySelection.Monthly Then
                         MyPresenter.InitializeMonthlyPayroll(payCycleRecord)
-                End Select
+                    End If
+                End If
+                If payFrequency = PayFrequencySelection.Monthly Then
+                    dtpStartDate.DisplayOnly = True
+                    dtpEndDate.DisplayOnly = True
+                Else
+                    dtpStartDate.DisplayOnly = False
+                    dtpEndDate.DisplayOnly = False
+                End If
+                dtpStartDate.Refresh()
+                dtpEndDate.Refresh()
             End If
         End Sub
 
