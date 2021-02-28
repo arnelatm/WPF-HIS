@@ -92,6 +92,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkEarningGroup = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.tlpEarning.SuspendLayout()
@@ -134,6 +136,7 @@ Namespace PresentationLayer.Views.Forms
             'tlpEarning
             '
             resources.ApplyResources(Me.tlpEarning, "tlpEarning")
+            Me.tlpEarning.Controls.Add(Me.CLabel3, 0, 3)
             Me.tlpEarning.Controls.Add(Me.txtEarningNameAra, 1, 2)
             Me.tlpEarning.Controls.Add(Me.lblName, 0, 1)
             Me.tlpEarning.Controls.Add(Me.txtEarningCode, 3, 0)
@@ -142,6 +145,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpEarning.Controls.Add(Me.CLabel1, 0, 0)
             Me.tlpEarning.Controls.Add(Me.txtEarningName, 1, 1)
             Me.tlpEarning.Controls.Add(Me.lblNameAra, 0, 2)
+            Me.tlpEarning.Controls.Add(Me.chkEarningGroup, 1, 3)
             Me.tlpEarning.Name = "tlpEarning"
             '
             'txtEarningNameAra
@@ -247,8 +251,8 @@ Namespace PresentationLayer.Views.Forms
             'lblNameAra
             '
             Me.lblNameAra.DisplayOnly = True
-            resources.ApplyResources(Me.lblNameAra, "lblNameAra")
             Me.lblNameAra.EditingMode = False
+            resources.ApplyResources(Me.lblNameAra, "lblNameAra")
             Me.lblNameAra.Name = "lblNameAra"
             '
             'tbcEarning
@@ -897,6 +901,25 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.CFlowLayout4)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
+            'CLabel3
+            '
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.EditingMode = False
+            resources.ApplyResources(Me.CLabel3, "CLabel3")
+            Me.CLabel3.Name = "CLabel3"
+            '
+            'chkEarningGroup
+            '
+            Me.chkEarningGroup.DisplayOnly = False
+            Me.chkEarningGroup.EditingMode = True
+            Me.chkEarningGroup.FlatAppearance.BorderSize = 0
+            resources.ApplyResources(Me.chkEarningGroup, "chkEarningGroup")
+            Me.chkEarningGroup.LinkedLabel = Nothing
+            Me.chkEarningGroup.Name = "chkEarningGroup"
+            Me.chkEarningGroup.NoLabel = True
+            Me.chkEarningGroup.OldValue = Nothing
+            Me.chkEarningGroup.UseVisualStyleBackColor = True
+            '
             'EarningEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -925,9 +948,9 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
             Me.ResumeLayout(False)
-            Me.PerformLayout
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents bsPayrollEarnAccounts As BindingSource
         Friend WithEvents CFlowLayout4 As CFlowLayout
         Friend WithEvents tlpEarning As TableLayoutPanel
@@ -986,5 +1009,7 @@ End Sub
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents lblFactoredUnit As CLabel
+        Friend WithEvents CLabel3 As CLabel
+        Friend WithEvents chkEarningGroup As CCheckBox
     End Class
 End Namespace

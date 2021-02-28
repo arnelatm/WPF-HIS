@@ -26,6 +26,7 @@ Public Enum CalculationTypeSelection
     <EnumCode("R")> FixedRate
     <EnumCode("V")> Variable
     <EnumCode("G")> [Global]
+    <EnumCode("T")> Table
     <EnumCode("D")> DaysAbsent
 End Enum
 
@@ -83,11 +84,12 @@ End Enum
 Public Enum DeductionTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("R")> Regular
+    <EnumCode("A")> AbsencesDeduction
+    <EnumCode("N")> AsNeeded
     <EnumCode("G")> Garnishments
     <EnumCode("V")> Voluntary
     <EnumCode("F")> Fines
     <EnumCode("S")> SalaryLoans
-    <EnumCode("A")> AbsencesDeduction
     <EnumCode("O")> Others
     <EnumCode("P")> Pension
     '<EnumCode("T")> IncomeTax
@@ -127,6 +129,7 @@ Public Enum EarningTypeSelection
     <EnumCode("E")> Expenses
     <EnumCode("D")> Redundancy
     <EnumCode("M")> Miscellaneous
+    <EnumCode("A")> AsNeeded
 End Enum
 
 Public Enum EmployeeActionSelection
@@ -211,8 +214,8 @@ Public Enum PayRateUnitSelection
     <EnumCode("Y")> Year
     <EnumCode("U")> Unit
     <EnumCode("A")> AbsencesWithoutPay
-    <EnumCode("O")> OvertimeHours1
-    <EnumCode("T")> OvertimeHours2
+    <EnumCode("O")> OvertimeHoursRegular
+    <EnumCode("T")> OvertimeHoursSpecial
 End Enum
 
 Public Enum PayrollPaymentMethodSelection

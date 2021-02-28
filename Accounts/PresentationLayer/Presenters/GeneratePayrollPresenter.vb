@@ -22,8 +22,8 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _fixedAmount = EnumToCode(CalculationTypeSelection.FixedAmount)
         Private ReadOnly _fixedRate = EnumToCode(CalculationTypeSelection.FixedRate)
         Private ReadOnly _global = EnumToCode(CalculationTypeSelection.Global)
-        Private ReadOnly _overtimeHours1 = EnumToCode(PayRateUnitSelection.OvertimeHours1)
-        Private ReadOnly _overtimeHours2 = EnumToCode(PayRateUnitSelection.OvertimeHours2)
+        Private ReadOnly _overtimeHoursRegular = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
+        Private ReadOnly _overtimeHoursSpecial = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
         Private ReadOnly _regularDeductionType = EnumToCode(DeductionTypeSelection.Regular)
         Private ReadOnly _absencesDeductionType = EnumToCode(DeductionTypeSelection.AbsencesDeduction)
         Private ReadOnly _regularEarning = EnumToCode(EarningTypeSelection.Regular)
@@ -199,9 +199,9 @@ Namespace PresentationLayer.Presenters
             If earning.CalculationType = _fixedAmount Then
                 amount = empEarning.Amount
             ElseIf earning.CalculationType = _fixedRate Then
-                If earning.Unit = _overtimeHours1 Then
+                If earning.Unit = _overtimeHoursRegular Then
                     amount = empEarning.Rate * employeeAttendance.Overtime1
-                ElseIf earning.Unit = _overtimeHours2 Then
+                ElseIf earning.Unit = _overtimeHoursSpecial Then
                     amount = empEarning.Rate * employeeAttendance.Overtime2
                 End If
             ElseIf earning.CalculationType = _factor Then
@@ -347,7 +347,7 @@ Namespace PresentationLayer.Presenters
                     If earning.CalculationType = _fixedAmount Then
                         amount = empEarning.Amount
                     ElseIf earning.CalculationType = _fixedRate Then
-                        If earning.Unit = _overtimeHours1 Then
+                        If earning.Unit = _overtimeHoursRegular Then
 
                         End If
 

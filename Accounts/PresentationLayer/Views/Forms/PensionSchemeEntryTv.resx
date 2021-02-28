@@ -574,7 +574,7 @@
     <value>1</value>
   </data>
   <data name="tbpPensionRates.Text" xml:space="preserve">
-    <value>Posting Accounts</value>
+    <value>Deduction Rates</value>
   </data>
   <data name="&gt;&gt;tbpPensionRates.Name" xml:space="preserve">
     <value>tbpPensionRates</value>
