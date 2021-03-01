@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private _payrollOvertime As New List(Of OvertimeItemView)
         Private _payrollEarning As New List(Of PayrollEarningView)
         Private Property MyPresenter As PayrollPresenter
+        Private _employees
 
         Public Sub New()
             ' This call is required by the designer.
@@ -37,13 +38,23 @@ Namespace PresentationLayer.Views.Forms
             dgvDaysAbsentWoPay.SetFormat(7, 4)
             dgvDaysTotal.SetFormat(7, 4)
             dgvDaysTotal.DisplayOnly = True
-            dgvEmployeeName.DisplayOnly = True
-            dgvEmployeeNameAra.DisplayOnly = True
+            dgvEmployeeIdNo.DisplayOnly = True
             dgvDaysAbsentWoPay.DisplayOnly = True
         End Sub
 
         Protected Overrides Sub CreateDataSources()
             cboPayCycleIdNo.DataSource = MyPresenter.GetLookup("PayCycle")
+            _employees = MyPresenter.GetLookup("Employee")
+            dgvEmployeeIdNo.DataSource = _employees
+            dgvEmployeeIdNoOt.DataSource = _employees
+            dgvEmployeeIdNo.DisplayMember = "Name"
+            dgvEmployeeIdNoOt.DisplayMember = "Name"
+            dgvEmployeeIdNo.ValueMember = "IdNo"
+            dgvEmployeeIdNoOt.ValueMember = "IdNo"
+            dgvEmployeeIdNo.DisplayOnly = True
+            dgvEmployeeIdNoOt.DisplayOnly = True
+            dgvEmployeeIdNo.DisplayStyleForCurrentCellOnly = True
+            dgvEmployeeIdNoOt.DisplayStyleForCurrentCellOnly = True
         End Sub
 
 #Region "Fields"
@@ -143,13 +154,6 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsPayrollAttendance
-                If RightToLeftLayout = True Then
-                    dgvEmployeeNameAra.Visible = True
-                    dgvEmployeeName.Visible = False
-                Else
-                    dgvEmployeeName.Visible = True
-                    dgvEmployeeNameAra.Visible = False
-                End If
                 .Refresh()
             End With
 
@@ -165,13 +169,6 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsPayrollOvertime
-                If RightToLeftLayout = True Then
-                    dgvEmployeeNameAra.Visible = True
-                    dgvEmployeeName.Visible = False
-                Else
-                    dgvEmployeeName.Visible = True
-                    dgvEmployeeNameAra.Visible = False
-                End If
                 .Refresh()
             End With
 
@@ -211,7 +208,43 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub btnInitialize_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitialize.ClickButtonArea
+
+        Private Class ActiveEmployee
+            Public IdNo As Int16
+        End Class
+
+        Private Class ActiveEmployees
+            Public EmployeeIdNo As Int16
+            Public EmployeeName As String
+            Public EmployeeNameAra As String
+            Public Active As Boolean
+        End Class
+
+        Private Sub DataGridViewAttendance_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayrollAttendance.CellEndEdit
+            With DataGridViewPayrollAttendance
+                Dim nIndex = .CurrentRow.Index
+                PayrollAttendance(nIndex).DaysAbsentWithoutPay = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysPresent
+            End With
+        End Sub
+
+        Protected Overrides Sub InputsTurnedOn()
+            If PayrollAttendance.Count() = 0 Then
+                btnInitializeAttendance.Text = Messaging.TranslateCaption("Initialize Attendance")
+                btnInitializeOvertime.Text = Messaging.TranslateCaption("Initialize Overtime")
+            Else
+                btnInitializeAttendance.Text = Messaging.TranslateCaption("Re-Process Attendance")
+                btnInitializeOvertime.Text = Messaging.TranslateCaption("Re-Process Overtime")
+            End If
+            btnInitializeAttendance.Enabled = True
+            btnInitializeOvertime.Enabled = True
+        End Sub
+
+        Protected Overrides Sub InputsTurnedOff()
+            btnInitializeAttendance.Enabled = False
+            btnInitializeOvertime.Enabled = False
+        End Sub
+
+        Private Sub btnInitializeAttendance_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnInitializeAttendance.ClickButtonArea
             MyPresenter.InitializeAttendance()
             bsPayrollAttendance.ResetBindings(False)
 
@@ -256,37 +289,13 @@ Namespace PresentationLayer.Views.Forms
             '              )
             '    End If
             'Next employee
+
         End Sub
 
-        Private Class ActiveEmployee
-            Public IdNo As Int16
-        End Class
 
-        Private Class ActiveEmployees
-            Public EmployeeIdNo As Int16
-            Public EmployeeName As String
-            Public EmployeeNameAra As String
-            Public Active As Boolean
-        End Class
-
-        Private Sub DataGridViewAttendance_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayrollAttendance.CellEndEdit
-            With DataGridViewPayrollAttendance
-                Dim nIndex = .CurrentRow.Index
-                PayrollAttendance(nIndex).DaysAbsentWithoutPay = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysPresent
-            End With
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOn()
-            If PayrollAttendance.Count() = 0 Then
-                btnInitialize.Text = Messaging.TranslateCaption("Initialize Attendance")
-            Else
-                btnInitialize.Text = Messaging.TranslateCaption("Re-Process Attendance")
-            End If
-            btnInitialize.Enabled = True
-        End Sub
-
-        Protected Overrides Sub InputsTurnedOff()
-            btnInitialize.Enabled = False
+        Private Sub btnInitialize_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitializeOvertime.ClickButtonArea
+            MyPresenter.InitializeOvertime()
+            bsPayrollOvertime.ResetBindings(False)
         End Sub
 
     End Class

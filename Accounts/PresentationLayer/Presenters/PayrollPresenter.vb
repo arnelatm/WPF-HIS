@@ -15,9 +15,12 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Protected DtOtInsertTable As New DataTable
+        Protected DtOtUpdateTable As New DataTable
         Protected DtEarnInsertTable As New DataTable
         Protected DtEarnUpdateTable As New DataTable
         Private _attendanceItemModel
+        Private _overtimeItemModel
         Private _reinitialize As Boolean = False
         Private _payrollEarning
 
@@ -39,6 +42,7 @@ Namespace PresentationLayer.Presenters
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
             _attendanceItemModel = New ModelAccounts("AttendanceItem", Nothing, Nothing)
+            _overtimeItemModel = New ModelAccounts("OvertimeItem", Nothing, Nothing)
 
             CreateDataTable(DtInsertTable, {{"DaysAbsentWithoutPay", GetType(Decimal)},
                                             {"DaysAbsentWithPay", GetType(Decimal)},
@@ -54,6 +58,21 @@ Namespace PresentationLayer.Presenters
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
+                                            {"PayrollIdNo", GetType(Int16)}
+                                           })
+
+            CreateDataTable(DtOtInsertTable, {{"EmployeeIdNo", GetType(Int32)},
+                                            {"OvertimeRegular", GetType(Decimal)},
+                                            {"OvertimeHoliday", GetType(Decimal)},
+                                            {"OvertimeSpecial", GetType(Decimal)},
+                                            {"PayrollIdNo", GetType(Int16)}
+                                           })
+
+            CreateDataTable(DtOtUpdateTable, {{"EmployeeIdNo", GetType(Int32)},
+                                            {"IdNo", GetType(Int32)},
+                                            {"OvertimeRegular", GetType(Decimal)},
+                                            {"OvertimeHoliday", GetType(Decimal)},
+                                            {"OvertimeSpecial", GetType(Decimal)},
                                             {"PayrollIdNo", GetType(Int16)}
                                            })
 
@@ -133,6 +152,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 ViewToDataTables(View.PayrollAttendance, DtInsertTable, DtUpdateTable, AddressOf AttendanceItemFillData, AddressOf AttendanceItemFilter, "IdNo", "")
+                ViewToDataTables(View.PayrollOvertime, DtOtInsertTable, DtOtUpdateTable, AddressOf OvertimeItemFillData, AddressOf OvertimeItemFilter, "IdNo", "")
             End If
             'For Each item In View.PayrollAttendance
             '    If item.Equals(DBNull.Value) Then
@@ -237,6 +257,57 @@ Namespace PresentationLayer.Presenters
             'Next employee
         End Sub
 
+        Public Sub InitializeOvertime()
+            Dim payFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
+            Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString()
+            Dim matchedEmployees = GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "HiredDate", "ReleasedDate"})
+            Dim numberOfEmployees = Int(matchedEmployees.Count() / 3)
+            Dim seq As Int16
+            Dim dateHired As Date
+            Dim dateReleased As Date?
+            Dim empId As Int32
+            Dim empFound As Boolean = False
+            seq = View.PayrollOvertime.Count() + 1
+            If View.PayrollOvertime.Any() Then
+                _reinitialize = True
+            Else
+                _reinitialize = False
+            End If
+            For i = 1 To numberOfEmployees
+                empId = matchedEmployees(i * 3 - 3)
+                dateHired = matchedEmployees(i * 3 - 2)
+                dateReleased = IIf(IsDBNull(matchedEmployees(i * 3 - 1)), Nothing, matchedEmployees(i * 3 - 1))
+                If _reinitialize Then
+                    Dim empOvertime As OvertimeItemView
+                    empOvertime = View.PayrollOvertime.Find(Function(c) c.EmployeeIdNo = empId)
+                    If empOvertime Is Nothing Then
+                        empFound = False
+                    Else
+                        empFound = True
+                        If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
+                            ' retain old data
+                        Else
+                            View.PayrollOvertime.Remove(empOvertime)
+                        End If
+                    End If
+                End If
+                If empFound Then
+                    Continue For
+                End If
+                If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
+                    AddEmployeeOvertime(dateHired, dateReleased, empId, seq)
+                    seq = seq + 1
+                End If
+            Next
+            If _reinitialize Then
+                Dim i As Int16 = 1
+                For Each item In View.PayrollOvertime
+                    item.Sequence = i
+                    i = i + 1
+                Next
+            End If
+        End Sub
+
         Public Sub AddEmployeeAttendance(ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal empName As String, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16, ByVal seq As Int16)
             Dim empAttendance As New AttendanceItemView
             Dim daysOff As Int16
@@ -250,6 +321,13 @@ Namespace PresentationLayer.Presenters
             empAttendance.EmployeeName = empName
             empAttendance.Sequence = seq
             View.PayrollAttendance.Add(empAttendance)
+        End Sub
+
+        Public Sub AddEmployeeOvertime(ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal seq As Int16)
+            Dim empOvertime As New OvertimeItemView
+            empOvertime.EmployeeIdNo = empId
+            empOvertime.Sequence = seq
+            View.PayrollOvertime.Add(empOvertime)
         End Sub
 
         Public Sub UpdateEmployeeAttendance(ByRef empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
@@ -293,6 +371,21 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function AttendanceItemFilter(ByVal obj As Object) As Boolean
+            'If (obj.Debit = 0 AndAlso obj.Credit = 0 AndAlso obj.Sequence <> 1) Then
+            '    Return False
+            'End If
+            Return True
+        End Function
+
+        Private Sub OvertimeItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("EmployeeIdNo") = itemDataView.EmployeeIdNo
+            workRow("OvertimeRegular") = itemDataView.OvertimeRegular
+            workRow("OvertimeHoliday") = itemDataView.OvertimeHoliday
+            workRow("OvertimeSpecial") = itemDataView.OvertimeSpecial
+            workRow("PayrollIdNo") = View.IdNo
+        End Sub
+
+        Public Function OvertimeItemFilter(ByVal obj As Object) As Boolean
             'If (obj.Debit = 0 AndAlso obj.Credit = 0 AndAlso obj.Sequence <> 1) Then
             '    Return False
             'End If
