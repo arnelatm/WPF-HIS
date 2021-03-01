@@ -28,7 +28,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _absencesDeductionType = EnumToCode(DeductionTypeSelection.AbsencesDeduction)
         Private ReadOnly _regularEarning = EnumToCode(EarningTypeSelection.Regular)
 
-        Private ReadOnly _absencesDeduction = EnumToCode(CalculationTypeSelection.DaysAbsent)
+        Private ReadOnly _absencesDeduction = EnumToCode(CalculationTypeSelection.Factor)
         Private ReadOnly _variable = EnumToCode(CalculationTypeSelection.Variable)
         Private _dtDeductionInsertTable As New DataTable
         Private _dtDeductionUpdateTable As New DataTable
@@ -143,7 +143,7 @@ Namespace PresentationLayer.Presenters
                 If idNo <> 0 Then
                     Dim basePayment As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordByIdNo(idNo)
                     If daysAbsentWithoutPay > 0D Then
-                        Dim daysToCompute As Decimal
+                        'Dim daysToCompute As Decimal
                         amount = ComputeDeductionAmount(deduction, daysAbsentWithoutPay, basePayment)
                     Else
                         amount = 0
@@ -200,9 +200,9 @@ Namespace PresentationLayer.Presenters
                 amount = empEarning.Amount
             ElseIf earning.CalculationType = _fixedRate Then
                 If earning.Unit = _overtimeHoursRegular Then
-                    amount = empEarning.Rate * employeeAttendance.Overtime1
+                    amount = empEarning.Rate '* employeeAttendance.Overtime1
                 ElseIf earning.Unit = _overtimeHoursSpecial Then
-                    amount = empEarning.Rate * employeeAttendance.Overtime2
+                    amount = empEarning.Rate '* employeeAttendance.Overtime2
                 End If
             ElseIf earning.CalculationType = _factor Then
                 'If earning.Unit = _overtimeHours1 Then

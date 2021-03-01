@@ -75,6 +75,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of JournalItemModel, IJournalItemView)().ReverseMap()
         CreateMap(Of Leave, LeaveModel)().ReverseMap()
         CreateMap(Of LeaveModel, ILeaveView).ReverseMap()
+        CreateMap(Of OvertimeItem, OvertimeItemModel)().ReverseMap()
+        CreateMap(Of OvertimeItemModel, OvertimeItemView)().ReverseMap()
         CreateMap(Of PayCycle, PayCycleModel)().ReverseMap()
         CreateMap(Of PayCycleModel, IPayCycleView).ReverseMap()
         CreateMap(Of PayGroup, PayGroupModel)().ReverseMap()

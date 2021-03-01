@@ -5,8 +5,6 @@
     [DaysPresent]          DECIMAL (8, 4) NOT NULL,
     [EmployeeIdNo]         INT            NOT NULL,
     [IDNo]                 INT            NOT NULL,
-    [Overtime1]            DECIMAL (8, 2) NOT NULL,
-    [Overtime2]            DECIMAL (8, 2) NOT NULL,
     [PayrollIdNo]          SMALLINT       NOT NULL,
     PRIMARY KEY CLUSTERED ([IDNo] ASC));
 

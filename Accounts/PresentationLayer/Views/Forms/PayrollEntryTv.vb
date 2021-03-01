@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IPayrollView
 
         Private _payrollAttendance As New List(Of AttendanceItemView)
+        Private _payrollOvertime As New List(Of OvertimeItemView)
         Private _payrollEarning As New List(Of PayrollEarningView)
         Private Property MyPresenter As PayrollPresenter
 
@@ -35,8 +36,6 @@ Namespace PresentationLayer.Views.Forms
             dgvDaysOff.SetFormat(7, 4)
             dgvDaysAbsentWoPay.SetFormat(7, 4)
             dgvDaysTotal.SetFormat(7, 4)
-            dgvOvertime1.SetFormat(8, 2)
-            dgvOvertime2.SetFormat(8, 2)
             dgvDaysTotal.DisplayOnly = True
             dgvEmployeeName.DisplayOnly = True
             dgvEmployeeNameAra.DisplayOnly = True
@@ -112,6 +111,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PayrollOvertime As List(Of OvertimeItemView) Implements IPayrollView.PayrollOvertime
+            Get
+                Return _payrollOvertime
+            End Get
+            Set
+                _payrollOvertime = Value
+                BindPayrollOvertime()
+            End Set
+        End Property
+
         Public Property PayrollAttendance As List(Of AttendanceItemView) Implements IPayrollView.PayrollAttendance
             Get
                 Return _payrollAttendance
@@ -134,6 +143,28 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsPayrollAttendance
+                If RightToLeftLayout = True Then
+                    dgvEmployeeNameAra.Visible = True
+                    dgvEmployeeName.Visible = False
+                Else
+                    dgvEmployeeName.Visible = True
+                    dgvEmployeeNameAra.Visible = False
+                End If
+                .Refresh()
+            End With
+
+        End Sub
+
+        Private Sub BindPayrollOvertime()
+            SuspendLayout()
+            bsPayrollOvertime.DataSource = Nothing
+            DataGridViewPayrollOvertime.Refresh()
+            bsPayrollOvertime.DataSource = PayrollOvertime
+            bsPayrollOvertime.AllowNew = True
+            With DataGridViewPayrollOvertime
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsPayrollOvertime
                 If RightToLeftLayout = True Then
                     dgvEmployeeNameAra.Visible = True
                     dgvEmployeeName.Visible = False

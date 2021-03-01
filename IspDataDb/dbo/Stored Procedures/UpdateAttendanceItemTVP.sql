@@ -29,8 +29,6 @@ SET a.DaysAbsentWithoutPay = b.DaysAbsentWithoutPay,
 	a.DaysOff = b.DaysOff,
 	a.DaysPresent = b.DaysPresent,
 	a.EmployeeIdNo = b.EmployeeIdNo,
-	a.Overtime1 = b.Overtime1,
-	a.Overtime2 = b.Overtime2,
 	a.PayrollIdNo = @GroupIdNo
 from AttendanceItem a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo

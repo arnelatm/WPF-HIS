@@ -23,9 +23,3 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  Or = 135
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ARJournalTransaction_View';
 
-
-GO
-
-
-
-

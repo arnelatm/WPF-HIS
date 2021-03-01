@@ -119,13 +119,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-
         Public Property EarningGroup As Boolean Implements IEarningView.EarningGroup
             Get
                 Return chkEarningGroup.Checked
             End Get
             Set
                 chkEarningGroup.Checked = Value
+                If Value Then
+                    cboEarningType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
+                End If
             End Set
         End Property
 
@@ -507,6 +509,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub tbpAccountPosting_Enter(sender As Object, e As EventArgs) Handles tbpAccountPosting.Enter
             UpdatePostingTabDisplay()
+        End Sub
+
+        Private Sub chkEarningGroup_CheckedChanged(sender As Object, e As EventArgs) Handles chkEarningGroup.CheckedChanged
+            If chkEarningGroup.Checked Then
+                cboEarningType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
+            End If
         End Sub
 
     End Class

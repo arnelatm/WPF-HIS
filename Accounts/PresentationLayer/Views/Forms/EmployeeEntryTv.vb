@@ -330,16 +330,42 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property OtRatePerHour As Decimal Implements IEmployeeView.OtRatePerHour
+        Public Property OtRateRegular As Decimal Implements IEmployeeView.OtRateRegular
             Get
-                If txtOtRatePerHour.Text <> "" Then
-                    Return Convert.ToSingle(txtOtRatePerHour.Text)
+                If txtOtRateRegular.Text <> "" Then
+                    Return Convert.ToSingle(txtOtRateRegular.Text)
                 Else
                     Return 0
                 End If
             End Get
             Set
-                txtOtRatePerHour.Text = FormatDecimalNumber(Value)
+                txtOtRateRegular.Text = FormatDecimalNumber(Value)
+            End Set
+        End Property
+
+        Public Property OtRateHoliday As Decimal Implements IEmployeeView.OtRateHoliday
+            Get
+                If txtOtRateHoliday.Text <> "" Then
+                    Return Convert.ToSingle(txtOtRateHoliday.Text)
+                Else
+                    Return 0
+                End If
+            End Get
+            Set
+                txtOtRateHoliday.Text = FormatDecimalNumber(Value)
+            End Set
+        End Property
+
+        Public Property OtRateSpecial As Decimal Implements IEmployeeView.OtRateSpecial
+            Get
+                If txtOtRateSpecial.Text <> "" Then
+                    Return Convert.ToSingle(txtOtRateSpecial.Text)
+                Else
+                    Return 0
+                End If
+            End Get
+            Set
+                txtOtRateSpecial.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
