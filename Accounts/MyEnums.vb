@@ -27,7 +27,6 @@ Public Enum CalculationTypeSelection
     <EnumCode("V")> Variable
     <EnumCode("G")> [Global]
     <EnumCode("T")> Table
-    <EnumCode("D")> DaysAbsent
 End Enum
 
 'Public Enum PayRateTypeSelection
@@ -130,6 +129,7 @@ Public Enum EarningTypeSelection
     <EnumCode("D")> Redundancy
     <EnumCode("M")> Miscellaneous
     <EnumCode("A")> AsNeeded
+    <EnumCode("F")> Formula
 End Enum
 
 Public Enum EmployeeActionSelection
@@ -231,6 +231,17 @@ Public Enum ReceiptTypeSelection
     <EnumCode("R")> SupplierRefund
     <EnumCode("C")> Customer
     <EnumCode("O")> Others
+End Enum
+
+Public Enum QuantityTypeSelection
+    <EnumCode("F")> Fixed
+    <EnumCode("V")> Variable
+    <EnumCode("A")> AbsencesWithoutPay
+    <EnumCode("D")> DaysPresent
+    <EnumCode("O")> OvertimeRegular
+    <EnumCode("H")> OvertimeHoliday
+    <EnumCode("S")> OvertimeSpecial
+    <EnumCode("L")> LeavesWithPay
 End Enum
 
 Public Enum SpecialAccountSelection

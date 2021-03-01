@@ -45,8 +45,6 @@ Namespace PresentationLayer.Presenters
                                             {"DaysOff", GetType(Decimal)},
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
-                                            {"Overtime1", GetType(Decimal)},
-                                            {"Overtime2", GetType(Decimal)},
                                             {"PayrollIdNo", GetType(Int16)}
                                            })
 
@@ -56,8 +54,6 @@ Namespace PresentationLayer.Presenters
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
-                                            {"Overtime1", GetType(Decimal)},
-                                            {"Overtime2", GetType(Decimal)},
                                             {"PayrollIdNo", GetType(Int16)}
                                            })
 
@@ -293,8 +289,6 @@ Namespace PresentationLayer.Presenters
             workRow("DaysOff") = itemDataView.DaysOff
             workRow("DaysPresent") = itemDataView.DaysPresent
             workRow("EmployeeIdNo") = itemDataView.EmployeeIdNo
-            workRow("Overtime1") = itemDataView.Overtime1
-            workRow("Overtime2") = itemDataView.Overtime2
             workRow("PayrollIdNo") = View.IdNo
         End Sub
 

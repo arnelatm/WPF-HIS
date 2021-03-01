@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayrollNameAra As String
         Property StartDate As Date
         Property PayrollAttendance As List(Of AttendanceItemView)
+        Property PayrollOvertime As List(Of OvertimeItemView)
     End Interface
 
 End Namespace

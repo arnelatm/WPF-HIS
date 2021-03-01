@@ -172,8 +172,10 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\OvertimeItem.vb" />
     <Compile Include="BusinessLayer\Basic.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
+    <Compile Include="BusinessLayer\EarningItem.vb" />
     <Compile Include="BusinessLayer\Payroll.vb" />
     <Compile Include="BusinessLayer\PayrollDetail.vb" />
     <Compile Include="BusinessLayer\PayrollDeduction.vb" />
@@ -308,7 +310,9 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\OvertimeItemModel.vb" />
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
+    <Compile Include="PresentationLayer\Models\EarningItemModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductionModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollEarningModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDetailModel.vb" />
@@ -345,6 +349,7 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\OvertimeItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
@@ -363,6 +368,7 @@
     <Compile Include="PresentationLayer\Views\Forms\PayrollDetailEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IOvertimeItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollDeductionView.vb" />
@@ -1300,9 +1306,10 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
+    <None Include="app.config" />
+    <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
@@ -1319,6 +1326,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.OvertimeItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayPeriodModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />

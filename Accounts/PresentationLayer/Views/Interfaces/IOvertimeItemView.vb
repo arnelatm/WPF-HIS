@@ -2,18 +2,16 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IAttendanceItemView
+    Public Interface IOvertimeItemView
         Inherits IView
 
         Property IdNo As Int32
         Property EmployeeIdNo As Int32
         Property EmployeeName As String
         Property EmployeeNameAra As String
-        Property DaysPresent As Decimal
-        Property DaysAbsentWithPay As Decimal
-        Property DaysAbsentWithoutPay As Decimal
-        Property DaysOff As Decimal
-        Property DaysTotal As Decimal
+        Property OvertimeRegular As Decimal
+        Property OvertimeHoliday As Decimal
+        Property OvertimeSpecial As Decimal
         Property PayrollIdNo As Int16
         Property Sequence As Int16
     End Interface

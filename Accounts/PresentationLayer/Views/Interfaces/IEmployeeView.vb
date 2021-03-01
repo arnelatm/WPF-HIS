@@ -26,7 +26,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property NationalityCode As String
         Property Notes As String
         Property OpeningBalance As Decimal
-        Property OtRatePerHour As Decimal
+        Property OtRateRegular As Decimal
+        Property OtRateHoliday As Decimal
+        Property OtRateSpecial As Decimal
         Property PayCycleIdNo As Int16?
         Property PayGroupIdNo As Int16?
         Property PaymentMethod As Char
