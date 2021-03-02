@@ -4,7 +4,7 @@
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class EarningItemModel
+    Public Class EarningSummaryModel
 
         Public Property EarningIdNo As Int16
         Public Property IdNo As Int16

@@ -19,7 +19,7 @@
     [UsePayGroups]     BIT             NULL,
     [Notes]            NVARCHAR (100)  NULL,
     [DateTimeStamp]    ROWVERSION      NULL,
-    [EarningGroup]     BIT             NULL,
+    [Summary]     BIT             NULL,
     CONSTRAINT [PK_Earning] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
 

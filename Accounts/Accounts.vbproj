@@ -175,7 +175,7 @@
     <Compile Include="BusinessLayer\OvertimeItem.vb" />
     <Compile Include="BusinessLayer\Basic.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
-    <Compile Include="BusinessLayer\EarningItem.vb" />
+    <Compile Include="BusinessLayer\EarningSummary.vb" />
     <Compile Include="BusinessLayer\Payroll.vb" />
     <Compile Include="BusinessLayer\PayrollDetail.vb" />
     <Compile Include="BusinessLayer\PayrollDeduction.vb" />
