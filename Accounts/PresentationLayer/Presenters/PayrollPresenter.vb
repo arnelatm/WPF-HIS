@@ -359,6 +359,9 @@ Namespace PresentationLayer.Presenters
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_attendanceItemModel, DtUpdateTable, DtInsertTable, passedValue, "PayrollIdNo")
+            If retVal >= 0 Then
+                retVal = UpdateChildData(_overtimeItemModel, DtOtUpdateTable, DtOtInsertTable, passedValue, "PayrollIdNo")
+            End If
         End Sub
 
         Private Sub AttendanceItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
@@ -386,9 +389,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function OvertimeItemFilter(ByVal obj As Object) As Boolean
-            'If (obj.Debit = 0 AndAlso obj.Credit = 0 AndAlso obj.Sequence <> 1) Then
-            '    Return False
-            'End If
+            If (obj.OvertimeRegular = 0 AndAlso obj.OvertimeHoliday = 0 AndAlso obj.OvertimeSpecial = 0) Then
+                Return False
+            End If
             Return True
         End Function
 
