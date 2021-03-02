@@ -1,9 +1,6 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -208,17 +205,16 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        'Private Class ActiveEmployee
+        '    Public IdNo As Int16
+        'End Class
 
-        Private Class ActiveEmployee
-            Public IdNo As Int16
-        End Class
-
-        Private Class ActiveEmployees
-            Public EmployeeIdNo As Int16
-            Public EmployeeName As String
-            Public EmployeeNameAra As String
-            Public Active As Boolean
-        End Class
+        'Private Class ActiveEmployees
+        '    Public EmployeeIdNo As Int16
+        '    Public EmployeeName As String
+        '    Public EmployeeNameAra As String
+        '    Public Active As Boolean
+        'End Class
 
         Private Sub DataGridViewAttendance_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayrollAttendance.CellEndEdit
             With DataGridViewPayrollAttendance
@@ -228,6 +224,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedOn()
+            UpdateButtonText()
+            btnInitializeAttendance.Enabled = True
+            btnInitializeOvertime.Enabled = True
+        End Sub
+
+        Private Sub UpdateButtonText()
             If PayrollAttendance.Count() = 0 Then
                 btnInitializeAttendance.Text = Messaging.TranslateCaption("Initialize Attendance")
                 btnInitializeOvertime.Text = Messaging.TranslateCaption("Initialize Overtime")
@@ -235,11 +237,10 @@ Namespace PresentationLayer.Views.Forms
                 btnInitializeAttendance.Text = Messaging.TranslateCaption("Re-Process Attendance")
                 btnInitializeOvertime.Text = Messaging.TranslateCaption("Re-Process Overtime")
             End If
-            btnInitializeAttendance.Enabled = True
-            btnInitializeOvertime.Enabled = True
         End Sub
 
         Protected Overrides Sub InputsTurnedOff()
+            UpdateButtonText()
             btnInitializeAttendance.Enabled = False
             btnInitializeOvertime.Enabled = False
         End Sub
@@ -247,55 +248,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub btnInitializeAttendance_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnInitializeAttendance.ClickButtonArea
             MyPresenter.InitializeAttendance()
             bsPayrollAttendance.ResetBindings(False)
-
-            'Dim payFrequency = MyPresenter.GetFieldWithIdNo(cboPayCycleIdNo.SelectedValue, "PayCycle", "PayFrequency")
-            'Dim employeeFilter = "Active = 1 and PayCycleIdNo = " & cboPayCycleIdNo.SelectedValue.ToString()
-            'Dim activeEmployees = MyPresenter.GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "EmployeeName"})
-            'Dim earningDao = New EarningDao
-            'Dim earnings = earningDao.GetAll()
-            'Dim NumberOfEmployees = Int(activeEmployees.Count() / 2)
-            'For i = 1 To NumberOfEmployees
-            '    'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithGroupIdNo(emp, "sequence")
-            '    'Dim filter As String
-            '    'filter = "EmployeeIdNo = " & emp.ToString()
-            '    'Dim employeeEarnings = MyPresenter.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
-            '    Dim empAttendance As New AttendanceItemView
-            '    empAttendance.PayrollIdNo = IdNo
-            '    empAttendance.EmployeeIdNo = activeEmployees(i * 2 - 2)
-            '    empAttendance.EmployeeName = activeEmployees(i * 2 - 1)
-            '    empAttendance.Sequence = i
-            '    _PayrollAttendance.Add(empAttendance)
-            '    'For Each employeeEarning In employeeEarnings
-
-            '    'Next
-            'Next
-            'bsPayrollAttendance.ResetBindings(False)
-            'For i = 1 To Int(Data.Count / 3)
-            '    Dim tData As New ActiveEmployee
-            '    tData.IdNo = Data(i * 3 - 3)
-            '    If Data(i * 3 - 1) Is DBNull.Value Then
-            '        tData.PayGroupIdNo = 0
-            '    Else
-            '        tData.PayGroupIdNo = Data(i * 3 - 1)
-            '    End If
-            '    lEmployeePayGroups.Add(tData)
-            'Next
-            'For Each employee In lEmployeePayGroups
-            '    If employee.PayGroupIdNo = node.Tag Then
-            '        node.Nodes.Add(New TreeNode With {.Text = employee.Name,
-            '                                   .Tag = employee.IdNo,
-            '                                   .Name = employee.Name
-            '                                 }
-            '              )
-            '    End If
-            'Next employee
-
         End Sub
-
 
         Private Sub btnInitialize_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitializeOvertime.ClickButtonArea
             MyPresenter.InitializeOvertime()
-            bsPayrollOvertime.ResetBindings(False)
+            bsPayrollOvertime.ResetBindings(True)
+            'DataGridViewPayrollOvertime.Refresh()
         End Sub
 
     End Class

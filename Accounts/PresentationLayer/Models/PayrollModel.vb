@@ -17,6 +17,7 @@ Namespace PresentationLayer.Models
         Public Property PayrollNameAra As String
         Public Property StartDate As Date
         Public Property PayrollAttendance As List(Of AttendanceItemModel)
+        Public Property PayrollOvertime As List(Of OvertimeItemModel)
     End Class
 
 End Namespace
