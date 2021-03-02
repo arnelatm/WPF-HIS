@@ -11,7 +11,7 @@
         Public Property CalculationType As Char
         Public Property DefaultQuantity As Decimal
         Public Property EarningCode As String
-        Public Property EarningGroup As Boolean
+        Public Property Summary As Boolean
         Public Property EarningName As String
         Public Property EarningNameAra As String
         Public Property EarningType As Char

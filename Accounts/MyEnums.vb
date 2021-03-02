@@ -27,6 +27,7 @@ Public Enum CalculationTypeSelection
     <EnumCode("V")> Variable
     <EnumCode("G")> [Global]
     <EnumCode("T")> Table
+    <EnumCode("S")> Summary
 End Enum
 
 'Public Enum PayRateTypeSelection
@@ -129,7 +130,7 @@ Public Enum EarningTypeSelection
     <EnumCode("D")> Redundancy
     <EnumCode("M")> Miscellaneous
     <EnumCode("A")> AsNeeded
-    <EnumCode("F")> Formula
+    <EnumCode("Y")> Summary
 End Enum
 
 Public Enum EmployeeActionSelection

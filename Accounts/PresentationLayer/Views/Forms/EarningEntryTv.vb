@@ -119,12 +119,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EarningGroup As Boolean Implements IEarningView.EarningGroup
+        Public Property Summary As Boolean Implements IEarningView.Summary
             Get
-                Return chkEarningGroup.Checked
+                Return chkSummary.Checked
             End Get
             Set
-                chkEarningGroup.Checked = Value
+                chkSummary.Checked = Value
                 If Value Then
                     cboEarningType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
                 End If
@@ -415,6 +415,18 @@ Namespace PresentationLayer.Views.Forms
                     txtRate.Visible = True
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                     tlpCalculation.SetColumnSpan(cboUnit, 1)
+                Case CalculationTypeSelection.Summary
+                    cboBasePaymentIdNo.Visible = False
+                    cboMultiplierType.Visible = False
+                    cboUnit.Visible = False
+                    lblBasePayment.Visible = False
+                    lblDefaultQuantity.Visible = False
+                    lblMultiplier.Visible = False
+                    lblPayRate.Visible = False
+                    lblRate.Visible = False
+                    txtDefaultQuantity.Visible = False
+                    txtMultiplier.Visible = False
+                    txtRate.Visible = False
             End Select
             tlpCalculation.Visible = True
             floCalculation.Visible = True
@@ -511,9 +523,18 @@ Namespace PresentationLayer.Views.Forms
             UpdatePostingTabDisplay()
         End Sub
 
-        Private Sub chkEarningGroup_CheckedChanged(sender As Object, e As EventArgs) Handles chkEarningGroup.CheckedChanged
-            If chkEarningGroup.Checked Then
-                cboEarningType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
+        Private Sub chkSummary_CheckedChanged(sender As Object, e As EventArgs) Handles chkSummary.CheckedChanged
+            If chkSummary.Checked Then
+                cboEarningType.Visible = False
+                tlpPostingAccounts.Visible = False
+                tlpCalculation.Visible = False
+                floCalculation.Visible = False
+                DataGridViewSummaryDetail.Visible = True
+            Else
+                tlpPostingAccounts.Visible = True
+                tlpCalculation.Visible = True
+                floCalculation.Visible = True
+                DataGridViewSummaryDetail.Visible = False
             End If
         End Sub
 
