@@ -233,6 +233,7 @@
     <Compile Include="DataLayer\AdoNet\DjOiItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDeductionDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EarningSummaryDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollEarningDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\PcJournalsDao.vb" />
@@ -311,9 +312,9 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\EarningSummaryModel.vb" />
     <Compile Include="PresentationLayer\Models\OvertimeItemModel.vb" />
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
-    <Compile Include="PresentationLayer\Models\EarningItemModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductionModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollEarningModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDetailModel.vb" />
@@ -350,6 +351,7 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEarningSummaryView.vb" />
     <Compile Include="PresentationLayer\Views\OvertimeItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
@@ -373,6 +375,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollDeductionView.vb" />
+    <Compile Include="PresentationLayer\Views\EarningSummaryView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollEarningView.vb" />
     <Compile Include="PresentationLayer\Views\AttendanceItemView.vb" />
     <Compile Include="PresentationLayer\Views\DjOiItemView.vb" />
@@ -1322,6 +1325,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CadOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CashReceiptJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CsrOiItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EarningSummaryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeDeductionModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeEarningModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />

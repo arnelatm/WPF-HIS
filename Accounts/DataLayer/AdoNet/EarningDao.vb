@@ -41,6 +41,8 @@ Namespace DataLayer.AdoNet
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim peaDao = New PayrollEarnAccountDao()
             data.PayrollEarnAccounts = peaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
+            Dim esDao = New EarningSummaryDao()
+            data.EarningsSummary = esDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
             Return data
         End Function
 

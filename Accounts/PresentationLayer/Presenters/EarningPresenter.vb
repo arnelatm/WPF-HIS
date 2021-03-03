@@ -13,7 +13,10 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Protected DtEarnInsertTable As New DataTable
+        Protected DtEarnUpdateTable As New DataTable
         Private ReadOnly _payrollEarnAccountModel As New ModelAccounts("PayrollEarnAccount")
+        Private ReadOnly _earningSummaryModel As New ModelAccounts("EarningSummary")
 
         Public Sub New(view As IEarningView)
             MyBase.New(view)
@@ -33,11 +36,23 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("PayGroupIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
+            DtEarnInsertTable.Columns.Add("EarningGroupIdNo", GetType(Int16))
+            DtEarnInsertTable.Columns.Add("EarningIdNo", GetType(Int16))
+            DtEarnInsertTable.Columns.Add("Multiplier", GetType(Decimal))
+            DtEarnInsertTable.Columns.Add("Sequence", GetType(Int16))
+
+            DtEarnUpdateTable.Columns.Add("EarningGroupIdNo", GetType(Int16))
+            DtEarnUpdateTable.Columns.Add("EarningIdNo", GetType(Int16))
+            DtEarnUpdateTable.Columns.Add("IdNo", GetType(Int32))
+            DtEarnUpdateTable.Columns.Add("Multiplier", GetType(Decimal))
+            DtEarnUpdateTable.Columns.Add("Sequence", GetType(Int16))
+
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 ViewToDataTables(View.PayrollEarnAccounts, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PayrollEarnAccountFilter)
+                ViewToDataTables(View.EarningsSummary, DtEarnInsertTable, DtEarnUpdateTable, AddressOf FillEsData, AddressOf EarnSummaryFilter)
             End If
         End Sub
 
@@ -54,9 +69,25 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
+        Private Sub FillEsData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("EarningGroupIdNo") = View.IdNo
+            workRow("EarningIdNo") = itemDataView.EarningIdNo
+            workRow("Multiplier") = itemDataView.Multiplier
+        End Sub
+
+        Public Function EarnSummaryFilter(ByVal obj As Object) As Boolean
+            If (obj.EarningIdNo Is Nothing Or obj.EarningIdNo = 0 Or obj.Multiplier = 0) Then 'AndAlso (obj.PayGroupIdNo Is Nothing Or obj.PayGroupIdNo = 0) Then
+                Return False
+            End If
+            Return True
+        End Function
+
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_payrollEarnAccountModel, DtUpdateTable, DtInsertTable, passedValue, "EarningIdNo")
+            retVal = UpdateChildData(_payrollEarnAccountModel, DtUpdateTable, DtInsertTable, passedValue, "EarningGroupIdNo")
+            If retVal >= 0 Then
+                retVal = UpdateChildData(_earningSummaryModel, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "EarningGroupIdNo")
+            End If
         End Sub
 
         'Public Overrides Sub UpdateViewDisplay(idNo As Int32)

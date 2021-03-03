@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -24,6 +25,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Unit As Char
         Property UsePayGroups As Boolean
         Property PayrollEarnAccounts As List(Of PayrollEarnAccountView)
+        Property EarningsSummary As List(Of EarningSummaryView)
     End Interface
 
 End Namespace

@@ -27,6 +27,7 @@
         Public Property UsePayGroups As Boolean
         Property Errors As List(Of String)
         Public Property PayrollEarnAccounts As IList(Of PayrollEarnAccountModel)
+        Public Property EarningsSummary As IList(Of EarningSummaryModel)
     End Class
 
 End Namespace
