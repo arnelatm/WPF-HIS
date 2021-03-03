@@ -39,6 +39,7 @@ Namespace BusinessLayer
         Public Property Unit As Char
         Public Property UsePayGroups As Boolean
         Public Property PayrollEarnAccounts As List(Of PayrollEarnAccount)
+        Public Property EarningsSummary As List(Of EarningSummary)
 
     End Class
 

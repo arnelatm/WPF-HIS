@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -11,7 +12,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private _accountsByCode
         Private _payGroupsByCode
+        Private _earningsByCode
         Private _payrollEarnAccounts As List(Of PayrollEarnAccountView)
+        Private _earningsSummary As List(Of EarningSummaryView)
         Private _useRevCostCenters As Nullable(Of Boolean)
         Private _useDepartments As Nullable(Of Boolean)
         Private _usePayGroups As Nullable(Of Boolean)
@@ -126,7 +129,8 @@ Namespace PresentationLayer.Views.Forms
             Set
                 chkSummary.Checked = Value
                 If Value Then
-                    cboEarningType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
+                    cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.Summary)
+                    cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
                 End If
             End Set
         End Property
@@ -176,16 +180,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayrollEarnAccounts As List(Of PayrollEarnAccountView) Implements IEarningView.PayrollEarnAccounts
-            Get
-                Return _payrollEarnAccounts
-            End Get
-            Set
-                _payrollEarnAccounts = Value
-                BindPayrollEarnAccounts()
-            End Set
-        End Property
-
         Public Property Notes As String Implements IEarningView.Notes
             Get
                 Return txtNotes.Text
@@ -228,6 +222,26 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property EarningsSummary As List(Of EarningSummaryView) Implements IEarningView.EarningsSummary
+            Get
+                Return _earningsSummary
+            End Get
+            Set
+                _earningsSummary = Value
+                BindEarningsSummary()
+            End Set
+        End Property
+
+        Public Property PayrollEarnAccounts As List(Of PayrollEarnAccountView) Implements IEarningView.PayrollEarnAccounts
+            Get
+                Return _payrollEarnAccounts
+            End Get
+            Set
+                _payrollEarnAccounts = Value
+                BindPayrollEarnAccounts()
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
@@ -240,6 +254,7 @@ Namespace PresentationLayer.Views.Forms
             cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
             _accountsByCode = PresenterObj.GetDetailAccountList()
             _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
+            _earningsByCode = PresenterObj.GetLookup("Earning")
         End Sub
 
         Private Sub BindPayrollEarnAccounts()
@@ -292,27 +307,23 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-        Private Sub BindPayrollEarnAccount()
+        Private Sub BindEarningsSummary()
             SuspendLayout()
-            bsPayrollEarnAccounts.DataSource = Nothing
-            DataGridViewPayrollEarnAccounts.Refresh()
-            bsPayrollEarnAccounts.DataSource = PayrollEarnAccounts
-            bsPayrollEarnAccounts.AllowNew = True
-            With DataGridViewPayrollEarnAccounts
+            bsEarningSummary.DataSource = Nothing
+            DataGridViewSummaryDetail.Refresh()
+            bsEarningSummary.DataSource = EarningsSummary
+            bsEarningSummary.AllowNew = True
+            With DataGridViewSummaryDetail
                 .Refresh()
                 .AutoGenerateColumns = False
-                .DataSource = bsPayrollEarnAccounts
+                .DataSource = bsEarningSummary
                 .Refresh()
             End With
-            With DataGridViewPayrollEarnAccounts.Columns
-                dgvAccountIdNo.DataSource = _accountsByCode
-                dgvAccountIdNo.DisplayMember = "Name"
-                dgvAccountIdNo.ValueMember = "IdNo"
-                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvPayGroupIdNo.DataSource = _payGroupsByCode
-                dgvPayGroupIdNo.DisplayMember = "Name"
-                dgvPayGroupIdNo.ValueMember = "idNo"
-                dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
+            With DataGridViewSummaryDetail.Columns
+                dgvEarningIdNo.DataSource = _earningsByCode
+                dgvEarningIdNo.ValueMember = "IdNo"
+                dgvEarningIdNo.DisplayMember = "Name"
+                dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -327,110 +338,112 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateCalculationTabDisplay()
-            SuspendLayout()
-            floCalculation.Visible = False
-            tlpCalculation.Visible = False
-            Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
-            'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
-            Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
-            Dim cellPosUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(1, 3)
-            lblFactoredUnit.Visible = False
-            Select Case curCalculationType
-                Case CalculationTypeSelection.FixedAmount
-                    cboBasePaymentIdNo.Visible = False
-                    cboMultiplierType.Visible = False
-                    cboUnit.Visible = False
-                    lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = False
-                    lblMultiplier.Visible = False
-                    lblPayRate.Visible = False
-                    lblRate.Visible = False
-                    'lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
-                    'lblPayRate.Text = Messaging.TranslateCaption("/")
-                    txtDefaultQuantity.Visible = False
-                    txtMultiplier.Visible = False
-                    txtRate.Visible = False
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetColumnSpan(cboUnit, 1)
-                Case CalculationTypeSelection.FixedRate
-                    cboBasePaymentIdNo.Visible = False
-                    cboMultiplierType.Visible = False
-                    cboUnit.Visible = True
-                    lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = True
-                    lblMultiplier.Visible = False
-                    lblPayRate.Visible = True
-                    lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
-                    'lblPayRate.Text = Messaging.TranslateCaption("/")
-                    txtDefaultQuantity.Visible = True
-                    txtMultiplier.Visible = False
-                    txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetColumnSpan(cboUnit, 1)
-                Case CalculationTypeSelection.Factor
-                    cboBasePaymentIdNo.Visible = True
-                    cboMultiplierType.Visible = True
-                    cboUnit.Visible = True
-                    lblBasePayment.Visible = True
-                    lblDefaultQuantity.Visible = True
-                    lblMultiplier.Visible = True
-                    lblPayRate.Visible = False
-                    lblRate.Visible = False
-                    lblFactoredUnit.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosUnit)
-                    tlpCalculation.SetColumnSpan(cboUnit, 3)
-                    cboUnit.Visible = True
-                    'SwapPosition(cboFactoredUnit,cboUnit)
-                    txtDefaultQuantity.Visible = True
-                    txtMultiplier.Visible = True
-                    txtRate.Visible = False
-                Case CalculationTypeSelection.Variable
-                    cboBasePaymentIdNo.Visible = False
-                    cboMultiplierType.Visible = False
-                    cboUnit.Visible = True
-                    lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = True
-                    lblMultiplier.Visible = False
-                    lblPayRate.Visible = True
-                    lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
-                    txtDefaultQuantity.Visible = True
-                    txtMultiplier.Visible = False
-                    txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetColumnSpan(cboUnit, 1)
-                Case CalculationTypeSelection.Global
-                    cboBasePaymentIdNo.Visible = False
-                    cboMultiplierType.Visible = False
-                    cboUnit.Visible = True
-                    lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = True
-                    lblMultiplier.Visible = False
-                    lblPayRate.Visible = True
-                    lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
-                    txtDefaultQuantity.Visible = True
-                    txtMultiplier.Visible = False
-                    txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetColumnSpan(cboUnit, 1)
-                Case CalculationTypeSelection.Summary
-                    cboBasePaymentIdNo.Visible = False
-                    cboMultiplierType.Visible = False
-                    cboUnit.Visible = False
-                    lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = False
-                    lblMultiplier.Visible = False
-                    lblPayRate.Visible = False
-                    lblRate.Visible = False
-                    txtDefaultQuantity.Visible = False
-                    txtMultiplier.Visible = False
-                    txtRate.Visible = False
-            End Select
-            tlpCalculation.Visible = True
-            floCalculation.Visible = True
-            ResumeLayout()
+            If Not chkSummary.Checked Then
+                SuspendLayout()
+                floCalculation.Visible = False
+                tlpCalculation.Visible = False
+                Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
+                'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
+                Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
+                Dim cellPosUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(1, 3)
+                lblFactoredUnit.Visible = False
+                Select Case curCalculationType
+                    Case CalculationTypeSelection.FixedAmount
+                        cboBasePaymentIdNo.Visible = False
+                        cboMultiplierType.Visible = False
+                        cboUnit.Visible = False
+                        lblBasePayment.Visible = False
+                        lblDefaultQuantity.Visible = False
+                        lblMultiplier.Visible = False
+                        lblPayRate.Visible = False
+                        lblRate.Visible = False
+                        'lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                        'lblPayRate.Text = Messaging.TranslateCaption("/")
+                        txtDefaultQuantity.Visible = False
+                        txtMultiplier.Visible = False
+                        txtRate.Visible = False
+                        tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                        tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    Case CalculationTypeSelection.FixedRate
+                        cboBasePaymentIdNo.Visible = False
+                        cboMultiplierType.Visible = False
+                        cboUnit.Visible = True
+                        lblBasePayment.Visible = False
+                        lblDefaultQuantity.Visible = True
+                        lblMultiplier.Visible = False
+                        lblPayRate.Visible = True
+                        lblRate.Visible = True
+                        lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                        'lblPayRate.Text = Messaging.TranslateCaption("/")
+                        txtDefaultQuantity.Visible = True
+                        txtMultiplier.Visible = False
+                        txtRate.Visible = True
+                        tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                        tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    Case CalculationTypeSelection.Factor
+                        cboBasePaymentIdNo.Visible = True
+                        cboMultiplierType.Visible = True
+                        cboUnit.Visible = True
+                        lblBasePayment.Visible = True
+                        lblDefaultQuantity.Visible = True
+                        lblMultiplier.Visible = True
+                        lblPayRate.Visible = False
+                        lblRate.Visible = False
+                        lblFactoredUnit.Visible = True
+                        tlpCalculation.SetCellPosition(cboUnit, cellPosUnit)
+                        tlpCalculation.SetColumnSpan(cboUnit, 3)
+                        cboUnit.Visible = True
+                        'SwapPosition(cboFactoredUnit,cboUnit)
+                        txtDefaultQuantity.Visible = True
+                        txtMultiplier.Visible = True
+                        txtRate.Visible = False
+                    Case CalculationTypeSelection.Variable
+                        cboBasePaymentIdNo.Visible = False
+                        cboMultiplierType.Visible = False
+                        cboUnit.Visible = True
+                        lblBasePayment.Visible = False
+                        lblDefaultQuantity.Visible = True
+                        lblMultiplier.Visible = False
+                        lblPayRate.Visible = True
+                        lblRate.Visible = True
+                        lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
+                        txtDefaultQuantity.Visible = True
+                        txtMultiplier.Visible = False
+                        txtRate.Visible = True
+                        tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                        tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    Case CalculationTypeSelection.Global
+                        cboBasePaymentIdNo.Visible = False
+                        cboMultiplierType.Visible = False
+                        cboUnit.Visible = True
+                        lblBasePayment.Visible = False
+                        lblDefaultQuantity.Visible = True
+                        lblMultiplier.Visible = False
+                        lblPayRate.Visible = True
+                        lblRate.Visible = True
+                        lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
+                        txtDefaultQuantity.Visible = True
+                        txtMultiplier.Visible = False
+                        txtRate.Visible = True
+                        tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                        tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    Case CalculationTypeSelection.Summary
+                        cboBasePaymentIdNo.Visible = False
+                        cboMultiplierType.Visible = False
+                        cboUnit.Visible = False
+                        lblBasePayment.Visible = False
+                        lblDefaultQuantity.Visible = False
+                        lblMultiplier.Visible = False
+                        lblPayRate.Visible = False
+                        lblRate.Visible = False
+                        txtDefaultQuantity.Visible = False
+                        txtMultiplier.Visible = False
+                        txtRate.Visible = False
+                End Select
+                tlpCalculation.Visible = True
+                floCalculation.Visible = True
+                ResumeLayout()
+            End If
         End Sub
 
         'Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs)

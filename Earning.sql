@@ -1,4 +1,4 @@
-USE [ISPDATA]
+sUSE [ISPDATA]
 GO
 SET IDENTITY_INSERT [dbo].[Earning] ON 
 GO
