@@ -680,6 +680,7 @@ Public Class CFormEntry
             If TypeOf cCtrl Is DataGridView Then
                 Dim cGrid As DataGridView = cCtrl
                 cGrid.EndEdit()
+                GridValidator()
             End If
         Next
         If ValidateNumericValues() Then
@@ -688,6 +689,10 @@ Public Class CFormEntry
         If PresenterObj.SaveSuccessful AndAlso PresenterObj.QuitOnSave Then
             PresenterObj.GoQuit()
         End If
+    End Sub
+
+    Protected Overridable Sub GridValidator()
+        '
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click

@@ -26,7 +26,9 @@ Public Class CDataGridView
         DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
         DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite
-
+        ShowEditingIcon = True
+        ShowCellErrors = True
+        ShowRowErrors = True
     End Sub
 
     Public Event ChangesMade As EventHandler

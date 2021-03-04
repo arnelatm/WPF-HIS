@@ -575,6 +575,55 @@ Namespace PresentationLayer.Views.Forms
         '    End With
         'End Sub
 
+        Protected Overrides Sub GridValidator()
+            MyBase.GridValidator()
+            Dim errorFound As Boolean = False
+            For Each row As DataGridViewRow In DataGridViewSummaryDetail.Rows
+                If row.Cells("dgvMultiplierSummary").Value = 0 Then
+                    row.Cells("dgvMultiplierSummary").ErrorText = "ERROR!"
+                    errorFound = True
+                End If
+            Next
+            If errorFound Then
+
+            End If
+        End Sub
+
+
+        'Protected Overrides Sub OnLoad(ByVal e As EventArgs)
+        '    MyBase.OnLoad(e)
+        '    Me.AutoValidate = AutoValidate.EnableAllowFocusChange
+        '    ImageList1.ColorDepth = ColorDepth.Depth32Bit
+        '    ImageList1.Images.Add(errorProvider1.Icon)
+        '    tabControl1.ImageList = ImageList1
+        '    textBox1.Validating += AddressOf textBox_Validating
+        '    textBox2.Validating += AddressOf textBox_Validating
+        'End Sub
+
+        'Private Sub textBox_Validating(ByVal sender As Object, ByVal e As CancelEventArgs)
+        '    Dim textBox = CType(sender, TextBox)
+
+        '    If String.IsNullOrEmpty(textBox.Text) Then
+        '        Me.errorProvider1.SetError(textBox, "Value is required.")
+        '        e.Cancel = True
+        '    Else
+        '        Me.errorProvider1.SetError(textBox, Nothing)
+        '    End If
+
+        '    Dim tabPage = TryCast(textBox.Parent, TabPage)
+        '    If tabPage IsNot Nothing Then ValidateTabPage(tabPage)
+        'End Sub
+
+        'Private Sub ValidateTabPage(ByVal tabPage As TabPage)
+        '    Dim tabIsValid = tabPage.Controls.Cast(Of Control)().All(Function(x) String.IsNullOrEmpty(errorProvider1.GetError(x)))
+
+        '    If tabIsValid Then
+        '        tabPage.ImageIndex = -1
+        '    Else
+        '        tabPage.ImageIndex = 0
+        '    End If
+        'End Sub
+
     End Class
 
 End Namespace

@@ -293,6 +293,42 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Protected Function IsChildValid(Of Tcm)(childProperty) As Boolean
+            Dim retValue As Boolean = True
+            Dim bizObjectList As New List(Of Tcm)
+            Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
+            Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
+            ' is standard naming convention to name the view as the object with 'View' as appended name so
+            Dim model As New ModelAccounts(bizName)
+            Dim dModel = GlobalVariables.Mapper.Map(childProperty, bizObjectList)
+            For Each item In bizObjectList
+                If Not model.IsValid(item) Then
+                    retValue = False
+                    AddToParentError(model.GetBizObjectErrors)
+                    Exit For
+                End If
+            Next
+            Return retValue
+        End Function
+
+
+        Protected Function IsChildValid2(Of Tcm)(bizName, childProperty) As Boolean
+            Dim retValue As Boolean = True
+            Dim sModel As New List(Of Tcm)
+            Dim esModel As New ModelAccounts(bizName)
+            Dim dModel = GlobalVariables.Mapper.Map(childProperty, sModel)
+            For Each item In sModel
+                If Not esModel.IsValid(item) Then
+                    retValue = False
+                End If
+            Next
+            If Not retValue Then
+                AddToParentError(esModel.GetBizObjectErrors)
+            End If
+            Return retValue
+        End Function
+
+
     End Class
 
 End Namespace
