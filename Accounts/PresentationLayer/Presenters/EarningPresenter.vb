@@ -85,7 +85,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_payrollEarnAccountModel, DtUpdateTable, DtInsertTable, passedValue, "EarningSummaryIdNo")
+            retVal = UpdateChildData(_payrollEarnAccountModel, DtUpdateTable, DtInsertTable, passedValue, "PayGroupIdNo")
             If retVal >= 0 Then
                 retVal = UpdateChildData(_earningSummaryModel, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "EarningSummaryIdNo")
             End If
@@ -157,36 +157,36 @@ Namespace PresentationLayer.Presenters
         'End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
-            Dim retValue = False
+            Dim retValue As Boolean = True
             If MyBase.IsBizDataValid() Then
-                retValue = True
                 If Not UsePayGroups() Then
                     If View.AccountIdNo <= 0 Then
                         Messaging.Show(True, "MsgPostingAccountMustNotBeBlank")
                         retValue = False
                     End If
                 End If
-                Dim sModel As New List(Of EarningSummaryModel)
-                Dim esModel As New ModelAccounts("EarningSummary")
-                Dim dModel = GlobalVariables.Mapper.Map(View.EarningsSummary, sModel)
-                For Each item In sModel
-                    If Not esModel.IsValid(item) Then
-                        retValue = False
-                    End If
-                Next
-                'If View.EarningsSummary Then
-                'For Each item In View.EarningsSummary
-                '    If item.Multiplier = 0 Then
-                '        Dim lineNumber As String = item.Sequence.ToString()
-                '        Messaging.ShowParametrizedMessage(True, "MultiplierMustNotBeZero", {"lineNumber", lineNumber})
-                '        retValue = False
-                '        Exit For
-                '    End If
-                ''Next
+                If retValue Then
+                    retValue = IsChildValid(Of EarningSummaryModel)(View.EarningsSummary)
+                End If
             End If
             Return retValue
         End Function
 
+        'Private Function GetChildErrors(retValue As Boolean) As Boolean
+        '    Dim sModel As New List(Of EarningSummaryModel)
+        '    Dim esModel As New ModelAccounts("EarningSummary")
+        '    Dim dModel = GlobalVariables.Mapper.Map(View.EarningsSummary, sModel)
+        '    For Each item In sModel
+        '        If Not esModel.IsValid(item) Then
+        '            retValue = False
+        '        End If
+        '    Next
+        '    If Not retValue Then
+        '        AddToParentError(esModel.GetBizObjectErrors)
+        '    End If
+
+        '    Return retValue
+        'End Function
     End Class
 
 End Namespace

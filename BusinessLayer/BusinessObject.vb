@@ -49,4 +49,10 @@ Public MustInherit Class BusinessObject
         Return _errors
     End Function
 
+    Public Sub AddError(errorList As List(Of String))
+        For Each aError In errorList
+            _errors.Add(aError)
+        Next
+    End Sub
+
 End Class

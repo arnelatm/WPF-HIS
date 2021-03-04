@@ -1381,4 +1381,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return dataList
     End Function
 
+
+    Public Sub AddToParentError(errors As List(Of String))
+        Dim mainBizObj = DirectCast(DirectCast(DirectCast(Model, AATM.PresentationLayer.Models.Model).DataService, AATM.ServicesLayer.Services.Service).DataBo, AATM.BusinessLayer.BusinessObject)
+        mainBizObj.AddError(errors)
+    End Sub
+
+
 End Class
