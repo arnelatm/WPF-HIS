@@ -724,4 +724,21 @@ Public Class CDataGridView
     '    Return True
     'End Function
 
+    Private Sub CDataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellEndEdit
+        Dim nIndex = Me.CurrentRow.Index
+        If DataSource IsNot Nothing Then
+            If DataSource.[GetType]() Is GetType(BindingSource) Then
+                'AssignEvent()
+                Dim myBindingSource = CType(DataSource, BindingSource)
+                If Me.CurrentRow.Index = Me.NewRowIndex Then
+                    myBindingSource.AddNew()
+                    ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                    myBindingSource.RemoveAt(myBindingSource.Count - 1)
+                End If
+            End If
+        End If
+
+    End Sub
+
 End Class
