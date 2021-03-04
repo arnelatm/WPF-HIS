@@ -2,6 +2,7 @@
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -349,6 +350,7 @@ Namespace PresentationLayer.Views.Forms
                 lblFactoredUnit.Visible = False
                 Select Case curCalculationType
                     Case CalculationTypeSelection.FixedAmount
+                        cboEarningType.Visible = True
                         cboBasePaymentIdNo.Visible = False
                         cboMultiplierType.Visible = False
                         cboUnit.Visible = False
@@ -365,6 +367,7 @@ Namespace PresentationLayer.Views.Forms
                         tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                         tlpCalculation.SetColumnSpan(cboUnit, 1)
                     Case CalculationTypeSelection.FixedRate
+                        cboEarningType.Visible = True
                         cboBasePaymentIdNo.Visible = False
                         cboMultiplierType.Visible = False
                         cboUnit.Visible = True
@@ -381,6 +384,7 @@ Namespace PresentationLayer.Views.Forms
                         tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                         tlpCalculation.SetColumnSpan(cboUnit, 1)
                     Case CalculationTypeSelection.Factor
+                        cboEarningType.Visible = True
                         cboBasePaymentIdNo.Visible = True
                         cboMultiplierType.Visible = True
                         cboUnit.Visible = True
@@ -398,6 +402,7 @@ Namespace PresentationLayer.Views.Forms
                         txtMultiplier.Visible = True
                         txtRate.Visible = False
                     Case CalculationTypeSelection.Variable
+                        cboEarningType.Visible = True
                         cboBasePaymentIdNo.Visible = False
                         cboMultiplierType.Visible = False
                         cboUnit.Visible = True
@@ -413,6 +418,7 @@ Namespace PresentationLayer.Views.Forms
                         tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                         tlpCalculation.SetColumnSpan(cboUnit, 1)
                     Case CalculationTypeSelection.Global
+                        cboEarningType.Visible = True
                         cboBasePaymentIdNo.Visible = False
                         cboMultiplierType.Visible = False
                         cboUnit.Visible = True
@@ -428,6 +434,7 @@ Namespace PresentationLayer.Views.Forms
                         tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                         tlpCalculation.SetColumnSpan(cboUnit, 1)
                     Case CalculationTypeSelection.Summary
+                        cboEarningType.Visible = False
                         cboBasePaymentIdNo.Visible = False
                         cboMultiplierType.Visible = False
                         cboUnit.Visible = False
@@ -550,6 +557,23 @@ Namespace PresentationLayer.Views.Forms
                 DataGridViewSummaryDetail.Visible = False
             End If
         End Sub
+
+        'Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSummaryDetail.CellEndEdit
+        '    With DataGridViewSummaryDetail
+        '        Dim nIndex = .CurrentRow.Index
+        '        Select Case .CurrentCell.OwningColumn.Name
+        '            Case "dgvEarningIdNo"
+        '                Dim earningId = DirectCast(DataGridViewSummaryDetail.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+        '                If DataGridViewSummaryDetail.CurrentRow.Index = DataGridViewSummaryDetail.NewRowIndex Then
+        '                    bsEarningSummary.AddNew()
+        '                    EarningsSummary(nIndex).EarningIdNo = earningId
+        '                    ' adding a new row to the bindingsource adds a new empty row at the end with null values
+        '                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+        '                    bsEarningSummary.RemoveAt(bsEarningSummary.Count - 1)
+        '                End If
+        '        End Select
+        '    End With
+        'End Sub
 
     End Class
 

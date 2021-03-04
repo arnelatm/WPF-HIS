@@ -1,5 +1,5 @@
 ﻿CREATE TYPE [dbo].[EarningSummaryUpdate] AS TABLE (
-    [EarningGroupIdNo] SMALLINT        NOT NULL,
+    [EarningSummaryIdNo] SMALLINT        NOT NULL,
     [EarningIdNo]      SMALLINT        NOT NULL,
     [IdNo]             INT             NOT NULL,
     [Multiplier]       DECIMAL (10, 4) NOT NULL,

@@ -5,6 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AutoMapper
 
 Namespace PresentationLayer.Presenters
 
@@ -36,12 +37,12 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("PayGroupIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtEarnInsertTable.Columns.Add("EarningGroupIdNo", GetType(Int16))
+            DtEarnInsertTable.Columns.Add("EarningSummaryIdNo", GetType(Int16))
             DtEarnInsertTable.Columns.Add("EarningIdNo", GetType(Int16))
             DtEarnInsertTable.Columns.Add("Multiplier", GetType(Decimal))
             DtEarnInsertTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtEarnUpdateTable.Columns.Add("EarningGroupIdNo", GetType(Int16))
+            DtEarnUpdateTable.Columns.Add("EarningSummaryIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("EarningIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtEarnUpdateTable.Columns.Add("Multiplier", GetType(Decimal))
@@ -70,7 +71,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub FillEsData(ByRef itemDataView As Object, ByRef workRow As DataRow)
-            workRow("EarningGroupIdNo") = View.IdNo
+            workRow("EarningSummaryIdNo") = View.IdNo
             workRow("EarningIdNo") = itemDataView.EarningIdNo
             workRow("Multiplier") = itemDataView.Multiplier
         End Sub
@@ -84,9 +85,9 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_payrollEarnAccountModel, DtUpdateTable, DtInsertTable, passedValue, "EarningGroupIdNo")
+            retVal = UpdateChildData(_payrollEarnAccountModel, DtUpdateTable, DtInsertTable, passedValue, "EarningSummaryIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_earningSummaryModel, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "EarningGroupIdNo")
+                retVal = UpdateChildData(_earningSummaryModel, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "EarningSummaryIdNo")
             End If
         End Sub
 
@@ -165,6 +166,23 @@ Namespace PresentationLayer.Presenters
                         retValue = False
                     End If
                 End If
+                Dim sModel As New List(Of EarningSummaryModel)
+                Dim esModel As New ModelAccounts("EarningSummary")
+                Dim dModel = GlobalVariables.Mapper.Map(View.EarningsSummary, sModel)
+                For Each item In sModel
+                    If Not esModel.IsValid(item) Then
+                        retValue = False
+                    End If
+                Next
+                'If View.EarningsSummary Then
+                'For Each item In View.EarningsSummary
+                '    If item.Multiplier = 0 Then
+                '        Dim lineNumber As String = item.Sequence.ToString()
+                '        Messaging.ShowParametrizedMessage(True, "MultiplierMustNotBeZero", {"lineNumber", lineNumber})
+                '        retValue = False
+                '        Exit For
+                '    End If
+                ''Next
             End If
             Return retValue
         End Function

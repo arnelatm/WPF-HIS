@@ -17,12 +17,12 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of EarningSummary) Implements IDaoChild(Of EarningSummary).GetRecordsWithGroupIdNo
             Dim sql As String =
                     "SELECT " &
-                    "EarningGroupIdNo," &
+                    "EarningSummaryIdNo," &
                     "EarningIdNo," &
                     "IdNo," &
                     "Multiplier" &
                     " FROM [EarningSummary]" &
-                    " WHERE EarningGroupIdNo = @IdNo "
+                    " WHERE EarningSummaryIdNo = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).ToList()
         End Function
@@ -42,7 +42,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, EarningSummary) =
                                     Function(reader) _
             New EarningSummary() With {
-            .EarningGroupIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("EarningGroupIdNo")),
+            .EarningSummaryIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("EarningSummaryIdNo")),
             .EarningIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("EarningIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .Multiplier = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Multiplier"))
