@@ -585,7 +585,9 @@ Namespace PresentationLayer.Views.Forms
                 End If
             Next
             If errorFound Then
-
+                tbpSummaryDetail.ImageIndex = 0
+            Else
+                tbpSummaryDetail.ImageIndex = -1
             End If
         End Sub
 
