@@ -488,9 +488,9 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
-            Dim childMdiForm As BankEntryTv
+            Dim childMdiForm As BankEntryTv1
             ''Set the Parent Form of the Child window.
-            childMdiForm = New BankEntryTv With {
+            childMdiForm = New BankEntryTv1 With {
                 .MdiParent = Me
                 }
             ''Display the new form.
@@ -561,7 +561,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCustomerClients.Click
-            ShowEntryForm(CustomerEntryTv)
+            'ShowEntryForm(CustomerEntryTv)
+            Dim childMdiForm = New CustomerEntryBound With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
         End Sub
 
         Private Sub DepartmentNewToolStripMenuItem_Click(sender As Object, e As EventArgs) _

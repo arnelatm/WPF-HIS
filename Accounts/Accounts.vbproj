@@ -172,6 +172,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\Customer1.vb" />
     <Compile Include="BusinessLayer\OvertimeItem.vb" />
     <Compile Include="BusinessLayer\Basic.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
@@ -351,6 +352,18 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\BankEntryTv1.Designer.vb">
+      <DependentUpon>BankEntryTv1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\BankEntryTv1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.Designer.vb">
+      <DependentUpon>CustomerEntryBound.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IEarningSummaryView.vb" />
     <Compile Include="PresentationLayer\Views\OvertimeItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\Form1.Designer.vb">
@@ -1011,6 +1024,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\BankEntryTv.resx">
       <DependentUpon>BankEntryTv.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\BankEntryTv1.resx">
+      <DependentUpon>BankEntryTv1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\BasicEntry.resx">
       <DependentUpon>BasicEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -1019,6 +1035,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CheckPrinting.resx">
       <DependentUpon>CheckPrinting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CustomerEntryBound.resx">
+      <DependentUpon>CustomerEntryBound.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DeductionEntryTv.resx">
       <DependentUpon>DeductionEntryTv.vb</DependentUpon>
@@ -1310,9 +1329,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
-    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\app.manifest" />
@@ -1320,6 +1339,8 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\AATM.Accounts.BusinessLayer.Bank.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.BusinessLayer.Customer1.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Forms.EmployeeEntryTv.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.AttendanceModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CadOiItemModel.datasource" />

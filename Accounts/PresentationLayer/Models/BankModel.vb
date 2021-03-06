@@ -5,7 +5,6 @@
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class BankModel
-
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
         Public Property BankCode As String
