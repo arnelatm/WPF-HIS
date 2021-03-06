@@ -107,8 +107,8 @@ Namespace PresentationLayer.Views.Forms
             cboParentIdNo.DataSource = PresenterObj.GetLookup("PayGroup")
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"PayGroupCode", txtPayGroupCode},
                 {"PayGroupName", txtPayGroupName},

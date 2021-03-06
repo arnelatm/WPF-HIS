@@ -61,7 +61,7 @@ Public Module GlobalSubs
 
     'End Function
 
-    Public Sub MapObject(Of TS, TT)(ByRef source As TS, ByRef target As TT, Optional ByVal fieldsDictionary As Dictionary(Of String, String) = Nothing)
+    Public Sub MapObject(Of TS, TT)(ByRef source As TS, ByRef target As TT, Optional ByVal MainFieldsDictionary As Dictionary(Of String, String) = Nothing)
         Dim tPropertyInfos = target.GetType().GetProperties()
         Dim sPropertyInfos = source.GetType().GetProperties()
         Dim comparer = StringComparer.OrdinalIgnoreCase
@@ -84,8 +84,8 @@ Public Module GlobalSubs
         Dim j As Int16 = 0
         For Each s As PropertyInfo In sPropertyInfos
             sourcePropertyName = s.Name
-            If fieldsDictionary IsNot Nothing Then
-                fieldsDictionary.TryGetValue(s.Name, targetPropertyName)
+            If MainFieldsDictionary IsNot Nothing Then
+                MainFieldsDictionary.TryGetValue(s.Name, targetPropertyName)
                 If targetPropertyName Is Nothing Then
                     targetPropertyName = sourcePropertyName
                 End If

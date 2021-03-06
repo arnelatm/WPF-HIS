@@ -16,8 +16,6 @@
     'For example, you can enter 'Student Name is mandatory' as an error message.
     Public Property ErrorMessage As String
 
-    'ErrorMessage is also used for displaying summary message.
-    'For example, you can enter 'Student Name is mandatory' as an error message.
     Public Property Mandatory As Boolean = True
 
 End Class

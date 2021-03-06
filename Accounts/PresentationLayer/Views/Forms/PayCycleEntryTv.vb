@@ -102,8 +102,8 @@ Namespace PresentationLayer.Views.Forms
             cboPayFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"PayCycleCode", txtPayCycleCode},
                 {"PayCycleName", txtPayCycleName},

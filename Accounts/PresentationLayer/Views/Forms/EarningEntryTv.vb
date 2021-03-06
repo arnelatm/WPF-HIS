@@ -21,6 +21,8 @@ Namespace PresentationLayer.Views.Forms
         Private _usePayGroups As Nullable(Of Boolean)
         Private _unit As Char
         Private _unitPosition As TableLayoutPanelCellPosition
+        Private _eSumFieldsDict As Dictionary(Of String, Object)
+        Private _eAccFieldsDict As Dictionary(Of String, Object)
         Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
 
         Public Sub New()
@@ -286,17 +288,45 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"AccountIdNo", cboAccountIdNo},
+                {"BasePaymentIdNo", cboBasePaymentIdNo},
+                {"CalculationType", cboCalculationType},
+                {"DefaultQuantity", txtDefaultQuantity},
                 {"EarningCode", txtEarningCode},
                 {"EarningName", txtEarningName},
                 {"EarningNameAra", txtEarningNameAra},
                 {"EarningType", cboEarningType},
                 {"IdNo", TxtIdNo},
-                {"Notes", txtNotes}
+                {"IncludeInEos", chkIncludeInEOS},
+                {"Multiplier", txtMultiplier},
+                {"MultiplierType", cboMultiplierType},
+                {"Notes", txtNotes},
+                {"Rate", txtRate},
+                {"Summary", chkSummary},
+                {"Taxable", chkTaxable},
+                {"Unit", cboUnit},
+                {"UsePayGroups", chkUsePayGroups},
+                {"EarningSummary", DataGridViewSummaryDetail}
                 }
+
+            _eSumFieldsDict = New Dictionary(Of String, Object) From
+                {
+                {"EarningIdNo", dgvEarningIdNo},
+                {"Multiplier", dgvMultiplierSummary}
+                }
+
+            _eAccFieldsDict = New Dictionary(Of String, Object) From
+                {
+                {"PayGroupIdNo", dgvPayGroupIdNo},
+                {"AccountIdNo", dgvAccountIdNo}
+                }
+
+            DataGridViewSummaryDetail.FieldsDictionary = _eSumFieldsDict
+            DataGridViewPayrollEarnAccounts.FieldsDictionary = _eAccFieldsDict
+
         End Sub
 
         'Private Sub OnEarningTypeSelectedIndexChanged(sender As Object, e As EventArgs)
@@ -578,11 +608,28 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub GridValidator()
             MyBase.GridValidator()
             Dim errorFound As Boolean = False
+            Dim rules = PresenterObj.GetBizRules(EarningsSummary)
+            'For Each rule In rules
+            '    Dim control As Control = Nothing
+            '    MainFieldsDictionary.TryGetValue(rule.Property, control)
+            '    MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
+            'Next
+
             For Each row As DataGridViewRow In DataGridViewSummaryDetail.Rows
-                If row.Cells("dgvMultiplierSummary").Value = 0 Then
-                    row.Cells("dgvMultiplierSummary").ErrorText = "ERROR!"
-                    errorFound = True
-                End If
+                For Each col In DataGridViewSummaryDetail.Columns()
+                    Dim colName = col.DataPropertyName
+                    Dim value As New Object
+                    _eSumFieldsDict.TryGetValue(colName, value)
+                    If value IsNot Nothing Then
+                        'value.
+                        'value.Cells.ErrorText = "error"
+                        'row.Cells(value)
+                    End If
+                    'If row.Cells("dgvMultiplierSummary").Value = 0 Then
+                    'row.Cells("dgvMultiplierSummary").ErrorText = "ERROR!"
+                    'errorFound = True
+                    'End If
+                Next
             Next
             If errorFound Then
                 tbpSummaryDetail.ImageIndex = 0
@@ -590,7 +637,6 @@ Namespace PresentationLayer.Views.Forms
                 tbpSummaryDetail.ImageIndex = -1
             End If
         End Sub
-
 
         'Protected Overrides Sub OnLoad(ByVal e As EventArgs)
         '    MyBase.OnLoad(e)

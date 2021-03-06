@@ -298,7 +298,7 @@ Namespace PresentationLayer.Presenters
             Dim bizObjectList As New List(Of Tcm)
             Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
             Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
-            ' is standard naming convention to name the view as the object with 'View' as appended name so
+            ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
             Dim model As New ModelAccounts(bizName)
             Dim dModel = GlobalVariables.Mapper.Map(childProperty, bizObjectList)
             For Each item In bizObjectList
@@ -311,6 +311,13 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
+        Public Function GetBizRules(childProperty)
+            Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
+            Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
+            ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
+            Dim bModel As New ModelAccounts(bizName)
+            Return bModel.GetBizObjectRules()
+        End Function
 
         Protected Function IsChildValid2(Of Tcm)(bizName, childProperty) As Boolean
             Dim retValue As Boolean = True
@@ -327,7 +334,6 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
-
 
     End Class
 

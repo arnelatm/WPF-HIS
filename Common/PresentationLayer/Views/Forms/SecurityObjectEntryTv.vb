@@ -97,8 +97,8 @@ Namespace PresentationLayer.Views.Forms
             cacParentIdNo.Refresh()
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"SecurityObjectName", txtSecurityObjectName},
                 {"SecurityObjectNameAra", txtSecurityObjectNameAra},

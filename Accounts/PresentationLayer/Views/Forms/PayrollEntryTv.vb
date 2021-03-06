@@ -171,8 +171,8 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"StartDate", dtpStartDate},
                 {"EndDate", dtpEndDate},

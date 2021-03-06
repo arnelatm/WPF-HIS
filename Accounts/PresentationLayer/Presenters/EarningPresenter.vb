@@ -168,6 +168,8 @@ Namespace PresentationLayer.Presenters
                 If retValue Then
                     retValue = IsChildValid(Of EarningSummaryModel)(View.EarningsSummary)
                 End If
+            Else
+                retValue = False
             End If
             Return retValue
         End Function

@@ -22,7 +22,7 @@ Public Class CFormEntryNew
                ISubscriber(Of BeforeAssignment)
     '          ISubscriber(Of RecordDeleted),
 
-    Public FieldsDictionary As New Dictionary(Of String, Object)
+    Public MainFieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
     Public ShowWaitForm As BackgroundWorker(Of String)
     Protected Const TurnOff As Boolean = False
@@ -92,8 +92,8 @@ Public Class CFormEntryNew
         PresenterObj.FindField(fieldName, searchString, searchAnywhere)
     End Sub
 
-    Public Function GetFieldsDictionary()
-        Return FieldsDictionary
+    Public Function GetMainFieldsDictionary()
+        Return MainFieldsDictionary
     End Function
 
     Public Sub GotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
@@ -481,7 +481,7 @@ Public Class CFormEntryNew
         '
     End Sub
 
-    Protected Overridable Sub CreateFieldsDictionary()
+    Protected Overridable Sub CreateMainFieldsDictionary()
         '
     End Sub
 
@@ -684,7 +684,7 @@ Public Class CFormEntryNew
             AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             CreateDataSources()
-            CreateFieldsDictionary()
+            CreateMainFieldsDictionary()
             Inputs(False)
 
             Try
@@ -698,7 +698,7 @@ Public Class CFormEntryNew
             Dim rules = PresenterObj.GetBizObjectRules()
             For Each rule In rules
                 Dim control As Control = Nothing
-                FieldsDictionary.TryGetValue(rule.Property, control)
+                MainFieldsDictionary.TryGetValue(rule.Property, control)
                 MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
             Next
             SetAllControlsDynamicProperties()
