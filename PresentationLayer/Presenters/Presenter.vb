@@ -1176,12 +1176,13 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Protected Overridable Function IsBizDataValid() As Boolean
-        Dim retValue As Boolean = False
-        GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        If Model.IsValid(DataModel) Then
-            retValue = True
-        End If
-        Return retValue
+        'Dim retValue As Boolean = False
+        'GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+        'If Model.IsValid(DataModel) Then
+        '    retValue = True
+        'End If
+        'Return retValue
+        Return True
     End Function
 
     Protected Function TranslateField(Of TX)(fieldToTranslate As String, ByRef dModel As TX) As String
@@ -1381,11 +1382,24 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return dataList
     End Function
 
-
     Public Sub AddToParentError(errors As List(Of String))
         Dim mainBizObj = DirectCast(DirectCast(DirectCast(Model, AATM.PresentationLayer.Models.Model).DataService, AATM.ServicesLayer.Services.Service).DataBo, AATM.BusinessLayer.BusinessObject)
         mainBizObj.AddError(errors)
     End Sub
 
+    Public Function IsBusinessDataValid(ByRef dataDictionary As Dictionary(Of String, Object)) As Boolean
+        Dim retValue As Boolean = False
+        GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+        If Model.IsValid(DataModel) Then
+            retValue = True
+        Else
+            UpdateErrors(dataDictionary)
+        End If
+        Return retValue
+    End Function
+
+    Private Sub UpdateErrors(ByRef dataDictionary As Dictionary(Of String, Object))
+
+    End Sub
 
 End Class

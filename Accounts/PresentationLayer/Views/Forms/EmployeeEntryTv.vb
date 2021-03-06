@@ -512,8 +512,8 @@ Namespace PresentationLayer.Views.Forms
             _unit = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
          {"Active", chkActive},
          {"BankAccountNo", txtBankAccountNo},

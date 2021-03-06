@@ -22,12 +22,11 @@ Public Class CFormEntry
                ISubscriber(Of BeforeAssignment)
     '          ISubscriber(Of RecordDeleted),
 
-    Public FieldsDictionary As New Dictionary(Of String, Object)
+    Public MainFieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
     Public ShowWaitForm As BackgroundWorker(Of String)
     Protected Const TurnOff As Boolean = False
     Protected Shared _resetEvent As AutoResetEvent = New AutoResetEvent(False)
-
     Protected FirstControl As Control
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
@@ -92,8 +91,8 @@ Public Class CFormEntry
         PresenterObj.FindField(fieldName, searchString, searchAnywhere)
     End Sub
 
-    Public Function GetFieldsDictionary()
-        Return FieldsDictionary
+    Public Function GetMainFieldsDictionary()
+        Return MainFieldsDictionary
     End Function
 
     Public Sub GotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
@@ -274,6 +273,7 @@ Public Class CFormEntry
         Dim originalValue As String
         For Each cCtrl As Control In FindControlRecursive(allControls, Me)
             If TypeOf cCtrl Is IEntryControl Then
+
                 If TypeOf cCtrl Is CTextBoxIdNo Then
                     ' no validations for this type of control. These are Identity Columns and are filled automatically
                     ' by the Data Server.
@@ -307,6 +307,7 @@ Public Class CFormEntry
                         End If
                     End If
                 End If
+
             End If
         Next
         PresenterObj.AutoValidationsPassed = validationsPassed
@@ -483,7 +484,7 @@ Public Class CFormEntry
         '
     End Sub
 
-    Protected Overridable Sub CreateFieldsDictionary()
+    Protected Overridable Sub CreateMainFieldsDictionary()
         '
     End Sub
 
@@ -767,7 +768,7 @@ Public Class CFormEntry
             AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             CreateDataSources()
-            CreateFieldsDictionary()
+            CreateMainFieldsDictionary()
             Inputs(False)
 
             Try
@@ -779,13 +780,18 @@ Public Class CFormEntry
                 MessageBox.Show(ex.Message + Name)
                 Debugger.Break()
             End Try
-
+            ' add bizObject rules to controls
             Dim rules = PresenterObj.GetBizObjectRules()
             For Each rule In rules
                 Dim control As Control = Nothing
-                FieldsDictionary.TryGetValue(rule.Property, control)
+                MainFieldsDictionary.TryGetValue(rule.Property, control)
+                'If control.GetType() Is DataGridView Then
+
+                'Else
                 MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
+                'End If
             Next
+
             SetAllControlsDynamicProperties()
             AddMandatoryFieldCHeck()
             If GlobalVariables.RightToLeftLayout Then
@@ -1074,5 +1080,60 @@ Public Class CFormEntry
     '    Public Event InputsTurnedOn()
 
     '#End Region
+
+    'Public Shared Function FormIsValid(ByRef objForm As Form) As Boolean
+
+    '    Dim valid As Boolean = True
+    '    ValidateControls(objForm, objForm.Controls, valid)
+
+    '    objForm.Focus()
+    '    If Not objForm.Validate Then valid = False
+
+    '    Return valid
+
+    'End Function
+
+    'Public Shared Function FormIsValid(ByRef objForm As Form, ByRef topLevelControl As Control) As Boolean
+
+    '    Dim valid As Boolean = True
+    '    ValidateControls(objForm, topLevelControl.Controls, valid)
+
+    '    objForm.Focus()
+    '    If Not objForm.Validate Then valid = False
+
+    '    Return valid
+
+    'End Function
+
+    'Private Shared Sub ValidateControls(ByRef objForm As Form, ByRef objControls As System.Windows.Forms.Control.ControlCollection, ByRef valid As Boolean)
+
+    '    For Each objControl As Control In objControls
+
+    '        If TypeOf objControl IsNot RadioButton Then
+
+    '            objControl.Focus()
+    '            If Not objForm.Validate() Then valid = False
+
+    '            If TypeOf objControl Is TabControl Then
+
+    '                Dim tabControl As TabControl = objControl
+    '                Dim index As Integer = tabControl.SelectedIndex
+
+    '                For Each objTab As TabPage In tabControl.TabPages
+    '                    tabControl.SelectedTab = objTab
+    '                    ValidateControls(objForm, objTab.Controls, valid)
+    '                Next
+
+    '            ElseIf objControl.HasChildren Then
+
+    '                ValidateControls(objForm, objControl.Controls, valid)
+
+    '            End If
+
+    '        End If
+
+    '    Next
+
+    'End Sub
 
 End Class

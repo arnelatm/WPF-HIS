@@ -399,8 +399,8 @@ Namespace PresentationLayer.Views.Forms
             cboDiscountAccountIdNo.DataSource = MyPresenter.GetAccountTypesList("PD")
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
          {"AccountIdNo", cboAccountIdNo},
          {"Amount", txtAmount},

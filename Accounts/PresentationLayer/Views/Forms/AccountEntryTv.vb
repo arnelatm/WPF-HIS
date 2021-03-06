@@ -191,8 +191,8 @@ Namespace PresentationLayer.Views.Forms
             cboSpecialAccount.DataSource = PresenterObj.MakeEnumComboList(Of SpecialAccountSelection)
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
                     {
                     {"AccountCode", txtAccountCode},
                     {"AccountGroup", cboAccountGroup},

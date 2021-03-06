@@ -103,8 +103,8 @@ Namespace PresentationLayer.Views.Forms
             cacParentIdNo.DataSource = PresenterObj.GetLookup("RevenueGroup")
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"IdNo", TxtIdNo},
                 {"LevelNumber", txtLevelNumber},

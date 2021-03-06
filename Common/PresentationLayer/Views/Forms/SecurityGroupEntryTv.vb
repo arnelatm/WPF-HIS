@@ -38,9 +38,9 @@ Namespace PresentationLayer.Views.Forms
             SecurityGroupView.cacParentIdNo.Refresh()
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
+        Protected Overrides Sub CreateMainFieldsDictionary()
             With SecurityGroupView
-                FieldsDictionary = New Dictionary(Of String, Object) From
+                MainFieldsDictionary = New Dictionary(Of String, Object) From
                     {
                     {"IdNo", .TxtIdNo},
                     {"Notes", .txtNotes},

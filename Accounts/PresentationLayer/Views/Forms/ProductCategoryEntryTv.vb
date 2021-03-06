@@ -76,8 +76,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
                     {
                     {"ProductCategoryCode", txtProductCategoryCode},
                     {"ProductCategoryName", txtProductCategoryName},

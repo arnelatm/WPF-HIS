@@ -123,8 +123,8 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"AccountIdNo", cboAccountIdNo},
                 {"PensionProviderIdNo", cboPensionProviderIdNo},

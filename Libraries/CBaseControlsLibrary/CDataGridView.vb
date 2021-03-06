@@ -37,6 +37,8 @@ Public Class CDataGridView
 
     Public Property DgvFooter As DgvFooter
 
+    Public Property FieldsDictionary As Dictionary(Of String, Object)
+
     '<Bindable(True)>
     '<Category("Custom")>
     '<DefaultValue(GetType(Boolean))>

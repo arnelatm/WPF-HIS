@@ -191,8 +191,8 @@ Namespace PresentationLayer.Views.Forms
             _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
         End Sub
 
-        Protected Overrides Sub CreateFieldsDictionary()
-            FieldsDictionary = New Dictionary(Of String, Object) From
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
          {"Cancelled", chkCancelled},
          {"DateCreated", dtpDateCreated},
