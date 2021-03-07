@@ -589,6 +589,11 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Protected Overrides Sub InputsTurnedON()
+
+            tbpSummaryDetail.ImageIndex = -1
+        End Sub
+
         'Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSummaryDetail.CellEndEdit
         '    With DataGridViewSummaryDetail
         '        Dim nIndex = .CurrentRow.Index
@@ -607,69 +612,43 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Public Overrides Function ValidateView()
-            MyBase.GridValidator()
-            Dim errorFound As Boolean = False
-            Dim rules = PresenterObj.GetBizRules(EarningsSummary)
-            Dim bo = PresenterObj.GetBizObject(EarningsSummary)
-            For Each rule In rules
-                Dim control As Control = Nothing
-                'MainFieldsDictionary.TryGetValue(rule.Property, control)
-                'MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
-                For Each col In DataGridViewSummaryDetail.Columns()
-                    Dim colName = col.DataPropertyName
-                    If rule.Property = colName Then
-                        For Each row As DataGridViewRow In DataGridViewSummaryDetail.Rows
-                            Dim model As New EarningSummaryModel
-                            If row.Index() < DataGridViewSummaryDetail.RowCount() - 1 Then
-                                GlobalVariables.Mapper.Map(Of EarningSummaryView, EarningSummaryModel)(EarningsSummary(row.Index()), model)
-                                GlobalVariables.Mapper.Map(Of EarningSummaryModel, EarningSummary)(model, bo)
-                                If Not bo.IsRuleValid(rule) Then
-                                    Dim obj As New Object
-                                    _eSumFieldsDict.TryGetValue(rule.Property, obj)
-                                    row.Cells(obj.Name).ErrorText = rule.Error
-                                    errorFound = True
-                                End If
-                            End If
-                        Next
-                    End If
-                Next
-            Next
-            'For Each row As DataGridViewRow In DataGridViewSummaryDetail.Rows
-            '    For Each col In DataGridViewSummaryDetail.Columns()
-            '        Dim colName = col.DataPropertyName
-            '        Dim value As New Object
-
-            '        For Each rule In rules
-            '            If rule.Property = colName Then
-            '                If Not bo.IsValid() Then
-            '                    'Dim control As Control = Nothing
-            '                    Dim obj As New Object
-            '                    _eSumFieldsDict.TryGetValue(rule.Property, obj)
-            '                    row.Cells(obj.Name).ErrorText = rule.Error
-            '                    'MessageBox.Show(bo.error)
-            '                    errorFound = True
-            '                End If
-            '            End If
-            '        Next
-            '        '_eSumFieldsDict.TryGetValue(colName, value)
-            '        'If value IsNot Nothing Then
-            '        '    'value.
-            '        '    'value.Cells.ErrorText = "error"
-            '        '    'row.Cells(value)
-            '        'End If
-            '        'If row.Cells("dgvMultiplierSummary").Value = 0 Then
-            '        'row.Cells("dgvMultiplierSummary").ErrorText = "ERROR!"
-            '        'errorFound = True
-            '        'End If
-            '    Next
-            'Next
-            If errorFound Then
-                tbpSummaryDetail.ImageIndex = 0
-            Else
-                tbpSummaryDetail.ImageIndex = -1
-            End If
-            Return Not errorFound
+            Dim valid As Boolean
+            valid = ValidateDataBoundGrid(Of EarningSummaryView, EarningSummaryModel)(EarningsSummary, DataGridViewSummaryDetail, _eSumFieldsDict, tbpSummaryDetail) And
+                    ValidateDataBoundGrid(Of PayrollEarnAccountView, PayrollEarnAccountModel)(PayrollEarnAccounts, DataGridViewPayrollEarnAccounts, _eAccFieldsDict, tbpAccountPosting)
+            Return valid
         End Function
+
+        'Public Overrides Function ValidateView()
+        '    Dim errorFound As Boolean = False
+        '    Dim rules = PresenterObj.GetBizRules(EarningsSummary)
+        '    Dim bo = PresenterObj.GetBizObject(EarningsSummary)
+        '    For Each rule In rules
+        '        For Each col In DataGridViewSummaryDetail.Columns()
+        '            Dim colName = col.DataPropertyName
+        '            If rule.Property = colName Then
+        '                For Each row As DataGridViewRow In DataGridViewSummaryDetail.Rows
+        '                    Dim model As New EarningSummaryModel
+        '                    If row.Index() < DataGridViewSummaryDetail.RowCount() - 1 Then
+        '                        GlobalVariables.Mapper.Map(Of EarningSummaryView, EarningSummaryModel)(EarningsSummary(row.Index()), model)
+        '                        GlobalVariables.Mapper.Map(Of EarningSummaryModel, EarningSummary)(model, bo)
+        '                        If Not bo.IsRuleValid(rule) Then
+        '                            Dim obj As New Object
+        '                            _eSumFieldsDict.TryGetValue(rule.Property, obj)
+        '                            row.Cells(obj.Name).ErrorText = rule.Error
+        '                            errorFound = True
+        '                        End If
+        '                    End If
+        '                Next
+        '            End If
+        '        Next
+        '    Next
+        '    If errorFound Then
+        '        tbpSummaryDetail.ImageIndex = 0
+        '    Else
+        '        tbpSummaryDetail.ImageIndex = -1
+        '    End If
+        '    Return Not errorFound
+        'End Function
 
         'Protected Overrides Sub OnLoad(ByVal e As EventArgs)
         '    MyBase.OnLoad(e)
