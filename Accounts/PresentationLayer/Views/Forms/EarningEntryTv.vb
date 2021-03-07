@@ -390,7 +390,7 @@ Namespace PresentationLayer.Views.Forms
                         lblMultiplier.Visible = False
                         lblPayRate.Visible = False
                         lblRate.Visible = False
-                        'lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                        lblRate.Text = Messaging.TranslateCaption("Amount")
                         'lblPayRate.Text = Messaging.TranslateCaption("/")
                         txtDefaultQuantity.Visible = False
                         txtMultiplier.Visible = False
@@ -464,19 +464,6 @@ Namespace PresentationLayer.Views.Forms
                         txtRate.Visible = True
                         tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                         tlpCalculation.SetColumnSpan(cboUnit, 1)
-                    Case CalculationTypeSelection.Summary
-                        cboEarningType.Visible = False
-                        cboBasePaymentIdNo.Visible = False
-                        cboMultiplierType.Visible = False
-                        cboUnit.Visible = False
-                        lblBasePayment.Visible = False
-                        lblDefaultQuantity.Visible = False
-                        lblMultiplier.Visible = False
-                        lblPayRate.Visible = False
-                        lblRate.Visible = False
-                        txtDefaultQuantity.Visible = False
-                        txtMultiplier.Visible = False
-                        txtRate.Visible = False
                 End Select
                 tlpCalculation.Visible = True
                 floCalculation.Visible = True
@@ -581,6 +568,8 @@ Namespace PresentationLayer.Views.Forms
                 tlpCalculation.Visible = False
                 floCalculation.Visible = False
                 DataGridViewSummaryDetail.Visible = True
+                EarningType = EnumToCode(EarningTypeSelection.AsNeeded)
+                CalculationType = EnumToCode(CalculationTypeSelection.Factor)
             Else
                 tlpPostingAccounts.Visible = True
                 tlpCalculation.Visible = True

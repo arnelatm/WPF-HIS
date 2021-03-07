@@ -180,13 +180,13 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtDistributionSchemeCode, "DistributionScheme Code")
-            MyErrorProvider.Controls.AddMandatory(txtDistributionSchemeName, "DistributionScheme Name in English")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
-        End Sub
+        'Protected Overrides Sub AddMandatoryFieldCheck()
+        '    'Add controls one by one in error provider.
+        '    MyErrorProvider.Controls.AddMandatory(txtDistributionSchemeCode, "DistributionScheme Code")
+        '    MyErrorProvider.Controls.AddMandatory(txtDistributionSchemeName, "DistributionScheme Name in English")
+        '    'Set summary error message
+        '    MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
+        'End Sub
 
         Protected Overrides Sub InputsTurnedOn()
             If PresenterObj.AddMode Then

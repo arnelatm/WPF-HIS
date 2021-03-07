@@ -704,6 +704,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollDeductAccounts.Ea = EventAggregator1
             Me.DataGridViewPayrollDeductAccounts.EditingMode = False
             Me.DataGridViewPayrollDeductAccounts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPayrollDeductAccounts.FieldsDictionary = Nothing
             Me.DataGridViewPayrollDeductAccounts.FirstRowDeletionEnabled = True
             Me.DataGridViewPayrollDeductAccounts.FirstRowInsertionEnabled = True
             Me.DataGridViewPayrollDeductAccounts.Name = "DataGridViewPayrollDeductAccounts"

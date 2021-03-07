@@ -27,7 +27,6 @@ Public Enum CalculationTypeSelection
     <EnumCode("V")> Variable
     <EnumCode("G")> [Global]
     <EnumCode("T")> Table
-    <EnumCode("S")> Summary
 End Enum
 
 'Public Enum PayRateTypeSelection
