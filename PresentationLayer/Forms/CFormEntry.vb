@@ -473,8 +473,8 @@ Public Class CFormEntry
     '    Return nMinValue
     'End Function
 
-    Protected Overridable Sub AddMandatoryFieldCHeck()
-    End Sub
+    'Protected Overridable Sub AddMandatoryFieldCHeck()
+    'End Sub
 
     Protected Overridable Function ChangesMade()
         Return PresenterObj.ChangesMade()
@@ -793,7 +793,7 @@ Public Class CFormEntry
             Next
 
             SetAllControlsDynamicProperties()
-            AddMandatoryFieldCHeck()
+            'AddMandatoryFieldCHeck()
             If GlobalVariables.RightToLeftLayout Then
                 btnArabic.Visible = False
                 btnOriginal.Visible = True

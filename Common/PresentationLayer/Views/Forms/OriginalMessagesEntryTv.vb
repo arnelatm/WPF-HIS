@@ -105,13 +105,13 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Protected Overrides Sub AddMandatoryFieldCheck()
-            'Add controls one by one in error provider.
-            MyErrorProvider.Controls.AddMandatory(txtMessageKey, "Message Key")
-            MyErrorProvider.Controls.AddMandatory(txtMessage, "Original Message")
-            'Set summary error message
-            MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
-        End Sub
+        'Protected Overrides Sub AddMandatoryFieldCheck()
+        '    'Add controls one by one in error provider.
+        '    MyErrorProvider.Controls.AddMandatory(txtMessageKey, "Message Key")
+        '    MyErrorProvider.Controls.AddMandatory(txtMessage, "Original Message")
+        '    'Set summary error message
+        '    MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
+        'End Sub
 
 #End Region
 

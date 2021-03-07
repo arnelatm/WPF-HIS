@@ -290,9 +290,12 @@ Namespace PresentationLayer.Views.Forms
             Select Case curCalculationType
                 Case CalculationTypeSelection.FixedAmount
                     cboBasePaymentIdNo.Visible = False
+                    cboCalculationType.Visible = True
+                    lblCalculationType.Visible = True
                     cboMultiplierType.Visible = False
-                    cboUnit.Visible = True
+                    cboUnit.Visible = False
                     lblBasePayment.Visible = False
+                    lblCalculationType.Visible = True
                     lblDefaultQty.Visible = False
                     lblMultiplier.Visible = False
                     lblPayRate.Visible = False
@@ -302,23 +305,42 @@ Namespace PresentationLayer.Views.Forms
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
                 Case CalculationTypeSelection.Factor
+                    If cboDeductionType.SelectedValue = EnumToCode(DeductionTypeSelection.AbsencesDeduction) Then
+                        cboCalculationType.Visible = False
+                        lblCalculationType.Visible = False
+                        cboMultiplierType.Visible = False
+                        cboUnit.Visible = False
+                        lblDefaultQty.Visible = False
+                        lblMultiplier.Visible = False
+                        lblPayRate.Visible = False
+                        lblRate.Visible = False
+                        lblRate.Text = ""
+                        txtDefaultQuantity.Visible = False
+                        txtMultiplier.Visible = False
+                        txtRate.Visible = False
+                    Else
+                        cboCalculationType.Visible = True
+                        cboMultiplierType.Visible = True
+                        cboUnit.Visible = True
+                        lblCalculationType.Visible = False
+                        lblDefaultQty.Visible = True
+                        lblMultiplier.Visible = True
+                        lblPayRate.Visible = False
+                        lblRate.Visible = True
+                        lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                        txtDefaultQuantity.Visible = True
+                        txtMultiplier.Visible = True
+                        txtRate.Visible = False
+                    End If
                     cboBasePaymentIdNo.Visible = True
-                    cboMultiplierType.Visible = True
-                    cboUnit.Visible = True
                     lblBasePayment.Visible = True
-                    lblDefaultQty.Visible = True
-                    lblMultiplier.Visible = True
-                    lblPayRate.Visible = False
-                    lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
-                    txtDefaultQuantity.Visible = True
-                    txtMultiplier.Visible = True
-                    txtRate.Visible = False
                 Case CalculationTypeSelection.Variable
                     cboBasePaymentIdNo.Visible = False
+                    cboCalculationType.Visible = True
                     cboMultiplierType.Visible = False
                     cboUnit.Visible = True
                     lblBasePayment.Visible = False
+                    lblCalculationType.Visible = False
                     lblDefaultQty.Visible = True
                     lblMultiplier.Visible = False
                     lblPayRate.Visible = True
@@ -329,9 +351,11 @@ Namespace PresentationLayer.Views.Forms
                     txtRate.Visible = True
                 Case CalculationTypeSelection.Global
                     cboBasePaymentIdNo.Visible = False
+                    cboCalculationType.Visible = True
                     cboMultiplierType.Visible = False
                     cboUnit.Visible = True
                     lblBasePayment.Visible = False
+                    lblCalculationType.Visible = False
                     lblDefaultQty.Visible = True
                     lblMultiplier.Visible = False
                     lblPayRate.Visible = True
@@ -355,9 +379,11 @@ Namespace PresentationLayer.Views.Forms
                 '    txtRate.Visible = False
                 Case CalculationTypeSelection.Table
                     cboBasePaymentIdNo.Visible = True
+                    cboCalculationType.Visible = True
                     cboMultiplierType.Visible = False
                     cboUnit.Visible = False
                     lblBasePayment.Visible = True
+                    lblCalculationType.Visible = False
                     lblDefaultQty.Visible = False
                     lblMultiplier.Visible = False
                     lblPayRate.Visible = False
@@ -456,6 +482,16 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub tbpAccountPosting_Enter(sender As Object, e As EventArgs) Handles tbpAccountPosting.Enter
             UpdatePostingTabDisplay()
+        End Sub
+
+        Private Sub cboDeductionType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDeductionType.SelectedIndexChanged
+            If cboDeductionType.SelectedValue = EnumToCode(DeductionTypeSelection.AbsencesDeduction) Then
+                cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
+                cboCalculationType.Visible = False
+            Else
+                cboCalculationType.Visible = True
+            End If
+
         End Sub
 
     End Class

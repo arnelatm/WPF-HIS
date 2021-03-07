@@ -12,7 +12,7 @@ Public MustInherit Class BusinessObject
     ' list of validation errors (following validation failure)
 
     Private ReadOnly _errors As New List(Of String)
-    Private ReadOnly _dErrors As New Dictionary(Of String, String)
+    'Private ReadOnly _dErrors As New Dictionary(Of String, String)
 
     ' gets list of validations errors
     Public ReadOnly Property Errors As List(Of String)
@@ -46,7 +46,6 @@ Public MustInherit Class BusinessObject
             If Not rule.Validate(Me) Then
                 valid = False
                 _errors.Add(rule.Error)
-                _dErrors.Add(rule.Property, rule.Error)
             End If
         Next rule
         Return valid
@@ -69,9 +68,9 @@ Public MustInherit Class BusinessObject
         Return _errors
     End Function
 
-    Public Function Get_dErrors() As Dictionary(Of String, String)
-        Return _dErrors
-    End Function
+    'Public Function Get_dErrors() As Dictionary(Of String, String)
+    '    Return _dErrors
+    'End Function
 
     Public Sub AddError(errorList As List(Of String))
         For Each aError In errorList
