@@ -25,6 +25,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Implements ISubscriber(Of SelectedButton)
 
     Public ChildPresenters As New List(Of Object)
+    Public ChildModels As New List(Of Object)
     Public IdFieldName As String = "IdNo"
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
@@ -1176,13 +1177,18 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Protected Overridable Function IsBizDataValid() As Boolean
-        'Dim retValue As Boolean = False
-        'GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        'If Model.IsValid(DataModel) Then
-        '    retValue = True
-        'End If
-        'Return retValue
-        Return True
+        Dim retValue As Boolean = False
+        GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+        If Model.IsValid(DataModel) Then
+            'For Each item In ChildModels
+            '    GlobalVariables.Mapper.Map()
+            '    If Not item.IsBizDataValid() Then
+            '        Exit For
+            '    End If
+            'Next
+            retValue = True
+        End If
+        Return retValue
     End Function
 
     Protected Function TranslateField(Of TX)(fieldToTranslate As String, ByRef dModel As TX) As String

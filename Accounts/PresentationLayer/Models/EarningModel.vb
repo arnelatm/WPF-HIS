@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.Libraries.GlobalFuncNSub
+
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.

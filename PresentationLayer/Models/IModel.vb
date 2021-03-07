@@ -104,6 +104,8 @@ Public Interface IModel
 
     Function GetBizObjectRules() As Object
 
+    Function GetBizObject() As Object
+
     Function IsValid(Of TM)(ByRef dModel As TM) As Object
 
     Function GetRecordField(tableName As String, returnFieldName As String) As Object

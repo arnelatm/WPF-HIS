@@ -48,6 +48,8 @@ Namespace PresentationLayer.Presenters
             DtEarnUpdateTable.Columns.Add("Multiplier", GetType(Decimal))
             DtEarnUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
+            ChildModels.Add(_earningSummaryModel)
+
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -156,23 +158,23 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Sub
 
-        Protected Overrides Function IsBizDataValid() As Boolean
-            Dim retValue As Boolean = True
-            If MyBase.IsBizDataValid() Then
-                If Not UsePayGroups() Then
-                    If View.AccountIdNo <= 0 Then
-                        Messaging.Show(True, "MsgPostingAccountMustNotBeBlank")
-                        retValue = False
-                    End If
-                End If
-                If retValue Then
-                    retValue = IsChildValid(Of EarningSummaryModel)(View.EarningsSummary)
-                End If
-            Else
-                retValue = False
-            End If
-            Return retValue
-        End Function
+        'Protected Overrides Function IsBizDataValid() As Boolean
+        '    Dim retValue As Boolean = True
+        '    If MyBase.IsBizDataValid() Then
+        '        If Not UsePayGroups() Then
+        '            If View.AccountIdNo <= 0 Then
+        '                Messaging.Show(True, "MsgPostingAccountMustNotBeBlank")
+        '                retValue = False
+        '            End If
+        '        End If
+        '        If retValue Then
+        '            retValue = IsChildValid(Of EarningSummaryModel)(View.EarningsSummary)
+        '        End If
+        '    Else
+        '        retValue = False
+        '    End If
+        '    Return retValue
+        'End Function
 
         'Private Function GetChildErrors(retValue As Boolean) As Boolean
         '    Dim sModel As New List(Of EarningSummaryModel)

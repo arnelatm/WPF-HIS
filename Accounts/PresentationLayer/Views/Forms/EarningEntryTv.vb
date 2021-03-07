@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -24,6 +25,7 @@ Namespace PresentationLayer.Views.Forms
         Private _eSumFieldsDict As Dictionary(Of String, Object)
         Private _eAccFieldsDict As Dictionary(Of String, Object)
         Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
+        Private _esModel = New ModelAccounts("EarningSummary")
 
         Public Sub New()
 
@@ -314,7 +316,6 @@ Namespace PresentationLayer.Views.Forms
 
             _eSumFieldsDict = New Dictionary(Of String, Object) From
                 {
-                {"EarningIdNo", dgvEarningIdNo},
                 {"Multiplier", dgvMultiplierSummary}
                 }
 
@@ -597,7 +598,7 @@ Namespace PresentationLayer.Views.Forms
         '                If DataGridViewSummaryDetail.CurrentRow.Index = DataGridViewSummaryDetail.NewRowIndex Then
         '                    bsEarningSummary.AddNew()
         '                    EarningsSummary(nIndex).EarningIdNo = earningId
-        '                    ' adding a new row to the bindingsource adds a new empty row at the end with null values
+        '                    ' adding a new row to the bindingSource adds a new empty row at the end with null values
         '                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
         '                    bsEarningSummary.RemoveAt(bsEarningSummary.Count - 1)
         '                End If
@@ -605,38 +606,70 @@ Namespace PresentationLayer.Views.Forms
         '    End With
         'End Sub
 
-        Protected Overrides Sub GridValidator()
+        Public Overrides Function ValidateView()
             MyBase.GridValidator()
             Dim errorFound As Boolean = False
             Dim rules = PresenterObj.GetBizRules(EarningsSummary)
-            'For Each rule In rules
-            '    Dim control As Control = Nothing
-            '    MainFieldsDictionary.TryGetValue(rule.Property, control)
-            '    MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
-            'Next
-
-            For Each row As DataGridViewRow In DataGridViewSummaryDetail.Rows
+            Dim bo = PresenterObj.GetBizObject(EarningsSummary)
+            For Each rule In rules
+                Dim control As Control = Nothing
+                'MainFieldsDictionary.TryGetValue(rule.Property, control)
+                'MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
                 For Each col In DataGridViewSummaryDetail.Columns()
                     Dim colName = col.DataPropertyName
-                    Dim value As New Object
-                    _eSumFieldsDict.TryGetValue(colName, value)
-                    If value IsNot Nothing Then
-                        'value.
-                        'value.Cells.ErrorText = "error"
-                        'row.Cells(value)
+                    If rule.Property = colName Then
+                        For Each row As DataGridViewRow In DataGridViewSummaryDetail.Rows
+                            Dim model As New EarningSummaryModel
+                            If row.Index() < DataGridViewSummaryDetail.RowCount() - 1 Then
+                                GlobalVariables.Mapper.Map(Of EarningSummaryView, EarningSummaryModel)(EarningsSummary(row.Index()), model)
+                                GlobalVariables.Mapper.Map(Of EarningSummaryModel, EarningSummary)(model, bo)
+                                If Not bo.IsRuleValid(rule) Then
+                                    Dim obj As New Object
+                                    _eSumFieldsDict.TryGetValue(rule.Property, obj)
+                                    row.Cells(obj.Name).ErrorText = rule.Error
+                                    errorFound = True
+                                End If
+                            End If
+                        Next
                     End If
-                    'If row.Cells("dgvMultiplierSummary").Value = 0 Then
-                    'row.Cells("dgvMultiplierSummary").ErrorText = "ERROR!"
-                    'errorFound = True
-                    'End If
                 Next
             Next
+            'For Each row As DataGridViewRow In DataGridViewSummaryDetail.Rows
+            '    For Each col In DataGridViewSummaryDetail.Columns()
+            '        Dim colName = col.DataPropertyName
+            '        Dim value As New Object
+
+            '        For Each rule In rules
+            '            If rule.Property = colName Then
+            '                If Not bo.IsValid() Then
+            '                    'Dim control As Control = Nothing
+            '                    Dim obj As New Object
+            '                    _eSumFieldsDict.TryGetValue(rule.Property, obj)
+            '                    row.Cells(obj.Name).ErrorText = rule.Error
+            '                    'MessageBox.Show(bo.error)
+            '                    errorFound = True
+            '                End If
+            '            End If
+            '        Next
+            '        '_eSumFieldsDict.TryGetValue(colName, value)
+            '        'If value IsNot Nothing Then
+            '        '    'value.
+            '        '    'value.Cells.ErrorText = "error"
+            '        '    'row.Cells(value)
+            '        'End If
+            '        'If row.Cells("dgvMultiplierSummary").Value = 0 Then
+            '        'row.Cells("dgvMultiplierSummary").ErrorText = "ERROR!"
+            '        'errorFound = True
+            '        'End If
+            '    Next
+            'Next
             If errorFound Then
                 tbpSummaryDetail.ImageIndex = 0
             Else
                 tbpSummaryDetail.ImageIndex = -1
             End If
-        End Sub
+            Return Not errorFound
+        End Function
 
         'Protected Overrides Sub OnLoad(ByVal e As EventArgs)
         '    MyBase.OnLoad(e)
