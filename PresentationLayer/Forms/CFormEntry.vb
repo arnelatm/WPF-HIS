@@ -266,7 +266,7 @@ Public Class CFormEntry
         Return validationsPassed
     End Function
 
-    Public Function ValidateView()
+    Public Overridable Function ValidateView()
         Dim validationsPassed As Boolean
         validationsPassed = True
         Dim allControls As New List(Of Control)

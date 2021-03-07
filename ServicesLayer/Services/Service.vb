@@ -104,6 +104,11 @@ Namespace Services
             Return DataBo.GetRules()
         End Function
 
+        Public Function GetBizObject()
+            Return DataBo
+        End Function
+
+
         Public Function GetDefaultFieldValues(ByVal systemViewName As String) Implements IService.GetDefaultFieldValues
             Return DefaultFieldValueDao.GetTableDefaultValues(systemViewName)
         End Function

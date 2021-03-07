@@ -74,6 +74,10 @@ Public Class Model
         Return DataService.GetBizObjectRules()
     End Function
 
+    Public Function GetBizObject() Implements IModel.GetBizObject
+        Return DataService.GetBizObject()
+    End Function
+
     Public Function GetControlSecurityIdNo(searchValue As String) As String _
         Implements IModel.GetControlSecurityIdNo
         Return Service.GetControlSecurityIdNo(searchValue)

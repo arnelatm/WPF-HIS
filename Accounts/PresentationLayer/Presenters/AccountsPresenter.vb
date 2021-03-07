@@ -319,6 +319,14 @@ Namespace PresentationLayer.Presenters
             Return bModel.GetBizObjectRules()
         End Function
 
+        Public Function GetBizObject(childProperty)
+            Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
+            Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
+            ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
+            Dim bModel As New ModelAccounts(bizName)
+            Return bModel.DataService.DataBo
+        End Function
+
         Protected Function IsChildValid2(Of Tcm)(bizName, childProperty) As Boolean
             Dim retValue As Boolean = True
             Dim sModel As New List(Of Tcm)

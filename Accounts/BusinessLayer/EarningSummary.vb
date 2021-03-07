@@ -9,7 +9,7 @@ Namespace BusinessLayer
         Inherits AATM.BusinessLayer.BusinessObject
         'Implements IDataErrorInfo
 
-        Private _multiplier As Decimal
+        'Private _multiplier As Decimal
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
@@ -23,15 +23,15 @@ Namespace BusinessLayer
         Public Property EarningIdNo As Int16
         Public Property IdNo As Int16
         Public Property Multiplier As Decimal
-            Get
-                Return _multiplier
-            End Get
-            Set(value As Decimal)
-                If value = 0 Then
-                    MessageBox.Show("Value cannot be zero")
-                End If
-            End Set
-        End Property
+        '    Get
+        '        Return _multiplier
+        '    End Get
+        '    Set(value As Decimal)
+        '        If value = 0 Then
+        '            MessageBox.Show("Value cannot be zero")
+        '        End If
+        '    End Set
+        'End Property
 
         Public Property Sequence As Int16
 
