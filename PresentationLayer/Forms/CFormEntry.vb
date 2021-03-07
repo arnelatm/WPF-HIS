@@ -1073,6 +1073,44 @@ Public Class CFormEntry
 
     Public Property HideNavigatorButtons As Boolean
 
+    Public Function ValidateDataBoundGrid(Of TV As New, TM As New)(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing)
+        Dim errorFound As Boolean = False
+        Dim rules = PresenterObj.GetBizRules(viewProperty)
+        Dim bo = PresenterObj.GetBizObject(viewProperty)
+        For Each rule In rules
+            For Each col In dataGridView.Columns()
+                Dim colName = col.DataPropertyName
+                If rule.Property = colName Then
+                    For Each row As DataGridViewRow In dataGridView.Rows
+                        Dim model As New TM
+                        If row.Index() < dataGridView.RowCount() - 1 Then
+                            GlobalVariables.Mapper.Map(viewProperty(row.Index()), model)
+                            GlobalVariables.Mapper.Map(model, bo)
+                            If Not bo.IsRuleValid(rule) Then
+                                Dim obj As New Object
+                                dictionary.TryGetValue(rule.Property, obj)
+                                row.Cells(obj.Name).ErrorText = rule.Error
+                                errorFound = True
+                            End If
+                        End If
+                    Next
+                End If
+            Next
+        Next
+        If errorFound Then
+            If tabPage IsNot Nothing Then
+                tabPage.ImageIndex = 0
+            Else
+                tabPage.ImageIndex = -1
+            End If
+        Else
+            If tabPage IsNot Nothing Then
+                tabPage.ImageIndex = -1
+            End If
+        End If
+        Return Not errorFound
+    End Function
+
     '#Region "Temporary Events"
 
     '    Public Event InputsTurnedOff()
