@@ -64,15 +64,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IncludeInPension As Boolean Implements IEarningView.IncludeInPension
-            Get
-                Return chkIncludeInPension.Checked
-            End Get
-            Set
-                chkIncludeInPension.Checked = Value
-            End Set
-        End Property
-
         Public Property Multiplier As String Implements IEarningView.Multiplier
             Get
                 Return txtMultiplier.Text  ' Convert.ToDecimal(NumParser(Of Decimal)(txtMultiplier.Text), _nfi)

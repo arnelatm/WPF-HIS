@@ -16,7 +16,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property EarningType As Char
         Property IdNo As Int16
         Property IncludeInEos As Boolean
-        Property IncludeInPension As Boolean
         Property Multiplier As String
         Property MultiplierType As Char
         Property Notes As String

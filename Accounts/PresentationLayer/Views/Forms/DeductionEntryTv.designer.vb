@@ -646,7 +646,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboAccountIdNo
             '
-            Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cboAccountIdNo.ChangingSearchValueOnly = False
             Me.tloPostingAccounts.SetColumnSpan(Me.cboAccountIdNo, 2)
@@ -655,7 +654,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
             Me.cboAccountIdNo.DropDownHeight = 1
-            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboAccountIdNo.EditingMode = False
             Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black

@@ -74,7 +74,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("RptAging", "Aging of {report} as of {endingDate}", "")
         Messaging.AddMessage("MsgDatesCannotBeEmpty", "Dates cannot be empty, please enter the dates", "Invalid Entry")
         Messaging.AddMessage("MsgDeleteEntryNotAllowed", "Sorry, deletion of {description} entries not allowed!", "Delete Error")
-        Messaging.AddMessage("MsgEmptyEmployeeAttendance", "Sorry, employee attendance not yet generated.  You must first generate attendance before generating payroll!", "Generate Error")
+        Messaging.AddMessage("MsgEmptyEmployeeOvertime", "Sorry, employee attendance not yet generated.  You must first generate attendance before generating payroll!", "Generate Error")
         Messaging.AddMessage("AskIfRegeneratePayroll", "Payroll has already been generated. Are you sure you want to re-generate and update previous payroll?", "Please Confirm!")
         Messaging.AddMessage("MsgPayrollGenerationCompleted", "Payroll Generation Completed!", "Finished")
         Messaging.AddMessage("MsgAmountChangeNotAllowed", "Sorry, you can't change the amount field for 'fixed rate' entries. You are only allowed to change the rate field.", "Warning")

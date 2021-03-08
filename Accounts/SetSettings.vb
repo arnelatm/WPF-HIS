@@ -61,7 +61,9 @@ Public Class AppSettings
             retVal = New AppSettings
         Else
             'Read it from the file
+#Disable Warning BC42104 ' Variable is used before it has been assigned a value
             retVal = serializer.Deserialize(textReader:=reader)
+#Enable Warning BC42104 ' Variable is used before it has been assigned a value
         End If
         reader.Close()
         Return retVal

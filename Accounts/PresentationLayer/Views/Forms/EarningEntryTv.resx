@@ -181,7 +181,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 23</value>
+    <value>145, 23</value>
   </data>
   <data name="lblSummary.TabIndex" type="System.Int32, mscorlib">
     <value>159</value>
@@ -217,7 +217,7 @@
     <value>TopRight</value>
   </data>
   <data name="txtEarningName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 26</value>
+    <value>148, 26</value>
   </data>
   <data name="txtEarningName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -244,7 +244,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtEarningNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 51</value>
+    <value>148, 51</value>
   </data>
   <data name="txtEarningNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -316,7 +316,7 @@
     <value>-20</value>
   </data>
   <data name="txtEarningCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>425, 1</value>
+    <value>424, 1</value>
   </data>
   <data name="txtEarningCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -346,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 1</value>
+    <value>296, 1</value>
   </data>
   <data name="lblCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -379,7 +379,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 1</value>
+    <value>148, 1</value>
   </data>
   <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -451,7 +451,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 23</value>
+    <value>145, 23</value>
   </data>
   <data name="lblNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
@@ -481,7 +481,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 76</value>
+    <value>148, 76</value>
   </data>
   <data name="chkSummary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -541,7 +541,7 @@
     <value>0</value>
   </data>
   <data name="tlpEarning.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblSummary" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningNameAra" Row="2" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningCode" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="CLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningName" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblNameAra" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="chkSummary" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33.33333,Percent,33.33334,AutoSize,0,Percent,33.33334,Absolute,16" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblSummary" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningNameAra" Row="2" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningCode" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="CLabel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtEarningName" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblNameAra" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="chkSummary" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33.33333,Percent,33.33334,AutoSize,0,Percent,33.33334,Absolute,18" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tbpMain.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -652,7 +652,7 @@
     <value>3, 3</value>
   </data>
   <data name="floMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>576, 308</value>
+    <value>576, 307</value>
   </data>
   <data name="floMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -670,13 +670,13 @@
     <value>0</value>
   </data>
   <data name="tbpMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 23</value>
   </data>
   <data name="tbpMain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 314</value>
+    <value>582, 313</value>
   </data>
   <data name="tbpMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -790,7 +790,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMultiplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 150</value>
+    <value>1, 149</value>
   </data>
   <data name="lblMultiplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -904,13 +904,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboCalculationType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 27</value>
+    <value>231, 27</value>
   </data>
   <data name="cboCalculationType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboCalculationType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 24</value>
+    <value>338, 24</value>
   </data>
   <data name="cboCalculationType.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -934,7 +934,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtRate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 53</value>
+    <value>231, 53</value>
   </data>
   <data name="txtRate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -967,7 +967,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDefaultQuantity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 98</value>
+    <value>231, 98</value>
   </data>
   <data name="txtDefaultQuantity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1039,13 +1039,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboBasePaymentIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 123</value>
+    <value>231, 123</value>
   </data>
   <data name="cboBasePaymentIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboBasePaymentIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 24</value>
+    <value>338, 24</value>
   </data>
   <data name="cboBasePaymentIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1062,87 +1062,6 @@
   <data name="&gt;&gt;cboBasePaymentIdNo.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="lblIncludeInGosi.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblIncludeInGosi.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lblIncludeInGosi.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblIncludeInGosi.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblIncludeInGosi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 203</value>
-  </data>
-  <data name="lblIncludeInGosi.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblIncludeInGosi.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 24</value>
-  </data>
-  <data name="lblIncludeInGosi.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="lblIncludeInGosi.Text" xml:space="preserve">
-    <value>Include in GOSI Computation?</value>
-  </data>
-  <data name="lblIncludeInGosi.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblIncludeInGosi.Name" xml:space="preserve">
-    <value>lblIncludeInGosi</value>
-  </data>
-  <data name="&gt;&gt;lblIncludeInGosi.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblIncludeInGosi.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;lblIncludeInGosi.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="chkIncludeInPension.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="chkIncludeInPension.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkIncludeInPension.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="chkIncludeInPension.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 203</value>
-  </data>
-  <data name="chkIncludeInPension.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="chkIncludeInPension.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
-  </data>
-  <data name="chkIncludeInPension.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="chkIncludeInPension.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="chkIncludeInPension.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;chkIncludeInPension.Name" xml:space="preserve">
-    <value>chkIncludeInPension</value>
-  </data>
-  <data name="&gt;&gt;chkIncludeInPension.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkIncludeInPension.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;chkIncludeInPension.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="lblIncludeInEos.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1156,13 +1075,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblIncludeInEos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 177</value>
+    <value>1, 175</value>
   </data>
   <data name="lblIncludeInEos.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblIncludeInEos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 24</value>
+    <value>318, 24</value>
   </data>
   <data name="lblIncludeInEos.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1183,7 +1102,7 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;lblIncludeInEos.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="chkIncludeInEOS.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1195,7 +1114,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkIncludeInEOS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 177</value>
+    <value>321, 175</value>
   </data>
   <data name="chkIncludeInEOS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1222,7 +1141,7 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;chkIncludeInEOS.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="txtMultiplier.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1231,7 +1150,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtMultiplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 150</value>
+    <value>231, 149</value>
   </data>
   <data name="txtMultiplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1255,7 +1174,7 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;txtMultiplier.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="cboMultiplierType.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1264,13 +1183,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboMultiplierType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 150</value>
+    <value>321, 149</value>
   </data>
   <data name="cboMultiplierType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboMultiplierType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 24</value>
+    <value>248, 24</value>
   </data>
   <data name="cboMultiplierType.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1285,7 +1204,7 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;cboMultiplierType.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="chkTaxable.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1306,7 +1225,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTaxable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 229</value>
+    <value>1, 201</value>
   </data>
   <data name="lblTaxable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1333,10 +1252,10 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;lblTaxable.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>15</value>
   </data>
   <data name="chkTaxable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 229</value>
+    <value>321, 201</value>
   </data>
   <data name="chkTaxable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1363,7 +1282,7 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;chkTaxable.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>14</value>
   </data>
   <data name="lblPayRate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1378,7 +1297,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPayRate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 53</value>
+    <value>321, 53</value>
   </data>
   <data name="lblPayRate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1405,7 +1324,7 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;lblPayRate.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>16</value>
   </data>
   <data name="lblRate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1444,7 +1363,7 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;lblRate.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>17</value>
   </data>
   <data name="cboUnit.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1453,13 +1372,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 53</value>
+    <value>347, 53</value>
   </data>
   <data name="cboUnit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboUnit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 24</value>
+    <value>222, 24</value>
   </data>
   <data name="cboUnit.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1474,7 +1393,7 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;cboUnit.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>18</value>
   </data>
   <data name="cboEarningType.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1486,13 +1405,13 @@
     <value>False</value>
   </data>
   <data name="cboEarningType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 1</value>
+    <value>231, 1</value>
   </data>
   <data name="cboEarningType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboEarningType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 24</value>
+    <value>338, 24</value>
   </data>
   <data name="cboEarningType.TabIndex" type="System.Int32, mscorlib">
     <value>274</value>
@@ -1507,13 +1426,13 @@
     <value>tlpCalculation</value>
   </data>
   <data name="&gt;&gt;cboEarningType.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>19</value>
   </data>
   <data name="tlpCalculation.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="tlpCalculation.RowCount" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="tlpCalculation.Size" type="System.Drawing.Size, System.Drawing">
     <value>570, 279</value>
@@ -1534,7 +1453,7 @@
     <value>0</value>
   </data>
   <data name="tlpCalculation.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblFactoredUnit" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CLabel2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblMultiplier" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblDefaultQuantity" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCalculationType" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboCalculationType" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="txtRate" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtDefaultQuantity" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblBasePayment" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboBasePaymentIdNo" Row="5" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblIncludeInGosi" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkIncludeInPension" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblIncludeInEos" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkIncludeInEOS" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtMultiplier" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cboMultiplierType" Row="6" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="chkTaxable" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblTaxable" Row="9" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblPayRate" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblRate" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboUnit" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cboEarningType" Row="0" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,71.81266,Percent,28.18734,Absolute,26,Absolute,222" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblFactoredUnit" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CLabel2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblMultiplier" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblDefaultQuantity" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCalculationType" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboCalculationType" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="txtRate" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtDefaultQuantity" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblBasePayment" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboBasePaymentIdNo" Row="5" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblIncludeInEos" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkIncludeInEOS" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtMultiplier" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cboMultiplierType" Row="6" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="chkTaxable" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblTaxable" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblPayRate" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblRate" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboUnit" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cboEarningType" Row="0" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,71.81266,Percent,28.18734,Absolute,26,Absolute,223" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="floCalculation.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1543,7 +1462,7 @@
     <value>3, 3</value>
   </data>
   <data name="floCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>576, 308</value>
+    <value>576, 307</value>
   </data>
   <data name="floCalculation.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1561,13 +1480,13 @@
     <value>0</value>
   </data>
   <data name="tbpCalculation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 23</value>
   </data>
   <data name="tbpCalculation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 314</value>
+    <value>582, 313</value>
   </data>
   <data name="tbpCalculation.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1612,7 +1531,7 @@
     <value>No</value>
   </data>
   <data name="lblAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 24</value>
+    <value>192, 24</value>
   </data>
   <data name="lblAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>275</value>
@@ -1648,13 +1567,13 @@
     <value>False</value>
   </data>
   <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 27</value>
+    <value>195, 27</value>
   </data>
   <data name="cboAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 24</value>
+    <value>377, 24</value>
   </data>
   <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>274</value>
@@ -1780,7 +1699,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblUsePayGroups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 24</value>
+    <value>303, 24</value>
   </data>
   <data name="lblUsePayGroups.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1810,7 +1729,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkUsePayGroups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>307, 1</value>
+    <value>306, 1</value>
   </data>
   <data name="chkUsePayGroups.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1864,7 +1783,7 @@
     <value>0</value>
   </data>
   <data name="tlpPostingAccounts.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblAccountIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboAccountIdNo" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="DataGridViewPayrollEarnAccounts" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="lblUsePayGroups" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkUsePayGroups" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,63.6656,Percent,36.3344,Absolute,266" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblAccountIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboAccountIdNo" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="DataGridViewPayrollEarnAccounts" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="lblUsePayGroups" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkUsePayGroups" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,63.6656,Percent,36.3344,Absolute,267" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="floPostingAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1873,7 +1792,7 @@
     <value>3, 3</value>
   </data>
   <data name="floPostingAccounts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>576, 308</value>
+    <value>576, 307</value>
   </data>
   <data name="floPostingAccounts.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1891,13 +1810,13 @@
     <value>0</value>
   </data>
   <data name="tbpAccountPosting.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 23</value>
   </data>
   <data name="tbpAccountPosting.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpAccountPosting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 314</value>
+    <value>582, 313</value>
   </data>
   <data name="tbpAccountPosting.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1939,7 +1858,7 @@
     <value>3, 3</value>
   </data>
   <data name="DataGridViewSummaryDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>576, 308</value>
+    <value>576, 307</value>
   </data>
   <data name="DataGridViewSummaryDetail.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1957,13 +1876,13 @@
     <value>0</value>
   </data>
   <data name="tbpSummaryDetail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 23</value>
   </data>
   <data name="tbpSummaryDetail.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpSummaryDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>582, 314</value>
+    <value>582, 313</value>
   </data>
   <data name="tbpSummaryDetail.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1994,7 +1913,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
-        BwAAAk1TRnQBSQFMAwEBAAEIAQABCAEAARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
+        BwAAAk1TRnQBSQFMAwEBAAEgAQABIAEAARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
         AUADAAEQAwABAQEAAQgGAAEEGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEA
         AfABygGmAQABMwUAATMBAAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEA
         AYABfAH/AQACUAH/AQABkwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFm
@@ -2023,8 +1942,8 @@
         AcwB/wFmAQAC/wGZAQAC/wHMAQACZgH/AQABZgH/AWYBAAFmAv8BAAH/AmYBAAH/AWYB/wEAAv8BZgEA
         ASEBAAGlAQADXwEAA3cBAAOGAQADlgEAA8sBAAOyAQAD1wEAA90BAAPjAQAD6gEAA/EBAAP4AQAB8AH7
         Af8BAAGkAqABAAOAAwAB/wIAAf8DAAL/AQAB/wMAAf8BAAH/AQAC/wIAA/8FAAH/B0Y3AApGAQc0AAxG
-        AQcyAAEaBkYB8gZGMgAHRgHyB0YxAA9GMAABkwdGAfIHRjAACEYB8gdGMAABbwdGAfIHRjAAAfUHRgHy
-        B0YxAAdGAfIHRjEAB0YB8gZGAf8yAAZGAfIGRjQAC0Y2AAhGARo5AAH1AW8BRgGTNgABQgFNAT4HAAE+
+        AQcyAAEaBkYB8gZGMgAHRgHyB0YxAA9GMAABkwdGAfIHRjAACEYB8gdGMAABbwdGAfIHRjAAAf8HRgHy
+        B0YxAAdGAfIHRjEAB0YB8gZGAf8yAAZGAfIGRjQAC0Y2AAhGARo5AAH/AW8BRgGTNgABQgFNAT4HAAE+
         AwABKAMAAUADAAEQAwABAQEAAQEFAAGAFwAD/wEAAfABDwYAAeABAwYAAcABAQYAAYABAQYAAYAHAAGA
         JwABgAcAAYAHAAHAAQEGAAHgAQMGAAHwAQcGAAH8AT8GAAs=
 </value>
@@ -2125,9 +2044,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>902, 520</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>918, 288</value>
   </data>
@@ -2182,6 +2098,12 @@
   <data name="&gt;&gt;dgvIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tabPageImages.Name" xml:space="preserve">
+    <value>tabPageImages</value>
+  </data>
+  <data name="&gt;&gt;tabPageImages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>AccountNameDataGridViewTextBoxColumn</value>
   </data>
@@ -2229,12 +2151,6 @@
   </data>
   <data name="&gt;&gt;bsEarningSummary.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageImages.Name" xml:space="preserve">
-    <value>tabPageImages</value>
-  </data>
-  <data name="&gt;&gt;tabPageImages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EarningEntryTv</value>
