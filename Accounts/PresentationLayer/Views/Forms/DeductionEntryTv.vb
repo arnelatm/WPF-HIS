@@ -321,14 +321,14 @@ Namespace PresentationLayer.Views.Forms
                     Else
                         cboCalculationType.Visible = True
                         cboMultiplierType.Visible = True
-                        cboUnit.Visible = True
-                        lblCalculationType.Visible = False
-                        lblDefaultQty.Visible = True
+                        cboUnit.Visible = False
+                        lblCalculationType.Visible = True
+                        lblDefaultQty.Visible = False
                         lblMultiplier.Visible = True
                         lblPayRate.Visible = False
-                        lblRate.Visible = True
-                        lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
-                        txtDefaultQuantity.Visible = True
+                        lblRate.Visible = False
+                        lblRate.Text = ""
+                        txtDefaultQuantity.Visible = False
                         txtMultiplier.Visible = True
                         txtRate.Visible = False
                     End If
