@@ -150,14 +150,15 @@ Namespace AdoNet
             Return obj
         End Function
 
-        Private Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IBaseDao.GetRecordFieldsFiltered
+        Public Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IBaseDao.GetRecordFieldsFiltered
             Dim sql As String =
                     " Select " & fieldList & " FROM [" & tableName & "] " &
                     " Where " & filter
             Dim values As Object
             values = _db.SqlRead(sql)
             Dim fields = fieldList.Split(",")
-            Dim obj As New ExpandoObject
+            Dim obj As Object
+            obj = New ExpandoObject
             Dim i As Int16 = 0
             For Each item In fields
                 CreateDynamicObject(obj, item, values(i))
@@ -166,7 +167,7 @@ Namespace AdoNet
             Return obj
         End Function
 
-        Public Sub CreateDynamicObject(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As String)
+        Public Sub CreateDynamicObject(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As Object)
             CType(obj, IDictionary(Of String, Object))(propertyName) = propertyValue
         End Sub
 

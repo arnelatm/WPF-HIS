@@ -323,6 +323,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\FormAbout.resx">
       <DependentUpon>FormAbout.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\MessagesTableManager.resx">
       <DependentUpon>MessagesTableManager.vb</DependentUpon>

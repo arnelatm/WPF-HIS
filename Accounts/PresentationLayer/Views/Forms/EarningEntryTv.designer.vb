@@ -69,8 +69,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblBasePayment = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblIncludeInGosi = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkIncludeInPension = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblIncludeInEos = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkIncludeInEOS = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.txtMultiplier = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -91,20 +89,20 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.tbpSummaryDetail = New System.Windows.Forms.TabPage()
-            Me.DataGridViewSummaryDetail = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.EarningIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPayrollEarnAccounts = New System.Windows.Forms.BindingSource(Me.components)
+            Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.tbpSummaryDetail = New System.Windows.Forms.TabPage()
+            Me.DataGridViewSummaryDetail = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvMultiplierSummary = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsEarningSummary = New System.Windows.Forms.BindingSource(Me.components)
             Me.tabPageImages = New System.Windows.Forms.ImageList(Me.components)
+            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.tlpEarning.SuspendLayout()
@@ -119,11 +117,11 @@ Namespace PresentationLayer.Views.Forms
             Me.floPostingAccounts.SuspendLayout()
             Me.tlpPostingAccounts.SuspendLayout()
             CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpSummaryDetail.SuspendLayout()
             CType(Me.DataGridViewSummaryDetail, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.floDataDisplay.SuspendLayout()
-            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsEarningSummary, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
             '
             'TreeViewTableName
@@ -378,14 +376,12 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpCalculation.Controls.Add(Me.txtDefaultQuantity, 1, 4)
             Me.tlpCalculation.Controls.Add(Me.lblBasePayment, 0, 5)
             Me.tlpCalculation.Controls.Add(Me.cboBasePaymentIdNo, 1, 5)
-            Me.tlpCalculation.Controls.Add(Me.lblIncludeInGosi, 0, 8)
-            Me.tlpCalculation.Controls.Add(Me.chkIncludeInPension, 1, 8)
             Me.tlpCalculation.Controls.Add(Me.lblIncludeInEos, 0, 7)
             Me.tlpCalculation.Controls.Add(Me.chkIncludeInEOS, 1, 7)
             Me.tlpCalculation.Controls.Add(Me.txtMultiplier, 1, 6)
             Me.tlpCalculation.Controls.Add(Me.cboMultiplierType, 2, 6)
-            Me.tlpCalculation.Controls.Add(Me.chkTaxable, 2, 9)
-            Me.tlpCalculation.Controls.Add(Me.lblTaxable, 0, 9)
+            Me.tlpCalculation.Controls.Add(Me.chkTaxable, 2, 8)
+            Me.tlpCalculation.Controls.Add(Me.lblTaxable, 0, 8)
             Me.tlpCalculation.Controls.Add(Me.lblPayRate, 2, 2)
             Me.tlpCalculation.Controls.Add(Me.lblRate, 0, 2)
             Me.tlpCalculation.Controls.Add(Me.cboUnit, 3, 2)
@@ -535,28 +531,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.ValueIsNullable = False
             Me.cboBasePaymentIdNo.ValueIsNumeric = False
             Me.cboBasePaymentIdNo.ValueMember = "IdNo"
-            '
-            'lblIncludeInGosi
-            '
-            resources.ApplyResources(Me.lblIncludeInGosi, "lblIncludeInGosi")
-            Me.tlpCalculation.SetColumnSpan(Me.lblIncludeInGosi, 2)
-            Me.lblIncludeInGosi.DisplayOnly = True
-            Me.lblIncludeInGosi.EditingMode = False
-            Me.lblIncludeInGosi.Name = "lblIncludeInGosi"
-            '
-            'chkIncludeInPension
-            '
-            resources.ApplyResources(Me.chkIncludeInPension, "chkIncludeInPension")
-            Me.chkIncludeInPension.BackColor = System.Drawing.Color.White
-            Me.chkIncludeInPension.DisplayOnly = False
-            Me.chkIncludeInPension.EditingMode = True
-            Me.chkIncludeInPension.FlatAppearance.BorderSize = 0
-            Me.chkIncludeInPension.ForeColor = System.Drawing.Color.Black
-            Me.chkIncludeInPension.LinkedLabel = Me.lblIncludeInGosi
-            Me.chkIncludeInPension.Name = "chkIncludeInPension"
-            Me.chkIncludeInPension.NoLabel = True
-            Me.chkIncludeInPension.OldValue = Nothing
-            Me.chkIncludeInPension.UseVisualStyleBackColor = True
             '
             'lblIncludeInEos
             '
@@ -828,6 +802,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollEarnAccounts.Ea = EventAggregator1
             Me.DataGridViewPayrollEarnAccounts.EditingMode = False
             Me.DataGridViewPayrollEarnAccounts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPayrollEarnAccounts.FieldsDictionary = Nothing
             Me.DataGridViewPayrollEarnAccounts.FirstRowDeletionEnabled = True
             Me.DataGridViewPayrollEarnAccounts.FirstRowInsertionEnabled = True
             Me.DataGridViewPayrollEarnAccounts.Name = "DataGridViewPayrollEarnAccounts"
@@ -883,6 +858,31 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvIdNo.Name = "dgvIdNo"
             Me.dgvIdNo.ReadOnly = True
             '
+            'AccountNameDataGridViewTextBoxColumn
+            '
+            Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
+            resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
+            Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
+            Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'EarningIdNoDataGridViewTextBoxColumn
+            '
+            Me.EarningIdNoDataGridViewTextBoxColumn.DataPropertyName = "EarningIdNo"
+            resources.ApplyResources(Me.EarningIdNoDataGridViewTextBoxColumn, "EarningIdNoDataGridViewTextBoxColumn")
+            Me.EarningIdNoDataGridViewTextBoxColumn.Name = "EarningIdNoDataGridViewTextBoxColumn"
+            Me.EarningIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'PayGroupNameDataGridViewTextBoxColumn
+            '
+            Me.PayGroupNameDataGridViewTextBoxColumn.DataPropertyName = "PayGroupName"
+            resources.ApplyResources(Me.PayGroupNameDataGridViewTextBoxColumn, "PayGroupNameDataGridViewTextBoxColumn")
+            Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
+            Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'bsPayrollEarnAccounts
+            '
+            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
+            '
             'lblUsePayGroups
             '
             resources.ApplyResources(Me.lblUsePayGroups, "lblUsePayGroups")
@@ -935,6 +935,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewSummaryDetail.Ea = Nothing
             Me.DataGridViewSummaryDetail.EditingMode = False
             Me.DataGridViewSummaryDetail.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewSummaryDetail.FieldsDictionary = Nothing
             Me.DataGridViewSummaryDetail.FirstRowDeletionEnabled = True
             Me.DataGridViewSummaryDetail.FirstRowInsertionEnabled = True
             Me.DataGridViewSummaryDetail.Name = "DataGridViewSummaryDetail"
@@ -943,39 +944,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewSummaryDetail.SequenceFieldName = "Sequence"
             Me.DataGridViewSummaryDetail.ShowFooter = False
             Me.DataGridViewSummaryDetail.ShowInsertColumnWhenEditing = True
-            '
-            'floDataDisplay
-            '
-            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-            Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
-            Me.floDataDisplay.Controls.Add(Me.CFlowLayout4)
-            Me.floDataDisplay.Name = "floDataDisplay"
-            '
-            'AccountNameDataGridViewTextBoxColumn
-            '
-            Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
-            resources.ApplyResources(Me.AccountNameDataGridViewTextBoxColumn, "AccountNameDataGridViewTextBoxColumn")
-            Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
-            Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'EarningIdNoDataGridViewTextBoxColumn
-            '
-            Me.EarningIdNoDataGridViewTextBoxColumn.DataPropertyName = "EarningIdNo"
-            resources.ApplyResources(Me.EarningIdNoDataGridViewTextBoxColumn, "EarningIdNoDataGridViewTextBoxColumn")
-            Me.EarningIdNoDataGridViewTextBoxColumn.Name = "EarningIdNoDataGridViewTextBoxColumn"
-            Me.EarningIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'PayGroupNameDataGridViewTextBoxColumn
-            '
-            Me.PayGroupNameDataGridViewTextBoxColumn.DataPropertyName = "PayGroupName"
-            resources.ApplyResources(Me.PayGroupNameDataGridViewTextBoxColumn, "PayGroupNameDataGridViewTextBoxColumn")
-            Me.PayGroupNameDataGridViewTextBoxColumn.Name = "PayGroupNameDataGridViewTextBoxColumn"
-            Me.PayGroupNameDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'bsPayrollEarnAccounts
-            '
-            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
             '
             'dgvEarningIdNo
             '
@@ -1020,6 +988,14 @@ Namespace PresentationLayer.Views.Forms
             Me.tabPageImages.TransparentColor = System.Drawing.Color.Transparent
             Me.tabPageImages.Images.SetKeyName(0, "error.png")
             '
+            'floDataDisplay
+            '
+            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+            Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+            Me.floDataDisplay.Controls.Add(Me.CFlowLayout4)
+            Me.floDataDisplay.Name = "floDataDisplay"
+            '
             'EarningEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -1045,11 +1021,11 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpPostingAccounts.ResumeLayout(False)
             Me.tlpPostingAccounts.PerformLayout()
             CType(Me.DataGridViewPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpSummaryDetail.ResumeLayout(False)
             CType(Me.DataGridViewSummaryDetail, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.floDataDisplay.ResumeLayout(False)
-            CType(Me.bsPayrollEarnAccounts, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsEarningSummary, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -1083,8 +1059,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtDefaultQuantity As CTextBox
         Friend WithEvents lblBasePayment As CLabel
         Friend WithEvents cboBasePaymentIdNo As CaComboBox
-        Friend WithEvents lblIncludeInGosi As CLabel
-        Friend WithEvents chkIncludeInPension As CCheckBox
         Friend WithEvents lblIncludeInEos As CLabel
         Friend WithEvents chkIncludeInEOS As CCheckBox
         Friend WithEvents txtMultiplier As CTextBox

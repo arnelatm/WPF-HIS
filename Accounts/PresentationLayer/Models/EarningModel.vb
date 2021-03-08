@@ -19,7 +19,6 @@ Namespace PresentationLayer.Models
         Public Property EarningType As Char
         Public Property IdNo As Int16
         Public Property IncludeInEos As Boolean
-        Public Property IncludeInPension As Boolean
         Public Property Multiplier As String
         Public Property MultiplierType As Char
         Public Property Notes As String

@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Dynamic
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -242,10 +243,9 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Private Sub GenerateEarnings(ByRef employeeAttendance As AttendanceItem, payrollIdNo As Short)
-            GenerateRegularEarnings(employeeAttendance, payrollIdNo)
-            'GenerateOvertime(employeeAttendance, payrollIdNo)
-        End Sub
+        'Private Sub GenerateEarnings(ByRef employeeAttendance As AttendanceItem, payrollIdNo As Short)
+        '    GenerateRegularEarnings(employeeAttendance, payrollIdNo)
+        'End Sub
 
         Private Sub GenerateEmployeePayroll(ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef progressBar As ProgressBar)
             Dim payrollEarningDao = New PayrollEarningDao
@@ -255,13 +255,13 @@ Namespace PresentationLayer.Presenters
             progressBar.Value = 0
             progressBar.Maximum = attendance.Count() + 2
             progressBar.Visible = True
-            Dim counter = 1
             For Each employeeAttendance In attendance
-                GenerateEarnings(employeeAttendance, payrollIdNo)
+                GenerateRegularEarnings(employeeAttendance, payrollIdNo)
                 GenerateDeductions(employeeAttendance, payrollIdNo)
                 GenerateAbsencesDeductions(employeeAttendance, payrollIdNo)
                 progressBar.Value = progressBar.Value + 1
             Next
+            GenerateOvertime(payrollIdNo)
             payrollEarningDao.InsertTvp(_dtEarningInsertTable)
             payrollDeductionDao.InsertTvp(_dtDeductionInsertTable)
             progressBar.Value = progressBar.Value + 2
@@ -293,6 +293,59 @@ Namespace PresentationLayer.Presenters
                     AddEarning(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, earning.IdNo)
                 End If
             Next
+        End Sub
+
+
+        Private Sub GenerateOvertime(payrollIdNo As Short)
+            Dim overtime As List(Of OvertimeItem)
+            Dim overtimeItemDao = New OvertimeItemDao
+            Dim employeeDao = New EmployeeDao
+            Dim otRegularUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
+            Dim otHolidayUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursHoliday)
+            Dim otSpecialUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
+            Dim otEarnings = _earningsDao.GetRecords("EarningType = '" & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
+                                                     "CalculationType = '" & EnumToCode(CalculationTypeSelection.FixedRate) & "' AND " &
+                                                     "(Unit = '" & otRegularUnit & "' or " &
+                                                     "Unit = '" & otHolidayUnit & "' or " &
+                                                     "Unit = '" & otSpecialUnit & "')")
+            overtime = overtimeItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
+            If overtime.Count() <> 0 Then
+                For Each item In overtime
+
+                    If item.OvertimeRegular <> 0 Or item.OvertimeHoliday <> 0 Or item.OvertimeSpecial Then
+                        Dim employeeIdNo = item.EmployeeIdNo
+                        Dim emp As Object
+                        emp = employeeDao.GetRecordFieldsFiltered("Employee", "OtRateRegular,OtRateHoliday,OtRateSpecial", "IdNo = " & employeeIdNo)
+                        If emp IsNot Nothing Then
+                            Dim empOtRegularRate As Decimal = IIf(IsDBNull(emp.OtRateRegular), 0, emp.OtRateRegular)
+                            Dim empOtHolidayRate As Decimal = IIf(IsDBNull(emp.otRateHoliday), 0, emp.otRateHoliday)
+                            Dim empOtSpecialRate As Decimal = IIf(IsDBNull(emp.OtRateSpecial), 0, emp.otRateSpecial)
+                            If item.OvertimeRegular <> 0 Then
+                                MakeOvertime(payrollIdNo, item.OvertimeRegular, otRegularUnit, empOtRegularRate, otEarnings, item, employeeIdNo)
+                            End If
+                            If item.OvertimeHoliday <> 0 Then
+                                MakeOvertime(payrollIdNo, item.OvertimeHoliday, otHolidayUnit, empOtHolidayRate, otEarnings, item, employeeIdNo)
+                            End If
+                            If item.OvertimeSpecial <> 0 Then
+                                MakeOvertime(payrollIdNo, item.OvertimeSpecial, otSpecialUnit, empOtSpecialRate, otEarnings, item, employeeIdNo)
+                            End If
+                        End If
+                    End If
+                Next
+            End If
+        End Sub
+
+        Private Sub MakeOvertime(payrollIdNo As Short, otHours As Decimal, otUnit As String, otRate As Decimal, otEarnings As List(Of Earning), item As OvertimeItem, employeeIdNo As Integer)
+            Dim amount As Decimal
+            Dim earn As Earning = otEarnings.Find(Function(value As Earning)
+                                                      Return value.Unit = otUnit
+                                                  End Function)
+            If earn IsNot Nothing Then
+                amount = otHours * IIf(otRate = 0, earn.Rate, otRate)
+            Else
+                amount = otHours * earn.Rate
+            End If
+            AddEarning(employeeIdNo, amount, payrollIdNo, earn.IdNo)
         End Sub
 
         Private Sub MakeDeductions(employeeIdNo As Int32, amount As Decimal, empDeduction As EmployeeDeduction, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)

@@ -11,8 +11,6 @@
     [DefaultQuantity]  DECIMAL (10, 4) NULL,
     [Multiplier]       VARCHAR (10)    NULL,
     [MultiplierType]   CHAR (1)        NULL,
-    [IncludeInEos]     BIT             NULL,
-    [IncludeInPension] BIT             NULL,
     [Rate]             MONEY           NULL,
     [Taxable]          BIT             NULL,
     [Unit]             CHAR (1)        NULL,

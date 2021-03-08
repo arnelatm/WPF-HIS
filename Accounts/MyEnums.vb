@@ -215,6 +215,7 @@ Public Enum PayRateUnitSelection
     <EnumCode("U")> Unit
     <EnumCode("A")> AbsencesWithoutPay
     <EnumCode("O")> OvertimeHoursRegular
+    <EnumCode("V")> OvertimeHoursHoliday
     <EnumCode("T")> OvertimeHoursSpecial
 End Enum
 
