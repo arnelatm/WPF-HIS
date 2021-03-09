@@ -18,6 +18,8 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _earningsDao = New EarningDao
         Private ReadOnly _employeeDeductionDao = New EmployeeDeductionDao
         Private ReadOnly _employeeEarningDao = New EmployeeEarningDao
+        Private ReadOnly _payrollDeductionDao = New PayrollDeductionDao
+        Private ReadOnly _payrollEarningDao = New PayrollEarningDao
         Private ReadOnly _factor = EnumToCode(CalculationTypeSelection.Factor)
         Private ReadOnly _factoredDeduction = EnumToCode(CalculationTypeSelection.Factor)
         Private ReadOnly _fixedAmount = EnumToCode(CalculationTypeSelection.FixedAmount)
@@ -83,12 +85,13 @@ Namespace PresentationLayer.Presenters
         Public Sub GeneratePayroll(ByVal payrollIdNo As Int16, ByVal startDate As Date, ByVal endDate As Date, ByRef progressBar As ProgressBar)
             Dim attendance As List(Of AttendanceItem)
             Dim attendanceItemDao = New AttendanceItemDao
+            Dim overtime As List(Of OvertimeItem)
+            Dim overtimeItemDao = New OvertimeItemDao
+            overtime = overtimeItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
             attendance = attendanceItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
-            If attendance.Count() = 0 Then
-                Messaging.Show(True, "MsgEmptyEmployeeAttendance")
+            If attendance.Count() = 0 And overtime.Count() = 0 Then
+                Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
             Else
-                Dim payrollDeductionDao = New PayrollDeductionDao
-                Dim payrollEarningDao = New PayrollEarningDao
                 Dim payEarnings As List(Of PayrollEarning)
                 Dim payDeductions As List(Of PayrollDeduction)
                 Dim payCycleIdNo = GetFieldWithIdNo(payrollIdNo, "Payroll", "PayCycleIdNo")
@@ -96,16 +99,16 @@ Namespace PresentationLayer.Presenters
                 If payFrequency = EnumToCode(PayFrequencySelection.Monthly) Then
                     _endDate = endDate
                     _daysInTheMonth = DateTime.DaysInMonth(Year(endDate), Month(endDate))
-                    payDeductions = payrollDeductionDao.GetRecordsWithGroupIdNo(payrollIdNo)
-                    payEarnings = payrollEarningDao.GetRecordsWithGroupIdNo(payrollIdNo)
+                    payDeductions = _payrollDeductionDao.GetRecordsWithGroupIdNo(payrollIdNo)
+                    payEarnings = _payrollEarningDao.GetRecordsWithGroupIdNo(payrollIdNo)
                     If payEarnings.Count() = 0 Then
-                        GenerateEmployeePayroll(payrollIdNo, attendance, progressBar)
+                        GenerateEmployeePayroll(payrollIdNo, attendance, overtime, progressBar)
                     Else
                         If Messaging.Show(True, "AskIfRegeneratePayroll",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                            ReGenerateEmployeePayroll(payEarnings, payDeductions, payrollIdNo, attendance, progressBar)
+                            ReGenerateEmployeePayroll(payEarnings, payDeductions, payrollIdNo, attendance, overtime, progressBar)
                         End If
                     End If
                 End If
@@ -243,17 +246,34 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
+        Private Sub ReGenerateDeduction(ByRef employeeAttendance As AttendanceItem, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
+            Dim amount As Decimal
+            Dim empDeductions As List(Of EmployeeDeduction)
+            empDeductions = _employeeDeductionDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
+            For Each empDeduction In empDeductions
+                Dim deduction As Deduction
+                deduction = _deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
+                If deduction.DeductionType = _regularDeductionType Then
+                    'If deduction.CalculationType = factoredDeduction Then
+                    '    If deduction.
+                    'ElseIf deduction.CalculationType = fixedDeduction Then
+                    '    MakeDeductions(employeeAttendance, empDeduction, payDeductions, payrollIdNo)
+                    '    End If
+                    'End If
+                End If
+                MakeDeductions(employeeAttendance.EmployeeIdNo, amount, empDeduction, payDeductions, payrollIdNo)
+            Next
+        End Sub
+
         'Private Sub GenerateEarnings(ByRef employeeAttendance As AttendanceItem, payrollIdNo As Short)
         '    GenerateRegularEarnings(employeeAttendance, payrollIdNo)
         'End Sub
 
-        Private Sub GenerateEmployeePayroll(ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef progressBar As ProgressBar)
-            Dim payrollEarningDao = New PayrollEarningDao
-            Dim payrollDeductionDao = New PayrollDeductionDao
+        Private Sub GenerateEmployeePayroll(ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef overtime As List(Of OvertimeItem), ByRef progressBar As ProgressBar)
             _dtEarningInsertTable.Clear()
             _dtDeductionInsertTable.Clear()
             progressBar.Value = 0
-            progressBar.Maximum = attendance.Count() + 2
+            progressBar.Maximum = attendance.Count() + 2 + overtime.Count()
             progressBar.Visible = True
             For Each employeeAttendance In attendance
                 GenerateRegularEarnings(employeeAttendance, payrollIdNo)
@@ -261,26 +281,33 @@ Namespace PresentationLayer.Presenters
                 GenerateAbsencesDeductions(employeeAttendance, payrollIdNo)
                 progressBar.Value = progressBar.Value + 1
             Next
-            GenerateOvertime(payrollIdNo)
-            payrollEarningDao.InsertTvp(_dtEarningInsertTable)
-            payrollDeductionDao.InsertTvp(_dtDeductionInsertTable)
-            progressBar.Value = progressBar.Value + 2
+            GenerateOvertime(payrollIdNo, overtime, progressBar)
+            _payrollEarningDao.InsertTvp(_dtEarningInsertTable)
+            progressBar.Value = progressBar.Value + 1
+            _payrollDeductionDao.InsertTvp(_dtDeductionInsertTable)
+            progressBar.Value = progressBar.Value + 1
             Messaging.Show(True, "MsgPayrollGenerationCompleted")
             progressBar.Visible = False
         End Sub
 
-        'Private Sub GenerateOvertime(employeeAttendance As AttendanceItem, payrollIdNo As Short)
-        '    'Dim overtime As List(Of Earning) = _earningsDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
-        '    'Dim amount As Decimal
-        '    'For Each empEarning In empEarnings
-        '    '    Dim earning As Earning
-        '    '    earning = _earningsDao.GetRecordById(empEarning.EarningIdNo)
-        '    '    If earning.EarningType = _regularEarning Then
-        '    '        amount = ComputeEarningAmount(empEarning, earning, employeeAttendance)
-        '    '        AddEarning(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, earning.IdNo)
-        '    '    End If
-        '    'Next
-        'End Sub
+        Private Sub ReGenerateEmployeePayroll(ByRef payEarnings As List(Of PayrollEarning), ByRef payDeductions As List(Of PayrollDeduction), ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef overtime As List(Of OvertimeItem), ByRef progressBar As ProgressBar)
+            _dtEarningInsertTable.Clear()
+            _dtEarningUpdateTable.Clear()
+            progressBar.Value = 0
+            progressBar.Maximum = attendance.Count() + overtime.Count() + 2
+            progressBar.Visible = True
+            For Each employeeAttendance In attendance
+                ReGenerateRegularEarning(employeeAttendance, payEarnings, payrollIdNo)
+                ReGenerateDeduction(employeeAttendance, payDeductions, payrollIdNo)
+                progressBar.Value = progressBar.Value + 1
+            Next
+            _payrollDeductionDao.UpdateInsertTvp(_dtDeductionUpdateTable, _dtDeductionInsertTable, payrollIdNo)
+            progressBar.Value = progressBar.Value + 1
+            _payrollEarningDao.UpdateInsertTvp(_dtEarningUpdateTable, _dtEarningInsertTable, payrollIdNo)
+            progressBar.Value = progressBar.Value + 1
+            Messaging.Show(True, "MsgPayrollGenerationCompleted")
+            progressBar.Visible = False
+        End Sub
 
         Private Sub GenerateRegularEarnings(employeeAttendance As AttendanceItem, payrollIdNo As Short)
             Dim empEarnings As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
@@ -295,11 +322,29 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
+        Private Sub ReGenerateRegularEarning(ByRef employeeAttendance As AttendanceItem, payEarnings As List(Of PayrollEarning), payrollIdNo As Short)
+            Dim empEarnings As List(Of EmployeeEarning)
+            Dim amount As Decimal
+            empEarnings = _employeeEarningDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
+            For Each empEarning In empEarnings
+                Dim earning As Earning
+                earning = _earningsDao.GetRecordById(empEarning.EarningIdNo)
+                If earning.EarningType = _regularEarning Then
+                    If earning.CalculationType = _fixedAmount Then
+                        amount = empEarning.Amount
+                    ElseIf earning.CalculationType = _fixedRate Then
+                        If earning.Unit = _overtimeHoursRegular Then
 
-        Private Sub GenerateOvertime(payrollIdNo As Short)
-            Dim overtime As List(Of OvertimeItem)
-            Dim overtimeItemDao = New OvertimeItemDao
+                        End If
+                    End If
+                    MakeEarnings(employeeAttendance.EmployeeIdNo, amount, empEarning, payEarnings, payrollIdNo)
+                End If
+            Next
+        End Sub
+
+        Private Sub GenerateOvertime(payrollIdNo As Short, overtime As List(Of OvertimeItem), ByRef progressBar As ProgressBar)
             Dim employeeDao = New EmployeeDao
+            Dim otAmount As Decimal = 0
             Dim otRegularUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
             Dim otHolidayUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursHoliday)
             Dim otSpecialUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
@@ -308,10 +353,8 @@ Namespace PresentationLayer.Presenters
                                                      "(Unit = '" & otRegularUnit & "' or " &
                                                      "Unit = '" & otHolidayUnit & "' or " &
                                                      "Unit = '" & otSpecialUnit & "')")
-            overtime = overtimeItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
             If overtime.Count() <> 0 Then
                 For Each item In overtime
-
                     If item.OvertimeRegular <> 0 Or item.OvertimeHoliday <> 0 Or item.OvertimeSpecial Then
                         Dim employeeIdNo = item.EmployeeIdNo
                         Dim emp As Object
@@ -321,31 +364,99 @@ Namespace PresentationLayer.Presenters
                             Dim empOtHolidayRate As Decimal = IIf(IsDBNull(emp.otRateHoliday), 0, emp.otRateHoliday)
                             Dim empOtSpecialRate As Decimal = IIf(IsDBNull(emp.OtRateSpecial), 0, emp.otRateSpecial)
                             If item.OvertimeRegular <> 0 Then
-                                MakeOvertime(payrollIdNo, item.OvertimeRegular, otRegularUnit, empOtRegularRate, otEarnings, item, employeeIdNo)
+                                MakePayrollOt(payrollIdNo, item.OvertimeRegular, otRegularUnit, empOtRegularRate, otEarnings, employeeIdNo)
                             End If
                             If item.OvertimeHoliday <> 0 Then
-                                MakeOvertime(payrollIdNo, item.OvertimeHoliday, otHolidayUnit, empOtHolidayRate, otEarnings, item, employeeIdNo)
+                                MakePayrollOt(payrollIdNo, item.OvertimeHoliday, otHolidayUnit, empOtHolidayRate, otEarnings, employeeIdNo)
                             End If
                             If item.OvertimeSpecial <> 0 Then
-                                MakeOvertime(payrollIdNo, item.OvertimeSpecial, otSpecialUnit, empOtSpecialRate, otEarnings, item, employeeIdNo)
+                                MakePayrollOt(payrollIdNo, item.OvertimeSpecial, otSpecialUnit, empOtSpecialRate, otEarnings, employeeIdNo)
                             End If
                         End If
                     End If
+                    progressBar.Value = progressBar.Value + 1
                 Next
             End If
         End Sub
 
-        Private Sub MakeOvertime(payrollIdNo As Short, otHours As Decimal, otUnit As String, otRate As Decimal, otEarnings As List(Of Earning), item As OvertimeItem, employeeIdNo As Integer)
-            Dim amount As Decimal
+        Private Sub ReGenerateOvertime(overtimeEarnings As List(Of Earning), payrollIdNo As Short, overtime As List(Of OvertimeItem), ByRef progressBar As ProgressBar)
+            Dim employeeDao = New EmployeeDao
+            Dim otAmount As Decimal = 0
+            Dim otRegularUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
+            Dim otHolidayUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursHoliday)
+            Dim otSpecialUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
+            Dim otEarnings As List(Of Earning) = _earningsDao.GetRecords("EarningType = '" & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
+                                                     "CalculationType = '" & EnumToCode(CalculationTypeSelection.FixedRate) & "' AND " &
+                                                     "(Unit = '" & otRegularUnit & "' or " &
+                                                     "Unit = '" & otHolidayUnit & "' or " &
+                                                     "Unit = '" & otSpecialUnit & "')")
+
+            Dim payrollEarnings As New List(Of PayrollEarning)
+            For Each item In otEarnings
+                Dim curPayEarnings = _payrollEarningDao.GetRecords("EarningIdNo = '" & item.IdNo.ToString() & "'" &
+                                                                   "PayrollIdNo = '" & payrollIdNo.ToString() & "'")
+                If curPayEarnings IsNot Nothing Then
+                    payrollEarnings.AddRange(curPayEarnings)
+                End If
+            Next
+            If overtime.Count() <> 0 Then
+                For Each item In overtime
+                    If item.OvertimeRegular <> 0 Or item.OvertimeHoliday <> 0 Or item.OvertimeSpecial Then
+                        Dim employeeIdNo = item.EmployeeIdNo
+                        Dim emp As Object
+                        emp = employeeDao.GetRecordFieldsFiltered("Employee", "OtRateRegular,OtRateHoliday,OtRateSpecial", "IdNo = " & employeeIdNo)
+                        If emp IsNot Nothing Then
+                            Dim empOtRegularRate As Decimal = IIf(IsDBNull(emp.OtRateRegular), 0, emp.OtRateRegular)
+                            Dim empOtHolidayRate As Decimal = IIf(IsDBNull(emp.otRateHoliday), 0, emp.otRateHoliday)
+                            Dim empOtSpecialRate As Decimal = IIf(IsDBNull(emp.OtRateSpecial), 0, emp.otRateSpecial)
+                            If item.OvertimeRegular <> 0 Then
+                                ReMakePayrollOt(payrollEarnings, payrollIdNo, item.OvertimeRegular, otRegularUnit, empOtRegularRate, otEarnings, employeeIdNo)
+                            End If
+                            If item.OvertimeHoliday <> 0 Then
+                                ReMakePayrollOt(payrollEarnings, payrollIdNo, item.OvertimeHoliday, otHolidayUnit, empOtHolidayRate, otEarnings, employeeIdNo)
+                            End If
+                            If item.OvertimeSpecial <> 0 Then
+                                ReMakePayrollOt(payrollEarnings, payrollIdNo, item.OvertimeSpecial, otSpecialUnit, empOtSpecialRate, otEarnings, employeeIdNo)
+                            End If
+                        End If
+                    End If
+                    progressBar.Value = progressBar.Value + 1
+                Next
+            End If
+        End Sub
+
+        Private Sub MakePayrollOt(payrollIdNo As Short, otHours As Decimal, otUnit As String, otRate As Decimal, otEarnings As List(Of Earning), employeeIdNo As Integer)
+            Dim otAmount As Decimal
             Dim earn As Earning = otEarnings.Find(Function(value As Earning)
                                                       Return value.Unit = otUnit
                                                   End Function)
             If earn IsNot Nothing Then
-                amount = otHours * IIf(otRate = 0, earn.Rate, otRate)
+                otAmount = otHours * IIf(IsDBNull(otRate), 0, otRate)
             Else
-                amount = otHours * earn.Rate
+                otAmount = otHours * IIf(IsDBNull(earn.Rate), 0, earn.Rate)
             End If
-            AddEarning(employeeIdNo, amount, payrollIdNo, earn.IdNo)
+            AddEarning(employeeIdNo, otAmount, payrollIdNo, earn.IdNo)
+        End Sub
+
+        Private Sub ReMakePayrollOt(payEarnings As List(Of PayrollEarning), payrollIdNo As Short, otHours As Decimal, otUnit As String, otRate As Decimal, otEarnings As List(Of Earning), employeeIdNo As Integer)
+            Dim otAmount As Decimal
+            Dim earn As Earning = otEarnings.Find(Function(value As Earning)
+                                                      Return value.Unit = otUnit
+                                                  End Function)
+            If earn IsNot Nothing Then
+                otAmount = otHours * IIf(otRate = 0, earn.Rate, otRate)
+            Else
+                otAmount = otHours * earn.Rate
+            End If
+
+            Dim payrollEarning As PayrollEarning = payEarnings.Find(Function(value As PayrollEarning)
+                                                                        Return value.EmployeeIdNo = employeeIdNo And value.EarningIdNo = earn.IdNo
+                                                                    End Function)
+            If payrollEarning Is Nothing Then
+                AddEarning(employeeIdNo, otAmount, payrollIdNo, earn.IdNo)
+            Else
+                UpdateEarning(otAmount, payrollEarning)
+            End If
         End Sub
 
         Private Sub MakeDeductions(employeeIdNo As Int32, amount As Decimal, empDeduction As EmployeeDeduction, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
@@ -368,68 +479,6 @@ Namespace PresentationLayer.Presenters
             Else
                 UpdateEarning(amount, earning)
             End If
-        End Sub
-
-        Private Sub ReGenerateDeduction(ByRef employeeAttendance As AttendanceItem, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
-            Dim empDeductions As List(Of EmployeeDeduction)
-            Dim amount As Decimal
-            empDeductions = _employeeDeductionDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
-            For Each empDeduction In empDeductions
-                Dim deduction As Deduction
-                deduction = _deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
-                If deduction.DeductionType = _regularDeductionType Then
-                    'If deduction.CalculationType = factoredDeduction Then
-                    '    If deduction.
-                    'ElseIf deduction.CalculationType = fixedDeduction Then
-                    '    MakeDeductions(employeeAttendance, empDeduction, payDeductions, payrollIdNo)
-                    '    End If
-                    'End If
-                End If
-                MakeDeductions(employeeAttendance.EmployeeIdNo, amount, empDeduction, payDeductions, payrollIdNo)
-            Next
-        End Sub
-
-        Private Sub ReGenerateEarning(ByRef employeeAttendance As AttendanceItem, payEarnings As List(Of PayrollEarning), payrollIdNo As Short)
-            Dim empEarnings As List(Of EmployeeEarning)
-            Dim amount As Decimal
-            empEarnings = _employeeEarningDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
-            For Each empEarning In empEarnings
-                Dim earning As Earning
-                earning = _earningsDao.GetRecordById(empEarning.EarningIdNo)
-                If earning.EarningType = _regularEarning Then
-                    If earning.CalculationType = _fixedAmount Then
-                        amount = empEarning.Amount
-                    ElseIf earning.CalculationType = _fixedRate Then
-                        If earning.Unit = _overtimeHoursRegular Then
-
-                        End If
-
-                    End If
-                    MakeEarnings(employeeAttendance.EmployeeIdNo, amount, empEarning, payEarnings, payrollIdNo)
-                End If
-            Next
-
-        End Sub
-
-        Private Sub ReGenerateEmployeePayroll(ByRef payEarnings As List(Of PayrollEarning), ByRef payDeductions As List(Of PayrollDeduction), ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef progressBar As ProgressBar)
-            Dim payrollDeductionDao = New PayrollDeductionDao
-            Dim payrollEarningDao = New PayrollEarningDao
-            _dtEarningInsertTable.Clear()
-            _dtEarningUpdateTable.Clear()
-            progressBar.Value = 0
-            progressBar.Maximum = attendance.Count() + 2
-            progressBar.Visible = True
-            Dim counter = 1
-            For Each employeeAttendance In attendance
-                ReGenerateEarning(employeeAttendance, payEarnings, payrollIdNo)
-                ReGenerateDeduction(employeeAttendance, payDeductions, payrollIdNo)
-                progressBar.Value = progressBar.Value + 1
-            Next
-            payrollDeductionDao.UpdateInsertTvp(_dtDeductionUpdateTable, _dtDeductionInsertTable, payrollIdNo)
-            payrollEarningDao.UpdateInsertTvp(_dtEarningUpdateTable, _dtEarningInsertTable, payrollIdNo)
-            progressBar.Value = progressBar.Value + 2
-            Messaging.Show(True, "MsgPayrollGenerationCompleted")
-            progressBar.Visible = False
         End Sub
 
         Private Sub UpdateDeduction(amount As Decimal, deduction As PayrollDeduction)

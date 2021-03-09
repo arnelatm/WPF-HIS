@@ -80,7 +80,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgAmountChangeNotAllowed", "Sorry, you can't change the amount field for 'fixed rate' entries. You are only allowed to change the rate field.", "Warning")
         Messaging.AddMessage("MsgRateChangeNotAllowed", "Sorry, you can't change the rate field for 'fixed amount' entries. You are only allowed to change the amount field.", "Warning")
         Messaging.AddMessage("MultiplierMustNotBeZero", "Error in line <{lineNumber}> on Earning Summary Detail Tab. Multiplier must not be equal to zero.", "Invalid Entry")
-
+        Messaging.AddMessage("MsgEmptyEmployeeAttendanceOt", "Employee attendance or overtime not yet initialized for this payroll, please initialize first before generating payroll", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()
