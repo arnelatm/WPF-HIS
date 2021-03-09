@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeEarningDao
         Inherits AccountsDao
-        Implements IDaoChild(Of EmployeeEarning), IDaoGetRecordByIdNo(Of EmployeeEarning)
+        Implements IDaoChild(Of EmployeeEarning), IDaoGetRecordByIdNo(Of EmployeeEarning), IDaoGetRecords(Of EmployeeEarning)
 
         Private ReadOnly Db As New Db()
 
@@ -71,6 +71,14 @@ Namespace DataLayer.AdoNet
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence")),
             .Unit = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Unit"))
            }
+
+        Public Function GetRecords(Optional filter As String = Nothing) As List(Of EmployeeEarning) Implements IDaoGetRecords(Of EmployeeEarning).GetRecords
+            Dim sql As String = "SELECT " &
+                                FieldList &
+                                " FROM [Earning]" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return Db.Read(sql, Make).ToList()
+        End Function
 
     End Class
 
