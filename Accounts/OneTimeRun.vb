@@ -81,6 +81,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgRateChangeNotAllowed", "Sorry, you can't change the rate field for 'fixed amount' entries. You are only allowed to change the amount field.", "Warning")
         Messaging.AddMessage("MultiplierMustNotBeZero", "Error in line <{lineNumber}> on Earning Summary Detail Tab. Multiplier must not be equal to zero.", "Invalid Entry")
         Messaging.AddMessage("MsgEmptyEmployeeAttendanceOt", "Employee attendance or overtime not yet initialized for this payroll, please initialize first before generating payroll", "Error")
+        Messaging.AddMessage("MsgSysEarnDelNotAllowed", "This is a system reserved earning, deletion not allowed!", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

@@ -62,6 +62,12 @@ Namespace DataLayer
 
     End Interface
 
+    Public Interface IDaoGetRecord(Of TM)
+
+        Function GetRecord(Optional filter As String = Nothing) As TM
+
+    End Interface
+
     'Public Interface IDaoAutoVatUpdate
 
     '    Function UpdateVatNumber(ByVal vatNumber As String, ByVal idNo As Integer) As Integer

@@ -108,7 +108,6 @@ Namespace Services
             Return DataBo
         End Function
 
-
         Public Function GetDefaultFieldValues(ByVal systemViewName As String) Implements IService.GetDefaultFieldValues
             Return DefaultFieldValueDao.GetTableDefaultValues(systemViewName)
         End Function
@@ -292,8 +291,8 @@ Namespace Services
             Return BaseDao.GetRecordPosition(tableName, idNo)
         End Function
 
-        Public Overloads Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetRecords
-            Return BaseDao.GetRecords(tableName, sortKey, fields)
+        Public Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetRecordsByField
+            Return BaseDao.GetRecordsByField(tableName, sortKey, fields)
         End Function
 
         'Public Overloads Function GetFields(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetFields

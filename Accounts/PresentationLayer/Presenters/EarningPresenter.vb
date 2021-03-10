@@ -93,6 +93,18 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim retValue = False
+            If MyBase.IsOkToDeleteRecord() Then
+                If View.EarningType = EnumToCode(EarningTypeSelection.Overtime) Then
+                    Messaging.Show(True, "MsgSysEarnDelNotAllowed")
+                Else
+                    retValue = True
+                End If
+            End If
+            Return retValue
+        End Function
+
         'Public Overrides Sub UpdateViewDisplay(idNo As Int32)
         '    If idNo <> 0 Then
         '        Dim modelData As EarningModel
