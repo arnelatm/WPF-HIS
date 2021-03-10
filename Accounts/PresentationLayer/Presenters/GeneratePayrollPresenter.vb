@@ -140,7 +140,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub AddNComputeDeduction(employeeIdNo As Int32, daysAbsentWithoutPay As Decimal, deduction As Deduction, payrollIdNo As Short)
+        Private Sub AddNComputeAbsenceDeduction(employeeIdNo As Int32, daysAbsentWithoutPay As Decimal, deduction As Deduction, payrollIdNo As Short)
             Dim amount As Decimal
             If deduction.CalculationType = _fixedAmount Then
                 amount = deduction.Rate
@@ -229,7 +229,7 @@ Namespace PresentationLayer.Presenters
         Private Sub GenerateAbsencesDeductions(employeeIdNo As Int32, payrollIdNo As Short, daysAbsentWithoutPay As Decimal)
             If daysAbsentWithoutPay <> 0 Then
                 For Each deduction In _absenceDeductions
-                    AddNComputeDeduction(employeeIdNo, daysAbsentWithoutPay, deduction, payrollIdNo)
+                    AddNComputeAbsenceDeduction(employeeIdNo, daysAbsentWithoutPay, deduction, payrollIdNo)
                 Next
             End If
         End Sub
@@ -237,13 +237,41 @@ Namespace PresentationLayer.Presenters
         Private Sub ReGenerateAbsencesDeductions(employeeIdNo As Int32, payrollIdNo As Short, daysAbsentWithoutPay As Decimal)
             If daysAbsentWithoutPay <> 0 Then
                 For Each deduction In _absenceDeductions
-                    Dim payrollAbsenceDed As New List(Of EmployeeDeduction)
-                    Dim empAbsenceDeduction As New EmployeeDeduction
-                    empAbsenceDeduction = _employeeDeductionDao.GetRecords("PayrollIdNo = '" & payrollIdNo.ToString() & "'" & "EarningIdNo = '" & empAbsenceDeduction.EmployeeIdNo.ToString() & "'")
-                    If empAbsenceDeduction IsNot Nothing Then
-                        AddNComputeDeduction(employeeIdNo, daysAbsentWithoutPay, deduction, payrollIdNo)
-                    End If
+                    MakeAbsencesDeduction(employeeIdNo, daysAbsentWithoutPay, deduction, payrollIdNo)
                 Next
+            End If
+        End Sub
+
+        Private Sub MakeAbsencesDeduction()
+            Dim amount As Decimal
+            Dim payrollAbsenceDed As New List(Of EmployeeDeduction)
+            Dim empAbsenceDeduction As New EmployeeDeduction
+            empAbsenceDeduction = _employeeDeductionDao.GetRecords("PayrollIdNo = '" & payrollIdNo.ToString() & "'" & "EarningIdNo = '" & empAbsenceDeduction.EmployeeIdNo.ToString() & "'")
+            If empAbsenceDeduction IsNot Nothing Then
+                MakeAbsencesDeduction(employeeIdNo, daysAbsentWithoutPay, Deduction, payrollIdNo)
+            End If
+
+            If Deduction.CalculationType = _fixedAmount Then
+                amount = Deduction.Rate
+            ElseIf Deduction.CalculationType = _fixedRate Then
+                amount = Deduction.Rate * daysAbsentWithoutPay
+            ElseIf Deduction.CalculationType = _factor Then
+                Dim idNo As Int16
+                idNo = _employeeEarningDao.GetFieldValue(Of Int32)("IdNo", "EmployeeEarning", "EmployeeIdNo = " & employeeIdNo & " and EarningIdNo = " & Deduction.BasePaymentIdNo)
+                If idNo <> 0 Then
+                    Dim basePayment As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordByIdNo(idNo)
+                    If daysAbsentWithoutPay > 0D Then
+                        'Dim daysToCompute As Decimal
+                        amount = ComputeDeductionAmount(Deduction, daysAbsentWithoutPay, basePayment)
+                    Else
+                        amount = 0
+                    End If
+                Else
+                    amount = 0
+                End If
+            End If
+            If amount <> 0 Then
+                AddDeduction(employeeIdNo, amount, payrollIdNo, Deduction.IdNo)
             End If
         End Sub
 
@@ -271,9 +299,8 @@ Namespace PresentationLayer.Presenters
                 If deduction.DeductionType = _regularDeductionType Then
                     If deduction.CalculationType = _fixedAmount Then
                         amount = empDeduction.Amount
-                        AddDeduction(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, deduction.IdNo)
+                        MakeDeductions(employeeAttendance.EmployeeIdNo, amount, empDeduction, payDeductions, payrollIdNo)
                     End If
-                    MakeDeductions(employeeAttendance.EmployeeIdNo, amount, empDeduction, payDeductions, payrollIdNo)
                 End If
             Next
         End Sub
