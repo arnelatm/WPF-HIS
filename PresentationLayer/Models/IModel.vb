@@ -67,9 +67,9 @@ Public Interface IModel
 
     Function GetLookupRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object
 
-    Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object
+    Function GetRecordsByField(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object
 
-    Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fields() As String)
+    'Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fields() As String)
 
     Function GetRecordsWithGroupIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) As List(Of TM)
 

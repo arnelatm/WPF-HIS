@@ -8,7 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class EarningDao
-        Implements IDao(Of Earning), IDaoAll(Of Earning), IDaoGetRecords(Of Earning)
+        Implements IDao(Of Earning), IDaoAll(Of Earning), IDaoGetRecords(Of Earning), IDaoGetRecord(Of Earning)
 
         Private Const FieldList = "AccountIdNo," &
                                   "BasePaymentIdNo," &
@@ -153,6 +153,14 @@ Namespace DataLayer.AdoNet
                                 " FROM [Earning]" &
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
             Return _db.Read(sql, Make).ToList()
+        End Function
+
+        Public Function GetRecord(Optional filter As String = Nothing) As Earning Implements IDaoGetRecord(Of Earning).GetRecord
+            Dim sql As String = "SELECT Top 1 " &
+                                FieldList &
+                                " FROM [Earning]" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return _db.Read(sql, Make)
         End Function
 
     End Class

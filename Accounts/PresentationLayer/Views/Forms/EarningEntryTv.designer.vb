@@ -59,8 +59,8 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpCalculation = New System.Windows.Forms.TabPage()
             Me.floCalculation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpCalculation = New System.Windows.Forms.TableLayoutPanel()
-            Me.lblFactoredUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblEarningType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblMultiplier = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblCalculationType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -75,7 +75,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.chkTaxable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblTaxable = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPayRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblSlash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.cboEarningType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -103,6 +103,7 @@ Namespace PresentationLayer.Views.Forms
             Me.bsEarningSummary = New System.Windows.Forms.BindingSource(Me.components)
             Me.tabPageImages = New System.Windows.Forms.ImageList(Me.components)
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.tlpEarning.SuspendLayout()
@@ -366,8 +367,8 @@ Namespace PresentationLayer.Views.Forms
             'tlpCalculation
             '
             resources.ApplyResources(Me.tlpCalculation, "tlpCalculation")
-            Me.tlpCalculation.Controls.Add(Me.lblFactoredUnit, 0, 3)
-            Me.tlpCalculation.Controls.Add(Me.CLabel2, 0, 0)
+            Me.tlpCalculation.Controls.Add(Me.lblUnit, 0, 3)
+            Me.tlpCalculation.Controls.Add(Me.lblEarningType, 0, 0)
             Me.tlpCalculation.Controls.Add(Me.lblMultiplier, 0, 6)
             Me.tlpCalculation.Controls.Add(Me.lblDefaultQuantity, 0, 4)
             Me.tlpCalculation.Controls.Add(Me.lblCalculationType, 0, 1)
@@ -382,25 +383,26 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpCalculation.Controls.Add(Me.cboMultiplierType, 2, 6)
             Me.tlpCalculation.Controls.Add(Me.chkTaxable, 2, 8)
             Me.tlpCalculation.Controls.Add(Me.lblTaxable, 0, 8)
-            Me.tlpCalculation.Controls.Add(Me.lblPayRate, 2, 2)
+            Me.tlpCalculation.Controls.Add(Me.lblSlash, 2, 2)
             Me.tlpCalculation.Controls.Add(Me.lblRate, 0, 2)
             Me.tlpCalculation.Controls.Add(Me.cboUnit, 3, 2)
             Me.tlpCalculation.Controls.Add(Me.cboEarningType, 1, 0)
+            Me.tlpCalculation.Controls.Add(Me.lblMultiplierType, 3, 7)
             Me.tlpCalculation.Name = "tlpCalculation"
             '
-            'lblFactoredUnit
+            'lblUnit
             '
-            resources.ApplyResources(Me.lblFactoredUnit, "lblFactoredUnit")
-            Me.lblFactoredUnit.DisplayOnly = True
-            Me.lblFactoredUnit.EditingMode = False
-            Me.lblFactoredUnit.Name = "lblFactoredUnit"
+            resources.ApplyResources(Me.lblUnit, "lblUnit")
+            Me.lblUnit.DisplayOnly = True
+            Me.lblUnit.EditingMode = False
+            Me.lblUnit.Name = "lblUnit"
             '
-            'CLabel2
+            'lblEarningType
             '
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            resources.ApplyResources(Me.CLabel2, "CLabel2")
-            Me.CLabel2.Name = "CLabel2"
+            Me.lblEarningType.DisplayOnly = True
+            Me.lblEarningType.EditingMode = False
+            resources.ApplyResources(Me.lblEarningType, "lblEarningType")
+            Me.lblEarningType.Name = "lblEarningType"
             '
             'lblMultiplier
             '
@@ -468,7 +470,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.txtRate, "txtRate")
             Me.txtRate.EditingMode = True
             Me.txtRate.ForeColor = System.Drawing.Color.Black
-            Me.txtRate.LinkedLabel = Nothing
+            Me.txtRate.LinkedLabel = Me.lblRate
             Me.txtRate.MaximumValue = Nothing
             Me.txtRate.MinimumValue = Nothing
             Me.txtRate.Name = "txtRate"
@@ -586,7 +588,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboMultiplierType.ForeColor = System.Drawing.Color.Black
             Me.cboMultiplierType.FormattingEnabled = True
             Me.cboMultiplierType.HideWhenNotEditingOrAdding = False
-            Me.cboMultiplierType.LinkedLabel = Nothing
+            Me.cboMultiplierType.LinkedLabel = Me.lblMultiplierType
             Me.cboMultiplierType.Name = "cboMultiplierType"
             Me.cboMultiplierType.OldValue = 0
             Me.cboMultiplierType.OriginalDataSource = Nothing
@@ -627,12 +629,12 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTaxable.EditingMode = False
             Me.lblTaxable.Name = "lblTaxable"
             '
-            'lblPayRate
+            'lblSlash
             '
-            resources.ApplyResources(Me.lblPayRate, "lblPayRate")
-            Me.lblPayRate.DisplayOnly = True
-            Me.lblPayRate.EditingMode = False
-            Me.lblPayRate.Name = "lblPayRate"
+            resources.ApplyResources(Me.lblSlash, "lblSlash")
+            Me.lblSlash.DisplayOnly = True
+            Me.lblSlash.EditingMode = False
+            Me.lblSlash.Name = "lblSlash"
             '
             'lblRate
             '
@@ -656,7 +658,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.ForeColor = System.Drawing.Color.Black
             Me.cboUnit.FormattingEnabled = True
             Me.cboUnit.HideWhenNotEditingOrAdding = False
-            Me.cboUnit.LinkedLabel = Me.lblRate
+            Me.cboUnit.LinkedLabel = Me.lblUnit
             Me.cboUnit.Name = "cboUnit"
             Me.cboUnit.OldValue = 0
             Me.cboUnit.OriginalDataSource = Nothing
@@ -691,7 +693,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEarningType.FilterRule = Nothing
             Me.cboEarningType.ForeColor = System.Drawing.Color.Black
             Me.cboEarningType.HideWhenNotEditingOrAdding = False
-            Me.cboEarningType.LinkedLabel = Nothing
+            Me.cboEarningType.LinkedLabel = Me.lblEarningType
             Me.cboEarningType.Name = "cboEarningType"
             Me.cboEarningType.OldValue = 0
             Me.cboEarningType.OriginalDataSource = Nothing
@@ -996,6 +998,13 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.CFlowLayout4)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
+            'lblMultiplierType
+            '
+            resources.ApplyResources(Me.lblMultiplierType, "lblMultiplierType")
+            Me.lblMultiplierType.DisplayOnly = True
+            Me.lblMultiplierType.EditingMode = False
+            Me.lblMultiplierType.Name = "lblMultiplierType"
+            '
             'EarningEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -1064,7 +1073,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtMultiplier As CTextBox
         Friend WithEvents cboMultiplierType As CaComboBox
         Friend WithEvents cboUnit As CaComboBox
-        Friend WithEvents lblPayRate As CLabel
+        Friend WithEvents lblSlash As CLabel
         Friend WithEvents tbpAccountPosting As TabPage
         Friend WithEvents floPostingAccounts As CFlowLayout
         Friend WithEvents floDataDisplay As CFlowLayout
@@ -1081,11 +1090,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents PayGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents lblUsePayGroups As CLabel
         Friend WithEvents chkUsePayGroups As CCheckBox
-        Friend WithEvents CLabel2 As CLabel
+        Friend WithEvents lblEarningType As CLabel
         Friend WithEvents cboEarningType As CaComboBox
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
-        Friend WithEvents lblFactoredUnit As CLabel
+        Friend WithEvents lblUnit As CLabel
         Friend WithEvents lblSummary As CLabel
         Friend WithEvents chkSummary As CCheckBox
         Friend WithEvents tbpSummaryDetail As TabPage
@@ -1095,5 +1104,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvMultiplierSummary As CdgvColumnText
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents tabPageImages As ImageList
+        Friend WithEvents lblMultiplierType As CLabel
     End Class
 End Namespace

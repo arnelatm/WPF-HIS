@@ -44,7 +44,7 @@ Namespace Services
 
         Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
-        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object
+        Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object
 
         'Function GetFields(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object
 

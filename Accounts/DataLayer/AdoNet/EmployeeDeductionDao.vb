@@ -9,7 +9,19 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeDeductionDao
         Inherits AccountsDao
-        Implements IDaoChild(Of EmployeeDeduction)
+        Implements IDaoChild(Of EmployeeDeduction), IDaoGetRecords(Of EmployeeDeduction)
+
+        Const FieldList As String = "Amount," &
+                                    "DeductionCode," &
+                                    "DeductionIdNo," &
+                                    "DeductionName," &
+                                    "DeductionNameAra," &
+                                    "DeductionType," &
+                                    "EmployeeIdNo," &
+                                    "IdNo," &
+                                    "Rate," &
+                                    "Sequence," &
+                                    "Unit"
 
         Private ReadOnly _db As New Db()
 
@@ -19,18 +31,7 @@ Namespace DataLayer.AdoNet
             End If
             Dim filter = "DeductionType='" + GlobalFunctions.EnumToCode(DeductionTypeSelection.Regular) + "'"
             Dim sql As String =
-                    " SELECT " &
-                    "Amount," &
-                    "DeductionCode," &
-                    "DeductionIdNo," &
-                    "DeductionName," &
-                    "DeductionNameAra," &
-                    "DeductionType," &
-                    "EmployeeIdNo," &
-                    "IdNo," &
-                    "Rate," &
-                    "Sequence," &
-                    "Unit" &
+                    " SELECT " & FieldList &
                     " FROM [EmployeeDeduction_View]" &
                     " WHERE EmployeeIdNo = @IdNo And " & filter &
                     " ORDER BY " & sortExpression
@@ -61,6 +62,14 @@ Namespace DataLayer.AdoNet
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence")),
             .Unit = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Unit"))
             }
+
+        Public Function GetRecords(Optional filter As String = Nothing) As List(Of EmployeeDeduction) Implements IDaoGetRecords(Of EmployeeDeduction).GetRecords
+            Dim sql As String = "SELECT " &
+                                            FieldList &
+                                            " FROM [Earning]" &
+                                            IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return _db.Read(sql, Make).ToList()
+        End Function
 
     End Class
 

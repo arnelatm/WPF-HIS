@@ -356,7 +356,7 @@ Namespace AdoNet
             Return _db.Scalar(sql)
         End Function
 
-        Public Function GetRecords(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetRecords
+        Public Function GetRecordsByField(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetRecordsByField
             Dim fields = String.Join(",", fieldNames)
             If Strings.Right(fields, 1) = "," Then
                 fields = Strings.Left(fields, Len(fields) - 1)
