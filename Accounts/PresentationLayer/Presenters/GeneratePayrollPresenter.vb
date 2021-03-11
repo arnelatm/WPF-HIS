@@ -1,4 +1,5 @@
 ﻿Imports System.Dynamic
+Imports System.Web.UI.WebControls.Expressions
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
@@ -20,6 +21,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _employeeEarningDao = New EmployeeEarningDao
         Private ReadOnly _payrollDeductionDao = New PayrollDeductionDao
         Private ReadOnly _payrollEarningDao = New PayrollEarningDao
+        Private ReadOnly _earningSummaryDao = New EarningSummaryDao
         Private ReadOnly _factor = EnumToCode(CalculationTypeSelection.Factor)
         Private ReadOnly _factoredDeduction = EnumToCode(CalculationTypeSelection.Factor)
         Private ReadOnly _fixedAmount = EnumToCode(CalculationTypeSelection.FixedAmount)
@@ -140,70 +142,61 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub AddNComputeAbsenceDeduction(employeeIdNo As Int32, daysAbsentWithoutPay As Decimal, deduction As Deduction, payrollIdNo As Short)
-            Dim amount As Decimal
-            If deduction.CalculationType = _fixedAmount Then
-                amount = deduction.Rate
-            ElseIf deduction.CalculationType = _fixedRate Then
-                amount = deduction.Rate * daysAbsentWithoutPay
-            ElseIf deduction.CalculationType = _factor Then
-                Dim idNo As Int16
-                idNo = _employeeEarningDao.GetFieldValue(Of Int32)("IdNo", "EmployeeEarning", "EmployeeIdNo = " & employeeIdNo & " and EarningIdNo = " & deduction.BasePaymentIdNo)
-                If idNo <> 0 Then
-                    Dim basePayment As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordByIdNo(idNo)
-                    If daysAbsentWithoutPay > 0D Then
-                        'Dim daysToCompute As Decimal
-                        amount = ComputeDeductionAmount(deduction, daysAbsentWithoutPay, basePayment)
-                    Else
-                        amount = 0
-                    End If
-                Else
-                    amount = 0
-                End If
-            End If
-            If amount <> 0 Then
-                AddDeduction(employeeIdNo, amount, payrollIdNo, deduction.IdNo)
-            End If
-        End Sub
-
-        Private Function ComputeDeductionAmount(deduction As Deduction, daysAbsentWithoutPay As Decimal, basePayment As List(Of EmployeeEarning)) As Decimal
+        Private Function ComputeDeductionAmount(deduction As Deduction, daysAbsentWithoutPay As Decimal, basePayment As EmployeeEarning) As Decimal
             Dim daysToCompute As Decimal
             Dim amount As Decimal
-            If deduction.DeductionType = EnumToCode(DeductionTypeSelection.AbsencesDeduction) Then
-                If _deductionComputationMethod = "DaysInMonth" Then
-                    daysToCompute = daysAbsentWithoutPay
-                    amount = Math.Round(basePayment(0).Amount / _daysInTheMonth * daysToCompute, 2)
-                ElseIf _deductionComputationMethod = "30Days" Then
-                    If daysAbsentWithoutPay <= 15D Then
-                        daysToCompute = daysAbsentWithoutPay
-                    Else
-                        daysToCompute = 30D - (CDec(DateTime.DaysInMonth(Year(_endDate), Month(_endDate))) - daysAbsentWithoutPay)
-                    End If
-                    amount = Math.Round(basePayment(0).Amount / 30D * daysToCompute, 2)
-                Else
-                    Dim multiplier As Decimal
-                    multiplier = CType(_multiplier.Compute(deduction.Multiplier, 0), Decimal)
-                    If deduction.MultiplierType = EnumToCode(MultiplierTypeSelection.PercentOfBasePaymentRate) Then
-                        amount = Math.Round(basePayment(0).Amount * multiplier / 100 * daysToCompute, 2)
-                    Else
-                        amount = Math.Round(basePayment(0).Amount * multiplier * daysToCompute, 2)
-                    End If
-                End If
-            Else
-                Dim multiplier As Decimal
+            If _deductionComputationMethod = "DaysInMonth" Then
                 daysToCompute = daysAbsentWithoutPay
-                'amount = Math.Round(basePayment(0).Amount / 30D * daysToCompute, 2)
-                multiplier = CType(_multiplier.Compute(deduction.Multiplier, 0), Decimal)
-                If deduction.MultiplierType = EnumToCode(MultiplierTypeSelection.PercentOfBasePaymentRate) Then
-                    amount = Math.Round(basePayment(0).Amount * multiplier / 100 * daysToCompute, 2)
+                amount = Math.Round(basePayment.Amount / _daysInTheMonth * daysToCompute, 2)
+            ElseIf _deductionComputationMethod = "30Days" Then
+                If daysAbsentWithoutPay <= 15D Then
+                    daysToCompute = daysAbsentWithoutPay
                 Else
-                    amount = Math.Round(basePayment(0).Amount * multiplier * daysToCompute, 2)
+                    daysToCompute = 30D - (CDec(DateTime.DaysInMonth(Year(_endDate), Month(_endDate))) - daysAbsentWithoutPay)
                 End If
+                amount = Math.Round(basePayment.Amount / 30D * daysToCompute, 2)
             End If
             Return amount
         End Function
 
-        Private Function ComputeEarningAmount(empEarning As EmployeeEarning, earning As Earning, employeeAttendance As AttendanceItem) As Decimal
+        'Private Function ComputeDeductionAmount(deduction As Deduction, daysAbsentWithoutPay As Decimal, basePayment As List(Of EmployeeEarning)) As Decimal
+        '    Dim daysToCompute As Decimal
+        '    Dim amount As Decimal
+        '    If deduction.DeductionType = EnumToCode(DeductionTypeSelection.AbsencesDeduction) Then
+        '        If _deductionComputationMethod = "DaysInMonth" Then
+        '            daysToCompute = daysAbsentWithoutPay
+        '            amount = Math.Round(basePayment(0).Amount / _daysInTheMonth * daysToCompute, 2)
+        '        ElseIf _deductionComputationMethod = "30Days" Then
+        '            If daysAbsentWithoutPay <= 15D Then
+        '                daysToCompute = daysAbsentWithoutPay
+        '            Else
+        '                daysToCompute = 30D - (CDec(DateTime.DaysInMonth(Year(_endDate), Month(_endDate))) - daysAbsentWithoutPay)
+        '            End If
+        '            amount = Math.Round(basePayment(0).Amount / 30D * daysToCompute, 2)
+        '        Else
+        '            Dim multiplier As Decimal
+        '            multiplier = CType(_multiplier.Compute(deduction.Multiplier, 0), Decimal)
+        '            If deduction.MultiplierType = EnumToCode(MultiplierTypeSelection.PercentOfBasePaymentRate) Then
+        '                amount = Math.Round(basePayment(0).Amount * multiplier / 100 * daysToCompute, 2)
+        '            Else
+        '                amount = Math.Round(basePayment(0).Amount * multiplier * daysToCompute, 2)
+        '            End If
+        '        End If
+        '    Else
+        '        Dim multiplier As Decimal
+        '        daysToCompute = daysAbsentWithoutPay
+        '        'amount = Math.Round(basePayment(0).Amount / 30D * daysToCompute, 2)
+        '        multiplier = CType(_multiplier.Compute(deduction.Multiplier, 0), Decimal)
+        '        If deduction.MultiplierType = EnumToCode(MultiplierTypeSelection.PercentOfBasePaymentRate) Then
+        '            amount = Math.Round(basePayment(0).Amount * multiplier / 100 * daysToCompute, 2)
+        '        Else
+        '            amount = Math.Round(basePayment(0).Amount * multiplier * daysToCompute, 2)
+        '        End If
+        '    End If
+        '    Return amount
+        'End Function
+
+        Private Function ComputeEarningAmount(empEarning As EmployeeEarning, earning As Earning) As Decimal
             Dim amount As Decimal
             If earning.CalculationType = _fixedAmount Then
                 amount = empEarning.Amount
@@ -214,16 +207,40 @@ Namespace PresentationLayer.Presenters
                     amount = empEarning.Rate '* employeeAttendance.Overtime2
                 End If
             ElseIf earning.CalculationType = _factor Then
-                'If earning.Unit = _overtimeHours1 Then
-                '    amount = empEarning.Rate * employeeAttendance.Overtime1
-                'ElseIf earning.Unit = _overtimeHours2 Then
-                '    amount = empEarning.Rate * employeeAttendance.Overtime2
-                'End If
-                amount = 0
-            Else
-                amount = 0
+                If Not earning.Summary Then
+                    ' factored item is not a summary earning (meaning not computed)
+                    Dim ee As EmployeeEarning = _employeeEarningDao.GetRecordById(earning.BasePaymentIdNo)
+                    amount = ComputeFactoredAmount(ee.Amount, earning.Multiplier, earning.MultiplierType)
+                Else
+                    ' factored item is a computed value
+                    If earning.BasePaymentIdNo <> 0 Then
+                        ' get the earning for the given basePaymentIdNo
+                        Dim bpEarning As Earning = _earningsDao.GetRecordById(earning.BasePaymentIdNo)
+                        ' get employee earning for the said item
+                        Dim bpEarningSummary As New List(Of EarningSummary)
+                        bpEarningSummary = _earningSummaryDao.GetRecordsWithGroupIdNo(bpEarning.IdNo)
+                        For Each e In bpEarningSummary
+                            Dim ee As EmployeeEarning
+                            ee = _employeeEarningDao.GetRecordById(e.EarningIdNo)
+                            amount += ee.Amount * e.Multiplier
+                        Next
+                        amount = ComputeFactoredAmount(amount, earning.Multiplier, earning.MultiplierType)
+                    Else
+                        amount = 0
+                    End If
+                End If
             End If
             Return amount
+        End Function
+
+        Private Shared Function ComputeFactoredAmount(amount As Decimal, multiplier As Decimal, multiplierType As Char)
+            Dim factoredAmount As Decimal
+            If multiplierType = EnumToCode(MultiplierTypeSelection.PercentOfBasePaymentRate) Then
+                factoredAmount = amount * multiplier * 0.01D
+            Else
+                factoredAmount = amount * multiplier
+            End If
+            Return factoredAmount
         End Function
 
         Private Sub GenerateAbsencesDeductions(employeeIdNo As Int32, payrollIdNo As Short, daysAbsentWithoutPay As Decimal)
@@ -234,44 +251,45 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub ReGenerateAbsencesDeductions(employeeIdNo As Int32, payrollIdNo As Short, daysAbsentWithoutPay As Decimal)
+        Private Sub ReGenerateAbsencesDeductions(employeeIdNo As Int32, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short, daysAbsentWithoutPay As Decimal)
             If daysAbsentWithoutPay <> 0 Then
                 For Each deduction In _absenceDeductions
-                    MakeAbsencesDeduction(employeeIdNo, daysAbsentWithoutPay, deduction, payrollIdNo)
+                    MakeAbsencesDeduction(employeeIdNo, daysAbsentWithoutPay, payDeductions, deduction, payrollIdNo)
                 Next
             End If
         End Sub
 
-        Private Sub MakeAbsencesDeduction()
+        Private Sub AddNComputeAbsenceDeduction(employeeIdNo As Int32, daysAbsentWithoutPay As Decimal, deduction As Deduction, payrollIdNo As Short)
             Dim amount As Decimal
-            Dim payrollAbsenceDed As New List(Of EmployeeDeduction)
-            Dim empAbsenceDeduction As New EmployeeDeduction
-            empAbsenceDeduction = _employeeDeductionDao.GetRecords("PayrollIdNo = '" & payrollIdNo.ToString() & "'" & "EarningIdNo = '" & empAbsenceDeduction.EmployeeIdNo.ToString() & "'")
-            If empAbsenceDeduction IsNot Nothing Then
-                MakeAbsencesDeduction(employeeIdNo, daysAbsentWithoutPay, Deduction, payrollIdNo)
-            End If
-
-            If Deduction.CalculationType = _fixedAmount Then
-                amount = Deduction.Rate
-            ElseIf Deduction.CalculationType = _fixedRate Then
-                amount = Deduction.Rate * daysAbsentWithoutPay
-            ElseIf Deduction.CalculationType = _factor Then
-                Dim idNo As Int16
-                idNo = _employeeEarningDao.GetFieldValue(Of Int32)("IdNo", "EmployeeEarning", "EmployeeIdNo = " & employeeIdNo & " and EarningIdNo = " & Deduction.BasePaymentIdNo)
-                If idNo <> 0 Then
-                    Dim basePayment As List(Of EmployeeEarning) = _employeeEarningDao.GetRecordByIdNo(idNo)
-                    If daysAbsentWithoutPay > 0D Then
-                        'Dim daysToCompute As Decimal
-                        amount = ComputeDeductionAmount(Deduction, daysAbsentWithoutPay, basePayment)
-                    Else
-                        amount = 0
-                    End If
+            If daysAbsentWithoutPay > 0D Then
+                Dim basePayment As Object = _employeeEarningDao.GetRecord("EmployeeIdNo = " & employeeIdNo & " and EarningIdNo = " & deduction.BasePaymentIdNo)
+                If basePayment IsNot Nothing Then
+                    amount = ComputeDeductionAmount(deduction, daysAbsentWithoutPay, basePayment)
                 Else
                     amount = 0
                 End If
+            Else
+                amount = 0
             End If
             If amount <> 0 Then
-                AddDeduction(employeeIdNo, amount, payrollIdNo, Deduction.IdNo)
+                AddDeduction(employeeIdNo, amount, payrollIdNo, deduction.IdNo)
+            End If
+        End Sub
+
+        Private Sub MakeAbsencesDeduction(employeeIdNo As Int32, daysAbsentWithoutPay As Decimal, payDeductions As List(Of PayrollDeduction), deduction As Deduction, payrollIdNo As Short)
+            Dim amount As Decimal
+            If daysAbsentWithoutPay > 0D Then
+                Dim basePayment As EmployeeEarning = _employeeEarningDao.GetRecord("EmployeeIdNo = " & employeeIdNo & " and EarningIdNo = " & deduction.BasePaymentIdNo)
+                If basePayment IsNot Nothing Then
+                    amount = ComputeDeductionAmount(deduction, daysAbsentWithoutPay, basePayment)
+                Else
+                    amount = 0
+                End If
+            Else
+                amount = 0
+            End If
+            If amount <> 0 Then
+                MakeDeductions(employeeIdNo, amount, deduction.IdNo, payDeductions, payrollIdNo)
             End If
         End Sub
 
@@ -299,7 +317,7 @@ Namespace PresentationLayer.Presenters
                 If deduction.DeductionType = _regularDeductionType Then
                     If deduction.CalculationType = _fixedAmount Then
                         amount = empDeduction.Amount
-                        MakeDeductions(employeeAttendance.EmployeeIdNo, amount, empDeduction, payDeductions, payrollIdNo)
+                        MakeDeductions(employeeAttendance.EmployeeIdNo, amount, empDeduction.DeductionIdNo, payDeductions, payrollIdNo)
                     End If
                 End If
             Next
@@ -340,7 +358,7 @@ Namespace PresentationLayer.Presenters
             For Each employeeAttendance In attendance
                 ReGenerateRegularEarning(employeeAttendance, payEarnings, payrollIdNo)
                 ReGenerateRegularDeduction(employeeAttendance, payDeductions, payrollIdNo)
-                ReGenerateAbsencesDeductions(employeeAttendance.EmployeeIdNo, payrollIdNo, employeeAttendance.DaysAbsentWithoutPay)
+                ReGenerateAbsencesDeductions(employeeAttendance.EmployeeIdNo, payDeductions, payrollIdNo, employeeAttendance.DaysAbsentWithoutPay)
                 progressBar.Value = progressBar.Value + 1
             Next
             GenerateOvertime(True, payrollIdNo, overtime, progressBar)
@@ -359,7 +377,7 @@ Namespace PresentationLayer.Presenters
                 Dim earning As Earning
                 earning = _earningsDao.GetRecordById(empEarning.EarningIdNo)
                 If earning.EarningType = _regularEarning Then
-                    amount = ComputeEarningAmount(empEarning, earning, employeeAttendance)
+                    amount = ComputeEarningAmount(empEarning, earning)
                     AddEarning(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, earning.IdNo)
                 End If
             Next
@@ -374,7 +392,7 @@ Namespace PresentationLayer.Presenters
                 earning = _earningsDao.GetRecordById(empEarning.EarningIdNo)
                 If earning.EarningType = _regularEarning Then
                     If earning.CalculationType = _fixedAmount Then
-                        amount = empEarning.Amount
+                        amount = ComputeEarningAmount(empEarning, earning)
                     Else
                         amount = 0
                     End If
@@ -426,23 +444,23 @@ Namespace PresentationLayer.Presenters
             Dim otRegularUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
             Dim otHolidayUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursHoliday)
             Dim otSpecialUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
-            Dim otRegularEarning As Earning = _earningsDao.GetRecord("EarningType = " & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
+            Dim otRegularEarning As Earning = _earningsDao.GetRecord("EarningType = '" & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
                                                      "CalculationType = '" & EnumToCode(CalculationTypeSelection.FixedRate) & "' AND " &
                                                      "Unit = '" & otRegularUnit & "'")
-            Dim otHolidayEarning As Earning = _earningsDao.GetRecord("EarningType = " & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
+            Dim otHolidayEarning As Earning = _earningsDao.GetRecord("EarningType = '" & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
                                                                      "CalculationType = '" & EnumToCode(CalculationTypeSelection.FixedRate) & "' AND " &
                                                                      "Unit = '" & otHolidayUnit & "'")
-            Dim otSpecialEarning As Earning = _earningsDao.GetRecord("EarningType = " & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
+            Dim otSpecialEarning As Earning = _earningsDao.GetRecord("EarningType = '" & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
                                                                      "CalculationType = '" & EnumToCode(CalculationTypeSelection.FixedRate) & "' AND " &
                                                                      "Unit = '" & otSpecialUnit & "'")
             Dim payrollEarnings As New List(Of PayrollEarning)
             If regenerate Then
-                Dim curRPayEarnings As New Earning
-                Dim curHPayEarnings As New Earning
-                Dim curSPayEarnings As New Earning
-                curRPayEarnings = _payrollEarningDao.GetRecords("EarningIdNo = '" & otRegularEarning.IdNo.ToString() & "'" & "PayrollIdNo = '" & payrollIdNo.ToString() & "'")
-                curHPayEarnings = _payrollEarningDao.GetRecords("EarningIdNo = '" & otHolidayEarning.IdNo.ToString() & "'" & "PayrollIdNo = '" & payrollIdNo.ToString() & "'")
-                curSPayEarnings = _payrollEarningDao.GetRecords("EarningIdNo = '" & otSpecialEarning.IdNo.ToString() & "'" & "PayrollIdNo = '" & payrollIdNo.ToString() & "'")
+                Dim curRPayEarnings As New List(Of PayrollEarning)
+                Dim curHPayEarnings As New List(Of PayrollEarning)
+                Dim curSPayEarnings As New List(Of PayrollEarning)
+                curRPayEarnings = _payrollEarningDao.GetRecords("EarningIdNo = '" & otRegularEarning.IdNo.ToString() & "' and PayrollIdNo = '" & payrollIdNo.ToString() & "'")
+                curHPayEarnings = _payrollEarningDao.GetRecords("EarningIdNo = '" & otHolidayEarning.IdNo.ToString() & "' and PayrollIdNo = '" & payrollIdNo.ToString() & "'")
+                curSPayEarnings = _payrollEarningDao.GetRecords("EarningIdNo = '" & otSpecialEarning.IdNo.ToString() & "' and PayrollIdNo = '" & payrollIdNo.ToString() & "'")
                 If curRPayEarnings IsNot Nothing Then
                     payrollEarnings.AddRange(curRPayEarnings)
                 End If
@@ -518,13 +536,13 @@ Namespace PresentationLayer.Presenters
             Return otAmount
         End Function
 
-        Private Sub MakeDeductions(employeeIdNo As Int32, amount As Decimal, empDeduction As EmployeeDeduction, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
+        Private Sub MakeDeductions(employeeIdNo As Int32, amount As Decimal, deductionIdNo As Int16, payDeductions As List(Of PayrollDeduction), payrollIdNo As Short)
             If amount <> 0 Then
                 Dim deduction As PayrollDeduction = payDeductions.Find(Function(value As PayrollDeduction)
-                                                                           Return value.EmployeeIdNo = empDeduction.EmployeeIdNo And value.DeductionIdNo = empDeduction.DeductionIdNo
+                                                                           Return value.EmployeeIdNo = employeeIdNo And value.DeductionIdNo = deductionIdNo
                                                                        End Function)
                 If deduction Is Nothing Then
-                    AddDeduction(employeeIdNo, amount, payrollIdNo, empDeduction.DeductionIdNo)
+                    AddDeduction(employeeIdNo, amount, payrollIdNo, deductionIdNo)
                 Else
                     UpdateDeduction(amount, deduction)
                 End If

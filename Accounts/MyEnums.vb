@@ -81,16 +81,17 @@ Public Enum DocumentTypeSelection
 End Enum
 
 Public Enum DeductionTypeSelection
-    <EnumCode("")> NotSpecified
-    <EnumCode("R")> Regular
-    <EnumCode("A")> AbsencesDeduction
-    <EnumCode("N")> AsNeeded
-    <EnumCode("G")> Garnishments
-    <EnumCode("V")> Voluntary
-    <EnumCode("F")> Fines
-    <EnumCode("S")> SalaryLoans
-    <EnumCode("O")> Others
-    <EnumCode("P")> Pension
+    <EnumCode("R")> NotSpecified
+    <EnumCode("C")> Regular
+    <EnumCode("A")> AsNeeded
+    'AbsencesDeduction
+    '<EnumCode("N")> AsNeeded
+    '<EnumCode("G")> Garnishments
+    '<EnumCode("V")> Voluntary
+    '<EnumCode("F")> Fines
+    '<EnumCode("S")> SalaryLoans
+    '<EnumCode("O")> Others
+    '<EnumCode("P")> Pension
     '<EnumCode("T")> IncomeTax
 End Enum
 
@@ -119,17 +120,18 @@ End Enum
 
 Public Enum EarningTypeSelection
     <EnumCode("R")> Regular
-    <EnumCode("O")> Overtime
-    <EnumCode("S")> SickPay
-    <EnumCode("V")> VacationPay
-    <EnumCode("H")> HolidayPay
-    <EnumCode("B")> Bonus
-    <EnumCode("C")> Commission
-    <EnumCode("E")> Expenses
-    <EnumCode("D")> Redundancy
-    <EnumCode("M")> Miscellaneous
+    <EnumCode("C")> Computed
     <EnumCode("A")> AsNeeded
-    <EnumCode("Y")> Summary
+    '<EnumCode("S")> SickPay
+    '<EnumCode("V")> VacationPay
+    '<EnumCode("H")> HolidayPay
+    '<EnumCode("B")> Bonus
+    '<EnumCode("C")> Commission
+    '<EnumCode("E")> Expenses
+    '<EnumCode("D")> Redundancy
+    '<EnumCode("M")> Miscellaneous
+    '<EnumCode("A")> AsNeeded
+    '<EnumCode("Y")> Summary
 End Enum
 
 Public Enum EmployeeActionSelection

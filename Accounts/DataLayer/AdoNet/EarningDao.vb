@@ -160,7 +160,7 @@ Namespace DataLayer.AdoNet
                                 FieldList &
                                 " FROM [Earning]" &
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
-            Return _db.Read(sql, Make)
+            Return _db.Read(sql, Make).FirstOrDefault()
         End Function
 
     End Class
