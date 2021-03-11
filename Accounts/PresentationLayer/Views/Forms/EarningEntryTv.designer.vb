@@ -66,6 +66,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCalculationType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblBasePayment = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -73,10 +74,10 @@ Namespace PresentationLayer.Views.Forms
             Me.chkIncludeInEOS = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.txtMultiplier = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.cboMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkTaxable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblTaxable = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSlash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.cboEarningType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
@@ -103,7 +104,6 @@ Namespace PresentationLayer.Views.Forms
             Me.bsEarningSummary = New System.Windows.Forms.BindingSource(Me.components)
             Me.tabPageImages = New System.Windows.Forms.ImageList(Me.components)
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.lblMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.tlpEarning.SuspendLayout()
@@ -476,6 +476,13 @@ Namespace PresentationLayer.Views.Forms
             Me.txtRate.Name = "txtRate"
             Me.txtRate.OldValue = Nothing
             '
+            'lblRate
+            '
+            resources.ApplyResources(Me.lblRate, "lblRate")
+            Me.lblRate.DisplayOnly = True
+            Me.lblRate.EditingMode = False
+            Me.lblRate.Name = "lblRate"
+            '
             'txtDefaultQuantity
             '
             Me.txtDefaultQuantity.BackColor = System.Drawing.Color.White
@@ -607,6 +614,13 @@ Namespace PresentationLayer.Views.Forms
             Me.cboMultiplierType.ValueIsNumeric = False
             Me.cboMultiplierType.ValueMember = "Code"
             '
+            'lblMultiplierType
+            '
+            resources.ApplyResources(Me.lblMultiplierType, "lblMultiplierType")
+            Me.lblMultiplierType.DisplayOnly = True
+            Me.lblMultiplierType.EditingMode = False
+            Me.lblMultiplierType.Name = "lblMultiplierType"
+            '
             'chkTaxable
             '
             resources.ApplyResources(Me.chkTaxable, "chkTaxable")
@@ -635,13 +649,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblSlash.DisplayOnly = True
             Me.lblSlash.EditingMode = False
             Me.lblSlash.Name = "lblSlash"
-            '
-            'lblRate
-            '
-            resources.ApplyResources(Me.lblRate, "lblRate")
-            Me.lblRate.DisplayOnly = True
-            Me.lblRate.EditingMode = False
-            Me.lblRate.Name = "lblRate"
             '
             'cboUnit
             '
@@ -997,13 +1004,6 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
             Me.floDataDisplay.Controls.Add(Me.CFlowLayout4)
             Me.floDataDisplay.Name = "floDataDisplay"
-            '
-            'lblMultiplierType
-            '
-            resources.ApplyResources(Me.lblMultiplierType, "lblMultiplierType")
-            Me.lblMultiplierType.DisplayOnly = True
-            Me.lblMultiplierType.EditingMode = False
-            Me.lblMultiplierType.Name = "lblMultiplierType"
             '
             'EarningEntryTv
             '

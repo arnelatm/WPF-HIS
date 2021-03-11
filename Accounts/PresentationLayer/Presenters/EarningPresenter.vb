@@ -96,7 +96,9 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function IsOkToDeleteRecord() As Boolean
             Dim retValue = False
             If MyBase.IsOkToDeleteRecord() Then
-                If View.EarningType = EnumToCode(EarningTypeSelection.Overtime) Then
+                If View.EarningType = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
+                   View.EarningType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
+                   View.EarningType = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
                     Messaging.Show(True, "MsgSysEarnDelNotAllowed")
                 Else
                     retValue = True

@@ -125,7 +125,7 @@ Namespace PresentationLayer.Views.Forms
             Set
                 chkSummary.Checked = Value
                 If Value Then
-                    cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.Summary)
+                    cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.Computed)
                     cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
                 End If
             End Set
@@ -370,30 +370,38 @@ Namespace PresentationLayer.Views.Forms
                     lblDefaultQuantity.Visible = False
                     lblMultiplier.Visible = False
                     lblSlash.Visible = False
-                    lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Default Amount")
                     lblSlash.Visible = False
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = False
-                    txtRate.Visible = True
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                     tlpCalculation.SetColumnSpan(cboUnit, 1)
                 Case CalculationTypeSelection.FixedRate
+                    If (EarningType = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
+                            EarningType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
+                            EarningType = EnumToCode(EarningTypeSelection.OvertimeSpecial)) Then
+                        lblRate.Visible = True
+                        txtRate.Visible = True
+                        cboUnit.Visible = False
+                        lblSlash.Visible = False
+                        lblSlash.Visible = False
+                        lblRate.Text = Messaging.TranslateCaption("Default Amount")
+                    Else
+                        cboUnit.Visible = True
+                        lblSlash.Visible = True
+                        lblSlash.Visible = True
+                        lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                        lblSlash.Text = Messaging.TranslateCaption("/")
+                    End If
                     cboEarningType.Visible = True
+                    lblDefaultQuantity.Visible = True
+                    lblRate.Visible = True
+                    txtDefaultQuantity.Visible = True
+                    txtRate.Visible = True
                     cboBasePaymentIdNo.Visible = False
                     cboMultiplierType.Visible = False
-                    cboUnit.Visible = True
                     lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = True
                     lblMultiplier.Visible = False
-                    lblSlash.Visible = True
-                    lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
-                    lblSlash.Visible = True
-                    lblSlash.Text = Messaging.TranslateCaption("/")
-                    txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
-                    txtRate.Visible = True
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                     tlpCalculation.SetColumnSpan(cboUnit, 1)
                 Case CalculationTypeSelection.Factor
@@ -554,7 +562,7 @@ Namespace PresentationLayer.Views.Forms
                 tlpCalculation.Visible = False
                 floCalculation.Visible = False
                 DataGridViewSummaryDetail.Visible = True
-                EarningType = EnumToCode(EarningTypeSelection.AsNeeded)
+                EarningType = EnumToCode(EarningTypeSelection.OnDemand)
                 CalculationType = EnumToCode(CalculationTypeSelection.Factor)
             Else
                 cboEarningType.Visible = True
@@ -595,7 +603,9 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Private Sub cboEarningType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEarningType.SelectedIndexChanged
-            If CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.Overtime Then
+            If CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.OvertimeRegular Or
+                CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.OvertimeHoliday Or
+                CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.OvertimeSpecial Then
                 cboCalculationType.DisplayOnly = True
                 cboEarningType.DisplayOnly = True
                 cboUnit.DisplayOnly = True
