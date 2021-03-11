@@ -712,7 +712,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 79</value>
+    <value>1, 80</value>
   </data>
   <data name="lblUnit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -790,7 +790,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMultiplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 149</value>
+    <value>1, 151</value>
   </data>
   <data name="lblMultiplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -829,7 +829,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDefaultQuantity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 98</value>
+    <value>1, 99</value>
   </data>
   <data name="lblDefaultQuantity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1006,7 +1006,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDefaultQuantity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 98</value>
+    <value>231, 99</value>
   </data>
   <data name="txtDefaultQuantity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1042,7 +1042,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBasePayment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 123</value>
+    <value>1, 124</value>
   </data>
   <data name="lblBasePayment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1078,7 +1078,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="cboBasePaymentIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 123</value>
+    <value>231, 124</value>
   </data>
   <data name="cboBasePaymentIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1114,7 +1114,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblIncludeInEos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 175</value>
+    <value>1, 178</value>
   </data>
   <data name="lblIncludeInEos.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1153,7 +1153,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkIncludeInEOS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 175</value>
+    <value>321, 178</value>
   </data>
   <data name="chkIncludeInEOS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1189,7 +1189,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtMultiplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 149</value>
+    <value>231, 151</value>
   </data>
   <data name="txtMultiplier.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1231,7 +1231,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMultiplierType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 175</value>
+    <value>347, 178</value>
   </data>
   <data name="lblMultiplierType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1264,7 +1264,7 @@
     <value>20</value>
   </data>
   <data name="cboMultiplierType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 149</value>
+    <value>321, 151</value>
   </data>
   <data name="cboMultiplierType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1306,7 +1306,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTaxable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 201</value>
+    <value>1, 204</value>
   </data>
   <data name="lblTaxable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1336,7 +1336,7 @@
     <value>15</value>
   </data>
   <data name="chkTaxable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 201</value>
+    <value>321, 204</value>
   </data>
   <data name="chkTaxable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1384,7 +1384,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblSlash.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
+    <value>24, 25</value>
   </data>
   <data name="lblSlash.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1955,7 +1955,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
-        BwAAAk1TRnQBSQFMAwEBAAEwAQABMAEAARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
+        BwAAAk1TRnQBSQFMAwEBAAE4AQABOAEAARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
         AUADAAEQAwABAQEAAQgGAAEEGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEA
         AfABygGmAQABMwUAATMBAAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEA
         AYABfAH/AQACUAH/AQABkwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFm

@@ -444,15 +444,9 @@ Namespace PresentationLayer.Presenters
             Dim otRegularUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
             Dim otHolidayUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursHoliday)
             Dim otSpecialUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
-            Dim otRegularEarning As Earning = _earningsDao.GetRecord("EarningType = '" & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
-                                                     "CalculationType = '" & EnumToCode(CalculationTypeSelection.FixedRate) & "' AND " &
-                                                     "Unit = '" & otRegularUnit & "'")
-            Dim otHolidayEarning As Earning = _earningsDao.GetRecord("EarningType = '" & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
-                                                                     "CalculationType = '" & EnumToCode(CalculationTypeSelection.FixedRate) & "' AND " &
-                                                                     "Unit = '" & otHolidayUnit & "'")
-            Dim otSpecialEarning As Earning = _earningsDao.GetRecord("EarningType = '" & EnumToCode(EarningTypeSelection.Overtime) & "' AND " &
-                                                                     "CalculationType = '" & EnumToCode(CalculationTypeSelection.FixedRate) & "' AND " &
-                                                                     "Unit = '" & otSpecialUnit & "'")
+            Dim otRegularEarning As Earning = _earningsDao.GetRecord("EarningType = '" & EnumToCode(EarningTypeSelection.OvertimeRegular))
+            Dim otHolidayEarning As Earning = _earningsDao.GetRecord("EarningType = '" & EnumToCode(EarningTypeSelection.OvertimeHoliday))
+            Dim otSpecialEarning As Earning = _earningsDao.GetRecord("EarningType = '" & EnumToCode(EarningTypeSelection.OvertimeSpecial))
             Dim payrollEarnings As New List(Of PayrollEarning)
             If regenerate Then
                 Dim curRPayEarnings As New List(Of PayrollEarning)

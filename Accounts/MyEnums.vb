@@ -81,10 +81,10 @@ Public Enum DocumentTypeSelection
 End Enum
 
 Public Enum DeductionTypeSelection
-    <EnumCode("R")> NotSpecified
-    <EnumCode("C")> Regular
-    <EnumCode("A")> AsNeeded
-    'AbsencesDeduction
+    <EnumCode("R")> Regular
+    <EnumCode("C")> Computed
+    <EnumCode("D")> OnDemand
+    <EnumCode("A")> AbsencesDeduction
     '<EnumCode("N")> AsNeeded
     '<EnumCode("G")> Garnishments
     '<EnumCode("V")> Voluntary
@@ -121,7 +121,10 @@ End Enum
 Public Enum EarningTypeSelection
     <EnumCode("R")> Regular
     <EnumCode("C")> Computed
-    <EnumCode("A")> AsNeeded
+    <EnumCode("D")> OnDemand
+    <EnumCode("O")> OvertimeRegular
+    <EnumCode("H")> OvertimeHoliday
+    <EnumCode("S")> OvertimeSpecial
     '<EnumCode("S")> SickPay
     '<EnumCode("V")> VacationPay
     '<EnumCode("H")> HolidayPay
