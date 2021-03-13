@@ -373,8 +373,8 @@ Namespace PresentationLayer.Views.Forms
                     lblSlash.Visible = False
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = False
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    'tlpCalculation.SetColumnSpan(cboUnit, 1)
                 Case CalculationTypeSelection.FixedRate
                     If (EarningType = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
                             EarningType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
@@ -402,8 +402,8 @@ Namespace PresentationLayer.Views.Forms
                     lblBasePayment.Visible = False
                     lblMultiplier.Visible = False
                     txtMultiplier.Visible = False
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    'tlpCalculation.SetColumnSpan(cboUnit, 1)
                 Case CalculationTypeSelection.Factor
                     cboEarningType.Visible = True
                     cboBasePaymentIdNo.Visible = True
@@ -436,8 +436,8 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    'tlpCalculation.SetColumnSpan(cboUnit, 1)
                 Case CalculationTypeSelection.Global
                     cboEarningType.Visible = True
                     cboBasePaymentIdNo.Visible = False
@@ -452,8 +452,8 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    'tlpCalculation.SetColumnSpan(cboUnit, 1)
             End Select
             If chkSummary.Checked Then
                 tlpCalculation.Visible = False
@@ -574,7 +574,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub InputsTurnedON()
-
             tbpSummaryDetail.ImageIndex = -1
         End Sub
 
@@ -616,6 +615,11 @@ Namespace PresentationLayer.Views.Forms
                 cboUnit.DisplayOnly = False
                 txtEarningName.DisplayOnly = False
             End If
+        End Sub
+
+        Protected Overloads Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+            MyBase.RecordPositionChanged(e)
+
         End Sub
 
         'Public Overrides Function ValidateView()

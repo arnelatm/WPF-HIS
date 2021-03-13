@@ -207,6 +207,7 @@ Public Class CFormEntryTv
         End If
     End Sub
 
+
     'Protected Overrides Sub RecordDeleted()
     '    RemoveCurrentNode(True)
     'End Sub
