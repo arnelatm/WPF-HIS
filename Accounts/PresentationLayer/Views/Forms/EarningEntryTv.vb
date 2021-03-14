@@ -159,16 +159,7 @@ Namespace PresentationLayer.Views.Forms
                 Return cboEarningType.GetValue()
             End Get
             Set
-                cboEarningType.SetValue(Value)election.OvertimeRegular) Or
-                '   Value = EnumToCode(EarningTypeSelection.Ov
-                'If Value = EnumToCode(EarningTypeSertimeHoliday) Or
-                '   Value = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
-                '    cboEarningType.DisplayOnly = True
-                '    cboCalculationType.DisplayOnly = True
-                'Else
-                '    cboEarningType.DisplayOnly = False
-                '    cboCalculationType.DisplayOnly = False
-                'End If
+                cboEarningType.SetValue(Value)
             End Set
         End Property
 
@@ -401,7 +392,7 @@ Namespace PresentationLayer.Views.Forms
                         cboUnit.Visible = True
                         lblSlash.Visible = True
                         lblSlash.Visible = True
-                        lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                        lblRate.Text = Messaging.TranslateCaption("Rate / Unit")
                         lblSlash.Text = Messaging.TranslateCaption("/")
                     End If
                     cboEarningType.Visible = True

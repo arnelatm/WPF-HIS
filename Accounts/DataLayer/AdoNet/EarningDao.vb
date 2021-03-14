@@ -19,6 +19,7 @@ Namespace DataLayer.AdoNet
                                   "EarningName," &
                                   "EarningNameAra," &
                                   "EarningType," &
+                                  "Frequency," &
                                   "IdNo," &
                                   "IncludeInEOS," &
                                   "Multiplier," &
@@ -56,6 +57,7 @@ Namespace DataLayer.AdoNet
                     " EarningName = @EarningName," &
                     " EarningNameAra = @EarningNameAra," &
                     " EarningType = @EarningType," &
+                    " Frequency = @Frequency," &
                     " IncludeInEos = @IncludeInEos," &
                     " Multiplier = @Multiplier," &
                     " MultiplierType = @MultiplierType," &
@@ -71,8 +73,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDao(Of Earning).AddRecord
             Dim sql As String =
                     " INSERT INTO [Earning] " &
-                    " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,EarningCode,Summary,EarningName,EarningNameAra,EarningType,IncludeInEos,Multiplier,MultiplierType,Notes,Rate,Taxable,Unit,UsePayGroups) " &
-                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@Summary,@EarningName,@EarningNameAra,@EarningType,@IncludeInEos,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit,@UsePayGroups) "
+                    " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,EarningCode,Summary,EarningName,EarningNameAra,EarningType,Frequency,IncludeInEos,Multiplier,MultiplierType,Notes,Rate,Taxable,Unit,UsePayGroups) " &
+                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@Summary,@EarningName,@EarningNameAra,@EarningType,@Frequency,@IncludeInEos,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit,@UsePayGroups) "
             Return _db.Insert(sql, Take(earning))
         End Function
 
@@ -88,6 +90,7 @@ Namespace DataLayer.AdoNet
             .EarningName = Extensions.AsString(reader("EarningName")),
             .EarningNameAra = Extensions.AsString(reader("EarningNameAra")),
             .EarningType = Extensions.AsChar(reader("EarningType")),
+            .Frequency = Extensions.AsChar(reader("Frequency")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .IncludeInEos = Extensions.AsBool(reader("IncludeInEos")),
             .Multiplier = Extensions.AsString(reader("Multiplier")),
@@ -110,6 +113,7 @@ Namespace DataLayer.AdoNet
                                     "@EarningName", earning.EarningName,
                                     "@EarningNameAra", earning.EarningNameAra,
                                     "@EarningType", earning.EarningType,
+                                    "@Frequency", earning.Frequency,
                                     "@IdNo", earning.IdNo,
                                     "@IncludeInEos", earning.IncludeInEos,
                                     "@Multiplier", earning.Multiplier,
@@ -134,6 +138,7 @@ Namespace DataLayer.AdoNet
                     "EarningName," &
                     "EarningNameAra," &
                     "EarningType," &
+                    "Frequency," &
                     "IdNo," &
                     "IncludeInEOS," &
                     "Multiplier," &
