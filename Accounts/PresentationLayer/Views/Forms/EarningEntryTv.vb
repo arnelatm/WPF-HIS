@@ -6,6 +6,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -21,8 +22,10 @@ Namespace PresentationLayer.Views.Forms
         Private _useDepartments As Nullable(Of Boolean)
         Private _usePayGroups As Nullable(Of Boolean)
         Private _unit As Char
-        Private _unitPosition As TableLayoutPanelCellPosition
+
+        'Private _unitPosition As TableLayoutPanelCellPosition
         Private _eSumFieldsDict As Dictionary(Of String, Object)
+
         Private _eAccFieldsDict As Dictionary(Of String, Object)
         Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
         Private _esModel = New ModelAccounts("EarningSummary")
@@ -125,8 +128,10 @@ Namespace PresentationLayer.Views.Forms
             Set
                 chkSummary.Checked = Value
                 If Value Then
-                    cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.Computed)
-                    cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
+                    EarningType = EnumToCode(EarningTypeSelection.Computed)
+                    CalculationType = EnumToCode(CalculationTypeSelection.Factor)
+                    'cboEarningType.SelectedValue =
+                    'cboCalculationType.SelectedValue =
                 End If
             End Set
         End Property
@@ -154,7 +159,16 @@ Namespace PresentationLayer.Views.Forms
                 Return cboEarningType.GetValue()
             End Get
             Set
-                cboEarningType.SetValue(Value)
+                cboEarningType.SetValue(Value)election.OvertimeRegular) Or
+                '   Value = EnumToCode(EarningTypeSelection.Ov
+                'If Value = EnumToCode(EarningTypeSertimeHoliday) Or
+                '   Value = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
+                '    cboEarningType.DisplayOnly = True
+                '    cboCalculationType.DisplayOnly = True
+                'Else
+                '    cboEarningType.DisplayOnly = False
+                '    cboCalculationType.DisplayOnly = False
+                'End If
             End Set
         End Property
 
@@ -342,7 +356,7 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub cboCalculationType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectedIndexChanged
+        Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.Validated, cboCalculationType.SelectionChangeCommitted
             Me.DoubleBuffered = True
             SuspendLayout()
             floCalculation.Visible = False
@@ -376,9 +390,7 @@ Namespace PresentationLayer.Views.Forms
                     'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                     'tlpCalculation.SetColumnSpan(cboUnit, 1)
                 Case CalculationTypeSelection.FixedRate
-                    If (EarningType = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
-                            EarningType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
-                            EarningType = EnumToCode(EarningTypeSelection.OvertimeSpecial)) Then
+                    If IsOvertimeEarning(cboEarningType.SelectedValue) Then
                         lblRate.Visible = True
                         txtRate.Visible = True
                         cboUnit.Visible = False
@@ -462,8 +474,37 @@ Namespace PresentationLayer.Views.Forms
                 tlpCalculation.Visible = True
                 floCalculation.Visible = True
             End If
+            If IsOvertimeEarning(cboEarningType.SelectedValue) Then
+                cboEarningType.DisplayOnly = True
+                cboCalculationType.DisplayOnly = True
+            Else
+                If PresenterObj.EditMode Or PresenterObj.AddMode Then
+                    cboEarningType.DisplayOnly = False
+                    cboCalculationType.DisplayOnly = False
+                Else
+                    cboEarningType.DisplayOnly = True
+                    cboCalculationType.DisplayOnly = True
+                End If
+            End If
             ResumeLayout()
         End Sub
+
+        'Private Sub UpdateDisplay()
+        '    If cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
+        '       cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
+        '       cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
+        '        cboEarningType.DisplayOnly = True
+        '        cboCalculationType.DisplayOnly = True
+        '    Else
+        '        If PresenterObj.EditMode Or PresenterObj.AddMode Then
+        '            cboEarningType.DisplayOnly = False
+        '            cboCalculationType.DisplayOnly = False
+        '        Else
+        '            cboEarningType.DisplayOnly = True
+        '            cboCalculationType.DisplayOnly = True
+        '        End If
+        '    End If
+        'End Sub
 
         'Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs)
         '    If chkPostToSingleAccount.Checked Then
@@ -507,7 +548,7 @@ Namespace PresentationLayer.Views.Forms
             If _usePayGroups Is Nothing Then
                 _usePayGroups = False
             End If
-            _unitPosition = tlpCalculation.GetCellPosition(cboUnit)
+            '_unitPosition = tlpCalculation.GetCellPosition(cboUnit)
             'If _usePayGroups Then
             '    chkUsePayGroups.Visible = True
             '    lblUsePayGroups.Visible = True
@@ -524,26 +565,28 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdatePostingTabDisplay()
-            If _usePayGroups IsNot Nothing And _usePayGroups Then
-                DataGridViewPayrollEarnAccounts.Visible = True
-                chkUsePayGroups.Visible = True
-                lblUsePayGroups.Visible = True
-                If chkUsePayGroups.Checked Then
+            If Not chkSummary.Checked Then
+                If _usePayGroups IsNot Nothing And _usePayGroups Then
                     DataGridViewPayrollEarnAccounts.Visible = True
-                    lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
+                    chkUsePayGroups.Visible = True
+                    lblUsePayGroups.Visible = True
+                    If chkUsePayGroups.Checked Then
+                        DataGridViewPayrollEarnAccounts.Visible = True
+                        lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
+                    Else
+                        DataGridViewPayrollEarnAccounts.Visible = False
+                        lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
+                    End If
                 Else
+                    If _usePayGroups Is Nothing Then
+                        _usePayGroups = False
+                    End If
                     DataGridViewPayrollEarnAccounts.Visible = False
+                    chkUsePayGroups.Visible = False
+                    lblUsePayGroups.Visible = False
                     lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
+                    DataGridViewPayrollEarnAccounts.Visible = False
                 End If
-            Else
-                If _usePayGroups Is Nothing Then
-                    _usePayGroups = False
-                End If
-                DataGridViewPayrollEarnAccounts.Visible = False
-                chkUsePayGroups.Visible = False
-                lblUsePayGroups.Visible = False
-                lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
-                DataGridViewPayrollEarnAccounts.Visible = False
             End If
         End Sub
 
@@ -575,6 +618,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub InputsTurnedON()
             tbpSummaryDetail.ImageIndex = -1
+            UpdateCalculationTabDisplay()
         End Sub
 
         'Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSummaryDetail.CellEndEdit
@@ -601,25 +645,50 @@ Namespace PresentationLayer.Views.Forms
             Return valid
         End Function
 
-        Private Sub cboEarningType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEarningType.SelectedIndexChanged
-            If CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.OvertimeRegular Or
-                CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.OvertimeHoliday Or
-                CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.OvertimeSpecial Then
-                cboCalculationType.DisplayOnly = True
-                cboEarningType.DisplayOnly = True
-                cboUnit.DisplayOnly = True
-                txtEarningName.DisplayOnly = True
+        Private Sub cboEarningType_ValueChanged(sender As Object, e As EventArgs) Handles cboEarningType.Validated, cboEarningType.SelectionChangeCommitted
+            'If CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.OvertimeRegular Or
+            '    CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.OvertimeHoliday Or
+            '    CodeToEnum(Of EarningTypeSelection)(cboEarningType.SelectedValue) = EarningTypeSelection.OvertimeSpecial Then
+            '    cboCalculationType.DisplayOnly = True
+            '    cboEarningType.DisplayOnly = True
+            '    cboUnit.DisplayOnly = True
+            '    txtEarningName.DisplayOnly = True
+            'Else
+            '    cboCalculationType.DisplayOnly = False
+            '    cboEarningType.DisplayOnly = False
+            '    cboUnit.DisplayOnly = False
+            '    txtEarningName.DisplayOnly = False
+            'End If
+            'UpdateCalculationTabDisplay()
+            If IsOvertimeEarning(cboEarningType.SelectedValue) Then
+                lblRate.Visible = True
+                txtRate.Visible = True
+                cboUnit.Visible = False
+                lblSlash.Visible = False
+                lblSlash.Visible = False
+                lblRate.Text = Messaging.TranslateCaption("Default Amount")
             Else
-                cboCalculationType.DisplayOnly = False
-                cboEarningType.DisplayOnly = False
-                cboUnit.DisplayOnly = False
-                txtEarningName.DisplayOnly = False
+                cboUnit.Visible = True
+                lblSlash.Visible = True
+                lblSlash.Visible = True
+                lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                lblSlash.Text = Messaging.TranslateCaption("/")
             End If
         End Sub
 
-        Protected Overloads Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            MyBase.RecordPositionChanged(e)
+        Private Function IsOvertimeEarning(earnType As Char)
+            If earnType = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
+               earnType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
+               earnType = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
+                Return True
+            End If
+            Return False
+        End Function
 
+        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+            MyBase.RecordPositionChanged(e)
+            UpdateCalculationTabDisplay()
+            UpdatePostingTabDisplay()
         End Sub
 
         'Public Overrides Function ValidateView()

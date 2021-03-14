@@ -907,6 +907,9 @@ Public Class CFormEntry
         Dim ctrl As Control
         For Each ctrl In FindControlRecursive(allCtrl, Me)
             If TypeOf ctrl Is IEntryControl Then
+                'If ctrl.Name = "cboEarningType" Then
+                '    Debugger.Break()
+                'End If
                 SetPropertyValue(ctrl, "EditingMode", onOff)
             End If
         Next
