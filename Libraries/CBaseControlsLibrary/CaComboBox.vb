@@ -27,7 +27,12 @@ Public Class CaComboBox
     Private _filterRule As Expression(Of Func(Of String, String, Boolean))
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
+
     Private _readOnlyCombo As Boolean
+    Private ReadOnly _defaultMaxDropDownItems As Int16
+
+    Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
+    Private ReadOnly _defaultDropDownHeight As Int16
 
     'Private _selectable As Boolean
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
@@ -63,18 +68,13 @@ Public Class CaComboBox
             Return _displayOnly
         End Get
         Set(value As Boolean)
-            If _displayOnly = value Then Exit Property
-            _displayOnly = value
+            If _displayOnly <> value Then
+                _displayOnly = value
+            End If
             If value Then
                 ReadOnlyCombo = True
-                DropDownStyle = ComboBoxStyle.Simple
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
                 ReadOnlyCombo = False
-                DropDownStyle = ComboBoxStyle.DropDownList
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
         End Set
     End Property
@@ -102,22 +102,26 @@ Public Class CaComboBox
             If value Then
                 If DisplayOnly Then
                     ReadOnlyCombo = True
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    'ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    'MaxDropDownItems = 1
+                    'DropDownStyle = ComboBoxStyle.Simple
+                    'DropDownHeight = 1
                 Else
                     ReadOnlyCombo = False
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    'ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    'BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    'MaxDropDownItems = _defaultMaxDropDownItems
+                    'IntegralHeight = True
+                    'DropDownStyle = ComboBoxStyle.DropDownList
+                    'DropDownHeight = _defaultDropDownHeight
                 End If
-                DropDownHeight = 200
-                IntegralHeight = True
-                DropDownStyle = ComboBoxStyle.DropDownList
             Else
                 ReadOnlyCombo = True
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                DropDownStyle = ComboBoxStyle.Simple
-                DropDownHeight = 1
+                'ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                'DropDownStyle = ComboBoxStyle.Simple
+                'DropDownHeight = 1
             End If
         End Set
     End Property
@@ -180,8 +184,21 @@ Public Class CaComboBox
         End Get
         Set
             ' If the value isn't changing, then do nothing
-            If Value = _readOnlyCombo Then Exit Property
+            'If Value = _readOnlyCombo Then Exit Property
             _readOnlyCombo = Value
+            If Value Then
+                DropDownStyle = ComboBoxStyle.Simple
+                MaxDropDownItems = 1
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                DropDownHeight = Height
+            Else
+                MaxDropDownItems = _defaultMaxDropDownItems
+                DropDownStyle = _defaultDropdownStyle
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                DropDownHeight = _defaultDropDownHeight
+            End If
         End Set
     End Property
 
@@ -473,7 +490,9 @@ Public Class CaComboBox
         BorderColor = Color.DimGray
         ValueMember = "IdNo"
         DisplayMember = "Name"
-        DropDownStyle = ComboBoxStyle.DropDownList
+        _defaultMaxDropDownItems = MaxDropDownItems
+        _defaultDropdownStyle = DropDownStyle
+        _defaultDropDownHeight = DropDownHeight
         Text = ""
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
         _suggestListOrderRuleCompiled = Function(s) s
@@ -653,20 +672,20 @@ Public Class CaComboBox
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    Private Sub caComboBox_DropDownStyleChanged(sender As Object, e As EventArgs) Handles Me.DropDownStyleChanged
-        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-            If DropDownStyle = ComboBoxStyle.DropDown Then
-                ''
-            Else
-                If DropDownStyle = ComboBoxStyle.DropDownList Then
-                    DropDownStyle = ComboBoxStyle.DropDown
-                    LimitToList = True
-                Else
-                    LimitToList = False
-                End If
-            End If
-        End If
-    End Sub
+    'Private Sub caComboBox_DropDownStyleChanged(sender As Object, e As EventArgs) Handles Me.DropDownStyleChanged
+    '    If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+    '        If DropDownStyle = ComboBoxStyle.DropDown Then
+    '            ''
+    '        Else
+    '            If DropDownStyle = ComboBoxStyle.DropDownList Then
+    '                'DropDownStyle = ComboBoxStyle.DropDown
+    '                LimitToList = True
+    '            Else
+    '                LimitToList = False
+    '            End If
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub caCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
         'Debugger.Break()
@@ -719,7 +738,7 @@ Public Class CaComboBox
     Private Shadows Sub OnDropDownClosed(sender As Object, e As EventArgs) Handles Me.DropDownClosed
         If DisplayOnly Then
             SelectedIndex = _previousIndex
-            Forms.MessageBox.Show($"Sorry you don't have the proper security credentials to change this value. Reverting to original value.")
+            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgCannotEditReadOnly")
         End If
     End Sub
 
