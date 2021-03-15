@@ -1511,6 +1511,14 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub TestToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem2.Click
+            Dim childMdiForm
+            childMdiForm = New Test() With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         'Private Sub PayrollAttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollAttendanceToolStripMenuItem.Click
         '    Dim childMdiForm As AttendanceItemEntry
         '    childMdiForm = New AttendanceItemEntry With {

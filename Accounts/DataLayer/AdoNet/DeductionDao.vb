@@ -21,8 +21,8 @@ Namespace DataLayer.AdoNet
                                     "DeductionNameAra," &
                                     "DeductionType," &
                                     "IdNo," &
-                                    "Multiplier," &
-                                    "MultiplierType," &
+                                    "FactorValue," &
+                                    "FactorType," &
                                     "Notes," &
                                     "Rate," &
                                     "Unit," &
@@ -49,8 +49,8 @@ Namespace DataLayer.AdoNet
                     " DeductionName = @DeductionName," &
                     " DeductionNameAra = @DeductionNameAra," &
                     " DeductionType = @DeductionType," &
-                    " Multiplier = @Multiplier," &
-                    " MultiplierType = @MultiplierType," &
+                    " FactorValue = @FactorValue," &
+                    " FactorType = @FactorType," &
                     " Notes = @Notes," &
                     " Rate = @Rate," &
                     " Unit = @Unit," &
@@ -62,8 +62,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef deduction As Deduction) As Integer Implements IDao(Of Deduction).AddRecord
             Dim sql As String =
                     " INSERT INTO [Deduction] " &
-                    " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,DeductionCode,DeductionName,DeductionNameAra,DeductionType,Multiplier,MultiplierType,Notes,Rate,Unit,UsePayGroups) " &
-                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@DeductionCode,@DeductionName,@DeductionNameAra,@DeductionType,@Multiplier,@MultiplierType,@Notes,@Rate,@Unit,@UsePayGroups) "
+                    " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,DeductionCode,DeductionName,DeductionNameAra,DeductionType,FactorValue,FactorType,Notes,Rate,Unit,UsePayGroups) " &
+                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@DeductionCode,@DeductionName,@DeductionNameAra,@DeductionType,@FactorValue,@FactorType,@Notes,@Rate,@Unit,@UsePayGroups) "
             Return _db.Insert(sql, Take(deduction))
         End Function
 
@@ -79,8 +79,8 @@ Namespace DataLayer.AdoNet
             .DeductionNameAra = Extensions.AsString(reader("DeductionNameAra")),
             .DeductionType = Extensions.AsChar(reader("DeductionType")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .Multiplier = Extensions.AsString(reader("Multiplier")),
-            .MultiplierType = Extensions.AsString(reader("MultiplierType")),
+            .FactorValue = Extensions.AsString(reader("FactorValue")),
+            .FactorType = Extensions.AsString(reader("FactorType")),
             .Notes = Extensions.AsString(reader("Notes")),
             .Rate = Extensions.AsDouble(reader("Rate")),
             .Unit = Extensions.AsChar(reader("Unit")),
@@ -98,8 +98,8 @@ Namespace DataLayer.AdoNet
                                     "@DeductionNameAra", Deduction.DeductionNameAra,
                                     "@DeductionType", Deduction.DeductionType,
                                     "@IdNo", Deduction.IdNo,
-                                    "@Multiplier", Deduction.Multiplier,
-                                    "@MultiplierType", Deduction.MultiplierType,
+                                    "@FactorValue", Deduction.FactorValue,
+                                    "@FactorType", Deduction.FactorType,
                                     "@Notes", Deduction.Notes,
                                     "@Rate", Deduction.Rate,
                                     "@Unit", Deduction.Unit,

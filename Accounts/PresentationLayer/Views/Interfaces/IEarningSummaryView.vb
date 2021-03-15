@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property EarningSummaryIdNo As Int16
         Property EarningIdNo As Int16
         Property IdNo As Int16
-        Property Multiplier As Decimal
+        Property FactorValue As Decimal
         Property Sequence As Int16
     End Interface
 

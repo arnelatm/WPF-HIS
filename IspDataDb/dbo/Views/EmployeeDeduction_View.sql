@@ -2,7 +2,7 @@
 AS
 SELECT        dbo.EmployeeDeduction.IdNo, dbo.EmployeeDeduction.EmployeeIdNo, dbo.EmployeeDeduction.DeductionIdNo, dbo.EmployeeDeduction.Amount, dbo.Deduction.DeductionCode, dbo.Deduction.DeductionName, 
                          dbo.Deduction.DeductionNameAra, dbo.Deduction.AccountIdNo AS Expr1, dbo.Deduction.DeductionType, dbo.Deduction.DeductionPlace, dbo.EmployeeDeduction.Sequence, dbo.Deduction.BasePaymentIdNo, 
-                         dbo.Deduction.CalculationType, dbo.Deduction.DefaultQuantity, dbo.Deduction.Multiplier, dbo.Deduction.Rate, dbo.Deduction.MultiplierType, dbo.Deduction.Unit, dbo.Deduction.UsePayGroups
+                         dbo.Deduction.CalculationType, dbo.Deduction.DefaultQuantity, dbo.Deduction.FactorValue, dbo.Deduction.Rate, dbo.Deduction.FactorType, dbo.Deduction.Unit, dbo.Deduction.UsePayGroups
 FROM            dbo.EmployeeDeduction INNER JOIN
                          dbo.Deduction ON dbo.EmployeeDeduction.DeductionIdNo = dbo.Deduction.IdNo
 GO

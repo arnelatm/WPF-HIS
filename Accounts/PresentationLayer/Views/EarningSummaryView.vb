@@ -17,14 +17,14 @@ Namespace PresentationLayer.Views
             End Get
             Set(value As Short)
                 _earningIdNo = value
-                If Multiplier = 0 Then
-                    Multiplier = 1
+                If FactorValue = 0 Then
+                    FactorValue = 1
                 End If
             End Set
         End Property
 
         Public Property IdNo As Int16 Implements IEarningSummaryView.IdNo
-        Public Property Multiplier As Decimal Implements IEarningSummaryView.Multiplier
+        Public Property FactorValue As Decimal Implements IEarningSummaryView.FactorValue
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property Sequence As Int16 Implements IEarningSummaryView.Sequence
     End Class

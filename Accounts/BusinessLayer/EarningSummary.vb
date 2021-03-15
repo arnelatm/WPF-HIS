@@ -15,14 +15,14 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
-                AddRule(New ValidateContent("Multiplier", 0, ValidationOperator.NotEqual, ValidationDataType.Decimal))
+                AddRule(New ValidateContent("FactorValue", 0, ValidationOperator.NotEqual, ValidationDataType.Decimal))
             End If
         End Sub
 
         Public Property EarningSummaryIdNo As Int16
         Public Property EarningIdNo As Int16
         Public Property IdNo As Int16
-        Public Property Multiplier As Decimal
+        Public Property FactorValue As Decimal
         '    Get
         '        Return _multiplier
         '    End Get

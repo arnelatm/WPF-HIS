@@ -43,6 +43,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemLogin = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemLogout = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+            Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemExit = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEdit = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCut = New System.Windows.Forms.ToolStripMenuItem()
@@ -165,7 +166,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.TestToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -255,6 +256,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.toolStripMenuItem1.Name = "toolStripMenuItem1"
             resources.ApplyResources(Me.toolStripMenuItem1, "toolStripMenuItem1")
+            '
+            'SettingsToolStripMenuItem
+            '
+            Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+            resources.ApplyResources(Me.SettingsToolStripMenuItem, "SettingsToolStripMenuItem")
             '
             'ToolStripMenuItemExit
             '
@@ -752,7 +758,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemHelp
             '
-            Me.ToolStripMenuItemHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemindex, Me.toolStripMenuItem2, Me.ToolStripMenuItemAbout})
+            Me.ToolStripMenuItemHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemindex, Me.toolStripMenuItem2, Me.ToolStripMenuItemAbout, Me.TestToolStripMenuItem2})
             Me.ToolStripMenuItemHelp.Name = "ToolStripMenuItemHelp"
             resources.ApplyResources(Me.ToolStripMenuItemHelp, "ToolStripMenuItemHelp")
             '
@@ -887,10 +893,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'SettingsToolStripMenuItem
+            'TestToolStripMenuItem2
             '
-            Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-            resources.ApplyResources(Me.SettingsToolStripMenuItem, "SettingsToolStripMenuItem")
+            Me.TestToolStripMenuItem2.Name = "TestToolStripMenuItem2"
+            resources.ApplyResources(Me.TestToolStripMenuItem2, "TestToolStripMenuItem2")
             '
             'Main
             '
@@ -1053,5 +1059,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ClosePettyCashFundToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents GeneratePayrollToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents TestToolStripMenuItem2 As ToolStripMenuItem
     End Class
 End NameSpace

@@ -16,12 +16,13 @@ Namespace PresentationLayer.Views.Interfaces
         Property EarningType As Char
         Property IdNo As Int16
         Property IncludeInEos As Boolean
-        Property Multiplier As String
-        Property MultiplierType As Char
+        Property FactorValue As String
+        Property FactorType As Char
         Property Notes As String
         Property Rate As Decimal
         Property Taxable As Boolean
         Property Unit As Char
+        Property UnitAttendance As Char
         Property UsePayGroups As Boolean
         Property PayrollEarnAccounts As List(Of PayrollEarnAccountView)
         Property EarningsSummary As List(Of EarningSummaryView)

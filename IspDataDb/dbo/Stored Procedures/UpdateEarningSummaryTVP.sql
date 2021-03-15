@@ -26,7 +26,8 @@ FROM [DBO].EarningSummary A WHERE A.EarningSummaryIdNo = @GroupIdNo and NOT EXIS
 UPDATE A
 SET a.EarningSummaryIdNo = @GroupIdNo,
 	a.EarningIdNo = b.EarningIdNo,
-	a.Multiplier = B.Multiplier,
+	a.FactorType = B.FactorType,
+	a.FactorValue = B.FactorValue,
 	a.Sequence = B.Sequence
 from [dbo].EarningSummary A INNER JOIN @MParam As B
 	ON A.IDNo = B.IDNo

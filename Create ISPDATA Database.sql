@@ -5629,8 +5629,8 @@ CREATE TABLE [dbo].[Deduction](
 	[BasePaymentIdNo] [smallint] NULL,
 	[CalculationType] [char](1) NULL,
 	[DefaultQuantity] [decimal](10, 4) NULL,
-	[Multiplier] [decimal](10, 4) NULL,
-	[MultiplierType] [char](1) NULL,
+	[FactorValue] [decimal](10, 4) NULL,
+	[FactorType] [char](1) NULL,
 	[Rate] [money] NULL,
 	[Unit] [char](1) NULL,
 	[UsePayGroups] [bit] NULL,
@@ -5669,7 +5669,7 @@ CREATE VIEW [dbo].[EmployeeDeduction_View]
 AS
 SELECT        dbo.EmployeeDeduction.IdNo, dbo.EmployeeDeduction.EmployeeIdNo, dbo.EmployeeDeduction.DeductionIdNo, dbo.EmployeeDeduction.Amount, dbo.Deduction.DeductionCode, dbo.Deduction.DeductionName, 
                          dbo.Deduction.DeductionNameAra, dbo.Deduction.AccountIdNo AS Expr1, dbo.Deduction.DeductionType, dbo.Deduction.DeductionPlace, dbo.EmployeeDeduction.Sequence, dbo.Deduction.BasePaymentIdNo, 
-                         dbo.Deduction.CalculationType, dbo.Deduction.DefaultQuantity, dbo.Deduction.Multiplier, dbo.Deduction.Rate, dbo.Deduction.MultiplierType, dbo.Deduction.Unit, dbo.Deduction.UsePayGroups
+                         dbo.Deduction.CalculationType, dbo.Deduction.DefaultQuantity, dbo.Deduction.FactorValue, dbo.Deduction.Rate, dbo.Deduction.FactorType, dbo.Deduction.Unit, dbo.Deduction.UsePayGroups
 FROM            dbo.EmployeeDeduction INNER JOIN
                          dbo.Deduction ON dbo.EmployeeDeduction.DeductionIdNo = dbo.Deduction.IdNo
 GO
@@ -5706,8 +5706,8 @@ CREATE TABLE [dbo].[Earning](
 	[BasePaymentIdNo] [smallint] NULL,
 	[CalculationType] [char](1) NULL,
 	[DefaultQuantity] [decimal](10, 4) NULL,
-	[Multiplier] [decimal](10, 4) NULL,
-	[MultiplierType] [char](1) NULL,
+	[FactorValue] [decimal](10, 4) NULL,
+	[FactorType] [char](1) NULL,
 	[IncludeInEos] [bit] NULL,
 	[Rate] [money] NULL,
 	[Taxable] [bit] NULL,
@@ -5747,7 +5747,7 @@ GO
 CREATE VIEW [dbo].[EmployeeEarning_View]
 AS
 SELECT        dbo.EmployeeEarning.IdNo, dbo.EmployeeEarning.EmployeeIdNo, dbo.EmployeeEarning.EarningIdNo, dbo.EmployeeEarning.Amount, dbo.Earning.EarningCode, dbo.Earning.EarningName, dbo.Earning.EarningNameAra, 
-                         dbo.Earning.Frequency, dbo.Earning.EarningType, dbo.EmployeeEarning.Sequence, dbo.Earning.CalculationType, dbo.Earning.DefaultQuantity, dbo.Earning.Multiplier, dbo.Earning.MultiplierType, 
+                         dbo.Earning.Frequency, dbo.Earning.EarningType, dbo.EmployeeEarning.Sequence, dbo.Earning.CalculationType, dbo.Earning.DefaultQuantity, dbo.Earning.FactorValue, dbo.Earning.FactorType, 
                          dbo.Earning.BasePaymentIdNo, dbo.Earning.IncludeInEos, dbo.Earning.Rate, dbo.Earning.Taxable, dbo.Earning.Unit, dbo.Earning.UsePayGroups, dbo.Earning.AccountIdNo
 FROM            dbo.EmployeeEarning INNER JOIN
                          dbo.Earning ON dbo.EmployeeEarning.EarningIdNo = dbo.Earning.IdNo

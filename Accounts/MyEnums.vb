@@ -21,12 +21,13 @@ Public Enum AccountStatusSelection
 End Enum
 
 Public Enum CalculationTypeSelection
-    <EnumCode("A")> FixedAmount
+    <EnumCode("A")> AttendanceBased
     <EnumCode("F")> Factor
     <EnumCode("R")> FixedRate
     <EnumCode("V")> Variable
-    <EnumCode("G")> [Global]
     <EnumCode("T")> Table
+    '<EnumCode("G")> [Global]
+    '<EnumCode("A")> FixedAmount
 End Enum
 
 'Public Enum PayRateTypeSelection
@@ -84,7 +85,7 @@ Public Enum DeductionTypeSelection
     <EnumCode("R")> Regular
     <EnumCode("C")> Computed
     <EnumCode("D")> OnDemand
-    <EnumCode("A")> AbsencesDeduction
+    <EnumCode("G")> [Global]
     '<EnumCode("N")> AsNeeded
     '<EnumCode("G")> Garnishments
     '<EnumCode("V")> Voluntary
@@ -122,9 +123,10 @@ Public Enum EarningTypeSelection
     <EnumCode("R")> Regular
     <EnumCode("C")> Computed
     <EnumCode("D")> OnDemand
-    <EnumCode("O")> OvertimeRegular
-    <EnumCode("H")> OvertimeHoliday
-    <EnumCode("S")> OvertimeSpecial
+    <EnumCode("G")> [Global]
+    '<EnumCode("O")> OvertimeRegular
+    '<EnumCode("V")> OvertimeHoliday
+    '<EnumCode("T")> OvertimeSpecial
     '<EnumCode("S")> SickPay
     '<EnumCode("V")> VacationPay
     '<EnumCode("H")> HolidayPay
@@ -150,9 +152,10 @@ Public Enum EmployeeActionSelection
     <EnumCode("RS")> Resign
 End Enum
 
-Public Enum MultiplierTypeSelection
+Public Enum FactorTypeSelection
     <EnumCode("X")> TimesBasePaymentRate
     <EnumCode("P")> PercentOfBasePaymentRate
+    <EnumCode("D")> DivideBasePaymentRate
 End Enum
 
 Public Enum PayeeTypeSelection
@@ -217,11 +220,6 @@ Public Enum PayRateUnitSelection
     <EnumCode("Q")> Quarter
     <EnumCode("R")> SemiYear
     <EnumCode("Y")> Year
-    <EnumCode("U")> Unit
-    <EnumCode("A")> AbsencesWithoutPay
-    <EnumCode("O")> OvertimeHoursRegular
-    <EnumCode("V")> OvertimeHoursHoliday
-    <EnumCode("T")> OvertimeHoursSpecial
 End Enum
 
 Public Enum PayrollPaymentMethodSelection
@@ -239,15 +237,26 @@ Public Enum ReceiptTypeSelection
     <EnumCode("O")> Others
 End Enum
 
-Public Enum QuantityTypeSelection
-    <EnumCode("F")> Fixed
-    <EnumCode("V")> Variable
-    <EnumCode("A")> AbsencesWithoutPay
-    <EnumCode("D")> DaysPresent
+'Public Enum QuantityTypeSelection
+'    <EnumCode("F")> Fixed
+'    <EnumCode("V")> Variable
+'    <EnumCode("A")> AbsencesWithoutPay
+'    <EnumCode("D")> DaysPresent
+'    <EnumCode("O")> OvertimeRegular
+'    <EnumCode("H")> OvertimeHoliday
+'    <EnumCode("S")> OvertimeSpecial
+'    <EnumCode("L")> LeavesWithPay
+'End Enum
+
+Public Enum AttendanceUnitSelection
+    <EnumCode("P")> PresentAttendance
+    <EnumCode("L")> PaidLeaveAbsences
+    <EnumCode("U")> UnpaidLeaveAbsences
+    <EnumCode("F")> PaidOff
+    <EnumCode("T")> PaidTotal
     <EnumCode("O")> OvertimeRegular
     <EnumCode("H")> OvertimeHoliday
     <EnumCode("S")> OvertimeSpecial
-    <EnumCode("L")> LeavesWithPay
 End Enum
 
 Public Enum SpecialAccountSelection
