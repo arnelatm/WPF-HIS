@@ -45,7 +45,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property FactorValue As String Implements IDeductionView.FactorValue
+        Public Property FactorValue As Decimal Implements IDeductionView.FactorValue
             Get
                 Return txtMultiplier.Text
             End Get

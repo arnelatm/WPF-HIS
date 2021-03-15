@@ -79,7 +79,7 @@ Namespace DataLayer.AdoNet
             .DeductionNameAra = Extensions.AsString(reader("DeductionNameAra")),
             .DeductionType = Extensions.AsChar(reader("DeductionType")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .FactorValue = Extensions.AsString(reader("FactorValue")),
+            .FactorValue = Extensions.AsDecimal(reader("FactorValue")),
             .FactorType = Extensions.AsString(reader("FactorType")),
             .Notes = Extensions.AsString(reader("Notes")),
             .Rate = Extensions.AsDouble(reader("Rate")),

@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private _accountsByCode
         Private _payGroupsByCode
         Private _earningsByCode
+        Private _factorTypeByCode
         Private _payrollEarnAccounts As List(Of PayrollEarnAccountView)
         Private _earningsSummary As List(Of EarningSummaryView)
         Private _useRevCostCenters As Nullable(Of Boolean)
@@ -67,7 +68,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property FactorValue As String Implements IEarningView.FactorValue
+        Public Property FactorValue As Decimal Implements IEarningView.FactorValue
             Get
                 Return txtMultiplier.Text  ' Convert.ToDecimal(NumParser(Of Decimal)(txtMultiplier.Text), _nfi)
             End Get
@@ -275,6 +276,7 @@ Namespace PresentationLayer.Views.Forms
             _accountsByCode = PresenterObj.GetDetailAccountList()
             _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
             _earningsByCode = PresenterObj.GetLookup("Earning")
+            _factorTypeByCode = PresenterObj.MakeEnumComboList(Of FactorTypeSelection)
         End Sub
 
         Private Sub BindPayrollEarnAccounts()
@@ -363,6 +365,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvFactorType.DataSource = _factorTypeByCode
+                dgvFactorType.ValueMember = "Code"
+                dgvFactorType.DisplayMember = "Name"
+                dgvFactorType.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
         End Sub

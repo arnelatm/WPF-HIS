@@ -33,6 +33,8 @@ Namespace BusinessLayer
         '    End Set
         'End Property
 
+        Public Property FactorType As Char
+
         Public Property Sequence As Int16
 
         'Default Public ReadOnly Property Item(columnName As String) As String Implements IDataErrorInfo.Item
