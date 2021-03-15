@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property EarningType As Char
         Property IdNo As Int16
         Property IncludeInEos As Boolean
-        Property FactorValue As String
+        Property FactorValue As Decimal
         Property FactorType As Char
         Property Notes As String
         Property Rate As Decimal

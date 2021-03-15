@@ -30,7 +30,7 @@ Namespace BusinessLayer
         Public Property Frequency As Char
         Public Property IdNo As Int16
         Public Property IncludeInEos As Boolean
-        Public Property FactorValue As String
+        Public Property FactorValue As Decimal
         Public Property FactorType As Char
         Public Property Notes As String
         Public Property Rate As Decimal

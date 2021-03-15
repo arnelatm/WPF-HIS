@@ -153,7 +153,7 @@ Public Enum EmployeeActionSelection
 End Enum
 
 Public Enum FactorTypeSelection
-    <EnumCode("X")> TimesBasePaymentRate
+    <EnumCode("M")> MultiplyBasePaymentRate
     <EnumCode("P")> PercentOfBasePaymentRate
     <EnumCode("D")> DivideBasePaymentRate
 End Enum

@@ -95,7 +95,7 @@ Namespace DataLayer.AdoNet
             .Frequency = Extensions.AsChar(reader("Frequency")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .IncludeInEos = Extensions.AsBool(reader("IncludeInEos")),
-            .FactorValue = Extensions.AsString(reader("FactorValue")),
+            .FactorValue = Extensions.AsDecimal(reader("FactorValue")),
             .FactorType = Extensions.AsString(reader("FactorType")),
             .Notes = Extensions.AsString(reader("Notes")),
             .Rate = Extensions.AsDouble(reader("Rate")),
