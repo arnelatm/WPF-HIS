@@ -748,7 +748,7 @@ Namespace PresentationLayer.Views.Forms
                     Case $"dgvEarningRate"
                         Dim earnIdNo = RegularEmployeeEarnings(nIndex).EarningIdNo
                         Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
-                        If calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
+                        If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
                             Messaging.Show(True, $"MsgRateChangeNotAllowed")
                             .CancelEdit()
                         End If
@@ -772,10 +772,10 @@ Namespace PresentationLayer.Views.Forms
                     Case "dgvDeductionRate"
                         Dim earnIdNo = RegularEmployeeEarnings(nIndex).EarningIdNo
                         Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
-                        If calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                            Messaging.Show(True, $"MsgRateChangeNotAllowed")
-                            .CancelEdit()
-                        End If
+                        'If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+                        '    Messaging.Show(True, $"MsgRateChangeNotAllowed")
+                        '    .CancelEdit()
+                        'End If
 
                 End Select
             End With

@@ -64,7 +64,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBasePayment = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.txtMultiplier = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboFactorType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblPayRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -85,6 +85,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboUnitAttendance = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblFactorType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPayrollDeductAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
@@ -324,21 +327,24 @@ Namespace PresentationLayer.Views.Forms
             'TableLayoutPanel2
             '
             resources.ApplyResources(Me.TableLayoutPanel2, "TableLayoutPanel2")
+            Me.TableLayoutPanel2.Controls.Add(Me.cboUnitAttendance, 3, 2)
             Me.TableLayoutPanel2.Controls.Add(Me.CLabel2, 0, 0)
-            Me.TableLayoutPanel2.Controls.Add(Me.lblMultiplier, 0, 5)
-            Me.TableLayoutPanel2.Controls.Add(Me.lblDefaultQty, 0, 3)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblUnit, 0, 2)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblMultiplier, 0, 6)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblDefaultQty, 0, 4)
             Me.TableLayoutPanel2.Controls.Add(Me.lblCalculationType, 0, 1)
             Me.TableLayoutPanel2.Controls.Add(Me.cboCalculationType, 1, 1)
-            Me.TableLayoutPanel2.Controls.Add(Me.txtRate, 1, 2)
-            Me.TableLayoutPanel2.Controls.Add(Me.txtDefaultQuantity, 1, 3)
-            Me.TableLayoutPanel2.Controls.Add(Me.lblBasePayment, 0, 4)
-            Me.TableLayoutPanel2.Controls.Add(Me.cboBasePaymentIdNo, 1, 4)
-            Me.TableLayoutPanel2.Controls.Add(Me.txtMultiplier, 1, 5)
-            Me.TableLayoutPanel2.Controls.Add(Me.cboMultiplierType, 2, 5)
-            Me.TableLayoutPanel2.Controls.Add(Me.lblPayRate, 2, 2)
-            Me.TableLayoutPanel2.Controls.Add(Me.lblRate, 0, 2)
-            Me.TableLayoutPanel2.Controls.Add(Me.cboUnit, 3, 2)
+            Me.TableLayoutPanel2.Controls.Add(Me.txtRate, 1, 3)
+            Me.TableLayoutPanel2.Controls.Add(Me.txtDefaultQuantity, 1, 4)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblBasePayment, 0, 5)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboBasePaymentIdNo, 1, 5)
+            Me.TableLayoutPanel2.Controls.Add(Me.txtMultiplier, 1, 6)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboFactorType, 2, 6)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblPayRate, 2, 3)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblRate, 0, 3)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboUnit, 3, 3)
             Me.TableLayoutPanel2.Controls.Add(Me.cboDeductionType, 1, 0)
+            Me.TableLayoutPanel2.Controls.Add(Me.lblFactorType, 3, 4)
             Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
             '
             'CLabel2
@@ -378,8 +384,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCalculationType.DefaultValue = Nothing
             Me.cboCalculationType.DisplayMember = "Name"
             resources.ApplyResources(Me.cboCalculationType, "cboCalculationType")
-            Me.cboCalculationType.DropDownHeight = 200
-            Me.cboCalculationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboCalculationType.EditingMode = True
             Me.cboCalculationType.FilterRule = Nothing
             Me.cboCalculationType.ForeColor = System.Drawing.Color.Black
@@ -414,7 +418,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.txtRate, "txtRate")
             Me.txtRate.EditingMode = True
             Me.txtRate.ForeColor = System.Drawing.Color.Black
-            Me.txtRate.LinkedLabel = Nothing
+            Me.txtRate.LinkedLabel = Me.lblRate
             Me.txtRate.MaximumValue = Nothing
             Me.txtRate.MinimumValue = Nothing
             Me.txtRate.Name = "txtRate"
@@ -452,8 +456,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.DefaultValue = Nothing
             Me.cboBasePaymentIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboBasePaymentIdNo, "cboBasePaymentIdNo")
-            Me.cboBasePaymentIdNo.DropDownHeight = 200
-            Me.cboBasePaymentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboBasePaymentIdNo.EditingMode = True
             Me.cboBasePaymentIdNo.FilterRule = Nothing
             Me.cboBasePaymentIdNo.ForeColor = System.Drawing.Color.Black
@@ -494,40 +496,38 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMultiplier.Name = "txtMultiplier"
             Me.txtMultiplier.OldValue = Nothing
             '
-            'cboMultiplierType
+            'cboFactorType
             '
-            Me.cboMultiplierType.BackColor = System.Drawing.Color.White
-            Me.cboMultiplierType.ChangingSearchValueOnly = False
-            Me.TableLayoutPanel2.SetColumnSpan(Me.cboMultiplierType, 2)
-            Me.cboMultiplierType.CurrentSearchTerm = ""
-            Me.cboMultiplierType.DefaultValue = Nothing
-            Me.cboMultiplierType.DisplayMember = "Name"
-            resources.ApplyResources(Me.cboMultiplierType, "cboMultiplierType")
-            Me.cboMultiplierType.DropDownHeight = 200
-            Me.cboMultiplierType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cboMultiplierType.EditingMode = True
-            Me.cboMultiplierType.FilterRule = Nothing
-            Me.cboMultiplierType.ForeColor = System.Drawing.Color.Black
-            Me.cboMultiplierType.FormattingEnabled = True
-            Me.cboMultiplierType.HideWhenNotEditingOrAdding = False
-            Me.cboMultiplierType.LinkedLabel = Nothing
-            Me.cboMultiplierType.Name = "cboMultiplierType"
-            Me.cboMultiplierType.OldValue = 0
-            Me.cboMultiplierType.OriginalDataSource = Nothing
-            Me.cboMultiplierType.OriginalList = Nothing
-            Me.cboMultiplierType.OverrideDropDownStyleList = False
-            Me.cboMultiplierType.PreviousSearchTerm = Nothing
-            Me.cboMultiplierType.PreviousSelectedIndex = -1
-            Me.cboMultiplierType.PropertySelector = Nothing
-            Me.cboMultiplierType.ReadOnlyCombo = False
-            Me.cboMultiplierType.SearchAnywhere = False
-            Me.cboMultiplierType.SuggestBoxHeight = 200
-            Me.cboMultiplierType.SuggestListOrderRule = Nothing
-            Me.cboMultiplierType.TextToSearch = Nothing
-            Me.cboMultiplierType.ValueIsMandatory = False
-            Me.cboMultiplierType.ValueIsNullable = False
-            Me.cboMultiplierType.ValueIsNumeric = False
-            Me.cboMultiplierType.ValueMember = "Code"
+            Me.cboFactorType.BackColor = System.Drawing.Color.White
+            Me.cboFactorType.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel2.SetColumnSpan(Me.cboFactorType, 2)
+            Me.cboFactorType.CurrentSearchTerm = ""
+            Me.cboFactorType.DefaultValue = Nothing
+            Me.cboFactorType.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboFactorType, "cboFactorType")
+            Me.cboFactorType.EditingMode = True
+            Me.cboFactorType.FilterRule = Nothing
+            Me.cboFactorType.ForeColor = System.Drawing.Color.Black
+            Me.cboFactorType.FormattingEnabled = True
+            Me.cboFactorType.HideWhenNotEditingOrAdding = False
+            Me.cboFactorType.LinkedLabel = Me.lblFactorType
+            Me.cboFactorType.Name = "cboFactorType"
+            Me.cboFactorType.OldValue = 0
+            Me.cboFactorType.OriginalDataSource = Nothing
+            Me.cboFactorType.OriginalList = Nothing
+            Me.cboFactorType.OverrideDropDownStyleList = False
+            Me.cboFactorType.PreviousSearchTerm = Nothing
+            Me.cboFactorType.PreviousSelectedIndex = -1
+            Me.cboFactorType.PropertySelector = Nothing
+            Me.cboFactorType.ReadOnlyCombo = False
+            Me.cboFactorType.SearchAnywhere = False
+            Me.cboFactorType.SuggestBoxHeight = 200
+            Me.cboFactorType.SuggestListOrderRule = Nothing
+            Me.cboFactorType.TextToSearch = Nothing
+            Me.cboFactorType.ValueIsMandatory = False
+            Me.cboFactorType.ValueIsNullable = False
+            Me.cboFactorType.ValueIsNumeric = False
+            Me.cboFactorType.ValueMember = "Code"
             '
             'lblPayRate
             '
@@ -551,14 +551,12 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.DefaultValue = Nothing
             Me.cboUnit.DisplayMember = "Name"
             resources.ApplyResources(Me.cboUnit, "cboUnit")
-            Me.cboUnit.DropDownHeight = 200
-            Me.cboUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboUnit.EditingMode = True
             Me.cboUnit.FilterRule = Nothing
             Me.cboUnit.ForeColor = System.Drawing.Color.Black
             Me.cboUnit.FormattingEnabled = True
             Me.cboUnit.HideWhenNotEditingOrAdding = False
-            Me.cboUnit.LinkedLabel = Me.lblRate
+            Me.cboUnit.LinkedLabel = Me.lblUnit
             Me.cboUnit.Name = "cboUnit"
             Me.cboUnit.OldValue = 0
             Me.cboUnit.OriginalDataSource = Nothing
@@ -587,8 +585,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDeductionType.DefaultValue = ""
             Me.cboDeductionType.DisplayMember = "Name"
             resources.ApplyResources(Me.cboDeductionType, "cboDeductionType")
-            Me.cboDeductionType.DropDownHeight = 1
-            Me.cboDeductionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboDeductionType.EditingMode = False
             Me.cboDeductionType.FilterRule = Nothing
             Me.cboDeductionType.ForeColor = System.Drawing.Color.Black
@@ -653,7 +649,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DefaultValue = Nothing
             Me.cboAccountIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
-            Me.cboAccountIdNo.DropDownHeight = 1
             Me.cboAccountIdNo.EditingMode = False
             Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
@@ -809,6 +804,52 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.CFlowLayout4)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
+            'lblUnit
+            '
+            resources.ApplyResources(Me.lblUnit, "lblUnit")
+            Me.lblUnit.DisplayOnly = True
+            Me.lblUnit.EditingMode = False
+            Me.lblUnit.Name = "lblUnit"
+            '
+            'cboUnitAttendance
+            '
+            Me.cboUnitAttendance.BackColor = System.Drawing.Color.White
+            Me.cboUnitAttendance.ChangingSearchValueOnly = False
+            Me.cboUnitAttendance.CurrentSearchTerm = ""
+            Me.cboUnitAttendance.DefaultValue = Nothing
+            Me.cboUnitAttendance.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboUnitAttendance, "cboUnitAttendance")
+            Me.cboUnitAttendance.EditingMode = True
+            Me.cboUnitAttendance.FilterRule = Nothing
+            Me.cboUnitAttendance.ForeColor = System.Drawing.Color.Black
+            Me.cboUnitAttendance.FormattingEnabled = True
+            Me.cboUnitAttendance.HideWhenNotEditingOrAdding = False
+            Me.cboUnitAttendance.LinkedLabel = Me.lblUnit
+            Me.cboUnitAttendance.Name = "cboUnitAttendance"
+            Me.cboUnitAttendance.OldValue = 0
+            Me.cboUnitAttendance.OriginalDataSource = Nothing
+            Me.cboUnitAttendance.OriginalList = Nothing
+            Me.cboUnitAttendance.OverrideDropDownStyleList = False
+            Me.cboUnitAttendance.PreviousSearchTerm = Nothing
+            Me.cboUnitAttendance.PreviousSelectedIndex = -1
+            Me.cboUnitAttendance.PropertySelector = Nothing
+            Me.cboUnitAttendance.ReadOnlyCombo = False
+            Me.cboUnitAttendance.SearchAnywhere = False
+            Me.cboUnitAttendance.SuggestBoxHeight = 200
+            Me.cboUnitAttendance.SuggestListOrderRule = Nothing
+            Me.cboUnitAttendance.TextToSearch = Nothing
+            Me.cboUnitAttendance.ValueIsMandatory = False
+            Me.cboUnitAttendance.ValueIsNullable = False
+            Me.cboUnitAttendance.ValueIsNumeric = False
+            Me.cboUnitAttendance.ValueMember = "Code"
+            '
+            'lblFactorType
+            '
+            resources.ApplyResources(Me.lblFactorType, "lblFactorType")
+            Me.lblFactorType.DisplayOnly = True
+            Me.lblFactorType.EditingMode = False
+            Me.lblFactorType.Name = "lblFactorType"
+            '
             'DeductionEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -870,7 +911,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblBasePayment As CLabel
         Friend WithEvents cboBasePaymentIdNo As CaComboBox
         Friend WithEvents txtMultiplier As CTextBox
-        Friend WithEvents cboMultiplierType As CaComboBox
+        Friend WithEvents cboFactorType As CaComboBox
         Friend WithEvents cboUnit As CaComboBox
         Friend WithEvents lblPayRate As CLabel
         Friend WithEvents tbpAccountPosting As TabPage
@@ -891,5 +932,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents cboDeductionType As CaComboBox
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents lblUnit As CLabel
+        Friend WithEvents cboUnitAttendance As CaComboBox
+        Friend WithEvents lblFactorType As CLabel
     End Class
 End Namespace

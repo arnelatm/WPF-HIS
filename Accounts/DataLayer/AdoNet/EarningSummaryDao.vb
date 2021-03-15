@@ -20,7 +20,7 @@ Namespace DataLayer.AdoNet
                     "EarningSummaryIdNo," &
                     "EarningIdNo," &
                     "IdNo," &
-                    "Multiplier" &
+                    "FactorValue" &
                     " FROM [EarningSummary]" &
                     " WHERE EarningSummaryIdNo = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
@@ -45,7 +45,7 @@ Namespace DataLayer.AdoNet
             .EarningSummaryIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("EarningSummaryIdNo")),
             .EarningIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("EarningIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Multiplier = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Multiplier"))
+            .FactorValue = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("FactorValue"))
            }
 
     End Class

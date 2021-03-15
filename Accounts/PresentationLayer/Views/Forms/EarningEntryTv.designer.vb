@@ -28,16 +28,16 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EarningEntryTv))
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpEarning = New System.Windows.Forms.TableLayoutPanel()
             Me.lblSummary = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -59,9 +59,10 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpCalculation = New System.Windows.Forms.TabPage()
             Me.floCalculation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpCalculation = New System.Windows.Forms.TableLayoutPanel()
+            Me.cboUnitAttendance = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblEarningType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblMultiplier = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblCalculationType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -73,8 +74,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIncludeInEos = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkIncludeInEOS = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.txtMultiplier = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblMultiplierType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboFactorType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblFactorType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkTaxable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblTaxable = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSlash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -367,28 +368,68 @@ Namespace PresentationLayer.Views.Forms
             'tlpCalculation
             '
             resources.ApplyResources(Me.tlpCalculation, "tlpCalculation")
+            Me.tlpCalculation.Controls.Add(Me.cboUnitAttendance, 3, 2)
             Me.tlpCalculation.Controls.Add(Me.cboCalculationType, 1, 1)
-            Me.tlpCalculation.Controls.Add(Me.lblUnit, 0, 3)
             Me.tlpCalculation.Controls.Add(Me.lblEarningType, 0, 0)
             Me.tlpCalculation.Controls.Add(Me.lblMultiplier, 0, 6)
             Me.tlpCalculation.Controls.Add(Me.lblDefaultQuantity, 0, 4)
             Me.tlpCalculation.Controls.Add(Me.lblCalculationType, 0, 1)
-            Me.tlpCalculation.Controls.Add(Me.txtRate, 1, 2)
+            Me.tlpCalculation.Controls.Add(Me.txtRate, 1, 3)
             Me.tlpCalculation.Controls.Add(Me.txtDefaultQuantity, 1, 4)
             Me.tlpCalculation.Controls.Add(Me.lblBasePayment, 0, 5)
             Me.tlpCalculation.Controls.Add(Me.cboBasePaymentIdNo, 1, 5)
             Me.tlpCalculation.Controls.Add(Me.lblIncludeInEos, 0, 7)
             Me.tlpCalculation.Controls.Add(Me.chkIncludeInEOS, 1, 7)
             Me.tlpCalculation.Controls.Add(Me.txtMultiplier, 1, 6)
-            Me.tlpCalculation.Controls.Add(Me.cboMultiplierType, 2, 6)
+            Me.tlpCalculation.Controls.Add(Me.cboFactorType, 2, 6)
             Me.tlpCalculation.Controls.Add(Me.chkTaxable, 2, 8)
             Me.tlpCalculation.Controls.Add(Me.lblTaxable, 0, 8)
-            Me.tlpCalculation.Controls.Add(Me.lblSlash, 2, 2)
-            Me.tlpCalculation.Controls.Add(Me.lblRate, 0, 2)
-            Me.tlpCalculation.Controls.Add(Me.cboUnit, 3, 2)
-            Me.tlpCalculation.Controls.Add(Me.lblMultiplierType, 3, 7)
+            Me.tlpCalculation.Controls.Add(Me.lblSlash, 2, 3)
+            Me.tlpCalculation.Controls.Add(Me.cboUnit, 3, 3)
+            Me.tlpCalculation.Controls.Add(Me.lblFactorType, 3, 7)
             Me.tlpCalculation.Controls.Add(Me.cboEarningType, 1, 0)
+            Me.tlpCalculation.Controls.Add(Me.lblRate, 0, 3)
+            Me.tlpCalculation.Controls.Add(Me.lblUnit, 0, 2)
             Me.tlpCalculation.Name = "tlpCalculation"
+            '
+            'cboUnitAttendance
+            '
+            Me.cboUnitAttendance.BackColor = System.Drawing.Color.White
+            Me.cboUnitAttendance.ChangingSearchValueOnly = False
+            Me.cboUnitAttendance.CurrentSearchTerm = ""
+            Me.cboUnitAttendance.DefaultValue = Nothing
+            Me.cboUnitAttendance.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboUnitAttendance, "cboUnitAttendance")
+            Me.cboUnitAttendance.EditingMode = True
+            Me.cboUnitAttendance.FilterRule = Nothing
+            Me.cboUnitAttendance.ForeColor = System.Drawing.Color.Black
+            Me.cboUnitAttendance.FormattingEnabled = True
+            Me.cboUnitAttendance.HideWhenNotEditingOrAdding = False
+            Me.cboUnitAttendance.LinkedLabel = Me.lblUnit
+            Me.cboUnitAttendance.Name = "cboUnitAttendance"
+            Me.cboUnitAttendance.OldValue = 0
+            Me.cboUnitAttendance.OriginalDataSource = Nothing
+            Me.cboUnitAttendance.OriginalList = Nothing
+            Me.cboUnitAttendance.OverrideDropDownStyleList = False
+            Me.cboUnitAttendance.PreviousSearchTerm = Nothing
+            Me.cboUnitAttendance.PreviousSelectedIndex = -1
+            Me.cboUnitAttendance.PropertySelector = Nothing
+            Me.cboUnitAttendance.ReadOnlyCombo = False
+            Me.cboUnitAttendance.SearchAnywhere = False
+            Me.cboUnitAttendance.SuggestBoxHeight = 200
+            Me.cboUnitAttendance.SuggestListOrderRule = Nothing
+            Me.cboUnitAttendance.TextToSearch = Nothing
+            Me.cboUnitAttendance.ValueIsMandatory = False
+            Me.cboUnitAttendance.ValueIsNullable = False
+            Me.cboUnitAttendance.ValueIsNumeric = False
+            Me.cboUnitAttendance.ValueMember = "Code"
+            '
+            'lblUnit
+            '
+            resources.ApplyResources(Me.lblUnit, "lblUnit")
+            Me.lblUnit.DisplayOnly = True
+            Me.lblUnit.EditingMode = False
+            Me.lblUnit.Name = "lblUnit"
             '
             'cboCalculationType
             '
@@ -429,13 +470,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEarningType.EditingMode = False
             resources.ApplyResources(Me.lblEarningType, "lblEarningType")
             Me.lblEarningType.Name = "lblEarningType"
-            '
-            'lblUnit
-            '
-            resources.ApplyResources(Me.lblUnit, "lblUnit")
-            Me.lblUnit.DisplayOnly = True
-            Me.lblUnit.EditingMode = False
-            Me.lblUnit.Name = "lblUnit"
             '
             'lblMultiplier
             '
@@ -575,45 +609,45 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMultiplier.Name = "txtMultiplier"
             Me.txtMultiplier.OldValue = Nothing
             '
-            'cboMultiplierType
+            'cboFactorType
             '
-            Me.cboMultiplierType.BackColor = System.Drawing.Color.White
-            Me.cboMultiplierType.ChangingSearchValueOnly = False
-            Me.tlpCalculation.SetColumnSpan(Me.cboMultiplierType, 2)
-            Me.cboMultiplierType.CurrentSearchTerm = ""
-            Me.cboMultiplierType.DefaultValue = Nothing
-            Me.cboMultiplierType.DisplayMember = "Name"
-            resources.ApplyResources(Me.cboMultiplierType, "cboMultiplierType")
-            Me.cboMultiplierType.EditingMode = True
-            Me.cboMultiplierType.FilterRule = Nothing
-            Me.cboMultiplierType.ForeColor = System.Drawing.Color.Black
-            Me.cboMultiplierType.FormattingEnabled = True
-            Me.cboMultiplierType.HideWhenNotEditingOrAdding = False
-            Me.cboMultiplierType.LinkedLabel = Me.lblMultiplierType
-            Me.cboMultiplierType.Name = "cboMultiplierType"
-            Me.cboMultiplierType.OldValue = 0
-            Me.cboMultiplierType.OriginalDataSource = Nothing
-            Me.cboMultiplierType.OriginalList = Nothing
-            Me.cboMultiplierType.OverrideDropDownStyleList = False
-            Me.cboMultiplierType.PreviousSearchTerm = Nothing
-            Me.cboMultiplierType.PreviousSelectedIndex = -1
-            Me.cboMultiplierType.PropertySelector = Nothing
-            Me.cboMultiplierType.ReadOnlyCombo = False
-            Me.cboMultiplierType.SearchAnywhere = False
-            Me.cboMultiplierType.SuggestBoxHeight = 200
-            Me.cboMultiplierType.SuggestListOrderRule = Nothing
-            Me.cboMultiplierType.TextToSearch = Nothing
-            Me.cboMultiplierType.ValueIsMandatory = False
-            Me.cboMultiplierType.ValueIsNullable = False
-            Me.cboMultiplierType.ValueIsNumeric = False
-            Me.cboMultiplierType.ValueMember = "Code"
+            Me.cboFactorType.BackColor = System.Drawing.Color.White
+            Me.cboFactorType.ChangingSearchValueOnly = False
+            Me.tlpCalculation.SetColumnSpan(Me.cboFactorType, 2)
+            Me.cboFactorType.CurrentSearchTerm = ""
+            Me.cboFactorType.DefaultValue = Nothing
+            Me.cboFactorType.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboFactorType, "cboFactorType")
+            Me.cboFactorType.EditingMode = True
+            Me.cboFactorType.FilterRule = Nothing
+            Me.cboFactorType.ForeColor = System.Drawing.Color.Black
+            Me.cboFactorType.FormattingEnabled = True
+            Me.cboFactorType.HideWhenNotEditingOrAdding = False
+            Me.cboFactorType.LinkedLabel = Me.lblFactorType
+            Me.cboFactorType.Name = "cboFactorType"
+            Me.cboFactorType.OldValue = 0
+            Me.cboFactorType.OriginalDataSource = Nothing
+            Me.cboFactorType.OriginalList = Nothing
+            Me.cboFactorType.OverrideDropDownStyleList = False
+            Me.cboFactorType.PreviousSearchTerm = Nothing
+            Me.cboFactorType.PreviousSelectedIndex = -1
+            Me.cboFactorType.PropertySelector = Nothing
+            Me.cboFactorType.ReadOnlyCombo = False
+            Me.cboFactorType.SearchAnywhere = False
+            Me.cboFactorType.SuggestBoxHeight = 200
+            Me.cboFactorType.SuggestListOrderRule = Nothing
+            Me.cboFactorType.TextToSearch = Nothing
+            Me.cboFactorType.ValueIsMandatory = False
+            Me.cboFactorType.ValueIsNullable = False
+            Me.cboFactorType.ValueIsNumeric = False
+            Me.cboFactorType.ValueMember = "Code"
             '
-            'lblMultiplierType
+            'lblFactorType
             '
-            resources.ApplyResources(Me.lblMultiplierType, "lblMultiplierType")
-            Me.lblMultiplierType.DisplayOnly = True
-            Me.lblMultiplierType.EditingMode = False
-            Me.lblMultiplierType.Name = "lblMultiplierType"
+            resources.ApplyResources(Me.lblFactorType, "lblFactorType")
+            Me.lblFactorType.DisplayOnly = True
+            Me.lblFactorType.EditingMode = False
+            Me.lblFactorType.Name = "lblFactorType"
             '
             'chkTaxable
             '
@@ -777,26 +811,26 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewPayrollEarnAccounts
             '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPayrollEarnAccounts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPayrollEarnAccounts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
             Me.DataGridViewPayrollEarnAccounts.AutoGenerateColumns = False
             Me.DataGridViewPayrollEarnAccounts.BackgroundColor = System.Drawing.SystemColors.Window
             Me.DataGridViewPayrollEarnAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPayrollEarnAccounts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPayGroupIdNo, Me.dgvAccountIdNo, Me.dgvIdNo, Me.AccountNameDataGridViewTextBoxColumn, Me.EarningIdNoDataGridViewTextBoxColumn, Me.PayGroupNameDataGridViewTextBoxColumn})
             Me.tlpPostingAccounts.SetColumnSpan(Me.DataGridViewPayrollEarnAccounts, 3)
             Me.DataGridViewPayrollEarnAccounts.DataSource = Me.bsPayrollEarnAccounts
-            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPayrollEarnAccounts.DefaultCellStyle = DataGridViewCellStyle5
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPayrollEarnAccounts.DefaultCellStyle = DataGridViewCellStyle14
             Me.DataGridViewPayrollEarnAccounts.DgvFooter = Nothing
             Me.DataGridViewPayrollEarnAccounts.DisplayOnly = False
             resources.ApplyResources(Me.DataGridViewPayrollEarnAccounts, "DataGridViewPayrollEarnAccounts")
-            Me.DataGridViewPayrollEarnAccounts.Ea = EventAggregator1
+            Me.DataGridViewPayrollEarnAccounts.Ea = EventAggregator2
             Me.DataGridViewPayrollEarnAccounts.EditingMode = False
             Me.DataGridViewPayrollEarnAccounts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewPayrollEarnAccounts.FieldsDictionary = Nothing
@@ -812,9 +846,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvSequence
             '
             Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             resources.ApplyResources(Me.dgvSequence, "dgvSequence")
@@ -826,9 +860,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvPayGroupIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader
             Me.dgvPayGroupIdNo.DataPropertyName = "PayGroupIdNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvPayGroupIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.dgvPayGroupIdNo.DefaultCellStyle = DataGridViewCellStyle12
             Me.dgvPayGroupIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvPayGroupIdNo, "dgvPayGroupIdNo")
             Me.dgvPayGroupIdNo.Name = "dgvPayGroupIdNo"
@@ -839,9 +873,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
             Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
@@ -912,20 +946,20 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewSummaryDetail
             '
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewSummaryDetail.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewSummaryDetail.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewSummaryDetail.AutoGenerateColumns = False
             Me.DataGridViewSummaryDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewSummaryDetail.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvEarningIdNo, Me.dgvMultiplierSummary, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewSummaryDetail.DataSource = Me.bsEarningSummary
-            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewSummaryDetail.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewSummaryDetail.DefaultCellStyle = DataGridViewCellStyle16
             Me.DataGridViewSummaryDetail.DgvFooter = Nothing
             Me.DataGridViewSummaryDetail.DisplayOnly = False
             resources.ApplyResources(Me.DataGridViewSummaryDetail, "DataGridViewSummaryDetail")
@@ -946,9 +980,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvEarningIdNo.DataPropertyName = "EarningIdNo"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle7
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvEarningIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvEarningIdNo, "dgvEarningIdNo")
             Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
@@ -958,10 +992,10 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvMultiplierSummary
             '
-            Me.dgvMultiplierSummary.DataPropertyName = "Multiplier"
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            Me.dgvMultiplierSummary.DefaultCellStyle = DataGridViewCellStyle8
+            Me.dgvMultiplierSummary.DataPropertyName = "FactorValue"
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            Me.dgvMultiplierSummary.DefaultCellStyle = DataGridViewCellStyle15
             Me.dgvMultiplierSummary.EditingMode = False
             resources.ApplyResources(Me.dgvMultiplierSummary, "dgvMultiplierSummary")
             Me.dgvMultiplierSummary.Name = "dgvMultiplierSummary"
@@ -1058,7 +1092,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblIncludeInEos As CLabel
         Friend WithEvents chkIncludeInEOS As CCheckBox
         Friend WithEvents txtMultiplier As CTextBox
-        Friend WithEvents cboMultiplierType As CaComboBox
+        Friend WithEvents cboFactorType As CaComboBox
         Friend WithEvents cboUnit As CaComboBox
         Friend WithEvents lblSlash As CLabel
         Friend WithEvents tbpAccountPosting As TabPage
@@ -1090,8 +1124,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvMultiplierSummary As CdgvColumnText
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents tabPageImages As ImageList
-        Friend WithEvents lblMultiplierType As CLabel
+        Friend WithEvents lblFactorType As CLabel
         Friend WithEvents cboEarningType As CaComboBox
         Friend WithEvents cboCalculationType As CaComboBox
+        Friend WithEvents cboUnitAttendance As CaComboBox
     End Class
 End Namespace

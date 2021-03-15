@@ -30,12 +30,13 @@ Namespace BusinessLayer
         Public Property Frequency As Char
         Public Property IdNo As Int16
         Public Property IncludeInEos As Boolean
-        Public Property Multiplier As String
-        Public Property MultiplierType As Char
+        Public Property FactorValue As String
+        Public Property FactorType As Char
         Public Property Notes As String
         Public Property Rate As Decimal
         Public Property Taxable As Boolean
         Public Property Unit As Char
+        Public Property UnitAttendance As Char
         Public Property UsePayGroups As Boolean
         Public Property PayrollEarnAccounts As List(Of PayrollEarnAccount)
         Public Property EarningsSummary As List(Of EarningSummary)

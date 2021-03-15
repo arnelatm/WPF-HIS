@@ -67,7 +67,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Multiplier As String Implements IEarningView.Multiplier
+        Public Property FactorValue As String Implements IEarningView.FactorValue
             Get
                 Return txtMultiplier.Text  ' Convert.ToDecimal(NumParser(Of Decimal)(txtMultiplier.Text), _nfi)
             End Get
@@ -76,12 +76,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MultiplierType As Char Implements IEarningView.MultiplierType
+        Public Property FactorType As Char Implements IEarningView.FactorType
             Get
-                Return cboMultiplierType.GetValue()
+                Return cboFactorType.GetValue()
             End Get
             Set
-                cboMultiplierType.SetValue(Value)
+                cboFactorType.SetValue(Value)
             End Set
         End Property
 
@@ -160,6 +160,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboEarningType.SetValue(Value)
+                'If IsOvertimeEarning(Value) Then
+                '    If Value = EnumToCode(EarningTypeSelection.OvertimeRegular) Then
+                '        Unit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
+                '    ElseIf Value = EnumToCode(EarningTypeSelection.OvertimeHoliday) Then
+                '        Unit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
+                '    ElseIf Value = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
+                '        Unit = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
+                '    End If
+                'End If
             End Set
         End Property
 
@@ -169,6 +178,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboUnit.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property UnitAttendance As Char Implements IEarningView.UnitAttendance
+            Get
+                Return cboUnitAttendance.GetValue()
+            End Get
+            Set
+                cboUnitAttendance.SetValue(Value)
             End Set
         End Property
 
@@ -250,9 +268,10 @@ Namespace PresentationLayer.Views.Forms
             cboEarningType.DataSource = PresenterObj.MakeEnumComboList(Of EarningTypeSelection)
             cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList
             cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
-            cboMultiplierType.DataSource = PresenterObj.MakeEnumComboList(Of MultiplierTypeSelection)
+            cboFactorType.DataSource = PresenterObj.MakeEnumComboList(Of FactorTypeSelection)
             cboBasePaymentIdNo.DataSource = PresenterObj.GetLookup("Earning")
             cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
+            cboUnitAttendance.DataSource = PresenterObj.MakeEnumComboList(Of AttendanceUnitSelection)
             _accountsByCode = PresenterObj.GetDetailAccountList()
             _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
             _earningsByCode = PresenterObj.GetLookup("Earning")
@@ -299,20 +318,21 @@ Namespace PresentationLayer.Views.Forms
                 {"EarningType", cboEarningType},
                 {"IdNo", TxtIdNo},
                 {"IncludeInEos", chkIncludeInEOS},
-                {"Multiplier", txtMultiplier},
-                {"MultiplierType", cboMultiplierType},
+                {"FactorValue", txtMultiplier},
+                {"FactorType", cboFactorType},
                 {"Notes", txtNotes},
                 {"Rate", txtRate},
                 {"Summary", chkSummary},
                 {"Taxable", chkTaxable},
                 {"Unit", cboUnit},
+                {"UnitAttendance", cboUnitAttendance},
                 {"UsePayGroups", chkUsePayGroups},
                 {"EarningSummary", DataGridViewSummaryDetail}
                 }
 
             _eSumFieldsDict = New Dictionary(Of String, Object) From
                 {
-                {"Multiplier", dgvMultiplierSummary}
+                {"FactorValue", dgvMultiplierSummary}
                 }
 
             _eAccFieldsDict = New Dictionary(Of String, Object) From
@@ -362,55 +382,53 @@ Namespace PresentationLayer.Views.Forms
             tlpCalculation.Visible = False
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
-            Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
-            Dim cellPosUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(1, 3)
+            Dim cellPosOrigUnitAtt As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
+            Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 3)
+            Dim cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 4)
             lblUnit.Visible = False
             Select Case curCalculationType
-                Case CalculationTypeSelection.FixedAmount
+                Case CalculationTypeSelection.AttendanceBased
                     cboEarningType.Visible = True
+                    cboUnitAttendance.Visible = True
+                    lblRate.Text = Messaging.TranslateCaption("Default Rate / Unit")
+                    lblSlash.Text = Messaging.TranslateCaption("/")
+                    lblSlash.Visible = True
+                    lblDefaultQuantity.Visible = True
+                    txtDefaultQuantity.Visible = True
                     cboBasePaymentIdNo.Visible = False
-                    cboMultiplierType.Visible = False
+                    cboFactorType.Visible = False
                     cboUnit.Visible = False
                     lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = False
                     lblMultiplier.Visible = False
-                    lblSlash.Visible = False
-                    lblSlash.Visible = False
-                    txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = False
-                    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    'tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosUnitSave)
+                    tlpCalculation.SetCellPosition(cboUnitAttendance, cellPosOrigUnit)
                 Case CalculationTypeSelection.FixedRate
-                    If IsOvertimeEarning(cboEarningType.SelectedValue) Then
-                        lblRate.Visible = True
-                        txtRate.Visible = True
-                        cboUnit.Visible = False
-                        lblSlash.Visible = False
-                        lblSlash.Visible = False
-                        lblRate.Text = Messaging.TranslateCaption("Default Amount")
-                    Else
-                        cboUnit.Visible = True
-                        lblSlash.Visible = True
-                        lblSlash.Visible = True
-                        lblRate.Text = Messaging.TranslateCaption("Rate / Unit")
-                        lblSlash.Text = Messaging.TranslateCaption("/")
-                    End If
+                    'If IsOvertimeEarning(cboEarningType.SelectedValue) Then
+                    '    cboUnit.
+                    'End If
+                    lblSlash.Visible = True
+                    lblSlash.Visible = True
+                    lblRate.Text = Messaging.TranslateCaption("Default Rate / Unit")
+                    lblSlash.Text = Messaging.TranslateCaption("/")
                     cboEarningType.Visible = True
+                    cboUnit.Visible = True
                     lblDefaultQuantity.Visible = True
                     lblRate.Visible = True
                     txtDefaultQuantity.Visible = True
                     txtRate.Visible = True
                     cboBasePaymentIdNo.Visible = False
-                    cboMultiplierType.Visible = False
+                    cboUnitAttendance.Visible = False
+                    cboFactorType.Visible = False
                     lblBasePayment.Visible = False
                     lblMultiplier.Visible = False
                     txtMultiplier.Visible = False
-                    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    'tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    tlpCalculation.SetCellPosition(cboUnitAttendance, cellPosOrigUnitAtt)
                 Case CalculationTypeSelection.Factor
                     cboEarningType.Visible = True
                     cboBasePaymentIdNo.Visible = True
-                    cboMultiplierType.Visible = True
+                    cboFactorType.Visible = True
                     cboUnit.Visible = False
                     lblBasePayment.Visible = True
                     lblDefaultQuantity.Visible = False
@@ -425,38 +443,42 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = True
                     txtRate.Visible = False
+                    cboUnitAttendance.Visible = False
                 Case CalculationTypeSelection.Variable
                     cboEarningType.Visible = True
                     cboBasePaymentIdNo.Visible = False
-                    cboMultiplierType.Visible = False
+                    cboFactorType.Visible = False
                     cboUnit.Visible = True
+                    cboUnitAttendance.Visible = False
                     lblBasePayment.Visible = False
                     lblDefaultQuantity.Visible = True
                     lblMultiplier.Visible = False
                     lblSlash.Visible = True
                     lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
+                    lblRate.Text = Messaging.TranslateCaption("Default Rate or Amount / Unit")
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    tlpCalculation.SetCellPosition(cboUnitAttendance, cellPosOrigUnitAtt)
                     'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                     'tlpCalculation.SetColumnSpan(cboUnit, 1)
-                Case CalculationTypeSelection.Global
-                    cboEarningType.Visible = True
-                    cboBasePaymentIdNo.Visible = False
-                    cboMultiplierType.Visible = False
-                    cboUnit.Visible = True
-                    lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = True
-                    lblMultiplier.Visible = False
-                    lblSlash.Visible = True
-                    lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
-                    txtDefaultQuantity.Visible = True
-                    txtMultiplier.Visible = False
-                    txtRate.Visible = True
-                    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    'tlpCalculation.SetColumnSpan(cboUnit, 1)
+                    'Case CalculationTypeSelection.Global
+                    '    cboEarningType.Visible = True
+                    '    cboBasePaymentIdNo.Visible = False
+                    '    cboFactorType.Visible = False
+                    '    cboUnit.Visible = True
+                    '    lblBasePayment.Visible = False
+                    '    lblDefaultQuantity.Visible = True
+                    '    lblMultiplier.Visible = False
+                    '    lblSlash.Visible = True
+                    '    lblRate.Visible = True
+                    '    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
+                    '    txtDefaultQuantity.Visible = True
+                    '    txtMultiplier.Visible = False
+                    '    txtRate.Visible = True
+                    '    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    '    'tlpCalculation.SetColumnSpan(cboUnit, 1)
             End Select
             If chkSummary.Checked Then
                 tlpCalculation.Visible = False
@@ -465,18 +487,18 @@ Namespace PresentationLayer.Views.Forms
                 tlpCalculation.Visible = True
                 floCalculation.Visible = True
             End If
-            If IsOvertimeEarning(cboEarningType.SelectedValue) Then
-                cboEarningType.DisplayOnly = True
-                cboCalculationType.DisplayOnly = True
-            Else
-                If PresenterObj.EditMode Or PresenterObj.AddMode Then
-                    cboEarningType.DisplayOnly = False
-                    cboCalculationType.DisplayOnly = False
-                Else
-                    cboEarningType.DisplayOnly = True
-                    cboCalculationType.DisplayOnly = True
-                End If
-            End If
+            'If IsOvertimeEarning(cboEarningType.SelectedValue) Then
+            '    cboEarningType.DisplayOnly = True
+            '    cboCalculationType.DisplayOnly = True
+            'Else
+            '    If PresenterObj.EditMode Or PresenterObj.AddMode Then
+            '        cboEarningType.DisplayOnly = False
+            '        cboCalculationType.DisplayOnly = False
+            '    Else
+            '        cboEarningType.DisplayOnly = True
+            '        cboCalculationType.DisplayOnly = True
+            '    End If
+            'End If
             ResumeLayout()
         End Sub
 
@@ -651,28 +673,40 @@ Namespace PresentationLayer.Views.Forms
             '    txtEarningName.DisplayOnly = False
             'End If
             'UpdateCalculationTabDisplay()
-            If IsOvertimeEarning(cboEarningType.SelectedValue) Then
-                lblRate.Visible = True
-                txtRate.Visible = True
-                cboUnit.Visible = False
-                lblSlash.Visible = False
-                lblSlash.Visible = False
-                lblRate.Text = Messaging.TranslateCaption("Default Amount")
-            Else
-                cboUnit.Visible = True
-                lblSlash.Visible = True
-                lblSlash.Visible = True
-                lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
-                lblSlash.Text = Messaging.TranslateCaption("/")
-            End If
+            'If IsOvertimeEarning(cboEarningType.SelectedValue) Then
+            '    If cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.OvertimeRegular) Then
+            '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
+            '    ElseIf cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.OvertimeHoliday) Then
+            '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
+            '    ElseIf cboEarningType.SelectedValue = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
+            '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
+            '    End If
+            '    '    lblRate.Visible = True
+            '    '    txtRate.Visible = True
+            '    '    cboUnit.Visible = False
+            '    '    lblSlash.Visible = False
+            '    '    lblSlash.Visible = False
+            '    '    lblRate.Text = Messaging.TranslateCaption("Default Amount")
+            '    'Else
+            '    '    cboUnit.Visible = True
+            '    '    lblSlash.Visible = True
+            '    '    lblSlash.Visible = True
+            '    '    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+            '    '    lblSlash.Text = Messaging.TranslateCaption("/")
+            'End If
         End Sub
 
         Private Function IsOvertimeEarning(earnType As Char)
-            If earnType = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
-               earnType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
-               earnType = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
-                Return True
-            End If
+            'If earnType = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
+            '   earnType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
+            '   earnType = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
+            '    Return True
+            'End If
+            'If earnType = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
+            '   earnType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
+            '   earnType = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
+            '    Return True
+            'End If
             Return False
         End Function
 

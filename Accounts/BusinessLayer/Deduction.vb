@@ -29,8 +29,8 @@ Namespace BusinessLayer
         Public Property DeductionType As Char
         Public Property Frequency As Char
         Public Property IdNo As Int16
-        Public Property Multiplier As String
-        Public Property MultiplierType As Char
+        Public Property FactorValue As String
+        Public Property FactorType As Char
         Public Property Notes As String
         Public Property Rate As Decimal
         Public Property Unit As Char

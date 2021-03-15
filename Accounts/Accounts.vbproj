@@ -366,10 +366,10 @@
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IEarningSummaryView.vb" />
     <Compile Include="PresentationLayer\Views\OvertimeItemView.vb" />
-    <Compile Include="PresentationLayer\Views\Forms\Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\Test.Designer.vb">
+      <DependentUpon>Test.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Form1.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Test.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\GeneratePayroll.designer.vb">
@@ -1053,6 +1053,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.resx">
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Test.resx">
+      <DependentUpon>Test.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\GeneratePayroll.resx">
       <DependentUpon>GeneratePayroll.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1329,9 +1332,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\app.manifest" />

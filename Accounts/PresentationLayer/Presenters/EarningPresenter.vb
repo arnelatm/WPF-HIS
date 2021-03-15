@@ -39,13 +39,13 @@ Namespace PresentationLayer.Presenters
 
             DtEarnInsertTable.Columns.Add("EarningSummaryIdNo", GetType(Int16))
             DtEarnInsertTable.Columns.Add("EarningIdNo", GetType(Int16))
-            DtEarnInsertTable.Columns.Add("Multiplier", GetType(Decimal))
+            DtEarnInsertTable.Columns.Add("FactorValue", GetType(Decimal))
             DtEarnInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtEarnUpdateTable.Columns.Add("EarningSummaryIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("EarningIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtEarnUpdateTable.Columns.Add("Multiplier", GetType(Decimal))
+            DtEarnUpdateTable.Columns.Add("FactorValue", GetType(Decimal))
             DtEarnUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
             ChildModels.Add(_earningSummaryModel)
@@ -75,11 +75,11 @@ Namespace PresentationLayer.Presenters
         Private Sub FillEsData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("EarningSummaryIdNo") = View.IdNo
             workRow("EarningIdNo") = itemDataView.EarningIdNo
-            workRow("Multiplier") = itemDataView.Multiplier
+            workRow("FactorValue") = itemDataView.FactorValue
         End Sub
 
         Public Function EarnSummaryFilter(ByVal obj As Object) As Boolean
-            If (obj.EarningIdNo Is Nothing Or obj.EarningIdNo = 0 Or obj.Multiplier = 0) Then 'AndAlso (obj.PayGroupIdNo Is Nothing Or obj.PayGroupIdNo = 0) Then
+            If (obj.EarningIdNo Is Nothing Or obj.EarningIdNo = 0 Or obj.FactorValue = 0) Then 'AndAlso (obj.PayGroupIdNo Is Nothing Or obj.PayGroupIdNo = 0) Then
                 Return False
             End If
             Return True
@@ -96,9 +96,10 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function IsOkToDeleteRecord() As Boolean
             Dim retValue = False
             If MyBase.IsOkToDeleteRecord() Then
-                If View.EarningType = EnumToCode(EarningTypeSelection.OvertimeRegular) Or
-                   View.EarningType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
-                   View.EarningType = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
+                'If View.EarningType = EnumToCode(EarningTypeSelection.Computed) Or
+                '   View.EarningType = EnumToCode(EarningTypeSelection.OvertimeHoliday) Or
+                '   View.EarningType = EnumToCode(EarningTypeSelection.OvertimeSpecial) Then
+                If View.IdNo <= 3 Then
                     Messaging.Show(True, "MsgSysEarnDelNotAllowed")
                 Else
                     retValue = True

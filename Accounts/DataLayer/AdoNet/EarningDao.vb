@@ -22,12 +22,13 @@ Namespace DataLayer.AdoNet
                                   "Frequency," &
                                   "IdNo," &
                                   "IncludeInEOS," &
-                                  "Multiplier," &
-                                  "MultiplierType," &
+                                  "FactorValue," &
+                                  "FactorType," &
                                   "Notes," &
                                   "Rate," &
                                   "Taxable," &
                                   "Unit," &
+                                  "UnitAttendance," &
                                   "UsePayGroups"
 
         Private ReadOnly _db As New Db()
@@ -59,12 +60,13 @@ Namespace DataLayer.AdoNet
                     " EarningType = @EarningType," &
                     " Frequency = @Frequency," &
                     " IncludeInEos = @IncludeInEos," &
-                    " Multiplier = @Multiplier," &
-                    " MultiplierType = @MultiplierType," &
+                    " FactorValue = @FactorValue," &
+                    " FactorType = @FactorType," &
                     " Notes = @Notes," &
                     " Rate = @Rate," &
                     " Taxable = @Taxable," &
                     " Unit = @Unit," &
+                    " UnitAttendance = @UnitAttendance," &
                     " UsePayGroups = @UsePayGroups" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(earning))
@@ -73,8 +75,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDao(Of Earning).AddRecord
             Dim sql As String =
                     " INSERT INTO [Earning] " &
-                    " (AccountIdNo,BasePaymentIdNo,CalculationType,DefaultQuantity,EarningCode,Summary,EarningName,EarningNameAra,EarningType,Frequency,IncludeInEos,Multiplier,MultiplierType,Notes,Rate,Taxable,Unit,UsePayGroups) " &
-                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@Summary,@EarningName,@EarningNameAra,@EarningType,@Frequency,@IncludeInEos,@Multiplier,@MultiplierType,@Notes,@Rate,@Taxable,@Unit,@UsePayGroups) "
+                    "        (AccountIdNo ,BasePaymentIdNo ,CalculationType ,DefaultQuantity ,EarningCode ,Summary ,EarningName ,EarningNameAra ,EarningType ,Frequency ,IncludeInEos ,FactorValue,FactorType  ,Notes ,Rate ,Taxable ,Unit ,UnitAttendance ,UsePayGroups) " &
+                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@Summary,@EarningName,@EarningNameAra,@EarningType,@Frequency,@IncludeInEos,@FactorValue,@FactorType,@Notes,@Rate,@Taxable,@Unit,@UnitAttendance,@UsePayGroups) "
             Return _db.Insert(sql, Take(earning))
         End Function
 
@@ -93,12 +95,13 @@ Namespace DataLayer.AdoNet
             .Frequency = Extensions.AsChar(reader("Frequency")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .IncludeInEos = Extensions.AsBool(reader("IncludeInEos")),
-            .Multiplier = Extensions.AsString(reader("Multiplier")),
-            .MultiplierType = Extensions.AsString(reader("MultiplierType")),
+            .FactorValue = Extensions.AsString(reader("FactorValue")),
+            .FactorType = Extensions.AsString(reader("FactorType")),
             .Notes = Extensions.AsString(reader("Notes")),
             .Rate = Extensions.AsDouble(reader("Rate")),
             .Taxable = Extensions.AsBool(reader("Taxable")),
             .Unit = Extensions.AsChar(reader("Unit")),
+            .UnitAttendance = Extensions.AsChar(reader("UnitAttendance")),
             .UsePayGroups = Extensions.AsBool(reader("UsePayGroups"))
             }
 
@@ -116,38 +119,20 @@ Namespace DataLayer.AdoNet
                                     "@Frequency", earning.Frequency,
                                     "@IdNo", earning.IdNo,
                                     "@IncludeInEos", earning.IncludeInEos,
-                                    "@Multiplier", earning.Multiplier,
-                                    "@MultiplierType", earning.MultiplierType,
+                                    "@FactorValue", earning.FactorValue,
+                                    "@FactorType", earning.FactorType,
                                     "@Notes", earning.Notes,
                                     "@Rate", earning.Rate,
                                     "@Taxable", earning.Taxable,
                                     "@Unit", earning.Unit,
+                                    "@UnitAttendance", earning.UnitAttendance,
                                     "@UsePayGroups", earning.UsePayGroups
                                 }
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Earning) Implements IDaoAll(Of Earning).GetAll
             Dim sql As String =
-                    "SELECT " &
-                    "AccountIdNo," &
-                    "BasePaymentIdNo," &
-                    "CalculationType," &
-                    "DefaultQuantity," &
-                    "EarningCode," &
-                    "Summary," &
-                    "EarningName," &
-                    "EarningNameAra," &
-                    "EarningType," &
-                    "Frequency," &
-                    "IdNo," &
-                    "IncludeInEOS," &
-                    "Multiplier," &
-                    "MultiplierType," &
-                    "Notes," &
-                    "Rate," &
-                    "Taxable," &
-                    "Unit," &
-                    "UsePayGroups" &
+                    "SELECT " & FieldList &
                     " FROM [Earning]"
             Return _db.Read(sql, Make).ToList()
         End Function

@@ -45,7 +45,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Multiplier As String Implements IDeductionView.Multiplier
+        Public Property FactorValue As String Implements IDeductionView.FactorValue
             Get
                 Return txtMultiplier.Text
             End Get
@@ -54,12 +54,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MultiplierType As Char Implements IDeductionView.MultiplierType
+        Public Property FactorType As Char Implements IDeductionView.FactorType
             Get
-                Return cboMultiplierType.GetValue()
+                Return cboFactorType.GetValue()
             End Get
             Set
-                cboMultiplierType.SetValue(Value)
+                cboFactorType.SetValue(Value)
             End Set
         End Property
 
@@ -194,7 +194,7 @@ Namespace PresentationLayer.Views.Forms
             cboDeductionType.DataSource = PresenterObj.MakeEnumComboList(Of DeductionTypeSelection)
             cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
-            cboMultiplierType.DataSource = PresenterObj.MakeEnumComboList(Of MultiplierTypeSelection)
+            cboFactorType.DataSource = PresenterObj.MakeEnumComboList(Of FactorTypeSelection)
             cboBasePaymentIdNo.DataSource = PresenterObj.GetLookup("Earning")
             cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
             _accountsByCode = PresenterObj.GetDetailAccountList()
@@ -288,11 +288,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateCalculationTabDisplay()
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             Select Case curCalculationType
-                Case CalculationTypeSelection.FixedAmount
+                Case CalculationTypeSelection.FixedRate
                     cboBasePaymentIdNo.Visible = False
                     cboCalculationType.Visible = True
                     lblCalculationType.Visible = True
-                    cboMultiplierType.Visible = False
+                    cboFactorType.Visible = False
                     cboUnit.Visible = False
                     lblBasePayment.Visible = False
                     lblCalculationType.Visible = True
@@ -300,44 +300,44 @@ Namespace PresentationLayer.Views.Forms
                     lblMultiplier.Visible = False
                     lblPayRate.Visible = False
                     lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+                    lblRate.Text = Messaging.TranslateCaption("Default Amount / Unit")
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
                 Case CalculationTypeSelection.Factor
-                    If cboDeductionType.SelectedValue = EnumToCode(DeductionTypeSelection.AbsencesDeduction) Then
-                        cboCalculationType.Visible = False
-                        lblCalculationType.Visible = False
-                        cboMultiplierType.Visible = False
-                        cboUnit.Visible = False
-                        lblDefaultQty.Visible = False
-                        lblMultiplier.Visible = False
-                        lblPayRate.Visible = False
-                        lblRate.Visible = False
-                        lblRate.Text = ""
-                        txtDefaultQuantity.Visible = False
-                        txtMultiplier.Visible = False
-                        txtRate.Visible = False
-                    Else
-                        cboCalculationType.Visible = True
-                        cboMultiplierType.Visible = True
-                        cboUnit.Visible = False
-                        lblCalculationType.Visible = True
-                        lblDefaultQty.Visible = False
-                        lblMultiplier.Visible = True
-                        lblPayRate.Visible = False
-                        lblRate.Visible = False
-                        lblRate.Text = ""
-                        txtDefaultQuantity.Visible = False
-                        txtMultiplier.Visible = True
-                        txtRate.Visible = False
-                    End If
+                    'If cboDeductionType.SelectedValue = EnumToCode(CalculationTypeSelection.AbsencesDeduction) Then
+                    cboCalculationType.Visible = False
+                    lblCalculationType.Visible = False
+                    cboFactorType.Visible = False
+                    cboUnit.Visible = False
+                    lblDefaultQty.Visible = False
+                    lblMultiplier.Visible = False
+                    lblPayRate.Visible = False
+                    lblRate.Visible = False
+                    lblRate.Text = ""
+                    txtDefaultQuantity.Visible = False
+                    txtMultiplier.Visible = False
+                    txtRate.Visible = False
+                    'Else
+                    '    cboCalculationType.Visible = True
+                    '    cboFactorType.Visible = True
+                    '    cboUnit.Visible = False
+                    '    lblCalculationType.Visible = True
+                    '    lblDefaultQty.Visible = False
+                    '    lblMultiplier.Visible = True
+                    '    lblPayRate.Visible = False
+                    '    lblRate.Visible = False
+                    '    lblRate.Text = ""
+                    '    txtDefaultQuantity.Visible = False
+                    '    txtMultiplier.Visible = True
+                    '    txtRate.Visible = False
+                    'End If
                     cboBasePaymentIdNo.Visible = True
                     lblBasePayment.Visible = True
                 Case CalculationTypeSelection.Variable
                     cboBasePaymentIdNo.Visible = False
                     cboCalculationType.Visible = True
-                    cboMultiplierType.Visible = False
+                    cboFactorType.Visible = False
                     cboUnit.Visible = True
                     lblBasePayment.Visible = False
                     lblCalculationType.Visible = False
@@ -349,24 +349,24 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
-                Case CalculationTypeSelection.Global
-                    cboBasePaymentIdNo.Visible = False
-                    cboCalculationType.Visible = True
-                    cboMultiplierType.Visible = False
-                    cboUnit.Visible = True
-                    lblBasePayment.Visible = False
-                    lblCalculationType.Visible = False
-                    lblDefaultQty.Visible = True
-                    lblMultiplier.Visible = False
-                    lblPayRate.Visible = True
-                    lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
-                    txtDefaultQuantity.Visible = True
-                    txtMultiplier.Visible = False
-                    txtRate.Visible = True
+                'Case CalculationTypeSelection.Global
+                '    cboBasePaymentIdNo.Visible = False
+                '    cboCalculationType.Visible = True
+                '    cboFactorType.Visible = False
+                '    cboUnit.Visible = True
+                '    lblBasePayment.Visible = False
+                '    lblCalculationType.Visible = False
+                '    lblDefaultQty.Visible = True
+                '    lblMultiplier.Visible = False
+                '    lblPayRate.Visible = True
+                '    lblRate.Visible = True
+                '    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
+                '    txtDefaultQuantity.Visible = True
+                '    txtMultiplier.Visible = False
+                '    txtRate.Visible = True
                 'Case CalculationTypeSelection.DaysAbsent
                 '    cboBasePaymentIdNo.Visible = True
-                '    cboMultiplierType.Visible = False
+                '    cboFactorType.Visible = False
                 '    cboUnit.Visible = False
                 '    lblBasePayment.Visible = True
                 '    lblDefaultQty.Visible = False
@@ -380,7 +380,7 @@ Namespace PresentationLayer.Views.Forms
                 Case CalculationTypeSelection.Table
                     cboBasePaymentIdNo.Visible = True
                     cboCalculationType.Visible = True
-                    cboMultiplierType.Visible = False
+                    cboFactorType.Visible = False
                     cboUnit.Visible = False
                     lblBasePayment.Visible = True
                     lblCalculationType.Visible = False
@@ -484,15 +484,15 @@ Namespace PresentationLayer.Views.Forms
             UpdatePostingTabDisplay()
         End Sub
 
-        Private Sub cboDeductionType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDeductionType.SelectedIndexChanged
-            If cboDeductionType.SelectedValue = EnumToCode(DeductionTypeSelection.AbsencesDeduction) Then
-                cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
-                cboCalculationType.Visible = False
-            Else
-                cboCalculationType.Visible = True
-            End If
+        'Private Sub cboDeductionType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDeductionType.SelectedIndexChanged
+        '    If cboDeductionType.SelectedValue = EnumToCode(AttendanceUnitSelection.PaidLeaveAbsences) Then
+        '        cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor)
+        '        cboCalculationType.Visible = False
+        '    Else
+        '        cboCalculationType.Visible = True
+        '    End If
 
-        End Sub
+        'End Sub
 
     End Class
 
