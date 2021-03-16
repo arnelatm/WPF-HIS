@@ -54,7 +54,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property FactorType As Char Implements IDeductionView.FactorType
+        Public Property FactorType As String Implements IDeductionView.FactorType
             Get
                 Return cboFactorType.GetValue()
             End Get

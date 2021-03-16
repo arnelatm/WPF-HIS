@@ -31,7 +31,7 @@ Namespace BusinessLayer
         Public Property IdNo As Int16
         Public Property IncludeInEos As Boolean
         Public Property FactorValue As Decimal
-        Public Property FactorType As Char
+        Public Property FactorType as String
         Public Property Notes As String
         Public Property Rate As Decimal
         Public Property Taxable As Boolean

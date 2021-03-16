@@ -77,7 +77,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property FactorType As Char Implements IEarningView.FactorType
+        Public Property FactorType as String Implements IEarningView.FactorType
             Get
                 Return cboFactorType.GetValue()
             End Get
