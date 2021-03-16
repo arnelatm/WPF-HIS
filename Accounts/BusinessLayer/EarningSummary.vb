@@ -33,7 +33,7 @@ Namespace BusinessLayer
         '    End Set
         'End Property
 
-        Public Property FactorType As Char
+        Public Property FactorType as String
 
         Public Property Sequence As Int16
 

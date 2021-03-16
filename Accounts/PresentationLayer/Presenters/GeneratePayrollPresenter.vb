@@ -281,7 +281,7 @@ Namespace PresentationLayer.Presenters
             Return amount
         End Function
 
-        Private Shared Function ComputeFactoredAmount(amount As Decimal, FactorValue As Decimal, FactorType As Char)
+        Private Shared Function ComputeFactoredAmount(amount As Decimal, FactorValue As Decimal, FactorType as String)
             Dim factoredAmount As Decimal
             If FactorType = EnumToCode(FactorTypeSelection.PercentOfBasePaymentRate) Then
                 factoredAmount = amount * FactorValue * 0.01D

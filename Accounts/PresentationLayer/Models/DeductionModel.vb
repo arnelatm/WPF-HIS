@@ -16,7 +16,7 @@
         Public Property DeductionType As Char
         Public Property IdNo As Int16
         Public Property FactorValue As Decimal
-        Public Property FactorType As Char
+        Public Property FactorType as String
         Public Property Notes As String
         Public Property Rate As Decimal
         Public Property Unit As Char

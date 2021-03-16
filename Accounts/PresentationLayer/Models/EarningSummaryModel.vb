@@ -9,7 +9,7 @@
         Public Property EarningSummaryIdNo As Int16
         Public Property EarningIdNo As Int16
         Public Property IdNo As Int16
-        Public Property FactorType As Char
+        Public Property FactorType as String
         Public Property FactorValue As Decimal
         Public Property Sequence As Int16
     End Class

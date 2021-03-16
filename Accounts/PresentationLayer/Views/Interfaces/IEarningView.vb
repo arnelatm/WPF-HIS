@@ -17,7 +17,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int16
         Property IncludeInEos As Boolean
         Property FactorValue As Decimal
-        Property FactorType As Char
+        Property FactorType as String
         Property Notes As String
         Property Rate As Decimal
         Property Taxable As Boolean

@@ -40,14 +40,14 @@ Namespace PresentationLayer.Presenters
 
             DtEarnInsertTable.Columns.Add("EarningSummaryIdNo", GetType(Int16))
             DtEarnInsertTable.Columns.Add("EarningIdNo", GetType(Int16))
-            DtEarnInsertTable.Columns.Add("FactorType", GetType(Char))
+            DtEarnInsertTable.Columns.Add("FactorType", GetType(String))
             DtEarnInsertTable.Columns.Add("FactorValue", GetType(Decimal))
             DtEarnInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtEarnUpdateTable.Columns.Add("EarningSummaryIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("EarningIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtEarnUpdateTable.Columns.Add("FactorType", GetType(Char))
+            DtEarnUpdateTable.Columns.Add("FactorType", GetType(String))
             DtEarnUpdateTable.Columns.Add("FactorValue", GetType(Decimal))
             DtEarnUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
