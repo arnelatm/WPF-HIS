@@ -1388,6 +1388,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return dataList
     End Function
 
+    Public Function MakeEnumComboList2(Of TE)()
+        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim data As New ClassesLibrary.LookupData With {
+                    .IdNo = CInt(c),
+                    .Code = CInt(c),
+                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+                    }
+            dataList.Add(data)
+        Next
+        Return dataList
+    End Function
+
     Public Sub AddToParentError(errors As List(Of String))
         Dim mainBizObj = DirectCast(DirectCast(DirectCast(Model, AATM.PresentationLayer.Models.Model).DataService, AATM.ServicesLayer.Services.Service).DataBo, AATM.BusinessLayer.BusinessObject)
         mainBizObj.AddError(errors)

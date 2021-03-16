@@ -158,6 +158,12 @@ Public Enum FactorTypeSelection
     <EnumCode("D")> DivideBasePaymentRate
 End Enum
 
+'Public Enum FactorTypeSelection
+'    MultiplyBasePaymentRate
+'    PercentOfBasePaymentRate
+'    DivideBasePaymentRate
+'End Enum
+
 Public Enum PayeeTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("E")> Employee
