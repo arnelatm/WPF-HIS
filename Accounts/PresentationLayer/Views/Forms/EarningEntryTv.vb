@@ -417,9 +417,9 @@ Namespace PresentationLayer.Views.Forms
             tlpCalculation.Visible = False
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
-            Dim cellPosOrigUnitAtt As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
-            Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 3)
-            Dim cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 4)
+            Dim cellPosOrigUnitAtt As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(8, 3)
+            Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(2, 3)
+            Dim cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(8, 0)
             lblUnit.Visible = False
             Select Case curCalculationType
                 Case CalculationTypeSelection.AttendanceBased
@@ -436,6 +436,7 @@ Namespace PresentationLayer.Views.Forms
                     lblBasePayment.Visible = False
                     lblMultiplier.Visible = False
                     txtMultiplier.Visible = False
+                    lblSlash2.Visible = False
                     tlpCalculation.SetCellPosition(cboUnit, cellPosUnitSave)
                     tlpCalculation.SetCellPosition(cboUnitAttendance, cellPosOrigUnit)
                 Case CalculationTypeSelection.FixedRate
@@ -464,7 +465,7 @@ Namespace PresentationLayer.Views.Forms
                     cboEarningType.Visible = True
                     cboBasePaymentIdNo.Visible = True
                     cboFactorType.Visible = True
-                    cboUnit.Visible = False
+                    cboUnit.Visible = True
                     lblBasePayment.Visible = True
                     lblDefaultQuantity.Visible = False
                     lblMultiplier.Visible = True
@@ -472,8 +473,8 @@ Namespace PresentationLayer.Views.Forms
                     lblRate.Visible = False
                     lblUnit.Visible = False
                     lblSlash.Visible = False
-                    'tlpCalculation.SetCellPosition(cboUnit, cellPosUnit)
-                    'tlpCalculation.SetColumnSpan(cboUnit, 3)
+                    lblDefaultQuantity.Visible = True
+                    txtDefaultQuantity.Visible = True
                     cboUnit.Visible = False
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = True
