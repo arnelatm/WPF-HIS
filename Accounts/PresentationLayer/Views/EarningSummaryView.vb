@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views
         End Property
 
         Public Property IdNo As Int16 Implements IEarningSummaryView.IdNo
-        Public Property FactorType As Char Implements IEarningSummaryView.FactorType
+        Public Property FactorType As String Implements IEarningSummaryView.FactorType
         Public Property FactorValue As Decimal Implements IEarningSummaryView.FactorValue
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property Sequence As Int16 Implements IEarningSummaryView.Sequence

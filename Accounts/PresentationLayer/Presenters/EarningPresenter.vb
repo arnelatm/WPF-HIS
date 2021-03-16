@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -39,14 +40,14 @@ Namespace PresentationLayer.Presenters
 
             DtEarnInsertTable.Columns.Add("EarningSummaryIdNo", GetType(Int16))
             DtEarnInsertTable.Columns.Add("EarningIdNo", GetType(Int16))
-            DtEarnInsertTable.Columns.Add("FactorType", GetType(String))
+            DtEarnInsertTable.Columns.Add("FactorType", GetType(Char))
             DtEarnInsertTable.Columns.Add("FactorValue", GetType(Decimal))
             DtEarnInsertTable.Columns.Add("Sequence", GetType(Int16))
 
             DtEarnUpdateTable.Columns.Add("EarningSummaryIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("EarningIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtEarnUpdateTable.Columns.Add("FactorType", GetType(String))
+            DtEarnUpdateTable.Columns.Add("FactorType", GetType(Char))
             DtEarnUpdateTable.Columns.Add("FactorValue", GetType(Decimal))
             DtEarnUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
@@ -77,11 +78,12 @@ Namespace PresentationLayer.Presenters
         Private Sub FillEsData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("EarningSummaryIdNo") = View.IdNo
             workRow("EarningIdNo") = itemDataView.EarningIdNo
+            workRow("FactorType") = itemDataView.FactorType
             workRow("FactorValue") = itemDataView.FactorValue
         End Sub
 
         Public Function EarnSummaryFilter(ByVal obj As Object) As Boolean
-            If (obj.EarningIdNo Is Nothing Or obj.EarningIdNo = 0 Or obj.FactorValue = 0) Then 'AndAlso (obj.PayGroupIdNo Is Nothing Or obj.PayGroupIdNo = 0) Then
+            If (obj.EarningIdNo Is Nothing Or obj.EarningIdNo = 0 Or obj.FactorValue = 0 Or obj.FactorType Is Nothing) Then 'AndAlso (obj.PayGroupIdNo Is Nothing Or obj.PayGroupIdNo = 0) Then
                 Return False
             End If
             Return True
@@ -208,6 +210,15 @@ Namespace PresentationLayer.Presenters
 
         '    Return retValue
         'End Function
+
+        Public Function GetDeductions() As List(Of Deduction)
+            Dim deductionsDao As New DeductionDao
+            Dim model As New List(Of DeductionModel)
+            Dim data As List(Of Deduction) = deductionsDao.GetRecords()
+            GlobalVariables.Mapper.Map(data, model)
+            Return data
+        End Function
+
     End Class
 
 End Namespace

@@ -589,7 +589,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvDeductionIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvDedUnit.DataSource = _unit
-                dgvDedUnit.DisplayOnly = True
+                'dgvDedUnit.DisplayOnly = True
                 dgvDedUnit.ValueMember = "Code"
                 dgvDedUnit.DisplayMember = "Name"
                 dgvDedUnit.DisplayStyleForCurrentCellOnly = True

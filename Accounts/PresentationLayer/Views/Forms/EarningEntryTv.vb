@@ -17,12 +17,12 @@ Namespace PresentationLayer.Views.Forms
         Private _payGroupsByCode
         Private _earningsByCode
         Private _factorTypeByCode
+        Private _calculationTypeByCode
         Private _payrollEarnAccounts As List(Of PayrollEarnAccountView)
         Private _earningsSummary As List(Of EarningSummaryView)
         Private _useRevCostCenters As Nullable(Of Boolean)
         Private _useDepartments As Nullable(Of Boolean)
         Private _usePayGroups As Nullable(Of Boolean)
-        Private _unit As Char
 
         'Private _unitPosition As TableLayoutPanelCellPosition
         Private _eSumFieldsDict As Dictionary(Of String, Object)
@@ -277,6 +277,7 @@ Namespace PresentationLayer.Views.Forms
             _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
             _earningsByCode = PresenterObj.GetLookup("Earning")
             _factorTypeByCode = PresenterObj.MakeEnumComboList(Of FactorTypeSelection)
+            _calculationTypeByCode = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
         End Sub
 
         Private Sub BindPayrollEarnAccounts()
@@ -303,6 +304,9 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.ValueMember = "IdNo"
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+                'dgvTest.DataSource = _factorTypeByCode
+                'dgvTest.DisplayMember = "Name"
+                'dgvTest.ValueMember = "Code"
             End With
             ResumeLayout()
         End Sub
@@ -350,20 +354,21 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BindEarningsSummary()
             SuspendLayout()
-            bsEarningSummary.DataSource = Nothing
+            bsDeductions.DataSource = Nothing
             DataGridViewSummaryDetail.Refresh()
-            bsEarningSummary.DataSource = EarningsSummary
-            bsEarningSummary.AllowNew = True
+            bsDeductions.DataSource = EarningsSummary
+            bsDeductions.AllowNew = True
             With DataGridViewSummaryDetail
                 .Refresh()
                 .AutoGenerateColumns = False
-                .DataSource = bsEarningSummary
+                .DataSource = bsDeductions
                 .Refresh()
             End With
             With DataGridViewSummaryDetail.Columns
                 dgvEarningIdNo.DataSource = _earningsByCode
-                dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.DisplayMember = "Name"
+                dgvEarningIdNo.ValueMember = "IdNo"
+                dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvFactorType.DataSource = _factorTypeByCode
                 dgvFactorType.ValueMember = "Code"
@@ -372,6 +377,30 @@ Namespace PresentationLayer.Views.Forms
             End With
             ResumeLayout()
         End Sub
+
+        'Private Sub BindEarningsSummary()
+        '    SuspendLayout()
+        '    bsEarningSummary.DataSource = Nothing
+        '    DataGridViewSummaryDetail.Refresh()
+        '    bsEarningSummary.DataSource = EarningsSummary
+        '    bsEarningSummary.AllowNew = True
+        '    With DataGridViewSummaryDetail
+        '        .Refresh()
+        '        .AutoGenerateColumns = False
+        '        .DataSource = bsEarningSummary
+        '        .Refresh()
+        '    End With
+        '    With DataGridViewSummaryDetail.Columns
+        '        dgvEarningIdNo.DataSource = _earningsByCode
+        '        dgvEarningIdNo.DisplayMember = "Name"
+        '        dgvEarningIdNo.ValueMember = "IdNo"
+        '        dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+        '        dgvFactorType.DataSource = _factorTypeByCode
+        '        dgvFactorType.ValueMember = "Code"
+        '        dgvFactorType.DisplayMember = "Name"
+        '        dgvFactorType.DisplayStyleForCurrentCellOnly = True
+        '    End With
+        'End Sub
 
         Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.Validated, cboCalculationType.SelectionChangeCommitted
             Me.DoubleBuffered = True
@@ -640,22 +669,22 @@ Namespace PresentationLayer.Views.Forms
             UpdateCalculationTabDisplay()
         End Sub
 
-        'Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSummaryDetail.CellEndEdit
-        '    With DataGridViewSummaryDetail
-        '        Dim nIndex = .CurrentRow.Index
-        '        Select Case .CurrentCell.OwningColumn.Name
-        '            Case "dgvEarningIdNo"
-        '                Dim earningId = DirectCast(DataGridViewSummaryDetail.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-        '                If DataGridViewSummaryDetail.CurrentRow.Index = DataGridViewSummaryDetail.NewRowIndex Then
-        '                    bsEarningSummary.AddNew()
-        '                    EarningsSummary(nIndex).EarningIdNo = earningId
-        '                    ' adding a new row to the bindingSource adds a new empty row at the end with null values
-        '                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-        '                    bsEarningSummary.RemoveAt(bsEarningSummary.Count - 1)
-        '                End If
-        '        End Select
-        '    End With
-        'End Sub
+        Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSummaryDetail.CellEndEdit
+            With DataGridViewSummaryDetail
+                Dim nIndex = .CurrentRow.Index
+                Select Case .CurrentCell.OwningColumn.Name
+                    Case "dgvFactorType"
+                        Dim earningId = DirectCast(DataGridViewSummaryDetail.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        'If DataGridViewSummaryDetail.CurrentRow.Index = DataGridViewSummaryDetail.NewRowIndex Then
+                        '    bsEarningSummary.AddNew()
+                        '    EarningsSummary(nIndex).EarningIdNo = earningId
+                        '    ' adding a new row to the bindingSource adds a new empty row at the end with null values
+                        '    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                        '    bsEarningSummary.RemoveAt(bsEarningSummary.Count - 1)
+                        'End If
+                End Select
+            End With
+        End Sub
 
         Public Overrides Function ValidateView()
             Dim valid As Boolean
