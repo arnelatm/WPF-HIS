@@ -81,7 +81,7 @@ Namespace PresentationLayer.Presenters
                                                    })
 
             _absenceDeductions = New List(Of Deduction)
-            Dim absencesDeductions = _deductionsDao.GetRecords("DeductionType = '" & EnumToCode(DeductionTypeSelection.Computed) & "' and UnitAttendance = '" & AttendanceUnitSelection.OvertimeSpecial)
+            Dim absencesDeductions = _deductionsDao.GetRecords("DeductionType = '" & EnumToCode(DeductionTypeSelection.Computed) & "' and QuantityType = '" & AttendanceUnitSelection.OvertimeSpecial)
             GlobalVariables.Mapper.Map(absencesDeductions, _absenceDeductions)
 
             _deductionComputationMethod = GetAppSetting($"PYCM", "Payroll", "Deduction Computation Method")
@@ -91,9 +91,9 @@ Namespace PresentationLayer.Presenters
         Public Sub GeneratePayroll(ByVal payrollIdNo As Int16, ByVal startDate As Date, ByVal endDate As Date, ByRef progressBar As ProgressBar)
             Dim attendance As List(Of AttendanceItem)
             Dim attendanceItemDao = New AttendanceItemDao
-            Dim overtime As List(Of OvertimeItem)
-            Dim overtimeItemDao = New OvertimeItemDao
-            overtime = overtimeItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
+            Dim overtime As List(Of OtWorkHour)
+            Dim OtWorkHourDao = New OtWorkHourDao
+            overtime = OtWorkHourDao.GetRecordsWithGroupIdNo(payrollIdNo)
             attendance = attendanceItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
             If attendance.Count() = 0 And overtime.Count() = 0 Then
                 Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
@@ -396,7 +396,7 @@ Namespace PresentationLayer.Presenters
         '    GenerateRegularEarnings(employeeAttendance, payrollIdNo)
         'End Sub
 
-        Private Sub GenerateEmployeePayroll(ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef overtime As List(Of OvertimeItem), ByRef progressBar As ProgressBar)
+        Private Sub GenerateEmployeePayroll(ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef overtime As List(Of OtWorkHour), ByRef progressBar As ProgressBar)
             _dtEarningInsertTable.Clear()
             _dtDeductionInsertTable.Clear()
             progressBar.Value = 0
@@ -420,7 +420,7 @@ Namespace PresentationLayer.Presenters
             progressBar.Visible = False
         End Sub
 
-        Private Sub ReGenerateEmployeePayroll(ByRef payEarnings As List(Of PayrollEarning), ByRef payDeductions As List(Of PayrollDeduction), ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef overtime As List(Of OvertimeItem), ByRef progressBar As ProgressBar)
+        Private Sub ReGenerateEmployeePayroll(ByRef payEarnings As List(Of PayrollEarning), ByRef payDeductions As List(Of PayrollDeduction), ByVal payrollIdNo As Short, ByRef attendance As List(Of AttendanceItem), ByRef overtime As List(Of OtWorkHour), ByRef progressBar As ProgressBar)
             _dtEarningInsertTable.Clear()
             _dtEarningUpdateTable.Clear()
             progressBar.Value = 0
@@ -495,7 +495,7 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        'Private Sub GenerateOvertime(payrollIdNo As Short, overtime As List(Of OvertimeItem), ByRef progressBar As ProgressBar)
+        'Private Sub GenerateOvertime(payrollIdNo As Short, overtime As List(Of OtWorkHour), ByRef progressBar As ProgressBar)
         '    Dim employeeDao = New EmployeeDao
         '    Dim otAmount As Decimal = 0
         '    Dim otRegularUnit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
@@ -533,7 +533,7 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Sub
 
-        Private Sub GenerateOvertime(regenerate As Boolean, payrollIdNo As Short, overtime As List(Of OvertimeItem), ByRef progressBar As ProgressBar)
+        Private Sub GenerateOvertime(regenerate As Boolean, payrollIdNo As Short, overtime As List(Of OtWorkHour), ByRef progressBar As ProgressBar)
             Dim employeeDao = New EmployeeDao
             Dim otAmount As Decimal = 0
             Dim otRegularUnit = EnumToCode(AttendanceUnitSelection.OvertimeRegular)

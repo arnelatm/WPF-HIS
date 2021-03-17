@@ -86,7 +86,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUnitAttendance = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboQuantityType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblFactorType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPayrollDeductAccounts, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -327,7 +327,7 @@ Namespace PresentationLayer.Views.Forms
             'TableLayoutPanel2
             '
             resources.ApplyResources(Me.TableLayoutPanel2, "TableLayoutPanel2")
-            Me.TableLayoutPanel2.Controls.Add(Me.cboUnitAttendance, 3, 2)
+            Me.TableLayoutPanel2.Controls.Add(Me.cboQuantityType, 3, 2)
             Me.TableLayoutPanel2.Controls.Add(Me.CLabel2, 0, 0)
             Me.TableLayoutPanel2.Controls.Add(Me.lblUnit, 0, 2)
             Me.TableLayoutPanel2.Controls.Add(Me.lblMultiplier, 0, 6)
@@ -811,37 +811,37 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUnit.EditingMode = False
             Me.lblUnit.Name = "lblUnit"
             '
-            'cboUnitAttendance
+            'cboQuantityType
             '
-            Me.cboUnitAttendance.BackColor = System.Drawing.Color.White
-            Me.cboUnitAttendance.ChangingSearchValueOnly = False
-            Me.cboUnitAttendance.CurrentSearchTerm = ""
-            Me.cboUnitAttendance.DefaultValue = Nothing
-            Me.cboUnitAttendance.DisplayMember = "Name"
-            resources.ApplyResources(Me.cboUnitAttendance, "cboUnitAttendance")
-            Me.cboUnitAttendance.EditingMode = True
-            Me.cboUnitAttendance.FilterRule = Nothing
-            Me.cboUnitAttendance.ForeColor = System.Drawing.Color.Black
-            Me.cboUnitAttendance.FormattingEnabled = True
-            Me.cboUnitAttendance.HideWhenNotEditingOrAdding = False
-            Me.cboUnitAttendance.LinkedLabel = Me.lblUnit
-            Me.cboUnitAttendance.Name = "cboUnitAttendance"
-            Me.cboUnitAttendance.OldValue = 0
-            Me.cboUnitAttendance.OriginalDataSource = Nothing
-            Me.cboUnitAttendance.OriginalList = Nothing
-            Me.cboUnitAttendance.OverrideDropDownStyleList = False
-            Me.cboUnitAttendance.PreviousSearchTerm = Nothing
-            Me.cboUnitAttendance.PreviousSelectedIndex = -1
-            Me.cboUnitAttendance.PropertySelector = Nothing
-            Me.cboUnitAttendance.ReadOnlyCombo = False
-            Me.cboUnitAttendance.SearchAnywhere = False
-            Me.cboUnitAttendance.SuggestBoxHeight = 200
-            Me.cboUnitAttendance.SuggestListOrderRule = Nothing
-            Me.cboUnitAttendance.TextToSearch = Nothing
-            Me.cboUnitAttendance.ValueIsMandatory = False
-            Me.cboUnitAttendance.ValueIsNullable = False
-            Me.cboUnitAttendance.ValueIsNumeric = False
-            Me.cboUnitAttendance.ValueMember = "Code"
+            Me.cboQuantityType.BackColor = System.Drawing.Color.White
+            Me.cboQuantityType.ChangingSearchValueOnly = False
+            Me.cboQuantityType.CurrentSearchTerm = ""
+            Me.cboQuantityType.DefaultValue = Nothing
+            Me.cboQuantityType.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboQuantityType, "cboQuantityType")
+            Me.cboQuantityType.EditingMode = True
+            Me.cboQuantityType.FilterRule = Nothing
+            Me.cboQuantityType.ForeColor = System.Drawing.Color.Black
+            Me.cboQuantityType.FormattingEnabled = True
+            Me.cboQuantityType.HideWhenNotEditingOrAdding = False
+            Me.cboQuantityType.LinkedLabel = Me.lblUnit
+            Me.cboQuantityType.Name = "cboQuantityType"
+            Me.cboQuantityType.OldValue = 0
+            Me.cboQuantityType.OriginalDataSource = Nothing
+            Me.cboQuantityType.OriginalList = Nothing
+            Me.cboQuantityType.OverrideDropDownStyleList = False
+            Me.cboQuantityType.PreviousSearchTerm = Nothing
+            Me.cboQuantityType.PreviousSelectedIndex = -1
+            Me.cboQuantityType.PropertySelector = Nothing
+            Me.cboQuantityType.ReadOnlyCombo = False
+            Me.cboQuantityType.SearchAnywhere = False
+            Me.cboQuantityType.SuggestBoxHeight = 200
+            Me.cboQuantityType.SuggestListOrderRule = Nothing
+            Me.cboQuantityType.TextToSearch = Nothing
+            Me.cboQuantityType.ValueIsMandatory = False
+            Me.cboQuantityType.ValueIsNullable = False
+            Me.cboQuantityType.ValueIsNumeric = False
+            Me.cboQuantityType.ValueMember = "Code"
             '
             'lblFactorType
             '
@@ -933,7 +933,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents lblUnit As CLabel
-        Friend WithEvents cboUnitAttendance As CaComboBox
+        Friend WithEvents cboQuantityType As CaComboBox
         Friend WithEvents lblFactorType As CLabel
     End Class
 End Namespace

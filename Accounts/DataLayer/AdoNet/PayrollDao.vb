@@ -25,8 +25,8 @@ Namespace DataLayer.AdoNet
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Dim attendanceDao = New AttendanceItemDao
             Dim attendance As List(Of AttendanceItem) = attendanceDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
-            Dim overtimeDao = New OvertimeItemDao
-            Dim overtime As List(Of OvertimeItem) = overtimeDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
+            Dim overtimeDao = New OtWorkHourDao
+            Dim overtime As List(Of OtWorkHour) = overtimeDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
             data.PayrollAttendance = attendance
             data.PayrollOvertime = overtime
             Return data

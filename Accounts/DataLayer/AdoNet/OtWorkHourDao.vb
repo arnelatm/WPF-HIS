@@ -1,20 +1,19 @@
 ﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
-    ' Data access object for OvertimeItem
+    ' Data access object for OtWorkHour
     ' ** DAO Pattern
 
-    Public Class OvertimeItemDao
+    Public Class OtWorkHourDao
         Inherits AccountsDao
-        Implements IDaoChild(Of OvertimeItem)
+        Implements IDaoChild(Of OtWorkHour)
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordsWithGroupIdNo(PayrollIdNo, Optional sortExpression = Nothing) As List(Of OvertimeItem) Implements IDaoChild(Of OvertimeItem).GetRecordsWithGroupIdNo
+        Public Function GetRecordsWithGroupIdNo(PayrollIdNo, Optional sortExpression = Nothing) As List(Of OtWorkHour) Implements IDaoChild(Of OtWorkHour).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "EmployeeName"
             End If
@@ -34,24 +33,24 @@ Namespace DataLayer.AdoNet
                     "OvertimeSpecial," &
                     "PayrollIdNo," &
                     "ROW_NUMBER() over(Order by " & sortExpression & ") As 'Sequence'" &
-                    " FROM [OvertimeItem_View]" &
+                    " FROM [OtWorkHour_View]" &
                     " WHERE PayrollIdNo = @PayrollIdNo "
             Dim params() As Object = {"@PayrollIdNo", PayrollIdNo}
             Dim dta = Db.Read(sql, Make, params).ToList()
             Return dta
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of OvertimeItem).DelUpdateTvp
-            Return Db.DelUpdateTvp("UpdateOvertimeItemTVP", tvpTable, "@MParam", groupIdNo)
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of OtWorkHour).DelUpdateTvp
+            Return Db.DelUpdateTvp("UpdateOtWorkHourTVP", tvpTable, "@MParam", groupIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of OvertimeItem).InsertTvp
-            Return Db.InsertTvp("InsertOvertimeItemTVP", tvpTable)
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of OtWorkHour).InsertTvp
+            Return Db.InsertTvp("InsertOtWorkHourTVP", tvpTable)
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, OvertimeItem) =
+        Private Shared ReadOnly Make As Func(Of IDataReader, OtWorkHour) =
                                     Function(reader) _
-            New OvertimeItem() With {
+            New OtWorkHour() With {
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),

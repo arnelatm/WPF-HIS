@@ -77,7 +77,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property FactorType as String Implements IEarningView.FactorType
+        Public Property FactorType As String Implements IEarningView.FactorType
             Get
                 Return cboFactorType.GetValue()
             End Get
@@ -110,6 +110,9 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboCalculationType.SetValue(Value)
+                If Value = EnumToCode(CalculationTypeSelection.Variable) Then
+                    QuantityType = EnumToCode(QuantityTypeSelection.Variable)
+                End If
             End Set
         End Property
 
@@ -182,12 +185,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property UnitAttendance As Char Implements IEarningView.UnitAttendance
+        Public Property QuantityType As Char Implements IEarningView.QuantityType
             Get
-                Return cboUnitAttendance.GetValue()
+                Return cboQuantityType.GetValue()
             End Get
             Set
-                cboUnitAttendance.SetValue(Value)
+                cboQuantityType.SetValue(Value)
             End Set
         End Property
 
@@ -272,7 +275,7 @@ Namespace PresentationLayer.Views.Forms
             cboFactorType.DataSource = PresenterObj.MakeEnumComboList(Of FactorTypeSelection)
             cboBasePaymentIdNo.DataSource = PresenterObj.GetLookup("Earning")
             cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
-            cboUnitAttendance.DataSource = PresenterObj.MakeEnumComboList(Of AttendanceUnitSelection)
+            cboQuantityType.DataSource = PresenterObj.MakeEnumComboList(Of QuantityTypeSelection)
             _accountsByCode = PresenterObj.GetDetailAccountList()
             _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
             _earningsByCode = PresenterObj.GetLookup("Earning")
@@ -331,7 +334,7 @@ Namespace PresentationLayer.Views.Forms
                 {"Summary", chkSummary},
                 {"Taxable", chkTaxable},
                 {"Unit", cboUnit},
-                {"UnitAttendance", cboUnitAttendance},
+                {"QuantityType", cboQuantityType},
                 {"UsePayGroups", chkUsePayGroups},
                 {"EarningSummary", DataGridViewSummaryDetail}
                 }
@@ -417,33 +420,35 @@ Namespace PresentationLayer.Views.Forms
             tlpCalculation.Visible = False
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
-            Dim cellPosOrigUnitAtt As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(8, 3)
-            Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(2, 3)
-            Dim cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(8, 0)
+            Dim cellPosOrigUnitAtt As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 8)
+            Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
+            Dim cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
             lblUnit.Visible = False
             Select Case curCalculationType
-                Case CalculationTypeSelection.AttendanceBased
-                    cboEarningType.Visible = True
-                    cboUnitAttendance.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Default Rate / Unit")
-                    lblSlash.Text = Messaging.TranslateCaption("/")
+                Case CalculationTypeSelection.FixedAmount
                     lblSlash.Visible = True
-                    lblDefaultQuantity.Visible = True
-                    txtDefaultQuantity.Visible = True
+                    lblRate.Text = Messaging.TranslateCaption("Default Amount / Unit")
+                    lblSlash.Text = Messaging.TranslateCaption("/")
+                    cboEarningType.Visible = True
+                    cboUnit.Visible = True
+                    lblRate.Visible = True
+                    txtRate.Visible = True
+                    lblDefaultQuantity.Visible = False
+                    txtDefaultQuantity.Visible = False
                     cboBasePaymentIdNo.Visible = False
+                    cboQuantityType.Visible = False
+                    lblQuantityType.Visible = False
                     cboFactorType.Visible = False
-                    cboUnit.Visible = False
                     lblBasePayment.Visible = False
-                    lblMultiplier.Visible = False
-                    txtMultiplier.Visible = False
+                    lblFactorValue.Visible = False
                     lblSlash2.Visible = False
-                    tlpCalculation.SetCellPosition(cboUnit, cellPosUnitSave)
-                    tlpCalculation.SetCellPosition(cboUnitAttendance, cellPosOrigUnit)
+                    txtMultiplier.Visible = False
+                    tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    'tlpCalculation.SetCellPosition(cboQuantityType, cellPosOrigUnitAtt)
                 Case CalculationTypeSelection.FixedRate
                     'If IsOvertimeEarning(cboEarningType.SelectedValue) Then
                     '    cboUnit.
                     'End If
-                    lblSlash.Visible = True
                     lblSlash.Visible = True
                     lblRate.Text = Messaging.TranslateCaption("Default Rate / Unit")
                     lblSlash.Text = Messaging.TranslateCaption("/")
@@ -454,49 +459,54 @@ Namespace PresentationLayer.Views.Forms
                     txtDefaultQuantity.Visible = True
                     txtRate.Visible = True
                     cboBasePaymentIdNo.Visible = False
-                    cboUnitAttendance.Visible = False
+                    cboQuantityType.Visible = True
+                    lblQuantityType.Visible = True
                     cboFactorType.Visible = False
                     lblBasePayment.Visible = False
-                    lblMultiplier.Visible = False
+                    lblFactorValue.Visible = False
+                    lblSlash2.Visible = False
                     txtMultiplier.Visible = False
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetCellPosition(cboUnitAttendance, cellPosOrigUnitAtt)
+                    'tlpCalculation.SetCellPosition(cboQuantityType, cellPosOrigUnitAtt)
                 Case CalculationTypeSelection.Factor
                     cboEarningType.Visible = True
                     cboBasePaymentIdNo.Visible = True
                     cboFactorType.Visible = True
                     cboUnit.Visible = True
                     lblBasePayment.Visible = True
+                    lblFactorValue.Visible = True
+                    cboQuantityType.Visible = True
+                    lblQuantityType.Visible = True
                     lblDefaultQuantity.Visible = False
-                    lblMultiplier.Visible = True
                     lblSlash.Visible = False
                     lblRate.Visible = False
                     lblUnit.Visible = False
                     lblSlash.Visible = False
-                    lblDefaultQuantity.Visible = True
-                    txtDefaultQuantity.Visible = True
                     cboUnit.Visible = False
                     txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = True
                     txtRate.Visible = False
-                    cboUnitAttendance.Visible = False
+                    'cboQuantityType.Visible = False
                 Case CalculationTypeSelection.Variable
                     cboEarningType.Visible = True
                     cboBasePaymentIdNo.Visible = False
                     cboFactorType.Visible = False
                     cboUnit.Visible = True
-                    cboUnitAttendance.Visible = False
-                    lblBasePayment.Visible = False
-                    lblDefaultQuantity.Visible = True
-                    lblMultiplier.Visible = False
                     lblSlash.Visible = True
                     lblRate.Visible = True
-                    lblRate.Text = Messaging.TranslateCaption("Default Rate or Amount / Unit")
+                    lblQuantityType.Visible = False
+                    cboFactorType.Visible = False
+                    cboQuantityType.Visible = False
+                    lblBasePayment.Visible = False
+                    lblDefaultQuantity.Visible = True
+                    lblFactorValue.Visible = False
+                    lblSlash2.Visible = False
+                    lblRate.Text = Messaging.TranslateCaption("Default Rate/Unit")
                     txtDefaultQuantity.Visible = True
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    tlpCalculation.SetCellPosition(cboUnitAttendance, cellPosOrigUnitAtt)
+                    'tlpCalculation.SetCellPosition(cboQuantityType, cellPosOrigUnitAtt)
                     'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
                     'tlpCalculation.SetColumnSpan(cboUnit, 1)
                     'Case CalculationTypeSelection.Global

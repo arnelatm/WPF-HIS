@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IOvertimeItemView
+    Public Interface IOtWorkHourView
         Inherits IView
 
         Property IdNo As Int32

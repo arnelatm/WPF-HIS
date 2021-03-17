@@ -173,7 +173,7 @@
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\Customer1.vb" />
-    <Compile Include="BusinessLayer\OvertimeItem.vb" />
+    <Compile Include="BusinessLayer\OtWorkHour.vb" />
     <Compile Include="BusinessLayer\Basic.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
     <Compile Include="BusinessLayer\EarningSummary.vb" />
@@ -228,7 +228,7 @@
     <Compile Include="BusinessLayer\PensionProvider.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
-    <Compile Include="DataLayer\AdoNet\OvertimeItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\OtWorkHourDao.vb" />
     <Compile Include="DataLayer\AdoNet\AttendanceItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\BasicDao.vb" />
     <Compile Include="DataLayer\AdoNet\DjOiItemDao.vb" />
@@ -314,7 +314,7 @@
     </Compile>
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\EarningSummaryModel.vb" />
-    <Compile Include="PresentationLayer\Models\OvertimeItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\OtWorkHourModel.vb" />
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductionModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollEarningModel.vb" />
@@ -365,7 +365,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IEarningSummaryView.vb" />
-    <Compile Include="PresentationLayer\Views\OvertimeItemView.vb" />
+    <Compile Include="PresentationLayer\Views\OtWorkHourView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\Test.Designer.vb">
       <DependentUpon>Test.vb</DependentUpon>
     </Compile>
@@ -384,7 +384,7 @@
     <Compile Include="PresentationLayer\Views\Forms\PayrollDetailEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Interfaces\IOvertimeItemView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IOtWorkHourView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollDeductionView.vb" />
@@ -1332,9 +1332,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\app.manifest" />

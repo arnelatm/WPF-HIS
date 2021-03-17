@@ -714,7 +714,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'bsPayrollOvertime
             '
-            Me.bsPayrollOvertime.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.OvertimeItemModel)
+            Me.bsPayrollOvertime.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.OtWorkHourModel)
             '
             'SequenceDataGridViewTextBoxColumn
             '
