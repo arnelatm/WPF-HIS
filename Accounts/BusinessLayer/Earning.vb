@@ -23,20 +23,20 @@ Namespace BusinessLayer
         Public Property CalculationType As Char
         Public Property DefaultQuantity As Decimal
         Public Property EarningCode As String
-        Public Property Summary As Boolean
         Public Property EarningName As String
         Public Property EarningNameAra As String
         Public Property EarningType As Char
+        Public Property FactorType As String
+        Public Property FactorValue As Decimal
         Public Property Frequency As Char
         Public Property IdNo As Int16
         Public Property IncludeInEos As Boolean
-        Public Property FactorValue As Decimal
-        Public Property FactorType as String
         Public Property Notes As String
+        Public Property QuantityType As Char
         Public Property Rate As Decimal
+        Public Property Summary As Boolean
         Public Property Taxable As Boolean
         Public Property Unit As Char
-        Public Property UnitAttendance As Char
         Public Property UsePayGroups As Boolean
         Public Property PayrollEarnAccounts As List(Of PayrollEarnAccount)
         Public Property EarningsSummary As List(Of EarningSummary)

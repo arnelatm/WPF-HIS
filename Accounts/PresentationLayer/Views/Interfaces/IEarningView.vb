@@ -22,7 +22,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Rate As Decimal
         Property Taxable As Boolean
         Property Unit As Char
-        Property UnitAttendance As Char
+        Property QuantityType As Char
         Property UsePayGroups As Boolean
         Property PayrollEarnAccounts As List(Of PayrollEarnAccountView)
         Property EarningsSummary As List(Of EarningSummaryView)

@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
         Protected DtEarnInsertTable As New DataTable
         Protected DtEarnUpdateTable As New DataTable
         Private _attendanceItemModel
-        Private _overtimeItemModel
+        Private _otWorkHourModel
         Private _reinitialize As Boolean = False
         Private _payrollEarning
 
@@ -42,7 +42,7 @@ Namespace PresentationLayer.Presenters
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
             _attendanceItemModel = New ModelAccounts("AttendanceItem", Nothing, Nothing)
-            _overtimeItemModel = New ModelAccounts("OvertimeItem", Nothing, Nothing)
+            _otWorkHourModel = New ModelAccounts("OtWorkHour", Nothing, Nothing)
 
             CreateDataTable(DtInsertTable, {{"DaysAbsentWithoutPay", GetType(Decimal)},
                                             {"DaysAbsentWithPay", GetType(Decimal)},
@@ -152,7 +152,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 ViewToDataTables(View.PayrollAttendance, DtInsertTable, DtUpdateTable, AddressOf AttendanceItemFillData, AddressOf AttendanceItemFilter, "IdNo", "")
-                ViewToDataTables(View.PayrollOvertime, DtOtInsertTable, DtOtUpdateTable, AddressOf OvertimeItemFillData, AddressOf OvertimeItemFilter, "IdNo", "")
+                ViewToDataTables(View.PayrollOvertime, DtOtInsertTable, DtOtUpdateTable, AddressOf OtWorkHourFillData, AddressOf OtWorkHourFilter, "IdNo", "")
             End If
             'For Each item In View.PayrollAttendance
             '    If item.Equals(DBNull.Value) Then
@@ -278,7 +278,7 @@ Namespace PresentationLayer.Presenters
                 dateHired = matchedEmployees(i * 3 - 2)
                 dateReleased = IIf(IsDBNull(matchedEmployees(i * 3 - 1)), Nothing, matchedEmployees(i * 3 - 1))
                 If _reinitialize Then
-                    Dim empOvertime As OvertimeItemView
+                    Dim empOvertime As OtWorkHourView
                     empOvertime = View.PayrollOvertime.Find(Function(c) c.EmployeeIdNo = empId)
                     If empOvertime Is Nothing Then
                         empFound = False
@@ -324,7 +324,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub AddEmployeeOvertime(ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal seq As Int16)
-            Dim empOvertime As New OvertimeItemView
+            Dim empOvertime As New OtWorkHourView
             empOvertime.EmployeeIdNo = empId
             empOvertime.Sequence = seq
             View.PayrollOvertime.Add(empOvertime)
@@ -360,7 +360,7 @@ Namespace PresentationLayer.Presenters
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_attendanceItemModel, DtUpdateTable, DtInsertTable, passedValue, "PayrollIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_overtimeItemModel, DtOtUpdateTable, DtOtInsertTable, passedValue, "PayrollIdNo")
+                retVal = UpdateChildData(_otWorkHourModel, DtOtUpdateTable, DtOtInsertTable, passedValue, "PayrollIdNo")
             End If
         End Sub
 
@@ -380,7 +380,7 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
-        Private Sub OvertimeItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+        Private Sub OtWorkHourFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("EmployeeIdNo") = itemDataView.EmployeeIdNo
             workRow("OvertimeRegular") = itemDataView.OvertimeRegular
             workRow("OvertimeHoliday") = itemDataView.OvertimeHoliday
@@ -388,7 +388,7 @@ Namespace PresentationLayer.Presenters
             workRow("PayrollIdNo") = View.IdNo
         End Sub
 
-        Public Function OvertimeItemFilter(ByVal obj As Object) As Boolean
+        Public Function OtWorkHourFilter(ByVal obj As Object) As Boolean
             If (obj.OvertimeRegular = 0 AndAlso obj.OvertimeHoliday = 0 AndAlso obj.OvertimeSpecial = 0) Then
                 Return False
             End If

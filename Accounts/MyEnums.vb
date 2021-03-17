@@ -21,7 +21,8 @@ Public Enum AccountStatusSelection
 End Enum
 
 Public Enum CalculationTypeSelection
-    <EnumCode("A")> AttendanceBased
+
+    <EnumCode("A")> FixedAmount
     <EnumCode("F")> Factor
     <EnumCode("R")> FixedRate
     <EnumCode("V")> Variable
@@ -263,6 +264,20 @@ Public Enum AttendanceUnitSelection
     <EnumCode("O")> OvertimeRegular
     <EnumCode("H")> OvertimeHoliday
     <EnumCode("S")> OvertimeSpecial
+End Enum
+
+Public Enum QuantityTypeSelection
+    <EnumCode("W")> DaysLeaveNoPay
+    <EnumCode("F")> DaysOff
+    <EnumCode("D")> DaysPaid
+    <EnumCode("P")> DaysPresent
+    <EnumCode("L")> DaysLeaveWithPay
+    <EnumCode("N")> NotNeeded
+    <EnumCode("H")> HoursWorked
+    <EnumCode("O")> OvertimeRegular
+    <EnumCode("T")> OvertimeHoliday
+    <EnumCode("S")> OvertimeSpecial
+    <EnumCode("V")> Variable
 End Enum
 
 Public Enum SpecialAccountSelection

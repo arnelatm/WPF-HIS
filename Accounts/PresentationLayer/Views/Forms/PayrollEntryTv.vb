@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IPayrollView
 
         Private _payrollAttendance As New List(Of AttendanceItemView)
-        Private _payrollOvertime As New List(Of OvertimeItemView)
+        Private _payrollOvertime As New List(Of OtWorkHourView)
         Private _payrollEarning As New List(Of PayrollEarningView)
         Private Property MyPresenter As PayrollPresenter
         Private _employees
@@ -119,7 +119,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayrollOvertime As List(Of OvertimeItemView) Implements IPayrollView.PayrollOvertime
+        Public Property PayrollOvertime As List(Of OtWorkHourView) Implements IPayrollView.PayrollOvertime
             Get
                 Return _payrollOvertime
             End Get

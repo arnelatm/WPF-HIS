@@ -15,20 +15,20 @@ Namespace DataLayer.AdoNet
                                   "CalculationType," &
                                   "DefaultQuantity," &
                                   "EarningCode," &
-                                  "Summary," &
                                   "EarningName," &
                                   "EarningNameAra," &
                                   "EarningType," &
+                                  "FactorType," &
+                                  "FactorValue," &
                                   "Frequency," &
                                   "IdNo," &
                                   "IncludeInEOS," &
-                                  "FactorValue," &
-                                  "FactorType," &
                                   "Notes," &
+                                  "QuantityType," &
                                   "Rate," &
+                                  "Summary," &
                                   "Taxable," &
                                   "Unit," &
-                                  "UnitAttendance," &
                                   "UsePayGroups"
 
         Private ReadOnly _db As New Db()
@@ -63,10 +63,10 @@ Namespace DataLayer.AdoNet
                     " FactorValue = @FactorValue," &
                     " FactorType = @FactorType," &
                     " Notes = @Notes," &
+                    " QuantityType = @QuantityType," &
                     " Rate = @Rate," &
                     " Taxable = @Taxable," &
                     " Unit = @Unit," &
-                    " UnitAttendance = @UnitAttendance," &
                     " UsePayGroups = @UsePayGroups" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(earning))
@@ -75,8 +75,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef earning As Earning) As Integer Implements IDao(Of Earning).AddRecord
             Dim sql As String =
                     " INSERT INTO [Earning] " &
-                    "        (AccountIdNo ,BasePaymentIdNo ,CalculationType ,DefaultQuantity ,EarningCode ,Summary ,EarningName ,EarningNameAra ,EarningType ,Frequency ,IncludeInEos ,FactorValue,FactorType  ,Notes ,Rate ,Taxable ,Unit ,UnitAttendance ,UsePayGroups) " &
-                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@Summary,@EarningName,@EarningNameAra,@EarningType,@Frequency,@IncludeInEos,@FactorValue,@FactorType,@Notes,@Rate,@Taxable,@Unit,@UnitAttendance,@UsePayGroups) "
+                    "        (AccountIdNo ,BasePaymentIdNo ,CalculationType ,DefaultQuantity ,EarningCode ,Summary ,EarningName ,EarningNameAra ,EarningType ,Frequency ,IncludeInEos ,FactorValue,FactorType  ,QuantityType ,Notes ,Rate ,Taxable ,Unit ,UsePayGroups) " &
+                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@EarningCode,@Summary,@EarningName,@EarningNameAra,@EarningType,@Frequency,@IncludeInEos,@FactorValue,@FactorType,@QuantityType,@Notes,@Rate,@Taxable,@Unit,@UsePayGroups) "
             Return _db.Insert(sql, Take(earning))
         End Function
 
@@ -98,10 +98,10 @@ Namespace DataLayer.AdoNet
             .FactorValue = Extensions.AsDecimal(reader("FactorValue")),
             .FactorType = Extensions.AsString(reader("FactorType")),
             .Notes = Extensions.AsString(reader("Notes")),
+            .QuantityType = Extensions.AsChar(reader("QuantityType")),
             .Rate = Extensions.AsDouble(reader("Rate")),
             .Taxable = Extensions.AsBool(reader("Taxable")),
             .Unit = Extensions.AsChar(reader("Unit")),
-            .UnitAttendance = Extensions.AsChar(reader("UnitAttendance")),
             .UsePayGroups = Extensions.AsBool(reader("UsePayGroups"))
             }
 
@@ -122,10 +122,10 @@ Namespace DataLayer.AdoNet
                                     "@FactorValue", earning.FactorValue,
                                     "@FactorType", earning.FactorType,
                                     "@Notes", earning.Notes,
+                                    "@QuantityType", earning.QuantityType,
                                     "@Rate", earning.Rate,
                                     "@Taxable", earning.Taxable,
                                     "@Unit", earning.Unit,
-                                    "@UnitAttendance", earning.UnitAttendance,
                                     "@UsePayGroups", earning.UsePayGroups
                                 }
         End Function
