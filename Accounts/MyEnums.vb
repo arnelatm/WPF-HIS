@@ -140,6 +140,44 @@ Public Enum EarningTypeSelection
     '<EnumCode("Y")> Summary
 End Enum
 
+Public Enum PayElementGroupSelection
+    <EnumCode("E")> Earning
+    <EnumCode("D")> Deduction
+    '<EnumCode("O")> OvertimeRegular
+    '<EnumCode("V")> OvertimeHoliday
+    '<EnumCode("T")> OvertimeSpecial
+    '<EnumCode("S")> SickPay
+    '<EnumCode("V")> VacationPay
+    '<EnumCode("H")> HolidayPay
+    '<EnumCode("B")> Bonus
+    '<EnumCode("C")> Commission
+    '<EnumCode("E")> Expenses
+    '<EnumCode("D")> Redundancy
+    '<EnumCode("M")> Miscellaneous
+    '<EnumCode("A")> AsNeeded
+    '<EnumCode("Y")> Summary
+End Enum
+
+Public Enum PayElementTypeSelection
+    <EnumCode("R")> Regular
+    <EnumCode("C")> Computed
+    <EnumCode("O")> OnDemand
+    <EnumCode("G")> [Global]
+    '<EnumCode("O")> OvertimeRegular
+    '<EnumCode("V")> OvertimeHoliday
+    '<EnumCode("T")> OvertimeSpecial
+    '<EnumCode("S")> SickPay
+    '<EnumCode("V")> VacationPay
+    '<EnumCode("H")> HolidayPay
+    '<EnumCode("B")> Bonus
+    '<EnumCode("C")> Commission
+    '<EnumCode("E")> Expenses
+    '<EnumCode("D")> Redundancy
+    '<EnumCode("M")> Miscellaneous
+    '<EnumCode("A")> AsNeeded
+    '<EnumCode("Y")> Summary
+End Enum
+
 Public Enum EmployeeActionSelection
     <EnumCode("HR")> Hire
     <EnumCode("PR")> Promote

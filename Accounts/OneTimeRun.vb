@@ -82,6 +82,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MultiplierMustNotBeZero", "Error in line <{lineNumber}> on Earning Summary Detail Tab. FactorValue must not be equal to zero.", "Invalid Entry")
         Messaging.AddMessage("MsgEmptyEmployeeAttendanceOt", "Employee attendance or overtime not yet initialized for this payroll, please initialize first before generating payroll", "Error")
         Messaging.AddMessage("MsgSysEarnDelNotAllowed", "This is a system reserved earning, deletion not allowed!", "Error")
+        Messaging.AddMessage("MsgSysPayElementNotAllowed", "This is a system reserved pay element, deletion not allowed!", "Error")
         Messaging.AddMessage("MsgCannotEditReadOnly", "Sorry either this item Is read only Or you don't have the proper security credentials to change this value. Reverting to original value.", "Error")
     End Sub
 

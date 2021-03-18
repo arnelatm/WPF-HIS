@@ -1,0 +1,32 @@
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.PresentationLayer.Views
+
+Namespace PresentationLayer.Views.Interfaces
+
+    Public Interface IPayElementView
+        Inherits IView
+        Property AccountIdNo As Int16
+        Property BasePaymentIdNo As Int16?
+        Property CalculationType As Char
+        Property DefaultQuantity As Decimal
+        Property FactorType As String
+        Property FactorValue As Decimal
+        Property IdNo As Int16
+        Property IncludeInEos As Boolean
+        Property Notes As String
+        Property PayElementCode As String
+        Property PayElementGroup As Char
+        Property PayElementName As String
+        Property PayElementNameAra As String
+        Property PayElementType As Char
+        Property QuantityType As Char
+        Property Rate As Decimal
+        Property Summary As Boolean
+        Property Taxable As Boolean
+        Property Unit As Char
+        Property UsePayGroups As Boolean
+        Property PayElementAccounts As List(Of PayElementAccountView)
+        Property PayElementItems As List(Of PayElementItemView)
+    End Interface
+
+End Namespace
