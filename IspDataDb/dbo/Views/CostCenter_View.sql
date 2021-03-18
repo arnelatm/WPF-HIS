@@ -49,8 +49,3 @@ select IDNo
       ,[path]
       ,SortKey
 from cte
-
-
-
-
-
