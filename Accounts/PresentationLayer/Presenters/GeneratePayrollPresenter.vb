@@ -81,7 +81,7 @@ Namespace PresentationLayer.Presenters
                                                    })
 
             _absenceDeductions = New List(Of Deduction)
-            Dim absencesDeductions = _deductionsDao.GetRecords("DeductionType = '" & EnumToCode(DeductionTypeSelection.Computed) & "' and QuantityType = '" & AttendanceUnitSelection.OvertimeSpecial)
+            Dim absencesDeductions = _deductionsDao.GetRecords("DeductionType = '" & EnumToCode(DeductionTypeSelection.Computed) & "' and QuantityType = '" & EnumToCode(AttendanceUnitSelection.OvertimeSpecial) & "'")
             GlobalVariables.Mapper.Map(absencesDeductions, _absenceDeductions)
 
             _deductionComputationMethod = GetAppSetting($"PYCM", "Payroll", "Deduction Computation Method")
@@ -281,7 +281,7 @@ Namespace PresentationLayer.Presenters
             Return amount
         End Function
 
-        Private Shared Function ComputeFactoredAmount(amount As Decimal, FactorValue As Decimal, FactorType as String)
+        Private Shared Function ComputeFactoredAmount(amount As Decimal, FactorValue As Decimal, FactorType As String)
             Dim factoredAmount As Decimal
             If FactorType = EnumToCode(FactorTypeSelection.PercentOfBasePaymentRate) Then
                 factoredAmount = amount * FactorValue * 0.01D

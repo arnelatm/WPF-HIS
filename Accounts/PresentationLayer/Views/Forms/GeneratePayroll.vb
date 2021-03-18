@@ -19,11 +19,13 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = "Payroll"
             SortOrderKey = "IdNo"
             PresenterObj = New GeneratePayrollPresenter(Me)
-
+            MyPresenter = PresenterObj
             ProgressBar.Minimum = 0
             ProgressBar.Maximum = 100
 
         End Sub
+
+        Private Property MyPresenter As ApJournalPresenter
 
         Private Sub GeneratePayroll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             cboPayrollIdNo.DataSource = PresenterObj.GetLookup("Payroll")
