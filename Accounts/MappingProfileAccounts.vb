@@ -59,17 +59,26 @@ Public Class MappingProfileAccounts
         CreateMap(Of EarningSummary, EarningSummaryModel)().ReverseMap()
         CreateMap(Of EarningSummaryModel, EarningSummaryView)().ReverseMap()
         'CreateMap(Of IPayrollEarnAccountView, PayrollEarnAccountModel)()
+
         CreateMap(Of Employee, EmployeeModel)().ReverseMap()
+        CreateMap(Of EmployeeModel, IEmployeeView)().ReverseMap()
+
         CreateMap(Of EmployeeDeduction, EmployeeDeductionModel)().ReverseMap()
         CreateMap(Of EmployeeDeductionModel, EmployeeDeductionView)().ReverseMap()
         CreateMap(Of EmployeeDeductionModel, IEmployeeDeductionView)().ReverseMap()
+
         CreateMap(Of EmployeeEarning, EmployeeEarningModel)().ReverseMap()
         CreateMap(Of EmployeeEarningModel, EmployeeEarningView)().ReverseMap()
         CreateMap(Of EmployeeEarningModel, IEmployeeEarningView)().ReverseMap()
-        CreateMap(Of EmployeeModel, IEmployeeView)().ReverseMap()
+
+        CreateMap(Of EmployeePayElement, EmployeePayElementModel)().ReverseMap()
+        CreateMap(Of EmployeePayElementModel, EmployeePayElementView)().ReverseMap()
+        CreateMap(Of EmployeePayElementModel, IEmployeePayElementView)().ReverseMap()
+
         CreateMap(Of IEmployeePhoneView, EmployeePhoneModel)()
         CreateMap(Of EmployeePhone, EmployeePhoneModel)().ReverseMap()
         CreateMap(Of EmployeePhoneModel, EmployeePhoneView)()
+
         CreateMap(Of ErJournal, ErJournalModel)().ReverseMap()
         CreateMap(Of ErJournalModel, IErJournalView)().ReverseMap()
         CreateMap(Of GeneralJournal, GeneralJournalModel)().ReverseMap()
@@ -82,6 +91,16 @@ Public Class MappingProfileAccounts
         CreateMap(Of OtWorkHourModel, OtWorkHourView)().ReverseMap()
         CreateMap(Of PayCycle, PayCycleModel)().ReverseMap()
         CreateMap(Of PayCycleModel, IPayCycleView).ReverseMap()
+
+        CreateMap(Of PayElement, PayElementModel)().ReverseMap()
+        CreateMap(Of PayElementModel, IPayElementView)().ReverseMap()
+
+        CreateMap(Of PayElementAccount, PayElementAccountModel)().ReverseMap()
+        CreateMap(Of PayElementAccountModel, PayElementAccountView)().ReverseMap()
+
+        CreateMap(Of PayElementItem, PayElementItemModel)().ReverseMap()
+        CreateMap(Of PayElementItemModel, PayElementItemView)().ReverseMap()
+
         CreateMap(Of PayGroup, PayGroupModel)().ReverseMap()
         CreateMap(Of PayGroupModel, IPayGroupView).ReverseMap()
         CreateMap(Of Payroll, PayrollModel)().ReverseMap()

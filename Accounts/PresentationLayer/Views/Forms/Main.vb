@@ -1309,8 +1309,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EarningsToolStripMenuItem.Click
-            Dim childMdiForm As EarningEntryTv
-            childMdiForm = New EarningEntryTv With {
+            'Dim childMdiForm As EarningEntryTv
+            Dim childMdiForm As PayElementEntryTv
+            'childMdiForm = New EarningEntryTv With {
+            childMdiForm = New PayElementEntryTv With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()

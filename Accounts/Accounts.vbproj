@@ -173,6 +173,9 @@
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\Customer1.vb" />
+    <Compile Include="BusinessLayer\EmployeePayElement.vb" />
+    <Compile Include="BusinessLayer\PayElementItem.vb" />
+    <Compile Include="BusinessLayer\PayElement.vb" />
     <Compile Include="BusinessLayer\OtWorkHour.vb" />
     <Compile Include="BusinessLayer\Basic.vb" />
     <Compile Include="BusinessLayer\CashReceiptJournal.vb" />
@@ -180,6 +183,7 @@
     <Compile Include="BusinessLayer\Payroll.vb" />
     <Compile Include="BusinessLayer\PayrollDetail.vb" />
     <Compile Include="BusinessLayer\PayrollDeduction.vb" />
+    <Compile Include="BusinessLayer\PayElementAccount.vb" />
     <Compile Include="BusinessLayer\PayrollEarning.vb" />
     <Compile Include="BusinessLayer\PettyCashClosing.vb" />
     <Compile Include="BusinessLayer\DjOiItem.vb" />
@@ -228,6 +232,8 @@
     <Compile Include="BusinessLayer\PensionProvider.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PayElementItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\OtWorkHourDao.vb" />
     <Compile Include="DataLayer\AdoNet\AttendanceItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\BasicDao.vb" />
@@ -235,6 +241,7 @@
     <Compile Include="DataLayer\AdoNet\DisbursementJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDeductionDao.vb" />
     <Compile Include="DataLayer\AdoNet\EarningSummaryDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PayElementAccountDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollEarningDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\PcJournalsDao.vb" />
@@ -313,10 +320,14 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeePayElementModel.vb" />
+    <Compile Include="PresentationLayer\Models\PayElementItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\PayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\EarningSummaryModel.vb" />
     <Compile Include="PresentationLayer\Models\OtWorkHourModel.vb" />
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductionModel.vb" />
+    <Compile Include="PresentationLayer\Models\PayElementAccountModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollEarningModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\PettyCashClosingModel.vb" />
@@ -335,6 +346,7 @@
     <Compile Include="PresentationLayer\Models\LeaveModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\PayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\GeneratePayrollPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TransactionsPresenter.vb" />
@@ -352,6 +364,17 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PayElementEntryTv.designer.vb">
+      <DependentUpon>PayElementEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PayElementEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
+    <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\BankEntryTv1.Designer.vb">
       <DependentUpon>BankEntryTv1.vb</DependentUpon>
     </Compile>
@@ -364,7 +387,9 @@
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEarningSummaryView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\OtWorkHourView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\Test.Designer.vb">
       <DependentUpon>Test.vb</DependentUpon>
@@ -389,6 +414,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollDeductionView.vb" />
     <Compile Include="PresentationLayer\Views\EarningSummaryView.vb" />
+    <Compile Include="PresentationLayer\Views\PayElementAccountView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollEarningView.vb" />
     <Compile Include="PresentationLayer\Views\AttendanceItemView.vb" />
     <Compile Include="PresentationLayer\Views\DjOiItemView.vb" />
@@ -1053,6 +1079,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.resx">
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayElementEntryTv.resx">
+      <DependentUpon>PayElementEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Test.resx">
       <DependentUpon>Test.vb</DependentUpon>
     </EmbeddedResource>
@@ -1358,6 +1387,8 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.OvertimeItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayElementAccountModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayElementItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayPeriodModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />
