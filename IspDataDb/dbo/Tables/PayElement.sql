@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[PayElement] (
     [IdNo]              SMALLINT        IDENTITY (1, 1) NOT NULL,
-    [PayElementGroup]   CHAR (1)        NULL,
+    [PayElementKind]   CHAR (1)        NULL,
     [PayElementCode]    VARCHAR (10)    NULL,
     [PayElementName]    VARCHAR (50)    NULL,
     [PayElementNameAra] NVARCHAR (50)   NULL,

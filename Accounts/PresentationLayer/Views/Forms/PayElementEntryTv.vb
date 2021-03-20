@@ -28,6 +28,10 @@ Namespace PresentationLayer.Views.Forms
         Private _eAccFieldsDict As Dictionary(Of String, Object)
         Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
         Private _esModel = New ModelAccounts("PayElementItem")
+        Private cellPosOrigUnitAtt As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 8)
+        Private cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
+        Private cellPosQtyUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 6)
+        Private cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
 
         Public Sub New()
 
@@ -123,12 +127,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayElementGroup As Char Implements IPayElementView.PayElementGroup
+        Public Property PayElementKind As Char Implements IPayElementView.PayElementKind
             Get
-                Return txtPayElementCode.Text
+                Return cboPayElementKind.GetValue()
             End Get
             Set
-                txtPayElementCode.Text = Value
+                cboPayElementKind.SetValue(Value)
             End Set
         End Property
 
@@ -276,6 +280,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             'cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
+            cboPayElementKind.DataSource = PresenterObj.MakeEnumComboList(Of PayElementKindSelection)
             cboPayElementType.DataSource = PresenterObj.MakeEnumComboList(Of PayElementTypeSelection)
             cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList
             cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
@@ -397,15 +402,33 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Private Sub cboQuantityType_ValueChanged(sender As Object, e As EventArgs) Handles cboQuantityType.Validated, cboQuantityType.SelectionChangeCommitted
+            Me.DoubleBuffered = True
+            SuspendLayout()
+            floCalculation.Visible = False
+            If cboQuantityType.SelectedValue = EnumToCode(QuantityTypeSelection.NotNeeded) Then
+                lblDefaultQuantity.Visible = False
+                txtDefaultQuantity.Visible = False
+                lblSlash2.Visible = False
+                cboUnit.Visible = False
+                tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+            Else
+                lblDefaultQuantity.Visible = True
+                txtDefaultQuantity.Visible = True
+                lblSlash2.Visible = False
+                cboUnit.Visible = True
+                tlpCalculation.SetCellPosition(cboUnit, cellPosQtyUnit)
+            End If
+            floCalculation.Visible = True
+            ResumeLayout()
+        End Sub
+
         Private Sub UpdateCalculationTabDisplay()
             SuspendLayout()
             floCalculation.Visible = False
             tlpCalculation.Visible = False
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
             'tlpCalculation.SetCellPosition(cboUnit, _unitPosition)
-            Dim cellPosOrigUnitAtt As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 8)
-            Dim cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
-            Dim cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
             lblUnit.Visible = False
             Select Case curCalculationType
                 Case CalculationTypeSelection.FixedAmount
@@ -450,26 +473,34 @@ Namespace PresentationLayer.Views.Forms
                     lblSlash2.Visible = False
                     txtMultiplier.Visible = False
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    'tlpCalculation.SetCellPosition(cboQuantityType, cellPosOrigUnitAtt)
                 Case CalculationTypeSelection.Factor
                     cboPayElementType.Visible = True
                     cboBasePaymentIdNo.Visible = True
                     cboFactorType.Visible = True
+                    cboQuantityType.Visible = True
                     cboUnit.Visible = True
                     lblBasePayment.Visible = True
                     lblFactorValue.Visible = True
-                    cboQuantityType.Visible = True
                     lblQuantityType.Visible = True
-                    lblDefaultQuantity.Visible = False
                     lblSlash.Visible = False
                     lblRate.Visible = False
                     lblUnit.Visible = False
                     lblSlash.Visible = False
-                    cboUnit.Visible = False
-                    txtDefaultQuantity.Visible = False
                     txtMultiplier.Visible = True
                     txtRate.Visible = False
-                    'cboQuantityType.Visible = False
+                    If cboQuantityType.SelectedValue = EnumToCode(QuantityTypeSelection.NotNeeded) Then
+                        lblDefaultQuantity.Visible = False
+                        txtDefaultQuantity.Visible = False
+                        lblSlash2.Visible = False
+                        cboUnit.Visible = False
+                        tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+                    Else
+                        lblDefaultQuantity.Visible = True
+                        txtDefaultQuantity.Visible = True
+                        lblSlash2.Visible = False
+                        cboUnit.Visible = True
+                        tlpCalculation.SetCellPosition(cboUnit, cellPosQtyUnit)
+                    End If
                 Case CalculationTypeSelection.Variable
                     cboPayElementType.Visible = True
                     cboBasePaymentIdNo.Visible = False
@@ -489,25 +520,6 @@ Namespace PresentationLayer.Views.Forms
                     txtMultiplier.Visible = False
                     txtRate.Visible = True
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    'tlpCalculation.SetCellPosition(cboQuantityType, cellPosOrigUnitAtt)
-                    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    'tlpCalculation.SetColumnSpan(cboUnit, 1)
-                    'Case CalculationTypeSelection.Global
-                    '    cboPayElementType.Visible = True
-                    '    cboBasePaymentIdNo.Visible = False
-                    '    cboFactorType.Visible = False
-                    '    cboUnit.Visible = True
-                    '    lblBasePayment.Visible = False
-                    '    lblDefaultQuantity.Visible = True
-                    '    lblMultiplier.Visible = False
-                    '    lblSlash.Visible = True
-                    '    lblRate.Visible = True
-                    '    lblRate.Text = Messaging.TranslateCaption("Rate or Amount / Unit")
-                    '    txtDefaultQuantity.Visible = True
-                    '    txtMultiplier.Visible = False
-                    '    txtRate.Visible = True
-                    '    'tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    '    'tlpCalculation.SetColumnSpan(cboUnit, 1)
             End Select
             If chkSummary.Checked Then
                 tlpCalculation.Visible = False
@@ -516,18 +528,6 @@ Namespace PresentationLayer.Views.Forms
                 tlpCalculation.Visible = True
                 floCalculation.Visible = True
             End If
-            'If IsOvertimePayElement(cboPayElementType.SelectedValue) Then
-            '    cboPayElementType.DisplayOnly = True
-            '    cboCalculationType.DisplayOnly = True
-            'Else
-            '    If PresenterObj.EditMode Or PresenterObj.AddMode Then
-            '        cboPayElementType.DisplayOnly = False
-            '        cboCalculationType.DisplayOnly = False
-            '    Else
-            '        cboPayElementType.DisplayOnly = True
-            '        cboCalculationType.DisplayOnly = True
-            '    End If
-            'End If
             ResumeLayout()
         End Sub
 
@@ -590,7 +590,11 @@ Namespace PresentationLayer.Views.Forms
             If _usePayGroups Is Nothing Then
                 _usePayGroups = False
             End If
-            '_unitPosition = tlpCalculation.GetCellPosition(cboUnit)
+
+            ImageListTreeView.Images.Add(Image.FromFile("Images\Deduction.png"))
+            ImageListTreeView.Images.Add(Image.FromFile("Images\Earning.png"))
+            TreeViewTableName.ImageList = ImageListTreeView
+
             'If _usePayGroups Then
             '    chkUsePayGroups.Visible = True
             '    lblUsePayGroups.Visible = True
@@ -743,6 +747,15 @@ Namespace PresentationLayer.Views.Forms
             MyBase.RecordPositionChanged(e)
             UpdateCalculationTabDisplay()
             UpdatePostingTabDisplay()
+        End Sub
+
+        Protected Sub PayElement_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles TreeViewTableName.AfterSelect
+            Dim n As TreeNode = TreeViewTableName.SelectedNode
+            If PayElementKind = EnumToCode(PayElementKindSelection.Deduction) Then
+                n.SelectedImageIndex = 2
+            Else
+                n.SelectedImageIndex = 3
+            End If
         End Sub
 
         'Public Overrides Function ValidateView()

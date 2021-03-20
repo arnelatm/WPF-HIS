@@ -140,7 +140,7 @@ Public Enum EarningTypeSelection
     '<EnumCode("Y")> Summary
 End Enum
 
-Public Enum PayElementGroupSelection
+Public Enum PayElementKindSelection
     <EnumCode("E")> Earning
     <EnumCode("D")> Deduction
     '<EnumCode("O")> OvertimeRegular
@@ -305,7 +305,7 @@ Public Enum AttendanceUnitSelection
 End Enum
 
 Public Enum QuantityTypeSelection
-    <EnumCode("W")> DaysLeaveNoPay
+    <EnumCode("W")> DaysLeaveWithoutPay
     <EnumCode("F")> DaysOff
     <EnumCode("D")> DaysPaid
     <EnumCode("P")> DaysPresent

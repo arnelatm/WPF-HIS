@@ -11,6 +11,7 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
+                AddRule(New ValidateRequired("PayElementKind"))
                 AddRule(New ValidateRequired("PayElementName"))
                 AddRule(New ValidateRequired("PayElementCode"))
                 AddRule(New ValidateRequired("PayElementType"))
@@ -23,7 +24,7 @@ Namespace BusinessLayer
         Public Property CalculationType As Char
         Public Property DefaultQuantity As Decimal
         Public Property PayElementCode As String
-        Public Property PayElementGroup As String
+        Public Property PayElementKind As String
         Public Property PayElementName As String
         Public Property PayElementNameAra As String
         Public Property PayElementType As Char

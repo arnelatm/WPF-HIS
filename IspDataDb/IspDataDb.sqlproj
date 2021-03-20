@@ -447,6 +447,12 @@
     <Build Include="dbo\Tables\PayElement.sql" />
     <Build Include="dbo\Tables\CdOiItem.sql" />
     <Build Include="dbo\Stored Procedures\UpdateOtWorkHourTVP.sql" />
+    <Build Include="dbo\Tables\PayrollPayElement.sql" />
+    <Build Include="dbo\Views\PayrollPayElement_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdatePayrollPayElementTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertPayrollPayElementTVP.sql" />
+    <Build Include="dbo\User Defined Types\PayrollPayElementUpdate.sql" />
+    <Build Include="dbo\User Defined Types\PayrollPayElementInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

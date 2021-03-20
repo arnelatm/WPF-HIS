@@ -184,6 +184,7 @@
     <Compile Include="BusinessLayer\PayrollDetail.vb" />
     <Compile Include="BusinessLayer\PayrollDeduction.vb" />
     <Compile Include="BusinessLayer\PayElementAccount.vb" />
+    <Compile Include="BusinessLayer\PayrollPayElement.vb" />
     <Compile Include="BusinessLayer\PayrollEarning.vb" />
     <Compile Include="BusinessLayer\PettyCashClosing.vb" />
     <Compile Include="BusinessLayer\DjOiItem.vb" />
@@ -242,6 +243,7 @@
     <Compile Include="DataLayer\AdoNet\PayrollDeductionDao.vb" />
     <Compile Include="DataLayer\AdoNet\EarningSummaryDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayElementAccountDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PayrollPayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollEarningDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\PcJournalsDao.vb" />
@@ -328,6 +330,7 @@
     <Compile Include="PresentationLayer\Models\BasicModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDeductionModel.vb" />
     <Compile Include="PresentationLayer\Models\PayElementAccountModel.vb" />
+    <Compile Include="PresentationLayer\Models\PayrollPayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollEarningModel.vb" />
     <Compile Include="PresentationLayer\Models\PayrollDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\PettyCashClosingModel.vb" />
