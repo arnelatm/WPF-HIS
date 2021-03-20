@@ -11,8 +11,8 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As ErJournal _
-        Implements IDao(Of ErJournal).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As ErJournal _
+        Implements IDao(Of ErJournal).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " &
                     "AccountIdNo," &

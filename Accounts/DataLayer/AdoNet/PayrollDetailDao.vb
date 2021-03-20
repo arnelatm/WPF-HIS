@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As PayrollDetail Implements IDao(Of PayrollDetail).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As PayrollDetail Implements IDao(Of PayrollDetail).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " &
                     "EmployeeCode," &

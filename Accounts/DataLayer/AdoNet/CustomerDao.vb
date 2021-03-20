@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As Customer Implements IDaoAll(Of Customer).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Customer Implements IDaoAll(Of Customer).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, CustomerCode, CustomerName, CustomerNameAra, ContactPerson, ContactDesignation, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Mobile, Fax, Email, Website, VatNumber, CrNumber, AccountStatus, " &

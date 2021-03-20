@@ -117,7 +117,7 @@ Namespace PresentationLayer.Presenters
         '        Dim modelData As EarningModel
         '        RecordCount = GetRecordCount()
         '        'RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
-        '        modelData = ModelPresenter.GetRecordById(Of EarningModel)(idNo)
+        '        modelData = ModelPresenter.GetRecordByIdNo(Of EarningModel)(idNo)
         '        'RaiseEvent AfterRecordRetrieval(modelData)
         '        'If Ea IsNot Nothing Then
         '        '    Ea.PublishEvent(New BeforeAssignment(modelData))

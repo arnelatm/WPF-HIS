@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As PhoneType Implements IDaoAll(Of PhoneType).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As PhoneType Implements IDaoAll(Of PhoneType).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
                     "   FROM [PhoneType]" &

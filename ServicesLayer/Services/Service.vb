@@ -155,9 +155,9 @@ Namespace Services
             Return BaseDao.GetControlSecurityIdNo(searchValue)
         End Function
 
-        Public Function GetRecordById(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordById
+        Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordByIdNo
             Dim modelPresenter As New TM
-            Dim record = DataDao.GetRecordById(Convert.ToInt32(idNo))
+            Dim record = DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
             If record IsNot Nothing Then
                 GlobalVariables.Mapper.Map(record, modelPresenter)
             End If
@@ -179,8 +179,8 @@ Namespace Services
             Return BaseDao.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
         End Function
 
-        'Public Shadows Function GetRecordById(idNo) Implements IService.GetRecordById
-        '    Return DataDao.GetRecordById(Convert.ToInt32(idNo))
+        'Public Shadows Function GetRecordByIdNo(idNo) Implements IService.GetRecordByIdNo
+        '    Return DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
         'End Function
         Public Function InsertTvp(dtTable As DataTable) As Integer Implements IService.InsertTvp
             Return DataDao.InsertTvp(dtTable)

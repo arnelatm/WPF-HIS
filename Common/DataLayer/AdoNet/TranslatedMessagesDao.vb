@@ -12,8 +12,8 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db ' ("TRANSLATIONS")
 
-        Public Function GetRecordById(idNo) As TranslatedMessages _
-            Implements IDao(Of TranslatedMessages).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As TranslatedMessages _
+            Implements IDao(Of TranslatedMessages).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, TranslatedMessage, TranslatedCaption, MessageIdNo, LanguageIdNo " &
                     "   FROM [TranslatedMessages]" &

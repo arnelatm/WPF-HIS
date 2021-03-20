@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As PensionProvider Implements IDaoAll(Of PensionProvider).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As PensionProvider Implements IDaoAll(Of PensionProvider).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " &
                     "Active," &

@@ -11,8 +11,8 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As GeneralJournal _
-            Implements IDao(Of GeneralJournal).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As GeneralJournal _
+            Implements IDao(Of GeneralJournal).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " &
                     "Cancelled," &

@@ -14,7 +14,7 @@ Namespace AdoNet
         '    Throw New NotImplementedException()
         'End Sub
 
-        Public Function GetRecordById(idNo) As User Implements IDao(Of User).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As User Implements IDao(Of User).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, UserName, Password, FullName, SecurityGroupIdNo " &
                     "   FROM [User]" &

@@ -1061,7 +1061,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Dim modelData As TM
             RecordCount = GetRecordCount()
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
-            modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
+            modelData = ModelPresenter.GetRecordByIdNo(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New BeforeAssignment(modelData))

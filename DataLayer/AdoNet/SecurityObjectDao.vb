@@ -30,8 +30,8 @@ Namespace AdoNet
                                     "@Notes", securityObject.Notes}
         End Function
 
-        Public Function GetRecordById(idNo) As SecurityObject _
-            Implements IDaoAll(Of SecurityObject).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As SecurityObject _
+            Implements IDaoAll(Of SecurityObject).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, SecurityObjectCode, SecurityObjectName, SecurityObjectNameAra, Notes" &
                     "   FROM [SecurityObject]" &

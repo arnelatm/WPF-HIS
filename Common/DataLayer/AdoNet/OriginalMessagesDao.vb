@@ -12,8 +12,8 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db
 
-        Public Function GetRecordById(idNo) As OriginalMessages _
-            Implements IDaoAll(Of OriginalMessages).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As OriginalMessages _
+            Implements IDaoAll(Of OriginalMessages).GetRecordByIdNo
             Dim sql As String = "select	o.[IdNo], " &
                                 "o.[MessageKey], " &
                                 "o.[Message], " &

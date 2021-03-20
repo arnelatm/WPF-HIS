@@ -34,7 +34,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As PayElement Implements IDao(Of PayElement).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As PayElement Implements IDao(Of PayElement).GetRecordByIdNo
             Dim sql As String = "SELECT " &
                                 FieldList &
                                 " FROM [PayElement]" &

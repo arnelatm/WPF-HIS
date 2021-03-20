@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
             OiDataNames = dataNames(3)
         End Sub
 
-        Public Function GetRecordById(idNo) As BusinessLayer.DisbursementJournal Implements IDao(Of BusinessLayer.DisbursementJournal).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As BusinessLayer.DisbursementJournal Implements IDao(Of BusinessLayer.DisbursementJournal).GetRecordByIdNo
             Dim sql As String
             Dim data
             Dim params() As Object = {"@IdNo", idNo}

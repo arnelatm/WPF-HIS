@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As Branch Implements IDaoAll(Of Branch).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Branch Implements IDaoAll(Of Branch).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, BranchCode, BranchName, BranchNameAra, Notes" &
                     "   FROM [Branch]" &

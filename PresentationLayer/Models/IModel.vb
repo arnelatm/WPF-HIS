@@ -51,7 +51,7 @@ Public Interface IModel
 
     Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
 
-    Function GetRecordById(Of TM As New)(idNo As Int32) As TM
+    Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
 
     Function GetRecordCount(tableName As String) As Integer
 

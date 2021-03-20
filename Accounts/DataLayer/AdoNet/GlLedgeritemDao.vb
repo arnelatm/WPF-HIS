@@ -21,7 +21,7 @@ Namespace DataLayer.AdoNet
         '    DbCommon = Db
         'End Sub
 
-        'Public Function GetRecordById(idNo) As GlLedgerItem Implements IDaoChild(Of GlLedgerItem).GetRecordById
+        'Public Function GetRecordByIdNo(idNo) As GlLedgerItem Implements IDaoChild(Of GlLedgerItem).GetRecordByIdNo
         '    Dim sql As String =
         '            "SELECT " &
         '            "AccountIdNo," &

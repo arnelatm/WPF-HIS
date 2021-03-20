@@ -33,7 +33,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As Earning Implements IDao(Of Earning).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Earning Implements IDao(Of Earning).GetRecordByIdNo
             Dim sql As String = "SELECT " &
                                 FieldList &
                                 " FROM [Earning]" &

@@ -14,7 +14,7 @@ Namespace AdoNet
         '    DbCommon = Db
         'End Sub
 
-        'Public Function GetRecordById(idNo) As GroupAccess Implements IDao(Of GroupAccess).GetRecordById
+        'Public Function GetRecordByIdNo(idNo) As GroupAccess Implements IDao(Of GroupAccess).GetRecordByIdNo
         '    Dim sql As String =
         '            " SELECT IdNo, SecurityGroupIdNo, SecurityObjectIdNo, Visible, Selectable, Viewable, Editable, SecurityObjectName" &
         '            "   FROM [GroupAccess_View] " &

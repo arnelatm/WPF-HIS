@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As RevenueGroup Implements IDaoAll(Of RevenueGroup).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As RevenueGroup Implements IDaoAll(Of RevenueGroup).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
                     "   FROM [RevenueGroup_View]" &

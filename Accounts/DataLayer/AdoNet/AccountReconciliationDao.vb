@@ -15,8 +15,8 @@ Namespace DataLayer.AdoNet
         Protected DboTvpUpdateFileName As String = "dbo.UpdateAccountReconciliationItemTVP"
         Protected DboTvpInsertFileName As String = "dbo.InsertAccountReconciliationItemTVP"
 
-        Public Function GetRecordById(idNo) As AccountReconciliation _
-            Implements IDao(Of AccountReconciliation).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As AccountReconciliation _
+            Implements IDao(Of AccountReconciliation).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " &
                     "AccountIdNo," &
