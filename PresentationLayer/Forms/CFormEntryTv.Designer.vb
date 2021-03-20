@@ -69,5 +69,5 @@ Partial Class CFormEntryTv
 End Sub
 
     Public WithEvents TreeViewTableName As TreeView
-    Friend WithEvents ImageListTreeView As ImageList
+    Public WithEvents ImageListTreeView As ImageList
 End Class

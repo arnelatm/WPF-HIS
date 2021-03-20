@@ -15,7 +15,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IncludeInEos As Boolean
         Property Notes As String
         Property PayElementCode As String
-        Property PayElementGroup As Char
+        Property PayElementKind As Char
         Property PayElementName As String
         Property PayElementNameAra As String
         Property PayElementType As Char

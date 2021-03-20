@@ -19,7 +19,7 @@ Namespace PresentationLayer.Models
         Public Property IncludeInEos As Boolean
         Public Property Notes As String
         Public Property PayElementCode As String
-        Public Property PayElementGroup As Char
+        Public Property PayElementKind As Char
         Public Property PayElementName As String
         Public Property PayElementNameAra As String
         Public Property PayElementType As Char
