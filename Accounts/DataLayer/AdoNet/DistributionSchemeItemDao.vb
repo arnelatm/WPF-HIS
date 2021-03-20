@@ -23,7 +23,7 @@ Namespace DataLayer.AdoNet
             DboTvpInsertFileName = "dbo.InsertDistributionSchemeItemTVP"
         End Sub
 
-        'Public Function GetRecordById(idNo) As DistributionSchemeItem Implements IDaoAll(Of DistributionSchemeItem).GetRecordById
+        'Public Function GetRecordByIdNo(idNo) As DistributionSchemeItem Implements IDaoAll(Of DistributionSchemeItem).GetRecordByIdNo
         '    Dim sql As String =
         '            " SELECT IdNo, DistributionSchemeIdNo, Sequence, RevCostCenterIdNo, Percentage" &
         '            "   FROM " & TableName &

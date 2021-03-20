@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As PurchaseItem Implements IDaoAll(Of PurchaseItem).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As PurchaseItem Implements IDaoAll(Of PurchaseItem).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, PurchaseItemCode, PurchaseItemName, PurchaseItemNameAra, ProductCategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
                     "   Unit1, Unit2, Unit3, Unit1Ara, Unit2Ara, Unit3Ara, StdPrice1, StdPrice2, StdPrice3, Active" &

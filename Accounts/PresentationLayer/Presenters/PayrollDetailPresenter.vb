@@ -66,7 +66,7 @@ Namespace PresentationLayer.Presenters
         '        Dim payMonthText As String = "PayrollDetail for the Month of"
         '        Dim PayrollDetailText As String = "PayrollDetail for the Period"
         '        nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "PayrollDetail", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
-        '        maxRecord = ModelPresenter.GetRecordById(Of PayrollDetailModel)(nIdNoMax)
+        '        maxRecord = ModelPresenter.GetRecordByIdNo(Of PayrollDetailModel)(nIdNoMax)
         '        View.StartDate = maxRecord.EndDate.AddDays(1)
         '        Dim arabicCulture As New CultureInfo("ar-ae", False)
         '        If View.StartDate.Day = 1 Then

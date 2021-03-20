@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
                 Return False
             Else
                 Dim parentAccount As AccountModel
-                parentAccount = ModelPresenter.GetRecordById(Of AccountModel)(parentIdNo)
+                parentAccount = ModelPresenter.GetRecordByIdNo(Of AccountModel)(parentIdNo)
                 If parentAccount.AccountGroup Is Nothing Then
                     Return False
                 Else

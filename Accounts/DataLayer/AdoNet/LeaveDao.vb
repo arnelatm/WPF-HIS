@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As Leave Implements IDaoAll(Of Leave).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Leave Implements IDaoAll(Of Leave).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, LeaveCode, LeaveName, LeaveNameAra, LeaveAllowed, PaidPercent, Cumulative, MaxCarryOver, MaxLimit, NoMaxLimit, Notes " &
                     "   FROM [Leave]" &

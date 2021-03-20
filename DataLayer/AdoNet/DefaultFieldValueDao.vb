@@ -9,8 +9,8 @@ Namespace AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As DefaultFieldValue _
-            Implements IDefaultFieldValueDao.GetRecordById
+        Public Function GetRecordByIdNo(idNo) As DefaultFieldValue _
+            Implements IDefaultFieldValueDao.GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, SystemViewName, SystemViewNameAra, FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField" &
                     "   FROM [DefaultFieldValue_View]" &

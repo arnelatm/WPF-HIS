@@ -18,7 +18,7 @@ Namespace DataLayer.AdoNet
             _tableOrViewName = tableName.ToString()
         End Sub
 
-        Public Function GetRecordById(idNo) As Basic Implements IDaoAll(Of Basic).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Basic Implements IDaoAll(Of Basic).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, Code, Name, NameAra" &
                     "   FROM " & _tableOrViewName &

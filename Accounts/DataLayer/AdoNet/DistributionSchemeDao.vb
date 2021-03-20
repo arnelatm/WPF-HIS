@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As DistributionScheme Implements IDaoAll(Of DistributionScheme).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As DistributionScheme Implements IDaoAll(Of DistributionScheme).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, DistributionSchemeName, DistributionSchemeNameAra, DistributionSchemeCode, ValidityStartDate,  ValidityEndDate, Notes" &
                     "   FROM [DistributionScheme]" &

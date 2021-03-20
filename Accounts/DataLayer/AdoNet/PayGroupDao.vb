@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As PayGroup Implements IDaoAll(Of PayGroup).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As PayGroup Implements IDaoAll(Of PayGroup).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, PayGroupCode, PayGroupName, PayGroupNameAra, LevelNumber, Notes, SortKey" &
                     "   FROM PayGroup_View " &

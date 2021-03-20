@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private db As New Db()
 
-        Public Function GetRecordById(idNo) As Department Implements IDaoAll(Of Department).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Department Implements IDaoAll(Of Department).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, RevCostCenterIdNo, SortKey" &
                     "   FROM [Department_View]" &

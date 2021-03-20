@@ -69,8 +69,6 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPayrollView)
             MyBase.New(view)
-            Dim _payCycleIdNo As Int16 = _payrollDao.GetRecordByIdNo(view.IdNo).PayCycleIdNo
-            _payFrequency = CodeToEnum(Of PayFrequencySelection)(_payCycleDao.GetRecordByIdNo(_payCycleIdNo))
             TableName = "Account"
             ModelPresenter = New ModelAccounts("Payroll")
             TableName = "Payroll"
@@ -108,6 +106,9 @@ Namespace PresentationLayer.Presenters
         Public Sub GeneratePayroll(ByVal payrollIdNo As Int16, ByVal startDate As Date, ByVal endDate As Date, ByRef progressBar As ProgressBar)
             Dim attendance As List(Of AttendanceItem)
             Dim otWorkHours As List(Of OtWorkHour)
+            Dim _payCycleIdNo As Int16?
+            _payCycleIdNo = _payrollDao.GetRecordByIdNo(View.IdNo).PayCycleIdNo
+            _payFrequency = CodeToEnum(Of PayFrequencySelection)(_payCycleDao.GetRecordByIdNo(_payCycleIdNo))
             attendance = _attendanceItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
             otWorkHours = _otWorkHoursDao.GetRecordsWithGroupIdNo(payrollIdNo)
             GlobalVariables.Mapper.Map(attendance, _attendance)
@@ -180,7 +181,7 @@ Namespace PresentationLayer.Presenters
             Dim amount As Decimal
             For Each empEarning In empEarnings
                 Dim earning As PayElementModel
-                earning = _payElementDao.GetRecordById(empEarning.EarningIdNo)
+                earning = _payElementDao.GetRecordByIdNo(empEarning.EarningIdNo)
                 If earning.CalculationType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
                     amount = ComputeFixedAmountEarning(empEarning, earning)
                     If Not regenerate Then
@@ -261,7 +262,7 @@ Namespace PresentationLayer.Presenters
 
         Private Function CalculateComputedEarning(employeeIdNo As Int32, earning As PayElementModel) As Decimal
             Dim amount As Decimal
-            Dim bpEarning = _payElementDao.GetRecordById(earning.BasePaymentIdNo)
+            Dim bpEarning = _payElementDao.GetRecordByIdNo(earning.BasePaymentIdNo)
             If bpEarning.Summary Then
                 amount = ComputeSummaryAmount(employeeIdNo, earning.BasePaymentIdNo)
             Else
@@ -275,7 +276,7 @@ Namespace PresentationLayer.Presenters
 
         'Private Function CalculateGlobalEarning(employeeIdNo As Int32, earning As PayElementModel) As Decimal
         '    Dim amount As Decimal
-        '    Dim gEarning = _payElementDao.GetRecordById(earning.IdNo)
+        '    Dim gEarning = _payElementDao.GetRecordByIdNo(earning.IdNo)
         '    If bpEarning.Summary Then
         '        amount = ComputeSummaryAmount(employeeIdNo, earning.BasePaymentIdNo)
         '    Else
@@ -546,19 +547,19 @@ Namespace PresentationLayer.Presenters
         '    ElseIf Earning.CalculationType = _factorType Then
         '    If Not Earning.Summary Then
         '        ' factored item is not a summary earning (meaning not computed)
-        '        Dim ee As EmployeeEarning = _employeePayElementDao.GetRecordById(Earning.BasePaymentIdNo)
+        '        Dim ee As EmployeeEarning = _employeePayElementDao.GetRecordByIdNo(Earning.BasePaymentIdNo)
         '        amount = ComputeFactoredAmount(ee.Amount, Earning.FactorValue, Earning.FactorType)
         '    Else
         '        ' factored item is a computed value
         '        If Earning.BasePaymentIdNo <> 0 Then
         '            ' get the earning for the given basePaymentIdNo
-        '            Dim bpEarning As Earning = _payElementDao.GetRecordById(Earning.BasePaymentIdNo)
+        '            Dim bpEarning As Earning = _payElementDao.GetRecordByIdNo(Earning.BasePaymentIdNo)
         '            ' get employee earning for the said item
         '            Dim bpEarningSummary As New List(Of EarningSummary)
         '            bpEarningSummary = _earningSummaryDao.GetRecordsWithGroupIdNo(bpEarning.IdNo)
         '            For Each e In bpEarningSummary
         '                Dim ee As EmployeeEarning
-        '                ee = _employeePayElementDao.GetRecordById(e.EarningIdNo)
+        '                ee = _employeePayElementDao.GetRecordByIdNo(e.EarningIdNo)
         '                amount += ee.Amount * e.FactorValue
         '            Next
         '            amount = ComputeFactoredAmount(amount, Earning.FactorValue, Earning.FactorType)
@@ -624,7 +625,7 @@ Namespace PresentationLayer.Presenters
         '    Dim empDeductions As List(Of EmployeeDeduction) = _employeeDeductionDao.GetRecordsWithGroupIdNo(employeeIdNo)
         '    For Each empDeduction In empDeductions
         '        Dim deduction As Deduction
-        '        deduction = _deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
+        '        deduction = _deductionsDao.GetRecordByIdNo(empDeduction.DeductionIdNo)
         '        If deduction.DeductionType = _regularDeductionType Then
         '            If deduction.CalculationType = _fixedRateType Then
         '                amount = empDeduction.Amount
@@ -639,7 +640,7 @@ Namespace PresentationLayer.Presenters
         '    Dim empDeductions As List(Of EmployeeDeduction) = _employeeDeductionDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
         '    For Each empDeduction In empDeductions
         '        Dim deduction As Deduction
-        '        deduction = _deductionsDao.GetRecordById(empDeduction.DeductionIdNo)
+        '        deduction = _deductionsDao.GetRecordByIdNo(empDeduction.DeductionIdNo)
         '        If deduction.DeductionType = _regularDeductionType Then
         '            If deduction.CalculationType = _fixedRateType Then
         '                amount = empDeduction.Amount
@@ -723,7 +724,7 @@ Namespace PresentationLayer.Presenters
         '    'create regular earnings first
         '    For Each empEarning In empEarnings
         '        Dim earning As Earning
-        '        earning = _payElementDao.GetRecordById(empEarning.EarningIdNo)
+        '        earning = _payElementDao.GetRecordByIdNo(empEarning.EarningIdNo)
         '        If earning.EarningType = _regularEarning Then
         '            amount = ComputeEarningAmount(empEarning, earning)
         '            AddEarning(employeeAttendance.EmployeeIdNo, amount, payrollIdNo, earning.IdNo)
@@ -744,7 +745,7 @@ Namespace PresentationLayer.Presenters
         '    empEarnings = _employeePayElementDao.GetRecordsWithGroupIdNo(employeeAttendance.EmployeeIdNo)
         '    For Each empEarning In empEarnings
         '        Dim earning As Earning
-        '        earning = _payElementDao.GetRecordById(empEarning.EarningIdNo)
+        '        earning = _payElementDao.GetRecordByIdNo(empEarning.EarningIdNo)
         '        If earning.EarningType = _regularEarning Then
         '            If earning.CalculationType = _fixedRateType Then
         '                amount = ComputeEarningAmount(empEarning, earning)

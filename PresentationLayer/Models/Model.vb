@@ -232,10 +232,10 @@ Public Class Model
         Return Service.GetMaxValueFiltered(searchFieldName, tableName, returnFieldName, filter)
     End Function
 
-    Public Function GetRecordById(Of TM As New)(idNo As Int32) As TM Implements IModel.GetRecordById
+    Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IModel.GetRecordByIdNo
         Dim modelData As New TM
         If idNo <> 0 Then
-            modelData = DataService.GetRecordById(Of TM)(idNo)
+            modelData = DataService.GetRecordByIdNo(Of TM)(idNo)
         End If
         Return modelData
     End Function

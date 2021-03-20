@@ -46,7 +46,7 @@ Namespace PresentationLayer.Presenters
         'Public Overrides Sub Display(idNo As Int32)
         '    If idNo <> 0 Then
         '        Dim modelData As OriginalMessagesModel
-        '        modelData = Model.GetRecordById(Of OriginalMessagesModel)(idNo)
+        '        modelData = Model.GetRecordByIdNo(Of OriginalMessagesModel)(idNo)
         '        If modelData IsNot Nothing Then
         '            GlobalVariables.Mapper.Map(modelData, View)
         '        End If

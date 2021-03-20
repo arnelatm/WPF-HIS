@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As Payroll Implements IDaoAll(Of Payroll).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Payroll Implements IDaoAll(Of Payroll).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, PayrollCode, PayrollName, PayrollNameAra, StartDate, EndDate, PayCycleIdNo" &
                     "   FROM [Payroll]" &
@@ -24,7 +24,11 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Dim attendanceDao = New AttendanceItemDao
-            Dim attendance As List(Of AttendanceItem) = attendanceDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
+            Dim attendance As List(Of AttendanceItem)
+            If data Is Nothing Then
+                Return Nothing
+            End If
+            attendance = attendanceDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
             Dim overtimeDao = New OtWorkHourDao
             Dim overtime As List(Of OtWorkHour) = overtimeDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
             data.PayrollAttendance = attendance

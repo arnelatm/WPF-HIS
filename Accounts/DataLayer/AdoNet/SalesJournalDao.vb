@@ -12,8 +12,8 @@ Namespace DataLayer.AdoNet
         ' ReSharper disable once InconsistentNaming
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As SalesJournal _
-            Implements IDao(Of SalesJournal).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As SalesJournal _
+            Implements IDao(Of SalesJournal).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " &
                     "AccountIdNo," &

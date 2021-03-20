@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As PayCycle Implements IDaoAll(Of PayCycle).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As PayCycle Implements IDaoAll(Of PayCycle).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, PayFrequency, PayCycleCode, PayCycleName, PayCycleNameAra, Notes " &
                     "   FROM [PayCycle]" &

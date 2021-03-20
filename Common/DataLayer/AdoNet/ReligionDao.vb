@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As Religion Implements IDaoAll(Of Religion).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Religion Implements IDaoAll(Of Religion).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
                     "   FROM [Religion]" &

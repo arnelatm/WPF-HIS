@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As Bank Implements IDaoAll(Of Bank).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Bank Implements IDaoAll(Of Bank).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, BankCode, BankName, BankNameAra" &
                     "   FROM [Bank]" &

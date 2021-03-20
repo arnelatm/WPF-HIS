@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
         Protected JournalCode As String
         Protected PcClosing As Object
 
-        Public Function GetRecordById(idNo) As PettyCashClosing Implements IDao(Of PettyCashClosing).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As PettyCashClosing Implements IDao(Of PettyCashClosing).GetRecordByIdNo
             Dim sql As String
             Dim data
             Dim params() As Object = {"@IdNo", idNo}

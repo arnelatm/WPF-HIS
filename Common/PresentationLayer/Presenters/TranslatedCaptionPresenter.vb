@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
         '    idNoTm = GetRecordFieldWithKey(messageIdNo, "TranslatedCaption", "captionIdNo", "IdNo")
         '    Dim modelData As New TranslatedCaptionModel
         '    If idNoTm <> 0 Then
-        '        modelData = Model.GetRecordById(Of TranslatedCaptionModel)(messageIdNo)
+        '        modelData = Model.GetRecordByIdNo(Of TranslatedCaptionModel)(messageIdNo)
         '    End If
         '    GlobalVariables.Mapper.Map(modelData, View)
         'End Sub

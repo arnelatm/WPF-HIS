@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordById(idNo) As DefaultFieldValue Implements IDaoAll(Of DefaultFieldValue).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As DefaultFieldValue Implements IDaoAll(Of DefaultFieldValue).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, SystemViewIdNo, SystemViewName, SystemViewNameAra, FieldName, DataType, Length, DecimalPart, LinkedTable, LinkedField, DefaultValue" &
                     "   FROM [DefaultFieldValue_View]" &

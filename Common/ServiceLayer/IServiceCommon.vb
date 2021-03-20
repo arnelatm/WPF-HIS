@@ -7,7 +7,7 @@ Namespace ServiceLayer
         'Function AddRecord(ByRef model As Object) As Integer
         'Function DelUpdateTvp(dtTable As DataTable, groupKey As Integer) As Integer
         'Function GetAll(ByRef Optional sortKey As String = Nothing) As Object
-        'Function GetRecordById(TableName As String, idNo As Int32) As Object
+        'Function GetRecordByIdNo(TableName As String, idNo As Int32) As Object
         'Function InsertTvp(dtTable As DataTable) As Integer
         'Function TransactionUpdate(Of TBiz)(ByRef model As TBiz) As Integer
         'Function UpdateRecord(Of TBiz)(ByRef model As TBiz) As Integer

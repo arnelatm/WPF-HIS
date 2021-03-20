@@ -7,9 +7,12 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Views.Forms
 
     Public Class GeneratePayroll
+        Implements IPayrollView
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
+        Private Property MyPresenter As GeneratePayrollPresenter
+
 
         Public Sub New()
 
@@ -25,7 +28,16 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Private Property MyPresenter As ApJournalPresenter
+
+        Public Property EndDate As Date Implements IPayrollView.EndDate
+        Public Property IdNo As Integer Implements IPayrollView.IdNo
+        Public Property PayCycleIdNo As Short Implements IPayrollView.PayCycleIdNo
+        Public Property PayrollCode As String Implements IPayrollView.PayrollCode
+        Public Property PayrollName As String Implements IPayrollView.PayrollName
+        Public Property PayrollNameAra As String Implements IPayrollView.PayrollNameAra
+        Public Property StartDate As Date Implements IPayrollView.StartDate
+        Public Property PayrollAttendance As List(Of AttendanceItemView) Implements IPayrollView.PayrollAttendance
+        Public Property PayrollOvertime As List(Of OtWorkHourView) Implements IPayrollView.PayrollOvertime
 
         Private Sub GeneratePayroll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             cboPayrollIdNo.DataSource = PresenterObj.GetLookup("Payroll")

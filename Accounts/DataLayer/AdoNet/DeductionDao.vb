@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
                                     "Unit," &
                                     "UsePayGroups"
 
-        Public Function GetRecordById(idNo) As Deduction Implements IDao(Of Deduction).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Deduction Implements IDao(Of Deduction).GetRecordByIdNo
             Dim sql As String = "SELECT " & FieldList &
                                 " FROM [Deduction]" &
                                 " WHERE IdNo = @IdNo"

@@ -1,7 +1,7 @@
 ﻿Public Interface IDao(Of TBiz)
 
     ' gets a specific record data
-    Function GetRecordById(idNo) As TBiz
+    Function GetRecordByIdNo(idNo) As TBiz
 
     ' Add a recordData
     Function AddRecord(ByRef recordData As TBiz) As Integer
@@ -21,7 +21,7 @@ End Interface
 Public Interface IDaoRead(Of TBiz)
 
     ' gets a specific record data
-    Function GetRecordById(idNo) As TBiz
+    Function GetRecordByIdNo(idNo) As TBiz
 
     Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
 

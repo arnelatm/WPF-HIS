@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
 
         End Sub
 
-        Public Function GetRecordById(idNo) As ProductCategory Implements IDaoAll(Of ProductCategory).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As ProductCategory Implements IDaoAll(Of ProductCategory).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ProductCategoryCode, ProductCategoryName, ProductCategoryNameAra, Notes" &
                     "   FROM [ProductCategory]" &

@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
         '    Throw New NotImplementedException
         'End Function
 
-        Public Function GetRecordById(idNo) As Country Implements IDaoAll(Of Country).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As Country Implements IDaoAll(Of Country).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, CountryCode, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA3, ISON, CountryTelCode" &
                     "   FROM [Country]" &

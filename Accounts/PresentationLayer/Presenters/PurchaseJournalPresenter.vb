@@ -52,7 +52,7 @@ Namespace PresentationLayer.Presenters
 
         Public Shadows Sub Display(idNo As Int32)
             Dim modelData As PurchaseJournalModel
-            modelData = Model.GetRecordById(Of PurchaseJournalModel)(idNo)
+            modelData = Model.GetRecordByIdNo(Of PurchaseJournalModel)(idNo)
             If modelData IsNot Nothing Then
                 OriginalModel = modelData
                 If idNo <> 0 Then

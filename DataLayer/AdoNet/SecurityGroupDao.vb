@@ -10,7 +10,7 @@ Namespace AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordById(idNo) As SecurityGroup Implements IDao(Of SecurityGroup).GetRecordById
+        Public Function GetRecordByIdNo(idNo) As SecurityGroup Implements IDao(Of SecurityGroup).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, Notes, ParentIdNo, SecurityGroupCode, SecurityGroupName, SecurityGroupNameAra" &
                     "   FROM [SecurityGroup]" &

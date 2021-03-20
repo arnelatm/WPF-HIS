@@ -9,7 +9,7 @@ Public Interface IUserDao
     Function GetAll(Optional ByVal sortExpression As String = "FullName ASC") As List(Of User)
 
     ' gets a specific User
-    Function GetRecordById(idNo) As User
+    Function GetRecordByIdNo(idNo) As User
 
     Function GetUserByName(fullName As String) As User
 

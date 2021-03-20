@@ -80,7 +80,7 @@ Namespace AdoNet
                                     "@Password", login.Password}
         End Function
 
-        'Public Function GetRecordById(idNo) As Login Implements IDao(Of Login).GetRecordById
+        'Public Function GetRecordByIdNo(idNo) As Login Implements IDao(Of Login).GetRecordByIdNo
         '    Dim sql As String =
         '            " SELECT IdNo, UserName, Password" &
         '            "  FROM [User]" &

@@ -185,7 +185,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayCycleIdNo.SelectedIndexChanged
             Dim payFrequency As PayFrequencySelection
             Dim payCycleDaoObject As New PayCycleDao
-            Dim payCycleRecord = payCycleDaoObject.GetRecordById(PayCycleIdNo)
+            Dim payCycleRecord = payCycleDaoObject.GetRecordByIdNo(PayCycleIdNo)
             If payCycleRecord IsNot Nothing Then
                 payFrequency = CodeToEnum(Of PayFrequencySelection)(payCycleRecord.PayFrequency)
                 If MyPresenter.AddMode Then
