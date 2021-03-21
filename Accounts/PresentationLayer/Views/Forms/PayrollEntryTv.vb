@@ -256,6 +256,10 @@ Namespace PresentationLayer.Views.Forms
             'DataGridViewPayrollOvertime.Refresh()
         End Sub
 
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            MyPresenter.GeneratePayroll(ProgressBar)
+        End Sub
+
     End Class
 
 End Namespace

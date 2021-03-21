@@ -22,7 +22,7 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PayrollPayElement) Implements IDaoChild(Of PayrollPayElement).GetRecordsWithGroupIdNo
             Dim sql As String =
                     " SELECT " & FieldList &
-                    " FROM [PayrollPayElement]" &
+                    " FROM [PayrollPayElement_View]" &
                     " WHERE PayrollIdNo = @IdNo " &
                     " ORDER BY EmployeeIdNo,PayElementIdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -44,7 +44,7 @@ Namespace DataLayer.AdoNet
         Public Function GetRecords(Optional filter As String = Nothing) As List(Of PayrollPayElement) Implements IDaoGetRecords(Of PayrollPayElement).GetRecords
             Dim sql As String = "SELECT " &
                                 FieldList &
-                                " FROM [PayrollPayElement]" &
+                                " FROM [PayrollPayElement_View]" &
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -52,7 +52,7 @@ Namespace DataLayer.AdoNet
         Public Function GetRecord(Optional filter As String = Nothing) As PayrollPayElement Implements IDaoGetRecord(Of PayrollPayElement).GetRecord
             Dim sql As String = "SELECT Top 1 " &
                                 FieldList &
-                                " FROM [PayrollPayElement]" &
+                                " FROM [PayrollPayElement_View]" &
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
             Return _db.Read(sql, Make).FirstOrDefault()
         End Function

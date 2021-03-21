@@ -13,7 +13,6 @@ Namespace PresentationLayer.Views.Forms
         Protected SortOrderKey As String
         Private Property MyPresenter As GeneratePayrollPresenter
 
-
         Public Sub New()
 
             MyBase.New()
@@ -28,9 +27,17 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-
         Public Property EndDate As Date Implements IPayrollView.EndDate
+
         Public Property IdNo As Integer Implements IPayrollView.IdNo
+            Get
+                Return txtPayrollIdNo.Text
+            End Get
+            Set(value As Integer)
+                txtPayrollIdNo.Text = value
+            End Set
+        End Property
+
         Public Property PayCycleIdNo As Short Implements IPayrollView.PayCycleIdNo
         Public Property PayrollCode As String Implements IPayrollView.PayrollCode
         Public Property PayrollName As String Implements IPayrollView.PayrollName
