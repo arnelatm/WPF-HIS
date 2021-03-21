@@ -46,7 +46,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.btnInitializeAttendance = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.dtpStartDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.dtpEndDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -59,9 +58,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.btnInitializeOvertime = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.CButton3 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.tbcPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tbpAttendance = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayrollAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
@@ -84,8 +80,12 @@ Namespace PresentationLayer.Views.Forms
             Me.PayrollIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPayrollOvertime = New System.Windows.Forms.BindingSource(Me.components)
-            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.btnInitializeOvertime = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.btnInitializeAttendance = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CButton3 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.ProgressBar = New System.Windows.Forms.ProgressBar()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
@@ -219,19 +219,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(774, 524)
             Me.TableLayoutPanel1.TabIndex = 169
-            '
-            'btnInitializeAttendance
-            '
-            Me.btnInitializeAttendance.DesignerSelected = False
-            Me.btnInitializeAttendance.DisplayOnly = True
-            Me.btnInitializeAttendance.ImageIndex = 0
-            Me.btnInitializeAttendance.Location = New System.Drawing.Point(99, 3)
-            Me.btnInitializeAttendance.Name = "btnInitializeAttendance"
-            Me.btnInitializeAttendance.OriginalImageName = Nothing
-            Me.btnInitializeAttendance.SecurityKey = ""
-            Me.btnInitializeAttendance.Size = New System.Drawing.Size(95, 40)
-            Me.btnInitializeAttendance.TabIndex = 173
-            Me.btnInitializeAttendance.Text = "Initialize Attendance"
             '
             'dtpStartDate
             '
@@ -459,45 +446,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.Text = "ID No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'btnInitializeOvertime
-            '
-            Me.btnInitializeOvertime.DesignerSelected = False
-            Me.btnInitializeOvertime.DisplayOnly = True
-            Me.btnInitializeOvertime.ImageIndex = 0
-            Me.btnInitializeOvertime.Location = New System.Drawing.Point(3, 3)
-            Me.btnInitializeOvertime.Name = "btnInitializeOvertime"
-            Me.btnInitializeOvertime.OriginalImageName = Nothing
-            Me.btnInitializeOvertime.SecurityKey = ""
-            Me.btnInitializeOvertime.Size = New System.Drawing.Size(90, 40)
-            Me.btnInitializeOvertime.TabIndex = 169
-            Me.btnInitializeOvertime.Text = "Initialize Overtime"
-            '
-            'CButton2
-            '
-            Me.CButton2.DesignerSelected = False
-            Me.CButton2.DisplayOnly = True
-            Me.CButton2.ImageIndex = 0
-            Me.CButton2.Location = New System.Drawing.Point(360, 3)
-            Me.CButton2.Name = "CButton2"
-            Me.CButton2.OriginalImageName = Nothing
-            Me.CButton2.SecurityKey = ""
-            Me.CButton2.Size = New System.Drawing.Size(190, 40)
-            Me.CButton2.TabIndex = 170
-            Me.CButton2.Text = "Enter Manual  Payments/ Deductions"
-            '
-            'CButton3
-            '
-            Me.CButton3.DesignerSelected = False
-            Me.CButton3.DisplayOnly = True
-            Me.CButton3.ImageIndex = 0
-            Me.CButton3.Location = New System.Drawing.Point(556, 3)
-            Me.CButton3.Name = "CButton3"
-            Me.CButton3.OriginalImageName = Nothing
-            Me.CButton3.SecurityKey = ""
-            Me.CButton3.Size = New System.Drawing.Size(189, 40)
-            Me.CButton3.TabIndex = 171
-            Me.CButton3.Text = "View Payroll Report"
-            '
             'tbcPayroll
             '
             Me.TableLayoutPanel1.SetColumnSpan(Me.tbcPayroll, 4)
@@ -678,7 +626,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpOvertime.Location = New System.Drawing.Point(4, 22)
             Me.tbpOvertime.Name = "tbpOvertime"
             Me.tbpOvertime.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbpOvertime.Size = New System.Drawing.Size(760, 362)
+            Me.tbpOvertime.Size = New System.Drawing.Size(760, 364)
             Me.tbpOvertime.TabIndex = 1
             Me.tbpOvertime.Text = "Overtime"
             Me.tbpOvertime.UseVisualStyleBackColor = True
@@ -715,7 +663,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollOvertime.SequenceFieldName = "Sequence"
             Me.DataGridViewPayrollOvertime.ShowFooter = False
             Me.DataGridViewPayrollOvertime.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 356)
+            Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 358)
             Me.DataGridViewPayrollOvertime.TabIndex = 0
             '
             'SequenceDataGridViewTextBoxColumn
@@ -806,19 +754,6 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.bsPayrollOvertime.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.OtWorkHourModel)
             '
-            'CButton1
-            '
-            Me.CButton1.DesignerSelected = False
-            Me.CButton1.DisplayOnly = True
-            Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(200, 3)
-            Me.CButton1.Name = "CButton1"
-            Me.CButton1.OriginalImageName = Nothing
-            Me.CButton1.SecurityKey = ""
-            Me.CButton1.Size = New System.Drawing.Size(154, 40)
-            Me.CButton1.TabIndex = 174
-            Me.CButton1.Text = "Initialize Regular Earnings/Deductions"
-            '
             'CFlowLayout1
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
@@ -832,6 +767,71 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Size = New System.Drawing.Size(773, 75)
             Me.CFlowLayout1.TabIndex = 175
+            '
+            'btnInitializeOvertime
+            '
+            Me.btnInitializeOvertime.DesignerSelected = False
+            Me.btnInitializeOvertime.DisplayOnly = True
+            Me.btnInitializeOvertime.ImageIndex = 0
+            Me.btnInitializeOvertime.Location = New System.Drawing.Point(3, 3)
+            Me.btnInitializeOvertime.Name = "btnInitializeOvertime"
+            Me.btnInitializeOvertime.OriginalImageName = Nothing
+            Me.btnInitializeOvertime.SecurityKey = ""
+            Me.btnInitializeOvertime.Size = New System.Drawing.Size(90, 40)
+            Me.btnInitializeOvertime.TabIndex = 169
+            Me.btnInitializeOvertime.Text = "Initialize Overtime"
+            '
+            'btnInitializeAttendance
+            '
+            Me.btnInitializeAttendance.DesignerSelected = False
+            Me.btnInitializeAttendance.DisplayOnly = True
+            Me.btnInitializeAttendance.ImageIndex = 0
+            Me.btnInitializeAttendance.Location = New System.Drawing.Point(99, 3)
+            Me.btnInitializeAttendance.Name = "btnInitializeAttendance"
+            Me.btnInitializeAttendance.OriginalImageName = Nothing
+            Me.btnInitializeAttendance.SecurityKey = ""
+            Me.btnInitializeAttendance.Size = New System.Drawing.Size(95, 40)
+            Me.btnInitializeAttendance.TabIndex = 173
+            Me.btnInitializeAttendance.Text = "Initialize Attendance"
+            '
+            'CButton1
+            '
+            Me.CButton1.DesignerSelected = True
+            Me.CButton1.DisplayOnly = True
+            Me.CButton1.ImageIndex = 0
+            Me.CButton1.Location = New System.Drawing.Point(200, 3)
+            Me.CButton1.Name = "CButton1"
+            Me.CButton1.OriginalImageName = Nothing
+            Me.CButton1.SecurityKey = ""
+            Me.CButton1.Size = New System.Drawing.Size(154, 40)
+            Me.CButton1.TabIndex = 174
+            Me.CButton1.Text = "Generate Employee Earnings/Deductions"
+            '
+            'CButton2
+            '
+            Me.CButton2.DesignerSelected = False
+            Me.CButton2.DisplayOnly = True
+            Me.CButton2.ImageIndex = 0
+            Me.CButton2.Location = New System.Drawing.Point(360, 3)
+            Me.CButton2.Name = "CButton2"
+            Me.CButton2.OriginalImageName = Nothing
+            Me.CButton2.SecurityKey = ""
+            Me.CButton2.Size = New System.Drawing.Size(190, 40)
+            Me.CButton2.TabIndex = 170
+            Me.CButton2.Text = "Enter Manual  Payments/ Deductions"
+            '
+            'CButton3
+            '
+            Me.CButton3.DesignerSelected = False
+            Me.CButton3.DisplayOnly = True
+            Me.CButton3.ImageIndex = 0
+            Me.CButton3.Location = New System.Drawing.Point(556, 3)
+            Me.CButton3.Name = "CButton3"
+            Me.CButton3.OriginalImageName = Nothing
+            Me.CButton3.SecurityKey = ""
+            Me.CButton3.Size = New System.Drawing.Size(189, 40)
+            Me.CButton3.TabIndex = 171
+            Me.CButton3.Text = "View Payroll Report"
             '
             'ProgressBar
             '
