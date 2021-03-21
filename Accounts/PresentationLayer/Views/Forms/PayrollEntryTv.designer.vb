@@ -36,10 +36,12 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -74,7 +76,6 @@ Namespace PresentationLayer.Views.Forms
             Me.bsPayrollAttendance = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpOvertime = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayrollOvertime = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.bsPayrollOvertime = New System.Windows.Forms.BindingSource(Me.components)
             Me.SequenceDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvEmployeeIdNoOt = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.OvertimeRegularDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
@@ -82,6 +83,10 @@ Namespace PresentationLayer.Views.Forms
             Me.OvertimeSpecialDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
             Me.PayrollIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsPayrollOvertime = New System.Windows.Forms.BindingSource(Me.components)
+            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.ProgressBar = New System.Windows.Forms.ProgressBar()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -92,6 +97,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpOvertime.SuspendLayout()
             CType(Me.DataGridViewPayrollOvertime, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPayrollOvertime, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
             '
             'TreeViewTableName
@@ -99,7 +105,13 @@ Namespace PresentationLayer.Views.Forms
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
             Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 258)
             Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 610)
+            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 624)
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
             '
             'TranslatorDAC
             '
@@ -163,12 +175,13 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
             Me.floDataDisplay.Controls.Add(Me.TableLayoutPanel1)
+            Me.floDataDisplay.Controls.Add(Me.CFlowLayout1)
             Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
             Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(804, 610)
+            Me.floDataDisplay.Size = New System.Drawing.Size(804, 624)
             Me.floDataDisplay.TabIndex = 147
             '
             'TableLayoutPanel1
@@ -178,7 +191,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-            Me.TableLayoutPanel1.Controls.Add(Me.btnInitializeAttendance, 3, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpStartDate, 1, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpEndDate, 3, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.lblStartDate, 0, 5)
@@ -193,23 +205,19 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPayrollName, 1, 3)
-            Me.TableLayoutPanel1.Controls.Add(Me.btnInitializeOvertime, 0, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.CButton2, 1, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.CButton3, 2, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.tbcPayroll, 0, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.tbcPayroll, 0, 6)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(13, 13)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-            Me.TableLayoutPanel1.RowCount = 8
+            Me.TableLayoutPanel1.RowCount = 7
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8.0!))
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(774, 568)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(774, 524)
             Me.TableLayoutPanel1.TabIndex = 169
             '
             'btnInitializeAttendance
@@ -217,11 +225,11 @@ Namespace PresentationLayer.Views.Forms
             Me.btnInitializeAttendance.DesignerSelected = False
             Me.btnInitializeAttendance.DisplayOnly = True
             Me.btnInitializeAttendance.ImageIndex = 0
-            Me.btnInitializeAttendance.Location = New System.Drawing.Point(3, 131)
+            Me.btnInitializeAttendance.Location = New System.Drawing.Point(99, 3)
             Me.btnInitializeAttendance.Name = "btnInitializeAttendance"
             Me.btnInitializeAttendance.OriginalImageName = Nothing
             Me.btnInitializeAttendance.SecurityKey = ""
-            Me.btnInitializeAttendance.Size = New System.Drawing.Size(187, 40)
+            Me.btnInitializeAttendance.Size = New System.Drawing.Size(95, 40)
             Me.btnInitializeAttendance.TabIndex = 173
             Me.btnInitializeAttendance.Text = "Initialize Attendance"
             '
@@ -395,14 +403,13 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.DefaultValue = Nothing
             Me.cboPayCycleIdNo.DisplayMember = "Name"
             Me.cboPayCycleIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboPayCycleIdNo.DropDownHeight = 200
-            Me.cboPayCycleIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboPayCycleIdNo.EditingMode = True
             Me.cboPayCycleIdNo.FilterRule = Nothing
             Me.cboPayCycleIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboPayCycleIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboPayCycleIdNo.FormattingEnabled = True
             Me.cboPayCycleIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPayCycleIdNo.IntegralHeight = False
             Me.cboPayCycleIdNo.LinkedLabel = Nothing
             Me.cboPayCycleIdNo.Location = New System.Drawing.Point(194, 1)
             Me.cboPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -456,13 +463,12 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnInitializeOvertime.DesignerSelected = False
             Me.btnInitializeOvertime.DisplayOnly = True
-            Me.btnInitializeOvertime.Dock = System.Windows.Forms.DockStyle.Fill
             Me.btnInitializeOvertime.ImageIndex = 0
-            Me.btnInitializeOvertime.Location = New System.Drawing.Point(196, 131)
+            Me.btnInitializeOvertime.Location = New System.Drawing.Point(3, 3)
             Me.btnInitializeOvertime.Name = "btnInitializeOvertime"
             Me.btnInitializeOvertime.OriginalImageName = Nothing
             Me.btnInitializeOvertime.SecurityKey = ""
-            Me.btnInitializeOvertime.Size = New System.Drawing.Size(187, 40)
+            Me.btnInitializeOvertime.Size = New System.Drawing.Size(90, 40)
             Me.btnInitializeOvertime.TabIndex = 169
             Me.btnInitializeOvertime.Text = "Initialize Overtime"
             '
@@ -470,23 +476,21 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.CButton2.DesignerSelected = False
             Me.CButton2.DisplayOnly = True
-            Me.CButton2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CButton2.ImageIndex = 0
-            Me.CButton2.Location = New System.Drawing.Point(389, 131)
+            Me.CButton2.Location = New System.Drawing.Point(360, 3)
             Me.CButton2.Name = "CButton2"
             Me.CButton2.OriginalImageName = Nothing
             Me.CButton2.SecurityKey = ""
-            Me.CButton2.Size = New System.Drawing.Size(187, 40)
+            Me.CButton2.Size = New System.Drawing.Size(190, 40)
             Me.CButton2.TabIndex = 170
-            Me.CButton2.Text = "Enter Payments/ Deductions"
+            Me.CButton2.Text = "Enter Manual  Payments/ Deductions"
             '
             'CButton3
             '
             Me.CButton3.DesignerSelected = False
             Me.CButton3.DisplayOnly = True
-            Me.CButton3.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CButton3.ImageIndex = 0
-            Me.CButton3.Location = New System.Drawing.Point(582, 131)
+            Me.CButton3.Location = New System.Drawing.Point(556, 3)
             Me.CButton3.Name = "CButton3"
             Me.CButton3.OriginalImageName = Nothing
             Me.CButton3.SecurityKey = ""
@@ -500,10 +504,10 @@ Namespace PresentationLayer.Views.Forms
             Me.tbcPayroll.Controls.Add(Me.tbpAttendance)
             Me.tbcPayroll.Controls.Add(Me.tbpOvertime)
             Me.tbcPayroll.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.tbcPayroll.Location = New System.Drawing.Point(3, 177)
+            Me.tbcPayroll.Location = New System.Drawing.Point(3, 131)
             Me.tbcPayroll.Name = "tbcPayroll"
             Me.tbcPayroll.SelectedIndex = 0
-            Me.tbcPayroll.Size = New System.Drawing.Size(768, 388)
+            Me.tbcPayroll.Size = New System.Drawing.Size(768, 390)
             Me.tbcPayroll.TabIndex = 172
             '
             'tbpAttendance
@@ -512,7 +516,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpAttendance.Location = New System.Drawing.Point(4, 22)
             Me.tbpAttendance.Name = "tbpAttendance"
             Me.tbpAttendance.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbpAttendance.Size = New System.Drawing.Size(760, 362)
+            Me.tbpAttendance.Size = New System.Drawing.Size(760, 364)
             Me.tbpAttendance.TabIndex = 0
             Me.tbpAttendance.Text = "Attendance"
             Me.tbpAttendance.UseVisualStyleBackColor = True
@@ -539,6 +543,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollAttendance.Ea = Nothing
             Me.DataGridViewPayrollAttendance.EditingMode = False
             Me.DataGridViewPayrollAttendance.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPayrollAttendance.FieldsDictionary = Nothing
             Me.DataGridViewPayrollAttendance.FirstRowDeletionEnabled = True
             Me.DataGridViewPayrollAttendance.FirstRowInsertionEnabled = True
             Me.DataGridViewPayrollAttendance.Location = New System.Drawing.Point(6, 6)
@@ -686,20 +691,21 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollOvertime.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPayrollOvertime.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SequenceDataGridViewTextBoxColumn, Me.dgvEmployeeIdNoOt, Me.OvertimeRegularDataGridViewTextBoxColumn, Me.OvertimeHolidayDataGridViewTextBoxColumn, Me.OvertimeSpecialDataGridViewTextBoxColumn, Me.PayrollIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn1})
             Me.DataGridViewPayrollOvertime.DataSource = Me.bsPayrollOvertime
-            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPayrollOvertime.DefaultCellStyle = DataGridViewCellStyle14
+            DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPayrollOvertime.DefaultCellStyle = DataGridViewCellStyle16
             Me.DataGridViewPayrollOvertime.DgvFooter = Nothing
             Me.DataGridViewPayrollOvertime.DisplayOnly = False
             Me.DataGridViewPayrollOvertime.Dock = System.Windows.Forms.DockStyle.Fill
             Me.DataGridViewPayrollOvertime.Ea = Nothing
             Me.DataGridViewPayrollOvertime.EditingMode = False
             Me.DataGridViewPayrollOvertime.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPayrollOvertime.FieldsDictionary = Nothing
             Me.DataGridViewPayrollOvertime.FirstRowDeletionEnabled = True
             Me.DataGridViewPayrollOvertime.FirstRowInsertionEnabled = True
             Me.DataGridViewPayrollOvertime.Location = New System.Drawing.Point(3, 3)
@@ -712,13 +718,12 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 356)
             Me.DataGridViewPayrollOvertime.TabIndex = 0
             '
-            'bsPayrollOvertime
-            '
-            Me.bsPayrollOvertime.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.OtWorkHourModel)
-            '
             'SequenceDataGridViewTextBoxColumn
             '
             Me.SequenceDataGridViewTextBoxColumn.DataPropertyName = "Sequence"
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            Me.SequenceDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle11
             Me.SequenceDataGridViewTextBoxColumn.EditingMode = False
             Me.SequenceDataGridViewTextBoxColumn.HeaderText = "Seq"
             Me.SequenceDataGridViewTextBoxColumn.Name = "SequenceDataGridViewTextBoxColumn"
@@ -729,6 +734,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvEmployeeIdNoOt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvEmployeeIdNoOt.DataPropertyName = "EmployeeIdNo"
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.dgvEmployeeIdNoOt.DefaultCellStyle = DataGridViewCellStyle12
             Me.dgvEmployeeIdNoOt.EditingMode = False
             Me.dgvEmployeeIdNoOt.HeaderText = "Employee Name"
             Me.dgvEmployeeIdNoOt.Name = "dgvEmployeeIdNoOt"
@@ -739,8 +747,10 @@ Namespace PresentationLayer.Views.Forms
             'OvertimeRegularDataGridViewTextBoxColumn
             '
             Me.OvertimeRegularDataGridViewTextBoxColumn.DataPropertyName = "OvertimeRegular"
-            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            Me.OvertimeRegularDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle11
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            Me.OvertimeRegularDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle13
             Me.OvertimeRegularDataGridViewTextBoxColumn.EditingMode = False
             Me.OvertimeRegularDataGridViewTextBoxColumn.HeaderText = "Regular Overtime"
             Me.OvertimeRegularDataGridViewTextBoxColumn.Name = "OvertimeRegularDataGridViewTextBoxColumn"
@@ -751,8 +761,10 @@ Namespace PresentationLayer.Views.Forms
             'OvertimeHolidayDataGridViewTextBoxColumn
             '
             Me.OvertimeHolidayDataGridViewTextBoxColumn.DataPropertyName = "OvertimeHoliday"
-            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            Me.OvertimeHolidayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle12
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            Me.OvertimeHolidayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle14
             Me.OvertimeHolidayDataGridViewTextBoxColumn.EditingMode = False
             Me.OvertimeHolidayDataGridViewTextBoxColumn.HeaderText = "Holiday Overtime"
             Me.OvertimeHolidayDataGridViewTextBoxColumn.Name = "OvertimeHolidayDataGridViewTextBoxColumn"
@@ -763,8 +775,10 @@ Namespace PresentationLayer.Views.Forms
             'OvertimeSpecialDataGridViewTextBoxColumn
             '
             Me.OvertimeSpecialDataGridViewTextBoxColumn.DataPropertyName = "OvertimeSpecial"
-            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            Me.OvertimeSpecialDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle13
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            Me.OvertimeSpecialDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle15
             Me.OvertimeSpecialDataGridViewTextBoxColumn.EditingMode = False
             Me.OvertimeSpecialDataGridViewTextBoxColumn.HeaderText = "Special Overtime"
             Me.OvertimeSpecialDataGridViewTextBoxColumn.Name = "OvertimeSpecialDataGridViewTextBoxColumn"
@@ -788,10 +802,50 @@ Namespace PresentationLayer.Views.Forms
             Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn1.Visible = False
             '
+            'bsPayrollOvertime
+            '
+            Me.bsPayrollOvertime.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.OtWorkHourModel)
+            '
+            'CButton1
+            '
+            Me.CButton1.DesignerSelected = False
+            Me.CButton1.DisplayOnly = True
+            Me.CButton1.ImageIndex = 0
+            Me.CButton1.Location = New System.Drawing.Point(200, 3)
+            Me.CButton1.Name = "CButton1"
+            Me.CButton1.OriginalImageName = Nothing
+            Me.CButton1.SecurityKey = ""
+            Me.CButton1.Size = New System.Drawing.Size(154, 40)
+            Me.CButton1.TabIndex = 174
+            Me.CButton1.Text = "Initialize Regular Earnings/Deductions"
+            '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.btnInitializeOvertime)
+            Me.CFlowLayout1.Controls.Add(Me.btnInitializeAttendance)
+            Me.CFlowLayout1.Controls.Add(Me.CButton1)
+            Me.CFlowLayout1.Controls.Add(Me.CButton2)
+            Me.CFlowLayout1.Controls.Add(Me.CButton3)
+            Me.CFlowLayout1.Controls.Add(Me.ProgressBar)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(13, 543)
+            Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.CFlowLayout1.Size = New System.Drawing.Size(773, 75)
+            Me.CFlowLayout1.TabIndex = 175
+            '
+            'ProgressBar
+            '
+            Me.ProgressBar.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.ProgressBar.Location = New System.Drawing.Point(3, 49)
+            Me.ProgressBar.Name = "ProgressBar"
+            Me.ProgressBar.Size = New System.Drawing.Size(764, 23)
+            Me.ProgressBar.TabIndex = 148
+            Me.ProgressBar.Visible = False
+            '
             'PayrollEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(1106, 663)
+            Me.ClientSize = New System.Drawing.Size(1106, 677)
             Me.Controls.Add(Me.floDataDisplay)
             Me.Name = "PayrollEntryTv"
             Me.Text = "Payroll Maintenance Form"
@@ -808,6 +862,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpOvertime.ResumeLayout(False)
             CType(Me.DataGridViewPayrollOvertime, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsPayrollOvertime, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -857,5 +912,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents OvertimeSpecialDataGridViewTextBoxColumn As CdgvColumnDecimal
         Friend WithEvents PayrollIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents CFlowLayout1 As CFlowLayout
+        Friend WithEvents CButton1 As CButton
+        Friend WithEvents ProgressBar As ProgressBar
     End Class
 End Namespace

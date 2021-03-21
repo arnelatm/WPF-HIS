@@ -16,9 +16,9 @@ Namespace PresentationLayer.Presenters
         Inherits AccountsPresenter(Of IPayrollView, PayrollModel)
 
         'Private ReadOnly _absenceDeductions As List(Of Deduction)
-        Private _attendance As List(Of AttendanceItemModel)
+        Private _attendance As New List(Of AttendanceItemModel)
 
-        Private _otWorkHours As List(Of OtWorkHourModel)
+        Private _otWorkHours As New List(Of OtWorkHourModel)
         Private _payrollPayElements As List(Of PayrollPayElementModel)
         Private _savedPayrollPayElements As List(Of PayrollPayElementModel)
         Private _computedEarnings As List(Of PayElementModel)
@@ -106,22 +106,21 @@ Namespace PresentationLayer.Presenters
         Public Sub GeneratePayroll(ByVal payrollIdNo As Int16, ByVal startDate As Date, ByVal endDate As Date, ByRef progressBar As ProgressBar)
             Dim attendance As List(Of AttendanceItem)
             Dim otWorkHours As List(Of OtWorkHour)
-            Dim _payCycleIdNo As Int16?
-            _payCycleIdNo = _payrollDao.GetRecordByIdNo(View.IdNo).PayCycleIdNo
-            _payFrequency = CodeToEnum(Of PayFrequencySelection)(_payCycleDao.GetRecordByIdNo(_payCycleIdNo))
+            Dim payroll As Payroll = _payrollDao.GetRecordByIdNo(View.IdNo)
+            Dim payFrequency = _payCycleDao.GetRecordByIdNo(payroll.PayCycleIdNo).PayFrequency
+            _payFrequency = CodeToEnum(Of PayFrequencySelection)(payFrequency)
             attendance = _attendanceItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
             otWorkHours = _otWorkHoursDao.GetRecordsWithGroupIdNo(payrollIdNo)
             GlobalVariables.Mapper.Map(attendance, _attendance)
             GlobalVariables.Mapper.Map(otWorkHours, _otWorkHours)
-            _otWorkHours = _otWorkHoursDao.GetRecordsWithGroupIdNo(payrollIdNo)
             _payrollIdNo = payrollIdNo
-            If _attendance.Count() = 0 And _otWorkHours.Count() = 0 Then
+            If attendance.Count() = 0 And otWorkHours.Count() = 0 Then
                 Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
             Else
                 Dim payrollPayElements As List(Of PayrollPayElement)
-                Dim payCycleIdNo = GetFieldWithIdNo(payrollIdNo, "Payroll", "PayCycleIdNo")
-                Dim payFrequency = GetFieldWithIdNo(payCycleIdNo, "PayCycle", "PayFrequency")
-                If payFrequency = EnumToCode(PayFrequencySelection.Monthly) Then
+                'Dim payCycleIdNo = GetFieldWithIdNo(payrollIdNo, "Payroll", "PayCycleIdNo")
+                'Dim payFrequency = GetFieldWithIdNo(payCycleIdNo, "PayCycle", "PayFrequency")
+                If _payFrequency = EnumToCode(PayFrequencySelection.Monthly) Then
                     _endDate = endDate
                     _daysInTheMonth = DateTime.DaysInMonth(Year(endDate), Month(endDate))
                     payrollPayElements = _payrollPayElementsDao.GetRecordsWithGroupIdNo(payrollIdNo)
