@@ -37,7 +37,6 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _deductionComputationMethod As String = "1"
         Private ReadOnly _dtPayrollDetailInsertTable As New DataTable
         Private ReadOnly _dtPayrollDetailUpdateTable As New DataTable
-        Private ReadOnly _dtPayrollPayElementInsertTable As New DataTable
         Private ReadOnly _dtPayrollPayElementUpdateTable As New DataTable
 
         Private ReadOnly _attendanceItemDao = New AttendanceItemDao
@@ -499,13 +498,13 @@ Namespace PresentationLayer.Presenters
                     _daysInTheMonth = DateTime.DaysInMonth(Year(View.EndDate), Month(View.EndDate))
                     payrollPayElements = _payrollPayElementsDao.GetRecordsWithGroupIdNo(View.IdNo)
                     If payrollPayElements.Count() = 0 Then
-                        InitializeEmployeePayroll(False, progressBar)
+                        ProcessPayroll(False, progressBar)
                     Else
                         If Messaging.Show(True, "AskIfRegeneratePayroll",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                            InitializeEmployeePayroll(True, progressBar)
+                            ProcessPayroll(True, progressBar)
                             'Dim payAbsencesDeductions = _payrollDeductionDao.GetRecordsWithGroupIdNo(payrollIdNo)
                             'ReGenerateEmployeePayroll(progressBar)
                         End If
@@ -514,11 +513,14 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub InitializeEmployeePayroll(ByRef regenerate As Boolean, progressBar As ProgressBar)
-            _dtPayrollPayElementInsertTable.Clear()
-            _dtPayrollDetailInsertTable.Clear()
-            Dim payrollDetails As List(Of PayrollDetailModel)
-            payrollDetails = CreatePayrollDetails()
+        Private Sub ProcessPayroll(ByRef regenerate As Boolean, progressBar As ProgressBar)
+            Dim _dtPayrollPayElementInsertTable As New DataTable
+            CreateDataTable(_dtPayrollPayElementInsertTable, {{"Amount", GetType(Decimal)},
+                                             {"EarningIdNo", GetType(Int16)},
+                                             {"PayrollDetailIdNo", GetType(Int32)}
+                                            })
+            Dim payrollDetailsModel As List(Of PayrollDetailModel)
+            payrollDetailsModel = CreatePayrollDetails()
             Dim computedEarnings As List(Of PayElement)
             computedEarnings = _payElementsDao.GetRecords("PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) &
                                                           "' and PayElementType = '" & EnumToCode(PayElementTypeSelection.Computed) &
@@ -530,30 +532,37 @@ Namespace PresentationLayer.Presenters
                                                         "' and not Summary=0")
             GlobalVariables.Mapper.Map(globalEarnings, _globalEarnings)
             progressBar.Value = 0
-            progressBar.Maximum = payrollDetails.Count() + 2
+            progressBar.Maximum = payrollDetailsModel.Count() + 2
             progressBar.Visible = True
             If regenerate Then
                 _savedPayrollPayElements = _payrollPayElementsDao.GetRecordsWithGroupIdNo(_payrollIdNo)
             End If
-            For Each payrollDetail In payrollDetails
-                GenerateRegularEarnings(regenerate, payrollDetail.EmployeeIdNo)
-                GenerateComputedEarnings(regenerate, payrollDetail.EmployeeIdNo)
-                GenerateGlobalEarnings(regenerate, payrollDetail.EmployeeIdNo)
+            For Each payrollDetailModel In payrollDetailsModel
+                Dim payrollDetail As New PayrollDetail
+                GlobalVariables.Mapper.Map(payrollDetailModel, payrollDetail)
+                Dim payrollDetailIdNo As Int32 = _payrollDetailsDao.AddRecord(payrollDetail)
+                GenerateRegularEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                GenerateComputedEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                GenerateGlobalEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                progressBar.Value = progressBar.Value + 1
             Next
-
-            'GenerateRegularDeductions(attendance.EmployeeIdNo, payrollIdNo)
-            'GenerateAbsencesDeductions(employeeAttendance.EmployeeIdNo, payrollIdNo, employeeAttendance.DaysAbsentWithoutPay)
-            'progressBar.Value = progressBar.Value + 1
-
-            '_payrollPayElementDao.InsertTvp(_dtPayrollPayElementInsertTable)
-            'progressBar.Value = progressBar.Value + 1
-            '_payrollDeductionDao.InsertTvp(_dtDeductionInsertTable)
+            For Each item In _payrollPayElements
+                Dim insertDataRow As DataRow
+                insertDataRow = _dtPayrollPayElementInsertTable.NewRow()
+                insertDataRow("Amount") = item.Amount
+                insertDataRow("EarningIdNo") = item.PayElementIdNo
+                insertDataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
+                _dtPayrollPayElementInsertTable.Rows.Add(insertDataRow)
+            Next
+            _payrollPayElementsDao.InsertTvp(_dtPayrollPayElementInsertTable)
+            _dtPayrollPayElementInsertTable = Nothing
+            _payrollPayElements = Nothing
             progressBar.Value = progressBar.Value + 1
             Messaging.Show(True, "MsgPayrollGenerationCompleted")
             progressBar.Visible = False
         End Sub
 
-        Private Sub GenerateRegularEarnings(regenerate As Boolean, employeeIdNo As Int32)
+        Private Sub GenerateRegularEarnings(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             Dim empEarnings As New List(Of EmployeeEarning)
             empEarnings = _employeeEarningsDao.GetRecordsWithGroupIdNo(employeeIdNo)
             Dim empEarningsModel As New List(Of EmployeeEarningModel)
@@ -567,24 +576,24 @@ Namespace PresentationLayer.Presenters
                 If earning.CalculationType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
                     amount = ComputeFixedAmountEarning(empEarning.Amount, empEarning.Unit)
                     If Not regenerate Then
-                        AddEarning(employeeIdNo, amount, earning.IdNo, 0)
+                        AddEarning(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
                     Else
-                        MakeEarning(employeeIdNo, amount, earning.IdNo)
+                        MakeEarning(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
                     End If
                 ElseIf earning.CalculationType = EnumToCode(CalculationTypeSelection.FixedRate) Then
                     Dim rate As Decimal = ComputeFixedAmountEarning(empEarning.Amount, earning.Unit)
                     Dim qty As Decimal = ComputeQuantity(empEarning.EmployeeIdNo, earning.QuantityType)
                     amount = rate * qty
                     If Not regenerate Then
-                        AddEarning(employeeIdNo, amount, earning.IdNo, 0)
+                        AddEarning(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
                     Else
-                        MakeEarning(employeeIdNo, amount, earning.IdNo)
+                        MakeEarning(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
                     End If
                 End If
             Next
         End Sub
 
-        Private Sub AddEarning(employeeIdNo As Int32, amount As Decimal, earningIdNo As Short, payrollPayEarningIdNo As Int16)
+        Private Sub AddEarning(employeeIdNo As Int32, amount As Decimal, earningIdNo As Short, payrollPayEarningIdNo As Int16, payrollDetailIdNo As Int32)
             If amount <> 0 Then
                 Dim payrollPayElement As New PayrollPayElementModel
                 payrollPayElement.Amount = Math.Round(amount, 2)
@@ -592,19 +601,20 @@ Namespace PresentationLayer.Presenters
                 payrollPayElement.PayElementIdNo = earningIdNo
                 payrollPayElement.EmployeeIdNo = employeeIdNo
                 payrollPayElement.IdNo = payrollPayEarningIdNo
+                payrollPayElement.PayrollDetailIdNo = payrollDetailIdNo
                 _payrollPayElements.Add(payrollPayElement)
             End If
         End Sub
 
-        Private Sub MakeEarning(employeeIdNo As Int32, amount As Decimal, earningIdNo As Int16)
+        Private Sub MakeEarning(employeeIdNo As Int32, amount As Decimal, earningIdNo As Int16, payrollDetailIdNo As Int32)
             If amount <> 0 Then
                 Dim earning As PayrollPayElementModel = _payrollPayElements.Find(Function(value As PayrollPayElementModel)
                                                                                      Return value.EmployeeIdNo = employeeIdNo And value.PayElementIdNo = earningIdNo
                                                                                  End Function)
                 If earning Is Nothing Then
-                    AddEarning(employeeIdNo, amount, earningIdNo, 0)
+                    AddEarning(employeeIdNo, amount, earningIdNo, 0, payrollDetailIdNo)
                 Else
-                    AddEarning(employeeIdNo, amount, earning.IdNo, earning.IdNo)
+                    AddEarning(employeeIdNo, amount, earning.IdNo, earning.IdNo, payrollDetailIdNo)
                 End If
             End If
         End Sub
@@ -621,24 +631,24 @@ Namespace PresentationLayer.Presenters
             _payrollPayElements.Add(payrollPayElement)
         End Sub
 
-        Private Sub GenerateComputedEarnings(regenerate As Boolean, employeeIdNo As Int32)
+        Private Sub GenerateComputedEarnings(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             For Each earning As PayElementModel In _computedEarnings
                 Dim amount As Decimal
                 amount = CalculateComputedEarning(employeeIdNo, earning)
                 If Not regenerate Then
-                    AddEarning(employeeIdNo, amount, earning.IdNo, 0)
+                    AddEarning(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
                 Else
-                    MakeEarning(employeeIdNo, amount, earning.IdNo)
+                    MakeEarning(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
                 End If
             Next
         End Sub
 
-        Private Sub GenerateGlobalEarnings(regenerate As Boolean, employeeIdNo As Int32)
+        Private Sub GenerateGlobalEarnings(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             For Each earning As PayElementModel In _globalEarnings
                 If Not regenerate Then
-                    AddEarning(employeeIdNo, earning.Rate, earning.IdNo, 0)
+                    AddEarning(employeeIdNo, earning.Rate, earning.IdNo, 0, payrollDetailIdNo)
                 Else
-                    MakeEarning(employeeIdNo, earning.Rate, earning.IdNo)
+                    MakeEarning(employeeIdNo, earning.Rate, earning.IdNo, payrollDetailIdNo)
                 End If
             Next
         End Sub
@@ -892,10 +902,10 @@ Namespace PresentationLayer.Presenters
             Return quantity
         End Function
 
-        Private Sub MakePayrollOt(payrollIdNo As Short, otHours As Decimal, otUnit As String, otRate As Decimal, otEarning As Earning, employeeIdNo As Integer)
-            Dim otAmount As Decimal = ComputeOtAmount(otEarning, otHours, otRate)
-            AddEarning(employeeIdNo, otAmount, payrollIdNo, otEarning.IdNo)
-        End Sub
+        'Private Sub MakePayrollOt(payrollIdNo As Short, otHours As Decimal, otUnit As String, otRate As Decimal, otEarning As Earning, employeeIdNo As Integer)
+        '    Dim otAmount As Decimal = ComputeOtAmount(otEarning, otHours, otRate)
+        '    AddEarning(employeeIdNo, otAmount, payrollIdNo, otEarning.IdNo)
+        'End Sub
 
         Private Shared Function ComputeOtAmount(otEarning As Earning, otHours As Decimal, otRate As Decimal) As Decimal
             Dim otAmount As Decimal
