@@ -10,6 +10,7 @@
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String
         Public Property EmployeeNameAra As String
+        Public Property HoursWorked As Decimal
         Public Property OvertimeRegular As Decimal
         Public Property OvertimeHoliday As Decimal
         Public Property OvertimeSpecial As Decimal

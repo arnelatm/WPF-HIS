@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views
         Public Property EmployeeName As String Implements IOtWorkHourView.EmployeeName
         Public Property EmployeeNameAra As String Implements IOtWorkHourView.EmployeeNameAra
         Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property HoursWorked As Decimal Implements IOtWorkHourView.HoursWorked
         Public Property IdNo As Int32 Implements IOtWorkHourView.IdNo
         Public Property OvertimeRegular As Decimal Implements IOtWorkHourView.OvertimeRegular
         Public Property OvertimeHoliday As Decimal Implements IOtWorkHourView.OvertimeHoliday

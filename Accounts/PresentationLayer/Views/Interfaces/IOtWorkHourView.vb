@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeeIdNo As Int32
         Property EmployeeName As String
         Property EmployeeNameAra As String
+        Property HoursWorked As Decimal
         Property OvertimeRegular As Decimal
         Property OvertimeHoliday As Decimal
         Property OvertimeSpecial As Decimal

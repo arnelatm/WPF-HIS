@@ -139,6 +139,12 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
             '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
             'TranslatorDAC
             '
             Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
