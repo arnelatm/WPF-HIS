@@ -181,6 +181,7 @@ Public Module GlobalFunctions
     '''<summary>
     '''Converts a given Enum Value to its Coded Value
     '''</summary>
+    <System.Diagnostics.DebuggerStepThrough()>
     Public Function EnumToCode(ByVal enumValue As Object) As String
         If enumValue Is Nothing Then
             Return Nothing

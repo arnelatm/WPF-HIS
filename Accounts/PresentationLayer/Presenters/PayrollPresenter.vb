@@ -52,13 +52,36 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _computedEarningType = EnumToCode(EarningTypeSelection.Computed)
 
+        Private ReadOnly _regularType = EnumToCode(EarningTypeSelection.Regular)
+        Private ReadOnly _globalType = EnumToCode(EarningTypeSelection.Global)
+        Private ReadOnly _computedType = EnumToCode(EarningTypeSelection.Computed)
+        Private ReadOnly _onDemandType = EnumToCode(EarningTypeSelection.OnDemand)
         Private ReadOnly _factorType = EnumToCode(CalculationTypeSelection.Factor)
+        Private ReadOnly _fixedAmountType = EnumToCode(CalculationTypeSelection.FixedAmount)
         Private ReadOnly _fixedRateType = EnumToCode(CalculationTypeSelection.FixedRate)
-        Private ReadOnly _overtimeHoursHolidayType = EnumToCode(AttendanceUnitSelection.OvertimeHoliday)
-        Private ReadOnly _overtimeHoursRegularType = EnumToCode(AttendanceUnitSelection.OvertimeRegular)
-        Private ReadOnly _overtimeHoursSpecialType = EnumToCode(AttendanceUnitSelection.OvertimeSpecial)
-        Private ReadOnly _regularPayElement = EnumToCode(EarningTypeSelection.Regular)
-        Private ReadOnly _variable = EnumToCode(CalculationTypeSelection.Variable)
+        Private ReadOnly _variableType = EnumToCode(CalculationTypeSelection.Variable)
+        Private ReadOnly _daysOffType = EnumToCode(QuantityTypeSelection.DaysOff)
+        Private ReadOnly _daysPresentType = EnumToCode(QuantityTypeSelection.DaysPresent)
+        Private ReadOnly _daysLeaveWithoutPayType = EnumToCode(QuantityTypeSelection.DaysLeaveWithoutPay)
+        Private ReadOnly _daysPaidType = EnumToCode(QuantityTypeSelection.DaysPaid)
+        Private ReadOnly _overtimeRegularType = EnumToCode(QuantityTypeSelection.OvertimeRegular)
+        Private ReadOnly _overtimeHolidayType = EnumToCode(QuantityTypeSelection.OvertimeHoliday)
+        Private ReadOnly _overTimeSpecialType = EnumToCode(QuantityTypeSelection.OvertimeSpecial)
+        Private ReadOnly _hoursWorkedType = EnumToCode(QuantityTypeSelection.HoursWorked)
+        Private ReadOnly _daysLeaveWithPayType = EnumToCode(QuantityTypeSelection.DaysLeaveWithPay)
+        Private ReadOnly _earningType = EnumToCode(PayElementKindSelection.Earning)
+        Private ReadOnly _deductionType = EnumToCode(PayElementKindSelection.Deduction)
+        Private ReadOnly _factorPercentType = EnumToCode(FactorTypeSelection.PercentOfBasePaymentRate)
+        Private ReadOnly _factorMultiplyType = EnumToCode(FactorTypeSelection.MultiplyBasePaymentRate)
+        Private ReadOnly _factorDivideType = EnumToCode(FactorTypeSelection.DivideBasePaymentRate)
+        Private ReadOnly _monthType = EnumToCode(PayRateUnitSelection.Month)
+        Private ReadOnly _semiMonthType = EnumToCode(PayRateUnitSelection.SemiMonth)
+        Private ReadOnly _yearType = EnumToCode(PayRateUnitSelection.Year)
+        Private ReadOnly _semiYearType = EnumToCode(PayRateUnitSelection.SemiYear)
+        Private ReadOnly _quarterType = EnumToCode(PayRateUnitSelection.Quarter)
+        Private ReadOnly _weekType = EnumToCode(PayRateUnitSelection.Week)
+        Private ReadOnly _dayType = EnumToCode(PayRateUnitSelection.Day)
+        Private ReadOnly _biWeekType = EnumToCode(PayRateUnitSelection.BiWeek)
 
         Public Sub New(view As IPayrollView)
             MyBase.New(view)
@@ -85,7 +108,8 @@ Namespace PresentationLayer.Presenters
                                             {"DaysOff", GetType(Decimal)},
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
-                                            {"PayrollIdNo", GetType(Int16)}
+                                            {"PayrollIdNo", GetType(Int16)},
+                                            {"Sequence", GetType(Int16)}
                                            })
 
             CreateDataTable(DtUpdateTable, {{"DaysAbsentWithoutPay", GetType(Decimal)},
@@ -94,22 +118,27 @@ Namespace PresentationLayer.Presenters
                                             {"DaysPresent", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
-                                            {"PayrollIdNo", GetType(Int16)}
+                                            {"PayrollIdNo", GetType(Int16)},
+                                            {"Sequence", GetType(Int16)}
                                            })
 
             CreateDataTable(DtOtInsertTable, {{"EmployeeIdNo", GetType(Int32)},
-                                            {"OvertimeRegular", GetType(Decimal)},
+                                            {"HoursWorked", GetType(Decimal)},
                                             {"OvertimeHoliday", GetType(Decimal)},
+                                            {"OvertimeRegular", GetType(Decimal)},
                                             {"OvertimeSpecial", GetType(Decimal)},
-                                            {"PayrollIdNo", GetType(Int16)}
+                                            {"PayrollIdNo", GetType(Int16)},
+                                            {"Sequence", GetType(Int16)}
                                            })
 
             CreateDataTable(DtOtUpdateTable, {{"EmployeeIdNo", GetType(Int32)},
+                                            {"HoursWorked", GetType(Decimal)},
                                             {"IdNo", GetType(Int32)},
-                                            {"OvertimeRegular", GetType(Decimal)},
                                             {"OvertimeHoliday", GetType(Decimal)},
+                                            {"OvertimeRegular", GetType(Decimal)},
                                             {"OvertimeSpecial", GetType(Decimal)},
-                                            {"PayrollIdNo", GetType(Int16)}
+                                            {"PayrollIdNo", GetType(Int16)},
+                                            {"Sequence", GetType(Int16)}
                                            })
 
             'CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
@@ -128,7 +157,6 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycle)
-            _payrollIdNo = View.IdNo
             If View.StartDate = Nothing And View.EndDate = Nothing Then
                 If payCycleRecord.PayCycleCode = "Month" Then
                     Dim nIdNoMax As Int32
@@ -419,6 +447,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OtWorkHourFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("EmployeeIdNo") = itemDataView.EmployeeIdNo
+            workRow("HoursWorked") = itemDataView.HoursWorked
             workRow("OvertimeRegular") = itemDataView.OvertimeRegular
             workRow("OvertimeHoliday") = itemDataView.OvertimeHoliday
             workRow("OvertimeSpecial") = itemDataView.OvertimeSpecial
@@ -474,19 +503,14 @@ Namespace PresentationLayer.Presenters
         '                                                 })
 
         '    '_absenceDeductions = New List(Of Deduction)
-        '    'Dim absencesDeductions = _deductionsDao.GetRecords("DeductionType = '" & EnumToCode(DeductionTypeSelection.Computed) & "' and QuantityType = '" & EnumToCode(AttendanceUnitSelection.OvertimeSpecial) & "'")
+        '    'Dim absencesDeductions = _deductionsDao.GetRecords("DeductionType = '" & .Computed) & "' and QuantityType = '" & EnumToCode(AttendanceUnitSelection.OvertimeSpecial) & "'")
         '    'GlobalVariables.Mapper.Map(absencesDeductions, _absenceDeductions)
         '    _deductionComputationMethod = GetAppSetting($"PYCM", "Payroll", "Deduction Computation Method")
 
         'End Sub
 
         Public Sub GeneratePayroll(progressBar As ProgressBar)
-            'Dim attendance As List(Of AttendanceItem)
-            'Dim otWorkHours As List(Of OtWorkHour)
-            'attendance = _attendanceItemDao.GetRecordsWithGroupIdNo(payrollIdNo)
-            'otWorkHours = _otWorkHoursDao.GetRecordsWithGroupIdNo(payrollIdNo)
-            'GlobalVariables.Mapper.Map(attendance, _attendance)
-            'GlobalVariables.Mapper.Map(otWorkHours, _otWorkHours)
+            _payrollIdNo = View.IdNo
             If View.PayrollAttendance.Count() = 0 And View.PayrollOvertime.Count() = 0 Then
                 Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
             Else
@@ -515,6 +539,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub ProcessPayroll(ByRef regenerate As Boolean, progressBar As ProgressBar)
             Dim _dtPayrollPayElementInsertTable As New DataTable
+            _payrollPayElements.Clear()
             CreateDataTable(_dtPayrollPayElementInsertTable, {{"Amount", GetType(Decimal)},
                                              {"EarningIdNo", GetType(Int16)},
                                              {"PayrollDetailIdNo", GetType(Int32)}
@@ -522,13 +547,13 @@ Namespace PresentationLayer.Presenters
             Dim payrollDetailsModel As List(Of PayrollDetailModel)
             payrollDetailsModel = CreatePayrollDetails()
             Dim computedEarnings As List(Of PayElement)
-            computedEarnings = _payElementsDao.GetRecords("PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) &
-                                                          "' and PayElementType = '" & EnumToCode(PayElementTypeSelection.Computed) &
+            computedEarnings = _payElementsDao.GetRecords("PayElementKind = '" & _earningType &
+                                                          "' and PayElementType = '" & _computedType &
                                                           "' and Summary=0")
             GlobalVariables.Mapper.Map(computedEarnings, _computedEarnings)
             Dim globalEarnings As List(Of PayElement)
-            globalEarnings = _payElementsDao.GetRecords("PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) &
-                                                        "' and CalculationType = '" & EnumToCode(PayElementTypeSelection.Global) &
+            globalEarnings = _payElementsDao.GetRecords("PayElementKind = '" & _earningType &
+                                                        "' and CalculationType = '" & _globalType &
                                                         "' and not Summary=0")
             GlobalVariables.Mapper.Map(globalEarnings, _globalEarnings)
             progressBar.Value = 0
@@ -556,7 +581,7 @@ Namespace PresentationLayer.Presenters
             Next
             _payrollPayElementsDao.InsertTvp(_dtPayrollPayElementInsertTable)
             _dtPayrollPayElementInsertTable = Nothing
-            _payrollPayElements = Nothing
+            _payrollPayElements.Clear()
             progressBar.Value = progressBar.Value + 1
             Messaging.Show(True, "MsgPayrollGenerationCompleted")
             progressBar.Visible = False
@@ -569,18 +594,18 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(empEarnings, empEarningsModel)
             Dim amount As Decimal
             For Each empEarning In empEarningsModel
-                Dim earning As PayElement
-                Dim earningModel As PayElementModel
+                Dim earning As New PayElement
+                Dim earningModel As New PayElementModel
                 earning = _payElementsDao.GetRecordByIdNo(empEarning.EarningIdNo)
                 GlobalVariables.Mapper.Map(earning, earningModel)
-                If earning.CalculationType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
+                If earning.CalculationType = _fixedAmountType Then
                     amount = ComputeFixedAmountEarning(empEarning.Amount, empEarning.Unit)
                     If Not regenerate Then
                         AddEarning(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
                     Else
                         MakeEarning(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
                     End If
-                ElseIf earning.CalculationType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+                ElseIf earning.CalculationType = _fixedRateType Then
                     Dim rate As Decimal = ComputeFixedAmountEarning(empEarning.Amount, earning.Unit)
                     Dim qty As Decimal = ComputeQuantity(empEarning.EmployeeIdNo, earning.QuantityType)
                     amount = rate * qty
@@ -655,8 +680,8 @@ Namespace PresentationLayer.Presenters
 
         Private Function CalculateComputedEarning(employeeIdNo As Int32, earning As PayElementModel) As Decimal
             Dim amount As Decimal
-            If earning.CalculationType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                Dim rate As Decimal
+            Dim rate As Decimal
+            If earning.CalculationType = _fixedRateType Then
                 Dim payElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = earning.IdNo)
                 If payElementModel IsNot Nothing Then
                     rate = ComputeFixedAmountEarning(payElementModel.Amount, earning.Unit)
@@ -664,10 +689,14 @@ Namespace PresentationLayer.Presenters
                 Else
                     amount = 0
                 End If
-            ElseIf earning.CalculationType = EnumToCode(CalculationTypeSelection.Factor) Then
+            ElseIf earning.CalculationType = _factorType Then
                 Dim bpEarning = _payElementsDao.GetRecordByIdNo(earning.BasePaymentIdNo)
                 If bpEarning.Summary Then
-                    amount = ComputeSummaryAmount(employeeIdNo, earning.BasePaymentIdNo)
+                    Dim bpAmount As Decimal
+                    bpAmount = ComputeSummaryAmount(employeeIdNo, earning.BasePaymentIdNo)
+                    rate = ComputeFactoredAmount(bpAmount, earning.FactorValue, earning.FactorType)
+                    Dim qty = ComputeQuantity(employeeIdNo, earning.QuantityType)
+                    amount = qty * rate
                 Else
                     Dim bpPayElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = earning.IdNo)
                     If bpPayElementModel IsNot Nothing Then
@@ -678,13 +707,13 @@ Namespace PresentationLayer.Presenters
             Return amount
         End Function
 
-        Private Shared Function ComputeFactoredAmount(amount As Decimal, FactorValue As Decimal, FactorType As String)
+        Private Function ComputeFactoredAmount(amount As Decimal, FactorValue As Decimal, FactorType As String)
             Dim factoredAmount As Decimal
-            If FactorType = EnumToCode(FactorTypeSelection.PercentOfBasePaymentRate) Then
+            If FactorType = _factorPercentType Then
                 factoredAmount = amount * FactorValue * 0.01D
-            ElseIf FactorType = EnumToCode(FactorTypeSelection.MultiplyBasePaymentRate) Then
+            ElseIf FactorType = _factorMultiplyType Then
                 factoredAmount = amount * FactorValue
-            ElseIf FactorType = EnumToCode(FactorTypeSelection.DivideBasePaymentRate) Then
+            ElseIf FactorType = _factorDivideType Then
                 If FactorValue <> 0 Then
                     factoredAmount = amount / FactorValue
                 End If
@@ -712,13 +741,13 @@ Namespace PresentationLayer.Presenters
             Return summaryAmount
         End Function
 
-        Private Shared Function ComputeSummaryItemAmount(amount As Decimal, FactorValue As Decimal, FactorType As String)
+        Private Function ComputeSummaryItemAmount(amount As Decimal, FactorValue As Decimal, FactorType As String)
             Dim factoredAmount As Decimal
-            If FactorType = EnumToCode(FactorTypeSelection.PercentOfBasePaymentRate) Then
+            If FactorType = _factorPercentType Then
                 factoredAmount = amount * FactorValue * 0.01D
-            ElseIf FactorType = EnumToCode(FactorTypeSelection.MultiplyBasePaymentRate) Then
+            ElseIf FactorType = _factorMultiplyType Then
                 factoredAmount = amount * FactorValue
-            ElseIf FactorType = EnumToCode(FactorTypeSelection.DivideBasePaymentRate) Then
+            ElseIf FactorType = _factorDivideType Then
                 If FactorValue <> 0 Then
                     factoredAmount = amount / FactorValue
                 End If
@@ -764,129 +793,129 @@ Namespace PresentationLayer.Presenters
             Dim factor As Decimal
             Select Case _payFrequency
                 Case PayFrequencySelection.Monthly
-                    If unit = EnumToCode(PayRateUnitSelection.Month) Then
+                    If unit = _monthType Then
                         factor = 1D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiMonth) Then
+                    ElseIf unit = _semiMonthType Then
                         factor = 2D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Year) Then
+                    ElseIf unit = _yearType Then
                         factor = 1D / 12D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiYear) Then
+                    ElseIf unit = _semiYearType Then
                         factor = 1D / 6D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Quarter) Then
+                    ElseIf unit = _quarterType Then
                         factor = 1D / 3D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Week) Then
+                    ElseIf unit = _weekType Then
                         factor = 13D / 2D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Day) Then
+                    ElseIf unit = _dayType Then
                         factor = 30D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.BiWeek) Then
+                    ElseIf unit = _biWeekType Then
                         factor = 13D / 6D
                     End If
                 Case PayFrequencySelection.Yearly
-                    If unit = EnumToCode(PayRateUnitSelection.Month) Then
+                    If unit = _monthType Then
                         factor = 12D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiMonth) Then
+                    ElseIf unit = _semiMonthType Then
                         factor = 24D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Year) Then
+                    ElseIf unit = _yearType Then
                         factor = 1D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiYear) Then
+                    ElseIf unit = _semiYearType Then
                         factor = 2D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Quarter) Then
+                    ElseIf unit = _quarterType Then
                         factor = 4D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Week) Then
+                    ElseIf unit = _weekType Then
                         factor = 52D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Day) Then
+                    ElseIf unit = _dayType Then
                         factor = 365D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.BiWeek) Then
+                    ElseIf unit = _biWeekType Then
                         factor = 26D
                     End If
                 Case PayFrequencySelection.SemiYearly
-                    If unit = EnumToCode(PayRateUnitSelection.Month) Then
+                    If unit = _monthType Then
                         factor = 6D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiMonth) Then
+                    ElseIf unit = _semiMonthType Then
                         factor = 12D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Year) Then
+                    ElseIf unit = _yearType Then
                         factor = 1D / 2D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiYear) Then
+                    ElseIf unit = _semiYearType Then
                         factor = 1D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Quarter) Then
+                    ElseIf unit = _quarterType Then
                         factor = 2D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Week) Then
+                    ElseIf unit = _weekType Then
                         factor = 26D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Day) Then
+                    ElseIf unit = _dayType Then
                         factor = 365D / 2D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.BiWeek) Then
+                    ElseIf unit = _biWeekType Then
                         factor = 13D
                     End If
                 Case PayFrequencySelection.Quarterly
-                    If unit = EnumToCode(PayRateUnitSelection.Month) Then
+                    If unit = _monthType Then
                         factor = 3D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiMonth) Then
+                    ElseIf unit = _semiMonthType Then
                         factor = 6D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Year) Then
+                    ElseIf unit = _yearType Then
                         factor = 1D / 4D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiYear) Then
+                    ElseIf unit = _semiYearType Then
                         factor = 1D / 2D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Quarter) Then
+                    ElseIf unit = _quarterType Then
                         factor = 1D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Week) Then
+                    ElseIf unit = _weekType Then
                         factor = 13D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Day) Then
+                    ElseIf unit = _dayType Then
                         factor = 365D / 4D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.BiWeek) Then
+                    ElseIf unit = _biWeekType Then
                         factor = 13D / 2D
                     End If
                 Case PayFrequencySelection.SemiMonthly
-                    If unit = EnumToCode(PayRateUnitSelection.Month) Then
+                    If unit = _monthType Then
                         factor = 1D / 2D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiMonth) Then
+                    ElseIf unit = _semiMonthType Then
                         factor = 1D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Year) Then
+                    ElseIf unit = _yearType Then
                         factor = 1D / 24D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiYear) Then
+                    ElseIf unit = _semiYearType Then
                         factor = 1D / 12D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Quarter) Then
+                    ElseIf unit = _quarterType Then
                         factor = 1D / 6D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Week) Then
+                    ElseIf unit = _weekType Then
                         factor = 13D / 4D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Day) Then
+                    ElseIf unit = _dayType Then
                         factor = 15D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.BiWeek) Then
+                    ElseIf unit = _biWeekType Then
                         factor = 13D / 12D
                     End If
                 Case PayFrequencySelection.Weekly
-                    If unit = EnumToCode(PayRateUnitSelection.Month) Then
+                    If unit = _monthType Then
                         factor = 12D / 52D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiMonth) Then
+                    ElseIf unit = _semiMonthType Then
                         factor = 24D / 52D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Year) Then
+                    ElseIf unit = _yearType Then
                         factor = 1D / 52D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiYear) Then
+                    ElseIf unit = _semiYearType Then
                         factor = 1D / 26D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Quarter) Then
+                    ElseIf unit = _quarterType Then
                         factor = 1D / 13D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Week) Then
+                    ElseIf unit = _weekType Then
                         factor = 1D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Day) Then
+                    ElseIf unit = _dayType Then
                         factor = 7D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.BiWeek) Then
+                    ElseIf unit = _biWeekType Then
                         factor = 1D / 2D
                     End If
                 Case PayFrequencySelection.Daily
-                    If unit = EnumToCode(PayRateUnitSelection.Month) Then
+                    If unit = _monthType Then
                         factor = 1D / 30D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiMonth) Then
+                    ElseIf unit = _semiMonthType Then
                         factor = 1D / 15D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Year) Then
+                    ElseIf unit = _yearType Then
                         factor = 1D / 360D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.SemiYear) Then
+                    ElseIf unit = _semiYearType Then
                         factor = 1D / 180D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Quarter) Then
+                    ElseIf unit = _quarterType Then
                         factor = 1D / 90D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Week) Then
+                    ElseIf unit = _weekType Then
                         factor = 1D / 7D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.Day) Then
+                    ElseIf unit = _dayType Then
                         factor = 1D
-                    ElseIf unit = EnumToCode(PayRateUnitSelection.BiWeek) Then
+                    ElseIf unit = _biWeekType Then
                         factor = 1D / 14D
                     End If
 
@@ -896,10 +925,37 @@ Namespace PresentationLayer.Presenters
 
         Private Function ComputeQuantity(employeeIdNo As Int32, quantityType As String)
             Dim quantity As Decimal
-            If quantityType = EnumToCode(QuantityTypeSelection.HoursWorked) Then
-                quantity = _otWorkHoursDao.GetRecord("EmployeeIdNo = " & employeeIdNo.ToString() & " PayrollIdNo = " & _payrollIdNo)
+            If quantityType = _hoursWorkedType Then
+                quantity = GetOtWorkHourValues(employeeIdNo).HoursWorked
+            ElseIf quantityType = _daysLeaveWithPayType Then
+                quantity = GetAttendanceValues(employeeIdNo).DaysAbsentWithPay
+            ElseIf quantityType = _daysOffType Then
+                quantity = GetAttendanceValues(employeeIdNo).DaysOff
+            ElseIf quantityType = _daysPresentType Then
+                quantity = GetAttendanceValues(employeeIdNo).DaysPresent
+            ElseIf quantityType = _daysLeaveWithoutPayType Then
+                quantity = GetAttendanceValues(employeeIdNo).DaysAbsentWithoutPay
+            ElseIf quantityType = _daysPaidType Then
+                Dim attendanceItem As AttendanceItem = GetAttendanceValues(employeeIdNo)
+                quantity = attendanceItem.DaysPresent + attendanceItem.DaysAbsentWithPay + attendanceItem.DaysOff
+            ElseIf quantityType = _overtimeRegularType Then
+                quantity = GetOtWorkHourValues(employeeIdNo).OvertimeRegular
+            ElseIf quantityType = _overtimeHolidayType Then
+                quantity = GetOtWorkHourValues(employeeIdNo).OvertimeHoliday
+            ElseIf quantityType = _overTimeSpecialType Then
+                quantity = GetOtWorkHourValues(employeeIdNo).OvertimeSpecial
+            Else
+                quantity = 1
             End If
             Return quantity
+        End Function
+
+        Private Function GetAttendanceValues(employeeIdNo As Int32) As AttendanceItem
+            Return _attendanceItemDao.GetRecord("EmployeeIdNo = " & employeeIdNo.ToString() & " and PayrollIdNo = " & _payrollIdNo)
+        End Function
+
+        Private Function GetOtWorkHourValues(employeeIdNo As Int32) As OtWorkHour
+            Return _otWorkHoursDao.GetRecord("EmployeeIdNo = " & employeeIdNo.ToString() & " and PayrollIdNo = " & _payrollIdNo)
         End Function
 
         'Private Sub MakePayrollOt(payrollIdNo As Short, otHours As Decimal, otUnit As String, otRate As Decimal, otEarning As Earning, employeeIdNo As Integer)

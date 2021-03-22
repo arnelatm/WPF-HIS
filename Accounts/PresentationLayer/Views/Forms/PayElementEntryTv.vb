@@ -48,6 +48,10 @@ Namespace PresentationLayer.Views.Forms
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
 
+            cboCalculationType.DrawMode = DrawMode.OwnerDrawFixed
+            AddHandler cboCalculationType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboCalculationType_DrawItem)
+            AddHandler cboCalculationType.SelectedIndexChanged, New System.EventHandler(AddressOf cboCalculationType_SelectedIndexChanged)
+
         End Sub
 
 #Region "Fields"
@@ -277,6 +281,65 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #End Region
+
+        Private myFont As Font = New Font("Aerial", 10, FontStyle.Underline Or FontStyle.Regular)
+        Private myFont2 As Font = New Font("Aerial", 10, FontStyle.Italic Or FontStyle.Strikeout)
+
+        'Private Sub cboCalculationType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
+        '    If (cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.Regular) And
+        '       (cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor) Or
+        '        cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Table) Or
+        '        cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Variable))) Then
+        '        e.Graphics.DrawString(cboCalculationType.Items(e.Index).ToString(), myFont2, Brushes.LightSlateGray, e.Bounds)
+        '    Else
+        '        e.DrawBackground()
+        '        e.Graphics.DrawString(cboCalculationType.Items(e.Index).ToString(), myFont, Brushes.White, e.Bounds)
+        '        e.DrawFocusRectangle()
+        '    End If
+        'End Sub
+
+        Private Sub cboCalculationType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            If IsItemDisabled(e.Index) Then
+                e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds)
+                e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, SystemBrushes.GrayText, e.Bounds)
+            Else
+                e.DrawBackground()
+                'Dim brush As Brush = If((e.State And DrawItemState.Selected) > 0, SystemBrushes.HighlightText, SystemBrushes.ControlText)
+                e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, Brushes.White, e.Bounds)
+                e.DrawFocusRectangle()
+            End If
+        End Sub
+
+        Private Sub cboCalculationType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectedIndexChanged
+            If cboCalculationType.Focused Then
+                If IsItemDisabled(cboCalculationType.SelectedIndex) Then
+                    MessageBox.Show("Sorry, selected value not allowed for selected Pay Element Type!")
+                    cboCalculationType.SelectedValue = -1
+                End If
+            End If
+        End Sub
+
+        Private Function IsItemDisabled(ByVal index As Integer) As Boolean
+            If cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.Regular) Then
+                If index = 1 Or index = 3 Or index = 4 Then
+                    Return True
+                End If
+            ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.Computed) Then
+                If index = 0 Or index = 3 Or index = 4 Then
+                    Return True
+                End If
+            ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.Global) Then
+                If index = 1 Or index = 2 Or index = 3 Or index = 4 Then
+                    Return True
+                End If
+            ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OnDemand) Then
+                If index = 4 Then
+                    Return True
+                End If
+            End If
+            Return False
+        End Function
 
         Protected Overrides Sub CreateDataSources()
             'cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)

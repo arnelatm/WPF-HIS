@@ -9,9 +9,19 @@ Namespace DataLayer.AdoNet
 
     Public Class OtWorkHourDao
         Inherits AccountsDao
-        Implements IDaoChild(Of OtWorkHour)
+        Implements IDaoChild(Of OtWorkHour), IDaoGetRecord(Of OtWorkHour)
 
         Private ReadOnly Db As New Db()
+
+        Private ReadOnly FieldList As String = "EmployeeIdNo," &
+                                               "EmployeeName," &
+                                               "EmployeeNameAra," &
+                                               "HoursWorked," &
+                                               "IdNo," &
+                                               "OvertimeRegular," &
+                                               "OvertimeHoliday," &
+                                               "OvertimeSpecial," &
+                                               "PayrollIdNo"
 
         Public Function GetRecordsWithGroupIdNo(PayrollIdNo, Optional sortExpression = Nothing) As List(Of OtWorkHour) Implements IDaoChild(Of OtWorkHour).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
@@ -23,16 +33,8 @@ Namespace DataLayer.AdoNet
                 End If
             End If
             Dim sql As String =
-                    "SELECT " &
-                    "EmployeeIdNo," &
-                    "EmployeeName," &
-                    "EmployeeNameAra," &
-                    "IdNo," &
-                    "OvertimeRegular," &
-                    "OvertimeHoliday," &
-                    "OvertimeSpecial," &
-                    "PayrollIdNo," &
-                    "ROW_NUMBER() over(Order by " & sortExpression & ") As 'Sequence'" &
+                    "SELECT " & FieldList &
+                    ",ROW_NUMBER() over(Order by " & sortExpression & ") As 'Sequence'" &
                     " FROM [OtWorkHour_View]" &
                     " WHERE PayrollIdNo = @PayrollIdNo "
             Dim params() As Object = {"@PayrollIdNo", PayrollIdNo}
@@ -48,6 +50,14 @@ Namespace DataLayer.AdoNet
             Return Db.InsertTvp("InsertOtWorkHourTVP", tvpTable)
         End Function
 
+        Public Function GetRecord(Optional filter As String = Nothing) As OtWorkHour Implements IDaoGetRecord(Of OtWorkHour).GetRecord
+            Dim sql As String = "SELECT Top 1 " &
+                                FieldList &
+                                " FROM [OtWorkHour_View]" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return Db.Read(sql, Make).FirstOrDefault()
+        End Function
+
         Private Shared ReadOnly Make As Func(Of IDataReader, OtWorkHour) =
                                     Function(reader) _
             New OtWorkHour() With {
@@ -55,6 +65,7 @@ Namespace DataLayer.AdoNet
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .HoursWorked = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("HoursWorked")),
             .OvertimeRegular = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("OvertimeRegular")),
             .OvertimeHoliday = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("OvertimeHoliday")),
             .OvertimeSpecial = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("OvertimeSpecial")),

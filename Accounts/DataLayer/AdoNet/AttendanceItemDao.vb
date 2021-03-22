@@ -10,9 +10,20 @@ Namespace DataLayer.AdoNet
 
     Public Class AttendanceItemDao
         Inherits AccountsDao
-        Implements IDaoChild(Of AttendanceItem)
+        Implements IDaoChild(Of AttendanceItem), IDaoGetRecord(Of AttendanceItem)
 
         Private ReadOnly Db As New Db()
+
+        Private ReadOnly FieldList As String = "DaysAbsentWithoutPay," &
+                                               "DaysAbsentWithPay," &
+                                               "DaysOff," &
+                                               "DaysPresent," &
+                                               "DaysTotal," &
+                                               "EmployeeIdNo," &
+                                               "EmployeeName," &
+                                               "EmployeeNameAra," &
+                                               "IdNo," &
+                                               "PayrollIdNo"
 
         Public Function GetRecordsWithGroupIdNo(PayrollIdNo, Optional sortExpression = Nothing) As List(Of AttendanceItem) Implements IDaoChild(Of AttendanceItem).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
@@ -24,18 +35,8 @@ Namespace DataLayer.AdoNet
                 End If
             End If
             Dim sql As String =
-                    "SELECT " &
-                    "DaysAbsentWithoutPay," &
-                    "DaysAbsentWithPay," &
-                    "DaysOff," &
-                    "DaysPresent," &
-                    "DaysTotal," &
-                    "EmployeeIdNo," &
-                    "EmployeeName," &
-                    "EmployeeNameAra," &
-                    "IdNo," &
-                    "PayrollIdNo," &
-                    "ROW_NUMBER() over(Order by " & sortExpression & ") As 'Sequence'" &
+                    "SELECT " & FieldList &
+                    ", ROW_NUMBER() over(Order by " & sortExpression & ") As 'Sequence'" &
                     " FROM [AttendanceItem_View]" &
                     " WHERE PayrollIdNo = @PayrollIdNo "
             Dim params() As Object = {"@PayrollIdNo", PayrollIdNo}
@@ -51,6 +52,14 @@ Namespace DataLayer.AdoNet
             Return Db.InsertTvp("InsertAttendanceItemTVP", tvpTable)
         End Function
 
+        Public Function GetRecord(Optional filter As String = Nothing) As AttendanceItem Implements IDaoGetRecord(Of AttendanceItem).GetRecord
+            Dim sql As String = "SELECT Top 1 " &
+                                FieldList &
+                                " FROM [AttendanceItem_View]" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return Db.Read(sql, Make).FirstOrDefault()
+        End Function
+
         Private Shared ReadOnly Make As Func(Of IDataReader, AttendanceItem) =
                                     Function(reader) _
             New AttendanceItem() With {
@@ -63,8 +72,7 @@ Namespace DataLayer.AdoNet
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayrollIdNo")),
-            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("Sequence"))
+            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayrollIdNo"))
            }
 
     End Class
