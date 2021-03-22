@@ -1,11 +1,9 @@
-﻿
-
-CREATE VIEW [dbo].[AttendanceItem_View]
+﻿CREATE VIEW dbo.AttendanceItem_View
 AS
 SELECT        dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.AttendanceItem.IdNo, dbo.AttendanceItem.EmployeeIdNo, dbo.AttendanceItem.PayrollIdNo, 
                          dbo.AttendanceItem.DaysPresent, dbo.AttendanceItem.DaysAbsentWithPay, dbo.AttendanceItem.DaysAbsentWithoutPay, dbo.AttendanceItem.DaysOff, 
-                         dbo.AttendanceItem.DaysPresent + dbo.AttendanceItem.DaysAbsentWithPay + dbo.AttendanceItem.DaysAbsentWithoutPay + dbo.AttendanceItem.DaysOff AS DaysTotal 
-                         FROM dbo.Employee INNER JOIN
+                         dbo.AttendanceItem.DaysPresent + dbo.AttendanceItem.DaysAbsentWithPay + dbo.AttendanceItem.DaysAbsentWithoutPay + dbo.AttendanceItem.DaysOff AS DaysTotal, dbo.AttendanceItem.Sequence
+FROM            dbo.Employee INNER JOIN
                          dbo.AttendanceItem ON dbo.Employee.IdNo = dbo.AttendanceItem.EmployeeIdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'AttendanceItem_View';
