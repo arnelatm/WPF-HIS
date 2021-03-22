@@ -16,6 +16,7 @@ Namespace DataLayer.AdoNet
 
         Private Const FieldList = "Amount," &
                                   "IdNo," &
+                                  "EmployeeIdNo," &
                                   "PayElementIdNo," &
                                   "PayrollIdNo"
 
