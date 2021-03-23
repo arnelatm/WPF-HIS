@@ -40,8 +40,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property Title As String
         Property TownCity As String
         Property ZipCode As String
-        Property RegularEmployeeDeductions As List(Of EmployeeDeductionView)
-        Property RegularEmployeeEarnings As List(Of EmployeeEarningView)
+        Property RegularEmployeeDeductions As List(Of EmployeePayElementView)
+        Property RegularEmployeeEarnings As List(Of EmployeePayElementView)
         Property EmployeePhones As List(Of EmployeePhoneView)
 
     End Interface

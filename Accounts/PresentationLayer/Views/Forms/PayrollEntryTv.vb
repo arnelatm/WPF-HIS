@@ -11,8 +11,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private _payrollAttendance As New List(Of AttendanceItemView)
         Private _payrollOvertime As New List(Of OtWorkHourView)
-        Private _payrollEarning As New List(Of PayrollEarningView)
+
+        'Private _payrollEarning As New List(Of PayrollEarningView)
         Private Property MyPresenter As PayrollPresenter
+
         Private _employees
 
         Public Sub New()

@@ -16,10 +16,19 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
+        Private FieldList As String =
+                                      "EndDate," &
+                                      "IdNo," &
+                                      "PayCycleIdNo," &
+                                      "PayrollCode," &
+                                      "PayrollName," &
+                                      "PayrollNameAra," &
+                                      "StartDate"
+
         Public Function GetRecordByIdNo(idNo) As Payroll Implements IDaoAll(Of Payroll).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, PayrollCode, PayrollName, PayrollNameAra, StartDate, EndDate, PayCycleIdNo" &
-                    "   FROM [Payroll]" &
+                    " SELECT " & FieldList &
+                    " FROM [Payroll]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
@@ -70,24 +79,24 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Payroll) =
                                     Function(reader) _
             New Payroll() With {
+            .EndDate = Extensions.AsDate(reader("EndDate")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .PayCycleIdNo = Extensions.AsInt(Of Int16)(reader("PayCycleIdNo")),
             .PayrollCode = Extensions.AsString(reader("PayrollCode")),
             .PayrollName = Extensions.AsString(reader("PayrollName")),
             .PayrollNameAra = Extensions.AsString(reader("PayrollNameAra")),
-            .StartDate = Extensions.AsDate(reader("StartDate")),
-            .EndDate = Extensions.AsDate(reader("EndDate")),
-            .PayCycleIdNo = Extensions.AsInt(Of Int16)(reader("PayCycleIdNo"))
+            .StartDate = Extensions.AsDate(reader("StartDate"))
             }
 
         Private Function Take(Payroll As Payroll) As Object()
             Return New Object() {
+                                 "@EndDate", Payroll.EndDate,
                                  "@IdNo", Payroll.IdNo,
+                                 "@PayCycleIdNo", Payroll.PayCycleIdNo,
                                  "@PayrollCode", Payroll.PayrollCode,
                                  "@PayrollName", Payroll.PayrollName,
                                  "@PayrollNameAra", Payroll.PayrollNameAra,
-                                 "@StartDate", Payroll.StartDate,
-                                 "@EndDate", Payroll.EndDate,
-                                 "@PayCycleIdNo", Payroll.PayCycleIdNo
+                                 "@StartDate", Payroll.StartDate
                                  }
         End Function
 

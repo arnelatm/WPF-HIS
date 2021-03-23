@@ -10,7 +10,6 @@ Namespace PresentationLayer.Views.Forms
         Implements IDepositTypeView
 
         Private _accountsByCode
-        Private _payrollEarnAccounts As List(Of PayrollEarnAccountView)
         Private _useRevCostCenters As Nullable(Of Boolean)
         Private _useDepartments As Nullable(Of Boolean)
         Private _usePayGroups As Nullable(Of Boolean)

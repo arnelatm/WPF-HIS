@@ -2,6 +2,8 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
+Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
     ' Data access object for Employee
@@ -22,11 +24,11 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim deductionDao = New EmployeeDeductionDao
-            Dim earningDao = New EmployeeEarningDao
+            Dim deductionDao = New EmployeePayElementDao
+            Dim earningDao = New EmployeePayElementDao
             Dim phoneDao = New EmployeePhoneDao
-            Dim d As List(Of EmployeeDeduction) = deductionDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
-            Dim e As List(Of EmployeeEarning) = earningDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+            Dim d As List(Of EmployeePayElement) = deductionDao.GetRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'")
+            Dim e As List(Of EmployeePayElement) = earningDao.GetRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'")
             Dim p As List(Of EmployeePhone) = phoneDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
             data.RegularEmployeeDeductions = d
             data.RegularEmployeeEarnings = e

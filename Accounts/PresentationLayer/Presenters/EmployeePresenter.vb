@@ -1,4 +1,6 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
@@ -9,15 +11,21 @@ Namespace PresentationLayer.Presenters
     Public Class EmployeePresenter
         Inherits AccountsPresenter(Of IEmployeeView, EmployeeModel)
 
-        Protected DtEarnInsertTable As New DataTable
-        Protected DtEarnUpdateTable As New DataTable
-        Protected DtDeductInsertTable As New DataTable
-        Protected DtDeductUpdateTable As New DataTable
+        Protected DtEmpPayElementInsertTable As New DataTable
+        Protected DtEmpPayElementUpdateTable As New DataTable
+
+        'Protected DtEarnInsertTable As New DataTable
+        'Protected DtEarnUpdateTable As New DataTable
+        'Protected DtDeductInsertTable As New DataTable
+        'Protected DtDeductUpdateTable As New DataTable
         Protected DtPhoneInsertTable As New DataTable
+
         Protected DtPhoneUpdateTable As New DataTable
 
-        Private ReadOnly _employeeDeductionModel As New ModelAccounts("EmployeeDeduction")
-        Private ReadOnly _employeeEarningModel As New ModelAccounts("EmployeeEarning")
+        Private ReadOnly _employeePayElementModel As New ModelAccounts("EmployeePayElement")
+
+        'Private ReadOnly _employeeDeductionModel As New ModelAccounts("EmployeeDeduction")
+        'Private ReadOnly _employeeEarningModel As New ModelAccounts("EmployeeEarning")
         Private ReadOnly _employeePhoneModel As New ModelAccounts("EmployeePhone")
 
         Public Sub New(view As IEmployeeView)
@@ -38,17 +46,21 @@ Namespace PresentationLayer.Presenters
 
         Private Sub CreateDataTables()
 
-            CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
-                                             {"EarningIdNo", GetType(Int16)},
+            CreateDataTable(DtEmpPayElementInsertTable, {{"Amount", GetType(Decimal)},
                                              {"EmployeeIdNo", GetType(Int32)},
+                                             {"PayElementIdNo", GetType(Int16)},
                                              {"Rate", GetType(Decimal)},
-                                             {"Sequence", GetType(Int16)}})
+                                             {"Sequence", GetType(Int16)},
+                                             {"Unit", GetType(String)}}
+                                             )
 
-            CreateDataTable(DtDeductInsertTable, {{"Amount", GetType(Decimal)},
-                                              {"DeductionIdNo", GetType(Int16)},
-                                              {"EmployeeIdNo", GetType(Int32)},
-                                              {"Rate", GetType(Decimal)},
-                                              {"Sequence", GetType(Int16)}})
+            'CreateDataTable(DtDeductInsertTable, {{"Amount", GetType(Decimal)},
+            '                                  {"PayElementIdNo", GetType(Int16)},
+            '                                  {"PayElementKind", GetType(String)},
+            '                                  {"EmployeeIdNo", GetType(Int32)},
+            '                                  {"Rate", GetType(Decimal)},
+            '                                  {"Unit", GetType(String)},
+            '                                  {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtPhoneInsertTable, {{"AreaCode", GetType(String)},
                                              {"CountryTelIdNo", GetType(Int16)},
@@ -57,19 +69,22 @@ Namespace PresentationLayer.Presenters
                                              {"PhoneTypeIdNo", GetType(Int16)},
                                              {"Sequence", GetType(Int16)}})
 
-            CreateDataTable(DtEarnUpdateTable, {{"Amount", GetType(Decimal)},
-                                            {"EarningIdNo", GetType(Int16)},
+            CreateDataTable(DtEmpPayElementUpdateTable, {{"Amount", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
+                                            {"PayElementIdNo", GetType(Int16)},
                                             {"Rate", GetType(Decimal)},
-                                            {"Sequence", GetType(Int16)}})
+                                            {"Sequence", GetType(Int16)},
+                                            {"Unit", GetType(String)}})
 
-            CreateDataTable(DtDeductUpdateTable, {{"Amount", GetType(Decimal)},
-                                              {"DeductionIdNo", GetType(Int16)},
-                                              {"EmployeeIdNo", GetType(Int32)},
-                                              {"IdNo", GetType(Int32)},
-                                              {"Rate", GetType(Decimal)},
-                                              {"Sequence", GetType(Int16)}})
+            'CreateDataTable(DtDeductUpdateTable, {{"Amount", GetType(Decimal)},
+            '                                  {"PayElementIdNo", GetType(Int16)},
+            '                                  {"PayElementKind", GetType(String)},
+            '                                  {"EmployeeIdNo", GetType(Int32)},
+            '                                  {"IdNo", GetType(Int32)},
+            '                                  {"Rate", GetType(Decimal)},
+            '                                  {"Unit", GetType(String)},
+            '                                  {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtPhoneUpdateTable, {{"AreaCode", GetType(String)},
                                              {"CountryTelIdNo", GetType(Int16)},
@@ -86,12 +101,20 @@ Namespace PresentationLayer.Presenters
             Return Model.GetFieldValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
         End Function
 
-        Public Function GetEmployeeDeductions(ByVal idNo As Int32) As List(Of EmployeeDeductionModel)
-            Return _employeeDeductionModel.GetRecordsWithGroupIdNo(Of EmployeeDeductionModel)(idNo, "Sequence")
+        Public Function GetEmployeeDeductions(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
+            Dim _employeePayElementDao As New EmployeePayElementDao
+            Dim employeeDeductionModel As New List(Of EmployeePayElementModel)
+            Dim employeeDeduction As List(Of EmployeePayElement) = _employeePayElementDao.GetRecords("PayElementKind = '" & PayElementKindSelection.Deduction & "' and EmployeeIdNo = " & View.IdNo)
+            GlobalVariables.Mapper.Map(employeeDeduction, employeeDeductionModel)
+            Return employeeDeductionModel
         End Function
 
-        Public Function GetEmployeeEarnings(ByVal idNo As Int32) As List(Of EmployeeEarningModel)
-            Return _employeeEarningModel.GetRecordsWithGroupIdNo(Of EmployeeEarningModel)(idNo, "Sequence")
+        Public Function GetEmployeeEarnings(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
+            Dim _employeePayElementDao As New EmployeePayElementDao
+            Dim employeeEarningModel As New List(Of EmployeePayElementModel)
+            Dim employeeEarning As List(Of EmployeePayElement) = _employeePayElementDao.GetRecords("PayElementKind = '" & PayElementKindSelection.Earning & "' and EmployeeIdNo = " & View.IdNo)
+            GlobalVariables.Mapper.Map(employeeEarning, employeeEarningModel)
+            Return employeeEarningModel
         End Function
 
         Public Function GetEmployeePhones(ByVal idNo As Int16) As List(Of EmployeePhoneModel)
@@ -100,8 +123,10 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                ViewToDataTables(View.RegularEmployeeDeductions, DtDeductInsertTable, DtDeductUpdateTable, AddressOf DeductionFillData, AddressOf DeductionFilter)
-                ViewToDataTables(View.RegularEmployeeEarnings, DtEarnInsertTable, DtEarnUpdateTable, AddressOf EarningFillData, AddressOf EarningFilter)
+                Dim employeePayElements As New List(Of EmployeePayElementView)
+                employeePayElements.AddRange(View.RegularEmployeeEarnings)
+                employeePayElements.AddRange(View.RegularEmployeeDeductions)
+                ViewToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
                 ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
                 If IsEmpty(View.HiredDate) Then
                     View.HiredDate = Today()
@@ -109,19 +134,22 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub EarningFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+        Private Sub EmpPayElementFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("Amount") = itemDataView.Amount
-            workRow("EarningIdNo") = itemDataView.EarningIdNo
             workRow("EmployeeIdNo") = View.IdNo
+            workRow("PayElementIdNo") = itemDataView.PayElementIdNo
             workRow("Rate") = itemDataView.Rate
+            workRow("Unit") = itemDataView.Unit
         End Sub
 
-        Private Sub DeductionFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
-            workRow("Amount") = itemDataView.Amount
-            workRow("DeductionIdNo") = itemDataView.DeductionIdNo
-            workRow("EmployeeIdNo") = View.IdNo
-            workRow("Rate") = itemDataView.Rate
-        End Sub
+        'Private Sub DeductionFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+        '    workRow("Amount") = itemDataView.Amount
+        '    workRow("EmployeeIdNo") = View.IdNo
+        '    workRow("PayElementIdNo") = itemDataView.PayElementIdNo
+        '    workRow("PayElementKind") = itemDataView.PayElementKind
+        '    workRow("Rate") = itemDataView.Rate
+        '    workRow("Unit") = itemDataView.Unit
+        'End Sub
 
         Private Sub PhoneFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("AreaCode") = itemDataView.AreaCode
@@ -131,14 +159,14 @@ Namespace PresentationLayer.Presenters
             workRow("PhoneTypeIdNo") = itemDataView.PhoneTypeIdNo
         End Sub
 
-        Public Function DeductionFilter(ByVal obj As Object) As Boolean
-            If obj.Amount <> 0 Or obj.Rate <> 0 Then
-                Return True
-            End If
-            Return False
-        End Function
+        'Public Function DeductionFilter(ByVal obj As Object) As Boolean
+        '    If obj.Amount <> 0 Or obj.Rate <> 0 Then
+        '        Return True
+        '    End If
+        '    Return False
+        'End Function
 
-        Public Function EarningFilter(ByVal obj As EmployeeEarningView) As Boolean
+        Public Function EmpPayElementFilter(ByVal obj As EmployeePayElementView) As Boolean
             If obj.Amount <> 0 Or obj.Rate <> 0 Then
                 Return True
             End If
@@ -154,10 +182,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_employeeDeductionModel, DtDeductUpdateTable, DtDeductInsertTable, passedValue, "EmployeeIdNo")
-            If retVal >= 0 Then
-                retVal = UpdateChildData(_employeeEarningModel, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "EmployeeIdNo")
-            End If
+            retVal = UpdateChildData(_employeePayElementModel, DtEmpPayElementUpdateTable, DtEmpPayElementInsertTable, passedValue, "EmployeeIdNo")
             If retVal >= 0 Then
                 retVal = UpdateChildData(_employeePhoneModel, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
             End If
@@ -166,19 +191,19 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
-                ' look for duplicate earningidno in bsEarning
-                Dim duplicate = FirstFieldDuplicate(Of EmployeeEarningView, Int16)(View.RegularEmployeeEarnings, "EarningIdNo")
+                ' look for duplicate PayElementIdNo in bsEarning
+                Dim duplicate = FirstFieldDuplicate(Of EmployeePayElementView, Int16)(View.RegularEmployeeEarnings, "PayElementIdNo")
                 If duplicate IsNot Nothing Then
                     MessageBox.Show("Duplicate earning value found in Employee Earnings. See line <" + (duplicate + 1).ToString() + ">.")
                 Else
-                    duplicate = FirstFieldDuplicate(Of EmployeeDeductionView, Int16)(View.RegularEmployeeDeductions, "DeductionIdNo")
+                    duplicate = FirstFieldDuplicate(Of EmployeePayElementView, Int16)(View.RegularEmployeeDeductions, "PayElementIdNo")
                     If duplicate IsNot Nothing Then
                         MessageBox.Show("Duplicate earning value found in Employee Deductions. See line <" + (duplicate + 1).ToString() + ">.")
                     Else
                         retValue = True
                     End If
                     'For Each item In View.EmployeeEarnings
-                    '    item.EarningIdNo
+                    '    item.PayElementIdNo
 
                     'Next
                     'If CodeToEnum(Of PaymentTypeSelection)(View.DepositType) <> PaymentTypeSelection.AccountsPayable Then

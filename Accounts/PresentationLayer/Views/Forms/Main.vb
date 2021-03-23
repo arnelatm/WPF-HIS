@@ -1318,13 +1318,13 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub DeductionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeductionsToolStripMenuItem.Click
-            Dim childMdiForm As DeductionEntryTv
-            childMdiForm = New DeductionEntryTv With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
+        'Private Sub DeductionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeductionsToolStripMenuItem.Click
+        '    Dim childMdiForm As DeductionEntryTv
+        '    childMdiForm = New DeductionEntryTv With {
+        '        .MdiParent = Me
+        '        }
+        '    childMdiForm.Show()
+        'End Sub
 
         Private Sub LeavesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LeavesToolStripMenuItem.Click
             Dim childMdiForm As LeaveEntry
@@ -1497,13 +1497,13 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub GeneratePayrollToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneratePayrollToolStripMenuItem.Click
-            Dim childMdiForm
-            childMdiForm = New GeneratePayroll() With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
+        'Private Sub GeneratePayrollToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneratePayrollToolStripMenuItem.Click
+        '    Dim childMdiForm
+        '    childMdiForm = New GeneratePayroll() With {
+        '        .MdiParent = Me
+        '        }
+        '    childMdiForm.Show()
+        'End Sub
 
         Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
             Dim childMdiForm

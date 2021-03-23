@@ -16,7 +16,6 @@ Namespace DataLayer.AdoNet
         Const FieldList As String = "Amount," &
                                     "PayElementCode," &
                                     "PayElementIdNo," &
-                                    "PayElementKind," &
                                     "PayElementName," &
                                     "PayElementNameAra," &
                                     "PayElementType," &
@@ -63,7 +62,6 @@ Namespace DataLayer.AdoNet
             .Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
             .PayElementCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayElementCode")),
             .PayElementIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayElementIdNo")),
-            .PayElementKind = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayElementKind")),
             .PayElementName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayElementName")),
             .PayElementNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayElementNameAra")),
             .PayElementType = AATM.DataLayer.AdoNet.Extensions.AsChar(reader("PayElementType")),

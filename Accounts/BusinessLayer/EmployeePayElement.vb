@@ -19,6 +19,7 @@ Namespace BusinessLayer
         Public Property Amount As Decimal
         Public Property PayElementCode As String
         Public Property PayElementIdNo As Int16
+        Public Property PayElementKind As String
         Public Property PayElementName As String
         Public Property PayElementNameAra As String
         Public Property PayElementType As Char
