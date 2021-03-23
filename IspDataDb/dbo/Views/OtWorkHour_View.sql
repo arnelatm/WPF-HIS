@@ -1,7 +1,7 @@
-CREATE VIEW dbo.OtWorkHour_View
+﻿CREATE VIEW dbo.OtWorkHour_View
 AS
 SELECT        dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.OTWorkHour.IdNo, dbo.OTWorkHour.EmployeeIdNo, dbo.OTWorkHour.PayrollIdNo, dbo.OTWorkHour.OvertimeRegular, 
-                         dbo.OTWorkHour.OvertimeHoliday, dbo.OTWorkHour.OvertimeSpecial, dbo.OTWorkHour.HoursWorked
+                         dbo.OTWorkHour.OvertimeHoliday, dbo.OTWorkHour.OvertimeSpecial, dbo.OTWorkHour.HoursWorked, dbo.OTWorkHour.Sequence
 FROM            dbo.Employee INNER JOIN
                          dbo.OTWorkHour ON dbo.Employee.IdNo = dbo.OTWorkHour.EmployeeIdNo
 GO
