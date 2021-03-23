@@ -567,13 +567,16 @@ Namespace PresentationLayer.Presenters
             End If
             Dim otWorkHours As List(Of OtWorkHour) = _otWorkHoursDao.GetRecordsWithGroupIdNo(_payrollIdNo)
             GlobalVariables.Mapper.Map(otWorkHours, _otWorkHoursModel)
+            Dim payrollDetailIdNo As Int32
             For Each payrollDetailModel In payrollDetailsModel
                 Dim payrollDetail As New PayrollDetail
                 GlobalVariables.Mapper.Map(payrollDetailModel, payrollDetail)
-                Dim payrollDetailIdNo As Int32 = _payrollDetailsDao.AddRecord(payrollDetail)
-                GenerateRegularEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
-                GenerateComputedEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
-                GenerateGlobalEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                If payrollDetailModel.IdNo = 0 Then
+                    payrollDetailIdNo = _payrollDetailsDao.AddRecord(payrollDetail)
+                End If
+                GenerateRegularEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailModel.IdNo)
+                GenerateComputedEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailModel.IdNo)
+                GenerateGlobalEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailModel.IdNo)
                 progressBar.Value = progressBar.Value + 1
             Next
             For Each item In _payrollPayElements
@@ -795,21 +798,36 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function CreatePayrollDetails()
-            Dim payrollDetails = _payrollDetailsDao.GetRecordsByBroupIdNo()
-            Dim payrollDetails As New List(Of PayrollDetailModel)
-            For Each employeeAttendance In View.PayrollAttendance
-                Dim payrollDetail As New PayrollDetailModel
-                payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
-                payrollDetail.PayrollIdNo = View.IdNo
-                payrollDetails.Add(payrollDetail)
-            Next
+            Dim payrollDetails As New List(Of PayrollDetail)
+            Dim payrollDetailsModel As New List(Of PayrollDetailModel)
+            payrollDetails = _payrollDetailsDao.GetRecordsWithGroupIdNo(_payrollIdNo)
+            GlobalVariables.Mapper.Map(payrollDetails, payrollDetailsModel)
+            payrollDetails = Nothing
+            If payrollDetailsModel.Count() = 0 Then
+                For Each employeeAttendance In View.PayrollAttendance
+                    Dim payrollDetail As New PayrollDetailModel
+                    payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
+                    payrollDetail.PayrollIdNo = View.IdNo
+                    payrollDetailsModel.Add(payrollDetail)
+                Next
+            Else
+                For Each employeeAttendance In View.PayrollAttendance
+                    Dim payrollDetail As New PayrollDetailModel
+                    payrollDetail = payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
+                    If payrollDetail Is Nothing Then
+                        payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
+                        payrollDetail.PayrollIdNo = View.IdNo
+                        payrollDetailsModel.Add(payrollDetail)
+                    End If
+                Next
+            End If
             For Each employeeAttendance In View.PayrollOvertime
-                Dim payrollDetail = payrollDetails.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
+                Dim payrollDetail As PayrollDetailModel = payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
                 If payrollDetail Is Nothing Then
-                    payrollDetails.Add(payrollDetail)
+                    payrollDetailsModel.Add(payrollDetail)
                 End If
             Next
-            Return payrollDetails
+            Return payrollDetailsModel
         End Function
 
         Private Function ComputeFixedRateEarning(amount As Decimal, unit As String) As Decimal

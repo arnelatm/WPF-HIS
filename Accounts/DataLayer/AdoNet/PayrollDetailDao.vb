@@ -10,8 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class PayrollDetailDao
         Inherits AccountsDao
-        Implements IDao(Of PayrollDetail), IDaoAll(Of PayrollDetail), IDaoGetRecord(Of PayrollDetail), IDaoGetRecords(Of PayrollDetail)
-
+        Implements IDao(Of PayrollDetail), IDaoTvp(Of PayrollDetail), IDaoGetRecord(Of PayrollDetail), IDaoGetRecords(Of PayrollDetail), IGetRecordsWithGroupIdNo(Of PayrollDetail)
         Private ReadOnly _db As New Db()
 
         Private Const FieldList = "EmployeeCode," &
@@ -63,15 +62,6 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PayrollDetail) Implements IDaoAll(Of PayrollDetail).GetAll
-            Dim sql As String =
-                    "SELECT " &
-                    "EmployeeIdNo," &
-                    "PayrollIdNo," &
-                    " FROM [PayrollDetail]"
-            Return _db.Read(sql, Make).ToList()
-        End Function
-
         Public Function GetRecords(Optional filter As String = Nothing) As List(Of PayrollDetail) Implements IDaoGetRecords(Of PayrollDetail).GetRecords
             Dim sql As String = "SELECT " &
                                 FieldList &
@@ -86,6 +76,20 @@ Namespace DataLayer.AdoNet
                                 " FROM [PayrollDetail_View]" &
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
             Return _db.Read(sql, Make).FirstOrDefault()
+        End Function
+
+        Public Function GetRecordsWithGroupIdNo(idNo As Object, Optional sortExpression As Object = Nothing) As List(Of PayrollDetail) Implements IGetRecordsWithGroupIdNo(Of PayrollDetail).GetRecordsWithGroupIdNo
+            Dim sql As String =
+                    " SELECT " & FieldList &
+                    " FROM [PayrollDetail_View]" &
+                    " WHERE PayrollIdNo = @IdNo " &
+                    " ORDER BY EmployeeIdNo"
+            Dim params() As Object = {"@IdNo", idNo}
+            Return _db.Read(sql, Make, params).ToList()
+        End Function
+
+        Public Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal groupIdNo As Integer) As Integer Implements IDaoTvp(Of PayrollDetail).UpdateInsertTvp
+            Return _db.UpdateInsertTvp("UpdateInsertPayrollDetailTVP", updateTvpTable, insertTvpTable, groupIdNo)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PayrollDetail) =
