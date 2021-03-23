@@ -72,14 +72,14 @@ Namespace PresentationLayer.Views.Forms
         'AppDataDAC
         '
         Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
-        'bsPayrollEarnAccounts
-        '
-        Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel)
-        '
-        'CFlowLayout4
-        '
-        resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
+            '
+            'bsPayrollEarnAccounts
+            '
+            Me.bsPayrollEarnAccounts.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayElementAccountModel)
+            '
+            'CFlowLayout4
+            '
+            resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
         Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout4.Controls.Add(Me.tlpPaymentType)
         Me.CFlowLayout4.Name = "CFlowLayout4"

@@ -10,9 +10,16 @@ Namespace DataLayer.AdoNet
 
     Public Class PayrollDetailDao
         Inherits AccountsDao
-        Implements IDao(Of PayrollDetail), IDaoAll(Of PayrollDetail)
+        Implements IDao(Of PayrollDetail), IDaoAll(Of PayrollDetail), IDaoGetRecord(Of PayrollDetail), IDaoGetRecords(Of PayrollDetail)
 
         Private ReadOnly _db As New Db()
+
+        Private Const FieldList = "EmployeeCode," &
+                                  "EmployeeIdNo," &
+                                  "EmployeeName," &
+                                  "EmployeeNameAra," &
+                                  "IdNo," &
+                                  "PayrollIdNo"
 
         Public Function GetRecordByIdNo(idNo) As PayrollDetail Implements IDao(Of PayrollDetail).GetRecordByIdNo
             Dim sql As String =
@@ -27,8 +34,8 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim peaDao = New PayrollEarnAccountDao()
-            'data.PayrollEarnAccounts = peaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
+            'Dim peaDao = New PayElementAccountDao()
+            'data.PayElementAccounts = peaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
             Return data
         End Function
 
@@ -63,6 +70,22 @@ Namespace DataLayer.AdoNet
                     "PayrollIdNo," &
                     " FROM [PayrollDetail]"
             Return _db.Read(sql, Make).ToList()
+        End Function
+
+        Public Function GetRecords(Optional filter As String = Nothing) As List(Of PayrollDetail) Implements IDaoGetRecords(Of PayrollDetail).GetRecords
+            Dim sql As String = "SELECT " &
+                                FieldList &
+                                " FROM [PayrollDetail_View]" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return _db.Read(sql, Make).ToList()
+        End Function
+
+        Public Function GetRecord(Optional filter As String = Nothing) As PayrollDetail Implements IDaoGetRecord(Of PayrollDetail).GetRecord
+            Dim sql As String = "SELECT Top 1 " &
+                                FieldList &
+                                " FROM [PayrollDetail_View]" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return _db.Read(sql, Make).FirstOrDefault()
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PayrollDetail) =

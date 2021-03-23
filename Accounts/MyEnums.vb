@@ -82,20 +82,20 @@ Public Enum DocumentTypeSelection
     Others
 End Enum
 
-Public Enum DeductionTypeSelection
-    <EnumCode("R")> Regular
-    <EnumCode("C")> Computed
-    <EnumCode("D")> OnDemand
-    <EnumCode("G")> [Global]
-    '<EnumCode("N")> AsNeeded
-    '<EnumCode("G")> Garnishments
-    '<EnumCode("V")> Voluntary
-    '<EnumCode("F")> Fines
-    '<EnumCode("S")> SalaryLoans
-    '<EnumCode("O")> Others
-    '<EnumCode("P")> Pension
-    '<EnumCode("T")> IncomeTax
-End Enum
+'Public Enum DeductionTypeSelection
+'    <EnumCode("R")> Regular
+'    <EnumCode("C")> Computed
+'    <EnumCode("D")> OnDemand
+'    <EnumCode("G")> [Global]
+'    '<EnumCode("N")> AsNeeded
+'    '<EnumCode("G")> Garnishments
+'    '<EnumCode("V")> Voluntary
+'    '<EnumCode("F")> Fines
+'    '<EnumCode("S")> SalaryLoans
+'    '<EnumCode("O")> Others
+'    '<EnumCode("P")> Pension
+'    '<EnumCode("T")> IncomeTax
+'End Enum
 
 'Public Enum DeductOnSelection
 '    <EnumCode("")> NotSpecified
@@ -120,25 +120,25 @@ Public Enum PayTypeSelection
     <EnumCode("3")> Others
 End Enum
 
-Public Enum EarningTypeSelection
-    <EnumCode("R")> Regular
-    <EnumCode("C")> Computed
-    <EnumCode("D")> OnDemand
-    <EnumCode("G")> [Global]
-    '<EnumCode("O")> OvertimeRegular
-    '<EnumCode("V")> OvertimeHoliday
-    '<EnumCode("T")> OvertimeSpecial
-    '<EnumCode("S")> SickPay
-    '<EnumCode("V")> VacationPay
-    '<EnumCode("H")> HolidayPay
-    '<EnumCode("B")> Bonus
-    '<EnumCode("C")> Commission
-    '<EnumCode("E")> Expenses
-    '<EnumCode("D")> Redundancy
-    '<EnumCode("M")> Miscellaneous
-    '<EnumCode("A")> AsNeeded
-    '<EnumCode("Y")> Summary
-End Enum
+'Public Enum EarningTypeSelection
+'    <EnumCode("R")> Regular
+'    <EnumCode("C")> Computed
+'    <EnumCode("D")> OnDemand
+'    <EnumCode("G")> [Global]
+'    '<EnumCode("O")> OvertimeRegular
+'    '<EnumCode("V")> OvertimeHoliday
+'    '<EnumCode("T")> OvertimeSpecial
+'    '<EnumCode("S")> SickPay
+'    '<EnumCode("V")> VacationPay
+'    '<EnumCode("H")> HolidayPay
+'    '<EnumCode("B")> Bonus
+'    '<EnumCode("C")> Commission
+'    '<EnumCode("E")> Expenses
+'    '<EnumCode("D")> Redundancy
+'    '<EnumCode("M")> Miscellaneous
+'    '<EnumCode("A")> AsNeeded
+'    '<EnumCode("Y")> Summary
+'End Enum
 
 Public Enum PayElementKindSelection
     <EnumCode("E")> Earning

@@ -23,7 +23,8 @@ Namespace DataLayer.AdoNet
                                                "EmployeeName," &
                                                "EmployeeNameAra," &
                                                "IdNo," &
-                                               "PayrollIdNo"
+                                               "PayrollIdNo," &
+                                               "Sequence"
 
         Public Function GetRecordsWithGroupIdNo(PayrollIdNo, Optional sortExpression = Nothing) As List(Of AttendanceItem) Implements IDaoChild(Of AttendanceItem).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
@@ -72,7 +73,8 @@ Namespace DataLayer.AdoNet
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayrollIdNo"))
+            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayrollIdNo")),
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("Sequence"))
            }
 
     End Class

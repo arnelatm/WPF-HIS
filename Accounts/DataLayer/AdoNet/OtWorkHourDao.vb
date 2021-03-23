@@ -21,7 +21,8 @@ Namespace DataLayer.AdoNet
                                                "OvertimeRegular," &
                                                "OvertimeHoliday," &
                                                "OvertimeSpecial," &
-                                               "PayrollIdNo"
+                                               "PayrollIdNo," &
+                                               "Sequence"
 
         Public Function GetRecordsWithGroupIdNo(PayrollIdNo, Optional sortExpression = Nothing) As List(Of OtWorkHour) Implements IDaoChild(Of OtWorkHour).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then

@@ -67,8 +67,8 @@ Namespace BusinessLayer
         Public Property Title As String
         Public Property TownCity As String
         Public Property ZipCode As String
-        Public Property RegularEmployeeDeductions As List(Of EmployeeDeduction)
-        Public Property RegularEmployeeEarnings As List(Of EmployeeEarning)
+        Public Property RegularEmployeeDeductions As List(Of EmployeePayElement)
+        Public Property RegularEmployeeEarnings As List(Of EmployeePayElement)
         Public Property EmployeePhones As List(Of EmployeePhone)
 
     End Class
