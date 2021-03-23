@@ -46,6 +46,14 @@ Public Interface IDaoChild(Of TBiz)
 
 End Interface
 
+
+Public Interface IGetRecordsWithGroupIdNo(Of TBiz)
+    ' gets a group of records with specific id no.
+
+    Function GetRecordsWithGroupIdNo(idNo, Optional ByVal sortExpression = Nothing) As List(Of TBiz)
+
+End Interface
+
 Public Interface IDaoTvp(Of TBiz)
     ' gets a specific record data
 
