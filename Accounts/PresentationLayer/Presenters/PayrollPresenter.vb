@@ -42,7 +42,7 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _attendanceItemDao = New AttendanceItemDao
 
-        Private ReadOnly _employeeEarningsDao = New EmployeePayElementDao
+        Private ReadOnly _employeePayElementsDao = New EmployeePayElementDao
         Private ReadOnly _otWorkHoursDao = New OtWorkHourDao
         Private ReadOnly _payCycleDao = New PayCycleDao
         Private ReadOnly _payElementsDao = New PayElementDao
@@ -573,10 +573,13 @@ Namespace PresentationLayer.Presenters
                 GlobalVariables.Mapper.Map(payrollDetailModel, payrollDetail)
                 If payrollDetailModel.IdNo = 0 Then
                     payrollDetailIdNo = _payrollDetailsDao.AddRecord(payrollDetail)
+                Else
+                    payrollDetailIdNo = payrollDetailModel.IdNo
                 End If
-                GenerateRegularEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailModel.IdNo)
-                GenerateComputedEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailModel.IdNo)
-                GenerateGlobalEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailModel.IdNo)
+                GenerateRegularEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                GenerateComputedEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                GenerateGlobalEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                GenerateRegularDeductions(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 progressBar.Value = progressBar.Value + 1
             Next
             For Each item In _payrollPayElements
@@ -597,7 +600,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GenerateRegularEarnings(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             Dim empEarnings As New List(Of EmployeePayElement)
-            empEarnings = _employeeEarningsDao.GetRecordsWithGroupIdNo(employeeIdNo)
+            empEarnings = _employeePayElementsDao.GetRecordsWithGroupIdNo(employeeIdNo)
             Dim empEarningsModel As New List(Of EmployeePayElementModel)
             GlobalVariables.Mapper.Map(empEarnings, empEarningsModel)
             Dim amount As Decimal
@@ -633,6 +636,50 @@ Namespace PresentationLayer.Presenters
                             AddEarning(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
                         Else
                             MakeEarning(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
+                        End If
+                    End If
+                End If
+            Next
+        End Sub
+
+        Private Sub GenerateRegularDeductions(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
+            Dim EmpDeductions As New List(Of EmployeePayElement)
+            EmpDeductions = _employeePayElementsDao.GetRecordsWithGroupIdNo(employeeIdNo)
+            Dim EmpDeductionsModel As New List(Of EmployeePayElementModel)
+            GlobalVariables.Mapper.Map(EmpDeductions, EmpDeductionsModel)
+            Dim amount As Decimal
+            For Each empDeduction As EmployeePayElementModel In EmpDeductionsModel
+                Dim Deduction As New PayElement
+                Dim DeductionModel As New PayElementModel
+                'If empDeduction.EmployeeIdNo = 323 Then
+                '    Debugger.Break()
+                'End If
+                Deduction = _payElementsDao.GetRecordByIdNo(empDeduction.PayElementIdNo)
+                GlobalVariables.Mapper.Map(Deduction, DeductionModel)
+                If Deduction.CalculationType = _fixedAmountType Then
+                    amount = ComputeFixedAmountDeduction(empDeduction.Amount, empDeduction.Unit)
+                    If Not regenerate Then
+                        AddDeduction(employeeIdNo, amount, Deduction.IdNo, 0, payrollDetailIdNo)
+                    Else
+                        MakeDeduction(employeeIdNo, amount, Deduction.IdNo, payrollDetailIdNo)
+                    End If
+                ElseIf Deduction.CalculationType = _fixedRateType Then
+                    Dim rate As Decimal = empDeduction.Rate
+                    If rate <> 0 Then
+                        Dim qty As Decimal
+                        If Deduction.QuantityType = _overtimeRegularType OrElse
+                            Deduction.QuantityType = _overtimeHolidayType OrElse
+                            Deduction.QuantityType = _overTimeSpecialType OrElse
+                            Deduction.QuantityType = _hoursWorkedType Then
+                            qty = ComputeQuantity(empDeduction.EmployeeIdNo, Deduction.QuantityType)
+                        Else
+                            qty = ComputeQuantity(empDeduction.EmployeeIdNo, Deduction.QuantityType)
+                        End If
+                        amount = rate * qty
+                        If Not regenerate Then
+                            AddDeduction(employeeIdNo, amount, Deduction.IdNo, 0, payrollDetailIdNo)
+                        Else
+                            MakeDeduction(employeeIdNo, amount, Deduction.IdNo, payrollDetailIdNo)
                         End If
                     End If
                 End If
