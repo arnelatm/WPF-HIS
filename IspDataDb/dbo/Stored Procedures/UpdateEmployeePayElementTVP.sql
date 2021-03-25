@@ -6,6 +6,7 @@
 
 
 
+
 CREATE PROCEDURE  [dbo].[UpdateEmployeePayElementTVP]
   @MParam EmployeePayElementUpdate READONLY, @GroupIdNo as INT
 AS 
@@ -22,7 +23,8 @@ SET a.Amount = B.Amount,
 	a.EmployeeIdNo = @GroupIdNo,
 	a.PayElementIdNo = B.PayElementIdNo,
 	a.Rate = B.Rate,
-	a.[Sequence] = B.[Sequence]
+	a.[Sequence] = B.[Sequence],
+	a.Unit = b.Unit
 from EmployeePayElement a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
 
