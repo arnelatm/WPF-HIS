@@ -19,7 +19,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "DepartmentName"
             TreeViewMainField = "DepartmentName"
             TreeViewSecondaryField = "DepartmentCode"
-            ModelPresenter = New ModelCommon("Department")
+            ModelOfPresenter = New ModelCommon("Department")
             OriginalModel = New DepartmentModel()
             DataModel = New DepartmentModel
             TreeViewList = New List(Of DepartmentModel)

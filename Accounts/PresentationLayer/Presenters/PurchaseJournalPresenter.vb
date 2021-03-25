@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPurchaseJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("PurchaseJournal")
+            ModelOfPresenter = New ModelAccounts("PurchaseJournal")
             TableName = "PurchaseJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New PurchaseJournalModel()
@@ -63,7 +63,7 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             GlobalVariables.Mapper.Map(View, DataModel)
-            Return ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            Return ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
         End Function
 
     End Class

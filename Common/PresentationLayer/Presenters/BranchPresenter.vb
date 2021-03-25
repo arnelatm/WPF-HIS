@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IBranchView)
             MyBase.New(view)
 
-            ModelPresenter = New ModelCommon("Branch")
+            ModelOfPresenter = New ModelCommon("Branch")
             TableName = "Branch"
             SortOrderKey = "BranchName"
             TreeViewMainField = "BranchName"

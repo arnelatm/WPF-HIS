@@ -26,7 +26,7 @@ Namespace PresentationLayer.Presenters
         Private _payrollEarning
         Private _payrollPayElements As New List(Of PayrollPayElementModel)
         Private _savedPayrollPayElements As New List(Of PayrollPayElementModel)
-        Private _computedEarnings As New List(Of PayElementModel)
+        Private _computedPayElements As New List(Of PayElementModel)
         Private _globalEarnings As New List(Of PayElementModel)
         Private _otWorkHoursModel As New List(Of OtWorkHour)
 
@@ -92,7 +92,7 @@ Namespace PresentationLayer.Presenters
 
             TableName = "Payroll"
             SortOrderKey = "EndDate"
-            ModelPresenter = New ModelAccounts("Payroll")
+            ModelOfPresenter = New ModelAccounts("Payroll")
             OriginalModel = New PayrollModel
             DataModel = New PayrollModel
             If TreeViewParentIdField IsNot Nothing Then
@@ -164,8 +164,8 @@ Namespace PresentationLayer.Presenters
                     Dim maxRecord As PayrollModel
                     Dim payMonthText As String = "Payroll for the Month of"
                     Dim PayrollText As String = "Payroll for the Period"
-                    nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
-                    maxRecord = ModelPresenter.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
+                    nIdNoMax = ModelOfPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
+                    maxRecord = ModelOfPresenter.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
                     View.StartDate = maxRecord.EndDate.AddDays(1)
                     Dim arabicCulture As New CultureInfo("ar-ae", False)
                     If View.StartDate.Day = 1 Then
@@ -188,13 +188,13 @@ Namespace PresentationLayer.Presenters
             'Dim maxRecord As PayrollModel
             'Dim payMonthText As String = "Payroll for the Month of"
             'Dim PayrollText As String = "Payroll for the Period"
-            'nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
+            'nIdNoMax = ModelOfPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
             'If nIdNoMax = 0 Then
             '    Dim now As Date = Today()
             '    View.EndDate = DateAdd(DateInterval.Day, DateAndTime.Day(now) * -1, now)
             '    View.StartDate = DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate)
             'Else
-            '    maxRecord = ModelPresenter.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
+            '    maxRecord = ModelOfPresenter.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
             '    View.StartDate = maxRecord.EndDate.AddDays(1)
             '    If View.StartDate.Day = 1 Then
             '        View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
@@ -477,7 +477,7 @@ Namespace PresentationLayer.Presenters
         'Public Sub New(view As IPayrollView)
         '    MyBase.New(view)
         '    TableName = "Account"
-        '    ModelPresenter = New ModelAccounts("Payroll")
+        '    ModelOfPresenter = New ModelAccounts("Payroll")
         '    TableName = "Payroll"
         '    SortOrderKey = "IdNo"
         '    OriginalModel = New PayrollModel()
@@ -549,14 +549,16 @@ Namespace PresentationLayer.Presenters
             Dim payrollDetailsModel As List(Of PayrollDetailModel)
             payrollDetailsModel = CreatePayrollDetails()
             Dim computedEarnings As List(Of PayElement)
-            computedEarnings = _payElementsDao.GetRecords("PayElementKind = '" & _PayElementType &
-                                                          "' and PayElementType = '" & _computedType &
-                                                          "' and Summary=0")
-            GlobalVariables.Mapper.Map(computedEarnings, _computedEarnings)
+            computedEarnings = _payElementsDao.GetRecords("PayElementType = '" & _computedType & "' and Summary=0")
+            'computedEarnings = _payElementsDao.GetRecords("PayElementKind = '" & _PayElementType &
+            '                                              "' and PayElementType = '" & _computedType &
+            '                                              "' and Summary=0")
+            GlobalVariables.Mapper.Map(computedEarnings, _computedPayElements)
             Dim globalEarnings As List(Of PayElement)
-            globalEarnings = _payElementsDao.GetRecords("PayElementKind = '" & _PayElementType &
-                                                        "' and CalculationType = '" & _globalType &
-                                                        "' and not Summary=0")
+            globalEarnings = _payElementsDao.GetRecords("CalculationType = '" & _globalType & "' and not Summary=0")
+            'globalEarnings = _payElementsDao.GetRecords("PayElementKind = '" & _PayElementType &
+            '                                            "' and CalculationType = '" & _globalType &
+            '                                            "' and not Summary=0")
             GlobalVariables.Mapper.Map(globalEarnings, _globalEarnings)
             progressBar.Value = 0
             progressBar.Maximum = payrollDetailsModel.Count() + 2
@@ -576,10 +578,10 @@ Namespace PresentationLayer.Presenters
                 Else
                     payrollDetailIdNo = payrollDetailModel.IdNo
                 End If
-                GenerateRegularEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
-                GenerateComputedEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                GenerateRegularPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                GenerateComputedPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 GenerateGlobalEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
-                GenerateRegularDeductions(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                'GenerateRegularDeductions(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 progressBar.Value = progressBar.Value + 1
             Next
             For Each item In _payrollPayElements
@@ -598,7 +600,7 @@ Namespace PresentationLayer.Presenters
             progressBar.Visible = False
         End Sub
 
-        Private Sub GenerateRegularEarnings(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
+        Private Sub GenerateRegularPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             Dim empEarnings As New List(Of EmployeePayElement)
             empEarnings = _employeePayElementsDao.GetRecordsWithGroupIdNo(employeeIdNo)
             Dim empEarningsModel As New List(Of EmployeePayElementModel)
@@ -613,11 +615,11 @@ Namespace PresentationLayer.Presenters
                 earning = _payElementsDao.GetRecordByIdNo(empEarning.PayElementIdNo)
                 GlobalVariables.Mapper.Map(earning, earningModel)
                 If earning.CalculationType = _fixedAmountType Then
-                    amount = ComputeFixedAmountEarning(empEarning.Amount, empEarning.Unit)
+                    amount = ComputeFixedAmount(empEarning.Amount, empEarning.Unit)
                     If Not regenerate Then
-                        AddEarning(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
+                        AddPayElement(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
                     Else
-                        MakeEarning(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
+                        UpdatePayElement(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
                     End If
                 ElseIf earning.CalculationType = _fixedRateType Then
                     Dim rate As Decimal = empEarning.Rate
@@ -633,60 +635,60 @@ Namespace PresentationLayer.Presenters
                         End If
                         amount = rate * qty
                         If Not regenerate Then
-                            AddEarning(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
+                            AddPayElement(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
                         Else
-                            MakeEarning(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
+                            UpdatePayElement(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
                         End If
                     End If
                 End If
             Next
         End Sub
 
-        Private Sub GenerateRegularDeductions(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
-            Dim EmpDeductions As New List(Of EmployeePayElement)
-            EmpDeductions = _employeePayElementsDao.GetRecordsWithGroupIdNo(employeeIdNo)
-            Dim EmpDeductionsModel As New List(Of EmployeePayElementModel)
-            GlobalVariables.Mapper.Map(EmpDeductions, EmpDeductionsModel)
-            Dim amount As Decimal
-            For Each empDeduction As EmployeePayElementModel In EmpDeductionsModel
-                Dim Deduction As New PayElement
-                Dim DeductionModel As New PayElementModel
-                'If empDeduction.EmployeeIdNo = 323 Then
-                '    Debugger.Break()
-                'End If
-                Deduction = _payElementsDao.GetRecordByIdNo(empDeduction.PayElementIdNo)
-                GlobalVariables.Mapper.Map(Deduction, DeductionModel)
-                If Deduction.CalculationType = _fixedAmountType Then
-                    amount = ComputeFixedAmountDeduction(empDeduction.Amount, empDeduction.Unit)
-                    If Not regenerate Then
-                        AddDeduction(employeeIdNo, amount, Deduction.IdNo, 0, payrollDetailIdNo)
-                    Else
-                        MakeDeduction(employeeIdNo, amount, Deduction.IdNo, payrollDetailIdNo)
-                    End If
-                ElseIf Deduction.CalculationType = _fixedRateType Then
-                    Dim rate As Decimal = empDeduction.Rate
-                    If rate <> 0 Then
-                        Dim qty As Decimal
-                        If Deduction.QuantityType = _overtimeRegularType OrElse
-                            Deduction.QuantityType = _overtimeHolidayType OrElse
-                            Deduction.QuantityType = _overTimeSpecialType OrElse
-                            Deduction.QuantityType = _hoursWorkedType Then
-                            qty = ComputeQuantity(empDeduction.EmployeeIdNo, Deduction.QuantityType)
-                        Else
-                            qty = ComputeQuantity(empDeduction.EmployeeIdNo, Deduction.QuantityType)
-                        End If
-                        amount = rate * qty
-                        If Not regenerate Then
-                            AddDeduction(employeeIdNo, amount, Deduction.IdNo, 0, payrollDetailIdNo)
-                        Else
-                            MakeDeduction(employeeIdNo, amount, Deduction.IdNo, payrollDetailIdNo)
-                        End If
-                    End If
-                End If
-            Next
-        End Sub
+        'Private Sub GenerateRegularDeductions(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
+        '    Dim empDeductions As New List(Of EmployeePayElement)
+        '    empDeductions = _employeePayElementsDao.GetRecordsWithGroupIdNo(employeeIdNo)
+        '    Dim EmpDeductionsModel As New List(Of EmployeePayElementModel)
+        '    GlobalVariables.Mapper.Map(empDeductions, EmpDeductionsModel)
+        '    Dim amount As Decimal
+        '    For Each empDeduction As EmployeePayElementModel In EmpDeductionsModel
+        '        Dim Deduction As New PayElement
+        '        Dim DeductionModel As New PayElementModel
+        '        'If empDeduction.EmployeeIdNo = 323 Then
+        '        '    Debugger.Break()
+        '        'End If
+        '        Deduction = _payElementsDao.GetRecordByIdNo(empDeduction.PayElementIdNo)
+        '        GlobalVariables.Mapper.Map(Deduction, DeductionModel)
+        '        If Deduction.CalculationType = _fixedAmountType Then
+        '            amount = ComputeFixedAmount(empDeduction.Amount, empDeduction.Unit)
+        '            If Not regenerate Then
+        '                AddPayElement(employeeIdNo, amount, Deduction.IdNo, 0, payrollDetailIdNo)
+        '            Else
+        '                UpdatePayElement(employeeIdNo, amount, Deduction.IdNo, payrollDetailIdNo)
+        '            End If
+        '        ElseIf Deduction.CalculationType = _fixedRateType Then
+        '            Dim rate As Decimal = empDeduction.Rate
+        '            If rate <> 0 Then
+        '                Dim qty As Decimal
+        '                If Deduction.QuantityType = _overtimeRegularType OrElse
+        '                    Deduction.QuantityType = _overtimeHolidayType OrElse
+        '                    Deduction.QuantityType = _overTimeSpecialType OrElse
+        '                    Deduction.QuantityType = _hoursWorkedType Then
+        '                    qty = ComputeQuantity(empDeduction.EmployeeIdNo, Deduction.QuantityType)
+        '                Else
+        '                    qty = ComputeQuantity(empDeduction.EmployeeIdNo, Deduction.QuantityType)
+        '                End If
+        '                amount = rate * qty
+        '                If Not regenerate Then
+        '                    AddPayElement(employeeIdNo, amount, Deduction.IdNo, 0, payrollDetailIdNo)
+        '                Else
+        '                    UpdatePayElement(employeeIdNo, amount, Deduction.IdNo, payrollDetailIdNo)
+        '                End If
+        '            End If
+        '        End If
+        '    Next
+        'End Sub
 
-        Private Sub AddEarning(employeeIdNo As Int32, amount As Decimal, earningIdNo As Short, payrollPayEarningIdNo As Int16, payrollDetailIdNo As Int32)
+        Private Sub AddPayElement(employeeIdNo As Int32, amount As Decimal, earningIdNo As Short, payrollPayEarningIdNo As Int16, payrollDetailIdNo As Int32)
             If amount <> 0 Then
                 Dim payrollPayElement As New PayrollPayElementModel
                 payrollPayElement.Amount = Math.Round(amount, 2)
@@ -699,16 +701,16 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub MakeEarning(employeeIdNo As Int32, amount As Decimal, earningIdNo As Int16, payrollDetailIdNo As Int32)
+        Private Sub UpdatePayElement(employeeIdNo As Int32, amount As Decimal, earningIdNo As Int16, payrollDetailIdNo As Int32)
             If amount <> 0 Then
                 Dim earning As PayrollPayElementModel = _savedPayrollPayElements.Find(Function(value As PayrollPayElementModel)
                                                                                           Return value.EmployeeIdNo = employeeIdNo And value.PayElementIdNo = earningIdNo
                                                                                       End Function)
 
                 If earning Is Nothing Then
-                    AddEarning(employeeIdNo, amount, earningIdNo, 0, payrollDetailIdNo)
+                    AddPayElement(employeeIdNo, amount, earningIdNo, 0, payrollDetailIdNo)
                 Else
-                    AddEarning(employeeIdNo, amount, earning.PayrollDetailIdNo, earning.IdNo, earning.PayrollIdNo)
+                    AddPayElement(employeeIdNo, amount, earning.PayrollDetailIdNo, earning.IdNo, earning.PayrollIdNo)
                 End If
             End If
         End Sub
@@ -725,17 +727,17 @@ Namespace PresentationLayer.Presenters
             _payrollPayElements.Add(payrollPayElement)
         End Sub
 
-        Private Sub GenerateComputedEarnings(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
-            For Each earning As PayElementModel In _computedEarnings
+        Private Sub GenerateComputedPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
+            For Each earning As PayElementModel In _computedPayElements
                 'If employeeIdNo = 323 And earning.IdNo = 2 Then
                 '    Debugger.Break()
                 'End If
                 Dim amount As Decimal
-                amount = CalculateComputedEarning(employeeIdNo, earning)
+                amount = CalculateComputedPayElement(employeeIdNo, earning)
                 If Not regenerate Then
-                    AddEarning(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
+                    AddPayElement(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
                 Else
-                    MakeEarning(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
+                    UpdatePayElement(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
                 End If
             Next
         End Sub
@@ -743,20 +745,20 @@ Namespace PresentationLayer.Presenters
         Private Sub GenerateGlobalEarnings(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             For Each earning As PayElementModel In _globalEarnings
                 If Not regenerate Then
-                    AddEarning(employeeIdNo, earning.Rate, earning.IdNo, 0, payrollDetailIdNo)
+                    AddPayElement(employeeIdNo, earning.Rate, earning.IdNo, 0, payrollDetailIdNo)
                 Else
-                    MakeEarning(employeeIdNo, earning.Rate, earning.IdNo, payrollDetailIdNo)
+                    UpdatePayElement(employeeIdNo, earning.Rate, earning.IdNo, payrollDetailIdNo)
                 End If
             Next
         End Sub
 
-        Private Function CalculateComputedEarning(employeeIdNo As Int32, earning As PayElementModel) As Decimal
+        Private Function CalculateComputedPayElement(employeeIdNo As Int32, earning As PayElementModel) As Decimal
             Dim amount As Decimal
             Dim rate As Decimal
             If earning.CalculationType = _fixedRateType Then
                 Dim payElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = earning.IdNo)
                 If payElementModel IsNot Nothing Then
-                    rate = ComputeFixedAmountEarning(payElementModel.Amount, earning.Unit)
+                    rate = ComputeFixedAmount(payElementModel.Amount, earning.Unit)
                     Dim qty As Decimal = ComputeQuantity(employeeIdNo, earning.Unit)
                 Else
                     amount = 0
@@ -1011,7 +1013,7 @@ Namespace PresentationLayer.Presenters
             Return amount * factor
         End Function
 
-        Private Function ComputeFixedAmountEarning(amount As Decimal, unit As String) As Decimal
+        Private Function ComputeFixedAmount(amount As Decimal, unit As String) As Decimal
             Dim factor As Decimal
             Select Case _payFrequency
                 Case PayFrequencySelection.Monthly
@@ -1173,7 +1175,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GetAttendanceValues(employeeIdNo As Int32, fieldName As String) As Decimal
-            Return ModelPresenter.GetFieldValue(Of Decimal)(fieldName, "AttendanceItem", "EmployeeIdNo = " & employeeIdNo.ToString() & " and PayrollIdNo = " & _payrollIdNo)
+            Return ModelOfPresenter.GetFieldValue(Of Decimal)(fieldName, "AttendanceItem", "EmployeeIdNo = " & employeeIdNo.ToString() & " and PayrollIdNo = " & _payrollIdNo)
         End Function
 
         Private Function GetOtWorkHourValues(employeeIdNo As Int32, fieldName As String) As Decimal

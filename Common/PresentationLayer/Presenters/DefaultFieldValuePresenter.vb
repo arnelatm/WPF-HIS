@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IDefaultFieldValueView)
             MyBase.New(view)
 
-            ModelPresenter = New ModelCommon("DefaultFieldValue")
+            ModelOfPresenter = New ModelCommon("DefaultFieldValue")
             'TableName = "DefaultFieldValue"
             SortOrderKey = "SystemViewName + FieldName"
             TreeViewMainField = "SystemViewName"

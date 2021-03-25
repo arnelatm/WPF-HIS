@@ -9,7 +9,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IView)
             MyBase.New(view)
             TableName = "Account"
-            ModelPresenter = New ModelAccounts("Account")
+            ModelOfPresenter = New ModelAccounts("Account")
             TableName = "Account"
             SortOrderKey = "IdNo"
             OriginalModel = New AccountModel()

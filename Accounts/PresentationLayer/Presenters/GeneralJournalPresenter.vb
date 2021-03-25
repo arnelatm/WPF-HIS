@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IGeneralJournalView, closingEntry As Boolean)
             MyBase.New(view)
             _closingEntry = closingEntry
-            ModelPresenter = New ModelAccounts("GeneralJournal")
+            ModelOfPresenter = New ModelAccounts("GeneralJournal")
             If Not view.ClosingJournal Then
                 TableName = "GeneralJournalNormal_View"
             Else
@@ -104,7 +104,7 @@ Namespace PresentationLayer.Presenters
             retVal = UpdateChildData(_gjJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
                 GlobalVariables.Mapper.Map(View, DataModel)
-                retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+                retVal = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
             End If
         End Sub
 

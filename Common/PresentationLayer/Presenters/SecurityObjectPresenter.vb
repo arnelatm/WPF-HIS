@@ -15,7 +15,7 @@ Namespace PresentationLayer
 
         Public Sub New(view As ISecurityObjectView)
             MyBase.New(view)
-            ModelPresenter = New Model("SecurityObject")
+            ModelOfPresenter = New Model("SecurityObject")
             TableName = "SecurityObject_View"
             SortOrderKey = "SecurityObjectName"
             TreeViewMainField = "SecurityObjectName"

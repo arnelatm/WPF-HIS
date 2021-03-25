@@ -11,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPhoneTypeView)
             MyBase.New(view)
-            ModelPresenter = New ModelCommon("PhoneType")
+            ModelOfPresenter = New ModelCommon("PhoneType")
             TableName = "PhoneType"
             SortOrderKey = "PhoneTypeCode"
             TreeViewMainField = "PhoneTypeName"

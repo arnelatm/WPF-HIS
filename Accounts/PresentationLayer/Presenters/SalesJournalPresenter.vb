@@ -26,7 +26,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ISalesJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("SalesJournal")
+            ModelOfPresenter = New ModelAccounts("SalesJournal")
             TableName = "SalesJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New SalesJournalModel()
@@ -149,7 +149,7 @@ Namespace PresentationLayer.Presenters
             End If
             If retVal >= 0 Then
                 GlobalVariables.Mapper.Map(View, DataModel)
-                retVal = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+                retVal = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
             End If
         End Sub
 
@@ -256,7 +256,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesDepositModel)
-            Return ModelPresenter.GetSupplierOpenInvoices(supplierIdNo)
+            Return ModelOfPresenter.GetSupplierOpenInvoices(supplierIdNo)
         End Function
 
         Public Overrides Sub GoPrintRecord()

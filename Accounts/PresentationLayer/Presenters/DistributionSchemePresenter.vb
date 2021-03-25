@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             TableName = "DistributionScheme"
             SortOrderKey = "DistributionSchemeName"
-            ModelPresenter = New ModelAccounts("DistributionScheme")
+            ModelOfPresenter = New ModelAccounts("DistributionScheme")
             OriginalModel = New DistributionSchemeModel()
             DataModel = New DistributionSchemeModel
             Ea = New EventAggregator()

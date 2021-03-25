@@ -29,7 +29,7 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = "EmployeeCode"
             TableName = "PayrollDetail_View"
             SortOrderKey = "EmployeeName"
-            ModelPresenter = New ModelAccounts("PayrollDetail")
+            ModelOfPresenter = New ModelAccounts("PayrollDetail")
             OriginalModel = New PayrollDetailModel
             DataModel = New PayrollDetailModel
             Ea = New EventAggregator()
@@ -53,7 +53,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub DisplayPayrollDetails(ByRef startDate As Date?, ByRef endDate As Date?, ByRef payDescription As String)
             Dim payroll As Object = New ExpandoObject
-            payroll = ModelPresenter.GetFieldsWithIdNo(View.PayrollIdNo, "Payroll", "StartDate,EndDate,PayrollName")
+            payroll = ModelOfPresenter.GetFieldsWithIdNo(View.PayrollIdNo, "Payroll", "StartDate,EndDate,PayrollName")
             startDate = CType(payroll.StartDate, Date)
             endDate = CType(payroll.EndDate, Date)
             payDescription = payroll.PayrollName
@@ -65,8 +65,8 @@ Namespace PresentationLayer.Presenters
         '        Dim maxRecord As PayrollDetailModel
         '        Dim payMonthText As String = "PayrollDetail for the Month of"
         '        Dim PayrollDetailText As String = "PayrollDetail for the Period"
-        '        nIdNoMax = ModelPresenter.GetMaxValueFiltered("EndDate", "PayrollDetail", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
-        '        maxRecord = ModelPresenter.GetRecordByIdNo(Of PayrollDetailModel)(nIdNoMax)
+        '        nIdNoMax = ModelOfPresenter.GetMaxValueFiltered("EndDate", "PayrollDetail", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
+        '        maxRecord = ModelOfPresenter.GetRecordByIdNo(Of PayrollDetailModel)(nIdNoMax)
         '        View.StartDate = maxRecord.EndDate.AddDays(1)
         '        Dim arabicCulture As New CultureInfo("ar-ae", False)
         '        If View.StartDate.Day = 1 Then

@@ -19,7 +19,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IApJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("ApJournal")
+            ModelOfPresenter = New ModelAccounts("ApJournal")
             SortOrderKey = "IdNo"
             OriginalModel = New ApJournalModel()
             DataModel = New ApJournalModel
@@ -114,7 +114,7 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
             If retVal >= 0 AndAlso Not IsEmpty(View.VatNumber) Then
-                ModelPresenter.UpdateVatNumber(View.VatNumber, View.SupplierIdNo)
+                ModelOfPresenter.UpdateVatNumber(View.VatNumber, View.SupplierIdNo)
             End If
         End Sub
 
@@ -200,7 +200,7 @@ Namespace PresentationLayer.Presenters
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            retValue = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
 

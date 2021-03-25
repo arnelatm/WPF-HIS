@@ -108,6 +108,144 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
+        Private Function ComputeFixedRateEarning(payFrequency As Char, amount As Decimal, payRateUnit As Char) As Decimal
+            Dim factor As Decimal
+            Dim payFrequencySel = CodeToEnum(Of PayFrequencySelection)(payFrequency)
+            Dim unitEnum = CodeToEnum(Of PayRateUnitSelection)(payRateUnit)
+            Select Case payFrequencySel
+                Case PayFrequencySelection.Monthly
+                    If unitEnum = PayRateUnitSelection.Month Then
+                        factor = 1D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiMonth Then
+                        factor = 2D
+                    ElseIf unitEnum = PayRateUnitSelection.Year Then
+                        factor = 1D / 12D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiYear Then
+                        factor = 1D / 6D
+                    ElseIf unitEnum = PayRateUnitSelection.Quarter Then
+                        factor = 1D / 3D
+                    ElseIf unitEnum = PayRateUnitSelection.Week Then
+                        factor = 13D / 2D
+                    ElseIf unitEnum = PayRateUnitSelection.Day Then
+                        factor = 30D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiMonth Then
+                        factor = 13D / 6D
+                    ElseIf unitEnum = PayRateUnitSelection.BiWeek Then
+                        factor = 13D / 4D
+                    End If
+                Case PayFrequencySelection.Yearly
+                    If unitEnum = PayRateUnitSelection.Month Then
+                        factor = 12D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiMonth Then
+                        factor = 24D
+                    ElseIf unitEnum = PayRateUnitSelection.Year Then
+                        factor = 1D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiYear Then
+                        factor = 2D
+                    ElseIf unitEnum = PayRateUnitSelection.Quarter Then
+                        factor = 4D
+                    ElseIf unitEnum = PayRateUnitSelection.Week Then
+                        factor = 52D
+                    ElseIf unitEnum = PayRateUnitSelection.Day Then
+                        factor = 365D
+                    ElseIf unitEnum = PayRateUnitSelection.BiWeek Then
+                        factor = 26D
+                    End If
+                Case PayFrequencySelection.SemiYearly
+                    If unitEnum = PayRateUnitSelection.Month Then
+                        factor = 6D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiMonth Then
+                        factor = 12D
+                    ElseIf unitEnum = PayRateUnitSelection.Year Then
+                        factor = 1D / 2D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiYear Then
+                        factor = 1D
+                    ElseIf unitEnum = PayRateUnitSelection.Quarter Then
+                        factor = 2D
+                    ElseIf unitEnum = PayRateUnitSelection.Week Then
+                        factor = 26D
+                    ElseIf unitEnum = PayRateUnitSelection.Day Then
+                        factor = 365D / 2D
+                    ElseIf unitEnum = PayRateUnitSelection.BiWeek Then
+                        factor = 13D
+                    End If
+                Case PayFrequencySelection.Quarterly
+                    If unitEnum = PayRateUnitSelection.Month Then
+                        factor = 3D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiMonth Then
+                        factor = 6D
+                    ElseIf unitEnum = PayRateUnitSelection.Year Then
+                        factor = 1D / 4D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiYear Then
+                        factor = 1D / 2D
+                    ElseIf unitEnum = PayRateUnitSelection.Quarter Then
+                        factor = 1D
+                    ElseIf unitEnum = PayRateUnitSelection.Week Then
+                        factor = 13D
+                    ElseIf unitEnum = PayRateUnitSelection.Day Then
+                        factor = 365D / 4D
+                    ElseIf unitEnum = PayRateUnitSelection.BiWeek Then
+                        factor = 13D / 2D
+                    End If
+                Case PayFrequencySelection.SemiMonthly
+                    If unitEnum = PayRateUnitSelection.Month Then
+                        factor = 1D / 2D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiMonth Then
+                        factor = 1D
+                    ElseIf unitEnum = PayRateUnitSelection.Year Then
+                        factor = 1D / 24D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiYear Then
+                        factor = 1D / 12D
+                    ElseIf unitEnum = PayRateUnitSelection.Quarter Then
+                        factor = 1D / 6D
+                    ElseIf unitEnum = PayRateUnitSelection.Week Then
+                        factor = 13D / 4D
+                    ElseIf unitEnum = PayRateUnitSelection.Day Then
+                        factor = 15D
+                    ElseIf unitEnum = PayRateUnitSelection.BiWeek Then
+                        factor = 13D / 12D
+                    End If
+                Case PayFrequencySelection.Weekly
+                    If unitEnum = PayRateUnitSelection.Month Then
+                        factor = 12D / 52D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiMonth Then
+                        factor = 24D / 52D
+                    ElseIf unitEnum = PayRateUnitSelection.Year Then
+                        factor = 1D / 52D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiYear Then
+                        factor = 1D / 26D
+                    ElseIf unitEnum = PayRateUnitSelection.Quarter Then
+                        factor = 1D / 13D
+                    ElseIf unitEnum = PayRateUnitSelection.Week Then
+                        factor = 1D
+                    ElseIf unitEnum = PayRateUnitSelection.Day Then
+                        factor = 7D
+                    ElseIf unitEnum = PayRateUnitSelection.BiWeek Then
+                        factor = 1D / 2D
+                    End If
+                Case PayFrequencySelection.Daily
+                    If unitEnum = PayRateUnitSelection.Month Then
+                        factor = 1D / 30D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiMonth Then
+                        factor = 1D / 15D
+                    ElseIf unitEnum = PayRateUnitSelection.Year Then
+                        factor = 1D / 360D
+                    ElseIf unitEnum = PayRateUnitSelection.SemiYear Then
+                        factor = 1D / 180D
+                    ElseIf unitEnum = PayRateUnitSelection.Quarter Then
+                        factor = 1D / 90D
+                    ElseIf unitEnum = PayRateUnitSelection.Week Then
+                        factor = 1D / 7D
+                    ElseIf unitEnum = PayRateUnitSelection.Day Then
+                        factor = 1D
+                    ElseIf unitEnum = PayRateUnitSelection.BiWeek Then
+                        factor = 1D / 14D
+                    End If
+
+            End Select
+            Return amount * factor
+        End Function
+
         'Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.AddInvoicePayment
         '    Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
         'End Function

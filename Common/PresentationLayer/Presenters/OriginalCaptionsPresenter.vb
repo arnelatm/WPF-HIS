@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IOriginalCaptionsView)
             MyBase.New(view)
-            ModelPresenter = New ModelCommon("OriginalCaptions")
+            ModelOfPresenter = New ModelCommon("OriginalCaptions")
             TableName = "OriginalCaptions"
             SortOrderKey = "Caption"
             TreeViewMainField = "Caption"

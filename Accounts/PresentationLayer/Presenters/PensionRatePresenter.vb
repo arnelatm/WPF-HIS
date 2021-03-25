@@ -11,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPensionRatesView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("PensionRate")
+            ModelOfPresenter = New ModelAccounts("PensionRate")
             TableName = "PensionRate"
             SortOrderKey = "Sequence"
             DataModel = New PensionRateModel

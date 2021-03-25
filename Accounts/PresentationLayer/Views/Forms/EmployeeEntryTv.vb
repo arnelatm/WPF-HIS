@@ -330,45 +330,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property OtRateRegular As Decimal Implements IEmployeeView.OtRateRegular
-            Get
-                If txtOtRateRegular.Text <> "" Then
-                    Return Convert.ToSingle(txtOtRateRegular.Text)
-                Else
-                    Return 0
-                End If
-            End Get
-            Set
-                txtOtRateRegular.Text = FormatDecimalNumber(Value)
-            End Set
-        End Property
-
-        Public Property OtRateHoliday As Decimal Implements IEmployeeView.OtRateHoliday
-            Get
-                If txtOtRateHoliday.Text <> "" Then
-                    Return Convert.ToSingle(txtOtRateHoliday.Text)
-                Else
-                    Return 0
-                End If
-            End Get
-            Set
-                txtOtRateHoliday.Text = FormatDecimalNumber(Value)
-            End Set
-        End Property
-
-        Public Property OtRateSpecial As Decimal Implements IEmployeeView.OtRateSpecial
-            Get
-                If txtOtRateSpecial.Text <> "" Then
-                    Return Convert.ToSingle(txtOtRateSpecial.Text)
-                Else
-                    Return 0
-                End If
-            End Get
-            Set
-                txtOtRateSpecial.Text = FormatDecimalNumber(Value)
-            End Set
-        End Property
-
         Public Property PayCycleIdNo As Int16? Implements IEmployeeView.PayCycleIdNo
             Get
                 Return cboPayCycleidNo.GetNullableValue(Of Int16)
@@ -736,13 +697,13 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewEarnings
                 Dim nIndex = .CurrentRow.Index
                 Select Case .CurrentCell.OwningColumn.Name
-                    Case $"dgvEarningAmount"
-                        Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-                        Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
-                        If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                            Messaging.Show(True, $"MsgAmountChangeNotAllowed")
-                            .CancelEdit()
-                        End If
+                    'Case $"dgvEarningAmount"
+                    '    Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
+                    '    Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
+                    '    If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+                    '        Messaging.Show(True, $"MsgAmountChangeNotAllowed")
+                    '        .CancelEdit()
+                    '    End If
 
                     Case $"dgvEarningRate"
                         Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo

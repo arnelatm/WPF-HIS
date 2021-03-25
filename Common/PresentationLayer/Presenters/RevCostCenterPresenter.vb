@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IRevCostCenterView)
             MyBase.New(view)
-            ModelPresenter = New ModelCommon("RevCostCenter")
+            ModelOfPresenter = New ModelCommon("RevCostCenter")
             TableName = "RevCostCenter_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevCostCenterName"

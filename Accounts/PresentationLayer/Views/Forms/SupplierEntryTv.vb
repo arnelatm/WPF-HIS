@@ -422,6 +422,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             Dim value As Double
+            MyBase.RecordPositionChanged(e)
             value = Convert.ToDouble(PresenterObj.GetSupplierBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
         End Sub

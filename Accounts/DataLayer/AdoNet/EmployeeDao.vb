@@ -19,7 +19,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, DutyHours, HiredDate, ReleasedDate, " &
-                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, OtRateRegular, OtRateHoliday, OtRateSpecial, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active" &
+                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active" &
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -82,9 +82,6 @@ Namespace DataLayer.AdoNet
                     " NationalityCode = @NationalityCode," &
                     " Notes = @Notes," &
                     " OpeningBalance = @OpeningBalance," &
-                    " OtRateRegular = @OtRateRegular," &
-                    " OtRateHoliday = @OtRateHoliday," &
-                    " OtRateSpecial = @OtRateSpecial," &
                     " PayCycleIdNo = @PayCycleIdNo," &
                     " PayGroupIdNo = @PayGroupIdNo," &
                     " PaymentMethod = @PaymentMethod," &
@@ -107,10 +104,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, OtRateRegular, OtRateHoliday, OtRateSpecial, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active)" &
+                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @OtRateRegular, @OtRateHoliday, @OtRateSpecial, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod,  @Active)"
+                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod,  @Active)"
             Return _db.Insert(sql, Take(employee))
         End Function
 
@@ -140,9 +137,6 @@ Namespace DataLayer.AdoNet
             .NationalityCode = Extensions.AsString(reader("NationalityCode")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OpeningBalance = Extensions.AsDecimal(reader("OpeningBalance")),
-            .OtRateRegular = Extensions.AsDecimal(reader("OtRateRegular")),
-            .OtRateHoliday = Extensions.AsDecimal(reader("OtRateHoliday")),
-            .OtRateSpecial = Extensions.AsDecimal(reader("OtRateSpecial")),
             .PayCycleIdNo = Extensions.AsNullable(Of Int16?)(reader("PayCycleIdNo")),
             .PayGroupIdNo = Extensions.AsNullable(Of Int16?)(reader("PayGroupIdNo")),
             .PaymentMethod = Extensions.AsChar(reader("PaymentMethod")),
@@ -183,9 +177,6 @@ Namespace DataLayer.AdoNet
                                     "@NationalityCode", employee.NationalityCode,
                                     "@Notes", employee.Notes,
                                     "@OpeningBalance", employee.OpeningBalance,
-                                    "@OtRateRegular", employee.OtRateRegular,
-                                    "@OtRateHoliday", employee.OtRateHoliday,
-                                    "@OtRateSpecial", employee.OtRateSpecial,
                                     "@PayCycleIdNo", employee.PayCycleIdNo,
                                     "@PayGroupIdNo", employee.PayGroupIdNo,
                                     "@PaymentMethod", employee.PaymentMethod,

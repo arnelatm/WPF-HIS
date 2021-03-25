@@ -157,7 +157,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
     'Public Property CurrentIdNo As Int32
     Public Property LastIdNo As Int32
 
-    Public Property ModelPresenter
+    Public Property ModelOfPresenter
         Get
             Return Model
         End Get
@@ -691,6 +691,8 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
                     End If
                     UpdateViewDisplay(TargetIdNo)
                     If Ea IsNot Nothing Then
+                        DataModel = New TM
+                        GlobalVariables.Mapper.Map(DataModel, View)
                         Ea.PublishEvent(New RecordSaved(DataModel))
                     End If
                 End If
@@ -1049,7 +1051,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
             Dim modelData As TM
             RecordCount = GetRecordCount()
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
-            modelData = ModelPresenter.GetRecordByIdNo(Of TM)(idNo)
+            modelData = ModelOfPresenter.GetRecordByIdNo(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New BeforeAssignment(modelData))
@@ -1082,7 +1084,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
 
     Protected Overridable Function AddRecord(record As TM) As Integer
         Dim retVal As Integer
-        NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
+        NewlyAddedRecordIdNo = ModelOfPresenter.AddRecord(record)
         retVal = NewlyAddedRecordIdNo
         CallByName(View, IdFieldName, CallType.Set, retVal)
         Return retVal
@@ -1146,14 +1148,14 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         Dim retVal As Integer
         Dim updateReturnValue As Object
         Dim insertReturnValue As Object
-        updateReturnValue = ModelPresenter.DelUpdateTvp(updateTable, parentIdNo)
+        updateReturnValue = ModelOfPresenter.DelUpdateTvp(updateTable, parentIdNo)
         If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
             If parentIdNo <> 0 Then
                 For Each row As DataRow In insertTable.Rows
                     row.Item(parentIdFieldName) = parentIdNo
                 Next
             End If
-            insertReturnValue = ModelPresenter.InsertTvp(insertTable)
+            insertReturnValue = ModelOfPresenter.InsertTvp(insertTable)
             If insertReturnValue >= 0 Then
                 retVal = updateReturnValue + insertReturnValue
             Else

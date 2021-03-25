@@ -27,7 +27,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             SortOrderKey = "IdNo"
             ReportName = "Cash Receipt Journal.Rpt"
-            ModelPresenter = New ModelAccounts("CashReceiptJournal")
+            ModelOfPresenter = New ModelAccounts("CashReceiptJournal")
             TableName = "CashReceiptJournal"
 
             OriginalModel = New CashReceiptJournalModel()
@@ -179,7 +179,7 @@ Namespace PresentationLayer.Presenters
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            retValue = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
 
@@ -703,7 +703,7 @@ Namespace PresentationLayer.Presenters
             If customerIdNo Is Nothing Then
                 Return New List(Of CsrOiItemModel)
             Else
-                Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
+                Return ModelOfPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
             End If
         End Function
 
