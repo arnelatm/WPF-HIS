@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "EmployeeName"
             TreeViewMainField = "EmployeeName"
             TreeViewSecondaryField = "EmployeeCode"
-            ModelPresenter = New ModelAccounts("Employee")
+            ModelOfPresenter = New ModelAccounts("Employee")
             OriginalModel = New EmployeeModel()
             DataModel = New EmployeeModel
             TreeViewList = New List(Of EmployeeModel)
@@ -274,7 +274,7 @@ Namespace PresentationLayer.Presenters
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             'Dim passedValue As Integer = retVal
             If retVal >= 0 And GlobalFunctions.IsEmpty(View.EmployeeCode) Then
-                retVal = ModelPresenter.GenerateCode(View.IdNo)
+                retVal = ModelOfPresenter.GenerateCode(View.IdNo)
             End If
         End Sub
 

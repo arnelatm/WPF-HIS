@@ -86,23 +86,23 @@ Namespace PresentationLayer.Presenters
             'Dim args As Object() = {objectName}
             'Dim t As Type = Type.GetType(presenterModelName)
             'If bizParams Is Nothing AndAlso daoParams Is Nothing Then
-            '    MyBase.ModelPresenter = Activator.CreateInstance(t)
+            '    MyBase.ModelOfPresenter = Activator.CreateInstance(t)
             'Else
-            '    MyBase.ModelPresenter = Activator.CreateInstance(t, bizParams, daoParams)
+            '    MyBase.ModelOfPresenter = Activator.CreateInstance(t, bizParams, daoParams)
             'End If
 
             Dim className = $"AATM.Common.PresentationLayer.Models.ModelCommon"
             TableName = objectName
             SortOrderKey = objectName + "Name"
-            Dim ModelPresenter As Object
+            Dim ModelOfPresenter As Object
             Dim tType As Type = Type.GetType(className)
             If tType Is Nothing Then
                 MessageBox.Show("Missing Data Access Object " + className + "!")
             End If
             If bizParams Is Nothing AndAlso daoParams Is Nothing Then
-                ModelPresenter = Activator.CreateInstance(tType, {objectName, bizParams, daoParams})
+                ModelOfPresenter = Activator.CreateInstance(tType, {objectName, bizParams, daoParams})
             Else
-                ModelPresenter = Activator.CreateInstance(tType, {objectName})
+                ModelOfPresenter = Activator.CreateInstance(tType, {objectName})
             End If
             OriginalModel = New TM
             DataModel = New TM

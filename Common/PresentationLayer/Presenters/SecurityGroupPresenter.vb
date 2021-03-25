@@ -19,7 +19,7 @@ Namespace PresentationLayer
 
         Public Sub New(view As ISecurityGroupView)
             MyBase.New(view)
-            ModelPresenter = New Model("SecurityGroup")
+            ModelOfPresenter = New Model("SecurityGroup")
             'TableName = "SecurityGroup_View"
             SortOrderKey = "SecurityGroupName"
             TreeViewMainField = "SecurityGroupName"
@@ -67,7 +67,7 @@ Namespace PresentationLayer
 
         Public Sub OnParentRecordUpdatedSuccessfully(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully
             Dim updateReturnValue As Integer
-            updateReturnValue = ModelPresenter.DelUpdateTvp(DtUpdateTable, View.ParentIdNo)
+            updateReturnValue = ModelOfPresenter.DelUpdateTvp(DtUpdateTable, View.ParentIdNo)
             If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
                 For Each row As DataRow In DtInsertTable.Rows
                     row.Item("SecurityGroupIdNo") = View.IdNo

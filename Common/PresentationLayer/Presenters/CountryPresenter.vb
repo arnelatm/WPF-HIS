@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICountryView)
             MyBase.New(view)
-            ModelPresenter = New ModelCommon("Country")
+            ModelOfPresenter = New ModelCommon("Country")
             TableName = "Country"
             SortOrderKey = "CountryName"
             TreeViewMainField = "CountryName"

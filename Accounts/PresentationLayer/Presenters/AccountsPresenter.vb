@@ -25,16 +25,16 @@ Namespace PresentationLayer.Presenters
             TableName = objectName
             SortOrderKey = objectName + "Name"
             'If objectName Is Nothing Then
-            '    ModelPresenter = New ModelAccounts(objectName)
+            '    ModelOfPresenter = New ModelAccounts(objectName)
             'Else
-            ModelPresenter = New ModelAccounts(objectName, bizParams, daoParams)
+            ModelOfPresenter = New ModelAccounts(objectName, bizParams, daoParams)
             'Dim t As Type = Type.GetType(presenterModelName)
             'If tableOrViewName Is Nothing Then
-            '    ModelPresenter = Activator.CreateInstance(t)
+            '    ModelOfPresenter = Activator.CreateInstance(t)
             'Else
             '    'Dim args As Object() = {baseClassName}
             '    'Dim t As Type = Type.GetType(presenterModelName)
-            '    ModelPresenter = Activator.CreateInstance(t, tableOrViewName)
+            '    ModelOfPresenter = Activator.CreateInstance(t, tableOrViewName)
             'End If
             OriginalModel = New TM
             DataModel = New TM
@@ -341,6 +341,51 @@ Namespace PresentationLayer.Presenters
                 AddToParentError(esModel.GetBizObjectErrors)
             End If
             Return retValue
+        End Function
+
+        'Public Overrides Function ValidateView()
+        '    Dim valid As Boolean
+        '    valid = ValidateDataBoundGrid(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
+        '            ValidateDataBoundGrid(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
+        '    Return valid
+        'End Function
+
+        Public Function ValidateDataBoundGrid(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing)
+            Dim errorFound As Boolean = False
+            Dim rules = GetBizRules(viewProperty)
+            Dim bo = GetBizObject(viewProperty)
+            For Each rule In rules
+                For Each col In dataGridView.Columns()
+                    Dim colName = col.DataPropertyName
+                    If rule.Property = colName Then
+                        For Each row As DataGridViewRow In dataGridView.Rows
+                            Dim model As New TM
+                            If row.Index() < dataGridView.RowCount() - 1 Then
+                                GlobalVariables.Mapper.Map(viewProperty(row.Index()), model)
+                                GlobalVariables.Mapper.Map(model, bo)
+                                If Not bo.IsRuleValid(rule) Then
+                                    Dim obj As New Object
+                                    dictionary.TryGetValue(rule.Property, obj)
+                                    row.Cells(obj.Name).ErrorText = rule.Error
+                                    errorFound = True
+                                End If
+                            End If
+                        Next
+                    End If
+                Next
+            Next
+            If errorFound Then
+                If tabPage IsNot Nothing Then
+                    tabPage.ImageIndex = 0
+                Else
+                    tabPage.ImageIndex = -1
+                End If
+            Else
+                If tabPage IsNot Nothing Then
+                    tabPage.ImageIndex = -1
+                End If
+            End If
+            Return Not errorFound
         End Function
 
     End Class

@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
         ''' <param name="view">The itemView</param>
         Public Sub New(ByVal view As IUserView)
             MyBase.New(view)
-            ModelPresenter = New Model("User")
+            ModelOfPresenter = New Model("User")
             'TableName = "User"
             'SortOrderKey = "FullName"
             'TreeViewMainField = "FullName"

@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IAccountView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("Account")
+            ModelOfPresenter = New ModelAccounts("Account")
             'TableName = "Account_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "AccountName"
@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
                 Return False
             Else
                 Dim parentAccount As AccountModel
-                parentAccount = ModelPresenter.GetRecordByIdNo(Of AccountModel)(parentIdNo)
+                parentAccount = ModelOfPresenter.GetRecordByIdNo(Of AccountModel)(parentIdNo)
                 If parentAccount.AccountGroup Is Nothing Then
                     Return False
                 Else

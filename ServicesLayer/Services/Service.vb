@@ -156,12 +156,12 @@ Namespace Services
         End Function
 
         Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordByIdNo
-            Dim modelPresenter As New TM
+            Dim ModelOfPresenter As New TM
             Dim record = DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
             If record IsNot Nothing Then
-                GlobalVariables.Mapper.Map(record, modelPresenter)
+                GlobalVariables.Mapper.Map(record, ModelOfPresenter)
             End If
-            Return modelPresenter
+            Return ModelOfPresenter
         End Function
 
         Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo

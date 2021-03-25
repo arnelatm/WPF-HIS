@@ -68,15 +68,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblDutyHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblOtRatePerHour = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtOtRateRegular = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtOtRateHoliday = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel8 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtOtRateSpecial = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -247,15 +238,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout6.Controls.Add(Me.cboPayGroupIdNo)
             Me.CFlowLayout6.Controls.Add(Me.lblDutyHours)
             Me.CFlowLayout6.Controls.Add(Me.txtDutyHours)
-            Me.CFlowLayout6.Controls.Add(Me.lblOtRatePerHour)
-            Me.CFlowLayout6.Controls.Add(Me.txtOtRateRegular)
-            Me.CFlowLayout6.Controls.Add(Me.CLabel6)
-            Me.CFlowLayout6.Controls.Add(Me.CLabel2)
-            Me.CFlowLayout6.Controls.Add(Me.txtOtRateHoliday)
-            Me.CFlowLayout6.Controls.Add(Me.CLabel8)
-            Me.CFlowLayout6.Controls.Add(Me.CLabel4)
-            Me.CFlowLayout6.Controls.Add(Me.txtOtRateSpecial)
-            Me.CFlowLayout6.Controls.Add(Me.CLabel9)
             Me.CFlowLayout6.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout6.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout6.Name = "CFlowLayout6"
@@ -572,7 +554,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayGroupIdNo.EditingMode = False
             Me.lblPayGroupIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayGroupIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayGroupIdNo.Location = New System.Drawing.Point(4, 183)
+            Me.lblPayGroupIdNo.Location = New System.Drawing.Point(4, 182)
             Me.lblPayGroupIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayGroupIdNo.Name = "lblPayGroupIdNo"
             Me.lblPayGroupIdNo.Size = New System.Drawing.Size(185, 23)
@@ -596,7 +578,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayGroupIdNo.HideWhenNotEditingOrAdding = False
             Me.cboPayGroupIdNo.IntegralHeight = False
             Me.cboPayGroupIdNo.LinkedLabel = Me.lblPayGroupIdNo
-            Me.cboPayGroupIdNo.Location = New System.Drawing.Point(190, 183)
+            Me.cboPayGroupIdNo.Location = New System.Drawing.Point(190, 182)
             Me.cboPayGroupIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboPayGroupIdNo.Name = "cboPayGroupIdNo"
             Me.cboPayGroupIdNo.OldValue = 0
@@ -624,7 +606,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDutyHours.EditingMode = False
             Me.lblDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblDutyHours.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDutyHours.Location = New System.Drawing.Point(4, 210)
+            Me.lblDutyHours.Location = New System.Drawing.Point(4, 208)
             Me.lblDutyHours.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDutyHours.Name = "lblDutyHours"
             Me.lblDutyHours.Size = New System.Drawing.Size(185, 23)
@@ -644,7 +626,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDutyHours.ForeColor = System.Drawing.Color.Black
             Me.txtDutyHours.LinkedLabel = Me.lblDutyHours
-            Me.txtDutyHours.Location = New System.Drawing.Point(191, 210)
+            Me.txtDutyHours.Location = New System.Drawing.Point(191, 208)
             Me.txtDutyHours.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDutyHours.MaximumValue = Nothing
             Me.txtDutyHours.MinimumValue = Nothing
@@ -654,156 +636,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDutyHours.Size = New System.Drawing.Size(93, 23)
             Me.txtDutyHours.TabIndex = 291
             Me.txtDutyHours.ValueIsNumeric = True
-            '
-            'lblOtRatePerHour
-            '
-            Me.lblOtRatePerHour.DisplayOnly = True
-            Me.lblOtRatePerHour.EditingMode = False
-            Me.lblOtRatePerHour.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblOtRatePerHour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblOtRatePerHour.Location = New System.Drawing.Point(4, 235)
-            Me.lblOtRatePerHour.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblOtRatePerHour.Name = "lblOtRatePerHour"
-            Me.lblOtRatePerHour.Size = New System.Drawing.Size(185, 23)
-            Me.lblOtRatePerHour.TabIndex = 294
-            Me.lblOtRatePerHour.Text = "Overtime Rate Regular"
-            Me.lblOtRatePerHour.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtOtRateRegular
-            '
-            Me.txtOtRateRegular.BackColor = System.Drawing.Color.White
-            Me.txtOtRateRegular.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtOtRateRegular.ComputedValue = False
-            Me.txtOtRateRegular.CustomFormat = Nothing
-            Me.txtOtRateRegular.DataBoundControl = True
-            Me.txtOtRateRegular.EditingMode = False
-            Me.txtOtRateRegular.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtOtRateRegular.ForeColor = System.Drawing.Color.Black
-            Me.txtOtRateRegular.LinkedLabel = Me.lblOtRatePerHour
-            Me.txtOtRateRegular.Location = New System.Drawing.Point(191, 235)
-            Me.txtOtRateRegular.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtOtRateRegular.MaximumValue = Nothing
-            Me.txtOtRateRegular.MinimumValue = Nothing
-            Me.txtOtRateRegular.Name = "txtOtRateRegular"
-            Me.txtOtRateRegular.OldValue = Nothing
-            Me.txtOtRateRegular.ReadOnly = True
-            Me.txtOtRateRegular.Size = New System.Drawing.Size(93, 23)
-            Me.txtOtRateRegular.TabIndex = 293
-            Me.txtOtRateRegular.ValueIsNumeric = True
-            '
-            'CLabel6
-            '
-            Me.CLabel6.DisplayOnly = True
-            Me.CLabel6.EditingMode = False
-            Me.CLabel6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel6.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel6.Location = New System.Drawing.Point(286, 235)
-            Me.CLabel6.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel6.Name = "CLabel6"
-            Me.CLabel6.Size = New System.Drawing.Size(185, 23)
-            Me.CLabel6.TabIndex = 299
-            Me.CLabel6.Text = "/hour"
-            Me.CLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'CLabel2
-            '
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel2.Location = New System.Drawing.Point(4, 260)
-            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(185, 23)
-            Me.CLabel2.TabIndex = 296
-            Me.CLabel2.Text = "Overtime Rate Holiday"
-            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtOtRateHoliday
-            '
-            Me.txtOtRateHoliday.BackColor = System.Drawing.Color.White
-            Me.txtOtRateHoliday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtOtRateHoliday.ComputedValue = False
-            Me.txtOtRateHoliday.CustomFormat = Nothing
-            Me.txtOtRateHoliday.DataBoundControl = True
-            Me.txtOtRateHoliday.EditingMode = False
-            Me.txtOtRateHoliday.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtOtRateHoliday.ForeColor = System.Drawing.Color.Black
-            Me.txtOtRateHoliday.LinkedLabel = Me.CLabel2
-            Me.txtOtRateHoliday.Location = New System.Drawing.Point(191, 260)
-            Me.txtOtRateHoliday.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtOtRateHoliday.MaximumValue = Nothing
-            Me.txtOtRateHoliday.MinimumValue = Nothing
-            Me.txtOtRateHoliday.Name = "txtOtRateHoliday"
-            Me.txtOtRateHoliday.OldValue = Nothing
-            Me.txtOtRateHoliday.ReadOnly = True
-            Me.txtOtRateHoliday.Size = New System.Drawing.Size(93, 23)
-            Me.txtOtRateHoliday.TabIndex = 295
-            Me.txtOtRateHoliday.ValueIsNumeric = True
-            '
-            'CLabel8
-            '
-            Me.CLabel8.DisplayOnly = True
-            Me.CLabel8.EditingMode = False
-            Me.CLabel8.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel8.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel8.Location = New System.Drawing.Point(286, 260)
-            Me.CLabel8.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel8.Name = "CLabel8"
-            Me.CLabel8.Size = New System.Drawing.Size(185, 23)
-            Me.CLabel8.TabIndex = 301
-            Me.CLabel8.Text = "/hour"
-            Me.CLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'CLabel4
-            '
-            Me.CLabel4.DisplayOnly = True
-            Me.CLabel4.EditingMode = False
-            Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel4.Location = New System.Drawing.Point(4, 285)
-            Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel4.Name = "CLabel4"
-            Me.CLabel4.Size = New System.Drawing.Size(185, 23)
-            Me.CLabel4.TabIndex = 298
-            Me.CLabel4.Text = "Overtime Rate Special"
-            Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            '
-            'txtOtRateSpecial
-            '
-            Me.txtOtRateSpecial.BackColor = System.Drawing.Color.White
-            Me.txtOtRateSpecial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtOtRateSpecial.ComputedValue = False
-            Me.txtOtRateSpecial.CustomFormat = Nothing
-            Me.txtOtRateSpecial.DataBoundControl = True
-            Me.txtOtRateSpecial.EditingMode = False
-            Me.txtOtRateSpecial.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtOtRateSpecial.ForeColor = System.Drawing.Color.Black
-            Me.txtOtRateSpecial.LinkedLabel = Me.CLabel4
-            Me.txtOtRateSpecial.Location = New System.Drawing.Point(191, 285)
-            Me.txtOtRateSpecial.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtOtRateSpecial.MaximumValue = Nothing
-            Me.txtOtRateSpecial.MinimumValue = Nothing
-            Me.txtOtRateSpecial.Name = "txtOtRateSpecial"
-            Me.txtOtRateSpecial.OldValue = Nothing
-            Me.txtOtRateSpecial.ReadOnly = True
-            Me.txtOtRateSpecial.Size = New System.Drawing.Size(93, 23)
-            Me.txtOtRateSpecial.TabIndex = 297
-            Me.txtOtRateSpecial.ValueIsNumeric = True
-            '
-            'CLabel9
-            '
-            Me.CLabel9.DisplayOnly = True
-            Me.CLabel9.EditingMode = False
-            Me.CLabel9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel9.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel9.Location = New System.Drawing.Point(286, 285)
-            Me.CLabel9.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel9.Name = "CLabel9"
-            Me.CLabel9.Size = New System.Drawing.Size(185, 23)
-            Me.CLabel9.TabIndex = 302
-            Me.CLabel9.Text = "/hour"
-            Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'bsEarnings
             '
@@ -2562,7 +2394,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle8.Format = "###,##0.00"
             Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle8
             Me.dgvEarningAmount.EditingMode = False
-            Me.dgvEarningAmount.HeaderText = "Amount"
+            Me.dgvEarningAmount.HeaderText = "Payroll Amount"
             Me.dgvEarningAmount.MinimumWidth = 80
             Me.dgvEarningAmount.Name = "dgvEarningAmount"
             Me.dgvEarningAmount.ReadOnly = True
@@ -2750,8 +2582,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents cboPayGroupIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblDutyHours As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtDutyHours As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents lblOtRatePerHour As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtOtRateRegular As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents tbpDeductions As TabPage
         Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CDataGridView
@@ -2763,13 +2593,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn12 As DataGridViewTextBoxColumn
-        Friend WithEvents CLabel6 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtOtRateHoliday As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents CLabel8 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtOtRateSpecial As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents CLabel9 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dgvSequenceDeduction As Libraries.CBaseControlsLibrary.CdgvColumnText
         Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
         Friend WithEvents dgvDeductionRate As Libraries.CBaseControlsLibrary.CdgvColumnMoney

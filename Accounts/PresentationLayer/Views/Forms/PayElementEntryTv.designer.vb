@@ -55,11 +55,6 @@ Namespace PresentationLayer.Views.Forms
             Me.chkSummary = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblSummary = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbcPayElement = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
-            Me.tbpMain = New System.Windows.Forms.TabPage()
-            Me.floMain = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpCalculation = New System.Windows.Forms.TabPage()
             Me.floCalculation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpCalculation = New System.Windows.Forms.TableLayoutPanel()
@@ -111,15 +106,17 @@ Namespace PresentationLayer.Views.Forms
             Me.ParentIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPayElementItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.tbpNotes = New System.Windows.Forms.TabPage()
+            Me.floMain = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tabPageImages = New System.Windows.Forms.ImageList(Me.components)
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.tlpPayElement.SuspendLayout()
             Me.tbcPayElement.SuspendLayout()
-            Me.tbpMain.SuspendLayout()
-            Me.floMain.SuspendLayout()
-            Me.TableLayoutPanel1.SuspendLayout()
             Me.tbpCalculation.SuspendLayout()
             Me.floCalculation.SuspendLayout()
             Me.tlpCalculation.SuspendLayout()
@@ -131,6 +128,9 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpSummaryDetail.SuspendLayout()
             CType(Me.DataGridViewPayElementItems, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPayElementItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.tbpNotes.SuspendLayout()
+            Me.floMain.SuspendLayout()
+            Me.TableLayoutPanel1.SuspendLayout()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
             '
@@ -354,63 +354,14 @@ Namespace PresentationLayer.Views.Forms
             '
             'tbcPayElement
             '
-            Me.tbcPayElement.Controls.Add(Me.tbpMain)
             Me.tbcPayElement.Controls.Add(Me.tbpCalculation)
             Me.tbcPayElement.Controls.Add(Me.tbpAccountPosting)
             Me.tbcPayElement.Controls.Add(Me.tbpSummaryDetail)
+            Me.tbcPayElement.Controls.Add(Me.tbpNotes)
             resources.ApplyResources(Me.tbcPayElement, "tbcPayElement")
             Me.tbcPayElement.ImageList = Me.tabPageImages
             Me.tbcPayElement.Name = "tbcPayElement"
             Me.tbcPayElement.SelectedIndex = 0
-            '
-            'tbpMain
-            '
-            Me.tbpMain.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
-            resources.ApplyResources(Me.tbpMain, "tbpMain")
-            Me.tbpMain.Controls.Add(Me.floMain)
-            Me.tbpMain.Cursor = System.Windows.Forms.Cursors.Default
-            Me.tbpMain.Name = "tbpMain"
-            Me.tbpMain.UseVisualStyleBackColor = True
-            '
-            'floMain
-            '
-            Me.floMain.BackColor = System.Drawing.Color.Transparent
-            Me.floMain.Controls.Add(Me.TableLayoutPanel1)
-            resources.ApplyResources(Me.floMain, "floMain")
-            Me.floMain.Name = "floMain"
-            '
-            'TableLayoutPanel1
-            '
-            resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
-            Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 5)
-            Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-            '
-            'txtNotes
-            '
-            Me.txtNotes.BackColor = System.Drawing.Color.White
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            resources.ApplyResources(Me.txtNotes, "txtNotes")
-            Me.txtNotes.EditingMode = False
-            Me.txtNotes.ForeColor = System.Drawing.Color.Black
-            Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.ReadOnly = True
-            Me.txtNotes.ValueIsMandatory = True
-            '
-            'lblNotes
-            '
-            Me.lblNotes.DisplayOnly = True
-            Me.lblNotes.EditingMode = False
-            resources.ApplyResources(Me.lblNotes, "lblNotes")
-            Me.lblNotes.Name = "lblNotes"
             '
             'tbpCalculation
             '
@@ -1117,6 +1068,55 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.bsPayElementItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayElementItemModel)
             '
+            'tbpNotes
+            '
+            Me.tbpNotes.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
+            resources.ApplyResources(Me.tbpNotes, "tbpNotes")
+            Me.tbpNotes.Controls.Add(Me.floMain)
+            Me.tbpNotes.Cursor = System.Windows.Forms.Cursors.Default
+            Me.tbpNotes.Name = "tbpNotes"
+            Me.tbpNotes.UseVisualStyleBackColor = True
+            '
+            'floMain
+            '
+            Me.floMain.BackColor = System.Drawing.Color.Transparent
+            Me.floMain.Controls.Add(Me.TableLayoutPanel1)
+            resources.ApplyResources(Me.floMain, "floMain")
+            Me.floMain.Name = "floMain"
+            '
+            'TableLayoutPanel1
+            '
+            resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
+            Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 5)
+            Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.ReadOnly = True
+            Me.txtNotes.ValueIsMandatory = True
+            '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.Name = "lblNotes"
+            '
             'tabPageImages
             '
             Me.tabPageImages.ImageStream = CType(resources.GetObject("tabPageImages.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -1143,10 +1143,6 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpPayElement.ResumeLayout(False)
             Me.tlpPayElement.PerformLayout()
             Me.tbcPayElement.ResumeLayout(False)
-            Me.tbpMain.ResumeLayout(False)
-            Me.floMain.ResumeLayout(False)
-            Me.TableLayoutPanel1.ResumeLayout(False)
-            Me.TableLayoutPanel1.PerformLayout()
             Me.tbpCalculation.ResumeLayout(False)
             Me.floCalculation.ResumeLayout(False)
             Me.tlpCalculation.ResumeLayout(False)
@@ -1160,6 +1156,10 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpSummaryDetail.ResumeLayout(False)
             CType(Me.DataGridViewPayElementItems, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsPayElementItems, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.tbpNotes.ResumeLayout(False)
+            Me.floMain.ResumeLayout(False)
+            Me.TableLayoutPanel1.ResumeLayout(False)
+            Me.TableLayoutPanel1.PerformLayout()
             Me.floDataDisplay.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
@@ -1176,7 +1176,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents lblNameAra As CLabel
         Friend WithEvents tbcPayElement As CTabControl
-        Friend WithEvents tbpMain As TabPage
+        Friend WithEvents tbpNotes As TabPage
         Friend WithEvents floMain As CFlowLayout
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents txtNotes As CTextBox

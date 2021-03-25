@@ -30,7 +30,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
     Protected CompareDifferences As String
-    Protected DataModel
+    Protected DataModel = New TM
     Protected DataService
     Protected DbDataDao
     Protected OriginalModel
@@ -157,7 +157,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Property EnumConverter As ResourceEnumConverter
     Public Property LastIdNo As Int32
 
-    Public Property ModelPresenter
+    ' This is the model of the Inheriting Presenter
+    ' when refferred to in this module this will be the current model
+    ' while if reffered in the Inheriting Presenter it will be the
+    ' model assigned to that presenter.
+    Public Property ModelOfPresenter
         Get
             Return Model
         End Get
@@ -693,9 +697,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                         GoLastRecord()
                     End If
                     UpdateViewDisplay(TargetIdNo)
-                    If Ea IsNot Nothing Then
-                        Ea.PublishEvent(New RecordSaved(DataModel))
-                    End If
                 End If
                 RaiseEvent AfterDelete()
             End If
@@ -1061,7 +1062,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Dim modelData As TM
             RecordCount = GetRecordCount()
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
-            modelData = ModelPresenter.GetRecordByIdNo(Of TM)(idNo)
+            modelData = Model.GetRecordByIdNo(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New BeforeAssignment(modelData))
@@ -1094,7 +1095,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Protected Overridable Function AddRecord(record As TM) As Integer
         Dim retVal As Integer
-        NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
+        NewlyAddedRecordIdNo = Model.AddRecord(record)
         retVal = NewlyAddedRecordIdNo
         CallByName(View, IdFieldName, CallType.Set, retVal)
         Return retVal
@@ -1236,14 +1237,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim retVal As Integer
         Dim updateReturnValue As Object
         Dim insertReturnValue As Object
-        updateReturnValue = ModelPresenter.DelUpdateTvp(updateTable, parentIdNo)
+        updateReturnValue = Model.DelUpdateTvp(updateTable, parentIdNo)
         If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
             If parentIdNo <> 0 Then
                 For Each row As DataRow In insertTable.Rows
                     row.Item(parentIdFieldName) = parentIdNo
                 Next
             End If
-            insertReturnValue = ModelPresenter.InsertTvp(insertTable)
+            insertReturnValue = Model.InsertTvp(insertTable)
             If insertReturnValue >= 0 Then
                 retVal = updateReturnValue + insertReturnValue
             Else

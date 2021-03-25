@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IErJournalView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("ErJournal")
+            ModelOfPresenter = New ModelAccounts("ErJournal")
             TableName = "ErJournal"
             SortOrderKey = "IdNo"
             OriginalModel = New ErJournalModel()
@@ -140,7 +140,7 @@ Namespace PresentationLayer.Presenters
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            retValue = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
 

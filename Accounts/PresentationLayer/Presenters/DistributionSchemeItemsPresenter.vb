@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDistributionSchemeItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("DistributionSchemeItem")
+            ModelOfPresenter = New ModelAccounts("DistributionSchemeItem")
             TableName = "DistributionSchemeItem"
             SortOrderKey = "Sequence"
             DataModel = New DistributionSchemeItemModel

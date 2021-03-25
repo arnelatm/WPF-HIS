@@ -36,13 +36,13 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function UpdateOpeningBalance()
-            Return ModelPresenter.UpdateOpeningBalance(DataModel)
+            Return ModelOfPresenter.UpdateOpeningBalance(DataModel)
         End Function
 
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             'Dim passedValue As Integer = retVal
             If retVal >= 0 And GlobalFunctions.IsEmpty(View.SupplierCode) Then
-                retVal = ModelPresenter.GenerateCode(View.IdNo)
+                retVal = ModelOfPresenter.GenerateCode(View.IdNo)
             End If
         End Sub
 

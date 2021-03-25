@@ -32,6 +32,7 @@ Namespace PresentationLayer.Views.Forms
         Private cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
         Private cellPosQtyUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 6)
         Private cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
+        Private MyPresenter As PayElementPresenter
 
         Public Sub New()
 
@@ -44,13 +45,17 @@ Namespace PresentationLayer.Views.Forms
             TvSecondaryFieldName = "PayElementCode"
             SortOrderKey = "PayElementName"
             FirstControl = txtPayElementCode
-            PresenterObj = New PayElementPresenter(Me)
-            Ea = PresenterObj.Ea
+            MyPresenter = New PayElementPresenter(Me)
+            PresenterObj = MyPresenter
+            Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
 
             cboCalculationType.DrawMode = DrawMode.OwnerDrawFixed
             AddHandler cboCalculationType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboCalculationType_DrawItem)
-            AddHandler cboCalculationType.SelectedIndexChanged, New System.EventHandler(AddressOf cboCalculationType_SelectedIndexChanged)
+            AddHandler cboCalculationType.SelectedIndexChanged, New System.EventHandler(AddressOf cboCalculationType_ValueChanged)
+            cboQuantityType.DrawMode = DrawMode.OwnerDrawFixed
+            AddHandler cboQuantityType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboQuantityType_DrawItem)
+            AddHandler cboQuantityType.SelectedIndexChanged, New System.EventHandler(AddressOf cboQuantityType_ValueChanged)
 
         End Sub
 
@@ -285,22 +290,9 @@ Namespace PresentationLayer.Views.Forms
         Private myFont As Font = New Font("Aerial", 10, FontStyle.Underline Or FontStyle.Regular)
         Private myFont2 As Font = New Font("Aerial", 10, FontStyle.Italic Or FontStyle.Strikeout)
 
-        'Private Sub cboCalculationType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
-        '    If (cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.Regular) And
-        '       (cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Factor) Or
-        '        cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Table) Or
-        '        cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.Variable))) Then
-        '        e.Graphics.DrawString(cboCalculationType.Items(e.Index).ToString(), myFont2, Brushes.LightSlateGray, e.Bounds)
-        '    Else
-        '        e.DrawBackground()
-        '        e.Graphics.DrawString(cboCalculationType.Items(e.Index).ToString(), myFont, Brushes.White, e.Bounds)
-        '        e.DrawFocusRectangle()
-        '    End If
-        'End Sub
-
         Private Sub cboCalculationType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
             Dim comboBox As ComboBox = CType(sender, ComboBox)
-            If IsItemDisabled(e.Index) Then
+            If IsCalcTypeItemDisabled(e.Index) Then
                 e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds)
                 e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, SystemBrushes.GrayText, e.Bounds)
             Else
@@ -311,30 +303,74 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub cboCalculationType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectedIndexChanged
+        Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectionChangeCommitted, cboCalculationType.Validated
             If cboCalculationType.Focused Then
-                If IsItemDisabled(cboCalculationType.SelectedIndex) Then
-                    MessageBox.Show("Sorry, selected value not allowed for selected Pay Element Type!")
+                If IsCalcTypeItemDisabled(cboCalculationType.SelectedIndex) Then
+                    Messaging.ShowParametrizedMessage(True, "MsgSelectedValueNotAllowed", {cboPayElementType.LinkedLabel.Text, "field1", cboCalculationType.LinkedLabel.Text, "field2"})
                     cboCalculationType.SelectedValue = -1
+                ElseIf cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.FixedAmount) Then
+                    QuantityType = EnumToCode(QuantityTypeSelection.NotNeeded)
                 End If
+                UpdateCalculationTabDisplay()
             End If
         End Sub
 
-        Private Function IsItemDisabled(ByVal index As Integer) As Boolean
+        Private Function IsCalcTypeItemDisabled(ByVal index As Integer) As Boolean
             If cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.Regular) Then
-                If index = 1 Or index = 3 Or index = 4 Then
+                If index = CalculationTypeSelection.Variable Or index = CalculationTypeSelection.Table Then
                     Return True
                 End If
             ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.Computed) Then
-                If index = 0 Or index = 3 Or index = 4 Then
+                If index = CalculationTypeSelection.FixedAmount Or index = CalculationTypeSelection.Variable Or index = CalculationTypeSelection.Table Then
                     Return True
                 End If
             ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.Global) Then
-                If index = 1 Or index = 2 Or index = 3 Or index = 4 Then
+                If index = CalculationTypeSelection.Factor Or index = CalculationTypeSelection.FixedRate Or index = CalculationTypeSelection.Variable Or index = CalculationTypeSelection.Table Then
                     Return True
                 End If
             ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OnDemand) Then
-                If index = 4 Then
+                If index = CalculationTypeSelection.Table Then
+                    Return True
+                End If
+            End If
+            Return False
+        End Function
+
+        Private Sub cboQuantityType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
+            Dim comboBox As ComboBox = CType(sender, ComboBox)
+            If IsQtyTypeItemDisabled(e.Index) Then
+                e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds)
+                e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, SystemBrushes.GrayText, e.Bounds)
+            Else
+                e.DrawBackground()
+                'Dim brush As Brush = If((e.State And DrawItemState.Selected) > 0, SystemBrushes.HighlightText, SystemBrushes.ControlText)
+                e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, Brushes.White, e.Bounds)
+                e.DrawFocusRectangle()
+            End If
+        End Sub
+
+        Private Sub cboQuantityType_ValueChanged(sender As Object, e As EventArgs) Handles cboQuantityType.SelectionChangeCommitted, cboQuantityType.Validated
+            If cboCalculationType.Focused Then
+                If IsQtyTypeItemDisabled(cboCalculationType.SelectedIndex) Then
+                    Messaging.ShowParametrizedMessage(True, "MsgSelectedValueNotAllowed", {cboCalculationType.LinkedLabel.Text, "field1", cboQuantityType.LinkedLabel.Text, "field2"})
+                    cboCalculationType.SelectedValue = -1
+                End If
+                Me.DoubleBuffered = True
+                SuspendLayout()
+                floCalculation.Visible = False
+                lblDefaultQuantity.Visible = True
+                txtDefaultQuantity.Visible = True
+                lblSlash2.Visible = False
+                cboUnit.Visible = True
+                tlpCalculation.SetCellPosition(cboUnit, cellPosQtyUnit)
+                floCalculation.Visible = True
+                ResumeLayout()
+            End If
+        End Sub
+
+        Private Function IsQtyTypeItemDisabled(ByVal index As Integer) As Boolean
+            If PayElementType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+                If index = QuantityTypeSelection.NotNeeded Or index = QuantityTypeSelection.Variable Then
                     Return True
                 End If
             End If
@@ -396,7 +432,6 @@ Namespace PresentationLayer.Views.Forms
                 {"PayElementCode", txtPayElementCode},
                 {"PayElementName", txtPayElementName},
                 {"PayElementNameAra", txtPayElementNameAra},
-                {"PayElementType", cboPayElementType},
                 {"IdNo", TxtIdNo},
                 {"IncludeInEos", chkIncludeInEOS},
                 {"FactorValue", txtMultiplier},
@@ -456,35 +491,35 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.Validated, cboCalculationType.SelectionChangeCommitted
-            Me.DoubleBuffered = True
-            SuspendLayout()
-            floCalculation.Visible = False
-            UpdateCalculationTabDisplay()
-            floCalculation.Visible = True
-            ResumeLayout()
-        End Sub
+        'Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.Validated, cboCalculationType.SelectionChangeCommitted
+        '    Me.DoubleBuffered = True
+        '    SuspendLayout()
+        '    floCalculation.Visible = False
+        '    UpdateCalculationTabDisplay()
+        '    floCalculation.Visible = True
+        '    ResumeLayout()
+        'End Sub
 
-        Private Sub cboQuantityType_ValueChanged(sender As Object, e As EventArgs) Handles cboQuantityType.Validated, cboQuantityType.SelectionChangeCommitted
-            Me.DoubleBuffered = True
-            SuspendLayout()
-            floCalculation.Visible = False
-            If cboQuantityType.SelectedValue = EnumToCode(QuantityTypeSelection.NotNeeded) Then
-                lblDefaultQuantity.Visible = False
-                txtDefaultQuantity.Visible = False
-                lblSlash2.Visible = False
-                cboUnit.Visible = False
-                tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-            Else
-                lblDefaultQuantity.Visible = True
-                txtDefaultQuantity.Visible = True
-                lblSlash2.Visible = False
-                cboUnit.Visible = True
-                tlpCalculation.SetCellPosition(cboUnit, cellPosQtyUnit)
-            End If
-            floCalculation.Visible = True
-            ResumeLayout()
-        End Sub
+        'Private Sub cboQuantityType_ValueChanged(sender As Object, e As EventArgs) Handles cboQuantityType.Validated, cboQuantityType.SelectionChangeCommitted
+        '    Me.DoubleBuffered = True
+        '    SuspendLayout()
+        '    floCalculation.Visible = False
+        '    If cboQuantityType.SelectedValue = EnumToCode(QuantityTypeSelection.NotNeeded) Then
+        '        lblDefaultQuantity.Visible = False
+        '        txtDefaultQuantity.Visible = False
+        '        lblSlash2.Visible = False
+        '        cboUnit.Visible = False
+        '        tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
+        '    Else
+        '        lblDefaultQuantity.Visible = True
+        '        txtDefaultQuantity.Visible = True
+        '        lblSlash2.Visible = False
+        '        cboUnit.Visible = True
+        '        tlpCalculation.SetCellPosition(cboUnit, cellPosQtyUnit)
+        '    End If
+        '    floCalculation.Visible = True
+        '    ResumeLayout()
+        'End Sub
 
         Private Sub UpdateCalculationTabDisplay()
             SuspendLayout()
@@ -747,50 +782,57 @@ Namespace PresentationLayer.Views.Forms
         '    End With
         'End Sub
 
+        'Public Overrides Function ValidateView()
+        '    Dim valid As Boolean
+        '    valid = ValidateDataBoundGrid(Of PayElementItemView, PayElementItemModel)(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
+        '            ValidateDataBoundGrid(Of PayElementAccountView, PayElementAccountModel)(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
+        '    Return valid
+        'End Function
+
         Public Overrides Function ValidateView()
             Dim valid As Boolean
-            valid = ValidateDataBoundGrid(Of PayElementItemView, PayElementItemModel)(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
-                    ValidateDataBoundGrid(Of PayElementAccountView, PayElementAccountModel)(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
+            valid = MyPresenter.ValidateDataBoundGrid(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
+                    MyPresenter.ValidateDataBoundGrid(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
             Return valid
         End Function
 
-        Private Sub cboPayElementType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayElementType.Validated, cboPayElementType.SelectionChangeCommitted
-            'If CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeRegular Or
-            '    CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeHoliday Or
-            '    CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeSpecial Then
-            '    cboCalculationType.DisplayOnly = True
-            '    cboPayElementType.DisplayOnly = True
-            '    cboUnit.DisplayOnly = True
-            '    txtPayElementName.DisplayOnly = True
-            'Else
-            '    cboCalculationType.DisplayOnly = False
-            '    cboPayElementType.DisplayOnly = False
-            '    cboUnit.DisplayOnly = False
-            '    txtPayElementName.DisplayOnly = False
-            'End If
-            'UpdateCalculationTabDisplay()
-            'If IsOvertimePayElement(cboPayElementType.SelectedValue) Then
-            '    If cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeRegular) Then
-            '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
-            '    ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeHoliday) Then
-            '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
-            '    ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeSpecial) Then
-            '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
-            '    End If
-            '    '    lblRate.Visible = True
-            '    '    txtRate.Visible = True
-            '    '    cboUnit.Visible = False
-            '    '    lblSlash.Visible = False
-            '    '    lblSlash.Visible = False
-            '    '    lblRate.Text = Messaging.TranslateCaption("Default Amount")
-            '    'Else
-            '    '    cboUnit.Visible = True
-            '    '    lblSlash.Visible = True
-            '    '    lblSlash.Visible = True
-            '    '    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
-            '    '    lblSlash.Text = Messaging.TranslateCaption("/")
-            'End If
-        End Sub
+        'Private Sub cboPayElementType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayElementType.Validated, cboPayElementType.SelectionChangeCommitted
+        '    'If CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeRegular Or
+        '    '    CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeHoliday Or
+        '    '    CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeSpecial Then
+        '    '    cboCalculationType.DisplayOnly = True
+        '    '    cboPayElementType.DisplayOnly = True
+        '    '    cboUnit.DisplayOnly = True
+        '    '    txtPayElementName.DisplayOnly = True
+        '    'Else
+        '    '    cboCalculationType.DisplayOnly = False
+        '    '    cboPayElementType.DisplayOnly = False
+        '    '    cboUnit.DisplayOnly = False
+        '    '    txtPayElementName.DisplayOnly = False
+        '    'End If
+        '    'UpdateCalculationTabDisplay()
+        '    'If IsOvertimePayElement(cboPayElementType.SelectedValue) Then
+        '    '    If cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeRegular) Then
+        '    '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
+        '    '    ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeHoliday) Then
+        '    '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
+        '    '    ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeSpecial) Then
+        '    '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
+        '    '    End If
+        '    '    '    lblRate.Visible = True
+        '    '    '    txtRate.Visible = True
+        '    '    '    cboUnit.Visible = False
+        '    '    '    lblSlash.Visible = False
+        '    '    '    lblSlash.Visible = False
+        '    '    '    lblRate.Text = Messaging.TranslateCaption("Default Amount")
+        '    '    'Else
+        '    '    '    cboUnit.Visible = True
+        '    '    '    lblSlash.Visible = True
+        '    '    '    lblSlash.Visible = True
+        '    '    '    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
+        '    '    '    lblSlash.Text = Messaging.TranslateCaption("/")
+        '    'End If
+        'End Sub
 
         Private Function IsOvertimePayElement(earnType As Char)
             'If earnType = EnumToCode(PayElementTypeSelection.OvertimeRegular) Or

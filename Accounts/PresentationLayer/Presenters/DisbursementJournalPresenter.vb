@@ -45,7 +45,7 @@ Namespace PresentationLayer.Presenters
             End If
             _journalItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
             OiItemModel = New ModelAccounts("DjOiItem", Nothing, oiArgs)
-            ModelPresenter = New ModelAccounts("DisbursementJournal", JournalCode, args)
+            ModelOfPresenter = New ModelAccounts("DisbursementJournal", JournalCode, args)
             TableName = tableOrViewName
             OriginalModel = New DisbursementJournalModel()
             DataModel = New DisbursementJournalModel
@@ -105,7 +105,7 @@ Namespace PresentationLayer.Presenters
                     Dim cdAccounts = GetAccountTypesList(accounts)
                     Return cdAccounts.Count()
                 End If
-                Return ModelPresenter.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
+                Return ModelOfPresenter.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
             End Get
         End Property
 
@@ -201,7 +201,7 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 AndAlso
                (View.PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Or View.PaymentType = EnumToCode(PaymentTypeSelection.Supplier)) AndAlso
                Not IsEmpty(View.VatNumber) Then
-                ModelPresenter.UpdateVatNumber(View.VatNumber, View.PayeeIdNo)
+                ModelOfPresenter.UpdateVatNumber(View.VatNumber, View.PayeeIdNo)
             End If
         End Sub
 
@@ -228,7 +228,7 @@ Namespace PresentationLayer.Presenters
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
             GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelPresenter.UpdateGlReferenceNumber(DataModel)
+            retValue = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
 
@@ -762,7 +762,7 @@ Namespace PresentationLayer.Presenters
             If supplierIdNo Is Nothing Then
                 Return New List(Of DjOiItemModel)
             Else
-                Return ModelPresenter.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
+                Return ModelOfPresenter.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
             End If
         End Function
 

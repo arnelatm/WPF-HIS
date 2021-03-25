@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ITranslatedCaptionView)
             MyBase.New(view)
-            ModelPresenter = New ModelCommon("TranslatedCaption")
+            ModelOfPresenter = New ModelCommon("TranslatedCaption")
             TableName = "TranslatedCaption"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
@@ -70,7 +70,7 @@ Namespace PresentationLayer.Presenters
                 If retVal = 0 Then
                     If Not (String.IsNullOrEmpty(record.TranslatedCaption)) Then
                         record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
-                        NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
+                        NewlyAddedRecordIdNo = ModelOfPresenter.AddRecord(record)
                         retVal = NewlyAddedRecordIdNo
                         CallByName(View, "IdNo", CallType.Set, retVal)
                     End If

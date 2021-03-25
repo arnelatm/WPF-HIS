@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPettyCashClosingView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("PcJournals")
+            ModelOfPresenter = New ModelAccounts("PcJournals")
             TableName = "PcJournal_View"
             OriginalModel = New PcJournalModel()
             DataModel = New PcJournalModel()

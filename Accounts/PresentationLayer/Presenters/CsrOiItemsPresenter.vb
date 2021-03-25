@@ -9,7 +9,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICsrOiItemsView)
             MyBase.New(view)
-            ModelPresenter = New ModelAccounts("CsrOiItem")
+            ModelOfPresenter = New ModelAccounts("CsrOiItem")
             TableName = "CsrOiItem"
             SortOrderKey = "Sequence"
             DataModel = New CsrOiItemModel
@@ -26,7 +26,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetCustomerOpenInvoices(ByVal customerIdNo As Int32) As List(Of CsrOiItemModel)
-            Return ModelPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
+            Return ModelOfPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
         End Function
 
 
