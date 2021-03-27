@@ -615,7 +615,7 @@ Namespace PresentationLayer.Presenters
                 earning = _payElementsDao.GetRecordByIdNo(empEarning.PayElementIdNo)
                 GlobalVariables.Mapper.Map(earning, earningModel)
                 If earning.CalculationType = _fixedAmountType Then
-                    amount = ComputeFixedAmount(empEarning.Amount, empEarning.Unit)
+                    amount = ComputePayAMount(_payFrequency, empEarning.Amount, empEarning.Unit)
                     If Not regenerate Then
                         AddPayElement(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
                     Else
@@ -758,7 +758,7 @@ Namespace PresentationLayer.Presenters
             If earning.CalculationType = _fixedRateType Then
                 Dim payElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = earning.IdNo)
                 If payElementModel IsNot Nothing Then
-                    rate = ComputeFixedAmount(payElementModel.Amount, earning.Unit)
+                    rate = ComputePayAMount(_payFrequency, payElementModel.Amount, earning.Unit)
                     Dim qty As Decimal = ComputeQuantity(employeeIdNo, earning.Unit)
                 Else
                     amount = 0
@@ -1013,139 +1013,139 @@ Namespace PresentationLayer.Presenters
             Return amount * factor
         End Function
 
-        Private Function ComputeFixedAmount(amount As Decimal, unit As String) As Decimal
-            Dim factor As Decimal
-            Select Case _payFrequency
-                Case PayFrequencySelection.Monthly
-                    If unit = _monthType Then
-                        factor = 1D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 2D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 12D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 6D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D / 3D
-                    ElseIf unit = _weekType Then
-                        factor = 13D / 2D
-                    ElseIf unit = _dayType Then
-                        factor = 30D
-                    ElseIf unit = _biWeekType Then
-                        factor = 13D / 6D
-                    End If
-                Case PayFrequencySelection.Yearly
-                    If unit = _monthType Then
-                        factor = 12D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 24D
-                    ElseIf unit = _yearType Then
-                        factor = 1D
-                    ElseIf unit = _semiYearType Then
-                        factor = 2D
-                    ElseIf unit = _quarterType Then
-                        factor = 4D
-                    ElseIf unit = _weekType Then
-                        factor = 52D
-                    ElseIf unit = _dayType Then
-                        factor = 365D
-                    ElseIf unit = _biWeekType Then
-                        factor = 26D
-                    End If
-                Case PayFrequencySelection.SemiYearly
-                    If unit = _monthType Then
-                        factor = 6D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 12D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 2D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D
-                    ElseIf unit = _quarterType Then
-                        factor = 2D
-                    ElseIf unit = _weekType Then
-                        factor = 26D
-                    ElseIf unit = _dayType Then
-                        factor = 365D / 2D
-                    ElseIf unit = _biWeekType Then
-                        factor = 13D
-                    End If
-                Case PayFrequencySelection.Quarterly
-                    If unit = _monthType Then
-                        factor = 3D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 6D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 4D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 2D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D
-                    ElseIf unit = _weekType Then
-                        factor = 13D
-                    ElseIf unit = _dayType Then
-                        factor = 365D / 4D
-                    ElseIf unit = _biWeekType Then
-                        factor = 13D / 2D
-                    End If
-                Case PayFrequencySelection.SemiMonthly
-                    If unit = _monthType Then
-                        factor = 1D / 2D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 1D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 24D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 12D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D / 6D
-                    ElseIf unit = _weekType Then
-                        factor = 13D / 4D
-                    ElseIf unit = _dayType Then
-                        factor = 15D
-                    ElseIf unit = _biWeekType Then
-                        factor = 13D / 12D
-                    End If
-                Case PayFrequencySelection.Weekly
-                    If unit = _monthType Then
-                        factor = 12D / 52D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 24D / 52D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 52D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 26D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D / 13D
-                    ElseIf unit = _weekType Then
-                        factor = 1D
-                    ElseIf unit = _dayType Then
-                        factor = 7D
-                    ElseIf unit = _biWeekType Then
-                        factor = 1D / 2D
-                    End If
-                Case PayFrequencySelection.Daily
-                    If unit = _monthType Then
-                        factor = 1D / 30D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 1D / 15D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 360D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 180D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D / 90D
-                    ElseIf unit = _weekType Then
-                        factor = 1D / 7D
-                    ElseIf unit = _dayType Then
-                        factor = 1D
-                    ElseIf unit = _biWeekType Then
-                        factor = 1D / 14D
-                    End If
+        'Private Function ComputePayAMount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
+        '    Dim factor As Decimal
+        '    Select Case payFrequency
+        '        Case PayFrequencySelection.Monthly
+        '            If unit = _monthType Then
+        '                factor = 1D
+        '            ElseIf unit = _semiMonthType Then
+        '                factor = 2D
+        '            ElseIf unit = _yearType Then
+        '                factor = 1D / 12D
+        '            ElseIf unit = _semiYearType Then
+        '                factor = 1D / 6D
+        '            ElseIf unit = _quarterType Then
+        '                factor = 1D / 3D
+        '            ElseIf unit = _weekType Then
+        '                factor = 13D / 2D
+        '            ElseIf unit = _dayType Then
+        '                factor = 30D
+        '            ElseIf unit = _biWeekType Then
+        '                factor = 13D / 6D
+        '            End If
+        '        Case PayFrequencySelection.Yearly
+        '            If unit = _monthType Then
+        '                factor = 12D
+        '            ElseIf unit = _semiMonthType Then
+        '                factor = 24D
+        '            ElseIf unit = _yearType Then
+        '                factor = 1D
+        '            ElseIf unit = _semiYearType Then
+        '                factor = 2D
+        '            ElseIf unit = _quarterType Then
+        '                factor = 4D
+        '            ElseIf unit = _weekType Then
+        '                factor = 52D
+        '            ElseIf unit = _dayType Then
+        '                factor = 365D
+        '            ElseIf unit = _biWeekType Then
+        '                factor = 26D
+        '            End If
+        '        Case PayFrequencySelection.SemiYearly
+        '            If unit = _monthType Then
+        '                factor = 6D
+        '            ElseIf unit = _semiMonthType Then
+        '                factor = 12D
+        '            ElseIf unit = _yearType Then
+        '                factor = 1D / 2D
+        '            ElseIf unit = _semiYearType Then
+        '                factor = 1D
+        '            ElseIf unit = _quarterType Then
+        '                factor = 2D
+        '            ElseIf unit = _weekType Then
+        '                factor = 26D
+        '            ElseIf unit = _dayType Then
+        '                factor = 365D / 2D
+        '            ElseIf unit = _biWeekType Then
+        '                factor = 13D
+        '            End If
+        '        Case PayFrequencySelection.Quarterly
+        '            If unit = _monthType Then
+        '                factor = 3D
+        '            ElseIf unit = _semiMonthType Then
+        '                factor = 6D
+        '            ElseIf unit = _yearType Then
+        '                factor = 1D / 4D
+        '            ElseIf unit = _semiYearType Then
+        '                factor = 1D / 2D
+        '            ElseIf unit = _quarterType Then
+        '                factor = 1D
+        '            ElseIf unit = _weekType Then
+        '                factor = 13D
+        '            ElseIf unit = _dayType Then
+        '                factor = 365D / 4D
+        '            ElseIf unit = _biWeekType Then
+        '                factor = 13D / 2D
+        '            End If
+        '        Case PayFrequencySelection.SemiMonthly
+        '            If unit = _monthType Then
+        '                factor = 1D / 2D
+        '            ElseIf unit = _semiMonthType Then
+        '                factor = 1D
+        '            ElseIf unit = _yearType Then
+        '                factor = 1D / 24D
+        '            ElseIf unit = _semiYearType Then
+        '                factor = 1D / 12D
+        '            ElseIf unit = _quarterType Then
+        '                factor = 1D / 6D
+        '            ElseIf unit = _weekType Then
+        '                factor = 13D / 4D
+        '            ElseIf unit = _dayType Then
+        '                factor = 15D
+        '            ElseIf unit = _biWeekType Then
+        '                factor = 13D / 12D
+        '            End If
+        '        Case PayFrequencySelection.Weekly
+        '            If unit = _monthType Then
+        '                factor = 12D / 52D
+        '            ElseIf unit = _semiMonthType Then
+        '                factor = 24D / 52D
+        '            ElseIf unit = _yearType Then
+        '                factor = 1D / 52D
+        '            ElseIf unit = _semiYearType Then
+        '                factor = 1D / 26D
+        '            ElseIf unit = _quarterType Then
+        '                factor = 1D / 13D
+        '            ElseIf unit = _weekType Then
+        '                factor = 1D
+        '            ElseIf unit = _dayType Then
+        '                factor = 7D
+        '            ElseIf unit = _biWeekType Then
+        '                factor = 1D / 2D
+        '            End If
+        '        Case PayFrequencySelection.Daily
+        '            If unit = _monthType Then
+        '                factor = 1D / 30D
+        '            ElseIf unit = _semiMonthType Then
+        '                factor = 1D / 15D
+        '            ElseIf unit = _yearType Then
+        '                factor = 1D / 360D
+        '            ElseIf unit = _semiYearType Then
+        '                factor = 1D / 180D
+        '            ElseIf unit = _quarterType Then
+        '                factor = 1D / 90D
+        '            ElseIf unit = _weekType Then
+        '                factor = 1D / 7D
+        '            ElseIf unit = _dayType Then
+        '                factor = 1D
+        '            ElseIf unit = _biWeekType Then
+        '                factor = 1D / 14D
+        '            End If
 
-            End Select
-            Return amount * factor
-        End Function
+        '    End Select
+        '    Return amount * factor
+        'End Function
 
         Private Function ComputeQuantity(employeeIdNo As Int32, quantityType As String)
             Dim quantity As Decimal?
