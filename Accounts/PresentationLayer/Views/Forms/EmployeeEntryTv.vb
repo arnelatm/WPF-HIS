@@ -21,7 +21,9 @@ Namespace PresentationLayer.Views.Forms
         Private _unit
         Private _phoneTypes
 
+
         Private ReadOnly _nfi As NumberFormatInfo
+        Private MyPresenter As EmployeePresenter
 
         Public Sub New()
             MyBase.New()
@@ -38,8 +40,9 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             tbcEmployee.RightToLeftLayout = GlobalVariables.RightToLeftLayout
             tbcEmployee.RightToLeft = RightToLeft.Inherit
-            PresenterObj = New EmployeePresenter(Me)
-            Ea = PresenterObj.Ea
+            MyPresenter = New EmployeePresenter(Me)
+            PresenterObj = MyPresenter
+            Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
             'DataGridViewEarnings.Ea.SubscribeEvent(Me)
             'DataGridViewDeductions.Ea.SubscribeEvent(Me)
@@ -455,22 +458,22 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacBankIdNo.DataSource = PresenterObj.GetLookup("Bank")
-            cacCountryCode.DataSource = PresenterObj.GetLookup("Country")
-            cacDepartmentIdNo.DataSource = PresenterObj.GetLookup("Department")
-            cacDesignationIdNo.DataSource = PresenterObj.GetLookup("Designation")
-            cacGender.DataSource = PresenterObj.MakeEnumComboList(Of MaleFemaleSelection)
-            cacMaritalStatus.DataSource = PresenterObj.MakeEnumComboList(Of MaritalStatusSelection)
-            cacNationalityCode.DataSource = PresenterObj.GetLookup("Country")
-            cacReligionIdNo.DataSource = PresenterObj.GetLookup("Religion")
-            cboPayCycleidNo.DataSource = PresenterObj.GetLookup("PayCycle")
-            cboPayGroupIdNo.DataSource = PresenterObj.GetLookup("PayGroup")
-            cboPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PayrollPaymentMethodSelection)
-            _deductionsByName = PresenterObj.GetFilteredLookupListByCodeName("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            _earningsByName = PresenterObj.GetFilteredLookupListByCodeName("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            _phoneTypes = PresenterObj.GetLookup("PhoneType")
-            _countryTelCodes = PresenterObj.GetIntPhoneCodes()
-            _unit = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
+            cacBankIdNo.DataSource = MyPresenter.GetLookup("Bank")
+            cacCountryCode.DataSource = MyPresenter.GetLookup("Country")
+            cacDepartmentIdNo.DataSource = MyPresenter.GetLookup("Department")
+            cacDesignationIdNo.DataSource = MyPresenter.GetLookup("Designation")
+            cacGender.DataSource = MyPresenter.MakeEnumComboList(Of MaleFemaleSelection)
+            cacMaritalStatus.DataSource = MyPresenter.MakeEnumComboList(Of MaritalStatusSelection)
+            cacNationalityCode.DataSource = MyPresenter.GetLookup("Country")
+            cacReligionIdNo.DataSource = MyPresenter.GetLookup("Religion")
+            cboPayCycleidNo.DataSource = MyPresenter.GetLookup("PayCycle")
+            cboPayGroupIdNo.DataSource = MyPresenter.GetLookup("PayGroup")
+            cboPaymentMethod.DataSource = MyPresenter.MakeEnumComboList(Of PayrollPaymentMethodSelection)
+            _deductionsByName = MyPresenter.GetFilteredLookupListByCodeName("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            _earningsByName = MyPresenter.GetFilteredLookupListByCodeName("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            _phoneTypes = MyPresenter.GetLookup("PhoneType")
+            _countryTelCodes = MyPresenter.GetIntPhoneCodes()
+            _unit = MyPresenter.MakeEnumComboList(Of PayRateUnitSelection)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -519,7 +522,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             MyBase.RecordPositionChanged(e)
             Dim value As Double
-            value = Convert.ToDecimal(PresenterObj.GetEmployeeBalance(IdNo))
+            value = Convert.ToDecimal(MyPresenter.GetEmployeeBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
             DisplayNetEarnings()
         End Sub
@@ -549,11 +552,11 @@ Namespace PresentationLayer.Views.Forms
                 dgvDeductionIdNo.ValueMember = "IdNo"
                 dgvDeductionIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvDedUnit.DataSource = _unit
-                'dgvDedUnit.DisplayOnly = True
-                dgvDedUnit.ValueMember = "Code"
-                dgvDedUnit.DisplayMember = "Name"
-                dgvDedUnit.DisplayStyleForCurrentCellOnly = True
+                dgvDeductionUnit.DataSource = _unit
+                dgvDeductionUnit.ValueMember = "Code"
+                dgvDeductionUnit.DisplayMember = "Name"
+                dgvDeductionUnit.DisplayStyleForCurrentCellOnly = True
+                dgvSequenceDeduction.DisplayOnly = True
                 dgvSequenceDeduction.DisplayOnly = True
             End With
             ResumeLayout()
@@ -565,7 +568,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewEarnings.Refresh()
             bsEarnings.DataSource = RegularEmployeeEarnings
             bsEarnings.AllowNew = True
-            'bsEarnings.Sort = "Sequence"
             With DataGridViewEarnings
                 .Refresh()
                 .AutoGenerateColumns = False
@@ -578,11 +580,12 @@ Namespace PresentationLayer.Views.Forms
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvUnit.DataSource = _unit
-                dgvUnit.ValueMember = "Code"
-                dgvUnit.DisplayMember = "Name"
-                dgvUnit.DisplayStyleForCurrentCellOnly = True
+                dgvEarningUnit.DataSource = _unit
+                dgvEarningUnit.ValueMember = "Code"
+                dgvEarningUnit.DisplayMember = "Name"
+                dgvEarningUnit.DisplayStyleForCurrentCellOnly = True
                 dgvSequenceEarning.DisplayOnly = True
+                dgvEarningAmount.DisplayOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -697,53 +700,66 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewEarnings
                 Dim nIndex = .CurrentRow.Index
                 Select Case .CurrentCell.OwningColumn.Name
-                    'Case $"dgvEarningAmount"
-                    '    Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-                    '    Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-                    '    If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                    '        Messaging.Show(True, $"MsgAmountChangeNotAllowed")
-                    '        .CancelEdit()
-                    '    End If
-
-                    Case $"dgvEarningRate"
-                        Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-                        Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-                        Dim unit = PresenterObj.GetFieldWithIdNo(earnIdNo, "PayElement", "Unit")
-                        If IsEmpty(RegularEmployeeEarnings(nIndex).Unit) Then
-                            RegularEmployeeEarnings(nIndex).Unit = unit
-                        End If
-                        'If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                        '    Messaging.Show(True, $"MsgRateChangeNotAllowed")
-                        '    .CancelEdit()
-                        'End If
-
+                    Case $"dgvEarningAmount"
+                        Messaging.Show(True, $"MsgAmountChangeNotAllowed")
                 End Select
             End With
         End Sub
 
-        Private Sub DgvDeduction_OnBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDeductions.CellBeginEdit
+        Private Sub DgvEarning_OnEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit, DataGridViewDeductions.CellEndEdit
             With DataGridViewEarnings
                 Dim nIndex = .CurrentRow.Index
+                Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
+                Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(MyPresenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
+                Dim calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
+                Dim amount As Decimal
                 Select Case .CurrentCell.OwningColumn.Name
-                    Case "dgvDeductionAmount"
-                        Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-                        Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
+                    Case $"dgvPayelementIdNo"
+                        earnIdNo = .CurrentCell.Value
+                        calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
                         If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                            Messaging.Show(True, $"MsgAmountChangeNotAllowed")
-                            .CancelEdit()
+                            amount = 0
+                        ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
+                            amount = MyPresenter.ComputePayAmount(payFrequency, RegularEmployeeEarnings(nIndex).Rate, RegularEmployeeEarnings(nIndex).Unit)
                         End If
-
-                    Case "dgvDeductionRate"
-                        Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-                        Dim calcType = PresenterObj.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
-                        'If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                        '    Messaging.Show(True, $"MsgRateChangeNotAllowed")
-                        '    .CancelEdit()
-                        'End If
-
+                    Case $"dgvEarningRate"
+                        If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+                            amount = 0
+                        ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
+                            amount = MyPresenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeEarnings(nIndex).Unit)
+                        End If
+                    Case $"dgvEarningUnit"
+                        Dim unit = DirectCast(.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        amount = MyPresenter.ComputePayAmount(payFrequency, RegularEmployeeEarnings(nIndex).Rate, unit)
                 End Select
+                RegularEmployeeEarnings(nIndex).Amount = amount
             End With
         End Sub
+
+        'Private Sub DgvDeduction_OnBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDeductions.CellBeginEdit
+        '    With DataGridViewEarnings
+        '        Dim nIndex = .CurrentRow.Index
+        '        Select Case .CurrentCell.OwningColumn.Name
+        '            Case "dgvDeductionAmount"
+        '                Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
+        '                Dim calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
+        '                If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+        '                    Messaging.Show(True, $"MsgAmountChangeNotAllowed")
+        '                    .CancelEdit()
+        '                End If
+
+        '            Case "dgvDeductionRate"
+        '                Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
+        '                Dim calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
+        '                'If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+        '                '    Messaging.Show(True, $"MsgRateChangeNotAllowed")
+        '                '    .CancelEdit()
+        '                'End If
+
+        '        End Select
+        '    End With
+        'End Sub
+
 
     End Class
 
