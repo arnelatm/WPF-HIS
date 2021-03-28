@@ -614,7 +614,7 @@ Namespace PresentationLayer.Presenters
                     Dim dataRow As DataRow
                     dataRow = dtPayrollPayElementInsertTable.NewRow()
                     dataRow("Amount") = item.Amount
-                    dataRow("EarningIdNo") = item.PayElementIdNo
+                    dataRow("PayElementIdNo") = item.PayElementIdNo
                     dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
                     dtPayrollPayElementInsertTable.Rows.Add(dataRow)
                 Next
@@ -637,9 +637,9 @@ Namespace PresentationLayer.Presenters
             Dim empPayElementsModel As New List(Of EmployeePayElementModel)
             GlobalVariables.Mapper.Map(empPayElements, empPayElementsModel)
             Dim amount As Decimal
-            If employeeIdNo = 453 Then
-                Debugger.Break()
-            End If
+            'If employeeIdNo = 453 Then
+            '    Debugger.Break()
+            'End If
             For Each empPayElement As EmployeePayElementModel In empPayElementsModel
                 Dim payElement As New PayElement
                 Dim payElementModel As New PayElementModel
@@ -883,10 +883,12 @@ Namespace PresentationLayer.Presenters
         Private Function CreatePayrollDetails()
             Dim payrollDetails As New List(Of PayrollDetail)
             Dim payrollDetailsModel As New List(Of PayrollDetailModel)
-            payrollDetails = _payrollDetailsDao.GetRecordsWithGroupIdNo(_payrollIdNo)
-            GlobalVariables.Mapper.Map(payrollDetails, payrollDetailsModel)
-            payrollDetails = Nothing
-            If payrollDetailsModel.Count() = 0 Then
+            Dim savedPayrollDetails As New List(Of PayrollDetail)
+            Dim savedPayrollDetailsModel As New List(Of PayrollDetailModel)
+            savedPayrollDetails = _payrollDetailsDao.GetRecordsWithGroupIdNo(_payrollIdNo)
+            GlobalVariables.Mapper.Map(savedPayrollDetails, savedPayrollDetailsModel)
+            savedPayrollDetails = Nothing
+            If savedPayrollDetailsModel.Count() = 0 Then
                 For Each employeeAttendance In View.PayrollAttendance
                     Dim payrollDetail As New PayrollDetailModel
                     payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
@@ -896,8 +898,9 @@ Namespace PresentationLayer.Presenters
             Else
                 For Each employeeAttendance In View.PayrollAttendance
                     Dim payrollDetail As New PayrollDetailModel
-                    payrollDetail = payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
+                    payrollDetail = savedPayrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
                     If payrollDetail Is Nothing Then
+
                         payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
                         payrollDetail.PayrollIdNo = View.IdNo
                         payrollDetailsModel.Add(payrollDetail)
