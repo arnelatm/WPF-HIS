@@ -21,7 +21,6 @@ Namespace PresentationLayer.Views.Forms
         Private _unit
         Private _phoneTypes
 
-
         Private ReadOnly _nfi As NumberFormatInfo
         Private MyPresenter As EmployeePresenter
 
@@ -557,7 +556,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvDeductionUnit.DisplayMember = "Name"
                 dgvDeductionUnit.DisplayStyleForCurrentCellOnly = True
                 dgvSequenceDeduction.DisplayOnly = True
-                dgvSequenceDeduction.DisplayOnly = True
+                dgvDeductionAmount.DisplayOnly = True
             End With
             ResumeLayout()
         End Sub
@@ -696,31 +695,39 @@ Namespace PresentationLayer.Views.Forms
             DisplayPhoneTab()
         End Sub
 
-        Private Sub DgvEarning_OnBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewEarnings.CellBeginEdit
-            With DataGridViewEarnings
-                Dim nIndex = .CurrentRow.Index
-                Select Case .CurrentCell.OwningColumn.Name
-                    Case $"dgvEarningAmount"
-                        Messaging.Show(True, $"MsgAmountChangeNotAllowed")
-                End Select
-            End With
-        End Sub
+        'Private Sub DgvEarning_OnBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewEarnings.CellBeginEdit
+        '    With DataGridViewEarnings
+        '        Dim nIndex = .CurrentRow.Index
+        '        Select Case .CurrentCell.OwningColumn.Name
+        '            Case $"dgvEarningAmount"
+        '                Messaging.Show(True, $"MsgAmountChangeNotAllowed")
+        '        End Select
+        '    End With
+        'End Sub
 
-        Private Sub DgvEarning_OnEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit, DataGridViewDeductions.CellEndEdit
+        Private Sub DgvEarning_OnEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit
             With DataGridViewEarnings
                 Dim nIndex = .CurrentRow.Index
                 Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
                 Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(MyPresenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
                 Dim calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
                 Dim amount As Decimal
+                Dim selectedRow As EmployeePayElementView
+                selectedRow = DataGridViewEarnings.Rows(nIndex).DataBoundItem
                 Select Case .CurrentCell.OwningColumn.Name
-                    Case $"dgvPayelementIdNo"
+                    Case $"dgvEarningIdNo"
                         earnIdNo = .CurrentCell.Value
                         calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
+                        If IsEmpty(selectedRow.Unit) Then
+                            selectedRow.Unit = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Unit")
+                        End If
+                        If selectedRow.Rate = 0 Then
+                            selectedRow.Rate = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Rate")
+                        End If
                         If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
                             amount = 0
                         ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                            amount = MyPresenter.ComputePayAmount(payFrequency, RegularEmployeeEarnings(nIndex).Rate, RegularEmployeeEarnings(nIndex).Unit)
+                            amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, selectedRow.Unit)
                         End If
                     Case $"dgvEarningRate"
                         If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
@@ -730,9 +737,47 @@ Namespace PresentationLayer.Views.Forms
                         End If
                     Case $"dgvEarningUnit"
                         Dim unit = DirectCast(.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        amount = MyPresenter.ComputePayAmount(payFrequency, RegularEmployeeEarnings(nIndex).Rate, unit)
+                        amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
                 End Select
-                RegularEmployeeEarnings(nIndex).Amount = amount
+                selectedRow.Amount = amount
+            End With
+        End Sub
+
+        Private Sub DgvDeduction_OnEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDeductions.CellEndEdit
+            With DataGridViewDeductions
+                Dim nIndex = .CurrentRow.Index
+                Dim deductionIdNo = RegularEmployeeDeductions(nIndex).PayElementIdNo
+                Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(MyPresenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
+                Dim calcType = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "CalculationType")
+                Dim amount As Decimal
+                Dim selectedRow As EmployeePayElementView
+                selectedRow = DataGridViewDeductions.Rows(nIndex).DataBoundItem
+                Select Case .CurrentCell.OwningColumn.Name
+                    Case $"dgvDeductionIdNo"
+                        deductionIdNo = .CurrentCell.Value
+                        calcType = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "CalculationType")
+                        If IsEmpty(selectedRow.Unit) Then
+                            selectedRow.Unit = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Unit")
+                        End If
+                        If selectedRow.Rate = 0 Then
+                            selectedRow.Rate = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Rate")
+                        End If
+                        If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+                            amount = 0
+                        ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
+                            amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, selectedRow.Unit)
+                        End If
+                    Case $"dgvDeductionRate"
+                        If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
+                            amount = 0
+                        ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
+                            amount = MyPresenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeDeductions(nIndex).Unit)
+                        End If
+                    Case $"dgvDeductionUnit"
+                        Dim unit = DirectCast(.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                        amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
+                End Select
+                selectedRow.Amount = amount
             End With
         End Sub
 
@@ -759,7 +804,6 @@ Namespace PresentationLayer.Views.Forms
         '        End Select
         '    End With
         'End Sub
-
 
     End Class
 
