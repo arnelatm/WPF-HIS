@@ -41,7 +41,8 @@ Partial Class CFindForm
         '
         'Label1
         '
-        Me.Label1.AutoSize = true
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Location = New System.Drawing.Point(13, 26)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(49, 13)
@@ -50,25 +51,27 @@ Partial Class CFindForm
         '
         'RBtnStart
         '
-        Me.RBtnStart.AutoSize = true
-        Me.RBtnStart.Checked = true
+        Me.RBtnStart.AutoSize = True
+        Me.RBtnStart.BackColor = System.Drawing.Color.Transparent
+        Me.RBtnStart.Checked = True
         Me.RBtnStart.Location = New System.Drawing.Point(54, 68)
         Me.RBtnStart.Name = "RBtnStart"
         Me.RBtnStart.Size = New System.Drawing.Size(84, 17)
         Me.RBtnStart.TabIndex = 2
-        Me.RBtnStart.TabStop = true
+        Me.RBtnStart.TabStop = True
         Me.RBtnStart.Text = "Start of Field"
-        Me.RBtnStart.UseVisualStyleBackColor = true
+        Me.RBtnStart.UseVisualStyleBackColor = False
         '
         'RBtnAnywhere
         '
-        Me.RBtnAnywhere.AutoSize = true
+        Me.RBtnAnywhere.AutoSize = True
+        Me.RBtnAnywhere.BackColor = System.Drawing.Color.Transparent
         Me.RBtnAnywhere.Location = New System.Drawing.Point(54, 92)
         Me.RBtnAnywhere.Name = "RBtnAnywhere"
         Me.RBtnAnywhere.Size = New System.Drawing.Size(112, 17)
         Me.RBtnAnywhere.TabIndex = 3
         Me.RBtnAnywhere.Text = "Anywhere on Field"
-        Me.RBtnAnywhere.UseVisualStyleBackColor = true
+        Me.RBtnAnywhere.UseVisualStyleBackColor = False
         '
         'BtnFind
         '

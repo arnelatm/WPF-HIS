@@ -72,6 +72,13 @@ Namespace PresentationLayer.Views.Forms
             Me.bsPayrollAttendance = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpOvertime = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayrollOvertime = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.dgvSequenceOvertime = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvEmployeeIdNoOt = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.OvertimeRegularDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
+            Me.OvertimeHolidayDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
+            Me.OvertimeSpecialDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
+            Me.PayrollIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPayrollOvertime = New System.Windows.Forms.BindingSource(Me.components)
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.btnInitializeOvertime = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -80,13 +87,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CButton3 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.ProgressBar = New System.Windows.Forms.ProgressBar()
-            Me.dgvSequenceOvertime = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvEmployeeIdNoOt = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.OvertimeRegularDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
-            Me.OvertimeHolidayDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
-            Me.OvertimeSpecialDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
-            Me.PayrollIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -178,7 +178,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.CFlowLayout1)
             Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
             Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
-            Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
+            Me.floDataDisplay.MinimumSize = New System.Drawing.Size(804, 624)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
             Me.floDataDisplay.Size = New System.Drawing.Size(804, 624)
@@ -666,6 +666,90 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 358)
             Me.DataGridViewPayrollOvertime.TabIndex = 0
             '
+            'dgvSequenceOvertime
+            '
+            Me.dgvSequenceOvertime.DataPropertyName = "Sequence"
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceOvertime.DefaultCellStyle = DataGridViewCellStyle11
+            Me.dgvSequenceOvertime.EditingMode = False
+            Me.dgvSequenceOvertime.HeaderText = "Seq"
+            Me.dgvSequenceOvertime.Name = "dgvSequenceOvertime"
+            Me.dgvSequenceOvertime.ReadOnly = True
+            Me.dgvSequenceOvertime.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvEmployeeIdNoOt
+            '
+            Me.dgvEmployeeIdNoOt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvEmployeeIdNoOt.DataPropertyName = "EmployeeIdNo"
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.dgvEmployeeIdNoOt.DefaultCellStyle = DataGridViewCellStyle12
+            Me.dgvEmployeeIdNoOt.EditingMode = False
+            Me.dgvEmployeeIdNoOt.HeaderText = "Employee Name"
+            Me.dgvEmployeeIdNoOt.Name = "dgvEmployeeIdNoOt"
+            Me.dgvEmployeeIdNoOt.ReadOnly = True
+            Me.dgvEmployeeIdNoOt.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEmployeeIdNoOt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'OvertimeRegularDataGridViewTextBoxColumn
+            '
+            Me.OvertimeRegularDataGridViewTextBoxColumn.DataPropertyName = "OvertimeRegular"
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            Me.OvertimeRegularDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle13
+            Me.OvertimeRegularDataGridViewTextBoxColumn.EditingMode = False
+            Me.OvertimeRegularDataGridViewTextBoxColumn.HeaderText = "Regular Overtime"
+            Me.OvertimeRegularDataGridViewTextBoxColumn.Name = "OvertimeRegularDataGridViewTextBoxColumn"
+            Me.OvertimeRegularDataGridViewTextBoxColumn.ReadOnly = True
+            Me.OvertimeRegularDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.OvertimeRegularDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'OvertimeHolidayDataGridViewTextBoxColumn
+            '
+            Me.OvertimeHolidayDataGridViewTextBoxColumn.DataPropertyName = "OvertimeHoliday"
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            Me.OvertimeHolidayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle14
+            Me.OvertimeHolidayDataGridViewTextBoxColumn.EditingMode = False
+            Me.OvertimeHolidayDataGridViewTextBoxColumn.HeaderText = "Holiday Overtime"
+            Me.OvertimeHolidayDataGridViewTextBoxColumn.Name = "OvertimeHolidayDataGridViewTextBoxColumn"
+            Me.OvertimeHolidayDataGridViewTextBoxColumn.ReadOnly = True
+            Me.OvertimeHolidayDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.OvertimeHolidayDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'OvertimeSpecialDataGridViewTextBoxColumn
+            '
+            Me.OvertimeSpecialDataGridViewTextBoxColumn.DataPropertyName = "OvertimeSpecial"
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            Me.OvertimeSpecialDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle15
+            Me.OvertimeSpecialDataGridViewTextBoxColumn.EditingMode = False
+            Me.OvertimeSpecialDataGridViewTextBoxColumn.HeaderText = "Special Overtime"
+            Me.OvertimeSpecialDataGridViewTextBoxColumn.Name = "OvertimeSpecialDataGridViewTextBoxColumn"
+            Me.OvertimeSpecialDataGridViewTextBoxColumn.ReadOnly = True
+            Me.OvertimeSpecialDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.OvertimeSpecialDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            '
+            'PayrollIdNoDataGridViewTextBoxColumn
+            '
+            Me.PayrollIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayrollIdNo"
+            Me.PayrollIdNoDataGridViewTextBoxColumn.HeaderText = "PayrollIdNo"
+            Me.PayrollIdNoDataGridViewTextBoxColumn.Name = "PayrollIdNoDataGridViewTextBoxColumn"
+            Me.PayrollIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.PayrollIdNoDataGridViewTextBoxColumn.Visible = False
+            '
+            'IdNoDataGridViewTextBoxColumn1
+            '
+            Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
+            Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = True
+            Me.IdNoDataGridViewTextBoxColumn1.Visible = False
+            '
             'bsPayrollOvertime
             '
             Me.bsPayrollOvertime.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.OtWorkHourModel)
@@ -757,90 +841,6 @@ Namespace PresentationLayer.Views.Forms
             Me.ProgressBar.Size = New System.Drawing.Size(764, 23)
             Me.ProgressBar.TabIndex = 148
             Me.ProgressBar.Visible = False
-            '
-            'dgvSequenceOvertime
-            '
-            Me.dgvSequenceOvertime.DataPropertyName = "Sequence"
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceOvertime.DefaultCellStyle = DataGridViewCellStyle11
-            Me.dgvSequenceOvertime.EditingMode = False
-            Me.dgvSequenceOvertime.HeaderText = "Seq"
-            Me.dgvSequenceOvertime.Name = "dgvSequenceOvertime"
-            Me.dgvSequenceOvertime.ReadOnly = True
-            Me.dgvSequenceOvertime.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            '
-            'dgvEmployeeIdNoOt
-            '
-            Me.dgvEmployeeIdNoOt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvEmployeeIdNoOt.DataPropertyName = "EmployeeIdNo"
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            Me.dgvEmployeeIdNoOt.DefaultCellStyle = DataGridViewCellStyle12
-            Me.dgvEmployeeIdNoOt.EditingMode = False
-            Me.dgvEmployeeIdNoOt.HeaderText = "Employee Name"
-            Me.dgvEmployeeIdNoOt.Name = "dgvEmployeeIdNoOt"
-            Me.dgvEmployeeIdNoOt.ReadOnly = True
-            Me.dgvEmployeeIdNoOt.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEmployeeIdNoOt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'OvertimeRegularDataGridViewTextBoxColumn
-            '
-            Me.OvertimeRegularDataGridViewTextBoxColumn.DataPropertyName = "OvertimeRegular"
-            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-            Me.OvertimeRegularDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle13
-            Me.OvertimeRegularDataGridViewTextBoxColumn.EditingMode = False
-            Me.OvertimeRegularDataGridViewTextBoxColumn.HeaderText = "Regular Overtime"
-            Me.OvertimeRegularDataGridViewTextBoxColumn.Name = "OvertimeRegularDataGridViewTextBoxColumn"
-            Me.OvertimeRegularDataGridViewTextBoxColumn.ReadOnly = True
-            Me.OvertimeRegularDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.OvertimeRegularDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'OvertimeHolidayDataGridViewTextBoxColumn
-            '
-            Me.OvertimeHolidayDataGridViewTextBoxColumn.DataPropertyName = "OvertimeHoliday"
-            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-            Me.OvertimeHolidayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle14
-            Me.OvertimeHolidayDataGridViewTextBoxColumn.EditingMode = False
-            Me.OvertimeHolidayDataGridViewTextBoxColumn.HeaderText = "Holiday Overtime"
-            Me.OvertimeHolidayDataGridViewTextBoxColumn.Name = "OvertimeHolidayDataGridViewTextBoxColumn"
-            Me.OvertimeHolidayDataGridViewTextBoxColumn.ReadOnly = True
-            Me.OvertimeHolidayDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.OvertimeHolidayDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'OvertimeSpecialDataGridViewTextBoxColumn
-            '
-            Me.OvertimeSpecialDataGridViewTextBoxColumn.DataPropertyName = "OvertimeSpecial"
-            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
-            Me.OvertimeSpecialDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle15
-            Me.OvertimeSpecialDataGridViewTextBoxColumn.EditingMode = False
-            Me.OvertimeSpecialDataGridViewTextBoxColumn.HeaderText = "Special Overtime"
-            Me.OvertimeSpecialDataGridViewTextBoxColumn.Name = "OvertimeSpecialDataGridViewTextBoxColumn"
-            Me.OvertimeSpecialDataGridViewTextBoxColumn.ReadOnly = True
-            Me.OvertimeSpecialDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.OvertimeSpecialDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            '
-            'PayrollIdNoDataGridViewTextBoxColumn
-            '
-            Me.PayrollIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayrollIdNo"
-            Me.PayrollIdNoDataGridViewTextBoxColumn.HeaderText = "PayrollIdNo"
-            Me.PayrollIdNoDataGridViewTextBoxColumn.Name = "PayrollIdNoDataGridViewTextBoxColumn"
-            Me.PayrollIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.PayrollIdNoDataGridViewTextBoxColumn.Visible = False
-            '
-            'IdNoDataGridViewTextBoxColumn1
-            '
-            Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
-            Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = True
-            Me.IdNoDataGridViewTextBoxColumn1.Visible = False
             '
             'PayrollEntryTv
             '

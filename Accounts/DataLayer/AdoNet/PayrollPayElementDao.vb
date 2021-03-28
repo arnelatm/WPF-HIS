@@ -15,9 +15,10 @@ Namespace DataLayer.AdoNet
         Private ReadOnly _db As New Db()
 
         Private Const FieldList = "Amount," &
-                                  "IdNo," &
                                   "EmployeeIdNo," &
+                                  "IdNo," &
                                   "PayElementIdNo," &
+                                  "PayrollDetailIdNo," &
                                   "PayrollIdNo"
 
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PayrollPayElement) Implements IDaoChild(Of PayrollPayElement).GetRecordsWithGroupIdNo
@@ -65,6 +66,7 @@ Namespace DataLayer.AdoNet
             .PayElementIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayElementIdNo")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .PayrollDetailIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("PayrollDetailIdNo")),
             .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("PayrollIdNo"))
            }
 
