@@ -792,6 +792,7 @@
     <Compile Include="PresentationLayer\Views\LeaveView.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\PayrollDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\PensionRateView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
@@ -1286,9 +1287,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\app.manifest" />
@@ -1317,6 +1318,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayElementItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayPeriodModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayrollEarnAccountModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayrollPayElementModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PensionRateModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PettyCashJournalModel.datasource" />
