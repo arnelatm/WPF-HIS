@@ -258,7 +258,7 @@ Namespace AdoNet
             End If
         End Function
 
-        Public Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object Implements IBaseDao.GetMaxValueFiltered
+        Public Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object Implements IBaseDao.GetFieldOnMaxField
             Dim sql As String
             If filter Is Nothing Or filter = "" Then
                 sql = " SELECT Top 1 " & returnFieldName & " from " & tableName & " order by " & searchFieldName & " Desc"

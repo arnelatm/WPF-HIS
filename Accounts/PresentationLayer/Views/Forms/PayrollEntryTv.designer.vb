@@ -822,7 +822,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'CButton3
             '
-            Me.CButton3.DesignerSelected = False
+            Me.CButton3.DesignerSelected = True
             Me.CButton3.DisplayOnly = True
             Me.CButton3.ImageIndex = 0
             Me.CButton3.Location = New System.Drawing.Point(556, 3)

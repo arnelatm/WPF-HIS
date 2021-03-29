@@ -228,8 +228,8 @@ Public Class Model
         Return tlData
     End Function
 
-    Public Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object Implements IModel.GetMaxValueFiltered
-        Return Service.GetMaxValueFiltered(searchFieldName, tableName, returnFieldName, filter)
+    Public Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object Implements IModel.GetFieldOnMaxField
+        Return Service.GetFieldOnMaxField(searchFieldName, tableName, returnFieldName, filter)
     End Function
 
     Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IModel.GetRecordByIdNo

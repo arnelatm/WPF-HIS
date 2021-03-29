@@ -259,8 +259,8 @@ Namespace Services
             Return BaseDao.GetLastSortKey(searchValue, tableName)
         End Function
 
-        Public Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object Implements IService.GetMaxValueFiltered
-            Return BaseDao.GetMaxValueFiltered(searchFieldName, tableName, returnFieldName, filter)
+        Public Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object Implements IService.GetFieldOnMaxField
+            Return BaseDao.GetFieldOnMaxField(searchFieldName, tableName, returnFieldName, filter)
         End Function
 
         Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount

@@ -34,7 +34,7 @@ Public Interface IBaseDao
 
     Function GetLastSortKey(searchValue As String, tableName As String) As String
 
-    Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
+    Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
 
     Function GetRecordCount(tableName As String, Optional Filter As String = Nothing) As Integer
 

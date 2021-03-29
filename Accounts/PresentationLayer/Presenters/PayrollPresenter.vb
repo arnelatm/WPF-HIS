@@ -163,7 +163,7 @@ Namespace PresentationLayer.Presenters
                     Dim maxRecord As PayrollModel
                     Dim payMonthText As String = "Payroll for the Month of"
                     Dim PayrollText As String = "Payroll for the Period"
-                    nIdNoMax = ModelOfPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
+                    nIdNoMax = ModelOfPresenter.GetFieldOnMaxField("EndDate", "Payroll", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
                     maxRecord = ModelOfPresenter.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
                     View.StartDate = maxRecord.EndDate.AddDays(1)
                     Dim arabicCulture As New CultureInfo("ar-ae", False)
@@ -187,7 +187,7 @@ Namespace PresentationLayer.Presenters
             'Dim maxRecord As PayrollModel
             'Dim payMonthText As String = "Payroll for the Month of"
             'Dim PayrollText As String = "Payroll for the Period"
-            'nIdNoMax = ModelOfPresenter.GetMaxValueFiltered("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
+            'nIdNoMax = ModelOfPresenter.GetFieldOnMaxField("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
             'If nIdNoMax = 0 Then
             '    Dim now As Date = Today()
             '    View.EndDate = DateAdd(DateInterval.Day, DateAndTime.Day(now) * -1, now)
@@ -603,11 +603,11 @@ Namespace PresentationLayer.Presenters
             For Each payrollDetailModel In payrollDetailsModel
                 Dim payrollDetail As New PayrollDetail
                 GlobalVariables.Mapper.Map(payrollDetailModel, payrollDetail)
-                'If payrollDetailModel.IdNo = 0 Then
-                '    payrollDetailIdNo = _payrollDetailsDao.AddRecord(payrollDetail)
-                'Else
-                '    payrollDetailIdNo = payrollDetailModel.IdNo
-                'End If
+                If payrollDetail.IdNo = 0 Then
+                    payrollDetailIdNo = _payrollDetailsDao.AddRecord(payrollDetail)
+                Else
+                    payrollDetailIdNo = payrollDetail.IdNo
+                End If
                 GenerateRegularPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 GenerateComputedPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 GenerateGlobalPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
