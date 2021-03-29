@@ -80,8 +80,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemCaptionsBatchEdit = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCreateAllMessages = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayroll = New System.Windows.Forms.ToolStripMenuItem()
-            Me.EarningsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.DeductionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.PayElementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.LeavesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.PayCyclesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -144,6 +143,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemindex = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
             Me.ToolStripMenuItemAbout = New System.Windows.Forms.ToolStripMenuItem()
+            Me.TestToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
             Me.contextMenuStripMember = New System.Windows.Forms.ContextMenuStrip(Me.components)
             Me.addNewMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.editMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -166,7 +166,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.TestToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.Account.SuspendLayout()
@@ -445,19 +444,14 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPayroll
             '
-            Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EarningsToolStripMenuItem, Me.DeductionsToolStripMenuItem, Me.LeavesToolStripMenuItem, Me.PayGroupsToolStripMenuItem, Me.PayCyclesToolStripMenuItem, Me.PayrollsToolStripMenuItem, Me.PensionProvidersToolStripMenuItem, Me.PensionSchemesToolStripMenuItem})
+            Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PayElementToolStripMenuItem, Me.LeavesToolStripMenuItem, Me.PayGroupsToolStripMenuItem, Me.PayCyclesToolStripMenuItem, Me.PayrollsToolStripMenuItem, Me.PensionProvidersToolStripMenuItem, Me.PensionSchemesToolStripMenuItem})
             Me.ToolStripMenuItemPayroll.Name = "ToolStripMenuItemPayroll"
             resources.ApplyResources(Me.ToolStripMenuItemPayroll, "ToolStripMenuItemPayroll")
             '
-            'EarningsToolStripMenuItem
+            'PayElementToolStripMenuItem
             '
-            Me.EarningsToolStripMenuItem.Name = "EarningsToolStripMenuItem"
-            resources.ApplyResources(Me.EarningsToolStripMenuItem, "EarningsToolStripMenuItem")
-            '
-            'DeductionsToolStripMenuItem
-            '
-            Me.DeductionsToolStripMenuItem.Name = "DeductionsToolStripMenuItem"
-            resources.ApplyResources(Me.DeductionsToolStripMenuItem, "DeductionsToolStripMenuItem")
+            Me.PayElementToolStripMenuItem.Name = "PayElementToolStripMenuItem"
+            resources.ApplyResources(Me.PayElementToolStripMenuItem, "PayElementToolStripMenuItem")
             '
             'LeavesToolStripMenuItem
             '
@@ -777,6 +771,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemAbout.Name = "ToolStripMenuItemAbout"
             resources.ApplyResources(Me.ToolStripMenuItemAbout, "ToolStripMenuItemAbout")
             '
+            'TestToolStripMenuItem2
+            '
+            Me.TestToolStripMenuItem2.Name = "TestToolStripMenuItem2"
+            resources.ApplyResources(Me.TestToolStripMenuItem2, "TestToolStripMenuItem2")
+            '
             'contextMenuStripMember
             '
             Me.contextMenuStripMember.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -892,11 +891,6 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-            '
-            'TestToolStripMenuItem2
-            '
-            Me.TestToolStripMenuItem2.Name = "TestToolStripMenuItem2"
-            resources.ApplyResources(Me.TestToolStripMenuItem2, "TestToolStripMenuItem2")
             '
             'Main
             '
@@ -1034,8 +1028,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents QuarterlyToolStripMenuItem1 As ToolStripMenuItem
         Friend WithEvents SemiAnnuallyToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents CustomRangeToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents EarningsToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents DeductionsToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents PayElementToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents LeavesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PayGroupsToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents PayCyclesToolStripMenuItem As ToolStripMenuItem

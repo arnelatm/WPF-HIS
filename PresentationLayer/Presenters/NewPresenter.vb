@@ -517,9 +517,9 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
     '    Implements IModel.GetRecordFieldWithKeyG
     '    Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
     'End Function
-    'Public Function GetMaxValueFiltered(searchFieldName As String, cTableName As String, returnFieldName As String, filter As String) As Object
+    'Public Function GetFieldOnMaxField(searchFieldName As String, cTableName As String, returnFieldName As String, filter As String) As Object
     '    Try
-    '        Return Model.GetMaxValueFiltered(searchFieldName, cTableName, returnFieldName, filter)
+    '        Return Model.GetFieldOnMaxField(searchFieldName, cTableName, returnFieldName, filter)
     '    Catch ex As Exception
     '        Return Nothing
     '    End Try

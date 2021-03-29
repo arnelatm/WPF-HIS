@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
             ModelOfPresenter = New ModelAccounts("PayrollDetail")
             OriginalModel = New PayrollDetailModel
             DataModel = New PayrollDetailModel
-            DataFilter = "PayrollIdNo = 1"
+            DataFilter = ""
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
             _attendanceItemModel = New ModelAccounts("AttendanceItem", Nothing, Nothing)
@@ -52,6 +52,13 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Public Sub UpdateDataFilter(payrollIdNo As Int16)
+            If payrollIdNo = 0 Then
+                payrollIdNo = ModelOfPresenter.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
+            End If
+            DataFilter = "PayrollIdNo = " & payrollIdNo.ToString()
+        End Sub
+
         Public Sub DisplayPayrollDetails(ByRef startDate As Date?, ByRef endDate As Date?, ByRef payDescription As String)
             Dim payroll As Object = New ExpandoObject
             payroll = ModelOfPresenter.GetFieldsWithIdNo(View.PayrollIdNo, "Payroll", "StartDate,EndDate,PayrollName")
@@ -66,7 +73,7 @@ Namespace PresentationLayer.Presenters
         '        Dim maxRecord As PayrollDetailModel
         '        Dim payMonthText As String = "PayrollDetail for the Month of"
         '        Dim PayrollDetailText As String = "PayrollDetail for the Period"
-        '        nIdNoMax = ModelOfPresenter.GetMaxValueFiltered("EndDate", "PayrollDetail", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
+        '        nIdNoMax = ModelOfPresenter.GetFieldOnMaxField("EndDate", "PayrollDetail", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
         '        maxRecord = ModelOfPresenter.GetRecordByIdNo(Of PayrollDetailModel)(nIdNoMax)
         '        View.StartDate = maxRecord.EndDate.AddDays(1)
         '        Dim arabicCulture As New CultureInfo("ar-ae", False)

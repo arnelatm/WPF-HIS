@@ -1308,7 +1308,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EarningsToolStripMenuItem.Click
+        Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayElementToolStripMenuItem.Click
             'Dim childMdiForm As EarningEntryTv
             Dim childMdiForm As PayElementEntryTv
             'childMdiForm = New EarningEntryTv With {
@@ -1491,7 +1491,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub PayrollEntryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem1.Click
             Dim childMdiForm
-            childMdiForm = New PayrollDetailEntry(1) With {
+            childMdiForm = New PayrollDetailEntry(0) With {
                 .MdiParent = Me
                 }
             childMdiForm.Show()

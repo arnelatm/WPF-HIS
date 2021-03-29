@@ -262,6 +262,11 @@ Namespace PresentationLayer.Views.Forms
             MyPresenter.GeneratePayroll(ProgressBar)
         End Sub
 
+        Private Sub CButton3_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton3.ClickButtonArea
+            Dim form As PayrollDetailEntry
+            form = New PayrollDetailEntry(IdNo)
+            form.Show()
+        End Sub
     End Class
 
 End Namespace
