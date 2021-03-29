@@ -1,4 +1,5 @@
 ﻿Imports System.Dynamic
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -12,6 +13,10 @@ Namespace PresentationLayer.Views.Forms
         'Private _employees
         'Private _payGroups
         Private Property MyPresenter As PayrollDetailPresenter
+
+        Private _payrollEarnings As List(Of PayrollPayElementView)
+        Private _payrollDeductions As List(Of PayrollPayElementView)
+        Private _payElementsByCode
 
         Public Sub New(ByVal payrollIdNo As Int16)
 
@@ -90,12 +95,71 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PayrollEarnings As List(Of PayrollPayElementView) Implements IPayrollDetailView.PayrollEarnings
+            Get
+                Return _payrollEarnings
+            End Get
+            Set(value As List(Of PayrollPayElementView))
+                _payrollEarnings = value
+                BindPayrollEarnings()
+            End Set
+        End Property
+
+        Public Property PayrollDeductions As List(Of PayrollPayElementView) Implements IPayrollDetailView.PayrollDeductions
+            Get
+                Return _payrollDeductions
+            End Get
+            Set(value As List(Of PayrollPayElementView))
+                _payrollDeductions = value
+                BindPayrollDeductions()
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
+            _payElementsByCode = MyPresenter.GetLookup("PayElement")
             cboEmployeeIdNo.BeginUpdate()
             cboEmployeeIdNo.DataSource = MyPresenter.GetLookup("Employee")
             cboEmployeeIdNo.EndUpdate()
+        End Sub
+
+        Private Sub BindPayrollEarnings()
+            SuspendLayout()
+            bsEarnings.DataSource = Nothing
+            DataGridViewEarnings.Refresh()
+            bsEarnings.DataSource = PayrollEarnings
+            bsEarnings.AllowNew = True
+            With DataGridViewEarnings
+                dgvEarningIdNo.DataSource = _payElementsByCode
+                dgvEarningIdNo.DisplayMember = "Name"
+                dgvEarningIdNo.ValueMember = "IdNo"
+                dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsEarnings
+                .Refresh()
+            End With
+
+        End Sub
+
+        Private Sub BindPayrollDeductions()
+            SuspendLayout()
+            bsDeductions.DataSource = Nothing
+            DataGridViewDeductions.Refresh()
+            bsDeductions.DataSource = PayrollDeductions
+            bsDeductions.AllowNew = True
+            With DataGridViewDeductions
+                dgvDeductionIdNo.DataSource = _payElementsByCode
+                dgvDeductionIdNo.DisplayMember = "Name"
+                dgvDeductionIdNo.ValueMember = "IdNo"
+                dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsDeductions
+                .Refresh()
+            End With
+
         End Sub
 
         'Public Sub DisplayTree(ByRef treeViewData As Object)

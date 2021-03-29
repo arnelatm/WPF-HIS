@@ -33,8 +33,9 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            'Dim peaDao = New PayElementAccountDao()
-            'data.PayElementAccounts = peaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
+            Dim ppeDao = New PayrollPayElementDao()
+            data.PayrollEarnings = ppeDao.GetRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
+            data.PayrollDeductions = ppeDao.GetRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
             Return data
         End Function
 

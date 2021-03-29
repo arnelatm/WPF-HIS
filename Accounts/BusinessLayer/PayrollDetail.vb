@@ -21,6 +21,8 @@ Namespace BusinessLayer
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String
         Public Property EmployeeNameAra As String
+        Public Property PayrollEarnings As List(Of PayrollPayElement)
+        Public Property PayrollDeductions As List(Of PayrollPayElement)
     End Class
 
 End Namespace

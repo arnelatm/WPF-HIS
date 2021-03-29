@@ -15,6 +15,8 @@ Namespace PresentationLayer.Models
         Public Property EmployeeName As String
         Public Property EmployeeNameAra As String
         Public Property EmployeeCode As String
+        Public Property PayrollEarnings As List(Of PayrollPayElementModel)
+        Public Property PayrollDeductions As List(Of PayrollPayElementModel)
 
     End Class
 

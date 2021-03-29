@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.PresentationLayer.Views
+﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -12,6 +11,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeeCode As String
         Property EmployeeName As String
         Property EmployeeNameAra As String
+
+        Property PayrollEarnings As List(Of PayrollPayElementView)
+        Property PayrollDeductions As List(Of PayrollPayElementView)
 
     End Interface
 

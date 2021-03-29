@@ -551,19 +551,24 @@ Namespace PresentationLayer.Presenters
                                              {"PayElementIdNo", GetType(Int16)},
                                              {"PayrollDetailIdNo", GetType(Int32)}
                                             })
+            Dim dtPayrollDetailInsertTable As New DataTable
+            Dim dtPayrollDetailUpdateTable As New DataTable
+            CreateDataTable(dtPayrollDetailInsertTable, {
+                                             {"EmployeeIdNo", GetType(Int32)},
+                                             {"PayrollIdNo", GetType(Int16)}
+                                            })
+            CreateDataTable(dtPayrollDetailUpdateTable, {
+                                             {"EmployeeIdNo", GetType(Int32)},
+                                             {"IdNo", GetType(Int32)},
+                                             {"PayrollIdNo", GetType(Int16)}
+                                            })
             Dim payrollDetailsModel As List(Of PayrollDetailModel)
             payrollDetailsModel = CreatePayrollDetails()
             Dim computedEarnings As List(Of PayElement)
             computedEarnings = _payElementsDao.GetRecords("PayElementType = '" & _computedType & "' and Summary=0")
-            'computedEarnings = _payElementsDao.GetRecords("PayElementKind = '" & _PayElementType &
-            '                                              "' and PayElementType = '" & _computedType &
-            '                                              "' and Summary=0")
             GlobalVariables.Mapper.Map(computedEarnings, _computedPayElements)
             Dim globalEarnings As List(Of PayElement)
             globalEarnings = _payElementsDao.GetRecords("CalculationType = '" & _globalType & "' and not Summary=0")
-            'globalEarnings = _payElementsDao.GetRecords("PayElementKind = '" & _PayElementType &
-            '                                            "' and CalculationType = '" & _globalType &
-            '                                            "' and not Summary=0")
             GlobalVariables.Mapper.Map(globalEarnings, _globalEarnings)
             progressBar.Value = 0
             progressBar.Maximum = payrollDetailsModel.Count() + 2
@@ -575,18 +580,37 @@ Namespace PresentationLayer.Presenters
             Dim otWorkHours As List(Of OtWorkHour) = _otWorkHoursDao.GetRecordsWithGroupIdNo(_payrollIdNo)
             GlobalVariables.Mapper.Map(otWorkHours, _otWorkHoursModel)
             Dim payrollDetailIdNo As Int32
+            For Each payrollDetail In payrollDetailsModel
+                If payrollDetail.IdNo = 0 Then
+                    Dim dataRow As DataRow
+                    dataRow = dtPayrollDetailInsertTable.NewRow()
+                    dataRow("EmployeeIdNo") = payrollDetail.EmployeeIdNo
+                    dataRow("PayrollIdNo") = View.IdNo
+                    dtPayrollDetailInsertTable.Rows.Add(dataRow)
+                Else
+                    Dim dataRow As DataRow
+                    dataRow = dtPayrollDetailUpdateTable.NewRow()
+                    dataRow("IdNo") = payrollDetail.IdNo
+                    dataRow("EmployeeIdNo") = payrollDetail.EmployeeIdNo
+                    dataRow("PayrollIdNo") = payrollDetail.PayrollIdNo
+                    dtPayrollDetailUpdateTable.Rows.Add(dataRow)
+                End If
+            Next
+            _payrollDetailsDao.UpdateInsertTvp(dtPayrollDetailUpdateTable, dtPayrollDetailInsertTable, View.IdNo)
+            Dim payrollDetails As List(Of PayrollDetail)
+            payrollDetails = _payrollDetailsDao.GetRecordsWithGroupIdNo(View.IdNo)
+            GlobalVariables.Mapper.Map(payrollDetails, payrollDetailsModel)
             For Each payrollDetailModel In payrollDetailsModel
                 Dim payrollDetail As New PayrollDetail
                 GlobalVariables.Mapper.Map(payrollDetailModel, payrollDetail)
-                If payrollDetailModel.IdNo = 0 Then
-                    payrollDetailIdNo = _payrollDetailsDao.AddRecord(payrollDetail)
-                Else
-                    payrollDetailIdNo = payrollDetailModel.IdNo
-                End If
+                'If payrollDetailModel.IdNo = 0 Then
+                '    payrollDetailIdNo = _payrollDetailsDao.AddRecord(payrollDetail)
+                'Else
+                '    payrollDetailIdNo = payrollDetailModel.IdNo
+                'End If
                 GenerateRegularPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 GenerateComputedPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
-                GenerateGlobalEarnings(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
-                'GenerateRegularDeductions(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+                GenerateGlobalPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 progressBar.Value = progressBar.Value + 1
             Next
 
@@ -600,6 +624,9 @@ Namespace PresentationLayer.Presenters
                         dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
                         dtPayrollPayElementInsertTable.Rows.Add(dataRow)
                     Else
+                        If item.PayrollDetailIdNo = 1745 Then
+                            Debugger.Break()
+                        End If
                         Dim dataRow As DataRow
                         dataRow = dtPayrollPayElementUpdateTable.NewRow()
                         dataRow("Amount") = item.Amount
@@ -619,12 +646,14 @@ Namespace PresentationLayer.Presenters
                     dtPayrollPayElementInsertTable.Rows.Add(dataRow)
                 Next
             End If
+            progressBar.Value = progressBar.Value + 1
             If regenerate Then
-                _payrollPayElementsDao.DelUpdateTvp(dtPayrollPayElementUpdateTable, _payrollIdNo)
-                dtPayrollPayElementUpdateTable = Nothing
+                _payrollPayElementsDao.UpdateInsertTvp(dtPayrollPayElementUpdateTable, dtPayrollPayElementInsertTable, _payrollIdNo)
+                dtPayrollPayElementUpdateTable.Clear()
+            Else
+                _payrollPayElementsDao.InsertTvp(dtPayrollPayElementInsertTable)
+                dtPayrollPayElementInsertTable.Clear()
             End If
-            _payrollPayElementsDao.InsertTvp(dtPayrollPayElementInsertTable)
-            dtPayrollPayElementInsertTable = Nothing
             _payrollPayElements.Clear()
             progressBar.Value = progressBar.Value + 1
             Messaging.Show(True, "MsgPayrollGenerationCompleted")
@@ -776,7 +805,7 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Private Sub GenerateGlobalEarnings(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
+        Private Sub GenerateGlobalPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             For Each earning As PayElementModel In _globalEarnings
                 If Not regenerate Then
                     AddPayElement(employeeIdNo, earning.Rate, earning.IdNo, 0, payrollDetailIdNo)
@@ -900,17 +929,23 @@ Namespace PresentationLayer.Presenters
                     Dim payrollDetail As New PayrollDetailModel
                     payrollDetail = savedPayrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
                     If payrollDetail Is Nothing Then
-
+                        payrollDetail = New PayrollDetailModel
                         payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
                         payrollDetail.PayrollIdNo = View.IdNo
-                        payrollDetailsModel.Add(payrollDetail)
                     End If
+                    payrollDetailsModel.Add(payrollDetail)
                 Next
             End If
             For Each employeeAttendance In View.PayrollOvertime
                 Dim payrollDetail As PayrollDetailModel = payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
                 If payrollDetail Is Nothing Then
-                    payrollDetailsModel.Add(payrollDetail)
+                    payrollDetail = savedPayrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
+                    If payrollDetail Is Nothing Then
+                        payrollDetail = New PayrollDetailModel
+                        payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
+                        payrollDetail.PayrollIdNo = View.IdNo
+                        payrollDetailsModel.Add(payrollDetail)
+                    End If
                 End If
             Next
             Return payrollDetailsModel

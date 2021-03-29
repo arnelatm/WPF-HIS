@@ -1,7 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Libraries
 
-Namespace PresentationLayer.Models
+Namespace PresentationLayer.Views
 
     Public Class PayrollPayElementView
         Public Property Amount As Decimal
