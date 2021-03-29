@@ -191,14 +191,18 @@ Namespace AdoNet
             Return _db.SqlRead(sql)
         End Function
 
-        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) _
-                    As Integer _
-            Implements IBaseDao.GetIdNoOfSortedPositionNumber
+        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetIdNoOfSortedPositionNumber
+            Dim filterKey As String
+            If filter Is Nothing Then
+                filterKey = ""
+            Else
+                filterKey = " where " & filter
+            End If
             If recordNo = 0 Then
                 Return 0
             Else
                 Dim sql As String =
-                        " Select IdNo FROM [" & tableName & "] order by " & sortOrder &
+                        " Select IdNo FROM [" & tableName & "] " & filterKey & " order by " & sortOrder &
                         " OFFSET " & recordNo - 1 & " ROWS fetch Next 1 ROWS ONLY"
                 Dim x As Object
                 x = _db.Scalar(sql)
@@ -213,7 +217,7 @@ Namespace AdoNet
                             sortOrder = sortOrder.Trim() + " DESC"
                         End If
                         sortOrder = Replace(sortOrder, " DESC", " ASC", )
-                        sql = "Select TOP 1 IdNo FROM [" & tableName & "] order by " & sortOrder
+                        sql = "Select TOP 1 IdNo FROM [" & tableName & "] " & filterKey & " order by " & sortOrder
                         x = _db.Scalar(sql)
                     Else
                         Return 0
@@ -264,10 +268,9 @@ Namespace AdoNet
             Return _db.Scalar(sql)
         End Function
 
-        Public Function GetRecordCount(tableName As String) As Integer _
+        Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer _
             Implements IBaseDao.GetRecordCount
-            Dim sql As String =
-                    " Select Count(*) FROM [" & tableName & "] "
+            Dim sql As String = "Select Count(*) FROM [" & tableName & "] " + IIf(filter Is Nothing, "", " where " & filter)
             Return _db.Scalar(sql)
         End Function
 
@@ -356,16 +359,22 @@ Namespace AdoNet
             Return _db.Scalar(sql)
         End Function
 
-        Public Function GetRecordsByField(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetRecordsByField
+        Public Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object Implements IBaseDao.GetRecordsByField
             Dim fields = String.Join(",", fieldNames)
+            Dim filterKey As String = ""
             If Strings.Right(fields, 1) = "," Then
                 fields = Strings.Left(fields, Len(fields) - 1)
             End If
             Dim sql As String
-            If sortKey Is Nothing Or sortKey = "" Then
-                sql = " SELECT " & fields & " from [" & tableName & "]"
+            If filter Is Nothing Then
+                filterKey = ""
             Else
-                sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
+                filterKey = " where " & filter
+            End If
+            If sortKey Is Nothing Or sortKey = "" Then
+                sql = " SELECT " & fields & " from [" & tableName & "]" & filterKey
+            Else
+                sql = " SELECT " & fields & " from [" & tableName & "] " & filterKey & " order by " & sortKey
             End If
             Return _db.SqlRead(sql)
         End Function
@@ -388,12 +397,16 @@ Namespace AdoNet
         '    Return _db.SqlRead(sql)
         'End Function
 
-        Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer _
-                                                                                            Implements IBaseDao.GetSortedRecordPosition
-            Dim sql As String =
-                    " Select count(*) From [" & tableName &
-                    "] where " & sortOrder & " <= (Select " & sortOrder &
-                    " from [" & tableName & "] where IdNo = " & idNo & ")"
+        Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetSortedRecordPosition
+            Dim filterKey As String
+            If filter Is Nothing Then
+                filterKey = ""
+            Else
+                filterKey = filter & " and "
+            End If
+            Dim sql As String = " Select count(*) From [" & tableName &
+                    "] where " & filterKey & " " & sortOrder & " <= (Select " & sortOrder &
+                    " from [" & tableName & "] where " & filterKey & " IdNo = " & idNo & ") "
             Return _db.Scalar(sql)
         End Function
 

@@ -30,7 +30,7 @@ Namespace Services
 
         Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
 
-        Function GetRecordCount(tableName As String) As Integer
+        Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer
 
         Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
 
@@ -44,7 +44,7 @@ Namespace Services
 
         Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
-        Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object
+        Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
 
         'Function GetFields(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object
 
@@ -56,9 +56,9 @@ Namespace Services
 
         Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object
 
-        Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
+        Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
-        Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
+        Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
         Function GetFieldValue(Of TType)(ByVal sqlStatement As String, tableName As String, condition As String) As TType
 

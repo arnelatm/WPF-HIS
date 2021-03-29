@@ -39,21 +39,21 @@ Public Interface IModel
 
     Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As Object
 
-    Function GetHRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.HLookupData)
+    Function GetHRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.HLookupData)
 
-    Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
+    Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
     Function GetLastSortKey(searchValue As String, tableName As String) As String
 
-    Function GetLookup(tableName As String, sortKey As String, ByVal ParamArray fields() As String)
+    Function GetLookup(tableName As String, sortKey As String, fields As String())
 
-    Function GetLookupNew(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData)
+    Function GetLookupNew(tableName As String, sortKey As String, fields As String()) As List(Of ClassesLibrary.LookupData)
 
     Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
 
     Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
 
-    Function GetRecordCount(tableName As String) As Integer
+    Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer
 
     Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
 
@@ -65,15 +65,15 @@ Public Interface IModel
 
     Function GetRecordPosition(tableName As String, dno As Integer) As Integer
 
-    Function GetLookupRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object
+    Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
 
-    Function GetRecordsByField(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object
+    Function GetRecordsByField(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
 
     'Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fields() As String)
 
     Function GetRecordsWithGroupIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) As List(Of TM)
 
-    Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
+    Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
     Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
 

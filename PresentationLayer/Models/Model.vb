@@ -149,7 +149,7 @@ Public Class Model
         Return DataService.GetFilteredRecords(tableName, sortKey, filterKey, fields)
     End Function
 
-    Public Function GetHRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) _
+    Public Function GetHRecords(tableName As String, sortKey As String, fields As String(), Optional Filter As String = Nothing) _
                     As List(Of ClassesLibrary.HLookupData) _
         Implements IModel.GetHRecords
         Dim data = DataService.GetRecordsByField(tableName, sortKey, fields)
@@ -166,9 +166,9 @@ Public Class Model
         Return tlData
     End Function
 
-    Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer _
+    Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer _
         Implements IModel.GetIdNoOfSortedPositionNumber
-        Return Service.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder)
+        Return Service.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder, filter)
     End Function
 
     Public Function GetLastSortKey(searchValue As String, tableName As String) As String _
@@ -176,7 +176,7 @@ Public Class Model
         Return Service.GetLastSortKey(searchValue, tableName)
     End Function
 
-    Public Function GetLookup(tableName As String, sortKey As String, ByVal ParamArray fields() As String) Implements IModel.GetLookup
+    Public Function GetLookup(tableName As String, sortKey As String, fields As String()) Implements IModel.GetLookup
         Dim data = Service.GetRecordsByField(tableName, sortKey, fields)
         Dim lookupSetting = GlobalVariables.LookupSetting()
         If lookupSetting = "CodeAndName" Then
@@ -190,7 +190,7 @@ Public Class Model
         End If
     End Function
 
-    Public Function GetLookupNew(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupNew
+    Public Function GetLookupNew(tableName As String, sortKey As String, fields As String()) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupNew
         Dim data = Service.GetRecordsByField(tableName, sortKey, fields)
         Dim lookupSetting = GlobalVariables.LookupSetting()
         If lookupSetting = "CodeAndName" Then
@@ -204,8 +204,8 @@ Public Class Model
         End If
     End Function
 
-    Public Function GetLookupRecords(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object Implements IModel.GetLookupRecords
-        Dim data = DataService.GetRecordsByField(tableName, sortKey, fields)
+    Public Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object Implements IModel.GetLookupRecords
+        Dim data = DataService.GetRecordsByField(tableName, sortKey, fields, filter)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         If fields.Count = 3 Then
             For i = 1 To Int(data.Count / 3)
@@ -240,9 +240,9 @@ Public Class Model
         Return modelData
     End Function
 
-    Public Function GetRecordCount(tableName As String) As Integer Implements IModel.GetRecordCount
+    Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer Implements IModel.GetRecordCount
         Try
-            Return Service.GetRecordCount(tableName)
+            Return Service.GetRecordCount(tableName, filter)
         Catch ex As Exception
             Return 0
         End Try
@@ -274,8 +274,8 @@ Public Class Model
         Return Service.GetRecordPosition(tableName, dno)
     End Function
 
-    Public Function GetRecordsByField(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object Implements IModel.GetRecordsByField
-        Return DataService.GetRecordsByField(tableName, sortKey, fields)
+    Public Function GetRecordsByField(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object Implements IModel.GetRecordsByField
+        Return DataService.GetRecordsByField(tableName, sortKey, fields, filter)
     End Function
 
     'Public Function GetRecordsByField(tableName As String, sortKey As String, ByVal ParamArray fields() As String) As Object Implements IModel.GetRecordsByField
@@ -306,8 +306,8 @@ Public Class Model
         Return data
     End Function
 
-    Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrderKey As String) As Integer Implements IModel.GetSortedRecordPosition
-        Return Service.GetSortedRecordPosition(idNo, tableName, sortOrderKey)
+    Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrderKey As String, Optional filter As String = Nothing) As Integer Implements IModel.GetSortedRecordPosition
+        Return Service.GetSortedRecordPosition(idNo, tableName, sortOrderKey, filter)
     End Function
 
     Public Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType _

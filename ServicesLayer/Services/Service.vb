@@ -251,8 +251,8 @@ Namespace Services
             Return BaseDao.GetFilteredRecords(tableName, sortKey, filterKey, fields)
         End Function
 
-        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer Implements IService.GetIdNoOfSortedPositionNumber
-            Return BaseDao.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder)
+        Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IService.GetIdNoOfSortedPositionNumber
+            Return BaseDao.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder, filter)
         End Function
 
         Public Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String Implements IService.GetLastSortKey
@@ -263,8 +263,8 @@ Namespace Services
             Return BaseDao.GetMaxValueFiltered(searchFieldName, tableName, returnFieldName, filter)
         End Function
 
-        Public Function GetRecordCount(tableName As String) As Integer Implements IService.GetRecordCount
-            Return BaseDao.GetRecordCount(tableName)
+        Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer Implements IService.GetRecordCount
+            Return BaseDao.GetRecordCount(tableName, filter)
         End Function
 
         Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object Implements IService.GetRecordDateTimeStamp
@@ -291,16 +291,16 @@ Namespace Services
             Return BaseDao.GetRecordPosition(tableName, idNo)
         End Function
 
-        Public Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetRecordsByField
-            Return BaseDao.GetRecordsByField(tableName, sortKey, fields)
+        Public Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, fields As String(), Optional Filter As String = Nothing) As Object Implements IService.GetRecordsByField
+            Return BaseDao.GetRecordsByField(tableName, sortKey, fields, Filter)
         End Function
 
         'Public Overloads Function GetFields(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetFields
         '    Return BaseDao.GetFields(tableName, sortKey, fields)
         'End Function
 
-        Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer Implements IService.GetSortedRecordPosition
-            Return BaseDao.GetSortedRecordPosition(idNo, tableName, sortOrder)
+        Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IService.GetSortedRecordPosition
+            Return BaseDao.GetSortedRecordPosition(idNo, tableName, sortOrder, filter)
         End Function
 
         Public Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType Implements IService.GetFieldValue

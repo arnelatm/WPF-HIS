@@ -32,6 +32,7 @@ Namespace PresentationLayer.Presenters
             ModelOfPresenter = New ModelAccounts("PayrollDetail")
             OriginalModel = New PayrollDetailModel
             DataModel = New PayrollDetailModel
+            DataFilter = "PayrollIdNo = 1"
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
             _attendanceItemModel = New ModelAccounts("AttendanceItem", Nothing, Nothing)
