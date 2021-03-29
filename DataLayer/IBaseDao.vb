@@ -30,13 +30,13 @@ Public Interface IBaseDao
 
     Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ParamArray fieldNames() As String) As Object
 
-    Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String) As Integer
+    Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
     Function GetLastSortKey(searchValue As String, tableName As String) As String
 
     Function GetMaxValueFiltered(searchFieldName As String, tableName As String, returnFieldName As String, filter As String) As Object
 
-    Function GetRecordCount(tableName As String) As Integer
+    Function GetRecordCount(tableName As String, Optional Filter As String = Nothing) As Integer
 
     Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) As Object
 
@@ -56,9 +56,9 @@ Public Interface IBaseDao
 
     Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) As Integer
 
-    Function GetRecordsByField(tableName As String, sortKey As String, ParamArray fieldNames() As String) As Object
+    Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object
 
-    Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String) As Integer
+    Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
     Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
 

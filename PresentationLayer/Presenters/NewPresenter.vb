@@ -37,6 +37,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
     Protected TreeViewMainField As String
     Protected TreeViewParentIdField As String
     Protected TreeViewSecondaryField As String
+    Protected DataFilter As String = Nothing
     Private ReadOnly _debugSwitch As Byte = 0
     Private ReadOnly _tableColumnPropertyList As List(Of TblColPropModel)
     Private _addMode As Boolean = False
@@ -433,7 +434,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
 
     Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer) As Integer
         Try
-            Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, SortOrderKey)
+            Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, SortOrderKey, DataFilter)
         Catch ex As Exception
             Return 0
         End Try
@@ -458,7 +459,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
 
     Public Function GetRecordCount() As Integer
         Try
-            Return Model.GetRecordCount(TableName)
+            Return Model.GetRecordCount(TableName, DataFilter)
         Catch ex As Exception
             Return 0
         End Try
@@ -548,7 +549,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
 
     Public Function GetSortedRecordPosition(idNo As Int32) As Integer
         Try
-            Return Model.GetSortedRecordPosition(idNo, TableName, SortOrderKey)
+            Return Model.GetSortedRecordPosition(idNo, TableName, SortOrderKey, DataFilter)
         Catch ex As Exception
             Return 0
         End Try
@@ -587,9 +588,9 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName})
+                Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
             Else
-                Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField})
+                Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
             End If
         Else
             newSortOrderKey = "SortKey"

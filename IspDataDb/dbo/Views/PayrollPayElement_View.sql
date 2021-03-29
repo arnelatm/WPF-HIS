@@ -1,8 +1,10 @@
 ﻿CREATE VIEW dbo.PayrollPayElement_View
 AS
-SELECT        dbo.PayrollPayElement.IdNo, dbo.PayrollPayElement.PayrollDetailIdNo, dbo.PayrollPayElement.PayElementIdNo, dbo.PayrollPayElement.Amount, dbo.PayrollDetail.PayrollIdNo, dbo.PayrollDetail.EmployeeIdNo
+SELECT        dbo.PayrollPayElement.IdNo, dbo.PayrollPayElement.PayrollDetailIdNo, dbo.PayrollPayElement.PayElementIdNo, dbo.PayrollPayElement.Amount, dbo.PayrollDetail.PayrollIdNo, dbo.PayrollDetail.EmployeeIdNo, 
+                         dbo.PayElement.PayElementKind
 FROM            dbo.PayrollPayElement INNER JOIN
-                         dbo.PayrollDetail ON dbo.PayrollPayElement.PayrollDetailIdNo = dbo.PayrollDetail.IdNo
+                         dbo.PayrollDetail ON dbo.PayrollPayElement.PayrollDetailIdNo = dbo.PayrollDetail.IdNo INNER JOIN
+                         dbo.PayElement ON dbo.PayrollPayElement.PayElementIdNo = dbo.PayElement.IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollPayElement_View';
 
@@ -99,6 +101,16 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
+         Begin Table = "PayElement"
+            Begin Extent = 
+               Top = 6
+               Left = 524
+               Bottom = 331
+               Right = 725
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
       End
    End
    Begin SQLPane = 
@@ -126,4 +138,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollPayElement_View';
+
+
 
