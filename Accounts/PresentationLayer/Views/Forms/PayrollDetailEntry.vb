@@ -19,8 +19,8 @@ Namespace PresentationLayer.Views.Forms
         Private _payrollEarnings As List(Of PayrollPayElementView)
         Private _payrollDeductions As List(Of PayrollPayElementView)
         Private _payElementsByCode
-        Private _earningFooter As DgvFooter
-        Private _deductionFooter As DgvFooter
+        Private _earningFooter
+        Private _deductionFooter
 
         Public Sub New(ByVal payrollIdNo As Int16)
 
@@ -40,6 +40,14 @@ Namespace PresentationLayer.Views.Forms
             MyPresenter.UpdateDataFilter(payrollIdNo)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            _earningFooter = New DgvFooter(DataGridViewEarnings) With {.AutoCalc = True}
+            _earningFooter.ColumnToSum("dgvEarningAmount") = True
+            _earningFooter.SetText("dgvEarningIdNo", "Totals ->")
+
+            _deductionFooter = New DgvFooter(DataGridViewDeductions) With {.AutoCalc = True}
+            _deductionFooter.ColumnToSum("dgvDeductionAmount") = True
+            _deductionFooter.SetText("dgvDeductionIdNo", "Totals")
+
             '_employees = PresenterObj.GetLookup("Employee")
             '_payGroups = PresenterObj.GetLookup("PayGroups")
         End Sub
@@ -169,20 +177,21 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub PayrollDetailEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             MyPresenter.DisplayPayrollDetails(dtpStartDate.Value, dtpEndDate.Value, txtPayPeriodName.Text)
-            _earningFooter = New DgvFooter(DataGridViewEarnings) With {.AutoCalc = True}
-            _earningFooter.ColumnToSum("dgvEarningAmount") = True
-            _earningFooter.SetText("dgvEarningIdNo", "Totals ->")
-
-            _deductionFooter = New DgvFooter(DataGridViewDeductions) With {.AutoCalc = True}
-            _deductionFooter.ColumnToSum("dgvDeductionAmount") = True
-            _deductionFooter.SetText("dgvDeductionIdNo", "Totals")
         End Sub
 
-
-        Protected Shadows Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
             MyBase.RecordPositionChanged(e)
+            UpdateTotals()
+        End Sub
+
+        Private Sub UpdateTotals()
             _earningFooter.SumColumn("dgvEarningAmount")
             _deductionFooter.SumColumn("dgvDeductionAmount")
+            Dim earning = _earningFooter.GetColumnTotal("dgvEarningAmount")
+            Dim deduction = _deductionFooter.GetColumnTotal("dgvDeductionAmount")
+            txtTotalEarnings.Text = earning
+            txtTotalDeductions.Text = deduction
+            txtNetPay.Text = earning - deduction
         End Sub
 
     End Class

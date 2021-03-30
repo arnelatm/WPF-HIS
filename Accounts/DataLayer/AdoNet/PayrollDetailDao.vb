@@ -42,7 +42,7 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef PayrollDetail As PayrollDetail) As Integer Implements IDao(Of PayrollDetail).UpdateRecord
             Dim sql As String = " UPDATE [PayrollDetail] Set" &
                     " EmployeeIdNo = @EmployeeIdNo," &
-                    " PayrollIdNo = @PayrollIdNo," &
+                    " PayrollIdNo = @PayrollIdNo" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(PayrollDetail))
         End Function

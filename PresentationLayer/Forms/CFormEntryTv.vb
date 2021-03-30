@@ -214,8 +214,10 @@ Public Class CFormEntryTv
     'Private Sub BfTvEntry_SuccessfulDelete(idNoOfDeletedRecord As Integer) Handles MyBase.SuccessfulDelete
 
     'End Sub
+
     'Public Sub OEHRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
 
     '    GotoRecordInTreeView()
     'End Sub
+
 End Class

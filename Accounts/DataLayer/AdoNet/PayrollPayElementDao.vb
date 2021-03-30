@@ -59,6 +59,10 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).FirstOrDefault()
         End Function
 
+        Public Function UpdInsEmpPayElementTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal payrollDetailIdNo As Integer, ByVal employeeIdNo As Integer) As Integer
+            Return _db.UpdateInsertTvp2("UpdateInsertEmployeePayrollPayElementTVP", updateTvpTable, insertTvpTable, payrollDetailIdNo, employeeIdNo)
+        End Function
+
         Private Shared ReadOnly Make As Func(Of IDataReader, PayrollPayElement) =
                                     Function(reader) _
             New PayrollPayElement() With {

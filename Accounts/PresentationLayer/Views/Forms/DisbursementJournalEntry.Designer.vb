@@ -240,8 +240,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.DefaultValue = "0"
             Me.cboPayType.DisplayMember = "Name"
             Me.cboPayType.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboPayType.DropDownHeight = 1
-            Me.cboPayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayType.EditingMode = False
             Me.cboPayType.FilterRule = Nothing
             Me.cboPayType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -261,7 +259,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.PropertySelector = Nothing
             Me.cboPayType.ReadOnlyCombo = False
             Me.cboPayType.SearchAnywhere = False
-            Me.cboPayType.Size = New System.Drawing.Size(224, 25)
+            Me.cboPayType.Size = New System.Drawing.Size(224, 24)
             Me.cboPayType.SuggestBoxHeight = 200
             Me.cboPayType.SuggestListOrderRule = Nothing
             Me.cboPayType.TabIndex = 5
@@ -323,6 +321,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewJournalItems.FieldsDictionary = Nothing
             Me.DataGridViewJournalItems.FirstRowDeletionEnabled = False
             Me.DataGridViewJournalItems.FirstRowInsertionEnabled = False
             Me.DataGridViewJournalItems.Location = New System.Drawing.Point(13, 203)
@@ -570,8 +569,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DefaultValue = ""
             Me.cboAccountIdNo.DisplayMember = "Name"
             Me.cboAccountIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboAccountIdNo.DropDownHeight = 1
-            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboAccountIdNo.EditingMode = False
             Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -664,8 +661,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.DefaultValue = Nothing
             Me.cboDiscountAccountIdNo.DisplayMember = "Name"
             Me.cboDiscountAccountIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboDiscountAccountIdNo.DropDownHeight = 1
-            Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboDiscountAccountIdNo.EditingMode = False
             Me.cboDiscountAccountIdNo.FilterRule = Nothing
             Me.cboDiscountAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -687,7 +682,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.PropertySelector = Nothing
             Me.cboDiscountAccountIdNo.ReadOnlyCombo = False
             Me.cboDiscountAccountIdNo.SearchAnywhere = False
-            Me.cboDiscountAccountIdNo.Size = New System.Drawing.Size(499, 25)
+            Me.cboDiscountAccountIdNo.Size = New System.Drawing.Size(499, 24)
             Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
             Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboDiscountAccountIdNo.TabIndex = 12
@@ -993,6 +988,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDjOiItems.Ea = EventAggregator2
             Me.DataGridViewDjOiItems.EditingMode = False
             Me.DataGridViewDjOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewDjOiItems.FieldsDictionary = Nothing
             Me.DataGridViewDjOiItems.FirstRowDeletionEnabled = False
             Me.DataGridViewDjOiItems.FirstRowInsertionEnabled = False
             Me.DataGridViewDjOiItems.Location = New System.Drawing.Point(13, 534)
@@ -1291,8 +1287,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.DefaultValue = "0"
             Me.cboPaymentType.DisplayMember = "Name"
             Me.cboPaymentType.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboPaymentType.DropDownHeight = 1
-            Me.cboPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPaymentType.EditingMode = False
             Me.cboPaymentType.FilterRule = Nothing
             Me.cboPaymentType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1312,7 +1306,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.PropertySelector = Nothing
             Me.cboPaymentType.ReadOnlyCombo = False
             Me.cboPaymentType.SearchAnywhere = False
-            Me.cboPaymentType.Size = New System.Drawing.Size(376, 25)
+            Me.cboPaymentType.Size = New System.Drawing.Size(376, 24)
             Me.cboPaymentType.SuggestBoxHeight = 200
             Me.cboPaymentType.SuggestListOrderRule = Nothing
             Me.cboPaymentType.TabIndex = 4
@@ -1394,14 +1388,13 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.DefaultValue = Nothing
             Me.cboPayeeIdNo.DisplayMember = "Name"
             Me.cboPayeeIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboPayeeIdNo.DropDownHeight = 200
-            Me.cboPayeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboPayeeIdNo.EditingMode = True
             Me.cboPayeeIdNo.FilterRule = Nothing
             Me.cboPayeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboPayeeIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboPayeeIdNo.FormattingEnabled = True
             Me.cboPayeeIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPayeeIdNo.IntegralHeight = False
             Me.cboPayeeIdNo.LinkedLabel = Nothing
             Me.cboPayeeIdNo.Location = New System.Drawing.Point(128, 65)
             Me.cboPayeeIdNo.Margin = New System.Windows.Forms.Padding(1)

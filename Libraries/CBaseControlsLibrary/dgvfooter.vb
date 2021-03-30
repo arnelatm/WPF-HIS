@@ -601,7 +601,7 @@ Public Class DgvFooter
     ''' </summary>
     ''' <value>A boolean indicating whether footer should autosum parent dgv columns.</value>
     ''' <returns>True if set to autocalc. Otherwise false.</returns>
-    ''' <remarks>If this is set to false after footer has already sumed columns, the values will not be removed from footer.
+    ''' <remarks>If this is set to false after footer has already summed columns, the values will not be removed from footer.
     ''' But no further autosum will be performed.</remarks>
     Public Property AutoCalc As Boolean
         Get

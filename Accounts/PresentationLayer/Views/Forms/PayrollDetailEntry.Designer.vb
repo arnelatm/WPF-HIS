@@ -22,14 +22,14 @@
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayrollDetailEntry))
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -55,11 +55,11 @@
             Me.txtPayPeriodName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CTextBox3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalEarnings = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpEndDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-            Me.CTextBox2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalDeductions = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtNetPay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -128,11 +128,11 @@
             Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodName, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.lblEmployeeName, 0, 2)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel9, 0, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.CTextBox3, 1, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtTotalEarnings, 1, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel10, 4, 7)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpEndDate, 5, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.CTextBox2, 5, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.CTextBox1, 5, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtTotalDeductions, 5, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtNetPay, 5, 7)
             Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel11, 3, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.cboEmployeeIdNo, 1, 2)
@@ -147,7 +147,7 @@
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(666, 503)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(666, 481)
             Me.TableLayoutPanel1.TabIndex = 0
             '
             'txtIdNo
@@ -263,20 +263,20 @@
             '
             'DataGridViewEarnings
             '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
             Me.DataGridViewEarnings.AutoGenerateColumns = False
             Me.DataGridViewEarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvEarningIdNo, Me.dgvEarningAmount})
             Me.DataGridViewEarnings.DataSource = Me.bsEarnings
-            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle12
             Me.DataGridViewEarnings.DgvFooter = Nothing
             Me.DataGridViewEarnings.DisplayOnly = False
             Me.DataGridViewEarnings.Dock = System.Windows.Forms.DockStyle.Fill
@@ -300,9 +300,9 @@
             '
             Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvEarningIdNo.EditingMode = False
             Me.dgvEarningIdNo.HeaderText = "Earning Name - Code"
             Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
@@ -313,11 +313,11 @@
             'dgvEarningAmount
             '
             Me.dgvEarningAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle3.Format = "###,##0.00"
-            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle11.Format = "###,##0.00"
+            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvEarningAmount.EditingMode = False
             Me.dgvEarningAmount.HeaderText = "Amount"
             Me.dgvEarningAmount.Name = "dgvEarningAmount"
@@ -342,20 +342,20 @@
             '
             'DataGridViewDeductions
             '
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewDeductions.AutoGenerateColumns = False
             Me.DataGridViewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvDeductionIdNo, Me.dgvDeductionAmount})
             Me.DataGridViewDeductions.DataSource = Me.bsDeductions
-            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle14
             Me.DataGridViewDeductions.DgvFooter = Nothing
             Me.DataGridViewDeductions.DisplayOnly = False
             Me.DataGridViewDeductions.Dock = System.Windows.Forms.DockStyle.Fill
@@ -379,9 +379,9 @@
             '
             Me.dgvDeductionIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvDeductionIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.dgvDeductionIdNo.DefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvDeductionIdNo.DefaultCellStyle = DataGridViewCellStyle4
             Me.dgvDeductionIdNo.EditingMode = False
             Me.dgvDeductionIdNo.HeaderText = "Deduction Name - Code"
             Me.dgvDeductionIdNo.Name = "dgvDeductionIdNo"
@@ -392,11 +392,11 @@
             'dgvDeductionAmount
             '
             Me.dgvDeductionAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle7.Format = "###,##0.00"
-            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle7
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.Format = "###,##0.00"
+            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvDeductionAmount.EditingMode = False
             Me.dgvDeductionAmount.HeaderText = "Amount"
             Me.dgvDeductionAmount.Name = "dgvDeductionAmount"
@@ -550,40 +550,43 @@
             Me.CLabel9.Text = "Total Earnings"
             Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'CTextBox3
+            'txtTotalEarnings
             '
-            Me.CTextBox3.BackColor = System.Drawing.Color.White
-            Me.CTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.CTextBox3.ComputedValue = False
-            Me.CTextBox3.CustomFormat = Nothing
-            Me.CTextBox3.DataBoundControl = True
-            Me.CTextBox3.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.CTextBox3.EditingMode = True
-            Me.CTextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CTextBox3.ForeColor = System.Drawing.Color.Black
-            Me.CTextBox3.LinkedLabel = Nothing
-            Me.CTextBox3.Location = New System.Drawing.Point(125, 431)
-            Me.CTextBox3.Margin = New System.Windows.Forms.Padding(1)
-            Me.CTextBox3.MaximumValue = Nothing
-            Me.CTextBox3.MinimumValue = Nothing
-            Me.CTextBox3.Name = "CTextBox3"
-            Me.CTextBox3.OldValue = Nothing
-            Me.CTextBox3.Size = New System.Drawing.Size(122, 23)
-            Me.CTextBox3.TabIndex = 33
+            Me.txtTotalEarnings.BackColor = System.Drawing.Color.White
+            Me.txtTotalEarnings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalEarnings.ComputedValue = False
+            Me.txtTotalEarnings.CustomFormat = "N2"
+            Me.txtTotalEarnings.DataBoundControl = True
+            Me.txtTotalEarnings.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtTotalEarnings.EditingMode = True
+            Me.txtTotalEarnings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtTotalEarnings.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalEarnings.LinkedLabel = Nothing
+            Me.txtTotalEarnings.Location = New System.Drawing.Point(125, 431)
+            Me.txtTotalEarnings.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtTotalEarnings.MaximumValue = Nothing
+            Me.txtTotalEarnings.MinimumValue = Nothing
+            Me.txtTotalEarnings.Name = "txtTotalEarnings"
+            Me.txtTotalEarnings.OldValue = Nothing
+            Me.txtTotalEarnings.Size = New System.Drawing.Size(122, 23)
+            Me.txtTotalEarnings.TabIndex = 33
+            Me.txtTotalEarnings.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtTotalEarnings.ValueIsNumeric = True
             '
             'CLabel10
             '
             Me.CLabel10.AutoSize = True
             Me.CLabel10.DisplayOnly = True
+            Me.CLabel10.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel10.EditingMode = False
             Me.CLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel10.Location = New System.Drawing.Point(463, 456)
             Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel10.Name = "CLabel10"
-            Me.CLabel10.Size = New System.Drawing.Size(58, 17)
+            Me.CLabel10.Size = New System.Drawing.Size(67, 24)
             Me.CLabel10.TabIndex = 29
             Me.CLabel10.Text = "Net Pay"
-            Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             '
             'dtpEndDate
             '
@@ -610,47 +613,51 @@
             Me.dtpEndDate.ValueIsMandatory = False
             Me.dtpEndDate.ValueIsNullable = False
             '
-            'CTextBox2
+            'txtTotalDeductions
             '
-            Me.CTextBox2.BackColor = System.Drawing.Color.White
-            Me.CTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.CTextBox2.ComputedValue = False
-            Me.CTextBox2.CustomFormat = Nothing
-            Me.CTextBox2.DataBoundControl = True
-            Me.CTextBox2.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.CTextBox2.EditingMode = True
-            Me.CTextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CTextBox2.ForeColor = System.Drawing.Color.Black
-            Me.CTextBox2.LinkedLabel = Nothing
-            Me.CTextBox2.Location = New System.Drawing.Point(532, 431)
-            Me.CTextBox2.Margin = New System.Windows.Forms.Padding(1)
-            Me.CTextBox2.MaximumValue = Nothing
-            Me.CTextBox2.MinimumValue = Nothing
-            Me.CTextBox2.Name = "CTextBox2"
-            Me.CTextBox2.OldValue = Nothing
-            Me.CTextBox2.Size = New System.Drawing.Size(117, 23)
-            Me.CTextBox2.TabIndex = 31
+            Me.txtTotalDeductions.BackColor = System.Drawing.Color.White
+            Me.txtTotalDeductions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalDeductions.ComputedValue = False
+            Me.txtTotalDeductions.CustomFormat = "N2"
+            Me.txtTotalDeductions.DataBoundControl = True
+            Me.txtTotalDeductions.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtTotalDeductions.EditingMode = True
+            Me.txtTotalDeductions.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtTotalDeductions.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalDeductions.LinkedLabel = Nothing
+            Me.txtTotalDeductions.Location = New System.Drawing.Point(532, 431)
+            Me.txtTotalDeductions.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtTotalDeductions.MaximumValue = Nothing
+            Me.txtTotalDeductions.MinimumValue = Nothing
+            Me.txtTotalDeductions.Name = "txtTotalDeductions"
+            Me.txtTotalDeductions.OldValue = Nothing
+            Me.txtTotalDeductions.Size = New System.Drawing.Size(117, 23)
+            Me.txtTotalDeductions.TabIndex = 31
+            Me.txtTotalDeductions.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtTotalDeductions.ValueIsNumeric = True
             '
-            'CTextBox1
+            'txtNetPay
             '
-            Me.CTextBox1.BackColor = System.Drawing.Color.White
-            Me.CTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.CTextBox1.ComputedValue = False
-            Me.CTextBox1.CustomFormat = Nothing
-            Me.CTextBox1.DataBoundControl = True
-            Me.CTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.CTextBox1.EditingMode = True
-            Me.CTextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CTextBox1.ForeColor = System.Drawing.Color.Black
-            Me.CTextBox1.LinkedLabel = Nothing
-            Me.CTextBox1.Location = New System.Drawing.Point(532, 456)
-            Me.CTextBox1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CTextBox1.MaximumValue = Nothing
-            Me.CTextBox1.MinimumValue = Nothing
-            Me.CTextBox1.Name = "CTextBox1"
-            Me.CTextBox1.OldValue = Nothing
-            Me.CTextBox1.Size = New System.Drawing.Size(117, 23)
-            Me.CTextBox1.TabIndex = 28
+            Me.txtNetPay.BackColor = System.Drawing.Color.White
+            Me.txtNetPay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNetPay.ComputedValue = False
+            Me.txtNetPay.CustomFormat = "N2"
+            Me.txtNetPay.DataBoundControl = True
+            Me.txtNetPay.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtNetPay.EditingMode = True
+            Me.txtNetPay.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtNetPay.ForeColor = System.Drawing.Color.Black
+            Me.txtNetPay.LinkedLabel = Nothing
+            Me.txtNetPay.Location = New System.Drawing.Point(532, 456)
+            Me.txtNetPay.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtNetPay.MaximumValue = Nothing
+            Me.txtNetPay.MinimumValue = Nothing
+            Me.txtNetPay.Name = "txtNetPay"
+            Me.txtNetPay.OldValue = Nothing
+            Me.txtNetPay.Size = New System.Drawing.Size(117, 23)
+            Me.txtNetPay.TabIndex = 28
+            Me.txtNetPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtNetPay.ValueIsNumeric = True
             '
             'lblNotes
             '
@@ -669,13 +676,15 @@
             'CLabel11
             '
             Me.CLabel11.AutoSize = True
+            Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel11, 2)
             Me.CLabel11.DisplayOnly = True
+            Me.CLabel11.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel11.EditingMode = False
             Me.CLabel11.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel11.Location = New System.Drawing.Point(339, 431)
             Me.CLabel11.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel11.Name = "CLabel11"
-            Me.CLabel11.Size = New System.Drawing.Size(115, 17)
+            Me.CLabel11.Size = New System.Drawing.Size(191, 23)
             Me.CLabel11.TabIndex = 32
             Me.CLabel11.Text = "Total Deductions"
             Me.CLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -754,10 +763,10 @@
         Friend WithEvents lblEndDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel9 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents CTextBox1 As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents CTextBox3 As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtNetPay As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtTotalEarnings As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel11 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents CTextBox2 As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtTotalDeductions As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel10 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents tbcPayroll As Libraries.CBaseControlsLibrary.CTabControl
         Friend WithEvents tpgEarnings As TabPage
