@@ -24,7 +24,7 @@ WHERE (D.PayrollIdNo = @GroupIdNo and D.IdNo is Null) or (D.PayrollIdNo = @Group
 UPDATE a 
 SET a.Amount = B.Amount,
 	a.PayElementIdNo = B.PayElementIdNo,
-	a.PayrollDetailIdNo = b.PayrollPayDetailIdNo
+	a.PayrollDetailIdNo = b.PayrollDetailIdNo
 from PayrollPayElement a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
 
