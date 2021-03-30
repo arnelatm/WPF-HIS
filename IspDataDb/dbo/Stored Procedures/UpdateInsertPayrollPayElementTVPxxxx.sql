@@ -8,7 +8,7 @@
 
 
 
-CREATE PROCEDURE  [dbo].[UpdateInsertPayrollPayElementTVP]
+CREATE PROCEDURE  [dbo].[UpdateInsertPayrollPayElementTVPxxxx]
   @MParam1 PayrollPayElementUpdate READONLY, @MParam2 PayrollPayElementInsert READONLY, @GroupIdNo as INT
 AS 
 
