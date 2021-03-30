@@ -777,6 +777,55 @@ Namespace AdoNet
             Return returnValue
         End Function
 
+        Public Function UpdateInsertTvp2(Of TI1, TI2)(updateTvp As String, updateDataTableName As DataTable, insertDataTableName As DataTable, groupIdNo1 As TI1, groupIdNo2 As TI2) _
+            As Integer
+            Dim returnValue As Integer
+            Dim tryAgain As Boolean
+            '_waitForm.Show()
+            Do While True
+                tryAgain = False
+                Try
+                    Using connection = CreateConnection()
+                        Using command As New SqlCommand(updateTvp)
+                            Try
+                                command.CommandType = CommandType.StoredProcedure
+                                command.Connection = connection
+                                command.Parameters.AddWithValue("@MParam1", updateDataTableName)
+                                command.Parameters.AddWithValue("@MParam2", insertDataTableName)
+                                command.Parameters.AddWithValue("@groupIdNo1", groupIdNo1)
+                                command.Parameters.AddWithValue("@groupIdNo2", groupIdNo2)
+                                returnValue = command.ExecuteNonQuery()
+                            Catch ex As Exception
+                                returnValue = -1
+                                MessageBox.Show(ex.Message)
+                                Throw
+                            End Try
+                        End Using
+                    End Using
+                Catch ex As Exception
+                    '_waitForm.Close()
+                    Select Case TryToCatchError(ex)
+                        Case DialogResult.Cancel
+                            returnValue = -1
+                            'Exit Do
+                        Case DialogResult.Retry
+                            ' do nothing
+                            tryAgain = True
+                            '_waitForm.Show()
+                        Case Else
+                            MessageBox.Show(ex.Message)
+                            Throw
+                    End Select
+                Finally
+                    '_waitForm.Close()
+                End Try
+                If Not tryAgain Then
+                    Exit Do
+                End If
+            Loop
+            Return returnValue
+        End Function
+
         ' delete a record
 
         Public Function Delete(sql As String) As Integer

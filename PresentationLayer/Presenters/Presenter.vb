@@ -197,9 +197,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Property TargetIdNo As Int32
         Get
+            If _targetIdNo = 0 Then
+                Debugger.Break()
+            End If
             Return _targetIdNo
         End Get
         Set(value As Integer)
+            If value = 0 Then
+                Debugger.Break()
+            End If
             _targetIdNo = value
             UpdateViewDisplay(value)
             If Ea IsNot Nothing Then
@@ -1313,7 +1319,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     End If
                 Else
                     retValue = UpdateRecord(record)
-                    If retValue > 0 Then
+                    If retValue >= 0 Then
                         Dim retVal As Integer = retValue
                         RaiseEvent RecordUpdatedSuccessfully(retVal)
                         If retVal < 0 Then
