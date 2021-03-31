@@ -152,7 +152,7 @@ Public Class Model
     Public Function GetHRecords(tableName As String, sortKey As String, fields As String(), Optional Filter As String = Nothing) _
                     As List(Of ClassesLibrary.HLookupData) _
         Implements IModel.GetHRecords
-        Dim data = DataService.GetRecordsByField(tableName, sortKey, fields)
+        Dim data = DataService.GetRecordsByField(tableName, sortKey, fields, Filter)
         Dim tlData = New List(Of ClassesLibrary.HLookupData)
         For i = 1 To Int(data.Count / 4)
             Dim tData As New ClassesLibrary.HLookupData With {
@@ -176,8 +176,8 @@ Public Class Model
         Return Service.GetLastSortKey(searchValue, tableName)
     End Function
 
-    Public Function GetLookup(tableName As String, sortKey As String, fields As String()) Implements IModel.GetLookup
-        Dim data = Service.GetRecordsByField(tableName, sortKey, fields)
+    Public Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) Implements IModel.GetLookup
+        Dim data = Service.GetRecordsByField(tableName, sortKey, fields, filter)
         Dim lookupSetting = GlobalVariables.LookupSetting()
         If lookupSetting = "CodeAndName" Then
             Return ProcessLookupByCodeName(data)
@@ -190,8 +190,8 @@ Public Class Model
         End If
     End Function
 
-    Public Function GetLookupNew(tableName As String, sortKey As String, fields As String()) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupNew
-        Dim data = Service.GetRecordsByField(tableName, sortKey, fields)
+    Public Function GetLookupNew(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData) Implements IModel.GetLookupNew
+        Dim data = Service.GetRecordsByField(tableName, sortKey, fields, filter)
         Dim lookupSetting = GlobalVariables.LookupSetting()
         If lookupSetting = "CodeAndName" Then
             Return ProcessLookupByCodeName(data)

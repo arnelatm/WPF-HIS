@@ -108,6 +108,7 @@
     <EmbeddedResource Include="StringWords.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StringWords.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

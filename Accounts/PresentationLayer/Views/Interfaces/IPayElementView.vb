@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayElementName As String
         Property PayElementNameAra As String
         Property PayElementType As Char
+        Property ReportGroupIdNo As Int16
         Property QuantityType As Char
         Property Rate As Decimal
         Property Summary As Boolean
