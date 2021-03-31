@@ -28,21 +28,23 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayElementEntryTv))
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpPayElement = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblPayElementType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPayElementGroup = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayElementNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.txtPayElementName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -108,7 +110,7 @@ Namespace PresentationLayer.Views.Forms
             Me.bsPayElementItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpNotes = New System.Windows.Forms.TabPage()
             Me.floMain = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.tlpNotes = New System.Windows.Forms.TableLayoutPanel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tabPageImages = New System.Windows.Forms.ImageList(Me.components)
@@ -130,7 +132,7 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.bsPayElementItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpNotes.SuspendLayout()
             Me.floMain.SuspendLayout()
-            Me.TableLayoutPanel1.SuspendLayout()
+            Me.tlpNotes.SuspendLayout()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
             '
@@ -164,6 +166,8 @@ Namespace PresentationLayer.Views.Forms
             'tlpPayElement
             '
             resources.ApplyResources(Me.tlpPayElement, "tlpPayElement")
+            Me.tlpPayElement.Controls.Add(Me.cboReportGroupIdNo, 1, 4)
+            Me.tlpPayElement.Controls.Add(Me.lblPayElementGroup, 0, 4)
             Me.tlpPayElement.Controls.Add(Me.cboPayElementKind, 1, 3)
             Me.tlpPayElement.Controls.Add(Me.lblPayElementKind, 0, 3)
             Me.tlpPayElement.Controls.Add(Me.txtPayElementNameAra, 1, 2)
@@ -177,6 +181,53 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpPayElement.Controls.Add(Me.chkSummary, 3, 3)
             Me.tlpPayElement.Controls.Add(Me.lblSummary, 2, 3)
             Me.tlpPayElement.Name = "tlpPayElement"
+            '
+            'cboReportGroupIdNo
+            '
+            Me.cboReportGroupIdNo.BackColor = System.Drawing.Color.White
+            Me.cboReportGroupIdNo.ChangingSearchValueOnly = False
+            Me.tlpPayElement.SetColumnSpan(Me.cboReportGroupIdNo, 2)
+            Me.cboReportGroupIdNo.CurrentSearchTerm = ""
+            Me.cboReportGroupIdNo.DefaultValue = Nothing
+            Me.cboReportGroupIdNo.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboReportGroupIdNo, "cboReportGroupIdNo")
+            Me.cboReportGroupIdNo.EditingMode = True
+            Me.cboReportGroupIdNo.FilterRule = Nothing
+            Me.cboReportGroupIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboReportGroupIdNo.FormattingEnabled = True
+            Me.cboReportGroupIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboReportGroupIdNo.LinkedLabel = Me.lblPayElementType
+            Me.cboReportGroupIdNo.Name = "cboReportGroupIdNo"
+            Me.cboReportGroupIdNo.OldValue = 0
+            Me.cboReportGroupIdNo.OriginalDataSource = Nothing
+            Me.cboReportGroupIdNo.OriginalList = Nothing
+            Me.cboReportGroupIdNo.OverrideDropDownStyleList = False
+            Me.cboReportGroupIdNo.PreviousSearchTerm = Nothing
+            Me.cboReportGroupIdNo.PreviousSelectedIndex = -1
+            Me.cboReportGroupIdNo.PropertySelector = Nothing
+            Me.cboReportGroupIdNo.ReadOnlyCombo = False
+            Me.cboReportGroupIdNo.SearchAnywhere = False
+            Me.cboReportGroupIdNo.SuggestBoxHeight = 200
+            Me.cboReportGroupIdNo.SuggestListOrderRule = Nothing
+            Me.cboReportGroupIdNo.TextToSearch = Nothing
+            Me.cboReportGroupIdNo.ValueIsMandatory = False
+            Me.cboReportGroupIdNo.ValueIsNullable = False
+            Me.cboReportGroupIdNo.ValueIsNumeric = False
+            Me.cboReportGroupIdNo.ValueMember = "Code"
+            '
+            'lblPayElementType
+            '
+            Me.lblPayElementType.DisplayOnly = True
+            Me.lblPayElementType.EditingMode = False
+            resources.ApplyResources(Me.lblPayElementType, "lblPayElementType")
+            Me.lblPayElementType.Name = "lblPayElementType"
+            '
+            'lblPayElementGroup
+            '
+            Me.lblPayElementGroup.DisplayOnly = True
+            Me.lblPayElementGroup.EditingMode = False
+            resources.ApplyResources(Me.lblPayElementGroup, "lblPayElementGroup")
+            Me.lblPayElementGroup.Name = "lblPayElementGroup"
             '
             'cboPayElementKind
             '
@@ -209,13 +260,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementKind.ValueIsNullable = False
             Me.cboPayElementKind.ValueIsNumeric = False
             Me.cboPayElementKind.ValueMember = "Code"
-            '
-            'lblPayElementType
-            '
-            Me.lblPayElementType.DisplayOnly = True
-            Me.lblPayElementType.EditingMode = False
-            resources.ApplyResources(Me.lblPayElementType, "lblPayElementType")
-            Me.lblPayElementType.Name = "lblPayElementType"
             '
             'lblPayElementKind
             '
@@ -856,21 +900,21 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewPayElementAccounts
             '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPayElementAccounts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPayElementAccounts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle12
             Me.DataGridViewPayElementAccounts.AutoGenerateColumns = False
             Me.DataGridViewPayElementAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPayElementAccounts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPayGroupIdNo, Me.dgvAccountIdNo, Me.AccountNameDataGridViewTextBoxColumn, Me.PayElementIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn1, Me.PayGroupNameDataGridViewTextBoxColumn})
             Me.tlpPostingAccounts.SetColumnSpan(Me.DataGridViewPayElementAccounts, 3)
             Me.DataGridViewPayElementAccounts.DataSource = Me.bsPayElementAccounts
-            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPayElementAccounts.DefaultCellStyle = DataGridViewCellStyle5
+            DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPayElementAccounts.DefaultCellStyle = DataGridViewCellStyle16
             Me.DataGridViewPayElementAccounts.DgvFooter = Nothing
             Me.DataGridViewPayElementAccounts.DisplayOnly = False
             resources.ApplyResources(Me.DataGridViewPayElementAccounts, "DataGridViewPayElementAccounts")
@@ -890,9 +934,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvSequence
             '
             Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             resources.ApplyResources(Me.dgvSequence, "dgvSequence")
@@ -903,9 +947,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvPayGroupIdNo
             '
             Me.dgvPayGroupIdNo.DataPropertyName = "PayGroupIdNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvPayGroupIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            Me.dgvPayGroupIdNo.DefaultCellStyle = DataGridViewCellStyle14
             Me.dgvPayGroupIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvPayGroupIdNo, "dgvPayGroupIdNo")
             Me.dgvPayGroupIdNo.Name = "dgvPayGroupIdNo"
@@ -917,9 +961,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle15
             Me.dgvAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
             Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
@@ -969,20 +1013,20 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewPayElementItems
             '
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPayElementItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPayElementItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPayElementItems.AutoGenerateColumns = False
             Me.DataGridViewPayElementItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPayElementItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceSummary, Me.dgvPayElementIdNo, Me.dgvFactorValue, Me.dgvFactorType, Me.ParentIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewPayElementItems.DataSource = Me.bsPayElementItems
-            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPayElementItems.DefaultCellStyle = DataGridViewCellStyle11
+            DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle20.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPayElementItems.DefaultCellStyle = DataGridViewCellStyle20
             Me.DataGridViewPayElementItems.DgvFooter = Nothing
             Me.DataGridViewPayElementItems.DisplayOnly = False
             resources.ApplyResources(Me.DataGridViewPayElementItems, "DataGridViewPayElementItems")
@@ -1002,9 +1046,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvSequenceSummary
             '
             Me.dgvSequenceSummary.DataPropertyName = "Sequence"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceSummary.DefaultCellStyle = DataGridViewCellStyle7
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceSummary.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvSequenceSummary.EditingMode = False
             resources.ApplyResources(Me.dgvSequenceSummary, "dgvSequenceSummary")
             Me.dgvSequenceSummary.Name = "dgvSequenceSummary"
@@ -1015,9 +1059,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvPayElementIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvPayElementIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            Me.dgvPayElementIdNo.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+            Me.dgvPayElementIdNo.DefaultCellStyle = DataGridViewCellStyle17
             Me.dgvPayElementIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvPayElementIdNo, "dgvPayElementIdNo")
             Me.dgvPayElementIdNo.Name = "dgvPayElementIdNo"
@@ -1028,9 +1072,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvFactorValue
             '
             Me.dgvFactorValue.DataPropertyName = "FactorValue"
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            Me.dgvFactorValue.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+            Me.dgvFactorValue.DefaultCellStyle = DataGridViewCellStyle18
             Me.dgvFactorValue.EditingMode = False
             resources.ApplyResources(Me.dgvFactorValue, "dgvFactorValue")
             Me.dgvFactorValue.Name = "dgvFactorValue"
@@ -1040,9 +1084,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvFactorType
             '
             Me.dgvFactorType.DataPropertyName = "FactorType"
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-            Me.dgvFactorType.DefaultCellStyle = DataGridViewCellStyle10
+            DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
+            Me.dgvFactorType.DefaultCellStyle = DataGridViewCellStyle19
             Me.dgvFactorType.EditingMode = False
             resources.ApplyResources(Me.dgvFactorType, "dgvFactorType")
             Me.dgvFactorType.Name = "dgvFactorType"
@@ -1080,22 +1124,22 @@ Namespace PresentationLayer.Views.Forms
             'floMain
             '
             Me.floMain.BackColor = System.Drawing.Color.Transparent
-            Me.floMain.Controls.Add(Me.TableLayoutPanel1)
+            Me.floMain.Controls.Add(Me.tlpNotes)
             resources.ApplyResources(Me.floMain, "floMain")
             Me.floMain.Name = "floMain"
             '
-            'TableLayoutPanel1
+            'tlpNotes
             '
-            resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
-            Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 5)
-            Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+            resources.ApplyResources(Me.tlpNotes, "tlpNotes")
+            Me.tlpNotes.Controls.Add(Me.txtNotes, 0, 6)
+            Me.tlpNotes.Controls.Add(Me.lblNotes, 0, 5)
+            Me.tlpNotes.Name = "tlpNotes"
             '
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
+            Me.tlpNotes.SetColumnSpan(Me.txtNotes, 2)
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
@@ -1158,8 +1202,8 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.bsPayElementItems, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpNotes.ResumeLayout(False)
             Me.floMain.ResumeLayout(False)
-            Me.TableLayoutPanel1.ResumeLayout(False)
-            Me.TableLayoutPanel1.PerformLayout()
+            Me.tlpNotes.ResumeLayout(False)
+            Me.tlpNotes.PerformLayout()
             Me.floDataDisplay.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
@@ -1178,7 +1222,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents tbcPayElement As CTabControl
         Friend WithEvents tbpNotes As TabPage
         Friend WithEvents floMain As CFlowLayout
-        Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+        Friend WithEvents tlpNotes As TableLayoutPanel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents tbpCalculation As TabPage
@@ -1239,5 +1283,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvFactorType As CaDgvComboBoxColumn
         Friend WithEvents ParentIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents cboReportGroupIdNo As CaComboBox
+        Friend WithEvents lblPayElementGroup As CLabel
     End Class
 End Namespace

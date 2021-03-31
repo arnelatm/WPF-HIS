@@ -28,6 +28,7 @@ Namespace BusinessLayer
         Public Property PayElementName As String
         Public Property PayElementNameAra As String
         Public Property PayElementType As Char
+        Public Property ReportGroupIdNo As Int16
         Public Property FactorType As String
         Public Property FactorValue As Decimal
         Public Property Frequency As Char

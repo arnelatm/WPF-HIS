@@ -18,7 +18,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private _payrollEarnings As List(Of PayrollPayElementView)
         Private _payrollDeductions As List(Of PayrollPayElementView)
-        Private _payElementsByCode
+        Private _payEarningsByCode
+        Private _payDeductionsByCode
         Private _earningFooter
         Private _deductionFooter
 
@@ -56,10 +57,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int32 Implements IPayrollDetailView.IdNo
             Get
-                Return NumParser(Of Int16)(txtPayrollIdNo.Text)
+                Return NumParser(Of Int16)(txtIdNo.Text)
             End Get
             Set
-                txtPayrollIdNo.Text = Convert.ToString(Value)
+                txtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -131,7 +132,8 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _payElementsByCode = MyPresenter.GetLookup("PayElement")
+            _payEarningsByCode = MyPresenter.GetLookup("PayElement", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "' and Summary = 0")
+            _payDeductionsByCode = MyPresenter.GetLookup("PayElement", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "' and Summary = 0")
             cboEmployeeIdNo.BeginUpdate()
             cboEmployeeIdNo.DataSource = MyPresenter.GetLookup("Employee")
             cboEmployeeIdNo.EndUpdate()
@@ -144,7 +146,7 @@ Namespace PresentationLayer.Views.Forms
             bsEarnings.DataSource = PayrollEarnings
             bsEarnings.AllowNew = True
             With DataGridViewEarnings
-                dgvEarningIdNo.DataSource = _payElementsByCode
+                dgvEarningIdNo.DataSource = _payEarningsByCode
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
@@ -163,7 +165,7 @@ Namespace PresentationLayer.Views.Forms
             bsDeductions.DataSource = PayrollDeductions
             bsDeductions.AllowNew = True
             With DataGridViewDeductions
-                dgvDeductionIdNo.DataSource = _payElementsByCode
+                dgvDeductionIdNo.DataSource = _payDeductionsByCode
                 dgvDeductionIdNo.DisplayMember = "Name"
                 dgvDeductionIdNo.ValueMember = "IdNo"
                 dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True

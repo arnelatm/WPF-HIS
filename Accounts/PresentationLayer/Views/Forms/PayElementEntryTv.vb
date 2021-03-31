@@ -13,7 +13,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private _accountsByCode
         Private _payGroupsByCode
-        Private _PayElementsByCode
+        Private _payElementsByCode
+        Private _earnReportGroupsByCode
+        Private _dedReportGroupsByCode
         Private _factorTypeByCode
         Private _calculationTypeByCode
         Private _payElementAccounts As List(Of PayElementAccountView)
@@ -133,6 +135,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtPayElementCode.Text = Value
+            End Set
+        End Property
+
+        Public Property ReportGroupIdNo As Int16 Implements IPayElementView.ReportGroupIdNo
+            Get
+                Return cboReportGroupIdNo.GetValue()
+            End Get
+            Set
+                cboReportGroupIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -389,9 +400,21 @@ Namespace PresentationLayer.Views.Forms
             cboQuantityType.DataSource = PresenterObj.MakeEnumComboList(Of QuantityTypeSelection)
             _accountsByCode = PresenterObj.GetDetailAccountList()
             _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
-            _PayElementsByCode = PresenterObj.GetLookup("PayElement")
+            _earnReportGroupsByCode = PresenterObj.GetLookup("PayElementGroup", "PayElementKind = '" & PayElementKindSelection.Earning & "'")
+            _dedReportGroupsByCode = PresenterObj.GetLookup("PayElementGroup", "PayElementKind = '" & PayElementKindSelection.Deduction & "'")
+            _payElementsByCode = PresenterObj.GetLookup("PayElement")
             _factorTypeByCode = PresenterObj.MakeEnumComboList(Of FactorTypeSelection)
             _calculationTypeByCode = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
+            UpdateReportGroup()
+        End Sub
+
+        Private Sub UpdateReportGroup()
+            cboReportGroupIdNo.DataSource = Nothing
+            If cboPayElementKind.SelectedValue = EnumToCode(PayElementKindSelection.Deduction) Then
+                cboReportGroupIdNo.DataSource = _dedReportGroupsByCode
+            Else
+                cboReportGroupIdNo.DataSource = _earnReportGroupsByCode
+            End If
         End Sub
 
         Private Sub BindPayElementAccounts()
@@ -478,7 +501,7 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewPayElementItems.Columns
-                dgvPayElementIdNo.DataSource = _PayElementsByCode
+                dgvPayElementIdNo.DataSource = _payElementsByCode
                 dgvPayElementIdNo.DisplayMember = "Name"
                 dgvPayElementIdNo.ValueMember = "IdNo"
                 dgvPayElementIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -861,6 +884,10 @@ Namespace PresentationLayer.Views.Forms
             Else
                 n.SelectedImageIndex = 3
             End If
+        End Sub
+
+        Private Sub cboPayElementKind_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayElementKind.SelectedIndexChanged
+            UpdateReportGroup()
         End Sub
 
         'Public Overrides Function ValidateView()

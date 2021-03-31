@@ -465,10 +465,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetLookup(listName As String)
+    Public Function GetLookup(listName As String, Optional filter As String = Nothing)
         ComposeLookupParameters(listName)
         ProcessLookupFields()
-        Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
+        Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
     End Function
 
     Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
@@ -485,10 +485,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
     End Function
 
-    Public Function GetLookupNew(listName As String)
+    Public Function GetLookupNew(listName As String, Optional filter As String = Nothing)
         ComposeLookupParametersNew(listName)
         ProcessLookupFields()
-        Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow)
+        Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
     End Function
 
     Public Function GetOriginalModel() As TM
@@ -810,7 +810,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                             RecordPositionNumber = GetSortedRecordPosition(idNo)
                         End If
                     Else
-                        RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
+                        RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
+                        'RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
                     End If
                     If AddMode Then
                         AddMode = False

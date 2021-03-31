@@ -94,7 +94,7 @@ Namespace PresentationLayer.Presenters
         Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("Amount") = itemDataView.Amount
             workRow("PayElementIdNo") = itemDataView.PayElementIdNo
-            workRow("PayrollDetailIdNo") = itemDataView.PayrollDetailIdNo
+            workRow("PayrollDetailIdNo") = View.IdNo
         End Sub
 
         Public Function PayrollPayElementFilter(ByVal obj As Object) As Boolean
