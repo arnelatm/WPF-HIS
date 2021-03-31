@@ -400,8 +400,8 @@ Namespace PresentationLayer.Views.Forms
             cboQuantityType.DataSource = PresenterObj.MakeEnumComboList(Of QuantityTypeSelection)
             _accountsByCode = PresenterObj.GetDetailAccountList()
             _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
-            _earnReportGroupsByCode = PresenterObj.GetLookup("PayElementGroup", "PayElementKind = '" & PayElementKindSelection.Earning & "'")
-            _dedReportGroupsByCode = PresenterObj.GetLookup("PayElementGroup", "PayElementKind = '" & PayElementKindSelection.Deduction & "'")
+            _earnReportGroupsByCode = PresenterObj.GetLookup("PayElementGroup", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
+            _dedReportGroupsByCode = PresenterObj.GetLookup("PayElementGroup", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
             _payElementsByCode = PresenterObj.GetLookup("PayElement")
             _factorTypeByCode = PresenterObj.MakeEnumComboList(Of FactorTypeSelection)
             _calculationTypeByCode = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
@@ -814,8 +814,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Overrides Function ValidateView()
             Dim valid As Boolean
-            valid = MyPresenter.ValidateDataBoundGrid(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
-                    MyPresenter.ValidateDataBoundGrid(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
+            valid = MyPresenter.ValidateDataBoundGrid(Of PayElementItemModel)(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
+                    MyPresenter.ValidateDataBoundGrid(Of PayElementAccountModel)(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
             Return valid
         End Function
 

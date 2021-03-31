@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[PayElement] (
     [IdNo]              SMALLINT        IDENTITY (1, 1) NOT NULL,
-    [PayElementKind]   CHAR (1)        NULL,
+    [PayElementKind]    CHAR (1)        NULL,
     [PayElementCode]    VARCHAR (10)    NULL,
     [PayElementName]    VARCHAR (50)    NULL,
     [PayElementNameAra] NVARCHAR (50)   NULL,
@@ -18,9 +18,12 @@
     [Unit]              CHAR (1)        NULL,
     [QuantityType]      CHAR (1)        NULL,
     [UsePayGroups]      BIT             NULL,
+    [ReportGroupIdNo]   TINYINT         NULL,
     [Notes]             NVARCHAR (100)  NULL,
     [DateTimeStamp]     ROWVERSION      NULL,
     [Summary]           BIT             NULL,
     CONSTRAINT [PK_PayElement] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
