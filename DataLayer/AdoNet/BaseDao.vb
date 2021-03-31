@@ -171,25 +171,6 @@ Namespace AdoNet
             CType(obj, IDictionary(Of String, Object))(propertyName) = propertyValue
         End Sub
 
-        Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetFilteredRecords
-            Dim fields = String.Join(",", fieldNames)
-            Dim sql As String
-            If filterKey Is Nothing Or filterKey = "" Then
-                If sortKey Is Nothing Or sortKey = "" Then
-                    sql = " SELECT " & fields & " from [" & tableName & "]"
-                Else
-                    sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
-                End If
-            Else
-                If sortKey Is Nothing Or sortKey = "" Then
-                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
-                Else
-                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
-
-                End If
-            End If
-            Return _db.SqlRead(sql)
-        End Function
 
         Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetIdNoOfSortedPositionNumber
             Dim filterKey As String
@@ -358,6 +339,28 @@ Namespace AdoNet
                     " Where " & sortField & "< '" & nameValue & "'"
             Return _db.Scalar(sql)
         End Function
+
+
+        Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetFilteredRecords
+            Dim fields = String.Join(",", fieldNames)
+            Dim sql As String
+            If filterKey Is Nothing Or filterKey = "" Then
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fields & " from [" & tableName & "]"
+                Else
+                    sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
+                End If
+            Else
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
+                Else
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
+
+                End If
+            End If
+            Return _db.SqlRead(sql)
+        End Function
+
 
         Public Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object Implements IBaseDao.GetRecordsByField
             Dim fields = String.Join(",", fieldNames)

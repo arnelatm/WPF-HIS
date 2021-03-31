@@ -451,12 +451,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetFilteredLookupListByCodeName(listName As String, filter As String, Optional fieldName As String = Nothing)
-        ComposeLookupParameters(listName)
-        LookUpFilterKey = filter
-        Return GetFilteredLookupByCodeName()
-    End Function
-
     Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer) As Integer
         Try
             Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, SortOrderKey, DataFilter)
@@ -465,10 +459,25 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetLookup(listName As String, Optional filter As String = Nothing)
+    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing)
         ComposeLookupParameters(listName)
         ProcessLookupFields()
         Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
+    End Function
+
+    Public Overloads Function GetLookup(LookupTableToGet As String, LookUpSortExpression As String, LookupFieldsToShow As String(), Optional filter As String = Nothing)
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            Dim LookUpDisplayNameArabic As String = LookupFieldsToShow(1) + "Ara"
+            If LookUpSortExpression = LookupFieldsToShow(1) Then
+                LookUpSortExpression = LookUpDisplayNameArabic
+            End If
+            dFieldName = LookUpDisplayNameArabic
+        Else
+            dFieldName = LookUpDisplayName
+        End If
+        LookupFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
+        Return Model.GetLookup(LookupTableToGet, LookUpSortExpression, LookupFieldsToShow, filter)
     End Function
 
     Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
@@ -483,12 +492,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
         LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
         Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
-    End Function
-
-    Public Function GetLookupNew(listName As String, Optional filter As String = Nothing)
-        ComposeLookupParametersNew(listName)
-        ProcessLookupFields()
-        Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
     End Function
 
     Public Function GetOriginalModel() As TM

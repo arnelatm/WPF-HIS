@@ -45,9 +45,7 @@ Public Interface IModel
 
     Function GetLastSortKey(searchValue As String, tableName As String) As String
 
-    Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing)
-
-    Function GetLookupNew(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
 
     Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
 
