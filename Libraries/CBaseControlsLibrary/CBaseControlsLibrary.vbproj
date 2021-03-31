@@ -388,10 +388,6 @@
       <Project>{a7ee826e-e3b4-40a7-8754-285b373f4321}</Project>
       <Name>HelperLibraries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Languages\Languages.vbproj">
-      <Project>{667a2bd9-eff1-4d99-9eb4-6c6fda930079}</Project>
-      <Name>Languages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MessagingLibrary\MessagingLibrary.vbproj">
       <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
       <Name>MessagingLibrary</Name>

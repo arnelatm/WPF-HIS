@@ -350,7 +350,7 @@ Namespace PresentationLayer.Presenters
         '    Return valid
         'End Function
 
-        Public Function ValidateDataBoundGrid(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing)
+        Public Function ValidateDataBoundGrid(Of TMG As New)(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing)
             Dim errorFound As Boolean = False
             Dim rules = GetBizRules(viewProperty)
             Dim bo = GetBizObject(viewProperty)
@@ -359,8 +359,8 @@ Namespace PresentationLayer.Presenters
                     Dim colName = col.DataPropertyName
                     If rule.Property = colName Then
                         For Each row As DataGridViewRow In dataGridView.Rows
-                            Dim model As New TM
-                            If row.Index() < dataGridView.RowCount() - 1 Then
+                            Dim model As New TMG
+                            If row.Index() >= 0 AndAlso row.Index() < dataGridView.RowCount() - 1 Then
                                 GlobalVariables.Mapper.Map(viewProperty(row.Index()), model)
                                 GlobalVariables.Mapper.Map(model, bo)
                                 If Not bo.IsRuleValid(rule) Then
@@ -387,7 +387,6 @@ Namespace PresentationLayer.Presenters
             End If
             Return Not errorFound
         End Function
-
 
         Private ReadOnly _monthType = EnumToCode(PayRateUnitSelection.Month)
         Private ReadOnly _semiMonthType = EnumToCode(PayRateUnitSelection.SemiMonth)

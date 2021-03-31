@@ -410,10 +410,6 @@
       <Project>{A7EE826E-E3B4-40A7-8754-285B373F4321}</Project>
       <Name>HelperLibraries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\Languages\Languages.vbproj">
-      <Project>{667A2BD9-EFF1-4D99-9EB4-6C6FDA930079}</Project>
-      <Name>Languages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Libraries\LocalizationUtilities\LocalizationUtilities.csproj">
       <Project>{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}</Project>
       <Name>LocalizationUtilities</Name>

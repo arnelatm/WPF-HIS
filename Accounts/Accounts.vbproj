@@ -1287,9 +1287,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Ibn-server.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\app.manifest" />
@@ -1386,10 +1386,6 @@
     <ProjectReference Include="..\Libraries\HelperLibraries\HelperLibraries.vbproj">
       <Project>{a7ee826e-e3b4-40a7-8754-285b373f4321}</Project>
       <Name>HelperLibraries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\Languages\Languages.vbproj">
-      <Project>{667a2bd9-eff1-4d99-9eb4-6c6fda930079}</Project>
-      <Name>Languages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\LocalizationUtilities\LocalizationUtilities.csproj">
       <Project>{63aacd2c-a92e-4cf4-8f4d-49c774e2b1c6}</Project>
