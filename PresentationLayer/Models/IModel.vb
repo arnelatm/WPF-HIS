@@ -17,6 +17,8 @@ Public Interface IModel
 
     Function DelUpdateTvp(ByRef dtTable As DataTable, groupKey As Integer) As Integer
 
+    Function FieldExistInTable(tableName As String, fieldName As String) As Boolean
+
     Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) As Integer
 
     Function FindFieldContinue(tableName As String, idNo As Int32) As Integer

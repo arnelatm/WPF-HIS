@@ -315,32 +315,34 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
             Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
-                Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
-                Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                    Case $"dgvaccountidno"
-                        Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
-                            bsJournalItems.AddNew()
-                            JournalItems(nIndex).AccountIdNo = accountId
-                            ' adding a new row to the BindingSource adds a new empty row at the end with null values
-                            ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                            bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-                        End If
-                        MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
-                        bsJournalItems.ResetItem(nIndex)
-                        DataGridViewJournalItems.Refresh()
-                    Case $"dgvdebit"
-                        MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
-                        UpdateTotals()
-                        bsJournalItems.ResetItem(nIndex)
-                        SendKeys.Send("{TAB}")
-                    Case $"dgvcredit"
-                        MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
-                        UpdateTotals()
-                        bsJournalItems.ResetItem(nIndex)
-                    Case $"dgvnotes"
-                        SendKeys.Send("{DOWN}")
-                End Select
+                If .CurrentRow IsNot Nothing Then
+                    Dim nIndex = .CurrentRow.Index
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                        Case $"dgvaccountidno"
+                            Dim accountId = DirectCast(.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                            If .CurrentRow.Index = .NewRowIndex Then
+                                bsJournalItems.AddNew()
+                                JournalItems(nIndex).AccountIdNo = accountId
+                                ' adding a new row to the BindingSource adds a new empty row at the end with null values
+                                ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+                            End If
+                            MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
+                            bsJournalItems.ResetItem(nIndex)
+                            .Refresh()
+                        Case $"dgvdebit"
+                            MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            UpdateTotals()
+                            bsJournalItems.ResetItem(nIndex)
+                            SendKeys.Send("{TAB}")
+                        Case $"dgvcredit"
+                            MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            UpdateTotals()
+                            bsJournalItems.ResetItem(nIndex)
+                        Case $"dgvnotes"
+                            SendKeys.Send("{DOWN}")
+                    End Select
+                End If
             End With
         End Sub
 

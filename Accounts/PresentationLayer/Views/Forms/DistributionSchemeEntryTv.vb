@@ -240,24 +240,26 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDistributionSchemeItems.CellEndEdit
-            With DataGridViewDistributionSchemeItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
+            With DataGridViewDistributionSchemeItems
+                If .CurrentRow IsNot Nothing Then
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
                     'Case "dgvRevCostCenterIdNo"
                     '    dgvRevCostCenterIdNo.DisplayMember = "Name"
-                    Case "dgvpercentage"
-                        Dim amount = .Value
-                        If amount <> 0 Then
-                            Dim row = .OwningRow
-                            Dim selectedRow As DistributionSchemeItemModel
-                            selectedRow = DataGridViewDistributionSchemeItems.Rows(.RowIndex).DataBoundItem
-                            If amount > 100 Or amount < 0 Then
-                                selectedRow.Percentage = 0
-                                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvalidPercentageRange")
+                        Case "dgvpercentage"
+                            Dim amount = .CurrentCell.Value
+                            If amount <> 0 Then
+                                Dim row = .CurrentCell.OwningRow
+                                Dim selectedRow As DistributionSchemeItemModel
+                                selectedRow = DataGridViewDistributionSchemeItems.Rows(.CurrentCell.RowIndex).DataBoundItem
+                                If amount > 100 Or amount < 0 Then
+                                    selectedRow.Percentage = 0
+                                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvalidPercentageRange")
+                                End If
                             End If
-                        End If
-                        UpdateTotals()
-                        'SendKeys.Send("{HOME}{DOWN}{ENTER}")
-                End Select
+                            UpdateTotals()
+                            'SendKeys.Send("{HOME}{DOWN}{ENTER}")
+                    End Select
+                End If
             End With
         End Sub
 

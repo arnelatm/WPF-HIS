@@ -220,8 +220,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DataGridViewAttendance_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayrollAttendance.CellEndEdit
             With DataGridViewPayrollAttendance
-                Dim nIndex = .CurrentRow.Index
-                PayrollAttendance(nIndex).DaysAbsentWithoutPay = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysPresent
+                If .CurrentRow() IsNot Nothing Then
+                    Dim nIndex = .CurrentRow.Index
+                    PayrollAttendance(nIndex).DaysAbsentWithoutPay = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysPresent
+                End If
             End With
         End Sub
 
@@ -267,6 +269,7 @@ Namespace PresentationLayer.Views.Forms
             form = New PayrollDetailEntry(IdNo)
             form.Show()
         End Sub
+
     End Class
 
 End Namespace

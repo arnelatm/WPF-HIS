@@ -58,6 +58,8 @@ Public Interface IBaseDao
 
     Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object
 
+    Function FieldExistInTable(tableName As String, fieldName As String) As Boolean
+
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
     Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType

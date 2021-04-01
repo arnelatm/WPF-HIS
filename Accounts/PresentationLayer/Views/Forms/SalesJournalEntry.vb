@@ -323,22 +323,24 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SalesDepositDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesDeposits.CellEndEdit
-            With DataGridViewSalesDeposits.CurrentCell
-                Dim selectedRow As DataGridViewRow
-                Dim updateTotalNeeded As Boolean = True
-                selectedRow = DataGridViewSalesDeposits.Rows(.RowIndex)
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvdeposittypeidno"
-                        Dim value = DirectCast(DataGridViewSalesDeposits.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        PresenterObj.RecomputeBankCharges(value, selectedRow.Index)
-                    Case $"dgvsaleamount"
-                        Dim pDepositTypeIdNo = selectedRow.Cells("dgvDepositTypeIdNo").Value
-                        PresenterObj.RecomputeBankCharges(pDepositTypeIdNo, selectedRow.Index)
-                    Case Else
-                        updateTotalNeeded = False
-                End Select
-                If updateTotalNeeded Then
-                    UpdateTotals()
+            With DataGridViewSalesDeposits
+                If .CurrentRow() IsNot Nothing Then
+                    Dim selectedRow As DataGridViewRow
+                    Dim updateTotalNeeded As Boolean = True
+                    selectedRow = .Rows(.CurrentCell.RowIndex)
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                        Case $"dgvdeposittypeidno"
+                            Dim value = DirectCast(.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                            PresenterObj.RecomputeBankCharges(value, selectedRow.Index)
+                        Case $"dgvsaleamount"
+                            Dim pDepositTypeIdNo = selectedRow.Cells("dgvDepositTypeIdNo").Value
+                            PresenterObj.RecomputeBankCharges(pDepositTypeIdNo, selectedRow.Index)
+                        Case Else
+                            updateTotalNeeded = False
+                    End Select
+                    If updateTotalNeeded Then
+                        UpdateTotals()
+                    End If
                 End If
             End With
         End Sub
