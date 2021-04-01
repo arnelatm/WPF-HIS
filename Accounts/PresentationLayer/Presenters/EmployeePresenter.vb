@@ -104,7 +104,7 @@ Namespace PresentationLayer.Presenters
         Public Function GetEmployeeDeductions(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
             Dim _employeePayElementDao As New EmployeePayElementDao
             Dim employeeDeductionModel As New List(Of EmployeePayElementModel)
-            Dim employeeDeduction As List(Of EmployeePayElement) = _employeePayElementDao.GetRecords("PayElementKind = '" & PayElementKindSelection.Deduction & "' and EmployeeIdNo = " & View.IdNo)
+            Dim employeeDeduction As List(Of EmployeePayElement) = _employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Deduction & "' and EmployeeIdNo = " & View.IdNo)
             GlobalVariables.Mapper.Map(employeeDeduction, employeeDeductionModel)
             Return employeeDeductionModel
         End Function
@@ -112,7 +112,7 @@ Namespace PresentationLayer.Presenters
         Public Function GetEmployeeEarnings(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
             Dim _employeePayElementDao As New EmployeePayElementDao
             Dim employeeEarningModel As New List(Of EmployeePayElementModel)
-            Dim employeeEarning As List(Of EmployeePayElement) = _employeePayElementDao.GetRecords("PayElementKind = '" & PayElementKindSelection.Earning & "' and EmployeeIdNo = " & View.IdNo)
+            Dim employeeEarning As List(Of EmployeePayElement) = _employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Earning & "' and EmployeeIdNo = " & View.IdNo)
             GlobalVariables.Mapper.Map(employeeEarning, employeeEarningModel)
             Return employeeEarningModel
         End Function

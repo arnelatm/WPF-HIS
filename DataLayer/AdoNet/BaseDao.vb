@@ -134,9 +134,7 @@ Namespace AdoNet
         End Function
 
         Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject Implements IBaseDao.GetFieldsWithIdNo
-            Dim sql As String =
-                    " Select top 1 " & fieldsList & " FROM [" & tableName & "] " &
-                    " Where IdNo = @IdNo "
+            Dim sql As String = " Select top 1 " & fieldsList & " FROM [" & tableName & "] " & " Where IdNo = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
             Dim values As Object
             values = _db.SqlRead(sql, params)
@@ -338,6 +336,7 @@ Namespace AdoNet
                     " Where " & sortField & "< '" & nameValue & "'"
             Return _db.Scalar(sql)
         End Function
+
 
         Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetFilteredRecords
             Dim fields = String.Join(",", fieldNames)

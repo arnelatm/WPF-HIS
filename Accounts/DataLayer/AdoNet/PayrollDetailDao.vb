@@ -34,8 +34,8 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             Dim ppeDao = New PayrollPayElementDao()
-            data.PayrollEarnings = ppeDao.GetRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
-            data.PayrollDeductions = ppeDao.GetRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
+            data.PayrollEarnings = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
+            data.PayrollDeductions = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
             Return data
         End Function
 
@@ -63,7 +63,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function GetRecords(Optional filter As String = Nothing) As List(Of PayrollDetail) Implements IDaoGetRecords(Of PayrollDetail).GetRecords
+        Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of PayrollDetail) Implements IDaoGetRecords(Of PayrollDetail).GetDaoRecords
             Dim sql As String = "SELECT " &
                                 FieldList &
                                 " FROM [PayrollDetail_View]" &
@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function GetRecord(Optional filter As String = Nothing) As PayrollDetail Implements IDaoGetRecord(Of PayrollDetail).GetRecord
+        Public Function GetDaoRecord(Optional filter As String = Nothing) As PayrollDetail Implements IDaoGetRecord(Of PayrollDetail).GetDaoRecord
             Dim sql As String = "SELECT Top 1 " &
                                 FieldList &
                                 " FROM [PayrollDetail_View]" &

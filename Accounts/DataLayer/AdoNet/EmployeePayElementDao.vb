@@ -72,7 +72,7 @@ Namespace DataLayer.AdoNet
             .Unit = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Unit"))
            }
 
-        Public Function GetRecords(Optional filter As String = Nothing) As List(Of EmployeePayElement) Implements IDaoGetRecords(Of EmployeePayElement).GetRecords
+        Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of EmployeePayElement) Implements IDaoGetRecords(Of EmployeePayElement).GetDaoRecords
             Dim sql As String = "SELECT " &
                                 FieldList &
                                 " FROM [EmployeePayElement_View]" &
@@ -80,7 +80,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function GetRecord(Optional filter As String = Nothing) As EmployeePayElement Implements IDaoGetRecord(Of EmployeePayElement).GetRecord
+        Public Function GetDaoRecord(Optional filter As String = Nothing) As EmployeePayElement Implements IDaoGetRecord(Of EmployeePayElement).GetDaoRecord
             Dim sql As String = "SELECT " &
                                 FieldList &
                                 " FROM [EmployeePayElement_View]" &

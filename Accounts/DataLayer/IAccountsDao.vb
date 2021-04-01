@@ -58,13 +58,13 @@ Namespace DataLayer
 
     Public Interface IDaoGetRecords(Of TM)
 
-        Function GetRecords(Optional filter As String = Nothing) As List(Of TM)
+        Function GetDaoRecords(Optional filter As String = Nothing) As List(Of TM)
 
     End Interface
 
     Public Interface IDaoGetRecord(Of TM)
 
-        Function GetRecord(Optional filter As String = Nothing) As TM
+        Function GetDaoRecord(Optional filter As String = Nothing) As TM
 
     End Interface
 

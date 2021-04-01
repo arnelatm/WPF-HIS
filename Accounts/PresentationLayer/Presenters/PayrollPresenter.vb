@@ -503,7 +503,7 @@ Namespace PresentationLayer.Presenters
         '                                                 })
 
         '    '_absenceDeductions = New List(Of Deduction)
-        '    'Dim absencesDeductions = _deductionsDao.GetRecords("DeductionType = '" & .Computed) & "' and QuantityType = '" & EnumToCode(AttendanceUnitSelection.OvertimeSpecial) & "'")
+        '    'Dim absencesDeductions = _deductionsDao.GetDaoRecords("DeductionType = '" & .Computed) & "' and QuantityType = '" & EnumToCode(AttendanceUnitSelection.OvertimeSpecial) & "'")
         '    'GlobalVariables.Mapper.Map(absencesDeductions, _absenceDeductions)
         '    _deductionComputationMethod = GetAppSetting($"PYCM", "Payroll", "Deduction Computation Method")
 
@@ -565,10 +565,10 @@ Namespace PresentationLayer.Presenters
             Dim payrollDetailsModel As List(Of PayrollDetailModel)
             payrollDetailsModel = CreatePayrollDetails()
             Dim computedEarnings As List(Of PayElement)
-            computedEarnings = _payElementsDao.GetRecords("PayElementType = '" & _computedType & "' and Summary=0")
+            computedEarnings = _payElementsDao.GetDaoRecords("PayElementType = '" & _computedType & "' and Summary=0")
             GlobalVariables.Mapper.Map(computedEarnings, _computedPayElements)
             Dim globalEarnings As List(Of PayElement)
-            globalEarnings = _payElementsDao.GetRecords("CalculationType = '" & _globalType & "' and not Summary=0")
+            globalEarnings = _payElementsDao.GetDaoRecords("CalculationType = '" & _globalType & "' and not Summary=0")
             GlobalVariables.Mapper.Map(globalEarnings, _globalEarnings)
             progressBar.Value = 0
             progressBar.Maximum = payrollDetailsModel.Count() + 2
@@ -1232,7 +1232,7 @@ Namespace PresentationLayer.Presenters
             ElseIf quantityType = _daysLeaveWithoutPayType Then
                 quantity = GetAttendanceValues(employeeIdNo, "DaysAbsentWithoutPay")
             ElseIf quantityType = _daysPaidType Then
-                Dim attendanceItem As AttendanceItem = _attendanceItemDao.GetRecord(employeeIdNo)
+                Dim attendanceItem As AttendanceItem = _attendanceItemDao.GetRecordByIdNo(employeeIdNo)
                 quantity = attendanceItem.DaysPresent + attendanceItem.DaysAbsentWithPay + attendanceItem.DaysOff
             ElseIf quantityType = _overtimeRegularType Then
                 quantity = GetOtWorkHourValues(employeeIdNo, "OvertimeRegular")

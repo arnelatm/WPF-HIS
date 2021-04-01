@@ -43,7 +43,7 @@ Namespace DataLayer.AdoNet
             Return _db.UpdateInsertTvp("UpdateInsertPayrollPayElementTVP", updateTvpTable, insertTvpTable, groupIdNo)
         End Function
 
-        Public Function GetRecords(Optional filter As String = Nothing) As List(Of PayrollPayElement) Implements IDaoGetRecords(Of PayrollPayElement).GetRecords
+        Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of PayrollPayElement) Implements IDaoGetRecords(Of PayrollPayElement).GetDaoRecords
             Dim sql As String = "SELECT " &
                                 FieldList &
                                 " FROM [PayrollPayElement_View]" &
@@ -51,7 +51,7 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function GetRecord(Optional filter As String = Nothing) As PayrollPayElement Implements IDaoGetRecord(Of PayrollPayElement).GetRecord
+        Public Function GetDaoRecord(Optional filter As String = Nothing) As PayrollPayElement Implements IDaoGetRecord(Of PayrollPayElement).GetDaoRecord
             Dim sql As String = "SELECT Top 1 " &
                                 FieldList &
                                 " FROM [PayrollPayElement_View]" &

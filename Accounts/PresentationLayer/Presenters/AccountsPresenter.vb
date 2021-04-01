@@ -202,7 +202,6 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")
             Return GetLookup("Country", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
-            'Return GetLookupData("CountryName", "CountryNameAra", "CountryTelCode", "Country", sortKey, "")
         End Function
 
         Public Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
