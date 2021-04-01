@@ -427,6 +427,7 @@
     <Build Include="dbo\Tables\PayElementGroup.sql" />
     <Build Include="dbo\Views\PayrollReportRollUp_View.sql" />
     <Build Include="dbo\Views\PayrollReport_View.sql" />
+    <Build Include="dbo\Stored Procedures\spFieldExistInTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
