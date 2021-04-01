@@ -145,7 +145,7 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function GetRecords(Optional filter As String = Nothing) As List(Of PayElement) Implements IDaoGetRecords(Of PayElement).GetRecords
+        Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of PayElement) Implements IDaoGetRecords(Of PayElement).GetDaoRecords
             Dim sql As String = "SELECT " &
                                 FieldList &
                                 " FROM [PayElement]" &
@@ -153,7 +153,7 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function GetRecord(Optional filter As String = Nothing) As PayElement Implements IDaoGetRecord(Of PayElement).GetRecord
+        Public Function GetDaoRecord(Optional filter As String = Nothing) As PayElement Implements IDaoGetRecord(Of PayElement).GetDaoRecord
             Dim sql As String = "SELECT Top 1 " &
                                 FieldList &
                                 " FROM [PayElement]" &

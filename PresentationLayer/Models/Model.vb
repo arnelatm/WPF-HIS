@@ -122,7 +122,6 @@ Public Class Model
 
     Public Function GetFilteredLookupByName(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fields() As String) As List(Of ClassesLibrary.LookupData) Implements IModel.GetFilteredLookupByName
         Dim data = Service.GetFilteredRecords(tableName, sortKey, filterKey, fields)
-        Dim tlData = New List(Of ClassesLibrary.LookupData)
         Return ProcessLookupByName(data, fields.Count())
     End Function
 
@@ -409,20 +408,17 @@ Public Class Model
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         If fieldCount = 3 Then
             For i = 1 To Int(data.Count / 3)
-                Dim tData As New ClassesLibrary.LookupData With {
-                .IdNo = data(i * 3 - 3),
-                .Name = data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)),
-                .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
-            }
+                Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 3 - 3),
+                                                                  .Name = data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)),
+                                                                  .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+                                                                }
                 tlData.Add(tData)
             Next
         Else
             For i = 1 To Int(data.Count / 2)
-                Dim tData As New ClassesLibrary.LookupData With {
-                .IdNo = data(i * 2 - 2),
-                .Name = data(i * 2 - 1) & " | " & If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1)),
-                .Code = If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1))
-            }
+                Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 2 - 2),
+                                                                  .Name = data(i * 2 - 1) & " | " & data(i * 2 - 2)
+                                                                }
                 tlData.Add(tData)
             Next
         End If

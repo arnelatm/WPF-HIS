@@ -27,8 +27,8 @@ Namespace DataLayer.AdoNet
             Dim deductionDao = New EmployeePayElementDao
             Dim earningDao = New EmployeePayElementDao
             Dim phoneDao = New EmployeePhoneDao
-            Dim d As List(Of EmployeePayElement) = deductionDao.GetRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'")
-            Dim e As List(Of EmployeePayElement) = earningDao.GetRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'")
+            Dim d As List(Of EmployeePayElement) = deductionDao.GetDaoRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'")
+            Dim e As List(Of EmployeePayElement) = earningDao.GetDaoRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'")
             Dim p As List(Of EmployeePhone) = phoneDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
             data.RegularEmployeeDeductions = d
             data.RegularEmployeeEarnings = e

@@ -481,20 +481,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetLookup(LookupTableToGet, LookUpSortExpression, LookupFieldsToShow, filter)
     End Function
 
-    'Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
-    '    Dim dFieldName As String
-    '    If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-    '        If LookUpSortExpression = pDisplayName Then
-    '            LookUpSortExpression = pDisplayNameArabic
-    '        End If
-    '        dFieldName = pDisplayNameArabic
-    '    Else
-    '        dFieldName = pDisplayName
-    '    End If
-    '    LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
-    '    Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
-    'End Function
-
     Public Function GetOriginalModel() As TM
         Return OriginalModel
     End Function
@@ -639,9 +625,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
+                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
+                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
             Else
-                Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
+                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
+                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
             End If
         Else
             newSortOrderKey = "SortKey"

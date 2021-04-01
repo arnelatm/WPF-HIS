@@ -53,7 +53,7 @@ Namespace DataLayer.AdoNet
             Return Db.InsertTvp("InsertAttendanceItemTVP", tvpTable)
         End Function
 
-        Public Function GetRecord(Optional filter As String = Nothing) As AttendanceItem Implements IDaoGetRecord(Of AttendanceItem).GetRecord
+        Public Function GetDaoRecord(Optional filter As String = Nothing) As AttendanceItem Implements IDaoGetRecord(Of AttendanceItem).GetDaoRecord
             Dim sql As String = "SELECT Top 1 " &
                                 FieldList &
                                 " FROM [AttendanceItem_View]" &

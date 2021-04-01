@@ -51,7 +51,7 @@ Namespace DataLayer.AdoNet
             Return Db.InsertTvp("InsertOtWorkHourTVP", tvpTable)
         End Function
 
-        Public Function GetRecord(Optional filter As String = Nothing) As OtWorkHour Implements IDaoGetRecord(Of OtWorkHour).GetRecord
+        Public Function GetDaoRecord(Optional filter As String = Nothing) As OtWorkHour Implements IDaoGetRecord(Of OtWorkHour).GetDaoRecord
             Dim sql As String = "SELECT Top 1 " &
                                 FieldList &
                                 " FROM [OtWorkHour_View]" &
