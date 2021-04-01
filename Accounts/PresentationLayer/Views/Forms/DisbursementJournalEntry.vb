@@ -637,58 +637,62 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
-                Dim nIndex = .CurrentRow.Index
-                Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                    Case $"dgvaccountidno"
-                        Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
-                            bsJournalItems.AddNew()
-                            JournalItems(nIndex).AccountIdNo = accountId
-                            ' adding a new row to the bindingsource adds a new empty row at the end with null values
-                            ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                            bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-                        End If
-                        If JournalItems.Count() - 1 <= nIndex Then
-                            MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
+                If .CurrentRow IsNot Nothing Then
+                    Dim nIndex = .CurrentRow.Index
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                        Case $"dgvaccountidno"
+                            Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                            If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
+                                bsJournalItems.AddNew()
+                                JournalItems(nIndex).AccountIdNo = accountId
+                                ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                                ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+                            End If
+                            If JournalItems.Count() - 1 <= nIndex Then
+                                MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
+                                UpdateInputVatAmount()
+                                bsJournalItems.ResetItem(nIndex)
+                            End If
+                            DataGridViewJournalItems.Refresh()
+                        Case $"dgvdebit"
+                            MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            UpdateJiTotals()
                             UpdateInputVatAmount()
                             bsJournalItems.ResetItem(nIndex)
-                        End If
-                        DataGridViewJournalItems.Refresh()
-                    Case $"dgvdebit"
-                        MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
-                        UpdateJiTotals()
-                        UpdateInputVatAmount()
-                        bsJournalItems.ResetItem(nIndex)
-                        SendKeys.Send("{TAB}")
-                    Case $"dgvcredit"
-                        MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
-                        UpdateJiTotals()
-                        UpdateInputVatAmount()
-                        bsJournalItems.ResetItem(nIndex)
-                    Case $"dgvnotes"
-                        SendKeys.Send("{DOWN}")
-                End Select
+                            SendKeys.Send("{TAB}")
+                        Case $"dgvcredit"
+                            MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            UpdateJiTotals()
+                            UpdateInputVatAmount()
+                            bsJournalItems.ResetItem(nIndex)
+                        Case $"dgvnotes"
+                            SendKeys.Send("{DOWN}")
+                    End Select
+                End If
             End With
         End Sub
 
         Private Sub DjOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDjOiItems.CellEndEdit
-            With DataGridViewDjOiItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvamount"
-                        Dim selectedRow As DjOiItemView
-                        Dim amt = .Value
-                        selectedRow = DataGridViewDjOiItems.Rows(.RowIndex).DataBoundItem
-                        selectedRow.Balance = selectedRow.PreviousBalance - amt - selectedRow.DiscountTaken
-                        UpdateOiTotals()
-                    Case $"dgvdiscounttaken"
-                        Dim selectedRow As DjOiItemView
-                        Dim amt = .Value
-                        selectedRow = DataGridViewDjOiItems.Rows(.RowIndex).DataBoundItem
-                        selectedRow.Balance = selectedRow.PreviousBalance - selectedRow.Amount - amt
-                        UpdateOiTotals()
-                    Case $"dgvbalance"
-                        SendKeys.Send("{DOWN}")
-                End Select
+            With DataGridViewDjOiItems
+                If .CurrentRow IsNot Nothing Then
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                        Case $"dgvamount"
+                            Dim selectedRow As DjOiItemView
+                            Dim amt = .CurrentCell.Value
+                            selectedRow = DataGridViewDjOiItems.Rows(.CurrentCell.RowIndex).DataBoundItem
+                            selectedRow.Balance = selectedRow.PreviousBalance - amt - selectedRow.DiscountTaken
+                            UpdateOiTotals()
+                        Case $"dgvdiscounttaken"
+                            Dim selectedRow As DjOiItemView
+                            Dim amt = .CurrentCell.Value
+                            selectedRow = DataGridViewDjOiItems.Rows(.CurrentCell.RowIndex).DataBoundItem
+                            selectedRow.Balance = selectedRow.PreviousBalance - selectedRow.Amount - amt
+                            UpdateOiTotals()
+                        Case $"dgvbalance"
+                            SendKeys.Send("{DOWN}")
+                    End Select
+                End If
             End With
         End Sub
 

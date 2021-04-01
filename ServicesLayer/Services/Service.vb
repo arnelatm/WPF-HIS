@@ -295,6 +295,10 @@ Namespace Services
             Return BaseDao.GetRecordsByField(tableName, sortKey, fields, Filter)
         End Function
 
+        Public Function FieldExistInTable(ByVal tableName As String, fieldName As String) As Boolean Implements IService.FieldExistInTable
+            Return BaseDao.FieldExistInTable(tableName, fieldName)
+        End Function
+
         'Public Overloads Function GetFields(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetFields
         '    Return BaseDao.GetFields(tableName, sortKey, fields)
         'End Function

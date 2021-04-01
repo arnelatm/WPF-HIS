@@ -46,7 +46,7 @@ Namespace Services
 
         Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
 
-        'Function GetFields(ByVal tableName As String, ByVal sortKey As String, ByVal ParamArray fields() As String) As Object
+        Function FieldExistInTable(ByVal tableName As String, ByVal fieldName As String) As Boolean
 
         Function GetFilteredRecords(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) As Object
 

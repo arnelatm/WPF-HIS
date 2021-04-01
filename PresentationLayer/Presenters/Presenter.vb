@@ -468,31 +468,32 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Public Overloads Function GetLookup(LookupTableToGet As String, LookUpSortExpression As String, LookupFieldsToShow As String(), Optional filter As String = Nothing)
         Dim dFieldName As String
         If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            Dim LookUpDisplayNameArabic As String = LookupFieldsToShow(1) + "Ara"
-            If LookUpSortExpression = LookupFieldsToShow(1) Then
-                LookUpSortExpression = LookUpDisplayNameArabic
+            If Model.FieldExistInTable(LookupTableToGet, LookUpSortExpression.Trim() + "Ara") Then
+                LookUpSortExpression = LookUpSortExpression.Trim() + "Ara"
             End If
-            dFieldName = LookUpDisplayNameArabic
-        Else
-            dFieldName = LookUpDisplayName
+            If Model.FieldExistInTable(LookupFieldsToShow(1), LookupFieldsToShow(1).Trim() + "Ara") Then
+                dFieldName = LookupFieldsToShow(1).Trim() + "Ara"
+            Else
+                dFieldName = LookupFieldsToShow(1)
+            End If
+            LookupFieldsToShow = {LookupFieldsToShow(0), dFieldName, LookupFieldsToShow(2)}
         End If
-        LookupFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
         Return Model.GetLookup(LookupTableToGet, LookUpSortExpression, LookupFieldsToShow, filter)
     End Function
 
-    Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
-        Dim dFieldName As String
-        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If LookUpSortExpression = pDisplayName Then
-                LookUpSortExpression = pDisplayNameArabic
-            End If
-            dFieldName = pDisplayNameArabic
-        Else
-            dFieldName = pDisplayName
-        End If
-        LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
-        Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
-    End Function
+    'Public Function GetLookupData(pDisplayName, pDisplayNameArabic, pDisplayCode, pLookUpTableToGet, pLookUpSortExpression, pFilterKey)
+    '    Dim dFieldName As String
+    '    If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+    '        If LookUpSortExpression = pDisplayName Then
+    '            LookUpSortExpression = pDisplayNameArabic
+    '        End If
+    '        dFieldName = pDisplayNameArabic
+    '    Else
+    '        dFieldName = pDisplayName
+    '    End If
+    '    LookUpFieldsToShow = {"IdNo", dFieldName, pDisplayCode}
+    '    Return Model.GetFilteredLookupByCodeName(pLookUpTableToGet, pLookUpSortExpression, pFilterKey, LookUpFieldsToShow)
+    'End Function
 
     Public Function GetOriginalModel() As TM
         Return OriginalModel

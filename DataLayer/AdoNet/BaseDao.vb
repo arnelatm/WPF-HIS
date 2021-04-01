@@ -171,7 +171,6 @@ Namespace AdoNet
             CType(obj, IDictionary(Of String, Object))(propertyName) = propertyValue
         End Sub
 
-
         Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetIdNoOfSortedPositionNumber
             Dim filterKey As String
             If filter Is Nothing Then
@@ -340,7 +339,6 @@ Namespace AdoNet
             Return _db.Scalar(sql)
         End Function
 
-
         Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetFilteredRecords
             Dim fields = String.Join(",", fieldNames)
             Dim sql As String
@@ -361,7 +359,6 @@ Namespace AdoNet
             Return _db.SqlRead(sql)
         End Function
 
-
         Public Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object Implements IBaseDao.GetRecordsByField
             Dim fields = String.Join(",", fieldNames)
             Dim filterKey As String = ""
@@ -380,6 +377,12 @@ Namespace AdoNet
                 sql = " SELECT " & fields & " from [" & tableName & "] " & filterKey & " order by " & sortKey
             End If
             Return _db.SqlRead(sql)
+        End Function
+
+        Public Function FieldExistsInTable(tableName As String, fieldName As String) As Boolean Implements IBaseDao.FieldExistInTable
+            Dim retValue As Boolean
+            retValue = _db.FieldExistInTable(tableName, fieldName)
+            Return retValue
         End Function
 
         'Public Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetFields

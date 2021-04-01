@@ -256,21 +256,22 @@ Namespace PresentationLayer.Views.Forms
             _footer.SetText("DgvAccountIdNo", "Totals ->")
         End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
-                    Handles DataGridViewJournalItems.CellEndEdit
-            With DataGridViewJournalItems.CurrentCell
-                Select Case .OwningColumn.Name.ToLower()
-                    Case $"dgvaccountidno"
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
+            With DataGridViewJournalItems
+                If .CurrentRow IsNot Nothing Then
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                        Case $"dgvaccountidno"
                         'SendKeys.Send("{TAB}")
-                    Case $"dgvdebit"
-                        UpdateTotals()
-                        SendKeys.Send("{TAB}")
-                    Case $"dgvcredit"
-                        UpdateTotals()
-                    Case $"dgvnotes"
-                        SendKeys.Send("{DOWN}")
-                End Select
-                DataGridViewJournalItems.Refresh()
+                        Case $"dgvdebit"
+                            UpdateTotals()
+                            SendKeys.Send("{TAB}")
+                        Case $"dgvcredit"
+                            UpdateTotals()
+                        Case $"dgvnotes"
+                            SendKeys.Send("{DOWN}")
+                    End Select
+                    .Refresh()
+                End If
             End With
         End Sub
 

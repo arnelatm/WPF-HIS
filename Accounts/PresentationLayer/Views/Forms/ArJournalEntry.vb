@@ -385,35 +385,37 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
             Handles DataGridViewJournalItems.CellEndEdit
             With DataGridViewJournalItems
-                Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
-                Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                    Case $"dgvaccountidno"
-                        Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                        If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
-                            bsJournalItems.AddNew()
-                            JournalItems(nIndex).AccountIdNo = accountId
-                            ' adding a new row to the bindingsource adds a new empty row at the end with null values
-                            ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                            bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-                        End If
-                        MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
-                        UpdateOutputVatAmount()
-                        bsJournalItems.ResetItem(nIndex)
-                        DataGridViewJournalItems.Refresh()
-                    Case $"dgvdebit"
-                        MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
-                        UpdateTotals()
-                        UpdateOutputVatAmount()
-                        bsJournalItems.ResetItem(nIndex)
-                        SendKeys.Send("{TAB}")
-                    Case $"dgvcredit"
-                        MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
-                        UpdateTotals()
-                        UpdateOutputVatAmount()
-                        bsJournalItems.ResetItem(nIndex)
-                    Case $"dgvnotes"
-                        SendKeys.Send("{DOWN}")
-                End Select
+                If .CurrentRow IsNot Nothing Then
+                    Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
+                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+                        Case $"dgvaccountidno"
+                            Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                            If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
+                                bsJournalItems.AddNew()
+                                JournalItems(nIndex).AccountIdNo = accountId
+                                ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                                ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+                            End If
+                            MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
+                            UpdateOutputVatAmount()
+                            bsJournalItems.ResetItem(nIndex)
+                            DataGridViewJournalItems.Refresh()
+                        Case $"dgvdebit"
+                            MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            UpdateTotals()
+                            UpdateOutputVatAmount()
+                            bsJournalItems.ResetItem(nIndex)
+                            SendKeys.Send("{TAB}")
+                        Case $"dgvcredit"
+                            MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            UpdateTotals()
+                            UpdateOutputVatAmount()
+                            bsJournalItems.ResetItem(nIndex)
+                        Case $"dgvnotes"
+                            SendKeys.Send("{DOWN}")
+                    End Select
+                End If
             End With
         End Sub
 
@@ -442,7 +444,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) _
-		Handles DataGridViewJournalItems.UserDeletingRow
+        Handles DataGridViewJournalItems.UserDeletingRow
             Dim arJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(arJournalRow) Then
                 ' Do not allow the user to delete the first row.

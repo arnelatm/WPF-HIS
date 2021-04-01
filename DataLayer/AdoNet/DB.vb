@@ -1090,6 +1090,60 @@ Namespace AdoNet
             Return retValue
         End Function
 
+        Public Function FieldExistInTable(tableName As String, fieldName As String)
+            Dim retValue As Boolean
+            Dim tryAgain As Boolean
+            '_waitForm.Show()
+            Do While True
+                tryAgain = False
+                Try
+                    Using connection = CreateConnection()
+                        Using command As New SqlCommand("spFieldExistInTable")
+                            Try
+                                command.CommandType = CommandType.StoredProcedure
+                                command.Connection = connection
+                                command.Parameters.AddWithValue("TableName", tableName)
+                                command.Parameters.AddWithValue("FieldName", fieldName)
+
+                                'Dim carYearParameter As IDbDataParameter = command.CreateParameter()
+                                'carYearParameter.Direction = ParameterDirection.ReturnValue
+
+                                'command.Parameters.Add("@retValue", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.ReturnValue
+                                'connection.Open()
+                                Dim x = command.ExecuteNonQuery()
+                                retValue = x
+                                'connection.Close()
+                                Exit Do
+                            Catch ex As Exception
+                                retValue = -1
+                                MessageBox.Show(ex.Message)
+                                Throw
+                            End Try
+                        End Using
+                    End Using
+                Catch ex As Exception
+                    '_waitForm.Close()
+                    Select Case TryToCatchError(ex)
+                        Case DialogResult.Cancel
+                            'Exit Do
+                            retValue = -1
+                        Case DialogResult.Retry
+                            '_waitForm.Show()
+                            tryAgain = True
+                        Case Else
+                            MessageBox.Show(ex.Message)
+                            Throw
+                    End Select
+                Finally
+                    '_waitForm.Close()
+                End Try
+                If Not tryAgain Then
+                    Exit Do
+                End If
+            Loop
+            Return retValue
+        End Function
+
     End Class
 
     ' extension methods
