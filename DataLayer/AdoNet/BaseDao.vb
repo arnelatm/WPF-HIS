@@ -58,13 +58,14 @@ Namespace AdoNet
             Return _db.Delete(sql)
         End Function
 
-        Public Function FindField(tableName As String, fieldName As String, searchString As String,
-                                  Optional searchAnywhere As Boolean = False) As Integer _
-            Implements IBaseDao.FindField
+        Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchAnywhere As Boolean = False, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
             Dim retVal As Integer
             Dim sql As String =
                     " SELECT IdNo FROM [" & tableName & "] " &
                     " Where "
+            If Not (filter Is Nothing OrElse filter = "") Then
+                sql = sql & filter.Trim() & " and "
+            End If
             If searchAnywhere Then
                 searchString = "%" & searchString.Trim() & "%"
                 sql = sql & fieldName & " Like @SearchString "
@@ -337,8 +338,7 @@ Namespace AdoNet
             Return _db.Scalar(sql)
         End Function
 
-
-        Public Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ByVal ParamArray fieldNames() As String) As Object Implements IBaseDao.GetFilteredRecords
+        Public Function GetRecords(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecords
             Dim fields = String.Join(",", fieldNames)
             Dim sql As String
             If filterKey Is Nothing Or filterKey = "" Then
@@ -358,25 +358,25 @@ Namespace AdoNet
             Return _db.SqlRead(sql)
         End Function
 
-        Public Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object Implements IBaseDao.GetRecordsByField
-            Dim fields = String.Join(",", fieldNames)
-            Dim filterKey As String = ""
-            If Strings.Right(fields, 1) = "," Then
-                fields = Strings.Left(fields, Len(fields) - 1)
-            End If
-            Dim sql As String
-            If filter Is Nothing Then
-                filterKey = ""
-            Else
-                filterKey = " where " & filter
-            End If
-            If sortKey Is Nothing Or sortKey = "" Then
-                sql = " SELECT " & fields & " from [" & tableName & "]" & filterKey
-            Else
-                sql = " SELECT " & fields & " from [" & tableName & "] " & filterKey & " order by " & sortKey
-            End If
-            Return _db.SqlRead(sql)
-        End Function
+        'Public Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object Implements IBaseDao.GetRecordsByField
+        '    Dim fields = String.Join(",", fieldNames)
+        '    Dim filterKey As String = ""
+        '    If Strings.Right(fields, 1) = "," Then
+        '        fields = Strings.Left(fields, Len(fields) - 1)
+        '    End If
+        '    Dim sql As String
+        '    If filter Is Nothing Then
+        '        filterKey = ""
+        '    Else
+        '        filterKey = " where " & filter
+        '    End If
+        '    If sortKey Is Nothing Or sortKey = "" Then
+        '        sql = " SELECT " & fields & " from [" & tableName & "]" & filterKey
+        '    Else
+        '        sql = " SELECT " & fields & " from [" & tableName & "] " & filterKey & " order by " & sortKey
+        '    End If
+        '    Return _db.SqlRead(sql)
+        'End Function
 
         Public Function FieldExistsInTable(tableName As String, fieldName As String) As Boolean Implements IBaseDao.FieldExistInTable
             Dim retValue As Boolean

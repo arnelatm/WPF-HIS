@@ -82,12 +82,23 @@ Public Class CFormEntry
     Public Sub CheckDataChanges()
     End Sub
 
-    Public Sub FindField(txtControl As Control)
-        Dim fieldName As String = txtControl.Name.Substring(3)
+    Public Sub FindField(cControl As Control)
+        Dim fieldName As String = cControl.Name.Substring(3)
         Dim searchString As String
         Dim searchAnywhere As Boolean
-        searchString = CallByName(txtControl, "GetTextToSearch", CallType.Get)
-        searchAnywhere = CallByName(txtControl, "GetSearchAnywhere", CallType.Get)
+        searchString = CallByName(cControl, "GetTextToSearch", CallType.Get)
+        If TypeOf cControl Is CaComboBox Then
+            Dim caComboboxControl As CaComboBox = cControl
+            If fieldName Is Nothing OrElse fieldName = "" Then
+                'fieldName = cControl.Name
+            Else
+                If Not (caComboboxControl.SearchField Is Nothing OrElse caComboboxControl.SearchField = "") Then
+                    fieldName = caComboboxControl.SearchField
+                    'searchString = PresenterObj.FindFieldOnTable("Employee", fieldNameToSearch, searchString, searchAnywhere)
+                End If
+            End If
+        End If
+        searchAnywhere = CallByName(cControl, "GetSearchAnywhere", CallType.Get)
         PresenterObj.FindField(fieldName, searchString, searchAnywhere)
     End Sub
 

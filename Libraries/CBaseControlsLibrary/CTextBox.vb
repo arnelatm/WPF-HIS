@@ -120,6 +120,12 @@ Public Class CTextBox
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
+    <Description("Set to True to enable find on this field.")>
+    <Browsable(True)>
+    Public Property FindEnabled As Boolean
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
     <Description("Set to True to specify that this control doesn't change alignment.")>
     <Browsable(True)>
     Public Property FixedAlignment As Boolean
@@ -390,48 +396,30 @@ Public Class CTextBox
     End Sub
 
     Private Sub MenuItemFind_Click()
-        Dim myForm = FindForm()
-        Dim pnt As Point
-        Dim searchForm = New CFindForm
-        Dim screenRectangle As Rectangle
-        Dim formLocation As Point
-        screenRectangle = Screen.PrimaryScreen.WorkingArea
-        searchForm.StartPosition = FormStartPosition.Manual
-        pnt = myForm.PointToScreen(Location)
-        'If System.ComponentModel.LicenseManager.UsageMode <> System.ComponentModel.LicenseUsageMode.Designtime Then
-        '    If GlobalVariables.RightToLeftLayout Then
-        '        formLocation = New Point(pnt.X - Width - SearchForm.Width, pnt.Y)
-        '        If formLocation.X < 0 Then
-        '            formLocation.X = pnt.X - Width
-        '            formLocation.Y += Height
-        '        End If
-        '    Else
-        '        formLocation = New Point(pnt.X + Width, pnt.Y)
-        '        If formLocation.X + SearchForm.Width > screenRectangle.Width Then
-        '            formLocation.X = pnt.X - SearchForm.Width
-        '            If Not GlobalVariables.RightToLeftLayout Then
-        '                ' this will cover the label so add controls height to display the caption
-        '                formLocation.Y += Height
-        '            End If
-        '        End If
-        '    End If
-        'End If
-        If formLocation.Y + searchForm.Height > screenRectangle.Height Then
-            formLocation.Y = pnt.Y - searchForm.Height + Height
-        End If
-        searchForm.Location = formLocation
-        'If System.ComponentModel.LicenseManager.UsageMode <> System.ComponentModel.LicenseUsageMode.Designtime Then
-        '    SearchForm.RightToLeftLayout = myForm.RightToLeftLayout
-        '    SearchForm.RightToLeft = myForm.RightToLeft
-        'End If
-        searchForm.ShowDialog()
-        _textToSearch = searchForm.TextToSearch
-        _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
-        searchForm.Dispose()
-        If _textToSearch <> "" Then
+        If FindEnabled Then
+            Dim myForm = FindForm()
+            Dim pnt As Point
+            Dim searchForm = New CFindForm()
+            Dim screenRectangle As Rectangle
+            Dim formLocation As Point
+            screenRectangle = Screen.PrimaryScreen.WorkingArea
+            searchForm.StartPosition = FormStartPosition.Manual
+            pnt = myForm.PointToScreen(Location)
+            If formLocation.Y + searchForm.Height > screenRectangle.Height Then
+                formLocation.Y = pnt.Y - searchForm.Height + Height
+            End If
+            searchForm.Location = formLocation
+            searchForm.ShowDialog()
+            _textToSearch = searchForm.TextToSearch
+            _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
+            searchForm.Dispose()
+            If _textToSearch <> "" Then
 
-            CallByName(myForm, "FindField", CallType.Method, Me)
+                CallByName(myForm, "FindField", CallType.Method, Me)
 
+            End If
+        Else
+            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
         End If
     End Sub
 

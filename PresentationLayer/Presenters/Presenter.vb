@@ -197,15 +197,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Property TargetIdNo As Int32
         Get
-            If _targetIdNo = 0 Then
-                Debugger.Break()
-            End If
+            'If _targetIdNo = 0 Then
+            '    Debugger.Break()
+            'End If
             Return _targetIdNo
         End Get
         Set(value As Integer)
-            If value = 0 Then
-                Debugger.Break()
-            End If
+            'If value = 0 Then
+            '    Debugger.Break()
+            'End If
             _targetIdNo = value
             UpdateViewDisplay(value)
             If Ea IsNot Nothing Then
@@ -384,10 +384,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         '
     End Sub
 
-    Public Sub FindField(fieldName, searchString, searchAnywhere)
-        Dim idNo = Model.FindField(TableName, fieldName, searchString, searchAnywhere)
+    Public Sub FindField(fieldName As String, searchString As String, searchAnywhere As String)
+        Dim idNo = Model.FindField(TableName, fieldName, searchString, searchAnywhere, DataFilter)
         RecordPositionNumber = GetSortedRecordPosition(idNo)
     End Sub
+
+    Public Function FindFieldOnTable(tableNameToSearch, fieldName, searchString, searchAnywhere)
+        Dim idNo = Model.FindField(tableNameToSearch, fieldName, searchString, searchAnywhere, DataFilter)
+        Return idNo
+    End Function
 
     Public Function FindFieldContinue(idNo As Int32) As Integer
         Return Model.FindFieldContinue(TableName, idNo)
@@ -636,18 +641,17 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
                 Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
             Else
-                Return Model.GetHRecords(TableName, newSortOrderKey,
-                                      {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
+                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
             End If
         End If
     End Function
 
-    Public Function GetRecordsByField(ByVal tableName As String, ByVal sortOrder As String, fieldNames As String(), Optional filter As String = Nothing)
-        Return Model.GetRecordsByField(tableName, sortOrder, fieldNames, filter)
-    End Function
+    'Public Function GetRecordsByField(ByVal tableName As String, ByVal sortOrder As String, fieldNames As String(), Optional filter As String = Nothing)
+    '    Return Model.GetRecords(tableName, sortOrder, fieldNames, filter)
+    'End Function
 
-    Public Function GetFilteredRecords(ByVal tableName As String, ByVal sortOrder As String, ByVal filter As String, ByVal ParamArray fieldNames() As String)
-        Return Model.GetFilteredRecords(tableName, sortOrder, filter, fieldNames)
+    Public Function GetRecords(ByVal tableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
+        Return Model.GetRecords(tableName, sortOrder, fieldNames, filter)
     End Function
 
     'Public Function GetFields(ByVal tableName As String, ByVal sortOrder As String, ByVal ParamArray fieldNames() As String)
@@ -1121,19 +1125,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return False
     End Function
 
-    Protected Function GetFilteredLookupByCodeName()
+    Protected Function GetLookupByCodeName()
         ProcessLookupFields()
-        Return Model.GetFilteredLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        Return Model.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
     End Function
 
-    Protected Function GetFilteredLookupByName()
+    Protected Function GetLookupByName()
         ProcessLookupFields()
-        Return Model.GetFilteredLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        Return Model.GetLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
     End Function
 
-    Protected Function GetFilteredLookupByNameCode()
+    Protected Function GetLookupByNameCode()
         ProcessLookupFields()
-        Return Model.GetFilteredLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFilterKey, LookUpFieldsToShow)
+        Return Model.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
     End Function
 
     Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String

@@ -113,12 +113,6 @@
     <Compile Include="CDTPHijriDate.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CFindForm.Designer.vb">
-      <DependentUpon>CFindForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CFindForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CGDateTimePicker.Designer.vb">
       <DependentUpon>CGDateTimePicker.vb</DependentUpon>
     </Compile>
@@ -231,9 +225,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CDTPHijriDate.resx">
       <DependentUpon>CDTPHijriDate.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CFindForm.resx">
-      <DependentUpon>CFindForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CGDateTimePicker.resx">
       <DependentUpon>CGDateTimePicker.vb</DependentUpon>

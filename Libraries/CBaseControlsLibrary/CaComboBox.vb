@@ -33,6 +33,7 @@ Public Class CaComboBox
 
     Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
     Private ReadOnly _defaultDropDownHeight As Int16
+    Private _searchField As String
 
     'Private _selectable As Boolean
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
@@ -239,6 +240,20 @@ Public Class CaComboBox
     End Property
 
     Public Property TextToSearch As String
+
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(String))>
+    <Description("Specify here the displayed field name to search")>
+    <Browsable(True)>
+    Public Property SearchField As String
+        Get
+            Return _searchField
+        End Get
+        Set(value As String)
+            _searchField = value
+        End Set
+    End Property
 
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
@@ -717,18 +732,22 @@ Public Class CaComboBox
     End Sub
 
     Private Sub MenuItemFind_Click()
-        'Dim MyForm = Me.FindForm()
-        'Dim SearchForm = New CFindForm
-        ''SearchForm.Show()
-        'SearchForm.ShowDialog()
-        '_TextToSearch = SearchForm.TextToSearch
-        '_SearchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
-        'SearchForm.Dispose()
-        'If _TextToSearch <> "" Then
+        Dim MyForm = Me.FindForm()
+        Dim SearchForm
+        If Me.SearchField Is Nothing OrElse Me.SearchField = "" Then
+            SearchForm = New CFindForm()
+        Else
+            SearchForm = New CFindForm()
+        End If
+        SearchForm.ShowDialog()
+        _TextToSearch = SearchForm.TextToSearch
+        _SearchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
+        SearchForm.Dispose()
+        If _TextToSearch <> "" Then
 
-        '    CallByName(MyForm, "FindField", CallType.Method, Me)
+            CallByName(MyForm, "FindField", CallType.Method, Me)
 
-        'End If
+        End If
     End Sub
 
     Private Sub MenuItemSelectAll_Click()

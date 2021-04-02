@@ -231,8 +231,8 @@ Namespace Services
             Return BaseDao.DeleteRecord(idNo, tableName)
         End Function
 
-        Public Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) As Integer Implements IService.FindField
-            Return BaseDao.FindField(tableName, fieldName, searchString, searchAnywhere)
+        Public Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean, Optional filter As String = Nothing) As Integer Implements IService.FindField
+            Return BaseDao.FindField(tableName, fieldName, searchString, searchAnywhere, filter)
         End Function
 
         Public Function FindFieldContinue(tableName As String, idNo As Int32) As Integer Implements IService.FindFieldContinue
@@ -247,8 +247,8 @@ Namespace Services
             Return BaseDao.GetFieldsWithIdNo(idNo, tableName, fields)
         End Function
 
-        Public Function GetFilteredRecords(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) As Object Implements IService.GetFilteredRecords
-            Return BaseDao.GetFilteredRecords(tableName, sortKey, filterKey, fields)
+        Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal fields As String(), Optional filterKey As String = Nothing) As Object Implements IService.GetRecords
+            Return BaseDao.GetRecords(tableName, sortKey, fields, filterKey)
         End Function
 
         Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IService.GetIdNoOfSortedPositionNumber
@@ -291,9 +291,9 @@ Namespace Services
             Return BaseDao.GetRecordPosition(tableName, idNo)
         End Function
 
-        Public Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, fields As String(), Optional Filter As String = Nothing) As Object Implements IService.GetRecordsByField
-            Return BaseDao.GetRecordsByField(tableName, sortKey, fields, Filter)
-        End Function
+        'Public Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, fields As String(), Optional Filter As String = Nothing) As Object Implements IService.GetRecordsByField
+        '    Return BaseDao.GetRecordsByField(tableName, sortKey, fields, Filter)
+        'End Function
 
         Public Function FieldExistInTable(ByVal tableName As String, fieldName As String) As Boolean Implements IService.FieldExistInTable
             Return BaseDao.FieldExistInTable(tableName, fieldName)

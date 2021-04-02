@@ -569,7 +569,7 @@ Namespace PresentationLayer.Views.Forms
             '    Case DataGridViewReconciliationItems.Columns.IndexOf(dgvDebit)
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindForm
+            Dim searchForm = New CFindForm()
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea

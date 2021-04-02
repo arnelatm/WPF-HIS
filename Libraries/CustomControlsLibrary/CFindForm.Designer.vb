@@ -27,7 +27,8 @@ Partial Class CFindForm
         Me.BtnFind = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.lblTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.SuspendLayout
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.SuspendLayout()
         '
         'TxtTextToSearch
         '
@@ -38,27 +39,27 @@ Partial Class CFindForm
         '
         'RBtnStart
         '
-        Me.RBtnStart.AutoSize = true
+        Me.RBtnStart.AutoSize = True
         Me.RBtnStart.BackColor = System.Drawing.Color.Transparent
-        Me.RBtnStart.Checked = true
+        Me.RBtnStart.Checked = True
         Me.RBtnStart.Location = New System.Drawing.Point(54, 68)
         Me.RBtnStart.Name = "RBtnStart"
-        Me.RBtnStart.Size = New System.Drawing.Size(87, 17)
+        Me.RBtnStart.Size = New System.Drawing.Size(84, 17)
         Me.RBtnStart.TabIndex = 2
-        Me.RBtnStart.TabStop = true
+        Me.RBtnStart.TabStop = True
         Me.RBtnStart.Text = "Start of Field"
-        Me.RBtnStart.UseVisualStyleBackColor = false
+        Me.RBtnStart.UseVisualStyleBackColor = False
         '
         'RBtnAnywhere
         '
-        Me.RBtnAnywhere.AutoSize = true
+        Me.RBtnAnywhere.AutoSize = True
         Me.RBtnAnywhere.BackColor = System.Drawing.Color.Transparent
         Me.RBtnAnywhere.Location = New System.Drawing.Point(54, 92)
         Me.RBtnAnywhere.Name = "RBtnAnywhere"
-        Me.RBtnAnywhere.Size = New System.Drawing.Size(114, 17)
+        Me.RBtnAnywhere.Size = New System.Drawing.Size(112, 17)
         Me.RBtnAnywhere.TabIndex = 3
         Me.RBtnAnywhere.Text = "Anywhere on Field"
-        Me.RBtnAnywhere.UseVisualStyleBackColor = false
+        Me.RBtnAnywhere.UseVisualStyleBackColor = False
         '
         'BtnFind
         '
@@ -67,7 +68,7 @@ Partial Class CFindForm
         Me.BtnFind.Size = New System.Drawing.Size(75, 23)
         Me.BtnFind.TabIndex = 4
         Me.BtnFind.Text = "Find"
-        Me.BtnFind.UseVisualStyleBackColor = true
+        Me.BtnFind.UseVisualStyleBackColor = True
         '
         'BtnCancel
         '
@@ -77,13 +78,15 @@ Partial Class CFindForm
         Me.BtnCancel.Size = New System.Drawing.Size(75, 23)
         Me.BtnCancel.TabIndex = 5
         Me.BtnCancel.Text = "Cancel"
-        Me.BtnCancel.UseVisualStyleBackColor = true
+        Me.BtnCancel.UseVisualStyleBackColor = True
         '
         'lblTextToSearch
         '
-        Me.lblTextToSearch.AutoSize = true
+        Me.lblTextToSearch.AutoSize = True
         Me.lblTextToSearch.BackColor = System.Drawing.Color.Transparent
-        Me.lblTextToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblTextToSearch.DisplayOnly = True
+        Me.lblTextToSearch.EditingMode = False
+        Me.lblTextToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblTextToSearch.Location = New System.Drawing.Point(10, 24)
         Me.lblTextToSearch.Margin = New System.Windows.Forms.Padding(1)
         Me.lblTextToSearch.Name = "lblTextToSearch"
@@ -92,11 +95,22 @@ Partial Class CFindForm
         Me.lblTextToSearch.Text = "Look For"
         Me.lblTextToSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'Button1
+        '
+        Me.Button1.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.Button1.Location = New System.Drawing.Point(130, 158)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 7
+        Me.Button1.Text = "Cancel"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'CFindForm
         '
         Me.AcceptButton = Me.BtnFind
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(334, 171)
+        Me.ClientSize = New System.Drawing.Size(334, 196)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblTextToSearch)
         Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.BtnFind)
@@ -117,4 +131,5 @@ End Sub
     Friend WithEvents BtnFind As Windows.Forms.Button
     Friend WithEvents BtnCancel As Windows.Forms.Button
     Friend WithEvents lblTextToSearch As CLabel
+    Friend WithEvents Button1 As Button
 End Class
