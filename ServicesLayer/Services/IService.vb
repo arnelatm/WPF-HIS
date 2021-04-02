@@ -16,7 +16,7 @@ Namespace Services
 
         Function DelUpdateTvp(dtTable As DataTable, groupKey As Integer) As Integer
 
-        Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean) As Integer
+        Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean, Optional filter As String = Nothing) As Integer
 
         Function FindFieldContinue(tableName As String, idNo As Int32) As Integer
 
@@ -44,11 +44,11 @@ Namespace Services
 
         Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
-        Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
+        'Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
 
         Function FieldExistInTable(ByVal tableName As String, ByVal fieldName As String) As Boolean
 
-        Function GetFilteredRecords(ByVal tableName As String, ByVal sortKey As String, ByVal filterKey As String, ByVal ParamArray fields() As String) As Object
+        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal fields As String(), Optional filterKey As String = Nothing) As Object
 
         Function GetRecordsWithGroupIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) As List(Of TM)
 

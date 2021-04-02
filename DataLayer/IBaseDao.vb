@@ -13,8 +13,7 @@ Public Interface IBaseDao
 
     Function DeleteRecord(idNo As Int32, tableName As String) As Int32
 
-    Function FindField(tableName As String, fieldName As String, searchString As String,
-                       Optional searchAnywhere As Boolean = False) As Integer
+    Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchAnywhere As Boolean = False, Optional filter As String = Nothing) As Integer
 
     Function FindFieldContinue(tableName As String, lastIdNo As Int32) As Object
 
@@ -28,7 +27,7 @@ Public Interface IBaseDao
 
     Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject
 
-    Function GetFilteredRecords(tableName As String, sortKey As String, filterKey As String, ParamArray fieldNames() As String) As Object
+    Function GetRecords(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object
 
     Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
@@ -56,7 +55,7 @@ Public Interface IBaseDao
 
     Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) As Integer
 
-    Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object
+    'Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object
 
     Function FieldExistInTable(tableName As String, fieldName As String) As Boolean
 

@@ -901,7 +901,6 @@ Namespace PresentationLayer.Views.Forms
             Me.Controls.Add(Me.Account)
             Me.IsMdiContainer = True
             Me.Name = "Main"
-            Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ToolStrip.ResumeLayout(False)
             Me.ToolStrip.PerformLayout()

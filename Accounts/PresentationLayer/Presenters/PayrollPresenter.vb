@@ -232,7 +232,7 @@ Namespace PresentationLayer.Presenters
         Public Sub InitializeAttendance()
             Dim payFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString()
-            Dim activeEmployees = GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"})
+            Dim activeEmployees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"}, employeeFilter)
             'Dim earningDao = New EarningDao
             'Dim earnings = earningDao.GetAll()
             Dim numberOfEmployees = Int(activeEmployees.Count() / 4)
@@ -256,7 +256,7 @@ Namespace PresentationLayer.Presenters
                 'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithGroupIdNo(emp, "sequence")
                 'Dim filter As String
                 'filter = "EmployeeIdNo = " & emp.ToString()
-                'Dim employeeEarnings = PresenterObj.GetFilteredRecords("EmployeeEarning", "", filter, {"EarningIdNo", "Amount"})
+                'Dim employeeEarnings = PresenterObj.GetRecords("EmployeeEarning", "", {"EarningIdNo", "Amount"}, filter)
 
                 empId = activeEmployees(i * 4 - 4)
                 empName = activeEmployees(i * 4 - 3)
@@ -325,7 +325,7 @@ Namespace PresentationLayer.Presenters
         Public Sub InitializeOvertime()
             Dim payFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString()
-            Dim matchedEmployees = GetFilteredRecords("Employee", "EmployeeName", employeeFilter, {"IdNo", "HiredDate", "ReleasedDate"})
+            Dim matchedEmployees = GetRecords("Employee", "EmployeeName", {"IdNo", "HiredDate", "ReleasedDate"}, employeeFilter)
             Dim numberOfEmployees = Int(matchedEmployees.Count() / 3)
             Dim seq As Int16
             Dim dateHired As Date

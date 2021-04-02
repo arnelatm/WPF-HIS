@@ -84,6 +84,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgSysPayElementNotAllowed", "This is a system reserved pay element, deletion not allowed!", "Error")
         Messaging.AddMessage("MsgCannotEditReadOnly", "Sorry either this item Is read only Or you don't have the proper security credentials to change this value. Reverting to original value.", "Error")
         Messaging.AddMessage("MsgSelectedValueNotAllowed", "Sorry selected value for {field1} not allowed for selected {field2}.", "Error")
+        Messaging.AddMessage("MsgNothingToFind", "Either this is a fixed field value or find not enabled for this field.", "Warning")
 
     End Sub
 

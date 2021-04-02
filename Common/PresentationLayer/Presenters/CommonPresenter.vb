@@ -48,14 +48,14 @@ Namespace PresentationLayer.Presenters
                 End If
                 LookUpFilterKey = LookUpFilterKey + "SpecialAccount = '" & account & "'"
             Next
-            Return GetFilteredLookupByCodeName()
+            Return GetLookupByCodeName()
         End Function
 
         Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountCode")
             ComposeLookupParameters("Account")
             LookUpSortExpression = sortKey
             LookUpFilterKey = "DetailAccount=1"
-            Return GetFilteredLookupByCodeName()
+            Return GetLookupByCodeName()
         End Function
 
         Public Function GetEnumList(Of TE)()
