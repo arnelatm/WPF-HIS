@@ -19,6 +19,8 @@ Public Interface IModel
 
     Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean, Optional filter As String = Nothing) As Integer
 
+    Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDates As Date?, Optional filter As String = Nothing) As Integer
+
     Function FindFieldContinue(tableName As String, idNo As Int32) As Integer
 
     Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM)

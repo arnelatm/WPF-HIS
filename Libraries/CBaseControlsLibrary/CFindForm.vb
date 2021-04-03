@@ -7,14 +7,14 @@ Public Class CFindForm
 
     Private _TextToSearch As String
     Private _SearchAnywhere As Boolean
-    Private _useCombobox As Boolean
+    Private _searchMode As Int16
     Private _control As Control
 
-    Public Sub New(useComboBox As Boolean, Optional cControl As Control = Nothing)
+    Public Sub New(searchMode As Int16, Optional cControl As Control = Nothing)
 
         ' This call is required by the designer.
         InitializeComponent()
-        _useCombobox = useComboBox
+        _searchMode = searchMode
         _control = cControl
         ' Add any initialization after the InitializeComponent() call.
 
@@ -51,15 +51,21 @@ Public Class CFindForm
     End Function
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
-        If _useCombobox Then
+        If _searchMode = 1 Then
+            ' combobox Search
             _TextToSearch = cboTextToSearch.SelectedValue
-        Else
+            _SearchAnywhere = False
+        ElseIf _searchMode = 0 Then
+            ' textbox search
             _TextToSearch = TxtTextToSearch.Text
             If RBtnStart.Checked Then
                 _SearchAnywhere = False
             Else
                 _SearchAnywhere = True
             End If
+        ElseIf _searchMode = 2 Then
+            ' date search
+            SearchAnywhere = False
         End If
         Close()
     End Sub
@@ -91,9 +97,11 @@ Public Class CFindForm
 
     Private Sub CFindForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetFormLocation()
-        If _useCombobox Then
+        If _searchMode = 1 Then
+            ' combobox search
             lblLookFor1.Visible = False
             lblLookFor2.Visible = True
+            lblLookFor3.Visible = False
             TxtTextToSearch.Visible = False
             cboTextToSearch.Visible = True
             RBtnAnywhere.Visible = False
@@ -102,13 +110,46 @@ Public Class CFindForm
             cboTextToSearch.DataSource = myComboBox.DataSource
             cboTextToSearch.DisplayMember = myComboBox.DisplayMember
             cboTextToSearch.ValueMember = myComboBox.ValueMember
-        Else
+            dtpBegDate.Visible = False
+            dtpEndDate.Visible = False
+            lblTo.Visible = False
+
+        ElseIf _searchMode = 0 Then
+            ' textbox search
             lblLookFor1.Visible = True
             lblLookFor2.Visible = False
+            lblLookFor3.Visible = False
             TxtTextToSearch.Visible = True
             cboTextToSearch.Visible = False
             RBtnAnywhere.Visible = True
             RBtnStart.Visible = True
+            dtpBegDate.Visible = False
+            dtpEndDate.Visible = False
+            lblTo.Visible = False
+        ElseIf _searchMode = 2 Then
+            ' date search
+            dtpBegDate.Visible = True
+            dtpEndDate.Visible = True
+            lblLookFor1.Visible = False
+            lblLookFor2.Visible = False
+            lblLookFor3.Visible = True
+            TxtTextToSearch.Visible = False
+            cboTextToSearch.Visible = False
+            RBtnAnywhere.Visible = False
+            RBtnStart.Visible = False
+            lblTo.Visible = True
+        End If
+    End Sub
+
+    Private Sub dtpBegDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpBegDate.ValueChanged
+        If dtpBegDate.Value > dtpEndDate.Value Then
+            dtpEndDate.Value = dtpBegDate.Value
+        End If
+    End Sub
+
+    Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.ValueChanged
+        If dtpEndDate.Value < dtpBegDate.Value Then
+            dtpBegDate.Value = dtpEndDate.Value
         End If
     End Sub
 

@@ -18,6 +18,8 @@ Namespace Services
 
         Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean, Optional filter As String = Nothing) As Integer
 
+        Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer
+
         Function FindFieldContinue(tableName As String, idNo As Int32) As Integer
 
         Function GetAll(ByRef Optional sortKey As String = Nothing) As Object

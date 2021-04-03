@@ -104,19 +104,19 @@ Public Class CMaskedTextBox
     <Browsable(True)>
     Public Property EmptyMask As String = ""
 
-    '<Bindable(True)>
-    '<Category("Properties")>
-    '<DefaultValue(GetType(String))>
-    '<Description("Specify here the displayed field name to search")>
-    '<Browsable(True)>
-    'Public Property SearchField As String
-    '    Get
-    '        Return _searchField
-    '    End Get
-    '    Set(value As String)
-    '        _searchField = value
-    '    End Set
-    'End Property
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(String))>
+    <Description("Specify here the displayed field name to search")>
+    <Browsable(True)>
+    Public Property SearchField As String
+        Get
+            Return _searchField
+        End Get
+        Set(value As String)
+            _searchField = value
+        End Set
+    End Property
 
     'Public Property OldValue() As String
     '    Get
@@ -298,7 +298,7 @@ Public Class CMaskedTextBox
 
     Private Sub MenuItemFind_Click()
         Dim MyForm = FindForm()
-        Dim SearchForm = New CFindForm(False)
+        Dim SearchForm = New CFindForm(2)
         'SearchForm.Show()
         SearchForm.ShowDialog()
         _textToSearch = SearchForm.TextToSearch
@@ -307,7 +307,7 @@ Public Class CMaskedTextBox
         If _textToSearch <> "" Then
 
             CallByName(MyForm, "FindField", CallType.Method, Me)
-
+            SearchForm.Dispose()
         End If
     End Sub
 

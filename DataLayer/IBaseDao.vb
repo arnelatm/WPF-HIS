@@ -15,6 +15,8 @@ Public Interface IBaseDao
 
     Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchAnywhere As Boolean = False, Optional filter As String = Nothing) As Integer
 
+    Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer
+
     Function FindFieldContinue(tableName As String, lastIdNo As Int32) As Object
 
     Function GetControlSecurityIdNo(searchValue As String) As String
@@ -72,7 +74,6 @@ Public Interface IBaseDao
 
     Function IsFieldUnique(tableName As String, fieldName As String) As Boolean
 
-    Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) _
-        As Integer
+    Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
 
 End Interface

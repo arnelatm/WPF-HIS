@@ -58,7 +58,7 @@ Partial Class CCustomDateTimePicker
         Me.txtLongDate.CustomFormat = Nothing
         Me.txtLongDate.DataBoundControl = true
         Me.txtLongDate.DisplayOnly = true
-        Me.txtLongDate.Editable = true
+        Me.txtLongDate.Editable = True
         Me.txtLongDate.EditingMode = True
         Me.txtLongDate.FindEnabled = True
         Me.txtLongDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -89,6 +89,7 @@ Partial Class CCustomDateTimePicker
         Me.txtDate.MaximumValue = Nothing
         Me.txtDate.MinimumValue = Nothing
         Me.txtDate.Name = "txtDate"
+        Me.txtDate.SearchField = Nothing
         Me.txtDate.SecurityKey = Nothing
         Me.txtDate.Size = New System.Drawing.Size(75, 23)
         Me.txtDate.TabIndex = 15
