@@ -55,6 +55,12 @@ Namespace PresentationLayer.Views.Forms
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
             resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
             'TranslatorDAC
             '
             Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
@@ -72,6 +78,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
@@ -91,6 +98,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtFieldName.CustomFormat = Nothing
             Me.txtFieldName.DataBoundControl = True
             Me.txtFieldName.EditingMode = True
+            Me.txtFieldName.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtFieldName, True)
             resources.ApplyResources(Me.txtFieldName, "txtFieldName")
             Me.txtFieldName.ForeColor = System.Drawing.Color.Black
@@ -149,8 +157,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSystemViewIdNo.CurrentSearchTerm = ""
             Me.cboSystemViewIdNo.DefaultValue = Nothing
             Me.cboSystemViewIdNo.DisplayMember = "Name"
-            Me.cboSystemViewIdNo.DropDownHeight = 200
-            Me.cboSystemViewIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboSystemViewIdNo.EditingMode = True
             Me.cboSystemViewIdNo.FilterRule = Nothing
             resources.ApplyResources(Me.cboSystemViewIdNo, "cboSystemViewIdNo")
@@ -168,6 +174,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSystemViewIdNo.PropertySelector = Nothing
             Me.cboSystemViewIdNo.ReadOnlyCombo = False
             Me.cboSystemViewIdNo.SearchAnywhere = False
+            Me.cboSystemViewIdNo.SearchField = Nothing
             Me.cboSystemViewIdNo.SuggestBoxHeight = 200
             Me.cboSystemViewIdNo.SuggestListOrderRule = Nothing
             Me.cboSystemViewIdNo.TextToSearch = Nothing
@@ -197,8 +204,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDataType.CurrentSearchTerm = ""
             Me.cboDataType.DefaultValue = Nothing
             Me.cboDataType.DisplayMember = "Name"
-            Me.cboDataType.DropDownHeight = 200
-            Me.cboDataType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboDataType.EditingMode = True
             Me.cboDataType.FilterRule = Nothing
             resources.ApplyResources(Me.cboDataType, "cboDataType")
@@ -216,6 +221,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDataType.PropertySelector = Nothing
             Me.cboDataType.ReadOnlyCombo = False
             Me.cboDataType.SearchAnywhere = False
+            Me.cboDataType.SearchField = Nothing
             Me.cboDataType.SuggestBoxHeight = 200
             Me.cboDataType.SuggestListOrderRule = Nothing
             Me.cboDataType.TextToSearch = Nothing
@@ -239,6 +245,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLength.CustomFormat = Nothing
             Me.txtLength.DataBoundControl = True
             Me.txtLength.EditingMode = True
+            Me.txtLength.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtLength, True)
             resources.ApplyResources(Me.txtLength, "txtLength")
             Me.txtLength.ForeColor = System.Drawing.Color.Black
@@ -266,6 +273,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDecimalPart.CustomFormat = Nothing
             Me.txtDecimalPart.DataBoundControl = True
             Me.txtDecimalPart.EditingMode = True
+            Me.txtDecimalPart.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtDecimalPart, True)
             resources.ApplyResources(Me.txtDecimalPart, "txtDecimalPart")
             Me.txtDecimalPart.ForeColor = System.Drawing.Color.Black
@@ -292,6 +300,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLinkedTable.CustomFormat = Nothing
             Me.txtLinkedTable.DataBoundControl = True
             Me.txtLinkedTable.EditingMode = True
+            Me.txtLinkedTable.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtLinkedTable, True)
             resources.ApplyResources(Me.txtLinkedTable, "txtLinkedTable")
             Me.txtLinkedTable.ForeColor = System.Drawing.Color.Black
@@ -318,6 +327,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLinkedField.CustomFormat = Nothing
             Me.txtLinkedField.DataBoundControl = True
             Me.txtLinkedField.EditingMode = True
+            Me.txtLinkedField.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtLinkedField, True)
             resources.ApplyResources(Me.txtLinkedField, "txtLinkedField")
             Me.txtLinkedField.ForeColor = System.Drawing.Color.Black
@@ -344,6 +354,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDefaultValue.CustomFormat = Nothing
             Me.txtDefaultValue.DataBoundControl = True
             Me.txtDefaultValue.EditingMode = True
+            Me.txtDefaultValue.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtDefaultValue, True)
             resources.ApplyResources(Me.txtDefaultValue, "txtDefaultValue")
             Me.txtDefaultValue.ForeColor = System.Drawing.Color.Black
@@ -363,6 +374,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSystemViewNameAra.CustomFormat = Nothing
             Me.txtSystemViewNameAra.DataBoundControl = True
             Me.txtSystemViewNameAra.EditingMode = True
+            Me.txtSystemViewNameAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtSystemViewNameAra, True)
             resources.ApplyResources(Me.txtSystemViewNameAra, "txtSystemViewNameAra")
             Me.txtSystemViewNameAra.ForeColor = System.Drawing.Color.Black
@@ -382,6 +394,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSystemViewName.CustomFormat = Nothing
             Me.txtSystemViewName.DataBoundControl = True
             Me.txtSystemViewName.EditingMode = True
+            Me.txtSystemViewName.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtSystemViewName, True)
             resources.ApplyResources(Me.txtSystemViewName, "txtSystemViewName")
             Me.txtSystemViewName.ForeColor = System.Drawing.Color.Black

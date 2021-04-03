@@ -120,12 +120,6 @@ Public Class CTextBox
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
-    <Description("Set to True to enable find on this field.")>
-    <Browsable(True)>
-    Public Property FindEnabled As Boolean
-
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
     <Description("Set to True to specify that this control doesn't change alignment.")>
     <Browsable(True)>
     Public Property FixedAlignment As Boolean
@@ -175,6 +169,11 @@ Public Class CTextBox
     <Description("Set to True to specify that this control must be unique, however blanks allowed.")>
     <Browsable(True)>
     Public Property ValueIsUniqueBlanksAllowed As Boolean
+
+    <Category("Custom Properties")>
+    <Description("Set to True to enable find on this field.")>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    Public Property FindEnabled As Boolean
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -399,7 +398,7 @@ Public Class CTextBox
         If FindEnabled Then
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindForm()
+            Dim searchForm = New CFindForm(False)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea

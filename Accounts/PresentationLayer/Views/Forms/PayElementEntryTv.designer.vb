@@ -207,6 +207,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.PropertySelector = Nothing
             Me.cboReportGroupIdNo.ReadOnlyCombo = False
             Me.cboReportGroupIdNo.SearchAnywhere = False
+            Me.cboReportGroupIdNo.SearchField = Nothing
             Me.cboReportGroupIdNo.SuggestBoxHeight = 200
             Me.cboReportGroupIdNo.SuggestListOrderRule = Nothing
             Me.cboReportGroupIdNo.TextToSearch = Nothing
@@ -246,6 +247,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementKind.PropertySelector = Nothing
             Me.cboPayElementKind.ReadOnlyCombo = False
             Me.cboPayElementKind.SearchAnywhere = False
+            Me.cboPayElementKind.SearchField = Nothing
             Me.cboPayElementKind.SuggestBoxHeight = 200
             Me.cboPayElementKind.SuggestListOrderRule = Nothing
             Me.cboPayElementKind.TextToSearch = Nothing
@@ -279,6 +281,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.txtPayElementNameAra, "txtPayElementNameAra")
             Me.txtPayElementNameAra.EditingMode = False
             Me.txtPayElementNameAra.EnglishControl = Me.txtPayElementName
+            Me.txtPayElementNameAra.FindEnabled = True
             Me.txtPayElementNameAra.ForeColor = System.Drawing.Color.Black
             Me.txtPayElementNameAra.LinkedLabel = Nothing
             Me.txtPayElementNameAra.MaximumValue = Nothing
@@ -297,6 +300,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayElementName.DataBoundControl = True
             resources.ApplyResources(Me.txtPayElementName, "txtPayElementName")
             Me.txtPayElementName.EditingMode = False
+            Me.txtPayElementName.FindEnabled = True
             Me.txtPayElementName.ForeColor = System.Drawing.Color.Black
             Me.MyErrorProvider.SetIconAlignment(Me.txtPayElementName, CType(resources.GetObject("txtPayElementName.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
             Me.txtPayElementName.LinkedLabel = Nothing
@@ -322,6 +326,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayElementCode.CustomFormat = Nothing
             Me.txtPayElementCode.DataBoundControl = True
             Me.txtPayElementCode.EditingMode = True
+            Me.txtPayElementCode.FindEnabled = True
             resources.ApplyResources(Me.txtPayElementCode, "txtPayElementCode")
             Me.txtPayElementCode.ForeColor = System.Drawing.Color.Black
             Me.MyErrorProvider.SetIconAlignment(Me.txtPayElementCode, CType(resources.GetObject("txtPayElementCode.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
@@ -351,6 +356,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DisplayOnly = True
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
             Me.TxtIdNo.MaximumValue = Nothing
@@ -483,6 +489,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboQuantityType.PropertySelector = Nothing
             Me.cboQuantityType.ReadOnlyCombo = False
             Me.cboQuantityType.SearchAnywhere = False
+            Me.cboQuantityType.SearchField = Nothing
             Me.cboQuantityType.SuggestBoxHeight = 200
             Me.cboQuantityType.SuggestListOrderRule = Nothing
             Me.cboQuantityType.TextToSearch = Nothing
@@ -516,6 +523,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCalculationType.PropertySelector = Nothing
             Me.cboCalculationType.ReadOnlyCombo = False
             Me.cboCalculationType.SearchAnywhere = False
+            Me.cboCalculationType.SearchField = Nothing
             Me.cboCalculationType.SuggestBoxHeight = 200
             Me.cboCalculationType.SuggestListOrderRule = Nothing
             Me.cboCalculationType.TextToSearch = Nothing
@@ -547,6 +555,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtRate.DataBoundControl = True
             resources.ApplyResources(Me.txtRate, "txtRate")
             Me.txtRate.EditingMode = True
+            Me.txtRate.FindEnabled = True
             Me.txtRate.ForeColor = System.Drawing.Color.Black
             Me.txtRate.LinkedLabel = Me.lblRate
             Me.txtRate.MaximumValue = Nothing
@@ -570,6 +579,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDefaultQuantity.DataBoundControl = True
             resources.ApplyResources(Me.txtDefaultQuantity, "txtDefaultQuantity")
             Me.txtDefaultQuantity.EditingMode = True
+            Me.txtDefaultQuantity.FindEnabled = True
             Me.txtDefaultQuantity.ForeColor = System.Drawing.Color.Black
             Me.txtDefaultQuantity.LinkedLabel = Me.lblDefaultQuantity
             Me.txtDefaultQuantity.MaximumValue = Nothing
@@ -616,6 +626,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.PropertySelector = Nothing
             Me.cboBasePaymentIdNo.ReadOnlyCombo = False
             Me.cboBasePaymentIdNo.SearchAnywhere = False
+            Me.cboBasePaymentIdNo.SearchField = Nothing
             Me.cboBasePaymentIdNo.SuggestBoxHeight = 200
             Me.cboBasePaymentIdNo.SuggestListOrderRule = Nothing
             Me.cboBasePaymentIdNo.TextToSearch = Nothing
@@ -655,6 +666,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMultiplier.DataBoundControl = True
             resources.ApplyResources(Me.txtMultiplier, "txtMultiplier")
             Me.txtMultiplier.EditingMode = True
+            Me.txtMultiplier.FindEnabled = True
             Me.txtMultiplier.ForeColor = System.Drawing.Color.Black
             Me.txtMultiplier.LinkedLabel = Me.lblFactorValue
             Me.txtMultiplier.MaximumValue = Nothing
@@ -687,6 +699,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFactorType.PropertySelector = Nothing
             Me.cboFactorType.ReadOnlyCombo = False
             Me.cboFactorType.SearchAnywhere = False
+            Me.cboFactorType.SearchField = Nothing
             Me.cboFactorType.SuggestBoxHeight = 200
             Me.cboFactorType.SuggestListOrderRule = Nothing
             Me.cboFactorType.TextToSearch = Nothing
@@ -755,6 +768,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.PropertySelector = Nothing
             Me.cboUnit.ReadOnlyCombo = False
             Me.cboUnit.SearchAnywhere = False
+            Me.cboUnit.SearchField = Nothing
             Me.cboUnit.SuggestBoxHeight = 200
             Me.cboUnit.SuggestListOrderRule = Nothing
             Me.cboUnit.TextToSearch = Nothing
@@ -795,6 +809,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementType.PropertySelector = Nothing
             Me.cboPayElementType.ReadOnlyCombo = False
             Me.cboPayElementType.SearchAnywhere = False
+            Me.cboPayElementType.SearchField = Nothing
             Me.cboPayElementType.SuggestBoxHeight = 200
             Me.cboPayElementType.SuggestListOrderRule = Nothing
             Me.cboPayElementType.TextToSearch = Nothing
@@ -868,6 +883,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SearchAnywhere = False
+            Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
@@ -1145,6 +1161,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.DataBoundControl = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
             Me.txtNotes.MaximumValue = Nothing

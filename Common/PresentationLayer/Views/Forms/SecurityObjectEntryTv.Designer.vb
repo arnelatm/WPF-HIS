@@ -46,8 +46,14 @@ Namespace PresentationLayer.Views.Forms
             '
             'TreeViewTableName
             '
-            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
             '
             'TxtIdNo
             '
@@ -58,6 +64,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
@@ -78,6 +85,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSecurityObjectName.CustomFormat = Nothing
             Me.txtSecurityObjectName.DataBoundControl = True
             Me.txtSecurityObjectName.EditingMode = False
+            Me.txtSecurityObjectName.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtSecurityObjectName, True)
             resources.ApplyResources(Me.txtSecurityObjectName, "txtSecurityObjectName")
             Me.txtSecurityObjectName.ForeColor = System.Drawing.Color.Black
@@ -98,6 +106,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSecurityObjectNameAra.DataBoundControl = True
             Me.txtSecurityObjectNameAra.EditingMode = False
             Me.txtSecurityObjectNameAra.EnglishControl = Me.txtSecurityObjectName
+            Me.txtSecurityObjectNameAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtSecurityObjectNameAra, True)
             resources.ApplyResources(Me.txtSecurityObjectNameAra, "txtSecurityObjectNameAra")
             Me.txtSecurityObjectNameAra.ForeColor = System.Drawing.Color.Black
@@ -116,6 +125,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
@@ -166,6 +176,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSecurityObjectCode.CustomFormat = Nothing
             Me.txtSecurityObjectCode.DataBoundControl = True
             Me.txtSecurityObjectCode.EditingMode = False
+            Me.txtSecurityObjectCode.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtSecurityObjectCode, True)
             resources.ApplyResources(Me.txtSecurityObjectCode, "txtSecurityObjectCode")
             Me.txtSecurityObjectCode.ForeColor = System.Drawing.Color.Black
@@ -205,8 +216,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.CurrentSearchTerm = ""
             Me.cacParentIdNo.DefaultValue = Nothing
             Me.cacParentIdNo.DisplayMember = "Name"
-            Me.cacParentIdNo.DropDownHeight = 1
-            Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cacParentIdNo.EditingMode = False
             Me.cacParentIdNo.FilterRule = Nothing
             resources.ApplyResources(Me.cacParentIdNo, "cacParentIdNo")
@@ -224,6 +233,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.ReadOnlyCombo = False
             Me.cacParentIdNo.SearchAnywhere = False
+            Me.cacParentIdNo.SearchField = Nothing
             Me.cacParentIdNo.SuggestBoxHeight = 200
             Me.cacParentIdNo.SuggestListOrderRule = Nothing
             Me.cacParentIdNo.TextToSearch = Nothing
@@ -243,7 +253,7 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "SecurityObjectEntryTv"
+            Me.Name = "SecurityObjectEntryTv"
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

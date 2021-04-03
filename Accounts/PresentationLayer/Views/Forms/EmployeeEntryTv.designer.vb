@@ -81,7 +81,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblReligion = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacReligionIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.tbcEmployee = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tbpPersonal = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
@@ -568,7 +568,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayGroupIdNo.EditingMode = False
             Me.lblPayGroupIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayGroupIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayGroupIdNo.Location = New System.Drawing.Point(4, 182)
+            Me.lblPayGroupIdNo.Location = New System.Drawing.Point(4, 183)
             Me.lblPayGroupIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayGroupIdNo.Name = "lblPayGroupIdNo"
             Me.lblPayGroupIdNo.Size = New System.Drawing.Size(185, 23)
@@ -592,7 +592,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayGroupIdNo.HideWhenNotEditingOrAdding = False
             Me.cboPayGroupIdNo.IntegralHeight = False
             Me.cboPayGroupIdNo.LinkedLabel = Me.lblPayGroupIdNo
-            Me.cboPayGroupIdNo.Location = New System.Drawing.Point(190, 182)
+            Me.cboPayGroupIdNo.Location = New System.Drawing.Point(190, 183)
             Me.cboPayGroupIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboPayGroupIdNo.Name = "cboPayGroupIdNo"
             Me.cboPayGroupIdNo.OldValue = 0
@@ -621,7 +621,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDutyHours.EditingMode = False
             Me.lblDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblDutyHours.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDutyHours.Location = New System.Drawing.Point(4, 208)
+            Me.lblDutyHours.Location = New System.Drawing.Point(4, 210)
             Me.lblDutyHours.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDutyHours.Name = "lblDutyHours"
             Me.lblDutyHours.Size = New System.Drawing.Size(185, 23)
@@ -644,7 +644,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDutyHours.ForeColor = System.Drawing.Color.Black
             Me.txtDutyHours.LinkedLabel = Me.lblDutyHours
-            Me.txtDutyHours.Location = New System.Drawing.Point(191, 208)
+            Me.txtDutyHours.Location = New System.Drawing.Point(191, 210)
             Me.txtDutyHours.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDutyHours.MaximumValue = Nothing
             Me.txtDutyHours.MinimumValue = Nothing
@@ -726,8 +726,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeNameAra.DisplayOnly = True
             Me.txtEmployeeNameAra.Editable = True
             Me.txtEmployeeNameAra.EditingMode = False
-            Me.txtEmployeeNameAra.FindEnabled = True
             Me.txtEmployeeNameAra.EnglishControl = Me.txtEmployeeName
+            Me.txtEmployeeNameAra.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtEmployeeNameAra, True)
             Me.txtEmployeeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtEmployeeNameAra.ForeColor = System.Drawing.Color.Black
@@ -784,7 +784,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floPersonal.SetFlowBreak(Me.dtpBirthDate, True)
             Me.dtpBirthDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpBirthDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpBirthDate.LinkedLabel = Me.lblBirthDate
+            Me.dtpBirthDate.LinkedLabel = Nothing
             Me.dtpBirthDate.Location = New System.Drawing.Point(176, 104)
             Me.dtpBirthDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpBirthDate.Name = "dtpBirthDate"
@@ -906,19 +906,19 @@ Namespace PresentationLayer.Views.Forms
             Me.cacNationalityCode.ValueIsNumeric = False
             Me.cacNationalityCode.ValueMember = "Code"
             '
-            'CLabel5
+            'lblReligion
             '
-            Me.CLabel5.DisplayOnly = True
-            Me.CLabel5.EditingMode = False
-            Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel5.Location = New System.Drawing.Point(1, 79)
-            Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel5.Name = "CLabel5"
-            Me.CLabel5.Size = New System.Drawing.Size(175, 24)
-            Me.CLabel5.TabIndex = 249
-            Me.CLabel5.Text = "Religion"
-            Me.CLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblReligion.DisplayOnly = True
+            Me.lblReligion.EditingMode = False
+            Me.lblReligion.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblReligion.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblReligion.Location = New System.Drawing.Point(1, 79)
+            Me.lblReligion.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblReligion.Name = "lblReligion"
+            Me.lblReligion.Size = New System.Drawing.Size(175, 24)
+            Me.lblReligion.TabIndex = 249
+            Me.lblReligion.Text = "Religion"
+            Me.lblReligion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'cacReligionIdNo
             '
@@ -999,7 +999,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floPersonal.Controls.Add(Me.cacMaritalStatus)
             Me.floPersonal.Controls.Add(Me.lblNationalityCode)
             Me.floPersonal.Controls.Add(Me.cacNationalityCode)
-            Me.floPersonal.Controls.Add(Me.CLabel5)
+            Me.floPersonal.Controls.Add(Me.lblReligion)
             Me.floPersonal.Controls.Add(Me.cacReligionIdNo)
             Me.floPersonal.Controls.Add(Me.lblBirthDate)
             Me.floPersonal.Controls.Add(Me.dtpBirthDate)
@@ -1727,7 +1727,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout5.SetFlowBreak(Me.dtpHiredDate, True)
             Me.dtpHiredDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpHiredDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpHiredDate.LinkedLabel = Me.lblHiredDate
+            Me.dtpHiredDate.LinkedLabel = Nothing
             Me.dtpHiredDate.Location = New System.Drawing.Point(179, 3)
             Me.dtpHiredDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpHiredDate.Name = "dtpHiredDate"
@@ -1767,7 +1767,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout5.SetFlowBreak(Me.dtpReleasedDate, True)
             Me.dtpReleasedDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpReleasedDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpReleasedDate.LinkedLabel = Me.lblReleasedDate
+            Me.dtpReleasedDate.LinkedLabel = Nothing
             Me.dtpReleasedDate.Location = New System.Drawing.Point(179, 29)
             Me.dtpReleasedDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpReleasedDate.Name = "dtpReleasedDate"
@@ -2525,7 +2525,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents cacMaritalStatus As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblNationalityCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents CLabel5 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents lblReligion As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacReligionIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CaComboBox

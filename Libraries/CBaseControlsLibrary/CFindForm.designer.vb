@@ -26,14 +26,14 @@ Partial Class CFindForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.TxtTextToSearch = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblLookFor1 = New System.Windows.Forms.Label()
         Me.RBtnStart = New System.Windows.Forms.RadioButton()
         Me.RBtnAnywhere = New System.Windows.Forms.RadioButton()
         Me.BtnFind = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.CaComboBox1 = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblLookFor2 = New System.Windows.Forms.Label()
+        Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -47,15 +47,15 @@ Partial Class CFindForm
         Me.TxtTextToSearch.Size = New System.Drawing.Size(245, 20)
         Me.TxtTextToSearch.TabIndex = 0
         '
-        'Label1
+        'lblLookFor1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Location = New System.Drawing.Point(3, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(49, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Look For"
+        Me.lblLookFor1.AutoSize = True
+        Me.lblLookFor1.BackColor = System.Drawing.Color.Transparent
+        Me.lblLookFor1.Location = New System.Drawing.Point(3, 0)
+        Me.lblLookFor1.Name = "lblLookFor1"
+        Me.lblLookFor1.Size = New System.Drawing.Size(49, 13)
+        Me.lblLookFor1.TabIndex = 1
+        Me.lblLookFor1.Text = "Look For"
         '
         'RBtnStart
         '
@@ -108,11 +108,11 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor2, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtTextToSearch, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.RBtnAnywhere, 1, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.CaComboBox1, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.cboTextToSearch, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.RBtnStart, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 4)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
@@ -127,52 +127,54 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(306, 136)
         Me.TableLayoutPanel1.TabIndex = 6
         '
-        'Label2
+        'lblLookFor2
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Location = New System.Drawing.Point(3, 26)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(49, 13)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Look For"
+        Me.lblLookFor2.AutoSize = True
+        Me.lblLookFor2.BackColor = System.Drawing.Color.Transparent
+        Me.lblLookFor2.Location = New System.Drawing.Point(3, 26)
+        Me.lblLookFor2.Name = "lblLookFor2"
+        Me.lblLookFor2.Size = New System.Drawing.Size(49, 13)
+        Me.lblLookFor2.TabIndex = 2
+        Me.lblLookFor2.Text = "Look For"
         '
-        'CaComboBox1
+        'cboTextToSearch
         '
-        Me.CaComboBox1.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.CaComboBox1.ChangingSearchValueOnly = False
-        Me.CaComboBox1.CurrentSearchTerm = ""
-        Me.CaComboBox1.DefaultValue = Nothing
-        Me.CaComboBox1.DisplayMember = "Name"
-        Me.CaComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CaComboBox1.EditingMode = True
-        Me.CaComboBox1.FilterRule = Nothing
-        Me.CaComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.CaComboBox1.FormattingEnabled = True
-        Me.CaComboBox1.HideWhenNotEditingOrAdding = False
-        Me.CaComboBox1.LinkedLabel = Nothing
-        Me.CaComboBox1.Location = New System.Drawing.Point(56, 27)
-        Me.CaComboBox1.Margin = New System.Windows.Forms.Padding(1)
-        Me.CaComboBox1.Name = "CaComboBox1"
-        Me.CaComboBox1.OldValue = 0
-        Me.CaComboBox1.OriginalDataSource = Nothing
-        Me.CaComboBox1.OriginalList = Nothing
-        Me.CaComboBox1.OverrideDropDownStyleList = False
-        Me.CaComboBox1.PreviousSearchTerm = Nothing
-        Me.CaComboBox1.PreviousSelectedIndex = -1
-        Me.CaComboBox1.PropertySelector = Nothing
-        Me.CaComboBox1.ReadOnlyCombo = False
-        Me.CaComboBox1.SearchAnywhere = False
-        Me.CaComboBox1.SearchField = Nothing
-        Me.CaComboBox1.Size = New System.Drawing.Size(249, 24)
-        Me.CaComboBox1.SuggestBoxHeight = 200
-        Me.CaComboBox1.SuggestListOrderRule = Nothing
-        Me.CaComboBox1.TabIndex = 3
-        Me.CaComboBox1.TextToSearch = Nothing
-        Me.CaComboBox1.ValueIsMandatory = False
-        Me.CaComboBox1.ValueIsNullable = False
-        Me.CaComboBox1.ValueIsNumeric = False
-        Me.CaComboBox1.ValueMember = "IdNo"
+        Me.cboTextToSearch.BackColor = System.Drawing.Color.White
+        Me.cboTextToSearch.ChangingSearchValueOnly = False
+        Me.cboTextToSearch.CurrentSearchTerm = ""
+        Me.cboTextToSearch.DefaultValue = Nothing
+        Me.cboTextToSearch.DisplayMember = "Name"
+        Me.cboTextToSearch.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cboTextToSearch.EditingMode = True
+        Me.cboTextToSearch.FilterRule = Nothing
+        Me.cboTextToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.cboTextToSearch.ForeColor = System.Drawing.Color.Black
+        Me.cboTextToSearch.FormattingEnabled = True
+        Me.cboTextToSearch.HideWhenNotEditingOrAdding = False
+        Me.cboTextToSearch.IntegralHeight = False
+        Me.cboTextToSearch.LinkedLabel = Nothing
+        Me.cboTextToSearch.Location = New System.Drawing.Point(56, 27)
+        Me.cboTextToSearch.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboTextToSearch.Name = "cboTextToSearch"
+        Me.cboTextToSearch.OldValue = 0
+        Me.cboTextToSearch.OriginalDataSource = Nothing
+        Me.cboTextToSearch.OriginalList = Nothing
+        Me.cboTextToSearch.OverrideDropDownStyleList = False
+        Me.cboTextToSearch.PreviousSearchTerm = Nothing
+        Me.cboTextToSearch.PreviousSelectedIndex = -1
+        Me.cboTextToSearch.PropertySelector = Nothing
+        Me.cboTextToSearch.ReadOnlyCombo = False
+        Me.cboTextToSearch.SearchAnywhere = False
+        Me.cboTextToSearch.SearchField = Nothing
+        Me.cboTextToSearch.Size = New System.Drawing.Size(249, 24)
+        Me.cboTextToSearch.SuggestBoxHeight = 200
+        Me.cboTextToSearch.SuggestListOrderRule = Nothing
+        Me.cboTextToSearch.TabIndex = 3
+        Me.cboTextToSearch.TextToSearch = Nothing
+        Me.cboTextToSearch.ValueIsMandatory = False
+        Me.cboTextToSearch.ValueIsNullable = False
+        Me.cboTextToSearch.ValueIsNumeric = False
+        Me.cboTextToSearch.ValueMember = "IdNo"
         '
         'TableLayoutPanel2
         '
@@ -206,13 +208,13 @@ Partial Class CFindForm
     End Sub
 
     Friend WithEvents TxtTextToSearch As TextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblLookFor1 As Label
     Friend WithEvents RBtnStart As RadioButton
     Friend WithEvents RBtnAnywhere As RadioButton
     Friend WithEvents BtnFind As Button
     Friend WithEvents BtnCancel As Button
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents Label2 As Label
-    Friend WithEvents CaComboBox1 As CaComboBox
+    Friend WithEvents lblLookFor2 As Label
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Public WithEvents cboTextToSearch As CaComboBox
 End Class

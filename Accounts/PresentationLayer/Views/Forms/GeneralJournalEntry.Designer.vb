@@ -54,6 +54,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -66,7 +67,6 @@ Namespace PresentationLayer.Views.Forms
             Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.dtpDateCreated = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floJournalHeader.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -127,6 +127,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
@@ -153,6 +154,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReferenceNo.CustomFormat = Nothing
             Me.txtReferenceNo.DataBoundControl = True
             Me.txtReferenceNo.EditingMode = False
+            Me.txtReferenceNo.FindEnabled = True
             Me.CFlowLayout1.SetFlowBreak(Me.txtReferenceNo, True)
             resources.ApplyResources(Me.txtReferenceNo, "txtReferenceNo")
             Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
@@ -212,6 +214,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkClosingJournal.ForeColor = System.Drawing.Color.Black
             Me.chkClosingJournal.LinkedLabel = Me.lblActive
             Me.chkClosingJournal.Name = "chkClosingJournal"
+            Me.chkClosingJournal.NoLabel = True
             Me.chkClosingJournal.OldValue = Nothing
             Me.chkClosingJournal.UseVisualStyleBackColor = False
             '
@@ -239,6 +242,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Me.lblNotes
@@ -272,6 +276,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.ForeColor = System.Drawing.Color.Black
             Me.chkPosted.LinkedLabel = Me.lblActive
             Me.chkPosted.Name = "chkPosted"
+            Me.chkPosted.NoLabel = True
             Me.chkPosted.OldValue = Nothing
             Me.chkPosted.UseVisualStyleBackColor = False
             '
@@ -294,6 +299,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.ForeColor = System.Drawing.Color.Black
             Me.chkCancelled.LinkedLabel = Me.lblCancelled
             Me.chkCancelled.Name = "chkCancelled"
+            Me.chkCancelled.NoLabel = True
             Me.chkCancelled.OldValue = Nothing
             Me.chkCancelled.UseVisualStyleBackColor = False
             '
@@ -304,6 +310,27 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated.EditingMode = False
             resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
             Me.lblDateCreated.Name = "lblDateCreated"
+            '
+            'dtpDateCreated
+            '
+            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpDateCreated.DefaultValue = Nothing
+            Me.dtpDateCreated.DisplayOnly = True
+            Me.dtpDateCreated.DtpDefaultValue = Nothing
+            Me.dtpDateCreated.EditingMode = False
+            Me.dtpDateCreated.EditsAllowed = False
+            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.dtpDateCreated.LinkedLabel = Nothing
+            resources.ApplyResources(Me.dtpDateCreated, "dtpDateCreated")
+            Me.dtpDateCreated.Name = "dtpDateCreated"
+            Me.dtpDateCreated.ReadOnlyDp = True
+            Me.dtpDateCreated.SecurityKey = Nothing
+            Me.dtpDateCreated.ShowLongDate = False
+            Me.dtpDateCreated.ShowTime = True
+            Me.dtpDateCreated.TargetCalendar = Nothing
+            Me.dtpDateCreated.Value = Nothing
+            Me.dtpDateCreated.ValueIsMandatory = False
+            Me.dtpDateCreated.ValueIsNullable = False
             '
             'DataGridViewJournalItems
             '
@@ -322,14 +349,21 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle8
+            Me.DataGridViewJournalItems.DgvFooter = Nothing
             Me.DataGridViewJournalItems.DisplayOnly = False
             Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewJournalItems.FieldsDictionary = Nothing
+            Me.DataGridViewJournalItems.FirstRowDeletionEnabled = True
+            Me.DataGridViewJournalItems.FirstRowInsertionEnabled = True
             resources.ApplyResources(Me.DataGridViewJournalItems, "DataGridViewJournalItems")
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
+            Me.DataGridViewJournalItems.ShowFooter = False
+            Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
             '
             'dgvSequence
             '
@@ -337,6 +371,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             resources.ApplyResources(Me.dgvSequence, "dgvSequence")
             Me.dgvSequence.Name = "dgvSequence"
@@ -350,6 +385,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
             Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            Me.dgvAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvAccountIdNo, "dgvAccountIdNo")
             Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
             Me.dgvAccountIdNo.ReadOnly = True
@@ -394,6 +430,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
             Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
+            Me.dgvRevCostCenterIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
             Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
             Me.dgvRevCostCenterIdNo.ReadOnly = True
@@ -445,27 +482,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
             Me.CFlowLayout4.Name = "CFlowLayout4"
             '
-            'dtpDateCreated
-            '
-            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpDateCreated.DefaultValue = Nothing
-            Me.dtpDateCreated.DisplayOnly = True
-            Me.dtpDateCreated.DtpDefaultValue = Nothing
-            Me.dtpDateCreated.EditingMode = False
-            Me.dtpDateCreated.EditsAllowed = False
-            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.dtpDateCreated.LinkedLabel = Nothing
-            resources.ApplyResources(Me.dtpDateCreated, "dtpDateCreated")
-            Me.dtpDateCreated.Name = "dtpDateCreated"
-            Me.dtpDateCreated.ReadOnlyDp = True
-            Me.dtpDateCreated.SecurityKey = Nothing
-            Me.dtpDateCreated.ShowLongDate = False
-            Me.dtpDateCreated.ShowTime = True
-            Me.dtpDateCreated.TargetCalendar = Nothing
-            Me.dtpDateCreated.Value = Nothing
-            Me.dtpDateCreated.ValueIsMandatory = False
-            Me.dtpDateCreated.ValueIsNullable = False
-            '
             'GeneralJournalEntry
             '
             resources.ApplyResources(Me, "$this")
@@ -478,8 +494,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.PerformLayout()
             Me.CFlowLayout2.ResumeLayout(False)
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout4.ResumeLayout(false)
+            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout4.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
 

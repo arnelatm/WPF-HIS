@@ -131,6 +131,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.Editable = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
@@ -156,6 +157,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollName.DataBoundControl = True
             Me.txtPayrollName.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtPayrollName.EditingMode = False
+            Me.txtPayrollName.FindEnabled = True
             Me.txtPayrollName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayrollName.ForeColor = System.Drawing.Color.Black
             Me.txtPayrollName.LinkedLabel = Nothing
@@ -292,6 +294,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollNameAra.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtPayrollNameAra.EditingMode = False
             Me.txtPayrollNameAra.EnglishControl = Me.txtPayrollName
+            Me.txtPayrollNameAra.FindEnabled = True
             Me.txtPayrollNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayrollNameAra.ForeColor = System.Drawing.Color.Black
             Me.txtPayrollNameAra.LinkedLabel = Nothing
@@ -354,6 +357,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollCode.CustomFormat = Nothing
             Me.txtPayrollCode.DataBoundControl = True
             Me.txtPayrollCode.EditingMode = False
+            Me.txtPayrollCode.FindEnabled = True
             Me.txtPayrollCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayrollCode.ForeColor = System.Drawing.Color.Black
             Me.txtPayrollCode.LinkedLabel = Nothing
@@ -410,6 +414,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.PropertySelector = Nothing
             Me.cboPayCycleIdNo.ReadOnlyCombo = False
             Me.cboPayCycleIdNo.SearchAnywhere = False
+            Me.cboPayCycleIdNo.SearchField = Nothing
             Me.cboPayCycleIdNo.Size = New System.Drawing.Size(579, 24)
             Me.cboPayCycleIdNo.SuggestBoxHeight = 200
             Me.cboPayCycleIdNo.SuggestListOrderRule = Nothing
@@ -822,7 +827,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'CButton3
             '
-            Me.CButton3.DesignerSelected = True
+            Me.CButton3.DesignerSelected = False
             Me.CButton3.DisplayOnly = True
             Me.CButton3.ImageIndex = 0
             Me.CButton3.Location = New System.Drawing.Point(556, 3)

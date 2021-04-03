@@ -15,6 +15,7 @@ Public Class CMaskedTextBox
     Private _editsALlowed As Boolean = False
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
     Private _editingMode As Boolean = False
+    Private _searchField As String
 
     <Bindable(True)>
     <Category("Properties")>
@@ -58,7 +59,6 @@ Public Class CMaskedTextBox
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
-
             Else
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
@@ -103,6 +103,20 @@ Public Class CMaskedTextBox
     <Description("The Mask to treat as empty value")>
     <Browsable(True)>
     Public Property EmptyMask As String = ""
+
+    '<Bindable(True)>
+    '<Category("Properties")>
+    '<DefaultValue(GetType(String))>
+    '<Description("Specify here the displayed field name to search")>
+    '<Browsable(True)>
+    'Public Property SearchField As String
+    '    Get
+    '        Return _searchField
+    '    End Get
+    '    Set(value As String)
+    '        _searchField = value
+    '    End Set
+    'End Property
 
     'Public Property OldValue() As String
     '    Get
@@ -283,18 +297,18 @@ Public Class CMaskedTextBox
     End Sub
 
     Private Sub MenuItemFind_Click()
-        'Dim MyForm = FindForm()
-        'Dim SearchForm = New CFindForm
-        ''SearchForm.Show()
-        'SearchForm.ShowDialog()
-        '_TextToSearch = SearchForm.TextToSearch
-        '_SearchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
-        'SearchForm.Dispose()
-        'If _TextToSearch <> "" Then
+        Dim MyForm = FindForm()
+        Dim SearchForm = New CFindForm(False)
+        'SearchForm.Show()
+        SearchForm.ShowDialog()
+        _textToSearch = SearchForm.TextToSearch
+        _searchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
+        ' SearchForm.Dispose()
+        If _textToSearch <> "" Then
 
-        '    CallByName(MyForm, "FindField", CallType.Method, Me)
+            CallByName(MyForm, "FindField", CallType.Method, Me)
 
-        'End If
+        End If
     End Sub
 
     Public Function GetTextToSearch() As String

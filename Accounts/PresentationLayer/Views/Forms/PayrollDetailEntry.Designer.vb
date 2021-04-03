@@ -421,6 +421,7 @@
             Me.txtPayrollIdNo.DataBoundControl = True
             Me.txtPayrollIdNo.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtPayrollIdNo.EditingMode = True
+            Me.txtPayrollIdNo.FindEnabled = False
             Me.txtPayrollIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayrollIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtPayrollIdNo.LinkedLabel = Nothing
@@ -431,7 +432,7 @@
             Me.txtPayrollIdNo.Name = "txtPayrollIdNo"
             Me.txtPayrollIdNo.OldValue = Nothing
             Me.txtPayrollIdNo.Size = New System.Drawing.Size(122, 23)
-            Me.txtPayrollIdNo.TabIndex = 36
+            Me.txtPayrollIdNo.TabIndex = 0
             Me.txtPayrollIdNo.TabStop = False
             '
             'CLabel1
@@ -466,7 +467,7 @@
             Me.dtpStartDate.ShowLongDate = False
             Me.dtpStartDate.ShowTime = False
             Me.dtpStartDate.Size = New System.Drawing.Size(115, 23)
-            Me.dtpStartDate.TabIndex = 3
+            Me.dtpStartDate.TabIndex = 1
             Me.dtpStartDate.TabStop = False
             Me.dtpStartDate.TargetCalendar = CType(resources.GetObject("dtpStartDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpStartDate.Value = Nothing
@@ -511,6 +512,7 @@
             Me.txtPayPeriodName.DataBoundControl = True
             Me.txtPayPeriodName.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtPayPeriodName.EditingMode = True
+            Me.txtPayPeriodName.FindEnabled = True
             Me.txtPayPeriodName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayPeriodName.ForeColor = System.Drawing.Color.Black
             Me.txtPayPeriodName.LinkedLabel = Nothing
@@ -521,7 +523,7 @@
             Me.txtPayPeriodName.Name = "txtPayPeriodName"
             Me.txtPayPeriodName.OldValue = Nothing
             Me.txtPayPeriodName.Size = New System.Drawing.Size(524, 23)
-            Me.txtPayPeriodName.TabIndex = 35
+            Me.txtPayPeriodName.TabIndex = 3
             Me.txtPayPeriodName.TabStop = False
             Me.txtPayPeriodName.ValueIsMandatory = True
             '
@@ -562,6 +564,7 @@
             Me.txtTotalEarnings.DataBoundControl = True
             Me.txtTotalEarnings.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtTotalEarnings.EditingMode = True
+            Me.txtTotalEarnings.FindEnabled = False
             Me.txtTotalEarnings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtTotalEarnings.ForeColor = System.Drawing.Color.Black
             Me.txtTotalEarnings.LinkedLabel = Nothing
@@ -572,7 +575,7 @@
             Me.txtTotalEarnings.Name = "txtTotalEarnings"
             Me.txtTotalEarnings.OldValue = Nothing
             Me.txtTotalEarnings.Size = New System.Drawing.Size(122, 23)
-            Me.txtTotalEarnings.TabIndex = 33
+            Me.txtTotalEarnings.TabIndex = 5
             Me.txtTotalEarnings.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtTotalEarnings.ValueIsNumeric = True
             '
@@ -609,7 +612,7 @@
             Me.dtpEndDate.ShowLongDate = False
             Me.dtpEndDate.ShowTime = False
             Me.dtpEndDate.Size = New System.Drawing.Size(115, 23)
-            Me.dtpEndDate.TabIndex = 37
+            Me.dtpEndDate.TabIndex = 2
             Me.dtpEndDate.TabStop = False
             Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpEndDate.Value = Nothing
@@ -625,6 +628,7 @@
             Me.txtTotalDeductions.DataBoundControl = True
             Me.txtTotalDeductions.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtTotalDeductions.EditingMode = True
+            Me.txtTotalDeductions.FindEnabled = False
             Me.txtTotalDeductions.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtTotalDeductions.ForeColor = System.Drawing.Color.Black
             Me.txtTotalDeductions.LinkedLabel = Nothing
@@ -635,7 +639,7 @@
             Me.txtTotalDeductions.Name = "txtTotalDeductions"
             Me.txtTotalDeductions.OldValue = Nothing
             Me.txtTotalDeductions.Size = New System.Drawing.Size(117, 23)
-            Me.txtTotalDeductions.TabIndex = 31
+            Me.txtTotalDeductions.TabIndex = 6
             Me.txtTotalDeductions.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtTotalDeductions.ValueIsNumeric = True
             '
@@ -648,6 +652,7 @@
             Me.txtNetPay.DataBoundControl = True
             Me.txtNetPay.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtNetPay.EditingMode = True
+            Me.txtNetPay.FindEnabled = False
             Me.txtNetPay.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNetPay.ForeColor = System.Drawing.Color.Black
             Me.txtNetPay.LinkedLabel = Nothing
@@ -658,7 +663,7 @@
             Me.txtNetPay.Name = "txtNetPay"
             Me.txtNetPay.OldValue = Nothing
             Me.txtNetPay.Size = New System.Drawing.Size(117, 23)
-            Me.txtNetPay.TabIndex = 28
+            Me.txtNetPay.TabIndex = 7
             Me.txtNetPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtNetPay.ValueIsNumeric = True
             '
@@ -725,7 +730,7 @@
             Me.cboEmployeeIdNo.Size = New System.Drawing.Size(524, 24)
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
-            Me.cboEmployeeIdNo.TabIndex = 44
+            Me.cboEmployeeIdNo.TabIndex = 4
             Me.cboEmployeeIdNo.TabStop = False
             Me.cboEmployeeIdNo.TextToSearch = Nothing
             Me.cboEmployeeIdNo.ValueIsMandatory = False

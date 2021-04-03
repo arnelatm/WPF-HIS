@@ -732,21 +732,30 @@ Public Class CaComboBox
     End Sub
 
     Private Sub MenuItemFind_Click()
-        Dim MyForm = Me.FindForm()
+        Dim myForm = Me.FindForm()
         Dim SearchForm
         If Me.SearchField Is Nothing OrElse Me.SearchField = "" Then
-            SearchForm = New CFindForm()
+            SearchForm = New CFindForm(True, Me)
         Else
-            SearchForm = New CFindForm()
+            SearchForm = New CFindForm(False)
         End If
         SearchForm.ShowDialog()
+        If Not (SearchField Is Nothing OrElse SearchField = "") Then
+            FindText(myForm, SearchForm)
+        Else
+            _TextToSearch = SearchForm.TextToSearch
+            'SearchForm.Dispose()
+            CallByName(myForm, "FindField", CallType.Method, Me)
+            'FindText(myForm, SearchForm)
+        End If
+    End Sub
+
+    Private Sub FindText(MyForm As Form, SearchForm As Object)
         _TextToSearch = SearchForm.TextToSearch
         _SearchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
         SearchForm.Dispose()
         If _TextToSearch <> "" Then
-
             CallByName(MyForm, "FindField", CallType.Method, Me)
-
         End If
     End Sub
 

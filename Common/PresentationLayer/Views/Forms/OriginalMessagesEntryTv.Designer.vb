@@ -47,280 +47,296 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
         Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Nothing
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.ReadOnly = true
-        Me.TxtIdNo.TabStop = false
-        Me.TxtIdNo.ValueIsNumeric = true
-        '
-        'txtMessageKey
-        '
-        Me.txtMessageKey.BackColor = System.Drawing.Color.White
-        Me.txtMessageKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtMessageKey.ComputedValue = false
-        Me.txtMessageKey.CustomFormat = Nothing
-        Me.txtMessageKey.DataBoundControl = true
-        Me.txtMessageKey.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtMessageKey, true)
-        resources.ApplyResources(Me.txtMessageKey, "txtMessageKey")
-        Me.txtMessageKey.ForeColor = System.Drawing.Color.Black
-        Me.txtMessageKey.LinkedLabel = Me.lblMessageKey
-        Me.txtMessageKey.MaximumValue = Nothing
-        Me.txtMessageKey.MinimumValue = Nothing
-        Me.txtMessageKey.Name = "txtMessageKey"
-        Me.txtMessageKey.OldValue = Nothing
-        Me.txtMessageKey.ReadOnly = true
-        Me.txtMessageKey.SecurityKey = "Translators_Developer"
-        Me.txtMessageKey.TabStop = false
-        Me.txtMessageKey.ValueIsMandatory = true
-        '
-        'lblMessageKey
-        '
-        Me.lblMessageKey.DisplayOnly = true
-        Me.lblMessageKey.EditingMode = false
-        resources.ApplyResources(Me.lblMessageKey, "lblMessageKey")
-        Me.lblMessageKey.Name = "lblMessageKey"
-        Me.lblMessageKey.SecurityKey = "Translators_Developer"
-        '
-        'txtMessage
-        '
-        Me.txtMessage.BackColor = System.Drawing.Color.White
-        Me.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtMessage.ComputedValue = false
-        Me.txtMessage.CustomFormat = Nothing
-        Me.txtMessage.DataBoundControl = true
-        Me.txtMessage.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtMessage, true)
-        resources.ApplyResources(Me.txtMessage, "txtMessage")
-        Me.txtMessage.ForeColor = System.Drawing.Color.Black
-        Me.txtMessage.LinkedLabel = Nothing
-        Me.txtMessage.MaximumValue = Nothing
-        Me.txtMessage.MinimumValue = Nothing
-        Me.txtMessage.Name = "txtMessage"
-        Me.txtMessage.OldValue = Nothing
-        Me.txtMessage.ReadOnly = true
-        Me.txtMessage.SecurityKey = "Translators_Developer"
-        Me.txtMessage.ValueIsMandatory = true
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        Me.txtNotes.EditingMode = false
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
-        Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.MaximumValue = Nothing
-        Me.txtNotes.MinimumValue = Nothing
-        Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.ReadOnly = true
-        Me.txtNotes.SecurityKey = "Translators_Developer"
-        Me.txtNotes.ValueIsMandatory = true
-        '
-        'floDataDisplay
-        '
-        resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-        Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-        Me.floDataDisplay.Controls.Add(Me.lblMessageKey)
-        Me.floDataDisplay.Controls.Add(Me.txtMessageKey)
-        Me.floDataDisplay.Controls.Add(Me.lblMessage)
-        Me.floDataDisplay.Controls.Add(Me.txtMessage)
-        Me.floDataDisplay.Controls.Add(Me.lblTranslatedMessage)
-        Me.floDataDisplay.Controls.Add(Me.txtTranslatedMessage)
-        Me.floDataDisplay.Controls.Add(Me.lblCaption)
-        Me.floDataDisplay.Controls.Add(Me.txtCaption)
-        Me.floDataDisplay.Controls.Add(Me.lblTranslatedCaption)
-        Me.floDataDisplay.Controls.Add(Me.txtTranslatedCaption)
-        Me.floDataDisplay.Controls.Add(Me.lblNotes)
-        Me.floDataDisplay.Controls.Add(Me.txtNotes)
-        Me.floDataDisplay.Controls.Add(Me.txtLanguageIdNo)
-        Me.floDataDisplay.Controls.Add(Me.txtMessageIdNo)
-        Me.floDataDisplay.Controls.Add(Me.txtIdNoTranslated)
-        Me.floDataDisplay.Controls.Add(Me.Button1)
-        Me.floDataDisplay.Name = "floDataDisplay"
-        '
-        'lblIdNo
-        '
-        Me.lblIdNo.DisplayOnly = true
-        Me.lblIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-        Me.lblIdNo.Name = "lblIdNo"
-        '
-        'lblMessage
-        '
-        Me.lblMessage.DisplayOnly = true
-        Me.lblMessage.EditingMode = false
-        resources.ApplyResources(Me.lblMessage, "lblMessage")
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.SecurityKey = "Translators_Developer"
-        '
-        'lblTranslatedMessage
-        '
-        Me.lblTranslatedMessage.DisplayOnly = true
-        Me.lblTranslatedMessage.EditingMode = false
-        resources.ApplyResources(Me.lblTranslatedMessage, "lblTranslatedMessage")
-        Me.lblTranslatedMessage.Name = "lblTranslatedMessage"
-        '
-        'txtTranslatedMessage
-        '
-        Me.txtTranslatedMessage.AutoFill = false
-        Me.txtTranslatedMessage.BackColor = System.Drawing.Color.White
-        Me.txtTranslatedMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTranslatedMessage.ComputedValue = false
-        Me.txtTranslatedMessage.CustomFormat = Nothing
-        Me.txtTranslatedMessage.DataBoundControl = true
-        Me.txtTranslatedMessage.EditingMode = false
-        Me.txtTranslatedMessage.EnglishControl = Me.txtMessage
-        Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedMessage, true)
-        resources.ApplyResources(Me.txtTranslatedMessage, "txtTranslatedMessage")
-        Me.txtTranslatedMessage.ForeColor = System.Drawing.Color.Black
-        Me.txtTranslatedMessage.LinkedLabel = Me.lblTranslatedMessage
-        Me.txtTranslatedMessage.MaximumValue = Nothing
-        Me.txtTranslatedMessage.MinimumValue = Nothing
-        Me.txtTranslatedMessage.Name = "txtTranslatedMessage"
-        Me.txtTranslatedMessage.OldValue = Nothing
-        Me.txtTranslatedMessage.ReadOnly = true
-        Me.txtTranslatedMessage.ValueIsMandatory = true
-        '
-        'lblCaption
-        '
-        Me.lblCaption.DisplayOnly = true
-        Me.lblCaption.EditingMode = false
-        resources.ApplyResources(Me.lblCaption, "lblCaption")
-        Me.lblCaption.Name = "lblCaption"
-        Me.lblCaption.SecurityKey = "Translators_Developer"
-        '
-        'txtCaption
-        '
-        Me.txtCaption.BackColor = System.Drawing.Color.White
-        Me.txtCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCaption.ComputedValue = false
-        Me.txtCaption.CustomFormat = Nothing
-        Me.txtCaption.DataBoundControl = true
-        Me.txtCaption.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtCaption, true)
-        resources.ApplyResources(Me.txtCaption, "txtCaption")
-        Me.txtCaption.ForeColor = System.Drawing.Color.Black
-        Me.txtCaption.LinkedLabel = Nothing
-        Me.txtCaption.MaximumValue = Nothing
-        Me.txtCaption.MinimumValue = Nothing
-        Me.txtCaption.Name = "txtCaption"
-        Me.txtCaption.OldValue = Nothing
-        Me.txtCaption.ReadOnly = true
-        Me.txtCaption.SecurityKey = "Translators_Developer"
-        Me.txtCaption.ValueIsMandatory = true
-        '
-        'lblTranslatedCaption
-        '
-        Me.lblTranslatedCaption.DisplayOnly = true
-        Me.lblTranslatedCaption.EditingMode = false
-        resources.ApplyResources(Me.lblTranslatedCaption, "lblTranslatedCaption")
-        Me.lblTranslatedCaption.Name = "lblTranslatedCaption"
-        '
-        'txtTranslatedCaption
-        '
-        Me.txtTranslatedCaption.BackColor = System.Drawing.Color.White
-        Me.txtTranslatedCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTranslatedCaption.ComputedValue = false
-        Me.txtTranslatedCaption.CustomFormat = Nothing
-        Me.txtTranslatedCaption.DataBoundControl = true
-        Me.txtTranslatedCaption.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedCaption, true)
-        resources.ApplyResources(Me.txtTranslatedCaption, "txtTranslatedCaption")
-        Me.txtTranslatedCaption.ForeColor = System.Drawing.Color.Black
-        Me.txtTranslatedCaption.LinkedLabel = Nothing
-        Me.txtTranslatedCaption.MaximumValue = Nothing
-        Me.txtTranslatedCaption.MinimumValue = Nothing
-        Me.txtTranslatedCaption.Name = "txtTranslatedCaption"
-        Me.txtTranslatedCaption.OldValue = Nothing
-        Me.txtTranslatedCaption.ReadOnly = true
-        Me.txtTranslatedCaption.TabStop = false
-        Me.txtTranslatedCaption.ValueIsMandatory = true
-        '
-        'lblNotes
-        '
-        Me.lblNotes.DisplayOnly = true
-        Me.lblNotes.EditingMode = false
-        resources.ApplyResources(Me.lblNotes, "lblNotes")
-        Me.lblNotes.Name = "lblNotes"
-        '
-        'txtLanguageIdNo
-        '
-        Me.txtLanguageIdNo.BackColor = System.Drawing.Color.White
-        Me.txtLanguageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLanguageIdNo.ComputedValue = false
-        Me.txtLanguageIdNo.CustomFormat = Nothing
-        Me.txtLanguageIdNo.DataBoundControl = true
-        Me.txtLanguageIdNo.DisplayOnly = true
-        Me.txtLanguageIdNo.EditingMode = true
-        resources.ApplyResources(Me.txtLanguageIdNo, "txtLanguageIdNo")
-        Me.txtLanguageIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtLanguageIdNo.LinkedLabel = Nothing
-        Me.txtLanguageIdNo.MaximumValue = Nothing
-        Me.txtLanguageIdNo.MinimumValue = Nothing
-        Me.txtLanguageIdNo.Name = "txtLanguageIdNo"
-        Me.txtLanguageIdNo.OldValue = Nothing
-        Me.txtLanguageIdNo.ReadOnly = true
-        Me.txtLanguageIdNo.TabStop = false
-        '
-        'txtMessageIdNo
-        '
-        Me.txtMessageIdNo.BackColor = System.Drawing.Color.White
-        Me.txtMessageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtMessageIdNo.ComputedValue = false
-        Me.txtMessageIdNo.CustomFormat = Nothing
-        Me.txtMessageIdNo.DataBoundControl = true
-        Me.txtMessageIdNo.DisplayOnly = true
-        Me.txtMessageIdNo.EditingMode = true
-        resources.ApplyResources(Me.txtMessageIdNo, "txtMessageIdNo")
-        Me.txtMessageIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtMessageIdNo.LinkedLabel = Nothing
-        Me.txtMessageIdNo.MaximumValue = Nothing
-        Me.txtMessageIdNo.MinimumValue = Nothing
-        Me.txtMessageIdNo.Name = "txtMessageIdNo"
-        Me.txtMessageIdNo.OldValue = Nothing
-        Me.txtMessageIdNo.ReadOnly = true
-        Me.txtMessageIdNo.TabStop = false
-        '
-        'txtIdNoTranslated
-        '
-        Me.txtIdNoTranslated.BackColor = System.Drawing.Color.White
-        Me.txtIdNoTranslated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtIdNoTranslated.ComputedValue = false
-        Me.txtIdNoTranslated.CustomFormat = Nothing
-        Me.txtIdNoTranslated.DataBoundControl = true
-        Me.txtIdNoTranslated.DisplayOnly = true
-        Me.txtIdNoTranslated.EditingMode = true
-        resources.ApplyResources(Me.txtIdNoTranslated, "txtIdNoTranslated")
-        Me.txtIdNoTranslated.ForeColor = System.Drawing.Color.Black
-        Me.txtIdNoTranslated.LinkedLabel = Nothing
+            '
+            'TreeViewTableName
+            '
+            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.ValueIsNumeric = True
+            '
+            'txtMessageKey
+            '
+            Me.txtMessageKey.BackColor = System.Drawing.Color.White
+            Me.txtMessageKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtMessageKey.ComputedValue = False
+            Me.txtMessageKey.CustomFormat = Nothing
+            Me.txtMessageKey.DataBoundControl = True
+            Me.txtMessageKey.EditingMode = False
+            Me.txtMessageKey.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtMessageKey, True)
+            resources.ApplyResources(Me.txtMessageKey, "txtMessageKey")
+            Me.txtMessageKey.ForeColor = System.Drawing.Color.Black
+            Me.txtMessageKey.LinkedLabel = Me.lblMessageKey
+            Me.txtMessageKey.MaximumValue = Nothing
+            Me.txtMessageKey.MinimumValue = Nothing
+            Me.txtMessageKey.Name = "txtMessageKey"
+            Me.txtMessageKey.OldValue = Nothing
+            Me.txtMessageKey.ReadOnly = True
+            Me.txtMessageKey.SecurityKey = "Translators_Developer"
+            Me.txtMessageKey.TabStop = False
+            Me.txtMessageKey.ValueIsMandatory = True
+            '
+            'lblMessageKey
+            '
+            Me.lblMessageKey.DisplayOnly = True
+            Me.lblMessageKey.EditingMode = False
+            resources.ApplyResources(Me.lblMessageKey, "lblMessageKey")
+            Me.lblMessageKey.Name = "lblMessageKey"
+            Me.lblMessageKey.SecurityKey = "Translators_Developer"
+            '
+            'txtMessage
+            '
+            Me.txtMessage.BackColor = System.Drawing.Color.White
+            Me.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtMessage.ComputedValue = False
+            Me.txtMessage.CustomFormat = Nothing
+            Me.txtMessage.DataBoundControl = True
+            Me.txtMessage.EditingMode = False
+            Me.txtMessage.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtMessage, True)
+            resources.ApplyResources(Me.txtMessage, "txtMessage")
+            Me.txtMessage.ForeColor = System.Drawing.Color.Black
+            Me.txtMessage.LinkedLabel = Nothing
+            Me.txtMessage.MaximumValue = Nothing
+            Me.txtMessage.MinimumValue = Nothing
+            Me.txtMessage.Name = "txtMessage"
+            Me.txtMessage.OldValue = Nothing
+            Me.txtMessage.ReadOnly = True
+            Me.txtMessage.SecurityKey = "Translators_Developer"
+            Me.txtMessage.ValueIsMandatory = True
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SecurityKey = "Translators_Developer"
+            Me.txtNotes.ValueIsMandatory = True
+            '
+            'floDataDisplay
+            '
+            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+            Me.floDataDisplay.Controls.Add(Me.lblIdNo)
+            Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
+            Me.floDataDisplay.Controls.Add(Me.lblMessageKey)
+            Me.floDataDisplay.Controls.Add(Me.txtMessageKey)
+            Me.floDataDisplay.Controls.Add(Me.lblMessage)
+            Me.floDataDisplay.Controls.Add(Me.txtMessage)
+            Me.floDataDisplay.Controls.Add(Me.lblTranslatedMessage)
+            Me.floDataDisplay.Controls.Add(Me.txtTranslatedMessage)
+            Me.floDataDisplay.Controls.Add(Me.lblCaption)
+            Me.floDataDisplay.Controls.Add(Me.txtCaption)
+            Me.floDataDisplay.Controls.Add(Me.lblTranslatedCaption)
+            Me.floDataDisplay.Controls.Add(Me.txtTranslatedCaption)
+            Me.floDataDisplay.Controls.Add(Me.lblNotes)
+            Me.floDataDisplay.Controls.Add(Me.txtNotes)
+            Me.floDataDisplay.Controls.Add(Me.txtLanguageIdNo)
+            Me.floDataDisplay.Controls.Add(Me.txtMessageIdNo)
+            Me.floDataDisplay.Controls.Add(Me.txtIdNoTranslated)
+            Me.floDataDisplay.Controls.Add(Me.Button1)
+            Me.floDataDisplay.Name = "floDataDisplay"
+            '
+            'lblIdNo
+            '
+            Me.lblIdNo.DisplayOnly = True
+            Me.lblIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.Name = "lblIdNo"
+            '
+            'lblMessage
+            '
+            Me.lblMessage.DisplayOnly = True
+            Me.lblMessage.EditingMode = False
+            resources.ApplyResources(Me.lblMessage, "lblMessage")
+            Me.lblMessage.Name = "lblMessage"
+            Me.lblMessage.SecurityKey = "Translators_Developer"
+            '
+            'lblTranslatedMessage
+            '
+            Me.lblTranslatedMessage.DisplayOnly = True
+            Me.lblTranslatedMessage.EditingMode = False
+            resources.ApplyResources(Me.lblTranslatedMessage, "lblTranslatedMessage")
+            Me.lblTranslatedMessage.Name = "lblTranslatedMessage"
+            '
+            'txtTranslatedMessage
+            '
+            Me.txtTranslatedMessage.AutoFill = False
+            Me.txtTranslatedMessage.BackColor = System.Drawing.Color.White
+            Me.txtTranslatedMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTranslatedMessage.ComputedValue = False
+            Me.txtTranslatedMessage.CustomFormat = Nothing
+            Me.txtTranslatedMessage.DataBoundControl = True
+            Me.txtTranslatedMessage.EditingMode = False
+            Me.txtTranslatedMessage.EnglishControl = Me.txtMessage
+            Me.txtTranslatedMessage.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedMessage, True)
+            resources.ApplyResources(Me.txtTranslatedMessage, "txtTranslatedMessage")
+            Me.txtTranslatedMessage.ForeColor = System.Drawing.Color.Black
+            Me.txtTranslatedMessage.LinkedLabel = Me.lblTranslatedMessage
+            Me.txtTranslatedMessage.MaximumValue = Nothing
+            Me.txtTranslatedMessage.MinimumValue = Nothing
+            Me.txtTranslatedMessage.Name = "txtTranslatedMessage"
+            Me.txtTranslatedMessage.OldValue = Nothing
+            Me.txtTranslatedMessage.ReadOnly = True
+            Me.txtTranslatedMessage.ValueIsMandatory = True
+            '
+            'lblCaption
+            '
+            Me.lblCaption.DisplayOnly = True
+            Me.lblCaption.EditingMode = False
+            resources.ApplyResources(Me.lblCaption, "lblCaption")
+            Me.lblCaption.Name = "lblCaption"
+            Me.lblCaption.SecurityKey = "Translators_Developer"
+            '
+            'txtCaption
+            '
+            Me.txtCaption.BackColor = System.Drawing.Color.White
+            Me.txtCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtCaption.ComputedValue = False
+            Me.txtCaption.CustomFormat = Nothing
+            Me.txtCaption.DataBoundControl = True
+            Me.txtCaption.EditingMode = False
+            Me.txtCaption.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtCaption, True)
+            resources.ApplyResources(Me.txtCaption, "txtCaption")
+            Me.txtCaption.ForeColor = System.Drawing.Color.Black
+            Me.txtCaption.LinkedLabel = Nothing
+            Me.txtCaption.MaximumValue = Nothing
+            Me.txtCaption.MinimumValue = Nothing
+            Me.txtCaption.Name = "txtCaption"
+            Me.txtCaption.OldValue = Nothing
+            Me.txtCaption.ReadOnly = True
+            Me.txtCaption.SecurityKey = "Translators_Developer"
+            Me.txtCaption.ValueIsMandatory = True
+            '
+            'lblTranslatedCaption
+            '
+            Me.lblTranslatedCaption.DisplayOnly = True
+            Me.lblTranslatedCaption.EditingMode = False
+            resources.ApplyResources(Me.lblTranslatedCaption, "lblTranslatedCaption")
+            Me.lblTranslatedCaption.Name = "lblTranslatedCaption"
+            '
+            'txtTranslatedCaption
+            '
+            Me.txtTranslatedCaption.BackColor = System.Drawing.Color.White
+            Me.txtTranslatedCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTranslatedCaption.ComputedValue = False
+            Me.txtTranslatedCaption.CustomFormat = Nothing
+            Me.txtTranslatedCaption.DataBoundControl = True
+            Me.txtTranslatedCaption.EditingMode = False
+            Me.txtTranslatedCaption.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedCaption, True)
+            resources.ApplyResources(Me.txtTranslatedCaption, "txtTranslatedCaption")
+            Me.txtTranslatedCaption.ForeColor = System.Drawing.Color.Black
+            Me.txtTranslatedCaption.LinkedLabel = Nothing
+            Me.txtTranslatedCaption.MaximumValue = Nothing
+            Me.txtTranslatedCaption.MinimumValue = Nothing
+            Me.txtTranslatedCaption.Name = "txtTranslatedCaption"
+            Me.txtTranslatedCaption.OldValue = Nothing
+            Me.txtTranslatedCaption.ReadOnly = True
+            Me.txtTranslatedCaption.TabStop = False
+            Me.txtTranslatedCaption.ValueIsMandatory = True
+            '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.Name = "lblNotes"
+            '
+            'txtLanguageIdNo
+            '
+            Me.txtLanguageIdNo.BackColor = System.Drawing.Color.White
+            Me.txtLanguageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtLanguageIdNo.ComputedValue = False
+            Me.txtLanguageIdNo.CustomFormat = Nothing
+            Me.txtLanguageIdNo.DataBoundControl = True
+            Me.txtLanguageIdNo.DisplayOnly = True
+            Me.txtLanguageIdNo.EditingMode = True
+            resources.ApplyResources(Me.txtLanguageIdNo, "txtLanguageIdNo")
+            Me.txtLanguageIdNo.FindEnabled = True
+            Me.txtLanguageIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtLanguageIdNo.LinkedLabel = Nothing
+            Me.txtLanguageIdNo.MaximumValue = Nothing
+            Me.txtLanguageIdNo.MinimumValue = Nothing
+            Me.txtLanguageIdNo.Name = "txtLanguageIdNo"
+            Me.txtLanguageIdNo.OldValue = Nothing
+            Me.txtLanguageIdNo.ReadOnly = True
+            Me.txtLanguageIdNo.TabStop = False
+            '
+            'txtMessageIdNo
+            '
+            Me.txtMessageIdNo.BackColor = System.Drawing.Color.White
+            Me.txtMessageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtMessageIdNo.ComputedValue = False
+            Me.txtMessageIdNo.CustomFormat = Nothing
+            Me.txtMessageIdNo.DataBoundControl = True
+            Me.txtMessageIdNo.DisplayOnly = True
+            Me.txtMessageIdNo.EditingMode = True
+            resources.ApplyResources(Me.txtMessageIdNo, "txtMessageIdNo")
+            Me.txtMessageIdNo.FindEnabled = True
+            Me.txtMessageIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtMessageIdNo.LinkedLabel = Nothing
+            Me.txtMessageIdNo.MaximumValue = Nothing
+            Me.txtMessageIdNo.MinimumValue = Nothing
+            Me.txtMessageIdNo.Name = "txtMessageIdNo"
+            Me.txtMessageIdNo.OldValue = Nothing
+            Me.txtMessageIdNo.ReadOnly = True
+            Me.txtMessageIdNo.TabStop = False
+            '
+            'txtIdNoTranslated
+            '
+            Me.txtIdNoTranslated.BackColor = System.Drawing.Color.White
+            Me.txtIdNoTranslated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtIdNoTranslated.ComputedValue = False
+            Me.txtIdNoTranslated.CustomFormat = Nothing
+            Me.txtIdNoTranslated.DataBoundControl = True
+            Me.txtIdNoTranslated.DisplayOnly = True
+            Me.txtIdNoTranslated.EditingMode = True
+            resources.ApplyResources(Me.txtIdNoTranslated, "txtIdNoTranslated")
+            Me.txtIdNoTranslated.FindEnabled = True
+            Me.txtIdNoTranslated.ForeColor = System.Drawing.Color.Black
+            Me.txtIdNoTranslated.LinkedLabel = Nothing
         Me.txtIdNoTranslated.MaximumValue = Nothing
         Me.txtIdNoTranslated.MinimumValue = Nothing
         Me.txtIdNoTranslated.Name = "txtIdNoTranslated"

@@ -7,6 +7,18 @@ Public Class CFindForm
 
     Private _TextToSearch As String
     Private _SearchAnywhere As Boolean
+    Private _useCombobox As Boolean
+    Private _control As Control
+
+    Public Sub New(useComboBox As Boolean, Optional cControl As Control = Nothing)
+
+        ' This call is required by the designer.
+        InitializeComponent()
+        _useCombobox = useComboBox
+        _control = cControl
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
 
     Public Property TextToSearch As String
         Get
@@ -39,11 +51,15 @@ Public Class CFindForm
     End Function
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
-        _TextToSearch = TxtTextToSearch.Text
-        If RBtnStart.Checked Then
-            _SearchAnywhere = False
+        If _useCombobox Then
+            _TextToSearch = cboTextToSearch.SelectedValue
         Else
-            _SearchAnywhere = True
+            _TextToSearch = TxtTextToSearch.Text
+            If RBtnStart.Checked Then
+                _SearchAnywhere = False
+            Else
+                _SearchAnywhere = True
+            End If
         End If
         Close()
     End Sub
@@ -75,6 +91,25 @@ Public Class CFindForm
 
     Private Sub CFindForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetFormLocation()
+        If _useCombobox Then
+            lblLookFor1.Visible = False
+            lblLookFor2.Visible = True
+            TxtTextToSearch.Visible = False
+            cboTextToSearch.Visible = True
+            RBtnAnywhere.Visible = False
+            RBtnStart.Visible = False
+            Dim myComboBox As CaComboBox = _control
+            cboTextToSearch.DataSource = myComboBox.DataSource
+            cboTextToSearch.DisplayMember = myComboBox.DisplayMember
+            cboTextToSearch.ValueMember = myComboBox.ValueMember
+        Else
+            lblLookFor1.Visible = True
+            lblLookFor2.Visible = False
+            TxtTextToSearch.Visible = True
+            cboTextToSearch.Visible = False
+            RBtnAnywhere.Visible = True
+            RBtnStart.Visible = True
+        End If
     End Sub
 
 End Class

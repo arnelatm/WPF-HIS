@@ -1367,12 +1367,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             If timeStampedValue IsNot Nothing Then
                 Dim newDateTimeStamp As Object
                 newDateTimeStamp = Model.GetRecordDateTimeStamp(idNo, TableName, DateTimeStampField)
-                For i = 0 To 7
-                    If timeStampedValue(i) <> newDateTimeStamp(i) Then
-                        retValue = True
-                        Exit For
-                    End If
-                Next
+                If newDateTimeStamp IsNot Nothing Then
+                    For i = 0 To 7
+                        If timeStampedValue(i) <> newDateTimeStamp(i) Then
+                            retValue = True
+                            Exit For
+                        End If
+                    Next
+                End If
             End If
         Catch ex As Exception
             Return Nothing

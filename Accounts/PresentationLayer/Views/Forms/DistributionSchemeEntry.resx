@@ -433,7 +433,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="dtpValidityStartDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 24</value>
+    <value>129, 24</value>
   </data>
   <data name="dtpValidityStartDate.TabIndex" type="System.Int32, mscorlib">
     <value>245</value>
@@ -467,13 +467,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblValidityEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 111</value>
+    <value>400, 111</value>
   </data>
   <data name="lblValidityEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblValidityEndDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 23</value>
+    <value>159, 23</value>
   </data>
   <data name="lblValidityEndDate.TabIndex" type="System.Int32, mscorlib">
     <value>248</value>
@@ -500,13 +500,13 @@
     <value>Tahoma, 9.75pt</value>
   </data>
   <data name="dtpValidityEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>566, 110</value>
+    <value>560, 110</value>
   </data>
   <data name="dtpValidityEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="dtpValidityEndDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 24</value>
+    <value>129, 24</value>
   </data>
   <data name="dtpValidityEndDate.TabIndex" type="System.Int32, mscorlib">
     <value>247</value>

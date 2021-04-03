@@ -61,316 +61,336 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.DataGridViewDistributionSchemeItems,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsDistributionSchemeItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Nothing
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.ReadOnly = true
-        Me.TxtIdNo.TabStop = false
-        Me.TxtIdNo.ValueIsNumeric = true
-        '
-        'txtDistributionSchemeCode
-        '
-        Me.txtDistributionSchemeCode.BackColor = System.Drawing.Color.White
-        Me.txtDistributionSchemeCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDistributionSchemeCode.ComputedValue = false
-        Me.txtDistributionSchemeCode.CustomFormat = Nothing
-        Me.txtDistributionSchemeCode.DataBoundControl = true
-        Me.txtDistributionSchemeCode.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtDistributionSchemeCode, true)
-        resources.ApplyResources(Me.txtDistributionSchemeCode, "txtDistributionSchemeCode")
-        Me.txtDistributionSchemeCode.ForeColor = System.Drawing.Color.Black
-        Me.txtDistributionSchemeCode.LinkedLabel = Nothing
-        Me.txtDistributionSchemeCode.MaximumValue = Nothing
-        Me.txtDistributionSchemeCode.MinimumValue = Nothing
-        Me.txtDistributionSchemeCode.Name = "txtDistributionSchemeCode"
-        Me.txtDistributionSchemeCode.OldValue = Nothing
-        Me.txtDistributionSchemeCode.ReadOnly = true
-        Me.txtDistributionSchemeCode.ValueIsMandatory = true
-        '
-        'txtDistributionSchemeName
-        '
-        Me.txtDistributionSchemeName.BackColor = System.Drawing.Color.White
-        Me.txtDistributionSchemeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDistributionSchemeName.ComputedValue = false
-        Me.txtDistributionSchemeName.CustomFormat = Nothing
-        Me.txtDistributionSchemeName.DataBoundControl = true
-        Me.txtDistributionSchemeName.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtDistributionSchemeName, true)
-        resources.ApplyResources(Me.txtDistributionSchemeName, "txtDistributionSchemeName")
-        Me.txtDistributionSchemeName.ForeColor = System.Drawing.Color.Black
-        Me.txtDistributionSchemeName.LinkedLabel = Nothing
-        Me.txtDistributionSchemeName.MaximumValue = Nothing
-        Me.txtDistributionSchemeName.MinimumValue = Nothing
-        Me.txtDistributionSchemeName.Name = "txtDistributionSchemeName"
-        Me.txtDistributionSchemeName.OldValue = Nothing
-        Me.txtDistributionSchemeName.ReadOnly = true
-        Me.txtDistributionSchemeName.ValueIsMandatory = true
-        '
-        'txtDistributionSchemeNameAra
-        '
-        Me.txtDistributionSchemeNameAra.BackColor = System.Drawing.Color.White
-        Me.txtDistributionSchemeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDistributionSchemeNameAra.ComputedValue = false
-        Me.txtDistributionSchemeNameAra.CustomFormat = Nothing
-        Me.txtDistributionSchemeNameAra.DataBoundControl = true
-        Me.txtDistributionSchemeNameAra.EditingMode = false
-        Me.txtDistributionSchemeNameAra.EnglishControl = Me.txtDistributionSchemeName
-        Me.floDataDisplay.SetFlowBreak(Me.txtDistributionSchemeNameAra, true)
-        resources.ApplyResources(Me.txtDistributionSchemeNameAra, "txtDistributionSchemeNameAra")
-        Me.txtDistributionSchemeNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtDistributionSchemeNameAra.LinkedLabel = Nothing
-        Me.txtDistributionSchemeNameAra.MaximumValue = Nothing
-        Me.txtDistributionSchemeNameAra.MinimumValue = Nothing
-        Me.txtDistributionSchemeNameAra.Name = "txtDistributionSchemeNameAra"
-        Me.txtDistributionSchemeNameAra.OldValue = Nothing
-        Me.txtDistributionSchemeNameAra.ReadOnly = true
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        Me.txtNotes.EditingMode = false
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
-        Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.MaximumValue = Nothing
-        Me.txtNotes.MinimumValue = Nothing
-        Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.ReadOnly = true
-        Me.txtNotes.ValueIsMandatory = true
-        '
-        'floDataDisplay
-        '
-        resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-        Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-        Me.floDataDisplay.Controls.Add(Me.lblDistributionSchemeCode)
-        Me.floDataDisplay.Controls.Add(Me.txtDistributionSchemeCode)
-        Me.floDataDisplay.Controls.Add(Me.lblDistributionSchemeName)
-        Me.floDataDisplay.Controls.Add(Me.txtDistributionSchemeName)
-        Me.floDataDisplay.Controls.Add(Me.lblDistributionSchemeNameAra)
-        Me.floDataDisplay.Controls.Add(Me.txtDistributionSchemeNameAra)
-        Me.floDataDisplay.Controls.Add(Me.lblValidityStartDate)
-        Me.floDataDisplay.Controls.Add(Me.dtpValidityStartDate)
-        Me.floDataDisplay.Controls.Add(Me.lblValidityEndDate)
-        Me.floDataDisplay.Controls.Add(Me.dtpValidityEndDate)
-        Me.floDataDisplay.Controls.Add(Me.lblNotes)
-        Me.floDataDisplay.Controls.Add(Me.txtNotes)
-        Me.floDataDisplay.Name = "floDataDisplay"
-        '
-        'lblIdNo
-        '
-        Me.lblIdNo.DisplayOnly = true
-        Me.lblIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-        Me.lblIdNo.Name = "lblIdNo"
-        '
-        'lblDistributionSchemeCode
-        '
-        Me.lblDistributionSchemeCode.DisplayOnly = true
-        Me.lblDistributionSchemeCode.EditingMode = false
-        resources.ApplyResources(Me.lblDistributionSchemeCode, "lblDistributionSchemeCode")
-        Me.lblDistributionSchemeCode.Name = "lblDistributionSchemeCode"
-        '
-        'lblDistributionSchemeName
-        '
-        Me.lblDistributionSchemeName.DisplayOnly = true
-        Me.lblDistributionSchemeName.EditingMode = false
-        resources.ApplyResources(Me.lblDistributionSchemeName, "lblDistributionSchemeName")
-        Me.lblDistributionSchemeName.Name = "lblDistributionSchemeName"
-        '
-        'lblDistributionSchemeNameAra
-        '
-        Me.lblDistributionSchemeNameAra.DisplayOnly = true
-        Me.lblDistributionSchemeNameAra.EditingMode = false
-        resources.ApplyResources(Me.lblDistributionSchemeNameAra, "lblDistributionSchemeNameAra")
-        Me.lblDistributionSchemeNameAra.Name = "lblDistributionSchemeNameAra"
-        '
-        'lblValidityStartDate
-        '
-        Me.lblValidityStartDate.DisplayOnly = true
-        Me.lblValidityStartDate.EditingMode = false
-        resources.ApplyResources(Me.lblValidityStartDate, "lblValidityStartDate")
-        Me.lblValidityStartDate.Name = "lblValidityStartDate"
-        '
-        'dtpValidityStartDate
-        '
-        Me.dtpValidityStartDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpValidityStartDate.DefaultValue = Nothing
-        Me.dtpValidityStartDate.DisplayOnly = false
-        Me.dtpValidityStartDate.DtpDefaultValue = Nothing
-        Me.dtpValidityStartDate.EditingMode = false
-        Me.dtpValidityStartDate.EditsAllowed = false
-        resources.ApplyResources(Me.dtpValidityStartDate, "dtpValidityStartDate")
-        Me.dtpValidityStartDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpValidityStartDate.LinkedLabel = Me.lblValidityEndDate
-        Me.dtpValidityStartDate.Name = "dtpValidityStartDate"
-        Me.dtpValidityStartDate.ReadOnlyDp = false
-        Me.dtpValidityStartDate.SecurityKey = Nothing
-        Me.dtpValidityStartDate.ShowLongDate = false
-        Me.dtpValidityStartDate.ShowTime = false
-        Me.dtpValidityStartDate.TargetCalendar = CType(resources.GetObject("dtpValidityStartDate.TargetCalendar"),System.Globalization.Calendar)
-        Me.dtpValidityStartDate.Value = Nothing
-        Me.dtpValidityStartDate.ValueIsMandatory = false
-        Me.dtpValidityStartDate.ValueIsNullable = false
-        '
-        'lblValidityEndDate
-        '
-        Me.lblValidityEndDate.DisplayOnly = true
-        Me.lblValidityEndDate.EditingMode = false
-        resources.ApplyResources(Me.lblValidityEndDate, "lblValidityEndDate")
-        Me.lblValidityEndDate.Name = "lblValidityEndDate"
-        '
-        'dtpValidityEndDate
-        '
-        Me.dtpValidityEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpValidityEndDate.DefaultValue = Nothing
-        Me.dtpValidityEndDate.DisplayOnly = false
-        Me.dtpValidityEndDate.DtpDefaultValue = Nothing
-        Me.dtpValidityEndDate.EditingMode = false
-        Me.dtpValidityEndDate.EditsAllowed = false
-        resources.ApplyResources(Me.dtpValidityEndDate, "dtpValidityEndDate")
-        Me.dtpValidityEndDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpValidityEndDate.LinkedLabel = Me.lblValidityStartDate
-        Me.dtpValidityEndDate.Name = "dtpValidityEndDate"
-        Me.dtpValidityEndDate.ReadOnlyDp = false
-        Me.dtpValidityEndDate.SecurityKey = Nothing
-        Me.dtpValidityEndDate.ShowLongDate = false
-        Me.dtpValidityEndDate.ShowTime = false
-        Me.dtpValidityEndDate.TargetCalendar = CType(resources.GetObject("dtpValidityEndDate.TargetCalendar"),System.Globalization.Calendar)
-        Me.dtpValidityEndDate.Value = Nothing
-        Me.dtpValidityEndDate.ValueIsMandatory = false
-        Me.dtpValidityEndDate.ValueIsNullable = false
-        '
-        'lblNotes
-        '
-        Me.lblNotes.DisplayOnly = true
-        Me.lblNotes.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.lblNotes, true)
-        resources.ApplyResources(Me.lblNotes, "lblNotes")
-        Me.lblNotes.Name = "lblNotes"
-        '
-        'DataGridViewDistributionSchemeItems
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewDistributionSchemeItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridViewDistributionSchemeItems.AutoGenerateColumns = false
-        Me.DataGridViewDistributionSchemeItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            '
+            'TreeViewTableName
+            '
+            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.ValueIsNumeric = True
+            '
+            'txtDistributionSchemeCode
+            '
+            Me.txtDistributionSchemeCode.BackColor = System.Drawing.Color.White
+            Me.txtDistributionSchemeCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDistributionSchemeCode.ComputedValue = False
+            Me.txtDistributionSchemeCode.CustomFormat = Nothing
+            Me.txtDistributionSchemeCode.DataBoundControl = True
+            Me.txtDistributionSchemeCode.EditingMode = False
+            Me.txtDistributionSchemeCode.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDistributionSchemeCode, True)
+            resources.ApplyResources(Me.txtDistributionSchemeCode, "txtDistributionSchemeCode")
+            Me.txtDistributionSchemeCode.ForeColor = System.Drawing.Color.Black
+            Me.txtDistributionSchemeCode.LinkedLabel = Nothing
+            Me.txtDistributionSchemeCode.MaximumValue = Nothing
+            Me.txtDistributionSchemeCode.MinimumValue = Nothing
+            Me.txtDistributionSchemeCode.Name = "txtDistributionSchemeCode"
+            Me.txtDistributionSchemeCode.OldValue = Nothing
+            Me.txtDistributionSchemeCode.ReadOnly = True
+            Me.txtDistributionSchemeCode.ValueIsMandatory = True
+            '
+            'txtDistributionSchemeName
+            '
+            Me.txtDistributionSchemeName.BackColor = System.Drawing.Color.White
+            Me.txtDistributionSchemeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDistributionSchemeName.ComputedValue = False
+            Me.txtDistributionSchemeName.CustomFormat = Nothing
+            Me.txtDistributionSchemeName.DataBoundControl = True
+            Me.txtDistributionSchemeName.EditingMode = False
+            Me.txtDistributionSchemeName.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDistributionSchemeName, True)
+            resources.ApplyResources(Me.txtDistributionSchemeName, "txtDistributionSchemeName")
+            Me.txtDistributionSchemeName.ForeColor = System.Drawing.Color.Black
+            Me.txtDistributionSchemeName.LinkedLabel = Nothing
+            Me.txtDistributionSchemeName.MaximumValue = Nothing
+            Me.txtDistributionSchemeName.MinimumValue = Nothing
+            Me.txtDistributionSchemeName.Name = "txtDistributionSchemeName"
+            Me.txtDistributionSchemeName.OldValue = Nothing
+            Me.txtDistributionSchemeName.ReadOnly = True
+            Me.txtDistributionSchemeName.ValueIsMandatory = True
+            '
+            'txtDistributionSchemeNameAra
+            '
+            Me.txtDistributionSchemeNameAra.BackColor = System.Drawing.Color.White
+            Me.txtDistributionSchemeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDistributionSchemeNameAra.ComputedValue = False
+            Me.txtDistributionSchemeNameAra.CustomFormat = Nothing
+            Me.txtDistributionSchemeNameAra.DataBoundControl = True
+            Me.txtDistributionSchemeNameAra.EditingMode = False
+            Me.txtDistributionSchemeNameAra.EnglishControl = Me.txtDistributionSchemeName
+            Me.txtDistributionSchemeNameAra.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDistributionSchemeNameAra, True)
+            resources.ApplyResources(Me.txtDistributionSchemeNameAra, "txtDistributionSchemeNameAra")
+            Me.txtDistributionSchemeNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtDistributionSchemeNameAra.LinkedLabel = Nothing
+            Me.txtDistributionSchemeNameAra.MaximumValue = Nothing
+            Me.txtDistributionSchemeNameAra.MinimumValue = Nothing
+            Me.txtDistributionSchemeNameAra.Name = "txtDistributionSchemeNameAra"
+            Me.txtDistributionSchemeNameAra.OldValue = Nothing
+            Me.txtDistributionSchemeNameAra.ReadOnly = True
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.ReadOnly = True
+            Me.txtNotes.ValueIsMandatory = True
+            '
+            'floDataDisplay
+            '
+            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+            Me.floDataDisplay.Controls.Add(Me.lblIdNo)
+            Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
+            Me.floDataDisplay.Controls.Add(Me.lblDistributionSchemeCode)
+            Me.floDataDisplay.Controls.Add(Me.txtDistributionSchemeCode)
+            Me.floDataDisplay.Controls.Add(Me.lblDistributionSchemeName)
+            Me.floDataDisplay.Controls.Add(Me.txtDistributionSchemeName)
+            Me.floDataDisplay.Controls.Add(Me.lblDistributionSchemeNameAra)
+            Me.floDataDisplay.Controls.Add(Me.txtDistributionSchemeNameAra)
+            Me.floDataDisplay.Controls.Add(Me.lblValidityStartDate)
+            Me.floDataDisplay.Controls.Add(Me.dtpValidityStartDate)
+            Me.floDataDisplay.Controls.Add(Me.lblValidityEndDate)
+            Me.floDataDisplay.Controls.Add(Me.dtpValidityEndDate)
+            Me.floDataDisplay.Controls.Add(Me.lblNotes)
+            Me.floDataDisplay.Controls.Add(Me.txtNotes)
+            Me.floDataDisplay.Name = "floDataDisplay"
+            '
+            'lblIdNo
+            '
+            Me.lblIdNo.DisplayOnly = True
+            Me.lblIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.Name = "lblIdNo"
+            '
+            'lblDistributionSchemeCode
+            '
+            Me.lblDistributionSchemeCode.DisplayOnly = True
+            Me.lblDistributionSchemeCode.EditingMode = False
+            resources.ApplyResources(Me.lblDistributionSchemeCode, "lblDistributionSchemeCode")
+            Me.lblDistributionSchemeCode.Name = "lblDistributionSchemeCode"
+            '
+            'lblDistributionSchemeName
+            '
+            Me.lblDistributionSchemeName.DisplayOnly = True
+            Me.lblDistributionSchemeName.EditingMode = False
+            resources.ApplyResources(Me.lblDistributionSchemeName, "lblDistributionSchemeName")
+            Me.lblDistributionSchemeName.Name = "lblDistributionSchemeName"
+            '
+            'lblDistributionSchemeNameAra
+            '
+            Me.lblDistributionSchemeNameAra.DisplayOnly = True
+            Me.lblDistributionSchemeNameAra.EditingMode = False
+            resources.ApplyResources(Me.lblDistributionSchemeNameAra, "lblDistributionSchemeNameAra")
+            Me.lblDistributionSchemeNameAra.Name = "lblDistributionSchemeNameAra"
+            '
+            'lblValidityStartDate
+            '
+            Me.lblValidityStartDate.DisplayOnly = True
+            Me.lblValidityStartDate.EditingMode = False
+            resources.ApplyResources(Me.lblValidityStartDate, "lblValidityStartDate")
+            Me.lblValidityStartDate.Name = "lblValidityStartDate"
+            '
+            'dtpValidityStartDate
+            '
+            Me.dtpValidityStartDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpValidityStartDate.DefaultValue = Nothing
+            Me.dtpValidityStartDate.DisplayOnly = False
+            Me.dtpValidityStartDate.DtpDefaultValue = Nothing
+            Me.dtpValidityStartDate.EditingMode = False
+            Me.dtpValidityStartDate.EditsAllowed = False
+            resources.ApplyResources(Me.dtpValidityStartDate, "dtpValidityStartDate")
+            Me.dtpValidityStartDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpValidityStartDate.LinkedLabel = Me.lblValidityEndDate
+            Me.dtpValidityStartDate.Name = "dtpValidityStartDate"
+            Me.dtpValidityStartDate.ReadOnlyDp = False
+            Me.dtpValidityStartDate.SecurityKey = Nothing
+            Me.dtpValidityStartDate.ShowLongDate = False
+            Me.dtpValidityStartDate.ShowTime = False
+            Me.dtpValidityStartDate.TargetCalendar = CType(resources.GetObject("dtpValidityStartDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpValidityStartDate.Value = Nothing
+            Me.dtpValidityStartDate.ValueIsMandatory = False
+            Me.dtpValidityStartDate.ValueIsNullable = False
+            '
+            'lblValidityEndDate
+            '
+            Me.lblValidityEndDate.DisplayOnly = True
+            Me.lblValidityEndDate.EditingMode = False
+            resources.ApplyResources(Me.lblValidityEndDate, "lblValidityEndDate")
+            Me.lblValidityEndDate.Name = "lblValidityEndDate"
+            '
+            'dtpValidityEndDate
+            '
+            Me.dtpValidityEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpValidityEndDate.DefaultValue = Nothing
+            Me.dtpValidityEndDate.DisplayOnly = False
+            Me.dtpValidityEndDate.DtpDefaultValue = Nothing
+            Me.dtpValidityEndDate.EditingMode = False
+            Me.dtpValidityEndDate.EditsAllowed = False
+            resources.ApplyResources(Me.dtpValidityEndDate, "dtpValidityEndDate")
+            Me.dtpValidityEndDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpValidityEndDate.LinkedLabel = Me.lblValidityStartDate
+            Me.dtpValidityEndDate.Name = "dtpValidityEndDate"
+            Me.dtpValidityEndDate.ReadOnlyDp = False
+            Me.dtpValidityEndDate.SecurityKey = Nothing
+            Me.dtpValidityEndDate.ShowLongDate = False
+            Me.dtpValidityEndDate.ShowTime = False
+            Me.dtpValidityEndDate.TargetCalendar = CType(resources.GetObject("dtpValidityEndDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpValidityEndDate.Value = Nothing
+            Me.dtpValidityEndDate.ValueIsMandatory = False
+            Me.dtpValidityEndDate.ValueIsNullable = False
+            '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            Me.floDataDisplay.SetFlowBreak(Me.lblNotes, True)
+            resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.Name = "lblNotes"
+            '
+            'DataGridViewDistributionSchemeItems
+            '
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDistributionSchemeItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewDistributionSchemeItems.AutoGenerateColumns = False
+            Me.DataGridViewDistributionSchemeItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewDistributionSchemeItems.DataSource = Me.bsDistributionSchemeItems
             DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewDistributionSchemeItems.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridViewDistributionSchemeItems.DisplayOnly = false
-        Me.DataGridViewDistributionSchemeItems.EditingMode = false
-        Me.DataGridViewDistributionSchemeItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        resources.ApplyResources(Me.DataGridViewDistributionSchemeItems, "DataGridViewDistributionSchemeItems")
-        Me.DataGridViewDistributionSchemeItems.Name = "DataGridViewDistributionSchemeItems"
-        Me.DataGridViewDistributionSchemeItems.ReadOnly = true
-        Me.DataGridViewDistributionSchemeItems.SequenceColumn = "dgvSequence"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDistributionSchemeItems.DefaultCellStyle = DataGridViewCellStyle2
+            Me.DataGridViewDistributionSchemeItems.DgvFooter = Nothing
+            Me.DataGridViewDistributionSchemeItems.DisplayOnly = False
+            Me.DataGridViewDistributionSchemeItems.Ea = Nothing
+            Me.DataGridViewDistributionSchemeItems.EditingMode = False
+            Me.DataGridViewDistributionSchemeItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewDistributionSchemeItems.FieldsDictionary = Nothing
+            Me.DataGridViewDistributionSchemeItems.FirstRowDeletionEnabled = True
+            Me.DataGridViewDistributionSchemeItems.FirstRowInsertionEnabled = True
+            resources.ApplyResources(Me.DataGridViewDistributionSchemeItems, "DataGridViewDistributionSchemeItems")
+            Me.DataGridViewDistributionSchemeItems.Name = "DataGridViewDistributionSchemeItems"
+            Me.DataGridViewDistributionSchemeItems.ReadOnly = True
+            Me.DataGridViewDistributionSchemeItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewDistributionSchemeItems.SequenceFieldName = "Sequence"
+            Me.DataGridViewDistributionSchemeItems.ShowFooter = False
+            Me.DataGridViewDistributionSchemeItems.ShowInsertColumnWhenEditing = True
             '
             'dgvIdNo
             '
             Me.dgvIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.dgvIdNo.DataPropertyName = "IdNo"
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        Me.dgvIdNo.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvIdNo.EditingMode = false
-        resources.ApplyResources(Me.dgvIdNo, "dgvIdNo")
-        Me.dgvIdNo.Name = "dgvIdNo"
-        Me.dgvIdNo.ReadOnly = true
-        Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvDistributionSchemeIdNo
-        '
-        Me.dgvDistributionSchemeIdNo.DataPropertyName = "DistributionSchemeIdNo"
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        Me.dgvDistributionSchemeIdNo.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvDistributionSchemeIdNo.EditingMode = false
-        resources.ApplyResources(Me.dgvDistributionSchemeIdNo, "dgvDistributionSchemeIdNo")
-        Me.dgvDistributionSchemeIdNo.Name = "dgvDistributionSchemeIdNo"
-        Me.dgvDistributionSchemeIdNo.ReadOnly = true
-        Me.dgvDistributionSchemeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvSequence
-        '
-        Me.dgvSequence.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.dgvSequence.DataPropertyName = "Sequence"
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle5
-        Me.dgvSequence.EditingMode = false
-        Me.dgvSequence.FillWeight = 1!
-        resources.ApplyResources(Me.dgvSequence, "dgvSequence")
-        Me.dgvSequence.Name = "dgvSequence"
-        Me.dgvSequence.ReadOnly = true
-        Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvRevCostCenterIdNo
-        '
-        Me.dgvRevCostCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
-        resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
-        Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
-        Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'dgvPercentage
-        '
-        Me.dgvPercentage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.dgvPercentage.DataPropertyName = "Percentage"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "N2"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.dgvPercentage.DefaultCellStyle = DataGridViewCellStyle7
-        Me.dgvPercentage.FillWeight = 1!
-        resources.ApplyResources(Me.dgvPercentage, "dgvPercentage")
-        Me.dgvPercentage.Name = "dgvPercentage"
-        '
-        'txtTotalPercentage
-        '
-        Me.txtTotalPercentage.BackColor = System.Drawing.Color.White
-        Me.txtTotalPercentage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalPercentage.ComputedValue = true
-        Me.txtTotalPercentage.CustomFormat = Nothing
-        Me.txtTotalPercentage.DataBoundControl = true
-        Me.txtTotalPercentage.DisplayOnly = true
-        Me.txtTotalPercentage.EditingMode = true
-        resources.ApplyResources(Me.txtTotalPercentage, "txtTotalPercentage")
-        Me.txtTotalPercentage.ForeColor = System.Drawing.Color.Black
+            Me.dgvIdNo.DataPropertyName = "IdNo"
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.dgvIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            Me.dgvIdNo.EditingMode = False
+            resources.ApplyResources(Me.dgvIdNo, "dgvIdNo")
+            Me.dgvIdNo.Name = "dgvIdNo"
+            Me.dgvIdNo.ReadOnly = True
+            Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvDistributionSchemeIdNo
+            '
+            Me.dgvDistributionSchemeIdNo.DataPropertyName = "DistributionSchemeIdNo"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvDistributionSchemeIdNo.DefaultCellStyle = DataGridViewCellStyle4
+            Me.dgvDistributionSchemeIdNo.EditingMode = False
+            resources.ApplyResources(Me.dgvDistributionSchemeIdNo, "dgvDistributionSchemeIdNo")
+            Me.dgvDistributionSchemeIdNo.Name = "dgvDistributionSchemeIdNo"
+            Me.dgvDistributionSchemeIdNo.ReadOnly = True
+            Me.dgvDistributionSchemeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvSequence
+            '
+            Me.dgvSequence.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+            Me.dgvSequence.DataPropertyName = "Sequence"
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle5
+            Me.dgvSequence.EditingMode = False
+            Me.dgvSequence.FillWeight = 1.0!
+            resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+            Me.dgvSequence.Name = "dgvSequence"
+            Me.dgvSequence.ReadOnly = True
+            Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvRevCostCenterIdNo
+            '
+            Me.dgvRevCostCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
+            resources.ApplyResources(Me.dgvRevCostCenterIdNo, "dgvRevCostCenterIdNo")
+            Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
+            Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            '
+            'dgvPercentage
+            '
+            Me.dgvPercentage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+            Me.dgvPercentage.DataPropertyName = "Percentage"
+            DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle7.Format = "N2"
+            DataGridViewCellStyle7.NullValue = Nothing
+            Me.dgvPercentage.DefaultCellStyle = DataGridViewCellStyle7
+            Me.dgvPercentage.FillWeight = 1.0!
+            resources.ApplyResources(Me.dgvPercentage, "dgvPercentage")
+            Me.dgvPercentage.Name = "dgvPercentage"
+            '
+            'txtTotalPercentage
+            '
+            Me.txtTotalPercentage.BackColor = System.Drawing.Color.White
+            Me.txtTotalPercentage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalPercentage.ComputedValue = True
+            Me.txtTotalPercentage.CustomFormat = Nothing
+            Me.txtTotalPercentage.DataBoundControl = True
+            Me.txtTotalPercentage.DisplayOnly = True
+            Me.txtTotalPercentage.EditingMode = True
+            Me.txtTotalPercentage.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalPercentage, "txtTotalPercentage")
+            Me.txtTotalPercentage.ForeColor = System.Drawing.Color.Black
         Me.txtTotalPercentage.LinkedLabel = Nothing
         Me.txtTotalPercentage.MaximumValue = Nothing
         Me.txtTotalPercentage.MinimumValue = Nothing
