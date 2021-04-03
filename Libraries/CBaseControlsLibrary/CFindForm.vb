@@ -9,6 +9,8 @@ Public Class CFindForm
     Private _SearchAnywhere As Boolean
     Private _searchMode As Int16
     Private _control As Control
+    Private _begDateToSearch As Date?
+    Private _endDateToSearch As Date?
 
     Public Sub New(searchMode As Int16, Optional cControl As Control = Nothing)
 
@@ -20,6 +22,24 @@ Public Class CFindForm
 
     End Sub
 
+    Public Property EndDateToSearch As Date?
+        Get
+            Return _endDateToSearch
+        End Get
+        Set
+            _endDateToSearch = Value
+        End Set
+    End Property
+
+    Public Property BegDateToSearch As Date?
+        Get
+            Return _begDateToSearch
+        End Get
+        Set
+            _begDateToSearch = Value
+        End Set
+    End Property
+
     Public Property TextToSearch As String
         Get
             Return _TextToSearch
@@ -28,6 +48,7 @@ Public Class CFindForm
             _TextToSearch = Value
         End Set
     End Property
+
 
     Public Property SearchAnywhere As Boolean
         Get
@@ -65,6 +86,8 @@ Public Class CFindForm
             End If
         ElseIf _searchMode = 2 Then
             ' date search
+            _begDateToSearch = dtpBegDate.Value
+            _endDateToSearch = dtpEndDate.Value
             SearchAnywhere = False
         End If
         Close()
@@ -102,6 +125,7 @@ Public Class CFindForm
             lblLookFor1.Visible = False
             lblLookFor2.Visible = True
             lblLookFor3.Visible = False
+            lblLookFor4.Visible = False
             TxtTextToSearch.Visible = False
             cboTextToSearch.Visible = True
             RBtnAnywhere.Visible = False
@@ -113,12 +137,14 @@ Public Class CFindForm
             dtpBegDate.Visible = False
             dtpEndDate.Visible = False
             lblTo.Visible = False
-
+            chkChecked.Visible = False
+            Height = 125
         ElseIf _searchMode = 0 Then
             ' textbox search
             lblLookFor1.Visible = True
             lblLookFor2.Visible = False
             lblLookFor3.Visible = False
+            lblLookFor4.Visible = False
             TxtTextToSearch.Visible = True
             cboTextToSearch.Visible = False
             RBtnAnywhere.Visible = True
@@ -126,6 +152,8 @@ Public Class CFindForm
             dtpBegDate.Visible = False
             dtpEndDate.Visible = False
             lblTo.Visible = False
+            chkChecked.Visible = False
+            Height = 175
         ElseIf _searchMode = 2 Then
             ' date search
             dtpBegDate.Visible = True
@@ -133,11 +161,28 @@ Public Class CFindForm
             lblLookFor1.Visible = False
             lblLookFor2.Visible = False
             lblLookFor3.Visible = True
+            lblLookFor4.Visible = False
             TxtTextToSearch.Visible = False
             cboTextToSearch.Visible = False
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
             lblTo.Visible = True
+            chkChecked.Visible = False
+            Height = 125
+        ElseIf _searchMode = 3 Then
+            lblLookFor4.Visible = True
+            chkChecked.Visible = True
+            dtpBegDate.Visible = False
+            dtpEndDate.Visible = False
+            lblLookFor1.Visible = False
+            lblLookFor2.Visible = False
+            lblLookFor3.Visible = False
+            TxtTextToSearch.Visible = False
+            cboTextToSearch.Visible = False
+            RBtnAnywhere.Visible = False
+            RBtnStart.Visible = False
+            lblTo.Visible = False
+            Height = 125
         End If
     End Sub
 

@@ -386,7 +386,20 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Sub FindField(fieldName As String, searchString As String, searchAnywhere As String)
         Dim idNo = Model.FindField(TableName, fieldName, searchString, searchAnywhere, DataFilter)
-        RecordPositionNumber = GetSortedRecordPosition(idNo)
+        If idNo <> 0 Then
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
+        Else
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+        End If
+    End Sub
+
+    Public Sub FindDateField(fieldName As String, begDateToSearch As Date?, endDateToSearch As Date?)
+        Dim idNo = Model.FindDateField(TableName, fieldName, begDateToSearch, endDateToSearch, DataFilter)
+        If idNo <> 0 Then
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
+        Else
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+        End If
     End Sub
 
     Public Function FindFieldOnTable(tableNameToSearch, fieldName, searchString, searchAnywhere)

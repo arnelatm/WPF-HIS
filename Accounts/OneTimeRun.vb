@@ -85,7 +85,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgCannotEditReadOnly", "Sorry either this item Is read only Or you don't have the proper security credentials to change this value. Reverting to original value.", "Error")
         Messaging.AddMessage("MsgSelectedValueNotAllowed", "Sorry selected value for {field1} not allowed for selected {field2}.", "Error")
         Messaging.AddMessage("MsgNothingToFind", "Either this is a fixed field value or find not enabled for this field.", "Warning")
-
+        Messaging.AddMessage("MsgNoMatchingRecordFound", "No records match your query condition!", "Warning")
     End Sub
 
     'Public Shared Sub CreateEnums()

@@ -97,13 +97,13 @@ Namespace AdoNet
                     sql = sql & filter.Trim() & " and "
                 End If
                 Dim dBegDate As Date = begSearchDate
-                Dim dEndDate As Date
+                Dim dEndDate As Date = endSearchDate
                 If endSearchDate Is Nothing Then
                     dEndDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBegDate)
                 Else
                     dEndDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEndDate)
                 End If
-                searchString = fieldName & " >= " & dBegDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & " and " & fieldName & " < " & dEndDate.ToString("yyyMMdd", CultureInfo.InvariantCulture)
+                searchString = fieldName & " >= '" & dBegDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEndDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
                 sql = sql & searchString
                 _lastFindQuery = sql
                 retVal = _db.Scalar(sql & " order by IdNo ")

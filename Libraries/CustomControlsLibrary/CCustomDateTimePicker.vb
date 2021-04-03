@@ -697,9 +697,10 @@ Public Class CCustomDateTimePicker
         Return True
     End Function
 
-    'Private Sub CCustomDateTimePicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    txtDate.SearchField = Name.Substring(3)
-    'End Sub
+    Private Sub CCustomDateTimePicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtDate.SearchField = Name.Substring(3)
+        txtDate.DateField = True
+    End Sub
 
     'Protected Sub ContextHandler(sender As Object, e As EventArgs)
 
