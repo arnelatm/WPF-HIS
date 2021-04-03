@@ -32,17 +32,19 @@ Partial Class CFindForm
         Me.BtnFind = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblLookFor4 = New System.Windows.Forms.Label()
         Me.lblLookFor3 = New System.Windows.Forms.Label()
         Me.lblLookFor2 = New System.Windows.Forms.Label()
         Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.tlpDates = New System.Windows.Forms.TableLayoutPanel()
         Me.dtpBegDate = New System.Windows.Forms.DateTimePicker()
         Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
         Me.lblTo = New System.Windows.Forms.Label()
+        Me.chkChecked = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
-        Me.TableLayoutPanel3.SuspendLayout()
+        Me.tlpDates.SuspendLayout()
         Me.SuspendLayout()
         '
         'TxtTextToSearch
@@ -68,7 +70,7 @@ Partial Class CFindForm
         Me.RBtnStart.AutoSize = True
         Me.RBtnStart.BackColor = System.Drawing.Color.Transparent
         Me.RBtnStart.Checked = True
-        Me.RBtnStart.Location = New System.Drawing.Point(58, 86)
+        Me.RBtnStart.Location = New System.Drawing.Point(58, 112)
         Me.RBtnStart.Name = "RBtnStart"
         Me.RBtnStart.Size = New System.Drawing.Size(84, 17)
         Me.RBtnStart.TabIndex = 2
@@ -80,7 +82,7 @@ Partial Class CFindForm
         '
         Me.RBtnAnywhere.AutoSize = True
         Me.RBtnAnywhere.BackColor = System.Drawing.Color.Transparent
-        Me.RBtnAnywhere.Location = New System.Drawing.Point(58, 109)
+        Me.RBtnAnywhere.Location = New System.Drawing.Point(58, 135)
         Me.RBtnAnywhere.Name = "RBtnAnywhere"
         Me.RBtnAnywhere.Size = New System.Drawing.Size(112, 17)
         Me.RBtnAnywhere.TabIndex = 3
@@ -114,15 +116,17 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor4, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor3, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtTextToSearch, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.RBtnAnywhere, 1, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.RBtnAnywhere, 1, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.cboTextToSearch, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.RBtnStart, 1, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel3, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.RBtnStart, 1, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.tlpDates, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkChecked, 1, 3)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 7
@@ -132,9 +136,19 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(308, 177)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(308, 190)
         Me.TableLayoutPanel1.TabIndex = 6
+        '
+        'lblLookFor4
+        '
+        Me.lblLookFor4.AutoSize = True
+        Me.lblLookFor4.BackColor = System.Drawing.Color.Transparent
+        Me.lblLookFor4.Location = New System.Drawing.Point(3, 83)
+        Me.lblLookFor4.Name = "lblLookFor4"
+        Me.lblLookFor4.Size = New System.Drawing.Size(49, 13)
+        Me.lblLookFor4.TabIndex = 7
+        Me.lblLookFor4.Text = "Look For"
         '
         'lblLookFor3
         '
@@ -204,29 +218,29 @@ Partial Class CFindForm
         Me.TableLayoutPanel2.Controls.Add(Me.BtnFind, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.BtnCancel, 1, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 132)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 158)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(302, 30)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(302, 29)
         Me.TableLayoutPanel2.TabIndex = 4
         '
-        'TableLayoutPanel3
+        'tlpDates
         '
-        Me.TableLayoutPanel3.ColumnCount = 3
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel3.Controls.Add(Me.dtpBegDate, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.dtpEndDate, 2, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.lblTo, 1, 0)
-        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(58, 55)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RowCount = 1
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(247, 25)
-        Me.TableLayoutPanel3.TabIndex = 6
+        Me.tlpDates.ColumnCount = 3
+        Me.tlpDates.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tlpDates.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tlpDates.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tlpDates.Controls.Add(Me.dtpBegDate, 0, 0)
+        Me.tlpDates.Controls.Add(Me.dtpEndDate, 2, 0)
+        Me.tlpDates.Controls.Add(Me.lblTo, 1, 0)
+        Me.tlpDates.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlpDates.Location = New System.Drawing.Point(58, 55)
+        Me.tlpDates.Name = "tlpDates"
+        Me.tlpDates.RowCount = 1
+        Me.tlpDates.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tlpDates.Size = New System.Drawing.Size(247, 25)
+        Me.tlpDates.TabIndex = 6
         '
         'dtpBegDate
         '
@@ -254,19 +268,39 @@ Partial Class CFindForm
         Me.lblTo.TabIndex = 6
         Me.lblTo.Text = "  to   "
         '
+        'chkChecked
+        '
+        Me.chkChecked.BackColor = System.Drawing.Color.White
+        Me.chkChecked.DisplayOnly = False
+        Me.chkChecked.EditingMode = True
+        Me.chkChecked.FlatAppearance.BorderSize = 0
+        Me.chkChecked.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.chkChecked.ForeColor = System.Drawing.Color.Black
+        Me.chkChecked.LinkedLabel = Nothing
+        Me.chkChecked.Location = New System.Drawing.Point(56, 84)
+        Me.chkChecked.Margin = New System.Windows.Forms.Padding(1)
+        Me.chkChecked.Name = "chkChecked"
+        Me.chkChecked.NoLabel = True
+        Me.chkChecked.OldValue = Nothing
+        Me.chkChecked.Size = New System.Drawing.Size(24, 24)
+        Me.chkChecked.TabIndex = 8
+        Me.chkChecked.Text = "CCheckBox1"
+        Me.chkChecked.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkChecked.UseVisualStyleBackColor = True
+        '
         'CFindForm
         '
         Me.AcceptButton = Me.BtnFind
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(334, 192)
+        Me.ClientSize = New System.Drawing.Size(334, 212)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "CFindForm"
         Me.Text = "Find Field Form"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
-        Me.TableLayoutPanel3.ResumeLayout(False)
-        Me.TableLayoutPanel3.PerformLayout()
+        Me.tlpDates.ResumeLayout(False)
+        Me.tlpDates.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -282,8 +316,10 @@ Partial Class CFindForm
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Public WithEvents cboTextToSearch As CaComboBox
     Friend WithEvents lblLookFor3 As Label
-    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents tlpDates As TableLayoutPanel
     Friend WithEvents lblTo As Label
     Friend WithEvents dtpBegDate As DateTimePicker
     Friend WithEvents dtpEndDate As DateTimePicker
+    Friend WithEvents lblLookFor4 As Label
+    Friend WithEvents chkChecked As CCheckBox
 End Class

@@ -99,13 +99,12 @@ Public Class CFormEntry
             End If
         ElseIf TypeOf cControl Is CMaskedTextBox Then
             Dim cMaskedTextBoxControl As CMaskedTextBox = cControl
-            If fieldName Is Nothing OrElse fieldName = "" Then
-                'fieldName = cControl.Name
-            Else
-                If Not (cMaskedTextBoxControl.SearchField Is Nothing OrElse cMaskedTextBoxControl.SearchField = "") Then
-                    fieldName = cMaskedTextBoxControl.SearchField
-                    'searchString = PresenterObj.FindFieldOnTable("Employee", fieldNameToSearch, searchString, searchAnywhere)
-                End If
+            If Not (cMaskedTextBoxControl.SearchField Is Nothing OrElse cMaskedTextBoxControl.SearchField = "") Then
+                fieldName = cMaskedTextBoxControl.SearchField
+                Dim begDateToSearch As Date = CallByName(cControl, "GetBegDateToSearch", CallType.Get)
+                Dim endDateToSearch As Date = CallByName(cControl, "GetEndDateToSearch", CallType.Get)
+                PresenterObj.FindDateField(fieldName, begDateToSearch, endDateToSearch)
+                Exit Sub
             End If
         End If
         searchAnywhere = CallByName(cControl, "GetSearchAnywhere", CallType.Get)

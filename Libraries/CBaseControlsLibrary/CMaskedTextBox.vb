@@ -10,6 +10,8 @@ Public Class CMaskedTextBox
     Private _defaultVal As String
     Private _isNumeric As Boolean
     Private _textToSearch As String
+    Private _begDateToSearch As Date?
+    Private _endDateToSearch As Date?
     Private _searchAnywhere As Boolean
     Private _oldValue As String
     Private _editsALlowed As Boolean = False
@@ -73,6 +75,13 @@ Public Class CMaskedTextBox
     <Description("Set to True to specify that this control is mandatory.")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
+
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that this field will contain a date.")>
+    <Browsable(True)>
+    Public Property DateField As Boolean
 
     <Bindable(True)>
     <Category("Properties")>
@@ -298,21 +307,35 @@ Public Class CMaskedTextBox
 
     Private Sub MenuItemFind_Click()
         Dim MyForm = FindForm()
-        Dim SearchForm = New CFindForm(2)
-        'SearchForm.Show()
-        SearchForm.ShowDialog()
-        _textToSearch = SearchForm.TextToSearch
-        _searchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
-        ' SearchForm.Dispose()
-        If _textToSearch <> "" Then
-
+        Dim searchForm
+        If DateField Then
+            searchForm = New CFindForm(2)
+            searchForm.ShowDialog()
+            _textToSearch = searchForm.TextToSearch
+            _begDateToSearch = SearchForm.BegDateToSearch
+            _endDateToSearch = SearchForm.EndDateToSearch
             CallByName(MyForm, "FindField", CallType.Method, Me)
             SearchForm.Dispose()
+        Else
+            searchForm = New CFindForm(0)
+            _searchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
+            If _textToSearch <> "" Then
+                CallByName(MyForm, "FindField", CallType.Method, Me)
+                SearchForm.Dispose()
+            End If
         End If
     End Sub
 
     Public Function GetTextToSearch() As String
         Return _textToSearch
+    End Function
+
+    Public Function GetBegDateToSearch() As String
+        Return _begDateToSearch
+    End Function
+
+    Public Function GetEndDateToSearch() As String
+        Return _endDateToSearch
     End Function
 
     Public Function GetSearchAnywhere() As Boolean
