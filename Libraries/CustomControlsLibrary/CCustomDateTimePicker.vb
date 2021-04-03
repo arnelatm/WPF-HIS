@@ -65,7 +65,6 @@ Public Class CCustomDateTimePicker
         txtLongDate.Width = _longDateWidth
         SetupDisplayWidths()
         EditingMode = True
-        'txtDate.SearchField = Name.Substring(3)
     End Sub
 
 #Region "Constant Declarations#"
@@ -697,6 +696,10 @@ Public Class CCustomDateTimePicker
         End If
         Return True
     End Function
+
+    'Private Sub CCustomDateTimePicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '    txtDate.SearchField = Name.Substring(3)
+    'End Sub
 
     'Protected Sub ContextHandler(sender As Object, e As EventArgs)
 

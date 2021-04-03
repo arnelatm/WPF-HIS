@@ -102,10 +102,10 @@ Public Class CFormEntry
             If fieldName Is Nothing OrElse fieldName = "" Then
                 'fieldName = cControl.Name
             Else
-                'If Not (cMaskedTextBoxControl.SearchField Is Nothing OrElse cMaskedTextBoxControl.SearchField = "") Then
-                '    fieldName = cMaskedTextBoxControl.SearchField
-                '    'searchString = PresenterObj.FindFieldOnTable("Employee", fieldNameToSearch, searchString, searchAnywhere)
-                'End If
+                If Not (cMaskedTextBoxControl.SearchField Is Nothing OrElse cMaskedTextBoxControl.SearchField = "") Then
+                    fieldName = cMaskedTextBoxControl.SearchField
+                    'searchString = PresenterObj.FindFieldOnTable("Employee", fieldNameToSearch, searchString, searchAnywhere)
+                End If
             End If
         End If
         searchAnywhere = CallByName(cControl, "GetSearchAnywhere", CallType.Get)

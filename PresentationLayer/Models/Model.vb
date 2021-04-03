@@ -51,6 +51,10 @@ Public Class Model
         Return Service.FindField(tableName, fieldName, searchString, searchAnywhere, filter)
     End Function
 
+    Public Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer Implements IModel.FindDateField
+        Return Service.FindDateField(tableName, fieldName, begSearchDate, endSearchDate, filter)
+    End Function
+
     Public Function FindFieldContinue(tableName As String, idNo As Int32) As Integer Implements IModel.FindFieldContinue
         Return Service.FindFieldContinue(tableName, idNo)
     End Function

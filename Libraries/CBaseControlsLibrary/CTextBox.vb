@@ -398,7 +398,7 @@ Public Class CTextBox
         If FindEnabled Then
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindForm(False)
+            Dim searchForm = New CFindForm(0)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea

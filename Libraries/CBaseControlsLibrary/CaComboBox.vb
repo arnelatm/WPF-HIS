@@ -735,9 +735,9 @@ Public Class CaComboBox
         Dim myForm = Me.FindForm()
         Dim SearchForm
         If Me.SearchField Is Nothing OrElse Me.SearchField = "" Then
-            SearchForm = New CFindForm(True, Me)
+            SearchForm = New CFindForm(1, Me)
         Else
-            SearchForm = New CFindForm(False)
+            SearchForm = New CFindForm(0)
         End If
         SearchForm.ShowDialog()
         If Not (SearchField Is Nothing OrElse SearchField = "") Then
