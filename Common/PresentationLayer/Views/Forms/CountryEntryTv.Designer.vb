@@ -24,6 +24,7 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CountryEntryTv))
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -57,6 +58,12 @@ Namespace PresentationLayer.Views.Forms
             Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 286)
             Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.TreeViewTableName.Size = New System.Drawing.Size(300, 301)
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
             '
             'floDataDisplay
             '
@@ -112,9 +119,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
-            Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
-            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
+            Me.TxtIdNo.FindEnabled = True
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
@@ -124,10 +130,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
-            Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
             Me.TxtIdNo.TabIndex = 0
-            Me.TxtIdNo.TabStop = False
             '
             'lblCountryCode
             '
@@ -152,6 +156,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCountryCode.CustomFormat = Nothing
             Me.txtCountryCode.DataBoundControl = True
             Me.txtCountryCode.EditingMode = False
+            Me.txtCountryCode.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtCountryCode, True)
             Me.txtCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCountryCode.ForeColor = System.Drawing.Color.Gray
@@ -191,6 +196,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCountryName.CustomFormat = Nothing
             Me.txtCountryName.DataBoundControl = True
             Me.txtCountryName.EditingMode = False
+            Me.txtCountryName.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtCountryName, True)
             Me.txtCountryName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCountryName.ForeColor = System.Drawing.Color.Gray
@@ -231,6 +237,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCountryNameAra.DataBoundControl = True
             Me.txtCountryNameAra.EditingMode = False
             Me.txtCountryNameAra.EnglishControl = Me.txtCountryName
+            Me.txtCountryNameAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtCountryNameAra, True)
             Me.txtCountryNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCountryNameAra.ForeColor = System.Drawing.Color.Black
@@ -271,6 +278,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNationality.DataBoundControl = True
             Me.txtNationality.EditingMode = False
             Me.txtNationality.EnglishControl = Me.txtCountryName
+            Me.txtNationality.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtNationality, True)
             Me.txtNationality.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNationality.ForeColor = System.Drawing.Color.Black
@@ -311,6 +319,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNationalityAra.DataBoundControl = True
             Me.txtNationalityAra.EditingMode = False
             Me.txtNationalityAra.EnglishControl = Me.txtCountryName
+            Me.txtNationalityAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtNationalityAra, True)
             Me.txtNationalityAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNationalityAra.ForeColor = System.Drawing.Color.Black
@@ -350,6 +359,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtISOA3.CustomFormat = Nothing
             Me.TxtISOA3.DataBoundControl = True
             Me.TxtISOA3.EditingMode = False
+            Me.TxtISOA3.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtISOA3, True)
             Me.TxtISOA3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtISOA3.ForeColor = System.Drawing.Color.Gray
@@ -388,6 +398,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtISON.CustomFormat = Nothing
             Me.TxtISON.DataBoundControl = True
             Me.TxtISON.EditingMode = False
+            Me.TxtISON.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtISON, True)
             Me.TxtISON.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtISON.ForeColor = System.Drawing.Color.Gray
@@ -411,7 +422,7 @@ Namespace PresentationLayer.Views.Forms
             Me.LblCountryTelCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.LblCountryTelCode.Location = New System.Drawing.Point(11, 211)
             Me.LblCountryTelCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.LblCountryTelCode.Name = "LblCountryTelIdNo"
+            Me.LblCountryTelCode.Name = "LblCountryTelCode"
             Me.LblCountryTelCode.Size = New System.Drawing.Size(184, 23)
             Me.LblCountryTelCode.TabIndex = 169
             Me.LblCountryTelCode.Text = "International Phone Code"
@@ -425,6 +436,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtCountryTelCode.CustomFormat = Nothing
             Me.TxtCountryTelCode.DataBoundControl = True
             Me.TxtCountryTelCode.EditingMode = False
+            Me.TxtCountryTelCode.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtCountryTelCode, True)
             Me.TxtCountryTelCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtCountryTelCode.ForeColor = System.Drawing.Color.Gray
@@ -433,7 +445,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtCountryTelCode.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtCountryTelCode.MaximumValue = Nothing
             Me.TxtCountryTelCode.MinimumValue = Nothing
-            Me.TxtCountryTelCode.Name = "TxtCountryTelIdNo"
+            Me.TxtCountryTelCode.Name = "TxtCountryTelCode"
             Me.TxtCountryTelCode.OldValue = Nothing
             Me.TxtCountryTelCode.ReadOnly = True
             Me.TxtCountryTelCode.Size = New System.Drawing.Size(62, 23)
@@ -463,6 +475,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtFlag32.CustomFormat = Nothing
             Me.TxtFlag32.DataBoundControl = True
             Me.TxtFlag32.EditingMode = False
+            Me.TxtFlag32.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.TxtFlag32, True)
             Me.TxtFlag32.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtFlag32.ForeColor = System.Drawing.Color.Gray
@@ -499,6 +512,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtFlag128.CustomFormat = Nothing
             Me.TxtFlag128.DataBoundControl = True
             Me.TxtFlag128.EditingMode = False
+            Me.TxtFlag128.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.TxtFlag128, True)
             Me.TxtFlag128.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtFlag128.ForeColor = System.Drawing.Color.Gray
@@ -531,7 +545,6 @@ Namespace PresentationLayer.Views.Forms
 
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblCountryCode As CLabel
         Friend WithEvents txtCountryCode As CTextBox
         Friend WithEvents lblCountryName As CLabel
@@ -552,5 +565,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents LblFlag32 As CLabel
         Friend WithEvents TxtFlag32 As CTextBox
         Friend WithEvents TxtCountryTelCode As CTextBox
+        Friend WithEvents TxtIdNo As CTextBox
     End Class
 End Namespace

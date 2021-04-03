@@ -46,6 +46,8 @@ Public Class CCustomDateTimePicker
     Private _editsAllowed As Boolean = False
     Private _editingMode As Boolean = True
 
+    Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
+
     Public Event ValueChanged As EventHandler
 
     Public Sub New()
@@ -63,7 +65,17 @@ Public Class CCustomDateTimePicker
         txtLongDate.Width = _longDateWidth
         SetupDisplayWidths()
         EditingMode = True
+        'txtDate.SearchField = Name.Substring(3)
     End Sub
+
+#Region "Constant Declarations#"
+
+    ' Text Menu Captions
+    Const TextFind = "Find on this field"
+
+    Const TextSelectAll = "Select All Text"
+
+#End Region
 
     Public Property CalendarType As CalendarToUse
         Get
@@ -685,5 +697,43 @@ Public Class CCustomDateTimePicker
         End If
         Return True
     End Function
+
+    'Protected Sub ContextHandler(sender As Object, e As EventArgs)
+
+    '    _contextMenuStrip1.Items.Clear()
+    '    Dim menuItemFind As New ToolStripMenuItem With {
+    '            .Text = TextFind
+    '            }
+    '    _contextMenuStrip1.Items.Add(menuItemFind)
+    '    menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
+    '    ' ReSharper disable once LocalizableElement
+    '    menuItemFind.ShortcutKeyDisplayString = "Ctrl-F"
+    '    AddHandler menuItemFind.Click, AddressOf MenuItemFind_Click
+
+    'End Sub
+
+    'Private Sub MenuItemFind_Click()
+    '    Dim myForm = FindForm()
+    '    Dim pnt As Point
+    '    Dim searchForm = New CFindForm(False)
+    '    Dim screenRectangle As Rectangle
+    '    Dim formLocation As Point
+    '    screenRectangle = Screen.PrimaryScreen.WorkingArea
+    '    searchForm.StartPosition = FormStartPosition.Manual
+    '    pnt = myForm.PointToScreen(Location)
+    '    If formLocation.Y + searchForm.Height > screenRectangle.Height Then
+    '        formLocation.Y = pnt.Y - searchForm.Height + Height
+    '    End If
+    '    searchForm.Location = formLocation
+    '    searchForm.ShowDialog()
+    '    _textToSearch = searchForm.TextToSearch
+    '    _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
+    '    searchForm.Dispose()
+    '    If _textToSearch <> "" Then
+
+    '        CallByName(myForm, "FindField", CallType.Method, Me)
+
+    '    End If
+    'End Sub
 
 End Class

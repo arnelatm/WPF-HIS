@@ -118,6 +118,12 @@ Namespace PresentationLayer.Views.Forms
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
             resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
             'LocalizableContent1
             '
             LocalizableContent1.MessageBoxes.Add(Me._MBSupplierCannotBeParentToItself)
@@ -146,6 +152,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.DataBoundControl = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
             Me.txtNotes.MaximumValue = Nothing
@@ -184,6 +191,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtOpeningBalance.CustomFormat = Nothing
             Me.txtOpeningBalance.DataBoundControl = True
             Me.txtOpeningBalance.EditingMode = False
+            Me.txtOpeningBalance.FindEnabled = True
             resources.ApplyResources(Me.txtOpeningBalance, "txtOpeningBalance")
             Me.txtOpeningBalance.ForeColor = System.Drawing.Color.Black
             Me.txtOpeningBalance.LinkedLabel = Me.lblOpeningBalance
@@ -216,6 +224,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSettlementDiscount.CustomFormat = Nothing
             Me.txtSettlementDiscount.DataBoundControl = True
             Me.txtSettlementDiscount.EditingMode = False
+            Me.txtSettlementDiscount.FindEnabled = True
             resources.ApplyResources(Me.txtSettlementDiscount, "txtSettlementDiscount")
             Me.txtSettlementDiscount.ForeColor = System.Drawing.Color.Black
             Me.txtSettlementDiscount.IgnoreNullCheck = True
@@ -242,6 +251,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSettlementDueDays.CustomFormat = Nothing
             Me.txtSettlementDueDays.DataBoundControl = True
             Me.txtSettlementDueDays.EditingMode = False
+            Me.txtSettlementDueDays.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtSettlementDueDays, True)
             resources.ApplyResources(Me.txtSettlementDueDays, "txtSettlementDueDays")
             Me.txtSettlementDueDays.ForeColor = System.Drawing.Color.Black
@@ -275,6 +285,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPaymentDueDays.CustomFormat = Nothing
             Me.txtPaymentDueDays.DataBoundControl = True
             Me.txtPaymentDueDays.EditingMode = False
+            Me.txtPaymentDueDays.FindEnabled = True
             resources.ApplyResources(Me.txtPaymentDueDays, "txtPaymentDueDays")
             Me.txtPaymentDueDays.ForeColor = System.Drawing.Color.Black
             Me.txtPaymentDueDays.IgnoreNullCheck = True
@@ -300,6 +311,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCreditLimit.CustomFormat = Nothing
             Me.txtCreditLimit.DataBoundControl = True
             Me.txtCreditLimit.EditingMode = False
+            Me.txtCreditLimit.FindEnabled = True
             resources.ApplyResources(Me.txtCreditLimit, "txtCreditLimit")
             Me.txtCreditLimit.ForeColor = System.Drawing.Color.Black
             Me.txtCreditLimit.LinkedLabel = Me.lblCreditLimit
@@ -339,6 +351,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIban.CustomFormat = Nothing
             Me.txtIban.DataBoundControl = True
             Me.txtIban.EditingMode = False
+            Me.txtIban.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtIban, True)
             resources.ApplyResources(Me.txtIban, "txtIban")
             Me.txtIban.ForeColor = System.Drawing.Color.Black
@@ -364,6 +377,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankAccountNo.CustomFormat = Nothing
             Me.txtBankAccountNo.DataBoundControl = True
             Me.txtBankAccountNo.EditingMode = False
+            Me.txtBankAccountNo.FindEnabled = True
             resources.ApplyResources(Me.txtBankAccountNo, "txtBankAccountNo")
             Me.txtBankAccountNo.ForeColor = System.Drawing.Color.Black
             Me.txtBankAccountNo.LinkedLabel = Me.lblBankAccountNo
@@ -395,6 +409,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCrNumber.CustomFormat = Nothing
             Me.txtCrNumber.DataBoundControl = True
             Me.txtCrNumber.EditingMode = False
+            Me.txtCrNumber.FindEnabled = True
             resources.ApplyResources(Me.txtCrNumber, "txtCrNumber")
             Me.txtCrNumber.ForeColor = System.Drawing.Color.Black
             Me.txtCrNumber.LinkedLabel = Me.lblCrNumber
@@ -419,6 +434,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtWebsite.CustomFormat = Nothing
             Me.txtWebsite.DataBoundControl = True
             Me.txtWebsite.EditingMode = False
+            Me.txtWebsite.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtWebsite, True)
             resources.ApplyResources(Me.txtWebsite, "txtWebsite")
             Me.txtWebsite.ForeColor = System.Drawing.Color.Black
@@ -444,6 +460,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmail.CustomFormat = Nothing
             Me.txtEmail.DataBoundControl = True
             Me.txtEmail.EditingMode = False
+            Me.txtEmail.FindEnabled = True
             resources.ApplyResources(Me.txtEmail, "txtEmail")
             Me.txtEmail.ForeColor = System.Drawing.Color.Black
             Me.txtEmail.LinkedLabel = Me.lblEmail
@@ -468,6 +485,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMobile.CustomFormat = Nothing
             Me.txtMobile.DataBoundControl = True
             Me.txtMobile.EditingMode = False
+            Me.txtMobile.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtMobile, True)
             resources.ApplyResources(Me.txtMobile, "txtMobile")
             Me.txtMobile.ForeColor = System.Drawing.Color.Black
@@ -493,6 +511,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtFax.CustomFormat = Nothing
             Me.txtFax.DataBoundControl = True
             Me.txtFax.EditingMode = False
+            Me.txtFax.FindEnabled = True
             resources.ApplyResources(Me.txtFax, "txtFax")
             Me.txtFax.ForeColor = System.Drawing.Color.Black
             Me.txtFax.LinkedLabel = Me.lblFax
@@ -517,6 +536,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPhone2.CustomFormat = Nothing
             Me.txtPhone2.DataBoundControl = True
             Me.txtPhone2.EditingMode = False
+            Me.txtPhone2.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtPhone2, True)
             resources.ApplyResources(Me.txtPhone2, "txtPhone2")
             Me.txtPhone2.ForeColor = System.Drawing.Color.Black
@@ -542,6 +562,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPhone1.CustomFormat = Nothing
             Me.txtPhone1.DataBoundControl = True
             Me.txtPhone1.EditingMode = False
+            Me.txtPhone1.FindEnabled = True
             resources.ApplyResources(Me.txtPhone1, "txtPhone1")
             Me.txtPhone1.ForeColor = System.Drawing.Color.Black
             Me.txtPhone1.LinkedLabel = Me.lblPhone1
@@ -573,6 +594,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtZipCode.CustomFormat = Nothing
             Me.txtZipCode.DataBoundControl = True
             Me.txtZipCode.EditingMode = False
+            Me.txtZipCode.FindEnabled = True
             resources.ApplyResources(Me.txtZipCode, "txtZipCode")
             Me.txtZipCode.ForeColor = System.Drawing.Color.Black
             Me.txtZipCode.LinkedLabel = Me.lblZipCode
@@ -597,6 +619,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPoBox.CustomFormat = Nothing
             Me.txtPoBox.DataBoundControl = True
             Me.txtPoBox.EditingMode = False
+            Me.txtPoBox.FindEnabled = True
             resources.ApplyResources(Me.txtPoBox, "txtPoBox")
             Me.txtPoBox.ForeColor = System.Drawing.Color.Black
             Me.txtPoBox.LinkedLabel = Me.lblPoBox
@@ -621,6 +644,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProvinceState.CustomFormat = Nothing
             Me.txtProvinceState.DataBoundControl = True
             Me.txtProvinceState.EditingMode = False
+            Me.txtProvinceState.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtProvinceState, True)
             resources.ApplyResources(Me.txtProvinceState, "txtProvinceState")
             Me.txtProvinceState.ForeColor = System.Drawing.Color.Black
@@ -646,6 +670,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTownCity.CustomFormat = Nothing
             Me.txtTownCity.DataBoundControl = True
             Me.txtTownCity.EditingMode = False
+            Me.txtTownCity.FindEnabled = True
             resources.ApplyResources(Me.txtTownCity, "txtTownCity")
             Me.txtTownCity.ForeColor = System.Drawing.Color.Black
             Me.txtTownCity.LinkedLabel = Me.lblTownCity
@@ -670,6 +695,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDistrict.CustomFormat = Nothing
             Me.txtDistrict.DataBoundControl = True
             Me.txtDistrict.EditingMode = False
+            Me.txtDistrict.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtDistrict, True)
             resources.ApplyResources(Me.txtDistrict, "txtDistrict")
             Me.txtDistrict.ForeColor = System.Drawing.Color.Black
@@ -695,6 +721,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtStreet.CustomFormat = Nothing
             Me.txtStreet.DataBoundControl = True
             Me.txtStreet.EditingMode = False
+            Me.txtStreet.FindEnabled = True
             resources.ApplyResources(Me.txtStreet, "txtStreet")
             Me.txtStreet.ForeColor = System.Drawing.Color.Black
             Me.txtStreet.LinkedLabel = Me.lblStreet
@@ -719,6 +746,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtContactDesignation.CustomFormat = Nothing
             Me.txtContactDesignation.DataBoundControl = True
             Me.txtContactDesignation.EditingMode = False
+            Me.txtContactDesignation.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtContactDesignation, True)
             resources.ApplyResources(Me.txtContactDesignation, "txtContactDesignation")
             Me.txtContactDesignation.ForeColor = System.Drawing.Color.Black
@@ -744,6 +772,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtContactPerson.CustomFormat = Nothing
             Me.txtContactPerson.DataBoundControl = True
             Me.txtContactPerson.EditingMode = False
+            Me.txtContactPerson.FindEnabled = True
             resources.ApplyResources(Me.txtContactPerson, "txtContactPerson")
             Me.txtContactPerson.ForeColor = System.Drawing.Color.Black
             Me.txtContactPerson.LinkedLabel = Me.lblContactPerson
@@ -769,6 +798,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSupplierNameAra.DataBoundControl = True
             Me.txtSupplierNameAra.EditingMode = False
             Me.txtSupplierNameAra.EnglishControl = Me.txtSupplierName
+            Me.txtSupplierNameAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtSupplierNameAra, True)
             resources.ApplyResources(Me.txtSupplierNameAra, "txtSupplierNameAra")
             Me.txtSupplierNameAra.ForeColor = System.Drawing.Color.Black
@@ -788,6 +818,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSupplierName.CustomFormat = Nothing
             Me.txtSupplierName.DataBoundControl = True
             Me.txtSupplierName.EditingMode = False
+            Me.txtSupplierName.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtSupplierName, True)
             resources.ApplyResources(Me.txtSupplierName, "txtSupplierName")
             Me.txtSupplierName.ForeColor = System.Drawing.Color.Black
@@ -828,6 +859,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtSupplierCode.CustomFormat = Nothing
             Me.txtSupplierCode.DataBoundControl = True
             Me.txtSupplierCode.EditingMode = False
+            Me.txtSupplierCode.FindEnabled = True
             resources.ApplyResources(Me.txtSupplierCode, "txtSupplierCode")
             Me.txtSupplierCode.ForeColor = System.Drawing.Color.Black
             Me.txtSupplierCode.LinkedLabel = Me.lblSupplierCode
@@ -855,6 +887,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.FindEnabled = True
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
             Me.TxtIdNo.MaximumValue = Nothing
@@ -961,6 +994,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatNumber.CustomFormat = Nothing
             Me.txtVatNumber.DataBoundControl = True
             Me.txtVatNumber.EditingMode = False
+            Me.txtVatNumber.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtVatNumber, True)
             resources.ApplyResources(Me.txtVatNumber, "txtVatNumber")
             Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
@@ -978,8 +1012,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.CurrentSearchTerm = ""
             Me.cacCountryCode.DefaultValue = Nothing
             Me.cacCountryCode.DisplayMember = "Name"
-            Me.cacCountryCode.DropDownHeight = 1
-            Me.cacCountryCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacCountryCode.EditingMode = False
             Me.cacCountryCode.FilterRule = Nothing
             Me.floDataDisplay.SetFlowBreak(Me.cacCountryCode, True)
@@ -998,6 +1030,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.ReadOnlyCombo = False
             Me.cacCountryCode.SearchAnywhere = False
+            Me.cacCountryCode.SearchField = Nothing
             Me.cacCountryCode.SuggestBoxHeight = 200
             Me.cacCountryCode.SuggestListOrderRule = Nothing
             Me.cacCountryCode.TextToSearch = Nothing
@@ -1013,8 +1046,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.CurrentSearchTerm = ""
             Me.cacBankIdNo.DefaultValue = Nothing
             Me.cacBankIdNo.DisplayMember = "Name"
-            Me.cacBankIdNo.DropDownHeight = 1
-            Me.cacBankIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacBankIdNo.EditingMode = False
             Me.cacBankIdNo.FilterRule = Nothing
             Me.floDataDisplay.SetFlowBreak(Me.cacBankIdNo, True)
@@ -1033,6 +1064,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.ReadOnlyCombo = False
             Me.cacBankIdNo.SearchAnywhere = False
+            Me.cacBankIdNo.SearchField = Nothing
             Me.cacBankIdNo.SuggestBoxHeight = 200
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
             Me.cacBankIdNo.TextToSearch = Nothing
@@ -1048,8 +1080,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacExpAccountIdNo.CurrentSearchTerm = ""
             Me.cacExpAccountIdNo.DefaultValue = Nothing
             Me.cacExpAccountIdNo.DisplayMember = "Name"
-            Me.cacExpAccountIdNo.DropDownHeight = 1
-            Me.cacExpAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacExpAccountIdNo.EditingMode = False
             Me.cacExpAccountIdNo.FilterRule = Nothing
             resources.ApplyResources(Me.cacExpAccountIdNo, "cacExpAccountIdNo")
@@ -1067,6 +1097,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacExpAccountIdNo.PropertySelector = Nothing
             Me.cacExpAccountIdNo.ReadOnlyCombo = False
             Me.cacExpAccountIdNo.SearchAnywhere = False
+            Me.cacExpAccountIdNo.SearchField = Nothing
             Me.cacExpAccountIdNo.SuggestBoxHeight = 200
             Me.cacExpAccountIdNo.SuggestListOrderRule = Nothing
             Me.cacExpAccountIdNo.TabStop = False
@@ -1083,8 +1114,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacApAccountIdNo.CurrentSearchTerm = ""
             Me.cacApAccountIdNo.DefaultValue = Nothing
             Me.cacApAccountIdNo.DisplayMember = "Name"
-            Me.cacApAccountIdNo.DropDownHeight = 1
-            Me.cacApAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacApAccountIdNo.EditingMode = False
             Me.cacApAccountIdNo.FilterRule = Nothing
             Me.floDataDisplay.SetFlowBreak(Me.cacApAccountIdNo, True)
@@ -1103,6 +1132,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacApAccountIdNo.PropertySelector = Nothing
             Me.cacApAccountIdNo.ReadOnlyCombo = False
             Me.cacApAccountIdNo.SearchAnywhere = False
+            Me.cacApAccountIdNo.SearchField = Nothing
             Me.cacApAccountIdNo.SuggestBoxHeight = 200
             Me.cacApAccountIdNo.SuggestListOrderRule = Nothing
             Me.cacApAccountIdNo.TextToSearch = Nothing
@@ -1118,8 +1148,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.CurrentSearchTerm = ""
             Me.cacPaymentMethod.DefaultValue = Nothing
             Me.cacPaymentMethod.DisplayMember = "Name"
-            Me.cacPaymentMethod.DropDownHeight = 1
-            Me.cacPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacPaymentMethod.EditingMode = False
             Me.cacPaymentMethod.FilterRule = Nothing
             Me.floDataDisplay.SetFlowBreak(Me.cacPaymentMethod, True)
@@ -1138,6 +1166,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.PropertySelector = Nothing
             Me.cacPaymentMethod.ReadOnlyCombo = False
             Me.cacPaymentMethod.SearchAnywhere = False
+            Me.cacPaymentMethod.SearchField = Nothing
             Me.cacPaymentMethod.SuggestBoxHeight = 200
             Me.cacPaymentMethod.SuggestListOrderRule = Nothing
             Me.cacPaymentMethod.TextToSearch = Nothing
@@ -1196,46 +1225,46 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.CurrentSearchTerm = ""
             Me.cacAccountStatus.DefaultValue = Nothing
             Me.cacAccountStatus.DisplayMember = "Name"
-            Me.cacAccountStatus.DropDownHeight = 1
-            Me.cacAccountStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacAccountStatus.EditingMode = False
             Me.cacAccountStatus.FilterRule = Nothing
             Me.floDataDisplay.SetFlowBreak(Me.cacAccountStatus, True)
             resources.ApplyResources(Me.cacAccountStatus, "cacAccountStatus")
             Me.cacAccountStatus.ForeColor = System.Drawing.Color.Black
-            Me.cacAccountStatus.FormattingEnabled = true
-        Me.cacAccountStatus.HideWhenNotEditingOrAdding = false
-        Me.cacAccountStatus.LinkedLabel = Nothing
-        Me.cacAccountStatus.Name = "cacAccountStatus"
-        Me.cacAccountStatus.OldValue = 0
-        Me.cacAccountStatus.OriginalDataSource = Nothing
-        Me.cacAccountStatus.OriginalList = Nothing
-        Me.cacAccountStatus.OverrideDropDownStyleList = false
-        Me.cacAccountStatus.PreviousSearchTerm = Nothing
-        Me.cacAccountStatus.PreviousSelectedIndex = -1
-        Me.cacAccountStatus.PropertySelector = Nothing
-        Me.cacAccountStatus.ReadOnlyCombo = false
-        Me.cacAccountStatus.SearchAnywhere = false
-        Me.cacAccountStatus.SuggestBoxHeight = 200
-        Me.cacAccountStatus.SuggestListOrderRule = Nothing
-        Me.cacAccountStatus.TextToSearch = Nothing
-        Me.cacAccountStatus.ValueIsMandatory = false
-        Me.cacAccountStatus.ValueIsNullable = false
-        Me.cacAccountStatus.ValueIsNumeric = false
-        Me.cacAccountStatus.ValueMember = "Code"
-        '
-        'txtBalance
-        '
-        Me.txtBalance.BackColor = System.Drawing.Color.White
-        Me.txtBalance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBalance.ComputedValue = false
-        Me.txtBalance.CustomFormat = Nothing
-        Me.txtBalance.DataBoundControl = true
-        Me.txtBalance.DisplayOnly = true
-        Me.txtBalance.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtBalance, true)
-        resources.ApplyResources(Me.txtBalance, "txtBalance")
-        Me.txtBalance.ForeColor = System.Drawing.Color.Black
+            Me.cacAccountStatus.FormattingEnabled = True
+            Me.cacAccountStatus.HideWhenNotEditingOrAdding = False
+            Me.cacAccountStatus.LinkedLabel = Nothing
+            Me.cacAccountStatus.Name = "cacAccountStatus"
+            Me.cacAccountStatus.OldValue = 0
+            Me.cacAccountStatus.OriginalDataSource = Nothing
+            Me.cacAccountStatus.OriginalList = Nothing
+            Me.cacAccountStatus.OverrideDropDownStyleList = False
+            Me.cacAccountStatus.PreviousSearchTerm = Nothing
+            Me.cacAccountStatus.PreviousSelectedIndex = -1
+            Me.cacAccountStatus.PropertySelector = Nothing
+            Me.cacAccountStatus.ReadOnlyCombo = False
+            Me.cacAccountStatus.SearchAnywhere = False
+            Me.cacAccountStatus.SearchField = Nothing
+            Me.cacAccountStatus.SuggestBoxHeight = 200
+            Me.cacAccountStatus.SuggestListOrderRule = Nothing
+            Me.cacAccountStatus.TextToSearch = Nothing
+            Me.cacAccountStatus.ValueIsMandatory = False
+            Me.cacAccountStatus.ValueIsNullable = False
+            Me.cacAccountStatus.ValueIsNumeric = False
+            Me.cacAccountStatus.ValueMember = "Code"
+            '
+            'txtBalance
+            '
+            Me.txtBalance.BackColor = System.Drawing.Color.White
+            Me.txtBalance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtBalance.ComputedValue = False
+            Me.txtBalance.CustomFormat = Nothing
+            Me.txtBalance.DataBoundControl = True
+            Me.txtBalance.DisplayOnly = True
+            Me.txtBalance.EditingMode = False
+            Me.txtBalance.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtBalance, True)
+            resources.ApplyResources(Me.txtBalance, "txtBalance")
+            Me.txtBalance.ForeColor = System.Drawing.Color.Black
         Me.txtBalance.LinkedLabel = Me.lblOpeningBalance
         Me.txtBalance.MaximumValue = Nothing
         Me.txtBalance.MinimumValue = Nothing

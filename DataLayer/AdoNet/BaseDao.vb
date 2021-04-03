@@ -60,24 +60,28 @@ Namespace AdoNet
 
         Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchAnywhere As Boolean = False, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
             Dim retVal As Integer
-            Dim sql As String =
-                    " SELECT IdNo FROM [" & tableName & "] " &
-                    " Where "
-            If Not (filter Is Nothing OrElse filter = "") Then
-                sql = sql & filter.Trim() & " and "
-            End If
-            If searchAnywhere Then
-                searchString = "%" & searchString.Trim() & "%"
-                sql = sql & fieldName & " Like @SearchString "
+            If searchString Is Nothing Or searchString = "" Then
+                retVal = 0
             Else
-                searchString = searchString.Trim() & "%"
-                sql = sql & fieldName & " Like @SearchString "
-            End If
+                Dim sql As String =
+                        " SELECT IdNo FROM [" & tableName & "] " &
+                        " Where "
+                If Not (filter Is Nothing OrElse filter = "") Then
+                    sql = sql & filter.Trim() & " and "
+                End If
+                If searchAnywhere Then
+                    searchString = "%" & searchString.Trim() & "%"
+                    sql = sql & fieldName & " Like @SearchString "
+                Else
+                    searchString = searchString.Trim() & "%"
+                    sql = sql & fieldName & " Like @SearchString "
+                End If
 
-            Dim params() As Object = {"@SearchString", searchString}
-            _lastFindQuery = sql
-            _lastFindParms = params
-            retVal = _db.Scalar(sql & " order by IdNo ", params)
+                Dim params() As Object = {"@SearchString", searchString}
+                _lastFindQuery = sql
+                _lastFindParms = params
+                retVal = _db.Scalar(sql & " order by IdNo ", params)
+            End If
             Return retVal
         End Function
 

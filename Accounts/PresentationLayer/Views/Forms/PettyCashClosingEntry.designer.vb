@@ -106,6 +106,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPcJournals.Ea = Nothing
             Me.DataGridViewPcJournals.EditingMode = False
             Me.DataGridViewPcJournals.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPcJournals.FieldsDictionary = Nothing
             Me.DataGridViewPcJournals.FirstRowDeletionEnabled = True
             Me.DataGridViewPcJournals.FirstRowInsertionEnabled = True
             Me.DataGridViewPcJournals.Location = New System.Drawing.Point(3, 107)
@@ -310,6 +311,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.DataBoundControl = True
             Me.txtPayeeName.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtPayeeName.EditingMode = True
+            Me.txtPayeeName.FindEnabled = True
             Me.txtPayeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
             Me.txtPayeeName.LinkedLabel = Nothing
@@ -397,14 +399,13 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DefaultValue = Nothing
             Me.cboAccountIdNo.DisplayMember = "Name"
             Me.cboAccountIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboAccountIdNo.DropDownHeight = 200
-            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboAccountIdNo.EditingMode = True
             Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboAccountIdNo.FormattingEnabled = True
             Me.cboAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboAccountIdNo.IntegralHeight = False
             Me.cboAccountIdNo.LinkedLabel = Nothing
             Me.cboAccountIdNo.Location = New System.Drawing.Point(120, 28)
             Me.cboAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -418,6 +419,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SearchAnywhere = False
+            Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.Size = New System.Drawing.Size(405, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
@@ -438,6 +440,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtNotes.EditingMode = True
+            Me.txtNotes.FindEnabled = True
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
@@ -472,6 +475,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReferenceNo.CustomFormat = Nothing
             Me.txtReferenceNo.DataBoundControl = True
             Me.txtReferenceNo.EditingMode = True
+            Me.txtReferenceNo.FindEnabled = True
             Me.txtReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
             Me.txtReferenceNo.LinkedLabel = Nothing
@@ -506,6 +510,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber.CustomFormat = Nothing
             Me.txtCheckNumber.DataBoundControl = True
             Me.txtCheckNumber.EditingMode = True
+            Me.txtCheckNumber.FindEnabled = True
             Me.txtCheckNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
             Me.txtCheckNumber.LinkedLabel = Nothing
@@ -541,6 +546,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.DataBoundControl = True
             Me.txtAmount.DisplayOnly = True
             Me.txtAmount.EditingMode = True
+            Me.txtAmount.FindEnabled = True
             Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
             Me.txtAmount.LinkedLabel = Nothing
@@ -606,14 +612,13 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.DefaultValue = Nothing
             Me.cboPayType.DisplayMember = "Name"
             Me.cboPayType.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboPayType.DropDownHeight = 200
-            Me.cboPayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboPayType.EditingMode = True
             Me.cboPayType.FilterRule = Nothing
             Me.cboPayType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboPayType.ForeColor = System.Drawing.Color.Black
             Me.cboPayType.FormattingEnabled = True
             Me.cboPayType.HideWhenNotEditingOrAdding = False
+            Me.cboPayType.IntegralHeight = False
             Me.cboPayType.LinkedLabel = Nothing
             Me.cboPayType.Location = New System.Drawing.Point(641, 28)
             Me.cboPayType.Margin = New System.Windows.Forms.Padding(1)
@@ -627,6 +632,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.PropertySelector = Nothing
             Me.cboPayType.ReadOnlyCombo = False
             Me.cboPayType.SearchAnywhere = False
+            Me.cboPayType.SearchField = Nothing
             Me.cboPayType.Size = New System.Drawing.Size(341, 24)
             Me.cboPayType.SuggestBoxHeight = 200
             Me.cboPayType.SuggestListOrderRule = Nothing
@@ -660,14 +666,13 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.DefaultValue = Nothing
             Me.cboPcAccountIdNo.DisplayMember = "Name"
             Me.cboPcAccountIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboPcAccountIdNo.DropDownHeight = 200
-            Me.cboPcAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboPcAccountIdNo.EditingMode = True
             Me.cboPcAccountIdNo.FilterRule = Nothing
             Me.cboPcAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboPcAccountIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboPcAccountIdNo.FormattingEnabled = True
             Me.cboPcAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPcAccountIdNo.IntegralHeight = False
             Me.cboPcAccountIdNo.LinkedLabel = Nothing
             Me.cboPcAccountIdNo.Location = New System.Drawing.Point(120, 54)
             Me.cboPcAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -681,6 +686,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.PropertySelector = Nothing
             Me.cboPcAccountIdNo.ReadOnlyCombo = False
             Me.cboPcAccountIdNo.SearchAnywhere = False
+            Me.cboPcAccountIdNo.SearchField = Nothing
             Me.cboPcAccountIdNo.Size = New System.Drawing.Size(405, 24)
             Me.cboPcAccountIdNo.SuggestBoxHeight = 200
             Me.cboPcAccountIdNo.SuggestListOrderRule = Nothing

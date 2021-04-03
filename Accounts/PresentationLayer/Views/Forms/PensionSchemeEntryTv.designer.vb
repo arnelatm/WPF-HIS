@@ -89,6 +89,12 @@ Namespace PresentationLayer.Views.Forms
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
             resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
             'TranslatorDAC
             '
             Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
@@ -163,8 +169,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPensionProviderIdNo.DefaultValue = Nothing
             Me.cboPensionProviderIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboPensionProviderIdNo, "cboPensionProviderIdNo")
-            Me.cboPensionProviderIdNo.DropDownHeight = 1
-            Me.cboPensionProviderIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPensionProviderIdNo.EditingMode = False
             Me.cboPensionProviderIdNo.FilterRule = Nothing
             Me.cboPensionProviderIdNo.ForeColor = System.Drawing.Color.Black
@@ -181,6 +185,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPensionProviderIdNo.PropertySelector = Nothing
             Me.cboPensionProviderIdNo.ReadOnlyCombo = False
             Me.cboPensionProviderIdNo.SearchAnywhere = False
+            Me.cboPensionProviderIdNo.SearchField = Nothing
             Me.cboPensionProviderIdNo.SuggestBoxHeight = 200
             Me.cboPensionProviderIdNo.SuggestListOrderRule = Nothing
             Me.cboPensionProviderIdNo.TextToSearch = Nothing
@@ -206,6 +211,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.DataBoundControl = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
             Me.txtNotes.MaximumValue = Nothing
@@ -255,8 +261,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DefaultValue = Nothing
             Me.cboAccountIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
-            Me.cboAccountIdNo.DropDownHeight = 1
-            Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboAccountIdNo.EditingMode = False
             Me.cboAccountIdNo.FilterRule = Nothing
             Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
@@ -273,6 +277,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SearchAnywhere = False
+            Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
@@ -305,6 +310,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPensionRates.Ea = EventAggregator1
             Me.DataGridViewPensionRates.EditingMode = False
             Me.DataGridViewPensionRates.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPensionRates.FieldsDictionary = Nothing
             Me.DataGridViewPensionRates.FirstRowDeletionEnabled = True
             Me.DataGridViewPensionRates.FirstRowInsertionEnabled = True
             Me.DataGridViewPensionRates.Name = "DataGridViewPensionRates"
@@ -427,6 +433,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.txtPensionSchemeNameAra, "txtPensionSchemeNameAra")
             Me.txtPensionSchemeNameAra.EditingMode = False
             Me.txtPensionSchemeNameAra.EnglishControl = Me.txtPensionSchemeName
+            Me.txtPensionSchemeNameAra.FindEnabled = True
             Me.txtPensionSchemeNameAra.ForeColor = System.Drawing.Color.Black
             Me.txtPensionSchemeNameAra.LinkedLabel = Nothing
             Me.txtPensionSchemeNameAra.MaximumValue = Nothing
@@ -445,6 +452,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPensionSchemeName.DataBoundControl = True
             resources.ApplyResources(Me.txtPensionSchemeName, "txtPensionSchemeName")
             Me.txtPensionSchemeName.EditingMode = False
+            Me.txtPensionSchemeName.FindEnabled = True
             Me.txtPensionSchemeName.ForeColor = System.Drawing.Color.Black
             Me.MyErrorProvider.SetIconAlignment(Me.txtPensionSchemeName, CType(resources.GetObject("txtPensionSchemeName.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
             Me.txtPensionSchemeName.LinkedLabel = Nothing
@@ -470,6 +478,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPensionSchemeCode.CustomFormat = Nothing
             Me.txtPensionSchemeCode.DataBoundControl = True
             Me.txtPensionSchemeCode.EditingMode = True
+            Me.txtPensionSchemeCode.FindEnabled = True
             resources.ApplyResources(Me.txtPensionSchemeCode, "txtPensionSchemeCode")
             Me.txtPensionSchemeCode.ForeColor = System.Drawing.Color.Black
             Me.MyErrorProvider.SetIconAlignment(Me.txtPensionSchemeCode, CType(resources.GetObject("txtPensionSchemeCode.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
@@ -497,6 +506,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
@@ -533,7 +543,7 @@ Namespace PresentationLayer.Views.Forms
             'PensionSchemeEntryTv
             '
             resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.floDataDisplay)
+            Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "PensionSchemeEntryTv"
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)

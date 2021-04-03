@@ -44,95 +44,106 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Nothing
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.ReadOnly = true
-        Me.TxtIdNo.TabStop = false
-        Me.TxtIdNo.ValueIsNumeric = true
-        '
-        'txtProductCategoryCode
-        '
-        Me.txtProductCategoryCode.BackColor = System.Drawing.Color.White
-        Me.txtProductCategoryCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtProductCategoryCode.ComputedValue = false
-        Me.txtProductCategoryCode.CustomFormat = Nothing
-        Me.txtProductCategoryCode.DataBoundControl = true
-        Me.txtProductCategoryCode.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryCode, true)
-        resources.ApplyResources(Me.txtProductCategoryCode, "txtProductCategoryCode")
-        Me.txtProductCategoryCode.ForeColor = System.Drawing.Color.Black
-        Me.txtProductCategoryCode.LinkedLabel = Nothing
-        Me.txtProductCategoryCode.MaximumValue = Nothing
-        Me.txtProductCategoryCode.MinimumValue = Nothing
-        Me.txtProductCategoryCode.Name = "txtProductCategoryCode"
-        Me.txtProductCategoryCode.OldValue = Nothing
-        Me.txtProductCategoryCode.ReadOnly = true
-        Me.txtProductCategoryCode.ValueIsMandatory = true
-        '
-        'txtProductCategoryName
-        '
-        Me.txtProductCategoryName.BackColor = System.Drawing.Color.White
-        Me.txtProductCategoryName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtProductCategoryName.ComputedValue = false
-        Me.txtProductCategoryName.CustomFormat = Nothing
-        Me.txtProductCategoryName.DataBoundControl = true
-        Me.txtProductCategoryName.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryName, true)
-        resources.ApplyResources(Me.txtProductCategoryName, "txtProductCategoryName")
-        Me.txtProductCategoryName.ForeColor = System.Drawing.Color.Black
-        Me.txtProductCategoryName.LinkedLabel = Nothing
-        Me.txtProductCategoryName.MaximumValue = Nothing
-        Me.txtProductCategoryName.MinimumValue = Nothing
-        Me.txtProductCategoryName.Name = "txtProductCategoryName"
-        Me.txtProductCategoryName.OldValue = Nothing
-        Me.txtProductCategoryName.ReadOnly = true
-        Me.txtProductCategoryName.ValueIsMandatory = true
-        '
-        'txtProductCategoryNameAra
-        '
-        Me.txtProductCategoryNameAra.BackColor = System.Drawing.Color.White
-        Me.txtProductCategoryNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtProductCategoryNameAra.ComputedValue = false
-        Me.txtProductCategoryNameAra.CustomFormat = Nothing
-        Me.txtProductCategoryNameAra.DataBoundControl = true
-        Me.txtProductCategoryNameAra.EditingMode = false
-        Me.txtProductCategoryNameAra.EnglishControl = Me.txtProductCategoryName
-        Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryNameAra, true)
-        resources.ApplyResources(Me.txtProductCategoryNameAra, "txtProductCategoryNameAra")
-        Me.txtProductCategoryNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtProductCategoryNameAra.LinkedLabel = Nothing
-        Me.txtProductCategoryNameAra.MaximumValue = Nothing
-        Me.txtProductCategoryNameAra.MinimumValue = Nothing
-        Me.txtProductCategoryNameAra.Name = "txtProductCategoryNameAra"
-        Me.txtProductCategoryNameAra.OldValue = Nothing
-        Me.txtProductCategoryNameAra.ReadOnly = true
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        Me.txtNotes.EditingMode = false
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.ValueIsNumeric = True
+            '
+            'txtProductCategoryCode
+            '
+            Me.txtProductCategoryCode.BackColor = System.Drawing.Color.White
+            Me.txtProductCategoryCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtProductCategoryCode.ComputedValue = False
+            Me.txtProductCategoryCode.CustomFormat = Nothing
+            Me.txtProductCategoryCode.DataBoundControl = True
+            Me.txtProductCategoryCode.EditingMode = True
+            Me.txtProductCategoryCode.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryCode, True)
+            resources.ApplyResources(Me.txtProductCategoryCode, "txtProductCategoryCode")
+            Me.txtProductCategoryCode.ForeColor = System.Drawing.Color.Black
+            Me.txtProductCategoryCode.LinkedLabel = Nothing
+            Me.txtProductCategoryCode.MaximumValue = Nothing
+            Me.txtProductCategoryCode.MinimumValue = Nothing
+            Me.txtProductCategoryCode.Name = "txtProductCategoryCode"
+            Me.txtProductCategoryCode.OldValue = Nothing
+            Me.txtProductCategoryCode.ReadOnly = True
+            Me.txtProductCategoryCode.ValueIsMandatory = True
+            '
+            'txtProductCategoryName
+            '
+            Me.txtProductCategoryName.BackColor = System.Drawing.Color.White
+            Me.txtProductCategoryName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtProductCategoryName.ComputedValue = False
+            Me.txtProductCategoryName.CustomFormat = Nothing
+            Me.txtProductCategoryName.DataBoundControl = True
+            Me.txtProductCategoryName.EditingMode = False
+            Me.txtProductCategoryName.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryName, True)
+            resources.ApplyResources(Me.txtProductCategoryName, "txtProductCategoryName")
+            Me.txtProductCategoryName.ForeColor = System.Drawing.Color.Black
+            Me.txtProductCategoryName.LinkedLabel = Nothing
+            Me.txtProductCategoryName.MaximumValue = Nothing
+            Me.txtProductCategoryName.MinimumValue = Nothing
+            Me.txtProductCategoryName.Name = "txtProductCategoryName"
+            Me.txtProductCategoryName.OldValue = Nothing
+            Me.txtProductCategoryName.ReadOnly = True
+            Me.txtProductCategoryName.ValueIsMandatory = True
+            '
+            'txtProductCategoryNameAra
+            '
+            Me.txtProductCategoryNameAra.BackColor = System.Drawing.Color.White
+            Me.txtProductCategoryNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtProductCategoryNameAra.ComputedValue = False
+            Me.txtProductCategoryNameAra.CustomFormat = Nothing
+            Me.txtProductCategoryNameAra.DataBoundControl = True
+            Me.txtProductCategoryNameAra.EditingMode = False
+            Me.txtProductCategoryNameAra.EnglishControl = Me.txtProductCategoryName
+            Me.txtProductCategoryNameAra.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtProductCategoryNameAra, True)
+            resources.ApplyResources(Me.txtProductCategoryNameAra, "txtProductCategoryNameAra")
+            Me.txtProductCategoryNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtProductCategoryNameAra.LinkedLabel = Nothing
+            Me.txtProductCategoryNameAra.MaximumValue = Nothing
+            Me.txtProductCategoryNameAra.MinimumValue = Nothing
+            Me.txtProductCategoryNameAra.Name = "txtProductCategoryNameAra"
+            Me.txtProductCategoryNameAra.OldValue = Nothing
+            Me.txtProductCategoryNameAra.ReadOnly = True
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.MaximumValue = Nothing
         Me.txtNotes.MinimumValue = Nothing

@@ -47,95 +47,106 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Nothing
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.ReadOnly = true
-        Me.TxtIdNo.TabStop = false
-        Me.TxtIdNo.ValueIsNumeric = true
-        '
-        'txtBankCode
-        '
-        Me.txtBankCode.BackColor = System.Drawing.Color.White
-        Me.txtBankCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBankCode.ComputedValue = false
-        Me.txtBankCode.CustomFormat = Nothing
-        Me.txtBankCode.DataBoundControl = true
-        Me.txtBankCode.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtBankCode, true)
-        resources.ApplyResources(Me.txtBankCode, "txtBankCode")
-        Me.txtBankCode.ForeColor = System.Drawing.Color.Black
-        Me.txtBankCode.LinkedLabel = Nothing
-        Me.txtBankCode.MaximumValue = Nothing
-        Me.txtBankCode.MinimumValue = Nothing
-        Me.txtBankCode.Name = "txtBankCode"
-        Me.txtBankCode.OldValue = Nothing
-        Me.txtBankCode.ReadOnly = true
-        Me.txtBankCode.ValueIsMandatory = true
-        '
-        'txtBankName
-        '
-        Me.txtBankName.BackColor = System.Drawing.Color.White
-        Me.txtBankName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBankName.ComputedValue = false
-        Me.txtBankName.CustomFormat = Nothing
-        Me.txtBankName.DataBoundControl = true
-        Me.txtBankName.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtBankName, true)
-        resources.ApplyResources(Me.txtBankName, "txtBankName")
-        Me.txtBankName.ForeColor = System.Drawing.Color.Black
-        Me.txtBankName.LinkedLabel = Nothing
-        Me.txtBankName.MaximumValue = Nothing
-        Me.txtBankName.MinimumValue = Nothing
-        Me.txtBankName.Name = "txtBankName"
-        Me.txtBankName.OldValue = Nothing
-        Me.txtBankName.ReadOnly = true
-        Me.txtBankName.ValueIsMandatory = true
-        '
-        'txtBankNameAra
-        '
-        Me.txtBankNameAra.BackColor = System.Drawing.Color.White
-        Me.txtBankNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBankNameAra.ComputedValue = false
-        Me.txtBankNameAra.CustomFormat = Nothing
-        Me.txtBankNameAra.DataBoundControl = true
-        Me.txtBankNameAra.EditingMode = false
-        Me.txtBankNameAra.EnglishControl = Me.txtBankName
-        Me.floDataDisplay.SetFlowBreak(Me.txtBankNameAra, true)
-        resources.ApplyResources(Me.txtBankNameAra, "txtBankNameAra")
-        Me.txtBankNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtBankNameAra.LinkedLabel = Nothing
-        Me.txtBankNameAra.MaximumValue = Nothing
-        Me.txtBankNameAra.MinimumValue = Nothing
-        Me.txtBankNameAra.Name = "txtBankNameAra"
-        Me.txtBankNameAra.OldValue = Nothing
-        Me.txtBankNameAra.ReadOnly = true
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        Me.txtNotes.EditingMode = false
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.ValueIsNumeric = True
+            '
+            'txtBankCode
+            '
+            Me.txtBankCode.BackColor = System.Drawing.Color.White
+            Me.txtBankCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtBankCode.ComputedValue = False
+            Me.txtBankCode.CustomFormat = Nothing
+            Me.txtBankCode.DataBoundControl = True
+            Me.txtBankCode.EditingMode = True
+            Me.txtBankCode.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtBankCode, True)
+            resources.ApplyResources(Me.txtBankCode, "txtBankCode")
+            Me.txtBankCode.ForeColor = System.Drawing.Color.Black
+            Me.txtBankCode.LinkedLabel = Nothing
+            Me.txtBankCode.MaximumValue = Nothing
+            Me.txtBankCode.MinimumValue = Nothing
+            Me.txtBankCode.Name = "txtBankCode"
+            Me.txtBankCode.OldValue = Nothing
+            Me.txtBankCode.ReadOnly = True
+            Me.txtBankCode.ValueIsMandatory = True
+            '
+            'txtBankName
+            '
+            Me.txtBankName.BackColor = System.Drawing.Color.White
+            Me.txtBankName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtBankName.ComputedValue = False
+            Me.txtBankName.CustomFormat = Nothing
+            Me.txtBankName.DataBoundControl = True
+            Me.txtBankName.EditingMode = False
+            Me.txtBankName.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtBankName, True)
+            resources.ApplyResources(Me.txtBankName, "txtBankName")
+            Me.txtBankName.ForeColor = System.Drawing.Color.Black
+            Me.txtBankName.LinkedLabel = Nothing
+            Me.txtBankName.MaximumValue = Nothing
+            Me.txtBankName.MinimumValue = Nothing
+            Me.txtBankName.Name = "txtBankName"
+            Me.txtBankName.OldValue = Nothing
+            Me.txtBankName.ReadOnly = True
+            Me.txtBankName.ValueIsMandatory = True
+            '
+            'txtBankNameAra
+            '
+            Me.txtBankNameAra.BackColor = System.Drawing.Color.White
+            Me.txtBankNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtBankNameAra.ComputedValue = False
+            Me.txtBankNameAra.CustomFormat = Nothing
+            Me.txtBankNameAra.DataBoundControl = True
+            Me.txtBankNameAra.EditingMode = False
+            Me.txtBankNameAra.EnglishControl = Me.txtBankName
+            Me.txtBankNameAra.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtBankNameAra, True)
+            resources.ApplyResources(Me.txtBankNameAra, "txtBankNameAra")
+            Me.txtBankNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtBankNameAra.LinkedLabel = Nothing
+            Me.txtBankNameAra.MaximumValue = Nothing
+            Me.txtBankNameAra.MinimumValue = Nothing
+            Me.txtBankNameAra.Name = "txtBankNameAra"
+            Me.txtBankNameAra.OldValue = Nothing
+            Me.txtBankNameAra.ReadOnly = True
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.MaximumValue = Nothing
         Me.txtNotes.MinimumValue = Nothing

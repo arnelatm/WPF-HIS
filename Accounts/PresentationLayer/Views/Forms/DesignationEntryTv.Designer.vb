@@ -39,100 +39,111 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
         Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Nothing
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.ReadOnly = true
-        Me.TxtIdNo.TabStop = false
-        Me.TxtIdNo.ValueIsNumeric = true
-        '
-        'txtDesignationCode
-        '
-        Me.txtDesignationCode.BackColor = System.Drawing.Color.White
-        Me.txtDesignationCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDesignationCode.ComputedValue = false
-        Me.txtDesignationCode.CustomFormat = Nothing
-        Me.txtDesignationCode.DataBoundControl = true
-        Me.txtDesignationCode.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtDesignationCode, true)
-        resources.ApplyResources(Me.txtDesignationCode, "txtDesignationCode")
-        Me.txtDesignationCode.ForeColor = System.Drawing.Color.Black
-        Me.txtDesignationCode.LinkedLabel = Nothing
-        Me.txtDesignationCode.MaximumValue = Nothing
-        Me.txtDesignationCode.MinimumValue = Nothing
-        Me.txtDesignationCode.Name = "txtDesignationCode"
-        Me.txtDesignationCode.OldValue = Nothing
-        Me.txtDesignationCode.ReadOnly = true
-        Me.txtDesignationCode.ValueIsMandatory = true
-        '
-        'txtDesignationName
-        '
-        Me.txtDesignationName.BackColor = System.Drawing.Color.White
-        Me.txtDesignationName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDesignationName.ComputedValue = false
-        Me.txtDesignationName.CustomFormat = Nothing
-        Me.txtDesignationName.DataBoundControl = true
-        Me.txtDesignationName.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtDesignationName, true)
-        resources.ApplyResources(Me.txtDesignationName, "txtDesignationName")
-        Me.txtDesignationName.ForeColor = System.Drawing.Color.Black
-        Me.txtDesignationName.LinkedLabel = Nothing
-        Me.txtDesignationName.MaximumValue = Nothing
-        Me.txtDesignationName.MinimumValue = Nothing
-        Me.txtDesignationName.Name = "txtDesignationName"
-        Me.txtDesignationName.OldValue = Nothing
-        Me.txtDesignationName.ReadOnly = true
-        Me.txtDesignationName.ValueIsMandatory = true
-        '
-        'txtDesignationNameAra
-        '
-        Me.txtDesignationNameAra.BackColor = System.Drawing.Color.White
-        Me.txtDesignationNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDesignationNameAra.ComputedValue = false
-        Me.txtDesignationNameAra.CustomFormat = Nothing
-        Me.txtDesignationNameAra.DataBoundControl = true
-        Me.txtDesignationNameAra.EditingMode = false
-        Me.txtDesignationNameAra.EnglishControl = Me.txtDesignationName
-        Me.floDataDisplay.SetFlowBreak(Me.txtDesignationNameAra, true)
-        resources.ApplyResources(Me.txtDesignationNameAra, "txtDesignationNameAra")
-        Me.txtDesignationNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtDesignationNameAra.LinkedLabel = Nothing
-        Me.txtDesignationNameAra.MaximumValue = Nothing
-        Me.txtDesignationNameAra.MinimumValue = Nothing
-        Me.txtDesignationNameAra.Name = "txtDesignationNameAra"
-        Me.txtDesignationNameAra.OldValue = Nothing
-        Me.txtDesignationNameAra.ReadOnly = true
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        Me.txtNotes.EditingMode = false
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            '
+            'TreeViewTableName
+            '
+            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.ValueIsNumeric = True
+            '
+            'txtDesignationCode
+            '
+            Me.txtDesignationCode.BackColor = System.Drawing.Color.White
+            Me.txtDesignationCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDesignationCode.ComputedValue = False
+            Me.txtDesignationCode.CustomFormat = Nothing
+            Me.txtDesignationCode.DataBoundControl = True
+            Me.txtDesignationCode.EditingMode = False
+            Me.txtDesignationCode.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDesignationCode, True)
+            resources.ApplyResources(Me.txtDesignationCode, "txtDesignationCode")
+            Me.txtDesignationCode.ForeColor = System.Drawing.Color.Black
+            Me.txtDesignationCode.LinkedLabel = Nothing
+            Me.txtDesignationCode.MaximumValue = Nothing
+            Me.txtDesignationCode.MinimumValue = Nothing
+            Me.txtDesignationCode.Name = "txtDesignationCode"
+            Me.txtDesignationCode.OldValue = Nothing
+            Me.txtDesignationCode.ReadOnly = True
+            Me.txtDesignationCode.ValueIsMandatory = True
+            '
+            'txtDesignationName
+            '
+            Me.txtDesignationName.BackColor = System.Drawing.Color.White
+            Me.txtDesignationName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDesignationName.ComputedValue = False
+            Me.txtDesignationName.CustomFormat = Nothing
+            Me.txtDesignationName.DataBoundControl = True
+            Me.txtDesignationName.EditingMode = False
+            Me.txtDesignationName.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDesignationName, True)
+            resources.ApplyResources(Me.txtDesignationName, "txtDesignationName")
+            Me.txtDesignationName.ForeColor = System.Drawing.Color.Black
+            Me.txtDesignationName.LinkedLabel = Nothing
+            Me.txtDesignationName.MaximumValue = Nothing
+            Me.txtDesignationName.MinimumValue = Nothing
+            Me.txtDesignationName.Name = "txtDesignationName"
+            Me.txtDesignationName.OldValue = Nothing
+            Me.txtDesignationName.ReadOnly = True
+            Me.txtDesignationName.ValueIsMandatory = True
+            '
+            'txtDesignationNameAra
+            '
+            Me.txtDesignationNameAra.BackColor = System.Drawing.Color.White
+            Me.txtDesignationNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDesignationNameAra.ComputedValue = False
+            Me.txtDesignationNameAra.CustomFormat = Nothing
+            Me.txtDesignationNameAra.DataBoundControl = True
+            Me.txtDesignationNameAra.EditingMode = False
+            Me.txtDesignationNameAra.EnglishControl = Me.txtDesignationName
+            Me.txtDesignationNameAra.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDesignationNameAra, True)
+            resources.ApplyResources(Me.txtDesignationNameAra, "txtDesignationNameAra")
+            Me.txtDesignationNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtDesignationNameAra.LinkedLabel = Nothing
+            Me.txtDesignationNameAra.MaximumValue = Nothing
+            Me.txtDesignationNameAra.MinimumValue = Nothing
+            Me.txtDesignationNameAra.Name = "txtDesignationNameAra"
+            Me.txtDesignationNameAra.OldValue = Nothing
+            Me.txtDesignationNameAra.ReadOnly = True
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.MaximumValue = Nothing
         Me.txtNotes.MinimumValue = Nothing

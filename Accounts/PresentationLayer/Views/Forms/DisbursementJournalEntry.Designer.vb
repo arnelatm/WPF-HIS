@@ -259,6 +259,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.PropertySelector = Nothing
             Me.cboPayType.ReadOnlyCombo = False
             Me.cboPayType.SearchAnywhere = False
+            Me.cboPayType.SearchField = Nothing
             Me.cboPayType.Size = New System.Drawing.Size(224, 24)
             Me.cboPayType.SuggestBoxHeight = 200
             Me.cboPayType.SuggestListOrderRule = Nothing
@@ -588,6 +589,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SearchAnywhere = False
+            Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.Size = New System.Drawing.Size(499, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
@@ -621,6 +623,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalCode.DataBoundControl = True
             Me.txtJournalCode.DisplayOnly = True
             Me.txtJournalCode.EditingMode = True
+            Me.txtJournalCode.FindEnabled = False
             Me.txtJournalCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
             Me.txtJournalCode.LinkedLabel = Nothing
@@ -682,6 +685,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.PropertySelector = Nothing
             Me.cboDiscountAccountIdNo.ReadOnlyCombo = False
             Me.cboDiscountAccountIdNo.SearchAnywhere = False
+            Me.cboDiscountAccountIdNo.SearchField = Nothing
             Me.cboDiscountAccountIdNo.Size = New System.Drawing.Size(499, 24)
             Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
             Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
@@ -716,6 +720,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtORNumber.DataBoundControl = True
             Me.txtORNumber.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtORNumber.EditingMode = False
+            Me.txtORNumber.FindEnabled = True
             Me.txtORNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtORNumber.ForeColor = System.Drawing.Color.Black
             Me.txtORNumber.LinkedLabel = Me.lblInvoiceNo
@@ -738,6 +743,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.CustomFormat = "N2"
             Me.txtAmount.DataBoundControl = True
             Me.txtAmount.EditingMode = False
+            Me.txtAmount.FindEnabled = True
             Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
             Me.txtAmount.LinkedLabel = Me.lblAmount
@@ -792,6 +798,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
@@ -817,6 +824,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatAmount.DataBoundControl = True
             Me.txtVatAmount.DisplayOnly = True
             Me.txtVatAmount.EditingMode = True
+            Me.txtVatAmount.FindEnabled = True
             Me.txtVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
             Me.txtVatAmount.LinkedLabel = Me.lblApplied
@@ -860,6 +868,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtApplied.DataBoundControl = True
             Me.txtApplied.DisplayOnly = True
             Me.txtApplied.EditingMode = True
+            Me.txtApplied.FindEnabled = True
             Me.txtApplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtApplied.ForeColor = System.Drawing.Color.Black
             Me.txtApplied.LinkedLabel = Me.lblApplied
@@ -886,6 +895,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnapplied.DataBoundControl = True
             Me.txtUnapplied.DisplayOnly = True
             Me.txtUnapplied.EditingMode = True
+            Me.txtUnapplied.FindEnabled = True
             Me.txtUnapplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtUnapplied.ForeColor = System.Drawing.Color.Black
             Me.txtUnapplied.LinkedLabel = Me.CLabel2
@@ -929,6 +939,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDiscountTaken.DataBoundControl = True
             Me.txtDiscountTaken.DisplayOnly = True
             Me.txtDiscountTaken.EditingMode = True
+            Me.txtDiscountTaken.FindEnabled = True
             Me.txtDiscountTaken.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDiscountTaken.ForeColor = System.Drawing.Color.Black
             Me.txtDiscountTaken.LinkedLabel = Me.lblDiscountTaken
@@ -1147,6 +1158,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.DataBoundControl = True
             Me.txtPayeeName.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtPayeeName.EditingMode = False
+            Me.txtPayeeName.FindEnabled = False
             Me.txtPayeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
             Me.txtPayeeName.LinkedLabel = Me.lblAmount
@@ -1209,6 +1221,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatNumber.DataBoundControl = True
             Me.txtVatNumber.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtVatNumber.EditingMode = False
+            Me.txtVatNumber.FindEnabled = True
             Me.txtVatNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
             Me.txtVatNumber.LinkedLabel = Me.lblApplied
@@ -1233,6 +1246,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber.CustomFormat = Nothing
             Me.txtCheckNumber.DataBoundControl = True
             Me.txtCheckNumber.EditingMode = False
+            Me.txtCheckNumber.FindEnabled = True
             Me.txtCheckNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
             Me.txtCheckNumber.LinkedLabel = Me.lblInvoiceNo
@@ -1306,6 +1320,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.PropertySelector = Nothing
             Me.cboPaymentType.ReadOnlyCombo = False
             Me.cboPaymentType.SearchAnywhere = False
+            Me.cboPaymentType.SearchField = Nothing
             Me.cboPaymentType.Size = New System.Drawing.Size(376, 24)
             Me.cboPaymentType.SuggestBoxHeight = 200
             Me.cboPaymentType.SuggestListOrderRule = Nothing
@@ -1326,6 +1341,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.Dock = System.Windows.Forms.DockStyle.Fill
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
@@ -1349,6 +1365,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReferenceNo.DataBoundControl = True
             Me.txtReferenceNo.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtReferenceNo.EditingMode = False
+            Me.txtReferenceNo.FindEnabled = True
             Me.txtReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
             Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
@@ -1408,6 +1425,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.PropertySelector = Nothing
             Me.cboPayeeIdNo.ReadOnlyCombo = False
             Me.cboPayeeIdNo.SearchAnywhere = False
+            Me.cboPayeeIdNo.SearchField = Nothing
             Me.cboPayeeIdNo.Size = New System.Drawing.Size(725, 24)
             Me.cboPayeeIdNo.SuggestBoxHeight = 200
             Me.cboPayeeIdNo.SuggestListOrderRule = Nothing
@@ -1600,6 +1618,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCdJournalIdNo.CustomFormat = Nothing
             Me.txtCdJournalIdNo.DataBoundControl = True
             Me.txtCdJournalIdNo.EditingMode = True
+            Me.txtCdJournalIdNo.FindEnabled = True
             Me.txtCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCdJournalIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtCdJournalIdNo.LinkedLabel = Nothing

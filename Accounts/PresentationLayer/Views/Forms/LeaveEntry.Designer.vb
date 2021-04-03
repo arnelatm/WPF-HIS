@@ -60,6 +60,12 @@ Namespace PresentationLayer.Views.Forms
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
             resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
             'TranslatorDAC
             '
             Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
@@ -117,6 +123,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.FindEnabled = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
@@ -135,6 +142,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMaxLimit.CustomFormat = Nothing
             Me.txtMaxLimit.DataBoundControl = True
             Me.txtMaxLimit.EditingMode = True
+            Me.txtMaxLimit.FindEnabled = True
             resources.ApplyResources(Me.txtMaxLimit, "txtMaxLimit")
             Me.txtMaxLimit.ForeColor = System.Drawing.Color.Black
             Me.txtMaxLimit.LinkedLabel = Nothing
@@ -160,6 +168,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMaxCarryOver.CustomFormat = Nothing
             Me.txtMaxCarryOver.DataBoundControl = True
             Me.txtMaxCarryOver.EditingMode = True
+            Me.txtMaxCarryOver.FindEnabled = True
             resources.ApplyResources(Me.txtMaxCarryOver, "txtMaxCarryOver")
             Me.txtMaxCarryOver.ForeColor = System.Drawing.Color.Black
             Me.txtMaxCarryOver.LinkedLabel = Nothing
@@ -206,6 +215,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPaidPercent.CustomFormat = Nothing
             Me.txtPaidPercent.DataBoundControl = True
             Me.txtPaidPercent.EditingMode = True
+            Me.txtPaidPercent.FindEnabled = True
             resources.ApplyResources(Me.txtPaidPercent, "txtPaidPercent")
             Me.txtPaidPercent.ForeColor = System.Drawing.Color.Black
             Me.txtPaidPercent.LinkedLabel = Nothing
@@ -231,6 +241,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLeaveAllowed.CustomFormat = Nothing
             Me.txtLeaveAllowed.DataBoundControl = True
             Me.txtLeaveAllowed.EditingMode = True
+            Me.txtLeaveAllowed.FindEnabled = True
             resources.ApplyResources(Me.txtLeaveAllowed, "txtLeaveAllowed")
             Me.txtLeaveAllowed.ForeColor = System.Drawing.Color.Black
             Me.txtLeaveAllowed.LinkedLabel = Nothing
@@ -258,6 +269,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLeaveNameAra.DataBoundControl = True
             Me.txtLeaveNameAra.EditingMode = False
             Me.txtLeaveNameAra.EnglishControl = Me.txtLeaveName
+            Me.txtLeaveNameAra.FindEnabled = True
             resources.ApplyResources(Me.txtLeaveNameAra, "txtLeaveNameAra")
             Me.txtLeaveNameAra.ForeColor = System.Drawing.Color.Black
             Me.txtLeaveNameAra.LinkedLabel = Nothing
@@ -276,6 +288,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLeaveName.CustomFormat = Nothing
             Me.txtLeaveName.DataBoundControl = True
             Me.txtLeaveName.EditingMode = False
+            Me.txtLeaveName.FindEnabled = True
             resources.ApplyResources(Me.txtLeaveName, "txtLeaveName")
             Me.txtLeaveName.ForeColor = System.Drawing.Color.Black
             Me.txtLeaveName.LinkedLabel = Nothing
@@ -310,6 +323,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLeaveCode.CustomFormat = Nothing
             Me.txtLeaveCode.DataBoundControl = True
             Me.txtLeaveCode.EditingMode = True
+            Me.txtLeaveCode.FindEnabled = True
             resources.ApplyResources(Me.txtLeaveCode, "txtLeaveCode")
             Me.txtLeaveCode.ForeColor = System.Drawing.Color.Black
             Me.txtLeaveCode.LinkedLabel = Nothing
@@ -329,6 +343,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing

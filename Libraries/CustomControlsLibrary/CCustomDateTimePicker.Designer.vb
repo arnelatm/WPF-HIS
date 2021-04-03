@@ -59,8 +59,9 @@ Partial Class CCustomDateTimePicker
         Me.txtLongDate.DataBoundControl = true
         Me.txtLongDate.DisplayOnly = true
         Me.txtLongDate.Editable = true
-        Me.txtLongDate.EditingMode = true
-        Me.txtLongDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtLongDate.EditingMode = True
+        Me.txtLongDate.FindEnabled = True
+        Me.txtLongDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtLongDate.ForeColor = System.Drawing.Color.Black
         Me.txtLongDate.LinkedLabel = Nothing
         Me.txtLongDate.Location = New System.Drawing.Point(0, 0)
@@ -69,7 +70,7 @@ Partial Class CCustomDateTimePicker
         Me.txtLongDate.MinimumValue = Nothing
         Me.txtLongDate.Name = "txtLongDate"
         Me.txtLongDate.OldValue = Nothing
-        Me.txtLongDate.ReadOnly = true
+        Me.txtLongDate.ReadOnly = True
         Me.txtLongDate.Size = New System.Drawing.Size(110, 23)
         Me.txtLongDate.TabIndex = 16
         '
@@ -77,11 +78,11 @@ Partial Class CCustomDateTimePicker
         '
         Me.txtDate.BackColor = System.Drawing.Color.White
         Me.txtDate.DefaultValue = Nothing
-        Me.txtDate.DisplayOnly = false
-        Me.txtDate.EditingMode = true
-        Me.txtDate.EditsAllowed = true
+        Me.txtDate.DisplayOnly = False
+        Me.txtDate.EditingMode = True
+        Me.txtDate.EditsAllowed = True
         Me.txtDate.EmptyMask = ""
-        Me.txtDate.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDate.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDate.ForeColor = System.Drawing.Color.Black
         Me.txtDate.Location = New System.Drawing.Point(110, 0)
         Me.txtDate.Margin = New System.Windows.Forms.Padding(0)
@@ -91,17 +92,17 @@ Partial Class CCustomDateTimePicker
         Me.txtDate.SecurityKey = Nothing
         Me.txtDate.Size = New System.Drawing.Size(75, 23)
         Me.txtDate.TabIndex = 15
-        Me.txtDate.ValueIsMandatory = false
-        Me.txtDate.ValueIsNullable = true
-        Me.txtDate.ValueIsNumeric = false
+        Me.txtDate.ValueIsMandatory = False
+        Me.txtDate.ValueIsNullable = True
+        Me.txtDate.ValueIsNumeric = False
         '
         'dtp
         '
         Me.dtp.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.dtp.DesignerSelected = false
-        Me.dtp.DisplayOnly = true
-        Me.dtp.Editable = true
-        Me.dtp.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtp.DesignerSelected = False
+        Me.dtp.DisplayOnly = True
+        Me.dtp.Editable = True
+        Me.dtp.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtp.Image = Global.AATM.Libraries.CustomControlsLibrary.My.Resources.Resources.Calendar18x18
         Me.dtp.ImageIndex = 0
         Me.dtp.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -112,7 +113,7 @@ Partial Class CCustomDateTimePicker
         Me.dtp.SecurityKey = ""
         Me.dtp.Size = New System.Drawing.Size(21, 19)
         Me.dtp.TabIndex = 19
-        Me.dtp.TabStop = false
+        Me.dtp.TabStop = False
         Me.dtp.Text = ""
         Me.dtp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -120,13 +121,14 @@ Partial Class CCustomDateTimePicker
         '
         Me.txtTime.BackColor = System.Drawing.Color.White
         Me.txtTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTime.ComputedValue = false
+        Me.txtTime.ComputedValue = False
         Me.txtTime.CustomFormat = Nothing
-        Me.txtTime.DataBoundControl = true
-        Me.txtTime.DisplayOnly = true
-        Me.txtTime.Editable = true
-        Me.txtTime.EditingMode = true
-        Me.txtTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtTime.DataBoundControl = True
+        Me.txtTime.DisplayOnly = True
+        Me.txtTime.Editable = True
+        Me.txtTime.EditingMode = True
+        Me.txtTime.FindEnabled = True
+        Me.txtTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtTime.ForeColor = System.Drawing.Color.Black
         Me.txtTime.LinkedLabel = Nothing
         Me.txtTime.Location = New System.Drawing.Point(206, 0)

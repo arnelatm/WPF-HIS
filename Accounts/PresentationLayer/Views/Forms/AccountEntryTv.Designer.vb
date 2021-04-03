@@ -65,490 +65,498 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        '
-        'txtIdNo
-        '
-        Me.txtIdNo.BackColor = System.Drawing.Color.White
-        Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtIdNo.ComputedValue = false
-        Me.txtIdNo.CustomFormat = Nothing
-        Me.txtIdNo.DataBoundControl = true
-        Me.txtIdNo.DisplayOnly = true
-        Me.txtIdNo.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtIdNo, true)
-        resources.ApplyResources(Me.txtIdNo, "txtIdNo")
-        Me.txtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtIdNo.LinkedLabel = Me.lblIdNo
-        Me.txtIdNo.MaximumValue = Nothing
-        Me.txtIdNo.MinimumValue = Nothing
-        Me.txtIdNo.Name = "txtIdNo"
-        Me.txtIdNo.OldValue = Nothing
-        Me.txtIdNo.ReadOnly = true
-        Me.txtIdNo.TabStop = false
-        Me.txtIdNo.ValueIsNumeric = true
-        '
-        'lblIdNo
-        '
-        Me.lblIdNo.DisplayOnly = true
-        Me.lblIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-        Me.lblIdNo.Name = "lblIdNo"
-        '
-        'txtAccountCode
-        '
-        Me.txtAccountCode.BackColor = System.Drawing.Color.White
-        Me.txtAccountCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAccountCode.ComputedValue = false
-        Me.txtAccountCode.CustomFormat = Nothing
-        Me.txtAccountCode.DataBoundControl = true
-        Me.txtAccountCode.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtAccountCode, true)
-        resources.ApplyResources(Me.txtAccountCode, "txtAccountCode")
-        Me.txtAccountCode.ForeColor = System.Drawing.Color.Black
-        Me.txtAccountCode.LinkedLabel = Me.lblAccountCode
-        Me.txtAccountCode.MaximumValue = Nothing
-        Me.txtAccountCode.MinimumValue = Nothing
-        Me.txtAccountCode.Name = "txtAccountCode"
-        Me.txtAccountCode.OldValue = Nothing
-        Me.txtAccountCode.ReadOnly = true
-        Me.txtAccountCode.ValueIsMandatory = true
-        '
-        'lblAccountCode
-        '
-        Me.lblAccountCode.DisplayOnly = true
-        Me.lblAccountCode.EditingMode = false
-        resources.ApplyResources(Me.lblAccountCode, "lblAccountCode")
-        Me.lblAccountCode.Name = "lblAccountCode"
-        '
-        'txtAccountName
-        '
-        Me.txtAccountName.BackColor = System.Drawing.Color.White
-        Me.txtAccountName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAccountName.ComputedValue = false
-        Me.txtAccountName.CustomFormat = Nothing
-        Me.txtAccountName.DataBoundControl = true
-        Me.txtAccountName.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtAccountName, true)
-        resources.ApplyResources(Me.txtAccountName, "txtAccountName")
-        Me.txtAccountName.ForeColor = System.Drawing.Color.Black
-        Me.txtAccountName.LinkedLabel = Me.lblAccountName
-        Me.txtAccountName.MaximumValue = Nothing
-        Me.txtAccountName.MinimumValue = Nothing
-        Me.txtAccountName.Name = "txtAccountName"
-        Me.txtAccountName.OldValue = Nothing
-        Me.txtAccountName.ReadOnly = true
-        Me.txtAccountName.ValueIsMandatory = true
-        '
-        'lblAccountName
-        '
-        Me.lblAccountName.DisplayOnly = true
-        Me.lblAccountName.EditingMode = false
-        resources.ApplyResources(Me.lblAccountName, "lblAccountName")
-        Me.lblAccountName.Name = "lblAccountName"
-        '
-        'txtAccountNameAra
-        '
-        Me.txtAccountNameAra.BackColor = System.Drawing.Color.White
-        Me.txtAccountNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAccountNameAra.ComputedValue = false
-        Me.txtAccountNameAra.CustomFormat = Nothing
-        Me.txtAccountNameAra.DataBoundControl = true
-        Me.txtAccountNameAra.EditingMode = true
-        Me.txtAccountNameAra.EnglishControl = Me.txtAccountName
-        Me.floDataDisplay.SetFlowBreak(Me.txtAccountNameAra, true)
-        resources.ApplyResources(Me.txtAccountNameAra, "txtAccountNameAra")
-        Me.txtAccountNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtAccountNameAra.LinkedLabel = Me.lblAccountNameAra
-        Me.txtAccountNameAra.MaximumValue = Nothing
-        Me.txtAccountNameAra.MinimumValue = Nothing
-        Me.txtAccountNameAra.Name = "txtAccountNameAra"
-        Me.txtAccountNameAra.OldValue = Nothing
-        Me.txtAccountNameAra.ReadOnly = true
-        '
-        'lblAccountNameAra
-        '
-        Me.lblAccountNameAra.DisplayOnly = true
-        Me.lblAccountNameAra.EditingMode = false
-        resources.ApplyResources(Me.lblAccountNameAra, "lblAccountNameAra")
-        Me.lblAccountNameAra.Name = "lblAccountNameAra"
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        Me.txtNotes.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtNotes, true)
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
-        Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.MaximumValue = Nothing
-        Me.txtNotes.MinimumValue = Nothing
-        Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.ReadOnly = true
-        Me.txtNotes.ValueIsMandatory = true
-        '
-        'floDataDisplay
-        '
-        resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-        Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-        Me.floDataDisplay.Controls.Add(Me.txtIdNo)
-        Me.floDataDisplay.Controls.Add(Me.lblAccountCode)
-        Me.floDataDisplay.Controls.Add(Me.txtAccountCode)
-        Me.floDataDisplay.Controls.Add(Me.lblAccountName)
-        Me.floDataDisplay.Controls.Add(Me.txtAccountName)
-        Me.floDataDisplay.Controls.Add(Me.lblAccountNameAra)
-        Me.floDataDisplay.Controls.Add(Me.txtAccountNameAra)
-        Me.floDataDisplay.Controls.Add(Me.lblParentIdNo)
-        Me.floDataDisplay.Controls.Add(Me.cboParentIdNo)
-        Me.floDataDisplay.Controls.Add(Me.lblLevelNumber)
-        Me.floDataDisplay.Controls.Add(Me.txtLevelNumber)
-        Me.floDataDisplay.Controls.Add(Me.lblAccountGroup)
-        Me.floDataDisplay.Controls.Add(Me.cboAccountGroup)
-        Me.floDataDisplay.Controls.Add(Me.lblSpecialAccount)
-        Me.floDataDisplay.Controls.Add(Me.cboSpecialAccount)
-        Me.floDataDisplay.Controls.Add(Me.CLabel1)
-        Me.floDataDisplay.Controls.Add(Me.chkDetailAccount)
-        Me.floDataDisplay.Controls.Add(Me.lblWithReconciliation)
-        Me.floDataDisplay.Controls.Add(Me.chkWithReconciliation)
-        Me.floDataDisplay.Controls.Add(Me.lblActive)
-        Me.floDataDisplay.Controls.Add(Me.chkActive)
-        Me.floDataDisplay.Controls.Add(Me.lblNormalBalance)
-        Me.floDataDisplay.Controls.Add(Me.cboNormalBalance)
-        Me.floDataDisplay.Controls.Add(Me.lblPayeeType)
-        Me.floDataDisplay.Controls.Add(Me.cboPayeeType)
-        Me.floDataDisplay.Controls.Add(Me.lblNotes)
-        Me.floDataDisplay.Controls.Add(Me.txtNotes)
-        Me.floDataDisplay.Controls.Add(Me.txtSortKey)
-        Me.floDataDisplay.Name = "floDataDisplay"
-        '
-        'lblParentIdNo
-        '
-        Me.lblParentIdNo.DisplayOnly = true
-        Me.lblParentIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblParentIdNo, "lblParentIdNo")
-        Me.lblParentIdNo.Name = "lblParentIdNo"
-        '
-        'cboParentIdNo
-        '
-        Me.cboParentIdNo.BackColor = System.Drawing.Color.White
-        Me.cboParentIdNo.ChangingSearchValueOnly = false
-        Me.cboParentIdNo.CurrentSearchTerm = ""
-        Me.cboParentIdNo.DefaultValue = Nothing
-        Me.cboParentIdNo.DisplayMember = "Name"
-        Me.cboParentIdNo.DropDownHeight = 1
-        Me.cboParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboParentIdNo.EditingMode = false
-        Me.cboParentIdNo.FilterRule = Nothing
-        Me.floDataDisplay.SetFlowBreak(Me.cboParentIdNo, true)
-        resources.ApplyResources(Me.cboParentIdNo, "cboParentIdNo")
-        Me.cboParentIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboParentIdNo.FormattingEnabled = true
-        Me.cboParentIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboParentIdNo.LinkedLabel = Nothing
-        Me.cboParentIdNo.Name = "cboParentIdNo"
-        Me.cboParentIdNo.OldValue = 0
-        Me.cboParentIdNo.OriginalDataSource = Nothing
-        Me.cboParentIdNo.OriginalList = Nothing
-        Me.cboParentIdNo.OverrideDropDownStyleList = false
-        Me.cboParentIdNo.PreviousSearchTerm = Nothing
-        Me.cboParentIdNo.PreviousSelectedIndex = -1
-        Me.cboParentIdNo.PropertySelector = Nothing
-        Me.cboParentIdNo.ReadOnlyCombo = false
-        Me.cboParentIdNo.SearchAnywhere = false
-        Me.cboParentIdNo.SuggestBoxHeight = 200
-        Me.cboParentIdNo.SuggestListOrderRule = Nothing
-        Me.cboParentIdNo.TextToSearch = Nothing
-        Me.cboParentIdNo.ValueIsMandatory = false
-        Me.cboParentIdNo.ValueIsNullable = false
-        Me.cboParentIdNo.ValueIsNumeric = false
-        Me.cboParentIdNo.ValueMember = "IdNo"
-        '
-        'lblLevelNumber
-        '
-        Me.lblLevelNumber.DisplayOnly = true
-        Me.lblLevelNumber.EditingMode = false
-        resources.ApplyResources(Me.lblLevelNumber, "lblLevelNumber")
-        Me.lblLevelNumber.Name = "lblLevelNumber"
-        '
-        'txtLevelNumber
-        '
-        Me.txtLevelNumber.BackColor = System.Drawing.Color.White
-        Me.txtLevelNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLevelNumber.ComputedValue = false
-        Me.txtLevelNumber.CustomFormat = Nothing
-        Me.txtLevelNumber.DataBoundControl = true
-        Me.txtLevelNumber.DisplayOnly = true
-        Me.txtLevelNumber.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtLevelNumber, true)
-        resources.ApplyResources(Me.txtLevelNumber, "txtLevelNumber")
-        Me.txtLevelNumber.ForeColor = System.Drawing.Color.Black
-        Me.txtLevelNumber.IgnoreNullCheck = true
-        Me.txtLevelNumber.LinkedLabel = Me.lblLevelNumber
-        Me.txtLevelNumber.MaximumValue = Nothing
-        Me.txtLevelNumber.MinimumValue = Nothing
-        Me.txtLevelNumber.Name = "txtLevelNumber"
-        Me.txtLevelNumber.OldValue = Nothing
-        Me.txtLevelNumber.ReadOnly = true
-        Me.txtLevelNumber.ValueIsMandatory = true
-        Me.txtLevelNumber.ValueIsNumeric = true
-        '
-        'lblAccountGroup
-        '
-        Me.lblAccountGroup.DisplayOnly = true
-        Me.lblAccountGroup.EditingMode = false
-        resources.ApplyResources(Me.lblAccountGroup, "lblAccountGroup")
-        Me.lblAccountGroup.Name = "lblAccountGroup"
-        '
-        'cboAccountGroup
-        '
-        Me.cboAccountGroup.BackColor = System.Drawing.Color.White
-        Me.cboAccountGroup.ChangingSearchValueOnly = false
-        Me.cboAccountGroup.CurrentSearchTerm = ""
-        Me.cboAccountGroup.DefaultValue = Nothing
-        Me.cboAccountGroup.DisplayMember = "Name"
-        Me.cboAccountGroup.DropDownHeight = 1
-        Me.cboAccountGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboAccountGroup.EditingMode = false
-        Me.cboAccountGroup.FilterRule = Nothing
-        Me.floDataDisplay.SetFlowBreak(Me.cboAccountGroup, true)
-        resources.ApplyResources(Me.cboAccountGroup, "cboAccountGroup")
-        Me.cboAccountGroup.ForeColor = System.Drawing.Color.Black
-        Me.cboAccountGroup.FormattingEnabled = true
-        Me.cboAccountGroup.HideWhenNotEditingOrAdding = false
-        Me.cboAccountGroup.LinkedLabel = Nothing
-        Me.cboAccountGroup.Name = "cboAccountGroup"
-        Me.cboAccountGroup.OldValue = 0
-        Me.cboAccountGroup.OriginalDataSource = Nothing
-        Me.cboAccountGroup.OriginalList = Nothing
-        Me.cboAccountGroup.OverrideDropDownStyleList = false
-        Me.cboAccountGroup.PreviousSearchTerm = Nothing
-        Me.cboAccountGroup.PreviousSelectedIndex = -1
-        Me.cboAccountGroup.PropertySelector = Nothing
-        Me.cboAccountGroup.ReadOnlyCombo = false
-        Me.cboAccountGroup.SearchAnywhere = false
-        Me.cboAccountGroup.SuggestBoxHeight = 200
-        Me.cboAccountGroup.SuggestListOrderRule = Nothing
-        Me.cboAccountGroup.TextToSearch = Nothing
-        Me.cboAccountGroup.ValueIsMandatory = false
-        Me.cboAccountGroup.ValueIsNullable = false
-        Me.cboAccountGroup.ValueIsNumeric = false
-        Me.cboAccountGroup.ValueMember = "Code"
-        '
-        'lblSpecialAccount
-        '
-        Me.lblSpecialAccount.DisplayOnly = true
-        Me.lblSpecialAccount.EditingMode = false
-        resources.ApplyResources(Me.lblSpecialAccount, "lblSpecialAccount")
-        Me.lblSpecialAccount.Name = "lblSpecialAccount"
-        '
-        'cboSpecialAccount
-        '
-        Me.cboSpecialAccount.BackColor = System.Drawing.Color.White
-        Me.cboSpecialAccount.ChangingSearchValueOnly = false
-        Me.cboSpecialAccount.CurrentSearchTerm = ""
-        Me.cboSpecialAccount.DefaultValue = Nothing
-        Me.cboSpecialAccount.DisplayMember = "Name"
-        Me.cboSpecialAccount.DropDownHeight = 1
-        Me.cboSpecialAccount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboSpecialAccount.EditingMode = false
-        Me.cboSpecialAccount.FilterRule = Nothing
-        Me.floDataDisplay.SetFlowBreak(Me.cboSpecialAccount, true)
-        resources.ApplyResources(Me.cboSpecialAccount, "cboSpecialAccount")
-        Me.cboSpecialAccount.ForeColor = System.Drawing.Color.Black
-        Me.cboSpecialAccount.FormattingEnabled = true
-        Me.cboSpecialAccount.HideWhenNotEditingOrAdding = false
-        Me.cboSpecialAccount.LinkedLabel = Me.lblAccountGroup
-        Me.cboSpecialAccount.Name = "cboSpecialAccount"
-        Me.cboSpecialAccount.OldValue = 0
-        Me.cboSpecialAccount.OriginalDataSource = Nothing
-        Me.cboSpecialAccount.OriginalList = Nothing
-        Me.cboSpecialAccount.OverrideDropDownStyleList = false
-        Me.cboSpecialAccount.PreviousSearchTerm = Nothing
-        Me.cboSpecialAccount.PreviousSelectedIndex = -1
-        Me.cboSpecialAccount.PropertySelector = Nothing
-        Me.cboSpecialAccount.ReadOnlyCombo = false
-        Me.cboSpecialAccount.SearchAnywhere = false
-        Me.cboSpecialAccount.SuggestBoxHeight = 200
-        Me.cboSpecialAccount.SuggestListOrderRule = Nothing
-        Me.cboSpecialAccount.TextToSearch = Nothing
-        Me.cboSpecialAccount.ValueIsMandatory = false
-        Me.cboSpecialAccount.ValueIsNullable = false
-        Me.cboSpecialAccount.ValueIsNumeric = false
-        Me.cboSpecialAccount.ValueMember = "Code"
-        '
-        'CLabel1
-        '
-        Me.CLabel1.DisplayOnly = true
-        Me.CLabel1.EditingMode = false
-        resources.ApplyResources(Me.CLabel1, "CLabel1")
-        Me.CLabel1.Name = "CLabel1"
-        '
-        'chkDetailAccount
-        '
-        resources.ApplyResources(Me.chkDetailAccount, "chkDetailAccount")
-        Me.chkDetailAccount.AutoCheck = false
-        Me.chkDetailAccount.BackColor = System.Drawing.Color.White
-        Me.chkDetailAccount.DisplayOnly = false
-        Me.chkDetailAccount.EditingMode = false
-        Me.chkDetailAccount.ForeColor = System.Drawing.Color.Black
-        Me.chkDetailAccount.LinkedLabel = Nothing
-        Me.chkDetailAccount.Name = "chkDetailAccount"
-        Me.chkDetailAccount.NoLabel = true
-        Me.chkDetailAccount.OldValue = Nothing
-        Me.chkDetailAccount.UseVisualStyleBackColor = true
-        '
-        'lblWithReconciliation
-        '
-        Me.lblWithReconciliation.DisplayOnly = true
-        Me.lblWithReconciliation.EditingMode = false
-        resources.ApplyResources(Me.lblWithReconciliation, "lblWithReconciliation")
-        Me.lblWithReconciliation.Name = "lblWithReconciliation"
-        '
-        'chkWithReconciliation
-        '
-        resources.ApplyResources(Me.chkWithReconciliation, "chkWithReconciliation")
-        Me.chkWithReconciliation.AutoCheck = false
-        Me.chkWithReconciliation.BackColor = System.Drawing.Color.White
-        Me.chkWithReconciliation.Checked = true
-        Me.chkWithReconciliation.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkWithReconciliation.DisplayOnly = false
-        Me.chkWithReconciliation.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.chkWithReconciliation, true)
-        Me.chkWithReconciliation.ForeColor = System.Drawing.Color.Black
-        Me.chkWithReconciliation.LinkedLabel = Nothing
-        Me.chkWithReconciliation.Name = "chkWithReconciliation"
-        Me.chkWithReconciliation.NoLabel = true
-        Me.chkWithReconciliation.OldValue = Nothing
-        Me.chkWithReconciliation.UseVisualStyleBackColor = false
-        '
-        'lblActive
-        '
-        Me.lblActive.DisplayOnly = true
-        Me.lblActive.EditingMode = false
-        resources.ApplyResources(Me.lblActive, "lblActive")
-        Me.lblActive.Name = "lblActive"
-        '
-        'chkActive
-        '
-        resources.ApplyResources(Me.chkActive, "chkActive")
-        Me.chkActive.AutoCheck = false
-        Me.chkActive.BackColor = System.Drawing.Color.White
-        Me.chkActive.DisplayOnly = false
-        Me.chkActive.EditingMode = false
-        Me.chkActive.ForeColor = System.Drawing.Color.Black
-        Me.chkActive.LinkedLabel = Nothing
-        Me.chkActive.Name = "chkActive"
-        Me.chkActive.NoLabel = true
-        Me.chkActive.OldValue = Nothing
-        Me.chkActive.UseVisualStyleBackColor = true
-        '
-        'lblNormalBalance
-        '
-        Me.lblNormalBalance.DisplayOnly = true
-        Me.lblNormalBalance.EditingMode = false
-        resources.ApplyResources(Me.lblNormalBalance, "lblNormalBalance")
-        Me.lblNormalBalance.Name = "lblNormalBalance"
-        '
-        'cboNormalBalance
-        '
-        Me.cboNormalBalance.BackColor = System.Drawing.Color.White
-        Me.cboNormalBalance.ChangingSearchValueOnly = false
-        Me.cboNormalBalance.CurrentSearchTerm = ""
-        Me.cboNormalBalance.DefaultValue = Nothing
-        Me.cboNormalBalance.DisplayMember = "Name"
-        Me.cboNormalBalance.DropDownHeight = 1
-        Me.cboNormalBalance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboNormalBalance.EditingMode = false
-        Me.cboNormalBalance.FilterRule = Nothing
-        Me.floDataDisplay.SetFlowBreak(Me.cboNormalBalance, true)
-        resources.ApplyResources(Me.cboNormalBalance, "cboNormalBalance")
-        Me.cboNormalBalance.ForeColor = System.Drawing.Color.Black
-        Me.cboNormalBalance.FormattingEnabled = true
-        Me.cboNormalBalance.HideWhenNotEditingOrAdding = false
-        Me.cboNormalBalance.LinkedLabel = Nothing
-        Me.cboNormalBalance.Name = "cboNormalBalance"
-        Me.cboNormalBalance.OldValue = 0
-        Me.cboNormalBalance.OriginalDataSource = Nothing
-        Me.cboNormalBalance.OriginalList = Nothing
-        Me.cboNormalBalance.OverrideDropDownStyleList = false
-        Me.cboNormalBalance.PreviousSearchTerm = Nothing
-        Me.cboNormalBalance.PreviousSelectedIndex = -1
-        Me.cboNormalBalance.PropertySelector = Nothing
-        Me.cboNormalBalance.ReadOnlyCombo = false
-        Me.cboNormalBalance.SearchAnywhere = false
-        Me.cboNormalBalance.SuggestBoxHeight = 200
-        Me.cboNormalBalance.SuggestListOrderRule = Nothing
-        Me.cboNormalBalance.TextToSearch = Nothing
-        Me.cboNormalBalance.ValueIsMandatory = false
-        Me.cboNormalBalance.ValueIsNullable = false
-        Me.cboNormalBalance.ValueIsNumeric = false
-        Me.cboNormalBalance.ValueMember = "Code"
-        '
-        'lblPayeeType
-        '
-        Me.lblPayeeType.DisplayOnly = true
-        Me.lblPayeeType.EditingMode = false
-        resources.ApplyResources(Me.lblPayeeType, "lblPayeeType")
-        Me.lblPayeeType.Name = "lblPayeeType"
-        '
-        'cboPayeeType
-        '
-        Me.cboPayeeType.BackColor = System.Drawing.Color.White
-        Me.cboPayeeType.ChangingSearchValueOnly = false
-        Me.cboPayeeType.CurrentSearchTerm = ""
-        Me.cboPayeeType.DefaultValue = Nothing
-        Me.cboPayeeType.DisplayMember = "Name"
-        Me.cboPayeeType.DropDownHeight = 1
-        Me.cboPayeeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboPayeeType.EditingMode = false
-        Me.cboPayeeType.FilterRule = Nothing
-        Me.floDataDisplay.SetFlowBreak(Me.cboPayeeType, true)
-        resources.ApplyResources(Me.cboPayeeType, "cboPayeeType")
-        Me.cboPayeeType.ForeColor = System.Drawing.Color.Black
-        Me.cboPayeeType.FormattingEnabled = true
-        Me.cboPayeeType.HideWhenNotEditingOrAdding = false
-        Me.cboPayeeType.LinkedLabel = Nothing
-        Me.cboPayeeType.Name = "cboPayeeType"
-        Me.cboPayeeType.OldValue = 0
-        Me.cboPayeeType.OriginalDataSource = Nothing
-        Me.cboPayeeType.OriginalList = Nothing
-        Me.cboPayeeType.OverrideDropDownStyleList = false
-        Me.cboPayeeType.PreviousSearchTerm = Nothing
-        Me.cboPayeeType.PreviousSelectedIndex = -1
-        Me.cboPayeeType.PropertySelector = Nothing
-        Me.cboPayeeType.ReadOnlyCombo = false
-        Me.cboPayeeType.SearchAnywhere = false
-        Me.cboPayeeType.SuggestBoxHeight = 200
-        Me.cboPayeeType.SuggestListOrderRule = Nothing
-        Me.cboPayeeType.TextToSearch = Nothing
-        Me.cboPayeeType.ValueIsMandatory = false
-        Me.cboPayeeType.ValueIsNullable = false
-        Me.cboPayeeType.ValueIsNumeric = false
-        Me.cboPayeeType.ValueMember = "Code"
-        '
-        'lblNotes
-        '
-        Me.lblNotes.DisplayOnly = true
-        Me.lblNotes.EditingMode = false
-        resources.ApplyResources(Me.lblNotes, "lblNotes")
-        Me.lblNotes.Name = "lblNotes"
-        '
-        'txtSortKey
-        '
-        Me.txtSortKey.BackColor = System.Drawing.Color.White
-        Me.txtSortKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSortKey.ComputedValue = false
-        Me.txtSortKey.CustomFormat = Nothing
-        Me.txtSortKey.DataBoundControl = true
-        Me.txtSortKey.EditingMode = true
-        resources.ApplyResources(Me.txtSortKey, "txtSortKey")
-        Me.txtSortKey.ForeColor = System.Drawing.Color.Black
-        Me.txtSortKey.LinkedLabel = Nothing
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'txtIdNo
+            '
+            Me.txtIdNo.BackColor = System.Drawing.Color.White
+            Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtIdNo.ComputedValue = False
+            Me.txtIdNo.CustomFormat = Nothing
+            Me.txtIdNo.DataBoundControl = True
+            Me.txtIdNo.DisplayOnly = True
+            Me.txtIdNo.EditingMode = True
+            Me.txtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtIdNo, True)
+            resources.ApplyResources(Me.txtIdNo, "txtIdNo")
+            Me.txtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtIdNo.LinkedLabel = Me.lblIdNo
+            Me.txtIdNo.MaximumValue = Nothing
+            Me.txtIdNo.MinimumValue = Nothing
+            Me.txtIdNo.Name = "txtIdNo"
+            Me.txtIdNo.OldValue = Nothing
+            Me.txtIdNo.ReadOnly = True
+            Me.txtIdNo.TabStop = False
+            Me.txtIdNo.ValueIsNumeric = True
+            '
+            'lblIdNo
+            '
+            Me.lblIdNo.DisplayOnly = True
+            Me.lblIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.Name = "lblIdNo"
+            '
+            'txtAccountCode
+            '
+            Me.txtAccountCode.BackColor = System.Drawing.Color.White
+            Me.txtAccountCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtAccountCode.ComputedValue = False
+            Me.txtAccountCode.CustomFormat = Nothing
+            Me.txtAccountCode.DataBoundControl = True
+            Me.txtAccountCode.EditingMode = True
+            Me.txtAccountCode.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtAccountCode, True)
+            resources.ApplyResources(Me.txtAccountCode, "txtAccountCode")
+            Me.txtAccountCode.ForeColor = System.Drawing.Color.Black
+            Me.txtAccountCode.LinkedLabel = Me.lblAccountCode
+            Me.txtAccountCode.MaximumValue = Nothing
+            Me.txtAccountCode.MinimumValue = Nothing
+            Me.txtAccountCode.Name = "txtAccountCode"
+            Me.txtAccountCode.OldValue = Nothing
+            Me.txtAccountCode.ReadOnly = True
+            Me.txtAccountCode.ValueIsMandatory = True
+            '
+            'lblAccountCode
+            '
+            Me.lblAccountCode.DisplayOnly = True
+            Me.lblAccountCode.EditingMode = False
+            resources.ApplyResources(Me.lblAccountCode, "lblAccountCode")
+            Me.lblAccountCode.Name = "lblAccountCode"
+            '
+            'txtAccountName
+            '
+            Me.txtAccountName.BackColor = System.Drawing.Color.White
+            Me.txtAccountName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtAccountName.ComputedValue = False
+            Me.txtAccountName.CustomFormat = Nothing
+            Me.txtAccountName.DataBoundControl = True
+            Me.txtAccountName.EditingMode = True
+            Me.txtAccountName.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtAccountName, True)
+            resources.ApplyResources(Me.txtAccountName, "txtAccountName")
+            Me.txtAccountName.ForeColor = System.Drawing.Color.Black
+            Me.txtAccountName.LinkedLabel = Me.lblAccountName
+            Me.txtAccountName.MaximumValue = Nothing
+            Me.txtAccountName.MinimumValue = Nothing
+            Me.txtAccountName.Name = "txtAccountName"
+            Me.txtAccountName.OldValue = Nothing
+            Me.txtAccountName.ReadOnly = True
+            Me.txtAccountName.ValueIsMandatory = True
+            '
+            'lblAccountName
+            '
+            Me.lblAccountName.DisplayOnly = True
+            Me.lblAccountName.EditingMode = False
+            resources.ApplyResources(Me.lblAccountName, "lblAccountName")
+            Me.lblAccountName.Name = "lblAccountName"
+            '
+            'txtAccountNameAra
+            '
+            Me.txtAccountNameAra.BackColor = System.Drawing.Color.White
+            Me.txtAccountNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtAccountNameAra.ComputedValue = False
+            Me.txtAccountNameAra.CustomFormat = Nothing
+            Me.txtAccountNameAra.DataBoundControl = True
+            Me.txtAccountNameAra.EditingMode = True
+            Me.txtAccountNameAra.EnglishControl = Me.txtAccountName
+            Me.txtAccountNameAra.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtAccountNameAra, True)
+            resources.ApplyResources(Me.txtAccountNameAra, "txtAccountNameAra")
+            Me.txtAccountNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtAccountNameAra.LinkedLabel = Me.lblAccountNameAra
+            Me.txtAccountNameAra.MaximumValue = Nothing
+            Me.txtAccountNameAra.MinimumValue = Nothing
+            Me.txtAccountNameAra.Name = "txtAccountNameAra"
+            Me.txtAccountNameAra.OldValue = Nothing
+            Me.txtAccountNameAra.ReadOnly = True
+            '
+            'lblAccountNameAra
+            '
+            Me.lblAccountNameAra.DisplayOnly = True
+            Me.lblAccountNameAra.EditingMode = False
+            resources.ApplyResources(Me.lblAccountNameAra, "lblAccountNameAra")
+            Me.lblAccountNameAra.Name = "lblAccountNameAra"
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = True
+            Me.txtNotes.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtNotes, True)
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.ReadOnly = True
+            Me.txtNotes.ValueIsMandatory = True
+            '
+            'floDataDisplay
+            '
+            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+            Me.floDataDisplay.Controls.Add(Me.lblIdNo)
+            Me.floDataDisplay.Controls.Add(Me.txtIdNo)
+            Me.floDataDisplay.Controls.Add(Me.lblAccountCode)
+            Me.floDataDisplay.Controls.Add(Me.txtAccountCode)
+            Me.floDataDisplay.Controls.Add(Me.lblAccountName)
+            Me.floDataDisplay.Controls.Add(Me.txtAccountName)
+            Me.floDataDisplay.Controls.Add(Me.lblAccountNameAra)
+            Me.floDataDisplay.Controls.Add(Me.txtAccountNameAra)
+            Me.floDataDisplay.Controls.Add(Me.lblParentIdNo)
+            Me.floDataDisplay.Controls.Add(Me.cboParentIdNo)
+            Me.floDataDisplay.Controls.Add(Me.lblLevelNumber)
+            Me.floDataDisplay.Controls.Add(Me.txtLevelNumber)
+            Me.floDataDisplay.Controls.Add(Me.lblAccountGroup)
+            Me.floDataDisplay.Controls.Add(Me.cboAccountGroup)
+            Me.floDataDisplay.Controls.Add(Me.lblSpecialAccount)
+            Me.floDataDisplay.Controls.Add(Me.cboSpecialAccount)
+            Me.floDataDisplay.Controls.Add(Me.CLabel1)
+            Me.floDataDisplay.Controls.Add(Me.chkDetailAccount)
+            Me.floDataDisplay.Controls.Add(Me.lblWithReconciliation)
+            Me.floDataDisplay.Controls.Add(Me.chkWithReconciliation)
+            Me.floDataDisplay.Controls.Add(Me.lblActive)
+            Me.floDataDisplay.Controls.Add(Me.chkActive)
+            Me.floDataDisplay.Controls.Add(Me.lblNormalBalance)
+            Me.floDataDisplay.Controls.Add(Me.cboNormalBalance)
+            Me.floDataDisplay.Controls.Add(Me.lblPayeeType)
+            Me.floDataDisplay.Controls.Add(Me.cboPayeeType)
+            Me.floDataDisplay.Controls.Add(Me.lblNotes)
+            Me.floDataDisplay.Controls.Add(Me.txtNotes)
+            Me.floDataDisplay.Controls.Add(Me.txtSortKey)
+            Me.floDataDisplay.Name = "floDataDisplay"
+            '
+            'lblParentIdNo
+            '
+            Me.lblParentIdNo.DisplayOnly = True
+            Me.lblParentIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblParentIdNo, "lblParentIdNo")
+            Me.lblParentIdNo.Name = "lblParentIdNo"
+            '
+            'cboParentIdNo
+            '
+            Me.cboParentIdNo.BackColor = System.Drawing.Color.White
+            Me.cboParentIdNo.ChangingSearchValueOnly = False
+            Me.cboParentIdNo.CurrentSearchTerm = ""
+            Me.cboParentIdNo.DefaultValue = Nothing
+            Me.cboParentIdNo.DisplayMember = "Name"
+            Me.cboParentIdNo.EditingMode = False
+            Me.cboParentIdNo.FilterRule = Nothing
+            Me.floDataDisplay.SetFlowBreak(Me.cboParentIdNo, True)
+            resources.ApplyResources(Me.cboParentIdNo, "cboParentIdNo")
+            Me.cboParentIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboParentIdNo.FormattingEnabled = True
+            Me.cboParentIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboParentIdNo.LinkedLabel = Nothing
+            Me.cboParentIdNo.Name = "cboParentIdNo"
+            Me.cboParentIdNo.OldValue = 0
+            Me.cboParentIdNo.OriginalDataSource = Nothing
+            Me.cboParentIdNo.OriginalList = Nothing
+            Me.cboParentIdNo.OverrideDropDownStyleList = False
+            Me.cboParentIdNo.PreviousSearchTerm = Nothing
+            Me.cboParentIdNo.PreviousSelectedIndex = -1
+            Me.cboParentIdNo.PropertySelector = Nothing
+            Me.cboParentIdNo.ReadOnlyCombo = False
+            Me.cboParentIdNo.SearchAnywhere = False
+            Me.cboParentIdNo.SearchField = Nothing
+            Me.cboParentIdNo.SuggestBoxHeight = 200
+            Me.cboParentIdNo.SuggestListOrderRule = Nothing
+            Me.cboParentIdNo.TextToSearch = Nothing
+            Me.cboParentIdNo.ValueIsMandatory = False
+            Me.cboParentIdNo.ValueIsNullable = False
+            Me.cboParentIdNo.ValueIsNumeric = False
+            Me.cboParentIdNo.ValueMember = "IdNo"
+            '
+            'lblLevelNumber
+            '
+            Me.lblLevelNumber.DisplayOnly = True
+            Me.lblLevelNumber.EditingMode = False
+            resources.ApplyResources(Me.lblLevelNumber, "lblLevelNumber")
+            Me.lblLevelNumber.Name = "lblLevelNumber"
+            '
+            'txtLevelNumber
+            '
+            Me.txtLevelNumber.BackColor = System.Drawing.Color.White
+            Me.txtLevelNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtLevelNumber.ComputedValue = False
+            Me.txtLevelNumber.CustomFormat = Nothing
+            Me.txtLevelNumber.DataBoundControl = True
+            Me.txtLevelNumber.DisplayOnly = True
+            Me.txtLevelNumber.EditingMode = True
+            Me.txtLevelNumber.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtLevelNumber, True)
+            resources.ApplyResources(Me.txtLevelNumber, "txtLevelNumber")
+            Me.txtLevelNumber.ForeColor = System.Drawing.Color.Black
+            Me.txtLevelNumber.IgnoreNullCheck = True
+            Me.txtLevelNumber.LinkedLabel = Me.lblLevelNumber
+            Me.txtLevelNumber.MaximumValue = Nothing
+            Me.txtLevelNumber.MinimumValue = Nothing
+            Me.txtLevelNumber.Name = "txtLevelNumber"
+            Me.txtLevelNumber.OldValue = Nothing
+            Me.txtLevelNumber.ReadOnly = True
+            Me.txtLevelNumber.ValueIsMandatory = True
+            Me.txtLevelNumber.ValueIsNumeric = True
+            '
+            'lblAccountGroup
+            '
+            Me.lblAccountGroup.DisplayOnly = True
+            Me.lblAccountGroup.EditingMode = False
+            resources.ApplyResources(Me.lblAccountGroup, "lblAccountGroup")
+            Me.lblAccountGroup.Name = "lblAccountGroup"
+            '
+            'cboAccountGroup
+            '
+            Me.cboAccountGroup.BackColor = System.Drawing.Color.White
+            Me.cboAccountGroup.ChangingSearchValueOnly = False
+            Me.cboAccountGroup.CurrentSearchTerm = ""
+            Me.cboAccountGroup.DefaultValue = Nothing
+            Me.cboAccountGroup.DisplayMember = "Name"
+            Me.cboAccountGroup.EditingMode = False
+            Me.cboAccountGroup.FilterRule = Nothing
+            Me.floDataDisplay.SetFlowBreak(Me.cboAccountGroup, True)
+            resources.ApplyResources(Me.cboAccountGroup, "cboAccountGroup")
+            Me.cboAccountGroup.ForeColor = System.Drawing.Color.Black
+            Me.cboAccountGroup.FormattingEnabled = True
+            Me.cboAccountGroup.HideWhenNotEditingOrAdding = False
+            Me.cboAccountGroup.LinkedLabel = Nothing
+            Me.cboAccountGroup.Name = "cboAccountGroup"
+            Me.cboAccountGroup.OldValue = 0
+            Me.cboAccountGroup.OriginalDataSource = Nothing
+            Me.cboAccountGroup.OriginalList = Nothing
+            Me.cboAccountGroup.OverrideDropDownStyleList = False
+            Me.cboAccountGroup.PreviousSearchTerm = Nothing
+            Me.cboAccountGroup.PreviousSelectedIndex = -1
+            Me.cboAccountGroup.PropertySelector = Nothing
+            Me.cboAccountGroup.ReadOnlyCombo = False
+            Me.cboAccountGroup.SearchAnywhere = False
+            Me.cboAccountGroup.SearchField = Nothing
+            Me.cboAccountGroup.SuggestBoxHeight = 200
+            Me.cboAccountGroup.SuggestListOrderRule = Nothing
+            Me.cboAccountGroup.TextToSearch = Nothing
+            Me.cboAccountGroup.ValueIsMandatory = False
+            Me.cboAccountGroup.ValueIsNullable = False
+            Me.cboAccountGroup.ValueIsNumeric = False
+            Me.cboAccountGroup.ValueMember = "Code"
+            '
+            'lblSpecialAccount
+            '
+            Me.lblSpecialAccount.DisplayOnly = True
+            Me.lblSpecialAccount.EditingMode = False
+            resources.ApplyResources(Me.lblSpecialAccount, "lblSpecialAccount")
+            Me.lblSpecialAccount.Name = "lblSpecialAccount"
+            '
+            'cboSpecialAccount
+            '
+            Me.cboSpecialAccount.BackColor = System.Drawing.Color.White
+            Me.cboSpecialAccount.ChangingSearchValueOnly = False
+            Me.cboSpecialAccount.CurrentSearchTerm = ""
+            Me.cboSpecialAccount.DefaultValue = Nothing
+            Me.cboSpecialAccount.DisplayMember = "Name"
+            Me.cboSpecialAccount.EditingMode = False
+            Me.cboSpecialAccount.FilterRule = Nothing
+            Me.floDataDisplay.SetFlowBreak(Me.cboSpecialAccount, True)
+            resources.ApplyResources(Me.cboSpecialAccount, "cboSpecialAccount")
+            Me.cboSpecialAccount.ForeColor = System.Drawing.Color.Black
+            Me.cboSpecialAccount.FormattingEnabled = True
+            Me.cboSpecialAccount.HideWhenNotEditingOrAdding = False
+            Me.cboSpecialAccount.LinkedLabel = Me.lblAccountGroup
+            Me.cboSpecialAccount.Name = "cboSpecialAccount"
+            Me.cboSpecialAccount.OldValue = 0
+            Me.cboSpecialAccount.OriginalDataSource = Nothing
+            Me.cboSpecialAccount.OriginalList = Nothing
+            Me.cboSpecialAccount.OverrideDropDownStyleList = False
+            Me.cboSpecialAccount.PreviousSearchTerm = Nothing
+            Me.cboSpecialAccount.PreviousSelectedIndex = -1
+            Me.cboSpecialAccount.PropertySelector = Nothing
+            Me.cboSpecialAccount.ReadOnlyCombo = False
+            Me.cboSpecialAccount.SearchAnywhere = False
+            Me.cboSpecialAccount.SearchField = Nothing
+            Me.cboSpecialAccount.SuggestBoxHeight = 200
+            Me.cboSpecialAccount.SuggestListOrderRule = Nothing
+            Me.cboSpecialAccount.TextToSearch = Nothing
+            Me.cboSpecialAccount.ValueIsMandatory = False
+            Me.cboSpecialAccount.ValueIsNullable = False
+            Me.cboSpecialAccount.ValueIsNumeric = False
+            Me.cboSpecialAccount.ValueMember = "Code"
+            '
+            'CLabel1
+            '
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
+            '
+            'chkDetailAccount
+            '
+            resources.ApplyResources(Me.chkDetailAccount, "chkDetailAccount")
+            Me.chkDetailAccount.AutoCheck = False
+            Me.chkDetailAccount.BackColor = System.Drawing.Color.White
+            Me.chkDetailAccount.DisplayOnly = False
+            Me.chkDetailAccount.EditingMode = False
+            Me.chkDetailAccount.ForeColor = System.Drawing.Color.Black
+            Me.chkDetailAccount.LinkedLabel = Nothing
+            Me.chkDetailAccount.Name = "chkDetailAccount"
+            Me.chkDetailAccount.NoLabel = True
+            Me.chkDetailAccount.OldValue = Nothing
+            Me.chkDetailAccount.UseVisualStyleBackColor = True
+            '
+            'lblWithReconciliation
+            '
+            Me.lblWithReconciliation.DisplayOnly = True
+            Me.lblWithReconciliation.EditingMode = False
+            resources.ApplyResources(Me.lblWithReconciliation, "lblWithReconciliation")
+            Me.lblWithReconciliation.Name = "lblWithReconciliation"
+            '
+            'chkWithReconciliation
+            '
+            resources.ApplyResources(Me.chkWithReconciliation, "chkWithReconciliation")
+            Me.chkWithReconciliation.AutoCheck = False
+            Me.chkWithReconciliation.BackColor = System.Drawing.Color.White
+            Me.chkWithReconciliation.Checked = True
+            Me.chkWithReconciliation.CheckState = System.Windows.Forms.CheckState.Checked
+            Me.chkWithReconciliation.DisplayOnly = False
+            Me.chkWithReconciliation.EditingMode = False
+            Me.floDataDisplay.SetFlowBreak(Me.chkWithReconciliation, True)
+            Me.chkWithReconciliation.ForeColor = System.Drawing.Color.Black
+            Me.chkWithReconciliation.LinkedLabel = Nothing
+            Me.chkWithReconciliation.Name = "chkWithReconciliation"
+            Me.chkWithReconciliation.NoLabel = True
+            Me.chkWithReconciliation.OldValue = Nothing
+            Me.chkWithReconciliation.UseVisualStyleBackColor = False
+            '
+            'lblActive
+            '
+            Me.lblActive.DisplayOnly = True
+            Me.lblActive.EditingMode = False
+            resources.ApplyResources(Me.lblActive, "lblActive")
+            Me.lblActive.Name = "lblActive"
+            '
+            'chkActive
+            '
+            resources.ApplyResources(Me.chkActive, "chkActive")
+            Me.chkActive.AutoCheck = False
+            Me.chkActive.BackColor = System.Drawing.Color.White
+            Me.chkActive.DisplayOnly = False
+            Me.chkActive.EditingMode = False
+            Me.chkActive.ForeColor = System.Drawing.Color.Black
+            Me.chkActive.LinkedLabel = Nothing
+            Me.chkActive.Name = "chkActive"
+            Me.chkActive.NoLabel = True
+            Me.chkActive.OldValue = Nothing
+            Me.chkActive.UseVisualStyleBackColor = True
+            '
+            'lblNormalBalance
+            '
+            Me.lblNormalBalance.DisplayOnly = True
+            Me.lblNormalBalance.EditingMode = False
+            resources.ApplyResources(Me.lblNormalBalance, "lblNormalBalance")
+            Me.lblNormalBalance.Name = "lblNormalBalance"
+            '
+            'cboNormalBalance
+            '
+            Me.cboNormalBalance.BackColor = System.Drawing.Color.White
+            Me.cboNormalBalance.ChangingSearchValueOnly = False
+            Me.cboNormalBalance.CurrentSearchTerm = ""
+            Me.cboNormalBalance.DefaultValue = Nothing
+            Me.cboNormalBalance.DisplayMember = "Name"
+            Me.cboNormalBalance.EditingMode = False
+            Me.cboNormalBalance.FilterRule = Nothing
+            Me.floDataDisplay.SetFlowBreak(Me.cboNormalBalance, True)
+            resources.ApplyResources(Me.cboNormalBalance, "cboNormalBalance")
+            Me.cboNormalBalance.ForeColor = System.Drawing.Color.Black
+            Me.cboNormalBalance.FormattingEnabled = True
+            Me.cboNormalBalance.HideWhenNotEditingOrAdding = False
+            Me.cboNormalBalance.LinkedLabel = Nothing
+            Me.cboNormalBalance.Name = "cboNormalBalance"
+            Me.cboNormalBalance.OldValue = 0
+            Me.cboNormalBalance.OriginalDataSource = Nothing
+            Me.cboNormalBalance.OriginalList = Nothing
+            Me.cboNormalBalance.OverrideDropDownStyleList = False
+            Me.cboNormalBalance.PreviousSearchTerm = Nothing
+            Me.cboNormalBalance.PreviousSelectedIndex = -1
+            Me.cboNormalBalance.PropertySelector = Nothing
+            Me.cboNormalBalance.ReadOnlyCombo = False
+            Me.cboNormalBalance.SearchAnywhere = False
+            Me.cboNormalBalance.SearchField = Nothing
+            Me.cboNormalBalance.SuggestBoxHeight = 200
+            Me.cboNormalBalance.SuggestListOrderRule = Nothing
+            Me.cboNormalBalance.TextToSearch = Nothing
+            Me.cboNormalBalance.ValueIsMandatory = False
+            Me.cboNormalBalance.ValueIsNullable = False
+            Me.cboNormalBalance.ValueIsNumeric = False
+            Me.cboNormalBalance.ValueMember = "Code"
+            '
+            'lblPayeeType
+            '
+            Me.lblPayeeType.DisplayOnly = True
+            Me.lblPayeeType.EditingMode = False
+            resources.ApplyResources(Me.lblPayeeType, "lblPayeeType")
+            Me.lblPayeeType.Name = "lblPayeeType"
+            '
+            'cboPayeeType
+            '
+            Me.cboPayeeType.BackColor = System.Drawing.Color.White
+            Me.cboPayeeType.ChangingSearchValueOnly = False
+            Me.cboPayeeType.CurrentSearchTerm = ""
+            Me.cboPayeeType.DefaultValue = Nothing
+            Me.cboPayeeType.DisplayMember = "Name"
+            Me.cboPayeeType.EditingMode = False
+            Me.cboPayeeType.FilterRule = Nothing
+            Me.floDataDisplay.SetFlowBreak(Me.cboPayeeType, True)
+            resources.ApplyResources(Me.cboPayeeType, "cboPayeeType")
+            Me.cboPayeeType.ForeColor = System.Drawing.Color.Black
+            Me.cboPayeeType.FormattingEnabled = True
+            Me.cboPayeeType.HideWhenNotEditingOrAdding = False
+            Me.cboPayeeType.LinkedLabel = Nothing
+            Me.cboPayeeType.Name = "cboPayeeType"
+            Me.cboPayeeType.OldValue = 0
+            Me.cboPayeeType.OriginalDataSource = Nothing
+            Me.cboPayeeType.OriginalList = Nothing
+            Me.cboPayeeType.OverrideDropDownStyleList = False
+            Me.cboPayeeType.PreviousSearchTerm = Nothing
+            Me.cboPayeeType.PreviousSelectedIndex = -1
+            Me.cboPayeeType.PropertySelector = Nothing
+            Me.cboPayeeType.ReadOnlyCombo = False
+            Me.cboPayeeType.SearchAnywhere = False
+            Me.cboPayeeType.SearchField = Nothing
+            Me.cboPayeeType.SuggestBoxHeight = 200
+            Me.cboPayeeType.SuggestListOrderRule = Nothing
+            Me.cboPayeeType.TextToSearch = Nothing
+            Me.cboPayeeType.ValueIsMandatory = False
+            Me.cboPayeeType.ValueIsNullable = False
+            Me.cboPayeeType.ValueIsNumeric = False
+            Me.cboPayeeType.ValueMember = "Code"
+            '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.Name = "lblNotes"
+            '
+            'txtSortKey
+            '
+            Me.txtSortKey.BackColor = System.Drawing.Color.White
+            Me.txtSortKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtSortKey.ComputedValue = False
+            Me.txtSortKey.CustomFormat = Nothing
+            Me.txtSortKey.DataBoundControl = True
+            Me.txtSortKey.EditingMode = True
+            resources.ApplyResources(Me.txtSortKey, "txtSortKey")
+            Me.txtSortKey.FindEnabled = False
+            Me.txtSortKey.ForeColor = System.Drawing.Color.Black
+            Me.txtSortKey.LinkedLabel = Nothing
         Me.txtSortKey.MaximumValue = Nothing
         Me.txtSortKey.MinimumValue = Nothing
         Me.txtSortKey.Name = "txtSortKey"

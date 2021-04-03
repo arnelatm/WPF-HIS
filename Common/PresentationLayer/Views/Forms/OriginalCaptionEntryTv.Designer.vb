@@ -38,147 +38,158 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
         Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Nothing
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.ReadOnly = true
-        Me.TxtIdNo.TabStop = false
-        Me.TxtIdNo.ValueIsNumeric = true
-        '
-        'txtCaption
-        '
-        Me.txtCaption.BackColor = System.Drawing.Color.White
-        Me.txtCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCaption.ComputedValue = false
-        Me.txtCaption.CustomFormat = Nothing
-        Me.txtCaption.DataBoundControl = true
-        Me.txtCaption.EditingMode = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtCaption, true)
-        resources.ApplyResources(Me.txtCaption, "txtCaption")
-        Me.txtCaption.ForeColor = System.Drawing.Color.Black
-        Me.txtCaption.LinkedLabel = Nothing
-        Me.txtCaption.MaximumValue = Nothing
-        Me.txtCaption.MinimumValue = Nothing
-        Me.txtCaption.Name = "txtCaption"
-        Me.txtCaption.OldValue = Nothing
-        Me.txtCaption.ReadOnly = true
-        Me.txtCaption.SecurityKey = "Translators_Developer"
-        Me.txtCaption.ValueIsMandatory = true
-        '
-        'floDataDisplay
-        '
-        resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-        Me.floDataDisplay.Controls.Add(Me.Label1)
-        Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-        Me.floDataDisplay.Controls.Add(Me.lblCaption)
-        Me.floDataDisplay.Controls.Add(Me.txtCaption)
-        Me.floDataDisplay.Controls.Add(Me.lblTranslatedCaption)
-        Me.floDataDisplay.Controls.Add(Me.txtTranslatedCaption)
-        Me.floDataDisplay.Controls.Add(Me.txtLanguageIdNo)
-        Me.floDataDisplay.Controls.Add(Me.txtIdNoTranslated)
-        Me.floDataDisplay.Name = "floDataDisplay"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
-        'lblIdNo
-        '
-        Me.lblIdNo.DisplayOnly = true
-        Me.lblIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-        Me.lblIdNo.Name = "lblIdNo"
-        '
-        'lblCaption
-        '
-        Me.lblCaption.DisplayOnly = true
-        Me.lblCaption.EditingMode = false
-        resources.ApplyResources(Me.lblCaption, "lblCaption")
-        Me.lblCaption.Name = "lblCaption"
-        Me.lblCaption.SecurityKey = "Translators_Developer"
-        '
-        'lblTranslatedCaption
-        '
-        Me.lblTranslatedCaption.DisplayOnly = true
-        Me.lblTranslatedCaption.EditingMode = false
-        resources.ApplyResources(Me.lblTranslatedCaption, "lblTranslatedCaption")
-        Me.lblTranslatedCaption.Name = "lblTranslatedCaption"
-        '
-        'txtTranslatedCaption
-        '
-        Me.txtTranslatedCaption.AutoFill = false
-        Me.txtTranslatedCaption.BackColor = System.Drawing.Color.White
-        Me.txtTranslatedCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTranslatedCaption.ComputedValue = false
-        Me.txtTranslatedCaption.CustomFormat = Nothing
-        Me.txtTranslatedCaption.DataBoundControl = true
-        Me.txtTranslatedCaption.EditingMode = false
-        Me.txtTranslatedCaption.EnglishControl = Me.txtCaption
-        Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedCaption, true)
-        resources.ApplyResources(Me.txtTranslatedCaption, "txtTranslatedCaption")
-        Me.txtTranslatedCaption.ForeColor = System.Drawing.Color.Black
-        Me.txtTranslatedCaption.LinkedLabel = Me.lblTranslatedCaption
-        Me.txtTranslatedCaption.MaximumValue = Nothing
-        Me.txtTranslatedCaption.MinimumValue = Nothing
-        Me.txtTranslatedCaption.Name = "txtTranslatedCaption"
-        Me.txtTranslatedCaption.OldValue = Nothing
-        Me.txtTranslatedCaption.ReadOnly = true
-        Me.txtTranslatedCaption.ValueIsMandatory = true
-        '
-        'txtLanguageIdNo
-        '
-        Me.txtLanguageIdNo.BackColor = System.Drawing.Color.White
-        Me.txtLanguageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLanguageIdNo.ComputedValue = false
-        Me.txtLanguageIdNo.CustomFormat = Nothing
-        Me.txtLanguageIdNo.DataBoundControl = true
-        Me.txtLanguageIdNo.DisplayOnly = true
-        Me.txtLanguageIdNo.EditingMode = true
-        resources.ApplyResources(Me.txtLanguageIdNo, "txtLanguageIdNo")
-        Me.txtLanguageIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtLanguageIdNo.LinkedLabel = Nothing
-        Me.txtLanguageIdNo.MaximumValue = Nothing
-        Me.txtLanguageIdNo.MinimumValue = Nothing
-        Me.txtLanguageIdNo.Name = "txtLanguageIdNo"
-        Me.txtLanguageIdNo.OldValue = Nothing
-        Me.txtLanguageIdNo.ReadOnly = true
-        Me.txtLanguageIdNo.TabStop = false
-        '
-        'txtIdNoTranslated
-        '
-        Me.txtIdNoTranslated.BackColor = System.Drawing.Color.White
-        Me.txtIdNoTranslated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtIdNoTranslated.ComputedValue = false
-        Me.txtIdNoTranslated.CustomFormat = Nothing
-        Me.txtIdNoTranslated.DataBoundControl = true
-        Me.txtIdNoTranslated.DisplayOnly = true
-        Me.txtIdNoTranslated.EditingMode = true
-        resources.ApplyResources(Me.txtIdNoTranslated, "txtIdNoTranslated")
-        Me.txtIdNoTranslated.ForeColor = System.Drawing.Color.Black
-        Me.txtIdNoTranslated.LinkedLabel = Nothing
+            '
+            'TreeViewTableName
+            '
+            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.ValueIsNumeric = True
+            '
+            'txtCaption
+            '
+            Me.txtCaption.BackColor = System.Drawing.Color.White
+            Me.txtCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtCaption.ComputedValue = False
+            Me.txtCaption.CustomFormat = Nothing
+            Me.txtCaption.DataBoundControl = True
+            Me.txtCaption.EditingMode = False
+            Me.txtCaption.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtCaption, True)
+            resources.ApplyResources(Me.txtCaption, "txtCaption")
+            Me.txtCaption.ForeColor = System.Drawing.Color.Black
+            Me.txtCaption.LinkedLabel = Nothing
+            Me.txtCaption.MaximumValue = Nothing
+            Me.txtCaption.MinimumValue = Nothing
+            Me.txtCaption.Name = "txtCaption"
+            Me.txtCaption.OldValue = Nothing
+            Me.txtCaption.ReadOnly = True
+            Me.txtCaption.SecurityKey = "Translators_Developer"
+            Me.txtCaption.ValueIsMandatory = True
+            '
+            'floDataDisplay
+            '
+            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+            Me.floDataDisplay.Controls.Add(Me.Label1)
+            Me.floDataDisplay.Controls.Add(Me.lblIdNo)
+            Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
+            Me.floDataDisplay.Controls.Add(Me.lblCaption)
+            Me.floDataDisplay.Controls.Add(Me.txtCaption)
+            Me.floDataDisplay.Controls.Add(Me.lblTranslatedCaption)
+            Me.floDataDisplay.Controls.Add(Me.txtTranslatedCaption)
+            Me.floDataDisplay.Controls.Add(Me.txtLanguageIdNo)
+            Me.floDataDisplay.Controls.Add(Me.txtIdNoTranslated)
+            Me.floDataDisplay.Name = "floDataDisplay"
+            '
+            'Label1
+            '
+            resources.ApplyResources(Me.Label1, "Label1")
+            Me.Label1.Name = "Label1"
+            '
+            'lblIdNo
+            '
+            Me.lblIdNo.DisplayOnly = True
+            Me.lblIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.Name = "lblIdNo"
+            '
+            'lblCaption
+            '
+            Me.lblCaption.DisplayOnly = True
+            Me.lblCaption.EditingMode = False
+            resources.ApplyResources(Me.lblCaption, "lblCaption")
+            Me.lblCaption.Name = "lblCaption"
+            Me.lblCaption.SecurityKey = "Translators_Developer"
+            '
+            'lblTranslatedCaption
+            '
+            Me.lblTranslatedCaption.DisplayOnly = True
+            Me.lblTranslatedCaption.EditingMode = False
+            resources.ApplyResources(Me.lblTranslatedCaption, "lblTranslatedCaption")
+            Me.lblTranslatedCaption.Name = "lblTranslatedCaption"
+            '
+            'txtTranslatedCaption
+            '
+            Me.txtTranslatedCaption.AutoFill = False
+            Me.txtTranslatedCaption.BackColor = System.Drawing.Color.White
+            Me.txtTranslatedCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTranslatedCaption.ComputedValue = False
+            Me.txtTranslatedCaption.CustomFormat = Nothing
+            Me.txtTranslatedCaption.DataBoundControl = True
+            Me.txtTranslatedCaption.EditingMode = False
+            Me.txtTranslatedCaption.EnglishControl = Me.txtCaption
+            Me.txtTranslatedCaption.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedCaption, True)
+            resources.ApplyResources(Me.txtTranslatedCaption, "txtTranslatedCaption")
+            Me.txtTranslatedCaption.ForeColor = System.Drawing.Color.Black
+            Me.txtTranslatedCaption.LinkedLabel = Me.lblTranslatedCaption
+            Me.txtTranslatedCaption.MaximumValue = Nothing
+            Me.txtTranslatedCaption.MinimumValue = Nothing
+            Me.txtTranslatedCaption.Name = "txtTranslatedCaption"
+            Me.txtTranslatedCaption.OldValue = Nothing
+            Me.txtTranslatedCaption.ReadOnly = True
+            Me.txtTranslatedCaption.ValueIsMandatory = True
+            '
+            'txtLanguageIdNo
+            '
+            Me.txtLanguageIdNo.BackColor = System.Drawing.Color.White
+            Me.txtLanguageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtLanguageIdNo.ComputedValue = False
+            Me.txtLanguageIdNo.CustomFormat = Nothing
+            Me.txtLanguageIdNo.DataBoundControl = True
+            Me.txtLanguageIdNo.DisplayOnly = True
+            Me.txtLanguageIdNo.EditingMode = True
+            resources.ApplyResources(Me.txtLanguageIdNo, "txtLanguageIdNo")
+            Me.txtLanguageIdNo.FindEnabled = True
+            Me.txtLanguageIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtLanguageIdNo.LinkedLabel = Nothing
+            Me.txtLanguageIdNo.MaximumValue = Nothing
+            Me.txtLanguageIdNo.MinimumValue = Nothing
+            Me.txtLanguageIdNo.Name = "txtLanguageIdNo"
+            Me.txtLanguageIdNo.OldValue = Nothing
+            Me.txtLanguageIdNo.ReadOnly = True
+            Me.txtLanguageIdNo.TabStop = False
+            '
+            'txtIdNoTranslated
+            '
+            Me.txtIdNoTranslated.BackColor = System.Drawing.Color.White
+            Me.txtIdNoTranslated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtIdNoTranslated.ComputedValue = False
+            Me.txtIdNoTranslated.CustomFormat = Nothing
+            Me.txtIdNoTranslated.DataBoundControl = True
+            Me.txtIdNoTranslated.DisplayOnly = True
+            Me.txtIdNoTranslated.EditingMode = True
+            resources.ApplyResources(Me.txtIdNoTranslated, "txtIdNoTranslated")
+            Me.txtIdNoTranslated.FindEnabled = True
+            Me.txtIdNoTranslated.ForeColor = System.Drawing.Color.Black
+            Me.txtIdNoTranslated.LinkedLabel = Nothing
         Me.txtIdNoTranslated.MaximumValue = Nothing
         Me.txtIdNoTranslated.MinimumValue = Nothing
         Me.txtIdNoTranslated.Name = "txtIdNoTranslated"
