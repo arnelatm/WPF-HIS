@@ -249,13 +249,13 @@ Public Class CDgvCaComboboxEditingControl
                 If Not IsNumeric(value) OrElse SelectedItem.idNo <> value Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + Me.Name)
+                    MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + Name)
                 End If
             ElseIf ValueMember.ToLower() = "code" Then
                 If SelectedItem.Code <> value Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    MessageBox.Show("Invalid value <" + Text + "> for field " + Me.Name)
+                    MessageBox.Show("Invalid value <" + Text + "> for field " + Name)
                 End If
             End If
         End If

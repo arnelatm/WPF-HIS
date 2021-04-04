@@ -43,16 +43,16 @@ Public Class CTextBox
             _editingMode = value
             If value Then
                 If DisplayOnly Then
-                    Me.ReadOnly = True
+                    [ReadOnly] = True
                     ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Else
-                    Me.ReadOnly = False
+                    [ReadOnly] = False
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
             Else
-                Me.ReadOnly = True
+                [ReadOnly] = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
@@ -187,11 +187,11 @@ Public Class CTextBox
             If _displayOnly = value Then Exit Property
             _displayOnly = value
             If value Then
-                Me.ReadOnly = True
+                [ReadOnly] = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
-                Me.ReadOnly = False
+                [ReadOnly] = False
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
@@ -287,17 +287,17 @@ Public Class CTextBox
     '    'End If
     'End Sub
 
-#Region "Constant Declarations#"
+#Region "Declarations#"
 
     ' Text Menu Captions
-    Const TextFind = "Find on this field"
+    Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
 
-    Const TextUndo = "Undo Last Cut/Paste/Delete"
-    Const TextCut = "Cut Selected Text"
-    Const TextCopy = "Copy Selected Text"
-    Const TextPaste = "Paste Text"
-    Const TextDelete = "Delete Selected Text"
-    Const TextSelectAll = "Select All Text"
+    Private ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
+    Private ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
+    Private ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
+    Private ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
+    Private ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
+    Private ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
 
 #End Region
 
@@ -324,7 +324,7 @@ Public Class CTextBox
         _contextMenuStrip1.Items.Clear()
 
         Dim menuItemFind As New ToolStripMenuItem With {
-                .Text = TextFind
+                .Text = _textFind
                 }
         _contextMenuStrip1.Items.Add(menuItemFind)
         menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
@@ -332,7 +332,7 @@ Public Class CTextBox
         AddHandler menuItemFind.Click, AddressOf MenuItemFind_Click
 
         Dim menuItemUndo As New ToolStripMenuItem With {
-                .Text = TextUndo
+                .Text = _textUndo
                 }
         _contextMenuStrip1.Items.Add(menuItemUndo)
         menuItemUndo.ShortcutKeys = Keys.Control Or Keys.Z
@@ -343,7 +343,7 @@ Public Class CTextBox
         _contextMenuStrip1.Items.Add(separator)
 
         Dim menuItemCut As New ToolStripMenuItem With {
-                .Text = TextCut
+                .Text = _textCut
                 }
         _contextMenuStrip1.Items.Add(menuItemCut)
         menuItemCut.Enabled = (SelectionLength <> 0)
@@ -352,7 +352,7 @@ Public Class CTextBox
         AddHandler menuItemCut.Click, AddressOf MenuItemCut_Click
 
         Dim menuItemCopy As New ToolStripMenuItem With {
-                .Text = TextCopy
+                .Text = _textCopy
                 }
         _contextMenuStrip1.Items.Add(menuItemCopy)
         menuItemCopy.ShortcutKeys = Keys.Control Or Keys.C
@@ -361,7 +361,7 @@ Public Class CTextBox
         AddHandler menuItemCopy.Click, AddressOf MenuItemCopy_Click
 
         Dim menuItemPaste As New ToolStripMenuItem With {
-                .Text = TextPaste
+                .Text = _textPaste
                 }
         _contextMenuStrip1.Items.Add(menuItemPaste)
         menuItemPaste.ShortcutKeys = Keys.Control Or Keys.V
@@ -370,7 +370,7 @@ Public Class CTextBox
         AddHandler menuItemPaste.Click, AddressOf MenuItemPaste_Click
 
         Dim menuItemDelete As New ToolStripMenuItem With {
-                .Text = TextDelete
+                .Text = _textDelete
                 }
         _contextMenuStrip1.Items.Add(menuItemDelete)
         menuItemDelete.ShortcutKeys = Keys.Delete
@@ -381,7 +381,7 @@ Public Class CTextBox
         _contextMenuStrip1.Items.Add(separator)
 
         Dim menuItemSelectAll As New ToolStripMenuItem With {
-                .Text = TextSelectAll
+                .Text = _textSelectAll
                 }
         _contextMenuStrip1.Items.Add(menuItemSelectAll)
         menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
@@ -412,11 +412,7 @@ Public Class CTextBox
             _textToSearch = searchForm.TextToSearch
             _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
             searchForm.Dispose()
-            If _textToSearch <> "" Then
-
-                CallByName(myForm, "FindField", CallType.Method, Me)
-
-            End If
+            CallByName(myForm, "FindField", CallType.Method, Me)
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
         End If

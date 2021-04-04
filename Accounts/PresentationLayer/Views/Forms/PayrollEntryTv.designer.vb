@@ -46,8 +46,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.dtpStartDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
-            Me.dtpEndDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.dtpStartDate = New CCustomDateTimePicker()
+            Me.dtpEndDate = New CCustomDateTimePicker()
             Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayrollNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblPayrollNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -884,8 +884,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents lblPayrollName As CLabel
         Friend WithEvents cboPayCycleIdNo As CaComboBox
-        Friend WithEvents dtpStartDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents dtpEndDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpStartDate As CCustomDateTimePicker
+        Friend WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents lblPayrollNameAra As CLabel
         Friend WithEvents txtPayrollNameAra As CTextBoxArabic
         Friend WithEvents lblPayrollCode As CLabel

@@ -276,10 +276,6 @@
       <Project>{1ABFF2A3-348B-49E0-A133-3D74C54D84F5}</Project>
       <Name>CBaseControlsLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\CustomControlsLibrary\CustomControlsLibrary.vbproj">
-      <Project>{37CA633C-5F75-45E4-BB37-D37DE1B692B1}</Project>
-      <Name>CustomControlsLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\EnumLocalization\EnumLocalization.vbproj">
       <Project>{EFEC4547-2F73-4EAB-8ADC-AFAF596F8288}</Project>
       <Name>EnumLocalization</Name>

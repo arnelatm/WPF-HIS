@@ -17,11 +17,13 @@ Namespace PresentationLayer.Views.Forms
         Private _accountReconciliations As New List(Of AccountReconciliationItemView)
         Private _glSystemBalance As Decimal
         Private _balance As Decimal
-        Private bsSearchFieldsList As BindingSource
-        Private contextMenuForReferenceNo As ContextMenu = New ContextMenu()
-        Private contextMenuForDocumentNo As ContextMenu = New ContextMenu()
-        Private contextMenuForDebit As ContextMenu = New ContextMenu()
-        Private contextMenuForCredit As ContextMenu = New ContextMenu()
+
+        'Private bsSearchFieldsList As BindingSource
+        Private ReadOnly _contextMenuForReferenceNo As ContextMenu = New ContextMenu()
+
+        Private ReadOnly _contextMenuForDocumentNo As ContextMenu = New ContextMenu()
+        Private ReadOnly _contextMenuForDebit As ContextMenu = New ContextMenu()
+        Private ReadOnly _contextMenuForCredit As ContextMenu = New ContextMenu()
 
         Public Sub New()
             MyBase.New()
@@ -302,100 +304,61 @@ Namespace PresentationLayer.Views.Forms
         Private Sub AccountReconciliationEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
 
-            'contextMenuForReferenceNo.MenuItems.Add("File", New EventHandler(AddressOf MenuClicked))
-            'contextMenuForReferenceNo.MenuItems.Add("Edit")
+            _contextMenuForReferenceNo.MenuItems.Add("File", New EventHandler(AddressOf MenuClicked))
+            _contextMenuForReferenceNo.MenuItems.Add("Edit")
 
-            'contextMenuForDebit.MenuItems.Add("Find value equal to ", AddressOf MenuClicked)
+            _contextMenuForDebit.MenuItems.Add("Find value equal to ", AddressOf MenuClicked)
+            '_contextMenuForDebit.MenuItems.Add("Find next match", AddressOf MenuNextMatchClicked)
 
-            ''contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
-            ''contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
-            ''contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
-            ''contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
+            'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
+            'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
+            'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
+            'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
 
-            ''contextMenuForDocumentNo.MenuItems.Add("Delete", New EventHandler(Delete))
-            ''contextMenuForDebit.MenuItems.Add("Register", New EventHandler(Register))
-            ''contextMenuForCredit.MenuItems.Add("Register", New EventHandler(Register))
-            ''bsSearchFieldsList.DataSource = New List(Of String) From {
-            ''                                     "test1",
-            ''                                     "test2"
-            ''                                     }
+            'contextMenuForDocumentNo.MenuItems.Add("Delete", New EventHandler(Delete))
+            'contextMenuForDebit.MenuItems.Add("Register", New EventHandler(Register))
+            'contextMenuForCredit.MenuItems.Add("Register", New EventHandler(Register))
+            'bsSearchFieldsList.DataSource = New List(Of String) From {
+            '                                     "test1",
+            '                                     "test2"
+            '                                     }
         End Sub
 
-        'Private Sub MenuClicked()
-        '    Dim myForm = FindForm()
-        '    Dim pnt As Point
-        '    Dim searchForm = New CFindForm
-        '    Dim screenRectangle As Rectangle
-        '    Dim formLocation As Point
-        '    screenRectangle = Screen.PrimaryScreen.WorkingArea
-        '    searchForm.StartPosition = FormStartPosition.Manual
-        '    pnt = myForm.PointToScreen(Location)
-        '    If formLocation.Y + searchForm.Height > screenRectangle.Height Then
-        '        formLocation.Y = pnt.Y - searchForm.Height + Height
-        '    End If
-        '    searchForm.Location = formLocation
-        '    'If System.ComponentModel.LicenseManager.UsageMode <> System.ComponentModel.LicenseUsageMode.Designtime Then
-        '    '    SearchForm.RightToLeftLayout = myForm.RightToLeftLayout
-        '    '    SearchForm.RightToLeft = myForm.RightToLeft
-        '    'End If
-        '    searchForm.ShowDialog()
-        '    Dim _textToSearch As String
-        '    Dim _searchAnywhere As String
-        '    _textToSearch = searchForm.TextToSearch
-        '    _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
-        '    searchForm.Dispose()
-        '    If _textToSearch <> "" Then
-        '        DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        '        Try
-        '            For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-        '                If row.Cells(3).Value.ToString().Equals(_textToSearch) Then
-        '                    row.Selected = True
-        '                    Exit For
-        '                End If
-        '            Next
-        '        Catch exc As Exception
-        '            MessageBox.Show(exc.Message)
-        '        End Try
-        '    End If
-        'End Sub
-
-        'Private Sub FindValue()
-        '    Dim myForm = FindForm()
-        '    Dim pnt As Point
-        '    Dim searchForm = New CFindForm
-        '    Dim screenRectangle As Rectangle
-        '    Dim formLocation As Point
-        '    screenRectangle = Screen.PrimaryScreen.WorkingArea
-        '    searchForm.StartPosition = FormStartPosition.Manual
-        '    pnt = myForm.PointToScreen(Location)
-        '    If formLocation.Y + searchForm.Height > screenRectangle.Height Then
-        '        formLocation.Y = pnt.Y - searchForm.Height + Height
-        '    End If
-        '    searchForm.Location = formLocation
-        '    'If System.ComponentModel.LicenseManager.UsageMode <> System.ComponentModel.LicenseUsageMode.Designtime Then
-        '    '    SearchForm.RightToLeftLayout = myForm.RightToLeftLayout
-        '    '    SearchForm.RightToLeft = myForm.RightToLeft
-        '    'End If
-        '    searchForm.ShowDialog()
-        '    Dim _textToSearch As String
-        '    Dim _searchAnywhere As String
-        '    _textToSearch = searchForm.TextToSearch
-        '    _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
-        '    searchForm.Dispose()
-        '    If _textToSearch <> "" Then
-        '        DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        '        Try
-        '            For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-        '                If row.Cells(3).Value.ToString().Equals(_textToSearch) Then
-        '                    row.Selected = True
-        '                    Exit For
-        '                End If
-        '            Next
-        '        Catch exc As Exception
-        '            MessageBox.Show(exc.Message)
-        '        End Try
-        '    End If
-        'End Sub
+        Private Sub MenuClicked()
+            Dim myForm = FindForm()
+            Dim pnt As Point
+            Dim searchForm = New CFindForm(0)
+            Dim screenRectangle As Rectangle
+            Dim formLocation As Point
+            screenRectangle = Screen.PrimaryScreen.WorkingArea
+            searchForm.StartPosition = FormStartPosition.Manual
+            pnt = myForm.PointToScreen(Location)
+            If formLocation.Y + searchForm.Height > screenRectangle.Height Then
+                formLocation.Y = pnt.Y - searchForm.Height + Height
+            End If
+            searchForm.Location = formLocation
+            'If System.ComponentModel.LicenseManager.UsageMode <> System.ComponentModel.LicenseUsageMode.Designtime Then
+            '    SearchForm.RightToLeftLayout = myForm.RightToLeftLayout
+            '    SearchForm.RightToLeft = myForm.RightToLeft
+            'End If
+            searchForm.ShowDialog()
+            Dim textToSearch As String
+            textToSearch = searchForm.TextToSearch
+            searchForm.Dispose()
+            If textToSearch <> "" Then
+                DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                Try
+                    For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                        If row.Cells(3).Value.ToString().Equals(textToSearch) Then
+                            row.Selected = True
+                            Exit For
+                        End If
+                    Next
+                Catch exc As Exception
+                    MessageBox.Show(exc.Message)
+                End Try
+            End If
+        End Sub
 
         Private Sub UpdateTotals()
             Dim nTotalDebitsCleared As Decimal = 0
@@ -569,7 +532,16 @@ Namespace PresentationLayer.Views.Forms
             '    Case DataGridViewReconciliationItems.Columns.IndexOf(dgvDebit)
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindForm(0)
+            Dim nMode As Int16
+            Dim columnDataType = DataGridViewReconciliationItems.Columns(columnNo).ValueType
+            If columnDataType = GetType(Date?) Or columnDataType = GetType(Date) Or columnDataType = GetType(DateTime) Then
+                nMode = 2
+            ElseIf columnDataType = GetType(String) Or columnDataType = GetType(Char) Then
+                nMode = 0
+            ElseIf columnDataType = GetType(Decimal) Or columnDataType = GetType(Int16) Or columnDataType = GetType(Int32) Or columnDataType = GetType(Int64) Then
+                nMode = 0
+            End If
+            Dim searchForm = New CFindForm(nMode)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea
@@ -586,21 +558,70 @@ Namespace PresentationLayer.Views.Forms
             searchForm.ShowDialog()
             Dim textToSearch As String
             Dim searchAnywhere As String
-            textToSearch = searchForm.TextToSearch
-            searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
-            searchForm.Dispose()
-            If textToSearch <> "" Then
+            If nMode = 0 Then
+                textToSearch = searchForm.TextToSearch
+                searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
+                If textToSearch <> "" Then
+                    DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                    Try
+                        DataGridViewReconciliationItems.ClearSelection()
+                        Dim sw = 0
+                        For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                            If searchAnywhere Then
+                                If row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                        sw = 1
+                                    End If
+                                End If
+                            Else
+                                If row.Cells(columnNo).Value.ToString().Equals(textToSearch) Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                        sw = 1
+                                    End If
+                                End If
+                            End If
+                        Next
+                    Catch exc As Exception
+                        MessageBox.Show(exc.Message)
+                    End Try
+                End If
+            ElseIf nMode = 2 Then
+                Dim dBegDate As Date? = searchForm.BegDateToSearch
+                Dim dEndDate As Date? = searchForm.EndDateToSearch
+                Dim dBDate As Date
+                Dim dEDate As Date
+
+                If dBegDate Is Nothing Then
+                Else
+                    If dEndDate Is Nothing Then
+                        dBDate = Convert.ToDateTime(dBegDate)
+                        dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBDate)
+                        'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                    Else
+                        dBDate = Convert.ToDateTime(dBegDate)
+                        dEDate = Convert.ToDateTime(dEndDate)
+                        dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
+                        'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                    End If
+                End If
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 Try
                     DataGridViewReconciliationItems.ClearSelection()
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                        If searchAnywhere Then
-                            If row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
-                                row.Selected = True
-                            End If
-                        Else
-                            If row.Cells(columnNo).Value.ToString().Equals(textToSearch) Then
-                                row.Selected = True
+                        Dim colDate As Date = row.Cells(columnNo).Value
+                        Dim sw As Int16 = 0
+                        If colDate.ToString("yyyyMMdd") >= dBDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEDate.ToString("yyyyMMdd") Then
+                            row.Selected = True
+                            If sw = 0 Then
+                                'scroll and move to the first matching record
+                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                sw = 1
                             End If
                         End If
                     Next
@@ -609,10 +630,9 @@ Namespace PresentationLayer.Views.Forms
                 End Try
             End If
 
+            searchForm.Dispose()
             '    Case Else
-
             'End Select
-
         End Sub
 
         'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit

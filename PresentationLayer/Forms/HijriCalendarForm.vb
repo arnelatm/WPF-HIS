@@ -3,6 +3,7 @@ Imports System.Drawing
 Imports System.Globalization
 Imports System.Text
 Imports System.Windows.Forms
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CustomControlsLibrary
 
 Public Class HijriCalendarForm

@@ -43,7 +43,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpReconciliationDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+        Me.dtpReconciliationDate = New CCustomDateTimePicker()
         Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()

@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblCheckDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.dtpCheckDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.dtpCheckDate = New CCustomDateTimePicker()
             Me.btnPrintCheck = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)

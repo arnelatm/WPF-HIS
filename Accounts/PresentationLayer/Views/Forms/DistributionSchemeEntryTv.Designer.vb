@@ -43,9 +43,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDistributionSchemeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblDistributionSchemeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblValidityStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpValidityStartDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+        Me.dtpValidityStartDate = New CCustomDateTimePicker()
         Me.lblValidityEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpValidityEndDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+        Me.dtpValidityEndDate = New CCustomDateTimePicker()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewDistributionSchemeItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.bsDistributionSchemeItems = New System.Windows.Forms.BindingSource(Me.components)
@@ -441,9 +441,9 @@ End Sub
         Friend WithEvents lblDistributionSchemeNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblValidityStartDate As CLabel
-        Friend WithEvents dtpValidityStartDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpValidityStartDate As CCustomDateTimePicker
         Friend WithEvents lblValidityEndDate As CLabel
-        Friend WithEvents dtpValidityEndDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpValidityEndDate As CCustomDateTimePicker
         Friend WithEvents DataGridViewDistributionSchemeItems As CDataGridView
         Friend WithEvents txtTotalPercentage As CTextBox
         Friend WithEvents lblAmount As CLabel

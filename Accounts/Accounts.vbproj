@@ -1352,10 +1352,6 @@
       <Project>{78a0ac9e-8e5c-422a-a45a-2bd0035f14e2}</Project>
       <Name>CustomComboBox</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\CustomControlsLibrary\CustomControlsLibrary.vbproj">
-      <Project>{37ca633c-5f75-45e4-bb37-d37de1b692b1}</Project>
-      <Name>CustomControlsLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Libraries\EnumLocalization\EnumLocalization.vbproj">
       <Project>{efec4547-2f73-4eab-8adc-afaf596f8288}</Project>
       <Name>EnumLocalization</Name>

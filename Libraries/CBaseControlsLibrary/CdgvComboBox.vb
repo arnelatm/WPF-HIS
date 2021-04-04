@@ -343,7 +343,7 @@ Public Class CDgvComboBox
         Dim comboBox1 As CDgvComboBox = CType(sender, CDgvComboBox)
         _dataGridView.CurrentCell.Value = comboBox1.SelectedValue
         _valueChanged = True
-        Me.EditingControlDataGridView.NotifyCurrentCellDirty(True)
+        EditingControlDataGridView.NotifyCurrentCellDirty(True)
         MyBase.OnSelectedValueChanged(e)
     End Sub
 
@@ -491,13 +491,13 @@ Public Class CDgvComboBox
                 If Not IsNumeric(value) OrElse SelectedItem.idNo <> value Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(Me.LinkedLabel Is Nothing, Me.Name, Me.LinkedLabel.Text))
+                    MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                 End If
             ElseIf ValueMember.ToLower() = "code" Then
                 If SelectedItem.Code <> value Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    MessageBox.Show("Invalid value <" + Text + "> for field " + If(Me.LinkedLabel Is Nothing, Me.Name, Me.LinkedLabel.Text))
+                    MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                 End If
                 'If SelectedItem.Code <> value Then
                 '    Text = Nothing
@@ -854,7 +854,7 @@ Public Class CDgvComboBox
 
     Protected Overrides Sub OnSelectedValueChanged(ByVal eventargs As EventArgs)
         _valueChanged = True
-        Me.EditingControlDataGridView.NotifyCurrentCellDirty(True)
+        EditingControlDataGridView.NotifyCurrentCellDirty(True)
         MyBase.OnSelectedValueChanged(eventargs)
     End Sub
 

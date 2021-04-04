@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Views.Forms
+﻿Imports AATM.Libraries.CBaseControlsLibrary
+
+Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class PayrollDetailEntry
         Inherits AATM.PresentationLayer.Forms.CFormEntryTv
@@ -49,7 +51,7 @@
             Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpStartDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.dtpStartDate = New CCustomDateTimePicker()
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayPeriodName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -57,7 +59,7 @@
             Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtTotalEarnings = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpEndDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.dtpEndDate = New CCustomDateTimePicker()
             Me.txtTotalDeductions = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNetPay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -767,7 +769,7 @@
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents lblEmployeeName As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpStartDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpStartDate As CCustomDateTimePicker
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblEndDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
@@ -782,7 +784,7 @@
         Friend WithEvents tpgDeductions As TabPage
         Friend WithEvents txtPayPeriodName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtPayrollIdNo As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents dtpEndDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents txtEmployeeNameAra As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtEmployeeName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtEmployeeCode As Libraries.CBaseControlsLibrary.CTextBox

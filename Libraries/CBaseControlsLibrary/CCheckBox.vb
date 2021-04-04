@@ -13,6 +13,8 @@ Public Class CCheckBox
     Private _noLabel As Boolean
     Private _oldValue As String
     Private _autoSize As Boolean
+    Private _textToSearch As String
+    Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
 
     Public Sub New()
         MyBase.New()
@@ -21,6 +23,7 @@ Public Class CCheckBox
         UseVisualStyleBackColor = True
         FlatStyle = FlatStyle.Flat
         TextAlign = ContentAlignment.MiddleRight
+        ContextMenuStrip = _contextMenuStrip1
         Size = New Size(24, 24)
         Margin = New Padding(1)
         FlatAppearance.BorderSize = 0
@@ -50,11 +53,11 @@ Public Class CCheckBox
             'If _displayOnly = value Then Exit Property
             _displayOnly = value
             If value Then
-                Me.Enabled = False
+                Enabled = False
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
-                Me.Enabled = True
+                Enabled = True
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
@@ -72,7 +75,7 @@ Public Class CCheckBox
         End Get
         Set(value As Boolean)
             If value Then
-                Me.Text = " "
+                Text = " "
             End If
             _noLabel = value
         End Set
@@ -137,6 +140,11 @@ Public Class CCheckBox
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
+
+    <Category("Custom Properties")>
+    <Description("Set to True to enable find on this field.")>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    Public Property FindEnabled As Boolean
 
     'Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
     '    Dim checkRegion As New Rectangle(2, 3, 9, 9)
@@ -213,6 +221,48 @@ Public Class CCheckBox
         End If
 
     End Sub
+
+    Private Sub HandlePopup(sender As Object, e As EventArgs) Handles _contextMenuStrip1.Opening
+        ContextHandler(sender, e)
+    End Sub
+
+    Protected Sub ContextHandler(sender As Object, e As EventArgs)
+        _contextMenuStrip1.Items.Clear()
+        Dim menuItemFind As New ToolStripMenuItem With {
+                .Text = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+                }
+        _contextMenuStrip1.Items.Add(menuItemFind)
+        menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
+        menuItemFind.ShortcutKeyDisplayString = $"Ctrl-F"
+        AddHandler menuItemFind.Click, AddressOf MenuItemFind_Click
+    End Sub
+
+    Private Sub MenuItemFind_Click()
+        If FindEnabled Then
+            Dim myForm = FindForm()
+            Dim pnt As Point
+            Dim searchForm = New CFindForm(0)
+            Dim screenRectangle As Rectangle
+            Dim formLocation As Point
+            screenRectangle = Screen.PrimaryScreen.WorkingArea
+            searchForm.StartPosition = FormStartPosition.Manual
+            pnt = myForm.PointToScreen(Location)
+            If formLocation.Y + searchForm.Height > screenRectangle.Height Then
+                formLocation.Y = pnt.Y - searchForm.Height + Height
+            End If
+            searchForm.Location = formLocation
+            searchForm.ShowDialog()
+            _textToSearch = searchForm.TextToSearch
+            searchForm.Dispose()
+            CallByName(myForm, "FindField", CallType.Method, Me)
+        Else
+            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
+        End If
+    End Sub
+
+    Public Function GetTextToSearch() As String
+        Return _textToSearch
+    End Function
 
     'Private ReadOnly _checkRegionColor As Color = Color.Coral
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable

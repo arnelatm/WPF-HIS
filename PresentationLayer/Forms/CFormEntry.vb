@@ -101,9 +101,12 @@ Public Class CFormEntry
             Dim cMaskedTextBoxControl As CMaskedTextBox = cControl
             If Not (cMaskedTextBoxControl.SearchField Is Nothing OrElse cMaskedTextBoxControl.SearchField = "") Then
                 fieldName = cMaskedTextBoxControl.SearchField
-                Dim begDateToSearch As Date = CallByName(cControl, "GetBegDateToSearch", CallType.Get)
-                Dim endDateToSearch As Date = CallByName(cControl, "GetEndDateToSearch", CallType.Get)
+                'Dim dSearch As Date? = CallByName(cControl, "GetBegDateToSearch", CallType.Get)
+                'If dSearch IsNot Nothing Then
+                Dim begDateToSearch As Date? = CallByName(cControl, "GetBegDateToSearch", CallType.Get)
+                Dim endDateToSearch As Date? = CallByName(cControl, "GetEndDateToSearch", CallType.Get)
                 PresenterObj.FindDateField(fieldName, begDateToSearch, endDateToSearch)
+                'End If
                 Exit Sub
             End If
         End If

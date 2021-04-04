@@ -14,7 +14,7 @@ Public Class CMaskedTextBox
     Private _endDateToSearch As Date?
     Private _searchAnywhere As Boolean
     Private _oldValue As String
-    Private _editsALlowed As Boolean = False
+    Private _editsAllowed As Boolean = False
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
     Private _editingMode As Boolean = False
     Private _searchField As String
@@ -198,17 +198,17 @@ Public Class CMaskedTextBox
         'End If
     End Sub
 
-#Region "Constant Declarations#"
+#Region "Declarations#"
 
     ' Text Menu Captions
-    Const TextFind = "Find on this field"
+    Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
 
-    Const TextUndo = "Undo Last Cut/Paste/Delete"
-    Const TextCut = "Cut Selected Text"
-    Const TextCopy = "Copy Selected Text"
-    Const TextPaste = "Paste Text"
-    Const TextDelete = "Delete Selected Text"
-    Const TextSelectAll = "Select All Text"
+    Private ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
+    Private ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
+    Private ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
+    Private ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
+    Private ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
+    Private ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
 
 #End Region
 
@@ -235,7 +235,7 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Clear()
 
         Dim menuItemFind As New ToolStripMenuItem With {
-                .Text = TextFind
+                .Text = _textFind
                 }
         ContextMenuStrip1.Items.Add(menuItemFind)
         menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
@@ -243,7 +243,7 @@ Public Class CMaskedTextBox
         AddHandler menuItemFind.Click, AddressOf MenuItemFind_Click
 
         Dim menuItemUndo As New ToolStripMenuItem With {
-                .Text = TextUndo
+                .Text = _textUndo
                 }
         ContextMenuStrip1.Items.Add(menuItemUndo)
         menuItemUndo.ShortcutKeys = Keys.Control Or Keys.Z
@@ -254,7 +254,7 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(separator)
 
         Dim menuItemCut As New ToolStripMenuItem With {
-                .Text = TextCut
+                .Text = _textCut
                 }
         ContextMenuStrip1.Items.Add(menuItemCut)
         ' menuItemCut.Enabled = (IIf(SampleTextBox.SelectionLength = 0, False, True))
@@ -263,7 +263,7 @@ Public Class CMaskedTextBox
         AddHandler menuItemCut.Click, AddressOf MenuItemCut_Click
 
         Dim menuItemCopy As New ToolStripMenuItem With {
-                .Text = TextCopy
+                .Text = _textCopy
                 }
         ContextMenuStrip1.Items.Add(menuItemCopy)
         menuItemCopy.ShortcutKeys = Keys.Control Or Keys.C
@@ -272,7 +272,7 @@ Public Class CMaskedTextBox
         AddHandler menuItemCopy.Click, AddressOf MenuItemCopy_Click
 
         Dim menuItemPaste As New ToolStripMenuItem With {
-                .Text = TextPaste
+                .Text = _textPaste
                 }
         ContextMenuStrip1.Items.Add(menuItemPaste)
         menuItemPaste.ShortcutKeys = Keys.Control Or Keys.V
@@ -281,7 +281,7 @@ Public Class CMaskedTextBox
         AddHandler menuItemPaste.Click, AddressOf MenuItemPaste_Click
 
         Dim menuItemDelete As New ToolStripMenuItem With {
-                .Text = TextDelete
+                .Text = _textDelete
                 }
         ContextMenuStrip1.Items.Add(menuItemDelete)
         menuItemDelete.ShortcutKeys = Keys.Delete
@@ -292,7 +292,7 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(separator)
 
         Dim menuItemSelectAll As New ToolStripMenuItem With {
-                .Text = TextSelectAll
+                .Text = _textSelectAll
                 }
         ContextMenuStrip1.Items.Add(menuItemSelectAll)
         menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
@@ -312,16 +312,16 @@ Public Class CMaskedTextBox
             searchForm = New CFindForm(2)
             searchForm.ShowDialog()
             _textToSearch = searchForm.TextToSearch
-            _begDateToSearch = SearchForm.BegDateToSearch
-            _endDateToSearch = SearchForm.EndDateToSearch
+            _begDateToSearch = searchForm.BegDateToSearch
+            _endDateToSearch = searchForm.EndDateToSearch
             CallByName(MyForm, "FindField", CallType.Method, Me)
-            SearchForm.Dispose()
+            searchForm.Dispose()
         Else
             searchForm = New CFindForm(0)
-            _searchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
+            _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
             If _textToSearch <> "" Then
                 CallByName(MyForm, "FindField", CallType.Method, Me)
-                SearchForm.Dispose()
+                searchForm.Dispose()
             End If
         End If
     End Sub
@@ -330,11 +330,11 @@ Public Class CMaskedTextBox
         Return _textToSearch
     End Function
 
-    Public Function GetBegDateToSearch() As String
+    Public Function GetBegDateToSearch() As Date?
         Return _begDateToSearch
     End Function
 
-    Public Function GetEndDateToSearch() As String
+    Public Function GetEndDateToSearch() As Date?
         Return _endDateToSearch
     End Function
 
@@ -400,10 +400,10 @@ Public Class CMaskedTextBox
 
     Public Property EditsAllowed As Boolean
         Get
-            Return _editsALlowed
+            Return _editsAllowed
         End Get
         Set(value As Boolean)
-            _editsALlowed = value
+            _editsAllowed = value
         End Set
     End Property
 

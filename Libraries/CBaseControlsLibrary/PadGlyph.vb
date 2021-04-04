@@ -38,14 +38,14 @@ Public Class PadGlyph
 
         MyBase.New(New PadBehavior(relatedDesigner, adjWhat))
         ' Cache references for convenience.
-        Me.behaviorSvc = behaviorService
-        Me.selectionSvc = selectionService
+        behaviorSvc = behaviorService
+        selectionSvc = selectionService
         Me.relatedDesigner = relatedDesigner
-        Me.PadAdorner = myAdorner
+        PadAdorner = myAdorner
         Me.AdjWhat = adjWhat
 
         ' Cache a reference to the control being designed.
-        Me.relatedControl = CType(Me.relatedDesigner.Component, CButton)
+        relatedControl = CType(Me.relatedDesigner.Component, CButton)
 
     End Sub
 
@@ -69,7 +69,7 @@ Public Class PadGlyph
 
     Public Overrides Function GetHitTest(ByVal p As Point) As Cursor
 
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) AndAlso
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) AndAlso
            DirectCast(DirectCast(relatedDesigner, CButtonDesigner).ChooseAdorner.Glyphs(0), ChooseGlyph).chooseWhat = ChooseGlyph.eChooseWhat.Pad Then
             '			WhatBorder = eWhatBorder.None
 
@@ -88,7 +88,7 @@ Public Class PadGlyph
                     WhatBorder = eWhatBorder.Top
                     If isOver = False Then
                         isOver = True
-                        Me.PadAdorner.Invalidate()
+                        PadAdorner.Invalidate()
                     End If
                     Return Cursors.HSplit
                 End If
@@ -98,7 +98,7 @@ Public Class PadGlyph
                     WhatBorder = eWhatBorder.Left
                     If isOver = False Then
                         isOver = True
-                        Me.PadAdorner.Invalidate()
+                        PadAdorner.Invalidate()
                     End If
                     Return Cursors.VSplit
                 End If
@@ -108,7 +108,7 @@ Public Class PadGlyph
                     WhatBorder = eWhatBorder.Right
                     If isOver = False Then
                         isOver = True
-                        Me.PadAdorner.Invalidate()
+                        PadAdorner.Invalidate()
                     End If
                     Return Cursors.VSplit
                 End If
@@ -118,14 +118,14 @@ Public Class PadGlyph
                     WhatBorder = eWhatBorder.Bottom
                     If isOver = False Then
                         isOver = True
-                        Me.PadAdorner.Invalidate()
+                        PadAdorner.Invalidate()
                     End If
                     Return Cursors.HSplit
                 End If
 
                 If isOver = True Then
                     isOver = False
-                    Me.PadAdorner.Invalidate()
+                    PadAdorner.Invalidate()
                 End If
                 Return Nothing
 
@@ -137,7 +137,7 @@ Public Class PadGlyph
 
     Public Overrides Sub Paint(ByVal pe As PaintEventArgs)
 
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) AndAlso
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) AndAlso
            DirectCast(DirectCast(relatedDesigner, CButtonDesigner).ChooseAdorner.Glyphs(0), ChooseGlyph).chooseWhat = ChooseGlyph.eChooseWhat.Pad Then
 
             Using pn As New Pen(Brushes.DarkGray, 1.5) With {.DashStyle = Drawing2D.DashStyle.Dash}
@@ -157,7 +157,7 @@ Public Class PadGlyph
 
         Friend Sub New(ByVal relatedDesigner As IDesigner, ByVal adjWhat As eAdjWhat)
             Me.relatedDesigner = relatedDesigner
-            Me.relatedControl = CType(relatedDesigner.Component, CButton)
+            relatedControl = CType(relatedDesigner.Component, CButton)
             Me.AdjWhat = adjWhat
         End Sub
 

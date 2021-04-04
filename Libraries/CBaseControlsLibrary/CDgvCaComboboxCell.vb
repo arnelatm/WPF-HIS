@@ -40,7 +40,7 @@ Public Class CDgvCaComboboxCell
         ' Make sure you have an instance...
         If MyEditingControl IsNot Nothing Then
             ' Set the value of the editing control instance to the current cell value.
-            MyEditingControl.SelectedValue = Me.Value
+            MyEditingControl.SelectedValue = Value
         End If
     End Sub
 

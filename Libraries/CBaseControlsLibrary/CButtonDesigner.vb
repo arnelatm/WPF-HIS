@@ -20,13 +20,13 @@ Public Class CButtonDesigner
 
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing Then
-            If (Me.behaviorSvc IsNot Nothing) Then
+            If (behaviorSvc IsNot Nothing) Then
                 ' Remove the adorners added by this designer from
                 ' the BehaviorService.Adorners collection.
-                Me.behaviorSvc.Adorners.Remove(Me.PadAdorner)
-                Me.behaviorSvc.Adorners.Remove(Me.CornAdorner)
-                Me.behaviorSvc.Adorners.Remove(Me.FocalPtAdorner)
-                Me.behaviorSvc.Adorners.Remove(Me.ChooseAdorner)
+                behaviorSvc.Adorners.Remove(PadAdorner)
+                behaviorSvc.Adorners.Remove(CornAdorner)
+                behaviorSvc.Adorners.Remove(FocalPtAdorner)
+                behaviorSvc.Adorners.Remove(ChooseAdorner)
             End If
         End If
 
@@ -55,10 +55,10 @@ Public Class CButtonDesigner
     Private Sub InitializeServices()
 
         ' Acquire a reference to ISelectionService.
-        Me.selectionSvc = CType(GetService(GetType(ISelectionService)), ISelectionService)
+        selectionSvc = CType(GetService(GetType(ISelectionService)), ISelectionService)
 
         ' Acquire a reference to BehaviorService.
-        Me.behaviorSvc = CType(GetService(GetType(BehaviorService)), Windows.Forms.Design.Behavior.BehaviorService)
+        behaviorSvc = CType(GetService(GetType(BehaviorService)), Windows.Forms.Design.Behavior.BehaviorService)
 
     End Sub
 

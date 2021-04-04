@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPayee = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpTransactionDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.dtpTransactionDate = New CCustomDateTimePicker()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
