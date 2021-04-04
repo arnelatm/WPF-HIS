@@ -151,7 +151,7 @@ Public Class CFindForm
             dtpEndDate.Visible = False
             lblTo.Visible = False
             chkChecked.Visible = False
-            Height = 175
+            Height = 200
         ElseIf _searchMode = 2 Then
             ' date search
             dtpBegDate.Visible = True
