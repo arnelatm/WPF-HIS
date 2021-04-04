@@ -132,7 +132,7 @@ Public Class CCustomDateTimePicker
     End Sub
 
     Private Sub ToggleTargetCulture()
-        Dim myValue = Me.Value
+        Dim myValue = Value
         Select Case CalendarType
             Case CalendarToUse.Hijri
                 CalendarType = CalendarToUse.Gregorian
@@ -147,7 +147,7 @@ Public Class CCustomDateTimePicker
                 CalendarType = CalendarToUse.Gregorian
                 SetTargetCulture()
         End Select
-        Me.Value = myValue
+        Value = myValue
     End Sub
 
     <Bindable(True)>
@@ -231,16 +231,16 @@ Public Class CCustomDateTimePicker
             txtLongDate.EditingMode = Value
             If Value Then
                 If DisplayOnly Then
-                    Me.ReadOnlyDp = True
+                    ReadOnlyDp = True
                     ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Else
-                    Me.ReadOnlyDp = False
+                    ReadOnlyDp = False
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
             Else
-                Me.ReadOnlyDp = True
+                ReadOnlyDp = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
@@ -579,7 +579,7 @@ Public Class CCustomDateTimePicker
 
             SetCalendarLocation(calendarForm)
             retVal = calendarForm.ShowDialog()
-            If ((Not EditingMode) Or Me.DisplayOnly) And retVal <> DialogResult.Retry Then
+            If ((Not EditingMode) Or DisplayOnly) And retVal <> DialogResult.Retry Then
                 calendarForm.Dispose()
                 Exit Do
             ElseIf retVal = DialogResult.OK Then
