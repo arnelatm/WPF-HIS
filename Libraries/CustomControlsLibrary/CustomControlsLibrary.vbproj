@@ -151,13 +151,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="MyTabControl.Designer.vb">
-      <DependentUpon>MyTabControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="MyTabControl.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="NewTabControl.vb" />
     <Compile Include="TdpDateTime.designer.vb">
       <DependentUpon>TdpDateTime.vb</DependentUpon>
     </Compile>
@@ -186,12 +179,6 @@
       <DependentUpon>TxtComboBox.vb</DependentUpon>
     </Compile>
     <Compile Include="TxtComboBox.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControl1.Designer.vb">
-      <DependentUpon>UserControl1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl1.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -241,9 +228,6 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MyTabControl.resx">
-      <DependentUpon>MyTabControl.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TdpDateTime.resx">
       <DependentUpon>TdpDateTime.vb</DependentUpon>
     </EmbeddedResource>
@@ -258,9 +242,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TxtComboBox.resx">
       <DependentUpon>TxtComboBox.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControl1.resx">
-      <DependentUpon>UserControl1.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
