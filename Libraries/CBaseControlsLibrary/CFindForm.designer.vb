@@ -41,6 +41,7 @@ Partial Class CFindForm
         Me.chkChecked = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.dtpBegDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+        Me.RBtnExactMatch = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -94,9 +95,9 @@ Partial Class CFindForm
         Me.BtnFind.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.BtnFind.AutoSize = True
         Me.TableLayoutPanel1.SetColumnSpan(Me.BtnFind, 2)
-        Me.BtnFind.Location = New System.Drawing.Point(58, 154)
+        Me.BtnFind.Location = New System.Drawing.Point(233, 177)
         Me.BtnFind.Name = "BtnFind"
-        Me.BtnFind.Size = New System.Drawing.Size(55, 23)
+        Me.BtnFind.Size = New System.Drawing.Size(55, 22)
         Me.BtnFind.TabIndex = 4
         Me.BtnFind.Text = "Find"
         Me.BtnFind.UseVisualStyleBackColor = True
@@ -107,9 +108,9 @@ Partial Class CFindForm
         Me.BtnCancel.AutoSize = True
         Me.TableLayoutPanel1.SetColumnSpan(Me.BtnCancel, 3)
         Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnCancel.Location = New System.Drawing.Point(220, 154)
+        Me.BtnCancel.Location = New System.Drawing.Point(65, 177)
         Me.BtnCancel.Name = "BtnCancel"
-        Me.BtnCancel.Size = New System.Drawing.Size(61, 23)
+        Me.BtnCancel.Size = New System.Drawing.Size(61, 22)
         Me.BtnCancel.TabIndex = 5
         Me.BtnCancel.Text = "Cancel"
         Me.BtnCancel.UseVisualStyleBackColor = True
@@ -137,11 +138,12 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.Controls.Add(Me.chkChecked, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.dtpEndDate, 4, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.dtpBegDate, 1, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.BtnFind, 0, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.BtnCancel, 2, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.BtnFind, 1, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.RBtnExactMatch, 1, 6)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(9, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 7
+        Me.TableLayoutPanel1.RowCount = 9
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -149,7 +151,9 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(331, 180)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(331, 214)
         Me.TableLayoutPanel1.TabIndex = 6
         '
         'lblLookFor4
@@ -238,6 +242,7 @@ Partial Class CFindForm
         Me.chkChecked.BackColor = System.Drawing.Color.White
         Me.chkChecked.DisplayOnly = False
         Me.chkChecked.EditingMode = True
+        Me.chkChecked.FindEnabled = False
         Me.chkChecked.FlatAppearance.BorderSize = 0
         Me.chkChecked.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.chkChecked.ForeColor = System.Drawing.Color.Black
@@ -303,11 +308,23 @@ Partial Class CFindForm
         Me.dtpBegDate.ValueIsMandatory = False
         Me.dtpBegDate.ValueIsNullable = False
         '
+        'RBtnExactMatch
+        '
+        Me.RBtnExactMatch.AutoSize = True
+        Me.RBtnExactMatch.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.SetColumnSpan(Me.RBtnExactMatch, 4)
+        Me.RBtnExactMatch.Location = New System.Drawing.Point(58, 154)
+        Me.RBtnExactMatch.Name = "RBtnExactMatch"
+        Me.RBtnExactMatch.Size = New System.Drawing.Size(85, 17)
+        Me.RBtnExactMatch.TabIndex = 11
+        Me.RBtnExactMatch.Text = "Exact Match"
+        Me.RBtnExactMatch.UseVisualStyleBackColor = False
+        '
         'CFindForm
         '
         Me.AcceptButton = Me.BtnFind
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(354, 208)
+        Me.ClientSize = New System.Drawing.Size(354, 245)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "CFindForm"
         Me.Text = "Find Field Form"
@@ -333,4 +350,5 @@ Partial Class CFindForm
     Friend WithEvents chkChecked As CCheckBox
     Friend WithEvents dtpEndDate As CCustomDateTimePicker
     Friend WithEvents dtpBegDate As CCustomDateTimePicker
+    Friend WithEvents RBtnExactMatch As RadioButton
 End Class

@@ -17,13 +17,20 @@ Namespace PresentationLayer.Views.Forms
         Private _accountReconciliations As New List(Of AccountReconciliationItemView)
         Private _glSystemBalance As Decimal
         Private _balance As Decimal
+        Private _existingFind As Boolean = False
+        Private _previousSelectedRow As Int16
+        Private _previousTextSearch As String
+        Private _previousSearchAnywhere As Boolean
+        Private _previousBegDateSearch As Date?
+        Private _previousEndDateSearch As Date?
+        Private _previousColumnSearch As Int16
 
-        'Private bsSearchFieldsList As BindingSource
-        Private ReadOnly _contextMenuForReferenceNo As ContextMenu = New ContextMenu()
+        ''Private bsSearchFieldsList As BindingSource
+        'Private ReadOnly _contextMenuForReferenceNo As ContextMenu = New ContextMenu()
 
-        Private ReadOnly _contextMenuForDocumentNo As ContextMenu = New ContextMenu()
-        Private ReadOnly _contextMenuForDebit As ContextMenu = New ContextMenu()
-        Private ReadOnly _contextMenuForCredit As ContextMenu = New ContextMenu()
+        'Private ReadOnly _contextMenuForDocumentNo As ContextMenu = New ContextMenu()
+        'Private ReadOnly _contextMenuForDebit As ContextMenu = New ContextMenu()
+        'Private ReadOnly _contextMenuForCredit As ContextMenu = New ContextMenu()
 
         Public Sub New()
             MyBase.New()
@@ -301,28 +308,28 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub AccountReconciliationEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            KeyPreview = True
+        'Private Sub AccountReconciliationEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    KeyPreview = True
 
-            _contextMenuForReferenceNo.MenuItems.Add("File", New EventHandler(AddressOf MenuClicked))
-            _contextMenuForReferenceNo.MenuItems.Add("Edit")
+        '    _contextMenuForReferenceNo.MenuItems.Add("File", New EventHandler(AddressOf MenuClicked))
+        '    _contextMenuForReferenceNo.MenuItems.Add("Edit")
 
-            _contextMenuForDebit.MenuItems.Add("Find value equal to ", AddressOf MenuClicked)
-            '_contextMenuForDebit.MenuItems.Add("Find next match", AddressOf MenuNextMatchClicked)
+        '    _contextMenuForDebit.MenuItems.Add("Find value equal to ", AddressOf MenuClicked)
+        '    '_contextMenuForDebit.MenuItems.Add("Find next match", AddressOf MenuNextMatchClicked)
 
-            'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
-            'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
-            'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
-            'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
+        '    'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
+        '    'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
+        '    'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
+        '    'contextMenuForReferenceNo.MenuItems.Add("Find", New EventHandler(AddressOf MenuClicked))
 
-            'contextMenuForDocumentNo.MenuItems.Add("Delete", New EventHandler(Delete))
-            'contextMenuForDebit.MenuItems.Add("Register", New EventHandler(Register))
-            'contextMenuForCredit.MenuItems.Add("Register", New EventHandler(Register))
-            'bsSearchFieldsList.DataSource = New List(Of String) From {
-            '                                     "test1",
-            '                                     "test2"
-            '                                     }
-        End Sub
+        '    'contextMenuForDocumentNo.MenuItems.Add("Delete", New EventHandler(Delete))
+        '    'contextMenuForDebit.MenuItems.Add("Register", New EventHandler(Register))
+        '    'contextMenuForCredit.MenuItems.Add("Register", New EventHandler(Register))
+        '    'bsSearchFieldsList.DataSource = New List(Of String) From {
+        '    '                                     "test1",
+        '    '                                     "test2"
+        '    '                                     }
+        'End Sub
 
         Private Sub MenuClicked()
             Dim myForm = FindForm()
@@ -514,11 +521,23 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DataGridViewReconciliationItems_MouseUp(sender As Object, e As MouseEventArgs) Handles DataGridViewReconciliationItems.MouseUp
             Dim hitTestInfo As DataGridView.HitTestInfo
-
+            Dim continueSearch As Boolean = False
             If e.Button = MouseButtons.Right Then
                 hitTestInfo = DataGridViewReconciliationItems.HitTest(e.X, e.Y)
-                If hitTestInfo.Type = DataGridViewHitTestType.ColumnHeader Then
-                    FindValue(hitTestInfo.ColumnIndex)
+                If _existingFind Then
+                    If Messaging.Show(True, "AskContinueWithPreviousSearch",
+                                      MessageBoxButtons.YesNo,
+                                      MessageBoxIcon.Warning,
+                                      MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                        ContinuePreviousSearch()
+                        continueSearch = True
+                    End If
+                End If
+                If Not continueSearch Then
+                    If hitTestInfo.Type = DataGridViewHitTestType.ColumnHeader Then
+                        _existingFind = False
+                        FindValue(hitTestInfo.ColumnIndex)
+                    End If
                 End If
                 'If hitTestInfo.Type = DataGridViewHitTestType.ColumnHeader AndAlso hitTestInfo.ColumnIndex = DataGridViewReconciliationItems.Columns.IndexOf(dgvReferenceNo) Then contextMenuForReferenceNo.Show(DataGridViewReconciliationItems, New Point(e.X, e.Y))
                 'If hitTestInfo.Type = DataGridViewHitTestType.Cell AndAlso hitTestInfo.ColumnIndex = DataGridViewReconciliationItems.Columns.IndexOf(dgvDocumentNumber) Then contextMenuForDocumentNo.Show(DataGridViewReconciliationItems, New Point(e.X, e.Y))
@@ -528,12 +547,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub FindValue(ByRef columnNo As Int16)
-            'Select Case columnNo
-            '    Case DataGridViewReconciliationItems.Columns.IndexOf(dgvDebit)
             Dim myForm = FindForm()
             Dim pnt As Point
             Dim nMode As Int16
             Dim columnDataType = DataGridViewReconciliationItems.Columns(columnNo).ValueType
+            _previousColumnSearch = columnNo
             If columnDataType = GetType(Date?) Or columnDataType = GetType(Date) Or columnDataType = GetType(DateTime) Then
                 nMode = 2
             ElseIf columnDataType = GetType(String) Or columnDataType = GetType(Char) Then
@@ -551,13 +569,12 @@ Namespace PresentationLayer.Views.Forms
                 formLocation.Y = pnt.Y - searchForm.Height + Height
             End If
             searchForm.Location = formLocation
-            'If System.ComponentModel.LicenseManager.UsageMode <> System.ComponentModel.LicenseUsageMode.Designtime Then
-            '    SearchForm.RightToLeftLayout = myForm.RightToLeftLayout
-            '    SearchForm.RightToLeft = myForm.RightToLeft
-            'End If
             searchForm.ShowDialog()
             Dim textToSearch As String
             Dim searchAnywhere As String
+            If Not _existingFind Then
+                _existingFind = True
+            End If
             If nMode = 0 Then
                 textToSearch = searchForm.TextToSearch
                 searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
@@ -574,6 +591,7 @@ Namespace PresentationLayer.Views.Forms
                                         'scroll and move to the first matching record
                                         DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
                                         sw = 1
+                                        _previousSelectedRow = row.Index()
                                     End If
                                 End If
                             Else
@@ -583,10 +601,13 @@ Namespace PresentationLayer.Views.Forms
                                         'scroll and move to the first matching record
                                         DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
                                         sw = 1
+                                        _previousSelectedRow = row.Index()
                                     End If
                                 End If
                             End If
                         Next
+                        _previousTextSearch = textToSearch
+                        _previousSearchAnywhere = searchAnywhere
                     Catch exc As Exception
                         MessageBox.Show(exc.Message)
                     End Try
@@ -621,7 +642,97 @@ Namespace PresentationLayer.Views.Forms
                             If sw = 0 Then
                                 'scroll and move to the first matching record
                                 DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
                                 sw = 1
+                            End If
+                        End If
+                    Next
+                    _previousBegDateSearch = dBDate
+                    _previousEndDateSearch = dEDate
+                Catch exc As Exception
+                    MessageBox.Show(exc.Message)
+                End Try
+            End If
+
+            searchForm.Dispose()
+
+        End Sub
+
+        Private Sub ContinuePreviousSearch()
+            Dim myForm = FindForm()
+            Dim columnNo = _previousColumnSearch
+            Dim nMode As Int16
+            Dim columnDataType = DataGridViewReconciliationItems.Columns(columnNo).ValueType
+            If columnDataType = GetType(Date?) Or columnDataType = GetType(Date) Or columnDataType = GetType(DateTime) Then
+                nMode = 2
+            ElseIf columnDataType = GetType(String) Or columnDataType = GetType(Char) Then
+                nMode = 0
+            ElseIf columnDataType = GetType(Decimal) Or columnDataType = GetType(Int16) Or columnDataType = GetType(Int32) Or columnDataType = GetType(Int64) Then
+                nMode = 0
+            End If
+            'Dim searchForm = New CFindForm(nMode)
+            'Dim screenRectangle As Rectangle
+            'Dim formLocation As Point
+            'screenRectangle = Screen.PrimaryScreen.WorkingArea
+            'searchForm.StartPosition = FormStartPosition.Manual
+            'pnt = myForm.PointToScreen(Location)
+            'If formLocation.Y + searchForm.Height > screenRectangle.Height Then
+            '    formLocation.Y = pnt.Y - searchForm.Height + Height
+            'End If
+            'searchForm.Location = formLocation
+            'searchForm.ShowDialog()
+            'Dim textToSearch As String
+            'Dim searchAnywhere As String
+            'If Not _existingFind Then
+            '    _existingFind = True
+            'End If
+            If nMode = 0 Then
+                DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                Try
+                    DataGridViewReconciliationItems.ClearSelection()
+                    Dim sw = 0
+                    For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                        If _previousSearchAnywhere Then
+                            If row.Cells(columnNo).Value.ToString().Contains(_previousTextSearch) Then
+                                row.Selected = True
+                                If sw = 0 And row.Index > _previousSelectedRow Then
+                                    'scroll and move to the first matching record
+                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                    sw = 1
+                                    _previousSelectedRow = row.Index
+                                End If
+                            End If
+                        Else
+                            If row.Cells(columnNo).Value.ToString().Equals(_previousTextSearch) Then
+                                row.Selected = True
+                                If sw = 0 And row.Index > _previousSelectedRow Then
+                                    'scroll and move to the first matching record
+                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                    sw = 1
+                                    _previousSelectedRow = row.Index
+                                End If
+                            End If
+                        End If
+                    Next
+                Catch exc As Exception
+                    MessageBox.Show(exc.Message)
+                End Try
+            ElseIf nMode = 2 Then
+                Dim dBegDate As Date? = _previousBegDateSearch
+                Dim dEndDate As Date? = _previousEndDateSearch
+                DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                Try
+                    DataGridViewReconciliationItems.ClearSelection()
+                    For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                        Dim colDate As Date = row.Cells(columnNo).Value
+                        Dim sw As Int16 = 0
+                        If colDate.ToString("yyyyMMdd") >= dBegDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEndDate.ToString("yyyyMMdd") Then
+                            row.Selected = True
+                            If sw = 0 And row.Index > _previousSelectedRow Then
+                                'scroll and move to the first matching record
+                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                sw = 1
+                                _previousSelectedRow = row.Index
                             End If
                         End If
                     Next
@@ -630,17 +741,7 @@ Namespace PresentationLayer.Views.Forms
                 End Try
             End If
 
-            searchForm.Dispose()
-            '    Case Else
-            'End Select
         End Sub
-
-        'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
-        '    If Posted Then
-        '        Messaging.Show(True, "MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
-        '        PresenterObj.CancelEdit = True
-        '    End If
-        'End Sub
 
         Private Sub dtpReconciliationDate_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles dtpReconciliationDate.Validating
             If dtpReconciliationDate.DateChanged() Then
