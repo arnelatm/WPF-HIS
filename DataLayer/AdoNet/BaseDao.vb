@@ -61,15 +61,15 @@ Namespace AdoNet
 
         Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchAnywhere As Boolean = False, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
             Dim retVal As Integer
-            If searchString Is Nothing Or searchString = "" Then
-                retVal = 0
-            Else
-                Dim sql As String =
+            Dim sql As String =
                         " SELECT IdNo FROM [" & tableName & "] " &
                         " Where "
-                If Not (filter Is Nothing OrElse filter = "") Then
-                    sql = sql & filter.Trim() & " and "
-                End If
+            If Not (filter Is Nothing OrElse filter = "") Then
+                sql = sql & filter.Trim() & " and "
+            End If
+            If searchString Is Nothing OrElse searchString = "" Then
+                sql = sql & " (" & fieldName & " Is Null or " & fieldName & " = '') "
+            Else
                 If searchAnywhere Then
                     searchString = "%" & searchString.Trim() & "%"
                     sql = sql & fieldName & " Like @SearchString "
@@ -77,37 +77,42 @@ Namespace AdoNet
                     searchString = searchString.Trim() & "%"
                     sql = sql & fieldName & " Like @SearchString "
                 End If
-
-                Dim params() As Object = {"@SearchString", searchString}
-                _lastFindQuery = sql
-                _lastFindParms = params
-                retVal = _db.Scalar(sql & " order by IdNo ", params)
             End If
+            Dim params() As Object = {"@SearchString", searchString}
+            _lastFindQuery = sql
+            _lastFindParms = params
+            retVal = _db.Scalar(sql & " order by IdNo ", params)
             Return retVal
         End Function
 
         Public Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindDateField
             Dim retVal As Integer
             Dim searchString As String
-            If begSearchDate Is Nothing Then
-                retVal = 0
-            Else
-                Dim sql As String = " SELECT IdNo FROM [" & tableName & "] Where "
-                If Not (filter Is Nothing OrElse filter = "") Then
-                    sql = sql & filter.Trim() & " and "
-                End If
-                Dim dBegDate As Date = begSearchDate
-                Dim dEndDate As Date = endSearchDate
-                If endSearchDate Is Nothing Then
-                    dEndDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBegDate)
-                Else
-                    dEndDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEndDate)
-                End If
-                searchString = fieldName & " >= '" & dBegDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEndDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
-                sql = sql & searchString
-                _lastFindQuery = sql
-                retVal = _db.Scalar(sql & " order by IdNo ")
+            Dim sql As String = " SELECT IdNo FROM [" & tableName & "] Where "
+            If Not (filter Is Nothing OrElse filter = "") Then
+                sql = sql & filter.Trim() & " and "
             End If
+            Dim dBegDate As Date? = begSearchDate
+            Dim dEndDate As Date? = endSearchDate
+            If dBegDate Is Nothing Then
+                searchString = fieldName & " Is Null"
+            Else
+                Dim dBDate As Date
+                Dim dEDate As Date
+                If endSearchDate Is Nothing Then
+                    dBDate = Convert.ToDateTime(begSearchDate)
+                    dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBDate)
+                    searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                Else
+                    dBDate = Convert.ToDateTime(begSearchDate)
+                    dEDate = Convert.ToDateTime(endSearchDate)
+                    dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
+                    searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                End If
+            End If
+            sql = sql & searchString
+            _lastFindQuery = sql
+            retVal = _db.Scalar(sql & " order by IdNo ")
             Return retVal
         End Function
 

@@ -24,11 +24,11 @@ Public Class CdgvCellMoney
             If Value Or DisplayOnly Then
                 Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Me.ReadOnly = True
+                [ReadOnly] = True
             Else
                 Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Me.ReadOnly = False
+                [ReadOnly] = False
             End If
         End Set
     End Property

@@ -42,19 +42,19 @@ Public Class ChooseGlyph
 
         MyBase.New(New CornBehavior(relatedDesigner))
         ' Cache references for convenience.
-        Me.behaviorSvc = behaviorService
-        Me.selectionSvc = selectionService
+        behaviorSvc = behaviorService
+        selectionSvc = selectionService
         Me.relatedDesigner = relatedDesigner
-        Me.ChooseAdorner = myAdorner
+        ChooseAdorner = myAdorner
 
         ' Cache a reference to the control being designed.
-        Me.relatedControl = CType(Me.relatedDesigner.Component, CButton)
+        relatedControl = CType(Me.relatedDesigner.Component, CButton)
 
         ' Hook the SelectionChanged event.
-        AddHandler Me.selectionSvc.SelectionChanged, AddressOf selectionService_SelectionChanged
+        AddHandler selectionSvc.SelectionChanged, AddressOf selectionService_SelectionChanged
 
-        AddHandler Me.relatedControl.Move, AddressOf relatedControl_Move
-        AddHandler Me.relatedControl.Resize, AddressOf relatedControl_Resize
+        AddHandler relatedControl.Move, AddressOf relatedControl_Move
+        AddHandler relatedControl.Resize, AddressOf relatedControl_Resize
 
     End Sub
 
@@ -64,9 +64,9 @@ Public Class ChooseGlyph
 
     Private Sub relatedControl_Move(ByVal sender As Object, ByVal e As EventArgs)
 
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) Then
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) Then
             SetBoxes()
-            Me.ChooseAdorner.Invalidate()
+            ChooseAdorner.Invalidate()
         End If
 
     End Sub
@@ -74,9 +74,9 @@ Public Class ChooseGlyph
     Private Sub relatedControl_Resize(
                                       ByVal sender As Object,
                                       ByVal e As EventArgs)
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) Then
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) Then
             SetBoxes()
-            Me.ChooseAdorner.Invalidate()
+            ChooseAdorner.Invalidate()
         End If
     End Sub
 
@@ -84,15 +84,15 @@ Public Class ChooseGlyph
                                                   ByVal sender As Object,
                                                   ByVal e As EventArgs)
 
-        If Me.relatedControl.GetType = GetType(CButton) Then
+        If relatedControl.GetType = GetType(CButton) Then
 
-            If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) Then
+            If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) Then
                 SetBoxes()
-                Me.ChooseAdorner.Enabled = True
+                ChooseAdorner.Enabled = True
                 relatedControl.DesignerSelected = True
             Else
                 If relatedControl.DesignerSelected Then
-                    Me.ChooseAdorner.Enabled = False
+                    ChooseAdorner.Enabled = False
                     relatedControl.DesignerSelected = False
                 End If
             End If
@@ -108,7 +108,7 @@ Public Class ChooseGlyph
 
     Public Overrides Function GetHitTest(ByVal p As Point) As Cursor
 
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) Then
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) Then
             If padBox.Contains(p) Then
                 sendWhat = eChooseWhat.Pad
                 Return Cursors.Hand
@@ -138,7 +138,7 @@ Public Class ChooseGlyph
     End Property
 
     Public Overrides Sub Paint(ByVal pe As PaintEventArgs)
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) Then
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) Then
             Using pn As New Pen(Brushes.DarkGray, 1) With {.DashStyle = Drawing2D.DashStyle.Solid}
                 Dim fnt As Font = New Font("Arial", 8)
                 Dim sf As New StringFormat() With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center}
@@ -201,7 +201,7 @@ Public Class ChooseGlyph
 
         Friend Sub New(ByVal relatedDesigner As IDesigner)
             Me.relatedDesigner = relatedDesigner
-            Me.relatedControl = CType(relatedDesigner.Component, CButton)
+            relatedControl = CType(relatedDesigner.Component, CButton)
         End Sub
 
 #End Region

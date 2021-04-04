@@ -450,13 +450,13 @@ Public Class CDgvComboBoxOld
                 If Not IsNumeric(value) OrElse SelectedItem.idNo <> value Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(Me.LinkedLabel Is Nothing, Me.Name, Me.LinkedLabel.Text))
+                    MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                 End If
             ElseIf ValueMember.ToLower() = "code" Then
                 If SelectedItem.Code <> value Then
                     SelectedIndex = -1
                     Text = value.ToString()
-                    MessageBox.Show("Invalid value <" + Text + "> for field " + If(Me.LinkedLabel Is Nothing, Me.Name, Me.LinkedLabel.Text))
+                    MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
                 End If
                 'If SelectedItem.Code <> value Then
                 '    Text = Nothing
@@ -770,10 +770,10 @@ Public Class CDgvComboBoxOld
 
     Public Property EditingControlFormattedValue As Object Implements IDataGridViewEditingControl.EditingControlFormattedValue
         Get
-            Return Me.GetValue()
+            Return GetValue()
         End Get
         Set(value As Object)
-            Me.SetValue(value)
+            SetValue(value)
         End Set
     End Property
 

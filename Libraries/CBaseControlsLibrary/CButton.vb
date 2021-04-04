@@ -174,7 +174,7 @@ Public Class CButton
         Size = New Size(90, 25)
         ForeColor = Color.White
         Font = New Font("Arial", 10, FontStyle.Bold)
-        Me.SetAutoSizeMode(AutoSizeMode.GrowOnly)
+        SetAutoSizeMode(AutoSizeMode.GrowOnly)
         UpdateDimColors()
         UpdateDimBlends()
 
@@ -1303,7 +1303,7 @@ Public Class CButton
 
             If MouseDrawState = eMouseDrawState.Down Then
                 Return _ClickColorBlend
-            ElseIf MouseDrawState = eMouseDrawState.Over OrElse (ShowFocus = eFocus.Dim And Me.Focused) Then
+            ElseIf MouseDrawState = eMouseDrawState.Over OrElse (ShowFocus = eFocus.Dim And Focused) Then
                 Return _HoverColorBlend
             Else
                 Return _ColorFillBlend.iColor
@@ -1318,7 +1318,7 @@ Public Class CButton
         If Enabled Then
             If MouseDrawState = eMouseDrawState.Down Then
                 Return _ClickColorSolid
-            ElseIf MouseDrawState = eMouseDrawState.Over OrElse (ShowFocus = eFocus.Dim And Me.Focused) Then
+            ElseIf MouseDrawState = eMouseDrawState.Over OrElse (ShowFocus = eFocus.Dim And Focused) Then
                 Return _HoverColorSolid
             Else
                 Return _ColorFillSolid
@@ -1543,7 +1543,7 @@ Public Class CButton
                 e.Handled = True
                 If MouseDrawState = eMouseDrawState.Down Then
                     Parent.Text = Cursor.Position.ToString
-                    If ButtonArea.Contains(Me.PointToClient(Cursor.Position)) Then
+                    If ButtonArea.Contains(PointToClient(Cursor.Position)) Then
                         MouseDrawState = eMouseDrawState.Over
                     Else
                         MouseDrawState = eMouseDrawState.Up
@@ -1560,7 +1560,7 @@ Public Class CButton
 
     Protected Overrides Function ProcessMnemonic(ByVal charCode As Char) As Boolean
         If (CanSelect And IsMnemonic(charCode, Text)) Then
-            Me.Select()
+            [Select]()
             PerformClickButtonArea(Me, New MouseEventArgs(Windows.Forms.MouseButtons.Left, 1, CInt(ButtonArea.X), CInt(ButtonArea.Y), 0))
             Return True
         End If

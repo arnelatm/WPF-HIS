@@ -4,7 +4,7 @@
 
     Public Sub New()
         MyBase.New()
-        Me.DisplayOnly = True
+        DisplayOnly = True
     End Sub
 
 End Class

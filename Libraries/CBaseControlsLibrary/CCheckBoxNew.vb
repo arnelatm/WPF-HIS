@@ -40,11 +40,11 @@ Public Class CCheckBoxNew
             'If _displayOnly = value Then Exit Property
             _displayOnly = value
             If value Then
-                Me.Enabled = False
+                Enabled = False
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
-                Me.Enabled = True
+                Enabled = True
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 'BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
@@ -62,7 +62,7 @@ Public Class CCheckBoxNew
         End Get
         Set(value As Boolean)
             If value Then
-                Me.Text = " "
+                Text = " "
             End If
             _noLabel = value
         End Set

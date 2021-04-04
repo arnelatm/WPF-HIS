@@ -15,7 +15,7 @@ Public Class EcbComboBoxCell
         Dim ctl As EcbComboBoxEditingControl = TryCast(DataGridView.EditingControl, EcbComboBoxEditingControl)
         ctl.ValueMember = "IdNo"
         ctl.DisplayMember = "Name"
-        ctl.SelectedValue = Me.Value
+        ctl.SelectedValue = Value
         ctl.CausesValidation = False
     End Sub
 

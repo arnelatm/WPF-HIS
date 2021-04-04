@@ -50,11 +50,11 @@ Public Class CDataGvBs
             If DisplayOnly OrElse Not value Then
                 DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Me.ReadOnly = True
+                [ReadOnly] = True
             Else
                 DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Me.ReadOnly = False
+                [ReadOnly] = False
             End If
             For Each col In Columns
                 If TypeOf col Is IEntryControl Then
@@ -182,7 +182,7 @@ Public Class CDataGvBs
                     Return True
                 End If
             End If
-            Me.ProcessTabKey(keyData)
+            ProcessTabKey(keyData)
             Return True
         Else
             Return MyBase.ProcessDialogKey(keyData)

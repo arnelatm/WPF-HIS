@@ -74,17 +74,17 @@ Public Class CdgvColumnDecimal
             _editingMode = value
             If value Then
                 If DisplayOnly Then
-                    Me.ReadOnly = True
+                    [ReadOnly] = True
                     DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 Else
-                    Me.ReadOnly = False
+                    [ReadOnly] = False
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    Me.ReadOnly = False
+                    [ReadOnly] = False
                 End If
             Else
-                Me.ReadOnly = True
+                [ReadOnly] = True
                 DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If

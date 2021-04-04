@@ -56,7 +56,7 @@ Public Class CDataGridView
     Public Property Ea As EventAggregator
 
     Private Sub DataGridView_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
-        If Me.Columns(SequenceColumn) IsNot Nothing Then
+        If Columns(SequenceColumn) IsNot Nothing Then
             CallByName(Columns(SequenceColumn), "DisplayOnly", CallType.Set, True)
         End If
         If ShowFooter Then
@@ -75,11 +75,11 @@ Public Class CDataGridView
             If DisplayOnly OrElse Not value Then
                 DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Me.ReadOnly = True
+                [ReadOnly] = True
             Else
                 DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Me.ReadOnly = False
+                [ReadOnly] = False
             End If
             For Each col In Columns
                 If TypeOf col Is IEntryControl Then
@@ -178,7 +178,7 @@ Public Class CDataGridView
     End Property
 
     Public Sub AddInsertColumn()
-        If Not DisplayOnly AndAlso Not Me.Columns.Contains("dgvInsertColumn") Then
+        If Not DisplayOnly AndAlso Not Columns.Contains("dgvInsertColumn") Then
             With Columns
                 Dim dgvInsColumn As New DataGridViewImageColumn
                 .Insert(.Count, dgvInsColumn)
@@ -254,7 +254,7 @@ Public Class CDataGridView
                     Return True
                 End If
             End If
-            Me.ProcessTabKey(keyData)
+            ProcessTabKey(keyData)
             Return True
             'Dim currentColumnIndex As Int16
             'currentColumnIndex = CurrentCell.ColumnIndex()
@@ -729,12 +729,12 @@ Public Class CDataGridView
     'End Function
 
     Private Sub CDataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellEndEdit
-        Dim nIndex = Me.CurrentRow.Index
+        Dim nIndex = CurrentRow.Index
         If DataSource IsNot Nothing Then
             If DataSource.[GetType]() Is GetType(BindingSource) Then
                 'AssignEvent()
                 Dim myBindingSource = CType(DataSource, BindingSource)
-                If Me.CurrentRow.Index = Me.NewRowIndex Then
+                If CurrentRow.Index = NewRowIndex Then
                     myBindingSource.AddNew()
                     ' adding a new row to the bindingsource adds a new empty row at the end with null values
                     ' therefore there is a need to remove that row because it causes errors when moving to that empty row

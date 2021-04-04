@@ -4,7 +4,7 @@ Public Class EcbComboBoxColumn
     Inherits DataGridViewComboBoxColumn
 
     Public Sub New()
-        Me.CellTemplate = New EcbComboBoxCell
+        CellTemplate = New EcbComboBoxCell
     End Sub
 
     'Public Overrides Property CellTemplate() As DataGridViewCell

@@ -79,6 +79,18 @@
     <Compile Include="ATabPage.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="BFCalendarUmAlQura.Designer.vb">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BFCalendarUmAlQura.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BFGregorianCalendar.Designer.vb">
+      <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BFGregorianCalendar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BlendItemsConverter.vb" />
     <Compile Include="BlendTypeEditor.vb" />
     <Compile Include="CaDgvComboBox.vb">
@@ -96,8 +108,26 @@
     </Compile>
     <Compile Include="CButtonActionList.vb" />
     <Compile Include="CButtonDesigner.vb" />
+    <Compile Include="CCalendar.Designer.vb">
+      <DependentUpon>CCalendar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CCalendar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CCalendarGregorian.Designer.vb">
+      <DependentUpon>CCalendarGregorian.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CCalendarGregorian.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CCheckBoxNew.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCustomDateTimePicker.Designer.vb">
+      <DependentUpon>CCustomDateTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CCustomDateTimePicker.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="cDataGridViewWithFooter.vb">
       <SubType>Component</SubType>
@@ -149,6 +179,18 @@
     <Compile Include="CdgvColumnMoney.vb" />
     <Compile Include="CDGVColumnText.vb" />
     <Compile Include="CdgvComboBoxCell.vb" />
+    <Compile Include="CDtpGregorianDate.Designer.vb">
+      <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CDtpGregorianDate.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CDTPHijriDate.Designer.vb">
+      <DependentUpon>CDTPHijriDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CDTPHijriDate.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CFindForm.designer.vb">
       <DependentUpon>CFindForm.vb</DependentUpon>
     </Compile>
@@ -173,8 +215,20 @@
     <Compile Include="cfsComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CGDateTimePicker.Designer.vb">
+      <DependentUpon>CGDateTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CGDateTimePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CGroupBox.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CHijriCalendar.Designer.vb">
+      <DependentUpon>CHijriCalendar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CHijriCalendar.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ChooseGlyph.vb" />
     <Compile Include="CLabel.vb">
@@ -204,10 +258,19 @@
     <Compile Include="CModalForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CMonthPicker.Designer.vb">
+      <DependentUpon>CMonthPicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CMonthPicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CMyCombobox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CNewTabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComboIcon.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CornerConverter.vb" />
@@ -266,6 +329,8 @@
     </Compile>
     <Compile Include="FocalPointsConverter.vb" />
     <Compile Include="FocalPtGlyph.vb" />
+    <Compile Include="GregorianDates.vb" />
+    <Compile Include="HijriDates.vb" />
     <Compile Include="ICDataGridView.vb" />
     <Compile Include="ISequencedData.vb" />
     <Compile Include="IEntryControl.vb" />
@@ -290,12 +355,57 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="TdpDateTime.designer.vb">
+      <DependentUpon>TdpDateTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TdpDateTime.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TdpDateTimePicker.Designer.vb">
+      <DependentUpon>TdpDateTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TdpDateTimePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tdpDateTimePickerCI.Designer.vb">
+      <DependentUpon>tdpDateTimePickerCI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="tdpDateTimePickerCI.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tdpGregorian.Designer.vb">
+      <DependentUpon>tdpGregorian.vb</DependentUpon>
+    </Compile>
+    <Compile Include="tdpGregorian.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TxtComboBox.Designer.vb">
+      <DependentUpon>TxtComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TxtComboBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ValidationControl.vb" />
     <Compile Include="ValidationControlCollection.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ATabPage.resx">
       <DependentUpon>ATabPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BFCalendarUmAlQura.ar-SA.resx">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BFCalendarUmAlQura.ar.resx">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BFCalendarUmAlQura.en-GB.resx">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BFCalendarUmAlQura.resx">
+      <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BFGregorianCalendar.resx">
+      <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CaDgvComboBox.resx">
       <DependentUpon>CaDgvComboBox.vb</DependentUpon>
@@ -304,11 +414,26 @@
       <DependentUpon>CButton.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="CCalendar.resx">
+      <DependentUpon>CCalendar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CCalendarGregorian.resx">
+      <DependentUpon>CCalendarGregorian.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CComboBox.resx">
       <DependentUpon>CComboBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CCustomDateTimePicker.resx">
+      <DependentUpon>CCustomDateTimePicker.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CdgvComboBox.resx">
       <DependentUpon>CdgvComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CDtpGregorianDate.resx">
+      <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CDTPHijriDate.resx">
+      <DependentUpon>CDTPHijriDate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CFindForm.resx">
       <DependentUpon>CFindForm.vb</DependentUpon>
@@ -322,8 +447,17 @@
       <LastGenOutput>CForm1.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="CGDateTimePicker.resx">
+      <DependentUpon>CGDateTimePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHijriCalendar.resx">
+      <DependentUpon>CHijriCalendar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CListBoxForm.resx">
       <DependentUpon>CListBoxForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMonthPicker.resx">
+      <DependentUpon>CMonthPicker.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CTextBox.resx">
       <DependentUpon>CTextBox.vb</DependentUpon>
@@ -348,6 +482,21 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TdpDateTime.resx">
+      <DependentUpon>TdpDateTime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TdpDateTimePicker.resx">
+      <DependentUpon>TdpDateTimePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tdpDateTimePickerCI.resx">
+      <DependentUpon>tdpDateTimePickerCI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tdpGregorian.resx">
+      <DependentUpon>tdpGregorian.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TxtComboBox.resx">
+      <DependentUpon>TxtComboBox.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +549,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CButton.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnprevious_ar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar18x18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\downArrow.png" />
+    <None Include="Resources\rightarrow_ar.PNG" />
+    <None Include="Resources\rightarrow.png" />
+    <None Include="Resources\leftarrow_ar.png" />
+    <None Include="Resources\leftarrow_ar.bmp" />
+    <None Include="Resources\leftarrow.PNG" />
+    <None Include="Resources\dropDown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

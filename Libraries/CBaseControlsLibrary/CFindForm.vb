@@ -5,10 +5,10 @@ Imports AATM.Libraries.GlobalFuncNSub
 Public Class CFindForm
     Inherits CForm
 
-    Private _TextToSearch As String
-    Private _SearchAnywhere As Boolean
-    Private _searchMode As Int16
-    Private _control As Control
+    Private _textToSearch As String
+    Private _searchAnywhere As Boolean
+    Private ReadOnly _searchMode As Int16
+    Private ReadOnly _control As Control
     Private _begDateToSearch As Date?
     Private _endDateToSearch As Date?
 
@@ -42,20 +42,19 @@ Public Class CFindForm
 
     Public Property TextToSearch As String
         Get
-            Return _TextToSearch
+            Return _textToSearch
         End Get
         Set
-            _TextToSearch = Value
+            _textToSearch = Value
         End Set
     End Property
 
-
     Public Property SearchAnywhere As Boolean
         Get
-            Return _SearchAnywhere
+            Return _searchAnywhere
         End Get
         Set
-            _SearchAnywhere = Value
+            _searchAnywhere = Value
         End Set
     End Property
 
@@ -74,15 +73,15 @@ Public Class CFindForm
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
         If _searchMode = 1 Then
             ' combobox Search
-            _TextToSearch = cboTextToSearch.SelectedValue
-            _SearchAnywhere = False
+            _textToSearch = cboTextToSearch.SelectedValue
+            _searchAnywhere = False
         ElseIf _searchMode = 0 Then
             ' textbox search
-            _TextToSearch = TxtTextToSearch.Text
+            _textToSearch = TxtTextToSearch.Text
             If RBtnStart.Checked Then
-                _SearchAnywhere = False
+                _searchAnywhere = False
             Else
-                _SearchAnywhere = True
+                _searchAnywhere = True
             End If
         ElseIf _searchMode = 2 Then
             ' date search
@@ -97,25 +96,24 @@ Public Class CFindForm
         Dim pnt As Point
         Dim formLocation As Point
         Dim screenRectangle As Rectangle
-        Dim myForm = FindForm()
         screenRectangle = Screen.PrimaryScreen.WorkingArea
-        Me.StartPosition = FormStartPosition.Manual
-        pnt = System.Windows.Forms.Control.MousePosition
+        StartPosition = FormStartPosition.Manual
+        pnt = MousePosition
         If GlobalVariables.RightToLeftLayout Then
-            formLocation = New Point(pnt.X - Me.Width, pnt.Y + Me.Height)
+            formLocation = New Point(pnt.X - Width, pnt.Y + Height)
             If formLocation.X < 0 Then
                 formLocation.X = pnt.X
             End If
         Else
             formLocation = New Point(pnt.X, pnt.Y)
-            If formLocation.X + Me.Width > screenRectangle.Width Then
-                formLocation.X = pnt.X - Me.Width
+            If formLocation.X + Width > screenRectangle.Width Then
+                formLocation.X = pnt.X - Width
             End If
         End If
-        If formLocation.Y + Me.Height > screenRectangle.Height Then
-            formLocation.Y = pnt.Y - Me.Height
+        If formLocation.Y + Height > screenRectangle.Height Then
+            formLocation.Y = pnt.Y - Height
         End If
-        Me.Location = formLocation
+        Location = formLocation
     End Sub
 
     Private Sub CFindForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -186,14 +184,14 @@ Public Class CFindForm
         End If
     End Sub
 
-    Private Sub dtpBegDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpBegDate.ValueChanged
+    Private Sub dtpBegDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpBegDate.Validated
         If dtpBegDate.Value > dtpEndDate.Value Then
             dtpEndDate.Value = dtpBegDate.Value
         End If
     End Sub
 
-    Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.ValueChanged
-        If dtpEndDate.Value < dtpBegDate.Value Then
+    Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.Validated
+        If dtpEndDate.Value IsNot Nothing AndAlso dtpEndDate.Value < dtpBegDate.Value Then
             dtpBegDate.Value = dtpEndDate.Value
         End If
     End Sub

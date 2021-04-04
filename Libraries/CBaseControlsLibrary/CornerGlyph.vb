@@ -43,16 +43,16 @@ Public Class CornerGlyph
 
         MyBase.New(New CornBehavior(relatedDesigner, whatCorner))
         ' Cache references for convenience.
-        Me.behaviorSvc = behaviorService
-        Me.selectionSvc = selectionService
+        behaviorSvc = behaviorService
+        selectionSvc = selectionService
         Me.relatedDesigner = relatedDesigner
-        Me.CornAdorner = myAdorner
+        CornAdorner = myAdorner
         Me.WhatCorner = whatCorner
 
         ' Cache a reference to the control being designed.
-        Me.relatedControl = CType(Me.relatedDesigner.Component, CButton)
+        relatedControl = CType(Me.relatedDesigner.Component, CButton)
 
-        AddHandler Me.relatedControl.Resize, AddressOf relatedControl_Resize
+        AddHandler relatedControl.Resize, AddressOf relatedControl_Resize
 
     End Sub
 
@@ -61,8 +61,8 @@ Public Class CornerGlyph
                                       ByVal e As EventArgs)
 
         SizeCornerTrack()
-        Me.relatedControl.Refresh()
-        Me.CornAdorner.Invalidate(Bounds)
+        relatedControl.Refresh()
+        CornAdorner.Invalidate(Bounds)
     End Sub
 
 #End Region
@@ -160,11 +160,11 @@ Public Class CornerGlyph
 
     Public Overrides Function GetHitTest(ByVal p As Point) As Cursor
 
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) AndAlso
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) AndAlso
            DirectCast(DirectCast(relatedDesigner, CButtonDesigner).ChooseAdorner.Glyphs(0), ChooseGlyph).chooseWhat = ChooseGlyph.eChooseWhat.Corner Then
 
             Dim box As Rectangle = New Rectangle(CornerTrack.X + GetPos(), CornerTrack.Y, 10, 10)
-            If DirectCast(Me.Behavior, CornBehavior)._dragging Then box.Inflate(10, 10)
+            If DirectCast(Behavior, CornBehavior)._dragging Then box.Inflate(10, 10)
             If box.Contains(p) Then
                 Return Cursors.VSplit
             End If
@@ -176,7 +176,7 @@ Public Class CornerGlyph
 
     Public Overrides Sub Paint(ByVal pe As PaintEventArgs)
 
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) AndAlso
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) AndAlso
            DirectCast(DirectCast(relatedDesigner, CButtonDesigner).ChooseAdorner.Glyphs(0), ChooseGlyph).chooseWhat = ChooseGlyph.eChooseWhat.Corner Then
 
             Using pn As New Pen(Brushes.DarkGray, 1) With {.DashStyle = Drawing2D.DashStyle.Solid}
@@ -225,7 +225,7 @@ Public Class CornerGlyph
 
         Friend Sub New(ByVal relatedDesigner As IDesigner, ByVal whatCorner As eCorner)
             Me.relatedDesigner = relatedDesigner
-            Me.relatedControl = CType(relatedDesigner.Component, CButton)
+            relatedControl = CType(relatedDesigner.Component, CButton)
             Me.whatCorner = whatCorner
         End Sub
 

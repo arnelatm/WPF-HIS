@@ -42,11 +42,11 @@ Public Class CdgvCellText
             If val Or DisplayOnly Then
                 Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                Me.ReadOnly = True
+                [ReadOnly] = True
             Else
                 Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Me.ReadOnly = False
+                [ReadOnly] = False
             End If
         End Set
     End Property

@@ -51,14 +51,14 @@ Public Class EcbComboBoxEditingControl
             If SelectedValue Is Nothing Then
                 Return 0
             Else
-                Return Me.SelectedValue
+                Return SelectedValue
             End If
 
         End Get
         Set(ByVal value As Object)
             Dim newValue As String = TryCast(value, String)
             If Not newValue Is Nothing Then
-                Me.SelectedValue = Integer.Parse(newValue)
+                SelectedValue = Integer.Parse(newValue)
             End If
         End Set
     End Property
@@ -68,9 +68,9 @@ Public Class EcbComboBoxEditingControl
     End Function
 
     Public Sub ApplyCellStyleToEditingControl(ByVal dataGridViewCellStyle As DataGridViewCellStyle) Implements IDataGridViewEditingControl.ApplyCellStyleToEditingControl
-        Me.Font = dataGridViewCellStyle.Font
-        Me.ForeColor = dataGridViewCellStyle.ForeColor
-        Me.BackColor = dataGridViewCellStyle.BackColor
+        Font = dataGridViewCellStyle.Font
+        ForeColor = dataGridViewCellStyle.ForeColor
+        BackColor = dataGridViewCellStyle.BackColor
     End Sub
 
     Public Function EditingControlWantsInputKey(ByVal key As Keys, ByVal dataGridViewWantsInputKey As Boolean) As Boolean Implements IDataGridViewEditingControl.EditingControlWantsInputKey
@@ -134,7 +134,7 @@ Public Class EcbComboBoxEditingControl
 
         '_DataGridView.CurrentRow.Cells(_dataGridView.CurrentCell.ColumnIndex).Value = Me.SelectedValue
         _hasValueChanged = True
-        Me.EditingControlDataGridView.NotifyCurrentCellDirty(True)
+        EditingControlDataGridView.NotifyCurrentCellDirty(True)
         MyBase.OnSelectedValueChanged(eventargs)
     End Sub
 

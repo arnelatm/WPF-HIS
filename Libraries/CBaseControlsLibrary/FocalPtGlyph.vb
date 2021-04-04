@@ -39,14 +39,14 @@ Public Class FocalPtGlyph
 
         MyBase.New(New FocalPtBehavior(relatedDesigner, adjWhat))
         ' Cache references for convenience.
-        Me.behaviorSvc = behaviorService
-        Me.selectionSvc = selectionService
+        behaviorSvc = behaviorService
+        selectionSvc = selectionService
         Me.relatedDesigner = relatedDesigner
-        Me.FocalPtAdorner = myAdorner
+        FocalPtAdorner = myAdorner
         Me.AdjWhat = adjWhat
 
         ' Cache a reference to the control being designed.
-        Me.relatedControl = CType(Me.relatedDesigner.Component, CButton)
+        relatedControl = CType(Me.relatedDesigner.Component, CButton)
 
     End Sub
 
@@ -75,10 +75,10 @@ Public Class FocalPtGlyph
 
     Public Overrides Function GetHitTest(ByVal p As Point) As Cursor
 
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) AndAlso
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) AndAlso
            DirectCast(DirectCast(relatedDesigner, CButtonDesigner).ChooseAdorner.Glyphs(0), ChooseGlyph).chooseWhat = ChooseGlyph.eChooseWhat.FocalPt Then
 
-            If DirectCast(Me.Behavior, FocalPtBehavior)._dragging Then Return Cursors.Cross
+            If DirectCast(Behavior, FocalPtBehavior)._dragging Then Return Cursors.Cross
             If Bounds.Contains(p) Then
                 Return Cursors.Cross
             End If
@@ -90,7 +90,7 @@ Public Class FocalPtGlyph
 
     Public Overrides Sub Paint(ByVal pe As PaintEventArgs)
 
-        If Object.ReferenceEquals(Me.selectionSvc.PrimarySelection, Me.relatedControl) AndAlso
+        If Object.ReferenceEquals(selectionSvc.PrimarySelection, relatedControl) AndAlso
            DirectCast(DirectCast(relatedDesigner, CButtonDesigner).ChooseAdorner.Glyphs(0), ChooseGlyph).chooseWhat = ChooseGlyph.eChooseWhat.FocalPt Then
 
             Dim edge As Point = behaviorSvc.ControlToAdornerWindow(relatedControl)
@@ -143,7 +143,7 @@ Public Class FocalPtGlyph
 
         Friend Sub New(ByVal relatedDesigner As IDesigner, ByVal adjWhat As eAdjWhat)
             Me.relatedDesigner = relatedDesigner
-            Me.relatedControl = CType(relatedDesigner.Component, CButton)
+            relatedControl = CType(relatedDesigner.Component, CButton)
             Me.adjWhat = adjWhat
         End Sub
 

@@ -164,25 +164,25 @@ Public Class CForm
     End Sub
 
     Protected Sub SelectAllText()
-        If Me.ActiveControl.[GetType]() = GetType(TextBox) OrElse Me.ActiveControl.[GetType]() = GetType(CTextBox) Then
-            Dim textBox As TextBox = CType(Me.ActiveControl, TextBox)
+        If ActiveControl.[GetType]() = GetType(TextBox) OrElse ActiveControl.[GetType]() = GetType(CTextBox) Then
+            Dim textBox As TextBox = CType(ActiveControl, TextBox)
             textBox.SelectAll()
         End If
     End Sub
 
     Protected Sub CutText()
-        If Me.ActiveControl.[GetType]() = GetType(TextBox) OrElse Me.ActiveControl.[GetType]() = GetType(CTextBox) Then
-            Dim textBox As TextBox = CType(Me.ActiveControl, TextBox)
+        If ActiveControl.[GetType]() = GetType(TextBox) OrElse ActiveControl.[GetType]() = GetType(CTextBox) Then
+            Dim textBox As TextBox = CType(ActiveControl, TextBox)
             textBox.Cut()
         End If
     End Sub
 
     Protected Sub CopyText()
-        Dim textBox = TryCast(Me.ActiveControl, TextBox)
+        Dim textBox = TryCast(ActiveControl, TextBox)
         If textBox IsNot Nothing Then
             textBox.Copy()
         Else
-            Dim comboBox = TryCast(Me.ActiveControl, ComboBox)
+            Dim comboBox = TryCast(ActiveControl, ComboBox)
             If comboBox IsNot Nothing Then
                 Clipboard.SetText(comboBox.Text)
             End If
@@ -190,8 +190,8 @@ Public Class CForm
     End Sub
 
     Protected Sub PasteText()
-        If ActiveControl.[GetType]() = GetType(TextBox) OrElse Me.ActiveControl.[GetType]() = GetType(CTextBox) Then
-            Dim textBox As TextBox = CType(Me.ActiveControl, TextBox)
+        If ActiveControl.[GetType]() = GetType(TextBox) OrElse ActiveControl.[GetType]() = GetType(CTextBox) Then
+            Dim textBox As TextBox = CType(ActiveControl, TextBox)
             textBox.Paste()
         End If
     End Sub

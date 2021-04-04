@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Forms
+﻿Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
@@ -76,7 +77,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBirthDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpBirthDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.dtpBirthDate = New CCustomDateTimePicker()
             Me.lblMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -126,9 +127,9 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpEmployment = New System.Windows.Forms.TabPage()
             Me.CFlowLayout5 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblHiredDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpHiredDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.dtpHiredDate = New CCustomDateTimePicker()
             Me.lblReleasedDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpReleasedDate = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+            Me.dtpReleasedDate = New CCustomDateTimePicker()
             Me.lblDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -2520,7 +2521,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtEmployeeNameAra As Libraries.CBaseControlsLibrary.CTextBoxArabic
         Friend WithEvents lblGender As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBirthDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpBirthDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpBirthDate As CCustomDateTimePicker
         Friend WithEvents lblMaritalStatus As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacMaritalStatus As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblNationalityCode As Libraries.CBaseControlsLibrary.CLabel
@@ -2564,9 +2565,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblPayCycleIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cboPayCycleidNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblHiredDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpHiredDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpHiredDate As CCustomDateTimePicker
         Friend WithEvents lblReleasedDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpReleasedDate As Libraries.CustomControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpReleasedDate As CCustomDateTimePicker
         Friend WithEvents CFlowLayout6 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents bsEarnings As BindingSource
         Friend WithEvents bsDeductions As BindingSource

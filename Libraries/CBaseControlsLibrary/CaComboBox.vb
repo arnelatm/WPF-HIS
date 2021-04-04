@@ -335,12 +335,12 @@ Public Class CaComboBox
 
 #End Region
 
-#Region "Constant Declarations#"
+#Region "Declarations#"
 
     ' Text Menu Captions
-    Const TextFind = "Find on this field"
+    Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
 
-    Const TextSelectAll = "Select All Text"
+    Private ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
 
 #End Region
 
@@ -620,7 +620,7 @@ Public Class CaComboBox
             SelectedIndex = -1
             returnValue = Nothing
             If value IsNot Nothing Then
-                Me.Text = value
+                Text = value
                 'MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
             End If
         End If
@@ -640,7 +640,7 @@ Public Class CaComboBox
             Next
             If Not found Then
                 If value IsNot Nothing Then
-                    Me.Text = value
+                    Text = value
                     'MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
                 End If
                 SelectedIndex = -1
@@ -657,7 +657,7 @@ Public Class CaComboBox
         _contextMenuStrip1.Items.Clear()
 
         Dim menuItemFind As New ToolStripMenuItem With {
-                .Text = TextFind
+                .Text = _textFind
                 }
         _contextMenuStrip1.Items.Add(menuItemFind)
         menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
@@ -668,7 +668,7 @@ Public Class CaComboBox
         _contextMenuStrip1.Items.Add(separator)
 
         Dim menuItemSelectAll As New ToolStripMenuItem With {
-                .Text = TextSelectAll
+                .Text = _textSelectAll
                 }
         _contextMenuStrip1.Items.Add(menuItemSelectAll)
         menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
@@ -732,9 +732,9 @@ Public Class CaComboBox
     End Sub
 
     Private Sub MenuItemFind_Click()
-        Dim myForm = Me.FindForm()
+        Dim myForm = FindForm()
         Dim SearchForm
-        If Me.SearchField Is Nothing OrElse Me.SearchField = "" Then
+        If SearchField Is Nothing OrElse SearchField = "" Then
             SearchForm = New CFindForm(1, Me)
         Else
             SearchForm = New CFindForm(0)

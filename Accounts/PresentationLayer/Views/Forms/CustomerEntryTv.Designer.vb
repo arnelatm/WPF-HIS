@@ -101,7 +101,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacDiscountSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.dtpDateAccountOpen = New AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker()
+        Me.dtpDateAccountOpen = New CCustomDateTimePicker()
         Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
