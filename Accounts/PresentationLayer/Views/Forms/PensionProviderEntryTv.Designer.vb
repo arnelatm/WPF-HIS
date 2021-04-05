@@ -1,5 +1,4 @@
 ﻿Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.LocalizationUtilities
 Imports AATM.PresentationLayer.Forms
 
@@ -762,7 +761,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.PreviousSelectedIndex = -1
             Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.ReadOnlyCombo = False
-            Me.cacCountryCode.SearchAnywhere = False
+            Me.cacCountryCode.SearchPlace = "1"
             Me.cacCountryCode.SearchField = Nothing
             Me.cacCountryCode.SuggestBoxHeight = 200
             Me.cacCountryCode.SuggestListOrderRule = Nothing
@@ -795,7 +794,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.PreviousSelectedIndex = -1
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.ReadOnlyCombo = False
-            Me.cacBankIdNo.SearchAnywhere = False
+            Me.cacBankIdNo.SearchPlace = "1"
             Me.cacBankIdNo.SearchField = Nothing
             Me.cacBankIdNo.SuggestBoxHeight = 200
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
@@ -829,7 +828,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.PreviousSelectedIndex = -1
             Me.cacPaymentMethod.PropertySelector = Nothing
             Me.cacPaymentMethod.ReadOnlyCombo = False
-            Me.cacPaymentMethod.SearchAnywhere = False
+            Me.cacPaymentMethod.SearchPlace = "1"
             Me.cacPaymentMethod.SearchField = Nothing
             Me.cacPaymentMethod.SuggestBoxHeight = 200
             Me.cacPaymentMethod.SuggestListOrderRule = Nothing

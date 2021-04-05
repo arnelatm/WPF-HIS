@@ -5,7 +5,7 @@ Public Class CDateTimePicker
     Inherits DateTimePicker
     'Private _valueIsNull As Boolean
     'Private _textToSearch As String
-    'Private _searchAnywhere As Boolean
+    'Private _searchPlace As Char
     'Private _minimumDate As Date?
     'Private _lastDate As Date = Today()
     'Private _origCultureStr As String
@@ -124,7 +124,7 @@ End Class
 '    Private _DefaultValue As Object
 '    Private _IsMandatory As Boolean
 '    Private _TextToSearch As String
-'    Private _SearchAnywhere As Boolean
+'    Private _SearchPlace As Char
 '    Private _IsNullable As Boolean
 '    Private _SecurityKey As String
 '    Private _backDisabledColor As Color
@@ -393,7 +393,7 @@ End Class
 '    Private _DefaultValue As Object
 '    Private _IsMandatory As Boolean
 '    Private _TextToSearch As String
-'    Private _SearchAnywhere As Boolean
+'    Private _SearchPlace As Char
 '    Private _IsNullable As Boolean
 '    Private _SecurityKey As String
 '    Private _backDisabledColor As Color
@@ -691,7 +691,7 @@ End Class
 '    Private _DefaultValue As Object
 '    Private _IsMandatory As Boolean
 '    Private _TextToSearch As String
-'    Private _SearchAnywhere As Boolean
+'    Private _SearchPlace As Char
 '    Private _IsNullable As Boolean
 '    Private _SecurityKey As String
 '    Private _backDisabledColor As Color

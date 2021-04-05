@@ -243,7 +243,7 @@ Public Class CDgvCaComboBox
         End Set
     End Property
 
-    Public Property SearchAnywhere As Boolean
+    Public Property SearchPlace As Char
     Public Property OldValue As String
     Public Property CurrentSearchTerm As String = ""
     Public Property ChangingSearchValueOnly As Boolean = False
@@ -653,7 +653,7 @@ Public Class CDgvCaComboBox
         ''SearchForm.Show()
         'SearchForm.ShowDialog()
         '_TextToSearch = SearchForm.TextToSearch
-        '_SearchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
+        '_SearchPlace = SearchForm.GetSearchPlace
         'SearchForm.Dispose()
         'If _TextToSearch <> "" Then
 
@@ -666,8 +666,8 @@ Public Class CDgvCaComboBox
         Return TextToSearch
     End Function
 
-    Public Function GetSearchAnywhere() As Boolean
-        Return SearchAnywhere
+    Public Function GetSearchPlace() As Char
+        Return SearchPlace
     End Function
 
     Private Sub MenuItemSelectAll_Click()

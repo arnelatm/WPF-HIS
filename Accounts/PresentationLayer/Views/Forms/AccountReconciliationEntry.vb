@@ -20,7 +20,7 @@ Namespace PresentationLayer.Views.Forms
         Private _existingFind As Boolean = False
         Private _previousSelectedRow As Int16
         Private _previousTextSearch As String
-        Private _previousSearchAnywhere As Boolean
+        Private _previousSearchPlace As Char
         Private _previousBegDateSearch As Date?
         Private _previousEndDateSearch As Date?
         Private _previousColumnSearch As Int16
@@ -571,20 +571,21 @@ Namespace PresentationLayer.Views.Forms
             searchForm.Location = formLocation
             searchForm.ShowDialog()
             Dim textToSearch As String
-            Dim searchAnywhere As String
+            Dim searchPlace As Char
             If Not _existingFind Then
                 _existingFind = True
             End If
             If nMode = 0 Then
                 textToSearch = searchForm.TextToSearch
-                searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
+                searchPlace = searchForm.GetSearchPlace
                 If textToSearch <> "" Then
                     DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                     Try
                         DataGridViewReconciliationItems.ClearSelection()
                         Dim sw = 0
                         For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                            If searchAnywhere Then
+                            If searchPlace = "A" Then
+                                ' search anywhere
                                 If row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
                                     row.Selected = True
                                     If sw = 0 Then
@@ -594,8 +595,20 @@ Namespace PresentationLayer.Views.Forms
                                         _previousSelectedRow = row.Index()
                                     End If
                                 End If
-                            Else
+                            ElseIf searchPlace = "E" Then
+                                ' exact match
                                 If row.Cells(columnNo).Value.ToString().Equals(textToSearch) Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                        sw = 1
+                                        _previousSelectedRow = row.Index()
+                                    End If
+                                End If
+                            Else
+                                ' start of text
+                                If row.Cells(columnNo).Value.ToString().StartsWith(textToSearch) Then
                                     row.Selected = True
                                     If sw = 0 Then
                                         'scroll and move to the first matching record
@@ -607,7 +620,7 @@ Namespace PresentationLayer.Views.Forms
                             End If
                         Next
                         _previousTextSearch = textToSearch
-                        _previousSearchAnywhere = searchAnywhere
+                        _previousSearchPlace = searchPlace
                     Catch exc As Exception
                         MessageBox.Show(exc.Message)
                     End Try
@@ -682,7 +695,7 @@ Namespace PresentationLayer.Views.Forms
             'searchForm.Location = formLocation
             'searchForm.ShowDialog()
             'Dim textToSearch As String
-            'Dim searchAnywhere As String
+            'Dim searchPlace As Char
             'If Not _existingFind Then
             '    _existingFind = True
             'End If
@@ -692,7 +705,7 @@ Namespace PresentationLayer.Views.Forms
                     DataGridViewReconciliationItems.ClearSelection()
                     Dim sw = 0
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                        If _previousSearchAnywhere Then
+                        If _previousSearchPlace = "A" Then
                             If row.Cells(columnNo).Value.ToString().Contains(_previousTextSearch) Then
                                 row.Selected = True
                                 If sw = 0 And row.Index > _previousSelectedRow Then

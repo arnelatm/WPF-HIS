@@ -1,5 +1,4 @@
 ﻿Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
@@ -619,7 +618,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSupplierIdNo.PreviousSelectedIndex = -1
             Me.cboSupplierIdNo.PropertySelector = Nothing
             Me.cboSupplierIdNo.ReadOnlyCombo = False
-            Me.cboSupplierIdNo.SearchAnywhere = False
+            Me.cboSupplierIdNo.SearchPlace = "1"
             Me.cboSupplierIdNo.SearchField = Nothing
             Me.cboSupplierIdNo.Size = New System.Drawing.Size(579, 24)
             Me.cboSupplierIdNo.SuggestBoxHeight = 200
@@ -671,7 +670,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboTransactionType.PreviousSelectedIndex = 0
             Me.cboTransactionType.PropertySelector = Nothing
             Me.cboTransactionType.ReadOnlyCombo = False
-            Me.cboTransactionType.SearchAnywhere = False
+            Me.cboTransactionType.SearchPlace = "1"
             Me.cboTransactionType.SearchField = Nothing
             Me.cboTransactionType.Size = New System.Drawing.Size(122, 24)
             Me.cboTransactionType.SuggestBoxHeight = 200
@@ -878,7 +877,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSelectedIndex = 0
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
-            Me.cboAccountIdNo.SearchAnywhere = False
+            Me.cboAccountIdNo.SearchPlace = "1"
             Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.Size = New System.Drawing.Size(355, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200

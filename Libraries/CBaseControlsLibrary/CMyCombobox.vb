@@ -18,7 +18,7 @@ Public Class CMyComboBox
     'Private MyErrorProvider As New ErrorProviderExtended
     Private ReadOnly _textToSearch As String
 
-    Private _searchAnywhere As Boolean
+    Private _searchPlace As Char
     Private _isNullable As Boolean
     Private _oldValue As String
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
@@ -362,7 +362,7 @@ Public Class CMyComboBox
         End Set
     End Property
 
-    Private _previousSearchterm As String
+    Private _previousSearchTerm As String
     Private _originalList As Object() = Nothing
     Private _originalDataSource As Object
 
@@ -474,7 +474,7 @@ Public Class CMyComboBox
         ''SearchForm.Show()
         'SearchForm.ShowDialog()
         '_TextToSearch = SearchForm.TextToSearch
-        '_SearchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
+        '_SearchPlace = SearchForm.GetSearchPlace
         'SearchForm.Dispose()
         'If _TextToSearch <> "" Then
 
@@ -487,8 +487,8 @@ Public Class CMyComboBox
         Return _textToSearch
     End Function
 
-    Public Function GetSearchAnywhere() As Boolean
-        Return _searchAnywhere
+    Public Function GetSearchPlace() As Char
+        Return _searchPlace
     End Function
 
     Private Sub MenuItemSelectAll_Click()

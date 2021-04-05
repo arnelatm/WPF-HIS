@@ -18,6 +18,7 @@ Public Class CDgvEcbComboBox
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
 
     Private _editingMode As Boolean = True
+
     'Private _viewable As Boolean
     'Private _selectable As Boolean
     Private _editable As Boolean
@@ -249,7 +250,7 @@ Public Class CDgvEcbComboBox
         End Set
     End Property
 
-    Public Property SearchAnywhere As Boolean
+    Public Property SearchPlace As Char
     Public Property OldValue As String
     Public Property CurrentSearchTerm As String = ""
     Public Property ChangingSearchValueOnly As Boolean = False
@@ -686,7 +687,7 @@ Public Class CDgvEcbComboBox
         ''SearchForm.Show()
         'SearchForm.ShowDialog()
         '_TextToSearch = SearchForm.TextToSearch
-        '_SearchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
+        '_SearchPlace = SearchForm.GetSearchPlace
         'SearchForm.Dispose()
         'If _TextToSearch <> "" Then
 
@@ -699,8 +700,8 @@ Public Class CDgvEcbComboBox
         Return TextToSearch
     End Function
 
-    Public Function GetSearchAnywhere() As Boolean
-        Return SearchAnywhere
+    Public Function GetSearchPlace() As Char
+        Return SearchPlace
     End Function
 
     Private Sub MenuItemSelectAll_Click()

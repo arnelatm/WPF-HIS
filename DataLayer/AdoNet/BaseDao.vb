@@ -59,7 +59,7 @@ Namespace AdoNet
             Return _db.Delete(sql)
         End Function
 
-        Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchAnywhere As Boolean = False, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
+        Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchPlace As Char = "A", Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
             Dim retVal As Integer
             Dim sql As String =
                         " SELECT IdNo FROM [" & tableName & "] " &
@@ -70,12 +70,15 @@ Namespace AdoNet
             If searchString Is Nothing OrElse searchString = "" Then
                 sql = sql & " (" & fieldName & " Is Null or " & fieldName & " = '') "
             Else
-                If searchAnywhere Then
+                If searchPlace = "A" Then
                     searchString = "%" & searchString.Trim() & "%"
                     sql = sql & fieldName & " Like @SearchString "
-                Else
+                ElseIf searchPlace = "S" Then
                     searchString = searchString.Trim() & "%"
                     sql = sql & fieldName & " Like @SearchString "
+                ElseIf searchString = "E" Then
+                    searchString = searchString.Trim()
+                    sql = sql & fieldName & " = @SearchString "
                 End If
             End If
             Dim params() As Object = {"@SearchString", searchString}
@@ -116,7 +119,7 @@ Namespace AdoNet
             Return retVal
         End Function
 
-        'Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchAnywhere As Boolean = False, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
+        'Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchPlace As Char = "A", Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
         '    Dim retVal As Integer
         '    If searchString Is Nothing Or searchString = "" Then
         '        retVal = 0
@@ -127,7 +130,7 @@ Namespace AdoNet
         '        If Not (filter Is Nothing OrElse filter = "") Then
         '            sql = sql & filter.Trim() & " and "
         '        End If
-        '        If searchAnywhere Then
+        '        If searchPlace = "A" Then
         '            searchString = "%" & searchString.Trim() & "%"
         '            sql = sql & fieldName & " Like @SearchString "
         '        Else

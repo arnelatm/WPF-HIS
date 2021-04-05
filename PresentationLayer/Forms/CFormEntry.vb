@@ -6,7 +6,6 @@ Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -85,7 +84,7 @@ Public Class CFormEntry
     Public Sub FindField(cControl As Control)
         Dim fieldName As String = cControl.Name.Substring(3)
         Dim searchString As String
-        Dim searchAnywhere As Boolean
+        Dim searchPlace As Char
         searchString = CallByName(cControl, "GetTextToSearch", CallType.Get)
         If TypeOf cControl Is CaComboBox Then
             Dim caComboboxControl As CaComboBox = cControl
@@ -110,8 +109,8 @@ Public Class CFormEntry
                 Exit Sub
             End If
         End If
-        searchAnywhere = CallByName(cControl, "GetSearchAnywhere", CallType.Get)
-        PresenterObj.FindField(fieldName, searchString, searchAnywhere)
+        searchPlace = CallByName(cControl, "GetSearchPlace", CallType.Get)
+        PresenterObj.FindField(fieldName, searchString, searchPlace)
     End Sub
 
     Public Function GetMainFieldsDictionary()

@@ -364,8 +364,8 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         '
     End Sub
 
-    Public Sub FindField(fieldName As String, searchString As String, searchAnywhere As Boolean, Optional filter As String = Nothing)
-        Dim idNo = Model.FindField(TableName, fieldName, searchString, searchAnywhere, filter)
+    Public Sub FindField(fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing)
+        Dim idNo = Model.FindField(TableName, fieldName, searchString, searchPlace, filter)
         RecordPositionNumber = GetSortedRecordPosition(idNo)
     End Sub
 

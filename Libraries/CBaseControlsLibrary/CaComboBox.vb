@@ -203,7 +203,7 @@ Public Class CaComboBox
         End Set
     End Property
 
-    Public Property SearchAnywhere As Boolean
+    Public Property SearchPlace As Char
 
     '<Category("Custom Properties")>
     '<DefaultValue(False)>
@@ -519,8 +519,8 @@ Public Class CaComboBox
         AddHandler ParentChanged, AddressOf OnParentChanged
     End Sub
 
-    Public Function GetSearchAnywhere() As Boolean
-        Return SearchAnywhere
+    Public Function GetSearchPlace() As Char
+        Return SearchPlace
     End Function
 
     Public Function GetTextToSearch() As String
@@ -750,12 +750,12 @@ Public Class CaComboBox
         End If
     End Sub
 
-    Private Sub FindText(MyForm As Form, SearchForm As Object)
-        _TextToSearch = SearchForm.TextToSearch
-        _SearchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
-        SearchForm.Dispose()
+    Private Sub FindText(myForm As Form, searchForm As Object)
+        _TextToSearch = searchForm.TextToSearch
+        _SearchPlace = searchForm.GetSearchPlace
+        searchForm.Dispose()
         If _TextToSearch <> "" Then
-            CallByName(MyForm, "FindField", CallType.Method, Me)
+            CallByName(myForm, "FindField", CallType.Method, Me)
         End If
     End Sub
 

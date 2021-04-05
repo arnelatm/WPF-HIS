@@ -1,5 +1,4 @@
 ﻿Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
@@ -336,7 +335,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.PreviousSelectedIndex = 0
             Me.cboPayorType.PropertySelector = Nothing
             Me.cboPayorType.ReadOnlyCombo = False
-            Me.cboPayorType.SearchAnywhere = False
+            Me.cboPayorType.SearchPlace = "1"
             Me.cboPayorType.SearchField = Nothing
             Me.cboPayorType.SuggestBoxHeight = 200
             Me.cboPayorType.SuggestListOrderRule = Nothing
@@ -377,7 +376,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorIdNo.PreviousSelectedIndex = -1
             Me.cboPayorIdNo.PropertySelector = Nothing
             Me.cboPayorIdNo.ReadOnlyCombo = False
-            Me.cboPayorIdNo.SearchAnywhere = False
+            Me.cboPayorIdNo.SearchPlace = "1"
             Me.cboPayorIdNo.SearchField = Nothing
             Me.cboPayorIdNo.SuggestBoxHeight = 200
             Me.cboPayorIdNo.SuggestListOrderRule = Nothing
@@ -443,7 +442,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSelectedIndex = 0
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
-            Me.cboAccountIdNo.SearchAnywhere = False
+            Me.cboAccountIdNo.SearchPlace = "1"
             Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
@@ -504,7 +503,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.PreviousSelectedIndex = 0
             Me.cboDiscountAccountIdNo.PropertySelector = Nothing
             Me.cboDiscountAccountIdNo.ReadOnlyCombo = False
-            Me.cboDiscountAccountIdNo.SearchAnywhere = False
+            Me.cboDiscountAccountIdNo.SearchPlace = "1"
             Me.cboDiscountAccountIdNo.SearchField = Nothing
             Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
             Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
