@@ -287,7 +287,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentMethod.PreviousSelectedIndex = -1
             Me.cboPaymentMethod.PropertySelector = Nothing
             Me.cboPaymentMethod.ReadOnlyCombo = False
-            Me.cboPaymentMethod.SearchAnywhere = False
+            Me.cboPaymentMethod.SearchPlace = "1"
             Me.cboPaymentMethod.SearchField = Nothing
             Me.cboPaymentMethod.Size = New System.Drawing.Size(402, 24)
             Me.cboPaymentMethod.SuggestBoxHeight = 200
@@ -340,7 +340,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.PreviousSelectedIndex = -1
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.ReadOnlyCombo = False
-            Me.cacBankIdNo.SearchAnywhere = False
+            Me.cacBankIdNo.SearchPlace = "1"
             Me.cacBankIdNo.SearchField = Nothing
             Me.cacBankIdNo.Size = New System.Drawing.Size(402, 24)
             Me.cacBankIdNo.SuggestBoxHeight = 200
@@ -551,7 +551,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleidNo.PreviousSelectedIndex = -1
             Me.cboPayCycleidNo.PropertySelector = Nothing
             Me.cboPayCycleidNo.ReadOnlyCombo = False
-            Me.cboPayCycleidNo.SearchAnywhere = False
+            Me.cboPayCycleidNo.SearchPlace = "1"
             Me.cboPayCycleidNo.SearchField = Nothing
             Me.cboPayCycleidNo.Size = New System.Drawing.Size(201, 24)
             Me.cboPayCycleidNo.SuggestBoxHeight = 200
@@ -604,7 +604,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayGroupIdNo.PreviousSelectedIndex = -1
             Me.cboPayGroupIdNo.PropertySelector = Nothing
             Me.cboPayGroupIdNo.ReadOnlyCombo = False
-            Me.cboPayGroupIdNo.SearchAnywhere = False
+            Me.cboPayGroupIdNo.SearchPlace = "1"
             Me.cboPayGroupIdNo.SearchField = Nothing
             Me.cboPayGroupIdNo.Size = New System.Drawing.Size(201, 24)
             Me.cboPayGroupIdNo.SuggestBoxHeight = 200
@@ -842,7 +842,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacMaritalStatus.PreviousSelectedIndex = -1
             Me.cacMaritalStatus.PropertySelector = Nothing
             Me.cacMaritalStatus.ReadOnlyCombo = False
-            Me.cacMaritalStatus.SearchAnywhere = False
+            Me.cacMaritalStatus.SearchPlace = "1"
             Me.cacMaritalStatus.SearchField = Nothing
             Me.cacMaritalStatus.Size = New System.Drawing.Size(278, 24)
             Me.cacMaritalStatus.SuggestBoxHeight = 200
@@ -895,7 +895,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacNationalityCode.PreviousSelectedIndex = -1
             Me.cacNationalityCode.PropertySelector = Nothing
             Me.cacNationalityCode.ReadOnlyCombo = False
-            Me.cacNationalityCode.SearchAnywhere = False
+            Me.cacNationalityCode.SearchPlace = "1"
             Me.cacNationalityCode.SearchField = Nothing
             Me.cacNationalityCode.Size = New System.Drawing.Size(279, 24)
             Me.cacNationalityCode.SuggestBoxHeight = 200
@@ -948,7 +948,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacReligionIdNo.PreviousSelectedIndex = -1
             Me.cacReligionIdNo.PropertySelector = Nothing
             Me.cacReligionIdNo.ReadOnlyCombo = False
-            Me.cacReligionIdNo.SearchAnywhere = False
+            Me.cacReligionIdNo.SearchPlace = "1"
             Me.cacReligionIdNo.SearchField = Nothing
             Me.cacReligionIdNo.Size = New System.Drawing.Size(278, 24)
             Me.cacReligionIdNo.SuggestBoxHeight = 200
@@ -1043,7 +1043,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacGender.PreviousSelectedIndex = -1
             Me.cacGender.PropertySelector = Nothing
             Me.cacGender.ReadOnlyCombo = False
-            Me.cacGender.SearchAnywhere = False
+            Me.cacGender.SearchPlace = "1"
             Me.cacGender.SearchField = Nothing
             Me.cacGender.Size = New System.Drawing.Size(124, 24)
             Me.cacGender.SuggestBoxHeight = 200
@@ -1422,7 +1422,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.PreviousSelectedIndex = -1
             Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.ReadOnlyCombo = False
-            Me.cacCountryCode.SearchAnywhere = False
+            Me.cacCountryCode.SearchPlace = "1"
             Me.cacCountryCode.SearchField = Nothing
             Me.cacCountryCode.Size = New System.Drawing.Size(195, 24)
             Me.cacCountryCode.SuggestBoxHeight = 200
@@ -1824,7 +1824,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDepartmentIdNo.PreviousSelectedIndex = -1
             Me.cacDepartmentIdNo.PropertySelector = Nothing
             Me.cacDepartmentIdNo.ReadOnlyCombo = False
-            Me.cacDepartmentIdNo.SearchAnywhere = False
+            Me.cacDepartmentIdNo.SearchPlace = "1"
             Me.cacDepartmentIdNo.SearchField = Nothing
             Me.cacDepartmentIdNo.Size = New System.Drawing.Size(279, 24)
             Me.cacDepartmentIdNo.SuggestBoxHeight = 200
@@ -1877,7 +1877,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDesignationIdNo.PreviousSelectedIndex = -1
             Me.cacDesignationIdNo.PropertySelector = Nothing
             Me.cacDesignationIdNo.ReadOnlyCombo = False
-            Me.cacDesignationIdNo.SearchAnywhere = False
+            Me.cacDesignationIdNo.SearchPlace = "1"
             Me.cacDesignationIdNo.SearchField = Nothing
             Me.cacDesignationIdNo.Size = New System.Drawing.Size(223, 24)
             Me.cacDesignationIdNo.SuggestBoxHeight = 200

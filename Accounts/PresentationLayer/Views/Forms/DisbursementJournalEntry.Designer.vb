@@ -1,5 +1,4 @@
 ﻿Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
@@ -258,7 +257,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.PreviousSelectedIndex = 0
             Me.cboPayType.PropertySelector = Nothing
             Me.cboPayType.ReadOnlyCombo = False
-            Me.cboPayType.SearchAnywhere = False
+            Me.cboPayType.SearchPlace = "1"
             Me.cboPayType.SearchField = Nothing
             Me.cboPayType.Size = New System.Drawing.Size(224, 24)
             Me.cboPayType.SuggestBoxHeight = 200
@@ -588,7 +587,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSelectedIndex = 0
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
-            Me.cboAccountIdNo.SearchAnywhere = False
+            Me.cboAccountIdNo.SearchPlace = "1"
             Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.Size = New System.Drawing.Size(499, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
@@ -684,7 +683,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.PreviousSelectedIndex = 0
             Me.cboDiscountAccountIdNo.PropertySelector = Nothing
             Me.cboDiscountAccountIdNo.ReadOnlyCombo = False
-            Me.cboDiscountAccountIdNo.SearchAnywhere = False
+            Me.cboDiscountAccountIdNo.SearchPlace = "1"
             Me.cboDiscountAccountIdNo.SearchField = Nothing
             Me.cboDiscountAccountIdNo.Size = New System.Drawing.Size(499, 24)
             Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
@@ -1319,7 +1318,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.PreviousSelectedIndex = 0
             Me.cboPaymentType.PropertySelector = Nothing
             Me.cboPaymentType.ReadOnlyCombo = False
-            Me.cboPaymentType.SearchAnywhere = False
+            Me.cboPaymentType.SearchPlace = "1"
             Me.cboPaymentType.SearchField = Nothing
             Me.cboPaymentType.Size = New System.Drawing.Size(376, 24)
             Me.cboPaymentType.SuggestBoxHeight = 200
@@ -1424,7 +1423,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.PreviousSelectedIndex = -1
             Me.cboPayeeIdNo.PropertySelector = Nothing
             Me.cboPayeeIdNo.ReadOnlyCombo = False
-            Me.cboPayeeIdNo.SearchAnywhere = False
+            Me.cboPayeeIdNo.SearchPlace = "1"
             Me.cboPayeeIdNo.SearchField = Nothing
             Me.cboPayeeIdNo.Size = New System.Drawing.Size(725, 24)
             Me.cboPayeeIdNo.SuggestBoxHeight = 200

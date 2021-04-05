@@ -2,7 +2,6 @@
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms

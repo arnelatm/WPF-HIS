@@ -268,7 +268,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.PreviousSelectedIndex = -1
             Me.cboParentIdNo.PropertySelector = Nothing
             Me.cboParentIdNo.ReadOnlyCombo = False
-            Me.cboParentIdNo.SearchAnywhere = False
+            Me.cboParentIdNo.SearchPlace = "1"
             Me.cboParentIdNo.SearchField = Nothing
             Me.cboParentIdNo.SuggestBoxHeight = 200
             Me.cboParentIdNo.SuggestListOrderRule = Nothing
@@ -339,7 +339,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountGroup.PreviousSelectedIndex = -1
             Me.cboAccountGroup.PropertySelector = Nothing
             Me.cboAccountGroup.ReadOnlyCombo = False
-            Me.cboAccountGroup.SearchAnywhere = False
+            Me.cboAccountGroup.SearchPlace = "1"
             Me.cboAccountGroup.SearchField = Nothing
             Me.cboAccountGroup.SuggestBoxHeight = 200
             Me.cboAccountGroup.SuggestListOrderRule = Nothing
@@ -380,7 +380,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSpecialAccount.PreviousSelectedIndex = -1
             Me.cboSpecialAccount.PropertySelector = Nothing
             Me.cboSpecialAccount.ReadOnlyCombo = False
-            Me.cboSpecialAccount.SearchAnywhere = False
+            Me.cboSpecialAccount.SearchPlace = "1"
             Me.cboSpecialAccount.SearchField = Nothing
             Me.cboSpecialAccount.SuggestBoxHeight = 200
             Me.cboSpecialAccount.SuggestListOrderRule = Nothing
@@ -487,7 +487,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNormalBalance.PreviousSelectedIndex = -1
             Me.cboNormalBalance.PropertySelector = Nothing
             Me.cboNormalBalance.ReadOnlyCombo = False
-            Me.cboNormalBalance.SearchAnywhere = False
+            Me.cboNormalBalance.SearchPlace = "1"
             Me.cboNormalBalance.SearchField = Nothing
             Me.cboNormalBalance.SuggestBoxHeight = 200
             Me.cboNormalBalance.SuggestListOrderRule = Nothing
@@ -528,7 +528,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeType.PreviousSelectedIndex = -1
             Me.cboPayeeType.PropertySelector = Nothing
             Me.cboPayeeType.ReadOnlyCombo = False
-            Me.cboPayeeType.SearchAnywhere = False
+            Me.cboPayeeType.SearchPlace = "1"
             Me.cboPayeeType.SearchField = Nothing
             Me.cboPayeeType.SuggestBoxHeight = 200
             Me.cboPayeeType.SuggestListOrderRule = Nothing

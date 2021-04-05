@@ -12,7 +12,7 @@ Public Class CMaskedTextBox
     Private _textToSearch As String
     Private _begDateToSearch As Date?
     Private _endDateToSearch As Date?
-    Private _searchAnywhere As Boolean
+    Private _searchPlace As Char
     Private _oldValue As String
     Private _editsAllowed As Boolean = False
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
@@ -318,7 +318,7 @@ Public Class CMaskedTextBox
             searchForm.Dispose()
         Else
             searchForm = New CFindForm(0)
-            _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
+            _searchPlace = searchForm.GetSearchPlace
             If _textToSearch <> "" Then
                 CallByName(MyForm, "FindField", CallType.Method, Me)
                 searchForm.Dispose()
@@ -338,8 +338,8 @@ Public Class CMaskedTextBox
         Return _endDateToSearch
     End Function
 
-    Public Function GetSearchAnywhere() As Boolean
-        Return _searchAnywhere
+    Public Function GetSearchPlace() As Char
+        Return _searchPlace
     End Function
 
     Private Sub MenuItemCut_Click()

@@ -47,8 +47,8 @@ Public Class Model
         Return DataService.DelUpdateTvp(dtTable, groupKey)
     End Function
 
-    Public Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean, Optional filter As String = Nothing) As Integer Implements IModel.FindField
-        Return Service.FindField(tableName, fieldName, searchString, searchAnywhere, filter)
+    Public Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer Implements IModel.FindField
+        Return Service.FindField(tableName, fieldName, searchString, searchPlace, filter)
     End Function
 
     Public Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer Implements IModel.FindDateField

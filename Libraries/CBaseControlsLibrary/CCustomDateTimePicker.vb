@@ -21,7 +21,7 @@ Public Class CCustomDateTimePicker
     Private _dtpDefaultValue As DateTime? = Nothing
     Private _isMandatory As Boolean
     Private _textToSearch As String
-    Private _searchAnywhere As Boolean
+    Private _searchPlace As Char
     Private _securityKey As String
     Private _minimumDate As DateTime?
     Private _lastDate As DateTime? = Today()
@@ -732,7 +732,7 @@ Public Class CCustomDateTimePicker
     '    searchForm.Location = formLocation
     '    searchForm.ShowDialog()
     '    _textToSearch = searchForm.TextToSearch
-    '    _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
+    '    _searchPlace = Convert.ToBoolean(searchForm.GetSearchPlace)
     '    searchForm.Dispose()
     '    If _textToSearch <> "" Then
 

@@ -6,7 +6,7 @@ Public Class CFindForm
     Inherits CForm
 
     Private _textToSearch As String
-    Private _searchAnywhere As Boolean
+    Private _searchPlace As Char
     Private ReadOnly _searchMode As Int16
     Private ReadOnly _control As Control
     Private _begDateToSearch As Date?
@@ -49,12 +49,12 @@ Public Class CFindForm
         End Set
     End Property
 
-    Public Property SearchAnywhere As Boolean
+    Public Property SearchPlace As Char
         Get
-            Return _searchAnywhere
+            Return _searchPlace
         End Get
         Set
-            _searchAnywhere = Value
+            _searchPlace = Value
         End Set
     End Property
 
@@ -66,28 +66,34 @@ Public Class CFindForm
         Return TextToSearch
     End Function
 
-    Public Function GetSearchAnywhere() As String
-        Return SearchAnywhere
+    Public Function GetSearchPlace() As String
+        Return SearchPlace
     End Function
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
         If _searchMode = 1 Then
             ' combobox Search
             _textToSearch = cboTextToSearch.SelectedValue
-            _searchAnywhere = False
+            _searchPlace = "E"
         ElseIf _searchMode = 0 Then
             ' textbox search
             _textToSearch = TxtTextToSearch.Text
             If RBtnStart.Checked Then
-                _searchAnywhere = False
+                _searchPlace = "S"
+            ElseIf RBtnExactMatch.Checked Then
+                _searchPlace = "E"
             Else
-                _searchAnywhere = True
+                _searchPlace = "A"
             End If
         ElseIf _searchMode = 2 Then
             ' date search
             _begDateToSearch = dtpBegDate.Value
             _endDateToSearch = dtpEndDate.Value
-            SearchAnywhere = False
+            SearchPlace = "E"
+        ElseIf _searchMode = 3 Then
+            ' date search
+            SearchPlace = "E"
+            _textToSearch = IIf(chkChecked.Checked, "0", "1")
         End If
         Close()
     End Sub
@@ -128,6 +134,7 @@ Public Class CFindForm
             cboTextToSearch.Visible = True
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
+            RBtnExactMatch.Visible = False
             Dim myComboBox As CaComboBox = _control
             cboTextToSearch.DataSource = myComboBox.DataSource
             cboTextToSearch.DisplayMember = myComboBox.DisplayMember
@@ -147,11 +154,12 @@ Public Class CFindForm
             cboTextToSearch.Visible = False
             RBtnAnywhere.Visible = True
             RBtnStart.Visible = True
+            RBtnExactMatch.Visible = True
             dtpBegDate.Visible = False
             dtpEndDate.Visible = False
             lblTo.Visible = False
             chkChecked.Visible = False
-            Height = 200
+            Height = 220
         ElseIf _searchMode = 2 Then
             ' date search
             dtpBegDate.Visible = True
@@ -162,6 +170,7 @@ Public Class CFindForm
             lblLookFor4.Visible = False
             TxtTextToSearch.Visible = False
             cboTextToSearch.Visible = False
+            RBtnExactMatch.Visible = False
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
             lblTo.Visible = True
@@ -177,6 +186,7 @@ Public Class CFindForm
             lblLookFor3.Visible = False
             TxtTextToSearch.Visible = False
             cboTextToSearch.Visible = False
+            RBtnExactMatch.Visible = False
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
             lblTo.Visible = False

@@ -18,7 +18,7 @@ Public Class CDtpGregorianDate
     Private _DtpDefaultValue As Date? = Nothing
     Private _IsMandatory As Boolean
     Private _TextToSearch As String
-    Private _SearchAnywhere As Boolean
+    Private _SearchPlace As Char
     Private _SecurityKey As String
     Private _MinimumDate As Date?
     Private LastDate As Date? = Today()

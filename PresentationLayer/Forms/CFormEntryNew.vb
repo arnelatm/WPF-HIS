@@ -6,7 +6,6 @@ Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -86,10 +85,10 @@ Public Class CFormEntryNew
     Public Sub FindField(txtControl As Control)
         Dim fieldName As String = txtControl.Name.Substring(3)
         Dim searchString As String
-        Dim searchAnywhere As Boolean
+        Dim searchPlace As Char
         searchString = CallByName(txtControl, "GetTextToSearch", CallType.Get)
-        searchAnywhere = CallByName(txtControl, "GetSearchAnywhere", CallType.Get)
-        PresenterObj.FindField(fieldName, searchString, searchAnywhere)
+        searchPlace = CallByName(txtControl, "GetSearchPlace", CallType.Get)
+        PresenterObj.FindField(fieldName, searchString, searchPlace)
     End Sub
 
     Public Function GetMainFieldsDictionary()

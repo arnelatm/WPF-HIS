@@ -384,8 +384,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         '
     End Sub
 
-    Public Sub FindField(fieldName As String, searchString As String, searchAnywhere As String)
-        Dim idNo = Model.FindField(TableName, fieldName, searchString, searchAnywhere, DataFilter)
+    Public Sub FindField(fieldName As String, searchString As String, searchPlace As Char)
+        Dim idNo = Model.FindField(TableName, fieldName, searchString, searchPlace, DataFilter)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else
@@ -402,8 +402,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
-    Public Function FindFieldOnTable(tableNameToSearch, fieldName, searchString, searchAnywhere)
-        Dim idNo = Model.FindField(tableNameToSearch, fieldName, searchString, searchAnywhere, DataFilter)
+    Public Function FindFieldOnTable(tableNameToSearch, fieldName, searchString, searchPlace)
+        Dim idNo = Model.FindField(tableNameToSearch, fieldName, searchString, searchPlace, DataFilter)
         Return idNo
     End Function
 

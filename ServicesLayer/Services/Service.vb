@@ -231,8 +231,8 @@ Namespace Services
             Return BaseDao.DeleteRecord(idNo, tableName)
         End Function
 
-        Public Function FindField(tableName As String, fieldName As String, searchString As String, searchAnywhere As Boolean, Optional filter As String = Nothing) As Integer Implements IService.FindField
-            Return BaseDao.FindField(tableName, fieldName, searchString, searchAnywhere, filter)
+        Public Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer Implements IService.FindField
+            Return BaseDao.FindField(tableName, fieldName, searchString, searchPlace, filter)
         End Function
 
         Public Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer Implements IService.FindDateField

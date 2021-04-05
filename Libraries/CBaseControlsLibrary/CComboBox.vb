@@ -16,7 +16,7 @@ Public Class CComboBox
     'Private MyErrorProvider As New ErrorProviderExtended
     Private ReadOnly _textToSearch As String
 
-    Private _searchAnywhere As Boolean
+    Private _searchPlace As Char
     Private _isNullable As Boolean
     Private _oldValue As Integer
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
@@ -40,7 +40,7 @@ Public Class CComboBox
 
         DropDownStyle = ComboBoxStyle.DropDown
         AutoCompleteMode = AutoCompleteMode.Suggest
-        
+
     End Sub
 
     <Bindable(True)>
@@ -265,13 +265,13 @@ Public Class CComboBox
 
     Private Sub MenuItemFind_Click()
         'Dim MyForm = Me.FindForm()
-        'Dim SearchForm = New CFindForm
+        'Dim SearchForm = New CFindForm(1, Me)
         ''SearchForm.Show()
         'SearchForm.ShowDialog()
-        '_TextToSearch = SearchForm.TextToSearch
-        '_SearchAnywhere = Convert.ToBoolean(SearchForm.GetSearchAnywhere)
+        '_textToSearch = SearchForm.TextToSearch
+        '_searchPlace = SearchForm.GetSearchPlace
         'SearchForm.Dispose()
-        'If _TextToSearch <> "" Then
+        'If _textToSearch <> "" Then
 
         '    CallByName(MyForm, "FindField", CallType.Method, Me)
 
@@ -282,8 +282,8 @@ Public Class CComboBox
         Return _textToSearch
     End Function
 
-    Public Function GetSearchAnywhere() As Boolean
-        Return _searchAnywhere
+    Public Function GetSearchAnywhere() As Char
+        Return _searchPlace
     End Function
 
     Private Sub MenuItemSelectAll_Click()

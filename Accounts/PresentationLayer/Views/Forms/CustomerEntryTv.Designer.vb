@@ -1,5 +1,4 @@
 ﻿Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CustomControlsLibrary
 Imports AATM.Libraries.LocalizationUtilities
 Imports AATM.PresentationLayer.Forms
 
@@ -1012,7 +1011,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.PreviousSelectedIndex = -1
             Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.ReadOnlyCombo = False
-            Me.cacCountryCode.SearchAnywhere = False
+            Me.cacCountryCode.SearchPlace = "1"
             Me.cacCountryCode.SearchField = Nothing
             Me.cacCountryCode.SecurityKey = ""
             Me.cacCountryCode.SuggestBoxHeight = 200
@@ -1047,7 +1046,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.PreviousSelectedIndex = -1
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.ReadOnlyCombo = False
-            Me.cacBankIdNo.SearchAnywhere = False
+            Me.cacBankIdNo.SearchPlace = "1"
             Me.cacBankIdNo.SearchField = Nothing
             Me.cacBankIdNo.SuggestBoxHeight = 200
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
@@ -1080,7 +1079,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevAccountIdNo.PreviousSelectedIndex = -1
             Me.cacRevAccountIdNo.PropertySelector = Nothing
             Me.cacRevAccountIdNo.ReadOnlyCombo = False
-            Me.cacRevAccountIdNo.SearchAnywhere = False
+            Me.cacRevAccountIdNo.SearchPlace = "1"
             Me.cacRevAccountIdNo.SearchField = Nothing
             Me.cacRevAccountIdNo.SuggestBoxHeight = 200
             Me.cacRevAccountIdNo.SuggestListOrderRule = Nothing
@@ -1113,7 +1112,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacArAccountIdNo.PreviousSelectedIndex = -1
             Me.cacArAccountIdNo.PropertySelector = Nothing
             Me.cacArAccountIdNo.ReadOnlyCombo = False
-            Me.cacArAccountIdNo.SearchAnywhere = False
+            Me.cacArAccountIdNo.SearchPlace = "1"
             Me.cacArAccountIdNo.SearchField = Nothing
             Me.cacArAccountIdNo.SuggestBoxHeight = 200
             Me.cacArAccountIdNo.SuggestListOrderRule = Nothing
@@ -1146,7 +1145,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.PreviousSelectedIndex = -1
             Me.cacPaymentMethod.PropertySelector = Nothing
             Me.cacPaymentMethod.ReadOnlyCombo = False
-            Me.cacPaymentMethod.SearchAnywhere = False
+            Me.cacPaymentMethod.SearchPlace = "1"
             Me.cacPaymentMethod.SearchField = Nothing
             Me.cacPaymentMethod.SuggestBoxHeight = 200
             Me.cacPaymentMethod.SuggestListOrderRule = Nothing
@@ -1186,7 +1185,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDiscountSchemeIdNo.PreviousSelectedIndex = -1
             Me.cacDiscountSchemeIdNo.PropertySelector = Nothing
             Me.cacDiscountSchemeIdNo.ReadOnlyCombo = False
-            Me.cacDiscountSchemeIdNo.SearchAnywhere = False
+            Me.cacDiscountSchemeIdNo.SearchPlace = "1"
             Me.cacDiscountSchemeIdNo.SearchField = Nothing
             Me.cacDiscountSchemeIdNo.SuggestBoxHeight = 200
             Me.cacDiscountSchemeIdNo.SuggestListOrderRule = Nothing
@@ -1241,7 +1240,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.PreviousSelectedIndex = -1
             Me.cacAccountStatus.PropertySelector = Nothing
             Me.cacAccountStatus.ReadOnlyCombo = False
-            Me.cacAccountStatus.SearchAnywhere = False
+            Me.cacAccountStatus.SearchPlace = "1"
             Me.cacAccountStatus.SearchField = Nothing
             Me.cacAccountStatus.SuggestBoxHeight = 200
             Me.cacAccountStatus.SuggestListOrderRule = Nothing

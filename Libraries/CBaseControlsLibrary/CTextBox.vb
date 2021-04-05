@@ -10,7 +10,7 @@ Public Class CTextBox
 
     Private _defaultVal As String
     Private _textToSearch As String
-    Private _searchAnywhere As Boolean
+    Private _searchPlace As Char
     Private _oldValue As String
     Private _editingMode As Boolean = True
 
@@ -410,7 +410,7 @@ Public Class CTextBox
             searchForm.Location = formLocation
             searchForm.ShowDialog()
             _textToSearch = searchForm.TextToSearch
-            _searchAnywhere = Convert.ToBoolean(searchForm.GetSearchAnywhere)
+            _searchPlace = searchForm.GetSearchPlace
             searchForm.Dispose()
             CallByName(myForm, "FindField", CallType.Method, Me)
         Else
@@ -422,8 +422,8 @@ Public Class CTextBox
         Return _textToSearch
     End Function
 
-    Public Function GetSearchAnywhere() As Boolean
-        Return _searchAnywhere
+    Public Function GetSearchPlace() As Char
+        Return _searchPlace
     End Function
 
     Private Sub MenuItemCut_Click()
