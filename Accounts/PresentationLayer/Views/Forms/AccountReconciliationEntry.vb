@@ -640,7 +640,7 @@ Namespace PresentationLayer.Views.Forms
                     Else
                         dBDate = Convert.ToDateTime(dBegDate)
                         dEDate = Convert.ToDateTime(dEndDate)
-                        dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
+                        'dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
                         'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
                     End If
                 End If
@@ -650,13 +650,23 @@ Namespace PresentationLayer.Views.Forms
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
                         Dim colDate As Date = row.Cells(columnNo).Value
                         Dim sw As Int16 = 0
-                        If colDate.ToString("yyyyMMdd") >= dBDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEDate.ToString("yyyyMMdd") Then
-                            row.Selected = True
-                            If sw = 0 Then
-                                'scroll and move to the first matching record
-                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                sw = 1
+                        If DateIsBetween(colDate, dBDate, dEDate) Then
+                            If DateIsBetween(colDate, dBegDate, dEndDate) Then
+                                row.Selected = True
+                                If sw = 0 Then
+                                    'scroll and move to the first matching record
+                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                    _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                    sw = 1
+                                End If
+                                'If colDate.ToString("yyyyMMdd") >= dBDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEDate.ToString("yyyyMMdd") Then
+                                'row.Selected = True
+                                'If sw = 0 Then
+                                '    'scroll and move to the first matching record
+                                '    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                '    _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                '    sw = 1
+                                'End If
                             End If
                         End If
                     Next
@@ -736,13 +746,12 @@ Namespace PresentationLayer.Views.Forms
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 Try
                     DataGridViewReconciliationItems.ClearSelection()
+                    Dim sw As Int16 = 0
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
                         Dim colDate As Date = row.Cells(columnNo).Value
-                        Dim sw As Int16 = 0
-                        If colDate.ToString("yyyyMMdd") >= dBegDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEndDate.ToString("yyyyMMdd") Then
+                        If DateIsBetween(colDate, dBegDate, dEndDate) Then
                             row.Selected = True
                             If sw = 0 And row.Index > _previousSelectedRow Then
-                                'scroll and move to the first matching record
                                 DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
                                 sw = 1
                                 _previousSelectedRow = row.Index
@@ -755,6 +764,49 @@ Namespace PresentationLayer.Views.Forms
             End If
 
         End Sub
+
+        Private Function DateIsBetween(dateToCheck As Object, begDate As Object, endDate As Object)
+            If Not (TypeOf dateToCheck Is Date Or TypeOf dateToCheck Is Date?) And (TypeOf begDate Is Date Or TypeOf begDate Is Date?) And (TypeOf endDate Is Date Or TypeOf endDate Is Date?) Then
+                MessageBox.Show("One of the passed date is not a valid date type.")
+                Debugger.Break()
+                Return False
+            End If
+            If TypeOf dateToCheck Is Date And TypeOf begDate Is Date And TypeOf endDate Is Date Then
+                Dim dC As Date = dateToCheck
+                Dim dB As Date = begDate
+                Dim dE As Date = endDate
+                If dC.ToString("yyyyMMdd") >= dB.ToString("yyyyMMdd") And dC.ToString("yyyyMMdd") <= dE.ToString("yyyyMMdd") Then
+                    Return True
+                Else
+                    Return False
+                End If
+            ElseIf TypeOf dateToCheck Is Date? And TypeOf begDate Is Date? And TypeOf endDate Is Date? Then
+                If dateToCheck Is Nothing And begDate Is Nothing And endDate Is Nothing Then
+                    Return True
+                End If
+                If dateToCheck Is Nothing Then
+                    If begDate IsNot Nothing And endDate IsNot Nothing Then
+                        Return False
+                    Else
+                        Return True
+                    End If
+                Else
+                    If begDate Is Nothing Or endDate Is Nothing Then
+                        Return True
+                    Else
+                        Dim dDateToCheck As Date = dateToCheck
+                        Dim dEndDate As Date = endDate
+                        Dim dBegDate As Date = begDate
+                        If dDateToCheck.ToString("yyyyMMdd") >= dBegDate.ToString("yyyyMMdd") And dDateToCheck.ToString("yyyyMMdd") <= dEndDate.ToString("yyyyMMdd") Then
+                            Return True
+                        Else
+                            Return False
+                        End If
+                    End If
+                End If
+            End If
+            Return False
+        End Function
 
         Private Sub dtpReconciliationDate_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles dtpReconciliationDate.Validating
             If dtpReconciliationDate.DateChanged() Then

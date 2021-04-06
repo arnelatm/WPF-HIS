@@ -175,7 +175,7 @@ Public Class CFindForm
             RBtnStart.Visible = False
             lblTo.Visible = True
             chkChecked.Visible = False
-            Height = 125
+            Height = 135
         ElseIf _searchMode = 3 Then
             lblLookFor4.Visible = True
             chkChecked.Visible = True
