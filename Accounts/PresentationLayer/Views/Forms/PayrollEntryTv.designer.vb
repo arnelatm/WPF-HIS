@@ -413,7 +413,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.PreviousSelectedIndex = -1
             Me.cboPayCycleIdNo.PropertySelector = Nothing
             Me.cboPayCycleIdNo.ReadOnlyCombo = False
-            Me.cboPayCycleIdNo.SearchPlace = "1"
+            Me.cboPayCycleIdNo.SearchPlace = "A"
             Me.cboPayCycleIdNo.SearchField = Nothing
             Me.cboPayCycleIdNo.Size = New System.Drawing.Size(579, 24)
             Me.cboPayCycleIdNo.SuggestBoxHeight = 200

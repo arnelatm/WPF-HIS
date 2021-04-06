@@ -281,9 +281,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.PreviousSearchTerm = Nothing
         Me.cboAccountIdNo.PreviousSelectedIndex = 0
         Me.cboAccountIdNo.PropertySelector = Nothing
-        Me.cboAccountIdNo.ReadOnlyCombo = false
-        Me.cboAccountIdNo.SearchPlace = "1"
-        Me.cboAccountIdNo.SuggestBoxHeight = 200
+        Me.cboAccountIdNo.ReadOnlyCombo = False
+            Me.cboAccountIdNo.SearchPlace = "A"
+            Me.cboAccountIdNo.SuggestBoxHeight = 200
         Me.cboAccountIdNo.SuggestListOrderRule = Nothing
         Me.cboAccountIdNo.TextToSearch = Nothing
         Me.cboAccountIdNo.ValueIsMandatory = false

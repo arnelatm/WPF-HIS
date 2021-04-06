@@ -175,7 +175,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboStartAccountCode.PreviousSelectedIndex = -1
             Me.cboStartAccountCode.PropertySelector = Nothing
             Me.cboStartAccountCode.ReadOnlyCombo = False
-            Me.cboStartAccountCode.SearchPlace = "1"
+            Me.cboStartAccountCode.SearchPlace = "A"
             Me.cboStartAccountCode.Size = New System.Drawing.Size(520, 24)
             Me.cboStartAccountCode.SuggestBoxHeight = 200
             Me.cboStartAccountCode.SuggestListOrderRule = Nothing
@@ -227,7 +227,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboEndAccountCode.PreviousSelectedIndex = -1
             Me.cboEndAccountCode.PropertySelector = Nothing
             Me.cboEndAccountCode.ReadOnlyCombo = False
-            Me.cboEndAccountCode.SearchPlace = "1"
+            Me.cboEndAccountCode.SearchPlace = "A"
             Me.cboEndAccountCode.Size = New System.Drawing.Size(520, 24)
             Me.cboEndAccountCode.SuggestBoxHeight = 200
             Me.cboEndAccountCode.SuggestListOrderRule = Nothing

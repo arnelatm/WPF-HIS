@@ -232,7 +232,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.PreviousSelectedIndex = -1
             Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.ReadOnlyCombo = False
-            Me.cacParentIdNo.SearchPlace = "1"
+            Me.cacParentIdNo.SearchPlace = "A"
             Me.cacParentIdNo.SearchField = Nothing
             Me.cacParentIdNo.SuggestBoxHeight = 200
             Me.cacParentIdNo.SuggestListOrderRule = Nothing

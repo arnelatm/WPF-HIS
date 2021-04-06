@@ -217,7 +217,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.PreviousSelectedIndex = -1
             Me.cboPayeeIdNo.PropertySelector = Nothing
             Me.cboPayeeIdNo.ReadOnlyCombo = False
-            Me.cboPayeeIdNo.SearchPlace = "1"
+            Me.cboPayeeIdNo.SearchPlace = "A"
             Me.cboPayeeIdNo.Size = New System.Drawing.Size(553, 24)
             Me.cboPayeeIdNo.SuggestBoxHeight = 200
             Me.cboPayeeIdNo.SuggestListOrderRule = Nothing
@@ -285,7 +285,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.PreviousSelectedIndex = 0
             Me.cboPaymentType.PropertySelector = Nothing
             Me.cboPaymentType.ReadOnlyCombo = False
-            Me.cboPaymentType.SearchPlace = "1"
+            Me.cboPaymentType.SearchPlace = "A"
             Me.cboPaymentType.Size = New System.Drawing.Size(193, 24)
             Me.cboPaymentType.SuggestBoxHeight = 200
             Me.cboPaymentType.SuggestListOrderRule = Nothing
