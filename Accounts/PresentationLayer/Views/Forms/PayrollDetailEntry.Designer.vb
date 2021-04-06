@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
             Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpStartDate = New CCustomDateTimePicker()
+            Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayPeriodName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -59,7 +59,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtTotalEarnings = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpEndDate = New CCustomDateTimePicker()
+            Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.txtTotalDeductions = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNetPay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -514,7 +514,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayPeriodName.DataBoundControl = True
             Me.txtPayPeriodName.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtPayPeriodName.EditingMode = True
-            Me.txtPayPeriodName.FindEnabled = True
+            Me.txtPayPeriodName.FindEnabled = False
             Me.txtPayPeriodName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayPeriodName.ForeColor = System.Drawing.Color.Black
             Me.txtPayPeriodName.LinkedLabel = Nothing
@@ -727,8 +727,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.PreviousSelectedIndex = -1
             Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.ReadOnlyCombo = False
-            Me.cboEmployeeIdNo.SearchPlace = "A"
             Me.cboEmployeeIdNo.SearchField = "EmployeeName"
+            Me.cboEmployeeIdNo.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cboEmployeeIdNo.Size = New System.Drawing.Size(524, 24)
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
