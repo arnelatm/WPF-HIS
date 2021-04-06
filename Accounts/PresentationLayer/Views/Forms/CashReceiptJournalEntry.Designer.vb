@@ -335,7 +335,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.PreviousSelectedIndex = 0
             Me.cboPayorType.PropertySelector = Nothing
             Me.cboPayorType.ReadOnlyCombo = False
-            Me.cboPayorType.SearchPlace = "1"
+            Me.cboPayorType.SearchPlace = "A"
             Me.cboPayorType.SearchField = Nothing
             Me.cboPayorType.SuggestBoxHeight = 200
             Me.cboPayorType.SuggestListOrderRule = Nothing
@@ -376,7 +376,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorIdNo.PreviousSelectedIndex = -1
             Me.cboPayorIdNo.PropertySelector = Nothing
             Me.cboPayorIdNo.ReadOnlyCombo = False
-            Me.cboPayorIdNo.SearchPlace = "1"
+            Me.cboPayorIdNo.SearchPlace = "A"
             Me.cboPayorIdNo.SearchField = Nothing
             Me.cboPayorIdNo.SuggestBoxHeight = 200
             Me.cboPayorIdNo.SuggestListOrderRule = Nothing
@@ -442,7 +442,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSelectedIndex = 0
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
-            Me.cboAccountIdNo.SearchPlace = "1"
+            Me.cboAccountIdNo.SearchPlace = "A"
             Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
@@ -503,7 +503,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.PreviousSelectedIndex = 0
             Me.cboDiscountAccountIdNo.PropertySelector = Nothing
             Me.cboDiscountAccountIdNo.ReadOnlyCombo = False
-            Me.cboDiscountAccountIdNo.SearchPlace = "1"
+            Me.cboDiscountAccountIdNo.SearchPlace = "A"
             Me.cboDiscountAccountIdNo.SearchField = Nothing
             Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
             Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing

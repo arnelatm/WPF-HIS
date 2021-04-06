@@ -184,7 +184,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPensionProviderIdNo.PreviousSelectedIndex = -1
             Me.cboPensionProviderIdNo.PropertySelector = Nothing
             Me.cboPensionProviderIdNo.ReadOnlyCombo = False
-            Me.cboPensionProviderIdNo.SearchPlace = "1"
+            Me.cboPensionProviderIdNo.SearchPlace = "A"
             Me.cboPensionProviderIdNo.SearchField = Nothing
             Me.cboPensionProviderIdNo.SuggestBoxHeight = 200
             Me.cboPensionProviderIdNo.SuggestListOrderRule = Nothing
@@ -276,7 +276,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSelectedIndex = -1
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
-            Me.cboAccountIdNo.SearchPlace = "1"
+            Me.cboAccountIdNo.SearchPlace = "A"
             Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing

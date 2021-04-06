@@ -143,7 +143,7 @@ Public Class CFindForm
             dtpEndDate.Visible = False
             lblTo.Visible = False
             chkChecked.Visible = False
-            Height = 125
+            Height = 140
         ElseIf _searchMode = 0 Then
             ' textbox search
             lblLookFor1.Visible = True

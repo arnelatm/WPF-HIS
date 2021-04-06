@@ -270,7 +270,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.PreviousSelectedIndex = -1
             Me.cboParentIdNo.PropertySelector = Nothing
             Me.cboParentIdNo.ReadOnlyCombo = False
-            Me.cboParentIdNo.SearchPlace = "1"
+            Me.cboParentIdNo.SearchPlace = "A"
             Me.cboParentIdNo.SearchField = Nothing
             Me.cboParentIdNo.SuggestBoxHeight = 200
             Me.cboParentIdNo.SuggestListOrderRule = Nothing

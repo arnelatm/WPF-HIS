@@ -76,7 +76,7 @@ Namespace AdoNet
                 ElseIf searchPlace = "S" Then
                     searchString = searchString.Trim() & "%"
                     sql = sql & fieldName & " Like @SearchString "
-                ElseIf searchString = "E" Then
+                ElseIf searchPlace = "E" Then
                     searchString = searchString.Trim()
                     sql = sql & fieldName & " = @SearchString "
                 End If

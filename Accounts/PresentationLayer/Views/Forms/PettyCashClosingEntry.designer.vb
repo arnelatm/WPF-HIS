@@ -417,7 +417,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSelectedIndex = -1
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
-            Me.cboAccountIdNo.SearchPlace = "1"
+            Me.cboAccountIdNo.SearchPlace = "A"
             Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.Size = New System.Drawing.Size(405, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
@@ -630,7 +630,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.PreviousSelectedIndex = -1
             Me.cboPayType.PropertySelector = Nothing
             Me.cboPayType.ReadOnlyCombo = False
-            Me.cboPayType.SearchPlace = "1"
+            Me.cboPayType.SearchPlace = "A"
             Me.cboPayType.SearchField = Nothing
             Me.cboPayType.Size = New System.Drawing.Size(341, 24)
             Me.cboPayType.SuggestBoxHeight = 200
@@ -684,7 +684,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.PreviousSelectedIndex = -1
             Me.cboPcAccountIdNo.PropertySelector = Nothing
             Me.cboPcAccountIdNo.ReadOnlyCombo = False
-            Me.cboPcAccountIdNo.SearchPlace = "1"
+            Me.cboPcAccountIdNo.SearchPlace = "A"
             Me.cboPcAccountIdNo.SearchField = Nothing
             Me.cboPcAccountIdNo.Size = New System.Drawing.Size(405, 24)
             Me.cboPcAccountIdNo.SuggestBoxHeight = 200

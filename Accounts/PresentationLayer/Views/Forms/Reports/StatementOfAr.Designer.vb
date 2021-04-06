@@ -106,7 +106,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboCustomerIdNo.PreviousSelectedIndex = -1
             Me.cboCustomerIdNo.PropertySelector = Nothing
             Me.cboCustomerIdNo.ReadOnlyCombo = False
-            Me.cboCustomerIdNo.SearchPlace = "1"
+            Me.cboCustomerIdNo.SearchPlace = "A"
             Me.cboCustomerIdNo.Size = New System.Drawing.Size(520, 24)
             Me.cboCustomerIdNo.SuggestBoxHeight = 200
             Me.cboCustomerIdNo.SuggestListOrderRule = Nothing
