@@ -311,7 +311,7 @@ Public Class CMaskedTextBox
         Else
             searchForm = New CFindFormNew(Me)
         End If
-        FieldName = Name.Substring(3)
+        'FieldName = Name.Substring(3)
         searchForm.Dispose()
         CallByName(MyForm, "FindFieldNew", CallType.Method, Me)
     End Sub
@@ -426,10 +426,10 @@ Public Class CMaskedTextBox
 
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
         Get
-            Throw New NotImplementedException()
+            Return IFindableControl.DataTypeEnum.Date
         End Get
         Set(value As IFindableControl.DataTypeEnum)
-            Throw New NotImplementedException()
+
         End Set
     End Property
 

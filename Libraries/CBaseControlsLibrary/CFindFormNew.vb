@@ -54,7 +54,7 @@ Public Class CFindFormNew
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
         If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
             _searchPlace = SearchPlaceEnum.ExactMatch
-            _findableControl.BegFindValue = TxtTextToSearch.Text
+            _findableControl.BegFindValue = cboTextToSearch.SelectedValue
         ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.String Then
             If RBtnStart.Checked Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.StartOfField
@@ -163,7 +163,8 @@ Public Class CFindFormNew
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
             lblTo.Visible = False
-            Height = 125
+            Height = 150
+            Width = 200
         End If
     End Sub
 

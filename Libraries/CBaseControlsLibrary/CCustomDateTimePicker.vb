@@ -67,6 +67,7 @@ Public Class CCustomDateTimePicker
         SetupDisplayWidths()
         EditingMode = True
         txtDate.DateField = True
+        'txtDate.FieldName = Name
     End Sub
 
 #Region "Declarations#"
@@ -700,7 +701,7 @@ Public Class CCustomDateTimePicker
     End Function
 
     Private Sub CCustomDateTimePicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtDate.SearchField = Name.Substring(3)
+        txtDate.FieldName = Name.Substring(3)
         txtDate.DateField = True
     End Sub
 
