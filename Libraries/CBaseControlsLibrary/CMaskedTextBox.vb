@@ -1,18 +1,15 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CMaskedTextBox
     Inherits MaskedTextBox
-    Implements IEntryControl
+    Implements IEntryControl, IFindableControl
 
     Private _defaultVal As String
     Private _isNumeric As Boolean
-    Private _textToSearch As String
-    Private _begDateToSearch As Date?
-    Private _endDateToSearch As Date?
-    Private _searchPlace As Char
     Private _oldValue As String
     Private _editsAllowed As Boolean = False
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
@@ -309,38 +306,19 @@ Public Class CMaskedTextBox
         Dim MyForm = FindForm()
         Dim searchForm
         If DateField Then
-            searchForm = New CFindForm(2)
+            searchForm = New CFindFormNew(Me)
             searchForm.ShowDialog()
-            _textToSearch = searchForm.TextToSearch
-            _begDateToSearch = searchForm.BegDateToSearch
-            _endDateToSearch = searchForm.EndDateToSearch
-            CallByName(MyForm, "FindField", CallType.Method, Me)
-            searchForm.Dispose()
         Else
-            searchForm = New CFindForm(0)
-            _searchPlace = searchForm.GetSearchPlace
-            If _textToSearch <> "" Then
-                CallByName(MyForm, "FindField", CallType.Method, Me)
-                searchForm.Dispose()
-            End If
+            searchForm = New CFindFormNew(Me)
         End If
+        FieldName = Name.Substring(3)
+        searchForm.Dispose()
+        CallByName(MyForm, "FindFieldNew", CallType.Method, Me)
     End Sub
 
-    Public Function GetTextToSearch() As String
-        Return _textToSearch
-    End Function
-
-    Public Function GetBegDateToSearch() As Date?
-        Return _begDateToSearch
-    End Function
-
-    Public Function GetEndDateToSearch() As Date?
-        Return _endDateToSearch
-    End Function
-
-    Public Function GetSearchPlace() As Char
-        Return _searchPlace
-    End Function
+    'Public Function GetTextToSearch() As String
+    '    Return _textToSearch
+    'End Function
 
     Private Sub MenuItemCut_Click()
         Cut()
@@ -406,6 +384,56 @@ Public Class CMaskedTextBox
             _editsAllowed = value
         End Set
     End Property
+
+#Region "FindableControl"
+
+    <Category("Custom Properties")>
+    <Description("Set to True to enable find on this field.")>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
+
+    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
+        Get
+            Return IFindableControl.SearchModeEnum.Date
+        End Get
+    End Property
+
+    Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
+        Get
+            Return Nothing
+        End Get
+    End Property
+
+    Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
+        Get
+            Return Nothing
+        End Get
+    End Property
+
+    Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
+        Get
+            Return Nothing
+        End Get
+    End Property
+
+    Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
+
+    Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
+
+    Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
+
+    Public Property FieldName As String Implements IFindableControl.FieldName
+
+    Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As IFindableControl.DataTypeEnum)
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
+#End Region
 
     'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
     '    MakeVisible(visibleControl)

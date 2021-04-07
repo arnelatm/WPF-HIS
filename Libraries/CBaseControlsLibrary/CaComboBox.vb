@@ -2,50 +2,37 @@
 Imports System.Drawing
 Imports System.Linq.Expressions
 Imports System.Threading
-Imports System.Windows
 Imports System.Windows.Forms
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CaComboBox
     Inherits BCombobox
-    Implements IEntryControl
+    Implements IEntryControl, IFindableControl
+
 
 #Region "Custom Properties"
 
     'Private MyErrorProvider As New ErrorProviderExtended
-    Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
-
-    Public DataSourceProgrammaticChange As Boolean = False
-    Public SuggestListForm As CListBoxForm = New CListBoxForm
-    Protected PropertySelectorCompiled As Func(Of ObjectCollection, IEnumerable(Of String))
-    Private Shared ReadOnly KeysToHandle As Keys() = {Keys.Down, Keys.Up, Keys.Enter, Keys.Escape}
-    Private ReadOnly _suggestBindingList As BindingList(Of String) = New BindingList(Of String)()
     Private _displayOnly As Boolean
     Private _editable As Boolean
     Private _editingMode As Boolean = True
     Private _filterRule As Expression(Of Func(Of String, String, Boolean))
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
-
     Private _readOnlyCombo As Boolean
-    Private ReadOnly _defaultMaxDropDownItems As Int16
-
-    Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
-    Private ReadOnly _defaultDropDownHeight As Int16
-    Private _searchField As String
-
-    'Private _selectable As Boolean
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
-
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
-    'Private _viewable As Boolean
-    '<Bindable(True)>
-    '<Category("Properties")>
-    '<DefaultValue("Name")>
-    '<Description("The field to display in the Combobox (when not Dropped down)")>
-    '<Browsable(True)>
-    'Public Property TextDisplayMember As String = "Name"
+    Private ReadOnly _defaultDropDownHeight As Int16
+    Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
+    Private ReadOnly _defaultMaxDropDownItems As Int16
+    Private ReadOnly _suggestBindingList As BindingList(Of String) = New BindingList(Of String)()
+    Private Shared ReadOnly KeysToHandle As Keys() = {Keys.Down, Keys.Up, Keys.Enter, Keys.Escape}
+    Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
+    Protected PropertySelectorCompiled As Func(Of ObjectCollection, IEnumerable(Of String))
+    Public DataSourceProgrammaticChange As Boolean = False
+    Public SuggestListForm As CListBoxForm = New CListBoxForm
 
     Public Property ChangingSearchValueOnly As Boolean = False
 
@@ -203,22 +190,6 @@ Public Class CaComboBox
         End Set
     End Property
 
-    Public Property SearchPlace As Char
-
-    '<Category("Custom Properties")>
-    '<DefaultValue(False)>
-    '<Description("Set to True to specify that this control can be selected.")>
-    '<Browsable(True)>
-    'Public Property Selectable As Boolean
-    '    Get
-    '        Return _selectable
-    '    End Get
-    '    Set
-    '        _selectable = Value
-    '        Enabled = Value
-    '    End Set
-    'End Property
-
     Public Property SuggestBoxHeight As Integer
         Get
             Return SuggestListForm.Height
@@ -241,30 +212,11 @@ Public Class CaComboBox
 
     Public Property TextToSearch As String
 
-    <Bindable(True)>
-    <Category("Properties")>
-    <DefaultValue(GetType(String))>
-    <Description("Specify here the displayed field name to search")>
-    <Browsable(True)>
-    Public Property SearchField As String
-        Get
-            Return _searchField
-        End Get
-        Set(value As String)
-            _searchField = value
-        End Set
-    End Property
-
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
     End Property
-
-    'Public Property ButtonWidth As Integer = SystemInformation.HorizontalScrollBarArrowWidth
-    'Public Property EnableTheme As Boolean = False
-    'Public Property CustomBorder As Boolean
-    Public Shared Property Undo As String = "Undo Last Cut/Paste/Delete"
 
     <Bindable(True)>
     <Category("Properties")>
@@ -307,17 +259,6 @@ Public Class CaComboBox
     <Browsable(True)>
     Private Property LimitToList As Boolean = False
 
-    'Private Shadows Sub OnKeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
-    '    If DisplayOnly Then
-    '        e.Handled = True
-    '    Else
-    '        If e.KeyChar = Chr(13) Then
-    '            e.Handled = True
-    '            SendKeys.Send("{TAB}")
-    '        End If
-    '    End If
-    'End Sub
-
     Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If DisplayOnly Then
             e.SuppressKeyPress = True
@@ -338,10 +279,13 @@ Public Class CaComboBox
 #Region "Declarations#"
 
     ' Text Menu Captions
-    Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
-
-    Private ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
-
+    Private Shared ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+    Private Shared ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
+    Private Shared ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
+    Private Shared ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
+    Private Shared ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
+    Private Shared ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
+    Private Shared ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
 #End Region
 
 #Region "Event Handlers"
@@ -370,7 +314,6 @@ Public Class CaComboBox
 
     Protected Overloads Overrides Sub OnDropDown(e As EventArgs)
         HideSuggestionBox()
-        'MyBase.OnDropDown(e)
         If DisplayOnly Then
             _previousIndex = SelectedIndex
         End If
@@ -419,31 +362,13 @@ Public Class CaComboBox
         MyBase.OnPreviewKeyDown(e)
     End Sub
 
-    'Protected Overrides Sub OnSizeChanged(ByVal e As EventArgs)
-    '    MyBase.OnSizeChanged(e)
-    '    If Viewable Then
-    '        'SuggestListForm.Width = Width - 10
-    '        'SuggestListForm.SuggestListBox.Width = SuggestListForm.Width
-    '    End If
-    'End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
         MyBase.OnTextChanged(e)
         If Not Focused Then Return
         _suggestBindingList.Clear()
         _suggestBindingList.RaiseListChangedEvents = False
-        'Dim x = PropertySelectorCompiled(Items)
-        'Dim y = _filterRuleCompiled
-        'Dim z = _suggestListOrderRuleCompiled
-        'Dim w = x.OrderBy(y)
-        'Dim w1 = w.ToList()
         PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-        'For Each it In PropertySelectorCompiled(Items)
-        '    '_filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
-        '    Dim q
-        '    q = it.ToLower().Contains(Text.Trim().ToLower())
-        'Next
-
         _suggestBindingList.RaiseListChangedEvents = True
         _suggestBindingList.ResetBindings()
         Dim showForm As Boolean
@@ -470,7 +395,6 @@ Public Class CaComboBox
     End Sub
 
     Private Sub HandleMouseUp(control As Object, e As MouseEventArgs)
-
         ' Checking the Mouse right Button
         If e.Button = MouseButtons.Right Then
             control.ContextMenuStrip.Show(control, New Point(e.X, e.Y))
@@ -519,14 +443,6 @@ Public Class CaComboBox
         AddHandler ParentChanged, AddressOf OnParentChanged
     End Sub
 
-    Public Function GetSearchPlace() As Char
-        Return SearchPlace
-    End Function
-
-    Public Function GetTextToSearch() As String
-        Return TextToSearch
-    End Function
-
     Public Function GetValue()
         If SelectedItem IsNot Nothing Then
             If ValueMember.ToLower() = "idno" Then
@@ -567,38 +483,6 @@ Public Class CaComboBox
             ElseIf ValueMember.ToLower() = "code" Then
                 CodeSearch(value)
             End If
-            '            'Dim saveDisplayMember As String = DisplayMember
-            ''DisplayMember = ValueMember
-            ''If Text <> value Then
-            ''    Text = value
-            ''End If
-            ''DisplayMember = saveDisplayMember
-            ''SelectedValue = value
-            'If ValueMember.ToLower() = "idno" Then
-            '    If Not IsNumeric(value) OrElse (SelectedItem IsNot Nothing AndAlso SelectedItem.idNo <> value) Then
-            '        SelectedIndex = -1
-            '        Text = value.ToString()
-            '        If value IsNot Nothing And value > 0 Then
-            '            MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
-            '            'Forms.MessageBox.Show("Invalid value <" + value.ToString() + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
-            '        End If
-            '    End If
-            'ElseIf ValueMember.ToLower() = "code" Then
-            '    If (SelectedItem IsNot Nothing) AndAlso SelectedItem.Code <> value Then
-            '        SelectedIndex = -1
-            '        Text = value.ToString()
-            '        If value <> vbNullChar And Text <> "" Then
-            '            MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", Text, "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
-            '            'Forms.MessageBox.Show("Invalid value <" + Text + "> for field " + If(LinkedLabel Is Nothing, Name, LinkedLabel.Text))
-            '        End If
-            '    Else
-            '        If SelectedItem IsNot Nothing Then
-            '            If SelectedItem.Code <> value Then
-            '                Text = Nothing
-            '            End If
-            '        End If
-            '    End If
-            'End If
         End If
     End Sub
 
@@ -621,7 +505,6 @@ Public Class CaComboBox
             returnValue = Nothing
             If value IsNot Nothing Then
                 Text = value
-                'MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
             End If
         End If
     End Sub
@@ -641,7 +524,6 @@ Public Class CaComboBox
             If Not found Then
                 If value IsNot Nothing Then
                     Text = value
-                    'MessagingLibrary.Messaging.ShowParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", value.ToString(), "fieldDescription", If(LinkedLabel Is Nothing, Name, LinkedLabel.Text)})
                 End If
                 SelectedIndex = -1
             End If
@@ -652,6 +534,33 @@ Public Class CaComboBox
 
     Protected Sub ContextHandler(sender As Object, e As EventArgs)
 
+        'Const separator = "-"
+
+        '_contextMenuStrip1.Items.Clear()
+
+        'Dim menuItemFind As New ToolStripMenuItem With {
+        '        .Text = _textFind
+        '        }
+        '_contextMenuStrip1.Items.Add(menuItemFind)
+        'menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
+        '' ReSharper disable once LocalizableElement
+        'menuItemFind.ShortcutKeyDisplayString = "Ctrl-F"
+        'AddHandler menuItemFind.Click, AddressOf MenuItemFind_Click
+
+        '_contextMenuStrip1.Items.Add(separator)
+
+        'Dim menuItemSelectAll As New ToolStripMenuItem With {
+        '        .Text = _textSelectAll
+        '        }
+        '_contextMenuStrip1.Items.Add(menuItemSelectAll)
+        'menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
+        '' ReSharper disable once LocalizableElement
+        'menuItemSelectAll.ShortcutKeyDisplayString = "Ctrl-A"
+        ''menuItemSelectAll.Enabled = (IIf(SampleTextBox.SelectionLength = SampleTextBox.Text.Length Or SampleTextBox.SelectionLength = SampleTextBox.Text.Trim.Length, False, True))
+        'AddHandler menuItemSelectAll.Click, AddressOf MenuItemSelectAll_Click
+
+        '_contextMenuStrip1.Items.Add(separator)
+
         Const separator = "-"
 
         _contextMenuStrip1.Items.Clear()
@@ -661,9 +570,54 @@ Public Class CaComboBox
                 }
         _contextMenuStrip1.Items.Add(menuItemFind)
         menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
-        ' ReSharper disable once LocalizableElement
-        menuItemFind.ShortcutKeyDisplayString = "Ctrl-F"
+        menuItemFind.ShortcutKeyDisplayString = $"Ctrl-F"
         AddHandler menuItemFind.Click, AddressOf MenuItemFind_Click
+
+        Dim menuItemUndo As New ToolStripMenuItem With {
+                .Text = _textUndo
+                }
+        _contextMenuStrip1.Items.Add(menuItemUndo)
+        menuItemUndo.ShortcutKeys = Keys.Control Or Keys.Z
+        menuItemUndo.ShortcutKeyDisplayString = $"Ctrl-Z"
+        AddHandler menuItemUndo.Click, AddressOf MenuItemUndo_Click
+
+        _contextMenuStrip1.Items.Add(separator)
+
+        Dim menuItemCut As New ToolStripMenuItem With {
+                .Text = _textCut
+                }
+        _contextMenuStrip1.Items.Add(menuItemCut)
+        menuItemCut.Enabled = (SelectionLength <> 0)
+        menuItemCut.ShortcutKeys = Keys.Control Or Keys.X
+        menuItemCut.ShortcutKeyDisplayString = $"Ctrl-X"
+        AddHandler menuItemCut.Click, AddressOf MenuItemCut_Click
+
+        Dim menuItemCopy As New ToolStripMenuItem With {
+                .Text = _textCopy
+                }
+        _contextMenuStrip1.Items.Add(menuItemCopy)
+        menuItemCopy.ShortcutKeys = Keys.Control Or Keys.C
+        menuItemCopy.ShortcutKeyDisplayString = $"Ctrl-C"
+        menuItemCopy.Enabled = (SelectionLength <> 0)
+        AddHandler menuItemCopy.Click, AddressOf MenuItemCopy_Click
+
+        Dim menuItemPaste As New ToolStripMenuItem With {
+                .Text = _textPaste
+                }
+        _contextMenuStrip1.Items.Add(menuItemPaste)
+        menuItemPaste.ShortcutKeys = Keys.Control Or Keys.V
+        menuItemPaste.ShortcutKeyDisplayString = $"Ctrl-V"
+        menuItemPaste.Enabled = (My.Computer.Clipboard.GetText() <> "")
+        AddHandler menuItemPaste.Click, AddressOf MenuItemPaste_Click
+
+        Dim menuItemDelete As New ToolStripMenuItem With {
+                .Text = _textDelete
+                }
+        _contextMenuStrip1.Items.Add(menuItemDelete)
+        menuItemDelete.ShortcutKeys = Keys.Delete
+        menuItemDelete.ShortcutKeyDisplayString = $"Delete"
+        menuItemDelete.Enabled = (SelectionLength <> 0)
+        AddHandler menuItemDelete.Click, AddressOf MenuItemDelete_Click
 
         _contextMenuStrip1.Items.Add(separator)
 
@@ -672,12 +626,51 @@ Public Class CaComboBox
                 }
         _contextMenuStrip1.Items.Add(menuItemSelectAll)
         menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
-        ' ReSharper disable once LocalizableElement
-        menuItemSelectAll.ShortcutKeyDisplayString = "Ctrl-A"
-        'menuItemSelectAll.Enabled = (IIf(SampleTextBox.SelectionLength = SampleTextBox.Text.Length Or SampleTextBox.SelectionLength = SampleTextBox.Text.Trim.Length, False, True))
+        menuItemSelectAll.ShortcutKeyDisplayString = $"Ctrl-A"
+        menuItemSelectAll.Enabled = (Not (SelectionLength = Text.Length Or SelectionLength = Text.Trim.Length))
         AddHandler menuItemSelectAll.Click, AddressOf MenuItemSelectAll_Click
 
         _contextMenuStrip1.Items.Add(separator)
+
+        'End If
+    End Sub
+
+
+    Private Sub MenuItemCut_Click()
+        If EditingMode Then
+            Clipboard.SetText(SelectedText)
+            SelectedIndex = -1
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
+    End Sub
+
+    Private Sub MenuItemDelete_Click()
+        If EditingMode Then
+            SelectedIndex = -1
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
+    End Sub
+
+    Private Sub MenuItemCopy_Click()
+        Clipboard.SetText(SelectedText)
+    End Sub
+
+    Private Sub MenuItemPaste_Click()
+        If EditingMode Then
+            Text = Clipboard.GetText()
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
+    End Sub
+
+    Private Sub MenuItemUndo_Click()
+        If EditingMode Then
+            SendKeys.Send("^Z")
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
     End Sub
 
     Protected Overloads Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
@@ -687,23 +680,7 @@ Public Class CaComboBox
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    'Private Sub caComboBox_DropDownStyleChanged(sender As Object, e As EventArgs) Handles Me.DropDownStyleChanged
-    '    If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-    '        If DropDownStyle = ComboBoxStyle.DropDown Then
-    '            ''
-    '        Else
-    '            If DropDownStyle = ComboBoxStyle.DropDownList Then
-    '                'DropDownStyle = ComboBoxStyle.DropDown
-    '                LimitToList = True
-    '            Else
-    '                LimitToList = False
-    '            End If
-    '        End If
-    '    End If
-    'End Sub
-
     Private Sub caCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
-        'Debugger.Break()
         If SelectedIndex < 0 Then
             If Text = "" Then
                 'allow empty strings
@@ -722,10 +699,6 @@ Public Class CaComboBox
         PreviousSelectedIndex = SelectedIndex
     End Sub
 
-    'Private Sub cboPaymentType_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles Me.SelectionChangeCommitted
-    '    PreviousSelectedIndex = SelectedIndex
-    'End Sub
-
     Private Sub HideSuggestionBox()
         SuggestListForm.Hide()
         SuggestListForm.Visible = False
@@ -734,30 +707,10 @@ Public Class CaComboBox
     Private Sub MenuItemFind_Click()
         Dim myForm = FindForm()
         Dim searchForm
-        If SearchField Is Nothing OrElse SearchField = "" Then
-            searchForm = New CFindForm(1, Me)
-        Else
-            searchForm = New CFindForm(0)
-        End If
+        searchForm = New CFindFormNew(Me)
         searchForm.ShowDialog()
-        If Not (SearchField Is Nothing OrElse SearchField = "") Then
-            FindText(myForm, searchForm)
-        Else
-            _TextToSearch = searchForm.TextToSearch
-            SearchPlace = searchForm.SearchPlace
-            'SearchForm.Dispose()
-            CallByName(myForm, "FindField", CallType.Method, Me)
-            'FindText(myForm, SearchForm)
-        End If
-    End Sub
-
-    Private Sub FindText(myForm As Form, searchForm As Object)
-        _TextToSearch = searchForm.TextToSearch
-        _SearchPlace = searchForm.GetSearchPlace
-        searchForm.Dispose()
-        If _TextToSearch <> "" Then
-            CallByName(myForm, "FindField", CallType.Method, Me)
-        End If
+        FieldName = Name.Substring(3)
+        CallByName(myForm, "FindFieldNew", CallType.Method, Me)
     End Sub
 
     Private Sub MenuItemSelectAll_Click()
@@ -772,14 +725,8 @@ Public Class CaComboBox
     End Sub
 
     Private Sub caCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Me.SelectedIndexChanged
-        'If PreviousSelectedIndex > -1 AndAlso PreviousSelectedIndex <> SelectedIndex Then
         PreviousSelectedIndex = SelectedIndex
-        'End If
     End Sub
-
-    'Private Sub OnSelectionChange(sender As Object, e As EventArgs) Handles Me.SelectedIndexChanged
-    '    PreviousSelectedIndex = SelectedIndex
-    'End Sub
 
     Private Sub SetListBoxFormLocation(ByRef suggestLbForm As CListBoxForm)
         Dim pnt As Point
@@ -790,20 +737,9 @@ Public Class CaComboBox
             Return
         End If
         screenRectangle = Screen.PrimaryScreen.WorkingArea
-        'suggestLbForm.Width = DropDownWidth
         suggestLbForm.StartPosition = FormStartPosition.Manual
         pnt = Parent.PointToScreen(Location)
-        'If GlobalVariables.RightToLeftLayout Then
-        '    formLocation = New Point(pnt.X - suggestLbForm.Width)
-        '    If formLocation.X < 0 Then
-        '        formLocation.X = pnt.X - suggestLbForm.Width
-        '    End If
-        'Else
         formLocation = New Point(pnt.X, pnt.Y + Height)
-        'If formLocation.X + suggestLbForm.Width > screenRectangle.Width Then
-        '    formLocation.X = pnt.X - suggestLbForm.Width
-        'End If
-        'End If
         If formLocation.Y + suggestLbForm.Height > screenRectangle.Height Then
             formLocation.Y = pnt.Y - suggestLbForm.Height
         End If
@@ -811,95 +747,71 @@ Public Class CaComboBox
         suggestLbForm.Width = Width
     End Sub
 
-    'Public Sub SetValue(ByRef value)
-    '    If value Is Nothing Then
-    '        Text = Nothing
-    '    End If
-    '    If IsNumeric(value) Then
-    '        If value = 0 Then
-    '            Text = ""
-    '        ElseIf ValueMember.ToLower() = "idno" AndAlso TextDisplayMember.ToLower() <> "idno" Then
-    '            Dim saveDisplayMember As String = DisplayMember
-    '            DisplayMember = "IdNo"
-    '            Text = value
-    '            DisplayMember = saveDisplayMember
-    '        ElseIf ValueMember.ToLower() = "code" Then
-    '            Dim saveDisplayMember As String = DisplayMember
-    '            DisplayMember = "Code"
-    '            Text = Val(value)
-    '            DisplayMember = saveDisplayMember
-    '        Else
-    '            Text = value
-    '        End If
-    '    Else
-    '        If ValueMember.ToLower() = "code" Then
-    '            Dim saveDisplayMember As String = DisplayMember
-    '            DisplayMember = "Code"
-    '            Text = value
-    '            DisplayMember = saveDisplayMember
-    '        Else
-    '            Text = value
-    '        End If
-    '    End If
-    'End Sub
     Private Sub SuggestListBoxOnClick()
         Text = SuggestListForm.SuggestListBox.Text
         Focus()
     End Sub
 
-    'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
-    '    DisplayOnly = Not editableControl
-    'End Sub
-
-    'Public Sub MakeSelectable(selectableControl As Boolean) Implements IEntryControl.MakeSelectable
-    '    Me.Enabled = selectableControl
-    'End Sub
-
-    'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
-    '    DisplayOnly = Not ViewableControl
-    'End Sub
-
-    'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
-    '    Visible = visibleControl
-    'End Sub
-
 #End Region
 
-    'Private Const WmPaint As Integer = &HF
-    'Private ReadOnly _buttonWidth As Integer = SystemInformation.HorizontalScrollBarArrowWidth
+#Region "FindableControl"
 
-    'Protected Overrides Sub WndProc(ByRef m As Message)
-    '    ' this will have an option to change the border color
-    '    MyBase.WndProc(m)
+    Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
 
-    '    If m.Msg = WmPaint Then
+    Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
 
-    '        Using g = Graphics.FromHwnd(Handle)
+    Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
 
-    '            Using p = New Pen(BorderColor, 1)
-    '                g.DrawRectangle(p, 0, 0, Width - _buttonWidth - 3, Height - 3)
-    '                'Dim blueBrush As New SolidBrush(Color.RED)
-    '                'Dim rect As New Rectangle(0, 0, Width - _buttonWidth - 3, Height - 3)
-    '                'g.DrawRectangle(p, rect)
-    '                'g.FillRectangle(blueBrush, rect)
-    '                'ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-    '                'BackColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-    '            End Using
+    Private Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
+        Get
+            Return IFindableControl.SearchPlaceEnum.ExactValue
+        End Get
+        Set(value As IFindableControl.SearchPlaceEnum)
 
-    '        End Using
-    '    End If
+        End Set
+    End Property
 
-    'End Sub
+    Public Property FieldName As String Implements IFindableControl.FieldName
+
+    Private ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
+        Get
+            Return DataSource
+        End Get
+    End Property
+
+    Private ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
+        Get
+            Return DisplayMember
+        End Get
+    End Property
+
+    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
+        Get
+            Return IFindableControl.SearchModeEnum.ComboBox
+        End Get
+    End Property
+
+    Private ReadOnly Property IFindableControl_ValueMember As String Implements IFindableControl.FindValueMember
+        Get
+            Return ValueMember
+        End Get
+    End Property
+
+#End Region
 
     <Browsable(True)>
     <Category("Appearance")>
     <DefaultValue(GetType(Color), "DimGray")>
     Public Property BorderColor As Color
 
-    '    Private Declare Auto Function GetWindow Lib "user32.dll" (
-    '        ByVal hWnd As IntPtr,
-    '        ByVal wCmd As Int32
-    '    ) As IntPtr
+    Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As IFindableControl.DataTypeEnum)
+            Throw New NotImplementedException()
+        End Set
+    End Property
 
     Public Sub RevertValue()
         ' revert to previous value
@@ -924,45 +836,30 @@ Public Class CaComboBox
         End If
     End Sub
 
-    'Private _selectedIndex As Integer = 0
-    'Private _onMouseWheel As Boolean = False
+    'Public Function binarySearch(value)
+    '    Dim index As Int32
+    '    Dim lowerBound = 0
+    '    Dim upperBound = DataSource.Count() - 1
+    '    Dim found = False
+    '    While Not found
 
-    'Private Sub OnThisMouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseWheel
+    '    End While
+    '    Return index
+    '    '   If upperBound < lowerBound Then
+    '    '             Exit: x does Not exists.
 
-    'End Sub
+    '    '   set midPoint = lowerBound + ( upperBound - lowerBound ) / 2
 
-    'Protected Overloads Overrides Sub OnSelectedIndexChanged(ByVal e As EventArgs)
-    '    If _onMouseWheel Then
-    '        If Me.SelectedIndex <> _selectedIndex Then Me.SelectedIndex = _selectedIndex
-    '        _onMouseWheel = False
-    '    End If
-    '    MyBase.OnSelectedIndexChanged(e)
-    'End Sub
+    '    '   If A Then[midPoint] < x
+    '    '      set lowerBound = midPoint + 1
 
-    Public Function binarySearch(value)
-        Dim index As Int32
-        Dim lowerBound = 0
-        Dim upperBound = DataSource.Count() - 1
-        Dim found = False
-        While Not found
+    '    '   If A Then[midPoint] > x
+    '    '      set upperBound = midPoint - 1
 
-        End While
-        Return index
-        '   If upperBound < lowerBound Then
-        '             Exit: x does Not exists.
-
-        '   set midPoint = lowerBound + ( upperBound - lowerBound ) / 2
-
-        '   If A Then[midPoint] < x
-        '      set lowerBound = midPoint + 1
-
-        '   If A Then[midPoint] > x
-        '      set upperBound = midPoint - 1
-
-        '   If A Then[midPoint] = x
-        '      Exit: x found at location midPoint
-        'End While
-    End Function
+    '    '   If A Then[midPoint] = x
+    '    '      Exit: x found at location midPoint
+    '    'End While
+    'End Function
 
 End Class
 

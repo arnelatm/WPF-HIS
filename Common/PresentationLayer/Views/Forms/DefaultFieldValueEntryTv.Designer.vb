@@ -173,8 +173,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSystemViewIdNo.PreviousSelectedIndex = -1
             Me.cboSystemViewIdNo.PropertySelector = Nothing
             Me.cboSystemViewIdNo.ReadOnlyCombo = False
-            Me.cboSystemViewIdNo.SearchPlace = "A"
-            Me.cboSystemViewIdNo.SearchField = Nothing
             Me.cboSystemViewIdNo.SuggestBoxHeight = 200
             Me.cboSystemViewIdNo.SuggestListOrderRule = Nothing
             Me.cboSystemViewIdNo.TextToSearch = Nothing
@@ -220,8 +218,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDataType.PreviousSelectedIndex = -1
             Me.cboDataType.PropertySelector = Nothing
             Me.cboDataType.ReadOnlyCombo = False
-            Me.cboDataType.SearchPlace = "A"
-            Me.cboDataType.SearchField = Nothing
             Me.cboDataType.SuggestBoxHeight = 200
             Me.cboDataType.SuggestListOrderRule = Nothing
             Me.cboDataType.TextToSearch = Nothing

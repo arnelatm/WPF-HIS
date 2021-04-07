@@ -18,7 +18,7 @@ Public Interface IBaseDao
 
     Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
 
-    Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer
+    Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
 
     Function FindFieldContinue(tableName As String, lastIdNo As Int32) As Object
 

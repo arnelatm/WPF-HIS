@@ -149,8 +149,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSelectedIndex = -1
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
-            Me.cboAccountIdNo.SearchPlace = "A"
-            Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
@@ -323,8 +321,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBankChargesAccountIdNo.PreviousSelectedIndex = -1
             Me.cboBankChargesAccountIdNo.PropertySelector = Nothing
             Me.cboBankChargesAccountIdNo.ReadOnlyCombo = False
-            Me.cboBankChargesAccountIdNo.SearchPlace = "A"
-            Me.cboBankChargesAccountIdNo.SearchField = Nothing
             Me.cboBankChargesAccountIdNo.SuggestBoxHeight = 200
             Me.cboBankChargesAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboBankChargesAccountIdNo.TextToSearch = Nothing
@@ -365,8 +361,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBankChargesVatAccountIdNo.PreviousSelectedIndex = -1
             Me.cboBankChargesVatAccountIdNo.PropertySelector = Nothing
             Me.cboBankChargesVatAccountIdNo.ReadOnlyCombo = False
-            Me.cboBankChargesVatAccountIdNo.SearchPlace = "A"
-            Me.cboBankChargesVatAccountIdNo.SearchField = Nothing
             Me.cboBankChargesVatAccountIdNo.SuggestBoxHeight = 200
             Me.cboBankChargesVatAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboBankChargesVatAccountIdNo.TextToSearch = Nothing

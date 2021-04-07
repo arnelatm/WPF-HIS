@@ -727,8 +727,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.PreviousSelectedIndex = -1
             Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.ReadOnlyCombo = False
-            Me.cboEmployeeIdNo.SearchField = "EmployeeName"
-            Me.cboEmployeeIdNo.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cboEmployeeIdNo.Size = New System.Drawing.Size(524, 24)
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing

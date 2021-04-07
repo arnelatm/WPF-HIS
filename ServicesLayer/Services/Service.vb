@@ -240,8 +240,8 @@ Namespace Services
             Return BaseDao.FindFieldNew(tableName, findableControl, filter)
         End Function
 
-        Public Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer Implements IService.FindDateField
-            Return BaseDao.FindDateField(tableName, fieldName, begSearchDate, endSearchDate, filter)
+        Public Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IService.FindDateField
+            Return BaseDao.FindDateField(tableName, findableControl, filter)
         End Function
 
         Public Function FindFieldContinue(tableName As String, idNo As Int32) As Integer Implements IService.FindFieldContinue

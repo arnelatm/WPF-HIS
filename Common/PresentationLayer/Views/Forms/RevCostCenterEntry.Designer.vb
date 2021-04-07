@@ -308,8 +308,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.PreviousSelectedIndex = -1
             Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.ReadOnlyCombo = False
-            Me.cacParentIdNo.SearchPlace = "A"
-            Me.cacParentIdNo.SearchField = Nothing
             Me.cacParentIdNo.Size = New System.Drawing.Size(418, 24)
             Me.cacParentIdNo.SuggestBoxHeight = 200
             Me.cacParentIdNo.SuggestListOrderRule = Nothing
@@ -402,8 +400,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRcType.PreviousSelectedIndex = -1
             Me.cacRcType.PropertySelector = Nothing
             Me.cacRcType.ReadOnlyCombo = False
-            Me.cacRcType.SearchPlace = "A"
-            Me.cacRcType.SearchField = Nothing
             Me.cacRcType.Size = New System.Drawing.Size(191, 24)
             Me.cacRcType.SuggestBoxHeight = 200
             Me.cacRcType.SuggestListOrderRule = Nothing

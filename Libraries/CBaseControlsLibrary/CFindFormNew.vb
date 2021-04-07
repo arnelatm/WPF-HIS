@@ -111,9 +111,9 @@ Public Class CFindFormNew
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
             RBtnExactMatch.Visible = False
-            cboTextToSearch.DataSource = _findableControl.DataSource
-            cboTextToSearch.DisplayMember = _findableControl.DisplayMember
-            cboTextToSearch.ValueMember = _findableControl.ValueMember
+            cboTextToSearch.DataSource = _findableControl.FindDataSource
+            cboTextToSearch.DisplayMember = _findableControl.FindDisplayMember
+            cboTextToSearch.ValueMember = _findableControl.FindValueMember
             dtpBegDate.Visible = False
             dtpEndDate.Visible = False
             lblTo.Visible = False

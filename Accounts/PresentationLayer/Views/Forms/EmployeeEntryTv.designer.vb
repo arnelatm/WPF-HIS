@@ -287,8 +287,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentMethod.PreviousSelectedIndex = -1
             Me.cboPaymentMethod.PropertySelector = Nothing
             Me.cboPaymentMethod.ReadOnlyCombo = False
-            Me.cboPaymentMethod.SearchField = Nothing
-            Me.cboPaymentMethod.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cboPaymentMethod.Size = New System.Drawing.Size(402, 24)
             Me.cboPaymentMethod.SuggestBoxHeight = 200
             Me.cboPaymentMethod.SuggestListOrderRule = Nothing
@@ -340,8 +338,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.PreviousSelectedIndex = -1
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.ReadOnlyCombo = False
-            Me.cacBankIdNo.SearchField = Nothing
-            Me.cacBankIdNo.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cacBankIdNo.Size = New System.Drawing.Size(402, 24)
             Me.cacBankIdNo.SuggestBoxHeight = 200
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
@@ -551,8 +547,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleidNo.PreviousSelectedIndex = -1
             Me.cboPayCycleidNo.PropertySelector = Nothing
             Me.cboPayCycleidNo.ReadOnlyCombo = False
-            Me.cboPayCycleidNo.SearchField = Nothing
-            Me.cboPayCycleidNo.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cboPayCycleidNo.Size = New System.Drawing.Size(201, 24)
             Me.cboPayCycleidNo.SuggestBoxHeight = 200
             Me.cboPayCycleidNo.SuggestListOrderRule = Nothing
@@ -604,8 +598,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayGroupIdNo.PreviousSelectedIndex = -1
             Me.cboPayGroupIdNo.PropertySelector = Nothing
             Me.cboPayGroupIdNo.ReadOnlyCombo = False
-            Me.cboPayGroupIdNo.SearchField = Nothing
-            Me.cboPayGroupIdNo.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cboPayGroupIdNo.Size = New System.Drawing.Size(201, 24)
             Me.cboPayGroupIdNo.SuggestBoxHeight = 200
             Me.cboPayGroupIdNo.SuggestListOrderRule = Nothing
@@ -842,8 +834,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacMaritalStatus.PreviousSelectedIndex = -1
             Me.cacMaritalStatus.PropertySelector = Nothing
             Me.cacMaritalStatus.ReadOnlyCombo = False
-            Me.cacMaritalStatus.SearchField = Nothing
-            Me.cacMaritalStatus.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cacMaritalStatus.Size = New System.Drawing.Size(278, 24)
             Me.cacMaritalStatus.SuggestBoxHeight = 200
             Me.cacMaritalStatus.SuggestListOrderRule = Nothing
@@ -895,8 +885,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacNationalityCode.PreviousSelectedIndex = -1
             Me.cacNationalityCode.PropertySelector = Nothing
             Me.cacNationalityCode.ReadOnlyCombo = False
-            Me.cacNationalityCode.SearchField = Nothing
-            Me.cacNationalityCode.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cacNationalityCode.Size = New System.Drawing.Size(279, 24)
             Me.cacNationalityCode.SuggestBoxHeight = 200
             Me.cacNationalityCode.SuggestListOrderRule = Nothing
@@ -948,8 +936,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacReligionIdNo.PreviousSelectedIndex = -1
             Me.cacReligionIdNo.PropertySelector = Nothing
             Me.cacReligionIdNo.ReadOnlyCombo = False
-            Me.cacReligionIdNo.SearchField = Nothing
-            Me.cacReligionIdNo.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cacReligionIdNo.Size = New System.Drawing.Size(278, 24)
             Me.cacReligionIdNo.SuggestBoxHeight = 200
             Me.cacReligionIdNo.SuggestListOrderRule = Nothing
@@ -1043,8 +1029,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacGender.PreviousSelectedIndex = -1
             Me.cacGender.PropertySelector = Nothing
             Me.cacGender.ReadOnlyCombo = False
-            Me.cacGender.SearchField = Nothing
-            Me.cacGender.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cacGender.Size = New System.Drawing.Size(124, 24)
             Me.cacGender.SuggestBoxHeight = 200
             Me.cacGender.SuggestListOrderRule = Nothing
@@ -1422,8 +1406,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.PreviousSelectedIndex = -1
             Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.ReadOnlyCombo = False
-            Me.cacCountryCode.SearchField = Nothing
-            Me.cacCountryCode.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cacCountryCode.Size = New System.Drawing.Size(195, 24)
             Me.cacCountryCode.SuggestBoxHeight = 200
             Me.cacCountryCode.SuggestListOrderRule = Nothing
@@ -1824,8 +1806,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDepartmentIdNo.PreviousSelectedIndex = -1
             Me.cacDepartmentIdNo.PropertySelector = Nothing
             Me.cacDepartmentIdNo.ReadOnlyCombo = False
-            Me.cacDepartmentIdNo.SearchField = Nothing
-            Me.cacDepartmentIdNo.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cacDepartmentIdNo.Size = New System.Drawing.Size(279, 24)
             Me.cacDepartmentIdNo.SuggestBoxHeight = 200
             Me.cacDepartmentIdNo.SuggestListOrderRule = Nothing
@@ -1877,8 +1857,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDesignationIdNo.PreviousSelectedIndex = -1
             Me.cacDesignationIdNo.PropertySelector = Nothing
             Me.cacDesignationIdNo.ReadOnlyCombo = False
-            Me.cacDesignationIdNo.SearchField = Nothing
-            Me.cacDesignationIdNo.SearchPlace = Global.Microsoft.VisualBasic.ChrW(65)
             Me.cacDesignationIdNo.Size = New System.Drawing.Size(223, 24)
             Me.cacDesignationIdNo.SuggestBoxHeight = 200
             Me.cacDesignationIdNo.SuggestListOrderRule = Nothing

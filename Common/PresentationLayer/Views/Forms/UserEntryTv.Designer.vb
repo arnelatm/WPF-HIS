@@ -275,8 +275,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityLevel.PreviousSelectedIndex = -1
             Me.cacSecurityLevel.PropertySelector = Nothing
             Me.cacSecurityLevel.ReadOnlyCombo = False
-            Me.cacSecurityLevel.SearchPlace = "A"
-            Me.cacSecurityLevel.SearchField = Nothing
             Me.cacSecurityLevel.Size = New System.Drawing.Size(320, 24)
             Me.cacSecurityLevel.SuggestBoxHeight = 200
             Me.cacSecurityLevel.SuggestListOrderRule = Nothing
@@ -366,8 +364,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityGroupIdNo.PreviousSelectedIndex = -1
             Me.cacSecurityGroupIdNo.PropertySelector = Nothing
             Me.cacSecurityGroupIdNo.ReadOnlyCombo = False
-            Me.cacSecurityGroupIdNo.SearchPlace = "A"
-            Me.cacSecurityGroupIdNo.SearchField = Nothing
             Me.cacSecurityGroupIdNo.Size = New System.Drawing.Size(320, 24)
             Me.cacSecurityGroupIdNo.SuggestBoxHeight = 200
         Me.cacSecurityGroupIdNo.SuggestListOrderRule = Nothing
