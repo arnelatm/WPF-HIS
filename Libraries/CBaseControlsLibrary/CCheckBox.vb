@@ -2,11 +2,12 @@
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CCheckBox
     Inherits CheckBox
-    Implements IEntryControl
+    Implements IEntryControl, IFindableControl
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean = True
@@ -148,10 +149,28 @@ Public Class CCheckBox
         End If
     End Sub
 
+    Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
+    Public Property IFindableControl_FindEnabled As Boolean Implements IFindableControl.FindEnabled
+
     <Category("Custom Properties")>
     <Description("Set to True to enable find on this field.")>
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
     Public Property FindEnabled As Boolean
+
+    Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
+    Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
+    Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
+    Public Property FieldName As String Implements IFindableControl.FieldName
+    Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
+    Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
+
+    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
+        Get
+            Return IFindableControl.SearchModeEnum.CheckBox
+        End Get
+    End Property
+
+    Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
 
     'Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
     '    Dim checkRegion As New Rectangle(2, 3, 9, 9)
@@ -255,7 +274,7 @@ Public Class CCheckBox
         If FindEnabled Then
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindForm(3)
+            Dim searchForm = New CFindFormNew(Me)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea
@@ -266,9 +285,9 @@ Public Class CCheckBox
             End If
             searchForm.Location = formLocation
             searchForm.ShowDialog()
-            _textToSearch = searchForm.TextToSearch
             searchForm.Dispose()
-            CallByName(myForm, "FindField", CallType.Method, Me)
+            FieldName = Name.Substring(3)
+            CallByName(myForm, "FindFieldNew", CallType.Method, Me)
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
         End If

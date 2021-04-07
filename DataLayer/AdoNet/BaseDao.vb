@@ -113,8 +113,12 @@ Namespace AdoNet
                         sql &= " = @searchString"
                     End If
                 End If
-            ElseIf findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
-                FindDateField(tableName, findableControl, filter)
+                Dim params() As Object = {"@SearchString", searchString}
+                _lastFindQuery = sql
+                _lastFindParms = params
+                retVal = _db.Scalar(sql & " order by IdNo ", params)
+            ElseIf findableControl.SearchMode = IFindableControl.SearchModeEnum.Date Then
+                retVal = FindDateField(tableName, findableControl, filter)
                 'If findableControl.Is Nothing OrElse findValue = "" Then
                 'sql = sql & " (" & fieldName & " Is Null or " & fieldName & " = '') "
                 'Else
@@ -128,11 +132,25 @@ Namespace AdoNet
                 '    searchString = searchString.Trim()
                 '    sql = sql & fieldName & " = @SearchString "
                 'End If
+            ElseIf findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
+                If findableControl.BegFindValue Is Nothing Then
+                    sql &= " (" & findableControl.FieldName & " Is Null or " & findableControl.FieldName & " = '') "
+                Else
+                    searchString = findableControl.BegFindValue
+                    sql &= " = @searchString"
+                End If
+                Dim params() As Object = {"@SearchString", searchString}
+                _lastFindQuery = sql
+                _lastFindParms = params
+                retVal = _db.Scalar(sql & " order by IdNo ", params)
+            ElseIf findableControl.SearchMode = IFindableControl.SearchModeEnum.CheckBox Then
+                searchString = IIf(findableControl.BegFindValue, "1", "0")
+                sql &= " = @searchString"
+                Dim params() As Object = {"@SearchString", searchString}
+                _lastFindQuery = sql
+                _lastFindParms = params
+                retVal = _db.Scalar(sql & " order by IdNo ", params)
             End If
-            Dim params() As Object = {"@SearchString", searchString}
-            _lastFindQuery = sql
-            _lastFindParms = params
-            retVal = _db.Scalar(sql & " order by IdNo ", params)
             Return retVal
         End Function
 
@@ -154,8 +172,9 @@ Namespace AdoNet
                     dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBDate)
                     searchString = findableControl.FieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & findableControl.FieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
                 Else
-                    dBDate = Convert.ToDateTime(dBegDate)
-                    dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
+                    dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, Convert.ToDateTime(dEndDate))
+                    'dBDate = Convert.ToDateTime(dBegDate)
+                    'dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
                     searchString = findableControl.FieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & findableControl.FieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
                 End If
             End If

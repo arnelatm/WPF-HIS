@@ -33,16 +33,16 @@ Partial Class CFindFormNew
         Me.BtnFind = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
+        Me.RBtnExactMatch = New System.Windows.Forms.RadioButton()
         Me.lblLookFor4 = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblLookFor3 = New System.Windows.Forms.Label()
         Me.lblLookFor2 = New System.Windows.Forms.Label()
         Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.chkChecked = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.dtpBegDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.RBtnExactMatch = New System.Windows.Forms.RadioButton()
-        Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
+        Me.chkChecked = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.CGroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -134,11 +134,11 @@ Partial Class CFindFormNew
         Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtTextToSearch, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.cboTextToSearch, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkChecked, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.dtpEndDate, 4, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.dtpBegDate, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.BtnCancel, 2, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.BtnFind, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkChecked, 2, 3)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(9, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 7
@@ -153,6 +153,33 @@ Partial Class CFindFormNew
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(331, 241)
         Me.TableLayoutPanel1.TabIndex = 6
+        '
+        'CGroupBox1
+        '
+        Me.CGroupBox1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.CGroupBox1.AutoSize = True
+        Me.CGroupBox1.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.SetColumnSpan(Me.CGroupBox1, 5)
+        Me.CGroupBox1.Controls.Add(Me.RBtnStart)
+        Me.CGroupBox1.Controls.Add(Me.RBtnAnywhere)
+        Me.CGroupBox1.Controls.Add(Me.RBtnExactMatch)
+        Me.CGroupBox1.DisplayOnly = True
+        Me.CGroupBox1.Location = New System.Drawing.Point(103, 108)
+        Me.CGroupBox1.Name = "CGroupBox1"
+        Me.CGroupBox1.Size = New System.Drawing.Size(124, 101)
+        Me.CGroupBox1.TabIndex = 7
+        Me.CGroupBox1.TabStop = False
+        '
+        'RBtnExactMatch
+        '
+        Me.RBtnExactMatch.AutoSize = True
+        Me.RBtnExactMatch.BackColor = System.Drawing.Color.Transparent
+        Me.RBtnExactMatch.Location = New System.Drawing.Point(5, 65)
+        Me.RBtnExactMatch.Name = "RBtnExactMatch"
+        Me.RBtnExactMatch.Size = New System.Drawing.Size(85, 17)
+        Me.RBtnExactMatch.TabIndex = 11
+        Me.RBtnExactMatch.Text = "Exact Match"
+        Me.RBtnExactMatch.UseVisualStyleBackColor = False
         '
         'lblLookFor4
         '
@@ -198,6 +225,7 @@ Partial Class CFindFormNew
         'cboTextToSearch
         '
         Me.cboTextToSearch.BackColor = System.Drawing.Color.White
+        Me.cboTextToSearch.BegFindValue = Nothing
         Me.cboTextToSearch.ChangingSearchValueOnly = False
         Me.TableLayoutPanel1.SetColumnSpan(Me.cboTextToSearch, 4)
         Me.cboTextToSearch.CurrentSearchTerm = ""
@@ -205,7 +233,11 @@ Partial Class CFindFormNew
         Me.cboTextToSearch.DisplayMember = "Name"
         Me.cboTextToSearch.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cboTextToSearch.EditingMode = True
+        Me.cboTextToSearch.EndFindValue = Nothing
+        Me.cboTextToSearch.FieldName = Nothing
         Me.cboTextToSearch.FilterRule = Nothing
+        Me.cboTextToSearch.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboTextToSearch.FindEnabled = False
         Me.cboTextToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.cboTextToSearch.ForeColor = System.Drawing.Color.Black
         Me.cboTextToSearch.FormattingEnabled = True
@@ -232,27 +264,6 @@ Partial Class CFindFormNew
         Me.cboTextToSearch.ValueIsNullable = False
         Me.cboTextToSearch.ValueIsNumeric = False
         Me.cboTextToSearch.ValueMember = "IdNo"
-        '
-        'chkChecked
-        '
-        Me.chkChecked.BackColor = System.Drawing.Color.White
-        Me.chkChecked.DisplayOnly = False
-        Me.chkChecked.EditingMode = True
-        Me.chkChecked.FindEnabled = False
-        Me.chkChecked.FlatAppearance.BorderSize = 0
-        Me.chkChecked.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.chkChecked.ForeColor = System.Drawing.Color.Black
-        Me.chkChecked.LinkedLabel = Nothing
-        Me.chkChecked.Location = New System.Drawing.Point(56, 80)
-        Me.chkChecked.Margin = New System.Windows.Forms.Padding(1)
-        Me.chkChecked.Name = "chkChecked"
-        Me.chkChecked.NoLabel = True
-        Me.chkChecked.OldValue = Nothing
-        Me.chkChecked.Size = New System.Drawing.Size(24, 24)
-        Me.chkChecked.TabIndex = 8
-        Me.chkChecked.Text = "CCheckBox1"
-        Me.chkChecked.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkChecked.UseVisualStyleBackColor = True
         '
         'dtpEndDate
         '
@@ -304,32 +315,33 @@ Partial Class CFindFormNew
         Me.dtpBegDate.ValueIsMandatory = False
         Me.dtpBegDate.ValueIsNullable = False
         '
-        'RBtnExactMatch
+        'chkChecked
         '
-        Me.RBtnExactMatch.AutoSize = True
-        Me.RBtnExactMatch.BackColor = System.Drawing.Color.Transparent
-        Me.RBtnExactMatch.Location = New System.Drawing.Point(5, 65)
-        Me.RBtnExactMatch.Name = "RBtnExactMatch"
-        Me.RBtnExactMatch.Size = New System.Drawing.Size(85, 17)
-        Me.RBtnExactMatch.TabIndex = 11
-        Me.RBtnExactMatch.Text = "Exact Match"
-        Me.RBtnExactMatch.UseVisualStyleBackColor = False
-        '
-        'CGroupBox1
-        '
-        Me.CGroupBox1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.CGroupBox1.AutoSize = True
-        Me.CGroupBox1.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel1.SetColumnSpan(Me.CGroupBox1, 5)
-        Me.CGroupBox1.Controls.Add(Me.RBtnStart)
-        Me.CGroupBox1.Controls.Add(Me.RBtnAnywhere)
-        Me.CGroupBox1.Controls.Add(Me.RBtnExactMatch)
-        Me.CGroupBox1.DisplayOnly = True
-        Me.CGroupBox1.Location = New System.Drawing.Point(103, 108)
-        Me.CGroupBox1.Name = "CGroupBox1"
-        Me.CGroupBox1.Size = New System.Drawing.Size(124, 101)
-        Me.CGroupBox1.TabIndex = 7
-        Me.CGroupBox1.TabStop = False
+        Me.chkChecked.BackColor = System.Drawing.Color.White
+        Me.chkChecked.BegFindValue = Nothing
+        Me.TableLayoutPanel1.SetColumnSpan(Me.chkChecked, 2)
+        Me.chkChecked.DisplayOnly = False
+        Me.chkChecked.EditingMode = True
+        Me.chkChecked.EndFindValue = Nothing
+        Me.chkChecked.FieldName = Nothing
+        Me.chkChecked.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkChecked.FindEnabled = False
+        Me.chkChecked.FlatAppearance.BorderSize = 0
+        Me.chkChecked.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.chkChecked.ForeColor = System.Drawing.Color.Black
+        Me.chkChecked.IFindableControl_FindEnabled = False
+        Me.chkChecked.LinkedLabel = Nothing
+        Me.chkChecked.Location = New System.Drawing.Point(172, 80)
+        Me.chkChecked.Margin = New System.Windows.Forms.Padding(1)
+        Me.chkChecked.Name = "chkChecked"
+        Me.chkChecked.NoLabel = True
+        Me.chkChecked.OldValue = Nothing
+        Me.chkChecked.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkChecked.Size = New System.Drawing.Size(18, 24)
+        Me.chkChecked.TabIndex = 8
+        Me.chkChecked.Text = "CCheckBox1"
+        Me.chkChecked.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkChecked.UseVisualStyleBackColor = True
         '
         'CFindFormNew
         '

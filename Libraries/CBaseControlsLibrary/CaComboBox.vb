@@ -11,11 +11,11 @@ Public Class CaComboBox
     Inherits BCombobox
     Implements IEntryControl, IFindableControl
 
-
 #Region "Custom Properties"
 
     'Private MyErrorProvider As New ErrorProviderExtended
     Private _displayOnly As Boolean
+
     Private _editable As Boolean
     Private _editingMode As Boolean = True
     Private _filterRule As Expression(Of Func(Of String, String, Boolean))
@@ -280,12 +280,14 @@ Public Class CaComboBox
 
     ' Text Menu Captions
     Private Shared ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+
     Private Shared ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
     Private Shared ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
     Private Shared ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
     Private Shared ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
     Private Shared ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
     Private Shared ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
+
 #End Region
 
 #Region "Event Handlers"
@@ -361,7 +363,6 @@ Public Class CaComboBox
         End Select
         MyBase.OnPreviewKeyDown(e)
     End Sub
-
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
         MyBase.OnTextChanged(e)
@@ -635,7 +636,6 @@ Public Class CaComboBox
         'End If
     End Sub
 
-
     Private Sub MenuItemCut_Click()
         If EditingMode Then
             Clipboard.SetText(SelectedText)
@@ -806,10 +806,10 @@ Public Class CaComboBox
 
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
         Get
-            Throw New NotImplementedException()
+            Return IFindableControl.DataTypeEnum.String
         End Get
         Set(value As IFindableControl.DataTypeEnum)
-            Throw New NotImplementedException()
+
         End Set
     End Property
 
