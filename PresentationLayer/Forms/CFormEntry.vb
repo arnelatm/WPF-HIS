@@ -9,6 +9,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.AatmInterfaces
 
 Public Class CFormEntry
     Implements ISubscriber(Of RecordPositionChanged),
@@ -89,7 +90,7 @@ Public Class CFormEntry
         If TypeOf cControl Is CaComboBox Then
             Dim caComboboxControl As CaComboBox = cControl
             If fieldName Is Nothing OrElse fieldName = "" Then
-                'fieldName = cControl.Name
+                'fieldName = findableControl.Name
             Else
                 If Not (caComboboxControl.SearchField Is Nothing OrElse caComboboxControl.SearchField = "") Then
                     fieldName = caComboboxControl.SearchField
@@ -100,7 +101,7 @@ Public Class CFormEntry
             Dim cMaskedTextBoxControl As CMaskedTextBox = cControl
             If Not (cMaskedTextBoxControl.SearchField Is Nothing OrElse cMaskedTextBoxControl.SearchField = "") Then
                 fieldName = cMaskedTextBoxControl.SearchField
-                'Dim dSearch As Date? = CallByName(cControl, "GetBegDateToSearch", CallType.Get)
+                'Dim dSearch As Date? = CallByName(findableControl, "GetBegDateToSearch", CallType.Get)
                 'If dSearch IsNot Nothing Then
                 Dim begDateToSearch As Date? = CallByName(cControl, "GetBegDateToSearch", CallType.Get)
                 Dim endDateToSearch As Date? = CallByName(cControl, "GetEndDateToSearch", CallType.Get)
@@ -112,6 +113,39 @@ Public Class CFormEntry
         searchPlace = CallByName(cControl, "GetSearchPlace", CallType.Get)
         PresenterObj.FindField(fieldName, searchString, searchPlace)
 
+    End Sub
+
+    Public Sub FindFieldNew(findableControl As IFindableControl)
+        'Dim fieldName As String = findableControl.FieldName
+        'Dim searchString As String
+        'Dim searchPlace As Char
+        PresenterObj.FindFieldNew(findableControl)
+        'searchString = CallByName(findableControl, "GetTextToSearch", CallType.Get)
+        'If findableControl.SearchMode = "String" Then
+        '    PresenterObj.FindFieldNew(findableControl)
+        '    If fieldName Is Nothing OrElse fieldName = "" Then
+        '        'fieldName = findableControl.Name
+        '    Else
+        '        If Not (caComboboxControl.SearchField Is Nothing OrElse caComboboxControl.SearchField = "") Then
+        '            fieldName = caComboboxControl.SearchField
+        '            'searchString = PresenterObj.FindFieldOnTable("Employee", fieldNameToSearch, searchString, searchAnywhere)
+        '        End If
+        '    End If
+        'ElseIf TypeOf findableControl Is CMaskedTextBox Then
+        '    Dim cMaskedTextBoxControl As CMaskedTextBox = findableControl
+        '    If Not (cMaskedTextBoxControl.SearchField Is Nothing OrElse cMaskedTextBoxControl.SearchField = "") Then
+        '        fieldName = cMaskedTextBoxControl.SearchField
+        '        'Dim dSearch As Date? = CallByName(findableControl, "GetBegDateToSearch", CallType.Get)
+        '        'If dSearch IsNot Nothing Then
+        '        Dim begDateToSearch As Date? = CallByName(findableControl, "GetBegDateToSearch", CallType.Get)
+        '        Dim endDateToSearch As Date? = CallByName(findableControl, "GetEndDateToSearch", CallType.Get)
+        '        PresenterObj.FindDateField(fieldName, begDateToSearch, endDateToSearch)
+        '        'End If
+        '        Exit Sub
+        '    End If
+        'End If
+        'searchPlace = CallByName(findableControl, "GetSearchPlace", CallType.Get)
+        'PresenterObj.FindField(fieldName, searchString, searchPlace)
     End Sub
 
     Public Function GetMainFieldsDictionary()

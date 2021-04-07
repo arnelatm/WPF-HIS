@@ -5,6 +5,7 @@ Imports System.Reflection.Emit
 Imports System.Transactions
 Imports System.Windows.Forms
 Imports AATM.Libraries
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -386,6 +387,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Sub FindField(fieldName As String, searchString As String, searchPlace As Char)
         Dim idNo = Model.FindField(TableName, fieldName, searchString, searchPlace, DataFilter)
+        If idNo <> 0 Then
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
+        Else
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+        End If
+    End Sub
+
+    Public Sub FindFieldNew(cControl As IFindableControl)
+        Dim idNo = Model.FindFieldNew(TableName, cControl, DataFilter)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else

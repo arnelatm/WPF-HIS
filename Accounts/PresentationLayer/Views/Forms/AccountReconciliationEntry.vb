@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -334,7 +335,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub MenuClicked()
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindForm(0)
+            Dim searchForm = New CFindFormNew(Me)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea
@@ -349,8 +350,8 @@ Namespace PresentationLayer.Views.Forms
             '    SearchForm.RightToLeft = myForm.RightToLeft
             'End If
             searchForm.ShowDialog()
-            Dim textToSearch As String
-            textToSearch = searchForm.TextToSearch
+            Dim textToSearch As String = ""
+            'textToSearch = searchForm.
             searchForm.Dispose()
             If textToSearch <> "" Then
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect

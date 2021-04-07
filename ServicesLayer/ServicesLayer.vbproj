@@ -129,6 +129,10 @@
       <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
+      <Project>{8bf1be35-27dc-4b2f-b7db-a2cf182bbc7c}</Project>
+      <Name>AatmInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
       <Name>GlobalFuncNSub</Name>

@@ -1,4 +1,5 @@
 ﻿Imports AATM.DataLayer
+Imports AATM.Libraries.AatmInterfaces
 
 Namespace Services
 
@@ -17,6 +18,8 @@ Namespace Services
         Function DelUpdateTvp(dtTable As DataTable, groupKey As Integer) As Integer
 
         Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer
+
+        Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
 
         Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer
 
