@@ -403,8 +403,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
     End Sub
 
-    Public Sub FindDateField(fieldName As String, begDateToSearch As Date?, endDateToSearch As Date?)
-        Dim idNo = Model.FindDateField(TableName, fieldName, begDateToSearch, endDateToSearch, DataFilter)
+    Public Sub FindDateField(fieldName As String, findableControl As IFindableControl)
+        Dim idNo = Model.FindDateField(TableName, findableControl, DataFilter)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else

@@ -105,10 +105,9 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboSupplierIdNo.PreviousSearchTerm = Nothing
         Me.cboSupplierIdNo.PreviousSelectedIndex = -1
         Me.cboSupplierIdNo.PropertySelector = Nothing
-        Me.cboSupplierIdNo.ReadOnlyCombo = false
-        Me.cboSupplierIdNo.SearchPlace = "A"
-        Me.cboSupplierIdNo.Size = New System.Drawing.Size(520, 24)
-        Me.cboSupplierIdNo.SuggestBoxHeight = 200
+        Me.cboSupplierIdNo.ReadOnlyCombo = False
+            Me.cboSupplierIdNo.Size = New System.Drawing.Size(520, 24)
+            Me.cboSupplierIdNo.SuggestBoxHeight = 200
         Me.cboSupplierIdNo.SuggestListOrderRule = Nothing
         Me.cboSupplierIdNo.TabIndex = 25
         Me.cboSupplierIdNo.TextToSearch = Nothing

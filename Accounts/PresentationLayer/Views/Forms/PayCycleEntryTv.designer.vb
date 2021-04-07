@@ -293,8 +293,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayFrequency.PreviousSelectedIndex = -1
             Me.cboPayFrequency.PropertySelector = Nothing
             Me.cboPayFrequency.ReadOnlyCombo = False
-            Me.cboPayFrequency.SearchPlace = "A"
-            Me.cboPayFrequency.SearchField = Nothing
             Me.cboPayFrequency.Size = New System.Drawing.Size(202, 24)
             Me.cboPayFrequency.SuggestBoxHeight = 200
             Me.cboPayFrequency.SuggestListOrderRule = Nothing

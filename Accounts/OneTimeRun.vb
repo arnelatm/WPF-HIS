@@ -86,6 +86,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgSelectedValueNotAllowed", "Sorry selected value for {field1} not allowed for selected {field2}.", "Error")
         Messaging.AddMessage("MsgNothingToFind", "Either this is a fixed field value or find not enabled for this field.", "Warning")
         Messaging.AddMessage("MsgNoMatchingRecordFound", "No records match your query condition!", "Warning")
+        Messaging.AddMessage("MsgOperationNotAvailableInViewMode", "Sorry operation not allowed in view mode, change to edit mode to be able to perform such action.", "Warning")
     End Sub
 
     'Public Shared Sub CreateEnums()

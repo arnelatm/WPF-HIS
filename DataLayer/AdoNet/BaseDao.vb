@@ -113,6 +113,8 @@ Namespace AdoNet
                         sql &= " = @searchString"
                     End If
                 End If
+            ElseIf findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
+                FindDateField(tableName, findableControl, filter)
                 'If findableControl.Is Nothing OrElse findValue = "" Then
                 'sql = sql & " (" & fieldName & " Is Null or " & fieldName & " = '') "
                 'Else
@@ -134,29 +136,27 @@ Namespace AdoNet
             Return retVal
         End Function
 
-        Public Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindDateField
+        Public Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindDateField
             Dim retVal As Integer
             Dim searchString As String
             Dim sql As String = " SELECT IdNo FROM [" & tableName & "] Where "
             If Not (filter Is Nothing OrElse filter = "") Then
                 sql = sql & filter.Trim() & " and "
             End If
-            Dim dBegDate As Date? = begSearchDate
-            Dim dEndDate As Date? = endSearchDate
+            Dim dBegDate As Date? = findableControl.BegFindValue
+            Dim dEndDate As Date? = findableControl.EndFindValue
             If dBegDate Is Nothing Then
-                searchString = fieldName & " Is Null"
+                searchString = findableControl.FieldName & " Is Null"
             Else
-                Dim dBDate As Date
+                Dim dBDate As Date = Convert.ToDateTime(dBegDate)
                 Dim dEDate As Date
-                If endSearchDate Is Nothing Then
-                    dBDate = Convert.ToDateTime(begSearchDate)
+                If dEndDate Is Nothing Then
                     dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBDate)
-                    searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                    searchString = findableControl.FieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & findableControl.FieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
                 Else
-                    dBDate = Convert.ToDateTime(begSearchDate)
-                    dEDate = Convert.ToDateTime(endSearchDate)
+                    dBDate = Convert.ToDateTime(dBegDate)
                     dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
-                    searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                    searchString = findableControl.FieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & findableControl.FieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
                 End If
             End If
             sql = sql & searchString

@@ -226,8 +226,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.PreviousSelectedIndex = -1
             Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.ReadOnlyCombo = False
-            Me.cacParentIdNo.SearchPlace = "A"
-            Me.cacParentIdNo.SearchField = Nothing
             Me.cacParentIdNo.SuggestBoxHeight = 200
             Me.cacParentIdNo.SuggestListOrderRule = Nothing
             Me.cacParentIdNo.TextToSearch = Nothing
@@ -267,8 +265,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevCostCenterIdNo.PreviousSelectedIndex = -1
             Me.cacRevCostCenterIdNo.PropertySelector = Nothing
             Me.cacRevCostCenterIdNo.ReadOnlyCombo = False
-            Me.cacRevCostCenterIdNo.SearchPlace = "A"
-            Me.cacRevCostCenterIdNo.SearchField = Nothing
             Me.cacRevCostCenterIdNo.SuggestBoxHeight = 200
             Me.cacRevCostCenterIdNo.SuggestListOrderRule = Nothing
             Me.cacRevCostCenterIdNo.TextToSearch = Nothing

@@ -1,13 +1,14 @@
 Public Interface IFindableControl
+    Property FindDataType As DataTypeEnum
     Property FindEnabled As Boolean
     Property BegFindValue As Object
     Property EndFindValue As Object
     Property SearchPlace As SearchPlaceEnum
     Property FieldName As String
-    ReadOnly Property DataSource As Object
-    ReadOnly Property DisplayMember As String
+    ReadOnly Property FindDataSource As Object
+    ReadOnly Property FindDisplayMember As String
     ReadOnly Property SearchMode As SearchModeEnum
-    ReadOnly Property ValueMember As String
+    ReadOnly Property FindValueMember As String
 
     Enum SearchModeEnum
         [String]
@@ -20,6 +21,15 @@ Public Interface IFindableControl
         [StartOfField]
         [AnywhereOnField]
         [ExactValue]
+    End Enum
+
+    Enum DataTypeEnum
+        [String]
+        [Date]
+        [DateTime]
+        [Integer]
+        [Decimal]
+        [Boolean]
     End Enum
 
 End Interface

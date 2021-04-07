@@ -172,11 +172,6 @@ Public Class CTextBox
     Public Property ValueIsUniqueBlanksAllowed As Boolean
 
     <Category("Custom Properties")>
-    <Description("Set to True to enable find on this field.")>
-    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
-    Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
-
-    <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is Read Only .")>
     <Browsable(True)>
@@ -241,25 +236,32 @@ Public Class CTextBox
         End Set
     End Property
 
+#Region "FindableControl"
+
+    <Category("Custom Properties")>
+    <Description("Set to True to enable find on this field.")>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
+
     Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
         Get
             Return IFindableControl.SearchModeEnum.String
         End Get
     End Property
 
-    Public ReadOnly Property DataSource As Object Implements IFindableControl.DataSource
+    Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
         Get
             Return Nothing
         End Get
     End Property
 
-    Public ReadOnly Property DisplayMember As String Implements IFindableControl.DisplayMember
+    Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
         Get
             Return Nothing
         End Get
     End Property
 
-    Public ReadOnly Property ValueMember As String Implements IFindableControl.ValueMember
+    Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
         Get
             Return Nothing
         End Get
@@ -272,6 +274,25 @@ Public Class CTextBox
     Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
 
     Public Property FieldName As String Implements IFindableControl.FieldName
+
+    Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
+        Get
+            Return GetDataType()
+        End Get
+        Set(value As IFindableControl.DataTypeEnum)
+
+        End Set
+    End Property
+
+#End Region
+
+    Private Function GetDataType() As IFindableControl.DataTypeEnum
+        If TypeOf Text Is String Then
+            Return IFindableControl.DataTypeEnum.String
+        Else
+            Return IFindableControl.DataTypeEnum.Date
+        End If
+    End Function
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         _oldValue = Text
@@ -323,14 +344,13 @@ Public Class CTextBox
 #Region "Declarations#"
 
     ' Text Menu Captions
-    Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
-
-    Private ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
-    Private ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
-    Private ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
-    Private ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
-    Private ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
-    Private ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
+    Private Shared ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+    Private Shared ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
+    Private Shared ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
+    Private Shared ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
+    Private Shared ReadOnly _textUndo = MessagingLibrary.Messaging.TranslateCaption("Undo Last Action")
+    Private Shared ReadOnly _textDelete = MessagingLibrary.Messaging.TranslateCaption("Delete Selected Text")
+    Private Shared ReadOnly _textSelectAll = MessagingLibrary.Messaging.TranslateCaption("Select All Text")
 
 #End Region
 
@@ -424,18 +444,7 @@ Public Class CTextBox
 
         _contextMenuStrip1.Items.Add(separator)
 
-        'End If
     End Sub
-
-    'Public Property ControlName Implements IFindableControl.ControlName
-    '    Get
-
-    '    End Get
-    '    Set(value)
-
-    '    End Set
-
-    'End Property
 
     Private Sub MenuItemFind_Click()
         If FindEnabled Then
@@ -461,7 +470,11 @@ Public Class CTextBox
     End Sub
 
     Private Sub MenuItemCut_Click()
-        Cut()
+        If EditingMode Then
+            Cut()
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
     End Sub
 
     Private Sub MenuItemCopy_Click()
@@ -469,7 +482,11 @@ Public Class CTextBox
     End Sub
 
     Private Sub MenuItemPaste_Click()
-        Paste()
+        If EditingMode Then
+            Paste()
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
     End Sub
 
     Private Sub MenuItemSelectAll_Click()
@@ -477,15 +494,23 @@ Public Class CTextBox
     End Sub
 
     Private Sub MenuItemUndo_Click()
-        Undo()
+        If EditingMode Then
+            Undo()
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
+        End If
     End Sub
 
     Private Sub MenuItemDelete_Click()
-        Dim clipBoardText As String
-        clipBoardText = Clipboard.GetText()
-        Cut()
-        If clipBoardText <> "" Then
-            Clipboard.SetText(clipBoardText)
+        If EditingMode Then
+            Dim clipBoardText As String
+            clipBoardText = Clipboard.GetText()
+            Cut()
+            If clipBoardText <> "" Then
+                Clipboard.SetText(clipBoardText)
+            End If
+        Else
+            MessagingLibrary.Messaging.Show(True, "MsgOperationNotAvailableInViewMode")
         End If
     End Sub
 

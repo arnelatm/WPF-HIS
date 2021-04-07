@@ -243,10 +243,9 @@
         Me.cacParentIdNo.PreviousSearchTerm = Nothing
         Me.cacParentIdNo.PreviousSelectedIndex = -1
         Me.cacParentIdNo.PropertySelector = Nothing
-        Me.cacParentIdNo.ReadOnlyCombo = false
-        Me.cacParentIdNo.SearchPlace = "A"
-        Me.cacParentIdNo.Size = New System.Drawing.Size(438, 24)
-        Me.cacParentIdNo.SuggestBoxHeight = 200
+        Me.cacParentIdNo.ReadOnlyCombo = False
+            Me.cacParentIdNo.Size = New System.Drawing.Size(438, 24)
+            Me.cacParentIdNo.SuggestBoxHeight = 200
         Me.cacParentIdNo.SuggestListOrderRule = Nothing
         Me.cacParentIdNo.TabIndex = 189
         Me.cacParentIdNo.TextToSearch = Nothing

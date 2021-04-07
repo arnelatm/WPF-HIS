@@ -618,8 +618,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSupplierIdNo.PreviousSelectedIndex = -1
             Me.cboSupplierIdNo.PropertySelector = Nothing
             Me.cboSupplierIdNo.ReadOnlyCombo = False
-            Me.cboSupplierIdNo.SearchPlace = "A"
-            Me.cboSupplierIdNo.SearchField = Nothing
             Me.cboSupplierIdNo.Size = New System.Drawing.Size(579, 24)
             Me.cboSupplierIdNo.SuggestBoxHeight = 200
             Me.cboSupplierIdNo.SuggestListOrderRule = Nothing
@@ -670,8 +668,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboTransactionType.PreviousSelectedIndex = 0
             Me.cboTransactionType.PropertySelector = Nothing
             Me.cboTransactionType.ReadOnlyCombo = False
-            Me.cboTransactionType.SearchPlace = "A"
-            Me.cboTransactionType.SearchField = Nothing
             Me.cboTransactionType.Size = New System.Drawing.Size(122, 24)
             Me.cboTransactionType.SuggestBoxHeight = 200
             Me.cboTransactionType.SuggestListOrderRule = Nothing
@@ -877,8 +873,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSelectedIndex = 0
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
-            Me.cboAccountIdNo.SearchPlace = "A"
-            Me.cboAccountIdNo.SearchField = Nothing
             Me.cboAccountIdNo.Size = New System.Drawing.Size(355, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing

@@ -22,7 +22,7 @@ Public Interface IModel
 
     Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
 
-    Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDates As Date?, Optional filter As String = Nothing) As Integer
+    Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
 
     Function FindFieldContinue(tableName As String, idNo As Int32) As Integer
 

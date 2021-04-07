@@ -223,8 +223,6 @@ Partial Class CFindForm
         Me.cboTextToSearch.PreviousSelectedIndex = -1
         Me.cboTextToSearch.PropertySelector = Nothing
         Me.cboTextToSearch.ReadOnlyCombo = False
-        Me.cboTextToSearch.SearchPlace = "A"
-        Me.cboTextToSearch.SearchField = Nothing
         Me.cboTextToSearch.Size = New System.Drawing.Size(274, 24)
         Me.cboTextToSearch.SuggestBoxHeight = 200
         Me.cboTextToSearch.SuggestListOrderRule = Nothing

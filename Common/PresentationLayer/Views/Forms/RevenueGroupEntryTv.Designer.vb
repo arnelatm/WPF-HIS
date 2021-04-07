@@ -331,8 +331,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.PreviousSelectedIndex = -1
             Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.ReadOnlyCombo = False
-            Me.cacParentIdNo.SearchPlace = "A"
-            Me.cacParentIdNo.SearchField = Nothing
             Me.cacParentIdNo.Size = New System.Drawing.Size(418, 24)
             Me.cacParentIdNo.SuggestBoxHeight = 200
             Me.cacParentIdNo.SuggestListOrderRule = Nothing
@@ -384,8 +382,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CaComboBox1.PreviousSelectedIndex = -1
             Me.CaComboBox1.PropertySelector = Nothing
             Me.CaComboBox1.ReadOnlyCombo = False
-            Me.CaComboBox1.SearchPlace = "A"
-            Me.CaComboBox1.SearchField = Nothing
             Me.CaComboBox1.Size = New System.Drawing.Size(418, 24)
             Me.CaComboBox1.SuggestBoxHeight = 200
             Me.CaComboBox1.SuggestListOrderRule = Nothing

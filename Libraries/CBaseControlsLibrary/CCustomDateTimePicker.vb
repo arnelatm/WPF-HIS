@@ -66,6 +66,7 @@ Public Class CCustomDateTimePicker
         txtLongDate.Width = _longDateWidth
         SetupDisplayWidths()
         EditingMode = True
+        txtDate.DateField = True
     End Sub
 
 #Region "Declarations#"
