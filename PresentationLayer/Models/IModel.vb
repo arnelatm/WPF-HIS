@@ -1,5 +1,6 @@
 ﻿' IBModel interface, part of MVP design pattern.
 Imports AATM.Libraries
+Imports AATM.Libraries.AatmInterfaces
 
 Public Interface IModel
 
@@ -18,6 +19,8 @@ Public Interface IModel
     Function FieldExistInTable(tableName As String, fieldName As String) As Boolean
 
     Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer
+
+    Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
 
     Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDates As Date?, Optional filter As String = Nothing) As Integer
 

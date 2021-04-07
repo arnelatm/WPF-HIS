@@ -1340,6 +1340,10 @@
       <Project>{440c4740-2584-4050-9086-543018eac766}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
+      <Project>{8bf1be35-27dc-4b2f-b7db-a2cf182bbc7c}</Project>
+      <Name>AatmInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">
       <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
       <Name>BaseControlsLibrary</Name>

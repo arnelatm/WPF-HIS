@@ -1,18 +1,19 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Web.Caching
 Imports System.Windows.Forms
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CTextBox
     Inherits BTextBox
-    Implements IEntryControl
+    Implements IEntryControl, IFindableControl
 
     Private _defaultVal As String
-    Private _textToSearch As String
-    Private _searchPlace As Char
     Private _oldValue As String
     Private _editingMode As Boolean = True
+    Private _controlName As String
 
     'Private _viewable As Boolean
     'Private _selectable As Boolean
@@ -173,7 +174,7 @@ Public Class CTextBox
     <Category("Custom Properties")>
     <Description("Set to True to enable find on this field.")>
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
-    Public Property FindEnabled As Boolean
+    Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -239,6 +240,38 @@ Public Class CTextBox
             _oldValue = value
         End Set
     End Property
+
+    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
+        Get
+            Return IFindableControl.SearchModeEnum.String
+        End Get
+    End Property
+
+    Public ReadOnly Property DataSource As Object Implements IFindableControl.DataSource
+        Get
+            Return Nothing
+        End Get
+    End Property
+
+    Public ReadOnly Property DisplayMember As String Implements IFindableControl.DisplayMember
+        Get
+            Return Nothing
+        End Get
+    End Property
+
+    Public ReadOnly Property ValueMember As String Implements IFindableControl.ValueMember
+        Get
+            Return Nothing
+        End Get
+    End Property
+
+    Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
+
+    Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
+
+    Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
+
+    Public Property FieldName As String Implements IFindableControl.FieldName
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         _oldValue = Text
@@ -394,11 +427,21 @@ Public Class CTextBox
         'End If
     End Sub
 
+    'Public Property ControlName Implements IFindableControl.ControlName
+    '    Get
+
+    '    End Get
+    '    Set(value)
+
+    '    End Set
+
+    'End Property
+
     Private Sub MenuItemFind_Click()
         If FindEnabled Then
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindForm(0)
+            Dim searchForm = New CFindFormNew(Me)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea
@@ -409,22 +452,13 @@ Public Class CTextBox
             End If
             searchForm.Location = formLocation
             searchForm.ShowDialog()
-            _textToSearch = searchForm.TextToSearch
-            _searchPlace = searchForm.GetSearchPlace
             searchForm.Dispose()
-            CallByName(myForm, "FindField", CallType.Method, Me)
+            FieldName = Name.Substring(3)
+            CallByName(myForm, "FindFieldNew", CallType.Method, Me)
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
         End If
     End Sub
-
-    Public Function GetTextToSearch() As String
-        Return _textToSearch
-    End Function
-
-    Public Function GetSearchPlace() As Char
-        Return _searchPlace
-    End Function
 
     Private Sub MenuItemCut_Click()
         Cut()
@@ -457,80 +491,11 @@ Public Class CTextBox
 
     Private Sub CTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Enter Then
-            'e.SuppressKeyPress = True
-            'e.Handled = True
-            'Me.SelectNextControl(Me, True, True, True, True)
             SendKeys.Send("{TAB}")
             e.Handled = True
             e.SuppressKeyPress = True
-            'SendWait("{TAB}")
         End If
     End Sub
-
-    'Private Sub CTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-    '    If e.KeyCode = Keys.Enter Then
-    '        e.SuppressKeyPress = True
-    '        e.Handled = True
-    '        'Me.SelectNextControl(Me, True, True, true, true)
-    '        SendKeys.Send("{TAB}")
-    '        'SendWait("{TAB}")
-    '    ElseIf e.KeyCode = Keys.X And e.Modifiers = Keys.Control Then
-    '        Cut()
-    '        e.Handled = True
-    '    ElseIf e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
-    '        Paste()
-    '        e.Handled = True
-    '    ElseIf e.KeyCode = Keys.Z And e.Modifiers = Keys.Control Then
-    '        Undo()
-    '        e.Handled = True
-    '    ElseIf e.KeyCode = Keys.A And e.Modifiers = Keys.Control Then
-    '        SelectAll()
-    '        e.Handled = True
-    '    ElseIf ValueIsNumeric Then
-    '        If ((e.KeyCode >= Keys.D0 And e.KeyCode <= Keys.D9) Or
-    '            (e.KeyCode >= Keys.NumPad0 And e.KeyCode <= Keys.NumPad9) Or
-    '            (e.KeyCode >= Keys.F1 And e.KeyCode <= Keys.F24) Or
-    '            e.KeyCode = Keys.Decimal Or e.KeyCode = Keys.Subtract Or e.KeyCode = Keys.Delete Or
-    '            e.KeyCode = Keys.Insert Or e.KeyCode = Keys.Back Or e.KeyCode = Keys.OemPeriod Or e.KeyCode = Keys.OemMinus Or
-    '            e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Or e.KeyCode = Keys.Left Or e.KeyCode = Keys.Right) Then
-    '        Else
-    '            e.SuppressKeyPress = True
-    '            e.Handled = True
-    '            Beep()
-    '        End If
-
-    '    End If
-    'End Sub
-
-    'Private Sub CTextBox_LostFocus(ByVal sender As Object,
-    '    ByVal e As EventArgs) Handles MyBase.LostFocus
-    '    If CustomFormat IsNot Nothing Then
-    '        Text = String.Format("{0:" + CustomFormat + "}", Convert.ToDecimal(NumParser(Of Decimal)(Text)))
-    '    End If
-    'End Sub
-
-    'Private Sub CTextBox_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.GotFocus
-    '    If Not _contextHandlerOn Then
-    '        ContextHandler(sender, e)
-    '        _contextHandlerOn = True
-    '    End If
-    '    'Debugger.Break()
-    'End Sub
-
-    'Private Sub CTextBox_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-    '    Try
-    '        Dim iKeep As Integer = SelectionStart - 1
-    '        For i As Integer = iKeep To 0 + 1
-    '            If Text(i) = ","c Then iKeep -= 1
-    '        Next
-    '        Text = String.Format("{0:N2}", Convert.ToInt32(Text.Replace(",", "")))
-    '        For i As Integer = 0 To iKeep - 1
-    '            If Text(i) = ","c Then iKeep += 1
-    '        Next
-    '        SelectionStart = iKeep + 1
-    '    Catch
-    '    End Try
-    'End Sub
 
     Public Function ValueChanged()
         If Text = _oldValue Then

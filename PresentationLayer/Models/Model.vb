@@ -1,4 +1,5 @@
 ﻿Imports AATM.Libraries
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.ServicesLayer.Services
 
@@ -49,6 +50,10 @@ Public Class Model
 
     Public Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer Implements IModel.FindField
         Return Service.FindField(tableName, fieldName, searchString, searchPlace, filter)
+    End Function
+
+    Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IModel.FindFieldNew
+        Return Service.FindFieldNew(tableName, findableControl, filter)
     End Function
 
     Public Function FindDateField(tableName As String, fieldName As String, begSearchDate As Date?, endSearchDate As Date?, Optional filter As String = Nothing) As Integer Implements IModel.FindDateField

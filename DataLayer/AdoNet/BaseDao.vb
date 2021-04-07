@@ -1,5 +1,6 @@
 ﻿Imports System.Dynamic
 Imports System.Globalization
+Imports AATM.Libraries.AatmInterfaces
 
 Namespace AdoNet
 
@@ -80,6 +81,51 @@ Namespace AdoNet
                     searchString = searchString.Trim()
                     sql = sql & fieldName & " = @SearchString "
                 End If
+            End If
+            Dim params() As Object = {"@SearchString", searchString}
+            _lastFindQuery = sql
+            _lastFindParms = params
+            retVal = _db.Scalar(sql & " order by IdNo ", params)
+            Return retVal
+        End Function
+
+        Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindFieldNew
+            Dim retVal As Integer
+            Dim sql As String = " SELECT IdNo FROM [" & tableName & "] " & " Where "
+            Dim searchString As String
+            If (filter Is Nothing OrElse filter = "") Then
+                sql &= findableControl.FieldName.Trim()
+            Else
+                sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
+            End If
+            If findableControl.SearchMode = IFindableControl.SearchModeEnum.String Then
+                If findableControl.BegFindValue Is Nothing OrElse findableControl.BegFindValue = "" Then
+                    sql &= " (" & findableControl.FieldName & " Is Null or " & findableControl.FieldName & " = '') "
+                Else
+                    If findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
+                        searchString = "%" & RTrim(findableControl.BegFindValue) + "%"
+                        sql &= " Like @searchString"
+                    ElseIf findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.StartOfField Then
+                        searchString = RTrim(findableControl.BegFindValue) + "%"
+                        sql &= " Like @searchString"
+                    Else  ' findableControl.searchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+                        searchString = RTrim(findableControl.BegFindValue)
+                        sql &= " = @searchString"
+                    End If
+                End If
+                'If findableControl.Is Nothing OrElse findValue = "" Then
+                'sql = sql & " (" & fieldName & " Is Null or " & fieldName & " = '') "
+                'Else
+                '    If searchPlace = "A" Then
+                '    searchString = "%" & searchString.Trim() & "%"
+                '    sql = sql & fieldName & " Like @SearchString "
+                'ElseIf searchPlace = "S" Then
+                '    searchString = searchString.Trim() & "%"
+                '    sql = sql & fieldName & " Like @SearchString "
+                'ElseIf searchPlace = "E" Then
+                '    searchString = searchString.Trim()
+                '    sql = sql & fieldName & " = @SearchString "
+                'End If
             End If
             Dim params() As Object = {"@SearchString", searchString}
             _lastFindQuery = sql

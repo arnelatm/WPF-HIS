@@ -191,6 +191,12 @@
     <Compile Include="CDTPHijriDate.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="CFindFormNew.designer.vb">
+      <DependentUpon>CFindFormNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CFindFormNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CFindForm.designer.vb">
       <DependentUpon>CFindForm.vb</DependentUpon>
     </Compile>
@@ -435,6 +441,9 @@
     <EmbeddedResource Include="CDTPHijriDate.resx">
       <DependentUpon>CDTPHijriDate.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CFindFormNew.resx">
+      <DependentUpon>CFindFormNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CFindForm.resx">
       <DependentUpon>CFindForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -514,6 +523,10 @@
     <ProjectReference Include="..\..\PresentationLayer\Events\Events.vbproj">
       <Project>{5F7FCA73-07BA-444A-BE5D-6117B973AA3D}</Project>
       <Name>Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AatmInterfaces\AatmInterfaces.vbproj">
+      <Project>{8bf1be35-27dc-4b2f-b7db-a2cf182bbc7c}</Project>
+      <Name>AatmInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\BaseControlsLibrary\BaseControlsLibrary.vbproj">
       <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
