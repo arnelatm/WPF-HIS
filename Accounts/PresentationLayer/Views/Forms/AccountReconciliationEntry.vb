@@ -713,26 +713,24 @@ Namespace PresentationLayer.Views.Forms
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 Try
                     DataGridViewReconciliationItems.ClearSelection()
-                    Dim sw = 0
+                    Dim firstRowMatchSw = 0
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
                         If _previousSearchPlace = "A" Then
                             If row.Cells(columnNo).Value.ToString().Contains(_previousTextSearch) Then
                                 row.Selected = True
-                                If sw = 0 And row.Index > _previousSelectedRow Then
-                                    'scroll and move to the first matching record
+                                If firstRowMatchSw = 0 And row.Index > _previousSelectedRow And Not DataGridViewReconciliationItems.Rows(row.Index).Displayed Then
                                     DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                    sw = 1
                                     _previousSelectedRow = row.Index
+                                    firstRowMatchSw = 1
                                 End If
                             End If
                         Else
                             If row.Cells(columnNo).Value.ToString().Equals(_previousTextSearch) Then
                                 row.Selected = True
-                                If sw = 0 And row.Index > _previousSelectedRow Then
-                                    'scroll and move to the first matching record
+                                If firstRowMatchSw = 0 And _previousSelectedRow And Not DataGridViewReconciliationItems.Rows(row.Index).Displayed Then
                                     DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                    sw = 1
                                     _previousSelectedRow = row.Index
+                                    firstRowMatchSw = 1
                                 End If
                             End If
                         End If
@@ -746,14 +744,18 @@ Namespace PresentationLayer.Views.Forms
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 Try
                     DataGridViewReconciliationItems.ClearSelection()
-                    Dim sw As Int16 = 0
+                    Dim firstRowMatchSw As Int16 = 0
+
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
                         Dim colDate As Date = row.Cells(columnNo).Value
                         If DateIsBetween(colDate, dBegDate, dEndDate) Then
                             row.Selected = True
-                            If sw = 0 And row.Index > _previousSelectedRow Then
+                            If firstRowMatchSw = 0 Then
                                 DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                sw = 1
+                                firstRowMatchSw = 1
+                                _previousSelectedRow = row.Index
+                            ElseIf row.Index > _previousSelectedRow And Not DataGridViewReconciliationItems.Rows(row.Index).Displayed Then
+                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
                                 _previousSelectedRow = row.Index
                             End If
                         End If
@@ -867,6 +869,35 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End If
         End Sub
+
+        'Private Function GetLastRowIndex(radGridView1 As DataGridView) As Integer
+        '    'Dim rowHeight = radGridView1.TableElement.RowHeight
+        '    'Dim scrollPos = radGridView1.TableElement.RowScroller.Scrollbar.Value
+        '    'Dim groupHeight = 0
+        '    'If radGridView1.EnableGrouping Then groupHeight = radGridView1.TableElement.GroupHeaderHeight
+        '    'Dim headerHeight = radGridView1.TableElement.TableHeaderHeight
+        '    'Dim contentHeight = radGridView1.Height
+        '    'Dim spaceAvailable = scrollPos + contentHeight - headerHeight - groupHeight
+
+        '    'If radGridView1.AllowAddNewRow AndAlso radGridView1.AddNewRowPosition = SystemRowPosition.Top Then
+        '    '    spaceAvailable -= rowHeight
+        '    'End If
+
+        '    'Dim pos As Integer = 0
+
+        '    'While True
+        '    '    Dim actualRowHeight = If(radGridView1.Rows(pos).Height = -1, rowHeight, radGridView1.Rows(pos).Height)
+
+        '    '    If radGridView1.RowCount > pos AndAlso spaceAvailable - actualRowHeight > 0 Then
+        '    '        pos += 1
+        '    '        spaceAvailable -= actualRowHeight
+        '    '    Else
+        '    '        Exit While
+        '    '    End If
+        '    'End While
+
+        '    'Return pos
+        'End Function
 
         'Protected Overrides Sub EndEditOnAllBindingSources()
         '    'Dim bindingSourcesQuery = From BindingSources In components.Components

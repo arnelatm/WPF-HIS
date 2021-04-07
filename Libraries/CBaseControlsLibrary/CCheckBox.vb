@@ -31,6 +31,13 @@ Public Class CCheckBox
         Text = ""
     End Sub
 
+#Region "Declarations#"
+
+    ' Text Menu Captions
+    Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+
+#End Region
+
     Public Overrides Property AutoSize As Boolean
         Get
             Return _autoSize
@@ -222,6 +229,13 @@ Public Class CCheckBox
 
     End Sub
 
+    Private Sub HandleMouseUp(control As Object, e As MouseEventArgs)
+        ' Checking the Mouse right Button
+        If e.Button = MouseButtons.Right Then
+            control.ContextMenuStrip.Show(control, New Point(e.X, e.Y))
+        End If
+    End Sub
+
     Private Sub HandlePopup(sender As Object, e As EventArgs) Handles _contextMenuStrip1.Opening
         ContextHandler(sender, e)
     End Sub
@@ -241,7 +255,7 @@ Public Class CCheckBox
         If FindEnabled Then
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindForm(0)
+            Dim searchForm = New CFindForm(3)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea

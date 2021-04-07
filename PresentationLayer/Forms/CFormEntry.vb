@@ -111,6 +111,7 @@ Public Class CFormEntry
         End If
         searchPlace = CallByName(cControl, "GetSearchPlace", CallType.Get)
         PresenterObj.FindField(fieldName, searchString, searchPlace)
+
     End Sub
 
     Public Function GetMainFieldsDictionary()
