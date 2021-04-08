@@ -21,7 +21,7 @@ Namespace PresentationLayer.Views.Forms
         Private _existingFind As Boolean = False
         Private _previousSelectedRow As Int16
         Private _previousTextSearch As String
-        Private _previousSearchPlace As Char
+        Private _previousSearchPlace As IFindableControl.SearchPlaceEnum
         Private _previousBegDateSearch As Date?
         Private _previousEndDateSearch As Date?
         Private _previousColumnSearch As Int16
@@ -550,17 +550,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub FindValue(ByRef columnNo As Int16)
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim nMode As Int16
+            Dim dataTypeEnum As IFindableControl.DataTypeEnum
+            Dim columnData = DataGridViewReconciliationItems.Columns(columnNo)
             Dim columnDataType = DataGridViewReconciliationItems.Columns(columnNo).ValueType
             _previousColumnSearch = columnNo
-            If columnDataType = GetType(Date?) Or columnDataType = GetType(Date) Or columnDataType = GetType(DateTime) Then
-                nMode = 2
-            ElseIf columnDataType = GetType(String) Or columnDataType = GetType(Char) Then
-                nMode = 0
-            ElseIf columnDataType = GetType(Decimal) Or columnDataType = GetType(Int16) Or columnDataType = GetType(Int32) Or columnDataType = GetType(Int64) Then
-                nMode = 0
-            End If
-            Dim searchForm = New CFindForm(nMode)
+            dataTypeEnum = GetObjectDataType(columnDataType)
+            Dim searchForm = New CFindFormNew(DataGridViewReconciliationItems.Columns(columnNo))
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea
@@ -572,20 +567,20 @@ Namespace PresentationLayer.Views.Forms
             searchForm.Location = formLocation
             searchForm.ShowDialog()
             Dim textToSearch As String
-            Dim searchPlace As Char
+            Dim searchPlace As IFindableControl.SearchPlaceEnum
             If Not _existingFind Then
                 _existingFind = True
             End If
-            If nMode = 0 Then
-                textToSearch = searchForm.TextToSearch
-                searchPlace = searchForm.GetSearchPlace
+            If dataTypeEnum = IFindableControl.SearchModeEnum.TextBox Then
+                textToSearch = CallByName(columnData, "BegFindValue", CallType.Get)
+                searchPlace = CallByName(columnData, "SearchPlace", CallType.Get)
                 If textToSearch <> "" Then
                     DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                     Try
                         DataGridViewReconciliationItems.ClearSelection()
                         Dim sw = 0
                         For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                            If searchPlace = "A" Then
+                            If searchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                                 ' search anywhere
                                 If row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
                                     row.Selected = True
@@ -596,7 +591,7 @@ Namespace PresentationLayer.Views.Forms
                                         _previousSelectedRow = row.Index()
                                     End If
                                 End If
-                            ElseIf searchPlace = "E" Then
+                            ElseIf searchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
                                 ' exact match
                                 If row.Cells(columnNo).Value.ToString().Equals(textToSearch) Then
                                     row.Selected = True
@@ -626,9 +621,9 @@ Namespace PresentationLayer.Views.Forms
                         MessageBox.Show(exc.Message)
                     End Try
                 End If
-            ElseIf nMode = 2 Then
-                Dim dBegDate As Date? = searchForm.BegDateToSearch
-                Dim dEndDate As Date? = searchForm.EndDateToSearch
+            ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Date Then
+                Dim dBegDate As Date? = CallByName(columnData, "BegFindValue", CallType.Get)
+                Dim dEndDate As Date? = CallByName(columnData, "EndFindValue", CallType.Get)
                 Dim dBDate As Date
                 Dim dEDate As Date
 
@@ -710,13 +705,13 @@ Namespace PresentationLayer.Views.Forms
             'If Not _existingFind Then
             '    _existingFind = True
             'End If
-            If nMode = 0 Then
+            If nMode = IFindableControl.SearchModeEnum.TextBox Then
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 Try
                     DataGridViewReconciliationItems.ClearSelection()
                     Dim firstRowMatchSw = 0
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                        If _previousSearchPlace = "A" Then
+                        If _previousSearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                             If row.Cells(columnNo).Value.ToString().Contains(_previousTextSearch) Then
                                 row.Selected = True
                                 If firstRowMatchSw = 0 And row.Index > _previousSelectedRow And Not DataGridViewReconciliationItems.Rows(row.Index).Displayed Then

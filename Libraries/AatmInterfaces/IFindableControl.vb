@@ -11,7 +11,7 @@ Public Interface IFindableControl
     ReadOnly Property FindValueMember As String
 
     Enum SearchModeEnum
-        [String]
+        [TextBox]
         [Date]
         [ComboBox]
         [CheckBox]

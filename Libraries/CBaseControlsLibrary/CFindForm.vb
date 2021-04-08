@@ -75,7 +75,7 @@ Public Class CFindForm
         If _searchMode = IFindableControl.SearchModeEnum.ComboBox Then
             _textToSearch = cboTextToSearch.SelectedValue
             _searchPlace = IFindableControl.SearchModeEnum.ComboBox
-        ElseIf _searchMode = IFindableControl.SearchModeEnum.String Then
+        ElseIf _searchMode = IFindableControl.SearchModeEnum.TextBox Then
             ' textbox search
             _textToSearch = TxtTextToSearch.Text
             If RBtnStart.Checked Then

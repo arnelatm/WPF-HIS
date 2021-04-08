@@ -310,6 +310,10 @@ Public Class Model
         Return Service.GetFieldValue(Of TType)(sqlStatement, tableName, condition)
     End Function
 
+    Public Function GetFieldType(tableName As String, fieldName As String) As Object Implements IModel.GetFieldType
+        Return Service.GetFieldType(tableName, fieldName)
+    End Function
+
     Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList _
         Implements IModel.GetUserSecurity
         Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
