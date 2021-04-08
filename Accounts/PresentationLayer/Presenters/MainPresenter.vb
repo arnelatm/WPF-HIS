@@ -5,6 +5,7 @@ Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
+Imports AATM.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Presenters
 

@@ -1,6 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Views.Forms
 

@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Views
+﻿Imports AATM.PresentationLayer.Models
+
+Namespace PresentationLayer.Views
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class SecurityGroupView
         Inherits System.Windows.Forms.UserControl
@@ -393,7 +395,7 @@
         '
         'bsGroupAccesses
         '
-        Me.bsGroupAccesses.DataSource = GetType(AATM.Common.PresentationLayer.Models.GroupAccessModel)
+        Me.bsGroupAccesses.DataSource = GetType(GroupAccessModel)
         '
         'SecurityGroupView
         '

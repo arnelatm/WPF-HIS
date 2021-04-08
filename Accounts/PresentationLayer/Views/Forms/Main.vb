@@ -13,6 +13,7 @@ Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Forms
+Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 Imports AutoMapper
 

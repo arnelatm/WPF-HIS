@@ -220,7 +220,6 @@
     <Compile Include="PresentationLayer\Models\RevCostCenterModel.vb" />
     <Compile Include="PresentationLayer\Models\CountryModel.vb" />
     <Compile Include="PresentationLayer\Models\DepartmentModel.vb" />
-    <Compile Include="PresentationLayer\Models\GroupAccessModel.vb" />
     <Compile Include="PresentationLayer\Models\IModelCommon.vb" />
     <Compile Include="PresentationLayer\Models\IModelDefaultFieldValue.vb" />
     <Compile Include="PresentationLayer\Models\ModelCommon.vb" />
@@ -241,11 +240,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PresentationLayer\Models\SecurityGroupModel.vb" />
-    <Compile Include="PresentationLayer\Models\SecurityObjectModel.vb" />
     <Compile Include="PresentationLayer\Models\TranslatedCaptionModel.vb" />
     <Compile Include="PresentationLayer\Models\TranslatedMessagesModel.vb" />
-    <Compile Include="PresentationLayer\Models\UserModel.vb" />
     <Compile Include="PresentationLayer\Presenters\DefaultFieldValuePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BranchPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
@@ -259,27 +255,18 @@
     <Compile Include="PresentationLayer\Presenters\RevenueGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TranslatedCaptionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TranslatedMessagesPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\SecurityGroupPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\SecurityObjectPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\SecurityPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\UserPresenter.vb" />
-    <Compile Include="PresentationLayer\Views\GroupAccessView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IDefaultFieldValueView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IBranchView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IRevCostCenterView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\ICountryView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IDepartmentView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IGroupAccessView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IOriginalCaptionsView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IOriginalMessagesView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IPhoneTypeView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IReligionView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IRevenueGroupView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\ISecurityGroupView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\ISecurityObjectView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\ITranslatedCaptionView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\ITranslatedMessagesView.vb" />
-    <Compile Include="PresentationLayer\Views\Interface\IUserView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IDefaultFieldValueView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IBranchView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IRevCostCenterView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ICountryView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IDepartmentView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IOriginalCaptionsView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IOriginalMessagesView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPhoneTypeView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IReligionView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IRevenueGroupView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ITranslatedCaptionView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ITranslatedMessagesView.vb" />
     <Compile Include="ServiceLayer\IServiceCommon.vb" />
     <Compile Include="ServiceLayer\ServiceCommon.vb" />
   </ItemGroup>
@@ -375,6 +362,7 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BusinessLayer\BusinessObjects\" />
     <Folder Include="ServiceLayer\ActionServices\" />
   </ItemGroup>
   <ItemGroup>

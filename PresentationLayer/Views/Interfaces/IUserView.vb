@@ -1,6 +1,6 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿
 
-Namespace PresentationLayer.Views.Interface
+Namespace Interfaces
 
     Public Interface IUserView
         Inherits IView
