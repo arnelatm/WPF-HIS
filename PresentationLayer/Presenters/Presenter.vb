@@ -395,7 +395,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Sub FindFieldNew(findableControl As IFindableControl)
-        Dim fieldType = Model.GetFieldType(TableName, findableControl.FieldName)
+        'Dim fieldType = Model.GetFieldType(TableName, findableControl.FieldName)
         Dim idNo = Model.FindFieldNew(TableName, findableControl, DataFilter)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)

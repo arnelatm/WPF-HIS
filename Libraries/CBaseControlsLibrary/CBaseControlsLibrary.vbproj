@@ -197,12 +197,6 @@
     <Compile Include="CFindFormNew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CFindForm.designer.vb">
-      <DependentUpon>CFindForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CFindForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CFlowLayout.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -443,9 +437,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CFindFormNew.resx">
       <DependentUpon>CFindFormNew.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CFindForm.resx">
-      <DependentUpon>CFindForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CForm.ar-SA.resx">
       <DependentUpon>CForm.vb</DependentUpon>
