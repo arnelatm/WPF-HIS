@@ -91,6 +91,10 @@
     </Compile>
     <Compile Include="NewPresenter.vb" />
     <Compile Include="Presenter.vb" />
+    <Compile Include="SecurityGroupPresenter.vb" />
+    <Compile Include="SecurityObjectPresenter.vb" />
+    <Compile Include="SecurityPresenter.vb" />
+    <Compile Include="UserPresenter.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

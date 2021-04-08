@@ -69,6 +69,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GroupAccessModel.vb" />
     <Compile Include="IModel.vb" />
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="LoginModel.vb" />
@@ -90,7 +91,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SaltModel.vb" />
+    <Compile Include="SecurityGroupModel.vb" />
+    <Compile Include="SecurityObjectModel.vb" />
     <Compile Include="TblColPropModel.vb" />
+    <Compile Include="UserModel.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

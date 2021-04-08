@@ -66,7 +66,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GroupAccessView.vb" />
     <Compile Include="ILoginView.vb" />
+    <Compile Include="Interfaces\IGroupAccessView.vb" />
+    <Compile Include="Interfaces\ISecurityGroupView.vb" />
+    <Compile Include="Interfaces\ISecurityObjectView.vb" />
+    <Compile Include="Interfaces\IUserView.vb" />
     <Compile Include="ISaltView.vb" />
     <Compile Include="IView.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -106,6 +111,46 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
+      <Project>{8bf1be35-27dc-4b2f-b7db-a2cf182bbc7c}</Project>
+      <Name>AatmInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">
+      <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
+      <Name>BaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
+      <Project>{f991561a-78f8-487c-a873-e6436b41d801}</Project>
+      <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\CustomComboBox\CustomComboBox.csproj">
+      <Project>{78a0ac9e-8e5c-422a-a45a-2bd0035f14e2}</Project>
+      <Name>CustomComboBox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\ErrorsAndEvents\ErrorsAndEvents.vbproj">
+      <Project>{abbf2275-7dff-4724-98f9-71a2fd10b471}</Project>
+      <Name>ErrorsAndEvents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\GlobalResources\GlobalResources.vbproj">
+      <Project>{821ee93b-1de7-414d-9612-960288f355fe}</Project>
+      <Name>GlobalResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\HelperLibraries\HelperLibraries.vbproj">
+      <Project>{a7ee826e-e3b4-40a7-8754-285b373f4321}</Project>
+      <Name>HelperLibraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+      <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
+      <Name>MessagingLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Events\Events.vbproj">
+      <Project>{5f7fca73-07ba-444a-be5d-6117b973aa3d}</Project>
+      <Name>Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.vbproj">
       <Project>{6A8692E0-9B9B-4F31-8BA6-0C3DE257F9A4}</Project>
       <Name>Models</Name>
@@ -113,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

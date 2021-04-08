@@ -1,5 +1,6 @@
 ﻿' GroupAccess business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field, Foreign Key Mapping.
+
 Namespace BusinessObjects
 
     Public Class GroupAccess
