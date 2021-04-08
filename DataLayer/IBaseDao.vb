@@ -77,6 +77,8 @@ Public Interface IBaseDao
 
     Function IsFieldUnique(tableName As String, fieldName As String) As Boolean
 
+    Function GetFieldType(tableName As String, fieldName As String) As Object
+
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
 
 End Interface

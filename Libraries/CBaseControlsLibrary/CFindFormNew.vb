@@ -52,10 +52,8 @@ Public Class CFindFormNew
     'End Function
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
-        If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
-            _searchPlace = SearchPlaceEnum.ExactMatch
-            _findableControl.BegFindValue = cboTextToSearch.SelectedValue
-        ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.String Then
+        Dim x As Object
+        If _findableControl.SearchMode = IFindableControl.SearchModeEnum.TextBox Then
             If RBtnStart.Checked Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.StartOfField
             ElseIf RBtnExactMatch.Checked Then
@@ -64,6 +62,9 @@ Public Class CFindFormNew
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField
             End If
             _findableControl.BegFindValue = TxtTextToSearch.Text
+        ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
+            _searchPlace = SearchPlaceEnum.ExactMatch
+            _findableControl.BegFindValue = cboTextToSearch.SelectedValue
         ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.Date Then
             _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
             _findableControl.BegFindValue = dtpBegDate.Value
@@ -119,7 +120,79 @@ Public Class CFindFormNew
             lblTo.Visible = False
             chkChecked.Visible = False
             Height = 140
-        ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.String Then
+        Else
+            SetupDisplay()
+        End If
+
+        'If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
+        '    lblLookFor1.Visible = False
+        '    lblLookFor2.Visible = True
+        '    lblLookFor3.Visible = False
+        '    lblLookFor4.Visible = False
+        '    TxtTextToSearch.Visible = False
+        '    cboTextToSearch.Visible = True
+        '    RBtnAnywhere.Visible = False
+        '    RBtnStart.Visible = False
+        '    RBtnExactMatch.Visible = False
+        '    cboTextToSearch.DataSource = _findableControl.FindDataSource
+        '    cboTextToSearch.DisplayMember = _findableControl.FindDisplayMember
+        '    cboTextToSearch.ValueMember = _findableControl.FindValueMember
+        '    dtpBegDate.Visible = False
+        '    dtpEndDate.Visible = False
+        '    lblTo.Visible = False
+        '    chkChecked.Visible = False
+        '    Height = 140
+        'ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.TextBox Then
+        '    lblLookFor1.Visible = True
+        '    lblLookFor2.Visible = False
+        '    lblLookFor3.Visible = False
+        '    lblLookFor4.Visible = False
+        '    TxtTextToSearch.Visible = True
+        '    cboTextToSearch.Visible = False
+        '    RBtnAnywhere.Visible = True
+        '    RBtnStart.Visible = True
+        '    RBtnExactMatch.Visible = True
+        '    dtpBegDate.Visible = False
+        '    dtpEndDate.Visible = False
+        '    lblTo.Visible = False
+        '    chkChecked.Visible = False
+        '    Height = 220
+        'ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.Date Then
+        '    dtpBegDate.Visible = True
+        '    dtpEndDate.Visible = True
+        '    lblLookFor1.Visible = False
+        '    lblLookFor2.Visible = False
+        '    lblLookFor3.Visible = True
+        '    lblLookFor4.Visible = False
+        '    TxtTextToSearch.Visible = False
+        '    cboTextToSearch.Visible = False
+        '    RBtnExactMatch.Visible = False
+        '    RBtnAnywhere.Visible = False
+        '    RBtnStart.Visible = False
+        '    lblTo.Visible = True
+        '    chkChecked.Visible = False
+        '    Height = 135
+        'ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.CheckBox Then
+        '    lblLookFor4.Visible = True
+        '    chkChecked.Visible = True
+        '    dtpBegDate.Visible = False
+        '    dtpEndDate.Visible = False
+        '    lblLookFor1.Visible = False
+        '    lblLookFor2.Visible = False
+        '    lblLookFor3.Visible = False
+        '    TxtTextToSearch.Visible = False
+        '    cboTextToSearch.Visible = False
+        '    RBtnExactMatch.Visible = False
+        '    RBtnAnywhere.Visible = False
+        '    RBtnStart.Visible = False
+        '    lblTo.Visible = False
+        '    Height = 150
+        '    Width = 200
+        'End If
+    End Sub
+
+    Private Sub SetupDisplay()
+        If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
             lblLookFor1.Visible = True
             lblLookFor2.Visible = False
             lblLookFor3.Visible = False
@@ -134,7 +207,7 @@ Public Class CFindFormNew
             lblTo.Visible = False
             chkChecked.Visible = False
             Height = 220
-        ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.Date Then
+        ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
             dtpBegDate.Visible = True
             dtpEndDate.Visible = True
             lblLookFor1.Visible = False
@@ -149,7 +222,7 @@ Public Class CFindFormNew
             lblTo.Visible = True
             chkChecked.Visible = False
             Height = 135
-        ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.CheckBox Then
+        ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
             lblLookFor4.Visible = True
             chkChecked.Visible = True
             dtpBegDate.Visible = False

@@ -245,7 +245,7 @@ Public Class CTextBox
 
     Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
         Get
-            Return IFindableControl.SearchModeEnum.String
+            Return IFindableControl.SearchModeEnum.TextBox
         End Get
     End Property
 
@@ -276,23 +276,16 @@ Public Class CTextBox
     Public Property FieldName As String Implements IFindableControl.FieldName
 
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
-        Get
-            Return GetDataType()
-        End Get
-        Set(value As IFindableControl.DataTypeEnum)
-
-        End Set
-    End Property
 
 #End Region
 
-    Private Function GetDataType() As IFindableControl.DataTypeEnum
-        If TypeOf Text Is String Then
-            Return IFindableControl.DataTypeEnum.String
-        Else
-            Return IFindableControl.DataTypeEnum.Date
-        End If
-    End Function
+    'Private Function GetDataType() As IFindableControl.DataTypeEnum
+    '    If TypeOf Text Is String Then
+    '        Return IFindableControl.DataTypeEnum.String
+    '    Else
+    '        Return IFindableControl.DataTypeEnum.Date
+    '    End If
+    'End Function
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         _oldValue = Text
@@ -345,6 +338,7 @@ Public Class CTextBox
 
     ' Text Menu Captions
     Private Shared ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
+
     Private Shared ReadOnly _textCut = MessagingLibrary.Messaging.TranslateCaption("Cut Selected Text")
     Private Shared ReadOnly _textCopy = MessagingLibrary.Messaging.TranslateCaption("Copy Selected Text")
     Private Shared ReadOnly _textPaste = MessagingLibrary.Messaging.TranslateCaption("Paste Text")
@@ -459,10 +453,12 @@ Public Class CTextBox
             If formLocation.Y + searchForm.Height > screenRectangle.Height Then
                 formLocation.Y = pnt.Y - searchForm.Height + Height
             End If
+            FieldName = Name.Substring(3)
             searchForm.Location = formLocation
+            Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
+            FindDataType = GetObjectDataType(x)
             searchForm.ShowDialog()
             searchForm.Dispose()
-            FieldName = Name.Substring(3)
             CallByName(myForm, "FindFieldNew", CallType.Method, Me)
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")

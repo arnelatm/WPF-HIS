@@ -1131,6 +1131,14 @@ Public Class CFormEntry
         DemoProp.SetValue(cont, True, Nothing)
     End Sub
 
+    Public Function GetFieldType(fieldName As String) As Type
+        Dim x As IFindableControl.DataTypeEnum
+        Dim y As Object
+        y = CallByName(Me, fieldName, CallType.Get)
+        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+        Return y.GetType()
+    End Function
+
     Public Property HideNavigatorButtons As Boolean
 
     'Public Function ValidateDataBoundGrid(Of TV As New, TM As New)(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing)

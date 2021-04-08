@@ -2,13 +2,14 @@
 Imports System.Drawing
 Imports System.Windows
 Imports System.Windows.Forms
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
 Imports AATM.Libraries.MessagingLibrary
 
 Public Class CDataGridView
     Inherits DataGridView
-    Implements IEntryControl
+    Implements IEntryControl, IFindableControl
 
     Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
@@ -176,6 +177,26 @@ Public Class CDataGridView
             Return True
         End Get
     End Property
+
+    Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
+
+    Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
+
+    Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
+
+    Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
+
+    Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
+
+    Public Property FieldName As String Implements IFindableControl.FieldName
+
+    Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
+
+    Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
+
+    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
+
+    Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
 
     Public Sub AddInsertColumn()
         If Not DisplayOnly AndAlso Not Columns.Contains("dgvInsertColumn") Then

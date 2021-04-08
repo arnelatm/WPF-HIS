@@ -89,6 +89,8 @@ Namespace Services
 
         Function GetRecordField(tableName As String, returnFieldName As String) As Object
 
+        Function GetFieldType(tableName As String, fieldName As String) As Object
+
     End Interface
 
 End Namespace

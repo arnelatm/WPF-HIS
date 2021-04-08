@@ -320,6 +320,10 @@ Namespace Services
             Return BaseDao.GetFieldValue(Of TType)(sqlStatement, tableName, condition)
         End Function
 
+        Public Function GetFieldType(tableName As String, fieldName As String) As Object Implements IService.GetFieldType
+            Return BaseDao.GetFieldType(tableName, fieldName)
+        End Function
+
         Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean Implements IService.HasRecordChanged
             Return BaseDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
         End Function

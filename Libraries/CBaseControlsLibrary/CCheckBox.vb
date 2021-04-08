@@ -291,6 +291,8 @@ Public Class CCheckBox
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
         End If
+        Dim x = Me.GetType()
+        MessageBox.Show(x.ToString())
     End Sub
 
     Public Function GetTextToSearch() As String

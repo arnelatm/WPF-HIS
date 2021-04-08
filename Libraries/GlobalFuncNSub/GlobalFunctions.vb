@@ -6,6 +6,7 @@ Imports System.Reflection
 Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
+Imports AATM.Libraries.AatmInterfaces
 
 Public Module GlobalFunctions
 
@@ -936,6 +937,22 @@ Public Module GlobalFunctions
                 result = value
         End Select
         Return result
+    End Function
+
+    Public Function GetObjectDataType(dataObject As Object) As IFindableControl.DataTypeEnum
+        Dim dataTypeEnum As IFindableControl.DataTypeEnum
+        If dataObject = GetType(Date?) Or dataObject = GetType(Date) Or dataObject = GetType(DateTime) Then
+            dataTypeEnum = IFindableControl.DataTypeEnum.Date
+        ElseIf dataObject = GetType(String) Or dataObject = GetType(Char) Then
+            dataTypeEnum = IFindableControl.DataTypeEnum.String
+        ElseIf dataObject = GetType(Short) Or dataObject = GetType(Integer) Or dataObject = GetType(Long) _
+               Or dataObject = GetType(ULong) Or dataObject = GetType(UShort) Or dataObject = GetType(UInteger) _
+               Or dataObject = GetType(SByte) Or dataObject = GetType(Byte) Then
+            dataTypeEnum = IFindableControl.DataTypeEnum.Integer
+        ElseIf dataObject = GetType(Decimal) Or dataObject = GetType(Single) Or dataObject = GetType(Double) Then
+            dataTypeEnum = IFindableControl.DataTypeEnum.Integer
+        End If
+        Return dataTypeEnum
     End Function
 
     '''<summary>

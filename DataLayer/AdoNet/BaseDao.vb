@@ -93,12 +93,13 @@ Namespace AdoNet
             Dim retVal As Integer
             Dim sql As String = " SELECT IdNo FROM [" & tableName & "] " & " Where "
             Dim searchString As String
+
             If (filter Is Nothing OrElse filter = "") Then
                 sql &= findableControl.FieldName.Trim()
             Else
                 sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
             End If
-            If findableControl.SearchMode = IFindableControl.SearchModeEnum.String Then
+            If findableControl.SearchMode = IFindableControl.SearchModeEnum.TextBox Then
                 If findableControl.BegFindValue Is Nothing OrElse findableControl.BegFindValue = "" Then
                     sql &= " (" & findableControl.FieldName & " Is Null or " & findableControl.FieldName & " = '') "
                 Else
@@ -646,6 +647,14 @@ Namespace AdoNet
                     " Set " & fieldName & " = @Value" &
                     " where IdNo = " & idNo
             Return _db.Update(sql, {"@Value", value})
+        End Function
+
+        Public Function GetFieldType(tableName As String, fieldName As String) As Object Implements IBaseDao.GetFieldType
+            Dim value As Object
+            Dim sql As String = "Select DATA_TYPE From INFORMATION_SCHEMA.COLUMNS Where TABLE_NAME = @tableName AND COLUMN_NAME = @fieldName"
+            Dim params() As Object = {"@TableName", tableName, "@FieldName", fieldName}
+            value = _db.Scalar(sql, params)
+            Return value
         End Function
 
         'Private Sub ExecuteSqlTransaction(ByVal connectionString As String)
