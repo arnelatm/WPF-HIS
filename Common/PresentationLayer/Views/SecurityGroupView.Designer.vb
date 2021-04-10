@@ -45,10 +45,10 @@ Namespace PresentationLayer.Views
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.DataGridViewGroupAccesses = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.DgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.DgvSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.DgvSecurityObjectIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-        Me.DgvSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+        Me.DgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
+        Me.DgvSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
+        Me.DgvSecurityObjectIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
+        Me.DgvSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
         Me.DgvVisible = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.DgvEditable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
@@ -73,12 +73,17 @@ Namespace PresentationLayer.Views
         'TxtIdNo
         '
         Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BegFindValue = Nothing
         Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtIdNo.ComputedValue = false
         Me.TxtIdNo.CustomFormat = Nothing
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
+        Me.TxtIdNo.EndFindValue = Nothing
+        Me.TxtIdNo.FieldName = Nothing
+        Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.TxtIdNo.FindEnabled = false
         Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Nothing
@@ -89,6 +94,7 @@ Namespace PresentationLayer.Views
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
         Me.TxtIdNo.ReadOnly = true
+        Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
         Me.TxtIdNo.TabIndex = 179
         Me.TxtIdNo.TabStop = false
@@ -111,11 +117,16 @@ Namespace PresentationLayer.Views
         'txtSecurityGroupCode
         '
         Me.txtSecurityGroupCode.BackColor = System.Drawing.Color.White
+        Me.txtSecurityGroupCode.BegFindValue = Nothing
         Me.txtSecurityGroupCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSecurityGroupCode.ComputedValue = false
         Me.txtSecurityGroupCode.CustomFormat = Nothing
         Me.txtSecurityGroupCode.DataBoundControl = true
         Me.txtSecurityGroupCode.EditingMode = false
+        Me.txtSecurityGroupCode.EndFindValue = Nothing
+        Me.txtSecurityGroupCode.FieldName = Nothing
+        Me.txtSecurityGroupCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtSecurityGroupCode.FindEnabled = false
         Me.txtSecurityGroupCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtSecurityGroupCode.ForeColor = System.Drawing.Color.Black
         Me.txtSecurityGroupCode.LinkedLabel = Nothing
@@ -126,6 +137,7 @@ Namespace PresentationLayer.Views
         Me.txtSecurityGroupCode.Name = "txtSecurityGroupCode"
         Me.txtSecurityGroupCode.OldValue = Nothing
         Me.txtSecurityGroupCode.ReadOnly = true
+        Me.txtSecurityGroupCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtSecurityGroupCode.Size = New System.Drawing.Size(62, 23)
         Me.txtSecurityGroupCode.TabIndex = 180
         Me.txtSecurityGroupCode.ValueIsMandatory = true
@@ -147,11 +159,16 @@ Namespace PresentationLayer.Views
         'txtSecurityGroupName
         '
         Me.txtSecurityGroupName.BackColor = System.Drawing.Color.White
+        Me.txtSecurityGroupName.BegFindValue = Nothing
         Me.txtSecurityGroupName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSecurityGroupName.ComputedValue = false
         Me.txtSecurityGroupName.CustomFormat = Nothing
         Me.txtSecurityGroupName.DataBoundControl = true
         Me.txtSecurityGroupName.EditingMode = true
+        Me.txtSecurityGroupName.EndFindValue = Nothing
+        Me.txtSecurityGroupName.FieldName = Nothing
+        Me.txtSecurityGroupName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtSecurityGroupName.FindEnabled = false
         Me.txtSecurityGroupName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtSecurityGroupName.ForeColor = System.Drawing.Color.Black
         Me.txtSecurityGroupName.LinkedLabel = Nothing
@@ -162,6 +179,7 @@ Namespace PresentationLayer.Views
         Me.txtSecurityGroupName.Name = "txtSecurityGroupName"
         Me.txtSecurityGroupName.OldValue = Nothing
         Me.txtSecurityGroupName.ReadOnly = true
+        Me.txtSecurityGroupName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtSecurityGroupName.Size = New System.Drawing.Size(437, 23)
         Me.txtSecurityGroupName.TabIndex = 181
         Me.txtSecurityGroupName.ValueIsMandatory = true
@@ -183,13 +201,17 @@ Namespace PresentationLayer.Views
         'txtSecurityGroupNameAra
         '
         Me.txtSecurityGroupNameAra.BackColor = System.Drawing.Color.White
+        Me.txtSecurityGroupNameAra.BegFindValue = Nothing
         Me.txtSecurityGroupNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSecurityGroupNameAra.ComputedValue = false
         Me.txtSecurityGroupNameAra.CustomFormat = Nothing
         Me.txtSecurityGroupNameAra.DataBoundControl = true
-        Me.txtSecurityGroupNameAra.DisplayOnly = true
         Me.txtSecurityGroupNameAra.EditingMode = true
+        Me.txtSecurityGroupNameAra.EndFindValue = Nothing
         Me.txtSecurityGroupNameAra.EnglishControl = Me.txtSecurityGroupName
+        Me.txtSecurityGroupNameAra.FieldName = Nothing
+        Me.txtSecurityGroupNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtSecurityGroupNameAra.FindEnabled = false
         Me.txtSecurityGroupNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtSecurityGroupNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtSecurityGroupNameAra.LinkedLabel = Nothing
@@ -199,8 +221,8 @@ Namespace PresentationLayer.Views
         Me.txtSecurityGroupNameAra.MinimumValue = Nothing
         Me.txtSecurityGroupNameAra.Name = "txtSecurityGroupNameAra"
         Me.txtSecurityGroupNameAra.OldValue = Nothing
-        Me.txtSecurityGroupNameAra.ReadOnly = true
         Me.txtSecurityGroupNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtSecurityGroupNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtSecurityGroupNameAra.Size = New System.Drawing.Size(437, 23)
         Me.txtSecurityGroupNameAra.TabIndex = 182
         '
@@ -221,14 +243,17 @@ Namespace PresentationLayer.Views
         'cacParentIdNo
         '
         Me.cacParentIdNo.BackColor = System.Drawing.Color.White
+        Me.cacParentIdNo.BegFindValue = Nothing
         Me.cacParentIdNo.ChangingSearchValueOnly = false
         Me.cacParentIdNo.CurrentSearchTerm = ""
         Me.cacParentIdNo.DefaultValue = Nothing
         Me.cacParentIdNo.DisplayMember = "Name"
-        Me.cacParentIdNo.DropDownHeight = 1
-        Me.cacParentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cacParentIdNo.EditingMode = false
+        Me.cacParentIdNo.EndFindValue = Nothing
+        Me.cacParentIdNo.FieldName = Nothing
         Me.cacParentIdNo.FilterRule = Nothing
+        Me.cacParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cacParentIdNo.FindEnabled = false
         Me.cacParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
         Me.cacParentIdNo.FormattingEnabled = true
@@ -245,9 +270,9 @@ Namespace PresentationLayer.Views
         Me.cacParentIdNo.PreviousSearchTerm = Nothing
         Me.cacParentIdNo.PreviousSelectedIndex = -1
         Me.cacParentIdNo.PropertySelector = Nothing
-        Me.cacParentIdNo.ReadOnlyCombo = False
-            Me.cacParentIdNo.Size = New System.Drawing.Size(438, 24)
-            Me.cacParentIdNo.SuggestBoxHeight = 200
+        Me.cacParentIdNo.ReadOnlyCombo = false
+        Me.cacParentIdNo.Size = New System.Drawing.Size(438, 24)
+        Me.cacParentIdNo.SuggestBoxHeight = 200
         Me.cacParentIdNo.SuggestListOrderRule = Nothing
         Me.cacParentIdNo.TabIndex = 189
         Me.cacParentIdNo.TextToSearch = Nothing
@@ -273,11 +298,16 @@ Namespace PresentationLayer.Views
         'txtNotes
         '
         Me.txtNotes.BackColor = System.Drawing.Color.White
+        Me.txtNotes.BegFindValue = Nothing
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNotes.ComputedValue = false
         Me.txtNotes.CustomFormat = Nothing
         Me.txtNotes.DataBoundControl = true
         Me.txtNotes.EditingMode = false
+        Me.txtNotes.EndFindValue = Nothing
+        Me.txtNotes.FieldName = Nothing
+        Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtNotes.FindEnabled = false
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
@@ -289,93 +319,128 @@ Namespace PresentationLayer.Views
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
         Me.txtNotes.ReadOnly = true
+        Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtNotes.Size = New System.Drawing.Size(437, 60)
         Me.txtNotes.TabIndex = 183
-        Me.txtNotes.ValueIsMandatory = True
-            '
-            'DataGridViewGroupAccesses
-            '
-            Me.DataGridViewGroupAccesses.AllowUserToAddRows = False
-            Me.DataGridViewGroupAccesses.AllowUserToDeleteRows = False
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewGroupAccesses.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-            Me.DataGridViewGroupAccesses.AutoGenerateColumns = False
-            Me.DataGridViewGroupAccesses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewGroupAccesses.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvIdNo, Me.DgvSecurityGroupIdNo, Me.DgvSecurityObjectIdNo, Me.DgvSecurityObjectName, Me.DgvVisible, Me.DgvEditable})
-            Me.DataGridViewGroupAccesses.DataSource = Me.bsGroupAccesses
-            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewGroupAccesses.DefaultCellStyle = DataGridViewCellStyle6
-            Me.DataGridViewGroupAccesses.DisplayOnly = False
-            Me.DataGridViewGroupAccesses.Ea = Nothing
-            Me.DataGridViewGroupAccesses.EditingMode = False
-            Me.DataGridViewGroupAccesses.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DataGridViewGroupAccesses.FirstRowDeletionEnabled = False
-            Me.DataGridViewGroupAccesses.FirstRowInsertionEnabled = False
-            Me.DataGridViewGroupAccesses.Location = New System.Drawing.Point(20, 203)
-            Me.DataGridViewGroupAccesses.Name = "DataGridViewGroupAccesses"
-            Me.DataGridViewGroupAccesses.ReadOnly = True
-            Me.DataGridViewGroupAccesses.SequenceColumn = "dgvSequence"
-            Me.DataGridViewGroupAccesses.ShowInsertColumnWhenEditing = False
-            Me.DataGridViewGroupAccesses.Size = New System.Drawing.Size(655, 368)
-            Me.DataGridViewGroupAccesses.TabIndex = 178
-            '
-            'DgvIdNo
-            '
-            Me.DgvIdNo.DataPropertyName = "IdNo"
+        Me.txtNotes.ValueIsMandatory = true
+        '
+        'DataGridViewGroupAccesses
+        '
+        Me.DataGridViewGroupAccesses.AllowUserToAddRows = false
+        Me.DataGridViewGroupAccesses.AllowUserToDeleteRows = false
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewGroupAccesses.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridViewGroupAccesses.AutoGenerateColumns = false
+        Me.DataGridViewGroupAccesses.BegFindValue = Nothing
+        Me.DataGridViewGroupAccesses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewGroupAccesses.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DgvIdNo, Me.DgvSecurityGroupIdNo, Me.DgvSecurityObjectIdNo, Me.DgvSecurityObjectName, Me.DgvVisible, Me.DgvEditable})
+        Me.DataGridViewGroupAccesses.DataSource = Me.bsGroupAccesses
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewGroupAccesses.DefaultCellStyle = DataGridViewCellStyle6
+        Me.DataGridViewGroupAccesses.DgvFooter = Nothing
+        Me.DataGridViewGroupAccesses.DisplayOnly = false
+        Me.DataGridViewGroupAccesses.Ea = Nothing
+        Me.DataGridViewGroupAccesses.EditingMode = false
+        Me.DataGridViewGroupAccesses.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.DataGridViewGroupAccesses.EndFindValue = Nothing
+        Me.DataGridViewGroupAccesses.FieldName = Nothing
+        Me.DataGridViewGroupAccesses.FieldsDictionary = Nothing
+        Me.DataGridViewGroupAccesses.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DataGridViewGroupAccesses.FindEnabled = false
+        Me.DataGridViewGroupAccesses.FirstRowDeletionEnabled = false
+        Me.DataGridViewGroupAccesses.FirstRowInsertionEnabled = false
+        Me.DataGridViewGroupAccesses.Location = New System.Drawing.Point(20, 203)
+        Me.DataGridViewGroupAccesses.Name = "DataGridViewGroupAccesses"
+        Me.DataGridViewGroupAccesses.ReadOnly = true
+        Me.DataGridViewGroupAccesses.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewGroupAccesses.SequenceColumn = "dgvSequence"
+        Me.DataGridViewGroupAccesses.SequenceFieldName = "Sequence"
+        Me.DataGridViewGroupAccesses.ShowFooter = false
+        Me.DataGridViewGroupAccesses.ShowInsertColumnWhenEditing = false
+        Me.DataGridViewGroupAccesses.Size = New System.Drawing.Size(655, 368)
+        Me.DataGridViewGroupAccesses.TabIndex = 178
+        '
+        'DgvIdNo
+        '
+        Me.DgvIdNo.BegFindValue = Nothing
+        Me.DgvIdNo.DataPropertyName = "IdNo"
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
         Me.DgvIdNo.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgvIdNo.EditingMode = false
+        Me.DgvIdNo.EndFindValue = Nothing
+        Me.DgvIdNo.FieldName = Nothing
+        Me.DgvIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DgvIdNo.FindEnabled = false
         Me.DgvIdNo.HeaderText = "IdNo"
         Me.DgvIdNo.Name = "DgvIdNo"
         Me.DgvIdNo.ReadOnly = true
         Me.DgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DgvIdNo.Visible = false
         '
         'DgvSecurityGroupIdNo
         '
+        Me.DgvSecurityGroupIdNo.BegFindValue = Nothing
         Me.DgvSecurityGroupIdNo.DataPropertyName = "SecurityGroupIdNo"
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
         Me.DgvSecurityGroupIdNo.DefaultCellStyle = DataGridViewCellStyle3
         Me.DgvSecurityGroupIdNo.EditingMode = false
+        Me.DgvSecurityGroupIdNo.EndFindValue = Nothing
+        Me.DgvSecurityGroupIdNo.FieldName = Nothing
+        Me.DgvSecurityGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DgvSecurityGroupIdNo.FindEnabled = false
         Me.DgvSecurityGroupIdNo.HeaderText = "SecurityGroupIdNo"
         Me.DgvSecurityGroupIdNo.Name = "DgvSecurityGroupIdNo"
         Me.DgvSecurityGroupIdNo.ReadOnly = true
         Me.DgvSecurityGroupIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvSecurityGroupIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DgvSecurityGroupIdNo.Visible = false
         '
         'DgvSecurityObjectIdNo
         '
+        Me.DgvSecurityObjectIdNo.BegFindValue = Nothing
         Me.DgvSecurityObjectIdNo.DataPropertyName = "SecurityObjectIdNo"
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
         Me.DgvSecurityObjectIdNo.DefaultCellStyle = DataGridViewCellStyle4
         Me.DgvSecurityObjectIdNo.EditingMode = false
+        Me.DgvSecurityObjectIdNo.EndFindValue = Nothing
+        Me.DgvSecurityObjectIdNo.FieldName = Nothing
+        Me.DgvSecurityObjectIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DgvSecurityObjectIdNo.FindEnabled = false
         Me.DgvSecurityObjectIdNo.HeaderText = "SecurityObjectIdNo"
         Me.DgvSecurityObjectIdNo.Name = "DgvSecurityObjectIdNo"
         Me.DgvSecurityObjectIdNo.ReadOnly = true
         Me.DgvSecurityObjectIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvSecurityObjectIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DgvSecurityObjectIdNo.Visible = false
         '
         'DgvSecurityObjectName
         '
         Me.DgvSecurityObjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DgvSecurityObjectName.BegFindValue = Nothing
         Me.DgvSecurityObjectName.DataPropertyName = "SecurityObjectName"
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
         Me.DgvSecurityObjectName.DefaultCellStyle = DataGridViewCellStyle5
         Me.DgvSecurityObjectName.EditingMode = false
+        Me.DgvSecurityObjectName.EndFindValue = Nothing
+        Me.DgvSecurityObjectName.FieldName = Nothing
+        Me.DgvSecurityObjectName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DgvSecurityObjectName.FindEnabled = false
         Me.DgvSecurityObjectName.HeaderText = "SecurityObjectName"
         Me.DgvSecurityObjectName.Name = "DgvSecurityObjectName"
         Me.DgvSecurityObjectName.ReadOnly = true
         Me.DgvSecurityObjectName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvSecurityObjectName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         '
         'DgvVisible
         '
@@ -395,7 +460,7 @@ Namespace PresentationLayer.Views
         '
         'bsGroupAccesses
         '
-        Me.bsGroupAccesses.DataSource = GetType(GroupAccessModel)
+        Me.bsGroupAccesses.DataSource = GetType(AATM.PresentationLayer.Models.GroupAccessModel)
         '
         'SecurityGroupView
         '

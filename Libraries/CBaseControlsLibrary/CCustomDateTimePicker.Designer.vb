@@ -56,8 +56,7 @@ Partial Class CCustomDateTimePicker
         Me.txtLongDate.ComputedValue = False
         Me.txtLongDate.CustomFormat = Nothing
         Me.txtLongDate.DataBoundControl = True
-        Me.txtLongDate.DisplayOnly = True
-        Me.txtLongDate.Editable = True
+        Me.txtLongDate.DisplayOnly = False
         Me.txtLongDate.EditingMode = True
         Me.txtLongDate.FindEnabled = True
         Me.txtLongDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -102,7 +101,6 @@ Partial Class CCustomDateTimePicker
         Me.dtp.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.dtp.DesignerSelected = True
         Me.dtp.DisplayOnly = True
-        Me.dtp.Editable = True
         Me.dtp.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtp.Image = Global.AATM.Libraries.CBaseControlsLibrary.My.Resources.Resources.Calendar18x18
         Me.dtp.ImageIndex = 0
@@ -125,8 +123,7 @@ Partial Class CCustomDateTimePicker
         Me.txtTime.ComputedValue = False
         Me.txtTime.CustomFormat = Nothing
         Me.txtTime.DataBoundControl = True
-        Me.txtTime.DisplayOnly = True
-        Me.txtTime.Editable = True
+        Me.txtTime.DisplayOnly = False
         Me.txtTime.EditingMode = True
         Me.txtTime.FindEnabled = True
         Me.txtTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -148,7 +145,6 @@ Partial Class CCustomDateTimePicker
         Me.btnCalendarType.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.btnCalendarType.DesignerSelected = False
         Me.btnCalendarType.DisplayOnly = True
-        Me.btnCalendarType.Editable = True
         Me.btnCalendarType.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCalendarType.ImageIndex = 0
         Me.btnCalendarType.ImeMode = System.Windows.Forms.ImeMode.NoControl
