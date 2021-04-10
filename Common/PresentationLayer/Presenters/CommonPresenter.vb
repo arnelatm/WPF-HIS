@@ -22,10 +22,15 @@ Namespace PresentationLayer.Presenters
         Public Sub New(itemView As IView)
             MyBase.New(itemView)
             Dim systemViewName As String
+            'If systemViewName Is Nothing Then
+            '    systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+            'Else
+            '    systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName.Trim()
+            'End If
             If DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName IsNot Nothing Then
-                systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName
+                systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName.Trim()
             Else
-                systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name
+                systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
             End If
             ViewDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(systemViewName)
         End Sub

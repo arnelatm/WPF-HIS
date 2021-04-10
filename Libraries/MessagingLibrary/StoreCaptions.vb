@@ -25,8 +25,8 @@
         Dim SystemViewIdNo As Int16
         _dAc1 = frm.TranslatorDAC
         frm.Tag = frm.Text
-        InsertForm(frm.Name)
-        SystemViewIdNo = GetSystemViewIdNo(frm.Name)
+        InsertForm(frm.ViewDisplayName)
+        SystemViewIdNo = GetSystemViewIdNo(frm.ViewDisplayName)
         InsertWord(frm.Text)
         InsertFormItem(SystemViewIdNo, frm.Text)
         Dim t As String

@@ -950,7 +950,7 @@ Public Module GlobalFunctions
                Or dataObject = GetType(SByte) Or dataObject = GetType(Byte) Then
             dataTypeEnum = IFindableControl.DataTypeEnum.Integer
         ElseIf dataObject = GetType(Decimal) Or dataObject = GetType(Single) Or dataObject = GetType(Double) Then
-            dataTypeEnum = IFindableControl.DataTypeEnum.Integer
+            dataTypeEnum = IFindableControl.DataTypeEnum.Decimal
         End If
         Return dataTypeEnum
     End Function

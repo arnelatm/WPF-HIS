@@ -53,25 +53,28 @@ Public Class CFindFormNew
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
         Dim x As Object
-        If _findableControl.SearchMode = IFindableControl.SearchModeEnum.TextBox Then
-            If RBtnStart.Checked Then
+        If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
+            _findableControl.BegFindValue = TxtTextToSearch.Text
+            If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
+                _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+            ElseIf RBtnStart.Checked Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.StartOfField
             ElseIf RBtnExactMatch.Checked Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
             Else
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField
             End If
-            _findableControl.BegFindValue = TxtTextToSearch.Text
-        ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
-            _searchPlace = SearchPlaceEnum.ExactMatch
-            _findableControl.BegFindValue = cboTextToSearch.SelectedValue
-        ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.Date Then
+        ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
             _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
             _findableControl.BegFindValue = dtpBegDate.Value
             _findableControl.EndFindValue = dtpEndDate.Value
-        ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.CheckBox Then
-            _findableControl.BegFindValue = chkChecked.Checked
-            _findableControl.EndFindValue = Nothing
+        ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Then
+            _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+            _findableControl.BegFindValue = txtBegValue.Text
+            _findableControl.EndFindValue = txtEndValue.Text
+        ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
+            _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+            _findableControl.BegFindValue = cboTextToSearch.SelectedValue
         End If
         Close()
     End Sub
