@@ -77,6 +77,7 @@
     <Compile Include="BusinessObjects\Login.vb" />
     <Compile Include="BusinessObjects\Salt.vb" />
     <Compile Include="BusinessObjects\SecurityGroup.vb" />
+    <Compile Include="BusinessObjects\SecurityControl.vb" />
     <Compile Include="BusinessObjects\SecurityObject.vb" />
     <Compile Include="BusinessObjects\User.vb" />
     <Compile Include="BusinessRules\BusinessRule.vb" />

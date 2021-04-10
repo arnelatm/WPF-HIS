@@ -1,4 +1,5 @@
-﻿Imports AATM.DataLayer
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.DataLayer
 Imports AATM.Libraries.AatmInterfaces
 
 Namespace Services
@@ -90,6 +91,8 @@ Namespace Services
         Function GetRecordField(tableName As String, returnFieldName As String) As Object
 
         Function GetFieldType(tableName As String, fieldName As String) As Object
+
+        Function AddSecurityControl(securityControlName As SecurityControl) As Integer
 
     End Interface
 

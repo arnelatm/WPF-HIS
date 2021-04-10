@@ -2,6 +2,7 @@
 Imports System.Globalization
 Imports System.Threading
 Imports System.Windows.Forms
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -166,19 +167,19 @@ Public Class BfMain
         End If
     End Function
 
-    Public Sub ProcessMenuItems(ByVal menuItems As Menu.MenuItemCollection, ByVal mLevel As String)
-        Dim i As Int16
-        For i = 0 To menuItems.Count - 1
-            Dim mi As MenuItem = menuItems(i)
-            Dim localMLevel As String = mLevel + i.ToString
-            _originalText = CaptionCollection.Item(localMLevel)
-            Dim r As Integer = Dv.Find(_originalText)
-            If r >= 0 Then mi.Text = Dv(r).Item($"TranslatedCaption") _
-                   Else mi.Text = _originalText
-            If mi.MenuItems.Count > 0 Then _
-            ProcessMenuItems(mi.MenuItems, localMLevel)
-        Next
-    End Sub
+    'Public Sub ProcessMenuItems(ByVal menuItems As Menu.MenuItemCollection, ByVal mLevel As String)
+    '    Dim i As Int16
+    '    For i = 0 To menuItems.Count - 1
+    '        Dim mi As MenuItem = menuItems(i)
+    '        Dim localMLevel As String = mLevel + i.ToString
+    '        _originalText = CaptionCollection.Item(localMLevel)
+    '        Dim r As Integer = Dv.Find(_originalText)
+    '        If r >= 0 Then mi.Text = Dv(r).Item($"TranslatedCaption") _
+    '               Else mi.Text = _originalText
+    '        If mi.MenuItems.Count > 0 Then _
+    '        ProcessMenuItems(mi.MenuItems, localMLevel)
+    '    Next
+    'End Sub
 
     Public Sub TranslateForm()
         SuspendLayout()
@@ -519,6 +520,9 @@ Public Class BfMain
             End If
             toolStripMenuItem.Enabled = isSelectable
             toolStripMenuItem.Visible = isVisible
+            Dim securityControl As New SecurityControl With {.SecurityControlName = controlSecurityKey,
+                    .SystemViewIdNo = VSystemViewIdNo}
+            PresenterObj.AddSecurityControl(securityControl)
         Else
             toolStripMenuItem.Enabled = False
             toolStripMenuItem.Visible = True
@@ -659,6 +663,9 @@ Public Class BfMain
                     If subMenu.HasDropDownItems Then
                         subMenuName = parentMenu + "." + Mid(obj.Name, 18)
                         SetMenuStripItems(subMenu.DropDownItems, subMenuName)
+                        'Dim securityControl As New SecurityControl With {.SecurityControlName = subMenuName,
+                        '        .SystemViewIdNo = VSystemViewIdNo}
+                        'PresenterObj.AddSecurityControl(securityControl)
                     End If
                 End If
             Next
@@ -673,8 +680,8 @@ Public Class BfMain
                 ' ReSharper disable once VBPossibleMistakenCallToGetType.2
                 If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then ' And GlobalVariables.SecurityGroupIdNo > 0 Then
                     Dim toolStripButton As ToolStripButton = obj
+                    Dim controlSecurityKey = subMenuName + "." + Mid(toolStripButton.Name, 16).TrimEnd()
                     If GlobalVariables.IsUserLoggedIn Then
-                        Dim controlSecurityKey = subMenuName + "." + Mid(toolStripButton.Name, 16).TrimEnd()
                         Dim controlSecurityValues As ArrayList
                         Dim isSelectable As Boolean
                         Dim isVisible As Boolean
@@ -713,10 +720,14 @@ Public Class BfMain
                             toolStripButton.Visible = True
                         End If
                     End If
+                    Dim securityControl As New SecurityControl With {.SecurityControlName = controlSecurityKey,
+                                                                     .SystemViewIdNo = VSystemViewIdNo}
+                    PresenterObj.AddSecurityControl(securityControl)
                 Else
                     obj.Enabled = True
                     obj.Visible = True
                 End If
+
             Next
         Catch ex As Exception
             MessageBox.Show(ex.Message, $"SetToolStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])

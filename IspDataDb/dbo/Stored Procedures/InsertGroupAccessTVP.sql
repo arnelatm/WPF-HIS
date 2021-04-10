@@ -1,7 +1,8 @@
-﻿CREATE PROC [dbo].[InsertGroupAccessTVP]
+﻿
+CREATE PROC [dbo].[InsertGroupAccessTVP]
   @MParam groupAccessInsert READONLY
 AS 
-INSERT  INTO GroupAccess (SecurityGroupIDNo, SecurityObjectIDNo, Visible, Editable)
-        SELECT  SecurityGroupIDNo, SecurityObjectIDNo, Visible, Editable
+INSERT  INTO GroupAccess (Editable, SecurityGroupIDNo, SecurityObjectIDNo, Visible)
+        SELECT  Editable, SecurityGroupIDNo, SecurityObjectIDNo, Visible
         FROM    @MParam
 SET IDENTITY_INSERT DBO.GroupAccess ON;

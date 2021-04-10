@@ -4,6 +4,7 @@ Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Transactions
 Imports System.Windows.Forms
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.EnumLocalization
@@ -688,6 +689,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
         Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
+    End Function
+
+    Public Function AddSecurityControl(securityControl As SecurityControl) As Int32
+        Return Model.AddSecurityControl(securityControl)
     End Function
 
     Public Overridable Sub GoAddRecord()

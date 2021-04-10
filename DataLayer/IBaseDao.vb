@@ -1,4 +1,5 @@
 ﻿Imports System.Dynamic
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
 
 Public Interface IBaseDao
@@ -80,5 +81,7 @@ Public Interface IBaseDao
     Function GetFieldType(tableName As String, fieldName As String) As Object
 
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
+
+    Function AddSecurityControl(securityControlName As SecurityControl) As Integer
 
 End Interface
