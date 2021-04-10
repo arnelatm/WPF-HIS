@@ -129,7 +129,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
-            Me.TxtIdNo.Editable = True
             Me.TxtIdNo.EditingMode = True
             Me.TxtIdNo.FindEnabled = True
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)

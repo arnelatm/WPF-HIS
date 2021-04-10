@@ -108,7 +108,6 @@ Public Class CTextBox
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control can be edited.")>
-    <Browsable(True)>
     Public Property Editable As Boolean
         Get
             Return _editable
