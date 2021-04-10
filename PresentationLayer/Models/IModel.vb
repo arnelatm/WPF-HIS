@@ -107,5 +107,5 @@ Public Interface IModel
     Function UpdateTvp(ByRef dtTable As DataTable) As Integer
 
     Sub Logout()
-
+    Function AddSecurityControl(securityControlName As Object) As Integer
 End Interface

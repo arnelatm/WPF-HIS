@@ -170,9 +170,9 @@ Namespace PresentationLayer.Views.Forms
             ToolStripButtonLogin.PerformClick()
             ToolStripButtonExit.Enabled = True
             If PresenterObj.UsePayGroups() Then
-                PayGroupsToolStripMenuItem.Visible = True
+                ToolStripMenuItemPayGroups.Visible = True
             Else
-                PayGroupsToolStripMenuItem.Visible = False
+                ToolStripMenuItemPayGroups.Visible = False
             End If
         End Sub
 
@@ -181,7 +181,7 @@ Namespace PresentationLayer.Views.Forms
         ''' </summary>
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
-        Private Sub IndexToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemindex.Click
+        Private Sub IndexToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIndex.Click
             MessageBox.Show("Help is not implemented... ", "Help")
         End Sub
 
@@ -1018,7 +1018,7 @@ Namespace PresentationLayer.Views.Forms
         '    ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         'End Sub
 
-        Private Sub AccountsPayableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsPayableEntryToolStripMenuItem.Click
+        Private Sub AccountsPayableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsPayableEntry.Click
             Dim childMdiForm As ApJournalEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New ApJournalEntry With {
@@ -1028,7 +1028,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsReceivableEntryToolStripMenuItem.Click
+        Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsReceivableEntry.Click
             Dim childMdiForm As ArJournalEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New ArJournalEntry With {
@@ -1053,7 +1053,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesJournalEntryToolStripMenuItem.Click
+        Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesJournalEntry.Click
             Dim childMdiForm As SalesJournalEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New SalesJournalEntry With {
@@ -1063,7 +1063,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountReconciliationToolStripMenuItem.Click
+        Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountReconciliation.Click
             Dim childMdiForm As AccountReconciliationEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New AccountReconciliationEntry With {
@@ -1073,7 +1073,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PettyCashToolStripMenuItem.Click
+        Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPettyCash.Click
             Dim childMdiForm ' As New DisbursementJournalEntry("PcJournal")
             'Set the Parent Form of the Child window.
             childMdiForm = New DisbursementJournalEntry("PcJournal") With {
@@ -1152,7 +1152,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub DefaultFieldValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefaultFieldValuesToolStripMenuItem.Click
+        Private Sub DefaultFieldValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDefaultFieldValues.Click
             Dim childMdiForm As DefaultFieldValueEntryTv
             childMdiForm = New DefaultFieldValueEntryTv With {
                 .MdiParent = Me
@@ -1180,7 +1180,7 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Private Sub ToolStripMenuItemIncomeStatementForAGivenYear_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIncomeStatementForAGivenYear.Click
+        Private Sub ToolStripMenuItemIncomeStatementForAGivenYear_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIncomeStatement.Click
 
         End Sub
 
@@ -1192,7 +1192,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeReceivableToolStripMenuItem.Click
+        Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeReceivable.Click
             Dim childMdiForm As ErJournalEntry
             childMdiForm = New ErJournalEntry With {
                 .MdiParent = Me
@@ -1200,7 +1200,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub StatementOfEmployeeLoansToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StatementOfEmployeeLoansToolStripMenuItem.Click
+        Private Sub StatementOfEmployeeLoansToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfEmployeeLoans.Click
             Dim childMdiForm As StatementOfEr
             childMdiForm = New StatementOfEr With {
                 .MdiParent = Me
@@ -1216,7 +1216,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SummaryOfAccountsPayableToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SummaryOfAccountsPayableToolStripMenuItem1.Click
+        Private Sub SummaryOfAccountsPayableToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfAccountsPayable.Click
             Dim childMdiForm As ApSummary
             childMdiForm = New ApSummary With {
                 .MdiParent = Me
@@ -1224,7 +1224,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ToolStripMenuItemStateOfEmployeeLoans_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStateOfEmployeeLoans.Click
+        Private Sub ToolStripMenuItemStateOfEmployeeLoans_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfEmployeeLoans.Click
             Dim childMdiForm As ErSummary
             childMdiForm = New ErSummary With {
                 .MdiParent = Me
@@ -1232,12 +1232,12 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClosingEntryToolStripMenuItem.Click
+        Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosing.Click
             Dim myForm = New GeneralJournalEntry(True)
             myForm.Show()
         End Sub
 
-        Private Sub YearlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles YearlyToolStripMenuItem.Click
+        Private Sub YearlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBYearly.Click
             Dim childMdiForm As TrialBalance
             childMdiForm = New TrialBalance("Y") With {
                 .MdiParent = Me
@@ -1245,7 +1245,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem.Click
+        Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBMonthly.Click
             Dim childMdiForm As TrialBalance
             childMdiForm = New TrialBalance("M") With {
                 .MdiParent = Me
@@ -1253,7 +1253,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub QuarterlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuarterlyToolStripMenuItem.Click
+        Private Sub QuarterlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBQuarterly.Click
             Dim childMdiForm As TrialBalance
             childMdiForm = New TrialBalance("Q") With {
                 .MdiParent = Me
@@ -1261,7 +1261,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SemestralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SemestralToolStripMenuItem.Click
+        Private Sub SemestralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBSemestral.Click
             Dim childMdiForm As TrialBalance
             childMdiForm = New TrialBalance("S") With {
                 .MdiParent = Me
@@ -1269,7 +1269,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub CustomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomToolStripMenuItem.Click
+        Private Sub CustomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBCustom.Click
             Dim childMdiForm As TrialBalance
             childMdiForm = New TrialBalance("C") With {
                 .MdiParent = Me
@@ -1277,7 +1277,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub YearlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles YearlyToolStripMenuItem1.Click
+        Private Sub YearlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSYearly.Click
             Dim childMdiForm As BalanceSheet
             childMdiForm = New BalanceSheet("Y") With {
                 .MdiParent = Me
@@ -1285,7 +1285,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub MonthlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem1.Click
+        Private Sub MonthlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSMonthly.Click
             Dim childMdiForm As BalanceSheet
             childMdiForm = New BalanceSheet("M") With {
                 .MdiParent = Me
@@ -1293,7 +1293,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub GeneralLedgerDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountActivityToolStripMenuItem.Click
+        Private Sub GeneralLedgerDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountActivity.Click
             Dim childMdiForm As AccountActivity
             childMdiForm = New AccountActivity With {
                 .MdiParent = Me
@@ -1301,7 +1301,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub YearlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles YearlyToolStripMenuItem2.Click
+        Private Sub YearlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISYearly.Click
             Dim childMdiForm As IncomeStatement
             childMdiForm = New IncomeStatement("Y") With {
                 .MdiParent = Me
@@ -1309,7 +1309,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayElementToolStripMenuItem.Click
+        Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayElement.Click
             'Dim childMdiForm As EarningEntryTv
             Dim childMdiForm As PayElementEntryTv
             'childMdiForm = New EarningEntryTv With {
@@ -1327,7 +1327,7 @@ Namespace PresentationLayer.Views.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        Private Sub LeavesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LeavesToolStripMenuItem.Click
+        Private Sub LeavesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLeaves.Click
             Dim childMdiForm As LeaveEntry
             childMdiForm = New LeaveEntry With {
                 .MdiParent = Me
@@ -1335,7 +1335,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PayGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayGroupsToolStripMenuItem.Click
+        Private Sub PayGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayGroups.Click
             Dim childMdiForm As PayGroupEntry
             childMdiForm = New PayGroupEntry With {
                 .MdiParent = Me
@@ -1343,7 +1343,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PayCyclesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayCyclesToolStripMenuItem.Click
+        Private Sub PayCyclesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayCycles.Click
             Dim childMdiForm As PayCycleEntryTv
             childMdiForm = New PayCycleEntryTv With {
                 .MdiParent = Me
@@ -1351,7 +1351,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PayrollsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollsToolStripMenuItem.Click
+        Private Sub PayrollsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayrolls.Click
             Dim childMdiForm As PayrollEntryTv
             childMdiForm = New PayrollEntryTv With {
                 .MdiParent = Me
@@ -1359,7 +1359,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PensionProvidersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PensionProvidersToolStripMenuItem.Click
+        Private Sub PensionProvidersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPensionProviders.Click
             Dim childMdiForm As PensionProviderEntryTv
             childMdiForm = New PensionProviderEntryTv With {
                 .MdiParent = Me
@@ -1367,7 +1367,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PensionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PensionSchemesToolStripMenuItem.Click
+        Private Sub PensionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPensionSchemes.Click
             Dim childMdiForm As PensionSchemeEntryTv
             childMdiForm = New PensionSchemeEntryTv With {
                 .MdiParent = Me
@@ -1375,7 +1375,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SalesDepositTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesDepositTypesToolStripMenuItem.Click
+        Private Sub SalesDepositTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesDepositTypes.Click
             Dim childMdiForm As DepositTypeEntryTv
             childMdiForm = New DepositTypeEntryTv With {
                 .MdiParent = Me
@@ -1383,7 +1383,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
+        Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISMonthly.Click
             Dim childMdiForm As IncomeStatement
             childMdiForm = New IncomeStatement("M") With {
                 .MdiParent = Me
@@ -1391,7 +1391,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub QuarterlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles QuarterlyToolStripMenuItem1.Click
+        Private Sub QuarterlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISQuarterly.Click
             Dim childMdiForm As IncomeStatement
             childMdiForm = New IncomeStatement("Q") With {
                 .MdiParent = Me
@@ -1399,7 +1399,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SemiAnnuallyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SemiAnnuallyToolStripMenuItem.Click
+        Private Sub SemiAnnuallyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISSemiAnnually.Click
             Dim childMdiForm As IncomeStatement
             childMdiForm = New IncomeStatement("S") With {
                 .MdiParent = Me
@@ -1407,7 +1407,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub CustomRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomRangeToolStripMenuItem.Click
+        Private Sub CustomRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISCustomRange.Click
             Dim childMdiForm As IncomeStatement
             childMdiForm = New IncomeStatement("C") With {
                 .MdiParent = Me
@@ -1415,7 +1415,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub CashIncomePerDoctorServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CashIncomePerDoctorServiceToolStripMenuItem.Click
+        Private Sub CashIncomePerDoctorServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCashIncomePerDoctorService.Click
             Dim childMdiForm As CashIncomePerDoctorPerService
             childMdiForm = New CashIncomePerDoctorPerService With {
                 .MdiParent = Me
@@ -1423,7 +1423,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub NumberOfCashPatientsPerDoctorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NumberOfCashPatientsPerDoctorToolStripMenuItem.Click
+        Private Sub NumberOfCashPatientsPerDoctorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemNumberOfCashPatientsPerDoctor.Click
             Dim childMdiForm As NumberOfCashPatientsPerDoctorPerDay
             childMdiForm = New NumberOfCashPatientsPerDoctorPerDay With {
                 .MdiParent = Me
@@ -1431,12 +1431,12 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem1.Click
+        Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBlankReport.Click
             Dim cForm As New ReportFormTest("Blank Report.Rpt")
             cForm.Show()
         End Sub
 
-        Private Sub QuarterlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles QuarterlyToolStripMenuItem2.Click
+        Private Sub QuarterlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSQuarterly.Click
             Dim childMdiForm As BalanceSheet
             childMdiForm = New BalanceSheet("Q") With {
                 .MdiParent = Me
@@ -1444,7 +1444,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SemestralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SemestralToolStripMenuItem1.Click
+        Private Sub SemestralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSSemestral.Click
             Dim childMdiForm As BalanceSheet
             childMdiForm = New BalanceSheet("S") With {
                 .MdiParent = Me
@@ -1452,21 +1452,21 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AgingOfAccountsPayableToolStripMenuItem.Click
+        Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAPAging.Click
             Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Payable as of ")
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim cForm As New ReportFormNew("Aging of Accounts Payable.Rpt", reportTitle, CultureInfo.CurrentCulture)
             cForm.Show()
         End Sub
 
-        Private Sub AccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountsReceivableToolStripMenuItem.Click
+        Private Sub AccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemARAging.Click
             Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Receivable")
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim cForm As New ReportFormNew("Aging of Accounts Receivable.Rpt", reportTitle, CultureInfo.CurrentCulture)
             cForm.Show()
         End Sub
 
-        Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckPrintingToolStripMenuItem.Click
+        Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCheckPrinting.Click
             Dim childMdiForm As CheckPrinter
             childMdiForm = New CheckPrinter("S") With {
                 .MdiParent = Me
@@ -1482,7 +1482,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClosePettyCashFundToolStripMenuItem.Click
+        Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosePettyCashFund.Click
             Dim childMdiForm
             childMdiForm = New PettyCashClosingEntry() With {
                 .MdiParent = Me
@@ -1490,7 +1490,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PayrollEntryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PayrollEntryToolStripMenuItem1.Click
+        Private Sub PayrollEntryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayrollEntry.Click
             Dim childMdiForm
             childMdiForm = New PayrollDetailEntry(0) With {
                 .MdiParent = Me
@@ -1506,7 +1506,7 @@ Namespace PresentationLayer.Views.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
+        Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSettings.Click
             Dim childMdiForm
             childMdiForm = New SetSettings() With {
                 .MdiParent = Me
@@ -1514,7 +1514,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub TestToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem2.Click
+        Private Sub TestToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuTest.Click
             Dim childMdiForm
             childMdiForm = New Test() With {
                 .MdiParent = Me

@@ -5,6 +5,7 @@
 
 
 
+
 CREATE View [dbo].[SecurityGroup_View] as 
 with cte as
 (
@@ -17,7 +18,7 @@ select IDNo
       ,DateTimeStamp
       ,cast(row_number()over(partition by ParentIdNo order by ParentIdNo) as varchar(max)) as [path]
       ,0 as levelnumber
-      ,row_number() over (partition by ParentIdNo order by ParentIdNo) / power(1000.0,0) as SortKey
+      ,row_number() over (partition by ParentIdNo order by  SecurityGroupName) / power(1000.0,0) as SortKey
  
 from SecurityGroup
 where ParentIdNo IS NULL

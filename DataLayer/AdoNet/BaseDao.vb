@@ -1,5 +1,6 @@
 ﻿Imports System.Dynamic
 Imports System.Globalization
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
 
 Namespace AdoNet
@@ -594,6 +595,11 @@ Namespace AdoNet
             Return _db.SqlRead(sql, params)
         End Function
 
+        Public Function AddSecurityControl(securityControl As SecurityControl) As Integer Implements IBaseDao.AddSecurityControl
+            Dim sql = "Insert into SecurityControl (securityControlName,systemViewIdNo) VALUES (@SecurityControlName,@SystemViewIdNo)"
+            Return _db.Insert(sql, TakeSecurityControl(securityControl))
+        End Function
+
         Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampValue As Byte,
                                                  Optional ByVal timeStampedField As String = "DateTimeStamp") As Boolean _
                     Implements IBaseDao.HasRecordChanged
@@ -730,6 +736,12 @@ Namespace AdoNet
         '            ' Attempt to commit the transaction.
         '            transaction.Commit()
         '            Console.WriteLine("Both records are written to database.")
+
+        Private Function TakeSecurityControl(securityControl As SecurityControl) As Object()
+            Return New Object() {"@SecurityControlName", securityControl.SecurityControlName,
+                                 "@SystemViewIdNo", securityControl.SystemViewIdNo}
+        End Function
+
     End Class
 
 End Namespace
