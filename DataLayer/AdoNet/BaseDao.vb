@@ -138,7 +138,7 @@ Namespace AdoNet
                     searchString = findableControl.BegFindValue
                     Dim searchString2 = findableControl.EndFindValue
                     sql &= findableControl.FieldName.Trim() & ">= @searchString and " & findableControl.FieldName.Trim() & " <= @searchString2"
-                    Dim params() As Object = {"@SearchString", searchString, "searchString", searchString2}
+                    Dim params() As Object = {"@SearchString", searchString, "@searchString2", searchString2}
                     _lastFindParms = params
                     retVal = _db.Scalar(sql & " order by IdNo ", params)
                 End If

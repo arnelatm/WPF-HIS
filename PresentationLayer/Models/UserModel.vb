@@ -4,7 +4,7 @@
 Public Class UserModel
     Inherits Model
 
-    Public Property IdNo As Int16
+    Public Property IdNo As Int32
     Public Property UserName As String
     Public Property FullName As String
     Public Property FullNameAra As String

@@ -548,7 +548,10 @@ Public Class BfMain
             RaiseEvent BeforeLoad()
             CaptionCollection = StoreCaptions1.StoreCaptions(Me)
             DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
-            cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + Name + "'"
+            If ViewDisplayName Is Nothing Then
+                ViewDisplayName = Name
+            End If
+            cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
             VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
             TranslateForm()
         End If

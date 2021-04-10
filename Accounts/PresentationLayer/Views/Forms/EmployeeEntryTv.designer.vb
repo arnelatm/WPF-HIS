@@ -25,31 +25,31 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv))
-            Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator3 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout6 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -139,7 +139,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.tbpEarnings = New System.Windows.Forms.TabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
             Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvEarningRate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal()
             Me.dgvEarningUnit = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -148,7 +148,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.tbpDeductions = New System.Windows.Forms.TabPage()
             Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequenceDeduction = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvSequenceDeduction = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
             Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvDeductionRate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
             Me.dgvDeductionUnit = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -157,11 +157,11 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.tbpPhones = New System.Windows.Forms.TabPage()
             Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
             Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvCountryTelIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvAreaCode = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.PhoneNumber = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvAreaCode = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
+            Me.PhoneNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
             Me.dgvFullPhone = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvFullPhoneAra = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvCountryTelCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -263,12 +263,17 @@ Namespace PresentationLayer.Views.Forms
             'cboPaymentMethod
             '
             Me.cboPaymentMethod.BackColor = System.Drawing.Color.White
+            Me.cboPaymentMethod.BegFindValue = Nothing
             Me.cboPaymentMethod.ChangingSearchValueOnly = False
             Me.cboPaymentMethod.CurrentSearchTerm = ""
             Me.cboPaymentMethod.DefaultValue = Nothing
             Me.cboPaymentMethod.DisplayMember = "Name"
             Me.cboPaymentMethod.EditingMode = False
+            Me.cboPaymentMethod.EndFindValue = Nothing
+            Me.cboPaymentMethod.FieldName = Nothing
             Me.cboPaymentMethod.FilterRule = Nothing
+            Me.cboPaymentMethod.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPaymentMethod.FindEnabled = False
             Me.CFlowLayout6.SetFlowBreak(Me.cboPaymentMethod, True)
             Me.cboPaymentMethod.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboPaymentMethod.ForeColor = System.Drawing.Color.Black
@@ -287,6 +292,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentMethod.PreviousSelectedIndex = -1
             Me.cboPaymentMethod.PropertySelector = Nothing
             Me.cboPaymentMethod.ReadOnlyCombo = False
+            Me.cboPaymentMethod.SecurityKey = "Payroll"
             Me.cboPaymentMethod.Size = New System.Drawing.Size(402, 24)
             Me.cboPaymentMethod.SuggestBoxHeight = 200
             Me.cboPaymentMethod.SuggestListOrderRule = Nothing
@@ -314,12 +320,17 @@ Namespace PresentationLayer.Views.Forms
             'cacBankIdNo
             '
             Me.cacBankIdNo.BackColor = System.Drawing.Color.White
+            Me.cacBankIdNo.BegFindValue = Nothing
             Me.cacBankIdNo.ChangingSearchValueOnly = False
             Me.cacBankIdNo.CurrentSearchTerm = ""
             Me.cacBankIdNo.DefaultValue = Nothing
             Me.cacBankIdNo.DisplayMember = "Name"
             Me.cacBankIdNo.EditingMode = False
+            Me.cacBankIdNo.EndFindValue = Nothing
+            Me.cacBankIdNo.FieldName = Nothing
             Me.cacBankIdNo.FilterRule = Nothing
+            Me.cacBankIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacBankIdNo.FindEnabled = False
             Me.CFlowLayout6.SetFlowBreak(Me.cacBankIdNo, True)
             Me.cacBankIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacBankIdNo.ForeColor = System.Drawing.Color.Black
@@ -338,6 +349,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.PreviousSelectedIndex = -1
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.ReadOnlyCombo = False
+            Me.cacBankIdNo.SecurityKey = "Payroll"
             Me.cacBankIdNo.Size = New System.Drawing.Size(402, 24)
             Me.cacBankIdNo.SuggestBoxHeight = 200
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
@@ -365,6 +377,7 @@ Namespace PresentationLayer.Views.Forms
             'txtBankAccountNo
             '
             Me.txtBankAccountNo.BackColor = System.Drawing.Color.White
+            Me.txtBankAccountNo.BegFindValue = Nothing
             Me.txtBankAccountNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtBankAccountNo.ComputedValue = False
             Me.txtBankAccountNo.CustomFormat = Nothing
@@ -372,6 +385,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankAccountNo.DisplayOnly = True
             Me.txtBankAccountNo.Editable = True
             Me.txtBankAccountNo.EditingMode = False
+            Me.txtBankAccountNo.EndFindValue = Nothing
+            Me.txtBankAccountNo.FieldName = Nothing
+            Me.txtBankAccountNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtBankAccountNo.FindEnabled = True
             Me.CFlowLayout6.SetFlowBreak(Me.txtBankAccountNo, True)
             Me.txtBankAccountNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -384,6 +400,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankAccountNo.Name = "txtBankAccountNo"
             Me.txtBankAccountNo.OldValue = Nothing
             Me.txtBankAccountNo.ReadOnly = True
+            Me.txtBankAccountNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtBankAccountNo.SecurityKey = "Payroll"
             Me.txtBankAccountNo.Size = New System.Drawing.Size(200, 23)
             Me.txtBankAccountNo.TabIndex = 3
             '
@@ -404,6 +422,7 @@ Namespace PresentationLayer.Views.Forms
             'txtBalance
             '
             Me.txtBalance.BackColor = System.Drawing.Color.White
+            Me.txtBalance.BegFindValue = Nothing
             Me.txtBalance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtBalance.ComputedValue = False
             Me.txtBalance.CustomFormat = Nothing
@@ -411,6 +430,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBalance.DisplayOnly = True
             Me.txtBalance.Editable = True
             Me.txtBalance.EditingMode = False
+            Me.txtBalance.EndFindValue = Nothing
+            Me.txtBalance.FieldName = Nothing
+            Me.txtBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtBalance.FindEnabled = True
             Me.CFlowLayout6.SetFlowBreak(Me.txtBalance, True)
             Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -423,6 +445,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBalance.Name = "txtBalance"
             Me.txtBalance.OldValue = Nothing
             Me.txtBalance.ReadOnly = True
+            Me.txtBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtBalance.SecurityKey = "Payroll"
             Me.txtBalance.Size = New System.Drawing.Size(93, 23)
             Me.txtBalance.TabIndex = 4
             Me.txtBalance.ValueIsNumeric = True
@@ -444,6 +468,7 @@ Namespace PresentationLayer.Views.Forms
             'txtOpeningBalance
             '
             Me.txtOpeningBalance.BackColor = System.Drawing.Color.White
+            Me.txtOpeningBalance.BegFindValue = Nothing
             Me.txtOpeningBalance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtOpeningBalance.ComputedValue = False
             Me.txtOpeningBalance.CustomFormat = Nothing
@@ -451,6 +476,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtOpeningBalance.DisplayOnly = True
             Me.txtOpeningBalance.Editable = True
             Me.txtOpeningBalance.EditingMode = False
+            Me.txtOpeningBalance.EndFindValue = Nothing
+            Me.txtOpeningBalance.FieldName = Nothing
+            Me.txtOpeningBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtOpeningBalance.FindEnabled = True
             Me.CFlowLayout6.SetFlowBreak(Me.txtOpeningBalance, True)
             Me.txtOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -463,6 +491,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtOpeningBalance.Name = "txtOpeningBalance"
             Me.txtOpeningBalance.OldValue = Nothing
             Me.txtOpeningBalance.ReadOnly = True
+            Me.txtOpeningBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtOpeningBalance.SecurityKey = "Payroll"
             Me.txtOpeningBalance.Size = New System.Drawing.Size(93, 23)
             Me.txtOpeningBalance.TabIndex = 5
             Me.txtOpeningBalance.ValueIsNumeric = True
@@ -484,6 +514,7 @@ Namespace PresentationLayer.Views.Forms
             'txtIban
             '
             Me.txtIban.BackColor = System.Drawing.Color.White
+            Me.txtIban.BegFindValue = Nothing
             Me.txtIban.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtIban.ComputedValue = False
             Me.txtIban.CustomFormat = Nothing
@@ -491,6 +522,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIban.DisplayOnly = True
             Me.txtIban.Editable = True
             Me.txtIban.EditingMode = False
+            Me.txtIban.EndFindValue = Nothing
+            Me.txtIban.FieldName = Nothing
+            Me.txtIban.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtIban.FindEnabled = True
             Me.CFlowLayout6.SetFlowBreak(Me.txtIban, True)
             Me.txtIban.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -503,6 +537,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIban.Name = "txtIban"
             Me.txtIban.OldValue = Nothing
             Me.txtIban.ReadOnly = True
+            Me.txtIban.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtIban.SecurityKey = "Payroll"
             Me.txtIban.Size = New System.Drawing.Size(200, 23)
             Me.txtIban.TabIndex = 6
             '
@@ -523,12 +559,17 @@ Namespace PresentationLayer.Views.Forms
             'cboPayCycleidNo
             '
             Me.cboPayCycleidNo.BackColor = System.Drawing.Color.White
+            Me.cboPayCycleidNo.BegFindValue = Nothing
             Me.cboPayCycleidNo.ChangingSearchValueOnly = False
             Me.cboPayCycleidNo.CurrentSearchTerm = ""
             Me.cboPayCycleidNo.DefaultValue = Nothing
             Me.cboPayCycleidNo.DisplayMember = "Name"
             Me.cboPayCycleidNo.EditingMode = False
+            Me.cboPayCycleidNo.EndFindValue = Nothing
+            Me.cboPayCycleidNo.FieldName = Nothing
             Me.cboPayCycleidNo.FilterRule = Nothing
+            Me.cboPayCycleidNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPayCycleidNo.FindEnabled = False
             Me.CFlowLayout6.SetFlowBreak(Me.cboPayCycleidNo, True)
             Me.cboPayCycleidNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboPayCycleidNo.ForeColor = System.Drawing.Color.Black
@@ -547,6 +588,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleidNo.PreviousSelectedIndex = -1
             Me.cboPayCycleidNo.PropertySelector = Nothing
             Me.cboPayCycleidNo.ReadOnlyCombo = False
+            Me.cboPayCycleidNo.SecurityKey = "Payroll"
             Me.cboPayCycleidNo.Size = New System.Drawing.Size(201, 24)
             Me.cboPayCycleidNo.SuggestBoxHeight = 200
             Me.cboPayCycleidNo.SuggestListOrderRule = Nothing
@@ -574,12 +616,17 @@ Namespace PresentationLayer.Views.Forms
             'cboPayGroupIdNo
             '
             Me.cboPayGroupIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPayGroupIdNo.BegFindValue = Nothing
             Me.cboPayGroupIdNo.ChangingSearchValueOnly = False
             Me.cboPayGroupIdNo.CurrentSearchTerm = ""
             Me.cboPayGroupIdNo.DefaultValue = Nothing
             Me.cboPayGroupIdNo.DisplayMember = "Name"
             Me.cboPayGroupIdNo.EditingMode = False
+            Me.cboPayGroupIdNo.EndFindValue = Nothing
+            Me.cboPayGroupIdNo.FieldName = Nothing
             Me.cboPayGroupIdNo.FilterRule = Nothing
+            Me.cboPayGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPayGroupIdNo.FindEnabled = False
             Me.CFlowLayout6.SetFlowBreak(Me.cboPayGroupIdNo, True)
             Me.cboPayGroupIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboPayGroupIdNo.ForeColor = System.Drawing.Color.Black
@@ -598,6 +645,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayGroupIdNo.PreviousSelectedIndex = -1
             Me.cboPayGroupIdNo.PropertySelector = Nothing
             Me.cboPayGroupIdNo.ReadOnlyCombo = False
+            Me.cboPayGroupIdNo.SecurityKey = "Payroll"
             Me.cboPayGroupIdNo.Size = New System.Drawing.Size(201, 24)
             Me.cboPayGroupIdNo.SuggestBoxHeight = 200
             Me.cboPayGroupIdNo.SuggestListOrderRule = Nothing
@@ -625,6 +673,7 @@ Namespace PresentationLayer.Views.Forms
             'txtDutyHours
             '
             Me.txtDutyHours.BackColor = System.Drawing.Color.White
+            Me.txtDutyHours.BegFindValue = Nothing
             Me.txtDutyHours.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtDutyHours.ComputedValue = False
             Me.txtDutyHours.CustomFormat = Nothing
@@ -632,6 +681,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDutyHours.DisplayOnly = True
             Me.txtDutyHours.Editable = True
             Me.txtDutyHours.EditingMode = False
+            Me.txtDutyHours.EndFindValue = Nothing
+            Me.txtDutyHours.FieldName = Nothing
+            Me.txtDutyHours.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtDutyHours.FindEnabled = True
             Me.CFlowLayout6.SetFlowBreak(Me.txtDutyHours, True)
             Me.txtDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -644,6 +696,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDutyHours.Name = "txtDutyHours"
             Me.txtDutyHours.OldValue = Nothing
             Me.txtDutyHours.ReadOnly = True
+            Me.txtDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDutyHours.SecurityKey = "Payroll"
             Me.txtDutyHours.Size = New System.Drawing.Size(93, 23)
             Me.txtDutyHours.TabIndex = 291
             Me.txtDutyHours.ValueIsNumeric = True
@@ -673,11 +727,15 @@ Namespace PresentationLayer.Views.Forms
             'txtEmployeeName
             '
             Me.txtEmployeeName.BackColor = System.Drawing.Color.White
+            Me.txtEmployeeName.BegFindValue = Nothing
             Me.txtEmployeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtEmployeeName.ComputedValue = False
             Me.txtEmployeeName.CustomFormat = Nothing
             Me.txtEmployeeName.DataBoundControl = True
             Me.txtEmployeeName.EditingMode = False
+            Me.txtEmployeeName.EndFindValue = Nothing
+            Me.txtEmployeeName.FieldName = Nothing
+            Me.txtEmployeeName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtEmployeeName.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtEmployeeName, True)
             Me.txtEmployeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -690,6 +748,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeName.Name = "txtEmployeeName"
             Me.txtEmployeeName.OldValue = Nothing
             Me.txtEmployeeName.ReadOnly = True
+            Me.txtEmployeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmployeeName.Size = New System.Drawing.Size(476, 23)
             Me.txtEmployeeName.TabIndex = 2
             Me.txtEmployeeName.ValueIsMandatory = True
@@ -712,6 +771,7 @@ Namespace PresentationLayer.Views.Forms
             'txtEmployeeNameAra
             '
             Me.txtEmployeeNameAra.BackColor = System.Drawing.Color.White
+            Me.txtEmployeeNameAra.BegFindValue = Nothing
             Me.txtEmployeeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtEmployeeNameAra.ComputedValue = False
             Me.txtEmployeeNameAra.CustomFormat = Nothing
@@ -719,7 +779,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeNameAra.DisplayOnly = True
             Me.txtEmployeeNameAra.Editable = True
             Me.txtEmployeeNameAra.EditingMode = False
+            Me.txtEmployeeNameAra.EndFindValue = Nothing
             Me.txtEmployeeNameAra.EnglishControl = Me.txtEmployeeName
+            Me.txtEmployeeNameAra.FieldName = Nothing
+            Me.txtEmployeeNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtEmployeeNameAra.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtEmployeeNameAra, True)
             Me.txtEmployeeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -733,6 +796,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeNameAra.OldValue = Nothing
             Me.txtEmployeeNameAra.ReadOnly = True
             Me.txtEmployeeNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtEmployeeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmployeeNameAra.Size = New System.Drawing.Size(476, 23)
             Me.txtEmployeeNameAra.TabIndex = 3
             Me.txtEmployeeNameAra.ValueIsMandatory = True
@@ -810,12 +874,17 @@ Namespace PresentationLayer.Views.Forms
             'cacMaritalStatus
             '
             Me.cacMaritalStatus.BackColor = System.Drawing.Color.White
+            Me.cacMaritalStatus.BegFindValue = Nothing
             Me.cacMaritalStatus.ChangingSearchValueOnly = False
             Me.cacMaritalStatus.CurrentSearchTerm = ""
             Me.cacMaritalStatus.DefaultValue = Nothing
             Me.cacMaritalStatus.DisplayMember = "Name"
             Me.cacMaritalStatus.EditingMode = False
+            Me.cacMaritalStatus.EndFindValue = Nothing
+            Me.cacMaritalStatus.FieldName = Nothing
             Me.cacMaritalStatus.FilterRule = Nothing
+            Me.cacMaritalStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacMaritalStatus.FindEnabled = False
             Me.floPersonal.SetFlowBreak(Me.cacMaritalStatus, True)
             Me.cacMaritalStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacMaritalStatus.ForeColor = System.Drawing.Color.Black
@@ -861,12 +930,17 @@ Namespace PresentationLayer.Views.Forms
             'cacNationalityCode
             '
             Me.cacNationalityCode.BackColor = System.Drawing.Color.White
+            Me.cacNationalityCode.BegFindValue = Nothing
             Me.cacNationalityCode.ChangingSearchValueOnly = False
             Me.cacNationalityCode.CurrentSearchTerm = ""
             Me.cacNationalityCode.DefaultValue = Nothing
             Me.cacNationalityCode.DisplayMember = "Name"
             Me.cacNationalityCode.EditingMode = False
+            Me.cacNationalityCode.EndFindValue = Nothing
+            Me.cacNationalityCode.FieldName = Nothing
             Me.cacNationalityCode.FilterRule = Nothing
+            Me.cacNationalityCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacNationalityCode.FindEnabled = False
             Me.floPersonal.SetFlowBreak(Me.cacNationalityCode, True)
             Me.cacNationalityCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacNationalityCode.ForeColor = System.Drawing.Color.Black
@@ -912,12 +986,17 @@ Namespace PresentationLayer.Views.Forms
             'cacReligionIdNo
             '
             Me.cacReligionIdNo.BackColor = System.Drawing.Color.White
+            Me.cacReligionIdNo.BegFindValue = Nothing
             Me.cacReligionIdNo.ChangingSearchValueOnly = False
             Me.cacReligionIdNo.CurrentSearchTerm = ""
             Me.cacReligionIdNo.DefaultValue = Nothing
             Me.cacReligionIdNo.DisplayMember = "Name"
             Me.cacReligionIdNo.EditingMode = False
+            Me.cacReligionIdNo.EndFindValue = Nothing
+            Me.cacReligionIdNo.FieldName = Nothing
             Me.cacReligionIdNo.FilterRule = Nothing
+            Me.cacReligionIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacReligionIdNo.FindEnabled = False
             Me.floPersonal.SetFlowBreak(Me.cacReligionIdNo, True)
             Me.cacReligionIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacReligionIdNo.ForeColor = System.Drawing.Color.Black
@@ -1005,12 +1084,17 @@ Namespace PresentationLayer.Views.Forms
             'cacGender
             '
             Me.cacGender.BackColor = System.Drawing.Color.White
+            Me.cacGender.BegFindValue = Nothing
             Me.cacGender.ChangingSearchValueOnly = False
             Me.cacGender.CurrentSearchTerm = ""
             Me.cacGender.DefaultValue = Nothing
             Me.cacGender.DisplayMember = "Name"
             Me.cacGender.EditingMode = False
+            Me.cacGender.EndFindValue = Nothing
+            Me.cacGender.FieldName = Nothing
             Me.cacGender.FilterRule = Nothing
+            Me.cacGender.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacGender.FindEnabled = False
             Me.floPersonal.SetFlowBreak(Me.cacGender, True)
             Me.cacGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacGender.ForeColor = System.Drawing.Color.Black
@@ -1056,6 +1140,7 @@ Namespace PresentationLayer.Views.Forms
             'txtNationalIdNo
             '
             Me.txtNationalIdNo.BackColor = System.Drawing.Color.White
+            Me.txtNationalIdNo.BegFindValue = Nothing
             Me.txtNationalIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNationalIdNo.ComputedValue = False
             Me.txtNationalIdNo.CustomFormat = Nothing
@@ -1063,6 +1148,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNationalIdNo.DisplayOnly = True
             Me.txtNationalIdNo.Editable = True
             Me.txtNationalIdNo.EditingMode = False
+            Me.txtNationalIdNo.EndFindValue = Nothing
+            Me.txtNationalIdNo.FieldName = Nothing
+            Me.txtNationalIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNationalIdNo.FindEnabled = True
             Me.floPersonal.SetFlowBreak(Me.txtNationalIdNo, True)
             Me.txtNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1075,6 +1163,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNationalIdNo.Name = "txtNationalIdNo"
             Me.txtNationalIdNo.OldValue = Nothing
             Me.txtNationalIdNo.ReadOnly = True
+            Me.txtNationalIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNationalIdNo.Size = New System.Drawing.Size(200, 23)
             Me.txtNationalIdNo.TabIndex = 6
             Me.txtNationalIdNo.ValueIsNumeric = True
@@ -1097,6 +1186,7 @@ Namespace PresentationLayer.Views.Forms
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
@@ -1104,6 +1194,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.DisplayOnly = True
             Me.txtNotes.Editable = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
             Me.floPersonal.SetFlowBreak(Me.txtNotes, True)
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1117,6 +1210,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Size = New System.Drawing.Size(422, 60)
             Me.txtNotes.TabIndex = 7
             Me.txtNotes.ValueIsMandatory = True
@@ -1191,28 +1285,33 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPhoneDisplay.AllowUserToAddRows = False
             Me.DataGridViewPhoneDisplay.AllowUserToDeleteRows = False
             Me.DataGridViewPhoneDisplay.AllowUserToResizeColumns = False
-            DataGridViewCellStyle24.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPhoneDisplay.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle24
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPhoneDisplay.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPhoneDisplay.AutoGenerateColumns = False
+            Me.DataGridViewPhoneDisplay.BegFindValue = Nothing
             Me.DataGridViewPhoneDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPhoneDisplay.ColumnHeadersVisible = False
             Me.DataGridViewPhoneDisplay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequencePhoneDisplay, Me.FullPhone, Me.FullPhoneAra, Me.AreaCodeDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.CountryTelIdNoDataGridViewTextBoxColumn, Me.PhoneNumberDataGridViewTextBoxColumn, Me.PhoneTypeIdNoDataGridViewTextBoxColumn})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewPhoneDisplay, 4)
             Me.DataGridViewPhoneDisplay.DataSource = Me.bsPhones
-            DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle25.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle25.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPhoneDisplay.DefaultCellStyle = DataGridViewCellStyle25
+            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPhoneDisplay.DefaultCellStyle = DataGridViewCellStyle2
             Me.DataGridViewPhoneDisplay.DgvFooter = Nothing
             Me.DataGridViewPhoneDisplay.DisplayOnly = True
             Me.DataGridViewPhoneDisplay.Ea = Nothing
             Me.DataGridViewPhoneDisplay.EditingMode = False
             Me.DataGridViewPhoneDisplay.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPhoneDisplay.EndFindValue = Nothing
+            Me.DataGridViewPhoneDisplay.FieldName = Nothing
             Me.DataGridViewPhoneDisplay.FieldsDictionary = Nothing
+            Me.DataGridViewPhoneDisplay.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewPhoneDisplay.FindEnabled = False
             Me.DataGridViewPhoneDisplay.FirstRowDeletionEnabled = True
             Me.DataGridViewPhoneDisplay.FirstRowInsertionEnabled = True
             Me.DataGridViewPhoneDisplay.Location = New System.Drawing.Point(3, 174)
@@ -1220,6 +1319,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPhoneDisplay.ReadOnly = True
             Me.DataGridViewPhoneDisplay.RowHeadersVisible = False
             Me.DataGridViewPhoneDisplay.ScrollBars = System.Windows.Forms.ScrollBars.None
+            Me.DataGridViewPhoneDisplay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPhoneDisplay.SequenceColumn = "dgvSequencePhoneDisplay"
             Me.DataGridViewPhoneDisplay.SequenceFieldName = "Sequence"
             Me.DataGridViewPhoneDisplay.ShowFooter = False
@@ -1307,6 +1407,7 @@ Namespace PresentationLayer.Views.Forms
             'txtZipCode
             '
             Me.txtZipCode.BackColor = System.Drawing.Color.White
+            Me.txtZipCode.BegFindValue = Nothing
             Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtZipCode.ComputedValue = False
             Me.txtZipCode.CustomFormat = Nothing
@@ -1314,6 +1415,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtZipCode.DisplayOnly = True
             Me.txtZipCode.Editable = True
             Me.txtZipCode.EditingMode = False
+            Me.txtZipCode.EndFindValue = Nothing
+            Me.txtZipCode.FieldName = Nothing
+            Me.txtZipCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtZipCode.FindEnabled = True
             Me.txtZipCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtZipCode.ForeColor = System.Drawing.Color.Black
@@ -1325,6 +1429,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtZipCode.Name = "txtZipCode"
             Me.txtZipCode.OldValue = Nothing
             Me.txtZipCode.ReadOnly = True
+            Me.txtZipCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtZipCode.Size = New System.Drawing.Size(193, 23)
             Me.txtZipCode.TabIndex = 290
             '
@@ -1345,6 +1450,7 @@ Namespace PresentationLayer.Views.Forms
             'txtPoBox
             '
             Me.txtPoBox.BackColor = System.Drawing.Color.White
+            Me.txtPoBox.BegFindValue = Nothing
             Me.txtPoBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPoBox.ComputedValue = False
             Me.txtPoBox.CustomFormat = Nothing
@@ -1352,6 +1458,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPoBox.DisplayOnly = True
             Me.txtPoBox.Editable = True
             Me.txtPoBox.EditingMode = False
+            Me.txtPoBox.EndFindValue = Nothing
+            Me.txtPoBox.FieldName = Nothing
+            Me.txtPoBox.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPoBox.FindEnabled = True
             Me.txtPoBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPoBox.ForeColor = System.Drawing.Color.Black
@@ -1363,6 +1472,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPoBox.Name = "txtPoBox"
             Me.txtPoBox.OldValue = Nothing
             Me.txtPoBox.ReadOnly = True
+            Me.txtPoBox.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPoBox.Size = New System.Drawing.Size(186, 23)
             Me.txtPoBox.TabIndex = 288
             '
@@ -1383,12 +1493,17 @@ Namespace PresentationLayer.Views.Forms
             'cacCountryCode
             '
             Me.cacCountryCode.BackColor = System.Drawing.Color.White
+            Me.cacCountryCode.BegFindValue = Nothing
             Me.cacCountryCode.ChangingSearchValueOnly = False
             Me.cacCountryCode.CurrentSearchTerm = ""
             Me.cacCountryCode.DefaultValue = Nothing
             Me.cacCountryCode.DisplayMember = "Name"
             Me.cacCountryCode.EditingMode = False
+            Me.cacCountryCode.EndFindValue = Nothing
+            Me.cacCountryCode.FieldName = Nothing
             Me.cacCountryCode.FilterRule = Nothing
+            Me.cacCountryCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacCountryCode.FindEnabled = False
             Me.cacCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacCountryCode.ForeColor = System.Drawing.Color.Black
             Me.cacCountryCode.FormattingEnabled = True
@@ -1433,6 +1548,7 @@ Namespace PresentationLayer.Views.Forms
             'txtProvinceState
             '
             Me.txtProvinceState.BackColor = System.Drawing.Color.White
+            Me.txtProvinceState.BegFindValue = Nothing
             Me.txtProvinceState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtProvinceState.ComputedValue = False
             Me.txtProvinceState.CustomFormat = Nothing
@@ -1440,6 +1556,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProvinceState.DisplayOnly = True
             Me.txtProvinceState.Editable = True
             Me.txtProvinceState.EditingMode = False
+            Me.txtProvinceState.EndFindValue = Nothing
+            Me.txtProvinceState.FieldName = Nothing
+            Me.txtProvinceState.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtProvinceState.FindEnabled = True
             Me.txtProvinceState.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtProvinceState.ForeColor = System.Drawing.Color.Black
@@ -1451,6 +1570,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProvinceState.Name = "txtProvinceState"
             Me.txtProvinceState.OldValue = Nothing
             Me.txtProvinceState.ReadOnly = True
+            Me.txtProvinceState.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtProvinceState.Size = New System.Drawing.Size(186, 23)
             Me.txtProvinceState.TabIndex = 284
             '
@@ -1471,6 +1591,7 @@ Namespace PresentationLayer.Views.Forms
             'txtTownCity
             '
             Me.txtTownCity.BackColor = System.Drawing.Color.White
+            Me.txtTownCity.BegFindValue = Nothing
             Me.txtTownCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtTownCity.ComputedValue = False
             Me.txtTownCity.CustomFormat = Nothing
@@ -1478,6 +1599,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTownCity.DisplayOnly = True
             Me.txtTownCity.Editable = True
             Me.txtTownCity.EditingMode = False
+            Me.txtTownCity.EndFindValue = Nothing
+            Me.txtTownCity.FieldName = Nothing
+            Me.txtTownCity.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtTownCity.FindEnabled = True
             Me.txtTownCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtTownCity.ForeColor = System.Drawing.Color.Black
@@ -1489,6 +1613,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTownCity.Name = "txtTownCity"
             Me.txtTownCity.OldValue = Nothing
             Me.txtTownCity.ReadOnly = True
+            Me.txtTownCity.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtTownCity.Size = New System.Drawing.Size(193, 23)
             Me.txtTownCity.TabIndex = 282
             '
@@ -1509,6 +1634,7 @@ Namespace PresentationLayer.Views.Forms
             'txtDistrict
             '
             Me.txtDistrict.BackColor = System.Drawing.Color.White
+            Me.txtDistrict.BegFindValue = Nothing
             Me.txtDistrict.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtDistrict.ComputedValue = False
             Me.txtDistrict.CustomFormat = Nothing
@@ -1516,6 +1642,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDistrict.DisplayOnly = True
             Me.txtDistrict.Editable = True
             Me.txtDistrict.EditingMode = False
+            Me.txtDistrict.EndFindValue = Nothing
+            Me.txtDistrict.FieldName = Nothing
+            Me.txtDistrict.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtDistrict.FindEnabled = True
             Me.txtDistrict.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDistrict.ForeColor = System.Drawing.Color.Black
@@ -1527,6 +1656,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDistrict.Name = "txtDistrict"
             Me.txtDistrict.OldValue = Nothing
             Me.txtDistrict.ReadOnly = True
+            Me.txtDistrict.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDistrict.Size = New System.Drawing.Size(186, 23)
             Me.txtDistrict.TabIndex = 280
             '
@@ -1547,6 +1677,7 @@ Namespace PresentationLayer.Views.Forms
             'txtStreet
             '
             Me.txtStreet.BackColor = System.Drawing.Color.White
+            Me.txtStreet.BegFindValue = Nothing
             Me.txtStreet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtStreet, 3)
             Me.txtStreet.ComputedValue = False
@@ -1555,6 +1686,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtStreet.DisplayOnly = True
             Me.txtStreet.Editable = True
             Me.txtStreet.EditingMode = False
+            Me.txtStreet.EndFindValue = Nothing
+            Me.txtStreet.FieldName = Nothing
+            Me.txtStreet.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtStreet.FindEnabled = True
             Me.txtStreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtStreet.ForeColor = System.Drawing.Color.Black
@@ -1566,12 +1700,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtStreet.Name = "txtStreet"
             Me.txtStreet.OldValue = Nothing
             Me.txtStreet.ReadOnly = True
+            Me.txtStreet.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtStreet.Size = New System.Drawing.Size(510, 23)
             Me.txtStreet.TabIndex = 278
             '
             'txtEmail
             '
             Me.txtEmail.BackColor = System.Drawing.Color.White
+            Me.txtEmail.BegFindValue = Nothing
             Me.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtEmail, 3)
             Me.txtEmail.ComputedValue = False
@@ -1580,6 +1716,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmail.DisplayOnly = True
             Me.txtEmail.Editable = True
             Me.txtEmail.EditingMode = False
+            Me.txtEmail.EndFindValue = Nothing
+            Me.txtEmail.FieldName = Nothing
+            Me.txtEmail.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtEmail.FindEnabled = True
             Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtEmail.ForeColor = System.Drawing.Color.Black
@@ -1591,6 +1730,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmail.Name = "txtEmail"
             Me.txtEmail.OldValue = Nothing
             Me.txtEmail.ReadOnly = True
+            Me.txtEmail.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmail.Size = New System.Drawing.Size(510, 23)
             Me.txtEmail.TabIndex = 274
             '
@@ -1782,12 +1922,17 @@ Namespace PresentationLayer.Views.Forms
             'cacDepartmentIdNo
             '
             Me.cacDepartmentIdNo.BackColor = System.Drawing.Color.White
+            Me.cacDepartmentIdNo.BegFindValue = Nothing
             Me.cacDepartmentIdNo.ChangingSearchValueOnly = False
             Me.cacDepartmentIdNo.CurrentSearchTerm = ""
             Me.cacDepartmentIdNo.DefaultValue = Nothing
             Me.cacDepartmentIdNo.DisplayMember = "Name"
             Me.cacDepartmentIdNo.EditingMode = False
+            Me.cacDepartmentIdNo.EndFindValue = Nothing
+            Me.cacDepartmentIdNo.FieldName = Nothing
             Me.cacDepartmentIdNo.FilterRule = Nothing
+            Me.cacDepartmentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacDepartmentIdNo.FindEnabled = False
             Me.CFlowLayout5.SetFlowBreak(Me.cacDepartmentIdNo, True)
             Me.cacDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacDepartmentIdNo.ForeColor = System.Drawing.Color.Black
@@ -1833,12 +1978,17 @@ Namespace PresentationLayer.Views.Forms
             'cacDesignationIdNo
             '
             Me.cacDesignationIdNo.BackColor = System.Drawing.Color.White
+            Me.cacDesignationIdNo.BegFindValue = Nothing
             Me.cacDesignationIdNo.ChangingSearchValueOnly = False
             Me.cacDesignationIdNo.CurrentSearchTerm = ""
             Me.cacDesignationIdNo.DefaultValue = Nothing
             Me.cacDesignationIdNo.DisplayMember = "Name"
             Me.cacDesignationIdNo.EditingMode = False
+            Me.cacDesignationIdNo.EndFindValue = Nothing
+            Me.cacDesignationIdNo.FieldName = Nothing
             Me.cacDesignationIdNo.FilterRule = Nothing
+            Me.cacDesignationIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacDesignationIdNo.FindEnabled = False
             Me.CFlowLayout5.SetFlowBreak(Me.cacDesignationIdNo, True)
             Me.cacDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacDesignationIdNo.ForeColor = System.Drawing.Color.Black
@@ -1886,13 +2036,18 @@ Namespace PresentationLayer.Views.Forms
             Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
             Me.chkActive.AutoCheck = False
             Me.chkActive.BackColor = System.Drawing.Color.White
+            Me.chkActive.BegFindValue = Nothing
             Me.chkActive.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.chkActive.DisplayOnly = False
             Me.chkActive.EditingMode = False
+            Me.chkActive.EndFindValue = Nothing
+            Me.chkActive.FieldName = Nothing
+            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.chkActive.FindEnabled = True
             Me.chkActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.CFlowLayout5.SetFlowBreak(Me.chkActive, True)
             Me.chkActive.ForeColor = System.Drawing.Color.Black
+            Me.chkActive.IFindableControl_FindEnabled = False
             Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkActive.LinkedLabel = Me.lblActive
             Me.chkActive.Location = New System.Drawing.Point(181, 108)
@@ -1900,6 +2055,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkActive.Name = "chkActive"
             Me.chkActive.NoLabel = False
             Me.chkActive.OldValue = ""
+            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.chkActive.Size = New System.Drawing.Size(25, 21)
             Me.chkActive.TabIndex = 5
             Me.chkActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1933,33 +2089,39 @@ Namespace PresentationLayer.Views.Forms
             'DataGridViewEarnings
             '
             Me.DataGridViewEarnings.AllowUserToOrderColumns = True
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
             Me.DataGridViewEarnings.AutoGenerateColumns = False
             Me.DataGridViewEarnings.BackgroundColor = System.Drawing.Color.White
+            Me.DataGridViewEarnings.BegFindValue = Nothing
             Me.DataGridViewEarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceEarning, Me.dgvEarningIdNo, Me.dgvEarningRate, Me.dgvEarningUnit, Me.dgvEarningAmount, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
             Me.DataGridViewEarnings.DataSource = Me.bsEarnings
-            DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle30.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle30
+            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle9
             Me.DataGridViewEarnings.DgvFooter = Nothing
             Me.DataGridViewEarnings.DisplayOnly = False
             Me.DataGridViewEarnings.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.DataGridViewEarnings.Ea = EventAggregator3
+            Me.DataGridViewEarnings.Ea = EventAggregator1
             Me.DataGridViewEarnings.EditingMode = False
             Me.DataGridViewEarnings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewEarnings.EndFindValue = Nothing
+            Me.DataGridViewEarnings.FieldName = Nothing
             Me.DataGridViewEarnings.FieldsDictionary = Nothing
+            Me.DataGridViewEarnings.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewEarnings.FindEnabled = False
             Me.DataGridViewEarnings.FirstRowDeletionEnabled = True
             Me.DataGridViewEarnings.FirstRowInsertionEnabled = True
             Me.DataGridViewEarnings.Location = New System.Drawing.Point(0, 0)
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
             Me.DataGridViewEarnings.ReadOnly = True
+            Me.DataGridViewEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewEarnings.SequenceColumn = "dgvSequenceEarning"
             Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
             Me.DataGridViewEarnings.ShowFooter = True
@@ -1969,24 +2131,30 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvSequenceEarning
             '
+            Me.dgvSequenceEarning.BegFindValue = Nothing
             Me.dgvSequenceEarning.DataPropertyName = "Sequence"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle4
             Me.dgvSequenceEarning.EditingMode = False
+            Me.dgvSequenceEarning.EndFindValue = Nothing
+            Me.dgvSequenceEarning.FieldName = Nothing
+            Me.dgvSequenceEarning.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequenceEarning.FindEnabled = False
             Me.dgvSequenceEarning.HeaderText = "Seq"
             Me.dgvSequenceEarning.MinimumWidth = 30
             Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
             Me.dgvSequenceEarning.ReadOnly = True
+            Me.dgvSequenceEarning.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSequenceEarning.Width = 30
             '
             'dgvEarningIdNo
             '
             Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle26.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle26.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle26
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvEarningIdNo.EditingMode = False
             Me.dgvEarningIdNo.HeaderText = "Earning Name - Code"
             Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
@@ -1997,10 +2165,10 @@ Namespace PresentationLayer.Views.Forms
             'dgvEarningRate
             '
             Me.dgvEarningRate.DataPropertyName = "Rate"
-            DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle27.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle27.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningRate.DefaultCellStyle = DataGridViewCellStyle27
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningRate.DefaultCellStyle = DataGridViewCellStyle6
             Me.dgvEarningRate.EditingMode = False
             Me.dgvEarningRate.HeaderText = "Rate / Amount"
             Me.dgvEarningRate.Name = "dgvEarningRate"
@@ -2012,9 +2180,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvEarningUnit
             '
             Me.dgvEarningUnit.DataPropertyName = "Unit"
-            DataGridViewCellStyle28.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningUnit.DefaultCellStyle = DataGridViewCellStyle28
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningUnit.DefaultCellStyle = DataGridViewCellStyle7
             Me.dgvEarningUnit.EditingMode = False
             Me.dgvEarningUnit.HeaderText = "Unit"
             Me.dgvEarningUnit.Name = "dgvEarningUnit"
@@ -2025,11 +2193,11 @@ Namespace PresentationLayer.Views.Forms
             'dgvEarningAmount
             '
             Me.dgvEarningAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle29.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle29.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle29.Format = "###,##0.00"
-            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle29
+            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle8.Format = "###,##0.00"
+            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle8
             Me.dgvEarningAmount.EditingMode = False
             Me.dgvEarningAmount.HeaderText = "Payroll Amount"
             Me.dgvEarningAmount.MinimumWidth = 80
@@ -2069,32 +2237,38 @@ Namespace PresentationLayer.Views.Forms
             'DataGridViewDeductions
             '
             Me.DataGridViewDeductions.AllowUserToOrderColumns = True
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
             Me.DataGridViewDeductions.AutoGenerateColumns = False
+            Me.DataGridViewDeductions.BegFindValue = Nothing
             Me.DataGridViewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDeduction, Me.dgvDeductionIdNo, Me.dgvDeductionRate, Me.dgvDeductionUnit, Me.dgvDeductionAmount, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14})
             Me.DataGridViewDeductions.DataSource = Me.bsDeductions
-            DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle35.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle35.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle35.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle35
+            DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle16
             Me.DataGridViewDeductions.DgvFooter = Nothing
             Me.DataGridViewDeductions.DisplayOnly = False
             Me.DataGridViewDeductions.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.DataGridViewDeductions.Ea = EventAggregator1
+            Me.DataGridViewDeductions.Ea = EventAggregator2
             Me.DataGridViewDeductions.EditingMode = False
             Me.DataGridViewDeductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewDeductions.EndFindValue = Nothing
+            Me.DataGridViewDeductions.FieldName = Nothing
             Me.DataGridViewDeductions.FieldsDictionary = Nothing
+            Me.DataGridViewDeductions.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewDeductions.FindEnabled = False
             Me.DataGridViewDeductions.FirstRowDeletionEnabled = True
             Me.DataGridViewDeductions.FirstRowInsertionEnabled = True
             Me.DataGridViewDeductions.Location = New System.Drawing.Point(3, 3)
             Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
             Me.DataGridViewDeductions.ReadOnly = True
+            Me.DataGridViewDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewDeductions.SequenceColumn = "dgvSequenceDeduction"
             Me.DataGridViewDeductions.SequenceFieldName = "Sequence"
             Me.DataGridViewDeductions.ShowFooter = False
@@ -2104,25 +2278,31 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvSequenceDeduction
             '
+            Me.dgvSequenceDeduction.BegFindValue = Nothing
             Me.dgvSequenceDeduction.DataPropertyName = "Sequence"
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvSequenceDeduction.EditingMode = False
+            Me.dgvSequenceDeduction.EndFindValue = Nothing
+            Me.dgvSequenceDeduction.FieldName = Nothing
+            Me.dgvSequenceDeduction.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequenceDeduction.FindEnabled = False
             Me.dgvSequenceDeduction.HeaderText = "Seq"
             Me.dgvSequenceDeduction.MinimumWidth = 30
             Me.dgvSequenceDeduction.Name = "dgvSequenceDeduction"
             Me.dgvSequenceDeduction.ReadOnly = True
             Me.dgvSequenceDeduction.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequenceDeduction.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSequenceDeduction.Width = 30
             '
             'dgvDeductionIdNo
             '
             Me.dgvDeductionIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvDeductionIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle31.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle31.ForeColor = System.Drawing.Color.Black
-            Me.dgvDeductionIdNo.DefaultCellStyle = DataGridViewCellStyle31
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.dgvDeductionIdNo.DefaultCellStyle = DataGridViewCellStyle12
             Me.dgvDeductionIdNo.EditingMode = False
             Me.dgvDeductionIdNo.HeaderText = "Deduction Name - Code"
             Me.dgvDeductionIdNo.Name = "dgvDeductionIdNo"
@@ -2133,11 +2313,11 @@ Namespace PresentationLayer.Views.Forms
             'dgvDeductionRate
             '
             Me.dgvDeductionRate.DataPropertyName = "Rate"
-            DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle32.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle32.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle32.Format = "###,##0.00"
-            Me.dgvDeductionRate.DefaultCellStyle = DataGridViewCellStyle32
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.Format = "###,##0.00"
+            Me.dgvDeductionRate.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvDeductionRate.EditingMode = False
             Me.dgvDeductionRate.HeaderText = "Rate / Amount"
             Me.dgvDeductionRate.Name = "dgvDeductionRate"
@@ -2149,9 +2329,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvDeductionUnit
             '
             Me.dgvDeductionUnit.DataPropertyName = "Unit"
-            DataGridViewCellStyle33.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle33.ForeColor = System.Drawing.Color.Black
-            Me.dgvDeductionUnit.DefaultCellStyle = DataGridViewCellStyle33
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            Me.dgvDeductionUnit.DefaultCellStyle = DataGridViewCellStyle14
             Me.dgvDeductionUnit.EditingMode = False
             Me.dgvDeductionUnit.HeaderText = "Unit"
             Me.dgvDeductionUnit.Name = "dgvDeductionUnit"
@@ -2162,11 +2342,11 @@ Namespace PresentationLayer.Views.Forms
             'dgvDeductionAmount
             '
             Me.dgvDeductionAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle34.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle34.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle34.Format = "###,##0.00"
-            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle34
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle15.Format = "###,##0.00"
+            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle15
             Me.dgvDeductionAmount.EditingMode = False
             Me.dgvDeductionAmount.HeaderText = "Payroll Amount"
             Me.dgvDeductionAmount.MinimumWidth = 80
@@ -2206,32 +2386,38 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewPhones
             '
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
+            DataGridViewCellStyle17.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle17
             Me.DataGridViewPhones.AutoGenerateColumns = False
+            Me.DataGridViewPhones.BegFindValue = Nothing
             Me.DataGridViewPhones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPhones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvPhoneTypeIdNo, Me.dgvCountryTelIdNo, Me.dgvAreaCode, Me.PhoneNumber, Me.dgvFullPhone, Me.dgvFullPhoneAra, Me.dgvCountryTelCode, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
             Me.DataGridViewPhones.DataSource = Me.bsPhones
-            DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle40.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle40.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle40.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle40.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle40.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle40
+            DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle23
             Me.DataGridViewPhones.DgvFooter = Nothing
             Me.DataGridViewPhones.DisplayOnly = False
             Me.DataGridViewPhones.Dock = System.Windows.Forms.DockStyle.Fill
             Me.DataGridViewPhones.Ea = Nothing
             Me.DataGridViewPhones.EditingMode = False
             Me.DataGridViewPhones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPhones.EndFindValue = Nothing
+            Me.DataGridViewPhones.FieldName = Nothing
             Me.DataGridViewPhones.FieldsDictionary = Nothing
+            Me.DataGridViewPhones.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewPhones.FindEnabled = False
             Me.DataGridViewPhones.FirstRowDeletionEnabled = True
             Me.DataGridViewPhones.FirstRowInsertionEnabled = True
             Me.DataGridViewPhones.Location = New System.Drawing.Point(3, 3)
             Me.DataGridViewPhones.Name = "DataGridViewPhones"
             Me.DataGridViewPhones.ReadOnly = True
+            Me.DataGridViewPhones.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPhones.SequenceColumn = "dgvSequence"
             Me.DataGridViewPhones.SequenceFieldName = "Sequence"
             Me.DataGridViewPhones.ShowFooter = False
@@ -2241,24 +2427,30 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvSequence
             '
+            Me.dgvSequence.BegFindValue = Nothing
             Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle16
+            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle18
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
+            Me.dgvSequence.EndFindValue = Nothing
+            Me.dgvSequence.FieldName = Nothing
+            Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequence.FindEnabled = False
             Me.dgvSequence.HeaderText = "Seq"
             Me.dgvSequence.Name = "dgvSequence"
             Me.dgvSequence.ReadOnly = True
             Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSequence.Width = 40
             '
             'dgvPhoneTypeIdNo
             '
             Me.dgvPhoneTypeIdNo.DataPropertyName = "PhoneTypeIdNo"
-            DataGridViewCellStyle36.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle36.ForeColor = System.Drawing.Color.Black
-            Me.dgvPhoneTypeIdNo.DefaultCellStyle = DataGridViewCellStyle36
+            DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
+            Me.dgvPhoneTypeIdNo.DefaultCellStyle = DataGridViewCellStyle19
             Me.dgvPhoneTypeIdNo.EditingMode = False
             Me.dgvPhoneTypeIdNo.HeaderText = "Phone Type Code - Name"
             Me.dgvPhoneTypeIdNo.Name = "dgvPhoneTypeIdNo"
@@ -2269,9 +2461,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvCountryTelIdNo
             '
             Me.dgvCountryTelIdNo.DataPropertyName = "CountryTelIdNo"
-            DataGridViewCellStyle37.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle37.ForeColor = System.Drawing.Color.Black
-            Me.dgvCountryTelIdNo.DefaultCellStyle = DataGridViewCellStyle37
+            DataGridViewCellStyle20.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
+            Me.dgvCountryTelIdNo.DefaultCellStyle = DataGridViewCellStyle20
             Me.dgvCountryTelIdNo.EditingMode = False
             Me.dgvCountryTelIdNo.HeaderText = "Country Phone Code"
             Me.dgvCountryTelIdNo.MinimumWidth = 200
@@ -2281,27 +2473,39 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvAreaCode
             '
+            Me.dgvAreaCode.BegFindValue = Nothing
             Me.dgvAreaCode.DataPropertyName = "AreaCode"
-            DataGridViewCellStyle38.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle38.ForeColor = System.Drawing.Color.Black
-            Me.dgvAreaCode.DefaultCellStyle = DataGridViewCellStyle38
+            DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black
+            Me.dgvAreaCode.DefaultCellStyle = DataGridViewCellStyle21
             Me.dgvAreaCode.EditingMode = False
+            Me.dgvAreaCode.EndFindValue = Nothing
+            Me.dgvAreaCode.FieldName = Nothing
+            Me.dgvAreaCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvAreaCode.FindEnabled = False
             Me.dgvAreaCode.HeaderText = "Area Code"
             Me.dgvAreaCode.Name = "dgvAreaCode"
             Me.dgvAreaCode.ReadOnly = True
             Me.dgvAreaCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvAreaCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvAreaCode.Width = 60
             '
             'PhoneNumber
             '
+            Me.PhoneNumber.BegFindValue = Nothing
             Me.PhoneNumber.DataPropertyName = "PhoneNumber"
-            DataGridViewCellStyle39.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle39.ForeColor = System.Drawing.Color.Black
-            Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle39
+            DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
+            Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle22
             Me.PhoneNumber.EditingMode = False
+            Me.PhoneNumber.EndFindValue = Nothing
+            Me.PhoneNumber.FieldName = Nothing
+            Me.PhoneNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.PhoneNumber.FindEnabled = False
             Me.PhoneNumber.HeaderText = "PhoneNumber"
             Me.PhoneNumber.Name = "PhoneNumber"
             Me.PhoneNumber.ReadOnly = True
+            Me.PhoneNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             '
             'dgvFullPhone
             '
@@ -2363,6 +2567,7 @@ Namespace PresentationLayer.Views.Forms
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
@@ -2370,6 +2575,9 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.Editable = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
@@ -2381,6 +2589,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
             Me.TxtIdNo.TabIndex = 151
             Me.TxtIdNo.TabStop = False
@@ -2403,6 +2612,7 @@ Namespace PresentationLayer.Views.Forms
             'txtEmployeeCode
             '
             Me.txtEmployeeCode.BackColor = System.Drawing.Color.White
+            Me.txtEmployeeCode.BegFindValue = Nothing
             Me.txtEmployeeCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtEmployeeCode.ComputedValue = False
             Me.txtEmployeeCode.CustomFormat = Nothing
@@ -2410,6 +2620,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeCode.DisplayOnly = True
             Me.txtEmployeeCode.Editable = True
             Me.txtEmployeeCode.EditingMode = False
+            Me.txtEmployeeCode.EndFindValue = Nothing
+            Me.txtEmployeeCode.FieldName = Nothing
+            Me.txtEmployeeCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtEmployeeCode.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtEmployeeCode, True)
             Me.txtEmployeeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -2422,6 +2635,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeCode.Name = "txtEmployeeCode"
             Me.txtEmployeeCode.OldValue = Nothing
             Me.txtEmployeeCode.ReadOnly = True
+            Me.txtEmployeeCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmployeeCode.Size = New System.Drawing.Size(105, 23)
             Me.txtEmployeeCode.TabIndex = 153
             Me.txtEmployeeCode.ValueIsMandatory = True
