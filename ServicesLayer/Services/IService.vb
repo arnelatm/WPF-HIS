@@ -92,7 +92,7 @@ Namespace Services
 
         Function GetFieldType(tableName As String, fieldName As String) As Object
 
-        Function AddSecurityControl(securityControlName As SecurityControl) As Integer
+        Function AddSecurityObject(securityObjectName As SecurityObject) As Integer
 
     End Interface
 

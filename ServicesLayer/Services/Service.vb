@@ -180,8 +180,8 @@ Namespace Services
             Return BaseDao.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
         End Function
 
-        Public Function AddSecurityControl(securityControlName As SecurityControl) As Int32 Implements IService.AddSecurityControl
-            Return BaseDao.AddSecurityControl(securityControlName)
+        Public Function AddSecurityObject(securityObject As SecurityObject) As Int32 Implements IService.AddSecurityObject
+            Return BaseDao.AddSecurityObject(securityObject)
         End Function
 
         'Public Shadows Function GetRecordByIdNo(idNo) Implements IService.GetRecordByIdNo

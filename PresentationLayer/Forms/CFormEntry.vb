@@ -1004,7 +1004,7 @@ Public Class CFormEntry
             TableProperties = PresenterObj.TableProperties
             For Each cCtrl As Control In FindControlRecursive(allControls, Me)
                 SetControlDynamicProperties(cCtrl)
-                SetControlSecurity(cCtrl)
+                SetObjectSecurity(cCtrl)
             Next
         End If
     End Sub

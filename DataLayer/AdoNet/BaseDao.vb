@@ -595,9 +595,9 @@ Namespace AdoNet
             Return _db.SqlRead(sql, params)
         End Function
 
-        Public Function AddSecurityControl(securityControl As SecurityControl) As Integer Implements IBaseDao.AddSecurityControl
-            Dim sql = "Insert into SecurityControl (securityControlName,systemViewIdNo,parentIdNo) VALUES (@SecurityControlName,@SystemViewIdNo,@ParentIdNo)"
-            Return _db.Insert(sql, TakeSecurityControl(securityControl))
+        Public Function AddSecurityObject(securityObject As SecurityObject) As Integer Implements IBaseDao.AddSecurityObject
+            Dim sql = "Insert into SecurityObject (securityObjectName,systemViewIdNo,parentIdNo) VALUES (@SecurityObjectName,@SystemViewIdNo,@ParentIdNo)"
+            Return _db.Insert(sql, TakeSecurityObject(securityObject))
         End Function
 
         Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampValue As Byte,
@@ -737,10 +737,10 @@ Namespace AdoNet
         '            transaction.Commit()
         '            Console.WriteLine("Both records are written to database.")
 
-        Private Function TakeSecurityControl(securityControl As SecurityControl) As Object()
-            Return New Object() {"@SecurityControlName", securityControl.SecurityControlName,
-                                 "@SystemViewIdNo", securityControl.SystemViewIdNo,
-                                 "@ParentIdNo", securityControl.ParentIdNo}
+        Private Function TakeSecurityObject(securityObject As SecurityObject) As Object()
+            Return New Object() {"@SecurityObjectName", securityObject.SecurityObjectName,
+                                 "@SystemViewIdNo", securityObject.SystemViewIdNo,
+                                 "@ParentIdNo", securityObject.ParentIdNo}
         End Function
 
     End Class

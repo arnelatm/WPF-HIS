@@ -18,6 +18,8 @@ Namespace BusinessObjects
         Public Property SecurityObjectCode As String
         Public Property SecurityObjectName As String
         Public Property SecurityObjectNameAra As String
+        Public Property SystemViewIdNo As Int16
+        Public Property ManuallyAdded As Boolean
         Public Property Notes As String
     End Class
 

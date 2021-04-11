@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property IdNo As Int16 Implements ISecurityObjectView.IdNo
+        Public Property IdNo As Int32 Implements ISecurityObjectView.IdNo
             Get
                 Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
@@ -38,12 +38,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ParentIdNo As Int16? Implements ISecurityObjectView.ParentIdNo
+        Public Property ParentIdNo As Int32? Implements ISecurityObjectView.ParentIdNo
             Get
                 Return cacParentIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property SystemViewIdNo As Int16? Implements ISecurityObjectView.SystemViewIdNo
+            Get
+                Return cboSystemViewIdNo.GetNullableValue(Of Int16)
+            End Get
+            Set
+                cboSystemViewIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -83,14 +92,17 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property ManuallyAdded As Boolean Implements ISecurityObjectView.ManuallyAdded
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
             UpdateParentIdData()
+            cboSystemViewIdNo.DataSource = PresenterObj.GetLookup("SystemView")
         End Sub
 
         Private Sub UpdateParentIdData()
-            cacParentIdNo.DataSource = PresenterObj.GetLookup("SecurityObject") 
+            cacParentIdNo.DataSource = PresenterObj.GetLookup("SecurityObject")
         End Sub
 
         Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
@@ -102,11 +114,14 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
+                {"SecurityObjectCode", txtSecurityObjectCode},
                 {"SecurityObjectName", txtSecurityObjectName},
                 {"SecurityObjectNameAra", txtSecurityObjectNameAra},
                 {"IdNo", TxtIdNo},
                 {"ParentIdNo", cacParentIdNo},
                 {"ParentId", TxtIdNo},
+                {"ManuallyAdded", chkManuallyAdded},
+                {"SystemViewIdNo", cboSystemViewIdNo},
                 {"Notes", txtNotes}
                 }
         End Sub

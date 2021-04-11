@@ -330,8 +330,8 @@ Public Class Model
         Return Service.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
     End Function
 
-    Public Function AddSecurityControl(securityControlName) As Int32 Implements IModel.AddSecurityControl
-        Return Service.AddSecurityControl(securityControlName)
+    Public Function AddSecurityModel(securityObject) As Int32 Implements IModel.AddSecurityObject
+        Return Service.AddSecurityObject(securityObject)
     End Function
 
     Public Function InsertTvp(dtTable As DataTable) As Integer _

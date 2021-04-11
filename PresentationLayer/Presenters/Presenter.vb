@@ -696,8 +696,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
     End Function
 
-    Public Function AddSecurityControl(securityControl As SecurityControl) As Int32
-        Return Model.AddSecurityControl(securityControl)
+    Public Function AddSecurityObject(securityObject As SecurityObject) As Int32
+        Return Model.AddSecurityObject(securityObject)
     End Function
 
     Public Overridable Sub GoAddRecord()
