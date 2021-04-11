@@ -137,7 +137,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAcABBwHAAQcBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAcgBBwHIAQcBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -3041,31 +3041,6 @@
   <data name="ToolStrip.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
-  <data name="ToolStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
-  </data>
-  <data name="ToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>949, 46</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ToolStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="ToolStrip.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip.Name" xml:space="preserve">
-    <value>ToolStrip</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="ToolStripButtonLogin.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -3085,6 +3060,7 @@
   <data name="ToolStripButtonLogin.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ToolStripButtonLogin.RightToLeftAutoMirrorImage" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3277,102 +3253,33 @@
   <data name="ToolStripButtonTranslate.ToolTipText" xml:space="preserve">
     <value>Change User Interface to English</value>
   </data>
+  <data name="ToolStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="ToolStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>949, 46</value>
+  </data>
+  <data name="ToolStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ToolStrip.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip.Name" xml:space="preserve">
+    <value>ToolStrip</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="Account.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>546, 17</value>
   </metadata>
-  <data name="ToolStripMenuItemFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="ToolStripMenuItemFile.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
-  <data name="ToolStripMenuItemEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
-  </data>
-  <data name="ToolStripMenuItemEdit.Text" xml:space="preserve">
-    <value>&amp;Edit</value>
-  </data>
-  <data name="ToolStripMenuItemMasters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="ToolStripMenuItemMasters.Text" xml:space="preserve">
-    <value>&amp;Masters</value>
-  </data>
-  <data name="ToolStripMenuItemTransactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 20</value>
-  </data>
-  <data name="ToolStripMenuItemTransactions.Text" xml:space="preserve">
-    <value>&amp;Transactions</value>
-  </data>
-  <data name="ToolStripMenuItemReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
-  </data>
-  <data name="ToolStripMenuItemReports.Text" xml:space="preserve">
-    <value>Reports</value>
-  </data>
-  <data name="ToolStripMenuItemIndex.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACFUlEQVQ4T7VSTWsTURTNT8hPmJ9QFFy4
-        ytLloA1kGcFFFyrBhQRBHApCMKgRKRosnbEqNpLqbGrHaO2ItraIdLBWYxuSaYmaNtP06VTph+Z475vA
-        WGoRFx44vPvevHPueZeJ/BdMzPq4VVpB5nYNvQPz6CtWMPLiIzqf98ab6gYK4y3opWW4zS18Wd+G8Leo
-        3sTFQhkZ3UHp5dKfjVh8z16D960N2wG0IUDNBOTadgSqa22c65vEyLPKbhPuvPq9DcMGYmnAsACxAQlX
-        AKnrfCZQI5NT2Sc7DSberuPhTEt2ZjFfZphTQDIXrGwWSwuqBXTrHfKFV6HJncdNfBI/ZNRYKoidM4Eu
-        qpUegVSOIhBUTSCZcTBf9XH0zHBokL27JAemaoGoqyegQkySmLvbZQFFtaEkbDQ8HwfiV0OD8zerNO1t
-        GT8Q0uWkoCRBZ9OmPQmjqkmriUbzK/apl0OD/P0aFr1NensgVBKuZG4oMIiqDjEwUNM2ypU6uk8YocHo
-        5GdYjicHxMJoggUOPcmludCexYdMScNyMWzN4cKNsdCAkR2cxYL3k7p2BESuZYKOWDMcfFjxcOS4vlPM
-        GJuuozc/jWqL/gXqomqOfDeTaz5bqK8iTtEHilO7DRijz2s4fWkcxqP3mJlbxDJNu9H05Zs5djd11vcS
-        /47+4mscO/sABxPXsP/wFcRPDiLb//Tvwn9HJPILndryrMLsTWYAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="ToolStripMenuItemIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 30</value>
-  </data>
-  <data name="ToolStripMenuItemIndex.Text" xml:space="preserve">
-    <value>Index</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 6</value>
-  </data>
-  <data name="ToolStripMenuItemAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 30</value>
-  </data>
-  <data name="ToolStripMenuItemAbout.Text" xml:space="preserve">
-    <value>&amp;About</value>
-  </data>
-  <data name="ToolStripMenuTest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 30</value>
-  </data>
-  <data name="ToolStripMenuTest.Text" xml:space="preserve">
-    <value>Test</value>
-  </data>
-  <data name="ToolStripMenuItemHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="ToolStripMenuItemHelp.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="Account.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="Account.Size" type="System.Drawing.Size, System.Drawing">
-    <value>949, 24</value>
-  </data>
-  <data name="Account.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;Account.Name" xml:space="preserve">
-    <value>Account</value>
-  </data>
-  <data name="&gt;&gt;Account.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Account.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;Account.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="ToolStripMenuItemLogin.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -3433,6 +3340,12 @@
   </data>
   <data name="ToolStripMenuItemExit.Text" xml:space="preserve">
     <value>E&amp;xit</value>
+  </data>
+  <data name="ToolStripMenuItemFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="ToolStripMenuItemFile.Text" xml:space="preserve">
+    <value>&amp;File</value>
   </data>
   <data name="ToolStripMenuItemCut.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3505,11 +3418,11 @@
   <data name="ToolStripMenuItemPaste.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
-  <data name="ToolStripMenuItemGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 22</value>
+  <data name="ToolStripMenuItemEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 20</value>
   </data>
-  <data name="ToolStripMenuItemGeneral.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="ToolStripMenuItemEdit.Text" xml:space="preserve">
+    <value>&amp;Edit</value>
   </data>
   <data name="ToolStripMenuItemBranches.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 22</value>
@@ -3598,11 +3511,11 @@
   <data name="ToolStripMenuItemSalesDepositTypes.Text" xml:space="preserve">
     <value>Sales Deposit Types</value>
   </data>
-  <data name="ToolStripMenuItemSecurity.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItemGeneral.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 22</value>
   </data>
-  <data name="ToolStripMenuItemSecurity.Text" xml:space="preserve">
-    <value>Security</value>
+  <data name="ToolStripMenuItemGeneral.Text" xml:space="preserve">
+    <value>General</value>
   </data>
   <data name="ToolStripMenuItemSecurityGroups.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 22</value>
@@ -3622,11 +3535,11 @@
   <data name="ToolStripMenuItemUsers.Text" xml:space="preserve">
     <value>Users</value>
   </data>
-  <data name="ToolStripMenuItemEmployee.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItemSecurity.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 22</value>
   </data>
-  <data name="ToolStripMenuItemEmployee.Text" xml:space="preserve">
-    <value>Employee</value>
+  <data name="ToolStripMenuItemSecurity.Text" xml:space="preserve">
+    <value>Security</value>
   </data>
   <data name="ToolStripMenuItemEmployees.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 22</value>
@@ -3640,11 +3553,11 @@
   <data name="ToolStripMenuItemDesignations.Text" xml:space="preserve">
     <value>Designations</value>
   </data>
-  <data name="ToolStripMenuItemTranslations.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItemEmployee.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 22</value>
   </data>
-  <data name="ToolStripMenuItemTranslations.Text" xml:space="preserve">
-    <value>Translations</value>
+  <data name="ToolStripMenuItemEmployee.Text" xml:space="preserve">
+    <value>Employee</value>
   </data>
   <data name="ToolStripMenuItemMessages.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
@@ -3670,11 +3583,11 @@
   <data name="ToolStripMenuItemCreateAllMessages.Text" xml:space="preserve">
     <value>Create All Messages</value>
   </data>
-  <data name="ToolStripMenuItemPayroll.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItemTranslations.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 22</value>
   </data>
-  <data name="ToolStripMenuItemPayroll.Text" xml:space="preserve">
-    <value>Payroll</value>
+  <data name="ToolStripMenuItemTranslations.Text" xml:space="preserve">
+    <value>Translations</value>
   </data>
   <data name="ToolStripMenuItemPayElement.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 22</value>
@@ -3718,6 +3631,12 @@
   <data name="ToolStripMenuItemPensionSchemes.Text" xml:space="preserve">
     <value>Pension Schemes</value>
   </data>
+  <data name="ToolStripMenuItemPayroll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="ToolStripMenuItemPayroll.Text" xml:space="preserve">
+    <value>Payroll</value>
+  </data>
   <data name="ToolStripMenuItemSupplierVendors.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 22</value>
   </data>
@@ -3729,6 +3648,12 @@
   </data>
   <data name="ToolStripMenuItemCustomerClients.Text" xml:space="preserve">
     <value>Customer/Clients</value>
+  </data>
+  <data name="ToolStripMenuItemMasters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="ToolStripMenuItemMasters.Text" xml:space="preserve">
+    <value>&amp;Masters</value>
   </data>
   <data name="ToolStripMenuItemPettyCash.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 22</value>
@@ -3796,12 +3721,6 @@
   <data name="ToolStripMenuItemClosing.Text" xml:space="preserve">
     <value>Closing Entry</value>
   </data>
-  <data name="ToolStripMenuItemPayrollMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 22</value>
-  </data>
-  <data name="ToolStripMenuItemPayrollMenu.Text" xml:space="preserve">
-    <value>Payroll</value>
-  </data>
   <data name="ToolStripMenuItemPayrollAttendance.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 22</value>
   </data>
@@ -3820,6 +3739,12 @@
   <data name="ToolStripMenuItemPayrollEntry.Text" xml:space="preserve">
     <value>Payroll Entry</value>
   </data>
+  <data name="ToolStripMenuItemPayrollMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 22</value>
+  </data>
+  <data name="ToolStripMenuItemPayrollMenu.Text" xml:space="preserve">
+    <value>Payroll</value>
+  </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 6</value>
   </data>
@@ -3828,6 +3753,12 @@
   </data>
   <data name="ToolStripMenuItemClosePettyCashFund.Text" xml:space="preserve">
     <value>Close Petty Cash Fund</value>
+  </data>
+  <data name="ToolStripMenuItemTransactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 20</value>
+  </data>
+  <data name="ToolStripMenuItemTransactions.Text" xml:space="preserve">
+    <value>&amp;Transactions</value>
   </data>
   <data name="ToolStripMenuItemStatementOfAccountsPayable.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 22</value>
@@ -3865,47 +3796,41 @@
   <data name="ToolStripMenuItemSummaryOfAccountsReceivable.Text" xml:space="preserve">
     <value>Summary of Accounts Receivable</value>
   </data>
-  <data name="ToolStripMenuItemTrialBalance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 22</value>
-  </data>
-  <data name="ToolStripMenuItemTrialBalance.Text" xml:space="preserve">
-    <value>Trial Balance</value>
-  </data>
   <data name="ToolStripMenuItemTBMonthly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBMonthly.Text" xml:space="preserve">
     <value>Monthly</value>
   </data>
   <data name="ToolStripMenuItemTBQuarterly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBQuarterly.Text" xml:space="preserve">
     <value>Quarterly</value>
   </data>
   <data name="ToolStripMenuItemTBSemestral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBSemestral.Text" xml:space="preserve">
     <value>Semestral</value>
   </data>
   <data name="ToolStripMenuItemTBYearly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBYearly.Text" xml:space="preserve">
     <value>Yearly</value>
   </data>
   <data name="ToolStripMenuItemTBCustom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="ToolStripMenuItemTBCustom.Text" xml:space="preserve">
     <value>Custom</value>
   </data>
-  <data name="ToolStripMenuItemBalanceSheet.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItemTrialBalance.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 22</value>
   </data>
-  <data name="ToolStripMenuItemBalanceSheet.Text" xml:space="preserve">
-    <value>Balance Sheet</value>
+  <data name="ToolStripMenuItemTrialBalance.Text" xml:space="preserve">
+    <value>Trial Balance</value>
   </data>
   <data name="ToolStripMenuItemBSYearly.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 22</value>
@@ -3931,11 +3856,11 @@
   <data name="ToolStripMenuItemBSSemestral.Text" xml:space="preserve">
     <value>Semestral</value>
   </data>
-  <data name="ToolStripMenuItemIncomeStatement.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItemBalanceSheet.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 22</value>
   </data>
-  <data name="ToolStripMenuItemIncomeStatement.Text" xml:space="preserve">
-    <value>Income Statement </value>
+  <data name="ToolStripMenuItemBalanceSheet.Text" xml:space="preserve">
+    <value>Balance Sheet</value>
   </data>
   <data name="ToolStripMenuItemISYearly.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
@@ -3967,17 +3892,17 @@
   <data name="ToolStripMenuItemISCustomRange.Text" xml:space="preserve">
     <value>Custom Range</value>
   </data>
+  <data name="ToolStripMenuItemIncomeStatement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 22</value>
+  </data>
+  <data name="ToolStripMenuItemIncomeStatement.Text" xml:space="preserve">
+    <value>Income Statement </value>
+  </data>
   <data name="ToolStripMenuItemAccountActivity.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 22</value>
   </data>
   <data name="ToolStripMenuItemAccountActivity.Text" xml:space="preserve">
     <value>Account Activity</value>
-  </data>
-  <data name="ToolStripMenuItemIGroupReports.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 22</value>
-  </data>
-  <data name="ToolStripMenuItemIGroupReports.Text" xml:space="preserve">
-    <value>IGroupReports</value>
   </data>
   <data name="ToolStripMenuItemCashIncomePerDoctorService.Size" type="System.Drawing.Size, System.Drawing">
     <value>265, 22</value>
@@ -3997,6 +3922,12 @@
   <data name="ToolStripMenuItemBlankReport.Text" xml:space="preserve">
     <value>Blank Report</value>
   </data>
+  <data name="ToolStripMenuItemIGroupReports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 22</value>
+  </data>
+  <data name="ToolStripMenuItemIGroupReports.Text" xml:space="preserve">
+    <value>IGroupReports</value>
+  </data>
   <data name="ToolStripMenuItemARAging.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 22</value>
   </data>
@@ -4015,18 +3946,72 @@
   <data name="ToolStripMenuItemCheckPrinting.Text" xml:space="preserve">
     <value>Check Printing</value>
   </data>
+  <data name="ToolStripMenuItemReports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="ToolStripMenuItemReports.Text" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="ToolStripMenuItemIndex.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACFUlEQVQ4T7VSTWsTURTNT8hPmJ9QFFy4
+        ytLloA1kGcFFFyrBhQRBHApCMKgRKRosnbEqNpLqbGrHaO2ItraIdLBWYxuSaYmaNtP06VTph+Z475vA
+        WGoRFx44vPvevHPueZeJ/BdMzPq4VVpB5nYNvQPz6CtWMPLiIzqf98ab6gYK4y3opWW4zS18Wd+G8Leo
+        3sTFQhkZ3UHp5dKfjVh8z16D960N2wG0IUDNBOTadgSqa22c65vEyLPKbhPuvPq9DcMGYmnAsACxAQlX
+        AKnrfCZQI5NT2Sc7DSberuPhTEt2ZjFfZphTQDIXrGwWSwuqBXTrHfKFV6HJncdNfBI/ZNRYKoidM4Eu
+        qpUegVSOIhBUTSCZcTBf9XH0zHBokL27JAemaoGoqyegQkySmLvbZQFFtaEkbDQ8HwfiV0OD8zerNO1t
+        GT8Q0uWkoCRBZ9OmPQmjqkmriUbzK/apl0OD/P0aFr1NensgVBKuZG4oMIiqDjEwUNM2ypU6uk8YocHo
+        5GdYjicHxMJoggUOPcmludCexYdMScNyMWzN4cKNsdCAkR2cxYL3k7p2BESuZYKOWDMcfFjxcOS4vlPM
+        GJuuozc/jWqL/gXqomqOfDeTaz5bqK8iTtEHilO7DRijz2s4fWkcxqP3mJlbxDJNu9H05Zs5djd11vcS
+        /47+4mscO/sABxPXsP/wFcRPDiLb//Tvwn9HJPILndryrMLsTWYAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="ToolStripMenuItemIndex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 30</value>
+  </data>
+  <data name="ToolStripMenuItemIndex.Text" xml:space="preserve">
+    <value>Index</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 6</value>
+  </data>
+  <data name="ToolStripMenuItemAbout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 30</value>
+  </data>
+  <data name="ToolStripMenuItemAbout.Text" xml:space="preserve">
+    <value>&amp;About</value>
+  </data>
+  <data name="ToolStripMenuItemHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="ToolStripMenuItemHelp.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="Account.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="Account.Size" type="System.Drawing.Size, System.Drawing">
+    <value>949, 24</value>
+  </data>
+  <data name="Account.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Account.Name" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="&gt;&gt;Account.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Account.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Account.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <metadata name="contextMenuStripMember.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>743, 17</value>
   </metadata>
-  <data name="contextMenuStripMember.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 94</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripMember.Name" xml:space="preserve">
-    <value>contextMenuStripMember</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripMember.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="addNewMemberToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -4088,6 +4073,15 @@
   <data name="deleteMemberToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete Member</value>
   </data>
+  <data name="contextMenuStripMember.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 94</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripMember.Name" xml:space="preserve">
+    <value>contextMenuStripMember</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripMember.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1088, 17</value>
   </metadata>
@@ -4096,7 +4090,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAcABBwHAAQcBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAcgBBwHIAQcBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4143,15 +4137,6 @@
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 56</value>
   </metadata>
-  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 94</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
-    <value>contextMenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="toolStripMenuItem3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -4212,6 +4197,15 @@
   </data>
   <data name="toolStripMenuItem5.Text" xml:space="preserve">
     <value>Delete Member</value>
+  </data>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 94</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+    <value>contextMenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripMenuItem6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5145,12 +5139,6 @@
     <value>ToolStripMenuItemAbout</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemAbout.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuTest.Name" xml:space="preserve">
-    <value>ToolStripMenuTest</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuTest.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;addNewMemberToolStripMenuItem.Name" xml:space="preserve">

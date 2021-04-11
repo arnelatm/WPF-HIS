@@ -596,7 +596,7 @@ Namespace AdoNet
         End Function
 
         Public Function AddSecurityControl(securityControl As SecurityControl) As Integer Implements IBaseDao.AddSecurityControl
-            Dim sql = "Insert into SecurityControl (securityControlName,systemViewIdNo) VALUES (@SecurityControlName,@SystemViewIdNo)"
+            Dim sql = "Insert into SecurityControl (securityControlName,systemViewIdNo,parentIdNo) VALUES (@SecurityControlName,@SystemViewIdNo,@ParentIdNo)"
             Return _db.Insert(sql, TakeSecurityControl(securityControl))
         End Function
 
@@ -739,7 +739,8 @@ Namespace AdoNet
 
         Private Function TakeSecurityControl(securityControl As SecurityControl) As Object()
             Return New Object() {"@SecurityControlName", securityControl.SecurityControlName,
-                                 "@SystemViewIdNo", securityControl.SystemViewIdNo}
+                                 "@SystemViewIdNo", securityControl.SystemViewIdNo,
+                                 "@ParentIdNo", securityControl.ParentIdNo}
         End Function
 
     End Class
