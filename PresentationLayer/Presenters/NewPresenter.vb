@@ -457,9 +457,14 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         Return retVal
     End Function
 
-    Public Function GetRecordCount() As Integer
+    Public Function GetRecordCount(Optional pTableName As String = Nothing, Optional pFilter As String = Nothing) As Integer
         Try
-            Return Model.GetRecordCount(TableName, DataFilter)
+            If pTableName Is Nothing Then
+                pTableName = TableName
+                Return Model.GetRecordCount(TableName, DataFilter)
+            Else
+                Return Model.GetRecordCount(pTableName, pFilter)
+            End If
         Catch ex As Exception
             Return 0
         End Try

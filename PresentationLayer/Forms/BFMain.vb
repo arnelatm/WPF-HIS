@@ -17,6 +17,13 @@ Public Class BfMain
     '    Dim _menuLevel As String = ""
     Private _textDisplayLanguage As String
 
+    Private _addSecurityControl As Boolean = False
+    Private _parentSecurityControlIdNo As Int32
+    Private _prevParentSecurityControlIdNo As Int32
+    Private _prevToolStripMenu As String = ""
+    Private _sw As Int16 = 0
+    Private _parentIdNo As Int32 = 0
+
     Protected CaptionCollection As New Collection
     Protected VSystemViewIdNo As Int16
     Protected InitializationMode As Boolean = True
@@ -47,7 +54,6 @@ Public Class BfMain
             '    RightToLeftLayout = False
             'End If
         End If
-
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
@@ -488,7 +494,7 @@ Public Class BfMain
         End If
     End Sub
 
-    Private Sub ApplyMenuSecurity(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String)
+    Private Function ApplyMenuSecurity(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String, ByVal parentIdNo As Int32) As Int32
         Dim toolStripMenuItem As ToolStripMenuItem = obj
         Dim controlSecurityKey = subMenuName + "." + Mid(toolStripMenuItem.Name, 18)
         Dim controlSecurityValues As ArrayList
@@ -520,14 +526,18 @@ Public Class BfMain
             End If
             toolStripMenuItem.Enabled = isSelectable
             toolStripMenuItem.Visible = isVisible
-            Dim securityControl As New SecurityControl With {.SecurityControlName = controlSecurityKey,
-                    .SystemViewIdNo = VSystemViewIdNo}
-            PresenterObj.AddSecurityControl(securityControl)
+            If _addSecurityControl Then
+                Dim securityControl As New SecurityControl With {.SecurityControlName = Mid(toolStripMenuItem.Name, 18),
+                        .SystemViewIdNo = VSystemViewIdNo,
+                        .ParentIdNo = parentIdNo}
+                parentIdNo = PresenterObj.AddSecurityControl(securityControl)
+            End If
         Else
             toolStripMenuItem.Enabled = False
             toolStripMenuItem.Visible = True
         End If
-    End Sub
+        Return parentIdNo
+    End Function
 
     'Private Sub BfForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     '    Dim allControls As New List(Of Control)
@@ -558,6 +568,9 @@ Public Class BfMain
             cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
             VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
             TranslateForm()
+            If PresenterObj.GetRecordCount("SecurityControl") = 0 Then
+                _addSecurityControl = True
+            End If
         End If
     End Sub
 
@@ -585,15 +598,37 @@ Public Class BfMain
 
     Public Sub SetControlSecurity(ByRef cCtrl As Control)
         Dim controlSecurityKey As String
+        Dim parentIdNo As Int32
+        If _sw = 0 Then
+            If _addSecurityControl Then
+                Dim securityControl As New SecurityControl With {.SecurityControlName = MenuFormName,
+                        .SystemViewIdNo = VSystemViewIdNo,
+                        .ParentIdNo = Nothing}
+                _parentIdNo = PresenterObj.AddSecurityControl(securityControl)
+            End If
+            _sw = 1
+        End If
         If TypeOf cCtrl Is MenuStrip Then
             ' check for MenuStrip first because MenuStrip is also a ToolStrip
             Dim subMenuName = MenuFormName + "." + cCtrl.Name.TrimEnd()
             Dim menuStrip As MenuStrip = cCtrl
-            SetMenuStripItems(menuStrip.Items, subMenuName)
+            If _addSecurityControl Then
+                Dim securityControl As New SecurityControl With {.SecurityControlName = "Menu",
+                        .SystemViewIdNo = VSystemViewIdNo,
+                        .ParentIdNo = _parentIdNo}
+                parentIdNo = PresenterObj.AddSecurityControl(securityControl)
+            End If
+            SetMenuStripItems(menuStrip.Items, subMenuName, parentIdNo)
         ElseIf TypeOf cCtrl Is ToolStrip Then
             Dim subMenuName = MenuFormName + "." + cCtrl.Name.TrimEnd()
             Dim toolStrip As ToolStrip = cCtrl
-            SetToolStripItems(toolStrip.Items, subMenuName)
+            If _addSecurityControl Then
+                Dim securityControl As New SecurityControl With {.SecurityControlName = cCtrl.Name.TrimEnd(),
+                        .SystemViewIdNo = VSystemViewIdNo,
+                        .ParentIdNo = _parentIdNo}
+                parentIdNo = PresenterObj.AddSecurityControl(securityControl)
+            End If
+            SetToolStripItems(toolStrip.Items, subMenuName, parentIdNo)
         Else
             controlSecurityKey = GetControlSecurityKey(cCtrl)
             If controlSecurityKey Is Nothing Or controlSecurityKey = "" Then
@@ -649,20 +684,17 @@ Public Class BfMain
         End If
     End Sub
 
-    Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String)
+    Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, pParentIdNo As Int32)
         Try
             Dim parentMenu As String
-            parentMenu = subMenuName
-            'IF parentMenu = "Main.Menu.Masters" then
-            '    debugger.Break()
-            'End If
+            Dim parentIdNo As Int32
             For Each obj As Object In dropDownItems
                 Dim subMenu = TryCast(obj, ToolStripMenuItem)
                 If subMenu IsNot Nothing Then
-                    ApplyMenuSecurity(obj, parentMenu)
+                    parentIdNo = ApplyMenuSecurity(obj, subMenuName, pParentIdNo)
                     If subMenu.HasDropDownItems Then
                         subMenuName = parentMenu + "." + Mid(obj.Name, 18)
-                        SetMenuStripItems(subMenu.DropDownItems, subMenuName)
+                        SetMenuStripItems(subMenu.DropDownItems, subMenuName, parentIdNo)
                         'Dim securityControl As New SecurityControl With {.SecurityControlName = subMenuName,
                         '        .SystemViewIdNo = VSystemViewIdNo}
                         'PresenterObj.AddSecurityControl(securityControl)
@@ -674,13 +706,21 @@ Public Class BfMain
         End Try
     End Sub
 
-    Private Sub SetToolStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String)
+    Private Sub SetToolStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, parentIdNo As Int32)
         Try
+            'If _addSecurityControl Then
+            '    Dim securityControl As New SecurityControl With {.SecurityControlName = subMenuName,
+            '            .SystemViewIdNo = VSystemViewIdNo,
+            '            .ParentIdNo = Nothing}
+            '    parentIdNo = PresenterObj.AddSecurityControl(securityControl)
+            'End If
+            _prevParentSecurityControlIdNo = _parentSecurityControlIdNo
             For Each obj As Object In dropDownItems
                 ' ReSharper disable once VBPossibleMistakenCallToGetType.2
                 If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then ' And GlobalVariables.SecurityGroupIdNo > 0 Then
                     Dim toolStripButton As ToolStripButton = obj
-                    Dim controlSecurityKey = subMenuName + "." + Mid(toolStripButton.Name, 16).TrimEnd()
+                    'Dim controlSecurityKey = subMenuName + "." + Mid(toolStripButton.Name, 16).TrimEnd()
+                    Dim controlSecurityKey = Mid(toolStripButton.Name, 16).TrimEnd()
                     If GlobalVariables.IsUserLoggedIn Then
                         Dim controlSecurityValues As ArrayList
                         Dim isSelectable As Boolean
@@ -720,9 +760,12 @@ Public Class BfMain
                             toolStripButton.Visible = True
                         End If
                     End If
-                    Dim securityControl As New SecurityControl With {.SecurityControlName = controlSecurityKey,
-                                                                     .SystemViewIdNo = VSystemViewIdNo}
-                    PresenterObj.AddSecurityControl(securityControl)
+                    If _addSecurityControl Then
+                        Dim securityControl As New SecurityControl With {.SecurityControlName = controlSecurityKey,
+                                                                         .SystemViewIdNo = VSystemViewIdNo,
+                                                                         .ParentIdNo = parentIdNo}
+                        PresenterObj.AddSecurityControl(securityControl)
+                    End If
                 Else
                     obj.Enabled = True
                     obj.Visible = True

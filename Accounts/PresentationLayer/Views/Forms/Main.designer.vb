@@ -142,7 +142,6 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemIndex = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItemAbout = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuTest = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextMenuStripMember = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.addNewMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.editMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -746,7 +745,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemHelp
         '
-        Me.ToolStripMenuItemHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemIndex, Me.toolStripMenuItem2, Me.ToolStripMenuItemAbout, Me.ToolStripMenuTest})
+        Me.ToolStripMenuItemHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemIndex, Me.toolStripMenuItem2, Me.ToolStripMenuItemAbout})
         Me.ToolStripMenuItemHelp.Name = "ToolStripMenuItemHelp"
         resources.ApplyResources(Me.ToolStripMenuItemHelp, "ToolStripMenuItemHelp")
         '
@@ -764,11 +763,6 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemAbout.Name = "ToolStripMenuItemAbout"
         resources.ApplyResources(Me.ToolStripMenuItemAbout, "ToolStripMenuItemAbout")
-        '
-        'ToolStripMenuTest
-        '
-        Me.ToolStripMenuTest.Name = "ToolStripMenuTest"
-        resources.ApplyResources(Me.ToolStripMenuTest, "ToolStripMenuTest")
         '
         'contextMenuStripMember
         '
@@ -1044,6 +1038,5 @@ End Sub
         Friend WithEvents ToolStripMenuItemClosePettyCashFund As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemGeneratePayroll As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSettings As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuTest As ToolStripMenuItem
     End Class
 End NameSpace
