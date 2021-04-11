@@ -104,7 +104,7 @@ Namespace PresentationLayer.Views.Forms
                 _logStatus = Value
                 Dim allControls As New List(Of Control)
                 For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-                    SetControlSecurity(cCtrl)
+                    SetObjectSecurity(cCtrl)
                 Next
 
                 If Value = LoginStatus.LoggedIn Then
@@ -438,7 +438,7 @@ Namespace PresentationLayer.Views.Forms
         '        _logStatus = Value
         '        Dim allControls As New List(Of Control)
         '        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-        '            SetControlSecurity(cCtrl)
+        '            SetObjectSecurity(cCtrl)
         '        Next
 
         '        If Value = LoginStatus.LoggedIn Then

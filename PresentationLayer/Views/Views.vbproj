@@ -70,7 +70,6 @@
     <Compile Include="ILoginView.vb" />
     <Compile Include="Interfaces\IGroupAccessView.vb" />
     <Compile Include="Interfaces\ISecurityGroupView.vb" />
-    <Compile Include="Interfaces\ISecurityControlView.vb" />
     <Compile Include="Interfaces\ISecurityObjectView.vb" />
     <Compile Include="Interfaces\IUserView.vb" />
     <Compile Include="ISaltView.vb" />

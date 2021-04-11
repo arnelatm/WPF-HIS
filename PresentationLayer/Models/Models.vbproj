@@ -92,7 +92,6 @@
     </Compile>
     <Compile Include="SaltModel.vb" />
     <Compile Include="SecurityGroupModel.vb" />
-    <Compile Include="SecurityContolModel.vb" />
     <Compile Include="SecurityObjectModel.vb" />
     <Compile Include="TblColPropModel.vb" />
     <Compile Include="UserModel.vb" />
