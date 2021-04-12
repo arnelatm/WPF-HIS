@@ -182,7 +182,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Get
         Set(value As Integer)
             _recordPositionNumber = value
-            TargetIdNo = GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+            TargetIdNo = GetIdNoOfSortedPositionNumber(value)
         End Set
     End Property
 
@@ -688,7 +688,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     '    Return Model.GetFields(tableName, sortOrder, fieldNames)
     'End Function
 
-    Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
+    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
         Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
 

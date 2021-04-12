@@ -38,7 +38,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripButtonArabic = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonEnglish = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonTranslate = New System.Windows.Forms.ToolStripButton()
-        Me.Account = New System.Windows.Forms.MenuStrip()
+        Me.AccountsMenu = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemLogin = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemLogout = New System.Windows.Forms.ToolStripMenuItem()
@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemMasters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemBranches = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemAccountOfAccounts = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemChartOfAccounts = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDepartments = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRevCostCenters = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRevenueGroups = New System.Windows.Forms.ToolStripMenuItem()
@@ -166,7 +166,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
-        Me.Account.SuspendLayout
+        Me.AccountsMenu.SuspendLayout
         Me.contextMenuStripMember.SuspendLayout
         Me.contextMenuStrip1.SuspendLayout
         Me.SuspendLayout
@@ -226,12 +226,12 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripButtonTranslate.Name = "ToolStripButtonTranslate"
         Me.ToolStripButtonTranslate.Padding = New System.Windows.Forms.Padding(2, 0, 2, 0)
         '
-        'Account
+        'AccountsMenu
         '
-        Me.Account.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.Account.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemEdit, Me.ToolStripMenuItemMasters, Me.ToolStripMenuItemTransactions, Me.ToolStripMenuItemReports, Me.ToolStripMenuItemHelp})
-        resources.ApplyResources(Me.Account, "Account")
-        Me.Account.Name = "Account"
+        Me.AccountsMenu.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.AccountsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemEdit, Me.ToolStripMenuItemMasters, Me.ToolStripMenuItemTransactions, Me.ToolStripMenuItemReports, Me.ToolStripMenuItemHelp})
+        resources.ApplyResources(Me.AccountsMenu, "AccountsMenu")
+        Me.AccountsMenu.Name = "AccountsMenu"
         '
         'ToolStripMenuItemFile
         '
@@ -293,7 +293,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemAccountOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -302,10 +302,10 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemBranches.Name = "ToolStripMenuItemBranches"
         resources.ApplyResources(Me.ToolStripMenuItemBranches, "ToolStripMenuItemBranches")
         '
-        'ToolStripMenuItemAccountOfAccounts
+        'ToolStripMenuItemChartOfAccounts
         '
-        Me.ToolStripMenuItemAccountOfAccounts.Name = "ToolStripMenuItemAccountOfAccounts"
-        resources.ApplyResources(Me.ToolStripMenuItemAccountOfAccounts, "ToolStripMenuItemAccountOfAccounts")
+        Me.ToolStripMenuItemChartOfAccounts.Name = "ToolStripMenuItemChartOfAccounts"
+        resources.ApplyResources(Me.ToolStripMenuItemChartOfAccounts, "ToolStripMenuItemChartOfAccounts")
         '
         'ToolStripMenuItemDepartments
         '
@@ -886,14 +886,14 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ToolStrip)
-        Me.Controls.Add(Me.Account)
+        Me.Controls.Add(Me.AccountsMenu)
         Me.IsMdiContainer = true
         Me.Name = "Main"
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
-        Me.Account.ResumeLayout(false)
-        Me.Account.PerformLayout
+        Me.AccountsMenu.ResumeLayout(false)
+        Me.AccountsMenu.PerformLayout
         Me.contextMenuStripMember.ResumeLayout(false)
         Me.contextMenuStrip1.ResumeLayout(false)
         Me.ResumeLayout(false)
@@ -908,7 +908,7 @@ End Sub
         Private WithEvents ToolStripButtonLogin As ToolStripButton
         Private WithEvents ToolStripButtonLogout As ToolStripButton
         Private toolStripSeparator1 As ToolStripSeparator
-        Private Account As MenuStrip
+        Private AccountsMenu As MenuStrip
         Private ToolStripMenuItemFile As ToolStripMenuItem
         Private WithEvents ToolStripMenuItemLogin As ToolStripMenuItem
         Private WithEvents ToolStripMenuItemLogout As ToolStripMenuItem
@@ -963,7 +963,7 @@ End Sub
         Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
         Friend WithEvents ToolStripMenuItemDepartments As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemRevCostCenters As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemAccountOfAccounts As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemChartOfAccounts As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSupplierVendors As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCustomerClients As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemGeneralJournalEntry As ToolStripMenuItem

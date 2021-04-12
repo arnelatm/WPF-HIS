@@ -35,13 +35,13 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtSecurityObjectCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblSecurityObjectNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblManuallyGenerated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkManuallyAdded = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
@@ -221,6 +221,50 @@ Namespace PresentationLayer.Views.Forms
         Me.txtSecurityObjectCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtSecurityObjectCode.ValueIsMandatory = true
         '
+        'lblSystemViewIdNo
+        '
+        Me.lblSystemViewIdNo.DisplayOnly = true
+        Me.lblSystemViewIdNo.EditingMode = false
+        resources.ApplyResources(Me.lblSystemViewIdNo, "lblSystemViewIdNo")
+        Me.lblSystemViewIdNo.Name = "lblSystemViewIdNo"
+        '
+        'cboSystemViewIdNo
+        '
+        Me.cboSystemViewIdNo.BackColor = System.Drawing.Color.White
+        Me.cboSystemViewIdNo.BegFindValue = Nothing
+        Me.cboSystemViewIdNo.ChangingSearchValueOnly = false
+        Me.cboSystemViewIdNo.CurrentSearchTerm = ""
+        Me.cboSystemViewIdNo.DefaultValue = Nothing
+        Me.cboSystemViewIdNo.DisplayMember = "Name"
+        Me.cboSystemViewIdNo.EditingMode = true
+        Me.cboSystemViewIdNo.EndFindValue = Nothing
+        Me.cboSystemViewIdNo.FieldName = Nothing
+        Me.cboSystemViewIdNo.FilterRule = Nothing
+        Me.cboSystemViewIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboSystemViewIdNo.FindEnabled = false
+        Me.floDataDisplay.SetFlowBreak(Me.cboSystemViewIdNo, true)
+        resources.ApplyResources(Me.cboSystemViewIdNo, "cboSystemViewIdNo")
+        Me.cboSystemViewIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboSystemViewIdNo.FormattingEnabled = true
+        Me.cboSystemViewIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboSystemViewIdNo.LinkedLabel = Me.lblSystemViewIdNo
+        Me.cboSystemViewIdNo.Name = "cboSystemViewIdNo"
+        Me.cboSystemViewIdNo.OldValue = 0
+        Me.cboSystemViewIdNo.OriginalDataSource = Nothing
+        Me.cboSystemViewIdNo.OriginalList = Nothing
+        Me.cboSystemViewIdNo.OverrideDropDownStyleList = false
+        Me.cboSystemViewIdNo.PreviousSearchTerm = Nothing
+        Me.cboSystemViewIdNo.PreviousSelectedIndex = -1
+        Me.cboSystemViewIdNo.PropertySelector = Nothing
+        Me.cboSystemViewIdNo.ReadOnlyCombo = false
+        Me.cboSystemViewIdNo.SuggestBoxHeight = 200
+        Me.cboSystemViewIdNo.SuggestListOrderRule = Nothing
+        Me.cboSystemViewIdNo.TextToSearch = Nothing
+        Me.cboSystemViewIdNo.ValueIsMandatory = false
+        Me.cboSystemViewIdNo.ValueIsNullable = false
+        Me.cboSystemViewIdNo.ValueIsNumeric = false
+        Me.cboSystemViewIdNo.ValueMember = "IdNo"
+        '
         'lblSecurityObjectName
         '
         Me.lblSecurityObjectName.DisplayOnly = true
@@ -285,49 +329,6 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
-        'cboSystemViewIdNo
-        '
-        Me.cboSystemViewIdNo.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.cboSystemViewIdNo.BegFindValue = Nothing
-        Me.cboSystemViewIdNo.ChangingSearchValueOnly = false
-        Me.cboSystemViewIdNo.CurrentSearchTerm = ""
-        Me.cboSystemViewIdNo.DefaultValue = Nothing
-        Me.cboSystemViewIdNo.DisplayMember = "Name"
-        Me.cboSystemViewIdNo.EditingMode = true
-        Me.cboSystemViewIdNo.EndFindValue = Nothing
-        Me.cboSystemViewIdNo.FieldName = Nothing
-        Me.cboSystemViewIdNo.FilterRule = Nothing
-        Me.cboSystemViewIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboSystemViewIdNo.FindEnabled = false
-        Me.floDataDisplay.SetFlowBreak(Me.cboSystemViewIdNo, true)
-        resources.ApplyResources(Me.cboSystemViewIdNo, "cboSystemViewIdNo")
-        Me.cboSystemViewIdNo.FormattingEnabled = true
-        Me.cboSystemViewIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboSystemViewIdNo.LinkedLabel = Me.lblSystemViewIdNo
-        Me.cboSystemViewIdNo.Name = "cboSystemViewIdNo"
-        Me.cboSystemViewIdNo.OldValue = 0
-        Me.cboSystemViewIdNo.OriginalDataSource = Nothing
-        Me.cboSystemViewIdNo.OriginalList = Nothing
-        Me.cboSystemViewIdNo.OverrideDropDownStyleList = false
-        Me.cboSystemViewIdNo.PreviousSearchTerm = Nothing
-        Me.cboSystemViewIdNo.PreviousSelectedIndex = -1
-        Me.cboSystemViewIdNo.PropertySelector = Nothing
-        Me.cboSystemViewIdNo.ReadOnlyCombo = false
-        Me.cboSystemViewIdNo.SuggestBoxHeight = 200
-        Me.cboSystemViewIdNo.SuggestListOrderRule = Nothing
-        Me.cboSystemViewIdNo.TextToSearch = Nothing
-        Me.cboSystemViewIdNo.ValueIsMandatory = false
-        Me.cboSystemViewIdNo.ValueIsNullable = false
-        Me.cboSystemViewIdNo.ValueIsNumeric = false
-        Me.cboSystemViewIdNo.ValueMember = "IdNo"
-        '
-        'lblSystemViewIdNo
-        '
-        Me.lblSystemViewIdNo.DisplayOnly = true
-        Me.lblSystemViewIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblSystemViewIdNo, "lblSystemViewIdNo")
-        Me.lblSystemViewIdNo.Name = "lblSystemViewIdNo"
-        '
         'lblManuallyGenerated
         '
         Me.lblManuallyGenerated.DisplayOnly = true
@@ -337,8 +338,9 @@ Namespace PresentationLayer.Views.Forms
         '
         'chkManuallyAdded
         '
+        Me.chkManuallyAdded.BackColor = System.Drawing.Color.White
         Me.chkManuallyAdded.BegFindValue = Nothing
-        Me.chkManuallyAdded.DisplayOnly = false
+        Me.chkManuallyAdded.DisplayOnly = true
         Me.chkManuallyAdded.EditingMode = true
         Me.chkManuallyAdded.EndFindValue = Nothing
         Me.chkManuallyAdded.FieldName = Nothing
@@ -346,13 +348,14 @@ Namespace PresentationLayer.Views.Forms
         Me.chkManuallyAdded.FindEnabled = false
         Me.chkManuallyAdded.FlatAppearance.BorderSize = 0
         resources.ApplyResources(Me.chkManuallyAdded, "chkManuallyAdded")
+        Me.chkManuallyAdded.ForeColor = System.Drawing.Color.Black
         Me.chkManuallyAdded.IFindableControl_FindEnabled = false
         Me.chkManuallyAdded.LinkedLabel = Nothing
         Me.chkManuallyAdded.Name = "chkManuallyAdded"
         Me.chkManuallyAdded.NoLabel = true
         Me.chkManuallyAdded.OldValue = Nothing
         Me.chkManuallyAdded.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkManuallyAdded.UseVisualStyleBackColor = true
+        Me.chkManuallyAdded.UseVisualStyleBackColor = false
         '
         'SecurityObjectEntryTv
         '

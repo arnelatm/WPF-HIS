@@ -17,7 +17,7 @@ Namespace AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            data.GroupAccesses = GetRecordsWithGroupIdNo(idNo, "SecurityObjectName")
+            data.GroupAccesses = GetRecordsWithGroupIdNo(idNo, "FullPathName")
             Return data
         End Function
 
@@ -87,9 +87,9 @@ Namespace AdoNet
                 sortExpression = "IdNo"
             End If
             Dim sql As String =
-                    "select GroupAccess.IdNo , GroupAccess.SecurityGroupIdNo ,  SecurityObject.IdNo as 'SecurityObjectIdNo' , SecurityObject.SecurityObjectName, GroupAccess.Visible, GroupAccess.Editable from SecurityObject  " &
-                    "left join groupAccess " &
-                    "on SecurityObject.IdNo = GroupAccess.SecurityObjectIdNo  and SecurityGroupIdNo = @SecurityGroupIdNo " &
+                    "select b.IdNo , b.SecurityGroupIdNo, a.IdNo as 'SecurityObjectIdNo', a.FullPathName as 'SecurityObjectName', b.Visible, b.Editable from SecurityObject_View1 a " &
+                    "left join groupAccess b " &
+                    "on a.IdNo = b.SecurityObjectIdNo  and b.SecurityGroupIdNo = @SecurityGroupIdNo " &
                     "Order By " & sortExpression & " ASC "
             Dim params() As Object = {"@SecurityGroupIdNo", idNo}
             Return Db.Read(sql, MakeGroupAccess, params).ToList()
@@ -109,7 +109,7 @@ Namespace AdoNet
             New GroupAccess() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .SecurityGroupIdNo = Extensions.AsInt(Of Int16?)(reader("SecurityGroupIdNo")),
-            .SecurityObjectIdNo = Extensions.AsInt(Of Int16?)(reader("SecurityObjectIdNo")),
+            .SecurityObjectIdNo = Extensions.AsInt(Of Int32?)(reader("SecurityObjectIdNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .Visible = Extensions.AsBool(reader("Visible")),
             .Editable = Extensions.AsBool(reader("Editable"))

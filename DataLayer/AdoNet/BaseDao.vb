@@ -235,8 +235,8 @@ Namespace AdoNet
 
         Public Function GetControlSecurityIdNo(searchValue As String) As String Implements IBaseDao.GetControlSecurityIdNo
             Dim sql As String =
-                    " Select Top 1 IdNo FROM SecurityObject " &
-                    " Where SecurityObjectName = @SearchValue "
+                    " Select Top 1 IdNo FROM SecurityObject_View1 " &
+                    " Where FullPathName = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
             Dim retVal = _db.Scalar(sql, params)
             If retVal Is Nothing Then
@@ -573,7 +573,7 @@ Namespace AdoNet
         '            ' Attempt to roll back the transaction.
         '            Try
         '                transaction.Rollback()
-        Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList _
+        Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList _
             Implements IBaseDao.GetUserSecurity
             Dim params() As Object =
                     {"@SecurityObjectIdNo", securityObjectIdNo, "@SecurityGroupIdNo", securityGroupIdNo}

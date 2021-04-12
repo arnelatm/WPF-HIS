@@ -954,7 +954,7 @@ Public Class CFormEntry
     End Function
 
     Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
-        Dim controlSecurityObjectIdNo As Int16
+        Dim controlSecurityObjectIdNo As Int32
         controlSecurityObjectIdNo = PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
         Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
     End Function
@@ -1132,7 +1132,6 @@ Public Class CFormEntry
     End Sub
 
     Public Function GetFieldType(fieldName As String) As Type
-        Dim x As IFindableControl.DataTypeEnum
         Dim y As Object
         y = CallByName(Me, fieldName, CallType.Get)
         ' ReSharper disable once VBPossibleMistakenCallToGetType.2
