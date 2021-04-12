@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -56,25 +56,37 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Add")>  _
-        Public Property CaptionAdd() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Oterkis() As String
             Get
-                Return CType(Me("CaptionAdd"),String)
+                Return CType(Me("Oterkis"),String)
             End Get
             Set
-                Me("CaptionAdd") = value
+                Me("Oterkis") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Delete")>  _
-        Public Property CaptionDelete() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property RememberPassword() As Boolean
             Get
-                Return CType(Me("CaptionDelete"),String)
+                Return CType(Me("RememberPassword"),Boolean)
             End Get
             Set
-                Me("CaptionDelete") = value
+                Me("RememberPassword") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property UserName() As String
+            Get
+                Return CType(Me("UserName"),String)
+            End Get
+            Set
+                Me("UserName") = value
             End Set
         End Property
     End Class

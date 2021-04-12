@@ -4,6 +4,7 @@ Public Class GroupAccessView
     Implements IGroupAccessView
 
     Private _visible As Boolean = False
+    Private _editable As Boolean = False
 
     Public Property IdNo As Int32 Implements IGroupAccessView.IdNo
 
@@ -17,13 +18,23 @@ Public Class GroupAccessView
         End Get
         Set(value As Boolean)
             If Not value Then
-                Editable = False
+                _editable = False
             End If
             _visible = value
         End Set
     End Property
 
     Public Property Editable As Boolean Implements IGroupAccessView.Editable
+        Get
+            Return _editable
+        End Get
+        Set(value As Boolean)
+            If value Then
+                _visible = True
+            End If
+            _editable = value
+        End Set
+    End Property
 
     Public Property SecurityObjectName As String Implements IGroupAccessView.SecurityObjectName
 

@@ -96,4 +96,10 @@ Public Class SecurityGroupPresenter
         Return retValue
     End Function
 
+    Public Sub ProcessRows(groupAccessesView As List(Of GroupAccessView), propertyName As String, value As Boolean)
+        For Each groupAccessView in groupAccessesView
+            CallByName(groupAccessView, propertyName, CallType.Set, {value})
+        Next 
+    End Sub
+
 End Class
