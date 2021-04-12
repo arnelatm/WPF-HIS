@@ -77,6 +77,30 @@ Namespace My
                 Me("Color") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Oterkis() As String
+            Get
+                Return CType(Me("Oterkis"),String)
+            End Get
+            Set
+                Me("Oterkis") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Kulay() As String
+            Get
+                Return CType(Me("Kulay"),String)
+            End Get
+            Set
+                Me("Kulay") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

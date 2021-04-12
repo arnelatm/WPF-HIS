@@ -32,6 +32,8 @@ Partial Class LoginEntry
         Me.textBoxUserName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.textBoxPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.chkSaveUserNameAndPassword = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
@@ -48,7 +50,7 @@ Partial Class LoginEntry
         Me.btn_Login.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btn_Login.ImageIndex = 0
         Me.btn_Login.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btn_Login.Location = New System.Drawing.Point(200, 264)
+        Me.btn_Login.Location = New System.Drawing.Point(200, 296)
         Me.btn_Login.Name = "btn_Login"
         Me.btn_Login.Size = New System.Drawing.Size(75, 33)
         Me.btn_Login.TabIndex = 20
@@ -66,7 +68,7 @@ Partial Class LoginEntry
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCancel.Location = New System.Drawing.Point(75, 264)
+        Me.btnCancel.Location = New System.Drawing.Point(75, 296)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(77, 33)
         Me.btnCancel.TabIndex = 19
@@ -92,10 +94,12 @@ Partial Class LoginEntry
         Me.CFlowLayout1.Controls.Add(Me.textBoxUserName)
         Me.CFlowLayout1.Controls.Add(Me.Label3)
         Me.CFlowLayout1.Controls.Add(Me.textBoxPassword)
+        Me.CFlowLayout1.Controls.Add(Me.chkSaveUserNameAndPassword)
+        Me.CFlowLayout1.Controls.Add(Me.CLabel2)
         Me.CFlowLayout1.Location = New System.Drawing.Point(12, 168)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(20)
-        Me.CFlowLayout1.Size = New System.Drawing.Size(325, 85)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(325, 112)
         Me.CFlowLayout1.TabIndex = 27
         '
         'Label4
@@ -115,11 +119,16 @@ Partial Class LoginEntry
         'textBoxUserName
         '
         Me.textBoxUserName.BackColor = System.Drawing.Color.White
+        Me.textBoxUserName.BegFindValue = Nothing
         Me.textBoxUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.textBoxUserName.ComputedValue = false
         Me.textBoxUserName.CustomFormat = Nothing
         Me.textBoxUserName.DataBoundControl = true
         Me.textBoxUserName.EditingMode = false
+        Me.textBoxUserName.EndFindValue = Nothing
+        Me.textBoxUserName.FieldName = Nothing
+        Me.textBoxUserName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.textBoxUserName.FindEnabled = false
         Me.textBoxUserName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.textBoxUserName.ForeColor = System.Drawing.Color.Black
         Me.textBoxUserName.LinkedLabel = Nothing
@@ -129,6 +138,8 @@ Partial Class LoginEntry
         Me.textBoxUserName.MinimumValue = Nothing
         Me.textBoxUserName.Name = "textBoxUserName"
         Me.textBoxUserName.OldValue = Nothing
+        Me.textBoxUserName.ReadOnly = true
+        Me.textBoxUserName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.textBoxUserName.Size = New System.Drawing.Size(201, 23)
         Me.textBoxUserName.TabIndex = 20
         '
@@ -145,12 +156,17 @@ Partial Class LoginEntry
         'textBoxPassword
         '
         Me.textBoxPassword.BackColor = System.Drawing.Color.White
+        Me.textBoxPassword.BegFindValue = Nothing
         Me.textBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.textBoxPassword.ComputedValue = False
+        Me.textBoxPassword.ComputedValue = false
         Me.textBoxPassword.CustomFormat = Nothing
-        Me.textBoxPassword.DataBoundControl = True
-        Me.textBoxPassword.EditingMode = False
-        Me.textBoxPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.textBoxPassword.DataBoundControl = true
+        Me.textBoxPassword.EditingMode = false
+        Me.textBoxPassword.EndFindValue = Nothing
+        Me.textBoxPassword.FieldName = Nothing
+        Me.textBoxPassword.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.textBoxPassword.FindEnabled = false
+        Me.textBoxPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.textBoxPassword.ForeColor = System.Drawing.Color.Black
         Me.textBoxPassword.LinkedLabel = Nothing
         Me.textBoxPassword.Location = New System.Drawing.Point(96, 43)
@@ -160,13 +176,57 @@ Partial Class LoginEntry
         Me.textBoxPassword.Name = "textBoxPassword"
         Me.textBoxPassword.OldValue = Nothing
         Me.textBoxPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.textBoxPassword.ReadOnly = true
+        Me.textBoxPassword.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.textBoxPassword.Size = New System.Drawing.Size(201, 23)
         Me.textBoxPassword.TabIndex = 21
         Me.textBoxPassword.Text = "1"
         '
+        'chkSaveUserNameAndPassword
+        '
+        Me.chkSaveUserNameAndPassword.BackColor = System.Drawing.Color.White
+        Me.chkSaveUserNameAndPassword.BegFindValue = Nothing
+        Me.chkSaveUserNameAndPassword.DisplayOnly = false
+        Me.chkSaveUserNameAndPassword.EditingMode = true
+        Me.chkSaveUserNameAndPassword.EndFindValue = Nothing
+        Me.chkSaveUserNameAndPassword.FieldName = Nothing
+        Me.chkSaveUserNameAndPassword.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkSaveUserNameAndPassword.FindEnabled = false
+        Me.chkSaveUserNameAndPassword.FlatAppearance.BorderSize = 0
+        Me.chkSaveUserNameAndPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.chkSaveUserNameAndPassword.ForeColor = System.Drawing.Color.Black
+        Me.chkSaveUserNameAndPassword.IFindableControl_FindEnabled = false
+        Me.chkSaveUserNameAndPassword.LinkedLabel = Nothing
+        Me.chkSaveUserNameAndPassword.Location = New System.Drawing.Point(21, 67)
+        Me.chkSaveUserNameAndPassword.Margin = New System.Windows.Forms.Padding(1)
+        Me.chkSaveUserNameAndPassword.Name = "chkSaveUserNameAndPassword"
+        Me.chkSaveUserNameAndPassword.NoLabel = true
+        Me.chkSaveUserNameAndPassword.OldValue = Nothing
+        Me.chkSaveUserNameAndPassword.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkSaveUserNameAndPassword.Size = New System.Drawing.Size(24, 23)
+        Me.chkSaveUserNameAndPassword.TabIndex = 22
+        Me.chkSaveUserNameAndPassword.Text = "CCheckBox1"
+        Me.chkSaveUserNameAndPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkSaveUserNameAndPassword.UseVisualStyleBackColor = true
+        '
+        'CLabel2
+        '
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
+        Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel2.Location = New System.Drawing.Point(47, 67)
+        Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel2.Name = "CLabel2"
+        Me.CLabel2.Size = New System.Drawing.Size(249, 23)
+        Me.CLabel2.TabIndex = 24
+        Me.CLabel2.Text = "Save User Name and Password"
+        Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'LoginEntry
         '
-        Me.ClientSize = New System.Drawing.Size(349, 309)
+        Me.AcceptButton = Me.btn_Login
+        Me.CancelButton = Me.btnCancel
+        Me.ClientSize = New System.Drawing.Size(349, 341)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.btn_Login)
@@ -188,4 +248,6 @@ End Sub
     Friend WithEvents Label4 As CLabel
     Friend WithEvents textBoxUserName As CTextBox
     Friend WithEvents textBoxPassword As CTextBox
+    Friend WithEvents chkSaveUserNameAndPassword As CCheckBox
+    Friend WithEvents CLabel2 As CLabel
 End Class

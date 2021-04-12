@@ -13,6 +13,7 @@ Public Class LoginEntry
     'Private ReadOnly _loginPresenter As LoginPresenter
 
     Private _cancelClose As Boolean
+    Private _rememberPassword as Boolean = False
 
     ' The Presenter
     Private _loginOk As Boolean
@@ -26,6 +27,16 @@ Public Class LoginEntry
         _cancelLogin = False
         AddHandler FormClosing, AddressOf FormLogin_Closing
         textBoxUserName.Text = $"Arnel" 'Environment.UserName
+        Dim userName = My.Settings.UserName
+        Dim password = My.Settings.Oterkis
+        _rememberPassword = My.Settings.RememberPassword
+        If userName IsNot Nothing Then
+            If password IsNot Nothing Then
+                textBoxPassword.Text = password
+            End If
+            textBoxUserName.Text = userName
+        End If
+        chkSaveUserNameAndPassword.Checked = _rememberPassword        
         'Dim model = New LoginModel
         PresenterObj = New LoginPresenter(Me)
 
@@ -65,6 +76,17 @@ Public Class LoginEntry
         Try
             If PresenterObj.Login() Then
                 _loginOk = True
+                If chkSaveUserNameAndPassword.Checked Then
+                    My.Settings.UserName = textBoxUserName.Text.Trim()
+                    My.Settings.Oterkis = textBoxPassword.Text
+                    My.Settings.RememberPassword = True
+                    My.Settings.Save()
+                else
+                    My.Settings.UserName = ""
+                    My.Settings.Oterkis = ""
+                    My.Settings.RememberPassword = False
+                    My.Settings.Save()
+                End If
                 GlobalVariables.UserName = textBoxUserName.Text.Trim()
                 GlobalVariables.UserIdNo = Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),
                                                                                                  "User", "UserName", "IdNo"))
