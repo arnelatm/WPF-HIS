@@ -534,7 +534,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub AccountOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemAccountOfAccounts.Click
+            Handles ToolStripMenuItemChartOfAccounts.Click
             ShowEntryForm(AccountEntryTv)
         End Sub
 

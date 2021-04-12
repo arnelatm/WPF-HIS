@@ -69,7 +69,7 @@ Public Interface IBaseDao
 
     Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
 
-    Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
+    Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
 
     Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
 

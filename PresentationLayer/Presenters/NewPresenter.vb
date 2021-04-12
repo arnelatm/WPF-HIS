@@ -651,7 +651,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
         Return translatedSortOrder
     End Function
 
-    Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
+    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
         Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
 

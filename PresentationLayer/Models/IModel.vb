@@ -86,7 +86,7 @@ Public Interface IModel
 
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
-    Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
+    Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
 
     Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
 
