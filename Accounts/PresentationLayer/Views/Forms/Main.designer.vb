@@ -164,6 +164,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemChangePassword = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -235,7 +236,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemFile
         '
-        Me.ToolStripMenuItemFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemLogin, Me.ToolStripMenuItemLogout, Me.toolStripMenuItem1, Me.ToolStripMenuItemSettings, Me.ToolStripMenuItemExit})
+        Me.ToolStripMenuItemFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemLogin, Me.ToolStripMenuItemLogout, Me.toolStripMenuItem1, Me.ToolStripMenuItemChangePassword, Me.ToolStripMenuItemSettings, Me.ToolStripMenuItemExit})
         Me.ToolStripMenuItemFile.Name = "ToolStripMenuItemFile"
         resources.ApplyResources(Me.ToolStripMenuItemFile, "ToolStripMenuItemFile")
         '
@@ -880,6 +881,11 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
+        'ToolStripMenuItemChangePassword
+        '
+        Me.ToolStripMenuItemChangePassword.Name = "ToolStripMenuItemChangePassword"
+        resources.ApplyResources(Me.ToolStripMenuItemChangePassword, "ToolStripMenuItemChangePassword")
+        '
         'Main
         '
         Me.AllowDrop = true
@@ -1038,5 +1044,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemClosePettyCashFund As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemGeneratePayroll As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSettings As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemChangePassword As ToolStripMenuItem
     End Class
 End NameSpace

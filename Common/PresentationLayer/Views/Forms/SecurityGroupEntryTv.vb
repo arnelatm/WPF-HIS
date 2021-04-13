@@ -1,9 +1,11 @@
-﻿Imports AATM.PresentationLayer.Events
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class SecurityGroupEntryTv
+        Implements ISubscriber(Of DataGridCellChanged)
 
         Public Sub New()
 
@@ -22,8 +24,12 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New SecurityGroupPresenter(SecurityGroupView)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            EaSg = SecurityGroupView.Ea
+            EaSg.SubscribeEvent(Me)
 
         End Sub
+
+        Private Property EaSg As EventAggregator
 
         Protected Overrides Sub CreateDataSources()
             UpdateParentIdData()
@@ -70,35 +76,37 @@ Namespace PresentationLayer.Views.Forms
             btnUncheckAllVisible.Enabled = False
         End Sub
 
-        Private Sub btnCheckAllVisible_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCheckAllVisible.ClickButtonArea
+        Private Sub btnCheckAllVisible_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCheckAllVisible.ClickButtonArea
             PresenterObj.ProcessRows(SecurityGroupView.GroupAccesses, "Visible", True)
             SecurityGroupView.bsGroupAccesses.ResetBindings(False)
         End Sub
 
-        Private Sub btnCheckAllEditable_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCheckAllEditable.ClickButtonArea
+        Private Sub btnCheckAllEditable_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCheckAllEditable.ClickButtonArea
             PresenterObj.ProcessRows(SecurityGroupView.GroupAccesses, "Editable", True)
             SecurityGroupView.bsGroupAccesses.ResetBindings(False)
         End Sub
 
-        Private Sub btnUncheckAllVisible_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnUncheckAllVisible.ClickButtonArea
+        Private Sub btnUncheckAllVisible_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnUncheckAllVisible.ClickButtonArea
             PresenterObj.ProcessRows(SecurityGroupView.GroupAccesses, "Visible", False)
             SecurityGroupView.bsGroupAccesses.ResetBindings(False)
         End Sub
 
-        Private Sub btnUncheckAllEditable_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnUncheckAllEditable.ClickButtonArea
+        Private Sub btnUncheckAllEditable_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnUncheckAllEditable.ClickButtonArea
             PresenterObj.ProcessRows(SecurityGroupView.GroupAccesses, "Editable", False)
             SecurityGroupView.bsGroupAccesses.ResetBindings(False)
         End Sub
 
-        'Private Sub ProcessRows(propertyName As String, value As Boolean)
-        '    For Each row In SecurityGroupView.DataGridViewGroupAccesses.Rows()
-        '        CallByName(row.DataBoundItem, propertyName, CallType.Set, {value})
-        '        'row.DataBoundItem.Visible = True
-        '    Next
-        '    SecurityGroupView.DataGridViewGroupAccesses.Refresh()
-        'End Sub
-
-
+        Public Sub OnEventHandler(ByRef e As DataGridCellChanged) Implements ISubscriber(Of DataGridCellChanged).OnEventHandler
+            Dim firstDisplayedRow = SecurityGroupView.DataGridViewGroupAccesses.FirstDisplayedScrollingRowIndex
+            If e.ColumnName.ToLower() = $"dgvvisible" Then
+                PresenterObj.ProcessChildren(e.Index, True)
+            Else
+                PresenterObj.ProcessChildren(e.Index, False)
+            End If
+            SecurityGroupView.bsGroupAccesses.ResetBindings(False)
+            'SecurityGroupView.DataGridViewGroupAccesses.CurrentCell = SecurityGroupView.DataGridViewGroupAccesses.Rows(e.Index).Cells(e.ColumnName)
+            SecurityGroupView.DataGridViewGroupAccesses.FirstDisplayedScrollingRowIndex = firstDisplayedRow
+        End Sub
 
     End Class
 

@@ -110,4 +110,6 @@ Public Interface IModel
 
     Function AddSecurityObject(securityObject As Object) As Integer
 
+    Function InitializeSecurityObject() As Integer
+    Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
 End Interface

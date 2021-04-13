@@ -55,7 +55,7 @@ Public Class GlobalVariables
 
     Public Shared Property SecurityGroupIdNo As Int16 = 0
 
-    Public Shared Property UserIdNo As Int16
+    Public Shared Property UserIdNo As Int32
 
 #Region "Colors"
 

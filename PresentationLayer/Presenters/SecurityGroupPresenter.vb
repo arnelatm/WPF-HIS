@@ -97,9 +97,49 @@ Public Class SecurityGroupPresenter
     End Function
 
     Public Sub ProcessRows(groupAccessesView As List(Of GroupAccessView), propertyName As String, value As Boolean)
-        For Each groupAccessView in groupAccessesView
+        For Each groupAccessView In groupAccessesView
             CallByName(groupAccessView, propertyName, CallType.Set, {value})
-        Next 
+        Next
+    End Sub
+
+    Public Sub ProcessChildren(index As Integer, visibleColumn As Boolean)
+        Dim key = View.GroupAccesses(index).SecurityObjectName
+        Dim keyLength = Len(key)
+        Dim visible = View.GroupAccesses(index).Visible
+        Dim editable = View.GroupAccesses(index).Editable
+        For Each groupAccess In View.GroupAccesses
+            If Left(groupAccess.SecurityObjectName, keyLength) = key Then
+                If visibleColumn Then
+                    groupAccess.Visible = visible
+                Else
+                    groupAccess.Editable = editable
+                End If
+            End If
+        Next
+        If (visibleColumn And visible) Or (Not visibleColumn And editable) Then
+            ' update parent only when Visible or Editable is True, otherwise don't
+            UpdateParent(key, keyLength, visibleColumn, visible, editable)
+        End If
+
+    End Sub
+
+    Private Sub UpdateParent(key As String, keyLength As Integer, visibleColumn As Boolean, visible As Boolean, editable As Boolean)
+        For Each groupAccess In View.GroupAccesses
+            Dim index As Integer = key.LastIndexOf(" > ", StringComparison.Ordinal)
+            If index > 0 Then
+                Dim parentKey = Left(key, index)
+                If Left(groupAccess.SecurityObjectName, keyLength) = parentKey Then
+                    If visibleColumn Then
+                        groupAccess.Visible = visible
+                    Else
+                        groupAccess.Editable = editable
+                    End If
+                    Dim curKey As String = parentKey
+                    Dim curKeyLength As Integer = Len(curKey)
+                    UpdateParent(curKey, curKeyLength, visibleColumn, visible, editable)
+                End If
+            End If
+        Next
     End Sub
 
 End Class

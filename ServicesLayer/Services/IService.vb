@@ -94,6 +94,8 @@ Namespace Services
 
         Function AddSecurityObject(securityObjectName As SecurityObject) As Integer
 
+        Function InitializeSecurityObject() As Integer
+
     End Interface
 
 End Namespace

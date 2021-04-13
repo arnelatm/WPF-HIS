@@ -1043,6 +1043,52 @@ Namespace AdoNet
             End If
         End Function
 
+        Public Function ExecuteCommands(transactionName As String, commands As Object) As Integer
+            Dim retValue As Integer
+            retValue = 0
+            Using connection As New SqlConnection(ConnectionString)
+                connection.Open()
+
+                Dim command As SqlCommand = connection.CreateCommand()
+                Dim transaction As SqlTransaction
+
+                ' Start a local transaction
+                transaction = connection.BeginTransaction(transactionName)
+
+                ' Must assign both transaction object and connection
+                ' to Command object for a pending local transaction.
+                command.Connection = connection
+                command.Transaction = transaction
+
+                Try
+                    For Each item In commands
+                        command.CommandText = item
+                        command.ExecuteNonQuery()
+                    Next
+
+                    ' Attempt to commit the transaction.
+                    transaction.Commit()
+                    retValue = 1
+                Catch ex As Exception
+                    MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
+                    MessageBox.Show("  Message: {0}", ex.Message)
+
+                    ' Attempt to roll back the transaction.
+                    Try
+                        transaction.Rollback()
+                    Catch ex2 As Exception
+                        ' This catch block will handle any errors that may have occurred
+                        ' on the server that would cause the rollback to fail, such as
+                        ' a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
+                        Console.WriteLine("  Message: {0}", ex2.Message)
+                    End Try
+                    retValue = -1
+                End Try
+            End Using
+            Return retValue
+        End Function
+
         Public Function ExecuteSqlTransaction(transactionName As String, sql1 As String, Optional sql2 As String = "") As Integer
             Dim retValue As Integer
             retValue = 0

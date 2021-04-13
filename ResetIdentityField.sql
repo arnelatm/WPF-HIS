@@ -1,0 +1,1 @@
+﻿  DBCC CHECKIDENT ('securityobject', RESEED, 1)  
