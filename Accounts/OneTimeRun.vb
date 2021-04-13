@@ -45,6 +45,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgOnEmptyReconChangeAccNotAllowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
         Messaging.AddMessage("MsgOnlyNumbersAllowed", "The field '<{FieldName}>' must contain numbers only.", "Invalid Entry")
         Messaging.AddMessage("MsgPasswordNotSaved", "Password not saved", "Error")
+        Messaging.AddMessage("MsgPasswordSaved", "New password saved successfully", "Success")
         Messaging.AddMessage("MsgPaymentCollExistChangeNotAllowed", "Sorry, this account receivable has already been partially or fully collected/discounted, changing account/customer not allowed. Value will revert to previous value.", "Modification Error")
         Messaging.AddMessage("MsgPaymentDiscExistChangeNotAllowed", "Sorry, this account payable has already been partially or fully paid/discounted, changing account/supplier not allowed. Value will revert to previous value.", "Modification Error")
         Messaging.AddMessage("MsgPaymentIsOverApplied", "Payment is over applied. Either increase the amount of payment or reduce applied payments.", "Invalid Transaction")

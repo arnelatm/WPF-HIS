@@ -334,6 +334,10 @@ Public Class Model
         Return Service.AddSecurityObject(securityObject)
     End Function
 
+    Public Function InitializeSecurityObject() As Integer Implements IModel.InitializeSecurityObject
+        Return Service.InitializeSecurityObject()
+    End Function
+
     Public Function InsertTvp(dtTable As DataTable) As Integer _
         Implements IModel.InsertTvp
         Return DataService.InsertTvp(dtTable)
@@ -437,6 +441,10 @@ Public Class Model
             Next
         End If
         Return tlData
+    End Function
+
+    Public Function EncryptPassword(userLoginIdNo As Integer, password As String) As String Implements IModel.EncryptPassword
+        Return Service.EncryptPassword(userLoginIdNo, password)
     End Function
 
     'Public Function IsValid(dataModel As Object) As Boolean Implements IModel.IsValid

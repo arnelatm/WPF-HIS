@@ -83,5 +83,5 @@ Public Interface IBaseDao
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
 
     Function AddSecurityObject(securityObject As SecurityObject) As Integer
-
+    Function InitializeSecurityObject() As Integer
 End Interface

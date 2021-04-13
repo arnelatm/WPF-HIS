@@ -1,13 +1,10 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Common
-Imports AATM.Common.PresentationLayer.Views
 Imports AATM.Common.PresentationLayer.Views.Forms
-Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
@@ -191,7 +188,7 @@ Namespace PresentationLayer.Views.Forms
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
         Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLogin.Click
-            Using form As New LoginEntry
+            Using form As New LoginEntry(False)
                 Try
                     If form.ShowDialog() = DialogResult.OK Then
                         If form.LoginOk Then
@@ -1512,6 +1509,40 @@ Namespace PresentationLayer.Views.Forms
                 .MdiParent = Me
                 }
             childMdiForm.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
+            Using form As New LoginEntry(True)
+                Try
+                    If form.ShowDialog() = DialogResult.OK Then
+                        If form.LoginOk Then
+                            GlobalVariables.IsUserLoggedIn = True
+                            LogStatus = LoginStatus.LoggedIn
+                        Else
+                            Messaging.Show(True, "MsgOldPasswordError")
+                            GlobalVariables.IsUserLoggedIn = False
+                            LogStatus = LoginStatus.LoggedOut
+                            ToolStripButtonLogin.Enabled = True
+                        End If
+                    Else
+                        GlobalVariables.IsUserLoggedIn = False
+                        LogStatus = LoginStatus.LoggedOut
+                        ToolStripButtonLogin.Enabled = True
+                    End If
+                    ToolStripButtonExit.Enabled = True
+                Catch ex As TypeInitializationException
+                    MessageBox.Show("Invalid Connection String, specified connection string doesn't exist.",
+                                    "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ErrLogger.LogError(ex, True)
+                Catch ex As Exception
+                    'LogStatus = LoginStatus.LoggedOut
+                    GlobalVariables.IsUserLoggedIn = True
+                    LogStatus = LoginStatus.LoggedIn
+                    'GlobalVariables.IsUserLoggedIn = False
+                    'MessageBox.Show("Unsuccessful Login")
+                    'Throw ex
+                End Try
+            End Using
         End Sub
 
         'Private Sub TestToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuTest.Click

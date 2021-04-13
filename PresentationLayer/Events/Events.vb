@@ -123,3 +123,15 @@ Public Class ValidatingData
 
     Public Property Validated
 End Class
+
+Public Class DataGridCellChanged
+
+    Public Sub New(ByVal index As Integer, ByVal columnName As String)
+        Me.Index = index
+        Me.ColumnName = columnName
+    End Sub
+
+    Public Property Index As Integer
+    Public Property ColumnName As String
+
+End Class

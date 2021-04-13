@@ -13,12 +13,13 @@ Public Class LoginEntry
     'Private ReadOnly _loginPresenter As LoginPresenter
 
     Private _cancelClose As Boolean
-    Private _rememberPassword as Boolean = False
+    Private _rememberPassword As Boolean = False
+    Private _changingPassword As Boolean = False
 
     ' The Presenter
     Private _loginOk As Boolean
 
-    Public Sub New()
+    Public Sub New(changePassword As Boolean)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -36,9 +37,23 @@ Public Class LoginEntry
             End If
             textBoxUserName.Text = userName
         End If
-        chkSaveUserNameAndPassword.Checked = _rememberPassword        
+        chkSaveUserNameAndPassword.Checked = _rememberPassword
         'Dim model = New LoginModel
         PresenterObj = New LoginPresenter(Me)
+        If changePassword Then
+            textNewPassword.Visible = True
+            textConfirmation.Visible = True
+            lblNewPassword.Visible = True
+            lblConfirmation.Visible = True
+            textNewPassword.DisplayOnly = False
+            textConfirmation.DisplayOnly = False
+            btn_Login.Text = Messaging.TranslateCaption("Save")
+            textNewPassword.Text = Space(20)
+            textConfirmation.Text = Space(20)
+            textNewPassword.Editable = True
+            textConfirmation.Editable = True
+            PresenterObj.EnableEdit()
+        End If
 
     End Sub
 
@@ -81,7 +96,7 @@ Public Class LoginEntry
                     My.Settings.Oterkis = textBoxPassword.Text
                     My.Settings.RememberPassword = True
                     My.Settings.Save()
-                else
+                Else
                     My.Settings.UserName = ""
                     My.Settings.Oterkis = ""
                     My.Settings.RememberPassword = False
@@ -93,6 +108,9 @@ Public Class LoginEntry
                 GlobalVariables.SecurityGroupIdNo =
                     Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo",
                                                                           "SecurityGroupIdNo"))
+                If textNewPassword.Visible Then
+                    SaveNewPassword()
+                End If
             Else
                 Messaging.Show(True, "MsgInvalidUserNameOrPassword", "Invalid User Name or Password.", "Login Error")
             End If
@@ -118,6 +136,11 @@ Public Class LoginEntry
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub FormLogin_Closing(sender As Object, e As CancelEventArgs)
+        If _changingPassword Then
+            _cancelClose = True
+            Show()
+            Exit Sub
+        End If
         e.Cancel = _cancelClose
         _cancelClose = False
     End Sub
@@ -125,8 +148,12 @@ Public Class LoginEntry
     Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _textBoxUserName.ReadOnly = False
         _textBoxPassword.ReadOnly = False
+        _textConfirmation.ReadOnly = False
+        _textNewPassword.ReadOnly = False
         _textBoxUserName.DisplayOnly = False
         _textBoxPassword.DisplayOnly = False
+        _textNewPassword.DisplayOnly = False
+        _textConfirmation.DisplayOnly = False
         'Me.Show()
         'LoginPresenter.Display()
     End Sub
@@ -135,6 +162,36 @@ Public Class LoginEntry
         If _cancelLogin Then
             Close()
         End If
+    End Sub
+
+    'Private Sub Button1_Click(sender As Object, e As EventArgs)
+    '    If txtConfirmation.Visible Then
+    '        If txtConfirmation.Visible = txtNewPassword.Visible AndAlso txtConfirmation.Text.Length >= 6 Then
+    '            SaveNewPassword()
+    '            txtConfirmation.Visible = False
+    '            txtNewPassword.Visible = False
+    '            lblConfirmation.Visible = False
+    '            lblNewPassword.Visible = False
+    '            Height = 360
+    '        End If
+    '    Else
+    '        txtConfirmation.Visible = True
+    '        txtNewPassword.Visible = True
+    '        lblConfirmation.Visible = True
+    '        lblNewPassword.Visible = True
+    '        Height = 417
+    '    End If
+    '    _changingPassword = True
+    'End Sub
+
+    Private Sub SaveNewPassword()
+        Dim userIdNo = Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(), "User", "UserName", "IdNo"))
+        Dim encryptedPassword As String = PresenterObj.EncryptPassword(userIdNo, textNewPassword.Text.Trim())
+        PresenterObj.SavePassword(userIdNo, encryptedPassword)
+    End Sub
+
+    Protected Sub EnableEdit()
+        PresenterObj.EditMode = True
     End Sub
 
 End Class

@@ -600,6 +600,20 @@ Namespace AdoNet
             Return _db.Insert(sql, TakeSecurityObject(securityObject))
         End Function
 
+        Public Function InitializeSecurityObject() As Integer Implements IBaseDao.InitializeSecurityObject
+            Dim sql1 = "INSERT [SecurityObject] ([IdNo], [SecurityObjectCode], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [SystemViewIdNo], [ManuallyAdded], [Notes]) VALUES "
+            Dim commandArray = {{"SET IDENTITY_INSERT [SecurityObject] ON"},
+                                {sql1 & "(1, N'1', N'_SuperAdministrator', NULL, NULL, NULL, 0, NULL)"},
+                                {sql1 & "(2, N'2', N'_Administrator', NULL, NULL, NULL, 0, NULL)"},
+                                {sql1 & "(3, N'3', N'_Manager', NULL, NULL, NULL, 0, NULL)"},
+                                {sql1 & "(4, N'4', N'_Supervisor', NULL, NULL, NULL, 0, NULL)"},
+                                {sql1 & "(5, N'5', N'_PowerUser', NULL, NULL, NULL, 0, NULL)"},
+                                {sql1 & "(6, N'6', N'_User', NULL, NULL, NULL, 0, NULL)"},
+                                {sql1 & "(7, N'7', N'_Guest', NULL, NULL, NULL, 0, NULL)"},
+                                {"SET IDENTITY_INSERT [SecurityObject] OFF "}}
+            Return _db.ExecuteCommands("SecurityObjectCreate", commandArray)
+        End Function
+
         Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampValue As Byte,
                                                  Optional ByVal timeStampedField As String = "DateTimeStamp") As Boolean _
                     Implements IBaseDao.HasRecordChanged
