@@ -8,40 +8,21 @@ Namespace BusinessLayer
 
     Public Class Customer
         'Inherits AATM.BusinessLayer.BusinessObject
-        Inherits BoBase
+        Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        'Public Sub New()
-        '    ' establish business rules
-        '    If GetRules().Count() = 0 Then
-        '        AddRule(New ValidateRequired("CustomerName"))
-        '        AddRule(New ValidateRequired("CustomerNameAra"))
-        '        'AddRule(New ValidateRequired("CustomerCode"))
-        '        AddRule(New ValidateEmail("Email"))
-        '    End If
-        'End Sub
-        Private _customerName
+        Public Sub New()
+            ' establish business rules
+            If GetRules().Count() = 0 Then
+                AddRule(New ValidateRequired("CustomerName"))
+                AddRule(New ValidateRequired("CustomerNameAra"))
+                AddRule(New ValidateEmail("Email"))
+            End If
+        End Sub
 
         Public Property IdNo As Int32
         Public Property CustomerCode As String
         Public Property CustomerName As String
-            Get
-                Return _customerName
-            End Get
-            Set(ByVal value As String)
-                If _customerName Is Nothing OrElse _customerName <> value Then
-                    Dim propertyName As String = "Customer Name"
-                    _customerName = value
-
-                    ' Validate the last name
-                    ValidationInstance.ValidateClear(propertyName)
-                    ValidationInstance.ValidateRequired(propertyName, value)
-
-                    SetEntityState(EntityStateType.Modified, propertyName)
-                End If
-            End Set
-        End Property
-
         Public Property CustomerNameAra As String
         Public Property ContactPerson As String
         Public Property ContactDesignation As String
@@ -77,9 +58,6 @@ Namespace BusinessLayer
         Public Property DiscountSchemeIdNo As Int16?
         Public Property Active As Boolean
 
-        Public Overrides Function SaveItem() As Boolean
-            Throw New NotImplementedException()
-        End Function
     End Class
 
 End Namespace

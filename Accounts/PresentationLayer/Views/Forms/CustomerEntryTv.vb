@@ -44,7 +44,7 @@ Namespace PresentationLayer.Views.Forms
             cacRevAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)
             cacAccountStatus.DataSource = PresenterObj.MakeEnumComboList(Of AccountStatusSelection)
-            cacDiscountSchemeIdNo.DataSource = PresenterObj.GetLookup("DiscountScheme")
+            cacDiscountSchemeIdNo.DataSource = PresenterObj.GetLookup("DiscountScheme","Name",{"IdNo","Name","Code"})
         End Sub
 
 #Region "Field Displays"

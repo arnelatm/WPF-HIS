@@ -102,13 +102,14 @@ Public Class LoginEntry
                 If Not _changingPassword Then
                     SaveUserPasswordSetting()
                     GlobalVariables.UserName = textBoxUserName.Text.Trim()
-                    GlobalVariables.UserIdNo = Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),
-                                                                                                     "User", "UserName", "IdNo"))
+                    GlobalVariables.UserIdNo = Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),"User", "UserName", "IdNo"))
                     GlobalVariables.SecurityGroupIdNo =
                         Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo",
                                                                               "SecurityGroupIdNo"))
                 Else
-                    If PresenterObj.SaveNewPassword(textNewPassword.Text, textConfirmation.Text) > 0 Then
+                    Dim userIdNo as Int32 
+                    userIdNo = Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),"User", "UserName", "IdNo"))
+                    If PresenterObj.SaveNewPassword(GlobalVariables.UserIdNo, textNewPassword.Text, textConfirmation.Text) > 0 Then
                         SaveUserPasswordSetting()
                     End If
                 End If
