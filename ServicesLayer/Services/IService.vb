@@ -95,7 +95,7 @@ Namespace Services
         Function AddSecurityObject(securityObjectName As SecurityObject) As Integer
 
         Function InitializeSecurityObject() As Integer
-
+        Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) As Integer
     End Interface
 
 End Namespace

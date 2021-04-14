@@ -35,11 +35,11 @@ Public Class LoginPresenter
         Dim retVal As Int32 = 0
         Dim userModel As New UserModel With {.IdNo = userIdNo,
                                               .Password = password}
-        GlobalVariables.Mapper.Map(View, userModel)
-        If Model.UpdateRecordWithIdNo(Of UserModel)(userIdNo, "User", "Password", userModel) Then
-            retVal = Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
+
+        If Model.GenericUpdateRecordWithIdNo(Of String)(userIdNo, "User", "Password", password) Then
+            retVal = Messaging.Show(True, "MsgPasswordSaved", "Password saved")
         Else
-            Messaging.Show(True, "MsgPasswordSaved", "Password saved")
+            Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
         End If
         Return retVal
     End Function

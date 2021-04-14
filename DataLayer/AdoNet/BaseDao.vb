@@ -668,6 +668,15 @@ Namespace AdoNet
             Return _db.Update(sql, {"@Value", value})
         End Function
 
+        Public Function GenericUpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer _
+            Implements IBaseDao.GenericUpdateRecordWithIdNo
+            Dim sql As String =
+                    " Update [" & tableName & "] " &
+                    " Set " & fieldName & " = @Value" &
+                    " where IdNo = " & idNo
+            Return _db.Update(sql, {"@Value", value})
+        End Function
+
         Public Function GetFieldType(tableName As String, fieldName As String) As Object Implements IBaseDao.GetFieldType
             Dim value As Object
             Dim sql As String = "Select DATA_TYPE From INFORMATION_SCHEMA.COLUMNS Where TABLE_NAME = @tableName AND COLUMN_NAME = @fieldName"
