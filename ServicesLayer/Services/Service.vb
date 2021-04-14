@@ -213,6 +213,12 @@ Namespace Services
             Return DataDao.UpdateRecordWithIdNo(Of T)(idNo, tableName, fieldName, value)
         End Function
 
+        Public Function GenericUpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer _
+            Implements IService.GenericUpdateRecordWithIdNo
+            Dim dDataDao = New BaseDao
+            Return dDataDao.GenericUpdateRecordWithIdNo(idNo, tableName, fieldName, value)
+        End Function
+
         Public Function UpdateTvp(dtTable As DataTable) As Integer Implements IService.UpdateTvp
             Return DataDao.UpdateTvp(dtTable)
         End Function

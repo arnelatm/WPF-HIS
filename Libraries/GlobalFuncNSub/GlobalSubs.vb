@@ -167,6 +167,32 @@ Public Module GlobalSubs
         'methodInfo.Invoke(obj, methodParameter)
     End Sub
 
+    Public Sub EnableAndUnHideMenu(ByRef obj As MenuStrip)
+        obj.Enabled = True
+        obj.Visible = True
+        SetVisibleAndEnableOfToolStripMenuItem(True, obj.Items)
+    End Sub
+
+    Public Sub DisableAndHideMenu(ByRef obj As MenuStrip)
+        obj.Enabled = False
+        obj.Visible = False
+        SetVisibleAndEnableOfToolStripMenuItem(False, obj.Items)
+    End Sub
+
+    Private Sub SetVisibleAndEnableOfToolStripMenuItem(ByVal action As Boolean, ByRef toolStripItemCollection As ToolStripItemCollection)
+        For Each toolStripItem As Object In toolStripItemCollection
+            Dim subMenu As ToolStripMenuItem = TryCast(toolStripItem, ToolStripMenuItem)
+            If subMenu IsNot Nothing Then
+                subMenu.Enabled = action
+                subMenu.Visible = action
+                If subMenu.HasDropDownItems Then
+                    Dim childToolStripItemCollection = subMenu.DropDownItems
+                    SetVisibleAndEnableOfToolStripMenuItem(action, childToolStripItemCollection)
+                End If
+            End If
+        Next
+    End Sub
+
 #End Region
 
 End Module

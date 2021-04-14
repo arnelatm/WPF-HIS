@@ -112,4 +112,5 @@ Public Interface IModel
 
     Function InitializeSecurityObject() As Integer
     Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
+    Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) As Integer
 End Interface

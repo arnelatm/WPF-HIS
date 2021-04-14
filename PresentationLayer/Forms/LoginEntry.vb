@@ -24,6 +24,9 @@ Public Class LoginEntry
         ' This call is required by the designer.
         InitializeComponent()
         MainTableName = "User"
+        If changePassword Then
+            _changingPassword = True
+        End If
         ' Add any initialization after the InitializeComponent() call.
         _cancelLogin = False
         AddHandler FormClosing, AddressOf FormLogin_Closing
@@ -40,7 +43,7 @@ Public Class LoginEntry
         chkSaveUserNameAndPassword.Checked = _rememberPassword
         'Dim model = New LoginModel
         PresenterObj = New LoginPresenter(Me)
-        If changePassword Then
+        If _changingPassword Then
             textNewPassword.Visible = True
             textConfirmation.Visible = True
             lblNewPassword.Visible = True
@@ -53,6 +56,11 @@ Public Class LoginEntry
             textNewPassword.Editable = True
             textConfirmation.Editable = True
             PresenterObj.EnableEdit()
+            Height = 388
+            floPasswordEntry.Height = 134
+        Else
+            Height = 342
+            floPasswordEntry.Height = 134 - 46
         End If
 
     End Sub
@@ -91,42 +99,50 @@ Public Class LoginEntry
         Try
             If PresenterObj.Login() Then
                 _loginOk = True
-                If chkSaveUserNameAndPassword.Checked Then
-                    My.Settings.UserName = textBoxUserName.Text.Trim()
-                    My.Settings.Oterkis = textBoxPassword.Text
-                    My.Settings.RememberPassword = True
-                    My.Settings.Save()
+                If Not _changingPassword Then
+                    SaveUserPasswordSetting()
+                    GlobalVariables.UserName = textBoxUserName.Text.Trim()
+                    GlobalVariables.UserIdNo = Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),
+                                                                                                     "User", "UserName", "IdNo"))
+                    GlobalVariables.SecurityGroupIdNo =
+                        Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo",
+                                                                              "SecurityGroupIdNo"))
                 Else
-                    My.Settings.UserName = ""
-                    My.Settings.Oterkis = ""
-                    My.Settings.RememberPassword = False
-                    My.Settings.Save()
-                End If
-                GlobalVariables.UserName = textBoxUserName.Text.Trim()
-                GlobalVariables.UserIdNo = Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),
-                                                                                                 "User", "UserName", "IdNo"))
-                GlobalVariables.SecurityGroupIdNo =
-                    Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo",
-                                                                          "SecurityGroupIdNo"))
-                If textNewPassword.Visible Then
-                    SaveNewPassword()
+                    If PresenterObj.SaveNewPassword(textNewPassword.Text, textConfirmation.Text) > 0 Then
+                        SaveUserPasswordSetting()
+                    End If
                 End If
             Else
                 Messaging.Show(True, "MsgInvalidUserNameOrPassword", "Invalid User Name or Password.", "Login Error")
+                _cancelClose = True
+                _loginOk = False
             End If
         Catch ex As ApplicationException
             MessageBox.Show(ex.Message, "Login failed")
             _cancelClose = True
         Catch ex As Exception
             Throw ex
-
         End Try
+    End Sub
+
+    Private Sub SaveUserPasswordSetting()
+        If chkSaveUserNameAndPassword.Checked Then
+            My.Settings.UserName = textBoxUserName.Text.Trim()
+            My.Settings.Oterkis = textBoxPassword.Text
+            My.Settings.RememberPassword = True
+            My.Settings.Save()
+        Else
+            My.Settings.UserName = ""
+            My.Settings.Oterkis = ""
+            My.Settings.RememberPassword = False
+            My.Settings.Save()
+        End If
     End Sub
 
     ''' <summary>
     '''     Cancel was requested. Now closes dialog
     ''' </summary>
-    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub BtnCancel_Click(sender As Object, e As EventArgs)
         Close()
     End Sub
 

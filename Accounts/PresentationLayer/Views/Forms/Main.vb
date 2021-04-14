@@ -99,16 +99,24 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _logStatus = Value
-                Dim allControls As New List(Of Control)
-                For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-                    SetObjectSecurity(cCtrl)
-                Next
 
-                If Value = LoginStatus.LoggedIn Then
+                Dim allControls As New List(Of Control)
+                If _logStatus = LoginStatus.LoggedIn Then
+                    GlobalVariables.IsUserLoggedIn = True
+                    If GlobalVariables.UserName = $"Arnel" Then
+                        GlobalSubs.EnableAndUnHideMenu(AccountsMenu)
+                    Else
+                        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+                            SetObjectSecurityNew(cCtrl)
+                        Next
+                    End If
                     DisableLogin()
                 Else
+                    GlobalVariables.IsUserLoggedIn = False
+                    GlobalSubs.DisableAndHideMenu(AccountsMenu)
                     EnableLogin()
                 End If
+                EnableEssentials()
             End Set
         End Property
 
@@ -141,10 +149,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EnableLogin()
             ToolStripButtonLogin.Enabled = True
-            ToolStripButtonLogout.Enabled = False
             ToolStripMenuItemLogin.Enabled = True
+            ToolStripButtonLogin.Visible = True
+            ToolStripMenuItemLogin.Visible = True
+            ToolStripButtonLogout.Enabled = False
             ToolStripMenuItemLogout.Enabled = False
-            ToolStripMenuItemExit.Enabled = True
+            ToolStripButtonLogout.Visible = True
+            ToolStripMenuItemLogout.Visible = True
             SetLanguageChangeButtons()
         End Sub
 
@@ -176,7 +187,7 @@ Namespace PresentationLayer.Views.Forms
         ''' <summary>
         '''     Help menu item event handler.
         ''' </summary>
-        ''' <param name="sender"></param>
+        ''' <param name="ThenThensender"></param>
         ''' <param name="e"></param>
         Private Sub IndexToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIndex.Click
             MessageBox.Show("Help is not implemented... ", "Help")
@@ -192,30 +203,20 @@ Namespace PresentationLayer.Views.Forms
                 Try
                     If form.ShowDialog() = DialogResult.OK Then
                         If form.LoginOk Then
-                            GlobalVariables.IsUserLoggedIn = True
                             LogStatus = LoginStatus.LoggedIn
                         Else
-                            GlobalVariables.IsUserLoggedIn = False
                             LogStatus = LoginStatus.LoggedOut
-                            ToolStripButtonLogin.Enabled = True
                         End If
                     Else
-                        GlobalVariables.IsUserLoggedIn = False
                         LogStatus = LoginStatus.LoggedOut
-                        ToolStripButtonLogin.Enabled = True
                     End If
-                    ToolStripButtonExit.Enabled = True
                 Catch ex As TypeInitializationException
                     MessageBox.Show("Invalid Connection String, specified connection string doesn't exist.",
                                     "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ErrLogger.LogError(ex, True)
+                    LogStatus = LoginStatus.LoggedOut
                 Catch ex As Exception
-                    'LogStatus = LoginStatus.LoggedOut
-                    GlobalVariables.IsUserLoggedIn = True
                     LogStatus = LoginStatus.LoggedIn
-                    'GlobalVariables.IsUserLoggedIn = False
-                    'MessageBox.Show("Unsuccessful Login")
-                    'Throw ex
                 End Try
             End Using
         End Sub
@@ -226,11 +227,7 @@ Namespace PresentationLayer.Views.Forms
         ''' </summary>
         Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemLogout.Click
-            'CType(New LogoutPresenter(Nothing), LogoutPresenter).Logout()
-            'Call New LogoutPresenter(Nothing).Logout()
-            GlobalVariables.IsUserLoggedIn = False
             LogStatus = LoginStatus.LoggedOut
-            'labelAnnouncement.Visible = True
         End Sub
 
         Private Sub SetLanguageChangeButtons()
@@ -328,8 +325,20 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripButtonLogout_Click(sender As Object, e As EventArgs) Handles ToolStripButtonLogout.Click
             LogoutToolStripMenuItem_Click(Me, Nothing)
             SetLanguageChangeButtons()
+            Refresh()
+        End Sub
+
+        Private Sub EnableEssentials()
+            AccountsMenu.Enabled = True
+            AccountsMenu.Visible = True
+            ToolStrip.Enabled = True
+            ToolStrip.Visible = True
+            ToolStripButtonExit.Visible = True
+            ToolStripMenuItemFile.Visible = True
+            ToolStripMenuItemExit.Visible = True
             ToolStripButtonExit.Enabled = True
-            ToolStripButtonLogin.Enabled = True
+            ToolStripMenuItemFile.Enabled = True
+            ToolStripMenuItemExit.Enabled = True
         End Sub
 
         Private Sub ToolStripButtonLTR_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnglish.Click
@@ -419,52 +428,6 @@ Namespace PresentationLayer.Views.Forms
             RunBasicForm("Category", "Categories Maintenance Form")
         End Sub
 
-        'Public Event FormCultureChanged()
-
-        ''Enumerates login Menu: Logged In or Logged Out.
-        'Public Enum LoginStatus
-        '    LoggedIn
-        '    LoggedOut
-        'End Enum
-
-        'Public Property LogStatus As LoginStatus
-        '    Get
-        '        Return _logStatus
-        '    End Get
-        '    Set
-        '        _logStatus = Value
-        '        Dim allControls As New List(Of Control)
-        '        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-        '            SetObjectSecurity(cCtrl)
-        '        Next
-
-        '        If Value = LoginStatus.LoggedIn Then
-        '            DisableLogin()
-        '        Else
-        '            EnableLogin()
-        '        End If
-        '    End Set
-        'End Property
-
-        'Protected Property FormCultureInfo As CultureInfo
-
-        'Protected Property FormCurrentCulture As CultureInfo
-        '    Get
-        '        Return _formCurrentCulture
-        '    End Get
-        '    Set(value As CultureInfo)
-        '        _formCurrentCulture = value
-        '        If value.TextInfo.IsRightToLeft Then
-        '            RightToLeftLayout = True
-        '            RightToLeft = RightToLeft.Yes
-        '        Else
-        '            RightToLeftLayout = False
-        '            RightToLeft = RightToLeft.No
-        '        End If
-        '        RaiseEvent FormCultureChanged()
-        '    End Set
-        'End Property
-
         ''Protected Shared Property Service As New Service
 
         '''' <summary>
@@ -473,16 +436,6 @@ Namespace PresentationLayer.Views.Forms
         'Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAbout.Click
         '    Dim form = New FormAbout()
         '    form.ShowDialog()
-        'End Sub
-
-        'Private Sub BalanceSheetForAGivenYearToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemBalanceSheetForAGivenYear.Click
-        '    ShowEntryForm(BalanceSheetYearlyReport)
-        'End Sub
-
-        'Private Sub BalanceSheetToolStripMenuItem1_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemBalanceSheet.Click
-        '    ShowEntryForm(BalanceSheetMonthlyReport)
         'End Sub
 
         Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
@@ -585,9 +538,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DisableLogin()
             ToolStripButtonLogin.Enabled = False
-            ToolStripButtonLogout.Enabled = True
             ToolStripMenuItemLogin.Enabled = False
+            ToolStripButtonLogin.Visible = True
+            ToolStripMenuItemLogin.Visible = True
+            ToolStripButtonLogout.Enabled = True
             ToolStripMenuItemLogout.Enabled = True
+            ToolStripButtonLogout.Visible = True
+            ToolStripMenuItemLogout.Visible = True
             SetLanguageChangeButtons()
         End Sub
 
@@ -633,76 +590,6 @@ Namespace PresentationLayer.Views.Forms
             Dim myForm = New GeneralJournalEntry(False)
             myForm.Show()
         End Sub
-
-        'Private Sub IncomeStatementForAGivenMonthToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemIncomeStatementForAGivenMonth.Click
-        '    ShowEntryForm(IncomeStatementMonthlyReport)
-        'End Sub
-
-        'Private Sub IncomeStatementForAGivenYearToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemIncomeStatementForAGivenYear.Click
-        '    ShowEntryForm(IncomeStatementYearly)
-        'End Sub
-
-        '''' <summary>
-        ''''     Help menu item event handler.
-        '''' </summary>
-        '''' <param name="sender"></param>
-        '''' <param name="e"></param>
-        'Private Sub IndexToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemindex.Click
-        '    MessageBox.Show(" Help is not implemented... ", "Help")
-        'End Sub
-
-        '''' <summary>
-        ''''     Displays login dialog box and loads member list in treeview.
-        '''' </summary>
-        '''' <param name="sender"></param>
-        '''' <param name="e"></param>
-        'Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLogin.Click
-        '    Dim form As LoginEntry
-        '    Try
-        '        form = New LoginEntry()
-        '        If form.ShowDialog() = DialogResult.OK Then
-        '            If form.LoginOk Then
-        '                GlobalVariables.IsUserLoggedIn = True
-        '                LogStatus = LoginStatus.LoggedIn
-        '            Else
-        '                GlobalVariables.IsUserLoggedIn = False
-        '                LogStatus = LoginStatus.LoggedOut
-        '                ToolStripButtonLogin.Enabled = True
-        '            End If
-        '        Else
-        '            GlobalVariables.IsUserLoggedIn = False
-        '            LogStatus = LoginStatus.LoggedOut
-        '            ToolStripButtonLogin.Enabled = True
-        '        End If
-        '        ToolStripButtonExit.Enabled = True
-        '    Catch ex As TypeInitializationException
-        '        MessageBox.Show("Invalid Connection String, specified connection string doesn't exist.",
-        '                        "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        '        ErrLogger.LogError(ex, True)
-        '    Catch ex As Exception
-        '        'LogStatus = LoginStatus.LoggedOut
-        '        GlobalVariables.IsUserLoggedIn = True
-        '        LogStatus = LoginStatus.LoggedIn
-        '        'GlobalVariables.IsUserLoggedIn = False
-        '        'MessageBox.Show("Unsuccessful Login")
-        '        'Throw ex
-        '    End Try
-        'End Sub
-
-        ''End Sub
-        '''' <summary>
-        ''''     Logoff user, empties datagridviews, and disables menus.
-        '''' </summary>
-        'Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-        '    Handles ToolStripMenuItemLogout.Click
-        '    'CType(New LogoutPresenter(Nothing), LogoutPresenter).Logout()
-        '    'Call New LogoutPresenter(Nothing).Logout()
-        '    GlobalVariables.IsUserLoggedIn = False
-        '    LogStatus = LoginStatus.LoggedOut
-        '    'labelAnnouncement.Visible = True
-        'End Sub
 
         Private Sub MessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMessages.Click
             Dim childMdiForm As OriginalMessagesEntryTv
@@ -1516,18 +1403,13 @@ Namespace PresentationLayer.Views.Forms
                 Try
                     If form.ShowDialog() = DialogResult.OK Then
                         If form.LoginOk Then
-                            GlobalVariables.IsUserLoggedIn = True
                             LogStatus = LoginStatus.LoggedIn
                         Else
                             Messaging.Show(True, "MsgOldPasswordError")
-                            GlobalVariables.IsUserLoggedIn = False
                             LogStatus = LoginStatus.LoggedOut
-                            ToolStripButtonLogin.Enabled = True
                         End If
                     Else
-                        GlobalVariables.IsUserLoggedIn = False
                         LogStatus = LoginStatus.LoggedOut
-                        ToolStripButtonLogin.Enabled = True
                     End If
                     ToolStripButtonExit.Enabled = True
                 Catch ex As TypeInitializationException
@@ -1535,12 +1417,7 @@ Namespace PresentationLayer.Views.Forms
                                     "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ErrLogger.LogError(ex, True)
                 Catch ex As Exception
-                    'LogStatus = LoginStatus.LoggedOut
-                    GlobalVariables.IsUserLoggedIn = True
                     LogStatus = LoginStatus.LoggedIn
-                    'GlobalVariables.IsUserLoggedIn = False
-                    'MessageBox.Show("Unsuccessful Login")
-                    'Throw ex
                 End Try
             End Using
         End Sub

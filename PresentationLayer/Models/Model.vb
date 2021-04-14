@@ -376,6 +376,11 @@ Public Class Model
         Return updateResult
     End Function
 
+    Public Function GenericUpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer _
+        Implements IModel.GenericUpdateRecordWithIdNo
+        Return DataService.GenericUpdateRecordWithIdNo(idNo, tableName, fieldName, value)
+    End Function
+
     Public Function UpdateTvp(ByRef dtTable As DataTable) As Integer Implements IModel.UpdateTvp
         Return DataService.UpdateTvp(dtTable)
     End Function
