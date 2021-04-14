@@ -351,7 +351,9 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
             MyPresenter.UpdateDueDate()
             MyPresenter.UpdateEarlySettlementValues()
-            MyPresenter.SetSupplierVatNumber(VatNumber, SupplierIdNo, True)
+            If SupplierIdNo IsNot Nothing Then
+                MyPresenter.SetSupplierVatNumber(VatNumber, SupplierIdNo, True)
+            End If
         End Sub
 
         Private Sub CboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboSupplierIdNo.Validating

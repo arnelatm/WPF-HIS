@@ -31,15 +31,20 @@ Public Class LoginPresenter
         Return Model.Login(username, password)
     End Function
 
-    Public Function SavePassword(userIdNo As Int32, password As String)
+    Public Function SaveNewPassword(userIdNo As Int32, password As String, confirmation As String)
         Dim retVal As Int32 = 0
-        Dim userModel As New UserModel With {.IdNo = userIdNo,
-                                              .Password = password}
-
-        If Model.GenericUpdateRecordWithIdNo(Of String)(userIdNo, "User", "Password", password) Then
-            retVal = Messaging.Show(True, "MsgPasswordSaved", "Password saved")
+        If password = confirmation >= 6 Then
+            Messaging.Show(True, "MsgPasswordMatchError")
+        ElseIf Len(password) < 6 Then
+            Messaging.Show(True, "MsgPasswordLengthError")
         Else
-            Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
+            Dim ePassword As String
+            ePassword = EncryptPassword(userIdNo, password)
+            If Model.GenericUpdateRecordWithIdNo(Of String)(userIdNo, "User", "Password", ePassword) Then
+                retVal = Messaging.Show(True, "MsgPasswordSaved", "Password saved")
+            Else
+                Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
+            End If
         End If
         Return retVal
     End Function
