@@ -22,10 +22,10 @@ Namespace Services
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
         Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
+
         'Protected Shared ReadOnly DaoFactory As IDaoFactory = DaoFactories.GetFactory(Provider)
 
         Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
-            'Dim securityGroup As New SecurityGroup
             CreateBusinessObject(objectName, bizParam)
             CreateDao(objectName, daoParam)
         End Sub
@@ -79,6 +79,20 @@ Namespace Services
             End If
         End Sub
 
+        Public Function CreateServiceDao(daoName As String, Optional daoParam As Object = Nothing) As Object
+            Dim dao
+            If daoParam Is Nothing OrElse daoParam.Length = 0 Then
+                dao = Factory.CreateDao(daoName)
+            Else
+                dao = Factory.CreateDao(daoName, daoParam)
+            End If
+            If dao Is Nothing Then
+                MessageBox.Show("Missing Data Access Object " + daoName)
+                Debugger.Break()
+            End If
+            Return dao
+        End Function
+
         Public Property DataBo As Object
         Public Property DataDao As Object
 
@@ -106,6 +120,10 @@ Namespace Services
 
         Public Function GetBizObjectRules()
             Return DataBo.GetRules()
+        End Function
+
+        Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
+            Return BaseDao.GetField(searchValue, tableName, searchFieldName, returnFieldName)
         End Function
 
         Public Function GetBizObject()
@@ -345,89 +363,89 @@ Namespace Services
             Return BaseDao.InitializeSecurityObject()
         End Function
 
-        Private ReadOnly _hasher As New SHA1CryptoServiceProvider()
+        'Private ReadOnly _hasher As New SHA1CryptoServiceProvider()
 
-        Public Function HashEncryptString(s As String) As String
-            Dim clearBytes As Byte() = Encoding.UTF8.GetBytes(s)
-            Dim hashedBytes As Byte() = _hasher.ComputeHash(clearBytes)
-            Return Convert.ToBase64String(hashedBytes)
-        End Function
+        'Public Function HashEncryptString(s As String) As String
+        '    Dim clearBytes As Byte() = Encoding.UTF8.GetBytes(s)
+        '    Dim hashedBytes As Byte() = _hasher.ComputeHash(clearBytes)
+        '    Return Convert.ToBase64String(hashedBytes)
+        'End Function
 
-        ' ReSharper disable once UnusedMember.Global
-        Public Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
-            Dim salt As Salt
-            Dim ePassword As String = Nothing
-            Dim saltString As String
-            Dim saltDao = New SaltDao()
-            Try
+        '' ReSharper disable once UnusedMember.Global
+        'Public Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
+        '    Dim salt As Salt
+        '    Dim ePassword As String = Nothing
+        '    Dim saltString As String
+        '    Dim saltDao = New SaltDao()
+        '    Try
 
-                If userLoginIdNo = 0 Then
-                    ePassword = password
-                    'saltString = GetSalt(28)
-                    'ePassword = HashEncryptStringWithSalt(password, saltString)
-                    ' new user no Salt record yet
-                Else
-                    salt = saltDao.GetSaltByLoginIdNo(userLoginIdNo)
-                    If salt Is Nothing Then
-                        saltString = HashEncryptString(password)
-                        Dim newSalt As New Salt
-                        newSalt.Salt = saltString.PadLeft(25)
-                        newSalt.LoginIdNo = userLoginIdNo
-                        If saltDao.InsertSalt(newSalt) > 0 Then
-                            ePassword = HashEncryptStringWithSalt(password, newSalt.Salt)
-                        Else
-                            MessageBox.Show("Password was not encrypted!")
-                        End If
-                    Else
-                        'Hash the user entered password with the salt value stored in the Salt table
-                        ePassword = HashEncryptStringWithSalt(password, salt.Salt)
-                    End If
-                End If
-            Catch ex As Exception
-                MsgBox(ex.ToString)
-                Return False
-            End Try
+        '        If userLoginIdNo = 0 Then
+        '            ePassword = password
+        '            'saltString = GetSalt(28)
+        '            'ePassword = HashEncryptStringWithSalt(password, saltString)
+        '            ' new user no Salt record yet
+        '        Else
+        '            salt = saltDao.GetSaltByLoginIdNo(userLoginIdNo)
+        '            If salt Is Nothing Then
+        '                saltString = HashEncryptString(password)
+        '                Dim newSalt As New Salt
+        '                newSalt.Salt = saltString.PadLeft(25)
+        '                newSalt.LoginIdNo = userLoginIdNo
+        '                If saltDao.InsertSalt(newSalt) > 0 Then
+        '                    ePassword = HashEncryptStringWithSalt(password, newSalt.Salt)
+        '                Else
+        '                    MessageBox.Show("Password was not encrypted!")
+        '                End If
+        '            Else
+        '                'Hash the user entered password with the salt value stored in the Salt table
+        '                ePassword = HashEncryptStringWithSalt(password, salt.Salt)
+        '            End If
+        '        End If
+        '    Catch ex As Exception
+        '        MsgBox(ex.ToString)
+        '        Return False
+        '    End Try
 
-            Return ePassword
-        End Function
+        '    Return ePassword
+        'End Function
 
-        Public Function DecryptPassword(userName As String, password As String) As String
-            Dim ePassword As String = ""
-            Dim saltDao As New SaltDao()
-            If String.IsNullOrWhiteSpace(userName) Then
-                Return ""
-            End If
-            If String.IsNullOrWhiteSpace(password) Then
-                Return ""
-            End If
-            Dim nLoginIdNo As Int32
-            nLoginIdNo = DataDao.GetLoginByUserName(userName).IdNo
+        'Public Function DecryptPassword(userName As String, password As String) As String
+        '    Dim ePassword As String = ""
+        '    Dim saltDao As New SaltDao()
+        '    If String.IsNullOrWhiteSpace(userName) Then
+        '        Return ""
+        '    End If
+        '    If String.IsNullOrWhiteSpace(password) Then
+        '        Return ""
+        '    End If
+        '    Dim nLoginIdNo As Int32
+        '    nLoginIdNo = DataDao.GetLoginByUserName(userName).IdNo
 
-            If nLoginIdNo <> 0 Then
-                'Get the salt value for this username
-                Dim salt As String
+        '    If nLoginIdNo <> 0 Then
+        '        'Get the salt value for this username
+        '        Dim salt As String
 
-                Try
-                    salt = saltDao.GetSaltByLoginIdNo(nLoginIdNo).Salt
-                    'Dim SaltValue As String
-                    'SaltValue = HashEncryptString(nLoginIdNo.ToString())
-                    If Not IsDBNull(salt) Then
-                        'Hash the user entered password with the salt value stored in the Salt table
-                        ePassword = HashEncryptStringWithSalt(password, salt.ToString)
-                    End If
-                Catch ex As Exception
-                    MsgBox(ex.ToString)
-                    Return False
-                End Try
+        '        Try
+        '            salt = saltDao.GetSaltByLoginIdNo(nLoginIdNo).Salt
+        '            'Dim SaltValue As String
+        '            'SaltValue = HashEncryptString(nLoginIdNo.ToString())
+        '            If Not IsDBNull(salt) Then
+        '                'Hash the user entered password with the salt value stored in the Salt table
+        '                ePassword = HashEncryptStringWithSalt(password, salt.ToString)
+        '            End If
+        '        Catch ex As Exception
+        '            MsgBox(ex.ToString)
+        '            Return False
+        '        End Try
 
-            End If
+        '    End If
 
-            Return ePassword
-        End Function
+        '    Return ePassword
+        'End Function
 
-        Public Function HashEncryptStringWithSalt(s As String, salt As String) As String
-            Return HashEncryptString(salt + s)
-        End Function
+        'Public Function HashEncryptStringWithSalt(s As String, salt As String) As String
+        '    Return HashEncryptString(salt + s)
+        'End Function
 
 #End Region
 

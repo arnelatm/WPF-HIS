@@ -167,13 +167,13 @@ Public Module GlobalSubs
         'methodInfo.Invoke(obj, methodParameter)
     End Sub
 
-    Public Sub EnableAndUnHideMenu(ByRef obj As MenuStrip)
+    Public Sub ShowAndEnableMenuItems(ByRef obj As MenuStrip)
         obj.Enabled = True
         obj.Visible = True
         SetVisibleAndEnableOfToolStripMenuItem(True, obj.Items)
     End Sub
 
-    Public Sub DisableAndHideMenu(ByRef obj As MenuStrip)
+    Public Sub HideAndDisableMenuItems(ByRef obj As MenuStrip)
         obj.Enabled = False
         obj.Visible = False
         SetVisibleAndEnableOfToolStripMenuItem(False, obj.Items)

@@ -11,6 +11,7 @@
     [Save]
     [Undo]
     [Print]
+    [Filter]
     [Translate]
 End Enum
 

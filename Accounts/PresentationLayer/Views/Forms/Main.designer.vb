@@ -43,6 +43,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemLogin = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemLogout = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItemChangePassword = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSettings = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEdit = New System.Windows.Forms.ToolStripMenuItem()
@@ -138,6 +139,8 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemARAging = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemAPAging = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCheckPrinting = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UtilitiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemIndex = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
@@ -164,7 +167,6 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemChangePassword = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -230,7 +232,7 @@ Namespace PresentationLayer.Views.Forms
         'AccountsMenu
         '
         Me.AccountsMenu.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.AccountsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemEdit, Me.ToolStripMenuItemMasters, Me.ToolStripMenuItemTransactions, Me.ToolStripMenuItemReports, Me.ToolStripMenuItemHelp})
+        Me.AccountsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemEdit, Me.ToolStripMenuItemMasters, Me.ToolStripMenuItemTransactions, Me.ToolStripMenuItemReports, Me.UtilitiesToolStripMenuItem, Me.ToolStripMenuItemHelp})
         resources.ApplyResources(Me.AccountsMenu, "AccountsMenu")
         Me.AccountsMenu.Name = "AccountsMenu"
         '
@@ -254,6 +256,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.toolStripMenuItem1.Name = "toolStripMenuItem1"
         resources.ApplyResources(Me.toolStripMenuItem1, "toolStripMenuItem1")
+        '
+        'ToolStripMenuItemChangePassword
+        '
+        Me.ToolStripMenuItemChangePassword.Name = "ToolStripMenuItemChangePassword"
+        resources.ApplyResources(Me.ToolStripMenuItemChangePassword, "ToolStripMenuItemChangePassword")
         '
         'ToolStripMenuItemSettings
         '
@@ -744,6 +751,17 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemCheckPrinting.Name = "ToolStripMenuItemCheckPrinting"
         resources.ApplyResources(Me.ToolStripMenuItemCheckPrinting, "ToolStripMenuItemCheckPrinting")
         '
+        'UtilitiesToolStripMenuItem
+        '
+        Me.UtilitiesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemRecreateSecurityObjectMenu})
+        Me.UtilitiesToolStripMenuItem.Name = "UtilitiesToolStripMenuItem"
+        resources.ApplyResources(Me.UtilitiesToolStripMenuItem, "UtilitiesToolStripMenuItem")
+        '
+        'ToolStripMenuItemRecreateSecurityObjectMenu
+        '
+        Me.ToolStripMenuItemRecreateSecurityObjectMenu.Name = "ToolStripMenuItemRecreateSecurityObjectMenu"
+        resources.ApplyResources(Me.ToolStripMenuItemRecreateSecurityObjectMenu, "ToolStripMenuItemRecreateSecurityObjectMenu")
+        '
         'ToolStripMenuItemHelp
         '
         Me.ToolStripMenuItemHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemIndex, Me.toolStripMenuItem2, Me.ToolStripMenuItemAbout})
@@ -880,11 +898,6 @@ Namespace PresentationLayer.Views.Forms
         '
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-        '
-        'ToolStripMenuItemChangePassword
-        '
-        Me.ToolStripMenuItemChangePassword.Name = "ToolStripMenuItemChangePassword"
-        resources.ApplyResources(Me.ToolStripMenuItemChangePassword, "ToolStripMenuItemChangePassword")
         '
         'Main
         '
@@ -1045,5 +1058,7 @@ End Sub
         Friend WithEvents ToolStripMenuItemGeneratePayroll As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSettings As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemChangePassword As ToolStripMenuItem
+        Friend WithEvents UtilitiesToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemRecreateSecurityObjectMenu As ToolStripMenuItem
     End Class
 End NameSpace

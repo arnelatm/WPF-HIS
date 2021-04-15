@@ -109,7 +109,7 @@ Public Class CFormEntryTv
         End If
     End Sub
 
-    Protected Sub DisplayTreeViewData()
+    Public Sub DisplayTreeViewData()
         Dim treeViewData = PresenterObj.GetTreeViewData()
         DisplayTree(treeViewData)
         TreeViewTableName.ExpandAll()

@@ -4,7 +4,7 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
-
+Imports AutoMapper
 
 Public Class UserPresenter
     Inherits Presenter(Of IUserView, UserModel)
@@ -24,19 +24,23 @@ Public Class UserPresenter
         ParentViewList = New List(Of UserModel)
         Ea = New EventAggregator()
         Ea.SubscribeEvent(Me)
-
     End Sub
 
+    Public Function Login() As Boolean
+        Dim loginOk As Boolean
+        GlobalVariables.Mapper.Map(View, DataModel)
+        loginOk = DataModel.Login()
+        GlobalVariables.Mapper.Map(DataModel, View)
+        Return loginOk
+    End Function
+
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-        'Password = Service.Encrypt
-        Dim serviceLogin = New ServiceLogin
-        View.Password = serviceLogin.EncryptPassword(View.IdNo, View.Password)
+        View.Password = DataModel.EncryptPassword(View.IdNo, View.Password)
     End Sub
 
     Private Sub OnSuccessfulAdd(ByRef newIdNo As Int32) Handles MyBase.RecordAddedSuccessfully
-        Dim serviceLogin = New ServiceLogin
         Dim ePassword As String
-        ePassword = serviceLogin.EncryptPassword(newIdNo, View.Password)
+        ePassword = DataModel.EncryptPassword(newIdNo, View.Password)
         If ePassword IsNot Nothing Then
             View.Password = ePassword
             Dim userModel As New UserModel

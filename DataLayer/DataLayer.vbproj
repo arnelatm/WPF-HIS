@@ -77,7 +77,6 @@
     <Compile Include="AdoNet\DefaultFieldValueDao.vb" />
     <Compile Include="AdoNet\Extensions.vb" />
     <Compile Include="AdoNet\GroupAccessDao.vb" />
-    <Compile Include="AdoNet\LoginDao.vb" />
     <Compile Include="AdoNet\SaltDao.vb" />
     <Compile Include="AdoNet\SecurityGroupDao.vb" />
     <Compile Include="AdoNet\SecurityObjectDao.vb" />
@@ -89,7 +88,6 @@
     <Compile Include="IDaoFactory.vb" />
     <Compile Include="IDataDao.vb" />
     <Compile Include="IDefaultFieldValueDao.vb" />
-    <Compile Include="ILoginDao.vb" />
     <Compile Include="ISaltDao.vb" />
     <Compile Include="ITblColPropDao.vb" />
     <Compile Include="IUserDao.vb" />

@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
         ''' </summary>
         ''' <param name="view">The itemView</param>
         Public Sub New(ByVal view As IUserView)
-            MyBase.New(view)
+            'MyBase.New(view)
             ModelOfPresenter = New Model("User")
             'TableName = "User"
             'SortOrderKey = "FullName"
@@ -30,5 +30,7 @@ Namespace PresentationLayer.Presenters
             'Ea.SubscribeEvent(Me)
 
         End Sub
+
     End Class
+
 End Namespace

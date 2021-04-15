@@ -10,8 +10,8 @@ Imports AATM.ServicesLayer.Services
 Public Class Model
     Implements IModel
 
-    Private Shared ReadOnly LoginService As New ServiceLogin()
-    Private Shared ReadOnly Service As New Service()
+    'Private Shared ReadOnly LoginService As New ServiceLogin()
+    Protected Shared ReadOnly Service As New Service()
 
     Public Sub New(accountName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
         DataService = New Service(accountName, bizParam, daoParam)
@@ -90,6 +90,10 @@ Public Class Model
     Public Function GetControlSecurityIdNo(searchValue As String) As String _
         Implements IModel.GetControlSecurityIdNo
         Return Service.GetControlSecurityIdNo(searchValue)
+    End Function
+
+    Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object Implements IModel.GetField
+        Return Service.GetField(searchValue, tableName, searchFieldName, returnFieldName)
     End Function
 
     'Public Function GetFields(tableName As String, sortKey As String, ByVal ParamArray fields() As String) Implements IModel.GetFields
@@ -353,10 +357,6 @@ Public Class Model
         Return DataService.IsValid(dModel)
     End Function
 
-    Public Function Login(userName As String, password As String) As Boolean Implements IModel.Login
-        Return LoginService.Login(userName, password)
-    End Function
-
     Public Sub Logout() Implements IModel.Logout
         Throw New NotImplementedException
     End Sub
@@ -447,26 +447,5 @@ Public Class Model
         End If
         Return tlData
     End Function
-
-    Public Function EncryptPassword(userLoginIdNo As Integer, password As String) As String Implements IModel.EncryptPassword
-        Return Service.EncryptPassword(userLoginIdNo, password)
-    End Function
-
-    'Public Function IsValid(dataModel As Object) As Boolean Implements IModel.IsValid
-    '    Throw New NotImplementedException()
-    'End Function
-
-    'Private Function IModel_GetBizObjectErrors() As IEnumerable(Of Object) Implements IModel.GetBizObjectErrors
-    '    Return DataService.GetBizObjectErrors()
-    'End Function
-
-End Class
-
-Public Class ModelLogin
-    Inherits Model
-
-    Public Sub New()
-        DataService = New ServiceLogin
-    End Sub
 
 End Class

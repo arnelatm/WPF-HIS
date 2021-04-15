@@ -303,7 +303,7 @@ Namespace AdoNet
 
         Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetIdNoOfSortedPositionNumber
             Dim filterKey As String
-            If filter Is Nothing Then
+            If filter Is Nothing Or filter = "" Then
                 filterKey = ""
             Else
                 filterKey = " where " & filter
