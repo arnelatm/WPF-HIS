@@ -93,7 +93,6 @@
     <Compile Include="Services\IRepositories.vb" />
     <Compile Include="Services\IService.vb" />
     <Compile Include="Services\ITblColPropService.vb" />
-    <Compile Include="Services\ServiceLogin.vb" />
     <Compile Include="Services\Service.vb" />
     <Compile Include="Services\TblColPropService.vb" />
   </ItemGroup>
@@ -136,6 +135,10 @@
     <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
       <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+      <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
+      <Name>MessagingLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

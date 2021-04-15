@@ -2,6 +2,7 @@
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
+Imports AATM.PresentationLayer.Views.Interfaces
 
 ''' <summary>
 '''     Login Presenter class.
@@ -10,16 +11,16 @@ Imports AATM.PresentationLayer.Views
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
 Public Class LoginPresenter
-    Inherits Presenter(Of ILoginView, LoginModel)
+
+    Protected Property ModelLogin As IModelLogin
 
     ''' <summary>
     '''     Constructor.
     ''' </summary>
     ''' <param name="view">The view</param>
-    Public Sub New(ByVal view As ILoginView)
-        MyBase.New(view)
-        ModelOfPresenter = New ModelLogin
-        DataModel = New LoginModel
+    Public Sub New(ByVal view As IUserView)
+        Me.View = view
+        ModelLogin = New UserModel
     End Sub
 
     ''' <summary>
@@ -28,8 +29,10 @@ Public Class LoginPresenter
     Function Login()
         Dim username As String = View.UserName
         Dim password As String = View.Password
-        Return Model.Login(username, password)
+        Return ModelLogin.Login(username, password)
     End Function
+
+    Public Property View As IUserView
 
     Public Function SaveNewPassword(userIdNo As Int32, password As String, confirmation As String)
         Dim retVal As Int32 = 0
@@ -38,20 +41,9 @@ Public Class LoginPresenter
         ElseIf Len(password) < 6 Then
             Messaging.Show(True, "MsgPasswordLengthError")
         Else
-            Dim ePassword As String
-            ePassword = EncryptPassword(userIdNo, password)
-            If Model.GenericUpdateRecordWithIdNo(Of String)(userIdNo, "User", "Password", ePassword) Then
-                retVal = Messaging.Show(True, "MsgPasswordSaved", "Password saved")
-            Else
-                Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")
-            End If
+            retVal = ModelLogin.SavePassword(userIdNo, password)
         End If
         Return retVal
     End Function
-
-    Public Sub EnableEdit()
-        DisableSaveMemento = True
-        EditMode = True
-    End Sub
 
 End Class

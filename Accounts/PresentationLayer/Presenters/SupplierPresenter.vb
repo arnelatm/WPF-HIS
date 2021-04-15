@@ -46,6 +46,16 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Overrides Sub GoFilter()
+            If DataFilter Is Nothing Or DataFilter = "" Then
+                DataFilter = "Active = 1"
+            Else
+                DataFilter = ""
+            End If
+            CallByName(View, "DisplayTreeViewData", CallType.Method)
+            GoFirstRecord()
+        End Sub
+
     End Class
 
 End Namespace

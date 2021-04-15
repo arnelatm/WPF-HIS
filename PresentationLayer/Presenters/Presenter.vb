@@ -887,6 +887,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         'frm.Show()
     End Sub
 
+    Public Overridable Sub GoFilter()
+    End Sub
+
     Public Sub GoUndoChanges()
         If OkToMove() Then
             UndoMode = True
@@ -993,6 +996,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 GoQuit()
             Case ButtonClicked.Translate
                 GoTranslate()
+            Case ButtonClicked.Filter
+                GoFilter()
         End Select
     End Sub
 
@@ -1468,43 +1473,5 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private Sub UpdateErrors(ByRef dataDictionary As Dictionary(Of String, Object))
 
     End Sub
-
-    Public Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
-        Return Model.EncryptPassword(userLoginIdNo, password)
-        'Dim salt As Salt
-        'Dim ePassword As String = Nothing
-        'Dim saltString As String
-        'Dim saltDao = New SaltDao()
-        'Try
-
-        '    If userLoginIdNo = 0 Then
-        '        ePassword = password
-        '        'saltString = GetSalt(28)
-        '        'ePassword = HashEncryptStringWithSalt(password, saltString)
-        '        ' new user no Salt record yet
-        '    Else
-        '        salt = saltDao.GetSaltByLoginIdNo(userLoginIdNo)
-        '        If salt Is Nothing Then
-        '            saltString = HashEncryptString(password)
-        '            Dim newSalt As New Salt
-        '            newSalt.Salt = saltString.PadLeft(25)
-        '            newSalt.LoginIdNo = userLoginIdNo
-        '            If saltDao.InsertSalt(newSalt) > 0 Then
-        '                ePassword = HashEncryptStringWithSalt(password, newSalt.Salt)
-        '            Else
-        '                MessageBox.Show("Password was not encrypted!")
-        '            End If
-        '        Else
-        '            'Hash the user entered password with the salt value stored in the Salt table
-        '            ePassword = HashEncryptStringWithSalt(password, salt.Salt)
-        '        End If
-        '    End If
-        'Catch ex As Exception
-        '    MsgBox(ex.ToString)
-        '    Return False
-        'End Try
-
-        'Return ePassword
-    End Function
 
 End Class

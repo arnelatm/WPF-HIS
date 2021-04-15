@@ -1,23 +1,29 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Views.Interfaces
 
 Public Class LoginEntry
-    Implements ILoginView
+    Implements IUserView
 
     Private ReadOnly _cancelLogin As Boolean
 
-    'Private ReadOnly _loginPresenter As LoginPresenter
+    'Private ReadOnly _loginPresenter As MyPresenter
 
     Private _cancelClose As Boolean
-    Private _rememberPassword As Boolean = False
-    Private _changingPassword As Boolean = False
+    Private ReadOnly _rememberPassword As Boolean = False
+    Private ReadOnly _changingPassword As Boolean = False
+    Private _oterkis As String
 
     ' The Presenter
     Private _loginOk As Boolean
+
+    Private ReadOnly _myPresenter
 
     Public Sub New(changePassword As Boolean)
 
@@ -31,18 +37,19 @@ Public Class LoginEntry
         _cancelLogin = False
         AddHandler FormClosing, AddressOf FormLogin_Closing
         textBoxUserName.Text = $"Arnel" 'Environment.UserName
-        Dim userName = My.Settings.UserName
-        Dim password = My.Settings.Oterkis
+
+        UserName = My.Settings.UserName
+        Password = My.Settings.Oterkis
+
         _rememberPassword = My.Settings.RememberPassword
-        If userName IsNot Nothing Then
-            If password IsNot Nothing Then
-                textBoxPassword.Text = password
+        If UserName IsNot Nothing Then
+            If Password IsNot Nothing Then
+                textBoxPassword.Text = Password
             End If
-            textBoxUserName.Text = userName
+            textBoxUserName.Text = UserName
         End If
         chkSaveUserNameAndPassword.Checked = _rememberPassword
-        'Dim model = New LoginModel
-        PresenterObj = New LoginPresenter(Me)
+        _myPresenter = New UserPresenter(Me)
         If _changingPassword Then
             textNewPassword.Visible = True
             textConfirmation.Visible = True
@@ -65,28 +72,38 @@ Public Class LoginEntry
 
     End Sub
 
-    Public Property MainTableName As String = "Login"
+    Public Property MainTableName As String = "User"
 
     ''' <summary>
     '''     Gets the password.
     ''' </summary>
-    Public ReadOnly Property Password As String Implements ILoginView.Password
+    Public Property Password As String Implements IUserView.Password
         Get
             Return textBoxPassword.Text.Trim()
         End Get
+        Set(value As String)
+            textBoxPassword.Text = value
+        End Set
     End Property
 
-    Public ReadOnly Property UserName As String Implements ILoginView.UserName
+    Public Property UserName As String Implements IUserView.UserName
         Get
             Return textBoxUserName.Text.Trim()
         End Get
+        Set(value As String)
+            textBoxUserName.Text = value
+        End Set
     End Property
 
-    Public ReadOnly Property IdNo As Int32 Implements ILoginView.IdNo
-        Get
-            Return 0
-        End Get
-    End Property
+    Public Property IdNo As Int32 Implements IUserView.IdNo
+
+    Public Property FullName As String Implements IUserView.FullName
+
+    Public Property FullNameAra As String Implements IUserView.FullNameAra
+
+    Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
+
+    Public Property SecurityGroupIdNo As Short Implements IUserView.SecurityGroupIdNo
 
     Public Function LoginOk()
         Return _loginOk
@@ -97,18 +114,19 @@ Public Class LoginEntry
     ''' </summary>
     Private Sub Btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
         Try
-            If PresenterObj.Login() Then
+            _oterkis = textBoxPassword.Text
+            If _myPresenter.Login() Then
                 _loginOk = True
                 If Not _changingPassword Then
                     AfterSuccessfulLogin()
                 Else
-                    If PresenterObj.SaveNewPassword(GlobalVariables.UserIdNo, textNewPassword.Text, textConfirmation.Text) > 0 Then
+                    If _myPresenter.SaveNewPassword(GlobalVariables.UserIdNo, textNewPassword.Text, textConfirmation.Text) > 0 Then
                         textBoxPassword = textNewPassword
                         AfterSuccessfulLogin()
                     End If
                 End If
             Else
-                Messaging.Show(True, "MsgInvalidUserNameOrPassword", "Invalid User Name or Password.", "Login Error")
+                Messaging.Show(True, "MsgInvalidUserNameOrPassword")
                 _cancelClose = True
                 _loginOk = False
             End If
@@ -122,15 +140,15 @@ Public Class LoginEntry
 
     Private Sub AfterSuccessfulLogin()
         SaveUserPasswordSetting()
-        GlobalVariables.UserName = textBoxUserName.Text.Trim()
-        GlobalVariables.UserIdNo = Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(), "User", "UserName", "IdNo"))
-        GlobalVariables.SecurityGroupIdNo = Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo", "SecurityGroupIdNo"))
+        GlobalVariables.UserName = UserName
+        GlobalVariables.UserIdNo = IdNo
+        GlobalVariables.SecurityGroupIdNo = SecurityGroupIdNo
     End Sub
 
     Private Sub SaveUserPasswordSetting()
         If chkSaveUserNameAndPassword.Checked Then
             My.Settings.UserName = textBoxUserName.Text.Trim()
-            My.Settings.Oterkis = textBoxPassword.Text
+            My.Settings.Oterkis = _oterkis
             My.Settings.RememberPassword = True
             My.Settings.Save()
         Else
@@ -173,7 +191,7 @@ Public Class LoginEntry
         _textNewPassword.DisplayOnly = False
         _textConfirmation.DisplayOnly = False
         'Me.Show()
-        'LoginPresenter.Display()
+        'MyPresenter.Display()
     End Sub
 
     Private Sub FormLogin_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown

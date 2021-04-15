@@ -773,6 +773,10 @@ Public Class CFormEntry
         RunButtonRoutine(ButtonClicked.Undo)
     End Sub
 
+    Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        RunButtonRoutine(ButtonClicked.Filter)
+    End Sub
+
     Private Sub CFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         If CancelClose Then
             e.Cancel = True
@@ -1004,7 +1008,7 @@ Public Class CFormEntry
             TableProperties = PresenterObj.TableProperties
             For Each cCtrl As Control In FindControlRecursive(allControls, Me)
                 SetControlDynamicProperties(cCtrl)
-                SetObjectSecurity(cCtrl)
+                SetObjectSecurityNew(cCtrl)
             Next
         End If
     End Sub
@@ -1139,6 +1143,10 @@ Public Class CFormEntry
     End Function
 
     Public Property HideNavigatorButtons As Boolean
+
+    Public Overridable Sub ActiveToolStripButton_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+
+    End Sub
 
     'Public Function ValidateDataBoundGrid(Of TV As New, TM As New)(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing)
     '    Dim errorFound As Boolean = False

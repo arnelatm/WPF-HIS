@@ -26,12 +26,6 @@ Namespace AdoNet
             End Get
         End Property
 
-        Private ReadOnly Property IDaoFactory_LoginDao As ILoginDao Implements IDaoFactory.LoginDao
-            Get
-                Return New LoginDao()
-            End Get
-        End Property
-
         Public ReadOnly Property SaltDao As ISaltDao Implements IDaoFactory.SaltDao
             Get
                 Return New SaltDao()

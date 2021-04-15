@@ -79,6 +79,7 @@ Public Interface IModel
     Function GetRecordPosition(tableName As String, dno As Integer) As Integer
 
     Function GetRecords(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As Object
+    Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 
     'Function GetRecordsByField(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
 
@@ -98,8 +99,6 @@ Public Interface IModel
 
     Function IsValid(Of TM)(ByRef dModel As TM) As Object
 
-    Function Login(userName As String, password As String) As Boolean
-
     Function UpdateRecord(Of TM)(ByRef modelBiz As TM) As Integer
 
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
@@ -111,6 +110,8 @@ Public Interface IModel
     Function AddSecurityObject(securityObject As Object) As Integer
 
     Function InitializeSecurityObject() As Integer
-    Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
+
+    'Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
     Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) As Integer
+
 End Interface
