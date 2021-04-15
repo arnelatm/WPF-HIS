@@ -100,17 +100,11 @@ Public Class LoginEntry
             If PresenterObj.Login() Then
                 _loginOk = True
                 If Not _changingPassword Then
-                    SaveUserPasswordSetting()
-                    GlobalVariables.UserName = textBoxUserName.Text.Trim()
-                    GlobalVariables.UserIdNo = Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),"User", "UserName", "IdNo"))
-                    GlobalVariables.SecurityGroupIdNo =
-                        Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo",
-                                                                              "SecurityGroupIdNo"))
+                    AfterSuccessfulLogin()
                 Else
-                    Dim userIdNo as Int32 
-                    userIdNo = Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(),"User", "UserName", "IdNo"))
                     If PresenterObj.SaveNewPassword(GlobalVariables.UserIdNo, textNewPassword.Text, textConfirmation.Text) > 0 Then
-                        SaveUserPasswordSetting()
+                        textBoxPassword = textNewPassword
+                        AfterSuccessfulLogin()
                     End If
                 End If
             Else
@@ -124,6 +118,13 @@ Public Class LoginEntry
         Catch ex As Exception
             Throw ex
         End Try
+    End Sub
+
+    Private Sub AfterSuccessfulLogin()
+        SaveUserPasswordSetting()
+        GlobalVariables.UserName = textBoxUserName.Text.Trim()
+        GlobalVariables.UserIdNo = Convert.ToInt32(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(), "User", "UserName", "IdNo"))
+        GlobalVariables.SecurityGroupIdNo = Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(GlobalVariables.UserIdNo, "User", "IdNo", "SecurityGroupIdNo"))
     End Sub
 
     Private Sub SaveUserPasswordSetting()
