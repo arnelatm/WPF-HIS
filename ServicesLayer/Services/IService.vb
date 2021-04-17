@@ -20,11 +20,11 @@ Namespace Services
 
         Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer
 
-        Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
+        Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer
 
         Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
 
-        Function FindFieldContinue(tableName As String, idNo As Int32) As Integer
+        Function FindFieldContinue(tableName As String, idNo As Int32, sortOrderKey As String) As Integer
 
         Function GetAll(ByRef Optional sortKey As String = Nothing) As Object
 
@@ -95,7 +95,9 @@ Namespace Services
         Function AddSecurityObject(securityObjectName As SecurityObject) As Integer
 
         Function InitializeSecurityObject() As Integer
+
         Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) As Integer
+
     End Interface
 
 End Namespace

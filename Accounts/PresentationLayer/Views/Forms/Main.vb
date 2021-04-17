@@ -85,9 +85,8 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _logStatus = Value
-
-                Dim allControls As New List(Of Control)
                 If _logStatus = LoginStatus.LoggedIn Then
+                    Dim allControls As New List(Of Control)
                     GlobalVariables.IsUserLoggedIn = True
                     If GlobalVariables.UserName.ToLower() = $"arnel" Then
                         GlobalSubs.ShowAndEnableMenuItems(AccountsMenu)
@@ -840,6 +839,12 @@ Namespace PresentationLayer.Views.Forms
             Else
                 ToolStripMenuItemPayGroups.Visible = False
             End If
+            ' Add any initialization after the InitializeComponent() call.
+            Dim mySettings = AppSettings.Load()
+            GlobalVariables.TranslationMode = mySettings.TranslationInitializer
+
+            '_appSettings = PropertyGrid.SelectedObject
+            ' Attribute for the user-scope settings.
 
         End Sub
 
@@ -956,7 +961,7 @@ Namespace PresentationLayer.Views.Forms
         Private Function AddSecurityObject(Of T)(ByRef obj As T, ByRef subMenuName As String, ByVal parentIdNo As Int32, loc As Int16) As Int32
             Dim toolStripMenuItem As T = obj
             Dim objName = CallByName(obj, "Name", CallType.Get)
-            Dim securityObject As New SecurityObject With {.SecurityObjectName = subMenuName & " > " & objName.SubString(loc),
+            Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
                     .SystemViewIdNo = VSystemViewIdNo,
                     .ParentIdNo = parentIdNo}
             parentIdNo = PresenterObj.AddSecurityObject(securityObject)

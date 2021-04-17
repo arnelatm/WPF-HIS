@@ -20,11 +20,11 @@ Public Interface IModel
 
     Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer
 
-    Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
+    Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer
 
     Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
 
-    Function FindFieldContinue(tableName As String, idNo As Int32) As Integer
+    Function FindFieldContinue(tableName As String, idNo As Int32, sortOrderKey As String) As Integer
 
     Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM)
 
@@ -79,6 +79,7 @@ Public Interface IModel
     Function GetRecordPosition(tableName As String, dno As Integer) As Integer
 
     Function GetRecords(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As Object
+
     Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 
     'Function GetRecordsByField(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object

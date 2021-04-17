@@ -866,6 +866,16 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
+            PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", True)
+            bsAccountReconciliationItems.ResetBindings(False)
+        End Sub
+
+        Private Sub btnUnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnUnClearAll.ClickButtonArea
+            PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", False)
+            bsAccountReconciliationItems.ResetBindings(False)
+        End Sub
+
         'Private Function GetLastRowIndex(radGridView1 As DataGridView) As Integer
         '    'Dim rowHeight = radGridView1.TableElement.RowHeight
         '    'Dim scrollPos = radGridView1.TableElement.RowScroller.Scrollbar.Value
