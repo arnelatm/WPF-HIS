@@ -93,7 +93,7 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub PostReconciliation(ByVal idNo As Int32, ByVal accountReconciliationItems As List(Of AccountReconciliationItemModel))
+        Public Sub PostReconciliation(ByVal idNo As Int32, ByVal accountReconciliationItems As List(Of AccountReconciliationItemView))
             Try
                 Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                     Dim dtInsertReconciledTable As New DataTable
@@ -111,7 +111,7 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                     SaveReconciliation(dtInsertReconciledTable, idNo)
-                    DataModel.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
+                    Model.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
                     scope.Complete()
                 End Using
             Catch ex As TransactionAbortedException
