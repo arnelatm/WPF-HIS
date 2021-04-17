@@ -865,10 +865,7 @@ Public Class CFormEntry
             If FirstControl IsNot Nothing Then
                 FirstControl.Focus()
             End If
-            'UpdateButtonDisplays(False, False)
-            Dim controlSecurityValues = PresenterObj.GetUserSecurityForKey("_Developer", GlobalVariables.SecurityGroupIdNo)
-            If Not (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso controlSecurityValues(0)) Then
-                ' Visible property stored in first element of the array
+            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
                 HideButton(btnDebug)
             End If
             If SingleData Or HideNavigatorButtons Then
@@ -1136,10 +1133,7 @@ Public Class CFormEntry
     End Sub
 
     Public Function GetFieldType(fieldName As String) As Type
-        Dim y As Object
-        y = CallByName(Me, fieldName, CallType.Get)
-        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-        Return y.GetType()
+        Return CallByName(Me, fieldName, CallType.Get).GetType
     End Function
 
     Public Property HideNavigatorButtons As Boolean

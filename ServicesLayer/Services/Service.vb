@@ -267,16 +267,16 @@ Namespace Services
             Return BaseDao.FindField(tableName, fieldName, searchString, searchPlace, filter)
         End Function
 
-        Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IService.FindFieldNew
-            Return BaseDao.FindFieldNew(tableName, findableControl, filter)
+        Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer Implements IService.FindFieldNew
+            Return BaseDao.FindFieldNew(tableName, findableControl, sortOrderKey, filter)
         End Function
 
         Public Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IService.FindDateField
             Return BaseDao.FindDateField(tableName, findableControl, filter)
         End Function
 
-        Public Function FindFieldContinue(tableName As String, idNo As Int32) As Integer Implements IService.FindFieldContinue
-            Return BaseDao.FindFieldContinue(tableName, idNo)
+        Public Function FindFieldContinue(tableName As String, idNo As Int32, sortOrderKey As String) As Integer Implements IService.FindFieldContinue
+            Return BaseDao.FindFieldContinue(tableName, idNo, sortOrderKey)
         End Function
 
         Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IService.GetFieldWithIdNo

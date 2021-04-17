@@ -17,11 +17,11 @@ Public Interface IBaseDao
 
     Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchPlace As Char = "A", Optional filter As String = Nothing) As Integer
 
-    Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
+    Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer
 
-    Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
+    Function FindDateField(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer
 
-    Function FindFieldContinue(tableName As String, lastIdNo As Int32) As Object
+    Function FindFieldContinue(tableName As String, lastIdNo As Int32, sortOrderKey As String) As Object
 
     Function GetControlSecurityIdNo(searchValue As String) As String
 

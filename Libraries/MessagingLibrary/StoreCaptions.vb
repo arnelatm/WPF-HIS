@@ -1,4 +1,6 @@
-﻿Public Class StoreCaptions
+﻿Imports AATM.Libraries.GlobalFuncNSub
+
+Public Class StoreCaptions
     Inherits System.ComponentModel.Component
 
     ' Generated form code omitted, except for the following overloaded
@@ -27,8 +29,7 @@
         frm.Tag = frm.Text
         InsertForm(frm.ViewDisplayName)
         SystemViewIdNo = GetSystemViewIdNo(frm.ViewDisplayName)
-        InsertWord(frm.Text)
-        InsertFormItem(SystemViewIdNo, frm.Text)
+        InsertTranslation(frm.Text, SystemViewIdNo)
         Dim t As String
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
@@ -76,8 +77,7 @@
                         If Not String.IsNullOrWhiteSpace(t) Then
                             cCtrl.Tag = t
                             Captions.Add(cCtrl.Text, cCtrl.Name)
-                            InsertWord(t)
-                            InsertFormItem(SystemViewIdNo, t)
+                            InsertTranslation(t, SystemViewIdNo)
                         End If
                     End If
                 Catch ex As Exception
@@ -96,8 +96,7 @@
             If Not String.IsNullOrEmpty(obj.Text) Then
                 t = obj.Text
                 Captions.Add(t, c.Name + "." + obj.Name + ".Text")
-                InsertWord(t)
-                InsertFormItem(SystemViewIdNo, t)
+                InsertTranslation(t, SystemViewIdNo)
             Else
                 ' add an empty place holder
                 Captions.Add("", c.Name + "." + obj.Name + ".Text")
@@ -105,8 +104,7 @@
             If Not String.IsNullOrEmpty(obj.ToolTipText) Then
                 t = obj.ToolTipText
                 Captions.Add(t, c.Name + "." + obj.Name + ".ToolTipText")
-                InsertWord(t)
-                InsertFormItem(SystemViewIdNo, t)
+                InsertTranslation(t, SystemViewIdNo)
             Else
                 Captions.Add("", c.Name + "." + obj.Name + ".ToolTipText")
             End If
@@ -121,8 +119,7 @@
             For Each col As DataGridViewColumn In c.Columns
                 t = col.HeaderText
                 Captions.Add(t, c.Name + "." + col.HeaderText)
-                InsertWord(t)
-                InsertFormItem(SystemViewIdNo, t)
+                InsertTranslation(t, SystemViewIdNo)
             Next
         Catch ex As Exception
 
@@ -141,8 +138,7 @@
                     subMenuName = subMenuName + "." + obj.Name
                     If Not String.IsNullOrEmpty(obj.Text) Then
                         Captions.Add(obj.text, subMenuName)
-                        InsertWord(obj.Text)
-                        InsertFormItem(SystemViewIdNo, obj.Text)
+                        InsertTranslation(obj.Text, SystemViewIdNo)
                         obj.Tag = obj.Text
                     End If
                     If subMenu.HasDropDownItems Then
@@ -188,15 +184,22 @@
         End If
     End Sub
 
-    Friend Sub InsertFormItem(ByVal SystemViewIdNo As Int16, ByVal item As String)
+    Public Sub InsertTranslation(ByVal text As String, ByVal systemViewIdNo As Int16)
+        If GlobalVariables.TranslationMode Then
+            InsertWord(text)
+            InsertFormItem(systemViewIdNo, text)
+        End If
+    End Sub
+
+    Friend Sub InsertFormItem(ByVal systemViewIdNo As Int16, ByVal item As String)
         Dim cmd As String
         Dim captionIdNo As Int32
         cmd = "Select IdNo From OriginalCaptions where Caption = '" + item.ToString().TrimEnd() + "'"
         captionIdNo = _dAc1.ExecScalar(Of Int32)(cmd)
-        cmd = "SELECT COUNT(*) FROM SystemViewItem where CaptionIdNo = " + captionIdNo.ToString() + " and SystemViewIdNo = " + SystemViewIdNo.ToString()
+        cmd = "SELECT COUNT(*) FROM SystemViewItem where CaptionIdNo = " + captionIdNo.ToString() + " and SystemViewIdNo = " + systemViewIdNo.ToString()
         Dim howMany As Integer = _dAc1.ExecScalar(Of Int16)(cmd)
         If howMany = 0 Then
-            cmd = "INSERT INTO SystemViewItem (SystemViewIdNo, CaptionIdNO) values ( " + SystemViewIdNo.ToString() + "," + captionIdNo.ToString() + ")"
+            cmd = "INSERT INTO SystemViewItem (SystemViewIdNo, CaptionIdNO) values ( " + systemViewIdNo.ToString() + "," + captionIdNo.ToString() + ")"
             _dAc1.ExecCmd(cmd)
         End If
     End Sub

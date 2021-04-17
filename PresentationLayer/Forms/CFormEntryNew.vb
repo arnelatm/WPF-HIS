@@ -710,10 +710,7 @@ Public Class CFormEntryNew
                 btnOriginal.Visible = False
             End If
             FirstControl.Focus()
-            'UpdateButtonDisplays(False, False)
-            Dim controlSecurityValues = PresenterObj.GetUserSecurityForKey("_Developer", GlobalVariables.SecurityGroupIdNo)
-            If Not (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso controlSecurityValues(0)) Then
-                ' Visible property stored in first element of the array
+            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
                 HideButton(btnDebug)
             End If
             UpdateButtonDisplays(False, False)

@@ -205,6 +205,8 @@ Public Class GlobalVariables
 
 #End Region
 
+    Public Property TranslateMode As Boolean = False
+
     Public Shared Property Mapper As AutoMapper.Mapper
 
     Public Shared Property DacConnectionString As String
@@ -682,6 +684,8 @@ Public Class GlobalVariables
             _defaultNumberFormatInfo = Value
         End Set
     End Property
+
+    Public Shared Property TranslationMode As Boolean = False
 
     'Private Shared Sub GetAppCultureInfo()
     '    If _AppLanguage = "" Then

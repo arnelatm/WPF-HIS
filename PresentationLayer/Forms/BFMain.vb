@@ -201,10 +201,14 @@ Public Class BfMain
             RightToLeftLayout = False
             RightToLeft = RightToLeft.No
         End If
-        TranslateCaptions(TextDisplayLanguage)
+        If GlobalVariables.TranslationMode Then
+            TranslateCaptions(TextDisplayLanguage)
+        End If
         BackgroundImage = myImage
         ResumeLayout()
-        RaiseEvent AfterTranslateForm()
+        If GlobalVariables.TranslationMode Then
+            RaiseEvent AfterTranslateForm()
+        End If
 
     End Sub
 
@@ -572,14 +576,16 @@ Public Class BfMain
             DoubleBuffered = True
             Dim cmd As String
             RaiseEvent BeforeLoad()
-            CaptionCollection = StoreCaptions1.StoreCaptions(Me)
-            DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
-            If ViewDisplayName Is Nothing Then
-                ViewDisplayName = Name
+            If GlobalVariables.TranslationMode Then
+                CaptionCollection = StoreCaptions1.StoreCaptions(Me)
+                DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
+                If ViewDisplayName Is Nothing Then
+                    ViewDisplayName = Name
+                End If
+                cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
+                VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
+                TranslateForm()
             End If
-            cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
-            VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
-            TranslateForm()
         End If
     End Sub
 

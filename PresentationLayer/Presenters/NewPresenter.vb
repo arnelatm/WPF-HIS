@@ -370,7 +370,7 @@ Public MustInherit Class NewPresenter(Of T As IView, TM As New)
     End Sub
 
     Public Function FindFieldContinue(idNo As Int32) As Integer
-        Return Model.FindFieldContinue(TableName, idNo)
+        Return Model.FindFieldContinue(TableName, idNo, SortOrderKey)
     End Function
 
     Public Function FindRecord() As Integer

@@ -4,7 +4,7 @@ Imports System.ComponentModel
 
 Public Class SetSettings
 
-    Private _appSettings As New AppSettings()
+    Private ReadOnly _appSettings As New AppSettings()
 
     Public Sub New()
 
@@ -44,6 +44,20 @@ Public Class AppSettings
         End Set
     End Property
 
+    Private _translationInitializer As Boolean
+
+    <TypeConverter(GetType(TranslateInitializerMode)),
+        CategoryAttribute("General Settings"), DefaultValueAttribute(False),
+        DescriptionAttribute("Select a setting from the list")>
+    Public Property TranslationInitializer() As Boolean
+        Get
+            Return _translationInitializer
+        End Get
+        Set(ByVal Value As Boolean)
+            _translationInitializer = Value
+        End Set
+    End Property
+
     Public Shared Function Load() As AppSettings
         Dim serializer As XmlSerializer = New XmlSerializer(GetType(AppSettings))
         Dim retVal As AppSettings
@@ -64,8 +78,8 @@ Public Class AppSettings
 #Disable Warning BC42104 ' Variable is used before it has been assigned a value
             retVal = serializer.Deserialize(textReader:=reader)
 #Enable Warning BC42104 ' Variable is used before it has been assigned a value
+            reader.Close()
         End If
-        reader.Close()
         Return retVal
     End Function
 
@@ -105,10 +119,29 @@ End Class
 Public Class DeductionComputationRule : Inherits System.ComponentModel.StringConverter
 
     '''
-    Dim _deductionRule As String() = New String() {"Use 30 days per month", "User No. of days in a month", "Use 26 days per month"}
+    ReadOnly _deductionRule As String() = New String() {"Use 30 days per month", "Use No. of days in a month", "Use 26 days per month"}
 
     Public Overloads Overrides Function GetStandardValues(ByVal context As ITypeDescriptorContext) As StandardValuesCollection
         Return New StandardValuesCollection(_deductionRule)
+    End Function
+
+    Public Overloads Overrides Function GetStandardValuesSupported(ByVal context As ITypeDescriptorContext) As Boolean
+        Return True
+    End Function
+
+    Public Overloads Overrides Function GetStandardValuesExclusive(ByVal context As ITypeDescriptorContext) As Boolean
+        Return True
+    End Function
+
+End Class
+
+Public Class TranslateInitializerMode : Inherits System.ComponentModel.BooleanConverter
+
+    '''
+    ReadOnly _translationInitializer As Boolean() = New Boolean() {True, False}
+
+    Public Overloads Overrides Function GetStandardValues(ByVal context As ITypeDescriptorContext) As StandardValuesCollection
+        Return New StandardValuesCollection(_translationInitializer)
     End Function
 
     Public Overloads Overrides Function GetStandardValuesSupported(ByVal context As ITypeDescriptorContext) As Boolean

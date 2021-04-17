@@ -292,6 +292,7 @@ Public Class CaComboBox
 #Region "Event Handlers"
 
     Private _previousIndex As Integer
+    Private _findDataType As IFindableControl.DataTypeEnum
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         If EditingMode And Not DisplayOnly Then
@@ -805,10 +806,13 @@ Public Class CaComboBox
 
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
         Get
-            Return IFindableControl.DataTypeEnum.String
+            Dim myForm = FindForm()
+            Dim cFieldName = Name.Substring(3)
+            Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {cFieldName})
+            Return GetObjectDataType(x)
         End Get
-        Set(value As IFindableControl.DataTypeEnum)
-
+        set(value As IFindableControl.DataTypeEnum)
+            _findDataType = value
         End Set
     End Property
 

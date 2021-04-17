@@ -204,6 +204,12 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Public Sub ProcessRows(accountReconciliationItems As List(Of AccountReconciliationItemView), propertyName As String, value As Boolean)
+            For Each accountReconciliationItem In accountReconciliationItems
+                CallByName(accountReconciliationItem, propertyName, CallType.Set, {value})
+            Next
+        End Sub
+
     End Class
 
 End Namespace

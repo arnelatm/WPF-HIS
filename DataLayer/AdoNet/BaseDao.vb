@@ -2,6 +2,7 @@
 Imports System.Globalization
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace AdoNet
 
@@ -12,6 +13,7 @@ Namespace AdoNet
 
         Private _lastFindParms As Object
         Private _lastFindQuery As String
+        Private _withParams As Boolean
 
         Public Sub New()
         End Sub
@@ -90,72 +92,69 @@ Namespace AdoNet
             Return retVal
         End Function
 
-        Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindFieldNew
+        Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindFieldNew
             Dim retVal As Integer
             Dim sql As String = " SELECT IdNo FROM [" & tableName & "] " & " Where "
+            Dim params As String() = Nothing
             Dim searchString As String
-
-            If Not (filter Is Nothing OrElse filter = "") Then
-                sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
-            End If
             If findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
                 If findableControl.BegFindValue Is Nothing OrElse findableControl.BegFindValue = "" Then
                     sql &= " (" & findableControl.FieldName & " Is Null or " & findableControl.FieldName & " = '') "
-                    retVal = _db.Scalar(sql & " order by IdNo ")
                 Else
+                    If Not (filter Is Nothing OrElse filter = "") Then
+                        sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
+                    End If
                     sql &= findableControl.FieldName.Trim()
                     If findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                         searchString = "%" & RTrim(findableControl.BegFindValue) + "%"
-                        sql &= " Like @searchString"
+                        sql &= " Like @searchString "
                     ElseIf findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.StartOfField Then
                         searchString = RTrim(findableControl.BegFindValue) + "%"
-                        sql &= " Like @searchString"
+                        sql &= " Like @searchString "
                     Else  ' findableControl.searchPlace = IFindableControl.SearchPlaceEnum.ExactValue
                         searchString = RTrim(findableControl.BegFindValue)
                         sql &= " = @searchString"
                     End If
-                    Dim params() As Object = {"@SearchString", searchString}
-                    _lastFindQuery = sql
-                    _lastFindParms = params
-                    retVal = _db.Scalar(sql & " order by IdNo ", params)
+                    params = {"@searchString", searchString}
                 End If
             ElseIf findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
+                If Not (filter Is Nothing OrElse filter = "") Then
+                    sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
+                End If
                 sql &= findableControl.FieldName.Trim()
-                retVal = FindDateField(tableName, findableControl, filter)
+                retVal = FindDateField(tableName, findableControl, sortOrderKey, filter)
+                Return retVal
             ElseIf findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Or
                    findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Then
+                If Not (filter Is Nothing OrElse filter = "") Then
+                    sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
+                End If
                 If findableControl.BegFindValue Is Nothing Then
                     sql &= " " & findableControl.FieldName & " Is Null "
-                    _lastFindQuery = sql
-                    retVal = _db.Scalar(sql & " order by IdNo ")
+                    params = {"@sortOrderKey", sortOrderKey}
                 ElseIf findableControl.EndFindValue Is Nothing Then
                     sql &= findableControl.FieldName.Trim()
                     searchString = findableControl.BegFindValue
-                    sql &= " = @searchString"
-                    Dim params() As Object = {"@SearchString", searchString}
-                    _lastFindParms = params
-                    retVal = _db.Scalar(sql & " order by IdNo ", params)
+                    sql &= " = @searchString "
+                    params = {"@SearchString", searchString}
                 Else
                     searchString = findableControl.BegFindValue
                     Dim searchString2 = findableControl.EndFindValue
                     sql &= findableControl.FieldName.Trim() & ">= @searchString and " & findableControl.FieldName.Trim() & " <= @searchString2"
-                    Dim params() As Object = {"@SearchString", searchString, "@searchString2", searchString2}
-                    _lastFindParms = params
-                    retVal = _db.Scalar(sql & " order by IdNo ", params)
+                    params = {"@SearchString", searchString, "@searchString2", searchString2, "@sortOrderKey", sortOrderKey}
                 End If
             ElseIf findableControl.SearchMode = IFindableControl.SearchModeEnum.CheckBox Then
                 sql &= findableControl.FieldName.Trim()
                 searchString = IIf(findableControl.BegFindValue, "1", "0")
-                sql &= " = @searchString"
-                Dim params() As Object = {"@SearchString", searchString}
-                _lastFindQuery = sql
-                _lastFindParms = params
-                retVal = _db.Scalar(sql & " order by IdNo ", params)
+                params = {"@SearchString", searchString}
             End If
+            retVal = _db.Scalar(sql & " order by " & sortOrderKey, params)
+            _lastFindQuery = sql
+            _lastFindParms = params
             Return retVal
         End Function
 
-        Public Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindDateField
+        Public Function FindDateField(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindDateField
             Dim retVal As Integer
             Dim searchString As String
             Dim sql As String = " SELECT IdNo FROM [" & tableName & "] Where "
@@ -165,7 +164,13 @@ Namespace AdoNet
             Dim dBegDate As Date? = findableControl.BegFindValue
             Dim dEndDate As Date? = findableControl.EndFindValue
             If dBegDate Is Nothing Then
-                searchString = findableControl.FieldName & " Is Null"
+                If dEndDate IsNot Nothing Then
+                    Dim dEDate As Date = Convert.ToDateTime(dEndDate)
+                    dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
+                    searchString = findableControl.FieldName & " < '" & dEDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "'"
+                Else
+                    searchString = findableControl.FieldName & " Is Null"
+                End If
             Else
                 Dim dBDate As Date = Convert.ToDateTime(dBegDate)
                 Dim dEDate As Date
@@ -174,14 +179,12 @@ Namespace AdoNet
                     searchString = findableControl.FieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & findableControl.FieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
                 Else
                     dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, Convert.ToDateTime(dEndDate))
-                    'dBDate = Convert.ToDateTime(dBegDate)
-                    'dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
                     searchString = findableControl.FieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & findableControl.FieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
                 End If
             End If
             sql = sql & searchString
             _lastFindQuery = sql
-            retVal = _db.Scalar(sql & " order by IdNo ")
+            retVal = _db.Scalar(sql & " order by " & sortOrderKey)
             Return retVal
         End Function
 
@@ -212,23 +215,33 @@ Namespace AdoNet
         '    Return retVal
         'End Function
 
-        Public Function FindFieldContinue(tableName As String, lastIdNo As Int32) _
+        Public Function FindFieldContinue(tableName As String, lastIdNo As Int32, sortOrderKey As String) _
             Implements IBaseDao.FindFieldContinue
             Dim retVal As Integer
             If _lastFindQuery Is Nothing Then
-                MessageBox.Show(
-                    "No Previous search was done. Nothing to find. To initiate a find right click anywhere on the field you want to search and type the text you want to search.")
+                Messaging.Show(True, "MsgNoPrevSearchFindInvalid")
                 retVal = lastIdNo
             Else
                 Dim sql As String
-                sql = _lastFindQuery + " and IdNo > " + lastIdNo.ToString() + " order by IdNo "
-                Dim params() As Object = _lastFindParms
-                retVal = _db.Scalar(sql, params)
-                'If RetVal = 0 Then
-                '    MessageBox.Show("This is already the last matching record or no record was found with the last entered search string!")
-                '    '' stay on the current record
-                '    RetVal = LastIdNo
-                'End If
+                Dim sortValue As Object
+                sql = "Select " & sortOrderKey & " from " & tableName & " where  IdNo = " & lastIdNo.ToString()
+                sortValue = _db.Scalar(sql)
+                sql = _lastFindQuery
+                Dim params As String()
+                If _lastFindParms Is Nothing Then
+                    params = {"@sortValue", sortValue}
+                Else
+                    params = _lastFindParms
+                    Array.Resize(params, params.Length + 1)
+                    params(params.Length - 1) = "@sortValue"
+                    Array.Resize(params, params.Length + 1)
+                    params(params.Length - 1) = sortValue
+                End If
+                If lastIdNo > 0 Then
+                    retVal = _db.Scalar(sql & " and " & sortOrderKey & "> @sortValue order by " & sortOrderKey, params)
+                Else
+                    retVal = _db.Scalar(sql & " order by " & sortOrderKey, params)
+                End If
             End If
             Return retVal
         End Function

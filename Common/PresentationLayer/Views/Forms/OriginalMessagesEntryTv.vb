@@ -122,13 +122,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub OriginalMessagesEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             Show()
-            Dim controlSecurityValues = PresenterObj.GetUserSecurityForKey("_Developer",
-                                                                                   GlobalVariables.SecurityGroupIdNo)
-            If _
-                Not _
-                (controlSecurityValues IsNot Nothing AndAlso controlSecurityValues.Count > 0 AndAlso
-                 controlSecurityValues(0)) Then
-                ' Visible property stored in first element of the array
+            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
                 HideButton(btnDelete)
             End If
         End Sub

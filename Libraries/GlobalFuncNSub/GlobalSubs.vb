@@ -185,7 +185,7 @@ Public Module GlobalSubs
             If subMenu IsNot Nothing Then
                 subMenu.Enabled = action
                 subMenu.Visible = action
-                If subMenu.HasDropDownItems Then
+                If subMenu.HasDropDown Then
                     Dim childToolStripItemCollection = subMenu.DropDownItems
                     SetVisibleAndEnableOfToolStripMenuItem(action, childToolStripItemCollection)
                 End If

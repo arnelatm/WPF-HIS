@@ -400,7 +400,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Sub FindFieldNew(findableControl As IFindableControl)
         'Dim fieldType = Model.GetFieldType(TableName, findableControl.FieldName)
-        Dim idNo = Model.FindFieldNew(TableName, findableControl, DataFilter)
+        Dim idNo = Model.FindFieldNew(TableName, findableControl, SortOrderKey, DataFilter)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else
@@ -423,7 +423,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Public Function FindFieldContinue(idNo As Int32) As Integer
-        Return Model.FindFieldContinue(TableName, idNo)
+        Return Model.FindFieldContinue(TableName, idNo, SortOrderKey)
     End Function
 
     Public Function FindRecord() As Integer
@@ -765,7 +765,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         If idNoOfFoundRecord = 0 Then
             If Messaging.Show(True, "AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
                               MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                idNoOfFoundRecord = FindFieldContinue(1)
+                idNoOfFoundRecord = FindFieldContinue(0)
                 RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
             Else
                 '' stay on the current record

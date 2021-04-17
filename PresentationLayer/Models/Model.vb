@@ -52,16 +52,16 @@ Public Class Model
         Return Service.FindField(tableName, fieldName, searchString, searchPlace, filter)
     End Function
 
-    Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IModel.FindFieldNew
-        Return Service.FindFieldNew(tableName, findableControl, filter)
+    Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer Implements IModel.FindFieldNew
+        Return Service.FindFieldNew(tableName, findableControl, sortOrderKey, filter)
     End Function
 
     Public Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer Implements IModel.FindDateField
         Return Service.FindDateField(tableName, findableControl, filter)
     End Function
 
-    Public Function FindFieldContinue(tableName As String, idNo As Int32) As Integer Implements IModel.FindFieldContinue
-        Return Service.FindFieldContinue(tableName, idNo)
+    Public Function FindFieldContinue(tableName As String, idNo As Int32, sortOrderKey As String) As Integer Implements IModel.FindFieldContinue
+        Return Service.FindFieldContinue(tableName, idNo, sortOrderKey)
     End Function
 
     Public Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM) Implements IModel.GetAll
