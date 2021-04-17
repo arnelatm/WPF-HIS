@@ -418,8 +418,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private Function GetGlSystemBalance() As Decimal
             If cboAccountIdNo.SelectedIndex >= 0 Then
-                Dim condition = "AccountIdNo = " & cboAccountIdNo.GetValue.ToString() & " and TransactionDate <= '" & DtoS(ReconciliationDate) & "'"
-                Return PresenterObj.GetFieldValue(Of Decimal)("sum(Debit-Credit)", "GlLedgers_View", condition)
+                Dim condition = "AccountIdNo = " & cboAccountIdNo.SelectedValue.ToString() & " and Year = 2017"
+                DIm x = PresenterObj.GetFieldValue(Of Decimal)("Debit-Credit", "AccountBalance", condition)
+                condition = "AccountIdNo = " & cboAccountIdNo.SelectedValue.ToString() & " and TransactionDate <= '" & DtoS(ReconciliationDate) & "'"
+                Dim y = PresenterObj.GetFieldValue(Of Decimal)("sum(Debit-Credit)", "GlLedgers_View", condition)
+                Return x + y
             End If
             Return 0
         End Function

@@ -228,7 +228,7 @@ Namespace Services
         End Function
 
         Public Function UpdateRecordWithIdNo(Of T)(ByVal idNo As Int32, ByVal tableName As String, ByVal fieldName As String, ByRef value As T) As Integer Implements IService.UpdateRecordWithIdNo
-            Return DataDao.UpdateRecordWithIdNo(Of T)(idNo, tableName, fieldName, value)
+            Return BaseDao.UpdateRecordWithIdNo(Of T)(idNo, tableName, fieldName, value)
         End Function
 
         Public Function GenericUpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer _
