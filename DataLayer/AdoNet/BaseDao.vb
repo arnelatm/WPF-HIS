@@ -103,8 +103,9 @@ Namespace AdoNet
                 Else
                     If Not (filter Is Nothing OrElse filter = "") Then
                         sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
-                    End If
-                    sql &= findableControl.FieldName.Trim()
+                    else
+                        sql &= findableControl.FieldName.Trim()
+                    End If                   
                     If findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                         searchString = "%" & RTrim(findableControl.BegFindValue) + "%"
                         sql &= " Like @searchString "
