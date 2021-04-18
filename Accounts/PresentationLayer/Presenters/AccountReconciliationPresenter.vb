@@ -1,4 +1,6 @@
-﻿Imports System.Transactions
+﻿Imports System.ComponentModel
+Imports System.Runtime.CompilerServices
+Imports System.Transactions
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -143,7 +145,7 @@ Namespace PresentationLayer.Presenters
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
-            Dim allAcctReconItems = ModelOfPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems As List(Of AccountReconciliationItemModel) = ModelOfPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
             If AddMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
@@ -151,18 +153,16 @@ Namespace PresentationLayer.Presenters
             Else
                 Dim oldReconciliationItems As List(Of AccountReconciliationItemModel)
                 oldReconciliationItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
+                Dim oldReconItems = New DataTable
+                oldReconItems = ToDataTable(oldReconciliationItems)
+                Dim oldReconItem As New AccountReconciliationItemModel
+                Dim dr() As DataRow
                 For Each acctReconItem In allAcctReconItems
-                    Dim found As Boolean = False
-                    For Each item As AccountReconciliationItemModel In oldReconciliationItems
-                        If item.JournalCode = acctReconItem.JournalCode And
-                           item.JournalItemIdNo = acctReconItem.JournalItemIdNo Then
-                            found = True
-                            Exit For
-                        End If
-                    Next
-                    nSeq += 1
-                    If Not found Then
+                    dr = oldReconItems.Select("JournalCode = '" & acctReconItem.JournalCode & "' and JournalItemIdNo = " & acctReconItem.JournalItemIdNo.ToString())
+                    If dr.Length > 0 Then
                         AddNewItem(acctReconItem, acctReconItems, nSeq)
+                    Else
+                        nSeq += 1
                     End If
                 Next
                 For Each reconciledItem As AccountReconciliationItemModel In oldReconciliationItems
@@ -174,6 +174,42 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(acctReconItems, result)
             Return result
         End Function
+
+        'Public Function GetAcctReconItems(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
+        '    Dim acctReconItems As New List(Of AccountReconciliationItemModel)
+        '    Dim nSeq As Integer = 0
+        '    'If PresenterObj.AddMode Or PresenterObj.EditMode Then
+        '    Dim allAcctReconItems = ModelOfPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
+        '    If AddMode Then
+        '        For Each acctReconItem In allAcctReconItems
+        '            AddNewItem(acctReconItem, acctReconItems, nSeq)
+        '        Next
+        '    Else
+        '        Dim oldReconciliationItems As List(Of AccountReconciliationItemModel)
+        '        oldReconciliationItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
+        '        For Each acctReconItem In allAcctReconItems
+        '            Dim found As Boolean = False
+        '            For Each item As AccountReconciliationItemModel In oldReconciliationItems
+        '                If item.JournalCode = acctReconItem.JournalCode And
+        '                   item.JournalItemIdNo = acctReconItem.JournalItemIdNo Then
+        '                    found = True
+        '                    Exit For
+        '                End If
+        '            Next
+        '            nSeq += 1
+        '            If Not found Then
+        '                AddNewItem(acctReconItem, acctReconItems, nSeq)
+        '            End If
+        '        Next
+        '        For Each reconciledItem As AccountReconciliationItemModel In oldReconciliationItems
+        '            AddNewItem(reconciledItem, acctReconItems, nSeq)
+        '            nSeq += 1
+        '        Next
+        '    End If
+        '    Dim result As New List(Of AccountReconciliationItemView)
+        '    GlobalVariables.Mapper.Map(acctReconItems, result)
+        '    Return result
+        'End Function
 
         Private Sub AddNewItem(acctReconItem As AccountReconciliationItemModel, actualReconItems As List(Of AccountReconciliationItemModel), nSeq As Integer)
             Dim item As New AccountReconciliationItemModel With {
@@ -209,6 +245,27 @@ Namespace PresentationLayer.Presenters
                 CallByName(accountReconciliationItem, propertyName, CallType.Set, {value})
             Next
         End Sub
+
+        Public Function ToDataTable(Of T)(data As IList(Of T)) As DataTable
+            Dim properties As PropertyDescriptorCollection = TypeDescriptor.GetProperties(GetType(T))
+            Dim table As DataTable = New DataTable()
+
+            For Each prop As PropertyDescriptor In properties
+                table.Columns.Add(prop.Name, If(Nullable.GetUnderlyingType(prop.PropertyType), prop.PropertyType))
+            Next
+
+            For Each item As T In data
+                Dim row As DataRow = table.NewRow()
+
+                For Each prop As PropertyDescriptor In properties
+                    row(prop.Name) = If(prop.GetValue(item), DBNull.Value)
+                Next
+
+                table.Rows.Add(row)
+            Next
+
+            Return table
+        End Function
 
     End Class
 

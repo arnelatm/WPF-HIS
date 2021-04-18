@@ -976,6 +976,132 @@
   <data name="&gt;&gt;txtTotalQtyCreditsCleared.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="&gt;&gt;CFlowLayout2.Name" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.Parent" xml:space="preserve">
+    <value>CFlowLayout3</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.Name" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.Parent" xml:space="preserve">
+    <value>CFlowLayout3</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CFlowLayout3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 385</value>
+  </data>
+  <data name="CFlowLayout3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>970, 144</value>
+  </data>
+  <data name="CFlowLayout3.TabIndex" type="System.Int32, mscorlib">
+    <value>245</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout3.Name" xml:space="preserve">
+    <value>CFlowLayout3</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout3.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout3.Parent" xml:space="preserve">
+    <value>CFlowLayout4</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsCleared.Name" xml:space="preserve">
+    <value>lblDebitsCleared</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsCleared.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Name" xml:space="preserve">
+    <value>txtTotalQtyDebitsCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsCleared.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsCleared.Name" xml:space="preserve">
+    <value>txtTotalDebitsCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsCleared.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.Name" xml:space="preserve">
+    <value>txtTotalCreditsCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.Name" xml:space="preserve">
+    <value>CFlowLayout8</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="CFlowLayout2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>310, 136</value>
+  </data>
+  <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
+    <value>269</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.Name" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.Parent" xml:space="preserve">
+    <value>CFlowLayout3</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lblDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -1138,6 +1264,51 @@
   <data name="&gt;&gt;txtTotalCreditsCleared.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="&gt;&gt;btnClearAll.Name" xml:space="preserve">
+    <value>btnClearAll</value>
+  </data>
+  <data name="&gt;&gt;btnClearAll.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnClearAll.Parent" xml:space="preserve">
+    <value>CFlowLayout8</value>
+  </data>
+  <data name="&gt;&gt;btnClearAll.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnUnClearAll.Name" xml:space="preserve">
+    <value>btnUnClearAll</value>
+  </data>
+  <data name="&gt;&gt;btnUnClearAll.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnUnClearAll.Parent" xml:space="preserve">
+    <value>CFlowLayout8</value>
+  </data>
+  <data name="&gt;&gt;btnUnClearAll.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CFlowLayout8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 53</value>
+  </data>
+  <data name="CFlowLayout8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 32</value>
+  </data>
+  <data name="CFlowLayout8.TabIndex" type="System.Int32, mscorlib">
+    <value>267</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.Name" xml:space="preserve">
+    <value>CFlowLayout8</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="btnClearAll.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
@@ -1192,47 +1363,98 @@
   <data name="&gt;&gt;btnUnClearAll.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="CFlowLayout8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 53</value>
+  <data name="&gt;&gt;CLabel9.Name" xml:space="preserve">
+    <value>CLabel9</value>
   </data>
-  <data name="CFlowLayout8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 32</value>
+  <data name="&gt;&gt;CLabel9.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="CFlowLayout8.TabIndex" type="System.Int32, mscorlib">
-    <value>267</value>
+  <data name="&gt;&gt;CLabel9.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout8.Name" xml:space="preserve">
-    <value>CFlowLayout8</value>
+  <data name="&gt;&gt;CLabel9.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout8.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Name" xml:space="preserve">
+    <value>txtTotalQtyCreditsNotCleared</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout8.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
+  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout8.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsNotCleared.Name" xml:space="preserve">
+    <value>txtTotalCreditsNotCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsNotCleared.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Name" xml:space="preserve">
+    <value>txtTotalQtyDebitsNotCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsNotCleared.Name" xml:space="preserve">
+    <value>txtTotalDebitsNotCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsNotCleared.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="CFlowLayout2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+  <data name="&gt;&gt;CFlowLayout7.Name" xml:space="preserve">
+    <value>CFlowLayout7</value>
   </data>
-  <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 136</value>
-  </data>
-  <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
-    <value>269</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout2.Name" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout2.Type" xml:space="preserve">
+  <data name="&gt;&gt;CFlowLayout7.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CFlowLayout7.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout7.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="CFlowLayout5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 3</value>
+  </data>
+  <data name="CFlowLayout5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 136</value>
+  </data>
+  <data name="CFlowLayout5.TabIndex" type="System.Int32, mscorlib">
+    <value>270</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.Name" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.Parent" xml:space="preserve">
     <value>CFlowLayout3</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout2.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;CFlowLayout5.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="CLabel9.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -1458,48 +1680,6 @@
   </data>
   <data name="&gt;&gt;CFlowLayout7.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="CFlowLayout5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 3</value>
-  </data>
-  <data name="CFlowLayout5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 136</value>
-  </data>
-  <data name="CFlowLayout5.TabIndex" type="System.Int32, mscorlib">
-    <value>270</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout5.Name" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout5.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout5.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout5.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="CFlowLayout3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 385</value>
-  </data>
-  <data name="CFlowLayout3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>970, 144</value>
-  </data>
-  <data name="CFlowLayout3.TabIndex" type="System.Int32, mscorlib">
-    <value>245</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.Name" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.Parent" xml:space="preserve">
-    <value>CFlowLayout4</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="btnPost.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -1867,6 +2047,42 @@
   <metadata name="CsrOiItemModelBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>890, 17</value>
   </metadata>
+  <data name="&gt;&gt;DataGridViewReconciliationItems.Name" xml:space="preserve">
+    <value>DataGridViewReconciliationItems</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewReconciliationItems.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewReconciliationItems.Parent" xml:space="preserve">
+    <value>CFlowLayout4</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewReconciliationItems.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CFlowLayout4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="CFlowLayout4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 53</value>
+  </data>
+  <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>997, 526</value>
+  </data>
+  <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
+    <value>246</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout4.Name" xml:space="preserve">
+    <value>CFlowLayout4</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout4.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="dgvSequence.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1992,30 +2208,6 @@
   </data>
   <data name="&gt;&gt;DataGridViewReconciliationItems.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="CFlowLayout4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="CFlowLayout4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 53</value>
-  </data>
-  <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>997, 526</value>
-  </data>
-  <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
-    <value>246</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout4.Name" xml:space="preserve">
-    <value>CFlowLayout4</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout4.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout4.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout4.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

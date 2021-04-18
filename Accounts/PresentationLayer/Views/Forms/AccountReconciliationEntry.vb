@@ -417,9 +417,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Function GetGlSystemBalance() As Decimal
-            If cboAccountIdNo.SelectedIndex >= 0 Then
+            If cboAccountIdNo.SelectedIndex >= 0 And ReconciliationDate IsNot Nothing Then
                 Dim condition = "AccountIdNo = " & cboAccountIdNo.SelectedValue.ToString() & " and Year = 2017"
-                DIm x = PresenterObj.GetFieldValue(Of Decimal)("Debit-Credit", "AccountBalance", condition)
+                Dim x = PresenterObj.GetFieldValue(Of Decimal)("Debit-Credit", "AccountBalance", condition)
                 condition = "AccountIdNo = " & cboAccountIdNo.SelectedValue.ToString() & " and TransactionDate <= '" & DtoS(ReconciliationDate) & "'"
                 Dim y = PresenterObj.GetFieldValue(Of Decimal)("sum(Debit-Credit)", "GlLedgers_View", condition)
                 Return x + y
@@ -809,13 +809,11 @@ Namespace PresentationLayer.Views.Forms
             Return False
         End Function
 
-        Private Sub dtpReconciliationDate_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles dtpReconciliationDate.Validating
+        Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated, dtpReconciliationDate.ValueChanged
             If dtpReconciliationDate.DateChanged() Then
-                If dtpReconciliationDate.DateChanged() Then
-                    If AccountReconciliationItems.Any() Then
-                        Messaging.Show("MsgDateChangedNotAllowed", "Sorry you can't change the reconciliation date when account reconciliation grid is not empty. Previous value restored.")
-                        dtpReconciliationDate.Undo()
-                    End If
+                If PresenterObj.EditMode And AccountReconciliationItems.Any() Then
+                    Messaging.Show("MsgDateChangedNotAllowed", "Sorry you can't change the reconciliation date when account reconciliation grid is not empty. Previous value restored.")
+                    dtpReconciliationDate.Undo()
                 End If
                 If AccountIdNo <> 0 And dtpReconciliationDate.Text IsNot Nothing Then
                     AccountReconciliationItems = PresenterObj.GetAcctReconItems(AccountIdNo, ReconciliationDate, PresenterObj.TargetIdNo, "TransactionDate")
@@ -825,19 +823,17 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub cboAccountIdNo_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles cboAccountIdNo.Validating
-            If cboAccountIdNo.ValueChanged() Then
-                If cboAccountIdNo.SelectedIndex > -1 Then
-                    If AccountReconciliationItems.Any() Then
-                        Messaging.Show(True, "MsgOnEmptyReconChangeAccNotAllowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
-                        cboAccountIdNo.RevertValue()
-                    End If
+        Private Sub cboAccountIdNo_Validating(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
+            If cboAccountIdNo.SelectedIndex > -1 Then
+                If AccountReconciliationItems.Any() Then
+                    Messaging.Show(True, "MsgOnEmptyReconChangeAccNotAllowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
+                    cboAccountIdNo.RevertValue()
                 End If
-            End If
-            If dtpReconciliationDate.Text IsNot Nothing And dtpReconciliationDate.Text <> "" Then
-                AccountReconciliationItems = PresenterObj.GetAcctReconItems(AccountIdNo, ReconciliationDate, PresenterObj.TargetIdNo, "TransactionDate")
-                UpdateTotals()
-                DataGridViewReconciliationItems.Refresh()
+                If dtpReconciliationDate.Text IsNot Nothing And dtpReconciliationDate.Text <> "" Then
+                    AccountReconciliationItems = PresenterObj.GetAcctReconItems(AccountIdNo, ReconciliationDate, PresenterObj.TargetIdNo, "TransactionDate")
+                    UpdateTotals()
+                    DataGridViewReconciliationItems.Refresh()
+                End If
             End If
         End Sub
 
@@ -872,11 +868,13 @@ Namespace PresentationLayer.Views.Forms
         Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
             PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", True)
             bsAccountReconciliationItems.ResetBindings(False)
+            UpdateTotals()
         End Sub
 
         Private Sub btnUnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnUnClearAll.ClickButtonArea
             PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", False)
             bsAccountReconciliationItems.ResetBindings(False)
+            UpdateTotals()
         End Sub
 
         'Private Function GetLastRowIndex(radGridView1 As DataGridView) As Integer

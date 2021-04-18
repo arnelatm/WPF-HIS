@@ -1011,6 +1011,7 @@ Public Class CFormEntry
     End Sub
 
     Private Sub SetControlDynamicProperties(ByRef cCtrl As Control)
+        Dim myForm = FindForm()
         'If cCtrl.GetType().GetProperty("DataBoundControl") IsNot Nothing Then
         If TypeOf cCtrl Is IEntryControl Then
             ' get FieldName from control : by convention when using this system
@@ -1023,12 +1024,8 @@ Public Class CFormEntry
             fldName = cCtrl.Name.Substring(3) ' get control name starting from the 3rd character (0 based)
 
             For Each row In TableProperties
-                'If fldName.ToLower() = "amount" Then
-                '    Debugger.Break()
-                'End If
                 If fldName.ToLower() = row.FldName.ToLower Then
-                    If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is CComboBox OrElse TypeOf cCtrl Is CMaskedTextBox OrElse
-                       TypeOf cCtrl Is CTextBoxArabic Then
+                    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CMaskedTextBox OrElse TypeOf cCtrl Is CTextBoxArabic Then
                         If row.FldType.ToLower = "int" OrElse
                             row.FldType.ToLower = "smallint" OrElse
                             row.FldType.ToLower = "money" OrElse
@@ -1039,7 +1036,6 @@ Public Class CFormEntry
                             row.FldType.ToLower = "real" OrElse
                             row.FldType.ToLower = "float" OrElse
                             row.FldType.ToLower = "numeric" Then
-
                             Select Case row.FldType.ToLower
                                 Case "int"
                                     SetPropertyValue(cCtrl, "MinimumValue", -2147483648D)
@@ -1054,23 +1050,13 @@ Public Class CFormEntry
                                     SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808D)
                                     SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807D)
                             End Select
-
                             SetPropertyValue(cCtrl, "ValueIsNumeric", True)
                         Else
-                            'If cCtrl.Name.ToLower() = "txtnotes" then
-                            '    debugger.Break()
-                            'End If
                             SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(row.MaxLength / 2), row.MaxLength))
                             SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
                             If (Not row.IsIdentity) And (Not row.IsNullable) Then
-                                'Add this controls in error provider for mandatory fields.
-                                'MyErrorProvider.Controls.AddMandatory(CCtrl, CCtrl.Name)
-                                'Dim thisCtrl As CTextBox
-                                'thisCtrl = cCtrl
                                 If GetPropertyValue(cCtrl, "IgnoreNullCheck") Then
-                                    'If Not thisCtrl.IgnoreNullCheck Then
                                     If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-                                        ''If thisCtrl.LinkedLabel Is Nothing Then
                                         MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
                                     Else
                                         MyErrorProvider.Controls.AddMandatory(cCtrl, GetPropertyValue(cCtrl, "LinkedLabel"))
@@ -1079,8 +1065,10 @@ Public Class CFormEntry
                             End If
                         End If
                         Exit For
-                    ElseIf _
-                        TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
+                    ElseIf TypeOf cCtrl Is CaComboBox OrElse TypeOf cCtrl Is CComboBox Then
+                        '
+                        '
+                    ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
                         TypeOf cCtrl Is CDTPHijriDate OrElse TypeOf cCtrl Is tdpGregorian OrElse
                         TypeOf cCtrl Is CDtpGregorianDate Then
                         SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
@@ -1090,7 +1078,13 @@ Public Class CFormEntry
                         End If
                         Exit For
                     End If
-
+                    If TypeOf cCtrl Is IFindableControl And Not (TypeOf cCtrl Is CForm) Then
+                        Dim thisControl As IFindableControl = cCtrl
+                        If thisControl.FindEnabled Then
+                            thisControl = cCtrl
+                            thisControl.FindDataType = GetObjectDataType(GetFieldType(Name.Substring(3)))
+                        End If
+                    End If
                 End If
             Next
         End If
