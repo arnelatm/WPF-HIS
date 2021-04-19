@@ -91,6 +91,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgPasswordMatchError", "Sorry the new password and confirmation password does not match, please try again.", "Warning")
         Messaging.AddMessage("MsgPasswordLengthError", "Sorry, password must be at least 6 characters long.", "Warning")
         Messaging.AddMessage("MsgNoPrevSearchFindInvalid", "No Previous search was done. Nothing to find. To initiate a find right click anywhere on the field you want to search and type the text you want to search.", "Warning")
+        Messaging.AddMessage("AskContinueWithPreviousSearch","You have reached the last matching record, do you want to search again from the first record?","Information")
 
     End Sub
 

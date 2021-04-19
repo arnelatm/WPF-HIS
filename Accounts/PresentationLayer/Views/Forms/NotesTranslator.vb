@@ -34,6 +34,7 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewTransactionNotes
                 Dim nIndex = .CurrentRow.Index
                 txtOriginalNote.Text = .Rows(nIndex).Cells(0).Value.ToString()
+                txtTranslation.Text = .Rows(nIndex).Cells(0).Value.ToString()
             End With
         End Sub
 
@@ -42,25 +43,33 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cmdSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdSave.Click
-            TranslateNote(True)
+            dim retVal As Int16 = TranslateNote(True)
+
         End Sub
 
         Private Sub btnTranslateWord_Click(sender As Object, e As EventArgs) Handles btnTranslateWord.Click
             TranslateNote(False)
         End Sub
 
-        Sub TranslateNote(wholeNote As Boolean)
+        Private Function  TranslateNote(wholeNote As Boolean)
+            Dim retVal As Integer = 0
             If txtOriginalNote.Text IsNot Nothing AndAlso txtTranslation.Text IsNot Nothing AndAlso
                txtOriginalNote.Text <> "" AndAlso txtTranslation.Text <> "" Then
                 Dim originalValue As String = txtOriginalNote.Text
                 Dim translatedValue As String = txtTranslation.Text
                 If wholeNote Then
-                    Result = TranslatorDAC.ExecuteSp2Param("spTranslateTransactionNotes", txtOriginalNote.Text, txtTranslation.Text)
+                    retVal = TranslatorDAC.ExecuteSp2Param("spTranslateTransactionNotes", txtOriginalNote.Text, txtTranslation.Text)
                 Else
-                    Result = TranslatorDAC.ExecuteSp2Param("spTranslateTransactionWordNotes", txtOriginalNote.Text, txtTranslation.Text)
+                    retVal = TranslatorDAC.ExecuteSp2Param("spTranslateTransactionWordNotes", txtOriginalNote.Text, txtTranslation.Text)
                 End If
             End If
-        End Sub
+            If retVal > 0 Then
+                MessageBox.Show(retVal.ToString() + " records translated.")
+            Else
+                MessageBox.Show("No records were found with the entered note.")
+            End If
+            Return retVal
+        End Function
 
         Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
             If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then

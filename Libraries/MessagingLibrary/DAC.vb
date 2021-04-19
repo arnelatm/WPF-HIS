@@ -623,7 +623,7 @@ Public Class Dac
     End Function
 
     Public Function ExecuteSp2Param(storedProcedureName As String, parameter1 As String, parameter2 As String) As Integer
-        Dim status As Boolean = True
+        Dim retVal As Integer 
         Cs = BuildConnString()
         Dim conn As SqlConnection = New SqlConnection(Cs)
         Dim sqlCommand As New SqlCommand(storedProcedureName, conn)
@@ -632,15 +632,15 @@ Public Class Dac
             sqlCommand.Parameters.Add("@parameter1", SqlDbType.VarChar).Value = parameter1
             sqlCommand.Parameters.Add("@parameter2", SqlDbType.VarChar).Value = parameter2
             sqlCommand.CommandType = CommandType.StoredProcedure
-            sqlCommand.ExecuteNonQuery()
+            retVal = sqlCommand.ExecuteNonQuery()
             conn.Close()
         Catch ex As Exception
             ErrorMessage(ex, SqlError)
-            status = False
+            retVal = -1
         Finally
             If conn.State = ConnectionState.Open Then conn.Close()
         End Try
-        Return status
+        Return retVal
     End Function
 
 #End Region
