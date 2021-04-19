@@ -38,8 +38,10 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewTransactionNotes = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsNotes = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvNotes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bsNotes = New System.Windows.Forms.BindingSource(Me.components)
+        Me.btnTranslateWord = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridViewTransactionNotes,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsNotes,System.ComponentModel.ISupportInitialize).BeginInit
@@ -64,20 +66,20 @@ Namespace PresentationLayer.Views.Forms
         '
         'cmdSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(212, 519)
+        Me.cmdSave.Location = New System.Drawing.Point(12, 519)
         Me.cmdSave.Name = "cmdSave"
-        Me.cmdSave.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSave.Size = New System.Drawing.Size(143, 23)
         Me.cmdSave.TabIndex = 27
-        Me.cmdSave.Text = "Save"
+        Me.cmdSave.Text = "Translate Whole Note"
         Me.cmdSave.UseVisualStyleBackColor = true
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(319, 519)
+        Me.cmdCancel.Location = New System.Drawing.Point(492, 519)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 29
-        Me.cmdCancel.Text = "&Cancel"
+        Me.cmdCancel.Text = "&Quit"
         Me.cmdCancel.UseVisualStyleBackColor = true
         '
         'CLabel2
@@ -87,7 +89,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel2.DisplayOnly = true
         Me.CLabel2.EditingMode = false
         Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel2.Location = New System.Drawing.Point(418, 382)
+        Me.CLabel2.Location = New System.Drawing.Point(405, 382)
         Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel2.Name = "CLabel2"
         Me.CLabel2.Size = New System.Drawing.Size(0, 17)
@@ -164,10 +166,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewTransactionNotes.Size = New System.Drawing.Size(551, 366)
         Me.DataGridViewTransactionNotes.TabIndex = 32
         '
-        'bsNotes
-        '
-        Me.bsNotes.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.TransactionNotesModel)
-        '
         'dgvNotes
         '
         Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
@@ -176,11 +174,36 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvNotes.Name = "dgvNotes"
         Me.dgvNotes.ReadOnly = true
         '
+        'bsNotes
+        '
+        Me.bsNotes.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.TransactionNotesModel)
+        '
+        'btnTranslateWord
+        '
+        Me.btnTranslateWord.Enabled = false
+        Me.btnTranslateWord.Location = New System.Drawing.Point(161, 519)
+        Me.btnTranslateWord.Name = "btnTranslateWord"
+        Me.btnTranslateWord.Size = New System.Drawing.Size(146, 23)
+        Me.btnTranslateWord.TabIndex = 33
+        Me.btnTranslateWord.Text = "Translate Word"
+        Me.btnTranslateWord.UseVisualStyleBackColor = true
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(327, 519)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(146, 23)
+        Me.Button1.TabIndex = 34
+        Me.Button1.Text = "Refresh Grid"
+        Me.Button1.UseVisualStyleBackColor = true
+        '
         'NotesTranslator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(597, 663)
+        Me.ClientSize = New System.Drawing.Size(584, 570)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnTranslateWord)
         Me.Controls.Add(Me.DataGridViewTransactionNotes)
         Me.Controls.Add(Me.CLabel3)
         Me.Controls.Add(Me.CLabel1)
@@ -208,5 +231,7 @@ End Sub
         Friend WithEvents DataGridViewTransactionNotes As CDataGridView
         Friend WithEvents bsNotes As BindingSource
         Friend WithEvents dgvNotes As DataGridViewTextBoxColumn
+        Friend WithEvents btnTranslateWord As Button
+        Friend WithEvents Button1 As Button
     End Class
 End NameSpace

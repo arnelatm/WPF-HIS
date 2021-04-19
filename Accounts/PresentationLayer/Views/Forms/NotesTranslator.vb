@@ -1,4 +1,6 @@
-﻿Namespace PresentationLayer.Views.Forms
+﻿Imports AATM.Libraries.GlobalFuncNSub
+
+Namespace PresentationLayer.Views.Forms
 
     Public Class NotesTranslator
 
@@ -40,23 +42,32 @@
         End Sub
 
         Private Sub cmdSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdSave.Click
-            TranslateNote()
+            TranslateNote(True)
         End Sub
 
-        Sub TranslateNote()
+        Private Sub btnTranslateWord_Click(sender As Object, e As EventArgs) Handles btnTranslateWord.Click
+            TranslateNote(False)
+        End Sub
 
+        Sub TranslateNote(wholeNote As Boolean)
             If txtOriginalNote.Text IsNot Nothing AndAlso txtTranslation.Text IsNot Nothing AndAlso
                txtOriginalNote.Text <> "" AndAlso txtTranslation.Text <> "" Then
                 Dim originalValue As String = txtOriginalNote.Text
                 Dim translatedValue As String = txtTranslation.Text
-                Result = TranslatorDAC.ExecuteSp2Param("spTranslateTransactionNotes", txtOriginalNote.Text, txtTranslation.Text)
+                If wholeNote Then
+                    Result = TranslatorDAC.ExecuteSp2Param("spTranslateTransactionNotes", txtOriginalNote.Text, txtTranslation.Text)
+                Else
+                    Result = TranslatorDAC.ExecuteSp2Param("spTranslateTransactionWordNotes", txtOriginalNote.Text, txtTranslation.Text)
+                End If
             End If
-
         End Sub
 
         Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
             If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
                 LoadColumn()
+            End If
+            If GlobalVariables.UserName.ToLower() = "arnel" Then
+                btnTranslateWord.Enabled = True
             End If
         End Sub
 
@@ -83,6 +94,10 @@
                 ResumeLayout()
             End If
 
+        End Sub
+
+        Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+            LoadColumn()
         End Sub
 
     End Class
