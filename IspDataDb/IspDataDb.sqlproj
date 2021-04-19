@@ -432,6 +432,7 @@
     <Build Include="dbo\Views\TransactionNotes_View.sql" />
     <Build Include="dbo\Functions\FuncBalanceSheet2.sql" />
     <Build Include="dbo\Stored Procedures\spTranslateTransactionNotes.sql" />
+    <Build Include="dbo\Stored Procedures\spTranslateTransactionWordNotes.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
