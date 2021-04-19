@@ -429,6 +429,9 @@
     <Build Include="dbo\Views\SecurityObjectFullPathNames_View.sql" />
     <Build Include="dbo\Views\SecurityObjectChildValues_View.sql" />
     <Build Include="dbo\Views\SecurityObject_View1.sql" />
+    <Build Include="dbo\Views\TransactionNotes_View.sql" />
+    <Build Include="dbo\Functions\FuncBalanceSheet2.sql" />
+    <Build Include="dbo\Stored Procedures\spTranslateTransactionNotes.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

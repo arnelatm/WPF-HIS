@@ -1106,6 +1106,11 @@ Namespace PresentationLayer.Views.Forms
             ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         End Sub
 
+        Private Sub TransactionNotesTranslatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransactionNotesTranslaterToolStripMenuItem.Click
+            Dim myForm As New NotesTranslator
+            myForm.Show()
+        End Sub
+
     End Class
 
 End Namespace
