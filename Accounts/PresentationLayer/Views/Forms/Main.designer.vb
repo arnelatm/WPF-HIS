@@ -141,6 +141,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemCheckPrinting = New System.Windows.Forms.ToolStripMenuItem()
         Me.UtilitiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TransactionNotesTranslaterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemIndex = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
@@ -753,7 +754,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'UtilitiesToolStripMenuItem
         '
-        Me.UtilitiesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemRecreateSecurityObjectMenu})
+        Me.UtilitiesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemRecreateSecurityObjectMenu, Me.TransactionNotesTranslaterToolStripMenuItem})
         Me.UtilitiesToolStripMenuItem.Name = "UtilitiesToolStripMenuItem"
         resources.ApplyResources(Me.UtilitiesToolStripMenuItem, "UtilitiesToolStripMenuItem")
         '
@@ -761,6 +762,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemRecreateSecurityObjectMenu.Name = "ToolStripMenuItemRecreateSecurityObjectMenu"
         resources.ApplyResources(Me.ToolStripMenuItemRecreateSecurityObjectMenu, "ToolStripMenuItemRecreateSecurityObjectMenu")
+        '
+        'TransactionNotesTranslaterToolStripMenuItem
+        '
+        Me.TransactionNotesTranslaterToolStripMenuItem.Name = "TransactionNotesTranslaterToolStripMenuItem"
+        resources.ApplyResources(Me.TransactionNotesTranslaterToolStripMenuItem, "TransactionNotesTranslaterToolStripMenuItem")
         '
         'ToolStripMenuItemHelp
         '
@@ -1060,5 +1066,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemChangePassword As ToolStripMenuItem
         Friend WithEvents UtilitiesToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemRecreateSecurityObjectMenu As ToolStripMenuItem
+        Friend WithEvents TransactionNotesTranslaterToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

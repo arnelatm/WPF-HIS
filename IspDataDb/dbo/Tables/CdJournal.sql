@@ -17,7 +17,7 @@
     [UnApplied]           MONEY          NULL,
     [VatNumber]           VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [VatAmount]           MONEY          NULL,
-    [Notes]               NVARCHAR (254) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Notes]               NVARCHAR (300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [PcClosed]            BIT            NULL,
     [Posted]              BIT            NULL,
     [DateCreated]         DATETIME       CONSTRAINT [DF_CashDisbursementJournal_DateCreated] DEFAULT (getdate()) NULL,
@@ -25,6 +25,8 @@
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_CashDisbursementJournal1] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

@@ -16,13 +16,15 @@
     [UnApplied]           MONEY          NULL,
     [VatAmount]           MONEY          NULL,
     [VatNumber]           VARCHAR (15)   NULL,
-    [Notes]               NVARCHAR (255) NULL,
+    [Notes]               NVARCHAR (300) NULL,
     [Posted]              BIT            NULL,
     [DateCreated]         DATETIME       CONSTRAINT [DF_CashReceiptJournal_DateCreated] DEFAULT (getdate()) NULL,
     [Cancelled]           BIT            NULL,
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_CashReceiptJournal] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
