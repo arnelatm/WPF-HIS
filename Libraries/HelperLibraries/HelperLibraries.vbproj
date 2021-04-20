@@ -67,6 +67,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessTypeEventArgs.vb" />
     <Compile Include="BackgroundWorker.vb" />
     <Compile Include="ClassesLibrary.vb" />
     <Compile Include="CompareLogic.vb" />
@@ -76,8 +77,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DoWorkEventArgs.vb" />
+    <Compile Include="EventAggregatorNew.vb" />
     <Compile Include="EventAggregator.vb" />
+    <Compile Include="EventHelpers.vb" />
     <Compile Include="GifFOrm.vb" />
+    <Compile Include="IAccessTypeEventArgs.vb" />
     <Compile Include="IApplicationEvent.vb" />
     <Compile Include="IEventAggregator.vb" />
     <Compile Include="ISelfDuplicating.vb" />

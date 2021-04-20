@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -14,6 +15,9 @@ Namespace PresentationLayer.Views.Forms
         Implements IAccountReconciliationView
 
         Public Report As New ReportDocument
+
+        Public Event ReconciliationItemCheckedChangeEvent As EventHandler
+
         Private ReadOnly _nfi As NumberFormatInfo
         Private _accountReconciliations As New List(Of AccountReconciliationItemView)
         Private _glSystemBalance As Decimal
@@ -45,6 +49,7 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New AccountReconciliationPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            PublishEvent(New ReconciliationItemCheckedChangeEvent())
 
         End Sub
 
@@ -272,6 +277,7 @@ Namespace PresentationLayer.Views.Forms
                 With DataGridViewReconciliationItems.CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvcleared"
+                            PublishEvent(New ReconciliationItemCheckedChangeEvent)
                             Dim selectedRow As AccountReconciliationItemView
                             Dim checked = DataGridViewReconciliationItems.Rows(e.RowIndex).Cells(e.ColumnIndex).EditedFormattedValue
                             selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
@@ -868,6 +874,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
             PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", True)
             bsAccountReconciliationItems.ResetBindings(False)
+            RaiseEvent ReconciliationItemCheckedChangeEvent(sender, Nothing)
             UpdateTotals()
         End Sub
 
