@@ -15,7 +15,8 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        'Protected ModelItemPresenter As New ModelAccounts("AccountReconciliationItem")
+
+        Public Event ReconciliationItemCheckedChangeEvent As EventHandler
 
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)
@@ -39,6 +40,8 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("JournalCode", GetType(String))
             DtUpdateTable.Columns.Add("JournalItemIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
+
+            SubscribeEvent(Me)
 
         End Sub
 
@@ -266,6 +269,10 @@ Namespace PresentationLayer.Presenters
 
             Return table
         End Function
+
+        Public Sub OnEventHandlerNew(ByRef eventType As ReconciliationItemCheckedChangeEvent)
+
+        End Sub
 
     End Class
 
