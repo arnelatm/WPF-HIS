@@ -1,4 +1,5 @@
-﻿CREATE vIEW [TransactionNotes_View] AS
+﻿
+CREATE vIEW [dbo].[TransactionNotes_View] AS
 (
 Select Distinct TransactionNotes from 
 ( SELECT Distinct [Notes] Collate Arabic_CI_AS  as 'TransactionNotes' FROM dbo.GeneralJournal where year(generalJournal.TransactionDate) > 2019
@@ -9,22 +10,22 @@ union
 select Distinct [Notes] Collate Arabic_CI_AS from ArJournal where year(arjournal.TransactionDate) > 2019
 union
 (select Distinct arjournalitem.[Notes] Collate Arabic_CI_AS from arjournalitem
- join arjournal on arjournalitem.JournalIdNo = arjournalitem.IdNo where year(arjournal.TransactionDate) > 2019)
+ join arjournal on arjournalitem.JournalIdNo = arjournal.IdNo where year(arjournal.TransactionDate) > 2019)
 union
 select Distinct [Notes] Collate Arabic_CI_AS from apjournal where year(apjournal.TransactionDate) > 2019
 union
 (select Distinct apjournalitem.[Notes] Collate Arabic_CI_AS from apjournalitem
-join apjournal on apjournalitem.JournalIdNo = apjournalitem.IdNo where year(apjournal.TransactionDate) > 2019)
+join apjournal on apjournalitem.JournalIdNo = apjournal.IdNo where year(apjournal.TransactionDate) > 2019)
 union
 select Distinct [Notes] Collate Arabic_CI_AS from cdjournal where year(cdjournal.TransactionDate) > 2019
 union
 (select Distinct CdJournalItem.Notes Collate Arabic_CI_AS from cdjournalitem
-join cdjournal on cdjournalitem.JournalIdNo = cdjournalitem.IdNo where year(cdjournal.TransactionDate) > 2019)
+join cdjournal on cdjournalitem.JournalIdNo = cdjournal.IdNo where year(cdjournal.TransactionDate) > 2019)
 union
 select Distinct [Notes] Collate Arabic_CI_AS from erjournal where year(erjournal.TransactionDate) > 2019
 union
 (select Distinct erjournalitem.[Notes] Collate Arabic_CI_AS from erjournalitem
-join erjournal on erjournalitem.JournalIdNo = erjournalitem.IdNo where year(erjournal.TransactionDate) > 2019)
+join erjournal on erjournalitem.JournalIdNo = erjournal.IdNo where year(erjournal.TransactionDate) > 2019)
 union
 select Distinct [Notes] Collate Arabic_CI_AS from cashReceiptJournal where year(cashreceiptjournal.TransactionDate) > 2019
 union
