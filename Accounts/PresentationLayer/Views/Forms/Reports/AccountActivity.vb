@@ -74,7 +74,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             If valid Then
                 Dim reportTitle As String
                 reportTitle = Messaging.TranslateCaption("Account Activity Report")
-                Dim cForm As New ReportFormNew("Account Activity Report.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate", cboStartAccountCode.SelectedValue, "BegAccountCode", cboEndAccountCode.SelectedValue, "EndAccountCode", language, "Language")
+                Dim cForm As New ReportFormNew("Account Activity Report.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboStartAccountCode.SelectedValue, "BegAccountCode", cboEndAccountCode.SelectedValue, "EndAccountCode", language, "Language")
                 cForm.Show()
             End If
             CultureInfo.CurrentCulture = curCulture

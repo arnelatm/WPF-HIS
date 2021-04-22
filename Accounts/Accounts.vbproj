@@ -808,6 +808,12 @@
     <Compile Include="PresentationLayer\Views\PensionRateView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
     <Compile Include="PresentationLayer\Views\SalesDepositView.vb" />
+    <Compile Include="Reports\Account Activity Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Account Activity Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Account Reconciliation Report.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1186,6 +1192,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Account Activity Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Account Activity Report.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Account Reconciliation Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1299,10 +1306,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-Ibn-Server - Copy.config" />
+    <None Include="app.config" />
     <None Include="app-Ispadmin2 - Copy.config" />
     <None Include="app-Ispadmin2.config" />
-    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />

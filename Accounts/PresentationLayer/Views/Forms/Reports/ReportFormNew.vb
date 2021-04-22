@@ -31,9 +31,9 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim value = args(i)
                 Report.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
             Next
-            Report.SetParameterValue("Language", language)
             Report.SetParameterValue("ReportTitle", reportTitle)
             Report.SetParameterValue("EstablishmentName", establishmentName)
+            Report.SetParameterValue("Language", language)
             Report.DataSourceConnections.Clear()
             ProcessReport()
 
