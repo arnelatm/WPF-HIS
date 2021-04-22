@@ -16,11 +16,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Report As New ReportDocument
 
-        Public Event ReconciliationItemCheckedChangeEvent As EventHandler
+        'Public Event ReconciliationItemCheckedChangeEvent As EventHandler
 
         Private ReadOnly _nfi As NumberFormatInfo
         Private _accountReconciliations As New List(Of AccountReconciliationItemView)
-        Private _glSystemBalance As Decimal
         Private _balance As Decimal
         Private _existingFind As Boolean = False
         Private _previousSelectedRow As Int16
@@ -49,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New AccountReconciliationPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            PublishEvent(New ReconciliationItemCheckedChangeEvent())
+            PublishEvent(New ReconciliationItemCheckedChangeEvent(Me))
 
         End Sub
 
@@ -151,10 +150,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property GlSystemBalance As Decimal Implements IAccountReconciliationView.GlSystemBalance
             Get
-                Return _glSystemBalance
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtGlSystemBalance.Text), _nfi)
             End Get
             Set
-                _glSystemBalance = Value
                 txtGlSystemBalance.Text = FormatMoney(Value)
             End Set
         End Property
@@ -226,6 +224,24 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property OutstandingCredits As Decimal Implements IAccountReconciliationView.OutstandingCredits
+            Get
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnreconciledDifference.Text), _nfi)
+            End Get
+            Set
+                txtUnreconciledDifference.Text = FormatMoney(Value)
+            End Set
+        End Property
+
+        Public Property OutstandingDeposits As Decimal Implements IAccountReconciliationView.OutstandingDeposits
+            Get
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnreconciledDifference.Text), _nfi)
+            End Get
+            Set
+                txtUnreconciledDifference.Text = FormatMoney(Value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
@@ -277,7 +293,7 @@ Namespace PresentationLayer.Views.Forms
                 With DataGridViewReconciliationItems.CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvcleared"
-                            PublishEvent(New ReconciliationItemCheckedChangeEvent)
+                            PublishEvent(New ReconciliationItemCheckedChangeEvent(Me))
                             Dim selectedRow As AccountReconciliationItemView
                             Dim checked = DataGridViewReconciliationItems.Rows(e.RowIndex).Cells(e.ColumnIndex).EditedFormattedValue
                             selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
@@ -374,45 +390,45 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UpdateTotals()
-            Dim nTotalDebitsCleared As Decimal = 0
-            Dim nTotalCreditsCleared As Decimal = 0
-            Dim nTotalDebitsNotCleared As Decimal = 0
-            Dim nTotalCreditsNotCleared As Decimal = 0
-            Dim nTotalQtyDebitsCleared As Integer = 0
-            Dim nTotalQtyCreditsCleared As Integer = 0
-            Dim nTotalQtyDebitsNotCleared As Integer = 0
-            Dim nTotalQtyCreditsNotCleared As Integer = 0
-            For Each accountReconciliationItem In bsAccountReconciliationItems
-                If accountReconciliationItem.Cleared Then
-                    If accountReconciliationItem.Debit > 0 Then
-                        nTotalDebitsCleared += accountReconciliationItem.Debit
-                        nTotalQtyDebitsCleared += 1
-                    Else
-                        nTotalQtyCreditsCleared += 1
-                        nTotalCreditsCleared += accountReconciliationItem.Credit
-                    End If
-                Else
-                    If accountReconciliationItem.Debit > 0 Then
-                        nTotalDebitsNotCleared += accountReconciliationItem.Debit
-                        nTotalQtyDebitsNotCleared += 1
-                    Else
-                        nTotalQtyCreditsNotCleared += 1
-                        nTotalCreditsNotCleared += accountReconciliationItem.Credit
-                    End If
-                End If
-            Next
-            TotalDebitsCleared = nTotalDebitsCleared
-            TotalCreditsCleared = nTotalCreditsCleared
-            TotalDebitsNotCleared = nTotalDebitsNotCleared
-            TotalCreditsNotCleared = nTotalCreditsNotCleared
-            TotalQtyDebitsCleared = nTotalQtyDebitsCleared
-            TotalQtyCreditsCleared = nTotalQtyCreditsCleared
-            TotalQtyDebitsNotCleared = nTotalQtyDebitsNotCleared
-            TotalQtyCreditsNotCleared = nTotalQtyCreditsNotCleared
-            GlSystemBalance = GetGlSystemBalance()
-            ReComputeDifference()
-        End Sub
+        'Private Sub UpdateTotals()
+        '    Dim nTotalDebitsCleared As Decimal = 0
+        '    Dim nTotalCreditsCleared As Decimal = 0
+        '    Dim nTotalDebitsNotCleared As Decimal = 0
+        '    Dim nTotalCreditsNotCleared As Decimal = 0
+        '    Dim nTotalQtyDebitsCleared As Integer = 0
+        '    Dim nTotalQtyCreditsCleared As Integer = 0
+        '    Dim nTotalQtyDebitsNotCleared As Integer = 0
+        '    Dim nTotalQtyCreditsNotCleared As Integer = 0
+        '    For Each accountReconciliationItem In bsAccountReconciliationItems
+        '        If accountReconciliationItem.Cleared Then
+        '            If accountReconciliationItem.Debit > 0 Then
+        '                nTotalDebitsCleared += accountReconciliationItem.Debit
+        '                nTotalQtyDebitsCleared += 1
+        '            Else
+        '                nTotalQtyCreditsCleared += 1
+        '                nTotalCreditsCleared += accountReconciliationItem.Credit
+        '            End If
+        '        Else
+        '            If accountReconciliationItem.Debit > 0 Then
+        '                nTotalDebitsNotCleared += accountReconciliationItem.Debit
+        '                nTotalQtyDebitsNotCleared += 1
+        '            Else
+        '                nTotalQtyCreditsNotCleared += 1
+        '                nTotalCreditsNotCleared += accountReconciliationItem.Credit
+        '            End If
+        '        End If
+        '    Next
+        '    TotalDebitsCleared = nTotalDebitsCleared
+        '    TotalCreditsCleared = nTotalCreditsCleared
+        '    TotalDebitsNotCleared = nTotalDebitsNotCleared
+        '    TotalCreditsNotCleared = nTotalCreditsNotCleared
+        '    TotalQtyDebitsCleared = nTotalQtyDebitsCleared
+        '    TotalQtyCreditsCleared = nTotalQtyCreditsCleared
+        '    TotalQtyDebitsNotCleared = nTotalQtyDebitsNotCleared
+        '    TotalQtyCreditsNotCleared = nTotalQtyCreditsNotCleared
+        '    GlSystemBalance = GetGlSystemBalance()
+        '    ReComputeDifference()
+        'End Sub
 
         Private Sub CatchClose(ByVal sender As Object, ByVal e As ComponentModel.CancelEventArgs)
             ' Insert code to deal with impending closure of this form.
@@ -422,20 +438,20 @@ Namespace PresentationLayer.Views.Forms
             AddHandler Closing, AddressOf CatchClose
         End Sub
 
-        Private Function GetGlSystemBalance() As Decimal
-            If cboAccountIdNo.SelectedIndex >= 0 And ReconciliationDate IsNot Nothing Then
-                Dim condition = "AccountIdNo = " & cboAccountIdNo.SelectedValue.ToString() & " and Year = 2017"
-                Dim x = PresenterObj.GetFieldValue(Of Decimal)("Debit-Credit", "AccountBalance", condition)
-                condition = "AccountIdNo = " & cboAccountIdNo.SelectedValue.ToString() & " and TransactionDate <= '" & DtoS(ReconciliationDate) & "'"
-                Dim y = PresenterObj.GetFieldValue(Of Decimal)("sum(Debit-Credit)", "GlLedgers_View", condition)
-                Return x + y
-            End If
-            Return 0
-        End Function
+        'Private Function GetGlSystemBalance() As Decimal
+        '    If cboAccountIdNo.SelectedIndex >= 0 And ReconciliationDate IsNot Nothing Then
+        '        Dim condition = "AccountIdNo = " & cboAccountIdNo.SelectedValue.ToString() & " and Year = 2017"
+        '        Dim x = PresenterObj.GetFieldValue(Of Decimal)("Debit-Credit", "AccountBalance", condition)
+        '        condition = "AccountIdNo = " & cboAccountIdNo.SelectedValue.ToString() & " and TransactionDate <= '" & DtoS(ReconciliationDate) & "'"
+        '        Dim y = PresenterObj.GetFieldValue(Of Decimal)("sum(Debit-Credit)", "GlLedgers_View", condition)
+        '        Return x + y
+        '    End If
+        '    Return 0
+        'End Function
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            UpdateTotals()
-        End Sub
+        'Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+        '    UpdateTotals()
+        'End Sub
 
         'Private Sub GetAcctReconItems()
         '    Dim acctReconItems = _accountReconciliationItemsPresenter.GetAcctReconItems(AccountIdNo, ReconciliationDate, "TransactionDate")
@@ -823,7 +839,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 If AccountIdNo <> 0 And dtpReconciliationDate.Text IsNot Nothing Then
                     AccountReconciliationItems = PresenterObj.GetAcctReconItems(AccountIdNo, ReconciliationDate, PresenterObj.TargetIdNo, "TransactionDate")
-                    UpdateTotals()
+                    'UpdateTotals()
                     DataGridViewReconciliationItems.Refresh()
                 End If
             End If
@@ -837,7 +853,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 If dtpReconciliationDate.Text IsNot Nothing And dtpReconciliationDate.Text <> "" Then
                     AccountReconciliationItems = PresenterObj.GetAcctReconItems(AccountIdNo, ReconciliationDate, PresenterObj.TargetIdNo, "TransactionDate")
-                    UpdateTotals()
+                    'UpdateTotals()
                     DataGridViewReconciliationItems.Refresh()
                 End If
             End If
@@ -872,16 +888,16 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
-            PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", True)
+            'PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", True)
+            PublishEvent(New ClearAllEvent(Me))
             bsAccountReconciliationItems.ResetBindings(False)
-            RaiseEvent ReconciliationItemCheckedChangeEvent(sender, Nothing)
-            UpdateTotals()
+            'UpdateTotals()
         End Sub
 
         Private Sub btnUnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnUnClearAll.ClickButtonArea
             PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", False)
             bsAccountReconciliationItems.ResetBindings(False)
-            UpdateTotals()
+            'UpdateTotals()
         End Sub
 
         'Private Function GetLastRowIndex(radGridView1 As DataGridView) As Integer
