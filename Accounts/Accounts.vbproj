@@ -990,6 +990,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.resx">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ApJournalEntry.resx">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
@@ -1306,9 +1307,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="app-Ispadmin2 - Copy.config" />
     <None Include="app-Ispadmin2.config" />
-    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />

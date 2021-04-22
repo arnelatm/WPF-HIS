@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New AccountReconciliationPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-            PublishEvent(New ReconciliationItemCheckedChangeEvent(Me))
+            'PublishEvent(New ReconciliationClearEvent(Me))
 
         End Sub
 
@@ -293,39 +293,39 @@ Namespace PresentationLayer.Views.Forms
                 With DataGridViewReconciliationItems.CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvcleared"
-                            PublishEvent(New ReconciliationItemCheckedChangeEvent(Me))
-                            Dim selectedRow As AccountReconciliationItemView
-                            Dim checked = DataGridViewReconciliationItems.Rows(e.RowIndex).Cells(e.ColumnIndex).EditedFormattedValue
-                            selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
-                            If checked Then
-                                'DataGridViewReconciliationItems.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Green
-                                If selectedRow.Debit > 0 Then
-                                    TotalDebitsCleared += selectedRow.Debit
-                                    TotalDebitsNotCleared -= selectedRow.Debit
-                                    TotalQtyDebitsCleared += 1
-                                    TotalQtyDebitsNotCleared -= 1
-                                Else
-                                    TotalCreditsCleared += selectedRow.Credit
-                                    TotalCreditsNotCleared -= selectedRow.Credit
-                                    TotalQtyCreditsCleared += 1
-                                    TotalQtyCreditsNotCleared -= 1
-                                End If
-                            Else
-                                'DataGridViewReconciliationItems.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Gray
-                                If selectedRow.Debit > 0 Then
-                                    TotalDebitsCleared -= selectedRow.Debit
-                                    TotalDebitsNotCleared += selectedRow.Debit
-                                    TotalQtyDebitsCleared -= 1
-                                    TotalQtyDebitsNotCleared += 1
-                                Else
-                                    TotalCreditsCleared -= selectedRow.Credit
-                                    TotalCreditsNotCleared += selectedRow.Credit
-                                    TotalQtyCreditsCleared -= 1
-                                    TotalQtyCreditsNotCleared += 1
-                                End If
-                            End If
-                            ReComputeDifference()
-                            Refresh()
+                            PublishEvent(New ReconciliationClearEvent(sender, False, .Value ))
+                            'Dim selectedRow As AccountReconciliationItemView
+                            'Dim checked = DataGridViewReconciliationItems.Rows(e.RowIndex).Cells(e.ColumnIndex).EditedFormattedValue
+                            'selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
+                            'If checked Then
+                            '    'DataGridViewReconciliationItems.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Green
+                            '    If selectedRow.Debit > 0 Then
+                            '        TotalDebitsCleared += selectedRow.Debit
+                            '        TotalDebitsNotCleared -= selectedRow.Debit
+                            '        TotalQtyDebitsCleared += 1
+                            '        TotalQtyDebitsNotCleared -= 1
+                            '    Else
+                            '        TotalCreditsCleared += selectedRow.Credit
+                            '        TotalCreditsNotCleared -= selectedRow.Credit
+                            '        TotalQtyCreditsCleared += 1
+                            '        TotalQtyCreditsNotCleared -= 1
+                            '    End If
+                            'Else
+                            '    'DataGridViewReconciliationItems.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Gray
+                            '    If selectedRow.Debit > 0 Then
+                            '        TotalDebitsCleared -= selectedRow.Debit
+                            '        TotalDebitsNotCleared += selectedRow.Debit
+                            '        TotalQtyDebitsCleared -= 1
+                            '        TotalQtyDebitsNotCleared += 1
+                            '    Else
+                            '        TotalCreditsCleared -= selectedRow.Credit
+                            '        TotalCreditsNotCleared += selectedRow.Credit
+                            '        TotalQtyCreditsCleared -= 1
+                            '        TotalQtyCreditsNotCleared += 1
+                            '    End If
+                            'End If
+                            'ReComputeDifference()
+                            'Refresh()
                     End Select
                 End With
             End If
@@ -888,16 +888,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
-            'PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", True)
-            PublishEvent(New ClearAllEvent(Me))
-            bsAccountReconciliationItems.ResetBindings(False)
-            'UpdateTotals()
+            PublishEvent(New ReconciliationClearEvent(sender, True, True))
+            bsAccountReconciliationItems.ResetBindings(False)            
         End Sub
 
         Private Sub btnUnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnUnClearAll.ClickButtonArea
-            PresenterObj.ProcessRows(AccountReconciliationItems, "Cleared", False)
-            bsAccountReconciliationItems.ResetBindings(False)
-            'UpdateTotals()
+            PublishEvent(New ReconciliationClearEvent(sender, True, False))            
+            bsAccountReconciliationItems.ResetBindings(False)            
         End Sub
 
         'Private Function GetLastRowIndex(radGridView1 As DataGridView) As Integer

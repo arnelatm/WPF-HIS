@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class AccountReconciliationPresenter
         Inherits AccountsPresenter(Of IAccountReconciliationView, AccountReconciliationModel)
-        Implements ISubscriber(Of ReconciliationItemCheckedChangeEvent)
+        Implements ISubscriber(Of ReconciliationClearEvent)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -249,10 +249,20 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub ProcessRows(accountReconciliationItems As List(Of AccountReconciliationItemView), propertyName As String, value As Boolean)
-            For Each accountReconciliationItem In accountReconciliationItems
-                CallByName(accountReconciliationItem, propertyName, CallType.Set, {value})
-            Next
+        Public Sub ProcessReconciliationRequest(eventType As ReconciliationClearEvent)
+            If eventType.All Then
+                For Each accountReconciliationItem In View.AccountReconciliationItems
+                    If eventType.Clear Then
+                        accountReconciliationItem.Cleared = True
+                    Else
+                        accountReconciliationItem.Cleared = False
+                    End If
+                Next
+            Else
+                dim x As DataGridView = eventType.sender
+                Dim i = x.CurrentRow.Index
+                View.AccountReconciliationItems(i).Cleared = eventType.Clear
+            End If
         End Sub
 
         Public Function ToDataTable(Of T)(data As IList(Of T)) As DataTable
@@ -276,8 +286,8 @@ Namespace PresentationLayer.Presenters
             Return table
         End Function
 
-        Public Sub OnReconciliationItemCheckedChangedEvent(ByRef eventType As ReconciliationItemCheckedChangeEvent) Implements ISubscriber(Of ReconciliationItemCheckedChangeEvent).OnEventHandler
-            ProcessRows(View.AccountReconciliationItems, "Cleared", True)
+        Public Sub OnReconciliationClearEvent(ByRef e As ReconciliationClearEvent) Implements ISubscriber(Of ReconciliationClearEvent).OnEventHandler
+            ProcessReconciliationRequest(e)
             UpdateTotals()
         End Sub
 
@@ -336,16 +346,21 @@ Namespace PresentationLayer.Presenters
             View.UnreconciledDifference = View.Balance + View.OutstandingDeposits - View.OutstandingCredits - View.GlSystemBalance
         End Sub
 
+
     End Class
 
-    Public Class ClearAllEvent
-
-        Public Sub New(view)
-            Me.View = view
+    Public Class ReconciliationClearEvent 
+        Public Sub New(sender As Object, all As Boolean, clear As Boolean)
+            'all - set to true to clear/unclear all, false to clear single value
+            'clear - set to true to clear , false to unClear
+            Me.Sender = sender
+            Me.All = all
+            Me.Clear = clear
         End Sub
 
-        Public Property View
-
+        Public Property Sender As Object
+        Public Property All As Boolean
+        Public Property Clear As Boolean
     End Class
 
 End Namespace

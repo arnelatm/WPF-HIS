@@ -166,7 +166,7 @@ Public Class Statement_of_Accounts_Receivable
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_EstablishmentNameAra() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_DisplayName() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(4)
         End Get
@@ -174,7 +174,7 @@ Public Class Statement_of_Accounts_Receivable
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_DisplayName() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_CustomerIdNo() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(5)
         End Get
@@ -182,7 +182,7 @@ Public Class Statement_of_Accounts_Receivable
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_CustomerIdNo() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_ReportTitle() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(6)
         End Get
