@@ -22,6 +22,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property TotalQtyDebitsNotCleared As Integer
         Property UnreconciledDifference As Decimal
         Property AccountReconciliationItems As List(Of AccountReconciliationItemView)
+        Property OutstandingCredits As Decimal
+        Property OutstandingDeposits As Decimal
     End Interface
 
 End Namespace

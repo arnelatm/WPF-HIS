@@ -2,9 +2,11 @@
 
     Public Class ReconciliationItemCheckedChangeEvent
 
-        Public Sub New()
+        Public Sub New(view)
+            Me.View = view
         End Sub
 
+        Public Property View
     End Class
 
 End Namespace
