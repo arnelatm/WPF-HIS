@@ -29,7 +29,7 @@ Begin
 	Insert @Results
 	select *,sum(debit-credit) OVER (PARTITION BY ACCOUNTIDNO ORDER BY TRANSACTIONDATE,JOURNALCODE,JOURNALIDNO,IDNO) AS balance 
 	from GlStatementNew_View 
-	WHERE (TransactionDate >= @BegDataDate and TransactionDate <= @EndDate and Trim(AccountCode) >= @BegAcctCode and Trim(AccountCode) <= @EndAcctCode AND JournalCode<>'BB') 
+	WHERE (TransactionDate >= @BegDataDate and TransactionDate <= @EndDate and AccountCode >= @BegAcctCode and AccountCode <= @EndAcctCode AND JournalCode<>'BB') 
 	   OR (JournalCode='BB' and TransactionDate = dATEfROMpARTS(YEAR(@BegDatadATE)-1,12,31) AND AccountCode >= @BegAcctCode and AccountCode <= @EndAcctCode)
 	order by transactiondate	return
 End
