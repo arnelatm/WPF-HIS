@@ -361,7 +361,6 @@
     <Build Include="dbo\Functions\FuncArStatement.sql" />
     <Build Include="dbo\Functions\FuncApStatement.sql" />
     <Build Include="dbo\Functions\FuncArStatementOld.sql" />
-    <Build Include="dbo\Functions\FuncApStatementOld.sql" />
     <Build Include="dbo\Functions\FuncArSummary.sql" />
     <Build Include="dbo\Functions\FuncApSummary.sql" />
     <Build Include="dbo\Tables\AttendanceItem.sql" />
