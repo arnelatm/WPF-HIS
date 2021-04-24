@@ -28,8 +28,9 @@ Namespace DataLayer.AdoNet
                     " FROM [AccountReconciliation]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim data As AccountReconciliation = _db.Read(sql, Make, params).FirstOrDefault()
             data.AccountReconciliationItems = GetRecordsWithGroupIdNo(idNo, "Sequence")
+            data.ComputeCalculatedProperties()
             Return data
         End Function
 

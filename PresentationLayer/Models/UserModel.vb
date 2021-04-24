@@ -38,7 +38,7 @@ Public Class UserModel
                     Dim eSavedPassword As String
                     eSavedPassword = GetPassword(nLoginIdNo)
                     If eSavedPassword = ePassword Then
-                        Dim userDao = Service.CreateServiceDao("User")
+                        Dim userDao = Service.GetDao("User")
                         Dim user As New User
                         user = userDao.GetRecordByIdNo(nLoginIdNo)
                         GlobalVariables.Mapper.Map(user, Me)
@@ -79,30 +79,28 @@ Public Class UserModel
     End Function
 
     Public Function EncryptPassword(userLoginIdNo As Int32, password As String) As String
-        Dim salt As Salt
+        Dim salt As String
         Dim ePassword As String = Nothing
         Dim saltString As String
         Try
             If userLoginIdNo = 0 Then
                 ePassword = password
-                'saltString = GetSalt(28)
-                'ePassword = HashEncryptStringWithSalt(password, saltString)
-                ' new user no Salt record yet
             Else
-                salt = DataService.GetSaltByLoginIdNo(userLoginIdNo)
+                salt = GetSalt(userLoginIdNo)
                 If salt Is Nothing Then
                     saltString = HashEncryptString(password)
                     Dim newSalt As New Salt
                     newSalt.Salt = saltString.PadLeft(25)
                     newSalt.LoginIdNo = userLoginIdNo
-                    If DataService.InsertSalt(newSalt) > 0 Then
+                    Dim saltDao = Service.GetDao("Salt")
+                    If saltDao.InsertSalt(newSalt) > 0 Then
                         ePassword = HashEncryptStringWithSalt(password, newSalt.Salt)
                     Else
                         MessageBox.Show("Password was not encrypted!")
                     End If
                 Else
                     'Hash the user entered password with the salt value stored in the Salt table
-                    ePassword = HashEncryptStringWithSalt(password, salt.Salt)
+                    ePassword = HashEncryptStringWithSalt(password, salt)
                 End If
             End If
         Catch ex As Exception
@@ -127,10 +125,10 @@ Public Class UserModel
             'Get the salt value for this username
             Dim salt As String
             Try
-                salt = DataService.GetSaltByLoginIdNo(nLoginIdNo).Salt
+                salt = GetSalt(nLoginIdNo)
                 If Not IsDBNull(salt) Then
                     'Hash the user entered password with the salt value stored in the Salt table
-                    ePassword = HashEncryptStringWithSalt(password, salt.ToString)
+                    ePassword = HashEncryptStringWithSalt(password, salt)
                 End If
             Catch ex As Exception
                 MsgBox(ex.ToString)
