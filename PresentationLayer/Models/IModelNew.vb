@@ -2,7 +2,7 @@
 Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 
-Public Interface IModel
+Public Interface IModelNew
 
     Function AddRecord(Of TBiz)(ByRef displayModel As TBiz) As Integer
 
@@ -81,8 +81,6 @@ Public Interface IModel
     Function GetRecords(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As Object
 
     Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
-
-    Function GetField(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String, Optional filter As String = Nothing) As TR
 
     'Function GetRecordsByField(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
 

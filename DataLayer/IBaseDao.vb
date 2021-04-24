@@ -27,6 +27,8 @@ Public Interface IBaseDao
 
     Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 
+    Function GetField(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String, Optional filter As String = Nothing) As TR
+
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject
 
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object

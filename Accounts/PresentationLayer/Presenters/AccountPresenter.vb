@@ -64,7 +64,8 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
-            Return Model.GetRecordFieldWithKey(idNoToSearch, "Account", "ParentIdNo", "AccountName")
+            Return Model.GetField(Of Int32, String)(idNoToSearch, "Account", "ParentIdNo", "AccountName")
+            'Return Model.GetRecordFieldWithKey(idNoToSearch, "Account", "ParentIdNo", "AccountName")
         End Function
 
         Protected Overrides Function IsBizDataValid() As Boolean
@@ -90,7 +91,6 @@ Namespace PresentationLayer.Presenters
                 View.DetailAccount = True
             End If
         End Sub
-
 
     End Class
 

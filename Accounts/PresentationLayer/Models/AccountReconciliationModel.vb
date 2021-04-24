@@ -1,10 +1,13 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.PresentationLayer.Models
+
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class AccountReconciliationModel
+        Inherits ModelNew
 
         Public Property Errors As List(Of String)
         Public Property AccountIdNo As Int16?
@@ -24,6 +27,7 @@
         Public Property TotalQtyDebitsNotCleared As Integer
         Public Property UnreconciledDifference As Decimal
         Public Property AccountReconciliationItems As List(Of AccountReconciliationItemModel)
+
     End Class
 
 End Namespace

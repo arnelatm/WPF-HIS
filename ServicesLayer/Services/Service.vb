@@ -79,15 +79,15 @@ Namespace Services
             End If
         End Sub
 
-        Public Function CreateServiceDao(daoName As String, Optional daoParam As Object = Nothing) As Object
+        Public Function GetDao(objectName As String, Optional daoParam As Object = Nothing) As Object
             Dim dao
             If daoParam Is Nothing OrElse daoParam.Length = 0 Then
-                dao = Factory.CreateDao(daoName)
+                dao = Factory.CreateDao(objectName)
             Else
-                dao = Factory.CreateDao(daoName, daoParam)
+                dao = Factory.CreateDao(objectName, daoParam)
             End If
             If dao Is Nothing Then
-                MessageBox.Show("Missing Data Access Object " + daoName)
+                MessageBox.Show("Missing Data Access Object " + objectName)
                 Debugger.Break()
             End If
             Return dao
@@ -122,8 +122,12 @@ Namespace Services
             Return DataBo.GetRules()
         End Function
 
-        Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
+        Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object Implements IService.GetField
             Return BaseDao.GetField(searchValue, tableName, searchFieldName, returnFieldName)
+        End Function
+
+        Public Function GetField(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String, Optional filter As String = Nothing) As TR Implements IService.GetField
+            Return BaseDao.GetField(Of TR, TS)(searchValue, tableName, searchFieldName, returnFieldName, filter)
         End Function
 
         Public Function GetBizObject()

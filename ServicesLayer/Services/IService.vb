@@ -50,8 +50,6 @@ Namespace Services
 
         Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
-        'Function GetRecordsByField(ByVal tableName As String, ByVal sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
-
         Function FieldExistInTable(ByVal tableName As String, ByVal fieldName As String) As Boolean
 
         Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal fields As String(), Optional filterKey As String = Nothing) As Object
@@ -97,6 +95,10 @@ Namespace Services
         Function InitializeSecurityObject() As Integer
 
         Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) As Integer
+
+        Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
+
+        Function GetField(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String, Optional filter As String = Nothing) As TR
 
     End Interface
 
