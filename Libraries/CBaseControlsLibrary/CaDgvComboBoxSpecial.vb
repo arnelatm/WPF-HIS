@@ -1,14 +1,14 @@
 ﻿Imports System.Windows.Forms
 
-Public Class CaDgvComboBox
-    Inherits CaComboBox
+Public Class CaDgvComboBoxSpecial
+    Inherits CComboboxSpecial
     Implements IDataGridViewEditingControl
 
     Public Sub New()
         MyBase.New()
-        'AutoCompleteMode = AutoCompleteMode.None
+        AutoCompleteMode = AutoCompleteMode.None
         DropDownStyle = ComboBoxStyle.DropDown
-        AutoCompleteSource = AutoCompleteSource.ListItems
+        AutoCompleteSource = AutoCompleteSource.CustomSource
         AutoCompleteMode = AutoCompleteMode.SuggestAppend
     End Sub
 
@@ -47,11 +47,6 @@ Public Class CaDgvComboBox
             Return False
         End Get
     End Property
-
-    'Private Declare Auto Function GetWindow Lib "user32.dll" (
-    '    ByVal hWnd As IntPtr,
-    '    ByVal wCmd As Int32
-    ') As IntPtr
 
     Public Sub ApplyCellStyleToEditingControl(dataGridViewCellStyle As DataGridViewCellStyle) Implements IDataGridViewEditingControl.ApplyCellStyleToEditingControl
         Font = dataGridViewCellStyle.Font
