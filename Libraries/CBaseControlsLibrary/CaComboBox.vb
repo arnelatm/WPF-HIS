@@ -32,7 +32,7 @@ Public Class CaComboBox
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
     Protected PropertySelectorCompiled As Func(Of ObjectCollection, IEnumerable(Of String))
     Public DataSourceProgrammaticChange As Boolean = False
-    Public SuggestListForm As CListBoxForm = New CListBoxForm
+    Protected SuggestListForm As CListBoxForm = New CListBoxForm
 
     Public Property ChangingSearchValueOnly As Boolean = False
 
@@ -314,8 +314,9 @@ Public Class CaComboBox
         End If
     End Sub
 
-    Protected Overloads Overrides Sub OnDropDown(e As EventArgs)
+    Protected Overrides Sub OnDropDown(e As EventArgs)
         HideSuggestionBox()
+        'SetVisibleCore(True)
         If DisplayOnly Then
             _previousIndex = SelectedIndex
         End If
@@ -364,6 +365,22 @@ Public Class CaComboBox
         MyBase.OnPreviewKeyDown(e)
     End Sub
 
+    Private Sub HideDropDown(hide As Boolean)
+        If hide Then
+            DropDownStyle = ComboBoxStyle.Simple
+            MaxDropDownItems = 1
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            DropDownHeight = Height
+        Else
+            MaxDropDownItems = _defaultMaxDropDownItems
+            DropDownStyle = _defaultDropdownStyle
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            DropDownHeight = _defaultDropDownHeight
+        End If
+    End Sub
+
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
         MyBase.OnTextChanged(e)
         If Not Focused Then Return
@@ -374,12 +391,16 @@ Public Class CaComboBox
         _suggestBindingList.ResetBindings()
         Dim showForm As Boolean
         showForm = _suggestBindingList.Any()
-        SuggestListForm.Visible = showForm
+        'SuggestListForm.Visible = showForm
         If showForm Then
             SetListBoxFormLocation(SuggestListForm)
             SuggestListForm.Visible = True
+            'Me.SendToBack()
+            'SuggestListForm.BringToFront()
+            'Me.Focus()
         Else
-            SuggestListForm.Hide()
+            'SuggestListForm.Hide()
+            'Me.SetVisibleCore(True)
         End If
         If _suggestBindingList.Count = 0 And LimitToList Then
             Beep()
@@ -390,6 +411,10 @@ Public Class CaComboBox
             HideSuggestionBox()
         End If
     End Sub
+
+    'Protected Sub SuggestListListForm(ByVal e As EventArgs) Handles SuggestListForm.OnTextChanged()
+
+    'End Sub
 
     Private Sub caComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
         HandleMouseUp(sender, e)
@@ -438,10 +463,11 @@ Public Class CaComboBox
         _suggestListOrderRuleCompiled = Function(s) s
         PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
         SetStyle(ControlStyles.EnableNotifyMessage, True)
-
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
+        SuggestListForm.SuggestListBox.ForeColor = Color.Green
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
         AddHandler ParentChanged, AddressOf OnParentChanged
+
     End Sub
 
     Public Function GetValue()
@@ -729,6 +755,7 @@ Public Class CaComboBox
     End Sub
 
     Private Sub SetListBoxFormLocation(ByRef suggestLbForm As CListBoxForm)
+        'SetVisibleCore(True)
         Dim pnt As Point
         Dim formLocation As Point
         Dim screenRectangle As Rectangle
@@ -751,6 +778,25 @@ Public Class CaComboBox
         Text = SuggestListForm.SuggestListBox.Text
         Focus()
     End Sub
+
+    'Private Event SuggestListBoxOnTextChanged()
+
+    'Private Sub OnSuggestListBoxOnTextChanged()
+    '    If Not Focused Then Return
+    '    _suggestBindingList.Clear()
+    '    _suggestBindingList.RaiseListChangedEvents = False
+    '    PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
+    '    _suggestBindingList.RaiseListChangedEvents = True
+    '    _suggestBindingList.ResetBindings()
+    '    If _suggestBindingList.Count = 0 And LimitToList Then
+    '        Beep()
+    '        SendKeys.SendWait("{BACKSPACE}")
+    '    ElseIf _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
+    '        Text = _suggestBindingList.Single()
+    '        [Select](0, Text.Length)
+    '        HideSuggestionBox()
+    '    End If
+    'End Sub
 
 #End Region
 
@@ -855,6 +901,11 @@ Public Class CaComboBox
     'End Function
 
 End Class
+
+'Public Class CSuggestListForm
+'    Inherits CListBoxForm
+
+'End Class
 
 'Sample Use
 '

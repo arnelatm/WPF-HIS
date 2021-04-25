@@ -516,14 +516,15 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.DataSource = _accountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
-                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvAccountIdNo.AutoComplete = True
+                'dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                'dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+                'dgvAccountIdNo.AutoComplete = True
                 dgvRevCostCenterIdNo.DataSource = _revCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
-                dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                'dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                'dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                'dgvRevCostCenterIdNo.AutoComplete = True
             End With
             ResumeLayout()
         End Sub
@@ -641,20 +642,23 @@ Namespace PresentationLayer.Views.Forms
                     Dim nIndex = .CurrentRow.Index
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvaccountidno"
-                            Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                            If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
-                                bsJournalItems.AddNew()
-                                JournalItems(nIndex).AccountIdNo = accountId
-                                ' adding a new row to the bindingsource adds a new empty row at the end with null values
-                                ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+                            If DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl IsNot Nothing Then
+                                'Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                                Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                                If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
+                                    bsJournalItems.AddNew()
+                                    JournalItems(nIndex).AccountIdNo = accountId
+                                    ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                                    bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+                                End If
+                                If JournalItems.Count() - 1 <= nIndex Then
+                                    MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
+                                    UpdateInputVatAmount()
+                                    bsJournalItems.ResetItem(nIndex)
+                                End If
+                                DataGridViewJournalItems.Refresh()
                             End If
-                            If JournalItems.Count() - 1 <= nIndex Then
-                                MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
-                                UpdateInputVatAmount()
-                                bsJournalItems.ResetItem(nIndex)
-                            End If
-                            DataGridViewJournalItems.Refresh()
                         Case $"dgvdebit"
                             MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
                             UpdateJiTotals()
