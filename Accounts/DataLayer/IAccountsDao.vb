@@ -42,6 +42,8 @@ Namespace DataLayer
 
         Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Int32, Optional sortExpression As String = Nothing) As List(Of TM)
 
+        Function GetAccountBalance(endDate As Date, accountIdNo As Int16) As Decimal
+
     End Interface
 
     Public Interface IDaoOiItem(Of TM)
