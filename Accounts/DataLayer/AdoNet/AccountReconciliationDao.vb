@@ -225,6 +225,11 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
+        Public Function GetAccountBalance(EndDate As Date, accountIdNo As Int16) as Decimal Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetAccountBalance
+            Dim sql As String = "Select Sum(Debit-Credit) from FuncGlAccountStatement(@EndDate,@EndDate,@AccountIdNo,@AccountIdNo)"
+            Return _db.Scalar(sql, {"@EndDate", EndDate, "@AccountIdNo", accountIdNo})
+        End Function
+
     End Class
 
 End Namespace
