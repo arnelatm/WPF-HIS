@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views.Forms
         Private _previousBegDateSearch As Date?
         Private _previousEndDateSearch As Date?
         Private _previousColumnSearch As Int16
+        Private _accounts As List(Of ClassesLibrary.LookupData)
 
         Public Sub New()
             MyBase.New()
@@ -100,6 +101,20 @@ Namespace PresentationLayer.Views.Forms
                 If Value.Any() Then
                     dtpReconciliationDate.DisplayOnly = True
                     cboAccountIdNo.DisplayOnly = True
+                End If
+            End Set
+        End Property
+
+        Public Property Accounts As List(Of ClassesLibrary.LookupData) Implements IAccountReconciliationView.Accounts
+            Get
+                Return _accounts
+            End Get
+            Set(value As List(Of ClassesLibrary.LookupData))
+                _accounts = value
+                If value.Any Then
+                    cboAccountIdNo.DataSource = Nothing
+                    cboAccountIdNo.DataSource = value
+                    cboAccountIdNo.Refresh()
                 End If
             End Set
         End Property
@@ -237,12 +252,12 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            'cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
-            cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("BA,CK,CS")
-            cboAccountIdNo.EndUpdate()
-        End Sub
+        'Protected Overrides Sub CreateDataSources()
+        '    'cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
+        '    cboAccountIdNo.BeginUpdate()
+        '    cboAccountIdNo.DataSource = Accounts ' PresenterObj.GetAccountTypesList("BA,CK,CS")
+        '    cboAccountIdNo.EndUpdate()
+        'End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -623,39 +638,34 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated, dtpReconciliationDate.ValueChanged
-            If PresenterObj.EditMode Then
+            If Not btnEdit.Enabled Then
+                'If cboAccountIdNo.SelectedValue = 0 Then
+                '    cboAccountIdNo.DisplayOnly = False
+                'End If
                 If dtpReconciliationDate.DateChanged() Then
                     PublishEvent(New EndingReconciliationDateChangedEvent(sender))
-                    'If PresenterObj.EditMode And AccountReconciliationItems.Any() Then
-                    '    Messaging.Show("MsgDateChangedNotAllowed", "Sorry you can't change the reconciliation date when account reconciliation grid is not empty. Previous value restored.")
-                    '    dtpReconciliationDate.Undo()
-                    'End If
-                    'If AccountIdNo <> 0 And dtpReconciliationDate.Text IsNot Nothing Then
-                    '    AccountReconciliationItems = PresenterObj.GetAcctReconItems(AccountIdNo, ReconciliationDate, PresenterObj.TargetIdNo, "TransactionDate")
-                    '    DataGridViewReconciliationItems.Refresh()
-                    'End If
                 End If
             End If
         End Sub
 
-        'Private Sub cboAccountIdNo_Validating(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
-        '    If cboAccountIdNo.SelectedIndex > -1 Then
-        '        'If AccountReconciliationItems.Any() Then
-        '        '    Messaging.Show(True, "MsgOnEmptyReconChangeAccNotAllowed", "Sorry you can't change the account to reconcile when account reconciliation grid is not empty. Previous value restored.", "Account change not allowed")
-        '        '    cboAccountIdNo.RevertValue()
-        '        'End If
-        '        If dtpReconciliationDate.Text IsNot Nothing And dtpReconciliationDate.Text <> "" Then
-        '            AccountReconciliationItems = PresenterObj.GetAcctReconItems(AccountIdNo, ReconciliationDate, PresenterObj.TargetIdNo, "TransactionDate")
-        '            DataGridViewReconciliationItems.Refresh()
-        '        End If
-        '    End If
-        'End Sub
+        Private Sub cboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
+            If Not btnEdit.Enabled Then
+                PublishEvent(New EndingReconciliationDateChangedEvent(sender))
+            End If
+        End Sub
+
+        Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+            cboAccountIdNo.DisplayOnly = False
+            dtpReconciliationDate.DisplayOnly = False
+            dtpReconciliationDate.Focus()
+        End Sub
 
         Private Sub btnPost_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
             PublishEvent(New ReconciliationPostingRequestEvent(sender, Not btnSave.Enabled))
         End Sub
 
         Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
+
             PublishEvent(New ReconciliationClearEvent(sender, True, True, bsAccountReconciliationItems))
         End Sub
 

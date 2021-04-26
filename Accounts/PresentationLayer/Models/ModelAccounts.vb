@@ -64,6 +64,10 @@ Namespace PresentationLayer.Models
             Return DataService.UpdateVatNumber(vatNumber, idNo)
         End Function
 
+        Public Function GetAccountBalance(endDate As Date, accountIdNo As Int16) As Decimal Implements IModelAccounts.GetAccountBalance
+            Return DataService.GetAccountBalance(endDate, accountIdNo)
+        End Function
+
         Public Function GetOpenPettyCash()
             Dim data = DataService.GetOpenPettyCash()
             Return data

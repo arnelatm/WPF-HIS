@@ -290,37 +290,41 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnReconciliationClearEvent(ByRef e As ReconciliationClearEvent) Implements ISubscriber(Of ReconciliationClearEvent).OnEventHandler
-            ProcessReconciliationRequest(e)
-            UpdateTotals()
-            e.DataBindingSource.ResetBindings(False)
+            If EditMode Then
+                ProcessReconciliationRequest(e)
+                UpdateTotals()
+                e.DataBindingSource.ResetBindings(False)
+            End If
         End Sub
 
         Private Sub UpdateTotals()
-            View.GlSystemBalance = GetGlSystemBalance()
-            ReComputeDifference()
+            If View.AccountIdNo > 0 Then
+                View.GlSystemBalance = ModelOfPresenter.GetAccountBalance(View.ReconciliationDate, View.AccountIdNo)
+                ReComputeDifference()
+            End If
         End Sub
 
-        Private Function GetGlSystemBalance() As Decimal
-            If View.AccountIdNo >= 0 And View.ReconciliationDate IsNot Nothing Then
-                Dim lastFiscalYearEndDate = Model.GetField(Of Date, String)("LastFiscalYearEnd", "LastPosting", "TransactionName", "LastPostingDate")
-                If View.ReconciliationDate >= lastFiscalYearEndDate Then
-                    Dim previousBalance = Model.GetField(Of Decimal, Int16)(View.AccountIdNo, "AccountBalance", "AccountIdNo", "Debit-Credit", " year = " & DateAndTime.Year(lastFiscalYearEndDate))
-                    Dim condition = " AccountIdNo = " & View.AccountIdNo.ToString() &
-                                    " and TransactionDate > '" & DtoS(lastFiscalYearEndDate) &
-                                    "' and TransactionDate <= '" & DtoS(View.ReconciliationDate) & "'"
-                    Dim currentBalance As Decimal = GetFieldValue(Of Decimal)("sum(Debit-Credit)", "GlLedgers_View", condition)
-                    Return previousBalance + currentBalance
-                End If
-            End If
-            'If ReconciliationDate Then
-            '    Dim condition = "AccountIdNo = " & View.AccountIdNo.ToString() & " and Year = 2017"
-            '    Dim x = GetFieldValue(Of Decimal)("Debit-Credit", "AccountBalance", condition)
-            '    condition = "AccountIdNo = " & View.AccountIdNo.ToString() & " and TransactionDate <= '" & DtoS(View.ReconciliationDate) & "'"
-            '    Dim y = GetFieldValue(Of Decimal)("sum(Debit-Credit)", "GlLedgers_View", condition)
-            '    Return x + y
-            'End If
-            Return 0
-        End Function
+        'Private Function GetGlSystemBalance() As Decimal
+        '    If View.AccountIdNo >= 0 And View.ReconciliationDate IsNot Nothing Then
+        '        Dim lastFiscalYearEndDate = Model.GetField(Of Date, String)("LastFiscalYearEnd", "LastPosting", "TransactionName", "LastPostingDate")
+        '        If View.ReconciliationDate >= lastFiscalYearEndDate Then
+        '            Dim previousBalance = Model.GetField(Of Decimal, Int16)(View.AccountIdNo, "AccountBalance", "AccountIdNo", "Debit-Credit", " year = " & DateAndTime.Year(lastFiscalYearEndDate))
+        '            Dim condition = " AccountIdNo = " & View.AccountIdNo.ToString() &
+        '                            " and TransactionDate > '" & DtoS(lastFiscalYearEndDate) &
+        '                            "' and TransactionDate <= '" & DtoS(View.ReconciliationDate) & "'"
+        '            Dim currentBalance As Decimal = GetFieldValue(Of Decimal)("sum(Debit-Credit)", "GlLedgers_View", condition)
+        '            Return previousBalance + currentBalance
+        '        End If
+        '    End If
+        '    'If ReconciliationDate Then
+        '    '    Dim condition = "AccountIdNo = " & View.AccountIdNo.ToString() & " and Year = 2017"
+        '    '    Dim x = GetFieldValue(Of Decimal)("Debit-Credit", "AccountBalance", condition)
+        '    '    condition = "AccountIdNo = " & View.AccountIdNo.ToString() & " and TransactionDate <= '" & DtoS(View.ReconciliationDate) & "'"
+        '    '    Dim y = GetFieldValue(Of Decimal)("sum(Debit-Credit)", "GlLedgers_View", condition)
+        '    '    Return x + y
+        '    'End If
+        '    Return 0
+        'End Function
 
         Private Sub ReComputeDifference()
             View.UnreconciledDifference = View.Balance + View.OutstandingDeposits - View.OutstandingCredits - View.GlSystemBalance
@@ -359,14 +363,18 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnEndingReconciliationDateChangedEvent(ByRef eventType As EndingReconciliationDateChangedEvent) Implements ISubscriber(Of EndingReconciliationDateChangedEvent).OnEventHandler
-            If View.AccountIdNo <> 0 Then ' And View.ReconciliationDate IsNot Nothing Then
-                View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
-                UpdateTotals()
+            If AddMode Then
+                If View.AccountIdNo <> 0 And View.ReconciliationDate IsNot Nothing Then
+                    View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
+                    UpdateTotals()
+                End If
             End If
         End Sub
 
         Public Sub OnReconciliationRefreshRequestEvent(ByRef eventType As ReconciliationRefreshRequestEvent) Implements ISubscriber(Of ReconciliationRefreshRequestEvent).OnEventHandler
-            UpdateTotals()
+            If EditMode Then
+                UpdateTotals()
+            End If
         End Sub
 
     End Class

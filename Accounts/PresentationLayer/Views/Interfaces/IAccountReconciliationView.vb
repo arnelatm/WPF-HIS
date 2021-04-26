@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -22,6 +23,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TotalQtyDebitsNotCleared As Integer
         Property UnreconciledDifference As Decimal
         Property AccountReconciliationItems As List(Of AccountReconciliationItemView)
+        Property Accounts As List(Of ClassesLibrary.LookupData)
         Property OutstandingCredits As Decimal
         Property OutstandingDeposits As Decimal
     End Interface

@@ -1,6 +1,7 @@
 ﻿Imports System.Reflection
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common.ServiceLayer
@@ -21,6 +22,7 @@ Namespace ServiceLayer.ActionService
         Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
             CreateBusinessObject(objectName, bizParam)
             CreateDao(objectName, daoParam)
+
         End Sub
 
         Protected Overrides Sub CreateBusinessObject(objectName As String, Optional bizParam As Object = Nothing)
@@ -101,6 +103,11 @@ Namespace ServiceLayer.ActionService
 
         Public Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer Implements IServiceAccounts.UpdateVatNumber
             Return DataDao.UpdateVatNumber(vatNumber, idNo)
+        End Function
+
+        Public Function GetAccountBalance(endDate As Date, accountIdNo As Int16) As Integer Implements IServiceAccounts.GetAccountBalance
+            Dim accountDao = New AccountDao
+            Return DataDao.GetAccountBalance(endDate, accountIdNo)
         End Function
 
         Public Function GetOpenPettyCash() Implements IServiceAccounts.GetOpenPettyCash
