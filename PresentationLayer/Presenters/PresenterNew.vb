@@ -1,9 +1,12 @@
 ﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Transactions
 Imports System.Windows.Forms
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -19,16 +22,17 @@ Imports KellermanSoftware.CompareNetObjects
 ''' <remarks>
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
-''' <typeparam name="T">Type of view.</typeparam>
+''' <typeparam name="T">Type of itemView.</typeparam>
 Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Implements ISubscriber(Of SelectedButton)
 
     Public ChildPresenters As New List(Of Object)
+    Public ChildModels As New List(Of Object)
     Public IdFieldName As String = "IdNo"
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
     Protected CompareDifferences As String
-    Protected DataModel
+    Protected DataModel = New TM
     Protected DataService
     Protected DbDataDao
     Protected OriginalModel
@@ -37,43 +41,36 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Protected TreeViewMainField As String
     Protected TreeViewParentIdField As String
     Protected TreeViewSecondaryField As String
+    Protected DataFilter As String = Nothing
     Private ReadOnly _debugSwitch As Byte = 0
     Private ReadOnly _tableColumnPropertyList As List(Of TblColPropModel)
     Private _addMode As Boolean = False
     Private _editMode As Boolean = False
     Private _errorList As String = ""
     Private _recordPositionNumber As Integer = 0
-
-    'Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
     Private _targetIdNo As Int32 = 0
-
     Private _undoMode As Boolean = False
+    Private _tableName As String
 
-    Protected Shared Property ModelTblColProp As IModelTblColProp = New ModelTblColProp
+    Public Sub New(itemView As T)
+        If itemView Is Nothing Then
+            ''
+        Else
+            Me.View = itemView
+            TableName = GetPropertyValue(Me.View, "MainTableName")
+            If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
+                MessageBox.Show($"'TableName' property is not set in the Form.")
+            End If
+            Dim tableColumnPropertyList As List(Of TblColPropModel)
+            tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
+            TableProperties = tableColumnPropertyList.ToArray
+        End If
+    End Sub
 
     Protected Sub New()
         'ModelTblColProp = New ModelTblColProp
         Model = New Model()
         'ModelDefaultFieldValue = New ModelDefaultFieldValue
-    End Sub
-
-    Public Sub New(view As T)
-        If view Is Nothing Then
-            ''
-        Else
-            Me.View = view
-
-            TableName = GetPropertyValue(Me.View, "MainTableName")
-            'GetPropertyValue(view,"MainTableName")
-            If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
-                MessageBox.Show($"'MainTableName' property of the form is not set.")
-            End If
-            Dim tableColumnPropertyList As List(Of TblColPropModel)
-
-            tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
-            TableProperties = tableColumnPropertyList.ToArray
-            'TableDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(TableName)
-        End If
     End Sub
 
     Delegate Sub FillDataFunc(ByRef dataView As Object, ByRef workRow As DataRow)
@@ -90,7 +87,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Event AfterRecordRetrieval(values As TM)
 
-    Public Event AfterSave(retVal As Integer)
+    Public Event AfterSave()
 
     Public Event BeforeAdd()
 
@@ -135,12 +132,16 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End Get
     End Property
 
+    Public Property QuitOnSave As Boolean = False
+    Public Property AskBeforeSave As Boolean = False
+    Public Property SaveSuccessful As Boolean = False
     Public Property AutoValidationsPassed As Boolean = False
     Public Property CancelDelete As Boolean = False
     Public Property CancelEdit As Boolean = False
     Public Property CancelSave As Boolean = False
     Public Property CurrentSortKeyValue As String
     Public Property Ea As EventAggregator
+    Public Property DisableSaveMemento
 
     Public Property EditMode As Boolean
         Set
@@ -149,7 +150,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 Ea.PublishEvent(New EditModeChanged(Value))
             End If
             If Value Then
-                SaveOriginalValues()
+                If Not DisableSaveMemento Then
+                    SaveOriginalValues()
+                End If
             End If
         End Set
         Get
@@ -158,12 +161,13 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Property
 
     Public Property EnumConverter As ResourceEnumConverter
-
-    '<Description("This is the last IdNo of the Displayed record before moving to a different record.")>
-    'Public Property CurrentIdNo As Int32
     Public Property LastIdNo As Int32
 
-    Public Property ModelPresenter
+    ' This is the model of the Inheriting Presenter
+    ' when refferred to in this module this will be the current model
+    ' while if reffered in the Inheriting Presenter it will be the
+    ' model assigned to that presenter.
+    Public Property ModelOfPresenter
         Get
             Return Model
         End Get
@@ -173,8 +177,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Property
 
     Public Property NewlyAddedRecordIdNo As Int32
-
-    'Public Shared Property RecordCount As Integer
     Public Property RecordCount As Integer
 
     Public Property RecordPositionNumber As Integer
@@ -183,25 +185,32 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End Get
         Set(value As Integer)
             _recordPositionNumber = value
-            TargetIdNo = GetIdNoOfSortedPositionNumber(RecordPositionNumber)
+            TargetIdNo = GetIdNoOfSortedPositionNumber(value)
         End Set
     End Property
 
-    'Public Shared Property TableDefaultFieldValues As List(Of DefaultFieldValueModel)
-
-    'Public Shared Property TableName As String
     Public Property TableName As String
+        Get
+            Return _tableName
+        End Get
+        Set(value As String)
+            _tableName = value
+        End Set
+    End Property
 
-    'Public Shared Property TableProperties As Array
     Public Property TableProperties As Array
 
-    'Public Property TableDefaultFieldValues
-    <Description("This is the value of the current IdNo in the TxtIdNo Field ")>
     Public Property TargetIdNo As Int32
         Get
+            'If _targetIdNo = 0 Then
+            '    Debugger.Break()
+            'End If
             Return _targetIdNo
         End Get
         Set(value As Integer)
+            'If value = 0 Then
+            '    Debugger.Break()
+            'End If
             _targetIdNo = value
             UpdateViewDisplay(value)
             If Ea IsNot Nothing Then
@@ -222,6 +231,15 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Property
 
     Public Property View As T
+    Protected Property LookUpDisplayCode As String
+    Protected Property LookUpDisplayName As String
+    Protected Property LookUpDisplayNameArabic As String
+    Protected Property LookUpFieldsToShow As String()
+    Protected Property LookUpFilterKey As String = Nothing
+    Protected Property LookUpSortExpression As String
+    Protected Property LookUpTableToGet As String
+    Protected Property Model As IModel
+    Protected Shared Property ModelTblColProp As IModelTblColProp = New ModelTblColProp
 
     'Public Sub FindFieldContinue(recIdKey As Integer)
     '    If _debugSwitch Then
@@ -236,9 +254,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     '        CancelClose = True
     '    End If
     'End Sub
-
-    Protected Property Model As New Model()
-
     Public Shared Function CreateClass(className As String, properties As Dictionary(Of String, Type)) As Type
 
         Dim myDomain As AppDomain = AppDomain.CurrentDomain
@@ -374,13 +389,41 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         '
     End Sub
 
-    Public Sub FindField(fieldName, searchString, searchAnywhere)
-        Dim idNo = Model.FindField(TableName, fieldName, searchString, searchAnywhere)
-        RecordPositionNumber = GetSortedRecordPosition(idNo)
+    Public Sub FindField(fieldName As String, searchString As String, searchPlace As Char)
+        Dim idNo = Model.FindField(TableName, fieldName, searchString, searchPlace, DataFilter)
+        If idNo <> 0 Then
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
+        Else
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+        End If
     End Sub
 
+    Public Sub FindFieldNew(findableControl As IFindableControl)
+        'Dim fieldType = Model.GetFieldType(TableName, findableControl.FieldName)
+        Dim idNo = Model.FindFieldNew(TableName, findableControl, SortOrderKey, DataFilter)
+        If idNo <> 0 Then
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
+        Else
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+        End If
+    End Sub
+
+    Public Sub FindDateField(fieldName As String, findableControl As IFindableControl)
+        Dim idNo = Model.FindDateField(TableName, findableControl, DataFilter)
+        If idNo <> 0 Then
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
+        Else
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+        End If
+    End Sub
+
+    Public Function FindFieldOnTable(tableNameToSearch, fieldName, searchString, searchPlace)
+        Dim idNo = Model.FindField(tableNameToSearch, fieldName, searchString, searchPlace, DataFilter)
+        Return idNo
+    End Function
+
     Public Function FindFieldContinue(idNo As Int32) As Integer
-        Return Model.FindFieldContinue(TableName, idNo)
+        Return Model.FindFieldContinue(TableName, idNo, SortOrderKey)
     End Function
 
     Public Function FindRecord() As Integer
@@ -406,7 +449,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return Model.GetBizObjectErrors()
     End Function
 
-    'Public Shared SecurityModel As New Model
     Public Function GetBizObjectRules()
         Return Model.GetBizObjectRules()
     End Function
@@ -444,10 +486,32 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer) As Integer
         Try
-            Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, SortOrderKey)
+            Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, SortOrderKey, DataFilter)
         Catch ex As Exception
             Return 0
         End Try
+    End Function
+
+    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing)
+        ComposeLookupParameters(listName)
+        ProcessLookupFields()
+        Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
+    End Function
+
+    Public Overloads Function GetLookup(LookupTableToGet As String, LookUpSortExpression As String, LookupFieldsToShow As String(), Optional filter As String = Nothing)
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            If Model.FieldExistInTable(LookupTableToGet, LookUpSortExpression.Trim() + "Ara") Then
+                LookUpSortExpression = LookUpSortExpression.Trim() + "Ara"
+            End If
+            If Model.FieldExistInTable(LookupFieldsToShow(1), LookupFieldsToShow(1).Trim() + "Ara") Then
+                dFieldName = LookupFieldsToShow(1).Trim() + "Ara"
+            Else
+                dFieldName = LookupFieldsToShow(1)
+            End If
+            LookupFieldsToShow = {LookupFieldsToShow(0), dFieldName, LookupFieldsToShow(2)}
+        End If
+        Return Model.GetLookup(LookupTableToGet, LookUpSortExpression, LookupFieldsToShow, filter)
     End Function
 
     Public Function GetOriginalModel() As TM
@@ -467,9 +531,14 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return retVal
     End Function
 
-    Public Function GetRecordCount() As Integer
+    Public Function GetRecordCount(Optional pTableName As String = Nothing, Optional pFilter As String = Nothing) As Integer
         Try
-            Return Model.GetRecordCount(TableName)
+            If pTableName Is Nothing Then
+                pTableName = TableName
+                Return Model.GetRecordCount(TableName, DataFilter)
+            Else
+                Return Model.GetRecordCount(pTableName, pFilter)
+            End If
         Catch ex As Exception
             Return 0
         End Try
@@ -496,9 +565,18 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     '    End If
     '    Return PresenterObj.TargetIdNo
     'End Function
+
     Public Function GetRecordDateTimeStamp(idNo As Int32) As Object
         Try
             Return Model.GetRecordDateTimeStamp(idNo, TableName)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+    Public Function GetRecordField(cTableName As String, returnFieldName As String) As Object
+        Try
+            Return Model.GetRecordField(cTableName, returnFieldName)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -522,18 +600,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End Try
     End Function
 
-    'Public Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
-    '                                             returnFieldName As String) As T _
-    '    Implements IModel.GetRecordFieldWithKeyG
-    '    Return Service.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
-    'End Function
-    'Public Function GetMaxValueFiltered(searchFieldName As String, cTableName As String, returnFieldName As String, filter As String) As Object
-    '    Try
-    '        Return Model.GetMaxValueFiltered(searchFieldName, cTableName, returnFieldName, filter)
-    '    Catch ex As Exception
-    '        Return Nothing
-    '    End Try
-    'End Function
     Public Function GetRecordPosition(idNo As Int32)
         Try
             Return Model.GetRecordPosition(TableName, idNo) + 1
@@ -559,15 +625,15 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetSortedRecordPosition(idNo As Int32) As Integer
         Try
-            Return Model.GetSortedRecordPosition(idNo, TableName, SortOrderKey)
+            Return Model.GetSortedRecordPosition(idNo, TableName, SortOrderKey, DataFilter)
         Catch ex As Exception
             Return 0
         End Try
     End Function
 
-    Public Function GetSqlValue(Of TType)(sqlStatement As String, cTableName As String, condition As String) As TType
+    Public Function GetFieldValue(Of TType)(sqlStatement As String, cTableName As String, condition As String) As TType
         Try
-            Return Model.GetSqlValue(Of TType)(sqlStatement, cTableName, condition)
+            Return Model.GetFieldValue(Of TType)(sqlStatement, cTableName, condition)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -593,68 +659,39 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetTreeViewData()
         Dim cModel As New TM
-
         Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName})
+                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
+                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
             Else
-                Return Model.GetRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField})
+                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
+                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
             End If
         Else
             newSortOrderKey = "SortKey"
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
                 Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
             Else
-                Return Model.GetHRecords(TableName, newSortOrderKey,
-                                      {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
+                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
             End If
         End If
     End Function
 
-    Protected Function GetTranslatedSortOrderKey(Of TX)(sortKey As String, ByRef dModel As TX) As String
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            If GlobalVariables.RightToLeftLayout Then
-                Dim stringLength = SortOrderKey.Length
-                Dim suffix = ""
-                Dim nameOfField As String = sortKey
-                If stringLength > 4 And
-                   (SortOrderKey.Substring(stringLength - 4).ToLower() = " asc" OrElse
-                    SortOrderKey.Substring(stringLength - 4).ToLower() = " des") Then
-                    suffix = SortOrderKey.Substring(stringLength - 4)
-                    nameOfField = SortOrderKey.Substring(0, stringLength - 4)
-                End If
-                nameOfField = GetTranslatedField(Of TX)(nameOfField, dModel)
-                sortKey = nameOfField + suffix
-            End If
-        End If
-        Return sortKey
+    'Public Function GetRecordsByField(ByVal tableName As String, ByVal sortOrder As String, fieldNames As String(), Optional filter As String = Nothing)
+    '    Return Model.GetRecords(tableName, sortOrder, fieldNames, filter)
+    'End Function
+
+    Public Function GetRecords(ByVal tableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
+        Return Model.GetRecords(tableName, sortOrder, fieldNames, filter)
     End Function
 
-    Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
-        Dim translatedSortOrder As String = dataSortOrder
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            If GlobalVariables.RightToLeftLayout Then
-                Dim stringLength = dataSortOrder.Length
-                Dim suffix = ""
-                Dim nameOfField As String = dataSortOrder
-                If stringLength > 4 And
-                   (dataSortOrder.Substring(stringLength - 4).ToLower() = " asc" OrElse
-                    dataSortOrder.Substring(stringLength - 4).ToLower() = " des") Then
-                    suffix = dataSortOrder.Substring(stringLength - 4)
-                    nameOfField = dataSortOrder.Substring(0, stringLength - 4)
-                End If
-                If PropertyExists(dModel, nameOfField + "ara") Then
-                    nameOfField += "Ara"
-                    translatedSortOrder = nameOfField + suffix
-                End If
-            End If
-        End If
-        Return translatedSortOrder
-    End Function
+    'Public Function GetFields(ByVal tableName As String, ByVal sortOrder As String, ByVal ParamArray fieldNames() As String)
+    '    Return Model.GetFields(tableName, sortOrder, fieldNames)
+    'End Function
 
-    Public Function GetUserSecurity(securityObjectIdNo As Int16, securityGroupIdNo As Int16) As ArrayList
+    Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
         Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
 
@@ -662,14 +699,20 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
     End Function
 
+    Public Function AddSecurityObject(securityObject As SecurityObject) As Int32
+        Return Model.AddSecurityObject(securityObject)
+    End Function
+
+    Public Function InitializeSecurityObject() As Integer
+        Return Model.InitializeSecurityObject()
+    End Function
+
     Public Overridable Sub GoAddRecord()
         LastIdNo = CallByName(View, IdFieldName, CallType.Get)
         Try
             DataModel = New TM
             GlobalVariables.Mapper.Map(DataModel, View)
-            'MakeDefaultValues()
             AddMode = True
-            'EditMode = False
             RaiseEvent BeforeAdd()
         Catch oEx As Exception
             MsgBox("Error:   " + oEx.Message)
@@ -682,16 +725,13 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retValue = 0
         Dim currentIdNo = CallByName(View, IdFieldName, CallType.Get)
-        If IsOkToDeleteRecord(currentIdNo) Then
+        If IsOkToDeleteRecord() Then
             If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 RaiseEvent BeforeDelete()
                 retValue = DeleteRecord(currentIdNo)
                 If retValue <= 0 Then
                     Messaging.Show(True, "MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
-                    'If Ea IsNot Nothing Then
-                    '    Ea.PublishEvent(New RecordDeleted2(DataModel))
-                    'End If
                     Messaging.Show(True, "MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
                     ' if deleted stay on that given RecordPositionNumber
                     ' which in this case will be the next record after the deleted record
@@ -701,9 +741,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                         GoLastRecord()
                     End If
                     UpdateViewDisplay(TargetIdNo)
-                    If Ea IsNot Nothing Then
-                        Ea.PublishEvent(New RecordSaved(DataModel))
-                    End If
                 End If
                 RaiseEvent AfterDelete()
             End If
@@ -712,13 +749,15 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Public Sub GoEditRecord()
-        RaiseEvent BeforeEdit()
-        If CancelEdit Then
-            CancelEdit = False
-        Else
-            EditMode = True
+        If IsOkToEditRecord() Then
+            RaiseEvent BeforeEdit()
+            If CancelEdit Then
+                CancelEdit = False
+            Else
+                EditMode = True
+            End If
+            'RaiseEvent AfterEdit()
         End If
-        'RaiseEvent AfterEdit()
     End Sub
 
     Public Sub GoFindRecord()
@@ -726,7 +765,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         If idNoOfFoundRecord = 0 Then
             If Messaging.Show(True, "AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
                               MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                idNoOfFoundRecord = FindFieldContinue(1)
+                idNoOfFoundRecord = FindFieldContinue(0)
                 RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
             Else
                 '' stay on the current record
@@ -784,40 +823,71 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Overridable Sub GoSaveRecord()
-        Dim retVal As Integer
+        Dim continueSave As Boolean = True
         Dim addAnother = False
-        retVal = Save()
-        If retVal > 0 Then
-            Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
-            If AddMode Then
-                If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
-                                  "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-                                  MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                    addAnother = True
-                Else
-                    Dim idNo = CallByName(View, IdFieldName, CallType.Get)
-                    RecordPositionNumber = GetSortedRecordPosition(idNo)
+        If AskBeforeSave Then
+            If Not MessageBeforeSave() Then
+                continueSave = False
+            End If
+        End If
+        If continueSave Then
+            Dim retVal As Integer
+            retVal = Save()
+            If retVal > 0 Then
+                SaveSuccessful = True
+                Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+                If Not QuitOnSave Then
+                    If AddMode Then
+                        If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
+                                      "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                                      MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                            addAnother = True
+                        Else
+                            Dim idNo = CallByName(View, IdFieldName, CallType.Get)
+                            RecordPositionNumber = GetSortedRecordPosition(idNo)
+                        End If
+                    Else
+                        RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
+                        'RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
+                    End If
+                    If AddMode Then
+                        AddMode = False
+                    Else
+                        EditMode = False
+                    End If
+                    If addAnother Then
+                        GoAddRecord()
+                    End If
                 End If
             Else
-                RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
-            End If
-            If AddMode Then
-                AddMode = False
-            Else
-                EditMode = False
-            End If
-            If addAnother Then
-                GoAddRecord()
+                SaveSuccessful = False
             End If
         End If
     End Sub
 
+    Public Overridable Function MessageBeforeSave() As Boolean
+        Dim retVal As Boolean = False
+        Dim message = "Are you sure you want to {action} this {itemName} entry?"
+        Dim caption = "Please confirm."
+        Dim action As String = Messaging.TranslateCaption("save")
+        Dim itemName As String = Messaging.TranslateCaption("transaction")
+        Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+        'message = message.Interpolate(Function(x) action, Function(x) itemName)
+        If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            retVal = True
+        End If
+        Return retVal
+    End Function
+
     Public Sub GoTranslate()
         'Dim frm As New TranslationTableManager()
-        'frm.FormIdNoToTranslate = FormIdNo
+        'frm.SystemViewIdNoToTranslate = SystemViewIdNo
         'frm.AppDataDAC = AppDataDAC
         'frm.TranslatorDAC = TranslatorDAC
         'frm.Show()
+    End Sub
+
+    Public Overridable Sub GoFilter()
     End Sub
 
     Public Sub GoUndoChanges()
@@ -832,12 +902,15 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             End If
         End If
         UndoMode = False
-        'CancelClose = True
     End Sub
 
-    Public Overridable Function IsOkToDeleteRecord(idNo As Int32) As Boolean
+    Public Overridable Function IsOkToEditRecord() As Boolean
+        Return True
+    End Function
+
+    Public Overridable Function IsOkToDeleteRecord() As Boolean
         Dim retValue As Boolean = False
-        If Not DependentRecordsExist(idNo) Then
+        If Not DependentRecordsExist() Then
             retValue = True
         End If
         Return retValue
@@ -852,7 +925,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Overridable Function OkToMove() As Boolean
         Dim retValue As Boolean = False
-        If Not (EditMode OrElse AddMode) Then
+        If QuitOnSave Then
+            retValue = True
+        ElseIf Not (EditMode OrElse AddMode) Then
             retValue = True
         Else
             Dim result As DialogResult
@@ -862,24 +937,17 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                     If result = DialogResult.Yes Then
                         result = Save()
                         If result > 0 Then
-                            'Dim message = Messaging.GetMessage(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
-                            'message = message + Environment.NewLine & CompareDifferences
                             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                             If AddMode Then
                                 RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
-                                'AddMode = False
-                                'Else
-                                'EditMode = False
                             End If
                             retValue = True
                         End If
                     Else
                         If AddMode Then
                             RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
-                            'AddMode = False
                         Else
                             RecordPositionNumber = RecordPositionNumber
-                            'EditMode = False
                         End If
                         retValue = True
                     End If
@@ -888,11 +956,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 End If
             Else
                 retValue = True
-                'If AddMode Then
-                '    AddMode = False
-                'Else
-                '    EditMode = False
-                'End If
             End If
         End If
         If retValue Then
@@ -905,70 +968,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    'Public Sub MakeDefaultValues()
-    '    For Each item In TableDefaultFieldValues
-    '        Select Case item.DataType
-    '            Case DataTypeSelection.StringType
-    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-    '            Case DataTypeSelection.Accountype
-    '                CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
-    '            Case DataTypeSelection.IntegerType
-    '                CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
-    '            Case DataTypeSelection.BooleanType
-    '                CallByName(View, item.FieldName, CallType.Set, CBool(item.DefaultValue))
-    '            Case DataTypeSelection.SingleType
-    '                CallByName(View, item.FieldName, CallType.Set, CSng(item.DefaultValue))
-    '            Case DataTypeSelection.DoubleType
-    '                CallByName(View, item.FieldName, CallType.Set, CDbl(item.DefaultValue))
-    '            Case DataTypeSelection.DecimalType
-    '                CallByName(View, item.FieldName, CallType.Set, CDec(item.DefaultValue))
-    '            Case DataTypeSelection.LongType
-    '                CallByName(View, item.FieldName, CallType.Set, CLng(item.DefaultValue))
-    '            Case DataTypeSelection.DateType
-    '                If item.DefaultValue = "today" Then
-    '                    CallByName(View, item.FieldName, CallType.Set, Today())
-    '                ElseIf item.DefaultValue = "yesterday" Then
-    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(-1))
-    '                ElseIf item.DefaultValue = "tomorrow" Then
-    '                    CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(1))
-    '                Else
-    '                    CallByName(View, item.FieldName, CallType.Set, CDate(item.DefaultValue))
-    '                End If
-    '            Case DataTypeSelection.ShortType
-    '                CallByName(View, item.FieldName, CallType.Set, CShort(item.DefaultValue))
-    '            Case DataTypeSelection.UIntegerType
-    '                CallByName(View, item.FieldName, CallType.Set, CUInt(item.DefaultValue))
-    '            Case DataTypeSelection.ULongType
-    '                CallByName(View, item.FieldName, CallType.Set, CULng(item.DefaultValue))
-    '            Case DataTypeSelection.UShortType
-    '                CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
-    '            Case Else
-    '                MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in table " & item.TableName & " conversion not handled")
-    '        End Select
-    '    Next item
-    '    Return
-    'End Sub
-    'Public Function MakeEnumComboList(Of TE)()
-    '    If EnumConverter Is Nothing Then
-    '        EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
-    '    End If
-    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
-    '    'Dim enumValues = [Enum].GetValues(GetType(TE))
-    '    'Dim x As Object
-    '    For Each c In [Enum].GetValues(GetType(TE))
-    '        Dim data As New ClassesLibrary.LookupData
-    '        'dim code As String
-    '        data.IdNo = CInt(c)
-    '        'code = GlobalFunctions.GetDescription(c,"")
-    '        data.Code = EnumToCode(c)
-    '        'x = Adapter.GetEnumDescription(c)
-    '        'data.Code = Adaptor.GetEnumDescription(c)
-    '        data.Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
-    '        dataList.Add(data)
-    '    Next
-    '    Return dataList
-    'End Function
-    Public Sub OnEventHandler(ByRef e As SelectedButton) Implements ISubscriber(Of SelectedButton).OnEventHandler
+    Public Sub OnSelectedButton(ByRef e As SelectedButton) Implements ISubscriber(Of SelectedButton).OnEventHandler
         Select Case e.ClickedButton
             Case ButtonClicked.First
                 GoFirstRecord()
@@ -996,12 +996,14 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 GoQuit()
             Case ButtonClicked.Translate
                 GoTranslate()
+            Case ButtonClicked.Filter
+                GoFilter()
         End Select
     End Sub
 
     Public Overridable Function Save()
         Dim retVal As Integer = 0
-        If EditMode AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then
+        If EditMode AndAlso (Not AddMode) AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then
             Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
         Else
             RaiseEvent BeforeValidate()
@@ -1022,17 +1024,19 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                         'Else
                         '    Messaging.Show(true,"MsgRecordHasBeenSaved", "Record has been successfully saved!")
                     Else
-                        RaiseEvent AfterSave(retVal)
+                        RaiseEvent AfterSave()
                         If Ea IsNot Nothing Then
                             Ea.PublishEvent(New RecordSaved(DataModel))
                         End If
                     End If
+                Else
+                    retVal = -1
                 End If
             End If
         End If
-        If retVal <= 0 Then
+        If retVal < 0 Then
             Dim lErrors = GetBizObjectErrors()
-            If Ea IsNot Nothing Then
+            If Ea IsNot Nothing And lErrors IsNot Nothing Then
                 Ea.PublishEvent(New PassErrorList(lErrors))
             End If
             Beep()
@@ -1047,13 +1051,19 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         msg = Messaging.GetMessage(True, "AskIfUserWantsToSaveOrContinueEdits",
                                  "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?",
                                  "Please Confirm.")
-        result = Messaging.Show(msg & Environment.NewLine & CompareDifferences, "Please Confirm", MessageBoxButtons.YesNoCancel,
+        If GlobalVariables.ShowDataDifferenceWhenSaving Then
+            result = Messaging.Show(msg & Environment.NewLine & CompareDifferences, "Please Confirm", MessageBoxButtons.YesNoCancel,
                                 MessageBoxIcon.Question,
                                 MessageBoxDefaultButton.Button3)
+        Else
+            result = Messaging.Show(msg & Environment.NewLine, "Please Confirm", MessageBoxButtons.YesNoCancel,
+                                    MessageBoxIcon.Question,
+                                    MessageBoxDefaultButton.Button3)
+        End If
         Return result
     End Function
 
-    Public Sub SaveOriginalValues()
+    Public Overridable Sub SaveOriginalValues()
         GlobalVariables.Mapper.Map(Of T, TM)(Me.View, Me.OriginalModel)
     End Sub
 
@@ -1070,7 +1080,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Next
         Messaging.MessageKey = "ValidationErrors"
         Messaging.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'MessageBox.Show(_errorList, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
 
     Public Sub Undo()
@@ -1103,7 +1112,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Dim modelData As TM
             RecordCount = GetRecordCount()
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
-            modelData = ModelPresenter.GetRecordById(Of TM)(idNo)
+            modelData = Model.GetRecordByIdNo(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New BeforeAssignment(modelData))
@@ -1136,20 +1145,98 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Protected Overridable Function AddRecord(record As TM) As Integer
         Dim retVal As Integer
-        NewlyAddedRecordIdNo = ModelPresenter.AddRecord(record)
+        NewlyAddedRecordIdNo = Model.AddRecord(record)
         retVal = NewlyAddedRecordIdNo
         CallByName(View, IdFieldName, CallType.Set, retVal)
         Return retVal
     End Function
 
-    Protected Overridable Function DependentRecordsExist(masterIdNo As Int32) As Integer
-        Return 0
+    Protected Sub ComposeLookupParameters(listName As String)
+        LookUpTableToGet = listName
+        LookUpDisplayName = listName + "Name"
+        LookUpSortExpression = LookUpDisplayName
+        LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
+        LookUpDisplayCode = listName + "Code"
+    End Sub
+
+    Protected Sub ComposeLookupParametersNew(listName As String)
+        LookUpTableToGet = listName
+        LookUpDisplayName = "Name"
+        LookUpSortExpression = LookUpDisplayName
+        LookUpDisplayNameArabic = "NameAra"
+        LookUpDisplayCode = "Code"
+    End Sub
+
+    Protected Overridable Function DependentRecordsExist() As Boolean
+        Return False
+    End Function
+
+    Protected Function GetLookupByCodeName()
+        ProcessLookupFields()
+        Return Model.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
+    End Function
+
+    Protected Function GetLookupByName()
+        ProcessLookupFields()
+        Return Model.GetLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
+    End Function
+
+    Protected Function GetLookupByNameCode()
+        ProcessLookupFields()
+        Return Model.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
+    End Function
+
+    Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
+        Dim translatedSortOrder As String = dataSortOrder
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            If GlobalVariables.RightToLeftLayout Then
+                Dim stringLength = dataSortOrder.Length
+                Dim suffix = ""
+                Dim nameOfField As String = dataSortOrder
+                If stringLength > 4 And
+                   (dataSortOrder.Substring(stringLength - 4).ToLower() = " asc" OrElse
+                    dataSortOrder.Substring(stringLength - 4).ToLower() = " des") Then
+                    suffix = dataSortOrder.Substring(stringLength - 4)
+                    nameOfField = dataSortOrder.Substring(0, stringLength - 4)
+                End If
+                If PropertyExists(dModel, nameOfField + "ara") Then
+                    nameOfField += "Ara"
+                    translatedSortOrder = nameOfField + suffix
+                End If
+            End If
+        End If
+        Return translatedSortOrder
+    End Function
+
+    Protected Function GetTranslatedSortOrderKey(Of TX)(sortKey As String, ByRef dModel As TX) As String
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            If GlobalVariables.RightToLeftLayout Then
+                Dim stringLength = SortOrderKey.Length
+                Dim suffix = ""
+                Dim nameOfField As String = sortKey
+                If stringLength > 4 And
+                   (SortOrderKey.Substring(stringLength - 4).ToLower() = " asc" OrElse
+                    SortOrderKey.Substring(stringLength - 4).ToLower() = " des") Then
+                    suffix = SortOrderKey.Substring(stringLength - 4)
+                    nameOfField = SortOrderKey.Substring(0, stringLength - 4)
+                End If
+                nameOfField = GetTranslatedField(Of TX)(nameOfField, dModel)
+                sortKey = nameOfField + suffix
+            End If
+        End If
+        Return sortKey
     End Function
 
     Protected Overridable Function IsBizDataValid() As Boolean
         Dim retValue As Boolean = False
         GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
         If Model.IsValid(DataModel) Then
+            'For Each item In ChildModels
+            '    GlobalVariables.Mapper.Map()
+            '    If Not item.IsBizDataValid() Then
+            '        Exit For
+            '    End If
+            'Next
             retValue = True
         End If
         Return retValue
@@ -1200,14 +1287,14 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim retVal As Integer
         Dim updateReturnValue As Object
         Dim insertReturnValue As Object
-        updateReturnValue = ModelPresenter.DelUpdateTvp(updateTable, parentIdNo)
+        updateReturnValue = Model.DelUpdateTvp(updateTable, parentIdNo)
         If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
             If parentIdNo <> 0 Then
                 For Each row As DataRow In insertTable.Rows
                     row.Item(parentIdFieldName) = parentIdNo
                 Next
             End If
-            insertReturnValue = ModelPresenter.InsertTvp(insertTable)
+            insertReturnValue = Model.InsertTvp(insertTable)
             If insertReturnValue >= 0 Then
                 retVal = updateReturnValue + insertReturnValue
             Else
@@ -1223,16 +1310,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return Model.UpdateRecord(record)
     End Function
 
-    'Public Sub OnBeforeEdit() Handles BeforeEdit()
-    '    Dim type As Type = View.GetType
-    '    If type.GetProperty("Posted") IsNot Nothing Then
-    '        Dim cPosted = CallByName(View, "Posted", CallType.Get)
-    '        If cPosted Then
-    '            Messaging.Show(True, "MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
-    '            CancelEdit = True
-    '        End If
-    '    End If
-    'End Sub
     Protected Function ViewToDataTables(ByRef dataViews As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
                                       ByVal includeFilter As Predicate(Of Object), ByVal Optional dataViewIdNoFieldName As String = "IdNo", ByVal Optional sequenceFieldName As String = "Sequence") As DataRow
         If insertTable IsNot Nothing Then
@@ -1252,7 +1329,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                     workRow = updateTable.NewRow()
                     workRow(dataViewIdNoFieldName) = idNo
                 End If
-                workRow(sequenceFieldName) = nRowCount
+                If sequenceFieldName <> "" Then
+                    workRow(sequenceFieldName) = nRowCount
+                End If
                 fillSub.Invoke(dataView, workRow)
                 If idNo <= 0 Then
                     insertTable.Rows.Add(workRow)
@@ -1283,7 +1362,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                     End If
                 Else
                     retValue = UpdateRecord(record)
-                    If retValue > 0 Then
+                    If retValue >= 0 Then
                         Dim retVal As Integer = retValue
                         RaiseEvent RecordUpdatedSuccessfully(retVal)
                         If retVal < 0 Then
@@ -1315,21 +1394,84 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return retValue
     End Function
 
+    Private Sub ProcessLookupFields()
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            If LookUpSortExpression = LookUpDisplayName Then
+                LookUpSortExpression = LookUpDisplayNameArabic
+            End If
+            dFieldName = LookUpDisplayNameArabic
+        Else
+            dFieldName = LookUpDisplayName
+        End If
+        LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
+    End Sub
+
     Private Function RecordHasChanged(idNo As Int32, timeStampedValue As Object) As Boolean
         Dim retValue = False
         Try
-            Dim newDateTimeStamp As Object
-            newDateTimeStamp = Model.GetRecordDateTimeStamp(idNo, TableName, DateTimeStampField)
-            For i = 0 To 7
-                If timeStampedValue(i) <> newDateTimeStamp(i) Then
-                    retValue = True
-                    Exit For
+            If timeStampedValue IsNot Nothing Then
+                Dim newDateTimeStamp As Object
+                newDateTimeStamp = Model.GetRecordDateTimeStamp(idNo, TableName, DateTimeStampField)
+                If newDateTimeStamp IsNot Nothing Then
+                    For i = 0 To 7
+                        If timeStampedValue(i) <> newDateTimeStamp(i) Then
+                            retValue = True
+                            Exit For
+                        End If
+                    Next
                 End If
-            Next
+            End If
         Catch ex As Exception
             Return Nothing
         End Try
         Return retValue
     End Function
+
+    Public Function MakeEnumComboList(Of TE)()
+        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim data As New ClassesLibrary.LookupData With {
+                .IdNo = CInt(c),
+                .Code = EnumToCode(c),
+                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+            }
+            dataList.Add(data)
+        Next
+        Return dataList
+    End Function
+
+    Public Function MakeEnumComboList2(Of TE)()
+        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim data As New ClassesLibrary.LookupData With {
+                    .IdNo = CInt(c),
+                    .Code = CInt(c),
+                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+                    }
+            dataList.Add(data)
+        Next
+        Return dataList
+    End Function
+
+    Public Sub AddToParentError(errors As List(Of String))
+        Dim mainBizObj = DirectCast(DirectCast(DirectCast(Model, AATM.PresentationLayer.Models.Model).DataService, AATM.ServicesLayer.Services.Service).DataBo, AATM.BusinessLayer.BusinessObject)
+        mainBizObj.AddError(errors)
+    End Sub
+
+    Public Function IsBusinessDataValid(ByRef dataDictionary As Dictionary(Of String, Object)) As Boolean
+        Dim retValue As Boolean = False
+        GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+        If Model.IsValid(DataModel) Then
+            retValue = True
+        Else
+            UpdateErrors(dataDictionary)
+        End If
+        Return retValue
+    End Function
+
+    Private Sub UpdateErrors(ByRef dataDictionary As Dictionary(Of String, Object))
+
+    End Sub
 
 End Class

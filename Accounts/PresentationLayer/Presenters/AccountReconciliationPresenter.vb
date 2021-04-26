@@ -58,7 +58,6 @@ Namespace PresentationLayer.Presenters
         Public Sub OnReconciliationItemCheckedChangeEvent(sender, pView)
             Dim x = sender
             Dim y = pView
-
         End Sub
 
         'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
@@ -297,6 +296,11 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Overrides Sub UpdateViewDisplay(idNo As Int32)
+            MyBase.UpdateViewDisplay(idNo)
+            UpdateTotals()
+        End Sub
+
         Private Sub UpdateTotals()
             If View.AccountIdNo > 0 Then
                 View.GlSystemBalance = ModelOfPresenter.GetAccountBalance(View.ReconciliationDate, View.AccountIdNo)
@@ -372,7 +376,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnReconciliationRefreshRequestEvent(ByRef eventType As ReconciliationRefreshRequestEvent) Implements ISubscriber(Of ReconciliationRefreshRequestEvent).OnEventHandler
-            If EditMode Then
+            If EditMode or AddMode Then
                 UpdateTotals()
             End If
         End Sub

@@ -9,28 +9,20 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports AATM.Libraries.AatmInterfaces
 
 Public Class CFormEntryNew
-    Implements ISubscriber(Of RecordPositionChanged),
-               ISubscriber(Of EditModeChanged),
-               ISubscriber(Of AddModeChanged),
-               ISubscriber(Of ValidatingData),
-               ISubscriber(Of PassErrorList),
-               ISubscriber(Of QuitView),
-               ISubscriber(Of RecordSaved),
-               ISubscriber(Of BeforeAssignment)
-    '          ISubscriber(Of RecordDeleted),
 
     Public MainFieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
     Public ShowWaitForm As BackgroundWorker(Of String)
     Protected Const TurnOff As Boolean = False
     Protected Shared _resetEvent As AutoResetEvent = New AutoResetEvent(False)
-
     Protected FirstControl As Control
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
     Protected SortOrderKey As String = "IdNo"
+    Protected SingleData As Boolean = False
     Private _debugSwitch As Byte = 0
 
     Public Sub New()
@@ -38,8 +30,7 @@ Public Class CFormEntryNew
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = True
-        'Ea = PresenterObj.Ea
-        'Ea.SubscribeEvent(Me)
+        DoubleBuffered = True
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -50,13 +41,6 @@ Public Class CFormEntryNew
     Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (hProcess As IntPtr,
                                                                           dwMinimumWorkingSetSize As Int32,
                                                                           dwMaximumWorkingSetSize As Int32) As Int32
-    'Private Declare Auto Function SendMessage Lib "user32" ( ByVal hwnd As IntPtr, ByVal wMsg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr ) As IntPtr
-
-    'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-    '    SendMessage(Me.Handle, msg.Msg, msg.WParam, msg.LParam)
-    '    Return MyBase.ProcessCmdKey(msg, keyData)
-    'End Function
-
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
@@ -82,13 +66,9 @@ Public Class CFormEntryNew
     Public Sub CheckDataChanges()
     End Sub
 
-    Public Sub FindField(txtControl As Control)
-        Dim fieldName As String = txtControl.Name.Substring(3)
-        Dim searchString As String
-        Dim searchPlace As Char
-        searchString = CallByName(txtControl, "GetTextToSearch", CallType.Get)
-        searchPlace = CallByName(txtControl, "GetSearchPlace", CallType.Get)
-        PresenterObj.FindField(fieldName, searchString, searchPlace)
+
+    Public Sub FindFieldNew(findableControl As IFindableControl)
+        PresenterObj.FindFieldNew(findableControl)
     End Sub
 
     Public Function GetMainFieldsDictionary()
@@ -165,21 +145,19 @@ Public Class CFormEntryNew
     End Sub
 
     Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
-        UpdateRecordCounter()
-        UpdateButtonDisplays(False, False)
-        MyErrorProvider.ClearAllErrorMessages()
-        MyErrorProvider.Clear()
-        Inputs(False)
-        RecordPositionChanged(e)
+        If Not SingleData Then
+            UpdateRecordCounter()
+            UpdateButtonDisplays(False, False)
+            MyErrorProvider.ClearAllErrorMessages()
+            MyErrorProvider.Clear()
+            Inputs(False)
+            RecordPositionChanged(e)
+        End If
     End Sub
 
     Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
         RecordSaved(e)
     End Sub
-
-    'Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted) Implements ISubscriber(Of RecordDeleted).OnEventHandler
-    '    RecordDeleted(e)
-    'End Sub
 
     Public Sub OnEventHandlerAddedRecord(ByRef e As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
         BeforeAssignment()
@@ -208,35 +186,23 @@ Public Class CFormEntryNew
     End Sub
 
     Public Sub ShowWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
-        'Dim progress As Int32 = 0
-        'Dim IdNoTarget as Int32 = 0
-        'waitMessageSetter.RunWorkerAsync(e.Argument)
-        'Debugger.Break()
-        'Do While IdNoTarget = 0
         If ShowWaitForm.CancellationPending Then
             e.Cancel = True
             Return
         End If
-        'Thread.Sleep(10)
-        'showWaitForm.ReportProgress(progress)
-        'Debugger.Break()
         e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
-        '_resetEvent.Set()
-        'Thread.Sleep(10)
-        'loop
-        'showWaitForm.ReportProgress(progress)
     End Sub
 
-    'Private Sub TurnOffInputs()
-    '    Inputs(False)
-    '    InputsTurnedOff()
-    'End Sub
+    Protected Sub TurnOffInputs()
+        Inputs(False)
+        InputsTurnedOff()
+    End Sub
 
-    'Private Sub TurnOnInputs()
-    '    Inputs(True)
-    '    InputsTurnedOn()
-    '    FirstControl.Focus()
-    'End Sub
+    Protected Sub TurnOnInputs()
+        Inputs(True)
+        InputsTurnedOn()
+        FirstControl.Focus()
+    End Sub
 
     Protected Overridable Sub InputsTurnedOn()
     End Sub
@@ -264,13 +230,14 @@ Public Class CFormEntryNew
         Return validationsPassed
     End Function
 
-    Public Function ValidateView()
+    Public Overridable Function ValidateView()
         Dim validationsPassed As Boolean
         validationsPassed = True
         Dim allControls As New List(Of Control)
         Dim originalValue As String
         For Each cCtrl As Control In FindControlRecursive(allControls, Me)
             If TypeOf cCtrl Is IEntryControl Then
+
                 If TypeOf cCtrl Is CTextBoxIdNo Then
                     ' no validations for this type of control. These are Identity Columns and are filled automatically
                     ' by the Data Server.
@@ -304,6 +271,7 @@ Public Class CFormEntryNew
                         End If
                     End If
                 End If
+
             End If
         Next
         PresenterObj.AutoValidationsPassed = validationsPassed
@@ -346,9 +314,6 @@ Public Class CFormEntryNew
 
     Public Function ValidateNumber(ByRef obj As Object)
         Dim objName = Strings.Mid(obj.Name, 4)
-        'If objName.ToLower() = "length" Or objName.ToLower() = "decimalpart" Then
-        '    Debugger.Break()
-        'End If
         Dim targetValue = obj.Text
         Dim y As PropertyInfo = [GetType]().GetProperty(objName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase)
         If y IsNot Nothing Then
@@ -356,16 +321,6 @@ Public Class CFormEntryNew
             Dim u As Type = Nullable.GetUnderlyingType(x)
             If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
                 Return True
-                'If u IsNot Nothing Then
-                '    Return True
-                'Else
-                '    If Type.GetTypeCode(x) = TypeCode.String Then
-                '        Return True
-                '    Else
-                '        MessageBox.Show($"Empty values not allowed for " & obj.Name & ".")
-                '        Return True
-                '    End If
-                'End If
             Else
                 Dim num As Double
                 Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
@@ -411,67 +366,6 @@ Public Class CFormEntryNew
 
     End Function
 
-    'Public Function GetObjMinMaxValue(obj As Object, ByRef nMaxValue As Double) As Double
-    '    Dim objName = Strings.Mid(obj.Name, 4)
-    '    Dim targetValue = obj.Text
-    '    Dim y As PropertyInfo = [GetType]().GetProperty(objName)
-    '    Dim x As Type = y.PropertyType
-    '    Dim u As Type = Nullable.GetUnderlyingType(x)
-    '    Dim typeCode As TypeCode
-    '    Dim nMinValue As Double
-    '    If u Is Nothing Then
-    '        typeCode = Type.GetTypeCode(x)
-    '        nMinValue = GetMinMaxValue(typeCode, nMaxValue)
-    '    Else
-    '        typeCode = Type.GetTypeCode(u)
-    '        nMinValue = GetMinMaxValue(typeCode, nMaxValue)
-    '    End If
-    '    Return nMinValue
-    'End Function
-
-    'Public Function GetMinMaxValue(typeCode As TypeCode, ByRef nMaxValue As Double) As Double
-    '    Dim nMinValue As Double
-    '    Select Case typeCode
-    '        Case TypeCode.Byte
-    '            nMinValue = Byte.MinValue
-    '            nMaxValue = Byte.MaxValue
-    '        Case TypeCode.Int16
-    '            nMinValue = Int16.MinValue
-    '            nMaxValue = Int16.MaxValue
-    '        Case TypeCode.Int32
-    '            nMinValue = Int32.MinValue
-    '            nMaxValue = Int32.MaxValue
-    '        Case TypeCode.Int64
-    '            nMinValue = Int64.MinValue
-    '            nMaxValue = Int64.MaxValue
-    '        Case TypeCode.UInt16
-    '            nMinValue = UInt16.MinValue
-    '            nMaxValue = UInt16.MaxValue
-    '        Case TypeCode.UInt32
-    '            nMinValue = UInt32.MinValue
-    '            nMaxValue = UInt32.MaxValue
-    '        Case TypeCode.UInt64
-    '            nMinValue = UInt64.MinValue
-    '            nMaxValue = UInt64.MaxValue
-    '        Case TypeCode.Single
-    '            nMinValue = Single.MinValue
-    '            nMaxValue = Single.MaxValue
-    '        Case TypeCode.Decimal
-    '            nMinValue = Decimal.MinValue
-    '            nMaxValue = Decimal.MaxValue
-    '        Case TypeCode.DBNull
-    '            nMinValue = 0
-    '            nMaxValue = 0
-    '        Case Else
-    '            nMinValue = Double.MinValue
-    '            nMaxValue = Double.MaxValue
-    '    End Select
-    '    Return nMinValue
-    'End Function
-
-    'Protected Overridable Sub AddMandatoryFieldCHeck()
-    'End Sub
-
     Protected Overridable Function ChangesMade()
         Return PresenterObj.ChangesMade()
     End Function
@@ -504,61 +398,64 @@ Public Class CFormEntryNew
     Protected Overridable Sub RecordSaved(ByRef e As RecordSaved)
     End Sub
 
-    'Protected Overridable Sub RecordDeleted(ByRef e As RecordDeleted)
-    'End Sub
-
     Protected Overridable Sub BeforeAssignment()
     End Sub
 
     Protected Sub UpdateButtonDisplays(editing As Boolean, adding As Boolean)
-        If RecordCount = 0 Then
-            btnFirst.Enabled = False
-            btnPrev.Enabled = False
-            btnNext.Enabled = False
-            btnLast.Enabled = False
-            btnEdit.Enabled = False
-            btnDelete.Enabled = False
-            btnUndo.Enabled = False
-            btnSave.Enabled = False
-            btnFind.Enabled = False
-            btnPrint.Enabled = False
-            If Not PresenterObj.AddMode Then
-                btnUndo.Enabled = False
-                btnSave.Enabled = False
-                Messaging.Show(True, "MsgNoRecordsFound", "No records found for this table!", "Empty Table")
-            Else
-                btnSave.Enabled = True
-                btnUndo.Enabled = True
-            End If
+        If SingleData Then
+            btnAdd.Visible = False
+            btnFind.Visible = False
+            HideNavigatorButtons = True
         Else
-            If PresenterObj.RecordPositionNumber = 1 Then
+            If RecordCount = 0 Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False
-            Else
-                btnFirst.Enabled = True
-                btnPrev.Enabled = True
-            End If
-            If PresenterObj.RecordPositionNumber >= RecordCount Then
-                btnLast.Enabled = False
                 btnNext.Enabled = False
-            Else
-                btnLast.Enabled = True
-                btnNext.Enabled = True
-            End If
-            If editing OrElse adding Then
+                btnLast.Enabled = False
                 btnEdit.Enabled = False
-                btnAdd.Enabled = False
                 btnDelete.Enabled = False
-                btnUndo.Enabled = True
-                btnSave.Enabled = True
-                btnPrint.Enabled = False
-            Else
-                btnEdit.Enabled = True
-                btnDelete.Enabled = True
-                btnAdd.Enabled = True
                 btnUndo.Enabled = False
                 btnSave.Enabled = False
-                btnPrint.Enabled = True
+                btnFind.Enabled = False
+                btnPrint.Enabled = False
+                If Not PresenterObj.AddMode Then
+                    btnUndo.Enabled = False
+                    btnSave.Enabled = False
+                    Messaging.Show(True, "MsgNoRecordsFound", "No records found for this table!", "Empty Table")
+                Else
+                    btnSave.Enabled = True
+                    btnUndo.Enabled = True
+                End If
+            Else
+                If PresenterObj.RecordPositionNumber = 1 Then
+                    btnFirst.Enabled = False
+                    btnPrev.Enabled = False
+                Else
+                    btnFirst.Enabled = True
+                    btnPrev.Enabled = True
+                End If
+                If PresenterObj.RecordPositionNumber >= RecordCount Then
+                    btnLast.Enabled = False
+                    btnNext.Enabled = False
+                Else
+                    btnLast.Enabled = True
+                    btnNext.Enabled = True
+                End If
+                If editing OrElse adding Then
+                    btnEdit.Enabled = False
+                    btnAdd.Enabled = False
+                    btnDelete.Enabled = False
+                    btnUndo.Enabled = True
+                    btnSave.Enabled = True
+                    btnPrint.Enabled = False
+                Else
+                    btnEdit.Enabled = True
+                    btnDelete.Enabled = True
+                    btnAdd.Enabled = True
+                    btnUndo.Enabled = False
+                    btnSave.Enabled = False
+                    btnPrint.Enabled = True
+                End If
             End If
         End If
     End Sub
@@ -582,64 +479,131 @@ Public Class CFormEntryNew
         RunButtonRoutine(ButtonClicked.Add)
     End Sub
 
-    Private Sub btnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
+    Private Sub BtnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
         SwitchUiLanguage(False)
     End Sub
 
-    Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
-
+    Private Sub BtnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
+        If _debugSwitch = 0 Then
+            _debugSwitch = 1
+            Debugger.Break()
+            btnDebug.Checked = False
+        Else
+            _debugSwitch = 0
+            btnDebug.Checked = True
+        End If
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.Delete)
     End Sub
 
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.Edit)
     End Sub
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
-
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.Find)
     End Sub
 
     Private Sub BtnFirst_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
-
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.First)
     End Sub
 
     Private Sub BtnLast_Click(sender As Object, e As EventArgs) Handles btnLast.Click
-
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.Last)
     End Sub
 
     Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
-
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.Next)
     End Sub
 
-    Private Sub btnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
-
+    Private Sub BtnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        SwitchUiLanguage(True)
     End Sub
 
     Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
-
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.Previous)
     End Sub
 
     Private Sub BtnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
-
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.Quit)
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
 
+        Dim allControls As New List(Of Control)
+        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+            If TypeOf cCtrl Is DataGridView Then
+                Dim cGrid As DataGridView = cCtrl
+                cGrid.EndEdit()
+                GridValidator()
+            End If
+        Next
+        If ValidateNumericValues() Then
+            RunButtonRoutine(ButtonClicked.Save)
+        End If
+        If PresenterObj.SaveSuccessful AndAlso PresenterObj.QuitOnSave Then
+            PresenterObj.GoQuit()
+        End If
+    End Sub
+
+    Protected Overridable Sub GridValidator()
+        '
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
+        RunButtonRoutine(ButtonClicked.Print)
     End Sub
 
-    Private Sub btnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
+    Private Sub BtnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
+
+        RunTranslator(VSystemViewIdNo)
 
     End Sub
 
     Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
         RunButtonRoutine(ButtonClicked.Undo)
+    End Sub
+
+    Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        RunButtonRoutine(ButtonClicked.Filter)
     End Sub
 
     Private Sub CFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
@@ -671,7 +635,8 @@ Public Class CFormEntryNew
             Else
                 Beep()
             End If
-        Else
+        ElseIf e.KeyCode = Keys.Enter Then
+
             e.Handled = False
         End If
     End Sub
@@ -687,21 +652,23 @@ Public Class CFormEntryNew
             Inputs(False)
 
             Try
-                RecordCount = PresenterObj.GetRecordCount()
-                PresenterObj.RecordPositionNumber = RecordCount
+                If Not SingleData Then
+                    RecordCount = PresenterObj.GetRecordCount()
+                    PresenterObj.RecordPositionNumber = RecordCount
+                End If
             Catch ex As Exception
                 MessageBox.Show(ex.Message + Name)
                 Debugger.Break()
             End Try
-
+            ' add bizObject rules to controls
             Dim rules = PresenterObj.GetBizObjectRules()
             For Each rule In rules
                 Dim control As Control = Nothing
                 MainFieldsDictionary.TryGetValue(rule.Property, control)
                 MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
             Next
+
             SetAllControlsDynamicProperties()
-            'AddMandatoryFieldCHeck()
             If GlobalVariables.RightToLeftLayout Then
                 btnArabic.Visible = False
                 btnOriginal.Visible = True
@@ -709,9 +676,22 @@ Public Class CFormEntryNew
                 btnArabic.Visible = True
                 btnOriginal.Visible = False
             End If
-            FirstControl.Focus()
+            If FirstControl IsNot Nothing Then
+                FirstControl.Focus()
+            End If
             If GlobalVariables.UserName.ToLower() <> $"arnel" Then
                 HideButton(btnDebug)
+            End If
+            If SingleData Or HideNavigatorButtons Then
+                btnFirst.Visible = False
+                btnNext.Visible = False
+                btnLast.Visible = False
+                btnPrev.Visible = False
+                tsbCurrentRecord.Visible = False
+                tsbTotalRecords.Visible = False
+                tssNavigator2.Visible = False
+                tssnavigator1.Visible = False
+                btnOf.Visible = False
             End If
             UpdateButtonDisplays(False, False)
         End If
@@ -732,7 +712,6 @@ Public Class CFormEntryNew
                 ElseIf TypeOf cCtrl Is TxtComboBox Then
                     CallByName(cCtrl, "MakeDefault", CallType.Method)
                 ElseIf TypeOf cCtrl Is CaComboBox Or TypeOf cCtrl Is CComboBox Then
-                    'SetPropertyValue(cCtrl, "Text", "")
                     SetPropertyValue(cCtrl, "SelectedItem", Nothing)
                     SetPropertyValue(cCtrl, "SelectedIndex", -1)
                     SetPropertyValue(cCtrl, "Text", "")
@@ -775,10 +754,6 @@ Public Class CFormEntryNew
         CutText()
     End Sub
 
-    'Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64
-    '    Return PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
-    'End Function
-
     Private Function GetControlSecurityKey(ByRef cCtrl As Control)
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
@@ -794,7 +769,7 @@ Public Class CFormEntryNew
         Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
     End Function
 
-    Private Sub Inputs(onOff As Boolean)
+    Public Sub Inputs(onOff As Boolean)
         Dim allCtrl As New List(Of Control)
         Dim ctrl As Control
         For Each ctrl In FindControlRecursive(allCtrl, Me)
@@ -807,7 +782,9 @@ Public Class CFormEntryNew
         Else
             InputsTurnedOff()
         End If
-        FirstControl.Focus()
+        If FirstControl IsNot Nothing Then
+            FirstControl.Focus()
+        End If
     End Sub
 
     Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
@@ -840,7 +817,7 @@ Public Class CFormEntryNew
     End Sub
 
     Private Sub SetControlDynamicProperties(ByRef cCtrl As Control)
-        'If cCtrl.GetType().GetProperty("DataBoundControl") IsNot Nothing Then
+        Dim myForm = FindForm()
         If TypeOf cCtrl Is IEntryControl Then
             ' get FieldName from control : by convention when using this system
             ' all DataBoundControls TextBox & Combobox that will hold field variables are named by convention in this format
@@ -852,12 +829,8 @@ Public Class CFormEntryNew
             fldName = cCtrl.Name.Substring(3) ' get control name starting from the 3rd character (0 based)
 
             For Each row In TableProperties
-                'If fldName.ToLower() = "amount" Then
-                '    Debugger.Break()
-                'End If
                 If fldName.ToLower() = row.FldName.ToLower Then
-                    If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is CComboBox OrElse TypeOf cCtrl Is CMaskedTextBox OrElse
-                       TypeOf cCtrl Is CTextBoxArabic Then
+                    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CMaskedTextBox OrElse TypeOf cCtrl Is CTextBoxArabic Then
                         If row.FldType.ToLower = "int" OrElse
                             row.FldType.ToLower = "smallint" OrElse
                             row.FldType.ToLower = "money" OrElse
@@ -868,7 +841,6 @@ Public Class CFormEntryNew
                             row.FldType.ToLower = "real" OrElse
                             row.FldType.ToLower = "float" OrElse
                             row.FldType.ToLower = "numeric" Then
-
                             Select Case row.FldType.ToLower
                                 Case "int"
                                     SetPropertyValue(cCtrl, "MinimumValue", -2147483648D)
@@ -883,58 +855,25 @@ Public Class CFormEntryNew
                                     SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808D)
                                     SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807D)
                             End Select
-
-                            'If row.FldType.ToLower = "money" Then
-                            '    SetPropertyValue(cCtrl, "Maxlength", 19)
-                            'Else
-                            '    SetPropertyValue(cCtrl, "Maxlength", row.MaxLength)
-                            'End If
-
                             SetPropertyValue(cCtrl, "ValueIsNumeric", True)
-                            'If CommonDaoOld.IsFieldUnique(MainTableName, fldName) Then
-                            '    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CTextBoxArabic Then
-                            '        SetPropertyValue(cCtrl, "ValueIsUnique", True)
-                            '    End If
-                            'Else
-                            '    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CTextBoxArabic Then
-                            '        SetPropertyValue(cCtrl, "ValueIsUnique", False)
-                            '    End If
-                            'End If
                         Else
-                            'If cCtrl.Name.ToLower() = "txtnotes" then
-                            '    debugger.Break()
-                            'End If
                             SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(row.MaxLength / 2), row.MaxLength))
                             SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
                             If (Not row.IsIdentity) And (Not row.IsNullable) Then
-                                'Add this controls in error provider for mandatory fields.
-                                'MyErrorProvider.Controls.AddMandatory(CCtrl, CCtrl.Name)
-                                'Dim thisCtrl As CTextBox
-                                'thisCtrl = cCtrl
                                 If GetPropertyValue(cCtrl, "IgnoreNullCheck") Then
-                                    'If Not thisCtrl.IgnoreNullCheck Then
                                     If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-                                        ''If thisCtrl.LinkedLabel Is Nothing Then
                                         MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
                                     Else
                                         MyErrorProvider.Controls.AddMandatory(cCtrl, GetPropertyValue(cCtrl, "LinkedLabel"))
-                                        'MyErrorProvider.Controls.AddMandatory(cCtrl, thisCtrl.LinkedLabel.Text)
                                     End If
                                 End If
-                                'If CommonDaoOld.IsFieldUnique(MainTableName, fldName) Then
-                                '    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CTextBoxArabic Then
-                                '        SetPropertyValue(cCtrl, "ValueIsUnique", True)
-                                '    End If
-                                'Else
-                                '    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CTextBoxArabic Then
-                                '        SetPropertyValue(cCtrl, "ValueIsUnique", False)
-                                '    End If
-                                'End If
                             End If
                         End If
                         Exit For
-                    ElseIf _
-                        TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
+                    ElseIf TypeOf cCtrl Is CaComboBox OrElse TypeOf cCtrl Is CComboBox Then
+                        '
+                        '
+                    ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
                         TypeOf cCtrl Is CDTPHijriDate OrElse TypeOf cCtrl Is tdpGregorian OrElse
                         TypeOf cCtrl Is CDtpGregorianDate Then
                         SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
@@ -944,7 +883,13 @@ Public Class CFormEntryNew
                         End If
                         Exit For
                     End If
-
+                    If TypeOf cCtrl Is IFindableControl And Not (TypeOf cCtrl Is CForm) Then
+                        Dim thisControl As IFindableControl = cCtrl
+                        If thisControl.FindEnabled Then
+                            thisControl = cCtrl
+                            thisControl.FindDataType = GetObjectDataType(GetFieldType(Name.Substring(3)))
+                        End If
+                    End If
                 End If
             Next
         End If
@@ -986,12 +931,14 @@ Public Class CFormEntryNew
         DemoProp.SetValue(cont, True, Nothing)
     End Sub
 
-    '#Region "Temporary Events"
+    Public Function GetFieldType(fieldName As String) As Type
+        Return CallByName(Me, fieldName, CallType.Get).GetType
+    End Function
 
-    '    Public Event InputsTurnedOff()
+    Public Property HideNavigatorButtons As Boolean
 
-    '    Public Event InputsTurnedOn()
+    Public Overridable Sub ActiveToolStripButton_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
 
-    '#End Region
+    End Sub
 
 End Class

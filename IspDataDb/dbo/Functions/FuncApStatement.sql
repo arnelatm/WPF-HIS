@@ -35,7 +35,7 @@ RETURN
              dbo.ApDetails_View.TransactionType, dbo.APDetails_View.MainNote
 	)
 	Union
-	(SELECT 0,'BB',0, ISNULL((Select sum(credit-debit) from ApStatement_View where SupplierIdNo = @SupplierIdNo and transactiondate < @BeginningDate and ApStatement_View.SpecialAccount = 'AP'),0), 'Beginning Balance',
+	(SELECT 0,'BB',0, ISNULL((Select sum(credit-debit) from ApStatement_View where SupplierIdNo = @SupplierIdNo and transactiondate < @BeginningDate and SpecialAccount = 'AP'),0), 'Beginning Balance',
            @SupplierIdNo , '' , DateAdd(Day,-1,@BeginningDate), '',
            'B', 'Beginning Balance'
 	)

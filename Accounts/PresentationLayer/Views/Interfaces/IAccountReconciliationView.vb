@@ -6,6 +6,8 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IAccountReconciliationView
         Inherits IView
 
+        Property Accounts As List(Of ClassesLibrary.LookupData)
+        Property AccountReconciliationItems As List(Of AccountReconciliationItemView)
         Property AccountIdNo As Int16?
         Property Balance As Decimal
         Property DateCreated As DateTime?
@@ -22,8 +24,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TotalQtyDebitsCleared As Integer
         Property TotalQtyDebitsNotCleared As Integer
         Property UnreconciledDifference As Decimal
-        Property AccountReconciliationItems As List(Of AccountReconciliationItemView)
-        Property Accounts As List(Of ClassesLibrary.LookupData)
+
         Property OutstandingCredits As Decimal
         Property OutstandingDeposits As Decimal
     End Interface

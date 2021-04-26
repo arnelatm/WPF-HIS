@@ -20,6 +20,8 @@ Namespace BusinessLayer
             End If
         End Sub
 
+        Public Property Accounts As List(Of ClassesLibrary.LookupData)
+        Public Property AccountReconciliationItems As List(Of AccountReconciliationItem)
         Public Property AccountIdNo As Int16?
         Public Property Balance As Decimal
         Public Property DateCreated As DateTime?
@@ -36,8 +38,7 @@ Namespace BusinessLayer
         Public Property TotalQtyDebitsCleared As Integer
         Public Property TotalQtyDebitsNotCleared As Integer
         Public Property UnreconciledDifference As Decimal
-        Public Property Accounts As List(Of ClassesLibrary.LookupData)
-        Public Property AccountReconciliationItems As List(Of AccountReconciliationItem)
+
 
         Public Sub ComputeCalculatedProperties()
             TotalDebitsCleared = 0

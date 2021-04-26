@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[AccountBalance] (
     [IdNo]          INT        IDENTITY (1, 1) NOT NULL,
-    [Year]          SMALLINT   NOT NULL,
-    [AccountIdNo]   SMALLINT   NOT NULL,
+    [Year]          INT        NOT NULL,
+    [AccountIdNo]   INT        NOT NULL,
     [Debit]         MONEY      NULL,
     [Credit]        MONEY      NULL,
     [DateTimeStamp] ROWVERSION NULL,
@@ -11,7 +11,8 @@
 
 
 
+
+
 GO
-CREATE NONCLUSTERED INDEX [IX_AccountBalance_Year_IdNo]
-    ON [dbo].[AccountBalance]([Year] ASC, [AccountIdNo] ASC);
+
 

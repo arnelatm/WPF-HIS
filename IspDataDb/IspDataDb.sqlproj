@@ -252,7 +252,6 @@
     <Build Include="dbo\Views\BalanceSheet_View.sql" />
     <Build Include="dbo\Functions\FuncGlStatement.sql" />
     <Build Include="dbo\Functions\FuncGlBalanceSheet.sql" />
-    <Build Include="dbo\Functions\FuncAccountBalance.sql" />
     <Build Include="dbo\Functions\FuncAcctStatement.sql" />
     <Build Include="dbo\Views\IncomeStatementLayout_View.sql" />
     <Build Include="dbo\Functions\FuncGlIncomeStatement.sql" />
@@ -437,6 +436,7 @@
     <Build Include="dbo\Views\GlLedgersNew_View.sql" />
     <Build Include="dbo\Functions\FuncGlAccountStatement.sql" />
     <Build Include="dbo\Functions\FuncGlStatementNew.sql" />
+    <Build Include="dbo\Functions\FuncAccountBalance.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

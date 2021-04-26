@@ -269,7 +269,7 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        'Protected Overrides Sub RecordPositionChanged()
+        'Protected Overrides Sub UpdateViewDisplay(idNo As Int32)
         '    MyBase.RecordPositionChanged()
         '    UpdateTotals()
         'End Sub
@@ -295,6 +295,8 @@ Namespace PresentationLayer.Views.Forms
             End With
             ResumeLayout()
         End Sub
+
+#Region "FindValues"
 
         Private Sub DataGridViewReconciliationItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReconciliationItems.CellContentClick
             If DataGridViewReconciliationItems.CurrentCell IsNot Nothing And (PresenterObj.EditMode Or PresenterObj.AddMode) Then
@@ -637,11 +639,10 @@ Namespace PresentationLayer.Views.Forms
             Return False
         End Function
 
+#End Region
+
         Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated, dtpReconciliationDate.ValueChanged
             If Not btnEdit.Enabled Then
-                'If cboAccountIdNo.SelectedValue = 0 Then
-                '    cboAccountIdNo.DisplayOnly = False
-                'End If
                 If dtpReconciliationDate.DateChanged() Then
                     PublishEvent(New EndingReconciliationDateChangedEvent(sender))
                 End If
@@ -665,7 +666,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
-
             PublishEvent(New ReconciliationClearEvent(sender, True, True, bsAccountReconciliationItems))
         End Sub
 
