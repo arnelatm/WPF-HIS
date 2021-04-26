@@ -24,7 +24,7 @@ Namespace PresentationLayer.Models
         Function GenerateCode(idNo As Integer) As String
 
         Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer
-
+        Function GetAccountBalance(endDate As Date, accountIdNo As Short) As Decimal
     End Interface
 
     'Public Interface IModelOpenInvoice

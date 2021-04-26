@@ -8,6 +8,8 @@ Namespace DataLayer
 
         Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer
 
+        Function GetAccountBalance(endDate As Date, accountIdNo As Short) As Decimal
+
     End Interface
 
     Public Interface IDaoContacts(Of TBiz)
@@ -36,13 +38,11 @@ Namespace DataLayer
 
     Public Interface IDaoAccountReconciliationItem(Of TM)
 
-        Function GetAcctReconItems(AccountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+        Function GetAcctReconItems(accountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
-        Function GetGlItems(AccountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
+        Function GetGlItems(accountIdNo As Int16, reconciliationDate As Date, Optional sortExpression As String = Nothing) As List(Of TM)
 
         Function GetReconciledRecordsWithIdNo(reconciled As Boolean, idNo As Int32, Optional sortExpression As String = Nothing) As List(Of TM)
-
-        Function GetAccountBalance(endDate As Date, accountIdNo As Int16) As Decimal
 
     End Interface
 

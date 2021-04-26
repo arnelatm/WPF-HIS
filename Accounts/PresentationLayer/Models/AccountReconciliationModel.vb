@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Models
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Models
 
@@ -7,7 +8,7 @@ Namespace PresentationLayer.Models
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class AccountReconciliationModel
-        Inherits ModelNew
+        'Inherits ModelNew
 
         Public Property Errors As List(Of String)
         Public Property AccountIdNo As Int16?
@@ -26,6 +27,7 @@ Namespace PresentationLayer.Models
         Public Property TotalQtyDebitsCleared As Integer
         Public Property TotalQtyDebitsNotCleared As Integer
         Public Property UnreconciledDifference As Decimal
+        Public Property Accounts As List(Of ClassesLibrary.LookupData)
         Public Property AccountReconciliationItems As List(Of AccountReconciliationItemModel)
 
     End Class

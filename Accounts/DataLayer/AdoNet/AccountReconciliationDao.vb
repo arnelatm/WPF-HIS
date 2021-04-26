@@ -1,6 +1,8 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
@@ -8,6 +10,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class AccountReconciliationDao
+        Inherits AccountsDao
         Implements IDao(Of AccountReconciliation), IDaoChild(Of AccountReconciliationItem), IDaoAccountReconciliationItem(Of AccountReconciliationItem)
 
         Private ReadOnly _db As New Db()
@@ -29,6 +32,8 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data As AccountReconciliation = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim accounts As List(Of ClassesLibrary.LookupData) = GetLookupData("Account", "AccountCode", "SpecialAccount = 'BA' or SpecialAccount = 'CK' or SpecialAccount = 'CS'")
+            data.Accounts = accounts
             data.AccountReconciliationItems = GetRecordsWithGroupIdNo(idNo, "Sequence")
             data.ComputeCalculatedProperties()
             Return data
@@ -225,10 +230,60 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetAccountBalance(EndDate As Date, accountIdNo As Int16) as Decimal Implements IDaoAccountReconciliationItem(Of AccountReconciliationItem).GetAccountBalance
-            Dim sql As String = "Select Sum(Debit-Credit) from FuncGlAccountStatement(@EndDate,@EndDate,@AccountIdNo,@AccountIdNo)"
-            Return _db.Scalar(sql, {"@EndDate", EndDate, "@AccountIdNo", accountIdNo})
+        Public Function GetLookupData(listName As String, sortKey As String, Optional filter As String = Nothing)
+            Dim lookUpTableToGet As String = listName
+            Dim lookUpDisplayName As String = listName + "Name"
+            Dim lookUpSortExpression As String = lookUpDisplayName
+            Dim lookUpDisplayNameArabic As String = lookUpDisplayName + "Ara"
+            Dim lookUpDisplayCode As String = listName + "Code"
+            Dim lookupFieldsToShow As String()
+            If sortKey IsNot Nothing Then
+                lookUpSortExpression = sortKey
+            End If
+            Dim dFieldName As String
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                If lookUpSortExpression = lookUpDisplayName Then
+                    lookUpSortExpression = lookUpDisplayNameArabic
+                End If
+                dFieldName = lookUpDisplayNameArabic
+            Else
+                dFieldName = lookUpDisplayName
+            End If
+            lookupFieldsToShow = {"IdNo", dFieldName, lookUpDisplayCode}
+            Dim baseDao = New BaseDao
+            Dim data = baseDao.GetRecords(listName, sortKey, lookupFieldsToShow, filter)
+            Return ProcessLookupByCodeName(data, lookupFieldsToShow.Count())
         End Function
+
+        Private Function ProcessLookupByCodeName(data As Object, fieldCount As UInt16) As List(Of ClassesLibrary.LookupData)
+            Dim tlData As New List(Of ClassesLibrary.LookupData)
+            If fieldCount = 3 Then
+                For i = 1 To Int(data.Count / 3)
+                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 3 - 3),
+                            .Name = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)) & " | " & data(i * 3 - 2),
+                            .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+                            }
+                    tlData.Add(tData)
+                Next
+            Else
+                For i = 1 To Int(data.Count / 2)
+                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 2 - 2),
+                            .Name = If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1)) & " | " & data(i * 2 - 2)
+                            }
+                    tlData.Add(tData)
+                Next
+            End If
+            Return tlData
+        End Function
+
+        'Dim values = accountType.Split(",")
+        'LookUpFilterKey = ""
+        'For Each account In values
+        'If LookUpFilterKey <> "" Then
+        'LookUpFilterKey = LookUpFilterKey + " Or "
+        'End If
+        'LookUpFilterKey = LookUpFilterKey + "SpecialAccount = '" & account & "'"
+        'Next
 
     End Class
 

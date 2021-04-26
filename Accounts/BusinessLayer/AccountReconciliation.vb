@@ -2,6 +2,7 @@
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.BusinessLayer.BusinessRules
+Imports AATM.Libraries
 
 Namespace BusinessLayer
 
@@ -35,6 +36,7 @@ Namespace BusinessLayer
         Public Property TotalQtyDebitsCleared As Integer
         Public Property TotalQtyDebitsNotCleared As Integer
         Public Property UnreconciledDifference As Decimal
+        Public Property Accounts As List(Of ClassesLibrary.LookupData)
         Public Property AccountReconciliationItems As List(Of AccountReconciliationItem)
 
         Public Sub ComputeCalculatedProperties()
