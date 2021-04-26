@@ -10,6 +10,8 @@ Namespace PresentationLayer.Models
     Public Class AccountReconciliationModel
         'Inherits ModelNew
 
+        Public Property Accounts As List(Of ClassesLibrary.LookupData)
+        Public Property AccountReconciliationItems As List(Of AccountReconciliationItemModel)
         Public Property Errors As List(Of String)
         Public Property AccountIdNo As Int16?
         Public Property Balance As Decimal
@@ -27,8 +29,6 @@ Namespace PresentationLayer.Models
         Public Property TotalQtyDebitsCleared As Integer
         Public Property TotalQtyDebitsNotCleared As Integer
         Public Property UnreconciledDifference As Decimal
-        Public Property Accounts As List(Of ClassesLibrary.LookupData)
-        Public Property AccountReconciliationItems As List(Of AccountReconciliationItemModel)
 
     End Class
 
