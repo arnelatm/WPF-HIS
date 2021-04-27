@@ -645,7 +645,6 @@ Public Class CFormEntry
     End Sub
 
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-
         RunButtonRoutine(ButtonClicked.Add)
     End Sub
 
@@ -989,7 +988,7 @@ Public Class CFormEntry
         PasteText()
     End Sub
 
-    Private Sub RunButtonRoutine(ByVal clickedButton As ButtonClicked)
+    Protected Sub RunButtonRoutine(ByVal clickedButton As ButtonClicked)
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
