@@ -53,7 +53,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.txtTotalOutstandingCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtOutstandingCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtTotalQtyCreditsCleared = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCreditsCleared = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -79,7 +79,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblEndingBankBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtBalance2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTotalDepositsInTransit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtTotalOutstandingDeposits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtOutstandingDeposits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblOutstandingCredits = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblGlSystemBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtGlSystemBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -347,33 +347,33 @@ Namespace PresentationLayer.Views.Forms
         Me.chkPosted.TabStop = false
         Me.chkPosted.UseVisualStyleBackColor = false
         '
-        'txtTotalOutstandingCredits
+        'txtOutstandingCredits
         '
-        Me.txtTotalOutstandingCredits.BackColor = System.Drawing.Color.White
-        Me.txtTotalOutstandingCredits.BegFindValue = Nothing
-        Me.txtTotalOutstandingCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalOutstandingCredits.ComputedValue = true
-        Me.txtTotalOutstandingCredits.CustomFormat = Nothing
-        Me.txtTotalOutstandingCredits.DataBoundControl = true
-        Me.txtTotalOutstandingCredits.DisplayOnly = true
-        Me.txtTotalOutstandingCredits.EditingMode = true
-        Me.txtTotalOutstandingCredits.EndFindValue = Nothing
-        Me.txtTotalOutstandingCredits.FieldName = Nothing
-        Me.txtTotalOutstandingCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtTotalOutstandingCredits.FindEnabled = false
-        Me.CFlowLayout6.SetFlowBreak(Me.txtTotalOutstandingCredits, true)
-        resources.ApplyResources(Me.txtTotalOutstandingCredits, "txtTotalOutstandingCredits")
-        Me.txtTotalOutstandingCredits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalOutstandingCredits.LinkedLabel = Nothing
-        Me.txtTotalOutstandingCredits.MaximumValue = Nothing
-        Me.txtTotalOutstandingCredits.MinimumValue = Nothing
-        Me.txtTotalOutstandingCredits.Name = "txtTotalOutstandingCredits"
-        Me.txtTotalOutstandingCredits.OldValue = Nothing
-        Me.txtTotalOutstandingCredits.ReadOnly = true
-        Me.txtTotalOutstandingCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtTotalOutstandingCredits.TabStop = false
-        Me.txtTotalOutstandingCredits.ValueIsMandatory = true
-        Me.txtTotalOutstandingCredits.ValueIsNumeric = true
+        Me.txtOutstandingCredits.BackColor = System.Drawing.Color.White
+        Me.txtOutstandingCredits.BegFindValue = Nothing
+        Me.txtOutstandingCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtOutstandingCredits.ComputedValue = true
+        Me.txtOutstandingCredits.CustomFormat = Nothing
+        Me.txtOutstandingCredits.DataBoundControl = true
+        Me.txtOutstandingCredits.DisplayOnly = true
+        Me.txtOutstandingCredits.EditingMode = true
+        Me.txtOutstandingCredits.EndFindValue = Nothing
+        Me.txtOutstandingCredits.FieldName = Nothing
+        Me.txtOutstandingCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtOutstandingCredits.FindEnabled = false
+        Me.CFlowLayout6.SetFlowBreak(Me.txtOutstandingCredits, true)
+        resources.ApplyResources(Me.txtOutstandingCredits, "txtOutstandingCredits")
+        Me.txtOutstandingCredits.ForeColor = System.Drawing.Color.Black
+        Me.txtOutstandingCredits.LinkedLabel = Nothing
+        Me.txtOutstandingCredits.MaximumValue = Nothing
+        Me.txtOutstandingCredits.MinimumValue = Nothing
+        Me.txtOutstandingCredits.Name = "txtOutstandingCredits"
+        Me.txtOutstandingCredits.OldValue = Nothing
+        Me.txtOutstandingCredits.ReadOnly = true
+        Me.txtOutstandingCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtOutstandingCredits.TabStop = false
+        Me.txtOutstandingCredits.ValueIsMandatory = true
+        Me.txtOutstandingCredits.ValueIsNumeric = true
         '
         'txtTotalQtyCreditsCleared
         '
@@ -729,9 +729,9 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout6.Controls.Add(Me.lblEndingBankBalance)
         Me.CFlowLayout6.Controls.Add(Me.txtBalance2)
         Me.CFlowLayout6.Controls.Add(Me.lblTotalDepositsInTransit)
-        Me.CFlowLayout6.Controls.Add(Me.txtTotalOutstandingDeposits)
+        Me.CFlowLayout6.Controls.Add(Me.txtOutstandingDeposits)
         Me.CFlowLayout6.Controls.Add(Me.lblOutstandingCredits)
-        Me.CFlowLayout6.Controls.Add(Me.txtTotalOutstandingCredits)
+        Me.CFlowLayout6.Controls.Add(Me.txtOutstandingCredits)
         Me.CFlowLayout6.Controls.Add(Me.lblGlSystemBalance)
         Me.CFlowLayout6.Controls.Add(Me.txtGlSystemBalance)
         Me.CFlowLayout6.Controls.Add(Me.CLabel7)
@@ -784,33 +784,33 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.lblTotalDepositsInTransit, "lblTotalDepositsInTransit")
         Me.lblTotalDepositsInTransit.Name = "lblTotalDepositsInTransit"
         '
-        'txtTotalOutstandingDeposits
+        'txtOutstandingDeposits
         '
-        Me.txtTotalOutstandingDeposits.BackColor = System.Drawing.Color.White
-        Me.txtTotalOutstandingDeposits.BegFindValue = Nothing
-        Me.txtTotalOutstandingDeposits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalOutstandingDeposits.ComputedValue = true
-        Me.txtTotalOutstandingDeposits.CustomFormat = Nothing
-        Me.txtTotalOutstandingDeposits.DataBoundControl = true
-        Me.txtTotalOutstandingDeposits.DisplayOnly = true
-        Me.txtTotalOutstandingDeposits.EditingMode = true
-        Me.txtTotalOutstandingDeposits.EndFindValue = Nothing
-        Me.txtTotalOutstandingDeposits.FieldName = Nothing
-        Me.txtTotalOutstandingDeposits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtTotalOutstandingDeposits.FindEnabled = false
-        Me.CFlowLayout6.SetFlowBreak(Me.txtTotalOutstandingDeposits, true)
-        resources.ApplyResources(Me.txtTotalOutstandingDeposits, "txtTotalOutstandingDeposits")
-        Me.txtTotalOutstandingDeposits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalOutstandingDeposits.LinkedLabel = Nothing
-        Me.txtTotalOutstandingDeposits.MaximumValue = Nothing
-        Me.txtTotalOutstandingDeposits.MinimumValue = Nothing
-        Me.txtTotalOutstandingDeposits.Name = "txtTotalOutstandingDeposits"
-        Me.txtTotalOutstandingDeposits.OldValue = Nothing
-        Me.txtTotalOutstandingDeposits.ReadOnly = true
-        Me.txtTotalOutstandingDeposits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtTotalOutstandingDeposits.TabStop = false
-        Me.txtTotalOutstandingDeposits.ValueIsMandatory = true
-        Me.txtTotalOutstandingDeposits.ValueIsNumeric = true
+        Me.txtOutstandingDeposits.BackColor = System.Drawing.Color.White
+        Me.txtOutstandingDeposits.BegFindValue = Nothing
+        Me.txtOutstandingDeposits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtOutstandingDeposits.ComputedValue = true
+        Me.txtOutstandingDeposits.CustomFormat = Nothing
+        Me.txtOutstandingDeposits.DataBoundControl = true
+        Me.txtOutstandingDeposits.DisplayOnly = true
+        Me.txtOutstandingDeposits.EditingMode = true
+        Me.txtOutstandingDeposits.EndFindValue = Nothing
+        Me.txtOutstandingDeposits.FieldName = Nothing
+        Me.txtOutstandingDeposits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtOutstandingDeposits.FindEnabled = false
+        Me.CFlowLayout6.SetFlowBreak(Me.txtOutstandingDeposits, true)
+        resources.ApplyResources(Me.txtOutstandingDeposits, "txtOutstandingDeposits")
+        Me.txtOutstandingDeposits.ForeColor = System.Drawing.Color.Black
+        Me.txtOutstandingDeposits.LinkedLabel = Nothing
+        Me.txtOutstandingDeposits.MaximumValue = Nothing
+        Me.txtOutstandingDeposits.MinimumValue = Nothing
+        Me.txtOutstandingDeposits.Name = "txtOutstandingDeposits"
+        Me.txtOutstandingDeposits.OldValue = Nothing
+        Me.txtOutstandingDeposits.ReadOnly = true
+        Me.txtOutstandingDeposits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtOutstandingDeposits.TabStop = false
+        Me.txtOutstandingDeposits.ValueIsMandatory = true
+        Me.txtOutstandingDeposits.ValueIsNumeric = true
         '
         'lblOutstandingCredits
         '
@@ -1157,7 +1157,7 @@ End Sub
         Friend WithEvents dtpReconciliationDate As CCustomDateTimePicker
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblIdNo As CLabel
-        Friend WithEvents txtTotalOutstandingCredits As CTextBox
+        Friend WithEvents txtOutstandingCredits As CTextBox
         Friend WithEvents txtTotalQtyCreditsCleared As CTextBox
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout3 As CFlowLayout
@@ -1167,7 +1167,7 @@ End Sub
         Friend WithEvents lblCreditsCleared As CLabel
         Friend WithEvents txtTotalCreditsCleared As CTextBox
         Friend WithEvents lblOutstandingCredits As CLabel
-        Friend WithEvents txtTotalOutstandingDeposits As CTextBox
+        Friend WithEvents txtOutstandingDeposits As CTextBox
         Friend WithEvents txtTotalQtyDebitsCleared As CTextBox
         Friend WithEvents lblDebitsCleared As CLabel
         Friend WithEvents txtTotalDebitsCleared As CTextBox

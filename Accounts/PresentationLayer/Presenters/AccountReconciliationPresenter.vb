@@ -262,10 +262,36 @@ Namespace PresentationLayer.Presenters
                         accountReconciliationItem.Cleared = False
                     End If
                 Next
+                eEvent.DataBindingSource.ResetBindings(False)
             Else
-                eEvent.Sender.Cleared = Not eEvent.Sender.Cleared
+                If eEvent.Sender.Cleared Then
+                    If eEvent.Sender.Debit > 0 Then
+                        View.TotalDebitsCleared -= eEvent.Sender.Debit
+                        View.TotalQtyDebitsCleared -= 1
+                        View.TotalDebitsNotCleared += eEvent.Sender.Debit
+                        View.TotalQtyDebitsNotCleared += 1
+                    Else
+                        View.TotalCreditsCleared -= eEvent.Sender.Credit
+                        View.TotalQtyCreditsCleared -= 1
+                        View.TotalCreditsNotCleared += eEvent.Sender.Credit
+                        View.TotalQtyCreditsNotCleared += 1
+                    End If
+                Else
+                    If eEvent.Sender.Debit > 0 Then
+                        View.TotalDebitsCleared += eEvent.Sender.Debit
+                        View.TotalQtyDebitsCleared += 1
+                        View.TotalDebitsNotCleared -= eEvent.Sender.Debit
+                        View.TotalQtyDebitsNotCleared -= 1
+                    Else
+                        View.TotalCreditsCleared += eEvent.Sender.Credit
+                        View.TotalQtyCreditsCleared += 1
+                        View.TotalCreditsCleared -= eEvent.Sender.Credit
+                        View.TotalQtyCreditsCleared -= 1
+                    End If
+                End If
+                eEvent.Sender.Cleared = Not eEvent.Sender.Cleared               
             End If
-            eEvent.DataBindingSource.ResetBindings(False)
+            ReComputeDifference()
         End Sub
 
         Public Function ToDataTable(Of T)(data As IList(Of T)) As DataTable
@@ -292,8 +318,11 @@ Namespace PresentationLayer.Presenters
         Public Sub OnReconciliationClearEvent(ByRef e As ReconciliationClearEvent) Implements ISubscriber(Of ReconciliationClearEvent).OnEventHandler
             If EditMode Or AddMode Then
                 ProcessReconciliationRequest(e)
-                UpdateTotals()
-                e.DataBindingSource.ResetBindings(False)
+                If e.All Then
+                    UpdateTotals()
+                    e.DataBindingSource.ResetBindings(False)
+                End If
+
             End If
         End Sub
 

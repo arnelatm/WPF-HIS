@@ -105,7 +105,7 @@ Namespace ServiceLayer.ActionService
             Return DataDao.UpdateVatNumber(vatNumber, idNo)
         End Function
 
-        Public Function GetAccountBalance(endDate As Date, accountIdNo As Int16) As Integer Implements IServiceAccounts.GetAccountBalance
+        Public Function GetAccountBalance(endDate As Date, accountIdNo As Int16) As Decimal Implements IServiceAccounts.GetAccountBalance
             Dim accountDao = New AccountDao
             Return DataDao.GetAccountBalance(endDate, accountIdNo)
         End Function

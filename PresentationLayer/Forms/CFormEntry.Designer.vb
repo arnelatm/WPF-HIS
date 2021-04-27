@@ -384,7 +384,6 @@ End Sub
     Friend WithEvents btnNext As Windows.Forms.ToolStripButton
     Protected WithEvents btnLast As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator3 As Windows.Forms.ToolStripSeparator
-    Protected WithEvents btnAdd As Windows.Forms.ToolStripButton
     Public WithEvents btnDelete As Windows.Forms.ToolStripButton
     Protected WithEvents btnEdit As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator4 As Windows.Forms.ToolStripSeparator
@@ -408,4 +407,5 @@ End Sub
     Public WithEvents btnFind As Windows.Forms.ToolStripButton
     Public WithEvents tsbCurrentRecord As Windows.Forms.ToolStripLabel
     Friend WithEvents btnFilter As Windows.Forms.ToolStripButton
+    Public WithEvents btnAdd As Windows.Forms.ToolStripButton
 End Class

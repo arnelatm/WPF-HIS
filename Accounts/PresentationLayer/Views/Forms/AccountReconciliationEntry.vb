@@ -134,7 +134,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtTotalCreditsNotCleared.Text = FormatMoney(Value)
-                txtTotalOutstandingCredits.Text = txtTotalCreditsNotCleared.Text
+                OutstandingCredits = FormatMoney(Value)
             End Set
         End Property
 
@@ -153,7 +153,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtTotalDebitsNotCleared.Text = FormatMoney(Value)
-                txtTotalOutstandingDeposits.Text = txtTotalDebitsNotCleared.Text
+                OutstandingDeposits = FormatMoney(Value)
             End Set
         End Property
 
@@ -227,26 +227,27 @@ Namespace PresentationLayer.Views.Forms
         Public Property UnreconciledDifference As Decimal Implements IAccountReconciliationView.UnreconciledDifference
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnreconciledDifference.Text), _nfi)
-            End Get
+            End Get              
             Set
+                 txtUnreconciledDifference.Text = value
             End Set
         End Property
 
         Public Property OutstandingCredits As Decimal Implements IAccountReconciliationView.OutstandingCredits
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnreconciledDifference.Text), _nfi)
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtOutStandingCredits.Text), _nfi)
             End Get
             Set
-                txtUnreconciledDifference.Text = FormatMoney(Value)
+                txtOUtstandingCredits.Text = FormatMoney(Value)
             End Set
         End Property
 
         Public Property OutstandingDeposits As Decimal Implements IAccountReconciliationView.OutstandingDeposits
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnreconciledDifference.Text), _nfi)
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtOutstandingDeposits.Text), _nfi)
             End Get
             Set
-                txtUnreconciledDifference.Text = FormatMoney(Value)
+                txtOutStandingDeposits.Text = FormatMoney(Value)
             End Set
         End Property
 
@@ -654,7 +655,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Public Sub ButtonAdd_Click(sender As Object, e As EventArgs) 
             cboAccountIdNo.DisplayOnly = False
             dtpReconciliationDate.DisplayOnly = False
             cboAccountIdNo.SelectedIndex = -1

@@ -685,34 +685,34 @@
   <data name="&gt;&gt;lblTotalDepositsInTransit.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="txtTotalOutstandingDeposits.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtOutstandingDeposits.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
-  <data name="txtTotalOutstandingDeposits.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtOutstandingDeposits.Location" type="System.Drawing.Point, System.Drawing">
     <value>208, 26</value>
   </data>
-  <data name="txtTotalOutstandingDeposits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtOutstandingDeposits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtTotalOutstandingDeposits.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtOutstandingDeposits.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 22</value>
   </data>
-  <data name="txtTotalOutstandingDeposits.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtOutstandingDeposits.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="txtTotalOutstandingDeposits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="txtOutstandingDeposits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;txtTotalOutstandingDeposits.Name" xml:space="preserve">
-    <value>txtTotalOutstandingDeposits</value>
+  <data name="&gt;&gt;txtOutstandingDeposits.Name" xml:space="preserve">
+    <value>txtOutstandingDeposits</value>
   </data>
-  <data name="&gt;&gt;txtTotalOutstandingDeposits.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtOutstandingDeposits.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtTotalOutstandingDeposits.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtOutstandingDeposits.Parent" xml:space="preserve">
     <value>CFlowLayout6</value>
   </data>
-  <data name="&gt;&gt;txtTotalOutstandingDeposits.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtOutstandingDeposits.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="lblOutstandingCredits.Font" type="System.Drawing.Font, System.Drawing">
@@ -943,34 +943,34 @@
   <data name="&gt;&gt;CFlowLayout6.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="txtTotalOutstandingCredits.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtOutstandingCredits.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
-  <data name="txtTotalOutstandingCredits.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtOutstandingCredits.Location" type="System.Drawing.Point, System.Drawing">
     <value>208, 51</value>
   </data>
-  <data name="txtTotalOutstandingCredits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtOutstandingCredits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtTotalOutstandingCredits.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtOutstandingCredits.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 22</value>
   </data>
-  <data name="txtTotalOutstandingCredits.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtOutstandingCredits.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="txtTotalOutstandingCredits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="txtOutstandingCredits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;txtTotalOutstandingCredits.Name" xml:space="preserve">
-    <value>txtTotalOutstandingCredits</value>
+  <data name="&gt;&gt;txtOutstandingCredits.Name" xml:space="preserve">
+    <value>txtOutstandingCredits</value>
   </data>
-  <data name="&gt;&gt;txtTotalOutstandingCredits.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtOutstandingCredits.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtTotalOutstandingCredits.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtOutstandingCredits.Parent" xml:space="preserve">
     <value>CFlowLayout6</value>
   </data>
-  <data name="&gt;&gt;txtTotalOutstandingCredits.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtOutstandingCredits.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="txtTotalQtyCreditsCleared.Font" type="System.Drawing.Font, System.Drawing">
