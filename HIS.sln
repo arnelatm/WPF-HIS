@@ -66,6 +66,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		CostCenter_View.sql = CostCenter_View.sql
 		CreateAllViews.sql = CreateAllViews.sql
 		CreateAllViews.txt = CreateAllViews.txt
+		CrystalErrorDataOnFirstLineNotAppearing.txt = CrystalErrorDataOnFirstLineNotAppearing.txt
 		Dynamically Create Table.sql = Dynamically Create Table.sql
 		EmployeeFileNDesignations.sql = EmployeeFileNDesignations.sql
 		FringeBenefits.sql = FringeBenefits.sql

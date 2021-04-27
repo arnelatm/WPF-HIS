@@ -129,213 +129,11 @@
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>535, 17</value>
   </metadata>
-  <data name="&gt;&gt;CFlowLayout1.Name" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.Parent" xml:space="preserve">
-    <value>floHeader</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="floHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="floHeader.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 10, 5, 5</value>
-  </data>
-  <data name="floHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>970, 79</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="floHeader.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;floHeader.Name" xml:space="preserve">
-    <value>floHeader</value>
-  </data>
-  <data name="&gt;&gt;floHeader.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floHeader.Parent" xml:space="preserve">
-    <value>CFlowLayout4</value>
-  </data>
-  <data name="&gt;&gt;floHeader.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblIdNo.Name" xml:space="preserve">
-    <value>lblIdNo</value>
-  </data>
-  <data name="&gt;&gt;lblIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblIdNo.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.Name" xml:space="preserve">
-    <value>TxtIdNo</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblTransactionDate.Name" xml:space="preserve">
-    <value>lblTransactionDate</value>
-  </data>
-  <data name="&gt;&gt;lblTransactionDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblTransactionDate.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;lblTransactionDate.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;dtpReconciliationDate.Name" xml:space="preserve">
-    <value>dtpReconciliationDate</value>
-  </data>
-  <data name="&gt;&gt;dtpReconciliationDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dtpReconciliationDate.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;dtpReconciliationDate.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblBalance.Name" xml:space="preserve">
-    <value>lblBalance</value>
-  </data>
-  <data name="&gt;&gt;lblBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblBalance.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;lblBalance.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;txtBalance.Name" xml:space="preserve">
-    <value>txtBalance</value>
-  </data>
-  <data name="&gt;&gt;txtBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtBalance.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;txtBalance.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lblDateAdded.Name" xml:space="preserve">
-    <value>lblDateAdded</value>
-  </data>
-  <data name="&gt;&gt;lblDateAdded.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblDateAdded.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;lblDateAdded.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;txtDateCreated.Name" xml:space="preserve">
-    <value>txtDateCreated</value>
-  </data>
-  <data name="&gt;&gt;txtDateCreated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtDateCreated.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Name" xml:space="preserve">
-    <value>lblNotes</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Name" xml:space="preserve">
-    <value>cboAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.Name" xml:space="preserve">
-    <value>lblPosted</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;chkPosted.Name" xml:space="preserve">
-    <value>chkPosted</value>
-  </data>
-  <data name="&gt;&gt;chkPosted.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkPosted.Parent" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;chkPosted.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 13</value>
-  </data>
-  <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>960, 58</value>
-  </data>
-  <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
-    <value>246</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.Name" xml:space="preserve">
-    <value>CFlowLayout1</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.Parent" xml:space="preserve">
-    <value>floHeader</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -348,6 +146,7 @@
   <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 23</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>160</value>
   </data>
@@ -739,970 +538,49 @@
   <data name="&gt;&gt;chkPosted.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="&gt;&gt;lblEndingBankBalance.Name" xml:space="preserve">
-    <value>lblEndingBankBalance</value>
+  <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 13</value>
   </data>
-  <data name="&gt;&gt;lblEndingBankBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>960, 58</value>
   </data>
-  <data name="&gt;&gt;lblEndingBankBalance.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;lblEndingBankBalance.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtBalance2.Name" xml:space="preserve">
-    <value>txtBalance2</value>
-  </data>
-  <data name="&gt;&gt;txtBalance2.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtBalance2.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;txtBalance2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblTotalDepositsInTransit.Name" xml:space="preserve">
-    <value>lblTotalDepositsInTransit</value>
-  </data>
-  <data name="&gt;&gt;lblTotalDepositsInTransit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblTotalDepositsInTransit.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;lblTotalDepositsInTransit.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalOutstandingDeposits.Name" xml:space="preserve">
-    <value>txtTotalOutstandingDeposits</value>
-  </data>
-  <data name="&gt;&gt;txtTotalOutstandingDeposits.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalOutstandingDeposits.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;txtTotalOutstandingDeposits.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblOutstandingCredits.Name" xml:space="preserve">
-    <value>lblOutstandingCredits</value>
-  </data>
-  <data name="&gt;&gt;lblOutstandingCredits.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblOutstandingCredits.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;lblOutstandingCredits.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblGlSystemBalance.Name" xml:space="preserve">
-    <value>lblGlSystemBalance</value>
-  </data>
-  <data name="&gt;&gt;lblGlSystemBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblGlSystemBalance.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;lblGlSystemBalance.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;txtGlSystemBalance.Name" xml:space="preserve">
-    <value>txtGlSystemBalance</value>
-  </data>
-  <data name="&gt;&gt;txtGlSystemBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtGlSystemBalance.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;txtGlSystemBalance.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;CLabel7.Name" xml:space="preserve">
-    <value>CLabel7</value>
-  </data>
-  <data name="&gt;&gt;CLabel7.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CLabel7.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;CLabel7.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lblUnreconciledDifference.Name" xml:space="preserve">
-    <value>lblUnreconciledDifference</value>
-  </data>
-  <data name="&gt;&gt;lblUnreconciledDifference.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblUnreconciledDifference.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;lblUnreconciledDifference.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;txtUnreconciledDifference.Name" xml:space="preserve">
-    <value>txtUnreconciledDifference</value>
-  </data>
-  <data name="&gt;&gt;txtUnreconciledDifference.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtUnreconciledDifference.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;txtUnreconciledDifference.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="CFlowLayout6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>631, 3</value>
-  </data>
-  <data name="CFlowLayout6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 136</value>
-  </data>
-  <data name="CFlowLayout6.TabIndex" type="System.Int32, mscorlib">
-    <value>271</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout6.Name" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout6.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout6.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout6.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txtTotalOutstandingCredits.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="txtTotalOutstandingCredits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 51</value>
-  </data>
-  <data name="txtTotalOutstandingCredits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalOutstandingCredits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="txtTotalOutstandingCredits.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="txtTotalOutstandingCredits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalOutstandingCredits.Name" xml:space="preserve">
-    <value>txtTotalOutstandingCredits</value>
-  </data>
-  <data name="&gt;&gt;txtTotalOutstandingCredits.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalOutstandingCredits.Parent" xml:space="preserve">
-    <value>CFlowLayout6</value>
-  </data>
-  <data name="&gt;&gt;txtTotalOutstandingCredits.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="txtTotalQtyCreditsCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblCreditsCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblCreditsCleared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
-  </data>
-  <data name="lblCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblCreditsCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 23</value>
-  </data>
-  <data name="lblCreditsCleared.TabIndex" type="System.Int32, mscorlib">
+  <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
   </data>
-  <data name="lblCreditsCleared.Text" xml:space="preserve">
-    <value>Checks/Withdrawals</value>
+  <data name="&gt;&gt;CFlowLayout1.Name" xml:space="preserve">
+    <value>CFlowLayout1</value>
   </data>
-  <data name="lblCreditsCleared.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblCreditsCleared.Name" xml:space="preserve">
-    <value>lblCreditsCleared</value>
-  </data>
-  <data name="&gt;&gt;lblCreditsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCreditsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;lblCreditsCleared.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="txtTotalQtyCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 26</value>
-  </data>
-  <data name="txtTotalQtyCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalQtyCreditsCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 23</value>
-  </data>
-  <data name="txtTotalQtyCreditsCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="txtTotalQtyCreditsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsCleared.Name" xml:space="preserve">
-    <value>txtTotalQtyCreditsCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsCleared.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout2.Name" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout2.Type" xml:space="preserve">
+  <data name="&gt;&gt;CFlowLayout1.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout2.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
+  <data name="&gt;&gt;CFlowLayout1.Parent" xml:space="preserve">
+    <value>floHeader</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout5.Name" xml:space="preserve">
-    <value>CFlowLayout5</value>
+  <data name="floHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout5.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="floHeader.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 10, 5, 5</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout5.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
+  <data name="floHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>970, 79</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout5.ZOrder" xml:space="preserve">
+  <data name="floHeader.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="CFlowLayout3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 385</value>
+  <data name="&gt;&gt;floHeader.Name" xml:space="preserve">
+    <value>floHeader</value>
   </data>
-  <data name="CFlowLayout3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>970, 144</value>
-  </data>
-  <data name="CFlowLayout3.TabIndex" type="System.Int32, mscorlib">
-    <value>245</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.Name" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout3.Type" xml:space="preserve">
+  <data name="&gt;&gt;floHeader.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;floHeader.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;CFlowLayout3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblDebitsCleared.Name" xml:space="preserve">
-    <value>lblDebitsCleared</value>
-  </data>
-  <data name="&gt;&gt;lblDebitsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblDebitsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;lblDebitsCleared.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Name" xml:space="preserve">
-    <value>txtTotalQtyDebitsCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsCleared.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsCleared.Name" xml:space="preserve">
-    <value>txtTotalDebitsCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsCleared.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.Name" xml:space="preserve">
-    <value>txtTotalCreditsCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout8.Name" xml:space="preserve">
-    <value>CFlowLayout8</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout8.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout8.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout8.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="CFlowLayout2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 136</value>
-  </data>
-  <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
-    <value>269</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout2.Name" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout2.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout2.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblDebitsCleared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDebitsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="lblDebitsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblDebitsCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 23</value>
-  </data>
-  <data name="lblDebitsCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>249</value>
-  </data>
-  <data name="lblDebitsCleared.Text" xml:space="preserve">
-    <value>Deposits/Debits</value>
-  </data>
-  <data name="lblDebitsCleared.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblDebitsCleared.Name" xml:space="preserve">
-    <value>lblDebitsCleared</value>
-  </data>
-  <data name="&gt;&gt;lblDebitsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblDebitsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;lblDebitsCleared.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="txtTotalQtyDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtTotalQtyDebitsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 1</value>
-  </data>
-  <data name="txtTotalQtyDebitsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalQtyDebitsCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 23</value>
-  </data>
-  <data name="txtTotalQtyDebitsCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="txtTotalQtyDebitsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Name" xml:space="preserve">
-    <value>txtTotalQtyDebitsCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsCleared.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="txtTotalDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="lblTotalCreditsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblTotalCreditsNotCleared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblTotalCreditsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 26</value>
-  </data>
-  <data name="lblTotalCreditsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblTotalCreditsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 23</value>
-  </data>
-  <data name="lblTotalCreditsNotCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>263</value>
-  </data>
-  <data name="lblTotalCreditsNotCleared.Text" xml:space="preserve">
-    <value>Checks/Withdrawals</value>
-  </data>
-  <data name="lblTotalCreditsNotCleared.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblTotalCreditsNotCleared.Name" xml:space="preserve">
-    <value>lblTotalCreditsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;lblTotalCreditsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblTotalCreditsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;lblTotalCreditsNotCleared.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txtTotalDebitsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 1</value>
-  </data>
-  <data name="txtTotalDebitsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalDebitsCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="txtTotalDebitsCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="txtTotalDebitsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsCleared.Name" xml:space="preserve">
-    <value>txtTotalDebitsCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsCleared.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txtTotalCreditsCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="txtTotalCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 26</value>
-  </data>
-  <data name="txtTotalCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalCreditsCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="txtTotalCreditsCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="txtTotalCreditsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.Name" xml:space="preserve">
-    <value>txtTotalCreditsCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;btnClearAll.Name" xml:space="preserve">
-    <value>btnClearAll</value>
-  </data>
-  <data name="&gt;&gt;btnClearAll.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnClearAll.Parent" xml:space="preserve">
-    <value>CFlowLayout8</value>
-  </data>
-  <data name="&gt;&gt;btnClearAll.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnUnClearAll.Name" xml:space="preserve">
-    <value>btnUnClearAll</value>
-  </data>
-  <data name="&gt;&gt;btnUnClearAll.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnUnClearAll.Parent" xml:space="preserve">
-    <value>CFlowLayout8</value>
-  </data>
-  <data name="&gt;&gt;btnUnClearAll.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="CFlowLayout8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 53</value>
-  </data>
-  <data name="CFlowLayout8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 32</value>
-  </data>
-  <data name="CFlowLayout8.TabIndex" type="System.Int32, mscorlib">
-    <value>267</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout8.Name" xml:space="preserve">
-    <value>CFlowLayout8</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout8.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout8.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout8.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="btnClearAll.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="btnClearAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="btnClearAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 26</value>
-  </data>
-  <data name="btnClearAll.TabIndex" type="System.Int32, mscorlib">
-    <value>251</value>
-  </data>
-  <data name="btnClearAll.Text" xml:space="preserve">
-    <value>Clear All</value>
-  </data>
-  <data name="&gt;&gt;btnClearAll.Name" xml:space="preserve">
-    <value>btnClearAll</value>
-  </data>
-  <data name="&gt;&gt;btnClearAll.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnClearAll.Parent" xml:space="preserve">
-    <value>CFlowLayout8</value>
-  </data>
-  <data name="&gt;&gt;btnClearAll.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnUnClearAll.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="btnUnClearAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 3</value>
-  </data>
-  <data name="btnUnClearAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 26</value>
-  </data>
-  <data name="btnUnClearAll.TabIndex" type="System.Int32, mscorlib">
-    <value>252</value>
-  </data>
-  <data name="btnUnClearAll.Text" xml:space="preserve">
-    <value>Un-clear all</value>
-  </data>
-  <data name="&gt;&gt;btnUnClearAll.Name" xml:space="preserve">
-    <value>btnUnClearAll</value>
-  </data>
-  <data name="&gt;&gt;btnUnClearAll.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnUnClearAll.Parent" xml:space="preserve">
-    <value>CFlowLayout8</value>
-  </data>
-  <data name="&gt;&gt;btnUnClearAll.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;CLabel9.Name" xml:space="preserve">
-    <value>CLabel9</value>
-  </data>
-  <data name="&gt;&gt;CLabel9.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CLabel9.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;CLabel9.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Name" xml:space="preserve">
-    <value>txtTotalQtyCreditsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsNotCleared.Name" xml:space="preserve">
-    <value>txtTotalCreditsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsNotCleared.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Name" xml:space="preserve">
-    <value>txtTotalQtyDebitsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsNotCleared.Name" xml:space="preserve">
-    <value>txtTotalDebitsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsNotCleared.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout7.Name" xml:space="preserve">
-    <value>CFlowLayout7</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout7.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout7.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout7.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="CFlowLayout5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 3</value>
-  </data>
-  <data name="CFlowLayout5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 136</value>
-  </data>
-  <data name="CFlowLayout5.TabIndex" type="System.Int32, mscorlib">
-    <value>270</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout5.Name" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout5.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout5.Parent" xml:space="preserve">
-    <value>CFlowLayout3</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout5.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="CLabel9.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="CLabel9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CLabel9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="CLabel9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="CLabel9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 23</value>
-  </data>
-  <data name="CLabel9.TabIndex" type="System.Int32, mscorlib">
-    <value>259</value>
-  </data>
-  <data name="CLabel9.Text" xml:space="preserve">
-    <value>Transactions Not Cleared:</value>
-  </data>
-  <data name="CLabel9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;CLabel9.Name" xml:space="preserve">
-    <value>CLabel9</value>
-  </data>
-  <data name="&gt;&gt;CLabel9.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CLabel9.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;CLabel9.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="txtTotalQtyCreditsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtTotalQtyCreditsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
-  </data>
-  <data name="txtTotalQtyCreditsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalQtyCreditsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 23</value>
-  </data>
-  <data name="txtTotalQtyCreditsNotCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="txtTotalQtyCreditsNotCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Name" xml:space="preserve">
-    <value>txtTotalQtyCreditsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="txtTotalCreditsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="txtTotalCreditsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>198, 26</value>
-  </data>
-  <data name="txtTotalCreditsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalCreditsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="txtTotalCreditsNotCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="txtTotalCreditsNotCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsNotCleared.Name" xml:space="preserve">
-    <value>txtTotalCreditsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsNotCleared.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="txtTotalQtyDebitsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblTotalDebitsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblTotalDebitsNotCleared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblTotalDebitsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 51</value>
-  </data>
-  <data name="lblTotalDebitsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblTotalDebitsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 23</value>
-  </data>
-  <data name="lblTotalDebitsNotCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>265</value>
-  </data>
-  <data name="lblTotalDebitsNotCleared.Text" xml:space="preserve">
-    <value>Deposits/Debits</value>
-  </data>
-  <data name="lblTotalDebitsNotCleared.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblTotalDebitsNotCleared.Name" xml:space="preserve">
-    <value>lblTotalDebitsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;lblTotalDebitsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblTotalDebitsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;lblTotalDebitsNotCleared.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="txtTotalQtyDebitsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 51</value>
-  </data>
-  <data name="txtTotalQtyDebitsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalQtyDebitsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 23</value>
-  </data>
-  <data name="txtTotalQtyDebitsNotCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="txtTotalQtyDebitsNotCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Name" xml:space="preserve">
-    <value>txtTotalQtyDebitsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="txtTotalDebitsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="txtTotalDebitsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>198, 51</value>
-  </data>
-  <data name="txtTotalDebitsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalDebitsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="txtTotalDebitsNotCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="txtTotalDebitsNotCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsNotCleared.Name" xml:space="preserve">
-    <value>txtTotalDebitsNotCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsNotCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsNotCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;txtTotalDebitsNotCleared.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;btnPost.Name" xml:space="preserve">
-    <value>btnPost</value>
-  </data>
-  <data name="&gt;&gt;btnPost.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnPost.Parent" xml:space="preserve">
-    <value>CFlowLayout7</value>
-  </data>
-  <data name="&gt;&gt;btnPost.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="CFlowLayout7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 78</value>
-  </data>
-  <data name="CFlowLayout7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 32</value>
-  </data>
-  <data name="CFlowLayout7.TabIndex" type="System.Int32, mscorlib">
-    <value>266</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout7.Name" xml:space="preserve">
-    <value>CFlowLayout7</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout7.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout7.Parent" xml:space="preserve">
-    <value>CFlowLayout5</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout7.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="btnPost.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="btnPost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 26</value>
-  </data>
-  <data name="btnPost.TabIndex" type="System.Int32, mscorlib">
-    <value>251</value>
-  </data>
-  <data name="btnPost.Text" xml:space="preserve">
-    <value>Post</value>
-  </data>
-  <data name="&gt;&gt;btnPost.Name" xml:space="preserve">
-    <value>btnPost</value>
-  </data>
-  <data name="&gt;&gt;btnPost.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnPost.Parent" xml:space="preserve">
-    <value>CFlowLayout7</value>
-  </data>
-  <data name="&gt;&gt;btnPost.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;floHeader.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lblEndingBankBalance.Font" type="System.Drawing.Font, System.Drawing">
@@ -2044,45 +922,663 @@
   <data name="&gt;&gt;txtUnreconciledDifference.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="CFlowLayout6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>631, 3</value>
+  </data>
+  <data name="CFlowLayout6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 136</value>
+  </data>
+  <data name="CFlowLayout6.TabIndex" type="System.Int32, mscorlib">
+    <value>271</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout6.Name" xml:space="preserve">
+    <value>CFlowLayout6</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout6.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout6.Parent" xml:space="preserve">
+    <value>CFlowLayout3</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout6.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtTotalOutstandingCredits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="txtTotalOutstandingCredits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 51</value>
+  </data>
+  <data name="txtTotalOutstandingCredits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalOutstandingCredits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="txtTotalOutstandingCredits.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="txtTotalOutstandingCredits.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalOutstandingCredits.Name" xml:space="preserve">
+    <value>txtTotalOutstandingCredits</value>
+  </data>
+  <data name="&gt;&gt;txtTotalOutstandingCredits.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalOutstandingCredits.Parent" xml:space="preserve">
+    <value>CFlowLayout6</value>
+  </data>
+  <data name="&gt;&gt;txtTotalOutstandingCredits.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="txtTotalQtyCreditsCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblCreditsCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblCreditsCleared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 26</value>
+  </data>
+  <data name="lblCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblCreditsCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 23</value>
+  </data>
+  <data name="lblCreditsCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>246</value>
+  </data>
+  <data name="lblCreditsCleared.Text" xml:space="preserve">
+    <value>Checks/Withdrawals</value>
+  </data>
+  <data name="lblCreditsCleared.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblCreditsCleared.Name" xml:space="preserve">
+    <value>lblCreditsCleared</value>
+  </data>
+  <data name="&gt;&gt;lblCreditsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblCreditsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;lblCreditsCleared.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtTotalQtyCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 26</value>
+  </data>
+  <data name="txtTotalQtyCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalQtyCreditsCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 23</value>
+  </data>
+  <data name="txtTotalQtyCreditsCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="txtTotalQtyCreditsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyCreditsCleared.Name" xml:space="preserve">
+    <value>txtTotalQtyCreditsCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyCreditsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyCreditsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyCreditsCleared.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblDebitsCleared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDebitsCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 1</value>
+  </data>
+  <data name="lblDebitsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblDebitsCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 23</value>
+  </data>
+  <data name="lblDebitsCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>249</value>
+  </data>
+  <data name="lblDebitsCleared.Text" xml:space="preserve">
+    <value>Deposits/Debits</value>
+  </data>
+  <data name="lblDebitsCleared.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsCleared.Name" xml:space="preserve">
+    <value>lblDebitsCleared</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;lblDebitsCleared.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtTotalQtyDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtTotalQtyDebitsCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 1</value>
+  </data>
+  <data name="txtTotalQtyDebitsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalQtyDebitsCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 23</value>
+  </data>
+  <data name="txtTotalQtyDebitsCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="txtTotalQtyDebitsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Name" xml:space="preserve">
+    <value>txtTotalQtyDebitsCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsCleared.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtTotalDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="lblTotalCreditsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblTotalCreditsNotCleared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTotalCreditsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 26</value>
+  </data>
+  <data name="lblTotalCreditsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblTotalCreditsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 23</value>
+  </data>
+  <data name="lblTotalCreditsNotCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>263</value>
+  </data>
+  <data name="lblTotalCreditsNotCleared.Text" xml:space="preserve">
+    <value>Checks/Withdrawals</value>
+  </data>
+  <data name="lblTotalCreditsNotCleared.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblTotalCreditsNotCleared.Name" xml:space="preserve">
+    <value>lblTotalCreditsNotCleared</value>
+  </data>
+  <data name="&gt;&gt;lblTotalCreditsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblTotalCreditsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;lblTotalCreditsNotCleared.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtTotalDebitsCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 1</value>
+  </data>
+  <data name="txtTotalDebitsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalDebitsCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="txtTotalDebitsCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="txtTotalDebitsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsCleared.Name" xml:space="preserve">
+    <value>txtTotalDebitsCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsCleared.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtTotalCreditsCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="txtTotalCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 26</value>
+  </data>
+  <data name="txtTotalCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalCreditsCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="txtTotalCreditsCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="txtTotalCreditsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.Name" xml:space="preserve">
+    <value>txtTotalCreditsCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="btnClearAll.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="btnClearAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="btnClearAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 26</value>
+  </data>
+  <data name="btnClearAll.TabIndex" type="System.Int32, mscorlib">
+    <value>251</value>
+  </data>
+  <data name="btnClearAll.Text" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="&gt;&gt;btnClearAll.Name" xml:space="preserve">
+    <value>btnClearAll</value>
+  </data>
+  <data name="&gt;&gt;btnClearAll.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnClearAll.Parent" xml:space="preserve">
+    <value>CFlowLayout8</value>
+  </data>
+  <data name="&gt;&gt;btnClearAll.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnUnClearAll.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="btnUnClearAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 3</value>
+  </data>
+  <data name="btnUnClearAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 26</value>
+  </data>
+  <data name="btnUnClearAll.TabIndex" type="System.Int32, mscorlib">
+    <value>252</value>
+  </data>
+  <data name="btnUnClearAll.Text" xml:space="preserve">
+    <value>Un-clear all</value>
+  </data>
+  <data name="&gt;&gt;btnUnClearAll.Name" xml:space="preserve">
+    <value>btnUnClearAll</value>
+  </data>
+  <data name="&gt;&gt;btnUnClearAll.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnUnClearAll.Parent" xml:space="preserve">
+    <value>CFlowLayout8</value>
+  </data>
+  <data name="&gt;&gt;btnUnClearAll.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CFlowLayout8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 53</value>
+  </data>
+  <data name="CFlowLayout8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 32</value>
+  </data>
+  <data name="CFlowLayout8.TabIndex" type="System.Int32, mscorlib">
+    <value>267</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.Name" xml:space="preserve">
+    <value>CFlowLayout8</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout8.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="CFlowLayout2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>310, 136</value>
+  </data>
+  <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
+    <value>269</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.Name" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.Parent" xml:space="preserve">
+    <value>CFlowLayout3</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="CLabel9.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="CLabel9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 1</value>
+  </data>
+  <data name="CLabel9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CLabel9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 23</value>
+  </data>
+  <data name="CLabel9.TabIndex" type="System.Int32, mscorlib">
+    <value>259</value>
+  </data>
+  <data name="CLabel9.Text" xml:space="preserve">
+    <value>Transactions Not Cleared:</value>
+  </data>
+  <data name="CLabel9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;CLabel9.Name" xml:space="preserve">
+    <value>CLabel9</value>
+  </data>
+  <data name="&gt;&gt;CLabel9.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel9.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;CLabel9.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtTotalQtyCreditsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtTotalQtyCreditsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 26</value>
+  </data>
+  <data name="txtTotalQtyCreditsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalQtyCreditsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 23</value>
+  </data>
+  <data name="txtTotalQtyCreditsNotCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="txtTotalQtyCreditsNotCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Name" xml:space="preserve">
+    <value>txtTotalQtyCreditsNotCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyCreditsNotCleared.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtTotalCreditsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="txtTotalCreditsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 26</value>
+  </data>
+  <data name="txtTotalCreditsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalCreditsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="txtTotalCreditsNotCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="txtTotalCreditsNotCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsNotCleared.Name" xml:space="preserve">
+    <value>txtTotalCreditsNotCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsNotCleared.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtTotalQtyDebitsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblTotalDebitsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblTotalDebitsNotCleared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTotalDebitsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 51</value>
+  </data>
+  <data name="lblTotalDebitsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblTotalDebitsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 23</value>
+  </data>
+  <data name="lblTotalDebitsNotCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>265</value>
+  </data>
+  <data name="lblTotalDebitsNotCleared.Text" xml:space="preserve">
+    <value>Deposits/Debits</value>
+  </data>
+  <data name="lblTotalDebitsNotCleared.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblTotalDebitsNotCleared.Name" xml:space="preserve">
+    <value>lblTotalDebitsNotCleared</value>
+  </data>
+  <data name="&gt;&gt;lblTotalDebitsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblTotalDebitsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;lblTotalDebitsNotCleared.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="txtTotalQtyDebitsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 51</value>
+  </data>
+  <data name="txtTotalQtyDebitsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalQtyDebitsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 23</value>
+  </data>
+  <data name="txtTotalQtyDebitsNotCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="txtTotalQtyDebitsNotCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Name" xml:space="preserve">
+    <value>txtTotalQtyDebitsNotCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;txtTotalQtyDebitsNotCleared.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtTotalDebitsNotCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="txtTotalDebitsNotCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 51</value>
+  </data>
+  <data name="txtTotalDebitsNotCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalDebitsNotCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="txtTotalDebitsNotCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="txtTotalDebitsNotCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsNotCleared.Name" xml:space="preserve">
+    <value>txtTotalDebitsNotCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsNotCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsNotCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebitsNotCleared.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="btnPost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="btnPost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 26</value>
+  </data>
+  <data name="btnPost.TabIndex" type="System.Int32, mscorlib">
+    <value>251</value>
+  </data>
+  <data name="btnPost.Text" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="&gt;&gt;btnPost.Name" xml:space="preserve">
+    <value>btnPost</value>
+  </data>
+  <data name="&gt;&gt;btnPost.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnPost.Parent" xml:space="preserve">
+    <value>CFlowLayout7</value>
+  </data>
+  <data name="&gt;&gt;btnPost.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="CFlowLayout7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 78</value>
+  </data>
+  <data name="CFlowLayout7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 32</value>
+  </data>
+  <data name="CFlowLayout7.TabIndex" type="System.Int32, mscorlib">
+    <value>266</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout7.Name" xml:space="preserve">
+    <value>CFlowLayout7</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout7.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout7.Parent" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout7.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="CFlowLayout5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 3</value>
+  </data>
+  <data name="CFlowLayout5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 136</value>
+  </data>
+  <data name="CFlowLayout5.TabIndex" type="System.Int32, mscorlib">
+    <value>270</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.Name" xml:space="preserve">
+    <value>CFlowLayout5</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.Parent" xml:space="preserve">
+    <value>CFlowLayout3</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout5.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CFlowLayout3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 385</value>
+  </data>
+  <data name="CFlowLayout3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>970, 144</value>
+  </data>
+  <data name="CFlowLayout3.TabIndex" type="System.Int32, mscorlib">
+    <value>245</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout3.Name" xml:space="preserve">
+    <value>CFlowLayout3</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout3.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout3.Parent" xml:space="preserve">
+    <value>CFlowLayout4</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="CsrOiItemModelBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>890, 17</value>
   </metadata>
-  <data name="&gt;&gt;DataGridViewReconciliationItems.Name" xml:space="preserve">
-    <value>DataGridViewReconciliationItems</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewReconciliationItems.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewReconciliationItems.Parent" xml:space="preserve">
-    <value>CFlowLayout4</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewReconciliationItems.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="CFlowLayout4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="CFlowLayout4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 53</value>
-  </data>
-  <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>997, 526</value>
-  </data>
-  <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
-    <value>246</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout4.Name" xml:space="preserve">
-    <value>CFlowLayout4</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout4.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout4.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;CFlowLayout4.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="dgvSequence.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2208,6 +1704,30 @@
   </data>
   <data name="&gt;&gt;DataGridViewReconciliationItems.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="CFlowLayout4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="CFlowLayout4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 53</value>
+  </data>
+  <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>997, 526</value>
+  </data>
+  <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
+    <value>246</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout4.Name" xml:space="preserve">
+    <value>CFlowLayout4</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout4.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CFlowLayout4.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

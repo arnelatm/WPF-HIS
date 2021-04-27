@@ -5,3 +5,5 @@
 2 Mapping Error for Nullable Value:  Please check in DAO that you defined the property as "AsNullable(Of X?)"  x? must be a nullable value
 3 Form Handle Error when showing Arabic forms.  Problem in OnLoad function or minimize code before form is shown. One time transferred
   OnLoad code to Shown code.
+  4. Crystal Report Problem (First Line of detail items not showing, why? I dont know) solution was to put the arabic and english
+	in one section and on top of each other, just suppress data based on Language.

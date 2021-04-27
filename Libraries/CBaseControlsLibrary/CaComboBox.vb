@@ -24,6 +24,7 @@ Public Class CaComboBox
     Private _readOnlyCombo As Boolean
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
+    Private _lastText As String = ""
     Private ReadOnly _defaultDropDownHeight As Int16
     Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
     Private ReadOnly _defaultMaxDropDownItems As Int16
@@ -752,6 +753,7 @@ Public Class CaComboBox
 
     Private Sub caCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Me.SelectedIndexChanged
         PreviousSelectedIndex = SelectedIndex
+        '_lastSelectedIndex = SelectedIndex
     End Sub
 
     Private Sub SetListBoxFormLocation(ByRef suggestLbForm As CListBoxForm)
@@ -856,6 +858,17 @@ Public Class CaComboBox
         ' revert to previous value
         SelectedIndex = PreviousSelectedIndex
     End Sub
+
+    Private Sub cboCOmbobox_OnGotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
+        _lastText = Text
+    End Sub
+
+    Public Function ComboBoxValueChanged()
+        If _lastText = Text Then
+            Return False
+        End If
+        Return True
+    End Function
 
     Public Function ValueChanged()
         If SelectedIndex = PreviousSelectedIndex Then

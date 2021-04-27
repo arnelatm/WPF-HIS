@@ -349,7 +349,8 @@ Namespace PresentationLayer.Views.Forms
             AddHandler Closing, AddressOf CatchClose
         End Sub
 
-        Private Sub txtBalance_TextChanged(sender As Object, e As EventArgs) Handles txtBalance.Validated
+        Private Sub txtBalance_TextChanged(sender As Object, e As EventArgs) Handles txtBalance.Validated, txtBalance.TextChanged
+            txtBalance2.Text = txtBalance.Text
             PublishEvent(New EndingBankBalanceEntryChangedEvent(sender))
         End Sub
 
@@ -643,22 +644,21 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated, dtpReconciliationDate.ValueChanged
             If Not btnEdit.Enabled Then
-                If dtpReconciliationDate.DateChanged() Then
-                    PublishEvent(New EndingReconciliationDateChangedEvent(sender))
-                End If
+                PublishEvent(New EndingReconciliationDateChangedEvent(sender))
             End If
         End Sub
 
         Private Sub cboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
             If Not btnEdit.Enabled Then
-                PublishEvent(New EndingReconciliationDateChangedEvent(sender))
+                PublishEvent(New ReconciliationAccountChangedEvent(sender))
             End If
         End Sub
 
         Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
             cboAccountIdNo.DisplayOnly = False
             dtpReconciliationDate.DisplayOnly = False
-            dtpReconciliationDate.Focus()
+            cboAccountIdNo.SelectedIndex = -1
+            dtpReconciliationDate.Value = Nothing
         End Sub
 
         Private Sub btnPost_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea

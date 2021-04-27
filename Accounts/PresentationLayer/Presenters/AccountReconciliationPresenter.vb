@@ -16,7 +16,8 @@ Namespace PresentationLayer.Presenters
                    ISubscriber(Of ReconciliationPostingRequestEvent),
                    ISubscriber(Of ReconciliationRefreshRequestEvent),
                    ISubscriber(Of EndingBankBalanceEntryChangedEvent),
-                   ISubscriber(Of EndingReconciliationDateChangedEvent)
+                   ISubscriber(Of EndingReconciliationDateChangedEvent),
+                   ISubscriber(Of ReconciliationAccountChangedEvent)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -289,7 +290,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnReconciliationClearEvent(ByRef e As ReconciliationClearEvent) Implements ISubscriber(Of ReconciliationClearEvent).OnEventHandler
-            If EditMode Then
+            If EditMode Or AddMode Then
                 ProcessReconciliationRequest(e)
                 UpdateTotals()
                 e.DataBindingSource.ResetBindings(False)
@@ -302,7 +303,34 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub UpdateTotals()
-            If View.AccountIdNo > 0 Then
+            If View.AccountIdNo > 0 And View.ReconciliationDate IsNot Nothing Then
+                View.TotalDebitsCleared = 0
+                View.TotalCreditsCleared = 0
+                View.TotalDebitsNotCleared = 0
+                View.TotalCreditsNotCleared = 0
+                View.TotalQtyDebitsCleared = 0
+                View.TotalQtyCreditsCleared = 0
+                View.TotalQtyDebitsNotCleared = 0
+                View.TotalQtyCreditsNotCleared = 0
+                For Each accountReconciliationItem In View.AccountReconciliationItems
+                    If accountReconciliationItem.Cleared Then
+                        If accountReconciliationItem.Debit > 0 Then
+                            View.TotalDebitsCleared += accountReconciliationItem.Debit
+                            View.TotalQtyDebitsCleared += 1
+                        Else
+                            View.TotalCreditsCleared += accountReconciliationItem.Credit
+                            View.TotalQtyCreditsCleared += 1
+                        End If
+                    Else
+                        If accountReconciliationItem.Debit > 0 Then
+                            View.TotalDebitsNotCleared += accountReconciliationItem.Debit
+                            View.TotalQtyDebitsNotCleared += 1
+                        Else
+                            View.TotalCreditsNotCleared += accountReconciliationItem.Credit
+                            View.TotalQtyCreditsNotCleared += 1
+                        End If
+                    End If
+                Next
                 View.GlSystemBalance = ModelOfPresenter.GetAccountBalance(View.ReconciliationDate, View.AccountIdNo)
                 ReComputeDifference()
             End If
@@ -336,7 +364,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnReconciliationPostingRequestEvent(ByRef e As ReconciliationPostingRequestEvent) Implements ISubscriber(Of ReconciliationPostingRequestEvent).OnEventHandler
             If View.UnreconciledDifference = 0 And Not View.Posted Then
-                If e.Saved Then
+                If Not e.Saved Then
                     AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgSaveReconFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
                 Else
                     Dim message = "Are you sure you want to {action} this {itemName} entry?"
@@ -367,17 +395,31 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnEndingReconciliationDateChangedEvent(ByRef eventType As EndingReconciliationDateChangedEvent) Implements ISubscriber(Of EndingReconciliationDateChangedEvent).OnEventHandler
-            If AddMode Then
+            If EditMode Or AddMode Then
                 If View.AccountIdNo <> 0 And View.ReconciliationDate IsNot Nothing Then
-                    View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
-                    UpdateTotals()
+                    If Not View.AccountReconciliationItems.Any() Then
+                        ' update only if empty
+                        View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
+                        UpdateTotals()
+                    End If
                 End If
             End If
         End Sub
 
         Public Sub OnReconciliationRefreshRequestEvent(ByRef eventType As ReconciliationRefreshRequestEvent) Implements ISubscriber(Of ReconciliationRefreshRequestEvent).OnEventHandler
-            If EditMode or AddMode Then
+            If EditMode Or AddMode Then
                 UpdateTotals()
+            End If
+        End Sub
+
+        Public Sub OnReconciliationdAccountChangedEvent(ByRef eventType As ReconciliationAccountChangedEvent) Implements ISubscriber(Of ReconciliationAccountChangedEvent).OnEventHandler
+            If EditMode Or AddMode Then
+                If Not View.AccountReconciliationItems.Any Then
+                    If View.AccountIdNo IsNot Nothing And View.ReconciliationDate IsNot Nothing Then
+                        View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
+                        UpdateTotals()
+                    End If
+                End If
             End If
         End Sub
 

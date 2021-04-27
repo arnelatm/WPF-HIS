@@ -437,6 +437,13 @@
     <Build Include="dbo\Functions\FuncGlAccountStatement.sql" />
     <Build Include="dbo\Functions\FuncGlStatementNew.sql" />
     <Build Include="dbo\Functions\FuncAccountBalance.sql" />
+    <Build Include="dbo\Functions\FuncGlAccountStatement4.sql" />
+    <Build Include="dbo\Functions\fnGetAcctActivityStatement.sql" />
+    <Build Include="dbo\Functions\fnGetAcctActivityPreviousData.sql" />
+    <Build Include="dbo\Functions\fnGetAcctActivityPrevBalance.sql" />
+    <Build Include="dbo\Functions\fnGetAcctActivityFullData.sql" />
+    <Build Include="dbo\Functions\fnGetAcctActivityCurrentData.sql" />
+    <Build Include="dbo\Stored Procedures\spAccountActivityReport.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
