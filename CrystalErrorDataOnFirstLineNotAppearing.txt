@@ -1,0 +1,1 @@
+remove the keep together checkbox in the common detail section (section designer)

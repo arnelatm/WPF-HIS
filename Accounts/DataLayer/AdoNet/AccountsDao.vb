@@ -24,9 +24,10 @@ Namespace DataLayer.AdoNet
         Public Function GetAccountBalance(endDate As Date, accountIdNo As Int16) As Decimal Implements IAccountsDao.GetAccountBalance
             Dim sql As String
             Dim baseDao As New BaseDao
-            sql = "Select dbo.FuncAccountBalance(@AccountIdNo,@endDate)"
+            Dim accountCode As String = "106"
+            sql = "Select Sum(debit-Credit) from dbo.[fnGetAcctActivityStatement](@BegDate,@EndDate,@BegAcctCode,@EndAcctCode)"
             Dim params() As Object
-            params = {"@AccountIdNo", accountIdNo, "@EndDate", endDate}
+            params = {"@BegDate", Convert.ToDateTime(endDate), "@EndDate", Convert.ToDateTime(endDate), "@BegAcctCode", accountCode, "@EndAcctCode", accountCode}
             Return _db.Scalar(sql, params)
             'Dim sql As String
             'Dim baseDao As New BaseDao

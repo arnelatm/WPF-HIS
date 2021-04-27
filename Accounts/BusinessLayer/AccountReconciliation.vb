@@ -39,7 +39,6 @@ Namespace BusinessLayer
         Public Property TotalQtyDebitsNotCleared As Integer
         Public Property UnreconciledDifference As Decimal
 
-
         Public Sub ComputeCalculatedProperties()
             TotalDebitsCleared = 0
             TotalCreditsCleared = 0
@@ -55,16 +54,16 @@ Namespace BusinessLayer
                         TotalDebitsCleared += accountReconciliationItem.Debit
                         TotalQtyDebitsCleared += 1
                     Else
-                        TotalCreditsCleared += 1
                         TotalCreditsCleared += accountReconciliationItem.Credit
+                        TotalQtyCreditsCleared += 1
                     End If
                 Else
                     If accountReconciliationItem.Debit > 0 Then
                         TotalDebitsNotCleared += accountReconciliationItem.Debit
                         TotalQtyDebitsNotCleared += 1
                     Else
-                        TotalQtyCreditsNotCleared += 1
                         TotalCreditsNotCleared += accountReconciliationItem.Credit
+                        TotalQtyCreditsNotCleared += 1
                     End If
                 End If
             Next
