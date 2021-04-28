@@ -160,12 +160,13 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetAcctReconItems(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
-            Dim nSeq As Integer = 0
+            Dim nSeq As Integer = 1
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
             Dim allAcctReconItems As List(Of AccountReconciliationItemModel) = ModelOfPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
             If AddMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
+                    nSeq += 1
                 Next
             Else
                 Dim oldReconciliationItems As List(Of AccountReconciliationItemModel)
@@ -177,15 +178,17 @@ Namespace PresentationLayer.Presenters
                 For Each acctReconItem In allAcctReconItems
                     dr = oldReconItems.Select("JournalCode = '" & acctReconItem.JournalCode & "' and JournalItemIdNo = " & acctReconItem.JournalItemIdNo.ToString())
                     If dr.Length > 0 Then
+                        acctReconItem.IdNo = dr(0).Item("IdNo")
                         AddNewItem(acctReconItem, acctReconItems, nSeq)
                     Else
-                        nSeq += 1
+                        AddNewItem(acctReconItem, acctReconItems, nSeq)
                     End If
-                Next
-                For Each reconciledItem As AccountReconciliationItemModel In oldReconciliationItems
-                    AddNewItem(reconciledItem, acctReconItems, nSeq)
                     nSeq += 1
                 Next
+                'For Each reconciledItem As AccountReconciliationItemModel In oldReconciliationItems
+                '    AddNewItem(reconciledItem, acctReconItems, nSeq)
+                '    nSeq += 1
+                'Next
             End If
             Dim result As New List(Of AccountReconciliationItemView)
             GlobalVariables.Mapper.Map(acctReconItems, result)
@@ -397,20 +400,13 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnReconciliationPostingRequestEvent(ByRef e As ReconciliationPostingRequestEvent) Implements ISubscriber(Of ReconciliationPostingRequestEvent).OnEventHandler
             If View.UnreconciledDifference = 0 And Not View.Posted Then
-                If Not e.Saved Then
-                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgSaveReconFirstBeforePosting", "Please save first your reconciliation before posting!", "Unsaved entries exist")
-                Else
-                    Dim message = "Are you sure you want to {action} this {itemName} entry?"
-                    Dim caption = "Please confirm."
-                    Dim action = "post"
-                    Dim itemName = "account reconciliation"
-                    AATM.Libraries.MessagingLibrary.Messaging.GetMessage(True, "AskIfContinueAction", message, caption)
-                    message = message.Interpolate(Function(x) action, Function(x) itemName)
-                    If AATM.Libraries.MessagingLibrary.Messaging.Show(True, "AskIfContinueAction", message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                        PostReconciliation(View.IdNo, View.AccountReconciliationItems)
-                        'Else
-                        '    MyErrorProvider.ClearAllErrorMessages()
-                    End If
+                Dim message = "Are you sure you want to {action} this {itemName} entry?"
+                Dim caption = "Please confirm."
+                Dim action As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("save")
+                Dim itemName As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("transaction")
+                Dim msg = AATM.Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+                If AATM.Libraries.MessagingLibrary.Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    PostReconciliation(View.IdNo, View.AccountReconciliationItems)
                 End If
             Else
                 If View.Posted Then
@@ -430,12 +426,11 @@ Namespace PresentationLayer.Presenters
         Private Sub OnEndingReconciliationDateChangedEvent(ByRef eventType As EndingReconciliationDateChangedEvent) Implements ISubscriber(Of EndingReconciliationDateChangedEvent).OnEventHandler
             If EditMode Or AddMode Then
                 If View.AccountIdNo <> 0 And View.ReconciliationDate IsNot Nothing Then
-                    If Not View.AccountReconciliationItems.Any() Then
-                        ' update only if empty
-                        View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
-                        UpdateTotals()
-                    End If
+                    View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
+                Else
+                    View.AccountReconciliationItems.Clear()
                 End If
+                UpdateTotals()
             End If
         End Sub
 
@@ -445,14 +440,16 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnReconciliationdAccountChangedEvent(ByRef eventType As ReconciliationAccountChangedEvent) Implements ISubscriber(Of ReconciliationAccountChangedEvent).OnEventHandler
+        Public Sub OnReconciliationAccountChangedEvent(ByRef eventType As ReconciliationAccountChangedEvent) Implements ISubscriber(Of ReconciliationAccountChangedEvent).OnEventHandler
             If EditMode Or AddMode Then
-                If Not View.AccountReconciliationItems.Any Then
-                    If View.AccountIdNo IsNot Nothing And View.ReconciliationDate IsNot Nothing Then
-                        View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
-                        UpdateTotals()
-                    End If
+                'If Not View.AccountReconciliationItems.Any Then
+                If View.AccountIdNo IsNot Nothing And View.ReconciliationDate IsNot Nothing Then
+                    View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
+                    UpdateTotals()
+                Else
+                    View.AccountReconciliationItems.Clear()
                 End If
+                'End If
             End If
         End Sub
 

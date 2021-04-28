@@ -40,9 +40,6 @@ Namespace PresentationLayer.Views.Forms
         Me.lblTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtLanguageIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtMessageIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtIdNoTranslated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floDataDisplay.SuspendLayout
         Me.SuspendLayout
@@ -187,9 +184,6 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.Controls.Add(Me.txtTranslatedCaption)
         Me.floDataDisplay.Controls.Add(Me.lblNotes)
         Me.floDataDisplay.Controls.Add(Me.txtNotes)
-        Me.floDataDisplay.Controls.Add(Me.txtLanguageIdNo)
-        Me.floDataDisplay.Controls.Add(Me.txtMessageIdNo)
-        Me.floDataDisplay.Controls.Add(Me.txtIdNoTranslated)
         Me.floDataDisplay.Name = "floDataDisplay"
         '
         'lblIdNo
@@ -313,81 +307,6 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.lblNotes, "lblNotes")
         Me.lblNotes.Name = "lblNotes"
         '
-        'txtLanguageIdNo
-        '
-        Me.txtLanguageIdNo.BackColor = System.Drawing.Color.White
-        Me.txtLanguageIdNo.BegFindValue = Nothing
-        Me.txtLanguageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLanguageIdNo.ComputedValue = false
-        Me.txtLanguageIdNo.CustomFormat = Nothing
-        Me.txtLanguageIdNo.DataBoundControl = true
-        Me.txtLanguageIdNo.DisplayOnly = true
-        Me.txtLanguageIdNo.EditingMode = true
-        resources.ApplyResources(Me.txtLanguageIdNo, "txtLanguageIdNo")
-        Me.txtLanguageIdNo.EndFindValue = Nothing
-        Me.txtLanguageIdNo.FieldName = Nothing
-        Me.txtLanguageIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtLanguageIdNo.FindEnabled = true
-        Me.txtLanguageIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtLanguageIdNo.LinkedLabel = Nothing
-        Me.txtLanguageIdNo.MaximumValue = Nothing
-        Me.txtLanguageIdNo.MinimumValue = Nothing
-        Me.txtLanguageIdNo.Name = "txtLanguageIdNo"
-        Me.txtLanguageIdNo.OldValue = Nothing
-        Me.txtLanguageIdNo.ReadOnly = true
-        Me.txtLanguageIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtLanguageIdNo.TabStop = false
-        '
-        'txtMessageIdNo
-        '
-        Me.txtMessageIdNo.BackColor = System.Drawing.Color.White
-        Me.txtMessageIdNo.BegFindValue = Nothing
-        Me.txtMessageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtMessageIdNo.ComputedValue = false
-        Me.txtMessageIdNo.CustomFormat = Nothing
-        Me.txtMessageIdNo.DataBoundControl = true
-        Me.txtMessageIdNo.DisplayOnly = true
-        Me.txtMessageIdNo.EditingMode = true
-        resources.ApplyResources(Me.txtMessageIdNo, "txtMessageIdNo")
-        Me.txtMessageIdNo.EndFindValue = Nothing
-        Me.txtMessageIdNo.FieldName = Nothing
-        Me.txtMessageIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtMessageIdNo.FindEnabled = true
-        Me.txtMessageIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtMessageIdNo.LinkedLabel = Nothing
-        Me.txtMessageIdNo.MaximumValue = Nothing
-        Me.txtMessageIdNo.MinimumValue = Nothing
-        Me.txtMessageIdNo.Name = "txtMessageIdNo"
-        Me.txtMessageIdNo.OldValue = Nothing
-        Me.txtMessageIdNo.ReadOnly = true
-        Me.txtMessageIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtMessageIdNo.TabStop = false
-        '
-        'txtIdNoTranslated
-        '
-        Me.txtIdNoTranslated.BackColor = System.Drawing.Color.White
-        Me.txtIdNoTranslated.BegFindValue = Nothing
-        Me.txtIdNoTranslated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtIdNoTranslated.ComputedValue = false
-        Me.txtIdNoTranslated.CustomFormat = Nothing
-        Me.txtIdNoTranslated.DataBoundControl = true
-        Me.txtIdNoTranslated.DisplayOnly = true
-        Me.txtIdNoTranslated.EditingMode = true
-        resources.ApplyResources(Me.txtIdNoTranslated, "txtIdNoTranslated")
-        Me.txtIdNoTranslated.EndFindValue = Nothing
-        Me.txtIdNoTranslated.FieldName = Nothing
-        Me.txtIdNoTranslated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtIdNoTranslated.FindEnabled = true
-        Me.txtIdNoTranslated.ForeColor = System.Drawing.Color.Black
-        Me.txtIdNoTranslated.LinkedLabel = Nothing
-        Me.txtIdNoTranslated.MaximumValue = Nothing
-        Me.txtIdNoTranslated.MinimumValue = Nothing
-        Me.txtIdNoTranslated.Name = "txtIdNoTranslated"
-        Me.txtIdNoTranslated.OldValue = Nothing
-        Me.txtIdNoTranslated.ReadOnly = true
-        Me.txtIdNoTranslated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtIdNoTranslated.TabStop = false
-        '
         'OriginalMessagesEntryTv
         '
         resources.ApplyResources(Me, "$this")
@@ -416,9 +335,6 @@ End Sub
         Friend WithEvents lblTranslatedMessage As CLabel
         Friend WithEvents lblTranslatedCaption As CLabel
         Friend WithEvents txtTranslatedCaption As CTextBox
-        Friend WithEvents txtLanguageIdNo As CTextBox
-        Friend WithEvents txtMessageIdNo As CTextBox
-        Friend WithEvents txtIdNoTranslated As CTextBox
         Friend WithEvents txtTranslatedMessage As CTextBoxArabic
     End Class
 End NameSpace

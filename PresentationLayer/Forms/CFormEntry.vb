@@ -168,7 +168,7 @@ Public Class CFormEntry
         button.Visible = False
     End Sub
 
-    Public Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
+    Protected Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
         If e.AddMode Then
             Inputs(True)
             UpdateButtonDisplays(False, True)
@@ -178,7 +178,7 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Public Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
+    Protected Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
         If e.EditMode Then
             Inputs(True)
             UpdateButtonDisplays(True, False)
@@ -827,7 +827,7 @@ Public Class CFormEntry
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             CreateDataSources()
             CreateMainFieldsDictionary()
-            Inputs(False)
+            'Inputs(False)
 
             Try
                 If Not SingleData Then
@@ -876,6 +876,8 @@ Public Class CFormEntry
                 tssnavigator1.Visible = False
                 btnOf.Visible = False
             End If
+            PresenterObj.EditMode = False
+            PresenterObj.AddMode = False
             UpdateButtonDisplays(False, False)
         End If
     End Sub

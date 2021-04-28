@@ -97,13 +97,6 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property IdNoTranslated As Integer Implements IOriginalMessagesView.IdNoTranslated
-            Get
-                Return NumParser(Of Integer)(txtIdNoTranslated.Text)
-            End Get
-            Set(value As Integer)
-                txtIdNoTranslated.Text = value
-            End Set
-        End Property
 
         'Protected Overrides Sub AddMandatoryFieldCheck()
         '    'Add controls one by one in error provider.

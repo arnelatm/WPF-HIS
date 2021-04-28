@@ -220,6 +220,8 @@ Public Class CCustomDateTimePicker
         Set
             _readOnlyDp = Value
             txtDate.DisplayOnly = Value
+            txtLongDate.DisplayOnly = Value
+            txtTime.DisplayOnly = Value
         End Set
     End Property
 
@@ -677,6 +679,12 @@ Public Class CCustomDateTimePicker
 
     Private Sub OnValueChanged(sender As Object, e As EventArgs) Handles txtDate.TextChanged, txtTime.TextChanged, txtLongDate.TextChanged
         RaiseEvent ValueChanged(sender, e)
+    End Sub
+
+    Private Sub dtpReconciliationDate_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged
+        txtDate.Enabled = Me.Enabled
+        txtLongDate.Enabled = Me.Enabled
+        txtTime.Enabled = Me.Enabled
     End Sub
 
     'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable

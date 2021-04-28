@@ -58,11 +58,11 @@ Namespace PresentationLayer.Views.Forms
         Me.lblCreditsCleared = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.txtTotalCreditsCleared = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDebitsCleared = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtTotalQtyDebitsCleared = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtTotalDebitsCleared = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblTotalCreditsNotCleared = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtTotalCreditsCleared = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout8 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnClearAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnUnClearAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -115,6 +115,14 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.DataGridViewReconciliationItems,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsAccountReconciliationItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
+        '
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
         'floHeader
         '
@@ -422,15 +430,43 @@ Namespace PresentationLayer.Views.Forms
         'CFlowLayout2
         '
         Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout2.Controls.Add(Me.lblDebitsCleared)
-        Me.CFlowLayout2.Controls.Add(Me.txtTotalQtyDebitsCleared)
-        Me.CFlowLayout2.Controls.Add(Me.txtTotalDebitsCleared)
         Me.CFlowLayout2.Controls.Add(Me.lblCreditsCleared)
         Me.CFlowLayout2.Controls.Add(Me.txtTotalQtyCreditsCleared)
         Me.CFlowLayout2.Controls.Add(Me.txtTotalCreditsCleared)
+        Me.CFlowLayout2.Controls.Add(Me.lblDebitsCleared)
+        Me.CFlowLayout2.Controls.Add(Me.txtTotalQtyDebitsCleared)
+        Me.CFlowLayout2.Controls.Add(Me.txtTotalDebitsCleared)
         Me.CFlowLayout2.Controls.Add(Me.CFlowLayout8)
         resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
         Me.CFlowLayout2.Name = "CFlowLayout2"
+        '
+        'txtTotalCreditsCleared
+        '
+        Me.txtTotalCreditsCleared.BackColor = System.Drawing.Color.White
+        Me.txtTotalCreditsCleared.BegFindValue = Nothing
+        Me.txtTotalCreditsCleared.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalCreditsCleared.ComputedValue = true
+        Me.txtTotalCreditsCleared.CustomFormat = Nothing
+        Me.txtTotalCreditsCleared.DataBoundControl = true
+        Me.txtTotalCreditsCleared.DisplayOnly = true
+        Me.txtTotalCreditsCleared.EditingMode = true
+        Me.txtTotalCreditsCleared.EndFindValue = Nothing
+        Me.txtTotalCreditsCleared.FieldName = Nothing
+        Me.txtTotalCreditsCleared.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtTotalCreditsCleared.FindEnabled = false
+        Me.CFlowLayout2.SetFlowBreak(Me.txtTotalCreditsCleared, true)
+        resources.ApplyResources(Me.txtTotalCreditsCleared, "txtTotalCreditsCleared")
+        Me.txtTotalCreditsCleared.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalCreditsCleared.LinkedLabel = Me.lblCreditsCleared
+        Me.txtTotalCreditsCleared.MaximumValue = Nothing
+        Me.txtTotalCreditsCleared.MinimumValue = Nothing
+        Me.txtTotalCreditsCleared.Name = "txtTotalCreditsCleared"
+        Me.txtTotalCreditsCleared.OldValue = Nothing
+        Me.txtTotalCreditsCleared.ReadOnly = true
+        Me.txtTotalCreditsCleared.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtTotalCreditsCleared.TabStop = false
+        Me.txtTotalCreditsCleared.ValueIsMandatory = true
+        Me.txtTotalCreditsCleared.ValueIsNumeric = true
         '
         'lblDebitsCleared
         '
@@ -502,34 +538,6 @@ Namespace PresentationLayer.Views.Forms
         Me.lblTotalCreditsNotCleared.EditingMode = false
         resources.ApplyResources(Me.lblTotalCreditsNotCleared, "lblTotalCreditsNotCleared")
         Me.lblTotalCreditsNotCleared.Name = "lblTotalCreditsNotCleared"
-        '
-        'txtTotalCreditsCleared
-        '
-        Me.txtTotalCreditsCleared.BackColor = System.Drawing.Color.White
-        Me.txtTotalCreditsCleared.BegFindValue = Nothing
-        Me.txtTotalCreditsCleared.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalCreditsCleared.ComputedValue = true
-        Me.txtTotalCreditsCleared.CustomFormat = Nothing
-        Me.txtTotalCreditsCleared.DataBoundControl = true
-        Me.txtTotalCreditsCleared.DisplayOnly = true
-        Me.txtTotalCreditsCleared.EditingMode = true
-        Me.txtTotalCreditsCleared.EndFindValue = Nothing
-        Me.txtTotalCreditsCleared.FieldName = Nothing
-        Me.txtTotalCreditsCleared.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtTotalCreditsCleared.FindEnabled = false
-        Me.CFlowLayout2.SetFlowBreak(Me.txtTotalCreditsCleared, true)
-        resources.ApplyResources(Me.txtTotalCreditsCleared, "txtTotalCreditsCleared")
-        Me.txtTotalCreditsCleared.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalCreditsCleared.LinkedLabel = Me.lblCreditsCleared
-        Me.txtTotalCreditsCleared.MaximumValue = Nothing
-        Me.txtTotalCreditsCleared.MinimumValue = Nothing
-        Me.txtTotalCreditsCleared.Name = "txtTotalCreditsCleared"
-        Me.txtTotalCreditsCleared.OldValue = Nothing
-        Me.txtTotalCreditsCleared.ReadOnly = true
-        Me.txtTotalCreditsCleared.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtTotalCreditsCleared.TabStop = false
-        Me.txtTotalCreditsCleared.ValueIsMandatory = true
-        Me.txtTotalCreditsCleared.ValueIsNumeric = true
         '
         'CFlowLayout8
         '

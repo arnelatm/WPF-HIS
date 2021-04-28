@@ -21,7 +21,7 @@
         Public Property PayDescriptionAra As String
         Public Property ReferenceNo As String
         Public Property TransactionDate As Date?
-        Public Property Sequence As Int16
+        Public Property Sequence As Int32
 
     End Class
 

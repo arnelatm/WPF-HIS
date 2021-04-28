@@ -126,7 +126,7 @@
     <value>No</value>
   </data>
   <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 423</value>
+    <value>300, 364</value>
   </data>
   <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
     <value>TreeViewTableName</value>
@@ -630,105 +630,6 @@
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="txtLanguageIdNo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="txtLanguageIdNo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtLanguageIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 353</value>
-  </data>
-  <data name="txtLanguageIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtLanguageIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
-  </data>
-  <data name="txtLanguageIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>164</value>
-  </data>
-  <data name="txtLanguageIdNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;txtLanguageIdNo.Name" xml:space="preserve">
-    <value>txtLanguageIdNo</value>
-  </data>
-  <data name="&gt;&gt;txtLanguageIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtLanguageIdNo.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;txtLanguageIdNo.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="txtMessageIdNo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="txtMessageIdNo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtMessageIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 353</value>
-  </data>
-  <data name="txtMessageIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtMessageIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
-  </data>
-  <data name="txtMessageIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>165</value>
-  </data>
-  <data name="txtMessageIdNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;txtMessageIdNo.Name" xml:space="preserve">
-    <value>txtMessageIdNo</value>
-  </data>
-  <data name="&gt;&gt;txtMessageIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtMessageIdNo.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;txtMessageIdNo.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="txtIdNoTranslated.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="txtIdNoTranslated.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtIdNoTranslated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 353</value>
-  </data>
-  <data name="txtIdNoTranslated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtIdNoTranslated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
-  </data>
-  <data name="txtIdNoTranslated.TabIndex" type="System.Int32, mscorlib">
-    <value>166</value>
-  </data>
-  <data name="txtIdNoTranslated.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;txtIdNoTranslated.Name" xml:space="preserve">
-    <value>txtIdNoTranslated</value>
-  </data>
-  <data name="&gt;&gt;txtIdNoTranslated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtIdNoTranslated.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;txtIdNoTranslated.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -742,7 +643,7 @@
     <value>0, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>625, 423</value>
+    <value>625, 364</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -793,7 +694,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>927, 476</value>
+    <value>927, 417</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>System Messages Maintenance Form</value>
