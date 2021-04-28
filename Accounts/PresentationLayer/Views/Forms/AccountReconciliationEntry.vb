@@ -387,10 +387,11 @@ Namespace PresentationLayer.Views.Forms
             Dim myForm = FindForm()
             Dim pnt As Point
             Dim dataTypeEnum As IFindableControl.DataTypeEnum
-            Dim columnData = DataGridViewReconciliationItems.Columns(columnNo)
+            Dim columnData As IFindableControl = DataGridViewReconciliationItems.Columns(columnNo)
             Dim columnDataType = DataGridViewReconciliationItems.Columns(columnNo).ValueType
             _previousColumnSearch = columnNo
             dataTypeEnum = GetObjectDataType(columnDataType)
+            columnData.FindDataType = dataTypeEnum
             Dim searchForm = New CFindFormNew(DataGridViewReconciliationItems.Columns(columnNo))
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
@@ -401,6 +402,7 @@ Namespace PresentationLayer.Views.Forms
                 formLocation.Y = pnt.Y - searchForm.Height + Height
             End If
             searchForm.Location = formLocation
+
             searchForm.ShowDialog()
             Dim textToSearch As String
             Dim searchPlace As IFindableControl.SearchPlaceEnum
@@ -483,23 +485,23 @@ Namespace PresentationLayer.Views.Forms
                         Dim colDate As Date = row.Cells(columnNo).Value
                         Dim sw As Int16 = 0
                         If DateIsBetween(colDate, dBDate, dEDate) Then
-                            If DateIsBetween(colDate, dBegDate, dEndDate) Then
-                                row.Selected = True
-                                If sw = 0 Then
-                                    'scroll and move to the first matching record
-                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                    _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                    sw = 1
-                                End If
-                                'If colDate.ToString("yyyyMMdd") >= dBDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEDate.ToString("yyyyMMdd") Then
-                                'row.Selected = True
-                                'If sw = 0 Then
-                                '    'scroll and move to the first matching record
-                                '    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                '    _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                '    sw = 1
-                                'End If
+                            'If DateIsBetween(colDate, dBegDate, dEndDate) Then
+                            row.Selected = True
+                            If sw = 0 Then
+                                'scroll and move to the first matching record
+                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                sw = 1
                             End If
+                            'If colDate.ToString("yyyyMMdd") >= dBDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEDate.ToString("yyyyMMdd") Then
+                            'row.Selected = True
+                            'If sw = 0 Then
+                            '    'scroll and move to the first matching record
+                            '    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                            '    _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
+                            '    sw = 1
+                            'End If
+                            'End If
                         End If
                     Next
                     _previousBegDateSearch = dBDate
