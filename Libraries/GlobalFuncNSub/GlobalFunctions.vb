@@ -156,6 +156,18 @@ Public Module GlobalFunctions
     End Function
 
     '''<summary>
+    '''Converts a given string to date (year,month,day) into a date regardless of current culture
+    '''</summary>
+    Public Function MakeDate(ByVal year As Int16, ByVal month As Int16, ByVal day As Int16) As Date?
+        Dim value As Date?
+        Dim curCulture = CultureInfo.CurrentCulture
+        CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+        value = DateSerial(year, month, day)
+        CultureInfo.CurrentCulture = curCulture
+        Return value
+    End Function
+
+    '''<summary>
     '''Get the Calendar Name for a given Calendar
     '''</summary>
     Function GetCalendarName(cal As Calendar) As String

@@ -11,7 +11,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class AccountReconciliationPresenter
-        Inherits AccountsPresenter(Of IAccountReconciliationView, AccountReconciliationModel)
+        Inherits TransactionsPresenter(Of IAccountReconciliationView, AccountReconciliationModel)
         Implements ISubscriber(Of ReconciliationClearEvent),
                    ISubscriber(Of ReconciliationPostingRequestEvent),
                    ISubscriber(Of ReconciliationRefreshRequestEvent),
@@ -55,6 +55,10 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
             View.AccountReconciliationItems.Clear()
         End Sub
+
+        'Public Sub OnBeforeEditd() Handles MyBase.BeforeAdd
+        '    View.AccountReconciliationItems.Clear()
+        'End Sub
 
         Public Sub OnReconciliationItemCheckedChangeEvent(sender, pView)
             Dim x = sender
@@ -289,7 +293,7 @@ Namespace PresentationLayer.Presenters
                         View.TotalQtyCreditsCleared -= 1
                     End If
                 End If
-                eEvent.Sender.Cleared = Not eEvent.Sender.Cleared               
+                eEvent.Sender.Cleared = Not eEvent.Sender.Cleared
             End If
             ReComputeDifference()
         End Sub

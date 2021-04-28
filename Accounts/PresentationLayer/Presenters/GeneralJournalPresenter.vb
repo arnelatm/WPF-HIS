@@ -12,7 +12,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class GeneralJournalPresenter
-        Inherits AccountsPresenter(Of IGeneralJournalView, GeneralJournalModel)
+        Inherits TransactionsPresenter(Of IGeneralJournalView, GeneralJournalModel)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable

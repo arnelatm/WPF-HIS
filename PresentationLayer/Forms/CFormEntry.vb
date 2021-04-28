@@ -245,9 +245,7 @@ Public Class CFormEntry
     End Sub
 
     Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
-        If ValidateView() Then
-            e.Validated = True
-        Else
+        If Not ValidateView() Then
             e.Validated = False
         End If
     End Sub

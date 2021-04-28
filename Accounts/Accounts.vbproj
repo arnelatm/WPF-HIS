@@ -332,7 +332,6 @@
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AttendancePresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\PcJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionRatePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayCyclePresenter.vb" />
@@ -748,7 +747,6 @@
     <Compile Include="PresentationLayer\Presenters\PettyCashClosingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseJournalItemsPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\PurchaseJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
@@ -1307,9 +1305,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2 - Copy.config" />
     <None Include="app-Ispadmin2.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />
