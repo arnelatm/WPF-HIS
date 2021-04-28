@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayDescriptionAra As String
         Property ReferenceNo As String
         Property TransactionDate As Date?
-        Property Sequence As Int16
+        Property Sequence As Int32
 
     End Interface
 

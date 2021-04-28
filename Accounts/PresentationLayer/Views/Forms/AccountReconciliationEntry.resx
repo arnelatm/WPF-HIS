@@ -244,7 +244,7 @@
     <value>129, 24</value>
   </data>
   <data name="dtpReconciliationDate.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="dtpReconciliationDate.TargetCalendar" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -317,7 +317,7 @@
     <value>74, 22</value>
   </data>
   <data name="txtBalance.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="txtBalance.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -383,7 +383,7 @@
     <value>122, 22</value>
   </data>
   <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
-    <value>260</value>
+    <value>4</value>
   </data>
   <data name="txtDateCreated.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -452,7 +452,7 @@
     <value>544, 24</value>
   </data>
   <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Name" xml:space="preserve">
     <value>cboAccountIdNo</value>
@@ -518,7 +518,7 @@
     <value>23, 23</value>
   </data>
   <data name="chkPosted.TabIndex" type="System.Int32, mscorlib">
-    <value>262</value>
+    <value>5</value>
   </data>
   <data name="chkPosted.Text" xml:space="preserve">
     <value> </value>
@@ -983,7 +983,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
+    <value>1, 1</value>
   </data>
   <data name="lblCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1010,10 +1010,10 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;lblCreditsCleared.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>0</value>
   </data>
   <data name="txtTotalQtyCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 26</value>
+    <value>142, 1</value>
   </data>
   <data name="txtTotalQtyCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1037,7 +1037,37 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;txtTotalQtyCreditsCleared.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>1</value>
+  </data>
+  <data name="txtTotalCreditsCleared.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="txtTotalCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 1</value>
+  </data>
+  <data name="txtTotalCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalCreditsCleared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 22</value>
+  </data>
+  <data name="txtTotalCreditsCleared.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="txtTotalCreditsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.Name" xml:space="preserve">
+    <value>txtTotalCreditsCleared</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCreditsCleared.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="lblDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -1046,7 +1076,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDebitsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
+    <value>1, 26</value>
   </data>
   <data name="lblDebitsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1073,13 +1103,13 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;lblDebitsCleared.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="txtTotalQtyDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtTotalQtyDebitsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 1</value>
+    <value>142, 26</value>
   </data>
   <data name="txtTotalQtyDebitsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1088,7 +1118,7 @@
     <value>48, 23</value>
   </data>
   <data name="txtTotalQtyDebitsCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="txtTotalQtyDebitsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -1103,7 +1133,7 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;txtTotalQtyDebitsCleared.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="txtTotalDebitsCleared.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
@@ -1124,7 +1154,7 @@
     <value>144, 23</value>
   </data>
   <data name="lblTotalCreditsNotCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>263</value>
+    <value>0</value>
   </data>
   <data name="lblTotalCreditsNotCleared.Text" xml:space="preserve">
     <value>Checks/Withdrawals</value>
@@ -1145,7 +1175,7 @@
     <value>2</value>
   </data>
   <data name="txtTotalDebitsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 1</value>
+    <value>192, 26</value>
   </data>
   <data name="txtTotalDebitsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1169,36 +1199,6 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;txtTotalDebitsCleared.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txtTotalCreditsCleared.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="txtTotalCreditsCleared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 26</value>
-  </data>
-  <data name="txtTotalCreditsCleared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtTotalCreditsCleared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 22</value>
-  </data>
-  <data name="txtTotalCreditsCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="txtTotalCreditsCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.Name" xml:space="preserve">
-    <value>txtTotalCreditsCleared</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtTotalCreditsCleared.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="btnClearAll.Font" type="System.Drawing.Font, System.Drawing">
@@ -1376,7 +1376,7 @@
     <value>99, 22</value>
   </data>
   <data name="txtTotalCreditsNotCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="txtTotalCreditsNotCleared.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -1412,7 +1412,7 @@
     <value>144, 23</value>
   </data>
   <data name="lblTotalDebitsNotCleared.TabIndex" type="System.Int32, mscorlib">
-    <value>265</value>
+    <value>2</value>
   </data>
   <data name="lblTotalDebitsNotCleared.Text" xml:space="preserve">
     <value>Deposits/Debits</value>

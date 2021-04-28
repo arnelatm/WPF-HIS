@@ -21,7 +21,7 @@ Namespace BusinessLayer
         Public Property PayDescriptionAra As String
         Public Property TransactionDate As Date?
         Public Property ReferenceNo As String
-        Public Property Sequence As Int16
+        Public Property Sequence As Int32
 
     End Class
 

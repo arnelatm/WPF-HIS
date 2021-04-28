@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views
 
         Public Property TransactionDate As Date? Implements IAccountReconciliationItemView.TransactionDate
 
-        Public Property Sequence As Int16 Implements IAccountReconciliationItemView.Sequence
+        Public Property Sequence As Int32 Implements IAccountReconciliationItemView.Sequence
 
         Public Property Errors As List(Of String) Implements IView.Errors
 

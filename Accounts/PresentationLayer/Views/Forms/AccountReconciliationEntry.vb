@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
 
     Public Class AccountReconciliationEntry
         Implements IAccountReconciliationView
+        Implements ISubscriber(Of EditModeChanged), ISubscriber(Of AddModeChanged)
 
         Public Report As New ReportDocument
         Private ReadOnly _nfi As NumberFormatInfo
@@ -34,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "AccountReconciliation"
             SortOrderKey = "IdNo"
-            FirstControl = cboAccountIdNo
+            FirstControl = dtpReconciliationDate
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             PresenterObj = New AccountReconciliationPresenter(Me)
             Ea = PresenterObj.Ea
@@ -98,10 +99,10 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _accountReconciliations = Value
                 BindAccountReconciliation()
-                If Value.Any() Then
-                    dtpReconciliationDate.DisplayOnly = True
-                    cboAccountIdNo.DisplayOnly = True
-                End If
+                'If Value.Any() Then
+                '    dtpReconciliationDate.DisplayOnly = True
+                '    cboAccountIdNo.DisplayOnly = True
+                'End If
             End Set
         End Property
 
@@ -227,18 +228,18 @@ Namespace PresentationLayer.Views.Forms
         Public Property UnreconciledDifference As Decimal Implements IAccountReconciliationView.UnreconciledDifference
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtUnreconciledDifference.Text), _nfi)
-            End Get              
+            End Get
             Set
-                 txtUnreconciledDifference.Text = value
+                txtUnreconciledDifference.Text = Value
             End Set
         End Property
 
         Public Property OutstandingCredits As Decimal Implements IAccountReconciliationView.OutstandingCredits
             Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtOutStandingCredits.Text), _nfi)
+                Return Convert.ToDecimal(NumParser(Of Decimal)(txtOutstandingCredits.Text), _nfi)
             End Get
             Set
-                txtOUtstandingCredits.Text = FormatMoney(Value)
+                txtOutstandingCredits.Text = FormatMoney(Value)
             End Set
         End Property
 
@@ -247,7 +248,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtOutstandingDeposits.Text), _nfi)
             End Get
             Set
-                txtOutStandingDeposits.Text = FormatMoney(Value)
+                txtOutstandingDeposits.Text = FormatMoney(Value)
             End Set
         End Property
 
@@ -646,21 +647,23 @@ Namespace PresentationLayer.Views.Forms
         Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated, dtpReconciliationDate.ValueChanged
             If Not btnEdit.Enabled Then
                 PublishEvent(New EndingReconciliationDateChangedEvent(sender))
+                bsAccountReconciliationItems.ResetBindings(False)
             End If
         End Sub
 
         Private Sub cboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
             If Not btnEdit.Enabled Then
                 PublishEvent(New ReconciliationAccountChangedEvent(sender))
+                bsAccountReconciliationItems.ResetBindings(False)
             End If
         End Sub
 
-        Public Sub ButtonAdd_Click(sender As Object, e As EventArgs) 
-            cboAccountIdNo.DisplayOnly = False
-            dtpReconciliationDate.DisplayOnly = False
-            cboAccountIdNo.SelectedIndex = -1
-            dtpReconciliationDate.Value = Nothing
-        End Sub
+        'Public Sub ButtonAdd_Click(sender As Object, e As EventArgs)
+        '    cboAccountIdNo.DisplayOnly = False
+        '    dtpReconciliationDate.DisplayOnly = False
+        '    cboAccountIdNo.SelectedIndex = -1
+        '    dtpReconciliationDate.Value = Nothing
+        'End Sub
 
         Private Sub btnPost_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
             PublishEvent(New ReconciliationPostingRequestEvent(sender, Not btnSave.Enabled))
@@ -672,6 +675,47 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnUnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnUnClearAll.ClickButtonArea
             PublishEvent(New ReconciliationClearEvent(sender, True, False, bsAccountReconciliationItems))
+        End Sub
+
+        Public Sub OnAcReconEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
+            MyBase.OnEventHandlerEditModeChanged(e)
+            If e.EditMode Then
+                btnClearAll.Enabled = True
+                btnUnClearAll.Enabled = True
+                btnPost.Enabled = False
+            Else
+                btnClearAll.Enabled = False
+                btnUnClearAll.Enabled = False
+                If chkPosted.Checked Then
+                    btnPost.Enabled = False
+                Else
+                    btnPost.Enabled = True
+                End If
+            End If
+
+        End Sub
+
+        Public Sub OnAcReconAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
+            MyBase.OnEventHandlerAddModeChanged(e)
+            If e.AddMode Then
+                btnPost.Enabled = False
+                btnClearAll.Enabled = True
+                btnUnClearAll.Enabled = True
+                'dtpReconciliationDate.Enabled = True
+                'dtpReconciliationDate.DisplayOnly = False
+                'dtpReconciliationDate.ReadOnlyDp = False
+                'cboAccountIdNo.DisplayOnly = False
+                'cboAccountIdNo.Enabled = True
+            Else
+                btnPost.Enabled = True
+                btnClearAll.Enabled = False
+                btnUnClearAll.Enabled = False
+                If chkPosted.Checked Then
+                    btnPost.Enabled = False
+                Else
+                    btnPost.Enabled = True
+                End If
+            End If
         End Sub
 
     End Class
