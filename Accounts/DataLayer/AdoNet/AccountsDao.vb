@@ -25,6 +25,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String
             Dim baseDao As New BaseDao
             Dim accountCode As String = "106"
+            accountCode = baseDao.GetField(Of String, Int16)(accountIdNo,"Account","IdNo","AccountCode")
             sql = "Select Sum(debit-Credit) from dbo.[fnGetAcctActivityStatement](@BegDate,@EndDate,@BegAcctCode,@EndAcctCode)"
             Dim params() As Object
             params = {"@BegDate", Convert.ToDateTime(endDate), "@EndDate", Convert.ToDateTime(endDate), "@BegAcctCode", accountCode, "@EndAcctCode", accountCode}

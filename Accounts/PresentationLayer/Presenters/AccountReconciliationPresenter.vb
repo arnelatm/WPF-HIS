@@ -130,9 +130,11 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                     SaveReconciliation(dtInsertReconciledTable, idNo)
-                    Model.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
-                    scope.Complete()
+                    Model.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)                     
+                    scope.Complete()                   
                 End Using
+                MEssagingLibrary.Messaging.Show(True,"MsgRecordSuccessfullyPosted")
+                View.Posted = True
             Catch ex As TransactionAbortedException
                 MessageBox.Show(ex.Message, "Transaction Aborted")
             Catch oEx As Exception
@@ -147,11 +149,7 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Integer
             If dtInsert.Rows.Count > 0 Then
                 insertReturnValue = modelReconciled.InsertTvp(dtInsert)
-                If insertReturnValue >= 0 Then
-                    retVal = insertReturnValue
-                Else
-                    retVal = insertReturnValue
-                End If
+                retVal = insertReturnValue   
             Else
                 Return 0
             End If
@@ -402,8 +400,8 @@ Namespace PresentationLayer.Presenters
             If View.UnreconciledDifference = 0 And Not View.Posted Then
                 Dim message = "Are you sure you want to {action} this {itemName} entry?"
                 Dim caption = "Please confirm."
-                Dim action As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("save")
-                Dim itemName As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("transaction")
+                Dim action As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("post")
+                Dim itemName As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("account reconciliation transaction")
                 Dim msg = AATM.Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
                 If AATM.Libraries.MessagingLibrary.Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     PostReconciliation(View.IdNo, View.AccountReconciliationItems)

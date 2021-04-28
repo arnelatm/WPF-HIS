@@ -55,6 +55,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
         Messaging.AddMessage("MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
         Messaging.AddMessage("MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+        Messaging.AddMessage("MsgRecordSuccessfullyPosted", "Record posted successfully!", "Successful Posting")
         Messaging.AddMessage("MsgRowDelNotAllowedInViewMode", "Row deletion not allowed while in itemView mode. Press edit button to enable deletion.", "Error")
         Messaging.AddMessage("MsgRowInsNotAllowedInFirstRow", "Row insertion on first row not allowed for this transaction.", "Error")
         Messaging.AddMessage("MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in itemView mode. Press edit button to enable insertion.", "Error")
