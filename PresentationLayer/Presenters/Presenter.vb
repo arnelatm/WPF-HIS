@@ -1010,8 +1010,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             If EditMode AndAlso Not ChangesMade() Then
                 Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
             Else
-                Dim viewIsValid As Boolean = True
-                Dim validatingObject = New ValidatingData(viewIsValid)
+                Dim validated As Boolean = True
+                Dim validatingObject = New ValidatingData(validated)
                 If Ea IsNot Nothing Then
                     Ea.PublishEvent(validatingObject)
                     'Ea.PublishEvent(New ValidatingData(viewIsValid))

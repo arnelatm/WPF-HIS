@@ -13,7 +13,7 @@ Imports CrystalDecisions.Shared.Json
 Namespace PresentationLayer.Presenters
 
     Public Class PayrollDetailPresenter
-        Inherits AccountsPresenter(Of IPayrollDetailView, PayrollDetailModel)
+        Inherits TransactionsPresenter(Of IPayrollDetailView, PayrollDetailModel)
 
         Protected DtPayElementInsertTable As New DataTable
         Protected DtPayElementUpdateTable As New DataTable
