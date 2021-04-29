@@ -26,7 +26,12 @@ Namespace DataLayer.AdoNet
             sql = "select  dbo.FnGetAccountBalance(@AccountIdNo,@EndDate)"
             Dim params() As Object
             params = {"@AccountIdNo", accountIdNo, "@EndDate", Convert.ToDateTime(endDate)}
-            Return _db.Scalar(sql, params)
+            Dim retVal = _db.Scalar(sql, params)
+            If retVal Is Nothing or retVal.Equals(DBNull.Value) then
+                Return 0
+            Else
+                Return retVal
+            End If
             'Dim sql As String
             'Dim baseDao As New BaseDao
             'Dim accountCode As String = baseDao.GetField(Of String, Int16)(accountIdNo, "Account", "IdNo", "AccountCode")

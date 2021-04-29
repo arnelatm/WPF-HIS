@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
         Private _previousBegDateSearch As Date?
         Private _previousEndDateSearch As Date?
         Private _previousColumnSearch As Int16
-        Private _accounts As List(Of ClassesLibrary.LookupData)
+        'Private _accounts As List(Of ClassesLibrary.LookupData)
 
         Public Sub New()
             MyBase.New()
@@ -106,19 +106,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Accounts As List(Of ClassesLibrary.LookupData) Implements IAccountReconciliationView.Accounts
-            Get
-                Return _accounts
-            End Get
-            Set(value As List(Of ClassesLibrary.LookupData))
-                _accounts = value
-                If value.Any Then
-                    cboAccountIdNo.DataSource = Nothing
-                    cboAccountIdNo.DataSource = value
-                    cboAccountIdNo.Refresh()
-                End If
-            End Set
-        End Property
+        'Public Property Accounts As List(Of ClassesLibrary.LookupData) Implements IAccountReconciliationView.Accounts
+        '    Get
+        '        Return _accounts
+        '    End Get
+        '    Set(value As List(Of ClassesLibrary.LookupData))
+        '        _accounts = value
+        '        cboAccountIdNo.DataSource = Nothing
+        '        cboAccountIdNo.DataSource = value                
+        '    End Set
+        'End Property
 
         Public Property TotalCreditsCleared As Decimal Implements IAccountReconciliationView.TotalCreditsCleared
             Get
@@ -254,12 +251,12 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        'Protected Overrides Sub CreateDataSources()
-        '    'cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
-        '    cboAccountIdNo.BeginUpdate()
-        '    cboAccountIdNo.DataSource = Accounts ' PresenterObj.GetAccountTypesList("BA,CK,CS")
-        '    cboAccountIdNo.EndUpdate()
-        'End Sub
+        Protected Overrides Sub CreateDataSources()
+            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("BA,CK,CS")
+            'cboAccountIdNo.BeginUpdate()
+            'cboAccountIdNo.DataSource = Accounts ' PresenterObj.GetAccountTypesList("BA,CK,CS")
+            'cboAccountIdNo.EndUpdate()
+        End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -646,7 +643,7 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated, dtpReconciliationDate.ValueChanged
+        Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated
             If Not btnEdit.Enabled Then
                 PublishEvent(New EndingReconciliationDateChangedEvent(sender))
                 bsAccountReconciliationItems.ResetBindings(False)
