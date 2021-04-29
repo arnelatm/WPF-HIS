@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports System.Runtime.CompilerServices
 Imports System.Transactions
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -130,10 +131,10 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                     SaveReconciliation(dtInsertReconciledTable, idNo)
-                    Model.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)                     
-                    scope.Complete()                   
+                    Model.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
+                    scope.Complete()
                 End Using
-                MEssagingLibrary.Messaging.Show(True,"MsgRecordSuccessfullyPosted")
+                MessagingLibrary.Messaging.Show(True, "MsgRecordSuccessfullyPosted")
                 View.Posted = True
             Catch ex As TransactionAbortedException
                 MessageBox.Show(ex.Message, "Transaction Aborted")
@@ -149,7 +150,7 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Integer
             If dtInsert.Rows.Count > 0 Then
                 insertReturnValue = modelReconciled.InsertTvp(dtInsert)
-                retVal = insertReturnValue   
+                retVal = insertReturnValue
             Else
                 Return 0
             End If
@@ -253,9 +254,10 @@ Namespace PresentationLayer.Presenters
             Dim currencies As New List(Of CurrencyInfo) From {
                 New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia)
             }
-            Dim cForm As New ReportForm("Account Reconciliation.Rpt", View.IdNo, "ReconciliationNumber")
+            Dim reportTitle As String
+            reportTitle = MessagingLibrary.Messaging.TranslateCaption("Account Reconciliation")
+            Dim cForm As New ReportFormNew("Account Reconciliation Report.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber", Convert.ToDateTime(View.ReconciliationDate), "EndDate", Convert.ToInt16(View.AccountIdNo), "AccountIdNo")
             cForm.Show()
-
         End Sub
 
         Public Sub ProcessReconciliationRequest(eEvent As ReconciliationClearEvent)

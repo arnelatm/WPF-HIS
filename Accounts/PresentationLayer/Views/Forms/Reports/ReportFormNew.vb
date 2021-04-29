@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             End If
 
             For i = 0 To args.Length - 1 Step 2
-                Dim value = args(i)
+                Dim value As Object = args(i)
                 Report.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
             Next
             Report.SetParameterValue("ReportTitle", reportTitle)
