@@ -589,7 +589,7 @@ Public Class CFormEntry
                 If Not PresenterObj.AddMode Then
                     btnUndo.Enabled = False
                     btnSave.Enabled = False
-                    Messaging.Show(True, "MsgNoRecordsFound", "No records found for this table!", "Empty Table")
+                    'Messaging.Show(True, "MsgNoRecordsFound", "No records found for this table!", "Empty Table")
                 Else
                     btnSave.Enabled = True
                     btnUndo.Enabled = True
@@ -879,7 +879,14 @@ Public Class CFormEntry
             PresenterObj.EditMode = False
             PresenterObj.AddMode = False
             UpdateButtonDisplays(False, False)
+            If RecordCount = 0 Then
+                Messaging.Show(True, "MsgNoRecordsFound", "No records found for this table!", "Empty Table")
+            End If
         End If
+    End Sub
+
+    Private Sub OnFormShow()
+
     End Sub
 
     Private Sub ClearData()

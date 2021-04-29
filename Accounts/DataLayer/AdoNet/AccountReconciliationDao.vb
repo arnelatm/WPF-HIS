@@ -32,8 +32,8 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data As AccountReconciliation = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim accounts As List(Of ClassesLibrary.LookupData) = GetLookupData("Account", "AccountCode", "SpecialAccount = 'BA' or SpecialAccount = 'CK' or SpecialAccount = 'CS'")
-            data.Accounts = accounts
+            'Dim accounts As List(Of ClassesLibrary.LookupData) = GetLookupData("Account", "AccountCode", "SpecialAccount = 'BA' or SpecialAccount = 'CK' or SpecialAccount = 'CS'")
+            'data.Accounts = accounts
             data.AccountReconciliationItems = GetRecordsWithGroupIdNo(idNo, "Sequence")
             data.ComputeCalculatedProperties()
             Return data

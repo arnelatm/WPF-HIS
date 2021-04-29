@@ -519,4 +519,13 @@ Namespace PresentationLayer.Presenters
         Public Property Sender As Object
     End Class
 
+    'Public Class CreateDataSourcesEvent
+
+    '    Public Sub New(accounts As List(Of Object)
+    '        Me.Sender = sender
+    '    End Sub
+
+    '    Public Property Sender As Object
+    'End Class
+
 End Namespace
