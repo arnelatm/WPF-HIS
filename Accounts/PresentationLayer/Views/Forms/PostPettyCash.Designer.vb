@@ -72,7 +72,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboStartIdNo.OriginalDataSource = Nothing
             Me.cboStartIdNo.OriginalDropDownStyle = 1
             Me.cboStartIdNo.OriginalList = Nothing
-            Me.cboStartIdNo.PreviousSelectedIndex = -1
             Me.cboStartIdNo.ReadOnlyCombo = False
             Me.cboStartIdNo.Size = New System.Drawing.Size(332, 24)
             Me.cboStartIdNo.TabIndex = 2
@@ -131,7 +130,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEndIdNo.OriginalDataSource = Nothing
             Me.cboEndIdNo.OriginalDropDownStyle = 1
             Me.cboEndIdNo.OriginalList = Nothing
-            Me.cboEndIdNo.PreviousSelectedIndex = -1
             Me.cboEndIdNo.ReadOnlyCombo = False
             Me.cboEndIdNo.Size = New System.Drawing.Size(332, 24)
             Me.cboEndIdNo.TabIndex = 4
@@ -175,7 +173,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalDataSource = Nothing
             Me.cboAccountIdNo.OriginalDropDownStyle = 1
             Me.cboAccountIdNo.OriginalList = Nothing
-            Me.cboAccountIdNo.PreviousSelectedIndex = -1
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.Size = New System.Drawing.Size(332, 24)
             Me.cboAccountIdNo.TabIndex = 6

@@ -289,7 +289,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayFrequency.OriginalList = Nothing
             Me.cboPayFrequency.OverrideDropDownStyleList = False
             Me.cboPayFrequency.PreviousSearchTerm = Nothing
-            Me.cboPayFrequency.PreviousSelectedIndex = -1
             Me.cboPayFrequency.PropertySelector = Nothing
             Me.cboPayFrequency.ReadOnlyCombo = False
             Me.cboPayFrequency.Size = New System.Drawing.Size(202, 24)

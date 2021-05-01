@@ -472,7 +472,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.OriginalList = Nothing
         Me.cboAccountIdNo.OverrideDropDownStyleList = false
         Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboAccountIdNo.PreviousSelectedIndex = -1
         Me.cboAccountIdNo.PropertySelector = Nothing
         Me.cboAccountIdNo.ReadOnlyCombo = false
         Me.cboAccountIdNo.Size = New System.Drawing.Size(405, 24)
@@ -708,7 +707,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayType.OriginalList = Nothing
         Me.cboPayType.OverrideDropDownStyleList = false
         Me.cboPayType.PreviousSearchTerm = Nothing
-        Me.cboPayType.PreviousSelectedIndex = -1
         Me.cboPayType.PropertySelector = Nothing
         Me.cboPayType.ReadOnlyCombo = false
         Me.cboPayType.Size = New System.Drawing.Size(341, 24)
@@ -765,7 +763,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPcAccountIdNo.OriginalList = Nothing
         Me.cboPcAccountIdNo.OverrideDropDownStyleList = false
         Me.cboPcAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboPcAccountIdNo.PreviousSelectedIndex = -1
         Me.cboPcAccountIdNo.PropertySelector = Nothing
         Me.cboPcAccountIdNo.ReadOnlyCombo = false
         Me.cboPcAccountIdNo.Size = New System.Drawing.Size(405, 24)

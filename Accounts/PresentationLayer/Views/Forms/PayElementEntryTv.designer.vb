@@ -203,7 +203,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.OriginalList = Nothing
             Me.cboReportGroupIdNo.OverrideDropDownStyleList = False
             Me.cboReportGroupIdNo.PreviousSearchTerm = Nothing
-            Me.cboReportGroupIdNo.PreviousSelectedIndex = -1
             Me.cboReportGroupIdNo.PropertySelector = Nothing
             Me.cboReportGroupIdNo.ReadOnlyCombo = False
             Me.cboReportGroupIdNo.SuggestBoxHeight = 200
@@ -241,7 +240,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementKind.OriginalList = Nothing
             Me.cboPayElementKind.OverrideDropDownStyleList = False
             Me.cboPayElementKind.PreviousSearchTerm = Nothing
-            Me.cboPayElementKind.PreviousSelectedIndex = -1
             Me.cboPayElementKind.PropertySelector = Nothing
             Me.cboPayElementKind.ReadOnlyCombo = False
             Me.cboPayElementKind.SuggestBoxHeight = 200
@@ -481,7 +479,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboQuantityType.OriginalList = Nothing
             Me.cboQuantityType.OverrideDropDownStyleList = False
             Me.cboQuantityType.PreviousSearchTerm = Nothing
-            Me.cboQuantityType.PreviousSelectedIndex = -1
             Me.cboQuantityType.PropertySelector = Nothing
             Me.cboQuantityType.ReadOnlyCombo = False
             Me.cboQuantityType.SuggestBoxHeight = 200
@@ -513,7 +510,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCalculationType.OriginalList = Nothing
             Me.cboCalculationType.OverrideDropDownStyleList = False
             Me.cboCalculationType.PreviousSearchTerm = Nothing
-            Me.cboCalculationType.PreviousSelectedIndex = -1
             Me.cboCalculationType.PropertySelector = Nothing
             Me.cboCalculationType.ReadOnlyCombo = False
             Me.cboCalculationType.SuggestBoxHeight = 200
@@ -614,7 +610,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.OriginalList = Nothing
             Me.cboBasePaymentIdNo.OverrideDropDownStyleList = False
             Me.cboBasePaymentIdNo.PreviousSearchTerm = Nothing
-            Me.cboBasePaymentIdNo.PreviousSelectedIndex = -1
             Me.cboBasePaymentIdNo.PropertySelector = Nothing
             Me.cboBasePaymentIdNo.ReadOnlyCombo = False
             Me.cboBasePaymentIdNo.SuggestBoxHeight = 200
@@ -685,7 +680,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFactorType.OriginalList = Nothing
             Me.cboFactorType.OverrideDropDownStyleList = False
             Me.cboFactorType.PreviousSearchTerm = Nothing
-            Me.cboFactorType.PreviousSelectedIndex = -1
             Me.cboFactorType.PropertySelector = Nothing
             Me.cboFactorType.ReadOnlyCombo = False
             Me.cboFactorType.SuggestBoxHeight = 200
@@ -752,7 +746,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.OriginalList = Nothing
             Me.cboUnit.OverrideDropDownStyleList = False
             Me.cboUnit.PreviousSearchTerm = Nothing
-            Me.cboUnit.PreviousSelectedIndex = -1
             Me.cboUnit.PropertySelector = Nothing
             Me.cboUnit.ReadOnlyCombo = False
             Me.cboUnit.SuggestBoxHeight = 200
@@ -791,7 +784,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementType.OriginalList = Nothing
             Me.cboPayElementType.OverrideDropDownStyleList = False
             Me.cboPayElementType.PreviousSearchTerm = Nothing
-            Me.cboPayElementType.PreviousSelectedIndex = -1
             Me.cboPayElementType.PropertySelector = Nothing
             Me.cboPayElementType.ReadOnlyCombo = False
             Me.cboPayElementType.SuggestBoxHeight = 200
@@ -863,7 +855,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalList = Nothing
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboAccountIdNo.PreviousSelectedIndex = -1
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SuggestBoxHeight = 200

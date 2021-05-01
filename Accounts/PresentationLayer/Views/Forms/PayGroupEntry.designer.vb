@@ -300,7 +300,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.OriginalList = Nothing
             Me.cacParentIdNo.OverrideDropDownStyleList = False
             Me.cacParentIdNo.PreviousSearchTerm = Nothing
-            Me.cacParentIdNo.PreviousSelectedIndex = -1
             Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.ReadOnlyCombo = False
             Me.cacParentIdNo.Size = New System.Drawing.Size(418, 24)

@@ -181,7 +181,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPensionProviderIdNo.OriginalList = Nothing
             Me.cboPensionProviderIdNo.OverrideDropDownStyleList = False
             Me.cboPensionProviderIdNo.PreviousSearchTerm = Nothing
-            Me.cboPensionProviderIdNo.PreviousSelectedIndex = -1
             Me.cboPensionProviderIdNo.PropertySelector = Nothing
             Me.cboPensionProviderIdNo.ReadOnlyCombo = False
             Me.cboPensionProviderIdNo.SuggestBoxHeight = 200
@@ -271,7 +270,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalList = Nothing
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboAccountIdNo.PreviousSelectedIndex = -1
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SuggestBoxHeight = 200

@@ -24,7 +24,6 @@ Public Class CMyComboBox
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
     Private _hideWhenNotEditingOrAdding As Boolean = False
     Private _editingMode As Boolean = True
-    Private _previousSelectedIndex As Integer = -1
     Private _bypassTextChange As Boolean = False
     Public DatasourceProgrammaticChange As Boolean = False
     Private _currentSearchTerm As String = ""
@@ -384,17 +383,6 @@ Public Class CMyComboBox
         End Set
     End Property
 
-    'Private _sel As Object
-
-    Public Property PreviousSelectedIndex As Integer
-        Get
-            Return _previousSelectedIndex
-        End Get
-        Set(value As Integer)
-            _previousSelectedIndex = value
-        End Set
-    End Property
-
 #End Region
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
@@ -508,10 +496,6 @@ Public Class CMyComboBox
     'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
     '    Visible = visibleControl
     'End Sub
-
-    Private Sub OnSelectionChange(sender As Object, e As EventArgs) Handles Me.SelectedIndexChanged
-        _previousSelectedIndex = SelectedIndex
-    End Sub
 
     'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
     '    ' not applicable

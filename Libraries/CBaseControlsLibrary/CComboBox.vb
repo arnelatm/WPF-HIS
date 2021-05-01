@@ -23,7 +23,6 @@ Public Class CComboBox
     Private _originalDropDownStyle As Integer
     Private _hideWhenNotEditingOrAdding As Boolean = False
     Private _editingMode As Boolean = True
-    Private _previousSelectedIndex As Integer = -1
     Private _bypassTextChange As Boolean = False
     Public DatasourceProgrammaticChange As Boolean = False
     Private _currentSearchTerm As String = ""
@@ -368,19 +367,6 @@ Public Class CComboBox
     End Sub
 
     Private _sel As Object
-
-    Public Property PreviousSelectedIndex As Integer
-        Get
-            Return _previousSelectedIndex
-        End Get
-        Set(value As Integer)
-            _previousSelectedIndex = value
-        End Set
-    End Property
-
-    Private Sub OnSelectionChange(sender As Object, e As EventArgs) Handles Me.SelectedIndexChanged
-        _previousSelectedIndex = SelectedIndex
-    End Sub
 
     Private Overloads Sub OnSelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs) Handles Me.SelectionChangeCommitted
         If SelectedItem Is Nothing Then

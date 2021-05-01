@@ -76,7 +76,6 @@ Partial Class CMonthPicker
         Me.cboMonths.OriginalDataSource = Nothing
         Me.cboMonths.OriginalDropDownStyle = 1
         Me.cboMonths.OriginalList = Nothing
-        Me.cboMonths.PreviousSelectedIndex = -1
         Me.cboMonths.ReadOnlyCombo = false
         Me.cboMonths.EditingMode = false
         Me.cboMonths.Size = New System.Drawing.Size(107, 22)

@@ -258,7 +258,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayType.OriginalList = Nothing
         Me.cboPayType.OverrideDropDownStyleList = false
         Me.cboPayType.PreviousSearchTerm = Nothing
-        Me.cboPayType.PreviousSelectedIndex = 0
         Me.cboPayType.PropertySelector = Nothing
         Me.cboPayType.ReadOnlyCombo = false
         Me.cboPayType.Size = New System.Drawing.Size(215, 24)
@@ -612,7 +611,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.OriginalList = Nothing
         Me.cboAccountIdNo.OverrideDropDownStyleList = false
         Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboAccountIdNo.PreviousSelectedIndex = 0
         Me.cboAccountIdNo.PropertySelector = Nothing
         Me.cboAccountIdNo.ReadOnlyCombo = false
         Me.cboAccountIdNo.Size = New System.Drawing.Size(420, 24)
@@ -715,7 +713,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDiscountAccountIdNo.OriginalList = Nothing
         Me.cboDiscountAccountIdNo.OverrideDropDownStyleList = false
         Me.cboDiscountAccountIdNo.PreviousSearchTerm = Nothing
-        Me.cboDiscountAccountIdNo.PreviousSelectedIndex = 0
         Me.cboDiscountAccountIdNo.PropertySelector = Nothing
         Me.cboDiscountAccountIdNo.ReadOnlyCombo = false
         Me.cboDiscountAccountIdNo.Size = New System.Drawing.Size(420, 24)
@@ -1406,7 +1403,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaymentType.OriginalList = Nothing
         Me.cboPaymentType.OverrideDropDownStyleList = false
         Me.cboPaymentType.PreviousSearchTerm = Nothing
-        Me.cboPaymentType.PreviousSelectedIndex = 0
         Me.cboPaymentType.PropertySelector = Nothing
         Me.cboPaymentType.ReadOnlyCombo = false
         Me.cboPaymentType.Size = New System.Drawing.Size(329, 24)
@@ -1521,7 +1517,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayeeIdNo.OriginalList = Nothing
         Me.cboPayeeIdNo.OverrideDropDownStyleList = false
         Me.cboPayeeIdNo.PreviousSearchTerm = Nothing
-        Me.cboPayeeIdNo.PreviousSelectedIndex = -1
         Me.cboPayeeIdNo.PropertySelector = Nothing
         Me.cboPayeeIdNo.ReadOnlyCombo = false
         Me.cboPayeeIdNo.Size = New System.Drawing.Size(637, 24)

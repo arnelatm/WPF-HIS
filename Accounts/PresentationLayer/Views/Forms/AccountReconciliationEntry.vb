@@ -26,6 +26,7 @@ Namespace PresentationLayer.Views.Forms
         Private _previousBegDateSearch As Date?
         Private _previousEndDateSearch As Date?
         Private _previousColumnSearch As Int16
+        Private _progressDisplayForm As Form1
         'Private _accounts As List(Of ClassesLibrary.LookupData)
 
         Public Sub New()
@@ -113,7 +114,7 @@ Namespace PresentationLayer.Views.Forms
         '    Set(value As List(Of ClassesLibrary.LookupData))
         '        _accounts = value
         '        cboAccountIdNo.DataSource = Nothing
-        '        cboAccountIdNo.DataSource = value                
+        '        cboAccountIdNo.DataSource = value
         '    End Set
         'End Property
 
@@ -644,7 +645,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated
-            If Not btnEdit.Enabled Then
+            If Not btnEdit.Enabled And dtpReconciliationDate.DateChanged Then
                 PublishEvent(New EndingReconciliationDateChangedEvent(sender))
                 bsAccountReconciliationItems.ResetBindings(False)
             End If
@@ -652,8 +653,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub cboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
             If Not btnEdit.Enabled Then
-                PublishEvent(New ReconciliationAccountChangedEvent(sender))
-                bsAccountReconciliationItems.ResetBindings(False)
+                If cboAccountIdNo.ValueChanged() Then
+                    PublishEvent(New ReconciliationAccountChangedEvent(sender))
+                    bsAccountReconciliationItems.ResetBindings(False)
+                End If
             End If
         End Sub
 
@@ -717,6 +720,20 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        'Private Sub BackgroundWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker.DoWork
+        '    _progressDisplayForm = New ProgressDisplayForm()
+        '    _progressDisplayForm.Show()
+
+        'End Sub
+
+        'Private Sub BackgroundWorker_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker.ProgressChanged
+        '    _progressDisplayForm.ProgressBar.Value = e.ProgressPercentage
+        '    _progressDisplayForm.lblProgress.Text = "Records processed : " + e.ProgressPercentage.ToString()
+        'End Sub
+
+        'Private Sub BackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker.RunWorkerCompleted
+
+        'End Sub
     End Class
 
 End Namespace

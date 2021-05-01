@@ -469,7 +469,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateOpenInvoicesDisplay()
             If OpenInvoiceMode Then
-                If MyPresenter.AddMode Or cboPayorIdNo.SelectedIndex <> cboPayorIdNo.PreviousSelectedIndex Then
+                If MyPresenter.AddMode Or cboPayorIdNo.ValueChanged() Then
                     CsrOiItems.Clear()
                 End If
                 bsCsrOiItems.DataSource = MyPresenter.GetCustomerOpenInvoices(CsrOiItems)

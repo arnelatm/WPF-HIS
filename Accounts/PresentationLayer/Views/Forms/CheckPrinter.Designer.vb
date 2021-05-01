@@ -214,7 +214,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.OriginalList = Nothing
             Me.cboPayeeIdNo.OverrideDropDownStyleList = False
             Me.cboPayeeIdNo.PreviousSearchTerm = Nothing
-            Me.cboPayeeIdNo.PreviousSelectedIndex = -1
             Me.cboPayeeIdNo.PropertySelector = Nothing
             Me.cboPayeeIdNo.ReadOnlyCombo = False
             Me.cboPayeeIdNo.Size = New System.Drawing.Size(553, 24)
@@ -281,7 +280,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.OriginalList = Nothing
             Me.cboPaymentType.OverrideDropDownStyleList = False
             Me.cboPaymentType.PreviousSearchTerm = Nothing
-            Me.cboPaymentType.PreviousSelectedIndex = 0
             Me.cboPaymentType.PropertySelector = Nothing
             Me.cboPaymentType.ReadOnlyCombo = False
             Me.cboPaymentType.Size = New System.Drawing.Size(193, 24)

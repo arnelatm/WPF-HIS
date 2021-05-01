@@ -175,7 +175,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboStartAccountCode.OriginalList = Nothing
         Me.cboStartAccountCode.OverrideDropDownStyleList = false
         Me.cboStartAccountCode.PreviousSearchTerm = Nothing
-        Me.cboStartAccountCode.PreviousSelectedIndex = -1
         Me.cboStartAccountCode.PropertySelector = Nothing
         Me.cboStartAccountCode.ReadOnlyCombo = false
         Me.cboStartAccountCode.Size = New System.Drawing.Size(520, 24)
@@ -229,7 +228,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboEndAccountCode.OriginalList = Nothing
         Me.cboEndAccountCode.OverrideDropDownStyleList = false
         Me.cboEndAccountCode.PreviousSearchTerm = Nothing
-        Me.cboEndAccountCode.PreviousSelectedIndex = -1
         Me.cboEndAccountCode.PropertySelector = Nothing
         Me.cboEndAccountCode.ReadOnlyCombo = false
         Me.cboEndAccountCode.Size = New System.Drawing.Size(520, 24)

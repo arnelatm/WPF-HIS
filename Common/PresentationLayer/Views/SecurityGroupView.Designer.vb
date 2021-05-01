@@ -268,7 +268,6 @@ Namespace PresentationLayer.Views
         Me.cacParentIdNo.OriginalList = Nothing
         Me.cacParentIdNo.OverrideDropDownStyleList = false
         Me.cacParentIdNo.PreviousSearchTerm = Nothing
-        Me.cacParentIdNo.PreviousSelectedIndex = -1
         Me.cacParentIdNo.PropertySelector = Nothing
         Me.cacParentIdNo.ReadOnlyCombo = false
         Me.cacParentIdNo.Size = New System.Drawing.Size(438, 24)

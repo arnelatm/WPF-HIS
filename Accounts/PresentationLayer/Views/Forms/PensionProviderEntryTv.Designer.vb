@@ -758,7 +758,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.OriginalList = Nothing
             Me.cacCountryCode.OverrideDropDownStyleList = False
             Me.cacCountryCode.PreviousSearchTerm = Nothing
-            Me.cacCountryCode.PreviousSelectedIndex = -1
             Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.ReadOnlyCombo = False
             Me.cacCountryCode.SuggestBoxHeight = 200
@@ -789,7 +788,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.OriginalList = Nothing
             Me.cacBankIdNo.OverrideDropDownStyleList = False
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
-            Me.cacBankIdNo.PreviousSelectedIndex = -1
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.ReadOnlyCombo = False
             Me.cacBankIdNo.SuggestBoxHeight = 200
@@ -821,7 +819,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.OriginalList = Nothing
             Me.cacPaymentMethod.OverrideDropDownStyleList = False
             Me.cacPaymentMethod.PreviousSearchTerm = Nothing
-            Me.cacPaymentMethod.PreviousSelectedIndex = -1
             Me.cacPaymentMethod.PropertySelector = Nothing
             Me.cacPaymentMethod.ReadOnlyCombo = False
             Me.cacPaymentMethod.SuggestBoxHeight = 200

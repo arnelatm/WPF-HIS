@@ -69,7 +69,6 @@ Partial Class CCalendar
         Me.cboMonths.OriginalDataSource = Nothing
         Me.cboMonths.OriginalDropDownStyle = 1
         Me.cboMonths.OriginalList = Nothing
-        Me.cboMonths.PreviousSelectedIndex = -1
         Me.cboMonths.ReadOnlyCombo = False
         Me.cboMonths.ValueIsMandatory = False
         Me.cboMonths.ValueIsNullable = False
@@ -222,7 +221,6 @@ Partial Class CCalendar
         Me.cboCalendars.OriginalDataSource = Nothing
         Me.cboCalendars.OriginalDropDownStyle = 1
         Me.cboCalendars.OriginalList = Nothing
-        Me.cboCalendars.PreviousSelectedIndex = -1
         Me.cboCalendars.ReadOnlyCombo = false
         Me.cboCalendars.ValueIsMandatory = false
         Me.cboCalendars.ValueIsNullable = false

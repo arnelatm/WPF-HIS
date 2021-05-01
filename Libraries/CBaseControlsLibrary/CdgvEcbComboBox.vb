@@ -23,7 +23,6 @@ Public Class CDgvEcbComboBox
     'Private _selectable As Boolean
     Private _editable As Boolean
 
-    Private _previousSelectedIndex As Integer = -1
     Public DataSourceProgrammaticChange As Boolean = False
 
     Public SuggestListForm As CListBoxForm = New CListBoxForm
@@ -238,15 +237,6 @@ Public Class CDgvEcbComboBox
             If value Is Nothing Then Return
             _suggestListOrderRule = value
             _suggestListOrderRuleCompiled = value.Compile()
-        End Set
-    End Property
-
-    Public Property PreviousSelectedIndex As Integer
-        Get
-            Return _previousSelectedIndex
-        End Get
-        Set(value As Integer)
-            _previousSelectedIndex = value
         End Set
     End Property
 
@@ -723,10 +713,6 @@ Public Class CDgvEcbComboBox
     'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
     '    Visible = visibleControl
     'End Sub
-
-    Private Sub OnSelectionChange(sender As Object, e As EventArgs) Handles Me.SelectedIndexChanged
-        _previousSelectedIndex = SelectedIndex
-    End Sub
 
     Private Sub caComboBox_DropDownStyleChanged(sender As Object, e As EventArgs) Handles Me.DropDownStyleChanged
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then

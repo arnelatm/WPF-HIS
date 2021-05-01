@@ -1,10 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CdgvColumnMoney
     Inherits DataGridViewColumn
-    Implements IEntryControl
+    Implements IEntryControl, IFindableControl
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
@@ -65,4 +66,14 @@ Public Class CdgvColumnMoney
         End Get
     End Property
 
+    Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
+    Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
+    Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
+    Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
+    Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
+    Public Property FieldName As String Implements IFindableControl.FieldName
+    Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
+    Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
+    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
+    Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
 End Class

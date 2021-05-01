@@ -409,7 +409,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleIdNo.OriginalList = Nothing
             Me.cboPayCycleIdNo.OverrideDropDownStyleList = False
             Me.cboPayCycleIdNo.PreviousSearchTerm = Nothing
-            Me.cboPayCycleIdNo.PreviousSelectedIndex = -1
             Me.cboPayCycleIdNo.PropertySelector = Nothing
             Me.cboPayCycleIdNo.ReadOnlyCombo = False
             Me.cboPayCycleIdNo.Size = New System.Drawing.Size(579, 24)

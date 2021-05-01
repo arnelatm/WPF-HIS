@@ -328,7 +328,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.OriginalList = Nothing
             Me.cacParentIdNo.OverrideDropDownStyleList = False
             Me.cacParentIdNo.PreviousSearchTerm = Nothing
-            Me.cacParentIdNo.PreviousSelectedIndex = -1
             Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.ReadOnlyCombo = False
             Me.cacParentIdNo.Size = New System.Drawing.Size(418, 24)
@@ -379,7 +378,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CaComboBox1.OriginalList = Nothing
             Me.CaComboBox1.OverrideDropDownStyleList = False
             Me.CaComboBox1.PreviousSearchTerm = Nothing
-            Me.CaComboBox1.PreviousSelectedIndex = -1
             Me.CaComboBox1.PropertySelector = Nothing
             Me.CaComboBox1.ReadOnlyCombo = False
             Me.CaComboBox1.Size = New System.Drawing.Size(418, 24)
