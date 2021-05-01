@@ -272,7 +272,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityLevel.OriginalList = Nothing
             Me.cacSecurityLevel.OverrideDropDownStyleList = False
             Me.cacSecurityLevel.PreviousSearchTerm = Nothing
-            Me.cacSecurityLevel.PreviousSelectedIndex = -1
             Me.cacSecurityLevel.PropertySelector = Nothing
             Me.cacSecurityLevel.ReadOnlyCombo = False
             Me.cacSecurityLevel.Size = New System.Drawing.Size(320, 24)
@@ -361,7 +360,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityGroupIdNo.OriginalList = Nothing
             Me.cacSecurityGroupIdNo.OverrideDropDownStyleList = False
             Me.cacSecurityGroupIdNo.PreviousSearchTerm = Nothing
-            Me.cacSecurityGroupIdNo.PreviousSelectedIndex = -1
             Me.cacSecurityGroupIdNo.PropertySelector = Nothing
             Me.cacSecurityGroupIdNo.ReadOnlyCombo = False
             Me.cacSecurityGroupIdNo.Size = New System.Drawing.Size(320, 24)

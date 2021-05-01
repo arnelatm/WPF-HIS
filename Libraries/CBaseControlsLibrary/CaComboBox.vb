@@ -24,7 +24,6 @@ Public Class CaComboBox
     Private _readOnlyCombo As Boolean
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
-    Private _lastText As String = ""
     Private ReadOnly _defaultDropDownHeight As Int16
     Private ReadOnly _defaultDropdownStyle As ComboBoxStyle
     Private ReadOnly _defaultMaxDropDownItems As Int16
@@ -46,6 +45,8 @@ Public Class CaComboBox
     Public Property DefaultValue As Object
 
     Public Shared Property Delete As String = "Delete Selected Text"
+    Public ComboBoxValueChanged As Boolean = False
+    Private _lastValue As Object = Nothing
 
     <Bindable(True)>
     <Category("Custom Properties")>
@@ -152,8 +153,6 @@ Public Class CaComboBox
 
     'Public Property BorderColor As Color
     Public Property PreviousSearchTerm As String
-
-    Public Property PreviousSelectedIndex As Integer = -1
 
     Public Property PropertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
         Get
@@ -334,6 +333,11 @@ Public Class CaComboBox
         End If
     End Sub
 
+    Protected Overrides Sub OnGotFocus(e As EventArgs)
+        MyBase.OnGotFocus(e)
+        _lastValue = SelectedValue
+    End Sub
+
     Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)
         If Not SuggestListForm.Visible Then
             MyBase.OnPreviewKeyDown(e)
@@ -412,10 +416,6 @@ Public Class CaComboBox
             HideSuggestionBox()
         End If
     End Sub
-
-    'Protected Sub SuggestListListForm(ByVal e As EventArgs) Handles SuggestListForm.OnTextChanged()
-
-    'End Sub
 
     Private Sub caComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
         HandleMouseUp(sender, e)
@@ -722,10 +722,6 @@ Public Class CaComboBox
         End If
     End Sub
 
-    Private Sub caComboBox_Enter(sender As Object, e As EventArgs) Handles Me.Enter
-        PreviousSelectedIndex = SelectedIndex
-    End Sub
-
     Private Sub HideSuggestionBox()
         SuggestListForm.Hide()
         SuggestListForm.Visible = False
@@ -749,11 +745,6 @@ Public Class CaComboBox
             SelectedIndex = _previousIndex
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgCannotEditReadOnly")
         End If
-    End Sub
-
-    Private Sub caCombobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Me.SelectedIndexChanged
-        PreviousSelectedIndex = SelectedIndex
-        '_lastSelectedIndex = SelectedIndex
     End Sub
 
     Private Sub SetListBoxFormLocation(ByRef suggestLbForm As CListBoxForm)
@@ -856,22 +847,23 @@ Public Class CaComboBox
 
     Public Sub RevertValue()
         ' revert to previous value
-        SelectedIndex = PreviousSelectedIndex
+        SelectedValue = _lastValue
     End Sub
 
-    Private Sub cboCOmbobox_OnGotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
-        _lastText = Text
-    End Sub
+    'Private Sub caCombobox_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
+    '    ComboBoxValueChanged = True
+    'End Sub
 
-    Public Function ComboBoxValueChanged()
-        If _lastText = Text Then
-            Return False
-        End If
-        Return True
-    End Function
+    'Private Sub caComboBox_SelectedValueChanged(sender As Object, e As EventArgs) Handles Me.SelectedValueChanged
+    '    If Not ComboBoxValueChanged Then
+    '        ComboBoxValueChanged = True
+    '    Else
+    '        ComboBoxValueChanged = False
+    '    End If
+    'End Sub
 
     Public Function ValueChanged()
-        If SelectedIndex = PreviousSelectedIndex Then
+        If SelectedValue = _lastValue Then
             Return False
         End If
         Return True

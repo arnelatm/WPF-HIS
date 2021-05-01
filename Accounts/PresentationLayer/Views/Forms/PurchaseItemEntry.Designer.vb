@@ -270,7 +270,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboProductCategoryIdNo.OriginalList = Nothing
             Me.cboProductCategoryIdNo.OverrideDropDownStyleList = False
             Me.cboProductCategoryIdNo.PreviousSearchTerm = Nothing
-            Me.cboProductCategoryIdNo.PreviousSelectedIndex = 0
             Me.cboProductCategoryIdNo.PropertySelector = Nothing
             Me.cboProductCategoryIdNo.ReadOnlyCombo = False
             Me.cboProductCategoryIdNo.SuggestBoxHeight = 200
@@ -307,7 +306,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGlAccountIdNo.OriginalList = Nothing
             Me.cboGlAccountIdNo.OverrideDropDownStyleList = False
             Me.cboGlAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboGlAccountIdNo.PreviousSelectedIndex = 0
             Me.cboGlAccountIdNo.PropertySelector = Nothing
             Me.cboGlAccountIdNo.ReadOnlyCombo = False
             Me.cboGlAccountIdNo.SuggestBoxHeight = 200
@@ -344,7 +342,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatAccountIdNo.OriginalList = Nothing
             Me.cboVatAccountIdNo.OverrideDropDownStyleList = False
             Me.cboVatAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboVatAccountIdNo.PreviousSelectedIndex = 0
             Me.cboVatAccountIdNo.PropertySelector = Nothing
             Me.cboVatAccountIdNo.ReadOnlyCombo = False
             Me.cboVatAccountIdNo.SuggestBoxHeight = 200

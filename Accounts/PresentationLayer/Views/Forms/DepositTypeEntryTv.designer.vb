@@ -146,7 +146,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OriginalList = Nothing
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboAccountIdNo.PreviousSelectedIndex = -1
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SuggestBoxHeight = 200
@@ -318,7 +317,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBankChargesAccountIdNo.OriginalList = Nothing
             Me.cboBankChargesAccountIdNo.OverrideDropDownStyleList = False
             Me.cboBankChargesAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboBankChargesAccountIdNo.PreviousSelectedIndex = -1
             Me.cboBankChargesAccountIdNo.PropertySelector = Nothing
             Me.cboBankChargesAccountIdNo.ReadOnlyCombo = False
             Me.cboBankChargesAccountIdNo.SuggestBoxHeight = 200
@@ -358,7 +356,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBankChargesVatAccountIdNo.OriginalList = Nothing
             Me.cboBankChargesVatAccountIdNo.OverrideDropDownStyleList = False
             Me.cboBankChargesVatAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cboBankChargesVatAccountIdNo.PreviousSelectedIndex = -1
             Me.cboBankChargesVatAccountIdNo.PropertySelector = Nothing
             Me.cboBankChargesVatAccountIdNo.ReadOnlyCombo = False
             Me.cboBankChargesVatAccountIdNo.SuggestBoxHeight = 200

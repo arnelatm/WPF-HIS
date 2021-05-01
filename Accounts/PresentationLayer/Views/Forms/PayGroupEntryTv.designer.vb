@@ -267,7 +267,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.OriginalList = Nothing
             Me.cboParentIdNo.OverrideDropDownStyleList = False
             Me.cboParentIdNo.PreviousSearchTerm = Nothing
-            Me.cboParentIdNo.PreviousSelectedIndex = -1
             Me.cboParentIdNo.PropertySelector = Nothing
             Me.cboParentIdNo.ReadOnlyCombo = False
             Me.cboParentIdNo.SuggestBoxHeight = 200

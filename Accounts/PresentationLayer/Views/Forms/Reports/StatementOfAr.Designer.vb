@@ -103,7 +103,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboCustomerIdNo.OriginalList = Nothing
             Me.cboCustomerIdNo.OverrideDropDownStyleList = False
             Me.cboCustomerIdNo.PreviousSearchTerm = Nothing
-            Me.cboCustomerIdNo.PreviousSelectedIndex = -1
             Me.cboCustomerIdNo.PropertySelector = Nothing
             Me.cboCustomerIdNo.Size = New System.Drawing.Size(520, 24)
             Me.cboCustomerIdNo.SuggestBoxHeight = 200

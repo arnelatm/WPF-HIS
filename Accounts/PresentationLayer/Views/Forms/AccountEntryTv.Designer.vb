@@ -265,7 +265,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.OriginalList = Nothing
             Me.cboParentIdNo.OverrideDropDownStyleList = False
             Me.cboParentIdNo.PreviousSearchTerm = Nothing
-            Me.cboParentIdNo.PreviousSelectedIndex = -1
             Me.cboParentIdNo.PropertySelector = Nothing
             Me.cboParentIdNo.ReadOnlyCombo = False
             Me.cboParentIdNo.SuggestBoxHeight = 200
@@ -334,7 +333,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountGroup.OriginalList = Nothing
             Me.cboAccountGroup.OverrideDropDownStyleList = False
             Me.cboAccountGroup.PreviousSearchTerm = Nothing
-            Me.cboAccountGroup.PreviousSelectedIndex = -1
             Me.cboAccountGroup.PropertySelector = Nothing
             Me.cboAccountGroup.ReadOnlyCombo = False
             Me.cboAccountGroup.SuggestBoxHeight = 200
@@ -373,7 +371,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSpecialAccount.OriginalList = Nothing
             Me.cboSpecialAccount.OverrideDropDownStyleList = False
             Me.cboSpecialAccount.PreviousSearchTerm = Nothing
-            Me.cboSpecialAccount.PreviousSelectedIndex = -1
             Me.cboSpecialAccount.PropertySelector = Nothing
             Me.cboSpecialAccount.ReadOnlyCombo = False
             Me.cboSpecialAccount.SuggestBoxHeight = 200
@@ -478,7 +475,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNormalBalance.OriginalList = Nothing
             Me.cboNormalBalance.OverrideDropDownStyleList = False
             Me.cboNormalBalance.PreviousSearchTerm = Nothing
-            Me.cboNormalBalance.PreviousSelectedIndex = -1
             Me.cboNormalBalance.PropertySelector = Nothing
             Me.cboNormalBalance.ReadOnlyCombo = False
             Me.cboNormalBalance.SuggestBoxHeight = 200
@@ -517,7 +513,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeType.OriginalList = Nothing
             Me.cboPayeeType.OverrideDropDownStyleList = False
             Me.cboPayeeType.PreviousSearchTerm = Nothing
-            Me.cboPayeeType.PreviousSelectedIndex = -1
             Me.cboPayeeType.PropertySelector = Nothing
             Me.cboPayeeType.ReadOnlyCombo = False
             Me.cboPayeeType.SuggestBoxHeight = 200

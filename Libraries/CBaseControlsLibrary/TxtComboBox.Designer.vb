@@ -46,7 +46,6 @@ Partial Class TxtComboBox
         Me.cboComboBox.Margin = New System.Windows.Forms.Padding(1)
         Me.cboComboBox.Name = "cboComboBox"
         Me.cboComboBox.OriginalDropDownStyle = 1
-        Me.cboComboBox.PreviousSelectedIndex = 0
         Me.cboComboBox.ReadOnlyCombo = false
         Me.cboComboBox.EditingMode = false
         Me.cboComboBox.Size = New System.Drawing.Size(220, 24)

@@ -170,7 +170,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSystemViewIdNo.OriginalList = Nothing
             Me.cboSystemViewIdNo.OverrideDropDownStyleList = False
             Me.cboSystemViewIdNo.PreviousSearchTerm = Nothing
-            Me.cboSystemViewIdNo.PreviousSelectedIndex = -1
             Me.cboSystemViewIdNo.PropertySelector = Nothing
             Me.cboSystemViewIdNo.ReadOnlyCombo = False
             Me.cboSystemViewIdNo.SuggestBoxHeight = 200
@@ -215,7 +214,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDataType.OriginalList = Nothing
             Me.cboDataType.OverrideDropDownStyleList = False
             Me.cboDataType.PreviousSearchTerm = Nothing
-            Me.cboDataType.PreviousSelectedIndex = -1
             Me.cboDataType.PropertySelector = Nothing
             Me.cboDataType.ReadOnlyCombo = False
             Me.cboDataType.SuggestBoxHeight = 200

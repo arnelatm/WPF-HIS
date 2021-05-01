@@ -289,7 +289,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaymentMethod.OriginalList = Nothing
         Me.cboPaymentMethod.OverrideDropDownStyleList = false
         Me.cboPaymentMethod.PreviousSearchTerm = Nothing
-        Me.cboPaymentMethod.PreviousSelectedIndex = -1
         Me.cboPaymentMethod.PropertySelector = Nothing
         Me.cboPaymentMethod.ReadOnlyCombo = false
         Me.cboPaymentMethod.SecurityKey = ""
@@ -346,7 +345,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacBankIdNo.OriginalList = Nothing
         Me.cacBankIdNo.OverrideDropDownStyleList = false
         Me.cacBankIdNo.PreviousSearchTerm = Nothing
-        Me.cacBankIdNo.PreviousSelectedIndex = -1
         Me.cacBankIdNo.PropertySelector = Nothing
         Me.cacBankIdNo.ReadOnlyCombo = false
         Me.cacBankIdNo.SecurityKey = ""
@@ -579,7 +577,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayCycleidNo.OriginalList = Nothing
         Me.cboPayCycleidNo.OverrideDropDownStyleList = false
         Me.cboPayCycleidNo.PreviousSearchTerm = Nothing
-        Me.cboPayCycleidNo.PreviousSelectedIndex = -1
         Me.cboPayCycleidNo.PropertySelector = Nothing
         Me.cboPayCycleidNo.ReadOnlyCombo = false
         Me.cboPayCycleidNo.SecurityKey = ""
@@ -636,7 +633,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayGroupIdNo.OriginalList = Nothing
         Me.cboPayGroupIdNo.OverrideDropDownStyleList = false
         Me.cboPayGroupIdNo.PreviousSearchTerm = Nothing
-        Me.cboPayGroupIdNo.PreviousSelectedIndex = -1
         Me.cboPayGroupIdNo.PropertySelector = Nothing
         Me.cboPayGroupIdNo.ReadOnlyCombo = false
         Me.cboPayGroupIdNo.SecurityKey = ""
@@ -890,7 +886,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacMaritalStatus.OriginalList = Nothing
         Me.cacMaritalStatus.OverrideDropDownStyleList = false
         Me.cacMaritalStatus.PreviousSearchTerm = Nothing
-        Me.cacMaritalStatus.PreviousSelectedIndex = -1
         Me.cacMaritalStatus.PropertySelector = Nothing
         Me.cacMaritalStatus.ReadOnlyCombo = false
         Me.cacMaritalStatus.Size = New System.Drawing.Size(278, 24)
@@ -946,7 +941,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacNationalityCode.OriginalList = Nothing
         Me.cacNationalityCode.OverrideDropDownStyleList = false
         Me.cacNationalityCode.PreviousSearchTerm = Nothing
-        Me.cacNationalityCode.PreviousSelectedIndex = -1
         Me.cacNationalityCode.PropertySelector = Nothing
         Me.cacNationalityCode.ReadOnlyCombo = false
         Me.cacNationalityCode.Size = New System.Drawing.Size(279, 24)
@@ -1002,7 +996,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacReligionIdNo.OriginalList = Nothing
         Me.cacReligionIdNo.OverrideDropDownStyleList = false
         Me.cacReligionIdNo.PreviousSearchTerm = Nothing
-        Me.cacReligionIdNo.PreviousSelectedIndex = -1
         Me.cacReligionIdNo.PropertySelector = Nothing
         Me.cacReligionIdNo.ReadOnlyCombo = false
         Me.cacReligionIdNo.Size = New System.Drawing.Size(278, 24)
@@ -1100,7 +1093,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacGender.OriginalList = Nothing
         Me.cacGender.OverrideDropDownStyleList = false
         Me.cacGender.PreviousSearchTerm = Nothing
-        Me.cacGender.PreviousSelectedIndex = -1
         Me.cacGender.PropertySelector = Nothing
         Me.cacGender.ReadOnlyCombo = false
         Me.cacGender.Size = New System.Drawing.Size(124, 24)
@@ -1498,7 +1490,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacCountryCode.OriginalList = Nothing
         Me.cacCountryCode.OverrideDropDownStyleList = false
         Me.cacCountryCode.PreviousSearchTerm = Nothing
-        Me.cacCountryCode.PreviousSelectedIndex = -1
         Me.cacCountryCode.PropertySelector = Nothing
         Me.cacCountryCode.ReadOnlyCombo = false
         Me.cacCountryCode.Size = New System.Drawing.Size(195, 24)
@@ -1918,7 +1909,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacDepartmentIdNo.OriginalList = Nothing
         Me.cacDepartmentIdNo.OverrideDropDownStyleList = false
         Me.cacDepartmentIdNo.PreviousSearchTerm = Nothing
-        Me.cacDepartmentIdNo.PreviousSelectedIndex = -1
         Me.cacDepartmentIdNo.PropertySelector = Nothing
         Me.cacDepartmentIdNo.ReadOnlyCombo = false
         Me.cacDepartmentIdNo.Size = New System.Drawing.Size(279, 24)
@@ -1974,7 +1964,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacDesignationIdNo.OriginalList = Nothing
         Me.cacDesignationIdNo.OverrideDropDownStyleList = false
         Me.cacDesignationIdNo.PreviousSearchTerm = Nothing
-        Me.cacDesignationIdNo.PreviousSelectedIndex = -1
         Me.cacDesignationIdNo.PropertySelector = Nothing
         Me.cacDesignationIdNo.ReadOnlyCombo = false
         Me.cacDesignationIdNo.Size = New System.Drawing.Size(223, 24)

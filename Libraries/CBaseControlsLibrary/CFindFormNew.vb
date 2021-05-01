@@ -52,7 +52,6 @@ Public Class CFindFormNew
     'End Function
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
-        Dim x As Object
         If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
             _findableControl.BegFindValue = TxtTextToSearch.Text
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then

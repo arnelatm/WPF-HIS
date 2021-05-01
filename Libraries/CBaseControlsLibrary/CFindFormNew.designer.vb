@@ -210,7 +210,6 @@ Partial Class CFindFormNew
         Me.cboTextToSearch.OriginalList = Nothing
         Me.cboTextToSearch.OverrideDropDownStyleList = False
         Me.cboTextToSearch.PreviousSearchTerm = Nothing
-        Me.cboTextToSearch.PreviousSelectedIndex = -1
         Me.cboTextToSearch.PropertySelector = Nothing
         Me.cboTextToSearch.ReadOnlyCombo = False
         Me.cboTextToSearch.Size = New System.Drawing.Size(274, 24)

@@ -1025,7 +1025,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.OriginalList = Nothing
             Me.cacCountryCode.OverrideDropDownStyleList = False
             Me.cacCountryCode.PreviousSearchTerm = Nothing
-            Me.cacCountryCode.PreviousSelectedIndex = -1
             Me.cacCountryCode.PropertySelector = Nothing
             Me.cacCountryCode.ReadOnlyCombo = False
             Me.cacCountryCode.SuggestBoxHeight = 200
@@ -1057,7 +1056,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.OriginalList = Nothing
             Me.cacBankIdNo.OverrideDropDownStyleList = False
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
-            Me.cacBankIdNo.PreviousSelectedIndex = -1
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.ReadOnlyCombo = False
             Me.cacBankIdNo.SuggestBoxHeight = 200
@@ -1088,7 +1086,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacExpAccountIdNo.OriginalList = Nothing
             Me.cacExpAccountIdNo.OverrideDropDownStyleList = False
             Me.cacExpAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cacExpAccountIdNo.PreviousSelectedIndex = -1
             Me.cacExpAccountIdNo.PropertySelector = Nothing
             Me.cacExpAccountIdNo.ReadOnlyCombo = False
             Me.cacExpAccountIdNo.SuggestBoxHeight = 200
@@ -1121,7 +1118,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacApAccountIdNo.OriginalList = Nothing
             Me.cacApAccountIdNo.OverrideDropDownStyleList = False
             Me.cacApAccountIdNo.PreviousSearchTerm = Nothing
-            Me.cacApAccountIdNo.PreviousSelectedIndex = -1
             Me.cacApAccountIdNo.PropertySelector = Nothing
             Me.cacApAccountIdNo.ReadOnlyCombo = False
             Me.cacApAccountIdNo.SuggestBoxHeight = 200
@@ -1153,7 +1149,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.OriginalList = Nothing
             Me.cacPaymentMethod.OverrideDropDownStyleList = False
             Me.cacPaymentMethod.PreviousSearchTerm = Nothing
-            Me.cacPaymentMethod.PreviousSelectedIndex = -1
             Me.cacPaymentMethod.PropertySelector = Nothing
             Me.cacPaymentMethod.ReadOnlyCombo = False
             Me.cacPaymentMethod.SuggestBoxHeight = 200
@@ -1228,7 +1223,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.OriginalList = Nothing
             Me.cacAccountStatus.OverrideDropDownStyleList = False
             Me.cacAccountStatus.PreviousSearchTerm = Nothing
-            Me.cacAccountStatus.PreviousSelectedIndex = -1
             Me.cacAccountStatus.PropertySelector = Nothing
             Me.cacAccountStatus.ReadOnlyCombo = False
             Me.cacAccountStatus.SuggestBoxHeight = 200

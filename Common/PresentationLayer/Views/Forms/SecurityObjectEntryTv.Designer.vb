@@ -254,7 +254,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboSystemViewIdNo.OriginalList = Nothing
         Me.cboSystemViewIdNo.OverrideDropDownStyleList = false
         Me.cboSystemViewIdNo.PreviousSearchTerm = Nothing
-        Me.cboSystemViewIdNo.PreviousSelectedIndex = -1
         Me.cboSystemViewIdNo.PropertySelector = Nothing
         Me.cboSystemViewIdNo.ReadOnlyCombo = false
         Me.cboSystemViewIdNo.SuggestBoxHeight = 200
@@ -311,7 +310,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cacParentIdNo.OriginalList = Nothing
         Me.cacParentIdNo.OverrideDropDownStyleList = false
         Me.cacParentIdNo.PreviousSearchTerm = Nothing
-        Me.cacParentIdNo.PreviousSelectedIndex = -1
         Me.cacParentIdNo.PropertySelector = Nothing
         Me.cacParentIdNo.ReadOnlyCombo = false
         Me.cacParentIdNo.SuggestBoxHeight = 200

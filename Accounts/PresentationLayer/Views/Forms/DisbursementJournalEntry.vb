@@ -535,7 +535,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateOpenInvoicesDisplay()
             If OpenInvoiceMode Then
-                If MyPresenter.AddMode Or cboPayeeIdNo.SelectedIndex <> cboPayeeIdNo.PreviousSelectedIndex Then
+                If MyPresenter.AddMode Or cboPayeeIdNo.ValueChanged() Then
                     DjOiItems.Clear()
                 End If
                 bsDjOiItems.DataSource = MyPresenter.GetSupplierOpenInvoices(DjOiItems)

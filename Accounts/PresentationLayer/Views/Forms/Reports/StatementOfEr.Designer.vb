@@ -103,7 +103,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboEmployeeIdNo.OriginalList = Nothing
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-        Me.cboEmployeeIdNo.PreviousSelectedIndex = -1
         Me.cboEmployeeIdNo.PropertySelector = Nothing
         Me.cboEmployeeIdNo.ReadOnlyCombo = False
             Me.cboEmployeeIdNo.Size = New System.Drawing.Size(520, 24)

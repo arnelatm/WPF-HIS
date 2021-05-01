@@ -223,7 +223,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.OriginalList = Nothing
             Me.cacParentIdNo.OverrideDropDownStyleList = False
             Me.cacParentIdNo.PreviousSearchTerm = Nothing
-            Me.cacParentIdNo.PreviousSelectedIndex = -1
             Me.cacParentIdNo.PropertySelector = Nothing
             Me.cacParentIdNo.ReadOnlyCombo = False
             Me.cacParentIdNo.SuggestBoxHeight = 200
@@ -262,7 +261,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevCostCenterIdNo.OriginalList = Nothing
             Me.cacRevCostCenterIdNo.OverrideDropDownStyleList = False
             Me.cacRevCostCenterIdNo.PreviousSearchTerm = Nothing
-            Me.cacRevCostCenterIdNo.PreviousSelectedIndex = -1
             Me.cacRevCostCenterIdNo.PropertySelector = Nothing
             Me.cacRevCostCenterIdNo.ReadOnlyCombo = False
             Me.cacRevCostCenterIdNo.SuggestBoxHeight = 200

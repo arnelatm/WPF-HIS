@@ -7,6 +7,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -22,6 +23,8 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Private _progressDisplayForm As CBaseControlsLibrary.DisplayProgressForm
+        'Private _backgroundWorker As BackgroundWorker
 
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)
@@ -48,6 +51,12 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
             SubscribeEvent(Me)
+
+            '_backgroundWorker.WorkerReportsProgress = True
+            '_backgroundWorker.WorkerSupportsCancellation = True
+            'AddHandler _backgroundworker.DoWork, AddressOf BackgroundWorker_DoWork
+            'AddHandler _backgroundworker.ProgressChanged, AddressOf BackgroundWorker_ProgressChanged
+            'AddHandler _backgroundworker.RunWorkerCompleted, AddressOf BackgroundWorker_RunWorkerCompleted
 
         End Sub
 
@@ -157,33 +166,69 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Function GetAcctReconItems(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
+        'Public Sub GetAcctReconItems(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
+        '    _backgroundWorker.RunWorkerAsync()
+        'End Sub
+
+        'Private Sub BackgroundWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
+        '    _progressDisplayForm = New ProgressDisplayForm()
+        '    _progressDisplayForm.Show()
+
+        'End Sub
+
+        'Private Sub BackgroundWorker_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs)
+        '    _progressDisplayForm.ProgressBar.Value = e.ProgressPercentage
+        '    _progressDisplayForm.lblProgress.Text = "Records processed : " + e.ProgressPercentage.ToString()
+        'End Sub
+
+        'Private Sub BackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs)
+
+        'End Sub
+
+        Public Function GetAcctReconItems(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
-            Dim nSeq As Integer = 1
+            Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
-            Dim allAcctReconItems As List(Of AccountReconciliationItemModel) = ModelOfPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems As List(Of AccountReconciliationItemModel) = ModelOfPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
+            Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
+            Dim counter As Int16 = 1
+            Dim nCount = allAcctReconItems.Count()
+            'progressDisplayForm.ProgressBar.Minimum = 1
+            'progressDisplayForm.ProgressBar.Maximum = nCount
             If AddMode Then
+                progressDisplayForm.Show()
+                progressDisplayForm.DisplayProgress(nCount)
+                progressDisplayForm.InitializeDisplay("Please wait processing request...", nCount)
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
-                    nSeq += 1
+                    'progressDisplayForm.ProgressBar.Value = counter
+                    progressDisplayForm.UpdateProgressBar(counter)
+                    counter += 1
                 Next
+                progressDisplayForm.Close()
             Else
                 Dim oldReconciliationItems As List(Of AccountReconciliationItemModel)
                 oldReconciliationItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
-                Dim oldReconItems = New DataTable
-                oldReconItems = ToDataTable(oldReconciliationItems)
-                Dim oldReconItem As New AccountReconciliationItemModel
-                Dim dr() As DataRow
+                progressDisplayForm.Show()
+                progressDisplayForm.DisplayProgress(nCount)
+                progressDisplayForm.InitializeDisplay("Please wait getting account transactions ...", nCount)
                 For Each acctReconItem In allAcctReconItems
-                    dr = oldReconItems.Select("JournalCode = '" & acctReconItem.JournalCode & "' and JournalItemIdNo = " & acctReconItem.JournalItemIdNo.ToString())
-                    If dr.Length > 0 Then
-                        acctReconItem.IdNo = dr(0).Item("IdNo")
-                        AddNewItem(acctReconItem, acctReconItems, nSeq)
-                    Else
-                        AddNewItem(acctReconItem, acctReconItems, nSeq)
-                    End If
+                    Dim found As Boolean = False
+                    For Each item As AccountReconciliationItemModel In oldReconciliationItems
+                        If item.JournalCode = acctReconItem.JournalCode And item.JournalItemIdNo = acctReconItem.JournalItemIdNo Then
+                            acctReconItem.IdNo = item.IdNo
+                            acctReconItem.Cleared = item.Cleared
+                            found = True
+                            Exit For
+                        End If
+                    Next
                     nSeq += 1
+                    AddNewItem(acctReconItem, acctReconItems, nSeq)
+                    progressDisplayForm.UpdateProgressBar(counter)
+                    'progressDisplayForm.ProgressBar.Value = counter
+                    counter += 1
                 Next
+                progressDisplayForm.Close()
                 'For Each reconciledItem As AccountReconciliationItemModel In oldReconciliationItems
                 '    AddNewItem(reconciledItem, acctReconItems, nSeq)
                 '    nSeq += 1
@@ -193,42 +238,6 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(acctReconItems, result)
             Return result
         End Function
-
-        'Public Function GetAcctReconItems(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
-        '    Dim acctReconItems As New List(Of AccountReconciliationItemModel)
-        '    Dim nSeq As Integer = 0
-        '    'If PresenterObj.AddMode Or PresenterObj.EditMode Then
-        '    Dim allAcctReconItems = ModelOfPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
-        '    If AddMode Then
-        '        For Each acctReconItem In allAcctReconItems
-        '            AddNewItem(acctReconItem, acctReconItems, nSeq)
-        '        Next
-        '    Else
-        '        Dim oldReconciliationItems As List(Of AccountReconciliationItemModel)
-        '        oldReconciliationItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
-        '        For Each acctReconItem In allAcctReconItems
-        '            Dim found As Boolean = False
-        '            For Each item As AccountReconciliationItemModel In oldReconciliationItems
-        '                If item.JournalCode = acctReconItem.JournalCode And
-        '                   item.JournalItemIdNo = acctReconItem.JournalItemIdNo Then
-        '                    found = True
-        '                    Exit For
-        '                End If
-        '            Next
-        '            nSeq += 1
-        '            If Not found Then
-        '                AddNewItem(acctReconItem, acctReconItems, nSeq)
-        '            End If
-        '        Next
-        '        For Each reconciledItem As AccountReconciliationItemModel In oldReconciliationItems
-        '            AddNewItem(reconciledItem, acctReconItems, nSeq)
-        '            nSeq += 1
-        '        Next
-        '    End If
-        '    Dim result As New List(Of AccountReconciliationItemView)
-        '    GlobalVariables.Mapper.Map(acctReconItems, result)
-        '    Return result
-        'End Function
 
         Private Sub AddNewItem(acctReconItem As AccountReconciliationItemModel, actualReconItems As List(Of AccountReconciliationItemModel), nSeq As Integer)
             Dim item As New AccountReconciliationItemModel With {
@@ -348,6 +357,12 @@ Namespace PresentationLayer.Presenters
                 View.TotalQtyCreditsCleared = 0
                 View.TotalQtyDebitsNotCleared = 0
                 View.TotalQtyCreditsNotCleared = 0
+                Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
+                progressDisplayForm.Show()
+                Dim nCount = View.AccountReconciliationItems.Count()
+                progressDisplayForm.DisplayProgress(nCount)
+                progressDisplayForm.InitializeDisplay("Please wait computing reconciliation totals...", nCount)
+                Dim counter As Int32 = 1
                 For Each accountReconciliationItem In View.AccountReconciliationItems
                     If accountReconciliationItem.Cleared Then
                         If accountReconciliationItem.Debit > 0 Then
@@ -366,9 +381,12 @@ Namespace PresentationLayer.Presenters
                             View.TotalQtyCreditsNotCleared += 1
                         End If
                     End If
+                    progressDisplayForm.UpdateProgressBar(counter)
+                    counter = counter + 1
                 Next
                 View.GlSystemBalance = ModelOfPresenter.GetAccountBalance(View.ReconciliationDate, View.AccountIdNo)
                 ReComputeDifference()
+                progressDisplayForm.Close()
             End If
         End Sub
 

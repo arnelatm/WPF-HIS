@@ -1,0 +1,39 @@
+﻿Imports System.Drawing
+Imports System.Reflection.Emit
+Imports System.Windows.Forms
+
+Public Class DisplayProgressForm
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
+    Public Sub InitializeDisplay(description As String, nMaxValue As Int32)
+        Me.CenterToScreen()
+        lblDescription.Text = description
+        ProgressBar.Maximum = nMaxValue
+        ProgressBar.Value = 0
+        Me.Text = description
+    End Sub
+
+    Public Sub DisplayProgress(count As Int32)
+        ProgressBar.Maximum = count
+    End Sub
+
+    Public Sub UpdateProgressBar(counter As Int32)
+        ProgressBar.Value = counter
+        Dim percent As Decimal = (counter / ProgressBar.Maximum * 100)
+        lblPercentage.Text = percent.ToString() + "%"
+    End Sub
+
+    Public Sub ResetProgressBar()
+        ProgressBar.Value = 0
+    End Sub
+
+End Class

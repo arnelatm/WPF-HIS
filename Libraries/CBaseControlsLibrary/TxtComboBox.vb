@@ -381,13 +381,10 @@ Public Class TxtComboBox
     '    cboComboBox.MakeVisible(visibleControl)
     'End Sub
 
-    Public Property PreviousSelectedIndex As Integer
     Public Property SelectedIndex As Integer
 
     Private Sub txtComboBox_LostFocus(sender As Object, e As EventArgs) Handles cboComboBox.LostFocus
-        PreviousSelectedIndex = cboComboBox.PreviousSelectedIndex
         cboComboBox.DataSource = DataSource
-        'cboComboBox.OriginalList = nothing
     End Sub
 
     'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
