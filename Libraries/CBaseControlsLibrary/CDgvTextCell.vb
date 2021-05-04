@@ -2,11 +2,12 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CdgvColumnComboBox
-    Inherits DataGridViewComboBoxColumn
+Public Class CDgvTextCell
+    Inherits DataGridViewTextBoxCell
     Implements IEntryControl
 
     Private _editingMode As Boolean
+
     Private _displayOnly As Boolean
 
     <Category("Custom Properties")>
@@ -17,45 +18,38 @@ Public Class CdgvColumnComboBox
         Get
             Return _displayOnly
         End Get
-        Set(value As Boolean)
-            _displayOnly = value
-            If value Then
+        Set(val As Boolean)
+            _displayOnly = val
+            If val Then
                 _editingMode = True
             End If
         End Set
     End Property
 
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that this control will only accept numeric values.")>
+    <Browsable(True)>
+    Public Property ValueIsNumeric As Boolean = False
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
         End Get
-        Set(value As Boolean)
-            _editingMode = value
-            If value Or DisplayOnly Then
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+        Set
+            _editingMode = Value
+            If Value Or DisplayOnly Then
+                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 [ReadOnly] = True
             Else
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 [ReadOnly] = False
             End If
         End Set
     End Property
-
-    'Public Sub EnterHandler(sender As Object, e As EventArgs) Handles Me.Enter
-    '    If Not _editingMode Then
-    '        ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-    '        BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-    '    End If
-    'End Sub
-
-    'Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-    '    If Not _editingMode Then
-    '        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-    '        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-    '    End If
-    'End Sub
 
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
@@ -64,11 +58,11 @@ Public Class CdgvColumnComboBox
     End Property
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
-    '    [ReadOnly] = editableControl
+    '    Me.ReadOnly = editableControl
     'End Sub
 
     'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
-    '    Visible = visibleControl
+    '    ' not applicable
     'End Sub
 
     'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable

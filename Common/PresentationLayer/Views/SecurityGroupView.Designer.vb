@@ -45,10 +45,10 @@ Namespace PresentationLayer.Views
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.DataGridViewGroupAccesses = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.DgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.DgvSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.DgvSecurityObjectIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.DgvSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
+        Me.DgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.DgvSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.DgvSecurityObjectIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.DgvSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.DgvVisible = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.DgvEditable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
@@ -501,10 +501,10 @@ End Sub
         Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents DataGridViewGroupAccesses As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents bsGroupAccesses As Windows.Forms.BindingSource
-        Friend WithEvents DgvIdNo As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents DgvSecurityGroupIdNo As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents DgvSecurityObjectIdNo As Libraries.CBaseControlsLibrary.CdgvColumnText
-        Friend WithEvents DgvSecurityObjectName As Libraries.CBaseControlsLibrary.CdgvColumnText
+        Friend WithEvents DgvIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents DgvSecurityGroupIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents DgvSecurityObjectIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents DgvSecurityObjectName As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents DgvVisible As DataGridViewCheckBoxColumn
         Friend WithEvents DgvEditable As DataGridViewCheckBoxColumn
     End Class

@@ -3,12 +3,12 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic.CompilerServices
 
-<DesignerGenerated()> _
+<DesignerGenerated()>
 Partial Class CFindForm
     Inherits CForm
 
     'Form overrides dispose to clean up the component list.
-    <DebuggerNonUserCode()> _
+    <DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -22,7 +22,7 @@ Partial Class CFindForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <DebuggerStepThrough()> _
+    <DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFindForm))
@@ -33,19 +33,22 @@ Partial Class CFindForm
         Me.BtnFind = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.lblLookFor4 = New System.Windows.Forms.Label()
-        Me.lblTo = New System.Windows.Forms.Label()
-        Me.lblLookFor3 = New System.Windows.Forms.Label()
-        Me.lblLookFor2 = New System.Windows.Forms.Label()
+        Me.txtEndValue = New System.Windows.Forms.TextBox()
+        Me.txtBegValue = New System.Windows.Forms.TextBox()
+        Me.lblTo1 = New System.Windows.Forms.Label()
         Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.chkChecked = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.dtpBegDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.RBtnExactMatch = New System.Windows.Forms.RadioButton()
         Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
-        Me.TableLayoutPanel1.SuspendLayout()
-        Me.CGroupBox1.SuspendLayout()
-        Me.SuspendLayout()
+        Me.RBtnExactMatch = New System.Windows.Forms.RadioButton()
+        Me.chkChecked = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtFieldToSearch = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkIgnoreCase = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblIgnoreCase = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel1.SuspendLayout
+        Me.CGroupBox1.SuspendLayout
+        Me.SuspendLayout
         '
         'TxtTextToSearch
         '
@@ -58,90 +61,92 @@ Partial Class CFindForm
         '
         'lblLookFor1
         '
-        Me.lblLookFor1.AutoSize = True
+        Me.lblLookFor1.AutoSize = true
         Me.lblLookFor1.BackColor = System.Drawing.Color.Transparent
         Me.lblLookFor1.Location = New System.Drawing.Point(3, 0)
         Me.lblLookFor1.Name = "lblLookFor1"
+        Me.TableLayoutPanel1.SetRowSpan(Me.lblLookFor1, 5)
         Me.lblLookFor1.Size = New System.Drawing.Size(49, 13)
         Me.lblLookFor1.TabIndex = 1
         Me.lblLookFor1.Text = "Look For"
         '
         'RBtnStart
         '
-        Me.RBtnStart.AutoSize = True
+        Me.RBtnStart.AutoSize = true
         Me.RBtnStart.BackColor = System.Drawing.Color.Transparent
         Me.RBtnStart.Location = New System.Drawing.Point(6, 42)
         Me.RBtnStart.Name = "RBtnStart"
         Me.RBtnStart.Size = New System.Drawing.Size(84, 17)
         Me.RBtnStart.TabIndex = 2
         Me.RBtnStart.Text = "Start of Field"
-        Me.RBtnStart.UseVisualStyleBackColor = False
+        Me.RBtnStart.UseVisualStyleBackColor = false
         '
         'RBtnAnywhere
         '
-        Me.RBtnAnywhere.AutoSize = True
+        Me.RBtnAnywhere.AutoSize = true
         Me.RBtnAnywhere.BackColor = System.Drawing.Color.Transparent
-        Me.RBtnAnywhere.Checked = True
+        Me.RBtnAnywhere.Checked = true
         Me.RBtnAnywhere.Location = New System.Drawing.Point(6, 19)
         Me.RBtnAnywhere.Name = "RBtnAnywhere"
         Me.RBtnAnywhere.Size = New System.Drawing.Size(112, 17)
         Me.RBtnAnywhere.TabIndex = 3
-        Me.RBtnAnywhere.TabStop = True
+        Me.RBtnAnywhere.TabStop = true
         Me.RBtnAnywhere.Text = "Anywhere on Field"
-        Me.RBtnAnywhere.UseVisualStyleBackColor = False
+        Me.RBtnAnywhere.UseVisualStyleBackColor = false
         '
         'BtnFind
         '
         Me.BtnFind.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.BtnFind.AutoSize = True
+        Me.BtnFind.AutoSize = true
         Me.TableLayoutPanel1.SetColumnSpan(Me.BtnFind, 2)
-        Me.BtnFind.Location = New System.Drawing.Point(58, 215)
+        Me.BtnFind.Location = New System.Drawing.Point(67, 267)
         Me.BtnFind.Name = "BtnFind"
-        Me.BtnFind.Size = New System.Drawing.Size(55, 23)
+        Me.BtnFind.Size = New System.Drawing.Size(37, 23)
         Me.BtnFind.TabIndex = 4
         Me.BtnFind.Text = "Find"
-        Me.BtnFind.UseVisualStyleBackColor = True
+        Me.BtnFind.UseVisualStyleBackColor = true
         '
         'BtnCancel
         '
         Me.BtnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.BtnCancel.AutoSize = True
+        Me.BtnCancel.AutoSize = true
         Me.TableLayoutPanel1.SetColumnSpan(Me.BtnCancel, 3)
         Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnCancel.Location = New System.Drawing.Point(220, 215)
+        Me.BtnCancel.Location = New System.Drawing.Point(220, 267)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(61, 23)
         Me.BtnCancel.TabIndex = 5
         Me.BtnCancel.Text = "Cancel"
-        Me.BtnCancel.UseVisualStyleBackColor = True
+        Me.BtnCancel.UseVisualStyleBackColor = true
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.AutoSize = True
+        Me.TableLayoutPanel1.AutoSize = true
         Me.TableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.ColumnCount = 5
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.CGroupBox1, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor4, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblTo, 2, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor3, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor2, 0, 1)
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120!))
+        Me.TableLayoutPanel1.Controls.Add(Me.txtEndValue, 4, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtBegValue, 1, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblTo1, 2, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.lblLookFor1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtTextToSearch, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.cboTextToSearch, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkChecked, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.dtpEndDate, 4, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.dtpBegDate, 1, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.BtnCancel, 2, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.BtnFind, 0, 6)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(9, 12)
+        Me.TableLayoutPanel1.Controls.Add(Me.CGroupBox1, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkChecked, 3, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.BtnCancel, 2, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkIgnoreCase, 3, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblIgnoreCase, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.BtnFind, 0, 8)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(11, 29)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 7
+        Me.TableLayoutPanel1.RowCount = 9
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -149,68 +154,64 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(331, 241)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(331, 293)
         Me.TableLayoutPanel1.TabIndex = 6
         '
-        'lblLookFor4
+        'txtEndValue
         '
-        Me.lblLookFor4.AutoSize = True
-        Me.lblLookFor4.BackColor = System.Drawing.Color.Transparent
-        Me.lblLookFor4.Location = New System.Drawing.Point(3, 79)
-        Me.lblLookFor4.Name = "lblLookFor4"
-        Me.lblLookFor4.Size = New System.Drawing.Size(49, 13)
-        Me.lblLookFor4.TabIndex = 7
-        Me.lblLookFor4.Text = "Look For"
+        Me.txtEndValue.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtEndValue.Location = New System.Drawing.Point(214, 82)
+        Me.txtEndValue.Name = "txtEndValue"
+        Me.txtEndValue.Size = New System.Drawing.Size(114, 20)
+        Me.txtEndValue.TabIndex = 14
         '
-        'lblTo
+        'txtBegValue
         '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel1.SetColumnSpan(Me.lblTo, 2)
-        Me.lblTo.Location = New System.Drawing.Point(174, 52)
-        Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(31, 13)
-        Me.lblTo.TabIndex = 6
-        Me.lblTo.Text = "  to   "
+        Me.txtBegValue.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtBegValue.Location = New System.Drawing.Point(58, 82)
+        Me.txtBegValue.Name = "txtBegValue"
+        Me.txtBegValue.Size = New System.Drawing.Size(110, 20)
+        Me.txtBegValue.TabIndex = 13
         '
-        'lblLookFor3
+        'lblTo1
         '
-        Me.lblLookFor3.AutoSize = True
-        Me.lblLookFor3.BackColor = System.Drawing.Color.Transparent
-        Me.lblLookFor3.Location = New System.Drawing.Point(3, 52)
-        Me.lblLookFor3.Name = "lblLookFor3"
-        Me.lblLookFor3.Size = New System.Drawing.Size(49, 13)
-        Me.lblLookFor3.TabIndex = 5
-        Me.lblLookFor3.Text = "Look For"
-        '
-        'lblLookFor2
-        '
-        Me.lblLookFor2.AutoSize = True
-        Me.lblLookFor2.BackColor = System.Drawing.Color.Transparent
-        Me.lblLookFor2.Location = New System.Drawing.Point(3, 26)
-        Me.lblLookFor2.Name = "lblLookFor2"
-        Me.lblLookFor2.Size = New System.Drawing.Size(49, 13)
-        Me.lblLookFor2.TabIndex = 2
-        Me.lblLookFor2.Text = "Look For"
+        Me.lblTo1.AutoSize = true
+        Me.lblTo1.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.SetColumnSpan(Me.lblTo1, 2)
+        Me.lblTo1.Location = New System.Drawing.Point(174, 52)
+        Me.lblTo1.Name = "lblTo1"
+        Me.TableLayoutPanel1.SetRowSpan(Me.lblTo1, 2)
+        Me.lblTo1.Size = New System.Drawing.Size(31, 13)
+        Me.lblTo1.TabIndex = 6
+        Me.lblTo1.Text = "  to   "
         '
         'cboTextToSearch
         '
         Me.cboTextToSearch.BackColor = System.Drawing.Color.White
-        Me.cboTextToSearch.ChangingSearchValueOnly = False
+        Me.cboTextToSearch.BegFindValue = Nothing
+        Me.cboTextToSearch.ChangingSearchValueOnly = false
         Me.TableLayoutPanel1.SetColumnSpan(Me.cboTextToSearch, 4)
         Me.cboTextToSearch.CurrentSearchTerm = ""
         Me.cboTextToSearch.DefaultValue = Nothing
         Me.cboTextToSearch.DisplayMember = "Name"
         Me.cboTextToSearch.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cboTextToSearch.EditingMode = True
+        Me.cboTextToSearch.EditingMode = true
+        Me.cboTextToSearch.EndFindValue = Nothing
+        Me.cboTextToSearch.FieldDescription = Nothing
+        Me.cboTextToSearch.FieldName = Nothing
         Me.cboTextToSearch.FilterRule = Nothing
-        Me.cboTextToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.cboTextToSearch.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboTextToSearch.FindEnabled = false
+        Me.cboTextToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboTextToSearch.ForeColor = System.Drawing.Color.Black
-        Me.cboTextToSearch.FormattingEnabled = True
-        Me.cboTextToSearch.HideWhenNotEditingOrAdding = False
-        Me.cboTextToSearch.IntegralHeight = False
+        Me.cboTextToSearch.FormattingEnabled = true
+        Me.cboTextToSearch.HideWhenNotEditingOrAdding = false
+        Me.cboTextToSearch.IntegralHeight = false
         Me.cboTextToSearch.LinkedLabel = Nothing
         Me.cboTextToSearch.Location = New System.Drawing.Point(56, 27)
         Me.cboTextToSearch.Margin = New System.Windows.Forms.Padding(1)
@@ -218,135 +219,219 @@ Partial Class CFindForm
         Me.cboTextToSearch.OldValue = 0
         Me.cboTextToSearch.OriginalDataSource = Nothing
         Me.cboTextToSearch.OriginalList = Nothing
-        Me.cboTextToSearch.OverrideDropDownStyleList = False
+        Me.cboTextToSearch.OverrideDropDownStyleList = false
         Me.cboTextToSearch.PreviousSearchTerm = Nothing
-        Me.cboTextToSearch.PreviousSelectedIndex = -1
         Me.cboTextToSearch.PropertySelector = Nothing
-        Me.cboTextToSearch.ReadOnlyCombo = False
+        Me.cboTextToSearch.ReadOnlyCombo = false
         Me.cboTextToSearch.Size = New System.Drawing.Size(274, 24)
         Me.cboTextToSearch.SuggestBoxHeight = 200
         Me.cboTextToSearch.SuggestListOrderRule = Nothing
         Me.cboTextToSearch.TabIndex = 3
         Me.cboTextToSearch.TextToSearch = Nothing
-        Me.cboTextToSearch.ValueIsMandatory = False
-        Me.cboTextToSearch.ValueIsNullable = False
-        Me.cboTextToSearch.ValueIsNumeric = False
+        Me.cboTextToSearch.ValueIsMandatory = false
+        Me.cboTextToSearch.ValueIsNullable = false
+        Me.cboTextToSearch.ValueIsNumeric = false
         Me.cboTextToSearch.ValueMember = "IdNo"
-        '
-        'chkChecked
-        '
-        Me.chkChecked.BackColor = System.Drawing.Color.White
-        Me.chkChecked.DisplayOnly = False
-        Me.chkChecked.EditingMode = True
-        Me.chkChecked.FindEnabled = False
-        Me.chkChecked.FlatAppearance.BorderSize = 0
-        Me.chkChecked.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.chkChecked.ForeColor = System.Drawing.Color.Black
-        Me.chkChecked.LinkedLabel = Nothing
-        Me.chkChecked.Location = New System.Drawing.Point(56, 80)
-        Me.chkChecked.Margin = New System.Windows.Forms.Padding(1)
-        Me.chkChecked.Name = "chkChecked"
-        Me.chkChecked.NoLabel = True
-        Me.chkChecked.OldValue = Nothing
-        Me.chkChecked.Size = New System.Drawing.Size(24, 24)
-        Me.chkChecked.TabIndex = 8
-        Me.chkChecked.Text = "CCheckBox1"
-        Me.chkChecked.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkChecked.UseVisualStyleBackColor = True
         '
         'dtpEndDate
         '
         Me.dtpEndDate.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
         Me.dtpEndDate.DefaultValue = Nothing
-        Me.dtpEndDate.DisplayOnly = False
+        Me.dtpEndDate.DisplayOnly = false
         Me.dtpEndDate.DtpDefaultValue = Nothing
-        Me.dtpEndDate.EditingMode = True
-        Me.dtpEndDate.EditsAllowed = False
+        Me.dtpEndDate.EditingMode = true
+        Me.dtpEndDate.EditsAllowed = false
         Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
         Me.dtpEndDate.LinkedLabel = Nothing
         Me.dtpEndDate.Location = New System.Drawing.Point(215, 53)
         Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpEndDate.Name = "dtpEndDate"
-        Me.dtpEndDate.ReadOnlyDp = False
+        Me.dtpEndDate.ReadOnlyDp = false
         Me.dtpEndDate.SecurityKey = Nothing
-        Me.dtpEndDate.ShowLongDate = False
-        Me.dtpEndDate.ShowTime = False
+        Me.dtpEndDate.ShowLongDate = false
+        Me.dtpEndDate.ShowTime = false
         Me.dtpEndDate.Size = New System.Drawing.Size(112, 25)
-        Me.dtpEndDate.TabIndex = 9
-        Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"), System.Globalization.Calendar)
+        Me.dtpEndDate.TabIndex = 10
+        Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"),System.Globalization.Calendar)
         Me.dtpEndDate.Value = Nothing
-        Me.dtpEndDate.ValueIsMandatory = False
-        Me.dtpEndDate.ValueIsNullable = False
+        Me.dtpEndDate.ValueIsMandatory = false
+        Me.dtpEndDate.ValueIsNullable = false
         '
         'dtpBegDate
         '
         Me.dtpBegDate.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.dtpBegDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
         Me.dtpBegDate.DefaultValue = Nothing
-        Me.dtpBegDate.DisplayOnly = False
+        Me.dtpBegDate.DisplayOnly = false
         Me.dtpBegDate.DtpDefaultValue = Nothing
-        Me.dtpBegDate.EditingMode = True
-        Me.dtpBegDate.EditsAllowed = False
+        Me.dtpBegDate.EditingMode = true
+        Me.dtpBegDate.EditsAllowed = false
         Me.dtpBegDate.ForeColor = System.Drawing.Color.Black
         Me.dtpBegDate.LinkedLabel = Nothing
         Me.dtpBegDate.Location = New System.Drawing.Point(57, 53)
         Me.dtpBegDate.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpBegDate.Name = "dtpBegDate"
-        Me.dtpBegDate.ReadOnlyDp = False
+        Me.dtpBegDate.ReadOnlyDp = false
         Me.dtpBegDate.SecurityKey = Nothing
-        Me.dtpBegDate.ShowLongDate = False
-        Me.dtpBegDate.ShowTime = False
+        Me.dtpBegDate.ShowLongDate = false
+        Me.dtpBegDate.ShowTime = false
         Me.dtpBegDate.Size = New System.Drawing.Size(112, 25)
-        Me.dtpBegDate.TabIndex = 10
-        Me.dtpBegDate.TargetCalendar = CType(resources.GetObject("dtpBegDate.TargetCalendar"), System.Globalization.Calendar)
+        Me.dtpBegDate.TabIndex = 9
+        Me.dtpBegDate.TargetCalendar = CType(resources.GetObject("dtpBegDate.TargetCalendar"),System.Globalization.Calendar)
         Me.dtpBegDate.Value = Nothing
-        Me.dtpBegDate.ValueIsMandatory = False
-        Me.dtpBegDate.ValueIsNullable = False
+        Me.dtpBegDate.ValueIsMandatory = false
+        Me.dtpBegDate.ValueIsNullable = false
+        '
+        'CGroupBox1
+        '
+        Me.CGroupBox1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.CGroupBox1.AutoSize = true
+        Me.CGroupBox1.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.SetColumnSpan(Me.CGroupBox1, 5)
+        Me.CGroupBox1.Controls.Add(Me.RBtnStart)
+        Me.CGroupBox1.Controls.Add(Me.RBtnAnywhere)
+        Me.CGroupBox1.Controls.Add(Me.RBtnExactMatch)
+        Me.CGroupBox1.DisplayOnly = true
+        Me.CGroupBox1.Location = New System.Drawing.Point(103, 134)
+        Me.CGroupBox1.Name = "CGroupBox1"
+        Me.CGroupBox1.Size = New System.Drawing.Size(124, 101)
+        Me.CGroupBox1.TabIndex = 7
+        Me.CGroupBox1.TabStop = false
         '
         'RBtnExactMatch
         '
-        Me.RBtnExactMatch.AutoSize = True
+        Me.RBtnExactMatch.AutoSize = true
         Me.RBtnExactMatch.BackColor = System.Drawing.Color.Transparent
         Me.RBtnExactMatch.Location = New System.Drawing.Point(5, 65)
         Me.RBtnExactMatch.Name = "RBtnExactMatch"
         Me.RBtnExactMatch.Size = New System.Drawing.Size(85, 17)
         Me.RBtnExactMatch.TabIndex = 11
         Me.RBtnExactMatch.Text = "Exact Match"
-        Me.RBtnExactMatch.UseVisualStyleBackColor = False
+        Me.RBtnExactMatch.UseVisualStyleBackColor = false
         '
-        'CGroupBox1
+        'chkChecked
         '
-        Me.CGroupBox1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.CGroupBox1.AutoSize = True
-        Me.CGroupBox1.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel1.SetColumnSpan(Me.CGroupBox1, 5)
-        Me.CGroupBox1.Controls.Add(Me.RBtnStart)
-        Me.CGroupBox1.Controls.Add(Me.RBtnAnywhere)
-        Me.CGroupBox1.Controls.Add(Me.RBtnExactMatch)
-        Me.CGroupBox1.DisplayOnly = True
-        Me.CGroupBox1.Location = New System.Drawing.Point(103, 108)
-        Me.CGroupBox1.Name = "CGroupBox1"
-        Me.CGroupBox1.Size = New System.Drawing.Size(124, 101)
-        Me.CGroupBox1.TabIndex = 7
-        Me.CGroupBox1.TabStop = False
+        Me.chkChecked.BackColor = System.Drawing.Color.White
+        Me.chkChecked.BegFindValue = Nothing
+        Me.TableLayoutPanel1.SetColumnSpan(Me.chkChecked, 2)
+        Me.chkChecked.DisplayOnly = false
+        Me.chkChecked.EditingMode = true
+        Me.chkChecked.EndFindValue = Nothing
+        Me.chkChecked.FieldDescription = Nothing
+        Me.chkChecked.FieldName = Nothing
+        Me.chkChecked.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkChecked.FindEnabled = false
+        Me.chkChecked.FlatAppearance.BorderSize = 0
+        Me.chkChecked.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.chkChecked.ForeColor = System.Drawing.Color.Black
+        Me.chkChecked.IFindableControl_FindEnabled = false
+        Me.chkChecked.LinkedLabel = Nothing
+        Me.chkChecked.Location = New System.Drawing.Point(192, 106)
+        Me.chkChecked.Margin = New System.Windows.Forms.Padding(1)
+        Me.chkChecked.Name = "chkChecked"
+        Me.chkChecked.NoLabel = true
+        Me.chkChecked.OldValue = Nothing
+        Me.chkChecked.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkChecked.Size = New System.Drawing.Size(18, 24)
+        Me.chkChecked.TabIndex = 8
+        Me.chkChecked.Text = "CCheckBox1"
+        Me.chkChecked.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkChecked.UseVisualStyleBackColor = true
+        '
+        'CLabel1
+        '
+        Me.CLabel1.AutoSize = true
+        Me.CLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
+        Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel1.Location = New System.Drawing.Point(10, 6)
+        Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel1.Name = "CLabel1"
+        Me.CLabel1.Size = New System.Drawing.Size(111, 17)
+        Me.CLabel1.TabIndex = 7
+        Me.CLabel1.Text = "Field to Search :"
+        Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtFieldToSearch
+        '
+        Me.txtFieldToSearch.AutoSize = true
+        Me.txtFieldToSearch.BackColor = System.Drawing.Color.Transparent
+        Me.txtFieldToSearch.DisplayOnly = true
+        Me.txtFieldToSearch.EditingMode = false
+        Me.txtFieldToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtFieldToSearch.ForeColor = System.Drawing.Color.Black
+        Me.txtFieldToSearch.Location = New System.Drawing.Point(124, 6)
+        Me.txtFieldToSearch.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtFieldToSearch.Name = "txtFieldToSearch"
+        Me.txtFieldToSearch.Size = New System.Drawing.Size(103, 17)
+        Me.txtFieldToSearch.TabIndex = 8
+        Me.txtFieldToSearch.Text = "Field to Search"
+        Me.txtFieldToSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'chkIgnoreCase
+        '
+        Me.chkIgnoreCase.BackColor = System.Drawing.Color.White
+        Me.chkIgnoreCase.BegFindValue = Nothing
+        Me.chkIgnoreCase.Checked = true
+        Me.chkIgnoreCase.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.TableLayoutPanel1.SetColumnSpan(Me.chkIgnoreCase, 2)
+        Me.chkIgnoreCase.DisplayOnly = false
+        Me.chkIgnoreCase.EditingMode = true
+        Me.chkIgnoreCase.EndFindValue = Nothing
+        Me.chkIgnoreCase.FieldDescription = Nothing
+        Me.chkIgnoreCase.FieldName = Nothing
+        Me.chkIgnoreCase.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkIgnoreCase.FindEnabled = false
+        Me.chkIgnoreCase.FlatAppearance.BorderSize = 0
+        Me.chkIgnoreCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.chkIgnoreCase.ForeColor = System.Drawing.Color.Black
+        Me.chkIgnoreCase.IFindableControl_FindEnabled = false
+        Me.chkIgnoreCase.LinkedLabel = Nothing
+        Me.chkIgnoreCase.Location = New System.Drawing.Point(192, 239)
+        Me.chkIgnoreCase.Margin = New System.Windows.Forms.Padding(1)
+        Me.chkIgnoreCase.Name = "chkIgnoreCase"
+        Me.chkIgnoreCase.NoLabel = true
+        Me.chkIgnoreCase.OldValue = Nothing
+        Me.chkIgnoreCase.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkIgnoreCase.Size = New System.Drawing.Size(18, 24)
+        Me.chkIgnoreCase.TabIndex = 15
+        Me.chkIgnoreCase.Text = "CCheckBox1"
+        Me.chkIgnoreCase.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkIgnoreCase.UseVisualStyleBackColor = true
+        Me.chkIgnoreCase.Visible = false
+        '
+        'lblIgnoreCase
+        '
+        Me.lblIgnoreCase.AutoSize = true
+        Me.lblIgnoreCase.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.SetColumnSpan(Me.lblIgnoreCase, 2)
+        Me.lblIgnoreCase.Location = New System.Drawing.Point(3, 238)
+        Me.lblIgnoreCase.Name = "lblIgnoreCase"
+        Me.lblIgnoreCase.Size = New System.Drawing.Size(70, 13)
+        Me.lblIgnoreCase.TabIndex = 16
+        Me.lblIgnoreCase.Text = "Ignore Case?"
+        Me.lblIgnoreCase.Visible = false
         '
         'CFindForm
         '
         Me.AcceptButton = Me.BtnFind
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(354, 266)
+        Me.ClientSize = New System.Drawing.Size(354, 334)
+        Me.Controls.Add(Me.txtFieldToSearch)
+        Me.Controls.Add(Me.CLabel1)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "CFindForm"
         Me.Text = "Find Field Form"
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.TableLayoutPanel1.PerformLayout()
-        Me.CGroupBox1.ResumeLayout(False)
-        Me.CGroupBox1.PerformLayout()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.TableLayoutPanel1.ResumeLayout(false)
+        Me.TableLayoutPanel1.PerformLayout
+        Me.CGroupBox1.ResumeLayout(false)
+        Me.CGroupBox1.PerformLayout
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
     Friend WithEvents TxtTextToSearch As TextBox
     Friend WithEvents lblLookFor1 As Label
@@ -355,14 +440,17 @@ Partial Class CFindForm
     Friend WithEvents BtnFind As Button
     Friend WithEvents BtnCancel As Button
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents lblLookFor2 As Label
     Public WithEvents cboTextToSearch As CaComboBox
-    Friend WithEvents lblLookFor3 As Label
-    Friend WithEvents lblTo As Label
-    Friend WithEvents lblLookFor4 As Label
+    Friend WithEvents lblTo1 As Label
     Friend WithEvents chkChecked As CCheckBox
     Friend WithEvents dtpEndDate As CCustomDateTimePicker
     Friend WithEvents dtpBegDate As CCustomDateTimePicker
     Friend WithEvents RBtnExactMatch As RadioButton
     Friend WithEvents CGroupBox1 As CGroupBox
+    Friend WithEvents txtEndValue As TextBox
+    Friend WithEvents txtBegValue As TextBox
+    Friend WithEvents CLabel1 As CLabel
+    Friend WithEvents txtFieldToSearch As CLabel
+    Friend WithEvents chkIgnoreCase As CCheckBox
+    Friend WithEvents lblIgnoreCase As Label
 End Class

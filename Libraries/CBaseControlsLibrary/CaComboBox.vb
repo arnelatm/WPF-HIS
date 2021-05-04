@@ -729,10 +729,17 @@ Public Class CaComboBox
 
     Private Sub MenuItemFind_Click()
         Dim myForm = FindForm()
-        Dim searchForm
-        searchForm = New CFindFormNew(Me)
-        searchForm.ShowDialog()
+        Dim searchForm As CFindForm
+        searchForm = New CFindForm(Me)
         FieldName = Name.Substring(3)
+        If LinkedLabel IsNot Nothing AndAlso LinkedLabel.Text <> "" Then
+            searchForm.SetFieldDescription(LinkedLabel.Text)
+        Else
+            searchForm.SetFieldDescription(FieldName)
+        End If
+        Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
+        FindDataType = GetObjectDataType(x)
+        searchForm.ShowDialog()
         CallByName(myForm, "FindFieldNew", CallType.Method, Me)
     End Sub
 
@@ -844,6 +851,8 @@ Public Class CaComboBox
     Public Property BorderColor As Color
 
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
+
+    Public Property FieldDescription As String Implements IFindableControl.FieldDescription
 
     Public Sub RevertValue()
         ' revert to previous value

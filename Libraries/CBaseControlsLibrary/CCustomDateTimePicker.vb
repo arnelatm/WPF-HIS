@@ -59,6 +59,7 @@ Public Class CCustomDateTimePicker
         InitializeComponent()
         _initialized = True
         SetupCalendarDisplay()
+        txtDate.DateTimePickerParent = Me
         txtDate.Width = _dateWidth
         dtp.Width = _buttonWidth
         txtTime.Width = _timeWidth

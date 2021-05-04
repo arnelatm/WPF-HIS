@@ -72,30 +72,30 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated = New CCustomDateTimePicker()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvNotes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DataGridViewCheckBoxColumn3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.DataGridViewCheckBoxColumn2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.dgvJournalIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.DataGridViewSalesDeposits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvDepositTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvDepositAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvVatAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvActualBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvRate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvComputedBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvComputedVat = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvBankChargeDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvVatDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvDepositAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvVatAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvActualBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvRate = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvComputedBankCharge = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvComputedVat = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvBankChargeDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvVatDifference = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DgvSalesJournalIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsSalesDeposits = New System.Windows.Forms.BindingSource(Me.components)
@@ -929,29 +929,29 @@ End Sub
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents btnHideJournalEntries As CButton
         Public WithEvents DataGridViewSalesDeposits As CDataGridView
-        Friend WithEvents dgvSequence As CdgvColumnText
+        Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvDebit As CdgvColumnMoney
-        Friend WithEvents dgvCredit As CdgvColumnMoney
+        Friend WithEvents dgvDebit As CdgvMoneyColumn
+        Friend WithEvents dgvCredit As CdgvMoneyColumn
         Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvNotes As DataGridViewTextBoxColumn
-        Friend WithEvents dgvIdNo As CdgvColumnText
+        Friend WithEvents dgvIdNo As CDgvTextColumn
         Friend WithEvents DataGridViewCheckBoxColumn3 As DataGridViewCheckBoxColumn
         Friend WithEvents DataGridViewCheckBoxColumn2 As DataGridViewCheckBoxColumn
         Friend WithEvents dgvJournalIdNo As DataGridViewTextBoxColumn
         Friend WithEvents ItemVatAmount As DataGridViewTextBoxColumn
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
-        Friend WithEvents dgvSequenceSc As CdgvColumnText
+        Friend WithEvents dgvSequenceSc As CDgvTextColumn
         Friend WithEvents dgvDepositTypeIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvSaleAmount As CdgvColumnMoney
-        Friend WithEvents dgvDepositAmount As CdgvColumnMoney
-        Friend WithEvents dgvVatAmount As CdgvColumnMoney
-        Friend WithEvents dgvActualBankCharge As CdgvColumnMoney
-        Friend WithEvents dgvRate As CdgvColumnMoney
-        Friend WithEvents dgvComputedBankCharge As CdgvColumnMoney
-        Friend WithEvents dgvComputedVat As CdgvColumnMoney
-        Friend WithEvents dgvBankChargeDifference As CdgvColumnMoney
-        Friend WithEvents dgvVatDifference As CdgvColumnMoney
+        Friend WithEvents dgvSaleAmount As CdgvMoneyColumn
+        Friend WithEvents dgvDepositAmount As CdgvMoneyColumn
+        Friend WithEvents dgvVatAmount As CdgvMoneyColumn
+        Friend WithEvents dgvActualBankCharge As CdgvMoneyColumn
+        Friend WithEvents dgvRate As CdgvMoneyColumn
+        Friend WithEvents dgvComputedBankCharge As CdgvMoneyColumn
+        Friend WithEvents dgvComputedVat As CdgvMoneyColumn
+        Friend WithEvents dgvBankChargeDifference As CdgvMoneyColumn
+        Friend WithEvents dgvVatDifference As CdgvMoneyColumn
         Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
         Friend WithEvents DgvSalesJournalIdNo As DataGridViewTextBoxColumn
     End Class

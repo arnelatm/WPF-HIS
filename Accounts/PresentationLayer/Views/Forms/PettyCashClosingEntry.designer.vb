@@ -37,14 +37,14 @@ Namespace PresentationLayer.Views.Forms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosingEntry))
         Me.DataGridViewPcJournals = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvPcClosed = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvReference = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvPayeeType = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvPayeeName = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvPayeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
+        Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvReference = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvPayeeType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvPayeeName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvPayeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.bsPcJournals = New System.Windows.Forms.BindingSource(Me.components)
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -797,12 +797,12 @@ Namespace PresentationLayer.Views.Forms
 End Sub
         Friend WithEvents bsPcJournals As Windows.Forms.BindingSource
         Friend WithEvents dgvIdNocadOi As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvJournalItemIdNo As CdgvColumnText
+        Friend WithEvents dgvJournalItemIdNo As CDgvTextColumn
         Friend WithEvents dgvcadIdNo As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents CkdIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents JournalItemIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn1 As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvSequenceCad As CdgvColumnText
+        Friend WithEvents dgvSequenceCad As CDgvTextColumn
         Friend WithEvents DataGridViewTextBoxColumn4 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn5 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
@@ -826,14 +826,14 @@ End Sub
         Friend WithEvents CButton1 As CButton
         Friend WithEvents btnSelectAll As CButton
         Friend WithEvents dgvPcClosed As DataGridViewCheckBoxColumn
-        Friend WithEvents dgvTransactionDate As CdgvColumnText
-        Friend WithEvents dgvIdNo As CdgvColumnText
-        Friend WithEvents dgvReference As CdgvColumnText
-        Friend WithEvents dgvPayeeType As CdgvColumnText
-        Friend WithEvents dgvPayeeName As CdgvColumnText
-        Friend WithEvents dgvAmount As CdgvColumnMoney
-        Friend WithEvents dgvNotes As CdgvColumnText
-        Friend WithEvents dgvPayeeNameAra As CdgvColumnText
+        Friend WithEvents dgvTransactionDate As CDgvTextColumn
+        Friend WithEvents dgvIdNo As CDgvTextColumn
+        Friend WithEvents dgvReference As CDgvTextColumn
+        Friend WithEvents dgvPayeeType As CDgvTextColumn
+        Friend WithEvents dgvPayeeName As CDgvTextColumn
+        Friend WithEvents dgvAmount As CdgvMoneyColumn
+        Friend WithEvents dgvNotes As CDgvTextColumn
+        Friend WithEvents dgvPayeeNameAra As CDgvTextColumn
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents cboPayType As CaComboBox
         Friend WithEvents CLabel4 As CLabel

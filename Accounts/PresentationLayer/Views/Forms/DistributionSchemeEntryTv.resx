@@ -145,7 +145,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFAAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFQAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -521,7 +521,7 @@
     <value>dtpValidityStartDate</value>
   </data>
   <data name="&gt;&gt;dtpValidityStartDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dtpValidityStartDate.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -558,7 +558,7 @@
     <value>dtpValidityEndDate</value>
   </data>
   <data name="&gt;&gt;dtpValidityEndDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dtpValidityEndDate.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -683,6 +683,33 @@
   <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="dgvSequence.HeaderText" xml:space="preserve">
+    <value>Sequence</value>
+  </data>
+  <data name="dgvRevCostCenterIdNo.HeaderText" xml:space="preserve">
+    <value>RevCostCenterIdNo</value>
+  </data>
+  <data name="dgvPercentage.HeaderText" xml:space="preserve">
+    <value>Percentage</value>
+  </data>
+  <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>IdNo</value>
+  </data>
+  <data name="IdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dgvDistributionSchemeIdNo.HeaderText" xml:space="preserve">
+    <value>DistributionSchemeIdNo</value>
+  </data>
+  <data name="dgvDistributionSchemeIdNo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="RevCostCenterNameDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>RevCostCenterName</value>
+  </data>
+  <data name="RevCostCenterNameDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <metadata name="bsDistributionSchemeItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>828, 17</value>
   </metadata>
@@ -709,63 +736,6 @@
   </data>
   <data name="&gt;&gt;DataGridViewDistributionSchemeItems.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <metadata name="dgvIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvIdNo.HeaderText" xml:space="preserve">
-    <value>IdNo</value>
-  </data>
-  <data name="dgvIdNo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="dgvIdNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="dgvIdNo.Width" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <metadata name="dgvDistributionSchemeIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvDistributionSchemeIdNo.HeaderText" xml:space="preserve">
-    <value>Profit Center</value>
-  </data>
-  <data name="dgvDistributionSchemeIdNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="dgvSequence.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvSequence.HeaderText" xml:space="preserve">
-    <value>Seq</value>
-  </data>
-  <data name="dgvSequence.MinimumWidth" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="dgvSequence.Width" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <metadata name="dgvRevCostCenterIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvRevCostCenterIdNo.HeaderText" xml:space="preserve">
-    <value>Profit Center</value>
-  </data>
-  <data name="dgvRevCostCenterIdNo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>400</value>
-  </data>
-  <metadata name="dgvPercentage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvPercentage.HeaderText" xml:space="preserve">
-    <value>Percentage</value>
-  </data>
-  <data name="dgvPercentage.MinimumWidth" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="dgvPercentage.Width" type="System.Int32, mscorlib">
-    <value>75</value>
   </data>
   <data name="txtTotalPercentage.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -884,34 +854,40 @@
   <data name="&gt;&gt;bsDistributionSchemeItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dgvIdNo.Name" xml:space="preserve">
-    <value>dgvIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvDistributionSchemeIdNo.Name" xml:space="preserve">
-    <value>dgvDistributionSchemeIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvDistributionSchemeIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvRevCostCenterIdNo.Name" xml:space="preserve">
     <value>dgvRevCostCenterIdNo</value>
   </data>
   <data name="&gt;&gt;dgvRevCostCenterIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvCaComboboxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvPercentage.Name" xml:space="preserve">
     <value>dgvPercentage</value>
   </data>
   <data name="&gt;&gt;dgvPercentage.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnDecimal, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>IdNoDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvDistributionSchemeIdNo.Name" xml:space="preserve">
+    <value>dgvDistributionSchemeIdNo</value>
+  </data>
+  <data name="&gt;&gt;dgvDistributionSchemeIdNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RevCostCenterNameDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>RevCostCenterNameDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;RevCostCenterNameDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

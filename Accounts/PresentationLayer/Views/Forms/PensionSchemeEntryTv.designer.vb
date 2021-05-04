@@ -53,12 +53,12 @@ Namespace PresentationLayer.Views.Forms
         Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.DataGridViewPensionRates = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvLowRange = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvHighRange = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvEmployeeShare = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvEmployerShare = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvMaxAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvLowRange = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvHighRange = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvEmployeeShare = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvEmployerShare = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvMaxAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.txtPensionSchemeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -587,12 +587,12 @@ End Sub
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
         Friend WithEvents DataGridViewPensionRates As CDataGridView
-        Friend WithEvents dgvSequence As CdgvColumnText
-        Friend WithEvents dgvLowRange As CdgvColumnMoney
-        Friend WithEvents dgvHighRange As CdgvColumnMoney
-        Friend WithEvents dgvEmployeeShare As CdgvColumnMoney
-        Friend WithEvents dgvEmployerShare As CdgvColumnMoney
-        Friend WithEvents dgvMaxAmount As CdgvColumnMoney
+        Friend WithEvents dgvSequence As CDgvTextColumn
+        Friend WithEvents dgvLowRange As CdgvMoneyColumn
+        Friend WithEvents dgvHighRange As CdgvMoneyColumn
+        Friend WithEvents dgvEmployeeShare As CdgvMoneyColumn
+        Friend WithEvents dgvEmployerShare As CdgvMoneyColumn
+        Friend WithEvents dgvMaxAmount As CdgvMoneyColumn
         Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class

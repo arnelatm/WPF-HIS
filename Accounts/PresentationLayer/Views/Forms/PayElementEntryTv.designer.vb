@@ -91,7 +91,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.DataGridViewPayElementAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -101,9 +101,9 @@ Namespace PresentationLayer.Views.Forms
             Me.bsPayElementAccounts = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpSummaryDetail = New System.Windows.Forms.TabPage()
             Me.DataGridViewPayElementItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequenceSummary = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvSequenceSummary = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvFactorValue = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvFactorValue = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvFactorType = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
             Me.ParentIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1258,7 +1258,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents bsPayElementItems As BindingSource
         Friend WithEvents DataGridViewPayElementAccounts As CDataGridView
         Friend WithEvents bsPayElementAccounts As BindingSource
-        Friend WithEvents dgvSequence As CdgvColumnText
+        Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvPayGroupIdNo As CaDgvComboBoxColumn
         Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
@@ -1267,9 +1267,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents PayGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents cboPayElementKind As CaComboBox
         Friend WithEvents lblPayElementKind As CLabel
-        Friend WithEvents dgvSequenceSummary As CdgvColumnText
+        Friend WithEvents dgvSequenceSummary As CDgvTextColumn
         Friend WithEvents dgvPayElementIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvFactorValue As CdgvColumnText
+        Friend WithEvents dgvFactorValue As CDgvTextColumn
         Friend WithEvents dgvFactorType As CaDgvComboBoxColumn
         Friend WithEvents ParentIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

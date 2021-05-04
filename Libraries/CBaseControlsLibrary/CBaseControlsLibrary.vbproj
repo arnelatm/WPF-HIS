@@ -135,25 +135,10 @@
     <Compile Include="CDataGvBs.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDgvCaComboboxCell.vb" />
-    <Compile Include="CDgvCaComboboxEditingControl.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CdgvCaComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CDGVCellDecimal.vb" />
-    <Compile Include="CdgvColumnDecimal.vb" />
-    <Compile Include="CdgvEcbComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CdgvTestColumnComboBox.vb" />
-    <Compile Include="CdgvComboBoxOld.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CdgvComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="CDgvCheckboxCell.vb" />
+    <Compile Include="CDgvDecimalCell.vb" />
+    <Compile Include="CDgvCheckBoxColumn.vb" />
+    <Compile Include="CdgvDecimalColumn.vb" />
     <Compile Include="CaComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -172,13 +157,10 @@
     <Compile Include="CDateTimePicker.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="cdgvCaComboboxColumn.vb" />
-    <Compile Include="CDGVCellMoney.vb" />
-    <Compile Include="CDGVCellText.vb" />
-    <Compile Include="CdgvColumnComboBox.vb" />
-    <Compile Include="CdgvColumnMoney.vb" />
-    <Compile Include="CDGVColumnText.vb" />
-    <Compile Include="CdgvComboBoxCell.vb" />
+    <Compile Include="CDgvMoneyCell.vb" />
+    <Compile Include="CDgvTextCell.vb" />
+    <Compile Include="CdgvMoneyColumn.vb" />
+    <Compile Include="CDgvTextColumn.vb" />
     <Compile Include="CDtpGregorianDate.Designer.vb">
       <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
     </Compile>
@@ -191,10 +173,10 @@
     <Compile Include="CDTPHijriDate.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CFindFormNew.designer.vb">
-      <DependentUpon>CFindFormNew.vb</DependentUpon>
+    <Compile Include="CFindForm.designer.vb">
+      <DependentUpon>CFindForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="CFindFormNew.vb">
+    <Compile Include="CFindForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CFlowLayout.vb">
@@ -438,17 +420,14 @@
     <EmbeddedResource Include="CCustomDateTimePicker.resx">
       <DependentUpon>CCustomDateTimePicker.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CdgvComboBox.resx">
-      <DependentUpon>CdgvComboBox.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CDtpGregorianDate.resx">
       <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CDTPHijriDate.resx">
       <DependentUpon>CDTPHijriDate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CFindFormNew.resx">
-      <DependentUpon>CFindFormNew.vb</DependentUpon>
+    <EmbeddedResource Include="CFindForm.resx">
+      <DependentUpon>CFindForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CForm.ar-SA.resx">
       <DependentUpon>CForm.vb</DependentUpon>

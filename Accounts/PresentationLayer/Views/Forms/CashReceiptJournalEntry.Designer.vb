@@ -94,12 +94,12 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated = New CCustomDateTimePicker()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvNotesDescription = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
+            Me.dgvNotesDescription = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.CancelledDataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -112,15 +112,15 @@ Namespace PresentationLayer.Views.Forms
             Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.DataGridViewCsrOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequenceCsrOi = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnText()
-            Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-            Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+            Me.dgvSequenceCsrOi = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsCsrOiItems = New System.Windows.Forms.BindingSource(Me.components)
@@ -1320,25 +1320,25 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents bsCsrOiItems As Windows.Forms.BindingSource
         Friend WithEvents DataGridViewCsrOiItems As CDataGridView
         Friend WithEvents btnViewGL As CButton
-        Friend WithEvents dgvJournalIdNoJi As CdgvColumnText
+        Friend WithEvents dgvJournalIdNoJi As CDgvTextColumn
         Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents dgvSequenceCsrOi As CdgvColumnText
-        Friend WithEvents dgvInvoiceNo As CdgvColumnText
-        Friend WithEvents dgvTransactionDate As CdgvColumnText
-        Friend WithEvents dgvJournalCode As CdgvColumnText
-        Friend WithEvents dgvJournalIdNoAp As CdgvColumnText
-        Friend WithEvents dgvPreviousBalance As CdgvColumnMoney
-        Friend WithEvents dgvAmount As CdgvColumnMoney
-        Friend WithEvents dgvDiscountTaken As CdgvColumnMoney
-        Friend WithEvents dgvBalance As CdgvColumnMoney
+        Friend WithEvents dgvSequenceCsrOi As CDgvTextColumn
+        Friend WithEvents dgvInvoiceNo As CDgvTextColumn
+        Friend WithEvents dgvTransactionDate As CDgvTextColumn
+        Friend WithEvents dgvJournalCode As CDgvTextColumn
+        Friend WithEvents dgvJournalIdNoAp As CDgvTextColumn
+        Friend WithEvents dgvPreviousBalance As CdgvMoneyColumn
+        Friend WithEvents dgvAmount As CdgvMoneyColumn
+        Friend WithEvents dgvDiscountTaken As CdgvMoneyColumn
+        Friend WithEvents dgvBalance As CdgvMoneyColumn
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents dgvSequence As CdgvColumnText
+        Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvDebit As CdgvColumnMoney
-        Friend WithEvents dgvCredit As CdgvColumnMoney
+        Friend WithEvents dgvDebit As CdgvMoneyColumn
+        Friend WithEvents dgvCredit As CdgvMoneyColumn
         Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvNotesDescription As CdgvColumnText
+        Friend WithEvents dgvNotesDescription As CDgvTextColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CancelledDataGridViewCheckBoxColumn1 As DataGridViewCheckBoxColumn
         Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

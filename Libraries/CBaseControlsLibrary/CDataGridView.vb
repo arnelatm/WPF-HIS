@@ -198,6 +198,8 @@ Public Class CDataGridView
 
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
 
+    Public Property FieldDescription As String Implements IFindableControl.FieldDescription
+
     Public Sub AddInsertColumn()
         If Not DisplayOnly AndAlso Not Columns.Contains("dgvInsertColumn") Then
             With Columns
