@@ -42,6 +42,8 @@ Public Class CMaskedTextBox
     <Browsable(True)>
     Public Property MaximumValue As Decimal? = Nothing
 
+    Public Property DateTimePickerParent As Control = Nothing
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
@@ -302,18 +304,39 @@ Public Class CMaskedTextBox
         'End If
     End Sub
 
+    <Category("Custom Properties")>
+    <Description("Select the label to which this control is linked.")>
+    <Browsable(True)>
+    Public Property LinkedLabel As CLabel
+
     Private Sub MenuItemFind_Click()
-        Dim MyForm = FindForm()
-        Dim searchForm
-        If DateField Then
-            searchForm = New CFindFormNew(Me)
-            searchForm.ShowDialog()
+        Dim myForm = FindForm()
+        Dim searchForm As CFindForm
+        searchForm = New CFindForm(Me)
+        If DateTimePickerParent IsNot Nothing Then
+            Dim dateTimePicker As CCustomDateTimePicker
+            dateTimePicker = DateTimePickerParent
+            FieldName = dateTimePicker.Name.Substring(3)
+            FindDataType = IFindableControl.DataTypeEnum.DateTime
+            If dateTimePicker.LinkedLabel IsNot Nothing AndAlso dateTimePicker.LinkedLabel.Text <> "" Then
+                searchForm.SetFieldDescription(dateTimePicker.LinkedLabel.Text)
+            Else
+                searchForm.SetFieldDescription(FieldName)
+            End If
         Else
-            searchForm = New CFindFormNew(Me)
+            Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
+            FindDataType = GetObjectDataType(x)
+            FieldName = Name.Substring(3)
+            If LinkedLabel IsNot Nothing AndAlso LinkedLabel.Text <> "" Then
+                searchForm.SetFieldDescription(LinkedLabel.Text)
+            Else
+                searchForm.SetFieldDescription(FieldName)
+            End If
         End If
-        'FieldName = Name.Substring(3)
+
+        searchForm.ShowDialog()
         searchForm.Dispose()
-        CallByName(MyForm, "FindFieldNew", CallType.Method, Me)
+        CallByName(myForm, "FindFieldNew", CallType.Method, Me)
     End Sub
 
     'Public Function GetTextToSearch() As String
@@ -432,6 +455,8 @@ Public Class CMaskedTextBox
 
         End Set
     End Property
+
+    Public Property FieldDescription As String Implements IFindableControl.FieldDescription
 
 #End Region
 

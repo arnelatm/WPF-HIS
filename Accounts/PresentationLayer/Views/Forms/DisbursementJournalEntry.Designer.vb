@@ -52,21 +52,21 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblPayType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
+        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
+        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgvVatAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvVatAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvPayeeType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgvSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
+        Me.dgvSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
@@ -91,15 +91,15 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewDjOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvSequenceDjOi = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CDgvColumnText()
-        Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
-        Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney()
+        Me.dgvSequenceDjOi = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+        Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+        Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+        Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -241,6 +241,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayType.DisplayMember = "Name"
         Me.cboPayType.EditingMode = false
         Me.cboPayType.EndFindValue = Nothing
+        Me.cboPayType.FieldDescription = Nothing
         Me.cboPayType.FieldName = Nothing
         Me.cboPayType.FilterRule = Nothing
         Me.cboPayType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -322,6 +323,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.EditingMode = false
         Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewJournalItems.EndFindValue = Nothing
+        Me.DataGridViewJournalItems.FieldDescription = Nothing
         Me.DataGridViewJournalItems.FieldName = Nothing
         Me.DataGridViewJournalItems.FieldsDictionary = Nothing
         Me.DataGridViewJournalItems.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -349,6 +351,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSequence.DisplayOnly = true
         Me.dgvSequence.EditingMode = false
         Me.dgvSequence.EndFindValue = Nothing
+        Me.dgvSequence.FieldDescription = Nothing
         Me.dgvSequence.FieldName = Nothing
         Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvSequence.FindEnabled = false
@@ -379,6 +382,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvDebit
         '
+        Me.dgvDebit.BegFindValue = Nothing
         Me.dgvDebit.DataPropertyName = "Debit"
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
@@ -386,15 +390,22 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle4.Format = "###,##0.00"
         Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvDebit.EditingMode = false
+        Me.dgvDebit.EndFindValue = Nothing
+        Me.dgvDebit.FieldDescription = Nothing
+        Me.dgvDebit.FieldName = Nothing
+        Me.dgvDebit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvDebit.FindEnabled = false
         Me.dgvDebit.HeaderText = "Debit"
         Me.dgvDebit.MinimumWidth = 90
         Me.dgvDebit.Name = "dgvDebit"
         Me.dgvDebit.ReadOnly = true
         Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDebit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvDebit.Width = 90
         '
         'dgvCredit
         '
+        Me.dgvCredit.BegFindValue = Nothing
         Me.dgvCredit.DataPropertyName = "Credit"
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
@@ -402,11 +413,17 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle5.Format = "###,##0.00"
         Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle5
         Me.dgvCredit.EditingMode = false
+        Me.dgvCredit.EndFindValue = Nothing
+        Me.dgvCredit.FieldDescription = Nothing
+        Me.dgvCredit.FieldName = Nothing
+        Me.dgvCredit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvCredit.FindEnabled = false
         Me.dgvCredit.HeaderText = "Credit"
         Me.dgvCredit.MinimumWidth = 90
         Me.dgvCredit.Name = "dgvCredit"
         Me.dgvCredit.ReadOnly = true
         Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCredit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvCredit.Width = 90
         '
         'dgvRevCostCenterIdNo
@@ -434,6 +451,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle7
         Me.dgvNotes.EditingMode = false
         Me.dgvNotes.EndFindValue = Nothing
+        Me.dgvNotes.FieldDescription = Nothing
         Me.dgvNotes.FieldName = Nothing
         Me.dgvNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvNotes.FindEnabled = false
@@ -495,6 +513,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvVatAmount
         '
+        Me.dgvVatAmount.BegFindValue = Nothing
         Me.dgvVatAmount.DataPropertyName = "AccountIdNo"
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
@@ -502,9 +521,15 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle8.Format = "###,##0.00"
         Me.dgvVatAmount.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvVatAmount.EditingMode = false
+        Me.dgvVatAmount.EndFindValue = Nothing
+        Me.dgvVatAmount.FieldDescription = Nothing
+        Me.dgvVatAmount.FieldName = Nothing
+        Me.dgvVatAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvVatAmount.FindEnabled = false
         Me.dgvVatAmount.HeaderText = "Vat Amount"
         Me.dgvVatAmount.Name = "dgvVatAmount"
         Me.dgvVatAmount.ReadOnly = true
+        Me.dgvVatAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvVatAmount.Visible = false
         '
         'dgvPayeeType
@@ -524,6 +549,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSpecialAccount.DefaultCellStyle = DataGridViewCellStyle9
         Me.dgvSpecialAccount.EditingMode = false
         Me.dgvSpecialAccount.EndFindValue = Nothing
+        Me.dgvSpecialAccount.FieldDescription = Nothing
         Me.dgvSpecialAccount.FieldName = Nothing
         Me.dgvSpecialAccount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvSpecialAccount.FindEnabled = false
@@ -594,6 +620,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.DisplayMember = "Name"
         Me.cboAccountIdNo.EditingMode = false
         Me.cboAccountIdNo.EndFindValue = Nothing
+        Me.cboAccountIdNo.FieldDescription = Nothing
         Me.cboAccountIdNo.FieldName = Nothing
         Me.cboAccountIdNo.FilterRule = Nothing
         Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -648,6 +675,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtJournalCode.DisplayOnly = true
         Me.txtJournalCode.EditingMode = true
         Me.txtJournalCode.EndFindValue = Nothing
+        Me.txtJournalCode.FieldDescription = Nothing
         Me.txtJournalCode.FieldName = Nothing
         Me.txtJournalCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtJournalCode.FindEnabled = false
@@ -694,6 +722,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDiscountAccountIdNo.DisplayMember = "Name"
         Me.cboDiscountAccountIdNo.EditingMode = false
         Me.cboDiscountAccountIdNo.EndFindValue = Nothing
+        Me.cboDiscountAccountIdNo.FieldDescription = Nothing
         Me.cboDiscountAccountIdNo.FieldName = Nothing
         Me.cboDiscountAccountIdNo.FilterRule = Nothing
         Me.cboDiscountAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -751,6 +780,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtORNumber.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtORNumber.EditingMode = false
         Me.txtORNumber.EndFindValue = Nothing
+        Me.txtORNumber.FieldDescription = Nothing
         Me.txtORNumber.FieldName = Nothing
         Me.txtORNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtORNumber.FindEnabled = true
@@ -779,6 +809,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtAmount.DataBoundControl = true
         Me.txtAmount.EditingMode = false
         Me.txtAmount.EndFindValue = Nothing
+        Me.txtAmount.FieldDescription = Nothing
         Me.txtAmount.FieldName = Nothing
         Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtAmount.FindEnabled = true
@@ -839,6 +870,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNotes.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtNotes.EditingMode = false
         Me.txtNotes.EndFindValue = Nothing
+        Me.txtNotes.FieldDescription = Nothing
         Me.txtNotes.FieldName = Nothing
         Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtNotes.FindEnabled = true
@@ -870,6 +902,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtVatAmount.DisplayOnly = true
         Me.txtVatAmount.EditingMode = true
         Me.txtVatAmount.EndFindValue = Nothing
+        Me.txtVatAmount.FieldDescription = Nothing
         Me.txtVatAmount.FieldName = Nothing
         Me.txtVatAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtVatAmount.FindEnabled = true
@@ -919,6 +952,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtApplied.DisplayOnly = true
         Me.txtApplied.EditingMode = true
         Me.txtApplied.EndFindValue = Nothing
+        Me.txtApplied.FieldDescription = Nothing
         Me.txtApplied.FieldName = Nothing
         Me.txtApplied.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtApplied.FindEnabled = true
@@ -951,6 +985,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtUnapplied.DisplayOnly = true
         Me.txtUnapplied.EditingMode = true
         Me.txtUnapplied.EndFindValue = Nothing
+        Me.txtUnapplied.FieldDescription = Nothing
         Me.txtUnapplied.FieldName = Nothing
         Me.txtUnapplied.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtUnapplied.FindEnabled = true
@@ -1000,6 +1035,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDiscountTaken.DisplayOnly = true
         Me.txtDiscountTaken.EditingMode = true
         Me.txtDiscountTaken.EndFindValue = Nothing
+        Me.txtDiscountTaken.FieldDescription = Nothing
         Me.txtDiscountTaken.FieldName = Nothing
         Me.txtDiscountTaken.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtDiscountTaken.FindEnabled = true
@@ -1064,6 +1100,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDjOiItems.EditingMode = false
         Me.DataGridViewDjOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewDjOiItems.EndFindValue = Nothing
+        Me.DataGridViewDjOiItems.FieldDescription = Nothing
         Me.DataGridViewDjOiItems.FieldName = Nothing
         Me.DataGridViewDjOiItems.FieldsDictionary = Nothing
         Me.DataGridViewDjOiItems.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -1092,6 +1129,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSequenceDjOi.DisplayOnly = true
         Me.dgvSequenceDjOi.EditingMode = false
         Me.dgvSequenceDjOi.EndFindValue = Nothing
+        Me.dgvSequenceDjOi.FieldDescription = Nothing
         Me.dgvSequenceDjOi.FieldName = Nothing
         Me.dgvSequenceDjOi.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvSequenceDjOi.FindEnabled = false
@@ -1110,6 +1148,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvInvoiceNo.DefaultCellStyle = DataGridViewCellStyle13
         Me.dgvInvoiceNo.EditingMode = false
         Me.dgvInvoiceNo.EndFindValue = Nothing
+        Me.dgvInvoiceNo.FieldDescription = Nothing
         Me.dgvInvoiceNo.FieldName = Nothing
         Me.dgvInvoiceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvInvoiceNo.FindEnabled = false
@@ -1128,6 +1167,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DgvTransactionDate.DefaultCellStyle = DataGridViewCellStyle14
         Me.DgvTransactionDate.EditingMode = false
         Me.DgvTransactionDate.EndFindValue = Nothing
+        Me.DgvTransactionDate.FieldDescription = Nothing
         Me.DgvTransactionDate.FieldName = Nothing
         Me.DgvTransactionDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DgvTransactionDate.FindEnabled = false
@@ -1146,6 +1186,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvJournalCode.DefaultCellStyle = DataGridViewCellStyle15
         Me.dgvJournalCode.EditingMode = false
         Me.dgvJournalCode.EndFindValue = Nothing
+        Me.dgvJournalCode.FieldDescription = Nothing
         Me.dgvJournalCode.FieldName = Nothing
         Me.dgvJournalCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvJournalCode.FindEnabled = false
@@ -1165,6 +1206,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvJournalIdNoAp.DefaultCellStyle = DataGridViewCellStyle16
         Me.dgvJournalIdNoAp.EditingMode = false
         Me.dgvJournalIdNoAp.EndFindValue = Nothing
+        Me.dgvJournalIdNoAp.FieldDescription = Nothing
         Me.dgvJournalIdNoAp.FieldName = Nothing
         Me.dgvJournalIdNoAp.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvJournalIdNoAp.FindEnabled = false
@@ -1176,6 +1218,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvPreviousBalance
         '
+        Me.dgvPreviousBalance.BegFindValue = Nothing
         Me.dgvPreviousBalance.DataPropertyName = "PreviousBalance"
         DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
@@ -1183,14 +1226,21 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle17.Format = "###,##0.00"
         Me.dgvPreviousBalance.DefaultCellStyle = DataGridViewCellStyle17
         Me.dgvPreviousBalance.EditingMode = false
+        Me.dgvPreviousBalance.EndFindValue = Nothing
+        Me.dgvPreviousBalance.FieldDescription = Nothing
+        Me.dgvPreviousBalance.FieldName = Nothing
+        Me.dgvPreviousBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvPreviousBalance.FindEnabled = false
         Me.dgvPreviousBalance.HeaderText = "Previous Balance"
         Me.dgvPreviousBalance.Name = "dgvPreviousBalance"
         Me.dgvPreviousBalance.ReadOnly = true
         Me.dgvPreviousBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPreviousBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvPreviousBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'dgvAmount
         '
+        Me.dgvAmount.BegFindValue = Nothing
         Me.dgvAmount.DataPropertyName = "Amount"
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
@@ -1198,14 +1248,21 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle18.Format = "###,##0.00"
         Me.dgvAmount.DefaultCellStyle = DataGridViewCellStyle18
         Me.dgvAmount.EditingMode = false
+        Me.dgvAmount.EndFindValue = Nothing
+        Me.dgvAmount.FieldDescription = Nothing
+        Me.dgvAmount.FieldName = Nothing
+        Me.dgvAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvAmount.FindEnabled = false
         Me.dgvAmount.HeaderText = "Amount"
         Me.dgvAmount.Name = "dgvAmount"
         Me.dgvAmount.ReadOnly = true
         Me.dgvAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'dgvDiscountTaken
         '
+        Me.dgvDiscountTaken.BegFindValue = Nothing
         Me.dgvDiscountTaken.DataPropertyName = "DiscountTaken"
         DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
@@ -1213,15 +1270,22 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle19.Format = "###,##0.00"
         Me.dgvDiscountTaken.DefaultCellStyle = DataGridViewCellStyle19
         Me.dgvDiscountTaken.EditingMode = false
+        Me.dgvDiscountTaken.EndFindValue = Nothing
+        Me.dgvDiscountTaken.FieldDescription = Nothing
+        Me.dgvDiscountTaken.FieldName = Nothing
+        Me.dgvDiscountTaken.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvDiscountTaken.FindEnabled = false
         Me.dgvDiscountTaken.HeaderText = "Discount Taken"
         Me.dgvDiscountTaken.Name = "dgvDiscountTaken"
         Me.dgvDiscountTaken.ReadOnly = true
         Me.dgvDiscountTaken.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDiscountTaken.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvDiscountTaken.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'dgvBalance
         '
         Me.dgvBalance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvBalance.BegFindValue = Nothing
         Me.dgvBalance.DataPropertyName = "Balance"
         DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle20.BackColor = System.Drawing.Color.White
@@ -1229,10 +1293,16 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle20.Format = "###,##0.00"
         Me.dgvBalance.DefaultCellStyle = DataGridViewCellStyle20
         Me.dgvBalance.EditingMode = false
+        Me.dgvBalance.EndFindValue = Nothing
+        Me.dgvBalance.FieldDescription = Nothing
+        Me.dgvBalance.FieldName = Nothing
+        Me.dgvBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvBalance.FindEnabled = false
         Me.dgvBalance.HeaderText = "Balance"
         Me.dgvBalance.Name = "dgvBalance"
         Me.dgvBalance.ReadOnly = true
         Me.dgvBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'DataGridViewTextBoxColumn6
@@ -1258,6 +1328,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPayeeName.DataBoundControl = true
         Me.txtPayeeName.EditingMode = false
         Me.txtPayeeName.EndFindValue = Nothing
+        Me.txtPayeeName.FieldDescription = Nothing
         Me.txtPayeeName.FieldName = Nothing
         Me.txtPayeeName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtPayeeName.FindEnabled = false
@@ -1310,6 +1381,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtVatNumber.DataBoundControl = true
         Me.txtVatNumber.EditingMode = false
         Me.txtVatNumber.EndFindValue = Nothing
+        Me.txtVatNumber.FieldDescription = Nothing
         Me.txtVatNumber.FieldName = Nothing
         Me.txtVatNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtVatNumber.FindEnabled = true
@@ -1340,6 +1412,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtCheckNumber.DataBoundControl = true
         Me.txtCheckNumber.EditingMode = false
         Me.txtCheckNumber.EndFindValue = Nothing
+        Me.txtCheckNumber.FieldDescription = Nothing
         Me.txtCheckNumber.FieldName = Nothing
         Me.txtCheckNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtCheckNumber.FindEnabled = true
@@ -1386,6 +1459,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaymentType.DisplayMember = "Name"
         Me.cboPaymentType.EditingMode = false
         Me.cboPaymentType.EndFindValue = Nothing
+        Me.cboPaymentType.FieldDescription = Nothing
         Me.cboPaymentType.FieldName = Nothing
         Me.cboPaymentType.FilterRule = Nothing
         Me.cboPaymentType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -1427,6 +1501,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TxtIdNo.EditingMode = true
         Me.TxtIdNo.EndFindValue = Nothing
+        Me.TxtIdNo.FieldDescription = Nothing
         Me.TxtIdNo.FieldName = Nothing
         Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.TxtIdNo.FindEnabled = true
@@ -1455,6 +1530,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtReferenceNo.DataBoundControl = true
         Me.txtReferenceNo.EditingMode = false
         Me.txtReferenceNo.EndFindValue = Nothing
+        Me.txtReferenceNo.FieldDescription = Nothing
         Me.txtReferenceNo.FieldName = Nothing
         Me.txtReferenceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtReferenceNo.FindEnabled = true
@@ -1499,6 +1575,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayeeIdNo.DisplayMember = "Name"
         Me.cboPayeeIdNo.EditingMode = true
         Me.cboPayeeIdNo.EndFindValue = Nothing
+        Me.cboPayeeIdNo.FieldDescription = Nothing
         Me.cboPayeeIdNo.FieldName = Nothing
         Me.cboPayeeIdNo.FilterRule = Nothing
         Me.cboPayeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -1584,9 +1661,10 @@ Namespace PresentationLayer.Views.Forms
         '
         'chkPosted
         '
+        Me.chkPosted.AutoCheck = false
         Me.chkPosted.AutoSize = true
         Me.chkPosted.BackColor = System.Drawing.Color.Transparent
-        Me.chkPosted.DisplayOnly = false
+        Me.chkPosted.DisplayOnly = true
         Me.chkPosted.EditingMode = true
         Me.chkPosted.FlatAppearance.BorderSize = 0
         Me.chkPosted.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1606,9 +1684,10 @@ Namespace PresentationLayer.Views.Forms
         '
         'chkCancelled
         '
+        Me.chkCancelled.AutoCheck = false
         Me.chkCancelled.AutoSize = true
         Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
-        Me.chkCancelled.DisplayOnly = false
+        Me.chkCancelled.DisplayOnly = true
         Me.chkCancelled.EditingMode = true
         Me.chkCancelled.FlatAppearance.BorderSize = 0
         Me.chkCancelled.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1628,9 +1707,10 @@ Namespace PresentationLayer.Views.Forms
         '
         'chkPcClosed
         '
+        Me.chkPcClosed.AutoCheck = false
         Me.chkPcClosed.AutoSize = true
         Me.chkPcClosed.BackColor = System.Drawing.Color.Transparent
-        Me.chkPcClosed.DisplayOnly = false
+        Me.chkPcClosed.DisplayOnly = true
         Me.chkPcClosed.EditingMode = true
         Me.chkPcClosed.FlatAppearance.BorderSize = 0
         Me.chkPcClosed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1713,6 +1793,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtCdJournalIdNo.DataBoundControl = true
         Me.txtCdJournalIdNo.EditingMode = true
         Me.txtCdJournalIdNo.EndFindValue = Nothing
+        Me.txtCdJournalIdNo.FieldDescription = Nothing
         Me.txtCdJournalIdNo.FieldName = Nothing
         Me.txtCdJournalIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtCdJournalIdNo.FindEnabled = true
@@ -1858,12 +1939,12 @@ End Sub
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
         Friend WithEvents bsDjOiItems As Windows.Forms.BindingSource
         Friend WithEvents dgvIdNocadOi As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvJournalItemIdNo As CdgvColumnText
+        Friend WithEvents dgvJournalItemIdNo As CDgvTextColumn
         Friend WithEvents dgvcadIdNo As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents CkdIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents JournalItemIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn1 As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvSequenceCad As CdgvColumnText
+        Friend WithEvents dgvSequenceCad As CDgvTextColumn
         Friend WithEvents DataGridViewTextBoxColumn4 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn5 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
@@ -1901,15 +1982,15 @@ End Sub
         Friend WithEvents lblDiscountTaken As CLabel
         Friend WithEvents btnAutoApply As CButton
         Friend WithEvents DataGridViewDjOiItems As CDataGridView
-        Friend WithEvents dgvSequenceDjOi As CdgvColumnText
-        Friend WithEvents dgvInvoiceNo As CdgvColumnText
-        Friend WithEvents DgvTransactionDate As CdgvColumnText
-        Friend WithEvents dgvJournalCode As CdgvColumnText
-        Friend WithEvents dgvJournalIdNoAp As CdgvColumnText
-        Friend WithEvents dgvPreviousBalance As CdgvColumnMoney
-        Friend WithEvents dgvAmount As CdgvColumnMoney
-        Friend WithEvents dgvDiscountTaken As CdgvColumnMoney
-        Friend WithEvents dgvBalance As CdgvColumnMoney
+        Friend WithEvents dgvSequenceDjOi As CDgvTextColumn
+        Friend WithEvents dgvInvoiceNo As CDgvTextColumn
+        Friend WithEvents DgvTransactionDate As CDgvTextColumn
+        Friend WithEvents dgvJournalCode As CDgvTextColumn
+        Friend WithEvents dgvJournalIdNoAp As CDgvTextColumn
+        Friend WithEvents dgvPreviousBalance As CdgvMoneyColumn
+        Friend WithEvents dgvAmount As CdgvMoneyColumn
+        Friend WithEvents dgvDiscountTaken As CdgvMoneyColumn
+        Friend WithEvents dgvBalance As CdgvMoneyColumn
         Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
         Friend WithEvents JournalItemIdNo As DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNo As DataGridViewTextBoxColumn
@@ -1933,21 +2014,21 @@ End Sub
         Friend WithEvents lblCdJournalIdNo As CLabel
         Friend WithEvents txtCdJournalIdNo As CTextBox
         Friend WithEvents btnPrintPcReplenishment As CButton
-        Friend WithEvents dgvSequence As CDgvColumnText
+        Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvDebit As CdgvColumnMoney
-        Friend WithEvents dgvCredit As CdgvColumnMoney
+        Friend WithEvents dgvDebit As CdgvMoneyColumn
+        Friend WithEvents dgvCredit As CdgvMoneyColumn
         Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
-        Friend WithEvents dgvNotes As CDgvColumnText
+        Friend WithEvents dgvNotes As CDgvTextColumn
         Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents JournalIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PaidAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents dgvVatAmount As CdgvColumnMoney
+        Friend WithEvents dgvVatAmount As CdgvMoneyColumn
         Friend WithEvents dgvPayeeType As DataGridViewTextBoxColumn
-        Friend WithEvents dgvSpecialAccount As CDgvColumnText
+        Friend WithEvents dgvSpecialAccount As CDgvTextColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
     End Class

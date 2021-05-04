@@ -2,46 +2,28 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CdgvCellText
+Public Class CDgvMoneyCell
     Inherits DataGridViewTextBoxCell
     Implements IEntryControl
 
     Private _editingMode As Boolean
 
-    Private _displayOnly As Boolean
-
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control is Read Only .")>
-    <Browsable(True)>
-    Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
-        End Get
-        Set(val As Boolean)
-            _displayOnly = val
-            If val Then
-                _editingMode = True
-            End If
-        End Set
-    End Property
-
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that this control will only accept numeric values.")>
+    <Description("Set to True to specify that this control is display only.")>
     <Browsable(True)>
-    Public Property ValueIsNumeric As Boolean = False
+    Public Property DisplayOnly As Boolean = False
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
         End Get
-        Set(val As Boolean)
-            _editingMode = val
-            If val Or DisplayOnly Then
-                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        Set
+            _editingMode = Value
+            If Value Or DisplayOnly Then
                 Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 [ReadOnly] = True
             Else
                 Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
@@ -50,6 +32,15 @@ Public Class CdgvCellText
             End If
         End Set
     End Property
+
+    Sub New()
+        If GlobalVariables.RightToLeftLayout Then
+            Style.Alignment = DataGridViewContentAlignment.MiddleLeft
+        Else
+            Style.Alignment = DataGridViewContentAlignment.MiddleRight
+        End If
+
+    End Sub
 
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get

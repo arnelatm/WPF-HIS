@@ -422,12 +422,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
         Friend WithEvents bsDjOiItems As Windows.Forms.BindingSource
         Friend WithEvents dgvIdNocadOi As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvJournalItemIdNo As CdgvColumnText
+        Friend WithEvents dgvJournalItemIdNo As CDgvTextColumn
         Friend WithEvents dgvcadIdNo As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents CkdIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents JournalItemIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn1 As Windows.Forms.DataGridViewTextBoxColumn
-        Friend WithEvents dgvSequenceCad As CdgvColumnText
+        Friend WithEvents dgvSequenceCad As CDgvTextColumn
         Friend WithEvents DataGridViewTextBoxColumn4 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn5 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn

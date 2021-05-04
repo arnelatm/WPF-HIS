@@ -2928,6 +2928,12 @@
   <data name="&gt;&gt;CsrOiItemModelBindingSource.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;bsAccountReconciliationItems.Name" xml:space="preserve">
+    <value>bsAccountReconciliationItems</value>
+  </data>
+  <data name="&gt;&gt;bsAccountReconciliationItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
   </data>
@@ -2980,7 +2986,7 @@
     <value>dgvCleared</value>
   </data>
   <data name="&gt;&gt;dgvCleared.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvPayDescription.Name" xml:space="preserve">
     <value>dgvPayDescription</value>
@@ -2993,12 +2999,6 @@
   </data>
   <data name="&gt;&gt;dgvAccountReconciliationIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsAccountReconciliationItems.Name" xml:space="preserve">
-    <value>bsAccountReconciliationItems</value>
-  </data>
-  <data name="&gt;&gt;bsAccountReconciliationItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AccountReconciliationEntry</value>

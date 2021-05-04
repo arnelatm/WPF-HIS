@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CDgvColumnText
+Public Class CDgvTextColumn
     Inherits DataGridViewTextBoxColumn
     Implements IEntryControl, IFindableControl
 
@@ -11,7 +11,7 @@ Public Class CDgvColumnText
     Private _editingMode As Boolean
 
     Public Sub New()
-        CellTemplate = New CdgvCellText
+        CellTemplate = New CDgvTextCell
     End Sub
 
     ' ReSharper disable once LocalizableElement
@@ -35,7 +35,7 @@ Public Class CDgvColumnText
     End Property
 
     Public Overrides Function Clone() As Object
-        Dim copy As CDgvColumnText = TryCast(MyBase.Clone(), CDgvColumnText)
+        Dim copy As CDgvTextColumn = TryCast(MyBase.Clone(), CDgvTextColumn)
         copy.DisplayOnly = DisplayOnly
         Return copy
     End Function
@@ -93,6 +93,7 @@ Public Class CDgvColumnText
     Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
     Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
     Public Property FieldName As String Implements IFindableControl.FieldName
+    Public Property FieldDescription As String Implements IFindableControl.FieldDescription
     Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
     Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
     Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode

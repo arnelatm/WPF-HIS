@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CdgvCellMoney
+Public Class CDgvDecimalCell
     Inherits DataGridViewTextBoxCell
     Implements IEntryControl
 
@@ -48,19 +48,4 @@ Public Class CdgvCellMoney
         End Get
     End Property
 
-    'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
-    '    Me.ReadOnly = editableControl
-    'End Sub
-
-    'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
-    '    ' not applicable
-    'End Sub
-
-    'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
-    '    ' not applicable
-    'End Sub
-
-    'Public Sub MakeSelectable(selectableControl As Boolean) Implements IEntryControl.MakeSelectable
-    '    ' not applicable
-    'End Sub
 End Class

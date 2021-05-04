@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CdgvColumnDecimal
+Public Class CdgvDecimalColumn
     Inherits DataGridViewColumn
     Implements IEntryControl
 
@@ -10,7 +10,7 @@ Public Class CdgvColumnDecimal
     Private _editingMode As Boolean
 
     Public Sub New()
-        CellTemplate = New CdgvCellDecimal
+        CellTemplate = New CDgvDecimalCell
         DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
     End Sub
 
@@ -29,9 +29,22 @@ Public Class CdgvColumnDecimal
             Return _displayOnly
         End Get
         Set(value As Boolean)
-            _displayOnly = value
+            _editingMode = value
             If value Then
-                _editingMode = True
+                If DisplayOnly Then
+                    [ReadOnly] = True
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                Else
+                    [ReadOnly] = False
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    [ReadOnly] = False
+                End If
+            Else
+                [ReadOnly] = True
+                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End Set
     End Property

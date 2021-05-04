@@ -161,6 +161,7 @@ Public Class CCheckBox
     Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
     Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
     Public Property FieldName As String Implements IFindableControl.FieldName
+    Public Property FieldDescription As String Implements IFindableControl.FieldDescription
     Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
     Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
 
@@ -274,9 +275,15 @@ Public Class CCheckBox
         If FindEnabled Then
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindFormNew(Me)
+            Dim searchForm = New CFindForm(Me)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
+            FieldName = Name.Substring(3)
+            If LinkedLabel IsNot Nothing AndAlso LinkedLabel.Text <> "" Then
+                searchForm.SetFieldDescription(LinkedLabel.Text)
+            Else
+                searchForm.SetFieldDescription(FieldName)
+            End If
             screenRectangle = Screen.PrimaryScreen.WorkingArea
             searchForm.StartPosition = FormStartPosition.Manual
             pnt = myForm.PointToScreen(Location)
@@ -284,9 +291,14 @@ Public Class CCheckBox
                 formLocation.Y = pnt.Y - searchForm.Height + Height
             End If
             searchForm.Location = formLocation
+            If LinkedLabel IsNot Nothing AndAlso LinkedLabel.Text <> "" Then
+                searchForm.SetFieldDescription(LinkedLabel.Text)
+            Else
+                searchForm.SetFieldDescription(FieldName)
+            End If
             searchForm.ShowDialog()
             searchForm.Dispose()
-            FieldName = Name.Substring(3)
+
             CallByName(myForm, "FindFieldNew", CallType.Method, Me)
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")

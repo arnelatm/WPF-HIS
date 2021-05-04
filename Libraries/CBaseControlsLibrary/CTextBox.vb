@@ -276,6 +276,8 @@ Public Class CTextBox
 
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
 
+    Public Property FieldDescription As String Implements IFindableControl.FieldDescription
+
 #End Region
 
     'Private Function GetDataType() As IFindableControl.DataTypeEnum
@@ -443,7 +445,7 @@ Public Class CTextBox
         If FindEnabled Then
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindFormNew(Me)
+            Dim searchForm = New CFindForm(Me)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea
@@ -456,6 +458,11 @@ Public Class CTextBox
             searchForm.Location = formLocation
             Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
             FindDataType = GetObjectDataType(x)
+            If LinkedLabel IsNot Nothing AndAlso LinkedLabel.Text <> "" Then
+                searchForm.SetFieldDescription(LinkedLabel.Text)
+            Else
+                searchForm.SetFieldDescription(FieldName)
+            End If
             searchForm.ShowDialog()
             searchForm.Dispose()
             CallByName(myForm, "FindFieldNew", CallType.Method, Me)

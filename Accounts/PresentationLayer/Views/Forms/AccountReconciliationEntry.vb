@@ -315,7 +315,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub MenuClicked()
             Dim myForm = FindForm()
             Dim pnt As Point
-            Dim searchForm = New CFindFormNew(Me)
+            Dim searchForm = New CFindForm(Me)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             screenRectangle = Screen.PrimaryScreen.WorkingArea
@@ -359,6 +359,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DataGridViewReconciliationItems_MouseUp(sender As Object, e As MouseEventArgs) Handles DataGridViewReconciliationItems.MouseUp
             Dim hitTestInfo As DataGridView.HitTestInfo
             Dim continueSearch As Boolean = False
+            Dim matchFound As Integer = -1
             If e.Button = MouseButtons.Right Then
                 hitTestInfo = DataGridViewReconciliationItems.HitTest(e.X, e.Y)
                 If _existingFind Then
@@ -366,8 +367,12 @@ Namespace PresentationLayer.Views.Forms
                                       MessageBoxButtons.YesNo,
                                       MessageBoxIcon.Warning,
                                       MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                        ContinuePreviousSearch()
-                        continueSearch = True
+                        matchFound = ContinuePreviousSearch()
+                        If matchFound >= 0 Then
+                            continueSearch = True
+                        Else
+                            continueSearch = False
+                        End If
                     Else
                         continueSearch = False
                     End If
@@ -386,6 +391,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub FindValue(ByRef columnNo As Int16)
             Dim myForm = FindForm()
+            Dim sw As Integer = 0
             Dim pnt As Point
             Dim dataTypeEnum As IFindableControl.DataTypeEnum
             Dim columnData As IFindableControl = DataGridViewReconciliationItems.Columns(columnNo)
@@ -393,9 +399,11 @@ Namespace PresentationLayer.Views.Forms
             _previousColumnSearch = columnNo
             dataTypeEnum = GetObjectDataType(columnDataType)
             columnData.FindDataType = dataTypeEnum
-            Dim searchForm = New CFindFormNew(DataGridViewReconciliationItems.Columns(columnNo))
+            Dim searchForm As CFindForm
+            searchForm = New CFindForm(DataGridViewReconciliationItems.Columns(columnNo))
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
+            searchForm.SetFieldDescription(DataGridViewReconciliationItems.Columns(columnNo).HeaderText)
             screenRectangle = Screen.PrimaryScreen.WorkingArea
             searchForm.StartPosition = FormStartPosition.Manual
             pnt = myForm.PointToScreen(Location)
@@ -403,7 +411,6 @@ Namespace PresentationLayer.Views.Forms
                 formLocation.Y = pnt.Y - searchForm.Height + Height
             End If
             searchForm.Location = formLocation
-
             searchForm.ShowDialog()
             Dim textToSearch As String
             Dim searchPlace As IFindableControl.SearchPlaceEnum
@@ -417,11 +424,10 @@ Namespace PresentationLayer.Views.Forms
                     DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                     Try
                         DataGridViewReconciliationItems.ClearSelection()
-                        Dim sw = 0
                         For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
                             If searchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                                 ' search anywhere
-                                If row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
+                                If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
                                     row.Selected = True
                                     If sw = 0 Then
                                         'scroll and move to the first matching record
@@ -484,7 +490,6 @@ Namespace PresentationLayer.Views.Forms
                     DataGridViewReconciliationItems.ClearSelection()
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
                         Dim colDate As Date = row.Cells(columnNo).Value
-                        Dim sw As Int16 = 0
                         If DateIsBetween(colDate, dBDate, dEDate) Then
                             'If DateIsBetween(colDate, dBegDate, dEndDate) Then
                             row.Selected = True
@@ -532,7 +537,6 @@ Namespace PresentationLayer.Views.Forms
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 Try
                     DataGridViewReconciliationItems.ClearSelection()
-                    Dim sw As Int16 = 0
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
                         Dim colValue As Decimal = row.Cells(columnNo).Value
                         If colValue >= dBValue And colValue <= dEValue Then
@@ -563,12 +567,16 @@ Namespace PresentationLayer.Views.Forms
                     MessageBox.Show(exc.Message)
                 End Try
             End If
-
+            If sw = 0 Then
+                Messaging.Show(True, "MsgNoMatchingRecordFound")
+                _existingFind = False
+            End If
             searchForm.Dispose()
 
         End Sub
 
-        Private Sub ContinuePreviousSearch()
+        Private Function ContinuePreviousSearch() As Integer
+            Dim matchSw As Integer = 0
             Dim myForm = FindForm()
             Dim columnNo = _previousColumnSearch
             Dim nMode As Int16
@@ -582,42 +590,29 @@ Namespace PresentationLayer.Views.Forms
             ElseIf columnDataType = GetType(Decimal) Then
                 nMode = 3
             End If
-            'Dim searchForm = New CFindForm(nMode)
-            'Dim screenRectangle As Rectangle
-            'Dim formLocation As Point
-            'screenRectangle = Screen.PrimaryScreen.WorkingArea
-            'searchForm.StartPosition = FormStartPosition.Manual
-            'pnt = myForm.PointToScreen(Location)
-            'If formLocation.Y + searchForm.Height > screenRectangle.Height Then
-            '    formLocation.Y = pnt.Y - searchForm.Height + Height
-            'End If
-            'searchForm.Location = formLocation
-            'searchForm.ShowDialog()
-            'Dim textToSearch As String
-            'Dim searchPlace As Char
-            'If Not _existingFind Then
-            '    _existingFind = True
-            'End If
             If nMode = IFindableControl.SearchModeEnum.TextBox Then
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 Try
-                    DataGridViewReconciliationItems.ClearSelection()
-                    'Dim firstRowMatchSw = 0
+                    'DataGridViewReconciliationItems.ClearSelection()
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
                         If _previousSearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
-                            If row.Cells(columnNo).Value.ToString().Contains(_previousTextSearch) Then
+                            If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().Contains(_previousTextSearch) Then
                                 row.Selected = True
                                 If row.Index > _previousSelectedRow AndAlso Not DataGridViewReconciliationItems.Rows(row.Index).Displayed Then
-                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = row.Index
                                     _previousSelectedRow = row.Index
+                                    matchSw = 1
+                                    Exit For
                                 End If
                             End If
                         Else
-                            If row.Cells(columnNo).Value.ToString().Equals(_previousTextSearch) Then
+                            If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().Equals(_previousTextSearch) Then
                                 row.Selected = True
                                 If Not DataGridViewReconciliationItems.Rows(row.Index).Displayed Then
                                     DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
                                     _previousSelectedRow = row.Index
+                                    matchSw = 1
+                                    Exit For
                                 End If
                             End If
                         End If
@@ -647,7 +642,6 @@ Namespace PresentationLayer.Views.Forms
                             End If
                         End If
                     Next
-
                 Catch exc As Exception
                     MessageBox.Show(exc.Message)
                 End Try
@@ -675,13 +669,21 @@ Namespace PresentationLayer.Views.Forms
                             End If
                         End If
                     Next
-
                 Catch exc As Exception
                     MessageBox.Show(exc.Message)
                 End Try
             End If
-
-        End Sub
+            If matchSw = 0 Then
+                If Messaging.Show(True, "AskLastRecordReachStartBeg",
+                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                    _previousSelectedRow = -1
+                    ContinuePreviousSearch()
+                Else
+                    '' stay on the current record
+                End If
+            End If
+            Return matchSw
+        End Function
 
         Private Function DateIsBetween(dateToCheck As Object, begDate As Object, endDate As Object)
             If Not (TypeOf dateToCheck Is Date Or TypeOf dateToCheck Is Date?) And (TypeOf begDate Is Date Or TypeOf begDate Is Date?) And (TypeOf endDate Is Date Or TypeOf endDate Is Date?) Then
