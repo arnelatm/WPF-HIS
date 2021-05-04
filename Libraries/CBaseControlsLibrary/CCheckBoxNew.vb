@@ -172,6 +172,10 @@ Public Class CCheckBoxNew
         End Get
     End Property
 
+    
+    Public Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+
+
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
 
     'Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)

@@ -438,6 +438,9 @@ Public Class CMaskedTextBox
             Return Nothing
         End Get
     End Property
+    
+    Private Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+
 
     Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
 

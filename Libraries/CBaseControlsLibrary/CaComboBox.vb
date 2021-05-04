@@ -831,6 +831,8 @@ Public Class CaComboBox
         End Get
     End Property
 
+    Public Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+
     Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
         Get
             Return IFindableControl.SearchModeEnum.ComboBox

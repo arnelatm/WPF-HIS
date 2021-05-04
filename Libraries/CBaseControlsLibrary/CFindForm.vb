@@ -52,6 +52,7 @@ Public Class CFindForm
     'End Function
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
+        DialogResult = DialogResult.OK
         If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
             _findableControl.BegFindValue = TxtTextToSearch.Text
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
@@ -63,6 +64,11 @@ Public Class CFindForm
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
             Else
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField
+            End If
+            If chkIgnoreCase.Checked Then
+                _findableControl.IgnoreCase = True
+            Else
+                _findableControl.IgnoreCase = False
             End If
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
@@ -79,8 +85,46 @@ Public Class CFindForm
                 _findableControl.BegFindValue = cboTextToSearch.SelectedValue
             Else
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                _findableControl.BegFindValue = txtBegValue.Text
-                _findableControl.EndFindValue = txtEndValue.Text
+                If txtBegValue.Text Is Nothing OrElse txtBegValue.Text = "" Then
+                    _findableControl.BegFindValue = Nothing
+                Else
+                    If _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Then
+                        Dim value As Decimal
+                        If Not Decimal.TryParse(txtBegValue.Text, value) Then
+                            MessagingLibrary.Messaging.Show(True, "MsgInvalidDecimalValue")
+                            DialogResult = DialogResult.Cancel
+                        Else
+                            _findableControl.BegFindValue = txtBegValue.Text
+                        End If
+                    Else
+                        Dim value As Integer
+                        If Not Integer.TryParse(txtBegValue.Text, value) Then
+                            MessagingLibrary.Messaging.Show(True, "MsgInvalidIntegerValue")
+                        Else
+                            _findableControl.BegFindValue = txtBegValue.Text
+                        End If
+                    End If
+                End If
+                If txtEndValue.Text Is Nothing OrElse txtEndValue.Text = "" Then
+                    _findableControl.EndFindValue = Nothing
+                Else
+                    If _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Then
+                        Dim value As Decimal
+                        If Not Decimal.TryParse(txtEndValue.Text, value) Then
+                            DialogResult = DialogResult.Cancel
+                            MessagingLibrary.Messaging.Show(True, "MsgInvalidDecimalValue")
+                        Else
+                            _findableControl.EndFindValue = txtEndValue.Text
+                        End If
+                    Else
+                        Dim value As Integer
+                        If Not Integer.TryParse(txtEndValue.Text, value) Then
+                            MessagingLibrary.Messaging.Show(True, "MsgInvalidIntegerValue")
+                        Else
+                            _findableControl.EndFindValue = txtEndValue.Text
+                        End If
+                    End If
+                End If
             End If
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
             _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue

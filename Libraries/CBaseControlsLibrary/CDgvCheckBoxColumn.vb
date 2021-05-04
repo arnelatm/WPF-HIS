@@ -99,5 +99,8 @@ Public Class CDgvCheckBoxColumn
     Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
 
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
+    
+    Public Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+
 
 End Class
