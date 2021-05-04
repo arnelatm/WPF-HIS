@@ -266,6 +266,9 @@ Public Class CTextBox
         End Get
     End Property
 
+    
+    Private Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+
     Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
 
     Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
