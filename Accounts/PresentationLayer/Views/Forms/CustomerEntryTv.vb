@@ -3,13 +3,14 @@ Imports System.Globalization
 Imports System.Resources
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class CustomerEntryTv
-        Implements ICustomerView
+        Implements ICustomerView, ISubscriber(Of AddModeChanged)
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
@@ -44,7 +45,7 @@ Namespace PresentationLayer.Views.Forms
             cacRevAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
             cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)
             cacAccountStatus.DataSource = PresenterObj.MakeEnumComboList(Of AccountStatusSelection)
-            cacDiscountSchemeIdNo.DataSource = PresenterObj.GetLookup("DiscountScheme","Name",{"IdNo","Name","Code"})
+            cacDiscountSchemeIdNo.DataSource = PresenterObj.GetLookup("DiscountScheme", "Name", {"IdNo", "Name", "Code"})
         End Sub
 
 #Region "Field Displays"
@@ -434,6 +435,20 @@ Namespace PresentationLayer.Views.Forms
             Dim value As Double
             value = Convert.ToDouble(PresenterObj.GetCustomerBalance(IdNo))
             txtBalance.Text = value.ToString("N", _nfi)
+            If Not PresenterObj.AddMode Then
+                txtOpeningBalance.DisplayOnly = True
+            Else
+                txtOpeningBalance.DisplayOnly = False
+            End If
+        End Sub
+
+        Public Sub OnAcReconAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
+            MyBase.OnEventHandlerAddModeChanged(e)
+            If e.AddMode Then
+                txtOpeningBalance.DisplayOnly = False
+            Else
+                txtOpeningBalance.DisplayOnly = True
+            End If
         End Sub
 
     End Class

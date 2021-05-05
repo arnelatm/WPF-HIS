@@ -226,15 +226,3 @@ Public Class CForm
     '    Next
     'End Sub
 End Class
-
-Public Class UpdateProgressFormDisplay
-
-    Public Sub New(ByRef displayProgressForm As DisplayProgressForm, percentage As Decimal)
-        Me.ProgressForm = displayProgressForm
-        Me.Percentage = percentage
-    End Sub
-
-    Public Property ProgressForm As DisplayProgressForm
-    Public Property Percentage As Decimal
-
-End Class
