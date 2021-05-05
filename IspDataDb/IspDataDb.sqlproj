@@ -444,6 +444,7 @@
     <Build Include="dbo\Functions\fnGetAcctActivityFullData.sql" />
     <Build Include="dbo\Functions\fnGetAcctActivityCurrentData.sql" />
     <Build Include="dbo\Stored Procedures\spAccountActivityReport.sql" />
+    <Build Include="dbo\Functions\FnGetAccountBalance.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
