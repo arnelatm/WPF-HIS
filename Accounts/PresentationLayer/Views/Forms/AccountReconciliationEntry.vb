@@ -678,6 +678,22 @@ Namespace PresentationLayer.Views.Forms
                     Catch exc As Exception
                         MessageBox.Show(exc.Message)
                     End Try
+                ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Boolean Then
+                    Dim valueToSearch As Boolean = CallByName(columnData, "BegFindValue", CallType.Get)
+                    DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                    DataGridViewReconciliationItems.ClearSelection()
+                    For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                        If row.Cells(columnNo).Value = valueToSearch Then
+                            row.Selected = True
+                            If sw = 0 Then
+                                'scroll and move to the first matching record
+                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                sw = 1
+                                _previousSelectedRow = row.Index()
+                            End If
+                        End If
+                    Next
+                    _previousBegValueSearch = valueToSearch
                 End If
             End If
             If sw = 0 Then
@@ -701,6 +717,8 @@ Namespace PresentationLayer.Views.Forms
                 nMode = 3
             ElseIf columnDataType = GetType(Decimal) Then
                 nMode = 3
+            ElseIf columnDataType = GetType(Boolean) Then
+                nMode = 4
             End If
             If nMode = IFindableControl.SearchModeEnum.TextBox Then
                 DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
@@ -765,6 +783,25 @@ Namespace PresentationLayer.Views.Forms
                     For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
                         Dim colValue As Decimal = row.Cells(columnNo).Value
                         If colValue >= dBegValue AndAlso colValue <= dEndValue Then
+                            row.Selected = True
+                            If row.Index > _previousSelectedRow AndAlso Not DataGridViewReconciliationItems.Rows(row.Index).Displayed Then
+                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = row.Index
+                                _previousSelectedRow = row.Index
+                                matchSw = 1
+                                Exit For
+                            End If
+                        End If
+                    Next
+                Catch exc As Exception
+                    MessageBox.Show(exc.Message)
+                End Try
+            ElseIf nMode = 4 Then
+                Dim dBegValue As Boolean = _previousBegValueSearch
+                DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                Try
+                    For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                        Dim colValue As Boolean = row.Cells(columnNo).Value
+                        If colValue = dBegValue Then
                             row.Selected = True
                             If row.Index > _previousSelectedRow AndAlso Not DataGridViewReconciliationItems.Rows(row.Index).Displayed Then
                                 DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = row.Index

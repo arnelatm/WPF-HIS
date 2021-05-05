@@ -963,6 +963,8 @@ Public Module GlobalFunctions
             dataTypeEnum = IFindableControl.DataTypeEnum.Integer
         ElseIf dataObject = GetType(Decimal) Or dataObject = GetType(Single) Or dataObject = GetType(Double) Then
             dataTypeEnum = IFindableControl.DataTypeEnum.Decimal
+        ElseIf dataObject = GetType(Boolean) Then
+            dataTypeEnum = IFindableControl.DataTypeEnum.Boolean
         End If
         Return dataTypeEnum
     End Function
