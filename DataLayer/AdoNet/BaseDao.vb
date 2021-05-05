@@ -147,7 +147,7 @@ Namespace AdoNet
                     params = {"@SearchString", searchString, "@searchString2", searchString2, "@sortOrderKey", sortOrderKey}
                 End If
             ElseIf findableControl.SearchMode = IFindableControl.SearchModeEnum.CheckBox Then
-                sql &= findableControl.FieldName.Trim()
+                sql &= findableControl.FieldName.Trim() & " = @SearchString"
                 searchString = IIf(findableControl.BegFindValue, "1", "0")
                 params = {"@SearchString", searchString}
             End If

@@ -293,6 +293,7 @@ Public Class CCheckBox
             If formLocation.Y + searchForm.Height > screenRectangle.Height Then
                 formLocation.Y = pnt.Y - searchForm.Height + Height
             End If
+            FindDataType = IFindableControl.DataTypeEnum.Boolean
             searchForm.Location = formLocation
             If LinkedLabel IsNot Nothing AndAlso LinkedLabel.Text <> "" Then
                 searchForm.SetFieldDescription(LinkedLabel.Text)
@@ -306,8 +307,8 @@ Public Class CCheckBox
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
         End If
-        Dim x = Me.GetType()
-        MessageBox.Show(x.ToString())
+        'Dim x = Me.GetType()
+        'MessageBox.Show(x.ToString())
     End Sub
 
     Public Function GetTextToSearch() As String
