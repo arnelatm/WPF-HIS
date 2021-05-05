@@ -963,14 +963,6 @@ Namespace PresentationLayer.Views.Forms
         'Private Sub BackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker.RunWorkerCompleted
 
         'End Sub
-        'Public Sub OnEventHandler(ByRef eventType As UpdateProgressFormDisplay) Implements ISubscriber(Of UpdateProgressFormDisplay).OnEventHandler
-        '    eventType.ProgressForm.lblPercentage.Text = eventType.Percentage
-        '    eventType.ProgressForm.lblPercentage.BackColor = Color.Black
-        '    eventType.ProgressForm.lblPercentage.ForeColor = Color.White
-        '    Dim x = eventType.ProgressForm.lblPercentage
-        '    Dim y = eventType.Percentage
-        '    eventType.ProgressForm.Invoke(Sub() x.Text = y.ToString())
-        'End Sub
 
     End Class
 

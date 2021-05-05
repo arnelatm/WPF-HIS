@@ -383,7 +383,6 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                     progressDisplayForm.UpdateProgressBar(counter)
-                    Ea.PublishEvent(New UpdateProgressFormDisplay(progressDisplayForm, counter))
                     counter = counter + 1
                 Next
                 View.GlSystemBalance = ModelOfPresenter.GetAccountBalance(View.ReconciliationDate, View.AccountIdNo)
