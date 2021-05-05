@@ -323,6 +323,14 @@ Public Class CFindForm
         End If
     End Sub
 
+    Private Sub txtBegValue_ValueChanged(sender As Object, e As EventArgs) Handles txtBegValue.Validated
+        If txtBegValue.Text > txtEndValue.Text Then
+            txtEndValue.Text = txtBegValue.Text
+        ElseIf txtEndValue.Text Is Nothing Then
+            txtEndValue.Text = txtBegValue.Text
+        End If
+    End Sub
+
     Private Sub dtpBegDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpBegDate.Validated
         If dtpBegDate.Value > dtpEndDate.Value Then
             dtpEndDate.Value = dtpBegDate.Value

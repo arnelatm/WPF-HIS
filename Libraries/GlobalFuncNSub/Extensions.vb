@@ -4,6 +4,7 @@ Imports System.Linq.Expressions
 Imports System.Reflection
 Imports System.Runtime.CompilerServices
 Imports System.Text.RegularExpressions
+Imports System.Windows.Forms
 
 Public Module Extensions
     ' Declarations will typically be in a separate module.
@@ -13,7 +14,6 @@ Public Module Extensions
         Dim strLength = stringValue.Length
         Return stringValue.Substring(strLength - noOfCharacters)
     End Function
-
 
     <Extension()>
     Public Function Interpolate(ByVal template As String, ParamArray values As Expression(Of Func(Of Object, String))()) As String
@@ -188,6 +188,15 @@ Public Module Extensions
         Dim attributes = memInfo(0).GetCustomAttributes(GetType(T), False)
         Return If((attributes.Length > 0), CType(attributes(0), T), Nothing)
     End Function
+
+    <Extension()>
+    Sub UiThread(ByVal this As Control, ByVal code As Action)
+        If this.InvokeRequired Then
+            this.BeginInvoke(code)
+        Else
+            code.Invoke()
+        End If
+    End Sub
 
 End Module
 

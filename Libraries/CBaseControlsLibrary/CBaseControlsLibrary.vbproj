@@ -79,6 +79,12 @@
     <Compile Include="ATabPage.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="BackgroundWorkerForm.Designer.vb">
+      <DependentUpon>BackgroundWorkerForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BackgroundWorkerForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BFCalendarUmAlQura.Designer.vb">
       <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
     </Compile>
@@ -385,6 +391,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ATabPage.resx">
       <DependentUpon>ATabPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackgroundWorkerForm.resx">
+      <DependentUpon>BackgroundWorkerForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BFCalendarUmAlQura.ar-SA.resx">
       <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>

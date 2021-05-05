@@ -173,6 +173,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 chkPosted.Checked = Value
+                btnPost.Enabled = Not Value
             End Set
         End Property
 
@@ -882,8 +883,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub cboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
             If Not btnEdit.Enabled Then
                 If cboAccountIdNo.ValueChanged() Then
-                    PublishEvent(New ReconciliationAccountChangedEvent(sender))
-                    bsAccountReconciliationItems.ResetBindings(False)
+                    PublishEvent(New ReconciliationAccountChangedEvent(Me, bsAccountReconciliationItems))
+                    'bsAccountReconciliationItems.ResetBindings(False)
                 End If
             End If
         End Sub
@@ -896,7 +897,7 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub btnPost_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
-            PublishEvent(New ReconciliationPostingRequestEvent(sender, Not btnSave.Enabled))
+            PublishEvent(New ReconciliationPostingRequestEvent(Me, IdNo, UnreconciledDifference, bsAccountReconciliationItems))
         End Sub
 
         Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
@@ -962,6 +963,15 @@ Namespace PresentationLayer.Views.Forms
         'Private Sub BackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker.RunWorkerCompleted
 
         'End Sub
+        'Public Sub OnEventHandler(ByRef eventType As UpdateProgressFormDisplay) Implements ISubscriber(Of UpdateProgressFormDisplay).OnEventHandler
+        '    eventType.ProgressForm.lblPercentage.Text = eventType.Percentage
+        '    eventType.ProgressForm.lblPercentage.BackColor = Color.Black
+        '    eventType.ProgressForm.lblPercentage.ForeColor = Color.White
+        '    Dim x = eventType.ProgressForm.lblPercentage
+        '    Dim y = eventType.Percentage
+        '    eventType.ProgressForm.Invoke(Sub() x.Text = y.ToString())
+        'End Sub
+
     End Class
 
 End Namespace

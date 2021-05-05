@@ -122,14 +122,14 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub PostReconciliation(ByVal idNo As Int32, ByVal accountReconciliationItems As List(Of AccountReconciliationItemView))
+        Public Sub PostReconciliation(ByVal idNo As Int32, ByVal bsAccountReconciliationItems As BindingSource)
             Try
                 Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                     Dim dtInsertReconciledTable As New DataTable
                     dtInsertReconciledTable.Columns.Add("JournalCode", GetType(String))
                     dtInsertReconciledTable.Columns.Add("JournalItemIdNo", GetType(Int32))
                     dtInsertReconciledTable.Columns.Add("ReconciliationIdNo", GetType(Int32))
-                    For Each item In accountReconciliationItems
+                    For Each item In bsAccountReconciliationItems
                         Dim workRow As DataRow
                         If item.Cleared Then
                             workRow = dtInsertReconciledTable.NewRow()
@@ -200,6 +200,7 @@ Namespace PresentationLayer.Presenters
                 progressDisplayForm.DisplayProgress(nCount)
                 progressDisplayForm.InitializeDisplay("Please wait processing request...", nCount)
                 For Each acctReconItem In allAcctReconItems
+                    nSeq += 1
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
                     'progressDisplayForm.ProgressBar.Value = counter
                     progressDisplayForm.UpdateProgressBar(counter)
@@ -271,7 +272,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub ProcessReconciliationRequest(eEvent As ReconciliationClearEvent)
             If eEvent.All Then
-                For Each accountReconciliationItem In View.AccountReconciliationItems
+                For Each accountReconciliationItem In eEvent.DataBindingSource
                     If eEvent.Clear Then
                         accountReconciliationItem.Cleared = True
                     Else
@@ -301,8 +302,8 @@ Namespace PresentationLayer.Presenters
                     Else
                         View.TotalCreditsCleared += eEvent.Sender.Credit
                         View.TotalQtyCreditsCleared += 1
-                        View.TotalCreditsCleared -= eEvent.Sender.Credit
-                        View.TotalQtyCreditsCleared -= 1
+                        View.TotalCreditsNotCleared -= eEvent.Sender.Credit
+                        View.TotalQtyCreditsNotCleared -= 1
                     End If
                 End If
                 eEvent.Sender.Cleared = Not eEvent.Sender.Cleared
@@ -382,6 +383,7 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                     progressDisplayForm.UpdateProgressBar(counter)
+                    Ea.PublishEvent(New UpdateProgressFormDisplay(progressDisplayForm, counter))
                     counter = counter + 1
                 Next
                 View.GlSystemBalance = ModelOfPresenter.GetAccountBalance(View.ReconciliationDate, View.AccountIdNo)
@@ -417,23 +419,18 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnReconciliationPostingRequestEvent(ByRef e As ReconciliationPostingRequestEvent) Implements ISubscriber(Of ReconciliationPostingRequestEvent).OnEventHandler
-            If View.UnreconciledDifference = 0 And Not View.Posted Then
+            If e.UnreconciledDifference = 0 Then
                 Dim message = "Are you sure you want to {action} this {itemName} entry?"
                 Dim caption = "Please confirm."
                 Dim action As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("post")
                 Dim itemName As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("account reconciliation transaction")
                 Dim msg = AATM.Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
                 If AATM.Libraries.MessagingLibrary.Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    PostReconciliation(View.IdNo, View.AccountReconciliationItems)
+                    PostReconciliation(e.IdNo, e.BsAccountReconciliationItem)
                 End If
             Else
-                If View.Posted Then
-                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgAlreadyPosted", "Sorry this record has already been posted!", "Invalid Request")
-                Else
-                    Dim err = AATM.Libraries.MessagingLibrary.Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
-                    AATM.Libraries.MessagingLibrary.Messaging.Show(False, "MsgCannotPostUnreconciledEntry")
-                    'MyErrorProvider.SetError(txtUnreconciledDifference, err)
-                End If
+                Dim err = AATM.Libraries.MessagingLibrary.Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
+                AATM.Libraries.MessagingLibrary.Messaging.Show(False, "MsgCannotPostUnreconciledEntry")
             End If
         End Sub
 
@@ -458,16 +455,15 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnReconciliationAccountChangedEvent(ByRef eventType As ReconciliationAccountChangedEvent) Implements ISubscriber(Of ReconciliationAccountChangedEvent).OnEventHandler
+        Public Sub OnReconciliationAccountChangedEvent(ByRef e As ReconciliationAccountChangedEvent) Implements ISubscriber(Of ReconciliationAccountChangedEvent).OnEventHandler
             If EditMode Or AddMode Then
-                'If Not View.AccountReconciliationItems.Any Then
-                If View.AccountIdNo IsNot Nothing And View.ReconciliationDate IsNot Nothing Then
-                    View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
+                If e.Sender.AccountIdNo IsNot Nothing And e.Sender.ReconciliationDate IsNot Nothing Then
+                    e.Sender.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
                     UpdateTotals()
                 Else
-                    View.AccountReconciliationItems.Clear()
+                    e.Sender.AccountReconciliationItems.Clear()
                 End If
-                'End If
+                e.BsAccountReconciliation.ResetBindings(False)
             End If
         End Sub
 
@@ -492,13 +488,17 @@ Namespace PresentationLayer.Presenters
 
     Public Class ReconciliationPostingRequestEvent
 
-        Public Sub New(sender As Object, saved As Boolean)
+        Public Sub New(sender As Object, idNo As Integer, unreconciledDifference As Decimal, bsAccountReconciliationItem As BindingSource)
             Me.Sender = sender
-            Me.Saved = saved
+            Me.IdNo = idNo
+            Me.UnreconciledDifference = unreconciledDifference
+            Me.BsAccountReconciliationItem = bsAccountReconciliationItem
         End Sub
 
         Public Property Sender As Object
-        Public Property Saved As Boolean
+        Public Property IdNo As Integer
+        Public Property UnreconciledDifference As Decimal
+        Public Property BsAccountReconciliationItem As BindingSource
     End Class
 
     Public Class EndingBankBalanceEntryChangedEvent
@@ -521,11 +521,13 @@ Namespace PresentationLayer.Presenters
 
     Public Class ReconciliationAccountChangedEvent
 
-        Public Sub New(sender As Object)
+        Public Sub New(sender As IAccountReconciliationView, bsAccountReconciliationItem As BindingSource)
             Me.Sender = sender
+            Me.BsAccountReconciliation = bsAccountReconciliationItem
         End Sub
 
-        Public Property Sender As Object
+        Public Property Sender As IAccountReconciliationView
+        Public Property BsAccountReconciliation As BindingSource
     End Class
 
     Public Class ReconciliationRefreshRequestEvent
