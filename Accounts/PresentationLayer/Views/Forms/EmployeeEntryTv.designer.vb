@@ -270,6 +270,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaymentMethod.DisplayMember = "Name"
         Me.cboPaymentMethod.EditingMode = false
         Me.cboPaymentMethod.EndFindValue = Nothing
+        Me.cboPaymentMethod.FieldDescription = Nothing
         Me.cboPaymentMethod.FieldName = Nothing
         Me.cboPaymentMethod.FilterRule = Nothing
         Me.cboPaymentMethod.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -279,6 +280,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaymentMethod.ForeColor = System.Drawing.Color.Black
         Me.cboPaymentMethod.FormattingEnabled = true
         Me.cboPaymentMethod.HideWhenNotEditingOrAdding = false
+        Me.cboPaymentMethod.IgnoreCase = false
         Me.cboPaymentMethod.IntegralHeight = false
         Me.cboPaymentMethod.LinkedLabel = Me.lblPaymentMethod
         Me.cboPaymentMethod.Location = New System.Drawing.Point(190, 4)
@@ -326,6 +328,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacBankIdNo.DisplayMember = "Name"
         Me.cacBankIdNo.EditingMode = false
         Me.cacBankIdNo.EndFindValue = Nothing
+        Me.cacBankIdNo.FieldDescription = Nothing
         Me.cacBankIdNo.FieldName = Nothing
         Me.cacBankIdNo.FilterRule = Nothing
         Me.cacBankIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -335,6 +338,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacBankIdNo.ForeColor = System.Drawing.Color.Black
         Me.cacBankIdNo.FormattingEnabled = true
         Me.cacBankIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacBankIdNo.IgnoreCase = false
         Me.cacBankIdNo.IntegralHeight = false
         Me.cacBankIdNo.LinkedLabel = Me.lblBankIdNo
         Me.cacBankIdNo.Location = New System.Drawing.Point(190, 30)
@@ -382,6 +386,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtBankAccountNo.DataBoundControl = true
         Me.txtBankAccountNo.EditingMode = false
         Me.txtBankAccountNo.EndFindValue = Nothing
+        Me.txtBankAccountNo.FieldDescription = Nothing
         Me.txtBankAccountNo.FieldName = Nothing
         Me.txtBankAccountNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtBankAccountNo.FindEnabled = true
@@ -426,6 +431,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtBalance.DisplayOnly = true
         Me.txtBalance.EditingMode = false
         Me.txtBalance.EndFindValue = Nothing
+        Me.txtBalance.FieldDescription = Nothing
         Me.txtBalance.FieldName = Nothing
         Me.txtBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtBalance.FindEnabled = true
@@ -471,6 +477,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtOpeningBalance.DisplayOnly = true
         Me.txtOpeningBalance.EditingMode = false
         Me.txtOpeningBalance.EndFindValue = Nothing
+        Me.txtOpeningBalance.FieldDescription = Nothing
         Me.txtOpeningBalance.FieldName = Nothing
         Me.txtOpeningBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtOpeningBalance.FindEnabled = true
@@ -515,6 +522,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtIban.DataBoundControl = true
         Me.txtIban.EditingMode = false
         Me.txtIban.EndFindValue = Nothing
+        Me.txtIban.FieldDescription = Nothing
         Me.txtIban.FieldName = Nothing
         Me.txtIban.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtIban.FindEnabled = true
@@ -558,6 +566,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayCycleidNo.DisplayMember = "Name"
         Me.cboPayCycleidNo.EditingMode = false
         Me.cboPayCycleidNo.EndFindValue = Nothing
+        Me.cboPayCycleidNo.FieldDescription = Nothing
         Me.cboPayCycleidNo.FieldName = Nothing
         Me.cboPayCycleidNo.FilterRule = Nothing
         Me.cboPayCycleidNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -567,6 +576,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayCycleidNo.ForeColor = System.Drawing.Color.Black
         Me.cboPayCycleidNo.FormattingEnabled = true
         Me.cboPayCycleidNo.HideWhenNotEditingOrAdding = false
+        Me.cboPayCycleidNo.IgnoreCase = false
         Me.cboPayCycleidNo.IntegralHeight = false
         Me.cboPayCycleidNo.LinkedLabel = Me.lblPayCycleIdNo
         Me.cboPayCycleidNo.Location = New System.Drawing.Point(190, 156)
@@ -614,6 +624,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayGroupIdNo.DisplayMember = "Name"
         Me.cboPayGroupIdNo.EditingMode = false
         Me.cboPayGroupIdNo.EndFindValue = Nothing
+        Me.cboPayGroupIdNo.FieldDescription = Nothing
         Me.cboPayGroupIdNo.FieldName = Nothing
         Me.cboPayGroupIdNo.FilterRule = Nothing
         Me.cboPayGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -623,6 +634,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayGroupIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboPayGroupIdNo.FormattingEnabled = true
         Me.cboPayGroupIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboPayGroupIdNo.IgnoreCase = false
         Me.cboPayGroupIdNo.IntegralHeight = false
         Me.cboPayGroupIdNo.LinkedLabel = Me.lblPayGroupIdNo
         Me.cboPayGroupIdNo.Location = New System.Drawing.Point(190, 183)
@@ -670,6 +682,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDutyHours.DataBoundControl = true
         Me.txtDutyHours.EditingMode = false
         Me.txtDutyHours.EndFindValue = Nothing
+        Me.txtDutyHours.FieldDescription = Nothing
         Me.txtDutyHours.FieldName = Nothing
         Me.txtDutyHours.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtDutyHours.FindEnabled = true
@@ -722,6 +735,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtEmployeeName.DataBoundControl = true
         Me.txtEmployeeName.EditingMode = false
         Me.txtEmployeeName.EndFindValue = Nothing
+        Me.txtEmployeeName.FieldDescription = Nothing
         Me.txtEmployeeName.FieldName = Nothing
         Me.txtEmployeeName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtEmployeeName.FindEnabled = true
@@ -767,6 +781,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtEmployeeNameAra.EditingMode = false
         Me.txtEmployeeNameAra.EndFindValue = Nothing
         Me.txtEmployeeNameAra.EnglishControl = Me.txtEmployeeName
+        Me.txtEmployeeNameAra.FieldDescription = Nothing
         Me.txtEmployeeNameAra.FieldName = Nothing
         Me.txtEmployeeNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtEmployeeNameAra.FindEnabled = true
@@ -867,6 +882,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacMaritalStatus.DisplayMember = "Name"
         Me.cacMaritalStatus.EditingMode = false
         Me.cacMaritalStatus.EndFindValue = Nothing
+        Me.cacMaritalStatus.FieldDescription = Nothing
         Me.cacMaritalStatus.FieldName = Nothing
         Me.cacMaritalStatus.FilterRule = Nothing
         Me.cacMaritalStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -876,6 +892,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacMaritalStatus.ForeColor = System.Drawing.Color.Black
         Me.cacMaritalStatus.FormattingEnabled = true
         Me.cacMaritalStatus.HideWhenNotEditingOrAdding = false
+        Me.cacMaritalStatus.IgnoreCase = false
         Me.cacMaritalStatus.IntegralHeight = false
         Me.cacMaritalStatus.LinkedLabel = Me.lblMaritalStatus
         Me.cacMaritalStatus.Location = New System.Drawing.Point(177, 27)
@@ -922,6 +939,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacNationalityCode.DisplayMember = "Name"
         Me.cacNationalityCode.EditingMode = false
         Me.cacNationalityCode.EndFindValue = Nothing
+        Me.cacNationalityCode.FieldDescription = Nothing
         Me.cacNationalityCode.FieldName = Nothing
         Me.cacNationalityCode.FilterRule = Nothing
         Me.cacNationalityCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -931,6 +949,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacNationalityCode.ForeColor = System.Drawing.Color.Black
         Me.cacNationalityCode.FormattingEnabled = true
         Me.cacNationalityCode.HideWhenNotEditingOrAdding = false
+        Me.cacNationalityCode.IgnoreCase = false
         Me.cacNationalityCode.IntegralHeight = false
         Me.cacNationalityCode.LinkedLabel = Me.lblNationalityCode
         Me.cacNationalityCode.Location = New System.Drawing.Point(176, 53)
@@ -977,6 +996,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacReligionIdNo.DisplayMember = "Name"
         Me.cacReligionIdNo.EditingMode = false
         Me.cacReligionIdNo.EndFindValue = Nothing
+        Me.cacReligionIdNo.FieldDescription = Nothing
         Me.cacReligionIdNo.FieldName = Nothing
         Me.cacReligionIdNo.FilterRule = Nothing
         Me.cacReligionIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -986,6 +1006,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacReligionIdNo.ForeColor = System.Drawing.Color.Black
         Me.cacReligionIdNo.FormattingEnabled = true
         Me.cacReligionIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacReligionIdNo.IgnoreCase = false
         Me.cacReligionIdNo.IntegralHeight = false
         Me.cacReligionIdNo.LinkedLabel = Me.lblNationalityCode
         Me.cacReligionIdNo.Location = New System.Drawing.Point(177, 79)
@@ -1074,6 +1095,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacGender.DisplayMember = "Name"
         Me.cacGender.EditingMode = false
         Me.cacGender.EndFindValue = Nothing
+        Me.cacGender.FieldDescription = Nothing
         Me.cacGender.FieldName = Nothing
         Me.cacGender.FilterRule = Nothing
         Me.cacGender.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -1083,6 +1105,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacGender.ForeColor = System.Drawing.Color.Black
         Me.cacGender.FormattingEnabled = true
         Me.cacGender.HideWhenNotEditingOrAdding = false
+        Me.cacGender.IgnoreCase = false
         Me.cacGender.IntegralHeight = false
         Me.cacGender.LinkedLabel = Me.lblMaritalStatus
         Me.cacGender.Location = New System.Drawing.Point(176, 1)
@@ -1129,6 +1152,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNationalIdNo.DataBoundControl = true
         Me.txtNationalIdNo.EditingMode = true
         Me.txtNationalIdNo.EndFindValue = Nothing
+        Me.txtNationalIdNo.FieldDescription = Nothing
         Me.txtNationalIdNo.FieldName = Nothing
         Me.txtNationalIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtNationalIdNo.FindEnabled = true
@@ -1172,6 +1196,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNotes.DataBoundControl = true
         Me.txtNotes.EditingMode = false
         Me.txtNotes.EndFindValue = Nothing
+        Me.txtNotes.FieldDescription = Nothing
         Me.txtNotes.FieldName = Nothing
         Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtNotes.FindEnabled = true
@@ -1186,6 +1211,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNotes.Multiline = true
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = true
         Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtNotes.Size = New System.Drawing.Size(422, 60)
         Me.txtNotes.TabIndex = 7
@@ -1284,12 +1310,14 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPhoneDisplay.EditingMode = false
         Me.DataGridViewPhoneDisplay.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewPhoneDisplay.EndFindValue = Nothing
+        Me.DataGridViewPhoneDisplay.FieldDescription = Nothing
         Me.DataGridViewPhoneDisplay.FieldName = Nothing
         Me.DataGridViewPhoneDisplay.FieldsDictionary = Nothing
         Me.DataGridViewPhoneDisplay.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DataGridViewPhoneDisplay.FindEnabled = false
         Me.DataGridViewPhoneDisplay.FirstRowDeletionEnabled = true
         Me.DataGridViewPhoneDisplay.FirstRowInsertionEnabled = true
+        Me.DataGridViewPhoneDisplay.IgnoreCase = false
         Me.DataGridViewPhoneDisplay.Location = New System.Drawing.Point(3, 174)
         Me.DataGridViewPhoneDisplay.Name = "DataGridViewPhoneDisplay"
         Me.DataGridViewPhoneDisplay.ReadOnly = true
@@ -1390,6 +1418,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtZipCode.DataBoundControl = true
         Me.txtZipCode.EditingMode = false
         Me.txtZipCode.EndFindValue = Nothing
+        Me.txtZipCode.FieldDescription = Nothing
         Me.txtZipCode.FieldName = Nothing
         Me.txtZipCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtZipCode.FindEnabled = true
@@ -1431,6 +1460,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPoBox.DataBoundControl = true
         Me.txtPoBox.EditingMode = false
         Me.txtPoBox.EndFindValue = Nothing
+        Me.txtPoBox.FieldDescription = Nothing
         Me.txtPoBox.FieldName = Nothing
         Me.txtPoBox.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtPoBox.FindEnabled = true
@@ -1472,6 +1502,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacCountryCode.DisplayMember = "Name"
         Me.cacCountryCode.EditingMode = false
         Me.cacCountryCode.EndFindValue = Nothing
+        Me.cacCountryCode.FieldDescription = Nothing
         Me.cacCountryCode.FieldName = Nothing
         Me.cacCountryCode.FilterRule = Nothing
         Me.cacCountryCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -1480,6 +1511,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacCountryCode.ForeColor = System.Drawing.Color.Black
         Me.cacCountryCode.FormattingEnabled = true
         Me.cacCountryCode.HideWhenNotEditingOrAdding = false
+        Me.cacCountryCode.IgnoreCase = false
         Me.cacCountryCode.IntegralHeight = false
         Me.cacCountryCode.LinkedLabel = Nothing
         Me.cacCountryCode.Location = New System.Drawing.Point(400, 101)
@@ -1526,6 +1558,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtProvinceState.DataBoundControl = true
         Me.txtProvinceState.EditingMode = false
         Me.txtProvinceState.EndFindValue = Nothing
+        Me.txtProvinceState.FieldDescription = Nothing
         Me.txtProvinceState.FieldName = Nothing
         Me.txtProvinceState.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtProvinceState.FindEnabled = true
@@ -1567,6 +1600,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtTownCity.DataBoundControl = true
         Me.txtTownCity.EditingMode = false
         Me.txtTownCity.EndFindValue = Nothing
+        Me.txtTownCity.FieldDescription = Nothing
         Me.txtTownCity.FieldName = Nothing
         Me.txtTownCity.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtTownCity.FindEnabled = true
@@ -1608,6 +1642,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDistrict.DataBoundControl = true
         Me.txtDistrict.EditingMode = false
         Me.txtDistrict.EndFindValue = Nothing
+        Me.txtDistrict.FieldDescription = Nothing
         Me.txtDistrict.FieldName = Nothing
         Me.txtDistrict.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtDistrict.FindEnabled = true
@@ -1650,6 +1685,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtStreet.DataBoundControl = true
         Me.txtStreet.EditingMode = false
         Me.txtStreet.EndFindValue = Nothing
+        Me.txtStreet.FieldDescription = Nothing
         Me.txtStreet.FieldName = Nothing
         Me.txtStreet.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtStreet.FindEnabled = true
@@ -1678,6 +1714,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtEmail.DataBoundControl = true
         Me.txtEmail.EditingMode = false
         Me.txtEmail.EndFindValue = Nothing
+        Me.txtEmail.FieldDescription = Nothing
         Me.txtEmail.FieldName = Nothing
         Me.txtEmail.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtEmail.FindEnabled = true
@@ -1819,7 +1856,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpHiredDate.SecurityKey = Nothing
         Me.dtpHiredDate.ShowLongDate = false
         Me.dtpHiredDate.ShowTime = false
-        Me.dtpHiredDate.Size = New System.Drawing.Size(123, 24)
+        Me.dtpHiredDate.Size = New System.Drawing.Size(131, 24)
         Me.dtpHiredDate.TabIndex = 1
         Me.dtpHiredDate.TargetCalendar = CType(resources.GetObject("dtpHiredDate.TargetCalendar"),System.Globalization.Calendar)
         Me.dtpHiredDate.Value = Nothing
@@ -1859,7 +1896,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpReleasedDate.SecurityKey = Nothing
         Me.dtpReleasedDate.ShowLongDate = false
         Me.dtpReleasedDate.ShowTime = false
-        Me.dtpReleasedDate.Size = New System.Drawing.Size(123, 24)
+        Me.dtpReleasedDate.Size = New System.Drawing.Size(131, 24)
         Me.dtpReleasedDate.TabIndex = 2
         Me.dtpReleasedDate.TargetCalendar = CType(resources.GetObject("dtpReleasedDate.TargetCalendar"),System.Globalization.Calendar)
         Me.dtpReleasedDate.Value = Nothing
@@ -1890,6 +1927,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacDepartmentIdNo.DisplayMember = "Name"
         Me.cacDepartmentIdNo.EditingMode = false
         Me.cacDepartmentIdNo.EndFindValue = Nothing
+        Me.cacDepartmentIdNo.FieldDescription = Nothing
         Me.cacDepartmentIdNo.FieldName = Nothing
         Me.cacDepartmentIdNo.FilterRule = Nothing
         Me.cacDepartmentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -1899,6 +1937,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacDepartmentIdNo.ForeColor = System.Drawing.Color.Black
         Me.cacDepartmentIdNo.FormattingEnabled = true
         Me.cacDepartmentIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacDepartmentIdNo.IgnoreCase = false
         Me.cacDepartmentIdNo.IntegralHeight = false
         Me.cacDepartmentIdNo.LinkedLabel = Me.lblDepartmentIdNo
         Me.cacDepartmentIdNo.Location = New System.Drawing.Point(179, 56)
@@ -1945,6 +1984,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacDesignationIdNo.DisplayMember = "Name"
         Me.cacDesignationIdNo.EditingMode = false
         Me.cacDesignationIdNo.EndFindValue = Nothing
+        Me.cacDesignationIdNo.FieldDescription = Nothing
         Me.cacDesignationIdNo.FieldName = Nothing
         Me.cacDesignationIdNo.FilterRule = Nothing
         Me.cacDesignationIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -1954,6 +1994,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cacDesignationIdNo.ForeColor = System.Drawing.Color.Black
         Me.cacDesignationIdNo.FormattingEnabled = true
         Me.cacDesignationIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacDesignationIdNo.IgnoreCase = false
         Me.cacDesignationIdNo.IntegralHeight = false
         Me.cacDesignationIdNo.LinkedLabel = Me.lblDesignationIdNo
         Me.cacDesignationIdNo.Location = New System.Drawing.Point(180, 82)
@@ -2000,6 +2041,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkActive.DisplayOnly = false
         Me.chkActive.EditingMode = false
         Me.chkActive.EndFindValue = Nothing
+        Me.chkActive.FieldDescription = Nothing
         Me.chkActive.FieldName = Nothing
         Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.chkActive.FindEnabled = true
@@ -2007,6 +2049,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout5.SetFlowBreak(Me.chkActive, true)
         Me.chkActive.ForeColor = System.Drawing.Color.Black
         Me.chkActive.IFindableControl_FindEnabled = false
+        Me.chkActive.IgnoreCase = false
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkActive.LinkedLabel = Me.lblActive
         Me.chkActive.Location = New System.Drawing.Point(181, 108)
@@ -2015,7 +2058,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkActive.NoLabel = false
         Me.chkActive.OldValue = ""
         Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkActive.Size = New System.Drawing.Size(25, 21)
+        Me.chkActive.Size = New System.Drawing.Size(23, 23)
         Me.chkActive.TabIndex = 5
         Me.chkActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chkActive.UseVisualStyleBackColor = false
@@ -2071,12 +2114,14 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewEarnings.EditingMode = false
         Me.DataGridViewEarnings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewEarnings.EndFindValue = Nothing
+        Me.DataGridViewEarnings.FieldDescription = Nothing
         Me.DataGridViewEarnings.FieldName = Nothing
         Me.DataGridViewEarnings.FieldsDictionary = Nothing
         Me.DataGridViewEarnings.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DataGridViewEarnings.FindEnabled = false
         Me.DataGridViewEarnings.FirstRowDeletionEnabled = true
         Me.DataGridViewEarnings.FirstRowInsertionEnabled = true
+        Me.DataGridViewEarnings.IgnoreCase = false
         Me.DataGridViewEarnings.Location = New System.Drawing.Point(0, 0)
         Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
         Me.DataGridViewEarnings.ReadOnly = true
@@ -2097,10 +2142,12 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvSequenceEarning.EditingMode = false
         Me.dgvSequenceEarning.EndFindValue = Nothing
+        Me.dgvSequenceEarning.FieldDescription = Nothing
         Me.dgvSequenceEarning.FieldName = Nothing
         Me.dgvSequenceEarning.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvSequenceEarning.FindEnabled = false
         Me.dgvSequenceEarning.HeaderText = "Seq"
+        Me.dgvSequenceEarning.IgnoreCase = false
         Me.dgvSequenceEarning.MinimumWidth = 30
         Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
         Me.dgvSequenceEarning.ReadOnly = true
@@ -2151,6 +2198,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvEarningAmount
         '
+        Me.dgvEarningAmount.BegFindValue = Nothing
         Me.dgvEarningAmount.DataPropertyName = "Amount"
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
@@ -2158,11 +2206,17 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle8.Format = "###,##0.00"
         Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvEarningAmount.EditingMode = false
+        Me.dgvEarningAmount.EndFindValue = Nothing
+        Me.dgvEarningAmount.FieldDescription = Nothing
+        Me.dgvEarningAmount.FieldName = Nothing
+        Me.dgvEarningAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvEarningAmount.FindEnabled = false
         Me.dgvEarningAmount.HeaderText = "Payroll Amount"
         Me.dgvEarningAmount.MinimumWidth = 80
         Me.dgvEarningAmount.Name = "dgvEarningAmount"
         Me.dgvEarningAmount.ReadOnly = true
         Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEarningAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgvEarningAmount.Width = 80
         '
@@ -2218,12 +2272,14 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDeductions.EditingMode = false
         Me.DataGridViewDeductions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewDeductions.EndFindValue = Nothing
+        Me.DataGridViewDeductions.FieldDescription = Nothing
         Me.DataGridViewDeductions.FieldName = Nothing
         Me.DataGridViewDeductions.FieldsDictionary = Nothing
         Me.DataGridViewDeductions.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DataGridViewDeductions.FindEnabled = false
         Me.DataGridViewDeductions.FirstRowDeletionEnabled = true
         Me.DataGridViewDeductions.FirstRowInsertionEnabled = true
+        Me.DataGridViewDeductions.IgnoreCase = false
         Me.DataGridViewDeductions.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
         Me.DataGridViewDeductions.ReadOnly = true
@@ -2244,10 +2300,12 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle11
         Me.dgvSequenceDeduction.EditingMode = false
         Me.dgvSequenceDeduction.EndFindValue = Nothing
+        Me.dgvSequenceDeduction.FieldDescription = Nothing
         Me.dgvSequenceDeduction.FieldName = Nothing
         Me.dgvSequenceDeduction.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvSequenceDeduction.FindEnabled = false
         Me.dgvSequenceDeduction.HeaderText = "Seq"
+        Me.dgvSequenceDeduction.IgnoreCase = false
         Me.dgvSequenceDeduction.MinimumWidth = 30
         Me.dgvSequenceDeduction.Name = "dgvSequenceDeduction"
         Me.dgvSequenceDeduction.ReadOnly = true
@@ -2271,6 +2329,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvDeductionRate
         '
+        Me.dgvDeductionRate.BegFindValue = Nothing
         Me.dgvDeductionRate.DataPropertyName = "Rate"
         DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
@@ -2278,10 +2337,16 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle13.Format = "###,##0.00"
         Me.dgvDeductionRate.DefaultCellStyle = DataGridViewCellStyle13
         Me.dgvDeductionRate.EditingMode = false
+        Me.dgvDeductionRate.EndFindValue = Nothing
+        Me.dgvDeductionRate.FieldDescription = Nothing
+        Me.dgvDeductionRate.FieldName = Nothing
+        Me.dgvDeductionRate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvDeductionRate.FindEnabled = false
         Me.dgvDeductionRate.HeaderText = "Rate / Amount"
         Me.dgvDeductionRate.Name = "dgvDeductionRate"
         Me.dgvDeductionRate.ReadOnly = true
         Me.dgvDeductionRate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDeductionRate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvDeductionRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgvDeductionRate.Width = 70
         '
@@ -2300,6 +2365,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvDeductionAmount
         '
+        Me.dgvDeductionAmount.BegFindValue = Nothing
         Me.dgvDeductionAmount.DataPropertyName = "Amount"
         DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
@@ -2307,11 +2373,17 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle15.Format = "###,##0.00"
         Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle15
         Me.dgvDeductionAmount.EditingMode = false
+        Me.dgvDeductionAmount.EndFindValue = Nothing
+        Me.dgvDeductionAmount.FieldDescription = Nothing
+        Me.dgvDeductionAmount.FieldName = Nothing
+        Me.dgvDeductionAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvDeductionAmount.FindEnabled = false
         Me.dgvDeductionAmount.HeaderText = "Payroll Amount"
         Me.dgvDeductionAmount.MinimumWidth = 80
         Me.dgvDeductionAmount.Name = "dgvDeductionAmount"
         Me.dgvDeductionAmount.ReadOnly = true
         Me.dgvDeductionAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDeductionAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvDeductionAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgvDeductionAmount.Width = 80
         '
@@ -2367,12 +2439,14 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPhones.EditingMode = false
         Me.DataGridViewPhones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewPhones.EndFindValue = Nothing
+        Me.DataGridViewPhones.FieldDescription = Nothing
         Me.DataGridViewPhones.FieldName = Nothing
         Me.DataGridViewPhones.FieldsDictionary = Nothing
         Me.DataGridViewPhones.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DataGridViewPhones.FindEnabled = false
         Me.DataGridViewPhones.FirstRowDeletionEnabled = true
         Me.DataGridViewPhones.FirstRowInsertionEnabled = true
+        Me.DataGridViewPhones.IgnoreCase = false
         Me.DataGridViewPhones.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewPhones.Name = "DataGridViewPhones"
         Me.DataGridViewPhones.ReadOnly = true
@@ -2394,10 +2468,12 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSequence.DisplayOnly = true
         Me.dgvSequence.EditingMode = false
         Me.dgvSequence.EndFindValue = Nothing
+        Me.dgvSequence.FieldDescription = Nothing
         Me.dgvSequence.FieldName = Nothing
         Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvSequence.FindEnabled = false
         Me.dgvSequence.HeaderText = "Seq"
+        Me.dgvSequence.IgnoreCase = false
         Me.dgvSequence.Name = "dgvSequence"
         Me.dgvSequence.ReadOnly = true
         Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -2439,10 +2515,12 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvAreaCode.DefaultCellStyle = DataGridViewCellStyle21
         Me.dgvAreaCode.EditingMode = false
         Me.dgvAreaCode.EndFindValue = Nothing
+        Me.dgvAreaCode.FieldDescription = Nothing
         Me.dgvAreaCode.FieldName = Nothing
         Me.dgvAreaCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvAreaCode.FindEnabled = false
         Me.dgvAreaCode.HeaderText = "Area Code"
+        Me.dgvAreaCode.IgnoreCase = false
         Me.dgvAreaCode.Name = "dgvAreaCode"
         Me.dgvAreaCode.ReadOnly = true
         Me.dgvAreaCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -2458,10 +2536,12 @@ Namespace PresentationLayer.Views.Forms
         Me.PhoneNumber.DefaultCellStyle = DataGridViewCellStyle22
         Me.PhoneNumber.EditingMode = false
         Me.PhoneNumber.EndFindValue = Nothing
+        Me.PhoneNumber.FieldDescription = Nothing
         Me.PhoneNumber.FieldName = Nothing
         Me.PhoneNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.PhoneNumber.FindEnabled = false
         Me.PhoneNumber.HeaderText = "PhoneNumber"
+        Me.PhoneNumber.IgnoreCase = false
         Me.PhoneNumber.Name = "PhoneNumber"
         Me.PhoneNumber.ReadOnly = true
         Me.PhoneNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -2533,6 +2613,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.EditingMode = true
         Me.TxtIdNo.EndFindValue = Nothing
+        Me.TxtIdNo.FieldDescription = Nothing
         Me.TxtIdNo.FieldName = Nothing
         Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.TxtIdNo.FindEnabled = true
@@ -2576,6 +2657,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtEmployeeCode.DataBoundControl = true
         Me.txtEmployeeCode.EditingMode = false
         Me.txtEmployeeCode.EndFindValue = Nothing
+        Me.txtEmployeeCode.FieldDescription = Nothing
         Me.txtEmployeeCode.FieldName = Nothing
         Me.txtEmployeeCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtEmployeeCode.FindEnabled = true

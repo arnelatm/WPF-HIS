@@ -26,7 +26,7 @@ Public Class CCheckBox
         TextAlign = ContentAlignment.MiddleRight
         CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         ContextMenuStrip = _contextMenuStrip1
-        Size = New Size(24, 24)
+        Size = New Size(23, 23)
         Margin = New Padding(1)
         FlatAppearance.BorderSize = 0
         NoLabel = True
@@ -203,6 +203,7 @@ Public Class CCheckBox
         End Using
 
         Dim pt As Point = New Point(0, 0)
+        'Dim rect As Rectangle = New Rectangle(pt, New Size(23, 23))
         Dim rect As Rectangle = New Rectangle(pt, New Size(23, 23))
         Dim cForeColor As Color
 
