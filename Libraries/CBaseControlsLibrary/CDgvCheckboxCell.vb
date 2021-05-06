@@ -9,6 +9,10 @@ Public Class CDgvCheckboxCell
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
 
+    Public Sub New()
+        Style.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+    End Sub
+
     ' ReSharper disable once LocalizableElement
     <DisplayName("DisplayOnly")>
     <Category("Custom Properties")>
@@ -24,7 +28,7 @@ Public Class CDgvCheckboxCell
         Set
             _displayOnly = Value
             If Value Or DisplayOnly Then
-                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Style.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 [ReadOnly] = True
             Else
@@ -39,10 +43,10 @@ Public Class CDgvCheckboxCell
         Get
             Return _editingMode
         End Get
-        Set(val As Boolean)
-            _editingMode = val
-            If val Or DisplayOnly Then
-                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        Set
+            _editingMode = value
+            If DisplayOnly or Not Value Then
+                Style.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 [ReadOnly] = True
             Else
