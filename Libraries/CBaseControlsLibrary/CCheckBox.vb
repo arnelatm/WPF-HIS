@@ -24,6 +24,7 @@ Public Class CCheckBox
         UseVisualStyleBackColor = True
         FlatStyle = FlatStyle.Flat
         TextAlign = ContentAlignment.MiddleRight
+        CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         ContextMenuStrip = _contextMenuStrip1
         Size = New Size(24, 24)
         Margin = New Padding(1)
@@ -171,8 +172,7 @@ Public Class CCheckBox
         End Get
     End Property
 
-    
-    Public Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+    Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
 
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
 

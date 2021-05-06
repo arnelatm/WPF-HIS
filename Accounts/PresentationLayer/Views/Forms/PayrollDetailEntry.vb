@@ -191,9 +191,9 @@ Namespace PresentationLayer.Views.Forms
             _deductionFooter.SumColumn("dgvDeductionAmount")
             Dim earning = _earningFooter.GetColumnTotal("dgvEarningAmount")
             Dim deduction = _deductionFooter.GetColumnTotal("dgvDeductionAmount")
-            txtTotalEarnings.Text = earning
-            txtTotalDeductions.Text = deduction
-            txtNetPay.Text = earning - deduction
+            txtTotalEarnings.Text = String.Format("{0:#,##0.00}", Double.Parse(earning))
+            txtTotalDeductions.Text = String.Format("{0:#,##0.00}", Double.Parse(deduction))
+            txtNetPay.Text = String.Format("{0:#,##0.00}", Double.Parse(earning - deduction))
         End Sub
 
     End Class

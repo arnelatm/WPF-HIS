@@ -1673,7 +1673,6 @@ Namespace PresentationLayer.Views.Forms
         Me.chkPosted.Location = New System.Drawing.Point(767, 174)
         Me.chkPosted.Margin = New System.Windows.Forms.Padding(1)
         Me.chkPosted.Name = "chkPosted"
-        Me.chkPosted.NoLabel = true
         Me.chkPosted.OldValue = Nothing
         Me.chkPosted.Size = New System.Drawing.Size(56, 17)
         Me.chkPosted.TabIndex = 293
@@ -1696,7 +1695,6 @@ Namespace PresentationLayer.Views.Forms
         Me.chkCancelled.Location = New System.Drawing.Point(838, 174)
         Me.chkCancelled.Margin = New System.Windows.Forms.Padding(1)
         Me.chkCancelled.Name = "chkCancelled"
-        Me.chkCancelled.NoLabel = true
         Me.chkCancelled.OldValue = Nothing
         Me.chkCancelled.Size = New System.Drawing.Size(70, 17)
         Me.chkCancelled.TabIndex = 294
@@ -1719,7 +1717,6 @@ Namespace PresentationLayer.Views.Forms
         Me.chkPcClosed.Location = New System.Drawing.Point(910, 174)
         Me.chkPcClosed.Margin = New System.Windows.Forms.Padding(1)
         Me.chkPcClosed.Name = "chkPcClosed"
-        Me.chkPcClosed.NoLabel = true
         Me.chkPcClosed.OldValue = Nothing
         Me.chkPcClosed.Size = New System.Drawing.Size(61, 17)
         Me.chkPcClosed.TabIndex = 295

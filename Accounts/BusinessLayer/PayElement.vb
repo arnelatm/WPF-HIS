@@ -20,6 +20,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property AccountIdNo As Int16
+        Public Property Active As Boolean
         Public Property BasePaymentIdNo As Int16
         Public Property CalculationType As Char
         Public Property DefaultQuantity As Decimal

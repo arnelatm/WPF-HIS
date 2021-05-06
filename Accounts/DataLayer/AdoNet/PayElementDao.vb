@@ -11,6 +11,7 @@ Namespace DataLayer.AdoNet
         Implements IDao(Of PayElement), IDaoAll(Of PayElement), IDaoGetRecords(Of PayElement), IDaoGetRecord(Of PayElement)
 
         Private Const FieldList = "AccountIdNo," &
+                                  "Active," &
                                   "BasePaymentIdNo," &
                                   "CalculationType," &
                                   "DefaultQuantity," &
@@ -52,6 +53,7 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef PayElement As PayElement) As Integer Implements IDao(Of PayElement).UpdateRecord
             Dim sql As String = " UPDATE [PayElement] Set" &
                     " AccountIdNo = @AccountIdNo," &
+                    " Active = @Active," &
                     " BasePaymentIdNo = @BasePaymentIdNo," &
                     " CalculationType = @CalculationType," &
                     " DefaultQuantity = @DefaultQuantity," &
@@ -79,8 +81,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef PayElement As PayElement) As Integer Implements IDao(Of PayElement).AddRecord
             Dim sql As String =
                     " INSERT INTO [PayElement] " &
-                    "        (AccountIdNo ,BasePaymentIdNo ,CalculationType ,DefaultQuantity ,PayElementCode ,PayElementKind ,Summary ,PayElementName ,PayElementNameAra ,PayElementType ,Frequency ,IncludeInEos ,FactorValue,FactorType  ,QuantityType ,ReportGroupIdNo, Notes ,Rate ,Taxable ,Unit ,UsePayGroups) " &
-                    " VALUES (@AccountIdNo,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@PayElementCode,@PayElementKind,@Summary,@PayElementName,@PayElementNameAra,@PayElementType,@Frequency,@IncludeInEos,@FactorValue,@FactorType,@QuantityType,@ReportGroupIdNo,@Notes,@Rate,@Taxable,@Unit,@UsePayGroups) "
+                    "        (AccountIdNo ,Active, BasePaymentIdNo ,CalculationType ,DefaultQuantity ,PayElementCode ,PayElementKind ,Summary ,PayElementName ,PayElementNameAra ,PayElementType ,Frequency ,IncludeInEos ,FactorValue,FactorType  ,QuantityType ,ReportGroupIdNo, Notes ,Rate ,Taxable ,Unit ,UsePayGroups) " &
+                    " VALUES (@AccountIdNo,@Active,@BasePaymentIdNo,@CalculationType,@DefaultQuantity,@PayElementCode,@PayElementKind,@Summary,@PayElementName,@PayElementNameAra,@PayElementType,@Frequency,@IncludeInEos,@FactorValue,@FactorType,@QuantityType,@ReportGroupIdNo,@Notes,@Rate,@Taxable,@Unit,@UsePayGroups) "
             Return _db.Insert(sql, Take(PayElement))
         End Function
 
@@ -88,6 +90,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New PayElement() With {
             .AccountIdNo = Extensions.AsId(Of Int16)(reader("AccountIdNo")),
+            .Active = Extensions.AsBool(reader("Active")),
             .BasePaymentIdNo = Extensions.AsId(Of Int16)(reader("BasePaymentIdNo")),
             .CalculationType = Extensions.AsChar(reader("CalculationType")),
             .DefaultQuantity = Extensions.AsDecimal(reader("DefaultQuantity")),
@@ -114,6 +117,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(PayElement As PayElement) As Object()
             Return New Object() {
                                     "@AccountIdNo", PayElement.AccountIdNo,
+                                    "@Active", PayElement.Active,
                                     "@BasePaymentIdNo", PayElement.BasePaymentIdNo,
                                     "@CalculationType", PayElement.CalculationType,
                                     "@DefaultQuantity", PayElement.DefaultQuantity,
