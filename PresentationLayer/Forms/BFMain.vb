@@ -567,7 +567,9 @@ Public Class BfMain
                 isSelectable = True
             End If
             cControl.Enabled = isSelectable
-            cControl.Visible = isVisible
+            If cControl.Visible Then
+                cControl.Visible = isVisible
+            End If
         End If
     End Sub
 
@@ -618,9 +620,9 @@ Public Class BfMain
             SetToolStripItemsNew(toolStrip.Items, subMenuName)
         Else
             objectSecurityKey = GetControlSecurityKey(cCtrl)
-            If objectSecurityKey Is Nothing Or objectSecurityKey = "" Then
-                cCtrl.Visible = True
-                cCtrl.Enabled = True
+            If objectSecurityKey Is Nothing OrElse objectSecurityKey = "" Then
+                'cCtrl.Visible = True
+                'cCtrl.Enabled = True
             Else
                 Dim controlSecurityValues As ArrayList
                 Dim isEditable As Boolean

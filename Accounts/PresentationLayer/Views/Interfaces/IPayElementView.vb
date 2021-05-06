@@ -6,6 +6,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IPayElementView
         Inherits IView
         Property AccountIdNo As Int16
+        Property Active As Boolean
         Property BasePaymentIdNo As Int16?
         Property CalculationType As Char
         Property DefaultQuantity As Decimal

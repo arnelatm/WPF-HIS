@@ -21,7 +21,7 @@ Namespace DataLayer.AdoNet
             DboTvpInsertFileName = "dbo.InsertPayElementAccountTVP"
         End Sub
 
-        Public Function GetRecordsWithGroupIdNo(PayElementIdNo, Optional sortKey = Nothing) As List(Of PayElementAccount) Implements IDaoChild(Of PayElementAccount).GetRecordsWithGroupIdNo
+        Public Function GetRecordsWithGroupIdNo(payElementIdNo, Optional sortKey = Nothing) As List(Of PayElementAccount) Implements IDaoChild(Of PayElementAccount).GetRecordsWithGroupIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If
@@ -37,7 +37,7 @@ Namespace DataLayer.AdoNet
                     " FROM " & TableFileName &
                     " WHERE PayElementIdNo = @PayElementIdNo" &
                     " ORDER BY " & sortKey
-            Dim params() As Object = {"@PayElementIdNo", PayElementIdNo}
+            Dim params() As Object = {"@PayElementIdNo", payElementIdNo}
             Return _db.Read(sql, Make, params).ToList()
         End Function
 

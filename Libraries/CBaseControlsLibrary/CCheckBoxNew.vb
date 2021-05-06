@@ -15,22 +15,18 @@ Public Class CCheckBoxNew
     Private _oldValue As String
     Private _autoSize As Boolean
     Private _textToSearch As String
+    Private _searchPlace As IFindableControl.SearchPlaceEnum
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
 
     Public Sub New()
         MyBase.New()
-        AutoSize = False
-        Appearance = Appearance.Normal
-        UseVisualStyleBackColor = True
-        FlatStyle = FlatStyle.Flat
-        TextAlign = ContentAlignment.MiddleRight
+        Dim myFont As New Font("Sans Serif", 10.0!, FontStyle.Regular)
         ContextMenuStrip = _contextMenuStrip1
-        BackColor = System.Drawing.Color.Transparent
-        Size = New Size(24, 24)
-        Margin = New Padding(1)
-        FlatAppearance.BorderSize = 0
-        NoLabel = True
-        Text = ""
+        Font = myFont
+        'Appearance = System.Windows.Forms.Appearance.Button
+        FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        AutoSize = True
+        'Height = 16
     End Sub
 
 #Region "Declarations#"
@@ -39,15 +35,6 @@ Public Class CCheckBoxNew
     Private ReadOnly _textFind = MessagingLibrary.Messaging.TranslateCaption("Find on this field")
 
 #End Region
-
-    Public Overrides Property AutoSize As Boolean
-        Get
-            Return _autoSize
-        End Get
-        Set(value As Boolean)
-            _autoSize = False
-        End Set
-    End Property
 
     <Bindable(True)>
     <Category("Custom Properties")>
@@ -63,30 +50,9 @@ Public Class CCheckBoxNew
             _displayOnly = value
             If value Then
                 Enabled = False
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
                 Enabled = True
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                'BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
-        End Set
-    End Property
-
-    <Bindable(True)>
-    <Category("Custom Properties")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that this checkbox has no label.")>
-    <Browsable(True)>
-    Public Property NoLabel As Boolean
-        Get
-            Return _noLabel
-        End Get
-        Set(value As Boolean)
-            If value Then
-                Text = " "
-            End If
-            _noLabel = value
         End Set
     End Property
 
@@ -99,17 +65,11 @@ Public Class CCheckBoxNew
             If value Then
                 If DisplayOnly Then
                     AutoCheck = False
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 Else
                     AutoCheck = True
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    'BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
             Else
                 AutoCheck = False
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End Set
     End Property
@@ -120,9 +80,6 @@ Public Class CCheckBoxNew
     <Browsable(True)>
     Public Property LinkedLabel As CLabel
 
-    '    If Checked Then
-    '        e.Graphics.FillRectangle(New SolidBrush(_checkRegionColor), checkRegion)
-    '    End If
     Public Property OldValue() As String
         Get
             Return _oldValue
@@ -134,20 +91,12 @@ Public Class CCheckBoxNew
 
     Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
-            Return False
+            Return True
         End Get
     End Property
 
-    '    MyBase.OnPaint(e)
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         _oldValue = Text
-        If EditingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-            'BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-        End If
     End Sub
 
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
@@ -160,7 +109,16 @@ Public Class CCheckBoxNew
 
     Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
     Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
+
     Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
+        Get
+            Return IFindableControl.SearchPlaceEnum.ExactValue
+        End Get
+        Set(value As IFindableControl.SearchPlaceEnum)
+            _searchPlace = value
+        End Set
+    End Property
+
     Public Property FieldName As String Implements IFindableControl.FieldName
     Public Property FieldDescription As String Implements IFindableControl.FieldDescription
     Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
@@ -172,23 +130,9 @@ Public Class CCheckBoxNew
         End Get
     End Property
 
-    
-    Public Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
-
+    Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
 
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
-
-    'Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
-    '    Dim checkRegion As New Rectangle(2, 3, 9, 9)
-    Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If EditingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            ' BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-        End If
-    End Sub
 
     Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -259,19 +203,52 @@ Public Class CCheckBoxNew
         Return _textToSearch
     End Function
 
-    'Private ReadOnly _checkRegionColor As Color = Color.Coral
-    'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
-    '    EditingMode = Not editableControl
+    'Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
+    '    'pEvent.Graphics.Clear(BackColor)
+
+    '    Using brush As SolidBrush = New SolidBrush(ForeColor)
+    '        pEvent.Graphics.DrawString(Text, Font, brush, 27, 4)
+    '    End Using
+
+    '    Dim pt As Point = New Point(4, 4)
+    '    Dim rect As Rectangle = New Rectangle(pt, New Size(16, 16))
+    '    pEvent.Graphics.FillRectangle(Brushes.Beige, rect)
+
+    '    If Checked Then
+
+    '        Using brush As SolidBrush = New SolidBrush(Color.Orange)
+
+    '            Using wing As Font = New Font("Wingdings", 12.0F)
+    '                pEvent.Graphics.DrawString("ü", wing, brush, 1, 2)
+    '            End Using
+    '        End Using
+    '    End If
+
+    '    pEvent.Graphics.DrawRectangle(Pens.DarkSlateBlue, rect)
+    '    Dim fRect As Rectangle = ClientRectangle
+
+    '    If Focused Then
+    '        fRect.Inflate(-1, -1)
+
+    '        Using pen As Pen = New Pen(Brushes.Gray) With {
+    '            .DashStyle = DashStyle.Dot
+    '            }
+    '            pEvent.Graphics.DrawRectangle(pen, fRect)
+    '        End Using
+    '    End If
     'End Sub
 
-    'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
-    '    Visible = visibleControl
-    'End Sub
-    'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
-    '    Throw New NotImplementedException()
+    'Protected Overrides Sub OnPaint(ByVal pevent As System.Windows.Forms.PaintEventArgs)
+    '    Dim Brsh As New SolidBrush(BackColor)
+    '    Dim BoxSide As Integer = CInt(pevent.Graphics.MeasureString(Text, Font, Width).Height)
+    '    pevent.Graphics.FillRectangle(Brsh, 0, 0, Width, Height)
+    '    If Checked Then
+    '        pevent.Graphics.FillRectangle(Brushes.Black, New Rectangle(0, 0, BoxSide, BoxSide))
+    '    Else
+    '        pevent.Graphics.FillRectangle(Brushes.White, New Rectangle(0, 0, BoxSide, BoxSide))
+    '        pevent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 0, BoxSide - 1, BoxSide - 1))
+    '    End If
+    '    pevent.Graphics.DrawString(Text, Font, Brushes.Black, BoxSide, 0)
     'End Sub
 
-    'Public Sub MakeSelectable(selectableControl As Boolean) Implements IEntryControl.MakeSelectable
-    '    Throw New NotImplementedException()
-    'End Sub
 End Class

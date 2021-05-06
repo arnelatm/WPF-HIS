@@ -108,6 +108,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Active As Boolean Implements IPayElementView.Active
+            Get
+                Return chkActive.Checked
+            End Get
+            Set
+                chkActive.Checked = Value
+            End Set
+        End Property
+
         Public Property BasePaymentIdNo As Int16? Implements IPayElementView.BasePaymentIdNo
             Get
                 Return cboBasePaymentIdNo.GetValue()
@@ -765,7 +774,7 @@ Namespace PresentationLayer.Views.Forms
             UpdatePostingTabDisplay()
         End Sub
 
-        Private Sub chkSummary_CheckedChanged(sender As Object, e As EventArgs) Handles chkSummary.CheckedChanged
+        Private Sub chkSummary_CheckedChanged(sender As Object, e As EventArgs)
             If chkSummary.Checked Then
                 cboPayElementType.Visible = False
                 tlpPostingAccounts.Visible = False
