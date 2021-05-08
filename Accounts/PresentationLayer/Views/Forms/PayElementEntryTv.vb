@@ -555,6 +555,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateCalculationTabDisplay()
             SuspendLayout()
+            floPayElement.Visible = False
             floCalculation.Visible = False
             tlpCalculation.Visible = False
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
@@ -658,6 +659,7 @@ Namespace PresentationLayer.Views.Forms
                 tlpCalculation.Visible = True
                 floCalculation.Visible = True
             End If
+            floPayElement.Visible = True
             ResumeLayout()
         End Sub
 

@@ -9,6 +9,14 @@ Public Class CDgvCheckboxCell
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
 
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvCheckboxCell = TryCast(MyBase.Clone(), CDgvCheckboxCell)
+        copy.DisplayOnly = DisplayOnly
+        copy.EditingMode = EditingMode
+        copy.Translatable = Translatable
+        Return copy
+    End Function
+
     ' ReSharper disable once LocalizableElement
     <DisplayName("DisplayOnly")>
     <Category("Custom Properties")>
@@ -53,10 +61,13 @@ Public Class CDgvCheckboxCell
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+
+        End Set
     End Property
 
 End Class

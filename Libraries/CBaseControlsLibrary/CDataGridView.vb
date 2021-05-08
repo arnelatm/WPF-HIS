@@ -198,7 +198,7 @@ Public Class CDataGridView
 
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
 
-    Public Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+    Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
 
     Public Property FieldDescription As String Implements IFindableControl.FieldDescription
 
@@ -797,5 +797,36 @@ Public Class CDataGridView
         End If
 
     End Sub
+
+    Private Sub On_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
+        If (e.ColumnIndex >= 0 AndAlso e.RowIndex >= 0) Then
+            If TypeOf Me.Columns(e.ColumnIndex) Is CDgvCheckBoxColumn Then
+                Dim value = DirectCast(e.FormattedValue, Nullable(Of Boolean))
+                If Not EditingMode Then
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.All And
+                                          Not (DataGridViewPaintParts.ContentForeground))
+                    Dim state = IIf((value.HasValue And value.Value),
+                                    VisualStyles.CheckBoxState.CheckedDisabled,
+                                    VisualStyles.CheckBoxState.UncheckedDisabled)
+                    Dim size = RadioButtonRenderer.GetGlyphSize(e.Graphics, state)
+                    Dim location = New Point((e.CellBounds.Width - size.Width) / 2,
+                                             (e.CellBounds.Height - size.Height) / 2)
+                    location.Offset(e.CellBounds.Location)
+                    CheckBoxRenderer.DrawCheckBox(e.Graphics, location, state)
+                    e.Handled = True
+                End If
+            End If
+        End If
+    End Sub
+
+    'Private Sub Dgv_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles Me.CellFormatting
+    '    If e.Value IsNot Nothing AndAlso TypeOf Columns(e.ColumnIndex).CellTemplate Is DataGridViewCheckBoxCell Then
+    '        If Me(e.ColumnIndex, e.RowIndex).ReadOnly Then
+    '            Me(e.ColumnIndex, e.RowIndex).Style.BackColor = If(CType(e.Value, Boolean), Color.Yellow, Columns(e.ColumnIndex).DefaultCellStyle.BackColor)
+    '        Else
+    '            Me(e.ColumnIndex, e.RowIndex).Style.BackColor = If(CType(e.Value, Boolean), Color.White, Columns(e.ColumnIndex).DefaultCellStyle.BackColor)
+    '        End If
+    '    End If
+    'End Sub
 
 End Class

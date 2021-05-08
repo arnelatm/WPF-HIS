@@ -1445,6 +1445,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PresentationLayer\app-Ibn-server.config" />
+    <None Include="Reports\Payroll Report Summary.rpt" />
+    <None Include="Reports\Payroll Report.rpt" />
     <None Include="Reports\Statement of Accounts Payable Arabic.rpt" />
     <None Include="Resources\YellowGradientBackgroundLarge.jpg" />
   </ItemGroup>

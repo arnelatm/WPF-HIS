@@ -141,7 +141,9 @@
     <Compile Include="CDataGvBs.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CDgvButtonColumn.vb" />
     <Compile Include="CDgvCheckboxCell.vb" />
+    <Compile Include="CDgvButtonCell.vb" />
     <Compile Include="CDgvDecimalCell.vb" />
     <Compile Include="CDgvCheckBoxColumn.vb" />
     <Compile Include="CdgvDecimalColumn.vb" />

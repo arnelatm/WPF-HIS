@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms
         Dim CBlendItems2 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
         Dim CBlendItems3 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -39,6 +39,7 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.floHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -310,6 +311,7 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
         Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboAccountIdNo.IgnoreCase = false
         Me.cboAccountIdNo.LinkedLabel = Nothing
         Me.cboAccountIdNo.Name = "cboAccountIdNo"
         Me.cboAccountIdNo.OldValue = 0
@@ -351,6 +353,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkPosted.FlatAppearance.BorderSize = 0
         Me.chkPosted.ForeColor = System.Drawing.Color.Black
         Me.chkPosted.IFindableControl_FindEnabled = false
+        Me.chkPosted.IgnoreCase = false
         Me.chkPosted.LinkedLabel = Nothing
         Me.chkPosted.Name = "chkPosted"
         Me.chkPosted.NoLabel = true
@@ -947,14 +950,14 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewReconciliationItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewReconciliationItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvReferenceNo, Me.dgvJournalIdNo, Me.dgvDocumentNumber, Me.dgvDebit, Me.dgvCredit, Me.dgvCleared, Me.dgvPayDescription, Me.dgvAccountReconciliationIdNo})
         Me.DataGridViewReconciliationItems.DataSource = Me.bsAccountReconciliationItems
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewReconciliationItems.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewReconciliationItems.DefaultCellStyle = DataGridViewCellStyle12
         Me.DataGridViewReconciliationItems.DgvFooter = Nothing
         Me.DataGridViewReconciliationItems.DisplayOnly = false
         Me.DataGridViewReconciliationItems.Ea = Nothing
@@ -968,6 +971,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewReconciliationItems.FindEnabled = false
         Me.DataGridViewReconciliationItems.FirstRowDeletionEnabled = false
         Me.DataGridViewReconciliationItems.FirstRowInsertionEnabled = false
+        Me.DataGridViewReconciliationItems.IgnoreCase = false
         resources.ApplyResources(Me.DataGridViewReconciliationItems, "DataGridViewReconciliationItems")
         Me.DataGridViewReconciliationItems.Name = "DataGridViewReconciliationItems"
         Me.DataGridViewReconciliationItems.ReadOnly = true
@@ -992,6 +996,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvSequence.FindEnabled = false
         resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+        Me.dgvSequence.IgnoreCase = false
         Me.dgvSequence.Name = "dgvSequence"
         Me.dgvSequence.ReadOnly = true
         Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -1011,6 +1016,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvTransactionDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvTransactionDate.FindEnabled = false
         resources.ApplyResources(Me.dgvTransactionDate, "dgvTransactionDate")
+        Me.dgvTransactionDate.IgnoreCase = false
         Me.dgvTransactionDate.Name = "dgvTransactionDate"
         Me.dgvTransactionDate.ReadOnly = true
         Me.dgvTransactionDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1030,6 +1036,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvJournalCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvJournalCode.FindEnabled = false
         resources.ApplyResources(Me.dgvJournalCode, "dgvJournalCode")
+        Me.dgvJournalCode.IgnoreCase = false
         Me.dgvJournalCode.Name = "dgvJournalCode"
         Me.dgvJournalCode.ReadOnly = true
         Me.dgvJournalCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -1049,6 +1056,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvReferenceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvReferenceNo.FindEnabled = false
         resources.ApplyResources(Me.dgvReferenceNo, "dgvReferenceNo")
+        Me.dgvReferenceNo.IgnoreCase = false
         Me.dgvReferenceNo.Name = "dgvReferenceNo"
         Me.dgvReferenceNo.ReadOnly = true
         Me.dgvReferenceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1067,6 +1075,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvJournalIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvJournalIdNo.FindEnabled = false
         resources.ApplyResources(Me.dgvJournalIdNo, "dgvJournalIdNo")
+        Me.dgvJournalIdNo.IgnoreCase = false
         Me.dgvJournalIdNo.Name = "dgvJournalIdNo"
         Me.dgvJournalIdNo.ReadOnly = true
         Me.dgvJournalIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1086,6 +1095,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvDocumentNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvDocumentNumber.FindEnabled = false
         resources.ApplyResources(Me.dgvDocumentNumber, "dgvDocumentNumber")
+        Me.dgvDocumentNumber.IgnoreCase = false
         Me.dgvDocumentNumber.Name = "dgvDocumentNumber"
         Me.dgvDocumentNumber.ReadOnly = true
         Me.dgvDocumentNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1138,6 +1148,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.dgvCleared.BegFindValue = Nothing
         Me.dgvCleared.DataPropertyName = "Cleared"
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.NullValue = false
+        Me.dgvCleared.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgvCleared.EditingMode = false
         Me.dgvCleared.EndFindValue = Nothing
         Me.dgvCleared.FieldDescription = Nothing
@@ -1145,6 +1160,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvCleared.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvCleared.FindEnabled = false
         resources.ApplyResources(Me.dgvCleared, "dgvCleared")
+        Me.dgvCleared.IgnoreCase = false
         Me.dgvCleared.Name = "dgvCleared"
         Me.dgvCleared.ReadOnly = true
         Me.dgvCleared.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -1155,9 +1171,9 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPayDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvPayDescription.BegFindValue = Nothing
         Me.dgvPayDescription.DataPropertyName = "PayDescription"
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-        Me.dgvPayDescription.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+        Me.dgvPayDescription.DefaultCellStyle = DataGridViewCellStyle11
         Me.dgvPayDescription.DisplayOnly = true
         Me.dgvPayDescription.EditingMode = true
         Me.dgvPayDescription.EndFindValue = Nothing
@@ -1167,6 +1183,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPayDescription.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvPayDescription.FindEnabled = false
         resources.ApplyResources(Me.dgvPayDescription, "dgvPayDescription")
+        Me.dgvPayDescription.IgnoreCase = false
         Me.dgvPayDescription.Name = "dgvPayDescription"
         Me.dgvPayDescription.ReadOnly = true
         Me.dgvPayDescription.Resizable = System.Windows.Forms.DataGridViewTriState.[True]

@@ -2,21 +2,28 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CDgvDecimalColumn
-    Inherits DataGridViewColumn
+Public Class CDgvButtonColumn
+    Inherits DataGridViewButtonColumn
     Implements IEntryControl
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
 
     Public Sub New()
-        CellTemplate = New CDgvDecimalCell
-        DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        CellTemplate = New CDgvButtonCell
+        DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        UseColumnTextForButtonValue = True
+        Text = "Yes"
+        Translatable = True
     End Sub
 
-    Public Sub SetFormat(ByVal length As UInt16, ByVal decimalPlaces As UInt16)
-        DefaultCellStyle.Format = StrDup(length - decimalPlaces - 2, "#") + "0." + StrDup(decimalPlaces, "0")
-    End Sub
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvButtonColumn = TryCast(MyBase.Clone(), CDgvButtonColumn)
+        copy.DisplayOnly = DisplayOnly
+        copy.EditingMode = EditingMode
+        copy.Translatable = Translatable
+        Return copy
+    End Function
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -49,36 +56,6 @@ Public Class CDgvDecimalColumn
         End Set
     End Property
 
-    '<Category("Custom Properties")>
-    '<DefaultValue(False)>
-    '<DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
-    '<EditorBrowsable(EditorBrowsableState.Always), Bindable(True)>
-    '<Description("Set to the number of decimal places to display.")>
-    '<Browsable(True)>
-    'Public Property DecimalPlaces As Int16
-    '    Get
-    '        Return _decimalPlaces
-    '    End Get
-    '    Set(value As Int16)
-    '        _decimalPlaces = value
-    '    End Set
-    'End Property
-
-    '<Category("Custom Properties")>
-    '<DefaultValue(False)>
-    '<DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
-    '<EditorBrowsable(EditorBrowsableState.Always), Bindable(True)>
-    '<Description("Set to the total length of the number including decimal places and period.")>
-    '<Browsable(True)>
-    'Public Property Length As Int16
-    '    Get
-    '        Return _length
-    '    End Get
-    '    Set(value As Int16)
-    '        _length = value
-    '    End Set
-    'End Property
-
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
@@ -105,10 +82,6 @@ Public Class CDgvDecimalColumn
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
-        Get
-            Return False
-        End Get
-    End Property
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
 
 End Class
