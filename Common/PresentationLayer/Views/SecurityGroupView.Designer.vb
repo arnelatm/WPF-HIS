@@ -45,13 +45,13 @@ Namespace PresentationLayer.Views
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.DataGridViewGroupAccesses = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
         Me.DgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.DgvSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.DgvSecurityObjectIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.DgvSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.DgvVisible = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.DgvEditable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.bsGroupAccesses = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DgvVisible = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+        Me.DgvEditable = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         CType(Me.DataGridViewGroupAccesses,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsGroupAccesses,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
@@ -81,6 +81,7 @@ Namespace PresentationLayer.Views
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
         Me.TxtIdNo.EndFindValue = Nothing
+        Me.TxtIdNo.FieldDescription = Nothing
         Me.TxtIdNo.FieldName = Nothing
         Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.TxtIdNo.FindEnabled = false
@@ -124,6 +125,7 @@ Namespace PresentationLayer.Views
         Me.txtSecurityGroupCode.DataBoundControl = true
         Me.txtSecurityGroupCode.EditingMode = false
         Me.txtSecurityGroupCode.EndFindValue = Nothing
+        Me.txtSecurityGroupCode.FieldDescription = Nothing
         Me.txtSecurityGroupCode.FieldName = Nothing
         Me.txtSecurityGroupCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtSecurityGroupCode.FindEnabled = false
@@ -166,6 +168,7 @@ Namespace PresentationLayer.Views
         Me.txtSecurityGroupName.DataBoundControl = true
         Me.txtSecurityGroupName.EditingMode = true
         Me.txtSecurityGroupName.EndFindValue = Nothing
+        Me.txtSecurityGroupName.FieldDescription = Nothing
         Me.txtSecurityGroupName.FieldName = Nothing
         Me.txtSecurityGroupName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtSecurityGroupName.FindEnabled = false
@@ -209,6 +212,7 @@ Namespace PresentationLayer.Views
         Me.txtSecurityGroupNameAra.EditingMode = true
         Me.txtSecurityGroupNameAra.EndFindValue = Nothing
         Me.txtSecurityGroupNameAra.EnglishControl = Me.txtSecurityGroupName
+        Me.txtSecurityGroupNameAra.FieldDescription = Nothing
         Me.txtSecurityGroupNameAra.FieldName = Nothing
         Me.txtSecurityGroupNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtSecurityGroupNameAra.FindEnabled = false
@@ -250,6 +254,7 @@ Namespace PresentationLayer.Views
         Me.cacParentIdNo.DisplayMember = "Name"
         Me.cacParentIdNo.EditingMode = false
         Me.cacParentIdNo.EndFindValue = Nothing
+        Me.cacParentIdNo.FieldDescription = Nothing
         Me.cacParentIdNo.FieldName = Nothing
         Me.cacParentIdNo.FilterRule = Nothing
         Me.cacParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -258,6 +263,7 @@ Namespace PresentationLayer.Views
         Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
         Me.cacParentIdNo.FormattingEnabled = true
         Me.cacParentIdNo.HideWhenNotEditingOrAdding = false
+        Me.cacParentIdNo.IgnoreCase = false
         Me.cacParentIdNo.IntegralHeight = false
         Me.cacParentIdNo.LinkedLabel = Nothing
         Me.cacParentIdNo.Location = New System.Drawing.Point(237, 113)
@@ -304,6 +310,7 @@ Namespace PresentationLayer.Views
         Me.txtNotes.DataBoundControl = true
         Me.txtNotes.EditingMode = false
         Me.txtNotes.EndFindValue = Nothing
+        Me.txtNotes.FieldDescription = Nothing
         Me.txtNotes.FieldName = Nothing
         Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtNotes.FindEnabled = false
@@ -348,12 +355,14 @@ Namespace PresentationLayer.Views
         Me.DataGridViewGroupAccesses.EditingMode = false
         Me.DataGridViewGroupAccesses.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewGroupAccesses.EndFindValue = Nothing
+        Me.DataGridViewGroupAccesses.FieldDescription = Nothing
         Me.DataGridViewGroupAccesses.FieldName = Nothing
         Me.DataGridViewGroupAccesses.FieldsDictionary = Nothing
         Me.DataGridViewGroupAccesses.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DataGridViewGroupAccesses.FindEnabled = false
         Me.DataGridViewGroupAccesses.FirstRowDeletionEnabled = false
         Me.DataGridViewGroupAccesses.FirstRowInsertionEnabled = false
+        Me.DataGridViewGroupAccesses.IgnoreCase = false
         Me.DataGridViewGroupAccesses.Location = New System.Drawing.Point(20, 203)
         Me.DataGridViewGroupAccesses.Name = "DataGridViewGroupAccesses"
         Me.DataGridViewGroupAccesses.ReadOnly = true
@@ -365,6 +374,10 @@ Namespace PresentationLayer.Views
         Me.DataGridViewGroupAccesses.Size = New System.Drawing.Size(655, 368)
         Me.DataGridViewGroupAccesses.TabIndex = 178
         '
+        'bsGroupAccesses
+        '
+        Me.bsGroupAccesses.DataSource = GetType(AATM.PresentationLayer.Models.GroupAccessModel)
+        '
         'DgvIdNo
         '
         Me.DgvIdNo.BegFindValue = Nothing
@@ -374,10 +387,12 @@ Namespace PresentationLayer.Views
         Me.DgvIdNo.DefaultCellStyle = DataGridViewCellStyle2
         Me.DgvIdNo.EditingMode = false
         Me.DgvIdNo.EndFindValue = Nothing
+        Me.DgvIdNo.FieldDescription = Nothing
         Me.DgvIdNo.FieldName = Nothing
         Me.DgvIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DgvIdNo.FindEnabled = false
         Me.DgvIdNo.HeaderText = "IdNo"
+        Me.DgvIdNo.IgnoreCase = false
         Me.DgvIdNo.Name = "DgvIdNo"
         Me.DgvIdNo.ReadOnly = true
         Me.DgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -393,10 +408,12 @@ Namespace PresentationLayer.Views
         Me.DgvSecurityGroupIdNo.DefaultCellStyle = DataGridViewCellStyle3
         Me.DgvSecurityGroupIdNo.EditingMode = false
         Me.DgvSecurityGroupIdNo.EndFindValue = Nothing
+        Me.DgvSecurityGroupIdNo.FieldDescription = Nothing
         Me.DgvSecurityGroupIdNo.FieldName = Nothing
         Me.DgvSecurityGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DgvSecurityGroupIdNo.FindEnabled = false
         Me.DgvSecurityGroupIdNo.HeaderText = "SecurityGroupIdNo"
+        Me.DgvSecurityGroupIdNo.IgnoreCase = false
         Me.DgvSecurityGroupIdNo.Name = "DgvSecurityGroupIdNo"
         Me.DgvSecurityGroupIdNo.ReadOnly = true
         Me.DgvSecurityGroupIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -412,10 +429,12 @@ Namespace PresentationLayer.Views
         Me.DgvSecurityObjectIdNo.DefaultCellStyle = DataGridViewCellStyle4
         Me.DgvSecurityObjectIdNo.EditingMode = false
         Me.DgvSecurityObjectIdNo.EndFindValue = Nothing
+        Me.DgvSecurityObjectIdNo.FieldDescription = Nothing
         Me.DgvSecurityObjectIdNo.FieldName = Nothing
         Me.DgvSecurityObjectIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DgvSecurityObjectIdNo.FindEnabled = false
         Me.DgvSecurityObjectIdNo.HeaderText = "SecurityObjectIdNo"
+        Me.DgvSecurityObjectIdNo.IgnoreCase = false
         Me.DgvSecurityObjectIdNo.Name = "DgvSecurityObjectIdNo"
         Me.DgvSecurityObjectIdNo.ReadOnly = true
         Me.DgvSecurityObjectIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -432,10 +451,12 @@ Namespace PresentationLayer.Views
         Me.DgvSecurityObjectName.DefaultCellStyle = DataGridViewCellStyle5
         Me.DgvSecurityObjectName.EditingMode = false
         Me.DgvSecurityObjectName.EndFindValue = Nothing
+        Me.DgvSecurityObjectName.FieldDescription = Nothing
         Me.DgvSecurityObjectName.FieldName = Nothing
         Me.DgvSecurityObjectName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DgvSecurityObjectName.FindEnabled = false
         Me.DgvSecurityObjectName.HeaderText = "SecurityObjectName"
+        Me.DgvSecurityObjectName.IgnoreCase = false
         Me.DgvSecurityObjectName.Name = "DgvSecurityObjectName"
         Me.DgvSecurityObjectName.ReadOnly = true
         Me.DgvSecurityObjectName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -443,23 +464,39 @@ Namespace PresentationLayer.Views
         '
         'DgvVisible
         '
+        Me.DgvVisible.BegFindValue = Nothing
         Me.DgvVisible.DataPropertyName = "Visible"
+        Me.DgvVisible.EditingMode = false
+        Me.DgvVisible.EndFindValue = Nothing
+        Me.DgvVisible.FieldDescription = Nothing
+        Me.DgvVisible.FieldName = Nothing
+        Me.DgvVisible.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DgvVisible.FindEnabled = false
         Me.DgvVisible.HeaderText = "Visible"
+        Me.DgvVisible.IgnoreCase = false
         Me.DgvVisible.Name = "DgvVisible"
         Me.DgvVisible.ReadOnly = true
+        Me.DgvVisible.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvVisible.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DgvVisible.Width = 50
         '
         'DgvEditable
         '
+        Me.DgvEditable.BegFindValue = Nothing
         Me.DgvEditable.DataPropertyName = "Editable"
+        Me.DgvEditable.EditingMode = false
+        Me.DgvEditable.EndFindValue = Nothing
+        Me.DgvEditable.FieldDescription = Nothing
+        Me.DgvEditable.FieldName = Nothing
+        Me.DgvEditable.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DgvEditable.FindEnabled = false
         Me.DgvEditable.HeaderText = "Editable"
+        Me.DgvEditable.IgnoreCase = false
         Me.DgvEditable.Name = "DgvEditable"
         Me.DgvEditable.ReadOnly = true
+        Me.DgvEditable.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvEditable.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DgvEditable.Width = 50
-        '
-        'bsGroupAccesses
-        '
-        Me.bsGroupAccesses.DataSource = GetType(AATM.PresentationLayer.Models.GroupAccessModel)
         '
         'SecurityGroupView
         '
@@ -505,7 +542,7 @@ End Sub
         Friend WithEvents DgvSecurityGroupIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents DgvSecurityObjectIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents DgvSecurityObjectName As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents DgvVisible As DataGridViewCheckBoxColumn
-        Friend WithEvents DgvEditable As DataGridViewCheckBoxColumn
+        Friend WithEvents DgvVisible As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
+        Friend WithEvents DgvEditable As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
     End Class
 End NameSpace

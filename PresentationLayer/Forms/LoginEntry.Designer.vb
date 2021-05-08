@@ -91,6 +91,7 @@ Partial Class LoginEntry
         Me.textBoxUserName.DataBoundControl = true
         Me.textBoxUserName.EditingMode = false
         Me.textBoxUserName.EndFindValue = Nothing
+        Me.textBoxUserName.FieldDescription = Nothing
         Me.textBoxUserName.FieldName = Nothing
         Me.textBoxUserName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.textBoxUserName.FindEnabled = false
@@ -121,31 +122,30 @@ Partial Class LoginEntry
         '
         'chkSaveUserNameAndPassword
         '
-        Me.chkSaveUserNameAndPassword.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.chkSaveUserNameAndPassword.BackColor = System.Drawing.Color.White
         Me.chkSaveUserNameAndPassword.BegFindValue = Nothing
         Me.chkSaveUserNameAndPassword.DisplayOnly = false
         Me.chkSaveUserNameAndPassword.EditingMode = true
         Me.chkSaveUserNameAndPassword.EndFindValue = Nothing
+        Me.chkSaveUserNameAndPassword.FieldDescription = Nothing
         Me.chkSaveUserNameAndPassword.FieldName = Nothing
         Me.chkSaveUserNameAndPassword.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.chkSaveUserNameAndPassword.FindEnabled = false
-        Me.chkSaveUserNameAndPassword.FlatAppearance.BorderSize = 0
         Me.chkSaveUserNameAndPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.chkSaveUserNameAndPassword.Font = New System.Drawing.Font("Segoe UI", 9!)
         Me.chkSaveUserNameAndPassword.ForeColor = System.Drawing.Color.Black
         Me.chkSaveUserNameAndPassword.IFindableControl_FindEnabled = false
+        Me.chkSaveUserNameAndPassword.IgnoreCase = false
         Me.chkSaveUserNameAndPassword.LinkedLabel = Nothing
-        Me.chkSaveUserNameAndPassword.Location = New System.Drawing.Point(1, 95)
+        Me.chkSaveUserNameAndPassword.Location = New System.Drawing.Point(1, 93)
         Me.chkSaveUserNameAndPassword.Margin = New System.Windows.Forms.Padding(1)
         Me.chkSaveUserNameAndPassword.Name = "chkSaveUserNameAndPassword"
         Me.chkSaveUserNameAndPassword.NoLabel = true
         Me.chkSaveUserNameAndPassword.OldValue = Nothing
         Me.chkSaveUserNameAndPassword.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkSaveUserNameAndPassword.Size = New System.Drawing.Size(24, 23)
+        Me.chkSaveUserNameAndPassword.Size = New System.Drawing.Size(13, 13)
         Me.chkSaveUserNameAndPassword.TabIndex = 22
-        Me.chkSaveUserNameAndPassword.Text = "CCheckBox1"
-        Me.chkSaveUserNameAndPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkSaveUserNameAndPassword.UseVisualStyleBackColor = true
+        Me.chkSaveUserNameAndPassword.UseVisualStyleBackColor = false
         '
         'CLabel2
         '
@@ -153,7 +153,7 @@ Partial Class LoginEntry
         Me.CLabel2.DisplayOnly = true
         Me.CLabel2.EditingMode = false
         Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CLabel2.Location = New System.Drawing.Point(27, 93)
+        Me.CLabel2.Location = New System.Drawing.Point(16, 93)
         Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel2.Name = "CLabel2"
         Me.CLabel2.Size = New System.Drawing.Size(249, 23)
@@ -223,6 +223,7 @@ Partial Class LoginEntry
         Me.textNewPassword.DataBoundControl = true
         Me.textNewPassword.EditingMode = false
         Me.textNewPassword.EndFindValue = Nothing
+        Me.textNewPassword.FieldDescription = Nothing
         Me.textNewPassword.FieldName = Nothing
         Me.textNewPassword.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.textNewPassword.FindEnabled = false
@@ -253,6 +254,7 @@ Partial Class LoginEntry
         Me.textBoxPassword.DataBoundControl = true
         Me.textBoxPassword.EditingMode = false
         Me.textBoxPassword.EndFindValue = Nothing
+        Me.textBoxPassword.FieldDescription = Nothing
         Me.textBoxPassword.FieldName = Nothing
         Me.textBoxPassword.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.textBoxPassword.FindEnabled = false
@@ -282,6 +284,7 @@ Partial Class LoginEntry
         Me.textConfirmation.DataBoundControl = true
         Me.textConfirmation.EditingMode = false
         Me.textConfirmation.EndFindValue = Nothing
+        Me.textConfirmation.FieldDescription = Nothing
         Me.textConfirmation.FieldName = Nothing
         Me.textConfirmation.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.textConfirmation.FindEnabled = false

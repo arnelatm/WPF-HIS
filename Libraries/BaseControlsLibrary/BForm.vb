@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
 
 Public Class BForm
@@ -15,10 +16,12 @@ Public Class BForm
         BackgroundImage = Images.GreenGradientBackgroundLarge
         BackgroundImageLayout = ImageLayout.Stretch
         KeyPreview = True
+        Application.EnableVisualStyles()
     End Sub
 
     'Public Sub New()
     '    MyBase.New()
     '    BackColor = SystemColors.ControlLight
     'End Sub
+
 End Class

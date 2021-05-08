@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -396,43 +397,66 @@ Namespace PresentationLayer.Views.Forms
             Dim sw As Integer = 0
             Dim pnt As Point
             Dim dataTypeEnum As IFindableControl.DataTypeEnum
-            Dim columnData As IFindableControl = DataGridViewReconciliationItems.Columns(columnNo)
-            Dim columnDataType = DataGridViewReconciliationItems.Columns(columnNo).ValueType
-            _previousColumnSearch = columnNo
-            dataTypeEnum = GetObjectDataType(columnDataType)
-            columnData.FindDataType = dataTypeEnum
-            Dim searchForm As CFindForm
-            searchForm = New CFindForm(DataGridViewReconciliationItems.Columns(columnNo))
-            Dim screenRectangle As Rectangle
-            Dim formLocation As Point
-            searchForm.SetFieldDescription(DataGridViewReconciliationItems.Columns(columnNo).HeaderText)
-            screenRectangle = Screen.PrimaryScreen.WorkingArea
-            searchForm.StartPosition = FormStartPosition.Manual
-            pnt = myForm.PointToScreen(Location)
-            If formLocation.Y + searchForm.Height > screenRectangle.Height Then
-                formLocation.Y = pnt.Y - searchForm.Height + Height
-            End If
-            searchForm.Location = formLocation
-            If searchForm.ShowDialog() = DialogResult.OK Then
-                Dim textToSearch As String
-                Dim searchPlace As IFindableControl.SearchPlaceEnum
-                Dim ignoreCase As Boolean
-                If Not _existingFind Then
-                    _existingFind = True
+            If TypeOf DataGridViewReconciliationItems.Columns(columnNo) Is IFindableControl Then
+                Dim columnData As IFindableControl = DataGridViewReconciliationItems.Columns(columnNo)
+                Dim columnDataType = DataGridViewReconciliationItems.Columns(columnNo).ValueType
+                _previousColumnSearch = columnNo
+                dataTypeEnum = GetObjectDataType(columnDataType)
+                columnData.FindDataType = dataTypeEnum
+                Dim searchForm As CFindForm
+                searchForm = New CFindForm(DataGridViewReconciliationItems.Columns(columnNo))
+                Dim screenRectangle As Rectangle
+                Dim formLocation As Point
+                searchForm.SetFieldDescription(DataGridViewReconciliationItems.Columns(columnNo).HeaderText)
+                screenRectangle = Screen.PrimaryScreen.WorkingArea
+                searchForm.StartPosition = FormStartPosition.Manual
+                pnt = myForm.PointToScreen(Location)
+                If formLocation.Y + searchForm.Height > screenRectangle.Height Then
+                    formLocation.Y = pnt.Y - searchForm.Height + Height
                 End If
-                If dataTypeEnum = IFindableControl.SearchModeEnum.TextBox Then
-                    textToSearch = CallByName(columnData, "BegFindValue", CallType.Get)
-                    searchPlace = CallByName(columnData, "SearchPlace", CallType.Get)
-                    ignoreCase = CallByName(columnData, "IgnoreCase", CallType.Get)
-                    If textToSearch <> "" Then
-                        DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                        Try
-                            DataGridViewReconciliationItems.ClearSelection()
-                            For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                                If searchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
-                                    ' search anywhere
-                                    If ignoreCase Then
-                                        If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().ToLower().Contains(textToSearch.ToLower()) Then
+                searchForm.Location = formLocation
+                If searchForm.ShowDialog() = DialogResult.OK Then
+                    Dim textToSearch As String
+                    Dim searchPlace As IFindableControl.SearchPlaceEnum
+                    Dim ignoreCase As Boolean
+                    If Not _existingFind Then
+                        _existingFind = True
+                    End If
+                    If dataTypeEnum = IFindableControl.SearchModeEnum.TextBox Then
+                        textToSearch = CallByName(columnData, "BegFindValue", CallType.Get)
+                        searchPlace = CallByName(columnData, "SearchPlace", CallType.Get)
+                        ignoreCase = CallByName(columnData, "IgnoreCase", CallType.Get)
+                        If textToSearch <> "" Then
+                            DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                            Try
+                                DataGridViewReconciliationItems.ClearSelection()
+                                For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                                    If searchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
+                                        ' search anywhere
+                                        If ignoreCase Then
+                                            If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().ToLower().Contains(textToSearch.ToLower()) Then
+                                                row.Selected = True
+                                                If sw = 0 Then
+                                                    'scroll and move to the first matching record
+                                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                                    sw = 1
+                                                    _previousSelectedRow = row.Index()
+                                                End If
+                                            End If
+                                        Else
+                                            If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
+                                                row.Selected = True
+                                                If sw = 0 Then
+                                                    'scroll and move to the first matching record
+                                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                                    sw = 1
+                                                    _previousSelectedRow = row.Index()
+                                                End If
+                                            End If
+                                        End If
+                                    ElseIf searchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
+                                        ' exact match
+                                        If row.Cells(columnNo).Value.ToString().Equals(textToSearch) Then
                                             row.Selected = True
                                             If sw = 0 Then
                                                 'scroll and move to the first matching record
@@ -442,19 +466,107 @@ Namespace PresentationLayer.Views.Forms
                                             End If
                                         End If
                                     Else
-                                        If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
-                                            row.Selected = True
-                                            If sw = 0 Then
-                                                'scroll and move to the first matching record
-                                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                                sw = 1
-                                                _previousSelectedRow = row.Index()
+                                        ' start of text
+                                        If ignoreCase Then
+                                            If row.Cells(columnNo).Value.ToString().ToLower().StartsWith(textToSearch.ToLower()) Then
+                                                row.Selected = True
+                                                If sw = 0 Then
+                                                    'scroll and move to the first matching record
+                                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                                    sw = 1
+                                                    _previousSelectedRow = row.Index()
+                                                End If
+                                            End If
+                                        Else
+                                            If row.Cells(columnNo).Value.ToString().StartsWith(textToSearch) Then
+                                                row.Selected = True
+                                                If sw = 0 Then
+                                                    'scroll and move to the first matching record
+                                                    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                                    sw = 1
+                                                    _previousSelectedRow = row.Index()
+                                                End If
                                             End If
                                         End If
                                     End If
-                                ElseIf searchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
-                                    ' exact match
-                                    If row.Cells(columnNo).Value.ToString().Equals(textToSearch) Then
+                                Next
+                                _previousTextSearch = textToSearch
+                                _previousSearchPlace = searchPlace
+                            Catch exc As Exception
+                                MessageBox.Show(exc.Message)
+                            End Try
+                        End If
+                    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Date Then
+                        Dim dBegDate As Date? = CallByName(columnData, "BegFindValue", CallType.Get)
+                        Dim dEndDate As Date? = CallByName(columnData, "EndFindValue", CallType.Get)
+                        Dim dBDate As Date
+                        Dim dEDate As Date
+
+                        If dBegDate Is Nothing Then
+                        Else
+                            If dEndDate Is Nothing Then
+                                dBDate = Convert.ToDateTime(dBegDate)
+                                dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBDate)
+                                'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                            Else
+                                dBDate = Convert.ToDateTime(dBegDate)
+                                dEDate = Convert.ToDateTime(dEndDate)
+                                'dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
+                                'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                            End If
+                        End If
+                        DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                        Try
+                            DataGridViewReconciliationItems.ClearSelection()
+                            For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                                Dim colDate As Date = row.Cells(columnNo).Value
+                                If DateIsBetween(colDate, dBDate, dEDate) Then
+                                    'If DateIsBetween(colDate, dBegDate, dEndDate) Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                        _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                        sw = 1
+                                    End If
+                                    'If colDate.ToString("yyyyMMdd") >= dBDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEDate.ToString("yyyyMMdd") Then
+                                    'row.Selected = True
+                                    'If sw = 0 Then
+                                    '    'scroll and move to the first matching record
+                                    '    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                    '    _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                    '    sw = 1
+                                    'End If
+                                    'End If
+                                End If
+                            Next
+                            _previousBegDateSearch = dBDate
+                            _previousEndDateSearch = dEDate
+                        Catch exc As Exception
+                            MessageBox.Show(exc.Message)
+                        End Try
+                    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Decimal Then
+                        Dim begValue = CallByName(columnData, "BegFindValue", CallType.Get)
+                        Dim endValue = CallByName(columnData, "EndFindValue", CallType.Get)
+                        Dim dBegValue As Decimal?
+                        Dim dEndValue As Decimal?
+                        If begValue Is Nothing Then
+                            dBegValue = Nothing
+                        Else
+                            dBegValue = Convert.ToDecimal(begValue)
+                        End If
+                        If endValue Is Nothing Then
+                            dEndValue = Nothing
+                        Else
+                            dEndValue = Convert.ToDecimal(endValue)
+                        End If
+                        DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                        Try
+                            DataGridViewReconciliationItems.ClearSelection()
+                            For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                                Dim colValue As Decimal? = row.Cells(columnNo).Value
+                                If dBegValue Is Nothing AndAlso dEndValue Is Nothing Then
+                                    If colValue Is Nothing Then
                                         row.Selected = True
                                         If sw = 0 Then
                                             'scroll and move to the first matching record
@@ -463,245 +575,136 @@ Namespace PresentationLayer.Views.Forms
                                             _previousSelectedRow = row.Index()
                                         End If
                                     End If
-                                Else
-                                    ' start of text
-                                    If ignoreCase Then
-                                        If row.Cells(columnNo).Value.ToString().ToLower().StartsWith(textToSearch.ToLower()) Then
-                                            row.Selected = True
-                                            If sw = 0 Then
-                                                'scroll and move to the first matching record
-                                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                                sw = 1
-                                                _previousSelectedRow = row.Index()
-                                            End If
+                                ElseIf dEndValue Is Nothing Then
+                                    If colValue >= dBegValue Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                            _previousSelectedRow = row.Index()
+                                            sw = 1
                                         End If
-                                    Else
-                                        If row.Cells(columnNo).Value.ToString().StartsWith(textToSearch) Then
-                                            row.Selected = True
-                                            If sw = 0 Then
-                                                'scroll and move to the first matching record
-                                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                                sw = 1
-                                                _previousSelectedRow = row.Index()
-                                            End If
+                                    End If
+                                ElseIf dBegValue Is Nothing Then
+                                    If colValue <= dEndValue Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                            _previousSelectedRow = row.Index()
+                                            sw = 1
+                                        End If
+                                    End If
+                                Else
+                                    If colValue >= dBegValue And colValue <= dEndValue Then
+                                        'If DateIsBetween(colDate, dBegValue, dEndValue) Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                            _previousSelectedRow = row.Index()
+                                            sw = 1
                                         End If
                                     End If
                                 End If
                             Next
-                            _previousTextSearch = textToSearch
-                            _previousSearchPlace = searchPlace
+                            _previousBegValueSearch = dBegValue
+                            _previousEndValueSearch = dEndValue
                         Catch exc As Exception
                             MessageBox.Show(exc.Message)
                         End Try
-                    End If
-                ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Date Then
-                    Dim dBegDate As Date? = CallByName(columnData, "BegFindValue", CallType.Get)
-                    Dim dEndDate As Date? = CallByName(columnData, "EndFindValue", CallType.Get)
-                    Dim dBDate As Date
-                    Dim dEDate As Date
-
-                    If dBegDate Is Nothing Then
-                    Else
-                        If dEndDate Is Nothing Then
-                            dBDate = Convert.ToDateTime(dBegDate)
-                            dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBDate)
-                            'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Integer Then
+                        Dim begValue = CallByName(columnData, "BegFindValue", CallType.Get)
+                        Dim endValue = CallByName(columnData, "EndFindValue", CallType.Get)
+                        Dim dBegValue As Integer?
+                        Dim dEndValue As Integer?
+                        If begValue Is Nothing Then
+                            dBegValue = Nothing
                         Else
-                            dBDate = Convert.ToDateTime(dBegDate)
-                            dEDate = Convert.ToDateTime(dEndDate)
-                            'dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
-                            'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                            dBegValue = Convert.ToInt32(begValue)
                         End If
-                    End If
-                    DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                    Try
+                        If endValue Is Nothing Then
+                            dEndValue = Nothing
+                        Else
+                            dEndValue = Convert.ToInt32(endValue)
+                        End If
+                        DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                        Try
+                            DataGridViewReconciliationItems.ClearSelection()
+                            For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
+                                Dim colValue As Integer? = row.Cells(columnNo).Value
+                                If dBegValue Is Nothing AndAlso dEndValue Is Nothing Then
+                                    If colValue Is Nothing Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                            sw = 1
+                                            _previousSelectedRow = row.Index()
+                                        End If
+                                    End If
+                                ElseIf dEndValue Is Nothing Then
+                                    If colValue >= dBegValue Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                            _previousSelectedRow = row.Index()
+                                            sw = 1
+                                        End If
+                                    End If
+                                ElseIf dBegValue Is Nothing Then
+                                    If colValue <= dEndValue Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                            _previousSelectedRow = row.Index()
+                                            sw = 1
+                                        End If
+                                    End If
+                                Else
+                                    If colValue >= dBegValue And colValue <= dEndValue Then
+                                        'If DateIsBetween(colDate, dBegValue, dEndValue) Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
+                                            _previousSelectedRow = row.Index()
+                                            sw = 1
+                                        End If
+                                    End If
+                                End If
+                            Next
+                            _previousBegValueSearch = dBegValue
+                            _previousEndValueSearch = dEndValue
+                        Catch exc As Exception
+                            MessageBox.Show(exc.Message)
+                        End Try
+                    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Boolean Then
+                        Dim valueToSearch As Boolean = CallByName(columnData, "BegFindValue", CallType.Get)
+                        DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                         DataGridViewReconciliationItems.ClearSelection()
                         For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                            Dim colDate As Date = row.Cells(columnNo).Value
-                            If DateIsBetween(colDate, dBDate, dEDate) Then
-                                'If DateIsBetween(colDate, dBegDate, dEndDate) Then
+                            If row.Cells(columnNo).Value = valueToSearch Then
                                 row.Selected = True
                                 If sw = 0 Then
                                     'scroll and move to the first matching record
                                     DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                    _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
                                     sw = 1
-                                End If
-                                'If colDate.ToString("yyyyMMdd") >= dBDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEDate.ToString("yyyyMMdd") Then
-                                'row.Selected = True
-                                'If sw = 0 Then
-                                '    'scroll and move to the first matching record
-                                '    DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                '    _previousSelectedRow = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                '    sw = 1
-                                'End If
-                                'End If
-                            End If
-                        Next
-                        _previousBegDateSearch = dBDate
-                        _previousEndDateSearch = dEDate
-                    Catch exc As Exception
-                        MessageBox.Show(exc.Message)
-                    End Try
-                ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Decimal Then
-                    Dim begValue = CallByName(columnData, "BegFindValue", CallType.Get)
-                    Dim endValue = CallByName(columnData, "EndFindValue", CallType.Get)
-                    Dim dBegValue As Decimal?
-                    Dim dEndValue As Decimal?
-                    If begValue Is Nothing Then
-                        dBegValue = Nothing
-                    Else
-                        dBegValue = Convert.ToDecimal(begValue)
-                    End If
-                    If endValue Is Nothing Then
-                        dEndValue = Nothing
-                    Else
-                        dEndValue = Convert.ToDecimal(endValue)
-                    End If
-                    DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                    Try
-                        DataGridViewReconciliationItems.ClearSelection()
-                        For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                            Dim colValue As Decimal? = row.Cells(columnNo).Value
-                            If dBegValue Is Nothing AndAlso dEndValue Is Nothing Then
-                                If colValue Is Nothing Then
-                                    row.Selected = True
-                                    If sw = 0 Then
-                                        'scroll and move to the first matching record
-                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                        sw = 1
-                                        _previousSelectedRow = row.Index()
-                                    End If
-                                End If
-                            ElseIf dEndValue Is Nothing Then
-                                If colValue >= dBegValue Then
-                                    row.Selected = True
-                                    If sw = 0 Then
-                                        'scroll and move to the first matching record
-                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                        _previousSelectedRow = row.Index()
-                                        sw = 1
-                                    End If
-                                End If
-                            ElseIf dBegValue Is Nothing Then
-                                If colValue <= dEndValue Then
-                                    row.Selected = True
-                                    If sw = 0 Then
-                                        'scroll and move to the first matching record
-                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                        _previousSelectedRow = row.Index()
-                                        sw = 1
-                                    End If
-                                End If
-                            Else
-                                If colValue >= dBegValue And colValue <= dEndValue Then
-                                    'If DateIsBetween(colDate, dBegValue, dEndValue) Then
-                                    row.Selected = True
-                                    If sw = 0 Then
-                                        'scroll and move to the first matching record
-                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                        _previousSelectedRow = row.Index()
-                                        sw = 1
-                                    End If
+                                    _previousSelectedRow = row.Index()
                                 End If
                             End If
                         Next
-                        _previousBegValueSearch = dBegValue
-                        _previousEndValueSearch = dEndValue
-                    Catch exc As Exception
-                        MessageBox.Show(exc.Message)
-                    End Try
-                ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Integer Then
-                    Dim begValue = CallByName(columnData, "BegFindValue", CallType.Get)
-                    Dim endValue = CallByName(columnData, "EndFindValue", CallType.Get)
-                    Dim dBegValue As Integer?
-                    Dim dEndValue As Integer?
-                    If begValue Is Nothing Then
-                        dBegValue = Nothing
-                    Else
-                        dBegValue = Convert.ToInt32(begValue)
+                        _previousBegValueSearch = valueToSearch
                     End If
-                    If endValue Is Nothing Then
-                        dEndValue = Nothing
-                    Else
-                        dEndValue = Convert.ToInt32(endValue)
-                    End If
-                    DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                    Try
-                        DataGridViewReconciliationItems.ClearSelection()
-                        For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                            Dim colValue As Integer? = row.Cells(columnNo).Value
-                            If dBegValue Is Nothing AndAlso dEndValue Is Nothing Then
-                                If colValue Is Nothing Then
-                                    row.Selected = True
-                                    If sw = 0 Then
-                                        'scroll and move to the first matching record
-                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                        sw = 1
-                                        _previousSelectedRow = row.Index()
-                                    End If
-                                End If
-                            ElseIf dEndValue Is Nothing Then
-                                If colValue >= dBegValue Then
-                                    row.Selected = True
-                                    If sw = 0 Then
-                                        'scroll and move to the first matching record
-                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                        _previousSelectedRow = row.Index()
-                                        sw = 1
-                                    End If
-                                End If
-                            ElseIf dBegValue Is Nothing Then
-                                If colValue <= dEndValue Then
-                                    row.Selected = True
-                                    If sw = 0 Then
-                                        'scroll and move to the first matching record
-                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                        _previousSelectedRow = row.Index()
-                                        sw = 1
-                                    End If
-                                End If
-                            Else
-                                If colValue >= dBegValue And colValue <= dEndValue Then
-                                    'If DateIsBetween(colDate, dBegValue, dEndValue) Then
-                                    row.Selected = True
-                                    If sw = 0 Then
-                                        'scroll and move to the first matching record
-                                        DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                        _previousSelectedRow = row.Index()
-                                        sw = 1
-                                    End If
-                                End If
-                            End If
-                        Next
-                        _previousBegValueSearch = dBegValue
-                        _previousEndValueSearch = dEndValue
-                    Catch exc As Exception
-                        MessageBox.Show(exc.Message)
-                    End Try
-                ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Boolean Then
-                    Dim valueToSearch As Boolean = CallByName(columnData, "BegFindValue", CallType.Get)
-                    DataGridViewReconciliationItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                    DataGridViewReconciliationItems.ClearSelection()
-                    For Each row As DataGridViewRow In DataGridViewReconciliationItems.Rows
-                        If row.Cells(columnNo).Value = valueToSearch Then
-                            row.Selected = True
-                            If sw = 0 Then
-                                'scroll and move to the first matching record
-                                DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = DataGridViewReconciliationItems.SelectedRows(0).Index
-                                sw = 1
-                                _previousSelectedRow = row.Index()
-                            End If
-                        End If
-                    Next
-                    _previousBegValueSearch = valueToSearch
                 End If
+                If sw = 0 Then
+                    Messaging.Show(True, "MsgNoMatchingRecordFound")
+                    _existingFind = False
+                End If
+                searchForm.Dispose()
             End If
-            If sw = 0 Then
-                Messaging.Show(True, "MsgNoMatchingRecordFound")
-                _existingFind = False
-            End If
-            searchForm.Dispose()
         End Sub
 
         Private Function ContinuePreviousSearch() As Integer
@@ -962,6 +965,126 @@ Namespace PresentationLayer.Views.Forms
 
         'Private Sub BackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker.RunWorkerCompleted
 
+        'End Sub
+
+        'Private Sub HS_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles DataGridViewReconciliationItems.CellPainting
+        '    If e.ColumnIndex > 0 AndAlso DataGridViewReconciliationItems.Columns(e.ColumnIndex).CellTemplate.[GetType]() = GetType(CDgvButtonCell) AndAlso e.RowIndex > -1 Then
+        '        e.Handled = True
+        '        Dim x = DataGridViewReconciliationItems.CurrentRow
+        '        Dim s As String = If(x.DataBoundItem.Cleared, "Yes", "No")
+        '        e.PaintBackground(e.CellBounds, DataGridViewReconciliationItems.CurrentCellAddress.Y = e.RowIndex)
+        '        Dim sf As StringFormat = New StringFormat()
+        '        sf.LineAlignment = StringAlignment.Center
+        '        e.Graphics.DrawString(s, DataGridViewReconciliationItems.Font, New SolidBrush(DataGridViewReconciliationItems.ForeColor), e.CellBounds, sf)
+
+        '    End If
+        'End Sub
+
+        'Private Sub CellPainting(ByVal sender As Object,
+        '                         ByVal e As DataGridViewCellPaintingEventArgs) Handles DataGridViewReconciliationItems.CellPainting
+        '    If (e.ColumnIndex >= 0 AndAlso e.RowIndex >= 0) Then
+        '        If TypeOf DataGridViewReconciliationItems.Columns(e.ColumnIndex) Is CDgvCheckBoxColumn Then
+        '            Dim value = DirectCast(e.FormattedValue, Nullable(Of Boolean))
+        '            If btnEdit.Enabled Or btnAdd.Enabled Then
+        '                e.Paint(e.CellBounds, DataGridViewPaintParts.All And
+        '                                      Not (DataGridViewPaintParts.ContentForeground))
+        '                Dim state = IIf((value.HasValue And value.Value),
+        '                                VisualStyles.CheckBoxState.CheckedDisabled,
+        '                                VisualStyles.CheckBoxState.UncheckedDisabled)
+        '                Dim size = RadioButtonRenderer.GetGlyphSize(e.Graphics, state)
+        '                Dim location = New Point((e.CellBounds.Width - size.Width) / 2,
+        '                                         (e.CellBounds.Height - size.Height) / 2)
+        '                location.Offset(e.CellBounds.Location)
+        '                CheckBoxRenderer.DrawCheckBox(e.Graphics, location, state)
+        '                e.Handled = True
+        '            End If
+        '        End If
+        '    End If
+        'End Sub
+
+        'Private Sub CellPainting(ByVal sender As Object,
+        '                         ByVal e As DataGridViewCellPaintingEventArgs) Handles DataGridViewReconciliationItems.CellPainting
+        '    If (e.ColumnIndex >= 0 AndAlso e.RowIndex >= 0) Then
+        '        If TypeOf DataGridViewReconciliationItems.Columns(e.ColumnIndex) Is CDgvCheckBoxColumn Then
+        '            Dim value = DirectCast(e.FormattedValue, Nullable(Of Boolean))
+        '            e.Paint(e.CellBounds, DataGridViewPaintParts.All And
+        '                                  Not (DataGridViewPaintParts.ContentForeground))
+        '            Dim state = IIf((value.HasValue And value.Value),
+        '                            VisualStyles.CheckBoxState.CheckedNormal,
+        '                            VisualStyles.CheckBoxState.MixedNormal)
+        '            Dim size = RadioButtonRenderer.GetGlyphSize(e.Graphics, state)
+        '            Dim location = New Point((e.CellBounds.Width - size.Width) / 2,
+        '                                     (e.CellBounds.Height - size.Height) / 2)
+        '            location.Offset(e.CellBounds.Location)
+        '            CheckBoxRenderer.DrawCheckBox(e.Graphics, location, state)
+        '            e.Handled = True
+        '        End If
+        '    End If
+        'End Sub
+
+        'Private Sub Dgv_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DataGridViewReconciliationItems.CellFormatting
+        '    With DataGridViewReconciliationItems
+        '        If e.Value IsNot Nothing Then
+        '            Dim t As Type = .Columns(e.ColumnIndex).GetType()
+        '            If TypeOf .Columns(e.ColumnIndex) Is CDgvCheckBoxColumn Then
+        '                Dim x = DataGridViewReconciliationItems.CurrentRow
+        '                Dim s As String = If(x.DataBoundItem.Cleared, "Yes", "No")
+        '                Dim c As CDgvCheckBoxColumn = DataGridViewReconciliationItems.Columns(e.ColumnIndex)
+        '                Dim w As CDgvCheckboxCell = DataGridViewReconciliationItems.Columns(e.ColumnIndex).CellTemplate
+        '                If
+        '                e.CellStyle.BackColor = System.Drawing.Color.Red
+        '                'w.UseColumnTextForButtonValue = True
+        '                'w.Value = s
+        '                'c.Text = s
+        '                'DirectCast(DataGridViewReconciliationItems.Columns(e.ColumnIndex), DataGridViewButtonColumn).Text = s
+        '                'w.UseColumnTextForButtonValue = True
+        '            End If
+        '        End If
+        '    End With
+        'End Sub
+
+        'Private Sub dgView_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewReconciliationItems.CellFormatting
+        '    Dim dgBtn As CDgvButtonCell
+        '    Dim dgView As CDataGridView = DataGridViewReconciliationItems
+        '    If (dgView.Columns(e.ColumnIndex).Name = "dgvCleared") Then
+        '        dgBtn = CType(dgView.Rows(e.RowIndex).Cells(8), CDgvButtonCell)
+        '        If (dgBtn.Value.ToString = "True") Then
+        '            dgBtn.UseColumnTextForButtonValue = False
+        '            dgView.CurrentCell = dgView.Rows(e.RowIndex).Cells(2)
+        '            dgView.CurrentCell.ReadOnly = False
+        '            dgBtn.Value = "Yes"
+        '            dgView.CurrentCell.ReadOnly = True
+        '        Else
+        '            dgBtn.UseColumnTextForButtonValue = False
+        '            dgView.CurrentCell = dgView.Rows(e.RowIndex).Cells(2)
+        '            dgView.CurrentCell.ReadOnly = False
+        '            dgBtn.Value = "No"
+        '            dgView.CurrentCell.ReadOnly = True
+        '        End If
+
+        '    End If
+        'End Sub
+
+        'Private Sub Dgv_RowPostPaint(e As ) Handles DataGridViewReconciliationItems.RowPostPaint
+        '    DataGridViewReconciliationItems.(DataGridViewReconciliationItems.Columns("Cleared").Index, e.RowIndex).Value = "Button " & (e.RowIndex + 1).ToString()
+        'end sub
+
+        'Private Sub DataGridViewReconciliationItems_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles DataGridViewReconciliationItems.RowsAdded
+        '    if DataGridViewReconciliationItems.Columns(e.RowIndex).CellTemplate
+        ''End Sub
+
+        'Private Sub dgv_CellContentClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewReconciliationItems.CellContentClick
+        '    If e.RowIndex < 1 OrElse e.ColumnIndex = 0 Then Return
+        '    Dim value = DataGridViewReconciliationItems.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        '    If value IsNot Nothing AndAlso value <> DBNull.Value Then DataGridViewReconciliationItems.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Not CBool(value)
+        'End Sub
+
+        'Private Sub dgv_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewReconciliationItems.CellFormatting
+        '    If (DataGridViewReconciliationItems.Columns(e.ColumnIndex).Name = "dgvCleared") Then
+        '        If e.RowIndex < 0 OrElse e.ColumnIndex = 0 Then Return
+        '        Dim value = DataGridViewReconciliationItems.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+        '        If value IsNot Nothing AndAlso value <> DBNull.Value Then e.Value = If(CBool(value), "-", "+")
+        '    End If
         'End Sub
 
     End Class

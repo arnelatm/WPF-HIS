@@ -4,6 +4,7 @@ Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -118,6 +119,16 @@ Namespace PresentationLayer.Presenters
             retVal = _payrollPayElementsDao.UpdInsEmpPayElementTvp(updateTable, insertTable, View.IdNo, View.EmployeeIdNo)
             Return retVal
         End Function
+
+        Public Overrides Sub GoPrintRecord()
+            Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim reportName As String = "Payroll Report.Rpt"
+            Dim reportTitle As String = Model.GetField(Of String, Int32)(View.IdNo, "Payroll", "IdNo", "PayrollName")
+            Dim cForm As New ReportFormNew(reportName, reportTitle, curCulture, {View.IdNo, "PayrollIdNo"})
+            cForm.Show()
+        End Sub
 
     End Class
 

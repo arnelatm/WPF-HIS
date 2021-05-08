@@ -1111,6 +1111,9 @@ Namespace PresentationLayer.Views.Forms
             myForm.Show()
         End Sub
 
+        Private Sub PayrollReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollReportToolStripMenuItem.Click
+
+        End Sub
     End Class
 
 End Namespace

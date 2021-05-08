@@ -2,6 +2,7 @@
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
+Imports System.Windows.Forms.VisualStyles
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -16,22 +17,178 @@ Public Class CCheckBox
     Private _autoSize As Boolean
     Private _textToSearch As String
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
+    Private _textRectangleValue As New Rectangle()
+
+    'Private clickedLocationValue As New Point()
+    Private clicked As Boolean = False
+
+    Private _state As CheckBoxState = CheckBoxState.UncheckedNormal
 
     Public Sub New()
         MyBase.New()
+        Font = SystemFonts.IconTitleFont
         AutoSize = False
         Appearance = Appearance.Normal
         UseVisualStyleBackColor = True
         FlatStyle = FlatStyle.Flat
-        TextAlign = ContentAlignment.MiddleRight
-        CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        'TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        'CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         ContextMenuStrip = _contextMenuStrip1
-        Size = New Size(24, 24)
-        Margin = New Padding(1)
-        FlatAppearance.BorderSize = 0
+        Size = New Size(13, 13)
+        SetStyle(ControlStyles.SupportsTransparentBackColor, True)
+        BackColor = Color.Transparent
+        'Margin = New Padding(5)
+        'FlatAppearance.BorderSize = 0
         NoLabel = True
         Text = ""
     End Sub
+
+    'Calculate the text bounds, excluding the check box.
+    Public ReadOnly Property TextRectangle() As Rectangle
+        Get
+            Using g As Graphics = Me.CreateGraphics()
+                With _textRectangleValue
+                    .X = Me.ClientRectangle.X +
+                        CheckBoxRenderer.GetGlyphSize(g,
+                        CheckBoxState.UncheckedNormal).Width
+                    .Y = Me.ClientRectangle.Y
+                    .Width = Me.ClientRectangle.Width -
+                        CheckBoxRenderer.GetGlyphSize(g,
+                        CheckBoxState.UncheckedNormal).Width
+                    .Height = Me.ClientRectangle.Height
+                End With
+            End Using
+            Return _textRectangleValue
+        End Get
+    End Property
+
+    ' Draw the check box in the current state.
+    Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
+        MyBase.OnPaint(e)
+        If DisplayOnly OrElse Not EditingMode Then
+            _state = IIf(Checked, VisualStyles.CheckBoxState.CheckedDisabled, VisualStyles.CheckBoxState.UncheckedDisabled)
+        Else
+            _state = IIf(Checked, VisualStyles.CheckBoxState.CheckedNormal, VisualStyles.CheckBoxState.UncheckedNormal)
+        End If
+
+        Dim pt As Point = New Point(0, 0)
+        Dim rect As Rectangle = New Rectangle(pt, New Size(13, 13))
+        'Dim cForeColor As Color
+
+        'If Focused Then
+        '    cForeColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        'Else
+        '    cForeColor = GlobalVariables.DefaultFormControlBackgroundColor
+        'End If
+        'Dim cBrush = New SolidBrush(cForeColor)
+        'e.Graphics.FillRectangle(cBrush, rect)
+        'CheckBoxRenderer.DrawCheckBox(e.Graphics,
+        '                              ClientRectangle.Location, TextRectangle, Text,
+        '                              Font, TextFormatFlags.HorizontalCenter,
+        '                              clicked, _state)
+
+        'e.Graphics.Clear(BackColor)
+
+        'Using brush As SolidBrush = New SolidBrush(ForeColor)
+        '    e.Graphics.DrawString(Text, Font, brush, 27, 4)
+        'End Using
+
+        'Dim pt As Point = New Point(5, 5)
+        'Dim rect As Rectangle = New Rectangle(pt, New Size(13, 13))
+        'Dim cForeColor As Color
+
+        'If Focused Then
+        '    cForeColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        'Else
+        '    cForeColor = GlobalVariables.DefaultFormControlBackgroundColor
+        'End If
+        'Dim cBrush = New SolidBrush(cForeColor)
+        'e.Graphics.FillRectangle(cBrush, rect)
+
+        If Checked Then
+            Dim cCol As Color
+            If _editingMode And Not DisplayOnly Then
+                If Focused Then
+                    cCol = GlobalVariables.DefaultFormControlEditingForegroundColor
+                Else
+                    cCol = GlobalVariables.DefaultFormControlForegroundColor
+                End If
+            Else
+                If Focused Then
+                    cCol = GlobalVariables.DefaultFormControlForegroundColor
+                Else
+                    cCol = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                End If
+            End If
+            Using brush As SolidBrush = New SolidBrush(cCol)
+                Dim emSize = CInt(Height / 13 * 9)
+                Using wing As Font = New Font("Wingdings", emSize)
+                    e.Graphics.DrawString("ü", wing, brush, 0, 0)
+                End Using
+            End Using
+        End If
+
+        'e.Graphics.DrawRectangle(Pens.Gray, rect)
+        'Dim fRect As Rectangle = ClientRectangle
+
+        'If Focused Then
+        '    fRect.Inflate(-1, -1)
+
+        '    Using pen As Pen = New Pen(Brushes.Gray) With {
+        '        .DashStyle = DashStyle.Dot
+        '        }
+        '        e.Graphics.DrawRectangle(pen, fRect)
+        '    End Using
+        'End If
+    End Sub
+
+    '' Draw the check box in the checked or unchecked state, alternately.
+    'Protected Overrides Sub OnMouseDown(ByVal e As MouseEventArgs)
+    '    MyBase.OnMouseDown(e)
+    '    If Not clicked Then
+    '        With Me
+    '            .clicked = True
+    '            .Text = "Clicked!"
+    '            _state = CheckBoxState.CheckedPressed
+    '        End With
+    '        Invalidate()
+    '    Else
+    '        With Me
+    '            .clicked = False
+    '            .Text = "Click here"
+    '            _state = CheckBoxState.UncheckedNormal
+    '        End With
+    '        Invalidate()
+    '    End If
+    'End Sub
+
+    '' Draw the check box in the hot state.
+    'Protected Overrides Sub OnMouseHover(ByVal e As EventArgs)
+    '    MyBase.OnMouseHover(e)
+    '    If clicked Then
+    '        _state = CheckBoxState.CheckedHot
+    '    Else
+    '        _state = CheckBoxState.UncheckedHot
+    '    End If
+    '    Invalidate()
+    'End Sub
+
+    '' Draw the check box in the hot state.
+    'Protected Overrides Sub OnMouseUp(ByVal e As MouseEventArgs)
+    '    MyBase.OnMouseUp(e)
+    '    Me.OnMouseHover(e)
+    'End Sub
+
+    '' Draw the check box in the unpressed state.
+    'Protected Overrides Sub OnMouseLeave(ByVal e As EventArgs)
+    '    MyBase.OnMouseLeave(e)
+    '    If clicked Then
+    '        _state = CheckBoxState.CheckedNormal
+    '    Else
+    '        _state = CheckBoxState.UncheckedNormal
+    '    End If
+    '    Invalidate()
+    'End Sub
 
 #Region "Declarations#"
 
@@ -106,10 +263,12 @@ Public Class CCheckBox
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
+                '_state = VisualStyles.CheckBoxState.CheckedDisabled
             Else
                 AutoCheck = False
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                '_state = VisualStyles.CheckBoxState.CheckedNormal
             End If
         End Set
     End Property
@@ -195,62 +354,61 @@ Public Class CCheckBox
         End If
     End Sub
 
-    Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
-        pEvent.Graphics.Clear(BackColor)
+    'Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
+    '    pEvent.Graphics.Clear(BackColor)
 
-        Using brush As SolidBrush = New SolidBrush(ForeColor)
-            pEvent.Graphics.DrawString(Text, Font, brush, 27, 4)
-        End Using
+    '    Using brush As SolidBrush = New SolidBrush(ForeColor)
+    '        pEvent.Graphics.DrawString(Text, Font, brush, 27, 4)
+    '    End Using
 
-        Dim pt As Point = New Point(0, 0)
-        Dim rect As Rectangle = New Rectangle(pt, New Size(23, 23))
-        Dim cForeColor As Color
+    '    Dim pt As Point = New Point(0, 0)
+    '    Dim rect As Rectangle = New Rectangle(pt, New Size(23, 23))
+    '    Dim cForeColor As Color
 
-        If Focused Then
-            cForeColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-        Else
+    '    If Focused Then
+    '        cForeColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+    '    Else
+    '        cForeColor = GlobalVariables.DefaultFormControlBackgroundColor
+    '    End If
+    '    Dim cBrush = New SolidBrush(cForeColor)
+    '    pEvent.Graphics.FillRectangle(cBrush, rect)
 
-            cForeColor = GlobalVariables.DefaultFormControlBackgroundColor
-        End If
-        Dim cBrush = New SolidBrush(cForeColor)
-        pEvent.Graphics.FillRectangle(cBrush, rect)
+    '    If Checked Then
+    '        Dim cCol As Color
+    '        If _editingMode And Not DisplayOnly Then
+    '            If Focused Then
+    '                cCol = GlobalVariables.DefaultFormControlEditingForegroundColor
+    '            Else
+    '                cCol = GlobalVariables.DefaultFormControlForegroundColor
+    '            End If
+    '        Else
+    '            If Focused Then
+    '                cCol = GlobalVariables.DefaultFormControlForegroundColor
+    '            Else
+    '                cCol = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+    '            End If
+    '        End If
+    '        Using brush As SolidBrush = New SolidBrush(cCol)
+    '            Using wing As Font = New Font("Wingdings", 12.0F)
+    '                pEvent.Graphics.DrawString("ü", wing, brush, 1, 2)
+    '            End Using
+    '        End Using
+    '    End If
 
-        If Checked Then
-            Dim cCol As Color
-            If _editingMode And Not DisplayOnly Then
-                If Focused Then
-                    cCol = GlobalVariables.DefaultFormControlEditingForegroundColor
-                Else
-                    cCol = GlobalVariables.DefaultFormControlForegroundColor
-                End If
-            Else
-                If Focused Then
-                    cCol = GlobalVariables.DefaultFormControlForegroundColor
-                Else
-                    cCol = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                End If
-            End If
-            Using brush As SolidBrush = New SolidBrush(cCol)
-                Using wing As Font = New Font("Wingdings", 12.0F)
-                    pEvent.Graphics.DrawString("ü", wing, brush, 1, 2)
-                End Using
-            End Using
-        End If
+    '    pEvent.Graphics.DrawRectangle(Pens.Gray, rect)
+    '    Dim fRect As Rectangle = ClientRectangle
 
-        pEvent.Graphics.DrawRectangle(Pens.Gray, rect)
-        Dim fRect As Rectangle = ClientRectangle
+    '    If Focused Then
+    '        fRect.Inflate(-1, -1)
 
-        If Focused Then
-            fRect.Inflate(-1, -1)
+    '        Using pen As Pen = New Pen(Brushes.Gray) With {
+    '            .DashStyle = DashStyle.Dot
+    '            }
+    '            pEvent.Graphics.DrawRectangle(pen, fRect)
+    '        End Using
+    '    End If
 
-            Using pen As Pen = New Pen(Brushes.Gray) With {
-                .DashStyle = DashStyle.Dot
-                }
-                pEvent.Graphics.DrawRectangle(pen, fRect)
-            End Using
-        End If
-
-    End Sub
+    'End Sub
 
     Private Sub HandleMouseUp(control As Object, e As MouseEventArgs)
         ' Checking the Mouse right Button
