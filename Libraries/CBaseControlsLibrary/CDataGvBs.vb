@@ -12,6 +12,7 @@ Public Class CDataGvBs
 
     Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
+    Private _translatable As Boolean = False
     Private _firstEditableColumn As Integer = -1
     Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
@@ -117,10 +118,13 @@ Public Class CDataGvBs
     <Browsable(True)>
     Public Property ShowInsertColumnWhenEditing As Boolean = True
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return True
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     Public Sub AddInsertColumn()

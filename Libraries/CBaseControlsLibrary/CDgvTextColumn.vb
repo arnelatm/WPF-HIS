@@ -9,10 +9,20 @@ Public Class CDgvTextColumn
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
+    Private _translatable As Boolean = False
 
     Public Sub New()
         CellTemplate = New CDgvTextCell
     End Sub
+
+    
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvTextColumn = TryCast(MyBase.Clone(), CDgvTextColumn)
+        copy.DisplayOnly = DisplayOnly
+        copy.EditingMode = EditingMode
+        copy.Translatable = Translatable
+        Return copy
+    End Function
 
     ' ReSharper disable once LocalizableElement
     <DisplayName("DisplayOnly")>
@@ -34,11 +44,6 @@ Public Class CDgvTextColumn
         End Set
     End Property
 
-    Public Overrides Function Clone() As Object
-        Dim copy As CDgvTextColumn = TryCast(MyBase.Clone(), CDgvTextColumn)
-        copy.DisplayOnly = DisplayOnly
-        Return copy
-    End Function
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
@@ -65,10 +70,14 @@ Public Class CDgvTextColumn
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
+
     End Property
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
@@ -98,7 +107,7 @@ Public Class CDgvTextColumn
     Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
     Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
-    
-    Public Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+
+    Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
 
 End Class

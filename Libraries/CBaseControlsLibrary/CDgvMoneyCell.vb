@@ -7,6 +7,7 @@ Public Class CDgvMoneyCell
     Implements IEntryControl
 
     Private _editingMode As Boolean
+    Private _translatable As Boolean = False
 
     <Bindable(True)>
     <Category("Properties")>
@@ -42,10 +43,13 @@ Public Class CDgvMoneyCell
 
     End Sub
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable

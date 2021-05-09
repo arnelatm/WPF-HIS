@@ -8,6 +8,7 @@ Public Class CDgvDecimalColumn
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
+    Private _translatable As Boolean = False
 
     Public Sub New()
         CellTemplate = New CDgvDecimalCell
@@ -105,10 +106,13 @@ Public Class CDgvDecimalColumn
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
 End Class

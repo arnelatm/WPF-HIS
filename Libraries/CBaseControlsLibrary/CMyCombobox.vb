@@ -14,6 +14,7 @@ Public Class CMyComboBox
     Private _isNumeric As Boolean
     Private _isMandatory As Boolean
     Private _displayOnly As Boolean
+    Private _translatable As Boolean = False
 
     'Private MyErrorProvider As New ErrorProviderExtended
     Private ReadOnly _textToSearch As String
@@ -483,10 +484,13 @@ Public Class CMyComboBox
         SelectAll()
     End Sub
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable

@@ -8,12 +8,22 @@ Public Class CaDgvComboBoxColumn
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
+    Private _translatable As Boolean = False
 
     Public Sub New()
-        MyBase.New()
         AutoComplete = False
-        MyBase.CellTemplate = New CaDgvComboboxCell
+        CellTemplate = New CaDgvComboboxCell
     End Sub
+
+    'Public Overrides Function Clone() As Object
+    '    Dim copy As CaDgvComboboxCell = TryCast(MyBase.Clone(), CaDgvComboboxCell)
+    '    If copy Is Nothing Then
+    '        copy.DisplayOnly = DisplayOnly
+    '        copy.Translatable = Translatable
+    '        copy.EditingMode = EditingMode
+    '    End If
+    '    Return copy
+    'End Function
 
     <Bindable(True)>
     <Category("Custom Properties")>
@@ -57,16 +67,13 @@ Public Class CaDgvComboBoxColumn
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
-            Throw New NotImplementedException()
+            Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
-
-    'Public Overrides Function Clone() As Object
-    '    Dim copy As CaDgvComboboxCell = TryCast(MyBase.Clone(), CaDgvComboboxCell)
-    '    Return copy
-
-    'End Function
 
 End Class

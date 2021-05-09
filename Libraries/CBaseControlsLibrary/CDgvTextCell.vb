@@ -7,8 +7,16 @@ Public Class CDgvTextCell
     Implements IEntryControl
 
     Private _editingMode As Boolean
-
     Private _displayOnly As Boolean
+    Private _translatable As Boolean = False
+
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvTextCell = TryCast(MyBase.Clone(), CDgvTextCell)
+        copy.DisplayOnly = DisplayOnly
+        copy.Translatable = Translatable
+        copy.EditingMode = EditingMode
+        Return copy
+    End Function
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -51,10 +59,13 @@ Public Class CDgvTextCell
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable

@@ -17,6 +17,7 @@ Public Class CaComboBox
     Private _displayOnly As Boolean
 
     Private _editable As Boolean
+    Private _translatable As Boolean = False
     Private _editingMode As Boolean = True
     Private _filterRule As Expression(Of Func(Of String, String, Boolean))
     Private _filterRuleCompiled As Func(Of String, Boolean)
@@ -211,10 +212,13 @@ Public Class CaComboBox
 
     Public Property TextToSearch As String
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     <Bindable(True)>
@@ -831,7 +835,7 @@ Public Class CaComboBox
         End Get
     End Property
 
-    Public Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+    Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
 
     Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
         Get

@@ -13,6 +13,7 @@ Public Class CTextBox
     Private _defaultVal As String
     Private _oldValue As String
     Private _editingMode As Boolean = True
+    Private _translatable As Boolean = False
     Private _controlName As String
 
     'Private _viewable As Boolean
@@ -60,10 +61,13 @@ Public Class CTextBox
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     '<Category("Custom Properties")>
