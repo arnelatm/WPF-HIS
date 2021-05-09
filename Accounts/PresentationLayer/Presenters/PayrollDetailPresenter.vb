@@ -125,7 +125,7 @@ Namespace PresentationLayer.Presenters
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim reportName As String = "Payroll Report.Rpt"
-            Dim reportTitle As String = Model.GetField(Of String, Int32)(View.IdNo, "Payroll", "IdNo", "PayrollName")
+            Dim reportTitle As String = Model.GetField(Of String, Int32)(View.PayrollIdNo, "Payroll", "IdNo", "PayrollName")
             Dim cForm As New ReportFormNew(reportName, reportTitle, curCulture, {View.IdNo, "PayrollIdNo"})
             cForm.Show()
         End Sub
