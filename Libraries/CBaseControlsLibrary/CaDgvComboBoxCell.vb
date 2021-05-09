@@ -1,13 +1,27 @@
 ﻿Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CaDgvComboboxCell
     Inherits DataGridViewComboBoxCell
+    Implements IEntryControl
+
+    Private _displayOnly As Boolean
+    Private _editingMode As Boolean
+    Private _translatable As Boolean = False
 
     'Private WithEvents myGrid As DataGridView
     'Public Sub New()
     '    MyBase.New()
     '    myGrid = DataGridView
     'End Sub
+
+    Public Overrides Function Clone() As Object
+        Dim copy As CaDgvComboboxCell = TryCast(MyBase.Clone(), CaDgvComboboxCell)
+        copy.DisplayOnly = DisplayOnly
+        copy.Translatable = Translatable
+        copy.EditingMode = EditingMode
+        Return copy
+    End Function
 
     ' You must override the EditType property to return the cell's
     ' editing control type, which is your custom ComboBox class...
@@ -71,5 +85,48 @@ Public Class CaDgvComboboxCell
     'Public Function GetValue()
 
     'End Function
+
+    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
+        Get
+            Return _editingMode
+        End Get
+        Set
+            _editingMode = Value
+            If Value Or DisplayOnly Then
+                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                [ReadOnly] = True
+            Else
+                Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                [ReadOnly] = False
+            End If
+        End Set
+    End Property
+
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
+        Get
+            Return False
+        End Get
+        Set
+            _translatable = Value
+        End Set
+    End Property
+
+    Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set
+            If _displayOnly <> Value Then
+                _displayOnly = Value
+            End If
+            'If value Then
+            '    ReadOnlyCombo = True
+            'Else
+            '    ReadOnly = False
+            'End If
+        End Set
+    End Property
 
 End Class

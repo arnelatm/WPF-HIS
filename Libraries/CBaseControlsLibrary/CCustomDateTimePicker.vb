@@ -16,6 +16,7 @@ Public Class CCustomDateTimePicker
     Public MaxLength As Integer
     Private _valueIsNullable As Boolean
     Private _displayOnly As Boolean = False
+    Private _translatable As Boolean = False
     Private _readOnlyDp As Boolean = False
     Private _defaultValue As DateTime? = Nothing
     Private _dtpDefaultValue As DateTime? = Nothing
@@ -253,10 +254,13 @@ Public Class CCustomDateTimePicker
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     <Bindable(True)>

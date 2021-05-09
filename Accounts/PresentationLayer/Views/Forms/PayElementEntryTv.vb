@@ -555,7 +555,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateCalculationTabDisplay()
             SuspendLayout()
-            floPayElement.Visible = False
             floCalculation.Visible = False
             tlpCalculation.Visible = False
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
@@ -659,7 +658,6 @@ Namespace PresentationLayer.Views.Forms
                 tlpCalculation.Visible = True
                 floCalculation.Visible = True
             End If
-            floPayElement.Visible = True
             ResumeLayout()
         End Sub
 
@@ -776,7 +774,7 @@ Namespace PresentationLayer.Views.Forms
             UpdatePostingTabDisplay()
         End Sub
 
-        Private Sub chkSummary_CheckedChanged(sender As Object, e As EventArgs)
+        Private Sub chkSummary_CheckedChanged(sender As Object, e As EventArgs) Handles chkSummary.CheckedChanged
             If chkSummary.Checked Then
                 cboPayElementType.Visible = False
                 tlpPostingAccounts.Visible = False

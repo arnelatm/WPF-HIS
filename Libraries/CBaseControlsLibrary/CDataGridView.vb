@@ -13,6 +13,7 @@ Public Class CDataGridView
 
     Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
+    Private _translatable As Boolean = True
     Private _firstEditableColumn As Integer = -1
     Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
@@ -172,10 +173,13 @@ Public Class CDataGridView
     <Browsable(True)>
     Public Property ShowInsertColumnWhenEditing As Boolean = True
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return True
         End Get
+        Set
+            _translatable = Value
+        End Set
     End Property
 
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
@@ -705,20 +709,20 @@ Public Class CDataGridView
     '    End RaiseEvent
     'End Event
 
-    Private Sub cDataGridView_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles Me.EditingControlShowing
-        'e represent the editing control in the datagridview
-        'the condition is, if the type of e is combobox then set your code for autocomplete
-        'If TypeOf e.Control Is AATM.Libraries.CBaseControlsLibrary.CComboboxSpecial Then
-        '    'declare variable(cb) as a caCombobox
-        '    Dim cb As CComboboxSpecial
-        '    cb = e.Control
-        '    'set the dropdown style of a combobox
-        '    cb.DropDownStyle = ComboBoxStyle.DropDown
-        '    'set the property of a combobox to autocomplete mode.
-        '    cb.AutoCompleteMode = AutoCompleteMode.Suggest
-        '    cb.AutoCompleteSource = AutoCompleteSource.ListItems
-        '    'cb.OverrideDropDownStyleList = True
-        'End If
+    Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles Me.EditingControlShowing
+        '    'declare variable(cb) as a combobox
+        '    Dim cb As CaComboBox
+        '    'e represent the editing control in the datagridview
+        '    'the condition is, if the type of e is combobox then set your code for autocomplete
+        '    If TypeOf e.Control Is CaComboBox Then
+        '        cb = e.Control
+        '        'set the dropdown style of a combobox
+        '        cb.DropDownStyle = ComboBoxStyle.DropDown
+        '        'set the property of a combobox to autocomplete mode.
+        '        cb.AutoCompleteMode = AutoCompleteMode.Suggest
+        '        cb.AutoCompleteSource = AutoCompleteSource.ListItems
+        '    End If
+        'End Sub
         If TypeOf e.Control Is CaComboBox Then
             'declare variable(cb) as a caCombobox
             Dim cb As CaComboBox
@@ -727,25 +731,16 @@ Public Class CDataGridView
             cb.DropDownStyle = ComboBoxStyle.DropDown
             'set the property of a combobox to autocomplete mode.
             cb.AutoCompleteMode = AutoCompleteMode.Suggest
-            cb.AutoCompleteSource = AutoCompleteSource.ListItems
-            cb.OverrideDropDownStyleList = False
-            cb.IntegralHeight = True
-            cb.AutoSize = False
-            cb.DropDownStyle = ComboBoxStyle.Simple
-            cb.MaxDropDownItems = 1
+            'cb.AutoCompleteSource = AutoCompleteSource.ListItems
+            'cb.OverrideDropDownStyleList = False
+            'cb.IntegralHeight = True
+            'cb.AutoSize = False
+            'cb.DropDownStyle = ComboBoxStyle.Simple
+            'cb.MaxDropDownItems = 1
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            cb.DropDownHeight = Height
+            'cb.DropDownHeight = Height
         End If
-        'If TypeOf e.Control Is ComboBox Then
-        '    Dim cb As ComboBox
-        '    cb = e.Control
-        '    'set the dropdown style of a combobox
-        '    cb.DropDownStyle = ComboBoxStyle.DropDown
-        '    'set the property of a combobox to autocomplete mode.
-        '    cb.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-        '    cb.AutoCompleteSource = AutoCompleteSource.ListItems
-        'End If
     End Sub
 
     ' sample cellvalidating event handler

@@ -9,6 +9,7 @@ Public Class CdgvMoneyColumn
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
+    Private _translatable As Boolean = False
 
     Public Sub New()
         CellTemplate = New CDgvMoneyCell
@@ -60,10 +61,13 @@ Public Class CdgvMoneyColumn
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
@@ -77,7 +81,7 @@ Public Class CdgvMoneyColumn
     Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
     Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
-    
-    Private Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
+
+    Private Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
 
 End Class

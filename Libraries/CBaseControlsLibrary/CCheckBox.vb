@@ -12,6 +12,7 @@ Public Class CCheckBox
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean = True
+    Private _translatable As Boolean = False
     Private _noLabel As Boolean
     Private _oldValue As String
     Private _autoSize As Boolean
@@ -291,10 +292,14 @@ Public Class CCheckBox
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
+
     End Property
 
     '    MyBase.OnPaint(e)

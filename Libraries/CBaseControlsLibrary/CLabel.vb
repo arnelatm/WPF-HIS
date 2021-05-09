@@ -9,6 +9,7 @@ Public Class CLabel
     Private _editable As Boolean
     Private _editingMode As Boolean
     Private _displayOnly As Boolean
+    Private _translatable As Boolean = True
 
     Public Sub New()
         MyBase.New()
@@ -43,10 +44,13 @@ Public Class CLabel
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return True
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     '<Category("Custom Properties")>

@@ -15,6 +15,7 @@ Public Class CMaskedTextBox
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
     Private _editingMode As Boolean = False
     Private _searchField As String
+    Private _translatable As Boolean = False
 
     <Bindable(True)>
     <Category("Properties")>
@@ -389,10 +390,13 @@ Public Class CMaskedTextBox
     '    End If
     'End Sub
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return False
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
@@ -438,9 +442,8 @@ Public Class CMaskedTextBox
             Return Nothing
         End Get
     End Property
-    
-    Private Property IgnoreCase as Boolean Implements IFindableControl.IgnoreCase       
 
+    Private Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
 
     Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
 

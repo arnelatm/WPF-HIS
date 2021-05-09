@@ -11,6 +11,7 @@ Public Class CCheckBoxNew
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean = True
+    Private _translatable As Boolean = False
     Private _noLabel As Boolean
     Private _oldValue As String
     Private _autoSize As Boolean
@@ -89,10 +90,13 @@ Public Class CCheckBoxNew
         End Set
     End Property
 
-    Public ReadOnly Property Translatable As Boolean Implements IEntryControl.Translatable
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return True
         End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
     End Property
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
