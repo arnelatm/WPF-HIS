@@ -41,7 +41,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
+            DoubleBuffered = True
             MainTableName = "PayElement"
             TvMainFieldName = "PayElementName"
             TvSecondaryFieldName = "PayElementCode"
@@ -375,7 +375,7 @@ Namespace PresentationLayer.Views.Forms
                     Messaging.ShowParametrizedMessage(True, "MsgSelectedValueNotAllowed", {cboCalculationType.LinkedLabel.Text, "field1", cboQuantityType.LinkedLabel.Text, "field2"})
                     cboCalculationType.SelectedValue = -1
                 End If
-                Me.DoubleBuffered = True
+                DoubleBuffered = True
                 SuspendLayout()
                 floCalculation.Visible = False
                 lblDefaultQuantity.Visible = True
