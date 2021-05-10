@@ -738,7 +738,7 @@ Namespace PresentationLayer.Views.Forms
                                 amount = MyPresenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeEarnings(nIndex).Unit)
                             End If
                         Case $"dgvEarningUnit"
-                            Dim unit = DirectCast(.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                            Dim unit = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
                             amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
                     End Select
                     selectedRow.Amount = amount
@@ -778,7 +778,7 @@ Namespace PresentationLayer.Views.Forms
                                 amount = MyPresenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeDeductions(nIndex).Unit)
                             End If
                         Case $"dgvDeductionUnit"
-                            Dim unit = DirectCast(.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                            Dim unit = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
                             amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
                     End Select
                     selectedRow.Amount = amount

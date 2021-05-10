@@ -5,8 +5,8 @@ Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CSuggestFilterComboBox
-    Inherits ComboBox
+Public Class CDgvComboBoxEditingControl
+    Inherits DataGridViewComboBoxEditingControl
 
     Public SuggestListForm As CListBoxForm = New CListBoxForm
     Private ReadOnly _suggestBindingList As BindingList(Of String) = New BindingList(Of String)()
@@ -87,8 +87,6 @@ Public Class CSuggestFilterComboBox
         showForm = _suggestBindingList.Any()
         SuggestListForm.Visible = showForm
         If showForm Then
-            SuggestListForm.BringToFront()
-            SuggestListForm.TopLevel = True
             SetListBoxFormLocation(SuggestListForm)
             SuggestListForm.Visible = True
         Else
@@ -216,6 +214,10 @@ Public Class CSuggestFilterComboBox
         pt.Offset(x, y)
         Return pt
 
+    End Function
+
+    Public Function GetValue()
+        Return SelectedValue
     End Function
 
 End Class

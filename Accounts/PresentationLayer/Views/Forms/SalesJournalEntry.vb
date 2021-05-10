@@ -330,7 +330,7 @@ Namespace PresentationLayer.Views.Forms
                     selectedRow = .Rows(.CurrentCell.RowIndex)
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvdeposittypeidno"
-                            Dim value = DirectCast(.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                            Dim value = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
                             PresenterObj.RecomputeBankCharges(value, selectedRow.Index)
                         Case $"dgvsaleamount"
                             Dim pDepositTypeIdNo = selectedRow.Cells("dgvDepositTypeIdNo").Value

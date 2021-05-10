@@ -801,7 +801,7 @@ Namespace PresentationLayer.Views.Forms
         '        Dim nIndex = .CurrentRow.Index
         '        Select Case .CurrentCell.OwningColumn.Name
         '            Case "dgvFactorType"
-        '                Dim PayElementId = DirectCast(DataGridViewPayElementItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+        '                Dim PayElementId = DirectCast(DataGridViewPayElementItems.CurrentCell, CDgvComboboxCell).CellEditingControl.GetValue()
         '                'If DataGridViewSummaryDetail.CurrentRow.Index = DataGridViewSummaryDetail.NewRowIndex Then
         '                '    bsPayElementItem.AddNew()
         '                '    PayElementItems(nIndex).PayElementIdNo = PayElementId

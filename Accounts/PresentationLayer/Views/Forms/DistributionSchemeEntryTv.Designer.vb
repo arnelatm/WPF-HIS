@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtTotalPercentage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvPercentage = New AATM.Libraries.CBaseControlsLibrary.CdgvDecimalColumn()
         Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDistributionSchemeIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -492,7 +492,7 @@ End Sub
         Friend WithEvents lblAmount As CLabel
         Friend WithEvents bsDistributionSchemeItems As Windows.Forms.BindingSource
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvPercentage As CdgvDecimalColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvDistributionSchemeIdNo As DataGridViewTextBoxColumn
