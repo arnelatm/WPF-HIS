@@ -319,7 +319,7 @@ Namespace PresentationLayer.Views.Forms
                     Dim nIndex = .CurrentRow.Index
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvaccountidno"
-                            Dim accountId = DirectCast(.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                            Dim accountId = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
                             If .CurrentRow.Index = .NewRowIndex Then
                                 bsJournalItems.AddNew()
                                 JournalItems(nIndex).AccountIdNo = accountId

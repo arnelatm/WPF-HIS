@@ -389,7 +389,7 @@ Namespace PresentationLayer.Views.Forms
                     Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvaccountidno"
-                            Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
+                            Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
                             If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
                                 bsJournalItems.AddNew()
                                 JournalItems(nIndex).AccountIdNo = accountId

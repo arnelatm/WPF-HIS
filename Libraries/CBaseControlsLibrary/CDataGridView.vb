@@ -507,17 +507,17 @@ Public Class CDataGridView
 
     'Public Function GetEditingValue(cCurrentCell As Object, Optional field As String = "")
     '    If cCurrentCell IsNot Nothing Then
-    '        Dim dgvControl As Libraries.CBaseControlsLibrary.CaDgvComboboxCell
-    '        dgvControl = TryCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell)
+    '        Dim dgvControl As Libraries.CBaseControlsLibrary.CDgvComboboxCell
+    '        dgvControl = TryCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell)
     '        If dgvControl IsNot Nothing Then
     '            If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
     '                Select Case field.ToLower()
     '                    Case $"code"
-    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
+    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
     '                    Case $"name"
-    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
     '                    Case $"idno"
-    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
+    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
     '                    Case Else
     '                        Return cCurrentCell.Value
     '                End Select
@@ -531,17 +531,17 @@ Public Class CDataGridView
 
     Public Function GetEditingValue(Optional field As String = "")
         If CurrentCell IsNot Nothing Then
-            Dim dgvControl As Libraries.CBaseControlsLibrary.CaDgvComboboxCell
-            dgvControl = TryCast(CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell)
+            Dim dgvControl As Libraries.CBaseControlsLibrary.CDgvComboBoxCell
+            dgvControl = TryCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell)
             If dgvControl IsNot Nothing Then
                 If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
                     Select Case field.ToLower()
                         Case $"code"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
                         Case $"name"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
                         Case $"idno"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CaDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
                         Case Else
                             Return CurrentCell.Value
                     End Select

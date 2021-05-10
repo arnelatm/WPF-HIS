@@ -41,12 +41,12 @@ Namespace PresentationLayer.Views.Forms
         Me.tbcPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
         Me.tpgEarnings = New System.Windows.Forms.TabPage()
         Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
         Me.tpgDeductions = New System.Windows.Forms.TabPage()
         Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
         Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -881,10 +881,10 @@ End Sub
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents bsEarnings As BindingSource
         Friend WithEvents bsDeductions As BindingSource
-        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvEarningAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
         Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvDeductionAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
     End Class
 End Namespace

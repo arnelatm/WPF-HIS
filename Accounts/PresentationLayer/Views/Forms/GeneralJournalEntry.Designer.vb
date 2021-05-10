@@ -56,10 +56,10 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated = New CCustomDateTimePicker()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -523,10 +523,10 @@ End Sub
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents chkClosingJournal As CCheckBox
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
         Friend WithEvents dgvCredit As CdgvMoneyColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvNotes As CDgvTextColumn
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn

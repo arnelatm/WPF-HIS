@@ -140,26 +140,26 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpEarnings = New System.Windows.Forms.TabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvEarningRate = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-            Me.dgvEarningUnit = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvEarningUnit = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.tbpDeductions = New System.Windows.Forms.TabPage()
             Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequenceDeduction = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvDeductionRate = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvDeductionUnit = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvDeductionUnit = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.tbpPhones = New System.Windows.Forms.TabPage()
             Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvCountryTelIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvCountryTelIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvAreaCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.PhoneNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvFullPhone = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -2820,7 +2820,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents bsPhones As BindingSource
-        Friend WithEvents dgvInternationalCode As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvInternationalCode As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvPhoneNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents tbpPhones As TabPage
         Friend WithEvents DataGridViewPhones As Libraries.CBaseControlsLibrary.CDataGridView
@@ -2844,8 +2844,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblEmail As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblStreet As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dgvSequence As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
-        Friend WithEvents dgvCountryTelIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvCountryTelIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvAreaCode As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents PhoneNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvFullPhone As DataGridViewTextBoxColumn
@@ -2882,16 +2882,16 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewTextBoxColumn11 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn12 As DataGridViewTextBoxColumn
         Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvEarningRate As Libraries.CBaseControlsLibrary.CdgvDecimalColumn
-        Friend WithEvents dgvEarningUnit As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvEarningUnit As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvEarningAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
         Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
         Friend WithEvents dgvSequenceDeduction As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvDeductionRate As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
-        Friend WithEvents dgvDeductionUnit As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvDeductionUnit As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvDeductionAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
         Friend WithEvents DataGridViewTextBoxColumn13 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn14 As DataGridViewTextBoxColumn
