@@ -299,6 +299,7 @@
     <Compile Include="CTreeView.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="CustomComboBox.vb" />
     <Compile Include="DataGridViewCaComboBoxCell.vb" />
     <Compile Include="DataGridViewExtensions.vb" />
     <Compile Include="dgvfooter.vb">
