@@ -3,11 +3,12 @@
 Public Class EcbComboBoxCell
     Inherits DataGridViewComboBoxCell
 
-    'Public Sub New()
-    '    MyBase.New()
-    '    ' Use the short date format say for date Cell
-    '    'Me.Style.Format = "d"
-    'End Sub
+    Public Sub New()
+        MyBase.New()
+        ' Use the short date format say for date Cell
+        'Me.Style.Format = "d"
+
+    End Sub
 
     Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer, ByVal initialFormattedValue As Object, ByVal dataGridViewCellStyle As DataGridViewCellStyle)
         ' Set the value of the editing control to the current cell value.
@@ -17,6 +18,7 @@ Public Class EcbComboBoxCell
         ctl.DisplayMember = "Name"
         ctl.SelectedValue = Value
         ctl.CausesValidation = False
+        ctl.DropDownStyle = ComboBoxStyle.DropDownList        
     End Sub
 
     Public Overrides ReadOnly Property EditType() As Type
@@ -26,12 +28,12 @@ Public Class EcbComboBoxCell
         End Get
     End Property
 
-    Public Overrides ReadOnly Property ValueType() As Type
-        Get
-            ' Return the type of the value that CalendarCell contains.
-            Return GetType(Integer)
-        End Get
-    End Property
+    'Public Overrides ReadOnly Property ValueType() As Type
+    '    Get
+    '        ' Return the type of the value that CalendarCell contains.
+    '        Return GetType(ValueType)
+    '    End Get
+    'End Property
 
     Public Overrides ReadOnly Property DefaultNewRowValue() As Object
         Get

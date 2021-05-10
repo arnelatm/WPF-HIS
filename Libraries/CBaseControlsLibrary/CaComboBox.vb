@@ -103,7 +103,7 @@ Public Class CaComboBox
                     'BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                     'MaxDropDownItems = _defaultMaxDropDownItems
                     'IntegralHeight = True
-                    'DropDownStyle = ComboBoxStyle.DropDownList
+                    DropDownStyle = ComboBoxStyle.DropDownList
                     'DropDownHeight = _defaultDropDownHeight
                 End If
             Else
