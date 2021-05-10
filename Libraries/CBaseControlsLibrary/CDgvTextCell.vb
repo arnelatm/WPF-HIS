@@ -10,13 +10,13 @@ Public Class CDgvTextCell
     Private _displayOnly As Boolean
     Private _translatable As Boolean = False
 
-    Public Overrides Function Clone() As Object
-        Dim copy As CDgvTextCell = TryCast(MyBase.Clone(), CDgvTextCell)
-        copy.DisplayOnly = DisplayOnly
-        copy.Translatable = Translatable
-        copy.EditingMode = EditingMode
-        Return copy
-    End Function
+    'Public Overrides Function Clone() As Object
+    '    Dim copy As CDgvTextCell = TryCast(MyBase.Clone(), CDgvTextCell)
+    '    copy.DisplayOnly = DisplayOnly
+    '    copy.Translatable = Translatable
+    '    copy.EditingMode = EditingMode
+    '    Return copy
+    'End Function
 
     <Category("Custom Properties")>
     <DefaultValue(False)>

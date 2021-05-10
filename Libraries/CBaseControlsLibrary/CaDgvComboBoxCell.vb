@@ -31,13 +31,13 @@ Public Class CaDgvComboboxCell
         End Get
     End Property
 
-    '    ' You must override the ValueType property to return the cell's
-    '' underlying type
-    'Public Overrides ReadOnly Property ValueType() As Type
-    '    Get
-    '        Return GetType(Integer)
-    '    End Get
-    'End Property
+    ' You must override the ValueType property to return the cell's
+    ' underlying type
+    Public Overrides ReadOnly Property ValueType() As Type
+        Get
+            Return GetType(ValueType)
+        End Get
+    End Property
 
     Private _myEditingControl As CaDgvComboBox
 

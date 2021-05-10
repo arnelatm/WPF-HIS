@@ -782,11 +782,16 @@ Public Class CDataGridView
             If DataSource.[GetType]() Is GetType(BindingSource) Then
                 'AssignEvent()
                 Dim myBindingSource = CType(DataSource, BindingSource)
+                Dim nDataCount = DataSource().Count()
                 If CurrentRow.Index = NewRowIndex Then
-                    myBindingSource.AddNew()
-                    ' adding a new row to the bindingsource adds a new empty row at the end with null values
-                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                    myBindingSource.RemoveAt(myBindingSource.Count - 1)
+                    Try
+                        myBindingSource.AddNew()
+                        ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                        ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                        myBindingSource.RemoveAt(myBindingSource.Count - 1)
+                    Catch
+
+                    End Try
                 End If
             End If
         End If

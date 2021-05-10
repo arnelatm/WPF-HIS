@@ -443,7 +443,6 @@ Namespace PresentationLayer.Views.Forms
                 dgvPayGroupIdNo.DataSource = _payGroupsByCode
                 dgvPayGroupIdNo.DisplayMember = "Name"
                 dgvPayGroupIdNo.ValueMember = "IdNo"
-                dgvPayGroupIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.DataSource = _accountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"

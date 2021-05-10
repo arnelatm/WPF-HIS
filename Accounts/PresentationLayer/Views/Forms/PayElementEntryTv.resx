@@ -158,7 +158,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFAAQEBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFYAQEBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -215,460 +215,6 @@
   </metadata>
   <data name="tlpPayElement.ColumnCount" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;cboReportGroupIdNo.Name" xml:space="preserve">
-    <value>cboReportGroupIdNo</value>
-  </data>
-  <data name="&gt;&gt;cboReportGroupIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboReportGroupIdNo.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;cboReportGroupIdNo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cboPayElementKind.Name" xml:space="preserve">
-    <value>cboPayElementKind</value>
-  </data>
-  <data name="&gt;&gt;cboPayElementKind.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboPayElementKind.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;cboPayElementKind.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblPayElementKind.Name" xml:space="preserve">
-    <value>lblPayElementKind</value>
-  </data>
-  <data name="&gt;&gt;lblPayElementKind.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblPayElementKind.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;lblPayElementKind.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;txtPayElementNameAra.Name" xml:space="preserve">
-    <value>txtPayElementNameAra</value>
-  </data>
-  <data name="&gt;&gt;txtPayElementNameAra.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtPayElementNameAra.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;txtPayElementNameAra.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblName.Name" xml:space="preserve">
-    <value>lblName</value>
-  </data>
-  <data name="&gt;&gt;lblName.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblName.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;txtPayElementCode.Name" xml:space="preserve">
-    <value>txtPayElementCode</value>
-  </data>
-  <data name="&gt;&gt;txtPayElementCode.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtPayElementCode.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;txtPayElementCode.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblCode.Name" xml:space="preserve">
-    <value>lblCode</value>
-  </data>
-  <data name="&gt;&gt;lblCode.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCode.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;lblCode.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.Name" xml:space="preserve">
-    <value>TxtIdNo</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lblNameAra.Name" xml:space="preserve">
-    <value>lblNameAra</value>
-  </data>
-  <data name="&gt;&gt;lblNameAra.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblNameAra.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;lblNameAra.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;chkSummary.Name" xml:space="preserve">
-    <value>chkSummary</value>
-  </data>
-  <data name="&gt;&gt;chkSummary.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkSummary.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;chkSummary.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;chkActive.Name" xml:space="preserve">
-    <value>chkActive</value>
-  </data>
-  <data name="&gt;&gt;chkActive.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkActive.Parent" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;chkActive.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="tlpPayElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 3</value>
-  </data>
-  <data name="tlpPayElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 3, 3, 3</value>
-  </data>
-  <data name="tlpPayElement.RowCount" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="tlpPayElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 126</value>
-  </data>
-  <data name="tlpPayElement.TabIndex" type="System.Int32, mscorlib">
-    <value>159</value>
-  </data>
-  <data name="&gt;&gt;tlpPayElement.Name" xml:space="preserve">
-    <value>tlpPayElement</value>
-  </data>
-  <data name="&gt;&gt;tlpPayElement.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tlpPayElement.Parent" xml:space="preserve">
-    <value>floPayElement</value>
-  </data>
-  <data name="&gt;&gt;tlpPayElement.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tlpPayElement.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cboReportGroupIdNo" Row="4" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="lblReportGroupIdNo" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboPayElementKind" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblPayElementKind" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtPayElementNameAra" Row="2" RowSpan="1" Column="1" ColumnSpan="4" /&gt;&lt;Control Name="lblName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtPayElementCode" Row="0" RowSpan="1" Column="3" ColumnSpan="2" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtPayElementName" Row="1" RowSpan="1" Column="1" ColumnSpan="4" /&gt;&lt;Control Name="lblNameAra" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="chkSummary" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="chkActive" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblSummary" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblActive" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tbcPayElement.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="&gt;&gt;floCalculation.Name" xml:space="preserve">
-    <value>floCalculation</value>
-  </data>
-  <data name="&gt;&gt;floCalculation.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floCalculation.Parent" xml:space="preserve">
-    <value>tbpCalculation</value>
-  </data>
-  <data name="&gt;&gt;floCalculation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbpCalculation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="tbpCalculation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 313</value>
-  </data>
-  <data name="tbpCalculation.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tbpCalculation.Text" xml:space="preserve">
-    <value>Calculation</value>
-  </data>
-  <data name="&gt;&gt;tbpCalculation.Name" xml:space="preserve">
-    <value>tbpCalculation</value>
-  </data>
-  <data name="&gt;&gt;tbpCalculation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpCalculation.Parent" xml:space="preserve">
-    <value>tbcPayElement</value>
-  </data>
-  <data name="&gt;&gt;tbpCalculation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbpAccountPosting.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="&gt;&gt;floPostingAccounts.Name" xml:space="preserve">
-    <value>floPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;floPostingAccounts.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floPostingAccounts.Parent" xml:space="preserve">
-    <value>tbpAccountPosting</value>
-  </data>
-  <data name="&gt;&gt;floPostingAccounts.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbpAccountPosting.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="tbpAccountPosting.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpAccountPosting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 313</value>
-  </data>
-  <data name="tbpAccountPosting.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tbpAccountPosting.Text" xml:space="preserve">
-    <value>Posting Accounts</value>
-  </data>
-  <data name="&gt;&gt;tbpAccountPosting.Name" xml:space="preserve">
-    <value>tbpAccountPosting</value>
-  </data>
-  <data name="&gt;&gt;tbpAccountPosting.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpAccountPosting.Parent" xml:space="preserve">
-    <value>tbcPayElement</value>
-  </data>
-  <data name="&gt;&gt;tbpAccountPosting.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewPayElementItems.Name" xml:space="preserve">
-    <value>DataGridViewPayElementItems</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewPayElementItems.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewPayElementItems.Parent" xml:space="preserve">
-    <value>tbpSummaryDetail</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewPayElementItems.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbpSummaryDetail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="tbpSummaryDetail.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpSummaryDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 313</value>
-  </data>
-  <data name="tbpSummaryDetail.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tbpSummaryDetail.Text" xml:space="preserve">
-    <value>Summary Detail</value>
-  </data>
-  <data name="&gt;&gt;tbpSummaryDetail.Name" xml:space="preserve">
-    <value>tbpSummaryDetail</value>
-  </data>
-  <data name="&gt;&gt;tbpSummaryDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpSummaryDetail.Parent" xml:space="preserve">
-    <value>tbcPayElement</value>
-  </data>
-  <data name="&gt;&gt;tbpSummaryDetail.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tbpNotes.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="&gt;&gt;floMain.Name" xml:space="preserve">
-    <value>floMain</value>
-  </data>
-  <data name="&gt;&gt;floMain.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floMain.Parent" xml:space="preserve">
-    <value>tbpNotes</value>
-  </data>
-  <data name="&gt;&gt;floMain.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbpNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 23</value>
-  </data>
-  <data name="tbpNotes.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 313</value>
-  </data>
-  <data name="tbpNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tbpNotes.Text" xml:space="preserve">
-    <value>Notes/Description</value>
-  </data>
-  <data name="&gt;&gt;tbpNotes.Name" xml:space="preserve">
-    <value>tbpNotes</value>
-  </data>
-  <data name="&gt;&gt;tbpNotes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpNotes.Parent" xml:space="preserve">
-    <value>tbcPayElement</value>
-  </data>
-  <data name="&gt;&gt;tbpNotes.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="tabPageImages.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>828, 17</value>
-  </metadata>
-  <data name="tabPageImages.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
-        BwAAAk1TRnQBSQFMAwEBAAFQAQMBUAEDARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
-        AUADAAEQAwABAQEAAQgGAAEEGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEA
-        AfABygGmAQABMwUAATMBAAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEA
-        AYABfAH/AQACUAH/AQABkwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFm
-        AwABmQMAAcwCAAEzAwACMwIAATMBZgIAATMBmQIAATMBzAIAATMB/wIAAWYDAAFmATMCAAJmAgABZgGZ
-        AgABZgHMAgABZgH/AgABmQMAAZkBMwIAAZkBZgIAApkCAAGZAcwCAAGZAf8CAAHMAwABzAEzAgABzAFm
-        AgABzAGZAgACzAIAAcwB/wIAAf8BZgIAAf8BmQIAAf8BzAEAATMB/wIAAf8BAAEzAQABMwEAAWYBAAEz
-        AQABmQEAATMBAAHMAQABMwEAAf8BAAH/ATMCAAMzAQACMwFmAQACMwGZAQACMwHMAQACMwH/AQABMwFm
-        AgABMwFmATMBAAEzAmYBAAEzAWYBmQEAATMBZgHMAQABMwFmAf8BAAEzAZkCAAEzAZkBMwEAATMBmQFm
-        AQABMwKZAQABMwGZAcwBAAEzAZkB/wEAATMBzAIAATMBzAEzAQABMwHMAWYBAAEzAcwBmQEAATMCzAEA
-        ATMBzAH/AQABMwH/ATMBAAEzAf8BZgEAATMB/wGZAQABMwH/AcwBAAEzAv8BAAFmAwABZgEAATMBAAFm
-        AQABZgEAAWYBAAGZAQABZgEAAcwBAAFmAQAB/wEAAWYBMwIAAWYCMwEAAWYBMwFmAQABZgEzAZkBAAFm
-        ATMBzAEAAWYBMwH/AQACZgIAAmYBMwEAA2YBAAJmAZkBAAJmAcwBAAFmAZkCAAFmAZkBMwEAAWYBmQFm
-        AQABZgKZAQABZgGZAcwBAAFmAZkB/wEAAWYBzAIAAWYBzAEzAQABZgHMAZkBAAFmAswBAAFmAcwB/wEA
-        AWYB/wIAAWYB/wEzAQABZgH/AZkBAAFmAf8BzAEAAcwBAAH/AQAB/wEAAcwBAAKZAgABmQEzAZkBAAGZ
-        AQABmQEAAZkBAAHMAQABmQMAAZkCMwEAAZkBAAFmAQABmQEzAcwBAAGZAQAB/wEAAZkBZgIAAZkBZgEz
-        AQABmQEzAWYBAAGZAWYBmQEAAZkBZgHMAQABmQEzAf8BAAKZATMBAAKZAWYBAAOZAQACmQHMAQACmQH/
-        AQABmQHMAgABmQHMATMBAAFmAcwBZgEAAZkBzAGZAQABmQLMAQABmQHMAf8BAAGZAf8CAAGZAf8BMwEA
-        AZkBzAFmAQABmQH/AZkBAAGZAf8BzAEAAZkC/wEAAcwDAAGZAQABMwEAAcwBAAFmAQABzAEAAZkBAAHM
-        AQABzAEAAZkBMwIAAcwCMwEAAcwBMwFmAQABzAEzAZkBAAHMATMBzAEAAcwBMwH/AQABzAFmAgABzAFm
-        ATMBAAGZAmYBAAHMAWYBmQEAAcwBZgHMAQABmQFmAf8BAAHMAZkCAAHMAZkBMwEAAcwBmQFmAQABzAKZ
-        AQABzAGZAcwBAAHMAZkB/wEAAswCAALMATMBAALMAWYBAALMAZkBAAPMAQACzAH/AQABzAH/AgABzAH/
-        ATMBAAGZAf8BZgEAAcwB/wGZAQABzAH/AcwBAAHMAv8BAAHMAQABMwEAAf8BAAFmAQAB/wEAAZkBAAHM
-        ATMCAAH/AjMBAAH/ATMBZgEAAf8BMwGZAQAB/wEzAcwBAAH/ATMB/wEAAf8BZgIAAf8BZgEzAQABzAJm
-        AQAB/wFmAZkBAAH/AWYBzAEAAcwBZgH/AQAB/wGZAgAB/wGZATMBAAH/AZkBZgEAAf8CmQEAAf8BmQHM
-        AQAB/wGZAf8BAAH/AcwCAAH/AcwBMwEAAf8BzAFmAQAB/wHMAZkBAAH/AswBAAH/AcwB/wEAAv8BMwEA
-        AcwB/wFmAQAC/wGZAQAC/wHMAQACZgH/AQABZgH/AWYBAAFmAv8BAAH/AmYBAAH/AWYB/wEAAv8BZgEA
-        ASEBAAGlAQADXwEAA3cBAAOGAQADlgEAA8sBAAOyAQAD1wEAA90BAAPjAQAD6gEAA/EBAAP4AQAB8AH7
-        Af8BAAGkAqABAAOAAwAB/wIAAf8DAAL/AQAB/wMAAf8BAAH/AQAC/wIAA/8FAAH/B0Y3AApGAQc0AAxG
-        AQcyAAEaBkYB8gZGMgAHRgHyB0YxAA9GMAABkwdGAfIHRjAACEYB8gdGMAABbwdGAfIHRjAAAf8HRgHy
-        B0YxAAdGAfIHRjEAB0YB8gZGAf8yAAZGAfIGRjQAC0Y2AAhGARo5AAH/AW8BRgGTNgABQgFNAT4HAAE+
-        AwABKAMAAUADAAEQAwABAQEAAQEFAAGAFwAD/wEAAfABDwYAAeABAwYAAcABAQYAAYABAQYAAYAHAAGA
-        JwABgAcAAYAHAAHAAQEGAAHgAQMGAAHwAQcGAAH8AT8GAAs=
-</value>
-  </data>
-  <data name="tbcPayElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 132</value>
-  </data>
-  <data name="tbcPayElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 0, 10, 3</value>
-  </data>
-  <data name="tbcPayElement.Padding" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tbcPayElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>589, 340</value>
-  </data>
-  <data name="tbcPayElement.TabIndex" type="System.Int32, mscorlib">
-    <value>284</value>
-  </data>
-  <data name="&gt;&gt;tbcPayElement.Name" xml:space="preserve">
-    <value>tbcPayElement</value>
-  </data>
-  <data name="&gt;&gt;tbcPayElement.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTabControl, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;tbcPayElement.Parent" xml:space="preserve">
-    <value>floPayElement</value>
-  </data>
-  <data name="&gt;&gt;tbcPayElement.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 476</value>
-  </data>
-  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 23</value>
-  </data>
-  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>158</value>
-  </data>
-  <data name="CLabel1.Text" xml:space="preserve">
-    <value>ID No.</value>
-  </data>
-  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
-    <value>CLabel1</value>
-  </data>
-  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
-    <value>floPayElement</value>
-  </data>
-  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="floPayElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 18</value>
-  </data>
-  <data name="floPayElement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>613, 480</value>
-  </data>
-  <data name="floPayElement.TabIndex" type="System.Int32, mscorlib">
-    <value>282</value>
-  </data>
-  <data name="&gt;&gt;floPayElement.Name" xml:space="preserve">
-    <value>floPayElement</value>
-  </data>
-  <data name="&gt;&gt;floPayElement.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floPayElement.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;floPayElement.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="cboReportGroupIdNo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1228,293 +774,44 @@
   <data name="&gt;&gt;chkActive.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="tlpPayElement.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 3</value>
+  </data>
+  <data name="tlpPayElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 3, 3, 3</value>
+  </data>
+  <data name="tlpPayElement.RowCount" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tlpPayElement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>590, 126</value>
+  </data>
+  <data name="tlpPayElement.TabIndex" type="System.Int32, mscorlib">
+    <value>159</value>
+  </data>
+  <data name="&gt;&gt;tlpPayElement.Name" xml:space="preserve">
+    <value>tlpPayElement</value>
+  </data>
+  <data name="&gt;&gt;tlpPayElement.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tlpPayElement.Parent" xml:space="preserve">
+    <value>floPayElement</value>
+  </data>
+  <data name="&gt;&gt;tlpPayElement.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tlpPayElement.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cboReportGroupIdNo" Row="4" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="lblReportGroupIdNo" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboPayElementKind" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblPayElementKind" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtPayElementNameAra" Row="2" RowSpan="1" Column="1" ColumnSpan="4" /&gt;&lt;Control Name="lblName" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtPayElementCode" Row="0" RowSpan="1" Column="3" ColumnSpan="2" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtPayElementName" Row="1" RowSpan="1" Column="1" ColumnSpan="4" /&gt;&lt;Control Name="lblNameAra" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="chkSummary" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="chkActive" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="lblSummary" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblActive" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tbcPayElement.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="floCalculation.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
-  <data name="&gt;&gt;tlpCalculation.Name" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;tlpCalculation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tlpCalculation.Parent" xml:space="preserve">
-    <value>floCalculation</value>
-  </data>
-  <data name="&gt;&gt;tlpCalculation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tlpCalculation.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblQuantityType" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboQuantityType" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cboCalculationType" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblPayElementType" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblFactorValue" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCalculationType" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtRate" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtDefaultQuantity" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblBasePayment" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboBasePaymentIdNo" Row="3" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblIncludeInEos" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkIncludeInEOS" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtMultiplier" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cboFactorType" Row="4" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="chkTaxable" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblSlash" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cboUnit" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cboPayElementType" Row="0" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblRate" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblDefaultQuantity" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblSlash2" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblTaxable" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblUnit" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblFactorType" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,55.3125,Percent,44.6875,Absolute,26,Absolute,224" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="floCalculation.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="floCalculation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="floCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 307</value>
-  </data>
-  <data name="floCalculation.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;floCalculation.Name" xml:space="preserve">
-    <value>floCalculation</value>
-  </data>
-  <data name="&gt;&gt;floCalculation.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floCalculation.Parent" xml:space="preserve">
-    <value>tbpCalculation</value>
-  </data>
-  <data name="&gt;&gt;floCalculation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="tlpCalculation.ColumnCount" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblQuantityType.Name" xml:space="preserve">
-    <value>lblQuantityType</value>
-  </data>
-  <data name="&gt;&gt;lblQuantityType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblQuantityType.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;lblQuantityType.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cboQuantityType.Name" xml:space="preserve">
-    <value>cboQuantityType</value>
-  </data>
-  <data name="&gt;&gt;cboQuantityType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboQuantityType.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;cboQuantityType.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cboCalculationType.Name" xml:space="preserve">
-    <value>cboCalculationType</value>
-  </data>
-  <data name="&gt;&gt;cboCalculationType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboCalculationType.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;cboCalculationType.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblFactorValue.Name" xml:space="preserve">
-    <value>lblFactorValue</value>
-  </data>
-  <data name="&gt;&gt;lblFactorValue.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblFactorValue.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;lblFactorValue.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblCalculationType.Name" xml:space="preserve">
-    <value>lblCalculationType</value>
-  </data>
-  <data name="&gt;&gt;lblCalculationType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCalculationType.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;lblCalculationType.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;txtRate.Name" xml:space="preserve">
-    <value>txtRate</value>
-  </data>
-  <data name="&gt;&gt;txtRate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtRate.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;txtRate.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;txtDefaultQuantity.Name" xml:space="preserve">
-    <value>txtDefaultQuantity</value>
-  </data>
-  <data name="&gt;&gt;txtDefaultQuantity.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtDefaultQuantity.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;txtDefaultQuantity.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;lblBasePayment.Name" xml:space="preserve">
-    <value>lblBasePayment</value>
-  </data>
-  <data name="&gt;&gt;lblBasePayment.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblBasePayment.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;lblBasePayment.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;cboBasePaymentIdNo.Name" xml:space="preserve">
-    <value>cboBasePaymentIdNo</value>
-  </data>
-  <data name="&gt;&gt;cboBasePaymentIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboBasePaymentIdNo.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;cboBasePaymentIdNo.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;lblIncludeInEos.Name" xml:space="preserve">
-    <value>lblIncludeInEos</value>
-  </data>
-  <data name="&gt;&gt;lblIncludeInEos.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblIncludeInEos.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;lblIncludeInEos.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;chkIncludeInEOS.Name" xml:space="preserve">
-    <value>chkIncludeInEOS</value>
-  </data>
-  <data name="&gt;&gt;chkIncludeInEOS.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkIncludeInEOS.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;chkIncludeInEOS.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;txtMultiplier.Name" xml:space="preserve">
-    <value>txtMultiplier</value>
-  </data>
-  <data name="&gt;&gt;txtMultiplier.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtMultiplier.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;txtMultiplier.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;cboFactorType.Name" xml:space="preserve">
-    <value>cboFactorType</value>
-  </data>
-  <data name="&gt;&gt;cboFactorType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboFactorType.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;cboFactorType.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;chkTaxable.Name" xml:space="preserve">
-    <value>chkTaxable</value>
-  </data>
-  <data name="&gt;&gt;chkTaxable.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkTaxable.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;chkTaxable.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;lblSlash.Name" xml:space="preserve">
-    <value>lblSlash</value>
-  </data>
-  <data name="&gt;&gt;lblSlash.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblSlash.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;lblSlash.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;cboUnit.Name" xml:space="preserve">
-    <value>cboUnit</value>
-  </data>
-  <data name="&gt;&gt;cboUnit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboUnit.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;cboUnit.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;cboPayElementType.Name" xml:space="preserve">
-    <value>cboPayElementType</value>
-  </data>
-  <data name="&gt;&gt;cboPayElementType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboPayElementType.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;cboPayElementType.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;lblSlash2.Name" xml:space="preserve">
-    <value>lblSlash2</value>
-  </data>
-  <data name="&gt;&gt;lblSlash2.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblSlash2.Parent" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;lblSlash2.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="tlpCalculation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="tlpCalculation.RowCount" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="tlpCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>570, 251</value>
-  </data>
-  <data name="tlpCalculation.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tlpCalculation.Name" xml:space="preserve">
-    <value>tlpCalculation</value>
-  </data>
-  <data name="&gt;&gt;tlpCalculation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tlpCalculation.Parent" xml:space="preserve">
-    <value>floCalculation</value>
-  </data>
-  <data name="&gt;&gt;tlpCalculation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tlpCalculation.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblQuantityType" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboQuantityType" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cboCalculationType" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblPayElementType" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblFactorValue" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCalculationType" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtRate" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtDefaultQuantity" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblBasePayment" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboBasePaymentIdNo" Row="3" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblIncludeInEos" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkIncludeInEOS" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtMultiplier" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cboFactorType" Row="4" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="chkTaxable" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblSlash" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cboUnit" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cboPayElementType" Row="0" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblRate" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblDefaultQuantity" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblSlash2" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblTaxable" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblUnit" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblFactorType" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,55.3125,Percent,44.6875,Absolute,26,Absolute,224" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="lblQuantityType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2386,134 +1683,89 @@
   <data name="&gt;&gt;lblSlash2.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <data name="&gt;&gt;tlpPostingAccounts.Name" xml:space="preserve">
-    <value>tlpPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;tlpPostingAccounts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tlpPostingAccounts.Parent" xml:space="preserve">
-    <value>floPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;tlpPostingAccounts.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tlpPostingAccounts.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblAccountIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboAccountIdNo" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="lblUsePayGroups" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkUsePayGroups" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="DataGridViewPayElementAccounts" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,63.6656,Percent,36.3344,Absolute,272" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="floPostingAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="floPostingAccounts.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tlpCalculation.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="floPostingAccounts.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tlpCalculation.RowCount" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="tlpCalculation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>570, 251</value>
+  </data>
+  <data name="tlpCalculation.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tlpCalculation.Name" xml:space="preserve">
+    <value>tlpCalculation</value>
+  </data>
+  <data name="&gt;&gt;tlpCalculation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tlpCalculation.Parent" xml:space="preserve">
+    <value>floCalculation</value>
+  </data>
+  <data name="&gt;&gt;tlpCalculation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tlpCalculation.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblQuantityType" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboQuantityType" Row="5" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="cboCalculationType" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblPayElementType" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblFactorValue" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCalculationType" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtRate" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtDefaultQuantity" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblBasePayment" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboBasePaymentIdNo" Row="3" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblIncludeInEos" Row="7" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkIncludeInEOS" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtMultiplier" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cboFactorType" Row="4" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="chkTaxable" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblSlash" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cboUnit" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cboPayElementType" Row="0" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="lblRate" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblDefaultQuantity" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblSlash2" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblTaxable" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblUnit" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lblFactorType" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,55.3125,Percent,44.6875,Absolute,26,Absolute,224" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="floCalculation.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="floCalculation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="floCalculation.Size" type="System.Drawing.Size, System.Drawing">
     <value>575, 307</value>
   </data>
-  <data name="floPostingAccounts.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="floCalculation.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;floPostingAccounts.Name" xml:space="preserve">
-    <value>floPostingAccounts</value>
+  <data name="&gt;&gt;floCalculation.Name" xml:space="preserve">
+    <value>floCalculation</value>
   </data>
-  <data name="&gt;&gt;floPostingAccounts.Type" xml:space="preserve">
+  <data name="&gt;&gt;floCalculation.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;floPostingAccounts.Parent" xml:space="preserve">
-    <value>tbpAccountPosting</value>
+  <data name="&gt;&gt;floCalculation.Parent" xml:space="preserve">
+    <value>tbpCalculation</value>
   </data>
-  <data name="&gt;&gt;floPostingAccounts.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;floCalculation.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tbpCalculation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="tbpCalculation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpCalculation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>581, 313</value>
+  </data>
+  <data name="tbpCalculation.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tbpCalculation.Text" xml:space="preserve">
+    <value>Calculation</value>
+  </data>
+  <data name="&gt;&gt;tbpCalculation.Name" xml:space="preserve">
+    <value>tbpCalculation</value>
+  </data>
+  <data name="&gt;&gt;tbpCalculation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpCalculation.Parent" xml:space="preserve">
+    <value>tbcPayElement</value>
+  </data>
+  <data name="&gt;&gt;tbpCalculation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbpAccountPosting.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
   </data>
   <data name="tlpPostingAccounts.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Name" xml:space="preserve">
-    <value>lblAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.Parent" xml:space="preserve">
-    <value>tlpPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;lblAccountIdNo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Name" xml:space="preserve">
-    <value>cboAccountIdNo</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
-    <value>tlpPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblUsePayGroups.Name" xml:space="preserve">
-    <value>lblUsePayGroups</value>
-  </data>
-  <data name="&gt;&gt;lblUsePayGroups.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblUsePayGroups.Parent" xml:space="preserve">
-    <value>tlpPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;lblUsePayGroups.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;chkUsePayGroups.Name" xml:space="preserve">
-    <value>chkUsePayGroups</value>
-  </data>
-  <data name="&gt;&gt;chkUsePayGroups.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkUsePayGroups.Parent" xml:space="preserve">
-    <value>tlpPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;chkUsePayGroups.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewPayElementAccounts.Name" xml:space="preserve">
-    <value>DataGridViewPayElementAccounts</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewPayElementAccounts.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewPayElementAccounts.Parent" xml:space="preserve">
-    <value>tlpPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewPayElementAccounts.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tlpPostingAccounts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="tlpPostingAccounts.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tlpPostingAccounts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 302</value>
-  </data>
-  <data name="tlpPostingAccounts.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;tlpPostingAccounts.Name" xml:space="preserve">
-    <value>tlpPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;tlpPostingAccounts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tlpPostingAccounts.Parent" xml:space="preserve">
-    <value>floPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;tlpPostingAccounts.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tlpPostingAccounts.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblAccountIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboAccountIdNo" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="lblUsePayGroups" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkUsePayGroups" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="DataGridViewPayElementAccounts" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,63.6656,Percent,36.3344,Absolute,272" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="lblAccountIdNo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -2720,7 +1972,7 @@
     <value>False</value>
   </data>
   <metadata name="bsPayElementAccounts.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>1120, 17</value>
   </metadata>
   <data name="DataGridViewPayElementAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -2745,6 +1997,84 @@
   </data>
   <data name="&gt;&gt;DataGridViewPayElementAccounts.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="tlpPostingAccounts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="tlpPostingAccounts.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tlpPostingAccounts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>573, 302</value>
+  </data>
+  <data name="tlpPostingAccounts.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;tlpPostingAccounts.Name" xml:space="preserve">
+    <value>tlpPostingAccounts</value>
+  </data>
+  <data name="&gt;&gt;tlpPostingAccounts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tlpPostingAccounts.Parent" xml:space="preserve">
+    <value>floPostingAccounts</value>
+  </data>
+  <data name="&gt;&gt;tlpPostingAccounts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tlpPostingAccounts.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblAccountIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboAccountIdNo" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="lblUsePayGroups" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkUsePayGroups" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="DataGridViewPayElementAccounts" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,63.6656,Percent,36.3344,Absolute,272" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="floPostingAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="floPostingAccounts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="floPostingAccounts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>575, 307</value>
+  </data>
+  <data name="floPostingAccounts.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;floPostingAccounts.Name" xml:space="preserve">
+    <value>floPostingAccounts</value>
+  </data>
+  <data name="&gt;&gt;floPostingAccounts.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;floPostingAccounts.Parent" xml:space="preserve">
+    <value>tbpAccountPosting</value>
+  </data>
+  <data name="&gt;&gt;floPostingAccounts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbpAccountPosting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="tbpAccountPosting.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpAccountPosting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>581, 313</value>
+  </data>
+  <data name="tbpAccountPosting.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbpAccountPosting.Text" xml:space="preserve">
+    <value>Posting Accounts</value>
+  </data>
+  <data name="&gt;&gt;tbpAccountPosting.Name" xml:space="preserve">
+    <value>tbpAccountPosting</value>
+  </data>
+  <data name="&gt;&gt;tbpAccountPosting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpAccountPosting.Parent" xml:space="preserve">
+    <value>tbcPayElement</value>
+  </data>
+  <data name="&gt;&gt;tbpAccountPosting.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="dgvSequenceSummary.HeaderText" xml:space="preserve">
     <value>Seq</value>
@@ -2806,98 +2136,38 @@
   <data name="&gt;&gt;DataGridViewPayElementItems.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tlpNotes.Name" xml:space="preserve">
-    <value>tlpNotes</value>
+  <data name="tbpSummaryDetail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
   </data>
-  <data name="&gt;&gt;tlpNotes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbpSummaryDetail.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
-  <data name="&gt;&gt;tlpNotes.Parent" xml:space="preserve">
-    <value>floMain</value>
+  <data name="tbpSummaryDetail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>581, 313</value>
   </data>
-  <data name="&gt;&gt;tlpNotes.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="tbpSummaryDetail.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="tlpNotes.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txtNotes" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblNotes" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  <data name="tbpSummaryDetail.Text" xml:space="preserve">
+    <value>Summary Detail</value>
   </data>
-  <data name="floMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;tbpSummaryDetail.Name" xml:space="preserve">
+    <value>tbpSummaryDetail</value>
   </data>
-  <data name="floMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+  <data name="&gt;&gt;tbpSummaryDetail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="floMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 307</value>
+  <data name="&gt;&gt;tbpSummaryDetail.Parent" xml:space="preserve">
+    <value>tbcPayElement</value>
   </data>
-  <data name="floMain.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;tbpSummaryDetail.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;floMain.Name" xml:space="preserve">
-    <value>floMain</value>
-  </data>
-  <data name="&gt;&gt;floMain.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;floMain.Parent" xml:space="preserve">
-    <value>tbpNotes</value>
-  </data>
-  <data name="&gt;&gt;floMain.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="tbpNotes.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
   </data>
   <data name="tlpNotes.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
-    <value>txtNotes</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Parent" xml:space="preserve">
-    <value>tlpNotes</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Name" xml:space="preserve">
-    <value>lblNotes</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Parent" xml:space="preserve">
-    <value>tlpNotes</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tlpNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="tlpNotes.RowCount" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="tlpNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>570, 302</value>
-  </data>
-  <data name="tlpNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>275</value>
-  </data>
-  <data name="&gt;&gt;tlpNotes.Name" xml:space="preserve">
-    <value>tlpNotes</value>
-  </data>
-  <data name="&gt;&gt;tlpNotes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tlpNotes.Parent" xml:space="preserve">
-    <value>floMain</value>
-  </data>
-  <data name="&gt;&gt;tlpNotes.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tlpNotes.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txtNotes" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblNotes" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="txtNotes.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2967,6 +2237,211 @@
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="tlpNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="tlpNotes.RowCount" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="tlpNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>570, 302</value>
+  </data>
+  <data name="tlpNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>275</value>
+  </data>
+  <data name="&gt;&gt;tlpNotes.Name" xml:space="preserve">
+    <value>tlpNotes</value>
+  </data>
+  <data name="&gt;&gt;tlpNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tlpNotes.Parent" xml:space="preserve">
+    <value>floMain</value>
+  </data>
+  <data name="&gt;&gt;tlpNotes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tlpNotes.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txtNotes" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lblNotes" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="floMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="floMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="floMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>575, 307</value>
+  </data>
+  <data name="floMain.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;floMain.Name" xml:space="preserve">
+    <value>floMain</value>
+  </data>
+  <data name="&gt;&gt;floMain.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;floMain.Parent" xml:space="preserve">
+    <value>tbpNotes</value>
+  </data>
+  <data name="&gt;&gt;floMain.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbpNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 23</value>
+  </data>
+  <data name="tbpNotes.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>581, 313</value>
+  </data>
+  <data name="tbpNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbpNotes.Text" xml:space="preserve">
+    <value>Notes/Description</value>
+  </data>
+  <data name="&gt;&gt;tbpNotes.Name" xml:space="preserve">
+    <value>tbpNotes</value>
+  </data>
+  <data name="&gt;&gt;tbpNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpNotes.Parent" xml:space="preserve">
+    <value>tbcPayElement</value>
+  </data>
+  <data name="&gt;&gt;tbpNotes.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <metadata name="tabPageImages.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>828, 17</value>
+  </metadata>
+  <data name="tabPageImages.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
+        BwAAAk1TRnQBSQFMAwEBAAFoAQMBaAEDARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
+        AUADAAEQAwABAQEAAQgGAAEEGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEA
+        AfABygGmAQABMwUAATMBAAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEA
+        AYABfAH/AQACUAH/AQABkwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFm
+        AwABmQMAAcwCAAEzAwACMwIAATMBZgIAATMBmQIAATMBzAIAATMB/wIAAWYDAAFmATMCAAJmAgABZgGZ
+        AgABZgHMAgABZgH/AgABmQMAAZkBMwIAAZkBZgIAApkCAAGZAcwCAAGZAf8CAAHMAwABzAEzAgABzAFm
+        AgABzAGZAgACzAIAAcwB/wIAAf8BZgIAAf8BmQIAAf8BzAEAATMB/wIAAf8BAAEzAQABMwEAAWYBAAEz
+        AQABmQEAATMBAAHMAQABMwEAAf8BAAH/ATMCAAMzAQACMwFmAQACMwGZAQACMwHMAQACMwH/AQABMwFm
+        AgABMwFmATMBAAEzAmYBAAEzAWYBmQEAATMBZgHMAQABMwFmAf8BAAEzAZkCAAEzAZkBMwEAATMBmQFm
+        AQABMwKZAQABMwGZAcwBAAEzAZkB/wEAATMBzAIAATMBzAEzAQABMwHMAWYBAAEzAcwBmQEAATMCzAEA
+        ATMBzAH/AQABMwH/ATMBAAEzAf8BZgEAATMB/wGZAQABMwH/AcwBAAEzAv8BAAFmAwABZgEAATMBAAFm
+        AQABZgEAAWYBAAGZAQABZgEAAcwBAAFmAQAB/wEAAWYBMwIAAWYCMwEAAWYBMwFmAQABZgEzAZkBAAFm
+        ATMBzAEAAWYBMwH/AQACZgIAAmYBMwEAA2YBAAJmAZkBAAJmAcwBAAFmAZkCAAFmAZkBMwEAAWYBmQFm
+        AQABZgKZAQABZgGZAcwBAAFmAZkB/wEAAWYBzAIAAWYBzAEzAQABZgHMAZkBAAFmAswBAAFmAcwB/wEA
+        AWYB/wIAAWYB/wEzAQABZgH/AZkBAAFmAf8BzAEAAcwBAAH/AQAB/wEAAcwBAAKZAgABmQEzAZkBAAGZ
+        AQABmQEAAZkBAAHMAQABmQMAAZkCMwEAAZkBAAFmAQABmQEzAcwBAAGZAQAB/wEAAZkBZgIAAZkBZgEz
+        AQABmQEzAWYBAAGZAWYBmQEAAZkBZgHMAQABmQEzAf8BAAKZATMBAAKZAWYBAAOZAQACmQHMAQACmQH/
+        AQABmQHMAgABmQHMATMBAAFmAcwBZgEAAZkBzAGZAQABmQLMAQABmQHMAf8BAAGZAf8CAAGZAf8BMwEA
+        AZkBzAFmAQABmQH/AZkBAAGZAf8BzAEAAZkC/wEAAcwDAAGZAQABMwEAAcwBAAFmAQABzAEAAZkBAAHM
+        AQABzAEAAZkBMwIAAcwCMwEAAcwBMwFmAQABzAEzAZkBAAHMATMBzAEAAcwBMwH/AQABzAFmAgABzAFm
+        ATMBAAGZAmYBAAHMAWYBmQEAAcwBZgHMAQABmQFmAf8BAAHMAZkCAAHMAZkBMwEAAcwBmQFmAQABzAKZ
+        AQABzAGZAcwBAAHMAZkB/wEAAswCAALMATMBAALMAWYBAALMAZkBAAPMAQACzAH/AQABzAH/AgABzAH/
+        ATMBAAGZAf8BZgEAAcwB/wGZAQABzAH/AcwBAAHMAv8BAAHMAQABMwEAAf8BAAFmAQAB/wEAAZkBAAHM
+        ATMCAAH/AjMBAAH/ATMBZgEAAf8BMwGZAQAB/wEzAcwBAAH/ATMB/wEAAf8BZgIAAf8BZgEzAQABzAJm
+        AQAB/wFmAZkBAAH/AWYBzAEAAcwBZgH/AQAB/wGZAgAB/wGZATMBAAH/AZkBZgEAAf8CmQEAAf8BmQHM
+        AQAB/wGZAf8BAAH/AcwCAAH/AcwBMwEAAf8BzAFmAQAB/wHMAZkBAAH/AswBAAH/AcwB/wEAAv8BMwEA
+        AcwB/wFmAQAC/wGZAQAC/wHMAQACZgH/AQABZgH/AWYBAAFmAv8BAAH/AmYBAAH/AWYB/wEAAv8BZgEA
+        ASEBAAGlAQADXwEAA3cBAAOGAQADlgEAA8sBAAOyAQAD1wEAA90BAAPjAQAD6gEAA/EBAAP4AQAB8AH7
+        Af8BAAGkAqABAAOAAwAB/wIAAf8DAAL/AQAB/wMAAf8BAAH/AQAC/wIAA/8FAAH/B0Y3AApGAQc0AAxG
+        AQcyAAEaBkYB8gZGMgAHRgHyB0YxAA9GMAABkwdGAfIHRjAACEYB8gdGMAABbwdGAfIHRjAAAf8HRgHy
+        B0YxAAdGAfIHRjEAB0YB8gZGAf8yAAZGAfIGRjQAC0Y2AAhGARo5AAH/AW8BRgGTNgABQgFNAT4HAAE+
+        AwABKAMAAUADAAEQAwABAQEAAQEFAAGAFwAD/wEAAfABDwYAAeABAwYAAcABAQYAAYABAQYAAYAHAAGA
+        JwABgAcAAYAHAAHAAQEGAAHgAQMGAAHwAQcGAAH8AT8GAAs=
+</value>
+  </data>
+  <data name="tbcPayElement.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 132</value>
+  </data>
+  <data name="tbcPayElement.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 0, 10, 3</value>
+  </data>
+  <data name="tbcPayElement.Padding" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tbcPayElement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>589, 340</value>
+  </data>
+  <data name="tbcPayElement.TabIndex" type="System.Int32, mscorlib">
+    <value>284</value>
+  </data>
+  <data name="&gt;&gt;tbcPayElement.Name" xml:space="preserve">
+    <value>tbcPayElement</value>
+  </data>
+  <data name="&gt;&gt;tbcPayElement.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTabControl, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tbcPayElement.Parent" xml:space="preserve">
+    <value>floPayElement</value>
+  </data>
+  <data name="&gt;&gt;tbcPayElement.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 476</value>
+  </data>
+  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 23</value>
+  </data>
+  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>158</value>
+  </data>
+  <data name="CLabel1.Text" xml:space="preserve">
+    <value>ID No.</value>
+  </data>
+  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
+    <value>CLabel1</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+    <value>floPayElement</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="floPayElement.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 18</value>
+  </data>
+  <data name="floPayElement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>613, 480</value>
+  </data>
+  <data name="floPayElement.TabIndex" type="System.Int32, mscorlib">
+    <value>282</value>
+  </data>
+  <data name="&gt;&gt;floPayElement.Name" xml:space="preserve">
+    <value>floPayElement</value>
+  </data>
+  <data name="&gt;&gt;floPayElement.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;floPayElement.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;floPayElement.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="floDataDisplay.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -3065,13 +2540,13 @@
     <value>dgvPayGroupIdNo</value>
   </data>
   <data name="&gt;&gt;dgvPayGroupIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
     <value>dgvAccountIdNo</value>
   </data>
   <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AccountNameDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>AccountNameDataGridViewTextBoxColumn</value>
@@ -3103,6 +2578,18 @@
   <data name="&gt;&gt;bsPayElementAccounts.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;bsPayElementItems.Name" xml:space="preserve">
+    <value>bsPayElementItems</value>
+  </data>
+  <data name="&gt;&gt;bsPayElementItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageImages.Name" xml:space="preserve">
+    <value>tabPageImages</value>
+  </data>
+  <data name="&gt;&gt;tabPageImages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvSequenceSummary.Name" xml:space="preserve">
     <value>dgvSequenceSummary</value>
   </data>
@@ -3113,7 +2600,7 @@
     <value>dgvPayElementIdNo</value>
   </data>
   <data name="&gt;&gt;dgvPayElementIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvFactorValue.Name" xml:space="preserve">
     <value>dgvFactorValue</value>
@@ -3138,18 +2625,6 @@
   </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsPayElementItems.Name" xml:space="preserve">
-    <value>bsPayElementItems</value>
-  </data>
-  <data name="&gt;&gt;bsPayElementItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageImages.Name" xml:space="preserve">
-    <value>tabPageImages</value>
-  </data>
-  <data name="&gt;&gt;tabPageImages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PayElementEntryTv</value>
