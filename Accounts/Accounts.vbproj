@@ -982,7 +982,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.en-GB.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -1314,8 +1313,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-Ispadmin2.config" />
     <None Include="app.config" />
+    <None Include="app-Ispadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />

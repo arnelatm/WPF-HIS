@@ -231,14 +231,14 @@ Namespace PresentationLayer.Presenters
 
         Public Sub InitializeAttendance()
             Dim payFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
-            Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString()
+            Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString() & " And Active = 1"
             Dim activeEmployees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"}, employeeFilter)
             'Dim earningDao = New EarningDao
             'Dim earnings = earningDao.GetAll()
             Dim numberOfEmployees = Int(activeEmployees.Count() / 4)
             Dim daysInPeriod As Int16
             Dim daysOffInPeriod As Int16
-            Dim seq As Int16
+            Dim seq As Integer
             Dim dateHired As Date
             Dim dateReleased As Date?
             Dim empId As Int32
@@ -252,16 +252,18 @@ Namespace PresentationLayer.Presenters
             Else
                 _reinitialize = False
             End If
+            Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
+            Dim counter As Integer = 0
+            progressDisplayForm.Show()
+            progressDisplayForm.InitializeDisplay(numberOfEmployees)
             For i = 1 To numberOfEmployees
-                'Dim empEarnings As List(Of EmployeeEarning) = earningDao.GetRecordsWithGroupIdNo(emp, "sequence")
-                'Dim filter As String
-                'filter = "EmployeeIdNo = " & emp.ToString()
-                'Dim employeeEarnings = PresenterObj.GetRecords("EmployeeEarning", "", {"EarningIdNo", "Amount"}, filter)
-
                 empId = activeEmployees(i * 4 - 4)
                 empName = activeEmployees(i * 4 - 3)
                 dateHired = activeEmployees(i * 4 - 2)
                 dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), Nothing, activeEmployees(i * 4 - 1))
+                If empId = 498 Then
+                    Debugger.Break()
+                End If
 
                 If _reinitialize Then
                     Dim empAttendance As AttendanceItemView
@@ -270,8 +272,6 @@ Namespace PresentationLayer.Presenters
                         empFound = False
                     Else
                         empFound = True
-                        'empAttendance.DaysTotal = DateDiff(DateInterval.Day, dateHired, eDate) + 1
-                        'empAttendance.DaysOff = FridaysInPeriod(dateHired, eDate)
                         If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
                             UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
                             If empAttendance.DaysAbsentWithoutPay <> empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent Then
@@ -285,14 +285,12 @@ Namespace PresentationLayer.Presenters
                 If empFound Then
                     Continue For
                 End If
-
                 If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
                     AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
                     seq = seq + 1
                 End If
-                'For Each employeeEarning In employeeEarnings
-
-                'Next
+                counter = counter + 1
+                progressDisplayForm.UpdateProgressBar(counter)
             Next
             If _reinitialize Then
                 Dim i As Int16 = 1
@@ -301,25 +299,9 @@ Namespace PresentationLayer.Presenters
                     i = i + 1
                 Next
             End If
-            'For i = 1 To Int(Data.Count / 3)
-            '    Dim tData As New ActiveEmployee
-            '    tData.IdNo = Data(i * 3 - 3)
-            '    If Data(i * 3 - 1) Is DBNull.Value Then
-            '        tData.PayGroupIdNo = 0
-            '    Else
-            '        tData.PayGroupIdNo = Data(i * 3 - 1)
-            '    End If
-            '    lEmployeePayGroups.Add(tData)
-            'Next
-            'For Each employee In lEmployeePayGroups
-            '    If employee.PayGroupIdNo = node.Tag Then
-            '        node.Nodes.Add(New TreeNode With {.Text = employee.Name,
-            '                                   .Tag = employee.IdNo,
-            '                                   .Name = employee.Name
-            '                                 }
-            '              )
-            '    End If
-            'Next employee
+            progressDisplayForm.UpdateProgressBar(counter)
+            progressDisplayForm.Close()
+            Messaging.Show(True, "MsgAttendanceInitializationCompleted")
         End Sub
 
         Public Sub InitializeOvertime()
@@ -338,6 +320,10 @@ Namespace PresentationLayer.Presenters
             Else
                 _reinitialize = False
             End If
+            Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
+            Dim counter As Integer = 0
+            progressDisplayForm.Show()
+            progressDisplayForm.InitializeDisplay(numberOfEmployees+1)
             For i = 1 To numberOfEmployees
                 empId = matchedEmployees(i * 3 - 3)
                 dateHired = matchedEmployees(i * 3 - 2)
@@ -363,6 +349,8 @@ Namespace PresentationLayer.Presenters
                     AddEmployeeOvertime(dateHired, dateReleased, empId, seq)
                     seq = seq + 1
                 End If
+                counter = counter + 1
+                progressDisplayForm.UpdateProgressBar(counter)
             Next
             If _reinitialize Then
                 Dim i As Int16 = 1
@@ -371,6 +359,9 @@ Namespace PresentationLayer.Presenters
                     i = i + 1
                 Next
             End If
+            progressDisplayForm.UpdateProgressBar(counter+1)
+            progressDisplayForm.Close()
+            Messaging.Show(True, "MsgOvertimeInitializationCompleted")
         End Sub
 
         Public Sub AddEmployeeAttendance(ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal empName As String, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16, ByVal seq As Int16)
@@ -509,7 +500,8 @@ Namespace PresentationLayer.Presenters
 
         'End Sub
 
-        Public Sub GeneratePayroll(progressBar As ProgressBar)
+        Public Sub GeneratePayroll()
+
             _payrollIdNo = View.IdNo
             If View.PayrollAttendance.Count() = 0 And View.PayrollOvertime.Count() = 0 Then
                 Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
@@ -523,13 +515,13 @@ Namespace PresentationLayer.Presenters
                     payrollPayElements = _payrollPayElementsDao.GetRecordsWithGroupIdNo(View.IdNo)
                     'GlobalVariables.Mapper.Map(payrollPayElements, _payrollPayElements)
                     If payrollPayElements.Count() = 0 Then
-                        ProcessPayroll(False, progressBar)
+                        ProcessPayroll(False)
                     Else
                         If Messaging.Show(True, "AskIfRegeneratePayroll",
                                            MessageBoxButtons.YesNo,
                                            MessageBoxIcon.Warning,
                                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                            ProcessPayroll(True, progressBar)
+                            ProcessPayroll(True)
                             'Dim payAbsencesDeductions = _payrollDeductionDao.GetRecordsWithGroupIdNo(payrollIdNo)
                             'ReGenerateEmployeePayroll(progressBar)
                         End If
@@ -538,7 +530,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub ProcessPayroll(ByRef regenerate As Boolean, progressBar As ProgressBar)
+        Private Sub ProcessPayroll(ByRef regenerate As Boolean)
             Dim dtPayrollPayElementInsertTable As New DataTable
             Dim dtPayrollPayElementUpdateTable As New DataTable
             _payrollPayElements.Clear()
@@ -570,9 +562,10 @@ Namespace PresentationLayer.Presenters
             Dim globalEarnings As List(Of PayElement)
             globalEarnings = _payElementsDao.GetDaoRecords("CalculationType = '" & _globalType & "' and not Summary=0")
             GlobalVariables.Mapper.Map(globalEarnings, _globalEarnings)
-            progressBar.Value = 0
-            progressBar.Maximum = payrollDetailsModel.Count() + 2
-            progressBar.Visible = True
+            Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
+            Dim counter As Integer = 0
+            progressDisplayForm.Show()
+            progressDisplayForm.InitializeDisplay(payrollDetailsModel.Count() + 2)
             If regenerate Then
                 Dim savedPayrollPayElements As List(Of PayrollPayElement) = _payrollPayElementsDao.GetRecordsWithGroupIdNo(_payrollIdNo)
                 GlobalVariables.Mapper.Map(savedPayrollPayElements, _savedPayrollPayElements)
@@ -611,9 +604,9 @@ Namespace PresentationLayer.Presenters
                 GenerateRegularPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 GenerateComputedPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 GenerateGlobalPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
-                progressBar.Value = progressBar.Value + 1
+                counter = counter + 1
+                progressDisplayForm.UpdateProgressBar(counter)
             Next
-
             If regenerate Then
                 For Each item In _payrollPayElements
                     If item.IdNo = 0 Then
@@ -624,9 +617,9 @@ Namespace PresentationLayer.Presenters
                         dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
                         dtPayrollPayElementInsertTable.Rows.Add(dataRow)
                     Else
-                        If item.PayrollDetailIdNo = 1745 Then
-                            Debugger.Break()
-                        End If
+                        'If item.PayrollDetailIdNo = 1745 Then
+                        '    Debugger.Break()
+                        'End If
                         Dim dataRow As DataRow
                         dataRow = dtPayrollPayElementUpdateTable.NewRow()
                         dataRow("Amount") = item.Amount
@@ -646,7 +639,7 @@ Namespace PresentationLayer.Presenters
                     dtPayrollPayElementInsertTable.Rows.Add(dataRow)
                 Next
             End If
-            progressBar.Value = progressBar.Value + 1
+            counter = counter + 1
             If regenerate Then
                 _payrollPayElementsDao.UpdateInsertTvp(dtPayrollPayElementUpdateTable, dtPayrollPayElementInsertTable, _payrollIdNo)
                 dtPayrollPayElementUpdateTable.Clear()
@@ -655,9 +648,9 @@ Namespace PresentationLayer.Presenters
                 dtPayrollPayElementInsertTable.Clear()
             End If
             _payrollPayElements.Clear()
-            progressBar.Value = progressBar.Value + 1
+            progressDisplayForm.UpdateProgressBar(counter + 1)
+            progressDisplayForm.Close()
             Messaging.Show(True, "MsgPayrollGenerationCompleted")
-            progressBar.Visible = False
         End Sub
 
         Private Sub GenerateRegularPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
@@ -666,9 +659,6 @@ Namespace PresentationLayer.Presenters
             Dim empPayElementsModel As New List(Of EmployeePayElementModel)
             GlobalVariables.Mapper.Map(empPayElements, empPayElementsModel)
             Dim amount As Decimal
-            'If employeeIdNo = 453 Then
-            '    Debugger.Break()
-            'End If
             For Each empPayElement As EmployeePayElementModel In empPayElementsModel
                 Dim payElement As New PayElement
                 payElement = _payElementsDao.GetRecordByIdNo(empPayElement.PayElementIdNo)
@@ -752,9 +742,9 @@ Namespace PresentationLayer.Presenters
 
         Private Sub AddPayElement(employeeIdNo As Int32, amount As Decimal, payElementIdNo As Short, payrollPayElementIdNo As Int16, payrollDetailIdNo As Int32)
             If amount <> 0 Then
-                If payElementIdNo = 0 Then
-                    Debugger.Break()
-                End If
+                'If payElementIdNo = 32 Then
+                '    Debugger.Break()
+                'End If
                 Dim payrollPayElement As New PayrollPayElementModel
                 payrollPayElement.Amount = Math.Round(amount, 2)
                 payrollPayElement.PayrollIdNo = _payrollIdNo
@@ -794,7 +784,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GenerateComputedPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             For Each earning As PayElementModel In _computedPayElements
-                'If employeeIdNo = 323 And earning.IdNo = 2 Then
+                'If employeeIdNo = 397 And earning.IdNo = 36 Then
                 '    Debugger.Break()
                 'End If
                 If earning.Active Then
@@ -829,6 +819,7 @@ Namespace PresentationLayer.Presenters
                 If payElementModel IsNot Nothing Then
                     rate = ComputePayAmount(_payFrequency, payElementModel.Amount, earning.Unit)
                     Dim qty As Decimal = ComputeQuantity(employeeIdNo, earning.Unit)
+                    amount = rate * qty
                 Else
                     amount = 0
                 End If
@@ -841,9 +832,11 @@ Namespace PresentationLayer.Presenters
                     Dim qty = ComputeQuantity(employeeIdNo, earning.QuantityType)
                     amount = qty * rate
                 Else
-                    Dim bpPayElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = earning.IdNo)
+                    Dim bpPayElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = earning.BasePaymentIdNo)
                     If bpPayElementModel IsNot Nothing Then
-                        amount = ComputeFactoredAmount(bpPayElementModel.Amount, earning.FactorValue, earning.FactorType)
+                        Dim qty = ComputeQuantity(employeeIdNo, earning.QuantityType)
+                        Dim bpAmount = ComputeFactoredAmount(bpPayElementModel.Amount, earning.FactorValue, earning.FactorType)
+                        amount = qty * bpAmount
                     End If
                 End If
             End If

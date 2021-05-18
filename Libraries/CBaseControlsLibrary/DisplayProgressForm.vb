@@ -2,6 +2,7 @@
 Imports System.Reflection.Emit
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Public Class DisplayProgressForm
 
@@ -16,9 +17,14 @@ Public Class DisplayProgressForm
 
     End Sub
 
-    Public Sub InitializeDisplay(description As String, nMaxValue As Int32)
+    Public Sub InitializeDisplay(Optional nMaxValue As Int32 = 100, Optional description As String = Nothing)
         Me.CenterToScreen()
-        _description = description
+        If description Is Nothing Then
+            Dim caption = Messaging.TranslateCaption("Please wait processing request...")
+            _description = caption
+        Else
+            _description = description
+        End If       
         ProgressBar.Maximum = nMaxValue
         ProgressBar.Value = 0
         Me.Text = description

@@ -193,16 +193,12 @@ Namespace PresentationLayer.Presenters
             Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
             Dim counter As Int16 = 1
             Dim nCount = allAcctReconItems.Count()
-            'progressDisplayForm.ProgressBar.Minimum = 1
-            'progressDisplayForm.ProgressBar.Maximum = nCount
             If AddMode Then
                 progressDisplayForm.Show()
-                progressDisplayForm.DisplayProgress(nCount)
-                progressDisplayForm.InitializeDisplay("Please wait processing request...", nCount)
+                progressDisplayForm.InitializeDisplay(nCount)
                 For Each acctReconItem In allAcctReconItems
                     nSeq += 1
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
-                    'progressDisplayForm.ProgressBar.Value = counter
                     progressDisplayForm.UpdateProgressBar(counter)
                     counter += 1
                 Next
@@ -212,7 +208,8 @@ Namespace PresentationLayer.Presenters
                 oldReconciliationItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
                 progressDisplayForm.Show()
                 progressDisplayForm.DisplayProgress(nCount)
-                progressDisplayForm.InitializeDisplay("Please wait getting account transactions ...", nCount)
+                Dim caption = MessagingLibrary.Messaging.TranslateCaption("Please wait getting account transactions ...")
+                progressDisplayForm.InitializeDisplay(nCount,caption)
                 For Each acctReconItem In allAcctReconItems
                     Dim found As Boolean = False
                     For Each item As AccountReconciliationItemModel In oldReconciliationItems
@@ -362,7 +359,8 @@ Namespace PresentationLayer.Presenters
                 progressDisplayForm.Show()
                 Dim nCount = View.AccountReconciliationItems.Count()
                 progressDisplayForm.DisplayProgress(nCount)
-                progressDisplayForm.InitializeDisplay("Please wait computing reconciliation totals...", nCount)
+                Dim caption = MessagingLibrary.Messaging.TranslateCaption("Please wait computing reconciliation totals...")
+                progressDisplayForm.InitializeDisplay(nCount,caption)
                 Dim counter As Int32 = 1
                 For Each accountReconciliationItem In View.AccountReconciliationItems
                     If accountReconciliationItem.Cleared Then
