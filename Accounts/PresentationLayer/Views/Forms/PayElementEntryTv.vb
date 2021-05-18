@@ -52,12 +52,12 @@ Namespace PresentationLayer.Views.Forms
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
 
-            cboCalculationType.DrawMode = DrawMode.OwnerDrawFixed
-            AddHandler cboCalculationType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboCalculationType_DrawItem)
-            AddHandler cboCalculationType.SelectedIndexChanged, New System.EventHandler(AddressOf cboCalculationType_ValueChanged)
-            cboQuantityType.DrawMode = DrawMode.OwnerDrawFixed
-            AddHandler cboQuantityType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboQuantityType_DrawItem)
-            AddHandler cboQuantityType.SelectedIndexChanged, New System.EventHandler(AddressOf cboQuantityType_ValueChanged)
+            'cboCalculationType.DrawMode = DrawMode.OwnerDrawFixed
+            'AddHandler cboCalculationType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboCalculationType_DrawItem)
+            'AddHandler cboCalculationType.SelectedIndexChanged, New System.EventHandler(AddressOf cboCalculationType_ValueChanged)
+            'cboQuantityType.DrawMode = DrawMode.OwnerDrawFixed
+            'AddHandler cboQuantityType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboQuantityType_DrawItem)
+            'AddHandler cboQuantityType.SelectedIndexChanged, New System.EventHandler(AddressOf cboQuantityType_ValueChanged)
 
         End Sub
 
@@ -310,18 +310,18 @@ Namespace PresentationLayer.Views.Forms
         Private myFont As Font = New Font("Aerial", 10, FontStyle.Underline Or FontStyle.Regular)
         Private myFont2 As Font = New Font("Aerial", 10, FontStyle.Italic Or FontStyle.Strikeout)
 
-        Private Sub cboCalculationType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
-            Dim comboBox As ComboBox = CType(sender, ComboBox)
-            If IsCalcTypeItemDisabled(e.Index) Then
-                e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds)
-                e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, SystemBrushes.GrayText, e.Bounds)
-            Else
-                e.DrawBackground()
-                'Dim brush As Brush = If((e.State And DrawItemState.Selected) > 0, SystemBrushes.HighlightText, SystemBrushes.ControlText)
-                e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, Brushes.White, e.Bounds)
-                e.DrawFocusRectangle()
-            End If
-        End Sub
+        'Private Sub cboCalculationType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
+        '    Dim comboBox As ComboBox = CType(sender, ComboBox)
+        '    If IsCalcTypeItemDisabled(e.Index) Then
+        '        e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds)
+        '        e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, SystemBrushes.GrayText, e.Bounds)
+        '    Else
+        '        e.DrawBackground()
+        '        'Dim brush As Brush = If((e.State And DrawItemState.Selected) > 0, SystemBrushes.HighlightText, SystemBrushes.ControlText)
+        '        e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, Brushes.White, e.Bounds)
+        '        e.DrawFocusRectangle()
+        '    End If
+        'End Sub
 
         Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectionChangeCommitted, cboCalculationType.Validated
             If cboCalculationType.Focused Then
@@ -356,18 +356,18 @@ Namespace PresentationLayer.Views.Forms
             Return False
         End Function
 
-        Private Sub cboQuantityType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
-            Dim comboBox As ComboBox = CType(sender, ComboBox)
-            If IsQtyTypeItemDisabled(e.Index) Then
-                e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds)
-                e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, SystemBrushes.GrayText, e.Bounds)
-            Else
-                e.DrawBackground()
-                'Dim brush As Brush = If((e.State And DrawItemState.Selected) > 0, SystemBrushes.HighlightText, SystemBrushes.ControlText)
-                e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, Brushes.White, e.Bounds)
-                e.DrawFocusRectangle()
-            End If
-        End Sub
+        'Private Sub cboQuantityType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
+        '    Dim comboBox As ComboBox = CType(sender, ComboBox)
+        '    If IsQtyTypeItemDisabled(e.Index) Then
+        '        e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds)
+        '        e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, SystemBrushes.GrayText, e.Bounds)
+        '    Else
+        '        e.DrawBackground()
+        '        'Dim brush As Brush = If((e.State And DrawItemState.Selected) > 0, SystemBrushes.HighlightText, SystemBrushes.ControlText)
+        '        e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, Brushes.White, e.Bounds)
+        '        e.DrawFocusRectangle()
+        '    End If
+        'End Sub
 
         Private Sub cboQuantityType_ValueChanged(sender As Object, e As EventArgs) Handles cboQuantityType.SelectionChangeCommitted, cboQuantityType.Validated
             If cboCalculationType.Focused Then

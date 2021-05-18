@@ -22,8 +22,11 @@
     [Notes]             NVARCHAR (100)  NULL,
     [DateTimeStamp]     ROWVERSION      NULL,
     [Summary]           BIT             NULL,
+    [Active]            BIT             NULL,
     CONSTRAINT [PK_PayElement] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

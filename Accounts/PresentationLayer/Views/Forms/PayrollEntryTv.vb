@@ -262,7 +262,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-            MyPresenter.GeneratePayroll(ProgressBar)
+            MyPresenter.GeneratePayroll()
         End Sub
 
         Private Sub CButton3_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton3.ClickButtonArea

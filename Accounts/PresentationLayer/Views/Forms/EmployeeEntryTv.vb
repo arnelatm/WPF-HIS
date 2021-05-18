@@ -778,16 +778,12 @@ Namespace PresentationLayer.Views.Forms
                                 amount = MyPresenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeDeductions(nIndex).Unit)
                             End If
                         Case $"dgvDeductionUnit"
-                            Dim unit = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
+                            Dim unit = .CurrentCell.Value
                             amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
                     End Select
                     selectedRow.Amount = amount
                 End If
             End With
-        End Sub
-
-        Private Sub dtpBirthDate_Load(sender As Object, e As EventArgs) Handles dtpBirthDate.Load
-
         End Sub
 
         'Private Sub DgvDeduction_OnBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDeductions.CellBeginEdit

@@ -24,7 +24,6 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _payrollPayElementModel As New ModelAccounts("PayrollPayElement")
 
         Private _attendanceItemModel
-
         Private _reinitialize As Boolean = False
         Private _PayrollDetailEarning
 
@@ -126,7 +125,7 @@ Namespace PresentationLayer.Presenters
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim reportName As String = "Payroll Report.Rpt"
             Dim reportTitle As String = Model.GetField(Of String, Int32)(View.PayrollIdNo, "Payroll", "IdNo", "PayrollName")
-            Dim cForm As New ReportFormNew(reportName, reportTitle, curCulture, {View.IdNo, "PayrollIdNo"})
+            Dim cForm As New ReportFormNew(reportName, reportTitle, curCulture, {View.PayrollIdNo, "PayrollIdNo"})
             cForm.Show()
         End Sub
 

@@ -140,6 +140,7 @@ Namespace PresentationLayer.Presenters
             workRow("PayElementIdNo") = itemDataView.PayElementIdNo
             workRow("Rate") = itemDataView.Rate
             workRow("Unit") = itemDataView.Unit
+            workRow("Sequence") = itemDataView.Sequence
         End Sub
 
         'Private Sub DeductionFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
