@@ -3,8 +3,6 @@ Imports AATM.Libraries
 
 Public Interface IViewNew
     Property Errors As List(Of String)
-
-    Function GetEventAggregator() As EventAggregator
-
+    Property AddMode As Boolean
     ' No members..
 End Interface

@@ -24,7 +24,7 @@ Imports KellermanSoftware.CompareNetObjects
 ''' </remarks>
 ''' <typeparam name="T">Type of itemView.</typeparam>
 Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
-    Implements ISubscriber(Of SelectedButton)
+    Implements ISubscriber(Of SelectedButton), ISubscriber(Of AddDataRequested)
 
     Public ChildPresenters As New List(Of Object)
     Public ChildModels As New List(Of Object)
@@ -117,20 +117,20 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
 
     Public Event UndoEdits(addingRec As Boolean)
 
-    Public Property AddMode As Boolean
-        Set
-            _addMode = Value
-            If GlobalVariables.EventAggregator IsNot Nothing Then
-                GlobalVariables.EventAggregator.PublishEvent(New AddModeChanged(Value))
-            End If
-            If Value Then
-                SaveOriginalValues()
-            End If
-        End Set
-        Get
-            Return _addMode
-        End Get
-    End Property
+    'Public Property AddMode As Boolean
+    '    Set
+    '        _addMode = Value
+    '        If GlobalVariables.EventAggregator IsNot Nothing Then
+    '            GlobalVariables.EventAggregator.PublishEvent(New AddModeChanged(Value))
+    '        End If
+    '        If Value Then
+    '            SaveOriginalValues()
+    '        End If
+    '    End Set
+    '    Get
+    '        Return _addMode
+    '    End Get
+    'End Property
 
     Public Property QuitOnSave As Boolean = False
     Public Property AskBeforeSave As Boolean = False
@@ -706,18 +706,18 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         Return Model.InitializeSecurityObject()
     End Function
 
-    Public Overridable Sub GoAddRecord()
-        LastIdNo = CallByName(View, IdFieldName, CallType.Get)
-        Try
-            DataModel = New TM
-            GlobalVariables.Mapper.Map(DataModel, View)
-            AddMode = True
-            RaiseEvent BeforeAdd()
-        Catch oEx As Exception
-            MsgBox("Error:   " + oEx.Message)
-            AddMode = False
-        End Try
-    End Sub
+    'Public Overridable Sub GoAddRecord()
+    '    LastIdNo = CallByName(View, IdFieldName, CallType.Get)
+    '    Try
+    '        DataModel = New TM
+    '        GlobalVariables.Mapper.Map(DataModel, View)
+    '        AddMode = True
+    '        RaiseEvent BeforeAdd()
+    '    Catch oEx As Exception
+    '        MsgBox("Error:   " + oEx.Message)
+    '        AddMode = False
+    '    End Try
+    'End Sub
 
     Public Overridable Function GoDeleteRecord() As Integer
         Dim record As New TM
@@ -821,6 +821,11 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End If
     End Sub
 
+    'Public Sub OnEventHandlerSaveRecordRequested(ByRef e As SaveRecordRequested) Implements ISubscriber(Of RecordSaved).OnEventHandler
+    '    RecordSaved(e)
+    'End Sub
+
+
     Public Overridable Sub GoSaveRecord()
         Dim continueSave As Boolean = True
         Dim addAnother = False
@@ -836,7 +841,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                 SaveSuccessful = True
                 Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
                 If Not QuitOnSave Then
-                    If AddMode Then
+                    If View.AddMode Then
                         If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
                                       "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                                       MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
@@ -849,13 +854,13 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                         RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
                         'RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
                     End If
-                    If AddMode Then
-                        AddMode = False
+                    If View.AddMode Then
+                        View.AddMode = False
                     Else
                         EditMode = False
                     End If
                     If addAnother Then
-                        GoAddRecord()
+                        'GoAddRecord()
                     End If
                 End If
             Else
@@ -892,9 +897,9 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Public Sub GoUndoChanges()
         If OkToMove() Then
             UndoMode = True
-            If AddMode Then
+            If View.AddMode Then
                 RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
-                AddMode = False
+                View.AddMode = False
             Else
                 RecordPositionNumber = RecordPositionNumber
                 EditMode = False
@@ -926,7 +931,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         Dim retValue As Boolean = False
         If QuitOnSave Then
             retValue = True
-        ElseIf Not (EditMode OrElse AddMode) Then
+        ElseIf Not (EditMode OrElse View.AddMode) Then
             retValue = True
         Else
             Dim result As DialogResult
@@ -937,13 +942,13 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                         result = Save()
                         If result > 0 Then
                             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
-                            If AddMode Then
+                            If View.AddMode Then
                                 RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
                             End If
                             retValue = True
                         End If
                     Else
-                        If AddMode Then
+                        If View.AddMode Then
                             RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
                         Else
                             RecordPositionNumber = RecordPositionNumber
@@ -958,8 +963,8 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             End If
         End If
         If retValue Then
-            If AddMode Then
-                AddMode = False
+            If View.AddMode Then
+                View.AddMode = False
             Else
                 EditMode = False
             End If
@@ -982,7 +987,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             Case ButtonClicked.Undo
                 GoUndoChanges()
             Case ButtonClicked.Add
-                GoAddRecord()
+                'GoAddRecord()
             Case ButtonClicked.Delete
                 GoDeleteRecord()
             Case ButtonClicked.Edit
@@ -1002,7 +1007,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
 
     Public Overridable Function Save()
         Dim retVal As Integer = 0
-        If EditMode AndAlso (Not AddMode) AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then
+        If EditMode AndAlso (Not View.AddMode) AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then
             Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
         Else
             RaiseEvent BeforeValidate()
@@ -1099,8 +1104,8 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         Else
             UpdateViewDisplay(TargetIdNo)
         End If
-        If AddMode Then
-            AddMode = False
+        If View.AddMode Then
+            View.AddMode = False
         Else
             EditMode = False
         End If
@@ -1258,7 +1263,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         Dim updateReturnValue As Object
         Dim insertReturnValue As Object
         Dim parentIdNo As Integer
-        If AddMode Then
+        If View.AddMode Then
             parentIdNo = passedValue
         Else
             parentIdNo = CallByName(View, IdFieldName, CallType.Get)
@@ -1349,7 +1354,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             Dim record As New TM
             GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
-                If AddMode Then
+                If View.AddMode Then
                     Dim retVal As Integer = 0
                     retValue = AddRecord(record)
                     If retValue > 0 Then
@@ -1473,6 +1478,19 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
 
     End Sub
 
+    Public Sub OnAddDataRequested_EventHandler(ByRef e As AddDataRequested) Implements ISubscriber(Of AddDataRequested).OnEventHandler
+        LastIdNo = CallByName(View, IdFieldName, CallType.Get)
+        Try
+            DataModel = New TM
+            GlobalVariables.Mapper.Map(DataModel, View)
+            View.AddMode = True
+            RaiseEvent BeforeAdd()
+        Catch oEx As Exception
+            MsgBox("Error:   " + oEx.Message)
+            View.AddMode = False
+        End Try
+    End Sub
+
     'Protected Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
     '    If e.AddMode Then
     '        Inputs(True)
@@ -1555,4 +1573,36 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     '    End If
     'End Sub
 
+End Class
+
+Public Class AddDataRequested
+
+    Public Sub New(ByRef source As Object, ByRef addMode As Boolean)
+        Me.Source = source
+        Me.AddMode = addMode       
+    End Sub
+
+    Public Property Source As Object
+    Public Property AddMode As Boolean
+
+End Class
+
+
+Public Class IdNoEventArgs
+    Inherits EventArgs
+
+    Private _idNo As Int32
+
+    Public Sub New(ByVal idNo As Int32)
+        Me._idNo = idNo
+    End Sub
+
+    Public Property IdNo As Int32
+        Get
+            Return _idNo
+        End Get
+        Set(ByVal value As Int32)
+            _idNo = value
+        End Set
+    End Property
 End Class
