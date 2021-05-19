@@ -1114,6 +1114,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub PayrollReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollReportToolStripMenuItem.Click
 
         End Sub
+
+        Private Sub SalaryLoanScheduleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalaryLoanScheduleToolStripMenuItem.Click
+            Dim myForm As New SalaryLoanScheduleEntry
+            myForm.Show()
+        End Sub
+
     End Class
 
 End Namespace

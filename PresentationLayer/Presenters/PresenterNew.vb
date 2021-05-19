@@ -23,7 +23,7 @@ Imports KellermanSoftware.CompareNetObjects
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
 ''' <typeparam name="T">Type of itemView.</typeparam>
-Public MustInherit Class PresenterNew(Of T As IView, TM As New)
+Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Implements ISubscriber(Of SelectedButton)
 
     Public ChildPresenters As New List(Of Object)
@@ -120,8 +120,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Property AddMode As Boolean
         Set
             _addMode = Value
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New AddModeChanged(Value))
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New AddModeChanged(Value))
             End If
             If Value Then
                 SaveOriginalValues()
@@ -140,14 +140,13 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Property CancelEdit As Boolean = False
     Public Property CancelSave As Boolean = False
     Public Property CurrentSortKeyValue As String
-    Public Property Ea As EventAggregator
     Public Property DisableSaveMemento
 
     Public Property EditMode As Boolean
         Set
             _editMode = Value
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New EditModeChanged(Value))
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New EditModeChanged(Value))
             End If
             If Value Then
                 If Not DisableSaveMemento Then
@@ -213,8 +212,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             'End If
             _targetIdNo = value
             UpdateViewDisplay(value)
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New RecordPositionChanged(value))
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New RecordPositionChanged(value))
             End If
         End Set
     End Property
@@ -360,8 +359,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                 retValue = Model.DeleteRecord(idNo, TableName)
                 If retValue > 0 Then
-                    If Ea IsNot Nothing Then
-                        'Ea.PublishEvent(New RecordDeleted(idNo))
+                    If GlobalVariables.EventAggregator IsNot Nothing Then
+                        'GlobalVariables.EventAggregator.PublishEvent(New RecordDeleted(idNo))
                     End If
                     RaiseEvent SuccessfulDelete(idNo)
                 End If
@@ -816,8 +815,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Sub GoQuit()
         If OkToMove() Then
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New QuitView(True))
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New QuitView(True))
             End If
         End If
     End Sub
@@ -1012,9 +1011,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Else
                 Dim viewIsValid As Boolean = True
                 Dim validatingObject = New ValidatingData(viewIsValid)
-                If Ea IsNot Nothing Then
-                    Ea.PublishEvent(validatingObject)
-                    'Ea.PublishEvent(New ValidatingData(viewIsValid))
+                If GlobalVariables.EventAggregator IsNot Nothing Then
+                    GlobalVariables.EventAggregator.PublishEvent(validatingObject)
+                    'GlobalVariables.EventAggregator.PublishEvent(New ValidatingData(viewIsValid))
                 End If
                 If validatingObject.Validated AndAlso IsBizDataValid() Then
                     RaiseEvent BeforeSave()
@@ -1025,8 +1024,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                         '    Messaging.Show(true,"MsgRecordHasBeenSaved", "Record has been successfully saved!")
                     Else
                         RaiseEvent AfterSave()
-                        If Ea IsNot Nothing Then
-                            Ea.PublishEvent(New RecordSaved(DataModel))
+                        If GlobalVariables.EventAggregator IsNot Nothing Then
+                            GlobalVariables.EventAggregator.PublishEvent(New RecordSaved(DataModel))
                         End If
                     End If
                 Else
@@ -1036,8 +1035,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End If
         If retVal < 0 Then
             Dim lErrors = GetBizObjectErrors()
-            If Ea IsNot Nothing And lErrors IsNot Nothing Then
-                Ea.PublishEvent(New PassErrorList(lErrors))
+            If GlobalVariables.EventAggregator IsNot Nothing And lErrors IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New PassErrorList(lErrors))
             End If
             Beep()
             ShowErrors("Record not saved!")
@@ -1114,8 +1113,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
             modelData = Model.GetRecordByIdNo(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New BeforeAssignment(modelData))
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New BeforeAssignment(modelData))
             End If
             GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
             For Each child In ChildPresenters
@@ -1473,5 +1472,87 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Private Sub UpdateErrors(ByRef dataDictionary As Dictionary(Of String, Object))
 
     End Sub
+
+    'Protected Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
+    '    If e.AddMode Then
+    '        Inputs(True)
+    '        UpdateButtonDisplays(False, True)
+    '    Else
+    '        Inputs(False)
+    '        UpdateButtonDisplays(False, False)
+    '    End If
+    'End Sub
+
+    'Protected Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
+    '    If e.EditMode Then
+    '        Inputs(True)
+    '        UpdateButtonDisplays(True, False)
+    '    Else
+    '        Inputs(False)
+    '        UpdateButtonDisplays(False, False)
+    '    End If
+    'End Sub
+
+    'Public Sub OnEventHandlerPassErrorList(ByRef e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
+    '    MyErrorProvider.ClearAllErrorMessages()
+    '    For Each _err In e.Errors
+    '        For Each ctrl In MyErrorProvider.Controls
+    '            If ctrl.errormessage = _err Then
+    '                If DirectCast(ctrl.controlobj, System.Windows.Forms.Control).Dock = DockStyle.Fill Then
+    '                    MyErrorProvider.SetIconPadding(ctrl.ControlObj, -18)
+    '                End If
+    '                If GlobalVariables.RightToLeftLayout Then
+    '                    MyErrorProvider.SetIconAlignment(ctrl.ControlObj, ErrorIconAlignment.TopLeft)
+    '                Else
+    '                    MyErrorProvider.SetIconAlignment(ctrl.ControlObj, ErrorIconAlignment.TopRight)
+    '                End If
+    '                MyErrorProvider.SetError(ctrl.ControlObj, _err)
+    '            End If
+    '        Next
+    '    Next
+    'End Sub
+
+    'Public Sub OnEventHandlerQuitView(ByRef e As QuitView) Implements ISubscriber(Of QuitView).OnEventHandler
+    '    CancelClose = False
+    '    Close()
+    '    If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
+    '        TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
+    '    End If
+    '    GC.Collect()
+    '    GC.WaitForPendingFinalizers()
+    '    If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
+    '        SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
+    '    End If
+    '    Dispose()
+    'End Sub
+
+    'Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
+    '    If Not SingleData Then
+    '        UpdateRecordCounter()
+    '        UpdateButtonDisplays(False, False)
+    '        MyErrorProvider.ClearAllErrorMessages()
+    '        MyErrorProvider.Clear()
+    '        Inputs(False)
+    '        RecordPositionChanged(e)
+    '    End If
+    'End Sub
+
+    'Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
+    '    RecordSaved(e)
+    'End Sub
+
+    ''Public Sub OnEventHandlerDeletedRecord(ByRef e As RecordDeleted) Implements ISubscriber(Of RecordDeleted).OnEventHandler
+    ''    RecordDeleted(e)
+    ''End Sub
+
+    'Public Sub OnEventHandlerAddedRecord(ByRef e As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
+    '    BeforeAssignment()
+    'End Sub
+
+    'Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
+    '    If Not ValidateView() Then
+    '        e.Validated = False
+    '    End If
+    'End Sub
 
 End Class

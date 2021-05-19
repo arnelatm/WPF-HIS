@@ -23,7 +23,9 @@ Public Class CFormEntryNew
     Protected RecordDateTimeStampValue As Object
     Protected SortOrderKey As String = "IdNo"
     Protected SingleData As Boolean = False
+    Private _addMode As Boolean = False
     Private _debugSwitch As Byte = 0
+    Protected Ea As EventAggregator
 
     Public Sub New()
 
@@ -31,7 +33,6 @@ Public Class CFormEntryNew
         InitializeComponent()
         KeyPreview = True
         DoubleBuffered = True
-
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
@@ -39,16 +40,15 @@ Public Class CFormEntryNew
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
 
     Private Declare Function SetProcessWorkingSetSize Lib "kernel32.dll" (hProcess As IntPtr,
-                                                                          dwMinimumWorkingSetSize As Int32,
+                                                                         dwMinimumWorkingSetSize As Int32,
                                                                           dwMaximumWorkingSetSize As Int32) As Int32
+
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
     <Description("Type here the Child Table name if any, otherwise leave it blank.")>
     <Browsable(True)>
     Public Property ChildTableName As String = ""
-
-    Public Property Ea As EventAggregator
 
     <Bindable(True)>
     <Category("Properties")>
@@ -66,6 +66,22 @@ Public Class CFormEntryNew
     Public Sub CheckDataChanges()
     End Sub
 
+    Public Property AddMode As Boolean
+        Get
+            Return _addMode
+        End Get
+        Set(value As Boolean)
+            _addMode = value
+            If Ea IsNot Nothing Then
+                PublishEvent(New AddModeChanged(value))
+            Else
+                If value Then
+                    ' add not possible so reset AddMode to False
+                    _addMode = False
+                End If
+            End If
+        End Set
+    End Property
 
     Public Sub FindFieldNew(findableControl As IFindableControl)
         PresenterObj.FindFieldNew(findableControl)
@@ -89,86 +105,6 @@ Public Class CFormEntryNew
 
     Public Sub HideButton(button As ToolStripButton)
         button.Visible = False
-    End Sub
-
-    Public Sub OnEventHandlerAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
-        If e.AddMode Then
-            Inputs(True)
-            UpdateButtonDisplays(False, True)
-        Else
-            Inputs(False)
-            UpdateButtonDisplays(False, False)
-        End If
-    End Sub
-
-    Public Sub OnEventHandlerEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
-        If e.EditMode Then
-            Inputs(True)
-            UpdateButtonDisplays(True, False)
-        Else
-            Inputs(False)
-            UpdateButtonDisplays(False, False)
-        End If
-    End Sub
-
-    Public Sub OnEventHandlerPassErrorList(ByRef e As PassErrorList) Implements ISubscriber(Of PassErrorList).OnEventHandler
-        MyErrorProvider.ClearAllErrorMessages()
-        For Each _err In e.Errors
-            For Each ctrl In MyErrorProvider.Controls
-                If ctrl.errormessage = _err Then
-                    If DirectCast(ctrl.controlobj, System.Windows.Forms.Control).Dock = DockStyle.Fill Then
-                        MyErrorProvider.SetIconPadding(ctrl.ControlObj, -18)
-                    End If
-                    If GlobalVariables.RightToLeftLayout Then
-                        MyErrorProvider.SetIconAlignment(ctrl.ControlObj, ErrorIconAlignment.TopLeft)
-                    Else
-                        MyErrorProvider.SetIconAlignment(ctrl.ControlObj, ErrorIconAlignment.TopRight)
-                    End If
-                    MyErrorProvider.SetError(ctrl.ControlObj, _err)
-                End If
-            Next
-        Next
-    End Sub
-
-    Public Sub OnEventHandlerQuitView(ByRef e As QuitView) Implements ISubscriber(Of QuitView).OnEventHandler
-        CancelClose = False
-        Close()
-        If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
-            TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
-        End If
-        GC.Collect()
-        GC.WaitForPendingFinalizers()
-        If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
-            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
-        End If
-        Dispose()
-    End Sub
-
-    Public Sub OnEventHandlerRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
-        If Not SingleData Then
-            UpdateRecordCounter()
-            UpdateButtonDisplays(False, False)
-            MyErrorProvider.ClearAllErrorMessages()
-            MyErrorProvider.Clear()
-            Inputs(False)
-            RecordPositionChanged(e)
-        End If
-    End Sub
-
-    Public Sub OnEventHandlerSavedRecord(ByRef e As RecordSaved) Implements ISubscriber(Of RecordSaved).OnEventHandler
-        RecordSaved(e)
-    End Sub
-
-    Public Sub OnEventHandlerAddedRecord(ByRef e As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
-        BeforeAssignment()
-    End Sub
-
-    Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
-        If ValidateView() Then
-            e.Validated = True
-        Else
-            e.Validated = False
-        End If
     End Sub
 
     Public Sub SetFormTitleCaption()
@@ -325,7 +261,7 @@ Public Class CFormEntryNew
                 Dim num As Double
                 Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
                 If Not isNumeric Then
-                    MessageBox.Show($"The entered value for " & obj.Name & "<" & obj.Text & $"> must be a number (numeric operations not allowed)!")
+                    MessageBox.Show($"The entered value for " & obj.Name & $"<" & obj.Text & $"> must be a number (numeric operations not allowed)!")
                     Return False
                 End If
                 Dim nMinValue As Double
@@ -336,7 +272,7 @@ Public Class CFormEntryNew
                     nMinValue = GlobalFunctions.GetMinMaxValue(typeCode, nMaxValue)
                 Else
                     typeCode = Type.GetTypeCode(u)
-                    nMinValue = GlobalFunctions.GetMinMaxValue(underlyingTypeCode, nMaxValue)
+                    nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
                 End If
                 If num < nMinValue OrElse num > nMaxValue Then
                     MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & " to " & nMaxValue.ToString())
@@ -418,10 +354,9 @@ Public Class CFormEntryNew
                 btnSave.Enabled = False
                 btnFind.Enabled = False
                 btnPrint.Enabled = False
-                If Not PresenterObj.AddMode Then
+                If Not AddMode Then
                     btnUndo.Enabled = False
                     btnSave.Enabled = False
-                    Messaging.Show(True, "MsgNoRecordsFound", "No records found for this table!", "Empty Table")
                 Else
                     btnSave.Enabled = True
                     btnUndo.Enabled = True
@@ -474,9 +409,10 @@ Public Class CFormEntryNew
         End If
     End Sub
 
-    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-
-        RunButtonRoutine(ButtonClicked.Add)
+    Protected Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        AddMode = True
+        Inputs(True)
+        UpdateButtonDisplays(False, True)
     End Sub
 
     Private Sub BtnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
@@ -649,7 +585,7 @@ Public Class CFormEntryNew
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             CreateDataSources()
             CreateMainFieldsDictionary()
-            Inputs(False)
+            'Inputs(False)
 
             Try
                 If Not SingleData Then
@@ -940,5 +876,9 @@ Public Class CFormEntryNew
     Public Overridable Sub ActiveToolStripButton_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
 
     End Sub
+
+    'Private Sub CFormEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+    '    Ea =
+    'End Sub
 
 End Class

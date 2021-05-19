@@ -107,12 +107,14 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPcJournals.EditingMode = false
         Me.DataGridViewPcJournals.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewPcJournals.EndFindValue = Nothing
+        Me.DataGridViewPcJournals.FieldDescription = Nothing
         Me.DataGridViewPcJournals.FieldName = Nothing
         Me.DataGridViewPcJournals.FieldsDictionary = Nothing
         Me.DataGridViewPcJournals.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.DataGridViewPcJournals.FindEnabled = false
         Me.DataGridViewPcJournals.FirstRowDeletionEnabled = true
         Me.DataGridViewPcJournals.FirstRowInsertionEnabled = true
+        Me.DataGridViewPcJournals.IgnoreCase = false
         Me.DataGridViewPcJournals.Location = New System.Drawing.Point(3, 107)
         Me.DataGridViewPcJournals.Name = "DataGridViewPcJournals"
         Me.DataGridViewPcJournals.ReadOnly = true
@@ -123,6 +125,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPcJournals.ShowInsertColumnWhenEditing = false
         Me.DataGridViewPcJournals.Size = New System.Drawing.Size(977, 450)
         Me.DataGridViewPcJournals.TabIndex = 10
+        Me.DataGridViewPcJournals.Translatable = true
         '
         'dgvPcClosed
         '
@@ -144,14 +147,17 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvTransactionDate.DisplayOnly = true
         Me.dgvTransactionDate.EditingMode = false
         Me.dgvTransactionDate.EndFindValue = Nothing
+        Me.dgvTransactionDate.FieldDescription = Nothing
         Me.dgvTransactionDate.FieldName = Nothing
         Me.dgvTransactionDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvTransactionDate.FindEnabled = false
         Me.dgvTransactionDate.HeaderText = "Date"
+        Me.dgvTransactionDate.IgnoreCase = false
         Me.dgvTransactionDate.Name = "dgvTransactionDate"
         Me.dgvTransactionDate.ReadOnly = true
         Me.dgvTransactionDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvTransactionDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvTransactionDate.Translatable = false
         Me.dgvTransactionDate.Width = 80
         '
         'dgvIdNo
@@ -163,14 +169,17 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvIdNo.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvIdNo.EditingMode = false
         Me.dgvIdNo.EndFindValue = Nothing
+        Me.dgvIdNo.FieldDescription = Nothing
         Me.dgvIdNo.FieldName = Nothing
         Me.dgvIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvIdNo.FindEnabled = false
         Me.dgvIdNo.HeaderText = "IdNo"
+        Me.dgvIdNo.IgnoreCase = false
         Me.dgvIdNo.Name = "dgvIdNo"
         Me.dgvIdNo.ReadOnly = true
         Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvIdNo.Translatable = false
         Me.dgvIdNo.Width = 50
         '
         'dgvReference
@@ -182,14 +191,17 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvReference.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvReference.EditingMode = false
         Me.dgvReference.EndFindValue = Nothing
+        Me.dgvReference.FieldDescription = Nothing
         Me.dgvReference.FieldName = Nothing
         Me.dgvReference.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvReference.FindEnabled = false
         Me.dgvReference.HeaderText = "Reference No"
+        Me.dgvReference.IgnoreCase = false
         Me.dgvReference.Name = "dgvReference"
         Me.dgvReference.ReadOnly = true
         Me.dgvReference.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvReference.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvReference.Translatable = false
         Me.dgvReference.Width = 80
         '
         'dgvPayeeType
@@ -201,14 +213,17 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPayeeType.DefaultCellStyle = DataGridViewCellStyle5
         Me.dgvPayeeType.EditingMode = false
         Me.dgvPayeeType.EndFindValue = Nothing
+        Me.dgvPayeeType.FieldDescription = Nothing
         Me.dgvPayeeType.FieldName = Nothing
         Me.dgvPayeeType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvPayeeType.FindEnabled = false
         Me.dgvPayeeType.HeaderText = "Payee Type"
+        Me.dgvPayeeType.IgnoreCase = false
         Me.dgvPayeeType.Name = "dgvPayeeType"
         Me.dgvPayeeType.ReadOnly = true
         Me.dgvPayeeType.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvPayeeType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvPayeeType.Translatable = false
         Me.dgvPayeeType.Width = 40
         '
         'dgvPayeeName
@@ -220,18 +235,22 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPayeeName.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvPayeeName.EditingMode = false
         Me.dgvPayeeName.EndFindValue = Nothing
+        Me.dgvPayeeName.FieldDescription = Nothing
         Me.dgvPayeeName.FieldName = Nothing
         Me.dgvPayeeName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvPayeeName.FindEnabled = false
         Me.dgvPayeeName.HeaderText = "PayeeName"
+        Me.dgvPayeeName.IgnoreCase = false
         Me.dgvPayeeName.Name = "dgvPayeeName"
         Me.dgvPayeeName.ReadOnly = true
         Me.dgvPayeeName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvPayeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvPayeeName.Translatable = false
         Me.dgvPayeeName.Width = 150
         '
         'dgvAmount
         '
+        Me.dgvAmount.BegFindValue = Nothing
         Me.dgvAmount.DataPropertyName = "Amount"
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
@@ -239,11 +258,18 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle7.Format = "###,##0.00"
         Me.dgvAmount.DefaultCellStyle = DataGridViewCellStyle7
         Me.dgvAmount.EditingMode = false
+        Me.dgvAmount.EndFindValue = Nothing
+        Me.dgvAmount.FieldDescription = Nothing
+        Me.dgvAmount.FieldName = Nothing
+        Me.dgvAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvAmount.FindEnabled = false
         Me.dgvAmount.HeaderText = "Amount"
         Me.dgvAmount.Name = "dgvAmount"
         Me.dgvAmount.ReadOnly = true
         Me.dgvAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvAmount.Translatable = false
         '
         'dgvNotes
         '
@@ -255,14 +281,17 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvNotes.EditingMode = false
         Me.dgvNotes.EndFindValue = Nothing
+        Me.dgvNotes.FieldDescription = Nothing
         Me.dgvNotes.FieldName = Nothing
         Me.dgvNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvNotes.FindEnabled = false
         Me.dgvNotes.HeaderText = "Notes"
+        Me.dgvNotes.IgnoreCase = false
         Me.dgvNotes.Name = "dgvNotes"
         Me.dgvNotes.ReadOnly = true
         Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvNotes.Translatable = false
         '
         'dgvPayeeNameAra
         '
@@ -273,14 +302,17 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPayeeNameAra.DefaultCellStyle = DataGridViewCellStyle9
         Me.dgvPayeeNameAra.EditingMode = false
         Me.dgvPayeeNameAra.EndFindValue = Nothing
+        Me.dgvPayeeNameAra.FieldDescription = Nothing
         Me.dgvPayeeNameAra.FieldName = Nothing
         Me.dgvPayeeNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvPayeeNameAra.FindEnabled = false
         Me.dgvPayeeNameAra.HeaderText = "PayeeNameAra"
+        Me.dgvPayeeNameAra.IgnoreCase = false
         Me.dgvPayeeNameAra.Name = "dgvPayeeNameAra"
         Me.dgvPayeeNameAra.ReadOnly = true
         Me.dgvPayeeNameAra.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvPayeeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvPayeeNameAra.Translatable = false
         Me.dgvPayeeNameAra.Visible = false
         Me.dgvPayeeNameAra.Width = 150
         '
@@ -360,6 +392,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPayeeName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtPayeeName.EditingMode = true
         Me.txtPayeeName.EndFindValue = Nothing
+        Me.txtPayeeName.FieldDescription = Nothing
         Me.txtPayeeName.FieldName = Nothing
         Me.txtPayeeName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtPayeeName.FindEnabled = true
@@ -375,6 +408,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPayeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtPayeeName.Size = New System.Drawing.Size(341, 23)
         Me.txtPayeeName.TabIndex = 8
+        Me.txtPayeeName.Translatable = false
         '
         'lblPayee
         '
@@ -389,6 +423,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPayee.TabIndex = 12
         Me.lblPayee.Text = "Payee"
         Me.lblPayee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPayee.Translatable = true
         '
         'lblTransactionDate
         '
@@ -403,6 +438,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblTransactionDate.TabIndex = 3
         Me.lblTransactionDate.Text = "Transaction Date"
         Me.lblTransactionDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblTransactionDate.Translatable = true
         '
         'dtpTransactionDate
         '
@@ -424,6 +460,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpTransactionDate.Size = New System.Drawing.Size(112, 25)
         Me.dtpTransactionDate.TabIndex = 0
         Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpTransactionDate.Translatable = false
         Me.dtpTransactionDate.Value = Nothing
         Me.dtpTransactionDate.ValueIsMandatory = false
         Me.dtpTransactionDate.ValueIsNullable = false
@@ -441,6 +478,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblAccountIdNo.TabIndex = 1
         Me.lblAccountIdNo.Text = "Closing Account"
         Me.lblAccountIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblAccountIdNo.Translatable = true
         '
         'cboAccountIdNo
         '
@@ -454,6 +492,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cboAccountIdNo.EditingMode = true
         Me.cboAccountIdNo.EndFindValue = Nothing
+        Me.cboAccountIdNo.FieldDescription = Nothing
         Me.cboAccountIdNo.FieldName = Nothing
         Me.cboAccountIdNo.FilterRule = Nothing
         Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -462,6 +501,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboAccountIdNo.FormattingEnabled = true
         Me.cboAccountIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboAccountIdNo.IgnoreCase = false
         Me.cboAccountIdNo.IntegralHeight = false
         Me.cboAccountIdNo.LinkedLabel = Nothing
         Me.cboAccountIdNo.Location = New System.Drawing.Point(120, 28)
@@ -479,6 +519,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.SuggestListOrderRule = Nothing
         Me.cboAccountIdNo.TabIndex = 5
         Me.cboAccountIdNo.TextToSearch = Nothing
+        Me.cboAccountIdNo.Translatable = false
         Me.cboAccountIdNo.ValueIsMandatory = false
         Me.cboAccountIdNo.ValueIsNullable = false
         Me.cboAccountIdNo.ValueIsNumeric = false
@@ -496,6 +537,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNotes.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtNotes.EditingMode = true
         Me.txtNotes.EndFindValue = Nothing
+        Me.txtNotes.FieldDescription = Nothing
         Me.txtNotes.FieldName = Nothing
         Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtNotes.FindEnabled = true
@@ -511,6 +553,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtNotes.Size = New System.Drawing.Size(862, 23)
         Me.txtNotes.TabIndex = 9
+        Me.txtNotes.Translatable = false
         '
         'CLabel2
         '
@@ -525,6 +568,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel2.TabIndex = 6
         Me.CLabel2.Text = "Reference No."
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel2.Translatable = true
         '
         'txtReferenceNo
         '
@@ -536,6 +580,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtReferenceNo.DataBoundControl = true
         Me.txtReferenceNo.EditingMode = true
         Me.txtReferenceNo.EndFindValue = Nothing
+        Me.txtReferenceNo.FieldDescription = Nothing
         Me.txtReferenceNo.FieldName = Nothing
         Me.txtReferenceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtReferenceNo.FindEnabled = true
@@ -551,6 +596,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtReferenceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtReferenceNo.Size = New System.Drawing.Size(86, 23)
         Me.txtReferenceNo.TabIndex = 1
+        Me.txtReferenceNo.Translatable = false
         '
         'lblCheckNumber
         '
@@ -565,6 +611,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblCheckNumber.TabIndex = 9
         Me.lblCheckNumber.Text = "Check Number"
         Me.lblCheckNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblCheckNumber.Translatable = true
         '
         'txtCheckNumber
         '
@@ -576,6 +623,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtCheckNumber.DataBoundControl = true
         Me.txtCheckNumber.EditingMode = true
         Me.txtCheckNumber.EndFindValue = Nothing
+        Me.txtCheckNumber.FieldDescription = Nothing
         Me.txtCheckNumber.FieldName = Nothing
         Me.txtCheckNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtCheckNumber.FindEnabled = true
@@ -591,6 +639,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtCheckNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtCheckNumber.Size = New System.Drawing.Size(112, 23)
         Me.txtCheckNumber.TabIndex = 2
+        Me.txtCheckNumber.Translatable = false
         '
         'lblAmount
         '
@@ -605,6 +654,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblAmount.TabIndex = 10
         Me.lblAmount.Text = "Amount"
         Me.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblAmount.Translatable = true
         '
         'txtAmount
         '
@@ -617,6 +667,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtAmount.DisplayOnly = true
         Me.txtAmount.EditingMode = true
         Me.txtAmount.EndFindValue = Nothing
+        Me.txtAmount.FieldDescription = Nothing
         Me.txtAmount.FieldName = Nothing
         Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtAmount.FindEnabled = true
@@ -634,6 +685,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtAmount.Size = New System.Drawing.Size(112, 23)
         Me.txtAmount.TabIndex = 3
         Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtAmount.Translatable = false
         Me.txtAmount.ValueIsNumeric = true
         '
         'CLabel1
@@ -649,6 +701,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1.TabIndex = 4
         Me.CLabel1.Text = "Notes"
         Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel1.Translatable = true
         '
         'btnSelectAll
         '
@@ -676,6 +729,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel3.TabIndex = 16
         Me.CLabel3.Text = "Pay Type"
         Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel3.Translatable = true
         '
         'cboPayType
         '
@@ -689,6 +743,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayType.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cboPayType.EditingMode = true
         Me.cboPayType.EndFindValue = Nothing
+        Me.cboPayType.FieldDescription = Nothing
         Me.cboPayType.FieldName = Nothing
         Me.cboPayType.FilterRule = Nothing
         Me.cboPayType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -697,6 +752,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayType.ForeColor = System.Drawing.Color.Black
         Me.cboPayType.FormattingEnabled = true
         Me.cboPayType.HideWhenNotEditingOrAdding = false
+        Me.cboPayType.IgnoreCase = false
         Me.cboPayType.IntegralHeight = false
         Me.cboPayType.LinkedLabel = Nothing
         Me.cboPayType.Location = New System.Drawing.Point(641, 28)
@@ -714,6 +770,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayType.SuggestListOrderRule = Nothing
         Me.cboPayType.TabIndex = 6
         Me.cboPayType.TextToSearch = Nothing
+        Me.cboPayType.Translatable = false
         Me.cboPayType.ValueIsMandatory = false
         Me.cboPayType.ValueIsNullable = false
         Me.cboPayType.ValueIsNumeric = false
@@ -732,6 +789,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel4.TabIndex = 18
         Me.CLabel4.Text = "Petty Cash Acct."
         Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel4.Translatable = true
         '
         'cboPcAccountIdNo
         '
@@ -745,6 +803,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPcAccountIdNo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cboPcAccountIdNo.EditingMode = true
         Me.cboPcAccountIdNo.EndFindValue = Nothing
+        Me.cboPcAccountIdNo.FieldDescription = Nothing
         Me.cboPcAccountIdNo.FieldName = Nothing
         Me.cboPcAccountIdNo.FilterRule = Nothing
         Me.cboPcAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -753,6 +812,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPcAccountIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboPcAccountIdNo.FormattingEnabled = true
         Me.cboPcAccountIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboPcAccountIdNo.IgnoreCase = false
         Me.cboPcAccountIdNo.IntegralHeight = false
         Me.cboPcAccountIdNo.LinkedLabel = Nothing
         Me.cboPcAccountIdNo.Location = New System.Drawing.Point(120, 54)
@@ -770,6 +830,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPcAccountIdNo.SuggestListOrderRule = Nothing
         Me.cboPcAccountIdNo.TabIndex = 7
         Me.cboPcAccountIdNo.TextToSearch = Nothing
+        Me.cboPcAccountIdNo.Translatable = false
         Me.cboPcAccountIdNo.ValueIsMandatory = false
         Me.cboPcAccountIdNo.ValueIsNullable = false
         Me.cboPcAccountIdNo.ValueIsNumeric = false

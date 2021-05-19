@@ -2,14 +2,15 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IPayrollEarningView
-        Inherits IView
+    Public Interface ISalaryLoanScheduleView
+        Inherits IViewNew
 
         Property Amount As Decimal
+        Property DateCreated As DateTime?
         Property EmployeeIdNo As Int32
-        Property EarningIdNo As Int16
         Property IdNo As Int32
-        Property PayrollIdNo As Int16
+        Property PeriodicPayment As Decimal
+        Property StartDate As Date?
 
     End Interface
 
