@@ -174,6 +174,7 @@
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\Customer1.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
+    <Compile Include="BusinessLayer\SalaryLoanSchedule.vb" />
     <Compile Include="BusinessLayer\PayElementItem.vb" />
     <Compile Include="BusinessLayer\PayElement.vb" />
     <Compile Include="BusinessLayer\OtWorkHour.vb" />
@@ -225,6 +226,7 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeePayElementDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SalaryLoanScheduleDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayElementItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\OtWorkHourDao.vb" />
@@ -306,6 +308,7 @@
     </Compile>
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePayElementModel.vb" />
+    <Compile Include="PresentationLayer\Models\SalaryLoanScheduleModel.vb" />
     <Compile Include="PresentationLayer\Models\TransactionNotes.vb" />
     <Compile Include="PresentationLayer\Models\PayElementItemModel.vb" />
     <Compile Include="PresentationLayer\Models\PayElementModel.vb" />
@@ -331,6 +334,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\PayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SalaryLoanSchedulePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TransactionsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />
@@ -350,6 +354,12 @@
     <Compile Include="PresentationLayer\Views\Forms\Form1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\SalaryLoanScheduleEntry.designer.vb">
+      <DependentUpon>SalaryLoanScheduleEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\SalaryLoanScheduleEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\NotesTranslator.Designer.vb">
       <DependentUpon>NotesTranslator.vb</DependentUpon>
     </Compile>
@@ -363,6 +373,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ISalaryLoanScheduleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
@@ -808,6 +819,12 @@
     <Compile Include="PresentationLayer\Views\PayrollPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\PensionRateView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
+    <Compile Include="PresentationLayer\Views\SalaryLoanScheduleView.Designer.vb">
+      <DependentUpon>SalaryLoanScheduleView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\SalaryLoanScheduleView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\SalesDepositView.vb" />
     <Compile Include="Reports\Account Activity Report.vb">
       <AutoGen>True</AutoGen>
@@ -1031,6 +1048,10 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SalaryLoanScheduleEntry.resx">
+      <DependentUpon>SalaryLoanScheduleEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\NotesTranslator.resx">
       <DependentUpon>NotesTranslator.vb</DependentUpon>
     </EmbeddedResource>
@@ -1197,6 +1218,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
       <DependentUpon>LeaveView.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\SalaryLoanScheduleView.resx">
+      <DependentUpon>SalaryLoanScheduleView.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Account Activity Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Account Activity Report.vb</LastGenOutput>
@@ -1313,8 +1337,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />

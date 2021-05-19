@@ -72,6 +72,7 @@
     <Compile Include="Interfaces\ISecurityObjectView.vb" />
     <Compile Include="Interfaces\IUserView.vb" />
     <Compile Include="ISaltView.vb" />
+    <Compile Include="IViewNew.vb" />
     <Compile Include="IView.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
