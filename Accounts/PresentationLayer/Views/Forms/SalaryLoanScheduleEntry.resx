@@ -174,14 +174,11 @@
   <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="SalaryLoanScheduleView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="SalaryLoanScheduleView.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="SalaryLoanScheduleView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>612, 205</value>
+    <value>609, 197</value>
   </data>
   <data name="SalaryLoanScheduleView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -280,6 +277,6 @@
     <value>SalaryLoanScheduleEntry</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>AATM.PresentationLayer.Forms.CFormEntry, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.PresentationLayer.Forms.CFormEntryNew, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

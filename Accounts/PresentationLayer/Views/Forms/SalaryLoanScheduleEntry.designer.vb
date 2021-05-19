@@ -66,18 +66,6 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.CTreeView1, "CTreeView1")
         Me.CTreeView1.Name = "CTreeView1"
         '
-        'SalaryLoanScheduleView
-        '
-        Me.SalaryLoanScheduleView.Amount = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.SalaryLoanScheduleView.DateCreated = Nothing
-        resources.ApplyResources(Me.SalaryLoanScheduleView, "SalaryLoanScheduleView")
-        Me.SalaryLoanScheduleView.EmployeeIdNo = 0
-        Me.SalaryLoanScheduleView.Errors = Nothing
-        Me.SalaryLoanScheduleView.IdNo = 0
-        Me.SalaryLoanScheduleView.Name = "SalaryLoanScheduleView"
-        Me.SalaryLoanScheduleView.PeriodicPayment = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.SalaryLoanScheduleView.StartDate = Nothing
-        '
         'SalaryLoanScheduleEntry
         '
         resources.ApplyResources(Me, "$this")

@@ -1116,8 +1116,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SalaryLoanScheduleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalaryLoanScheduleToolStripMenuItem.Click
-            Dim myForm As New SalaryLoanScheduleEntry
-            myForm.Show()
+            Dim childMdiForm As SalaryLoanScheduleEntry
+            'Set the Parent Form of the Child window.
+            childMdiForm = New SalaryLoanScheduleEntry With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
         End Sub
 
     End Class

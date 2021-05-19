@@ -136,3 +136,13 @@ Public Class DataGridCellChanged
     Public Property ColumnName As String
 
 End Class
+
+Public Class SaveDataRequested
+
+    Public Sub New(ByVal success As Boolean)
+        Me.Success = success
+    End Sub
+
+    Public Property Success As Boolean
+
+End Class

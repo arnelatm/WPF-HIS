@@ -10,6 +10,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.Libraries.AatmInterfaces
+Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntryNew
 
@@ -66,6 +67,10 @@ Public Class CFormEntryNew
     Public Sub CheckDataChanges()
     End Sub
 
+    Public Function GetEventAggregator() As EventAggregator 
+        Return Ea
+    End Function
+
     Public Property AddMode As Boolean
         Get
             Return _addMode
@@ -73,7 +78,7 @@ Public Class CFormEntryNew
         Set(value As Boolean)
             _addMode = value
             If Ea IsNot Nothing Then
-                PublishEvent(New AddModeChanged(value))
+                Ea.PublishEvent(New AddDataRequested(Me, value))
             Else
                 If value Then
                     ' add not possible so reset AddMode to False
@@ -410,6 +415,9 @@ Public Class CFormEntryNew
     End Sub
 
     Protected Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If _debugSwitch = 1 Then
+            Debugger.Break()
+        End If
         AddMode = True
         Inputs(True)
         UpdateButtonDisplays(False, True)
@@ -497,7 +505,6 @@ Public Class CFormEntryNew
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-
         Dim allControls As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allControls, Me)
             If TypeOf cCtrl Is DataGridView Then
@@ -507,11 +514,18 @@ Public Class CFormEntryNew
             End If
         Next
         If ValidateNumericValues() Then
-            RunButtonRoutine(ButtonClicked.Save)
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New SaveDataRequested(True))
+                'Else
+                '    If value Then
+                '        ' add not possible so reset AddMode to False
+                '        _addMode = False
+                '    End If
+            End If
         End If
-        If PresenterObj.SaveSuccessful AndAlso PresenterObj.QuitOnSave Then
-            PresenterObj.GoQuit()
-        End If
+        'If PresenterObj.SaveSuccessful AndAlso PresenterObj.QuitOnSave Then
+        '    PresenterObj.GoQuit()
+        'End If
     End Sub
 
     Protected Overridable Sub GridValidator()
