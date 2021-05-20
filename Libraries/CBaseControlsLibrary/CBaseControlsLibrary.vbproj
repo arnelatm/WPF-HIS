@@ -300,7 +300,7 @@
       <DependentUpon>CTreeView.vb</DependentUpon>
     </Compile>
     <Compile Include="CTreeView.vb">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomComboBox.vb" />
     <Compile Include="DataGridViewCaComboBoxCell.vb" />

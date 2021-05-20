@@ -135,7 +135,15 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End Get
     End Property
 
-    Public Property QuitOnSave As Boolean = False
+    Protected Property QuitOnSave As Boolean
+        Get
+            Return CallByName(View, "QuitOnSave", CallType.Get)
+        End Get
+        Set(value As Boolean)
+            CallByName(View, "QuitOnSave", CallType.Set, value)
+        End Set
+    End Property
+
     Public Property AskBeforeSave As Boolean = False
     Public Property SaveSuccessful As Boolean = False
     Public Property AutoValidationsPassed As Boolean = False
@@ -790,6 +798,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Public Sub GoLastRecord()
         If OkToMove() Then
             RecordPositionNumber = GetRecordCount()
+            RecordCount = RecordPositionNumber
         End If
     End Sub
 
@@ -845,10 +854,9 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                                       "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                                       MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                             addAnother = True
-                        Else
-                            Dim idNo = CallByName(View, IdFieldName, CallType.Get)
-                            RecordPositionNumber = GetSortedRecordPosition(idNo)
                         End If
+                        Dim idNo = CallByName(View, IdFieldName, CallType.Get)
+                        RecordPositionNumber = GetSortedRecordPosition(idNo)
                     Else
                         RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
                         'RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
@@ -866,8 +874,12 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                 SaveSuccessful = False
             End If
             If SaveSuccessful Then
-                EditMode = False
-                AddMode = False
+                If addAnother Then
+                    AddMode = True
+                Else
+                    EditMode = False
+                    AddMode = False
+                End If
             End If
         End If
     End Sub

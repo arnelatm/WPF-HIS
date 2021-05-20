@@ -65,11 +65,16 @@ Namespace PresentationLayer.Views.Forms
         '
         resources.ApplyResources(Me.CTreeView1, "CTreeView1")
         Me.CTreeView1.Name = "CTreeView1"
-        '
-        'SalaryLoanScheduleEntry
-        '
-        resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.SplitContainer1)
+            '
+            'SalaryLoanScheduleView
+            '
+            resources.ApplyResources(Me.SalaryLoanScheduleView, "SalaryLoanScheduleView")
+            Me.SalaryLoanScheduleView.Name = "SalaryLoanScheduleView"
+            '
+            'SalaryLoanScheduleEntry
+            '
+            resources.ApplyResources(Me, "$this")
+            Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "SalaryLoanScheduleEntry"
         Me.Controls.SetChildIndex(Me.SplitContainer1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
