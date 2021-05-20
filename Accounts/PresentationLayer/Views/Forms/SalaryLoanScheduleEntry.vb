@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class SalaryLoanScheduleEntry
         Implements ISalaryLoanScheduleView
 
-        Private ReadOnly _ea As New EventAggregator
+        'Private ReadOnly _ea As New EventAggregator
 
         Public Sub New()
 
@@ -18,8 +18,8 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             MainTableName = "SalaryLoanSchedule"
             SortOrderKey = "SalaryLoanScheduleName"
-            Ea = _ea
-            PresenterObj = New SalaryLoanSchedulePresenter(SalaryLoanScheduleView, Ea)
+            'Ea = _ea
+            PresenterObj = New SalaryLoanSchedulePresenter(Me)
 
         End Sub
 
@@ -80,14 +80,6 @@ Namespace PresentationLayer.Views.Forms
 
         Public Overloads Property Errors As List(Of String) Implements IViewNew.Errors
 
-        Private Property IView_AddMode As Boolean Implements IViewNew.AddMode
-            Get
-                Return AddMode
-            End Get
-            Set(value As Boolean)
-                AddMode = value
-            End Set
-        End Property
     End Class
 
 End Namespace

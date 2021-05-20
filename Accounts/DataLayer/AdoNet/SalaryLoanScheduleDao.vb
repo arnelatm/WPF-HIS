@@ -56,7 +56,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New SalaryLoanSchedule() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .Amount = Extensions.AsBool(reader("Amount")),
+            .Amount = Extensions.AsDecimal(reader("Amount")),
             .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .StartDate = Extensions.AsDate(reader("StartDate")),
             .PeriodicPayment = Extensions.AsDecimal(reader("PeriodicPayment"))
