@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New SalaryLoanScheduleModel()
             DataModel = New SalaryLoanScheduleModel()
-            QuitOnSave = True
+            QuitOnSave = False
             AskBeforeSave = True
         End Sub
 

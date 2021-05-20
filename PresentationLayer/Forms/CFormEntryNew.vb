@@ -13,6 +13,7 @@ Imports AATM.Libraries.AatmInterfaces
 Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntryNew
+    Implements IViewDataEntry
 
     Public MainFieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
@@ -66,32 +67,30 @@ Public Class CFormEntryNew
 
     Protected Property FormTitleCaption As String = ""
 
-    Public Property RecordCount As Integer
+    Public Property RecordCount As Integer Implements IViewDataEntry.RecordCount
         Get
             Return _recordCount
         End Get
         Set(value As Integer)
-            If value <> _recordCount Then
-                _recordCount = value
-                tsbTotalRecords.Text = value
-                UpdateNavigationButtonDisplay(False, False)
-            End If
+            _recordCount = value
+            tsbTotalRecords.Text = value
+            UpdateNavigationButtonDisplay(False, False)
         End Set
     End Property
 
-    Public Property RecordPositionNumber As Integer
+    Public Property RecordPositionNumber As Integer Implements IViewDataEntry.RecordPositionNumber
         Get
             Return _recordPositionNumber
         End Get
         Set(value As Integer)
-            If value <> _recordPositionNumber Then
-                _recordPositionNumber = value
-                tsbCurrentRecord.Text = value
-                UpdateNavigationButtonDisplay(False, False)
-            End If
-
+            _recordPositionNumber = value
+            tsbCurrentRecord.Text = value
+            UpdateNavigationButtonDisplay(False, False)
         End Set
     End Property
+
+    Public Property QuitOnSave As Boolean Implements IViewDataEntry.QuitOnSave
+
 
     Public Sub CheckDataChanges()
     End Sub
@@ -128,17 +127,17 @@ Public Class CFormEntryNew
         Return MainFieldsDictionary
     End Function
 
-    Public Sub GotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
-        If GotoTargetRecordWorker.CancellationPending Then
-            e.Cancel = True
-            Return
-        End If
-        PresenterObj.TargetIdNo = e.Argument
-        PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
-        PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
-        PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
-        DoPaintEvents()
-    End Sub
+    'Public Sub GotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+    '    If GotoTargetRecordWorker.CancellationPending Then
+    '        e.Cancel = True
+    '        Return
+    '    End If
+    '    PresenterObj.TargetIdNo = e.Argument
+    '    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+    '    PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+    '    PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
+    '    DoPaintEvents()
+    'End Sub
 
     Public Sub HideButton(button As ToolStripButton)
         button.Visible = False
@@ -434,12 +433,12 @@ Public Class CFormEntryNew
         End If
     End Sub
 
-    Protected Sub UpdateRecordCounter()
-        RecordCount = PresenterObj.GetRecordCount()
-        RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(PresenterObj.TargetIdNo)
-        tsbCurrentRecord.Text = PresenterObj.RecordPositionNumber
-        tsbTotalRecords.Text = RecordCount
-    End Sub
+    'Protected Sub UpdateRecordCounter()
+    '    RecordCount = PresenterObj.GetRecordCount()
+    '    RecordDateTimeStampValue = PresenterObj.GetRecordDateTimeStamp(PresenterObj.TargetIdNo)
+    '    tsbCurrentRecord.Text = PresenterObj.RecordPositionNumber
+    '    tsbTotalRecords.Text = RecordCount
+    'End Sub
 
     Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
         ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
@@ -558,6 +557,10 @@ Public Class CFormEntryNew
             TurnOnInputs()
         Else
             TurnOffInputs()
+            UpdateNavigationButtonDisplay(False, False)
+        End If
+        If QuitOnSave Then
+            Close()
         End If
     End Sub
 
@@ -897,13 +900,10 @@ Public Class CFormEntryNew
             TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
         End If
         TranslateForm()
-        UpdateRecordCounter()
-        If PresenterObj.EditMode Or PresenterObj.AddMode Then
-            PresenterObj.Undo()
-        End If
+        PublishClickedButton(ButtonClicked.Undo)
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
-        PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
+        RecordPositionNumber = RecordPositionNumber
     End Sub
 
     Protected Overridable Function DataIsValid() As Boolean

@@ -5,7 +5,7 @@ Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()> _
 Partial Class CTreeView
-    Inherits UserControl
+    Inherits TreeView
 
     'UserControl overrides dispose to clean up the component list.
     <DebuggerNonUserCode()> _
@@ -40,8 +40,6 @@ Partial Class CTreeView
         '
         'CTreeView
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.TreeView1)
         Me.Name = "CTreeView"
         Me.ResumeLayout(False)

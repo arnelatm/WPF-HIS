@@ -25,10 +25,16 @@ Public Class StoreCaptions
 
     Function StoreCaptions(ByVal frm As Object) As Collection
         Dim SystemViewIdNo As Int16
+        Dim ViewDisplayName As String
         _dAc1 = frm.TranslatorDAC
         frm.Tag = frm.Text
-        InsertForm(frm.ViewDisplayName)
-        SystemViewIdNo = GetSystemViewIdNo(frm.ViewDisplayName)
+        If frm.ViewDisplayName Is Nothing Then
+            ViewDisplayName = frm.Name
+        Else
+            ViewDisplayName = frm.ViewDisplayName
+        End If
+        InsertForm(ViewDisplayName)
+        SystemViewIdNo = GetSystemViewIdNo(ViewDisplayName)
         InsertTranslation(frm.Text, SystemViewIdNo)
         Dim t As String
         Dim allCtrl As New List(Of Control)
