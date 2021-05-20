@@ -24,9 +24,12 @@ Public Class CFormEntryNew
     Protected RecordDateTimeStampValue As Object
     Protected SortOrderKey As String = "IdNo"
     Protected SingleData As Boolean = False
-    Private _addMode As Boolean = False
     Private _debugSwitch As Byte = 0
-    Protected Ea As EventAggregator
+    Private _addMode As Boolean = False
+    Private _editMode As Boolean = False
+    Private _recordCount As Int32 = 0
+    Private _recordPositionNumber As Int32 = 0
+    Public Ea As EventAggregator
 
     Public Sub New()
 
@@ -34,6 +37,7 @@ Public Class CFormEntryNew
         InitializeComponent()
         KeyPreview = True
         DoubleBuffered = True
+        Ea = New EventAggregator
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
@@ -62,12 +66,37 @@ Public Class CFormEntryNew
 
     Protected Property FormTitleCaption As String = ""
 
-    Protected Property RecordCount As Integer
+    Public Property RecordCount As Integer
+        Get
+            Return _recordCount
+        End Get
+        Set(value As Integer)
+            If value <> _recordCount Then
+                _recordCount = value
+                tsbTotalRecords.Text = value
+                UpdateNavigationButtonDisplay(False, False)
+            End If
+        End Set
+    End Property
+
+    Public Property RecordPositionNumber As Integer
+        Get
+            Return _recordPositionNumber
+        End Get
+        Set(value As Integer)
+            If value <> _recordPositionNumber Then
+                _recordPositionNumber = value
+                tsbCurrentRecord.Text = value
+                UpdateNavigationButtonDisplay(False, False)
+            End If
+
+        End Set
+    End Property
 
     Public Sub CheckDataChanges()
     End Sub
 
-    Public Function GetEventAggregator() As EventAggregator 
+    Public Function GetEventAggregator() As EventAggregator
         Return Ea
     End Function
 
@@ -77,14 +106,17 @@ Public Class CFormEntryNew
         End Get
         Set(value As Boolean)
             _addMode = value
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New AddDataRequested(Me, value))
-            Else
-                If value Then
-                    ' add not possible so reset AddMode to False
-                    _addMode = False
-                End If
-            End If
+            UpdateNavigationButtonDisplay(EditMode, value)
+        End Set
+    End Property
+
+    Public Property EditMode As Boolean
+        Get
+            Return _editMode
+        End Get
+        Set(value As Boolean)
+            _editMode = value
+            UpdateNavigationButtonDisplay(value, AddMode)
         End Set
     End Property
 
@@ -142,7 +174,9 @@ Public Class CFormEntryNew
     Protected Sub TurnOnInputs()
         Inputs(True)
         InputsTurnedOn()
-        FirstControl.Focus()
+        If FirstControl IsNot Nothing Then
+            FirstControl.Focus()
+        End If
     End Sub
 
     Protected Overridable Sub InputsTurnedOn()
@@ -342,7 +376,7 @@ Public Class CFormEntryNew
     Protected Overridable Sub BeforeAssignment()
     End Sub
 
-    Protected Sub UpdateButtonDisplays(editing As Boolean, adding As Boolean)
+    Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean)
         If SingleData Then
             btnAdd.Visible = False
             btnFind.Visible = False
@@ -367,14 +401,14 @@ Public Class CFormEntryNew
                     btnUndo.Enabled = True
                 End If
             Else
-                If PresenterObj.RecordPositionNumber = 1 Then
+                If RecordPositionNumber = 1 Then
                     btnFirst.Enabled = False
                     btnPrev.Enabled = False
                 Else
                     btnFirst.Enabled = True
                     btnPrev.Enabled = True
                 End If
-                If PresenterObj.RecordPositionNumber >= RecordCount Then
+                If RecordPositionNumber >= RecordCount Then
                     btnLast.Enabled = False
                     btnNext.Enabled = False
                 Else
@@ -419,8 +453,9 @@ Public Class CFormEntryNew
             Debugger.Break()
         End If
         AddMode = True
+        PublishClickedButton(ButtonClicked.Add)
         Inputs(True)
-        UpdateButtonDisplays(False, True)
+        UpdateNavigationButtonDisplay(False, True)
     End Sub
 
     Private Sub BtnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
@@ -442,42 +477,45 @@ Public Class CFormEntryNew
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RunButtonRoutine(ButtonClicked.Delete)
+        PublishClickedButton(ButtonClicked.Delete)
     End Sub
 
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RunButtonRoutine(ButtonClicked.Edit)
+        PublishClickedButton(ButtonClicked.Edit)
+        If EditMode Then
+            TurnOnInputs()
+        End If
     End Sub
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RunButtonRoutine(ButtonClicked.Find)
+        PublishClickedButton(ButtonClicked.Find)
     End Sub
 
     Private Sub BtnFirst_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RunButtonRoutine(ButtonClicked.First)
+        PublishClickedButton(ButtonClicked.First)
     End Sub
 
     Private Sub BtnLast_Click(sender As Object, e As EventArgs) Handles btnLast.Click
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RunButtonRoutine(ButtonClicked.Last)
+        PublishClickedButton(ButtonClicked.Last)
     End Sub
 
     Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RunButtonRoutine(ButtonClicked.Next)
+        PublishClickedButton(ButtonClicked.Next)
     End Sub
 
     Private Sub BtnOriginal_Click(sender As Object, e As EventArgs) Handles btnOriginal.Click
@@ -491,14 +529,14 @@ Public Class CFormEntryNew
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RunButtonRoutine(ButtonClicked.Previous)
+        PublishClickedButton(ButtonClicked.Previous)
     End Sub
 
     Private Sub BtnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RunButtonRoutine(ButtonClicked.Quit)
+        Close()
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -514,18 +552,19 @@ Public Class CFormEntryNew
             End If
         Next
         If ValidateNumericValues() Then
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New SaveDataRequested(True))
-                'Else
-                '    If value Then
-                '        ' add not possible so reset AddMode to False
-                '        _addMode = False
-                '    End If
-            End If
+            PublishClickedButton(ButtonClicked.Save)
         End If
-        'If PresenterObj.SaveSuccessful AndAlso PresenterObj.QuitOnSave Then
-        '    PresenterObj.GoQuit()
-        'End If
+        If EditMode Or AddMode Then
+            TurnOnInputs()
+        Else
+            TurnOffInputs()
+        End If
+    End Sub
+
+    Private Sub PublishClickedButton(buttonClicked As ButtonClicked)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
+        End If
     End Sub
 
     Protected Overridable Sub GridValidator()
@@ -536,7 +575,7 @@ Public Class CFormEntryNew
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        RunButtonRoutine(ButtonClicked.Print)
+        PublishClickedButton(ButtonClicked.Print)
     End Sub
 
     Private Sub BtnTranslate_Click(sender As Object, e As EventArgs) Handles btnTranslate.Click
@@ -549,18 +588,24 @@ Public Class CFormEntryNew
     End Sub
 
     Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
-        RunButtonRoutine(ButtonClicked.Undo)
+        PublishClickedButton(ButtonClicked.Undo)
+        If EditMode Or AddMode Then
+            TurnOnInputs()
+        Else
+            TurnOffInputs()
+        End If
     End Sub
 
     Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
-        RunButtonRoutine(ButtonClicked.Filter)
+        PublishClickedButton(ButtonClicked.Filter)
     End Sub
 
     Private Sub CFormEntry_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
+        PublishClickedButton(ButtonClicked.Quit)
         If CancelClose Then
             e.Cancel = True
         Else
-            CancelClose = False
+            e.Cancel = False
         End If
     End Sub
 
@@ -573,7 +618,12 @@ Public Class CFormEntryNew
             If btnSave.Enabled Then
                 e.SuppressKeyPress = True
                 e.Handled = True
-                PresenterObj.GoSaveRecord()
+                PublishClickedButton(ButtonClicked.Save)
+                If EditMode Or AddMode Then
+                    TurnOnInputs()
+                Else
+                    TurnOffInputs()
+                End If
             Else
                 Beep()
             End If
@@ -599,17 +649,18 @@ Public Class CFormEntryNew
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             CreateDataSources()
             CreateMainFieldsDictionary()
-            'Inputs(False)
+            PublishClickedButton(ButtonClicked.Last)
+            Inputs(False)
 
-            Try
-                If Not SingleData Then
-                    RecordCount = PresenterObj.GetRecordCount()
-                    PresenterObj.RecordPositionNumber = RecordCount
-                End If
-            Catch ex As Exception
-                MessageBox.Show(ex.Message + Name)
-                Debugger.Break()
-            End Try
+            'Try
+            '    If Not SingleData Then
+            '        RecordCount = PresenterObj.GetRecordCount()
+            '        PresenterObj.RecordPositionNumber = RecordCount
+            '    End If
+            'Catch ex As Exception
+            '    MessageBox.Show(ex.Message + Name)
+            '    Debugger.Break()
+            'End Try
             ' add bizObject rules to controls
             Dim rules = PresenterObj.GetBizObjectRules()
             For Each rule In rules
@@ -643,7 +694,7 @@ Public Class CFormEntryNew
                 tssnavigator1.Visible = False
                 btnOf.Visible = False
             End If
-            UpdateButtonDisplays(False, False)
+            UpdateNavigationButtonDisplay(False, False)
         End If
     End Sub
 
@@ -678,22 +729,15 @@ Public Class CFormEntryNew
     End Sub
 
     Private Sub CloseForm()
-
-        If PresenterObj.OkToMove() Then
-            CancelClose = False
-            'Close()
-            If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
-                TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
-            End If
-            GC.Collect()
-            GC.WaitForPendingFinalizers()
-            If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
-                SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
-            End If
-            Dispose()
-        Else
-            CancelClose = True
+        If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
+            TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
         End If
+        GC.Collect()
+        GC.WaitForPendingFinalizers()
+        If (Environment.OSVersion.Platform = PlatformID.Win32NT) Then
+            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1)
+        End If
+        Dispose()
     End Sub
 
     Private Sub CopyToolStripButton_Click(sender As Object, e As EventArgs) Handles CopyToolStripButton.Click
@@ -743,15 +787,6 @@ Public Class CFormEntryNew
 
     Private Sub PasteToolStripButton_Click(sender As Object, e As EventArgs) Handles PasteToolStripButton.Click
         PasteText()
-    End Sub
-
-    Private Sub RunButtonRoutine(ByVal clickedButton As ButtonClicked)
-        If _debugSwitch = 1 Then
-            Debugger.Break()
-        End If
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New SelectedButton(clickedButton))
-        End If
     End Sub
 
     Private Sub SetAllControlsDynamicProperties()
@@ -886,13 +921,5 @@ Public Class CFormEntryNew
     End Function
 
     Public Property HideNavigatorButtons As Boolean
-
-    Public Overridable Sub ActiveToolStripButton_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
-
-    End Sub
-
-    'Private Sub CFormEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-    '    Ea =
-    'End Sub
 
 End Class

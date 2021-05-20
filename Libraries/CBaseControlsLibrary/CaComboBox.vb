@@ -531,13 +531,15 @@ Public Class CaComboBox
                 End If
                 i += 1
             Next
-        End If
-        If Not found Then
-            SelectedIndex = -1
-            returnValue = Nothing
-            If value IsNot Nothing Then
-                Text = value
+            If Not found Then
+                SelectedIndex = -1
+                returnValue = Nothing
+                If value IsNot Nothing Then
+                    Text = value
+                End If
             End If
+        Else
+            SelectedIndex = -1
         End If
     End Sub
 
