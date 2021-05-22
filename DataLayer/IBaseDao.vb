@@ -15,7 +15,7 @@ Public Interface IBaseDao
 
     Function DeleteRecord(idNo As Int32, tableName As String) As Int32
 
-    Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchPlace As Char = "A", Optional filter As String = Nothing) As Integer
+    'Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchPlace As Char = "A", Optional filter As String = Nothing) As Integer
 
     Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer
 

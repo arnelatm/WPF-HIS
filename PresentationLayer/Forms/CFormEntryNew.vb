@@ -30,6 +30,7 @@ Public Class CFormEntryNew
     Private _editMode As Boolean = False
     Private _recordCount As Int32 = 0
     Private _recordPositionNumber As Int32 = 0
+    Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
     Public Ea As EventAggregator
 
     Public Sub New()
@@ -91,7 +92,6 @@ Public Class CFormEntryNew
 
     Public Property QuitOnSave As Boolean Implements IViewDataEntry.QuitOnSave
 
-
     Public Sub CheckDataChanges()
     End Sub
 
@@ -120,7 +120,7 @@ Public Class CFormEntryNew
     End Property
 
     Public Sub FindFieldNew(findableControl As IFindableControl)
-        PresenterObj.FindFieldNew(findableControl)
+        Ea.PublishEvent(New FindFieldRequested(findableControl))
     End Sub
 
     Public Function GetMainFieldsDictionary()
@@ -157,13 +157,13 @@ Public Class CFormEntryNew
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Public Sub ShowWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
-        If ShowWaitForm.CancellationPending Then
-            e.Cancel = True
-            Return
-        End If
-        e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
-    End Sub
+    'Public Sub ShowWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+    '    If ShowWaitForm.CancellationPending Then
+    '        e.Cancel = True
+    '        Return
+    '    End If
+    '    e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+    'End Sub
 
     Protected Sub TurnOffInputs()
         Inputs(False)
@@ -184,161 +184,54 @@ Public Class CFormEntryNew
     Protected Overridable Sub InputsTurnedOff()
     End Sub
 
-    Public Function ValidateNumericValues()
-        Dim validationsPassed As Boolean
-        validationsPassed = True
-        Dim allControls As New List(Of Control)
-        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-            If TypeOf cCtrl Is IEntryControl Then
-                If TypeOf cCtrl Is CTextBox Then
-                    Dim thisControl As CTextBox = cCtrl
-                    If thisControl.ValueIsNumeric Then
-                        If Not ValidateNumber(cCtrl) Then
-                            validationsPassed = False
-                            Exit For
-                        End If
-                    End If
-                End If
-            End If
-        Next
-        Return validationsPassed
-    End Function
+    'Public Overridable Function ValidateView()
+    '    Ea.PublishEvent(New )
+    '    Dim validationsPassed As Boolean
+    '    validationsPassed = True
+    '    Dim allControls As New List(Of Control)
+    '    Dim originalValue As String
+    '    For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+    '        If TypeOf cCtrl Is IEntryControl Then
 
-    Public Overridable Function ValidateView()
-        Dim validationsPassed As Boolean
-        validationsPassed = True
-        Dim allControls As New List(Of Control)
-        Dim originalValue As String
-        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-            If TypeOf cCtrl Is IEntryControl Then
+    '            If TypeOf cCtrl Is CTextBoxIdNo Then
+    '                ' no validations for this type of control. These are Identity Columns and are filled automatically
+    '                ' by the Data Server.
+    '            ElseIf TypeOf cCtrl Is CTextBox AndAlso GetPropertyValue(cCtrl, "ComputedValue") Then
+    '                ' ignore this also computed values don't need to be validated for empty values
+    '            ElseIf TypeOf cCtrl Is CTextBoxArabic Then
+    '                Dim thisControl As CTextBoxArabic
+    '                thisControl = cCtrl
+    '                If thisControl.EnglishControl Is Nothing Then
+    '                    MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{thisControl.Name}> not set.")
+    '                End If
+    '                originalValue = PresenterObj.GetOriginalValue(thisControl.EnglishControl)
+    '                Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
+    '                If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
+    '                    thisControl.Text = englishText
+    '                End If
+    '            ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
+    '                ' check for duplicate values
+    '                Dim thisControl As CTextBox = cCtrl
+    '                If thisControl.ValueIsNumeric Then
+    '                    If Not ValidateNumber(cCtrl) Then
+    '                        validationsPassed = False
+    '                    End If
+    '                End If
+    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
+    '                    validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+    '                End If
+    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
+    '                    If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
+    '                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+    '                    End If
+    '                End If
+    '            End If
 
-                If TypeOf cCtrl Is CTextBoxIdNo Then
-                    ' no validations for this type of control. These are Identity Columns and are filled automatically
-                    ' by the Data Server.
-                ElseIf TypeOf cCtrl Is CTextBox AndAlso GetPropertyValue(cCtrl, "ComputedValue") Then
-                    ' ignore this also computed values don't need to be validated for empty values
-                ElseIf TypeOf cCtrl Is CTextBoxArabic Then
-                    Dim thisControl As CTextBoxArabic
-                    thisControl = cCtrl
-                    If thisControl.EnglishControl Is Nothing Then
-                        MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{thisControl.Name}> not set.")
-                    End If
-                    originalValue = PresenterObj.GetOriginalValue(thisControl.EnglishControl)
-                    Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
-                    If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
-                        thisControl.Text = englishText
-                    End If
-                ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
-                    ' check for duplicate values
-                    Dim thisControl As CTextBox = cCtrl
-                    If thisControl.ValueIsNumeric Then
-                        If Not ValidateNumber(cCtrl) Then
-                            validationsPassed = False
-                        End If
-                    End If
-                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
-                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
-                    End If
-                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
-                        If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
-                            validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
-                        End If
-                    End If
-                End If
-
-            End If
-        Next
-        PresenterObj.AutoValidationsPassed = validationsPassed
-        Return validationsPassed
-    End Function
-
-    Private Function ValueIsUnique(cCtrl As Control, validationsPassed As Boolean) As Boolean
-        Dim originalValue As String
-
-        Dim fldName As String = cCtrl.Name.Substring(3)
-        Dim fieldDescription As String
-        If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-            fieldDescription = fldName
-        Else
-            Dim cTextCtrl As CTextBox
-            cTextCtrl = cCtrl
-            fieldDescription = GetPropertyValue(cTextCtrl.LinkedLabel, "Text")
-        End If
-        Dim recordIsNotUnique = False
-        If PresenterObj.AddMode Then
-            If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
-                recordIsNotUnique = True
-            End If
-        Else
-            originalValue = PresenterObj.GetOriginalValue(cCtrl)
-            ' if value did not change no need to check for duplicate values.
-            If cCtrl.Text <> originalValue Then
-                If PresenterObj.IsRecordNotUnique(cCtrl, fldName) Then
-                    recordIsNotUnique = True
-                End If
-            End If
-        End If
-        If recordIsNotUnique Then
-            Messaging.ShowParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldName", cCtrl.Text, "fieldDescription", fieldDescription})
-            validationsPassed = False
-            Return validationsPassed
-        End If
-        Return validationsPassed
-    End Function
-
-    Public Function ValidateNumber(ByRef obj As Object)
-        Dim objName = Strings.Mid(obj.Name, 4)
-        Dim targetValue = obj.Text
-        Dim y As PropertyInfo = [GetType]().GetProperty(objName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase)
-        If y IsNot Nothing Then
-            Dim x As Type = y.PropertyType
-            Dim u As Type = Nullable.GetUnderlyingType(x)
-            If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
-                Return True
-            Else
-                Dim num As Double
-                Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
-                If Not isNumeric Then
-                    MessageBox.Show($"The entered value for " & obj.Name & $"<" & obj.Text & $"> must be a number (numeric operations not allowed)!")
-                    Return False
-                End If
-                Dim nMinValue As Double
-                Dim nMaxValue As Double
-                Dim typeCode As TypeCode = Type.GetTypeCode(x)
-                Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
-                If u Is Nothing Then
-                    nMinValue = GlobalFunctions.GetMinMaxValue(typeCode, nMaxValue)
-                Else
-                    typeCode = Type.GetTypeCode(u)
-                    nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
-                End If
-                If num < nMinValue OrElse num > nMaxValue Then
-                    MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & " to " & nMaxValue.ToString())
-                    Return False
-                End If
-                Dim isInteger As Boolean = False
-                If u Is Nothing Then
-                    If NumTypeIsInteger(typeCode) Then
-                        isInteger = True
-                    End If
-                Else
-                    If NumTypeIsInteger(underlyingTypeCode) Then
-                        isInteger = True
-                    End If
-                End If
-                If isInteger Then
-                    If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
-                        MessageBox.Show($"The entered value for " & obj.Name & $" must be a whole number (Integer)!")
-                        Return False
-                    End If
-                End If
-                Return True
-            End If
-        Else
-            Return True
-        End If
-
-    End Function
+    '        End If
+    '    Next
+    '    PresenterObj.AutoValidationsPassed = validationsPassed
+    '    Return validationsPassed
+    'End Function
 
     Protected Overridable Function ChangesMade()
         Return PresenterObj.ChangesMade()
@@ -381,54 +274,55 @@ Public Class CFormEntryNew
             btnFind.Visible = False
             HideNavigatorButtons = True
         Else
+            If AddMode Or EditMode Then
+                btnFirst.Enabled = False
+                btnPrev.Enabled = False
+                btnNext.Enabled = False
+                btnLast.Enabled = False
+                btnEdit.Enabled = False
+                btnAdd.Enabled = False
+                btnDelete.Enabled = False
+                btnPrint.Enabled = False
+                btnFind.Enabled = False
+                btnQuit.Enabled = False
+                btnSave.Enabled = True
+                btnUndo.Enabled = True
+            Else
+                btnFirst.Enabled = True
+                btnPrev.Enabled = True
+                btnNext.Enabled = True
+                btnLast.Enabled = True
+                btnEdit.Enabled = True
+                btnAdd.Enabled = True
+                btnDelete.Enabled = True
+                btnPrint.Enabled = True
+                btnFind.Enabled = True
+                btnQuit.Enabled = True
+                btnSave.Enabled = False
+                btnUndo.Enabled = False
+            End If
             If RecordCount = 0 Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False
                 btnNext.Enabled = False
                 btnLast.Enabled = False
                 btnEdit.Enabled = False
+                btnAdd.Enabled = True
                 btnDelete.Enabled = False
-                btnUndo.Enabled = False
-                btnSave.Enabled = False
                 btnFind.Enabled = False
                 btnPrint.Enabled = False
-                If Not AddMode Then
-                    btnUndo.Enabled = False
-                    btnSave.Enabled = False
-                Else
-                    btnSave.Enabled = True
-                    btnUndo.Enabled = True
-                End If
-            Else
-                If RecordPositionNumber = 1 Then
-                    btnFirst.Enabled = False
-                    btnPrev.Enabled = False
-                Else
-                    btnFirst.Enabled = True
-                    btnPrev.Enabled = True
-                End If
-                If RecordPositionNumber >= RecordCount Then
-                    btnLast.Enabled = False
+                btnUndo.Enabled = False
+                btnSave.Enabled = False
+            ElseIf RecordPositionNumber = 1 Then
+                btnFirst.Enabled = False
+                btnPrev.Enabled = False
+                If RecordCount = 1 Then
                     btnNext.Enabled = False
-                Else
-                    btnLast.Enabled = True
-                    btnNext.Enabled = True
+                    btnLast.Enabled = False
                 End If
-                If editing OrElse adding Then
-                    btnEdit.Enabled = False
-                    btnAdd.Enabled = False
-                    btnDelete.Enabled = False
-                    btnUndo.Enabled = True
-                    btnSave.Enabled = True
-                    btnPrint.Enabled = False
-                Else
-                    btnEdit.Enabled = True
-                    btnDelete.Enabled = True
-                    btnAdd.Enabled = True
-                    btnUndo.Enabled = False
-                    btnSave.Enabled = False
-                    btnPrint.Enabled = True
-                End If
+            ElseIf RecordPositionNumber = RecordCount Then
+                btnNext.Enabled = False
+                btnLast.Enabled = False
             End If
         End If
     End Sub
@@ -539,6 +433,12 @@ Public Class CFormEntryNew
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim adding As Boolean
+        If AddMode Then
+            adding = True
+        Else
+            adding = False
+        End If
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
@@ -550,14 +450,24 @@ Public Class CFormEntryNew
                 GridValidator()
             End If
         Next
-        If ValidateNumericValues() Then
-            PublishClickedButton(ButtonClicked.Save)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New SaveDataRequested(Me))
         End If
         If EditMode Or AddMode Then
             TurnOnInputs()
         Else
             TurnOffInputs()
             UpdateNavigationButtonDisplay(False, False)
+            If adding Then
+                If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
+                "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                    AddMode = True
+                    PublishClickedButton(ButtonClicked.Add)
+                    Inputs(True)
+                    UpdateNavigationButtonDisplay(False, True)
+                End If
+            End If
         End If
         If QuitOnSave Then
             Close()
@@ -565,6 +475,7 @@ Public Class CFormEntryNew
     End Sub
 
     Private Sub PublishClickedButton(buttonClicked As ButtonClicked)
+
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
         End If
@@ -634,7 +545,7 @@ Public Class CFormEntryNew
             If btnSave.Enabled Then
                 e.SuppressKeyPress = True
                 e.Handled = True
-                PresenterObj.GoEditRecord()
+                PublishClickedButton(ButtonClicked.Edit)
             Else
                 Beep()
             End If
@@ -921,5 +832,26 @@ Public Class CFormEntryNew
     End Function
 
     Public Property HideNavigatorButtons As Boolean
+    Public Property IgnoreTextBoxNumParserMessage As Boolean
+    Public Property DataErrorsFound As Boolean
+
+    Protected Function TextBoxNumParser(Of T As Structure)(ByRef control As CTextBox) As T
+        Dim retValue As T
+        Try
+            retValue = Parser(Of T).Parser(control.Text)
+            Text = retValue.ToString()
+        Catch ex As Exception
+            If Not IgnoreTextBoxNumParserMessage Then
+                If control.LinkedLabel IsNot Nothing Then
+                    Messaging.ShowParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", control.LinkedLabel.Text})
+                Else
+                    Messaging.ShowParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", control.Name})
+                End If
+            End If
+            retValue = Parser(Of T).Parser("0")
+            DataErrorsFound = True
+        End Try
+        Return retValue
+    End Function
 
 End Class

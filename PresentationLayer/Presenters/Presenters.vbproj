@@ -129,6 +129,14 @@
       <Project>{8bf1be35-27dc-4b2f-b7db-a2cf182bbc7c}</Project>
       <Name>AatmInterfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">
+      <Project>{58f5ec33-2974-4823-ab62-1d4e5b3ef152}</Project>
+      <Name>BaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
+      <Project>{f991561a-78f8-487c-a873-e6436b41d801}</Project>
+      <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\EnumLocalization\EnumLocalization.vbproj">
       <Project>{EFEC4547-2F73-4EAB-8ADC-AFAF596F8288}</Project>
       <Name>EnumLocalization</Name>

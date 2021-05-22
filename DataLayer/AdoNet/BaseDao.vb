@@ -63,34 +63,34 @@ Namespace AdoNet
             Return _db.Delete(sql)
         End Function
 
-        Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchPlace As Char = "A", Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
-            Dim retVal As Integer
-            Dim sql As String =
-                        " SELECT IdNo FROM [" & tableName & "] " &
-                        " Where "
-            If Not (filter Is Nothing OrElse filter = "") Then
-                sql = sql & filter.Trim() & " and "
-            End If
-            If searchString Is Nothing OrElse searchString = "" Then
-                sql = sql & " (" & fieldName & " Is Null or " & fieldName & " = '') "
-            Else
-                If searchPlace = "A" Then
-                    searchString = "%" & searchString.Trim() & "%"
-                    sql = sql & fieldName & " Like @SearchString "
-                ElseIf searchPlace = "S" Then
-                    searchString = searchString.Trim() & "%"
-                    sql = sql & fieldName & " Like @SearchString "
-                ElseIf searchPlace = "E" Then
-                    searchString = searchString.Trim()
-                    sql = sql & fieldName & " = @SearchString "
-                End If
-            End If
-            Dim params() As Object = {"@SearchString", searchString}
-            _lastFindQuery = sql
-            _lastFindParms = params
-            retVal = _db.Scalar(sql & " order by IdNo ", params)
-            Return retVal
-        End Function
+        'Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchPlace As Char = "A", Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
+        '    Dim retVal As Integer
+        '    Dim sql As String =
+        '                " SELECT IdNo FROM [" & tableName & "] " &
+        '                " Where "
+        '    If Not (filter Is Nothing OrElse filter = "") Then
+        '        sql = sql & filter.Trim() & " and "
+        '    End If
+        '    If searchString Is Nothing OrElse searchString = "" Then
+        '        sql = sql & " (" & fieldName & " Is Null or " & fieldName & " = '') "
+        '    Else
+        '        If searchPlace = "A" Then
+        '            searchString = "%" & searchString.Trim() & "%"
+        '            sql = sql & fieldName & " Like @SearchString "
+        '        ElseIf searchPlace = "S" Then
+        '            searchString = searchString.Trim() & "%"
+        '            sql = sql & fieldName & " Like @SearchString "
+        '        ElseIf searchPlace = "E" Then
+        '            searchString = searchString.Trim()
+        '            sql = sql & fieldName & " = @SearchString "
+        '        End If
+        '    End If
+        '    Dim params() As Object = {"@SearchString", searchString}
+        '    _lastFindQuery = sql
+        '    _lastFindParms = params
+        '    retVal = _db.Scalar(sql & " order by IdNo ", params)
+        '    Return retVal
+        'End Function
 
         Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindFieldNew
             Dim retVal As Integer
