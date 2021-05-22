@@ -97,6 +97,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("RptForTheQuarter", "{reportName} for the {quarterName} Quarter of {year}", "")
         Messaging.AddMessage("RptForTheSemester", "{reportName} for the {semesterName} Semester of {year}", "")
         Messaging.AddMessage("RptForTheYear", "{reportName} for the Year Ending {year}", "")
+        Messaging.AddMessage("MsgInvalidNumericValue", "The entered value '{text}' in field [{controlName}] is not a number.", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

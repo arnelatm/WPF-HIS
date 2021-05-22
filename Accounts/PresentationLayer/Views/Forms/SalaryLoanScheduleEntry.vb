@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -9,6 +10,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class SalaryLoanScheduleEntry
         Implements ISalaryLoanScheduleView
 
+        Private ReadOnly _nfi As NumberFormatInfo
+
         'Private ReadOnly _ea As New EventAggregator
 
         Public Sub New()
@@ -18,6 +21,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             MainTableName = "SalaryLoanSchedule"
             SortOrderKey = "SalaryLoanScheduleName"
+            _nfi = GlobalVariables.DefaultNumberFormatInfo
             'Ea = _ea
             PresenterObj = New SalaryLoanSchedulePresenter(Me)
 
@@ -25,11 +29,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Amount As Decimal Implements ISalaryLoanScheduleView.Amount
             Get
-                If SalaryLoanScheduleView.txtAmount.Text <> "" Then
-                    Return Convert.ToDouble(SalaryLoanScheduleView.txtAmount.Text)
-                Else
-                    Return 0
-                End If
+                Return TextBoxNumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount)
+                'Return Convert.ToDecimal(NumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount.Text))
             End Get
             Set
                 SalaryLoanScheduleView.txtAmount.Text = Value

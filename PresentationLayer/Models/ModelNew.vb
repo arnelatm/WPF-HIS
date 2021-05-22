@@ -48,9 +48,9 @@ Public Class ModelNew
         Return DataService.DelUpdateTvp(dtTable, groupKey)
     End Function
 
-    Public Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer Implements IModelNew.FindField
-        Return Service.FindField(tableName, fieldName, searchString, searchPlace, filter)
-    End Function
+    'Public Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer Implements IModelNew.FindField
+    '    Return Service.FindField(tableName, fieldName, searchString, searchPlace, filter)
+    'End Function
 
     Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer Implements IModelNew.FindFieldNew
         Return Service.FindFieldNew(tableName, findableControl, sortOrderKey, filter)

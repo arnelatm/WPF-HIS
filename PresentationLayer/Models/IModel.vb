@@ -18,7 +18,7 @@ Public Interface IModel
 
     Function FieldExistInTable(tableName As String, fieldName As String) As Boolean
 
-    Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer
+    'Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer
 
     Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer
 

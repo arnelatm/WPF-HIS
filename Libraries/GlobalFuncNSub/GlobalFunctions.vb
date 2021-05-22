@@ -599,6 +599,8 @@ Public Module GlobalFunctions
                         numString = Strings.Left(numString, numString.IndexOf(".", StringComparison.Ordinal))
                         Return Parser(Of T).Parser(numString)
                     End If
+                ElseIf typeCode = TypeCode.Decimal Then
+                    Return Parser(Of T).Parser(0)
                 End If
             Else
                 If NumTypeIsInteger(underlyingTypeCode) Then
@@ -975,6 +977,14 @@ Public Module GlobalFunctions
     Public Function NumTypeIsInteger(ByVal typeCodeVal As TypeCode) As Boolean
         If typeCodeVal = TypeCode.Byte OrElse typeCodeVal = TypeCode.Int16 OrElse typeCodeVal = TypeCode.Int32 OrElse typeCodeVal = TypeCode.Int64 _
             OrElse typeCodeVal = TypeCode.UInt16 OrElse typeCodeVal = TypeCode.UInt32 OrElse typeCodeVal = TypeCode.UInt64 Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    '''</summary>
+    Public Function NumTypeIsDecimal(ByVal typeCodeVal As TypeCode) As Boolean
+        If typeCodeVal = TypeCode.Decimal Then
             Return True
         End If
         Return False
