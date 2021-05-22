@@ -263,7 +263,7 @@ Namespace PresentationLayer.Presenters
             }
             Dim reportTitle As String
             reportTitle = MessagingLibrary.Messaging.TranslateCaption("Account Reconciliation")
-            Dim cForm As New ReportFormNew("Account Reconciliation Report.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber", Convert.ToDateTime(View.ReconciliationDate), "EndDate", Convert.ToInt16(View.AccountIdNo), "AccountIdNo")
+            Dim cForm As New ReportFormNew("Account Reconciliation Report.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber")
             cForm.Show()
         End Sub
 
