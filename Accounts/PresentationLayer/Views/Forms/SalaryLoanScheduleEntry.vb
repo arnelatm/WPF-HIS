@@ -15,16 +15,12 @@ Namespace PresentationLayer.Views.Forms
         'Private ReadOnly _ea As New EventAggregator
 
         Public Sub New()
-
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             MainTableName = "SalaryLoanSchedule"
             SortOrderKey = "SalaryLoanScheduleName"
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            'Ea = _ea
-            PresenterObj = New SalaryLoanSchedulePresenter(Me)
-
         End Sub
 
         Public Property Amount As Decimal Implements ISalaryLoanScheduleView.Amount

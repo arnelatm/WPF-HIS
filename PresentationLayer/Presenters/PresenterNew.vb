@@ -27,12 +27,15 @@ Imports KellermanSoftware.CompareNetObjects
 Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Implements ISubscriber(Of ViewButtonClicked),
                ISubscriber(Of FindFieldRequested),
+               ISubscriber(Of EntryFormLoaded),
                ISubscriber(Of SaveDataRequested),
                ISubscriber(Of ValidateViewRequested)
 
     Public ChildPresenters As New List(Of Object)
     Public ChildModels As New List(Of Object)
     Public IdFieldName As String = "IdNo"
+    Public MyErrorProvider As New ErrorProviderExtended
+
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
     Protected CompareDifferences As String
@@ -123,6 +126,24 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Public Event TextDisplayChanged()
 
     Public Event UndoEdits(addingRec As Boolean)
+
+    Protected ReadOnly Property MenuFormName As String
+        Get
+            Return CallByName(View, "MenuFormName", CallType.Get)
+        End Get
+    End Property
+
+    Protected ReadOnly Property ViewName As String
+        Get
+            Return CallByName(View, "Name", CallType.Get)
+        End Get
+    End Property
+
+    Protected ReadOnly Property MainFieldsDictionary As Dictionary(Of String, Object)
+        Get
+            Return CallByName(View, "MainFieldsDictionary", CallType.Get)
+        End Get
+    End Property
 
     Protected Property AddMode As Boolean
         Get
@@ -660,9 +681,9 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End Try
     End Function
 
-    Public Function GetTableProperties() As List(Of TblColPropModel)
-        Return ModelTblColProp.GetMainTableColumnProperties(TableName)
-    End Function
+    'Public Function GetTableProperties() As List(Of TblColPropModel)
+    '    Return ModelTblColProp.GetMainTableColumnProperties(TableName)
+    'End Function
 
     Public Function GetTreeNodeText()
         Dim cModel As New TM
@@ -1554,6 +1575,17 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End Select
     End Sub
 
+
+    Public Sub OnEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
+        Dim rules = GetBizObjectRules()
+        For Each rule In rules
+            Dim control As Control = Nothing
+            MainFieldsDictionary.TryGetValue(rule.Property, control)
+            MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
+        Next
+        SetAllControlsDynamicProperties(eventType.ViewControl)
+    End Sub
+
     Public Sub OnEventHandler(ByRef eventType As SaveDataRequested) Implements ISubscriber(Of SaveDataRequested).OnEventHandler
         ' Validate record first for errors before saving
         Dim validated As Boolean = False
@@ -1626,6 +1658,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         'AutoValidationsPassed = validationsPassed
         eventType.ValidView = validationsPassed
     End Sub
+
 
     Public Function ValidateNumber(ByRef viewControl As Control, ByRef obj As CTextBox)
         Dim objName = Strings.Mid(obj.Name, 4)
@@ -1740,6 +1773,274 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         Return validationsPassed
     End Function
 
+    Private Sub SetAllControlsDynamicProperties(viewControl As Control)
+        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+            Dim allControls As New List(Of Control)
+            Dim resources = New ComponentResourceManager(Me.GetType())
+            For Each cCtrl As Control In FindControlRecursive(allControls, viewControl)
+                SetControlDynamicProperties(cCtrl)
+                SetObjectSecurityNew(cCtrl)
+            Next
+        End If
+    End Sub
+
+    Private Sub SetControlDynamicProperties(ByRef cCtrl As Control)
+        Dim myView = cCtrl.FindForm()
+        If TypeOf cCtrl Is IEntryControl Then
+            ' get FieldName from control : by convention when using this system
+            ' all DataBoundControls TextBox & Combobox that will hold field variables are named by convention in this format
+            ' textboxes  = txt<FieldName>
+            ' combobox   = cbo<FieldName>
+            ' datetimePicker = dtp<FieldName>
+            ' so to get the field name just get the characters from the control starting at the 4th character onwards
+            Dim fldName As String
+            fldName = cCtrl.Name.Substring(3) ' get control name starting from the 3rd character (0 based)
+
+            For Each row In TableProperties
+                If fldName.ToLower() = row.FldName.ToLower Then
+                    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CMaskedTextBox OrElse TypeOf cCtrl Is CTextBoxArabic Then
+                        If row.FldType.ToLower = "int" OrElse
+                            row.FldType.ToLower = "smallint" OrElse
+                            row.FldType.ToLower = "money" OrElse
+                            row.FldType.ToLower = "decimal" OrElse
+                            row.FldType.ToLower = "bigint" OrElse
+                            row.FldType.ToLower = "tinyint" OrElse
+                            row.FldType.ToLower = "smallmoney" OrElse
+                            row.FldType.ToLower = "real" OrElse
+                            row.FldType.ToLower = "float" OrElse
+                            row.FldType.ToLower = "numeric" Then
+                            Select Case row.FldType.ToLower
+                                Case "int"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -2147483648D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 2147483648D)
+                                Case "tinyint"
+                                    SetPropertyValue(cCtrl, "MinimumValue", 0D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 255D)
+                                Case "smallint"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -32768D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 32767D)
+                                Case "bigint"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807D)
+                            End Select
+                            SetPropertyValue(cCtrl, "ValueIsNumeric", True)
+                        Else
+                            SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(row.MaxLength / 2), row.MaxLength))
+                            SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
+                            If (Not row.IsIdentity) And (Not row.IsNullable) Then
+                                If GetPropertyValue(cCtrl, "IgnoreNullCheck") Then
+                                    If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
+                                        MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
+                                    Else
+                                        MyErrorProvider.Controls.AddMandatory(cCtrl, GetPropertyValue(cCtrl, "LinkedLabel"))
+                                    End If
+                                End If
+                            End If
+                        End If
+                        Exit For
+                    ElseIf TypeOf cCtrl Is CaComboBox OrElse TypeOf cCtrl Is CComboBox Then
+                        '
+                        '
+                    ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
+                        TypeOf cCtrl Is CDTPHijriDate OrElse TypeOf cCtrl Is tdpGregorian OrElse
+                        TypeOf cCtrl Is CDtpGregorianDate Then
+                        SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
+                        If Not row.IsNullable Then
+                            'Add this controls to the Mandatory fields error provider.
+                            MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
+                        End If
+                        Exit For
+                    End If
+                    If TypeOf cCtrl Is IFindableControl And Not (TypeOf cCtrl Is CForm) Then
+                        Dim thisControl As IFindableControl = cCtrl
+                        If thisControl.FindEnabled Then
+                            thisControl = cCtrl
+                            thisControl.FindDataType = GetObjectDataType(GetFieldType(ViewName.Substring(3)))
+                        End If
+                    End If
+                End If
+            Next
+        End If
+    End Sub
+
+    Public Sub SetObjectSecurityNew(ByRef cCtrl As Control)
+        Dim objectSecurityKey As String
+        If TypeOf cCtrl Is MenuStrip Then
+            ' check for MenuStrip first because MenuStrip is also a ToolStrip
+            Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
+            Dim menuStrip As MenuStrip = cCtrl
+            ApplyObjectSecurity(menuStrip, subMenuName)
+            SetMenuStripItemsNew(menuStrip.Items, subMenuName)
+        ElseIf TypeOf cCtrl Is ToolStrip Then
+            Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
+            Dim toolStrip As ToolStrip = cCtrl
+            ApplyObjectSecurity(toolStrip, subMenuName)
+            SetToolStripItemsNew(toolStrip.Items, subMenuName)
+        Else
+            objectSecurityKey = GetControlSecurityKey(cCtrl)
+            If objectSecurityKey Is Nothing OrElse objectSecurityKey = "" Then
+                'cCtrl.Visible = True
+                'cCtrl.Enabled = True
+            Else
+                Dim controlSecurityValues As ArrayList
+                Dim isEditable As Boolean
+                Dim isVisible As Boolean
+                controlSecurityValues = GetControlSecurityValues(objectSecurityKey)
+                If controlSecurityValues.Count > 0 Then
+                    isVisible = controlSecurityValues(0)
+                    isEditable = controlSecurityValues(1)
+                Else
+                    isVisible = False
+                    isEditable = False
+                End If
+                SetControlVisibility(cCtrl, isVisible)
+                SetControlEditability(cCtrl, isEditable)
+            End If
+        End If
+    End Sub
+
+    Private Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
+        ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
+        If Not controlVisible Then
+            SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
+        End If
+    End Sub
+
+    Private Sub SetControlEditability(ByRef cCtrl As Control, ByRef editable As Boolean)
+        ' if Editable is False, make the control readonly property so that it can't be edited
+        If Not editable Then
+            SetPropertyValue(cCtrl, "DisplayOnly", True)
+        End If
+    End Sub
+
+    Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
+        Dim controlSecurityObjectIdNo As Int32
+        controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey)
+        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+    End Function
+
+    Private Function GetControlSecurityKey(ByRef cCtrl As Control)
+        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+            If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
+                Return GetPropertyValue(cCtrl, "SecurityKey")
+            End If
+        End If
+        Return ""
+    End Function
+
+    Private Sub ApplyObjectSecurity(cControl As Object, controlSecurityKey As String)
+        If GlobalVariables.UserName = $"Arnel" Then
+            ' make all editable and visible regardless of security values
+            cControl.Enabled = True
+            cControl.Visible = True
+        Else
+            Dim securityIdNo As Integer
+            Dim controlSecurityValues As ArrayList
+            Dim isSelectable As Boolean
+            Dim isVisible As Boolean
+
+            securityIdNo = GetControlSecurityIdNo(controlSecurityKey)
+            If securityIdNo <> 0 Then
+                controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo)
+                If controlSecurityValues.Count > 0 Then
+                    ' Visible property stored in first element of the array
+                    isVisible = controlSecurityValues(0)
+                    isSelectable = controlSecurityValues(1)
+                    ' Editable property stored in second element of the array
+                Else
+                    isVisible = False
+                    isSelectable = False
+                End If
+            Else
+                isVisible = True
+                isSelectable = True
+            End If
+            cControl.Enabled = isSelectable
+            If cControl.Visible Then
+                cControl.Visible = isVisible
+            End If
+        End If
+    End Sub
+
+    Private Sub SetMenuStripItemsNew(dropDownItems As ToolStripItemCollection, pParentMenuName As String)
+        For Each dropDownItem As Object In dropDownItems
+            Dim subMenu = TryCast(dropDownItem, ToolStripMenuItem)
+            If subMenu IsNot Nothing Then
+                Dim parentMenuName = pParentMenuName
+                ApplyMenuSecurityNew(dropDownItem, parentMenuName)
+                If subMenu.HasDropDown Then
+                    Dim childSubMenuName As String = pParentMenuName + " > " + Mid(dropDownItem.Name, 18)
+                    SetMenuStripItemsNew(subMenu.DropDownItems, childSubMenuName)
+                End If
+            End If
+        Next
+    End Sub
+
+
+    Private Sub ApplyMenuSecurityNew(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String)
+        Dim toolStripMenuItem As ToolStripMenuItem = obj
+        Dim controlSecurityKey = subMenuName + " > " + Mid(toolStripMenuItem.Name, 18)
+        If GlobalVariables.IsUserLoggedIn Then
+            ApplyObjectSecurity(toolStripMenuItem, controlSecurityKey)
+        Else
+            toolStripMenuItem.Enabled = False
+            toolStripMenuItem.Visible = True
+        End If
+    End Sub
+
+    Private Sub SetToolStripItemsNew(dropDownItems As ToolStripItemCollection, subMenuName As String)
+        For Each obj As Object In dropDownItems
+            ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+            If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
+                Dim toolStripButton As ToolStripButton = obj
+                Dim controlSecurityKey = Mid(toolStripButton.Name, 16).TrimEnd()
+                If GlobalVariables.IsUserLoggedIn Then
+                    Dim controlSecurityValues As ArrayList
+                    Dim isSelectable As Boolean
+                    Dim isVisible As Boolean
+                    Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey)
+                    If securityIdNo <> 0 Then
+                        If GlobalVariables.SecurityGroupIdNo <> 0 Then
+                            controlSecurityValues = GetUserSecurity(securityIdNo, GlobalVariables.SecurityGroupIdNo)
+                            If controlSecurityValues.Count > 0 Then
+                                ' Visible property stored in first element of the array
+                                isVisible = controlSecurityValues(0)
+                                ' Editable property stored in third element of the array
+                                isSelectable = controlSecurityValues(1)
+                            Else
+                                isVisible = False
+                                isSelectable = False
+                            End If
+                        Else
+                            isVisible = True
+                            isSelectable = False
+                        End If
+                    Else
+                        isVisible = True
+                        isSelectable = True
+                    End If
+                    toolStripButton.Enabled = isSelectable
+                    toolStripButton.Visible = isVisible
+                Else
+                    If obj.Name = "ToolStripButtonLogin" Then
+                        toolStripButton.Enabled = True
+                        toolStripButton.Visible = True
+                    Else
+                        toolStripButton.Enabled = False
+                        toolStripButton.Visible = True
+                    End If
+                End If
+            Else
+                obj.Enabled = True
+                obj.Visible = True
+            End If
+        Next
+    End Sub
+
+    Public Function GetFieldType(fieldName As String) As Type
+        Return CallByName(Me, fieldName, CallType.Get).GetType
+    End Function
+
 End Class
 
 Public Class ViewButtonClicked
@@ -1803,6 +2104,18 @@ Public Class IdNoEventArgs
     End Property
 
 End Class
+
+Public Class EntryFormLoaded
+
+    Public Sub New(ByVal viewControl As Control)
+        Me.ViewControl = viewControl
+    End Sub
+
+    Public Property ViewControl As Control
+
+
+End Class
+
 
 'Public Enum ButtonClicked
 '    [Add]
