@@ -44,6 +44,8 @@ Namespace PresentationLayer.Views.Forms
 
             AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
             AddHandler Application.ThreadException, AddressOf ThreadExceptionHandler
+            Dim mySettings = AppSettings.Load()
+            GlobalVariables.TranslationMode = mySettings.TranslationInitializer
             _logStatus = LoginStatus.LoggedOut
             InitializeComponent()
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
@@ -841,7 +843,6 @@ Namespace PresentationLayer.Views.Forms
             End If
             ' Add any initialization after the InitializeComponent() call.
             Dim mySettings = AppSettings.Load()
-            GlobalVariables.TranslationMode = mySettings.TranslationInitializer
 
             '_appSettings = PropertyGrid.SelectedObject
             ' Attribute for the user-scope settings.

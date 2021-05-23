@@ -209,7 +209,7 @@ Namespace PresentationLayer.Presenters
                 progressDisplayForm.Show()
                 progressDisplayForm.DisplayProgress(nCount)
                 Dim caption = MessagingLibrary.Messaging.TranslateCaption("Please wait getting account transactions ...")
-                progressDisplayForm.InitializeDisplay(nCount,caption)
+                progressDisplayForm.InitializeDisplay(nCount, caption)
                 For Each acctReconItem In allAcctReconItems
                     Dim found As Boolean = False
                     For Each item As AccountReconciliationItemModel In oldReconciliationItems
@@ -262,9 +262,14 @@ Namespace PresentationLayer.Presenters
                 New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia)
             }
             Dim reportTitle As String
+            Dim cForm
             reportTitle = MessagingLibrary.Messaging.TranslateCaption("Account Reconciliation")
-            Dim cForm As New ReportFormNew("Account Reconciliation Report.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber")
-            cForm.Show()
+            If Not GlobalVariables.RightToLeftLayout Then
+                cForm = New ReportFormNew("Account Reconciliation Report.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber")
+            Else
+                cForm = New ReportFormNew("Account Reconciliation Report Arabic.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber")
+            End If
+            CForm.Show()
         End Sub
 
         Public Sub ProcessReconciliationRequest(eEvent As ReconciliationClearEvent)
@@ -360,7 +365,7 @@ Namespace PresentationLayer.Presenters
                 Dim nCount = View.AccountReconciliationItems.Count()
                 progressDisplayForm.DisplayProgress(nCount)
                 Dim caption = MessagingLibrary.Messaging.TranslateCaption("Please wait computing reconciliation totals...")
-                progressDisplayForm.InitializeDisplay(nCount,caption)
+                progressDisplayForm.InitializeDisplay(nCount, caption)
                 Dim counter As Int32 = 1
                 For Each accountReconciliationItem In View.AccountReconciliationItems
                     If accountReconciliationItem.Cleared Then

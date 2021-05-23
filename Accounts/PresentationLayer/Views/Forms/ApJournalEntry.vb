@@ -348,7 +348,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
+        Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs)
             MyPresenter.UpdateDueDate()
             MyPresenter.UpdateEarlySettlementValues()
             If SupplierIdNo IsNot Nothing Then
@@ -356,7 +356,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboSupplierIdNo.Validating
+        Private Sub CboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs)
             If PaymentOrDiscountMade() Then
                 ' revert to previous value
                 cboSupplierIdNo.RevertValue()

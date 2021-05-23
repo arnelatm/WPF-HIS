@@ -233,9 +233,9 @@ Public Class CFormEntryNew
     '    Return validationsPassed
     'End Function
 
-    Protected Overridable Function ChangesMade()
-        Return PresenterObj.ChangesMade()
-    End Function
+    'Protected Overridable Function ChangesMade()
+    '    Return PresenterObj.ChangesMade()
+    'End Function
 
     Protected Overridable Sub CreateDataSources()
         '
@@ -576,14 +576,11 @@ Public Class CFormEntryNew
             '    Debugger.Break()
             'End Try
             ' add bizObject rules to controls
-            Dim rules = PresenterObj.GetBizObjectRules()
-            For Each rule In rules
-                Dim control As Control = Nothing
-                MainFieldsDictionary.TryGetValue(rule.Property, control)
-                MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
-            Next
 
-            SetAllControlsDynamicProperties()
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New EntryFormLoaded(Me))
+            End If
+
             If GlobalVariables.RightToLeftLayout Then
                 btnArabic.Visible = False
                 btnOriginal.Visible = True
@@ -662,20 +659,8 @@ Public Class CFormEntryNew
         CutText()
     End Sub
 
-    Private Function GetControlSecurityKey(ByRef cCtrl As Control)
-        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-            If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
-                Return GetPropertyValue(cCtrl, "SecurityKey")
-            End If
-        End If
-        Return ""
-    End Function
 
-    Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
-        Dim controlSecurityObjectIdNo As Int32
-        controlSecurityObjectIdNo = PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
-        Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
-    End Function
+
 
     Public Sub Inputs(onOff As Boolean)
         Dim allCtrl As New List(Of Control)
@@ -703,103 +688,98 @@ Public Class CFormEntryNew
         PasteText()
     End Sub
 
-    Private Sub SetAllControlsDynamicProperties()
-        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-            Dim allControls As New List(Of Control)
-            Dim resources = New ComponentResourceManager(Me.GetType())
-            TableProperties = PresenterObj.TableProperties
-            For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-                SetControlDynamicProperties(cCtrl)
-                SetObjectSecurityNew(cCtrl)
-            Next
-        End If
-    End Sub
+    'Private Sub SetAllControlsDynamicProperties()
+    '    If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+    '        Dim allControls As New List(Of Control)
+    '        Dim resources = New ComponentResourceManager(Me.GetType())
+    '        TableProperties = PresenterObj.TableProperties
+    '        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+    '            SetControlDynamicProperties(cCtrl)
+    '            SetObjectSecurityNew(cCtrl)
+    '        Next
+    '    End If
+    'End Sub
 
-    Private Sub SetControlDynamicProperties(ByRef cCtrl As Control)
-        Dim myForm = FindForm()
-        If TypeOf cCtrl Is IEntryControl Then
-            ' get FieldName from control : by convention when using this system
-            ' all DataBoundControls TextBox & Combobox that will hold field variables are named by convention in this format
-            ' textboxes  = txt<FieldName>
-            ' combobox   = cbo<FieldName>
-            ' datetimePicker = dtp<FieldName>
-            ' so to get the field name just get the characters from the control starting at the 4th character onwards
-            Dim fldName As String
-            fldName = cCtrl.Name.Substring(3) ' get control name starting from the 3rd character (0 based)
+    'Private Sub SetControlDynamicProperties(ByRef cCtrl As Control)
+    '    Dim myForm = FindForm()
+    '    If TypeOf cCtrl Is IEntryControl Then
+    '        ' get FieldName from control : by convention when using this system
+    '        ' all DataBoundControls TextBox & Combobox that will hold field variables are named by convention in this format
+    '        ' textboxes  = txt<FieldName>
+    '        ' combobox   = cbo<FieldName>
+    '        ' datetimePicker = dtp<FieldName>
+    '        ' so to get the field name just get the characters from the control starting at the 4th character onwards
+    '        Dim fldName As String
+    '        fldName = cCtrl.Name.Substring(3) ' get control name starting from the 3rd character (0 based)
 
-            For Each row In TableProperties
-                If fldName.ToLower() = row.FldName.ToLower Then
-                    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CMaskedTextBox OrElse TypeOf cCtrl Is CTextBoxArabic Then
-                        If row.FldType.ToLower = "int" OrElse
-                            row.FldType.ToLower = "smallint" OrElse
-                            row.FldType.ToLower = "money" OrElse
-                            row.FldType.ToLower = "decimal" OrElse
-                            row.FldType.ToLower = "bigint" OrElse
-                            row.FldType.ToLower = "tinyint" OrElse
-                            row.FldType.ToLower = "smallmoney" OrElse
-                            row.FldType.ToLower = "real" OrElse
-                            row.FldType.ToLower = "float" OrElse
-                            row.FldType.ToLower = "numeric" Then
-                            Select Case row.FldType.ToLower
-                                Case "int"
-                                    SetPropertyValue(cCtrl, "MinimumValue", -2147483648D)
-                                    SetPropertyValue(cCtrl, "MaximumValue", 2147483648D)
-                                Case "tinyint"
-                                    SetPropertyValue(cCtrl, "MinimumValue", 0D)
-                                    SetPropertyValue(cCtrl, "MaximumValue", 255D)
-                                Case "smallint"
-                                    SetPropertyValue(cCtrl, "MinimumValue", -32768D)
-                                    SetPropertyValue(cCtrl, "MaximumValue", 32767D)
-                                Case "bigint"
-                                    SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808D)
-                                    SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807D)
-                            End Select
-                            SetPropertyValue(cCtrl, "ValueIsNumeric", True)
-                        Else
-                            SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(row.MaxLength / 2), row.MaxLength))
-                            SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
-                            If (Not row.IsIdentity) And (Not row.IsNullable) Then
-                                If GetPropertyValue(cCtrl, "IgnoreNullCheck") Then
-                                    If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-                                        MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
-                                    Else
-                                        MyErrorProvider.Controls.AddMandatory(cCtrl, GetPropertyValue(cCtrl, "LinkedLabel"))
-                                    End If
-                                End If
-                            End If
-                        End If
-                        Exit For
-                    ElseIf TypeOf cCtrl Is CaComboBox OrElse TypeOf cCtrl Is CComboBox Then
-                        '
-                        '
-                    ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
-                        TypeOf cCtrl Is CDTPHijriDate OrElse TypeOf cCtrl Is tdpGregorian OrElse
-                        TypeOf cCtrl Is CDtpGregorianDate Then
-                        SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
-                        If Not row.IsNullable Then
-                            'Add this controls to the Mandatory fields error provider.
-                            MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
-                        End If
-                        Exit For
-                    End If
-                    If TypeOf cCtrl Is IFindableControl And Not (TypeOf cCtrl Is CForm) Then
-                        Dim thisControl As IFindableControl = cCtrl
-                        If thisControl.FindEnabled Then
-                            thisControl = cCtrl
-                            thisControl.FindDataType = GetObjectDataType(GetFieldType(Name.Substring(3)))
-                        End If
-                    End If
-                End If
-            Next
-        End If
-    End Sub
+    '        For Each row In TableProperties
+    '            If fldName.ToLower() = row.FldName.ToLower Then
+    '                If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CMaskedTextBox OrElse TypeOf cCtrl Is CTextBoxArabic Then
+    '                    If row.FldType.ToLower = "int" OrElse
+    '                        row.FldType.ToLower = "smallint" OrElse
+    '                        row.FldType.ToLower = "money" OrElse
+    '                        row.FldType.ToLower = "decimal" OrElse
+    '                        row.FldType.ToLower = "bigint" OrElse
+    '                        row.FldType.ToLower = "tinyint" OrElse
+    '                        row.FldType.ToLower = "smallmoney" OrElse
+    '                        row.FldType.ToLower = "real" OrElse
+    '                        row.FldType.ToLower = "float" OrElse
+    '                        row.FldType.ToLower = "numeric" Then
+    '                        Select Case row.FldType.ToLower
+    '                            Case "int"
+    '                                SetPropertyValue(cCtrl, "MinimumValue", -2147483648D)
+    '                                SetPropertyValue(cCtrl, "MaximumValue", 2147483648D)
+    '                            Case "tinyint"
+    '                                SetPropertyValue(cCtrl, "MinimumValue", 0D)
+    '                                SetPropertyValue(cCtrl, "MaximumValue", 255D)
+    '                            Case "smallint"
+    '                                SetPropertyValue(cCtrl, "MinimumValue", -32768D)
+    '                                SetPropertyValue(cCtrl, "MaximumValue", 32767D)
+    '                            Case "bigint"
+    '                                SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808D)
+    '                                SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807D)
+    '                        End Select
+    '                        SetPropertyValue(cCtrl, "ValueIsNumeric", True)
+    '                    Else
+    '                        SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(row.MaxLength / 2), row.MaxLength))
+    '                        SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
+    '                        If (Not row.IsIdentity) And (Not row.IsNullable) Then
+    '                            If GetPropertyValue(cCtrl, "IgnoreNullCheck") Then
+    '                                If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
+    '                                    MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
+    '                                Else
+    '                                    MyErrorProvider.Controls.AddMandatory(cCtrl, GetPropertyValue(cCtrl, "LinkedLabel"))
+    '                                End If
+    '                            End If
+    '                        End If
+    '                    End If
+    '                    Exit For
+    '                ElseIf TypeOf cCtrl Is CaComboBox OrElse TypeOf cCtrl Is CComboBox Then
+    '                    '
+    '                    '
+    '                ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
+    '                    TypeOf cCtrl Is CDTPHijriDate OrElse TypeOf cCtrl Is tdpGregorian OrElse
+    '                    TypeOf cCtrl Is CDtpGregorianDate Then
+    '                    SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
+    '                    If Not row.IsNullable Then
+    '                        'Add this controls to the Mandatory fields error provider.
+    '                        MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
+    '                    End If
+    '                    Exit For
+    '                End If
+    '                If TypeOf cCtrl Is IFindableControl And Not (TypeOf cCtrl Is CForm) Then
+    '                    Dim thisControl As IFindableControl = cCtrl
+    '                    If thisControl.FindEnabled Then
+    '                        thisControl = cCtrl
+    '                        thisControl.FindDataType = GetObjectDataType(GetFieldType(Name.Substring(3)))
+    '                    End If
+    '                End If
+    '            End If
+    '        Next
+    '    End If
+    'End Sub
 
-    Private Sub SetControlEditability(ByRef cCtrl As Control, ByRef editable As Boolean)
-        ' if Editable is False, make the control readonly property so that it can't be edited
-        If Not editable Then
-            SetPropertyValue(cCtrl, "DisplayOnly", True)
-        End If
-    End Sub
+
 
     Private Sub SwitchUiLanguage(originalUi As Boolean)
         If _debugSwitch Then
@@ -827,9 +807,9 @@ Public Class CFormEntryNew
         DemoProp.SetValue(cont, True, Nothing)
     End Sub
 
-    Public Function GetFieldType(fieldName As String) As Type
-        Return CallByName(Me, fieldName, CallType.Get).GetType
-    End Function
+    'Public Function GetFieldType(fieldName As String) As Type
+    '    Return CallByName(Me, fieldName, CallType.Get).GetType
+    'End Function
 
     Public Property HideNavigatorButtons As Boolean
     Public Property IgnoreTextBoxNumParserMessage As Boolean

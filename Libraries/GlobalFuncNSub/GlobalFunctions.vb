@@ -620,15 +620,15 @@ Public Module GlobalFunctions
         End Try
     End Function
 
-    '''<summary>
-    '''Checks two objects if they are the same (no changes)
-    '''</summary>
-    Public Function ChangesMade(ByVal fromObject As Object, ByVal toObject As Object)
-        If ObjectsCompare(fromObject, toObject) Then
-            Return False
-        End If
-        Return True
-    End Function
+    ''''<summary>
+    ''''Checks two objects if they are the same (no changes)
+    ''''</summary>
+    'Public Function ChangesMade(ByVal fromObject As Object, ByVal toObject As Object)
+    '    If ObjectsCompare(fromObject, toObject) Then
+    '        Return False
+    '    End If
+    '    Return True
+    'End Function
 
     '''<summary>
     '''Compares two objects if the same
