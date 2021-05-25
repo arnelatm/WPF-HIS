@@ -51,6 +51,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _targetIdNo As Int32 = 0
     Private _undoMode As Boolean = False
     Private _tableName As String
+    Private _actualTableName As String
 
     Public Sub New(itemView As T)
         If itemView Is Nothing Then
@@ -195,6 +196,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Get
         Set(value As String)
             _tableName = value
+        End Set
+    End Property
+
+    Public Property ActualTableName As String
+        Get
+            Return _actualTableName
+        End Get
+        Set(value As String)
+            _actualTableName = value
         End Set
     End Property
 
@@ -358,7 +368,11 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim retValue As Integer
         Try
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
-                retValue = Model.DeleteRecord(idNo, TableName)
+                If ActualTableName Is Nothing Then
+                    retValue = Model.DeleteRecord(idNo, TableName)
+                Else
+                    retValue = Model.DeleteRecord(idNo, ActualTableName)
+                End If
                 If retValue > 0 Then
                     If Ea IsNot Nothing Then
                         'Ea.PublishEvent(New RecordDeleted(idNo))

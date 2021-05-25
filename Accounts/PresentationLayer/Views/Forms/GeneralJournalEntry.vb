@@ -35,7 +35,6 @@ Namespace PresentationLayer.Views.Forms
                 Text = Messaging.TranslateCaption("Closing Entry")
                 MainTableName = "GeneralJournalClosing_View"
             End If
-
             SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
