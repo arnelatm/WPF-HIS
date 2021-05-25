@@ -263,13 +263,15 @@ Namespace PresentationLayer.Presenters
             }
             Dim reportTitle As String
             Dim cForm
+            Dim previousDate As Date
+            Dim beginningDate As Date
+            Dim endingDate As Date
+            beginningDate = GregorianDateSerial(GregorianYear(View.ReconciliationDate), GregorianMonth(View.ReconciliationDate), 1)
+            previousDate = DateAdd(DateInterval.Day, -1, beginningDate)
+            endingDate = View.ReconciliationDate
             reportTitle = MessagingLibrary.Messaging.TranslateCaption("Account Reconciliation")
-            If Not GlobalVariables.RightToLeftLayout Then
-                cForm = New ReportFormNew("Account Reconciliation Report.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber")
-            Else
-                cForm = New ReportFormNew("Account Reconciliation Report Arabic.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber")
-            End If
-            CForm.Show()
+            cForm = New ReportFormNew("Account Reconciliation Report.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber", View.AccountIdNo, "AccountIdNo", previousDate, "PreviousDate", beginningDate, "BeginningDate", View.ReconciliationDate, "EndingDate")
+            cForm.Show()
         End Sub
 
         Public Sub ProcessReconciliationRequest(eEvent As ReconciliationClearEvent)
