@@ -46,7 +46,6 @@ Public Interface IDaoChild(Of TBiz)
 
 End Interface
 
-
 Public Interface IGetRecordsWithGroupIdNo(Of TBiz)
     ' gets a group of records with specific id no.
 

@@ -3,7 +3,6 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views.Interfaces
 
-
 Public Class SecurityObjectPresenter
     Inherits Presenter(Of ISecurityObjectView, SecurityObjectModel)
 

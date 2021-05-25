@@ -1,10 +1,7 @@
 ﻿Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common.BusinessLayer
 Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views
-Imports AATM.Common.PresentationLayer.Views.Forms
 Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.DataLayer.AdoNet
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 Imports AATM.PresentationLayer.Views.Interfaces

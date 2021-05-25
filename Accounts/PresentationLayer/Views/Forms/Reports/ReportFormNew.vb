@@ -1,7 +1,6 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Views.Forms.Reports
 

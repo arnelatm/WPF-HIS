@@ -1,10 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
-Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 

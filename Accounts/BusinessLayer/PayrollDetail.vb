@@ -1,6 +1,4 @@
-﻿Imports AATM.BusinessLayer.BusinessRules
-
-Namespace BusinessLayer
+﻿Namespace BusinessLayer
 
     Public Class PayrollDetail
         Inherits AATM.BusinessLayer.BusinessObject

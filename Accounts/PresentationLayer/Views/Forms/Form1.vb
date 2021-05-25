@@ -1,6 +1,4 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
-
-Public Class Form1
+﻿Public Class Form1
 
     Public Sub New()
 

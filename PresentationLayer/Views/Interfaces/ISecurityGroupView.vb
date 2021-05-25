@@ -1,6 +1,4 @@
-﻿
-
-Namespace Interfaces
+﻿Namespace Interfaces
 
     Public Interface ISecurityGroupView
         Inherits IView

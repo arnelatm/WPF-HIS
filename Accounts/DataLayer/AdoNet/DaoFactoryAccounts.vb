@@ -1,5 +1,4 @@
-﻿Imports System.Reflection
-Imports AATM.Common.DataLayer.AdoNet
+﻿Imports AATM.Common.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
     ' Data access object factory

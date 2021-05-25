@@ -1575,7 +1575,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End Select
     End Sub
 
-
     Public Sub OnEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
         Dim rules = GetBizObjectRules()
         For Each rule In rules
@@ -1658,7 +1657,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         'AutoValidationsPassed = validationsPassed
         eventType.ValidView = validationsPassed
     End Sub
-
 
     Public Function ValidateNumber(ByRef viewControl As Control, ByRef obj As CTextBox)
         Dim objName = Strings.Mid(obj.Name, 4)
@@ -1976,7 +1974,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         Next
     End Sub
 
-
     Private Sub ApplyMenuSecurityNew(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String)
         Dim toolStripMenuItem As ToolStripMenuItem = obj
         Dim controlSecurityKey = subMenuName + " > " + Mid(toolStripMenuItem.Name, 18)
@@ -2113,9 +2110,7 @@ Public Class EntryFormLoaded
 
     Public Property ViewControl As Control
 
-
 End Class
-
 
 'Public Enum ButtonClicked
 '    [Add]

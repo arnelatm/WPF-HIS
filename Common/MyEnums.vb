@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel
-Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports AATM.Libraries.GlobalFuncNSub
 
 Public Enum YearMonthDaySelection
     <EnumCode("")> NotSpecified

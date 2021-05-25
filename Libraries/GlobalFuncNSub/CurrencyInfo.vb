@@ -1,4 +1,5 @@
 ﻿Public Class CurrencyInfo
+
     Public Enum Currencies
         SaudiArabia = 0
         UAE
@@ -71,7 +72,6 @@
                 PartPrecision = 2
                 IsCurrencyPartNameFeminine = False
                 Exit Select
-
 
             Case Currencies.Tunisia
                 CurrencyID = 3
@@ -238,4 +238,5 @@
     Public Property Arabic1199CurrencyPartName As String
 
 #End Region
+
 End Class

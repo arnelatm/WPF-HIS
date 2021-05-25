@@ -1,5 +1,4 @@
-﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 

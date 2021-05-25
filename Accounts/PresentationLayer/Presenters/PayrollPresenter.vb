@@ -7,7 +7,6 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports CrystalDecisions.Shared.Json
 
 Namespace PresentationLayer.Presenters
 
@@ -323,7 +322,7 @@ Namespace PresentationLayer.Presenters
             Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
             Dim counter As Integer = 0
             progressDisplayForm.Show()
-            progressDisplayForm.InitializeDisplay(numberOfEmployees+1)
+            progressDisplayForm.InitializeDisplay(numberOfEmployees + 1)
             For i = 1 To numberOfEmployees
                 empId = matchedEmployees(i * 3 - 3)
                 dateHired = matchedEmployees(i * 3 - 2)
@@ -359,7 +358,7 @@ Namespace PresentationLayer.Presenters
                     i = i + 1
                 Next
             End If
-            progressDisplayForm.UpdateProgressBar(counter+1)
+            progressDisplayForm.UpdateProgressBar(counter + 1)
             progressDisplayForm.Close()
             Messaging.Show(True, "MsgOvertimeInitializationCompleted")
         End Sub

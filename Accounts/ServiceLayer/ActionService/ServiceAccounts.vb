@@ -1,12 +1,7 @@
-﻿Imports System.Reflection
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer
+﻿Imports AATM.Accounts.DataLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common.ServiceLayer
-Imports AATM.DataLayer
-Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace ServiceLayer.ActionService

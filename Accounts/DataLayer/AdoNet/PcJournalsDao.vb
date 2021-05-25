@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.DataLayer
+﻿Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet

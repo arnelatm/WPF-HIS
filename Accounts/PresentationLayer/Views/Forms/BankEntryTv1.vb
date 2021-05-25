@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #Region "Fields"
+
         Public Property IdNo As Int32 Implements IBankView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIdNo.Text)
@@ -69,6 +70,7 @@ Namespace PresentationLayer.Views.Forms
                 txtNotes.Text = Value
             End Set
         End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -81,8 +83,6 @@ Namespace PresentationLayer.Views.Forms
                 {"Notes", txtNotes}
                 }
         End Sub
-
-
 
     End Class
 

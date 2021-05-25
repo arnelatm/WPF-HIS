@@ -1,8 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.DataLayer
-Imports AATM.DataLayer.AdoNet
-
-Namespace DataLayer.AdoNet
+﻿Namespace DataLayer.AdoNet
     ' Data access object for JournalItem
     ' ** DAO Pattern
 

@@ -1,7 +1,4 @@
-﻿Imports System.Reflection
-Imports AATM.Common.BusinessLayer
-Imports AATM.Common.DataLayer
-Imports AATM.DataLayer
+﻿Imports AATM.Common.DataLayer
 Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer

@@ -15,7 +15,6 @@ Public Class CDgvTextColumn
         CellTemplate = New CDgvTextCell
     End Sub
 
-    
     Public Overrides Function Clone() As Object
         Dim copy As CDgvTextColumn = TryCast(MyBase.Clone(), CDgvTextColumn)
         copy.DisplayOnly = DisplayOnly
@@ -43,7 +42,6 @@ Public Class CDgvTextColumn
             End If
         End Set
     End Property
-
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get

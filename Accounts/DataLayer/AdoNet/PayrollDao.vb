@@ -1,10 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
-Imports AATM.Libraries
-Imports AutoMapper
 
 Namespace DataLayer.AdoNet
     ' Data access object for Payroll

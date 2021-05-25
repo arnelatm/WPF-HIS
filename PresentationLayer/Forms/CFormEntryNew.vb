@@ -1,15 +1,14 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Globalization
-Imports System.Reflection
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
-Imports AATM.Libraries.AatmInterfaces
 Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntryNew
@@ -659,9 +658,6 @@ Public Class CFormEntryNew
         CutText()
     End Sub
 
-
-
-
     Public Sub Inputs(onOff As Boolean)
         Dim allCtrl As New List(Of Control)
         Dim ctrl As Control
@@ -778,8 +774,6 @@ Public Class CFormEntryNew
     '        Next
     '    End If
     'End Sub
-
-
 
     Private Sub SwitchUiLanguage(originalUi As Boolean)
         If _debugSwitch Then

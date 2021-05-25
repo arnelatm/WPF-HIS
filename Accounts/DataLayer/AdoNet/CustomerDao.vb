@@ -2,7 +2,6 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
-Imports CrystalDecisions.ReportSource
 
 Namespace DataLayer.AdoNet
     ' Data access object for Customer

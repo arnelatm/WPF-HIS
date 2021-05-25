@@ -1,7 +1,4 @@
-﻿Imports System.Drawing
-Imports System.Reflection.Emit
-Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports System.Windows.Forms
 Imports AATM.Libraries.MessagingLibrary
 
 Public Class DisplayProgressForm
@@ -24,7 +21,7 @@ Public Class DisplayProgressForm
             _description = caption
         Else
             _description = description
-        End If       
+        End If
         ProgressBar.Maximum = nMaxValue
         ProgressBar.Value = 0
         Me.Text = description

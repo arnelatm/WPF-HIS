@@ -1,6 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.

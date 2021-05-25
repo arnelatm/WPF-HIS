@@ -2,7 +2,6 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -20,7 +19,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' GlobalVariables.EventAggregator.SubscribeEvent(Me)
             ' Add any initialization after the InitializeComponent() call.
-            
+
         End Sub
 
         Public Sub DisplayTree(ByRef treeViewData As Object)
@@ -79,7 +78,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs)           
+        Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs)
             If Not _bypassSelectedChange Then
                 Select Case (e.Action)
                     Case TreeViewAction.ByKeyboard

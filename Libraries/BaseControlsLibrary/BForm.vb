@@ -1,6 +1,5 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
 
 Public Class BForm

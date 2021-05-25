@@ -1,6 +1,4 @@
-﻿Imports System
-
-Module EventHelpers
+﻿Module EventHelpers
 
     Public Sub [RaiseEvent](ByVal objectRaisingEvent As Object, ByVal eventHandlerRaised As EventHandler(Of AccessTypeEventArgs), ByVal accessTypeEventArgs As AccessTypeEventArgs)
         eventHandlerRaised(objectRaisingEvent, accessTypeEventArgs)

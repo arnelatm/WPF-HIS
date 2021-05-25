@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
+﻿Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
@@ -27,7 +26,7 @@ Namespace DataLayer.AdoNet
             Dim params() As Object
             params = {"@AccountIdNo", accountIdNo, "@EndDate", Convert.ToDateTime(endDate)}
             Dim retVal = _db.Scalar(sql, params)
-            If retVal Is Nothing or retVal.Equals(DBNull.Value) then
+            If retVal Is Nothing Or retVal.Equals(DBNull.Value) Then
                 Return 0
             Else
                 Return retVal

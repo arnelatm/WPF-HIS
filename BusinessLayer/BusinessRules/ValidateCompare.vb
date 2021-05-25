@@ -1,7 +1,4 @@
 ﻿' compares values of two properties given a data type and operator  (>, ==, etc)
-Imports System.Linq.Expressions
-Imports System.Runtime.CompilerServices
-Imports System.Text.RegularExpressions
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace BusinessRules

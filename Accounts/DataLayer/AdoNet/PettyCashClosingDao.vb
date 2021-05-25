@@ -1,7 +1,6 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
-Imports AATM.Libraries.GlobalFuncNSub
 Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet

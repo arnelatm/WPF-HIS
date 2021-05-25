@@ -1,5 +1,5 @@
 ﻿Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer
+
 Public Class CustomerEntryBound
 
     Public Sub New()
@@ -20,7 +20,6 @@ Public Class CustomerEntryBound
         'Ea = PresenterObj.Ea
         'Ea.SubscribeEvent(Me)
 
-
     End Sub
 
     Private Sub CustomerEntryBound_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -29,7 +28,5 @@ Public Class CustomerEntryBound
         cust = dao.GetAll()
         Me.CustomerBindingSource.DataSource = cust
     End Sub
-
-
 
 End Class

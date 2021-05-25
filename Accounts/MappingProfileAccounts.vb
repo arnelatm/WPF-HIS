@@ -2,10 +2,6 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.BusinessLayer.BusinessObjects
-Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views
 Imports AutoMapper
 
 Public Class MappingProfileAccounts

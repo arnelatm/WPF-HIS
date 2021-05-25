@@ -1,6 +1,7 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.BusinessLayer
+
 Namespace BusinessLayer
 
     Public Class ArOpenInvoice

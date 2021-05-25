@@ -1,5 +1,4 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Presenters
@@ -28,7 +27,6 @@ Namespace PresentationLayer.Presenters
         Public Function GetCustomerOpenInvoices(ByVal customerIdNo As Int32) As List(Of CsrOiItemModel)
             Return ModelOfPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
         End Function
-
 
     End Class
 

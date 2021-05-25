@@ -1,11 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
-Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 
 Public Class LoginEntry
