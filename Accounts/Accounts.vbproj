@@ -1362,7 +1362,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-Ispadmin2.config" />
+    <None Include="app-Isp-server.config" />
+    <None Include="app-IspAdmin.config" />
     <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />

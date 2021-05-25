@@ -301,6 +301,32 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            Dim apIdNo As Int32 = _apOpenInvoiceModel.GetField(Of Int32, Int32)(idNo, "ApOpenInvoice", "JournalIdNo", "IdNo")
+            _apOpenInvoiceModel.DeleteRecord(apIdNo, "ApOpenInvoice")
+            If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
+                DtUpdateTable.Clear()
+                _apJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
+        End Sub
+
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim type As Type = View.GetType
+            Dim retVal As Boolean = True
+            If MyBase.IsOkToDeleteRecord() Then
+                Dim apIdNo As Int32 = _apOpenInvoiceModel.GetField(Of Int32, Int32)(View.IdNo, "ApOpenInvoice", "JournalIdNo", "IdNo")
+                Dim apOpenInvoice As ApOpenInvoiceModel = _apOpenInvoiceModel.GetRecordByIdNo(Of ApOpenInvoiceModel)(apIdNo)
+                If apOpenInvoice.PaidAmount <> 0 Or apOpenInvoice.DiscountTaken <> 0 Then
+                    Messaging.Show(True, "MsgPaidDiscountedInvoiceDeletion")
+                    retVal = False
+                End If
+            Else
+                retVal = False
+            End If
+            Return retVal
+        End Function
+
         Public Sub UpdateDueDate()
             If View.SupplierIdNo IsNot Nothing Then
                 Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)

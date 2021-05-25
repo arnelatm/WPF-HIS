@@ -20,6 +20,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             _closingEntry = closingEntry
             ModelOfPresenter = New ModelAccounts("GeneralJournal")
+            ActualTableName = "GeneralJournal"
             If Not view.ClosingJournal Then
                 TableName = "GeneralJournalNormal_View"
             Else
@@ -72,6 +73,14 @@ Namespace PresentationLayer.Presenters
             Dim cForm As New ReportForm("General Journal.Rpt", View.IdNo, "GeneralJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
 
             cForm.Show()
+        End Sub
+
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            ' ReSharper disable once VBUseMethodAny.1
+            If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
+                DtUpdateTable.Clear()
+                _gjJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
