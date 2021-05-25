@@ -66,7 +66,7 @@ Public Class CButton
     'Private _viewable As Boolean
     'Private _selectable As Boolean
 
-    #Region " IButtonControl Implementation "
+#Region " IButtonControl Implementation "
 
     Private m_DialogResult As DialogResult
     Private m_IsDefault As Boolean
@@ -154,7 +154,7 @@ Public Class CButton
     Private Const WM_RBUTTONDOWN As Integer = 516
     Private Const WM_RBUTTONUP As Integer = 517
 
-    <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+    <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
     Private Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
     End Function
 
@@ -418,14 +418,14 @@ Public Class CButton
         End Set
     End Property
 
-    Private _DimFactorClick As Integer = - 25
+    Private _DimFactorClick As Integer = -25
 
     ''' <summary>
     ''' Get or Set how much to dim the color on mouse down. Positive to Lighten and negative to Darken
     ''' </summary>
     <Category("Appearance CButton")>
     <Description("Get or Set how much to dim the color on mouse down. Positive to Lighten and negative to Darken")>
-    <DefaultValue(- 25)>
+    <DefaultValue(-25)>
     Public Property DimFactorClick() As Integer
         Get
             Return _DimFactorClick
@@ -1006,7 +1006,7 @@ Public Class CButton
                                 cb.Positions = ColorFillBlend.iPoint
 
                                 br.FocusScales = FocalPoints.FocusScales
-                                br.CenterPoint = New PointF(Padding.Left + ButtonArea.Width*FocalPoints.CenterPoint.X, Padding.Top + ButtonArea.Height*FocalPoints.CenterPoint.Y)
+                                br.CenterPoint = New PointF(Padding.Left + ButtonArea.Width * FocalPoints.CenterPoint.X, Padding.Top + ButtonArea.Height * FocalPoints.CenterPoint.Y)
                                 br.InterpolationColors = cb
 
                                 e.Graphics.FillPath(br, gp)
@@ -1028,7 +1028,7 @@ Public Class CButton
 
                 If MyBase.Focused AndAlso ShowFocus = eFocus.Dot Then
                     Using focusPen As Pen = New Pen(Brushes.Black, 1) With {.DashStyle = DashStyle.Dot}
-                        e.Graphics.DrawPath(focusPen, GetPath(- 1, - 1))
+                        e.Graphics.DrawPath(focusPen, GetPath(-1, -1))
                     End Using
                 End If
 
@@ -1067,7 +1067,7 @@ Public Class CButton
             If TextShadowShow Then
                 TextArea.Offset(1, 1)
                 e.Graphics.DrawString(Text, Font, New SolidBrush(tsColor), TextArea, GetStringFormat(TextAlign))
-                TextArea.Offset(- 1, - 1)
+                TextArea.Offset(-1, -1)
             End If
             e.Graphics.DrawString(Text, Font, New SolidBrush(tColor), TextArea, GetStringFormat(TextAlign))
 
@@ -1101,19 +1101,19 @@ Public Class CButton
                 gp = GetRoundedRectPath(rect)
 
             Case eShape.TriangleUp
-                Dim pts() As PointF = New PointF() {New PointF(CSng(rect.Width/2), rect.Y), New PointF(rect.Width, rect.Y + rect.Height), New PointF(rect.X, rect.Y + rect.Height)}
+                Dim pts() As PointF = New PointF() {New PointF(CSng(rect.Width / 2), rect.Y), New PointF(rect.Width, rect.Y + rect.Height), New PointF(rect.X, rect.Y + rect.Height)}
                 gp.AddPolygon(pts)
 
             Case eShape.TriangleDown
-                Dim pts() As PointF = New PointF() {New PointF(rect.X, rect.Y), New PointF(CSng(rect.Width/2), rect.Y + rect.Height), New PointF(rect.X + rect.Width, rect.Y)}
+                Dim pts() As PointF = New PointF() {New PointF(rect.X, rect.Y), New PointF(CSng(rect.Width / 2), rect.Y + rect.Height), New PointF(rect.X + rect.Width, rect.Y)}
                 gp.AddPolygon(pts)
 
             Case eShape.TriangleLeft
-                Dim pts() As PointF = New PointF() {New PointF(rect.X, CSng(rect.Y + (rect.Height/2))), New PointF(rect.Width, rect.Y), New PointF(rect.Width, rect.Y + rect.Height)}
+                Dim pts() As PointF = New PointF() {New PointF(rect.X, CSng(rect.Y + (rect.Height / 2))), New PointF(rect.Width, rect.Y), New PointF(rect.Width, rect.Y + rect.Height)}
                 gp.AddPolygon(pts)
 
             Case eShape.TriangleRight
-                Dim pts() As PointF = New PointF() {New PointF(rect.X, rect.Y), New PointF(rect.Width, CSng(rect.Y + (rect.Height/2))), New PointF(rect.X, rect.Y + rect.Height)}
+                Dim pts() As PointF = New PointF() {New PointF(rect.X, rect.Y), New PointF(rect.Width, CSng(rect.Y + (rect.Height / 2))), New PointF(rect.X, rect.Y + rect.Height)}
                 gp.AddPolygon(pts)
 
         End Select
@@ -1190,7 +1190,7 @@ Public Class CButton
 
                 Select Case GetStringFormat(TextAlign).Alignment
                     Case StringAlignment.Center
-                        Imagept.X = ButtonArea.X + ((ButtonArea.Width - TextSize.Width - ImageSizeUse.Width)/2)
+                        Imagept.X = ButtonArea.X + ((ButtonArea.Width - TextSize.Width - ImageSizeUse.Width) / 2)
                         TextArea.X = ButtonArea.X + ImageSizeUse.Width
                     Case StringAlignment.Near
                         Imagept.X = ButtonArea.X + 4
@@ -1210,14 +1210,14 @@ Public Class CButton
 
                 Select Case GetStringFormat(TextAlign).Alignment
                     Case StringAlignment.Center
-                        Imagept.X = ((TextArea.Width - TextSize.Width)/2) + TextSize.Width
-                        TextArea.X = - 4
+                        Imagept.X = ((TextArea.Width - TextSize.Width) / 2) + TextSize.Width
+                        TextArea.X = -4
                     Case StringAlignment.Near
                         Imagept.X = TextSize.Width + 8
                         TextArea.X = 4
                     Case StringAlignment.Far
                         Imagept.X = TextArea.Width - 12
-                        TextArea.X = - 16
+                        TextArea.X = -16
                 End Select
 
         End Select
@@ -1228,7 +1228,7 @@ Public Class CButton
         Dim pt As PointF
         Select Case sf.Alignment
             Case StringAlignment.Center
-                pt.X = CSng((Area.Width - ImageArea.Width)/2)
+                pt.X = CSng((Area.Width - ImageArea.Width) / 2)
             Case StringAlignment.Near
                 pt.X = 2
             Case StringAlignment.Far
@@ -1238,7 +1238,7 @@ Public Class CButton
 
         Select Case sf.LineAlignment
             Case StringAlignment.Center
-                pt.Y = CSng((Area.Height - ImageArea.Height)/2)
+                pt.Y = CSng((Area.Height - ImageArea.Height) / 2)
             Case StringAlignment.Near
                 pt.Y = 2
             Case StringAlignment.Far
@@ -1294,7 +1294,7 @@ Public Class CButton
     ''' </summary>
     ''' <param name="GrayColor">Color object to be grayed</param>
     Public Shared Function GrayTheColor(ByVal GrayColor As Color) As Color
-        Dim gray As Integer = CInt(GrayColor.R*0.3 + GrayColor.G*0.59 + GrayColor.B*0.11)
+        Dim gray As Integer = CInt(GrayColor.R * 0.3 + GrayColor.G * 0.59 + GrayColor.B * 0.11)
         Return Color.FromArgb(GrayColor.A, gray, gray, gray)
     End Function
 
@@ -1348,13 +1348,13 @@ Public Class CButton
 
         Dim ArcRect As RectangleF
         Dim MyPath As New Drawing2D.GraphicsPath()
-        If Corners.All = - 1 Then
+        If Corners.All = -1 Then
             With MyPath
                 ' top left arc
                 If Corners.UpperLeft = 0 Then
                     .AddLine(BaseRect.X, BaseRect.Y, BaseRect.X, BaseRect.Y)
                 Else
-                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.UpperLeft*2, Corners.UpperLeft*2))
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.UpperLeft * 2, Corners.UpperLeft * 2))
                     .AddArc(ArcRect, 180, 90)
                 End If
 
@@ -1362,8 +1362,8 @@ Public Class CButton
                 If Corners.UpperRight = 0 Then
                     .AddLine(BaseRect.X + (Corners.UpperLeft), BaseRect.Y, BaseRect.Right - (Corners.UpperRight), BaseRect.Top)
                 Else
-                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.UpperRight*2, Corners.UpperRight*2))
-                    ArcRect.X = BaseRect.Right - (Corners.UpperRight*2)
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.UpperRight * 2, Corners.UpperRight * 2))
+                    ArcRect.X = BaseRect.Right - (Corners.UpperRight * 2)
                     .AddArc(ArcRect, 270, 90)
                 End If
 
@@ -1371,9 +1371,9 @@ Public Class CButton
                 If Corners.LowerRight = 0 Then
                     .AddLine(BaseRect.Right, BaseRect.Top + (Corners.UpperRight), BaseRect.Right, BaseRect.Bottom - (Corners.LowerRight))
                 Else
-                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.LowerRight*2, Corners.LowerRight*2))
-                    ArcRect.Y = BaseRect.Bottom - (Corners.LowerRight*2)
-                    ArcRect.X = BaseRect.Right - (Corners.LowerRight*2)
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.LowerRight * 2, Corners.LowerRight * 2))
+                    ArcRect.Y = BaseRect.Bottom - (Corners.LowerRight * 2)
+                    ArcRect.X = BaseRect.Right - (Corners.LowerRight * 2)
                     .AddArc(ArcRect, 0, 90)
                 End If
 
@@ -1381,8 +1381,8 @@ Public Class CButton
                 If Corners.LowerLeft = 0 Then
                     .AddLine(BaseRect.Right - (Corners.LowerRight), BaseRect.Bottom, BaseRect.X - (Corners.LowerLeft), BaseRect.Bottom)
                 Else
-                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.LowerLeft*2, Corners.LowerLeft*2))
-                    ArcRect.Y = BaseRect.Bottom - (Corners.LowerLeft*2)
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.LowerLeft * 2, Corners.LowerLeft * 2))
+                    ArcRect.Y = BaseRect.Bottom - (Corners.LowerLeft * 2)
                     .AddArc(ArcRect, 90, 90)
                 End If
 
@@ -1394,16 +1394,16 @@ Public Class CButton
                     .AddRectangle(BaseRect)
                 Else
 
-                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.All*2, Corners.All*2))
+                    ArcRect = New RectangleF(BaseRect.Location, New SizeF(Corners.All * 2, Corners.All * 2))
                     ' top left arc
                     .AddArc(ArcRect, 180, 90)
 
                     ' top right arc
-                    ArcRect.X = BaseRect.Right - (Corners.All*2)
+                    ArcRect.X = BaseRect.Right - (Corners.All * 2)
                     .AddArc(ArcRect, 270, 90)
 
                     ' bottom right arc
-                    ArcRect.Y = BaseRect.Bottom - (Corners.All*2)
+                    ArcRect.Y = BaseRect.Bottom - (Corners.All * 2)
                     .AddArc(ArcRect, 0, 90)
 
                     ' bottom left arc
@@ -1572,6 +1572,7 @@ Public Class CButton
     Protected Overrides Sub Finalize()
         MyBase.Finalize()
     End Sub
+
 End Class
 
 #End Region    'CButton Class

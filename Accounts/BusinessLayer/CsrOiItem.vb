@@ -7,6 +7,7 @@ Namespace BusinessLayer
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Property AccountIdNo As Int16?
+
         Public Property Amount As Decimal
         Public Property ArOpenInvoiceIdNo As Int32
         Public Property Balance As Decimal

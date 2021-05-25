@@ -43,7 +43,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cmdSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdSave.Click
-            dim retVal As Int16 = TranslateNote(True)
+            Dim retVal As Int16 = TranslateNote(True)
 
         End Sub
 
@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
             TranslateNote(False)
         End Sub
 
-        Private Function  TranslateNote(wholeNote As Boolean)
+        Private Function TranslateNote(wholeNote As Boolean)
             Dim retVal As Integer = 0
             If txtOriginalNote.Text IsNot Nothing AndAlso txtTranslation.Text IsNot Nothing AndAlso
                txtOriginalNote.Text <> "" AndAlso txtTranslation.Text <> "" Then

@@ -1,5 +1,4 @@
-﻿Imports AATM.Libraries
-Imports AATM.PresentationLayer.Views
+﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -8,6 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         'Property Accounts As List(Of ClassesLibrary.LookupData)
         Property AccountReconciliationItems As List(Of AccountReconciliationItemView)
+
         Property AccountIdNo As Int16?
         Property Balance As Decimal
         Property DateCreated As DateTime?

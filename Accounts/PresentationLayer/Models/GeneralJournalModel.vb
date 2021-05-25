@@ -1,6 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -10,6 +8,7 @@ Namespace PresentationLayer.Models
 
         'Public Property Amount As Decimal
         Public Property Cancelled As Boolean
+
         Public Property ClosingJournal As Boolean
         Public Property DateCreated As DateTime?
         Public Property Errors As List(Of String)

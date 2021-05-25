@@ -5,11 +5,11 @@ Imports System.Reflection
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
-Imports AATM.Libraries.AatmInterfaces
 
 Public Class CFormEntry
     Implements ISubscriber(Of RecordPositionChanged),

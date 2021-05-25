@@ -15,7 +15,7 @@ Public Class Validation
         End Get
     End Property
 
-    'The Item Property provides access To the validation errors given a Property name. 
+    'The Item Property provides access To the validation errors given a Property name.
     Public ReadOnly Property Item(ByVal propertyName As String) As String
         Get
             If ValidationList.ContainsKey(propertyName) Then
@@ -26,10 +26,11 @@ Public Class Validation
         End Get
     End Property
 
-    'The ValidationList Property retains a Private Dictionary Of validation errors. 
-    'The key Of the dictionary Is the Property name And the value Is the Error text. 
+    'The ValidationList Property retains a Private Dictionary Of validation errors.
+    'The key Of the dictionary Is the Property name And the value Is the Error text.
     'For example, the “LastName” Property may have a validation Error such As “Last Name is required.”
     Private _ValidationList As Dictionary(Of String, String)
+
     Private Property ValidationList() As Dictionary(Of String, String)
         Get
             Return _ValidationList
@@ -50,8 +51,8 @@ Public Class Validation
         Return sb.ToString
     End Function
 
-    'When a validation error Is added to the list, it Is added for a particular property. 
-    'If the Property already has a validation Error, additional validation errors are appended To it, separated by semi-colons (;). 
+    'When a validation error Is added to the list, it Is added for a particular property.
+    'If the Property already has a validation Error, additional validation errors are appended To it, separated by semi-colons (;).
     'An AddValidationError method Handles this logic.
     Private Sub AddValidationError(ByVal propertyName As String,
          ByVal message As String)
@@ -70,11 +71,11 @@ Public Class Validation
         End If
     End Sub
 
-    'A ValidateClear method clears any existing validation errors for a property. 
-    'This method should be called before performing any New validation On the Property. 
-    'For example, the user leaves the Last Name field empty. 
-    'The validation Is performed And a validation Error entry Is created In the ValidationList. 
-    'Then the user enters a value into the last name field. 
+    'A ValidateClear method clears any existing validation errors for a property.
+    'This method should be called before performing any New validation On the Property.
+    'For example, the user leaves the Last Name field empty.
+    'The validation Is performed And a validation Error entry Is created In the ValidationList.
+    'Then the user enters a value into the last name field.
     'The original validation Error must be cleared before revalidating the value.
     'The ValidateClear method uses the Remove method of the Dictionary to remove any Dictionary entry for the property.
     Public Sub ValidateClear(ByVal propertyName As String)
@@ -112,9 +113,7 @@ Public Class Validation
         End If
     End Function
 
-
 End Class
-
 
 'Some additional suggestions
 

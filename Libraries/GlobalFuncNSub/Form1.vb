@@ -1,5 +1,6 @@
 ﻿Public Class Form1
     Dim currencies As New List(Of CurrencyInfo)()
+
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.Syria))
         currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.UAE))
@@ -28,4 +29,5 @@
             txtArabicWord.Text = [String].Empty
         End Try
     End Sub
+
 End Class

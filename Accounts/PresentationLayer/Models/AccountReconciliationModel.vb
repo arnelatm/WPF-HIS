@@ -1,7 +1,4 @@
-﻿Imports AATM.Libraries
-Imports AATM.PresentationLayer.Models
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -12,6 +9,7 @@ Namespace PresentationLayer.Models
 
         'Public Property Accounts As List(Of ClassesLibrary.LookupData)
         Public Property AccountReconciliationItems As List(Of AccountReconciliationItemModel)
+
         Public Property Errors As List(Of String)
         Public Property AccountIdNo As Int16?
         Public Property Balance As Decimal

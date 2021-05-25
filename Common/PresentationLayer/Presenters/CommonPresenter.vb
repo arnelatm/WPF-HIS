@@ -3,7 +3,6 @@ Imports System.Globalization
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 

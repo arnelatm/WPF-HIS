@@ -1,6 +1,4 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
-
-Namespace PresentationLayer.Views.Forms.Reports
+﻿Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ReportFormTest
 

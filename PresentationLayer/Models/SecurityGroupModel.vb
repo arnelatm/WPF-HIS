@@ -1,7 +1,4 @@
-﻿
-
-
-Public Class SecurityGroupModel
+﻿Public Class SecurityGroupModel
     Inherits Model
 
     Public Property IdNo As Int16

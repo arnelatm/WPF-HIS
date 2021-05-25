@@ -1,7 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Libraries
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     Public Class PcJournalModel
 

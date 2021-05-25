@@ -1,6 +1,6 @@
-﻿Imports System.Xml.Serialization
+﻿Imports System.ComponentModel
 Imports System.IO
-Imports System.ComponentModel
+Imports System.Xml.Serialization
 
 Public Class SetSettings
 

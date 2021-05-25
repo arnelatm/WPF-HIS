@@ -1,6 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Windows.Forms
 Imports AATM.Accounts.BusinessLayer.Commands
 
 Namespace Commands

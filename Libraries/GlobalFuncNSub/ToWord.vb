@@ -28,6 +28,7 @@
             _mNumber = value
         End Set
     End Property
+
     Private _mNumber As [Decimal]
 
     ''' <summary>
@@ -46,6 +47,7 @@
             _mEnglishPrefixText = value
         End Set
     End Property
+
     Private _mEnglishPrefixText As [String]
 
     ''' <summary>
@@ -59,6 +61,7 @@
             _mEnglishSuffixText = value
         End Set
     End Property
+
     Private _mEnglishSuffixText As [String]
 
     ''' <summary>
@@ -72,6 +75,7 @@
             _mArabicPrefixText = value
         End Set
     End Property
+
     Private _mArabicPrefixText As [String]
 
     ''' <summary>
@@ -85,7 +89,9 @@
             _mArabicSuffixText = value
         End Set
     End Property
+
     Private _mArabicSuffixText As [String]
+
 #End Region
 
 #Region "General"
@@ -145,7 +151,7 @@
             Dim decimalPartLength As Integer = decimalPart.Length
 
             For i = 0 To Currency.PartPrecision - decimalPartLength
-                decimalPart += "0" 'Fix for 1 number after decimal ( 10.5 , 1442.2 , 375.4 ) 
+                decimalPart += "0" 'Fix for 1 number after decimal ( 10.5 , 1442.2 , 375.4 )
             Next
 
             result = [String].Format("{0}.{1}", decimalPart.Substring(0, Currency.PartPrecision), decimalPart.Substring(Currency.PartPrecision, decimalPart.Length - Currency.PartPrecision))
@@ -174,6 +180,7 @@
             _decimalValue = Convert.ToInt64(GetDecimalValue(splits(1)))
         End If
     End Sub
+
 #End Region
 
 #Region "English Number To Word"
@@ -194,6 +201,7 @@
      "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Unvigintillion", "Duovigintillion",
      "10^72", "10^75", "10^78", "10^81", "10^84", "10^87",
      "Vigintinonillion", "10^93", "10^96", "Duotrigintillion", "Trestrigintillion"}
+
 #End Region
 
     ''' <summary>
@@ -317,6 +325,7 @@
 
     Private Shared _arabicPluralGroups As String() = New String() {"", "آلاف", "ملايين", "مليارات", "تريليونات", "كوادريليونات",
      "كوينتليونات", "سكستيليونات"}
+
 #End Region
 
     ''' <summary>
@@ -527,5 +536,7 @@
 
         Return formattedNumber
     End Function
+
 #End Region
+
 End Class

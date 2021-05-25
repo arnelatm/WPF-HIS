@@ -1,5 +1,4 @@
-﻿Imports AATM.BusinessLayer
-Imports AATM.BusinessLayer.BusinessRules
+﻿Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 

@@ -6,6 +6,7 @@ Namespace PresentationLayer.Views.Forms
 
     Public Class DesignationEntryTv
         Implements IDesignationView
+
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
@@ -22,6 +23,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #Region "Fields"
+
         Public Property IdNo As Int16 Implements IDesignationView.IdNo
             Get
                 Return NumParser(Of Int16)(TxtIdNo.Text)
@@ -66,6 +68,7 @@ Namespace PresentationLayer.Views.Forms
                 txtNotes.Text = Value
             End Set
         End Property
+
 #End Region
 
     End Class

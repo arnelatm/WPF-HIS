@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.BusinessLayer.BusinessRules
+﻿Imports AATM.BusinessLayer.BusinessRules
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace BusinessLayer

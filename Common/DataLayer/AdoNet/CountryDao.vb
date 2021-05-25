@@ -72,8 +72,8 @@ Namespace DataLayer.AdoNet
             .Flag128 = Extensions.AsString(reader("Flag128")),
             .Flag32 = Extensions.AsString(reader("Flag32")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .ISOA3 = Extensions.AsString(reader("ISOA3")),
-            .ISON = Extensions.AsString(reader("ISON")),
+            .IsoA3 = Extensions.AsString(reader("ISOA3")),
+            .IsoN = Extensions.AsString(reader("ISON")),
             .Nationality = Extensions.AsString(reader("Nationality")),
             .NationalityAra = Extensions.AsString(reader("NationalityAra"))
             }
@@ -87,8 +87,8 @@ Namespace DataLayer.AdoNet
                                     "@Flag128", country.Flag128,
                                     "@Flag32", country.Flag32,
                                     "@IdNo", country.IdNo,
-                                    "@IsoA3", country.ISOA3,
-                                    "@IsoN", country.ISON,
+                                    "@IsoA3", country.IsoA3,
+                                    "@IsoN", country.IsoN,
                                     "@Nationality", country.Nationality,
                                     "@NationalityAra", country.NationalityAra}
         End Function

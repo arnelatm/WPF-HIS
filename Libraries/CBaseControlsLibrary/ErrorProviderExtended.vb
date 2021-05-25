@@ -4,7 +4,6 @@
 
 Imports System.ComponentModel
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class ErrorProviderExtended
     Inherits ErrorProvider

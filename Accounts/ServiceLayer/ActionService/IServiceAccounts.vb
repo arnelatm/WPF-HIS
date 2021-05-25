@@ -24,6 +24,7 @@ Namespace ServiceLayer.ActionService
         Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer
 
         Function GetOpenPettyCash()
+
         Function GetAccountBalance(endDate As Date, accountIdNo As Short) As Decimal
 
         'Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)

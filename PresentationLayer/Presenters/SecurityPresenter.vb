@@ -1,7 +1,6 @@
 ﻿Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views.Interfaces
 
-
 Public Class SecurityPresenter
     Inherits Presenter(Of ISecurityGroupView, SecurityGroupModel)
 

@@ -1,11 +1,8 @@
-﻿Imports System.ComponentModel
-Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
-Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events

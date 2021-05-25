@@ -1,12 +1,7 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AutoMapper
 
 Namespace PresentationLayer.Presenters
 

@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Configuration
 Imports System.Data.OleDb
 Imports System.Data.SqlClient
 Imports AATM.Libraries.GlobalFuncNSub
@@ -623,7 +622,7 @@ Public Class Dac
     End Function
 
     Public Function ExecuteSp2Param(storedProcedureName As String, parameter1 As String, parameter2 As String) As Integer
-        Dim retVal As Integer 
+        Dim retVal As Integer
         Cs = BuildConnString()
         Dim conn As SqlConnection = New SqlConnection(Cs)
         Dim sqlCommand As New SqlCommand(storedProcedureName, conn)

@@ -125,6 +125,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "AatmInterfaces", "Libraries\AatmInterfaces\AatmInterfaces.vbproj", "{8BF1BE35-27DC-4B2F-B7DB-A2CF182BBC7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAccounts", "Accounts\CAccounts\CAccounts.csproj", "{DFF185B6-1B96-47F7-B39B-C4B114B3C581}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -229,6 +231,10 @@ Global
 		{8BF1BE35-27DC-4B2F-B7DB-A2CF182BBC7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BF1BE35-27DC-4B2F-B7DB-A2CF182BBC7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BF1BE35-27DC-4B2F-B7DB-A2CF182BBC7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFF185B6-1B96-47F7-B39B-C4B114B3C581}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

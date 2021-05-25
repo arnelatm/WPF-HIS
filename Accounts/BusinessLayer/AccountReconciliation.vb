@@ -1,8 +1,6 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.BusinessLayer.BusinessRules
-Imports AATM.Libraries
 
 Namespace BusinessLayer
 
@@ -22,6 +20,7 @@ Namespace BusinessLayer
 
         'Public Property Accounts As List(Of ClassesLibrary.LookupData)
         Public Property AccountReconciliationItems As List(Of AccountReconciliationItem)
+
         Public Property AccountIdNo As Int16?
         Public Property Balance As Decimal
         Public Property DateCreated As DateTime?

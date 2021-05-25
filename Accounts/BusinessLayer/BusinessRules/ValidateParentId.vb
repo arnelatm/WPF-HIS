@@ -1,4 +1,5 @@
 ﻿Imports AATM.BusinessLayer.BusinessRules
+
 Namespace BusinessLayer.BusinessRules
     ' length validation rule.
     ' length must be between given min and max values

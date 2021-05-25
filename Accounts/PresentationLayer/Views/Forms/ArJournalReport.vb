@@ -1,5 +1,7 @@
 ﻿Namespace PresentationLayer.Views.Forms
+
     Public Class ArJournalReport
+
         Public Sub New(ByVal idNo As Int32, ByVal amount As String, ByVal lineTotal As String)
 
             ' This call is required by the designer.
@@ -17,7 +19,6 @@
 
         End Sub
 
-
-
     End Class
-End NameSpace
+
+End Namespace

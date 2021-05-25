@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Text
 
 Public MustInherit Class BoBase
     Implements IDataErrorInfo
@@ -11,7 +10,6 @@ Public MustInherit Class BoBase
         ValidationInstance = New Validation
     End Sub
 
-
     Protected Friend Enum EntityStateType
         Unchanged
         Added
@@ -20,6 +18,7 @@ Public MustInherit Class BoBase
     End Enum
 
     Private _EntityState As EntityStateType
+
     Protected Property EntityState() As EntityStateType
         Get
             Return _EntityState
@@ -68,9 +67,7 @@ Public MustInherit Class BoBase
     '    End Get
     'End Property
 
-
 #Region " Properties required by the IDataErrorInfo"
-
 
     'The Error property uses the overridden ToString method of the validation class to return the full list of validation errors.
     <Bindable(False)>
@@ -82,7 +79,7 @@ Public MustInherit Class BoBase
         End Get
     End Property
 
-    'The Item property provides access to the validation errors given a property name. 
+    'The Item property provides access to the validation errors given a property name.
     'This Property is implemented As the Class indexer In C#.
     <BrowsableAttribute(False)>
     <Bindable(False)>
@@ -97,11 +94,12 @@ Public MustInherit Class BoBase
 #End Region
 
 #Region " Events required by INotifyPropertyChanged"
+
     Public Event PropertyChanged(ByVal sender As Object, ByVal e As System.ComponentModel.PropertyChangedEventArgs) Implements INotifyPropertyChanged.PropertyChanged
+
 #End Region
 
-
-    'Since every business Object will have unique requirements For the save operation, 
+    'Since every business Object will have unique requirements For the save operation,
     'the SaveItem method Is Not implemented. Rather it Is defined As abstract.
     Public MustOverride Function SaveItem() As Boolean
 
@@ -109,7 +107,6 @@ Public MustInherit Class BoBase
     Protected Friend Sub SetEntityState(ByVal dataState As EntityStateType)
         SetEntityState(dataState, Nothing)
     End Sub
-
 
     'The SetEntityState method has two Overloads. The first Is used When changing the entity state In general And the second Is used When changing the entity state because a specific Property Is changed.
     'For example, when setting an object as Unchanged, Added, Or Deleted, it does Not matter which property was changed. But when a particular property Is changed, the code must also raise the PropertyChanged event.
@@ -136,7 +133,6 @@ Public MustInherit Class BoBase
     End Sub
 
 End Class
-
 
 'Some additional suggestions
 
@@ -168,7 +164,6 @@ End Class
 '        End If
 '    End Set
 'End Property
-
 
 'Public Class Customer
 '    Inherits BoBase

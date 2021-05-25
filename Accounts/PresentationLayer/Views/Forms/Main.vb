@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common

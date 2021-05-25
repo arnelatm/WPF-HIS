@@ -3,8 +3,6 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views.Interfaces
-Imports AATM.ServicesLayer.Services
-Imports AutoMapper
 
 Public Class UserPresenter
     Inherits Presenter(Of IUserView, UserModel)

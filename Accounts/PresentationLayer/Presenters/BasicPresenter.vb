@@ -1,6 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Libraries
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 

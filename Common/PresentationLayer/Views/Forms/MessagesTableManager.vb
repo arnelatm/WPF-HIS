@@ -348,4 +348,5 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
     End Class
-End NameSpace
+
+End Namespace

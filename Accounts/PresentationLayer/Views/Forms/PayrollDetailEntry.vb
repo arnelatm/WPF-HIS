@@ -1,6 +1,4 @@
-﻿Imports System.Dynamic
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
