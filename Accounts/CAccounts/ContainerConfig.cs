@@ -10,7 +10,10 @@ namespace CAccounts
     {
         public static IContainer Configure()
         {
-            var builder = new ContainerBuilder();
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterType<SalaryLoanSchedule>.As < ISalaryLoanScheduleView >
+            // var container = containerBuilder.Build();
+
             //builder.RegisterType<SalaryLoanSchedulePresenter>().As<ISalaryLoanSchedulePresenter>();
             return builder.Build();
         }

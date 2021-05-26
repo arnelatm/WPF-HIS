@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.Interfaces
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
@@ -7,8 +8,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class SalaryLoanSchedulePresenter
         Inherits PresenterNew(Of ISalaryLoanScheduleView, SalaryLoanScheduleModel)
-
-        'Private _ea As EventAggregator
+        Implements ISalaryLoanSchedulePresenter
 
         Public Sub New(view As IViewNew)
             MyBase.New(view)
@@ -18,7 +18,6 @@ Namespace PresentationLayer.Presenters
             OriginalModel = New SalaryLoanScheduleModel()
             DataModel = New SalaryLoanScheduleModel()
             QuitOnSave = False
-            AskBeforeSave = True
         End Sub
 
     End Class

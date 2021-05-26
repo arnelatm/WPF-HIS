@@ -7,6 +7,7 @@ Imports System.Windows.Forms
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -23,12 +24,18 @@ Imports KellermanSoftware.CompareNetObjects
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
 ''' <typeparam name="T">Type of itemView.</typeparam>
-Public MustInherit Class Presenter(Of T As IView, TM As New)
-    Implements ISubscriber(Of SelectedButton)
+Public MustInherit Class BasePresenter 'Of T As IViewNew, TM As New)
+    Implements ISubscriber(Of ViewButtonClicked),
+               ISubscriber(Of FindFieldRequested),
+               ISubscriber(Of EntryFormLoaded),
+               ISubscriber(Of SaveDataRequested),
+               ISubscriber(Of ValidateViewRequested)
 
     Public ChildPresenters As New List(Of Object)
     Public ChildModels As New List(Of Object)
     Public IdFieldName As String = "IdNo"
+    Public MyErrorProvider As New ErrorProviderExtended
+
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
     Protected CompareDifferences As String
@@ -49,8 +56,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     Private _errorList As String = ""
     Private _recordPositionNumber As Integer = 0
     Private _targetIdNo As Int32 = 0
+    Private _recordCount As Int32 = 0
     Private _undoMode As Boolean = False
     Private _tableName As String
+    Private _ea As EventAggregator
 
     Public Sub New(itemView As T)
         If itemView Is Nothing Then
@@ -64,6 +73,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Dim tableColumnPropertyList As List(Of TblColPropModel)
             tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
             TableProperties = tableColumnPropertyList.ToArray
+            Ea.SubscribeEvent(Me)
         End If
     End Sub
 
@@ -117,47 +127,71 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event UndoEdits(addingRec As Boolean)
 
-    Public Property AddMode As Boolean
-        Set
-            _addMode = Value
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New AddModeChanged(Value))
-            End If
-            If Value Then
-                SaveOriginalValues()
-            End If
-        End Set
+    Protected ReadOnly Property MenuFormName As String
         Get
-            Return _addMode
+            Return CallByName(View, "MenuFormName", CallType.Get)
         End Get
     End Property
 
-    Public Property QuitOnSave As Boolean = False
+    Protected ReadOnly Property ViewName As String
+        Get
+            Return CallByName(View, "Name", CallType.Get)
+        End Get
+    End Property
+
+    Protected ReadOnly Property MainFieldsDictionary As Dictionary(Of String, Object)
+        Get
+            Return CallByName(View, "MainFieldsDictionary", CallType.Get)
+        End Get
+    End Property
+
+    Protected Property AddMode As Boolean
+        Get
+            Return CallByName(View, "AddMode", CallType.Get)
+        End Get
+        Set(value As Boolean)
+            CallByName(View, "AddMode", CallType.Set, value)
+        End Set
+    End Property
+
+    Protected ReadOnly Property Ea As EventAggregator
+        Get
+            Return CallByName(View, "Ea", CallType.Get)
+        End Get
+    End Property
+
+    Protected Property QuitOnSave As Boolean
+        Get
+            Return CallByName(View, "QuitOnSave", CallType.Get)
+        End Get
+        Set(value As Boolean)
+            CallByName(View, "QuitOnSave", CallType.Set, value)
+        End Set
+    End Property
+
     Public Property AskBeforeSave As Boolean = False
     Public Property SaveSuccessful As Boolean = False
-    Public Property AutoValidationsPassed As Boolean = False
+
+    'Public Property AutoValidationsPassed As Boolean = False
     Public Property CancelDelete As Boolean = False
+
     Public Property CancelEdit As Boolean = False
     Public Property CancelSave As Boolean = False
     Public Property CurrentSortKeyValue As String
-    Public Property Ea As EventAggregator
     Public Property DisableSaveMemento
 
     Public Property EditMode As Boolean
+        Get
+            Return CallByName(View, "EditMode", CallType.Get)
+        End Get
         Set
-            _editMode = Value
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New EditModeChanged(Value))
-            End If
+            CallByName(View, "EditMode", CallType.Set, Value)
             If Value Then
                 If Not DisableSaveMemento Then
                     SaveOriginalValues()
                 End If
             End If
         End Set
-        Get
-            Return _editMode
-        End Get
     End Property
 
     Public Property EnumConverter As ResourceEnumConverter
@@ -177,7 +211,15 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Property
 
     Public Property NewlyAddedRecordIdNo As Int32
+
     Public Property RecordCount As Integer
+        Get
+            Return CallByName(View, "RecordCount", CallType.Get)
+        End Get
+        Set(value As Integer)
+            CallByName(View, "RecordCount", CallType.Set, value)
+        End Set
+    End Property
 
     Public Property RecordPositionNumber As Integer
         Get
@@ -186,6 +228,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Set(value As Integer)
             _recordPositionNumber = value
             TargetIdNo = GetIdNoOfSortedPositionNumber(value)
+            CallByName(View, "RecordPositionNumber", CallType.Set, value)
         End Set
     End Property
 
@@ -213,9 +256,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             'End If
             _targetIdNo = value
             UpdateViewDisplay(value)
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New RecordPositionChanged(value))
-            End If
         End Set
     End Property
 
@@ -324,12 +364,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         compareLogic.Config.CompareChildren = True
         compareLogic.Config.MembersToIgnore.Add("DateCreated")
         compareLogic.Config.MembersToIgnore.Add("Errors")
+        CallByName(View, "IgnoreTextBoxNumParserMessage", CallType.Set, True)
         Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
         If Not result.AreEqual Then
             CompareDifferences = result.DifferencesString
             'Messaging.Show(result.DifferencesString, "Differences")
             retVal = True
         End If
+        CallByName(View, "IgnoreTextBoxNumParserMessage", CallType.Set, False)
         Return retVal
     End Function
 
@@ -360,8 +402,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                 retValue = Model.DeleteRecord(idNo, TableName)
                 If retValue > 0 Then
-                    If Ea IsNot Nothing Then
-                        'Ea.PublishEvent(New RecordDeleted(idNo))
+                    If GlobalVariables.EventAggregator IsNot Nothing Then
+                        'GlobalVariables.EventAggregator.PublishEvent(New RecordDeleted(idNo))
                     End If
                     RaiseEvent SuccessfulDelete(idNo)
                 End If
@@ -428,9 +470,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Function FindRecord() As Integer
         Dim idNoOfFoundRecord As Integer = 0
-        If OkToMove() Then
-            idNoOfFoundRecord = FindFieldContinue(TargetIdNo)
-        End If
+        'If OkToMove() Then
+        idNoOfFoundRecord = FindFieldContinue(TargetIdNo)
+        'End If
         Return idNoOfFoundRecord
     End Function
 
@@ -639,9 +681,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetTableProperties() As List(Of TblColPropModel)
-        Return ModelTblColProp.GetMainTableColumnProperties(TableName)
-    End Function
+    'Public Function GetTableProperties() As List(Of TblColPropModel)
+    '    Return ModelTblColProp.GetMainTableColumnProperties(TableName)
+    'End Function
 
     Public Function GetTreeNodeText()
         Dim cModel As New TM
@@ -712,11 +754,10 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Try
             DataModel = New TM
             GlobalVariables.Mapper.Map(DataModel, View)
-            AddMode = True
             RaiseEvent BeforeAdd()
         Catch oEx As Exception
             MsgBox("Error:   " + oEx.Message)
-            AddMode = False
+            CallByName(View, "AddMode", CallType.Set, False)
         End Try
     End Sub
 
@@ -748,7 +789,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Public Sub GoEditRecord()
+    Private Sub GoEditRecord()
         If IsOkToEditRecord() Then
             RaiseEvent BeforeEdit()
             If CancelEdit Then
@@ -756,7 +797,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Else
                 EditMode = True
             End If
-            'RaiseEvent AfterEdit()
         End If
     End Sub
 
@@ -779,35 +819,36 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Sub GoFirstRecord()
-        If OkToMove() Then
-            RecordPositionNumber = 1
-        End If
+        'If OkToMove() Then
+        RecordPositionNumber = 1
+        'End If
     End Sub
 
     Public Sub GoLastRecord()
-        If OkToMove() Then
-            RecordPositionNumber = GetRecordCount()
-        End If
+        'If OkToMove() Then
+        RecordPositionNumber = GetRecordCount()
+        RecordCount = RecordPositionNumber
+        'End If
     End Sub
 
     Public Sub GoNextRecord()
-        If OkToMove() Then
-            If RecordPositionNumber = RecordCount Then
-                Messaging.Show(True, "MsgLastRecordHit", "This is already the last record.", "Last Record")
-            Else
-                RecordPositionNumber += 1
-            End If
+        'If OkToMove() Then
+        If RecordPositionNumber = RecordCount Then
+            Messaging.Show(True, "MsgLastRecordHit", "This is already the last record.", "Last Record")
+        Else
+            RecordPositionNumber += 1
         End If
+        'End If
     End Sub
 
     Public Sub GoPreviousRecord()
-        If OkToMove() Then
-            If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
-                Messaging.Show(True, "MsgFirstRecordHit", "This is already the first record.", "First Record")
-            Else
-                RecordPositionNumber -= 1
-            End If
+        'If OkToMove() Then
+        If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
+            Messaging.Show(True, "MsgFirstRecordHit", "This is already the first record.", "First Record")
+        Else
+            RecordPositionNumber -= 1
         End If
+        'End If
     End Sub
 
     Public Overridable Sub GoPrintRecord()
@@ -815,16 +856,16 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Sub GoQuit()
-        If OkToMove() Then
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New QuitView(True))
-            End If
-        End If
+        'If OkToMove() Then
+        CallByName(View, "CancelClose", CallType.Set, False)
+        'Else
+        'CallByName(View, "CancelClose", CallType.Set, True)
+        'End If
     End Sub
 
-    Public Overridable Sub GoSaveRecord()
+    Protected Overridable Sub GoSaveRecord(ByRef viewControl As Control)
         Dim continueSave As Boolean = True
-        Dim addAnother = False
+        Dim addAnother As Boolean = False
         If AskBeforeSave Then
             If Not MessageBeforeSave() Then
                 continueSave = False
@@ -832,7 +873,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End If
         If continueSave Then
             Dim retVal As Integer
-            retVal = Save()
+            retVal = Save(viewControl)
             If retVal > 0 Then
                 SaveSuccessful = True
                 Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
@@ -842,10 +883,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                                       "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                                       MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                             addAnother = True
-                        Else
-                            Dim idNo = CallByName(View, IdFieldName, CallType.Get)
-                            RecordPositionNumber = GetSortedRecordPosition(idNo)
                         End If
+                        Dim idNo = CallByName(View, IdFieldName, CallType.Get)
+                        RecordPositionNumber = GetSortedRecordPosition(idNo)
                     Else
                         RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
                         'RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
@@ -861,6 +901,14 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 End If
             Else
                 SaveSuccessful = False
+            End If
+            If SaveSuccessful Then
+                If addAnother Then
+                    AddMode = True
+                Else
+                    EditMode = False
+                    AddMode = False
+                End If
             End If
         End If
     End Sub
@@ -891,17 +939,17 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Sub
 
     Public Sub GoUndoChanges()
-        If OkToMove() Then
-            UndoMode = True
-            If AddMode Then
-                RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
-                AddMode = False
-            Else
-                RecordPositionNumber = RecordPositionNumber
-                EditMode = False
-            End If
+        'If OkToMove() Then
+        'UndoMode = True
+        If AddMode Then
+            RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
+            AddMode = False
+        Else
+            RecordPositionNumber = RecordPositionNumber
+            EditMode = False
         End If
-        UndoMode = False
+        'End If
+        'UndoMode = False
     End Sub
 
     Public Overridable Function IsOkToEditRecord() As Boolean
@@ -923,124 +971,80 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return True
     End Function
 
-    Public Overridable Function OkToMove() As Boolean
-        Dim retValue As Boolean = False
-        If QuitOnSave Then
-            retValue = True
-        ElseIf Not (EditMode OrElse AddMode) Then
-            retValue = True
-        Else
-            Dim result As DialogResult
-            If ChangesMade() Then
-                result = SaveOrAbandonChanges()
-                If result = DialogResult.Yes Or result = DialogResult.No Then
-                    If result = DialogResult.Yes Then
-                        result = Save()
-                        If result > 0 Then
-                            Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
-                            If AddMode Then
-                                RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
-                            End If
-                            retValue = True
-                        End If
-                    Else
-                        If AddMode Then
-                            RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
-                        Else
-                            RecordPositionNumber = RecordPositionNumber
-                        End If
-                        retValue = True
-                    End If
-                Else
-                    retValue = False
-                End If
-            Else
-                retValue = True
-            End If
-        End If
-        If retValue Then
-            If AddMode Then
-                AddMode = False
-            Else
-                EditMode = False
-            End If
-        End If
-        Return retValue
-    End Function
+    'Public Overridable Function OkToMove() As Boolean
+    '    Dim retValue As Boolean = False
+    '    If QuitOnSave Then
+    '        retValue = True
+    '    ElseIf Not (EditMode OrElse AddMode) Then
+    '        retValue = True
+    '    Else
+    '        Dim result As DialogResult
+    '        If ChangesMade() Then
+    '            result = SaveOrAbandonChanges()
+    '            If result = DialogResult.Yes Or result = DialogResult.No Then
+    '                If result = DialogResult.Yes Then
+    '                    result = Save()
+    '                    If result > 0 Then
+    '                        Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+    '                        If AddMode Then
+    '                            RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
+    '                        End If
+    '                        retValue = True
+    '                    End If
+    '                Else
+    '                    If AddMode Then
+    '                        RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
+    '                    Else
+    '                        RecordPositionNumber = RecordPositionNumber
+    '                    End If
+    '                    retValue = True
+    '                End If
+    '            Else
+    '                retValue = False
+    '            End If
+    '        Else
+    '            retValue = True
+    '        End If
+    '    End If
+    '    If retValue Then
+    '        If AddMode Then
+    '            AddMode = False
+    '        Else
+    '            EditMode = False
+    '        End If
+    '    End If
+    '    Return retValue
+    'End Function
 
-    Public Sub OnEventHandler(ByRef e As SelectedButton) Implements ISubscriber(Of SelectedButton).OnEventHandler
-        Select Case e.ClickedButton
-            Case ButtonClicked.First
-                GoFirstRecord()
-            Case ButtonClicked.Next
-                GoNextRecord()
-            Case ButtonClicked.Previous
-                GoPreviousRecord()
-            Case ButtonClicked.Last
-                GoLastRecord()
-            Case ButtonClicked.Find
-                GoFindRecord()
-            Case ButtonClicked.Undo
-                GoUndoChanges()
-            Case ButtonClicked.Add
-                GoAddRecord()
-            Case ButtonClicked.Delete
-                GoDeleteRecord()
-            Case ButtonClicked.Edit
-                GoEditRecord()
-            Case ButtonClicked.Save
-                GoSaveRecord()
-            Case ButtonClicked.Print
-                GoPrintRecord()
-            Case ButtonClicked.Quit
-                GoQuit()
-            Case ButtonClicked.Translate
-                GoTranslate()
-            Case ButtonClicked.Filter
-                GoFilter()
-        End Select
-    End Sub
-
-    Public Overridable Function Save()
+    Public Overridable Function Save(ByRef viewControl As Control)
+        RaiseEvent BeforeSave()
         Dim retVal As Integer = 0
-        If EditMode AndAlso (Not AddMode) AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then
-            Messaging.Show(True, "MsgRecordChangedSinceLastRetrieval", "Record Has Changed since you last retrieved the record, cannot save your modifications. Please refresh the record and try again.", "Someone changed the record!")
+        Dim record As New TM
+        GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
+        retVal = InitiateSave()
+        If retVal < 0 Then
+            Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
-            RaiseEvent BeforeValidate()
-            If EditMode AndAlso Not ChangesMade() Then
-                Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
-            Else
-                Dim validated As Boolean = True
-                Dim validatingObject = New ValidatingData(validated)
-                If Ea IsNot Nothing Then
-                    Ea.PublishEvent(validatingObject)
-                    'Ea.PublishEvent(New ValidatingData(viewIsValid))
-                End If
-                If validatingObject.Validated AndAlso IsBizDataValid() Then
-                    RaiseEvent BeforeSave()
-                    retVal = InitiateSave()
-                    If retVal < 0 Then
-                        Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        'Else
-                        '    Messaging.Show(true,"MsgRecordHasBeenSaved", "Record has been successfully saved!")
-                    Else
-                        RaiseEvent AfterSave()
-                        If Ea IsNot Nothing Then
-                            Ea.PublishEvent(New RecordSaved(DataModel))
-                        End If
-                    End If
-                Else
-                    retVal = -1
-                End If
+            RaiseEvent AfterSave()
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New RecordSaved(DataModel))
             End If
         End If
         If retVal < 0 Then
             Dim lErrors = GetBizObjectErrors()
-            If Ea IsNot Nothing And lErrors IsNot Nothing Then
-                Ea.PublishEvent(New PassErrorList(lErrors))
+            If GlobalVariables.EventAggregator IsNot Nothing And lErrors IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New PassErrorList(lErrors))
             End If
             Beep()
             ShowErrors("Record not saved!")
+        Else
+            Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+            If AddMode Then
+                RecordPositionNumber = GetSortedRecordPosition(retVal)
+            End If
+            'turn off addmode/editmode
+            AddMode = False
+            EditMode = False
         End If
         Return retVal
     End Function
@@ -1087,8 +1091,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Dim result As DialogResult
             result = SaveOrAbandonChanges()
             If result = DialogResult.Yes Then
-                Save()
-                UpdateViewDisplay(TargetIdNo)
+                'Save()
+                'UpdateViewDisplay(TargetIdNo)
             ElseIf result = DialogResult.No Then
                 ' undo changes retrieve the last record
                 TargetIdNo = LastIdNo
@@ -1114,8 +1118,8 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
             modelData = Model.GetRecordByIdNo(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New BeforeAssignment(modelData))
+            If GlobalVariables.EventAggregator IsNot Nothing Then
+                GlobalVariables.EventAggregator.PublishEvent(New BeforeAssignment(modelData))
             End If
             GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
             For Each child In ChildPresenters
@@ -1143,7 +1147,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return False
     End Function
 
-    Protected Overridable Function AddRecord(record As TM) As Integer
+    Protected Overridable Function SaveAddedRecord(record As TM) As Integer
         Dim retVal As Integer
         NewlyAddedRecordIdNo = Model.AddRecord(record)
         retVal = NewlyAddedRecordIdNo
@@ -1229,15 +1233,20 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Protected Overridable Function IsBizDataValid() As Boolean
         Dim retValue As Boolean = False
+        CallByName(View, "DataErrorsFound", CallType.Set, False)
         GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        If Model.IsValid(DataModel) Then
-            'For Each item In ChildModels
-            '    GlobalVariables.Mapper.Map()
-            '    If Not item.IsBizDataValid() Then
-            '        Exit For
-            '    End If
-            'Next
-            retValue = True
+        If Not CallByName(View, "DataErrorsFound", CallType.Get) Then
+            If Model.IsValid(DataModel) Then
+                retValue = True
+            End If
+        End If
+        If Not retValue Then
+            Dim lErrors = GetBizObjectErrors()
+            If Ea IsNot Nothing And lErrors IsNot Nothing Then
+                Ea.PublishEvent(New PassErrorList(lErrors))
+            End If
+            Beep()
+            ShowErrors("Record not saved!")
         End If
         Return retValue
     End Function
@@ -1352,7 +1361,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                 If AddMode Then
                     Dim retVal As Integer = 0
-                    retValue = AddRecord(record)
+                    retValue = SaveAddedRecord(record)
                     If retValue > 0 Then
                         retVal = retValue
                         RaiseEvent RecordAddedSuccessfully(retVal)
@@ -1474,4 +1483,648 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     End Sub
 
+    'Public Overridable Function ValidateView()
+    '    Dim validationsPassed As Boolean
+    '    validationsPassed = True
+    '    Dim allControls As New List(Of Control)
+    '    Dim originalValue As String
+    '    Dim cForm As Form
+    '    cForm = View
+    '    For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+    '        If TypeOf cCtrl Is IEntryControl Then
+
+    '            If TypeOf cCtrl Is CTextBoxIdNo Then
+    '                ' no validations for this type of control. These are Identity Columns and are filled automatically
+    '                ' by the Data Server.
+    '            ElseIf TypeOf cCtrl Is CTextBox AndAlso GetPropertyValue(cCtrl, "ComputedValue") Then
+    '                ' ignore this also computed values don't need to be validated for empty values
+    '            ElseIf TypeOf cCtrl Is CTextBoxArabic Then
+    '                Dim thisControl As CTextBoxArabic
+    '                thisControl = cCtrl
+    '                If thisControl.EnglishControl Is Nothing Then
+    '                    MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{thisControl.Name}> not set.")
+    '                End If
+    '                originalValue = PresenterObj.GetOriginalValue(thisControl.EnglishControl)
+    '                Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
+    '                If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
+    '                    thisControl.Text = englishText
+    '                End If
+    '            ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
+    '                ' check for duplicate values
+    '                Dim thisControl As CTextBox = cCtrl
+    '                If thisControl.ValueIsNumeric Then
+    '                    If Not ValidateNumber(cCtrl) Then
+    '                        validationsPassed = False
+    '                    End If
+    '                End If
+    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
+    '                    validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+    '                End If
+    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
+    '                    If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
+    '                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+    '                    End If
+    '                End If
+    '            End If
+
+    '        End If
+    '    Next
+    '    AutoValidationsPassed = validationsPassed
+    '    Return validationsPassed
+    'End Function
+
+    Public Sub OnFindFieldRequested_EventHandler(ByRef eventType As FindFieldRequested) Implements ISubscriber(Of FindFieldRequested).OnEventHandler
+        Dim idNo = Model.FindFieldNew(TableName, eventType.FindableControl, SortOrderKey, DataFilter)
+        If idNo <> 0 Then
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
+        Else
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+        End If
+    End Sub
+
+    Public Sub OnViewButtonClicked_EventHandler(ByRef eventType As ViewButtonClicked) Implements ISubscriber(Of ViewButtonClicked).OnEventHandler
+        Select Case eventType.SelectedButton
+            Case ButtonClicked.First
+                GoFirstRecord()
+            Case ButtonClicked.Next
+                GoNextRecord()
+            Case ButtonClicked.Previous
+                GoPreviousRecord()
+            Case ButtonClicked.Last
+                GoLastRecord()
+            Case ButtonClicked.Find
+                GoFindRecord()
+            Case ButtonClicked.Undo
+                GoUndoChanges()
+            Case ButtonClicked.Add
+                GoAddRecord()
+            Case ButtonClicked.Delete
+                GoDeleteRecord()
+            Case ButtonClicked.Edit
+                GoEditRecord()
+            'Case ButtonClicked.Save
+            '    GoSaveRecord()
+            Case ButtonClicked.Print
+                GoPrintRecord()
+            Case ButtonClicked.Quit
+                GoQuit()
+            Case ButtonClicked.Translate
+                GoTranslate()
+            Case ButtonClicked.Filter
+                GoFilter()
+        End Select
+    End Sub
+
+    Public Sub OnEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
+        Dim rules = GetBizObjectRules()
+        For Each rule In rules
+            Dim control As Control = Nothing
+            MainFieldsDictionary.TryGetValue(rule.Property, control)
+            MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
+        Next
+        SetAllControlsDynamicProperties(eventType.ViewControl)
+    End Sub
+
+    Public Sub OnEventHandler(ByRef eventType As SaveDataRequested) Implements ISubscriber(Of SaveDataRequested).OnEventHandler
+        ' Validate record first for errors before saving
+        Dim validated As Boolean = False
+        RaiseEvent BeforeValidate()
+        If EditMode AndAlso Not ChangesMade() Then
+            Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
+        Else
+            Dim validatingObject = New ValidateViewRequested(eventType.ViewControl)
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(validatingObject)
+                'Ea.PublishEvent(New ValidateViewRequested(eventType.ViewControl, validated))
+            End If
+            If validatingObject.ValidView AndAlso IsBizDataValid() Then
+                If ValidateNumericValues(eventType.ViewControl) Then
+                    validated = True
+                End If
+            End If
+        End If
+        If validated Then
+            Save(eventType.ViewControl)
+        End If
+    End Sub
+
+    Public Sub OnEventHandler(ByRef eventType As ValidateViewRequested) Implements ISubscriber(Of ValidateViewRequested).OnEventHandler
+        Dim validationsPassed As Boolean
+        validationsPassed = True
+        Dim allControls As New List(Of Control)
+        Dim originalValue As String
+        Dim cForm As Control
+        cForm = eventType.ViewControl
+        For Each cCtrl As Control In FindControlRecursive(allControls, cForm)
+            If TypeOf cCtrl Is IEntryControl Then
+
+                If TypeOf cCtrl Is CTextBoxIdNo Then
+                    ' no validations for this type of control. These are Identity Columns and are filled automatically
+                    ' by the Data Server.
+                ElseIf TypeOf cCtrl Is CTextBox AndAlso GetPropertyValue(cCtrl, "ComputedValue") Then
+                    ' ignore this also computed values don't need to be validated for empty values
+                ElseIf TypeOf cCtrl Is CTextBoxArabic Then
+                    Dim thisControl As CTextBoxArabic
+                    thisControl = cCtrl
+                    If thisControl.EnglishControl Is Nothing Then
+                        MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{thisControl.Name}> not set.")
+                    End If
+                    originalValue = GetOriginalValue(thisControl.EnglishControl)
+                    Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
+                    If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
+                        thisControl.Text = englishText
+                    End If
+                ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
+                    ' check for duplicate values
+                    Dim thisControl As CTextBox = cCtrl
+                    If thisControl.ValueIsNumeric Then
+                        If Not ValidateNumber(eventType.ViewControl, cCtrl) Then
+                            validationsPassed = False
+                        End If
+                    End If
+                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
+                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+                    End If
+                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
+                        If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
+                            validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+                        End If
+                    End If
+                End If
+
+            End If
+        Next
+        'AutoValidationsPassed = validationsPassed
+        eventType.ValidView = validationsPassed
+    End Sub
+
+    Public Function ValidateNumber(ByRef viewControl As Control, ByRef obj As CTextBox)
+        Dim objName = Strings.Mid(obj.Name, 4)
+        Dim targetValue = obj.Text
+        Dim y As PropertyInfo = viewControl.GetType().GetProperty(objName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase)
+        If y IsNot Nothing Then
+            Dim x As Type = y.PropertyType
+            Dim u As Type = Nullable.GetUnderlyingType(x)
+            If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
+                Return True
+            Else
+                Dim num As Double
+                Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
+                If Not isNumeric Then
+                    Dim controlName As String
+                    If obj.LinkedLabel IsNot Nothing Then
+                        controlName = obj.LinkedLabel.Text
+                    Else
+                        controlName = obj.Name.Substring(3)
+                    End If
+                    Messaging.ShowParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text})
+                    obj.Focus()
+                    Return False
+                End If
+                Dim nMinValue As Double
+                Dim nMaxValue As Double
+                Dim typeCode As TypeCode = Type.GetTypeCode(x)
+                Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
+                If u Is Nothing Then
+                    nMinValue = GlobalFunctions.GetMinMaxValue(typeCode, nMaxValue)
+                Else
+                    typeCode = Type.GetTypeCode(u)
+                    nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
+                End If
+                If num < nMinValue OrElse num > nMaxValue Then
+                    MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & " to " & nMaxValue.ToString())
+                    Return False
+                End If
+                Dim isInteger As Boolean = False
+                If u Is Nothing Then
+                    If NumTypeIsInteger(typeCode) Then
+                        isInteger = True
+                    End If
+                Else
+                    If NumTypeIsInteger(underlyingTypeCode) Then
+                        isInteger = True
+                    End If
+                End If
+                If isInteger Then
+                    If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
+                        MessageBox.Show($"The entered value for " & obj.Name & $" must be a whole number (Integer)!")
+                        Return False
+                    End If
+                End If
+                Return True
+            End If
+        Else
+            Return True
+        End If
+    End Function
+
+    Private Function ValueIsUnique(cCtrl As Control, validationsPassed As Boolean) As Boolean
+        Dim originalValue As String
+        Dim fldName As String = cCtrl.Name.Substring(3)
+        Dim fieldDescription As String
+        If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
+            fieldDescription = fldName
+        Else
+            Dim cTextCtrl As CTextBox
+            cTextCtrl = cCtrl
+            fieldDescription = GetPropertyValue(cTextCtrl.LinkedLabel, "Text")
+        End If
+        Dim recordIsNotUnique = False
+        If AddMode Then
+            If IsRecordNotUnique(cCtrl, fldName) Then
+                recordIsNotUnique = True
+            End If
+        Else
+            originalValue = GetOriginalValue(cCtrl)
+            ' if value did not change no need to check for duplicate values.
+            If cCtrl.Text <> originalValue Then
+                If IsRecordNotUnique(cCtrl, fldName) Then
+                    recordIsNotUnique = True
+                End If
+            End If
+        End If
+        If recordIsNotUnique Then
+            Messaging.ShowParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldName", cCtrl.Text, "fieldDescription", fieldDescription})
+            validationsPassed = False
+            Return validationsPassed
+        End If
+        Return validationsPassed
+    End Function
+
+    Public Function ValidateNumericValues(sender As Control)
+        Dim validationsPassed As Boolean
+        validationsPassed = True
+        Dim allControls As New List(Of Control)
+        For Each cCtrl As Control In FindControlRecursive(allControls, sender)
+            If TypeOf cCtrl Is IEntryControl Then
+                If TypeOf cCtrl Is CTextBox Then
+                    Dim thisControl As CTextBox = cCtrl
+                    If thisControl.ValueIsNumeric Then
+                        If Not ValidateNumber(sender, cCtrl) Then
+                            validationsPassed = False
+                            Exit For
+                        End If
+                    End If
+                End If
+            End If
+        Next
+        Return validationsPassed
+    End Function
+
+    Private Sub SetAllControlsDynamicProperties(viewControl As Control)
+        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+            Dim allControls As New List(Of Control)
+            Dim resources = New ComponentResourceManager(Me.GetType())
+            For Each cCtrl As Control In FindControlRecursive(allControls, viewControl)
+                SetControlDynamicProperties(cCtrl)
+                SetObjectSecurityNew(cCtrl)
+            Next
+        End If
+    End Sub
+
+    Private Sub SetControlDynamicProperties(ByRef cCtrl As Control)
+        Dim myView = cCtrl.FindForm()
+        If TypeOf cCtrl Is IEntryControl Then
+            ' get FieldName from control : by convention when using this system
+            ' all DataBoundControls TextBox & Combobox that will hold field variables are named by convention in this format
+            ' textboxes  = txt<FieldName>
+            ' combobox   = cbo<FieldName>
+            ' datetimePicker = dtp<FieldName>
+            ' so to get the field name just get the characters from the control starting at the 4th character onwards
+            Dim fldName As String
+            fldName = cCtrl.Name.Substring(3) ' get control name starting from the 3rd character (0 based)
+
+            For Each row In TableProperties
+                If fldName.ToLower() = row.FldName.ToLower Then
+                    If TypeOf cCtrl Is CTextBox Or TypeOf cCtrl Is CMaskedTextBox OrElse TypeOf cCtrl Is CTextBoxArabic Then
+                        If row.FldType.ToLower = "int" OrElse
+                            row.FldType.ToLower = "smallint" OrElse
+                            row.FldType.ToLower = "money" OrElse
+                            row.FldType.ToLower = "decimal" OrElse
+                            row.FldType.ToLower = "bigint" OrElse
+                            row.FldType.ToLower = "tinyint" OrElse
+                            row.FldType.ToLower = "smallmoney" OrElse
+                            row.FldType.ToLower = "real" OrElse
+                            row.FldType.ToLower = "float" OrElse
+                            row.FldType.ToLower = "numeric" Then
+                            Select Case row.FldType.ToLower
+                                Case "int"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -2147483648D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 2147483648D)
+                                Case "tinyint"
+                                    SetPropertyValue(cCtrl, "MinimumValue", 0D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 255D)
+                                Case "smallint"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -32768D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 32767D)
+                                Case "bigint"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807D)
+                            End Select
+                            SetPropertyValue(cCtrl, "ValueIsNumeric", True)
+                        Else
+                            SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(row.MaxLength / 2), row.MaxLength))
+                            SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
+                            If (Not row.IsIdentity) And (Not row.IsNullable) Then
+                                If GetPropertyValue(cCtrl, "IgnoreNullCheck") Then
+                                    If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
+                                        MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
+                                    Else
+                                        MyErrorProvider.Controls.AddMandatory(cCtrl, GetPropertyValue(cCtrl, "LinkedLabel"))
+                                    End If
+                                End If
+                            End If
+                        End If
+                        Exit For
+                    ElseIf TypeOf cCtrl Is CaComboBox OrElse TypeOf cCtrl Is CComboBox Then
+                        '
+                        '
+                    ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
+                        TypeOf cCtrl Is CDTPHijriDate OrElse TypeOf cCtrl Is tdpGregorian OrElse
+                        TypeOf cCtrl Is CDtpGregorianDate Then
+                        SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
+                        If Not row.IsNullable Then
+                            'Add this controls to the Mandatory fields error provider.
+                            MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
+                        End If
+                        Exit For
+                    End If
+                    If TypeOf cCtrl Is IFindableControl And Not (TypeOf cCtrl Is CForm) Then
+                        Dim thisControl As IFindableControl = cCtrl
+                        If thisControl.FindEnabled Then
+                            thisControl = cCtrl
+                            thisControl.FindDataType = GetObjectDataType(GetFieldType(ViewName.Substring(3)))
+                        End If
+                    End If
+                End If
+            Next
+        End If
+    End Sub
+
+    Public Sub SetObjectSecurityNew(ByRef cCtrl As Control)
+        Dim objectSecurityKey As String
+        If TypeOf cCtrl Is MenuStrip Then
+            ' check for MenuStrip first because MenuStrip is also a ToolStrip
+            Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
+            Dim menuStrip As MenuStrip = cCtrl
+            ApplyObjectSecurity(menuStrip, subMenuName)
+            SetMenuStripItemsNew(menuStrip.Items, subMenuName)
+        ElseIf TypeOf cCtrl Is ToolStrip Then
+            Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
+            Dim toolStrip As ToolStrip = cCtrl
+            ApplyObjectSecurity(toolStrip, subMenuName)
+            SetToolStripItemsNew(toolStrip.Items, subMenuName)
+        Else
+            objectSecurityKey = GetControlSecurityKey(cCtrl)
+            If objectSecurityKey Is Nothing OrElse objectSecurityKey = "" Then
+                'cCtrl.Visible = True
+                'cCtrl.Enabled = True
+            Else
+                Dim controlSecurityValues As ArrayList
+                Dim isEditable As Boolean
+                Dim isVisible As Boolean
+                controlSecurityValues = GetControlSecurityValues(objectSecurityKey)
+                If controlSecurityValues.Count > 0 Then
+                    isVisible = controlSecurityValues(0)
+                    isEditable = controlSecurityValues(1)
+                Else
+                    isVisible = False
+                    isEditable = False
+                End If
+                SetControlVisibility(cCtrl, isVisible)
+                SetControlEditability(cCtrl, isEditable)
+            End If
+        End If
+    End Sub
+
+    Private Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
+        ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
+        If Not controlVisible Then
+            SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
+        End If
+    End Sub
+
+    Private Sub SetControlEditability(ByRef cCtrl As Control, ByRef editable As Boolean)
+        ' if Editable is False, make the control readonly property so that it can't be edited
+        If Not editable Then
+            SetPropertyValue(cCtrl, "DisplayOnly", True)
+        End If
+    End Sub
+
+    Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
+        Dim controlSecurityObjectIdNo As Int32
+        controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey)
+        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+    End Function
+
+    Private Function GetControlSecurityKey(ByRef cCtrl As Control)
+        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+            If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
+                Return GetPropertyValue(cCtrl, "SecurityKey")
+            End If
+        End If
+        Return ""
+    End Function
+
+    Private Sub ApplyObjectSecurity(cControl As Object, controlSecurityKey As String)
+        If GlobalVariables.UserName = $"Arnel" Then
+            ' make all editable and visible regardless of security values
+            cControl.Enabled = True
+            cControl.Visible = True
+        Else
+            Dim securityIdNo As Integer
+            Dim controlSecurityValues As ArrayList
+            Dim isSelectable As Boolean
+            Dim isVisible As Boolean
+
+            securityIdNo = GetControlSecurityIdNo(controlSecurityKey)
+            If securityIdNo <> 0 Then
+                controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo)
+                If controlSecurityValues.Count > 0 Then
+                    ' Visible property stored in first element of the array
+                    isVisible = controlSecurityValues(0)
+                    isSelectable = controlSecurityValues(1)
+                    ' Editable property stored in second element of the array
+                Else
+                    isVisible = False
+                    isSelectable = False
+                End If
+            Else
+                isVisible = True
+                isSelectable = True
+            End If
+            cControl.Enabled = isSelectable
+            If cControl.Visible Then
+                cControl.Visible = isVisible
+            End If
+        End If
+    End Sub
+
+    Private Sub SetMenuStripItemsNew(dropDownItems As ToolStripItemCollection, pParentMenuName As String)
+        For Each dropDownItem As Object In dropDownItems
+            Dim subMenu = TryCast(dropDownItem, ToolStripMenuItem)
+            If subMenu IsNot Nothing Then
+                Dim parentMenuName = pParentMenuName
+                ApplyMenuSecurityNew(dropDownItem, parentMenuName)
+                If subMenu.HasDropDown Then
+                    Dim childSubMenuName As String = pParentMenuName + " > " + Mid(dropDownItem.Name, 18)
+                    SetMenuStripItemsNew(subMenu.DropDownItems, childSubMenuName)
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub ApplyMenuSecurityNew(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String)
+        Dim toolStripMenuItem As ToolStripMenuItem = obj
+        Dim controlSecurityKey = subMenuName + " > " + Mid(toolStripMenuItem.Name, 18)
+        If GlobalVariables.IsUserLoggedIn Then
+            ApplyObjectSecurity(toolStripMenuItem, controlSecurityKey)
+        Else
+            toolStripMenuItem.Enabled = False
+            toolStripMenuItem.Visible = True
+        End If
+    End Sub
+
+    Private Sub SetToolStripItemsNew(dropDownItems As ToolStripItemCollection, subMenuName As String)
+        For Each obj As Object In dropDownItems
+            ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+            If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
+                Dim toolStripButton As ToolStripButton = obj
+                Dim controlSecurityKey = Mid(toolStripButton.Name, 16).TrimEnd()
+                If GlobalVariables.IsUserLoggedIn Then
+                    Dim controlSecurityValues As ArrayList
+                    Dim isSelectable As Boolean
+                    Dim isVisible As Boolean
+                    Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey)
+                    If securityIdNo <> 0 Then
+                        If GlobalVariables.SecurityGroupIdNo <> 0 Then
+                            controlSecurityValues = GetUserSecurity(securityIdNo, GlobalVariables.SecurityGroupIdNo)
+                            If controlSecurityValues.Count > 0 Then
+                                ' Visible property stored in first element of the array
+                                isVisible = controlSecurityValues(0)
+                                ' Editable property stored in third element of the array
+                                isSelectable = controlSecurityValues(1)
+                            Else
+                                isVisible = False
+                                isSelectable = False
+                            End If
+                        Else
+                            isVisible = True
+                            isSelectable = False
+                        End If
+                    Else
+                        isVisible = True
+                        isSelectable = True
+                    End If
+                    toolStripButton.Enabled = isSelectable
+                    toolStripButton.Visible = isVisible
+                Else
+                    If obj.Name = "ToolStripButtonLogin" Then
+                        toolStripButton.Enabled = True
+                        toolStripButton.Visible = True
+                    Else
+                        toolStripButton.Enabled = False
+                        toolStripButton.Visible = True
+                    End If
+                End If
+            Else
+                obj.Enabled = True
+                obj.Visible = True
+            End If
+        Next
+    End Sub
+
+    Public Function GetFieldType(fieldName As String) As Type
+        Return CallByName(Me, fieldName, CallType.Get).GetType
+    End Function
+
 End Class
+
+'Public Class ViewButtonClicked
+
+'    Public Sub New(ByVal selectedButton As ButtonClicked)
+'        Me.SelectedButton = selectedButton
+'    End Sub
+
+'    Public Property SelectedButton As ButtonClicked
+
+'End Class
+
+'Public Class SaveDataRequested
+
+'    Public Sub New(ByVal viewControl As Control)
+'        Me.ViewControl = viewControl
+'    End Sub
+
+'    Public Property ViewControl As Control
+'    Public Property ValidData As Boolean
+
+'End Class
+
+'Public Class FindFieldRequested
+
+'    Public Sub New(ByVal findableControl As IFindableControl)
+'        Me.FindableControl = findableControl
+'    End Sub
+
+'    Public Property FindableControl As IFindableControl
+
+'End Class
+
+'Public Class ValidateViewRequested
+
+'    Public Sub New(ByRef viewControl As Control)
+'        Me.ViewControl = viewControl
+'    End Sub
+
+'    Public Property ViewControl As Control
+'    Public Property ValidView As Boolean
+
+'End Class
+
+'Public Class IdNoEventArgs
+'    Inherits EventArgs
+
+'    Private _idNo As Int32
+
+'    Public Sub New(ByVal idNo As Int32)
+'        Me._idNo = idNo
+'    End Sub
+
+'    Public Property IdNo As Int32
+'        Get
+'            Return _idNo
+'        End Get
+'        Set(ByVal value As Int32)
+'            _idNo = value
+'        End Set
+'    End Property
+
+'End Class
+
+'Public Class EntryFormLoaded
+
+'    Public Sub New(ByVal viewControl As Control)
+'        Me.ViewControl = viewControl
+'    End Sub
+
+'    Public Property ViewControl As Control
+
+'End Class
+
+'Public Enum ButtonClicked
+'    [Add]
+'    [Delete]
+'    [Edit]
+'    [Find]
+'    [First]
+'    [Last]
+'    [Next]
+'    [Previous]
+'    [Quit]
+'    [Save]
+'    [Undo]
+'    [Print]
+'    [Filter]
+'    [Translate]
+'End Enum

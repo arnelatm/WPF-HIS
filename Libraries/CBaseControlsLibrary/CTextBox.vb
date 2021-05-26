@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CTextBox
     Inherits BTextBox
-    Implements IEntryControl, IFindableControl
+    Implements IEntryControl, IFindableControl, ILinkedLabel
 
     Private _defaultVal As String
     Private _oldValue As String
@@ -222,7 +222,17 @@ Public Class CTextBox
     <Category("Custom Properties")>
     <Description("Select the label to which this control is linked.")>
     <Browsable(True)>
-    Public Property LinkedLabel As CLabel
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
+
+    Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
+        Dim description As String
+        If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+            description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+        Else
+            description = LinkedLabel.Text
+        End If
+        Return description
+    End Function
 
     <Category("Custom Properties")>
     <Description("Change to true if this is a computed value. When true this will not be auto validated for empty values.")>
@@ -463,11 +473,7 @@ Public Class CTextBox
             searchForm.Location = formLocation
             Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
             FindDataType = GetObjectDataType(x)
-            If LinkedLabel IsNot Nothing AndAlso LinkedLabel.Text <> "" Then
-                searchForm.SetFieldDescription(LinkedLabel.Text)
-            Else
-                searchForm.SetFieldDescription(FieldName)
-            End If
+            searchForm.SetFieldDescription(GetControlDescription(FieldName))
             searchForm.ShowDialog()
             searchForm.Dispose()
             CallByName(myForm, "FindFieldNew", CallType.Method, Me)

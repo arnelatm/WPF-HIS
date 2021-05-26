@@ -8,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CMyComboBox
     Inherits BCombobox
-    Implements IEntryControl
+    Implements IEntryControl, ILinkedLabel
 
     Private _defaultValue As Object
     Private _isNumeric As Boolean
@@ -330,7 +330,7 @@ Public Class CMyComboBox
     <Category("Custom Properties")>
     <Description("Select the label to which this control is linked.")>
     <Browsable(True)>
-    Public Property LinkedLabel As CLabel
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
 
     Private Const WmPaint As Integer = &HF
     Private _readOnlyCombo As Boolean
@@ -492,6 +492,16 @@ Public Class CMyComboBox
             _translatable = value
         End Set
     End Property
+
+    Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
+        Dim description As String
+        If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+            description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+        Else
+            description = LinkedLabel.Text
+        End If
+        Return description
+    End Function
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
     '    DisplayOnly = Not editableControl

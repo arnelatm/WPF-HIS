@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Drawing
 Imports System.Globalization
+Imports Autofac
 
 Public Class GlobalVariables
     Private Shared _appCultureInfo As CultureInfo
@@ -683,6 +684,15 @@ Public Class GlobalVariables
         Set
             _defaultNumberFormatInfo = Value
         End Set
+    End Property
+
+    Public Shared ReadOnly Property Container 'As Autofac.ContainerBuilder
+        Get
+            Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
+            'builder.RegisterType(Of SalaryLoanScheduleEntry)().[As](Of ISalaryLoanScheduleView)()
+            'builder.RegisterType(Of SalaryLoanSchedulePresenter)().[As](Of ISalaryLoanSchedulePresenter)()
+            Return builder.Build()
+        End Get
     End Property
 
     Public Shared Property TranslationMode As Boolean = False

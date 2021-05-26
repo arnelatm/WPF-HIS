@@ -249,6 +249,7 @@
     <Compile Include="BusinessLayer\SalesJournal.vb" />
     <Compile Include="BusinessLayer\PensionProvider.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
+    <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeePayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\SalaryLoanScheduleDao.vb" />
@@ -309,6 +310,7 @@
     <Compile Include="Form2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interfaces\ISalaryLoanSchedulePresenter.vb" />
     <Compile Include="LocalizedEnumConverter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -1362,8 +1364,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-Isp-server.config" />
-    <None Include="app-IspAdmin.config" />
+    <None Include="app - Copy.config" />
+    <None Include="app-Ispadmin2.config" />
     <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />

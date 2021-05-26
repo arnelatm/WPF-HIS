@@ -1,7 +1,10 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
+Imports AATM.Accounts.Interfaces
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Views.Forms
@@ -13,6 +16,7 @@ Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
+Imports Autofac
 Imports AutoMapper
 
 Namespace PresentationLayer.Views.Forms
@@ -35,6 +39,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Shared AccountsMapper As IMapper
         Private _logStatus As LoginStatus
+        Private _salaryLoanSchedulePresenter As ISalaryLoanSchedulePresenter
 
         ''' <summary>
         '''     Default form constructor.
@@ -63,6 +68,10 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = "User"
             PresenterObj = New UserPresenter(Me)
             SetupMapper()
+            'Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
+            'builder.RegisterType(Of SalaryLoanSchedulePresenter)().[As](Of ISalaryLoanSchedulePresenter)()
+            'Dim x = builder.Build()
+            '_salaryLoanSchedulePresenter = x.Resolve(Of ISalaryLoanSchedulePresenter)
             GlobalVariables.EventAggregator = New EventAggregator
 
         End Sub
@@ -1117,8 +1126,14 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SalaryLoanScheduleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalaryLoanScheduleToolStripMenuItem.Click
             Dim childMdiForm As SalaryLoanScheduleEntry
+            'Dim presenter 'As ISalaryLoanSchedulePresenter
+            'Dim builder As ContainerBuilder = GlobalVariables.Container
+            'builder.RegisterType(Of SalaryLoanScheduleEntry)().As(Of ISalaryLoanScheduleView)()
+            'builder.Build()
+            'presenter = builder.Resolve(Of ISalaryLoanSchedulePresenter)()'
+
             'Set the Parent Form of the Child window.
-            childMdiForm = New SalaryLoanScheduleEntry With {
+            childMdiForm = New SalaryLoanScheduleEntry() With {
                 .MdiParent = Me
                 }
             'Display the new form.

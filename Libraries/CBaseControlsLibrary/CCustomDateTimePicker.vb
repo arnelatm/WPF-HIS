@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
 
 Public Class CCustomDateTimePicker
-    Implements IEntryControl
+    Implements IEntryControl, ILinkedLabel
 
     Private _dropDownClicked = False
     Public EmptyMask As String
@@ -326,7 +326,17 @@ Public Class CCustomDateTimePicker
     <Category("Custom Properties")>
     <Description("Select the label to which this control is linked.")>
     <Browsable(True)>
-    Public Property LinkedLabel As CLabel
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
+
+    Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
+        Dim description As String
+        If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+            description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+        Else
+            description = LinkedLabel.Text
+        End If
+        Return description
+    End Function
 
     <Bindable(True)>
     <Category("Properties")>

@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -372,7 +373,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub cboQuantityType_ValueChanged(sender As Object, e As EventArgs) Handles cboQuantityType.SelectionChangeCommitted, cboQuantityType.Validated
             If cboCalculationType.Focused Then
                 If IsQtyTypeItemDisabled(cboCalculationType.SelectedIndex) Then
-                    Messaging.ShowParametrizedMessage(True, "MsgSelectedValueNotAllowed", {cboCalculationType.LinkedLabel.Text, "field1", cboQuantityType.LinkedLabel.Text, "field2"})
+                    Dim description As String = DirectCast(cboCalculationType, ILinkedLabel).GetControlDescription()
+                    Messaging.ShowParametrizedMessage(True, "MsgSelectedValueNotAllowed",
+                                                      {DirectCast(cboCalculationType, ILinkedLabel).GetControlDescription(), "field1",
+                                                       DirectCast(cboQuantityType, ILinkedLabel).GetControlDescription(), "field2"})
                     cboCalculationType.SelectedValue = -1
                 End If
                 DoubleBuffered = True

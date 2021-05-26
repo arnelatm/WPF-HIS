@@ -78,9 +78,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     End Sub
 
     Protected Sub New()
-        'ModelTblColProp = New ModelTblColProp
         Model = New Model()
-        'ModelDefaultFieldValue = New ModelDefaultFieldValue
     End Sub
 
     Delegate Sub FillDataFunc(ByRef dataView As Object, ByRef workRow As DataRow)
@@ -431,17 +429,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         '
     End Sub
 
-    'Public Sub FindField(fieldName As String, searchString As String, searchPlace As Char)
-    '    Dim idNo = Model.FindField(TableName, fieldName, searchString, searchPlace, DataFilter)
-    '    If idNo <> 0 Then
-    '        RecordPositionNumber = GetSortedRecordPosition(idNo)
-    '    Else
-    '        Messaging.Show(True, "MsgNoMatchingRecordFound")
-    '    End If
-    'End Sub
-
     Public Sub FindFieldNew(findableControl As IFindableControl)
-        'Dim fieldType = Model.GetFieldType(TableName, findableControl.FieldName)
         Dim idNo = Model.FindFieldNew(TableName, findableControl, SortOrderKey, DataFilter)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
@@ -459,20 +447,13 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End If
     End Sub
 
-    'Public Function FindFieldOnTable(tableNameToSearch, fieldName, searchString, searchPlace)
-    '    Dim idNo = Model.FindField(tableNameToSearch, fieldName, searchString, searchPlace, DataFilter)
-    '    Return idNo
-    'End Function
-
     Public Function FindFieldContinue(idNo As Int32) As Integer
         Return Model.FindFieldContinue(TableName, idNo, SortOrderKey)
     End Function
 
     Public Function FindRecord() As Integer
         Dim idNoOfFoundRecord As Integer = 0
-        'If OkToMove() Then
         idNoOfFoundRecord = FindFieldContinue(TargetIdNo)
-        'End If
         Return idNoOfFoundRecord
     End Function
 
@@ -586,28 +567,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End Try
     End Function
 
-    'Public Function FindField(txtControl As Control) As Integer
-    '    If _debugSwitch Then
-    '        Debugger.Break()
-    '    End If
-    '    If PresenterObj.OkToMove("FindField") Then
-    '        Dim idNoOfFoundRecord As Integer
-    '        idNoOfFoundRecord = PresenterObj.FindField(txtControl)
-    '        If idNoOfFoundRecord = 0 Then
-    '            _MBTextToFindNotFound.Show(Me, GetPropertyValue(txtControl, "GetTextToSearch"))
-    '            btnFind.Enabled = False
-    '        Else
-    '            btnFind.Enabled = True
-    '            PresenterObj.TargetIdNo = idNoOfFoundRecord
-    '            PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
-    '            PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
-    '            RaiseEvent DisplayedRecordChanged()
-    '        End If
-    '        CancelClose = True
-    '    End If
-    '    Return PresenterObj.TargetIdNo
-    'End Function
-
     Public Function GetRecordDateTimeStamp(idNo As Int32) As Object
         Try
             Return Model.GetRecordDateTimeStamp(idNo, TableName)
@@ -681,10 +640,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End Try
     End Function
 
-    'Public Function GetTableProperties() As List(Of TblColPropModel)
-    '    Return ModelTblColProp.GetMainTableColumnProperties(TableName)
-    'End Function
-
     Public Function GetTreeNodeText()
         Dim cModel As New TM
         Dim cText As String
@@ -705,10 +660,8 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
                 Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
             Else
-                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
                 Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
             End If
         Else
@@ -721,17 +674,9 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End If
     End Function
 
-    'Public Function GetRecordsByField(ByVal tableName As String, ByVal sortOrder As String, fieldNames As String(), Optional filter As String = Nothing)
-    '    Return Model.GetRecords(tableName, sortOrder, fieldNames, filter)
-    'End Function
-
     Public Function GetRecords(ByVal tableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
         Return Model.GetRecords(tableName, sortOrder, fieldNames, filter)
     End Function
-
-    'Public Function GetFields(ByVal tableName As String, ByVal sortOrder As String, ByVal ParamArray fieldNames() As String)
-    '    Return Model.GetFields(tableName, sortOrder, fieldNames)
-    'End Function
 
     Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
         Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
@@ -819,9 +764,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     End Sub
 
     Public Sub GoFirstRecord()
-        'If OkToMove() Then
         RecordPositionNumber = 1
-        'End If
     End Sub
 
     Public Sub GoLastRecord()
@@ -832,23 +775,19 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     End Sub
 
     Public Sub GoNextRecord()
-        'If OkToMove() Then
         If RecordPositionNumber = RecordCount Then
             Messaging.Show(True, "MsgLastRecordHit", "This is already the last record.", "Last Record")
         Else
             RecordPositionNumber += 1
         End If
-        'End If
     End Sub
 
     Public Sub GoPreviousRecord()
-        'If OkToMove() Then
         If RecordPositionNumber = 1 Or RecordPositionNumber = 0 Then
             Messaging.Show(True, "MsgFirstRecordHit", "This is already the first record.", "First Record")
         Else
             RecordPositionNumber -= 1
         End If
-        'End If
     End Sub
 
     Public Overridable Sub GoPrintRecord()
@@ -856,11 +795,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     End Sub
 
     Public Sub GoQuit()
-        'If OkToMove() Then
         CallByName(View, "CancelClose", CallType.Set, False)
-        'Else
-        'CallByName(View, "CancelClose", CallType.Set, True)
-        'End If
     End Sub
 
     Protected Overridable Sub GoSaveRecord(ByRef viewControl As Control)
@@ -888,7 +823,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                         RecordPositionNumber = GetSortedRecordPosition(idNo)
                     Else
                         RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
-                        'RecordPositionNumber = GetSortedRecordPosition(CallByName(View, IdFieldName, CallType.Get))
                     End If
                     If AddMode Then
                         AddMode = False
@@ -939,8 +873,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     End Sub
 
     Public Sub GoUndoChanges()
-        'If OkToMove() Then
-        'UndoMode = True
         If AddMode Then
             RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
             AddMode = False
@@ -948,8 +880,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             RecordPositionNumber = RecordPositionNumber
             EditMode = False
         End If
-        'End If
-        'UndoMode = False
     End Sub
 
     Public Overridable Function IsOkToEditRecord() As Boolean
@@ -965,7 +895,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     End Function
 
     Public Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
-        If CheckIfUnique(cCtrl.Text, fldName, TargetIdNo) Then
+        If CheckIfUnique(DirectCast(cCtrl, ILinkedLabel).GetControlDescription(), fldName, TargetIdNo) Then
             Return False
         End If
         Return True
@@ -1672,11 +1602,8 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                 Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
                 If Not isNumeric Then
                     Dim controlName As String
-                    If obj.LinkedLabel IsNot Nothing Then
-                        controlName = obj.LinkedLabel.Text
-                    Else
-                        controlName = obj.Name.Substring(3)
-                    End If
+                    controlName = obj.Name.Substring(3)
+                    controlName = DirectCast(obj, ILinkedLabel).GetControlDescription(controlName)
                     Messaging.ShowParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text})
                     obj.Focus()
                     Return False
@@ -1711,6 +1638,10 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                         Return False
                     End If
                 End If
+                If num < obj.MinimumValue OrElse num > obj.MaximumValue Then
+                    MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & obj.MinimumValue.ToString() & " to " & obj.MaximumValue.ToString())
+                    Return False
+                End If
                 Return True
             End If
         Else
@@ -1722,12 +1653,11 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         Dim originalValue As String
         Dim fldName As String = cCtrl.Name.Substring(3)
         Dim fieldDescription As String
-        If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-            fieldDescription = fldName
+        Dim linkedLabel = TryCast(cCtrl, ILinkedLabel)
+        If (linkedLabel IsNot Nothing) Then
+            fieldDescription = linkedLabel.GetControlDescription(fldName)
         Else
-            Dim cTextCtrl As CTextBox
-            cTextCtrl = cCtrl
-            fieldDescription = GetPropertyValue(cTextCtrl.LinkedLabel, "Text")
+            fieldDescription = fldName
         End If
         Dim recordIsNotUnique = False
         If AddMode Then
@@ -1803,7 +1733,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                             row.FldType.ToLower = "decimal" OrElse
                             row.FldType.ToLower = "bigint" OrElse
                             row.FldType.ToLower = "tinyint" OrElse
-                            row.FldType.ToLower = "smallmoney" OrElse
+                            row.FldType.ToLower = $"smallmoney" OrElse
                             row.FldType.ToLower = "real" OrElse
                             row.FldType.ToLower = "float" OrElse
                             row.FldType.ToLower = "numeric" Then
@@ -1820,6 +1750,12 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                                 Case "bigint"
                                     SetPropertyValue(cCtrl, "MinimumValue", -922337236854775808D)
                                     SetPropertyValue(cCtrl, "MaximumValue", 922337236854775807D)
+                                Case "money"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -922337203685477.5808D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 922337203685477.5807D)
+                                Case $"smallmoney"
+                                    SetPropertyValue(cCtrl, "MinimumValue", -214748.3647D)
+                                    SetPropertyValue(cCtrl, "MaximumValue", 214748.3647D)
                             End Select
                             SetPropertyValue(cCtrl, "ValueIsNumeric", True)
                         Else
@@ -1827,11 +1763,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                             SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
                             If (Not row.IsIdentity) And (Not row.IsNullable) Then
                                 If GetPropertyValue(cCtrl, "IgnoreNullCheck") Then
-                                    If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-                                        MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
-                                    Else
-                                        MyErrorProvider.Controls.AddMandatory(cCtrl, GetPropertyValue(cCtrl, "LinkedLabel"))
-                                    End If
+                                    MyErrorProvider.Controls.AddMandatory(cCtrl, DirectCast(cCtrl, ILinkedLabel).GetControlDescription(fldName))
                                 End If
                             End If
                         End If
@@ -2032,11 +1964,32 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                 obj.Visible = True
             End If
         Next
+
     End Sub
 
     Public Function GetFieldType(fieldName As String) As Type
         Return CallByName(Me, fieldName, CallType.Get).GetType
     End Function
+
+    'Public Sub ShowWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+    '    If ShowWaitForm.CancellationPending Then
+    '        e.Cancel = True
+    '        Return
+    '    End If
+    '    e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+    'End Sub
+
+    'Public Sub GotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
+    '    If GotoTargetRecordWorker.CancellationPending Then
+    '        e.Cancel = True
+    '        Return
+    '    End If
+    '    PresenterObj.TargetIdNo = e.Argument
+    '    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
+    '    PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+    '    PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
+    '    DoPaintEvents()
+    'End Sub
 
 End Class
 

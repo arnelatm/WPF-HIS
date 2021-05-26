@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CMaskedTextBox
     Inherits MaskedTextBox
-    Implements IEntryControl, IFindableControl
+    Implements IEntryControl, IFindableControl, ILinkedLabel
 
     Private _defaultVal As String
     Private _isNumeric As Boolean
@@ -308,31 +308,34 @@ Public Class CMaskedTextBox
     <Category("Custom Properties")>
     <Description("Select the label to which this control is linked.")>
     <Browsable(True)>
-    Public Property LinkedLabel As CLabel
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
+
+    Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
+        Dim description As String
+        If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+            description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+        Else
+            description = LinkedLabel.Text
+        End If
+        Return description
+    End Function
 
     Private Sub MenuItemFind_Click()
         Dim myForm = FindForm()
         Dim searchForm As CFindForm
+        Dim description = GetControlDescription(FieldName)
         searchForm = New CFindForm(Me)
         If DateTimePickerParent IsNot Nothing Then
             Dim dateTimePicker As CCustomDateTimePicker
             dateTimePicker = DateTimePickerParent
             FieldName = dateTimePicker.Name.Substring(3)
             FindDataType = IFindableControl.DataTypeEnum.DateTime
-            If dateTimePicker.LinkedLabel IsNot Nothing AndAlso dateTimePicker.LinkedLabel.Text <> "" Then
-                searchForm.SetFieldDescription(dateTimePicker.LinkedLabel.Text)
-            Else
-                searchForm.SetFieldDescription(FieldName)
-            End If
+            searchForm.SetFieldDescription(description)
         Else
             Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
             FindDataType = GetObjectDataType(x)
             FieldName = Name.Substring(3)
-            If LinkedLabel IsNot Nothing AndAlso LinkedLabel.Text <> "" Then
-                searchForm.SetFieldDescription(LinkedLabel.Text)
-            Else
-                searchForm.SetFieldDescription(FieldName)
-            End If
+            searchForm.SetFieldDescription(GetControlDescription(FieldName))
         End If
 
         searchForm.ShowDialog()

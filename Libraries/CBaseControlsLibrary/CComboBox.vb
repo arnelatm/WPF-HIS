@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CComboBox
     Inherits BCombobox
-    Implements IEntryControl
+    Implements IEntryControl, ILinkedLabel
 
     Private _defaultValue As Object
     Private _isNumeric As Boolean
@@ -165,7 +165,7 @@ Public Class CComboBox
     <Category("Custom Properties")>
     <Description("Select the label to which this control is linked.")>
     <Browsable(True)>
-    Public Property LinkedLabel As CLabel
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         If EditingMode Then
@@ -480,6 +480,16 @@ Public Class CComboBox
             ResumeLayout(True)
         End Try
     End Sub
+
+    Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
+        Dim description As String
+        If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+            description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+        Else
+            description = LinkedLabel.Text
+        End If
+        Return description
+    End Function
 
     'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
     '    ' not applicable

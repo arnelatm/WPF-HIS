@@ -12,7 +12,8 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
 Public Class CFormEntry
-    Implements ISubscriber(Of RecordPositionChanged),
+    Implements IEntryControl,
+               ISubscriber(Of RecordPositionChanged),
                ISubscriber(Of EditModeChanged),
                ISubscriber(Of AddModeChanged),
                ISubscriber(Of ValidatingData),
@@ -33,6 +34,9 @@ Public Class CFormEntry
     Protected SortOrderKey As String = "IdNo"
     Protected SingleData As Boolean = False
     Private _debugSwitch As Byte = 0
+    Private _editingMode As Boolean = False
+    Private _displayOnly As Boolean = False
+    Private _translatable As Boolean = True
 
     Public Sub New()
 
@@ -374,12 +378,10 @@ Public Class CFormEntry
 
         Dim fldName As String = cCtrl.Name.Substring(3)
         Dim fieldDescription As String
-        If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-            fieldDescription = fldName
+        If TypeOf cCtrl Is ILinkedLabel Then
+            fieldDescription = DirectCast(cCtrl, ILinkedLabel).GetControlDescription()
         Else
-            Dim cTextCtrl As CTextBox
-            cTextCtrl = cCtrl
-            fieldDescription = GetPropertyValue(cTextCtrl.LinkedLabel, "Text")
+            fieldDescription = fldName
         End If
         Dim recordIsNotUnique = False
         If PresenterObj.AddMode Then
@@ -469,67 +471,6 @@ Public Class CFormEntry
         End If
 
     End Function
-
-    'Public Function GetObjMinMaxValue(obj As Object, ByRef nMaxValue As Double) As Double
-    '    Dim objName = Strings.Mid(obj.Name, 4)
-    '    Dim targetValue = obj.Text
-    '    Dim y As PropertyInfo = [GetType]().GetProperty(objName)
-    '    Dim x As Type = y.PropertyType
-    '    Dim u As Type = Nullable.GetUnderlyingType(x)
-    '    Dim typeCode As TypeCode
-    '    Dim nMinValue As Double
-    '    If u Is Nothing Then
-    '        typeCode = Type.GetTypeCode(x)
-    '        nMinValue = GetMinMaxValue(typeCode, nMaxValue)
-    '    Else
-    '        typeCode = Type.GetTypeCode(u)
-    '        nMinValue = GetMinMaxValue(typeCode, nMaxValue)
-    '    End If
-    '    Return nMinValue
-    'End Function
-
-    'Public Function GetMinMaxValue(typeCode As TypeCode, ByRef nMaxValue As Double) As Double
-    '    Dim nMinValue As Double
-    '    Select Case typeCode
-    '        Case TypeCode.Byte
-    '            nMinValue = Byte.MinValue
-    '            nMaxValue = Byte.MaxValue
-    '        Case TypeCode.Int16
-    '            nMinValue = Int16.MinValue
-    '            nMaxValue = Int16.MaxValue
-    '        Case TypeCode.Int32
-    '            nMinValue = Int32.MinValue
-    '            nMaxValue = Int32.MaxValue
-    '        Case TypeCode.Int64
-    '            nMinValue = Int64.MinValue
-    '            nMaxValue = Int64.MaxValue
-    '        Case TypeCode.UInt16
-    '            nMinValue = UInt16.MinValue
-    '            nMaxValue = UInt16.MaxValue
-    '        Case TypeCode.UInt32
-    '            nMinValue = UInt32.MinValue
-    '            nMaxValue = UInt32.MaxValue
-    '        Case TypeCode.UInt64
-    '            nMinValue = UInt64.MinValue
-    '            nMaxValue = UInt64.MaxValue
-    '        Case TypeCode.Single
-    '            nMinValue = Single.MinValue
-    '            nMaxValue = Single.MaxValue
-    '        Case TypeCode.Decimal
-    '            nMinValue = Decimal.MinValue
-    '            nMaxValue = Decimal.MaxValue
-    '        Case TypeCode.DBNull
-    '            nMinValue = 0
-    '            nMaxValue = 0
-    '        Case Else
-    '            nMinValue = Double.MinValue
-    '            nMaxValue = Double.MaxValue
-    '    End Select
-    '    Return nMinValue
-    'End Function
-
-    'Protected Overridable Sub AddMandatoryFieldCHeck()
-    'End Sub
 
     Protected Overridable Function ChangesMade()
         Return PresenterObj.ChangesMade()
@@ -1062,11 +1003,7 @@ Public Class CFormEntry
                             SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
                             If (Not row.IsIdentity) And (Not row.IsNullable) Then
                                 If GetPropertyValue(cCtrl, "IgnoreNullCheck") Then
-                                    If GetPropertyValue(cCtrl, "LinkedLabel") Is Nothing Then
-                                        MyErrorProvider.Controls.AddMandatory(cCtrl, cCtrl.Name)
-                                    Else
-                                        MyErrorProvider.Controls.AddMandatory(cCtrl, GetPropertyValue(cCtrl, "LinkedLabel"))
-                                    End If
+                                    MyErrorProvider.Controls.AddMandatory(cCtrl, DirectCast(cCtrl, ILinkedLabel).GetControlDescription())
                                 End If
                             End If
                         End If
@@ -1137,6 +1074,57 @@ Public Class CFormEntry
     End Function
 
     Public Property HideNavigatorButtons As Boolean
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is Read Only .")>
+    <Browsable(True)>
+    Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set(value As Boolean)
+            If _displayOnly = value Then Exit Property
+            _displayOnly = value
+            If value Then
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+        End Set
+    End Property
+
+    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
+        Get
+            Return _editingMode
+        End Get
+        Set(value As Boolean)
+            _editingMode = value
+            If value Then
+                If DisplayOnly Then
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Else
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
+        End Set
+    End Property
+
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
+        Get
+            Return True
+        End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
+    End Property
 
     Public Overridable Sub ActiveToolStripButton_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
 

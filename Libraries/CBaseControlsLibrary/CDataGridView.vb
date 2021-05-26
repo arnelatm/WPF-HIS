@@ -829,4 +829,14 @@ Public Class CDataGridView
     '    End If
     'End Sub
 
+    'Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements IEntryControl.GetControlDescription
+    '    Dim description As String
+    '    If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+    '        description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+    '    Else
+    '        description = LinkedLabel.Text
+    '    End If
+    '    Return description
+    'End Function
+
 End Class
