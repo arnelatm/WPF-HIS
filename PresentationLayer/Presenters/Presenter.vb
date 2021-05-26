@@ -1001,6 +1001,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Select
     End Sub
 
+
     Public Overridable Function Save()
         Dim retVal As Integer = 0
         If EditMode AndAlso (Not AddMode) AndAlso RecordHasChanged(TargetIdNo, RecordDateTimeStampValue) Then

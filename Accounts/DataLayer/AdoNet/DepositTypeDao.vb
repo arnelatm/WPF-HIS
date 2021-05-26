@@ -78,7 +78,6 @@ Namespace DataLayer.AdoNet
                     "DepositTypeCode," &
                     "DepositTypeName," &
                     "DepositTypeNameAra," &
-                    "IdNo, " &
                     "Notes," &
                     "Rate," &
                     "WithBankCharges" &
@@ -86,10 +85,9 @@ Namespace DataLayer.AdoNet
                     "@AccountIdNo," &
                     "@BankChargesAccountIdNo," &
                     "@BankChargesVatAccountIdNo," &
-                    "@DepositType," &
+                    "@DepositTypeCode," &
                     "@DepositTypeName," &
                     "@DepositTypeNameAra," &
-                    "@IdNo," &
                     "@Notes," &
                     "@Rate," &
                     "@WithBankCharges" &
