@@ -9,7 +9,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CaComboBox
     Inherits BCombobox
-    Implements IEntryControl, IFindableControl
+    Implements IEntryControl, ILinkedLabel, IFindableControl
 
 #Region "Custom Properties"
 
@@ -134,10 +134,10 @@ Public Class CaComboBox
     <Browsable(True)>
     Public Property HideWhenNotEditingOrAdding As Boolean = False
 
-    <Category("Custom Properties")>
-    <Description("Select the label to which this control is linked.")>
-    <Browsable(True)>
-    Public Property LinkedLabel As CLabel
+    '<Category("Custom Properties")>
+    '<Description("Select the label to which this control is linked.")>
+    '<Browsable(True)>
+    'Public Property LinkedLabel As Label Implements IEntryControl.LinkedLabel
 
     Public Property OldValue As Integer
 
@@ -862,6 +862,11 @@ Public Class CaComboBox
 
     Public Property FieldDescription As String Implements IFindableControl.FieldDescription
 
+    '<Category("Custom Properties")>
+    '<Description("Select the label to which this control is linked.")>
+    '<Browsable(True)>
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
+
     Public Sub RevertValue()
         ' revert to previous value
         SelectedValue = _lastValue
@@ -896,6 +901,16 @@ Public Class CaComboBox
             If Not m.Msg = WmMousewheel Then MyBase.WndProc(m)
         End If
     End Sub
+
+    Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
+        Dim description As String
+        If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+            description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+        Else
+            description = LinkedLabel.Text
+        End If
+        Return description
+    End Function
 
     'Public Function binarySearch(value)
     '    Dim index As Int32

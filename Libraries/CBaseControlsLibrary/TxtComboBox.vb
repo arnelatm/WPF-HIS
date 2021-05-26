@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class TxtComboBox
-    Implements IEntryControl
+    Implements IEntryControl, ILinkedLabel
 
     Private _text As String = ""
     Private _dataSource As Object
@@ -317,7 +317,7 @@ Public Class TxtComboBox
     <Category("Custom Properties")>
     <Description("Select the label to which this control is linked.")>
     <Browsable(True)>
-    Public Property LinkedLabel As CLabel
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
 
     Public Sub MakeDefault()
         Text = _defaultValue
@@ -390,6 +390,16 @@ Public Class TxtComboBox
     Private Sub txtComboBox_LostFocus(sender As Object, e As EventArgs) Handles cboComboBox.LostFocus
         cboComboBox.DataSource = DataSource
     End Sub
+
+    Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
+        Dim description As String
+        If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+            description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+        Else
+            description = LinkedLabel.Text
+        End If
+        Return description
+    End Function
 
     'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
     '    If ViewableControl

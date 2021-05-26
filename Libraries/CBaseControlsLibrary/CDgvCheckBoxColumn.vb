@@ -75,6 +75,18 @@ Public Class CDgvCheckBoxColumn
         End Set
     End Property
 
+    'Public Property LinkedLabel As CLabel Implements IEntryControl.LinkedLabel
+
+    'Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements IEntryControl.GetControlDescription
+    '    Dim description As String
+    '    If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+    '        description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+    '    Else
+    '        description = LinkedLabel.Text
+    '    End If
+    '    Return description
+    'End Function
+
     Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
 
     Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled

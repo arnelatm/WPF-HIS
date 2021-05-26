@@ -27,7 +27,7 @@ Namespace DataLayer
     Public Interface IDaoOpenInvoice(Of TBiz)
 
         Function AddRecord(ByRef openInvoice As TBiz) As Integer
-        Function GetRecordByIdNo(ByVal idNo As Int32) As TBiz
+
     End Interface
 
     Public Interface IDaoAccount

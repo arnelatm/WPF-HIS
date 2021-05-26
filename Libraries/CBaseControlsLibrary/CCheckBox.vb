@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CCheckBox
     Inherits CheckBox
-    Implements IEntryControl, IFindableControl
+    Implements IEntryControl, IFindableControl, ILinkedLabel
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean = True
@@ -277,7 +277,7 @@ Public Class CCheckBox
     <Category("Custom Properties")>
     <Description("Select the label to which this control is linked.")>
     <Browsable(True)>
-    Public Property LinkedLabel As CLabel
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
 
     '    If Checked Then
     '        e.Graphics.FillRectangle(New SolidBrush(_checkRegionColor), checkRegion)
@@ -475,6 +475,16 @@ Public Class CCheckBox
 
     Public Function GetTextToSearch() As String
         Return _textToSearch
+    End Function
+
+    Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
+        Dim description As String
+        If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+            description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+        Else
+            description = LinkedLabel.Text
+        End If
+        Return description
     End Function
 
     'Private ReadOnly _checkRegionColor As Color = Color.Coral

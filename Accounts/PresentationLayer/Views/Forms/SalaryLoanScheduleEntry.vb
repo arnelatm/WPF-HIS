@@ -1,7 +1,11 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.Interfaces
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
+Imports Autofac
 
 Namespace PresentationLayer.Views.Forms
 
@@ -9,7 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Implements ISalaryLoanScheduleView
 
         Private ReadOnly _nfi As NumberFormatInfo
-
+        Private _presenter As ISalaryLoanSchedulePresenter
         'Private ReadOnly _ea As New EventAggregator
 
         Public Sub New()
@@ -19,6 +23,7 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = "SalaryLoanSchedule"
             SortOrderKey = "SalaryLoanScheduleName"
             _nfi = GlobalVariables.DefaultNumberFormatInfo
+            _presenter = New SalaryLoanSchedulePresenter(Me)
         End Sub
 
         Public Property Amount As Decimal Implements ISalaryLoanScheduleView.Amount

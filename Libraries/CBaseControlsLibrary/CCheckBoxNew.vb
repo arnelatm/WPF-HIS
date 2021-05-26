@@ -5,7 +5,7 @@ Imports AATM.Libraries.AatmInterfaces
 
 Public Class CCheckBoxNew
     Inherits CheckBox
-    Implements IEntryControl, IFindableControl
+    Implements IEntryControl, IFindableControl, ILinkedLabel
 
     Private _displayOnly As Boolean
     Private _editingMode As Boolean = True
@@ -77,7 +77,7 @@ Public Class CCheckBoxNew
     <Category("Custom Properties")>
     <Description("Select the label to which this control is linked.")>
     <Browsable(True)>
-    Public Property LinkedLabel As CLabel
+    Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
 
     Public Property OldValue() As String
         Get
@@ -203,6 +203,16 @@ Public Class CCheckBoxNew
 
     Public Function GetTextToSearch() As String
         Return _textToSearch
+    End Function
+
+    Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
+        Dim description As String
+        If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
+            description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
+        Else
+            description = LinkedLabel.Text
+        End If
+        Return description
     End Function
 
     'Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)

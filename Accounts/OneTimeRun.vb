@@ -37,7 +37,6 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgEmptyEmployeeOvertime", "Sorry, employee attendance not yet generated.  You must first generate attendance before generating payroll!", "Generate Error")
         Messaging.AddMessage("MsgFirstRecordHit", "This is already the first record.", "First Record")
         Messaging.AddMessage("MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed for this transaction!", "Delete Error")
-        Messaging.AddMessage("MsgPaidDiscountedInvoiceDeletion", "Deletion of paid or discounted invoices not allowed! If you really want to delete, please delete or change applied payment or discount.", "Delete Error")
         Messaging.AddMessage("MsgFirstRowInsertionNotAllowed", "Deletion of the first row Is Not allowed for this transaction!", "Delete Error")
         Messaging.AddMessage("MsgInvalidDate", "Invalid {dateField} Date entered, value must be between {startDate} and {endDate}!", "Invalid Date")
         Messaging.AddMessage("MsgInvalidEndOfYearDate", $"Invalid year end date entry. Month must be 12 and day must be 31!", "Invalid Entry")
