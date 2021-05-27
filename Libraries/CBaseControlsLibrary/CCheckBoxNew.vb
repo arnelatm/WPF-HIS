@@ -35,6 +35,12 @@ Public Class CCheckBoxNew
 
 #End Region
 
+    <Category("Custom Properties")>
+    <DefaultValue(CType(Nothing, String))>
+    <Description("Security Key to use for this control.")>
+    <Browsable(True)>
+    Public Property SecurityKey As String
+
     <Bindable(True)>
     <Category("Custom Properties")>
     <DefaultValue(GetType(Boolean))>

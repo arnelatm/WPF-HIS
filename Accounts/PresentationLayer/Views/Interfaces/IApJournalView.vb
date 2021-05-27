@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property AccountIdNo As Int16?
         Property Amount As Decimal
+        Property Approved As Boolean
         Property Cancelled As Boolean
         Property DateCreated As DateTime?
         Property DueDate As Date?

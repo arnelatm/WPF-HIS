@@ -249,10 +249,13 @@ Namespace AdoNet
             Return retVal
         End Function
 
-        Public Function GetControlSecurityIdNo(searchValue As String) As String Implements IBaseDao.GetControlSecurityIdNo
-            Dim sql As String =
-                    " Select Top 1 IdNo FROM SecurityObject_View1 " &
-                    " Where FullPathName = @SearchValue "
+        Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String Implements IBaseDao.GetControlSecurityIdNo
+            Dim sql As String
+            If menu Then
+                sql = "Select Top 1 IdNo FROM SecurityObject_View1 Where FullPathName = @SearchValue"
+            Else
+                sql = "Select Top 1 IdNo FROM SecurityObject_View1 Where SecurityObjectName = @SearchValue"
+            End If
             Dim params() As Object = {"@SearchValue", searchValue}
             Dim retVal = _db.Scalar(sql, params)
             If retVal Is Nothing Then

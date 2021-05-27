@@ -68,6 +68,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Approved As Boolean Implements IApJournalView.Approved
+            Get
+                Return chkApproved.Checked
+            End Get
+            Set
+                chkApproved.Checked = Value
+            End Set
+        End Property
+
         Public Property Cancelled As Boolean Implements IApJournalView.Cancelled
             Get
                 Return chkCancelled.Checked
@@ -79,13 +88,13 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IApJournalView.DateCreated
             Get
-                Return dtpDateCreated.Value
+                Return Convert.ToDateTime(txtDateCreated.Text)
             End Get
             Set
                 If Value.HasValue Then
-                    dtpDateCreated.Value = Value
+                    txtDateCreated.Text = Value
                 Else
-                    dtpDateCreated.Value = Date.Now()
+                    txtDateCreated.Text = Date.Now().ToString()
                 End If
             End Set
         End Property
@@ -279,7 +288,7 @@ Namespace PresentationLayer.Views.Forms
          {"AccountIdNo", cboAccountIdNo},
          {"Amount", txtAmount},
          {"Cancelled", chkCancelled},
-         {"DateCreated", dtpDateCreated},
+         {"DateCreated", txtDateCreated},
          {"DueDate", dtpDueDate},
          {"IdNo", TxtIdNo},
          {"InvoiceNo", txtInvoiceNo},

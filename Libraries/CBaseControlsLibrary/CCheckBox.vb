@@ -43,6 +43,12 @@ Public Class CCheckBox
         Text = ""
     End Sub
 
+    <Category("Custom Properties")>
+    <DefaultValue(CType(Nothing, String))>
+    <Description("Security Key to use for this control.")>
+    <Browsable(True)>
+    Public Property SecurityKey As String
+
     'Calculate the text bounds, excluding the check box.
     Public ReadOnly Property TextRectangle() As Rectangle
         Get

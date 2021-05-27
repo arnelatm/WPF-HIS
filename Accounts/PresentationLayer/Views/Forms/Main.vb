@@ -908,6 +908,7 @@ Namespace PresentationLayer.Views.Forms
                         addSecurityObject = True
                     End If
                 Else
+                    MessageBox.Show("Security Objects not changed there already exists security objects. You must delete them (except the basic 7 security groups) before you can Initialize the security objects.")
                     addSecurityObject = False
                 End If
                 If addSecurityObject Then
@@ -1115,12 +1116,12 @@ Namespace PresentationLayer.Views.Forms
             ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         End Sub
 
-        Private Sub TransactionNotesTranslatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransactionNotesTranslaterToolStripMenuItem.Click
+        Private Sub TransactionNotesTranslatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransactionNotesTranslator.Click
             Dim myForm As New NotesTranslator
             myForm.Show()
         End Sub
 
-        Private Sub PayrollReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PayrollReportToolStripMenuItem.Click
+        Private Sub PayrollReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPeriodicPayroll.Click
 
         End Sub
 

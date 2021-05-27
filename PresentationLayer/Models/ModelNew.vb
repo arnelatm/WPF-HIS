@@ -87,9 +87,9 @@ Public Class ModelNew
         Return DataService.GetBizObject()
     End Function
 
-    Public Function GetControlSecurityIdNo(searchValue As String) As String _
+    Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String _
         Implements IModelNew.GetControlSecurityIdNo
-        Return Service.GetControlSecurityIdNo(searchValue)
+        Return Service.GetControlSecurityIdNo(searchValue, menu)
     End Function
 
     Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object Implements IModelNew.GetField

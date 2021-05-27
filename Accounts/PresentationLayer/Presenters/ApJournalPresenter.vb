@@ -334,6 +334,17 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        'Public Overrides Function IsOkToEditRecord() As Boolean
+        '    Dim retVal As Boolean = True
+        '    If MyBase.IsOkToEditRecord() Then
+        '        If CallByName(View, "chkApproved.DisplayOnly", CallType.Get) Then
+        '            retVal = False
+        '        End If
+        '        Return retVal
+        '    End If
+        '    Return retVal
+        'End Function
+
     End Class
 
 End Namespace

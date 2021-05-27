@@ -18,6 +18,7 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "AccountIdNo," &
                     "Amount," &
+                    "Approved," &
                     "Cancelled," &
                     "DateCreated," &
                     "DueDate," &
@@ -53,6 +54,7 @@ Namespace DataLayer.AdoNet
                     " UPDATE [ApJournal] Set " &
                     "AccountIdNo = @AccountIdNo," &
                     "Amount = @Amount," &
+                    "Approved = @Approved," &
                     "Cancelled = @Cancelled," &
                     "DueDate = @DueDate," &
                     "InvoiceDate = @InvoiceDate," &
@@ -76,6 +78,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String = "INSERT INTO [ApJournal] (" &
                     "AccountIdNo," &
                     "Amount," &
+                    "Approved," &
                     "Cancelled," &
                     "DueDate," &
                     "InvoiceDate," &
@@ -93,6 +96,7 @@ Namespace DataLayer.AdoNet
                     ") VALUES (" &
                     "@AccountIdNo," &
                     "@Amount," &
+                    "@Approved," &
                     "@Cancelled," &
                     "@DueDate," &
                     "@InvoiceDate," &
@@ -116,6 +120,7 @@ Namespace DataLayer.AdoNet
             New ApJournal() With {
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
+            .Approved = Extensions.AsBool(reader("Approved")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .DueDate = Extensions.AsNullable(Of DateTime?)(reader("DueDate")),
@@ -138,6 +143,7 @@ Namespace DataLayer.AdoNet
             Return New Object() {
                                     "@AccountIdNo", apJournal.AccountIdNo,
                                     "@Amount", apJournal.Amount,
+                                    "@Approved", apJournal.Approved,
                                     "@Cancelled", apJournal.Cancelled,
                                     "@DueDate", apJournal.DueDate,
                                     "@IdNo", apJournal.IdNo,

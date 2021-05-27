@@ -87,9 +87,9 @@ Public Class Model
         Return DataService.GetBizObject()
     End Function
 
-    Public Function GetControlSecurityIdNo(searchValue As String) As String _
+    Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String _
         Implements IModel.GetControlSecurityIdNo
-        Return Service.GetControlSecurityIdNo(searchValue)
+        Return Service.GetControlSecurityIdNo(searchValue, menu)
     End Function
 
     Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object Implements IModel.GetField
@@ -173,7 +173,7 @@ Public Class Model
                 .IdNo = data(i * 4 - 4),
                 .Name = data(i * 4 - 3),
                 .ParentIdNo = CInt(If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 2))),
-                .Code = If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 1))
+                .Code = If(data(i * 4 - 1) Is DBNull.Value, "", data(i * 4 - 1))
             }
             tlData.Add(tData)
         Next

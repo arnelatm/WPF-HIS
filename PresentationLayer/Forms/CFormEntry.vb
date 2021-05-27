@@ -888,10 +888,6 @@ Public Class CFormEntry
         CutText()
     End Sub
 
-    'Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String) As Int64
-    '    Return PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
-    'End Function
-
     Private Function GetControlSecurityKey(ByRef cCtrl As Control)
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
@@ -903,7 +899,7 @@ Public Class CFormEntry
 
     Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
-        controlSecurityObjectIdNo = PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
+        controlSecurityObjectIdNo = PresenterObj.GetControlSecurityIdNo(controlSecurityKey, False)
         Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
     End Function
 
