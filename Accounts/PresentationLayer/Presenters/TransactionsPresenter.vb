@@ -1,4 +1,5 @@
 ﻿Imports AATM.Libraries
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
@@ -48,9 +49,20 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
                 Dim approved = CallByName(View, "Approved", CallType.Get)
-                If retVal AndAlso type.GetProperty("Approved") IsNot Nothing Then
-                    Dim approved = CallByName(View, "Approved", CallType.Get)
-                    If approved Then
+                If retVal AndAlso approved Then
+                    Dim controlSecurityValues As ArrayList
+                    Dim isEditable As Boolean
+                    Dim controlSecurityObjectIdNo As Int32
+                    controlSecurityObjectIdNo = GetControlSecurityIdNo("ApproveTransactions")
+                    controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+                    If controlSecurityValues.Count > 0 Then
+                        isEditable = controlSecurityValues(1)
+                    Else
+                        isEditable = False
+                    End If
+                    If isEditable Then
+                        ' user has editing options for approved transactions
+                    Else
                         Messaging.Show(True, "MsgEditingApprovedTransaction")
                         retVal = False
                     End If

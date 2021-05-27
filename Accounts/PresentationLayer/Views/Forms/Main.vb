@@ -899,7 +899,7 @@ Namespace PresentationLayer.Views.Forms
             Dim nRecCount = PresenterObj.GetRecordCount("SecurityObject")
             If GlobalVariables.UserName.ToLower() = $"arnel" Then
                 Dim addSecurityObject As Boolean = False
-                If nRecCount <= 7 Then
+                If nRecCount <= 10 Then
                     If nRecCount = 0 Then
                         If PresenterObj.InitializeSecurityObject() > 0 Then
                             addSecurityObject = True
@@ -908,7 +908,7 @@ Namespace PresentationLayer.Views.Forms
                         addSecurityObject = True
                     End If
                 Else
-                    MessageBox.Show("Security Objects not changed there already exists security objects. You must delete them (except the basic 7 security groups) before you can Initialize the security objects.")
+                    MessageBox.Show("Security Objects not changed there already exists security objects. You must delete them (except the basic 10 security groups) before you can Initialize the security objects.")
                     addSecurityObject = False
                 End If
                 If addSecurityObject Then
