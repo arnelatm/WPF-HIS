@@ -4,8 +4,10 @@
     [Amount]          SMALLMONEY NULL,
     [StartDate]       DATE       NULL,
     [PeriodicPayment] SMALLMONEY NULL,
-    [DateCreated]     DATETIME   NULL,
+    [DateCreated]     DATETIME   CONSTRAINT [DF_SalaryLoanSchedule_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]   ROWVERSION NULL,
     CONSTRAINT [PK_SalaryLoan] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
