@@ -665,6 +665,8 @@ Namespace AdoNet
                                 {sql1 & "(5, N'5', N'_PowerUser', NULL, NULL, NULL, 0, NULL)"},
                                 {sql1 & "(6, N'6', N'_User', NULL, NULL, NULL, 0, NULL)"},
                                 {sql1 & "(7, N'7', N'_Guest', NULL, NULL, NULL, 0, NULL)"},
+                                {sql1 & "(8, N'8', N'Translators', NULL, NULL, NULL, 0, NULL)"},
+                                {sql1 & "(9, N'9', N'ApproveTransactions', NULL, NULL, NULL, 0, NULL)"},
                                 {"SET IDENTITY_INSERT [SecurityObject] OFF "}}
             Return _db.ExecuteCommands("SecurityObjectCreate", commandArray)
         End Function

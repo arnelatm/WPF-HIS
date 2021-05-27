@@ -18,6 +18,11 @@ INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectCode], [SecurityObjectName
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectCode], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [SystemViewIdNo], [ManuallyAdded], [Notes]) VALUES (7, N'7', N'_Guest', NULL, NULL, NULL, NULL, NULL)
 GO
+INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectCode], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [SystemViewIdNo], [ManuallyAdded], [Notes]) VALUES (8, N'8', N'ApproveTransactions', NULL, NULL, NULL, NULL, NULL)
+GO
+INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectCode], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [SystemViewIdNo], [ManuallyAdded], [Notes]) VALUES (9, N'9', N'Translators', NULL, NULL, NULL, NULL, NULL)
+GO
+DBCC CHECKIDENT ('SecurityObject', RESEED, 10)  
 SET IDENTITY_INSERT [dbo].[SecurityObject] OFF
 GO
 GO
