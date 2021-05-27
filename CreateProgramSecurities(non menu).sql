@@ -1,10 +1,7 @@
 ﻿USE [ISPDATA]
 GO
-Delete SecurityObject
-DBCC CHECKIDENT ('SecurityObject', RESEED, 1)  
-SET IDENTITY_INSERT [dbo].[SecurityObject] ON 
 GO
-INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectCode], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [SystemViewIdNo], [ManuallyAdded], [Notes]) VALUES (1, N'1', N'_SuperAdministrator', NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectCode], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [SystemViewIdNo], [ManuallyAdded], [Notes]) VALUES (1, N'1001', N'TransactionApproval', NULL, NULL, NULL, NULL, NULL)
 GO
 INSERT [dbo].[SecurityObject] ([IdNo], [SecurityObjectCode], [SecurityObjectName], [SecurityObjectNameAra], [ParentIdNo], [SystemViewIdNo], [ManuallyAdded], [Notes]) VALUES (2, N'2', N'_Administrator', NULL, NULL, NULL, NULL, NULL)
 GO

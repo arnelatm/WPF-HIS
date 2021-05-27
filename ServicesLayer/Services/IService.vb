@@ -80,7 +80,7 @@ Namespace Services
 
         Function IsValid(ByVal model) As Boolean
 
-        Function GetControlSecurityIdNo(searchValue As String) As String
+        Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
 
         Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
 

@@ -23,7 +23,7 @@ Public Interface IBaseDao
 
     Function FindFieldContinue(tableName As String, lastIdNo As Int32, sortOrderKey As String) As Object
 
-    Function GetControlSecurityIdNo(searchValue As String) As String
+    Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
 
     Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 

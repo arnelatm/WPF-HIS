@@ -7,6 +7,7 @@
     Public Class ApJournalModel
         Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
+        Public Property Approved As Boolean
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
         Public Property DueDate As Date?

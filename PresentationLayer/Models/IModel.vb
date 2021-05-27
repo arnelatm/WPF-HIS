@@ -34,7 +34,7 @@ Public Interface IModel
 
     Function GetBizObjectRules() As Object
 
-    Function GetControlSecurityIdNo(searchValue As String) As String
+    Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
 
     Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
 

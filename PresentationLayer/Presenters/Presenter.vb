@@ -453,9 +453,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Return Model.GetBizObjectRules()
     End Function
 
-    Public Function GetControlSecurityIdNo(searchValue As String) As String
+    Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
         Try
-            Return Model.GetControlSecurityIdNo(searchValue)
+            Return Model.GetControlSecurityIdNo(searchValue, menu)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -1000,7 +1000,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                 GoFilter()
         End Select
     End Sub
-
 
     Public Overridable Function Save()
         Dim retVal As Integer = 0

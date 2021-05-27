@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ParentIdNo As Int32? Implements ISecurityObjectView.ParentIdNo
             Get
-                Return cacParentIdNo.GetNullableValue(Of Int16)
+                Return cacParentIdNo.GetNullableValue(Of Int32)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)

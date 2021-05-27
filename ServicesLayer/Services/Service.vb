@@ -175,8 +175,8 @@ Namespace Services
             Return DataDao.GetAll(sortKey)
         End Function
 
-        Public Function GetControlSecurityIdNo(searchValue As String) As String Implements IService.GetControlSecurityIdNo
-            Return BaseDao.GetControlSecurityIdNo(searchValue)
+        Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String Implements IService.GetControlSecurityIdNo
+            Return BaseDao.GetControlSecurityIdNo(searchValue, menu)
         End Function
 
         Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordByIdNo
