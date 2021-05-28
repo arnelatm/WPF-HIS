@@ -1,7 +1,9 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CCheckBoxNew
     Inherits CheckBox
@@ -16,6 +18,7 @@ Public Class CCheckBoxNew
     Private _textToSearch As String
     Private _searchPlace As IFindableControl.SearchPlaceEnum
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
+    'Private ReadOnly _stringFormat As New StringFormat
 
     Public Sub New()
         MyBase.New()
@@ -26,6 +29,8 @@ Public Class CCheckBoxNew
         FlatStyle = System.Windows.Forms.FlatStyle.Flat
         AutoSize = True
         'Height = 16
+        '_stringFormat.Alignment = StringAlignment.Center
+        '_stringFormat.LineAlignment = StringAlignment.Center
     End Sub
 
 #Region "Declarations#"
@@ -221,6 +226,28 @@ Public Class CCheckBoxNew
         Return description
     End Function
 
+    'Protected Overrides Sub OnPaint(ByVal pEvent As System.Windows.Forms.PaintEventArgs)
+    '    Dim brush As New SolidBrush(BackColor)
+    '    Dim boxSide As Integer = CInt(pEvent.Graphics.MeasureString(Text, Font, Width).Height)
+    '    pEvent.Graphics.FillRectangle(brush, 0, 0, Width, Height)
+    '    If Checked And Enabled Then
+    '        pEvent.Graphics.DrawString(Chr(252), New Font("Wingdings", Font.Size, FontStyle.Bold), Brushes.Black, New Rectangle(0, boxSide \ 10, boxSide, boxSide), _stringFormat)
+    '        pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 0, boxSide - 1, boxSide - 1))
+    '        pEvent.Graphics.DrawString(Text, Font, Brushes.Black, boxSide, 0)
+    '    ElseIf Enabled Then
+    '        pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 0, boxSide - 1, boxSide - 1))
+    '        pEvent.Graphics.DrawString(Text, Font, Brushes.Black, boxSide, 0)
+    '    ElseIf Checked And Not Enabled Then
+    '        pEvent.Graphics.DrawString(Chr(252), New Font("Wingdings", Font.Size, FontStyle.Bold), Brushes.Gray, New Rectangle(0, boxSide \ 10, boxSide, boxSide), _stringFormat)
+    '        pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 0, boxSide - 1, boxSide - 1))
+    '        pEvent.Graphics.DrawString(Text, Font, Brushes.Gray, boxSide, 0)
+    '    Else
+    '        pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 0, boxSide - 1, boxSide - 1))
+    '        pEvent.Graphics.DrawString(Text, Font, Brushes.Gray, boxSide, 0)
+    '    End If
+    '    brush.Dispose()
+    'End Sub
+
     'Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
     '    'pEvent.Graphics.Clear(BackColor)
 
@@ -256,17 +283,89 @@ Public Class CCheckBoxNew
     '    End If
     'End Sub
 
-    'Protected Overrides Sub OnPaint(ByVal pevent As System.Windows.Forms.PaintEventArgs)
-    '    Dim Brsh As New SolidBrush(BackColor)
-    '    Dim BoxSide As Integer = CInt(pevent.Graphics.MeasureString(Text, Font, Width).Height)
-    '    pevent.Graphics.FillRectangle(Brsh, 0, 0, Width, Height)
+    'Protected Overrides Sub OnPaint(ByVal pEvent As System.Windows.Forms.PaintEventArgs)
+    '    Dim brush As New SolidBrush(Color.Gray)
+    '    'Dim boxSide As Integer = CInt(pEvent.Graphics.MeasureString(Text, Font, Width).Height)
+    '    Dim boxSide As Integer = 12
+    '    'Dim bitmap As Bitmap = New Bitmap(Width, Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+    '    'bitmap.MakeTransparent()
+    '    'BackgroundImage = bitmap
+    '    pEvent.Graphics.FillRectangle(brush, 0, 0, boxSide, boxSide)
     '    If Checked Then
-    '        pevent.Graphics.FillRectangle(Brushes.Black, New Rectangle(0, 0, BoxSide, BoxSide))
+    '        pEvent.Graphics.FillRectangle(Brushes.Black, New Rectangle(0, 0, boxSide, boxSide))
     '    Else
-    '        pevent.Graphics.FillRectangle(Brushes.White, New Rectangle(0, 0, BoxSide, BoxSide))
-    '        pevent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 0, BoxSide - 1, BoxSide - 1))
+    '        pEvent.Graphics.FillRectangle(Brushes.White, New Rectangle(0, 0, boxSide, boxSide))
+    '        pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 0, boxSide - 1, boxSide - 1))
     '    End If
-    '    pevent.Graphics.DrawString(Text, Font, Brushes.Black, BoxSide, 0)
+    '    pEvent.Graphics.DrawString(Text, Font, Brushes.Black, boxSide + 2, 0)
     'End Sub
+
+    Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
+        MyBase.OnPaint(pEvent)
+        'Using brush As SolidBrush = New SolidBrush(Color.Gray)
+        '    'pEvent.Graphics.Clear(Color.Transparent)
+        '    'Dim bitmap As Bitmap = New Bitmap(Width, Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+        '    'Bitmap.MakeTransparent()
+        '    'Dim graph As Graphics = Graphics.FromImage(bitmap)
+        '    'pEvent.Graphics.DrawString(Text, Font, brush, 14, 0)
+        '    'BackgroundImage = bitmap
+        'End Using
+
+        Dim pt As Point = New Point(1, 6)
+        Dim rect As Rectangle = New Rectangle(pt, New Size(9, 9))
+        Dim cBoxColorFill As Color
+
+        If Focused Then
+            If _editingMode And Not DisplayOnly Then
+                cBoxColorFill = Color.White
+            Else
+                cBoxColorFill = Color.LightGray
+            End If
+        Else
+            If _editingMode And Not DisplayOnly Then
+                cBoxColorFill = Color.White
+            Else
+                cBoxColorFill = Color.LightGray
+            End If
+        End If
+        Dim cBrush = New SolidBrush(cBoxColorFill)
+        pEvent.Graphics.FillRectangle(cBrush, rect)
+
+        If Checked Then
+            Dim cCol As Color
+            If _editingMode And Not DisplayOnly Then
+                If Focused Then
+                    cCol = Color.Blue
+                Else
+                    cCol = Color.Black
+                End If
+            Else
+                If Focused Then
+                    cCol = Color.Blue
+                Else
+                    cCol = Color.Black
+                End If
+            End If
+            Using brush As SolidBrush = New SolidBrush(cCol)
+                Using wing As Font = New Font("Wingdings", 10.0F)
+                    pEvent.Graphics.DrawString("ü", wing, brush, -1, 4)
+                End Using
+            End Using
+        End If
+
+        'pEvent.Graphics.DrawRectangle(Pens.Gray, rect)
+        'Dim fRect As Rectangle = ClientRectangle
+
+        'If Focused Then
+        '    fRect.Inflate(-1, -1)
+
+        '    Using pen As Pen = New Pen(Brushes.Gray) With {
+        '        .DashStyle = DashStyle.Dot
+        '        }
+        '        pEvent.Graphics.DrawRectangle(pen, fRect)
+        '    End Using
+        'End If
+
+    End Sub
 
 End Class

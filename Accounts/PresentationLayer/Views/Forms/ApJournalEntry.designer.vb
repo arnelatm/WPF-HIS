@@ -90,6 +90,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtSettlementDiscount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPercent = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CheckBox1 = New System.Windows.Forms.CheckBox()
             Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
             Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
             Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
@@ -1043,6 +1044,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.CLabel5)
             Me.CFlowLayout2.Controls.Add(Me.txtSettlementDiscount)
             Me.CFlowLayout2.Controls.Add(Me.lblPercent)
+            Me.CFlowLayout2.Controls.Add(Me.CheckBox1)
             Me.CFlowLayout2.Controls.Add(Me.chkCancelled)
             Me.CFlowLayout2.Controls.Add(Me.chkApproved)
             Me.CFlowLayout2.Controls.Add(Me.chkPosted)
@@ -1207,6 +1209,16 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.lblPercent.Translatable = True
             '
+            'CheckBox1
+            '
+            Me.CheckBox1.AutoSize = True
+            Me.CheckBox1.Location = New System.Drawing.Point(18, 93)
+            Me.CheckBox1.Name = "CheckBox1"
+            Me.CheckBox1.Size = New System.Drawing.Size(54, 17)
+            Me.CheckBox1.TabIndex = 292
+            Me.CheckBox1.Text = "HELP"
+            Me.CheckBox1.UseVisualStyleBackColor = True
+            '
             'chkCancelled
             '
             Me.chkCancelled.AutoCheck = False
@@ -1225,7 +1237,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.IFindableControl_FindEnabled = False
             Me.chkCancelled.IgnoreCase = False
             Me.chkCancelled.LinkedLabel = Nothing
-            Me.chkCancelled.Location = New System.Drawing.Point(18, 93)
+            Me.chkCancelled.Location = New System.Drawing.Point(78, 93)
             Me.chkCancelled.Name = "chkCancelled"
             Me.chkCancelled.OldValue = Nothing
             Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.ExactValue
@@ -1436,5 +1448,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkApproved As CCheckBoxNew
         Friend WithEvents chkCancelled As CCheckBoxNew
         Friend WithEvents chkPosted As CCheckBoxNew
+        Friend WithEvents CheckBox1 As CheckBox
     End Class
 End NameSpace
