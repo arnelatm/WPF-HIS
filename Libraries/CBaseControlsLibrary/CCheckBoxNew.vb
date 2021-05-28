@@ -311,23 +311,38 @@ Public Class CCheckBoxNew
         '    'BackgroundImage = bitmap
         'End Using
 
-        Dim pt As Point = New Point(1, 6)
-        Dim rect As Rectangle = New Rectangle(pt, New Size(9, 9))
+        'Dim pt1 As Point = New Point(0, 5)
+        'Dim rect1 As Rectangle = New Rectangle(pt1, New Size(9, 9))
+        'Dim cBoxLineColor As Color
+
+        Dim pt As Point = New Point(2, 6)
+        Dim rect As Rectangle = New Rectangle(pt, New Size(8, 8))
         Dim cBoxColorFill As Color
 
-        If Focused Then
-            If _editingMode And Not DisplayOnly Then
-                cBoxColorFill = Color.White
+        If _editingMode Then
+            If DisplayOnly Then
+                cBoxColorFill = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Else
-                cBoxColorFill = Color.LightGray
+                cBoxColorFill = GlobalVariables.DefaultFormControlBackgroundColor
             End If
         Else
-            If _editingMode And Not DisplayOnly Then
-                cBoxColorFill = Color.White
-            Else
-                cBoxColorFill = Color.LightGray
-            End If
+            cBoxColorFill = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
+
+        'If Focused Then
+        '    If _editingMode And Not DisplayOnly Then
+        '        cBoxColorFill = GlobalVariables.DefaultFormControlBackgroundColor
+        '    Else
+        '        cBoxColorFill = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        '    End If
+        'Else
+        '    If _editingMode And Not DisplayOnly Then
+        '        cBoxColorFill = Color.White
+        '    Else
+        '        cBoxColorFill = Color.LightGray
+        '    End If
+        'End If
+        pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 4, 10, 10))
         Dim cBrush = New SolidBrush(cBoxColorFill)
         pEvent.Graphics.FillRectangle(cBrush, rect)
 
@@ -337,13 +352,13 @@ Public Class CCheckBoxNew
                 If Focused Then
                     cCol = Color.Blue
                 Else
-                    cCol = Color.Black
+                    cCol = GlobalVariables.DefaultFormControlForegroundColor
                 End If
             Else
                 If Focused Then
                     cCol = Color.Blue
                 Else
-                    cCol = Color.Black
+                    cCol = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 End If
             End If
             Using brush As SolidBrush = New SolidBrush(cCol)
