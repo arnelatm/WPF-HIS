@@ -174,29 +174,29 @@ Namespace PresentationLayer.Views.Forms
             Me.floMain = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.CFlowLayout6.SuspendLayout
+            Me.CFlowLayout6.SuspendLayout()
             CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.tbcEmployee.SuspendLayout
-            Me.tbpPersonal.SuspendLayout
-            Me.floPersonal.SuspendLayout
-            Me.tbpContact.SuspendLayout
-            Me.floContactInformation.SuspendLayout
-            Me.TableLayoutPanel1.SuspendLayout
+            Me.tbcEmployee.SuspendLayout()
+            Me.tbpPersonal.SuspendLayout()
+            Me.floPersonal.SuspendLayout()
+            Me.tbpContact.SuspendLayout()
+            Me.floContactInformation.SuspendLayout()
+            Me.TableLayoutPanel1.SuspendLayout()
             CType(Me.DataGridViewPhoneDisplay, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.tbpEmployment.SuspendLayout
-            Me.CFlowLayout5.SuspendLayout
-            Me.tbpPayroll.SuspendLayout
-            Me.tbpEarnings.SuspendLayout
+            Me.tbpEmployment.SuspendLayout()
+            Me.CFlowLayout5.SuspendLayout()
+            Me.tbpPayroll.SuspendLayout()
+            Me.tbpEarnings.SuspendLayout()
             CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.tbpDeductions.SuspendLayout
+            Me.tbpDeductions.SuspendLayout()
             CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.tbpPhones.SuspendLayout
+            Me.tbpPhones.SuspendLayout()
             CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.floMain.SuspendLayout
-            Me.CFlowLayout4.SuspendLayout
-            Me.SuspendLayout
+            Me.floMain.SuspendLayout()
+            Me.CFlowLayout4.SuspendLayout()
+            Me.SuspendLayout()
             '
             'TreeViewTableName
             '
@@ -259,6 +259,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPaymentMethod.TabIndex = 288
             Me.lblPaymentMethod.Text = "Payment Method"
             Me.lblPaymentMethod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPaymentMethod.Translatable = True
             '
             'cboPaymentMethod
             '
@@ -299,6 +300,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentMethod.SuggestListOrderRule = Nothing
             Me.cboPaymentMethod.TabIndex = 287
             Me.cboPaymentMethod.TextToSearch = Nothing
+            Me.cboPaymentMethod.Translatable = False
             Me.cboPaymentMethod.ValueIsMandatory = False
             Me.cboPaymentMethod.ValueIsNullable = False
             Me.cboPaymentMethod.ValueIsNumeric = False
@@ -317,6 +319,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBankIdNo.TabIndex = 216
             Me.lblBankIdNo.Text = "Bank Name"
             Me.lblBankIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblBankIdNo.Translatable = True
             '
             'cacBankIdNo
             '
@@ -357,6 +360,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
             Me.cacBankIdNo.TabIndex = 2
             Me.cacBankIdNo.TextToSearch = Nothing
+            Me.cacBankIdNo.Translatable = False
             Me.cacBankIdNo.ValueIsMandatory = False
             Me.cacBankIdNo.ValueIsNullable = False
             Me.cacBankIdNo.ValueIsNumeric = False
@@ -375,6 +379,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBankAccountNo.TabIndex = 218
             Me.lblBankAccountNo.Text = "Account No."
             Me.lblBankAccountNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblBankAccountNo.Translatable = True
             '
             'txtBankAccountNo
             '
@@ -405,6 +410,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankAccountNo.SecurityKey = ""
             Me.txtBankAccountNo.Size = New System.Drawing.Size(200, 23)
             Me.txtBankAccountNo.TabIndex = 3
+            Me.txtBankAccountNo.Translatable = False
             '
             'lblBalance
             '
@@ -419,6 +425,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBalance.TabIndex = 285
             Me.lblBalance.Text = "Cash Advance Balance"
             Me.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblBalance.Translatable = True
             '
             'txtBalance
             '
@@ -450,6 +457,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBalance.SecurityKey = ""
             Me.txtBalance.Size = New System.Drawing.Size(93, 23)
             Me.txtBalance.TabIndex = 4
+            Me.txtBalance.Translatable = False
             Me.txtBalance.ValueIsNumeric = True
             '
             'lblOpeningBalance
@@ -465,6 +473,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblOpeningBalance.TabIndex = 284
             Me.lblOpeningBalance.Text = "Open. Bal. (Cash Adv.)"
             Me.lblOpeningBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblOpeningBalance.Translatable = True
             '
             'txtOpeningBalance
             '
@@ -496,6 +505,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtOpeningBalance.SecurityKey = ""
             Me.txtOpeningBalance.Size = New System.Drawing.Size(93, 23)
             Me.txtOpeningBalance.TabIndex = 5
+            Me.txtOpeningBalance.Translatable = False
             Me.txtOpeningBalance.ValueIsNumeric = True
             '
             'lblIban
@@ -511,6 +521,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIban.TabIndex = 220
             Me.lblIban.Text = "IBAN Number"
             Me.lblIban.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblIban.Translatable = True
             '
             'txtIban
             '
@@ -541,6 +552,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIban.SecurityKey = ""
             Me.txtIban.Size = New System.Drawing.Size(200, 23)
             Me.txtIban.TabIndex = 6
+            Me.txtIban.Translatable = False
             '
             'lblPayCycleIdNo
             '
@@ -555,6 +567,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleIdNo.TabIndex = 286
             Me.lblPayCycleIdNo.Text = "Pay Cycle"
             Me.lblPayCycleIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayCycleIdNo.Translatable = True
             '
             'cboPayCycleidNo
             '
@@ -595,6 +608,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayCycleidNo.SuggestListOrderRule = Nothing
             Me.cboPayCycleidNo.TabIndex = 7
             Me.cboPayCycleidNo.TextToSearch = Nothing
+            Me.cboPayCycleidNo.Translatable = False
             Me.cboPayCycleidNo.ValueIsMandatory = False
             Me.cboPayCycleidNo.ValueIsNullable = True
             Me.cboPayCycleidNo.ValueIsNumeric = False
@@ -613,6 +627,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayGroupIdNo.TabIndex = 290
             Me.lblPayGroupIdNo.Text = "Pay Group"
             Me.lblPayGroupIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayGroupIdNo.Translatable = True
             '
             'cboPayGroupIdNo
             '
@@ -653,6 +668,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayGroupIdNo.SuggestListOrderRule = Nothing
             Me.cboPayGroupIdNo.TabIndex = 289
             Me.cboPayGroupIdNo.TextToSearch = Nothing
+            Me.cboPayGroupIdNo.Translatable = False
             Me.cboPayGroupIdNo.ValueIsMandatory = False
             Me.cboPayGroupIdNo.ValueIsNullable = True
             Me.cboPayGroupIdNo.ValueIsNumeric = False
@@ -671,6 +687,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDutyHours.TabIndex = 292
             Me.lblDutyHours.Text = "Duty Hours"
             Me.lblDutyHours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblDutyHours.Translatable = True
             '
             'txtDutyHours
             '
@@ -701,6 +718,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDutyHours.SecurityKey = ""
             Me.txtDutyHours.Size = New System.Drawing.Size(93, 23)
             Me.txtDutyHours.TabIndex = 291
+            Me.txtDutyHours.Translatable = False
             Me.txtDutyHours.ValueIsNumeric = True
             '
             'bsEarnings
@@ -724,6 +742,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEmployeeName.TabIndex = 210
             Me.lblEmployeeName.Text = "Employee Name"
             Me.lblEmployeeName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblEmployeeName.Translatable = True
             '
             'txtEmployeeName
             '
@@ -753,6 +772,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmployeeName.Size = New System.Drawing.Size(476, 23)
             Me.txtEmployeeName.TabIndex = 2
+            Me.txtEmployeeName.Translatable = False
             Me.txtEmployeeName.ValueIsMandatory = True
             Me.txtEmployeeName.ValueIsUnique = True
             '
@@ -769,6 +789,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEmployeeNameAra.TabIndex = 212
             Me.lblEmployeeNameAra.Text = "Employee Name (Arabic)"
             Me.lblEmployeeNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblEmployeeNameAra.Translatable = True
             '
             'txtEmployeeNameAra
             '
@@ -800,6 +821,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmployeeNameAra.Size = New System.Drawing.Size(476, 23)
             Me.txtEmployeeNameAra.TabIndex = 3
+            Me.txtEmployeeNameAra.Translatable = False
             Me.txtEmployeeNameAra.ValueIsMandatory = True
             Me.txtEmployeeNameAra.ValueIsUnique = True
             '
@@ -816,6 +838,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblGender.TabIndex = 183
             Me.lblGender.Text = "Gender"
             Me.lblGender.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblGender.Translatable = True
             '
             'lblBirthDate
             '
@@ -830,6 +853,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBirthDate.TabIndex = 185
             Me.lblBirthDate.Text = "Date of Birth"
             Me.lblBirthDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblBirthDate.Translatable = True
             '
             'dtpBirthDate
             '
@@ -854,6 +878,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpBirthDate.TabIndex = 5
             Me.dtpBirthDate.TabStop = False
             Me.dtpBirthDate.TargetCalendar = CType(resources.GetObject("dtpBirthDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpBirthDate.Translatable = False
             Me.dtpBirthDate.Value = Nothing
             Me.dtpBirthDate.ValueIsMandatory = False
             Me.dtpBirthDate.ValueIsNullable = False
@@ -871,6 +896,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblMaritalStatus.TabIndex = 244
             Me.lblMaritalStatus.Text = "Marital Status"
             Me.lblMaritalStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblMaritalStatus.Translatable = True
             '
             'cacMaritalStatus
             '
@@ -910,6 +936,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacMaritalStatus.SuggestListOrderRule = Nothing
             Me.cacMaritalStatus.TabIndex = 2
             Me.cacMaritalStatus.TextToSearch = Nothing
+            Me.cacMaritalStatus.Translatable = False
             Me.cacMaritalStatus.ValueIsMandatory = False
             Me.cacMaritalStatus.ValueIsNullable = False
             Me.cacMaritalStatus.ValueIsNumeric = False
@@ -928,6 +955,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNationalityCode.TabIndex = 247
             Me.lblNationalityCode.Text = "Nationality"
             Me.lblNationalityCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblNationalityCode.Translatable = True
             '
             'cacNationalityCode
             '
@@ -967,6 +995,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacNationalityCode.SuggestListOrderRule = Nothing
             Me.cacNationalityCode.TabIndex = 3
             Me.cacNationalityCode.TextToSearch = Nothing
+            Me.cacNationalityCode.Translatable = False
             Me.cacNationalityCode.ValueIsMandatory = False
             Me.cacNationalityCode.ValueIsNullable = False
             Me.cacNationalityCode.ValueIsNumeric = False
@@ -985,6 +1014,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReligion.TabIndex = 249
             Me.lblReligion.Text = "Religion"
             Me.lblReligion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblReligion.Translatable = True
             '
             'cacReligionIdNo
             '
@@ -1024,6 +1054,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacReligionIdNo.SuggestListOrderRule = Nothing
             Me.cacReligionIdNo.TabIndex = 4
             Me.cacReligionIdNo.TextToSearch = Nothing
+            Me.cacReligionIdNo.Translatable = False
             Me.cacReligionIdNo.ValueIsMandatory = False
             Me.cacReligionIdNo.ValueIsNullable = False
             Me.cacReligionIdNo.ValueIsNumeric = False
@@ -1123,6 +1154,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacGender.SuggestListOrderRule = Nothing
             Me.cacGender.TabIndex = 1
             Me.cacGender.TextToSearch = Nothing
+            Me.cacGender.Translatable = False
             Me.cacGender.ValueIsMandatory = False
             Me.cacGender.ValueIsNullable = False
             Me.cacGender.ValueIsNumeric = False
@@ -1141,6 +1173,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNationalIdNo.TabIndex = 265
             Me.lblNationalIdNo.Text = "National ID/Iqama #"
             Me.lblNationalIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblNationalIdNo.Translatable = True
             '
             'txtNationalIdNo
             '
@@ -1169,6 +1202,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNationalIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNationalIdNo.Size = New System.Drawing.Size(200, 23)
             Me.txtNationalIdNo.TabIndex = 6
+            Me.txtNationalIdNo.Translatable = False
             Me.txtNationalIdNo.ValueIsNumeric = True
             Me.txtNationalIdNo.ValueIsUniqueBlanksAllowed = True
             '
@@ -1185,6 +1219,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.TabIndex = 271
             Me.lblNotes.Text = "Notes"
             Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblNotes.Translatable = True
             '
             'txtNotes
             '
@@ -1215,6 +1250,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Size = New System.Drawing.Size(422, 60)
             Me.txtNotes.TabIndex = 7
+            Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
             'tbpContact
@@ -1330,6 +1366,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPhoneDisplay.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPhoneDisplay.Size = New System.Drawing.Size(363, 140)
             Me.DataGridViewPhoneDisplay.TabIndex = 291
+            Me.DataGridViewPhoneDisplay.Translatable = True
             '
             'dgvSequencePhoneDisplay
             '
@@ -1435,6 +1472,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtZipCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtZipCode.Size = New System.Drawing.Size(193, 23)
             Me.txtZipCode.TabIndex = 290
+            Me.txtZipCode.Translatable = False
             '
             'lblZipCode
             '
@@ -1449,6 +1487,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblZipCode.TabIndex = 289
             Me.lblZipCode.Text = "Zip Code"
             Me.lblZipCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblZipCode.Translatable = True
             '
             'txtPoBox
             '
@@ -1477,6 +1516,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPoBox.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPoBox.Size = New System.Drawing.Size(186, 23)
             Me.txtPoBox.TabIndex = 288
+            Me.txtPoBox.Translatable = False
             '
             'lblPoBox
             '
@@ -1491,6 +1531,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPoBox.TabIndex = 287
             Me.lblPoBox.Text = "P.O. Box No."
             Me.lblPoBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPoBox.Translatable = True
             '
             'cacCountryCode
             '
@@ -1529,6 +1570,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.SuggestListOrderRule = Nothing
             Me.cacCountryCode.TabIndex = 286
             Me.cacCountryCode.TextToSearch = Nothing
+            Me.cacCountryCode.Translatable = False
             Me.cacCountryCode.ValueIsMandatory = False
             Me.cacCountryCode.ValueIsNullable = False
             Me.cacCountryCode.ValueIsNumeric = False
@@ -1547,6 +1589,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCountryCode.TabIndex = 285
             Me.lblCountryCode.Text = "Country"
             Me.lblCountryCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblCountryCode.Translatable = True
             '
             'txtProvinceState
             '
@@ -1575,6 +1618,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProvinceState.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtProvinceState.Size = New System.Drawing.Size(186, 23)
             Me.txtProvinceState.TabIndex = 284
+            Me.txtProvinceState.Translatable = False
             '
             'lblProvinceState
             '
@@ -1589,6 +1633,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblProvinceState.TabIndex = 283
             Me.lblProvinceState.Text = "Province/State"
             Me.lblProvinceState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblProvinceState.Translatable = True
             '
             'txtTownCity
             '
@@ -1617,6 +1662,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTownCity.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtTownCity.Size = New System.Drawing.Size(193, 23)
             Me.txtTownCity.TabIndex = 282
+            Me.txtTownCity.Translatable = False
             '
             'lblTownCity
             '
@@ -1631,6 +1677,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTownCity.TabIndex = 281
             Me.lblTownCity.Text = "Town/City"
             Me.lblTownCity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblTownCity.Translatable = True
             '
             'txtDistrict
             '
@@ -1659,6 +1706,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDistrict.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDistrict.Size = New System.Drawing.Size(186, 23)
             Me.txtDistrict.TabIndex = 280
+            Me.txtDistrict.Translatable = False
             '
             'lblDistrict
             '
@@ -1673,6 +1721,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDistrict.TabIndex = 279
             Me.lblDistrict.Text = "District"
             Me.lblDistrict.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblDistrict.Translatable = True
             '
             'txtStreet
             '
@@ -1702,6 +1751,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtStreet.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtStreet.Size = New System.Drawing.Size(510, 23)
             Me.txtStreet.TabIndex = 278
+            Me.txtStreet.Translatable = False
             '
             'txtEmail
             '
@@ -1731,6 +1781,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmail.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmail.Size = New System.Drawing.Size(510, 23)
             Me.txtEmail.TabIndex = 274
+            Me.txtEmail.Translatable = False
             '
             'CLabel1
             '
@@ -1747,6 +1798,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.TabIndex = 213
             Me.CLabel1.Text = "Home Address"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
             '
             'lblEmail
             '
@@ -1761,6 +1813,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEmail.TabIndex = 212
             Me.lblEmail.Text = "E-mail Address"
             Me.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblEmail.Translatable = True
             '
             'lblStreet
             '
@@ -1775,6 +1828,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblStreet.TabIndex = 277
             Me.lblStreet.Text = "Street"
             Me.lblStreet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblStreet.Translatable = True
             '
             'CLabel3
             '
@@ -1789,6 +1843,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel3.TabIndex = 292
             Me.CLabel3.Text = "Phones:"
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel3.Translatable = True
             '
             'tbpEmployment
             '
@@ -1836,6 +1891,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblHiredDate.TabIndex = 288
             Me.lblHiredDate.Text = "Hired Date"
             Me.lblHiredDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblHiredDate.Translatable = True
             '
             'dtpHiredDate
             '
@@ -1859,6 +1915,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpHiredDate.Size = New System.Drawing.Size(123, 24)
             Me.dtpHiredDate.TabIndex = 1
             Me.dtpHiredDate.TargetCalendar = CType(resources.GetObject("dtpHiredDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpHiredDate.Translatable = False
             Me.dtpHiredDate.Value = Nothing
             Me.dtpHiredDate.ValueIsMandatory = False
             Me.dtpHiredDate.ValueIsNullable = False
@@ -1876,6 +1933,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReleasedDate.TabIndex = 289
             Me.lblReleasedDate.Text = "Released Date"
             Me.lblReleasedDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblReleasedDate.Translatable = True
             '
             'dtpReleasedDate
             '
@@ -1899,6 +1957,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpReleasedDate.Size = New System.Drawing.Size(123, 24)
             Me.dtpReleasedDate.TabIndex = 2
             Me.dtpReleasedDate.TargetCalendar = CType(resources.GetObject("dtpReleasedDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpReleasedDate.Translatable = False
             Me.dtpReleasedDate.Value = Nothing
             Me.dtpReleasedDate.ValueIsMandatory = False
             Me.dtpReleasedDate.ValueIsNullable = False
@@ -1916,6 +1975,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDepartmentIdNo.TabIndex = 284
             Me.lblDepartmentIdNo.Text = "Department"
             Me.lblDepartmentIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblDepartmentIdNo.Translatable = True
             '
             'cacDepartmentIdNo
             '
@@ -1955,6 +2015,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDepartmentIdNo.SuggestListOrderRule = Nothing
             Me.cacDepartmentIdNo.TabIndex = 3
             Me.cacDepartmentIdNo.TextToSearch = Nothing
+            Me.cacDepartmentIdNo.Translatable = False
             Me.cacDepartmentIdNo.ValueIsMandatory = False
             Me.cacDepartmentIdNo.ValueIsNullable = False
             Me.cacDepartmentIdNo.ValueIsNumeric = False
@@ -1973,6 +2034,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDesignationIdNo.TabIndex = 285
             Me.lblDesignationIdNo.Text = "Designation"
             Me.lblDesignationIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblDesignationIdNo.Translatable = True
             '
             'cacDesignationIdNo
             '
@@ -2012,6 +2074,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDesignationIdNo.SuggestListOrderRule = Nothing
             Me.cacDesignationIdNo.TabIndex = 4
             Me.cacDesignationIdNo.TextToSearch = Nothing
+            Me.cacDesignationIdNo.Translatable = False
             Me.cacDesignationIdNo.ValueIsMandatory = False
             Me.cacDesignationIdNo.ValueIsNullable = False
             Me.cacDesignationIdNo.ValueIsNumeric = False
@@ -2030,6 +2093,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblActive.TabIndex = 277
             Me.lblActive.Text = "Active?"
             Me.lblActive.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblActive.Translatable = True
             '
             'chkActive
             '
@@ -2062,6 +2126,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkActive.Size = New System.Drawing.Size(13, 13)
             Me.chkActive.TabIndex = 5
             Me.chkActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkActive.Translatable = False
             Me.chkActive.UseVisualStyleBackColor = False
             '
             'tbpPayroll
@@ -2133,6 +2198,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = True
             Me.DataGridViewEarnings.Size = New System.Drawing.Size(654, 330)
             Me.DataGridViewEarnings.TabIndex = 5
+            Me.DataGridViewEarnings.Translatable = True
             '
             'dgvSequenceEarning
             '
@@ -2153,6 +2219,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
             Me.dgvSequenceEarning.ReadOnly = True
             Me.dgvSequenceEarning.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequenceEarning.Translatable = False
             Me.dgvSequenceEarning.Width = 30
             '
             'dgvEarningIdNo
@@ -2168,6 +2235,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvEarningIdNo.ReadOnly = True
             Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningIdNo.Translatable = False
             '
             'dgvEarningRate
             '
@@ -2182,6 +2250,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvEarningRate.ReadOnly = True
             Me.dgvEarningRate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvEarningRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningRate.Translatable = False
             Me.dgvEarningRate.Width = 80
             '
             'dgvEarningUnit
@@ -2196,6 +2265,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvEarningUnit.ReadOnly = True
             Me.dgvEarningUnit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvEarningUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningUnit.Translatable = False
             '
             'dgvEarningAmount
             '
@@ -2219,6 +2289,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvEarningAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningAmount.Translatable = False
             Me.dgvEarningAmount.Width = 80
             '
             'DataGridViewTextBoxColumn7
@@ -2291,6 +2362,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDeductions.ShowInsertColumnWhenEditing = True
             Me.DataGridViewDeductions.Size = New System.Drawing.Size(648, 324)
             Me.DataGridViewDeductions.TabIndex = 2
+            Me.DataGridViewDeductions.Translatable = True
             '
             'dgvSequenceDeduction
             '
@@ -2312,6 +2384,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequenceDeduction.ReadOnly = True
             Me.dgvSequenceDeduction.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvSequenceDeduction.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequenceDeduction.Translatable = False
             Me.dgvSequenceDeduction.Width = 30
             '
             'dgvDeductionIdNo
@@ -2327,6 +2400,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDeductionIdNo.ReadOnly = True
             Me.dgvDeductionIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvDeductionIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvDeductionIdNo.Translatable = False
             '
             'dgvDeductionRate
             '
@@ -2349,6 +2423,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDeductionRate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvDeductionRate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvDeductionRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvDeductionRate.Translatable = False
             Me.dgvDeductionRate.Width = 70
             '
             'dgvDeductionUnit
@@ -2363,6 +2438,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDeductionUnit.ReadOnly = True
             Me.dgvDeductionUnit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvDeductionUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvDeductionUnit.Translatable = False
             '
             'dgvDeductionAmount
             '
@@ -2386,6 +2462,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDeductionAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvDeductionAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvDeductionAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvDeductionAmount.Translatable = False
             Me.dgvDeductionAmount.Width = 80
             '
             'DataGridViewTextBoxColumn13
@@ -2458,6 +2535,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPhones.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPhones.Size = New System.Drawing.Size(648, 324)
             Me.DataGridViewPhones.TabIndex = 273
+            Me.DataGridViewPhones.Translatable = True
             '
             'dgvSequence
             '
@@ -2479,6 +2557,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequence.ReadOnly = True
             Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequence.Translatable = False
             Me.dgvSequence.Width = 40
             '
             'dgvPhoneTypeIdNo
@@ -2493,6 +2572,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvPhoneTypeIdNo.ReadOnly = True
             Me.dgvPhoneTypeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvPhoneTypeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvPhoneTypeIdNo.Translatable = False
             '
             'dgvCountryTelIdNo
             '
@@ -2505,6 +2585,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvCountryTelIdNo.MinimumWidth = 200
             Me.dgvCountryTelIdNo.Name = "dgvCountryTelIdNo"
             Me.dgvCountryTelIdNo.ReadOnly = True
+            Me.dgvCountryTelIdNo.Translatable = False
             Me.dgvCountryTelIdNo.Width = 200
             '
             'dgvAreaCode
@@ -2526,6 +2607,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvAreaCode.ReadOnly = True
             Me.dgvAreaCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvAreaCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvAreaCode.Translatable = False
             Me.dgvAreaCode.Width = 60
             '
             'PhoneNumber
@@ -2546,6 +2628,7 @@ Namespace PresentationLayer.Views.Forms
             Me.PhoneNumber.Name = "PhoneNumber"
             Me.PhoneNumber.ReadOnly = True
             Me.PhoneNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.PhoneNumber.Translatable = False
             '
             'dgvFullPhone
             '
@@ -2603,6 +2686,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.TabIndex = 152
             Me.lblIdNo.Text = "Employee Id No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblIdNo.Translatable = True
             '
             'TxtIdNo
             '
@@ -2632,6 +2716,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
             Me.TxtIdNo.TabIndex = 151
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'lblEmployeeCode
@@ -2647,6 +2732,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEmployeeCode.TabIndex = 154
             Me.lblEmployeeCode.Text = "Employee Code"
             Me.lblEmployeeCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.lblEmployeeCode.Translatable = True
             '
             'txtEmployeeCode
             '
@@ -2676,12 +2762,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtEmployeeCode.Size = New System.Drawing.Size(105, 23)
             Me.txtEmployeeCode.TabIndex = 153
+            Me.txtEmployeeCode.Translatable = False
             Me.txtEmployeeCode.ValueIsMandatory = True
             Me.txtEmployeeCode.ValueIsUnique = True
             '
             'floMain
             '
             Me.floMain.BackColor = System.Drawing.Color.Transparent
+            Me.floMain.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.floMain.Controls.Add(Me.CFlowLayout4)
             Me.floMain.Controls.Add(Me.tbcEmployee)
             Me.floMain.Dock = System.Windows.Forms.DockStyle.Left
@@ -2717,17 +2805,17 @@ Namespace PresentationLayer.Views.Forms
             Me.Controls.SetChildIndex(Me.floMain, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout6.ResumeLayout(False)
-            Me.CFlowLayout6.PerformLayout
+            Me.CFlowLayout6.PerformLayout()
             CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbcEmployee.ResumeLayout(False)
             Me.tbpPersonal.ResumeLayout(False)
             Me.floPersonal.ResumeLayout(False)
-            Me.floPersonal.PerformLayout
+            Me.floPersonal.PerformLayout()
             Me.tbpContact.ResumeLayout(False)
             Me.floContactInformation.ResumeLayout(False)
             Me.TableLayoutPanel1.ResumeLayout(False)
-            Me.TableLayoutPanel1.PerformLayout
+            Me.TableLayoutPanel1.PerformLayout()
             CType(Me.DataGridViewPhoneDisplay, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpEmployment.ResumeLayout(False)
@@ -2741,9 +2829,9 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floMain.ResumeLayout(False)
             Me.CFlowLayout4.ResumeLayout(False)
-            Me.CFlowLayout4.PerformLayout
+            Me.CFlowLayout4.PerformLayout()
             Me.ResumeLayout(False)
-            Me.PerformLayout
+            Me.PerformLayout()
 
         End Sub
         Friend WithEvents lblEmployeeName As Libraries.CBaseControlsLibrary.CLabel

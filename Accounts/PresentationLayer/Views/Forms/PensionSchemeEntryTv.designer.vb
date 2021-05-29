@@ -292,7 +292,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPensionRates.DataSource = Me.bsPensionRates
             DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.Font = New System.Drawing.Font("Andalus", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle8.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
             DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
