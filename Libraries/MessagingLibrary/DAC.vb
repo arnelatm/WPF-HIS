@@ -23,13 +23,13 @@ Public Class Dac
 
     'Public Shared DefaultMirroredLanguageIdNo As Int16
 
-    <Category("AATM")> Public Property DacAccessType As String '= "SQL"
-    <Category("AATM")> Public Property DacFileName As String '= $"ISPDATA" '""Translations"
-    <Category("AATM")> Public Property DacDatabase As String '= $"ISPDATA" '""Translations"
-    <Category("AATM")> Public Property DacServer As String '= ""
-    <Category("AATM")> Public Property DacUid As String '= ""
-    <Category("AATM")> Public Property DacServerType As String '= ""
-    <Category("AATM")> Public Property DacPassword As String '= ""
+    <Category("AATM")> Public Shared Property DacAccessType As String '= "SQL"
+    <Category("AATM")> Public Shared Property DacFileName As String '= $"ISPDATA" '""Translations"
+    <Category("AATM")> Public Shared Property DacDatabase As String '= $"ISPDATA" '""Translations"
+    <Category("AATM")> Public Shared Property DacServer As String '= ""
+    <Category("AATM")> Public Shared Property DacUid As String '= ""
+    <Category("AATM")> Public Shared Property DacServerType As String '= ""
+    <Category("AATM")> Public Shared Property DacPassword As String '= ""
 
     Public Sub New()
 

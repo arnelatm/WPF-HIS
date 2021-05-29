@@ -31,7 +31,7 @@ Public Class CComboBox
 
     Public Sub New()
         MyBase.New()
-        Dim myFont As New Font("Sans Serif", 10.0!, FontStyle.Regular)
+        Dim myFont As New Font("Arial", 10.0!, FontStyle.Regular)
         ContextMenuStrip = ContextMenuStrip1
         OriginalDropDownStyle = DropDownStyle
         Margin = New Padding(1)
