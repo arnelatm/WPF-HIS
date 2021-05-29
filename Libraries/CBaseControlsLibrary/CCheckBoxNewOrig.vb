@@ -5,7 +5,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CCheckBoxNew
+Public Class CCheckBoxNewOrig
     Inherits CheckBox
     Implements IEntryControl, IFindableControl, ILinkedLabel
 
@@ -210,8 +210,8 @@ Public Class CCheckBoxNew
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
         End If
-        'Dim x = Me.GetType()
-        'MessageBox.Show(x.ToString())
+        Dim x = Me.GetType()
+        MessageBox.Show(x.ToString())
     End Sub
 
     Public Function GetTextToSearch() As String
@@ -227,8 +227,6 @@ Public Class CCheckBoxNew
         End If
         Return description
     End Function
-
-
 
     'Protected Overrides Sub OnPaint(ByVal pEvent As System.Windows.Forms.PaintEventArgs)
     '    Dim brush As New SolidBrush(BackColor)
@@ -305,23 +303,22 @@ Public Class CCheckBoxNew
     'End Sub
 
     Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
-        'MyBase.OnPaint(pEvent)
-        pEvent.Graphics.Clear(GlobalVariables.DefaultFormControlReadOnlyBackgroundColor)
+        MyBase.OnPaint(pEvent)
         Dim pt As Point
-        'If RightToLeft Then
-        pt = New Point(0, 0)
-        'Else
-        'pt = New Point(Width - 10, 0)
-        'End If
+        If RightToLeft Then
+            pt = New Point(0, 4)
+        Else
+            pt = New Point(Width - 10, 4)
+        End If
         Dim rect As Rectangle = New Rectangle(pt, New Size(10, 10))
         Dim cBoxColorFill As Color
         Dim cBrush = New SolidBrush(cBoxColorFill)
         pEvent.Graphics.FillRectangle(cBrush, rect)
-        'If RightToLeft Then
-        ' pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(Width - 10, 4, 10, 10))
-        'Else
-        pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 0, 10, 10))
-        'End If
+        If RightToLeft Then
+            pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(Width - 10, 4, 10, 10))
+        Else
+            pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 4, 10, 10))
+        End If
         If _editingMode Then
             If DisplayOnly Then
                 cBoxColorFill = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
@@ -347,12 +344,16 @@ Public Class CCheckBoxNew
                 End If
             End If
             Using brush As SolidBrush = New SolidBrush(cCol)
-                Using wing As Font = New Font("Wingdings", 10.0F)
-                    pEvent.Graphics.DrawString(Chr(252), wing, brush, -2, 0)
+                Using wing As Font = New Font("Wingdings", 12.0F)
+                    If Not RightToLeft Then
+                        pEvent.Graphics.DrawString(Chr(252), wing, brush, -2, 3)
+                    Else
+                        pEvent.Graphics.DrawString(Chr(252), wing, brush, Width - 12, 3)
+                    End If
                 End Using
             End Using
         End If
-        'pEvent.Graphics.DrawString(Text, Font, Brushes.Black, 12, 1)
+        pEvent.Graphics.DrawString(Text, Font, Brushes.Black, 12, 1)
         'pEvent.Graphics.DrawRectangle(Pens.Gray, rect)
         'Dim fRect As Rectangle = ClientRectangle
 
