@@ -1141,6 +1141,10 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+            Debugger.Break()
+        End Sub
+
     End Class
 
 End Namespace

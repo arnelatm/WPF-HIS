@@ -36,7 +36,6 @@ Public Class CFormEntry
     Private _debugSwitch As Byte = 0
     Private _editingMode As Boolean = False
     Private _displayOnly As Boolean = False
-    Private _translatable As Boolean = True
 
     Public Sub New()
 
@@ -1021,7 +1020,7 @@ Public Class CFormEntry
                         Dim thisControl As IFindableControl = cCtrl
                         If thisControl.FindEnabled Then
                             thisControl = cCtrl
-                            thisControl.FindDataType = GetObjectDataType(GetFieldType(Name.Substring(3)))
+                            thisControl.FindDataType = GetObjectDataType(GetFieldType(cCtrl.Name.Substring(3)))
                         End If
                     End If
                 End If
@@ -1114,13 +1113,6 @@ Public Class CFormEntry
     End Property
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
-        Get
-            Return True
-        End Get
-        Set(value As Boolean)
-            _translatable = value
-        End Set
-    End Property
 
     Public Overridable Sub ActiveToolStripButton_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
 
