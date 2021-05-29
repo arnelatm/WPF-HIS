@@ -167,10 +167,12 @@ Namespace PresentationLayer.Views.Forms
             _bypassSelectedChange = True
             If GlobalVariables.RightToLeftLayout Then
                 RightToLeftLayout = True
+                RightToLeft = RightToLeft.Yes
                 trvTreeView.RightToLeftLayout = True
                 trvTreeView.RightToLeft = RightToLeft.Yes
             Else
                 RightToLeftLayout = False
+                RightToLeft = RightToLeft.No
                 trvTreeView.RightToLeftLayout = False
                 trvTreeView.RightToLeft = RightToLeft.No
             End If
