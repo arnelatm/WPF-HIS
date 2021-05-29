@@ -3,7 +3,6 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports System.Windows.Forms.VisualStyles
 Imports AATM.Libraries.AatmInterfaces
-Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class UcCheckBox
     Implements IEntryControl, IFindableControl, ILinkedLabel
