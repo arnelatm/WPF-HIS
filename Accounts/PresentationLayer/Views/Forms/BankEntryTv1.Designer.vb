@@ -50,15 +50,27 @@ Namespace PresentationLayer.Views.Forms
             Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
             resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.TxtIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
@@ -68,17 +80,25 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'txtBankCode
             '
             Me.txtBankCode.BackColor = System.Drawing.Color.White
+            Me.txtBankCode.BegFindValue = Nothing
             Me.txtBankCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtBankCode.ComputedValue = False
             Me.txtBankCode.CustomFormat = Nothing
             Me.txtBankCode.DataBoundControl = True
             Me.txtBankCode.EditingMode = True
+            Me.txtBankCode.EndFindValue = Nothing
+            Me.txtBankCode.FieldDescription = Nothing
+            Me.txtBankCode.FieldName = Nothing
+            Me.txtBankCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtBankCode.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.txtBankCode, True)
             resources.ApplyResources(Me.txtBankCode, "txtBankCode")
             Me.txtBankCode.ForeColor = System.Drawing.Color.Black
@@ -88,16 +108,24 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankCode.Name = "txtBankCode"
             Me.txtBankCode.OldValue = Nothing
             Me.txtBankCode.ReadOnly = True
+            Me.txtBankCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtBankCode.Translatable = False
             Me.txtBankCode.ValueIsMandatory = True
             '
             'txtBankName
             '
             Me.txtBankName.BackColor = System.Drawing.Color.White
+            Me.txtBankName.BegFindValue = Nothing
             Me.txtBankName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtBankName.ComputedValue = False
             Me.txtBankName.CustomFormat = Nothing
             Me.txtBankName.DataBoundControl = True
             Me.txtBankName.EditingMode = False
+            Me.txtBankName.EndFindValue = Nothing
+            Me.txtBankName.FieldDescription = Nothing
+            Me.txtBankName.FieldName = Nothing
+            Me.txtBankName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtBankName.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.txtBankName, True)
             resources.ApplyResources(Me.txtBankName, "txtBankName")
             Me.txtBankName.ForeColor = System.Drawing.Color.Black
@@ -107,17 +135,25 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankName.Name = "txtBankName"
             Me.txtBankName.OldValue = Nothing
             Me.txtBankName.ReadOnly = True
+            Me.txtBankName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtBankName.Translatable = False
             Me.txtBankName.ValueIsMandatory = True
             '
             'txtBankNameAra
             '
             Me.txtBankNameAra.BackColor = System.Drawing.Color.White
+            Me.txtBankNameAra.BegFindValue = Nothing
             Me.txtBankNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtBankNameAra.ComputedValue = False
             Me.txtBankNameAra.CustomFormat = Nothing
             Me.txtBankNameAra.DataBoundControl = True
             Me.txtBankNameAra.EditingMode = False
+            Me.txtBankNameAra.EndFindValue = Nothing
             Me.txtBankNameAra.EnglishControl = Me.txtBankName
+            Me.txtBankNameAra.FieldDescription = Nothing
+            Me.txtBankNameAra.FieldName = Nothing
+            Me.txtBankNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtBankNameAra.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.txtBankNameAra, True)
             resources.ApplyResources(Me.txtBankNameAra, "txtBankNameAra")
             Me.txtBankNameAra.ForeColor = System.Drawing.Color.Black
@@ -127,15 +163,23 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankNameAra.Name = "txtBankNameAra"
             Me.txtBankNameAra.OldValue = Nothing
             Me.txtBankNameAra.ReadOnly = True
+            Me.txtBankNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtBankNameAra.Translatable = False
             '
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtNotes.FindEnabled = False
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
@@ -144,12 +188,15 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
             'floDataDisplay
             '
             resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
             Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+            Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.floDataDisplay.Controls.Add(Me.lblIdNo)
             Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
             Me.floDataDisplay.Controls.Add(Me.lblBankCode)
@@ -168,6 +215,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.EditingMode = False
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Translatable = True
             '
             'lblBankCode
             '
@@ -175,6 +223,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBankCode.EditingMode = False
             resources.ApplyResources(Me.lblBankCode, "lblBankCode")
             Me.lblBankCode.Name = "lblBankCode"
+            Me.lblBankCode.Translatable = True
             '
             'lblBankName
             '
@@ -182,6 +231,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBankName.EditingMode = False
             resources.ApplyResources(Me.lblBankName, "lblBankName")
             Me.lblBankName.Name = "lblBankName"
+            Me.lblBankName.Translatable = True
             '
             'lblBankNameAra
             '
@@ -189,6 +239,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBankNameAra.EditingMode = False
             resources.ApplyResources(Me.lblBankNameAra, "lblBankNameAra")
             Me.lblBankNameAra.Name = "lblBankNameAra"
+            Me.lblBankNameAra.Translatable = True
             '
             'lblNotes
             '
@@ -196,6 +247,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.EditingMode = False
             resources.ApplyResources(Me.lblNotes, "lblNotes")
             Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Translatable = True
             '
             'bsBank
             '
@@ -204,6 +256,7 @@ Namespace PresentationLayer.Views.Forms
             'BankEntryTv1
             '
             resources.ApplyResources(Me, "$this")
+            Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.Controls.Add(Me.floDataDisplay)
             Me.Name = "BankEntryTv1"
             Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
@@ -213,9 +266,9 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.PerformLayout()
             CType(Me.bsBank, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
-            Me.PerformLayout
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtBankCode As CTextBox
         Friend WithEvents txtBankName As CTextBox
