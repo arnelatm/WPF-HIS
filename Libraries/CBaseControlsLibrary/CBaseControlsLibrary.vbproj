@@ -126,6 +126,9 @@
     <Compile Include="CCalendarGregorian.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CCheckBoxNewOrig.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCheckBoxNew.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -393,6 +396,12 @@
     <Compile Include="TxtComboBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UcCheckBox.Designer.vb">
+      <DependentUpon>UcCheckBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UcCheckBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ValidationControl.vb" />
     <Compile Include="ValidationControlCollection.vb" />
   </ItemGroup>
@@ -511,6 +520,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TxtComboBox.resx">
       <DependentUpon>TxtComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UcCheckBox.resx">
+      <DependentUpon>UcCheckBox.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
