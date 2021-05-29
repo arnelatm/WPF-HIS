@@ -126,9 +126,6 @@
     <Compile Include="CCalendarGregorian.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CCheckBoxNewOrig.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CCheckBoxNew.vb">
       <SubType>Component</SubType>
     </Compile>
