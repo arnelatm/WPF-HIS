@@ -13,12 +13,15 @@
     [VatNumber]          VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [VatAmount]          MONEY          NULL,
     [Notes]              NVARCHAR (300) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    [Approved]           BIT            NULL,
     [Posted]             BIT            NULL,
     [Cancelled]          BIT            NULL,
     [DateCreated]        DATETIME       CONSTRAINT [DF_PurchaseJournal_DateCreated] DEFAULT (getdate()) NOT NULL,
     [DateTimeStamp]      ROWVERSION     NOT NULL,
     CONSTRAINT [PK_PurchaseIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

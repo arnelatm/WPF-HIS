@@ -8,11 +8,14 @@
     [AccountIdNo]     SMALLINT       NOT NULL,
     [Notes]           NVARCHAR (255) NOT NULL,
     [Posted]          BIT            NULL,
+    [Approved]        BIT            NULL,
     [Cancelled]       BIT            NULL,
     [DateCreated]     DATETIME       CONSTRAINT [DF_ErJournal_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]   ROWVERSION     NOT NULL,
     CONSTRAINT [PK_ErIdNo] PRIMARY KEY CLUSTERED ([IDNo] ASC)
 );
+
+
 
 
 

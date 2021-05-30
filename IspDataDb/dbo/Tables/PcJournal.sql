@@ -20,12 +20,15 @@
     [Notes]               NVARCHAR (300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [PcClosed]            BIT            NULL,
     [CdJournalIdNo]       INT            NULL,
+    [Approved]            BIT            NULL,
     [Posted]              BIT            NULL,
     [DateCreated]         DATETIME       CONSTRAINT [DF_PcJournal_DateCreated] DEFAULT (getdate()) NULL,
     [Cancelled]           BIT            NULL,
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_PcJournal1] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
