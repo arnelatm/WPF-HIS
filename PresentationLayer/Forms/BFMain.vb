@@ -102,18 +102,19 @@ Public Class BfMain
                 _textDisplayLanguage = cultureCode
                 CultureInfo.CurrentCulture = New CultureInfo("en-US", False)
             End If
-            SetFormCulture()
+            SetFormCulture(CultureInfo.CurrentCulture)
         Else
-            If FormCulture.Name = CultureInfo.CurrentCulture.Name Then
+            If FormCulture.Name = cultureCode Then
                 ' nothing to do already set.
             Else
-                SetFormCulture()
+                CultureInfo.CurrentCulture = New CultureInfo(cultureCode, False)
+                SetFormCulture(CultureInfo.CurrentCulture)
             End If
         End If
     End Sub
 
-    Protected Sub SetFormCulture()
-        FormCulture = CultureInfo.CurrentCulture
+    Protected Sub SetFormCulture(cCultureInfo As CultureInfo)
+        FormCulture = cCultureInfo
         If FormCulture.TextInfo.IsRightToLeft Then
             RightToLeftLayout = True
             RightToLeft = RightToLeft.Yes
@@ -1025,15 +1026,15 @@ Public Class BfMain
         Next
     End Sub
 
-    'Private Sub BfMain_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
-    '    If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft And BackgroundImage IsNot Nothing Then
-    '        ' this routine is needed for righttoleft languages because the backgroundimage is
-    '        ' not redrawn for this culture.  So need to manually repaint the background form with
-    '        ' this procedure.
-    '        Dim r As Rectangle = ClientRectangle
-    '        e.Graphics.DrawImage(BackgroundImage, r)
-    '    End If
-    'End Sub
+    Private Sub BfMain_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft And BackgroundImage IsNot Nothing Then
+            ' this routine is needed for righttoleft languages because the backgroundimage is
+            ' not redrawn for this culture.  So need to manually repaint the background form with
+            ' this procedure.
+            Dim r As Rectangle = ClientRectangle
+            e.Graphics.DrawImage(BackgroundImage, r)
+        End If
+    End Sub
 
     'Protected Overridable Sub EndEditOnAllBindingSources()
     '    'Dim bindingSourcesQuery = From BindingSources In components.Components
