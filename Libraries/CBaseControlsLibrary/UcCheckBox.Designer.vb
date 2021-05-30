@@ -37,13 +37,13 @@ Partial Class UcCheckBox
         Me.CFlowLayout1.Controls.Add(Me.CLabel1)
         Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(80, 21)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(215, 21)
         Me.CFlowLayout1.TabIndex = 0
         '
         'checkBox
         '
-        Me.checkBox.AutoSize = True
         Me.checkBox.BegFindValue = Nothing
+        Me.checkBox.BoxSize = New System.Drawing.Size(14, 14)
         Me.checkBox.DisplayOnly = False
         Me.checkBox.EditingMode = True
         Me.checkBox.EndFindValue = Nothing
@@ -60,7 +60,7 @@ Partial Class UcCheckBox
         Me.checkBox.Name = "checkBox"
         Me.checkBox.OldValue = Nothing
         Me.checkBox.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.ExactValue
-        Me.checkBox.Size = New System.Drawing.Size(12, 11)
+        Me.checkBox.Size = New System.Drawing.Size(14, 14)
         Me.checkBox.TabIndex = 1
         Me.checkBox.Translatable = True
         Me.checkBox.UseVisualStyleBackColor = True
@@ -71,12 +71,12 @@ Partial Class UcCheckBox
         Me.CLabel1.DisplayOnly = True
         Me.CLabel1.EditingMode = False
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.CLabel1.Location = New System.Drawing.Point(19, 1)
+        Me.CLabel1.Location = New System.Drawing.Point(21, 1)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(60, 17)
+        Me.CLabel1.Size = New System.Drawing.Size(52, 17)
         Me.CLabel1.TabIndex = 0
-        Me.CLabel1.Text = "CLabel1"
+        Me.CLabel1.Text = "CLabel"
         Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.CLabel1.Translatable = True
         '

@@ -53,12 +53,17 @@ Namespace PresentationLayer.Views.Forms
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
@@ -69,17 +74,25 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'txtCaption
             '
             Me.txtCaption.BackColor = System.Drawing.Color.White
+            Me.txtCaption.BegFindValue = Nothing
             Me.txtCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtCaption.ComputedValue = False
             Me.txtCaption.CustomFormat = Nothing
             Me.txtCaption.DataBoundControl = True
+            Me.txtCaption.DisplayOnly = True
             Me.txtCaption.EditingMode = False
+            Me.txtCaption.EndFindValue = Nothing
+            Me.txtCaption.FieldDescription = Nothing
+            Me.txtCaption.FieldName = Nothing
+            Me.txtCaption.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtCaption.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtCaption, True)
             resources.ApplyResources(Me.txtCaption, "txtCaption")
@@ -90,7 +103,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCaption.Name = "txtCaption"
             Me.txtCaption.OldValue = Nothing
             Me.txtCaption.ReadOnly = True
-            Me.txtCaption.SecurityKey = "Translators_Developer"
+            Me.txtCaption.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtCaption.Translatable = False
             Me.txtCaption.ValueIsMandatory = True
             '
             'floDataDisplay
@@ -119,6 +133,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.EditingMode = False
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Translatable = True
             '
             'lblCaption
             '
@@ -126,7 +141,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCaption.EditingMode = False
             resources.ApplyResources(Me.lblCaption, "lblCaption")
             Me.lblCaption.Name = "lblCaption"
-            Me.lblCaption.SecurityKey = "Translators_Developer"
+            Me.lblCaption.Translatable = True
             '
             'lblTranslatedCaption
             '
@@ -134,17 +149,23 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTranslatedCaption.EditingMode = False
             resources.ApplyResources(Me.lblTranslatedCaption, "lblTranslatedCaption")
             Me.lblTranslatedCaption.Name = "lblTranslatedCaption"
+            Me.lblTranslatedCaption.Translatable = True
             '
             'txtTranslatedCaption
             '
             Me.txtTranslatedCaption.AutoFill = False
             Me.txtTranslatedCaption.BackColor = System.Drawing.Color.White
+            Me.txtTranslatedCaption.BegFindValue = Nothing
             Me.txtTranslatedCaption.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtTranslatedCaption.ComputedValue = False
             Me.txtTranslatedCaption.CustomFormat = Nothing
             Me.txtTranslatedCaption.DataBoundControl = True
             Me.txtTranslatedCaption.EditingMode = False
+            Me.txtTranslatedCaption.EndFindValue = Nothing
             Me.txtTranslatedCaption.EnglishControl = Me.txtCaption
+            Me.txtTranslatedCaption.FieldDescription = Nothing
+            Me.txtTranslatedCaption.FieldName = Nothing
+            Me.txtTranslatedCaption.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtTranslatedCaption.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtTranslatedCaption, True)
             resources.ApplyResources(Me.txtTranslatedCaption, "txtTranslatedCaption")
@@ -155,11 +176,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTranslatedCaption.Name = "txtTranslatedCaption"
             Me.txtTranslatedCaption.OldValue = Nothing
             Me.txtTranslatedCaption.ReadOnly = True
+            Me.txtTranslatedCaption.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTranslatedCaption.Translatable = False
             Me.txtTranslatedCaption.ValueIsMandatory = True
             '
             'txtLanguageIdNo
             '
             Me.txtLanguageIdNo.BackColor = System.Drawing.Color.White
+            Me.txtLanguageIdNo.BegFindValue = Nothing
             Me.txtLanguageIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtLanguageIdNo.ComputedValue = False
             Me.txtLanguageIdNo.CustomFormat = Nothing
@@ -167,6 +191,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLanguageIdNo.DisplayOnly = True
             Me.txtLanguageIdNo.EditingMode = True
             resources.ApplyResources(Me.txtLanguageIdNo, "txtLanguageIdNo")
+            Me.txtLanguageIdNo.EndFindValue = Nothing
+            Me.txtLanguageIdNo.FieldDescription = Nothing
+            Me.txtLanguageIdNo.FieldName = Nothing
+            Me.txtLanguageIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtLanguageIdNo.FindEnabled = True
             Me.txtLanguageIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtLanguageIdNo.LinkedLabel = Nothing
@@ -175,11 +203,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLanguageIdNo.Name = "txtLanguageIdNo"
             Me.txtLanguageIdNo.OldValue = Nothing
             Me.txtLanguageIdNo.ReadOnly = True
+            Me.txtLanguageIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtLanguageIdNo.TabStop = False
+            Me.txtLanguageIdNo.Translatable = False
             '
             'txtIdNoTranslated
             '
             Me.txtIdNoTranslated.BackColor = System.Drawing.Color.White
+            Me.txtIdNoTranslated.BegFindValue = Nothing
             Me.txtIdNoTranslated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtIdNoTranslated.ComputedValue = False
             Me.txtIdNoTranslated.CustomFormat = Nothing
@@ -187,20 +218,26 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIdNoTranslated.DisplayOnly = True
             Me.txtIdNoTranslated.EditingMode = True
             resources.ApplyResources(Me.txtIdNoTranslated, "txtIdNoTranslated")
+            Me.txtIdNoTranslated.EndFindValue = Nothing
+            Me.txtIdNoTranslated.FieldDescription = Nothing
+            Me.txtIdNoTranslated.FieldName = Nothing
+            Me.txtIdNoTranslated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtIdNoTranslated.FindEnabled = True
             Me.txtIdNoTranslated.ForeColor = System.Drawing.Color.Black
             Me.txtIdNoTranslated.LinkedLabel = Nothing
-        Me.txtIdNoTranslated.MaximumValue = Nothing
-        Me.txtIdNoTranslated.MinimumValue = Nothing
-        Me.txtIdNoTranslated.Name = "txtIdNoTranslated"
-        Me.txtIdNoTranslated.OldValue = Nothing
-        Me.txtIdNoTranslated.ReadOnly = true
-        Me.txtIdNoTranslated.TabStop = false
-        '
-        'OriginalCaptionEntryTv
-        '
-        resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.floDataDisplay)
+            Me.txtIdNoTranslated.MaximumValue = Nothing
+            Me.txtIdNoTranslated.MinimumValue = Nothing
+            Me.txtIdNoTranslated.Name = "txtIdNoTranslated"
+            Me.txtIdNoTranslated.OldValue = Nothing
+            Me.txtIdNoTranslated.ReadOnly = True
+            Me.txtIdNoTranslated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtIdNoTranslated.TabStop = False
+            Me.txtIdNoTranslated.Translatable = False
+            '
+            'OriginalCaptionEntryTv
+            '
+            resources.ApplyResources(Me, "$this")
+            Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "OriginalCaptionEntryTv"
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)

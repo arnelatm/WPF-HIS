@@ -10,6 +10,7 @@ Namespace PresentationLayer.Models
         Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Applied As Decimal
+        Public Property Approved As Boolean
         Public Property CsrOiItems As List(Of CsrOiItemModel)
         Public Property Cancelled As Boolean
         Public Property CheckDate As Date?

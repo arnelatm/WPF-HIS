@@ -18,7 +18,9 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = txtCaption
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New OriginalCaptionsPresenter(Me)
-
+            If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                txtCaption.DisplayOnly = False
+            End If
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
         End Sub

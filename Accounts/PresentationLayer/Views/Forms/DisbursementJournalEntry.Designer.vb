@@ -27,227 +27,279 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.tlpDisbursement = New System.Windows.Forms.TableLayoutPanel()
-        Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblPayType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgvVatAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvPayeeType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgvSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtORNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblApplied = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtApplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtUnapplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.DataGridViewDjOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvSequenceDjOi = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.dtpCheckDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblVatNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
-        Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
-        Me.chkPcClosed = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
-        Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.lblCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblCheckDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnPrintCheck = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.btnPrintPcReplenishment = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tlpDisbursement.SuspendLayout
-        CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.DataGridViewDjOiItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsDjOiItems,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout1.SuspendLayout
-        Me.SuspendLayout
-        '
-        'TranslatorDAC
-        '
-        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
-        'AppDataDAC
-        '
-        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
-        'tlpDisbursement
-        '
-        Me.tlpDisbursement.BackColor = System.Drawing.Color.Transparent
-        Me.tlpDisbursement.ColumnCount = 13
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tlpDisbursement.Controls.Add(Me.cboPayType, 7, 1)
-        Me.tlpDisbursement.Controls.Add(Me.lblPayType, 6, 1)
-        Me.tlpDisbursement.Controls.Add(Me.DataGridViewJournalItems, 0, 8)
-        Me.tlpDisbursement.Controls.Add(Me.lblDiscountAccountIdNo, 0, 5)
-        Me.tlpDisbursement.Controls.Add(Me.lblNotes, 0, 6)
-        Me.tlpDisbursement.Controls.Add(Me.cboAccountIdNo, 1, 3)
-        Me.tlpDisbursement.Controls.Add(Me.lblAccountIdNo, 0, 3)
-        Me.tlpDisbursement.Controls.Add(Me.lblPaymentType, 0, 1)
-        Me.tlpDisbursement.Controls.Add(Me.txtJournalCode, 1, 0)
-        Me.tlpDisbursement.Controls.Add(Me.lblIdNo, 0, 0)
-        Me.tlpDisbursement.Controls.Add(Me.cboDiscountAccountIdNo, 1, 5)
-        Me.tlpDisbursement.Controls.Add(Me.lblInvoiceNo, 0, 4)
-        Me.tlpDisbursement.Controls.Add(Me.txtORNumber, 1, 4)
-        Me.tlpDisbursement.Controls.Add(Me.txtAmount, 8, 3)
-        Me.tlpDisbursement.Controls.Add(Me.lblAmount, 7, 3)
-        Me.tlpDisbursement.Controls.Add(Me.lblTransactionDate, 7, 0)
-        Me.tlpDisbursement.Controls.Add(Me.txtNotes, 1, 6)
-        Me.tlpDisbursement.Controls.Add(Me.txtVatAmount, 11, 0)
-        Me.tlpDisbursement.Controls.Add(Me.txtApplied, 11, 1)
-        Me.tlpDisbursement.Controls.Add(Me.txtUnapplied, 11, 2)
-        Me.tlpDisbursement.Controls.Add(Me.txtDiscountTaken, 11, 3)
-        Me.tlpDisbursement.Controls.Add(Me.lblDiscountTaken, 9, 3)
-        Me.tlpDisbursement.Controls.Add(Me.DataGridViewDjOiItems, 0, 9)
-        Me.tlpDisbursement.Controls.Add(Me.txtPayeeName, 1, 11)
-        Me.tlpDisbursement.Controls.Add(Me.dtpCheckDate, 8, 5)
-        Me.tlpDisbursement.Controls.Add(Me.txtVatNumber, 5, 4)
-        Me.tlpDisbursement.Controls.Add(Me.txtCheckNumber, 8, 4)
-        Me.tlpDisbursement.Controls.Add(Me.lblApplied, 9, 1)
-        Me.tlpDisbursement.Controls.Add(Me.lblVatAmount, 9, 0)
-        Me.tlpDisbursement.Controls.Add(Me.cboPaymentType, 1, 1)
-        Me.tlpDisbursement.Controls.Add(Me.TxtIdNo, 2, 0)
-        Me.tlpDisbursement.Controls.Add(Me.txtReferenceNo, 6, 0)
-        Me.tlpDisbursement.Controls.Add(Me.cboPayeeIdNo, 1, 2)
-        Me.tlpDisbursement.Controls.Add(Me.lblVatNo, 3, 4)
-        Me.tlpDisbursement.Controls.Add(Me.lblReferenceNo, 3, 0)
-        Me.tlpDisbursement.Controls.Add(Me.dtpTransactionDate, 8, 0)
-        Me.tlpDisbursement.Controls.Add(Me.lblSupplierIdNo, 0, 2)
-        Me.tlpDisbursement.Controls.Add(Me.CLabel2, 9, 2)
-        Me.tlpDisbursement.Controls.Add(Me.chkPosted, 9, 6)
-        Me.tlpDisbursement.Controls.Add(Me.chkCancelled, 10, 6)
-        Me.tlpDisbursement.Controls.Add(Me.chkPcClosed, 11, 6)
-        Me.tlpDisbursement.Controls.Add(Me.lblDateCreated, 9, 5)
-        Me.tlpDisbursement.Controls.Add(Me.dtpDateCreated, 10, 5)
-        Me.tlpDisbursement.Controls.Add(Me.lblCdJournalIdNo, 9, 4)
-        Me.tlpDisbursement.Controls.Add(Me.txtCdJournalIdNo, 11, 4)
-        Me.tlpDisbursement.Controls.Add(Me.lblCheckNumber, 6, 4)
-        Me.tlpDisbursement.Controls.Add(Me.lblCheckDate, 7, 5)
-        Me.tlpDisbursement.Location = New System.Drawing.Point(0, 53)
-        Me.tlpDisbursement.Name = "tlpDisbursement"
-        Me.tlpDisbursement.Padding = New System.Windows.Forms.Padding(10)
-        Me.tlpDisbursement.RowCount = 11
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpDisbursement.Size = New System.Drawing.Size(1020, 892)
-        Me.tlpDisbursement.TabIndex = 5
-        '
-        'cboPayType
-        '
-        Me.cboPayType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboPayType.BackColor = System.Drawing.Color.White
-        Me.cboPayType.BegFindValue = Nothing
-        Me.cboPayType.ChangingSearchValueOnly = false
-        Me.tlpDisbursement.SetColumnSpan(Me.cboPayType, 2)
-        Me.cboPayType.CurrentSearchTerm = ""
-        Me.cboPayType.DefaultValue = "0"
-        Me.cboPayType.DisplayMember = "Name"
-        Me.cboPayType.EditingMode = false
-        Me.cboPayType.EndFindValue = Nothing
-        Me.cboPayType.FieldDescription = Nothing
-        Me.cboPayType.FieldName = Nothing
-        Me.cboPayType.FilterRule = Nothing
-        Me.cboPayType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboPayType.FindEnabled = false
-        Me.cboPayType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboPayType.ForeColor = System.Drawing.Color.Black
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Me.tlpDisbursement = New System.Windows.Forms.TableLayoutPanel()
+            Me.chkPcClosed = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPayType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PaidAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvVatAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvPayeeType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvSpecialAccount = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtORNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblApplied = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtApplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtUnapplied = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.DataGridViewDjOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.dgvSequenceDjOi = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.DgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvJournalIdNoAp = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPreviousBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvBalance = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.dtpCheckDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblVatNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.lblCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtCdJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblCheckDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.btnPrintCheck = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.btnPrintPcReplenishment = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.tlpDisbursement.SuspendLayout()
+            CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.DataGridViewDjOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsDjOiItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout1.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+            '
+            'tlpDisbursement
+            '
+            Me.tlpDisbursement.BackColor = System.Drawing.Color.Transparent
+            Me.tlpDisbursement.ColumnCount = 13
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.tlpDisbursement.Controls.Add(Me.chkPcClosed, 10, 6)
+            Me.tlpDisbursement.Controls.Add(Me.chkPosted, 9, 6)
+            Me.tlpDisbursement.Controls.Add(Me.cboPayType, 7, 1)
+            Me.tlpDisbursement.Controls.Add(Me.lblPayType, 6, 1)
+            Me.tlpDisbursement.Controls.Add(Me.DataGridViewJournalItems, 0, 8)
+            Me.tlpDisbursement.Controls.Add(Me.lblDiscountAccountIdNo, 0, 5)
+            Me.tlpDisbursement.Controls.Add(Me.lblNotes, 0, 6)
+            Me.tlpDisbursement.Controls.Add(Me.cboAccountIdNo, 1, 3)
+            Me.tlpDisbursement.Controls.Add(Me.lblAccountIdNo, 0, 3)
+            Me.tlpDisbursement.Controls.Add(Me.lblPaymentType, 0, 1)
+            Me.tlpDisbursement.Controls.Add(Me.txtJournalCode, 1, 0)
+            Me.tlpDisbursement.Controls.Add(Me.lblIdNo, 0, 0)
+            Me.tlpDisbursement.Controls.Add(Me.cboDiscountAccountIdNo, 1, 5)
+            Me.tlpDisbursement.Controls.Add(Me.lblInvoiceNo, 0, 4)
+            Me.tlpDisbursement.Controls.Add(Me.txtORNumber, 1, 4)
+            Me.tlpDisbursement.Controls.Add(Me.txtAmount, 8, 3)
+            Me.tlpDisbursement.Controls.Add(Me.lblAmount, 7, 3)
+            Me.tlpDisbursement.Controls.Add(Me.lblTransactionDate, 7, 0)
+            Me.tlpDisbursement.Controls.Add(Me.txtNotes, 1, 6)
+            Me.tlpDisbursement.Controls.Add(Me.txtVatAmount, 11, 0)
+            Me.tlpDisbursement.Controls.Add(Me.txtApplied, 11, 1)
+            Me.tlpDisbursement.Controls.Add(Me.txtUnapplied, 11, 2)
+            Me.tlpDisbursement.Controls.Add(Me.txtDiscountTaken, 11, 3)
+            Me.tlpDisbursement.Controls.Add(Me.lblDiscountTaken, 9, 3)
+            Me.tlpDisbursement.Controls.Add(Me.DataGridViewDjOiItems, 0, 9)
+            Me.tlpDisbursement.Controls.Add(Me.txtPayeeName, 1, 11)
+            Me.tlpDisbursement.Controls.Add(Me.dtpCheckDate, 8, 5)
+            Me.tlpDisbursement.Controls.Add(Me.txtVatNumber, 5, 4)
+            Me.tlpDisbursement.Controls.Add(Me.txtCheckNumber, 8, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblApplied, 9, 1)
+            Me.tlpDisbursement.Controls.Add(Me.lblVatAmount, 9, 0)
+            Me.tlpDisbursement.Controls.Add(Me.cboPaymentType, 1, 1)
+            Me.tlpDisbursement.Controls.Add(Me.TxtIdNo, 2, 0)
+            Me.tlpDisbursement.Controls.Add(Me.txtReferenceNo, 6, 0)
+            Me.tlpDisbursement.Controls.Add(Me.cboPayeeIdNo, 1, 2)
+            Me.tlpDisbursement.Controls.Add(Me.lblVatNo, 3, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblReferenceNo, 3, 0)
+            Me.tlpDisbursement.Controls.Add(Me.dtpTransactionDate, 8, 0)
+            Me.tlpDisbursement.Controls.Add(Me.lblSupplierIdNo, 0, 2)
+            Me.tlpDisbursement.Controls.Add(Me.CLabel2, 9, 2)
+            Me.tlpDisbursement.Controls.Add(Me.lblDateCreated, 9, 5)
+            Me.tlpDisbursement.Controls.Add(Me.dtpDateCreated, 10, 5)
+            Me.tlpDisbursement.Controls.Add(Me.lblCdJournalIdNo, 9, 4)
+            Me.tlpDisbursement.Controls.Add(Me.txtCdJournalIdNo, 11, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblCheckNumber, 6, 4)
+            Me.tlpDisbursement.Controls.Add(Me.lblCheckDate, 7, 5)
+            Me.tlpDisbursement.Controls.Add(Me.chkApproved, 8, 6)
+            Me.tlpDisbursement.Controls.Add(Me.chkCancelled, 11, 6)
+            Me.tlpDisbursement.Location = New System.Drawing.Point(0, 53)
+            Me.tlpDisbursement.Name = "tlpDisbursement"
+            Me.tlpDisbursement.Padding = New System.Windows.Forms.Padding(10)
+            Me.tlpDisbursement.RowCount = 11
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.tlpDisbursement.Size = New System.Drawing.Size(1020, 892)
+            Me.tlpDisbursement.TabIndex = 5
+            '
+            'chkPcClosed
+            '
+            Me.chkPcClosed.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkPcClosed.BackColor = System.Drawing.Color.Transparent
+            Me.chkPcClosed.BegFindValue = Nothing
+            Me.chkPcClosed.Checked = False
+            Me.chkPcClosed.DisplayOnly = True
+            Me.chkPcClosed.EditingMode = False
+            Me.chkPcClosed.EndFindValue = Nothing
+            Me.chkPcClosed.FieldDescription = Nothing
+            Me.chkPcClosed.FieldName = Nothing
+            Me.chkPcClosed.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkPcClosed.FindEnabled = True
+            Me.chkPcClosed.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.chkPcClosed.IgnoreCase = False
+            Me.chkPcClosed.LinkedLabel = Nothing
+            Me.chkPcClosed.Location = New System.Drawing.Point(856, 176)
+            Me.chkPcClosed.Name = "chkPcClosed"
+            Me.chkPcClosed.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkPcClosed.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkPcClosed.Size = New System.Drawing.Size(67, 21)
+            Me.chkPcClosed.TabIndex = 300
+            Me.chkPcClosed.Text = "Closed?"
+            Me.chkPcClosed.Translatable = True
+            '
+            'chkPosted
+            '
+            Me.chkPosted.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
+            Me.chkPosted.BegFindValue = Nothing
+            Me.chkPosted.Checked = False
+            Me.chkPosted.DisplayOnly = True
+            Me.chkPosted.EditingMode = False
+            Me.chkPosted.EndFindValue = Nothing
+            Me.chkPosted.FieldDescription = Nothing
+            Me.chkPosted.FieldName = Nothing
+            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkPosted.FindEnabled = True
+            Me.chkPosted.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.chkPosted.IgnoreCase = False
+            Me.chkPosted.LinkedLabel = Nothing
+            Me.chkPosted.Location = New System.Drawing.Point(771, 176)
+            Me.chkPosted.Name = "chkPosted"
+            Me.chkPosted.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkPosted.Size = New System.Drawing.Size(79, 21)
+            Me.chkPosted.TabIndex = 299
+            Me.chkPosted.Text = "Posted?"
+            Me.chkPosted.Translatable = True
+            '
+            'cboPayType
+            '
+            Me.cboPayType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+            Me.cboPayType.BackColor = System.Drawing.Color.White
+            Me.cboPayType.BegFindValue = Nothing
+            Me.cboPayType.ChangingSearchValueOnly = False
+            Me.tlpDisbursement.SetColumnSpan(Me.cboPayType, 2)
+            Me.cboPayType.CurrentSearchTerm = ""
+            Me.cboPayType.DefaultValue = "0"
+            Me.cboPayType.DisplayMember = "Name"
+            Me.cboPayType.EditingMode = False
+            Me.cboPayType.EndFindValue = Nothing
+            Me.cboPayType.FieldDescription = Nothing
+            Me.cboPayType.FieldName = Nothing
+            Me.cboPayType.FilterRule = Nothing
+            Me.cboPayType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPayType.FindEnabled = False
+            Me.cboPayType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPayType.ForeColor = System.Drawing.Color.Black
             Me.cboPayType.HideWhenNotEditingOrAdding = False
             Me.cboPayType.IgnoreCase = False
             Me.cboPayType.IntegralHeight = False
@@ -894,7 +946,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.BackColor = System.Drawing.Color.White
             Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.tlpDisbursement.SetColumnSpan(Me.txtNotes, 8)
+            Me.tlpDisbursement.SetColumnSpan(Me.txtNotes, 7)
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
@@ -917,7 +969,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNotes.Size = New System.Drawing.Size(637, 25)
+            Me.txtNotes.Size = New System.Drawing.Size(523, 25)
             Me.txtNotes.TabIndex = 14
             Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
@@ -941,7 +993,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
             Me.txtVatAmount.LinkedLabel = Me.lblApplied
-            Me.txtVatAmount.Location = New System.Drawing.Point(926, 11)
+            Me.txtVatAmount.Location = New System.Drawing.Point(927, 11)
             Me.txtVatAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtVatAmount.MaximumValue = Nothing
             Me.txtVatAmount.MinimumValue = Nothing
@@ -965,7 +1017,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblApplied.EditingMode = False
             Me.lblApplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblApplied.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblApplied.Location = New System.Drawing.Point(767, 38)
+            Me.lblApplied.Location = New System.Drawing.Point(769, 38)
             Me.lblApplied.Margin = New System.Windows.Forms.Padding(1)
             Me.lblApplied.Name = "lblApplied"
             Me.lblApplied.Size = New System.Drawing.Size(107, 17)
@@ -993,7 +1045,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtApplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtApplied.ForeColor = System.Drawing.Color.Black
             Me.txtApplied.LinkedLabel = Me.lblApplied
-            Me.txtApplied.Location = New System.Drawing.Point(926, 38)
+            Me.txtApplied.Location = New System.Drawing.Point(927, 38)
             Me.txtApplied.Margin = New System.Windows.Forms.Padding(1)
             Me.txtApplied.MaximumValue = Nothing
             Me.txtApplied.MinimumValue = Nothing
@@ -1027,7 +1079,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnapplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtUnapplied.ForeColor = System.Drawing.Color.Black
             Me.txtUnapplied.LinkedLabel = Me.CLabel2
-            Me.txtUnapplied.Location = New System.Drawing.Point(926, 65)
+            Me.txtUnapplied.Location = New System.Drawing.Point(927, 65)
             Me.txtUnapplied.Margin = New System.Windows.Forms.Padding(1)
             Me.txtUnapplied.MaximumValue = Nothing
             Me.txtUnapplied.MinimumValue = Nothing
@@ -1051,7 +1103,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel2.Location = New System.Drawing.Point(767, 65)
+            Me.CLabel2.Location = New System.Drawing.Point(769, 65)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
             Me.CLabel2.Size = New System.Drawing.Size(124, 17)
@@ -1079,7 +1131,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDiscountTaken.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDiscountTaken.ForeColor = System.Drawing.Color.Black
             Me.txtDiscountTaken.LinkedLabel = Me.lblDiscountTaken
-            Me.txtDiscountTaken.Location = New System.Drawing.Point(926, 92)
+            Me.txtDiscountTaken.Location = New System.Drawing.Point(927, 92)
             Me.txtDiscountTaken.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDiscountTaken.MaximumValue = Nothing
             Me.txtDiscountTaken.MinimumValue = Nothing
@@ -1103,7 +1155,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDiscountTaken.EditingMode = False
             Me.lblDiscountTaken.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblDiscountTaken.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDiscountTaken.Location = New System.Drawing.Point(767, 92)
+            Me.lblDiscountTaken.Location = New System.Drawing.Point(769, 92)
             Me.lblDiscountTaken.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDiscountTaken.Name = "lblDiscountTaken"
             Me.lblDiscountTaken.Size = New System.Drawing.Size(107, 17)
@@ -1499,7 +1551,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatAmount.EditingMode = False
             Me.lblVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblVatAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblVatAmount.Location = New System.Drawing.Point(767, 11)
+            Me.lblVatAmount.Location = New System.Drawing.Point(769, 11)
             Me.lblVatAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblVatAmount.Name = "lblVatAmount"
             Me.lblVatAmount.Size = New System.Drawing.Size(81, 17)
@@ -1730,112 +1782,13 @@ Namespace PresentationLayer.Views.Forms
             Me.lblSupplierIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblSupplierIdNo.Translatable = True
             '
-            'chkPosted
-            '
-            Me.chkPosted.AutoCheck = False
-            Me.chkPosted.AutoSize = True
-            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
-            Me.chkPosted.BegFindValue = Nothing
-            Me.chkPosted.DisplayOnly = True
-            Me.chkPosted.EditingMode = True
-            Me.chkPosted.EndFindValue = Nothing
-            Me.chkPosted.FieldDescription = Nothing
-            Me.chkPosted.FieldName = Nothing
-            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkPosted.FindEnabled = False
-            Me.chkPosted.FlatAppearance.BorderSize = 0
-            Me.chkPosted.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.chkPosted.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.chkPosted.ForeColor = System.Drawing.Color.Black
-            Me.chkPosted.IFindableControl_FindEnabled = False
-            Me.chkPosted.IgnoreCase = False
-            Me.chkPosted.LinkedLabel = Nothing
-            Me.chkPosted.Location = New System.Drawing.Point(767, 174)
-            Me.chkPosted.Margin = New System.Windows.Forms.Padding(1)
-            Me.chkPosted.Name = "chkPosted"
-            Me.chkPosted.OldValue = Nothing
-            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.ExactValue
-            Me.chkPosted.Size = New System.Drawing.Size(68, 21)
-            Me.chkPosted.TabIndex = 293
-            Me.chkPosted.TabStop = False
-            Me.chkPosted.Text = "Posted"
-            Me.chkPosted.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.chkPosted.Translatable = True
-            Me.chkPosted.UseVisualStyleBackColor = False
-            '
-            'chkCancelled
-            '
-            Me.chkCancelled.AutoCheck = False
-            Me.chkCancelled.AutoSize = True
-            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
-            Me.chkCancelled.BegFindValue = Nothing
-            Me.chkCancelled.DisplayOnly = True
-            Me.chkCancelled.EditingMode = True
-            Me.chkCancelled.EndFindValue = Nothing
-            Me.chkCancelled.FieldDescription = Nothing
-            Me.chkCancelled.FieldName = Nothing
-            Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkCancelled.FindEnabled = False
-            Me.chkCancelled.FlatAppearance.BorderSize = 0
-            Me.chkCancelled.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.chkCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.chkCancelled.ForeColor = System.Drawing.Color.Black
-            Me.chkCancelled.IFindableControl_FindEnabled = False
-            Me.chkCancelled.IgnoreCase = False
-            Me.chkCancelled.LinkedLabel = Nothing
-            Me.chkCancelled.Location = New System.Drawing.Point(838, 174)
-            Me.chkCancelled.Margin = New System.Windows.Forms.Padding(1)
-            Me.chkCancelled.Name = "chkCancelled"
-            Me.chkCancelled.OldValue = Nothing
-            Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.ExactValue
-            Me.chkCancelled.Size = New System.Drawing.Size(86, 21)
-            Me.chkCancelled.TabIndex = 294
-            Me.chkCancelled.TabStop = False
-            Me.chkCancelled.Text = "Cancelled"
-            Me.chkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.chkCancelled.Translatable = True
-            Me.chkCancelled.UseVisualStyleBackColor = False
-            '
-            'chkPcClosed
-            '
-            Me.chkPcClosed.AutoCheck = False
-            Me.chkPcClosed.AutoSize = True
-            Me.chkPcClosed.BackColor = System.Drawing.Color.Transparent
-            Me.chkPcClosed.BegFindValue = Nothing
-            Me.chkPcClosed.DisplayOnly = True
-            Me.chkPcClosed.EditingMode = True
-            Me.chkPcClosed.EndFindValue = Nothing
-            Me.chkPcClosed.FieldDescription = Nothing
-            Me.chkPcClosed.FieldName = Nothing
-            Me.chkPcClosed.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkPcClosed.FindEnabled = False
-            Me.chkPcClosed.FlatAppearance.BorderSize = 0
-            Me.chkPcClosed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.chkPcClosed.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.chkPcClosed.ForeColor = System.Drawing.Color.Black
-            Me.chkPcClosed.IFindableControl_FindEnabled = False
-            Me.chkPcClosed.IgnoreCase = False
-            Me.chkPcClosed.LinkedLabel = Nothing
-            Me.chkPcClosed.Location = New System.Drawing.Point(926, 174)
-            Me.chkPcClosed.Margin = New System.Windows.Forms.Padding(1)
-            Me.chkPcClosed.Name = "chkPcClosed"
-            Me.chkPcClosed.OldValue = Nothing
-            Me.chkPcClosed.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.ExactValue
-            Me.chkPcClosed.Size = New System.Drawing.Size(75, 21)
-            Me.chkPcClosed.TabIndex = 295
-            Me.chkPcClosed.TabStop = False
-            Me.chkPcClosed.Text = "Closed?"
-            Me.chkPcClosed.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.chkPcClosed.Translatable = True
-            Me.chkPcClosed.UseVisualStyleBackColor = False
-            '
             'lblDateCreated
             '
             Me.lblDateCreated.DisplayOnly = True
             Me.lblDateCreated.EditingMode = False
             Me.lblDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
             Me.lblDateCreated.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDateCreated.Location = New System.Drawing.Point(767, 147)
+            Me.lblDateCreated.Location = New System.Drawing.Point(769, 147)
             Me.lblDateCreated.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDateCreated.Name = "lblDateCreated"
             Me.lblDateCreated.Size = New System.Drawing.Size(69, 25)
@@ -1855,7 +1808,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated.EditsAllowed = False
             Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
             Me.dtpDateCreated.LinkedLabel = Nothing
-            Me.dtpDateCreated.Location = New System.Drawing.Point(847, 147)
+            Me.dtpDateCreated.Location = New System.Drawing.Point(863, 147)
             Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(10, 1, 1, 1)
             Me.dtpDateCreated.Name = "dtpDateCreated"
             Me.dtpDateCreated.ReadOnlyDp = True
@@ -1878,7 +1831,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCdJournalIdNo.DisplayOnly = True
             Me.lblCdJournalIdNo.EditingMode = False
             Me.lblCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblCdJournalIdNo.Location = New System.Drawing.Point(767, 118)
+            Me.lblCdJournalIdNo.Location = New System.Drawing.Point(769, 118)
             Me.lblCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCdJournalIdNo.Name = "lblCdJournalIdNo"
             Me.lblCdJournalIdNo.Size = New System.Drawing.Size(121, 17)
@@ -1904,7 +1857,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCdJournalIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtCdJournalIdNo.LinkedLabel = Nothing
-            Me.txtCdJournalIdNo.Location = New System.Drawing.Point(926, 118)
+            Me.txtCdJournalIdNo.Location = New System.Drawing.Point(927, 118)
             Me.txtCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtCdJournalIdNo.MaximumValue = Nothing
             Me.txtCdJournalIdNo.MinimumValue = Nothing
@@ -1946,6 +1899,54 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckDate.Text = "Check Date"
             Me.lblCheckDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.lblCheckDate.Translatable = True
+            '
+            'chkApproved
+            '
+            Me.chkApproved.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkApproved.BegFindValue = Nothing
+            Me.chkApproved.Checked = False
+            Me.chkApproved.EditingMode = False
+            Me.chkApproved.EndFindValue = Nothing
+            Me.chkApproved.FieldDescription = Nothing
+            Me.chkApproved.FieldName = Nothing
+            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkApproved.FindEnabled = True
+            Me.chkApproved.IgnoreCase = False
+            Me.chkApproved.LinkedLabel = Nothing
+            Me.chkApproved.Location = New System.Drawing.Point(655, 176)
+            Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkApproved.Size = New System.Drawing.Size(110, 21)
+            Me.chkApproved.TabIndex = 298
+            Me.chkApproved.Text = "Approved?"
+            Me.chkApproved.Translatable = True
+            '
+            'chkCancelled
+            '
+            Me.chkCancelled.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
+            Me.chkCancelled.BegFindValue = Nothing
+            Me.chkCancelled.Checked = False
+            Me.chkCancelled.DisplayOnly = True
+            Me.chkCancelled.EditingMode = False
+            Me.chkCancelled.EndFindValue = Nothing
+            Me.chkCancelled.FieldDescription = Nothing
+            Me.chkCancelled.FieldName = Nothing
+            Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkCancelled.FindEnabled = True
+            Me.chkCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.chkCancelled.IgnoreCase = False
+            Me.chkCancelled.LinkedLabel = Nothing
+            Me.chkCancelled.Location = New System.Drawing.Point(929, 176)
+            Me.chkCancelled.Name = "chkCancelled"
+            Me.chkCancelled.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkCancelled.Size = New System.Drawing.Size(80, 21)
+            Me.chkCancelled.TabIndex = 301
+            Me.chkCancelled.Text = "Cancelled?"
+            Me.chkCancelled.Translatable = True
             '
             'btnViewGL
             '
@@ -2001,7 +2002,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Bottom
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 943)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(1021, 27)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(1023, 27)
             Me.CFlowLayout1.TabIndex = 6
             '
             'btnPrintPcReplenishment
@@ -2022,27 +2023,27 @@ Namespace PresentationLayer.Views.Forms
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-            Me.ClientSize = New System.Drawing.Size(1021, 970)
+            Me.ClientSize = New System.Drawing.Size(1023, 970)
             Me.Controls.Add(Me.CFlowLayout1)
             Me.Controls.Add(Me.tlpDisbursement)
             Me.DefaultFormBackColor = System.Drawing.Color.Transparent
-            Me.MinimumSize = New System.Drawing.Size(1037, 590)
+            Me.MinimumSize = New System.Drawing.Size(1039, 590)
             Me.Name = "DisbursementJournalEntry"
             Me.Text = "Petty Cash Journal "
-        Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)
-        Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tlpDisbursement.ResumeLayout(false)
-        Me.tlpDisbursement.PerformLayout
-        CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.DataGridViewDjOiItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsDjOiItems,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)
+            Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.tlpDisbursement.ResumeLayout(False)
+            Me.tlpDisbursement.PerformLayout()
+            CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DataGridViewDjOiItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsDjOiItems, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
         Friend WithEvents bsDjOiItems As Windows.Forms.BindingSource
         Friend WithEvents dgvIdNocadOi As Windows.Forms.DataGridViewTextBoxColumn
@@ -2114,9 +2115,6 @@ End Sub
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
         Friend WithEvents cboPayType As CaComboBox
         Friend WithEvents lblPayType As CLabel
-        Friend WithEvents chkPosted As CCheckBoxNew
-        Friend WithEvents chkCancelled As CCheckBoxNew
-        Friend WithEvents chkPcClosed As CCheckBoxNew
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents lblCdJournalIdNo As CLabel
         Friend WithEvents txtCdJournalIdNo As CTextBox
@@ -2138,5 +2136,9 @@ End Sub
         Friend WithEvents dgvSpecialAccount As CDgvTextColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
+        Friend WithEvents chkPcClosed As UcCheckBox
+        Friend WithEvents chkPosted As UcCheckBox
+        Friend WithEvents chkApproved As UcCheckBox
+        Friend WithEvents chkCancelled As UcCheckBox
     End Class
 End Namespace

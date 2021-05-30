@@ -17,6 +17,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT " &
                     "AccountIdNo," &
+                    "Approved," &
                     "Cancelled," &
                     "DateCreated," &
                     "IdNo," &
@@ -45,6 +46,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "UPDATE [SalesJournal] SET " &
                     "AccountIdNo = @AccountIdNo," &
+                    "Approved = @Approved," &
                     "Cancelled = @Cancelled," &
                     "Notes = @Notes," &
                     "Posted = @Posted," &
@@ -60,6 +62,7 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [SalesJournal] " &
                     "(" &
                     "AccountIdNo," &
+                    "Approved," &
                     "Cancelled," &
                     "Notes," &
                     "Posted," &
@@ -67,6 +70,7 @@ Namespace DataLayer.AdoNet
                     "TransactionDate" &
                     ") VALUES (" &
                     "@AccountIdNo," &
+                    "@Approved," &
                     "@Cancelled," &
                     "@Notes," &
                     "@Posted," &
@@ -80,6 +84,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New SalesJournal() With {
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
+            .Approved = Extensions.AsBool(reader("Approved")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
@@ -92,6 +97,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(salesJournal As SalesJournal) As Object()
             Return New Object() {
                                     "@AccountIdNo", salesJournal.AccountIdNo,
+                                    "@Approved", salesJournal.Approved,
                                     "@Cancelled", salesJournal.Cancelled,
                                     "@IdNo", salesJournal.IdNo,
                                     "@Notes", salesJournal.Notes,

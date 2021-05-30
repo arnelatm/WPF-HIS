@@ -159,6 +159,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Approved As Boolean Implements IArJournalView.Approved
+            Get
+                Return chkApproved.Checked
+            End Get
+            Set
+                chkApproved.Checked = Value
+            End Set
+        End Property
+
         Public Property ReferenceNo As String Implements IArJournalView.ReferenceNo
             Get
                 Return txtReferenceNo.Text
@@ -260,6 +269,7 @@ Namespace PresentationLayer.Views.Forms
         {
          {"AccountIdNo", cboAccountIdNo},
          {"Amount", txtAmount},
+         {"Approved", chkApproved},
          {"Cancelled", chkCancelled},
          {"CustomerIdNo", cboCustomerIdNo},
          {"DateCreated", dtpDateCreated},

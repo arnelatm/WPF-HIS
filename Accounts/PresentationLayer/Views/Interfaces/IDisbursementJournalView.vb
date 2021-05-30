@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property AccountIdNo As Int16?
         Property Amount As Decimal
         Property Applied As Decimal
+        Property Approved As Boolean
         Property Cancelled As Boolean
         Property CdJournalIdNo As Int32?
         Property CheckDate As Date?

@@ -63,6 +63,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		HomeSqlIspdata.sql = HomeSqlIspdata.sql
 		ToDo.txt = ToDo.txt
 		Translations.txt = Translations.txt
+		Update Approved Fields.sql = Update Approved Fields.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00-8C55-479E-94C2-19679791F55C}"

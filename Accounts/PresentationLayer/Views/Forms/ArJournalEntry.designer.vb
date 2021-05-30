@@ -54,9 +54,6 @@ Namespace PresentationLayer.Views.Forms
             Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-            Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floArJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -89,10 +86,12 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPercent = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floArJournalItems.SuspendLayout()
@@ -366,73 +365,6 @@ Namespace PresentationLayer.Views.Forms
             'bsJournalItems
             '
             Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
-            '
-            'lblCancelled
-            '
-            Me.lblCancelled.DisplayOnly = True
-            Me.lblCancelled.EditingMode = False
-            Me.lblCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblCancelled.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblCancelled.Location = New System.Drawing.Point(11, 86)
-            Me.lblCancelled.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblCancelled.Name = "lblCancelled"
-            Me.lblCancelled.Size = New System.Drawing.Size(97, 23)
-            Me.lblCancelled.TabIndex = 4
-            Me.lblCancelled.Text = "Cancelled?"
-            Me.lblCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblCancelled.Translatable = True
-            '
-            'chkPosted
-            '
-            Me.chkPosted.Appearance = System.Windows.Forms.Appearance.Button
-            Me.chkPosted.AutoCheck = False
-            Me.chkPosted.BackColor = System.Drawing.Color.White
-            Me.chkPosted.BegFindValue = Nothing
-            Me.chkPosted.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.chkPosted.DisplayOnly = True
-            Me.chkPosted.EditingMode = True
-            Me.chkPosted.Enabled = False
-            Me.chkPosted.EndFindValue = Nothing
-            Me.chkPosted.FieldDescription = Nothing
-            Me.chkPosted.FieldName = Nothing
-            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkPosted.FindEnabled = False
-            Me.chkPosted.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.CFlowLayout2.SetFlowBreak(Me.chkPosted, True)
-            Me.chkPosted.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-            Me.chkPosted.ForeColor = System.Drawing.Color.Black
-            Me.chkPosted.IFindableControl_FindEnabled = False
-            Me.chkPosted.IgnoreCase = False
-            Me.chkPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.chkPosted.LinkedLabel = Me.lblPosted
-            Me.chkPosted.Location = New System.Drawing.Point(110, 111)
-            Me.chkPosted.Margin = New System.Windows.Forms.Padding(1)
-            Me.chkPosted.Name = "chkPosted"
-            Me.chkPosted.NoLabel = True
-            Me.chkPosted.OldValue = Nothing
-            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkPosted.Size = New System.Drawing.Size(23, 21)
-            Me.chkPosted.TabIndex = 6
-            Me.chkPosted.TabStop = False
-            Me.chkPosted.Text = " "
-            Me.chkPosted.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.chkPosted.Translatable = False
-            Me.chkPosted.UseVisualStyleBackColor = False
-            '
-            'lblPosted
-            '
-            Me.lblPosted.DisplayOnly = True
-            Me.lblPosted.EditingMode = False
-            Me.lblPosted.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPosted.Location = New System.Drawing.Point(11, 111)
-            Me.lblPosted.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPosted.Name = "lblPosted"
-            Me.lblPosted.Size = New System.Drawing.Size(97, 23)
-            Me.lblPosted.TabIndex = 6
-            Me.lblPosted.Text = "Posted?"
-            Me.lblPosted.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblPosted.Translatable = True
             '
             'floArJournalHeader
             '
@@ -1011,10 +943,9 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.lblPercent)
             Me.CFlowLayout2.Controls.Add(Me.lblVatAmount)
             Me.CFlowLayout2.Controls.Add(Me.txtVatAmount)
-            Me.CFlowLayout2.Controls.Add(Me.lblCancelled)
             Me.CFlowLayout2.Controls.Add(Me.chkCancelled)
-            Me.CFlowLayout2.Controls.Add(Me.lblPosted)
             Me.CFlowLayout2.Controls.Add(Me.chkPosted)
+            Me.CFlowLayout2.Controls.Add(Me.chkApproved)
             Me.CFlowLayout2.Controls.Add(Me.lblDateAdded)
             Me.CFlowLayout2.Controls.Add(Me.dtpDateCreated)
             Me.CFlowLayout2.Location = New System.Drawing.Point(772, 3)
@@ -1195,81 +1126,93 @@ Namespace PresentationLayer.Views.Forms
             '
             'chkCancelled
             '
-            Me.chkCancelled.Appearance = System.Windows.Forms.Appearance.Button
-            Me.chkCancelled.AutoCheck = False
-            Me.chkCancelled.BackColor = System.Drawing.Color.White
+            Me.chkCancelled.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
             Me.chkCancelled.BegFindValue = Nothing
-            Me.chkCancelled.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkCancelled.Checked = False
             Me.chkCancelled.DisplayOnly = True
-            Me.chkCancelled.EditingMode = True
-            Me.chkCancelled.Enabled = False
+            Me.chkCancelled.EditingMode = False
             Me.chkCancelled.EndFindValue = Nothing
             Me.chkCancelled.FieldDescription = Nothing
             Me.chkCancelled.FieldName = Nothing
             Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.chkCancelled.FindEnabled = False
-            Me.chkCancelled.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.CFlowLayout2.SetFlowBreak(Me.chkCancelled, True)
-            Me.chkCancelled.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-            Me.chkCancelled.ForeColor = System.Drawing.Color.Black
-            Me.chkCancelled.IFindableControl_FindEnabled = False
             Me.chkCancelled.IgnoreCase = False
-            Me.chkCancelled.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.chkCancelled.LinkedLabel = Me.lblCancelled
-            Me.chkCancelled.Location = New System.Drawing.Point(110, 86)
-            Me.chkCancelled.Margin = New System.Windows.Forms.Padding(1)
+            Me.chkCancelled.LinkedLabel = Nothing
+            Me.chkCancelled.Location = New System.Drawing.Point(13, 88)
             Me.chkCancelled.Name = "chkCancelled"
-            Me.chkCancelled.NoLabel = True
-            Me.chkCancelled.OldValue = Nothing
+            Me.chkCancelled.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkCancelled.Size = New System.Drawing.Size(23, 21)
-            Me.chkCancelled.TabIndex = 5
+            Me.chkCancelled.Size = New System.Drawing.Size(95, 21)
+            Me.chkCancelled.TabIndex = 287
             Me.chkCancelled.TabStop = False
-            Me.chkCancelled.Text = " "
-            Me.chkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.chkCancelled.Translatable = False
-            Me.chkCancelled.UseVisualStyleBackColor = False
+            Me.chkCancelled.Text = "Cancelled?"
+            Me.chkCancelled.Translatable = True
+            '
+            'chkApproved
+            '
+            Me.chkApproved.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkApproved.BegFindValue = Nothing
+            Me.chkApproved.Checked = False
+            Me.chkApproved.EditingMode = False
+            Me.chkApproved.EndFindValue = Nothing
+            Me.chkApproved.FieldDescription = Nothing
+            Me.chkApproved.FieldName = Nothing
+            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkApproved.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
+            Me.chkApproved.IgnoreCase = False
+            Me.chkApproved.LinkedLabel = Nothing
+            Me.chkApproved.Location = New System.Drawing.Point(13, 115)
+            Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkApproved.Size = New System.Drawing.Size(113, 21)
+            Me.chkApproved.TabIndex = 288
+            Me.chkApproved.Text = "Approved?"
+            Me.chkApproved.Translatable = True
+            '
+            'chkPosted
+            '
+            Me.chkPosted.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
+            Me.chkPosted.BegFindValue = Nothing
+            Me.chkPosted.Checked = False
+            Me.chkPosted.DisplayOnly = True
+            Me.chkPosted.EditingMode = False
+            Me.chkPosted.EndFindValue = Nothing
+            Me.chkPosted.FieldDescription = Nothing
+            Me.chkPosted.FieldName = Nothing
+            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkPosted.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.chkPosted, True)
+            Me.chkPosted.IgnoreCase = False
+            Me.chkPosted.LinkedLabel = Nothing
+            Me.chkPosted.Location = New System.Drawing.Point(114, 88)
+            Me.chkPosted.Name = "chkPosted"
+            Me.chkPosted.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkPosted.Size = New System.Drawing.Size(113, 21)
+            Me.chkPosted.TabIndex = 289
+            Me.chkPosted.TabStop = False
+            Me.chkPosted.Text = "Posted?"
+            Me.chkPosted.Translatable = True
             '
             'lblDateAdded
             '
             Me.lblDateAdded.DisplayOnly = True
             Me.lblDateAdded.EditingMode = False
-            Me.lblDateAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblDateAdded.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblDateAdded.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDateAdded.Location = New System.Drawing.Point(11, 136)
+            Me.lblDateAdded.Location = New System.Drawing.Point(11, 141)
             Me.lblDateAdded.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDateAdded.Name = "lblDateAdded"
-            Me.lblDateAdded.Size = New System.Drawing.Size(40, 26)
+            Me.lblDateAdded.Size = New System.Drawing.Size(74, 26)
             Me.lblDateAdded.TabIndex = 8
             Me.lblDateAdded.Text = "Date Added:"
-            Me.lblDateAdded.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lblDateAdded.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblDateAdded.Translatable = True
-            '
-            'dtpDateCreated
-            '
-            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpDateCreated.DefaultValue = Nothing
-            Me.dtpDateCreated.DisplayOnly = True
-            Me.dtpDateCreated.DtpDefaultValue = Nothing
-            Me.dtpDateCreated.EditingMode = False
-            Me.dtpDateCreated.EditsAllowed = False
-            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.dtpDateCreated.LinkedLabel = Nothing
-            Me.dtpDateCreated.Location = New System.Drawing.Point(53, 136)
-            Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(1)
-            Me.dtpDateCreated.Name = "dtpDateCreated"
-            Me.dtpDateCreated.ReadOnlyDp = True
-            Me.dtpDateCreated.SecurityKey = Nothing
-            Me.dtpDateCreated.ShowLongDate = False
-            Me.dtpDateCreated.ShowTime = True
-            Me.dtpDateCreated.Size = New System.Drawing.Size(150, 25)
-            Me.dtpDateCreated.TabIndex = 285
-            Me.dtpDateCreated.TabStop = False
-            Me.dtpDateCreated.TargetCalendar = Nothing
-            Me.dtpDateCreated.Translatable = False
-            Me.dtpDateCreated.Value = Nothing
-            Me.dtpDateCreated.ValueIsMandatory = False
-            Me.dtpDateCreated.ValueIsNullable = False
             '
             'floFullEntryArea
             '
@@ -1283,6 +1226,32 @@ Namespace PresentationLayer.Views.Forms
             Me.floFullEntryArea.Name = "floFullEntryArea"
             Me.floFullEntryArea.Size = New System.Drawing.Size(1045, 514)
             Me.floFullEntryArea.TabIndex = 0
+            '
+            'dtpDateCreated
+            '
+            Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpDateCreated.DefaultValue = Nothing
+            Me.dtpDateCreated.DisplayOnly = True
+            Me.dtpDateCreated.DtpDefaultValue = Nothing
+            Me.dtpDateCreated.EditingMode = False
+            Me.dtpDateCreated.EditsAllowed = False
+            Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.dtpDateCreated.LinkedLabel = Nothing
+            Me.dtpDateCreated.Location = New System.Drawing.Point(96, 141)
+            Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(10, 1, 1, 1)
+            Me.dtpDateCreated.Name = "dtpDateCreated"
+            Me.dtpDateCreated.ReadOnlyDp = True
+            Me.dtpDateCreated.SecurityKey = Nothing
+            Me.dtpDateCreated.ShowLongDate = False
+            Me.dtpDateCreated.ShowTime = True
+            Me.dtpDateCreated.Size = New System.Drawing.Size(139, 25)
+            Me.dtpDateCreated.TabIndex = 290
+            Me.dtpDateCreated.TabStop = False
+            Me.dtpDateCreated.TargetCalendar = Nothing
+            Me.dtpDateCreated.Translatable = False
+            Me.dtpDateCreated.Value = Nothing
+            Me.dtpDateCreated.ValueIsMandatory = False
+            Me.dtpDateCreated.ValueIsNullable = False
             '
             'ArJournalEntry
             '
@@ -1309,8 +1278,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
         Friend WithEvents floArJournalItems As CFlowLayout
         Friend WithEvents DataGridViewJournalItems As CDataGridView
-        Friend WithEvents lblCancelled As CLabel
-        Friend WithEvents chkPosted As CCheckBox
         Friend WithEvents floArJournalHeader As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents txtJournalCode As CTextBox
@@ -1330,9 +1297,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dtpDueDate As CCustomDateTimePicker
         Friend WithEvents lblCustomerIdNo As CLabel
         Friend WithEvents lblAmount As CLabel
-        Friend WithEvents lblPosted As CLabel
         Friend WithEvents lblDateAdded As CLabel
-        Friend WithEvents chkCancelled As CCheckBox
         Friend WithEvents lblPercent As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboCustomerIdNo As CaComboBox
@@ -1363,8 +1328,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents dtpDateCreated As CCustomDateTimePicker
         Friend WithEvents lblVatAmount As CLabel
         Friend WithEvents txtVatAmount As CTextBox
+        Friend WithEvents chkCancelled As UcCheckBox
+        Friend WithEvents chkApproved As UcCheckBox
+        Friend WithEvents chkPosted As UcCheckBox
+        Friend WithEvents dtpDateCreated As CCustomDateTimePicker
     End Class
 End NameSpace

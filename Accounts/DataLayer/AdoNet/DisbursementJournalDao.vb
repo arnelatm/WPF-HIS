@@ -38,6 +38,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo," &
                     "Amount," &
                     "Applied," &
+                    "Approved," &
                     "Cancelled," &
                     "CheckDate," &
                     "CheckNumber," &
@@ -66,6 +67,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo," &
                     "Amount," &
                     "Applied," &
+                    "Approved," &
                     "Cancelled," &
                     "CdJournalIdNo," &
                     "DateCreated," &
@@ -108,6 +110,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
+                    "Approved      = @Approved," &
                     "Cancelled     = @Cancelled," &
                     "CheckDate     = @CheckDate," &
                     "CheckNumber   = @CheckNumber," &
@@ -133,6 +136,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
+                    "Approved      = @Approved," &
                     "Cancelled     = @Cancelled," &
                     "CdJournalIdNo = @CdJournalIdNo," &
                     "DiscountAccountIdNo = @DiscountAccountIdNo," &
@@ -161,6 +165,7 @@ Namespace DataLayer.AdoNet
                         "AccountIdNo," &
                         "Amount," &
                         "Applied," &
+                        "Approved," &
                         "Cancelled," &
                         "CheckDate," &
                         "CheckNumber," &
@@ -183,6 +188,7 @@ Namespace DataLayer.AdoNet
                         "@AccountIdNo," &
                         "@Amount," &
                         "@Applied," &
+                        "@Approved," &
                         "@Cancelled," &
                         "@CheckDate," &
                         "@CheckNumber," &
@@ -208,6 +214,7 @@ Namespace DataLayer.AdoNet
                         "AccountIdNo," &
                         "Amount," &
                         "Applied," &
+                        "Approved," &
                         "Cancelled," &
                         "DiscountAccountIdNo," &
                         "DiscountTaken," &
@@ -227,6 +234,7 @@ Namespace DataLayer.AdoNet
                         "@AccountIdNo," &
                         "@Amount," &
                         "@Applied," &
+                        "@Approved," &
                         "@Cancelled," &
                         "@DiscountAccountIdNo," &
                         "@DiscountTaken," &
@@ -253,6 +261,7 @@ Namespace DataLayer.AdoNet
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
+            .Approved = Extensions.AsBool(reader("Approved")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .CdJournalIdNo = Extensions.AsInt(Of Int32)(reader("CdJournalIdNO")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
@@ -279,6 +288,7 @@ Namespace DataLayer.AdoNet
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
+            .Approved = Extensions.AsBool(reader("Approved")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .CheckDate = Extensions.AsNullable(Of Date?)(reader("CheckDate")),
             .CheckNumber = Extensions.AsString(reader("CheckNumber")),
@@ -306,6 +316,7 @@ Namespace DataLayer.AdoNet
                                     "@AccountIdNo", disbursementJournal.AccountIdNo,
                                     "@Amount", disbursementJournal.Amount,
                                     "@Applied", disbursementJournal.Applied,
+                                    "@Approved", disbursementJournal.Approved,
                                     "@Cancelled", disbursementJournal.Cancelled,
                                     "@CdJournalIdNo", disbursementJournal.CdJournalIdNo,
                                     "@DateCreated", disbursementJournal.DateCreated,
@@ -332,6 +343,7 @@ Namespace DataLayer.AdoNet
                                     "@AccountIdNo", disbursementJournal.AccountIdNo,
                                     "@Amount", disbursementJournal.Amount,
                                     "@Applied", disbursementJournal.Applied,
+                                    "@Approved", disbursementJournal.Approved,
                                     "@Cancelled", disbursementJournal.Cancelled,
                                     "@CheckDate", disbursementJournal.CheckDate,
                                     "@CheckNumber", disbursementJournal.CheckNumber,

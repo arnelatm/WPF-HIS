@@ -6,7 +6,7 @@ Namespace AdoNet
 
     Public Class GroupAccessDao
         Inherits BaseDao
-        Implements IDaoChild(Of GroupAccess)
+        Implements IDaoChild(Of GroupAccess), IDaoAllOnly(Of SecurityObject)
 
         Private ReadOnly Db As New Db()
 
@@ -24,15 +24,15 @@ Namespace AdoNet
         '    Return Db.Read(sql, Make, parms).FirstOrDefault()
         'End Function
 
-        'Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of GroupAccess) Implements IDaoWithAll(Of GroupAccess).GetAll
-        '    If sortExpression = Nothing THEN
-        '        sortExpression = "IdNo"
-        '    End If
-        '    Dim sql As String =
-        '            " SELECT IdNo, SecurityGroupIdNo,  " &
-        '            "   FROM [GroupAccess_View] " & "order by " & sortExpression
-        '    Return Db.Read(sql, Make).ToList()
-        'End Function
+        Public Function GetSecurityObjects(Optional sortExpression As String = Nothing) As List(Of SecurityObject) Implements IDaoAllOnly(Of SecurityObject).GetAll
+            If sortExpression = Nothing Then
+                sortExpression = "FullPathName"
+            End If
+            Dim sql As String =
+                    " SELECT IdNo, SecurityObjectName, SecurityObjectNameAra" &
+                    " FROM [SecurityObject_View1] " & "order by " & sortExpression
+            Return Db.Read(sql, _makeSecurityObject).ToList()
+        End Function
 
         'Public Function GetRecordsById(idNo As Int32, Optional sortExpression As String = Nothing) As List(Of GroupAccess) Implements IDaoChild(Of GroupAccess).GetRecordsById
         '    If sortExpression Is Nothing Then
@@ -81,7 +81,14 @@ Namespace AdoNet
             .Editable = Extensions.AsBool(reader("Editable"))
             }
 
-        ' creates query parameters list from GroupAccess object
+        ' creates a SecurityObject based on DataReader.
+        Private ReadOnly _makeSecurityObject As Func(Of IDataReader, SecurityObject) =
+                             Function(reader) _
+            New SecurityObject() With {
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
+            .SecurityObjectNameAra = Extensions.AsString(reader("SecurityObjectNameAra"))
+            }
 
         ' ReSharper disable once UnusedMember.Local
         Private Function Take(groupAccess As GroupAccess) As Object()

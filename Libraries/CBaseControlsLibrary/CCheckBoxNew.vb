@@ -25,9 +25,10 @@ Public Class CCheckBoxNew
         Dim myFont As New Font("Sans Serif", 10.0!, FontStyle.Regular)
         ContextMenuStrip = _contextMenuStrip1
         Font = myFont
+        BoxSize = New Size(14, 14)
         'Appearance = System.Windows.Forms.Appearance.Button
         FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        AutoSize = True
+        AutoSize = False
         SetStyle(ControlStyles.UserPaint, True)
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
         'Height = 16
@@ -47,6 +48,12 @@ Public Class CCheckBoxNew
     <Description("Security Key to use for this control.")>
     <Browsable(True)>
     Public Property SecurityKey As String
+
+    <Category("Custom Properties")>
+    <DefaultValue(CType(Nothing, String))>
+    <Description("BoxSize is the size of the check box in pixel.")>
+    <Browsable(True)>
+    Public Property BoxSize As Size
 
     <Bindable(True)>
     <Category("Custom Properties")>
@@ -228,8 +235,6 @@ Public Class CCheckBoxNew
         Return description
     End Function
 
-
-
     'Protected Overrides Sub OnPaint(ByVal pEvent As System.Windows.Forms.PaintEventArgs)
     '    Dim brush As New SolidBrush(BackColor)
     '    Dim boxSide As Integer = CInt(pEvent.Graphics.MeasureString(Text, Font, Width).Height)
@@ -276,15 +281,6 @@ Public Class CCheckBoxNew
     '    pEvent.Graphics.DrawRectangle(Pens.DarkSlateBlue, rect)
     '    Dim fRect As Rectangle = ClientRectangle
 
-    '    If Focused Then
-    '        fRect.Inflate(-1, -1)
-
-    '        Using pen As Pen = New Pen(Brushes.Gray) With {
-    '            .DashStyle = DashStyle.Dot
-    '            }
-    '            pEvent.Graphics.DrawRectangle(pen, fRect)
-    '        End Using
-    '    End If
     'End Sub
 
     'Protected Overrides Sub OnPaint(ByVal pEvent As System.Windows.Forms.PaintEventArgs)
@@ -305,23 +301,10 @@ Public Class CCheckBoxNew
     'End Sub
 
     Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
-        'MyBase.OnPaint(pEvent)
         pEvent.Graphics.Clear(GlobalVariables.DefaultFormControlReadOnlyBackgroundColor)
         Dim pt As Point
-        'If RightToLeft Then
         pt = New Point(0, 0)
-        'Else
-        'pt = New Point(Width - 10, 0)
-        'End If
-        Dim rect As Rectangle = New Rectangle(pt, New Size(10, 10))
         Dim cBoxColorFill As Color
-        Dim cBrush = New SolidBrush(cBoxColorFill)
-        pEvent.Graphics.FillRectangle(cBrush, rect)
-        'If RightToLeft Then
-        ' pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(Width - 10, 4, 10, 10))
-        'Else
-        pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(0, 0, 10, 10))
-        'End If
         If _editingMode Then
             If DisplayOnly Then
                 cBoxColorFill = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
@@ -331,6 +314,10 @@ Public Class CCheckBoxNew
         Else
             cBoxColorFill = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
+        Dim rect As Rectangle = New Rectangle(pt, New Size(BoxSize.Width, BoxSize.Height))
+        Dim cBrush = New SolidBrush(cBoxColorFill)
+        pEvent.Graphics.FillRectangle(cBrush, rect)
+        pEvent.Graphics.DrawRectangle(Pens.Black, New Rectangle(pt, New Size(BoxSize.Width, BoxSize.Height)))
         If Checked Then
             Dim cCol As Color
             If _editingMode And Not DisplayOnly Then
@@ -347,25 +334,20 @@ Public Class CCheckBoxNew
                 End If
             End If
             Using brush As SolidBrush = New SolidBrush(cCol)
-                Using wing As Font = New Font("Wingdings", 10.0F)
+                Using wing As Font = New Font("Wingdings", BoxSize.Height - 2)
                     pEvent.Graphics.DrawString(Chr(252), wing, brush, -2, 0)
                 End Using
             End Using
         End If
-        'pEvent.Graphics.DrawString(Text, Font, Brushes.Black, 12, 1)
-        'pEvent.Graphics.DrawRectangle(Pens.Gray, rect)
-        'Dim fRect As Rectangle = ClientRectangle
-
         'If Focused Then
-        '    fRect.Inflate(-1, -1)
+        '    rect.Inflate(-1, -1)
 
         '    Using pen As Pen = New Pen(Brushes.Gray) With {
         '        .DashStyle = DashStyle.Dot
         '        }
-        '        pEvent.Graphics.DrawRectangle(pen, fRect)
+        '        pEvent.Graphics.DrawRectangle(pen, rect)
         '    End Using
         'End If
-
     End Sub
 
 End Class

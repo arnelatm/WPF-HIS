@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
@@ -288,6 +289,7 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewReconciliationItems.Columns
+                Dim dateCulture = New System.Globalization.CultureInfo("en")
                 dgvSequence.DisplayOnly = True
                 dgvJournalCode.DisplayOnly = True
                 dgvJournalIdNo.DisplayOnly = True
@@ -295,6 +297,8 @@ Namespace PresentationLayer.Views.Forms
                 dgvDebit.DisplayOnly = True
                 dgvReferenceNo.DisplayOnly = True
                 dgvTransactionDate.DisplayOnly = True
+                Dim englishDateTimeFormat As DateTimeFormatInfo = New CultureInfo("en-GB").DateTimeFormat
+                Thread.CurrentThread.CurrentCulture.DateTimeFormat = englishDateTimeFormat
             End With
             ResumeLayout()
         End Sub

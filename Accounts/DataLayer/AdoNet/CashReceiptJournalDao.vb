@@ -18,6 +18,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo," &
                     "Amount," &
                     "Applied," &
+                    "Approved," &
                     "Cancelled," &
                     "CheckDate," &
                     "CheckNumber," &
@@ -56,6 +57,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo   = @AccountIdNo," &
                     "Amount        = @Amount," &
                     "Applied       = @Applied," &
+                    "Approved      = @Approved," &
                     "Cancelled     = @Cancelled," &
                     "CheckDate     = @CheckDate," &
                     "CheckNumber   = @CheckNumber," &
@@ -82,6 +84,7 @@ Namespace DataLayer.AdoNet
                     "AccountIdNo," &
                     "Amount," &
                     "Applied," &
+                    "Approved," &
                     "Cancelled," &
                     "CheckDate," &
                     "CheckNumber," &
@@ -102,6 +105,7 @@ Namespace DataLayer.AdoNet
                     "@AccountIdNo," &
                     "@Amount," &
                     "@Applied," &
+                    "@Approved," &
                     "@Cancelled," &
                     "@CheckDate," &
                     "@CheckNumber," &
@@ -128,6 +132,7 @@ Namespace DataLayer.AdoNet
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
+            .Approved = Extensions.AsBool(reader("Approved")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .CheckDate = Extensions.AsDate(reader("CheckDate")),
             .CheckNumber = Extensions.AsString(reader("CheckNumber")),
@@ -153,6 +158,7 @@ Namespace DataLayer.AdoNet
                                     "@AccountIdNo", cashReceiptJournal.AccountIdNo,
                                     "@Amount", cashReceiptJournal.Amount,
                                     "@Applied", cashReceiptJournal.Applied,
+                                    "@Approved", cashReceiptJournal.Approved,
                                     "@Cancelled", cashReceiptJournal.Cancelled,
                                     "@CheckDate", cashReceiptJournal.CheckDate,
                                     "@CheckNumber", cashReceiptJournal.CheckNumber,

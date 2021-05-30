@@ -155,6 +155,15 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PcClosed As Boolean Implements IDisbursementJournalView.PcClosed
 
+        Public Property Approved As Boolean Implements IDisbursementJournalView.Approved
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 #End Region
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler

@@ -18,9 +18,13 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = txtMessageKey
             ' Add any initialization after the InitializeComponent() call.
             PresenterObj = New OriginalMessagesPresenter(Me)
-
             'PresenterObj.TranslatedMessagesPresenter = New TranslatedMessagesPresenter(Me)
             'PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
+            If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                txtMessageKey.DisplayOnly = False
+                txtCaption.DisplayOnly = False
+                txtMessage.DisplayOnly = False
+            End If
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
         End Sub

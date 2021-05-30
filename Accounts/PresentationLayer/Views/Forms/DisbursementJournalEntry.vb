@@ -368,6 +368,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Approved As Boolean Implements IDisbursementJournalView.Approved
+            Get
+                Return chkApproved.Checked
+            End Get
+            Set
+                chkApproved.Checked = Value
+            End Set
+        End Property
+
 #End Region
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
@@ -517,13 +526,13 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 'dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                'dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 'dgvAccountIdNo.AutoComplete = True
                 dgvRevCostCenterIdNo.DataSource = _revCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 'dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                'dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
                 'dgvRevCostCenterIdNo.AutoComplete = True
             End With
             ResumeLayout()

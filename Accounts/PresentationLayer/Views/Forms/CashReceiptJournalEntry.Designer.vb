@@ -55,7 +55,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpTransactionDate = New CCustomDateTimePicker()
+            Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblInvoiceDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPayorType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -72,7 +72,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblCheckDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpCheckDate = New CCustomDateTimePicker()
+            Me.dtpCheckDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtORNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -86,12 +86,11 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDiscountTaken = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpDateCreated = New CCustomDateTimePicker()
+            Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -210,16 +209,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.EditingMode = False
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Translatable = True
             '
             'txtJournalCode
             '
             Me.txtJournalCode.BackColor = System.Drawing.Color.White
+            Me.txtJournalCode.BegFindValue = Nothing
             Me.txtJournalCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtJournalCode.ComputedValue = True
             Me.txtJournalCode.CustomFormat = Nothing
             Me.txtJournalCode.DataBoundControl = True
             Me.txtJournalCode.DisplayOnly = True
             Me.txtJournalCode.EditingMode = True
+            Me.txtJournalCode.EndFindValue = Nothing
+            Me.txtJournalCode.FieldDescription = Nothing
+            Me.txtJournalCode.FieldName = Nothing
+            Me.txtJournalCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtJournalCode.FindEnabled = False
             resources.ApplyResources(Me.txtJournalCode, "txtJournalCode")
             Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
@@ -229,18 +234,25 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalCode.Name = "txtJournalCode"
             Me.txtJournalCode.OldValue = Nothing
             Me.txtJournalCode.ReadOnly = True
+            Me.txtJournalCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtJournalCode.TabStop = False
+            Me.txtJournalCode.Translatable = False
             Me.txtJournalCode.ValueIsMandatory = True
             '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = True
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
@@ -250,6 +262,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'lblReferenceNo
@@ -258,15 +272,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReferenceNo.EditingMode = False
             resources.ApplyResources(Me.lblReferenceNo, "lblReferenceNo")
             Me.lblReferenceNo.Name = "lblReferenceNo"
+            Me.lblReferenceNo.Translatable = True
             '
             'txtReferenceNo
             '
             Me.txtReferenceNo.BackColor = System.Drawing.Color.White
+            Me.txtReferenceNo.BegFindValue = Nothing
             Me.txtReferenceNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtReferenceNo.ComputedValue = False
             Me.txtReferenceNo.CustomFormat = Nothing
             Me.txtReferenceNo.DataBoundControl = True
             Me.txtReferenceNo.EditingMode = False
+            Me.txtReferenceNo.EndFindValue = Nothing
+            Me.txtReferenceNo.FieldDescription = Nothing
+            Me.txtReferenceNo.FieldName = Nothing
+            Me.txtReferenceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtReferenceNo.FindEnabled = True
             resources.ApplyResources(Me.txtReferenceNo, "txtReferenceNo")
             Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
@@ -276,6 +296,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReferenceNo.Name = "txtReferenceNo"
             Me.txtReferenceNo.OldValue = Nothing
             Me.txtReferenceNo.ReadOnly = True
+            Me.txtReferenceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtReferenceNo.Translatable = False
             Me.txtReferenceNo.ValueIsMandatory = True
             '
             'lblTransactionDate
@@ -284,6 +306,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTransactionDate.EditingMode = False
             resources.ApplyResources(Me.lblTransactionDate, "lblTransactionDate")
             Me.lblTransactionDate.Name = "lblTransactionDate"
+            Me.lblTransactionDate.Translatable = True
             '
             'dtpTransactionDate
             '
@@ -302,6 +325,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
             Me.dtpTransactionDate.TargetCalendar = Nothing
+            Me.dtpTransactionDate.Translatable = False
             Me.dtpTransactionDate.Value = Nothing
             Me.dtpTransactionDate.ValueIsMandatory = False
             Me.dtpTransactionDate.ValueIsNullable = False
@@ -312,19 +336,27 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceDate.EditingMode = False
             resources.ApplyResources(Me.lblInvoiceDate, "lblInvoiceDate")
             Me.lblInvoiceDate.Name = "lblInvoiceDate"
+            Me.lblInvoiceDate.Translatable = True
             '
             'cboPayorType
             '
             Me.cboPayorType.BackColor = System.Drawing.Color.White
+            Me.cboPayorType.BegFindValue = Nothing
             Me.cboPayorType.ChangingSearchValueOnly = False
             Me.cboPayorType.CurrentSearchTerm = ""
             Me.cboPayorType.DefaultValue = "0"
             Me.cboPayorType.DisplayMember = "Name"
             Me.cboPayorType.EditingMode = False
+            Me.cboPayorType.EndFindValue = Nothing
+            Me.cboPayorType.FieldDescription = Nothing
+            Me.cboPayorType.FieldName = Nothing
             Me.cboPayorType.FilterRule = Nothing
+            Me.cboPayorType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPayorType.FindEnabled = False
             resources.ApplyResources(Me.cboPayorType, "cboPayorType")
             Me.cboPayorType.ForeColor = System.Drawing.Color.Black
             Me.cboPayorType.HideWhenNotEditingOrAdding = False
+            Me.cboPayorType.IgnoreCase = False
             Me.cboPayorType.LinkedLabel = Nothing
             Me.cboPayorType.Name = "cboPayorType"
             Me.cboPayorType.OldValue = 0
@@ -337,6 +369,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.SuggestBoxHeight = 200
             Me.cboPayorType.SuggestListOrderRule = Nothing
             Me.cboPayorType.TextToSearch = Nothing
+            Me.cboPayorType.Translatable = False
             Me.cboPayorType.ValueIsMandatory = False
             Me.cboPayorType.ValueIsNullable = False
             Me.cboPayorType.ValueIsNumeric = False
@@ -348,21 +381,29 @@ Namespace PresentationLayer.Views.Forms
             Me.lblSupplierIdNo.EditingMode = False
             resources.ApplyResources(Me.lblSupplierIdNo, "lblSupplierIdNo")
             Me.lblSupplierIdNo.Name = "lblSupplierIdNo"
+            Me.lblSupplierIdNo.Translatable = True
             '
             'cboPayorIdNo
             '
             Me.cboPayorIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboPayorIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPayorIdNo.BegFindValue = Nothing
             Me.cboPayorIdNo.ChangingSearchValueOnly = False
             Me.cboPayorIdNo.CurrentSearchTerm = ""
             Me.cboPayorIdNo.DefaultValue = Nothing
             Me.cboPayorIdNo.DisplayMember = "Name"
             Me.cboPayorIdNo.EditingMode = False
+            Me.cboPayorIdNo.EndFindValue = Nothing
+            Me.cboPayorIdNo.FieldDescription = Nothing
+            Me.cboPayorIdNo.FieldName = Nothing
             Me.cboPayorIdNo.FilterRule = Nothing
+            Me.cboPayorIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPayorIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboPayorIdNo, "cboPayorIdNo")
             Me.cboPayorIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboPayorIdNo.FormattingEnabled = True
             Me.cboPayorIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPayorIdNo.IgnoreCase = False
             Me.cboPayorIdNo.LinkedLabel = Me.lblSupplierIdNo
             Me.cboPayorIdNo.Name = "cboPayorIdNo"
             Me.cboPayorIdNo.OldValue = 0
@@ -375,6 +416,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorIdNo.SuggestBoxHeight = 200
             Me.cboPayorIdNo.SuggestListOrderRule = Nothing
             Me.cboPayorIdNo.TextToSearch = Nothing
+            Me.cboPayorIdNo.Translatable = False
             Me.cboPayorIdNo.ValueIsMandatory = False
             Me.cboPayorIdNo.ValueIsNullable = False
             Me.cboPayorIdNo.ValueIsNumeric = False
@@ -383,11 +425,16 @@ Namespace PresentationLayer.Views.Forms
             'txtPayorName
             '
             Me.txtPayorName.BackColor = System.Drawing.Color.White
+            Me.txtPayorName.BegFindValue = Nothing
             Me.txtPayorName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPayorName.ComputedValue = False
             Me.txtPayorName.CustomFormat = Nothing
             Me.txtPayorName.DataBoundControl = True
             Me.txtPayorName.EditingMode = False
+            Me.txtPayorName.EndFindValue = Nothing
+            Me.txtPayorName.FieldDescription = Nothing
+            Me.txtPayorName.FieldName = Nothing
+            Me.txtPayorName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPayorName.FindEnabled = False
             Me.floHeader1.SetFlowBreak(Me.txtPayorName, True)
             resources.ApplyResources(Me.txtPayorName, "txtPayorName")
@@ -398,6 +445,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayorName.Name = "txtPayorName"
             Me.txtPayorName.OldValue = Nothing
             Me.txtPayorName.ReadOnly = True
+            Me.txtPayorName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPayorName.Translatable = False
             Me.txtPayorName.ValueIsMandatory = True
             '
             'lblAmount
@@ -406,6 +455,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblAmount.EditingMode = False
             resources.ApplyResources(Me.lblAmount, "lblAmount")
             Me.lblAmount.Name = "lblAmount"
+            Me.lblAmount.Translatable = True
             '
             'lblAccountIdNo
             '
@@ -413,19 +463,27 @@ Namespace PresentationLayer.Views.Forms
             Me.lblAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
             Me.lblAccountIdNo.Name = "lblAccountIdNo"
+            Me.lblAccountIdNo.Translatable = True
             '
             'cboAccountIdNo
             '
             Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
+            Me.cboAccountIdNo.BegFindValue = Nothing
             Me.cboAccountIdNo.ChangingSearchValueOnly = False
             Me.cboAccountIdNo.CurrentSearchTerm = ""
             Me.cboAccountIdNo.DefaultValue = ""
             Me.cboAccountIdNo.DisplayMember = "Name"
             Me.cboAccountIdNo.EditingMode = False
+            Me.cboAccountIdNo.EndFindValue = Nothing
+            Me.cboAccountIdNo.FieldDescription = Nothing
+            Me.cboAccountIdNo.FieldName = Nothing
             Me.cboAccountIdNo.FilterRule = Nothing
+            Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboAccountIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
             Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboAccountIdNo.IgnoreCase = False
             Me.cboAccountIdNo.LinkedLabel = Me.lblAccountIdNo
             Me.cboAccountIdNo.Name = "cboAccountIdNo"
             Me.cboAccountIdNo.OldValue = 0
@@ -438,6 +496,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
+            Me.cboAccountIdNo.Translatable = False
             Me.cboAccountIdNo.ValueIsMandatory = False
             Me.cboAccountIdNo.ValueIsNullable = False
             Me.cboAccountIdNo.ValueIsNumeric = False
@@ -446,11 +505,16 @@ Namespace PresentationLayer.Views.Forms
             'txtAmount
             '
             Me.txtAmount.BackColor = System.Drawing.Color.White
+            Me.txtAmount.BegFindValue = Nothing
             Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtAmount.ComputedValue = False
             Me.txtAmount.CustomFormat = "N2"
             Me.txtAmount.DataBoundControl = True
             Me.txtAmount.EditingMode = False
+            Me.txtAmount.EndFindValue = Nothing
+            Me.txtAmount.FieldDescription = Nothing
+            Me.txtAmount.FieldName = Nothing
+            Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtAmount.FindEnabled = True
             resources.ApplyResources(Me.txtAmount, "txtAmount")
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
@@ -460,6 +524,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.Name = "txtAmount"
             Me.txtAmount.OldValue = Nothing
             Me.txtAmount.ReadOnly = True
+            Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtAmount.Translatable = False
             Me.txtAmount.ValueIsMandatory = True
             Me.txtAmount.ValueIsNumeric = True
             '
@@ -469,21 +535,29 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDiscountAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.lblDiscountAccountIdNo, "lblDiscountAccountIdNo")
             Me.lblDiscountAccountIdNo.Name = "lblDiscountAccountIdNo"
+            Me.lblDiscountAccountIdNo.Translatable = True
             '
             'cboDiscountAccountIdNo
             '
             Me.cboDiscountAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboDiscountAccountIdNo.BackColor = System.Drawing.Color.White
+            Me.cboDiscountAccountIdNo.BegFindValue = Nothing
             Me.cboDiscountAccountIdNo.ChangingSearchValueOnly = False
             Me.cboDiscountAccountIdNo.CurrentSearchTerm = ""
             Me.cboDiscountAccountIdNo.DefaultValue = Nothing
             Me.cboDiscountAccountIdNo.DisplayMember = "Name"
             Me.cboDiscountAccountIdNo.EditingMode = False
+            Me.cboDiscountAccountIdNo.EndFindValue = Nothing
+            Me.cboDiscountAccountIdNo.FieldDescription = Nothing
+            Me.cboDiscountAccountIdNo.FieldName = Nothing
             Me.cboDiscountAccountIdNo.FilterRule = Nothing
+            Me.cboDiscountAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboDiscountAccountIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboDiscountAccountIdNo, "cboDiscountAccountIdNo")
             Me.cboDiscountAccountIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboDiscountAccountIdNo.FormattingEnabled = True
             Me.cboDiscountAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboDiscountAccountIdNo.IgnoreCase = False
             Me.cboDiscountAccountIdNo.LinkedLabel = Nothing
             Me.cboDiscountAccountIdNo.Name = "cboDiscountAccountIdNo"
             Me.cboDiscountAccountIdNo.OldValue = 0
@@ -496,6 +570,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
             Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboDiscountAccountIdNo.TextToSearch = Nothing
+            Me.cboDiscountAccountIdNo.Translatable = False
             Me.cboDiscountAccountIdNo.ValueIsMandatory = False
             Me.cboDiscountAccountIdNo.ValueIsNullable = False
             Me.cboDiscountAccountIdNo.ValueIsNumeric = False
@@ -507,15 +582,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatNumber.EditingMode = False
             resources.ApplyResources(Me.lblVatNumber, "lblVatNumber")
             Me.lblVatNumber.Name = "lblVatNumber"
+            Me.lblVatNumber.Translatable = True
             '
             'txtVatNumber
             '
             Me.txtVatNumber.BackColor = System.Drawing.Color.White
+            Me.txtVatNumber.BegFindValue = Nothing
             Me.txtVatNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtVatNumber.ComputedValue = False
             Me.txtVatNumber.CustomFormat = "N2"
             Me.txtVatNumber.DataBoundControl = True
             Me.txtVatNumber.EditingMode = False
+            Me.txtVatNumber.EndFindValue = Nothing
+            Me.txtVatNumber.FieldDescription = Nothing
+            Me.txtVatNumber.FieldName = Nothing
+            Me.txtVatNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtVatNumber.FindEnabled = True
             resources.ApplyResources(Me.txtVatNumber, "txtVatNumber")
             Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
@@ -525,6 +606,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatNumber.Name = "txtVatNumber"
             Me.txtVatNumber.OldValue = Nothing
             Me.txtVatNumber.ReadOnly = True
+            Me.txtVatNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtVatNumber.Translatable = False
             Me.txtVatNumber.ValueIsMandatory = True
             Me.txtVatNumber.ValueIsNumeric = True
             '
@@ -534,15 +617,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckNumber.EditingMode = False
             resources.ApplyResources(Me.lblCheckNumber, "lblCheckNumber")
             Me.lblCheckNumber.Name = "lblCheckNumber"
+            Me.lblCheckNumber.Translatable = True
             '
             'txtCheckNumber
             '
             Me.txtCheckNumber.BackColor = System.Drawing.Color.White
+            Me.txtCheckNumber.BegFindValue = Nothing
             Me.txtCheckNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtCheckNumber.ComputedValue = False
             Me.txtCheckNumber.CustomFormat = Nothing
             Me.txtCheckNumber.DataBoundControl = True
             Me.txtCheckNumber.EditingMode = False
+            Me.txtCheckNumber.EndFindValue = Nothing
+            Me.txtCheckNumber.FieldDescription = Nothing
+            Me.txtCheckNumber.FieldName = Nothing
+            Me.txtCheckNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtCheckNumber.FindEnabled = True
             resources.ApplyResources(Me.txtCheckNumber, "txtCheckNumber")
             Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
@@ -552,6 +641,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber.Name = "txtCheckNumber"
             Me.txtCheckNumber.OldValue = Nothing
             Me.txtCheckNumber.ReadOnly = True
+            Me.txtCheckNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtCheckNumber.Translatable = False
             Me.txtCheckNumber.ValueIsMandatory = True
             '
             'lblCheckDate
@@ -560,6 +651,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckDate.EditingMode = False
             resources.ApplyResources(Me.lblCheckDate, "lblCheckDate")
             Me.lblCheckDate.Name = "lblCheckDate"
+            Me.lblCheckDate.Translatable = True
             '
             'dtpCheckDate
             '
@@ -578,6 +670,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpCheckDate.ShowLongDate = False
             Me.dtpCheckDate.ShowTime = False
             Me.dtpCheckDate.TargetCalendar = Nothing
+            Me.dtpCheckDate.Translatable = False
             Me.dtpCheckDate.Value = Nothing
             Me.dtpCheckDate.ValueIsMandatory = False
             Me.dtpCheckDate.ValueIsNullable = False
@@ -588,15 +681,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceNo.EditingMode = False
             resources.ApplyResources(Me.lblInvoiceNo, "lblInvoiceNo")
             Me.lblInvoiceNo.Name = "lblInvoiceNo"
+            Me.lblInvoiceNo.Translatable = True
             '
             'txtORNumber
             '
             Me.txtORNumber.BackColor = System.Drawing.Color.White
+            Me.txtORNumber.BegFindValue = Nothing
             Me.txtORNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtORNumber.ComputedValue = False
             Me.txtORNumber.CustomFormat = Nothing
             Me.txtORNumber.DataBoundControl = True
             Me.txtORNumber.EditingMode = False
+            Me.txtORNumber.EndFindValue = Nothing
+            Me.txtORNumber.FieldDescription = Nothing
+            Me.txtORNumber.FieldName = Nothing
+            Me.txtORNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtORNumber.FindEnabled = True
             resources.ApplyResources(Me.txtORNumber, "txtORNumber")
             Me.txtORNumber.ForeColor = System.Drawing.Color.Black
@@ -606,6 +705,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtORNumber.Name = "txtORNumber"
             Me.txtORNumber.OldValue = Nothing
             Me.txtORNumber.ReadOnly = True
+            Me.txtORNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtORNumber.Translatable = False
             Me.txtORNumber.ValueIsMandatory = True
             '
             'lblNotes
@@ -614,15 +715,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.EditingMode = False
             resources.ApplyResources(Me.lblNotes, "lblNotes")
             Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Translatable = True
             '
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
@@ -632,6 +739,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
             'floHeader2
@@ -645,10 +754,9 @@ Namespace PresentationLayer.Views.Forms
             Me.floHeader2.Controls.Add(Me.txtDiscountTaken)
             Me.floHeader2.Controls.Add(Me.lblVatAmount)
             Me.floHeader2.Controls.Add(Me.txtVatAmount)
-            Me.floHeader2.Controls.Add(Me.lblCancelled)
             Me.floHeader2.Controls.Add(Me.chkCancelled)
-            Me.floHeader2.Controls.Add(Me.lblPosted)
             Me.floHeader2.Controls.Add(Me.chkPosted)
+            Me.floHeader2.Controls.Add(Me.chkApproved)
             Me.floHeader2.Controls.Add(Me.lblDateCreated)
             Me.floHeader2.Controls.Add(Me.dtpDateCreated)
             Me.floPurchaseJournalHeader.SetFlowBreak(Me.floHeader2, True)
@@ -662,16 +770,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblApplied.EditingMode = False
             resources.ApplyResources(Me.lblApplied, "lblApplied")
             Me.lblApplied.Name = "lblApplied"
+            Me.lblApplied.Translatable = True
             '
             'txtApplied
             '
             Me.txtApplied.BackColor = System.Drawing.Color.White
+            Me.txtApplied.BegFindValue = Nothing
             Me.txtApplied.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtApplied.ComputedValue = False
             Me.txtApplied.CustomFormat = "N2"
             Me.txtApplied.DataBoundControl = True
             Me.txtApplied.DisplayOnly = True
             Me.txtApplied.EditingMode = True
+            Me.txtApplied.EndFindValue = Nothing
+            Me.txtApplied.FieldDescription = Nothing
+            Me.txtApplied.FieldName = Nothing
+            Me.txtApplied.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtApplied.FindEnabled = True
             resources.ApplyResources(Me.txtApplied, "txtApplied")
             Me.txtApplied.ForeColor = System.Drawing.Color.Black
@@ -681,7 +795,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtApplied.Name = "txtApplied"
             Me.txtApplied.OldValue = Nothing
             Me.txtApplied.ReadOnly = True
+            Me.txtApplied.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtApplied.TabStop = False
+            Me.txtApplied.Translatable = False
             Me.txtApplied.ValueIsMandatory = True
             Me.txtApplied.ValueIsNumeric = True
             '
@@ -691,16 +807,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUnapplied.EditingMode = False
             resources.ApplyResources(Me.lblUnapplied, "lblUnapplied")
             Me.lblUnapplied.Name = "lblUnapplied"
+            Me.lblUnapplied.Translatable = True
             '
             'txtUnapplied
             '
             Me.txtUnapplied.BackColor = System.Drawing.Color.White
+            Me.txtUnapplied.BegFindValue = Nothing
             Me.txtUnapplied.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtUnapplied.ComputedValue = False
             Me.txtUnapplied.CustomFormat = "N2"
             Me.txtUnapplied.DataBoundControl = True
             Me.txtUnapplied.DisplayOnly = True
             Me.txtUnapplied.EditingMode = True
+            Me.txtUnapplied.EndFindValue = Nothing
+            Me.txtUnapplied.FieldDescription = Nothing
+            Me.txtUnapplied.FieldName = Nothing
+            Me.txtUnapplied.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtUnapplied.FindEnabled = True
             Me.floHeader2.SetFlowBreak(Me.txtUnapplied, True)
             resources.ApplyResources(Me.txtUnapplied, "txtUnapplied")
@@ -711,7 +833,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnapplied.Name = "txtUnapplied"
             Me.txtUnapplied.OldValue = Nothing
             Me.txtUnapplied.ReadOnly = True
+            Me.txtUnapplied.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtUnapplied.TabStop = False
+            Me.txtUnapplied.Translatable = False
             Me.txtUnapplied.ValueIsMandatory = True
             Me.txtUnapplied.ValueIsNumeric = True
             '
@@ -721,16 +845,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDiscountTaken.EditingMode = False
             resources.ApplyResources(Me.lblDiscountTaken, "lblDiscountTaken")
             Me.lblDiscountTaken.Name = "lblDiscountTaken"
+            Me.lblDiscountTaken.Translatable = True
             '
             'txtDiscountTaken
             '
             Me.txtDiscountTaken.BackColor = System.Drawing.Color.White
+            Me.txtDiscountTaken.BegFindValue = Nothing
             Me.txtDiscountTaken.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtDiscountTaken.ComputedValue = False
             Me.txtDiscountTaken.CustomFormat = "N2"
             Me.txtDiscountTaken.DataBoundControl = True
             Me.txtDiscountTaken.DisplayOnly = True
             Me.txtDiscountTaken.EditingMode = True
+            Me.txtDiscountTaken.EndFindValue = Nothing
+            Me.txtDiscountTaken.FieldDescription = Nothing
+            Me.txtDiscountTaken.FieldName = Nothing
+            Me.txtDiscountTaken.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtDiscountTaken.FindEnabled = True
             resources.ApplyResources(Me.txtDiscountTaken, "txtDiscountTaken")
             Me.txtDiscountTaken.ForeColor = System.Drawing.Color.Black
@@ -740,7 +870,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDiscountTaken.Name = "txtDiscountTaken"
             Me.txtDiscountTaken.OldValue = Nothing
             Me.txtDiscountTaken.ReadOnly = True
+            Me.txtDiscountTaken.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDiscountTaken.TabStop = False
+            Me.txtDiscountTaken.Translatable = False
             Me.txtDiscountTaken.ValueIsMandatory = True
             Me.txtDiscountTaken.ValueIsNumeric = True
             '
@@ -750,16 +882,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatAmount.EditingMode = False
             resources.ApplyResources(Me.lblVatAmount, "lblVatAmount")
             Me.lblVatAmount.Name = "lblVatAmount"
+            Me.lblVatAmount.Translatable = True
             '
             'txtVatAmount
             '
             Me.txtVatAmount.BackColor = System.Drawing.Color.White
+            Me.txtVatAmount.BegFindValue = Nothing
             Me.txtVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtVatAmount.ComputedValue = False
             Me.txtVatAmount.CustomFormat = "N2"
             Me.txtVatAmount.DataBoundControl = True
             Me.txtVatAmount.DisplayOnly = True
             Me.txtVatAmount.EditingMode = True
+            Me.txtVatAmount.EndFindValue = Nothing
+            Me.txtVatAmount.FieldDescription = Nothing
+            Me.txtVatAmount.FieldName = Nothing
+            Me.txtVatAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtVatAmount.FindEnabled = True
             resources.ApplyResources(Me.txtVatAmount, "txtVatAmount")
             Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
@@ -769,55 +907,70 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatAmount.Name = "txtVatAmount"
             Me.txtVatAmount.OldValue = Nothing
             Me.txtVatAmount.ReadOnly = True
+            Me.txtVatAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtVatAmount.TabStop = False
+            Me.txtVatAmount.Translatable = False
             Me.txtVatAmount.ValueIsMandatory = True
             Me.txtVatAmount.ValueIsNumeric = True
-            '
-            'lblCancelled
-            '
-            Me.lblCancelled.DisplayOnly = True
-            Me.lblCancelled.EditingMode = False
-            resources.ApplyResources(Me.lblCancelled, "lblCancelled")
-            Me.lblCancelled.Name = "lblCancelled"
             '
             'chkCancelled
             '
             resources.ApplyResources(Me.chkCancelled, "chkCancelled")
-            Me.chkCancelled.AutoCheck = False
-            Me.chkCancelled.BackColor = System.Drawing.Color.White
+            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
+            Me.chkCancelled.BegFindValue = Nothing
+            Me.chkCancelled.Checked = False
             Me.chkCancelled.DisplayOnly = True
-            Me.chkCancelled.EditingMode = True
-            Me.floHeader2.SetFlowBreak(Me.chkCancelled, True)
-            Me.chkCancelled.ForeColor = System.Drawing.Color.Black
-            Me.chkCancelled.LinkedLabel = Me.lblCancelled
+            Me.chkCancelled.EditingMode = False
+            Me.chkCancelled.EndFindValue = Nothing
+            Me.chkCancelled.FieldDescription = Nothing
+            Me.chkCancelled.FieldName = Nothing
+            Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkCancelled.FindEnabled = True
+            Me.chkCancelled.IgnoreCase = False
+            Me.chkCancelled.LinkedLabel = Nothing
             Me.chkCancelled.Name = "chkCancelled"
-            Me.chkCancelled.NoLabel = True
-            Me.chkCancelled.OldValue = Nothing
+            Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.chkCancelled.TabStop = False
-            Me.chkCancelled.UseVisualStyleBackColor = False
-            '
-            'lblPosted
-            '
-            Me.lblPosted.DisplayOnly = True
-            Me.lblPosted.EditingMode = False
-            resources.ApplyResources(Me.lblPosted, "lblPosted")
-            Me.lblPosted.Name = "lblPosted"
+            Me.chkCancelled.Translatable = True
             '
             'chkPosted
             '
             resources.ApplyResources(Me.chkPosted, "chkPosted")
-            Me.chkPosted.AutoCheck = False
-            Me.chkPosted.BackColor = System.Drawing.Color.White
+            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
+            Me.chkPosted.BegFindValue = Nothing
+            Me.chkPosted.Checked = False
             Me.chkPosted.DisplayOnly = True
-            Me.chkPosted.EditingMode = True
-            Me.floHeader2.SetFlowBreak(Me.chkPosted, True)
-            Me.chkPosted.ForeColor = System.Drawing.Color.Black
-            Me.chkPosted.LinkedLabel = Me.lblPosted
+            Me.chkPosted.EditingMode = False
+            Me.chkPosted.EndFindValue = Nothing
+            Me.chkPosted.FieldDescription = Nothing
+            Me.chkPosted.FieldName = Nothing
+            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkPosted.FindEnabled = True
+            Me.chkPosted.IgnoreCase = False
+            Me.chkPosted.LinkedLabel = Nothing
             Me.chkPosted.Name = "chkPosted"
-            Me.chkPosted.NoLabel = True
-            Me.chkPosted.OldValue = Nothing
+            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.chkPosted.TabStop = False
-            Me.chkPosted.UseVisualStyleBackColor = False
+            Me.chkPosted.Translatable = True
+            '
+            'chkApproved
+            '
+            resources.ApplyResources(Me.chkApproved, "chkApproved")
+            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkApproved.BegFindValue = Nothing
+            Me.chkApproved.Checked = False
+            Me.chkApproved.EditingMode = False
+            Me.chkApproved.EndFindValue = Nothing
+            Me.chkApproved.FieldDescription = Nothing
+            Me.chkApproved.FieldName = Nothing
+            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkApproved.FindEnabled = True
+            Me.floHeader2.SetFlowBreak(Me.chkApproved, True)
+            Me.chkApproved.IgnoreCase = False
+            Me.chkApproved.LinkedLabel = Nothing
+            Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkApproved.Translatable = True
             '
             'lblDateCreated
             '
@@ -825,6 +978,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated.EditingMode = False
             resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
             Me.lblDateCreated.Name = "lblDateCreated"
+            Me.lblDateCreated.Translatable = True
             '
             'dtpDateCreated
             '
@@ -844,6 +998,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated.ShowTime = True
             Me.dtpDateCreated.TabStop = False
             Me.dtpDateCreated.TargetCalendar = Nothing
+            Me.dtpDateCreated.Translatable = False
             Me.dtpDateCreated.Value = Nothing
             Me.dtpDateCreated.ValueIsMandatory = False
             Me.dtpDateCreated.ValueIsNullable = False
@@ -864,6 +1019,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewJournalItems.AutoGenerateColumns = False
+            Me.DataGridViewJournalItems.BegFindValue = Nothing
             Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotesDescription, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn1, Me.DiscountTakenDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn1, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn1, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PaidAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.SpecialAccountDataGridViewTextBoxColumn})
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
@@ -881,28 +1037,45 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.Ea = EventAggregator1
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewJournalItems.EndFindValue = Nothing
+            Me.DataGridViewJournalItems.FieldDescription = Nothing
+            Me.DataGridViewJournalItems.FieldName = Nothing
             Me.DataGridViewJournalItems.FieldsDictionary = Nothing
+            Me.DataGridViewJournalItems.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewJournalItems.FindEnabled = False
             Me.DataGridViewJournalItems.FirstRowDeletionEnabled = False
             Me.DataGridViewJournalItems.FirstRowInsertionEnabled = False
+            Me.DataGridViewJournalItems.IgnoreCase = False
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
+            Me.DataGridViewJournalItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
             Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
             Me.DataGridViewJournalItems.ShowFooter = False
             Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewJournalItems.Translatable = True
             '
             'dgvSequence
             '
+            Me.dgvSequence.BegFindValue = Nothing
             Me.dgvSequence.DataPropertyName = "Sequence"
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
+            Me.dgvSequence.EndFindValue = Nothing
+            Me.dgvSequence.FieldDescription = Nothing
+            Me.dgvSequence.FieldName = Nothing
+            Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequence.FindEnabled = False
             resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+            Me.dgvSequence.IgnoreCase = False
             Me.dgvSequence.Name = "dgvSequence"
             Me.dgvSequence.ReadOnly = True
             Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequence.Translatable = False
             '
             'dgvAccountIdNo
             '
@@ -916,9 +1089,11 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvAccountIdNo.ReadOnly = True
             Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvAccountIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvAccountIdNo.Translatable = False
             '
             'dgvDebit
             '
+            Me.dgvDebit.BegFindValue = Nothing
             Me.dgvDebit.DataPropertyName = "Debit"
             DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
@@ -926,14 +1101,22 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle4.Format = "###,##0.00"
             Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle4
             Me.dgvDebit.EditingMode = False
+            Me.dgvDebit.EndFindValue = Nothing
+            Me.dgvDebit.FieldDescription = Nothing
+            Me.dgvDebit.FieldName = Nothing
+            Me.dgvDebit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvDebit.FindEnabled = False
             resources.ApplyResources(Me.dgvDebit, "dgvDebit")
             Me.dgvDebit.Name = "dgvDebit"
             Me.dgvDebit.ReadOnly = True
             Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvDebit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvDebit.Translatable = False
             '
             'dgvCredit
             '
+            Me.dgvCredit.BegFindValue = Nothing
             Me.dgvCredit.DataPropertyName = "Credit"
             DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
@@ -941,11 +1124,18 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle5.Format = "###,##0.00"
             Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvCredit.EditingMode = False
+            Me.dgvCredit.EndFindValue = Nothing
+            Me.dgvCredit.FieldDescription = Nothing
+            Me.dgvCredit.FieldName = Nothing
+            Me.dgvCredit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvCredit.FindEnabled = False
             resources.ApplyResources(Me.dgvCredit, "dgvCredit")
             Me.dgvCredit.Name = "dgvCredit"
             Me.dgvCredit.ReadOnly = True
             Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvCredit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvCredit.Translatable = False
             '
             'dgvRevCostCenterIdNo
             '
@@ -959,19 +1149,29 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvRevCostCenterIdNo.ReadOnly = True
             Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvRevCostCenterIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvRevCostCenterIdNo.Translatable = False
             '
             'dgvNotesDescription
             '
             Me.dgvNotesDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvNotesDescription.BegFindValue = Nothing
             Me.dgvNotesDescription.DataPropertyName = "Notes"
             DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
             Me.dgvNotesDescription.DefaultCellStyle = DataGridViewCellStyle7
             Me.dgvNotesDescription.EditingMode = False
+            Me.dgvNotesDescription.EndFindValue = Nothing
+            Me.dgvNotesDescription.FieldDescription = Nothing
+            Me.dgvNotesDescription.FieldName = Nothing
+            Me.dgvNotesDescription.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvNotesDescription.FindEnabled = False
             resources.ApplyResources(Me.dgvNotesDescription, "dgvNotesDescription")
+            Me.dgvNotesDescription.IgnoreCase = False
             Me.dgvNotesDescription.Name = "dgvNotesDescription"
             Me.dgvNotesDescription.ReadOnly = True
             Me.dgvNotesDescription.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvNotesDescription.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvNotesDescription.Translatable = False
             '
             'AccountNameDataGridViewTextBoxColumn
             '
@@ -1054,6 +1254,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle9.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewCsrOiItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
             Me.DataGridViewCsrOiItems.AutoGenerateColumns = False
+            Me.DataGridViewCsrOiItems.BegFindValue = Nothing
             Me.DataGridViewCsrOiItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewCsrOiItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceCsrOi, Me.dgvInvoiceNo, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvJournalIdNoAp, Me.dgvPreviousBalance, Me.dgvAmount, Me.dgvDiscountTaken, Me.dgvBalance, Me.AccountIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewCsrOiItems.DataSource = Me.bsCsrOiItems
@@ -1070,84 +1271,138 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewCsrOiItems.Ea = EventAggregator2
             Me.DataGridViewCsrOiItems.EditingMode = False
             Me.DataGridViewCsrOiItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewCsrOiItems.EndFindValue = Nothing
+            Me.DataGridViewCsrOiItems.FieldDescription = Nothing
+            Me.DataGridViewCsrOiItems.FieldName = Nothing
             Me.DataGridViewCsrOiItems.FieldsDictionary = Nothing
+            Me.DataGridViewCsrOiItems.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewCsrOiItems.FindEnabled = False
             Me.DataGridViewCsrOiItems.FirstRowDeletionEnabled = False
             Me.DataGridViewCsrOiItems.FirstRowInsertionEnabled = False
+            Me.DataGridViewCsrOiItems.IgnoreCase = False
             resources.ApplyResources(Me.DataGridViewCsrOiItems, "DataGridViewCsrOiItems")
             Me.DataGridViewCsrOiItems.Name = "DataGridViewCsrOiItems"
             Me.DataGridViewCsrOiItems.ReadOnly = True
+            Me.DataGridViewCsrOiItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewCsrOiItems.SequenceColumn = "dgvSequenceCsrOi"
             Me.DataGridViewCsrOiItems.SequenceFieldName = "Sequence"
             Me.DataGridViewCsrOiItems.ShowFooter = False
             Me.DataGridViewCsrOiItems.ShowInsertColumnWhenEditing = False
+            Me.DataGridViewCsrOiItems.Translatable = True
             '
             'dgvSequenceCsrOi
             '
+            Me.dgvSequenceCsrOi.BegFindValue = Nothing
             Me.dgvSequenceCsrOi.DataPropertyName = "Sequence"
             DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
             Me.dgvSequenceCsrOi.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvSequenceCsrOi.DisplayOnly = True
             Me.dgvSequenceCsrOi.EditingMode = False
+            Me.dgvSequenceCsrOi.EndFindValue = Nothing
+            Me.dgvSequenceCsrOi.FieldDescription = Nothing
+            Me.dgvSequenceCsrOi.FieldName = Nothing
+            Me.dgvSequenceCsrOi.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequenceCsrOi.FindEnabled = False
             resources.ApplyResources(Me.dgvSequenceCsrOi, "dgvSequenceCsrOi")
+            Me.dgvSequenceCsrOi.IgnoreCase = False
             Me.dgvSequenceCsrOi.Name = "dgvSequenceCsrOi"
             Me.dgvSequenceCsrOi.ReadOnly = True
+            Me.dgvSequenceCsrOi.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSequenceCsrOi.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+            Me.dgvSequenceCsrOi.Translatable = False
             '
             'dgvInvoiceNo
             '
+            Me.dgvInvoiceNo.BegFindValue = Nothing
             Me.dgvInvoiceNo.DataPropertyName = "InvoiceNo"
             DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
             Me.dgvInvoiceNo.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvInvoiceNo.DisplayOnly = True
             Me.dgvInvoiceNo.EditingMode = False
+            Me.dgvInvoiceNo.EndFindValue = Nothing
+            Me.dgvInvoiceNo.FieldDescription = Nothing
+            Me.dgvInvoiceNo.FieldName = Nothing
+            Me.dgvInvoiceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvInvoiceNo.FindEnabled = False
             resources.ApplyResources(Me.dgvInvoiceNo, "dgvInvoiceNo")
+            Me.dgvInvoiceNo.IgnoreCase = False
             Me.dgvInvoiceNo.Name = "dgvInvoiceNo"
             Me.dgvInvoiceNo.ReadOnly = True
+            Me.dgvInvoiceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvInvoiceNo.Translatable = False
             '
             'dgvTransactionDate
             '
+            Me.dgvTransactionDate.BegFindValue = Nothing
             Me.dgvTransactionDate.DataPropertyName = "TransactionDate"
             DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
             Me.dgvTransactionDate.DefaultCellStyle = DataGridViewCellStyle12
             Me.dgvTransactionDate.DisplayOnly = True
             Me.dgvTransactionDate.EditingMode = False
+            Me.dgvTransactionDate.EndFindValue = Nothing
+            Me.dgvTransactionDate.FieldDescription = Nothing
+            Me.dgvTransactionDate.FieldName = Nothing
+            Me.dgvTransactionDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvTransactionDate.FindEnabled = False
             resources.ApplyResources(Me.dgvTransactionDate, "dgvTransactionDate")
+            Me.dgvTransactionDate.IgnoreCase = False
             Me.dgvTransactionDate.Name = "dgvTransactionDate"
             Me.dgvTransactionDate.ReadOnly = True
             Me.dgvTransactionDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvTransactionDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvTransactionDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+            Me.dgvTransactionDate.Translatable = False
             '
             'dgvJournalCode
             '
+            Me.dgvJournalCode.BegFindValue = Nothing
             Me.dgvJournalCode.DataPropertyName = "JournalCode"
             DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
             Me.dgvJournalCode.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvJournalCode.DisplayOnly = True
             Me.dgvJournalCode.EditingMode = False
+            Me.dgvJournalCode.EndFindValue = Nothing
+            Me.dgvJournalCode.FieldDescription = Nothing
+            Me.dgvJournalCode.FieldName = Nothing
+            Me.dgvJournalCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvJournalCode.FindEnabled = False
             resources.ApplyResources(Me.dgvJournalCode, "dgvJournalCode")
+            Me.dgvJournalCode.IgnoreCase = False
             Me.dgvJournalCode.Name = "dgvJournalCode"
             Me.dgvJournalCode.ReadOnly = True
             Me.dgvJournalCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvJournalCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvJournalCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+            Me.dgvJournalCode.Translatable = False
             '
             'dgvJournalIdNoAp
             '
+            Me.dgvJournalIdNoAp.BegFindValue = Nothing
             Me.dgvJournalIdNoAp.DataPropertyName = "JournalIdNo"
             DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
             Me.dgvJournalIdNoAp.DefaultCellStyle = DataGridViewCellStyle14
             Me.dgvJournalIdNoAp.DisplayOnly = True
             Me.dgvJournalIdNoAp.EditingMode = False
+            Me.dgvJournalIdNoAp.EndFindValue = Nothing
+            Me.dgvJournalIdNoAp.FieldDescription = Nothing
+            Me.dgvJournalIdNoAp.FieldName = Nothing
+            Me.dgvJournalIdNoAp.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvJournalIdNoAp.FindEnabled = False
             resources.ApplyResources(Me.dgvJournalIdNoAp, "dgvJournalIdNoAp")
+            Me.dgvJournalIdNoAp.IgnoreCase = False
             Me.dgvJournalIdNoAp.Name = "dgvJournalIdNoAp"
             Me.dgvJournalIdNoAp.ReadOnly = True
+            Me.dgvJournalIdNoAp.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvJournalIdNoAp.Translatable = False
             '
             'dgvPreviousBalance
             '
+            Me.dgvPreviousBalance.BegFindValue = Nothing
             Me.dgvPreviousBalance.DataPropertyName = "PreviousBalance"
             DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
@@ -1155,13 +1410,21 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle15.Format = "###,##0.00"
             Me.dgvPreviousBalance.DefaultCellStyle = DataGridViewCellStyle15
             Me.dgvPreviousBalance.EditingMode = False
+            Me.dgvPreviousBalance.EndFindValue = Nothing
+            Me.dgvPreviousBalance.FieldDescription = Nothing
+            Me.dgvPreviousBalance.FieldName = Nothing
+            Me.dgvPreviousBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvPreviousBalance.FindEnabled = False
             resources.ApplyResources(Me.dgvPreviousBalance, "dgvPreviousBalance")
             Me.dgvPreviousBalance.Name = "dgvPreviousBalance"
             Me.dgvPreviousBalance.ReadOnly = True
             Me.dgvPreviousBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPreviousBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvPreviousBalance.Translatable = False
             '
             'dgvAmount
             '
+            Me.dgvAmount.BegFindValue = Nothing
             Me.dgvAmount.DataPropertyName = "Amount"
             DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
@@ -1169,13 +1432,21 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle16.Format = "###,##0.00"
             Me.dgvAmount.DefaultCellStyle = DataGridViewCellStyle16
             Me.dgvAmount.EditingMode = False
+            Me.dgvAmount.EndFindValue = Nothing
+            Me.dgvAmount.FieldDescription = Nothing
+            Me.dgvAmount.FieldName = Nothing
+            Me.dgvAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvAmount.FindEnabled = False
             resources.ApplyResources(Me.dgvAmount, "dgvAmount")
             Me.dgvAmount.Name = "dgvAmount"
             Me.dgvAmount.ReadOnly = True
             Me.dgvAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvAmount.Translatable = False
             '
             'dgvDiscountTaken
             '
+            Me.dgvDiscountTaken.BegFindValue = Nothing
             Me.dgvDiscountTaken.DataPropertyName = "DiscountTaken"
             DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
@@ -1183,14 +1454,22 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle17.Format = "###,##0.00"
             Me.dgvDiscountTaken.DefaultCellStyle = DataGridViewCellStyle17
             Me.dgvDiscountTaken.EditingMode = False
+            Me.dgvDiscountTaken.EndFindValue = Nothing
+            Me.dgvDiscountTaken.FieldDescription = Nothing
+            Me.dgvDiscountTaken.FieldName = Nothing
+            Me.dgvDiscountTaken.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvDiscountTaken.FindEnabled = False
             resources.ApplyResources(Me.dgvDiscountTaken, "dgvDiscountTaken")
             Me.dgvDiscountTaken.Name = "dgvDiscountTaken"
             Me.dgvDiscountTaken.ReadOnly = True
             Me.dgvDiscountTaken.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvDiscountTaken.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvDiscountTaken.Translatable = False
             '
             'dgvBalance
             '
             Me.dgvBalance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvBalance.BegFindValue = Nothing
             Me.dgvBalance.DataPropertyName = "Balance"
             DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
@@ -1198,9 +1477,16 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle18.Format = "###,##0.00"
             Me.dgvBalance.DefaultCellStyle = DataGridViewCellStyle18
             Me.dgvBalance.EditingMode = False
+            Me.dgvBalance.EndFindValue = Nothing
+            Me.dgvBalance.FieldDescription = Nothing
+            Me.dgvBalance.FieldName = Nothing
+            Me.dgvBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvBalance.FindEnabled = False
             resources.ApplyResources(Me.dgvBalance, "dgvBalance")
             Me.dgvBalance.Name = "dgvBalance"
             Me.dgvBalance.ReadOnly = True
+            Me.dgvBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvBalance.Translatable = False
             '
             'AccountIdNoDataGridViewTextBoxColumn
             '
@@ -1295,11 +1581,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents floPurchaseJournalItems As CFlowLayout
         Friend WithEvents DataGridViewJournalItems As CDataGridView
         Friend WithEvents floFooter As CFlowLayout
-        Friend WithEvents lblCancelled As CLabel
-        Friend WithEvents chkCancelled As CCheckBox
         Friend WithEvents lblDateCreated As CLabel
-        Friend WithEvents lblPosted As CLabel
-        Friend WithEvents chkPosted As CCheckBox
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
         Friend WithEvents cboPayorType As CaComboBox
         Friend WithEvents lblCheckNumber As CLabel
@@ -1355,5 +1637,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblVatAmount As CLabel
         Friend WithEvents txtVatAmount As CTextBox
         Friend WithEvents btnAutoApply As CButton
+        Friend WithEvents chkCancelled As UcCheckBox
+        Friend WithEvents chkPosted As UcCheckBox
+        Friend WithEvents chkApproved As UcCheckBox
     End Class
 End Namespace

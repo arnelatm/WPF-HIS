@@ -17,6 +17,7 @@ Namespace DataLayer.AdoNet
                     " SELECT " &
                     "AccountIdNo," &
                     "Amount," &
+                    "Approved," &
                     "Cancelled," &
                     "CustomerIdNo," &
                     "DateCreated," &
@@ -50,6 +51,7 @@ Namespace DataLayer.AdoNet
                     "UPDATE [ArJournal] SET " &
                     "AccountIdNo = @AccountIdNo," &
                     "Amount = @Amount," &
+                    "Approved = @Approved," &
                     "Cancelled = @Cancelled," &
                     "CustomerIdNo = @CustomerIdNo," &
                     "DueDate = @DueDate," &
@@ -71,6 +73,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String = "INSERT INTO [ArJournal] (" &
                     "AccountIdNo," &
                     "Amount," &
+                    "Approved," &
                     "Cancelled," &
                     "CustomerIdNo," &
                     "DueDate," &
@@ -86,6 +89,7 @@ Namespace DataLayer.AdoNet
                     ") VALUES (" &
                     "@AccountIdNo," &
                     "@Amount," &
+                    "@Approved," &
                     "@Cancelled," &
                     "@CustomerIdNo," &
                     "@DueDate," &
@@ -107,6 +111,7 @@ Namespace DataLayer.AdoNet
             New ArJournal() With {
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
+            .Approved = Extensions.AsBool(reader("Approved")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .CustomerIdNo = Extensions.AsInt(Of Integer)(reader("CustomerIdNo")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
@@ -127,6 +132,7 @@ Namespace DataLayer.AdoNet
             Return New Object() {
                                     "@AccountIdNo", arJournal.AccountIdNo,
                                     "@Amount", arJournal.Amount,
+                                    "@Approved", arJournal.Approved,
                                     "@Cancelled", arJournal.Cancelled,
                                     "@CustomerIdNo", arJournal.CustomerIdNo,
                                     "@DueDate", arJournal.DueDate,

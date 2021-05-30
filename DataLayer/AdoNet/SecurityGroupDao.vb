@@ -115,6 +115,14 @@ Namespace AdoNet
             .Editable = Extensions.AsBool(reader("Editable"))
             }
 
+        Private ReadOnly _makeSecurityObject As Func(Of IDataReader, SecurityObject) =
+                             Function(reader) _
+            New SecurityObject() With {
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
+            .SecurityObjectNameAra = Extensions.AsString(reader("SecurityObjectNameAra"))
+            }
+
     End Class
 
 End Namespace
