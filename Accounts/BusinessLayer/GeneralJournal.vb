@@ -19,6 +19,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
+        Public Property Approved As Boolean
         Public Property Cancelled As Boolean
         Public Property ClosingJournal As Boolean
         Public Property DateCreated As DateTime?

@@ -144,7 +144,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 23</value>
+    <value>118, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
@@ -175,7 +175,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 1</value>
+    <value>121, 1</value>
   </data>
   <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -208,13 +208,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 1</value>
+    <value>155, 1</value>
   </data>
   <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 23</value>
+    <value>89, 23</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -238,13 +238,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 1</value>
+    <value>246, 1</value>
   </data>
   <data name="lblReferenceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 23</value>
+    <value>362, 23</value>
   </data>
   <data name="lblReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
@@ -271,7 +271,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 1</value>
+    <value>610, 1</value>
   </data>
   <data name="txtReferenceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -359,7 +359,7 @@
     <value>dtpTransactionDate</value>
   </data>
   <data name="&gt;&gt;dtpTransactionDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dtpTransactionDate.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
@@ -370,9 +370,6 @@
   <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 26</value>
   </data>
@@ -380,16 +377,13 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="CLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 23</value>
+    <value>216, 23</value>
   </data>
   <data name="CLabel2.TabIndex" type="System.Int32, mscorlib">
-    <value>166</value>
-  </data>
-  <data name="CLabel2.Text" xml:space="preserve">
-    <value>Closing Entry?</value>
+    <value>165</value>
   </data>
   <data name="CLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;CLabel2.Name" xml:space="preserve">
     <value>CLabel2</value>
@@ -403,77 +397,32 @@
   <data name="&gt;&gt;CLabel2.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="chkClosingJournal.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="chkClosingJournal.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="chkClosingJournal.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="chkClosingJournal.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="chkClosingJournal.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkClosingJournal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblActive.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblActive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="lblActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblActive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 23</value>
-  </data>
-  <data name="lblActive.TabIndex" type="System.Int32, mscorlib">
-    <value>241</value>
-  </data>
-  <data name="lblActive.Text" xml:space="preserve">
-    <value>Posted?</value>
-  </data>
-  <data name="lblActive.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblActive.Name" xml:space="preserve">
-    <value>lblActive</value>
-  </data>
-  <data name="&gt;&gt;lblActive.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblActive.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;lblActive.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="chkClosingJournal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>641, 26</value>
+    <value>505, 28</value>
   </data>
-  <data name="chkClosingJournal.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+  <data name="chkClosingJournal.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
   </data>
   <data name="chkClosingJournal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 21</value>
+    <value>179, 21</value>
   </data>
   <data name="chkClosingJournal.TabIndex" type="System.Int32, mscorlib">
-    <value>249</value>
+    <value>166</value>
   </data>
-  <data name="chkClosingJournal.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="chkClosingJournal.Text" xml:space="preserve">
+    <value>Closing Entry?</value>
   </data>
   <data name="&gt;&gt;chkClosingJournal.Name" xml:space="preserve">
     <value>chkClosingJournal</value>
   </data>
   <data name="&gt;&gt;chkClosingJournal.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.UcCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkClosingJournal.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
@@ -488,7 +437,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 51</value>
+    <value>1, 53</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -521,7 +470,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 51</value>
+    <value>156, 53</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -530,7 +479,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 49</value>
+    <value>550, 49</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -551,7 +500,7 @@
     <value>8, 13</value>
   </data>
   <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>747, 111</value>
+    <value>715, 111</value>
   </data>
   <data name="CFlowLayout1.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
@@ -568,146 +517,122 @@
   <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="chkPosted.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
+  <data name="chkPosted.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="chkPosted.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="chkPosted.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="chkPosted.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkPosted.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkPosted.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="chkPosted.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 1</value>
+    <value>3, 3</value>
   </data>
-  <data name="chkPosted.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+  <data name="chkPosted.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
   </data>
   <data name="chkPosted.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 21</value>
+    <value>228, 21</value>
   </data>
   <data name="chkPosted.TabIndex" type="System.Int32, mscorlib">
-    <value>245</value>
+    <value>288</value>
   </data>
-  <data name="chkPosted.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="chkPosted.Text" xml:space="preserve">
+    <value>Posted?</value>
   </data>
   <data name="&gt;&gt;chkPosted.Name" xml:space="preserve">
     <value>chkPosted</value>
   </data>
   <data name="&gt;&gt;chkPosted.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.UcCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkPosted.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;chkPosted.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
-  <data name="lblCancelled.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
+  <data name="chkCancelled.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
-  <data name="lblCancelled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
-  </data>
-  <data name="lblCancelled.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblCancelled.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 23</value>
-  </data>
-  <data name="lblCancelled.TabIndex" type="System.Int32, mscorlib">
-    <value>246</value>
-  </data>
-  <data name="lblCancelled.Text" xml:space="preserve">
-    <value>Cancelled?</value>
-  </data>
-  <data name="lblCancelled.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.Name" xml:space="preserve">
-    <value>lblCancelled</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="chkCancelled.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="chkCancelled.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="chkCancelled.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="chkCancelled.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkCancelled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkCancelled.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="chkCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 26</value>
+    <value>3, 30</value>
   </data>
-  <data name="chkCancelled.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+  <data name="chkCancelled.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
   </data>
   <data name="chkCancelled.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 21</value>
+    <value>228, 21</value>
   </data>
   <data name="chkCancelled.TabIndex" type="System.Int32, mscorlib">
-    <value>240</value>
+    <value>286</value>
   </data>
-  <data name="chkCancelled.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="chkCancelled.Text" xml:space="preserve">
+    <value>Cancelled?</value>
   </data>
   <data name="&gt;&gt;chkCancelled.Name" xml:space="preserve">
     <value>chkCancelled</value>
   </data>
   <data name="&gt;&gt;chkCancelled.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.UcCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkCancelled.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;chkCancelled.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
+  </data>
+  <data name="chkApproved.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="chkApproved.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 57</value>
+  </data>
+  <data name="chkApproved.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="chkApproved.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 21</value>
+  </data>
+  <data name="chkApproved.TabIndex" type="System.Int32, mscorlib">
+    <value>287</value>
+  </data>
+  <data name="chkApproved.Text" xml:space="preserve">
+    <value>Approved?</value>
+  </data>
+  <data name="&gt;&gt;chkApproved.Name" xml:space="preserve">
+    <value>chkApproved</value>
+  </data>
+  <data name="&gt;&gt;chkApproved.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.UcCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkApproved.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;chkApproved.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="lblDateCreated.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblDateCreated.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 51</value>
+    <value>1, 82</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 23</value>
+    <value>73, 23</value>
   </data>
   <data name="lblDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>247</value>
   </data>
   <data name="lblDateCreated.Text" xml:space="preserve">
-    <value>Date Added</value>
+    <value>Date Added:</value>
   </data>
   <data name="lblDateCreated.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -722,10 +647,10 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="dtpDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 76</value>
+    <value>85, 82</value>
   </data>
   <data name="dtpDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 1, 1, 1</value>
@@ -740,19 +665,19 @@
     <value>dtpDateCreated</value>
   </data>
   <data name="&gt;&gt;dtpDateCreated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dtpDateCreated.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;dtpDateCreated.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="CFlowLayout2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>761, 13</value>
+    <value>729, 13</value>
   </data>
   <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 111</value>
+    <value>245, 111</value>
   </data>
   <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
     <value>247</value>
@@ -776,7 +701,7 @@
     <value>5, 10, 5, 5</value>
   </data>
   <data name="floJournalHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>969, 136</value>
+    <value>1012, 136</value>
   </data>
   <data name="floJournalHeader.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -884,7 +809,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="DataGridViewJournalItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>971, 239</value>
+    <value>964, 239</value>
   </data>
   <data name="DataGridViewJournalItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -908,7 +833,7 @@
     <value>0, 53</value>
   </data>
   <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>985, 382</value>
+    <value>979, 382</value>
   </data>
   <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
@@ -2086,7 +2011,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>985, 453</value>
+    <value>979, 453</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>995, 483</value>
@@ -2122,7 +2047,7 @@
     <value>dgvSequence</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
     <value>dgvAccountIdNo</value>
@@ -2134,13 +2059,13 @@
     <value>dgvDebit</value>
   </data>
   <data name="&gt;&gt;dgvDebit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvCredit.Name" xml:space="preserve">
     <value>dgvCredit</value>
   </data>
   <data name="&gt;&gt;dgvCredit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvRevCostCenterIdNo.Name" xml:space="preserve">
     <value>dgvRevCostCenterIdNo</value>
@@ -2152,7 +2077,7 @@
     <value>dgvNotes</value>
   </data>
   <data name="&gt;&gt;dgvNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvIdNo.Name" xml:space="preserve">
     <value>dgvIdNo</value>
