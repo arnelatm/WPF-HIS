@@ -7,6 +7,7 @@
     Public Class GeneralJournalModel
 
         'Public Property Amount As Decimal
+        Public Property Approved As Boolean
         Public Property Cancelled As Boolean
 
         Public Property ClosingJournal As Boolean

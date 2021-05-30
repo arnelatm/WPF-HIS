@@ -15,6 +15,7 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of GeneralJournal).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " &
+                    "Approved," &
                     "Cancelled," &
                     "ClosingJournal," &
                     "DateCreated," &
@@ -40,6 +41,7 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of GeneralJournal).UpdateRecord
             Dim sql As String =
                     "UPDATE [GeneralJournal] SET " &
+                    "Approved = @Approved," &
                     "Cancelled = @Cancelled," &
                     "ClosingJournal = @ClosingJournal," &
                     "Notes = @Notes," &
@@ -55,6 +57,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " INSERT INTO [GeneralJournal] " &
                     "(" &
+                    "Approved," &
                     "Cancelled," &
                     "ClosingJournal," &
                     "Notes," &
@@ -62,6 +65,7 @@ Namespace DataLayer.AdoNet
                     "ReferenceNo," &
                     "TransactionDate" &
                     ") VALUES (" &
+                    "Approved," &
                     "@Cancelled," &
                     "@ClosingJournal," &
                     "@Notes," &
@@ -75,6 +79,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, GeneralJournal) =
                                     Function(reader) _
             New GeneralJournal() With {
+            .Approved = Extensions.AsBool(reader("Approved")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .ClosingJournal = Extensions.AsBool(reader("ClosingJournal")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
@@ -87,6 +92,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(generalJournal As GeneralJournal) As Object()
             Return New Object() {
+                                    "@Approved", generalJournal.Approved,
                                     "@Cancelled", generalJournal.Cancelled,
                                     "@ClosingJournal", generalJournal.ClosingJournal,
                                     "@DateCreated", generalJournal.DateCreated,

@@ -18,3 +18,5 @@ update purchaseJournal set approved = 1 where year(transactiondate) < 2021
 update purchaseJournal set approved = 0 where year(transactiondate) = 2021
 update salesjournal set approved = 1 where year(transactiondate) < 2021
 update salesjournal set approved = 0 where year(transactiondate) = 2021
+update generaljournal set approved = 1 where year(transactiondate) < 2021
+update generaljournal set approved = 0 where year(transactiondate) = 2021
