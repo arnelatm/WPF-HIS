@@ -453,6 +453,7 @@
     <Build Include="dbo\Functions\fnGetAccountActivityPrevBalance.sql" />
     <Build Include="dbo\Functions\fnGetAccountActivityFullData.sql" />
     <Build Include="dbo\Functions\fnGetAccountActivityCurrentData.sql" />
+    <Build Include="dbo\Views\GroupAccessAll_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

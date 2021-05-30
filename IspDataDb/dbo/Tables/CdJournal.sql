@@ -19,12 +19,15 @@
     [VatAmount]           MONEY          NULL,
     [Notes]               NVARCHAR (300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [PcClosed]            BIT            NULL,
+    [Approved]            BIT            NULL,
     [Posted]              BIT            NULL,
     [DateCreated]         DATETIME       CONSTRAINT [DF_CashDisbursementJournal_DateCreated] DEFAULT (getdate()) NULL,
     [Cancelled]           BIT            NULL,
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_CashDisbursementJournal1] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
