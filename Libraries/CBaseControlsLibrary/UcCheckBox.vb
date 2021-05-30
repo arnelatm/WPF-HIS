@@ -3,6 +3,7 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports System.Windows.Forms.VisualStyles
 Imports AATM.Libraries.AatmInterfaces
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class UcCheckBox
     Implements IEntryControl, IFindableControl, ILinkedLabel
@@ -11,6 +12,7 @@ Public Class UcCheckBox
     Private _textToSearch As String
     Private clicked As Boolean = False
     Private _state As CheckBoxState = CheckBoxState.UncheckedNormal
+    Private _text As String
 
     Public Sub New()
 
@@ -19,6 +21,14 @@ Public Class UcCheckBox
 
         ' Add any initialization after the InitializeComponent() call.
         Translatable = True
+        'If GlobalVariables.RightToLeftLayout Then
+        RightToLeft = RightToLeft.No
+        checkBox.BoxSize = New Size(12, 12)
+        'RtlTranslateAlignment(align:=Drawing.ContentAlignment.MiddleRight)
+        'Else
+        '    RightToLeft = RightToLeft.No
+        '    RtlTranslateAlignment(align:=Drawing.ContentAlignment.MiddleLeft)
+        'End If
     End Sub
 
     <Category("Custom Properties")>
@@ -27,11 +37,38 @@ Public Class UcCheckBox
     <Browsable(True)>
     Public Property SecurityKey As String
 
-    <Category("Custom Properties")>
-    <DefaultValue("UcCheckBox")>
-    <Description("Text to display for the control.")>
+    '<Category("Custom Properties")>
+    '<DefaultValue("UcCheckBox")>
+    '<Description("Text to display for the control.")>
+    '<Browsable(True)>
+    'Public Property Caption As String
+
+    <EditorBrowsable(EditorBrowsableState.Always)>
     <Browsable(True)>
-    Public Property Caption As String
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    <Bindable(True)>
+    Public Overrides Property Text As String
+        Get
+            Return CLabel1.Text
+        End Get
+        Set(value As String)
+            CLabel1.Text = value
+        End Set
+    End Property
+
+    <EditorBrowsable(EditorBrowsableState.Always)>
+    <Browsable(True)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    <Bindable(True)>
+    Public Overrides Property Font As Font
+        Get
+            Return CLabel1.Font
+        End Get
+        Set(value As Font)
+            CLabel1.Font = value
+            MyBase.Font = value
+        End Set
+    End Property
 
     <Category("Custom Properties")>
     <DefaultValue("UcCheckBox")>
@@ -46,13 +83,30 @@ Public Class UcCheckBox
         End Set
     End Property
 
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is Read Only .")>
+    <Browsable(True)>
+    Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set(value As Boolean)
+            If _displayOnly = value Then Exit Property
+            _displayOnly = value
+            checkBox.DisplayOnly = value
+        End Set
+    End Property
+
     Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
 
-    Private Sub UcCheckBox_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        CLabel1.Text = Caption
-        checkBox.Width = 12
-        'Width = checkBox.Width + CLabel1.Width + 10
-    End Sub
+    'Private Sub UcCheckBox_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '    CLabel1.Text = Text
+    'End Sub
+
+    'Private Sub OnRefresh()
+    '    CLabel1.Text = Text
+    'End Sub
 
     Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements ILinkedLabel.GetControlDescription
         Dim description As String
@@ -135,5 +189,16 @@ Public Class UcCheckBox
             checkBox.Checked = True
         End If
     End Sub
+
+    'Protected Overrides Sub OnPaint(ByVal pEvent As PaintEventArgs)
+    '    MyBase.OnPaint(pEvent)
+    '    If GlobalVariables.RightToLeftLayout Then
+    '        RightToLeft = RightToLeft.Yes
+    '        RtlTranslateAlignment(align:=Drawing.ContentAlignment.MiddleRight)
+    '    Else
+    '        RightToLeft = RightToLeft.No
+    '        RtlTranslateAlignment(align:=Drawing.ContentAlignment.MiddleLeft)
+    '    End If
+    'End Sub
 
 End Class

@@ -7,6 +7,7 @@
     Public Class ErJournalModel
 
         Public Property AccountIdNo As Int16?
+        Public Property Approved As Boolean
         Public Property Amount As Decimal
         Public Property Cancelled As Boolean
         Public Property EmployeeIdNo As Int32?

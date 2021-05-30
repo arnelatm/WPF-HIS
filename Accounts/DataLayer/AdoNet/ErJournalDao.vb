@@ -16,6 +16,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT " &
                     "AccountIdNo," &
+                    "Approved," &
                     "Amount," &
                     "Cancelled," &
                     "EmployeeIdNo," &
@@ -45,6 +46,7 @@ Namespace DataLayer.AdoNet
                     "UPDATE [ErJournal] SET " &
                     "AccountIdNo = @AccountIdNo," &
                     "Amount = @Amount," &
+                    "Approved = @Approved," &
                     "Cancelled = @Cancelled," &
                     "EmployeeIdNo = @EmployeeIdNo," &
                     "Notes = @Notes," &
@@ -61,6 +63,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String = "INSERT INTO [ErJournal] (" &
                     "AccountIdNo," &
                     "Amount," &
+                    "Approved," &
                     "Cancelled," &
                     "EmployeeIdNo," &
                     "Notes," &
@@ -71,6 +74,7 @@ Namespace DataLayer.AdoNet
                     ") VALUES (" &
                     "@AccountIdNo," &
                     "@Amount," &
+                    "@Approved," &
                     "@Cancelled," &
                     "@EmployeeIdNo," &
                     "@Notes," &
@@ -87,6 +91,7 @@ Namespace DataLayer.AdoNet
             New ErJournal() With {
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
+            .Approved = Extensions.AsBool(reader("Approved")),
             .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .EmployeeIdNo = Extensions.AsInt(Of Int32)(reader("EmployeeIdNo")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
@@ -102,6 +107,7 @@ Namespace DataLayer.AdoNet
             Return New Object() {
                                     "@AccountIdNo", ErJournal.AccountIdNo,
                                     "@Amount", ErJournal.Amount,
+                                    "@Approved", ErJournal.Approved,
                                     "@Cancelled", ErJournal.Cancelled,
                                     "@EmployeeIdNo", ErJournal.EmployeeIdNo,
                                     "@IdNo", ErJournal.IdNo,

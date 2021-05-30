@@ -7,6 +7,7 @@
     Public Class SalesJournalModel
 
         Public Property AccountIdNo As Int16?
+        Public Property Approved As Boolean
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
         Public Property Errors As List(Of String)

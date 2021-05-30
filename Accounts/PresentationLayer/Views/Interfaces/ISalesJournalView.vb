@@ -6,6 +6,7 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property AccountIdNo As Int16?
+        Property Approved As Boolean
         Property Cancelled As Boolean
         Property IdNo As Int32
         Property Notes As String

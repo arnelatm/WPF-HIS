@@ -51,9 +51,9 @@ Namespace PresentationLayer.Views.Forms
             Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvPaidAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvDiscountTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.OpenInvoiceIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvSpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.floApJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -134,7 +134,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.AutoGenerateColumns = False
             Me.DataGridViewJournalItems.BegFindValue = Nothing
             Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.dgvPaidAmount, Me.dgvDiscountTaken, Me.ItemVatAmount, Me.OpenInvoiceIdNo, Me.dgvSpecialAccount})
+            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.dgvPaidAmount, Me.dgvDiscountTaken, Me.OpenInvoiceIdNo, Me.dgvSpecialAccount, Me.ItemVatAmount})
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
             DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
@@ -359,13 +359,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDiscountTaken.ReadOnly = True
             Me.dgvDiscountTaken.Visible = False
             '
-            'ItemVatAmount
-            '
-            Me.ItemVatAmount.HeaderText = "ItemVatAmount"
-            Me.ItemVatAmount.Name = "ItemVatAmount"
-            Me.ItemVatAmount.ReadOnly = True
-            Me.ItemVatAmount.Visible = False
-            '
             'OpenInvoiceIdNo
             '
             Me.OpenInvoiceIdNo.DataPropertyName = "OpenInvoiceIdNo"
@@ -381,6 +374,13 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSpecialAccount.Name = "dgvSpecialAccount"
             Me.dgvSpecialAccount.ReadOnly = True
             Me.dgvSpecialAccount.Visible = False
+            '
+            'ItemVatAmount
+            '
+            Me.ItemVatAmount.HeaderText = "ItemVatAmount"
+            Me.ItemVatAmount.Name = "ItemVatAmount"
+            Me.ItemVatAmount.ReadOnly = True
+            Me.ItemVatAmount.Visible = False
             '
             'bsJournalItems
             '
@@ -1220,8 +1220,8 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
             Me.chkCancelled.BegFindValue = Nothing
-            Me.chkCancelled.Caption = "Cancelled?"
             Me.chkCancelled.Checked = False
+            Me.chkCancelled.DisplayOnly = True
             Me.chkCancelled.EditingMode = False
             Me.chkCancelled.EndFindValue = Nothing
             Me.chkCancelled.FieldDescription = Nothing
@@ -1233,9 +1233,11 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.LinkedLabel = Nothing
             Me.chkCancelled.Location = New System.Drawing.Point(18, 93)
             Me.chkCancelled.Name = "chkCancelled"
+            Me.chkCancelled.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkCancelled.Size = New System.Drawing.Size(111, 21)
+            Me.chkCancelled.Size = New System.Drawing.Size(111, 23)
             Me.chkCancelled.TabIndex = 294
+            Me.chkCancelled.Text = "Cancelled?"
             Me.chkCancelled.Translatable = True
             '
             'chkApproved
@@ -1243,7 +1245,6 @@ Namespace PresentationLayer.Views.Forms
             Me.chkApproved.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.chkApproved.BackColor = System.Drawing.Color.Transparent
             Me.chkApproved.BegFindValue = Nothing
-            Me.chkApproved.Caption = "Approved?"
             Me.chkApproved.Checked = False
             Me.chkApproved.EditingMode = False
             Me.chkApproved.EndFindValue = Nothing
@@ -1254,11 +1255,13 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
             Me.chkApproved.IgnoreCase = False
             Me.chkApproved.LinkedLabel = Nothing
-            Me.chkApproved.Location = New System.Drawing.Point(18, 120)
+            Me.chkApproved.Location = New System.Drawing.Point(18, 122)
             Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.chkApproved.Size = New System.Drawing.Size(111, 21)
             Me.chkApproved.TabIndex = 293
+            Me.chkApproved.Text = "Approved?"
             Me.chkApproved.Translatable = True
             '
             'chkPosted
@@ -1266,8 +1269,8 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.chkPosted.BackColor = System.Drawing.Color.Transparent
             Me.chkPosted.BegFindValue = Nothing
-            Me.chkPosted.Caption = "Posted?"
             Me.chkPosted.Checked = False
+            Me.chkPosted.DisplayOnly = True
             Me.chkPosted.EditingMode = False
             Me.chkPosted.EndFindValue = Nothing
             Me.chkPosted.FieldDescription = Nothing
@@ -1277,11 +1280,13 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.SetFlowBreak(Me.chkPosted, True)
             Me.chkPosted.IgnoreCase = False
             Me.chkPosted.LinkedLabel = Nothing
-            Me.chkPosted.Location = New System.Drawing.Point(18, 147)
+            Me.chkPosted.Location = New System.Drawing.Point(18, 149)
             Me.chkPosted.Name = "chkPosted"
+            Me.chkPosted.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.chkPosted.Size = New System.Drawing.Size(111, 21)
             Me.chkPosted.TabIndex = 295
+            Me.chkPosted.Text = "Posted?"
             Me.chkPosted.Translatable = True
             '
             'lblDateAdded
@@ -1290,10 +1295,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateAdded.EditingMode = False
             Me.lblDateAdded.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblDateAdded.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDateAdded.Location = New System.Drawing.Point(15, 171)
+            Me.lblDateAdded.Location = New System.Drawing.Point(15, 173)
             Me.lblDateAdded.Margin = New System.Windows.Forms.Padding(0)
             Me.lblDateAdded.Name = "lblDateAdded"
-            Me.lblDateAdded.Size = New System.Drawing.Size(114, 26)
+            Me.lblDateAdded.Size = New System.Drawing.Size(87, 26)
             Me.lblDateAdded.TabIndex = 8
             Me.lblDateAdded.Text = "Date Added:"
             Me.lblDateAdded.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1316,7 +1321,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
             Me.txtDateCreated.LinkedLabel = Nothing
-            Me.txtDateCreated.Location = New System.Drawing.Point(130, 172)
+            Me.txtDateCreated.Location = New System.Drawing.Point(103, 174)
             Me.txtDateCreated.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDateCreated.MaximumValue = Nothing
             Me.txtDateCreated.MinimumValue = Nothing
@@ -1324,7 +1329,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.OldValue = Nothing
             Me.txtDateCreated.ReadOnly = True
             Me.txtDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDateCreated.Size = New System.Drawing.Size(113, 23)
+            Me.txtDateCreated.Size = New System.Drawing.Size(134, 23)
             Me.txtDateCreated.TabIndex = 288
             Me.txtDateCreated.TabStop = False
             Me.txtDateCreated.Translatable = False

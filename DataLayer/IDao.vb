@@ -27,6 +27,13 @@ Public Interface IDaoRead(Of TBiz)
 
 End Interface
 
+Public Interface IDaoAllOnly(Of TBiz)
+
+    ' gets a specific record data
+    Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+
+End Interface
+
 Public Interface IDaoAll(Of TBiz)
     Inherits IDao(Of TBiz)
 

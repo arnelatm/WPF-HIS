@@ -55,6 +55,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Approved As Boolean Implements ISalesJournalView.Approved
+            Get
+                Return chkApproved.Checked
+            End Get
+            Set
+                chkApproved.Checked = Value
+            End Set
+        End Property
+
         Public Property Cancelled As Boolean Implements ISalesJournalView.Cancelled
             Get
                 Return chkCancelled.Checked

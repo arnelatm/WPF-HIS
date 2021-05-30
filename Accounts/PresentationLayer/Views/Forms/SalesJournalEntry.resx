@@ -340,7 +340,7 @@
     <value>dtpTransactionDate</value>
   </data>
   <data name="&gt;&gt;dtpTransactionDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dtpTransactionDate.Parent" xml:space="preserve">
     <value>floHeader1</value>
@@ -528,176 +528,110 @@
   <data name="&gt;&gt;floHeader1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblCancelled.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblCancelled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
-  </data>
-  <data name="lblCancelled.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblCancelled.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 23</value>
-  </data>
-  <data name="lblCancelled.TabIndex" type="System.Int32, mscorlib">
-    <value>249</value>
-  </data>
-  <data name="lblCancelled.Text" xml:space="preserve">
-    <value>Cancelled?</value>
-  </data>
-  <data name="lblCancelled.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.Name" xml:space="preserve">
-    <value>lblCancelled</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;lblCancelled.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="chkCancelled.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="chkCancelled.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="chkCancelled.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkCancelled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkCancelled.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="chkCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 1</value>
+    <value>3, 3</value>
   </data>
-  <data name="chkCancelled.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+  <data name="chkCancelled.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
   </data>
   <data name="chkCancelled.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 21</value>
+    <value>109, 21</value>
   </data>
   <data name="chkCancelled.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>286</value>
   </data>
   <data name="chkCancelled.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="chkCancelled.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+    <value>Cancelled?</value>
   </data>
   <data name="&gt;&gt;chkCancelled.Name" xml:space="preserve">
     <value>chkCancelled</value>
   </data>
   <data name="&gt;&gt;chkCancelled.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.UcCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkCancelled.Parent" xml:space="preserve">
     <value>floHeader2</value>
   </data>
   <data name="&gt;&gt;chkCancelled.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
-  <data name="lblPosted.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblPosted.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblPosted.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
-  </data>
-  <data name="lblPosted.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblPosted.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 23</value>
-  </data>
-  <data name="lblPosted.TabIndex" type="System.Int32, mscorlib">
-    <value>266</value>
-  </data>
-  <data name="lblPosted.Text" xml:space="preserve">
-    <value>Posted?</value>
-  </data>
-  <data name="lblPosted.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.Name" xml:space="preserve">
-    <value>lblPosted</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.Parent" xml:space="preserve">
-    <value>floHeader2</value>
-  </data>
-  <data name="&gt;&gt;lblPosted.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="chkPosted.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="chkPosted.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="chkPosted.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkPosted.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkPosted.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="chkPosted.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 26</value>
+    <value>118, 3</value>
   </data>
-  <data name="chkPosted.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+  <data name="chkPosted.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
   </data>
   <data name="chkPosted.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 21</value>
+    <value>109, 21</value>
   </data>
   <data name="chkPosted.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>287</value>
   </data>
   <data name="chkPosted.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="chkPosted.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+    <value>Posted</value>
   </data>
   <data name="&gt;&gt;chkPosted.Name" xml:space="preserve">
     <value>chkPosted</value>
   </data>
   <data name="&gt;&gt;chkPosted.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.UcCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkPosted.Parent" xml:space="preserve">
     <value>floHeader2</value>
   </data>
   <data name="&gt;&gt;chkPosted.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
+  </data>
+  <data name="chkApproved.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="chkApproved.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 30</value>
+  </data>
+  <data name="chkApproved.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="chkApproved.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 21</value>
+  </data>
+  <data name="chkApproved.TabIndex" type="System.Int32, mscorlib">
+    <value>288</value>
+  </data>
+  <data name="chkApproved.Text" xml:space="preserve">
+    <value>Approved?</value>
+  </data>
+  <data name="&gt;&gt;chkApproved.Name" xml:space="preserve">
+    <value>chkApproved</value>
+  </data>
+  <data name="&gt;&gt;chkApproved.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.UcCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkApproved.Parent" xml:space="preserve">
+    <value>floHeader2</value>
+  </data>
+  <data name="&gt;&gt;chkApproved.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="lblDateCreated.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 6.75pt</value>
+    <value>Arial Narrow, 8.25pt</value>
   </data>
   <data name="lblDateCreated.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 51</value>
+    <value>1, 55</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 23</value>
+    <value>74, 23</value>
   </data>
   <data name="lblDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>268</value>
@@ -718,10 +652,10 @@
     <value>floHeader2</value>
   </data>
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="dtpDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 51</value>
+    <value>77, 55</value>
   </data>
   <data name="dtpDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -736,13 +670,13 @@
     <value>dtpDateCreated</value>
   </data>
   <data name="&gt;&gt;dtpDateCreated.Type" xml:space="preserve">
-    <value>AATM.Libraries.CustomControlsLibrary.CCustomDateTimePicker, CustomControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dtpDateCreated.Parent" xml:space="preserve">
     <value>floHeader2</value>
   </data>
   <data name="&gt;&gt;dtpDateCreated.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="floHeader2.Location" type="System.Drawing.Point, System.Drawing">
     <value>744, 8</value>
@@ -89463,7 +89397,7 @@
     <value>dgvSequence</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvAccountIdNo.Name" xml:space="preserve">
     <value>dgvAccountIdNo</value>
@@ -89475,13 +89409,13 @@
     <value>dgvDebit</value>
   </data>
   <data name="&gt;&gt;dgvDebit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvCredit.Name" xml:space="preserve">
     <value>dgvCredit</value>
   </data>
   <data name="&gt;&gt;dgvCredit.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvRevCostCenterIdNo.Name" xml:space="preserve">
     <value>dgvRevCostCenterIdNo</value>
@@ -89499,7 +89433,7 @@
     <value>dgvIdNo</value>
   </data>
   <data name="&gt;&gt;dgvIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DataGridViewCheckBoxColumn3.Name" xml:space="preserve">
     <value>DataGridViewCheckBoxColumn3</value>
@@ -89535,7 +89469,7 @@
     <value>dgvSequenceSc</value>
   </data>
   <data name="&gt;&gt;dgvSequenceSc.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnText, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvDepositTypeIdNo.Name" xml:space="preserve">
     <value>dgvDepositTypeIdNo</value>
@@ -89547,55 +89481,55 @@
     <value>dgvSaleAmount</value>
   </data>
   <data name="&gt;&gt;dgvSaleAmount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvDepositAmount.Name" xml:space="preserve">
     <value>dgvDepositAmount</value>
   </data>
   <data name="&gt;&gt;dgvDepositAmount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvVatAmount.Name" xml:space="preserve">
     <value>dgvVatAmount</value>
   </data>
   <data name="&gt;&gt;dgvVatAmount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvActualBankCharge.Name" xml:space="preserve">
     <value>dgvActualBankCharge</value>
   </data>
   <data name="&gt;&gt;dgvActualBankCharge.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvRate.Name" xml:space="preserve">
     <value>dgvRate</value>
   </data>
   <data name="&gt;&gt;dgvRate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvComputedBankCharge.Name" xml:space="preserve">
     <value>dgvComputedBankCharge</value>
   </data>
   <data name="&gt;&gt;dgvComputedBankCharge.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvComputedVat.Name" xml:space="preserve">
     <value>dgvComputedVat</value>
   </data>
   <data name="&gt;&gt;dgvComputedVat.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvBankChargeDifference.Name" xml:space="preserve">
     <value>dgvBankChargeDifference</value>
   </data>
   <data name="&gt;&gt;dgvBankChargeDifference.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvVatDifference.Name" xml:space="preserve">
     <value>dgvVatDifference</value>
   </data>
   <data name="&gt;&gt;dgvVatDifference.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvColumnMoney, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn1</value>
