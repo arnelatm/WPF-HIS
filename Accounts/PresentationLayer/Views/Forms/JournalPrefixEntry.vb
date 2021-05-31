@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IJournalPrefixView
 
         Private ReadOnly _nfi As NumberFormatInfo
+        Private _presenter As JournalPrefixPresenter
 
         Public Sub New()
             MyBase.New()
@@ -21,6 +22,7 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = "JournalPrefix"
             SortOrderKey = "JournalName"
             _nfi = GlobalVariables.DefaultNumberFormatInfo
+            _presenter = New JournalPrefixPresenter(Me)
         End Sub
 
         Public Property JournalCode As String Implements IJournalPrefixView.JournalCode

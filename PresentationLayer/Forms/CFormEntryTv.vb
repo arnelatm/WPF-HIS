@@ -4,7 +4,6 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
 Public Class CFormEntryTv
-    'Implements ISubscriber(Of RecordPositionChanged)
 
     Protected TvMainFieldName As String
     Protected TvSecondaryFieldName As String
@@ -12,12 +11,9 @@ Public Class CFormEntryTv
     Private _bypassSelectedChange As Boolean = False
 
     Public Sub New()
-
         ' This call is required by the designer.
         InitializeComponent()
-        ' GlobalVariables.EventAggregator.SubscribeEvent(Me)
         ' Add any initialization after the InitializeComponent() call.
-
     End Sub
 
     Public Sub DisplayTree(ByRef treeViewData As Object)
@@ -177,7 +173,6 @@ Public Class CFormEntryTv
         _bypassSelectedChange = False
     End Sub
 
-    ' ReSharper disable once UnusedMember.Local
     Private Function GetMainFieldName(mainFieldName As String) As String
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
             If GlobalVariables.RightToLeftLayout Then
@@ -206,18 +201,5 @@ Public Class CFormEntryTv
             TreeViewTableName.SelectedNode.EnsureVisible()
         End If
     End Sub
-
-    'Protected Overrides Sub RecordDeleted()
-    '    RemoveCurrentNode(True)
-    'End Sub
-
-    'Private Sub BfTvEntry_SuccessfulDelete(idNoOfDeletedRecord As Integer) Handles MyBase.SuccessfulDelete
-
-    'End Sub
-
-    'Public Sub OEHRecordPositionChanged(ByRef e As RecordPositionChanged) Implements ISubscriber(Of RecordPositionChanged).OnEventHandler
-
-    '    GotoRecordInTreeView()
-    'End Sub
 
 End Class
