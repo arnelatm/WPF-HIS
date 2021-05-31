@@ -144,7 +144,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 23</value>
+    <value>153, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
@@ -168,53 +168,47 @@
   <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  <data name="txtJournalCode.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="txtJournalCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 1</value>
   </data>
-  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 1</value>
-  </data>
-  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtJournalCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 23</value>
+  <data name="txtJournalCode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 23</value>
   </data>
-  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>164</value>
+  <data name="txtJournalCode.TabIndex" type="System.Int32, mscorlib">
+    <value>167</value>
   </data>
-  <data name="CLabel1.Text" xml:space="preserve">
-    <value>GJ-</value>
+  <data name="txtJournalCode.Text" xml:space="preserve">
+    <value>GJ</value>
   </data>
-  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="&gt;&gt;txtJournalCode.Name" xml:space="preserve">
+    <value>txtJournalCode</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
-    <value>CLabel1</value>
+  <data name="&gt;&gt;txtJournalCode.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtJournalCode.Parent" xml:space="preserve">
     <value>CFlowLayout1</value>
   </data>
-  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtJournalCode.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 1</value>
+    <value>182, 1</value>
   </data>
   <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 23</value>
+    <value>102, 23</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -238,13 +232,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 1</value>
+    <value>286, 1</value>
   </data>
   <data name="lblReferenceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblReferenceNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 23</value>
+    <value>326, 23</value>
   </data>
   <data name="lblReferenceNo.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
@@ -271,7 +265,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtReferenceNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>610, 1</value>
+    <value>614, 1</value>
   </data>
   <data name="txtReferenceNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -479,7 +473,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>550, 49</value>
+    <value>554, 49</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

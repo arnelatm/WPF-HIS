@@ -84,6 +84,10 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Function GetLocalizedPrefix(journalCode As String)
+            Return Model.GetField(journalCode, "JournalPrefix", "JournalCode", "JournalCodeAra")
+        End Function
+
     End Class
 
 End Namespace

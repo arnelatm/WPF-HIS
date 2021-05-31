@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
@@ -42,7 +43,11 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New GeneralJournalPresenter(Me, _closingEntry)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
-
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = PresenterObj.GetLocalizedPrefix("GJ")
+            Else
+                txtJournalCode.Text = "GJ"
+            End If
         End Sub
 
         ' This event handler provides custom item-creation behavior.
