@@ -133,7 +133,9 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemISQuarterly = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemISSemiAnnually = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemISCustomRange = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemAccountingtLists = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemAccountActivity = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemJournalTransactionSummary = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemIGroupReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCashIncomePerDoctorService = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor = New System.Windows.Forms.ToolStripMenuItem()
@@ -172,6 +174,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemTransactionJournalCodes = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -437,7 +440,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTranslations
             '
-            Me.ToolStripMenuItemTranslations.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemMessages, Me.ToolStripMenuItemCaptions, Me.ToolStripMenuItemCaptionsBatchEdit, Me.ToolStripMenuItemCreateAllMessages})
+            Me.ToolStripMenuItemTranslations.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemMessages, Me.ToolStripMenuItemCaptions, Me.ToolStripMenuItemCaptionsBatchEdit, Me.ToolStripMenuItemCreateAllMessages, Me.ToolStripMenuItemTransactionJournalCodes})
             Me.ToolStripMenuItemTranslations.Name = "ToolStripMenuItemTranslations"
             resources.ApplyResources(Me.ToolStripMenuItemTranslations, "ToolStripMenuItemTranslations")
             '
@@ -611,7 +614,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemReports
             '
-            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountActivity, Me.ToolStripMenuItemIGroupReports, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemPayrollReport})
+            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemIGroupReports, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemPayrollReport})
             Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
             resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
             '
@@ -733,10 +736,21 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemISCustomRange.Name = "ToolStripMenuItemISCustomRange"
             resources.ApplyResources(Me.ToolStripMenuItemISCustomRange, "ToolStripMenuItemISCustomRange")
             '
+            'ToolStripMenuItemAccountingtLists
+            '
+            Me.ToolStripMenuItemAccountingtLists.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemAccountActivity, Me.ToolStripMenuItemJournalTransactionSummary})
+            Me.ToolStripMenuItemAccountingtLists.Name = "ToolStripMenuItemAccountingtLists"
+            resources.ApplyResources(Me.ToolStripMenuItemAccountingtLists, "ToolStripMenuItemAccountingtLists")
+            '
             'ToolStripMenuItemAccountActivity
             '
             Me.ToolStripMenuItemAccountActivity.Name = "ToolStripMenuItemAccountActivity"
             resources.ApplyResources(Me.ToolStripMenuItemAccountActivity, "ToolStripMenuItemAccountActivity")
+            '
+            'ToolStripMenuItemJournalTransactionSummary
+            '
+            Me.ToolStripMenuItemJournalTransactionSummary.Name = "ToolStripMenuItemJournalTransactionSummary"
+            resources.ApplyResources(Me.ToolStripMenuItemJournalTransactionSummary, "ToolStripMenuItemJournalTransactionSummary")
             '
             'ToolStripMenuItemIGroupReports
             '
@@ -938,6 +952,11 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'ToolStripMenuItemTransactionJournalCodes
+            '
+            Me.ToolStripMenuItemTransactionJournalCodes.Name = "ToolStripMenuItemTransactionJournalCodes"
+            resources.ApplyResources(Me.ToolStripMenuItemTransactionJournalCodes, "ToolStripMenuItemTransactionJournalCodes")
+            '
             'Main
             '
             Me.AllowDrop = True
@@ -1068,7 +1087,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemTBCustom As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBSYearly As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBSMonthly As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemAccountActivity As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemAccountingtLists As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemISYearly As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemISMonthly As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemISQuarterly As ToolStripMenuItem
@@ -1106,5 +1125,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemPeriodicPayroll As ToolStripMenuItem
         Friend WithEvents SalaryLoanScheduleToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents ToolStripButton1 As ToolStripButton
+        Friend WithEvents ToolStripMenuItemAccountActivity As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemJournalTransactionSummary As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemTransactionJournalCodes As ToolStripMenuItem
     End Class
 End NameSpace

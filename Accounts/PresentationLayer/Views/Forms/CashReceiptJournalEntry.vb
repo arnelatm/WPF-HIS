@@ -44,7 +44,11 @@ Namespace PresentationLayer.Views.Forms
             _nfi.NumberDecimalDigits = 2
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
-
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = MyPresenter.GetLocalizedPrefix("CR")
+            Else
+                txtJournalCode.Text = "CR"
+            End If
         End Sub
 
         Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew

@@ -54,7 +54,12 @@ Namespace PresentationLayer.Views.Forms
             End If
             PresenterObj = MyPresenter
             _defaultAccount = MyPresenter.DefaultDisbursementAccount
-            txtJournalCode.Text = MyPresenter.JournalCode
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = MyPresenter.GetLocalizedPrefix(MyPresenter.JournalCode)
+            Else
+                txtJournalCode.Text = MyPresenter.JournalCode
+            End If
+
             FirstControl = cboPaymentType
             '_nfi.NumberDecimalDigits = 2
             Height = 655

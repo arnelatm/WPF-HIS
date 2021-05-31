@@ -35,6 +35,11 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = MyPresenter
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = MyPresenter.GetLocalizedPrefix("ER")
+            Else
+                txtJournalCode.Text = "ER"
+            End If
         End Sub
 
         ' This event handler provides custom item-creation behavior.

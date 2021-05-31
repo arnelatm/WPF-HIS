@@ -15,6 +15,7 @@ Namespace BusinessLayer
         Public Property DocumentNumber As String
         Public Property IdNo As Int32
         Public Property JournalCode As String
+        Public Property JournalCodeAra As String
         Public Property JournalIdNo As Int32
         Public Property JournalItemIdNo As Int32
         Public Property PayDescription As String

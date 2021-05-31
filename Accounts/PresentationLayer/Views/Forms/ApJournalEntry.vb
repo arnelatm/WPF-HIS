@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Forms
         Private _footer As DgvFooter
         Private _journalItems As List(Of IJournalItemView)
         Private _revCostCentersByCode
+        Private _journalCodeLocal As String
 
         Public Sub New()
             MyBase.New()
@@ -35,6 +36,11 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = MyPresenter
             Ea = MyPresenter.Ea
             Ea.SubscribeEvent(Me)
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = MyPresenter.GetLocalizedPrefix("AP")
+            Else
+                txtJournalCode.Text = "AP"
+            End If
         End Sub
 
         Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew

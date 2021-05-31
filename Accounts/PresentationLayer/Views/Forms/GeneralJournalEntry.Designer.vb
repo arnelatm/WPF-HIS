@@ -37,15 +37,19 @@ Namespace PresentationLayer.Views.Forms
             Me.floJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkClosingJournal = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
@@ -60,11 +64,7 @@ Namespace PresentationLayer.Views.Forms
             Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkClosingJournal = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floJournalHeader.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -87,7 +87,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
-            Me.CFlowLayout1.Controls.Add(Me.CLabel1)
+            Me.CFlowLayout1.Controls.Add(Me.txtJournalCode)
             Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
             Me.CFlowLayout1.Controls.Add(Me.lblReferenceNo)
             Me.CFlowLayout1.Controls.Add(Me.txtReferenceNo)
@@ -108,15 +108,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
             Me.lblIdNo.Translatable = True
-            '
-            'CLabel1
-            '
-            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Translatable = True
             '
             'TxtIdNo
             '
@@ -212,6 +203,33 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpTransactionDate.ValueIsMandatory = False
             Me.dtpTransactionDate.ValueIsNullable = False
             '
+            'CLabel2
+            '
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            resources.ApplyResources(Me.CLabel2, "CLabel2")
+            Me.CLabel2.Name = "CLabel2"
+            Me.CLabel2.Translatable = True
+            '
+            'chkClosingJournal
+            '
+            resources.ApplyResources(Me.chkClosingJournal, "chkClosingJournal")
+            Me.chkClosingJournal.BackColor = System.Drawing.Color.Transparent
+            Me.chkClosingJournal.BegFindValue = Nothing
+            Me.chkClosingJournal.Checked = False
+            Me.chkClosingJournal.DisplayOnly = True
+            Me.chkClosingJournal.EditingMode = False
+            Me.chkClosingJournal.EndFindValue = Nothing
+            Me.chkClosingJournal.FieldDescription = Nothing
+            Me.chkClosingJournal.FieldName = Nothing
+            Me.chkClosingJournal.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkClosingJournal.FindEnabled = False
+            Me.chkClosingJournal.IgnoreCase = False
+            Me.chkClosingJournal.LinkedLabel = Nothing
+            Me.chkClosingJournal.Name = "chkClosingJournal"
+            Me.chkClosingJournal.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkClosingJournal.Translatable = True
+            '
             'lblNotes
             '
             Me.lblNotes.BackColor = System.Drawing.Color.Transparent
@@ -257,6 +275,66 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.dtpDateCreated)
             resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
             Me.CFlowLayout2.Name = "CFlowLayout2"
+            '
+            'chkPosted
+            '
+            resources.ApplyResources(Me.chkPosted, "chkPosted")
+            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
+            Me.chkPosted.BegFindValue = Nothing
+            Me.chkPosted.Checked = False
+            Me.chkPosted.DisplayOnly = True
+            Me.chkPosted.EditingMode = False
+            Me.chkPosted.EndFindValue = Nothing
+            Me.chkPosted.FieldDescription = Nothing
+            Me.chkPosted.FieldName = Nothing
+            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkPosted.FindEnabled = True
+            Me.CFlowLayout2.SetFlowBreak(Me.chkPosted, True)
+            Me.chkPosted.IgnoreCase = False
+            Me.chkPosted.LinkedLabel = Nothing
+            Me.chkPosted.Name = "chkPosted"
+            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkPosted.TabStop = False
+            Me.chkPosted.Translatable = True
+            '
+            'chkCancelled
+            '
+            resources.ApplyResources(Me.chkCancelled, "chkCancelled")
+            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
+            Me.chkCancelled.BegFindValue = Nothing
+            Me.chkCancelled.Checked = False
+            Me.chkCancelled.DisplayOnly = True
+            Me.chkCancelled.EditingMode = False
+            Me.chkCancelled.EndFindValue = Nothing
+            Me.chkCancelled.FieldDescription = Nothing
+            Me.chkCancelled.FieldName = Nothing
+            Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkCancelled.FindEnabled = True
+            Me.chkCancelled.IgnoreCase = False
+            Me.chkCancelled.LinkedLabel = Nothing
+            Me.chkCancelled.Name = "chkCancelled"
+            Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkCancelled.TabStop = False
+            Me.chkCancelled.Translatable = True
+            '
+            'chkApproved
+            '
+            resources.ApplyResources(Me.chkApproved, "chkApproved")
+            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkApproved.BegFindValue = Nothing
+            Me.chkApproved.Checked = False
+            Me.chkApproved.EditingMode = False
+            Me.chkApproved.EndFindValue = Nothing
+            Me.chkApproved.FieldDescription = Nothing
+            Me.chkApproved.FieldName = Nothing
+            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkApproved.FindEnabled = True
+            Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
+            Me.chkApproved.IgnoreCase = False
+            Me.chkApproved.LinkedLabel = Nothing
+            Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkApproved.Translatable = True
             '
             'lblDateCreated
             '
@@ -484,92 +562,28 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
             Me.CFlowLayout4.Name = "CFlowLayout4"
             '
-            'chkCancelled
+            'txtJournalCode
             '
-            resources.ApplyResources(Me.chkCancelled, "chkCancelled")
-            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
-            Me.chkCancelled.BegFindValue = Nothing
-            Me.chkCancelled.Checked = False
-            Me.chkCancelled.DisplayOnly = True
-            Me.chkCancelled.EditingMode = False
-            Me.chkCancelled.EndFindValue = Nothing
-            Me.chkCancelled.FieldDescription = Nothing
-            Me.chkCancelled.FieldName = Nothing
-            Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkCancelled.FindEnabled = True
-            Me.chkCancelled.IgnoreCase = False
-            Me.chkCancelled.LinkedLabel = Nothing
-            Me.chkCancelled.Name = "chkCancelled"
-            Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkCancelled.TabStop = False
-            Me.chkCancelled.Translatable = True
-            '
-            'chkApproved
-            '
-            resources.ApplyResources(Me.chkApproved, "chkApproved")
-            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
-            Me.chkApproved.BegFindValue = Nothing
-            Me.chkApproved.Checked = False
-            Me.chkApproved.EditingMode = False
-            Me.chkApproved.EndFindValue = Nothing
-            Me.chkApproved.FieldDescription = Nothing
-            Me.chkApproved.FieldName = Nothing
-            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkApproved.FindEnabled = True
-            Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
-            Me.chkApproved.IgnoreCase = False
-            Me.chkApproved.LinkedLabel = Nothing
-            Me.chkApproved.Name = "chkApproved"
-            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkApproved.Translatable = True
-            '
-            'chkPosted
-            '
-            resources.ApplyResources(Me.chkPosted, "chkPosted")
-            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
-            Me.chkPosted.BegFindValue = Nothing
-            Me.chkPosted.Checked = False
-            Me.chkPosted.DisplayOnly = True
-            Me.chkPosted.EditingMode = False
-            Me.chkPosted.EndFindValue = Nothing
-            Me.chkPosted.FieldDescription = Nothing
-            Me.chkPosted.FieldName = Nothing
-            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkPosted.FindEnabled = True
-            Me.CFlowLayout2.SetFlowBreak(Me.chkPosted, True)
-            Me.chkPosted.IgnoreCase = False
-            Me.chkPosted.LinkedLabel = Nothing
-            Me.chkPosted.Name = "chkPosted"
-            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkPosted.TabStop = False
-            Me.chkPosted.Translatable = True
-            '
-            'CLabel2
-            '
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            resources.ApplyResources(Me.CLabel2, "CLabel2")
-            Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Translatable = True
-            '
-            'chkClosingJournal
-            '
-            resources.ApplyResources(Me.chkClosingJournal, "chkClosingJournal")
-            Me.chkClosingJournal.BackColor = System.Drawing.Color.Transparent
-            Me.chkClosingJournal.BegFindValue = Nothing
-            Me.chkClosingJournal.Checked = False
-            Me.chkClosingJournal.DisplayOnly = True
-            Me.chkClosingJournal.EditingMode = False
-            Me.chkClosingJournal.EndFindValue = Nothing
-            Me.chkClosingJournal.FieldDescription = Nothing
-            Me.chkClosingJournal.FieldName = Nothing
-            Me.chkClosingJournal.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkClosingJournal.FindEnabled = False
-            Me.chkClosingJournal.IgnoreCase = False
-            Me.chkClosingJournal.LinkedLabel = Nothing
-            Me.chkClosingJournal.Name = "chkClosingJournal"
-            Me.chkClosingJournal.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkClosingJournal.Translatable = True
+            Me.txtJournalCode.BackColor = System.Drawing.SystemColors.ControlLight
+            Me.txtJournalCode.BegFindValue = Nothing
+            Me.txtJournalCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtJournalCode.ComputedValue = False
+            Me.txtJournalCode.CustomFormat = Nothing
+            Me.txtJournalCode.DataBoundControl = True
+            Me.txtJournalCode.EditingMode = True
+            Me.txtJournalCode.EndFindValue = Nothing
+            Me.txtJournalCode.FieldDescription = Nothing
+            Me.txtJournalCode.FieldName = Nothing
+            Me.txtJournalCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtJournalCode.FindEnabled = False
+            resources.ApplyResources(Me.txtJournalCode, "txtJournalCode")
+            Me.txtJournalCode.LinkedLabel = Nothing
+            Me.txtJournalCode.MaximumValue = Nothing
+            Me.txtJournalCode.MinimumValue = Nothing
+            Me.txtJournalCode.Name = "txtJournalCode"
+            Me.txtJournalCode.OldValue = Nothing
+            Me.txtJournalCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtJournalCode.Translatable = False
             '
             'GeneralJournalEntry
             '
@@ -605,7 +619,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents CFlowLayout4 As CFlowLayout
         Friend WithEvents lblDateCreated As CLabel
-        Friend WithEvents CLabel1 As CLabel
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
@@ -621,5 +634,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkApproved As UcCheckBox
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents chkClosingJournal As UcCheckBox
+        Friend WithEvents txtJournalCode As CTextBox
     End Class
 End NameSpace

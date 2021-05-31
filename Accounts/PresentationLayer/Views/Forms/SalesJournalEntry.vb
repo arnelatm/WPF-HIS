@@ -41,6 +41,11 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New SalesJournalPresenter(Me)
             Ea = PresenterObj.Ea
             Ea.SubscribeEvent(Me)
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = PresenterObj.GetLocalizedPrefix("SJ")
+            Else
+                txtJournalCode.Text = "SJ"
+            End If
 
         End Sub
 

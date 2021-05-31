@@ -378,14 +378,6 @@ Namespace PresentationLayer.Views.Forms
             myForm.Show()
         End Sub
 
-        Private Sub GeneralLedgerDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountActivity.Click
-            Dim childMdiForm As AccountActivity
-            childMdiForm = New AccountActivity With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
-
         ''' <summary>
         '''     Help menu item event handler.
         ''' </summary>
@@ -1143,6 +1135,30 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
             Debugger.Break()
+        End Sub
+
+        Private Sub JournalListingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemJournalTransactionSummary.Click
+            Dim childMdiForm As TransactionSummary
+            childMdiForm = New TransactionSummary With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemAccountActivity_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountActivity.Click
+            Dim childMdiForm As AccountActivity
+            childMdiForm = New AccountActivity With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemTransactionJournalCodes_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransactionJournalCodes.Click
+            Dim childMdiForm As JournalPrefixEntry
+            childMdiForm = New JournalPrefixEntry With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
         End Sub
 
     End Class
