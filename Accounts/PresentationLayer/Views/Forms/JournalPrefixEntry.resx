@@ -137,6 +137,31 @@
   <data name="SplitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 53</value>
   </data>
+  <data name="TreeView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TreeView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="TreeView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 196</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TreeView.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;TreeView.Name" xml:space="preserve">
+    <value>TreeView</value>
+  </data>
+  <data name="&gt;&gt;TreeView.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTreeView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TreeView.Parent" xml:space="preserve">
+    <value>SplitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;TreeView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="CTreeView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -146,7 +171,6 @@
   <data name="CTreeView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 196</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="CTreeView1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -160,7 +184,7 @@
     <value>SplitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;CTreeView1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.Name" xml:space="preserve">
     <value>SplitContainer1.Panel1</value>

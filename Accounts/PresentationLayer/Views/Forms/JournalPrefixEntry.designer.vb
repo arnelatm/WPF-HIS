@@ -35,12 +35,13 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblJournalCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblJournalCodeAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtJournalCodeAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblJournalName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblJournalNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.lblJournalCodeAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtJournalCodeAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TreeView = New AATM.Libraries.CBaseControlsLibrary.CTreeView()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -66,6 +67,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'SplitContainer1.Panel1
             '
+            Me.SplitContainer1.Panel1.Controls.Add(Me.TreeView)
             Me.SplitContainer1.Panel1.Controls.Add(Me.CTreeView1)
             '
             'SplitContainer1.Panel2
@@ -167,6 +169,41 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalCode.Translatable = False
             Me.txtJournalCode.ValueIsMandatory = True
             '
+            'lblJournalCodeAra
+            '
+            Me.lblJournalCodeAra.DisplayOnly = True
+            Me.lblJournalCodeAra.EditingMode = False
+            resources.ApplyResources(Me.lblJournalCodeAra, "lblJournalCodeAra")
+            Me.lblJournalCodeAra.Name = "lblJournalCodeAra"
+            Me.lblJournalCodeAra.Translatable = True
+            '
+            'txtJournalCodeAra
+            '
+            Me.txtJournalCodeAra.BackColor = System.Drawing.Color.White
+            Me.txtJournalCodeAra.BegFindValue = Nothing
+            Me.txtJournalCodeAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtJournalCodeAra.ComputedValue = False
+            Me.txtJournalCodeAra.CustomFormat = Nothing
+            Me.txtJournalCodeAra.DataBoundControl = True
+            Me.txtJournalCodeAra.EditingMode = True
+            Me.txtJournalCodeAra.EndFindValue = Nothing
+            Me.txtJournalCodeAra.FieldDescription = Nothing
+            Me.txtJournalCodeAra.FieldName = Nothing
+            Me.txtJournalCodeAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtJournalCodeAra.FindEnabled = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtJournalCodeAra, True)
+            resources.ApplyResources(Me.txtJournalCodeAra, "txtJournalCodeAra")
+            Me.txtJournalCodeAra.ForeColor = System.Drawing.Color.Black
+            Me.txtJournalCodeAra.LinkedLabel = Nothing
+            Me.txtJournalCodeAra.MaximumValue = Nothing
+            Me.txtJournalCodeAra.MinimumValue = Nothing
+            Me.txtJournalCodeAra.Name = "txtJournalCodeAra"
+            Me.txtJournalCodeAra.OldValue = Nothing
+            Me.txtJournalCodeAra.ReadOnly = True
+            Me.txtJournalCodeAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtJournalCodeAra.Translatable = False
+            Me.txtJournalCodeAra.ValueIsMandatory = True
+            '
             'lblJournalName
             '
             Me.lblJournalName.DisplayOnly = True
@@ -236,40 +273,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtJournalNameAra.Translatable = False
             '
-            'lblJournalCodeAra
+            'TreeView
             '
-            Me.lblJournalCodeAra.DisplayOnly = True
-            Me.lblJournalCodeAra.EditingMode = False
-            resources.ApplyResources(Me.lblJournalCodeAra, "lblJournalCodeAra")
-            Me.lblJournalCodeAra.Name = "lblJournalCodeAra"
-            Me.lblJournalCodeAra.Translatable = True
-            '
-            'txtJournalCodeAra
-            '
-            Me.txtJournalCodeAra.BackColor = System.Drawing.Color.White
-            Me.txtJournalCodeAra.BegFindValue = Nothing
-            Me.txtJournalCodeAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtJournalCodeAra.ComputedValue = False
-            Me.txtJournalCodeAra.CustomFormat = Nothing
-            Me.txtJournalCodeAra.DataBoundControl = True
-            Me.txtJournalCodeAra.EditingMode = True
-            Me.txtJournalCodeAra.EndFindValue = Nothing
-            Me.txtJournalCodeAra.FieldDescription = Nothing
-            Me.txtJournalCodeAra.FieldName = Nothing
-            Me.txtJournalCodeAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtJournalCodeAra.FindEnabled = True
-            Me.CFlowLayout1.SetFlowBreak(Me.txtJournalCodeAra, True)
-            resources.ApplyResources(Me.txtJournalCodeAra, "txtJournalCodeAra")
-            Me.txtJournalCodeAra.ForeColor = System.Drawing.Color.Black
-            Me.txtJournalCodeAra.LinkedLabel = Nothing
-            Me.txtJournalCodeAra.MaximumValue = Nothing
-            Me.txtJournalCodeAra.MinimumValue = Nothing
-            Me.txtJournalCodeAra.Name = "txtJournalCodeAra"
-            Me.txtJournalCodeAra.OldValue = Nothing
-            Me.txtJournalCodeAra.ReadOnly = True
-            Me.txtJournalCodeAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtJournalCodeAra.Translatable = False
-            Me.txtJournalCodeAra.ValueIsMandatory = True
+            resources.ApplyResources(Me.TreeView, "TreeView")
+            Me.TreeView.Name = "TreeView"
             '
             'JournalPrefixEntry
             '
@@ -302,5 +309,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtJournalName As CTextBox
         Friend WithEvents lblJournalNameAra As CLabel
         Friend WithEvents txtJournalNameAra As CTextBoxArabic
+        Friend WithEvents TreeView As CTreeView
     End Class
 End Namespace

@@ -40,8 +40,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             End If
             If valid Then
                 Dim reportTitle As String
+                Dim currentCulture As CultureInfo = CultureInfo.CurrentUICulture
                 reportTitle = Messaging.TranslateCaption("Transaction Summary Report")
-                Dim cForm As New ReportFormNew("Transaction Summary Report.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", language, "Language")
+                Dim cForm As New ReportFormNew("Transaction Summary Report.Rpt", reportTitle, currentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", language, "Language")
                 cForm.Show()
             End If
             CultureInfo.CurrentCulture = curCulture
