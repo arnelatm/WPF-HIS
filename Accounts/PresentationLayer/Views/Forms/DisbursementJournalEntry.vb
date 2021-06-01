@@ -571,7 +571,9 @@ Namespace PresentationLayer.Views.Forms
                 UpdateOpenInvoicesDisplay()
             End If
             If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                MyPresenter.SetSupplierVatNumber(VatNumber, PayeeIdNo, True)
+                If PayeeIdNo IsNot Nothing Then
+                    MyPresenter.SetSupplierVatNumber(VatNumber, PayeeIdNo, True)
+                End If
             Else
                 VatNumber = ""
             End If

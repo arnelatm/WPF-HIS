@@ -1,6 +1,8 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
+Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
     ' Data access object for SalesJournal
@@ -111,7 +113,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String
             Dim transactionDate = bizObj.TransactionDate
             Dim referenceNo As String
-            referenceNo = "S" + Right("00" + Month(transactionDate).ToString, 2) & "-" & Right("00" + DateAndTime.Day(transactionDate).ToString, 2)
+            referenceNo = "S" + Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2) & "-" & Right("00" + GlobalFunctions.GregorianDay(transactionDate).ToString, 2)
             sql = "Update [SalesJournal] set ReferenceNo = '" & referenceNo & "' where IdNo = " & bizObj.IdNo
             Dim retVal As Boolean = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql, "")
             Return retVal

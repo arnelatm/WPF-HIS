@@ -48,23 +48,25 @@ Namespace PresentationLayer.Presenters
                         retVal = False
                     End If
                 End If
-                Dim approved = CallByName(View, "Approved", CallType.Get)
-                If retVal AndAlso approved Then
-                    Dim controlSecurityValues As ArrayList
-                    Dim isEditable As Boolean
-                    Dim controlSecurityObjectIdNo As Int32
-                    controlSecurityObjectIdNo = GetControlSecurityIdNo("ApproveTransactions")
-                    controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
-                    If controlSecurityValues.Count > 0 Then
-                        isEditable = controlSecurityValues(1)
-                    Else
-                        isEditable = False
-                    End If
-                    If isEditable Then
-                        ' user has editing options for approved transactions
-                    Else
-                        Messaging.Show(True, "MsgEditingApprovedTransaction")
-                        retVal = False
+                If retVal AndAlso type.GetProperty("Approved") IsNot Nothing Then
+                    Dim approved = CallByName(View, "Approved", CallType.Get)
+                    If retVal AndAlso approved Then
+                        Dim controlSecurityValues As ArrayList
+                        Dim isEditable As Boolean
+                        Dim controlSecurityObjectIdNo As Int32
+                        controlSecurityObjectIdNo = GetControlSecurityIdNo("ApproveTransactions")
+                        controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+                        If controlSecurityValues.Count > 0 Then
+                            isEditable = controlSecurityValues(1)
+                        Else
+                            isEditable = False
+                        End If
+                        If isEditable Then
+                            ' user has editing options for approved transactions
+                        Else
+                            Messaging.Show(True, "MsgEditingApprovedTransaction")
+                            retVal = False
+                        End If
                     End If
                 End If
             End If
