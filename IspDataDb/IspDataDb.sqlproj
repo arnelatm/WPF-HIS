@@ -457,6 +457,7 @@
     <Build Include="dbo\Tables\JournalPrefix.sql" />
     <Build Include="dbo\Views\GLStatement_View.sql" />
     <Build Include="dbo\Functions\fnGetAccountTransaction.sql" />
+    <Build Include="dbo\Functions\fnGetAccountTransactions.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

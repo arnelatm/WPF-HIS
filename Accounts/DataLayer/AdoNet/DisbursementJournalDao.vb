@@ -368,7 +368,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function UpdateGlReferenceNumber(ByRef bizObj As BusinessLayer.DisbursementJournal) As Integer Implements IDaoJournals(Of BusinessLayer.DisbursementJournal).UpdateGlReferenceNumber
-            Dim retVal As Boolean
+            Dim retVal As Int32
             Dim sql1 As String
             Dim sql2 As String
             Dim seriesName As String

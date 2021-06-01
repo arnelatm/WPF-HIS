@@ -3,7 +3,10 @@
     [JournalCode]    CHAR (2)      NULL,
     [JournalName]    VARCHAR (50)  NULL,
     [JournalNameAra] NVARCHAR (50) NULL,
-    [JournalCodeAra] NVARCHAR (4)  NULL,
+    [JournalCodeAra] NVARCHAR (2)  NULL,
+    [DateTimeStamp]  ROWVERSION    NULL,
     CONSTRAINT [PK_JournalPrefix] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

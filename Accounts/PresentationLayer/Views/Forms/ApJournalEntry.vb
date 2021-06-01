@@ -363,7 +363,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs)
+        Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
             MyPresenter.UpdateDueDate()
             MyPresenter.UpdateEarlySettlementValues()
             If SupplierIdNo IsNot Nothing Then

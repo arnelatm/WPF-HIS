@@ -54,6 +54,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property Applied As Decimal Implements IDisbursementJournalView.Applied
+        Public Property Approved As Boolean Implements IDisbursementJournalView.Approved
 
         Public Property Cancelled As Boolean Implements IDisbursementJournalView.Cancelled
 
@@ -154,15 +155,6 @@ Namespace PresentationLayer.Views.Forms
         Public Property PayType As String Implements IDisbursementJournalView.PayType
 
         Public Property PcClosed As Boolean Implements IDisbursementJournalView.PcClosed
-
-        Public Property Approved As Boolean Implements IDisbursementJournalView.Approved
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Boolean)
-                Throw New NotImplementedException()
-            End Set
-        End Property
 
 #End Region
 

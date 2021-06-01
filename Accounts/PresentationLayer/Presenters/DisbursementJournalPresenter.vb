@@ -919,7 +919,6 @@ Namespace PresentationLayer.Presenters
             Dim checkAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim language As String
             language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
@@ -928,7 +927,7 @@ Namespace PresentationLayer.Presenters
             Else
                 checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm("Check Printing.Rpt", checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language")
+            Dim cForm As New ReportForm("Check Printing.Rpt", checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
             cForm.Show()
         End Sub
 
@@ -952,13 +951,28 @@ Namespace PresentationLayer.Presenters
         Private Function GetPayeeName(ByVal payeeIdNo? As Int32)
             Dim payee As String
             Dim cbDataSource = Nothing
+            Dim curCulture = CultureInfo.CurrentCulture
+            Dim language As String
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable OrElse paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                payee = GetFieldWithIdNo(View.PayeeIdNo, "Supplier", "SupplierName")
+                If language = "ar" Then
+                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Supplier", "SupplierNameAra")
+                Else
+                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Supplier", "SupplierName")
+                End If
             ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                payee = GetFieldWithIdNo(View.PayeeIdNo, "Employee", "EmployeeName")
+                If language = "ar" Then
+                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Employee", "EmployeeNameAra")
+                Else
+                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Employee", "EmployeeName")
+                End If
             ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                payee = GetFieldWithIdNo(View.PayeeIdNo, "Customer", "CustomerName")
+                If language = "ar" Then
+                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Customer", "CustomerNameAra")
+                Else
+                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Customer", "CustomerName")
+                End If
             Else
                 payee = View.PayeeName
             End If
