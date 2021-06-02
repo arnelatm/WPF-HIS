@@ -57,7 +57,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
@@ -136,10 +135,6 @@
     <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
       <Name>GlobalFuncNSub</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
-      <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
-      <Name>MessagingLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -58,7 +58,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
@@ -122,10 +121,6 @@
     <ProjectReference Include="..\..\BusinessLayer\BusinessLayer.vbproj">
       <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
       <Name>BusinessLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\DataLayer\DataLayer.vbproj">
-      <Project>{440C4740-2584-4050-9086-543018EAC766}</Project>
-      <Name>DataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
       <Project>{8bf1be35-27dc-4b2f-b7db-a2cf182bbc7c}</Project>

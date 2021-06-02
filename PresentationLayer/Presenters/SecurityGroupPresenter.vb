@@ -1,5 +1,4 @@
-﻿Imports AATM.DataLayer.AdoNet
-Imports AATM.Libraries
+﻿Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
