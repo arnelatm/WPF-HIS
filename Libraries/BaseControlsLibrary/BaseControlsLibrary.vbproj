@@ -133,7 +133,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Resources\ButtonBackGround.png" />
   </ItemGroup>
   <ItemGroup>
