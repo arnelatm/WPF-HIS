@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
@@ -382,15 +383,15 @@ Namespace DataLayer.AdoNet
                 sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & seriesName & "'"
                 sql2 = "Update [" & TableOrViewName & "] set ReferenceNo = (select value from series where seriesName = '" & seriesName & "') where IdNo = " & bizObj.IdNo
                 retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
-            Else
+            ElseIf TableOrViewName = "CdJournal" Then
                 Dim transactionDate = bizObj.TransactionDate
-                Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
+                Dim series = "GL" + GlobalFunctions.GregorianYear(transactionDate).ToString() + Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2)
                 Dim maxlength As Int16
                 Dim prefix As String
                 If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
                     seriesName = "GJ"
                     maxlength = 4
-                    prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
+                    prefix = Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2) & "-"
                     Dim sql As String = "INSERT INTO [Series] " &
                         " (SeriesName,Value,MaxLength,Prefix,Description)" &
                         " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
@@ -398,7 +399,7 @@ Namespace DataLayer.AdoNet
                                               "@Value", 0,
                                               "@MaxLength", 4,
                                               "@Prefix", prefix,
-                                              "@Description", "GL Series for " & Year(transactionDate).ToString() & Microsoft.VisualBasic.Strings.Right("00" + Month(transactionDate).ToString, 2)
+                                              "@Description", "GL Series for " & GlobalFunctions.GregorianYear(transactionDate).ToString() & Microsoft.VisualBasic.Strings.Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2)
                                              }
                     retVal = _db.Insert(sql, params)
                     If retVal < 0 Then
@@ -413,6 +414,22 @@ Namespace DataLayer.AdoNet
                        ")) where IdNo = " & bizObj.IdNo
                 retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
                 Return retVal
+            Else
+                seriesName = $"PCJOURNAL"
+                Dim transactionDate As Date = bizObj.TransactionDate
+                Dim referenceNo As String = ""
+                Dim prefix As String
+                If _db.Scalar("Select Count(*) from Series where SeriesName = '" & seriesName & "'") < 1 Then
+                    MessageBox.Show($"No series format found for PCJournal. Please notify System Administrator.")
+                    retVal = -1
+                Else
+                    Dim format As String = ""
+                    format = _db.Scalar("select prefix from series where seriesName = '" & seriesName & "'")
+                    prefix = transactionDate.ToString(format, CultureInfo.InvariantCulture)
+                    sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & seriesName & "'"
+                    sql2 = "Update [PCJournal] set ReferenceNo = Concat( '" & prefix & "', (select value from series where seriesName = '" & seriesName & "')) where IdNo = " & bizObj.IdNo
+                    retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
+                End If
             End If
             Return retVal
         End Function

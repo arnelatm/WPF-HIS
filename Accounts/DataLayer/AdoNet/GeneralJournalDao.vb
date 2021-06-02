@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for GeneralJournal
@@ -79,15 +80,15 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, GeneralJournal) =
                                     Function(reader) _
             New GeneralJournal() With {
-            .Approved = Extensions.AsBool(reader("Approved")),
-            .Cancelled = Extensions.AsBool(reader("Cancelled")),
-            .ClosingJournal = Extensions.AsBool(reader("ClosingJournal")),
-            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Notes = Extensions.AsString(reader("Notes")),
-            .Posted = Extensions.AsBool(reader("Posted")),
-            .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
-            .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
+            .Approved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Approved")),
+            .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
+            .ClosingJournal = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("ClosingJournal")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
+            .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+            .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
+            .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate"))
             }
 
         Private Function Take(generalJournal As GeneralJournal) As Object()
@@ -109,12 +110,12 @@ Namespace DataLayer.AdoNet
             Dim sql1 As String
             Dim sql2 As String
             Dim transactionDate = bizObj.TransactionDate
-            Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
+            Dim series = "GL" + GlobalFunctions.GregorianYear(transactionDate).ToString() + Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
             If Db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
                 maxlength = 4
-                prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
+                prefix = Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2) & "-"
                 Dim sql As String = "INSERT INTO [Series] " &
                     " (SeriesName,Value,MaxLength,Prefix,Description)" &
                     " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
@@ -122,7 +123,7 @@ Namespace DataLayer.AdoNet
                                           "@Value", 0,
                                           "@MaxLength", 4,
                                           "@Prefix", prefix,
-                                          "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
+                                          "@Description", "GL Series for " & GlobalFunctions.GregorianYear(transactionDate).ToString() & Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2)
                                          }
                 retVal = Db.Insert(sql, params)
                 If retVal < 0 Then
