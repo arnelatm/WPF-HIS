@@ -172,14 +172,14 @@ Namespace DataLayer.AdoNet
             Dim maxlength As Int16
             Dim prefix As String
             If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
-                maxlength = 4
+                maxlength = 3
                 prefix = Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2) & "-"
                 Dim sql As String = "INSERT INTO [Series] " &
                     " (SeriesName,Value,MaxLength,Prefix,Description)" &
                     " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
                 Dim params() As Object = {"@SeriesName", series,
                                           "@Value", 0,
-                                          "@MaxLength", 4,
+                                          "@MaxLength", 3,
                                           "@Prefix", prefix,
                                           "@Description", "GL Series for " & GlobalFunctions.GregorianYear(transactionDate).ToString() & Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2)
                                          }
