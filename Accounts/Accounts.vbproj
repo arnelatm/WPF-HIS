@@ -313,7 +313,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfaces\ISalaryLoanSchedulePresenter.vb" />
-    <Compile Include="LocalizedEnumConverter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -1389,8 +1388,8 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app - Copy.config" />
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
+    <None Include="app.config" />
     <None Include="app-Marcelo.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
@@ -1471,10 +1470,6 @@
     <ProjectReference Include="..\Libraries\CustomComboBox\CustomComboBox.csproj">
       <Project>{78a0ac9e-8e5c-422a-a45a-2bd0035f14e2}</Project>
       <Name>CustomComboBox</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\EnumLocalization\EnumLocalization.vbproj">
-      <Project>{efec4547-2f73-4eab-8adc-afaf596f8288}</Project>
-      <Name>EnumLocalization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\ErrorsAndEvents\ErrorsAndEvents.vbproj">
       <Project>{abbf2275-7dff-4724-98f9-71a2fd10b471}</Project>

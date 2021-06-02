@@ -7,7 +7,6 @@ Imports System.Windows.Forms
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
-Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -161,7 +160,6 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Get
     End Property
 
-    Public Property EnumConverter As ResourceEnumConverter
     Public Property LastIdNo As Int32
 
     ' This is the model of the Inheriting Presenter

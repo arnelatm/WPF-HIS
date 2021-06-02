@@ -99,7 +99,6 @@ Namespace PresentationLayer.Views.Forms
 
     End Class
 
-    <TypeConverter(GetType(LocalizedEnumConverter))>
     Public Enum SecurityLevelSelection
         None
         Guest
