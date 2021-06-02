@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
@@ -128,10 +127,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj">
-      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
-      <Name>GlobalFuncNSub</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GlobalResources\GlobalResources.vbproj">
       <Project>{821ee93b-1de7-414d-9612-960288f355fe}</Project>
       <Name>GlobalResources</Name>

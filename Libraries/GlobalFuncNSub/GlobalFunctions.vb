@@ -982,7 +982,6 @@ Public Module GlobalFunctions
         Return False
     End Function
 
-    '''</summary>
     Public Function NumTypeIsDecimal(ByVal typeCodeVal As TypeCode) As Boolean
         If typeCodeVal = TypeCode.Decimal Then
             Return True
