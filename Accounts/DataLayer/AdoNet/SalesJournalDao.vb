@@ -1,4 +1,6 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Globalization
+Imports System.Net.Http.Headers
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
@@ -111,11 +113,20 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateGlReferenceNumber(ByRef bizObj As SalesJournal) As Integer Implements IDaoJournals(Of SalesJournal).UpdateGlReferenceNumber
             Dim sql As String
-            Dim transactionDate = bizObj.TransactionDate
-            Dim referenceNo As String
-            referenceNo = "S" + Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2) & "-" & Right("00" + GlobalFunctions.GregorianDay(transactionDate).ToString, 2)
-            sql = "Update [SalesJournal] set ReferenceNo = '" & referenceNo & "' where IdNo = " & bizObj.IdNo
-            Dim retVal As Boolean = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql, "")
+            Dim retVal As Integer
+            Dim transactionDate As Date = bizObj.TransactionDate
+            Dim referenceNo As String = ""
+            Dim series As String = "Sales" + String.Format("{0:D}", bizObj.AccountIdNo)
+            Dim prefix As String
+            If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
+                MessageBox.Show("No series format found for Account Id Number " + bizObj.AccountIdNo.ToString("D"))
+                retVal = -1
+            Else
+                prefix = _db.Scalar("select prefix from series where seriesName = '" & series & "'")
+                referenceNo = transactionDate.ToString(prefix, CultureInfo.InvariantCulture)
+                sql = "Update [SalesJournal] set ReferenceNo = '" & referenceNo & "' where IdNo = " & bizObj.IdNo
+                retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql, "")
+            End If
             Return retVal
         End Function
 

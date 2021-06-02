@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for CashReceiptJournal
@@ -129,28 +130,28 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, CashReceiptJournal) =
                                     Function(reader) _
             New CashReceiptJournal() With {
-            .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
-            .Amount = Extensions.AsDecimal(reader("Amount")),
-            .Applied = Extensions.AsDecimal(reader("Applied")),
-            .Approved = Extensions.AsBool(reader("Approved")),
-            .Cancelled = Extensions.AsBool(reader("Cancelled")),
-            .CheckDate = Extensions.AsDate(reader("CheckDate")),
-            .CheckNumber = Extensions.AsString(reader("CheckNumber")),
-            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
-            .DiscountAccountIdNo = Extensions.AsNullable(Of Int16?)(reader("DiscountAccountIdNo")),
-            .DiscountTaken = Extensions.AsDecimal(reader("DiscountTaken")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Notes = Extensions.AsString(reader("Notes")),
-            .OrNumber = Extensions.AsString(reader("ORNumber")),
-            .PayorIdNo = Extensions.AsInt(Of Integer)(reader("PayorIdNo")),
-            .PayorName = Extensions.AsString(reader("PayorName")),
-            .PayorType = Extensions.AsString(reader("PayorType")),
-            .Posted = Extensions.AsBool(reader("Posted")),
-            .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
-            .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-            .UnApplied = Extensions.AsDecimal(reader("UnApplied")),
-            .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
-            .VatNumber = Extensions.AsString(reader("VatNumber"))
+            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
+            .Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+            .Applied = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Applied")),
+            .Approved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Approved")),
+            .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
+            .CheckDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("CheckDate")),
+            .CheckNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("CheckNumber")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .DiscountAccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int16?)(reader("DiscountAccountIdNo")),
+            .DiscountTaken = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountTaken")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
+            .OrNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ORNumber")),
+            .PayorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("PayorIdNo")),
+            .PayorName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayorName")),
+            .PayorType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PayorType")),
+            .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+            .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
+            .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
+            .UnApplied = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnApplied")),
+            .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
+            .VatNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("VatNumber"))
             }
 
         Private Function Take(cashReceiptJournal As CashReceiptJournal) As Object()
@@ -185,12 +186,12 @@ Namespace DataLayer.AdoNet
             Dim sql1 As String
             Dim sql2 As String
             Dim transactionDate = bizObj.TransactionDate
-            Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
+            Dim series = "GL" + GlobalFunctions.GregorianYear(transactionDate).ToString() + Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
             If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
                 maxlength = 4
-                prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
+                prefix = Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2) & "-"
                 Dim sql As String = "INSERT INTO [Series] " &
                     " (SeriesName,Value,MaxLength,Prefix,Description)" &
                     " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
@@ -198,7 +199,7 @@ Namespace DataLayer.AdoNet
                                           "@Value", 0,
                                           "@MaxLength", 4,
                                           "@Prefix", prefix,
-                                          "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
+                                          "@Description", "GL Series for " & GlobalFunctions.GregorianMonth(transactionDate).ToString() & Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2)
                                          }
                 retVal = _db.Insert(sql, params)
                 If retVal < 0 Then

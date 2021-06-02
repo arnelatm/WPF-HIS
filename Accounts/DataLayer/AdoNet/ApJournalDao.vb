@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for ApJournal
@@ -118,25 +119,25 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, ApJournal) =
                                     Function(reader) _
             New ApJournal() With {
-            .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
-            .Amount = Extensions.AsDecimal(reader("Amount")),
-            .Approved = Extensions.AsBool(reader("Approved")),
-            .Cancelled = Extensions.AsBool(reader("Cancelled")),
-            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
-            .DueDate = Extensions.AsNullable(Of DateTime?)(reader("DueDate")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .InvoiceDate = Extensions.AsNullable(Of DateTime?)(reader("InvoiceDate")),
-            .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
-            .Notes = Extensions.AsString(reader("Notes")),
-            .Posted = Extensions.AsBool(reader("Posted")),
-            .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
-            .SettlementDiscount = Extensions.AsDecimal(reader("SettlementDiscount")),
-            .SettlementDueDate = Extensions.AsDate(reader("SettlementDueDate")),
-            .SupplierIdNo = Extensions.AsInt(Of Integer)(reader("SupplierIdNo")),
-            .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-            .TransactionType = Extensions.AsString(reader("TransactionType")),
-            .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
-            .VatNumber = Extensions.AsString(reader("VatNumber"))
+            .AccountIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
+            .Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+            .Approved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Approved")),
+            .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .DueDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of DateTime?)(reader("DueDate")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .InvoiceDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of DateTime?)(reader("InvoiceDate")),
+            .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceNo")),
+            .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
+            .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+            .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
+            .SettlementDiscount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("SettlementDiscount")),
+            .SettlementDueDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("SettlementDueDate")),
+            .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Integer)(reader("SupplierIdNo")),
+            .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
+            .TransactionType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("TransactionType")),
+            .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
+            .VatNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("VatNumber"))
             }
 
         Private Function Take(apJournal As ApJournal) As Object()
@@ -167,12 +168,12 @@ Namespace DataLayer.AdoNet
             Dim sql1 As String
             Dim sql2 As String
             Dim transactionDate = bizObj.TransactionDate
-            Dim series = "GL" + Year(transactionDate).ToString() + Right("00" + Month(transactionDate).ToString, 2)
+            Dim series = "GL" + GlobalFunctions.GregorianYear(transactionDate).ToString() + Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2)
             Dim maxlength As Int16
             Dim prefix As String
             If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
                 maxlength = 4
-                prefix = Right("00" + Month(transactionDate).ToString, 2) & "-"
+                prefix = Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2) & "-"
                 Dim sql As String = "INSERT INTO [Series] " &
                     " (SeriesName,Value,MaxLength,Prefix,Description)" &
                     " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
@@ -180,7 +181,7 @@ Namespace DataLayer.AdoNet
                                           "@Value", 0,
                                           "@MaxLength", 4,
                                           "@Prefix", prefix,
-                                          "@Description", "GL Series for " & Year(transactionDate).ToString() & Right("00" + Month(transactionDate).ToString, 2)
+                                          "@Description", "GL Series for " & GlobalFunctions.GregorianYear(transactionDate).ToString() & Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2)
                                          }
                 retVal = _db.Insert(sql, params)
                 If retVal < 0 Then
