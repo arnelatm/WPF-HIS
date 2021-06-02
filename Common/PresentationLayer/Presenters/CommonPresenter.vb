@@ -62,22 +62,22 @@ Namespace PresentationLayer.Presenters
             Return GetLookupByCodeName()
         End Function
 
-        Public Function GetEnumList(Of TE)()
-            If EnumConverter Is Nothing Then
-                EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
-            End If
-            Dim dataList As New List(Of ClassesLibrary.LookupData)
-            'Dim enumValues = [Enum].GetValues(GetType(TE))
-            For Each c In [Enum].GetValues(GetType(TE))
-                Dim data As New ClassesLibrary.LookupData With {
-                    .IdNo = CInt(c),
-                    .Code = EnumToCode(c),
-                    .Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
-                }
-                dataList.Add(data)
-            Next
-            Return dataList
-        End Function
+        'Public Function GetEnumList(Of TE)()
+        '    If EnumConverter Is Nothing Then
+        '        EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
+        '    End If
+        '    Dim dataList As New List(Of ClassesLibrary.LookupData)
+        '    'Dim enumValues = [Enum].GetValues(GetType(TE))
+        '    For Each c In [Enum].GetValues(GetType(TE))
+        '        Dim data As New ClassesLibrary.LookupData With {
+        '            .IdNo = CInt(c),
+        '            .Code = EnumToCode(c),
+        '            .Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
+        '        }
+        '        dataList.Add(data)
+        '    Next
+        '    Return dataList
+        'End Function
 
         Public Overrides Sub GoAddRecord()
             MyBase.GoAddRecord()

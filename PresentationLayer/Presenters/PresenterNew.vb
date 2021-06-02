@@ -8,7 +8,6 @@ Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.EnumLocalization
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -192,7 +191,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End Set
     End Property
 
-    Public Property EnumConverter As ResourceEnumConverter
     Public Property LastIdNo As Int32
 
     ' This is the model of the Inheriting Presenter
