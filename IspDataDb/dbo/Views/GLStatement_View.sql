@@ -11,6 +11,7 @@
 
 
 
+
 CREATE View [dbo].[GLStatement_View] 
 as 
 ( SELECT 'GJ' AS 'JournalCode'
@@ -27,8 +28,8 @@ as
 	  ,[TransactionDate] 
       ,[ReferenceNo] COLLATE Arabic_CI_AS AS 'ReferenceNo'
 	  ,'' COLLATE Arabic_CI_AS AS 'DocumentNumber'
-	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes])) COLLATE Arabic_CI_AS AS 'PayDescription'
-	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes])) COLLATE Arabic_CI_AS AS 'PayDescriptionAra'
+	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS AS 'PayDescription'
+	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS AS 'PayDescriptionAra'
 	  ,[ClosingJournal]
 	  ,j.JournalCodeAra 
   FROM [dbo].[GeneralJournalItem] a
@@ -49,7 +50,7 @@ UNION
       ,a.[Debit]
       ,a.[Credit]
       ,[RevCostCenterIdNo]
-      ,a.[Notes]
+	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS
       ,a.[Posted]
 	  ,[TransactionDate]
       ,[ReferenceNo] 
@@ -78,7 +79,7 @@ UNION
       ,a.[Debit]
       ,a.[Credit]
       ,[RevCostCenterIdNo]
-      ,a.[Notes]
+	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS
       ,a.[Posted]
 	  ,[TransactionDate]
       ,[ReferenceNo]
@@ -107,7 +108,7 @@ UNION
       ,a.[Debit]
       ,a.[Credit]
       ,[RevCostCenterIdNo]
-      ,a.[Notes]
+	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS
       ,a.[Posted]
 	  ,[TransactionDate]
       ,[ReferenceNo]
@@ -136,11 +137,15 @@ UNION
       ,a.[Debit]
       ,a.[Credit]
 	  ,[RevCostCenterIdNo]
-      ,a.[Notes]
+	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,[ReferenceNo]
-	  ,'Inv#'+[ORNUMBER] 
+	  ,Case
+			WHEN b.PayType = '1' then 'Chk#' COLLATE Arabic_CI_AS + [CheckNumber] COLLATE Arabic_CI_AS
+			WHEN b.PayType = '2' then 'Inv#'+[ORNUMBER] 
+			WHEN b.PayType = '3' then 'Inv#'+[ORNUMBER] 
+	   End
 	  ,CASE
 			WHEN b.PaymentType = 'A' then s.SupplierName
 			WHEN b.PaymentType = 'R' then c.CustomerName
@@ -183,7 +188,7 @@ UNION
       ,a.[Debit]
       ,a.[Credit]
 	  ,[RevCostCenterIdNo]
-      ,a.[Notes]
+	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS  
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,[ReferenceNo]
@@ -234,7 +239,7 @@ UNION
       ,a.[Debit]
       ,a.[Credit]
 	  ,[RevCostCenterIdNo]
-      ,a.[Notes]
+	  ,iif(a.[Notes] is Null or a.[Notes] = '',b.Notes,a.Notes) COLLATE Arabic_CI_AS 
 	  ,a.[Posted]
 	  ,[TransactionDate]
       ,[ReferenceNo]
