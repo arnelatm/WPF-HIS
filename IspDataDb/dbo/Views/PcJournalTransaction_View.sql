@@ -1,7 +1,8 @@
-﻿CREATE VIEW dbo.PcJournalTransaction_View
+﻿
+CREATE VIEW [dbo].[PcJournalTransaction_View]
 AS
-SELECT        dbo.PcJournal.IdNo, dbo.PcJournal.TransactionDate, dbo.PcJournal.ReferenceNo, dbo.PcJournal.Amount, dbo.PcJournal.PayeeIdNo, dbo.PcJournal.PaymentType, dbo.PcJournal.PayeeName, dbo.PcJournalItem.Sequence, 
-                         dbo.PcJournalItem.Debit, dbo.PcJournalItem.Credit, dbo.PcJournalItem.RevCostCenterIdNo, dbo.PcJournalItem.Notes, dbo.Account.AccountCode, dbo.Account.AccountName, dbo.Account.AccountNameAra, 
+SELECT        dbo.PcJournal.IdNo, dbo.PcJournal.TransactionDate, dbo.PcJournal.ReferenceNo, dbo.PcJournal.Amount, dbo.PcJournal.PayeeIdNo, dbo.PcJournal.PaymentType, dbo.PcJournal.PayeeName, dbo.PcJournal.AccountIdNo as JournalAccountIdNo, dbo.PcJournalItem.Sequence, 
+                         dbo.PcJournalItem.Debit, dbo.PcJournalItem.Credit, dbo.PcJournalItem.RevCostCenterIdNo, dbo.PcJournalItem.Notes, dbo.PcJournalItem.AccountIdNo, dbo.Account.AccountCode, dbo.Account.AccountName, dbo.Account.AccountNameAra, 
                          dbo.Customer.CustomerCode, dbo.Customer.CustomerName, dbo.Customer.CustomerNameAra, dbo.Supplier.SupplierCode, dbo.Supplier.SupplierName, dbo.Supplier.SupplierNameAra, dbo.Employee.EmployeeCode, 
                          dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.RevCostCenter.RevCostCenterCode, dbo.RevCostCenter.RevCostCenterName, dbo.PcJournal.Notes AS PcNote, dbo.BankAccount.BranchName, 
                          dbo.Bank.BankCode, dbo.Bank.BankName, dbo.Bank.BankNameAra, dbo.PcJournal.CdJournalIdNo
