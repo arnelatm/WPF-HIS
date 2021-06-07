@@ -295,6 +295,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvJournalIdNo.DisplayOnly = True
                 dgvCredit.DisplayOnly = True
                 dgvDebit.DisplayOnly = True
+                dgvJournalItemIdNo.DisplayOnly = True
                 dgvReferenceNo.DisplayOnly = True
                 dgvTransactionDate.DisplayOnly = True
                 Dim englishDateTimeFormat As DateTimeFormatInfo = New CultureInfo("en-GB").DateTimeFormat
@@ -880,7 +881,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated
-            If Not btnEdit.Enabled And dtpReconciliationDate.DateChanged Then
+            If Not btnEdit.Enabled Then 'And dtpReconciliationDate.DateChanged Then
                 PublishEvent(New EndingReconciliationDateChangedEvent(sender))
                 bsAccountReconciliationItems.ResetBindings(False)
             End If
@@ -888,10 +889,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub cboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
             If Not btnEdit.Enabled Then
-                If cboAccountIdNo.ValueChanged() Then
-                    PublishEvent(New ReconciliationAccountChangedEvent(Me, bsAccountReconciliationItems))
-                    'bsAccountReconciliationItems.ResetBindings(False)
-                End If
+                'If cboAccountIdNo.ValueChanged() Then
+                PublishEvent(New ReconciliationAccountChangedEvent(Me, bsAccountReconciliationItems))
+                'bsAccountReconciliationItems.ResetBindings(False)
+                'End If
             End If
         End Sub
 

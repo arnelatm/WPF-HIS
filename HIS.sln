@@ -72,6 +72,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		CreateAllViews.sql = CreateAllViews.sql
 		CreateAllViews.txt = CreateAllViews.txt
 		CrystalErrorDataOnFirstLineNotAppearing.txt = CrystalErrorDataOnFirstLineNotAppearing.txt
+		DeleteDuplicate.sql = DeleteDuplicate.sql
 		Dynamically Create Table.sql = Dynamically Create Table.sql
 		EmployeeFileNDesignations.sql = EmployeeFileNDesignations.sql
 		FringeBenefits.sql = FringeBenefits.sql
@@ -109,6 +110,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IspDataDb", "IspDataDb\IspD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQueries", "{E0336D98-67DC-4134-9508-7F5598295FEC}"
 	ProjectSection(SolutionItems) = preProject
+		DeleteDuplicates.sql = DeleteDuplicates.sql
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
 	EndProjectSection
 EndProject

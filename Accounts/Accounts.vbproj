@@ -1376,8 +1376,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
+    <None Include="app.config" />
     <None Include="app-Marcelo.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
@@ -1390,6 +1390,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.BusinessLayer.Bank.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.BusinessLayer.Customer1.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Forms.EmployeeEntryTv.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.AccountReconciliationItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.AttendanceModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CadOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CashReceiptJournalModel.datasource" />

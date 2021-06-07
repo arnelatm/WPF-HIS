@@ -511,6 +511,9 @@
   <data name="chkPosted.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="chkPosted.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
   <data name="chkPosted.Location" type="System.Drawing.Point, System.Drawing">
     <value>819, 26</value>
   </data>
@@ -1627,6 +1630,12 @@
   <data name="dgvJournalIdNo.Width" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
+  <data name="dgvJournalItemIdNo.HeaderText" xml:space="preserve">
+    <value>Jounal Item ID No.</value>
+  </data>
+  <data name="dgvJournalItemIdNo.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
   <metadata name="dgvDocumentNumber.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1671,15 +1680,6 @@
   </data>
   <data name="dgvPayDescription.MinimumWidth" type="System.Int32, mscorlib">
     <value>150</value>
-  </data>
-  <metadata name="dgvAccountReconciliationIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvAccountReconciliationIdNo.HeaderText" xml:space="preserve">
-    <value>AccountReconciliationIdNo</value>
-  </data>
-  <data name="dgvAccountReconciliationIdNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <metadata name="bsAccountReconciliationItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>675, 17</value>
@@ -2967,6 +2967,12 @@
   <data name="&gt;&gt;dgvJournalIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;dgvJournalItemIdNo.Name" xml:space="preserve">
+    <value>dgvJournalItemIdNo</value>
+  </data>
+  <data name="&gt;&gt;dgvJournalItemIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;dgvDocumentNumber.Name" xml:space="preserve">
     <value>dgvDocumentNumber</value>
   </data>
@@ -2996,12 +3002,6 @@
   </data>
   <data name="&gt;&gt;dgvPayDescription.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvAccountReconciliationIdNo.Name" xml:space="preserve">
-    <value>dgvAccountReconciliationIdNo</value>
-  </data>
-  <data name="&gt;&gt;dgvAccountReconciliationIdNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AccountReconciliationEntry</value>
