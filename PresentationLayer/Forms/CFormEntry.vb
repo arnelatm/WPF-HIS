@@ -829,36 +829,36 @@ Public Class CFormEntry
 
     End Sub
 
-    Private Sub ClearData()
-        Dim allCtrl As New List(Of Control)
-        Dim initValue = ""
-        For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
-            Try
-                If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is CMaskedTextBox Then
-                    Try
-                        initValue = GetPropertyValue(cCtrl, "DefaultValue")
-                    Catch ex As Exception
-                        '' ignore error if no 'DefaultValue' property
-                    End Try
-                    cCtrl.Text = initValue
-                ElseIf TypeOf cCtrl Is TxtComboBox Then
-                    CallByName(cCtrl, "MakeDefault", CallType.Method)
-                ElseIf TypeOf cCtrl Is CaComboBox Or TypeOf cCtrl Is CComboBox Then
-                    'SetPropertyValue(cCtrl, "Text", "")
-                    SetPropertyValue(cCtrl, "SelectedItem", Nothing)
-                    SetPropertyValue(cCtrl, "SelectedIndex", -1)
-                    SetPropertyValue(cCtrl, "Text", "")
-                ElseIf TypeOf cCtrl Is CDataGridView Then
-                    'CType(cCtrl, CDataGridView).Rows.Clear()
-                ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDTPHijriDate OrElse
-                TypeOf cCtrl Is tdpGregorian OrElse TypeOf cCtrl Is CDtpGregorianDate Then
-                    SetPropertyValue(cCtrl, "Value", Nothing)
-                End If
-            Catch ' ignore fields that don't have a column to bind to
-                ''
-            End Try
-        Next
-    End Sub
+    'Private Sub ClearData()
+    '    Dim allCtrl As New List(Of Control)
+    '    Dim initValue = ""
+    '    For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
+    '        Try
+    '            If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is CMaskedTextBox Then
+    '                Try
+    '                    initValue = GetPropertyValue(cCtrl, "DefaultValue")
+    '                Catch ex As Exception
+    '                    '' ignore error if no 'DefaultValue' property
+    '                End Try
+    '                cCtrl.Text = initValue
+    '            ElseIf TypeOf cCtrl Is TxtComboBox Then
+    '                CallByName(cCtrl, "MakeDefault", CallType.Method)
+    '            ElseIf TypeOf cCtrl Is CaComboBox Or TypeOf cCtrl Is CComboBox Then
+    '                'SetPropertyValue(cCtrl, "Text", "")
+    '                SetPropertyValue(cCtrl, "SelectedItem", Nothing)
+    '                SetPropertyValue(cCtrl, "SelectedIndex", -1)
+    '                SetPropertyValue(cCtrl, "Text", "")
+    '            ElseIf TypeOf cCtrl Is CDataGridView Then
+    '                'CType(cCtrl, CDataGridView).Rows.Clear()
+    '            ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDTPHijriDate OrElse
+    '            TypeOf cCtrl Is tdpGregorian OrElse TypeOf cCtrl Is CDtpGregorianDate Then
+    '                SetPropertyValue(cCtrl, "Value", Nothing)
+    '            End If
+    '        Catch ' ignore fields that don't have a column to bind to
+    '            ''
+    '        End Try
+    '    Next
+    'End Sub
 
     Private Sub CloseForm()
 
