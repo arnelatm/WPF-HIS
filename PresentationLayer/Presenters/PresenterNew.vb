@@ -893,7 +893,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     End Function
 
     Public Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
-        If CheckIfUnique(DirectCast(cCtrl, ILinkedLabel).GetControlDescription(), fldName, TargetIdNo) Then
+        If CheckIfUnique(ControlDescription(cCtrl), fldName, TargetIdNo) Then
             Return False
         End If
         Return True
@@ -1596,12 +1596,10 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             If targetValue Is Nothing OrElse targetValue.Equals(DBNull.Value) OrElse String.IsNullOrWhiteSpace(targetValue) Then
                 Return True
             Else
+                Dim controlName As String = ControlDescription(obj)
                 Dim num As Double
                 Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
                 If Not isNumeric Then
-                    Dim controlName As String
-                    controlName = obj.Name.Substring(3)
-                    controlName = DirectCast(obj, ILinkedLabel).GetControlDescription(controlName)
                     Messaging.ShowParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text})
                     obj.Focus()
                     Return False
@@ -1617,6 +1615,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                     nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
                 End If
                 If num < nMinValue OrElse num > nMaxValue Then
+                    Messaging.ShowParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", nMinValue.ToString(), "highNumber", nMaxValue.ToString()})
                     MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & " to " & nMaxValue.ToString())
                     Return False
                 End If
@@ -1632,12 +1631,12 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                 End If
                 If isInteger Then
                     If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
-                        MessageBox.Show($"The entered value for " & obj.Name & $" must be a whole number (Integer)!")
+                        Messaging.ShowParametrizedMessage(True, "MsgInvalidInteger", {"number", viewControl.Text, "controlName"})
                         Return False
                     End If
                 End If
                 If num < obj.MinimumValue OrElse num > obj.MaximumValue Then
-                    MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & obj.MinimumValue.ToString() & " to " & obj.MaximumValue.ToString())
+                    Messaging.ShowParametrizedMessage(True, "MsgNumericOverflow", {"number", viewControl.Text, "controlName", controlName, "lowNumber", obj.MinimumValue, "highNumber", obj.MaximumValue})
                     Return False
                 End If
                 Return True
@@ -1650,13 +1649,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Private Function ValueIsUnique(cCtrl As Control, validationsPassed As Boolean) As Boolean
         Dim originalValue As String
         Dim fldName As String = cCtrl.Name.Substring(3)
-        Dim fieldDescription As String
-        Dim linkedLabel = TryCast(cCtrl, ILinkedLabel)
-        If (linkedLabel IsNot Nothing) Then
-            fieldDescription = linkedLabel.GetControlDescription(fldName)
-        Else
-            fieldDescription = fldName
-        End If
+        Dim fieldDescription As String = ControlDescription(cCtrl)
         Dim recordIsNotUnique = False
         If AddMode Then
             If IsRecordNotUnique(cCtrl, fldName) Then
@@ -1761,7 +1754,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                             SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
                             If (Not row.IsIdentity) And (Not row.IsNullable) Then
                                 If GetPropertyValue(cCtrl, "IgnoreNullCheck") Then
-                                    MyErrorProvider.Controls.AddMandatory(cCtrl, DirectCast(cCtrl, ILinkedLabel).GetControlDescription(fldName))
+                                    MyErrorProvider.Controls.AddMandatory(cCtrl, ControlDescription(cCtrl))
                                 End If
                             End If
                         End If
@@ -1967,6 +1960,16 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
 
     Public Function GetFieldType(fieldName As String) As Type
         Return CallByName(Me, fieldName, CallType.Get).GetType
+    End Function
+
+    Public Function ControlDescription(control As Control)
+        Dim description As String
+        If TypeOf control Is ILinkedLabel Then
+            description = DirectCast(control, ILinkedLabel).GetControlDescription()
+        Else
+            description = control.Name.Substring(control.Name, 3)
+        End If
+        Return description
     End Function
 
     'Public Sub ShowWaitForm_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
