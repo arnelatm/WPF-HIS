@@ -270,10 +270,13 @@ Public Class CFindForm
             chkChecked.Visible = False
             lblIgnoreCase.Visible = True
             chkIgnoreCase.Visible = True
+            TxtTextToSearch.Focus()
             Height = 270
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
             dtpBegDate.Visible = True
             dtpEndDate.Visible = True
+            dtpBegDate.Focus()
+            dtpBegDate.Select()
             'lblLookFor1.Visible = False
             'lblLookFor2.Visible = False
             'lblLookFor3.Visible = True
@@ -301,6 +304,8 @@ Public Class CFindForm
             chkChecked.Visible = False
             txtBegValue.Visible = True
             txtEndValue.Visible = True
+            txtBegValue.Focus()
+            txtBegValue.Select()
             Height = 160
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
             'lblLookFor4.Visible = True
