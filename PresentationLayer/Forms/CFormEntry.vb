@@ -331,7 +331,6 @@ Public Class CFormEntry
         Dim originalValue As String
         For Each cCtrl As Control In FindControlRecursive(allControls, Me)
             If TypeOf cCtrl Is IEntryControl Then
-
                 If TypeOf cCtrl Is CTextBoxIdNo Then
                     ' no validations for this type of control. These are Identity Columns and are filled automatically
                     ' by the Data Server.

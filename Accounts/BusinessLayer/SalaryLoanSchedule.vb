@@ -12,7 +12,7 @@ Namespace BusinessLayer
             ' establish business rules
             'If createRules Then
             If GetRules().Count() = 0 Then
-                'AddRule(New ValidateRequired("EmployeeIdNo"))
+                AddRule(New ValidateRequired("EmployeeIdNo"))
                 AddRule(New ValidateRequired("StartDate"))
                 AddRule(New ValidateContent("Amount", 0, ValidationOperator.GreaterThan, ValidationDataType.Decimal))
                 AddRule(New ValidateContent("PeriodicPayment", 0, ValidationOperator.GreaterThan, ValidationDataType.Decimal))
