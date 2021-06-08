@@ -28,7 +28,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Amount As Decimal Implements ISalaryLoanScheduleView.Amount
             Get
-                Return TextBoxNumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount)
+                Return NumParser(Of Decimal)(SalaryLoanScheduleView.txtPeriodicPayment.Text)
+                'Return TextBoxNumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount)
                 'Return Convert.ToDecimal(NumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount.Text))
             End Get
             Set

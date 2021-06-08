@@ -91,16 +91,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.EditingMode = False
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Translatable = True
             '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             Me.CFlowLayout1.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
@@ -111,7 +117,9 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'lblDepartmentCode
@@ -120,15 +128,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDepartmentCode.EditingMode = False
             resources.ApplyResources(Me.lblDepartmentCode, "lblDepartmentCode")
             Me.lblDepartmentCode.Name = "lblDepartmentCode"
+            Me.lblDepartmentCode.Translatable = True
             '
             'txtDepartmentCode
             '
             Me.txtDepartmentCode.BackColor = System.Drawing.Color.White
+            Me.txtDepartmentCode.BegFindValue = Nothing
             Me.txtDepartmentCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtDepartmentCode.ComputedValue = False
             Me.txtDepartmentCode.CustomFormat = Nothing
             Me.txtDepartmentCode.DataBoundControl = True
             Me.txtDepartmentCode.EditingMode = False
+            Me.txtDepartmentCode.EndFindValue = Nothing
+            Me.txtDepartmentCode.FieldDescription = Nothing
+            Me.txtDepartmentCode.FieldName = Nothing
+            Me.txtDepartmentCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtDepartmentCode.FindEnabled = True
             Me.CFlowLayout1.SetFlowBreak(Me.txtDepartmentCode, True)
             resources.ApplyResources(Me.txtDepartmentCode, "txtDepartmentCode")
@@ -139,6 +153,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDepartmentCode.Name = "txtDepartmentCode"
             Me.txtDepartmentCode.OldValue = Nothing
             Me.txtDepartmentCode.ReadOnly = True
+            Me.txtDepartmentCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDepartmentCode.Translatable = False
             Me.txtDepartmentCode.ValueIsMandatory = True
             '
             'lblDepartmentName
@@ -147,15 +163,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDepartmentName.EditingMode = False
             resources.ApplyResources(Me.lblDepartmentName, "lblDepartmentName")
             Me.lblDepartmentName.Name = "lblDepartmentName"
+            Me.lblDepartmentName.Translatable = True
             '
             'txtDepartmentName
             '
             Me.txtDepartmentName.BackColor = System.Drawing.Color.White
+            Me.txtDepartmentName.BegFindValue = Nothing
             Me.txtDepartmentName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtDepartmentName.ComputedValue = False
             Me.txtDepartmentName.CustomFormat = Nothing
             Me.txtDepartmentName.DataBoundControl = True
             Me.txtDepartmentName.EditingMode = False
+            Me.txtDepartmentName.EndFindValue = Nothing
+            Me.txtDepartmentName.FieldDescription = Nothing
+            Me.txtDepartmentName.FieldName = Nothing
+            Me.txtDepartmentName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtDepartmentName.FindEnabled = True
             Me.CFlowLayout1.SetFlowBreak(Me.txtDepartmentName, True)
             resources.ApplyResources(Me.txtDepartmentName, "txtDepartmentName")
@@ -166,6 +188,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDepartmentName.Name = "txtDepartmentName"
             Me.txtDepartmentName.OldValue = Nothing
             Me.txtDepartmentName.ReadOnly = True
+            Me.txtDepartmentName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDepartmentName.Translatable = False
             Me.txtDepartmentName.ValueIsMandatory = True
             '
             'lblDepartmentNameAra
@@ -174,16 +198,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDepartmentNameAra.EditingMode = False
             resources.ApplyResources(Me.lblDepartmentNameAra, "lblDepartmentNameAra")
             Me.lblDepartmentNameAra.Name = "lblDepartmentNameAra"
+            Me.lblDepartmentNameAra.Translatable = True
             '
             'txtDepartmentNameAra
             '
             Me.txtDepartmentNameAra.BackColor = System.Drawing.Color.White
+            Me.txtDepartmentNameAra.BegFindValue = Nothing
             Me.txtDepartmentNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtDepartmentNameAra.ComputedValue = False
             Me.txtDepartmentNameAra.CustomFormat = Nothing
             Me.txtDepartmentNameAra.DataBoundControl = True
             Me.txtDepartmentNameAra.EditingMode = False
+            Me.txtDepartmentNameAra.EndFindValue = Nothing
             Me.txtDepartmentNameAra.EnglishControl = Me.txtDepartmentName
+            Me.txtDepartmentNameAra.FieldDescription = Nothing
+            Me.txtDepartmentNameAra.FieldName = Nothing
+            Me.txtDepartmentNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtDepartmentNameAra.FindEnabled = True
             Me.CFlowLayout1.SetFlowBreak(Me.txtDepartmentNameAra, True)
             resources.ApplyResources(Me.txtDepartmentNameAra, "txtDepartmentNameAra")
@@ -194,6 +224,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDepartmentNameAra.Name = "txtDepartmentNameAra"
             Me.txtDepartmentNameAra.OldValue = Nothing
             Me.txtDepartmentNameAra.ReadOnly = True
+            Me.txtDepartmentNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDepartmentNameAra.Translatable = False
             '
             'lblParentIdNo
             '
@@ -201,21 +233,29 @@ Namespace PresentationLayer.Views.Forms
             Me.lblParentIdNo.EditingMode = False
             resources.ApplyResources(Me.lblParentIdNo, "lblParentIdNo")
             Me.lblParentIdNo.Name = "lblParentIdNo"
+            Me.lblParentIdNo.Translatable = True
             '
             'cacParentIdNo
             '
             Me.cacParentIdNo.BackColor = System.Drawing.Color.White
+            Me.cacParentIdNo.BegFindValue = Nothing
             Me.cacParentIdNo.ChangingSearchValueOnly = False
             Me.cacParentIdNo.CurrentSearchTerm = ""
             Me.cacParentIdNo.DefaultValue = Nothing
             Me.cacParentIdNo.DisplayMember = "Name"
             Me.cacParentIdNo.EditingMode = False
+            Me.cacParentIdNo.EndFindValue = Nothing
+            Me.cacParentIdNo.FieldDescription = Nothing
+            Me.cacParentIdNo.FieldName = Nothing
             Me.cacParentIdNo.FilterRule = Nothing
+            Me.cacParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacParentIdNo.FindEnabled = False
             Me.CFlowLayout1.SetFlowBreak(Me.cacParentIdNo, True)
             resources.ApplyResources(Me.cacParentIdNo, "cacParentIdNo")
             Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
             Me.cacParentIdNo.FormattingEnabled = True
             Me.cacParentIdNo.HideWhenNotEditingOrAdding = False
+            Me.cacParentIdNo.IgnoreCase = False
             Me.cacParentIdNo.LinkedLabel = Nothing
             Me.cacParentIdNo.Name = "cacParentIdNo"
             Me.cacParentIdNo.OldValue = 0
@@ -228,6 +268,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.SuggestBoxHeight = 200
             Me.cacParentIdNo.SuggestListOrderRule = Nothing
             Me.cacParentIdNo.TextToSearch = Nothing
+            Me.cacParentIdNo.Translatable = False
             Me.cacParentIdNo.ValueIsMandatory = False
             Me.cacParentIdNo.ValueIsNullable = False
             Me.cacParentIdNo.ValueIsNumeric = False
@@ -239,21 +280,29 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevCostCenterIdNo.EditingMode = False
             resources.ApplyResources(Me.lblRevCostCenterIdNo, "lblRevCostCenterIdNo")
             Me.lblRevCostCenterIdNo.Name = "lblRevCostCenterIdNo"
+            Me.lblRevCostCenterIdNo.Translatable = True
             '
             'cacRevCostCenterIdNo
             '
             Me.cacRevCostCenterIdNo.BackColor = System.Drawing.Color.White
+            Me.cacRevCostCenterIdNo.BegFindValue = Nothing
             Me.cacRevCostCenterIdNo.ChangingSearchValueOnly = False
             Me.cacRevCostCenterIdNo.CurrentSearchTerm = ""
             Me.cacRevCostCenterIdNo.DefaultValue = Nothing
             Me.cacRevCostCenterIdNo.DisplayMember = "Name"
             Me.cacRevCostCenterIdNo.EditingMode = False
+            Me.cacRevCostCenterIdNo.EndFindValue = Nothing
+            Me.cacRevCostCenterIdNo.FieldDescription = Nothing
+            Me.cacRevCostCenterIdNo.FieldName = Nothing
             Me.cacRevCostCenterIdNo.FilterRule = Nothing
+            Me.cacRevCostCenterIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacRevCostCenterIdNo.FindEnabled = False
             Me.CFlowLayout1.SetFlowBreak(Me.cacRevCostCenterIdNo, True)
             resources.ApplyResources(Me.cacRevCostCenterIdNo, "cacRevCostCenterIdNo")
             Me.cacRevCostCenterIdNo.ForeColor = System.Drawing.Color.Black
             Me.cacRevCostCenterIdNo.FormattingEnabled = True
             Me.cacRevCostCenterIdNo.HideWhenNotEditingOrAdding = False
+            Me.cacRevCostCenterIdNo.IgnoreCase = False
             Me.cacRevCostCenterIdNo.LinkedLabel = Nothing
             Me.cacRevCostCenterIdNo.Name = "cacRevCostCenterIdNo"
             Me.cacRevCostCenterIdNo.OldValue = 0
@@ -266,6 +315,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevCostCenterIdNo.SuggestBoxHeight = 200
             Me.cacRevCostCenterIdNo.SuggestListOrderRule = Nothing
             Me.cacRevCostCenterIdNo.TextToSearch = Nothing
+            Me.cacRevCostCenterIdNo.Translatable = False
             Me.cacRevCostCenterIdNo.ValueIsMandatory = False
             Me.cacRevCostCenterIdNo.ValueIsNullable = False
             Me.cacRevCostCenterIdNo.ValueIsNumeric = False
@@ -277,15 +327,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.EditingMode = False
             resources.ApplyResources(Me.lblNotes, "lblNotes")
             Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Translatable = True
             '
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
@@ -295,31 +351,40 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
             'txtSortKey
             '
             Me.txtSortKey.BackColor = System.Drawing.Color.White
+            Me.txtSortKey.BegFindValue = Nothing
             Me.txtSortKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtSortKey.ComputedValue = False
             Me.txtSortKey.CustomFormat = Nothing
             Me.txtSortKey.DataBoundControl = True
             Me.txtSortKey.EditingMode = True
             resources.ApplyResources(Me.txtSortKey, "txtSortKey")
+            Me.txtSortKey.EndFindValue = Nothing
+            Me.txtSortKey.FieldDescription = Nothing
+            Me.txtSortKey.FieldName = Nothing
+            Me.txtSortKey.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtSortKey.FindEnabled = False
             Me.txtSortKey.ForeColor = System.Drawing.Color.Black
             Me.txtSortKey.LinkedLabel = Nothing
             Me.txtSortKey.MaximumValue = Nothing
             Me.txtSortKey.MinimumValue = Nothing
             Me.txtSortKey.Name = "txtSortKey"
-        Me.txtSortKey.OldValue = Nothing
-        Me.txtSortKey.ReadOnly = true
-        Me.txtSortKey.TabStop = false
-        Me.txtSortKey.ValueIsMandatory = true
-        '
-        'DepartmentEntryTv
-        '
-        resources.ApplyResources(Me, "$this")
+            Me.txtSortKey.OldValue = Nothing
+            Me.txtSortKey.ReadOnly = True
+            Me.txtSortKey.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtSortKey.TabStop = False
+            Me.txtSortKey.Translatable = False
+            Me.txtSortKey.ValueIsMandatory = True
+            '
+            'DepartmentEntryTv
+            '
+            resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Name = "DepartmentEntryTv"
         Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)

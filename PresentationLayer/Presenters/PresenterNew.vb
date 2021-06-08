@@ -1553,11 +1553,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                     End If
                 End If
             Next
-            If IsBizDataValid() Then
-                If Not ValidateNumericValues(eventType.ViewControl) Then
-                    validated = False
-                End If
-            Else
+            If Not IsBizDataValid() Then
                 validated = False
             End If
         End If
