@@ -75,7 +75,7 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.SplitContainer1)
-        Me.Name = "SalaryLoanScheduleEntry"
+            Me.Name = "SalaryLoanScheduleEntry"
         Me.Controls.SetChildIndex(Me.SplitContainer1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.SplitContainer1.Panel1.ResumeLayout(false)

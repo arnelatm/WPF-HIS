@@ -70,9 +70,9 @@ Namespace DataLayer.AdoNet
             .DepartmentCode = Extensions.AsString(reader("DepartmentCode")),
             .DepartmentName = Extensions.AsString(reader("DepartmentName")),
             .DepartmentNameAra = Extensions.AsString(reader("DepartmentNameAra")),
-            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int16?)(reader("ParentIdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
-            .RevCostCenterIdNo = Extensions.AsInt(Of Integer)(reader("RevCostCenterIdNo")),
+            .RevCostCenterIdNo = Extensions.AsInt(Of Int16)(reader("RevCostCenterIdNo")),
             .SortKey = Extensions.AsString(reader("SortKey"))}
 
         Private Function Take(ByVal department As Department) As Object()
