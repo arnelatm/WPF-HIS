@@ -58,11 +58,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PeriodicPayment As Decimal Implements ISalaryLoanScheduleView.PeriodicPayment
             Get
-                If SalaryLoanScheduleView.txtPeriodicPayment.Text <> "" Then
-                    Return Convert.ToDouble(SalaryLoanScheduleView.txtPeriodicPayment.Text)
-                Else
-                    Return 0
-                End If
+                Return GlobalFunctions.NumParser(Of Decimal)(SalaryLoanScheduleView.txtPeriodicPayment.Text)
             End Get
             Set
                 SalaryLoanScheduleView.txtPeriodicPayment.Text = Value

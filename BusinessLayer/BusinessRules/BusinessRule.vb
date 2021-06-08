@@ -7,6 +7,7 @@ Namespace BusinessRules
     Public MustInherit Class BusinessRule
         Public Property [Property] As String
         Public Property [Error] As String
+        Public Property [Valid] As Boolean = False
         Protected Dac As New Dac
         'Public Property Control As Object
         'Protected Property Presenter As Object

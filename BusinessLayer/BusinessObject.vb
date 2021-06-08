@@ -45,6 +45,7 @@ Public MustInherit Class BusinessObject
         For Each rule In _rules
             If Not rule.Validate(Me) Then
                 valid = False
+                rule.Valid = valid
                 _errors.Add(rule.Error)
             End If
         Next rule

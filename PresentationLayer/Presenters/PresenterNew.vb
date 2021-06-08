@@ -1153,26 +1153,19 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     End Function
 
     Protected Overridable Function IsBizDataValid() As Boolean
-        Dim retValue As Boolean = False
-        CallByName(View, "DataErrorsFound", CallType.Set, False)
+        Dim retValue As Boolean = True
         GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        If Not CallByName(View, "DataErrorsFound", CallType.Get) Then
-            If Model.IsValid(DataModel) Then
-                retValue = True
+        If Not Model.IsValid(DataModel) Then
+            retValue = False
+        End If
+        Dim rules = GetBizObjectRules()
+        For Each rule In rules
+            Dim control As Control = Nothing
+            If Not rule.Valid Then
+                MainFieldsDictionary.TryGetValue(rule.Property, control)
+                FormatError(control, rule.Error)
             End If
-        End If
-        If Not retValue Then
-            Dim lErrors = GetBizObjectErrors()
-            For Each _err In lErrors
-                For Each ctrl In MyErrorProvider.Controls
-                    If ctrl.errormessage = _err Then
-                        FormatError(ctrl, _err)
-                    End If
-                Next
-            Next
-            Beep()
-            ShowErrors("Record not saved!")
-        End If
+        Next
         Return retValue
     End Function
 
@@ -1545,7 +1538,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                     If TypeOf cCtrl Is CTextBox Then
                         If Not IsNumberValid(eventType.ViewControl, cCtrl) Then
                             validated = False
-                            Exit For
                         End If
                     End If
                 End If
@@ -1554,16 +1546,14 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                         If GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
                             If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
                                 validated = False
-                                Exit For
                             End If
                         Else
                             validated = False
-                            Exit For
                         End If
                     End If
                 End If
             Next
-            If validated AndAlso IsBizDataValid() Then
+            If IsBizDataValid() Then
                 If Not ValidateNumericValues(eventType.ViewControl) Then
                     validated = False
                 End If
@@ -1573,6 +1563,9 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End If
         If validated Then
             Save(eventType.ViewControl)
+        Else
+            Beep()
+            ShowErrors("Record not saved!")
         End If
     End Sub
 
@@ -1645,6 +1638,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     'End Sub
 
     Public Function IsNumberValid(ByRef viewControl As Control, ByRef obj As CTextBox)
+        Dim returnValue As Boolean = True
         Dim objName = Strings.Mid(obj.Name, 4)
         Dim targetValue = obj.Text
         Dim y As PropertyInfo = viewControl.GetType().GetProperty(objName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase)
@@ -1658,11 +1652,8 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                 Dim num As Double
                 Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
                 If Not isNumeric Then
-                    Dim err As String
-                    err = Messaging.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text})
-                    obj.Focus()
-                    FormatError(obj, err)
-                    Return False
+                    FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text}))
+                    returnValue = False
                 End If
                 Dim nMinValue As Double
                 Dim nMaxValue As Double
@@ -1675,9 +1666,8 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                     nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
                 End If
                 If num < nMinValue OrElse num > nMaxValue Then
-                    Messaging.ShowParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", nMinValue.ToString(), "highNumber", nMaxValue.ToString()})
-                    MessageBox.Show($"The entered value for " & obj.Name & $" must be between " & nMinValue.ToString() & " to " & nMaxValue.ToString())
-                    Return False
+                    Dim err As String = Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", nMinValue.ToString(), "highNumber", nMaxValue.ToString()})
+                    returnValue = False
                 End If
                 Dim isInteger As Boolean = False
                 If u Is Nothing Then
@@ -1691,19 +1681,17 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                 End If
                 If isInteger Then
                     If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
-                        Messaging.ShowParametrizedMessage(True, "MsgInvalidInteger", {"number", viewControl.Text, "controlName"})
-                        Return False
+                        FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidInteger", {"number", obj.Text, "controlName", controlName}))
+                        returnValue = False
                     End If
                 End If
                 If num < obj.MinimumValue OrElse num > obj.MaximumValue Then
-                    Messaging.ShowParametrizedMessage(True, "MsgNumericOverflow", {"number", viewControl.Text, "controlName", controlName, "lowNumber", obj.MinimumValue, "highNumber", obj.MaximumValue})
-                    Return False
+                    FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", obj.MinimumValue, "highNumber", obj.MaximumValue}))
+                    returnValue = False
                 End If
-                Return True
             End If
-        Else
-            Return True
         End If
+        Return returnValue
     End Function
 
     Private Function ValueIsUnique(cCtrl As Control) As Boolean
@@ -1757,7 +1745,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                     If thisControl.ValueIsNumeric Then
                         If Not IsNumberValid(sender, cCtrl) Then
                             validationsPassed = False
-                            Exit For
                         End If
                     End If
                 End If
