@@ -27,8 +27,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Implements ISubscriber(Of ViewButtonClicked),
                ISubscriber(Of FindFieldRequested),
                ISubscriber(Of EntryFormLoaded),
-               ISubscriber(Of SaveDataRequested),
-               ISubscriber(Of ValidateViewRequested)
+               ISubscriber(Of SaveDataRequested)
 
     Public ChildPresenters As New List(Of Object)
     Public ChildModels As New List(Of Object)
@@ -959,12 +958,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             End If
         End If
         If retVal < 0 Then
-            Dim lErrors = GetBizObjectErrors()
-            If GlobalVariables.EventAggregator IsNot Nothing And lErrors IsNot Nothing Then
-                GlobalVariables.EventAggregator.PublishEvent(New PassErrorList(lErrors))
-            End If
-            Beep()
-            ShowErrors("Record not saved!")
         Else
             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
             If AddMode Then
@@ -1170,14 +1163,37 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End If
         If Not retValue Then
             Dim lErrors = GetBizObjectErrors()
-            If Ea IsNot Nothing And lErrors IsNot Nothing Then
-                Ea.PublishEvent(New PassErrorList(lErrors))
-            End If
+            For Each _err In lErrors
+                For Each ctrl In MyErrorProvider.Controls
+                    If ctrl.errormessage = _err Then
+                        FormatError(ctrl, _err)
+                    End If
+                Next
+            Next
             Beep()
             ShowErrors("Record not saved!")
         End If
         Return retValue
     End Function
+
+    Private Sub FormatError(ctrl As Object, ctrlError As String)
+        If DirectCast(ctrl, System.Windows.Forms.Control).Dock = DockStyle.Fill Then
+            MyErrorProvider.SetIconPadding(ctrl, -18)
+        End If
+        If GlobalVariables.RightToLeftLayout Then
+            MyErrorProvider.SetIconAlignment(ctrl, ErrorIconAlignment.TopLeft)
+        Else
+            MyErrorProvider.SetIconAlignment(ctrl, ErrorIconAlignment.TopRight)
+        End If
+        Dim controlError As String
+        controlError = MyErrorProvider.GetError(ctrl)
+        If controlError Is Nothing OrElse controlError = "" Then
+            controlError = ctrlError
+        Else
+            controlError += Environment.NewLine & ctrlError
+        End If
+        MyErrorProvider.SetError(ctrl, controlError)
+    End Sub
 
     Protected Function TranslateField(Of TX)(fieldToTranslate As String, ByRef dModel As TX) As String
         Dim translatedField As String = fieldToTranslate
@@ -1441,7 +1457,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     '                ' check for duplicate values
     '                Dim thisControl As CTextBox = cCtrl
     '                If thisControl.ValueIsNumeric Then
-    '                    If Not ValidateNumber(cCtrl) Then
+    '                    If Not IsNumberValid(cCtrl) Then
     '                        validationsPassed = False
     '                    End If
     '                End If
@@ -1515,20 +1531,44 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
 
     Public Sub OnEventHandler(ByRef eventType As SaveDataRequested) Implements ISubscriber(Of SaveDataRequested).OnEventHandler
         ' Validate record first for errors before saving
-        Dim validated As Boolean = False
+        Dim validated As Boolean = True
         RaiseEvent BeforeValidate()
+        PreValidate()
+        MyErrorProvider.ClearAllErrorMessages()
         If EditMode AndAlso Not ChangesMade() Then
             Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
         Else
-            Dim validatingObject = New ValidateViewRequested(eventType.ViewControl)
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(validatingObject)
-                'Ea.PublishEvent(New ValidateViewRequested(eventType.ViewControl, validated))
-            End If
-            If validatingObject.ValidView AndAlso IsBizDataValid() Then
-                If ValidateNumericValues(eventType.ViewControl) Then
-                    validated = True
+            For Each item In MainFieldsDictionary
+                Dim cCtrl = item.Value
+                Dim fldName = item.Key
+                If CheckForNumericValue(cCtrl) Then
+                    If TypeOf cCtrl Is CTextBox Then
+                        If Not IsNumberValid(eventType.ViewControl, cCtrl) Then
+                            validated = False
+                            Exit For
+                        End If
+                    End If
                 End If
+                If CheckForUniqueness(cCtrl) Then
+                    If Not ValueIsUnique(cCtrl) Then
+                        If GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
+                            If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
+                                validated = False
+                                Exit For
+                            End If
+                        Else
+                            validated = False
+                            Exit For
+                        End If
+                    End If
+                End If
+            Next
+            If validated AndAlso IsBizDataValid() Then
+                If Not ValidateNumericValues(eventType.ViewControl) Then
+                    validated = False
+                End If
+            Else
+                validated = False
             End If
         End If
         If validated Then
@@ -1536,57 +1576,75 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End If
     End Sub
 
-    Public Sub OnEventHandler(ByRef eventType As ValidateViewRequested) Implements ISubscriber(Of ValidateViewRequested).OnEventHandler
-        Dim validationsPassed As Boolean
-        validationsPassed = True
-        Dim allControls As New List(Of Control)
-        Dim originalValue As String
-        Dim cForm As Control
-        cForm = eventType.ViewControl
-        For Each cCtrl As Control In FindControlRecursive(allControls, cForm)
-            If TypeOf cCtrl Is IEntryControl Then
-
-                If TypeOf cCtrl Is CTextBoxIdNo Then
-                    ' no validations for this type of control. These are Identity Columns and are filled automatically
-                    ' by the Data Server.
-                ElseIf TypeOf cCtrl Is CTextBox AndAlso GetPropertyValue(cCtrl, "ComputedValue") Then
-                    ' ignore this also computed values don't need to be validated for empty values
-                ElseIf TypeOf cCtrl Is CTextBoxArabic Then
-                    Dim thisControl As CTextBoxArabic
-                    thisControl = cCtrl
-                    If thisControl.EnglishControl Is Nothing Then
-                        MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{thisControl.Name}> not set.")
-                    End If
-                    originalValue = GetOriginalValue(thisControl.EnglishControl)
-                    Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
-                    If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
-                        thisControl.Text = englishText
-                    End If
-                ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
-                    ' check for duplicate values
-                    Dim thisControl As CTextBox = cCtrl
-                    If thisControl.ValueIsNumeric Then
-                        If Not ValidateNumber(eventType.ViewControl, cCtrl) Then
-                            validationsPassed = False
-                        End If
-                    End If
-                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
-                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
-                    End If
-                    If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
-                        If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
-                            validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
-                        End If
-                    End If
-                End If
-
+    Private Sub PreValidate()
+        For Each item In MainFieldsDictionary
+            If TypeOf item.Value Is CTextBoxArabic Then
+                UpdateArabicControl(item.Value)
             End If
         Next
-        'AutoValidationsPassed = validationsPassed
-        eventType.ValidView = validationsPassed
     End Sub
 
-    Public Function ValidateNumber(ByRef viewControl As Control, ByRef obj As CTextBox)
+    Private Sub UpdateArabicControl(cCtrl As CTextBoxArabic)
+        If cCtrl.EnglishControl Is Nothing Then
+            MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{cCtrl.Name}> not set.")
+        End If
+        Dim originalValue As String = GetOriginalValue(cCtrl.EnglishControl)
+        Dim englishText As String = GetPropertyValue(cCtrl.EnglishControl, "Text")
+        If cCtrl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
+            cCtrl.Text = englishText
+        End If
+    End Sub
+
+    'Public Sub OnEventHandler(ByRef eventType As ValidateViewRequested) Implements ISubscriber(Of ValidateViewRequested).OnEventHandler
+    '    Dim validationsPassed As Boolean
+    '    validationsPassed = True
+    '    Dim allControls As New List(Of Control)
+    '    Dim originalValue As String
+    '    Dim cForm As Control
+    '    cForm = eventType.ViewControl
+    '    For Each cCtrl As Control In FindControlRecursive(allControls, cForm)
+    '        If TypeOf cCtrl Is IEntryControl Then
+    '            If TypeOf cCtrl Is CTextBoxIdNo Then
+    '                ' no validations for this type of control. These are Identity Columns and are filled automatically
+    '                ' by the Data Server.
+    '            ElseIf TypeOf cCtrl Is CTextBox AndAlso GetPropertyValue(cCtrl, "ComputedValue") Then
+    '                ' ignore this also computed values don't need to be validated for empty values
+    '            ElseIf TypeOf cCtrl Is CTextBoxArabic Then
+    '                Dim thisControl As CTextBoxArabic
+    '                thisControl = cCtrl
+    '                If thisControl.EnglishControl Is Nothing Then
+    '                    MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{thisControl.Name}> not set.")
+    '                End If
+    '                originalValue = GetOriginalValue(thisControl.EnglishControl)
+    '                Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
+    '                If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
+    '                    thisControl.Text = englishText
+    '                End If
+    '            ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
+    '                ' check for duplicate values
+    '                Dim thisControl As CTextBox = cCtrl
+    '                If thisControl.ValueIsNumeric Then
+    '                    If Not IsNumberValid(eventType.ViewControl, cCtrl) Then
+    '                        validationsPassed = False
+    '                    End If
+    '                End If
+    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
+    '                    validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+    '                End If
+    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
+    '                    If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
+    '                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+    '                    End If
+    '                End If
+    '            End If
+
+    '        End If
+    '    Next
+    '    'AutoValidationsPassed = validationsPassed
+    '    eventType.ValidView = validationsPassed
+    'End Sub
+
+    Public Function IsNumberValid(ByRef viewControl As Control, ByRef obj As CTextBox)
         Dim objName = Strings.Mid(obj.Name, 4)
         Dim targetValue = obj.Text
         Dim y As PropertyInfo = viewControl.GetType().GetProperty(objName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase)
@@ -1600,8 +1658,10 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                 Dim num As Double
                 Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
                 If Not isNumeric Then
-                    Messaging.ShowParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text})
+                    Dim err As String
+                    err = Messaging.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text})
                     obj.Focus()
+                    FormatError(obj, err)
                     Return False
                 End If
                 Dim nMinValue As Double
@@ -1646,16 +1706,15 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End If
     End Function
 
-    Private Function ValueIsUnique(cCtrl As Control, validationsPassed As Boolean) As Boolean
-        Dim originalValue As String
+    Private Function ValueIsUnique(cCtrl As Control) As Boolean
         Dim fldName As String = cCtrl.Name.Substring(3)
-        Dim fieldDescription As String = ControlDescription(cCtrl)
         Dim recordIsNotUnique = False
         If AddMode Then
             If IsRecordNotUnique(cCtrl, fldName) Then
                 recordIsNotUnique = True
             End If
         Else
+            Dim originalValue As String
             originalValue = GetOriginalValue(cCtrl)
             ' if value did not change no need to check for duplicate values.
             If cCtrl.Text <> originalValue Then
@@ -1665,11 +1724,26 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             End If
         End If
         If recordIsNotUnique Then
-            Messaging.ShowParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldName", cCtrl.Text, "fieldDescription", fieldDescription})
-            validationsPassed = False
-            Return validationsPassed
+            Messaging.ShowParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldName", cCtrl.Text, "fieldDescription", ControlDescription(cCtrl)})
+            Return False
         End If
-        Return validationsPassed
+        Return True
+    End Function
+
+    Private Function CheckForUniqueness(cCtrl As Control) As Boolean
+        If GetPropertyValue(cCtrl, "ValueIsUnique") IsNot Nothing Then
+            If GetPropertyValue(cCtrl, "ValueIsUnique") Then
+                Return True
+            End If
+        End If
+        Return False
+    End Function
+
+    Private Function CheckForNumericValue(cCtrl As Control) As Boolean
+        If GetPropertyValue(cCtrl, "ValueIsNumeric") IsNot Nothing Then
+            Return True
+        End If
+        Return False
     End Function
 
     Public Function ValidateNumericValues(sender As Control)
@@ -1681,7 +1755,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
                 If TypeOf cCtrl Is CTextBox Then
                     Dim thisControl As CTextBox = cCtrl
                     If thisControl.ValueIsNumeric Then
-                        If Not ValidateNumber(sender, cCtrl) Then
+                        If Not IsNumberValid(sender, cCtrl) Then
                             validationsPassed = False
                             Exit For
                         End If

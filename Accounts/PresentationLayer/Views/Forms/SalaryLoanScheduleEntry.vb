@@ -80,6 +80,17 @@ Namespace PresentationLayer.Views.Forms
 
         Public Overloads Property Errors As List(Of String) Implements IViewNew.Errors
 
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"Amount", SalaryLoanScheduleView.txtAmount},
+                {"EmployeeIdNo", SalaryLoanScheduleView.cboEmployeeIdNo},
+                {"IdNo", SalaryLoanScheduleView.TxtIdNo},
+                {"PeriodicPayment", SalaryLoanScheduleView.txtPeriodicPayment},
+                {"StartDate", SalaryLoanScheduleView.dtpStartDate}
+                }
+        End Sub
+
     End Class
 
 End Namespace
