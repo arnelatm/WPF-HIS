@@ -635,7 +635,7 @@ Public Class CFormEntryNew
 
     Public Property HideNavigatorButtons As Boolean
     Public Property IgnoreTextBoxNumParserMessage As Boolean
-    Public Property DataErrorsFound As Boolean
+    'Public Property DataErrorsFound As Boolean
 
     Protected Function TextBoxNumParser(Of T As Structure)(ByRef control As CTextBox) As T
         Dim retValue As T
@@ -650,10 +650,10 @@ Public Class CFormEntryNew
                 Else
                     description = control.Name
                 End If
-                Messaging.ShowParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", description})
+                'Messaging.ShowParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", description})
             End If
             retValue = Parser(Of T).Parser("0")
-            DataErrorsFound = True
+            'DataErrorsFound = True
         End Try
         Return retValue
     End Function
