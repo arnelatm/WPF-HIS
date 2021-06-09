@@ -58,6 +58,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Private _undoMode As Boolean = False
     Private _tableName As String
     Private _ea As EventAggregator
+    Private _dataErrors As String = ""
 
     Public Sub New(itemView As T)
         If itemView Is Nothing Then
@@ -1186,6 +1187,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             controlError += Environment.NewLine & ctrlError
         End If
         MyErrorProvider.SetError(ctrl, controlError)
+        _dataErrors += Environment.NewLine + ctrlError
     End Sub
 
     Protected Function TranslateField(Of TX)(fieldToTranslate As String, ByRef dModel As TX) As String
@@ -1528,31 +1530,11 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         RaiseEvent BeforeValidate()
         PreValidate()
         MyErrorProvider.ClearAllErrorMessages()
+        _dataErrors = ""
         If EditMode AndAlso Not ChangesMade() Then
             Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
         Else
-            For Each item In MainFieldsDictionary
-                Dim cCtrl = item.Value
-                Dim fldName = item.Key
-                If CheckForNumericValue(cCtrl) Then
-                    If TypeOf cCtrl Is CTextBox Then
-                        If Not IsNumberValid(eventType.ViewControl, cCtrl) Then
-                            validated = False
-                        End If
-                    End If
-                End If
-                If CheckForUniqueness(cCtrl) Then
-                    If Not ValueIsUnique(cCtrl) Then
-                        If GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
-                            If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
-                                validated = False
-                            End If
-                        Else
-                            validated = False
-                        End If
-                    End If
-                End If
-            Next
+            validated = CheckForDataErrors(eventType)
             If Not IsBizDataValid() Then
                 validated = False
             End If
@@ -1561,9 +1543,38 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             Save(eventType.ViewControl)
         Else
             Beep()
-            ShowErrors("Record not saved!")
+            Messaging.MessageKey = "ValidationErrors"
+            Messaging.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            'ShowErrors("Record not saved!" & Environment.NewLine & _dataErrors)
         End If
     End Sub
+
+    Private Function CheckForDataErrors(eventType As SaveDataRequested) As Boolean
+        Dim validated As Boolean = True
+        For Each item In MainFieldsDictionary
+            Dim cCtrl = item.Value
+            Dim fldName = item.Key
+            If CheckForNumericValue(cCtrl) Then
+                If TypeOf cCtrl Is CTextBox Then
+                    If Not IsNumberValid(eventType.ViewControl, cCtrl) Then
+                        validated = False
+                    End If
+                End If
+            End If
+            If CheckForUniqueness(cCtrl) Then
+                If Not ValueIsUnique(cCtrl) Then
+                    If GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
+                        If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
+                            validated = False
+                        End If
+                    Else
+                        validated = False
+                    End If
+                End If
+            End If
+        Next
+        Return validated
+    End Function
 
     Private Sub PreValidate()
         For Each item In MainFieldsDictionary
