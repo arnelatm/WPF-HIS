@@ -80,6 +80,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemCaptions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCaptionsBatchEdit = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCreateAllMessages = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemTransactionJournalCodes = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayroll = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayElement = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemLeaves = New System.Windows.Forms.ToolStripMenuItem()
@@ -174,7 +175,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemTransactionJournalCodes = New System.Windows.Forms.ToolStripMenuItem()
+            Me.SalaryLoanScheduleTvToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -464,6 +465,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemCreateAllMessages.Name = "ToolStripMenuItemCreateAllMessages"
             resources.ApplyResources(Me.ToolStripMenuItemCreateAllMessages, "ToolStripMenuItemCreateAllMessages")
             '
+            'ToolStripMenuItemTransactionJournalCodes
+            '
+            Me.ToolStripMenuItemTransactionJournalCodes.Name = "ToolStripMenuItemTransactionJournalCodes"
+            resources.ApplyResources(Me.ToolStripMenuItemTransactionJournalCodes, "ToolStripMenuItemTransactionJournalCodes")
+            '
             'ToolStripMenuItemPayroll
             '
             Me.ToolStripMenuItemPayroll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayElement, Me.ToolStripMenuItemLeaves, Me.ToolStripMenuItemPayGroups, Me.ToolStripMenuItemPayCycles, Me.ToolStripMenuItemPayrolls, Me.ToolStripMenuItemPensionProviders, Me.ToolStripMenuItemPensionSchemes})
@@ -578,7 +584,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPayrollMenu
             '
-            Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.SalaryLoanScheduleToolStripMenuItem})
+            Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.SalaryLoanScheduleToolStripMenuItem, Me.SalaryLoanScheduleTvToolStripMenuItem})
             Me.ToolStripMenuItemPayrollMenu.Name = "ToolStripMenuItemPayrollMenu"
             resources.ApplyResources(Me.ToolStripMenuItemPayrollMenu, "ToolStripMenuItemPayrollMenu")
             '
@@ -952,10 +958,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemTransactionJournalCodes
+            'SalaryLoanScheduleTvToolStripMenuItem
             '
-            Me.ToolStripMenuItemTransactionJournalCodes.Name = "ToolStripMenuItemTransactionJournalCodes"
-            resources.ApplyResources(Me.ToolStripMenuItemTransactionJournalCodes, "ToolStripMenuItemTransactionJournalCodes")
+            Me.SalaryLoanScheduleTvToolStripMenuItem.Name = "SalaryLoanScheduleTvToolStripMenuItem"
+            resources.ApplyResources(Me.SalaryLoanScheduleTvToolStripMenuItem, "SalaryLoanScheduleTvToolStripMenuItem")
             '
             'Main
             '
@@ -1128,5 +1134,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemAccountActivity As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemJournalTransactionSummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTransactionJournalCodes As ToolStripMenuItem
+        Friend WithEvents SalaryLoanScheduleTvToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace
