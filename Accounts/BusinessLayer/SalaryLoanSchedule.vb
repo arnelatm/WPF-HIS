@@ -1,6 +1,8 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.BusinessLayer.BusinessRules
+Imports AATM.Libraries
+Imports AATM.Libraries.ClassesLibrary
 
 Namespace BusinessLayer
 
@@ -27,6 +29,7 @@ Namespace BusinessLayer
         Public Property IdNo As Int32
         Public Property PeriodicPayment As Decimal
         Public Property StartDate As Date?
+
     End Class
 
 End Namespace

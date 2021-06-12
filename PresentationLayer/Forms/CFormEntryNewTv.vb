@@ -2,6 +2,7 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
+Imports AATM.PresentationLayer.Presenters
 
 Public Class CFormEntryNewTv
 
@@ -19,7 +20,9 @@ Public Class CFormEntryNewTv
 
     End Sub
 
-    Public Sub DisplayTree(ByRef treeViewData As Object)
+    Public Property TreeViewData As Object
+
+    Public Sub DisplayTree()
         Dim root As TreeNode = TreeViewTableName.Nodes(0)
         root.Nodes.Clear()
         ' create the tree
@@ -30,11 +33,11 @@ Public Class CFormEntryNewTv
         End If
         TreeViewTableName.RightToLeft = RightToLeft.Inherit
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
-            For Each dataNode In treeViewData
+            For Each dataNode In TreeViewData
                 AddRecordToTree(dataNode)
             Next
         Else
-            For Each dataNode In treeViewData
+            For Each dataNode In TreeViewData
                 AddRecordToTreeHierarchical(dataNode, True)
             Next
         End If
@@ -108,8 +111,12 @@ Public Class CFormEntryNewTv
     End Sub
 
     Public Sub DisplayTreeViewData()
-        Dim treeViewData = PresenterObj.GetTreeViewData()
-        DisplayTree(treeViewData)
+        Dim tvd As New TreeViewDisplay(TreeViewData)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(Of TreeViewDisplay)(tvd)
+        End If
+        TreeViewData = tvd.TreeViewData
+        DisplayTree()
         TreeViewTableName.ExpandAll()
         GotoRecordInTreeView()
     End Sub

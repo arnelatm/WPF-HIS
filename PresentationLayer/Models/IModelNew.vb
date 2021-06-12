@@ -60,7 +60,7 @@ Public Interface IModelNew
 
     Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
 
-    Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
+    Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
 
     Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
 

@@ -199,7 +199,7 @@ Public Class ModelNew
         End If
     End Function
 
-    Public Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object Implements IModelNew.GetLookupRecords
+    Public Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData) Implements IModelNew.GetLookupRecords
         Dim data = Service.GetRecords(tableName, sortKey, fields, filter)
         Dim tlData = New List(Of ClassesLibrary.LookupData)
         If fields.Count = 3 Then

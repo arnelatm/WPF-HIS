@@ -27,7 +27,8 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Implements ISubscriber(Of ViewButtonClicked),
                ISubscriber(Of FindFieldRequested),
                ISubscriber(Of EntryFormLoaded),
-               ISubscriber(Of SaveDataRequested)
+               ISubscriber(Of SaveDataRequested),
+               ISubscriber(Of GetDataSources)
 
     Public ChildPresenters As New List(Of Object)
     Public ChildModels As New List(Of Object)
@@ -57,7 +58,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Private _recordCount As Int32 = 0
     Private _undoMode As Boolean = False
     Private _tableName As String
-    Private _ea As EventAggregator
+    Protected _ea As EventAggregator
     Private _dataErrors As String = ""
 
     Public Sub New(itemView As T)
@@ -194,8 +195,8 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     Public Property LastIdNo As Int32
 
     ' This is the model of the Inheriting Presenter
-    ' when refferred to in this module this will be the current model
-    ' while if reffered in the Inheriting Presenter it will be the
+    ' when referred to in this module this will be the current model
+    ' while if refered in the Inheriting Presenter it will be the
     ' model assigned to that presenter.
     Public Property ModelOfPresenter
         Get
@@ -513,13 +514,13 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         End Try
     End Function
 
-    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing)
+    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
         ComposeLookupParameters(listName)
         ProcessLookupFields()
         Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
     End Function
 
-    Public Overloads Function GetLookup(LookupTableToGet As String, LookUpSortExpression As String, LookupFieldsToShow As String(), Optional filter As String = Nothing)
+    Public Overloads Function GetLookup(LookupTableToGet As String, LookUpSortExpression As String, LookupFieldsToShow As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
         Dim dFieldName As String
         If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
             If Model.FieldExistInTable(LookupTableToGet, LookUpSortExpression.Trim() + "Ara") Then
@@ -652,26 +653,6 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         Return cText
     End Function
 
-    Public Function GetTreeViewData()
-        Dim cModel As New TM
-        Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
-        Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
-        If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
-            If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
-            Else
-                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
-            End If
-        Else
-            newSortOrderKey = "SortKey"
-            If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
-            Else
-                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
-            End If
-        End If
-    End Function
-
     Public Function GetRecords(ByVal tableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
         Return Model.GetRecords(tableName, sortOrder, fieldNames, filter)
     End Function
@@ -796,54 +777,54 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
         CallByName(View, "CancelClose", CallType.Set, False)
     End Sub
 
-    Protected Overridable Sub GoSaveRecord(ByRef viewControl As Control)
-        Dim continueSave As Boolean = True
-        Dim addAnother As Boolean = False
-        If AskBeforeSave Then
-            If Not MessageBeforeSave() Then
-                continueSave = False
-            End If
-        End If
-        If continueSave Then
-            Dim retVal As Integer
-            retVal = Save(viewControl)
-            If retVal > 0 Then
-                SaveSuccessful = True
-                Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
-                If Not QuitOnSave Then
-                    If AddMode Then
-                        If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
-                                      "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-                                      MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                            addAnother = True
-                        End If
-                        Dim idNo = CallByName(View, IdFieldName, CallType.Get)
-                        RecordPositionNumber = GetSortedRecordPosition(idNo)
-                    Else
-                        RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
-                    End If
-                    If AddMode Then
-                        AddMode = False
-                    Else
-                        EditMode = False
-                    End If
-                    If addAnother Then
-                        GoAddRecord()
-                    End If
-                End If
-            Else
-                SaveSuccessful = False
-            End If
-            If SaveSuccessful Then
-                If addAnother Then
-                    AddMode = True
-                Else
-                    EditMode = False
-                    AddMode = False
-                End If
-            End If
-        End If
-    End Sub
+    'Protected Overridable Sub GoSaveRecord(ByRef viewControl As Control)
+    '    Dim continueSave As Boolean = True
+    '    Dim addAnother As Boolean = False
+    '    If AskBeforeSave Then
+    '        If Not MessageBeforeSave() Then
+    '            continueSave = False
+    '        End If
+    '    End If
+    '    If continueSave Then
+    '        Dim retVal As Integer
+    '        retVal = Save(viewControl)
+    '        If retVal > 0 Then
+    '            SaveSuccessful = True
+    '            Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+    '            If Not QuitOnSave Then
+    '                If AddMode Then
+    '                    If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
+    '                                  "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+    '                                  MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+    '                        addAnother = True
+    '                    End If
+    '                    Dim idNo = CallByName(View, IdFieldName, CallType.Get)
+    '                    RecordPositionNumber = GetSortedRecordPosition(idNo)
+    '                Else
+    '                    RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
+    '                End If
+    '                If AddMode Then
+    '                    AddMode = False
+    '                Else
+    '                    EditMode = False
+    '                End If
+    '                If addAnother Then
+    '                    GoAddRecord()
+    '                End If
+    '            End If
+    '        Else
+    '            SaveSuccessful = False
+    '        End If
+    '        If SaveSuccessful Then
+    '            If addAnother Then
+    '                AddMode = True
+    '            Else
+    '                EditMode = False
+    '                AddMode = False
+    '            End If
+    '        End If
+    '    End If
+    'End Sub
 
     Public Overridable Function MessageBeforeSave() As Boolean
         Dim retVal As Boolean = False
@@ -878,6 +859,7 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
             RecordPositionNumber = RecordPositionNumber
             EditMode = False
         End If
+        MyErrorProvider.ClearAllErrorMessages()
     End Sub
 
     Public Overridable Function IsOkToEditRecord() As Boolean
@@ -2060,6 +2042,12 @@ Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
     '    DoPaintEvents()
     'End Sub
 
+    Public Sub OnGetDataSourcesHandler(ByRef eventType As GetDataSources) Implements ISubscriber(Of GetDataSources).OnEventHandler
+        Dim data As List(Of ClassesLibrary.LookupData)
+        data = GetLookup(eventType.TableName)
+        CallByName(eventType.Control, "DataSource", CallType.Set, data)
+    End Sub
+
 End Class
 
 Public Class ViewButtonClicked
@@ -2069,6 +2057,18 @@ Public Class ViewButtonClicked
     End Sub
 
     Public Property SelectedButton As ButtonClicked
+
+End Class
+
+Public Class GetDataSources
+
+    Public Sub New(ByVal tableName As String, ByRef control As Control)
+        Me.TableName = tableName
+        Me.Control = control
+    End Sub
+
+    Public Property TableName As String
+    Public Property Control As Control
 
 End Class
 

@@ -2,6 +2,7 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries
 
 Namespace DataLayer.AdoNet
     ' Data access object for SalaryLoanSchedule
@@ -61,6 +62,10 @@ Namespace DataLayer.AdoNet
             .StartDate = Extensions.AsDate(reader("StartDate")),
             .PeriodicPayment = Extensions.AsDecimal(reader("PeriodicPayment"))
             }
+
+        Public Sub New()
+
+        End Sub
 
         Private Function Take(SalaryLoanSchedule As SalaryLoanSchedule) As Object()
             Return New Object() {

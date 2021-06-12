@@ -73,6 +73,7 @@
     <Compile Include="ISaltView.vb" />
     <Compile Include="IViewNew.vb" />
     <Compile Include="IView.vb" />
+    <Compile Include="IViewTv.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
