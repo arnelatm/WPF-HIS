@@ -504,7 +504,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing)
+    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
         ComposeLookupParameters(listName)
         ProcessLookupFields()
         Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)

@@ -76,7 +76,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Overloads Property Errors As List(Of String) Implements IViewNew.Errors
+        Private Property IViewNew_Errors As List(Of String) Implements IViewNew.Errors
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As List(Of String))
+                Throw New NotImplementedException()
+            End Set
+        End Property
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From

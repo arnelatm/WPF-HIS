@@ -88,6 +88,12 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New GetDataSources("Employee", SalaryLoanScheduleView.cboEmployeeIdNo))
+            End If
+        End Sub
+
     End Class
 
 End Namespace

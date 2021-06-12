@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.Interfaces
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
@@ -18,24 +19,33 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New SalaryLoanScheduleModel()
             DataModel = New SalaryLoanScheduleModel()
-            TreeViewList = New List(Of SalaryLoanScheduleModel)
+            'TreeViewList = New List(Of SalaryLoanScheduleModel)
             QuitOnSave = False
+
         End Sub
 
-        Public Function GetBranchList(Optional ByVal sortKey As String = "") As List(Of SalaryLoanScheduleModel)
-            Dim xModel As New SalaryLoanScheduleModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of SalaryLoanScheduleModel)(sortKey, xModel)
-            Dim modelData = Model.GetAll(Of SalaryLoanScheduleModel)(newSortOrderKey)
-            If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
-                TreeViewList.Clear()
-            End If
-            For Each modData In modelData
-                Dim modelTb As New SalaryLoanScheduleModel
-                GlobalVariables.Mapper.Map(modData, modelTb)
-                TreeViewList.Add(modelTb)
-            Next
-            Return TreeViewList
-        End Function
+        'Public Sub OnAfterRecordRetrieval(modelData) Handles MyBase.AfterRecordRetrieval
+        '    If CallByName(View, "Employees", CallType.Get) Is Nothing Then
+        '        Dim employees As List(Of ClassesLibrary.LookupData)
+        '        employees = GetLookup("Employee")
+        '        CallByName(View, "Employees", CallType.Set, employees)
+        '    End If
+        'End Sub
+
+        'Public Function GetBranchList(Optional ByVal sortKey As String = "") As List(Of SalaryLoanScheduleModel)
+        '    Dim xModel As New SalaryLoanScheduleModel
+        '    Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of SalaryLoanScheduleModel)(sortKey, xModel)
+        '    Dim modelData = Model.GetAll(Of SalaryLoanScheduleModel)(newSortOrderKey)
+        '    If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
+        '        TreeViewList.Clear()
+        '    End If
+        '    For Each modData In modelData
+        '        Dim modelTb As New SalaryLoanScheduleModel
+        '        GlobalVariables.Mapper.Map(modData, modelTb)
+        '        TreeViewList.Add(modelTb)
+        '    Next
+        '    Return TreeViewList
+        'End Function
 
     End Class
 
