@@ -144,10 +144,10 @@
     <Compile Include="CFormEntryNew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CFormEntryNewTv.Designer.vb">
-      <DependentUpon>CFormEntryNewTv.vb</DependentUpon>
+    <Compile Include="CFormEntryTvNew.Designer.vb">
+      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
     </Compile>
-    <Compile Include="CFormEntryNewTv.vb">
+    <Compile Include="CFormEntryTvNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CFormEntryTv.Designer.vb">
@@ -230,8 +230,8 @@
     <EmbeddedResource Include="CFormEntryNew.resx">
       <DependentUpon>CFormEntryNew.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CFormEntryNewTv.resx">
-      <DependentUpon>CFormEntryNewTv.vb</DependentUpon>
+    <EmbeddedResource Include="CFormEntryTvNew.resx">
+      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntryTv.resx">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>

@@ -1,7 +1,7 @@
 ﻿Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class SalaryLoanScheduleEntryTv
-        Inherits AATM.PresentationLayer.Forms.CFormEntryNewTv
+        Inherits AATM.PresentationLayer.Forms.CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>

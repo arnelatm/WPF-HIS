@@ -195,4 +195,8 @@ Public Module GlobalSubs
 
 #End Region
 
+    Public Sub Gobble(dummy As Object)
+        ' dummy sub to instantiate an object without assigning to a variable
+    End Sub
+
 End Module

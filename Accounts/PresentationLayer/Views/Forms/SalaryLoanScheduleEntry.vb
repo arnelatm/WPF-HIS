@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views.Forms
             _presenter = New SalaryLoanSchedulePresenter(Me)
         End Sub
 
+#Region "Fields"
         Public Property Amount As Decimal Implements ISalaryLoanScheduleView.Amount
             Get
                 Return NumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount.Text)
@@ -71,8 +72,7 @@ Namespace PresentationLayer.Views.Forms
                 SalaryLoanScheduleView.dtpStartDate.Value = Value
             End Set
         End Property
-
-        Public Overloads Property Errors As List(Of String) Implements IView.Errors
+#End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
