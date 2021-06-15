@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class CFormEntryNewTv
+Partial Class CFormEntryTvNew
     Inherits CFormEntryNew
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class CFormEntryNewTv
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFormEntryNewTv))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFormEntryTvNew))
         Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("TableName")
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TreeViewTableName = New AATM.Libraries.CBaseControlsLibrary.CTreeView()

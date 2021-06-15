@@ -4,7 +4,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Presenters
 
-Public Class CFormEntryNewTv
+Public Class CFormEntryTvNew
 
     Protected TvMainFieldName As String
     Protected TvSecondaryFieldName As String
@@ -111,11 +111,11 @@ Public Class CFormEntryNewTv
     End Sub
 
     Public Sub DisplayTreeViewData()
-        Dim tvd As New TreeViewDisplay(TreeViewData)
+        'Dim tvd As New TreeViewDisplay(TreeViewData)
         If Ea IsNot Nothing Then
-            Ea.PublishEvent(Of TreeViewDisplay)(tvd)
+            Ea.PublishEvent(Of TreeViewDisplay)(TreeViewData)
         End If
-        TreeViewData = tvd.TreeViewData
+        'TreeViewData = tvd.TreeViewData
         DisplayTree()
         TreeViewTableName.ExpandAll()
         GotoRecordInTreeView()

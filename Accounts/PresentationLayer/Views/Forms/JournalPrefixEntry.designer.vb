@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class JournalPrefixEntry
-        Inherits CFormEntryNew
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -29,6 +29,7 @@ Namespace PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(JournalPrefixEntry))
             Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+            Me.TreeView = New AATM.Libraries.CBaseControlsLibrary.CTreeView()
             Me.CTreeView1 = New AATM.Libraries.CBaseControlsLibrary.CTreeView()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -41,7 +42,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblJournalNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.TreeView = New AATM.Libraries.CBaseControlsLibrary.CTreeView()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -74,6 +74,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent
             Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
+            '
+            'TreeView
+            '
+            resources.ApplyResources(Me.TreeView, "TreeView")
+            Me.TreeView.Name = "TreeView"
             '
             'CTreeView1
             '
@@ -272,11 +277,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalNameAra.ReadOnly = True
             Me.txtJournalNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtJournalNameAra.Translatable = False
-            '
-            'TreeView
-            '
-            resources.ApplyResources(Me.TreeView, "TreeView")
-            Me.TreeView.Name = "TreeView"
             '
             'JournalPrefixEntry
             '

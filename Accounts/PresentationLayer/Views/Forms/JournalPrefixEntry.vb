@@ -19,6 +19,8 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            TvMainFieldName = "BankName"
+            TvSecondaryFieldName = "BankCode"
             MainTableName = "JournalPrefix"
             SortOrderKey = "JournalName"
             _nfi = GlobalVariables.DefaultNumberFormatInfo
