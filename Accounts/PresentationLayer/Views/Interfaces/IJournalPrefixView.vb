@@ -3,7 +3,7 @@
 Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IJournalPrefixView
-        Inherits IViewNew
+        Inherits IView
         Property JournalCode As String
         Property JournalName As String
         Property IdNo As Int16

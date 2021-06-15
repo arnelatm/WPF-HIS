@@ -9,7 +9,7 @@ Namespace PresentationLayer.Presenters
     Public Class JournalPrefixPresenter
         Inherits PresenterNew(Of IJournalPrefixView, JournalPrefixModel)
 
-        Public Sub New(view As IViewNew)
+        Public Sub New(view As IJournalPrefixView)
             MyBase.New(view)
             ModelOfPresenter = New ModelAccounts("JournalPrefix")
             TableName = "JournalPrefix"

@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views.Forms
             _presenter = New JournalPrefixPresenter(Me)
         End Sub
 
+#Region "Fields"
         Public Property JournalCode As String Implements IJournalPrefixView.JournalCode
             Get
                 Return txtJournalCode.Text
@@ -69,8 +70,18 @@ Namespace PresentationLayer.Views.Forms
                 txtJournalName.Text = Value
             End Set
         End Property
+#End Region
 
-        Public Overloads Property Errors As List(Of String) Implements IViewNew.Errors
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"IdNo", txtIdNo},
+                {"JournalCode", txtJournalCode},
+                {"JournalCodeAra", txtJournalCodeAra},
+                {"JournalName", txtJournalNameAra},
+                {"JournalNameAra", txtJournalNameAra}
+                }
+        End Sub
 
     End Class
 
