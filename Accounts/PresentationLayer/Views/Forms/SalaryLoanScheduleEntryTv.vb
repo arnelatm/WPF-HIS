@@ -76,7 +76,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private Property IViewNew_Errors As List(Of String) Implements IViewNew.Errors
+        Private Property IViewNew_Errors As List(Of String) Implements IView.Errors
             Get
                 Throw New NotImplementedException()
             End Get

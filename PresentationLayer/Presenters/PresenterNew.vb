@@ -23,7 +23,7 @@ Imports KellermanSoftware.CompareNetObjects
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
 ''' <typeparam name="T">Type of itemView.</typeparam>
-Public MustInherit Class PresenterNew(Of T As IViewNew, TM As New)
+Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Implements ISubscriber(Of ViewButtonClicked),
                ISubscriber(Of FindFieldRequested),
                ISubscriber(Of EntryFormLoaded),

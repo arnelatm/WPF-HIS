@@ -21,24 +21,9 @@ Namespace PresentationLayer.Presenters
         Public Overrides Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
             TableName = objectName
             SortOrderKey = objectName + "Name"
-            'If objectName Is Nothing Then
-            '    ModelOfPresenter = New ModelAccounts(objectName)
-            'Else
             ModelOfPresenter = New ModelAccounts(objectName, bizParams, daoParams)
-            'Dim t As Type = Type.GetType(presenterModelName)
-            'If tableOrViewName Is Nothing Then
-            '    ModelOfPresenter = Activator.CreateInstance(t)
-            'Else
-            '    'Dim args As Object() = {baseClassName}
-            '    'Dim t As Type = Type.GetType(presenterModelName)
-            '    ModelOfPresenter = Activator.CreateInstance(t, tableOrViewName)
-            'End If
             OriginalModel = New TM
             DataModel = New TM
-            'End If
-            'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Model." + baseClassName + "Model"
-            'OriginalModel = Activator.CreateInstance(Type.GetType(presenterModelName))
-            'DataModel = Activator.CreateInstance(Type.GetType(presenterModelName))
         End Sub
 
         Public Overrides Sub InitializerWithTv(baseClassName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)

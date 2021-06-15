@@ -13,8 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Implements ISalaryLoanScheduleView
 
         Private ReadOnly _nfi As NumberFormatInfo
-        Private _presenter As ISalaryLoanSchedulePresenter
-        'Private ReadOnly _ea As New EventAggregator
+        Private _presenter
 
         Public Sub New()
             MyBase.New()
@@ -29,8 +28,6 @@ Namespace PresentationLayer.Views.Forms
         Public Property Amount As Decimal Implements ISalaryLoanScheduleView.Amount
             Get
                 Return NumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount.Text)
-                'Return TextBoxNumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount)
-                'Return Convert.ToDecimal(NumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount.Text))
             End Get
             Set
                 SalaryLoanScheduleView.txtAmount.Text = Value
@@ -75,7 +72,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Overloads Property Errors As List(Of String) Implements IViewNew.Errors
+        Public Overloads Property Errors As List(Of String) Implements IView.Errors
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From

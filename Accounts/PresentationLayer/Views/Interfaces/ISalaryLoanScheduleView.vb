@@ -3,7 +3,7 @@
 Namespace PresentationLayer.Views.Interfaces
 
     Public Interface ISalaryLoanScheduleView
-        Inherits IViewNew
+        Inherits IView
 
         Property Amount As Decimal
         Property DateCreated As DateTime?

@@ -1,5 +1,5 @@
 ﻿Public Interface IViewTv
-    Inherits IViewNew
+    Inherits IView
 
     Property TreeViewRecords As Object
 
