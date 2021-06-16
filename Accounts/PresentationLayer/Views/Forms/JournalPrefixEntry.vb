@@ -2,6 +2,7 @@
 Imports AATM.Accounts.Interfaces
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
@@ -24,10 +25,12 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = "JournalPrefix"
             SortOrderKey = "JournalName"
             _nfi = GlobalVariables.DefaultNumberFormatInfo
+            Ea = New EventAggregator()
             _presenter = New JournalPrefixPresenter(Me)
         End Sub
 
 #Region "Fields"
+
         Public Property JournalCode As String Implements IJournalPrefixView.JournalCode
             Get
                 Return txtJournalCode.Text
@@ -48,10 +51,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int16 Implements IJournalPrefixView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int16)(TxtIdNo.Text)
+                Return GlobalFunctions.NumParser(Of Int16)(txtIdNo.Text)
             End Get
             Set
-                TxtIdNo.Text = Convert.ToString(Value)
+                txtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -72,6 +75,7 @@ Namespace PresentationLayer.Views.Forms
                 txtJournalName.Text = Value
             End Set
         End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()

@@ -43,12 +43,6 @@
             Me.floFields.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TreeViewTableName
-            '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.TreeViewTableName.Size = New System.Drawing.Size(301, 191)
-            '
             'SplitContainer1
             '
             '

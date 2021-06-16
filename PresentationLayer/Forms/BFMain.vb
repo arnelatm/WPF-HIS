@@ -154,7 +154,8 @@ Public Class BfMain
                TypeOf ctrl Is CDataGridView OrElse
                TypeOf ctrl Is CGroupBox OrElse
                TypeOf ctrl Is CTabControl OrElse
-               TypeOf ctrl Is CTreeView OrElse
+               TypeOf ctrl Is CTreeViewOld OrElse
+               TypeOf ctrl Is TreeView OrElse
                TypeOf ctrl Is MenuStrip OrElse
                TypeOf ctrl Is ToolStrip OrElse
                TypeOf ctrl Is Label OrElse
@@ -333,7 +334,7 @@ Public Class BfMain
                         TranslateMenuStripItems(menuStrip.Items, subMenuName)
                     ElseIf TypeOf cCtrl Is ToolStrip Then
                         TranslateToolStripItems(cCtrl)
-                    ElseIf TypeOf cCtrl Is CTreeView Or TypeOf cCtrl Is TreeView Then
+                    ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
                         Dim cT = CType(cCtrl, TreeView)
                         cT.ExpandAll()
                         cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout

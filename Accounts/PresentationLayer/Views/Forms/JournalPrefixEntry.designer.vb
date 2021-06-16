@@ -28,9 +28,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(JournalPrefixEntry))
-            Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-            Me.TreeView = New AATM.Libraries.CBaseControlsLibrary.CTreeView()
-            Me.CTreeView1 = New AATM.Libraries.CBaseControlsLibrary.CTreeView()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -42,48 +39,21 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblJournalNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
             Me.SplitContainer1.SuspendLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TranslatorDAC
-            '
-            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-            '
-            'AppDataDAC
-            '
-            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-            '
             'SplitContainer1
             '
-            Me.SplitContainer1.BackColor = System.Drawing.Color.Transparent
-            Me.SplitContainer1.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
-            Me.SplitContainer1.Name = "SplitContainer1"
-            '
-            'SplitContainer1.Panel1
-            '
-            Me.SplitContainer1.Panel1.Controls.Add(Me.TreeView)
-            Me.SplitContainer1.Panel1.Controls.Add(Me.CTreeView1)
             '
             'SplitContainer1.Panel2
             '
-            Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent
             Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
-            '
-            'TreeView
-            '
-            resources.ApplyResources(Me.TreeView, "TreeView")
-            Me.TreeView.Name = "TreeView"
-            '
-            'CTreeView1
-            '
-            resources.ApplyResources(Me.CTreeView1, "CTreeView1")
-            Me.CTreeView1.Name = "CTreeView1"
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
             '
             'CFlowLayout1
             '
@@ -232,6 +202,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalName.FieldName = Nothing
             Me.txtJournalName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtJournalName.FindEnabled = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtJournalName, True)
             resources.ApplyResources(Me.txtJournalName, "txtJournalName")
             Me.txtJournalName.ForeColor = System.Drawing.Color.Black
             Me.txtJournalName.LinkedLabel = Nothing
@@ -281,14 +252,12 @@ Namespace PresentationLayer.Views.Forms
             'JournalPrefixEntry
             '
             resources.ApplyResources(Me, "$this")
-            Me.Controls.Add(Me.SplitContainer1)
             Me.Name = "JournalPrefixEntry"
-            Me.Controls.SetChildIndex(Me.SplitContainer1, 0)
-            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.SplitContainer1.Panel1.ResumeLayout(False)
             Me.SplitContainer1.Panel2.ResumeLayout(False)
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout1.ResumeLayout(False)
             Me.CFlowLayout1.PerformLayout()
             Me.ResumeLayout(False)
@@ -296,8 +265,6 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Friend WithEvents SplitContainer1 As SplitContainer
-        Friend WithEvents CTreeView1 As CTreeView
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents txtIdNo As CTextBox
@@ -309,6 +276,5 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtJournalName As CTextBox
         Friend WithEvents lblJournalNameAra As CLabel
         Friend WithEvents txtJournalNameAra As CTextBoxArabic
-        Friend WithEvents TreeView As CTreeView
     End Class
 End Namespace

@@ -20,18 +20,18 @@ Public Class CFormEntryTvNew
 
     End Sub
 
-    Public Property TreeViewData As Object
+    Public Property TreeViewData As New Object
 
     Public Sub DisplayTree()
-        Dim root As TreeNode = TreeViewTableName.Nodes(0)
+        Dim root As TreeNode = FormTreeView.Nodes(0)
         root.Nodes.Clear()
         ' create the tree
         If GlobalVariables.RightToLeftLayout Then
-            TreeViewTableName.RightToLeftLayout = True
+            FormTreeView.RightToLeftLayout = True
         Else
-            TreeViewTableName.RightToLeftLayout = False
+            FormTreeView.RightToLeftLayout = False
         End If
-        TreeViewTableName.RightToLeft = RightToLeft.Inherit
+        FormTreeView.RightToLeft = RightToLeft.Inherit
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             For Each dataNode In TreeViewData
                 AddRecordToTree(dataNode)
@@ -48,7 +48,7 @@ Public Class CFormEntryTvNew
         Dim mainValue As String = GetPropertyValue(dataNode, "Name")
         Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
         Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
-        TreeViewTableName.Nodes(0).Nodes.Add(treeNode)
+        FormTreeView.Nodes(0).Nodes.Add(treeNode)
     End Sub
 
     Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean)
@@ -62,13 +62,13 @@ Public Class CFormEntryTvNew
             Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
             If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
                 If parentChanged Then
-                    TreeViewTableName.Nodes(TreeViewTableName.Nodes.Count - 1).Nodes.Add(treeNode)
+                    FormTreeView.Nodes(FormTreeView.Nodes.Count - 1).Nodes.Add(treeNode)
                 Else
-                    TreeViewTableName.Nodes(0).Nodes.Add(treeNode)
+                    FormTreeView.Nodes(0).Nodes.Add(treeNode)
                 End If
             Else
                 If parentChanged Then
-                    Dim foundNode As TreeNode() = TreeViewTableName.Nodes.Find(parentIdValue.ToString(), True)
+                    Dim foundNode As TreeNode() = FormTreeView.Nodes.Find(parentIdValue.ToString(), True)
                     If foundNode.Length <> 0 Then
                         foundNode(0).Nodes.Add(treeNode)
                     End If
@@ -77,8 +77,8 @@ Public Class CFormEntryTvNew
         End If
     End Sub
 
-    Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) _
-    Handles TreeViewTableName.AfterSelect
+    Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs)
+
         If Not _bypassSelectedChange Then
             Select Case (e.Action)
                 Case TreeViewAction.ByKeyboard
@@ -97,15 +97,15 @@ Public Class CFormEntryTvNew
                 Exit Sub
             End If
             Dim nTag As Integer
-            TreeViewTableName.ImageIndex = 1
-            If TreeViewTableName.SelectedNode.Tag.ToString = "root" Then
+            FormTreeView.ImageIndex = 1
+            If FormTreeView.SelectedNode.Tag.ToString = "root" Then
                 PresenterObj.RecordPositionNumber = 1
             Else
-                nTag = TreeViewTableName.SelectedNode.Tag
+                nTag = FormTreeView.SelectedNode.Tag
                 PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(nTag)
             End If
-            If Not TreeViewTableName.SelectedNode.IsVisible Then
-                TreeViewTableName.SelectedNode.EnsureVisible()
+            If Not FormTreeView.SelectedNode.IsVisible Then
+                FormTreeView.SelectedNode.EnsureVisible()
             End If
         End If
     End Sub
@@ -113,12 +113,8 @@ Public Class CFormEntryTvNew
     Public Sub DisplayTreeViewData()
         'Dim tvd As New TreeViewDisplay(TreeViewData)
         If Ea IsNot Nothing Then
-            Ea.PublishEvent(Of TreeViewDisplay)(TreeViewData)
+            Ea.PublishEvent(New TreeViewDisplay(FormTreeView))
         End If
-        'TreeViewData = tvd.TreeViewData
-        DisplayTree()
-        TreeViewTableName.ExpandAll()
-        GotoRecordInTreeView()
     End Sub
 
     Protected Function MakeTreeNode(mainFieldValue As String, secondaryFieldValue As String, idNo As Int32) _
@@ -139,6 +135,7 @@ Public Class CFormEntryTvNew
 
     Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
         MyBase.RecordPositionChanged(e)
+        Debugger.Break()
         GotoRecordInTreeView()
     End Sub
 
@@ -150,7 +147,7 @@ Public Class CFormEntryTvNew
         If bypassChange Then
             _bypassSelectedChange = True
         End If
-        TreeViewTableName.Nodes.Remove(TreeViewTableName.SelectedNode)
+        FormTreeView.Nodes.Remove(FormTreeView.SelectedNode)
         _bypassSelectedChange = False
     End Sub
 
@@ -161,9 +158,10 @@ Public Class CFormEntryTvNew
 
     Private Sub BfTvEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            TreeViewTableName.Nodes(0).Text = MainTableName
-            TreeViewTableName.ExpandAll()
+            FormTreeView.Nodes(0).Text = MainTableName
             DisplayTreeViewData()
+            FormTreeView.ExpandAll()
+            FormTreeView.Refresh()
         End If
     End Sub
 
@@ -171,14 +169,14 @@ Public Class CFormEntryTvNew
         _bypassSelectedChange = True
         If GlobalVariables.RightToLeftLayout Then
             RightToLeftLayout = True
-            TreeViewTableName.RightToLeftLayout = True
-            TreeViewTableName.RightToLeft = RightToLeft.Yes
+            FormTreeView.RightToLeftLayout = True
+            FormTreeView.RightToLeft = RightToLeft.Yes
         Else
             RightToLeftLayout = False
-            TreeViewTableName.RightToLeftLayout = False
-            TreeViewTableName.RightToLeft = RightToLeft.No
+            FormTreeView.RightToLeftLayout = False
+            FormTreeView.RightToLeft = RightToLeft.No
         End If
-        TreeViewTableName.ExpandAll()
+        FormTreeView.ExpandAll()
         _bypassSelectedChange = False
     End Sub
 
@@ -202,6 +200,10 @@ Public Class CFormEntryTvNew
                 .Select()
             End With
         End If
+        ' update treeview text if ever name is changed
+        'If Not TreeViewTableName.SelectedNode Is Nothing Then
+        'TreeViewTableName.SelectedNode.Text = TreeNodeText
+        'End If
         If TreeViewTableName.SelectedNode IsNot Nothing AndAlso TreeViewTableName.SelectedNode.IsVisible Then
             TreeViewTableName.SelectedNode.EnsureVisible()
         End If
