@@ -1,4 +1,6 @@
-﻿Imports AATM.Libraries
+﻿Imports System.Windows.Forms
+Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.PresentationLayer.Views
 
 Public Class PresenterTv(Of T As IViewTv, TM As New)
@@ -11,37 +13,37 @@ Public Class PresenterTv(Of T As IViewTv, TM As New)
     End Sub
 
     Public Sub OnTvEventHandler(ByRef eventType As TreeViewDisplay) Implements ISubscriber(Of TreeViewDisplay).OnEventHandler
-        eventType.TreeViewData = GetTreeViewData()
+        eventType.Tree = GetTreeViewData()
     End Sub
 
-    Public Function GetTreeViewData()
-        Dim cModel As New TM
-        Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
-        Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
-        If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
-            If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
-            Else
-                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
-            End If
-        Else
-            newSortOrderKey = "SortKey"
-            If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
-            Else
-                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
-            End If
-        End If
-    End Function
+    'Public Function GetTreeViewData()
+    '    Dim cModel As New TM
+    '    Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
+    '    Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
+    '    If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
+    '        If String.IsNullOrEmpty(TreeViewSecondaryField) Then
+    '            Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
+    '        Else
+    '            Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
+    '        End If
+    '    Else
+    '        newSortOrderKey = "SortKey"
+    '        If String.IsNullOrEmpty(TreeViewSecondaryField) Then
+    '            Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
+    '        Else
+    '            Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
+    '        End If
+    '    End If
+    'End Function
 
 End Class
 
 Public Class TreeViewDisplay
 
-    Public Sub New(ByVal treeViewData As Object)
-        Me.TreeViewData = treeViewData
+    Public Sub New(ByVal tree As TreeView)
+        Me.Tree = tree
     End Sub
 
-    Public Property TreeViewData As Object
+    Public Property Tree As TreeView
 
 End Class

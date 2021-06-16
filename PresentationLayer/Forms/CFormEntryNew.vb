@@ -36,12 +36,12 @@ Public Class CFormEntryNew
     Private _translatable As Boolean = True
 
     Public Sub New()
-
+        MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = True
         DoubleBuffered = True
-        Ea = New EventAggregator
+        'Ea = New EventAggregator
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub

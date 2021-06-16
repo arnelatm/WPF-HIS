@@ -2,6 +2,7 @@
 Imports AATM.Accounts.Interfaces
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
@@ -22,10 +23,12 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = "SalaryLoanSchedule"
             SortOrderKey = "SalaryLoanScheduleName"
             _nfi = GlobalVariables.DefaultNumberFormatInfo
+            Ea = New EventAggregator
             _presenter = New SalaryLoanSchedulePresenter(Me)
         End Sub
 
 #Region "Fields"
+
         Public Property Amount As Decimal Implements ISalaryLoanScheduleView.Amount
             Get
                 Return NumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount.Text)
@@ -72,6 +75,7 @@ Namespace PresentationLayer.Views.Forms
                 SalaryLoanScheduleView.dtpStartDate.Value = Value
             End Set
         End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()

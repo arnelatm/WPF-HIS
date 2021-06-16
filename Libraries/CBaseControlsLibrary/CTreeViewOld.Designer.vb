@@ -4,7 +4,7 @@ Imports System.Windows.Forms
 Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()> _
-Partial Class CTreeView
+Partial Class CTreeViewOld
     Inherits TreeView
 
     'UserControl overrides dispose to clean up the component list.
@@ -32,16 +32,16 @@ Partial Class CTreeView
         '
         'TreeView1
         '
-        Me.TreeView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TreeView1.LineColor = System.Drawing.Color.Empty
         Me.TreeView1.Location = New System.Drawing.Point(0, 0)
         Me.TreeView1.Name = "TreeView1"
-        Me.TreeView1.Size = New System.Drawing.Size(150, 150)
+        Me.TreeView1.Size = New System.Drawing.Size(117, 93)
         Me.TreeView1.TabIndex = 0
         '
         'CTreeView
         '
+        Me.BackColor = System.Drawing.Color.Silver
         Me.Controls.Add(Me.TreeView1)
-        Me.Name = "CTreeView"
         Me.ResumeLayout(False)
 
     End Sub

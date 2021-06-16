@@ -13,6 +13,8 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             ModelOfPresenter = New ModelAccounts("JournalPrefix")
             TableName = "JournalPrefix"
+            TreeViewMainField = "JournalName"
+            TreeViewSecondaryField = "JournalCode"
             SortOrderKey = "IdNo"
             OriginalModel = New JournalPrefixModel()
             DataModel = New JournalPrefixModel()

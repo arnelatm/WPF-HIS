@@ -194,14 +194,17 @@
     <Compile Include="cFocalPoints.vb" />
     <Compile Include="CForm.Designer.vb">
       <DependentUpon>CForm.vb</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="CForm.vb">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="CForm1.Designer.vb">
       <DependentUpon>CForm.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="cfsComboBox.vb">
       <SubType>Component</SubType>
@@ -292,10 +295,13 @@
       <DependentUpon>CToolStripMenu.vb</DependentUpon>
     </Compile>
     <Compile Include="CToolStripMenu.vb" />
-    <Compile Include="CTreeView.Designer.vb">
-      <DependentUpon>CTreeView.vb</DependentUpon>
-    </Compile>
     <Compile Include="CTreeView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CTreeViewOld.Designer.vb">
+      <DependentUpon>CTreeViewOld.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CTreeViewOld.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomComboBox.vb" />
@@ -448,14 +454,12 @@
     <EmbeddedResource Include="CFindForm.resx">
       <DependentUpon>CFindForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CForm.ar-SA.resx">
-      <DependentUpon>CForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CForm.resx">
       <DependentUpon>CForm.vb</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CForm1.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="CGDateTimePicker.resx">
       <DependentUpon>CGDateTimePicker.vb</DependentUpon>
@@ -475,8 +479,8 @@
     <EmbeddedResource Include="CToolStripMenu.resx">
       <DependentUpon>CToolStripMenu.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CTreeView.resx">
-      <DependentUpon>CTreeView.vb</DependentUpon>
+    <EmbeddedResource Include="CTreeViewOld.resx">
+      <DependentUpon>CTreeViewOld.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DropdownColorBlender.resx">
       <DependentUpon>DropdownColorBlender.vb</DependentUpon>
