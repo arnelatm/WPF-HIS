@@ -28,8 +28,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                ISubscriber(Of FindFieldRequested),
                ISubscriber(Of EntryFormLoaded),
                ISubscriber(Of SaveDataRequested),
-               ISubscriber(Of GetDataSources),
-               ISubscriber(Of TreeViewDisplay)
+               ISubscriber(Of GetDataSources)
 
     Public ChildPresenters As New List(Of Object)
     Public ChildModels As New List(Of Object)
@@ -44,10 +43,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Protected DbDataDao
     Protected OriginalModel
     Protected SortOrderKey As String = "IdNo"
-    Protected TreeViewList
-    Protected TreeViewMainField As String
-    Protected TreeViewParentIdField As String
-    Protected TreeViewSecondaryField As String
     Protected DataFilter As String = Nothing
     Private ReadOnly _debugSwitch As Byte = 0
     Private ReadOnly _tableColumnPropertyList As List(Of TblColPropModel)
@@ -61,7 +56,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Private _tableName As String
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
-    Private _bypassSelectedChange As Boolean = False
 
     Public Sub New(itemView As T)
         If itemView Is Nothing Then
@@ -639,20 +633,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Catch ex As Exception
             Return Nothing
         End Try
-    End Function
-
-    Public Function GetTreeNodeText()
-        Dim cModel As New TM
-        Dim cText As String
-        Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
-        If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-            cText = CallByName(View, treeMainFieldName, CallType.Get) + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String)
-        Else
-            Dim addText = CallByName(View, TreeViewSecondaryField, CallType.Get)
-            cText = CallByName(View, treeMainFieldName, CallType.Get) + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String) +
-                    If(String.IsNullOrEmpty(addText), "", " (" + addText.ToString() + ")")
-        End If
-        Return cText
     End Function
 
     Public Function GetRecords(ByVal tableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
@@ -2048,124 +2028,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim data As List(Of ClassesLibrary.LookupData)
         data = GetLookup(eventType.TableName)
         CallByName(eventType.Control, "DataSource", CallType.Set, data)
-    End Sub
-
-    Public Sub OnTreeViewDisplayHandler(ByRef eventType As TreeViewDisplay) Implements ISubscriber(Of TreeViewDisplay).OnEventHandler
-        Dim tree As TreeView = eventType.Tree
-        Dim root As TreeNode = eventType.Tree.Nodes(0)
-        'Dim displayMainFieldName = GetTranslatedField(TvMainFieldName)
-        root.Nodes.Clear()
-        ' create the tree
-        If GlobalVariables.RightToLeftLayout Then
-            tree.RightToLeftLayout = True
-        Else
-            tree.RightToLeftLayout = False
-        End If
-        tree.RightToLeft = RightToLeft.Inherit
-        Dim treeViewData As New Object
-        treeViewData = GetTreeViewData()
-        'If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
-        For Each dataNode In treeViewData
-            AddRecordToTree(dataNode, tree)
-        Next
-        'Else
-        'For Each dataNode In treeViewData
-        'AddRecordToTreeHierarchical(dataNode, True)
-        'Next
-        'End If
-
-        tree.ExpandAll()
-        GotoRecordInTreeView(tree)
-
-    End Sub
-
-    Public Function GetTreeViewData()
-        Dim cModel As New TM
-        Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
-        Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
-        If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
-            If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
-                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
-            Else
-                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
-                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
-            End If
-        Else
-            newSortOrderKey = "SortKey"
-            If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
-            Else
-                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
-            End If
-        End If
-    End Function
-
-    Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean, treeViewTableName As TreeView)
-        Dim parentFieldName As String = CallByName(View, "ParentFieldName", CallType.Get)
-        Dim parentIdValue As Integer? = GetPropertyValue(dataNode, parentFieldName)
-        If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
-            AddRecordToTree(dataNode, treeViewTableName) ', "Name")
-        Else
-            Dim idNo As Int32 = GetPropertyValue(dataNode, "IdNo")
-            Dim mainValue As String = GetPropertyValue(dataNode, "Name")
-            Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
-            Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
-            If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
-                If parentChanged Then
-                    treeViewTableName.Nodes(treeViewTableName.Nodes.Count - 1).Nodes.Add(treeNode)
-                Else
-                    treeViewTableName.Nodes(0).Nodes.Add(treeNode)
-                End If
-            Else
-                If parentChanged Then
-                    Dim foundNode As TreeNode() = treeViewTableName.Nodes.Find(parentIdValue.ToString(), True)
-                    If foundNode.Length <> 0 Then
-                        foundNode(0).Nodes.Add(treeNode)
-                    End If
-                End If
-            End If
-        End If
-    End Sub
-
-    Protected Overloads Sub AddRecordToTree(dataNode As Object, ByRef tree As TreeView) ', mainFieldName As String)
-        Dim idNo As Int32 = GetPropertyValue(dataNode, IdFieldName)
-        Dim mainValue As String = GetPropertyValue(dataNode, "Name")
-        Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
-        Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
-        tree.Nodes(0).Nodes.Add(treeNode)
-    End Sub
-
-    Protected Function MakeTreeNode(mainFieldValue As String, secondaryFieldValue As String, idNo As Int32) _
-        As TreeNode
-        Dim treeTextDisplay As String
-        treeTextDisplay = TreeNodeTextDisplay(mainFieldValue, secondaryFieldValue)
-        Return New TreeNode With {
-            .Text = treeTextDisplay,
-            .Tag = idNo,
-            .Name = idNo
-            }
-    End Function
-
-    Protected Overridable Function TreeNodeTextDisplay(tvName As String, ByVal Optional tvAdditionalText As String = "") _
-        As String
-        Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
-    End Function
-
-    Private Sub GotoRecordInTreeView(tree As TreeView)
-        Dim found As TreeNode() = tree.Nodes.Find(TargetIdNo, True)
-        If found.Length <> 0 Then
-            With tree
-                _bypassSelectedChange = True
-                .SelectedNode = found(0)
-                _bypassSelectedChange = False
-                .HideSelection = False
-                .Select()
-            End With
-        End If
-        If tree.SelectedNode IsNot Nothing AndAlso tree.SelectedNode.IsVisible Then
-            tree.SelectedNode.EnsureVisible()
-        End If
     End Sub
 
 End Class
