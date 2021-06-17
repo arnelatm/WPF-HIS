@@ -91,7 +91,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             If Ea IsNot Nothing Then
-                Ea.PublishEvent(New GetDataSources("Employee", SalaryLoanScheduleView.cboEmployeeIdNo))
+                Ea.PublishEvent(New GetDataSource("Employee", SalaryLoanScheduleView.cboEmployeeIdNo))
             End If
         End Sub
 

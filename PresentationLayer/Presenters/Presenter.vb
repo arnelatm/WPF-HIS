@@ -1471,19 +1471,19 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         mainBizObj.AddError(errors)
     End Sub
 
-    Public Function IsBusinessDataValid(ByRef dataDictionary As Dictionary(Of String, Object)) As Boolean
-        Dim retValue As Boolean = False
-        GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        If Model.IsValid(DataModel) Then
-            retValue = True
-        Else
-            UpdateErrors(dataDictionary)
-        End If
-        Return retValue
-    End Function
+    'Public Function IsBusinessDataValid(ByRef dataDictionary As Dictionary(Of String, Object)) As Boolean
+    '    Dim retValue As Boolean = False
+    '    GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+    '    If Model.IsValid(DataModel) Then
+    '        retValue = True
+    '    Else
+    '        UpdateErrors(dataDictionary)
+    '    End If
+    '    Return retValue
+    'End Function
 
-    Private Sub UpdateErrors(ByRef dataDictionary As Dictionary(Of String, Object))
+    'Private Sub UpdateErrors(ByRef dataDictionary As Dictionary(Of String, Object))
 
-    End Sub
+    'End Sub
 
 End Class
