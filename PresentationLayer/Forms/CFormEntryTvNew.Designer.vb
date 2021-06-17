@@ -99,5 +99,5 @@ Partial Class CFormEntryTvNew
     End Sub
     Friend WithEvents ImageListTreeView As Windows.Forms.ImageList
     Public WithEvents SplitContainer1 As Windows.Forms.SplitContainer
-    Friend WithEvents FormTreeView As Windows.Forms.TreeView
+    Public WithEvents FormTreeView As Windows.Forms.TreeView
 End Class

@@ -174,9 +174,9 @@ Public Class CFormEntryNew
         '
     End Sub
 
-    Protected Overridable Sub DisplayView(idNo As Int32)
-        Debugger.Break()
-    End Sub
+    'Protected Overridable Sub DisplayView(idNo As Int32)
+    '    Debugger.Break()
+    'End Sub
 
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
         CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
