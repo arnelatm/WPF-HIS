@@ -28,7 +28,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                ISubscriber(Of FindFieldRequested),
                ISubscriber(Of EntryFormLoaded),
                ISubscriber(Of SaveDataRequested),
-               ISubscriber(Of GetDataSources)
+               ISubscriber(Of GetDataSource),
+               ISubscriber(Of GetLookupDataRequested)
 
     Public ChildPresenters As New List(Of Object)
     Public ChildModels As New List(Of Object)
@@ -62,10 +63,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             ''
         Else
             Me.View = itemView
-            TableName = GetPropertyValue(Me.View, "MainTableName")
-            If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
-                MessageBox.Show($"'TableName' property is not set in the Form.")
-            End If
+            'TableName = GetPropertyValue(Me.View, "MainTableName")
+            'If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
+            '    MessageBox.Show($"'TableName' property is not set in the Form.")
+            'End If
             Dim tableColumnPropertyList As List(Of TblColPropModel)
             tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
             TableProperties = tableColumnPropertyList.ToArray
@@ -1371,20 +1372,20 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         mainBizObj.AddError(errors)
     End Sub
 
-    Public Function IsBusinessDataValid(ByRef dataDictionary As Dictionary(Of String, Object)) As Boolean
-        Dim retValue As Boolean = False
-        GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        If Model.IsValid(DataModel) Then
-            retValue = True
-        Else
-            UpdateErrors(dataDictionary)
-        End If
-        Return retValue
-    End Function
+    'Public Function IsBusinessDataValid(ByRef dataDictionary As Dictionary(Of String, Object)) As Boolean
+    '    Dim retValue As Boolean = False
+    '    GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
+    '    If Model.IsValid(DataModel) Then
+    '        retValue = True
+    '    Else
+    '        UpdateErrors(dataDictionary)
+    '    End If
+    '    Return retValue
+    'End Function
 
-    Private Sub UpdateErrors(ByRef dataDictionary As Dictionary(Of String, Object))
+    'Private Sub UpdateErrors(ByRef dataDictionary As Dictionary(Of String, Object))
 
-    End Sub
+    'End Sub
 
     'Public Overridable Function ValidateView()
     '    Dim validationsPassed As Boolean
@@ -2024,10 +2025,16 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     '    DoPaintEvents()
     'End Sub
 
-    Public Sub OnGetDataSourcesHandler(ByRef eventType As GetDataSources) Implements ISubscriber(Of GetDataSources).OnEventHandler
+    Public Sub OnGetDataSourceHandler(ByRef eventType As GetDataSource) Implements ISubscriber(Of GetDataSource).OnEventHandler
         Dim data As List(Of ClassesLibrary.LookupData)
         data = GetLookup(eventType.TableName)
         CallByName(eventType.Control, "DataSource", CallType.Set, data)
+    End Sub
+
+    Public Sub OnGetLookupDataRequestedHandler(ByRef eventType As GetLookupDataRequested) Implements ISubscriber(Of GetLookupDataRequested).OnEventHandler
+        Dim data As List(Of ClassesLibrary.LookupData)
+        data = GetLookup(eventType.TableName)
+        eventType.Target = data
     End Sub
 
 End Class
@@ -2042,16 +2049,31 @@ Public Class ViewButtonClicked
 
 End Class
 
-Public Class GetDataSources
+Public Class GetDataSource
 
-    Public Sub New(ByVal tableName As String, ByRef control As Control)
+    Public Sub New(ByVal tableName As String, ByRef control As Control, Optional ByVal filter As String = Nothing)
         Me.TableName = tableName
         Me.Control = control
+        Me.Filter = filter
     End Sub
 
     Public Property TableName As String
     Public Property Control As Control
+    Public Property Filter As String
 
+End Class
+
+Public Class GetLookupDataRequested
+
+    Public Sub New(ByVal tableName As String, ByRef target As List(Of ClassesLibrary.LookupData), ByVal Optional filter As String = Nothing)
+        Me.TableName = tableName
+        Me.Target = target
+        Me.Filter = filter
+    End Sub
+
+    Public Property TableName As String
+    Public Property Target As List(Of ClassesLibrary.LookupData)
+    Public Property Filter As String
 End Class
 
 Public Class SaveDataRequested
