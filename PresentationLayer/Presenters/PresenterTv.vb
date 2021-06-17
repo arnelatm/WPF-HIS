@@ -12,40 +12,42 @@ Public Class PresenterTv(Of T As IView, TM As New)
     Protected TreeViewMainField As String
     Protected TreeViewParentIdField As String
     Protected TreeViewSecondaryField As String
+    Protected ParentFieldName As String = ""
+    Protected FormTreeView As TreeView
 
     Private _bypassSelectedChange As Boolean = False
 
     Public Sub New(itemView As T)
         MyBase.New(itemView)
-        Ea.SubscribeEvent(Me)
+        'Ea.SubscribeEvent(Me)
+        FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
     End Sub
 
     Public Sub OnTreeViewDisplayHandler(ByRef eventType As TreeViewDisplay) Implements ISubscriber(Of TreeViewDisplay).OnEventHandler
-        Dim tree As TreeView = eventType.Tree
-        Dim root As TreeNode = eventType.Tree.Nodes(0)
+        FormTreeView = eventType.Tree
+        Dim root As TreeNode = FormTreeView.Nodes(0)
         'Dim displayMainFieldName = GetTranslatedField(TvMainFieldName)
         root.Nodes.Clear()
         ' create the tree
         If GlobalVariables.RightToLeftLayout Then
-            tree.RightToLeftLayout = True
+            FormTreeView.RightToLeftLayout = True
         Else
-            tree.RightToLeftLayout = False
+            FormTreeView.RightToLeftLayout = False
         End If
-        tree.RightToLeft = RightToLeft.Inherit
+        FormTreeView.RightToLeft = RightToLeft.Inherit
         Dim treeViewData As New Object
         treeViewData = GetTreeViewData()
-        'If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
-        For Each dataNode In treeViewData
-            AddRecordToTree(dataNode, tree)
-        Next
-        'Else
-        'For Each dataNode In treeViewData
-        'AddRecordToTreeHierarchical(dataNode, True)
-        'Next
-        'End If
-
-        tree.ExpandAll()
-        GotoRecordInTreeView(tree)
+        If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
+            For Each dataNode In treeViewData
+                AddRecordToTree(dataNode)
+            Next
+        Else
+            For Each dataNode In treeViewData
+                AddRecordToTreeHierarchical(dataNode, True, FormTreeView)
+            Next
+        End If
+        FormTreeView.ExpandAll()
+        GotoRecordInTreeView()
 
     End Sub
 
@@ -72,10 +74,10 @@ Public Class PresenterTv(Of T As IView, TM As New)
     End Function
 
     Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean, treeViewTableName As TreeView)
-        Dim parentFieldName As String = CallByName(View, "ParentFieldName", CallType.Get)
-        Dim parentIdValue As Integer? = GetPropertyValue(dataNode, parentFieldName)
+        'Dim parentFieldName As String = CallByName(View, "ParentFieldName", CallType.Get)
+        Dim parentIdValue As Integer? = GetPropertyValue(dataNode, ParentFieldName)
         If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
-            AddRecordToTree(dataNode, treeViewTableName) ', "Name")
+            AddRecordToTree(dataNode) ', "Name")
         Else
             Dim idNo As Int32 = GetPropertyValue(dataNode, "IdNo")
             Dim mainValue As String = GetPropertyValue(dataNode, "Name")
@@ -98,12 +100,12 @@ Public Class PresenterTv(Of T As IView, TM As New)
         End If
     End Sub
 
-    Protected Overloads Sub AddRecordToTree(dataNode As Object, ByRef tree As TreeView) ', mainFieldName As String)
+    Protected Overloads Sub AddRecordToTree(dataNode As Object) ', mainFieldName As String)
         Dim idNo As Int32 = GetPropertyValue(dataNode, IdFieldName)
         Dim mainValue As String = GetPropertyValue(dataNode, "Name")
         Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
         Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
-        tree.Nodes(0).Nodes.Add(treeNode)
+        FormTreeView.Nodes(0).Nodes.Add(treeNode)
     End Sub
 
     Protected Function MakeTreeNode(mainFieldValue As String, secondaryFieldValue As String, idNo As Int32) _
@@ -122,10 +124,10 @@ Public Class PresenterTv(Of T As IView, TM As New)
         Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
     End Function
 
-    Private Sub GotoRecordInTreeView(tree As TreeView)
-        Dim found As TreeNode() = tree.Nodes.Find(TargetIdNo, True)
+    Private Sub GotoRecordInTreeView()
+        Dim found As TreeNode() = FormTreeView.Nodes.Find(TargetIdNo, True)
         If found.Length <> 0 Then
-            With tree
+            With FormTreeView
                 _bypassSelectedChange = True
                 .SelectedNode = found(0)
                 _bypassSelectedChange = False
@@ -133,8 +135,8 @@ Public Class PresenterTv(Of T As IView, TM As New)
                 .Select()
             End With
         End If
-        If tree.SelectedNode IsNot Nothing AndAlso tree.SelectedNode.IsVisible Then
-            tree.SelectedNode.EnsureVisible()
+        If FormTreeView.SelectedNode IsNot Nothing AndAlso FormTreeView.SelectedNode.IsVisible Then
+            FormTreeView.SelectedNode.EnsureVisible()
         End If
     End Sub
 
@@ -151,6 +153,11 @@ Public Class PresenterTv(Of T As IView, TM As New)
         End If
         Return cText
     End Function
+
+    Public Overrides Sub UpdateViewDisplay(idNo As Int32)
+        MyBase.UpdateViewDisplay(idNo)
+        GotoRecordInTreeView()
+    End Sub
 
 End Class
 

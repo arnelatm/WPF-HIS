@@ -9,6 +9,8 @@ Public Class CFormEntryTvNew
     Protected TvMainFieldName As String
     Protected TvSecondaryFieldName As String
     Protected TvSortKey As String
+
+    'Protected FormTreeView As TreeView
     Private _bypassSelectedChange As Boolean = False
 
     Public Sub New()
@@ -156,7 +158,7 @@ Public Class CFormEntryTvNew
         Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
     End Function
 
-    Private Sub BfTvEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub CFormEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
             FormTreeView.Nodes(0).Text = MainTableName
             DisplayTreeViewData()
@@ -190,9 +192,9 @@ Public Class CFormEntryTvNew
     End Function
 
     Private Sub GotoRecordInTreeView()
-        Dim found As TreeNode() = TreeViewTableName.Nodes.Find(PresenterObj.TargetIdNo, True)
+        Dim found As TreeNode() = FormTreeView.Nodes.Find(PresenterObj.TargetIdNo, True)
         If found.Length <> 0 Then
-            With TreeViewTableName
+            With FormTreeView
                 _bypassSelectedChange = True
                 .SelectedNode = found(0)
                 _bypassSelectedChange = False
@@ -204,8 +206,8 @@ Public Class CFormEntryTvNew
         'If Not TreeViewTableName.SelectedNode Is Nothing Then
         'TreeViewTableName.SelectedNode.Text = TreeNodeText
         'End If
-        If TreeViewTableName.SelectedNode IsNot Nothing AndAlso TreeViewTableName.SelectedNode.IsVisible Then
-            TreeViewTableName.SelectedNode.EnsureVisible()
+        If FormTreeView.SelectedNode IsNot Nothing AndAlso FormTreeView.SelectedNode.IsVisible Then
+            FormTreeView.SelectedNode.EnsureVisible()
         End If
     End Sub
 
