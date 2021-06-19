@@ -1,12 +1,8 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.Interfaces
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views
-Imports Autofac
 
 Namespace PresentationLayer.Views.Forms
 
@@ -20,8 +16,8 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            TvMainFieldName = "BankName"
-            TvSecondaryFieldName = "BankCode"
+            TvMainFieldName = "JournalName"
+            TvSecondaryFieldName = "JournalCode"
             MainTableName = "JournalPrefix"
             SortOrderKey = "JournalName"
             _nfi = GlobalVariables.DefaultNumberFormatInfo

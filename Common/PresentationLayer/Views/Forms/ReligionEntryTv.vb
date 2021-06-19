@@ -1,5 +1,7 @@
-﻿Imports AATM.Common.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -7,24 +9,34 @@ Namespace PresentationLayer.Views.Forms
     Public Class ReligionEntryTv
         Implements IReligionView
 
+        Private _presenter As ReligionPresenter
+
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
 
-            MainTableName = "Religion"
             TvMainFieldName = "ReligionName"
             TvSecondaryFieldName = "ReligionCode"
+            MainTableName = "Religion"
             SortOrderKey = "ReligionName"
-            FirstControl = txtReligionCode
-            ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New ReligionPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
+            Ea = New EventAggregator()
+            _presenter = New ReligionPresenter(Me)
+
+
+            'MainTableName = "Religion"
+            'TvMainFieldName = "ReligionName"
+            'TvSecondaryFieldName = "ReligionCode"
+            'SortOrderKey = "ReligionName"
+            'FirstControl = txtReligionCode
+            '' Add any initialization after the InitializeComponent() call.
+            'PresenterObj = New ReligionPresenter(Me)
+            'Ea = PresenterObj.Ea
+            'Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements IReligionView.IdNo
+        Public Property IdNo As Int16 Implements IReligionView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
             End Get
