@@ -1521,8 +1521,11 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Dim fldName = item.Key
             If CheckForNumericValue(cCtrl) Then
                 If TypeOf cCtrl Is CTextBox Then
-                    If Not IsNumberValid(eventType.ViewControl, cCtrl) Then
-                        validated = False
+                    Dim cTextTextBox As CTextBox = cCtrl
+                    If cTextTextBox.ValueIsNumeric Then
+                        If Not IsNumberValid(eventType.ViewControl, cCtrl) Then
+                            validated = False
+                        End If
                     End If
                 End If
             End If

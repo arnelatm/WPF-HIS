@@ -53,6 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		App.config = App.config
 		CommonErrors.txt = CommonErrors.txt
+		Create JournalPrefix.sql = Create JournalPrefix.sql
 		CreateBaseSecurityObject.sql = CreateBaseSecurityObject.sql
 		CreatePayElementGroups.sql = CreatePayElementGroups.sql
 		CreateProgramSecurities(non menu).sql = CreateProgramSecurities(non menu).sql

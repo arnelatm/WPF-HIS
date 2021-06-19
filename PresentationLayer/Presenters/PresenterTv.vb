@@ -13,7 +13,7 @@ Public Class PresenterTv(Of T As IView, TM As New)
     Protected TreeViewParentIdField As String
     Protected TreeViewSecondaryField As String
     Protected ParentFieldName As String = ""
-    Protected FormTreeView As TreeView
+    Protected WithEvents FormTreeView As TreeView
 
     Private _bypassSelectedChange As Boolean = False
 
@@ -157,6 +157,48 @@ Public Class PresenterTv(Of T As IView, TM As New)
     Public Overrides Sub UpdateViewDisplay(idNo As Int32)
         MyBase.UpdateViewDisplay(idNo)
         GotoRecordInTreeView()
+    End Sub
+
+    Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
+
+        If Not _bypassSelectedChange Then
+            'Select Case (e.Action)
+            '    Case TreeViewAction.ByKeyboard
+            '        'MessageBox.Show("You like the keyboard!")
+            '    Case TreeViewAction.ByMouse
+            '        'MessageBox.Show("You like the mouse!")
+            '    Case Else
+            '        ' A problem here is causing a windows handle error when executing the below code.
+            '        ' Therefore since this is just a selection change during initialization no need
+            '        ' to execute the codes below so just exit the sub. This will also make initialization
+            '        ' faster because no more need to move the database anyway at initialization the
+            '        ' first record will be the one to be shown.
+            '        Exit Sub
+            'End Select
+            ''If Not PresenterObj.OkToMove() Then
+            ''    Exit Sub
+            ''End If
+            Dim nTag As Integer
+            FormTreeView.ImageIndex = 1
+            If FormTreeView.SelectedNode.Tag Is Nothing Then
+                'If FormTreeView.SelectedNode.Tag.ToString = "root" Then
+                RecordPositionNumber = 1
+            Else
+                nTag = FormTreeView.SelectedNode.Tag
+                RecordPositionNumber = GetSortedRecordPosition(nTag)
+            End If
+            If Not FormTreeView.SelectedNode.IsVisible Then
+                FormTreeView.SelectedNode.EnsureVisible()
+            End If
+        End If
+    End Sub
+
+    Public Sub OnBeforeDelete() Handles MyBase.BeforeDelete
+        RemoveCurrentNode()
+    End Sub
+
+    Protected Sub RemoveCurrentNode()
+        FormTreeView.Nodes.Remove(FormTreeView.SelectedNode)
     End Sub
 
 End Class

@@ -188,14 +188,14 @@ Public Class CFormEntryNew
         CreateDataSources()
     End Sub
 
-    Protected Overridable Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-    End Sub
+    'Protected Overridable Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+    'End Sub
 
-    Protected Overridable Sub RecordSaved(ByRef e As RecordSaved)
-    End Sub
+    'Protected Overridable Sub RecordSaved(ByRef e As RecordSaved)
+    'End Sub
 
-    Protected Overridable Sub BeforeAssignment()
-    End Sub
+    'Protected Overridable Sub BeforeAssignment()
+    'End Sub
 
     Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean)
         If SingleData Then

@@ -67,11 +67,12 @@ Partial Class CFormEntryTvNew
         Me.FormTreeView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FormTreeView.Location = New System.Drawing.Point(0, 0)
         Me.FormTreeView.Name = "FormTreeView"
-        TreeNode1.Name = "Node1"
-        TreeNode1.Text = "Node1"
+        TreeNode1.Name = "Node0"
+        TreeNode1.Text = "root"
         Me.FormTreeView.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
         Me.FormTreeView.Size = New System.Drawing.Size(266, 397)
         Me.FormTreeView.TabIndex = 0
+        Me.FormTreeView.Tag = "root"
         '
         'ImageListTreeView
         '
