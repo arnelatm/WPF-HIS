@@ -24,7 +24,7 @@ Partial Class CFormEntryTvNew
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFormEntryTvNew))
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Node1")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("root")
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.FormTreeView = New System.Windows.Forms.TreeView()
         Me.ImageListTreeView = New System.Windows.Forms.ImageList(Me.components)
@@ -59,12 +59,14 @@ Partial Class CFormEntryTvNew
         Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent
         Me.SplitContainer1.Size = New System.Drawing.Size(800, 397)
         Me.SplitContainer1.SplitterDistance = 266
+        Me.SplitContainer1.SplitterWidth = 10
         Me.SplitContainer1.TabIndex = 4
         '
         'FormTreeView
         '
         Me.FormTreeView.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.FormTreeView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FormTreeView.HotTracking = True
         Me.FormTreeView.Location = New System.Drawing.Point(0, 0)
         Me.FormTreeView.Name = "FormTreeView"
         TreeNode1.Name = "Node0"

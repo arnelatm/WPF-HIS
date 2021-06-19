@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class BankEntryTv
-        Inherits CFormEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -26,33 +26,34 @@ Namespace PresentationLayer.Views.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BankEntryTv))
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtBankCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtBankName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtBankNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblBankCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblBankName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblBankNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.floDataDisplay.SuspendLayout
-        Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BankEntryTv))
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtBankCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtBankName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtBankNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblBankCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblBankName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblBankNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floDataDisplay.SuspendLayout()
+            Me.SuspendLayout()
             '
-            'ImageListTreeView
+            'SplitContainer1
             '
-            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
-            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
-            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
             '
             'TxtIdNo
             '
@@ -195,6 +196,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
             Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
             Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
+            Me.floDataDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
             Me.floDataDisplay.Controls.Add(Me.lblIdNo)
             Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
             Me.floDataDisplay.Controls.Add(Me.lblBankCode)
@@ -251,16 +253,19 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "BankEntryTv"
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
-        Me.floDataDisplay.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.Name = "BankEntryTv"
+            Me.Controls.SetChildIndex(Me.SplitContainer1, 0)
+            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.floDataDisplay.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtBankCode As CTextBox
         Friend WithEvents txtBankName As CTextBox
