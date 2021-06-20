@@ -25,6 +25,10 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Public Sub OnTreeViewDisplayHandler(ByRef eventType As TreeViewDisplay) Implements ISubscriber(Of TreeViewDisplay).OnEventHandler
         FormTreeView = eventType.Tree
+        DisplayTree()
+    End Sub
+
+    Private Sub DisplayTree()
         Dim root As TreeNode = FormTreeView.Nodes(0)
         'Dim displayMainFieldName = GetTranslatedField(TvMainFieldName)
         root.Nodes.Clear()
@@ -48,7 +52,6 @@ Public Class PresenterTv(Of T As IView, TM As New)
         End If
         FormTreeView.ExpandAll()
         GotoRecordInTreeView()
-
     End Sub
 
     Public Function GetTreeViewData()
@@ -160,7 +163,6 @@ Public Class PresenterTv(Of T As IView, TM As New)
     End Sub
 
     Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
-
         If Not _bypassSelectedChange Then
             'Select Case (e.Action)
             '    Case TreeViewAction.ByKeyboard
@@ -195,6 +197,10 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Public Sub OnBeforeDelete() Handles MyBase.BeforeDelete
         RemoveCurrentNode()
+    End Sub
+
+    Private Sub OnAfterSave() Handles MyBase.AfterSave
+        DisplayTree()
     End Sub
 
     Protected Sub RemoveCurrentNode()

@@ -919,9 +919,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             RaiseEvent AfterSave()
-            If GlobalVariables.EventAggregator IsNot Nothing Then
-                GlobalVariables.EventAggregator.PublishEvent(New RecordSaved(DataModel))
-            End If
         End If
         If retVal < 0 Then
         Else
