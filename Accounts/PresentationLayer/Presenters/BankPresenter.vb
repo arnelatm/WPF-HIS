@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
             TableName = "Bank"
             TreeViewMainField = "BankName"
             TreeViewSecondaryField = "BankCode"
-            SortOrderKey = "IdNo"
+            SortOrderKey = "BankName"
             OriginalModel = New BankModel()
             DataModel = New BankModel()
 
