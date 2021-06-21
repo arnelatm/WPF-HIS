@@ -925,6 +925,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
             If AddMode Then
                 RecordPositionNumber = GetSortedRecordPosition(retVal)
+                TargetIdNo = retVal
             End If
             'turn off addmode/editmode
             AddMode = False

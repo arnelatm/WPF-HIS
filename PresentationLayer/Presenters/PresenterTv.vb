@@ -195,6 +195,13 @@ Public Class PresenterTv(Of T As IView, TM As New)
         End If
     End Sub
 
+    Private Sub TreeView1_BeforeSelect(ByVal sender As Object, ByVal e As TreeViewCancelEventArgs) Handles FormTreeView.BeforeSelect
+        'If e.Action = TreeViewAction.Unknown Then e.Cancel = True
+        If EditMode Or AddMode Then
+            e.Cancel = True
+        End If
+    End Sub
+
     Public Sub OnBeforeDelete() Handles MyBase.BeforeDelete
         RemoveCurrentNode()
     End Sub
