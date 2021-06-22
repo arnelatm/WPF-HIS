@@ -760,55 +760,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         CallByName(View, "CancelClose", CallType.Set, False)
     End Sub
 
-    'Protected Overridable Sub GoSaveRecord(ByRef viewControl As Control)
-    '    Dim continueSave As Boolean = True
-    '    Dim addAnother As Boolean = False
-    '    If AskBeforeSave Then
-    '        If Not MessageBeforeSave() Then
-    '            continueSave = False
-    '        End If
-    '    End If
-    '    If continueSave Then
-    '        Dim retVal As Integer
-    '        retVal = Save(viewControl)
-    '        If retVal > 0 Then
-    '            SaveSuccessful = True
-    '            Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
-    '            If Not QuitOnSave Then
-    '                If AddMode Then
-    '                    If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
-    '                                  "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-    '                                  MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-    '                        addAnother = True
-    '                    End If
-    '                    Dim idNo = CallByName(View, IdFieldName, CallType.Get)
-    '                    RecordPositionNumber = GetSortedRecordPosition(idNo)
-    '                Else
-    '                    RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
-    '                End If
-    '                If AddMode Then
-    '                    AddMode = False
-    '                Else
-    '                    EditMode = False
-    '                End If
-    '                If addAnother Then
-    '                    GoAddRecord()
-    '                End If
-    '            End If
-    '        Else
-    '            SaveSuccessful = False
-    '        End If
-    '        If SaveSuccessful Then
-    '            If addAnother Then
-    '                AddMode = True
-    '            Else
-    '                EditMode = False
-    '                AddMode = False
-    '            End If
-    '        End If
-    '    End If
-    'End Sub
-
     Public Overridable Function MessageBeforeSave() As Boolean
         Dim retVal As Boolean = False
         Dim message = "Are you sure you want to {action} this {itemName} entry?"
