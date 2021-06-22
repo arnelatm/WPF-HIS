@@ -53,10 +53,12 @@ Partial Class CFormEntryTvNew
         '
         Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.SplitContainer1.Panel1.Controls.Add(Me.FormTreeView)
+        Me.SplitContainer1.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No
         '
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent
+        Me.SplitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.SplitContainer1.Size = New System.Drawing.Size(800, 397)
         Me.SplitContainer1.SplitterDistance = 266
         Me.SplitContainer1.SplitterWidth = 10
@@ -72,6 +74,7 @@ Partial Class CFormEntryTvNew
         TreeNode1.Name = "Node0"
         TreeNode1.Text = "root"
         Me.FormTreeView.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
+        Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.FormTreeView.Size = New System.Drawing.Size(266, 397)
         Me.FormTreeView.TabIndex = 0
         Me.FormTreeView.Tag = "root"

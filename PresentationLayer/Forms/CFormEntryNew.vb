@@ -607,7 +607,7 @@ Public Class CFormEntryNew
         PasteText()
     End Sub
 
-    Private Sub SwitchUiLanguage(originalUi As Boolean)
+    Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
         If _debugSwitch Then
             Debugger.Break()
         End If
@@ -621,6 +621,7 @@ Public Class CFormEntryNew
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
         RecordPositionNumber = RecordPositionNumber
+        'RightToLeft = RightToLeft.Yes
     End Sub
 
     Protected Overridable Function DataIsValid() As Boolean

@@ -2090,6 +2090,16 @@ Public Class EntryFormLoaded
 
 End Class
 
+Public Class LanguageChanged
+
+    Public Sub New(ByVal viewControl As Control)
+        Me.ViewControl = viewControl
+    End Sub
+
+    Public Property ViewControl As Control
+
+End Class
+
 'Public Enum ButtonClicked
 '    [Add]
 '    [Delete]

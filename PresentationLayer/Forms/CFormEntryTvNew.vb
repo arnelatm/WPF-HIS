@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Security.Policy
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -13,7 +14,7 @@ Public Class CFormEntryTvNew
     Protected TvSortKey As String
 
     'Protected FormTreeView As TreeView
-    Private _bypassSelectedChange As Boolean = False
+    'Private _bypassSelectedChange As Boolean = False
 
     Public Sub New()
 
@@ -48,16 +49,29 @@ Public Class CFormEntryTvNew
 
     Private Sub BfTvEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         '_bypassSelectedChange = True
+        Refresh()
+        Show()
         If GlobalVariables.RightToLeftLayout Then
+            RightToLeft = RightToLeft.Yes
             RightToLeftLayout = True
-            FormTreeView.RightToLeftLayout = True
-            FormTreeView.RightToLeft = RightToLeft.Yes
+            'FormTreeView.RightToLeft = RightToLeft.Yes
+            'FormTreeView.RightToLeftLayout = True
         Else
+            RightToLeft = RightToLeft.No
             RightToLeftLayout = False
-            FormTreeView.RightToLeftLayout = False
-            FormTreeView.RightToLeft = RightToLeft.No
+            'FormTreeView.RightToLeft = RightToLeft.No
+            'FormTreeView.RightToLeftLayout = False
         End If
         FormTreeView.ExpandAll()
+        '_bypassSelectedChange = False
+    End Sub
+
+    Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
+        '_bypassSelectedChange = True
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New LanguageChanged(Me))
+        End If
+        MyBase.SwitchUiLanguage(originalUi)
         '_bypassSelectedChange = False
     End Sub
 
