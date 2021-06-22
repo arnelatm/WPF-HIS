@@ -26,28 +26,28 @@ Public Class CFormEntryTvNew
 
     Public Property TreeViewData As New Object
 
-    Public Sub DisplayTreeViewData()
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New TreeViewDisplay(FormTreeView))
-        End If
-    End Sub
+    'Public Sub DisplayTreeViewData()
+    '    If Ea IsNot Nothing Then
+    '        Ea.PublishEvent(New TreeViewDisplay(FormTreeView))
+    '    End If
+    'End Sub
 
-    Protected Overrides Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
-        MyBase.OnTextDisplayLanguageChanged()
-        DisplayTreeViewData()
-    End Sub
+    'Protected Overrides Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
+    '    MyBase.OnTextDisplayLanguageChanged()
+    '    DisplayTreeViewData()
+    'End Sub
 
-    Private Sub CFormEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            FormTreeView.Nodes(0).Text = MainTableName
-            DisplayTreeViewData()
-            FormTreeView.ExpandAll()
-            FormTreeView.Refresh()
-        End If
-    End Sub
+    'Private Sub CFormEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '    If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+    '        FormTreeView.Nodes(0).Text = MainTableName
+    '        DisplayTreeViewData()
+    '        FormTreeView.ExpandAll()
+    '        FormTreeView.Refresh()
+    '    End If
+    'End Sub
 
     Private Sub BfTvEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        _bypassSelectedChange = True
+        '_bypassSelectedChange = True
         If GlobalVariables.RightToLeftLayout Then
             RightToLeftLayout = True
             FormTreeView.RightToLeftLayout = True
@@ -58,7 +58,7 @@ Public Class CFormEntryTvNew
             FormTreeView.RightToLeft = RightToLeft.No
         End If
         FormTreeView.ExpandAll()
-        _bypassSelectedChange = False
+        '_bypassSelectedChange = False
     End Sub
 
 End Class

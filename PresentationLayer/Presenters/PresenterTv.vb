@@ -6,7 +6,8 @@ Imports AATM.PresentationLayer.Views
 
 Public Class PresenterTv(Of T As IView, TM As New)
     Inherits PresenterNew(Of T, TM)
-    Implements ISubscriber(Of TreeViewDisplay)
+    Implements ISubscriber(Of TreeViewDisplay),
+               ISubscriber(Of EntryFormLoaded)
 
     Protected TreeViewList
     Protected TreeViewMainField As String
@@ -25,6 +26,10 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Public Sub OnTreeViewDisplayHandler(ByRef eventType As TreeViewDisplay) Implements ISubscriber(Of TreeViewDisplay).OnEventHandler
         FormTreeView = eventType.Tree
+        DisplayTree()
+    End Sub
+
+    Public Sub OnTvEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
         DisplayTree()
     End Sub
 
@@ -124,7 +129,7 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Protected Overridable Function TreeNodeTextDisplay(tvName As String, ByVal Optional tvAdditionalText As String = "") _
         As String
-        Return tvName + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString() + ")")
+        Return tvName.Trim() + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString().Trim() + ")")
     End Function
 
     Private Sub GotoRecordInTreeView()
@@ -148,11 +153,11 @@ Public Class PresenterTv(Of T As IView, TM As New)
         Dim cText As String
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-            cText = CallByName(View, treeMainFieldName, CallType.Get) + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String)
+            cText = CallByName(View, treeMainFieldName, CallType.Get).Trim() + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String).Trim()
         Else
             Dim addText = CallByName(View, TreeViewSecondaryField, CallType.Get)
-            cText = CallByName(View, treeMainFieldName, CallType.Get) + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String) +
-                    If(String.IsNullOrEmpty(addText), "", " (" + addText.ToString() + ")")
+            cText = CallByName(View, treeMainFieldName, CallType.Get).Trim() + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String).Trim() +
+                    If(String.IsNullOrEmpty(addText), "", " (" + addText.ToString().Trim() + ")")
         End If
         Return cText
     End Function
@@ -187,7 +192,8 @@ Public Class PresenterTv(Of T As IView, TM As New)
                 RecordPositionNumber = 1
             Else
                 nTag = FormTreeView.SelectedNode.Tag
-                RecordPositionNumber = GetSortedRecordPosition(nTag)
+                Dim x = GetSortedRecordPosition(nTag)
+                RecordPositionNumber = x
             End If
             If Not FormTreeView.SelectedNode.IsVisible Then
                 FormTreeView.SelectedNode.EnsureVisible()
