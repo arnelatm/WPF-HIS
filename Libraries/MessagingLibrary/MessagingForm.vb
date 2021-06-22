@@ -307,11 +307,11 @@ Public Class MessagingForm
             Dim textInformation As TextInfo = CultureInfo.CurrentCulture.TextInfo
 
             If textInformation.IsRightToLeft Then
-                RightToLeftLayout = True
                 RightToLeft = RightToLeft.Yes
+                RightToLeftLayout = True
             Else
-                RightToLeftLayout = False
                 RightToLeft = RightToLeft.No
+                RightToLeftLayout = False
             End If
 
             [Enum].TryParse(Of TwoLetterIsoLanguageId)(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, languageID)

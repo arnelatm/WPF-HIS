@@ -84,33 +84,33 @@ Public Class BFMainNew
         End Set
     End Property
 
-    Protected Sub SetCulture(ByVal cultureCode As String)
-        If FormCulture Is Nothing Then
-            If IsCultureOk(cultureCode) Then
-                CultureInfo.CurrentCulture = New CultureInfo(cultureCode, False)
-            Else
-                cultureCode = "en-US"
-                _textDisplayLanguage = cultureCode
-                CultureInfo.CurrentCulture = New CultureInfo("en-US", False)
-            End If
-            SetFormCulture()
-        Else
-            If FormCulture.Name = CultureInfo.CurrentCulture.Name Then
-                ' nothing to do already set.
-            Else
-                SetFormCulture()
-            End If
-        End If
-    End Sub
+    'Protected Sub SetCulture(ByVal cultureCode As String)
+    '    If FormCulture Is Nothing Then
+    '        If IsCultureOk(cultureCode) Then
+    '            CultureInfo.CurrentCulture = New CultureInfo(cultureCode, False)
+    '        Else
+    '            cultureCode = "en-US"
+    '            _textDisplayLanguage = cultureCode
+    '            CultureInfo.CurrentCulture = New CultureInfo("en-US", False)
+    '        End If
+    '        SetFormCulture(CultureInfo.CurrentCulture)
+    '    Else
+    '        If FormCulture.Name = cultureCode Then
+    '            ' nothing to do already set.
+    '        Else
+    '            CultureInfo.CurrentCulture = New CultureInfo(cultureCode, False)
+    '            SetFormCulture(CultureInfo.CurrentCulture)
+    '        End If
+    '    End If
+    'End Sub
 
-    Protected Sub SetFormCulture()
-        FormCulture = CultureInfo.CurrentCulture
+    Protected Sub SetFormCulture(cCultureInfo As CultureInfo)
+        FormCulture = cCultureInfo
+
         If FormCulture.TextInfo.IsRightToLeft Then
             RightToLeftLayout = True
-            RightToLeft = RightToLeft.Yes
         Else
             RightToLeftLayout = False
-            RightToLeft = RightToLeft.No
         End If
         If CultureInfo.CurrentUICulture.Name <> CultureInfo.CurrentCulture.Name Then
             CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture
@@ -122,11 +122,11 @@ Public Class BFMainNew
 
     Public Sub SetupDisplay()
         If IsRightToLeft(_textDisplayLanguage) Then
-            RightToLeftLayout = True
             RightToLeft = RightToLeft.Yes
+            RightToLeftLayout = True
         Else
-            RightToLeftLayout = False
             RightToLeft = RightToLeft.No
+            RightToLeftLayout = False
         End If
     End Sub
 
@@ -170,24 +170,27 @@ Public Class BFMainNew
         Dim myImage As Bitmap
         myImage = BackgroundImage
         BackgroundImage = Nothing
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            GlobalVariables.RightToLeftLayout = True
-            RightToLeftLayout = True
-            RightToLeft = RightToLeft.Yes
-        Else
-            GlobalVariables.RightToLeftLayout = False
-            RightToLeftLayout = False
-            RightToLeft = RightToLeft.No
-        End If
         If GlobalVariables.TranslationMode Then
             TranslateCaptions(TextDisplayLanguage)
         End If
         BackgroundImage = myImage
-        ResumeLayout()
         If GlobalVariables.TranslationMode Then
             RaiseEvent AfterTranslateForm()
         End If
-
+        Show()
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+            GlobalVariables.RightToLeftLayout = True
+            'SetFormCulture(CultureInfo.CurrentCulture)
+            RightToLeft = RightToLeft.No
+            RightToLeft = RightToLeft.Yes
+            RightToLeftLayout = True
+        Else
+            GlobalVariables.RightToLeftLayout = False
+            'SetFormCulture(CultureInfo.CurrentCulture)
+            RightToLeft = RightToLeft.No
+            RightToLeftLayout = False
+        End If
+        ResumeLayout()
     End Sub
 
     Protected Sub RunTranslator(ByVal nSystemViewIdNo)
@@ -200,15 +203,15 @@ Public Class BFMainNew
 
     Protected Overridable Sub ChangeToLtrDisplay()
         SuspendLayout()
-        RightToLeftLayout = False
         RightToLeft = RightToLeft.No
+        RightToLeftLayout = False
         ResumeLayout()
     End Sub
 
     Protected Overridable Sub ChangeToRtlDisplay()
         SuspendLayout()
-        RightToLeftLayout = True
         RightToLeft = RightToLeft.Yes
+        RightToLeftLayout = True
         ResumeLayout()
     End Sub
 
@@ -289,8 +292,8 @@ Public Class BFMainNew
                     ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
                         Dim cT = CType(cCtrl, TreeView)
                         cT.ExpandAll()
-                        cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-                        cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                        'cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+                        'cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
                     ElseIf TypeOf cCtrl Is DataGridView Then
                         '_originalText = CaptionCollection.Item(cCtrl.Name)
                         'r = Dv.Find(_originalText)
@@ -313,8 +316,8 @@ Public Class BFMainNew
                             TranslateButton(cCtrl)
                         ElseIf TypeOf cCtrl Is CTabControl Then
                             Dim tc = CType(cCtrl, CTabControl)
-                            tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                             tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                            tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                         End If
                         Try
                             _originalText = CaptionCollection.Item(cCtrl.Name)
@@ -509,19 +512,23 @@ Public Class BFMainNew
 
     Private Sub BFMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-            DoubleBuffered = True
-            Dim cmd As String
             RaiseEvent BeforeLoad()
-            If GlobalVariables.TranslationMode Then
-                CaptionCollection = StoreCaptions1.StoreCaptions(Me)
-                DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
-                If ViewDisplayName Is Nothing Then
-                    ViewDisplayName = Name
-                End If
-                cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
-                VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
-                TranslateForm()
+            TranslateFormNew()
+        End If
+    End Sub
+
+    Public Sub TranslateFormNew()
+        Dim cmd As String
+        DoubleBuffered = True
+        If GlobalVariables.TranslationMode Then
+            CaptionCollection = StoreCaptions1.StoreCaptions(Me)
+            DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
+            If ViewDisplayName Is Nothing Then
+                ViewDisplayName = Name
             End If
+            cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
+            VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
+            TranslateForm()
         End If
     End Sub
 

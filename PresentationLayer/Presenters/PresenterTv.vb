@@ -7,7 +7,8 @@ Imports AATM.PresentationLayer.Views
 Public Class PresenterTv(Of T As IView, TM As New)
     Inherits PresenterNew(Of T, TM)
     Implements ISubscriber(Of TreeViewDisplay),
-               ISubscriber(Of EntryFormLoaded)
+               ISubscriber(Of EntryFormLoaded),
+               ISubscriber(Of LanguageChanged)
 
     Protected TreeViewList
     Protected TreeViewMainField As String
@@ -39,11 +40,12 @@ Public Class PresenterTv(Of T As IView, TM As New)
         root.Nodes.Clear()
         ' create the tree
         If GlobalVariables.RightToLeftLayout Then
+            FormTreeView.RightToLeft = RightToLeft.Yes
             FormTreeView.RightToLeftLayout = True
         Else
+            FormTreeView.RightToLeft = RightToLeft.No
             FormTreeView.RightToLeftLayout = False
         End If
-        FormTreeView.RightToLeft = RightToLeft.Inherit
         Dim treeViewData As New Object
         treeViewData = GetTreeViewData()
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
@@ -218,6 +220,10 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Protected Sub RemoveCurrentNode()
         FormTreeView.Nodes.Remove(FormTreeView.SelectedNode)
+    End Sub
+
+    Public Sub OnLanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
+        _bypassSelectedChange = True
     End Sub
 
 End Class
