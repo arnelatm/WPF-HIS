@@ -2,6 +2,8 @@
 
     Sub PublishEvent(Of TEventType)(ByVal eventToPublish As TEventType)
 
+    Sub PublishEvent(Of TEventType, TE)(ByVal eventToPublish As TEventType)
+
     Sub PublishEventAsync(Of TEventType)(ByVal eventToPublish As TEventType)
 
     Sub SubscribeEvent(ByVal subscriber As Object)

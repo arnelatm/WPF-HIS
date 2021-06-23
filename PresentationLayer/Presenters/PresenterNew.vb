@@ -1976,6 +1976,32 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         eventType.Target = data
     End Sub
 
+    'Public Sub OnGetEnumListHandler(Of TE)(ByRef eventType As GetEnumListRequested) Implements ISubscriber(Of GetEnumListRequested).OnEventHandler
+    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
+    '    For Each c In [Enum].GetValues(GetType(TE))
+    '        Dim data As New ClassesLibrary.LookupData With {
+    '                .IdNo = CInt(c),
+    '                .Code = EnumToCode(c),
+    '                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+    '                }
+    '        dataList.Add(data)
+    '    Next
+    '    eventType.Target = dataList
+    'End Sub
+
+    Public Sub OnEventHandler(Of TE)(ByRef eventType As GetEnumListRequested) Implements ISubscriber(Of GetEnumListRequestedNew).OnEventHandler
+        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim data As New ClassesLibrary.LookupData With {
+                    .IdNo = CInt(c),
+                    .Code = EnumToCode(c),
+                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+                    }
+            dataList.Add(data)
+        Next
+        eventType.Target = dataList
+    End Sub
+
 End Class
 
 Public Class ViewButtonClicked
@@ -1996,8 +2022,16 @@ Public Class GetDataSource
         Me.Filter = filter
     End Sub
 
+    Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal fields As String(), Optional ByVal filter As String = Nothing)
+        Me.TableName = tableName
+        Me.Control = control
+        Me.Filter = filter
+        Me.Fields = fields
+    End Sub
+
     Public Property TableName As String
     Public Property Control As Control
+    Public Property Fields As String()
     Public Property Filter As String
 
 End Class
@@ -2010,9 +2044,41 @@ Public Class GetLookupDataRequested
         Me.Filter = filter
     End Sub
 
+    Public Sub New(ByVal tableName As String, ByVal fields As String(), ByRef target As List(Of ClassesLibrary.LookupData), ByVal Optional filter As String = Nothing)
+        Me.TableName = tableName
+        Me.Target = target
+        Me.Filter = filter
+        Me.Fields = fields
+    End Sub
+
     Public Property TableName As String
     Public Property Target As List(Of ClassesLibrary.LookupData)
+    Public Property Fields As String()
     Public Property Filter As String
+End Class
+
+Public Class GetEnumListRequested
+
+    Public Sub New(ByRef enumList As Object, ByRef target As List(Of ClassesLibrary.LookupData))
+        Me.Target = target
+        Me.EnumList = enumList
+    End Sub
+
+    Public Property Target As List(Of ClassesLibrary.LookupData)
+    Public Property EnumList As Object
+
+End Class
+
+Public Class GetEnumListRequestedNew(Of TE)
+
+    Public Sub New(ByRef enumList As TE, ByRef target As List(Of ClassesLibrary.LookupData))
+        Me.Target = target
+        Me.EnumList = enumList
+    End Sub
+
+    Public Property Target As List(Of ClassesLibrary.LookupData)
+    Public Property EnumList As TE
+
 End Class
 
 Public Class SaveDataRequested

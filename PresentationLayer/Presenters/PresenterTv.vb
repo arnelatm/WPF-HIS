@@ -1,14 +1,11 @@
-﻿Imports System.Globalization
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 Imports AATM.Libraries
-Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 
 Public Class PresenterTv(Of T As IView, TM As New)
     Inherits PresenterNew(Of T, TM)
-    Implements ISubscriber(Of TreeViewDisplay),
-               ISubscriber(Of EntryFormLoaded),
+    Implements ISubscriber(Of EntryFormLoaded),
                ISubscriber(Of LanguageChanged)
 
     Protected TreeViewList
@@ -24,11 +21,6 @@ Public Class PresenterTv(Of T As IView, TM As New)
     Public Sub New(itemView As T)
         MyBase.New(itemView)
         FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
-    End Sub
-
-    Public Sub OnTreeViewDisplayHandler(ByRef eventType As TreeViewDisplay) Implements ISubscriber(Of TreeViewDisplay).OnEventHandler
-        FormTreeView = eventType.Tree
-        DisplayTree()
     End Sub
 
     Public Sub OnTvEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
@@ -218,15 +210,5 @@ Public Class PresenterTv(Of T As IView, TM As New)
     Public Sub OnLanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
         DisplayTree()
     End Sub
-
-End Class
-
-Public Class TreeViewDisplay
-
-    Public Sub New(ByVal tree As TreeView)
-        Me.Tree = tree
-    End Sub
-
-    Public Property Tree As TreeView
 
 End Class
