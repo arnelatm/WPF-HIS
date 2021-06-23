@@ -9,13 +9,6 @@ Imports AATM.PresentationLayer.Views
 
 Public Class CFormEntryTvNew
 
-    Protected TvMainFieldName As String
-    Protected TvSecondaryFieldName As String
-    Protected TvSortKey As String
-
-    'Protected FormTreeView As TreeView
-    'Private _bypassSelectedChange As Boolean = False
-
     Public Sub New()
 
         ' This call is required by the designer.

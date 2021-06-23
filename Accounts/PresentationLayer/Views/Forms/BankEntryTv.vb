@@ -14,11 +14,6 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            TvMainFieldName = "BankName"
-            TvSecondaryFieldName = "BankCode"
-            MainTableName = "Bank"
-            Ea = New EventAggregator()
             _presenter = New BankPresenter(Me)
 
         End Sub

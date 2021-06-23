@@ -14,24 +14,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            TvMainFieldName = "ReligionName"
-            TvSecondaryFieldName = "ReligionCode"
-            MainTableName = "Religion"
-            SortOrderKey = "ReligionName"
-            Ea = New EventAggregator()
             _presenter = New ReligionPresenter(Me)
-
-
-            'MainTableName = "Religion"
-            'TvMainFieldName = "ReligionName"
-            'TvSecondaryFieldName = "ReligionCode"
-            'SortOrderKey = "ReligionName"
-            'FirstControl = txtReligionCode
-            '' Add any initialization after the InitializeComponent() call.
-            'PresenterObj = New ReligionPresenter(Me)
-            'Ea = PresenterObj.Ea
-            'Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"

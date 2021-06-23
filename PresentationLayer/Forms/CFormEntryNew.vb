@@ -22,8 +22,8 @@ Public Class CFormEntryNew
     Protected FirstControl As Control
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
-    Protected SortOrderKey As String = "IdNo"
     Protected SingleData As Boolean = False
+
     Private _debugSwitch As Byte = 0
     Private _addMode As Boolean = False
     Private _editMode As Boolean = False
@@ -41,7 +41,7 @@ Public Class CFormEntryNew
         InitializeComponent()
         KeyPreview = True
         DoubleBuffered = True
-        'Ea = New EventAggregator
+        Ea = New EventAggregator
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
@@ -58,13 +58,6 @@ Public Class CFormEntryNew
     <Description("Type here the Child Table name if any, otherwise leave it blank.")>
     <Browsable(True)>
     Public Property ChildTableName As String = ""
-
-    <Bindable(True)>
-    <Category("Properties")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Type here the Table name usually the Master (Parent) Table name as shown in the Database ")>
-    <Browsable(True)>
-    Public Property MainTableName As String = ""
 
     Public Property TableProperties As Array
 

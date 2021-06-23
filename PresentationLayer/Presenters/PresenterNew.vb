@@ -63,10 +63,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             ''
         Else
             Me.View = itemView
-            'TableName = GetPropertyValue(Me.View, "MainTableName")
-            'If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
-            '    MessageBox.Show($"'TableName' property is not set in the Form.")
-            'End If
             Dim tableColumnPropertyList As List(Of TblColPropModel)
             tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
             TableProperties = tableColumnPropertyList.ToArray
@@ -167,7 +163,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Property AskBeforeSave As Boolean = False
     Public Property SaveSuccessful As Boolean = False
 
-    'Public Property AutoValidationsPassed As Boolean = False
     Public Property CancelDelete As Boolean = False
 
     Public Property CancelEdit As Boolean = False

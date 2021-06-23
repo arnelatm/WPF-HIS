@@ -1161,14 +1161,6 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SalaryLoanScheduleTvToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalaryLoanScheduleTvToolStripMenuItem.Click
-            Dim childMdiForm As SalaryLoanScheduleEntryTv
-            childMdiForm = New SalaryLoanScheduleEntryTv() With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
-
     End Class
 
 End Namespace
