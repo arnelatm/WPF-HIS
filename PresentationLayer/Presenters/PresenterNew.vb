@@ -54,7 +54,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Private _targetIdNo As Int32 = 0
     Private _recordCount As Int32 = 0
     Private _undoMode As Boolean = False
-    Private _tableName As String
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
 
@@ -80,7 +79,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Event AfterAdd(retVal As Integer)
 
-    Public Event AfterDelete()
+    Public Event AfterDelete(retVal As Integer)
 
     Public Event AfterDisplayView()
 
@@ -222,13 +221,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Property
 
     Public Property TableName As String
-        Get
-            Return _tableName
-        End Get
-        Set(value As String)
-            _tableName = value
-        End Set
-    End Property
 
     Public Property TableProperties As Array
 
@@ -683,9 +675,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                         ' last record deleted
                         GoLastRecord()
                     End If
-                    UpdateViewDisplay(TargetIdNo)
                 End If
-                RaiseEvent AfterDelete()
+                RaiseEvent AfterDelete(retValue)
+                UpdateViewDisplay(TargetIdNo)
             End If
         End If
         Return retValue

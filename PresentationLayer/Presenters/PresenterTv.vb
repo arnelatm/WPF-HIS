@@ -17,8 +17,9 @@ Public Class PresenterTv(Of T As IView, TM As New)
     Protected TreeViewSecondaryField As String
     Protected ParentFieldName As String = ""
     Protected WithEvents FormTreeView As TreeView
+    Protected NodeToDelete As TreeNode
 
-    Private _bypassSelectedChange As Boolean = False
+    'Private _bypassSelectedChange As Boolean = False
 
     Public Sub New(itemView As T)
         MyBase.New(itemView)
@@ -37,6 +38,7 @@ Public Class PresenterTv(Of T As IView, TM As New)
     Private Sub DisplayTree()
         Dim root As TreeNode = FormTreeView.Nodes(0)
         root.Nodes.Clear()
+        root.Text = MessagingLibrary.Messaging.TranslateCaption(TableName)
         ' create the tree
         If GlobalVariables.RightToLeftLayout Then
             FormTreeView.RightToLeft = RightToLeft.Yes
@@ -135,9 +137,7 @@ Public Class PresenterTv(Of T As IView, TM As New)
         Dim found As TreeNode() = FormTreeView.Nodes.Find(TargetIdNo, True)
         If found.Length <> 0 Then
             With FormTreeView
-                _bypassSelectedChange = True
                 .SelectedNode = found(0)
-                _bypassSelectedChange = False
                 .HideSelection = False
                 .Select()
             End With
@@ -167,33 +167,31 @@ Public Class PresenterTv(Of T As IView, TM As New)
     End Sub
 
     Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
-        If Not _bypassSelectedChange Then
-            Select Case e.Action
-                Case TreeViewAction.ByKeyboard
+        Select Case e.Action
+            Case TreeViewAction.ByKeyboard
                     'MessageBox.Show("You like the keyboard!")
 
-                Case TreeViewAction.ByMouse
-                    'MessageBox.Show("You like the mouse!")
-                Case Else
-                    ' A problem here is causing a windows handle error when executing the below code.
-                    ' Therefore since this is just a selection change during initialization no need
-                    ' to execute the codes below so just exit the sub. This will also make initialization
-                    ' faster because no more need to move the database anyway at initialization the
-                    ' first record will be the one to be shown.
-                    Exit Sub
-            End Select
-            Dim nTag As Integer
-            FormTreeView.ImageIndex = 1
-            If FormTreeView.SelectedNode.Tag Is Nothing Then
-                RecordPositionNumber = 1
-            Else
-                nTag = FormTreeView.SelectedNode.Tag
-                Dim x = GetSortedRecordPosition(nTag)
-                RecordPositionNumber = x
-            End If
-            If Not FormTreeView.SelectedNode.IsVisible Then
-                FormTreeView.SelectedNode.EnsureVisible()
-            End If
+            Case TreeViewAction.ByMouse
+                'MessageBox.Show("You like the mouse!")
+            Case Else
+                ' A problem here is causing a windows handle error when executing the below code.
+                ' Therefore since this is just a selection change during initialization no need
+                ' to execute the codes below so just exit the sub. This will also make initialization
+                ' faster because no more need to move the database anyway at initialization the
+                ' first record will be the one to be shown.
+                Exit Sub
+        End Select
+        Dim nTag As Integer
+        FormTreeView.ImageIndex = 1
+        If FormTreeView.SelectedNode.Tag Is Nothing Then
+            RecordPositionNumber = 1
+        Else
+            nTag = FormTreeView.SelectedNode.Tag
+            Dim x = GetSortedRecordPosition(nTag)
+            RecordPositionNumber = x
+        End If
+        If Not FormTreeView.SelectedNode.IsVisible Then
+            FormTreeView.SelectedNode.EnsureVisible()
         End If
     End Sub
 
@@ -204,26 +202,20 @@ Public Class PresenterTv(Of T As IView, TM As New)
     End Sub
 
     Public Sub OnBeforeDelete() Handles MyBase.BeforeDelete
-        RemoveCurrentNode()
+        NodeToDelete = FormTreeView.SelectedNode()
+    End Sub
+
+    Public Sub OnAfterDelete(retVal As Integer) Handles MyBase.AfterDelete
+        If retVal > 0 Then
+            FormTreeView.Nodes.Remove(NodeToDelete)
+        End If
     End Sub
 
     Private Sub OnAfterSave() Handles MyBase.AfterSave
         DisplayTree()
     End Sub
 
-    Protected Sub RemoveCurrentNode()
-        FormTreeView.Nodes.Remove(FormTreeView.SelectedNode)
-    End Sub
-
     Public Sub OnLanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
-        _bypassSelectedChange = True
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            FormTreeView.RightToLeft = RightToLeft.Yes
-            FormTreeView.RightToLeftLayout = True
-        Else
-            FormTreeView.RightToLeft = RightToLeft.No
-            FormTreeView.RightToLeftLayout = False
-        End If
         DisplayTree()
     End Sub
 
