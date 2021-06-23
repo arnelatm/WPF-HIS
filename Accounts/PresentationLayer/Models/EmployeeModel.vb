@@ -9,6 +9,7 @@
         Public Property Active As Boolean
         Public Property ArAccountIdNo As Int16?
         Public Property BankAccountNo As String
+        Public Property Balance As Decimal
         Public Property BankIdNo As Int16?
         Public Property BirthDate As Date?
         Public Property CountryCode As String

@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Active As Boolean
         Property BankAccountNo As String
         Property BankIdNo As Int16?
+        Property Balance As Decimal
         Property BirthDate As Date?
         Property CountryCode As String
         Property DepartmentIdNo As Int16?

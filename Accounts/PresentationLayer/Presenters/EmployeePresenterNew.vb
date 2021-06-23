@@ -213,6 +213,12 @@ Namespace PresentationLayer.Presenters
             GoFirstRecord()
         End Sub
 
+        Private Sub OnAfterRecordRetrieval() Handles MyBase.AfterRecordRetrieval
+            Dim value As Double
+            value = Convert.ToDecimal(GetEmployeeBalance(View.IdNo))
+            View.Balance = value
+        End Sub
+
     End Class
 
 End Namespace
