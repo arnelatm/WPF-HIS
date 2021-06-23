@@ -355,6 +355,7 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\Class1.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeePresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\PayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\JournalPrefixPresenter.vb" />
@@ -372,6 +373,13 @@
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTvNew.Designer.vb">
+      <DependentUpon>EmployeeEntryTvNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTvNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeePresenterTvNew.vb" />
     <Compile Include="PresentationLayer\Views\Forms\Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
@@ -1081,6 +1089,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.resx">
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTvNew.resx">
+      <DependentUpon>EmployeeEntryTvNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>

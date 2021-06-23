@@ -11,6 +11,10 @@ Public Class EventAggregator
         PublishTheEvent(eventToPublish, False)
     End Sub
 
+    Public Sub PublishEvent(Of TEventType, TE)(ByVal eventToPublish As TEventType) Implements IEventAggregator.PublishEvent
+        PublishTheEvent(eventToPublish, False)
+    End Sub
+
     Public Sub PublishEventAsync(Of TEventType)(ByVal eventToPublish As TEventType) Implements IEventAggregator.PublishEventAsync
         PublishTheEvent(eventToPublish, True)
     End Sub
