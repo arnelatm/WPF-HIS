@@ -66,7 +66,6 @@ Public Class BFMainNew
 
     Public Property CancelClose As Boolean
 
-    'Public Shadows Event Load(sender As Object, e As EventArgs)
     Public Overridable Property PresenterObj
 
     Public Property Errors As List(Of String) Implements IView.Errors
@@ -83,26 +82,6 @@ Public Class BFMainNew
             End If
         End Set
     End Property
-
-    'Protected Sub SetCulture(ByVal cultureCode As String)
-    '    If FormCulture Is Nothing Then
-    '        If IsCultureOk(cultureCode) Then
-    '            CultureInfo.CurrentCulture = New CultureInfo(cultureCode, False)
-    '        Else
-    '            cultureCode = "en-US"
-    '            _textDisplayLanguage = cultureCode
-    '            CultureInfo.CurrentCulture = New CultureInfo("en-US", False)
-    '        End If
-    '        SetFormCulture(CultureInfo.CurrentCulture)
-    '    Else
-    '        If FormCulture.Name = cultureCode Then
-    '            ' nothing to do already set.
-    '        Else
-    '            CultureInfo.CurrentCulture = New CultureInfo(cultureCode, False)
-    '            SetFormCulture(CultureInfo.CurrentCulture)
-    '        End If
-    '    End If
-    'End Sub
 
     Protected Sub SetFormCulture(cCultureInfo As CultureInfo)
         FormCulture = cCultureInfo

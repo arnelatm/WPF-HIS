@@ -22,7 +22,6 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Public Sub New(itemView As T)
         MyBase.New(itemView)
-        'Ea.SubscribeEvent(Me)
         FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
     End Sub
 
@@ -37,7 +36,6 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Private Sub DisplayTree()
         Dim root As TreeNode = FormTreeView.Nodes(0)
-        'Dim displayMainFieldName = GetTranslatedField(TvMainFieldName)
         root.Nodes.Clear()
         ' create the tree
         If GlobalVariables.RightToLeftLayout Then

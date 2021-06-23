@@ -20,10 +20,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            MainTableName = "SalaryLoanSchedule"
-            SortOrderKey = "SalaryLoanScheduleName"
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            Ea = New EventAggregator
             _presenter = New SalaryLoanSchedulePresenter(Me)
         End Sub
 
