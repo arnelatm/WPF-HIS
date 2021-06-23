@@ -174,10 +174,6 @@ Public Class CFormEntryNew
         '
     End Sub
 
-    'Protected Overridable Sub DisplayView(idNo As Int32)
-    '    Debugger.Break()
-    'End Sub
-
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
         CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
@@ -187,15 +183,6 @@ Public Class CFormEntryNew
         End If
         CreateDataSources()
     End Sub
-
-    'Protected Overridable Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-    'End Sub
-
-    'Protected Overridable Sub RecordSaved(ByRef e As RecordSaved)
-    'End Sub
-
-    'Protected Overridable Sub BeforeAssignment()
-    'End Sub
 
     Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean)
         If SingleData Then
@@ -488,17 +475,6 @@ Public Class CFormEntryNew
             PublishClickedButton(ButtonClicked.Last)
             Inputs(False)
 
-            'Try
-            '    If Not SingleData Then
-            '        RecordCount = PresenterObj.GetRecordCount()
-            '        PresenterObj.RecordPositionNumber = RecordCount
-            '    End If
-            'Catch ex As Exception
-            '    MessageBox.Show(ex.Message + Name)
-            '    Debugger.Break()
-            'End Try
-            ' add bizObject rules to controls
-
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New EntryFormLoaded(Me))
             End If
@@ -530,36 +506,6 @@ Public Class CFormEntryNew
             UpdateNavigationButtonDisplay(False, False)
         End If
     End Sub
-
-    'Private Sub ClearData()
-    '    Dim allCtrl As New List(Of Control)
-    '    Dim initValue = ""
-    '    For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
-    '        Try
-    '            If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is CMaskedTextBox Then
-    '                Try
-    '                    initValue = GetPropertyValue(cCtrl, "DefaultValue")
-    '                Catch ex As Exception
-    '                    '' ignore error if no 'DefaultValue' property
-    '                End Try
-    '                cCtrl.Text = initValue
-    '            ElseIf TypeOf cCtrl Is TxtComboBox Then
-    '                CallByName(cCtrl, "MakeDefault", CallType.Method)
-    '            ElseIf TypeOf cCtrl Is CaComboBox Or TypeOf cCtrl Is CComboBox Then
-    '                SetPropertyValue(cCtrl, "SelectedItem", Nothing)
-    '                SetPropertyValue(cCtrl, "SelectedIndex", -1)
-    '                SetPropertyValue(cCtrl, "Text", "")
-    '            ElseIf TypeOf cCtrl Is CDataGridView Then
-    '                'CType(cCtrl, CDataGridView).Rows.Clear()
-    '            ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDTPHijriDate OrElse
-    '            TypeOf cCtrl Is tdpGregorian OrElse TypeOf cCtrl Is CDtpGregorianDate Then
-    '                SetPropertyValue(cCtrl, "Value", Nothing)
-    '            End If
-    '        Catch ' ignore fields that don't have a column to bind to
-    '            ''
-    '        End Try
-    '    Next
-    'End Sub
 
     Private Sub CloseForm()
         If GlobalVariables.AppCurrentCultureInfo.Name <> TextDisplayLanguage Then
@@ -621,7 +567,6 @@ Public Class CFormEntryNew
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
         RecordPositionNumber = RecordPositionNumber
-        'RightToLeft = RightToLeft.Yes
     End Sub
 
     Protected Overridable Function DataIsValid() As Boolean
@@ -636,7 +581,6 @@ Public Class CFormEntryNew
 
     Public Property HideNavigatorButtons As Boolean
     Public Property IgnoreTextBoxNumParserMessage As Boolean
-    'Public Property DataErrorsFound As Boolean
 
     Protected Function TextBoxNumParser(Of T As Structure)(ByRef control As CTextBox) As T
         Dim retValue As T
@@ -651,63 +595,10 @@ Public Class CFormEntryNew
                 Else
                     description = control.Name
                 End If
-                'Messaging.ShowParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", description})
             End If
             retValue = Parser(Of T).Parser("0")
-            'DataErrorsFound = True
         End Try
         Return retValue
     End Function
-
-    '<Category("Custom Properties")>
-    '<DefaultValue(False)>
-    '<Description("Set to True to specify that this control is Read Only .")>
-    '<Browsable(True)>
-    'Public Property DisplayOnly As Boolean
-    '    Get
-    '        Return _displayOnly
-    '    End Get
-    '    Set(value As Boolean)
-    '        If _displayOnly = value Then Exit Property
-    '        _displayOnly = value
-    '        If value Then
-    '            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-    '            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-    '        Else
-    '            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-    '            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-    '        End If
-    '    End Set
-    'End Property
-
-    'Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
-    '    Get
-    '        Return _editingMode
-    '    End Get
-    '    Set(value As Boolean)
-    '        _editingMode = value
-    '        If value Then
-    '            If DisplayOnly Then
-    '                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-    '                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-    '            Else
-    '                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-    '                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-    '            End If
-    '        Else
-    '            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-    '            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-    '        End If
-    '    End Set
-    'End Property
-
-    'Public Property Translatable As Boolean Implements IEntryControl.Translatable
-    '    Get
-    '        Return True
-    '    End Get
-    '    Set(value As Boolean)
-    '        _translatable = value
-    '    End Set
-    'End Property
 
 End Class

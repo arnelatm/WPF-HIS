@@ -22,11 +22,12 @@ Public Class CFormEntryTv
         root.Nodes.Clear()
         ' create the tree
         If GlobalVariables.RightToLeftLayout Then
+            TreeViewTableName.RightToLeft = RightToLeft.Yes
             TreeViewTableName.RightToLeftLayout = True
         Else
+            TreeViewTableName.RightToLeft = RightToLeft.No
             TreeViewTableName.RightToLeftLayout = False
         End If
-        TreeViewTableName.RightToLeft = RightToLeft.Inherit
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             For Each dataNode In treeViewData
                 AddRecordToTree(dataNode)
@@ -162,12 +163,12 @@ Public Class CFormEntryTv
         _bypassSelectedChange = True
         If GlobalVariables.RightToLeftLayout Then
             RightToLeftLayout = True
-            TreeViewTableName.RightToLeftLayout = True
             TreeViewTableName.RightToLeft = RightToLeft.Yes
+            TreeViewTableName.RightToLeftLayout = True
         Else
             RightToLeftLayout = False
-            TreeViewTableName.RightToLeftLayout = False
             TreeViewTableName.RightToLeft = RightToLeft.No
+            TreeViewTableName.RightToLeftLayout = False
         End If
         TreeViewTableName.ExpandAll()
         _bypassSelectedChange = False

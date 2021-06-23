@@ -27,51 +27,30 @@ Public Class CFormEntryTvNew
 
     Public Property TreeViewData As New Object
 
-    'Public Sub DisplayTreeViewData()
-    '    If Ea IsNot Nothing Then
-    '        Ea.PublishEvent(New TreeViewDisplay(FormTreeView))
-    '    End If
-    'End Sub
-
-    'Protected Overrides Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
-    '    MyBase.OnTextDisplayLanguageChanged()
-    '    DisplayTreeViewData()
-    'End Sub
-
-    'Private Sub CFormEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-    '        FormTreeView.Nodes(0).Text = MainTableName
-    '        DisplayTreeViewData()
-    '        FormTreeView.ExpandAll()
-    '        FormTreeView.Refresh()
-    '    End If
-    'End Sub
-
     Private Sub BfTvEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         '_bypassSelectedChange = True
-        Refresh()
-        Show()
         If GlobalVariables.RightToLeftLayout Then
             RightToLeft = RightToLeft.Yes
             RightToLeftLayout = True
-            'FormTreeView.RightToLeft = RightToLeft.Yes
-            'FormTreeView.RightToLeftLayout = True
+            FormTreeView.RightToLeft = RightToLeft.Yes
+            FormTreeView.RightToLeftLayout = True
         Else
             RightToLeft = RightToLeft.No
             RightToLeftLayout = False
-            'FormTreeView.RightToLeft = RightToLeft.No
-            'FormTreeView.RightToLeftLayout = False
+            FormTreeView.RightToLeft = RightToLeft.No
+            FormTreeView.RightToLeftLayout = False
         End If
         FormTreeView.ExpandAll()
+        TranslateFormNew()
         '_bypassSelectedChange = False
     End Sub
 
     Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
         '_bypassSelectedChange = True
+        MyBase.SwitchUiLanguage(originalUi)
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New LanguageChanged(Me))
         End If
-        MyBase.SwitchUiLanguage(originalUi)
         '_bypassSelectedChange = False
     End Sub
 
