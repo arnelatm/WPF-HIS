@@ -25,18 +25,22 @@
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -122,21 +126,42 @@
             Me.txtDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.tbpEarnings = New System.Windows.Forms.TabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpDeductions = New System.Windows.Forms.TabPage()
             Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.dgvSequenceDeduction = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvDeductionRate = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvDeductionUnit = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpPhones = New System.Windows.Forms.TabPage()
             Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvCountryTelIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvFullPhone = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvFullPhoneAra = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvCountryTelCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
-            Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsPhones = New System.Windows.Forms.BindingSource(Me.components)
+            Me.AmountDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayElementCodeDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayElementIdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayElementKindDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayElementNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayElementNameAraDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.PayElementTypeDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.EmployeeIdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.RateDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.UnitDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvEarningRate = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+            Me.dgvUnit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -157,12 +182,12 @@
             Me.CFlowLayout6.SuspendLayout()
             Me.tbpEarnings.SuspendLayout()
             CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpDeductions.SuspendLayout()
             CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpPhones.SuspendLayout()
             CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
@@ -189,7 +214,7 @@
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(660, 459)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(666, 459)
             Me.CFlowLayout1.TabIndex = 8
             '
             'CFlowLayout4
@@ -2173,18 +2198,20 @@
             Me.DataGridViewEarnings.AllowUserToOrderColumns = True
             DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewEarnings.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+            Me.DataGridViewEarnings.AutoGenerateColumns = False
             Me.DataGridViewEarnings.BackgroundColor = System.Drawing.Color.White
             Me.DataGridViewEarnings.BegFindValue = Nothing
             Me.DataGridViewEarnings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvEarningIdNo})
-            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle5
+            Me.DataGridViewEarnings.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceEarning, Me.dgvEarningIdNo, Me.dgvEarningRate, Me.dgvUnit, Me.dgvEarningAmount, Me.EmployeeIdNoDataGridViewTextBoxColumn2, Me.IdNoDataGridViewTextBoxColumn2})
+            Me.DataGridViewEarnings.DataSource = Me.bsEarnings
+            DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewEarnings.DefaultCellStyle = DataGridViewCellStyle7
             Me.DataGridViewEarnings.DgvFooter = Nothing
             Me.DataGridViewEarnings.DisplayOnly = False
             Me.DataGridViewEarnings.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2204,7 +2231,7 @@
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
             Me.DataGridViewEarnings.ReadOnly = True
             Me.DataGridViewEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewEarnings.SequenceColumn = "dgvSequenceEarning"
+            Me.DataGridViewEarnings.SequenceColumn = "dgvSequence"
             Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
             Me.DataGridViewEarnings.ShowFooter = True
             Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = True
@@ -2212,20 +2239,9 @@
             Me.DataGridViewEarnings.TabIndex = 5
             Me.DataGridViewEarnings.Translatable = True
             '
-            'dgvEarningIdNo
+            'bsEarnings
             '
-            Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle4
-            Me.dgvEarningIdNo.EditingMode = False
-            Me.dgvEarningIdNo.HeaderText = "Earning Name - Code"
-            Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
-            Me.dgvEarningIdNo.ReadOnly = True
-            Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvEarningIdNo.Translatable = False
+            Me.bsEarnings.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel)
             '
             'tbpDeductions
             '
@@ -2241,19 +2257,21 @@
             'DataGridViewDeductions
             '
             Me.DataGridViewDeductions.AllowUserToOrderColumns = True
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDeductions.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
+            Me.DataGridViewDeductions.AutoGenerateColumns = False
             Me.DataGridViewDeductions.BegFindValue = Nothing
             Me.DataGridViewDeductions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvDeductionIdNo, Me.dgvDeductionRate, Me.dgvDeductionUnit})
-            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle10
+            Me.DataGridViewDeductions.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDeduction, Me.dgvDeductionIdNo, Me.dgvDeductionRate, Me.dgvDeductionUnit, Me.dgvDeductionAmount, Me.EmployeeIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewDeductions.DataSource = Me.bsDeductions
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDeductions.DefaultCellStyle = DataGridViewCellStyle14
             Me.DataGridViewDeductions.DgvFooter = Nothing
             Me.DataGridViewDeductions.DisplayOnly = False
             Me.DataGridViewDeductions.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2281,13 +2299,35 @@
             Me.DataGridViewDeductions.TabIndex = 2
             Me.DataGridViewDeductions.Translatable = True
             '
+            'dgvSequenceDeduction
+            '
+            Me.dgvSequenceDeduction.BegFindValue = Nothing
+            Me.dgvSequenceDeduction.DataPropertyName = "Sequence"
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceDeduction.DefaultCellStyle = DataGridViewCellStyle9
+            Me.dgvSequenceDeduction.EditingMode = False
+            Me.dgvSequenceDeduction.EndFindValue = Nothing
+            Me.dgvSequenceDeduction.FieldDescription = Nothing
+            Me.dgvSequenceDeduction.FieldName = Nothing
+            Me.dgvSequenceDeduction.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequenceDeduction.FindEnabled = False
+            Me.dgvSequenceDeduction.HeaderText = "Seq"
+            Me.dgvSequenceDeduction.IgnoreCase = False
+            Me.dgvSequenceDeduction.Name = "dgvSequenceDeduction"
+            Me.dgvSequenceDeduction.ReadOnly = True
+            Me.dgvSequenceDeduction.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequenceDeduction.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequenceDeduction.Translatable = False
+            Me.dgvSequenceDeduction.Width = 40
+            '
             'dgvDeductionIdNo
             '
             Me.dgvDeductionIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvDeductionIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvDeductionIdNo.DefaultCellStyle = DataGridViewCellStyle7
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            Me.dgvDeductionIdNo.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvDeductionIdNo.EditingMode = False
             Me.dgvDeductionIdNo.HeaderText = "Deduction Name - Code"
             Me.dgvDeductionIdNo.Name = "dgvDeductionIdNo"
@@ -2300,11 +2340,11 @@
             '
             Me.dgvDeductionRate.BegFindValue = Nothing
             Me.dgvDeductionRate.DataPropertyName = "Rate"
-            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle8.Format = "###,##0.00"
-            Me.dgvDeductionRate.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle11.Format = "###,##0.00"
+            Me.dgvDeductionRate.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvDeductionRate.EditingMode = False
             Me.dgvDeductionRate.EndFindValue = Nothing
             Me.dgvDeductionRate.FieldDescription = Nothing
@@ -2323,9 +2363,9 @@
             'dgvDeductionUnit
             '
             Me.dgvDeductionUnit.DataPropertyName = "Unit"
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            Me.dgvDeductionUnit.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.dgvDeductionUnit.DefaultCellStyle = DataGridViewCellStyle12
             Me.dgvDeductionUnit.EditingMode = False
             Me.dgvDeductionUnit.HeaderText = "Unit"
             Me.dgvDeductionUnit.Name = "dgvDeductionUnit"
@@ -2333,6 +2373,49 @@
             Me.dgvDeductionUnit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvDeductionUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             Me.dgvDeductionUnit.Translatable = False
+            '
+            'dgvDeductionAmount
+            '
+            Me.dgvDeductionAmount.BegFindValue = Nothing
+            Me.dgvDeductionAmount.DataPropertyName = "Amount"
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.Format = "###,##0.00"
+            Me.dgvDeductionAmount.DefaultCellStyle = DataGridViewCellStyle13
+            Me.dgvDeductionAmount.EditingMode = False
+            Me.dgvDeductionAmount.EndFindValue = Nothing
+            Me.dgvDeductionAmount.FieldDescription = Nothing
+            Me.dgvDeductionAmount.FieldName = Nothing
+            Me.dgvDeductionAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvDeductionAmount.FindEnabled = False
+            Me.dgvDeductionAmount.HeaderText = "Payroll Amount"
+            Me.dgvDeductionAmount.Name = "dgvDeductionAmount"
+            Me.dgvDeductionAmount.ReadOnly = True
+            Me.dgvDeductionAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvDeductionAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvDeductionAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvDeductionAmount.Translatable = False
+            '
+            'EmployeeIdNoDataGridViewTextBoxColumn
+            '
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.DataPropertyName = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.HeaderText = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.Name = "EmployeeIdNoDataGridViewTextBoxColumn"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.EmployeeIdNoDataGridViewTextBoxColumn.Visible = False
+            '
+            'IdNoDataGridViewTextBoxColumn
+            '
+            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
+            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.IdNoDataGridViewTextBoxColumn.Visible = False
+            '
+            'bsDeductions
+            '
+            Me.bsDeductions.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel)
             '
             'tbpPhones
             '
@@ -2348,19 +2431,19 @@
             '
             'DataGridViewPhones
             '
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPhones.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle15
             Me.DataGridViewPhones.BegFindValue = Nothing
             Me.DataGridViewPhones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPhones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvCountryTelIdNo, Me.dgvFullPhone, Me.dgvFullPhoneAra, Me.dgvCountryTelCode})
-            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle13
+            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPhones.DefaultCellStyle = DataGridViewCellStyle17
             Me.DataGridViewPhones.DgvFooter = Nothing
             Me.DataGridViewPhones.DisplayOnly = False
             Me.DataGridViewPhones.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2391,9 +2474,9 @@
             'dgvCountryTelIdNo
             '
             Me.dgvCountryTelIdNo.DataPropertyName = "CountryTelIdNo"
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            Me.dgvCountryTelIdNo.DefaultCellStyle = DataGridViewCellStyle12
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            Me.dgvCountryTelIdNo.DefaultCellStyle = DataGridViewCellStyle16
             Me.dgvCountryTelIdNo.EditingMode = False
             Me.dgvCountryTelIdNo.HeaderText = "Country Phone Code"
             Me.dgvCountryTelIdNo.MinimumWidth = 200
@@ -2428,17 +2511,167 @@
             Me.dgvCountryTelCode.ReadOnly = True
             Me.dgvCountryTelCode.Visible = False
             '
-            'bsEarnings
-            '
-            Me.bsEarnings.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel)
-            '
-            'bsDeductions
-            '
-            Me.bsDeductions.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel)
-            '
             'bsPhones
             '
             Me.bsPhones.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel)
+            '
+            'AmountDataGridViewTextBoxColumn1
+            '
+            Me.AmountDataGridViewTextBoxColumn1.DataPropertyName = "Amount"
+            Me.AmountDataGridViewTextBoxColumn1.HeaderText = "Amount"
+            Me.AmountDataGridViewTextBoxColumn1.Name = "AmountDataGridViewTextBoxColumn1"
+            '
+            'PayElementCodeDataGridViewTextBoxColumn1
+            '
+            Me.PayElementCodeDataGridViewTextBoxColumn1.DataPropertyName = "PayElementCode"
+            Me.PayElementCodeDataGridViewTextBoxColumn1.HeaderText = "PayElementCode"
+            Me.PayElementCodeDataGridViewTextBoxColumn1.Name = "PayElementCodeDataGridViewTextBoxColumn1"
+            '
+            'PayElementIdNoDataGridViewTextBoxColumn1
+            '
+            Me.PayElementIdNoDataGridViewTextBoxColumn1.DataPropertyName = "PayElementIdNo"
+            Me.PayElementIdNoDataGridViewTextBoxColumn1.HeaderText = "PayElementIdNo"
+            Me.PayElementIdNoDataGridViewTextBoxColumn1.Name = "PayElementIdNoDataGridViewTextBoxColumn1"
+            '
+            'PayElementKindDataGridViewTextBoxColumn1
+            '
+            Me.PayElementKindDataGridViewTextBoxColumn1.DataPropertyName = "PayElementKind"
+            Me.PayElementKindDataGridViewTextBoxColumn1.HeaderText = "PayElementKind"
+            Me.PayElementKindDataGridViewTextBoxColumn1.Name = "PayElementKindDataGridViewTextBoxColumn1"
+            '
+            'PayElementNameDataGridViewTextBoxColumn1
+            '
+            Me.PayElementNameDataGridViewTextBoxColumn1.DataPropertyName = "PayElementName"
+            Me.PayElementNameDataGridViewTextBoxColumn1.HeaderText = "PayElementName"
+            Me.PayElementNameDataGridViewTextBoxColumn1.Name = "PayElementNameDataGridViewTextBoxColumn1"
+            '
+            'PayElementNameAraDataGridViewTextBoxColumn1
+            '
+            Me.PayElementNameAraDataGridViewTextBoxColumn1.DataPropertyName = "PayElementNameAra"
+            Me.PayElementNameAraDataGridViewTextBoxColumn1.HeaderText = "PayElementNameAra"
+            Me.PayElementNameAraDataGridViewTextBoxColumn1.Name = "PayElementNameAraDataGridViewTextBoxColumn1"
+            '
+            'PayElementTypeDataGridViewTextBoxColumn1
+            '
+            Me.PayElementTypeDataGridViewTextBoxColumn1.DataPropertyName = "PayElementType"
+            Me.PayElementTypeDataGridViewTextBoxColumn1.HeaderText = "PayElementType"
+            Me.PayElementTypeDataGridViewTextBoxColumn1.Name = "PayElementTypeDataGridViewTextBoxColumn1"
+            '
+            'EmployeeIdNoDataGridViewTextBoxColumn1
+            '
+            Me.EmployeeIdNoDataGridViewTextBoxColumn1.DataPropertyName = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn1.HeaderText = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn1.Name = "EmployeeIdNoDataGridViewTextBoxColumn1"
+            '
+            'IdNoDataGridViewTextBoxColumn1
+            '
+            Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
+            '
+            'RateDataGridViewTextBoxColumn1
+            '
+            Me.RateDataGridViewTextBoxColumn1.DataPropertyName = "Rate"
+            Me.RateDataGridViewTextBoxColumn1.HeaderText = "Rate"
+            Me.RateDataGridViewTextBoxColumn1.Name = "RateDataGridViewTextBoxColumn1"
+            '
+            'UnitDataGridViewTextBoxColumn1
+            '
+            Me.UnitDataGridViewTextBoxColumn1.DataPropertyName = "Unit"
+            Me.UnitDataGridViewTextBoxColumn1.HeaderText = "Unit"
+            Me.UnitDataGridViewTextBoxColumn1.Name = "UnitDataGridViewTextBoxColumn1"
+            '
+            'dgvSequenceEarning
+            '
+            Me.dgvSequenceEarning.BegFindValue = Nothing
+            Me.dgvSequenceEarning.DataPropertyName = "Sequence"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle4
+            Me.dgvSequenceEarning.EditingMode = False
+            Me.dgvSequenceEarning.EndFindValue = Nothing
+            Me.dgvSequenceEarning.FieldDescription = Nothing
+            Me.dgvSequenceEarning.FieldName = Nothing
+            Me.dgvSequenceEarning.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequenceEarning.FindEnabled = False
+            Me.dgvSequenceEarning.HeaderText = "Seq"
+            Me.dgvSequenceEarning.IgnoreCase = False
+            Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
+            Me.dgvSequenceEarning.ReadOnly = True
+            Me.dgvSequenceEarning.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequenceEarning.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequenceEarning.Translatable = False
+            Me.dgvSequenceEarning.Width = 40
+            '
+            'dgvEarningIdNo
+            '
+            Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
+            Me.dgvEarningIdNo.EditingMode = False
+            Me.dgvEarningIdNo.HeaderText = "Earning Name - Code"
+            Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
+            Me.dgvEarningIdNo.ReadOnly = True
+            Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningIdNo.Translatable = False
+            '
+            'dgvEarningRate
+            '
+            Me.dgvEarningRate.DataPropertyName = "Rate"
+            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            Me.dgvEarningRate.DefaultCellStyle = DataGridViewCellStyle5
+            Me.dgvEarningRate.EditingMode = False
+            Me.dgvEarningRate.HeaderText = "Rate / Amount"
+            Me.dgvEarningRate.Name = "dgvEarningRate"
+            Me.dgvEarningRate.ReadOnly = True
+            Me.dgvEarningRate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningRate.Translatable = False
+            Me.dgvEarningRate.Width = 80
+            '
+            'dgvUnit
+            '
+            Me.dgvUnit.DataPropertyName = "Unit"
+            Me.dgvUnit.HeaderText = "Unit"
+            Me.dgvUnit.Name = "dgvUnit"
+            Me.dgvUnit.ReadOnly = True
+            '
+            'dgvEarningAmount
+            '
+            Me.dgvEarningAmount.BegFindValue = Nothing
+            Me.dgvEarningAmount.DataPropertyName = "Amount"
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle6.Format = "###,##0.00"
+            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle6
+            Me.dgvEarningAmount.EditingMode = False
+            Me.dgvEarningAmount.EndFindValue = Nothing
+            Me.dgvEarningAmount.FieldDescription = Nothing
+            Me.dgvEarningAmount.FieldName = Nothing
+            Me.dgvEarningAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvEarningAmount.FindEnabled = False
+            Me.dgvEarningAmount.HeaderText = "Payroll Amount"
+            Me.dgvEarningAmount.Name = "dgvEarningAmount"
+            Me.dgvEarningAmount.ReadOnly = True
+            Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningAmount.Translatable = False
+            '
+            'EmployeeIdNoDataGridViewTextBoxColumn2
+            '
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.DataPropertyName = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.HeaderText = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.Name = "EmployeeIdNoDataGridViewTextBoxColumn2"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.ReadOnly = True
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.Visible = False
+            '
+            'IdNoDataGridViewTextBoxColumn2
+            '
+            Me.IdNoDataGridViewTextBoxColumn2.DataPropertyName = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn2.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn2.Name = "IdNoDataGridViewTextBoxColumn2"
+            Me.IdNoDataGridViewTextBoxColumn2.ReadOnly = True
+            Me.IdNoDataGridViewTextBoxColumn2.Visible = False
             '
             'EmployeeEntryTvNew
             '
@@ -2470,12 +2703,12 @@
             Me.CFlowLayout6.PerformLayout()
             Me.tbpEarnings.ResumeLayout(False)
             CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpDeductions.ResumeLayout(False)
             CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpPhones.ResumeLayout(False)
             CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
@@ -2567,12 +2800,8 @@
         Friend WithEvents txtDutyHours As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents tbpEarnings As TabPage
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents tbpDeductions As TabPage
         Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
-        Friend WithEvents dgvDeductionRate As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
-        Friend WithEvents dgvDeductionUnit As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents tbpPhones As TabPage
         Friend WithEvents DataGridViewPhones As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents dgvCountryTelIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
@@ -2582,5 +2811,30 @@
         Friend WithEvents bsEarnings As BindingSource
         Friend WithEvents bsDeductions As BindingSource
         Friend WithEvents bsPhones As BindingSource
+        Friend WithEvents dgvSequenceDeduction As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvDeductionRate As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
+        Friend WithEvents dgvDeductionUnit As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvDeductionAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
+        Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents AmountDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents PayElementCodeDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents PayElementIdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents PayElementKindDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents PayElementNameDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents PayElementNameAraDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents PayElementTypeDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents RateDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents UnitDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvEarningRate As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
+        Friend WithEvents dgvUnit As DataGridViewTextBoxColumn
+        Friend WithEvents dgvEarningAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
+        Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     End Class
 End Namespace
