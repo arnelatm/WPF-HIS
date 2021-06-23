@@ -18,18 +18,8 @@ Namespace PresentationLayer.Views.Forms
             TvMainFieldName = "BankName"
             TvSecondaryFieldName = "BankCode"
             MainTableName = "Bank"
-            'SortOrderKey = "BankName"
             Ea = New EventAggregator()
             _presenter = New BankPresenter(Me)
-
-            'MainTableName = "Bank"
-            'TvMainFieldName = "BankName"
-            'TvSecondaryFieldName = "BankCode"
-            'SortOrderKey = "BankName"
-            'FirstControl = txtBankCode
-            'PresenterObj = New BankPresenter(Me)
-            'Ea = PresenterObj.Ea
-            'Ea.SubscribeEvent(Me)
 
         End Sub
 

@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Globalization
+Imports System.Windows.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -67,10 +68,8 @@ Public Class PresenterTv(Of T As IView, TM As New)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
                 Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
             Else
-                'Return Model.GetLookupRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
                 Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
             End If
         Else
@@ -171,26 +170,23 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
         If Not _bypassSelectedChange Then
-            'Select Case (e.Action)
-            '    Case TreeViewAction.ByKeyboard
-            '        'MessageBox.Show("You like the keyboard!")
-            '    Case TreeViewAction.ByMouse
-            '        'MessageBox.Show("You like the mouse!")
-            '    Case Else
-            '        ' A problem here is causing a windows handle error when executing the below code.
-            '        ' Therefore since this is just a selection change during initialization no need
-            '        ' to execute the codes below so just exit the sub. This will also make initialization
-            '        ' faster because no more need to move the database anyway at initialization the
-            '        ' first record will be the one to be shown.
-            '        Exit Sub
-            'End Select
-            ''If Not PresenterObj.OkToMove() Then
-            ''    Exit Sub
-            ''End If
+            Select Case e.Action
+                Case TreeViewAction.ByKeyboard
+                    'MessageBox.Show("You like the keyboard!")
+
+                Case TreeViewAction.ByMouse
+                    'MessageBox.Show("You like the mouse!")
+                Case Else
+                    ' A problem here is causing a windows handle error when executing the below code.
+                    ' Therefore since this is just a selection change during initialization no need
+                    ' to execute the codes below so just exit the sub. This will also make initialization
+                    ' faster because no more need to move the database anyway at initialization the
+                    ' first record will be the one to be shown.
+                    Exit Sub
+            End Select
             Dim nTag As Integer
             FormTreeView.ImageIndex = 1
             If FormTreeView.SelectedNode.Tag Is Nothing Then
-                'If FormTreeView.SelectedNode.Tag.ToString = "root" Then
                 RecordPositionNumber = 1
             Else
                 nTag = FormTreeView.SelectedNode.Tag
@@ -203,8 +199,7 @@ Public Class PresenterTv(Of T As IView, TM As New)
         End If
     End Sub
 
-    Private Sub TreeView1_BeforeSelect(ByVal sender As Object, ByVal e As TreeViewCancelEventArgs) Handles FormTreeView.BeforeSelect
-        'If e.Action = TreeViewAction.Unknown Then e.Cancel = True
+    Private Sub FormTreeViewBeforeSelect(ByVal sender As Object, ByVal e As TreeViewCancelEventArgs) Handles FormTreeView.BeforeSelect
         If EditMode Or AddMode Then
             e.Cancel = True
         End If
@@ -224,6 +219,14 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Public Sub OnLanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
         _bypassSelectedChange = True
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+            FormTreeView.RightToLeft = RightToLeft.Yes
+            FormTreeView.RightToLeftLayout = True
+        Else
+            FormTreeView.RightToLeft = RightToLeft.No
+            FormTreeView.RightToLeftLayout = False
+        End If
+        DisplayTree()
     End Sub
 
 End Class

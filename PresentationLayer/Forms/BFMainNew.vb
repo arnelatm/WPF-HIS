@@ -167,6 +167,15 @@ Public Class BFMainNew
 
     Public Sub TranslateForm()
         SuspendLayout()
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+            GlobalVariables.RightToLeftLayout = True
+            RightToLeft = RightToLeft.Yes
+            RightToLeftLayout = True
+        Else
+            GlobalVariables.RightToLeftLayout = False
+            RightToLeft = RightToLeft.No
+            RightToLeftLayout = False
+        End If
         Dim myImage As Bitmap
         myImage = BackgroundImage
         BackgroundImage = Nothing
@@ -176,19 +185,6 @@ Public Class BFMainNew
         BackgroundImage = myImage
         If GlobalVariables.TranslationMode Then
             RaiseEvent AfterTranslateForm()
-        End If
-        Show()
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            GlobalVariables.RightToLeftLayout = True
-            'SetFormCulture(CultureInfo.CurrentCulture)
-            RightToLeft = RightToLeft.No
-            RightToLeft = RightToLeft.Yes
-            RightToLeftLayout = True
-        Else
-            GlobalVariables.RightToLeftLayout = False
-            'SetFormCulture(CultureInfo.CurrentCulture)
-            RightToLeft = RightToLeft.No
-            RightToLeftLayout = False
         End If
         ResumeLayout()
     End Sub
@@ -513,7 +509,7 @@ Public Class BFMainNew
     Private Sub BFMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             RaiseEvent BeforeLoad()
-            TranslateFormNew()
+            'TranslateFormNew()
         End If
     End Sub
 

@@ -74,7 +74,6 @@ Partial Class CFormEntryTvNew
         TreeNode1.Name = "Node0"
         TreeNode1.Text = "root"
         Me.FormTreeView.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
-        Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.FormTreeView.Size = New System.Drawing.Size(266, 397)
         Me.FormTreeView.TabIndex = 0
         Me.FormTreeView.Tag = "root"
