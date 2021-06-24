@@ -1989,18 +1989,18 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     '    eventType.Target = dataList
     'End Sub
 
-    Public Sub OnEventHandler(Of TE)(ByRef eventType As GetEnumListRequested) Implements ISubscriber(Of GetEnumListRequestedNew).OnEventHandler
-        Dim dataList As New List(Of ClassesLibrary.LookupData)
-        For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData With {
-                    .IdNo = CInt(c),
-                    .Code = EnumToCode(c),
-                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-                    }
-            dataList.Add(data)
-        Next
-        eventType.Target = dataList
-    End Sub
+    'Public Sub OnEventHandler(Of TE)(ByRef eventType As GetEnumListRequested) Implements ISubscriber(Of GetEnumListRequestedNew).OnEventHandler
+    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
+    '    For Each c In [Enum].GetValues(GetType(TE))
+    '        Dim data As New ClassesLibrary.LookupData With {
+    '                .IdNo = CInt(c),
+    '                .Code = EnumToCode(c),
+    '                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+    '                }
+    '        dataList.Add(data)
+    '    Next
+    '    eventType.Target = dataList
+    'End Sub
 
 End Class
 

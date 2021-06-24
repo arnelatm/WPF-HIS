@@ -21,11 +21,6 @@ Namespace PresentationLayer.Presenters
         Public Sub New(itemView As IView)
             MyBase.New(itemView)
             Dim systemViewName As String
-            'If systemViewName Is Nothing Then
-            '    systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
-            'Else
-            '    systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName.Trim()
-            'End If
             If DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName IsNot Nothing Then
                 systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName.Trim()
             Else
@@ -62,39 +57,12 @@ Namespace PresentationLayer.Presenters
             Return GetLookupByCodeName()
         End Function
 
-        'Public Function GetEnumList(Of TE)()
-        '    If EnumConverter Is Nothing Then
-        '        EnumConverter = TypeDescriptor.GetConverter(GetType(TE))
-        '    End If
-        '    Dim dataList As New List(Of ClassesLibrary.LookupData)
-        '    'Dim enumValues = [Enum].GetValues(GetType(TE))
-        '    For Each c In [Enum].GetValues(GetType(TE))
-        '        Dim data As New ClassesLibrary.LookupData With {
-        '            .IdNo = CInt(c),
-        '            .Code = EnumToCode(c),
-        '            .Name = EnumConverter.GetValueText(CultureInfo.CurrentCulture, c)
-        '        }
-        '        dataList.Add(data)
-        '    Next
-        '    Return dataList
-        'End Function
-
         Public Overrides Sub GoAddRecord()
             MyBase.GoAddRecord()
             MakeDefaultValues()
         End Sub
 
         Public Overridable Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
-            'Dim presenterModelName = $"AATM.Common.PresentationLayer.Models.ModelCommon." + objectName
-
-            'Dim args As Object() = {objectName}
-            'Dim t As Type = Type.GetType(presenterModelName)
-            'If bizParams Is Nothing AndAlso daoParams Is Nothing Then
-            '    MyBase.ModelOfPresenter = Activator.CreateInstance(t)
-            'Else
-            '    MyBase.ModelOfPresenter = Activator.CreateInstance(t, bizParams, daoParams)
-            'End If
-
             Dim className = $"AATM.Common.PresentationLayer.Models.ModelCommon"
             TableName = objectName
             SortOrderKey = objectName + "Name"
@@ -162,19 +130,6 @@ Namespace PresentationLayer.Presenters
             Next item
             Return
         End Sub
-
-        'Public Function MakeEnumComboList(Of TE)()
-        '    Dim dataList As New List(Of ClassesLibrary.LookupData)
-        '    For Each c In [Enum].GetValues(GetType(TE))
-        '        Dim data As New ClassesLibrary.LookupData With {
-        '            .IdNo = CInt(c),
-        '            .Code = EnumToCode(c),
-        '            .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-        '        }
-        '        dataList.Add(data)
-        '    Next
-        '    Return dataList
-        'End Function
 
     End Class
 
