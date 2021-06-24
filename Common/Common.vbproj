@@ -266,7 +266,9 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IRevenueGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ITranslatedCaptionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ITranslatedMessagesView.vb" />
+    <Compile Include="ServiceLayer\IServiceCommonNew.vb" />
     <Compile Include="ServiceLayer\IServiceCommon.vb" />
+    <Compile Include="ServiceLayer\ServiceCommonNew.vb" />
     <Compile Include="ServiceLayer\ServiceCommon.vb" />
   </ItemGroup>
   <ItemGroup>

@@ -88,10 +88,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Services\DataService.vb" />
     <Compile Include="Services\DefaultFieldValueService.vb" />
+    <Compile Include="Services\ISecurityService.vb" />
+    <Compile Include="Services\IDataService.vb" />
     <Compile Include="Services\IRepositories.vb" />
+    <Compile Include="Services\IServiceNew.vb" />
     <Compile Include="Services\IService.vb" />
     <Compile Include="Services\ITblColPropService.vb" />
+    <Compile Include="Services\SecurityService.vb" />
+    <Compile Include="Services\ServiceNew.vb" />
     <Compile Include="Services\Service.vb" />
     <Compile Include="Services\TblColPropService.vb" />
   </ItemGroup>

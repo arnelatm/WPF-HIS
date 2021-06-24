@@ -289,6 +289,10 @@ Namespace PresentationLayer.Presenters
             GoFirstRecord()
         End Sub
 
+        Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
+
+        End Function
+
     End Class
 
 End Namespace

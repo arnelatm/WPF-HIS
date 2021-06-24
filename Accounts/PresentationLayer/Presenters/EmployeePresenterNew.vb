@@ -219,6 +219,11 @@ Namespace PresentationLayer.Presenters
             View.Balance = value
         End Sub
 
+        Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
+            Dim accountsPresenter As New AccountsPresenterNew()
+            Return accountsPresenter.ComputePayAmount(payFrequency, amount, unit)
+        End Function
+
     End Class
 
 End Namespace

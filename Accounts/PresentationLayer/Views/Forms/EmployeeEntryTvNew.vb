@@ -30,6 +30,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            _presenter = New EmployeePresenterNew(Me)
 
             ' Add any initialization after the InitializeComponent() call.
 
@@ -641,35 +642,35 @@ Namespace PresentationLayer.Views.Forms
                 If .CurrentRow IsNot Nothing Then
                     Dim nIndex = .CurrentRow.Index
                     Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-                    Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(MyPresenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
-                    Dim calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
+                    Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(_presenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
+                    Dim calcType = _presenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
                     Dim amount As Decimal
                     Dim selectedRow As EmployeePayElementView
                     selectedRow = DataGridViewEarnings.Rows(nIndex).DataBoundItem
                     Select Case .CurrentCell.OwningColumn.Name
                         Case $"dgvEarningIdNo"
                             earnIdNo = .CurrentCell.Value
-                            calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
+                            calcType = _presenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
                             If IsEmpty(selectedRow.Unit) Then
-                                selectedRow.Unit = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Unit")
+                                selectedRow.Unit = _presenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Unit")
                             End If
                             If selectedRow.Rate = 0 Then
-                                selectedRow.Rate = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Rate")
+                                selectedRow.Rate = _presenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Rate")
                             End If
                             If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
                                 amount = 0
                             ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                                amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, selectedRow.Unit)
+                                amount = _presenter.ComputePayAmount(payFrequency, selectedRow.Rate, selectedRow.Unit)
                             End If
                         Case $"dgvEarningRate"
                             If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
                                 amount = 0
                             ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                                amount = MyPresenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeEarnings(nIndex).Unit)
+                                amount = _presenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeEarnings(nIndex).Unit)
                             End If
                         Case $"dgvEarningUnit"
                             Dim unit = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-                            amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
+                            amount = _presenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
                     End Select
                     selectedRow.Amount = amount
                 End If
@@ -681,35 +682,35 @@ Namespace PresentationLayer.Views.Forms
                 If .CurrentRow IsNot Nothing Then
                     Dim nIndex = .CurrentRow.Index
                     Dim deductionIdNo = RegularEmployeeDeductions(nIndex).PayElementIdNo
-                    Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(MyPresenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
-                    Dim calcType = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "CalculationType")
+                    Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(_presenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
+                    Dim calcType = _presenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "CalculationType")
                     Dim amount As Decimal
                     Dim selectedRow As EmployeePayElementView
                     selectedRow = DataGridViewDeductions.Rows(nIndex).DataBoundItem
                     Select Case .CurrentCell.OwningColumn.Name
                         Case $"dgvDeductionIdNo"
                             deductionIdNo = .CurrentCell.Value
-                            calcType = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "CalculationType")
+                            calcType = _presenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "CalculationType")
                             If IsEmpty(selectedRow.Unit) Then
-                                selectedRow.Unit = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Unit")
+                                selectedRow.Unit = _presenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Unit")
                             End If
                             If selectedRow.Rate = 0 Then
-                                selectedRow.Rate = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Rate")
+                                selectedRow.Rate = _presenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Rate")
                             End If
                             If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
                                 amount = 0
                             ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                                amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, selectedRow.Unit)
+                                amount = _presenter.ComputePayAmount(payFrequency, selectedRow.Rate, selectedRow.Unit)
                             End If
                         Case $"dgvDeductionRate"
                             If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
                                 amount = 0
                             ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                                amount = MyPresenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeDeductions(nIndex).Unit)
+                                amount = _presenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeDeductions(nIndex).Unit)
                             End If
                         Case $"dgvDeductionUnit"
                             Dim unit = .CurrentCell.Value
-                            amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
+                            amount = _presenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
                     End Select
                     selectedRow.Amount = amount
                 End If

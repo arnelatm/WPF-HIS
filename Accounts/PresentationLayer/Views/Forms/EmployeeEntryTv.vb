@@ -60,18 +60,18 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property Balance As Decimal Implements IEmployeeView.Balance
-        '    Get
-        '        If txtBalance.Text <> "" Then
-        '            Return Convert.ToSingle(txtBalance.Text)
-        '        Else
-        '            Return 0
-        '        End If
-        '    End Get
-        '    Set
-        '        txtBalance.Text = Value
-        '    End Set
-        'End Property
+        Public Property Balance As Decimal Implements IEmployeeView.Balance
+            Get
+                If txtBalance.Text <> "" Then
+                    Return Convert.ToSingle(txtBalance.Text)
+                Else
+                    Return 0
+                End If
+            End Get
+            Set
+                txtBalance.Text = Value
+            End Set
+        End Property
 
         Public Property BankAccountNo As String Implements IEmployeeView.BankAccountNo
             Get

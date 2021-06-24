@@ -354,6 +354,7 @@
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\Class1.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeePresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\PayElementPresenter.vb" />
@@ -379,7 +380,6 @@
     <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTvNew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeePresenterTvNew.vb" />
     <Compile Include="PresentationLayer\Views\Forms\Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
