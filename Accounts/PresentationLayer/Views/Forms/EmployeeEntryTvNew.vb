@@ -22,18 +22,18 @@ Namespace PresentationLayer.Views.Forms
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _unit
         Private _phoneTypes
-        Private _presenter As EmployeePresenterNew
+        Private _presenter As IAccountsPresenter
 
         Private ReadOnly _nfi As NumberFormatInfo
 
-        Public Sub New()
+        Public Sub New(ByRef presenter As IAccountsPresenter)
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            _presenter = New EmployeePresenterNew(Me)
+            '_presenter = New EmployeePresenterNew(Me)
 
             ' Add any initialization after the InitializeComponent() call.
-
+            _presenter = presenter
             FirstControl = txtEmployeeName
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             ' Add any initialization after the InitializeComponent() call.
@@ -431,6 +431,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
+
             cacGender.DataSource = _presenter.MakeEnumComboList(Of MaleFemaleSelection)
             cacMaritalStatus.DataSource = _presenter.MakeEnumComboList(Of MaritalStatusSelection)
             cboPaymentMethod.DataSource = _presenter.MakeEnumComboList(Of PayrollPaymentMethodSelection)

@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.Interfaces
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -195,13 +196,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
-            Dim childMdiForm As BankEntryTv
-            ''Set the Parent Form of the Child window.
-            childMdiForm = New BankEntryTv With {
-                .MdiParent = Me
-                }
-            ''Display the new form.
-            childMdiForm.Show()
+            Dim presenter As IPresenter
+            Dim myForm = New BankEntryTv(presenter)
+            presenter = New BankPresenter(myForm)
+            myForm.Show()
         End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -368,7 +366,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemEmployees.Click
-            Dim myForm = New EmployeeEntryTvNew
+            Dim presenter As EmployeePresenter
+            Dim myForm = New EmployeeEntryTvNew(presenter)
+            presenter = New EmployeePresenter(myForm)
             myForm.Show()
         End Sub
 

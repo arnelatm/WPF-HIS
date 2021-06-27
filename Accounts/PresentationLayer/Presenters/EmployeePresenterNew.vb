@@ -10,7 +10,7 @@ Imports AATM.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeePresenterNew
-        Inherits PresenterTv(Of IEmployeeView, EmployeeModel)
+        Inherits AccountsPresenterNew(Of IEmployeeView, EmployeeModel)
 
         Protected DtEmpPayElementInsertTable As New DataTable
         Protected DtEmpPayElementUpdateTable As New DataTable
@@ -219,10 +219,9 @@ Namespace PresentationLayer.Presenters
             View.Balance = value
         End Sub
 
-        Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
-            Dim accountsPresenter As New AccountsPresenterNew()
-            Return accountsPresenter.ComputePayAmount(payFrequency, amount, unit)
-        End Function
+        'Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
+        '    Return ComputePayAmount(payFrequency, amount, unit)
+        'End Function
 
     End Class
 

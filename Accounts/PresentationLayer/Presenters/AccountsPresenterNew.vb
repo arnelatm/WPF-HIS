@@ -1,170 +1,175 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AccountsPresenterNew
+    Public Class AccountsPresenterNew(Of T As IView, TM As New)
+        Inherits PresenterTv(Of T, TM)
+        Implements IAccountsPresenter
 
-        Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
-            Dim modelDepositType As New ModelAccounts("DepositType")
-            Return modelDepositType.GetAll(Of DepositTypeModel)("DepositTypeName")
-        End Function
-
-        Public Function GetAccount(idNo As String)
-            Dim accountModel As New ModelAccounts("Account")
-            Return accountModel.GetRecordByIdNo(Of AccountModel)(idNo)
-        End Function
-
-        Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
-            Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
-                    .JournalCode = journalCode,
-                    .JournalIdNo = journalItem.JournalIdNo,
-                    .JournalItemIdNo = journalItem.IdNo
-                    }
-            Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
-        End Function
-
-        Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-            Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
-                    .JournalCode = journalCode,
-                    .JournalIdNo = journalItem.JournalIdNo,
-                    .JournalItemIdNo = journalItem.IdNo
-                    }
-            Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
-        End Function
-
-        Public Function DeleteApOpenInvoice(ByRef idNo As Int32)
-            Dim retVal As Integer = 0
-            If idNo <> 0 Then
-                Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-                retVal = modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
-            End If
-            Return retVal
-        End Function
-
-        Public Function UpdateInputVatAmount(journalItems As List(Of IJournalItemView))
-            Dim tiVatAmount As Decimal = 0
-            Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
-            For Each item In journalItems
-                If item.SpecialAccount = inputVatAccount Then
-                    tiVatAmount = tiVatAmount + item.Debit - item.Credit
-                End If
-            Next
-            Return tiVatAmount
-        End Function
-
-        Public Function UpdateOutputVatAmount(journalItems As List(Of IJournalItemView))
-            Dim toVatAmount As Decimal = 0
-            Dim outputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
-            For Each item In journalItems
-                If item.SpecialAccount = outputVatAccount Then
-                    toVatAmount = toVatAmount + item.Credit - item.Debit
-                End If
-            Next
-            Return toVatAmount
-        End Function
-
-        Public Sub MakeDebitAmount(journalItem As IJournalItemView, amount As Decimal?)
-            If amount Is Nothing OrElse amount >= 0 Then
-                journalItem.Credit = 0
-            ElseIf amount < 0 Then
-                journalItem.Credit = amount * -1
-                journalItem.Debit = 0
-            End If
+        Public Sub New(itemView As T)
+            MyBase.New(itemView)
+            'FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
         End Sub
 
-        Public Sub MakeCreditAmount(journalItem As IJournalItemView, amount As Decimal?)
-            If amount Is Nothing OrElse amount >= 0 Then
-                journalItem.Debit = 0
-            ElseIf amount < 0 Then
-                journalItem.Debit = amount * -1
-                journalItem.Credit = 0
-            End If
-        End Sub
+        'Public Function GetDepositTypeModel() As List(Of DepositTypeModel) Implements IAccountsPresenter.GetDepositTypeModel
+        '    Dim modelDepositType As New ModelAccounts("DepositType")
+        '    Return modelDepositType.GetAll(Of DepositTypeModel)("DepositTypeName")
+        'End Function
 
-        Public Sub MakePayTypeAndSpecialAccount(journalItem As IJournalItemView, accountIdNo As Int16?)
-            Dim account As AccountModel
-            If accountIdNo Is Nothing Or accountIdNo <= 0 Then
-                journalItem.JournalIdNo = 0
-                journalItem.SpecialAccount = Nothing
-                journalItem.PayeeType = Nothing
-            Else
-                account = GetAccount(accountIdNo)
-                journalItem.AccountIdNo = accountIdNo
-                journalItem.SpecialAccount = account.SpecialAccount
-                journalItem.PayeeType = account.PayeeType
-            End If
-        End Sub
+        'Public Function GetAccount(idNo As String) Implements IAccountsPresenter.GetAccount
+        '    Dim accountModel As New ModelAccounts("Account")
+        '    Return accountModel.GetRecordByIdNo(Of AccountModel)(idNo)
+        'End Function
 
-        Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView)
-            e.NewObject = New TS
-            ' work around for error on datagrid entry on lastrow please do not remove.
-            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
-            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
-            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-            If dataGridView.Rows.Count = bindingSource.Count Then
-                bindingSource.RemoveAt(bindingSource.Count - 1)
-            End If
-        End Sub
+        'Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer Implements IAccountsPresenter.AddArOpenInvoice
+        '    Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
+        '    Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
+        '            .JournalCode = journalCode,
+        '            .JournalIdNo = journalItem.JournalIdNo,
+        '            .JournalItemIdNo = journalItem.IdNo
+        '            }
+        '    Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
+        'End Function
 
-        Public Function GetBizRules(childProperty)
-            Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
-            Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
-            ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
-            Dim bModel As New ModelAccounts(bizName)
-            Return bModel.GetBizObjectRules()
-        End Function
+        'Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer Implements IAccountsPresenter.AddApOpenInvoice
+        '    Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
+        '    Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
+        '            .JournalCode = journalCode,
+        '            .JournalIdNo = journalItem.JournalIdNo,
+        '            .JournalItemIdNo = journalItem.IdNo
+        '            }
+        '    Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
+        'End Function
 
-        Public Function GetBizObject(childProperty)
-            Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
-            Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
-            ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
-            Dim bModel As New ModelAccounts(bizName)
-            Return bModel.DataService.DataBo
-        End Function
+        'Public Function DeleteApOpenInvoice(ByRef idNo As Int32) Implements IAccountsPresenter.DeleteApOpenInvoice
+        '    Dim retVal As Integer = 0
+        '    If idNo <> 0 Then
+        '        Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
+        '        retVal = modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
+        '    End If
+        '    Return retVal
+        'End Function
 
-        Public Function ValidateDataBoundGrid(Of TMG As New)(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing)
-            Dim errorFound As Boolean = False
-            Dim rules = GetBizRules(viewProperty)
-            Dim bo = GetBizObject(viewProperty)
-            For Each rule In rules
-                For Each col In dataGridView.Columns()
-                    Dim colName = col.DataPropertyName
-                    If rule.Property = colName Then
-                        For Each row As DataGridViewRow In dataGridView.Rows
-                            Dim model As New TMG
-                            If row.Index() >= 0 AndAlso row.Index() < dataGridView.RowCount() - 1 Then
-                                GlobalVariables.Mapper.Map(viewProperty(row.Index()), model)
-                                GlobalVariables.Mapper.Map(model, bo)
-                                If Not bo.IsRuleValid(rule) Then
-                                    Dim obj As New Object
-                                    dictionary.TryGetValue(rule.Property, obj)
-                                    row.Cells(obj.Name).ErrorText = rule.Error
-                                    errorFound = True
-                                End If
-                            End If
-                        Next
-                    End If
-                Next
-            Next
-            If errorFound Then
-                If tabPage IsNot Nothing Then
-                    tabPage.ImageIndex = 0
-                Else
-                    tabPage.ImageIndex = -1
-                End If
-            Else
-                If tabPage IsNot Nothing Then
-                    tabPage.ImageIndex = -1
-                End If
-            End If
-            Return Not errorFound
-        End Function
+        'Public Function UpdateInputVatAmount(journalItems As List(Of IJournalItemView)) Implements IAccountsPresenter.UpdateInputVatAmount
+        '    Dim tiVatAmount As Decimal = 0
+        '    Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
+        '    For Each item In journalItems
+        '        If item.SpecialAccount = inputVatAccount Then
+        '            tiVatAmount = tiVatAmount + item.Debit - item.Credit
+        '        End If
+        '    Next
+        '    Return tiVatAmount
+        'End Function
+
+        'Public Function UpdateOutputVatAmount(journalItems As List(Of IJournalItemView)) Implements IAccountsPresenter.UpdateOutputVatAmount
+        '    Dim toVatAmount As Decimal = 0
+        '    Dim outputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
+        '    For Each item In journalItems
+        '        If item.SpecialAccount = outputVatAccount Then
+        '            toVatAmount = toVatAmount + item.Credit - item.Debit
+        '        End If
+        '    Next
+        '    Return toVatAmount
+        'End Function
+
+        'Public Sub MakeDebitAmount(journalItem As IJournalItemView, amount As Decimal?) Implements IAccountsPresenter.MakeDebitAmount
+        '    If amount Is Nothing OrElse amount >= 0 Then
+        '        journalItem.Credit = 0
+        '    ElseIf amount < 0 Then
+        '        journalItem.Credit = amount * -1
+        '        journalItem.Debit = 0
+        '    End If
+        'End Sub
+
+        'Public Sub MakeCreditAmount(journalItem As IJournalItemView, amount As Decimal?) Implements IAccountsPresenter.MakeCreditAmount
+        '    If amount Is Nothing OrElse amount >= 0 Then
+        '        journalItem.Debit = 0
+        '    ElseIf amount < 0 Then
+        '        journalItem.Debit = amount * -1
+        '        journalItem.Credit = 0
+        '    End If
+        'End Sub
+
+        'Public Sub MakePayTypeAndSpecialAccount(journalItem As IJournalItemView, accountIdNo As Int16?) Implements IAccountsPresenter.MakePayTypeAndSpecialAccount
+        '    Dim account As AccountModel
+        '    If accountIdNo Is Nothing Or accountIdNo <= 0 Then
+        '        journalItem.JournalIdNo = 0
+        '        journalItem.SpecialAccount = Nothing
+        '        journalItem.PayeeType = Nothing
+        '    Else
+        '        account = GetAccount(accountIdNo)
+        '        journalItem.AccountIdNo = accountIdNo
+        '        journalItem.SpecialAccount = account.SpecialAccount
+        '        journalItem.PayeeType = account.PayeeType
+        '    End If
+        'End Sub
+
+        'Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView) Implements IAccountsPresenter.AddNewItemOnBindingSource
+        '    e.NewObject = New TS
+        '    ' work around for error on datagrid entry on lastrow please do not remove.
+        '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+        '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+        '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+        '    If dataGridView.Rows.Count = bindingSource.Count Then
+        '        bindingSource.RemoveAt(bindingSource.Count - 1)
+        '    End If
+        'End Sub
+
+        'Public Function GetBizRules(childProperty) Implements IAccountsPresenter.GetBizRules
+        '    Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
+        '    Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
+        '    ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
+        '    Dim bModel As New ModelAccounts(bizName)
+        '    Return bModel.GetBizObjectRules()
+        'End Function
+
+        'Public Function GetBizObject(childProperty) Implements IAccountsPresenter.GetBizObject
+        '    Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
+        '    Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
+        '    ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
+        '    Dim bModel As New ModelAccounts(bizName)
+        '    Return bModel.DataService.DataBo
+        'End Function
+
+        'Public Function ValidateDataBoundGrid(Of TMG As New)(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing) Implements IAccountsPresenter.ValidateDataBoundGrid
+        '    Dim errorFound As Boolean = False
+        '    Dim rules = GetBizRules(viewProperty)
+        '    Dim bo = GetBizObject(viewProperty)
+        '    For Each rule In rules
+        '        For Each col In dataGridView.Columns()
+        '            Dim colName = col.DataPropertyName
+        '            If rule.Property = colName Then
+        '                For Each row As DataGridViewRow In dataGridView.Rows
+        '                    Dim model As New TMG
+        '                    If row.Index() >= 0 AndAlso row.Index() < dataGridView.RowCount() - 1 Then
+        '                        GlobalVariables.Mapper.Map(viewProperty(row.Index()), model)
+        '                        GlobalVariables.Mapper.Map(model, bo)
+        '                        If Not bo.IsRuleValid(rule) Then
+        '                            Dim obj As New Object
+        '                            dictionary.TryGetValue(rule.Property, obj)
+        '                            row.Cells(obj.Name).ErrorText = rule.Error
+        '                            errorFound = True
+        '                        End If
+        '                    End If
+        '                Next
+        '            End If
+        '        Next
+        '    Next
+        '    If errorFound Then
+        '        If tabPage IsNot Nothing Then
+        '            tabPage.ImageIndex = 0
+        '        Else
+        '            tabPage.ImageIndex = -1
+        '        End If
+        '    Else
+        '        If tabPage IsNot Nothing Then
+        '            tabPage.ImageIndex = -1
+        '        End If
+        '    End If
+        '    Return Not errorFound
+        'End Function
 
         Private ReadOnly _monthType = EnumToCode(PayRateUnitSelection.Month)
         Private ReadOnly _semiMonthType = EnumToCode(PayRateUnitSelection.SemiMonth)
@@ -175,7 +180,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _dayType = EnumToCode(PayRateUnitSelection.Day)
         Private ReadOnly _biWeekType = EnumToCode(PayRateUnitSelection.BiWeek)
 
-        Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
+        Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal Implements IAccountsPresenter.ComputePayAmount
             Dim factor As Decimal
             Select Case payFrequency
                 Case PayFrequencySelection.Monthly

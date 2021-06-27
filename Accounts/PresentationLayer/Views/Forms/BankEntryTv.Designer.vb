@@ -39,15 +39,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBankName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBankNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
             Me.SplitContainer1.SuspendLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
+            Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
             '
             'SplitContainer1
             '
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
             resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
             '
             'FormTreeView
@@ -249,19 +256,25 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.Name = "lblNotes"
             Me.lblNotes.Translatable = True
             '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+            Me.CFlowLayout1.Name = "CFlowLayout1"
+            '
             'BankEntryTv
             '
             resources.ApplyResources(Me, "$this")
-            Me.Controls.Add(Me.floDataDisplay)
             Me.Name = "BankEntryTv"
-            Me.Controls.SetChildIndex(Me.SplitContainer1, 0)
-            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
             Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.SplitContainer1.ResumeLayout(False)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
             Me.floDataDisplay.PerformLayout()
+            Me.CFlowLayout1.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -277,5 +290,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblBankName As CLabel
         Friend WithEvents lblBankNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
+        Friend WithEvents CFlowLayout1 As CFlowLayout
     End Class
 End Namespace

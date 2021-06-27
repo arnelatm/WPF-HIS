@@ -24,7 +24,8 @@ Imports KellermanSoftware.CompareNetObjects
 ''' </remarks>
 ''' <typeparam name="T">Type of itemView.</typeparam>
 Public MustInherit Class PresenterNew(Of T As IView, TM As New)
-    Implements ISubscriber(Of ViewButtonClicked),
+    Implements IPresenter,
+               ISubscriber(Of ViewButtonClicked),
                ISubscriber(Of FindFieldRequested),
                ISubscriber(Of EntryFormLoaded),
                ISubscriber(Of SaveDataRequested),
@@ -482,7 +483,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End If
     End Function
 
-    Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String)
+    Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) Implements IPresenter.GetFieldWithIdNo
         Try
             Return Model.GetFieldWithIdNo(idNo, tableName, returnFieldName)
         Catch ex As Exception
@@ -1277,7 +1278,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return retValue
     End Function
 
-    Public Function MakeEnumComboList(Of TE)()
+    Public Function MakeEnumComboList(Of TE)() Implements IPresenter.MakeEnumComboList
         Dim dataList As New List(Of ClassesLibrary.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
             Dim data As New ClassesLibrary.LookupData With {
@@ -1290,18 +1291,18 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return dataList
     End Function
 
-    Public Function MakeEnumComboList2(Of TE)()
-        Dim dataList As New List(Of ClassesLibrary.LookupData)
-        For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData With {
-                    .IdNo = CInt(c),
-                    .Code = CInt(c),
-                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-                    }
-            dataList.Add(data)
-        Next
-        Return dataList
-    End Function
+    'Public Function MakeEnumComboList2(Of TE)()
+    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
+    '    For Each c In [Enum].GetValues(GetType(TE))
+    '        Dim data As New ClassesLibrary.LookupData With {
+    '                .IdNo = CInt(c),
+    '                .Code = CInt(c),
+    '                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+    '                }
+    '        dataList.Add(data)
+    '    Next
+    '    Return dataList
+    'End Function
 
     Public Sub AddToParentError(errors As List(Of String))
         Dim mainBizObj = DirectCast(DirectCast(DirectCast(Model, AATM.PresentationLayer.Models.Model).DataService, AATM.ServicesLayer.Services.Service).DataBo, AATM.BusinessLayer.BusinessObject)
