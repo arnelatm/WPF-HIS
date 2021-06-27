@@ -499,26 +499,26 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData) Implements IPresenter.GetLookup
         ComposeLookupParameters(listName)
         ProcessLookupFields()
         Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
     End Function
 
-    Public Overloads Function GetLookup(LookupTableToGet As String, LookUpSortExpression As String, LookupFieldsToShow As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    Public Overloads Function GetLookup(lLookupTableToGet As String, lLookUpSortExpression As String, lLookupFieldsToShow As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData) Implements IPresenter.GetLookup
         Dim dFieldName As String
         If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If Model.FieldExistInTable(LookupTableToGet, LookUpSortExpression.Trim() + "Ara") Then
-                LookUpSortExpression = LookUpSortExpression.Trim() + "Ara"
+            If Model.FieldExistInTable(LookUpTableToGet, lLookUpSortExpression.Trim() + "Ara") Then
+                lLookUpSortExpression = lLookUpSortExpression.Trim() + "Ara"
             End If
-            If Model.FieldExistInTable(LookupFieldsToShow(1), LookupFieldsToShow(1).Trim() + "Ara") Then
-                dFieldName = LookupFieldsToShow(1).Trim() + "Ara"
+            If Model.FieldExistInTable(lLookupFieldsToShow(1), lLookupFieldsToShow(1).Trim() + "Ara") Then
+                dFieldName = lLookupFieldsToShow(1).Trim() + "Ara"
             Else
-                dFieldName = LookupFieldsToShow(1)
+                dFieldName = lLookupFieldsToShow(1)
             End If
-            LookupFieldsToShow = {LookupFieldsToShow(0), dFieldName, LookupFieldsToShow(2)}
+            lLookupFieldsToShow = {lLookupFieldsToShow(0), dFieldName, lLookupFieldsToShow(2)}
         End If
-        Return Model.GetLookup(LookupTableToGet, LookUpSortExpression, LookupFieldsToShow, filter)
+        Return Model.GetLookup(lLookUpTableToGet, lLookUpSortExpression, lLookUpFieldsToShow, filter)
     End Function
 
     Public Function GetOriginalModel() As TM

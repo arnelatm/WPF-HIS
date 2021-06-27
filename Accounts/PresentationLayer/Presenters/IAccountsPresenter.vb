@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
         'Function GetCustomerSettlementDueDays(idNo As String)
         'Function GetDepositTypeModel() As List(Of DepositTypeModel)
         'Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
-        'Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")
+        Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")
         'Function GetSupplierPaymentDueDays(idNo As String)
         'Function GetSupplierSettlementDiscount(idNo As String)
         'Function GetSupplierSettlementDueDays(idNo As String)
