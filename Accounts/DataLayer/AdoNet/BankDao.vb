@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Bank Implements IDaoAll(Of Bank).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, BankCode, BankName, BankNameAra" &
+                    " SELECT IdNo, BankCode, BankName, BankNameAra, Notes" &
                     "   FROM [Bank]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "BankName ASC"
             End If
             Dim sql As String =
-                    " SELECT IdNo, BankCode, BankName, BankNameAra" &
+                    " SELECT IdNo, BankCode, BankName, BankNameAra, Notes" &
                     "   FROM [Bank] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -38,7 +38,8 @@ Namespace DataLayer.AdoNet
                     " UPDATE [Bank]" &
                     "    SET BankCode = @BankCode," &
                     "        BankName = @BankName," &
-                    "        BankNameAra = @BankNameAra" &
+                    "        BankNameAra = @BankNameAra," &
+                    "        Notes = @Notes " &
                     "  WHERE IdNo = @IdNo"
 
             Return Db.Update(sql, Take(bank))
@@ -47,8 +48,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef bank As Bank) As Integer Implements IDaoAll(Of Bank).AddRecord
             Dim sql As String =
                     " INSERT INTO [Bank] " &
-                    " (BankCode,BankName,BankNameAra) " &
-                    " VALUES (@BankCode,@BankName,@BankNameAra) "
+                    " (BankCode,BankName,BankNameAra,Notes) " &
+                    " VALUES (@BankCode,@BankName,@BankNameAra,@Notes) "
             Return Db.Insert(sql, Take(bank))
         End Function
 
@@ -58,7 +59,8 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .BankCode = Extensions.AsString(reader("BankCode")),
             .BankName = Extensions.AsString(reader("BankName")),
-            .BankNameAra = Extensions.AsString(reader("BankNameAra"))
+            .BankNameAra = Extensions.AsString(reader("BankNameAra")),
+            .Notes = Extensions.AsString(reader("Notes"))
             }
 
         Private Function Take(bank As Bank) As Object()
@@ -66,7 +68,8 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", bank.IdNo,
                                     "@BankCode", bank.BankCode,
                                     "@BankName", bank.BankName,
-                                    "@BankNameAra", bank.BankNameAra
+                                    "@BankNameAra", bank.BankNameAra,
+                                    "@Notes", bank.Notes
                                 }
         End Function
 

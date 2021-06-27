@@ -3,9 +3,7 @@ Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
@@ -72,17 +70,17 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetEmployeeDeductions(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
-            Dim _employeePayElementDao As New EmployeePayElementDao
+            Dim employeePayElementDao As New EmployeePayElementDao
             Dim employeeDeductionModel As New List(Of EmployeePayElementModel)
-            Dim employeeDeduction As List(Of EmployeePayElement) = _employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Deduction & "' and EmployeeIdNo = " & View.IdNo)
+            Dim employeeDeduction As List(Of EmployeePayElement) = employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Deduction & "' and EmployeeIdNo = " & View.IdNo)
             GlobalVariables.Mapper.Map(employeeDeduction, employeeDeductionModel)
             Return employeeDeductionModel
         End Function
 
         Public Function GetEmployeeEarnings(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
-            Dim _employeePayElementDao As New EmployeePayElementDao
+            Dim employeePayElementDao As New EmployeePayElementDao
             Dim employeeEarningModel As New List(Of EmployeePayElementModel)
-            Dim employeeEarning As List(Of EmployeePayElement) = _employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Earning & "' and EmployeeIdNo = " & View.IdNo)
+            Dim employeeEarning As List(Of EmployeePayElement) = employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Earning & "' and EmployeeIdNo = " & View.IdNo)
             GlobalVariables.Mapper.Map(employeeEarning, employeeEarningModel)
             Return employeeEarningModel
         End Function
@@ -162,7 +160,7 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Function hasDuplicates(Of T)(ByVal myList As List(Of T)) As Boolean
+        Private Function HasDuplicates(Of T)(ByVal myList As List(Of T)) As Boolean
             Dim hs = New HashSet(Of T)()
             For i = 0 To myList.Count - 1
                 If Not hs.Add(myList(i)) Then Return True
@@ -198,7 +196,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             'Dim passedValue As Integer = retVal
-            If retVal >= 0 And GlobalFunctions.IsEmpty(View.EmployeeCode) Then
+            If retVal >= 0 And IsEmpty(View.EmployeeCode) Then
                 retVal = ModelOfPresenter.GenerateCode(View.IdNo)
             End If
         End Sub
@@ -218,10 +216,6 @@ Namespace PresentationLayer.Presenters
             value = Convert.ToDecimal(GetEmployeeBalance(View.IdNo))
             View.Balance = value
         End Sub
-
-        'Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
-        '    Return ComputePayAmount(payFrequency, amount, unit)
-        'End Function
 
     End Class
 

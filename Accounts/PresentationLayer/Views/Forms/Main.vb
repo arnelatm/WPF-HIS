@@ -196,7 +196,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
-            Dim presenter As IPresenter
+            Dim presenter As New BankPresenter(Nothing)
             Dim myForm = New BankEntryTv(presenter)
             presenter = New BankPresenter(myForm)
             myForm.Show()
@@ -366,9 +366,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemEmployees.Click
-            Dim presenter As EmployeePresenter
+            Dim presenter As New EmployeePresenterNew(Nothing)
             Dim myForm = New EmployeeEntryTvNew(presenter)
-            presenter = New EmployeePresenter(myForm)
+            presenter = New EmployeePresenterNew(myForm)
             myForm.Show()
         End Sub
 
