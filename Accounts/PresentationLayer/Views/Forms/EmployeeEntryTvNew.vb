@@ -437,22 +437,41 @@ Namespace PresentationLayer.Views.Forms
             cacMaritalStatus.DataSource = _presenter.MakeEnumComboList(Of MaritalStatusSelection)
             cboPaymentMethod.DataSource = _presenter.MakeEnumComboList(Of PayrollPaymentMethodSelection)
 
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New GetDataSource("Bank", cacBankIdNo))
-                Ea.PublishEvent(New GetDataSource("Country", cacCountryCode))
-                Ea.PublishEvent(New GetDataSource("Department", cacDepartmentIdNo))
-                Ea.PublishEvent(New GetDataSource("Designation", cacDesignationIdNo))
-                Ea.PublishEvent(New GetDataSource("Country", cacNationalityCode))
-                Ea.PublishEvent(New GetDataSource("Religion", cacReligionIdNo))
-                Ea.PublishEvent(New GetDataSource("PayCycle", cboPayCycleidNo))
-                Ea.PublishEvent(New GetDataSource("PayGroup", cboPayGroupIdNo))
+            cacBankIdNo.DataSource = _presenter.GetLookup("Bank")
+            cacCountryCode.DataSource = _presenter.GetLookup("Country")
+            cacDepartmentIdNo.DataSource = _presenter.GetLookup("Department")
+            cacDesignationIdNo.DataSource = _presenter.GetLookup("Designation")
+            cacGender.DataSource = _presenter.MakeEnumComboList(Of MaleFemaleSelection)
+            cacMaritalStatus.DataSource = _presenter.MakeEnumComboList(Of MaritalStatusSelection)
+            cacNationalityCode.DataSource = _presenter.GetLookup("Country")
+            cacReligionIdNo.DataSource = _presenter.GetLookup("Religion")
+            cboPayCycleidNo.DataSource = _presenter.GetLookup("PayCycle")
+            cboPayGroupIdNo.DataSource = _presenter.GetLookup("PayGroup")
+            cboPaymentMethod.DataSource = _presenter.MakeEnumComboList(Of PayrollPaymentMethodSelection)
+            _deductionsByName = _presenter.GetLookup("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            _earningsByName = _presenter.GetLookup("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            _phoneTypes = _presenter.GetLookup("PhoneType")
+            _countryTelCodes = _presenter.GetIntPhoneCodes()
+            _unit = _presenter.MakeEnumComboList(Of PayRateUnitSelection)
 
-                Ea.PublishEvent(New GetLookupDataRequested("PhoneType", _phoneTypes))
-                Ea.PublishEvent(New GetLookupDataRequested("PayElement", _deductionsByName, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"))
-                Ea.PublishEvent(New GetLookupDataRequested("PayElement", _earningsByName, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"))
-                Ea.PublishEvent(New GetLookupDataRequested("Country", {"IdNo", "CountryName", "CountryTelCode"}, _countryTelCodes))
+            'If Ea IsNot Nothing Then
+            '    Ea.PublishEvent(New GetDataSource("Bank", cacBankIdNo))
+            '    Ea.PublishEvent(New GetDataSource("Country", cacCountryCode))
+            '    Ea.PublishEvent(New GetDataSource("Department", cacDepartmentIdNo))
+            '    Ea.PublishEvent(New GetDataSource("Designation", cacDesignationIdNo))
+            '    Ea.PublishEvent(New GetDataSource("Country", cacNationalityCode))
+            '    Ea.PublishEvent(New GetDataSource("Religion", cacReligionIdNo))
+            '    Ea.PublishEvent(New GetDataSource("PayCycle", cboPayCycleidNo))
+            '    Ea.PublishEvent(New GetDataSource("PayGroup", cboPayGroupIdNo))
 
-            End If
+            '    _phoneTypes = _presenter
+
+            '    Ea.PublishEvent(New GetLookupDataRequested("PhoneType", _phoneTypes))
+            '    Ea.PublishEvent(New GetLookupDataRequested("PayElement", _deductionsByName, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"))
+            '    Ea.PublishEvent(New GetLookupDataRequested("PayElement", _earningsByName, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"))
+            '    Ea.PublishEvent(New GetLookupDataRequested("Country", {"IdNo", "CountryName", "CountryTelCode"}, _countryTelCodes))
+
+            'End If
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
