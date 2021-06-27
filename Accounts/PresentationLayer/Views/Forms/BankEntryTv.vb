@@ -2,13 +2,14 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class BankEntryTv
         Implements IBankView
 
-        Public Sub New(presenter As Object)
+        Public Sub New(presenter As IPresenter)
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()

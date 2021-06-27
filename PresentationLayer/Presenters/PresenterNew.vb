@@ -1973,7 +1973,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Sub OnGetLookupDataRequestedHandler(ByRef eventType As GetLookupDataRequested) Implements ISubscriber(Of GetLookupDataRequested).OnEventHandler
         Dim data As List(Of ClassesLibrary.LookupData)
-        data = GetLookup(eventType.TableName)
+        data = GetLookup(eventType.TableName, eventType.Filter)
         eventType.Target = data
     End Sub
 

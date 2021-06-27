@@ -17,7 +17,6 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "BankName"
             OriginalModel = New BankModel()
             DataModel = New BankModel()
-
         End Sub
 
     End Class

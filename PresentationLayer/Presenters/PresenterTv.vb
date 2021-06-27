@@ -20,7 +20,9 @@ Public Class PresenterTv(Of T As IView, TM As New)
 
     Public Sub New(itemView As T)
         MyBase.New(itemView)
-        FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
+        If View IsNot Nothing Then
+            FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
+        End If
     End Sub
 
     Public Sub OnTvEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
