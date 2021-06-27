@@ -8,14 +8,10 @@ Namespace PresentationLayer.Views.Forms
     Public Class BankEntryTv
         Implements IBankView
 
-        Private _presenter As BankPresenter
-
-        Public Sub New()
+        Public Sub New(presenter As Object)
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            _presenter = New BankPresenter(Me)
-
         End Sub
 
 #Region "Fields"
