@@ -594,4 +594,39 @@ Public Class CFormEntryNew
         Return retValue
     End Function
 
+    Protected Sub CreateDataSource(tableName As String, ByRef control As Control)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(tableName, control))
+        End If
+    End Sub
+
+    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
+    End Sub
+
+    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, fields, filter))
+    End Sub
+
+    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
+        comboControl.DataSource = GetEnumData(Of TE)()
+    End Sub
+
+    Public Function GetEnumData(Of TE)()
+        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim data As New ClassesLibrary.LookupData With {
+                    .IdNo = CInt(c),
+                    .Code = EnumToCode(c),
+                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+                    }
+            dataList.Add(data)
+        Next
+        Return dataList
+    End Function
+
+    Public Function GetFieldType(fieldName As String) As Type
+        Return CallByName(Me, fieldName, CallType.Get).GetType
+    End Function
+
 End Class

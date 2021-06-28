@@ -8,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeePresenterNew
-        Inherits AccountsPresenterNew(Of IEmployeeView, EmployeeModel)
+        Inherits AccountsPresenterTvNew(Of IEmployeeView, EmployeeModel)
 
         Protected DtEmpPayElementInsertTable As New DataTable
         Protected DtEmpPayElementUpdateTable As New DataTable
@@ -198,6 +198,7 @@ Namespace PresentationLayer.Presenters
             'Dim passedValue As Integer = retVal
             If retVal >= 0 And IsEmpty(View.EmployeeCode) Then
                 retVal = ModelOfPresenter.GenerateCode(View.IdNo)
+                View.EmployeeCode = ModelOfPresenter.GetFieldWithIdNo(View.IdNo, "Employee", "EmployeeCode")
             End If
         End Sub
 
@@ -216,6 +217,12 @@ Namespace PresentationLayer.Presenters
             value = Convert.ToDecimal(GetEmployeeBalance(View.IdNo))
             View.Balance = value
         End Sub
+
+        'Private Sub OnAfterSave() Handles MyBase.AfterSave
+        '    If View.EmployeeCode Is Nothing Or View.EmployeeCode = "" Then
+        '        ModelOfPresenter.GenerateCode(View.IdNo)
+        '    End If
+        'End Sub
 
     End Class
 
