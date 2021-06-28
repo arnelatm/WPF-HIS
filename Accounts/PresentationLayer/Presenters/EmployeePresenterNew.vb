@@ -208,7 +208,7 @@ Namespace PresentationLayer.Presenters
             Else
                 DataFilter = ""
             End If
-            CallByName(View, "DisplayTreeViewData", CallType.Method)
+            DisplayTree()
             GoFirstRecord()
         End Sub
 

@@ -417,11 +417,11 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CountryTelCodes As List(Of ClassesLibrary.LookupData)
             Get
-                GetLookUpData("Country", "CountryTelCodes", {"IdNo", "CountryName", "CountryTelCode"})
+                GetLookUpData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
                 Return _countryTelCodes
             End Get
             Set
-                _phoneTypes = Value
+                _countryTelCodes = Value
             End Set
         End Property
 
@@ -558,7 +558,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
                 dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvCountryTelIdNo.DataSource = _countryTelCodes
+                dgvCountryTelIdNo.DataSource = CountryTelCodes
                 dgvCountryTelIdNo.DisplayMember = "Name"
                 dgvCountryTelIdNo.ValueMember = "IdNo"
                 dgvCountryTelIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
