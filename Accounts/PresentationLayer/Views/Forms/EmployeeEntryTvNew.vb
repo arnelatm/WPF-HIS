@@ -14,14 +14,14 @@ Namespace PresentationLayer.Views.Forms
     Public Class EmployeeEntryTvNew
         Implements IEmployeeView
 
-        Private _countryTelCodes
-        Private _deductionsByName
-        Private _earningsByName
+        Private _countryTelCodes As List(Of ClassesLibrary.LookupData)
+        Private _deductionsByName As List(Of ClassesLibrary.LookupData)
+        Private _earningsByName As List(Of ClassesLibrary.LookupData)
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _unit
-        Private _phoneTypes
+        Private _phoneTypes As List(Of ClassesLibrary.LookupData)
         Private ReadOnly _presenter As IAccountsPresenter
 
         Private ReadOnly _nfi As NumberFormatInfo
@@ -198,13 +198,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        '    Get
-        '        Return txtTitle.Text
-        '    End Get
-        '    Set
-        '        txtTitle.Text = Value
-        '    End Set
-        'End Property
         Public Property EmployeeNameAra As String Implements IEmployeeView.EmployeeNameAra
             Get
                 Return txtEmployeeNameAra.Text
@@ -236,18 +229,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property BankIdNo As Int16 Implements IEmployeeView.BankIdNo
-        '    Get
-        '        If tcbBankIdNo.Text <> "" Then
-        '            Return Convert.ToInt32(tcbBankIdNo.Text)
-        '        Else
-        '            Return 0
-        '        End If
-        '    End Get
-        '    Set
-        '        tcbBankIdNo.Text = Value
-        '    End Set
-        'End Property
         Public Property Iban As String Implements IEmployeeView.Iban
             Get
                 Return txtIban.Text
@@ -342,24 +323,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property PayRateType As String Implements IEmployeeView.PayRateType
-        '    Get
-        '        Return cboPayRateType.GetValue()
-        '    End Get
-        '    Set
-        '        cboPayRateType.SetValue(Value)
-        '    End Set
-        'End Property
-
-        'Public Property PaySalariedOrHourly As String Implements IEmployeeView.PaySalariedOrHourly
-        '    Get
-        '        Return cboPaySalariedOrHourly.GetValue()
-        '    End Get
-        '    Set
-        '        cboPaySalariedOrHourly.SetValue(Value)
-        '    End Set
-        'End Property
-
         Public Property PoBox As String Implements IEmployeeView.PoBox
             Get
                 Return txtPoBox.Text
@@ -383,11 +346,7 @@ Namespace PresentationLayer.Views.Forms
                 Return dtpReleasedDate.Value
             End Get
             Set
-                'If Value Is Nothing Then
-                '    dtpBirthDate.Value = Date.Now()
-                'Else
                 dtpReleasedDate.Value = Value
-                'End If
             End Set
         End Property
 
@@ -429,49 +388,60 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property EarningsByName As List(Of ClassesLibrary.LookupData)
+            Get
+                GetLookUpData("PayElement", "EarningsByName")
+                Return _earningsByName
+            End Get
+            Set
+                _earningsByName = Value
+            End Set
+        End Property
+
+        Public Property DeductionsByName As List(Of ClassesLibrary.LookupData)
+            Get
+                GetLookUpData("PayElement", "DeductionsByName")
+                Return _deductionsByName
+            End Get
+            Set
+                _countryTelCodes = Value
+            End Set
+        End Property
+
+        Public Property PhoneTypes As List(Of ClassesLibrary.LookupData)
+            Get
+                GetLookUpData("PhoneType", "PhoneTypes")
+                Return _phoneTypes
+            End Get
+            Set
+                _phoneTypes = Value
+            End Set
+        End Property
+
+        Public Property CountryTelCodes As List(Of ClassesLibrary.LookupData)
+            Get
+                GetLookUpData("Country", "CountryTelCodes", {"IdNo", "CountryName", "CountryTelCode"})
+                Return _countryTelCodes
+            End Get
+            Set
+                _phoneTypes = Value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-
-            cacGender.DataSource = _presenter.MakeEnumComboList(Of MaleFemaleSelection)
-            cacMaritalStatus.DataSource = _presenter.MakeEnumComboList(Of MaritalStatusSelection)
-            cboPaymentMethod.DataSource = _presenter.MakeEnumComboList(Of PayrollPaymentMethodSelection)
-
-            cacBankIdNo.DataSource = _presenter.GetLookup("Bank")
-            cacCountryCode.DataSource = _presenter.GetLookup("Country")
-            cacDepartmentIdNo.DataSource = _presenter.GetLookup("Department")
-            cacDesignationIdNo.DataSource = _presenter.GetLookup("Designation")
-            cacGender.DataSource = _presenter.MakeEnumComboList(Of MaleFemaleSelection)
-            cacMaritalStatus.DataSource = _presenter.MakeEnumComboList(Of MaritalStatusSelection)
-            cacNationalityCode.DataSource = _presenter.GetLookup("Country")
-            cacReligionIdNo.DataSource = _presenter.GetLookup("Religion")
-            cboPayCycleidNo.DataSource = _presenter.GetLookup("PayCycle")
-            cboPayGroupIdNo.DataSource = _presenter.GetLookup("PayGroup")
-            cboPaymentMethod.DataSource = _presenter.MakeEnumComboList(Of PayrollPaymentMethodSelection)
-            _deductionsByName = _presenter.GetLookup("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            _earningsByName = _presenter.GetLookup("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            _phoneTypes = _presenter.GetLookup("PhoneType")
-            _countryTelCodes = _presenter.GetIntPhoneCodes()
-            _unit = _presenter.MakeEnumComboList(Of PayRateUnitSelection)
-
-            'If Ea IsNot Nothing Then
-            '    Ea.PublishEvent(New GetDataSource("Bank", cacBankIdNo))
-            '    Ea.PublishEvent(New GetDataSource("Country", cacCountryCode))
-            '    Ea.PublishEvent(New GetDataSource("Department", cacDepartmentIdNo))
-            '    Ea.PublishEvent(New GetDataSource("Designation", cacDesignationIdNo))
-            '    Ea.PublishEvent(New GetDataSource("Country", cacNationalityCode))
-            '    Ea.PublishEvent(New GetDataSource("Religion", cacReligionIdNo))
-            '    Ea.PublishEvent(New GetDataSource("PayCycle", cboPayCycleidNo))
-            '    Ea.PublishEvent(New GetDataSource("PayGroup", cboPayGroupIdNo))
-
-            '    _phoneTypes = _presenter
-
-            '    Ea.PublishEvent(New GetLookupDataRequested("PhoneType", _phoneTypes))
-            '    Ea.PublishEvent(New GetLookupDataRequested("PayElement", _deductionsByName, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"))
-            '    Ea.PublishEvent(New GetLookupDataRequested("PayElement", _earningsByName, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"))
-            '    Ea.PublishEvent(New GetLookupDataRequested("Country", {"IdNo", "CountryName", "CountryTelCode"}, _countryTelCodes))
-
-            'End If
+            CreateEnumDataSource(Of MaleFemaleSelection)(cacGender)
+            CreateEnumDataSource(Of MaritalStatusSelection)(cacMaritalStatus)
+            CreateEnumDataSource(Of PayrollPaymentMethodSelection)(cboPaymentMethod)
+            CreateDataSource("Bank", cacBankIdNo)
+            CreateDataSource("Country", cacCountryCode)
+            CreateDataSource("Department", cacDepartmentIdNo)
+            CreateDataSource("Designation", cacDesignationIdNo)
+            CreateDataSource("Country", cacNationalityCode)
+            CreateDataSource("Religion", cacReligionIdNo)
+            CreateDataSource("PayCycle", cboPayCycleidNo)
+            CreateDataSource("PayGroup", cboPayGroupIdNo)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -557,12 +527,12 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewEarnings.Columns
-                dgvEarningIdNo.DataSource = _earningsByName
+                dgvEarningIdNo.DataSource = EarningsByName
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvEarningUnit.DataSource = _unit
+                dgvEarningUnit.DataSource = GetEnumData(Of PayRateUnitSelection)()
                 dgvEarningUnit.ValueMember = "Code"
                 dgvEarningUnit.DisplayMember = "Name"
                 dgvEarningUnit.DisplayStyleForCurrentCellOnly = True
@@ -586,7 +556,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewPhones.Columns
                 dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvPhoneTypeIdNo.DataSource = _phoneTypes
+                dgvPhoneTypeIdNo.DataSource = PhoneTypes
                 dgvPhoneTypeIdNo.DisplayMember = "Name"
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
                 dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend

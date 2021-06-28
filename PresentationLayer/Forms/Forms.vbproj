@@ -144,16 +144,16 @@
     <Compile Include="CFormEntryNew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CFormEntryTvNew.Designer.vb">
-      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CFormEntryTvNew.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CFormEntryTv.Designer.vb">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="CFormEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CFormEntryTvNew.Designer.vb">
+      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CFormEntryTvNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CFormTvEntry.designer.vb">
@@ -230,11 +230,11 @@
     <EmbeddedResource Include="CFormEntryNew.resx">
       <DependentUpon>CFormEntryNew.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CFormEntryTvNew.resx">
-      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CFormEntryTv.resx">
       <DependentUpon>CFormEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFormEntryTvNew.resx">
+      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CFormTvEntry.resx">
       <DependentUpon>CFormTvEntry.vb</DependentUpon>

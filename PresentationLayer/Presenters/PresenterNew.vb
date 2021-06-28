@@ -188,7 +188,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     ' This is the model of the Inheriting Presenter
     ' when referred to in this module this will be the current model
-    ' while if refered in the Inheriting Presenter it will be the
+    ' while if referred in the Inheriting Presenter it will be the
     ' model assigned to that presenter.
     Public Property ModelOfPresenter
         Get
@@ -518,8 +518,29 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             End If
             lLookupFieldsToShow = {lLookupFieldsToShow(0), dFieldName, lLookupFieldsToShow(2)}
         End If
-        Return Model.GetLookup(lLookUpTableToGet, lLookUpSortExpression, lLookUpFieldsToShow, filter)
+        Return Model.GetLookup(lLookupTableToGet, lLookUpSortExpression, lLookupFieldsToShow, filter)
     End Function
+
+    Protected Sub ComposeLookupParameters(listName As String)
+        LookUpTableToGet = listName
+        LookUpDisplayName = listName + "Name"
+        LookUpSortExpression = LookUpDisplayName
+        LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
+        LookUpDisplayCode = listName + "Code"
+    End Sub
+
+    Private Sub ProcessLookupFields()
+        Dim dFieldName As String
+        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+            If LookUpSortExpression = LookUpDisplayName Then
+                LookUpSortExpression = LookUpDisplayNameArabic
+            End If
+            dFieldName = LookUpDisplayNameArabic
+        Else
+            dFieldName = LookUpDisplayName
+        End If
+        LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
+    End Sub
 
     Public Function GetOriginalModel() As TM
         Return OriginalModel
@@ -979,14 +1000,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return retVal
     End Function
 
-    Protected Sub ComposeLookupParameters(listName As String)
-        LookUpTableToGet = listName
-        LookUpDisplayName = listName + "Name"
-        LookUpSortExpression = LookUpDisplayName
-        LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
-        LookUpDisplayCode = listName + "Code"
-    End Sub
-
     Protected Sub ComposeLookupParametersNew(listName As String)
         LookUpTableToGet = listName
         LookUpDisplayName = "Name"
@@ -1243,19 +1256,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
         Return retValue
     End Function
-
-    Private Sub ProcessLookupFields()
-        Dim dFieldName As String
-        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If LookUpSortExpression = LookUpDisplayName Then
-                LookUpSortExpression = LookUpDisplayNameArabic
-            End If
-            dFieldName = LookUpDisplayNameArabic
-        Else
-            dFieldName = LookUpDisplayName
-        End If
-        LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
-    End Sub
 
     Private Function RecordHasChanged(idNo As Int32, timeStampedValue As Object) As Boolean
         Dim retValue = False
@@ -1972,9 +1972,11 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Sub OnGetLookupDataRequestedHandler(ByRef eventType As GetLookupDataRequested) Implements ISubscriber(Of GetLookupDataRequested).OnEventHandler
-        Dim data As List(Of ClassesLibrary.LookupData)
-        data = GetLookup(eventType.TableName, eventType.Filter)
-        eventType.Target = data
+        If eventType.View IsNot Nothing Then
+            Dim data As List(Of ClassesLibrary.LookupData)
+            data = GetLookup(eventType.TableName, eventType.Filter)
+            CallByName(eventType.View, eventType.TargetProperty, CallType.Set, data)
+        End If
     End Sub
 
     'Public Sub OnGetEnumListHandler(Of TE)(ByRef eventType As GetEnumListRequested) Implements ISubscriber(Of GetEnumListRequested).OnEventHandler
@@ -2039,21 +2041,23 @@ End Class
 
 Public Class GetLookupDataRequested
 
-    Public Sub New(ByVal tableName As String, ByRef target As List(Of ClassesLibrary.LookupData), ByVal Optional filter As String = Nothing)
+    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
-        Me.Target = target
+        Me.TargetProperty = targetProperty
         Me.Filter = filter
+        Me.View = view
     End Sub
 
-    Public Sub New(ByVal tableName As String, ByVal fields As String(), ByRef target As List(Of ClassesLibrary.LookupData), ByVal Optional filter As String = Nothing)
+    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
-        Me.Target = target
+        Me.TargetProperty = targetProperty
         Me.Filter = filter
         Me.Fields = fields
     End Sub
 
     Public Property TableName As String
-    Public Property Target As List(Of ClassesLibrary.LookupData)
+    Public Property View As Control
+    Public Property TargetProperty As String
     Public Property Fields As String()
     Public Property Filter As String
 End Class
