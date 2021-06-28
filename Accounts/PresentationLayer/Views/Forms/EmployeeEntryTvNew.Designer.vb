@@ -1813,10 +1813,10 @@
             Me.CFlowLayout6.Controls.Add(Me.cacBankIdNo)
             Me.CFlowLayout6.Controls.Add(Me.lblBankAccountNo)
             Me.CFlowLayout6.Controls.Add(Me.txtBankAccountNo)
-            Me.CFlowLayout6.Controls.Add(Me.lblBalance)
-            Me.CFlowLayout6.Controls.Add(Me.txtBalance)
             Me.CFlowLayout6.Controls.Add(Me.lblOpeningBalance)
             Me.CFlowLayout6.Controls.Add(Me.txtOpeningBalance)
+            Me.CFlowLayout6.Controls.Add(Me.lblBalance)
+            Me.CFlowLayout6.Controls.Add(Me.txtBalance)
             Me.CFlowLayout6.Controls.Add(Me.lblIban)
             Me.CFlowLayout6.Controls.Add(Me.txtIban)
             Me.CFlowLayout6.Controls.Add(Me.lblPayCycleIdNo)
@@ -2004,7 +2004,7 @@
             Me.lblBalance.EditingMode = False
             Me.lblBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblBalance.Location = New System.Drawing.Point(4, 81)
+            Me.lblBalance.Location = New System.Drawing.Point(4, 106)
             Me.lblBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBalance.Name = "lblBalance"
             Me.lblBalance.Size = New System.Drawing.Size(185, 23)
@@ -2032,7 +2032,7 @@
             Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtBalance.ForeColor = System.Drawing.Color.Black
             Me.txtBalance.LinkedLabel = Me.lblBalance
-            Me.txtBalance.Location = New System.Drawing.Point(191, 81)
+            Me.txtBalance.Location = New System.Drawing.Point(191, 106)
             Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBalance.MaximumValue = Nothing
             Me.txtBalance.MinimumValue = Nothing
@@ -2042,7 +2042,7 @@
             Me.txtBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBalance.SecurityKey = ""
             Me.txtBalance.Size = New System.Drawing.Size(93, 23)
-            Me.txtBalance.TabIndex = 4
+            Me.txtBalance.TabIndex = 5
             Me.txtBalance.Translatable = False
             Me.txtBalance.ValueIsNumeric = True
             '
@@ -2052,7 +2052,7 @@
             Me.lblOpeningBalance.EditingMode = False
             Me.lblOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblOpeningBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblOpeningBalance.Location = New System.Drawing.Point(4, 106)
+            Me.lblOpeningBalance.Location = New System.Drawing.Point(4, 81)
             Me.lblOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.lblOpeningBalance.Name = "lblOpeningBalance"
             Me.lblOpeningBalance.Size = New System.Drawing.Size(185, 23)
@@ -2080,7 +2080,7 @@
             Me.txtOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtOpeningBalance.ForeColor = System.Drawing.Color.Black
             Me.txtOpeningBalance.LinkedLabel = Me.lblOpeningBalance
-            Me.txtOpeningBalance.Location = New System.Drawing.Point(191, 106)
+            Me.txtOpeningBalance.Location = New System.Drawing.Point(191, 81)
             Me.txtOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.txtOpeningBalance.MaximumValue = Nothing
             Me.txtOpeningBalance.MinimumValue = Nothing
@@ -2090,7 +2090,7 @@
             Me.txtOpeningBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtOpeningBalance.SecurityKey = ""
             Me.txtOpeningBalance.Size = New System.Drawing.Size(93, 23)
-            Me.txtOpeningBalance.TabIndex = 5
+            Me.txtOpeningBalance.TabIndex = 4
             Me.txtOpeningBalance.Translatable = False
             Me.txtOpeningBalance.ValueIsNumeric = True
             '

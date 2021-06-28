@@ -218,12 +218,6 @@ Namespace PresentationLayer.Presenters
             View.Balance = value
         End Sub
 
-        'Private Sub OnAfterSave() Handles MyBase.AfterSave
-        '    If View.EmployeeCode Is Nothing Or View.EmployeeCode = "" Then
-        '        ModelOfPresenter.GenerateCode(View.IdNo)
-        '    End If
-        'End Sub
-
     End Class
 
 End Namespace

@@ -1,13 +1,10 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Views.Forms
 
