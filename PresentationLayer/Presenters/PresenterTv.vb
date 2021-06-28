@@ -29,7 +29,7 @@ Public Class PresenterTv(Of T As IView, TM As New)
         DisplayTree()
     End Sub
 
-    Private Sub DisplayTree()
+    Protected Sub DisplayTree()
         Dim root As TreeNode = FormTreeView.Nodes(0)
         root.Nodes.Clear()
         root.Text = MessagingLibrary.Messaging.TranslateCaption(TableName)

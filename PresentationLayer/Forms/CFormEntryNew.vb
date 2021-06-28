@@ -608,6 +608,10 @@ Public Class CFormEntryNew
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, fields, filter))
     End Sub
 
+    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
+    End Sub
+
     Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
         comboControl.DataSource = GetEnumData(Of TE)()
     End Sub

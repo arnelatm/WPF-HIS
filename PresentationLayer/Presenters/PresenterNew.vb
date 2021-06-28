@@ -1974,7 +1974,11 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Sub OnGetLookupDataRequestedHandler(ByRef eventType As GetLookupDataRequested) Implements ISubscriber(Of GetLookupDataRequested).OnEventHandler
         If eventType.View IsNot Nothing Then
             Dim data As List(Of ClassesLibrary.LookupData)
-            data = GetLookup(eventType.TableName, eventType.Filter)
+            If eventType.Fields Is Nothing Then
+                data = GetLookup(eventType.TableName, eventType.Filter)
+            Else
+                data = GetLookup(eventType.TableName, eventType.SortKey, eventType.Fields, eventType.Filter)
+            End If
             CallByName(eventType.View, eventType.TargetProperty, CallType.Set, data)
         End If
     End Sub
@@ -2050,8 +2054,18 @@ Public Class GetLookupDataRequested
 
     Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
+        Me.View = view
         Me.TargetProperty = targetProperty
         Me.Filter = filter
+        Me.Fields = fields
+    End Sub
+
+    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal sortKey As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
+        Me.TableName = tableName
+        Me.View = view
+        Me.TargetProperty = targetProperty
+        Me.Filter = filter
+        Me.SortKey = sortKey
         Me.Fields = fields
     End Sub
 
@@ -2060,6 +2074,7 @@ Public Class GetLookupDataRequested
     Public Property TargetProperty As String
     Public Property Fields As String()
     Public Property Filter As String
+    Public Property SortKey As String
 End Class
 
 Public Class GetEnumListRequested
