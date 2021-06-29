@@ -9,6 +9,7 @@
         Public Property AccountStatus As String
         Public Property Active As Boolean
         Public Property ApAccountIdNo As Int16?
+        Public Property Balance As Decimal
         Public Property BankAccountNo As String
         Public Property BankIdNo As Int16?
         Public Property ContactDesignation As String

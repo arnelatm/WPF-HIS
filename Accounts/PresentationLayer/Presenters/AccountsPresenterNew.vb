@@ -1,16 +1,15 @@
-﻿Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
+﻿Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
     Public Class AccountsPresenterNew(Of T As IView, TM As New)
-        Inherits PresenterNew(Of T, TM)
+        Inherits CommonPresenterNew(Of T, TM)
         'Implements IAccountsPresenter
 
         Public Sub New(itemView As T)
             MyBase.New(itemView)
-            'FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
         End Sub
 
         'Public Function GetDepositTypeModel() As List(Of DepositTypeModel) Implements IAccountsPresenter.GetDepositTypeModel

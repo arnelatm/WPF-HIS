@@ -34,7 +34,6 @@ Namespace PresentationLayer.Views.Forms
             _presenter = presenter
             FirstControl = txtEmployeeName
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            ' Add any initialization after the InitializeComponent() call.
             tbcEmployee.RightToLeftLayout = GlobalVariables.RightToLeftLayout
             tbcEmployee.RightToLeft = RightToLeft.Inherit
             DataGridViewEarnings.ShowFooter = True

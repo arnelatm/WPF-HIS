@@ -684,7 +684,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemSupplierVendors.Click
-            ShowEntryForm(SupplierEntryTv)
+            Dim presenter As New SupplierPresenterNew(Nothing)
+            Dim myForm = New SupplierEntryTvNew(presenter)
+            presenter = New SupplierPresenterNew(myForm)
+            myForm.Show()
         End Sub
 
         Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBlankReport.Click
