@@ -1,8 +1,6 @@
-﻿Imports System.ComponentModel
-Imports System.Globalization
+﻿' Category business object
+' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Libraries
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
@@ -20,13 +18,15 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As IView)
             MyBase.New(itemView)
-            Dim systemViewName As String
-            If DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName IsNot Nothing Then
-                systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName.Trim()
-            Else
-                systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+            If itemView IsNot Nothing Then
+                Dim systemViewName As String
+                If DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName IsNot Nothing Then
+                    systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName.Trim()
+                Else
+                    systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+                End If
+                ViewDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(systemViewName)
             End If
-            ViewDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(systemViewName)
         End Sub
 
         Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue

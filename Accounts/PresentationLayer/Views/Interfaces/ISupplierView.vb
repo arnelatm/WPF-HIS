@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property AccountStatus As String
         Property Active As Boolean
         Property ApAccountIdNo As Int16?
+        Property Balance As Decimal
         Property BankAccountNo As String
         Property BankIdNo As Int16?
         Property ContactDesignation As String

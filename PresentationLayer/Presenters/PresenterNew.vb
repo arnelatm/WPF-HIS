@@ -58,7 +58,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Private _undoMode As Boolean = False
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
-    Private WithTreeView As Boolean = False
+    Private ReadOnly _withTreeView As Boolean = False
 
     Public Sub New(itemView As T)
         If itemView Is Nothing Then
@@ -69,10 +69,19 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
             TableProperties = tableColumnPropertyList.ToArray
             Ea.SubscribeEvent(Me)
-            FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
-            If FormTreeView IsNot Nothing Then
-                WithTreeView = True
+
+            Dim pi As PropertyInfo = View.GetType().GetProperty("FormTreeView")
+            If pi IsNot Nothing Then
+                'FormTreeView = fi.GetValue(CallByName(View, "FormTreeView", CallType.Get)
+                'If FormTreeView IsNot Nothing Then
+                '    WithTreeView = True
+                'End If
+
+                'field exists now get the value
+                _withTreeView = True
+                FormTreeView = pi.GetValue(View)
             End If
+
         End If
     End Sub
 
@@ -690,7 +699,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         If IsOkToDeleteRecord() Then
             If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 RaiseEvent BeforeDelete()
-                If WithTreeView Then
+                If _withTreeView Then
                     TreeViewBeforeDelete()
                 End If
                 retValue = DeleteRecord(currentIdNo)
@@ -707,7 +716,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                     End If
                 End If
                 RaiseEvent AfterDelete(retValue)
-                If WithTreeView Then
+                If _withTreeView Then
                     TreeViewAfterDelete(retValue)
                 End If
                 UpdateViewDisplay(TargetIdNo)
@@ -886,7 +895,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         If retVal < 0 Then
             Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
-            If WithTreeView Then
+            If _withTreeView Then
                 TreeViewAfterSave()
             End If
             RaiseEvent AfterSave()
@@ -981,7 +990,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             For Each child In ChildPresenters
                 child.UpdateViewDisplay(idNo)
             Next
-            If WithTreeView Then
+            If _withTreeView Then
                 TreeViewUpdateViewDisplay(idNo)
             End If
         End If
@@ -1437,7 +1446,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
         Next
         SetAllControlsDynamicProperties(eventType.ViewControl)
-        If WithTreeView Then
+        If _withTreeView Then
             DisplayTree()
         End If
     End Sub

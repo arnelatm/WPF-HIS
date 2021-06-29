@@ -882,7 +882,7 @@
             Me.tbpContact.Location = New System.Drawing.Point(4, 22)
             Me.tbpContact.Name = "tbpContact"
             Me.tbpContact.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbpContact.Size = New System.Drawing.Size(654, 330)
+            Me.tbpContact.Size = New System.Drawing.Size(651, 330)
             Me.tbpContact.TabIndex = 1
             Me.tbpContact.Text = "Contact Information"
             Me.tbpContact.UseVisualStyleBackColor = True
@@ -1511,7 +1511,7 @@
             Me.tbpEmployment.Controls.Add(Me.CFlowLayout5)
             Me.tbpEmployment.Location = New System.Drawing.Point(4, 22)
             Me.tbpEmployment.Name = "tbpEmployment"
-            Me.tbpEmployment.Size = New System.Drawing.Size(654, 330)
+            Me.tbpEmployment.Size = New System.Drawing.Size(651, 330)
             Me.tbpEmployment.TabIndex = 3
             Me.tbpEmployment.Text = "Employment Information"
             Me.tbpEmployment.UseVisualStyleBackColor = True
@@ -1536,7 +1536,7 @@
             Me.CFlowLayout5.Location = New System.Drawing.Point(0, 0)
             Me.CFlowLayout5.Name = "CFlowLayout5"
             Me.CFlowLayout5.Padding = New System.Windows.Forms.Padding(3)
-            Me.CFlowLayout5.Size = New System.Drawing.Size(654, 330)
+            Me.CFlowLayout5.Size = New System.Drawing.Size(651, 330)
             Me.CFlowLayout5.TabIndex = 286
             '
             'lblHiredDate
@@ -1799,7 +1799,7 @@
             Me.tbpPayroll.Location = New System.Drawing.Point(4, 22)
             Me.tbpPayroll.Name = "tbpPayroll"
             Me.tbpPayroll.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbpPayroll.Size = New System.Drawing.Size(654, 330)
+            Me.tbpPayroll.Size = New System.Drawing.Size(651, 330)
             Me.tbpPayroll.TabIndex = 2
             Me.tbpPayroll.Text = "Payroll Information"
             Me.tbpPayroll.UseVisualStyleBackColor = True
@@ -1829,7 +1829,7 @@
             Me.CFlowLayout6.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout6.Name = "CFlowLayout6"
             Me.CFlowLayout6.Padding = New System.Windows.Forms.Padding(3)
-            Me.CFlowLayout6.Size = New System.Drawing.Size(644, 320)
+            Me.CFlowLayout6.Size = New System.Drawing.Size(641, 320)
             Me.CFlowLayout6.TabIndex = 293
             '
             'lblPaymentMethod
@@ -2313,7 +2313,7 @@
             Me.tbpEarnings.Controls.Add(Me.DataGridViewEarnings)
             Me.tbpEarnings.Location = New System.Drawing.Point(4, 22)
             Me.tbpEarnings.Name = "tbpEarnings"
-            Me.tbpEarnings.Size = New System.Drawing.Size(654, 330)
+            Me.tbpEarnings.Size = New System.Drawing.Size(651, 330)
             Me.tbpEarnings.TabIndex = 4
             Me.tbpEarnings.Text = "Earnings"
             Me.tbpEarnings.UseVisualStyleBackColor = True
@@ -2360,7 +2360,7 @@
             Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
             Me.DataGridViewEarnings.ShowFooter = True
             Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewEarnings.Size = New System.Drawing.Size(654, 330)
+            Me.DataGridViewEarnings.Size = New System.Drawing.Size(651, 330)
             Me.DataGridViewEarnings.TabIndex = 5
             Me.DataGridViewEarnings.Translatable = True
             '
@@ -2480,7 +2480,7 @@
             Me.tbpDeductions.Location = New System.Drawing.Point(4, 22)
             Me.tbpDeductions.Name = "tbpDeductions"
             Me.tbpDeductions.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbpDeductions.Size = New System.Drawing.Size(654, 330)
+            Me.tbpDeductions.Size = New System.Drawing.Size(651, 330)
             Me.tbpDeductions.TabIndex = 6
             Me.tbpDeductions.Text = "Deductions"
             Me.tbpDeductions.UseVisualStyleBackColor = True
@@ -2526,7 +2526,7 @@
             Me.DataGridViewDeductions.SequenceFieldName = "Sequence"
             Me.DataGridViewDeductions.ShowFooter = False
             Me.DataGridViewDeductions.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewDeductions.Size = New System.Drawing.Size(648, 324)
+            Me.DataGridViewDeductions.Size = New System.Drawing.Size(645, 324)
             Me.DataGridViewDeductions.TabIndex = 2
             Me.DataGridViewDeductions.Translatable = True
             '
@@ -2655,7 +2655,7 @@
             Me.tbpPhones.Location = New System.Drawing.Point(4, 22)
             Me.tbpPhones.Name = "tbpPhones"
             Me.tbpPhones.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbpPhones.Size = New System.Drawing.Size(654, 330)
+            Me.tbpPhones.Size = New System.Drawing.Size(651, 330)
             Me.tbpPhones.TabIndex = 5
             Me.tbpPhones.Text = "Phones"
             Me.tbpPhones.UseVisualStyleBackColor = True
@@ -2700,7 +2700,7 @@
             Me.DataGridViewPhones.SequenceFieldName = "Sequence"
             Me.DataGridViewPhones.ShowFooter = False
             Me.DataGridViewPhones.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewPhones.Size = New System.Drawing.Size(648, 324)
+            Me.DataGridViewPhones.Size = New System.Drawing.Size(645, 324)
             Me.DataGridViewPhones.TabIndex = 273
             Me.DataGridViewPhones.Translatable = True
             '
@@ -2910,6 +2910,7 @@
             Me.ClientSize = New System.Drawing.Size(1038, 505)
             Me.Name = "EmployeeEntryTvNew"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.Text = "Employee Maintenance Form"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
             Me.SplitContainer1.Panel2.ResumeLayout(False)
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()

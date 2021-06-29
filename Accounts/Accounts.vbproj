@@ -361,6 +361,7 @@
     <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\JournalPrefixPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalaryLoanSchedulePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SupplierPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\TransactionsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />
@@ -414,6 +415,12 @@
       <DependentUpon>PayElementEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayElementEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTvNew.Designer.vb">
+      <DependentUpon>SupplierEntryTvNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTvNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
@@ -1113,6 +1120,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayElementEntryTv.resx">
       <DependentUpon>PayElementEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTvNew.resx">
+      <DependentUpon>SupplierEntryTvNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Test.resx">
       <DependentUpon>Test.vb</DependentUpon>
