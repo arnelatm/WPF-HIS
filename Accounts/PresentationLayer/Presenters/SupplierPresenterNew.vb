@@ -11,8 +11,8 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ISupplierView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("Supplier")
             TableName = "Supplier"
+            ModelOfPresenter = New ModelAccounts("Supplier")
             TreeViewMainField = "SupplierName"
             TreeViewSecondaryField = "SupplierCode"
             SortOrderKey = "SupplierName"
