@@ -129,10 +129,10 @@
             Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIban = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtIban = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -219,24 +219,23 @@
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1037, 459)
+            Me.SplitContainer1.Size = New System.Drawing.Size(1038, 452)
             Me.SplitContainer1.SplitterDistance = 344
             '
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(344, 459)
+            Me.FormTreeView.Size = New System.Drawing.Size(344, 452)
             '
             'CFlowLayout1
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout1.Controls.Add(Me.CFlowLayout4)
-            Me.CFlowLayout1.Controls.Add(Me.tbcEmployee)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(683, 459)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(684, 452)
             Me.CFlowLayout1.TabIndex = 8
             '
             'CFlowLayout4
@@ -250,9 +249,10 @@
             Me.CFlowLayout4.Controls.Add(Me.txtEmployeeName)
             Me.CFlowLayout4.Controls.Add(Me.lblEmployeeNameAra)
             Me.CFlowLayout4.Controls.Add(Me.txtEmployeeNameAra)
+            Me.CFlowLayout4.Controls.Add(Me.tbcEmployee)
             Me.CFlowLayout4.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout4.Name = "CFlowLayout4"
-            Me.CFlowLayout4.Size = New System.Drawing.Size(677, 82)
+            Me.CFlowLayout4.Size = New System.Drawing.Size(680, 445)
             Me.CFlowLayout4.TabIndex = 7
             '
             'lblIdNo
@@ -455,10 +455,10 @@
             Me.tbcEmployee.Controls.Add(Me.tbpDeductions)
             Me.tbcEmployee.Controls.Add(Me.tbpPhones)
             Me.tbcEmployee.HotTrack = True
-            Me.tbcEmployee.Location = New System.Drawing.Point(3, 91)
+            Me.tbcEmployee.Location = New System.Drawing.Point(3, 78)
             Me.tbcEmployee.Name = "tbcEmployee"
             Me.tbcEmployee.SelectedIndex = 0
-            Me.tbcEmployee.Size = New System.Drawing.Size(662, 356)
+            Me.tbcEmployee.Size = New System.Drawing.Size(659, 356)
             Me.tbcEmployee.TabIndex = 8
             '
             'tbpPersonal
@@ -470,7 +470,7 @@
             Me.tbpPersonal.Location = New System.Drawing.Point(4, 22)
             Me.tbpPersonal.Name = "tbpPersonal"
             Me.tbpPersonal.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbpPersonal.Size = New System.Drawing.Size(654, 330)
+            Me.tbpPersonal.Size = New System.Drawing.Size(651, 330)
             Me.tbpPersonal.TabIndex = 0
             Me.tbpPersonal.Text = "Personal Information"
             Me.tbpPersonal.UseVisualStyleBackColor = True
@@ -498,7 +498,7 @@
             Me.floPersonal.Margin = New System.Windows.Forms.Padding(0)
             Me.floPersonal.MinimumSize = New System.Drawing.Size(430, 180)
             Me.floPersonal.Name = "floPersonal"
-            Me.floPersonal.Size = New System.Drawing.Size(644, 320)
+            Me.floPersonal.Size = New System.Drawing.Size(641, 320)
             Me.floPersonal.TabIndex = 4
             '
             'lblGender
@@ -1998,54 +1998,6 @@
             Me.txtBankAccountNo.TabIndex = 3
             Me.txtBankAccountNo.Translatable = False
             '
-            'lblBalance
-            '
-            Me.lblBalance.DisplayOnly = True
-            Me.lblBalance.EditingMode = False
-            Me.lblBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblBalance.Location = New System.Drawing.Point(4, 106)
-            Me.lblBalance.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblBalance.Name = "lblBalance"
-            Me.lblBalance.Size = New System.Drawing.Size(185, 23)
-            Me.lblBalance.TabIndex = 285
-            Me.lblBalance.Text = "Cash Advance Balance"
-            Me.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblBalance.Translatable = True
-            '
-            'txtBalance
-            '
-            Me.txtBalance.BackColor = System.Drawing.Color.White
-            Me.txtBalance.BegFindValue = Nothing
-            Me.txtBalance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtBalance.ComputedValue = False
-            Me.txtBalance.CustomFormat = Nothing
-            Me.txtBalance.DataBoundControl = True
-            Me.txtBalance.DisplayOnly = True
-            Me.txtBalance.EditingMode = False
-            Me.txtBalance.EndFindValue = Nothing
-            Me.txtBalance.FieldDescription = Nothing
-            Me.txtBalance.FieldName = Nothing
-            Me.txtBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtBalance.FindEnabled = True
-            Me.CFlowLayout6.SetFlowBreak(Me.txtBalance, True)
-            Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtBalance.ForeColor = System.Drawing.Color.Black
-            Me.txtBalance.LinkedLabel = Me.lblBalance
-            Me.txtBalance.Location = New System.Drawing.Point(191, 106)
-            Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtBalance.MaximumValue = Nothing
-            Me.txtBalance.MinimumValue = Nothing
-            Me.txtBalance.Name = "txtBalance"
-            Me.txtBalance.OldValue = Nothing
-            Me.txtBalance.ReadOnly = True
-            Me.txtBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBalance.SecurityKey = ""
-            Me.txtBalance.Size = New System.Drawing.Size(93, 23)
-            Me.txtBalance.TabIndex = 5
-            Me.txtBalance.Translatable = False
-            Me.txtBalance.ValueIsNumeric = True
-            '
             'lblOpeningBalance
             '
             Me.lblOpeningBalance.DisplayOnly = True
@@ -2093,6 +2045,54 @@
             Me.txtOpeningBalance.TabIndex = 4
             Me.txtOpeningBalance.Translatable = False
             Me.txtOpeningBalance.ValueIsNumeric = True
+            '
+            'lblBalance
+            '
+            Me.lblBalance.DisplayOnly = True
+            Me.lblBalance.EditingMode = False
+            Me.lblBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblBalance.Location = New System.Drawing.Point(4, 106)
+            Me.lblBalance.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblBalance.Name = "lblBalance"
+            Me.lblBalance.Size = New System.Drawing.Size(185, 23)
+            Me.lblBalance.TabIndex = 285
+            Me.lblBalance.Text = "Cash Advance Balance"
+            Me.lblBalance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblBalance.Translatable = True
+            '
+            'txtBalance
+            '
+            Me.txtBalance.BackColor = System.Drawing.Color.White
+            Me.txtBalance.BegFindValue = Nothing
+            Me.txtBalance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtBalance.ComputedValue = False
+            Me.txtBalance.CustomFormat = Nothing
+            Me.txtBalance.DataBoundControl = True
+            Me.txtBalance.DisplayOnly = True
+            Me.txtBalance.EditingMode = False
+            Me.txtBalance.EndFindValue = Nothing
+            Me.txtBalance.FieldDescription = Nothing
+            Me.txtBalance.FieldName = Nothing
+            Me.txtBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtBalance.FindEnabled = True
+            Me.CFlowLayout6.SetFlowBreak(Me.txtBalance, True)
+            Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtBalance.ForeColor = System.Drawing.Color.Black
+            Me.txtBalance.LinkedLabel = Me.lblBalance
+            Me.txtBalance.Location = New System.Drawing.Point(191, 106)
+            Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtBalance.MaximumValue = Nothing
+            Me.txtBalance.MinimumValue = Nothing
+            Me.txtBalance.Name = "txtBalance"
+            Me.txtBalance.OldValue = Nothing
+            Me.txtBalance.ReadOnly = True
+            Me.txtBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtBalance.SecurityKey = ""
+            Me.txtBalance.Size = New System.Drawing.Size(93, 23)
+            Me.txtBalance.TabIndex = 5
+            Me.txtBalance.Translatable = False
+            Me.txtBalance.ValueIsNumeric = True
             '
             'lblIban
             '
@@ -2907,7 +2907,7 @@
             'EmployeeEntryTvNew
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(1037, 512)
+            Me.ClientSize = New System.Drawing.Size(1038, 505)
             Me.Name = "EmployeeEntryTvNew"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.SplitContainer1.Panel1.ResumeLayout(False)

@@ -354,8 +354,6 @@
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
-    <Compile Include="PresentationLayer\Presenters\AccountsPresenterTvNew.vb" />
-    <Compile Include="PresentationLayer\Presenters\IAccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\Class1.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeePresenterNew.vb" />

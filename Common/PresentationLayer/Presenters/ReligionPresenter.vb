@@ -6,7 +6,7 @@ Imports AATM.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class ReligionPresenter
-        Inherits PresenterTv(Of IReligionView, ReligionModel)
+        Inherits PresenterNew(Of IReligionView, ReligionModel)
 
         Public Sub New(view As IReligionView)
             MyBase.New(view)
