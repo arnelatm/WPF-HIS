@@ -65,9 +65,11 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             ''
         Else
             Me.View = itemView
-            Dim tableColumnPropertyList As List(Of TblColPropModel)
-            tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
-            TableProperties = tableColumnPropertyList.ToArray
+            MyErrorProvider = CallByName(View, "MyErrorProvider", CallType.Get)
+
+            'Dim tableColumnPropertyList As List(Of TblColPropModel)
+            'tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
+            'TableProperties = tableColumnPropertyList.ToArray
             Ea.SubscribeEvent(Me)
 
             Dim pi As PropertyInfo = View.GetType().GetProperty("FormTreeView")
@@ -910,6 +912,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             'turn off addmode/editmode
             AddMode = False
             EditMode = False
+            ClearAllErrorMessages()
         End If
         Return retVal
     End Function
@@ -993,6 +996,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             If _withTreeView Then
                 TreeViewUpdateViewDisplay(idNo)
             End If
+            ClearAllErrorMessages()
+            'MyErrorProvider.ClearAllErrorMessages()
         End If
     End Sub
 
@@ -1445,6 +1450,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             MainFieldsDictionary.TryGetValue(rule.Property, control)
             MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
         Next
+        Dim tableColumnPropertyList As List(Of TblColPropModel)
+        tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
+        TableProperties = tableColumnPropertyList.ToArray
         SetAllControlsDynamicProperties(eventType.ViewControl)
         If _withTreeView Then
             DisplayTree()
@@ -1577,6 +1585,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Function IsNumberValid(ByRef viewControl As Control, ByRef obj As CTextBox)
         Dim returnValue As Boolean = True
         Dim objName = Strings.Mid(obj.Name, 4)
+        'If objName = "CreditLimit" Then
+        '    Debugger.Break()
+        'End If
         Dim targetValue = obj.Text
         Dim y As PropertyInfo = viewControl.GetType().GetProperty(objName, BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.IgnoreCase)
         If y IsNot Nothing Then
@@ -1587,45 +1598,53 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Else
                 Dim controlName As String = ControlDescription(obj)
                 Dim num As Double
-                Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
-                If Not isNumeric Then
+                If Not IsNumeric(targetValue) Then
                     FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text}))
                     returnValue = False
-                End If
-                Dim nMinValue As Double
-                Dim nMaxValue As Double
-                Dim typeCode As TypeCode = Type.GetTypeCode(x)
-                Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
-                If u Is Nothing Then
-                    nMinValue = GetMinMaxValue(typeCode, nMaxValue)
                 Else
-                    typeCode = Type.GetTypeCode(u)
-                    nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
-                End If
-                If num < nMinValue OrElse num > nMaxValue Then
-                    Dim err As String = Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", nMinValue.ToString(), "highNumber", nMaxValue.ToString()})
-                    returnValue = False
-                End If
-                Dim isInteger As Boolean = False
-                If u Is Nothing Then
-                    If NumTypeIsInteger(typeCode) Then
-                        isInteger = True
+                    Dim nMinValue As Double
+                    Dim nMaxValue As Double
+                    Dim typeCode As TypeCode = Type.GetTypeCode(x)
+                    Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
+                    If u Is Nothing Then
+                        nMinValue = GetMinMaxValue(typeCode, nMaxValue)
+                    Else
+                        typeCode = Type.GetTypeCode(u)
+                        nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
                     End If
-                Else
-                    If NumTypeIsInteger(underlyingTypeCode) Then
-                        isInteger = True
+                    Decimal.TryParse(targetValue, num)
+                    If num < nMinValue OrElse num > nMaxValue Then
+                        Dim err As String = Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", nMinValue.ToString(), "highNumber", nMaxValue.ToString()})
+                        returnValue = False
                     End If
-                End If
-                If isInteger Then
-                    If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
-                        FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidInteger", {"number", obj.Text, "controlName", controlName}))
+                    Dim isInteger As Boolean = False
+                    If u Is Nothing Then
+                        If NumTypeIsInteger(typeCode) Then
+                            isInteger = True
+                        End If
+                    Else
+                        If NumTypeIsInteger(underlyingTypeCode) Then
+                            isInteger = True
+                        End If
+                    End If
+                    If isInteger Then
+                        If Not Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
+                            FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidInteger", {"number", obj.Text, "controlName", controlName}))
+                            returnValue = False
+                        End If
+                    End If
+                    If num < obj.MinimumValue OrElse num > obj.MaximumValue Then
+                        FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", obj.MinimumValue, "highNumber", obj.MaximumValue}))
                         returnValue = False
                     End If
                 End If
-                If num < obj.MinimumValue OrElse num > obj.MaximumValue Then
-                    FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", obj.MinimumValue, "highNumber", obj.MaximumValue}))
-                    returnValue = False
-                End If
+
+                ''Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
+                'If Not IsNumeric() Then
+                '    FormatError(obj, Messaging.GetParametrizedMessage(True, "MsgInvalidNumericValue", {"controlName", controlName, "text", obj.Text}))
+                '    returnValue = False
+                'End If
+
             End If
         End If
         Return returnValue
@@ -1695,10 +1714,21 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Dim allControls As New List(Of Control)
             Dim resources = New ComponentResourceManager(Me.GetType())
             For Each cCtrl As Control In FindControlRecursive(allControls, viewControl)
+                'If cCtrl.Name = "txtCreditLimit" Then
+                '    Debugger.Break()
+                'End If
                 SetControlDynamicProperties(cCtrl)
                 SetObjectSecurityNew(cCtrl)
             Next
         End If
+    End Sub
+
+
+    Private Sub ClearAllErrorMessages()
+        Dim myDict = MainFieldsDictionary
+        For Each cCtrl As Control In myDict.Values
+            MyErrorProvider.SetError(cCtrl, "")
+        Next
     End Sub
 
     Private Sub SetControlDynamicProperties(ByRef cCtrl As Control)
