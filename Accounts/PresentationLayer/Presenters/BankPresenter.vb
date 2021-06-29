@@ -6,7 +6,7 @@ Imports AATM.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class BankPresenter
-        Inherits PresenterTv(Of IBankView, BankModel)
+        Inherits PresenterNew(Of IBankView, BankModel)
 
         Public Sub New(view As IBankView)
             MyBase.New(view)

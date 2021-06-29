@@ -111,6 +111,7 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="MyEnums.vb" />
+    <Compile Include="PresentationLayer\Presenters\CommonPresenterNew.vb" />
     <Compile Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.Designer.vb">
       <DependentUpon>DefaultFieldValueEntryTv.vb</DependentUpon>
     </Compile>

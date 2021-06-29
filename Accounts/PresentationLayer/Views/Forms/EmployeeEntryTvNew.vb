@@ -19,11 +19,11 @@ Namespace PresentationLayer.Views.Forms
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _unit
         Private _phoneTypes As List(Of ClassesLibrary.LookupData)
-        Private ReadOnly _presenter As IAccountsPresenter
+        Private ReadOnly _presenter 'As IAccountsPresenter
 
         Private ReadOnly _nfi As NumberFormatInfo
 
-        Public Sub New(ByRef presenter As IAccountsPresenter)
+        Public Sub New(ByRef presenter)
             MyBase.New()
 
             ' This call is required by the designer.

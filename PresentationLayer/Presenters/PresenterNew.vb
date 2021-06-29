@@ -30,7 +30,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                ISubscriber(Of EntryFormLoaded),
                ISubscriber(Of SaveDataRequested),
                ISubscriber(Of GetDataSource),
-               ISubscriber(Of GetLookupDataRequested)
+               ISubscriber(Of GetLookupDataRequested),
+               ISubscriber(Of LanguageChanged)
 
     Public ChildPresenters As New List(Of Object)
     Public ChildModels As New List(Of Object)
@@ -57,6 +58,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Private _undoMode As Boolean = False
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
+    Private WithTreeView As Boolean = False
 
     Public Sub New(itemView As T)
         If itemView Is Nothing Then
@@ -67,6 +69,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
             TableProperties = tableColumnPropertyList.ToArray
             Ea.SubscribeEvent(Me)
+            FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
+            If FormTreeView IsNot Nothing Then
+                WithTreeView = True
+            End If
         End If
     End Sub
 
@@ -357,8 +363,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return retVal
     End Function
 
-    Public Function CheckIfUnique(textValue As String, fieldName As String, targetIdNo As Int32) As Boolean
-        If Model.CheckIfUnique(textValue, TableName, fieldName, targetIdNo) Then
+    Public Function CheckIfUnique(textValue As String, fieldName As String, pTargetIdNo As Integer) As Boolean
+        If Model.CheckIfUnique(textValue, TableName, fieldName, pTargetIdNo) Then
             Return True
         End If
         Return False
@@ -392,7 +398,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 scope.Complete()
             End Using
         Catch ex As TransactionAbortedException
-            MessageBox.Show(ex.Message, "Record Deletion Aborted!")
+            MessageBox.Show(ex.Message, $"Record Deletion Aborted!")
         Catch oEx As Exception
 
             If oEx.Message.Contains("Timeout Expired") Then
@@ -436,8 +442,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Public Function FindRecord() As Integer
-        Dim idNoOfFoundRecord As Integer = 0
-        idNoOfFoundRecord = FindFieldContinue(TargetIdNo)
+        Dim idNoOfFoundRecord As Integer = FindFieldContinue(TargetIdNo)
         Return idNoOfFoundRecord
     End Function
 
@@ -483,9 +488,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End If
     End Function
 
-    Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) Implements IPresenter.GetFieldWithIdNo
+    Public Function GetFieldWithIdNo(idNo As Object, pTableName As String, returnFieldName As String) Implements IPresenter.GetFieldWithIdNo
         Try
-            Return Model.GetFieldWithIdNo(idNo, tableName, returnFieldName)
+            Return Model.GetFieldWithIdNo(idNo, pTableName, returnFieldName)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -645,8 +650,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetRecords(ByVal tableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
-        Return Model.GetRecords(tableName, sortOrder, fieldNames, filter)
+    Public Function GetRecords(ByVal pTableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
+        Return Model.GetRecords(pTableName, sortOrder, fieldNames, filter)
     End Function
 
     Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
@@ -685,6 +690,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         If IsOkToDeleteRecord() Then
             If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 RaiseEvent BeforeDelete()
+                If WithTreeView Then
+                    TreeViewBeforeDelete()
+                End If
                 retValue = DeleteRecord(currentIdNo)
                 If retValue <= 0 Then
                     Messaging.Show(True, "MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -699,6 +707,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                     End If
                 End If
                 RaiseEvent AfterDelete(retValue)
+                If WithTreeView Then
+                    TreeViewAfterDelete(retValue)
+                End If
                 UpdateViewDisplay(TargetIdNo)
             End If
         End If
@@ -771,12 +782,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Overridable Function MessageBeforeSave() As Boolean
         Dim retVal As Boolean = False
-        Dim message = "Are you sure you want to {action} this {itemName} entry?"
         Dim caption = "Please confirm."
         Dim action As String = Messaging.TranslateCaption("save")
         Dim itemName As String = Messaging.TranslateCaption("transaction")
         Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
-        'message = message.Interpolate(Function(x) action, Function(x) itemName)
         If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             retVal = True
         End If
@@ -871,13 +880,15 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Overridable Function Save(ByRef viewControl As Control)
         RaiseEvent BeforeSave()
-        Dim retVal As Integer = 0
         Dim record As New TM
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
-        retVal = InitiateSave()
+        Dim retVal As Integer = InitiateSave()
         If retVal < 0 Then
             Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
+            If WithTreeView Then
+                TreeViewAfterSave()
+            End If
             RaiseEvent AfterSave()
         End If
         If retVal < 0 Then
@@ -913,7 +924,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Public Overridable Sub SaveOriginalValues()
-        GlobalVariables.Mapper.Map(Of T, TM)(Me.View, Me.OriginalModel)
+        GlobalVariables.Mapper.Map(Of T, TM)(View, OriginalModel)
     End Sub
 
     Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
@@ -970,6 +981,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             For Each child In ChildPresenters
                 child.UpdateViewDisplay(idNo)
             Next
+            If WithTreeView Then
+                TreeViewUpdateViewDisplay(idNo)
+            End If
         End If
     End Sub
 
@@ -1086,7 +1100,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Private Sub FormatError(ctrl As Object, ctrlError As String)
-        If DirectCast(ctrl, System.Windows.Forms.Control).Dock = DockStyle.Fill Then
+        If DirectCast(ctrl, Control).Dock = DockStyle.Fill Then
             MyErrorProvider.SetIconPadding(ctrl, -18)
         End If
         If GlobalVariables.RightToLeftLayout Then
@@ -1214,10 +1228,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                 If AddMode Then
-                    Dim retVal As Integer = 0
                     retValue = SaveAddedRecord(record)
                     If retValue > 0 Then
-                        retVal = retValue
+                        Dim retVal As Integer = retValue
                         RaiseEvent RecordAddedSuccessfully(retVal)
                         If retVal < 0 Then
                             retValue = retVal
@@ -1241,7 +1254,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             End Using
         Catch ex As TransactionAbortedException
             retValue = -1
-            MessageBox.Show(ex.Message, "Transaction Aborted")
+            MessageBox.Show(ex.Message, $"Transaction Aborted")
         Catch oEx As Exception
 
             If oEx.Message.Contains("Timeout Expired") Then
@@ -1305,7 +1318,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     'End Function
 
     Public Sub AddToParentError(errors As List(Of String))
-        Dim mainBizObj = DirectCast(DirectCast(DirectCast(Model, AATM.PresentationLayer.Models.Model).DataService, AATM.ServicesLayer.Services.Service).DataBo, AATM.BusinessLayer.BusinessObject)
+        Dim mainBizObj = DirectCast(DirectCast(DirectCast(Model, Model).DataService, ServicesLayer.Services.Service).DataBo, BusinessLayer.BusinessObject)
         mainBizObj.AddError(errors)
     End Sub
 
@@ -1424,6 +1437,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
         Next
         SetAllControlsDynamicProperties(eventType.ViewControl)
+        If WithTreeView Then
+            DisplayTree()
+        End If
     End Sub
 
     Public Sub OnEventHandler(ByRef eventType As SaveDataRequested) Implements ISubscriber(Of SaveDataRequested).OnEventHandler
@@ -1572,7 +1588,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 Dim typeCode As TypeCode = Type.GetTypeCode(x)
                 Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
                 If u Is Nothing Then
-                    nMinValue = GlobalFunctions.GetMinMaxValue(typeCode, nMaxValue)
+                    nMinValue = GetMinMaxValue(typeCode, nMaxValue)
                 Else
                     typeCode = Type.GetTypeCode(u)
                     nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
@@ -1677,7 +1693,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Private Sub SetControlDynamicProperties(ByRef cCtrl As Control)
-        Dim myView = cCtrl.FindForm()
+        'Dim myView = cCtrl.FindForm()
         If TypeOf cCtrl Is IEntryControl Then
             ' get FieldName from control : by convention when using this system
             ' all DataBoundControls TextBox & Combobox that will hold field variables are named by convention in this format
@@ -2009,6 +2025,208 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     '    eventType.Target = dataList
     'End Sub
 
+#Region "TreeView"
+
+    Protected TreeViewList
+    Protected TreeViewMainField As String
+    Protected TreeViewParentIdField As String
+    Protected TreeViewSecondaryField As String
+    Protected ParentFieldName As String = ""
+    Protected WithEvents FormTreeView As TreeView
+    Protected NodeToDelete As TreeNode
+
+    'Public Sub NewTreeView()
+    '    FormTreeView = CallByName(View, "FormTreeView", CallType.Get)
+    'End Sub
+
+    'Public Sub OnTvEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
+    '    DisplayTree()
+    'End Sub
+
+    Protected Sub DisplayTree()
+        Dim root As TreeNode = FormTreeView.Nodes(0)
+        root.Nodes.Clear()
+        root.Text = Messaging.TranslateCaption(TableName)
+        ' create the tree
+        If GlobalVariables.RightToLeftLayout Then
+            FormTreeView.RightToLeft = RightToLeft.Yes
+            FormTreeView.RightToLeftLayout = True
+        Else
+            FormTreeView.RightToLeft = RightToLeft.No
+            FormTreeView.RightToLeftLayout = False
+        End If
+        Dim treeViewData As Object = GetTreeViewData()
+        If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
+            For Each dataNode In treeViewData
+                AddRecordToTree(dataNode)
+            Next
+        Else
+            For Each dataNode In treeViewData
+                AddRecordToTreeHierarchical(dataNode, True, FormTreeView)
+            Next
+        End If
+        FormTreeView.ExpandAll()
+        GotoRecordInTreeView()
+    End Sub
+
+    Public Function GetTreeViewData()
+        Dim cModel As New TM
+        Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
+        Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
+        If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
+            If String.IsNullOrEmpty(TreeViewSecondaryField) Then
+                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
+            Else
+                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
+            End If
+        Else
+            newSortOrderKey = "SortKey"
+            If String.IsNullOrEmpty(TreeViewSecondaryField) Then
+                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
+            Else
+                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
+            End If
+        End If
+    End Function
+
+    Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean, treeViewTableName As TreeView)
+        'Dim parentFieldName As String = CallByName(View, "ParentFieldName", CallType.Get)
+        Dim parentIdValue As Integer? = GetPropertyValue(dataNode, ParentFieldName)
+        If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
+            AddRecordToTree(dataNode) ', "Name")
+        Else
+            Dim idNo As Int32 = GetPropertyValue(dataNode, "IdNo")
+            Dim mainValue As String = GetPropertyValue(dataNode, "Name")
+            Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
+            Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
+            If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
+                If parentChanged Then
+                    treeViewTableName.Nodes(treeViewTableName.Nodes.Count - 1).Nodes.Add(treeNode)
+                Else
+                    treeViewTableName.Nodes(0).Nodes.Add(treeNode)
+                End If
+            Else
+                If parentChanged Then
+                    Dim foundNode As TreeNode() = treeViewTableName.Nodes.Find(parentIdValue.ToString(), True)
+                    If foundNode.Length <> 0 Then
+                        foundNode(0).Nodes.Add(treeNode)
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Protected Overloads Sub AddRecordToTree(dataNode As Object) ', mainFieldName As String)
+        Dim idNo As Int32 = GetPropertyValue(dataNode, IdFieldName)
+        Dim mainValue As String = GetPropertyValue(dataNode, "Name")
+        Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
+        Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
+        FormTreeView.Nodes(0).Nodes.Add(treeNode)
+    End Sub
+
+    Protected Function MakeTreeNode(mainFieldValue As String, secondaryFieldValue As String, idNo As Int32) _
+        As TreeNode
+        Dim treeTextDisplay As String
+        treeTextDisplay = TreeNodeTextDisplay(mainFieldValue, secondaryFieldValue)
+        Return New TreeNode With {
+            .Text = treeTextDisplay,
+            .Tag = idNo,
+            .Name = idNo
+            }
+    End Function
+
+    Protected Overridable Function TreeNodeTextDisplay(tvName As String, ByVal Optional tvAdditionalText As String = "") _
+        As String
+        Return tvName.Trim() + If(String.IsNullOrEmpty(tvAdditionalText), "", " (" + tvAdditionalText.ToString().Trim() + ")")
+    End Function
+
+    Private Sub GotoRecordInTreeView()
+        Dim found As TreeNode() = FormTreeView.Nodes.Find(TargetIdNo, True)
+        If found.Length <> 0 Then
+            With FormTreeView
+                .SelectedNode = found(0)
+                .HideSelection = False
+                .Select()
+            End With
+        End If
+        If FormTreeView.SelectedNode IsNot Nothing AndAlso FormTreeView.SelectedNode.IsVisible Then
+            FormTreeView.SelectedNode.EnsureVisible()
+        End If
+    End Sub
+
+    Public Function GetTreeNodeText()
+        Dim cModel As New TM
+        Dim cText As String
+        Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
+        If String.IsNullOrEmpty(TreeViewSecondaryField) Then
+            cText = CallByName(View, treeMainFieldName, CallType.Get).Trim() + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String).Trim()
+        Else
+            Dim addText = CallByName(View, TreeViewSecondaryField, CallType.Get)
+            cText = CallByName(View, treeMainFieldName, CallType.Get).Trim() + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String).Trim() +
+                    If(String.IsNullOrEmpty(addText), "", " (" + addText.ToString().Trim() + ")")
+        End If
+        Return cText
+    End Function
+
+    Public Sub TreeViewUpdateViewDisplay(idNo As Int32)
+        GotoRecordInTreeView()
+    End Sub
+
+    Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
+        Select Case e.Action
+            Case TreeViewAction.ByKeyboard
+                    'MessageBox.Show("You like the keyboard!")
+
+            Case TreeViewAction.ByMouse
+                'MessageBox.Show("You like the mouse!")
+            Case Else
+                ' A problem here is causing a windows handle error when executing the below code.
+                ' Therefore since this is just a selection change during initialization no need
+                ' to execute the codes below so just exit the sub. This will also make initialization
+                ' faster because no more need to move the database anyway at initialization the
+                ' first record will be the one to be shown.
+                Exit Sub
+        End Select
+        Dim nTag As Integer
+        FormTreeView.ImageIndex = 1
+        If FormTreeView.SelectedNode.Tag Is Nothing Then
+            RecordPositionNumber = 1
+        Else
+            nTag = FormTreeView.SelectedNode.Tag
+            Dim x = GetSortedRecordPosition(nTag)
+            RecordPositionNumber = x
+        End If
+        If Not FormTreeView.SelectedNode.IsVisible Then
+            FormTreeView.SelectedNode.EnsureVisible()
+        End If
+    End Sub
+
+    Private Sub FormTreeViewBeforeSelect(ByVal sender As Object, ByVal e As TreeViewCancelEventArgs) Handles FormTreeView.BeforeSelect
+        If EditMode Or AddMode Then
+            e.Cancel = True
+        End If
+    End Sub
+
+    Public Sub TreeViewBeforeDelete()
+        NodeToDelete = FormTreeView.SelectedNode()
+    End Sub
+
+    Public Sub TreeViewAfterDelete(retVal As Integer)
+        If retVal > 0 Then
+            FormTreeView.Nodes.Remove(NodeToDelete)
+        End If
+    End Sub
+
+    Private Sub TreeViewAfterSave()
+        DisplayTree()
+    End Sub
+
+    Public Sub OnLanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
+        DisplayTree()
+    End Sub
+
+#End Region
+
 End Class
 
 Public Class ViewButtonClicked
@@ -2139,7 +2357,7 @@ Public Class IdNoEventArgs
     Private _idNo As Int32
 
     Public Sub New(ByVal idNo As Int32)
-        Me._idNo = idNo
+        _idNo = idNo
     End Sub
 
     Public Property IdNo As Int32

@@ -8,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeePresenterNew
-        Inherits AccountsPresenterTvNew(Of IEmployeeView, EmployeeModel)
+        Inherits AccountsPresenterNew(Of IEmployeeView, EmployeeModel)
 
         Protected DtEmpPayElementInsertTable As New DataTable
         Protected DtEmpPayElementUpdateTable As New DataTable

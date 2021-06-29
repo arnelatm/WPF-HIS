@@ -5,8 +5,8 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Presenters
 
     Public Class AccountsPresenterNew(Of T As IView, TM As New)
-        Inherits PresenterTv(Of T, TM)
-        Implements IAccountsPresenter
+        Inherits PresenterNew(Of T, TM)
+        'Implements IAccountsPresenter
 
         Public Sub New(itemView As T)
             MyBase.New(itemView)
@@ -180,7 +180,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _dayType = EnumToCode(PayRateUnitSelection.Day)
         Private ReadOnly _biWeekType = EnumToCode(PayRateUnitSelection.BiWeek)
 
-        Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal Implements IAccountsPresenter.ComputePayAmount
+        Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
             Dim factor As Decimal
             Select Case payFrequency
                 Case PayFrequencySelection.Monthly
@@ -418,7 +418,7 @@ Namespace PresentationLayer.Presenters
         '    Return 0
         'End Function
 
-        Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName") Implements IAccountsPresenter.GetIntPhoneCodes
+        Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")
             Return GetLookup("Country", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
         End Function
 
