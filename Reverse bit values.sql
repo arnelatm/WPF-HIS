@@ -1,0 +1,1 @@
+﻿UPDATE Tablename SET BitField =  BitField ^ 1

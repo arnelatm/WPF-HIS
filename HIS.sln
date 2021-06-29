@@ -113,6 +113,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 	ProjectSection(SolutionItems) = preProject
 		DeleteDuplicates.sql = DeleteDuplicates.sql
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
+		Reverse bit values.sql = Reverse bit values.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspdata", "{D0B2F203-4601-4F73-89C4-C5A6FF4D4B99}"
@@ -125,7 +126,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "AatmInterfaces", "Libraries\AatmInterfaces\AatmInterfaces.vbproj", "{8BF1BE35-27DC-4B2F-B7DB-A2CF182BBC7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAccounts", "Accounts\CAccounts\CAccounts.csproj", "{DFF185B6-1B96-47F7-B39B-C4B114B3C581}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAccounts", "Accounts\CAccounts\CAccounts.csproj", "{DFF185B6-1B96-47F7-B39B-C4B114B3C581}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
