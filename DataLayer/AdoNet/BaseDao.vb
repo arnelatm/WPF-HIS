@@ -143,7 +143,7 @@ Namespace AdoNet
                 Else
                     searchString = findableControl.BegFindValue
                     Dim searchString2 = findableControl.EndFindValue
-                    sql &= findableControl.FieldName.Trim() & ">= @searchString and " & findableControl.FieldName.Trim() & " <= @searchString2"
+                    sql &= ">= @searchString and " & findableControl.FieldName.Trim() & " <= @searchString2"
                     params = {"@SearchString", searchString, "@searchString2", searchString2, "@sortOrderKey", sortOrderKey}
                 End If
             ElseIf findableControl.SearchMode = IFindableControl.SearchModeEnum.CheckBox Then
@@ -435,8 +435,13 @@ Namespace AdoNet
 
         Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer _
             Implements IBaseDao.GetRecordCount
-            Dim sql As String = "Select Count(*) FROM [" & tableName & "] " + IIf(filter Is Nothing, "", " where " & filter)
-            Return _db.Scalar(sql)
+            Dim sql As String = ""
+            If filter Is Nothing Or filter = "" Then
+                sql = "Select Count(*) FROM [" & tableName & "]"
+            Else
+                sql = "Select Count(*) FROM [" & tableName & "] " + IIf(filter Is Nothing, "", " where " & filter)
+            End If
+            Return _db.Scalar(Sql)
         End Function
 
         Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) _
