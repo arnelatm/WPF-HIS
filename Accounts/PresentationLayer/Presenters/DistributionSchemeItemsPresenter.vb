@@ -31,28 +31,28 @@ Namespace PresentationLayer.Presenters
         '    Return
         'End Function
 
-        Public Overloads Function DataIsValid(ByRef distributionSchemeItems As List(Of DistributionSchemeItemModel))
-            Dim retVal = True
-            Dim totalPercentage As Decimal
-            If distributionSchemeItems Is Nothing Then
-                MessageBox.Show("No entries, cannot save a blank distribution scheme.")
-                retVal = False
-            Else
-                For Each item In distributionSchemeItems
-                    totalPercentage += item.Percentage
-                    If item.RevCostCenterIdNo = 0 Then
-                        MessageBox.Show("Blank Profit Center is not allowed in line #" + item.Sequence.ToString())
-                        retVal = False
-                        Exit For
-                    End If
-                Next
-                If retVal And Math.Abs(totalPercentage - 100.0) > 0.001 Then
-                    MessageBox.Show("Total Percentage must be 100.00%")
-                    retVal = False
-                End If
-            End If
-            Return retVal
-        End Function
+        'Public Overloads Function DataIsValid(ByRef distributionSchemeItems As List(Of DistributionSchemeItemModel))
+        '    Dim retVal = True
+        '    Dim totalPercentage As Decimal
+        '    If distributionSchemeItems Is Nothing Then
+        '        MessageBox.Show("No entries, cannot save a blank distribution scheme.")
+        '        retVal = False
+        '    Else
+        '        For Each item In distributionSchemeItems
+        '            totalPercentage += item.Percentage
+        '            If item.RevCostCenterIdNo = 0 Then
+        '                MessageBox.Show("Blank Profit Center is not allowed in line #" + item.Sequence.ToString())
+        '                retVal = False
+        '                Exit For
+        '            End If
+        '        Next
+        '        If retVal And Math.Abs(totalPercentage - 100.0) > 0.001 Then
+        '            MessageBox.Show("Total Percentage must be 100.00%")
+        '            retVal = False
+        '        End If
+        '    End If
+        '    Return retVal
+        'End Function
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
                                        distributionSchemeIdNo As Int32)

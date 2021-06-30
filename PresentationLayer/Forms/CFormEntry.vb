@@ -668,7 +668,6 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-
         Dim allControls As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allControls, Me)
             If TypeOf cCtrl Is DataGridView Then
@@ -1053,7 +1052,7 @@ Public Class CFormEntry
         PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
     End Sub
 
-    Protected Overridable Function DataIsValid() As Boolean
+    Protected Overridable Function f() As Boolean
         Debugger.Break()
         Return False
     End Function

@@ -7,6 +7,7 @@
     Public Class CustomerModel
 
         Public Property Errors As List(Of String)
+        Public Property Balance As Decimal
         Public Property IdNo As Int32
         Public Property CustomerCode As String
         Public Property CustomerName As String

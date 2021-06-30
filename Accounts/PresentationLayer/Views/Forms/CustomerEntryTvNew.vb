@@ -3,49 +3,25 @@ Imports System.Globalization
 Imports System.Resources
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class CustomerEntryTv
-        Implements ICustomerView, ISubscriber(Of AddModeChanged)
+    Public Class CustomerEntryTvNew
+        Implements ICustomerView ', ISubscriber(Of AddModeChanged)
 
-        Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private ReadOnly _presenter
+        Private ReadOnly _nfi As NumberFormatInfo
+        'Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
-        Public Sub New()
+        Public Sub New(ByRef presenter)
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "Customer"
-            TvMainFieldName = "CustomerName"
-            TvSecondaryFieldName = "CustomerCode"
-            SortOrderKey = "CustomerName"
+            _presenter = presenter
             FirstControl = txtCustomerName
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New CustomerPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
 
-            'ResourceEnumConverter.MakeResource("DepartmentTypeSelection", GetType(DepartmentTypeSelection))
-        End Sub
-
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("DepartmentTypeSelection", GetType(DepartmentTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        End Sub
-
-        Protected Overrides Sub CreateDataSources()
-            cacCountryCode.DataSource = PresenterObj.GetLookup("Country")
-            cacBankIdNo.DataSource = PresenterObj.GetLookup("Bank")
-            cacArAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsReceivable))
-            cacRevAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
-            cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)
-            cacAccountStatus.DataSource = PresenterObj.MakeEnumComboList(Of AccountStatusSelection)
-            cacDiscountSchemeIdNo.DataSource = PresenterObj.GetLookup("DiscountScheme", "Name", {"IdNo", "Name", "Code"})
         End Sub
 
 #Region "Field Displays"
@@ -281,10 +257,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CreditLimit As Decimal Implements ICustomerView.CreditLimit
             Get
-                Return txtCreditLimit.Text.ToDecimalNumber(_nfi)
+                Return NumParser(Of Decimal)(txtCreditLimit.Text)
             End Get
             Set
-                txtCreditLimit.Text = Value
+                txtCreditLimit.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
@@ -299,10 +275,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SettlementDiscount As Decimal Implements ICustomerView.SettlementDiscount
             Get
-                Return txtSettlementDiscount.Text.ToDecimalNumber(_nfi)
+                Return NumParser(Of Decimal)(txtSettlementDiscount.Text)
             End Get
             Set
-                txtSettlementDiscount.Text = Value
+                txtSettlementDiscount.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
@@ -360,15 +336,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property Active As Boolean Implements ICustomerView.Active
-        '    Get
-        '        Return EnumToCode(tcbActive.Text)
-        '    End Get
-        '    Set(value As Boolean)
-        '        tcbActive.Text = EnumToCode(value)
-        '    End Set
-        'End Property
-
         Public Property Notes As String Implements ICustomerView.Notes
             Get
                 Return txtNotes.Text
@@ -380,10 +347,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property OpeningBalance As Decimal Implements ICustomerView.OpeningBalance
             Get
-                Return txtOpeningBalance.Text.ToDecimalNumber(_nfi)
+                Return NumParser(Of Decimal)(txtOpeningBalance.Text)
             End Get
             Set
-                txtOpeningBalance.Text = Value.ToString("N", _nfi)
+                txtOpeningBalance.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
@@ -407,58 +374,100 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Private Sub lblContactDesignation_Click(sender As Object, e As EventArgs) Handles lblContactDesignation.Click
-            ' Create a resource writer.
-            ' just a test program nothing to do with this program
-            ' this is just a test on how to access the Resources file using ResourceWriter.
-            Dim componentResourceManager As New ComponentResourceManager(Me.GetType)
-            Dim rw As IResourceWriter
-            rw = New ResourceWriter("CustomerEntryTv.resources")
-            ' Add resources to the file.
-            rw.AddResource("lblContactDesignation.Text", "ChangedValue")
-            MessageBox.Show("changed resource value to changedValue")
-            rw.Generate()
-            ' Close the ResourceWriter.
-            rw.Close()
-            Dim res As New ResourceReader("CustomerEntryTv.resources")
-            Dim dict As IDictionaryEnumerator = res.GetEnumerator()
-            Do While dict.MoveNext()
-                MessageBox.Show(dict.Key.ToString() + dict.Value.ToString() + dict.Value.GetType().Name.ToString())
-            Loop
-            res.Close()
+        Protected Overrides Sub CreateDataSources()
+            CreateEnumDataSource(Of PaymentMethodSelection)(cacPaymentMethod)
+            CreateEnumDataSource(Of AccountStatusSelection)(cacAccountStatus)
+            cacArAccountIdNo.DataSource = _presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsReceivable))
+            CreateDataSource("Country", cacCountryCode)
+            CreateDataSource("Bank", cacCountryCode)
+            cacRevAccountIdNo.DataSource = _presenter.GetDetailAccountList()
+            CreateDataSource("DiscountScheme", cacDiscountSchemeIdNo)
+            'cacDiscountSchemeIdNo.DataSource = _presenter.GetLookup("DiscountScheme", cacDiscountSchemeIdNo, "Name", {"IdNo", "Name", "Code"})
         End Sub
+
+        'Private Sub lblContactDesignation_Click(sender As Object, e As EventArgs) Handles lblContactDesignation.Click
+        '    ' Create a resource writer.
+        '    ' just a test program nothing to do with this program
+        '    ' this is just a test on how to access the Resources file using ResourceWriter.
+        '    Dim componentResourceManager As New ComponentResourceManager(Me.GetType)
+        '    Dim rw As IResourceWriter
+        '    rw = New ResourceWriter("CustomerEntryTv.resources")
+        '    ' Add resources to the file.
+        '    rw.AddResource("lblContactDesignation.Text", "ChangedValue")
+        '    MessageBox.Show("changed resource value to changedValue")
+        '    rw.Generate()
+        '    ' Close the ResourceWriter.
+        '    rw.Close()
+        '    Dim res As New ResourceReader("CustomerEntryTv.resources")
+        '    Dim dict As IDictionaryEnumerator = res.GetEnumerator()
+        '    Do While dict.MoveNext()
+        '        MessageBox.Show(dict.Key.ToString() + dict.Value.ToString() + dict.Value.GetType().Name.ToString())
+        '    Loop
+        '    res.Close()
+        'End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
-                {
+                {{"IdNo", TxtIdNo},
                 {"CustomerCode", txtCustomerCode},
                 {"CustomerName", txtCustomerName},
                 {"CustomerNameAra", txtCustomerNameAra},
-                {"IdNo", TxtIdNo},
-                {"Notes", txtNotes}
+                {"ContactPerson", txtContactPerson},
+                {"ContactDesignation", txtContactDesignation},
+                {"Street", txtStreet},
+                {"District", txtDistrict},
+                {"TownCity", txtTownCity},
+                {"ProvinceState", txtProvinceState},
+                {"CountryCode", cacCountryCode},
+                {"PoBox", txtPoBox},
+                {"ZipCode", txtZipCode},
+                {"Phone1", txtPhone1},
+                {"Phone2", txtPhone2},
+                {"Mobile", txtMobile},
+                {"Fax", txtFax},
+                {"Email", txtEmail},
+                {"Website", txtWebsite},
+                {"VatNumber", txtVatNumber},
+                {"CrNumber", txtCrNumber},
+                {"AccountStatus", cacAccountStatus},
+                {"ArAccountIdNo", cacArAccountIdNo},
+                {"RevAccountIdNo", cacRevAccountIdNo},
+                {"CreditLimit", txtCreditLimit},
+                {"SettlementDueDays", txtSettlementDueDays},
+                {"SettlementDiscount", txtSettlementDiscount},
+                {"PaymentDueDays", txtPaymentDueDays},
+                {"DateAccountOpen", dtpDateAccountOpen},
+                {"BankIdNo", cacBankIdNo},
+                {"BankAccountNo", txtBankAccountNo},
+                {"Iban", txtIban},
+                {"PaymentMethod", cacPaymentMethod},
+                {"Notes", txtNotes},
+                {"OpeningBalance", txtOpeningBalance},
+                {"DiscountSchemeIdNo", cacDiscountSchemeIdNo},
+                {"Active", chkActive}
                 }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            MyBase.RecordPositionChanged(e)
-            Dim value As Double
-            value = Convert.ToDouble(PresenterObj.GetCustomerBalance(IdNo))
-            txtBalance.Text = value.ToString("N", _nfi)
-            If Not PresenterObj.AddMode Then
-                txtOpeningBalance.DisplayOnly = True
-            Else
-                txtOpeningBalance.DisplayOnly = False
-            End If
-        End Sub
+        'Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+        '    MyBase.RecordPositionChanged(e)
+        '    Dim value As Double
+        '    value = Convert.ToDouble(PresenterObj.GetCustomerBalance(IdNo))
+        '    txtBalance.Text = value.ToString("N", _nfi)
+        '    If Not PresenterObj.AddMode Then
+        '        txtOpeningBalance.DisplayOnly = True
+        '    Else
+        '        txtOpeningBalance.DisplayOnly = False
+        '    End If
+        'End Sub
 
-        Public Sub OnAcReconAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
-            MyBase.OnEventHandlerAddModeChanged(e)
-            If e.AddMode Then
-                txtOpeningBalance.DisplayOnly = False
-            Else
-                txtOpeningBalance.DisplayOnly = True
-            End If
-        End Sub
+        'Public Sub OnAcReconAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
+        '    MyBase.OnEventHandlerAddModeChanged(e)
+        '    If e.AddMode Then
+        '        txtOpeningBalance.DisplayOnly = False
+        '    Else
+        '        txtOpeningBalance.DisplayOnly = True
+        '    End If
+        'End Sub
 
     End Class
 

@@ -260,9 +260,9 @@ Namespace PresentationLayer.Presenters
                 empName = activeEmployees(i * 4 - 3)
                 dateHired = activeEmployees(i * 4 - 2)
                 dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), Nothing, activeEmployees(i * 4 - 1))
-                If empId = 498 Then
-                    Debugger.Break()
-                End If
+                'If empId = 498 Then
+                '    Debugger.Break()
+                'End If
 
                 If _reinitialize Then
                     Dim empAttendance As AttendanceItemView

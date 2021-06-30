@@ -101,6 +101,9 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgInvalidNumericValue", "The entered value '{text}' in field [{controlName}] is not a number.", "Error")
         Messaging.AddMessage("MsgNumericOverflow", "The entered number '{Number}' in field [{controlName}] is too large or too low. Entry must be between [{lowNumber}] and [{highNumber}].", "Error")
         Messaging.AddMessage("MsgInvalidInteger", "The entered number '{number}' in field [{controlName}] is not a valid integer (whole number).", "Error")
+        Messaging.AddMessage("MsgBlankDistributionScheme", "No entries, cannot save a blank distribution scheme.", "Invalid Entry")
+        Messaging.AddMessage("MsgInvalidTotalPercentage", "Total Percentage must be 100.00%.", "Invalid Entry")
+        Messaging.AddMessage("MsgBlankRevenueCostCenter", "Blank Revenue Cost Center not allowed in line # {lineNumber}.", "Invalid Entry")
     End Sub
 
     'Public Shared Sub CreateEnums()

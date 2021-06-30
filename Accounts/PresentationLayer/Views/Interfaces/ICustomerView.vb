@@ -5,6 +5,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface ICustomerView
         Inherits IView
         Property IdNo As Int32
+        Property Balance As Decimal
         Property CustomerCode As String
         Property CustomerName As String
         Property CustomerNameAra As String

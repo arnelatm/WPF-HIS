@@ -288,12 +288,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCustomerClients.Click
-            'ShowEntryForm(CustomerEntryTv)
-            Dim childMdiForm = New CustomerEntryTv With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            Dim presenter As New CustomerPresenterNew(Nothing)
+            Dim myForm = New CustomerEntryTvNew(presenter)
+            presenter = New CustomerPresenterNew(myForm)
+            myForm.Show()
         End Sub
 
         Private Sub CustomRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISCustomRange.Click
