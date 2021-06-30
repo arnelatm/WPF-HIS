@@ -17,27 +17,27 @@ Namespace PresentationLayer.Presenters
 
         Public Property ChangesMadeInJournalItem As Boolean = False
 
-        Public Overloads Function DataIsValid(ByRef journalItems As List(Of JournalItemModel))
-            Dim retVal = True
-            For Each item In journalItems
-                If item.Debit = 0 And item.Credit = 0 Then
-                    MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with zero debit and credit amount. See line ", item.Sequence))
-                    retVal = False
-                    Exit For
-                ElseIf item.AccountIdNo = 0 Then
-                    MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with blank account id", item.Sequence))
-                    retVal = False
-                    Exit For
-                Else
-                    Dim enumPayeeType = CodeToEnum(Of PayeeTypeSelection)(Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType"))
-                    If enumPayeeType = PayeeTypeSelection.Employee Or enumPayeeType = PayeeTypeSelection.Customer Or enumPayeeType = PayeeTypeSelection.Supplier Then
-                        MessageBox.Show(String.Format("Error in line {0:N0} Sorry the account entered is either a Customer/Employee/Supplier Account. Such entries are not allowed for General Journal.", item.Sequence))
-                        retVal = False
-                    End If
-                End If
-            Next
-            Return retVal
-        End Function
+        'Public Overloads Function DataIsValid(ByRef journalItems As List(Of JournalItemModel))
+        '    Dim retVal = True
+        '    For Each item In journalItems
+        '        If item.Debit = 0 And item.Credit = 0 Then
+        '            MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with zero debit and credit amount. See line ", item.Sequence))
+        '            retVal = False
+        '            Exit For
+        '        ElseIf item.AccountIdNo = 0 Then
+        '            MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with blank account id", item.Sequence))
+        '            retVal = False
+        '            Exit For
+        '        Else
+        '            Dim enumPayeeType = CodeToEnum(Of PayeeTypeSelection)(Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType"))
+        '            If enumPayeeType = PayeeTypeSelection.Employee Or enumPayeeType = PayeeTypeSelection.Customer Or enumPayeeType = PayeeTypeSelection.Supplier Then
+        '                MessageBox.Show(String.Format("Error in line {0:N0} Sorry the account entered is either a Customer/Employee/Supplier Account. Such entries are not allowed for General Journal.", item.Sequence))
+        '                retVal = False
+        '            End If
+        '        End If
+        '    Next
+        '    Return retVal
+        'End Function
 
         ''' <summary>
         '''     Displays list of  Journal Items.

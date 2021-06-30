@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
@@ -69,10 +70,26 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
-            Dim retValue As Boolean = False
+            Dim retValue As Boolean = True
+            Dim totalPercentage As Decimal = 0D
             If MyBase.IsBizDataValid() Then
-                If Not (View.DistributionSchemeItems Is Nothing OrElse View.DistributionSchemeItems.Count = 0) Then
-                    retValue = True
+                If View.DistributionSchemeItems Is Nothing OrElse View.DistributionSchemeItems.Count = 0 Then
+                    Messaging.Show(True, "MsgBlankDistributionScheme")
+                    retValue = False
+                Else
+                    For Each item In View.DistributionSchemeItems
+                        totalPercentage += item.Percentage
+                        If item.RevCostCenterIdNo = 0 Then
+                            Dim lineNumber = Format(item.Sequence, "0")
+                            Messaging.ShowParametrizedMessage(True, "MsgBlankRevenueCostCenter", {"lineNumber", lineNumber})
+                            retValue = False
+                            Exit For
+                        End If
+                    Next
+                    If retValue And Math.Abs(totalPercentage - 100.0) > 0.001 Then
+                        Messaging.Show(True, "MsgInvalidTotalPercentage")
+                        retValue = False
+                    End If
                 End If
             End If
             Return retValue

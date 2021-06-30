@@ -562,10 +562,10 @@ Public Class CFormEntryNew
         RecordPositionNumber = RecordPositionNumber
     End Sub
 
-    Protected Overridable Function DataIsValid() As Boolean
-        Debugger.Break()
-        Return False
-    End Function
+    'Protected Overridable Function DataIsValid() As Boolean
+    '    Debugger.Break()
+    '    Return False
+    'End Function
 
     Public Shared Sub EnableDoubleBuff(ByVal cont As System.Windows.Forms.Control)
         Dim DemoProp As System.Reflection.PropertyInfo = GetType(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Instance)

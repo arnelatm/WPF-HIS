@@ -20,6 +20,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property IdNo As Int32
+        Public Property Balance As Decimal
         Public Property CustomerCode As String
         Public Property CustomerName As String
         Public Property CustomerNameAra As String

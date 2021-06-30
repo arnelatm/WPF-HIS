@@ -18,47 +18,47 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Overloads Function DataIsValid(ByRef journalItems As List(Of JournalItemModel), ByVal paymentType As String)
-            Dim retVal = True
-            Dim paymentTypeEnum As String
-            Dim itemPayeeType As String
-            For Each item In journalItems
-                paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(paymentType)
-                If item.Debit = 0 And item.Credit = 0 Then
-                    MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with zero debit and credit amount.", item.Sequence.ToString()))
-                    retVal = False
-                    Exit For
-                ElseIf item.AccountIdNo = 0 Then
-                    MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
-                    retVal = False
-                    Exit For
-                ElseIf String.IsNullOrEmpty(paymentType) Then
-                    ' no need to check for accountTypes
-                ElseIf CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsPayable Then
-                    MessageBox.Show(String.Format("Error on line {0:N0}. Sorry Accounts Payable accounts not allowed for this entry!", item.Sequence))
-                    retVal = False
-                ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
-                    If Not String.IsNullOrEmpty(itemPayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(itemPayeeType) <> PayeeTypeSelection.Employee Then
-                        MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Employee Payee accounts allowed for this entry!", item.Sequence))
-                        retVal = False
-                    End If
-                ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                    itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
-                    If Not String.IsNullOrEmpty(itemPayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(itemPayeeType) <> PayeeTypeSelection.Customer Then
-                        MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Customer Payee accounts allowed for this entry!", item.Sequence))
-                        retVal = False
-                    End If
-                ElseIf paymentTypeEnum = PaymentTypeSelection.Others Or paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
-                    If Not String.IsNullOrEmpty(itemPayeeType) Then
-                        MessageBox.Show(String.Format("Error on line {0:N0}. Sorry Customer, Supplier or Employee Payee accounts not allowed for this entry!", item.Sequence))
-                        retVal = False
-                    End If
-                End If
-            Next
-            Return retVal
-        End Function
+        'Public Overloads Function DataIsValid(ByRef journalItems As List(Of JournalItemModel), ByVal paymentType As String)
+        '    Dim retVal = True
+        '    Dim paymentTypeEnum As String
+        '    Dim itemPayeeType As String
+        '    For Each item In journalItems
+        '        paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(paymentType)
+        '        If item.Debit = 0 And item.Credit = 0 Then
+        '            MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with zero debit and credit amount.", item.Sequence.ToString()))
+        '            retVal = False
+        '            Exit For
+        '        ElseIf item.AccountIdNo = 0 Then
+        '            MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
+        '            retVal = False
+        '            Exit For
+        '        ElseIf String.IsNullOrEmpty(paymentType) Then
+        '            ' no need to check for accountTypes
+        '        ElseIf CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) = SpecialAccountSelection.AccountsPayable Then
+        '            MessageBox.Show(String.Format("Error on line {0:N0}. Sorry Accounts Payable accounts not allowed for this entry!", item.Sequence))
+        '            retVal = False
+        '        ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
+        '            itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
+        '            If Not String.IsNullOrEmpty(itemPayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(itemPayeeType) <> PayeeTypeSelection.Employee Then
+        '                MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Employee Payee accounts allowed for this entry!", item.Sequence))
+        '                retVal = False
+        '            End If
+        '        ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
+        '            itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
+        '            If Not String.IsNullOrEmpty(itemPayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(itemPayeeType) <> PayeeTypeSelection.Customer Then
+        '                MessageBox.Show(String.Format("Error on line {0:N0}. Sorry only Customer Payee accounts allowed for this entry!", item.Sequence))
+        '                retVal = False
+        '            End If
+        '        ElseIf paymentTypeEnum = PaymentTypeSelection.Others Or paymentTypeEnum = PaymentTypeSelection.Supplier Then
+        '            itemPayeeType = Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType")
+        '            If Not String.IsNullOrEmpty(itemPayeeType) Then
+        '                MessageBox.Show(String.Format("Error on line {0:N0}. Sorry Customer, Supplier or Employee Payee accounts not allowed for this entry!", item.Sequence))
+        '                retVal = False
+        '            End If
+        '        End If
+        '    Next
+        '    Return retVal
+        'End Function
 
         ''' <summary>
         '''     Displays list of Cheque Disbursement Journal Items.

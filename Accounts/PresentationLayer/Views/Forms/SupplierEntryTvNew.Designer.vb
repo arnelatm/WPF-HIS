@@ -1996,6 +1996,7 @@
             Me.ClientSize = New System.Drawing.Size(1078, 555)
             Me.Name = "SupplierEntryTvNew"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.Text = "Supplier Maintenance Form"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
             Me.SplitContainer1.Panel2.ResumeLayout(False)
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()

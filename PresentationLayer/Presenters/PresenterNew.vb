@@ -363,14 +363,14 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         compareLogic.Config.CompareChildren = True
         compareLogic.Config.MembersToIgnore.Add("DateCreated")
         compareLogic.Config.MembersToIgnore.Add("Errors")
-        CallByName(View, "IgnoreTextBoxNumParserMessage", CallType.Set, True)
+        'CallByName(View, "IgnoreTextBoxNumParserMessage", CallType.Set, True)
         Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
         If Not result.AreEqual Then
             CompareDifferences = result.DifferencesString
             'Messaging.Show(result.DifferencesString, "Differences")
             retVal = True
         End If
-        CallByName(View, "IgnoreTextBoxNumParserMessage", CallType.Set, False)
+        'CallByName(View, "IgnoreTextBoxNumParserMessage", CallType.Set, False)
         Return retVal
     End Function
 
@@ -822,7 +822,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             RecordPositionNumber = RecordPositionNumber
             EditMode = False
         End If
-        MyErrorProvider.ClearAllErrorMessages()
+        ClearAllErrorMessages()
     End Sub
 
     Public Overridable Function IsOkToEditRecord() As Boolean
@@ -997,7 +997,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 TreeViewUpdateViewDisplay(idNo)
             End If
             ClearAllErrorMessages()
-            'MyErrorProvider.ClearAllErrorMessages()
         End If
     End Sub
 
@@ -1464,12 +1463,12 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim validated As Boolean = True
         RaiseEvent BeforeValidate()
         PreValidate()
-        MyErrorProvider.ClearAllErrorMessages()
+        ClearAllErrorMessages()
         _dataErrors = ""
-        If EditMode AndAlso Not ChangesMade() Then
+        validated = CheckForDataErrors(eventType)
+        If validated AndAlso EditMode AndAlso Not ChangesMade() Then
             Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
         Else
-            validated = CheckForDataErrors(eventType)
             If Not IsBizDataValid() Then
                 validated = False
             End If
@@ -1489,6 +1488,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         For Each item In MainFieldsDictionary
             Dim cCtrl = item.Value
             Dim fldName = item.Key
+            'If fldName = "CreditLimit" Then
+            '    Debugger.Break()
+            'End If
             If CheckForNumericValue(cCtrl) Then
                 If TypeOf cCtrl Is CTextBox Then
                     Dim cTextTextBox As CTextBox = cCtrl
@@ -1612,7 +1614,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                         typeCode = Type.GetTypeCode(u)
                         nMinValue = GetMinMaxValue(underlyingTypeCode, nMaxValue)
                     End If
-                    Decimal.TryParse(targetValue, num)
+                    num = Val(targetValue)
                     If num < nMinValue OrElse num > nMaxValue Then
                         Dim err As String = Messaging.GetParametrizedMessage(True, "MsgNumericOverflow", {"number", obj.Text, "controlName", controlName, "lowNumber", nMinValue.ToString(), "highNumber", nMaxValue.ToString()})
                         returnValue = False
@@ -1722,7 +1724,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Next
         End If
     End Sub
-
 
     Private Sub ClearAllErrorMessages()
         Dim myDict = MainFieldsDictionary
