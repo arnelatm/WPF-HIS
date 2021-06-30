@@ -595,7 +595,7 @@ Namespace AdoNet
 
         Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetSortedRecordPosition
             Dim filterKey As String
-            If filter Is Nothing Then
+            If filter Is Nothing Or filter = "" Then
                 filterKey = ""
             Else
                 filterKey = filter & " and "
