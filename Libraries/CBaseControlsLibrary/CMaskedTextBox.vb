@@ -332,7 +332,8 @@ Public Class CMaskedTextBox
             FindDataType = IFindableControl.DataTypeEnum.DateTime
             searchForm.SetFieldDescription(description)
         Else
-            Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
+            'Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
+            Dim x = LateBinding.InvokeFunction(myForm, "GetFieldType", CallType.Method, {FieldName})
             FindDataType = GetObjectDataType(x)
             FieldName = Name.Substring(3)
             searchForm.SetFieldDescription(GetControlDescription(FieldName))
@@ -340,7 +341,8 @@ Public Class CMaskedTextBox
 
         searchForm.ShowDialog()
         searchForm.Dispose()
-        CallByName(myForm, "FindFieldNew", CallType.Method, Me)
+        'CallByName(myForm, "FindFieldNew", CallType.Method, Me)
+        LateBinding.InvokeFunction(myForm, "FindFieldNew", {Me})
     End Sub
 
     'Public Function GetTextToSearch() As String

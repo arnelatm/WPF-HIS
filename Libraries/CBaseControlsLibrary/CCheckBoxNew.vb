@@ -213,7 +213,8 @@ Public Class CCheckBoxNew
             searchForm.ShowDialog()
             searchForm.Dispose()
 
-            CallByName(myForm, "FindFieldNew", CallType.Method, Me)
+            'CallByName(myForm, "FindFieldNew", CallType.Method, Me)
+            LateBinding.InvokeFunction(myForm, "FindFieldNew", {Me})
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
         End If

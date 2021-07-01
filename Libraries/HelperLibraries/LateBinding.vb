@@ -5,8 +5,10 @@ Public NotInheritable Class LateBinding
     Private Const InvokePublicMethod As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.InvokeMethod
 
     Private Const GetPublicProperty As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.GetProperty
+    Private Const GetPublicField As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.GetField
 
     Private Const SetPublicProperty As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.SetProperty
+    Private Const SetPublicField As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.SetField
 
     Public Shared Function InvokeFunction(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
 
@@ -19,6 +21,13 @@ Public NotInheritable Class LateBinding
 
         'Return oObject.InvokeMember(sName, GetPublicProperty, Nothing, oObject, yArguments)
         Return oObject.GetType().InvokeMember(sName, GetPublicProperty, Nothing, oObject, yArguments)
+
+    End Function
+
+    Public Shared Function GetField(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
+
+        'Return oObject.InvokeMember(sName, GetPublicProperty, Nothing, oObject, yArguments)
+        Return oObject.GetType().InvokeMember(sName, GetPublicField, Nothing, oObject, yArguments)
 
     End Function
 

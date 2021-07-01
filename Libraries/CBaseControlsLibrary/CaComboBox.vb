@@ -743,10 +743,12 @@ Public Class CaComboBox
         Else
             searchForm.SetFieldDescription(FieldName)
         End If
-        Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
+        'Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
+        Dim x = LateBinding.InvokeFunction(myForm, "GetFieldType", CallType.Method, {FieldName})
         FindDataType = GetObjectDataType(x)
         searchForm.ShowDialog()
-        CallByName(myForm, "FindFieldNew", CallType.Method, Me)
+        'CallByName(myForm, "FindFieldNew", CallType.Method, Me)
+        LateBinding.InvokeFunction(myForm, "FindFieldNew", {Me})
     End Sub
 
     Private Sub MenuItemSelectAll_Click()

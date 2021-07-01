@@ -3,6 +3,7 @@ Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -184,7 +185,7 @@ Namespace PresentationLayer.Presenters
             Dim i As Integer = 0
             Dim x As T2
             For Each item As T1 In items
-                x = CallByName(item, fieldName, CallType.Get)
+                x = LateBinding.GetProperty(item, fieldName)
                 If [set].Contains(x) Then
                     Return i
                 End If

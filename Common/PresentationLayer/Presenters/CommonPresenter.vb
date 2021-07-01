@@ -91,39 +91,39 @@ Namespace PresentationLayer.Presenters
             For Each item In ViewDefaultFieldValues
                 Select Case item.DataType
                     Case DataTypeSelection.StringType
-                        CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+                        CallByName(View, item.FieldName, CallType.Set, {item.DefaultValue})
                     Case DataTypeSelection.Accountype
-                        CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+                        CallByName(View, item.FieldName, CallType.Set, {item.DefaultValue})
                     Case DataTypeSelection.IntegerType
-                        CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CInt(item.DefaultValue)})
                     Case DataTypeSelection.BooleanType
-                        CallByName(View, item.FieldName, CallType.Set, CBool(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CBool(item.DefaultValue)})
                     Case DataTypeSelection.SingleType
-                        CallByName(View, item.FieldName, CallType.Set, CSng(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CSng(item.DefaultValue)})
                     Case DataTypeSelection.DoubleType
-                        CallByName(View, item.FieldName, CallType.Set, CDbl(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CDbl(item.DefaultValue)})
                     Case DataTypeSelection.DecimalType
-                        CallByName(View, item.FieldName, CallType.Set, CDec(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CDec(item.DefaultValue)})
                     Case DataTypeSelection.LongType
-                        CallByName(View, item.FieldName, CallType.Set, CLng(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CLng(item.DefaultValue)})
                     Case DataTypeSelection.DateType
                         If item.DefaultValue = "today" Then
-                            CallByName(View, item.FieldName, CallType.Set, Today())
+                            CallByName(View, item.FieldName, CallType.Set, {Today()})
                         ElseIf item.DefaultValue = "yesterday" Then
-                            CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(-1))
+                            CallByName(View, item.FieldName, CallType.Set, {DateTime.Now.AddDays(-1)})
                         ElseIf item.DefaultValue = "tomorrow" Then
-                            CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(1))
+                            CallByName(View, item.FieldName, CallType.Set, {DateTime.Now.AddDays(1)})
                         Else
-                            CallByName(View, item.FieldName, CallType.Set, CDate(item.DefaultValue))
+                            CallByName(View, item.FieldName, CallType.Set, {CDate(item.DefaultValue)})
                         End If
                     Case DataTypeSelection.ShortType
-                        CallByName(View, item.FieldName, CallType.Set, CShort(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CShort(item.DefaultValue)})
                     Case DataTypeSelection.UIntegerType
-                        CallByName(View, item.FieldName, CallType.Set, CUInt(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CUInt(item.DefaultValue)})
                     Case DataTypeSelection.ULongType
-                        CallByName(View, item.FieldName, CallType.Set, CULng(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CULng(item.DefaultValue)})
                     Case DataTypeSelection.UShortType
-                        CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
+                        CallByName(View, item.FieldName, CallType.Set, {CUShort(item.DefaultValue)})
                     Case Else
                         MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in form/view " & item.SystemViewName & " conversion not handled")
                 End Select

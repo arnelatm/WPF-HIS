@@ -59,7 +59,8 @@ Public Class CDataGridView
 
     Private Sub DataGridView_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
         If Columns(SequenceColumn) IsNot Nothing Then
-            CallByName(Columns(SequenceColumn), "DisplayOnly", CallType.Set, True)
+            'CallByName(Columns(SequenceColumn), "DisplayOnly", CallType.Set, True)
+            LateBinding.SetProperty(Columns(SequenceColumn), "DisplayOnly", True)
         End If
         If ShowFooter Then
             DgvFooter = New DgvFooter(Me) With {
@@ -235,11 +236,14 @@ Public Class CDataGridView
             Dim i = CurrentCell.RowIndex()
             Dim myBindingSource = CType(DataSource, BindingSource)
             Try
-                If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
+                'If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
+                If LateBinding.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                     For Each record In myBindingSource
-                        Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
+                        'Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
+                        Dim sequence = LateBinding.GetProperty(record, SequenceFieldName)
                         If sequence > i + 1 Then
-                            CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
+                            'CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
+                            LateBinding.SetProperty(record, SequenceFieldName, {sequence - 1})
                         End If
                     Next
                 End If
@@ -254,14 +258,18 @@ Public Class CDataGridView
         Dim i = CurrentCell.RowIndex()
         Dim myBindingSource = CType(DataSource, BindingSource)
         Try
-            If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
+            'If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
+            If LateBinding.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                 For Each o In myBindingSource
                     If o IsNot Nothing Then
-                        Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
+                        'Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
+                        Dim sequence = LateBinding.GetProperty(o, SequenceFieldName)
                         If sequence = 0 Then
-                            CallByName(o, SequenceFieldName, CallType.Set, i)
+                            'CallByName(o, SequenceFieldName, CallType.Set, i)
+                            LateBinding.SetProperty(o, SequenceFieldName, {i})
                         ElseIf sequence >= i Then
-                            CallByName(o, SequenceFieldName, CallType.Set, sequence + 1)
+                            'CallByName(o, SequenceFieldName, CallType.Set, sequence + 1)
+                            LateBinding.SetProperty(o, SequenceFieldName, {sequence + 1})
                         End If
                     End If
                 Next

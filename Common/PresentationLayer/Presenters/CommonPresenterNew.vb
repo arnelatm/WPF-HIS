@@ -1,6 +1,7 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Libraries
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
@@ -84,39 +85,39 @@ Namespace PresentationLayer.Presenters
             For Each item In ViewDefaultFieldValues
                 Select Case item.DataType
                     Case DataTypeSelection.StringType
-                        CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+                        LateBinding.SetProperty(View, item.FieldName, item.DefaultValue)
                     Case DataTypeSelection.Accountype
-                        CallByName(View, item.FieldName, CallType.Set, item.DefaultValue)
+                        LateBinding.SetProperty(View, item.FieldName, item.DefaultValue)
                     Case DataTypeSelection.IntegerType
-                        CallByName(View, item.FieldName, CallType.Set, CInt(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CInt(item.DefaultValue))
                     Case DataTypeSelection.BooleanType
-                        CallByName(View, item.FieldName, CallType.Set, CBool(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CBool(item.DefaultValue))
                     Case DataTypeSelection.SingleType
-                        CallByName(View, item.FieldName, CallType.Set, CSng(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CSng(item.DefaultValue))
                     Case DataTypeSelection.DoubleType
-                        CallByName(View, item.FieldName, CallType.Set, CDbl(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CDbl(item.DefaultValue))
                     Case DataTypeSelection.DecimalType
-                        CallByName(View, item.FieldName, CallType.Set, CDec(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CDec(item.DefaultValue))
                     Case DataTypeSelection.LongType
-                        CallByName(View, item.FieldName, CallType.Set, CLng(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CLng(item.DefaultValue))
                     Case DataTypeSelection.DateType
                         If item.DefaultValue = "today" Then
-                            CallByName(View, item.FieldName, CallType.Set, Today())
+                            LateBinding.SetProperty(View, item.FieldName, Today())
                         ElseIf item.DefaultValue = "yesterday" Then
-                            CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(-1))
+                            LateBinding.SetProperty(View, item.FieldName, DateTime.Now.AddDays(-1))
                         ElseIf item.DefaultValue = "tomorrow" Then
-                            CallByName(View, item.FieldName, CallType.Set, DateTime.Now.AddDays(1))
+                            LateBinding.SetProperty(View, item.FieldName, DateTime.Now.AddDays(1))
                         Else
-                            CallByName(View, item.FieldName, CallType.Set, CDate(item.DefaultValue))
+                            LateBinding.SetProperty(View, item.FieldName, CDate(item.DefaultValue))
                         End If
                     Case DataTypeSelection.ShortType
-                        CallByName(View, item.FieldName, CallType.Set, CShort(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CShort(item.DefaultValue))
                     Case DataTypeSelection.UIntegerType
-                        CallByName(View, item.FieldName, CallType.Set, CUInt(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CUInt(item.DefaultValue))
                     Case DataTypeSelection.ULongType
-                        CallByName(View, item.FieldName, CallType.Set, CULng(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CULng(item.DefaultValue))
                     Case DataTypeSelection.UShortType
-                        CallByName(View, item.FieldName, CallType.Set, CUShort(item.DefaultValue))
+                        LateBinding.SetProperty(View, item.FieldName, CUShort(item.DefaultValue))
                     Case Else
                         MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in form/view " & item.SystemViewName & " conversion not handled")
                 End Select
