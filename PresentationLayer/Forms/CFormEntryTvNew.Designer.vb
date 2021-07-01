@@ -102,7 +102,7 @@ Partial Class CFormEntryTvNew
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ImageListTreeView As Windows.Forms.ImageList
     Public WithEvents SplitContainer1 As Windows.Forms.SplitContainer
     Public WithEvents FormTreeView As Windows.Forms.TreeView
+    Public WithEvents ImageListTreeView As Windows.Forms.ImageList
 End Class

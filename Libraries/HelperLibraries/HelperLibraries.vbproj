@@ -85,6 +85,7 @@
     <Compile Include="IEventAggregator.vb" />
     <Compile Include="ISelfDuplicating.vb" />
     <Compile Include="ISubscriber.vb" />
+    <Compile Include="LateBinding.vb" />
     <Compile Include="LoadingForm.Designer.vb">
       <DependentUpon>LoadingForm.vb</DependentUpon>
     </Compile>

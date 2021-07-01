@@ -1,0 +1,16 @@
+            Dim y As String
+            Dim timerCbn As New Stopwatch
+            timerCbn.Start()
+            For j = 1 To 100
+                y = CallByName(View, "MenuFormName", CallType.Get)
+            Next j
+            timerCbn.Stop()
+            Dim x As String
+            Dim timerLb As New Stopwatch
+            timerLb.Start()
+            For i = 1 To 100
+                x = LateBinding.GetProperty(View, "MenuFormName")
+            Next i
+            timerLb.Stop()
+            MessageBox.Show("Elapsed Time LateBinding  = " & timerLb.Elapsed.ToString() & vbNewLine &
+                                "Elapsed Time CallByName = " & timerCbn.Elapsed.ToString)

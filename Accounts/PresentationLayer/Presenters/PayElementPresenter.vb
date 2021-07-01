@@ -107,6 +107,12 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
+        'Public Overrides Sub UpdateViewDisplay(idNo As Int32)
+        '    MyBase.UpdateViewDisplay(idNo)
+        '    UpdateCalculationTabDisplay()
+        '    UpdatePostingTabDisplay()
+        'End Sub
+
     End Class
 
 End Namespace

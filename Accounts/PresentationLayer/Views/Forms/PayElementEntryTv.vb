@@ -35,23 +35,19 @@ Namespace PresentationLayer.Views.Forms
         Private cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
         Private cellPosQtyUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 6)
         Private cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
-        Private MyPresenter As PayElementPresenter
+        Private ReadOnly _presenter
 
-        Public Sub New()
+        Public Sub New(ByRef presenter)
 
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             DoubleBuffered = True
-            MainTableName = "PayElement"
-            TvMainFieldName = "PayElementName"
-            TvSecondaryFieldName = "PayElementCode"
-            SortOrderKey = "PayElementName"
             FirstControl = txtPayElementCode
-            MyPresenter = New PayElementPresenter(Me)
-            PresenterObj = MyPresenter
-            Ea = MyPresenter.Ea
-            Ea.SubscribeEvent(Me)
+            _presenter = New PayElementPresenter(Me)
+            PresenterObj = _presenter
+            'Ea = _presenter.Ea
+            'Ea.SubscribeEvent(Me)
 
             'cboCalculationType.DrawMode = DrawMode.OwnerDrawFixed
             'AddHandler cboCalculationType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboCalculationType_DrawItem)
@@ -726,7 +722,7 @@ Namespace PresentationLayer.Views.Forms
 
             ImageListTreeView.Images.Add(Image.FromFile("Images\Deduction.png"))
             ImageListTreeView.Images.Add(Image.FromFile("Images\Earning.png"))
-            TreeViewTableName.ImageList = ImageListTreeView
+            FormTreeView.ImageList = ImageListTreeView
 
             'If _usePayGroups Then
             '    chkUsePayGroups.Visible = True
@@ -824,12 +820,12 @@ Namespace PresentationLayer.Views.Forms
         '    Return valid
         'End Function
 
-        Public Overrides Function ValidateView()
-            Dim valid As Boolean
-            valid = MyPresenter.ValidateDataBoundGrid(Of PayElementItemModel)(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
-                    MyPresenter.ValidateDataBoundGrid(Of PayElementAccountModel)(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
-            Return valid
-        End Function
+        'Public Overrides Function ValidateView()
+        '    Dim valid As Boolean
+        '    valid = _presenter.ValidateDataBoundGrid(Of PayElementItemModel)(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
+        '            _presenter.ValidateDataBoundGrid(Of PayElementAccountModel)(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
+        '    Return valid
+        'End Function
 
         'Private Sub cboPayElementType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayElementType.Validated, cboPayElementType.SelectionChangeCommitted
         '    'If CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeRegular Or
@@ -883,14 +879,13 @@ Namespace PresentationLayer.Views.Forms
             Return False
         End Function
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            MyBase.RecordPositionChanged(e)
+        Protected Overrides Sub OnAfterRecordChanged()
             UpdateCalculationTabDisplay()
             UpdatePostingTabDisplay()
         End Sub
 
-        Protected Sub PayElement_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles TreeViewTableName.AfterSelect
-            Dim n As TreeNode = TreeViewTableName.SelectedNode
+        Protected Sub PayElement_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
+            Dim n As TreeNode = FormTreeView.SelectedNode
             If PayElementKind = EnumToCode(PayElementKindSelection.Deduction) Then
                 n.SelectedImageIndex = 2
             Else

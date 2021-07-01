@@ -54,8 +54,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Private _errorList As String = ""
     Private _recordPositionNumber As Integer = 0
     Private _targetIdNo As Int32 = 0
-    Private _recordCount As Int32 = 0
+
+    'Private _recordCount As Int32 = 0
     Private _undoMode As Boolean = False
+
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
     Private ReadOnly _withTreeView As Boolean = False
@@ -67,19 +69,11 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Me.View = itemView
             MyErrorProvider = CallByName(View, "MyErrorProvider", CallType.Get)
 
-            'Dim tableColumnPropertyList As List(Of TblColPropModel)
-            'tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
-            'TableProperties = tableColumnPropertyList.ToArray
+            'MyErrorProvider = LateBinding.GetProperty(View, "MyErrorProvider")
             Ea.SubscribeEvent(Me)
 
             Dim pi As PropertyInfo = View.GetType().GetProperty("FormTreeView")
             If pi IsNot Nothing Then
-                'FormTreeView = fi.GetValue(CallByName(View, "FormTreeView", CallType.Get)
-                'If FormTreeView IsNot Nothing Then
-                '    WithTreeView = True
-                'End If
-
-                'field exists now get the value
                 _withTreeView = True
                 FormTreeView = pi.GetValue(View)
             End If
@@ -137,43 +131,52 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Protected ReadOnly Property MenuFormName As String
         Get
-            Return CallByName(View, "MenuFormName", CallType.Get)
+            Return LateBinding.GetProperty(View, "MenuFormName")
         End Get
     End Property
 
     Protected ReadOnly Property ViewName As String
         Get
-            Return CallByName(View, "Name", CallType.Get)
+            Return LateBinding.GetProperty(View, "Name")
         End Get
     End Property
 
     Protected ReadOnly Property MainFieldsDictionary As Dictionary(Of String, Object)
         Get
             Return CallByName(View, "MainFieldsDictionary", CallType.Get)
+            'Return LateBinding.GetProperty(View, "MainFieldsDictionary")
         End Get
     End Property
 
-    Protected Property AddMode As Boolean
+    Public Property AddMode As Boolean
         Get
-            Return CallByName(View, "AddMode", CallType.Get)
+            Return _addMode
         End Get
         Set(value As Boolean)
-            CallByName(View, "AddMode", CallType.Set, value)
+            _addMode = value
+            If value Then
+                _editMode = False
+            End If
+            CurrentRecordChanged()
         End Set
     End Property
 
-    Public ReadOnly Property Ea As EventAggregator
+    Public Property Ea As EventAggregator
         Get
-            Return CallByName(View, "Ea", CallType.Get)
+            'Return CallByName(View, "Ea", CallType.Get)
+            Return LateBinding.GetProperty(View, "Ea")
         End Get
+        Set(value As EventAggregator)
+            _ea = value
+        End Set
     End Property
 
     Protected Property QuitOnSave As Boolean
         Get
-            Return CallByName(View, "QuitOnSave", CallType.Get)
+            Return LateBinding.GetProperty(View, "QuitOnSave")
         End Get
         Set(value As Boolean)
-            CallByName(View, "QuitOnSave", CallType.Set, value)
+            LateBinding.SetProperty(View, "QuitOnSave")
         End Set
     End Property
 
@@ -189,14 +192,18 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Property EditMode As Boolean
         Get
-            Return CallByName(View, "EditMode", CallType.Get)
+            Return _editMode
         End Get
         Set
-            CallByName(View, "EditMode", CallType.Set, Value)
+            _editMode = Value
             If Value Then
+                _addMode = False
                 If Not DisableSaveMemento Then
                     SaveOriginalValues()
                 End If
+                LateBinding.InvokeFunction(View, "TurnOnInputs")
+            Else
+                LateBinding.InvokeFunction(View, "TurnOffInputs")
             End If
         End Set
     End Property
@@ -218,13 +225,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Property NewlyAddedRecordIdNo As Int32
 
-    Public Property RecordCount As Integer
+    Public ReadOnly Property RecordCount As Integer
         Get
-            Return CallByName(View, "RecordCount", CallType.Get)
+            Return Model.GetRecordCount(TableName, DataFilter)
         End Get
-        Set(value As Integer)
-            CallByName(View, "RecordCount", CallType.Set, value)
-        End Set
     End Property
 
     Public Property RecordPositionNumber As Integer
@@ -234,7 +238,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Set(value As Integer)
             _recordPositionNumber = value
             TargetIdNo = GetIdNoOfSortedPositionNumber(value)
-            CallByName(View, "RecordPositionNumber", CallType.Set, value)
         End Set
     End Property
 
@@ -255,6 +258,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             'End If
             _targetIdNo = value
             UpdateViewDisplay(value)
+            LateBinding.InvokeFunction(View, "CurrentRecordChanged", {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
+            'CallByName(View, "CurrentRecordChanged", CallType.Method, {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
         End Set
     End Property
 
@@ -575,18 +580,18 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return retVal
     End Function
 
-    Public Function GetRecordCount(Optional pTableName As String = Nothing, Optional pFilter As String = Nothing) As Integer
-        Try
-            If pTableName Is Nothing Then
-                pTableName = TableName
-                Return Model.GetRecordCount(TableName, DataFilter)
-            Else
-                Return Model.GetRecordCount(pTableName, pFilter)
-            End If
-        Catch ex As Exception
-            Return 0
-        End Try
-    End Function
+    'Public Function GetRecordCount(Optional pTableName As String = Nothing, Optional pFilter As String = Nothing) As Integer
+    '    Try
+    '        If pTableName Is Nothing Then
+    '            pTableName = TableName
+    '            Return Model.GetRecordCount(TableName, DataFilter)
+    '        Else
+    '            Return Model.GetRecordCount(pTableName, pFilter)
+    '        End If
+    '    Catch ex As Exception
+    '        Return 0
+    '    End Try
+    'End Function
 
     Public Function GetRecordDateTimeStamp(idNo As Int32) As Object
         Try
@@ -682,14 +687,16 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Public Overridable Sub GoAddRecord()
-        LastIdNo = CallByName(View, IdFieldName, CallType.Get)
+        LastIdNo = LateBinding.GetProperty(View, IdFieldName)
         Try
             DataModel = New TM
             GlobalVariables.Mapper.Map(DataModel, View)
+            AddMode = True
             RaiseEvent BeforeAdd()
         Catch oEx As Exception
             MsgBox("Error:   " + oEx.Message)
-            CallByName(View, "AddMode", CallType.Set, False)
+            AddMode = False
+            'CallByName(View, "AddMode", CallType.Set, False)
         End Try
     End Sub
 
@@ -697,7 +704,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim record As New TM
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retValue = 0
-        Dim currentIdNo = CallByName(View, IdFieldName, CallType.Get)
+        Dim currentIdNo = LateBinding.GetProperty(View, IdFieldName)
         If IsOkToDeleteRecord() Then
             If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 RaiseEvent BeforeDelete()
@@ -721,7 +728,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 If _withTreeView Then
                     TreeViewAfterDelete(retValue)
                 End If
-                UpdateViewDisplay(TargetIdNo)
+                'UpdateViewDisplay(TargetIdNo)
             End If
         End If
         Return retValue
@@ -761,9 +768,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Sub GoLastRecord()
+        RecordPositionNumber = RecordCount
         'If OkToMove() Then
-        RecordPositionNumber = GetRecordCount()
-        RecordCount = RecordPositionNumber
+        'RecordPositionNumber = GetRecordCount()
+        'RecordCount = RecordPositionNumber
         'End If
     End Sub
 
@@ -788,7 +796,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Sub GoQuit()
-        CallByName(View, "CancelClose", CallType.Set, False)
+        LateBinding.SetProperty(View, "CancelClose", {False})
     End Sub
 
     Public Overridable Function MessageBeforeSave() As Boolean
@@ -816,11 +824,12 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Sub GoUndoChanges()
         If AddMode Then
-            RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
             AddMode = False
+            RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
         Else
-            RecordPositionNumber = RecordPositionNumber
             EditMode = False
+            UpdateViewDisplay(TargetIdNo)
+            'RecordPositionNumber = RecordPositionNumber
         End If
         ClearAllErrorMessages()
     End Sub
@@ -907,11 +916,12 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
             If AddMode Then
                 RecordPositionNumber = GetSortedRecordPosition(retVal)
-                TargetIdNo = retVal
+                'TargetIdNo = retVal
             End If
             'turn off addmode/editmode
             AddMode = False
             EditMode = False
+            UpdateViewDisplay(TargetIdNo)
             ClearAllErrorMessages()
         End If
         Return retVal
@@ -964,7 +974,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             ElseIf result = DialogResult.No Then
                 ' undo changes retrieve the last record
                 TargetIdNo = LastIdNo
-                UpdateViewDisplay(TargetIdNo)
+                'UpdateViewDisplay(TargetIdNo)
             Else
                 ' DialogResult.Cancel
                 ' don't do anything just continue edits
@@ -982,7 +992,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Overridable Sub UpdateViewDisplay(idNo As Int32)
         If idNo <> 0 Then
             Dim modelData As TM
-            RecordCount = GetRecordCount()
+            'RecordCount = GetRecordCount()
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
             modelData = Model.GetRecordByIdNo(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
@@ -996,8 +1006,14 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             If _withTreeView Then
                 TreeViewUpdateViewDisplay(idNo)
             End If
+            CurrentRecordChanged()
             ClearAllErrorMessages()
         End If
+    End Sub
+
+    Public Sub CurrentRecordChanged()
+        CallByName(View, "CurrentRecordChanged", CallType.Method, {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
+        'LateBinding.InvokeFunction(View, "CurrentRecordChanged", CallType.Method, {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
     End Sub
 
     Public Function UsePayGroups()
@@ -1023,7 +1039,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim retVal As Integer
         NewlyAddedRecordIdNo = Model.AddRecord(record)
         retVal = NewlyAddedRecordIdNo
-        CallByName(View, IdFieldName, CallType.Set, retVal)
+        LateBinding.SetProperty(View, IdFieldName, retVal)
         Return retVal
     End Function
 
@@ -1152,7 +1168,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         If AddMode Then
             parentIdNo = passedValue
         Else
-            parentIdNo = CallByName(View, IdFieldName, CallType.Get)
+            parentIdNo = LateBinding.GetProperty(View, IdFieldName)
         End If
         updateReturnValue = childDataModel.DelUpdateTvp(updateTable, parentIdNo)
         If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
@@ -1212,7 +1228,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim workRow As DataRow = Nothing
         For Each dataView In dataViews
             If includeFilter.Invoke(dataView) Then
-                Dim idNo As Integer = CallByName(dataView, dataViewIdNoFieldName, CallType.Get)
+                Dim idNo As Integer = LateBinding.GetProperty(dataView, dataViewIdNoFieldName)
                 If idNo <= 0 Then
                     workRow = insertTable.NewRow()
                 Else
@@ -1988,7 +2004,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Function GetFieldType(fieldName As String) As Type
-        Return CallByName(Me, fieldName, CallType.Get).GetType
+        Return LateBinding.GetProperty(Me, fieldName, CallType.Get).GetType
     End Function
 
     Public Function ControlDescription(control As Control)
@@ -2024,7 +2040,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Sub OnGetDataSourceHandler(ByRef eventType As GetDataSource) Implements ISubscriber(Of GetDataSource).OnEventHandler
         Dim data As List(Of ClassesLibrary.LookupData)
         data = GetLookup(eventType.TableName)
-        CallByName(eventType.Control, "DataSource", CallType.Set, data)
+        'CallByName(eventType.Control, "DataSource", CallType.Set, data)
+        LateBinding.SetProperty(eventType.Control, "DataSource", {data})
     End Sub
 
     Public Sub OnGetLookupDataRequestedHandler(ByRef eventType As GetLookupDataRequested) Implements ISubscriber(Of GetLookupDataRequested).OnEventHandler
@@ -2035,7 +2052,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Else
                 data = GetLookup(eventType.TableName, eventType.SortKey, eventType.Fields, eventType.Filter)
             End If
-            CallByName(eventType.View, eventType.TargetProperty, CallType.Set, data)
+            'CallByName(eventType.View, eventType.TargetProperty, CallType.Set, data)
+            LateBinding.SetProperty(eventType.View, eventType.TargetProperty, {data})
         End If
     End Sub
 
@@ -2199,10 +2217,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim cText As String
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-            cText = CallByName(View, treeMainFieldName, CallType.Get).Trim() + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String).Trim()
+            cText = LateBinding.GetProperty(View, treeMainFieldName).Trim() + " | " + CType(LateBinding.GetProperty(View, IdFieldName), String).Trim()
         Else
-            Dim addText = CallByName(View, TreeViewSecondaryField, CallType.Get)
-            cText = CallByName(View, treeMainFieldName, CallType.Get).Trim() + " | " + CType(CallByName(View, IdFieldName, CallType.Get), String).Trim() +
+            Dim addText = LateBinding.GetProperty(View, TreeViewSecondaryField)
+            cText = LateBinding.GetProperty(View, treeMainFieldName).Trim() + " | " + CType(LateBinding.GetProperty(View, IdFieldName), String).Trim() +
                     If(String.IsNullOrEmpty(addText), "", " (" + addText.ToString().Trim() + ")")
         End If
         Return cText
@@ -2233,8 +2251,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             RecordPositionNumber = 1
         Else
             nTag = FormTreeView.SelectedNode.Tag
-            Dim x = GetSortedRecordPosition(nTag)
-            RecordPositionNumber = x
+            RecordPositionNumber = GetSortedRecordPosition(nTag)
         End If
         If Not FormTreeView.SelectedNode.IsVisible Then
             FormTreeView.SelectedNode.EnsureVisible()

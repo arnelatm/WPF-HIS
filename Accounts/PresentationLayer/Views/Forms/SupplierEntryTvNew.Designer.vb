@@ -2009,7 +2009,6 @@
 
         End Sub
 
-        Public WithEvents ImageListTreeView As ImageList
         Friend WithEvents floDataDisplay As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
