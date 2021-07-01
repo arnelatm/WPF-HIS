@@ -346,12 +346,17 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayElement.Click
             'Dim childMdiForm As EarningEntryTv
-            Dim childMdiForm As PayElementEntryTv
-            'childMdiForm = New EarningEntryTv With {
-            childMdiForm = New PayElementEntryTv With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            'Dim childMdiForm As PayElementEntryTv
+            ''childMdiForm = New EarningEntryTv With {
+            'childMdiForm = New PayElementEntryTv With {
+            '    .MdiParent = Me
+            '    }
+            'childMdiForm.Show()
+
+            Dim presenter As New PayElementPresenter(Nothing)
+            Dim myForm = New PayElementEntryTv(presenter)
+            presenter = New PayElementPresenter(myForm)
+            myForm.Show()
         End Sub
 
         Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeReceivable.Click

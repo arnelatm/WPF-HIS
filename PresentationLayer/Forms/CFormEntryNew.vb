@@ -25,15 +25,19 @@ Public Class CFormEntryNew
     Protected SingleData As Boolean = False
 
     Private _debugSwitch As Byte = 0
-    Private _addMode As Boolean = False
-    Private _editMode As Boolean = False
-    Private _recordCount As Int32 = 0
-    Private _recordPositionNumber As Int32 = 0
+
+    'Private _addMode As Boolean = False
+    'Private _editMode As Boolean = False
+    'Private _recordCount As Int32 = 0
+    'Private _recordPositionNumber As Int32 = 0
     Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+
     Public Ea As EventAggregator
     Private _editingMode As Boolean = False
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
+
+    Public Event AfterRecordChanged()
 
     Public Sub New()
         MyBase.New()
@@ -63,27 +67,42 @@ Public Class CFormEntryNew
 
     Protected Property FormTitleCaption As String = ""
 
-    Public Property RecordCount As Integer Implements IViewDataEntry.RecordCount
-        Get
-            Return _recordCount
-        End Get
-        Set(value As Integer)
-            _recordCount = value
-            tsbTotalRecords.Text = value
-            UpdateNavigationButtonDisplay(False, False)
-        End Set
-    End Property
+    'Public Property RecordCount As Integer Implements IViewDataEntry.RecordCount
+    '    Get
+    '        Return _recordCount
+    '    End Get
+    '    Set(value As Integer)
+    '        _recordCount = value
+    '        tsbTotalRecords.Text = value
+    '        UpdateNavigationButtonDisplay(False, False)
+    '    End Set
+    'End Property
 
-    Public Property RecordPositionNumber As Integer Implements IViewDataEntry.RecordPositionNumber
-        Get
-            Return _recordPositionNumber
-        End Get
-        Set(value As Integer)
-            _recordPositionNumber = value
-            tsbCurrentRecord.Text = value
-            UpdateNavigationButtonDisplay(False, False)
-        End Set
-    End Property
+    'Public Property RecordPositionNumber As Integer Implements IViewDataEntry.RecordPositionNumber
+    '    Get
+    '        Return _recordPositionNumber
+    '    End Get
+    '    Set(value As Integer)
+    '        _recordPositionNumber = value
+    '        tsbCurrentRecord.Text = value
+    '        UpdateNavigationButtonDisplay(False, False)
+    '    End Set
+    'End Property
+
+    Public Sub CurrentRecordChanged(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
+        tsbCurrentRecord.Text = recordPositionNumber
+        tsbTotalRecords.Text = recordCount
+        UpdateNavigationButtonDisplay(editMode, addMode, recordPositionNumber, recordCount)
+        If addMode Or editMode Then
+            TurnOnInputs()
+        Else
+            TurnOffInputs()
+        End If
+        RaiseEvent AfterRecordChanged()
+    End Sub
+
+    Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterRecordChanged
+    End Sub
 
     Public Property QuitOnSave As Boolean Implements IViewDataEntry.QuitOnSave
 
@@ -94,25 +113,25 @@ Public Class CFormEntryNew
         Return Ea
     End Function
 
-    Public Property AddMode As Boolean
-        Get
-            Return _addMode
-        End Get
-        Set(value As Boolean)
-            _addMode = value
-            UpdateNavigationButtonDisplay(EditMode, value)
-        End Set
-    End Property
+    'Public Property AddMode As Boolean
+    '    Get
+    '        Return _addMode
+    '    End Get
+    '    Set(value As Boolean)
+    '        _addMode = value
+    '        UpdateNavigationButtonDisplay(EditMode, value)
+    '    End Set
+    'End Property
 
-    Public Property EditMode As Boolean
-        Get
-            Return _editMode
-        End Get
-        Set(value As Boolean)
-            _editMode = value
-            UpdateNavigationButtonDisplay(value, AddMode)
-        End Set
-    End Property
+    'Public Property EditMode As Boolean
+    '    Get
+    '        Return _editMode
+    '    End Get
+    '    Set(value As Boolean)
+    '        _editMode = value
+    '        UpdateNavigationButtonDisplay(value, AddMode)
+    '    End Set
+    'End Property
 
     Public Sub FindFieldNew(findableControl As IFindableControl)
         Ea.PublishEvent(New FindFieldRequested(findableControl))
@@ -140,12 +159,12 @@ Public Class CFormEntryNew
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
-    Protected Sub TurnOffInputs()
+    Public Overridable Sub TurnOffInputs()
         Inputs(False)
         InputsTurnedOff()
     End Sub
 
-    Protected Sub TurnOnInputs()
+    Public Overridable Sub TurnOnInputs()
         Inputs(True)
         InputsTurnedOn()
         If FirstControl IsNot Nothing Then
@@ -177,13 +196,13 @@ Public Class CFormEntryNew
         CreateDataSources()
     End Sub
 
-    Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean)
+    Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean, recordPositionNumber As Integer, recordCount As Integer)
         If SingleData Then
             btnAdd.Visible = False
             btnFind.Visible = False
             HideNavigatorButtons = True
         Else
-            If AddMode Or EditMode Then
+            If adding Or editing Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False
                 btnNext.Enabled = False
@@ -210,7 +229,7 @@ Public Class CFormEntryNew
                 btnSave.Enabled = False
                 btnUndo.Enabled = False
             End If
-            If RecordCount = 0 Then
+            If recordCount = 0 Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False
                 btnNext.Enabled = False
@@ -222,14 +241,14 @@ Public Class CFormEntryNew
                 btnPrint.Enabled = False
                 btnUndo.Enabled = False
                 btnSave.Enabled = False
-            ElseIf RecordPositionNumber = 1 Then
+            ElseIf recordPositionNumber = 1 Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False
-                If RecordCount = 1 Then
+                If recordCount = 1 Then
                     btnNext.Enabled = False
                     btnLast.Enabled = False
                 End If
-            ElseIf RecordPositionNumber = RecordCount Then
+            ElseIf recordPositionNumber = recordCount Then
                 btnNext.Enabled = False
                 btnLast.Enabled = False
             End If
@@ -247,10 +266,10 @@ Public Class CFormEntryNew
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        AddMode = True
+        'AddMode = True
         PublishClickedButton(ButtonClicked.Add)
         Inputs(True)
-        UpdateNavigationButtonDisplay(False, True)
+        'UpdateNavigationButtonDisplay(False, True)
     End Sub
 
     Private Sub BtnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
@@ -280,9 +299,9 @@ Public Class CFormEntryNew
             Debugger.Break()
         End If
         PublishClickedButton(ButtonClicked.Edit)
-        If EditMode Then
-            TurnOnInputs()
-        End If
+        'If EditMode Then
+        '    TurnOnInputs()
+        'End If
     End Sub
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
@@ -335,12 +354,12 @@ Public Class CFormEntryNew
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim adding As Boolean
-        If AddMode Then
-            adding = True
-        Else
-            adding = False
-        End If
+        'Dim adding As Boolean
+        'If AddMode Then
+        '    adding = True
+        'Else
+        '    adding = False
+        'End If
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
@@ -355,22 +374,22 @@ Public Class CFormEntryNew
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New SaveDataRequested(Me))
         End If
-        If EditMode Or AddMode Then
-            TurnOnInputs()
-        Else
-            TurnOffInputs()
-            UpdateNavigationButtonDisplay(False, False)
-            If adding Then
-                If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
-                "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-                        MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                    AddMode = True
-                    PublishClickedButton(ButtonClicked.Add)
-                    Inputs(True)
-                    UpdateNavigationButtonDisplay(False, True)
-                End If
-            End If
-        End If
+        'If EditMode Or AddMode Then
+        '    TurnOnInputs()
+        'Else
+        '    TurnOffInputs()
+        '    UpdateNavigationButtonDisplay(False, False)
+        '    If adding Then
+        '        If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
+        '        "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+        '                MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+        '            AddMode = True
+        '            PublishClickedButton(ButtonClicked.Add)
+        '            Inputs(True)
+        '            UpdateNavigationButtonDisplay(False, True)
+        '        End If
+        '    End If
+        'End If
         If QuitOnSave Then
             Close()
         End If
@@ -405,11 +424,11 @@ Public Class CFormEntryNew
 
     Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
         PublishClickedButton(ButtonClicked.Undo)
-        If EditMode Or AddMode Then
-            TurnOnInputs()
-        Else
-            TurnOffInputs()
-        End If
+        'If EditMode Or AddMode Then
+        '    TurnOnInputs()
+        'Else
+        '    TurnOffInputs()
+        'End If
     End Sub
 
     Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
@@ -435,11 +454,11 @@ Public Class CFormEntryNew
                 e.SuppressKeyPress = True
                 e.Handled = True
                 PublishClickedButton(ButtonClicked.Save)
-                If EditMode Or AddMode Then
-                    TurnOnInputs()
-                Else
-                    TurnOffInputs()
-                End If
+                'If EditMode Or AddMode Then
+                '    TurnOnInputs()
+                'Else
+                '    TurnOffInputs()
+                'End If
             Else
                 Beep()
             End If
@@ -496,7 +515,7 @@ Public Class CFormEntryNew
                 tssnavigator1.Visible = False
                 btnOf.Visible = False
             End If
-            UpdateNavigationButtonDisplay(False, False)
+            'UpdateNavigationButtonDisplay(False, False)
         End If
     End Sub
 
@@ -559,7 +578,7 @@ Public Class CFormEntryNew
         PublishClickedButton(ButtonClicked.Undo)
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
-        RecordPositionNumber = RecordPositionNumber
+        'RecordPositionNumber = RecordPositionNumber
     End Sub
 
     'Protected Overridable Function DataIsValid() As Boolean

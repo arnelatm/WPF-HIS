@@ -59,6 +59,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		CreateProgramSecurities(non menu).sql = CreateProgramSecurities(non menu).sql
 		HomeSqlDataStructures.sql = HomeSqlDataStructures.sql
 		HomeSqlIspdata.sql = HomeSqlIspdata.sql
+		Sample Timer.txt = Sample Timer.txt
 		ToDo.txt = ToDo.txt
 		Translations.txt = Translations.txt
 		Update Approved Fields.sql = Update Approved Fields.sql
