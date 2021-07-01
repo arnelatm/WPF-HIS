@@ -84,7 +84,8 @@ Public Class BfCalendarUmAlQura
         For Each menuItem As ToolStripMenuItem In MenuMonths.Items()
             Dim cMenuName As String = "ToolStripMenuItem" & i.ToString().Trim()
             i += 1
-            CallByName(menuItem, "Text", CallType.Set, GetMonthName(i, True))
+            'CallByName(menuItem, "Text", CallType.Set, GetMonthName(i, True))
+            LateBinding.SetProperty(menuItem, "Text", {GetMonthName(i, True)})
         Next
     End Sub
 

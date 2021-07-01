@@ -88,7 +88,8 @@ Namespace PresentationLayer.Views
                 .AutoGenerateColumns = False
                 .DataSource = bsGroupAccesses
                 'CallByName(DataGridViewGroupAccesses.Columns("DGVSecurityObjectName").CellTemplate, "DisplayOnly", CallType.Set, True)
-                CallByName(DataGridViewGroupAccesses.Columns("DGVSecurityObjectName"), "DisplayOnly", CallType.Set, True)
+                'CallByName(DataGridViewGroupAccesses.Columns("DGVSecurityObjectName"), "DisplayOnly", CallType.Set, True)
+                LateBinding.SetProperty(DataGridViewGroupAccesses.Columns("DGVSecurityObjectName"), "DisplayOnly", {True})
                 .AutoResizeColumns()
                 .Refresh()
             End With

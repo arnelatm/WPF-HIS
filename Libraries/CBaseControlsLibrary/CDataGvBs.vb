@@ -153,9 +153,11 @@ Public Class CDataGvBs
         Dim i = CurrentCell.RowIndex()
         Dim myBindingSource = CType(DataSource, BindingSource)
         For Each value In myBindingSource
-            Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+            'Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
+            Dim sequence = LateBinding.GetProperty(value, sequenceFieldName)
             If sequence > i + 1 Then
-                CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
+                'CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
+                LateBinding.SetProperty(value, sequenceFieldName, {sequence - 1})
             End If
         Next
     End Sub
@@ -165,11 +167,14 @@ Public Class CDataGvBs
         Dim myBindingSource = CType(DataSource, BindingSource)
         For Each o In myBindingSource
             If o IsNot Nothing Then
-                Dim sequence = CallByName(o, sequenceFieldName, CallType.Get)
+                'Dim sequence = CallByName(o, sequenceFieldName, CallType.Get)
+                Dim sequence = LateBinding.GetProperty(o, sequenceFieldName)
                 If sequence = 0 Then
-                    CallByName(o, sequenceFieldName, CallType.Set, i)
+                    'CallByName(o, sequenceFieldName, CallType.Set, i)
+                    LateBinding.SetProperty(o, sequenceFieldName, {i})
                 ElseIf sequence >= i Then
-                    CallByName(o, sequenceFieldName, CallType.Set, sequence + 1)
+                    'CallByName(o, sequenceFieldName, CallType.Set, sequence + 1)
+                    LateBinding.SetProperty(o, sequenceFieldName, {sequence + 1})
                 End If
             End If
         Next
@@ -271,7 +276,8 @@ Public Class CDataGvBs
 
     Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
         RaiseEvent ChangesMade(Me, EventArgs.Empty)
-        CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
+        'CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
+        LateBinding.SetProperty(CurrentRow.Cells("dgvInsColumn"), "Image", {Images.InsertRowImage})
     End Sub
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError

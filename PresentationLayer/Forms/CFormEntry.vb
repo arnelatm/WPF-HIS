@@ -1063,7 +1063,8 @@ Public Class CFormEntry
     End Sub
 
     Public Function GetFieldType(fieldName As String) As Type
-        Return CallByName(Me, fieldName, CallType.Get).GetType
+        'Return CallByName(Me, fieldName, CallType.Get).GetType
+        Return LateBinding.GetProperty(Me, fieldName).GetType
     End Function
 
     Public Property HideNavigatorButtons As Boolean

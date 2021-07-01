@@ -38,7 +38,8 @@ Namespace PresentationLayer.Presenters
             Else
                 DataFilter = ""
             End If
-            CallByName(View, "DisplayTreeViewData", CallType.Method)
+            LateBinding.InvokeFunction(View, "DisplayTreeViewData")
+            'CallByName(View, "DisplayTreeViewData", CallType.Method)
             GoFirstRecord()
         End Sub
 

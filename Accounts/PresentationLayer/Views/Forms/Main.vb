@@ -968,7 +968,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Function AddSecurityObject(Of T)(ByRef obj As T, ByRef subMenuName As String, ByVal parentIdNo As Int32, loc As Int16) As Int32
             Dim toolStripMenuItem As T = obj
-            Dim objName = CallByName(obj, "Name", CallType.Get)
+            'Dim objName = CallByName(obj, "Name", CallType.Get)
+            Dim objName = LateBinding.GetProperty(obj, "Name")
             Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
                     .SystemViewIdNo = VSystemViewIdNo,
                     .ParentIdNo = parentIdNo}
@@ -995,8 +996,10 @@ Namespace PresentationLayer.Views.Forms
                 Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
                 Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
             Else
-                CallByName(formEntry, "MdiParent", CallType.Set, Me)
-                CallByName(formEntry, "Show", CallType.Method)
+                'CallByName(formEntry, "MdiParent", CallType.Set, Me)
+                'CallByName(formEntry, "Show", CallType.Method)
+                LateBinding.SetProperty(formEntry, "MdiParent", {Me})
+                LateBinding.InvokeFunction(formEntry, "Show")
             End If
         End Sub
 

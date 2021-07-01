@@ -67,9 +67,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             ''
         Else
             Me.View = itemView
-            MyErrorProvider = CallByName(View, "MyErrorProvider", CallType.Get)
+            'MyErrorProvider = CallByName(View, "MyErrorProvider", CallType.Get)
 
-            'MyErrorProvider = LateBinding.GetProperty(View, "MyErrorProvider")
+            MyErrorProvider = LateBinding.GetField(View, "MyErrorProvider")
             Ea.SubscribeEvent(Me)
 
             Dim pi As PropertyInfo = View.GetType().GetProperty("FormTreeView")
@@ -143,8 +143,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Protected ReadOnly Property MainFieldsDictionary As Dictionary(Of String, Object)
         Get
-            Return CallByName(View, "MainFieldsDictionary", CallType.Get)
-            'Return LateBinding.GetProperty(View, "MainFieldsDictionary")
+            'Return CallByName(View, "MainFieldsDictionary", CallType.Get)
+            Return LateBinding.GetField(View, "MainFieldsDictionary")
         End Get
     End Property
 
@@ -164,7 +164,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Property Ea As EventAggregator
         Get
             'Return CallByName(View, "Ea", CallType.Get)
-            Return LateBinding.GetProperty(View, "Ea")
+            Return LateBinding.GetField(View, "Ea")
         End Get
         Set(value As EventAggregator)
             _ea = value
@@ -1012,8 +1012,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Sub CurrentRecordChanged()
-        CallByName(View, "CurrentRecordChanged", CallType.Method, {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
-        'LateBinding.InvokeFunction(View, "CurrentRecordChanged", CallType.Method, {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
+        'CallByName(View, "CurrentRecordChanged", CallType.Method, {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
+        LateBinding.InvokeFunction(View, "CurrentRecordChanged", {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
     End Sub
 
     Public Function UsePayGroups()

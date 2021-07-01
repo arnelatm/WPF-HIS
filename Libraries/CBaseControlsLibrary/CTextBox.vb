@@ -471,12 +471,12 @@ Public Class CTextBox
             End If
             FieldName = Name.Substring(3)
             searchForm.Location = formLocation
-            Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
+            Dim x = LateBinding.InvokeFunction(myForm, "GetFieldType", {FieldName})
             FindDataType = GetObjectDataType(x)
             searchForm.SetFieldDescription(GetControlDescription(FieldName))
             searchForm.ShowDialog()
             searchForm.Dispose()
-            CallByName(myForm, "FindFieldNew", CallType.Method, Me)
+            LateBinding.InvokeFunction(myForm, "FindFieldNew", {Me})
         Else
             AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNothingToFind")
         End If

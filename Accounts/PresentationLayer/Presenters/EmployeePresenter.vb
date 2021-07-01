@@ -262,7 +262,8 @@ Namespace PresentationLayer.Presenters
             Dim i As Integer = 0
             Dim x As T2
             For Each item As T1 In items
-                x = CallByName(item, fieldName, CallType.Get)
+                'x = CallByName(item, fieldName, CallType.Get)
+                x = LateBinding.GetProperty(item, fieldName)
                 If [set].Contains(x) Then
                     Return i
                 End If
@@ -285,10 +286,10 @@ Namespace PresentationLayer.Presenters
             Else
                 DataFilter = ""
             End If
-            CallByName(View, "DisplayTreeViewData", CallType.Method)
+            'CallByName(View, "DisplayTreeViewData", CallType.Method)
+            LateBinding.InvokeFunction(View, "DisplayTreeViewData")
             GoFirstRecord()
         End Sub
-
 
     End Class
 

@@ -70,7 +70,7 @@ Namespace PresentationLayer.Presenters
                         record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
                         NewlyAddedRecordIdNo = ModelOfPresenter.AddRecord(record)
                         retVal = NewlyAddedRecordIdNo
-                        CallByName(View, "IdNo", CallType.Set, retVal)
+                        LateBinding.SetProperty(View, "IdNo", {retVal})
                     End If
                 End If
             End If
