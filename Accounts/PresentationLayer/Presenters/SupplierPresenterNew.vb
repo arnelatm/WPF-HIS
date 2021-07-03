@@ -57,10 +57,10 @@ Namespace PresentationLayer.Presenters
             GoFirstRecord()
         End Sub
 
-        Public Overrides Sub UpdateViewDisplay(idNo As Int32)
-            MyBase.UpdateViewDisplay(idNo)
+        Protected Overrides Sub UpdateViewDisplay()
+            MyBase.UpdateViewDisplay()
             Dim value As Double
-            value = Convert.ToDouble(GetSupplierBalance(idNo))
+            value = Convert.ToDouble(GetSupplierBalance(TargetIdNo))
             View.Balance = value.ToString("N2")
         End Sub
 

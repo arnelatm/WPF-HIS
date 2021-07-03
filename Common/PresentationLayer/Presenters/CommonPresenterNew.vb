@@ -30,6 +30,10 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Protected Sub New()
+            MyBase.New()
+        End Sub
+
         Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
         Public Shared Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
 

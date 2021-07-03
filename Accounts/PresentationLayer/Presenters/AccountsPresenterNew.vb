@@ -179,6 +179,10 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _dayType = EnumToCode(PayRateUnitSelection.Day)
         Private ReadOnly _biWeekType = EnumToCode(PayRateUnitSelection.BiWeek)
 
+        Protected Sub New()
+            MyBase.New()
+        End Sub
+
         Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
             Dim factor As Decimal
             Select Case payFrequency

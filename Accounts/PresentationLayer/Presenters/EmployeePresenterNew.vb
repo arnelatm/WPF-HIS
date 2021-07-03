@@ -18,16 +18,22 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _employeePayElementModel As New ModelAccounts("EmployeePayElement")
         Private ReadOnly _employeePhoneModel As New ModelAccounts("EmployeePhone")
 
+        Public Sub New()
+            MyBase.New()
+        End Sub
+
         Public Sub New(view As IEmployeeView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("Employee")
-            TableName = "Employee"
-            TreeViewMainField = "EmployeeName"
-            TreeViewSecondaryField = "EmployeeCode"
-            SortOrderKey = "EmployeeName"
-            OriginalModel = New EmployeeModel()
-            DataModel = New EmployeeModel
-            CreateDataTables()
+            If view IsNot Nothing Then
+                ModelOfPresenter = New ModelAccounts("Employee")
+                TableName = "Employee"
+                TreeViewMainField = "EmployeeName"
+                TreeViewSecondaryField = "EmployeeCode"
+                SortOrderKey = "EmployeeName"
+                OriginalModel = New EmployeeModel()
+                DataModel = New EmployeeModel
+                CreateDataTables()
+            End If
         End Sub
 
         Private Sub CreateDataTables()

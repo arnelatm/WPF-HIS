@@ -228,6 +228,12 @@
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.FormTreeView.Size = New System.Drawing.Size(344, 452)
             '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
+            Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            '
             'CFlowLayout1
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent

@@ -145,7 +145,7 @@ Public Class BFMainNew
     End Function
 
     Public Sub TranslateForm()
-        SuspendLayout()
+        Visible = False
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             GlobalVariables.RightToLeftLayout = True
             RightToLeft = RightToLeft.Yes
@@ -165,7 +165,7 @@ Public Class BFMainNew
         If GlobalVariables.TranslationMode Then
             RaiseEvent AfterTranslateForm()
         End If
-        ResumeLayout()
+        Visible = True
     End Sub
 
     Protected Sub RunTranslator(ByVal nSystemViewIdNo)

@@ -35,7 +35,16 @@ Namespace PresentationLayer.Views.Forms
         Private cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
         Private cellPosQtyUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 6)
         Private cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
-        Private ReadOnly _presenter
+        'Public Property presenter
+
+        Public Sub New()
+            MyBase.New()
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            ' Add any initialization after the InitializeComponent() call.
+
+        End Sub
 
         Public Sub New(ByRef presenter)
 
@@ -44,8 +53,8 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             DoubleBuffered = True
             FirstControl = txtPayElementCode
-            _presenter = New PayElementPresenter(Me)
-            PresenterObj = _presenter
+            'presenter = New PayElementPresenter(Me)
+            'PresenterObj =
             'Ea = _presenter.Ea
             'Ea.SubscribeEvent(Me)
 
@@ -879,7 +888,7 @@ Namespace PresentationLayer.Views.Forms
             Return False
         End Function
 
-        Protected Overrides Sub OnAfterRecordChanged()
+        Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateCalculationTabDisplay()
             UpdatePostingTabDisplay()
         End Sub
