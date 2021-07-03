@@ -63,9 +63,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Private ReadOnly _withTreeView As Boolean = False
 
     Public Sub New(itemView As T)
-        If itemView Is Nothing Then
-            ''
-        Else
+        If itemView IsNot Nothing Then
             Me.View = itemView
             'MyErrorProvider = CallByName(View, "MyErrorProvider", CallType.Get)
 
@@ -77,7 +75,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 _withTreeView = True
                 FormTreeView = pi.GetValue(View)
             End If
-
         End If
     End Sub
 
@@ -157,7 +154,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             If value Then
                 _editMode = False
             End If
-            CurrentRecordChanged()
+            UpdateViewDisplay()
         End Set
     End Property
 
@@ -201,10 +198,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 If Not DisableSaveMemento Then
                     SaveOriginalValues()
                 End If
-                LateBinding.InvokeFunction(View, "TurnOnInputs")
-            Else
-                LateBinding.InvokeFunction(View, "TurnOffInputs")
             End If
+            UpdateViewDisplay()
         End Set
     End Property
 
@@ -257,11 +252,15 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             '    Debugger.Break()
             'End If
             _targetIdNo = value
-            UpdateViewDisplay(value)
-            LateBinding.InvokeFunction(View, "CurrentRecordChanged", {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
+            UpdateView(value)
             'CallByName(View, "CurrentRecordChanged", CallType.Method, {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
         End Set
     End Property
+
+    Protected Sub UpdateView(value As Integer)
+        UpdateViewData(value)
+        UpdateViewDisplay()
+    End Sub
 
     Public Property UndoMode As Boolean
         Set
@@ -514,7 +513,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer) As Integer
         Try
-            Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, SortOrderKey, DataFilter)
+            Dim cModel = New TM
+            Dim newSortOrder As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
+            Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, newSortOrder, DataFilter)
         Catch ex As Exception
             Return 0
         End Try
@@ -652,7 +653,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetSortedRecordPosition(idNo As Int32) As Integer
         Try
-            Return Model.GetSortedRecordPosition(idNo, TableName, SortOrderKey, DataFilter)
+            Dim cModel As New TM
+            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
+            Return Model.GetSortedRecordPosition(idNo, TableName, newSortOrderKey, DataFilter)
         Catch ex As Exception
             Return 0
         End Try
@@ -828,7 +831,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             RecordPositionNumber = GetSortedRecordPosition(LastIdNo)
         Else
             EditMode = False
-            UpdateViewDisplay(TargetIdNo)
+            UpdateViewData(TargetIdNo)
             'RecordPositionNumber = RecordPositionNumber
         End If
         ClearAllErrorMessages()
@@ -921,7 +924,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             'turn off addmode/editmode
             AddMode = False
             EditMode = False
-            UpdateViewDisplay(TargetIdNo)
+            UpdateViewData(TargetIdNo)
             ClearAllErrorMessages()
         End If
         Return retVal
@@ -980,7 +983,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                 ' don't do anything just continue edits
             End If
         Else
-            UpdateViewDisplay(TargetIdNo)
+            UpdateViewData(TargetIdNo)
         End If
         If AddMode Then
             AddMode = False
@@ -989,7 +992,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End If
     End Sub
 
-    Public Overridable Sub UpdateViewDisplay(idNo As Int32)
+    Public Overridable Sub UpdateViewData(idNo As Int32)
         If idNo <> 0 Then
             Dim modelData As TM
             'RecordCount = GetRecordCount()
@@ -1006,14 +1009,14 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             If _withTreeView Then
                 TreeViewUpdateViewDisplay(idNo)
             End If
-            CurrentRecordChanged()
+            UpdateViewDisplay()
             ClearAllErrorMessages()
         End If
     End Sub
 
-    Public Sub CurrentRecordChanged()
+    Protected Overridable Sub UpdateViewDisplay()
         'CallByName(View, "CurrentRecordChanged", CallType.Method, {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
-        LateBinding.InvokeFunction(View, "CurrentRecordChanged", {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
+        LateBinding.InvokeFunction(View, "UpdateViewDisplay", {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
     End Sub
 
     Public Function UsePayGroups()

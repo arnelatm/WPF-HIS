@@ -18,6 +18,10 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
         End Sub
 
+        Public Sub New()
+            MyBase.New()
+        End Sub
+
         Public Overrides Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
             TableName = objectName
             SortOrderKey = objectName + "Name"

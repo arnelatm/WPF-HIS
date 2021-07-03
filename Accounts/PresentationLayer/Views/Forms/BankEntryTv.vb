@@ -15,6 +15,19 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
         End Sub
 
+        Public Sub New()
+
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            ' Add any initialization after the InitializeComponent() call.
+
+        End Sub
+
+        Public Sub SetPresenter(pPresenter As Object)
+            Presenter = pPresenter
+        End Sub
+
 #Region "Fields"
 
         Public Property IdNo As Int32 Implements IBankView.IdNo

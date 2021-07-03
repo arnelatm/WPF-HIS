@@ -37,7 +37,7 @@ Public Class CFormEntryNew
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
 
-    Public Event AfterRecordChanged()
+    Public Event AfterUpdateView()
 
     Public Sub New()
         MyBase.New()
@@ -62,6 +62,8 @@ Public Class CFormEntryNew
     <Description("Type here the Child Table name if any, otherwise leave it blank.")>
     <Browsable(True)>
     Public Property ChildTableName As String = ""
+
+    Public Property Presenter
 
     Public Property TableProperties As Array
 
@@ -89,7 +91,7 @@ Public Class CFormEntryNew
     '    End Set
     'End Property
 
-    Public Sub CurrentRecordChanged(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
+    Public Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
         tsbCurrentRecord.Text = recordPositionNumber
         tsbTotalRecords.Text = recordCount
         UpdateNavigationButtonDisplay(editMode, addMode, recordPositionNumber, recordCount)
@@ -98,20 +100,20 @@ Public Class CFormEntryNew
         Else
             TurnOffInputs()
         End If
-        RaiseEvent AfterRecordChanged()
+        RaiseEvent AfterUpdateView()
     End Sub
 
-    Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterRecordChanged
-    End Sub
+    'Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
+    'End Sub
 
     Public Property QuitOnSave As Boolean Implements IViewDataEntry.QuitOnSave
 
     Public Sub CheckDataChanges()
     End Sub
 
-    Public Function GetEventAggregator() As EventAggregator
-        Return Ea
-    End Function
+    'Public Function GetEventAggregator() As EventAggregator
+    '    Return Ea
+    'End Function
 
     'Public Property AddMode As Boolean
     '    Get
@@ -213,6 +215,7 @@ Public Class CFormEntryNew
                 btnPrint.Enabled = False
                 btnFind.Enabled = False
                 btnQuit.Enabled = False
+                btnFilter.Enabled = False
                 btnSave.Enabled = True
                 btnUndo.Enabled = True
             Else
@@ -226,6 +229,7 @@ Public Class CFormEntryNew
                 btnPrint.Enabled = True
                 btnFind.Enabled = True
                 btnQuit.Enabled = True
+                btnFilter.Enabled = True
                 btnSave.Enabled = False
                 btnUndo.Enabled = False
             End If
@@ -424,11 +428,6 @@ Public Class CFormEntryNew
 
     Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
         PublishClickedButton(ButtonClicked.Undo)
-        'If EditMode Or AddMode Then
-        '    TurnOnInputs()
-        'Else
-        '    TurnOffInputs()
-        'End If
     End Sub
 
     Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
@@ -454,11 +453,6 @@ Public Class CFormEntryNew
                 e.SuppressKeyPress = True
                 e.Handled = True
                 PublishClickedButton(ButtonClicked.Save)
-                'If EditMode Or AddMode Then
-                '    TurnOnInputs()
-                'Else
-                '    TurnOffInputs()
-                'End If
             Else
                 Beep()
             End If
@@ -480,7 +474,7 @@ Public Class CFormEntryNew
 
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
 
-            AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
+            'AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             CreateDataSources()
             CreateMainFieldsDictionary()
@@ -575,7 +569,7 @@ Public Class CFormEntryNew
             TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
         End If
         TranslateForm()
-        PublishClickedButton(ButtonClicked.Undo)
+        'PublishClickedButton(ButtonClicked.Undo)
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
         'RecordPositionNumber = RecordPositionNumber

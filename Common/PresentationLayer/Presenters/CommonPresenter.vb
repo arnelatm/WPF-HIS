@@ -20,13 +20,19 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As IView)
             MyBase.New(itemView)
-            Dim systemViewName As String
-            If DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName IsNot Nothing Then
-                systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName.Trim()
-            Else
-                systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+            If itemView IsNot Nothing Then
+                Dim systemViewName As String
+                If DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName IsNot Nothing Then
+                    systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName.Trim()
+                Else
+                    systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+                End If
+                ViewDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(systemViewName)
             End If
-            ViewDefaultFieldValues = ModelDefaultFieldValue.GetDefaultFieldValue(systemViewName)
+        End Sub
+
+        Protected Sub New()
+            MyBase.New()
         End Sub
 
         Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue

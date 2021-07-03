@@ -23,6 +23,15 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo
 
+        Public Sub New()
+
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            ' Add any initialization after the InitializeComponent() call.
+
+        End Sub
+
         Public Sub New(ByRef presenter)
             MyBase.New()
 
@@ -702,6 +711,10 @@ Namespace PresentationLayer.Views.Forms
                     selectedRow.Amount = amount
                 End If
             End With
+        End Sub
+
+        Private Sub EmployeeEntryTvNew_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+            'Debugger.Break()
         End Sub
 
     End Class
