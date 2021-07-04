@@ -3,7 +3,6 @@ Imports System.Drawing
 Imports System.Windows.Forms
 Imports System.Windows.Forms.VisualStyles
 Imports AATM.Libraries.AatmInterfaces
-Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class UcCheckBox
     Implements IEntryControl, IFindableControl, ILinkedLabel
@@ -53,6 +52,7 @@ Public Class UcCheckBox
         End Get
         Set(value As String)
             CLabel1.Text = value
+            CLabel1.Name = "lbl" + Me.Name
         End Set
     End Property
 
