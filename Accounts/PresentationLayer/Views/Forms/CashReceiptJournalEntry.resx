@@ -562,7 +562,7 @@
     <value>266</value>
   </data>
   <data name="lblAccountIdNo.Text" xml:space="preserve">
-    <value>Acct. to Credit:</value>
+    <value>Acct. to Debit:</value>
   </data>
   <data name="lblAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>

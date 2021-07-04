@@ -167,8 +167,8 @@ Namespace PresentationLayer.Presenters
                     item.JournalIdNo = View.IdNo
                     item.Sequence = 1
                     item.AccountIdNo = View.AccountIdNo
-                    item.Credit = View.Amount
-                    item.Debit = 0
+                    item.Credit = 0
+                    item.Debit = View.Amount
                     item.RevCostCenterIdNo = 0
                     MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
                     Exit For

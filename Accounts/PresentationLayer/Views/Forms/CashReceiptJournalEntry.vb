@@ -672,11 +672,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs)
-            MyPresenter.AutoApplyAmount()
-            DataGridViewCsrOiItems.Refresh()
-            UpdateOiTotals()
-        End Sub
 
         Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If DataGridViewJournalItems.Visible Then
@@ -796,6 +791,12 @@ Namespace PresentationLayer.Views.Forms
                 bsJournalItems.ResetBindings(True)
                 UpdateJiTotals()
             End If
+        End Sub
+
+        Private Sub btnAutoApply_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
+            MyPresenter.AutoApplyAmount()
+            DataGridViewCsrOiItems.Refresh()
+            UpdateOiTotals()
         End Sub
 
     End Class

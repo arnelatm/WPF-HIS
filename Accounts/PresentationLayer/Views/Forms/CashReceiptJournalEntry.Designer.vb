@@ -1525,7 +1525,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'btnAutoApply
             '
-            Me.btnAutoApply.DesignerSelected = False
+            Me.btnAutoApply.DesignerSelected = True
             Me.btnAutoApply.DisplayOnly = True
             resources.ApplyResources(Me.btnAutoApply, "btnAutoApply")
             Me.btnAutoApply.ImageIndex = 0
