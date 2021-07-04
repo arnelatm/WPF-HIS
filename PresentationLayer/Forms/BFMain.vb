@@ -327,6 +327,9 @@ Public Class BfMain
             End If
             Dim allCtrl As New List(Of Control)
             For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
+                If cCtrl.Text = "Approved?" Then
+                    Debugger.Break()
+                End If
                 If IsTranslatable(cCtrl) Then
                     If TypeOf cCtrl Is MenuStrip Then
                         Dim subMenuName = ""
@@ -389,6 +392,7 @@ Public Class BfMain
                     End If
                 End If
             Next
+            Dim x = 1
         End If
     End Sub
 

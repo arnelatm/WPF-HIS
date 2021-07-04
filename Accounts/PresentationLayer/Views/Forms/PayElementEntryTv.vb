@@ -633,10 +633,10 @@ Namespace PresentationLayer.Views.Forms
             UpdateCalculationTabDisplay()
         End Sub
 
-        Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
-            UpdateCalculationTabDisplay()
-            UpdatePostingTabDisplay()
-        End Sub
+        'Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+        '    UpdateCalculationTabDisplay()
+        '    UpdatePostingTabDisplay()
+        'End Sub
 
         Protected Sub PayElement_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
             Dim n As TreeNode = FormTreeView.SelectedNode

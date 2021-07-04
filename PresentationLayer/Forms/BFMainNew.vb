@@ -32,6 +32,7 @@ Public Class BFMainNew
     Protected Shared ResetEvent As AutoResetEvent = New AutoResetEvent(False)
     Public Dv As DataView
     Public MyErrorProvider As New ErrorProviderExtended
+    Private PresenterObj As Object
 
     Public Event AfterTranslateForm()
 
