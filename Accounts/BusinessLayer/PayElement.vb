@@ -42,6 +42,7 @@ Namespace BusinessLayer
         Public Property Taxable As Boolean
         Public Property Unit As Char
         Public Property UsePayGroups As Boolean
+        Public Property UsePayGroupSetting As Boolean
         Public Property PayElementAccounts As List(Of PayElementAccount)
         Public Property PayElementItems As List(Of PayElementItem)
 

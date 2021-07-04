@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace DataLayer.AdoNet
     ' Data access object for PayElement
@@ -46,7 +47,24 @@ Namespace DataLayer.AdoNet
             data.PayElementAccounts = peaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
             Dim esDao = New PayElementItemDao()
             data.PayElementItems = esDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
+            data.UsePayGroupSetting = GetUsePayGroupSetting(data)
             Return data
+        End Function
+
+        Private Function GetUsePayGroupSetting(data As PayElement) As Boolean
+            Dim dao = New BaseDao
+            Dim retValue = dao.GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
+            If retValue Is Nothing Then
+                Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
+                Dim groupSetting As String = "Payroll"
+                Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+                Return False
+            End If
+            If retValue = "1" Then
+                Return True
+            Else
+                Return False
+            End If
         End Function
 
         Public Function UpdateRecord(ByRef PayElement As PayElement) As Integer Implements IDao(Of PayElement).UpdateRecord

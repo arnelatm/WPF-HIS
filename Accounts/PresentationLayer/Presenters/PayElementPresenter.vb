@@ -21,10 +21,20 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPayElementView)
             MyBase.New(view)
+            If view IsNot Nothing Then
+                ModelOfPresenter = New ModelAccounts("PayElement")
+                TableName = "PayElement"
+                TreeViewMainField = "PayElementName"
+                TreeViewSecondaryField = "PayElementCode"
+                SortOrderKey = "PayElementName"
+                OriginalModel = New PayElementModel()
+                DataModel = New PayElementModel
+            End If
+            CreateDataTables()
+            ChildModels.Add(_payElementItemModel)
+        End Sub
 
-            InitializerWithTv("PayElement")
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+        Private Sub CreateDataTables()
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("PayElementIdNo", GetType(Int16))
@@ -49,9 +59,6 @@ Namespace PresentationLayer.Presenters
             DtEarnUpdateTable.Columns.Add("FactorType", GetType(String))
             DtEarnUpdateTable.Columns.Add("FactorValue", GetType(Decimal))
             DtEarnUpdateTable.Columns.Add("Sequence", GetType(Int16))
-
-            ChildModels.Add(_payElementItemModel)
-
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave

@@ -66,7 +66,6 @@ Public Class BFMainNew
 
     Public Property CancelClose As Boolean
 
-    Public Overridable Property PresenterObj
 
     Public Property Errors As List(Of String) Implements IView.Errors
 
