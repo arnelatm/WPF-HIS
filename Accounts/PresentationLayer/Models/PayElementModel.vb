@@ -29,6 +29,7 @@
         Public Property Taxable As Boolean
         Public Property Unit As Char
         Public Property UsePayGroups As Boolean
+        Public Property UsePayGroupSetting As Boolean
         Public Property PayElementAccounts As IList(Of PayElementAccountModel)
         Public Property PayElementItems As IList(Of PayElementItemModel)
     End Class

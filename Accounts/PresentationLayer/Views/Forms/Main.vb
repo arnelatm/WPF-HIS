@@ -197,7 +197,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
-            RunForm(Of BankPresenter, BankEntryTv)("BankEntryTv", "BankPresenter")
+            RunForm(Of BankPresenter, BankEntryTv)()
         End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -343,36 +343,16 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayElement.Click
-            RunForm(Of PayElementPresenter, PayElementEntryTv)("PayElementEntryTv", "PayElementPresenter")
-            'Dim presenter As New PayElementPresenter(Nothing)
-            'Dim childMdiForm As New PayElementEntryTv(presenter) With {
-            '        .MdiParent = Me
-            '        }
-            'presenter = New PayElementPresenter(childMdiForm)
-            'childMdiForm.Show()
+            RunForm(Of PayElementPresenter, PayElementEntryTv)()
         End Sub
 
-        Private Sub RunForm(Of TP As New, TF As New)(formName, presenterName)
+        Private Sub RunForm(Of TP As New, TF As New)()
             Dim x As TP = New TP
             Dim y As TF = New TF
-            Dim childMdiForm As New Form
-            Dim presenter As Object = Activator.CreateInstance(x.GetType())
-            childMdiForm = Activator.CreateInstance(y.GetType())
-            'Dim childMdiForm As Form = Activator.CreateInstance(formName, presenter)
-            presenter = Activator.CreateInstance(x.GetType(), {childMdiForm})
-            'presenter = Activator.CreateInstance(presenterName, {childMdiForm})
+            Dim childMdiForm = Activator.CreateInstance(y.GetType())
+            Dim presenter = Activator.CreateInstance(x.GetType(), {childMdiForm})
             childMdiForm.MdiParent = Me
             childMdiForm.Show()
-            'Dim x As TP = New TP
-            'Dim y As TF = New TF
-            'Dim childMdiForm As New Form
-            'Dim presenter As Object = Activator.CreateInstance(x.GetType())
-            'childMdiForm = Activator.CreateInstance(y.GetType())
-            ''Dim childMdiForm As Form = Activator.CreateInstance(formName, presenter)
-            'presenter = Activator.CreateInstance(x.GetType(), {childMdiForm})
-            ''presenter = Activator.CreateInstance(presenterName, {childMdiForm})
-            'childMdiForm.MdiParent = Me
-            'childMdiForm.Show()
         End Sub
 
         'Private Sub RunForm(Of TF As New, TP As New)()
@@ -396,25 +376,25 @@ Namespace PresentationLayer.Views.Forms
         '    'CallByName(childMdiForm, "Show", CallType.Method)
         'End Sub
 
-        Private Function InvokeModuleFunction(FunctionNameToCall As String, FunctionParameters As Object, Optional ModuleName As String = Nothing)
-            Dim myReflectionAssembly = Reflection.Assembly.GetExecutingAssembly()
-            Dim myObject As Object
-            Dim myFunctionType As Type
-            If IsNothing(ModuleName) Then
-                'Gets function without ModuleName. FunctionName should be unique in the assembly/program.
-                myFunctionType = myReflectionAssembly.DefinedTypes.Where(Function(x) x.DeclaredMethods.Where(Function(y) y.Name = FunctionNameToCall).Count > 0).FirstOrDefault
-            Else
-                'Gets function using ModuleName, if available
-                myFunctionType = myReflectionAssembly.DefinedTypes.Where(Function(x) x.Name = ModuleName AndAlso x.DeclaredMethods.Where(Function(y) y.Name = FunctionNameToCall).Count > 0).FirstOrDefault
-            End If
+        'Private Function InvokeModuleFunction(FunctionNameToCall As String, FunctionParameters As Object, Optional ModuleName As String = Nothing)
+        '    Dim myReflectionAssembly = Reflection.Assembly.GetExecutingAssembly()
+        '    Dim myObject As Object
+        '    Dim myFunctionType As Type
+        '    If IsNothing(ModuleName) Then
+        '        'Gets function without ModuleName. FunctionName should be unique in the assembly/program.
+        '        myFunctionType = myReflectionAssembly.DefinedTypes.Where(Function(x) x.DeclaredMethods.Where(Function(y) y.Name = FunctionNameToCall).Count > 0).FirstOrDefault
+        '    Else
+        '        'Gets function using ModuleName, if available
+        '        myFunctionType = myReflectionAssembly.DefinedTypes.Where(Function(x) x.Name = ModuleName AndAlso x.DeclaredMethods.Where(Function(y) y.Name = FunctionNameToCall).Count > 0).FirstOrDefault
+        '    End If
 
-            If Not IsNothing(myFunctionType) Then
-                myObject = myFunctionType.GetMethod(FunctionNameToCall).Invoke(myFunctionType, New Object() {FunctionParameters})
-            Else
-                myObject = Nothing
-            End If
-            Return myObject
-        End Function
+        '    If Not IsNothing(myFunctionType) Then
+        '        myObject = myFunctionType.GetMethod(FunctionNameToCall).Invoke(myFunctionType, New Object() {FunctionParameters})
+        '    Else
+        '        myObject = Nothing
+        '    End If
+        '    Return myObject
+        'End Function
 
         Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeReceivable.Click
             Dim childMdiForm As ErJournalEntry
@@ -426,13 +406,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemEmployees.Click
-            RunForm(Of EmployeePresenterNew, EmployeeEntryTvNew)("EmployeeEntryTvNew", "EmployeePresenterNew")
-            'Dim presenter As New EmployeePresenterNew(Nothing)
-            'Dim childMdiForm As New EmployeeEntryTvNew(presenter) With {
-            '    .MdiParent = Me
-            '    }
-            'presenter = New EmployeePresenterNew(childMdiForm)
-            'childMdiForm.Show()
+            RunForm(Of EmployeePresenterNew, EmployeeEntryTvNew)()
         End Sub
 
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _

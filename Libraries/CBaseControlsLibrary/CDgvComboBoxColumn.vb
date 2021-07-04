@@ -26,7 +26,7 @@ Public Class CDgvComboBoxColumn
             If (value IsNot Nothing) AndAlso
                Not value.GetType().IsAssignableFrom(GetType(CDgvComboBoxCell)) _
                 Then
-                Throw New InvalidCastException("Must be a CalendarCell")
+                Throw New InvalidCastException("Must be a CDgvComboBoxCell")
             End If
             MyBase.CellTemplate = value
 

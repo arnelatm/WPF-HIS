@@ -171,6 +171,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PayFrequency As PayFrequencySelection Implements IEmployeeView.PayFrequency
+
         Public Property RegularEmployeeDeductions As List(Of EmployeePayElementView) Implements IEmployeeView.RegularEmployeeDeductions
             Get
                 Return _regularEmployeeDeductions

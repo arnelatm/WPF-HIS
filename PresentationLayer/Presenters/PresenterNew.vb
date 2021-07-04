@@ -2042,8 +2042,11 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Sub OnGetDataSourceHandler(ByRef eventType As GetDataSource) Implements ISubscriber(Of GetDataSource).OnEventHandler
         Dim data As List(Of ClassesLibrary.LookupData)
-        data = GetLookup(eventType.TableName)
-        'CallByName(eventType.Control, "DataSource", CallType.Set, data)
+        If eventType.Fields Is Nothing Then
+            data = GetLookup(eventType.TableName)
+        Else
+            data = GetLookup(eventType.TableName, eventType.SortKey, eventType.Fields, eventType.Filter)
+        End If
         LateBinding.SetProperty(eventType.Control, "DataSource", {data})
     End Sub
 
@@ -2055,7 +2058,6 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Else
                 data = GetLookup(eventType.TableName, eventType.SortKey, eventType.Fields, eventType.Filter)
             End If
-            'CallByName(eventType.View, eventType.TargetProperty, CallType.Set, data)
             LateBinding.SetProperty(eventType.View, eventType.TargetProperty, {data})
         End If
     End Sub
@@ -2307,6 +2309,13 @@ Public Class GetDataSource
         Me.Filter = filter
     End Sub
 
+    Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal sortKey As String, Optional ByVal filter As String = Nothing)
+        Me.TableName = tableName
+        Me.Control = control
+        Me.Filter = filter
+        Me.SortKey = sortKey
+    End Sub
+
     Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal fields As String(), Optional ByVal filter As String = Nothing)
         Me.TableName = tableName
         Me.Control = control
@@ -2317,6 +2326,7 @@ Public Class GetDataSource
     Public Property TableName As String
     Public Property Control As Control
     Public Property Fields As String()
+    Public Property SortKey As String
     Public Property Filter As String
 
 End Class
@@ -2326,6 +2336,14 @@ Public Class GetLookupDataRequested
     Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
         Me.TargetProperty = targetProperty
+        Me.Filter = filter
+        Me.View = view
+    End Sub
+
+    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal sortKey As String, ByVal Optional filter As String = Nothing)
+        Me.TableName = tableName
+        Me.TargetProperty = targetProperty
+        Me.SortKey = sortKey
         Me.Filter = filter
         Me.View = view
     End Sub

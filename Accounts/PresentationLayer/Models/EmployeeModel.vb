@@ -43,6 +43,7 @@
         Public Property Title As String
         Public Property TownCity As String
         Public Property ZipCode As String
+        Public Property PayFrequency As PayFrequencySelection
         Public Property RegularEmployeeDeductions As List(Of EmployeePayElementModel)
         Public Property RegularEmployeeEarnings As List(Of EmployeePayElementModel)
         Public Property EmployeePhones As List(Of EmployeePhoneModel)

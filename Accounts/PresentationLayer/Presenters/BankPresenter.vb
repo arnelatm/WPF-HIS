@@ -19,10 +19,6 @@ Namespace PresentationLayer.Presenters
             DataModel = New BankModel()
         End Sub
 
-        Public Sub AssignView(itemView As IBankView)
-            Me.View = itemView
-        End Sub
-
         Public Sub New()
             MyBase.New()
         End Sub

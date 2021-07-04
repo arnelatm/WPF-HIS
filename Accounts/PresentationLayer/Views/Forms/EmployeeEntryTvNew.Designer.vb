@@ -30,11 +30,6 @@
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
@@ -50,6 +45,11 @@
             Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -143,13 +143,6 @@
             Me.txtDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.tbpEarnings = New System.Windows.Forms.TabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvEarningRate = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-            Me.dgvEarningUnit = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-            Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.EmployeeIdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.IdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpDeductions = New System.Windows.Forms.TabPage()
             Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
@@ -164,7 +157,7 @@
             Me.tbpPhones = New System.Windows.Forms.TabPage()
             Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+            Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvCountryTelIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvAreaCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.PhoneNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -184,6 +177,13 @@
             Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.RateDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.UnitDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvEarningRate = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+            Me.dgvEarningUnit = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -2362,119 +2362,13 @@
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
             Me.DataGridViewEarnings.ReadOnly = True
             Me.DataGridViewEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewEarnings.SequenceColumn = "dgvSequence"
+            Me.DataGridViewEarnings.SequenceColumn = "dgvSequenceEarning"
             Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
             Me.DataGridViewEarnings.ShowFooter = True
             Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = True
             Me.DataGridViewEarnings.Size = New System.Drawing.Size(651, 330)
             Me.DataGridViewEarnings.TabIndex = 5
             Me.DataGridViewEarnings.Translatable = True
-            '
-            'dgvSequenceEarning
-            '
-            Me.dgvSequenceEarning.BegFindValue = Nothing
-            Me.dgvSequenceEarning.DataPropertyName = "Sequence"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle7
-            Me.dgvSequenceEarning.EditingMode = False
-            Me.dgvSequenceEarning.EndFindValue = Nothing
-            Me.dgvSequenceEarning.FieldDescription = Nothing
-            Me.dgvSequenceEarning.FieldName = Nothing
-            Me.dgvSequenceEarning.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvSequenceEarning.FindEnabled = False
-            Me.dgvSequenceEarning.HeaderText = "Seq"
-            Me.dgvSequenceEarning.IgnoreCase = False
-            Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
-            Me.dgvSequenceEarning.ReadOnly = True
-            Me.dgvSequenceEarning.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvSequenceEarning.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvSequenceEarning.Translatable = False
-            Me.dgvSequenceEarning.Width = 40
-            '
-            'dgvEarningIdNo
-            '
-            Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle8
-            Me.dgvEarningIdNo.EditingMode = False
-            Me.dgvEarningIdNo.HeaderText = "Earning Name - Code"
-            Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
-            Me.dgvEarningIdNo.ReadOnly = True
-            Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvEarningIdNo.Translatable = False
-            '
-            'dgvEarningRate
-            '
-            Me.dgvEarningRate.DataPropertyName = "Rate"
-            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningRate.DefaultCellStyle = DataGridViewCellStyle9
-            Me.dgvEarningRate.EditingMode = False
-            Me.dgvEarningRate.HeaderText = "Rate / Amount"
-            Me.dgvEarningRate.Name = "dgvEarningRate"
-            Me.dgvEarningRate.ReadOnly = True
-            Me.dgvEarningRate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEarningRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvEarningRate.Translatable = False
-            Me.dgvEarningRate.Width = 80
-            '
-            'dgvEarningUnit
-            '
-            Me.dgvEarningUnit.DataPropertyName = "Unit"
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-            Me.dgvEarningUnit.DefaultCellStyle = DataGridViewCellStyle10
-            Me.dgvEarningUnit.EditingMode = False
-            Me.dgvEarningUnit.HeaderText = "Unit"
-            Me.dgvEarningUnit.Name = "dgvEarningUnit"
-            Me.dgvEarningUnit.ReadOnly = True
-            Me.dgvEarningUnit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEarningUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvEarningUnit.Translatable = False
-            '
-            'dgvEarningAmount
-            '
-            Me.dgvEarningAmount.BegFindValue = Nothing
-            Me.dgvEarningAmount.DataPropertyName = "Amount"
-            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle11.Format = "###,##0.00"
-            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle11
-            Me.dgvEarningAmount.EditingMode = False
-            Me.dgvEarningAmount.EndFindValue = Nothing
-            Me.dgvEarningAmount.FieldDescription = Nothing
-            Me.dgvEarningAmount.FieldName = Nothing
-            Me.dgvEarningAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvEarningAmount.FindEnabled = False
-            Me.dgvEarningAmount.HeaderText = "Payroll Amount"
-            Me.dgvEarningAmount.Name = "dgvEarningAmount"
-            Me.dgvEarningAmount.ReadOnly = True
-            Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvEarningAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvEarningAmount.Translatable = False
-            '
-            'EmployeeIdNoDataGridViewTextBoxColumn2
-            '
-            Me.EmployeeIdNoDataGridViewTextBoxColumn2.DataPropertyName = "EmployeeIdNo"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn2.HeaderText = "EmployeeIdNo"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn2.Name = "EmployeeIdNoDataGridViewTextBoxColumn2"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn2.ReadOnly = True
-            Me.EmployeeIdNoDataGridViewTextBoxColumn2.Visible = False
-            '
-            'IdNoDataGridViewTextBoxColumn2
-            '
-            Me.IdNoDataGridViewTextBoxColumn2.DataPropertyName = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn2.HeaderText = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn2.Name = "IdNoDataGridViewTextBoxColumn2"
-            Me.IdNoDataGridViewTextBoxColumn2.ReadOnly = True
-            Me.IdNoDataGridViewTextBoxColumn2.Visible = False
             '
             'bsEarnings
             '
@@ -2910,6 +2804,112 @@
             Me.UnitDataGridViewTextBoxColumn1.HeaderText = "Unit"
             Me.UnitDataGridViewTextBoxColumn1.Name = "UnitDataGridViewTextBoxColumn1"
             '
+            'dgvSequenceEarning
+            '
+            Me.dgvSequenceEarning.BegFindValue = Nothing
+            Me.dgvSequenceEarning.DataPropertyName = "Sequence"
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequenceEarning.DefaultCellStyle = DataGridViewCellStyle7
+            Me.dgvSequenceEarning.EditingMode = False
+            Me.dgvSequenceEarning.EndFindValue = Nothing
+            Me.dgvSequenceEarning.FieldDescription = Nothing
+            Me.dgvSequenceEarning.FieldName = Nothing
+            Me.dgvSequenceEarning.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequenceEarning.FindEnabled = False
+            Me.dgvSequenceEarning.HeaderText = "Seq"
+            Me.dgvSequenceEarning.IgnoreCase = False
+            Me.dgvSequenceEarning.Name = "dgvSequenceEarning"
+            Me.dgvSequenceEarning.ReadOnly = True
+            Me.dgvSequenceEarning.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequenceEarning.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequenceEarning.Translatable = False
+            Me.dgvSequenceEarning.Width = 40
+            '
+            'dgvEarningIdNo
+            '
+            Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle8
+            Me.dgvEarningIdNo.EditingMode = False
+            Me.dgvEarningIdNo.HeaderText = "Earning Name - Code"
+            Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
+            Me.dgvEarningIdNo.ReadOnly = True
+            Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningIdNo.Translatable = False
+            '
+            'dgvEarningRate
+            '
+            Me.dgvEarningRate.DataPropertyName = "Rate"
+            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningRate.DefaultCellStyle = DataGridViewCellStyle9
+            Me.dgvEarningRate.EditingMode = False
+            Me.dgvEarningRate.HeaderText = "Rate / Amount"
+            Me.dgvEarningRate.Name = "dgvEarningRate"
+            Me.dgvEarningRate.ReadOnly = True
+            Me.dgvEarningRate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningRate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningRate.Translatable = False
+            Me.dgvEarningRate.Width = 80
+            '
+            'dgvEarningUnit
+            '
+            Me.dgvEarningUnit.DataPropertyName = "Unit"
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            Me.dgvEarningUnit.DefaultCellStyle = DataGridViewCellStyle10
+            Me.dgvEarningUnit.EditingMode = False
+            Me.dgvEarningUnit.HeaderText = "Unit"
+            Me.dgvEarningUnit.Name = "dgvEarningUnit"
+            Me.dgvEarningUnit.ReadOnly = True
+            Me.dgvEarningUnit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningUnit.Translatable = False
+            '
+            'dgvEarningAmount
+            '
+            Me.dgvEarningAmount.BegFindValue = Nothing
+            Me.dgvEarningAmount.DataPropertyName = "Amount"
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle11.Format = "###,##0.00"
+            Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle11
+            Me.dgvEarningAmount.EditingMode = False
+            Me.dgvEarningAmount.EndFindValue = Nothing
+            Me.dgvEarningAmount.FieldDescription = Nothing
+            Me.dgvEarningAmount.FieldName = Nothing
+            Me.dgvEarningAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvEarningAmount.FindEnabled = False
+            Me.dgvEarningAmount.HeaderText = "Payroll Amount"
+            Me.dgvEarningAmount.Name = "dgvEarningAmount"
+            Me.dgvEarningAmount.ReadOnly = True
+            Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEarningAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningAmount.Translatable = False
+            '
+            'EmployeeIdNoDataGridViewTextBoxColumn2
+            '
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.DataPropertyName = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.HeaderText = "EmployeeIdNo"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.Name = "EmployeeIdNoDataGridViewTextBoxColumn2"
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.ReadOnly = True
+            Me.EmployeeIdNoDataGridViewTextBoxColumn2.Visible = False
+            '
+            'IdNoDataGridViewTextBoxColumn2
+            '
+            Me.IdNoDataGridViewTextBoxColumn2.DataPropertyName = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn2.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn2.Name = "IdNoDataGridViewTextBoxColumn2"
+            Me.IdNoDataGridViewTextBoxColumn2.ReadOnly = True
+            Me.IdNoDataGridViewTextBoxColumn2.Visible = False
+            '
             'EmployeeEntryTvNew
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3061,13 +3061,6 @@
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
         Friend WithEvents RateDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
         Friend WithEvents UnitDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
-        Friend WithEvents dgvEarningRate As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvEarningUnit As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
-        Friend WithEvents dgvEarningAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
-        Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-        Friend WithEvents IdNoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
         Friend WithEvents dgvSequencePhoneDisplay As DataGridViewTextBoxColumn
         Friend WithEvents FullPhone As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents FullPhoneAra As Libraries.CBaseControlsLibrary.CDgvTextColumn
@@ -3078,7 +3071,7 @@
         Friend WithEvents PhoneNumberDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PhoneTypeIdNo As DataGridViewTextBoxColumn
         Friend WithEvents dgvSequence As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+        Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvCountryTelIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvAreaCode As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents PhoneNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
@@ -3087,5 +3080,12 @@
         Friend WithEvents CountryTelCode As DataGridViewTextBoxColumn
         Friend WithEvents EmployeeIdNo As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+        Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvEarningRate As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
+        Friend WithEvents dgvEarningUnit As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvEarningAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
+        Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     End Class
 End Namespace

@@ -26,6 +26,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Taxable As Boolean
         Property Unit As Char
         Property UsePayGroups As Boolean
+        Property UsePayGroupSetting As Boolean
         Property PayElementAccounts As List(Of PayElementAccountView)
         Property PayElementItems As List(Of PayElementItemView)
     End Interface

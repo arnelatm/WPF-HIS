@@ -1,11 +1,9 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -23,7 +21,6 @@ Namespace PresentationLayer.Views.Forms
         Private _payElementItems As List(Of PayElementItemView)
         Private _useRevCostCenters As Nullable(Of Boolean)
         Private _useDepartments As Nullable(Of Boolean)
-        Private _usePayGroups As Nullable(Of Boolean)
 
         'Private _unitPosition As TableLayoutPanelCellPosition
         Private _eSumFieldsDict As Dictionary(Of String, Object)
@@ -35,35 +32,14 @@ Namespace PresentationLayer.Views.Forms
         Private cellPosOrigUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 2)
         Private cellPosQtyUnit As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(3, 6)
         Private cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
-        'Public Property presenter
 
         Public Sub New()
-            MyBase.New()
-            ' This call is required by the designer.
-            InitializeComponent()
-
-            ' Add any initialization after the InitializeComponent() call.
-
-        End Sub
-
-        Public Sub New(ByRef presenter)
 
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             DoubleBuffered = True
             FirstControl = txtPayElementCode
-            'presenter = New PayElementPresenter(Me)
-            'PresenterObj =
-            'Ea = _presenter.Ea
-            'Ea.SubscribeEvent(Me)
-
-            'cboCalculationType.DrawMode = DrawMode.OwnerDrawFixed
-            'AddHandler cboCalculationType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboCalculationType_DrawItem)
-            'AddHandler cboCalculationType.SelectedIndexChanged, New System.EventHandler(AddressOf cboCalculationType_ValueChanged)
-            'cboQuantityType.DrawMode = DrawMode.OwnerDrawFixed
-            'AddHandler cboQuantityType.DrawItem, New System.Windows.Forms.DrawItemEventHandler(AddressOf cboQuantityType_DrawItem)
-            'AddHandler cboQuantityType.SelectedIndexChanged, New System.EventHandler(AddressOf cboQuantityType_ValueChanged)
 
         End Sub
 
@@ -180,8 +156,6 @@ Namespace PresentationLayer.Views.Forms
                 If Value Then
                     PayElementType = EnumToCode(PayElementTypeSelection.Computed)
                     CalculationType = EnumToCode(CalculationTypeSelection.Factor)
-                    'cboPayElementType.SelectedValue =
-                    'cboCalculationType.SelectedValue =
                 End If
             End Set
         End Property
@@ -210,15 +184,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboPayElementType.SetValue(Value)
-                'If IsOvertimePayElement(Value) Then
-                '    If Value = EnumToCode(PayElementTypeSelection.OvertimeRegular) Then
-                '        Unit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
-                '    ElseIf Value = EnumToCode(PayElementTypeSelection.OvertimeHoliday) Then
-                '        Unit = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
-                '    ElseIf Value = EnumToCode(PayElementTypeSelection.OvertimeSpecial) Then
-                '        Unit = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
-                '    End If
-                'End If
             End Set
         End Property
 
@@ -267,12 +232,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public ReadOnly Property PayElementIdNoDataGridViewTextBoxColumnProperty As DataGridViewTextBoxColumn
-        '    Get
-        '        Return PayElementIdNoDataGridViewTextBoxColumn
-        '    End Get
-        'End Property
-
         Public Property Taxable As Boolean Implements IPayElementView.Taxable
             Get
                 Return chkTaxable.Checked
@@ -311,23 +270,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property UsePayGroupSetting As Boolean Implements IPayElementView.UsePayGroupSetting
+
 #End Region
 
-        Private myFont As Font = New Font("Aerial", 10, FontStyle.Underline Or FontStyle.Regular)
-        Private myFont2 As Font = New Font("Aerial", 10, FontStyle.Italic Or FontStyle.Strikeout)
-
-        'Private Sub cboCalculationType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
-        '    Dim comboBox As ComboBox = CType(sender, ComboBox)
-        '    If IsCalcTypeItemDisabled(e.Index) Then
-        '        e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds)
-        '        e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, SystemBrushes.GrayText, e.Bounds)
-        '    Else
-        '        e.DrawBackground()
-        '        'Dim brush As Brush = If((e.State And DrawItemState.Selected) > 0, SystemBrushes.HighlightText, SystemBrushes.ControlText)
-        '        e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, Brushes.White, e.Bounds)
-        '        e.DrawFocusRectangle()
-        '    End If
-        'End Sub
+        Private myFont As Font = New Font("Arial", 10, FontStyle.Underline Or FontStyle.Regular)
+        Private myFont2 As Font = New Font("Arial", 10, FontStyle.Italic Or FontStyle.Strikeout)
 
         Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectionChangeCommitted, cboCalculationType.Validated
             If cboCalculationType.Focused Then
@@ -362,19 +310,6 @@ Namespace PresentationLayer.Views.Forms
             Return False
         End Function
 
-        'Private Sub cboQuantityType_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs)
-        '    Dim comboBox As ComboBox = CType(sender, ComboBox)
-        '    If IsQtyTypeItemDisabled(e.Index) Then
-        '        e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds)
-        '        e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, SystemBrushes.GrayText, e.Bounds)
-        '    Else
-        '        e.DrawBackground()
-        '        'Dim brush As Brush = If((e.State And DrawItemState.Selected) > 0, SystemBrushes.HighlightText, SystemBrushes.ControlText)
-        '        e.Graphics.DrawString(comboBox.Items(e.Index).ToString(), comboBox.Font, Brushes.White, e.Bounds)
-        '        e.DrawFocusRectangle()
-        '    End If
-        'End Sub
-
         Private Sub cboQuantityType_ValueChanged(sender As Object, e As EventArgs) Handles cboQuantityType.SelectionChangeCommitted, cboQuantityType.Validated
             If cboCalculationType.Focused Then
                 If IsQtyTypeItemDisabled(cboCalculationType.SelectedIndex) Then
@@ -407,22 +342,21 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Protected Overrides Sub CreateDataSources()
-            'cboFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
-            cboPayElementKind.DataSource = PresenterObj.MakeEnumComboList(Of PayElementKindSelection)
-            cboPayElementType.DataSource = PresenterObj.MakeEnumComboList(Of PayElementTypeSelection)
-            cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList
-            cboCalculationType.DataSource = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
-            cboFactorType.DataSource = PresenterObj.MakeEnumComboList(Of FactorTypeSelection)
-            cboBasePaymentIdNo.DataSource = PresenterObj.GetLookup("PayElement")
-            cboUnit.DataSource = PresenterObj.MakeEnumComboList(Of PayRateUnitSelection)
-            cboQuantityType.DataSource = PresenterObj.MakeEnumComboList(Of QuantityTypeSelection)
-            _accountsByCode = PresenterObj.GetDetailAccountList()
-            _payGroupsByCode = PresenterObj.GetLookup("PayGroup")
-            _earnReportGroupsByCode = PresenterObj.GetLookup("PayElementGroup", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
-            _dedReportGroupsByCode = PresenterObj.GetLookup("PayElementGroup", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
-            _payElementsByCode = PresenterObj.GetLookup("PayElement")
-            _factorTypeByCode = PresenterObj.MakeEnumComboList(Of FactorTypeSelection)
-            _calculationTypeByCode = PresenterObj.MakeEnumComboList(Of CalculationTypeSelection)
+            CreateEnumDataSource(Of PayElementKindSelection)(cboPayElementKind)
+            CreateEnumDataSource(Of CalculationTypeSelection)(cboCalculationType)
+            CreateEnumDataSource(Of FactorTypeSelection)(cboFactorType)
+            CreateEnumDataSource(Of PayRateUnitSelection)(cboUnit)
+            CreateEnumDataSource(Of QuantityTypeSelection)(cboQuantityType)
+            CreateEnumDataSource(Of PayElementTypeSelection)(cboPayElementType)
+            _factorTypeByCode = GetEnumData(Of FactorTypeSelection)()
+            _calculationTypeByCode = GetEnumData(Of CalculationTypeSelection)()
+            GetLookUpData("PayElementGroup", "_earnReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
+            GetLookUpData("PayElementGroup", "_dedReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
+            CreateDataSource("PayElement", cboBasePaymentIdNo)
+            GetLookUpData("PayGroup", "_payGroupsByCode")
+            GetLookUpData("PayElement", "_payElementsByCode")
+            GetLookUpData("Account", "_accountsByCode", "AccountName", "DetailAccount=1")
+            CreateDataSource("Account", cboAccountIdNo, "AccountName", "DetailAccount=1")
             UpdateReportGroup()
         End Sub
 
@@ -531,36 +465,6 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        'Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.Validated, cboCalculationType.SelectionChangeCommitted
-        '    Me.DoubleBuffered = True
-        '    SuspendLayout()
-        '    floCalculation.Visible = False
-        '    UpdateCalculationTabDisplay()
-        '    floCalculation.Visible = True
-        '    ResumeLayout()
-        'End Sub
-
-        'Private Sub cboQuantityType_ValueChanged(sender As Object, e As EventArgs) Handles cboQuantityType.Validated, cboQuantityType.SelectionChangeCommitted
-        '    Me.DoubleBuffered = True
-        '    SuspendLayout()
-        '    floCalculation.Visible = False
-        '    If cboQuantityType.SelectedValue = EnumToCode(QuantityTypeSelection.NotNeeded) Then
-        '        lblDefaultQuantity.Visible = False
-        '        txtDefaultQuantity.Visible = False
-        '        lblSlash2.Visible = False
-        '        cboUnit.Visible = False
-        '        tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-        '    Else
-        '        lblDefaultQuantity.Visible = True
-        '        txtDefaultQuantity.Visible = True
-        '        lblSlash2.Visible = False
-        '        cboUnit.Visible = True
-        '        tlpCalculation.SetCellPosition(cboUnit, cellPosQtyUnit)
-        '    End If
-        '    floCalculation.Visible = True
-        '    ResumeLayout()
-        'End Sub
-
         Private Sub UpdateCalculationTabDisplay()
             SuspendLayout()
             floCalculation.Visible = False
@@ -588,11 +492,7 @@ Namespace PresentationLayer.Views.Forms
                     lblSlash2.Visible = False
                     txtMultiplier.Visible = False
                     tlpCalculation.SetCellPosition(cboUnit, cellPosOrigUnit)
-                    'tlpCalculation.SetCellPosition(cboQuantityType, cellPosOrigUnitAtt)
                 Case CalculationTypeSelection.FixedRate
-                    'If IsOvertimePayElement(cboPayElementType.SelectedValue) Then
-                    '    cboUnit.
-                    'End If
                     lblSlash.Visible = True
                     lblRate.Text = Messaging.TranslateCaption("Default Rate / Unit")
                     lblSlash.Text = Messaging.TranslateCaption("/")
@@ -669,79 +569,10 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        'Private Sub UpdateDisplay()
-        '    If cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeRegular) Or
-        '       cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeHoliday) Or
-        '       cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeSpecial) Then
-        '        cboPayElementType.DisplayOnly = True
-        '        cboCalculationType.DisplayOnly = True
-        '    Else
-        '        If PresenterObj.EditMode Or PresenterObj.AddMode Then
-        '            cboPayElementType.DisplayOnly = False
-        '            cboCalculationType.DisplayOnly = False
-        '        Else
-        '            cboPayElementType.DisplayOnly = True
-        '            cboCalculationType.DisplayOnly = True
-        '        End If
-        '    End If
-        'End Sub
-
-        'Private Sub chkPostToSingleAccount_CheckedChanged(sender As Object, e As EventArgs)
-        '    If chkPostToSingleAccount.Checked Then
-        '        lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
-        '        'tbpAccountPosting.Enabled = False
-        '    Else
-        '        lblAccountIdNo.Text = Messaging.TranslateCaption("Default Posting Account")
-        '        'tbpAccountPosting.Enabled = True
-        '    End If
-        'End Sub
-
-        'Private Sub tbcPayElement_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbcPayElement.SelectedIndexChanged
-        '    SuspendLayout()
-        '    ' prevent flicker
-        '    floPostingAccounts.Visible = False
-        '    If _usePayGroups And chkUsePayGroups.Checked Then
-        '        If tbcPayElement.SelectedTab Is tbpAccountPosting Then
-        '            tbcPayElement.SelectedTab = tbpAccountPosting
-        '            cboAccountIdNo.Select()
-        '        End If
-        '    Else
-        '        If tbcPayElement.SelectedTab Is tbpAccountPosting Then
-        '            tbcPayElement.SelectedTab = tbpMain
-        '            cboAccountIdNo.Select()
-        '        End If
-        '    End If
-        '    floPostingAccounts.Visible = True
-        '    ResumeLayout()
-        'End Sub
-
         Private Sub PayElementEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _useDepartments = PresenterObj.GetDepartmentUseSetting()
-            If _useDepartments Is Nothing Then
-                _useDepartments = False
-            End If
-            _useRevCostCenters = PresenterObj.GetRevCostCenterUseSetting()
-            If _useRevCostCenters Is Nothing Then
-                _useRevCostCenters = False
-            End If
-            _usePayGroups = PresenterObj.UsePayGroups()
-            If _usePayGroups Is Nothing Then
-                _usePayGroups = False
-            End If
-
             ImageListTreeView.Images.Add(Image.FromFile("Images\Deduction.png"))
             ImageListTreeView.Images.Add(Image.FromFile("Images\Earning.png"))
             FormTreeView.ImageList = ImageListTreeView
-
-            'If _usePayGroups Then
-            '    chkUsePayGroups.Visible = True
-            '    lblUsePayGroups.Visible = True
-            '    DataGridViewPayElementAccounts.Visible = True
-            'Else
-            '    chkUsePayGroups.Visible = False
-            '    lblUsePayGroups.Visible = False
-            '    DataGridViewPayElementAccounts.Visible = False
-            'End If
         End Sub
 
         Private Sub ChkUsePayGroups_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsePayGroups.CheckedChanged
@@ -750,7 +581,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdatePostingTabDisplay()
             If Not chkSummary.Checked Then
-                If _usePayGroups IsNot Nothing And _usePayGroups Then
+                If UsePayGroupSetting Then
                     DataGridViewPayElementAccounts.Visible = True
                     chkUsePayGroups.Visible = True
                     lblUsePayGroups.Visible = True
@@ -762,9 +593,6 @@ Namespace PresentationLayer.Views.Forms
                         lblAccountIdNo.Text = Messaging.TranslateCaption("Posting Account")
                     End If
                 Else
-                    If _usePayGroups Is Nothing Then
-                        _usePayGroups = False
-                    End If
                     DataGridViewPayElementAccounts.Visible = False
                     chkUsePayGroups.Visible = False
                     lblUsePayGroups.Visible = False
@@ -805,89 +633,6 @@ Namespace PresentationLayer.Views.Forms
             UpdateCalculationTabDisplay()
         End Sub
 
-        'Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
-        '    With DataGridViewPayElementItems
-        '        Dim nIndex = .CurrentRow.Index
-        '        Select Case .CurrentCell.OwningColumn.Name
-        '            Case "dgvFactorType"
-        '                Dim PayElementId = DirectCast(DataGridViewPayElementItems.CurrentCell, CDgvComboboxCell).CellEditingControl.GetValue()
-        '                'If DataGridViewSummaryDetail.CurrentRow.Index = DataGridViewSummaryDetail.NewRowIndex Then
-        '                '    bsPayElementItem.AddNew()
-        '                '    PayElementItems(nIndex).PayElementIdNo = PayElementId
-        '                '    ' adding a new row to the bindingSource adds a new empty row at the end with null values
-        '                '    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-        '                '    bsPayElementItem.RemoveAt(bsPayElementItem.Count - 1)
-        '                'End If
-        '        End Select
-        '    End With
-        'End Sub
-
-        'Public Overrides Function ValidateView()
-        '    Dim valid As Boolean
-        '    valid = ValidateDataBoundGrid(Of PayElementItemView, PayElementItemModel)(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
-        '            ValidateDataBoundGrid(Of PayElementAccountView, PayElementAccountModel)(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
-        '    Return valid
-        'End Function
-
-        'Public Overrides Function ValidateView()
-        '    Dim valid As Boolean
-        '    valid = _presenter.ValidateDataBoundGrid(Of PayElementItemModel)(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
-        '            _presenter.ValidateDataBoundGrid(Of PayElementAccountModel)(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
-        '    Return valid
-        'End Function
-
-        'Private Sub cboPayElementType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayElementType.Validated, cboPayElementType.SelectionChangeCommitted
-        '    'If CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeRegular Or
-        '    '    CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeHoliday Or
-        '    '    CodeToEnum(Of PayElementTypeSelection)(cboPayElementType.SelectedValue) = PayElementTypeSelection.OvertimeSpecial Then
-        '    '    cboCalculationType.DisplayOnly = True
-        '    '    cboPayElementType.DisplayOnly = True
-        '    '    cboUnit.DisplayOnly = True
-        '    '    txtPayElementName.DisplayOnly = True
-        '    'Else
-        '    '    cboCalculationType.DisplayOnly = False
-        '    '    cboPayElementType.DisplayOnly = False
-        '    '    cboUnit.DisplayOnly = False
-        '    '    txtPayElementName.DisplayOnly = False
-        '    'End If
-        '    'UpdateCalculationTabDisplay()
-        '    'If IsOvertimePayElement(cboPayElementType.SelectedValue) Then
-        '    '    If cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeRegular) Then
-        '    '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
-        '    '    ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeHoliday) Then
-        '    '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursRegular)
-        '    '    ElseIf cboPayElementType.SelectedValue = EnumToCode(PayElementTypeSelection.OvertimeSpecial) Then
-        '    '        cboUnit.SelectedValue = EnumToCode(PayRateUnitSelection.OvertimeHoursSpecial)
-        '    '    End If
-        '    '    '    lblRate.Visible = True
-        '    '    '    txtRate.Visible = True
-        '    '    '    cboUnit.Visible = False
-        '    '    '    lblSlash.Visible = False
-        '    '    '    lblSlash.Visible = False
-        '    '    '    lblRate.Text = Messaging.TranslateCaption("Default Amount")
-        '    '    'Else
-        '    '    '    cboUnit.Visible = True
-        '    '    '    lblSlash.Visible = True
-        '    '    '    lblSlash.Visible = True
-        '    '    '    lblRate.Text = Messaging.TranslateCaption("Amount / Unit")
-        '    '    '    lblSlash.Text = Messaging.TranslateCaption("/")
-        '    'End If
-        'End Sub
-
-        Private Function IsOvertimePayElement(earnType As Char)
-            'If earnType = EnumToCode(PayElementTypeSelection.OvertimeRegular) Or
-            '   earnType = EnumToCode(PayElementTypeSelection.OvertimeHoliday) Or
-            '   earnType = EnumToCode(PayElementTypeSelection.OvertimeSpecial) Then
-            '    Return True
-            'End If
-            'If earnType = EnumToCode(PayElementTypeSelection.OvertimeRegular) Or
-            '   earnType = EnumToCode(PayElementTypeSelection.OvertimeHoliday) Or
-            '   earnType = EnumToCode(PayElementTypeSelection.OvertimeSpecial) Then
-            '    Return True
-            'End If
-            Return False
-        End Function
-
         Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateCalculationTabDisplay()
             UpdatePostingTabDisplay()
@@ -905,72 +650,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub cboPayElementKind_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayElementKind.SelectedIndexChanged
             UpdateReportGroup()
         End Sub
-
-        'Public Overrides Function ValidateView()
-        '    Dim errorFound As Boolean = False
-        '    Dim rules = PresenterObj.GetBizRules(PayElementItems)
-        '    Dim bo = PresenterObj.GetBizObject(PayElementItems)
-        '    For Each rule In rules
-        '        For Each col In DataGridViewSummaryDetail.Columns()
-        '            Dim colName = col.DataPropertyName
-        '            If rule.Property = colName Then
-        '                For Each row As DataGridViewRow In DataGridViewSummaryDetail.Rows
-        '                    Dim model As New PayElementItemModel
-        '                    If row.Index() < DataGridViewSummaryDetail.RowCount() - 1 Then
-        '                        GlobalVariables.Mapper.Map(Of PayElementItemView, PayElementItemModel)(PayElementItems(row.Index()), model)
-        '                        GlobalVariables.Mapper.Map(Of PayElementItemModel, PayElementItem)(model, bo)
-        '                        If Not bo.IsRuleValid(rule) Then
-        '                            Dim obj As New Object
-        '                            _eSumFieldsDict.TryGetValue(rule.Property, obj)
-        '                            row.Cells(obj.Name).ErrorText = rule.Error
-        '                            errorFound = True
-        '                        End If
-        '                    End If
-        '                Next
-        '            End If
-        '        Next
-        '    Next
-        '    If errorFound Then
-        '        tbpSummaryDetail.ImageIndex = 0
-        '    Else
-        '        tbpSummaryDetail.ImageIndex = -1
-        '    End If
-        '    Return Not errorFound
-        'End Function
-
-        'Protected Overrides Sub OnLoad(ByVal e As EventArgs)
-        '    MyBase.OnLoad(e)
-        '    Me.AutoValidate = AutoValidate.EnableAllowFocusChange
-        '    ImageList1.ColorDepth = ColorDepth.Depth32Bit
-        '    ImageList1.Images.Add(errorProvider1.Icon)
-        '    tabControl1.ImageList = ImageList1
-        '    textBox1.Validating += AddressOf textBox_Validating
-        '    textBox2.Validating += AddressOf textBox_Validating
-        'End Sub
-
-        'Private Sub textBox_Validating(ByVal sender As Object, ByVal e As CancelEventArgs)
-        '    Dim textBox = CType(sender, TextBox)
-
-        '    If String.IsNullOrEmpty(textBox.Text) Then
-        '        Me.errorProvider1.SetError(textBox, "Value is required.")
-        '        e.Cancel = True
-        '    Else
-        '        Me.errorProvider1.SetError(textBox, Nothing)
-        '    End If
-
-        '    Dim tabPage = TryCast(textBox.Parent, TabPage)
-        '    If tabPage IsNot Nothing Then ValidateTabPage(tabPage)
-        'End Sub
-
-        'Private Sub ValidateTabPage(ByVal tabPage As TabPage)
-        '    Dim tabIsValid = tabPage.Controls.Cast(Of Control)().All(Function(x) String.IsNullOrEmpty(errorProvider1.GetError(x)))
-
-        '    If tabIsValid Then
-        '        tabPage.ImageIndex = -1
-        '    Else
-        '        tabPage.ImageIndex = 0
-        '    End If
-        'End Sub
 
     End Class
 

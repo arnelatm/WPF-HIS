@@ -63,7 +63,7 @@ Public Class CFormEntryNew
     <Browsable(True)>
     Public Property ChildTableName As String = ""
 
-    Public Property Presenter
+    'Public Property Presenter
 
     Public Property TableProperties As Array
 
@@ -607,14 +607,34 @@ Public Class CFormEntryNew
         Return retValue
     End Function
 
-    Protected Sub CreateDataSource(tableName As String, ByRef control As Control)
+    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control)
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New GetDataSource(tableName, control))
         End If
     End Sub
 
+    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, filter As String)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(tableName, control, filter))
+        End If
+    End Sub
+
+    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, sortKey As String, filter As String)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(tableName, control, sortKey, filter))
+        End If
+    End Sub
+
     Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String)
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
+    End Sub
+
+    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String, filter As String)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, filter))
+    End Sub
+
+    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String, sortKey As String, filter As String)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortKey, filter))
     End Sub
 
     Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
@@ -625,7 +645,7 @@ Public Class CFormEntryNew
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
     End Sub
 
-    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
+    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox, Optional dataSource As Boolean = True)
         comboControl.DataSource = GetEnumData(Of TE)()
     End Sub
 
