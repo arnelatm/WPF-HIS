@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms
     '''     reside in its own Visual Studio project.
     '''     MV Patterns: MVP design pattern is used throughout this WinForms application.
     ''' </remarks>
-    Partial Public Class Main
+    Partial Public Class MainNew
         Implements IUserView
 
         Public Shared AccountsMapper As IMapper
@@ -54,6 +54,7 @@ Namespace PresentationLayer.Views.Forms
             GlobalVariables.TranslationMode = mySettings.TranslationInitializer
             _logStatus = LoginStatus.LoggedOut
             InitializeComponent()
+            PresenterObj = New UserPresenter(Me)
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
                 MenuFormName = "Main"
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
@@ -68,7 +69,7 @@ Namespace PresentationLayer.Views.Forms
                 SetLanguageChangeButtons()
             End If
             MainTableName = "User"
-            PresenterObj = New UserPresenter(Me)
+            'PresenterObj = New UserPresenter(Me)
             SetupMapper()
             'Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
             'builder.RegisterType(Of SalaryLoanSchedulePresenter)().[As](Of ISalaryLoanSchedulePresenter)()
@@ -352,49 +353,16 @@ Namespace PresentationLayer.Views.Forms
             Dim childMdiForm = Activator.CreateInstance(y.GetType())
             Dim presenter = Activator.CreateInstance(x.GetType(), {childMdiForm})
             childMdiForm.MdiParent = Me
+            TranslateFormNew()
+            If GlobalVariables.RightToLeftLayout Then
+                childMdiForm.RightToLeft = RightToLeft.Yes
+                childMdiForm.RightToLeftLayout = True
+            Else
+                childMdiForm.RightToLeft = RightToLeft.No
+                childMdiForm.RightToLeftLayout = False
+            End If
             childMdiForm.Show()
         End Sub
-
-        'Private Sub RunForm(Of TF As New, TP As New)()
-        '    Dim presenter = New TP()
-        '    Dim childMdiForm As New TF()
-        '    CallByName(childMdiForm, "Presenter", CallType.Set, presenter)
-        '    CallByName(childMdiForm, "MdiParent", CallType.Set, {Me})
-        '    CallByName(childMdiForm, "Show", CallType.Method)
-
-        '    'Dim childMdiForm = CallByName()
-
-        '    'Dim instance As TF = Activator.CreateInstance()
-
-        '    'Activator.CreateInstance("BanbankkEntryTv")
-
-        '    'Dim p As TF = CType(myHandle.Unwrap(), TF)
-
-        '    'Dim childMdiForm = InvokeModuleFunction(FunctionNameToCall:="BankEntryTv", FunctionParameters:=presenter)
-        '    'CallByName(childMdiForm, "MdiParent", CallType.Set, {Me})
-        '    'presenter = CallByName(Me, "presenter", CallType.Set, {childMdiForm})
-        '    'CallByName(childMdiForm, "Show", CallType.Method)
-        'End Sub
-
-        'Private Function InvokeModuleFunction(FunctionNameToCall As String, FunctionParameters As Object, Optional ModuleName As String = Nothing)
-        '    Dim myReflectionAssembly = Reflection.Assembly.GetExecutingAssembly()
-        '    Dim myObject As Object
-        '    Dim myFunctionType As Type
-        '    If IsNothing(ModuleName) Then
-        '        'Gets function without ModuleName. FunctionName should be unique in the assembly/program.
-        '        myFunctionType = myReflectionAssembly.DefinedTypes.Where(Function(x) x.DeclaredMethods.Where(Function(y) y.Name = FunctionNameToCall).Count > 0).FirstOrDefault
-        '    Else
-        '        'Gets function using ModuleName, if available
-        '        myFunctionType = myReflectionAssembly.DefinedTypes.Where(Function(x) x.Name = ModuleName AndAlso x.DeclaredMethods.Where(Function(y) y.Name = FunctionNameToCall).Count > 0).FirstOrDefault
-        '    End If
-
-        '    If Not IsNothing(myFunctionType) Then
-        '        myObject = myFunctionType.GetMethod(FunctionNameToCall).Invoke(myFunctionType, New Object() {FunctionParameters})
-        '    Else
-        '        myObject = Nothing
-        '    End If
-        '    Return myObject
-        'End Function
 
         Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeReceivable.Click
             Dim childMdiForm As ErJournalEntry
@@ -1220,6 +1188,12 @@ Namespace PresentationLayer.Views.Forms
                 TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
             Else
                 TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+            End If
+            CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
+            If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+                GlobalVariables.RightToLeftLayout = True
+            Else
+                GlobalVariables.RightToLeftLayout = False
             End If
             TranslateFormNew()
             ToolStripButtonArabic.Visible = originalUi

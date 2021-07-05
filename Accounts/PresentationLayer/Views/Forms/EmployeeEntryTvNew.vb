@@ -28,10 +28,25 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = txtEmployeeName
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            tbcEmployee.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-            tbcEmployee.RightToLeft = RightToLeft.Inherit
-            DataGridViewEarnings.ShowFooter = True
-            DataGridViewDeductions.ShowFooter = True
+            'If GlobalVariables.RightToLeftLayout Then
+            '    SwitchUiLanguage(False)
+            '    'If FormCulture.TextInfo.IsRightToLeft Then
+            '    '    RightToLeftLayout = True
+            '    '    RightToLeft = RightToLeft.Yes
+            '    'Else
+            '    '    RightToLeftLayout = False
+            '    '    RightToLeft = RightToLeft.No
+            '    'End If
+            '    'If CultureInfo.CurrentUICulture.Name <> CultureInfo.CurrentCulture.Name Then
+            '    '    CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture
+            '    'End If
+            '    'CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
+            'End If
+            'tbcEmployee.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+            'tbcEmployee.RightToLeft = RightToLeft.Inherit
+            'DataGridViewEarnings.ShowFooter = True
+            'DataGridViewDeductions.ShowFooter = True
+
 
         End Sub
 
@@ -476,12 +491,18 @@ Namespace PresentationLayer.Views.Forms
         }
         End Sub
 
-        Private Sub EmployeeEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            DataGridViewEarnings.DgvFooter.ColumnToSum("dgvEarningAmount") = True
-            DataGridViewEarnings.DgvFooter.SetText("dgvEarningIdNo", "Totals ->")
-            DataGridViewDeductions.DgvFooter.ColumnToSum("dgvDeductionAmount") = True
-            DataGridViewDeductions.DgvFooter.SetText("dgvDeductionIdNo", "Totals ->")
-        End Sub
+        'Private Sub EmployeeEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    'If GlobalVariables.RightToLeftLayout Then
+        '    '    SwitchUiLanguage(True)
+        '    '    SwitchUiLanguage(False)
+        '    'Else
+        '    '    SwitchUiLanguage(True)
+        '    'End If
+        '    DataGridViewEarnings.DgvFooter.ColumnToSum("dgvEarningAmount") = True
+        '    DataGridViewEarnings.DgvFooter.SetText("dgvEarningIdNo", "Totals ->")
+        '    DataGridViewDeductions.DgvFooter.ColumnToSum("dgvDeductionAmount") = True
+        '    DataGridViewDeductions.DgvFooter.SetText("dgvDeductionIdNo", "Totals ->")
+        'End Sub
 
         Private Sub BindEmployeeDeduction()
             SuspendLayout()

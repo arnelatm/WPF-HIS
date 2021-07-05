@@ -823,10 +823,6 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub OnFormShow()
-
-    End Sub
-
     'Private Sub ClearData()
     '    Dim allCtrl As New List(Of Control)
     '    Dim initValue = ""

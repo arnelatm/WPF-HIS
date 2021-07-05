@@ -214,6 +214,45 @@ Public Class BfMain
 
     End Sub
 
+    Public Sub TranslateForm2()
+        Visible = False
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+            GlobalVariables.RightToLeftLayout = True
+            RightToLeft = RightToLeft.Yes
+            RightToLeftLayout = True
+        Else
+            GlobalVariables.RightToLeftLayout = False
+            RightToLeft = RightToLeft.No
+            RightToLeftLayout = False
+        End If
+        Dim myImage As Bitmap
+        myImage = BackgroundImage
+        BackgroundImage = Nothing
+        If GlobalVariables.TranslationMode Then
+            TranslateCaptions(TextDisplayLanguage)
+        End If
+        BackgroundImage = myImage
+        If GlobalVariables.TranslationMode Then
+            RaiseEvent AfterTranslateForm()
+        End If
+        Visible = True
+    End Sub
+
+    Public Sub TranslateFormNew()
+        Dim cmd As String
+        DoubleBuffered = True
+        If GlobalVariables.TranslationMode Then
+            CaptionCollection = StoreCaptions1.StoreCaptions(Me)
+            DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
+            If ViewDisplayName Is Nothing Then
+                ViewDisplayName = Name
+            End If
+            cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
+            VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
+            TranslateForm2()
+        End If
+    End Sub
+
     Protected Sub RunTranslator(ByVal nSystemViewIdNo)
         Dim frm As New TranslationTableManager()
         frm.SystemViewIdNoToTranslate = nSystemViewIdNo

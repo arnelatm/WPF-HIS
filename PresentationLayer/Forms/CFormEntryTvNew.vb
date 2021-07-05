@@ -15,21 +15,21 @@ Public Class CFormEntryTvNew
 
     Public Property TreeViewData As New Object
 
-    Private Sub BfTvEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        If GlobalVariables.RightToLeftLayout Then
-            RightToLeft = RightToLeft.Yes
-            RightToLeftLayout = True
-            FormTreeView.RightToLeft = RightToLeft.Yes
-            FormTreeView.RightToLeftLayout = True
-        Else
-            RightToLeft = RightToLeft.No
-            RightToLeftLayout = False
-            FormTreeView.RightToLeft = RightToLeft.No
-            FormTreeView.RightToLeftLayout = False
-        End If
-        FormTreeView.ExpandAll()
-        TranslateFormNew()
-    End Sub
+    'Private Sub BfTvEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+    '    'If GlobalVariables.RightToLeftLayout Then
+    '    '    RightToLeft = RightToLeft.Yes
+    '    '    RightToLeftLayout = True
+    '    '    FormTreeView.RightToLeft = RightToLeft.Yes
+    '    '    FormTreeView.RightToLeftLayout = True
+    '    'Else
+    '    '    RightToLeft = RightToLeft.No
+    '    '    RightToLeftLayout = False
+    '    '    FormTreeView.RightToLeft = RightToLeft.No
+    '    '    FormTreeView.RightToLeftLayout = False
+    '    'End If
+    '    'FormTreeView.ExpandAll()
+    '    'TranslateFormNew()
+    'End Sub
 
     Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
         MyBase.SwitchUiLanguage(originalUi)

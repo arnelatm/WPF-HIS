@@ -32,7 +32,7 @@ Public Class BFMainNew
     Protected Shared ResetEvent As AutoResetEvent = New AutoResetEvent(False)
     Public Dv As DataView
     Public MyErrorProvider As New ErrorProviderExtended
-    Private PresenterObj As Object
+    Public PresenterObj As Object
 
     Public Event AfterTranslateForm()
 
@@ -83,31 +83,31 @@ Public Class BFMainNew
         End Set
     End Property
 
-    Protected Sub SetFormCulture(cCultureInfo As CultureInfo)
-        FormCulture = cCultureInfo
+    'Protected Sub SetFormCulture(cCultureInfo As CultureInfo)
+    '    FormCulture = cCultureInfo
 
-        If FormCulture.TextInfo.IsRightToLeft Then
-            RightToLeftLayout = True
-        Else
-            RightToLeftLayout = False
-        End If
-        If CultureInfo.CurrentUICulture.Name <> CultureInfo.CurrentCulture.Name Then
-            CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture
-        End If
-        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
-    End Sub
+    '    If FormCulture.TextInfo.IsRightToLeft Then
+    '        RightToLeftLayout = True
+    '    Else
+    '        RightToLeftLayout = False
+    '    End If
+    '    If CultureInfo.CurrentUICulture.Name <> CultureInfo.CurrentCulture.Name Then
+    '        CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture
+    '    End If
+    '    CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
+    'End Sub
 
     Protected Property FormCulture As CultureInfo
 
-    Public Sub SetupDisplay()
-        If IsRightToLeft(_textDisplayLanguage) Then
-            RightToLeft = RightToLeft.Yes
-            RightToLeftLayout = True
-        Else
-            RightToLeft = RightToLeft.No
-            RightToLeftLayout = False
-        End If
-    End Sub
+    'Public Sub SetupDisplay()
+    '    If IsRightToLeft(_textDisplayLanguage) Then
+    '        RightToLeft = RightToLeft.Yes
+    '        RightToLeftLayout = True
+    '    Else
+    '        RightToLeft = RightToLeft.No
+    '        RightToLeftLayout = False
+    '    End If
+    'End Sub
 
     Function IsTranslatable(ByRef ctrl As Control) As Boolean
         If TypeOf ctrl Is IEntryControl Then
@@ -273,9 +273,9 @@ Public Class BFMainNew
                         '_originalText = CaptionCollection.Item(cCtrl.Name)
                         'r = Dv.Find(_originalText)
                         'If r >= 0 Then
-                        '    CType(cCtrl, DataGridView).Text = Dv(r).Item(1)
+                        ' CType(cCtrl, DataGridView).Text = Dv(r).Item(1)
                         'Else
-                        '    CType(cCtrl, DataGridView).Text = cCtrl.Tag
+                        'CType(cCtrl, DataGridView).Text = cCtrl.Tag
                         'End If
                         TranslateDataGridView(cCtrl)
                     ElseIf TypeOf cCtrl Is DataGrid Then
@@ -488,7 +488,6 @@ Public Class BFMainNew
     Private Sub BFMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             RaiseEvent BeforeLoad()
-            'TranslateFormNew()
         End If
     End Sub
 
