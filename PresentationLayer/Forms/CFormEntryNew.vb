@@ -135,6 +135,7 @@ Public Class CFormEntryNew
     '    End Set
     'End Property
 
+
     Public Sub FindFieldNew(findableControl As IFindableControl)
         Ea.PublishEvent(New FindFieldRequested(findableControl))
     End Sub
@@ -568,7 +569,13 @@ Public Class CFormEntryNew
         Else
             TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
         End If
-        TranslateForm()
+        'CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
+        'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+        '    GlobalVariables.RightToLeftLayout = True
+        'Else
+        '    GlobalVariables.RightToLeftLayout = False
+        'End If
+        TranslateFormNew()
         'PublishClickedButton(ButtonClicked.Undo)
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
