@@ -399,7 +399,7 @@ Public Class CComboBox
     Private Sub ResetCompletionList()
         _previousSearchterm = Nothing
         Try
-            SuspendLayout()
+            'SuspendLayout()
             'If _originalList Is Nothing OrElse _originalList.Count = 0 Then
             '    '_originalDataSource = DataSource
             '    _originalList = Items.Cast(Of Object)().ToArray()
@@ -416,7 +416,7 @@ Public Class CComboBox
             End If
             DatasourceProgrammaticChange = False
         Finally
-            ResumeLayout(True)
+            'ResumeLayout(True)
         End Try
     End Sub
 
@@ -446,7 +446,7 @@ Public Class CComboBox
         End If
         _previousSearchterm = _currentSearchTerm
         Try
-            SuspendLayout()
+            'SuspendLayout()
             Dim newList As Object()
             If String.IsNullOrEmpty(_currentSearchTerm) Then
                 If Items.Count = _originalList.Length Then
@@ -477,7 +477,7 @@ Public Class CComboBox
                 Text = _currentSearchTerm
                 [Select](_currentSearchTerm.Length, 0)
             End If
-            ResumeLayout(True)
+            'ResumeLayout(True)
         End Try
     End Sub
 

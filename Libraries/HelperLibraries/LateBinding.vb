@@ -2,39 +2,36 @@
 
 Public NotInheritable Class LateBinding
 
-    Private Const InvokePublicMethod As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.InvokeMethod
-
-    Private Const GetPublicProperty As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.GetProperty
-    Private Const GetPublicField As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.GetField
-
-    Private Const SetPublicProperty As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.SetProperty
-    Private Const SetPublicField As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.SetField
+    Private Const InvokePublicMethodFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.InvokeMethod
+    Private Const GetPublicPropertyFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.GetProperty
+    Private Const GetPublicFieldFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.GetField
+    Private Const SetPublicPropertyFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.SetProperty
+    Private Const SetPublicNonPublicPropertyFieldFlags As BindingFlags = BindingFlags.Public Or BindingFlags.NonPublic Or BindingFlags.Instance Or BindingFlags.SetProperty Or BindingFlags.SetField
+    Private Const SetPublicFieldFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.SetField
 
     Public Shared Function InvokeFunction(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
-
-        'Return oObject.InvokeMember(sName, InvokePublicMethod, Nothing, oObject, yArguments)
-        Return oObject.GetType().InvokeMember(sName, InvokePublicMethod, Nothing, oObject, yArguments)
-
+        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+        Return oObject.GetType().InvokeMember(sName, InvokePublicMethodFlags, Nothing, oObject, yArguments)
     End Function
 
     Public Shared Function GetProperty(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
-
-        'Return oObject.InvokeMember(sName, GetPublicProperty, Nothing, oObject, yArguments)
-        Return oObject.GetType().InvokeMember(sName, GetPublicProperty, Nothing, oObject, yArguments)
-
+        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+        Return oObject.GetType().InvokeMember(sName, GetPublicPropertyFlags, Nothing, oObject, yArguments)
     End Function
 
     Public Shared Function GetField(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
+        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+        Return oObject.GetType().InvokeMember(sName, GetPublicFieldFlags, Nothing, oObject, yArguments)
+    End Function
 
-        'Return oObject.InvokeMember(sName, GetPublicProperty, Nothing, oObject, yArguments)
-        Return oObject.GetType().InvokeMember(sName, GetPublicField, Nothing, oObject, yArguments)
-
+    Public Shared Function SetPublicProperty(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
+        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+        Return oObject.GetType().InvokeMember(sName, SetPublicPropertyFlags, Nothing, oObject, yArguments)
     End Function
 
     Public Shared Function SetProperty(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
-
-        'Return oObject.InvokeMember(sName, SetPublicProperty, Nothing, oObject, yArguments)
-        Return oObject.GetType().InvokeMember(sName, SetPublicProperty, Nothing, oObject, yArguments)
+        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+        Return oObject.GetType().InvokeMember(sName, SetPublicNonPublicPropertyFieldFlags, Nothing, oObject, yArguments)
 
     End Function
 

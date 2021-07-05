@@ -10,13 +10,20 @@ Namespace PresentationLayer.Views.Forms
         Implements IEmployeeView
 
         Private _countryTelCodes As List(Of ClassesLibrary.LookupData)
-        Private _deductionsByName As List(Of ClassesLibrary.LookupData)
-        Private _earningsByName As List(Of ClassesLibrary.LookupData)
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _employeePhones As List(Of EmployeePhoneView)
-        Private _unit
+        Private _unit As List(Of ClassesLibrary.LookupData)
+
+        ' ReSharper disable once UnassignedField.Local
         Private _phoneTypes As List(Of ClassesLibrary.LookupData)
+
+        ' ReSharper disable once UnassignedField.Local
+        Private _deductionsByName As List(Of ClassesLibrary.LookupData)
+
+        ' ReSharper disable once UnassignedField.Local
+        Private _earningsByName As List(Of ClassesLibrary.LookupData)
+
         Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New()
@@ -381,43 +388,43 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EarningsByName As List(Of ClassesLibrary.LookupData)
-            Get
-                GetLookUpData("PayElement",
-                              "EarningsByName",
-                              "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-                Return _earningsByName
-            End Get
-            Set
-                _earningsByName = Value
-            End Set
-        End Property
+        'Public Property EarningsByName As List(Of ClassesLibrary.LookupData)
+        '    Get
+        '        CreateLookupData("PayElement",
+        '                      "EarningsByName",
+        '                      "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+        '        Return _earningsByName
+        '    End Get
+        '    Set
+        '        _earningsByName = Value
+        '    End Set
+        'End Property
 
-        Public Property DeductionsByName As List(Of ClassesLibrary.LookupData)
-            Get
-                GetLookUpData("PayElement",
-                              "DeductionsByName",
-                              "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-                Return _deductionsByName
-            End Get
-            Set
-                _countryTelCodes = Value
-            End Set
-        End Property
+        'Public Property DeductionsByName As List(Of ClassesLibrary.LookupData)
+        '    Get
+        '        CreateLookupData("PayElement",
+        '                      "DeductionsByName",
+        '                      "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+        '        Return _deductionsByName
+        '    End Get
+        '    Set
+        '        _countryTelCodes = Value
+        '    End Set
+        'End Property
 
-        Public Property PhoneTypes As List(Of ClassesLibrary.LookupData)
-            Get
-                GetLookUpData("PhoneType", "PhoneTypes")
-                Return _phoneTypes
-            End Get
-            Set
-                _phoneTypes = Value
-            End Set
-        End Property
+        'Public Property PhoneTypes As List(Of ClassesLibrary.LookupData)
+        '    Get
+        '        CreateLookupData("PhoneType", "PhoneTypes")
+        '        Return _phoneTypes
+        '    End Get
+        '    Set
+        '        _phoneTypes = Value
+        '    End Set
+        'End Property
 
         Public Property CountryTelCodes As List(Of ClassesLibrary.LookupData)
             Get
-                GetLookUpData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
+                CreateLookupData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
                 Return _countryTelCodes
             End Get
             Set
@@ -439,6 +446,12 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("Religion", cacReligionIdNo)
             CreateDataSource("PayCycle", cboPayCycleidNo)
             CreateDataSource("PayGroup", cboPayGroupIdNo)
+            _phoneTypes = GetLookupData("PhoneType", NameOf(_phoneTypes))
+            _deductionsByName = GetLookupData("PayElement", NameOf(_deductionsByName),
+                          "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            _earningsByName = GetLookupData("PayElement", NameOf(_earningsByName),
+                          "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            _unit = GetEnumData(Of PayRateUnitSelection)()
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -484,7 +497,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BindEmployeeDeduction()
-            SuspendLayout()
+            'SuspendLayout()
             bsDeductions.DataSource = Nothing
             DataGridViewDeductions.Refresh()
             bsDeductions.DataSource = RegularEmployeeDeductions
@@ -508,11 +521,11 @@ Namespace PresentationLayer.Views.Forms
                 dgvSequenceDeduction.DisplayOnly = True
                 dgvDeductionAmount.DisplayOnly = True
             End With
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
         Private Sub BindEmployeeEarning()
-            SuspendLayout()
+            'SuspendLayout()
             bsEarnings.DataSource = Nothing
             DataGridViewEarnings.Refresh()
             bsEarnings.DataSource = RegularEmployeeEarnings
@@ -524,23 +537,23 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewEarnings.Columns
-                dgvEarningIdNo.DataSource = EarningsByName
+                dgvEarningIdNo.DataSource = _earningsByName
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvEarningUnit.DataSource = GetEnumData(Of PayRateUnitSelection)()
+                dgvEarningUnit.DataSource = _unit
                 dgvEarningUnit.ValueMember = "Code"
                 dgvEarningUnit.DisplayMember = "Name"
                 dgvEarningUnit.DisplayStyleForCurrentCellOnly = True
                 dgvSequenceEarning.DisplayOnly = True
                 dgvEarningAmount.DisplayOnly = True
             End With
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
         Private Sub BindEmployeePhone()
-            SuspendLayout()
+            'SuspendLayout()
             bsPhones.DataSource = Nothing
             DataGridViewPhones.Refresh()
             bsPhones.DataSource = EmployeePhones
@@ -553,7 +566,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewPhones.Columns
                 dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvPhoneTypeIdNo.DataSource = PhoneTypes
+                dgvPhoneTypeIdNo.DataSource = _phoneTypes
                 dgvPhoneTypeIdNo.DisplayMember = "Name"
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
                 dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -571,7 +584,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvFullPhoneAra.Visible = False
                 dgvFullPhone.Visible = True
             End If
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
         Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
