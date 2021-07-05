@@ -16,6 +16,7 @@ Public Class CFormEntryTvNew
     Public Property TreeViewData As New Object
 
     Private Sub BfTvEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        SuspendLayout()
         If GlobalVariables.RightToLeftLayout Then
             RightToLeft = RightToLeft.Yes
             RightToLeftLayout = True
@@ -29,6 +30,7 @@ Public Class CFormEntryTvNew
         End If
         FormTreeView.ExpandAll()
         TranslateFormNew()
+        ResumeLayout()
     End Sub
 
     Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)

@@ -207,11 +207,10 @@ Public Class BfMain
             TranslateCaptions(TextDisplayLanguage)
         End If
         BackgroundImage = myImage
-        ResumeLayout()
         If GlobalVariables.TranslationMode Then
             RaiseEvent AfterTranslateForm()
         End If
-
+        ResumeLayout()
     End Sub
 
     Protected Sub RunTranslator(ByVal nSystemViewIdNo)
@@ -223,10 +222,10 @@ Public Class BfMain
     End Sub
 
     Protected Overridable Sub ChangeToLtrDisplay()
-        SuspendLayout()
+        'SuspendLayout()
         RightToLeftLayout = False
         RightToLeft = RightToLeft.No
-        ResumeLayout()
+        'ResumeLayout()
     End Sub
 
     'Private Function GetAvailableTranslationLanguageIdNo(ByVal desiredLanguage As String) As Int32
@@ -251,10 +250,10 @@ Public Class BfMain
     '    Return
     'End Function
     Protected Overridable Sub ChangeToRtlDisplay()
-        SuspendLayout()
+        'SuspendLayout()
         RightToLeftLayout = True
         RightToLeft = RightToLeft.Yes
-        ResumeLayout()
+        'ResumeLayout()
     End Sub
 
     Protected Function GetFallBackLanguageIdNo(ByVal desiredLanguage As String) As Int16

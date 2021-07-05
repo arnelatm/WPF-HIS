@@ -129,7 +129,7 @@ Public Class BfCalendarUmAlQura
 
             Return
         End If
-
+        SuspendLayout()
         If Days IsNot Nothing Then
 
             For i = 0 To m_iDaysInMonth - 1
@@ -154,7 +154,6 @@ Public Class BfCalendarUmAlQura
         Dim iRows = 0
         m_iDaysInMonth = If(HijriDate.Is29(iMonth, iYear) = 1, 29, 30)
         Days = New Label(m_iDaysInMonth - 1) {}
-        SuspendLayout()
 
         For i = 0 To m_iDaysInMonth - 1
             Days(i) = New Label()
@@ -184,12 +183,11 @@ Public Class BfCalendarUmAlQura
                 rcDay.Offset(rcSaturday.Width, 0)
             End If
         Next
-
-        ResumeLayout()
         m_iPreviousMonth = m_iMonth
         m_iPreviousYear = m_iYear
         lblTodayMark.Size = Days(0).Size
         RaiseEvent DateChanged(Me, New EventArgs())
+        ResumeLayout()
     End Sub
 
     Private Function IsSelectedDay(iDay As Integer, iMonth As Integer, iYear As Integer) As Boolean
