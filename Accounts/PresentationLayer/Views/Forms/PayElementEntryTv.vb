@@ -34,13 +34,15 @@ Namespace PresentationLayer.Views.Forms
         Private cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
 
         Public Sub New()
-
             MyBase.New()
-            ' This call is required by the designer.
-            InitializeComponent()
+            'Visible = False
+            SuspendLayout()
             DoubleBuffered = True
             FirstControl = txtPayElementCode
-
+            ' This call is required by the designer.
+            InitializeComponent()
+            ResumeLayout()
+            'Visible = True
         End Sub
 
 #Region "Fields"
@@ -320,7 +322,7 @@ Namespace PresentationLayer.Views.Forms
                     cboCalculationType.SelectedValue = -1
                 End If
                 DoubleBuffered = True
-                SuspendLayout()
+                'SuspendLayout()
                 floCalculation.Visible = False
                 lblDefaultQuantity.Visible = True
                 txtDefaultQuantity.Visible = True
@@ -328,7 +330,7 @@ Namespace PresentationLayer.Views.Forms
                 cboUnit.Visible = True
                 tlpCalculation.SetCellPosition(cboUnit, cellPosQtyUnit)
                 floCalculation.Visible = True
-                ResumeLayout()
+                'ResumeLayout()
             End If
         End Sub
 
@@ -348,15 +350,15 @@ Namespace PresentationLayer.Views.Forms
             CreateEnumDataSource(Of PayRateUnitSelection)(cboUnit)
             CreateEnumDataSource(Of QuantityTypeSelection)(cboQuantityType)
             CreateEnumDataSource(Of PayElementTypeSelection)(cboPayElementType)
+            CreateDataSource("PayElement", cboBasePaymentIdNo)
+            CreateDataSource("Account", cboAccountIdNo, "AccountName", "DetailAccount=1")
             _factorTypeByCode = GetEnumData(Of FactorTypeSelection)()
             _calculationTypeByCode = GetEnumData(Of CalculationTypeSelection)()
-            GetLookUpData("PayElementGroup", "_earnReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
-            GetLookUpData("PayElementGroup", "_dedReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
-            CreateDataSource("PayElement", cboBasePaymentIdNo)
-            GetLookUpData("PayGroup", "_payGroupsByCode")
-            GetLookUpData("PayElement", "_payElementsByCode")
-            GetLookUpData("Account", "_accountsByCode", "AccountName", "DetailAccount=1")
-            CreateDataSource("Account", cboAccountIdNo, "AccountName", "DetailAccount=1")
+            CreateLookupData("PayElementGroup", "_earnReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
+            CreateLookupData("PayElementGroup", "_dedReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
+            _payGroupsByCode = GetLookupData("PayGroup", NameOf(_payGroupsByCode))
+            _payElementsByCode = GetLookupData("PayElement", NameOf(_payElementsByCode))
+            _accountsByCode = GetLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
             UpdateReportGroup()
         End Sub
 
@@ -370,7 +372,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BindPayElementAccounts()
-            SuspendLayout()
+            'SuspendLayout()
             bsPayElementAccounts.DataSource = Nothing
             DataGridViewPayElementAccounts.Refresh()
             bsPayElementAccounts.DataSource = PayElementAccounts
@@ -393,7 +395,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
             End With
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -440,7 +442,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BindPayElementItems()
-            SuspendLayout()
+            'SuspendLayout()
             bsPayElementItems.DataSource = Nothing
             DataGridViewPayElementItems.Refresh()
             bsPayElementItems.DataSource = PayElementItems
@@ -462,11 +464,13 @@ Namespace PresentationLayer.Views.Forms
                 dgvFactorType.DisplayMember = "Name"
                 dgvFactorType.DisplayStyleForCurrentCellOnly = True
             End With
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
         Private Sub UpdateCalculationTabDisplay()
-            SuspendLayout()
+            'DoubleBuffered = True
+            'SuspendLayout()
+            'floDataDisplay.Visible = False
             floCalculation.Visible = False
             tlpCalculation.Visible = False
             Dim curCalculationType = CodeToEnum(Of CalculationTypeSelection)(cboCalculationType.SelectedValue)
@@ -566,13 +570,17 @@ Namespace PresentationLayer.Views.Forms
                 tlpCalculation.Visible = True
                 floCalculation.Visible = True
             End If
-            ResumeLayout()
+            'floDataDisplay.Visible = True
+            'ResumeLayout(False)
+            'PerformLayout()
         End Sub
 
         Private Sub PayElementEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            'SuspendLayout()
             ImageListTreeView.Images.Add(Image.FromFile("Images\Deduction.png"))
             ImageListTreeView.Images.Add(Image.FromFile("Images\Earning.png"))
             FormTreeView.ImageList = ImageListTreeView
+            'ResumeLayout()
         End Sub
 
         Private Sub ChkUsePayGroups_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsePayGroups.CheckedChanged
@@ -580,6 +588,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdatePostingTabDisplay()
+            SuspendLayout()
+            'floDataDisplay.Visible = False
             If Not chkSummary.Checked Then
                 If UsePayGroupSetting Then
                     DataGridViewPayElementAccounts.Visible = True
@@ -600,6 +610,9 @@ Namespace PresentationLayer.Views.Forms
                     DataGridViewPayElementAccounts.Visible = False
                 End If
             End If
+            'floDataDisplay.Visible = True
+            ResumeLayout(False)
+            'PerformLayout()
         End Sub
 
         Private Sub tbpCalculation_Enter(sender As Object, e As EventArgs) Handles tbpCalculation.Enter

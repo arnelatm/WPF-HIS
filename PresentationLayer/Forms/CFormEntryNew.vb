@@ -632,23 +632,42 @@ Public Class CFormEntryNew
         End If
     End Sub
 
-    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String)
+    'Protected Overloads Sub CreateLookupData(tableName As String, ByRef targetLookup As List(Of ClassesLibrary.LookupData), Optional filter As String = Nothing)
+    '    Dim varName = NameOf(targetLookup)
+    '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, varName, filter))
+    'End Sub
+
+    'Protected Function CreateLookupData(tableName As String, targetProperty As String) As List(Of ClassesLibrary.LookupData)
+    '    Dim data As List(Of ClassesLibrary.LookupData)
+    '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
+    '    Return data
+    'End Function
+
+    ' ReSharper disable once UnassignedField.Local
+    Public DataLookupFunctionVariable As List(Of ClassesLibrary.LookupData)
+
+    Protected Function GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, "DataLookupFunctionVariable", filter))
+        Return DataLookupFunctionVariable
+    End Function
+
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String)
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
     End Sub
 
-    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String, filter As String)
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, filter As String)
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, filter))
     End Sub
 
-    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String, sortKey As String, filter As String)
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortKey As String, filter As String)
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortKey, filter))
     End Sub
 
-    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, fields, filter))
     End Sub
 
-    Protected Overloads Sub GetLookUpData(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
     End Sub
 

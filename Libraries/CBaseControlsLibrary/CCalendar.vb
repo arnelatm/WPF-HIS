@@ -144,6 +144,7 @@ Public Class CCalendar
         '    End If
         '    Return
         'End If
+        SuspendLayout()
         If Days IsNot Nothing Then
             For i = 0 To Days.Count - 1 ' m_iDaysInMonth - 1
                 Days(i).Dispose()
@@ -163,8 +164,6 @@ Public Class CCalendar
         Dim iRows = 0
         m_iDaysInMonth = TargetCalendar.GetDaysInMonth(iYear, iMonth)
         Days = New Label(m_iDaysInMonth - 1) {}
-        SuspendLayout()
-
         For i = 0 To m_iDaysInMonth - 1
             Days(i) = New Label()
             Days(i).Bounds = rcDay
@@ -193,12 +192,11 @@ Public Class CCalendar
                 rcDay.Offset(rcSaturday.Width, 0)
             End If
         Next
-
-        ResumeLayout()
         m_iPreviousMonth = _Month
         m_iPreviousYear = _Year
         lblTodayMark.Size = Days(0).Size
         RaiseEvent DateChanged(Me, New EventArgs())
+        ResumeLayout()
     End Sub
 
     Private Function IsSelectedDay(iDay As Integer, iMonth As Integer, iYear As Integer) As Boolean

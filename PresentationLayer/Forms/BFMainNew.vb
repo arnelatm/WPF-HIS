@@ -67,7 +67,6 @@ Public Class BFMainNew
 
     Public Property CancelClose As Boolean
 
-
     Public Property Errors As List(Of String) Implements IView.Errors
 
     Protected Property TextDisplayLanguage As String
@@ -145,11 +144,15 @@ Public Class BFMainNew
     End Function
 
     Public Sub TranslateForm()
-        Visible = False
+        DoubleBuffered = True
+        SuspendLayout()
+        Hide()
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+            'Visible = False
             GlobalVariables.RightToLeftLayout = True
             RightToLeft = RightToLeft.Yes
             RightToLeftLayout = True
+            'Visible = True
         Else
             GlobalVariables.RightToLeftLayout = False
             RightToLeft = RightToLeft.No
@@ -165,7 +168,8 @@ Public Class BFMainNew
         If GlobalVariables.TranslationMode Then
             RaiseEvent AfterTranslateForm()
         End If
-        Visible = True
+        ResumeLayout()
+        Show()
     End Sub
 
     Protected Sub RunTranslator(ByVal nSystemViewIdNo)
@@ -177,10 +181,10 @@ Public Class BFMainNew
     End Sub
 
     Protected Overridable Sub ChangeToLtrDisplay()
-        SuspendLayout()
+        'SuspendLayout()
         RightToLeft = RightToLeft.No
         RightToLeftLayout = False
-        ResumeLayout()
+        'ResumeLayout()
     End Sub
 
     Protected Overridable Sub ChangeToRtlDisplay()
