@@ -350,9 +350,11 @@ Namespace PresentationLayer.Views.Forms
             Dim x As TP = New TP
             Dim y As TF = New TF
             Dim childMdiForm = Activator.CreateInstance(y.GetType())
+            childMdiForm.Visible = False
             Dim presenter = Activator.CreateInstance(x.GetType(), {childMdiForm})
             childMdiForm.MdiParent = Me
             childMdiForm.Show()
+
         End Sub
 
         'Private Sub RunForm(Of TF As New, TP As New)()

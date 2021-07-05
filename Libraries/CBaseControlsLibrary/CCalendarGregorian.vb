@@ -89,6 +89,7 @@ Public Class CCalendarGregorian
             End If
             Return
         End If
+        SuspendLayout()
         If Days IsNot Nothing Then
             For i = 0 To m_iDaysInMonth - 1
                 Days(i).Dispose()
@@ -108,8 +109,6 @@ Public Class CCalendarGregorian
         Dim iRows = 0
         m_iDaysInMonth = TargetCalendar.GetDaysInMonth(iYear, iMonth)
         Days = New Label(m_iDaysInMonth - 1) {}
-        SuspendLayout()
-
         For i = 0 To m_iDaysInMonth - 1
             Days(i) = New Label()
             Days(i).Bounds = rcDay
@@ -138,7 +137,6 @@ Public Class CCalendarGregorian
                 rcDay.Offset(rcSaturday.Width, 0)
             End If
         Next
-
         ResumeLayout()
         m_iPreviousMonth = _Month
         m_iPreviousYear = _Year

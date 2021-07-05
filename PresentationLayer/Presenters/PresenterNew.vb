@@ -2333,6 +2333,14 @@ End Class
 
 Public Class GetLookupDataRequested
 
+    'Public Sub New(ByVal tableName As String, ByRef view As Control, ByRef targetLookup As List(Of ClassesLibrary.LookupData), ByVal Optional filter As String = Nothing)
+    '    Me.TableName = tableName
+    '    Me.TargetProperty = TargetProperty
+    '    Me.Filter = filter
+    '    Me.View = view
+    '    Me.TargetLookup = targetLookup
+    'End Sub
+
     Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
         Me.TargetProperty = targetProperty
@@ -2371,6 +2379,7 @@ Public Class GetLookupDataRequested
     Public Property Fields As String()
     Public Property Filter As String
     Public Property SortKey As String
+    'Public Property TargetLookup As List(Of ClassesLibrary.LookupData)
 End Class
 
 Public Class GetEnumListRequested
