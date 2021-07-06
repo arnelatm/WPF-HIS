@@ -28,7 +28,7 @@ Public Class CFormEntryTvNew
     '    '    FormTreeView.RightToLeftLayout = False
     '    'End If
     '    'FormTreeView.ExpandAll()
-    '    'TranslateFormNew()
+    '    'GetNSaveCaptions()
     'End Sub
 
     Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)

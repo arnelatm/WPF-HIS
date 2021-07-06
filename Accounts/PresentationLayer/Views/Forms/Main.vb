@@ -1071,7 +1071,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripButtonLTR_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnglish.Click
             SwitchUiLanguage(True)
             'TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-            'TranslateFormNew()
+            'GetNSaveCaptions()
             'ToolStripButtonArabic.Visible = True
             'ToolStripButtonEnglish.Visible = False
 
@@ -1108,7 +1108,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripButtonRTL_Click(sender As Object, e As EventArgs) Handles ToolStripButtonArabic.Click
             SwitchUiLanguage(False)
             'TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-            'TranslateFormNew()
+            'GetNSaveCaptions()
             'ToolStripButtonArabic.Visible = False
             'ToolStripButtonEnglish.Visible = True
             'TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
