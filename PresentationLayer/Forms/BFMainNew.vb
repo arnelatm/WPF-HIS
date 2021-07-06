@@ -152,7 +152,7 @@ Public Class BFMainNew
         VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
         DoubleBuffered = True
         SuspendLayout()
-        Hide()
+        Visible = False
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             'Visible = False
             GlobalVariables.RightToLeftLayout = True
@@ -174,10 +174,11 @@ Public Class BFMainNew
         If GlobalVariables.TranslationMode Then
             RaiseEvent AfterTranslateForm()
         End If
-        ResumeLayout(False)
+        'ResumeLayout(True)
         'IgnoreLoad = True
-        Show()
+        'Show()
         'IgnoreLoad = False
+        Visible = True
     End Sub
 
     Protected Sub RunTranslator(ByVal nSystemViewIdNo)
