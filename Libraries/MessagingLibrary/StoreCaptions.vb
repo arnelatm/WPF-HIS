@@ -24,38 +24,38 @@ Public Class StoreCaptions
     Public Captions As New Collection
 
     Function StoreCaptions(ByVal frm As Object) As Collection
-        Dim SystemViewIdNo As Int16
-        Dim ViewDisplayName As String
+        Dim systemViewIdNo As Int16
+        Dim viewDisplayName As String
         _dAc1 = frm.TranslatorDAC
         frm.Tag = frm.Text
         If frm.ViewDisplayName Is Nothing Then
-            ViewDisplayName = frm.Name
+            viewDisplayName = frm.Name
         Else
-            ViewDisplayName = frm.ViewDisplayName
+            viewDisplayName = frm.ViewDisplayName
         End If
-        InsertForm(ViewDisplayName)
-        SystemViewIdNo = GetSystemViewIdNo(ViewDisplayName)
-        InsertTranslation(frm.Text, SystemViewIdNo)
+        InsertForm(viewDisplayName)
+        systemViewIdNo = GetSystemViewIdNo(viewDisplayName)
+        InsertTranslation(frm.Text, systemViewIdNo)
         Dim t As String
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
             If TypeOf cCtrl Is MenuStrip Then
                 Dim subMenuName = cCtrl.Name
                 Dim menuStrip As MenuStrip = cCtrl
-                SetMenuStripItems(menuStrip.Items, subMenuName, SystemViewIdNo)
+                StoreMenuStripTranslation(menuStrip.Items, subMenuName, systemViewIdNo)
             ElseIf TypeOf cCtrl Is ToolStrip Then
                 Dim subMenuName = ""
                 Dim toolStrip As ToolStrip = cCtrl
                 Dim c As ToolStrip
                 c = cCtrl
                 For Each obj As Object In c.Items
-                    TranslateToolStrip(SystemViewIdNo, c, obj)
+                    TranslateToolStrip(systemViewIdNo, c, obj)
                 Next
             ElseIf TypeOf cCtrl Is DataGridView Then
                 Dim c As DataGridView
                 c = cCtrl
                 For Each col As DataGridViewColumn In c.Columns
-                    TranslateDataGridView(SystemViewIdNo, c, col)
+                    TranslateDataGridView(systemViewIdNo, c, col)
                 Next
             ElseIf TypeOf cCtrl Is DataGrid Then
                 t = CType(cCtrl, DataGrid).CaptionText
@@ -83,7 +83,7 @@ Public Class StoreCaptions
                         If Not String.IsNullOrWhiteSpace(t) Then
                             cCtrl.Tag = t
                             Captions.Add(cCtrl.Text, cCtrl.Name)
-                            InsertTranslation(t, SystemViewIdNo)
+                            InsertTranslation(t, systemViewIdNo)
                         End If
                     End If
                 Catch ex As Exception
@@ -91,6 +91,74 @@ Public Class StoreCaptions
                 End Try
             End If
             'End If
+        Next
+        Return Captions
+    End Function
+
+    Function StoreTranslation(ByVal frm As Object) As Collection
+        Dim systemViewIdNo As Int16
+        Dim viewDisplayName As String
+        _dAc1 = frm.TranslatorDAC
+        SaveOriginalText(frm, frm.Text)
+        frm.Tag = frm.Text
+        If frm.ViewDisplayName Is Nothing Then
+            viewDisplayName = frm.Name
+        Else
+            viewDisplayName = frm.ViewDisplayName
+        End If
+        InsertForm(viewDisplayName)
+        systemViewIdNo = GetSystemViewIdNo(viewDisplayName)
+        InsertTranslation(frm.Text, systemViewIdNo)
+        Dim t As String
+        Dim allCtrl As New List(Of Control)
+        For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
+            If TypeOf cCtrl Is MenuStrip Then
+                Dim subMenuName = cCtrl.Name
+                Dim menuStrip As MenuStrip = cCtrl
+                StoreMenuStripTranslation(menuStrip.Items, subMenuName, systemViewIdNo)
+            ElseIf TypeOf cCtrl Is ToolStrip Then
+                Dim subMenuName = ""
+                Dim toolStrip As ToolStrip = cCtrl
+                Dim c As ToolStrip
+                c = cCtrl
+                For Each obj As Object In c.Items
+                    StoreToolStripTranslation(systemViewIdNo, c, obj)
+                Next
+            ElseIf TypeOf cCtrl Is DataGridView Then
+                Dim c As DataGridView
+                c = cCtrl
+                For Each col As DataGridViewColumn In c.Columns
+                    StoreDataGridViewTranslation(systemViewIdNo, c, col)
+                Next
+            ElseIf TypeOf cCtrl Is DataGrid Then
+                Captions.Add(cCtrl.Text, cCtrl.Name)
+            Else
+                Try
+                    If TypeOf cCtrl Is TextBox OrElse
+                       TypeOf cCtrl Is ComboBox OrElse
+                       TypeOf cCtrl Is MaskedTextBox OrElse
+                       TypeOf cCtrl Is FlowLayoutPanel Then
+                    Else
+                        'TypeOf cCtrl Is Button OrElse
+                        'TypeOf cCtrl Is Label OrElse
+                        'TypeOf cCtrl Is CheckBox OrElse
+                        'TypeOf cCtrl Is RadioButton OrElse
+                        'TypeOf cCtrl Is TabControl OrElse
+                        'TypeOf cCtrl Is TreeView OrElse
+                        'TypeOf cCtrl Is Form OrElse
+                        'TypeOf cCtrl Is DataGrid OrElse
+                        'TypeOf cCtrl Is TabPage Then
+                        'TypeOf cCtrl Is AATM.Libraries.CBaseControlsLibrary.CButton Then
+                        t = cCtrl.Text
+                        If Not String.IsNullOrWhiteSpace(t) Then
+                            Captions.Add(cCtrl.Text, cCtrl.Name)
+                            InsertTranslation(t, systemViewIdNo)
+                        End If
+                    End If
+                Catch ex As Exception
+
+                End Try
+            End If
         Next
         Return Captions
     End Function
@@ -119,13 +187,57 @@ Public Class StoreCaptions
         End Try
     End Sub
 
-    Private Sub TranslateDataGridView(SystemViewIdNo As Short, c As DataGridView, obj As Object)
+    Private Sub StoreToolStripTranslation(systemViewIdNo As Short, c As ToolStrip, obj As Object)
+        Dim t As String
+        Try
+            If Not String.IsNullOrEmpty(obj.Text) Then
+                t = obj.Text
+                Captions.Add(t, c.Name + "." + obj.Name + ".Text")
+                InsertTranslation(t, systemViewIdNo)
+            Else
+                ' add an empty place holder
+                Captions.Add("", c.Name + "." + obj.Name + ".Text")
+            End If
+            If Not String.IsNullOrEmpty(obj.ToolTipText) Then
+                t = obj.ToolTipText
+                Captions.Add(t, c.Name + "." + obj.Name + ".ToolTipText")
+                InsertTranslation(t, systemViewIdNo)
+            Else
+                Captions.Add("", c.Name + "." + obj.Name + ".ToolTipText")
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub SaveOriginalText(ByRef originalObject As Object, originalText As Object)
+        originalObject.Tag = originalText
+    End Sub
+
+    Private Sub SaveOriginalToolStripText(systemViewIdNo As Short, c As ToolStrip, obj As Object)
+        obj.Tag = {obj.Text, obj.ToolTipText}
+    End Sub
+
+    Private Sub TranslateDataGridView(systemViewIdNo As Short, c As DataGridView, obj As Object)
         Dim t As String
         Try
             For Each col As DataGridViewColumn In c.Columns
                 t = col.HeaderText
                 Captions.Add(t, c.Name + "." + col.HeaderText)
-                InsertTranslation(t, SystemViewIdNo)
+                InsertTranslation(t, systemViewIdNo)
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub StoreDataGridViewTranslation(systemViewIdNo As Short, c As DataGridView, obj As Object)
+        Dim t As String
+        Try
+            For Each col As DataGridViewColumn In c.Columns
+                t = col.HeaderText
+                Captions.Add(t, c.Name + "." + col.HeaderText)
+                InsertTranslation(t, systemViewIdNo)
             Next
         Catch ex As Exception
 
@@ -136,7 +248,28 @@ Public Class StoreCaptions
     '    InsertMessage(message)
     'End Sub
 
-    Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, SystemViewIdNo As Int16)
+    Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, systemViewIdNo As Int16)
+        'Try
+        '    For Each obj As Object In dropDownItems
+        '        Dim subMenu = TryCast(obj, ToolStripMenuItem)
+        '        If subMenu IsNot Nothing Then
+        '            subMenuName = subMenuName + "." + obj.Name
+        '            If Not String.IsNullOrEmpty(obj.Text) Then
+        '                Captions.Add(obj.text, subMenuName)
+        '                InsertTranslation(obj.Text, systemViewIdNo)
+        '                obj.Tag = obj.Text
+        '            End If
+        '            If subMenu.HasDropDownItems Then
+        '                SetMenuStripItems(subMenu.DropDownItems, subMenuName, systemViewIdNo)
+        '            End If
+        '        End If
+        '    Next
+        'Catch ex As Exception
+        '    MessageBox.Show(ex.Message, $"SetMenuStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+        'End Try
+    End Sub
+
+    Private Sub StoreMenuStripTranslation(dropDownItems As ToolStripItemCollection, subMenuName As String, systemViewIdNo As Int16)
         Try
             For Each obj As Object In dropDownItems
                 Dim subMenu = TryCast(obj, ToolStripMenuItem)
@@ -144,24 +277,85 @@ Public Class StoreCaptions
                     subMenuName = subMenuName + "." + obj.Name
                     If Not String.IsNullOrEmpty(obj.Text) Then
                         Captions.Add(obj.text, subMenuName)
-                        InsertTranslation(obj.Text, SystemViewIdNo)
-                        obj.Tag = obj.Text
+                        InsertTranslation(obj.Text, systemViewIdNo)
                     End If
                     If subMenu.HasDropDownItems Then
-                        SetMenuStripItems(subMenu.DropDownItems, subMenuName, SystemViewIdNo)
+                        StoreMenuStripTranslation(subMenu.DropDownItems, subMenuName, systemViewIdNo)
                     End If
-                    't = obj.Text
-                    'If Not String.IsNullOrEmpty(t) Then
-                    '    Captions.Add(obj.text, subMenuName + "." + obj.Name)
-                    '    InsertWord(obj.Text)
-                    '    InsertFormItem(SystemViewIdNo, obj.Text)
-                    'End If
                 End If
             Next
         Catch ex As Exception
             MessageBox.Show(ex.Message, $"SetMenuStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])
         End Try
     End Sub
+
+    Private Sub SaveOriginalMenuStripText(dropDownItems As ToolStripItemCollection, subMenuName As String)
+        For Each obj As Object In dropDownItems
+            Dim subMenu = TryCast(obj, ToolStripMenuItem)
+            If subMenu IsNot Nothing Then
+                subMenuName = subMenuName + "." + obj.Name
+                If Not String.IsNullOrEmpty(obj.Text) Then
+                    SaveOriginalText(obj, obj.Text)
+                End If
+                If subMenu.HasDropDownItems Then
+                    SaveOriginalMenuStripText(subMenu.DropDownItems, subMenuName)
+                End If
+            End If
+        Next
+    End Sub
+
+    Function SaveControlsOriginalText(ByVal frm As Object) As Collection
+        frm.Tag = frm.Text
+        Dim t As String
+        Dim allCtrl As New List(Of Control)
+        For Each cCtrl As Control In FindControlRecursive(allCtrl, frm)
+            If TypeOf cCtrl Is MenuStrip Then
+                Dim subMenuName = cCtrl.Name
+                Dim menuStrip As MenuStrip = cCtrl
+                SaveOriginalMenuStripText(menuStrip.Items, subMenuName)
+            ElseIf TypeOf cCtrl Is ToolStrip Then
+                Dim c As ToolStrip = cCtrl
+                For Each obj As Object In c.Items
+                    SaveOriginalText(obj, {obj.Text, obj.TooltipText})
+                Next
+            ElseIf TypeOf cCtrl Is DataGridView Then
+                Dim c As DataGridView = cCtrl
+                For Each col As DataGridViewColumn In c.Columns
+                    SaveOriginalText(col, col.HeaderText)
+                Next
+            ElseIf TypeOf cCtrl Is DataGrid Then
+                t = CType(cCtrl, DataGrid).CaptionText
+                SaveOriginalText(cCtrl, t)
+            Else
+                Try
+                    If TypeOf cCtrl Is TextBox OrElse
+                       TypeOf cCtrl Is ComboBox OrElse
+                       TypeOf cCtrl Is MaskedTextBox OrElse
+                       TypeOf cCtrl Is FlowLayoutPanel Then
+                        'Debugger.Break()
+                    Else
+                        'TypeOf cCtrl Is Button OrElse
+                        'TypeOf cCtrl Is Label OrElse
+                        'TypeOf cCtrl Is CheckBox OrElse
+                        'TypeOf cCtrl Is RadioButton OrElse
+                        'TypeOf cCtrl Is TabControl OrElse
+                        'TypeOf cCtrl Is TreeView OrElse
+                        'TypeOf cCtrl Is Form OrElse
+                        'TypeOf cCtrl Is DataGrid OrElse
+                        'TypeOf cCtrl Is TabPage Then
+                        'TypeOf cCtrl Is AATM.Libraries.CBaseControlsLibrary.CButton Then
+                        t = cCtrl.Text
+                        If Not String.IsNullOrWhiteSpace(t) Then
+                            SaveOriginalText(cCtrl, t)
+                        End If
+                    End If
+                Catch ex As Exception
+
+                End Try
+            End If
+        Next
+        Return Captions
+    End Function
 
     Friend Sub InsertWord(ByVal t As String)
         Dim cmd As String

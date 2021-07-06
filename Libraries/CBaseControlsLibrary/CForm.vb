@@ -15,6 +15,7 @@ Public Class CForm
     Public Property DefaultFormControlsForeColor As Color = Color.Black
     Public Property DefaultFormControlsReadOnlyBackColor As Color = Color.White
     Public Property DefaultFormControlsReadOnlyForeColor As Color = Color.Gray
+    Public Property IgnoreLoad As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -27,49 +28,51 @@ Public Class CForm
     Public Property ViewDisplayName As String
 
     Private Sub CForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim allControls As New List(Of Control)
+        If Not IgnoreLoad Then
+            Dim allControls As New List(Of Control)
 
-        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
-            If UseGlobalFormColor Then
-                BackColor = GlobalVariables.DefaultFormBackgroundColor
-                ForeColor = GlobalVariables.DefaultFormForegroundColor
-                DefaultFormControlsBackColor = GlobalVariables.DefaultFormBackgroundColor
-                DefaultFormControlsForeColor = GlobalVariables.DefaultFormForegroundColor
-                DefaultFormControlsBackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                DefaultFormControlsForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                DefaultFormControlsReadOnlyBackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                DefaultFormControlsReadOnlyForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            End If
-            'If System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            If GlobalVariables.RightToLeftLayout Then
-                'RightToLeftLayout = True
-                'RightToLeft = RightToLeft.Yes
-                'If GetPropertyValue(Me, "RightToLeftLayout") IsNot Nothing Then
-                '    Me.RightToLeftLayout = True
-                '    If GetPropertyValue(Me, "RightToLeft") IsNot Nothing Then
-                '       Me.RightToLeft = RightToLeft.Yes
-                '    End If
-                'End If
-                For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-                    If TypeOf cCtrl Is CButton OrElse TypeOf cCtrl Is Button Then
-                        If GetPropertyValue(cCtrl, "Image") IsNot Nothing Then
-                            Dim btnImageName As String
-                            btnImageName = (cCtrl.Name.ToString() + "_" + Strings.Left(CultureInfo.CurrentCulture.Name, 2)).ToLower()
-                            Dim resource As Object = My.Resources.ResourceManager.GetObject(btnImageName)
-                            If Not (resource Is Nothing) Then
-                                Dim i = CType(cCtrl, CButton)
-                                i.Image = DirectCast(resource, Image)
+            If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+                If UseGlobalFormColor Then
+                    BackColor = GlobalVariables.DefaultFormBackgroundColor
+                    ForeColor = GlobalVariables.DefaultFormForegroundColor
+                    DefaultFormControlsBackColor = GlobalVariables.DefaultFormBackgroundColor
+                    DefaultFormControlsForeColor = GlobalVariables.DefaultFormForegroundColor
+                    DefaultFormControlsBackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    DefaultFormControlsForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    DefaultFormControlsReadOnlyBackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    DefaultFormControlsReadOnlyForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                End If
+                'If System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+                If GlobalVariables.RightToLeftLayout Then
+                    'RightToLeftLayout = True
+                    'RightToLeft = RightToLeft.Yes
+                    'If GetPropertyValue(Me, "RightToLeftLayout") IsNot Nothing Then
+                    '    Me.RightToLeftLayout = True
+                    '    If GetPropertyValue(Me, "RightToLeft") IsNot Nothing Then
+                    '       Me.RightToLeft = RightToLeft.Yes
+                    '    End If
+                    'End If
+                    For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+                        If TypeOf cCtrl Is CButton OrElse TypeOf cCtrl Is Button Then
+                            If GetPropertyValue(cCtrl, "Image") IsNot Nothing Then
+                                Dim btnImageName As String
+                                btnImageName = (cCtrl.Name.ToString() + "_" + Strings.Left(CultureInfo.CurrentCulture.Name, 2)).ToLower()
+                                Dim resource As Object = My.Resources.ResourceManager.GetObject(btnImageName)
+                                If Not (resource Is Nothing) Then
+                                    Dim i = CType(cCtrl, CButton)
+                                    i.Image = DirectCast(resource, Image)
+                                End If
+                            ElseIf TypeOf cCtrl Is CTabControl OrElse TypeOf cCtrl Is TabControl Then
+                                Dim c = CType(cCtrl, CTabControl)
+                                c.RightToLeftLayout = True
+                                c.RightToLeft = RightToLeft.No
                             End If
-                        ElseIf TypeOf cCtrl Is CTabControl OrElse TypeOf cCtrl Is TabControl Then
-                            Dim c = CType(cCtrl, CTabControl)
-                            c.RightToLeftLayout = True
-                            c.RightToLeft = RightToLeft.No
                         End If
-                    End If
-                Next cCtrl
-            Else
-                'RightToLeftLayout = False
-                'RightToLeft = RightToLeft.No
+                    Next cCtrl
+                Else
+                    'RightToLeftLayout = False
+                    'RightToLeft = RightToLeft.No
+                End If
             End If
         End If
     End Sub

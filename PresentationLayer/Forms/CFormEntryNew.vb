@@ -135,7 +135,6 @@ Public Class CFormEntryNew
     '    End Set
     'End Property
 
-
     Public Sub FindFieldNew(findableControl As IFindableControl)
         Ea.PublishEvent(New FindFieldRequested(findableControl))
     End Sub
@@ -472,45 +471,46 @@ Public Class CFormEntryNew
     End Sub
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not IgnoreLoad Then
+            If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
 
-        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+                'AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
+                TextDisplayLanguage = CultureInfo.CurrentCulture.Name
+                CreateDataSources()
+                CreateMainFieldsDictionary()
+                PublishClickedButton(ButtonClicked.Last)
+                Inputs(False)
 
-            'AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
-            TextDisplayLanguage = CultureInfo.CurrentCulture.Name
-            CreateDataSources()
-            CreateMainFieldsDictionary()
-            PublishClickedButton(ButtonClicked.Last)
-            Inputs(False)
+                If Ea IsNot Nothing Then
+                    Ea.PublishEvent(New EntryFormLoaded(Me))
+                End If
 
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New EntryFormLoaded(Me))
+                If GlobalVariables.RightToLeftLayout Then
+                    btnArabic.Visible = False
+                    btnOriginal.Visible = True
+                Else
+                    btnArabic.Visible = True
+                    btnOriginal.Visible = False
+                End If
+                If FirstControl IsNot Nothing Then
+                    FirstControl.Focus()
+                End If
+                If GlobalVariables.UserName.ToLower() <> $"arnel" Then
+                    HideButton(btnDebug)
+                End If
+                If SingleData Or HideNavigatorButtons Then
+                    btnFirst.Visible = False
+                    btnNext.Visible = False
+                    btnLast.Visible = False
+                    btnPrev.Visible = False
+                    tsbCurrentRecord.Visible = False
+                    tsbTotalRecords.Visible = False
+                    tssNavigator2.Visible = False
+                    tssnavigator1.Visible = False
+                    btnOf.Visible = False
+                End If
+                'UpdateNavigationButtonDisplay(False, False)
             End If
-
-            If GlobalVariables.RightToLeftLayout Then
-                btnArabic.Visible = False
-                btnOriginal.Visible = True
-            Else
-                btnArabic.Visible = True
-                btnOriginal.Visible = False
-            End If
-            If FirstControl IsNot Nothing Then
-                FirstControl.Focus()
-            End If
-            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
-                HideButton(btnDebug)
-            End If
-            If SingleData Or HideNavigatorButtons Then
-                btnFirst.Visible = False
-                btnNext.Visible = False
-                btnLast.Visible = False
-                btnPrev.Visible = False
-                tsbCurrentRecord.Visible = False
-                tsbTotalRecords.Visible = False
-                tssNavigator2.Visible = False
-                tssnavigator1.Visible = False
-                btnOf.Visible = False
-            End If
-            'UpdateNavigationButtonDisplay(False, False)
         End If
     End Sub
 
@@ -575,8 +575,8 @@ Public Class CFormEntryNew
         'Else
         '    GlobalVariables.RightToLeftLayout = False
         'End If
-        TranslateFormNew()
-        'PublishClickedButton(ButtonClicked.Undo)
+        TranslateForm()
+        'PublishClickedButton(ButtonClicked.Undo)`
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
         'RecordPositionNumber = RecordPositionNumber

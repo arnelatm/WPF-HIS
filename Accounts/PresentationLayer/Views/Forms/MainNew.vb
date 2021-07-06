@@ -353,7 +353,8 @@ Namespace PresentationLayer.Views.Forms
             Dim childMdiForm = Activator.CreateInstance(y.GetType())
             Dim presenter = Activator.CreateInstance(x.GetType(), {childMdiForm})
             childMdiForm.MdiParent = Me
-            TranslateFormNew()
+            childMdiForm.GetNSaveCaptions()
+            childMdiForm.TranslateForm()
             If GlobalVariables.RightToLeftLayout Then
                 childMdiForm.RightToLeft = RightToLeft.Yes
                 childMdiForm.RightToLeftLayout = True
@@ -1037,7 +1038,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripButtonLTR_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnglish.Click
             SwitchUiLanguage(True)
             'TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-            'TranslateFormNew()
+            'GetNSaveCaptions()
             'ToolStripButtonArabic.Visible = True
             'ToolStripButtonEnglish.Visible = False
 
@@ -1074,7 +1075,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripButtonRTL_Click(sender As Object, e As EventArgs) Handles ToolStripButtonArabic.Click
             SwitchUiLanguage(False)
             'TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-            'TranslateFormNew()
+            'GetNSaveCaptions()
             'ToolStripButtonArabic.Visible = False
             'ToolStripButtonEnglish.Visible = True
             'TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
@@ -1195,7 +1196,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 GlobalVariables.RightToLeftLayout = False
             End If
-            TranslateFormNew()
+            TranslateForm()
             ToolStripButtonArabic.Visible = originalUi
             ToolStripButtonEnglish.Visible = Not originalUi
             'RecordPositionNumber = RecordPositionNumber
