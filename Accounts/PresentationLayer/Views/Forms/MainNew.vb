@@ -1190,16 +1190,9 @@ Namespace PresentationLayer.Views.Forms
             Else
                 TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
             End If
-            CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-            If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-                GlobalVariables.RightToLeftLayout = True
-            Else
-                GlobalVariables.RightToLeftLayout = False
-            End If
             TranslateForm()
-            ToolStripButtonArabic.Visible = originalUi
             ToolStripButtonEnglish.Visible = Not originalUi
-            'RecordPositionNumber = RecordPositionNumber
+            ToolStripButtonArabic.Visible = originalUi
         End Sub
 
     End Class

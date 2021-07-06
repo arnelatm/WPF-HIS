@@ -28,7 +28,7 @@ Partial Class BFMainNew
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BfMainNew))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BFMainNew))
         Me.LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
         Me._MBDeletionNotAllowed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
         Me._MBAddRecordFailed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
@@ -53,9 +53,9 @@ Partial Class BFMainNew
         Me._MBDataEntryIsNotUnique = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.TranslatorDAC = New Dac()
-        Me.AppDataDAC = New Dac()
-        Me.StoreCaptions1 = New StoreCaptions()
+        Me.TranslatorDAC = New AATM.Libraries.MessagingLibrary.Dac()
+        Me.AppDataDAC = New AATM.Libraries.MessagingLibrary.Dac()
+        Me.StoreCaptions1 = New AATM.Libraries.MessagingLibrary.StoreCaptions()
         Me.SuspendLayout()
         '
         'LocalizableContent1
@@ -209,11 +209,20 @@ Partial Class BFMainNew
         Me.ImageList1.Images.SetKeyName(0, "openbriefcase.png")
         Me.ImageList1.Images.SetKeyName(1, "TreeNode.ico")
         '
-        'BfMainNew
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = ""
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = ""
+        '
+        'BFMainNew
         '
         Me.ClientSize = New System.Drawing.Size(1114, 709)
-        Me.Name = "BfMainNew"
+        Me.Name = "BFMainNew"
         Me.Text = "Base Form"
+        Me.ViewDisplayName = "Main"
         Me.ResumeLayout(False)
 
     End Sub
