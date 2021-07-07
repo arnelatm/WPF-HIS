@@ -7,6 +7,7 @@
 
 
 
+
 CREATE VIEW [dbo].[ErDetails_View]	
   AS
 (SELECT 'ER' AS 'JournalCode'
@@ -50,28 +51,6 @@ UNION
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PayorType='E'
-)
-UNION
-(SELECT 'CK'
-	  ,a.[IdNo]
-      ,[Sequence]
-	  ,[JournalIdNo]
-      ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
-	  ,[RevCostCenterIdNo]
-      ,LTrim(a.[Notes])+Iif(CheckNumber='','',CheckNumber)
-	  ,a.[Posted]
-	  ,[PayeeIdNo]
-	  ,[ReferenceNo]
-	  ,[TransactionDate]
-      ,[ReferenceNo]
-	  ,'D'
-	  ,LTrim(b.[Notes])+Iif(CheckNumber='','',CheckNumber)
-  FROM [dbo].[CkJournalItem] A
-  LEFT OUTER JOIN dbo.CkJournal b
-  on a.JournalIdNo = b.IDNo
-  WHERE PaymentType='E'
 )
 UNION
 (SELECT 'CD'

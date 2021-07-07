@@ -835,6 +835,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            GetNSaveCaptions()
             If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
                 ToolStripButtonArabic.Visible = False
                 ToolStripButtonEnglish.Visible = True
@@ -1036,6 +1037,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripButtonLTR_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnglish.Click
+            If Not GlobalVariables.RightToLeftLayout Then
+                GlobalVariables.RightToLeftLayout = False
+            End If
             SwitchUiLanguage(True)
             'TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
             'GetNSaveCaptions()
@@ -1073,6 +1077,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripButtonRTL_Click(sender As Object, e As EventArgs) Handles ToolStripButtonArabic.Click
+            If Not GlobalVariables.RightToLeftLayout Then
+                GlobalVariables.RightToLeftLayout = True
+            End If
             SwitchUiLanguage(False)
             'TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
             'GetNSaveCaptions()
@@ -1190,7 +1197,6 @@ Namespace PresentationLayer.Views.Forms
             Else
                 TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
             End If
-            GetNSaveCaptions()
             TranslateForm()
             ToolStripButtonEnglish.Visible = Not originalUi
             ToolStripButtonArabic.Visible = originalUi
