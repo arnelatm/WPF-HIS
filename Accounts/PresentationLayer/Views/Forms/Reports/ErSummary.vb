@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             ' Add any initialization after the InitializeComponent() call.
 
-            MainTableName = "ApJournal"
+            MainTableName = "ErJournal"
             SortOrderKey = "IdNo"
             PresenterObj = New ReportPresenter(Me)
             Dim currentDate = Now()
@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
-                Dim reportName = Messaging.TranslateCaption("Summary of Accounts Payable")
+                Dim reportName = Messaging.TranslateCaption("Summary of Employee Loans")
                 Dim reportTitle As String
                 reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, FormCulture)
                 Dim cForm As New ReportFormNew("Summary of Employee Loans.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalances")
