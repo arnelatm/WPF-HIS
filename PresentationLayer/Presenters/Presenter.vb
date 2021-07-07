@@ -58,9 +58,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Else
             Me.View = itemView
             TableName = GetPropertyValue(Me.View, "MainTableName")
-            If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
-                MessageBox.Show($"'TableName' property is not set in the Form.")
-            End If
+            'If TableName Is Nothing OrElse TableName.TrimEnd() = "" Then
+            '    MessageBox.Show($"'TableName' property is not set in the Form.")
+            'End If
             Dim tableColumnPropertyList As List(Of TblColPropModel)
             tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
             TableProperties = tableColumnPropertyList.ToArray
