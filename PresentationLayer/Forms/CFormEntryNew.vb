@@ -196,6 +196,7 @@ Public Class CFormEntryNew
             GlobalVariables.RightToLeftLayout = False
         End If
         CreateDataSources()
+        PublishEvent(New LanguageChanged(Me))
     End Sub
 
     Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean, recordPositionNumber As Integer, recordCount As Integer)

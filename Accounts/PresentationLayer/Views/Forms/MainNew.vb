@@ -1190,6 +1190,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
             End If
+            GetNSaveCaptions()
             TranslateForm()
             ToolStripButtonEnglish.Visible = Not originalUi
             ToolStripButtonArabic.Visible = originalUi

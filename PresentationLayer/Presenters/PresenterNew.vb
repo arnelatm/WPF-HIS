@@ -1009,7 +1009,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             If _withTreeView Then
                 TreeViewUpdateViewDisplay(idNo)
             End If
-            UpdateViewDisplay()
+            'UpdateViewDisplay()
             ClearAllErrorMessages()
         End If
     End Sub
@@ -2265,6 +2265,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Private Sub FormTreeViewBeforeSelect(ByVal sender As Object, ByVal e As TreeViewCancelEventArgs) Handles FormTreeView.BeforeSelect
         If EditMode Or AddMode Then
+            If e.Action = TreeViewAction.ByKeyboard Or e.Action = TreeViewAction.ByMouse Then
+                'MessageBox.Show("You like the keyboard!")
+                MessagingLibrary.Messaging.Show(True, "MsgTvSelectionNotAllowed")
+            End If
             e.Cancel = True
         End If
     End Sub
@@ -2284,7 +2288,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Sub OnLanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
-        DisplayTree()
+        UpdateViewDisplay()
+        If _withTreeView Then
+            DisplayTree()
+        End If
     End Sub
 
 #End Region
