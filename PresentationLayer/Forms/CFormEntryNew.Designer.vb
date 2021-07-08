@@ -366,11 +366,11 @@ Partial Class CFormEntryNew
         Me.Controls.Add(Me.FormToolStrip)
         Me.Name = "CFormEntryNew"
         Me.Text = "CFormEntry"
-        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FormToolStrip.ResumeLayout(False)
-        Me.FormToolStrip.PerformLayout
+        Me.FormToolStrip.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout
+        Me.PerformLayout()
 
     End Sub
 
@@ -401,12 +401,12 @@ Partial Class CFormEntryNew
     Friend WithEvents OpenToolStripButton As Windows.Forms.ToolStripButton
     Friend WithEvents NewToolStripButton As Windows.Forms.ToolStripButton
     Friend WithEvents HelpToolStripButton As Windows.Forms.ToolStripButton
-    Friend WithEvents btnArabic As Windows.Forms.ToolStripButton
     Protected WithEvents btnTranslate As Windows.Forms.ToolStripButton
-    Friend WithEvents btnOriginal As Windows.Forms.ToolStripButton
     Friend WithEvents btnQuit As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator6 As Windows.Forms.ToolStripSeparator
     Public WithEvents btnFind As Windows.Forms.ToolStripButton
     Public WithEvents tsbCurrentRecord As Windows.Forms.ToolStripLabel
     Friend WithEvents btnFilter As Windows.Forms.ToolStripButton
+    Public WithEvents btnArabic As Windows.Forms.ToolStripButton
+    Public WithEvents btnOriginal As Windows.Forms.ToolStripButton
 End Class

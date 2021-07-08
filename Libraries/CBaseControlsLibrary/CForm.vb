@@ -199,6 +199,10 @@ Public Class CForm
         End If
     End Sub
 
+    'Private Sub CFormEntryNew_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
+    '    Debugger.Break()
+    'End Sub
+
     'Private Sub CForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
     '    'If System.ComponentModel.LicenseManager.UsageMode <> System.ComponentModel.LicenseUsageMode.Designtime Then
     '    '    If GlobalVariables.RightToLeftLayout Then

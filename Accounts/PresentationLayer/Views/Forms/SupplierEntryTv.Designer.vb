@@ -1564,7 +1564,7 @@ Namespace PresentationLayer.Views.Forms
             'SupplierEntryTv
             '
             resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.floDataDisplay)
+            Me.Controls.Add(Me.floDataDisplay)
         Me.Name = "SupplierEntryTv"
         Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
         Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)

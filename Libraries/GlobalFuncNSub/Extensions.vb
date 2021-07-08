@@ -3,6 +3,7 @@ Imports System.Globalization
 Imports System.Linq.Expressions
 Imports System.Reflection
 Imports System.Runtime.CompilerServices
+Imports System.Runtime.InteropServices
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 
@@ -196,6 +197,37 @@ Public Module Extensions
         Else
             code.Invoke()
         End If
+    End Sub
+
+    <DllImport("user32.dll")>
+    Private Function SendMessage(ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As Boolean, ByVal lParam As IntPtr) As Integer
+    End Function
+
+    Private Const WmSetRedraw As Integer = 11
+
+    ' Extension methods for Control
+    <Extension()>
+    Public Sub ResumeDrawing(ByVal target As Control, ByVal redraw As Boolean)
+        SendMessage(target.Handle, WmSetRedraw, True, 0)
+        If redraw Then
+            target.Refresh()
+        End If
+    End Sub
+
+    <Extension()>
+    Public Sub SuspendDrawing(ByVal target As Control)
+        If target Is Nothing Then
+            Throw New ArgumentNullException(NameOf(target))
+        End If
+        SendMessage(target.Handle, WmSetRedraw, False, 0)
+    End Sub
+
+    <Extension()>
+    Public Sub ResumeDrawing(target As Control)
+        If target Is Nothing Then
+            Throw New ArgumentNullException(NameOf(target))
+        End If
+        target.ResumeDrawing(True)
     End Sub
 
 End Module

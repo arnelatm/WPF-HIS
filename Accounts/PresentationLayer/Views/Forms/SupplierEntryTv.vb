@@ -422,6 +422,10 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
+        Private Sub TreeViewTableName_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles TreeViewTableName.AfterSelect
+
+        End Sub
+
     End Class
 
 End Namespace

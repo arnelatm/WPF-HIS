@@ -406,10 +406,10 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemEmployees.Click
-            RunForm(Of EmployeePresenterNew, EmployeeEntryTvNew)()
-        End Sub
+        'Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+        '    Handles ToolStripMenuItemEmployees.Click
+        '    RunForm(Of EmployeePresenterNew, EmployeeEntryTvNew)()
+        'End Sub
 
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemGeneralJournalEntry.Click
