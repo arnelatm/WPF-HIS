@@ -1,0 +1,34 @@
+Public Class Form1
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        For i = 1 To 16
+            With New Form
+                .MdiParent = Me
+                .Show()
+            End With
+        Next
+    End Sub
+
+    Private Sub Form1_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+        Me.ArrangeChildren()
+    End Sub
+
+    Private Sub Form1_ResizeEnd(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ResizeEnd
+        Me.ArrangeChildren()
+    End Sub
+
+    Private Sub ArrangeChildren()
+        Dim containerSize = DirectCast(Me.Controls(0), MdiClient).ClientSize
+        Dim childWidth = containerSize.Width \ 4
+        Dim childHeight = containerSize.Height \ 4
+        Dim children = Me.MdiChildren
+
+        For index = 0 To children.GetUpperBound(0)
+            children(index).SetBounds((index Mod 4) * childWidth,
+                                      (index \ 4) * childHeight,
+                                      childWidth,
+                                      childHeight)
+        Next
+    End Sub
+
+End Class

@@ -144,6 +144,12 @@ Public Class BFMainNew
     End Function
 
     Public Sub TranslateForm() 'control As Control, pViewDisplayName As String)
+        Parent.SuspendDrawing()
+        Dim lTop = Top
+        Dim lLeft = Left
+        Visible = False
+        Top = lTop
+        Left = lLeft
         Dim cmd As String
         If ViewDisplayName Is Nothing Then
             ViewDisplayName = Name
@@ -151,34 +157,33 @@ Public Class BFMainNew
         cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
         VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
         DoubleBuffered = True
-        SuspendLayout()
-        Visible = False
+        'If GlobalVariables.TranslationMode Then
+        TranslateCaptions(TextDisplayLanguage)
+        'End If
+        'Visible = False
+        Dim myImage As Bitmap
+        myImage = BackgroundImage
+        BackgroundImage = Nothing
+
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            'Visible = False
             GlobalVariables.RightToLeftLayout = True
             RightToLeft = RightToLeft.Yes
             RightToLeftLayout = True
-            'Visible = True
         Else
             GlobalVariables.RightToLeftLayout = False
             RightToLeft = RightToLeft.No
             RightToLeftLayout = False
         End If
-        Dim myImage As Bitmap
-        myImage = BackgroundImage
-        BackgroundImage = Nothing
-        'If GlobalVariables.TranslationMode Then
-        TranslateCaptions(TextDisplayLanguage)
-        'End If
         BackgroundImage = myImage
         If GlobalVariables.TranslationMode Then
             RaiseEvent AfterTranslateForm()
         End If
-        'ResumeLayout(True)
-        'IgnoreLoad = True
-        'Show()
-        'IgnoreLoad = False
+
         Visible = True
+        Top = lTop
+        Left = lLeft
+
+        Parent.ResumeDrawing()
     End Sub
 
     Protected Sub RunTranslator(ByVal nSystemViewIdNo)
@@ -283,8 +288,8 @@ Public Class BFMainNew
                 ElseIf TypeOf cCtrl Is ToolStrip Then
                     TranslateToolStripItems(cCtrl)
                 ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
-                    Dim cT = CType(cCtrl, TreeView)
-                    cT.ExpandAll()
+                    'Dim cT = CType(cCtrl, TreeView)
+                    'cT.ExpandAll()
                     'cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                     'cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
                 ElseIf TypeOf cCtrl Is DataGridView Then
@@ -308,9 +313,9 @@ Public Class BFMainNew
                     If TypeOf cCtrl Is CButton Then
                         TranslateButton(cCtrl)
                     ElseIf TypeOf cCtrl Is CTabControl Then
-                        Dim tc = CType(cCtrl, CTabControl)
-                        tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-                        tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+                        'Dim tc = CType(cCtrl, CTabControl)
+                        'tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                        'tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                     End If
                     Try
                         _originalText = CaptionCollection.Item(cCtrl.Name)
@@ -326,18 +331,102 @@ Public Class BFMainNew
                     End Try
 
                 End If
-            ElseIf TypeOf cCtrl Is CTextBox Then
-                Dim tc = CType(cCtrl, CTextBox)
-                If tc.ValueIsNumeric Then
-                    If tc.RightToLeft = RightToLeft.Yes Then
-                        tc.TextAlign = HorizontalAlignment.Left
-                    Else
-                        tc.TextAlign = HorizontalAlignment.Right
-                    End If
-                End If
+                'ElseIf TypeOf cCtrl Is CTextBox Then
+                '    'Dim tc = CType(cCtrl, CTextBox)
+                '    'If tc.ValueIsNumeric Then
+                '    '    If tc.RightToLeft = RightToLeft.Yes Then
+                '    '        tc.TextAlign = HorizontalAlignment.Left
+                '    '    Else
+                '    '        tc.TextAlign = HorizontalAlignment.Right
+                '    '    End If
+                '    'End If
             End If
         Next
     End Sub
+
+    'Protected Sub TranslateControls(targetLanguageIdNo As Integer)
+    '    Dim cmd As String
+    '    cmd = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + VSystemViewIdNo.ToString()
+    '    Dim translations As DataSet
+    '    translations = TranslatorDAC.ReturnDs(cmd)
+    '    Dv = translations.Tables(0).DefaultView
+    '    Dv.Sort = "Caption"
+    '    Dim r As Integer
+    '    If Tag Is Nothing Then
+    '        r = 0
+    '    Else
+    '        r = Dv.Find(Tag.ToString.TrimEnd)
+    '    End If
+    '    If r > 0 Then
+    '        Text = Dv(r).Item("translatedCaption")
+    '    Else
+    '        Text = Tag
+    '    End If
+    '    Dim allCtrl As New List(Of Control)
+    '    For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
+    '        If IsTranslatable(cCtrl) Then
+    '            If TypeOf cCtrl Is MenuStrip Then
+    '                Dim subMenuName = ""
+    '                Dim menuStrip As MenuStrip = cCtrl
+    '                TranslateMenuStripItems(menuStrip.Items, subMenuName)
+    '            ElseIf TypeOf cCtrl Is ToolStrip Then
+    '                TranslateToolStripItems(cCtrl)
+    '            ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
+    '                Dim cT = CType(cCtrl, TreeView)
+    '                cT.ExpandAll()
+    '                'cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+    '                'cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+    '            ElseIf TypeOf cCtrl Is DataGridView Then
+    '                '_originalText = CaptionCollection.Item(cCtrl.Name)
+    '                'r = Dv.Find(_originalText)
+    '                'If r >= 0 Then
+    '                ' CType(cCtrl, DataGridView).Text = Dv(r).Item(1)
+    '                'Else
+    '                'CType(cCtrl, DataGridView).Text = cCtrl.Tag
+    '                'End If
+    '                TranslateDataGridView(cCtrl)
+    '            ElseIf TypeOf cCtrl Is DataGrid Then
+    '                _originalText = CaptionCollection.Item(cCtrl.Name)
+    '                r = Dv.Find(_originalText)
+    '                If r >= 0 Then
+    '                    CType(cCtrl, DataGrid).CaptionText = Dv(r).Item(1)
+    '                Else
+    '                    CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
+    '                End If
+    '            Else
+    '                If TypeOf cCtrl Is CButton Then
+    '                    TranslateButton(cCtrl)
+    '                ElseIf TypeOf cCtrl Is CTabControl Then
+    '                    Dim tc = CType(cCtrl, CTabControl)
+    '                    tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+    '                    tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+    '                End If
+    '                Try
+    '                    _originalText = CaptionCollection.Item(cCtrl.Name)
+
+    '                    r = Dv.Find(_originalText)
+    '                    If r >= 0 Then
+    '                        cCtrl.Text = Dv(r).Item("TranslatedCaption")
+    '                    Else
+    '                        cCtrl.Text = cCtrl.Tag
+    '                    End If
+    '                Catch ex As Exception
+    '                    cCtrl.Text = cCtrl.Tag
+    '                End Try
+
+    '            End If
+    '        ElseIf TypeOf cCtrl Is CTextBox Then
+    '            Dim tc = CType(cCtrl, CTextBox)
+    '            If tc.ValueIsNumeric Then
+    '                If tc.RightToLeft = RightToLeft.Yes Then
+    '                    tc.TextAlign = HorizontalAlignment.Left
+    '                Else
+    '                    tc.TextAlign = HorizontalAlignment.Right
+    '                End If
+    '            End If
+    '        End If
+    '    Next
+    'End Sub
 
     Private Sub TranslateToolStripItems(ByRef cToolStrip As ToolStrip)
         For Each obj As Object In cToolStrip.Items
@@ -862,6 +951,10 @@ Public Class BFMainNew
             End If
         Next
     End Sub
+
+    'Private Sub CFormEntryNew_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
+    '    Debugger.Break()
+    'End Sub
 
     'Private Sub BfMain_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
     '    If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft And BackgroundImage IsNot Nothing Then

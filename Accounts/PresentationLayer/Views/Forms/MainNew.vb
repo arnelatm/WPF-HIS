@@ -353,7 +353,7 @@ Namespace PresentationLayer.Views.Forms
             Dim childMdiForm = Activator.CreateInstance(y.GetType())
             Dim presenter = Activator.CreateInstance(x.GetType(), {childMdiForm})
             childMdiForm.MdiParent = Me
-            childMdiForm.GetNSaveCaptions()
+            'childMdiForm.GetNSaveCaptions()
             childMdiForm.TranslateForm()
             If GlobalVariables.RightToLeftLayout Then
                 childMdiForm.RightToLeft = RightToLeft.Yes
@@ -375,7 +375,46 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemEmployees.Click
-            RunForm(Of EmployeePresenterNew, EmployeeEntryTvNew)()
+            'Dim presenter As New EmployeePresenterNew(Nothing)
+            'Dim myForm = New EmployeeEntryTv2(presenter)
+            'presenter = New EmployeePresenterNew(myForm)
+            'myForm.Show()
+            RunForm2(Of EmployeePresenterNew, EmployeeEntryTv2)()
+            'RunForm2(Of SupplierPresenterNew, SupplierEntryTvNew)()
+        End Sub
+
+        Private Sub RunForm2(Of TP, TF)()
+            Dim pArgs As Type() = {Nothing}
+            Dim presenter = Activator.CreateInstance(GetType(TP), pArgs)
+            Dim childMdiForm = Activator.CreateInstance(GetType(TF), {presenter})
+            presenter = Activator.CreateInstance(GetType(TP), childMdiForm)
+            'GetNSaveCaptions()
+            childMdiForm.MdiParent = Me
+            'childMdiForm.TranslateForm()
+            'If GlobalVariables.RightToLeftLayout Then
+            '    childMdiForm.RightToLeft = RightToLeft.Yes
+            '    childMdiForm.RightToLeftLayout = True
+            'Else
+            '    childMdiForm.RightToLeft = RightToLeft.No
+            '    childMdiForm.RightToLeftLayout = False
+            'End If
+            childMdiForm.Show()
+
+            'Dim p As Type = GetType(TP)
+            'Dim f As Type = GetType(TF)
+            'Dim pArgs As Type() = {Nothing}
+            'Dim presenter = Activator.CreateInstance(GetType(TP), pArgs)
+            'Dim fArgs As Type() = {presenter}
+            'Dim myForm = Activator.CreateInstance(GetType(TF), Activator.CreateInstance(GetType(TP)))
+            'myForm.Show()
+            ''Dim makeme As Type = d1.MakeGenericType(typeArgs)
+            'Dim o As Object = Activator.CreateInstance(p)
+            'Dim itsMe As List(Of String) = TryCast(o, List(Of String))
+            'Console.WriteLine(If((itsMe Is Nothing), "Failed", "Succeeded"))
+            'Dim y As TF = New TF
+            'Dim presenter = Activator.CreateInstance(x)
+            'Dim childMdiForm = Activator.CreateInstance(y.GetType(), {presenter})
+            'childMdiForm.Show()
         End Sub
 
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
@@ -835,7 +874,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            GetNSaveCaptions()
+            'GetNSaveCaptions()
             If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
                 ToolStripButtonArabic.Visible = False
                 ToolStripButtonEnglish.Visible = True
@@ -877,7 +916,7 @@ Namespace PresentationLayer.Views.Forms
                         LogStatus = LoginStatus.LoggedOut
                     End If
                 Catch ex As TypeInitializationException
-                    MessageBox.Show("Invalid Connection String, specified connection string doesn't exist.",
+                    MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
                                     "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ErrLogger.LogError(ex, True)
                     LogStatus = LoginStatus.LoggedOut

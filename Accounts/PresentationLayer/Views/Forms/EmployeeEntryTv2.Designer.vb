@@ -1,6 +1,6 @@
 ﻿Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class EmployeeEntryTvNew
+    Partial Class EmployeeEntryTv2
         Inherits AATM.PresentationLayer.Forms.CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
@@ -21,7 +21,7 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTvNew))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeEntryTv2))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -50,6 +50,9 @@
             Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Me.bsPhones = New System.Windows.Forms.BindingSource(Me.components)
+            Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
+            Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.floMainData = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -89,7 +92,6 @@
             Me.CountryTelIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PhoneNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PhoneTypeIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPhones = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtZipCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblZipCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPoBox = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -149,7 +151,6 @@
             Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.EmployeeIdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpDeductions = New System.Windows.Forms.TabPage()
             Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequenceDeduction = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -159,7 +160,6 @@
             Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpPhones = New System.Windows.Forms.TabPage()
             Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -172,22 +172,14 @@
             Me.CountryTelCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.EmployeeIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.AmountDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayElementCodeDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayElementIdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayElementKindDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayElementNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayElementNameAraDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PayElementTypeDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.EmployeeIdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.RateDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.UnitDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
             Me.SplitContainer1.SuspendLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floMainData.SuspendLayout()
             Me.tbcEmployee.SuspendLayout()
             Me.tbpPersonal.SuspendLayout()
@@ -196,17 +188,14 @@
             Me.floContactInformation.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
             CType(Me.DataGridViewPhoneDisplay, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpEmployment.SuspendLayout()
             Me.floEmployment.SuspendLayout()
             Me.tbpPayroll.SuspendLayout()
             Me.floPayroll.SuspendLayout()
             Me.tbpEarnings.SuspendLayout()
             CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpDeductions.SuspendLayout()
             CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tbpPhones.SuspendLayout()
             CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
@@ -217,20 +206,32 @@
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.floMainData)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1378, 768)
-            Me.SplitContainer1.SplitterDistance = 442
+            Me.SplitContainer1.Size = New System.Drawing.Size(1078, 502)
+            Me.SplitContainer1.SplitterDistance = 335
             '
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(442, 768)
+            Me.FormTreeView.Size = New System.Drawing.Size(335, 502)
             '
             'ImageListTreeView
             '
             Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
             Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
             Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            '
+            'bsPhones
+            '
+            Me.bsPhones.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel)
+            '
+            'bsEarnings
+            '
+            Me.bsEarnings.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel)
+            '
+            'bsDeductions
+            '
+            Me.bsDeductions.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel)
             '
             'floMainData
             '
@@ -245,10 +246,11 @@
             Me.floMainData.Controls.Add(Me.lblEmployeeNameAra)
             Me.floMainData.Controls.Add(Me.txtEmployeeNameAra)
             Me.floMainData.Controls.Add(Me.tbcEmployee)
-            Me.floMainData.Location = New System.Drawing.Point(84, 92)
+            Me.floMainData.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.floMainData.Location = New System.Drawing.Point(0, 0)
             Me.floMainData.Name = "floMainData"
-            Me.floMainData.Size = New System.Drawing.Size(695, 448)
-            Me.floMainData.TabIndex = 8
+            Me.floMainData.Size = New System.Drawing.Size(733, 502)
+            Me.floMainData.TabIndex = 9
             '
             'lblIdNo
             '
@@ -1096,10 +1098,6 @@
             Me.PhoneTypeIdNo.Name = "PhoneTypeIdNo"
             Me.PhoneTypeIdNo.ReadOnly = True
             Me.PhoneTypeIdNo.Visible = False
-            '
-            'bsPhones
-            '
-            Me.bsPhones.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel)
             '
             'txtZipCode
             '
@@ -2465,10 +2463,6 @@
             Me.IdNoDataGridViewTextBoxColumn2.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn2.Visible = False
             '
-            'bsEarnings
-            '
-            Me.bsEarnings.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel)
-            '
             'tbpDeductions
             '
             Me.tbpDeductions.Controls.Add(Me.DataGridViewDeductions)
@@ -2638,10 +2632,6 @@
             Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
             Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn.Visible = False
-            '
-            'bsDeductions
-            '
-            Me.bsDeductions.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel)
             '
             'tbpPhones
             '
@@ -2833,90 +2823,22 @@
             Me.IdNoDataGridViewTextBoxColumn4.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn4.Visible = False
             '
-            'AmountDataGridViewTextBoxColumn1
-            '
-            Me.AmountDataGridViewTextBoxColumn1.DataPropertyName = "Amount"
-            Me.AmountDataGridViewTextBoxColumn1.HeaderText = "Amount"
-            Me.AmountDataGridViewTextBoxColumn1.Name = "AmountDataGridViewTextBoxColumn1"
-            '
-            'PayElementCodeDataGridViewTextBoxColumn1
-            '
-            Me.PayElementCodeDataGridViewTextBoxColumn1.DataPropertyName = "PayElementCode"
-            Me.PayElementCodeDataGridViewTextBoxColumn1.HeaderText = "PayElementCode"
-            Me.PayElementCodeDataGridViewTextBoxColumn1.Name = "PayElementCodeDataGridViewTextBoxColumn1"
-            '
-            'PayElementIdNoDataGridViewTextBoxColumn1
-            '
-            Me.PayElementIdNoDataGridViewTextBoxColumn1.DataPropertyName = "PayElementIdNo"
-            Me.PayElementIdNoDataGridViewTextBoxColumn1.HeaderText = "PayElementIdNo"
-            Me.PayElementIdNoDataGridViewTextBoxColumn1.Name = "PayElementIdNoDataGridViewTextBoxColumn1"
-            '
-            'PayElementKindDataGridViewTextBoxColumn1
-            '
-            Me.PayElementKindDataGridViewTextBoxColumn1.DataPropertyName = "PayElementKind"
-            Me.PayElementKindDataGridViewTextBoxColumn1.HeaderText = "PayElementKind"
-            Me.PayElementKindDataGridViewTextBoxColumn1.Name = "PayElementKindDataGridViewTextBoxColumn1"
-            '
-            'PayElementNameDataGridViewTextBoxColumn1
-            '
-            Me.PayElementNameDataGridViewTextBoxColumn1.DataPropertyName = "PayElementName"
-            Me.PayElementNameDataGridViewTextBoxColumn1.HeaderText = "PayElementName"
-            Me.PayElementNameDataGridViewTextBoxColumn1.Name = "PayElementNameDataGridViewTextBoxColumn1"
-            '
-            'PayElementNameAraDataGridViewTextBoxColumn1
-            '
-            Me.PayElementNameAraDataGridViewTextBoxColumn1.DataPropertyName = "PayElementNameAra"
-            Me.PayElementNameAraDataGridViewTextBoxColumn1.HeaderText = "PayElementNameAra"
-            Me.PayElementNameAraDataGridViewTextBoxColumn1.Name = "PayElementNameAraDataGridViewTextBoxColumn1"
-            '
-            'PayElementTypeDataGridViewTextBoxColumn1
-            '
-            Me.PayElementTypeDataGridViewTextBoxColumn1.DataPropertyName = "PayElementType"
-            Me.PayElementTypeDataGridViewTextBoxColumn1.HeaderText = "PayElementType"
-            Me.PayElementTypeDataGridViewTextBoxColumn1.Name = "PayElementTypeDataGridViewTextBoxColumn1"
-            '
-            'EmployeeIdNoDataGridViewTextBoxColumn1
-            '
-            Me.EmployeeIdNoDataGridViewTextBoxColumn1.DataPropertyName = "EmployeeIdNo"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn1.HeaderText = "EmployeeIdNo"
-            Me.EmployeeIdNoDataGridViewTextBoxColumn1.Name = "EmployeeIdNoDataGridViewTextBoxColumn1"
-            '
-            'IdNoDataGridViewTextBoxColumn1
-            '
-            Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
-            '
-            'RateDataGridViewTextBoxColumn1
-            '
-            Me.RateDataGridViewTextBoxColumn1.DataPropertyName = "Rate"
-            Me.RateDataGridViewTextBoxColumn1.HeaderText = "Rate"
-            Me.RateDataGridViewTextBoxColumn1.Name = "RateDataGridViewTextBoxColumn1"
-            '
-            'UnitDataGridViewTextBoxColumn1
-            '
-            Me.UnitDataGridViewTextBoxColumn1.DataPropertyName = "Unit"
-            Me.UnitDataGridViewTextBoxColumn1.HeaderText = "Unit"
-            Me.UnitDataGridViewTextBoxColumn1.Name = "UnitDataGridViewTextBoxColumn1"
-            '
-            'EmployeeEntryTvNew
+            'EmployeeEntryTv2
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.AutoScroll = True
-            Me.AutoSize = True
-            Me.ClientSize = New System.Drawing.Size(1378, 821)
-            Me.MinimumSize = New System.Drawing.Size(1024, 39)
-            Me.Name = "EmployeeEntryTvNew"
+            Me.ClientSize = New System.Drawing.Size(1078, 555)
+            Me.Name = "EmployeeEntryTv2"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Employee Maintenance Form"
-            Me.ViewDisplayName = "EmployeeEntryTv"
-            Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
             Me.SplitContainer1.Panel1.ResumeLayout(False)
             Me.SplitContainer1.Panel2.ResumeLayout(False)
             Me.SplitContainer1.Panel2.PerformLayout()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.SplitContainer1.ResumeLayout(False)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floMainData.ResumeLayout(False)
             Me.floMainData.PerformLayout()
             Me.tbcEmployee.ResumeLayout(False)
@@ -2928,7 +2850,6 @@
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
             CType(Me.DataGridViewPhoneDisplay, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsPhones, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpEmployment.ResumeLayout(False)
             Me.floEmployment.ResumeLayout(False)
             Me.tbpPayroll.ResumeLayout(False)
@@ -2936,10 +2857,8 @@
             Me.floPayroll.PerformLayout()
             Me.tbpEarnings.ResumeLayout(False)
             CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpDeductions.ResumeLayout(False)
             CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tbpPhones.ResumeLayout(False)
             CType(Me.DataGridViewPhones, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
@@ -2947,21 +2866,10 @@
 
         End Sub
 
-        Friend WithEvents floMainData As Libraries.CBaseControlsLibrary.CFlowLayout
+        Friend WithEvents bsPhones As BindingSource
         Friend WithEvents bsEarnings As BindingSource
         Friend WithEvents bsDeductions As BindingSource
-        Friend WithEvents bsPhones As BindingSource
-        Friend WithEvents AmountDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementCodeDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementIdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementKindDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementNameDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementNameAraDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementTypeDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents RateDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents UnitDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents floMainData As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEmployeeCode As Libraries.CBaseControlsLibrary.CLabel
@@ -3081,4 +2989,4 @@
         Friend WithEvents EmployeeIdNo As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     End Class
-End Namespace
+End NameSpace

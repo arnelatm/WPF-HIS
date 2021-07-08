@@ -1,4 +1,6 @@
 ﻿Imports System.Globalization
+Imports System.Runtime.CompilerServices
+Imports System.Runtime.InteropServices
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
 Imports AATM.Libraries
@@ -6,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class EmployeeEntryTvNew
+    Public Class EmployeeEntryTv2
         Implements IEmployeeView
 
         Private _countryTelCodes As List(Of ClassesLibrary.LookupData)
@@ -26,14 +28,17 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo
 
-        Public Sub New()
-            MyBase.New()
+        Private ReadOnly _presenter
+
+        Public Sub New(ByRef presenter)
 
             ' This call is required by the designer.
             InitializeComponent()
 
+            _presenter = presenter
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = txtEmployeeName
+
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             'If GlobalVariables.RightToLeftLayout Then
             '    SwitchUiLanguage(False)
@@ -672,6 +677,23 @@ Namespace PresentationLayer.Views.Forms
                                                   DataGridViewEarnings.CurrentCell.OwningColumn.DataPropertyName,
                                                   DataGridViewEarnings.CurrentCell.OwningColumn.Name,
                                                   DataGridViewEarnings.CurrentCell.Value))
+        End Sub
+
+        Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
+            If originalUi Then
+                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+            Else
+                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+            End If
+            CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
+            If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+                GlobalVariables.RightToLeftLayout = True
+            Else
+                GlobalVariables.RightToLeftLayout = False
+            End If
+            TranslateForm()
+            btnArabic.Visible = originalUi
+            btnOriginal.Visible = Not originalUi
         End Sub
 
     End Class

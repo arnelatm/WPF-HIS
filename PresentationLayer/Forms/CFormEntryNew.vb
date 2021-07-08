@@ -47,7 +47,6 @@ Public Class CFormEntryNew
         DoubleBuffered = True
         Ea = New EventAggregator
         ' Add any initialization after the InitializeComponent() call.
-
     End Sub
 
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
@@ -472,6 +471,7 @@ Public Class CFormEntryNew
     End Sub
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetNSaveCaptions()
         If Not IgnoreLoad Then
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
 
@@ -576,7 +576,21 @@ Public Class CFormEntryNew
         'Else
         '    GlobalVariables.RightToLeftLayout = False
         'End If
+        SuspendLayout()
+        Dim lLocation = Location
+        Dim lWidth = Width
+        Dim lHeight = Height
+        Dim lTop = Top
+        Dim lLeft = Left
+        Visible = False
         TranslateForm()
+        ResumeLayout(False)
+        Width = lWidth
+        Height = lHeight
+        Top = lTop
+        Left = lLeft
+        Location = lLocation
+        Visible = True
         'PublishClickedButton(ButtonClicked.Undo)`
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
