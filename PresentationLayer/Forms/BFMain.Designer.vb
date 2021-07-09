@@ -53,9 +53,11 @@ Partial Class BfMain
         Me._MBDataEntryIsNotUnique = New AATM.Libraries.LocalizationUtilities.LocalizableMessage()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.TranslatorDAC = New Dac()
-        Me.AppDataDAC = New Dac()
-        Me.StoreCaptions1 = New StoreCaptions()
+        Me.TranslatorDAC = New AATM.Libraries.MessagingLibrary.Dac()
+        Me.AppDataDAC = New AATM.Libraries.MessagingLibrary.Dac()
+        Me.StoreCaptions1 = New AATM.Libraries.MessagingLibrary.StoreCaptions()
+        Me.BackgroundWorker2 = New System.ComponentModel.BackgroundWorker()
+        Me.BackgroundWorker3 = New System.ComponentModel.BackgroundWorker()
         Me.SuspendLayout()
         '
         'LocalizableContent1
@@ -209,6 +211,14 @@ Partial Class BfMain
         Me.ImageList1.Images.SetKeyName(0, "openbriefcase.png")
         Me.ImageList1.Images.SetKeyName(1, "TreeNode.ico")
         '
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = ""
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = ""
+        '
         'BfMain
         '
         Me.ClientSize = New System.Drawing.Size(1114, 709)
@@ -244,4 +254,6 @@ Partial Class BfMain
     Protected WithEvents StoreCaptions1 As StoreCaptions
     Public WithEvents TranslatorDAC As Dac
     Public WithEvents AppDataDAC As Dac
+    Friend WithEvents BackgroundWorker2 As BackgroundWorker
+    Friend WithEvents BackgroundWorker3 As BackgroundWorker
 End Class

@@ -679,23 +679,6 @@ Namespace PresentationLayer.Views.Forms
                                                   DataGridViewEarnings.CurrentCell.Value))
         End Sub
 
-        Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
-            If originalUi Then
-                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-            Else
-                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-            End If
-            CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-            If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-                GlobalVariables.RightToLeftLayout = True
-            Else
-                GlobalVariables.RightToLeftLayout = False
-            End If
-            TranslateForm()
-            btnArabic.Visible = originalUi
-            btnOriginal.Visible = Not originalUi
-        End Sub
-
     End Class
 
 End Namespace

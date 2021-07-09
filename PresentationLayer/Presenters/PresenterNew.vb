@@ -2110,14 +2110,14 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim root As TreeNode = FormTreeView.Nodes(0)
         root.Nodes.Clear()
         root.Text = Messaging.TranslateCaption(TableName)
-        ' create the tree
-        If GlobalVariables.RightToLeftLayout Then
-            FormTreeView.RightToLeft = RightToLeft.Yes
-            FormTreeView.RightToLeftLayout = True
-        Else
-            FormTreeView.RightToLeft = RightToLeft.No
-            FormTreeView.RightToLeftLayout = False
-        End If
+        '' create the tree
+        'If GlobalVariables.RightToLeftLayout Then
+        '    FormTreeView.RightToLeft = RightToLeft.Yes
+        '    FormTreeView.RightToLeftLayout = True
+        'Else
+        '    FormTreeView.RightToLeft = RightToLeft.No
+        '    FormTreeView.RightToLeftLayout = False
+        'End If
         Dim treeViewData As Object = GetTreeViewData()
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             For Each dataNode In treeViewData
@@ -2288,10 +2288,10 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Sub OnLanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
-        UpdateViewDisplay()
         If _withTreeView Then
             DisplayTree()
         End If
+        UpdateViewDisplay()
     End Sub
 
 #End Region

@@ -10,13 +10,15 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IBankView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("Bank")
-            TableName = "Bank"
-            TreeViewMainField = "BankName"
-            TreeViewSecondaryField = "BankCode"
-            SortOrderKey = "BankName"
-            OriginalModel = New BankModel()
-            DataModel = New BankModel()
+            If view IsNot Nothing Then
+                ModelOfPresenter = New ModelAccounts("Bank")
+                TableName = "Bank"
+                TreeViewMainField = "BankName"
+                TreeViewSecondaryField = "BankCode"
+                SortOrderKey = "BankName"
+                OriginalModel = New BankModel()
+                DataModel = New BankModel()
+            End If
         End Sub
 
         Public Sub New()

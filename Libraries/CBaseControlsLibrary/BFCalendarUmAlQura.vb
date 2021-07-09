@@ -28,6 +28,7 @@ Public Class BfCalendarUmAlQura
     Private strValue As String = ""
     Private passedDateStr As String
     Private ReadOnly curDate As DateTime?
+    Private _dateToday As String
 
     Public Sub New()
         _initializing = True
@@ -325,7 +326,7 @@ Public Class BfCalendarUmAlQura
                             HijriMonthInEnglish(Int(HijriDate.FormatHijri(HToday, "MM"))) & " " &
                             HijriDate.FormatHijri(HToday, "yyyy")
         End If
-        lblToday.Tag = HijriDate.FormatHijri(HToday, "dd/MM/yyyy")
+        _dateToday = HijriDate.FormatHijri(HToday, "dd/MM/yyyy")
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
@@ -499,10 +500,10 @@ Public Class BfCalendarUmAlQura
     End Property
 
     Private Sub lblToday_Click(sender As Object, e As EventArgs) Handles lblToday.Click
-        Dim strTag As String = lblToday.Tag.ToString()
-        Day = Int(strTag.Substring(0, 2))
-        Month = Int(strTag.Substring(3, 2))
-        Year = Int(strTag.Substring(6, 4))
+        Dim strDate As String = _dateToday.ToString()
+        Day = Int(strDate.Substring(0, 2))
+        Month = Int(strDate.Substring(3, 2))
+        Year = Int(strDate.Substring(6, 4))
         RaiseEvent DateChanged(sender, e)
     End Sub
 

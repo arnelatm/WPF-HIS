@@ -21,6 +21,7 @@ Public Class CCalendar
     Private targetCulture As CultureInfo = New CultureInfo(CultureInfo.CurrentCulture.Name)
     Private formCalendarType As GlobalSubs.CalendarToUse
     Private _todayCmdClicked As Boolean = False
+    Private _dateToday As String
 
     Public Sub New(dDate As DateTime?, calendarType As CalendarToUse)
 
@@ -319,7 +320,7 @@ Public Class CCalendar
 
     Private Sub FormatToday()
         Dim dToday As DateTime = DateTime.Now()
-        lblToday.Tag = dToday.ToShortDateString()
+        _dateToday = dToday.ToShortDateString()
 
         If Mid(originalCulture.Name.ToLower(), 1, 2) = "ar" Then
             lblToday.Text = " اليوم : " & dToday.ToString("dd MMM yyyy", targetCulture)

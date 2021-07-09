@@ -189,11 +189,11 @@ Public Class CFormEntryNew
 
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
         CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            GlobalVariables.RightToLeftLayout = True
-        Else
-            GlobalVariables.RightToLeftLayout = False
-        End If
+        'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+        '    GlobalVariables.RightToLeftLayout = True
+        'Else
+        '    GlobalVariables.RightToLeftLayout = False
+        'End If
         CreateDataSources()
         PublishEvent(New LanguageChanged(Me))
     End Sub
@@ -562,39 +562,23 @@ Public Class CFormEntryNew
     End Sub
 
     Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
-        If _debugSwitch Then
-            Debugger.Break()
-        End If
         If originalUi Then
             TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
         Else
             TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
         End If
-        'CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
+        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
         'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
         '    GlobalVariables.RightToLeftLayout = True
         'Else
         '    GlobalVariables.RightToLeftLayout = False
         'End If
-        SuspendLayout()
-        Dim lLocation = Location
-        Dim lWidth = Width
-        Dim lHeight = Height
-        Dim lTop = Top
-        Dim lLeft = Left
-        Visible = False
         TranslateForm()
-        ResumeLayout(False)
-        Width = lWidth
-        Height = lHeight
-        Top = lTop
-        Left = lLeft
-        Location = lLocation
-        Visible = True
-        'PublishClickedButton(ButtonClicked.Undo)`
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
-        'RecordPositionNumber = RecordPositionNumber
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New LanguageChanged(Me))
+        End If
     End Sub
 
     'Protected Overridable Function DataIsValid() As Boolean
