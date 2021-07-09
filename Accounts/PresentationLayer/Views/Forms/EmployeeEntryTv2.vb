@@ -28,37 +28,16 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo
 
-        Private ReadOnly _presenter
+        'Private ReadOnly _presenter
 
-        Public Sub New(ByRef presenter)
+        Public Sub New() 'ByRef presenter)
 
             ' This call is required by the designer.
             InitializeComponent()
-
-            _presenter = presenter
+            '_presenter = presenter
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = txtEmployeeName
-
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            'If GlobalVariables.RightToLeftLayout Then
-            '    SwitchUiLanguage(False)
-            '    'If FormCulture.TextInfo.IsRightToLeft Then
-            '    '    RightToLeftLayout = True
-            '    '    RightToLeft = RightToLeft.Yes
-            '    'Else
-            '    '    RightToLeftLayout = False
-            '    '    RightToLeft = RightToLeft.No
-            '    'End If
-            '    'If CultureInfo.CurrentUICulture.Name <> CultureInfo.CurrentCulture.Name Then
-            '    '    CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture
-            '    'End If
-            '    'CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
-            'End If
-            'tbcEmployee.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-            'tbcEmployee.RightToLeft = RightToLeft.Inherit
-            'DataGridViewEarnings.ShowFooter = True
-            'DataGridViewDeductions.ShowFooter = True
-
         End Sub
 
 #Region "Fields"

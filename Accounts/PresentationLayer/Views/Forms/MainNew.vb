@@ -1,12 +1,9 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
-Imports System.Runtime.Remoting
 Imports System.Threading
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.Interfaces
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Views.Forms
@@ -18,7 +15,6 @@ Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
-Imports Autofac
 Imports AutoMapper
 
 Namespace PresentationLayer.Views.Forms
@@ -390,7 +386,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub RunForm(Of TP, TF)()
             Dim pArgs As Type() = {Nothing}
             Dim presenter = Activator.CreateInstance(GetType(TP), pArgs)
-            Dim childMdiForm = Activator.CreateInstance(GetType(TF), {presenter})
+            Dim childMdiForm = Activator.CreateInstance(GetType(TF)) ', {presenter})
             presenter = Activator.CreateInstance(GetType(TP), childMdiForm)
             childMdiForm.MdiParent = Me
             childMdiForm.Show()

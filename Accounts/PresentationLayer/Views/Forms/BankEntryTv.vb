@@ -11,11 +11,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private _presenter
 
-        Public Sub New(ByRef presenter)
+        Public Sub New() 'ByRef presenter)
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            _presenter = presenter
+            ' _presenter = Presenter
             FirstControl = txtBankName
         End Sub
 
