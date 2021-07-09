@@ -24,7 +24,6 @@ Public Class BFMainNew
     Private _parentIdNo As Int32 = 0
     Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
-    Protected VSystemViewIdNo As Int16
     Protected InitializationMode As Boolean = True
     Protected LtrCultureInfoStr = GlobalVariables.DefaultUnmirroredCultureInfoStr
     Protected RtlCultureInfoStr = GlobalVariables.DefaultMirroredCultureInfoStr
@@ -47,7 +46,7 @@ Public Class BFMainNew
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
         End If
         ' Add any initialization after the InitializeComponent() call.
-
+        VSystemViewIdNo = GetSystemViewIdNo()
     End Sub
 
     Public Sub New(ByVal transDac As Dac, ByVal appDac As Dac)
@@ -98,6 +97,8 @@ Public Class BFMainNew
 
     Protected Property FormCulture As CultureInfo
 
+    Protected Property VSystemViewIdNo As Short
+
     'Public Sub SetupDisplay()
     '    If IsRightToLeft(_textDisplayLanguage) Then
     '        RightToLeft = RightToLeft.Yes
@@ -143,28 +144,28 @@ Public Class BFMainNew
         End If
     End Function
 
-    Public Sub TranslateForm() 'control As Control, pViewDisplayName As String)
+    Public Sub TranslateForm()
         Parent.SuspendDrawing()
-        Dim lTop = Top
-        Dim lLeft = Left
-        Visible = False
-        Top = lTop
-        Left = lLeft
-        Dim cmd As String
-        If ViewDisplayName Is Nothing Then
-            ViewDisplayName = Name
-        End If
-        cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
-        VSystemViewIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
+        Dim settings As New SettingsSaver
+        Dim allCtrl As New List(Of Control)
+        allCtrl = FindControlRecursive(allCtrl, Me)
+        settings.SaveSetting(Me)
+        ' form location is being changed when Resetting RightToLeftLayout so need to save values
+        ' to restore form with the same size and location
         DoubleBuffered = True
-        'If GlobalVariables.TranslationMode Then
-        TranslateCaptions(TextDisplayLanguage)
-        'End If
-        'Visible = False
+        TranslateCaptions(allCtrl, TextDisplayLanguage)
+        SetControlLayout(allCtrl)
+        settings.RestoreSetting(Me)
+        Parent.ResumeDrawing()
+        If GlobalVariables.TranslationMode Then
+            RaiseEvent AfterTranslateForm()
+        End If
+    End Sub
+
+    Protected Sub SetControlLayout(ByRef allCtrl As List(Of Control))
         Dim myImage As Bitmap
         myImage = BackgroundImage
         BackgroundImage = Nothing
-
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             GlobalVariables.RightToLeftLayout = True
             RightToLeft = RightToLeft.Yes
@@ -174,16 +175,8 @@ Public Class BFMainNew
             RightToLeft = RightToLeft.No
             RightToLeftLayout = False
         End If
+        LayOutControls(allCtrl)
         BackgroundImage = myImage
-        If GlobalVariables.TranslationMode Then
-            RaiseEvent AfterTranslateForm()
-        End If
-
-        Visible = True
-        Top = lTop
-        Left = lLeft
-
-        Parent.ResumeDrawing()
     End Sub
 
     Protected Sub RunTranslator(ByVal nSystemViewIdNo)
@@ -225,17 +218,25 @@ Public Class BFMainNew
         Return TranslatorDAC.ExecScalar(Of String)(cmd)
     End Function
 
-    Protected Sub TranslateCaptions(ByVal desiredLanguage As String, Optional ByVal allowFallBack As Boolean = True)
+    Protected Sub TranslateCaptions(ByRef allCtrl As List(Of Control), ByVal desiredLanguage As String, Optional ByVal allowFallBack As Boolean = True)
+        Dim targetLanguageIdNo As Short = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
+        If targetLanguageIdNo = 0 Then
+            UseOriginalCaptions()
+        Else
+            TranslateToLanguageIdNo(allCtrl, targetLanguageIdNo)
+        End If
+    End Sub
+
+    Private Function GetTargetLanguageIdNo(desiredLanguage As String, allowFallBack As Boolean) As Short
         Dim cmd As String
         Dim desiredLanguageIdNo As Int16
         Dim fallBackLanguageIdNo As Int16
         Dim fallBackLanguage As String
-        Dim targetLanguageIdNo As Int16 = 0
-        Dim useOriginal As Boolean = False
+        Dim targetLanguageIdNo As Int16
         cmd = "Select IdNo from Languages where cultureInfoCode = '" + desiredLanguage + "'"
         desiredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
         If desiredLanguageIdNo = 0 Then
-            useOriginal = True
+            targetLanguageIdNo = 0
         Else
             If Not TranslationLanguageExist(desiredLanguage) Then
                 If allowFallBack Then
@@ -243,28 +244,22 @@ Public Class BFMainNew
                     cmd = "Select cultureInfoCode from Languages where IdNo = " + fallBackLanguageIdNo.ToString()
                     fallBackLanguage = TranslatorDAC.ExecScalar(Of String)(cmd)
                     If Not NeedToTranslateText(fallBackLanguage) Then
-                        useOriginal = True
+                        targetLanguageIdNo = 0
                     Else
                         targetLanguageIdNo = fallBackLanguageIdNo
                     End If
                 Else
-                    useOriginal = True
+                    targetLanguageIdNo = 0
                 End If
             Else
                 targetLanguageIdNo = desiredLanguageIdNo
             End If
         End If
-        If useOriginal Then
-            UserOriginalCaptions()
-        End If
-        TranslateControls(targetLanguageIdNo)
-    End Sub
+        Return targetLanguageIdNo
+    End Function
 
-    Protected Sub TranslateControls(targetLanguageIdNo As Integer)
-        Dim cmd As String
-        cmd = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + VSystemViewIdNo.ToString()
-        Dim translations As DataSet
-        translations = TranslatorDAC.ReturnDs(cmd)
+    Protected Sub TranslateToLanguageIdNo(ByRef allCtrl As List(Of Control), targetLanguageIdNo As Integer)
+        Dim translations As DataSet = GetTranslations(targetLanguageIdNo)
         Dv = translations.Tables(0).DefaultView
         Dv.Sort = "Caption"
         Dim r As Integer
@@ -278,8 +273,7 @@ Public Class BFMainNew
         Else
             Text = Tag
         End If
-        Dim allCtrl As New List(Of Control)
-        For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
+        For Each cCtrl As Control In allCtrl
             If IsTranslatable(cCtrl) Then
                 If TypeOf cCtrl Is MenuStrip Then
                     Dim subMenuName = ""
@@ -288,18 +282,7 @@ Public Class BFMainNew
                 ElseIf TypeOf cCtrl Is ToolStrip Then
                     TranslateToolStripItems(cCtrl)
                 ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Then
-                    'Dim cT = CType(cCtrl, TreeView)
-                    'cT.ExpandAll()
-                    'cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-                    'cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
                 ElseIf TypeOf cCtrl Is DataGridView Then
-                    '_originalText = CaptionCollection.Item(cCtrl.Name)
-                    'r = Dv.Find(_originalText)
-                    'If r >= 0 Then
-                    ' CType(cCtrl, DataGridView).Text = Dv(r).Item(1)
-                    'Else
-                    'CType(cCtrl, DataGridView).Text = cCtrl.Tag
-                    'End If
                     TranslateDataGridView(cCtrl)
                 ElseIf TypeOf cCtrl Is DataGrid Then
                     _originalText = CaptionCollection.Item(cCtrl.Name)
@@ -313,13 +296,9 @@ Public Class BFMainNew
                     If TypeOf cCtrl Is CButton Then
                         TranslateButton(cCtrl)
                     ElseIf TypeOf cCtrl Is CTabControl Then
-                        'Dim tc = CType(cCtrl, CTabControl)
-                        'tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
-                        'tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
                     End If
                     Try
                         _originalText = CaptionCollection.Item(cCtrl.Name)
-
                         r = Dv.Find(_originalText)
                         If r >= 0 Then
                             cCtrl.Text = Dv(r).Item("TranslatedCaption")
@@ -329,20 +308,68 @@ Public Class BFMainNew
                     Catch ex As Exception
                         cCtrl.Text = cCtrl.Tag
                     End Try
-
                 End If
-                'ElseIf TypeOf cCtrl Is CTextBox Then
-                '    'Dim tc = CType(cCtrl, CTextBox)
-                '    'If tc.ValueIsNumeric Then
-                '    '    If tc.RightToLeft = RightToLeft.Yes Then
-                '    '        tc.TextAlign = HorizontalAlignment.Left
-                '    '    Else
-                '    '        tc.TextAlign = HorizontalAlignment.Right
-                '    '    End If
-                '    'End If
             End If
         Next
     End Sub
+
+    Protected Sub LayOutControls(ByRef allCtrl As List(Of Control))
+        For Each cCtrl As Control In allCtrl
+            If IsTranslatable(cCtrl) Then
+                If TypeOf cCtrl Is ToolStrip Then
+                    Dim cToolStrip As ToolStrip = cCtrl
+                    For Each obj As Object In cToolStrip.Items
+                        If TypeOf obj Is ToolStripButton Then
+                            TranslateToolStripButtonImage(obj)
+                        ElseIf TypeOf obj Is TextBox Then
+                            Dim c = CType(obj, TextBox)
+                            If GlobalVariables.RightToLeftLayout Then
+                                c.RightToLeft = RightToLeft.Yes
+                            Else
+                                c.RightToLeft = RightToLeft.No
+                            End If
+                        End If
+                    Next
+                ElseIf TypeOf cCtrl Is CTreeViewOld Or TypeOf cCtrl Is TreeView Or TypeOf cCtrl Is CTreeView Then
+                    Dim cT = CType(cCtrl, TreeView)
+                    cT.ExpandAll()
+                    cT.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+                    cT.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                ElseIf TypeOf cCtrl Is CButton Then
+                    TranslateButton(cCtrl)
+                ElseIf TypeOf cCtrl Is CTabControl Then
+                    Dim tc = CType(cCtrl, CTabControl)
+                    tc.RightToLeft = If(GlobalVariables.RightToLeftLayout, RightToLeft.Yes, RightToLeft.No)
+                    tc.RightToLeftLayout = GlobalVariables.RightToLeftLayout
+                End If
+            ElseIf TypeOf cCtrl Is CTextBox Then
+                Dim tc = CType(cCtrl, CTextBox)
+                If tc.ValueIsNumeric Then
+                    If tc.RightToLeft = RightToLeft.Yes Then
+                        tc.TextAlign = HorizontalAlignment.Left
+                    Else
+                        tc.TextAlign = HorizontalAlignment.Right
+                    End If
+                End If
+            End If
+        Next
+    End Sub
+
+    Protected Function GetTranslations(targetLanguageIdNo As Integer) As DataSet
+        Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + VSystemViewIdNo.ToString()
+        Dim translations As DataSet
+        translations = TranslatorDAC.ReturnDs(cmd)
+        Return translations
+    End Function
+
+    Protected Function GetSystemViewIdNo()
+        Dim cmd As String
+        If ViewDisplayName Is Nothing Then
+            ViewDisplayName = Name
+        End If
+        cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
+        Return TranslatorDAC.ExecScalar(Of Int16)(cmd)
+    End Function
 
     'Protected Sub TranslateControls(targetLanguageIdNo As Integer)
     '    Dim cmd As String
@@ -469,9 +496,6 @@ Public Class BFMainNew
     Private Sub TranslateButton(cCtrl As Control)
         Dim o = CType(cCtrl, CButton)
         Dim cButton = CType(cCtrl, CButton)
-        If cButton.Name = "CutToolStripButton" Then
-            Debugger.Break()
-        End If
         Dim cFileName = "btn" + o.OriginalImageName
         If cButton.Image IsNot Nothing And cButton.OriginalImageName IsNot Nothing Then
             If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
@@ -545,7 +569,7 @@ Public Class BFMainNew
             SetMenuSecurity(toolStripMenuItem, controlSecurityKey)
             If _addSecurityObject Then
                 Dim securityObject As New SecurityObject With {.SecurityObjectName = Mid(toolStripMenuItem.Name, 18),
-                        .SystemViewIdNo = VSystemViewIdNo,
+                        .SystemViewIdNo = _VSystemViewIdNo,
                         .ParentIdNo = parentIdNo}
                 parentIdNo = PresenterObj.AddSecurityObject(securityObject)
             End If
@@ -739,6 +763,7 @@ Public Class BFMainNew
 
     Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
         Dim parentIdNo As Int32
+        Dim systemViewIdNo = VSystemViewIdNo
         For Each dropDownItem As Object In dropDownItems
             Dim subMenu = TryCast(dropDownItem, ToolStripMenuItem)
             If subMenu IsNot Nothing Then
@@ -804,6 +829,7 @@ Public Class BFMainNew
 
     Private Sub SetToolStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, parentIdNo As Int32)
         Try
+            Dim systemViewIdNo = VSystemViewIdNo
             For Each obj As Object In dropDownItems
                 ' ReSharper disable once VBPossibleMistakenCallToGetType.2
                 If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then ' And GlobalVariables.SecurityGroupIdNo > 0 Then
@@ -851,7 +877,7 @@ Public Class BFMainNew
                     End If
                     If _addSecurityObject Then
                         Dim securityObject As New SecurityObject With {.SecurityObjectName = controlSecurityKey,
-                                                                       .SystemViewIdNo = VSystemViewIdNo,
+                                                                       .SystemViewIdNo = systemViewIdNo,
                                                                        .ParentIdNo = parentIdNo}
                         PresenterObj.AddSecurityObject(securityObject)
                     End If
@@ -887,9 +913,6 @@ Public Class BFMainNew
                     If subMenu.HasDropDownItems Then
                         subMenuName = subMenuName + "." + obj.Name
                         TranslateMenuStripItems(subMenu.DropDownItems, subMenuName)
-                        'Else
-                        '    Dim cControl As ToolStripMenuItem = obj
-                        '    cControl.Text = cControl.Tag
                     End If
 
                 End If
@@ -919,7 +942,7 @@ Public Class BFMainNew
         End Try
     End Sub
 
-    Private Sub UserOriginalCaptions()
+    Private Sub UseOriginalCaptions()
 
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
@@ -977,5 +1000,27 @@ Public Class BFMainNew
     '        End If
     '    Next
     'End Sub
+
+End Class
+
+Public Class SettingsSaver
+    Private _top As UInt16
+    Private _left As UInt16
+    Private _width As UInt16
+    Private _height As UInt16
+
+    Public Sub SaveSetting(control As Control)
+        _top = control.Top
+        _left = control.Left
+        _width = control.Width
+        _height = control.Height
+    End Sub
+
+    Public Sub RestoreSetting(control As Control)
+        control.Top = _top
+        control.Left = _left
+        control.Width = _width
+        control.Height = _height
+    End Sub
 
 End Class

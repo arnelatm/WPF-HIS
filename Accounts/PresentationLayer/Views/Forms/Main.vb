@@ -196,9 +196,9 @@ Namespace PresentationLayer.Views.Forms
             cForm.Show()
         End Sub
 
-        Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
-            RunForm(Of BankPresenter, BankEntryTv)()
-        End Sub
+        'Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
+        '    RunForm(Of BankPresenter, BankEntryTv)()
+        'End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm

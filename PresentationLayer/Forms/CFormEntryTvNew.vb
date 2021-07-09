@@ -31,11 +31,11 @@ Public Class CFormEntryTvNew
     '    'GetNSaveCaptions()
     'End Sub
 
-    Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
-        MyBase.SwitchUiLanguage(originalUi)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New LanguageChanged(Me))
-        End If
-    End Sub
+    'Protected Overrides Sub SwitchUiLanguage(originalUi As Boolean)
+    '    MyBase.SwitchUiLanguage(originalUi)
+    '    If Ea IsNot Nothing Then
+    '        Ea.PublishEvent(New LanguageChanged(Me))
+    '    End If
+    'End Sub
 
 End Class

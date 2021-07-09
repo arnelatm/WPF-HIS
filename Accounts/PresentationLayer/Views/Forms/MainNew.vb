@@ -347,23 +347,23 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of PayElementPresenter, PayElementEntryTv)()
         End Sub
 
-        Private Sub RunForm(Of TP As New, TF As New)()
-            Dim x As TP = New TP
-            Dim y As TF = New TF
-            Dim childMdiForm = Activator.CreateInstance(y.GetType())
-            Dim presenter = Activator.CreateInstance(x.GetType(), {childMdiForm})
-            childMdiForm.MdiParent = Me
-            'childMdiForm.GetNSaveCaptions()
-            childMdiForm.TranslateForm()
-            If GlobalVariables.RightToLeftLayout Then
-                childMdiForm.RightToLeft = RightToLeft.Yes
-                childMdiForm.RightToLeftLayout = True
-            Else
-                childMdiForm.RightToLeft = RightToLeft.No
-                childMdiForm.RightToLeftLayout = False
-            End If
-            childMdiForm.Show()
-        End Sub
+        'Private Sub RunForm(Of TP As New, TF As New)()
+        '    Dim x As TP = New TP
+        '    Dim y As TF = New TF
+        '    Dim childMdiForm = Activator.CreateInstance(y.GetType())
+        '    Dim presenter = Activator.CreateInstance(x.GetType(), {childMdiForm})
+        '    childMdiForm.MdiParent = Me
+        '    'childMdiForm.GetNSaveCaptions()
+        '    childMdiForm.TranslateForm()
+        '    If GlobalVariables.RightToLeftLayout Then
+        '        childMdiForm.RightToLeft = RightToLeft.Yes
+        '        childMdiForm.RightToLeftLayout = True
+        '    Else
+        '        childMdiForm.RightToLeft = RightToLeft.No
+        '        childMdiForm.RightToLeftLayout = False
+        '    End If
+        '    childMdiForm.Show()
+        'End Sub
 
         Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeReceivable.Click
             Dim childMdiForm As ErJournalEntry
@@ -375,46 +375,25 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemEmployees.Click
-            'Dim presenter As New EmployeePresenterNew(Nothing)
-            'Dim myForm = New EmployeeEntryTv2(presenter)
-            'presenter = New EmployeePresenterNew(myForm)
-            'myForm.Show()
-            RunForm2(Of EmployeePresenterNew, EmployeeEntryTv2)()
-            'RunForm2(Of SupplierPresenterNew, SupplierEntryTvNew)()
+            RunForm(Of EmployeePresenterNew, EmployeeEntryTv2)()
         End Sub
 
-        Private Sub RunForm2(Of TP, TF)()
+        'Private Sub RunForm(Of TP, TF)()
+        '    Dim pArgs As Type() = {Nothing}
+        '    Dim presenter = Activator.CreateInstance(GetType(TP))
+        '    Dim childMdiForm = Activator.CreateInstance(GetType(TF))
+        '    childMdiForm.SetPresenter(presenter)
+        '    childMdiForm.MdiParent = Me
+        '    childMdiForm.Show()
+        'End Sub
+
+        Private Sub RunForm(Of TP, TF)()
             Dim pArgs As Type() = {Nothing}
             Dim presenter = Activator.CreateInstance(GetType(TP), pArgs)
             Dim childMdiForm = Activator.CreateInstance(GetType(TF), {presenter})
             presenter = Activator.CreateInstance(GetType(TP), childMdiForm)
-            'GetNSaveCaptions()
             childMdiForm.MdiParent = Me
-            'childMdiForm.TranslateForm()
-            'If GlobalVariables.RightToLeftLayout Then
-            '    childMdiForm.RightToLeft = RightToLeft.Yes
-            '    childMdiForm.RightToLeftLayout = True
-            'Else
-            '    childMdiForm.RightToLeft = RightToLeft.No
-            '    childMdiForm.RightToLeftLayout = False
-            'End If
             childMdiForm.Show()
-
-            'Dim p As Type = GetType(TP)
-            'Dim f As Type = GetType(TF)
-            'Dim pArgs As Type() = {Nothing}
-            'Dim presenter = Activator.CreateInstance(GetType(TP), pArgs)
-            'Dim fArgs As Type() = {presenter}
-            'Dim myForm = Activator.CreateInstance(GetType(TF), Activator.CreateInstance(GetType(TP)))
-            'myForm.Show()
-            ''Dim makeme As Type = d1.MakeGenericType(typeArgs)
-            'Dim o As Object = Activator.CreateInstance(p)
-            'Dim itsMe As List(Of String) = TryCast(o, List(Of String))
-            'Console.WriteLine(If((itsMe Is Nothing), "Failed", "Succeeded"))
-            'Dim y As TF = New TF
-            'Dim presenter = Activator.CreateInstance(x)
-            'Dim childMdiForm = Activator.CreateInstance(y.GetType(), {presenter})
-            'childMdiForm.Show()
         End Sub
 
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _

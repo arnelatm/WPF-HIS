@@ -19,6 +19,7 @@ Partial Class CForm
         End Try
     End Sub
 
+
     'Required by the Windows Form Designer
     Private components As IContainer
 

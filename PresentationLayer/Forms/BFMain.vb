@@ -345,7 +345,7 @@ Public Class BfMain
             End If
         End If
         If useOriginal Then
-            UserOriginalCaptions()
+            UseOriginalCaptions()
         Else
             cmd = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + VSystemViewIdNo.ToString()
             Dim translations As DataSet
@@ -934,8 +934,7 @@ Public Class BfMain
         End Try
     End Sub
 
-    Private Sub UserOriginalCaptions()
-
+    Private Sub UseOriginalCaptions()
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
             If IsTranslatable(cCtrl) Then

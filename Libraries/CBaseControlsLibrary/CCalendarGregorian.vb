@@ -18,6 +18,7 @@ Public Class CCalendarGregorian
     Private ReadOnly passedDate As DateTime?
     Private ReadOnly currentCulture As CultureInfo = CultureInfo.CurrentCulture
     Private ReadOnly targetCulture As CultureInfo = New CultureInfo(CultureInfo.CurrentCulture.Name)
+    Private _dateToday As String
 
     Public Sub New(dDate As DateTime?)
         _initializing = True
@@ -264,7 +265,7 @@ Public Class CCalendarGregorian
 
     Private Sub FormatToday()
         Dim dToday As DateTime = DateTime.Now()
-        lblToday.Tag = dToday.ToShortDateString()
+        _dateToday = dToday.ToShortDateString()
         If CultureInfo.CurrentCulture.Name.ToLower().Remove(2) = "ar" Then
             lblToday.Text = " اليوم : " & dToday.ToString("dd MMM yyyy", targetCulture)
         Else
