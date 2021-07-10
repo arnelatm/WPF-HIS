@@ -20,10 +20,6 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _employeePayElementModel As New ModelAccounts("EmployeePayElement")
         Private ReadOnly _employeePhoneModel As New ModelAccounts("EmployeePhone")
 
-        'Public Sub New()
-        '    MyBase.New()
-        'End Sub
-
         Public Sub New(view As IEmployeeView)
             MyBase.New(view)
             If view IsNot Nothing Then

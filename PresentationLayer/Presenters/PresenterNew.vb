@@ -2338,6 +2338,36 @@ Public Class GetDataSource
 
 End Class
 
+Public Class GetDataSourceSpecial
+
+    Public Sub New(ByVal tableName As String, ByRef control As Control, Optional ByVal filter As String = Nothing)
+        Me.TableName = tableName
+        Me.Control = control
+        Me.Filter = filter
+    End Sub
+
+    Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal sortKey As String, Optional ByVal filter As String = Nothing)
+        Me.TableName = tableName
+        Me.Control = control
+        Me.Filter = filter
+        Me.SortKey = sortKey
+    End Sub
+
+    Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal fields As String(), Optional ByVal filter As String = Nothing)
+        Me.TableName = tableName
+        Me.Control = control
+        Me.Filter = filter
+        Me.Fields = fields
+    End Sub
+
+    Public Property TableName As String
+    Public Property Control As Control
+    Public Property Fields As String()
+    Public Property SortKey As String
+    Public Property Filter As String
+
+End Class
+
 Public Class GetLookupDataRequested
 
     'Public Sub New(ByVal tableName As String, ByRef view As Control, ByRef targetLookup As List(Of ClassesLibrary.LookupData), ByVal Optional filter As String = Nothing)
@@ -2347,6 +2377,11 @@ Public Class GetLookupDataRequested
     '    Me.View = view
     '    Me.TargetLookup = targetLookup
     'End Sub
+
+    Public Sub New(ByVal targetSourceName As String)
+        Me.TargetSourceName = targetSourceName
+    End Sub
+
 
     Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
@@ -2386,6 +2421,7 @@ Public Class GetLookupDataRequested
     Public Property Fields As String()
     Public Property Filter As String
     Public Property SortKey As String
+    Public Property TargetSourceName As String
     'Public Property TargetLookup As List(Of ClassesLibrary.LookupData)
 End Class
 

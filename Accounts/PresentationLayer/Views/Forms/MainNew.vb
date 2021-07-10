@@ -369,9 +369,8 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemEmployees.Click
-            RunForm(Of EmployeePresenterNew, EmployeeEntryTv2)()
+        Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployees.Click
+            RunForm(Of EmployeePresenterNew, EmployeeEntryTv)()
         End Sub
 
         'Private Sub RunForm(Of TP, TF)()
@@ -384,10 +383,8 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub RunForm(Of TP, TF)()
-            Dim pArgs As Type() = {Nothing}
-            Dim presenter = Activator.CreateInstance(GetType(TP), pArgs)
-            Dim childMdiForm = Activator.CreateInstance(GetType(TF)) ', {presenter})
-            presenter = Activator.CreateInstance(GetType(TP), childMdiForm)
+            Dim childMdiForm = Activator.CreateInstance(GetType(TF))
+            Activator.CreateInstance(GetType(TP), childMdiForm)
             childMdiForm.MdiParent = Me
             childMdiForm.Show()
         End Sub

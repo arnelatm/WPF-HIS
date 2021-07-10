@@ -41,7 +41,6 @@ Namespace PresentationLayer.Presenters
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
             CreateDataTables()
-
         End Sub
 
         Private Sub CreateDataTables()
