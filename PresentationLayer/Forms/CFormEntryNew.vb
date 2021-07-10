@@ -23,6 +23,7 @@ Public Class CFormEntryNew
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
     Protected SingleData As Boolean = False
+    Protected Presenter As Object
 
     Private _debugSwitch As Byte = 0
 
@@ -189,11 +190,6 @@ Public Class CFormEntryNew
 
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
         CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-        '    GlobalVariables.RightToLeftLayout = True
-        'Else
-        '    GlobalVariables.RightToLeftLayout = False
-        'End If
         CreateDataSources()
         PublishEvent(New LanguageChanged(Me))
     End Sub

@@ -117,23 +117,297 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;SplitContainer1.Panel1.Name" xml:space="preserve">
-    <value>SplitContainer1.Panel1</value>
-  </data>
-  <data name="&gt;&gt;SplitContainer1.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SplitContainer1.Panel1.Parent" xml:space="preserve">
-    <value>SplitContainer1</value>
-  </data>
-  <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TreeViewTableName.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TreeViewTableName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 559</value>
+  </data>
+  <data name="&gt;&gt;TreeViewTableName.Name" xml:space="preserve">
+    <value>TreeViewTableName</value>
+  </data>
+  <data name="&gt;&gt;TreeViewTableName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TreeViewTableName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TreeViewTableName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="ImageListTreeView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="ImageListTreeView.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFQAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/wEABf8B8gHxAf8B8QH3
+        AuwB8wP/AgAB7AHrAewC7SkAA/8B9AHsARIBFAFDARQBdAFtAesBbQH0Av8BAAFtAksBRAEUAeoBbQHs
+        Ae0mAAH/AfcBbQESARQBFQESAewBmQGgAeUBmQHtAesB9AH/Ae0BSwFMA1IBSwFKAUQBFAHqAW0B7CMA
+        Af8BbQGaAXMBHAGZAuUBWQM4AaAB7AFtAf8B7QFLAkwCUgNTAVIBSwFKAUQBbSIAAf8BmQHlAlkHOAFe
+        AaAB7AH/Ae0BSwNMAlIGUwEUIgAB9gGgAVkJOAH7AV4BmQHyAe0BSwRMAlIFUwEUIgAB9gGgAeUHOAT7
+        AaAB8gHtAUsFTAJSBFMBFCIAAfYBwwGgAV4DOAf7AaABGwHtAksBSgFEA0wCUgNTARQiAAH/AcMBoAFe
+        BfsFXgHDAfQB7QFMAUQBTAZLAVICUwEUIgAB/wH2AaAB5QFeA/sBXgTlAaAB9gHwAe0BTAFEBEwBmgGg
+        AXUDSwEUIgAB/wH2AcMBoAHlAV4D5QGgAcMBoAHDAfYB8gG8Ae0BSgVMAnoBdQNMAUsiAAH/AfYCwwKg
+        A8MD9gHwAfIB7QHvAe0BUgGaAcMDmgF1AXQBUwNSAUoiAAL/AfYCwwEbAbwB8AG8AfICvAGSAe8B6wHv
+        AQAB7QHsAUsBTAFSAXQCegGaA3oBRCIABP8B8wH3AewB7QHsAe8BBwHxARsC9AH/AwAB7QFGAUUCAAFE
+        ASMCSwHsIwAE/wH0AbwB8QH2CP8DAAHtAVIBTANFASQmABD/BAAB7QH3A0snAAFCAU0BPgcAAT4DAAEo
+        AwABQAMAARADAAEBAQABAQUAAYAXAAP/AwABwQH/BgABgAE/BwABBwcAAQMHAAEDBwABAwcAAQMHAAED
+        BwABAwcAAQMHAAEDBwABAwYAAYABAwYAAeMBBwYAAeABPwYAAfABfxoACw==
+</value>
+  </data>
+  <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>299, 17</value>
+  </metadata>
+  <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>434, 17</value>
+  </metadata>
+  <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>564, 17</value>
+  </metadata>
+  <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>688, 17</value>
+  </metadata>
+  <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 494</value>
+  </data>
+  <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtNotes.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>555, 60</value>
+  </data>
+  <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
+    <value>txtNotes</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
+    <value>75</value>
+  </data>
+  <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblNotes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 494</value>
+  </data>
+  <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 23</value>
+  </data>
+  <data name="lblNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>159</value>
+  </data>
+  <data name="lblNotes.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="lblNotes.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblNotes.Name" xml:space="preserve">
+    <value>lblNotes</value>
+  </data>
+  <data name="&gt;&gt;lblNotes.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblNotes.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
+    <value>74</value>
+  </data>
+  <data name="lblAccountStatus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblAccountStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAccountStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 443</value>
+  </data>
+  <data name="lblAccountStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblAccountStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 20</value>
+  </data>
+  <data name="lblAccountStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>238</value>
+  </data>
+  <data name="lblAccountStatus.Text" xml:space="preserve">
+    <value>Account Status</value>
+  </data>
+  <data name="lblAccountStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblAccountStatus.Name" xml:space="preserve">
+    <value>lblAccountStatus</value>
+  </data>
+  <data name="&gt;&gt;lblAccountStatus.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblAccountStatus.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblAccountStatus.ZOrder" xml:space="preserve">
+    <value>68</value>
+  </data>
+  <data name="lblDateAccountOpen.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblDateAccountOpen.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDateAccountOpen.Location" type="System.Drawing.Point, System.Drawing">
+    <value>351, 417</value>
+  </data>
+  <data name="lblDateAccountOpen.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblDateAccountOpen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 24</value>
+  </data>
+  <data name="lblDateAccountOpen.TabIndex" type="System.Int32, mscorlib">
+    <value>232</value>
+  </data>
+  <data name="lblDateAccountOpen.Text" xml:space="preserve">
+    <value>Date Account Opening</value>
+  </data>
+  <data name="lblDateAccountOpen.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblDateAccountOpen.Name" xml:space="preserve">
+    <value>lblDateAccountOpen</value>
+  </data>
+  <data name="&gt;&gt;lblDateAccountOpen.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblDateAccountOpen.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblDateAccountOpen.ZOrder" xml:space="preserve">
+    <value>66</value>
+  </data>
+  <data name="txtOpeningBalance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblOpeningBalance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblOpeningBalance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblOpeningBalance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 365</value>
+  </data>
+  <data name="lblOpeningBalance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblOpeningBalance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 23</value>
+  </data>
+  <data name="lblOpeningBalance.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="lblOpeningBalance.Text" xml:space="preserve">
+    <value>Opening Balance</value>
+  </data>
+  <data name="lblOpeningBalance.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblOpeningBalance.Name" xml:space="preserve">
+    <value>lblOpeningBalance</value>
+  </data>
+  <data name="&gt;&gt;lblOpeningBalance.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblOpeningBalance.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblOpeningBalance.ZOrder" xml:space="preserve">
+    <value>56</value>
+  </data>
+  <data name="txtOpeningBalance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 365</value>
+  </data>
+  <data name="txtOpeningBalance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtOpeningBalance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 23</value>
+  </data>
+  <data name="txtOpeningBalance.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="txtOpeningBalance.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;txtOpeningBalance.Name" xml:space="preserve">
+    <value>txtOpeningBalance</value>
+  </data>
+  <data name="&gt;&gt;txtOpeningBalance.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtOpeningBalance.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtOpeningBalance.ZOrder" xml:space="preserve">
+    <value>57</value>
+  </data>
   <data name="floDataDisplay.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="floDataDisplay.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk0WwFAAAAAAADYAAAAoAAAAkAYAABoEAAABABgAAAAAAAAAAADEDgAAxA4AAAAAAAAAAAAAsPSVsPSV
@@ -88354,7 +88628,6 @@
   <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>150</value>
   </data>
@@ -90116,72 +90389,6 @@
   <data name="&gt;&gt;cacPaymentMethod.ZOrder" xml:space="preserve">
     <value>55</value>
   </data>
-  <data name="lblOpeningBalance.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblOpeningBalance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblOpeningBalance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 365</value>
-  </data>
-  <data name="lblOpeningBalance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblOpeningBalance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 23</value>
-  </data>
-  <data name="lblOpeningBalance.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="lblOpeningBalance.Text" xml:space="preserve">
-    <value>Opening Balance</value>
-  </data>
-  <data name="lblOpeningBalance.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblOpeningBalance.Name" xml:space="preserve">
-    <value>lblOpeningBalance</value>
-  </data>
-  <data name="&gt;&gt;lblOpeningBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblOpeningBalance.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblOpeningBalance.ZOrder" xml:space="preserve">
-    <value>56</value>
-  </data>
-  <data name="txtOpeningBalance.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtOpeningBalance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 365</value>
-  </data>
-  <data name="txtOpeningBalance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtOpeningBalance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 23</value>
-  </data>
-  <data name="txtOpeningBalance.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="txtOpeningBalance.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtOpeningBalance.Name" xml:space="preserve">
-    <value>txtOpeningBalance</value>
-  </data>
-  <data name="&gt;&gt;txtOpeningBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtOpeningBalance.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;txtOpeningBalance.ZOrder" xml:space="preserve">
-    <value>57</value>
-  </data>
   <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -90350,36 +90557,6 @@
   <data name="&gt;&gt;lblSettlementDiscount.ZOrder" xml:space="preserve">
     <value>62</value>
   </data>
-  <data name="txtSettlementDiscount.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtSettlementDiscount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 391</value>
-  </data>
-  <data name="txtSettlementDiscount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtSettlementDiscount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 23</value>
-  </data>
-  <data name="txtSettlementDiscount.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="txtSettlementDiscount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtSettlementDiscount.Name" xml:space="preserve">
-    <value>txtSettlementDiscount</value>
-  </data>
-  <data name="&gt;&gt;txtSettlementDiscount.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtSettlementDiscount.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;txtSettlementDiscount.ZOrder" xml:space="preserve">
-    <value>63</value>
-  </data>
   <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -90446,42 +90623,6 @@
   <data name="&gt;&gt;cacDiscountSchemeIdNo.ZOrder" xml:space="preserve">
     <value>65</value>
   </data>
-  <data name="lblDateAccountOpen.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblDateAccountOpen.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDateAccountOpen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 417</value>
-  </data>
-  <data name="lblDateAccountOpen.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblDateAccountOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 24</value>
-  </data>
-  <data name="lblDateAccountOpen.TabIndex" type="System.Int32, mscorlib">
-    <value>232</value>
-  </data>
-  <data name="lblDateAccountOpen.Text" xml:space="preserve">
-    <value>Date Account Opening</value>
-  </data>
-  <data name="lblDateAccountOpen.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblDateAccountOpen.Name" xml:space="preserve">
-    <value>lblDateAccountOpen</value>
-  </data>
-  <data name="&gt;&gt;lblDateAccountOpen.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblDateAccountOpen.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblDateAccountOpen.ZOrder" xml:space="preserve">
-    <value>66</value>
-  </data>
   <data name="dtpDateAccountOpen.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 9.75pt</value>
   </data>
@@ -90518,42 +90659,6 @@
   </data>
   <data name="&gt;&gt;dtpDateAccountOpen.ZOrder" xml:space="preserve">
     <value>67</value>
-  </data>
-  <data name="lblAccountStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblAccountStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblAccountStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 443</value>
-  </data>
-  <data name="lblAccountStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblAccountStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 20</value>
-  </data>
-  <data name="lblAccountStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>238</value>
-  </data>
-  <data name="lblAccountStatus.Text" xml:space="preserve">
-    <value>Account Status</value>
-  </data>
-  <data name="lblAccountStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblAccountStatus.Name" xml:space="preserve">
-    <value>lblAccountStatus</value>
-  </data>
-  <data name="&gt;&gt;lblAccountStatus.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblAccountStatus.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblAccountStatus.ZOrder" xml:space="preserve">
-    <value>68</value>
   </data>
   <data name="cacAccountStatus.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -90621,6 +90726,12 @@
   <data name="&gt;&gt;lblActive.ZOrder" xml:space="preserve">
     <value>70</value>
   </data>
+  <data name="chkActive.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="chkActive.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
   <data name="chkActive.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -90628,16 +90739,22 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 445</value>
+    <value>511, 443</value>
+  </data>
+  <data name="chkActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 13</value>
+    <value>25, 21</value>
   </data>
   <data name="chkActive.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
   <data name="chkActive.Text" xml:space="preserve">
-    <value>CCheckBox1</value>
+    <value> </value>
+  </data>
+  <data name="chkActive.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;chkActive.Name" xml:space="preserve">
     <value>chkActive</value>
@@ -90717,77 +90834,11 @@
   <data name="&gt;&gt;txtBalance.ZOrder" xml:space="preserve">
     <value>73</value>
   </data>
-  <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblNotes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 494</value>
-  </data>
-  <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 23</value>
-  </data>
-  <data name="lblNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>159</value>
-  </data>
-  <data name="lblNotes.Text" xml:space="preserve">
-    <value>Notes</value>
-  </data>
-  <data name="lblNotes.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Name" xml:space="preserve">
-    <value>lblNotes</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>74</value>
-  </data>
-  <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 494</value>
-  </data>
-  <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtNotes.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 60</value>
-  </data>
-  <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
-    <value>txtNotes</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.Parent" xml:space="preserve">
-    <value>floDataDisplay</value>
-  </data>
-  <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>75</value>
-  </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>300, 53</value>
   </data>
   <data name="floDataDisplay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -90799,7 +90850,7 @@
     <value>0, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>727, 563</value>
+    <value>727, 559</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -90811,71 +90862,41 @@
     <value>AATM.Libraries.CBaseControlsLibrary.CFlowLayout, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;floDataDisplay.Parent" xml:space="preserve">
-    <value>SplitContainer1.Panel2</value>
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;floDataDisplay.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel2.Name" xml:space="preserve">
-    <value>SplitContainer1.Panel2</value>
+  <data name="txtSettlementDiscount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="txtSettlementDiscount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>511, 391</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel2.Parent" xml:space="preserve">
-    <value>SplitContainer1</value>
+  <data name="txtSettlementDiscount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="txtSettlementDiscount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
   </data>
-  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1104, 563</value>
+  <data name="txtSettlementDiscount.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
   </data>
-  <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>367</value>
+  <data name="txtSettlementDiscount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
-    <value>SplitContainer1</value>
+  <data name="&gt;&gt;txtSettlementDiscount.Name" xml:space="preserve">
+    <value>txtSettlementDiscount</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;txtSettlementDiscount.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;txtSettlementDiscount.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;txtSettlementDiscount.ZOrder" xml:space="preserve">
+    <value>63</value>
   </data>
-  <data name="FormTreeView.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
-  <data name="FormTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 563</value>
-  </data>
-  <data name="&gt;&gt;FormTreeView.Name" xml:space="preserve">
-    <value>FormTreeView</value>
-  </data>
-  <data name="&gt;&gt;FormTreeView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FormTreeView.Parent" xml:space="preserve">
-    <value>SplitContainer1.Panel1</value>
-  </data>
-  <data name="&gt;&gt;FormTreeView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>146, 17</value>
-  </metadata>
-  <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>281, 17</value>
-  </metadata>
-  <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>411, 17</value>
-  </metadata>
-  <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>535, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -90892,7 +90913,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1104, 616</value>
+    <value>1027, 612</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -90900,11 +90921,14 @@
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1010, 600</value>
   </data>
-  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Customer Maintenance Form</value>
+  </data>
+  <data name="&gt;&gt;ImageListTreeView.Name" xml:space="preserve">
+    <value>ImageListTreeView</value>
+  </data>
+  <data name="&gt;&gt;ImageListTreeView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
     <value>StoreCaptions1</value>
@@ -90931,9 +90955,9 @@
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CustomerEntryTvNew</value>
+    <value>CustomerEntryTv</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>AATM.PresentationLayer.Forms.CFormEntryTvNew, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.PresentationLayer.Forms.CFormEntryTv, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

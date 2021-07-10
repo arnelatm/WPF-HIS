@@ -1,52 +1,43 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
+Imports System.Runtime.CompilerServices
+Imports System.Runtime.InteropServices
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
-Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class EmployeeEntryTv
         Implements IEmployeeView
 
-        Private _countryTelCodes
-        Private _deductionsByName
-        Private _earningsByName
+        Private _countryTelCodes As List(Of ClassesLibrary.LookupData)
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _employeePhones As List(Of EmployeePhoneView)
-        Private _unit
-        Private _phoneTypes
+        Private _unit As List(Of ClassesLibrary.LookupData)
+
+        ' ReSharper disable once UnassignedField.Local
+        Private _phoneTypes As List(Of ClassesLibrary.LookupData)
+
+        ' ReSharper disable once UnassignedField.Local
+        Private _deductionsByName As List(Of ClassesLibrary.LookupData)
+
+        ' ReSharper disable once UnassignedField.Local
+        Private _earningsByName As List(Of ClassesLibrary.LookupData)
 
         Private ReadOnly _nfi As NumberFormatInfo
-        Private MyPresenter As EmployeePresenter
 
-        Public Sub New()
-            MyBase.New()
+        'Private ReadOnly _presenter
+
+        Public Sub New() 'ByRef presenter)
+
             ' This call is required by the designer.
             InitializeComponent()
-
+            '_presenter = presenter
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "Employee"
-            TvMainFieldName = "EmployeeName"
-            TvSecondaryFieldName = "EmployeeCode"
-            SortOrderKey = "EmployeeName"
             FirstControl = txtEmployeeName
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            ' Add any initialization after the InitializeComponent() call.
-            tbcEmployee.RightToLeftLayout = GlobalVariables.RightToLeftLayout
-            tbcEmployee.RightToLeft = RightToLeft.Inherit
-            MyPresenter = New EmployeePresenter(Me)
-            PresenterObj = MyPresenter
-            Ea = MyPresenter.Ea
-            Ea.SubscribeEvent(Me)
-            'DataGridViewEarnings.Ea.SubscribeEvent(Me)
-            'DataGridViewDeductions.Ea.SubscribeEvent(Me)
-            DataGridViewEarnings.ShowFooter = True
-            DataGridViewDeductions.ShowFooter = True
-
         End Sub
 
 #Region "Fields"
@@ -62,11 +53,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Balance As Decimal Implements IEmployeeView.Balance
             Get
-                If txtBalance.Text <> "" Then
-                    Return Convert.ToSingle(txtBalance.Text)
-                Else
-                    Return 0
-                End If
+                Return NumParser(Of Decimal)(txtBalance.Text)
             End Get
             Set
                 txtBalance.Text = Value
@@ -142,11 +129,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DutyHours As Decimal Implements IEmployeeView.DutyHours
             Get
-                If txtDutyHours.Text <> "" Then
-                    Return Convert.ToSingle(txtDutyHours.Text)
-                Else
-                    Return 0
-                End If
+                Return NumParser(Of Decimal)(txtDutyHours.Text)
             End Get
             Set
                 txtDutyHours.Text = FormatDecimalNumber(Value)
@@ -212,13 +195,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        '    Get
-        '        Return txtTitle.Text
-        '    End Get
-        '    Set
-        '        txtTitle.Text = Value
-        '    End Set
-        'End Property
         Public Property EmployeeNameAra As String Implements IEmployeeView.EmployeeNameAra
             Get
                 Return txtEmployeeNameAra.Text
@@ -250,18 +226,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property BankIdNo As Int16 Implements IEmployeeView.BankIdNo
-        '    Get
-        '        If tcbBankIdNo.Text <> "" Then
-        '            Return Convert.ToInt32(tcbBankIdNo.Text)
-        '        Else
-        '            Return 0
-        '        End If
-        '    End Get
-        '    Set
-        '        tcbBankIdNo.Text = Value
-        '    End Set
-        'End Property
         Public Property Iban As String Implements IEmployeeView.Iban
             Get
                 Return txtIban.Text
@@ -322,11 +286,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property OpeningBalance As Decimal Implements IEmployeeView.OpeningBalance
             Get
-                If txtOpeningBalance.Text <> "" Then
-                    Return Convert.ToSingle(txtOpeningBalance.Text)
-                Else
-                    Return 0
-                End If
+                Return NumParser(Of Decimal)(txtOpeningBalance.Text)
             End Get
             Set
                 txtOpeningBalance.Text = FormatDecimalNumber(Value)
@@ -339,6 +299,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboPayCycleidNo.SetValue(Value)
+                Ea.PublishEvent(New PayCycleIdNoChanged(Value))
             End Set
         End Property
 
@@ -359,24 +320,6 @@ Namespace PresentationLayer.Views.Forms
                 cboPaymentMethod.SetValue(Value)
             End Set
         End Property
-
-        'Public Property PayRateType As String Implements IEmployeeView.PayRateType
-        '    Get
-        '        Return cboPayRateType.GetValue()
-        '    End Get
-        '    Set
-        '        cboPayRateType.SetValue(Value)
-        '    End Set
-        'End Property
-
-        'Public Property PaySalariedOrHourly As String Implements IEmployeeView.PaySalariedOrHourly
-        '    Get
-        '        Return cboPaySalariedOrHourly.GetValue()
-        '    End Get
-        '    Set
-        '        cboPaySalariedOrHourly.SetValue(Value)
-        '    End Set
-        'End Property
 
         Public Property PoBox As String Implements IEmployeeView.PoBox
             Get
@@ -401,11 +344,7 @@ Namespace PresentationLayer.Views.Forms
                 Return dtpReleasedDate.Value
             End Get
             Set
-                'If Value Is Nothing Then
-                '    dtpBirthDate.Value = Date.Now()
-                'Else
                 dtpReleasedDate.Value = Value
-                'End If
             End Set
         End Property
 
@@ -447,33 +386,70 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        'Public Property EarningsByName As List(Of ClassesLibrary.LookupData)
+        '    Get
+        '        CreateLookupData("PayElement",
+        '                      "EarningsByName",
+        '                      "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+        '        Return _earningsByName
+        '    End Get
+        '    Set
+        '        _earningsByName = Value
+        '    End Set
+        'End Property
+
+        'Public Property DeductionsByName As List(Of ClassesLibrary.LookupData)
+        '    Get
+        '        CreateLookupData("PayElement",
+        '                      "DeductionsByName",
+        '                      "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+        '        Return _deductionsByName
+        '    End Get
+        '    Set
+        '        _countryTelCodes = Value
+        '    End Set
+        'End Property
+
+        'Public Property PhoneTypes As List(Of ClassesLibrary.LookupData)
+        '    Get
+        '        CreateLookupData("PhoneType", "PhoneTypes")
+        '        Return _phoneTypes
+        '    End Get
+        '    Set
+        '        _phoneTypes = Value
+        '    End Set
+        'End Property
+
+        Public Property CountryTelCodes As List(Of ClassesLibrary.LookupData)
+            Get
+                CreateLookupData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
+                Return _countryTelCodes
+            End Get
+            Set
+                _countryTelCodes = Value
+            End Set
+        End Property
+
 #End Region
 
-        'Public Sub OnEventHandler(ByRef eventType As InsertDgvLine) Implements ISubscriber(Of InsertDgvLine).OnEventHandler
-        '    If eventType.Name = "DataGridViewEarnings" Then
-        '        bsEarnings.Insert(eventType.BsRow, New EmployeeEarningView)
-        '    ElseIf eventType.Name = "DataGridViewDeductions" Then
-        '        bsDeductions.Insert(eventType.BsRow, New EmployeePayElementView)
-        '    End If
-        'End Sub
-
         Protected Overrides Sub CreateDataSources()
-            cacBankIdNo.DataSource = MyPresenter.GetLookup("Bank")
-            cacCountryCode.DataSource = MyPresenter.GetLookup("Country")
-            cacDepartmentIdNo.DataSource = MyPresenter.GetLookup("Department")
-            cacDesignationIdNo.DataSource = MyPresenter.GetLookup("Designation")
-            cacGender.DataSource = MyPresenter.MakeEnumComboList(Of MaleFemaleSelection)
-            cacMaritalStatus.DataSource = MyPresenter.MakeEnumComboList(Of MaritalStatusSelection)
-            cacNationalityCode.DataSource = MyPresenter.GetLookup("Country")
-            cacReligionIdNo.DataSource = MyPresenter.GetLookup("Religion")
-            cboPayCycleidNo.DataSource = MyPresenter.GetLookup("PayCycle")
-            cboPayGroupIdNo.DataSource = MyPresenter.GetLookup("PayGroup")
-            cboPaymentMethod.DataSource = MyPresenter.MakeEnumComboList(Of PayrollPaymentMethodSelection)
-            _deductionsByName = MyPresenter.GetLookup("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            _earningsByName = MyPresenter.GetLookup("PayElement", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            _phoneTypes = MyPresenter.GetLookup("PhoneType")
-            _countryTelCodes = MyPresenter.GetIntPhoneCodes()
-            _unit = MyPresenter.MakeEnumComboList(Of PayRateUnitSelection)
+            CreateEnumDataSource(Of MaleFemaleSelection)(cacGender)
+            CreateEnumDataSource(Of MaritalStatusSelection)(cacMaritalStatus)
+            CreateEnumDataSource(Of PayrollPaymentMethodSelection)(cboPaymentMethod)
+            CreateDataSource("Bank", cacBankIdNo)
+            CreateDataSource("Country", cacCountryCode)
+            CreateDataSource("Department", cacDepartmentIdNo)
+            CreateDataSource("Designation", cacDesignationIdNo)
+            CreateDataSource("Country", cacNationalityCode)
+            CreateDataSource("Religion", cacReligionIdNo)
+            CreateDataSource("PayCycle", cboPayCycleidNo)
+            CreateDataSource("PayGroup", cboPayGroupIdNo)
+            _phoneTypes = GetLookupData("PhoneType", NameOf(_phoneTypes))
+            _deductionsByName = GetLookupData("PayElement", NameOf(_deductionsByName),
+                          "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            _earningsByName = GetLookupData("PayElement", NameOf(_earningsByName),
+                          "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            _unit = GetEnumData(Of PayRateUnitSelection)()
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -511,31 +487,21 @@ Namespace PresentationLayer.Views.Forms
         }
         End Sub
 
-        Private Sub EmployeeEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            DataGridViewEarnings.DgvFooter.ColumnToSum("dgvEarningAmount") = True
-            DataGridViewEarnings.DgvFooter.SetText("dgvEarningIdNo", "Totals ->")
-            DataGridViewDeductions.DgvFooter.ColumnToSum("dgvDeductionAmount") = True
-            DataGridViewDeductions.DgvFooter.SetText("dgvDeductionIdNo", "Totals ->")
-            DisplayNetEarnings()
-        End Sub
-
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            MyBase.RecordPositionChanged(e)
-            Dim value As Double
-            value = Convert.ToDecimal(MyPresenter.GetEmployeeBalance(IdNo))
-            txtBalance.Text = value.ToString("N", _nfi)
-            DisplayNetEarnings()
-        End Sub
-
-        Private Sub DisplayNetEarnings()
-            Dim nTotal As Decimal
-            nTotal = DataGridViewEarnings.GetColumnTotal("dgvEarningAmount") -
-                     DataGridViewDeductions.GetColumnTotal("dgvDeductionAmount")
-            'txtNetTotal.Text = nTotal.ToString("N", _nfi)
-        End Sub
+        'Private Sub EmployeeEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    'If GlobalVariables.RightToLeftLayout Then
+        '    '    SwitchUiLanguage(True)
+        '    '    SwitchUiLanguage(False)
+        '    'Else
+        '    '    SwitchUiLanguage(True)
+        '    'End If
+        '    DataGridViewEarnings.DgvFooter.ColumnToSum("dgvEarningAmount") = True
+        '    DataGridViewEarnings.DgvFooter.SetText("dgvEarningIdNo", "Totals ->")
+        '    DataGridViewDeductions.DgvFooter.ColumnToSum("dgvDeductionAmount") = True
+        '    DataGridViewDeductions.DgvFooter.SetText("dgvDeductionIdNo", "Totals ->")
+        'End Sub
 
         Private Sub BindEmployeeDeduction()
-            SuspendLayout()
+            'SuspendLayout()
             bsDeductions.DataSource = Nothing
             DataGridViewDeductions.Refresh()
             bsDeductions.DataSource = RegularEmployeeDeductions
@@ -559,11 +525,11 @@ Namespace PresentationLayer.Views.Forms
                 dgvSequenceDeduction.DisplayOnly = True
                 dgvDeductionAmount.DisplayOnly = True
             End With
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
         Private Sub BindEmployeeEarning()
-            SuspendLayout()
+            'SuspendLayout()
             bsEarnings.DataSource = Nothing
             DataGridViewEarnings.Refresh()
             bsEarnings.DataSource = RegularEmployeeEarnings
@@ -587,11 +553,11 @@ Namespace PresentationLayer.Views.Forms
                 dgvSequenceEarning.DisplayOnly = True
                 dgvEarningAmount.DisplayOnly = True
             End With
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
         Private Sub BindEmployeePhone()
-            SuspendLayout()
+            'SuspendLayout()
             bsPhones.DataSource = Nothing
             DataGridViewPhones.Refresh()
             bsPhones.DataSource = EmployeePhones
@@ -609,7 +575,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
                 dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvCountryTelIdNo.DataSource = _countryTelCodes
+                dgvCountryTelIdNo.DataSource = CountryTelCodes
                 dgvCountryTelIdNo.DisplayMember = "Name"
                 dgvCountryTelIdNo.ValueMember = "IdNo"
                 dgvCountryTelIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -622,10 +588,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvFullPhoneAra.Visible = False
                 dgvFullPhone.Visible = True
             End If
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
-        Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
+        Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
             DisplayPhoneTab()
         End Sub
 
@@ -638,16 +604,16 @@ Namespace PresentationLayer.Views.Forms
             tbcEmployee.SelectTab(tbpPhones)
         End Sub
 
-        Private Sub tbpPhones_Leave(sender As Object, e As EventArgs) Handles tbpPhones.Leave
+        Private Sub OnTbpPhones_Leave(sender As Object, e As EventArgs) Handles tbpPhones.Leave
             tbpPhones.Parent = Nothing
             BindEmployeePhone()
         End Sub
 
-        Private Sub EmployeeEntryTvTest_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        Private Sub OnEmployeeEntryTvTest_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             tbpPhones.Parent = Nothing
         End Sub
 
-        Private Sub DataGridViewPhones_Enter(sender As Object, e As EventArgs) Handles DataGridViewPhones.Enter
+        Private Sub OnDataGridViewPhones_Enter(sender As Object, e As EventArgs) Handles DataGridViewPhones.Enter
             If btnEdit.Enabled Or btnAdd.Enabled Then
                 DataGridViewPhones.EditingMode = False
             Else
@@ -655,7 +621,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhones.CellEndEdit
+        Private Sub OnDataGridViewPhones_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhones.CellEndEdit
             With DataGridViewPhones
                 If .CurrentRow IsNot Nothing Then
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
@@ -668,149 +634,25 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private Sub EarningsOnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
-            DisplayNetEarnings()
-            'With DataGridViewEarnings
-            '    Select Case .CurrentCell.OwningColumn.Name.ToLower()
-            '        Case $"dgvPayElementIdNo"
-            '            bsEarnings.Current.EarningName = DataGridViewEarnings.GetEditingValue("Name")
-            '            bsEarnings.Current.EarningCode = DataGridViewEarnings.GetEditingValue("Code")
-            '    End Select
-            'End With
-        End Sub
-
-        Private Sub DeductionsOnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
-            DisplayNetEarnings()
-            'With DataGridViewEarnings
-            '    Select Case .CurrentCell.OwningColumn.Name.ToLower()
-            '        Case $"dgvPayElementIdNo"
-            '            bsEarnings.Current.EarningName = DataGridViewEarnings.GetEditingValue("Name")
-            '            bsEarnings.Current.EarningCode = DataGridViewEarnings.GetEditingValue("Code")
-            '    End Select
-            'End With
-        End Sub
-
-        Private Sub DataGridViewPhoneDisplay_Click(sender As Object, e As EventArgs) Handles DataGridViewPhoneDisplay.Click
+        Private Sub OnDataGridViewPhoneDisplay_Click(sender As Object, e As EventArgs) Handles DataGridViewPhoneDisplay.Click
             DisplayPhoneTab()
         End Sub
 
-        Private Sub DataGridViewPhoneDisplay_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
-            DisplayPhoneTab()
+        Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit
+            Ea.PublishEvent(New EmployeePayElementChanged(RegularEmployeeEarnings,
+                                                  DataGridViewEarnings.CurrentRow.Index,
+                                                  DataGridViewEarnings.CurrentCell.OwningColumn.DataPropertyName,
+                                                  DataGridViewEarnings.CurrentCell.OwningColumn.Name,
+                                                  DataGridViewEarnings.CurrentCell.Value))
         End Sub
 
-        'Private Sub DgvEarning_OnBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewEarnings.CellBeginEdit
-        '    With DataGridViewEarnings
-        '        Dim nIndex = .CurrentRow.Index
-        '        Select Case .CurrentCell.OwningColumn.Name
-        '            Case $"dgvEarningAmount"
-        '                Messaging.Show(True, $"MsgAmountChangeNotAllowed")
-        '        End Select
-        '    End With
-        'End Sub
-
-        Private Sub DgvEarning_OnEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit
-            With DataGridViewEarnings
-                If .CurrentRow IsNot Nothing Then
-                    Dim nIndex = .CurrentRow.Index
-                    Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-                    Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(MyPresenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
-                    Dim calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-                    Dim amount As Decimal
-                    Dim selectedRow As EmployeePayElementView
-                    selectedRow = DataGridViewEarnings.Rows(nIndex).DataBoundItem
-                    Select Case .CurrentCell.OwningColumn.Name
-                        Case $"dgvEarningIdNo"
-                            earnIdNo = .CurrentCell.Value
-                            calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-                            If IsEmpty(selectedRow.Unit) Then
-                                selectedRow.Unit = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Unit")
-                            End If
-                            If selectedRow.Rate = 0 Then
-                                selectedRow.Rate = MyPresenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Rate")
-                            End If
-                            If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                                amount = 0
-                            ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                                amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, selectedRow.Unit)
-                            End If
-                        Case $"dgvEarningRate"
-                            If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                                amount = 0
-                            ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                                amount = MyPresenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeEarnings(nIndex).Unit)
-                            End If
-                        Case $"dgvEarningUnit"
-                            Dim unit = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-                            amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
-                    End Select
-                    selectedRow.Amount = amount
-                End If
-            End With
+        Private Sub DgvDeduction_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDeductions.CellEndEdit
+            Ea.PublishEvent(New EmployeePayElementChanged(RegularEmployeeDeductions,
+                                                  DataGridViewDeductions.CurrentRow.Index,
+                                                  DataGridViewDeductions.CurrentCell.OwningColumn.DataPropertyName,
+                                                  DataGridViewDeductions.CurrentCell.OwningColumn.Name,
+                                                  DataGridViewDeductions.CurrentCell.Value))
         End Sub
-
-        Private Sub DgvDeduction_OnEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDeductions.CellEndEdit
-            With DataGridViewDeductions
-                If .CurrentRow IsNot Nothing Then
-                    Dim nIndex = .CurrentRow.Index
-                    Dim deductionIdNo = RegularEmployeeDeductions(nIndex).PayElementIdNo
-                    Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(MyPresenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
-                    Dim calcType = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "CalculationType")
-                    Dim amount As Decimal
-                    Dim selectedRow As EmployeePayElementView
-                    selectedRow = DataGridViewDeductions.Rows(nIndex).DataBoundItem
-                    Select Case .CurrentCell.OwningColumn.Name
-                        Case $"dgvDeductionIdNo"
-                            deductionIdNo = .CurrentCell.Value
-                            calcType = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "CalculationType")
-                            If IsEmpty(selectedRow.Unit) Then
-                                selectedRow.Unit = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Unit")
-                            End If
-                            If selectedRow.Rate = 0 Then
-                                selectedRow.Rate = MyPresenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Rate")
-                            End If
-                            If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                                amount = 0
-                            ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                                amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, selectedRow.Unit)
-                            End If
-                        Case $"dgvDeductionRate"
-                            If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-                                amount = 0
-                            ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-                                amount = MyPresenter.ComputePayAmount(payFrequency, .CurrentCell.Value, RegularEmployeeDeductions(nIndex).Unit)
-                            End If
-                        Case $"dgvDeductionUnit"
-                            Dim unit = .CurrentCell.Value
-                            amount = MyPresenter.ComputePayAmount(payFrequency, selectedRow.Rate, unit)
-                    End Select
-                    selectedRow.Amount = amount
-                End If
-            End With
-        End Sub
-
-        'Private Sub DgvDeduction_OnBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewDeductions.CellBeginEdit
-        '    With DataGridViewEarnings
-        '        Dim nIndex = .CurrentRow.Index
-        '        Select Case .CurrentCell.OwningColumn.Name
-        '            Case "dgvDeductionAmount"
-        '                Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-        '                Dim calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
-        '                If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-        '                    Messaging.Show(True, $"MsgAmountChangeNotAllowed")
-        '                    .CancelEdit()
-        '                End If
-
-        '            Case "dgvDeductionRate"
-        '                Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-        '                Dim calcType = MyPresenter.GetFieldWithIdNo(earnIdNo, "earning", "CalculationType")
-        '                'If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-        '                '    Messaging.Show(True, $"MsgRateChangeNotAllowed")
-        '                '    .CancelEdit()
-        '                'End If
-
-        '        End Select
-        '    End With
-        'End Sub
 
     End Class
 

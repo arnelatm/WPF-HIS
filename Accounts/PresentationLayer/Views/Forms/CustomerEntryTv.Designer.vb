@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class CustomerEntryTv
-        Inherits CFormEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -24,8 +24,8 @@ Namespace PresentationLayer.Views.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomerEntryTv))
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomerEntryTvNew))
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -100,23 +100,29 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TreeViewTableName
+            'SplitContainer1
             '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
             '
-            'ImageListTreeView
+            'SplitContainer1.Panel2
             '
-            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
-            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
-            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
             '
             'txtNotes
             '
@@ -1337,6 +1343,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacArAccountIdNo.FilterRule = Nothing
             Me.cacArAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacArAccountIdNo.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.cacArAccountIdNo, True)
             resources.ApplyResources(Me.cacArAccountIdNo, "cacArAccountIdNo")
             Me.cacArAccountIdNo.ForeColor = System.Drawing.Color.Black
             Me.cacArAccountIdNo.FormattingEnabled = True
@@ -1375,6 +1382,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.FilterRule = Nothing
             Me.cacPaymentMethod.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacPaymentMethod.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.cacPaymentMethod, True)
             resources.ApplyResources(Me.cacPaymentMethod, "cacPaymentMethod")
             Me.cacPaymentMethod.ForeColor = System.Drawing.Color.Black
             Me.cacPaymentMethod.FormattingEnabled = True
@@ -1513,31 +1521,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblActive.Name = "lblActive"
             Me.lblActive.Translatable = True
             '
-            'chkActive
-            '
-            resources.ApplyResources(Me.chkActive, "chkActive")
-            Me.chkActive.AutoCheck = False
-            Me.chkActive.BackColor = System.Drawing.Color.White
-            Me.chkActive.BegFindValue = Nothing
-            Me.chkActive.DisplayOnly = False
-            Me.chkActive.EditingMode = False
-            Me.chkActive.EndFindValue = Nothing
-            Me.chkActive.FieldDescription = Nothing
-            Me.chkActive.FieldName = Nothing
-            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkActive.FindEnabled = True
-            Me.floDataDisplay.SetFlowBreak(Me.chkActive, True)
-            Me.chkActive.ForeColor = System.Drawing.Color.Black
-            Me.chkActive.IFindableControl_FindEnabled = False
-            Me.chkActive.IgnoreCase = False
-            Me.chkActive.LinkedLabel = Nothing
-            Me.chkActive.Name = "chkActive"
-            Me.chkActive.NoLabel = True
-            Me.chkActive.OldValue = Nothing
-            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkActive.Translatable = False
-            Me.chkActive.UseVisualStyleBackColor = True
-            '
             'CLabel3
             '
             Me.CLabel3.DisplayOnly = True
@@ -1574,20 +1557,44 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBalance.Translatable = False
             Me.txtBalance.ValueIsNumeric = True
             '
-            'CustomerEntryTv
+            'chkActive
+            '
+            Me.chkActive.BackColor = System.Drawing.Color.Transparent
+            Me.chkActive.BegFindValue = Nothing
+            Me.chkActive.DisplayOnly = False
+            Me.chkActive.EditingMode = True
+            Me.chkActive.EndFindValue = Nothing
+            Me.chkActive.FieldDescription = Nothing
+            Me.chkActive.FieldName = Nothing
+            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkActive.FindEnabled = False
+            resources.ApplyResources(Me.chkActive, "chkActive")
+            Me.floDataDisplay.SetFlowBreak(Me.chkActive, True)
+            Me.chkActive.IFindableControl_FindEnabled = False
+            Me.chkActive.IgnoreCase = False
+            Me.chkActive.LinkedLabel = Nothing
+            Me.chkActive.Name = "chkActive"
+            Me.chkActive.NoLabel = True
+            Me.chkActive.OldValue = Nothing
+            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkActive.Translatable = False
+            Me.chkActive.UseVisualStyleBackColor = False
+            '
+            'CustomerEntryTvNew
             '
             resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "CustomerEntryTv"
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
-        Me.floDataDisplay.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.Name = "CustomerEntryTvNew"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.floDataDisplay.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblAccountStatus As CLabel
@@ -1651,7 +1658,6 @@ End Sub
         Friend WithEvents lblSettlementDiscount As CLabel
         Friend WithEvents txtSettlementDiscount As CTextBox
         Friend WithEvents lblOpeningBalance As CLabel
-        Friend WithEvents chkActive As CCheckBox
         Friend WithEvents txtVatNumber As CTextBox
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents lblActive As CLabel
@@ -1665,5 +1671,6 @@ End Sub
         Friend WithEvents cacAccountStatus As CaComboBox
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents txtBalance As CTextBox
+        Friend WithEvents chkActive As CCheckBox
     End Class
 End Namespace

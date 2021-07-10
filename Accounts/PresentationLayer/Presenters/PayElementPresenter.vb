@@ -15,10 +15,6 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _PayElementAccountModel As New ModelAccounts("PayElementAccount")
         Private ReadOnly _payElementItemModel As New ModelAccounts("PayElementItem")
 
-        Public Sub New()
-            MyBase.New()
-        End Sub
-
         Public Sub New(view As IPayElementView)
             MyBase.New(view)
             If view IsNot Nothing Then
