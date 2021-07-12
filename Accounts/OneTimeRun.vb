@@ -105,6 +105,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgInvalidTotalPercentage", "Total Percentage must be 100.00%.", "Invalid Entry")
         Messaging.AddMessage("MsgBlankRevenueCostCenter", "Blank Revenue Cost Center not allowed in line # {lineNumber}.", "Invalid Entry")
         Messaging.AddMessage("MsgTvSelectionNotAllowed", "Sorry you can't change selection while in Edit or Add Mode. Either save or undo edits/add before you can change selection.", "Invalid action")
+        Messaging.AddMessage("MsgRequiredField", "Sorry, the field [{fieldName}] is a required field!", "Invalid Entry")
     End Sub
 
     'Public Shared Sub CreateEnums()

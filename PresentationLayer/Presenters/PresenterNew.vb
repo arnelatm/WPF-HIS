@@ -14,7 +14,6 @@ Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 Imports AATM.ServicesLayer.Services
-Imports AutoMapper
 Imports KellermanSoftware.CompareNetObjects
 
 ''' <summary>
@@ -43,7 +42,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
     Protected CompareDifferences As String
-    Protected Model As TM
+    Protected Model As New TM
     Protected DataService
     Protected DbDataDao
     Protected OriginalModel
@@ -68,7 +67,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Public Sub New(itemView As IView)
         If itemView IsNot Nothing Then
             Me.View = itemView
-            Me.Model = New TM
+            'Me.Model = New TM
             MyErrorProvider = GetErrorProvider()
             Ea.SubscribeEvent(Me)
             InitializeTreeViewIfPresent()
@@ -1347,89 +1346,11 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Return dataList
     End Function
 
-    'Public Function MakeEnumComboList2(Of TE)()
-    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
-    '    For Each c In [Enum].GetValues(GetType(TE))
-    '        Dim data As New ClassesLibrary.LookupData With {
-    '                .IdNo = CInt(c),
-    '                .Code = CInt(c),
-    '                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-    '                }
-    '        dataList.Add(data)
-    '    Next
-    '    Return dataList
-    'End Function
-
     Public Sub AddToParentError(errors As List(Of String))
         'Dim mainBizObj = DirectCast(DirectCast(DirectCast(Service, Service).DataService, ServicesLayer.Services.Service).DataBo, BusinessLayer.BusinessObject)
         Dim mainBizObj = DirectCast(DirectCast(Service, ServicesLayer.Services.Service).DataBo, BusinessLayer.BusinessObject)
         mainBizObj.AddError(errors)
     End Sub
-
-    'Public Function IsBusinessDataValid(ByRef dataDictionary As Dictionary(Of String, Object)) As Boolean
-    '    Dim retValue As Boolean = False
-    '    GlobalVariables.Mapper.Map(Of T, TM)(View, Model)
-    '    If Service.IsValid(Model) Then
-    '        retValue = True
-    '    Else
-    '        UpdateErrors(dataDictionary)
-    '    End If
-    '    Return retValue
-    'End Function
-
-    'Private Sub UpdateErrors(ByRef dataDictionary As Dictionary(Of String, Object))
-
-    'End Sub
-
-    'Public Overridable Function ValidateView()
-    '    Dim validationsPassed As Boolean
-    '    validationsPassed = True
-    '    Dim allControls As New List(Of Control)
-    '    Dim originalValue As String
-    '    Dim cForm As Form
-    '    cForm = View
-    '    For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-    '        If TypeOf cCtrl Is IEntryControl Then
-
-    '            If TypeOf cCtrl Is CTextBoxIdNo Then
-    '                ' no validations for this type of control. These are Identity Columns and are filled automatically
-    '                ' by the Data Server.
-    '            ElseIf TypeOf cCtrl Is CTextBox AndAlso GetPropertyValue(cCtrl, "ComputedValue") Then
-    '                ' ignore this also computed values don't need to be validated for empty values
-    '            ElseIf TypeOf cCtrl Is CTextBoxArabic Then
-    '                Dim thisControl As CTextBoxArabic
-    '                thisControl = cCtrl
-    '                If thisControl.EnglishControl Is Nothing Then
-    '                    MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{thisControl.Name}> not set.")
-    '                End If
-    '                originalValue = PresenterObj.GetOriginalValue(thisControl.EnglishControl)
-    '                Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
-    '                If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
-    '                    thisControl.Text = englishText
-    '                End If
-    '            ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
-    '                ' check for duplicate values
-    '                Dim thisControl As CTextBox = cCtrl
-    '                If thisControl.ValueIsNumeric Then
-    '                    If Not IsNumberValid(cCtrl) Then
-    '                        validationsPassed = False
-    '                    End If
-    '                End If
-    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
-    '                    validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
-    '                End If
-    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
-    '                    If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
-    '                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
-    '                    End If
-    '                End If
-    '            End If
-
-    '        End If
-    '    Next
-    '    AutoValidationsPassed = validationsPassed
-    '    Return validationsPassed
-    'End Function
 
     Public Sub OnFindFieldRequested_EventHandler(ByRef eventType As FindFieldRequested) Implements ISubscriber(Of FindFieldRequested).OnEventHandler
         Dim idNo = Service.FindFieldNew(TableName, eventType.FindableControl, SortOrderKey, DataFilter)
@@ -1502,10 +1423,10 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
             If Not ChangesMade() Then
                 Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
                 noChanges = True
-            End If
-        Else
-            If Not IsBizDataValid() Then
-                validated = False
+            Else
+                If Not IsBizDataValid() Then
+                    validated = False
+                End If
             End If
         End If
         If noChanges Then
