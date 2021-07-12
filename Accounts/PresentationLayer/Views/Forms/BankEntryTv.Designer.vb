@@ -62,6 +62,12 @@ Namespace PresentationLayer.Views.Forms
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             resources.ApplyResources(Me.FormTreeView, "FormTreeView")
             '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
+            Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
@@ -80,7 +86,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
             Me.TxtIdNo.MaximumValue = Nothing
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
@@ -108,7 +114,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.SetFlowBreak(Me.txtBankCode, True)
             resources.ApplyResources(Me.txtBankCode, "txtBankCode")
             Me.txtBankCode.ForeColor = System.Drawing.Color.Black
-            Me.txtBankCode.LinkedLabel = Nothing
+            Me.txtBankCode.LinkedLabel = Me.lblBankCode
             Me.txtBankCode.MaximumValue = Nothing
             Me.txtBankCode.MinimumValue = Nothing
             Me.txtBankCode.Name = "txtBankCode"
@@ -135,7 +141,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.SetFlowBreak(Me.txtBankName, True)
             resources.ApplyResources(Me.txtBankName, "txtBankName")
             Me.txtBankName.ForeColor = System.Drawing.Color.Black
-            Me.txtBankName.LinkedLabel = Nothing
+            Me.txtBankName.LinkedLabel = Me.lblBankName
             Me.txtBankName.MaximumValue = Nothing
             Me.txtBankName.MinimumValue = Nothing
             Me.txtBankName.Name = "txtBankName"
@@ -163,7 +169,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.SetFlowBreak(Me.txtBankNameAra, True)
             resources.ApplyResources(Me.txtBankNameAra, "txtBankNameAra")
             Me.txtBankNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtBankNameAra.LinkedLabel = Nothing
+            Me.txtBankNameAra.LinkedLabel = Me.lblBankNameAra
             Me.txtBankNameAra.MaximumValue = Nothing
             Me.txtBankNameAra.MinimumValue = Nothing
             Me.txtBankNameAra.Name = "txtBankNameAra"
@@ -188,7 +194,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.FindEnabled = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
-            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.LinkedLabel = Me.lblNotes
             Me.txtNotes.MaximumValue = Nothing
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"

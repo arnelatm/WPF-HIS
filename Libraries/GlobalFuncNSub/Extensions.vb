@@ -132,9 +132,14 @@ Public Module Extensions
     End Function
 
     <Extension()>
-    Public Function SplitCamelCase(ByVal str As String) As String
-        Return Regex.Replace(Regex.Replace(str, "(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"), "(\p{Ll})(\P{Ll})", "$1 $2")
+    Public Function SplitCamelCase(ByVal inputString As String) As String
+        Return System.Text.RegularExpressions.Regex.Replace(inputString, "([A-Z])", " $1", System.Text.RegularExpressions.RegexOptions.Compiled).Trim()
+        'Return Regex.Replace(Regex.Replace(str, "(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"), "(\p{Ll})(\P{Ll})", "$1 $2")
     End Function
+
+    'Public Function SplitCamelCase(ByVal input As String) As String
+    '    'Return System.Text.RegularExpressions.Regex.Replace(input, "([A-Z])", " $1", System.Text.RegularExpressions.RegexOptions.Compiled).Trim()
+    'End Function
 
     '<Extension()>
     'Public Function IgnoreAllNonExisting(Of TSource, TDestination)(ByVal expression As IMappingExpression(Of TSource, TDestination)) As IMappingExpression(Of TSource, TDestination)
