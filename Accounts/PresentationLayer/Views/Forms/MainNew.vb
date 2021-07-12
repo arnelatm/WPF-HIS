@@ -284,7 +284,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCustomerClients.Click
             Dim presenter As New CustomerPresenterNew(Nothing)
-            Dim myForm = New CustomerEntryTvNew(presenter)
+            Dim myForm = New CustomerEntryTv(presenter)
             presenter = New CustomerPresenterNew(myForm)
             myForm.Show()
         End Sub

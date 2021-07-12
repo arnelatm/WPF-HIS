@@ -1,6 +1,8 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
@@ -12,7 +14,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As ISupplierView)
             MyBase.New(view)
             TableName = "Supplier"
-            ModelOfPresenter = New ModelAccounts("Supplier")
+            Service = New ServiceAccounts("Supplier")
             TreeViewMainField = "SupplierName"
             TreeViewSecondaryField = "SupplierCode"
             SortOrderKey = "SupplierName"
@@ -21,7 +23,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetSupplierBalance(idNo As Integer)
-            Return Model.GetFieldValue(Of Decimal)("Sum(Credit-Debit)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString() & " and SpecialAccount = 'AP'")
+            Return Service.GetFieldValue(Of Decimal)("Sum(Credit-Debit)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString() & " and SpecialAccount = 'AP'")
         End Function
 
         Private Function FunctionOnSuccessfulUpdate() Handles MyBase.RecordUpdatedSuccessfully
@@ -37,13 +39,13 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function UpdateOpeningBalance()
-            Return ModelOfPresenter.UpdateOpeningBalance(DataModel)
+            Return Service.UpdateOpeningBalance(DataModel)
         End Function
 
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             If retVal >= 0 And IsEmpty(View.SupplierCode) Then
-                retVal = ModelOfPresenter.GenerateCode(View.IdNo)
-                View.SupplierCode = ModelOfPresenter.GetFieldWithIdNo(View.IdNo, "Supplier", "SupplierCode")
+                retVal = Service.GenerateCode(View.IdNo)
+                View.SupplierCode = Service.GetFieldWithIdNo(View.IdNo, "Supplier", "SupplierCode")
             End If
         End Sub
 

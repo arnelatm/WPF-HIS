@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
@@ -9,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IJournalPrefixView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("JournalPrefix")
+            Service = New ServiceAccounts("JournalPrefix")
             TableName = "JournalPrefix"
             TreeViewMainField = "JournalName"
             TreeViewSecondaryField = "JournalCode"

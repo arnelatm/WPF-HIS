@@ -3,6 +3,7 @@ Imports System.Reflection
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -158,6 +159,83 @@ Namespace Services
 
         Public Function GetRecordExternal(Of TM, TD As New)(tableName As String, idNo As Int32, ByRef externalService As Object) As TM
             Return externalService.InvokeMember("Get" + tableName, BindingFlags.InvokeMethod, Nothing, Me, New Object() {idNo})
+        End Function
+
+        Public Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+            Dim data = GetRecords(tableName, sortKey, fields, filter)
+            Dim lookupSetting = GlobalVariables.LookupSetting()
+            If lookupSetting = "CodeAndName" Then
+                Return ProcessLookupByCodeName(data, fields.Count())
+            ElseIf lookupSetting = "NameAndCode" Then
+                Return ProcessLookupByNameCode(data, fields.Count())
+            ElseIf lookupSetting = "Name" Then
+                Return ProcessLookupByName(data, fields.Count())
+            Else
+                Return ProcessLookupByCodeName(data, fields.Count())
+            End If
+        End Function
+
+        Private Function ProcessLookupByNameCode(data As Object, fieldCount As UInt16) As List(Of ClassesLibrary.LookupData)
+            Dim tlData = New List(Of ClassesLibrary.LookupData)
+            If fieldCount = 3 Then
+                For i = 1 To Int(data.Count / 3)
+                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 3 - 3),
+                            .Name = data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)),
+                            .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+                            }
+                    tlData.Add(tData)
+                Next
+            Else
+                For i = 1 To Int(data.Count / 2)
+                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 2 - 2),
+                            .Name = data(i * 2 - 1) & " | " & data(i * 2 - 2)
+                            }
+                    tlData.Add(tData)
+                Next
+            End If
+            Return tlData
+        End Function
+
+        Private Function ProcessLookupByCodeName(data As Object, fieldCount As UInt16) As List(Of ClassesLibrary.LookupData)
+            Dim tlData As New List(Of ClassesLibrary.LookupData)
+            If fieldCount = 3 Then
+                For i = 1 To Int(data.Count / 3)
+                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 3 - 3),
+                            .Name = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)) & " | " & data(i * 3 - 2),
+                            .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+                            }
+                    tlData.Add(tData)
+                Next
+            Else
+                For i = 1 To Int(data.Count / 2)
+                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 2 - 2),
+                            .Name = If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1)) & " | " & data(i * 2 - 2)
+                            }
+                    tlData.Add(tData)
+                Next
+            End If
+            Return tlData
+        End Function
+
+        Private Function ProcessLookupByName(data As Object, fieldCount As UInt16) As List(Of ClassesLibrary.LookupData)
+            Dim tlData = New List(Of ClassesLibrary.LookupData)
+            If fieldCount = 3 Then
+                For i = 1 To Int(data.Count / 3)
+                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 3 - 3),
+                            .Name = data(i * 3 - 2),
+                            .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+                            }
+                    tlData.Add(tData)
+                Next
+            Else
+                For i = 1 To Int(data.Count / 2)
+                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 2 - 2),
+                            .Name = data(i * 2 - 1)
+                            }
+                    tlData.Add(tData)
+                Next
+            End If
+            Return tlData
         End Function
 
 #Region "Current Service Function"

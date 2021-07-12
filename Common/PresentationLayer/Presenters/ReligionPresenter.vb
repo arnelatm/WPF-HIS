@@ -2,6 +2,7 @@
 Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries
 Imports AATM.PresentationLayer.Presenters
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
@@ -10,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IReligionView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelCommon("Religion")
+            Service = New Service("Religion")
             TableName = "Religion"
             TreeViewMainField = "ReligionName"
             TreeViewSecondaryField = "ReligionCode"

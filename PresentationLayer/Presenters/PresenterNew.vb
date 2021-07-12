@@ -13,11 +13,12 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
+Imports AATM.ServicesLayer.Services
 Imports KellermanSoftware.CompareNetObjects
 
 ''' <summary>
-'''     Base class for all presenter classes. Keeps track of Model and View classes.
-'''     Notice that Model is static and View is set in the constructor.
+'''     Base class for all presenter classes. Keeps track of Service and View classes.
+'''     Notice that Service is static and View is set in the constructor.
 ''' </summary>
 ''' <remarks>
 '''     MV Patterns: MVP design pattern.
@@ -34,7 +35,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                ISubscriber(Of LanguageChanged)
 
     Public ChildPresenters As New List(Of Object)
-    Public ChildModels As New List(Of Object)
+    Public ChildServices As New List(Of Service)
     Public IdFieldName As String = "IdNo"
     Public MyErrorProvider As New ErrorProviderExtended
 
@@ -61,15 +62,15 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
     Private ReadOnly _withTreeView As Boolean = False
+    Protected Service As Object
 
     Public Sub New(itemView As T)
         If itemView IsNot Nothing Then
             Me.View = itemView
             'MyErrorProvider = CallByName(View, "MyErrorProvider", CallType.Get)
 
-            MyErrorProvider = LateBinding.GetField(View, "MyErrorProvider")
+            MyErrorProvider = GetErrorProvider()
             Ea.SubscribeEvent(Me)
-
             Dim pi As PropertyInfo = View.GetType().GetProperty("FormTreeView")
             If pi IsNot Nothing Then
                 _withTreeView = True
@@ -78,8 +79,12 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End If
     End Sub
 
+    Private Function GetErrorProvider() As Object
+        Return LateBinding.GetField(View, "MyErrorProvider")
+    End Function
+
     Protected Sub New()
-        Model = New Model()
+        Service = New Service()
     End Sub
 
     Delegate Sub FillDataFunc(ByRef dataView As Object, ByRef workRow As DataRow)
@@ -205,24 +210,24 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Property LastIdNo As Int32
 
-    ' This is the model of the Inheriting Presenter
-    ' when referred to in this module this will be the current model
+    ' This is the Service of the Inheriting Presenter
+    ' when referred to in this module this will be the current Service
     ' while if referred in the Inheriting Presenter it will be the
-    ' model assigned to that presenter.
-    Public Property ModelOfPresenter
-        Get
-            Return Model
-        End Get
-        Set(value)
-            Model = value
-        End Set
-    End Property
+    ' Service assigned to that presenter.
+    'Public Property ModelOfPresenter
+    '    Get
+    '        Return Service
+    '    End Get
+    '    Set(value)
+    '        Service = value
+    '    End Set
+    'End Property
 
     Public Property NewlyAddedRecordIdNo As Int32
 
     Public ReadOnly Property RecordCount As Integer
         Get
-            Return Model.GetRecordCount(TableName, DataFilter)
+            Return Service.GetRecordCount(TableName, DataFilter)
         End Get
     End Property
 
@@ -281,7 +286,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Protected Property LookUpFilterKey As String = Nothing
     Protected Property LookUpSortExpression As String
     Protected Property LookUpTableToGet As String
-    Protected Property Model As IModel
+
+    'Protected Property Service As IModel
     Protected Shared Property ModelTblColProp As IModelTblColProp = New ModelTblColProp
 
     'Public Sub FindFieldContinue(recIdKey As Integer)
@@ -379,7 +385,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Public Function CheckIfUnique(textValue As String, fieldName As String, pTargetIdNo As Integer) As Boolean
-        If Model.CheckIfUnique(textValue, TableName, fieldName, pTargetIdNo) Then
+        If Service.CheckIfUnique(textValue, TableName, fieldName, pTargetIdNo) Then
             Return True
         End If
         Return False
@@ -387,7 +393,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function CountRecordWithKey(searchValue As String, searchFieldName As String) As Integer
         Try
-            Return Model.CountRecordWithKey(searchValue, TableName, searchFieldName)
+            Return Service.CountRecordWithKey(searchValue, TableName, searchFieldName)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -403,7 +409,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim retValue As Integer
         Try
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
-                retValue = Model.DeleteRecord(idNo, TableName)
+                retValue = Service.DeleteRecord(idNo, TableName)
                 If retValue > 0 Then
                     If GlobalVariables.EventAggregator IsNot Nothing Then
                         'GlobalVariables.EventAggregator.PublishEvent(New RecordDeleted(idNo))
@@ -435,7 +441,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Sub FindFieldNew(findableControl As IFindableControl)
-        Dim idNo = Model.FindFieldNew(TableName, findableControl, SortOrderKey, DataFilter)
+        Dim idNo = Service.FindFieldNew(TableName, findableControl, SortOrderKey, DataFilter)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else
@@ -444,7 +450,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Sub FindDateField(fieldName As String, findableControl As IFindableControl)
-        Dim idNo = Model.FindDateField(TableName, findableControl, DataFilter)
+        Dim idNo = Service.FindDateField(TableName, findableControl, DataFilter)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else
@@ -453,7 +459,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Function FindFieldContinue(idNo As Int32) As Integer
-        Return Model.FindFieldContinue(TableName, idNo, SortOrderKey)
+        Return Service.FindFieldContinue(TableName, idNo, SortOrderKey)
     End Function
 
     Public Function FindRecord() As Integer
@@ -462,7 +468,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Public Function GetAppSetting(ByVal settingCode As String, ByVal group As String, ByVal description As String)
-        Dim retValue = Model.GetRecordFieldWithKey(settingCode, "Setting", "SettingCode", "Value")
+        Dim retValue = Service.GetRecordFieldWithKey(settingCode, "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption(description)
             Dim groupSetting As String = group
@@ -473,23 +479,23 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Public Function GetBizObjectErrors() As List(Of String)
-        Return Model.GetBizObjectErrors()
+        Return Service.GetBizObjectErrors()
     End Function
 
     Public Function GetBizObjectRules()
-        Return Model.GetBizObjectRules()
+        Return Service.GetBizObjectRules()
     End Function
 
     Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
         Try
-            Return Model.GetControlSecurityIdNo(searchValue, menu)
+            Return Service.GetControlSecurityIdNo(searchValue, menu)
         Catch ex As Exception
             Return Nothing
         End Try
     End Function
 
     Public Function GetDepartmentUseSetting()
-        Dim retValue = Model.GetRecordFieldWithKey("DEPT", "Setting", "SettingCode", "Value")
+        Dim retValue = Service.GetRecordFieldWithKey("DEPT", "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption("Use Revenue/Cost Centers")
             Dim groupSetting As String = "Company"
@@ -505,7 +511,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetFieldWithIdNo(idNo As Object, pTableName As String, returnFieldName As String) Implements IPresenter.GetFieldWithIdNo
         Try
-            Return Model.GetFieldWithIdNo(idNo, pTableName, returnFieldName)
+            Return Service.GetFieldWithIdNo(idNo, pTableName, returnFieldName)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -515,7 +521,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Try
             Dim cModel = New TM
             Dim newSortOrder As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
-            Return Model.GetIdNoOfSortedPositionNumber(recordNo, TableName, newSortOrder, DataFilter)
+            Return Service.GetIdNoOfSortedPositionNumber(recordNo, TableName, newSortOrder, DataFilter)
         Catch ex As Exception
             Return 0
         End Try
@@ -524,23 +530,23 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData) Implements IPresenter.GetLookup
         ComposeLookupParameters(listName)
         ProcessLookupFields()
-        Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
+        Return Service.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
     End Function
 
     Public Overloads Function GetLookup(lLookupTableToGet As String, lLookUpSortExpression As String, lLookupFieldsToShow As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData) Implements IPresenter.GetLookup
         Dim dFieldName As String
         If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If Model.FieldExistInTable(LookUpTableToGet, lLookUpSortExpression.Trim() + "Ara") Then
+            If Service.FieldExistInTable(LookUpTableToGet, lLookUpSortExpression.Trim() + "Ara") Then
                 lLookUpSortExpression = lLookUpSortExpression.Trim() + "Ara"
             End If
-            If Model.FieldExistInTable(lLookupFieldsToShow(1), lLookupFieldsToShow(1).Trim() + "Ara") Then
+            If Service.FieldExistInTable(lLookupFieldsToShow(1), lLookupFieldsToShow(1).Trim() + "Ara") Then
                 dFieldName = lLookupFieldsToShow(1).Trim() + "Ara"
             Else
                 dFieldName = lLookupFieldsToShow(1)
             End If
             lLookupFieldsToShow = {lLookupFieldsToShow(0), dFieldName, lLookupFieldsToShow(2)}
         End If
-        Return Model.GetLookup(lLookupTableToGet, lLookUpSortExpression, lLookupFieldsToShow, filter)
+        Return Service.GetLookup(lLookupTableToGet, lLookUpSortExpression, lLookupFieldsToShow, filter)
     End Function
 
     Protected Sub ComposeLookupParameters(listName As String)
@@ -585,9 +591,9 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     '    Try
     '        If pTableName Is Nothing Then
     '            pTableName = TableName
-    '            Return Model.GetRecordCount(TableName, DataFilter)
+    '            Return Service.GetRecordCount(TableName, DataFilter)
     '        Else
-    '            Return Model.GetRecordCount(pTableName, pFilter)
+    '            Return Service.GetRecordCount(pTableName, pFilter)
     '        End If
     '    Catch ex As Exception
     '        Return 0
@@ -596,7 +602,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetRecordDateTimeStamp(idNo As Int32) As Object
         Try
-            Return Model.GetRecordDateTimeStamp(idNo, TableName)
+            Return Service.GetRecordDateTimeStamp(idNo, TableName)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -604,7 +610,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetRecordField(cTableName As String, returnFieldName As String) As Object
         Try
-            Return Model.GetRecordField(cTableName, returnFieldName)
+            Return Service.GetRecordField(cTableName, returnFieldName)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -614,7 +620,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
                                           returnFieldName As String) _
         As String
         Try
-            Return Model.GetRecordFieldWithKey(searchValue, cTableName, searchFieldName, returnFieldName)
+            Return Service.GetRecordFieldWithKey(searchValue, cTableName, searchFieldName, returnFieldName)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -622,7 +628,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetRecordFieldWithKeyG(Of TT)(searchValue As String, cTableName As String, searchFieldName As String, returnFieldName As String) As TT
         Try
-            Return Model.GetRecordFieldWithKeyG(Of TT)(searchValue, cTableName, searchFieldName, returnFieldName)
+            Return Service.GetRecordFieldWithKeyG(Of TT)(searchValue, cTableName, searchFieldName, returnFieldName)
         Catch ex As Exception
             Return Nothing
         End Try
@@ -630,14 +636,14 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetRecordPosition(idNo As Int32)
         Try
-            Return Model.GetRecordPosition(TableName, idNo) + 1
+            Return Service.GetRecordPosition(TableName, idNo) + 1
         Catch ex As Exception
             Return 0
         End Try
     End Function
 
     Public Function GetRevCostCenterUseSetting()
-        Dim retValue = Model.GetRecordFieldWithKey("RCCN", "Setting", "SettingCode", "Value")
+        Dim retValue = Service.GetRecordFieldWithKey("RCCN", "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption("Use Departments")
             Dim groupSetting As String = "Company"
@@ -655,7 +661,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Try
             Dim cModel As New TM
             Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
-            Return Model.GetSortedRecordPosition(idNo, TableName, newSortOrderKey, DataFilter)
+            Return Service.GetSortedRecordPosition(idNo, TableName, newSortOrderKey, DataFilter)
         Catch ex As Exception
             Return 0
         End Try
@@ -663,30 +669,30 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetFieldValue(Of TType)(sqlStatement As String, cTableName As String, condition As String) As TType
         Try
-            Return Model.GetFieldValue(Of TType)(sqlStatement, cTableName, condition)
+            Return Service.GetFieldValue(Of TType)(sqlStatement, cTableName, condition)
         Catch ex As Exception
             Return Nothing
         End Try
     End Function
 
     Public Function GetRecords(ByVal pTableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
-        Return Model.GetRecords(pTableName, sortOrder, fieldNames, filter)
+        Return Service.GetRecords(pTableName, sortOrder, fieldNames, filter)
     End Function
 
     Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
-        Return Model.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
+        Return Service.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
     End Function
 
     Public Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
-        Return Model.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
+        Return Service.GetUserSecurityForKey(securityObjectName, securityGroupIdNo)
     End Function
 
     Public Function AddSecurityObject(securityObject As SecurityObject) As Int32
-        Return Model.AddSecurityObject(securityObject)
+        Return Service.AddSecurityObject(securityObject)
     End Function
 
     Public Function InitializeSecurityObject() As Integer
-        Return Model.InitializeSecurityObject()
+        Return Service.InitializeSecurityObject()
     End Function
 
     Public Overridable Sub GoAddRecord()
@@ -956,7 +962,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         If additionalMessage IsNot Nothing Then
             _errorList = additionalMessage + Environment.NewLine
         End If
-        For Each bizError In Model.GetBizObjectErrors()
+        For Each bizError In Service.GetBizObjectErrors()
             If _errorList.Contains(bizError & Environment.NewLine) Then
                 ' don't add duplicate message
             Else
@@ -997,7 +1003,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             Dim modelData As TM
             'RecordCount = GetRecordCount()
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
-            modelData = Model.GetRecordByIdNo(Of TM)(idNo)
+            modelData = Service.GetRecordByIdNo(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
             If GlobalVariables.EventAggregator IsNot Nothing Then
                 GlobalVariables.EventAggregator.PublishEvent(New BeforeAssignment(modelData))
@@ -1020,7 +1026,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Function UsePayGroups()
-        Dim retValue = Model.GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
+        Dim retValue = Service.GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
             Dim groupSetting As String = "Payroll"
@@ -1040,7 +1046,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Protected Overridable Function SaveAddedRecord(record As TM) As Integer
         Dim retVal As Integer
-        NewlyAddedRecordIdNo = Model.AddRecord(record)
+        NewlyAddedRecordIdNo = Service.AddRecord(record)
         retVal = NewlyAddedRecordIdNo
         LateBinding.SetProperty(View, IdFieldName, retVal)
         Return retVal
@@ -1060,17 +1066,17 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Protected Function GetLookupByCodeName()
         ProcessLookupFields()
-        Return Model.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
+        Return Service.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
     End Function
 
     Protected Function GetLookupByName()
         ProcessLookupFields()
-        Return Model.GetLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
+        Return Service.GetLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
     End Function
 
     Protected Function GetLookupByNameCode()
         ProcessLookupFields()
-        Return Model.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
+        Return Service.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
     End Function
 
     Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
@@ -1117,7 +1123,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Protected Overridable Function IsBizDataValid() As Boolean
         Dim retValue As Boolean = True
         GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        If Not Model.IsValid(DataModel) Then
+        If Not Service.IsValid(DataModel) Then
             retValue = False
         End If
         Dim rules = GetBizObjectRules()
@@ -1163,7 +1169,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Return translatedField
     End Function
 
-    Protected Function UpdateChildData(ByRef childDataModel As Model, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
+    Protected Function UpdateChildData(ByRef childDataModel As Service, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
         Dim retVal As Integer
         Dim updateReturnValue As Object
         Dim insertReturnValue As Object
@@ -1196,14 +1202,14 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim retVal As Integer
         Dim updateReturnValue As Object
         Dim insertReturnValue As Object
-        updateReturnValue = Model.DelUpdateTvp(updateTable, parentIdNo)
+        updateReturnValue = Service.DelUpdateTvp(updateTable, parentIdNo)
         If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
             If parentIdNo <> 0 Then
                 For Each row As DataRow In insertTable.Rows
                     row.Item(parentIdFieldName) = parentIdNo
                 Next
             End If
-            insertReturnValue = Model.InsertTvp(insertTable)
+            insertReturnValue = Service.InsertTvp(insertTable)
             If insertReturnValue >= 0 Then
                 retVal = updateReturnValue + insertReturnValue
             Else
@@ -1216,7 +1222,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Protected Overridable Function UpdateRecord(record As TM) As Integer
-        Return Model.UpdateRecord(record)
+        'Return Service.UpdateRecord(record)
+        Return Service.UpdateRecord(record)
     End Function
 
     Protected Function ViewToDataTables(ByRef dataViews As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
@@ -1307,7 +1314,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Try
             If timeStampedValue IsNot Nothing Then
                 Dim newDateTimeStamp As Object
-                newDateTimeStamp = Model.GetRecordDateTimeStamp(idNo, TableName, DateTimeStampField)
+                newDateTimeStamp = Service.GetRecordDateTimeStamp(idNo, TableName, DateTimeStampField)
                 If newDateTimeStamp IsNot Nothing Then
                     For i = 0 To 7
                         If timeStampedValue(i) <> newDateTimeStamp(i) Then
@@ -1350,14 +1357,15 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     'End Function
 
     Public Sub AddToParentError(errors As List(Of String))
-        Dim mainBizObj = DirectCast(DirectCast(DirectCast(Model, Model).DataService, ServicesLayer.Services.Service).DataBo, BusinessLayer.BusinessObject)
+        'Dim mainBizObj = DirectCast(DirectCast(DirectCast(Service, Service).DataService, ServicesLayer.Services.Service).DataBo, BusinessLayer.BusinessObject)
+        Dim mainBizObj = DirectCast(DirectCast(Service, ServicesLayer.Services.Service).DataBo, BusinessLayer.BusinessObject)
         mainBizObj.AddError(errors)
     End Sub
 
     'Public Function IsBusinessDataValid(ByRef dataDictionary As Dictionary(Of String, Object)) As Boolean
     '    Dim retValue As Boolean = False
     '    GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-    '    If Model.IsValid(DataModel) Then
+    '    If Service.IsValid(DataModel) Then
     '        retValue = True
     '    Else
     '        UpdateErrors(dataDictionary)
@@ -1420,7 +1428,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     'End Function
 
     Public Sub OnFindFieldRequested_EventHandler(ByRef eventType As FindFieldRequested) Implements ISubscriber(Of FindFieldRequested).OnEventHandler
-        Dim idNo = Model.FindFieldNew(TableName, eventType.FindableControl, SortOrderKey, DataFilter)
+        Dim idNo = Service.FindFieldNew(TableName, eventType.FindableControl, SortOrderKey, DataFilter)
         If idNo <> 0 Then
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         Else
@@ -2138,16 +2146,16 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
+                Return Service.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
             Else
-                Return Model.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
+                Return Service.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
             End If
         Else
             newSortOrderKey = "SortKey"
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
+                Return Service.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
             Else
-                Return Model.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
+                Return Service.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
             End If
         End If
     End Function
@@ -2381,7 +2389,6 @@ Public Class GetLookupDataRequested
     Public Sub New(ByVal targetSourceName As String)
         Me.TargetSourceName = targetSourceName
     End Sub
-
 
     Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal Optional filter As String = Nothing)
         Me.TableName = tableName

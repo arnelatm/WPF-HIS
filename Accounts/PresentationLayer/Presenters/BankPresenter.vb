@@ -1,7 +1,9 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.PresentationLayer.Presenters
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
@@ -11,7 +13,8 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IBankView)
             MyBase.New(view)
             If view IsNot Nothing Then
-                ModelOfPresenter = New ModelAccounts("Bank")
+                Service = New ServiceAccounts("Bank")
+                'ModelOfPresenter = New ModelAccounts("Bank")
                 TableName = "Bank"
                 TreeViewMainField = "BankName"
                 TreeViewSecondaryField = "BankCode"

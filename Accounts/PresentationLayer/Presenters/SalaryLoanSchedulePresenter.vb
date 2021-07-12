@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
@@ -10,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ISalaryLoanScheduleView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("SalaryLoanSchedule")
+            Service = New ServiceAccounts("SalaryLoanSchedule")
             TableName = "SalaryLoanSchedule"
             SortOrderKey = "IdNo"
             OriginalModel = New SalaryLoanScheduleModel()

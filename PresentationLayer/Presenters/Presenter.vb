@@ -1243,7 +1243,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         Dim retValue As Boolean = False
         GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
         If Model.IsValid(DataModel) Then
-            'For Each item In ChildModels
+            'For Each item In ChildServices
             '    GlobalVariables.Mapper.Map()
             '    If Not item.IsBizDataValid() Then
             '        Exit For

@@ -3,8 +3,10 @@ Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
@@ -17,13 +19,13 @@ Namespace PresentationLayer.Presenters
         Protected DtEmpPayElementUpdateTable As New DataTable
         Protected DtPhoneInsertTable As New DataTable
         Protected DtPhoneUpdateTable As New DataTable
-        Private ReadOnly _employeePayElementModel As New ModelAccounts("EmployeePayElement")
-        Private ReadOnly _employeePhoneModel As New ModelAccounts("EmployeePhone")
+        Private ReadOnly _employeePayElementService As New ServiceAccounts("EmployeePayElement")
+        Private ReadOnly _employeePhoneService As New ServiceAccounts("EmployeePhone")
 
         Public Sub New(view As IEmployeeView)
             MyBase.New(view)
             If view IsNot Nothing Then
-                ModelOfPresenter = New ModelAccounts("Employee")
+                Service = New ServiceAccounts("Employee")
                 TableName = "Employee"
                 TreeViewMainField = "EmployeeName"
                 TreeViewSecondaryField = "EmployeeCode"
@@ -71,7 +73,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetEmployeeBalance(idNo As Integer)
-            Return Model.GetFieldValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
+            Return Service.GetFieldValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
         End Function
 
         Public Function GetEmployeeDeductions(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
@@ -91,7 +93,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetEmployeePhones(ByVal idNo As Int16) As List(Of EmployeePhoneModel)
-            Return _employeePhoneModel.GetRecordsWithGroupIdNo(Of EmployeePhoneModel)(idNo, "Sequence")
+            Return _employeePhoneService.GetRecordsWithGroupIdNo(Of EmployeePhoneModel)(idNo, "Sequence")
         End Function
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -140,9 +142,9 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_employeePayElementModel, DtEmpPayElementUpdateTable, DtEmpPayElementInsertTable, passedValue, "EmployeeIdNo")
+            retVal = UpdateChildData(_employeePayElementService, DtEmpPayElementUpdateTable, DtEmpPayElementInsertTable, passedValue, "EmployeeIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_employeePhoneModel, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
+                retVal = UpdateChildData(_employeePhoneService, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
             End If
         End Sub
 
@@ -202,8 +204,8 @@ Namespace PresentationLayer.Presenters
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             'Dim passedValue As Integer = retVal
             If retVal >= 0 And IsEmpty(View.EmployeeCode) Then
-                retVal = ModelOfPresenter.GenerateCode(View.IdNo)
-                View.EmployeeCode = ModelOfPresenter.GetFieldWithIdNo(View.IdNo, "Employee", "EmployeeCode")
+                retVal = Service.GenerateCode(View.IdNo)
+                View.EmployeeCode = Service.GetFieldWithIdNo(View.IdNo, "Employee", "EmployeeCode")
             End If
         End Sub
 
