@@ -1,0 +1,1 @@
+1.  ReadOnly Properties can have their values set in the constructor or in other words you can only change the value of readonly property in the constructor.
