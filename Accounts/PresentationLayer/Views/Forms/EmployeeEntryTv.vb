@@ -28,9 +28,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo
 
-        'Private ReadOnly _presenter
-
-        Public Sub New() 'ByRef presenter)
+        Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()

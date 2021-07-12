@@ -1,7 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.Globalization
-Imports System.Resources
-Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -12,11 +9,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo
 
-        Public Sub New(ByRef pPresenter)
+        Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            Presenter = pPresenter
             FirstControl = txtCustomerName
             ' Add any initialization after the InitializeComponent() call.
 
@@ -383,7 +379,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Function GetArAccounts()
-            Return Presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsReceivable))
+            Return Nothing 'Presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsReceivable))
         End Function
 
         'Private Sub lblContactDesignation_Click(sender As Object, e As EventArgs) Handles lblContactDesignation.Click

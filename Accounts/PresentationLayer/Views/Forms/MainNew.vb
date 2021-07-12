@@ -283,10 +283,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCustomerClients.Click
-            Dim presenter As New CustomerPresenterNew(Nothing)
-            Dim myForm = New CustomerEntryTv(presenter)
-            presenter = New CustomerPresenterNew(myForm)
-            myForm.Show()
+            RunForm(Of CustomerPresenter, CustomerEntryTv)()
+            'Dim presenter As New CustomerPresenterNew(Nothing)
+            'Dim myForm = New CustomerEntryTv(presenter)
+            'presenter = New CustomerPresenterNew(myForm)
+            'myForm.Show()
         End Sub
 
         Private Sub CustomRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISCustomRange.Click
@@ -370,7 +371,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployees.Click
-            RunForm(Of EmployeePresenterNew, EmployeeEntryTv)()
+            RunForm(Of EmployeePresenter, EmployeeEntryTv)()
         End Sub
 
         'Private Sub RunForm(Of TP, TF)()
@@ -701,10 +702,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemSupplierVendors.Click
-            Dim presenter As New SupplierPresenterNew(Nothing)
-            Dim myForm = New SupplierEntryTvNew(presenter)
-            presenter = New SupplierPresenterNew(myForm)
-            myForm.Show()
+            RunForm(Of SupplierPresenter, SupplierEntryTv)()
+            'Dim presenter As New SupplierPresenter(Nothing)
+            'Dim myForm = New SupplierEntryTv(presenter)
+            'presenter = New SupplierPresenter(myForm)
+            'myForm.Show()
         End Sub
 
         Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBlankReport.Click

@@ -356,13 +356,13 @@
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\Class1.vb" />
-    <Compile Include="PresentationLayer\Presenters\CustomerPresenterNew.vb" />
-    <Compile Include="PresentationLayer\Presenters\EmployeePresenterNew.vb" />
+    <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\JournalPrefixPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalaryLoanSchedulePresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\SupplierPresenterNew.vb" />
+    <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TransactionsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />
@@ -430,10 +430,10 @@
     <Compile Include="PresentationLayer\Views\Forms\PayElementEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTvNew.Designer.vb">
-      <DependentUpon>SupplierEntryTvNew.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.Designer.vb">
+      <DependentUpon>SupplierEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTvNew.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
@@ -749,12 +749,6 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.Designer.vb">
-      <DependentUpon>SupplierEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Models\AccountReconciliationItemModel.vb" />
     <Compile Include="PresentationLayer\Models\AccountReconciliationModel.vb" />
     <Compile Include="PresentationLayer\Models\ApJournalModel.vb" />
@@ -797,7 +791,6 @@
     <Compile Include="PresentationLayer\Presenters\ProductCategoryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CsrOiItemsPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DesignationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DistributionSchemeItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DistributionSchemePresenter.vb" />
@@ -810,7 +803,6 @@
     <Compile Include="PresentationLayer\Presenters\ReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalItemPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalesJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Views\AccountReconciliationItemView.vb" />
     <Compile Include="PresentationLayer\Views\CsrOiItemView.vb" />
     <Compile Include="PresentationLayer\Views\DistributionSchemeItemView.vb" />
@@ -1127,8 +1119,8 @@
       <DependentUpon>PayElementEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTvNew.resx">
-      <DependentUpon>SupplierEntryTvNew.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.resx">
+      <DependentUpon>SupplierEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Test.resx">
       <DependentUpon>Test.vb</DependentUpon>
@@ -1265,12 +1257,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.resx">
       <DependentUpon>StatementOfAp.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.ar-SA.resx">
-      <DependentUpon>SupplierEntryTv.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.resx">
-      <DependentUpon>SupplierEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
       <DependentUpon>LeaveView.vb</DependentUpon>
