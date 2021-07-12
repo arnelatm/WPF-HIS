@@ -72,7 +72,6 @@
     <Compile Include="IModelNew.vb" />
     <Compile Include="IModel.vb" />
     <Compile Include="IModelTblColProp.vb" />
-    <Compile Include="ModelNew.vb" />
     <Compile Include="Model.vb" />
     <Compile Include="ModelTblColProp.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

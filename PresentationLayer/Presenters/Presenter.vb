@@ -844,7 +844,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             retVal = Save()
             If retVal > 0 Then
                 SaveSuccessful = True
-                Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+                Messaging.Show(True, "MsgRecordSuccessfullySaved")
                 If Not QuitOnSave Then
                     If AddMode Then
                         If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
@@ -946,7 +946,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                     If result = DialogResult.Yes Then
                         result = Save()
                         If result > 0 Then
-                            Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+                            Messaging.Show(True, "MsgRecordSuccessfullySaved")
                             If AddMode Then
                                 RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
                             End If

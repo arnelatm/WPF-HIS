@@ -3,11 +3,12 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PayElementPresenter
-        Inherits AccountsPresenterNew(Of IPayElementView, PayElementModel)
+    Public Class PayElementPresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IPayElementView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -24,8 +25,8 @@ Namespace PresentationLayer.Presenters
                 TreeViewMainField = "PayElementName"
                 TreeViewSecondaryField = "PayElementCode"
                 SortOrderKey = "PayElementName"
-                OriginalModel = New PayElementModel()
-                DataModel = New PayElementModel
+                'OriginalModel = New PayElementModel()
+                'DataModel = New PayElementModel
             End If
             CreateDataTables()
             ChildServices.Add(_payElementItemService)

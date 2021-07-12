@@ -6,8 +6,8 @@ Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-    Public Class SupplierPresenter
-        Inherits AccountsPresenterNew(Of ISupplierView, SupplierModel)
+    Public Class SupplierPresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of ISupplierView, TM)
 
         Public ParentViewList As List(Of SupplierModel)
 
@@ -19,8 +19,8 @@ Namespace PresentationLayer.Presenters
                 TreeViewMainField = "SupplierName"
                 TreeViewSecondaryField = "SupplierCode"
                 SortOrderKey = "SupplierName"
-                OriginalModel = New SupplierModel()
-                DataModel = New SupplierModel
+                'OriginalModel = New SupplierModel()
+                'DataModel = New SupplierModel
             End If
         End Sub
 
@@ -41,7 +41,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function UpdateOpeningBalance()
-            Return Service.UpdateOpeningBalance(DataModel)
+            Return Service.UpdateOpeningBalance(Model)
         End Function
 
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully

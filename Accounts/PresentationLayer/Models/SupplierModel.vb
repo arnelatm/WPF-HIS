@@ -1,10 +1,13 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.PresentationLayer.Models
+
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class SupplierModel
+        Implements IModelNew
 
         Public Property AccountStatus As String
         Public Property Active As Boolean

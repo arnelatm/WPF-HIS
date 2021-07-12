@@ -10,14 +10,14 @@ Namespace PresentationLayer.Views.Forms
         Implements IJournalPrefixView
 
         Private ReadOnly _nfi As NumberFormatInfo
-        Private _presenter As JournalPrefixPresenter
+        'Private _presenter As JournalPrefixPresenter
 
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            _presenter = New JournalPrefixPresenter(Me)
+            '_presenter = New JournalPrefixPresenter(Me)
         End Sub
 
 #Region "Fields"
