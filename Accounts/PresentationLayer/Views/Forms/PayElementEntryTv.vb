@@ -35,14 +35,12 @@ Namespace PresentationLayer.Views.Forms
 
         Public Sub New()
             MyBase.New()
-            'Visible = False
             SuspendLayout()
             DoubleBuffered = True
             FirstControl = txtPayElementCode
             ' This call is required by the designer.
             InitializeComponent()
             ResumeLayout()
-            'Visible = True
         End Sub
 
 #Region "Fields"

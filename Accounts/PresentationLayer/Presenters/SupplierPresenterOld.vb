@@ -1,29 +1,25 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-    Public Class SupplierPresenterNew
-        Inherits AccountsPresenterNew(Of ISupplierView, SupplierModel)
+    Public Class SupplierPresenter
+        Inherits AccountsPresenter(Of ISupplierView, SupplierModel)
 
         Public ParentViewList As List(Of SupplierModel)
 
         Public Sub New(view As ISupplierView)
             MyBase.New(view)
-            TableName = "Supplier"
-            Service = New ServiceAccounts("Supplier")
-            TreeViewMainField = "SupplierName"
-            TreeViewSecondaryField = "SupplierCode"
-            SortOrderKey = "SupplierName"
-            OriginalModel = New SupplierModel()
-            DataModel = New SupplierModel
+            InitializerWithTv("Supplier")
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
+
         End Sub
 
         Public Function GetSupplierBalance(idNo As Integer)
-            Return Service.GetFieldValue(Of Decimal)("Sum(Credit-Debit)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString() & " and SpecialAccount = 'AP'")
+            Return Model.GetFieldValue(Of Decimal)("Sum(Credit-Debit)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString())
         End Function
 
         Private Function FunctionOnSuccessfulUpdate() Handles MyBase.RecordUpdatedSuccessfully
@@ -39,13 +35,13 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function UpdateOpeningBalance()
-            Return Service.UpdateOpeningBalance(DataModel)
+            Return ModelOfPresenter.UpdateOpeningBalance(DataModel)
         End Function
 
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            If retVal >= 0 And IsEmpty(View.SupplierCode) Then
-                retVal = Service.GenerateCode(View.IdNo)
-                View.SupplierCode = Service.GetFieldWithIdNo(View.IdNo, "Supplier", "SupplierCode")
+            'Dim passedValue As Integer = retVal
+            If retVal >= 0 And GlobalFunctions.IsEmpty(View.SupplierCode) Then
+                retVal = ModelOfPresenter.GenerateCode(View.IdNo)
             End If
         End Sub
 
@@ -55,15 +51,9 @@ Namespace PresentationLayer.Presenters
             Else
                 DataFilter = ""
             End If
-            DisplayTree()
+            'CallByName(View, "DisplayTreeViewData", CallType.Method)
+            LateBinding.InvokeFunction(View, "DisplayTreeViewData")
             GoFirstRecord()
-        End Sub
-
-        Protected Overrides Sub UpdateViewDisplay()
-            MyBase.UpdateViewDisplay()
-            Dim value As Double
-            value = Convert.ToDouble(GetSupplierBalance(TargetIdNo))
-            View.Balance = value.ToString("N2")
         End Sub
 
     End Class

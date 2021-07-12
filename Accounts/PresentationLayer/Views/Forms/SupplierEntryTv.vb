@@ -1,30 +1,22 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class SupplierEntryTv
         Implements ISupplierView
 
-        Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New()
-            MyBase.New()
+
             ' This call is required by the designer.
             InitializeComponent()
-            _nfi.NumberDecimalDigits = 2
-            MainTableName = "Supplier"
-            TvMainFieldName = "SupplierName"
-            TvSecondaryFieldName = "SupplierCode"
-            SortOrderKey = "SupplierName"
             FirstControl = txtSupplierName
+
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New SupplierPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
+
         End Sub
 
 #Region "Fields"
@@ -32,11 +24,9 @@ Namespace PresentationLayer.Views.Forms
         Public Property AccountStatus As String Implements ISupplierView.AccountStatus
             Get
                 Return cacAccountStatus.GetValue()
-                'Return EnumToCode(cacAccountStatus.Text)
             End Get
             Set
                 cacAccountStatus.SetValue(Value)
-                'cacAccountStatus.Text = EnumToCode(value)
             End Set
         End Property
 
@@ -57,8 +47,6 @@ Namespace PresentationLayer.Views.Forms
                 cacApAccountIdNo.SetValue(Value)
             End Set
         End Property
-
-        Public Property Balance As Decimal Implements ISupplierView.Balance
 
         Public Property BankAccountNo As String Implements ISupplierView.BankAccountNo
             Get
@@ -107,10 +95,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CreditLimit As Decimal Implements ISupplierView.CreditLimit
             Get
-                Return txtCreditLimit.Text.ToDecimalNumber(_nfi)
+                Return NumParser(Of Decimal)(txtCreditLimit.Text)
             End Get
             Set
-                txtCreditLimit.Text = Value.ToString("N", _nfi)
+                txtCreditLimit.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
@@ -218,10 +206,10 @@ Namespace PresentationLayer.Views.Forms
         'End Property
         Public Property OpeningBalance As Decimal Implements ISupplierView.OpeningBalance
             Get
-                Return txtOpeningBalance.Text.ToDecimalNumber(_nfi)
+                Return NumParser(Of Decimal)(txtOpeningBalance.Text)
             End Get
             Set
-                txtOpeningBalance.Text = Value.ToString("N", _nfi)
+                txtOpeningBalance.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
@@ -281,10 +269,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SettlementDiscount As Decimal Implements ISupplierView.SettlementDiscount
             Get
-                Return txtSettlementDiscount.Text.ToDecimalNumber(_nfi)
+                Return NumParser(Of Decimal)(txtSettlementDiscount.Text)
             End Get
             Set
-                txtSettlementDiscount.Text = Value.ToString("N", _nfi)
+                txtSettlementDiscount.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
@@ -369,61 +357,67 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Balance As Decimal Implements ISupplierView.Balance
+            Get
+                Return txtBalance.Text
+            End Get
+            Set(value As Decimal)
+                txtBalance.Text = FormatDecimalNumber(value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cacCountryCode.DataSource = PresenterObj.GetLookup("Country")
-            cacBankIdNo.DataSource = PresenterObj.GetLookup("Bank")
-            cacApAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsPayable))
-            cacExpAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
-            cacAccountStatus.DataSource = PresenterObj.MakeEnumComboList(Of AccountStatusSelection)
-            cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)
+            CreateEnumDataSource(Of AccountStatusSelection)(cacAccountStatus)
+            CreateEnumDataSource(Of PaymentMethodSelection)(cacPaymentMethod)
+            CreateDataSource("Bank", cacBankIdNo)
+            CreateDataSource("Country", cacCountryCode)
+            'cacApAccountIdNo.DataSource = _presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsPayable))
+            'cacExpAccountIdNo.DataSource = _presenter.GetDetailAccountList()
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                 {"AccountStatus", cacAccountStatus},
-                 {"Active", chkActive},
-                 {"ApAccountIdNo", cacApAccountIdNo},
-                 {"BankAccountNo", txtBankAccountNo},
-                 {"BankIdNo", cacBankIdNo},
-                 {"ContactDesignation", txtContactDesignation},
-                 {"ContactPerson", txtContactPerson},
-                 {"CountryCode", cacCountryCode},
-                 {"CreditLimit", txtCreditLimit},
-                 {"CrNumber", txtCrNumber},
-                 {"DateAccountOpen", dtpDateAccountOpen},
-                 {"District", txtDistrict},
-                 {"Email", txtEmail},
-                 {"ExpAccountIdNo", cacExpAccountIdNo},
-                 {"Fax", txtFax},
-                 {"Iban", txtIban},
-                 {"IdNo", TxtIdNo},
-                 {"Mobile", txtMobile},
-                 {"Notes", txtNotes},
-                 {"OpeningBalance", txtOpeningBalance},
-                 {"PaymentDueDays", txtPaymentDueDays},
-                 {"PaymentMethod", cacPaymentMethod},
-                 {"Phone1", txtPhone1},
-                 {"Phone2", txtPhone2},
-                 {"PoBox", txtPoBox},
-                 {"ProvinceState", txtProvinceState},
-                 {"SettlementDiscount", txtSettlementDiscount},
-                 {"SettlementDueDays", txtSettlementDueDays},
-                 {"Street", txtStreet},
-                 {"SupplierCode", txtSupplierCode},
-                 {"SupplierName", txtSupplierName},
-                 {"SupplierNameAra", txtSupplierNameAra},
-                 {"TownCity", txtTownCity},
-                 {"VatNumber", txtVatNumber},
-                 {"Website", txtWebsite},
-                 {"ZipCode", txtZipCode}
+                {"AccountStatus", cacAccountStatus},
+                {"Active", chkActive},
+                {"ApAccountIdNo", cacApAccountIdNo},
+                {"Balance", txtBalance},
+                {"BankAccountNo", txtBankAccountNo},
+                {"BankIdNo", cacBankIdNo},
+                {"ContactDesignation", txtContactDesignation},
+                {"ContactPerson", txtContactPerson},
+                {"CountryCode", cacCountryCode},
+                {"CreditLimit", txtCreditLimit},
+                {"CrNumber", txtCrNumber},
+                {"DateAccountOpen", dtpDateAccountOpen},
+                {"District", txtDistrict},
+                {"Email", txtEmail},
+                {"ExpAccountIdNo", cacExpAccountIdNo},
+                {"Fax", txtFax},
+                {"Iban", txtIban},
+                {"IdNo", TxtIdNo},
+                {"Mobile", txtMobile},
+                {"Notes", txtNotes},
+                {"OpeningBalance", txtOpeningBalance},
+                {"PaymentDueDays", txtPaymentDueDays},
+                {"PaymentMethod", cacPaymentMethod},
+                {"Phone1", txtPhone1},
+                {"Phone2", txtPhone2},
+                {"PoBox", txtPoBox},
+                {"ProvinceState", txtProvinceState},
+                {"SettlementDiscount", txtSettlementDiscount},
+                {"SettlementDueDays", txtSettlementDueDays},
+                {"Street", txtStreet},
+                {"SupplierCode", txtSupplierCode},
+                {"SupplierName", txtSupplierName},
+                {"SupplierNameAra", txtSupplierNameAra},
+                {"TownCity", txtTownCity},
+                {"VatNumber", txtVatNumber},
+                {"Website", txtWebsite},
+                {"ZipCode", txtZipCode}
                 }
-        End Sub
-
-        Private Sub TreeViewTableName_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles TreeViewTableName.AfterSelect
-
         End Sub
 
     End Class

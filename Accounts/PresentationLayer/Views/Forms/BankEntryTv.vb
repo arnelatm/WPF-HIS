@@ -1,8 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Views.Forms
 

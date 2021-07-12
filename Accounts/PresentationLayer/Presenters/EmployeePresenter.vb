@@ -10,7 +10,7 @@ Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-    Public Class EmployeePresenterNew
+    Public Class EmployeePresenter
         Inherits AccountsPresenterNew(Of IEmployeeView, EmployeeModel)
         Implements ISubscriber(Of PayCycleIdNoChanged),
                    ISubscriber(Of EmployeePayElementChanged)
