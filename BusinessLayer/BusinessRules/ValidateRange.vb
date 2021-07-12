@@ -1,4 +1,5 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace BusinessRules
     ' validates a range (min and max) for a given data type
@@ -14,13 +15,13 @@ Namespace BusinessRules
 
         Public Sub New(propertyName As String, min As Object, max As Object, dataType As ValidationDataType)
             MyBase.New(propertyName)
+            Dim fieldName = Messaging.TranslateCaption(propertyName.SplitCamelCase)
+            Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgInvalidRange", {"fieldName", fieldName, "minimumValue", min.ToString(), "maximumValue", max.ToString()})
             Me.Min = min
             Me.Max = max
-
             Me.Operator = [Operator]
             Me.DataType = dataType
-
-            [Error] = propertyName & " must be between " & Me.Min.ToString() & " and " & Me.Max.ToString()
+            [Error] = errorMessage
         End Sub
 
         Public Sub New(propertyName As String, errorMessage As String, min As Object, max As Object,
@@ -69,9 +70,9 @@ Namespace BusinessRules
                         Dim sMax As String = Max.ToString()
 
                         Dim result1 As Integer = String.Compare(sMin, IIf(value Is Nothing, "", value))
-                        Dim result2 As Integer = String.Compare(IIf(value Is Nothing, "", value), sMax)
+                        Dim result2 As Integer = String.Compare(sMax, IIf(value Is Nothing, "", value))
 
-                        Return result1 >= 0 AndAlso result2 <= 0
+                        Return result1 <= 0 AndAlso result2 >= 0
                 End Select
                 Return False
             Catch

@@ -21,24 +21,27 @@ Namespace BusinessRules
             Me.DataType = dataType
             Select Case [operator]
                 Case ValidationOperator.Equal
-                    MakeError($"MsgValidationCompareEqual", "must be equal to")
+                    MakeError($"MsgValidationCompareEqual")
                 Case ValidationOperator.NotEqual
-                    MakeError($"MsgValidationCompareNotEqual", "must not be equal to")
+                    MakeError($"MsgValidationCompareNotEqual")
                 Case ValidationOperator.GreaterThan
-                    MakeError($"MsgValidationCompareGreaterThan", "must be greater than")
+                    MakeError($"MsgValidationCompareGreaterThan")
                 Case ValidationOperator.GreaterThanOrEqual
-                    MakeError($"MsgValidationCompareGreaterThanOrEqualTo", "must be greater than or equal to")
+                    MakeError($"MsgValidationCompareGreaterThanOrEqualTo")
                 Case ValidationOperator.LessThan
-                    MakeError($"MsgValidationCompareLessThan", "must be less than")
+                    MakeError($"MsgValidationCompareLessThan")
                 Case ValidationOperator.LessThanOrEqual
-                    MakeError($"MsgValidationCompareLessThanOrEqualTo", "must be less than or equal to")
+                    MakeError($"MsgValidationCompareLessThanOrEqualTo")
             End Select
         End Sub
 
-        Private Sub MakeError(errMessageKey As String, errMessageText As String)
-            Dim strError = "{propertyName} " + errMessageText + " {otherPropertyName}"
-            strError = Dac.GetMessage(errMessageKey, strError, "Validation Error")
-            [Error] = strError.Interpolate(Function(x) PropertyName, Function(x) OtherPropertyName)
+        Private Sub MakeError(errMessageKey As String)
+            Dim fieldName1 = Libraries.MessagingLibrary.Messaging.TranslateCaption(PropertyName.SplitCamelCase)
+            Dim fieldName2 = Libraries.MessagingLibrary.Messaging.TranslateCaption(OtherPropertyName.SplitCamelCase)
+            [Error] = Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, errMessageKey, {"PropertyName", fieldName1, "OtherPropertyName", fieldName2})
+            'Dim strError = "{propertyName} " + errMessageText + " {otherPropertyName}"
+            'strError = Dac.GetMessage(errMessageKey, strError, "Validation Error")
+            '[Error] = strError.Interpolate(Function(x) PropertyName, Function(x) OtherPropertyName)
         End Sub
 
         Public Sub New(propertyName As String, otherPropertyName As String, errorMessage As String,
