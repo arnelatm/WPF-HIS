@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.MessagingLibrary
 
@@ -12,13 +13,13 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
         Protected DtEarnInsertTable As New DataTable
         Protected DtEarnUpdateTable As New DataTable
-        Private ReadOnly _PayElementAccountModel As New ModelAccounts("PayElementAccount")
-        Private ReadOnly _payElementItemModel As New ModelAccounts("PayElementItem")
+        Private ReadOnly _payElementAccountService As New ServiceAccounts("PayElementAccount")
+        Private ReadOnly _payElementItemService As New ServiceAccounts("PayElementItem")
 
         Public Sub New(view As IPayElementView)
             MyBase.New(view)
             If view IsNot Nothing Then
-                ModelOfPresenter = New ModelAccounts("PayElement")
+                Service = New ServiceAccounts("PayElement")
                 TableName = "PayElement"
                 TreeViewMainField = "PayElementName"
                 TreeViewSecondaryField = "PayElementCode"
@@ -27,7 +28,7 @@ Namespace PresentationLayer.Presenters
                 DataModel = New PayElementModel
             End If
             CreateDataTables()
-            ChildModels.Add(_payElementItemModel)
+            ChildServices.Add(_payElementItemService)
         End Sub
 
         Private Sub CreateDataTables()
@@ -93,9 +94,9 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_PayElementAccountModel, DtUpdateTable, DtInsertTable, passedValue, "PayGroupIdNo")
+            retVal = UpdateChildData(_payElementAccountService, DtUpdateTable, DtInsertTable, passedValue, "PayGroupIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_payElementItemModel, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "PayElementItemIdNo")
+                retVal = UpdateChildData(_payElementItemService, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "PayElementItemIdNo")
             End If
         End Sub
 

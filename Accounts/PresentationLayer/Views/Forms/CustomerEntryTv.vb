@@ -12,7 +12,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo
 
-
         Public Sub New(ByRef pPresenter)
             MyBase.New()
             ' This call is required by the designer.
@@ -379,14 +378,13 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("Country", cacCountryCode)
             CreateDataSource("Bank", cacCountryCode)
             CreateDataSource("DiscountScheme", cacDiscountSchemeIdNo)
-            cacRevAccountIdNo.DataSource = GetLookupSpecial()
+            'cacRevAccountIdNo.DataSource = GetLookupSpecial()
             cacArAccountIdNo.DataSource = GetArAccounts()
         End Sub
 
         Private Function GetArAccounts()
             Return Presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsReceivable))
         End Function
-
 
         'Private Sub lblContactDesignation_Click(sender As Object, e As EventArgs) Handles lblContactDesignation.Click
         '    ' Create a resource writer.

@@ -1,7 +1,9 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
@@ -13,7 +15,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As ICustomerView)
             MyBase.New(view)
             TableName = "Customer"
-            ModelOfPresenter = New ModelAccounts("Customer")
+            Service = New ServiceAccounts("Customer")
             TreeViewMainField = "CustomerName"
             TreeViewSecondaryField = "CustomerCode"
             SortOrderKey = "CustomerName"
@@ -22,14 +24,14 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnSuccessfulUpdate(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-            retVal = ModelOfPresenter.UpdateOpeningBalance(DataModel)
+            retVal = Service.UpdateOpeningBalance(DataModel)
         End Sub
 
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             'Dim passedValue As Integer = retVal
             If retVal >= 0 And GlobalFunctions.IsEmpty(View.CustomerCode) Then
-                retVal = ModelOfPresenter.GenerateCode(View.IdNo)
-                View.CustomerCode = ModelOfPresenter.GetFieldWithIdNo(View.IdNo, "Customer", "CustomerCode")
+                retVal = Service.GenerateCode(View.IdNo)
+                View.CustomerCode = Service.GetFieldWithIdNo(View.IdNo, "Customer", "CustomerCode")
             End If
         End Sub
 
@@ -51,7 +53,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetCustomerBalance(idNo As Integer)
-            Return Model.GetFieldValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
+            Return Service.GetFieldValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
         End Function
 
     End Class
