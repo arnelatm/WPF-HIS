@@ -2,13 +2,14 @@
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Libraries
+Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class CommonPresenterNew(Of T As IView, TM As New)
-        Inherits PresenterNew(Of T, TM)
+    Public MustInherit Class CommonPresenterNew(Of TV As IView, TM As New)
+        Inherits PresenterNew(Of TV, TM)
 
         Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
 
@@ -81,8 +82,8 @@ Namespace PresentationLayer.Presenters
             Else
                 ModelOfPresenter = Activator.CreateInstance(tType, {objectName})
             End If
-            OriginalModel = New TM
-            DataModel = New TM
+            'OriginalModel = Model.Clone().Clear()
+            'Model = Model.Clear()
         End Sub
 
         Public Sub MakeDefaultValues()

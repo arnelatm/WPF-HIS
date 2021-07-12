@@ -1,14 +1,15 @@
 ﻿Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AccountsPresenterNew(Of T As IView, TM As New)
-        Inherits CommonPresenterNew(Of T, TM)
+    Public Class AccountsPresenterNew(Of TV As IView, TM As New)
+        Inherits CommonPresenterNew(Of TV, TM)
         'Implements IAccountsPresenter
 
-        Public Sub New(itemView As T)
+        Public Sub New(itemView As IView)
             MyBase.New(itemView)
         End Sub
 

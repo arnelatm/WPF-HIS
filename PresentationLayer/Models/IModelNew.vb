@@ -4,115 +4,119 @@ Imports AATM.Libraries.AatmInterfaces
 
 Public Interface IModelNew
 
-    Function AddRecord(Of TBiz)(ByRef displayModel As TBiz) As Integer
+    'Function SetPresenter(presenter As Object)
 
-    Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) As Boolean
+    ' No members..
 
-    Function CountRecordWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As Integer
+    'Function AddRecord(Of TBiz)(ByRef displayModel As TBiz) As Integer
 
-    Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer
+    'Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) As Boolean
 
-    Function DeleteRecord(idNo As Int32, tableName As String) As Integer
+    'Function CountRecordWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As Integer
 
-    Function DelUpdateTvp(ByRef dtTable As DataTable, groupKey As Integer) As Integer
+    'Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer
 
-    Function FieldExistInTable(tableName As String, fieldName As String) As Boolean
+    'Function DeleteRecord(idNo As Int32, tableName As String) As Integer
 
-    'Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer
+    'Function DelUpdateTvp(ByRef dtTable As DataTable, groupKey As Integer) As Integer
 
-    Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer
+    'Function FieldExistInTable(tableName As String, fieldName As String) As Boolean
 
-    Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
+    ''Function FindField(tableName As String, fieldName As String, searchString As String, searchPlace As Char, Optional filter As String = Nothing) As Integer
 
-    Function FindFieldContinue(tableName As String, idNo As Int32, sortOrderKey As String) As Integer
+    'Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer
 
-    Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM)
+    'Function FindDateField(tableName As String, findableControl As IFindableControl, Optional filter As String = Nothing) As Integer
 
-    Function GetBizObject() As Object
+    'Function FindFieldContinue(tableName As String, idNo As Int32, sortOrderKey As String) As Integer
 
-    Function GetBizObjectErrors() As IEnumerable(Of Object)
+    'Function GetAll(Of TM As New)(Optional ByRef sortExpression As String = Nothing) As List(Of TM)
 
-    Function GetBizObjectRules() As Object
+    'Function GetBizObject() As Object
 
-    Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
+    'Function GetBizObjectErrors() As IEnumerable(Of Object)
 
-    Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
+    'Function GetBizObjectRules() As Object
 
-    Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object
+    'Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
 
-    Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
+    'Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
 
-    Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
+    'Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object
 
-    Function GetFieldType(tableName As String, fieldName As String) As Object
+    'Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
 
-    Function GetLookupByCodeName(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
-    Function GetLookupByName(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetFieldType(tableName As String, fieldName As String) As Object
 
-    Function GetLookupByNameCode(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetLookupByCodeName(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of ClassesLibrary.LookupData)
 
-    Function GetHRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.HLookupData)
+    'Function GetLookupByName(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of ClassesLibrary.LookupData)
 
-    Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
+    'Function GetLookupByNameCode(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of ClassesLibrary.LookupData)
 
-    Function GetLastSortKey(searchValue As String, tableName As String) As String
+    'Function GetHRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.HLookupData)
 
-    Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
-    Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetLastSortKey(searchValue As String, tableName As String) As String
 
-    Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
+    'Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
 
-    Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer
+    'Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
 
-    Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
+    'Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
 
-    Function GetRecordField(tableName As String, returnFieldName As String) As Object
+    'Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer
 
-    Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String
+    'Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
 
-    Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String
+    'Function GetRecordField(tableName As String, returnFieldName As String) As Object
 
-    Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T
+    'Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String
 
-    Function GetRecordPosition(tableName As String, dno As Integer) As Integer
+    'Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String
 
-    Function GetRecords(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As Object
+    'Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T
 
-    Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
+    'Function GetRecordPosition(tableName As String, dno As Integer) As Integer
 
-    'Function GetRecordsByField(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
+    'Function GetRecords(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As Object
 
-    Function GetRecordsWithGroupIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) As List(Of TM)
+    'Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 
-    Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
+    ''Function GetRecordsByField(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As Object
 
-    Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
+    'Function GetRecordsWithGroupIdNo(Of TM As New)(idNo, Optional ByRef sortExpression = Nothing) As List(Of TM)
 
-    Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
+    'Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
-    Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
+    'Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList
 
-    Function InsertTvp(dtTable As DataTable) As Integer
+    'Function GetUserSecurityForKey(securityObjectName As String, securityGroupIdNo As Int16) As ArrayList
 
-    Function IsUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) As Boolean
+    'Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean
 
-    Function IsValid(Of TM)(ByRef dModel As TM) As Object
+    'Function InsertTvp(dtTable As DataTable) As Integer
 
-    Function UpdateRecord(Of TM)(ByRef modelBiz As TM) As Integer
+    'Function IsUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) As Boolean
 
-    Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
+    'Function IsValid(Of TM)(ByRef dModel As TM) As Object
 
-    Function UpdateTvp(ByRef dtTable As DataTable) As Integer
+    'Function UpdateRecord(Of TM)(ByRef modelBiz As TM) As Integer
 
-    Sub Logout()
+    'Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
 
-    Function AddSecurityObject(securityObject As Object) As Integer
+    'Function UpdateTvp(ByRef dtTable As DataTable) As Integer
 
-    Function InitializeSecurityObject() As Integer
+    'Sub Logout()
 
-    'Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
-    Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) As Integer
+    'Function AddSecurityObject(securityObject As Object) As Integer
+
+    'Function InitializeSecurityObject() As Integer
+
+    ''Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
+    'Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) As Integer
 
 End Interface

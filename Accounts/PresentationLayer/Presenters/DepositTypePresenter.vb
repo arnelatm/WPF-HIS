@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
+Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
@@ -27,16 +28,16 @@ Namespace PresentationLayer.Presenters
 
     End Class
 
-    Public Class DepositTypePresenterNew
-        Inherits PresenterNew(Of IDepositTypeView, DepositTypeModel)
+    Public Class DepositTypePresenterNew(Of TV As IDepositTypeView, TM As New)
+        Inherits PresenterNew(Of IDepositTypeView, TM)
 
         Public Sub New(view As IView)
             MyBase.New(view)
             Service = New ServiceAccounts("DepositType")
             TableName = "SalaryLoanSchedule"
             SortOrderKey = "IdNo"
-            OriginalModel = New DepositTypeModel()
-            DataModel = New DepositTypeModel()
+            'OriginalModel = New DepositTypeModel()
+            'DataModel = New DepositTypeModel()
             QuitOnSave = False
         End Sub
 

@@ -2,13 +2,14 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-    Public Class CustomerPresenter
-        Inherits AccountsPresenterNew(Of ICustomerView, CustomerModel)
+    Public Class CustomerPresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of ICustomerView, TM)
 
-        Public ParentViewList As List(Of CustomerModel)
+        Public ParentViewList As List(Of TM)
 
         Public Sub New(view As ICustomerView)
             MyBase.New(view)
@@ -17,12 +18,12 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "CustomerName"
             TreeViewSecondaryField = "CustomerCode"
             SortOrderKey = "CustomerName"
-            OriginalModel = New CustomerModel()
-            DataModel = New CustomerModel
+            'OriginalModel = New CustomerModel()
+            'DataModel = New CustomerModel
         End Sub
 
         Private Sub OnSuccessfulUpdate(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-            retVal = Service.UpdateOpeningBalance(DataModel)
+            retVal = Service.UpdateOpeningBalance(Model)
         End Sub
 
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully

@@ -9,12 +9,12 @@ Namespace PresentationLayer.Views.Forms
     Public Class ReligionEntryTv
         Implements IReligionView
 
-        Private _presenter As ReligionPresenter
+        'Private _presenter As ReligionPresenter
 
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            _presenter = New ReligionPresenter(Me)
+            '_presenter = New ReligionPresenter(Me)
         End Sub
 
 #Region "Fields"

@@ -2,6 +2,7 @@
 Imports System.Globalization
 Imports System.Threading
 Imports AATM.Accounts.Interfaces
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
@@ -194,7 +195,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
-            RunForm(Of BankPresenter, BankEntryTv)()
+            RunForm(Of BankPresenter(Of BankModel), BankEntryTv)()
         End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -283,7 +284,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCustomerClients.Click
-            RunForm(Of CustomerPresenter, CustomerEntryTv)()
+            RunForm(Of CustomerPresenter(Of CustomerModel), CustomerEntryTv)()
             'Dim presenter As New CustomerPresenterNew(Nothing)
             'Dim myForm = New CustomerEntryTv(presenter)
             'presenter = New CustomerPresenterNew(myForm)
@@ -341,7 +342,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayElement.Click
-            RunForm(Of PayElementPresenter, PayElementEntryTv)()
+            RunForm(Of PayElementPresenter(Of PayElementModel), PayElementEntryTv)()
         End Sub
 
         'Private Sub RunForm(Of TP As New, TF As New)()
@@ -371,7 +372,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployees.Click
-            RunForm(Of EmployeePresenter, EmployeeEntryTv)()
+            RunForm(Of EmployeePresenter(Of EmployeeModel), EmployeeEntryTv)()
         End Sub
 
         'Private Sub RunForm(Of TP, TF)()
@@ -383,9 +384,9 @@ Namespace PresentationLayer.Views.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        Private Sub RunForm(Of TP, TF)()
-            Dim childMdiForm = Activator.CreateInstance(GetType(TF))
-            Activator.CreateInstance(GetType(TP), childMdiForm)
+        Private Sub RunForm(Of TP, TV)()
+            Dim childMdiForm = Activator.CreateInstance(GetType(TV))
+            Activator.CreateInstance(GetType(TP), {childMdiForm})
             childMdiForm.MdiParent = Me
             childMdiForm.Show()
         End Sub
@@ -702,7 +703,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemSupplierVendors.Click
-            RunForm(Of SupplierPresenter, SupplierEntryTv)()
+            RunForm(Of SupplierPresenter(Of SupplierModel), SupplierEntryTv)()
             'Dim presenter As New SupplierPresenter(Nothing)
             'Dim myForm = New SupplierEntryTv(presenter)
             'presenter = New SupplierPresenter(myForm)

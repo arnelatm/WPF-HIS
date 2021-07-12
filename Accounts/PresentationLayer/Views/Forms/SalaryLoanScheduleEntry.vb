@@ -14,14 +14,14 @@ Namespace PresentationLayer.Views.Forms
         Implements ISalaryLoanScheduleView
 
         Private ReadOnly _nfi As NumberFormatInfo
-        Private _presenter
+        'Private _presenter
 
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            _presenter = New SalaryLoanSchedulePresenter(Me)
+            '_presenter = New SalaryLoanSchedulePresenter(Me)
         End Sub
 
 #Region "Fields"

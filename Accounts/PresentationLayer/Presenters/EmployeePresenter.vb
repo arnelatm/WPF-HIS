@@ -10,8 +10,8 @@ Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
-    Public Class EmployeePresenter
-        Inherits AccountsPresenterNew(Of IEmployeeView, EmployeeModel)
+    Public Class EmployeePresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IEmployeeView, TM)
         Implements ISubscriber(Of PayCycleIdNoChanged),
                    ISubscriber(Of EmployeePayElementChanged)
 
@@ -22,16 +22,16 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _employeePayElementService As New ServiceAccounts("EmployeePayElement")
         Private ReadOnly _employeePhoneService As New ServiceAccounts("EmployeePhone")
 
-        Public Sub New(view As IEmployeeView)
-            MyBase.New(view)
-            If view IsNot Nothing Then
+        Public Sub New(itemView As IEmployeeView)
+            MyBase.New(itemView)
+            If View IsNot Nothing Then
                 Service = New ServiceAccounts("Employee")
                 TableName = "Employee"
                 TreeViewMainField = "EmployeeName"
                 TreeViewSecondaryField = "EmployeeCode"
                 SortOrderKey = "EmployeeName"
-                OriginalModel = New EmployeeModel()
-                DataModel = New EmployeeModel
+                'OriginalModel = New EmployeeModel()
+                'DataModel = New EmployeeModel
                 CreateDataTables()
             End If
         End Sub

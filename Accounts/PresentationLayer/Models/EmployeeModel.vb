@@ -1,10 +1,14 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.PresentationLayer.Models
+
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class EmployeeModel
+        Implements IModelNew
+
         Public Property Errors As List(Of String)
         Public Property Active As Boolean
         Public Property ArAccountIdNo As Int16?

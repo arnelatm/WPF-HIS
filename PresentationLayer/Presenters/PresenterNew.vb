@@ -14,6 +14,7 @@ Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 Imports AATM.ServicesLayer.Services
+Imports AutoMapper
 Imports KellermanSoftware.CompareNetObjects
 
 ''' <summary>
@@ -23,8 +24,8 @@ Imports KellermanSoftware.CompareNetObjects
 ''' <remarks>
 '''     MV Patterns: MVP design pattern.
 ''' </remarks>
-''' <typeparam name="T">Type of itemView.</typeparam>
-Public MustInherit Class PresenterNew(Of T As IView, TM As New)
+''' <typeparam name="TV">Type of itemView.</typeparam>
+Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Implements IPresenter,
                ISubscriber(Of ViewButtonClicked),
                ISubscriber(Of FindFieldRequested),
@@ -42,7 +43,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
     Protected CompareDifferences As String
-    Protected DataModel = New TM
+    Protected Model As TM
     Protected DataService
     Protected DbDataDao
     Protected OriginalModel
@@ -61,15 +62,17 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
-    Private ReadOnly _withTreeView As Boolean = False
+    Private _withTreeView As Boolean = False
     Protected Service As Object
 
-    Public Sub New(itemView As T)
+    Public Sub New(itemView As IView)
         If itemView IsNot Nothing Then
             Me.View = itemView
+            Me.Model = New TM
             MyErrorProvider = GetErrorProvider()
             Ea.SubscribeEvent(Me)
             InitializeTreeViewIfPresent()
+            OriginalModel = Activator.CreateInstance(GetType(TM))
         End If
     End Sub
 
@@ -280,7 +283,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End Get
     End Property
 
-    Public Property View As T
+    Public Property View As TV
     Protected Property LookUpDisplayCode As String
     Protected Property LookUpDisplayName As String
     Protected Property LookUpDisplayNameArabic As String
@@ -521,7 +524,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer) As Integer
         Try
-            Dim cModel = New TM
+            Dim cModel As TM = Activator.CreateInstance(GetType(TM))
             Dim newSortOrder As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
             Return Service.GetIdNoOfSortedPositionNumber(recordNo, TableName, newSortOrder, DataFilter)
         Catch ex As Exception
@@ -661,7 +664,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Function GetSortedRecordPosition(idNo As Int32) As Integer
         Try
-            Dim cModel As New TM
+            Dim cModel As TM = Activator.CreateInstance(GetType(TM))
             Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
             Return Service.GetSortedRecordPosition(idNo, TableName, newSortOrderKey, DataFilter)
         Catch ex As Exception
@@ -700,8 +703,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Overridable Sub GoAddRecord()
         LastIdNo = LateBinding.GetProperty(View, IdFieldName)
         Try
-            DataModel = New TM
-            GlobalVariables.Mapper.Map(DataModel, View)
+            GlobalVariables.Mapper.Map(Model, View)
             AddMode = True
             RaiseEvent BeforeAdd()
         Catch oEx As Exception
@@ -712,7 +714,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Overridable Function GoDeleteRecord() As Integer
-        Dim record As New TM
+        Dim record As TM = Activator.CreateInstance(GetType(TM))
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retValue = 0
         Dim currentIdNo = LateBinding.GetProperty(View, IdFieldName)
@@ -911,7 +913,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Public Overridable Function Save(ByRef viewControl As Control)
         RaiseEvent BeforeSave()
-        Dim record As New TM
+        Dim record As TM = Activator.CreateInstance(GetType(TM))
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retVal As Integer = InitiateSave()
         If retVal < 0 Then
@@ -924,7 +926,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
         End If
         If retVal < 0 Then
         Else
-            Messaging.Show(True, "MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+            Messaging.Show(True, "MsgRecordSuccessfullySaved")
             If AddMode Then
                 RecordPositionNumber = GetSortedRecordPosition(retVal)
                 'TargetIdNo = retVal
@@ -957,7 +959,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Function
 
     Public Overridable Sub SaveOriginalValues()
-        GlobalVariables.Mapper.Map(Of T, TM)(View, OriginalModel)
+        GlobalVariables.Mapper.Map(Of TV, TM)(View, OriginalModel)
     End Sub
 
     Public Sub ShowErrors(Optional ByVal additionalMessage As String = Nothing)
@@ -1010,7 +1012,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
             If GlobalVariables.EventAggregator IsNot Nothing Then
                 GlobalVariables.EventAggregator.PublishEvent(New BeforeAssignment(modelData))
             End If
-            GlobalVariables.Mapper.Map(Of TM, T)(modelData, View)
+            GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
             For Each child In ChildPresenters
                 child.UpdateViewDisplay(idNo)
             Next
@@ -1124,8 +1126,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     Protected Overridable Function IsBizDataValid() As Boolean
         Dim retValue As Boolean = True
-        GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-        If Not Service.IsValid(DataModel) Then
+        GlobalVariables.Mapper.Map(Of TV, TM)(View, Model)
+        If Not Service.IsValid(Model) Then
             retValue = False
         End If
         Dim rules = GetBizObjectRules()
@@ -1265,7 +1267,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Private Function InitiateSave() As Integer
         Dim retValue As Integer
         Try
-            Dim record As New TM
+            Dim record As TM = Activator.CreateInstance(GetType(TM))
             GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                 If AddMode Then
@@ -1366,8 +1368,8 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
 
     'Public Function IsBusinessDataValid(ByRef dataDictionary As Dictionary(Of String, Object)) As Boolean
     '    Dim retValue As Boolean = False
-    '    GlobalVariables.Mapper.Map(Of T, TM)(View, DataModel)
-    '    If Service.IsValid(DataModel) Then
+    '    GlobalVariables.Mapper.Map(Of T, TM)(View, Model)
+    '    If Service.IsValid(Model) Then
     '        retValue = True
     '    Else
     '        UpdateErrors(dataDictionary)
@@ -1490,25 +1492,33 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Sub OnEventHandler(ByRef eventType As SaveDataRequested) Implements ISubscriber(Of SaveDataRequested).OnEventHandler
         ' Validate record first for errors before saving
         Dim validated As Boolean = True
+        Dim noChanges As Boolean = False
         RaiseEvent BeforeValidate()
         PreValidate()
         ClearAllErrorMessages()
         _dataErrors = ""
         validated = CheckForDataErrors(eventType)
-        If validated AndAlso EditMode AndAlso Not ChangesMade() Then
-            Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
+        If validated AndAlso EditMode Then
+            If Not ChangesMade() Then
+                Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
+                noChanges = True
+            End If
         Else
             If Not IsBizDataValid() Then
                 validated = False
             End If
         End If
-        If validated Then
-            Save(eventType.ViewControl)
+        If noChanges Then
+            GoUndoChanges()
         Else
-            Beep()
-            Messaging.MessageKey = "ValidationErrors"
-            Messaging.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            'ShowErrors("Record not saved!" & Environment.NewLine & _dataErrors)
+            If validated Then
+                Save(eventType.ViewControl)
+            Else
+                Beep()
+                Messaging.MessageKey = "ValidationErrors"
+                Messaging.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'ShowErrors("Record not saved!" & Environment.NewLine & _dataErrors)
+            End If
         End If
     End Sub
 
@@ -2143,7 +2153,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Function GetTreeViewData()
-        Dim cModel As New TM
+        Dim cModel As TM = Activator.CreateInstance(GetType(TM))
         Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
@@ -2228,7 +2238,7 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     End Sub
 
     Public Function GetTreeNodeText()
-        Dim cModel As New TM
+        Dim cModel As TM = Activator.CreateInstance(GetType(TM))
         Dim cText As String
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If String.IsNullOrEmpty(TreeViewSecondaryField) Then
@@ -2529,6 +2539,23 @@ Public Class LanguageChanged
     Public Property ViewControl As Control
 
 End Class
+
+'Public Class X
+'    Public str As String
+
+'    Public Function Clone() As Object
+'        Return Me.MemberwiseClone()
+'    End Function
+'End Class
+
+'Public Class Example
+'    Public Shared Sub Main()
+'        Dim obj As X = New X()
+'        obj.str = "Hello!"
+'        Dim copy As X = CType(obj.Clone(), X)
+'        Console.WriteLine(copy.str)
+'    End Sub
+'End Class
 
 'Public Enum ButtonClicked
 '    [Add]

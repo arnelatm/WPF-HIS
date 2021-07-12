@@ -442,12 +442,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
-    <Compile Include="PresentationLayer\Views\Forms\BankEntryTv1.Designer.vb">
-      <DependentUpon>BankEntryTv1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\BankEntryTv1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.Designer.vb">
       <DependentUpon>CustomerEntryBound.vb</DependentUpon>
     </Compile>
@@ -1057,9 +1051,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\BankEntryTv.resx">
       <DependentUpon>BankEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\BankEntryTv1.resx">
-      <DependentUpon>BankEntryTv1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\BasicEntry.resx">
       <DependentUpon>BasicEntry.vb</DependentUpon>
