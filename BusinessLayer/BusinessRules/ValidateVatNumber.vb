@@ -1,4 +1,6 @@
-﻿Namespace BusinessRules
+﻿Imports AATM.Libraries.MessagingLibrary
+
+Namespace BusinessRules
     ' base class for regex based validation rules.
 
     Public Class ValidateVatNumber
@@ -9,7 +11,7 @@
         Public Sub New(propertyName As String)
             MyBase.New(propertyName, VatPattern)
             Pattern = VatPattern
-            [Error] = "Invalid value entered, Vat Number must be exactly 15 numbers Long!"
+            [Error] = Messaging.GetMessage(True, "MsgInvalidVatNumber")
         End Sub
 
         Public Sub New(propertyName As String, errorMessage As String)
