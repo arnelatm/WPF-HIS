@@ -67,15 +67,17 @@ Public MustInherit Class PresenterNew(Of T As IView, TM As New)
     Public Sub New(itemView As T)
         If itemView IsNot Nothing Then
             Me.View = itemView
-            'MyErrorProvider = CallByName(View, "MyErrorProvider", CallType.Get)
-
             MyErrorProvider = GetErrorProvider()
             Ea.SubscribeEvent(Me)
-            Dim pi As PropertyInfo = View.GetType().GetProperty("FormTreeView")
-            If pi IsNot Nothing Then
-                _withTreeView = True
-                FormTreeView = pi.GetValue(View)
-            End If
+            InitializeTreeViewIfPresent()
+        End If
+    End Sub
+
+    Private Sub InitializeTreeViewIfPresent()
+        Dim pi As PropertyInfo = View.GetType().GetProperty("FormTreeView")
+        If pi IsNot Nothing Then
+            _withTreeView = True
+            FormTreeView = pi.GetValue(View)
         End If
     End Sub
 
