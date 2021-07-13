@@ -42,9 +42,9 @@ Namespace DataLayer.AdoNet
 
         Public Function AddRecord(ByRef department As Department) As Integer Implements IDaoAll(Of Department).AddRecord
             Dim sql As String =
-                    " INSERT INTO [Department] " &
-                    " (DepartmentCode,DepartmentName,DepartmentNameAra,ParentIdNo,Notes,RevCostCenterIdNo,RevCostCenterIdNo) " &
-                    " VALUES (@DepartmentCode,@DepartmentName,@DepartmentNameAra,@ParentIdNo,@Notes,@RevCostCenterIdNo) "
+                    "INSERT INTO [Department] " &
+                    "(DepartmentCode,DepartmentName,DepartmentNameAra,ParentIdNo,Notes,RevCostCenterIdNo) VALUES " &
+                    "(@DepartmentCode,@DepartmentName,@DepartmentNameAra,@ParentIdNo,@Notes,@RevCostCenterIdNo)"
             Return db.Insert(sql, Take(department))
         End Function
 

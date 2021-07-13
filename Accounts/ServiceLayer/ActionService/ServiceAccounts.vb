@@ -17,7 +17,6 @@ Namespace ServiceLayer.ActionService
         Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
             CreateBusinessObject(objectName, bizParam)
             CreateDao(objectName, daoParam)
-
         End Sub
 
         Protected Overrides Sub CreateBusinessObject(objectName As String, Optional bizParam As Object = Nothing)

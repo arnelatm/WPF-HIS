@@ -29,16 +29,16 @@ Namespace PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BankEntryTv))
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtBankCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtBankName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtBankNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtBankCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblBankCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtBankName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblBankName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtBankNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblBankNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -97,6 +97,14 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
+            'lblIdNo
+            '
+            Me.lblIdNo.DisplayOnly = True
+            Me.lblIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Translatable = True
+            '
             'txtBankCode
             '
             Me.txtBankCode.BackColor = System.Drawing.Color.White
@@ -123,6 +131,15 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBankCode.Translatable = False
             Me.txtBankCode.ValueIsMandatory = True
+            Me.txtBankCode.ValueIsUnique = True
+            '
+            'lblBankCode
+            '
+            Me.lblBankCode.DisplayOnly = True
+            Me.lblBankCode.EditingMode = False
+            resources.ApplyResources(Me.lblBankCode, "lblBankCode")
+            Me.lblBankCode.Name = "lblBankCode"
+            Me.lblBankCode.Translatable = True
             '
             'txtBankName
             '
@@ -150,6 +167,15 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBankName.Translatable = False
             Me.txtBankName.ValueIsMandatory = True
+            Me.txtBankName.ValueIsUnique = True
+            '
+            'lblBankName
+            '
+            Me.lblBankName.DisplayOnly = True
+            Me.lblBankName.EditingMode = False
+            resources.ApplyResources(Me.lblBankName, "lblBankName")
+            Me.lblBankName.Name = "lblBankName"
+            Me.lblBankName.Translatable = True
             '
             'txtBankNameAra
             '
@@ -177,6 +203,15 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBankNameAra.ReadOnly = True
             Me.txtBankNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBankNameAra.Translatable = False
+            Me.txtBankNameAra.ValueIsUnique = True
+            '
+            'lblBankNameAra
+            '
+            Me.lblBankNameAra.DisplayOnly = True
+            Me.lblBankNameAra.EditingMode = False
+            resources.ApplyResources(Me.lblBankNameAra, "lblBankNameAra")
+            Me.lblBankNameAra.Name = "lblBankNameAra"
+            Me.lblBankNameAra.Translatable = True
             '
             'txtNotes
             '
@@ -204,6 +239,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Translatable = True
+            '
             'floDataDisplay
             '
             resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
@@ -221,46 +264,6 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
             Me.floDataDisplay.Name = "floDataDisplay"
-            '
-            'lblIdNo
-            '
-            Me.lblIdNo.DisplayOnly = True
-            Me.lblIdNo.EditingMode = False
-            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-            Me.lblIdNo.Name = "lblIdNo"
-            Me.lblIdNo.Translatable = True
-            '
-            'lblBankCode
-            '
-            Me.lblBankCode.DisplayOnly = True
-            Me.lblBankCode.EditingMode = False
-            resources.ApplyResources(Me.lblBankCode, "lblBankCode")
-            Me.lblBankCode.Name = "lblBankCode"
-            Me.lblBankCode.Translatable = True
-            '
-            'lblBankName
-            '
-            Me.lblBankName.DisplayOnly = True
-            Me.lblBankName.EditingMode = False
-            resources.ApplyResources(Me.lblBankName, "lblBankName")
-            Me.lblBankName.Name = "lblBankName"
-            Me.lblBankName.Translatable = True
-            '
-            'lblBankNameAra
-            '
-            Me.lblBankNameAra.DisplayOnly = True
-            Me.lblBankNameAra.EditingMode = False
-            resources.ApplyResources(Me.lblBankNameAra, "lblBankNameAra")
-            Me.lblBankNameAra.Name = "lblBankNameAra"
-            Me.lblBankNameAra.Translatable = True
-            '
-            'lblNotes
-            '
-            Me.lblNotes.DisplayOnly = True
-            Me.lblNotes.EditingMode = False
-            resources.ApplyResources(Me.lblNotes, "lblNotes")
-            Me.lblNotes.Name = "lblNotes"
-            Me.lblNotes.Translatable = True
             '
             'CFlowLayout1
             '

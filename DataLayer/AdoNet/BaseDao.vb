@@ -603,7 +603,16 @@ Namespace AdoNet
             Dim sql As String = " Select count(*) From [" & tableName &
                     "] where " & filterKey & " " & sortOrder & " <= (Select " & sortOrder &
                     " from [" & tableName & "] where " & filterKey & " IdNo = " & idNo & ") "
-            Return _db.Scalar(sql)
+            Dim recordPosition = _db.Scalar(sql) + 1
+            Dim recCount = GetRecordCount(tableName, filterKey)
+            If recordPosition > recCount Then
+                recordPosition = recCount
+            Else
+                If recordPosition < 0 Then
+                    recordPosition = 0
+                End If
+            End If
+            Return recordPosition
         End Function
 
         '            Catch ex2 As Exception

@@ -81,19 +81,21 @@ Public Class BFMainNew
         End Set
     End Property
 
-    'Protected Sub SetFormCulture(cCultureInfo As CultureInfo)
-    '    FormCulture = cCultureInfo
+    Protected Sub SetFormCulture(cCultureInfo As CultureInfo)
+        FormCulture = cCultureInfo
 
-    '    If FormCulture.TextInfo.IsRightToLeft Then
-    '        RightToLeftLayout = True
-    '    Else
-    '        RightToLeftLayout = False
-    '    End If
-    '    If CultureInfo.CurrentUICulture.Name <> CultureInfo.CurrentCulture.Name Then
-    '        CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture
-    '    End If
-    '    CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
-    'End Sub
+        If FormCulture.TextInfo.IsRightToLeft Then
+            RightToLeftLayout = True
+            RightToLeft = RightToLeft.Yes
+        Else
+            RightToLeftLayout = False
+            RightToLeft = RightToLeft.No
+        End If
+        If CultureInfo.CurrentUICulture.Name <> CultureInfo.CurrentCulture.Name Then
+            CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture
+        End If
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
+    End Sub
 
     Protected Property FormCulture As CultureInfo
 
@@ -473,6 +475,12 @@ Public Class BFMainNew
         Next
     End Sub
 
+    Private Sub UseOriginalDataGridView(ByRef cDataGridView As DataGridView)
+        For Each col As DataGridViewColumn In cDataGridView.Columns
+            col.HeaderText = col.Tag
+        Next
+    End Sub
+
     Private Sub TranslateDataGridView(ByRef cDataGridView As DataGridView)
         For Each col As DataGridViewColumn In cDataGridView.Columns
             col.HeaderText = Messaging.TranslateCaption(col.HeaderText)
@@ -504,6 +512,18 @@ Public Class BFMainNew
             Else
                 cFileName = "btn" + o.OriginalImageName.ToLower()
             End If
+        End If
+        If GlobalResources.My.Resources.ResourceManager.GetObject(cFileName) IsNot Nothing Then
+            cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cFileName)
+        End If
+    End Sub
+
+    Private Sub UseOriginalButtonText(cCtrl As Control)
+        Dim o = CType(cCtrl, CButton)
+        Dim cButton = CType(cCtrl, CButton)
+        Dim cFileName = "btn" + o.OriginalImageName
+        If cButton.Image IsNot Nothing And cButton.OriginalImageName IsNot Nothing Then
+            cFileName = "btn" + o.OriginalImageName.ToLower()
         End If
         If GlobalResources.My.Resources.ResourceManager.GetObject(cFileName) IsNot Nothing Then
             cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cFileName)
@@ -621,10 +641,8 @@ Public Class BFMainNew
     End Sub
 
     Private Sub BFMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        If Not IgnoreLoad Then
-            If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
-                RaiseEvent BeforeLoad()
-            End If
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+            RaiseEvent BeforeLoad()
         End If
     End Sub
 
@@ -943,36 +961,52 @@ Public Class BFMainNew
     End Sub
 
     Private Sub UseOriginalCaptions()
-
         Dim allCtrl As New List(Of Control)
         For Each cCtrl As Control In FindControlRecursive(allCtrl, Me)
             If IsTranslatable(cCtrl) Then
-                If TypeOf cCtrl Is DataGrid Then
-                    CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
-                ElseIf TypeOf cCtrl Is ToolStrip Then
-                    Dim c As ToolStrip
-                    c = cCtrl
-                    For Each obj As Object In c.Items
-
-                        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-                        obj.Text = obj.Tag(0)
-                        obj.ToolTipText = obj.Tag(1)
-                        Dim button As ToolStripButton = TryCast(obj, ToolStripButton)
-                        If (button IsNot Nothing) Then
-                            If button.Image IsNot Nothing And button.Image.Tag IsNot Nothing Then
-                                button.Image = button.Image.Tag
-                            End If
-                        End If
-                    Next
-                ElseIf cCtrl.GetType().ToString() = "System.Windows.Forms.MenuStrip" Then
+                If TypeOf cCtrl Is MenuStrip Then
                     Dim subMenuName = ""
                     Dim menuStrip As MenuStrip = cCtrl
                     UseOriginalMenuStripCaptions(menuStrip.Items, subMenuName)
+                ElseIf TypeOf cCtrl Is ToolStrip Then
+                    UseOriginalToolStripItems(cCtrl)
+                ElseIf TypeOf cCtrl Is DataGridView Then
+                    UseOriginalDataGridView(cCtrl)
+                ElseIf TypeOf cCtrl Is DataGrid Then
+                    CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
                 Else
+                    If TypeOf cCtrl Is CButton Then
+                        UseOriginalButtonText(cCtrl)
+                    End If
                     cCtrl.Text = cCtrl.Tag
                 End If
             End If
         Next
+    End Sub
+
+    Private Sub UseOriginalToolStripItems(ByRef cToolStrip As ToolStrip)
+        For Each obj As Object In cToolStrip.Items
+            obj.Text = obj.Tag(0)
+            obj.ToolTipText = obj.Tag(1)
+            If TypeOf obj Is ToolStripButton Then
+                UseOriginalToolStripButtonImage(obj)
+            ElseIf TypeOf obj Is TextBox Then
+                Dim c = CType(obj, TextBox)
+                If GlobalVariables.RightToLeftLayout Then
+                    c.Text = Messaging.TranslateCaption(c.Text)
+                    c.RightToLeft = RightToLeft.Yes
+                Else
+                    c.RightToLeft = RightToLeft.No
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub UseOriginalToolStripButtonImage(cButton As ToolStripButton)
+        Dim cResourceName = cButton.Name.ToLower()
+        If GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName) IsNot Nothing Then
+            cButton.Image = GlobalResources.My.Resources.ResourceManager.GetObject(cResourceName)
+        End If
     End Sub
 
     'Private Sub CFormEntryNew_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
@@ -1010,8 +1044,8 @@ Public Class SettingsSaver
     Private _height As UInt16
 
     Public Sub SaveSetting(control As Control)
-        _top = control.Top
-        _left = control.Left
+        _top = Math.Max(control.Top, 0)
+        _left = Math.Max(control.Left, 0)
         _width = control.Width
         _height = control.Height
     End Sub

@@ -238,6 +238,21 @@ Namespace Services
             Return tlData
         End Function
 
+        Public Function GetHRecords(tableName As String, sortKey As String, fields As String(), Optional Filter As String = Nothing) As List(Of ClassesLibrary.HLookupData)
+            Dim data = DataDao.GetRecords(tableName, sortKey, fields, Filter)
+            Dim tlData = New List(Of ClassesLibrary.HLookupData)
+            For i = 1 To Int(data.Count / 4)
+                Dim tData As New ClassesLibrary.HLookupData With {
+                        .IdNo = data(i * 4 - 4),
+                        .Name = data(i * 4 - 3),
+                        .ParentIdNo = CInt(If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 2))),
+                        .Code = If(data(i * 4 - 1) Is DBNull.Value, "", data(i * 4 - 1))
+                        }
+                tlData.Add(tData)
+            Next
+            Return tlData
+        End Function
+
 #Region "Current Service Function"
 
         Public Function AddRecord(ByRef model) As Integer Implements IService.AddRecord

@@ -2,12 +2,12 @@
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class DepartmentEntryTv
-        Inherits CFormEntryTv 
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
+        <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -21,48 +21,52 @@ Namespace PresentationLayer.Views.Forms
         'NOTE: The following procedure is required by the Windows Form Designer
         'It can be modified using the Windows Form Designer.  
         'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
+        <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DepartmentEntryTv))
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout1.SuspendLayout
-        Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DepartmentEntryTv))
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout1.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'SplitContainer1
+            '
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
             '
             'ImageListTreeView
             '
             Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
             Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
             Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
-            '
-            'TranslatorDAC
-            '
-            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-            '
-            'AppDataDAC
-            '
-            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
             'CFlowLayout1
             '
@@ -343,6 +347,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.FieldName = Nothing
             Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtNotes, True)
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
@@ -385,17 +390,18 @@ Namespace PresentationLayer.Views.Forms
             'DepartmentEntryTv
             '
             resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.CFlowLayout1)
-        Me.Name = "DepartmentEntryTv"
-        Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
-        Me.CFlowLayout1.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.Name = "DepartmentEntryTv"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
 
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
@@ -414,4 +420,4 @@ End Sub
         Friend WithEvents cacRevCostCenterIdNo As CaComboBox
         Friend WithEvents txtSortKey As CTextBox
     End Class
-End NameSpace
+End Namespace
