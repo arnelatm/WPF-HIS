@@ -1110,7 +1110,6 @@ Public Class CFormEntry
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
 
     Public Overridable Sub ActiveToolStripButton_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
-
     End Sub
 
     'Public Function ValidateDataBoundGrid(Of TV As New, TM As New)(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing)

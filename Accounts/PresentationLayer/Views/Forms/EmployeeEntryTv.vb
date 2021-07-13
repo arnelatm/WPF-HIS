@@ -454,6 +454,7 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
          {"Active", chkActive},
+         {"Balance", txtBalance},
          {"BankAccountNo", txtBankAccountNo},
          {"BankIdNo", cacBankIdNo},
          {"BirthDate", dtpBirthDate},
@@ -474,6 +475,9 @@ Namespace PresentationLayer.Views.Forms
          {"NationalityCode", cacNationalityCode},
          {"Notes", txtNotes},
          {"OpeningBalance", txtOpeningBalance},
+         {"PayCycleIdNo", cboPayCycleidNo},
+         {"PayGroupIdNo", cboPayGroupIdNo},
+         {"PaymentMethod", cboPaymentMethod},
          {"PoBox", txtPoBox},
          {"ProvinceState", txtProvinceState},
          {"ReleasedDate", dtpReleasedDate},

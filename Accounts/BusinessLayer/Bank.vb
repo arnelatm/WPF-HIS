@@ -13,10 +13,8 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("BankName"))
                 AddRule(New ValidateRequired("BankCode"))
-                AddRule(New ValidateCompare("BankCode", "BankName", ValidationOperator.NotEqual, ValidationDataType.String))
-                AddRule(New ValidateLength("BankName", 5, 10))
-                AddRule(New ValidateRange("BankName", "A", "J", ValidationDataType.String))
-                AddRule(New ValidateRequiredOne({"BankCode", "BankName"}))
+                'AddRule(New ValidateUnique("BankName"))
+                'AddRule(New ValidateUnique("BankCode"))
             End If
         End Sub
 

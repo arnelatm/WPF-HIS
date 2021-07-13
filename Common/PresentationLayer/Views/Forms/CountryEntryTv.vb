@@ -10,16 +10,8 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "Country"
-            TvMainFieldName = "CountryName"
-            TvSecondaryFieldName = "CountryCode"
-            SortOrderKey = "SortKey"
             FirstControl = txtCountryCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New CountryPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"

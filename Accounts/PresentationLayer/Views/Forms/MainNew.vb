@@ -7,6 +7,8 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
+Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Forms
 Imports AATM.Libraries
 Imports AATM.Libraries.ErrorsAndEvents
@@ -264,15 +266,8 @@ Namespace PresentationLayer.Views.Forms
             myForm.Show()
         End Sub
 
-        Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-    Handles ToolStripMenuItemCountries.Click
-            Dim childMdiForm As CountryEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New CountryEntryTv With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+        Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCountries.Click
+            RunForm(Of CountryPresenter(Of CountryModel), CountryEntryTv)()
         End Sub
 
         Private Sub CreateAllMessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCreateAllMessages.Click
@@ -317,13 +312,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DepartmentNewToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemDepartments.Click
-            Dim childMdiForm As DepartmentEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New DepartmentEntryTv() With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of DepartmentPresenter(Of DepartmentModel), DepartmentEntryTv)()
         End Sub
 
         Private Sub DesignationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDesignations.Click
@@ -849,7 +838,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            'GetNSaveCaptions()
+            GetNSaveCaptions()
             If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
                 ToolStripButtonArabic.Visible = False
                 ToolStripButtonEnglish.Visible = True

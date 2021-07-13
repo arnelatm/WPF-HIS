@@ -190,6 +190,13 @@ Public Class BfMain
     'End Sub
 
     Public Sub TranslateForm()
+        SetFormLayout()
+        If GlobalVariables.TranslationMode Then
+            RaiseEvent AfterTranslateForm()
+        End If
+    End Sub
+
+    Public Sub SetFormLayout()
         SuspendLayout()
         Dim myImage As Bitmap
         myImage = BackgroundImage
@@ -207,9 +214,6 @@ Public Class BfMain
             TranslateCaptions(TextDisplayLanguage)
         End If
         BackgroundImage = myImage
-        If GlobalVariables.TranslationMode Then
-            RaiseEvent AfterTranslateForm()
-        End If
         ResumeLayout()
     End Sub
 

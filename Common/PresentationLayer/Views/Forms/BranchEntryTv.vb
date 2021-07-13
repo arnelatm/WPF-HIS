@@ -10,16 +10,8 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            FormTitleCaption = "Branches Maintenance Form"
-            MainTableName = "Branch"
-            TvMainFieldName = "BranchName"
-            TvSecondaryFieldName = "BranchCode"
-            SortOrderKey = "BranchName"
             FirstControl = txtBranchCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New BranchPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"

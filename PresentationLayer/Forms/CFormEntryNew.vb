@@ -37,6 +37,7 @@ Public Class CFormEntryNew
     Private _editingMode As Boolean = False
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
+    Private _firstLoadSwitch As UInt16 = 0
 
     Public Event AfterUpdateView()
 
@@ -47,6 +48,7 @@ Public Class CFormEntryNew
         KeyPreview = True
         DoubleBuffered = True
         Ea = New EventAggregator
+
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
@@ -68,6 +70,20 @@ Public Class CFormEntryNew
     Public Property TableProperties As Array
 
     Protected Property FormTitleCaption As String = ""
+
+    Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
+        Parent.SuspendDrawing()
+        If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+            If btnArabic.Enabled Then
+                btnOriginal.PerformClick()
+            End If
+        Else
+            If Not btnArabic.Enabled Then
+                btnOriginal.PerformClick()
+            End If
+        End If
+        Parent.ResumeDrawing()
+    End Sub
 
     'Public Property RecordCount As Integer Implements IViewDataEntry.RecordCount
     '    Get
@@ -467,47 +483,47 @@ Public Class CFormEntryNew
     End Sub
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        GetNSaveCaptions()
-        If Not IgnoreLoad Then
-            If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+        If _firstLoadSwitch = 0 Then
+            GetNSaveCaptions()
+            _firstLoadSwitch = 1
+        End If
+        If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+            'AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
+            TextDisplayLanguage = CultureInfo.CurrentCulture.Name
+            CreateDataSources()
+            CreateMainFieldsDictionary()
+            PublishClickedButton(ButtonClicked.Last)
+            Inputs(False)
 
-                'AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
-                TextDisplayLanguage = CultureInfo.CurrentCulture.Name
-                CreateDataSources()
-                CreateMainFieldsDictionary()
-                PublishClickedButton(ButtonClicked.Last)
-                Inputs(False)
-
-                If Ea IsNot Nothing Then
-                    Ea.PublishEvent(New EntryFormLoaded(Me))
-                End If
-
-                If GlobalVariables.RightToLeftLayout Then
-                    btnArabic.Visible = False
-                    btnOriginal.Visible = True
-                Else
-                    btnArabic.Visible = True
-                    btnOriginal.Visible = False
-                End If
-                If FirstControl IsNot Nothing Then
-                    FirstControl.Focus()
-                End If
-                If GlobalVariables.UserName.ToLower() <> $"arnel" Then
-                    HideButton(btnDebug)
-                End If
-                If SingleData Or HideNavigatorButtons Then
-                    btnFirst.Visible = False
-                    btnNext.Visible = False
-                    btnLast.Visible = False
-                    btnPrev.Visible = False
-                    tsbCurrentRecord.Visible = False
-                    tsbTotalRecords.Visible = False
-                    tssNavigator2.Visible = False
-                    tssnavigator1.Visible = False
-                    btnOf.Visible = False
-                End If
-                'UpdateNavigationButtonDisplay(False, False)
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New EntryFormLoaded(Me))
             End If
+
+            If GlobalVariables.RightToLeftLayout Then
+                btnArabic.Visible = False
+                btnOriginal.Visible = True
+            Else
+                btnArabic.Visible = True
+                btnOriginal.Visible = False
+            End If
+            If FirstControl IsNot Nothing Then
+                FirstControl.Focus()
+            End If
+            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
+                HideButton(btnDebug)
+            End If
+            If SingleData Or HideNavigatorButtons Then
+                btnFirst.Visible = False
+                btnNext.Visible = False
+                btnLast.Visible = False
+                btnPrev.Visible = False
+                tsbCurrentRecord.Visible = False
+                tsbTotalRecords.Visible = False
+                tssNavigator2.Visible = False
+                tssnavigator1.Visible = False
+                btnOf.Visible = False
+            End If
+            'UpdateNavigationButtonDisplay(False, False)
         End If
     End Sub
 

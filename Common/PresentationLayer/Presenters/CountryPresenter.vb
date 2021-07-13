@@ -1,27 +1,22 @@
-﻿Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Common.ServiceLayer
+Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
-    Public Class CountryPresenter
-        Inherits CommonPresenter(Of ICountryView, CountryModel)
+    Public Class CountryPresenter(Of TM As New)
+        Inherits PresenterNew(Of ICountryView, TM)
 
-        Public ParentViewList As List(Of CountryModel)
+        Public ParentViewList As List(Of TM)
 
         Public Sub New(view As ICountryView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelCommon("Country")
+            Service = New ServiceCommon("Country")
             TableName = "Country"
             SortOrderKey = "CountryName"
             TreeViewMainField = "CountryName"
             TreeViewSecondaryField = "CountryCode"
-            OriginalModel = New CountryModel()
-            DataModel = New CountryModel
-            TreeViewList = New List(Of CountryModel)
-            ParentViewList = New List(Of CountryModel)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            ParentViewList = New List(Of TM)
         End Sub
 
     End Class

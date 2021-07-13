@@ -702,6 +702,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Public Overridable Sub GoAddRecord()
         LastIdNo = LateBinding.GetProperty(View, IdFieldName)
         Try
+            Model = New TM
             GlobalVariables.Mapper.Map(Model, View)
             AddMode = True
             RaiseEvent BeforeAdd()
@@ -859,7 +860,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Function
 
     Public Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
-        If CheckIfUnique(ControlDescription(cCtrl), fldName, TargetIdNo) Then
+        If CheckIfUnique(cCtrl.Text, fldName, TargetIdNo) Then
             Return False
         End If
         Return True
@@ -1051,7 +1052,8 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Dim retVal As Integer
         NewlyAddedRecordIdNo = Service.AddRecord(record)
         retVal = NewlyAddedRecordIdNo
-        LateBinding.SetProperty(View, IdFieldName, retVal)
+        CallByName(View, IdFieldName, CallType.Set, retVal)
+        'LateBinding.SetProperty(View, IdFieldName, retVal)
         Return retVal
     End Function
 
@@ -1419,7 +1421,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         ClearAllErrorMessages()
         _dataErrors = ""
         validated = CheckForDataErrors(eventType)
-        If validated AndAlso EditMode Then
+        If validated AndAlso (EditMode Or AddMode) Then
             If Not ChangesMade() Then
                 Messaging.Show(True, "MsgNoChangesMadeNothingToSave", "No changes made, nothing to save!", "Nothing to save")
                 noChanges = True
@@ -1630,7 +1632,8 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
             End If
         End If
         If recordIsNotUnique Then
-            Messaging.ShowParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldName", cCtrl.Text, "fieldDescription", ControlDescription(cCtrl)})
+            Dim errorMessage = Messaging.GetParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldValue", cCtrl.Text, "fieldDescription", ControlDescription(cCtrl)})
+            FormatError(cCtrl, errorMessage)
             Return False
         End If
         Return True
@@ -2003,6 +2006,59 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         End If
     End Sub
 
+    'Public Sub OnEventHandlerValidatingData(ByRef e As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
+    '    If Not ValidateView() Then
+    '        e.Validated = False
+    '    End If
+    'End Sub
+
+    'Public Overridable Function ValidateView()
+    '    Dim validationsPassed As Boolean
+    '    validationsPassed = True
+    '    Dim allControls As New List(Of Control)
+    '    Dim originalValue As String
+    '    For Each cCtrl As Control In MainFieldsDictionary.Controls
+    '        If TypeOf cCtrl Is IEntryControl Then
+    '            If TypeOf cCtrl Is CTextBoxIdNo Then
+    '                ' no validations for this type of control. These are Identity Columns and are filled automatically
+    '                ' by the Data Server.
+    '            ElseIf TypeOf cCtrl Is CTextBox AndAlso GetPropertyValue(cCtrl, "ComputedValue") Then
+    '                ' ignore this also computed values don't need to be validated for empty values
+    '            ElseIf TypeOf cCtrl Is CTextBoxArabic Then
+    '                Dim thisControl As CTextBoxArabic
+    '                thisControl = cCtrl
+    '                If thisControl.EnglishControl Is Nothing Then
+    '                    MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{thisControl.Name}> not set.")
+    '                End If
+    '                originalValue = GetOriginalValue(thisControl.EnglishControl)
+    '                Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
+    '                If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
+    '                    thisControl.Text = englishText
+    '                End If
+    '            ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
+    '                ' check for duplicate values
+    '                Dim thisControl As CTextBox = cCtrl
+    '                If thisControl.ValueIsNumeric Then
+    '                    If Not ValidateNumber(cCtrl) Then
+    '                        validationsPassed = False
+    '                    End If
+    '                End If
+    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
+    '                    validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+    '                End If
+    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
+    '                    If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
+    '                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
+    '                    End If
+    '                End If
+    '            End If
+
+    '        End If
+    '    Next
+    '    PresenterObj.AutoValidationsPassed = validationsPassed
+    '    Return validationsPassed
+    'End Function
+
     'Public Sub OnGetEnumListHandler(Of TE)(ByRef eventType As GetEnumListRequested) Implements ISubscriber(Of GetEnumListRequested).OnEventHandler
     '    Dim dataList As New List(Of ClassesLibrary.LookupData)
     '    For Each c In [Enum].GetValues(GetType(TE))
@@ -2051,14 +2107,6 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Dim root As TreeNode = FormTreeView.Nodes(0)
         root.Nodes.Clear()
         root.Text = Messaging.TranslateCaption(TableName)
-        '' create the tree
-        'If GlobalVariables.RightToLeftLayout Then
-        '    FormTreeView.RightToLeft = RightToLeft.Yes
-        '    FormTreeView.RightToLeftLayout = True
-        'Else
-        '    FormTreeView.RightToLeft = RightToLeft.No
-        '    FormTreeView.RightToLeftLayout = False
-        'End If
         Dim treeViewData As Object = GetTreeViewData()
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             For Each dataNode In treeViewData
@@ -2094,7 +2142,6 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Function
 
     Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean, treeViewTableName As TreeView)
-        'Dim parentFieldName As String = CallByName(View, "ParentFieldName", CallType.Get)
         Dim parentIdValue As Integer? = GetPropertyValue(dataNode, ParentFieldName)
         If parentIdValue Is Nothing OrElse parentIdValue = 0 Then
             AddRecordToTree(dataNode) ', "Name")

@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class CountryEntryTv
-        Inherits CFormEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -48,16 +48,27 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtFlag32 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.LblFlag128 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtFlag128 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TreeViewTableName
+            'SplitContainer1
             '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 286)
-            Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 301)
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            Me.SplitContainer1.Size = New System.Drawing.Size(687, 312)
+            Me.SplitContainer1.SplitterDistance = 228
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            Me.FormTreeView.Size = New System.Drawing.Size(228, 312)
             '
             'ImageListTreeView
             '
@@ -67,6 +78,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'floDataDisplay
             '
+            Me.floDataDisplay.AutoSize = True
             Me.floDataDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
             Me.floDataDisplay.Controls.Add(Me.lblIdNo)
@@ -91,11 +103,12 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.TxtFlag32)
             Me.floDataDisplay.Controls.Add(Me.LblFlag128)
             Me.floDataDisplay.Controls.Add(Me.TxtFlag128)
-            Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
-            Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
+            Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.floDataDisplay.Location = New System.Drawing.Point(0, 0)
+            Me.floDataDisplay.MinimumSize = New System.Drawing.Size(440, 300)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(435, 301)
+            Me.floDataDisplay.Size = New System.Drawing.Size(449, 312)
             Me.floDataDisplay.TabIndex = 148
             '
             'lblIdNo
@@ -111,16 +124,23 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.TabIndex = 150
             Me.lblIdNo.Text = "Country ID No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblIdNo.Translatable = True
             '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
@@ -130,8 +150,10 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
             Me.TxtIdNo.TabIndex = 0
+            Me.TxtIdNo.Translatable = False
             '
             'lblCountryCode
             '
@@ -147,15 +169,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCountryCode.TabIndex = 151
             Me.lblCountryCode.Text = "ISO Code 2 Letter"
             Me.lblCountryCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblCountryCode.Translatable = True
             '
             'txtCountryCode
             '
             Me.txtCountryCode.BackColor = System.Drawing.Color.White
+            Me.txtCountryCode.BegFindValue = Nothing
             Me.txtCountryCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtCountryCode.ComputedValue = False
             Me.txtCountryCode.CustomFormat = Nothing
             Me.txtCountryCode.DataBoundControl = True
             Me.txtCountryCode.EditingMode = False
+            Me.txtCountryCode.EndFindValue = Nothing
+            Me.txtCountryCode.FieldDescription = Nothing
+            Me.txtCountryCode.FieldName = Nothing
+            Me.txtCountryCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtCountryCode.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtCountryCode, True)
             Me.txtCountryCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -169,8 +197,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCountryCode.Name = "txtCountryCode"
             Me.txtCountryCode.OldValue = Nothing
             Me.txtCountryCode.ReadOnly = True
+            Me.txtCountryCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCountryCode.Size = New System.Drawing.Size(62, 23)
             Me.txtCountryCode.TabIndex = 1
+            Me.txtCountryCode.Translatable = False
             Me.txtCountryCode.ValueIsMandatory = True
             '
             'lblCountryName
@@ -187,15 +217,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCountryName.TabIndex = 153
             Me.lblCountryName.Text = "Country Name"
             Me.lblCountryName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblCountryName.Translatable = True
             '
             'txtCountryName
             '
             Me.txtCountryName.BackColor = System.Drawing.Color.White
+            Me.txtCountryName.BegFindValue = Nothing
             Me.txtCountryName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtCountryName.ComputedValue = False
             Me.txtCountryName.CustomFormat = Nothing
             Me.txtCountryName.DataBoundControl = True
             Me.txtCountryName.EditingMode = False
+            Me.txtCountryName.EndFindValue = Nothing
+            Me.txtCountryName.FieldDescription = Nothing
+            Me.txtCountryName.FieldName = Nothing
+            Me.txtCountryName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtCountryName.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtCountryName, True)
             Me.txtCountryName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -209,8 +245,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCountryName.Name = "txtCountryName"
             Me.txtCountryName.OldValue = Nothing
             Me.txtCountryName.ReadOnly = True
+            Me.txtCountryName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCountryName.Size = New System.Drawing.Size(221, 23)
             Me.txtCountryName.TabIndex = 2
+            Me.txtCountryName.Translatable = False
             Me.txtCountryName.ValueIsMandatory = True
             '
             'lblCountryNameAra
@@ -227,16 +265,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCountryNameAra.TabIndex = 155
             Me.lblCountryNameAra.Text = "Country Name (Arabic)"
             Me.lblCountryNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblCountryNameAra.Translatable = True
             '
             'txtCountryNameAra
             '
             Me.txtCountryNameAra.BackColor = System.Drawing.Color.White
+            Me.txtCountryNameAra.BegFindValue = Nothing
             Me.txtCountryNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtCountryNameAra.ComputedValue = False
             Me.txtCountryNameAra.CustomFormat = Nothing
             Me.txtCountryNameAra.DataBoundControl = True
             Me.txtCountryNameAra.EditingMode = False
+            Me.txtCountryNameAra.EndFindValue = Nothing
             Me.txtCountryNameAra.EnglishControl = Me.txtCountryName
+            Me.txtCountryNameAra.FieldDescription = Nothing
+            Me.txtCountryNameAra.FieldName = Nothing
+            Me.txtCountryNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtCountryNameAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtCountryNameAra, True)
             Me.txtCountryNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -251,8 +295,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCountryNameAra.OldValue = Nothing
             Me.txtCountryNameAra.ReadOnly = True
             Me.txtCountryNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtCountryNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCountryNameAra.Size = New System.Drawing.Size(221, 23)
             Me.txtCountryNameAra.TabIndex = 3
+            Me.txtCountryNameAra.Translatable = False
             '
             'LblNationality
             '
@@ -268,16 +314,22 @@ Namespace PresentationLayer.Views.Forms
             Me.LblNationality.TabIndex = 158
             Me.LblNationality.Text = "Nationality"
             Me.LblNationality.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.LblNationality.Translatable = True
             '
             'txtNationality
             '
             Me.txtNationality.BackColor = System.Drawing.Color.White
+            Me.txtNationality.BegFindValue = Nothing
             Me.txtNationality.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNationality.ComputedValue = False
             Me.txtNationality.CustomFormat = Nothing
             Me.txtNationality.DataBoundControl = True
             Me.txtNationality.EditingMode = False
+            Me.txtNationality.EndFindValue = Nothing
             Me.txtNationality.EnglishControl = Me.txtCountryName
+            Me.txtNationality.FieldDescription = Nothing
+            Me.txtNationality.FieldName = Nothing
+            Me.txtNationality.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNationality.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtNationality, True)
             Me.txtNationality.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -292,8 +344,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNationality.OldValue = Nothing
             Me.txtNationality.ReadOnly = True
             Me.txtNationality.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtNationality.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNationality.Size = New System.Drawing.Size(221, 23)
             Me.txtNationality.TabIndex = 4
+            Me.txtNationality.Translatable = False
             '
             'lblNationalityAra
             '
@@ -309,16 +363,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNationalityAra.TabIndex = 160
             Me.lblNationalityAra.Text = "Nationality (Arabic)"
             Me.lblNationalityAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblNationalityAra.Translatable = True
             '
             'txtNationalityAra
             '
             Me.txtNationalityAra.BackColor = System.Drawing.Color.White
+            Me.txtNationalityAra.BegFindValue = Nothing
             Me.txtNationalityAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNationalityAra.ComputedValue = False
             Me.txtNationalityAra.CustomFormat = Nothing
             Me.txtNationalityAra.DataBoundControl = True
             Me.txtNationalityAra.EditingMode = False
+            Me.txtNationalityAra.EndFindValue = Nothing
             Me.txtNationalityAra.EnglishControl = Me.txtCountryName
+            Me.txtNationalityAra.FieldDescription = Nothing
+            Me.txtNationalityAra.FieldName = Nothing
+            Me.txtNationalityAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNationalityAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtNationalityAra, True)
             Me.txtNationalityAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -333,8 +393,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNationalityAra.OldValue = Nothing
             Me.txtNationalityAra.ReadOnly = True
             Me.txtNationalityAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtNationalityAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNationalityAra.Size = New System.Drawing.Size(221, 23)
             Me.txtNationalityAra.TabIndex = 5
+            Me.txtNationalityAra.Translatable = False
             '
             'lblISOA3
             '
@@ -350,15 +412,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblISOA3.TabIndex = 162
             Me.lblISOA3.Text = "ISO Code 3 Letters"
             Me.lblISOA3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblISOA3.Translatable = True
             '
             'TxtISOA3
             '
             Me.TxtISOA3.BackColor = System.Drawing.Color.White
+            Me.TxtISOA3.BegFindValue = Nothing
             Me.TxtISOA3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtISOA3.ComputedValue = False
             Me.TxtISOA3.CustomFormat = Nothing
             Me.TxtISOA3.DataBoundControl = True
             Me.TxtISOA3.EditingMode = False
+            Me.TxtISOA3.EndFindValue = Nothing
+            Me.TxtISOA3.FieldDescription = Nothing
+            Me.TxtISOA3.FieldName = Nothing
+            Me.TxtISOA3.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtISOA3.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtISOA3, True)
             Me.TxtISOA3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -372,8 +440,10 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtISOA3.Name = "TxtISOA3"
             Me.TxtISOA3.OldValue = Nothing
             Me.TxtISOA3.ReadOnly = True
+            Me.TxtISOA3.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtISOA3.Size = New System.Drawing.Size(62, 23)
             Me.TxtISOA3.TabIndex = 6
+            Me.TxtISOA3.Translatable = False
             Me.TxtISOA3.ValueIsMandatory = True
             '
             'LblISON
@@ -389,15 +459,21 @@ Namespace PresentationLayer.Views.Forms
             Me.LblISON.TabIndex = 168
             Me.LblISON.Text = "ISO Code Numeric"
             Me.LblISON.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.LblISON.Translatable = True
             '
             'TxtISON
             '
             Me.TxtISON.BackColor = System.Drawing.Color.White
+            Me.TxtISON.BegFindValue = Nothing
             Me.TxtISON.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtISON.ComputedValue = False
             Me.TxtISON.CustomFormat = Nothing
             Me.TxtISON.DataBoundControl = True
             Me.TxtISON.EditingMode = False
+            Me.TxtISON.EndFindValue = Nothing
+            Me.TxtISON.FieldDescription = Nothing
+            Me.TxtISON.FieldName = Nothing
+            Me.TxtISON.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtISON.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtISON, True)
             Me.TxtISON.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -410,8 +486,10 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtISON.Name = "TxtISON"
             Me.TxtISON.OldValue = Nothing
             Me.TxtISON.ReadOnly = True
+            Me.TxtISON.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtISON.Size = New System.Drawing.Size(62, 23)
             Me.TxtISON.TabIndex = 7
+            Me.TxtISON.Translatable = False
             Me.TxtISON.ValueIsNumeric = True
             '
             'LblCountryTelCode
@@ -427,15 +505,21 @@ Namespace PresentationLayer.Views.Forms
             Me.LblCountryTelCode.TabIndex = 169
             Me.LblCountryTelCode.Text = "International Phone Code"
             Me.LblCountryTelCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.LblCountryTelCode.Translatable = True
             '
             'TxtCountryTelCode
             '
             Me.TxtCountryTelCode.BackColor = System.Drawing.Color.White
+            Me.TxtCountryTelCode.BegFindValue = Nothing
             Me.TxtCountryTelCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtCountryTelCode.ComputedValue = False
             Me.TxtCountryTelCode.CustomFormat = Nothing
             Me.TxtCountryTelCode.DataBoundControl = True
             Me.TxtCountryTelCode.EditingMode = False
+            Me.TxtCountryTelCode.EndFindValue = Nothing
+            Me.TxtCountryTelCode.FieldDescription = Nothing
+            Me.TxtCountryTelCode.FieldName = Nothing
+            Me.TxtCountryTelCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtCountryTelCode.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtCountryTelCode, True)
             Me.TxtCountryTelCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -448,8 +532,10 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtCountryTelCode.Name = "TxtCountryTelCode"
             Me.TxtCountryTelCode.OldValue = Nothing
             Me.TxtCountryTelCode.ReadOnly = True
+            Me.TxtCountryTelCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtCountryTelCode.Size = New System.Drawing.Size(62, 23)
             Me.TxtCountryTelCode.TabIndex = 8
+            Me.TxtCountryTelCode.Translatable = False
             Me.TxtCountryTelCode.ValueIsNullable = True
             Me.TxtCountryTelCode.ValueIsNumeric = True
             '
@@ -466,15 +552,21 @@ Namespace PresentationLayer.Views.Forms
             Me.LblFlag32.TabIndex = 170
             Me.LblFlag32.Text = "Flag Small"
             Me.LblFlag32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.LblFlag32.Translatable = True
             '
             'TxtFlag32
             '
             Me.TxtFlag32.BackColor = System.Drawing.Color.White
+            Me.TxtFlag32.BegFindValue = Nothing
             Me.TxtFlag32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtFlag32.ComputedValue = False
             Me.TxtFlag32.CustomFormat = Nothing
             Me.TxtFlag32.DataBoundControl = True
             Me.TxtFlag32.EditingMode = False
+            Me.TxtFlag32.EndFindValue = Nothing
+            Me.TxtFlag32.FieldDescription = Nothing
+            Me.TxtFlag32.FieldName = Nothing
+            Me.TxtFlag32.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtFlag32.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.TxtFlag32, True)
             Me.TxtFlag32.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -487,8 +579,10 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtFlag32.Name = "TxtFlag32"
             Me.TxtFlag32.OldValue = Nothing
             Me.TxtFlag32.ReadOnly = True
+            Me.TxtFlag32.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtFlag32.Size = New System.Drawing.Size(62, 23)
             Me.TxtFlag32.TabIndex = 9
+            Me.TxtFlag32.Translatable = False
             '
             'LblFlag128
             '
@@ -503,15 +597,21 @@ Namespace PresentationLayer.Views.Forms
             Me.LblFlag128.TabIndex = 171
             Me.LblFlag128.Text = "Flag Big"
             Me.LblFlag128.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.LblFlag128.Translatable = True
             '
             'TxtFlag128
             '
             Me.TxtFlag128.BackColor = System.Drawing.Color.White
+            Me.TxtFlag128.BegFindValue = Nothing
             Me.TxtFlag128.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtFlag128.ComputedValue = False
             Me.TxtFlag128.CustomFormat = Nothing
             Me.TxtFlag128.DataBoundControl = True
             Me.TxtFlag128.EditingMode = False
+            Me.TxtFlag128.EndFindValue = Nothing
+            Me.TxtFlag128.FieldDescription = Nothing
+            Me.TxtFlag128.FieldName = Nothing
+            Me.TxtFlag128.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtFlag128.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.TxtFlag128, True)
             Me.TxtFlag128.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -524,17 +624,23 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtFlag128.Name = "TxtFlag128"
             Me.TxtFlag128.OldValue = Nothing
             Me.TxtFlag128.ReadOnly = True
+            Me.TxtFlag128.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtFlag128.Size = New System.Drawing.Size(62, 23)
             Me.TxtFlag128.TabIndex = 10
+            Me.TxtFlag128.Translatable = False
             '
             'CountryEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(738, 354)
-            Me.Controls.Add(Me.floDataDisplay)
+            Me.ClientSize = New System.Drawing.Size(687, 365)
+            Me.MinimumSize = New System.Drawing.Size(703, 404)
             Me.Name = "CountryEntryTv"
-            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+            Me.Text = "Country Maintenance Form"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.PerformLayout()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
             Me.floDataDisplay.PerformLayout()

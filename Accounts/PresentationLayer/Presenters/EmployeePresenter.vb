@@ -24,16 +24,12 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As IEmployeeView)
             MyBase.New(itemView)
-            If View IsNot Nothing Then
-                Service = New ServiceAccounts("Employee")
-                TableName = "Employee"
-                TreeViewMainField = "EmployeeName"
-                TreeViewSecondaryField = "EmployeeCode"
-                SortOrderKey = "EmployeeName"
-                'OriginalModel = New EmployeeModel()
-                'DataModel = New EmployeeModel
-                CreateDataTables()
-            End If
+            Service = New ServiceAccounts("Employee")
+            TableName = "Employee"
+            TreeViewMainField = "EmployeeName"
+            TreeViewSecondaryField = "EmployeeCode"
+            SortOrderKey = "EmployeeName"
+            CreateDataTables()
         End Sub
 
         Private Sub CreateDataTables()
