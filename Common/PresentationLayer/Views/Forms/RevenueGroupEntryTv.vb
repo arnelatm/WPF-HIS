@@ -1,5 +1,4 @@
-﻿Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Common.PresentationLayer.Views.Interface
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -10,17 +9,9 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "RevenueGroup_View"
-            TvMainFieldName = "RevenueGroupName"
-            TvSecondaryFieldName = "RevenueGroupCode"
-            SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
             FirstControl = txtRevenueGroupCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New RevenueGroupPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"

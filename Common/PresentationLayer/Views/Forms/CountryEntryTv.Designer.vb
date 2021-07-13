@@ -202,6 +202,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCountryCode.TabIndex = 1
             Me.txtCountryCode.Translatable = False
             Me.txtCountryCode.ValueIsMandatory = True
+            Me.txtCountryCode.ValueIsUnique = True
             '
             'lblCountryName
             '
@@ -250,6 +251,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCountryName.TabIndex = 2
             Me.txtCountryName.Translatable = False
             Me.txtCountryName.ValueIsMandatory = True
+            Me.txtCountryName.ValueIsUnique = True
             '
             'lblCountryNameAra
             '
@@ -299,6 +301,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCountryNameAra.Size = New System.Drawing.Size(221, 23)
             Me.txtCountryNameAra.TabIndex = 3
             Me.txtCountryNameAra.Translatable = False
+            Me.txtCountryNameAra.ValueIsUnique = True
             '
             'LblNationality
             '

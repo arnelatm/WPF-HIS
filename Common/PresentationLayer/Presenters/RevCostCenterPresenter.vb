@@ -1,28 +1,22 @@
-﻿Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Common.ServiceLayer
 
 Namespace PresentationLayer.Presenters
 
-    Public Class RevCostCenterPresenter
-        Inherits CommonPresenter(Of IRevCostCenterView, RevCostCenterModel)
+    Public Class RevCostCenterPresenter(Of TM As New)
+        Inherits CommonPresenterNew(Of IRevCostCenterView, TM)
 
-        Public ParentViewList As List(Of RevCostCenterModel)
+        Public ParentViewList As List(Of TM)
 
-        Public Sub New(view As IRevCostCenterView)
-            MyBase.New(view)
-            ModelOfPresenter = New ModelCommon("RevCostCenter")
+        Public Sub New(itemView As IRevCostCenterView)
+            MyBase.New(itemView)
+            Service = New ServiceCommon("RevCostCenter")
             TableName = "RevCostCenter_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevCostCenterName"
             TreeViewSecondaryField = "RevCostCenterCode"
             TreeViewParentIdField = "ParentIdNo"
-            OriginalModel = New RevCostCenterModel()
-            DataModel = New RevCostCenterModel
-            TreeViewList = New List(Of RevCostCenterModel)
-            ParentViewList = New List(Of RevCostCenterModel)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            ParentViewList = New List(Of TM)
         End Sub
 
     End Class

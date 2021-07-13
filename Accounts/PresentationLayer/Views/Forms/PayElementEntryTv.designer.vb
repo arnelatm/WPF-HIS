@@ -317,6 +317,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayElementNameAra.ReadOnly = True
             Me.txtPayElementNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayElementNameAra.Translatable = False
+            Me.txtPayElementNameAra.ValueIsUnique = True
             '
             'txtPayElementName
             '
@@ -345,6 +346,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayElementName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayElementName.Translatable = False
             Me.txtPayElementName.ValueIsMandatory = True
+            Me.txtPayElementName.ValueIsUnique = True
             '
             'lblName
             '
@@ -382,6 +384,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayElementCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayElementCode.Translatable = False
             Me.txtPayElementCode.ValueIsMandatory = True
+            Me.txtPayElementCode.ValueIsUnique = True
             '
             'lblCode
             '

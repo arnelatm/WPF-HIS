@@ -2,12 +2,12 @@
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class PhoneTypeEntryTv
-        Inherits CFormEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
+        <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -21,9 +21,9 @@ Namespace PresentationLayer.Views.Forms
         'NOTE: The following procedure is required by the Windows Form Designer
         'It can be modified using the Windows Form Designer.  
         'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
+        <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
+            Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PhoneTypeEntryTv))
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtPhoneTypeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -36,15 +36,27 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPhoneTypeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPhoneTypeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TreeViewTableName
+            'SplitContainer1
             '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 183)
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            Me.SplitContainer1.Size = New System.Drawing.Size(905, 183)
+            Me.SplitContainer1.SplitterDistance = 300
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            Me.FormTreeView.Size = New System.Drawing.Size(300, 183)
             '
             'ImageListTreeView
             '
@@ -55,12 +67,17 @@ Namespace PresentationLayer.Views.Forms
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -73,19 +90,26 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
             Me.TxtIdNo.TabIndex = 0
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'txtPhoneTypeCode
             '
             Me.txtPhoneTypeCode.BackColor = System.Drawing.Color.White
+            Me.txtPhoneTypeCode.BegFindValue = Nothing
             Me.txtPhoneTypeCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPhoneTypeCode.ComputedValue = False
             Me.txtPhoneTypeCode.CustomFormat = Nothing
             Me.txtPhoneTypeCode.DataBoundControl = True
             Me.txtPhoneTypeCode.EditingMode = False
+            Me.txtPhoneTypeCode.EndFindValue = Nothing
+            Me.txtPhoneTypeCode.FieldDescription = Nothing
+            Me.txtPhoneTypeCode.FieldName = Nothing
+            Me.txtPhoneTypeCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPhoneTypeCode.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtPhoneTypeCode, True)
             Me.txtPhoneTypeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -98,18 +122,26 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPhoneTypeCode.Name = "txtPhoneTypeCode"
             Me.txtPhoneTypeCode.OldValue = Nothing
             Me.txtPhoneTypeCode.ReadOnly = True
+            Me.txtPhoneTypeCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPhoneTypeCode.Size = New System.Drawing.Size(100, 23)
             Me.txtPhoneTypeCode.TabIndex = 152
+            Me.txtPhoneTypeCode.Translatable = False
             Me.txtPhoneTypeCode.ValueIsMandatory = True
+            Me.txtPhoneTypeCode.ValueIsUnique = True
             '
             'txtPhoneTypeName
             '
             Me.txtPhoneTypeName.BackColor = System.Drawing.Color.White
+            Me.txtPhoneTypeName.BegFindValue = Nothing
             Me.txtPhoneTypeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPhoneTypeName.ComputedValue = False
             Me.txtPhoneTypeName.CustomFormat = Nothing
             Me.txtPhoneTypeName.DataBoundControl = True
             Me.txtPhoneTypeName.EditingMode = False
+            Me.txtPhoneTypeName.EndFindValue = Nothing
+            Me.txtPhoneTypeName.FieldDescription = Nothing
+            Me.txtPhoneTypeName.FieldName = Nothing
+            Me.txtPhoneTypeName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPhoneTypeName.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtPhoneTypeName, True)
             Me.txtPhoneTypeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -122,19 +154,27 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPhoneTypeName.Name = "txtPhoneTypeName"
             Me.txtPhoneTypeName.OldValue = Nothing
             Me.txtPhoneTypeName.ReadOnly = True
+            Me.txtPhoneTypeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPhoneTypeName.Size = New System.Drawing.Size(388, 23)
             Me.txtPhoneTypeName.TabIndex = 154
+            Me.txtPhoneTypeName.Translatable = False
             Me.txtPhoneTypeName.ValueIsMandatory = True
+            Me.txtPhoneTypeName.ValueIsUnique = True
             '
             'txtPhoneTypeNameAra
             '
             Me.txtPhoneTypeNameAra.BackColor = System.Drawing.Color.White
+            Me.txtPhoneTypeNameAra.BegFindValue = Nothing
             Me.txtPhoneTypeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPhoneTypeNameAra.ComputedValue = False
             Me.txtPhoneTypeNameAra.CustomFormat = Nothing
             Me.txtPhoneTypeNameAra.DataBoundControl = True
             Me.txtPhoneTypeNameAra.EditingMode = False
+            Me.txtPhoneTypeNameAra.EndFindValue = Nothing
             Me.txtPhoneTypeNameAra.EnglishControl = Me.txtPhoneTypeName
+            Me.txtPhoneTypeNameAra.FieldDescription = Nothing
+            Me.txtPhoneTypeNameAra.FieldName = Nothing
+            Me.txtPhoneTypeNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPhoneTypeNameAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtPhoneTypeNameAra, True)
             Me.txtPhoneTypeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -148,17 +188,25 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPhoneTypeNameAra.OldValue = Nothing
             Me.txtPhoneTypeNameAra.ReadOnly = True
             Me.txtPhoneTypeNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtPhoneTypeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPhoneTypeNameAra.Size = New System.Drawing.Size(388, 23)
             Me.txtPhoneTypeNameAra.TabIndex = 156
+            Me.txtPhoneTypeNameAra.Translatable = False
+            Me.txtPhoneTypeNameAra.ValueIsUnique = True
             '
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
@@ -171,8 +219,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Size = New System.Drawing.Size(388, 60)
             Me.txtNotes.TabIndex = 3
+            Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
             'floDataDisplay
@@ -189,12 +239,12 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtPhoneTypeNameAra)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
-            Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
-            Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
+            Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.floDataDisplay.Location = New System.Drawing.Point(0, 0)
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(598, 180)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(607, 183)
+            Me.floDataDisplay.Size = New System.Drawing.Size(598, 183)
             Me.floDataDisplay.TabIndex = 147
             '
             'lblIdNo
@@ -209,6 +259,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.TabIndex = 150
             Me.lblIdNo.Text = "Phone Type Id No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblIdNo.Translatable = True
             '
             'lblPhoneTypeCode
             '
@@ -222,6 +273,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPhoneTypeCode.TabIndex = 151
             Me.lblPhoneTypeCode.Text = "Phone Type Code"
             Me.lblPhoneTypeCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPhoneTypeCode.Translatable = True
             '
             'lblPhoneTypeName
             '
@@ -235,6 +287,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPhoneTypeName.TabIndex = 153
             Me.lblPhoneTypeName.Text = "Phone Type Name"
             Me.lblPhoneTypeName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPhoneTypeName.Translatable = True
             '
             'lblPhoneTypeNameAra
             '
@@ -248,6 +301,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPhoneTypeNameAra.TabIndex = 155
             Me.lblPhoneTypeNameAra.Text = "Phone Type Name Arabic"
             Me.lblPhoneTypeNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPhoneTypeNameAra.Translatable = True
             '
             'lblNotes
             '
@@ -261,24 +315,26 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.TabIndex = 159
             Me.lblNotes.Text = "Notes"
             Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblNotes.Translatable = True
             '
             'PhoneTypeEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(905, 236)
-            Me.Controls.Add(Me.floDataDisplay)
             Me.MinimumSize = New System.Drawing.Size(914, 265)
             Me.Name = "PhoneTypeEntryTv"
             Me.Text = ""
-            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
-        Me.floDataDisplay.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.floDataDisplay.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtPhoneTypeCode As CTextBox
         Friend WithEvents txtPhoneTypeName As CTextBox
@@ -291,4 +347,4 @@ End Sub
         Friend WithEvents lblPhoneTypeNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
     End Class
-End NameSpace
+End Namespace

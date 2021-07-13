@@ -1,24 +1,18 @@
-﻿Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Common.ServiceLayer
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PhoneTypePresenter
-        Inherits CommonPresenter(Of IPhoneTypeView, PhoneTypeModel)
+    Public Class PhoneTypePresenter(Of TM As New)
+        Inherits CommonPresenterNew(Of IPhoneTypeView, TM)
 
-        Public Sub New(view As IPhoneTypeView)
-            MyBase.New(view)
-            ModelOfPresenter = New ModelCommon("PhoneType")
+        Public Sub New(itemView As IPhoneTypeView)
+            MyBase.New(itemView)
+            Service = New ServiceCommon("PhoneType")
             TableName = "PhoneType"
             SortOrderKey = "PhoneTypeCode"
             TreeViewMainField = "PhoneTypeName"
             TreeViewSecondaryField = "PhoneTypeCode"
-            OriginalModel = New PhoneTypeModel
-            DataModel = New PhoneTypeModel
-            TreeViewList = New List(Of PhoneTypeModel)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
         End Sub
 
     End Class

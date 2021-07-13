@@ -1,25 +1,18 @@
-﻿Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries
-Imports AATM.PresentationLayer.Models
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views
-Imports AATM.ServicesLayer.Services
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Common.ServiceLayer
 
 Namespace PresentationLayer.Presenters
 
-    Public Class ReligionPresenter(Of TV As IView, TM As New)
-        Inherits PresenterNew(Of IReligionView, TM)
+    Public Class ReligionPresenter(Of TM As New)
+        Inherits CommonPresenterNew(Of IReligionView, TM)
 
         Public Sub New(view As IReligionView)
             MyBase.New(view)
-            Service = New Service("Religion")
+            Service = New ServiceCommon("Religion")
             TableName = "Religion"
             TreeViewMainField = "ReligionName"
             TreeViewSecondaryField = "ReligionCode"
             SortOrderKey = "IdNo"
-            'OriginalModel = New ReligionModel()
-            'model = New ReligionModel()
         End Sub
 
     End Class

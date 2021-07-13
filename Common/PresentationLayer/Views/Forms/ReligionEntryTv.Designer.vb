@@ -23,6 +23,7 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReligionEntryTv))
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -57,6 +58,12 @@ Namespace PresentationLayer.Views.Forms
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.FormTreeView.Size = New System.Drawing.Size(219, 183)
             '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
+            Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            '
             'CFlowLayout1
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
@@ -74,7 +81,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.CFlowLayout1.Size = New System.Drawing.Size(436, 183)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(430, 183)
             Me.CFlowLayout1.TabIndex = 128
             '
             'lblIdNo
@@ -170,6 +177,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReligionCode.TabIndex = 118
             Me.txtReligionCode.Translatable = False
             Me.txtReligionCode.ValueIsMandatory = True
+            Me.txtReligionCode.ValueIsUnique = True
             '
             'lblReligionName
             '
@@ -216,6 +224,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReligionName.TabIndex = 119
             Me.txtReligionName.Translatable = False
             Me.txtReligionName.ValueIsMandatory = True
+            Me.txtReligionName.ValueIsUnique = True
             '
             'lblReligionNameAra
             '
@@ -262,6 +271,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReligionNameAra.TabIndex = 120
             Me.txtReligionNameAra.Translatable = False
             Me.txtReligionNameAra.ValueIsMandatory = True
+            Me.txtReligionNameAra.ValueIsUnique = True
             '
             'lblNotes
             '

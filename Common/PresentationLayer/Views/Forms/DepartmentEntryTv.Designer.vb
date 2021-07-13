@@ -160,6 +160,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDepartmentCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDepartmentCode.Translatable = False
             Me.txtDepartmentCode.ValueIsMandatory = True
+            Me.txtDepartmentCode.ValueIsUnique = True
             '
             'lblDepartmentName
             '
@@ -195,6 +196,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDepartmentName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDepartmentName.Translatable = False
             Me.txtDepartmentName.ValueIsMandatory = True
+            Me.txtDepartmentName.ValueIsUnique = True
             '
             'lblDepartmentNameAra
             '
@@ -230,6 +232,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDepartmentNameAra.ReadOnly = True
             Me.txtDepartmentNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDepartmentNameAra.Translatable = False
+            Me.txtDepartmentNameAra.ValueIsUnique = True
             '
             'lblParentIdNo
             '
