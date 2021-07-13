@@ -11,21 +11,14 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
 
-            MainTableName = "RevCostCenter"
-            TvMainFieldName = "RevCostCenterName"
-            TvSecondaryFieldName = "RevCostCenterCode"
-            SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
             FirstControl = txtRevCostCenterCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New RevCostCenterPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacParentIdNo.DataSource = PresenterObj.GetLookup("RevCostCenter")
-            cacRcType.DataSource = PresenterObj.MakeEnumComboList(Of RevCostTypeSelection)
+            CreateDataSource("RevCostCenter", cacParentIdNo)
+            CreateEnumDataSource(Of RevCostTypeSelection)(cacRcType)
         End Sub
 
 #Region "Fields"

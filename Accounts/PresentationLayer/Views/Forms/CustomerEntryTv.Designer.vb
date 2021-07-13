@@ -100,9 +100,9 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -123,6 +123,12 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             resources.ApplyResources(Me.FormTreeView, "FormTreeView")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
+            Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
             '
             'txtNotes
             '
@@ -981,6 +987,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCustomerNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCustomerNameAra.Translatable = False
             Me.txtCustomerNameAra.ValueIsMandatory = True
+            Me.txtCustomerNameAra.ValueIsUnique = True
             '
             'txtCustomerName
             '
@@ -1008,6 +1015,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCustomerName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCustomerName.Translatable = False
             Me.txtCustomerName.ValueIsMandatory = True
+            Me.txtCustomerName.ValueIsUnique = True
             '
             'lblCustomerName
             '
@@ -1058,6 +1066,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCustomerCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCustomerCode.Translatable = False
             Me.txtCustomerCode.ValueIsMandatory = True
+            Me.txtCustomerCode.ValueIsUnique = True
             '
             'lblCustomerCode
             '
@@ -1521,6 +1530,30 @@ Namespace PresentationLayer.Views.Forms
             Me.lblActive.Name = "lblActive"
             Me.lblActive.Translatable = True
             '
+            'chkActive
+            '
+            Me.chkActive.BackColor = System.Drawing.Color.White
+            Me.chkActive.BegFindValue = Nothing
+            Me.chkActive.DisplayOnly = False
+            Me.chkActive.EditingMode = True
+            Me.chkActive.EndFindValue = Nothing
+            Me.chkActive.FieldDescription = Nothing
+            Me.chkActive.FieldName = Nothing
+            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkActive.FindEnabled = False
+            resources.ApplyResources(Me.chkActive, "chkActive")
+            Me.floDataDisplay.SetFlowBreak(Me.chkActive, True)
+            Me.chkActive.ForeColor = System.Drawing.Color.Black
+            Me.chkActive.IFindableControl_FindEnabled = False
+            Me.chkActive.IgnoreCase = False
+            Me.chkActive.LinkedLabel = Nothing
+            Me.chkActive.Name = "chkActive"
+            Me.chkActive.NoLabel = True
+            Me.chkActive.OldValue = Nothing
+            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkActive.Translatable = False
+            Me.chkActive.UseVisualStyleBackColor = False
+            '
             'CLabel3
             '
             Me.CLabel3.DisplayOnly = True
@@ -1557,33 +1590,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBalance.Translatable = False
             Me.txtBalance.ValueIsNumeric = True
             '
-            'chkActive
-            '
-            Me.chkActive.BackColor = System.Drawing.Color.Transparent
-            Me.chkActive.BegFindValue = Nothing
-            Me.chkActive.DisplayOnly = False
-            Me.chkActive.EditingMode = True
-            Me.chkActive.EndFindValue = Nothing
-            Me.chkActive.FieldDescription = Nothing
-            Me.chkActive.FieldName = Nothing
-            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkActive.FindEnabled = False
-            resources.ApplyResources(Me.chkActive, "chkActive")
-            Me.floDataDisplay.SetFlowBreak(Me.chkActive, True)
-            Me.chkActive.IFindableControl_FindEnabled = False
-            Me.chkActive.IgnoreCase = False
-            Me.chkActive.LinkedLabel = Nothing
-            Me.chkActive.Name = "chkActive"
-            Me.chkActive.NoLabel = True
-            Me.chkActive.OldValue = Nothing
-            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkActive.Translatable = False
-            Me.chkActive.UseVisualStyleBackColor = False
-            '
-            'CustomerEntryTvNew
+            'CustomerEntryTv
             '
             resources.ApplyResources(Me, "$this")
-            Me.Name = "CustomerEntryTvNew"
+            Me.Name = "CustomerEntryTv"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
             Me.SplitContainer1.Panel2.ResumeLayout(False)
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()

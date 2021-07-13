@@ -1,13 +1,10 @@
-﻿Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views.Interface
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Common.ServiceLayer
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
     Public Class DepartmentPresenter(Of TM As New)
-        Inherits PresenterNew(Of IDepartmentView, TM)
+        Inherits CommonPresenterNew(Of IDepartmentView, TM)
 
         Public ParentViewList As List(Of TM)
 

@@ -118,6 +118,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBranchCode.Translatable = False
             Me.txtBranchCode.ValueIsMandatory = True
+            Me.txtBranchCode.ValueIsUnique = True
             '
             'txtBranchName
             '
@@ -145,6 +146,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBranchName.Translatable = False
             Me.txtBranchName.ValueIsMandatory = True
+            Me.txtBranchName.ValueIsUnique = True
             '
             'txtBranchNameAra
             '
@@ -172,6 +174,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchNameAra.ReadOnly = True
             Me.txtBranchNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBranchNameAra.Translatable = False
+            Me.txtBranchNameAra.ValueIsUnique = True
             '
             'txtNotes
             '
@@ -264,8 +267,8 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.SplitContainer1.ResumeLayout(False)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.floDataDisplay.ResumeLayout(false)
-        Me.floDataDisplay.PerformLayout
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.floDataDisplay.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
 

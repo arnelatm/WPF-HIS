@@ -197,7 +197,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
-            RunForm(Of BankPresenter(Of BankModel), BankEntryTv)()
+            RunForm(Of BankEntryTv, BankPresenter(Of BankModel))()
         End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -267,7 +267,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCountries.Click
-            RunForm(Of CountryPresenter(Of CountryModel), CountryEntryTv)()
+            RunForm(Of CountryEntryTv, CountryPresenter(Of CountryModel))()
         End Sub
 
         Private Sub CreateAllMessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCreateAllMessages.Click
@@ -279,7 +279,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCustomerClients.Click
-            RunForm(Of CustomerPresenter(Of CustomerModel), CustomerEntryTv)()
+            RunForm(Of CustomerEntryTv, CustomerPresenter(Of CustomerModel))()
             'Dim presenter As New CustomerPresenterNew(Nothing)
             'Dim myForm = New CustomerEntryTv(presenter)
             'presenter = New CustomerPresenterNew(myForm)
@@ -312,7 +312,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DepartmentNewToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemDepartments.Click
-            RunForm(Of DepartmentPresenter(Of DepartmentModel), DepartmentEntryTv)()
+            RunForm(Of DepartmentEntryTv, DepartmentPresenter(Of DepartmentModel))()
         End Sub
 
         Private Sub DesignationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDesignations.Click
@@ -331,7 +331,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayElement.Click
-            RunForm(Of PayElementPresenter(Of PayElementModel), PayElementEntryTv)()
+            RunForm(Of PayElementEntryTv, PayElementPresenter(Of PayElementModel))()
         End Sub
 
         'Private Sub RunForm(Of TP As New, TF As New)()
@@ -361,7 +361,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployees.Click
-            RunForm(Of EmployeePresenter(Of EmployeeModel), EmployeeEntryTv)()
+            RunForm(Of EmployeeEntryTv, EmployeePresenter(Of EmployeeModel))()
         End Sub
 
         'Private Sub RunForm(Of TP, TF)()
@@ -373,7 +373,7 @@ Namespace PresentationLayer.Views.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        Private Sub RunForm(Of TP, TV)()
+        Private Sub RunForm(Of TV, TP)()
             Dim childMdiForm = Activator.CreateInstance(GetType(TV))
             Activator.CreateInstance(GetType(TP), {childMdiForm})
             childMdiForm.MdiParent = Me
@@ -511,13 +511,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub PhoneTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemPhoneTypes.Click
-            Dim childMdiForm As PhoneTypeEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New PhoneTypeEntryTv With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of PhoneTypeEntryTv, PhoneTypePresenter(Of PhoneTypeModel))()
         End Sub
 
         Private Sub QuarterlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBQuarterly.Click
@@ -545,25 +539,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-     Handles ToolStripMenuItemReligions.Click
-            Dim childMdiForm As ReligionEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New ReligionEntryTv With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            Handles ToolStripMenuItemReligions.Click
+            RunForm(Of ReligionEntryTv, ReligionPresenter(Of ReligionModel))()
         End Sub
 
         Private Sub RevCostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemRevCostCenters.Click
-            Dim childMdiForm As RevCostCenterEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New RevCostCenterEntryTv() With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of RevCostCenterEntryTv, RevCostCenterPresenter(Of RevCostCenterModel))()
         End Sub
 
         Private Sub RevenueGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRevenueGroups.Click
@@ -692,11 +674,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemSupplierVendors.Click
-            RunForm(Of SupplierPresenter(Of SupplierModel), SupplierEntryTv)()
-            'Dim presenter As New SupplierPresenter(Nothing)
-            'Dim myForm = New SupplierEntryTv(presenter)
-            'presenter = New SupplierPresenter(myForm)
-            'myForm.Show()
+            RunForm(Of SupplierEntryTv, SupplierPresenter(Of SupplierModel))()
         End Sub
 
         Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBlankReport.Click

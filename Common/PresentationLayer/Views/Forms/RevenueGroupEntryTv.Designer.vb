@@ -3,12 +3,12 @@ Imports AATM.Libraries.LocalizationUtilities
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class RevenueGroupEntryTv
-        Inherits CFormEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
+        <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -22,9 +22,9 @@ Namespace PresentationLayer.Views.Forms
         'NOTE: The following procedure is required by the Windows Form Designer
         'It can be modified using the Windows Form Designer.  
         'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
+        <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
+            Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(RevenueGroupEntryTv))
             Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
             Me._MBRevenueGroupCannotBeParentToItself = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
@@ -49,15 +49,27 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TreeViewTableName
+            'SplitContainer1
             '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 272)
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            Me.SplitContainer1.Size = New System.Drawing.Size(1056, 272)
+            Me.SplitContainer1.SplitterDistance = 351
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            Me.FormTreeView.Size = New System.Drawing.Size(351, 272)
             '
             'ImageListTreeView
             '
@@ -88,12 +100,17 @@ Namespace PresentationLayer.Views.Forms
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -106,19 +123,26 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
             Me.TxtIdNo.TabIndex = 0
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'txtRevenueGroupCode
             '
             Me.txtRevenueGroupCode.BackColor = System.Drawing.Color.White
+            Me.txtRevenueGroupCode.BegFindValue = Nothing
             Me.txtRevenueGroupCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtRevenueGroupCode.ComputedValue = False
             Me.txtRevenueGroupCode.CustomFormat = Nothing
             Me.txtRevenueGroupCode.DataBoundControl = True
             Me.txtRevenueGroupCode.EditingMode = False
+            Me.txtRevenueGroupCode.EndFindValue = Nothing
+            Me.txtRevenueGroupCode.FieldDescription = Nothing
+            Me.txtRevenueGroupCode.FieldName = Nothing
+            Me.txtRevenueGroupCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtRevenueGroupCode.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtRevenueGroupCode, True)
             Me.txtRevenueGroupCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -131,18 +155,26 @@ Namespace PresentationLayer.Views.Forms
             Me.txtRevenueGroupCode.Name = "txtRevenueGroupCode"
             Me.txtRevenueGroupCode.OldValue = Nothing
             Me.txtRevenueGroupCode.ReadOnly = True
+            Me.txtRevenueGroupCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtRevenueGroupCode.Size = New System.Drawing.Size(62, 23)
             Me.txtRevenueGroupCode.TabIndex = 0
+            Me.txtRevenueGroupCode.Translatable = False
             Me.txtRevenueGroupCode.ValueIsMandatory = True
+            Me.txtRevenueGroupCode.ValueIsUnique = True
             '
             'txtRevenueGroupName
             '
             Me.txtRevenueGroupName.BackColor = System.Drawing.Color.White
+            Me.txtRevenueGroupName.BegFindValue = Nothing
             Me.txtRevenueGroupName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtRevenueGroupName.ComputedValue = False
             Me.txtRevenueGroupName.CustomFormat = Nothing
             Me.txtRevenueGroupName.DataBoundControl = True
             Me.txtRevenueGroupName.EditingMode = False
+            Me.txtRevenueGroupName.EndFindValue = Nothing
+            Me.txtRevenueGroupName.FieldDescription = Nothing
+            Me.txtRevenueGroupName.FieldName = Nothing
+            Me.txtRevenueGroupName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtRevenueGroupName.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtRevenueGroupName, True)
             Me.txtRevenueGroupName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -155,19 +187,27 @@ Namespace PresentationLayer.Views.Forms
             Me.txtRevenueGroupName.Name = "txtRevenueGroupName"
             Me.txtRevenueGroupName.OldValue = Nothing
             Me.txtRevenueGroupName.ReadOnly = True
+            Me.txtRevenueGroupName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtRevenueGroupName.Size = New System.Drawing.Size(418, 23)
             Me.txtRevenueGroupName.TabIndex = 1
+            Me.txtRevenueGroupName.Translatable = False
             Me.txtRevenueGroupName.ValueIsMandatory = True
+            Me.txtRevenueGroupName.ValueIsUnique = True
             '
             'txtRevenueGroupNameAra
             '
             Me.txtRevenueGroupNameAra.BackColor = System.Drawing.Color.White
+            Me.txtRevenueGroupNameAra.BegFindValue = Nothing
             Me.txtRevenueGroupNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtRevenueGroupNameAra.ComputedValue = False
             Me.txtRevenueGroupNameAra.CustomFormat = Nothing
             Me.txtRevenueGroupNameAra.DataBoundControl = True
             Me.txtRevenueGroupNameAra.EditingMode = False
+            Me.txtRevenueGroupNameAra.EndFindValue = Nothing
             Me.txtRevenueGroupNameAra.EnglishControl = Me.txtRevenueGroupName
+            Me.txtRevenueGroupNameAra.FieldDescription = Nothing
+            Me.txtRevenueGroupNameAra.FieldName = Nothing
+            Me.txtRevenueGroupNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtRevenueGroupNameAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtRevenueGroupNameAra, True)
             Me.txtRevenueGroupNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -181,17 +221,25 @@ Namespace PresentationLayer.Views.Forms
             Me.txtRevenueGroupNameAra.OldValue = Nothing
             Me.txtRevenueGroupNameAra.ReadOnly = True
             Me.txtRevenueGroupNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtRevenueGroupNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtRevenueGroupNameAra.Size = New System.Drawing.Size(418, 23)
             Me.txtRevenueGroupNameAra.TabIndex = 2
+            Me.txtRevenueGroupNameAra.Translatable = False
+            Me.txtRevenueGroupNameAra.ValueIsUnique = True
             '
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtNotes, True)
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -205,8 +253,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Size = New System.Drawing.Size(418, 60)
             Me.txtNotes.TabIndex = 3
+            Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
             'floDataDisplay
@@ -230,12 +280,12 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
             Me.floDataDisplay.Controls.Add(Me.txtSortKey)
-            Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
-            Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
+            Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.floDataDisplay.Location = New System.Drawing.Point(0, 0)
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(692, 272)
+            Me.floDataDisplay.Size = New System.Drawing.Size(695, 272)
             Me.floDataDisplay.TabIndex = 147
             '
             'lblIdNo
@@ -250,6 +300,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.TabIndex = 150
             Me.lblIdNo.Text = "Revenue Group ID No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblIdNo.Translatable = True
             '
             'lblRevenueGroupCode
             '
@@ -263,6 +314,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevenueGroupCode.TabIndex = 156
             Me.lblRevenueGroupCode.Text = "Revenue Group Code"
             Me.lblRevenueGroupCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblRevenueGroupCode.Translatable = True
             '
             'lblRevenueGroupName
             '
@@ -276,6 +328,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevenueGroupName.TabIndex = 157
             Me.lblRevenueGroupName.Text = "Revenue Group Name"
             Me.lblRevenueGroupName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblRevenueGroupName.Translatable = True
             '
             'lblRevenueGroupNameAra
             '
@@ -289,6 +342,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevenueGroupNameAra.TabIndex = 158
             Me.lblRevenueGroupNameAra.Text = "RevenueGroup Name (Arabic)"
             Me.lblRevenueGroupNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblRevenueGroupNameAra.Translatable = True
             '
             'lblParentIdNo
             '
@@ -303,21 +357,29 @@ Namespace PresentationLayer.Views.Forms
             Me.lblParentIdNo.TabIndex = 161
             Me.lblParentIdNo.Text = "Parent Rev. Group"
             Me.lblParentIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblParentIdNo.Translatable = True
             '
             'cacParentIdNo
             '
             Me.cacParentIdNo.BackColor = System.Drawing.Color.White
+            Me.cacParentIdNo.BegFindValue = Nothing
             Me.cacParentIdNo.ChangingSearchValueOnly = False
             Me.cacParentIdNo.CurrentSearchTerm = ""
             Me.cacParentIdNo.DefaultValue = Nothing
             Me.cacParentIdNo.DisplayMember = "Name"
             Me.cacParentIdNo.EditingMode = False
+            Me.cacParentIdNo.EndFindValue = Nothing
+            Me.cacParentIdNo.FieldDescription = Nothing
+            Me.cacParentIdNo.FieldName = Nothing
             Me.cacParentIdNo.FilterRule = Nothing
+            Me.cacParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cacParentIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cacParentIdNo, True)
             Me.cacParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
             Me.cacParentIdNo.FormattingEnabled = True
             Me.cacParentIdNo.HideWhenNotEditingOrAdding = False
+            Me.cacParentIdNo.IgnoreCase = False
             Me.cacParentIdNo.IntegralHeight = False
             Me.cacParentIdNo.LinkedLabel = Nothing
             Me.cacParentIdNo.Location = New System.Drawing.Point(256, 111)
@@ -335,6 +397,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.SuggestListOrderRule = Nothing
             Me.cacParentIdNo.TabIndex = 3
             Me.cacParentIdNo.TextToSearch = Nothing
+            Me.cacParentIdNo.Translatable = False
             Me.cacParentIdNo.ValueIsMandatory = False
             Me.cacParentIdNo.ValueIsNullable = False
             Me.cacParentIdNo.ValueIsNumeric = False
@@ -353,21 +416,29 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevCostCenter.TabIndex = 160
             Me.lblRevCostCenter.Text = "Level"
             Me.lblRevCostCenter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblRevCostCenter.Translatable = True
             '
             'CaComboBox1
             '
             Me.CaComboBox1.BackColor = System.Drawing.Color.White
+            Me.CaComboBox1.BegFindValue = Nothing
             Me.CaComboBox1.ChangingSearchValueOnly = False
             Me.CaComboBox1.CurrentSearchTerm = ""
             Me.CaComboBox1.DefaultValue = Nothing
             Me.CaComboBox1.DisplayMember = "Name"
             Me.CaComboBox1.EditingMode = False
+            Me.CaComboBox1.EndFindValue = Nothing
+            Me.CaComboBox1.FieldDescription = Nothing
+            Me.CaComboBox1.FieldName = Nothing
             Me.CaComboBox1.FilterRule = Nothing
+            Me.CaComboBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.CaComboBox1.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.CaComboBox1, True)
             Me.CaComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CaComboBox1.ForeColor = System.Drawing.Color.Black
             Me.CaComboBox1.FormattingEnabled = True
             Me.CaComboBox1.HideWhenNotEditingOrAdding = False
+            Me.CaComboBox1.IgnoreCase = False
             Me.CaComboBox1.IntegralHeight = False
             Me.CaComboBox1.LinkedLabel = Nothing
             Me.CaComboBox1.Location = New System.Drawing.Point(256, 137)
@@ -385,6 +456,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CaComboBox1.SuggestListOrderRule = Nothing
             Me.CaComboBox1.TabIndex = 165
             Me.CaComboBox1.TextToSearch = Nothing
+            Me.CaComboBox1.Translatable = False
             Me.CaComboBox1.ValueIsMandatory = False
             Me.CaComboBox1.ValueIsNullable = False
             Me.CaComboBox1.ValueIsNumeric = False
@@ -403,16 +475,22 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.TabIndex = 166
             Me.CLabel1.Text = "Level"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
             '
             'txtLevelNumber
             '
             Me.txtLevelNumber.BackColor = System.Drawing.Color.White
+            Me.txtLevelNumber.BegFindValue = Nothing
             Me.txtLevelNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtLevelNumber.ComputedValue = False
             Me.txtLevelNumber.CustomFormat = Nothing
             Me.txtLevelNumber.DataBoundControl = True
             Me.txtLevelNumber.DisplayOnly = True
             Me.txtLevelNumber.EditingMode = True
+            Me.txtLevelNumber.EndFindValue = Nothing
+            Me.txtLevelNumber.FieldDescription = Nothing
+            Me.txtLevelNumber.FieldName = Nothing
+            Me.txtLevelNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtLevelNumber.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtLevelNumber, True)
             Me.txtLevelNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -426,8 +504,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLevelNumber.Name = "txtLevelNumber"
             Me.txtLevelNumber.OldValue = Nothing
             Me.txtLevelNumber.ReadOnly = True
+            Me.txtLevelNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtLevelNumber.Size = New System.Drawing.Size(74, 23)
             Me.txtLevelNumber.TabIndex = 163
+            Me.txtLevelNumber.Translatable = False
             Me.txtLevelNumber.ValueIsMandatory = True
             Me.txtLevelNumber.ValueIsNumeric = True
             '
@@ -443,49 +523,58 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.TabIndex = 159
             Me.lblNotes.Text = "Notes"
             Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblNotes.Translatable = True
             '
             'txtSortKey
             '
             Me.txtSortKey.BackColor = System.Drawing.Color.White
+            Me.txtSortKey.BegFindValue = Nothing
             Me.txtSortKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtSortKey.ComputedValue = False
             Me.txtSortKey.CustomFormat = Nothing
             Me.txtSortKey.DataBoundControl = True
             Me.txtSortKey.EditingMode = False
             Me.txtSortKey.Enabled = False
+            Me.txtSortKey.EndFindValue = Nothing
+            Me.txtSortKey.FieldDescription = Nothing
+            Me.txtSortKey.FieldName = Nothing
+            Me.txtSortKey.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtSortKey.FindEnabled = True
             Me.txtSortKey.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtSortKey.ForeColor = System.Drawing.Color.Black
-        Me.txtSortKey.LinkedLabel = Nothing
-        Me.txtSortKey.Location = New System.Drawing.Point(13, 258)
-        Me.txtSortKey.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.txtSortKey.MaximumValue = Nothing
-        Me.txtSortKey.MinimumValue = Nothing
-        Me.txtSortKey.Name = "txtSortKey"
-        Me.txtSortKey.OldValue = Nothing
-        Me.txtSortKey.ReadOnly = true
-        Me.txtSortKey.Size = New System.Drawing.Size(72, 23)
-        Me.txtSortKey.TabIndex = 164
-        Me.txtSortKey.ValueIsMandatory = true
-        Me.txtSortKey.Visible = false
-        '
-        'RevenueGroupEntryTv
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.ClientSize = New System.Drawing.Size(995, 325)
-        Me.Controls.Add(Me.floDataDisplay)
-        Me.MinimumSize = New System.Drawing.Size(1011, 364)
-        Me.Name = "RevenueGroupEntryTv"
-        Me.Text = "RevenueGroups Maintenance Form"
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
-        Me.floDataDisplay.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.txtSortKey.LinkedLabel = Nothing
+            Me.txtSortKey.Location = New System.Drawing.Point(13, 258)
+            Me.txtSortKey.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+            Me.txtSortKey.MaximumValue = Nothing
+            Me.txtSortKey.MinimumValue = Nothing
+            Me.txtSortKey.Name = "txtSortKey"
+            Me.txtSortKey.OldValue = Nothing
+            Me.txtSortKey.ReadOnly = True
+            Me.txtSortKey.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtSortKey.Size = New System.Drawing.Size(72, 23)
+            Me.txtSortKey.TabIndex = 164
+            Me.txtSortKey.Translatable = False
+            Me.txtSortKey.ValueIsMandatory = True
+            Me.txtSortKey.Visible = False
+            '
+            'RevenueGroupEntryTv
+            '
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.ClientSize = New System.Drawing.Size(1056, 325)
+            Me.MinimumSize = New System.Drawing.Size(1011, 364)
+            Me.Name = "RevenueGroupEntryTv"
+            Me.Text = "Revenue Groups Maintenance Form"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.floDataDisplay.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtRevenueGroupCode As CTextBox
         Friend WithEvents txtRevenueGroupName As CTextBox

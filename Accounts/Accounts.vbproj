@@ -1364,11 +1364,11 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="appIbnserver.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Marcelo.config" />
     <None Include="appMarcelo-Dell.config" />
-    <None Include="app.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\app.manifest" />

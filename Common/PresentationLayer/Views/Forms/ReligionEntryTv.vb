@@ -1,7 +1,4 @@
-﻿Imports System.Globalization
-Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -9,12 +6,10 @@ Namespace PresentationLayer.Views.Forms
     Public Class ReligionEntryTv
         Implements IReligionView
 
-        'Private _presenter As ReligionPresenter
-
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            '_presenter = New ReligionPresenter(Me)
+            FirstControl = txtReligionCode
         End Sub
 
 #Region "Fields"

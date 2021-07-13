@@ -307,6 +307,7 @@
             Me.txtSupplierCode.TabIndex = 0
             Me.txtSupplierCode.Translatable = False
             Me.txtSupplierCode.ValueIsMandatory = True
+            Me.txtSupplierCode.ValueIsUnique = True
             '
             'lblVatNumber
             '
@@ -398,6 +399,7 @@
             Me.txtSupplierName.TabIndex = 2
             Me.txtSupplierName.Translatable = False
             Me.txtSupplierName.ValueIsMandatory = True
+            Me.txtSupplierName.ValueIsUnique = True
             '
             'lblSupplierNameAra
             '
@@ -446,6 +448,7 @@
             Me.txtSupplierNameAra.TabIndex = 3
             Me.txtSupplierNameAra.Translatable = False
             Me.txtSupplierNameAra.ValueIsMandatory = True
+            Me.txtSupplierNameAra.ValueIsUnique = True
             '
             'lblContactPerson
             '
@@ -1989,11 +1992,11 @@
             Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
-            'SupplierEntryTvNew
+            'SupplierEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1078, 555)
-            Me.Name = "SupplierEntryTvNew"
+            Me.Name = "SupplierEntryTv"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Supplier Maintenance Form"
             Me.SplitContainer1.Panel1.ResumeLayout(False)

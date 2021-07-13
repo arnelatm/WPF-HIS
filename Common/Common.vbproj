@@ -296,6 +296,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\RevCostCenterEntry.resx">
       <DependentUpon>RevCostCenterEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CountryEntryTv.resx">
       <DependentUpon>CountryEntryTv.vb</DependentUpon>
