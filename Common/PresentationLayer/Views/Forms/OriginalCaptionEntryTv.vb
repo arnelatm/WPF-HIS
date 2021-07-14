@@ -10,19 +10,11 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "OriginalCaptions"
-            TvMainFieldName = "Caption"
-            TvSecondaryFieldName = "Caption"
-            SortOrderKey = "Caption"
             FirstControl = txtCaption
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New OriginalCaptionsPresenter(Me)
             If GlobalVariables.UserName.ToLower() = $"arnel" Then
                 txtCaption.DisplayOnly = False
             End If
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "OriginalCaptionFields"
@@ -72,7 +64,6 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Private Sub OriginalCaptionsEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            Show()
             If GlobalVariables.UserName.ToLower() <> $"arnel" Then
                 HideButton(btnDelete)
             End If

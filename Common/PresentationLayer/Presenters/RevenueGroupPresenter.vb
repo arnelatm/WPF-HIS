@@ -1,32 +1,26 @@
-﻿Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Common.ServiceLayer
 
 Namespace PresentationLayer.Presenters
 
-    Public Class RevenueGroupPresenter
-        Inherits CommonPresenter(Of IRevenueGroupView, RevenueGroupModel)
+    Public Class RevenueGroupPresenter(Of TM As New)
+        Inherits CommonPresenterNew(Of IRevenueGroupView, TM)
 
-        Public ParentViewList As List(Of RevenueGroupModel)
+        Public ParentViewList As List(Of TM)
 
         Public Sub New(view As IRevenueGroupView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelCommon("RevenueGroup")
+            Service = New ServiceCommon("RevenueGroup")
             TableName = "RevenueGroup_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevenueGroupName"
             TreeViewSecondaryField = "RevenueGroupCode"
             TreeViewParentIdField = "ParentIdNo"
-            OriginalModel = New RevenueGroupModel()
-            DataModel = New RevenueGroupModel
-            TreeViewList = New List(Of RevenueGroupModel)
-            ParentViewList = New List(Of RevenueGroupModel)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            ParentViewList = New List(Of TM)
         End Sub
 
         Public Function GetLastSortKey(ByVal searchValue As String) As String
-            Return Model.GetLastSortKey(searchValue, TableName)
+            Return Service.GetLastSortKey(searchValue, TableName)
         End Function
 
     End Class

@@ -1,39 +1,26 @@
 ﻿Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
-    Public Class TranslatedCaptionPresenter
-        Inherits CommonPresenter(Of ITranslatedCaptionView, TranslatedCaptionModel)
+    Public Class TranslatedCaptionPresenter(Of TM As New)
+        Inherits CommonPresenterNew(Of ITranslatedCaptionView, TM)
 
         Private Property Dac
 
         Public Sub New(view As ITranslatedCaptionView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelCommon("TranslatedCaption")
+            Service = New ServiceCommon("TranslatedCaption")
             TableName = "TranslatedCaption"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
-            OriginalModel = New TranslatedCaptionModel()
-            DataModel = New TranslatedCaptionModel
-            TreeViewList = New List(Of TranslatedCaptionModel)
+            TreeViewList = New List(Of TM)
             Dac = New Dac
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
         End Sub
-
-        'Public Overrides Sub Display(messageIdNo As Int16)
-        '    Dim idNoTm As Int16
-        '    idNoTm = GetRecordFieldWithKey(messageIdNo, "TranslatedCaption", "captionIdNo", "IdNo")
-        '    Dim modelData As New TranslatedCaptionModel
-        '    If idNoTm <> 0 Then
-        '        modelData = Model.GetRecordByIdNo(Of TranslatedCaptionModel)(messageIdNo)
-        '    End If
-        '    GlobalVariables.Mapper.Map(modelData, View)
-        'End Sub
 
         Public Overrides Function ChangesMade() As Boolean
             ' need to do a non-standard compare because Using the ObjectsCompare method
@@ -45,30 +32,21 @@ Namespace PresentationLayer.Presenters
                 Return False
             End If
             Return True
-            'If OriginalModel is Nothing Then
-            '    If String.IsNullOrEmpty(View.TranslatedCaption) Then
-            '        Return True
-            '    End If
-            'End If
-            'If Not GlobalFunctions.CompareValues(OriginalModel.TranslatedCaption, View.TranslatedCaption) Then
-            '    Return True
-            'End If
-            'Return False
         End Function
 
-        Protected Overrides Function UpDateRecord(record As TranslatedCaptionModel) As Integer
+        Protected Shadows Function UpDateRecord(record As TranslatedCaptionModel) As Integer
             Dim retVal As Integer
             If String.IsNullOrEmpty(record.TranslatedCaption) Then
-                retVal = Model.DeleteRecord(record.IdNo, "TranslatedCaption")
+                retVal = Service.DeleteRecord(record.IdNo, "TranslatedCaption")
             Else
                 If String.IsNullOrEmpty(record.TranslatedCaption) Then
                     record.TranslatedCaption = ""
                 End If
-                retVal = Model.UpdateRecord(record)
+                retVal = Service.UpdateRecord(record)
                 If retVal = 0 Then
                     If Not (String.IsNullOrEmpty(record.TranslatedCaption)) Then
                         record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
-                        NewlyAddedRecordIdNo = ModelOfPresenter.AddRecord(record)
+                        NewlyAddedRecordIdNo = Service.AddRecord(record)
                         retVal = NewlyAddedRecordIdNo
                         LateBinding.SetProperty(View, "IdNo", {retVal})
                     End If

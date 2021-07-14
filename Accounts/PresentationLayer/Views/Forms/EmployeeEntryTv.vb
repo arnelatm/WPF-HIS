@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -639,19 +640,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit
-            Ea.PublishEvent(New EmployeePayElementChanged(RegularEmployeeEarnings,
-                                                  DataGridViewEarnings.CurrentRow.Index,
-                                                  DataGridViewEarnings.CurrentCell.OwningColumn.DataPropertyName,
-                                                  DataGridViewEarnings.CurrentCell.OwningColumn.Name,
-                                                  DataGridViewEarnings.CurrentCell.Value))
+            ProcessCellEndEdit(DataGridViewEarnings, bsEarnings)
         End Sub
 
         Private Sub DgvDeduction_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDeductions.CellEndEdit
-            Ea.PublishEvent(New EmployeePayElementChanged(RegularEmployeeDeductions,
-                                                  DataGridViewDeductions.CurrentRow.Index,
-                                                  DataGridViewDeductions.CurrentCell.OwningColumn.DataPropertyName,
-                                                  DataGridViewDeductions.CurrentCell.OwningColumn.Name,
-                                                  DataGridViewDeductions.CurrentCell.Value))
+            ProcessCellEndEdit(DataGridViewDeductions, bsDeductions)
         End Sub
 
     End Class

@@ -2,12 +2,12 @@
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class OriginalMessagesEntryTv
-        Inherits CFormEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
+        <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -21,51 +21,63 @@ Namespace PresentationLayer.Views.Forms
         'NOTE: The following procedure is required by the Windows Form Designer
         'It can be modified using the Windows Form Designer.  
         'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
+        <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OriginalMessagesEntryTv))
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtMessageKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblMessageKey = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtMessage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.lblCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.floDataDisplay.SuspendLayout
-        Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
-        '
-        'ImageListTreeView
-        '
-        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
-        Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
-        Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BegFindValue = Nothing
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.TxtIdNo.EndFindValue = Nothing
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OriginalMessagesEntryTv))
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtMessageKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblMessageKey = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtMessage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtTranslatedMessage = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtTranslatedCaption = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floDataDisplay.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'SplitContainer1
+            '
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
             Me.TxtIdNo.FieldDescription = Nothing
             Me.TxtIdNo.FieldName = Nothing
             Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -331,17 +343,18 @@ Namespace PresentationLayer.Views.Forms
             'OriginalMessagesEntryTv
             '
             resources.ApplyResources(Me, "$this")
-            Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "OriginalMessagesEntryTv"
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
-        Me.floDataDisplay.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.Name = "OriginalMessagesEntryTv"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.floDataDisplay.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtMessageKey As CTextBox
         Friend WithEvents txtMessage As CTextBox
@@ -358,4 +371,4 @@ End Sub
         Friend WithEvents txtTranslatedCaption As CTextBox
         Friend WithEvents txtTranslatedMessage As CTextBoxArabic
     End Class
-End NameSpace
+End Namespace

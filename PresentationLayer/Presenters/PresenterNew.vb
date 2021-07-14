@@ -1174,7 +1174,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Return translatedField
     End Function
 
-    Protected Function UpdateChildData(ByRef childDataModel As Service, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
+    Protected Function UpdateChildData(ByRef childDataService As Service, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
         Dim retVal As Integer
         Dim updateReturnValue As Object
         Dim insertReturnValue As Object
@@ -1184,14 +1184,14 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Else
             parentIdNo = LateBinding.GetProperty(View, IdFieldName)
         End If
-        updateReturnValue = childDataModel.DelUpdateTvp(updateTable, parentIdNo)
+        updateReturnValue = childDataService.DelUpdateTvp(updateTable, parentIdNo)
         If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
             If passedValue <> 0 Then
                 For Each row As DataRow In insertTable.Rows
                     row.Item(parentIdFieldName) = parentIdNo
                 Next
             End If
-            insertReturnValue = childDataModel.InsertTvp(insertTable)
+            insertReturnValue = childDataService.InsertTvp(insertTable)
             If insertReturnValue >= 0 Then
                 retVal = updateReturnValue + insertReturnValue
             Else
@@ -2283,228 +2283,6 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Sub
 
 #End Region
-
-End Class
-
-Public Class ViewButtonClicked
-
-    Public Sub New(ByVal selectedButton As ButtonClicked)
-        Me.SelectedButton = selectedButton
-    End Sub
-
-    Public Property SelectedButton As ButtonClicked
-
-End Class
-
-Public Class GetDataSource
-
-    Public Sub New(ByVal tableName As String, ByRef control As Control, Optional ByVal filter As String = Nothing)
-        Me.TableName = tableName
-        Me.Control = control
-        Me.Filter = filter
-    End Sub
-
-    Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal sortKey As String, Optional ByVal filter As String = Nothing)
-        Me.TableName = tableName
-        Me.Control = control
-        Me.Filter = filter
-        Me.SortKey = sortKey
-    End Sub
-
-    Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal fields As String(), Optional ByVal filter As String = Nothing)
-        Me.TableName = tableName
-        Me.Control = control
-        Me.Filter = filter
-        Me.Fields = fields
-    End Sub
-
-    Public Property TableName As String
-    Public Property Control As Control
-    Public Property Fields As String()
-    Public Property SortKey As String
-    Public Property Filter As String
-
-End Class
-
-Public Class GetDataSourceSpecial
-
-    Public Sub New(ByVal tableName As String, ByRef control As Control, Optional ByVal filter As String = Nothing)
-        Me.TableName = tableName
-        Me.Control = control
-        Me.Filter = filter
-    End Sub
-
-    Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal sortKey As String, Optional ByVal filter As String = Nothing)
-        Me.TableName = tableName
-        Me.Control = control
-        Me.Filter = filter
-        Me.SortKey = sortKey
-    End Sub
-
-    Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal fields As String(), Optional ByVal filter As String = Nothing)
-        Me.TableName = tableName
-        Me.Control = control
-        Me.Filter = filter
-        Me.Fields = fields
-    End Sub
-
-    Public Property TableName As String
-    Public Property Control As Control
-    Public Property Fields As String()
-    Public Property SortKey As String
-    Public Property Filter As String
-
-End Class
-
-Public Class GetLookupDataRequested
-
-    'Public Sub New(ByVal tableName As String, ByRef view As Control, ByRef targetLookup As List(Of ClassesLibrary.LookupData), ByVal Optional filter As String = Nothing)
-    '    Me.TableName = tableName
-    '    Me.TargetProperty = TargetProperty
-    '    Me.Filter = filter
-    '    Me.View = view
-    '    Me.TargetLookup = targetLookup
-    'End Sub
-
-    Public Sub New(ByVal targetSourceName As String)
-        Me.TargetSourceName = targetSourceName
-    End Sub
-
-    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal Optional filter As String = Nothing)
-        Me.TableName = tableName
-        Me.TargetProperty = targetProperty
-        Me.Filter = filter
-        Me.View = view
-    End Sub
-
-    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal sortKey As String, ByVal Optional filter As String = Nothing)
-        Me.TableName = tableName
-        Me.TargetProperty = targetProperty
-        Me.SortKey = sortKey
-        Me.Filter = filter
-        Me.View = view
-    End Sub
-
-    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
-        Me.TableName = tableName
-        Me.View = view
-        Me.TargetProperty = targetProperty
-        Me.Filter = filter
-        Me.Fields = fields
-    End Sub
-
-    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal sortKey As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
-        Me.TableName = tableName
-        Me.View = view
-        Me.TargetProperty = targetProperty
-        Me.Filter = filter
-        Me.SortKey = sortKey
-        Me.Fields = fields
-    End Sub
-
-    Public Property TableName As String
-    Public Property View As Control
-    Public Property TargetProperty As String
-    Public Property Fields As String()
-    Public Property Filter As String
-    Public Property SortKey As String
-    Public Property TargetSourceName As String
-    'Public Property TargetLookup As List(Of ClassesLibrary.LookupData)
-End Class
-
-Public Class GetEnumListRequested
-
-    Public Sub New(ByRef enumList As Object, ByRef target As List(Of ClassesLibrary.LookupData))
-        Me.Target = target
-        Me.EnumList = enumList
-    End Sub
-
-    Public Property Target As List(Of ClassesLibrary.LookupData)
-    Public Property EnumList As Object
-
-End Class
-
-Public Class GetEnumListRequestedNew(Of TE)
-
-    Public Sub New(ByRef enumList As TE, ByRef target As List(Of ClassesLibrary.LookupData))
-        Me.Target = target
-        Me.EnumList = enumList
-    End Sub
-
-    Public Property Target As List(Of ClassesLibrary.LookupData)
-    Public Property EnumList As TE
-
-End Class
-
-Public Class SaveDataRequested
-
-    Public Sub New(ByVal viewControl As Control)
-        Me.ViewControl = viewControl
-    End Sub
-
-    Public Property ViewControl As Control
-    Public Property ValidData As Boolean
-
-End Class
-
-Public Class FindFieldRequested
-
-    Public Sub New(ByVal findableControl As IFindableControl)
-        Me.FindableControl = findableControl
-    End Sub
-
-    Public Property FindableControl As IFindableControl
-
-End Class
-
-Public Class ValidateViewRequested
-
-    Public Sub New(ByRef viewControl As Control)
-        Me.ViewControl = viewControl
-    End Sub
-
-    Public Property ViewControl As Control
-    Public Property ValidView As Boolean
-
-End Class
-
-Public Class IdNoEventArgs
-    Inherits EventArgs
-
-    Private _idNo As Int32
-
-    Public Sub New(ByVal idNo As Int32)
-        _idNo = idNo
-    End Sub
-
-    Public Property IdNo As Int32
-        Get
-            Return _idNo
-        End Get
-        Set(ByVal value As Int32)
-            _idNo = value
-        End Set
-    End Property
-
-End Class
-
-Public Class EntryFormLoaded
-
-    Public Sub New(ByVal viewControl As Control)
-        Me.ViewControl = viewControl
-    End Sub
-
-    Public Property ViewControl As Control
-
-End Class
-
-Public Class LanguageChanged
-
-    Public Sub New(ByVal viewControl As Control)
-        Me.ViewControl = viewControl
-    End Sub
-
-    Public Property ViewControl As Control
 
 End Class
 

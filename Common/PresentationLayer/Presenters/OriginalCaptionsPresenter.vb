@@ -1,38 +1,30 @@
-﻿Imports AATM.Common.DataLayer.AdoNet
-Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class OriginalCaptionsPresenter
-        Inherits CommonPresenter(Of IOriginalCaptionsView, OriginalCaptionsModel)
+    Public Class OriginalCaptionsPresenter(Of TM As New)
+        Inherits CommonPresenterNew(Of IOriginalCaptionsView, TM)
 
         Public Sub New(view As IOriginalCaptionsView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelCommon("OriginalCaptions")
+            Service = New ServiceCommon("OriginalCaptions")
             TableName = "OriginalCaptions"
             SortOrderKey = "Caption"
             TreeViewMainField = "Caption"
             TreeViewSecondaryField = Nothing
-            OriginalModel = New OriginalCaptionsModel()
-            DataModel = New OriginalCaptionsModel
-            DbDataDao = New OriginalCaptionsDao
-            TreeViewList = New List(Of OriginalCaptionsModel)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Function GetOriginalCaptionsList(Optional ByVal sortKey As String = "") As List(Of OriginalCaptionsModel)
-            Dim xModel As New OriginalCaptionsModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of OriginalCaptionsModel)(sortKey, xModel)
-            Dim modelData = Model.GetAll(Of OriginalCaptionsModel)(newSortOrderKey)
+        Public Function GetOriginalCaptionsList(Optional ByVal sortKey As String = "") As List(Of TM)
+            Dim xModel As New TM
+            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(sortKey, xModel)
+            Dim modelData = Service.GetAll(Of TM)(newSortOrderKey)
             If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
                 TreeViewList.Clear()
             End If
             For Each modData In modelData
-                Dim modelTb As New OriginalCaptionsModel
+                Dim modelTb As New TM
                 GlobalVariables.Mapper.Map(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next
