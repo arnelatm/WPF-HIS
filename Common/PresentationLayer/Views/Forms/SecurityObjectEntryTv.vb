@@ -13,16 +13,8 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
 
             ' Add any initialization after the InitializeComponent() call.
-
-            MainTableName = "SecurityObject_View"
-            TvMainFieldName = "SecurityObjectName"
-            TvSecondaryFieldName = "SecurityCode"
-            SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
             FirstControl = txtSecurityObjectName
-            PresenterObj = New SecurityObjectPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
 
         End Sub
 
@@ -97,11 +89,11 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             UpdateParentIdData()
-            cboSystemViewIdNo.DataSource = PresenterObj.GetLookup("SystemView")
+            CreateDataSource("SystemView", cboSystemViewIdNo)
         End Sub
 
         Private Sub UpdateParentIdData()
-            cacParentIdNo.DataSource = PresenterObj.GetLookup("SecurityObject")
+            CreateDataSource("SecurityObject", cacParentIdNo)
         End Sub
 
         Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
