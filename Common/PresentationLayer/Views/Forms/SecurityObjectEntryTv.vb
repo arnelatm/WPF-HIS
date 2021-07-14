@@ -96,12 +96,6 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("SecurityObject", cacParentIdNo)
         End Sub
 
-        Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
-            MyBase.RecordSaved(e)
-            UpdateParentIdData()
-            cacParentIdNo.Refresh()
-        End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {

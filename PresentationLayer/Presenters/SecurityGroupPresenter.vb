@@ -64,23 +64,6 @@ Public Class SecurityGroupPresenter(Of TM As New)
         Next
     End Sub
 
-    'Public Sub OnParentRecordUpdatedSuccessfully(ByRef passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully
-    '    Dim updateReturnValue As Integer
-    '    updateReturnValue = ModelOfPresenter.DelUpdateTvp(DtUpdateTable, View.ParentIdNo)
-    '    If updateReturnValue >= 0 AndAlso DtInsertTable.Rows.Count > 0 Then
-    '        For Each row As DataRow In DtInsertTable.Rows
-    '            row.Item("SecurityGroupIdNo") = View.IdNo
-    '        Next
-    '        Dim insertReturnValue = Model.InsertTvp(DtInsertTable)
-    '        If insertReturnValue >= 0 Then
-    '            passedValue = updateReturnValue + insertReturnValue
-    '        Else
-    '            passedValue = insertReturnValue
-    '        End If
-    '    Else
-    '        passedValue = updateReturnValue
-    '    End If
-    'End Sub
 
     Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
         Dim passedValue As Int32 = retVal
@@ -160,88 +143,5 @@ Public Class SecurityGroupPresenter(Of TM As New)
             ProcessChildren(eventType.Row, False)
         End If
     End Sub
-
-    'Public Sub OnEventHandler(ByRef e As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
-    '    Dim firstDisplayedRow = SecurityGroupView.DataGridViewGroupAccesses.FirstDisplayedScrollingRowIndex
-    '    If e.PropertyName = "Visible" Then
-    '        PresenterObj.ProcessChildren(e.Index, True)
-    '    Else
-    '        PresenterObj.ProcessChildren(e.Index, False)
-    '    End If
-    '    SecurityGroupView.bsGroupAccesses.ResetBindings(False)
-    '    'SecurityGroupView.DataGridViewGroupAccesses.CurrentCell = SecurityGroupView.DataGridViewGroupAccesses.Rows(e.Index).Cells(e.ColumnName)
-    '    SecurityGroupView.DataGridViewGroupAccesses.FirstDisplayedScrollingRowIndex = firstDisplayedRow
-    'End Sub
-
-    'Public Sub OnSecurityGroupDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
-    '    With eventType.BindingSource
-    '        If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
-    '            Dim groupAccess As GroupAccessView = eventType.BindingSource.Current
-    '            Select Case eventType.PropertyName
-    '                Case $"Visible"
-    '                    If Ea IsNot Nothing Then
-    '                        ProcessChildren(eventType.Row, True)
-    '                    End If
-    '                Case $"Editable"
-    '                    If Ea IsNot Nothing Then
-    '                        ProcessChildren(eventType.Row, False)
-    '                        mainnew.vb                End Select
-    '            eventType.BindingSource.ResetBindings(False)
-    '        End If
-    '    End With
-    'End Sub
-
-    'Public Sub OnDataGridViewCellChangedEventHandler(ByRef eventType As EmployeePayElementChanged) Implements ISubscriber(Of DataGridViewCellChanged).OnEventHandler
-    '    With eventType.BindingSource
-    '        If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
-    '            Dim earnIdNo = eventType.BindingSource.Current.PayElementIdNo
-    '            Dim calcType = GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-    '            Dim amount As Decimal
-    '            Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
-    '            Select Case eventType.PropertyName
-    '                Case $"PayElementIdNo"
-    '                    earnIdNo = eventType.EnteredValue
-    '                    calcType = GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-    '                    If IsEmpty(employeePayElement.Unit) Then
-    '                        employeePayElement.Unit = GetFieldWithIdNo(earnIdNo, "PayElement", "Unit")
-    '                    End If
-    '                    If employeePayElement.Rate = 0 Then
-    '                        employeePayElement.Rate = GetFieldWithIdNo(earnIdNo, "PayElement", "Rate")
-    '                    End If
-    '                    If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-    '                        amount = 0
-    '                    ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-    '                        amount = ComputePayAmount(View.PayFrequency, employeePayElement.Rate, employeePayElement.Unit)
-    '                    End If
-    '                Case $"Rate"
-    '                    If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-    '                        amount = 0
-    '                    ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-    '                        amount = ComputePayAmount(View.PayFrequency, eventType.EnteredValue, employeePayElement.Unit)
-    '                    End If
-    '                Case $"Unit"
-    '                    amount = ComputePayAmount(View.PayFrequency, employeePayElement.Rate, eventType.EnteredValue)
-    '            End Select
-    '            employeePayElement.Amount = amount
-    '        End If
-    '    End With
-    'End Sub
-
-    '    With DataGridViewGroupAccesses
-    '    If .CurrentRow IsNot Nothing Then
-    '    Dim nIndex = .CurrentRow.Index
-    '    Dim columnName As String = .CurrentCell.OwningColumn.Name.ToLower()
-    '    Select Case columnName
-    '        Case $"dgvvisible"
-    '            If Ea IsNot Nothing Then
-    '                Ea.PublishEvent(New DataGridCellChanged(nIndex, columnName))
-    '            End If
-    '        Case $"dgveditable"
-    '            If Ea IsNot Nothing Then
-    '                Ea.PublishEvent(New DataGridCellChanged(nIndex, columnName))
-    '            End If
-    '    End Select
-    'End If
-    'End With
 
 End Class
