@@ -1,40 +1,35 @@
 ﻿Imports AATM.Common.DataLayer.AdoNet
-Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries
+Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class OriginalMessagesPresenter
-        Inherits CommonPresenter(Of IOriginalMessagesView, OriginalMessagesModel)
+    Public Class OriginalMessagesPresenter(Of TM As New)
+        Inherits CommonPresenterNew(Of IOriginalMessagesView, TM)
 
         Public Sub New(view As IOriginalMessagesView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelCommon("OriginalMessages")
+            Service = New ServiceCommon("OriginalMessages")
             TableName = "OriginalMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
-            OriginalModel = New OriginalMessagesModel()
-            DataModel = New OriginalMessagesModel
+            OriginalModel = New TM()
             DbDataDao = New OriginalMessagesDao
-            TreeViewList = New List(Of OriginalMessagesModel)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Property TranslatedMessagesPresenter As TranslatedMessagesPresenter
+        'Public Property TranslatedMessagesPresenter As TranslatedMessagesPresenter
 
-        Public Function GetOriginalMessagesList(Optional ByVal sortKey As String = "") As List(Of OriginalMessagesModel)
-            Dim xModel As New OriginalMessagesModel
-            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of OriginalMessagesModel)(sortKey, xModel)
-            Dim modelData = Model.GetAll(Of OriginalMessagesModel)(newSortOrderKey)
+        Public Function GetOriginalMessagesList(Optional ByVal sortKey As String = "") As List(Of TM)
+            Dim xModel As New TM
+            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(sortKey, xModel)
+            Dim modelData = Service.GetAll(Of TM)(newSortOrderKey)
             If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
                 TreeViewList.Clear()
             End If
             For Each modData In modelData
-                Dim modelTb As New OriginalMessagesModel
+                Dim modelTb As New TM
                 GlobalVariables.Mapper.Map(modData, modelTb)
                 TreeViewList.Add(modelTb)
             Next

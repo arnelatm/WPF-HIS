@@ -6,14 +6,14 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Models
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeePresenter(Of TM As New)
         Inherits AccountsPresenterNew(Of IEmployeeView, TM)
         Implements ISubscriber(Of PayCycleIdNoChanged),
-                   ISubscriber(Of EmployeePayElementChanged)
+                   ISubscriber(Of DataChanged)
 
         Protected DtEmpPayElementInsertTable As New DataTable
         Protected DtEmpPayElementUpdateTable As New DataTable
@@ -225,13 +225,13 @@ Namespace PresentationLayer.Presenters
             View.PayFrequency = CodeToEnum(Of PayFrequencySelection)(GetFieldWithIdNo(eventType.PayCycleIdNo, "PayCycle", "PayFrequency"))
         End Sub
 
-        Public Sub OnDataGridViewCellChangedEventHandler(ByRef eventType As EmployeePayElementChanged) Implements ISubscriber(Of EmployeePayElementChanged).OnEventHandler
-            With eventType.PayElements
-                If eventType.Row >= 0 And eventType.Row < eventType.PayElements.Count() Then
-                    Dim earnIdNo = eventType.PayElements(eventType.Row).PayElementIdNo
+        Public Sub OnPayElementDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+            With eventType.BindingSource
+                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+                    Dim earnIdNo = eventType.BindingSource.Current.PayElementIdNo
                     Dim calcType = GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
                     Dim amount As Decimal
-                    Dim employeePayElement As EmployeePayElementView = eventType.PayElements(eventType.Row)
+                    Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
                     Select Case eventType.PropertyName
                         Case $"PayElementIdNo"
                             earnIdNo = eventType.EnteredValue
@@ -259,84 +259,7 @@ Namespace PresentationLayer.Presenters
                     employeePayElement.Amount = amount
                 End If
             End With
-            'With DataGridViewEarnings
-            '    If .CurrentRow IsNot Nothing Then
-            '        Dim nIndex = .CurrentRow.Index
-            '        Dim earnIdNo = RegularEmployeeEarnings(nIndex).PayElementIdNo
-            '        'Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(_presenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
-            '        Dim calcType = _presenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-            '        Dim amount As Decimal
-            '        Dim selectedRow As EmployeePayElementView
-            '        selectedRow = DataGridViewEarnings.Rows(nIndex).DataBoundItem
-            '        Select Case .CurrentCell.OwningColumn.Name
-            '            Case $"dgvEarningIdNo"
-            '                earnIdNo = .CurrentCell.Value
-            '                calcType = _presenter.GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-            '                If IsEmpty(selectedRow.Unit) Then
-            '                    selectedRow.Unit = _presenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Unit")
-            '                End If
-            '                If selectedRow.Rate = 0 Then
-            '                    selectedRow.Rate = _presenter.GetFieldWithIdNo(earnIdNo, "PayElement", "Rate")
-            '                End If
-            '                If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-            '                    amount = 0
-            '                ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-            '                    amount = _presenter.ComputePayAmount(PayFrequency, selectedRow.Rate, selectedRow.Unit)
-            '                End If
-            '            Case $"dgvEarningRate"
-            '                If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-            '                    amount = 0
-            '                ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-            '                    amount = _presenter.ComputePayAmount(PayFrequency, .CurrentCell.Value, RegularEmployeeEarnings(nIndex).Unit)
-            '                End If
-            '            Case $"dgvEarningUnit"
-            '                Dim unit = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-            '                amount = _presenter.ComputePayAmount(PayFrequency, selectedRow.Rate, unit)
-            '        End Select
-            '        selectedRow.Amount = amount
-            '    End If
-            'End With
         End Sub
-
-        'If .CurrentRow IsNot Nothing Then
-        '        Dim nIndex = .CurrentRow.Index
-        '        Dim deductionIdNo = RegularEmployeeDeductions(nIndex).PayElementIdNo
-        '        Dim calcType As Char
-        '        'Dim payFrequency = CodeToEnum(Of PayFrequencySelection)(_presenter.GetFieldWithIdNo(PayCycleIdNo, "PayCycle", "PayFrequency"))
-        '        'Ea.PublishEvent(New CalcTypeRequested(deductionIdNo, calcType))
-        '        Dim amount As Decimal
-        '        Dim selectedRow As EmployeePayElementView
-        '        selectedRow = DataGridViewDeductions.Rows(nIndex).DataBoundItem
-        '        Select Case .CurrentCell.OwningColumn.Name
-        '            Case $"dgvDeductionIdNo"
-        '                deductionIdNo = .CurrentCell.Value
-        '                Ea.PublishEvent(New CalcTypeRequested(deductionIdNo, calcType))
-        '                calcType = _presenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "CalculationType")
-        '                If IsEmpty(selectedRow.Unit) Then
-        '                    selectedRow.Unit = _presenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Unit")
-        '                End If
-        '                If selectedRow.Rate = 0 Then
-        '                    selectedRow.Rate = _presenter.GetFieldWithIdNo(deductionIdNo, "PayElement", "Rate")
-        '                End If
-        '                If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-        '                    amount = 0
-        '                ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-        '                    amount = _presenter.ComputePayAmount(PayFrequency, selectedRow.Rate, selectedRow.Unit)
-        '                End If
-        '            Case $"dgvDeductionRate"
-        '                Ea.PublishEvent(New CalcTypeRequested(deductionIdNo, calcType))
-        '                If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
-        '                    amount = 0
-        '                ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
-        '                    amount = _presenter.ComputePayAmount(PayFrequency, .CurrentCell.Value, RegularEmployeeDeductions(nIndex).Unit)
-        '                End If
-        '            Case $"dgvDeductionUnit"
-        '                Dim unit = .CurrentCell.Value
-        '                amount = _presenter.ComputePayAmount(PayFrequency, selectedRow.Rate, unit)
-        '        End Select
-        '        selectedRow.Amount = amount
-        '    End If
-        '    End If
 
     End Class
 
@@ -362,6 +285,15 @@ Public Class EmployeePayElementChanged
         Me.EnteredValue = enteredValue
     End Sub
 
+    Public Sub New(bindingSource As BindingSource, row As Int32, propertyName As String, elementName As String, enteredValue As Object)
+        Me.BindingSource = bindingSource
+        Me.Row = row
+        Me.PropertyName = propertyName
+        Me.ElementName = elementName
+        Me.EnteredValue = enteredValue
+    End Sub
+
+    Public Property BindingSource As BindingSource
     Public Property PayElements As List(Of EmployeePayElementView)
     Public Property Row As Int32
     Public Property PropertyName As String

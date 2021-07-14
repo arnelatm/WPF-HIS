@@ -1,6 +1,8 @@
 ﻿Public Class GroupAccessModel
-    Inherits Model
+
+    'Inherits Model
     Public Property IdNo As Int32
+
     Public Property SecurityGroupIdNo As Int16
     Public Property SecurityObjectIdNo As Int32
     Public Property Visible As Boolean

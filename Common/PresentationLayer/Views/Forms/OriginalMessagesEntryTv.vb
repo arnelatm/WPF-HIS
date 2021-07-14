@@ -11,22 +11,13 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             FormTitleCaption = "System Messages Maintenance Form"
-            MainTableName = "OriginalMessages"
-            TvMainFieldName = "Message"
-            TvSecondaryFieldName = "MessageKey"
-            SortOrderKey = "Message"
             FirstControl = txtMessageKey
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New OriginalMessagesPresenter(Me)
-            'PresenterObj.TranslatedMessagesPresenter = New TranslatedMessagesPresenter(Me)
-            'PresenterObj.AddChildPresenter(PresenterObj.TranslatedMessagesPresenter)
             If GlobalVariables.UserName.ToLower() = $"arnel" Then
                 txtMessageKey.DisplayOnly = False
                 txtCaption.DisplayOnly = False
                 txtMessage.DisplayOnly = False
             End If
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "OriginalMessageFields"
@@ -118,7 +109,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub OriginalMessagesEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            Show()
             If GlobalVariables.UserName.ToLower() <> $"arnel" Then
                 HideButton(btnDelete)
             End If

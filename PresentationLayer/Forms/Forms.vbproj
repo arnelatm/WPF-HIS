@@ -176,6 +176,7 @@
     <Compile Include="CrystalDecisions\ReportAppServer\CommonControls.vb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="FormHelpers.vb" />
     <Compile Include="HijriCalendarForm.Designer.vb">
       <DependentUpon>HijriCalendarForm.vb</DependentUpon>
     </Compile>

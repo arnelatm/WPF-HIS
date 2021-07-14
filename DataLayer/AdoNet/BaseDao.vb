@@ -603,7 +603,7 @@ Namespace AdoNet
             Dim sql As String = " Select count(*) From [" & tableName &
                     "] where " & filterKey & " " & sortOrder & " <= (Select " & sortOrder &
                     " from [" & tableName & "] where " & filterKey & " IdNo = " & idNo & ") "
-            Dim recordPosition = _db.Scalar(sql) + 1
+            Dim recordPosition = _db.Scalar(sql) ' + 1
             Dim recCount = GetRecordCount(tableName, filterKey)
             If recordPosition > recCount Then
                 recordPosition = recCount

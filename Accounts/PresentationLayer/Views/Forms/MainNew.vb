@@ -15,6 +15,7 @@ Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Forms
+Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
@@ -128,6 +129,38 @@ Namespace PresentationLayer.Views.Forms
         Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
         Protected Shared Property Service As New Service
 
+        Public Sub ResetMenuSecurity(ByRef cCtrl As Control)
+            Static sw = 0
+            Static mainParentIdNo As Int32
+            If sw = 0 Then
+                Dim securityObject As New SecurityObject With {.SecurityObjectName = MenuFormName,
+                        .SystemViewIdNo = VSystemViewIdNo,
+                        .ParentIdNo = Nothing}
+                mainParentIdNo = PresenterObj.AddSecurityObject(securityObject)
+                sw = 1
+            End If
+            If TypeOf cCtrl Is MenuStrip Then
+                ' check for MenuStrip first because MenuStrip is also a ToolStrip
+                Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
+                Dim menuStripMain As MenuStrip = cCtrl
+                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.Trim(),
+                        .SystemViewIdNo = VSystemViewIdNo,
+                        .ParentIdNo = mainParentIdNo}
+                Dim parentIdNo As Int32
+                parentIdNo = PresenterObj.AddSecurityObject(securityObject)
+                AddChildMenuSecurityObjects(menuStripMain.Items, subMenuName, parentIdNo)
+            ElseIf TypeOf cCtrl Is ToolStrip Then
+                Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
+                Dim toolStripMain As ToolStrip = cCtrl
+                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.TrimEnd(),
+                        .SystemViewIdNo = VSystemViewIdNo,
+                        .ParentIdNo = mainParentIdNo}
+                Dim parentIdNo As Int32
+                parentIdNo = PresenterObj.AddSecurityObject(securityObject)
+                AddChildMenuSecurityObjects(toolStripMain.Items, subMenuName, parentIdNo)
+            End If
+        End Sub
+
         Public Sub SetupMapper()
             Dim mapperConfigurationAccounts = New MapperConfiguration(Sub(cfg)
                                                                           cfg.AddProfile(New MappingProfileAccounts)
@@ -145,11 +178,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAbout.Click
             Dim form = New FormAbout()
             form.ShowDialog()
-        End Sub
-
-        Private Sub ChartOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemChartOfAccounts.Click
-            ShowEntryForm(AccountEntryTv)
         End Sub
 
         Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountReconciliation.Click
@@ -219,15 +247,6 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemCashReceiptEntry.Click
-            ShowEntryForm(CashReceiptJournalEntry)
-        End Sub
-
-        Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCategories.Click
-            RunBasicForm("Category", "Categories Maintenance Form")
-        End Sub
-
         Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCashDisbursementEntry.Click
             Dim childMdiForm
@@ -243,6 +262,20 @@ Namespace PresentationLayer.Views.Forms
                 .MdiParent = Me
                 }
             childMdiForm.Show()
+        End Sub
+
+        Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+            Handles ToolStripMenuItemCashReceiptEntry.Click
+            ShowEntryForm(CashReceiptJournalEntry)
+        End Sub
+
+        Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCategories.Click
+            RunBasicForm("Category", "Categories Maintenance Form")
+        End Sub
+
+        Private Sub ChartOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
+                                                                                                            Handles ToolStripMenuItemChartOfAccounts.Click
+            ShowEntryForm(AccountEntryTv)
         End Sub
 
         Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCheckPrinting.Click
@@ -373,13 +406,6 @@ Namespace PresentationLayer.Views.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        Private Sub RunForm(Of TV, TP)()
-            Dim childMdiForm = Activator.CreateInstance(GetType(TV))
-            Activator.CreateInstance(GetType(TP), {childMdiForm})
-            childMdiForm.MdiParent = Me
-            childMdiForm.Show()
-        End Sub
-
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemGeneralJournalEntry.Click
             Dim myForm = New GeneralJournalEntry(False)
@@ -414,9 +440,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub MessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMessages.Click
-            Dim childMdiForm As OriginalMessagesEntryTv
-            childMdiForm = New OriginalMessagesEntryTv() With {.MdiParent = Me}
-            childMdiForm.Show()
+            RunForm(Of OriginalMessagesEntryTv, OriginalMessagesPresenter(Of OriginalMessagesModel))()
         End Sub
 
         Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBMonthly.Click
@@ -538,33 +562,17 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemReligions.Click
+        Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReligions.Click
             RunForm(Of ReligionEntryTv, ReligionPresenter(Of ReligionModel))()
         End Sub
 
-        Private Sub RevCostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemRevCostCenters.Click
+        Private Sub RevCostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRevCostCenters.Click
             RunForm(Of RevCostCenterEntryTv, RevCostCenterPresenter(Of RevCostCenterModel))()
         End Sub
 
         Private Sub RevenueGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRevenueGroups.Click
-            Dim childMdiForm As RevenueGroupEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New RevenueGroupEntryTv() With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of RevenueGroupEntryTv, RevenueGroupPresenter(Of RevenueGroupModel))()
         End Sub
-
-        '''' <summary>
-        ''''     Opens the about dialog window.
-        '''' </summary>
-        'Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAbout.Click
-        '    Dim form = New FormAbout()
-        '    form.ShowDialog()
-        'End Sub
 
         Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String)
             Dim childMdiForm As BasicEntry
@@ -576,6 +584,21 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub RunForm(Of TV, TP)()
+            Dim childMdiForm = Activator.CreateInstance(GetType(TV))
+            Dim pType As Type = GetType(TP)
+            Activator.CreateInstance(GetType(TP), {childMdiForm})
+            childMdiForm.MdiParent = Me
+            childMdiForm.Show()
+        End Sub
+
+        '''' <summary>
+        ''''     Opens the about dialog window.
+        '''' </summary>
+        'Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAbout.Click
+        '    Dim form = New FormAbout()
+        '    form.ShowDialog()
+        'End Sub
         Private Sub SalesDepositTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesDepositTypes.Click
             Dim childMdiForm As DepositTypeEntryTv
             childMdiForm = New DepositTypeEntryTv With {
@@ -637,25 +660,6 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ToolStripButtonTranslate_Click(sender As Object, e As EventArgs) Handles ToolStripButtonTranslate.Click
-            Dim frm As New TranslationTableManager With {
-                    .SystemViewIdNoToTranslate = VSystemViewIdNo,
-                    .AppDataDAC = AppDataDAC,
-                    .TranslatorDAC = TranslatorDAC
-                    }
-            frm.Show()
-        End Sub
-
-        Private Sub ToolStripMenuItemCaptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCaptions.Click
-            Dim childMdiForm As OriginalCaptionEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New OriginalCaptionEntryTv With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
-        End Sub
-
         Private Sub StatementOfEmployeeLoansToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfEmployeeLoans.Click
             Dim childMdiForm As StatementOfEr
             childMdiForm = New StatementOfEr With {
@@ -682,12 +686,21 @@ Namespace PresentationLayer.Views.Forms
             cForm.Show()
         End Sub
 
-        Private Sub ToolStripMenuItemSecurityGroups_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSecurityGroups.Click
-            Dim childMdiForm As SecurityGroupEntryTv
-            childMdiForm = New SecurityGroupEntryTv With {
-                    .MdiParent = Me
+        Private Sub ToolStripButtonTranslate_Click(sender As Object, e As EventArgs) Handles ToolStripButtonTranslate.Click
+            Dim frm As New TranslationTableManager With {
+                    .SystemViewIdNoToTranslate = VSystemViewIdNo,
+                    .AppDataDAC = AppDataDAC,
+                    .TranslatorDAC = TranslatorDAC
                     }
-            childMdiForm.Show()
+            frm.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemCaptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCaptions.Click
+            RunForm(Of OriginalCaptionEntryTv, OriginalCaptionsPresenter(Of OriginalCaptionsModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemSecurityGroups_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSecurityGroups.Click
+            RunForm(Of SecurityGroupEntryTv, SecurityGroupPresenter(Of SecurityGroupModel))()
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsPayable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsPayable.Click
@@ -771,6 +784,45 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
+        Protected Sub SwitchUiLanguage(originalUi As Boolean)
+            If originalUi Then
+                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+            Else
+                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+            End If
+            TranslateForm()
+            ToolStripButtonEnglish.Visible = Not originalUi
+            ToolStripButtonArabic.Visible = originalUi
+        End Sub
+
+        Private Sub AddChildMenuSecurityObjects(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
+            Dim parentIdNo As Int32
+            For Each dropDownItem As Object In dropDownItems
+                If TypeOf dropDownItem Is ToolStripMenuItem Then
+                    Dim parentMenuName = pParentMenuName
+                    parentIdNo = AddSecurityObject(Of ToolStripMenuItem)(dropDownItem, parentMenuName, pParentIdNo, 17)
+                    If dropDownItem.HasDropDown Then
+                        'Dim childSubMenuName As String = pParentMenuName + " > " + Mid(dropDownItem.Name, 18)
+                        AddChildMenuSecurityObjects(dropDownItem.DropDownItems, pParentMenuName, parentIdNo)
+                    End If
+                ElseIf TypeOf dropDownItem Is ToolStripButton Then
+                    'Dim childSubMenuName = pParentMenuName + " > " + Mid(dropDownItem.Name, 16)
+                    AddSecurityObject(Of ToolStripButton)(dropDownItem, pParentMenuName, pParentIdNo, 15)
+                End If
+            Next
+        End Sub
+
+        Private Function AddSecurityObject(Of T)(ByRef obj As T, ByRef subMenuName As String, ByVal parentIdNo As Int32, loc As Int16) As Int32
+            Dim toolStripMenuItem As T = obj
+            'Dim objName = CallByName(obj, "Name", CallType.Get)
+            Dim objName = LateBinding.GetProperty(obj, "Name")
+            Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
+                    .SystemViewIdNo = VSystemViewIdNo,
+                    .ParentIdNo = parentIdNo}
+            parentIdNo = PresenterObj.AddSecurityObject(securityObject)
+            Return parentIdNo
+        End Function
+
         Private Sub DisableLogin()
             ToolStripButtonLogin.Enabled = False
             ToolStripMenuItemLogin.Enabled = False
@@ -840,6 +892,14 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
+        Private Sub JournalListingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemJournalTransactionSummary.Click
+            Dim childMdiForm As TransactionSummary
+            childMdiForm = New TransactionSummary With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         ''' <summary>
         '''     Displays login dialog box and loads member list in treeview.
         ''' </summary>
@@ -877,6 +937,10 @@ Namespace PresentationLayer.Views.Forms
             LogStatus = LoginStatus.LoggedOut
         End Sub
 
+        Private Sub PayrollReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPeriodicPayroll.Click
+
+        End Sub
+
         Private Sub RecreateSecurityObjectMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRecreateSecurityObjectMenu.Click
             Dim allControls As New List(Of Control)
             Dim nRecCount = PresenterObj.GetRecordCount("SecurityObject")
@@ -902,65 +966,21 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Public Sub ResetMenuSecurity(ByRef cCtrl As Control)
-            Static sw = 0
-            Static mainParentIdNo As Int32
-            If sw = 0 Then
-                Dim securityObject As New SecurityObject With {.SecurityObjectName = MenuFormName,
-                        .SystemViewIdNo = VSystemViewIdNo,
-                        .ParentIdNo = Nothing}
-                mainParentIdNo = PresenterObj.AddSecurityObject(securityObject)
-                sw = 1
-            End If
-            If TypeOf cCtrl Is MenuStrip Then
-                ' check for MenuStrip first because MenuStrip is also a ToolStrip
-                Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
-                Dim menuStripMain As MenuStrip = cCtrl
-                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.Trim(),
-                        .SystemViewIdNo = VSystemViewIdNo,
-                        .ParentIdNo = mainParentIdNo}
-                Dim parentIdNo As Int32
-                parentIdNo = PresenterObj.AddSecurityObject(securityObject)
-                AddChildMenuSecurityObjects(menuStripMain.Items, subMenuName, parentIdNo)
-            ElseIf TypeOf cCtrl Is ToolStrip Then
-                Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
-                Dim toolStripMain As ToolStrip = cCtrl
-                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.TrimEnd(),
-                        .SystemViewIdNo = VSystemViewIdNo,
-                        .ParentIdNo = mainParentIdNo}
-                Dim parentIdNo As Int32
-                parentIdNo = PresenterObj.AddSecurityObject(securityObject)
-                AddChildMenuSecurityObjects(toolStripMain.Items, subMenuName, parentIdNo)
-            End If
-        End Sub
+        Private Sub SalaryLoanScheduleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalaryLoanScheduleToolStripMenuItem.Click
+            Dim childMdiForm As SalaryLoanScheduleEntry
+            'Dim presenter 'As ISalaryLoanSchedulePresenter
+            'Dim builder As ContainerBuilder = GlobalVariables.Container
+            'builder.RegisterType(Of SalaryLoanScheduleEntry)().As(Of ISalaryLoanScheduleView)()
+            'builder.Build()
+            'presenter = builder.Resolve(Of ISalaryLoanSchedulePresenter)()'
 
-        Private Sub AddChildMenuSecurityObjects(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
-            Dim parentIdNo As Int32
-            For Each dropDownItem As Object In dropDownItems
-                If TypeOf dropDownItem Is ToolStripMenuItem Then
-                    Dim parentMenuName = pParentMenuName
-                    parentIdNo = AddSecurityObject(Of ToolStripMenuItem)(dropDownItem, parentMenuName, pParentIdNo, 17)
-                    If dropDownItem.HasDropDown Then
-                        'Dim childSubMenuName As String = pParentMenuName + " > " + Mid(dropDownItem.Name, 18)
-                        AddChildMenuSecurityObjects(dropDownItem.DropDownItems, pParentMenuName, parentIdNo)
-                    End If
-                ElseIf TypeOf dropDownItem Is ToolStripButton Then
-                    'Dim childSubMenuName = pParentMenuName + " > " + Mid(dropDownItem.Name, 16)
-                    AddSecurityObject(Of ToolStripButton)(dropDownItem, pParentMenuName, pParentIdNo, 15)
-                End If
-            Next
+            'Set the Parent Form of the Child window.
+            childMdiForm = New SalaryLoanScheduleEntry() With {
+                .MdiParent = Me
+                }
+            'Display the new form.
+            childMdiForm.Show()
         End Sub
-
-        Private Function AddSecurityObject(Of T)(ByRef obj As T, ByRef subMenuName As String, ByVal parentIdNo As Int32, loc As Int16) As Int32
-            Dim toolStripMenuItem As T = obj
-            'Dim objName = CallByName(obj, "Name", CallType.Get)
-            Dim objName = LateBinding.GetProperty(obj, "Name")
-            Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
-                    .SystemViewIdNo = VSystemViewIdNo,
-                    .ParentIdNo = parentIdNo}
-            parentIdNo = PresenterObj.AddSecurityObject(securityObject)
-            Return parentIdNo
-        End Function
 
         Private Sub SetLanguageChangeButtons()
             If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
@@ -994,6 +1014,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButtonExit.Click
             Close()
+        End Sub
+
+        Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+            Debugger.Break()
         End Sub
 
         Private Sub ToolStripButtonHelp_Click(sender As Object, e As EventArgs)
@@ -1091,6 +1115,14 @@ Namespace PresentationLayer.Views.Forms
             'TranslateForm()
         End Sub
 
+        Private Sub ToolStripMenuItemAccountActivity_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountActivity.Click
+            Dim childMdiForm As AccountActivity
+            childMdiForm = New AccountActivity With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
+        End Sub
+
         Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
             Using form As New LoginEntry(True)
                 Try
@@ -1115,55 +1147,6 @@ Namespace PresentationLayer.Views.Forms
             End Using
         End Sub
 
-        Private Sub UnhandledExceptionHandler(sender As Object, e As UnhandledExceptionEventArgs)
-            ErrLogger.LogError(CType(e.ExceptionObject, Exception))
-        End Sub
-
-        Private Sub TransactionNotesTranslatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransactionNotesTranslator.Click
-            Dim myForm As New NotesTranslator
-            myForm.Show()
-        End Sub
-
-        Private Sub PayrollReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPeriodicPayroll.Click
-
-        End Sub
-
-        Private Sub SalaryLoanScheduleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalaryLoanScheduleToolStripMenuItem.Click
-            Dim childMdiForm As SalaryLoanScheduleEntry
-            'Dim presenter 'As ISalaryLoanSchedulePresenter
-            'Dim builder As ContainerBuilder = GlobalVariables.Container
-            'builder.RegisterType(Of SalaryLoanScheduleEntry)().As(Of ISalaryLoanScheduleView)()
-            'builder.Build()
-            'presenter = builder.Resolve(Of ISalaryLoanSchedulePresenter)()'
-
-            'Set the Parent Form of the Child window.
-            childMdiForm = New SalaryLoanScheduleEntry() With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
-        End Sub
-
-        Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-            Debugger.Break()
-        End Sub
-
-        Private Sub JournalListingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemJournalTransactionSummary.Click
-            Dim childMdiForm As TransactionSummary
-            childMdiForm = New TransactionSummary With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
-
-        Private Sub ToolStripMenuItemAccountActivity_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountActivity.Click
-            Dim childMdiForm As AccountActivity
-            childMdiForm = New AccountActivity With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
-        End Sub
-
         Private Sub ToolStripMenuItemTransactionJournalCodes_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransactionJournalCodes.Click
             Dim childMdiForm As JournalPrefixEntry
             childMdiForm = New JournalPrefixEntry With {
@@ -1172,15 +1155,13 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Protected Sub SwitchUiLanguage(originalUi As Boolean)
-            If originalUi Then
-                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-            Else
-                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-            End If
-            TranslateForm()
-            ToolStripButtonEnglish.Visible = Not originalUi
-            ToolStripButtonArabic.Visible = originalUi
+        Private Sub TransactionNotesTranslatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransactionNotesTranslator.Click
+            Dim myForm As New NotesTranslator
+            myForm.Show()
+        End Sub
+
+        Private Sub UnhandledExceptionHandler(sender As Object, e As UnhandledExceptionEventArgs)
+            ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         End Sub
 
     End Class

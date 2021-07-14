@@ -703,4 +703,14 @@ Public Class CFormEntryNew
         Return LateBinding.GetProperty(Me, fieldName).GetType
     End Function
 
+    Protected Sub ProcessCellEndEdit(dataGridView As DataGridView, bindingSource As BindingSource)
+        Dim firstDisplayedRow = dataGridView.FirstDisplayedScrollingRowIndex
+        Ea.PublishEvent(New DataChanged(bindingSource,
+                                                dataGridView.CurrentRow.Index,
+                                                dataGridView.CurrentCell.OwningColumn.DataPropertyName,
+                                                dataGridView.CurrentCell.OwningColumn.Name,
+                                                dataGridView.CurrentCell.Value))
+
+    End Sub
+
 End Class
