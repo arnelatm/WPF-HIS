@@ -101,7 +101,6 @@ Public Class SecurityGroupPresenter(Of TM As New)
 
     Public Sub ProcessRows(propertyName As String, value As Boolean)
         For Each groupAccessView In View.GroupAccesses
-            'CallByName(groupAccessView, propertyName, CallType.Set, {value})
             LateBinding.SetProperty(groupAccessView, propertyName, {value})
         Next
     End Sub
