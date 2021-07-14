@@ -617,15 +617,8 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SecurityObjectsToolStripMenuItem_Click_1(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemSecurityObjects.Click
-            Dim childMdiForm As SecurityObjectEntryTv
-            'Set the Parent Form of the Child window.
-            childMdiForm = New SecurityObjectEntryTv With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+        Private Sub SecurityObjectsToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ToolStripMenuItemSecurityObjects.Click
+            RunForm(Of SecurityObjectEntryTv, SecurityObjectPresenter(Of SecurityObjectModel))()
         End Sub
 
         Private Sub SemestralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBSemestral.Click
