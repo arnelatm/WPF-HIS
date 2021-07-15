@@ -1,17 +1,18 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 
 Namespace PresentationLayer.Presenters
 
-    Public Class ProductCategoryPresenter
-        Inherits AccountsPresenter(Of IProductCategoryView, ProductCategoryModel)
+    Public Class ProductCategoryPresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IProductCategoryView, TM)
 
         Public Sub New(view As IProductCategoryView)
             MyBase.New(view)
-            InitializerWithTv("ProductCategory")
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            Service = New ServiceAccounts("ProductCategory")
+            TableName = "ProductCategory"
+            TreeViewMainField = "ProductCategoryName"
+            TreeViewSecondaryField = "ProductCategoryCode"
+            SortOrderKey = "ProductCategoryName"
         End Sub
 
     End Class

@@ -13,6 +13,8 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
         End Sub
 
+
+
         'Public Function GetDepositTypeModel() As List(Of DepositTypeModel) Implements IAccountsPresenter.GetDepositTypeModel
         '    Dim modelDepositType As New ModelAccounts("DepositType")
         '    Return modelDepositType.GetAll(Of DepositTypeModel)("DepositTypeName")

@@ -1,24 +1,23 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PensionSchemePresenter
-        Inherits AccountsPresenter(Of IPensionSchemeView, PensionSchemeModel)
+    Public Class PensionSchemePresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IPensionSchemeView, TM)
 
-        'Public ParentViewList As List(Of PensionSchemeModel)
         Protected DtInsertTable As New DataTable
-
         Protected DtUpdateTable As New DataTable
-
-        Private ReadOnly _pensionRateModel As New ModelAccounts("PensionRate")
+        Private ReadOnly _pensionRateService As New ServiceAccounts("PensionRate")
 
         Public Sub New(view As IPensionSchemeView)
             MyBase.New(view)
-            InitializerWithTv("PensionScheme")
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            Service = New ServiceAccounts("PensionScheme")
+            TableName = "PensionScheme"
+            TreeViewMainField = "PensionSchemeName"
+            TreeViewSecondaryField = "PensionSchemeCode"
+            SortOrderKey = "PensionSchemeName"
+
 
             DtInsertTable.Columns.Add("EmployeeShare", GetType(Decimal))
             DtInsertTable.Columns.Add("EmployerShare", GetType(Decimal))
@@ -62,7 +61,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_pensionRateModel, DtUpdateTable, DtInsertTable, passedValue, "PensionSchemeIdNo")
+            retVal = UpdateChildData(_pensionRateService, DtUpdateTable, DtInsertTable, passedValue, "PensionSchemeIdNo")
         End Sub
 
         'Protected Overrides Function IsBizDataValid() As Boolean

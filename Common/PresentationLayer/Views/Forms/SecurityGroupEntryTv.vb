@@ -151,16 +151,14 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Protected Overrides Sub InputsTurnedOff()
-            MyBase.InputsTurnedOff()
+        Protected Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
             btnCheckAllEditable.Enabled = False
             btnCheckAllVisible.Enabled = False
             btnUncheckAllEditable.Enabled = False
             btnUncheckAllVisible.Enabled = False
         End Sub
 
-        Protected Overrides Sub InputsTurnedOn()
-            MyBase.InputsTurnedOn()
+        Protected Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             btnCheckAllEditable.Enabled = True
             btnCheckAllVisible.Enabled = True
             btnUncheckAllEditable.Enabled = True

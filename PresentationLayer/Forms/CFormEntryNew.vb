@@ -40,6 +40,8 @@ Public Class CFormEntryNew
     Private _firstLoadSwitch As UInt16 = 0
 
     Public Event AfterUpdateView()
+    Public Event InputsTurnedOn()
+    Public Event InputsTurnedOff()
 
     Public Sub New()
         MyBase.New()
@@ -107,7 +109,7 @@ Public Class CFormEntryNew
     '    End Set
     'End Property
 
-    Public Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
+    Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
         tsbCurrentRecord.Text = recordPositionNumber
         tsbTotalRecords.Text = recordCount
         UpdateNavigationButtonDisplay(editMode, addMode, recordPositionNumber, recordCount)
@@ -179,21 +181,15 @@ Public Class CFormEntryNew
 
     Public Overridable Sub TurnOffInputs()
         Inputs(False)
-        InputsTurnedOff()
+        RaiseEvent InputsTurnedOff()
     End Sub
 
     Public Overridable Sub TurnOnInputs()
         Inputs(True)
-        InputsTurnedOn()
+        RaiseEvent InputsTurnedOn()
         If FirstControl IsNot Nothing Then
             FirstControl.Focus()
         End If
-    End Sub
-
-    Protected Overridable Sub InputsTurnedOn()
-    End Sub
-
-    Protected Overridable Sub InputsTurnedOff()
     End Sub
 
     Protected Overridable Sub CreateDataSources()
@@ -556,9 +552,9 @@ Public Class CFormEntryNew
             End If
         Next
         If onOff Then
-            InputsTurnedOn()
+            RaiseEvent InputsTurnedOn()
         Else
-            InputsTurnedOff()
+            RaiseEvent InputsTurnedOff()
         End If
         If FirstControl IsNot Nothing Then
             FirstControl.Focus()
