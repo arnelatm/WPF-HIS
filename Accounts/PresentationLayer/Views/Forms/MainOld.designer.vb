@@ -2,8 +2,8 @@
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
-    Partial Public Class MainNew
-        Inherits BFMainNew
+    Partial Public Class Main
+        Inherits BfMain
         ''' <summary>
         ''' Required designer variable.
         ''' </summary>
@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms
         ''' </summary>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainNew))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
             Me.imageListMember = New System.Windows.Forms.ImageList(Me.components)
             Me.ToolStrip = New System.Windows.Forms.ToolStrip()
             Me.ToolStripButtonLogin = New System.Windows.Forms.ToolStripButton()

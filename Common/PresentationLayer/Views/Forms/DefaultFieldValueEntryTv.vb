@@ -11,16 +11,8 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            FormTitleCaption = "Default Field Values Maintenance Form"
-            MainTableName = "DefaultFieldValue_View"
-            TvMainFieldName = "SystemViewName"
-            TvSecondaryFieldName = "FieldName"
-            SortOrderKey = "SystemViewName, FieldName"
             FirstControl = cboSystemViewIdNo
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New DefaultFieldValuePresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"
@@ -164,8 +156,8 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboDataType.DataSource = PresenterObj.MakeEnumComboList(Of DataTypeSelection)
-            cboSystemViewIdNo.DataSource = PresenterObj.GetLookup("SystemView")
+            CreateEnumDataSource(Of DataTypeSelection)(cboDataType)
+            CreateDataSource("SystemView", cboSystemViewIdNo)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()

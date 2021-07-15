@@ -130,7 +130,7 @@
     <value>535, 17</value>
   </metadata>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>675, 17</value>
+    <value>17, 56</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -141,7 +141,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
+    <value>11, 11</value>
   </data>
   <data name="lblIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -175,7 +175,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 1</value>
+    <value>223, 11</value>
   </data>
   <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -205,7 +205,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCategoryIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
+    <value>11, 36</value>
   </data>
   <data name="lblCategoryIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -241,7 +241,7 @@
     <value>False</value>
   </data>
   <data name="cboProductCategoryIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 26</value>
+    <value>223, 36</value>
   </data>
   <data name="cboProductCategoryIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -271,7 +271,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPurchaseItemCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 52</value>
+    <value>11, 62</value>
   </data>
   <data name="lblPurchaseItemCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -304,7 +304,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtPurchaseItemCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 52</value>
+    <value>223, 62</value>
   </data>
   <data name="txtPurchaseItemCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -334,7 +334,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPurchaseItemName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 77</value>
+    <value>11, 87</value>
   </data>
   <data name="lblPurchaseItemName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPurchaseItemNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 102</value>
+    <value>11, 112</value>
   </data>
   <data name="lblPurchaseItemNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -406,7 +406,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblGlAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 127</value>
+    <value>11, 137</value>
   </data>
   <data name="lblGlAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -442,7 +442,7 @@
     <value>False</value>
   </data>
   <data name="cboGlAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 127</value>
+    <value>223, 137</value>
   </data>
   <data name="cboGlAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -472,7 +472,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVatAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 153</value>
+    <value>11, 163</value>
   </data>
   <data name="lblVatAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -508,7 +508,7 @@
     <value>False</value>
   </data>
   <data name="cboVatAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 153</value>
+    <value>223, 163</value>
   </data>
   <data name="cboVatAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -538,7 +538,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 179</value>
+    <value>11, 189</value>
   </data>
   <data name="CLabel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -574,7 +574,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 179</value>
+    <value>223, 189</value>
   </data>
   <data name="lblUnit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -610,7 +610,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUnitArabic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 179</value>
+    <value>299, 189</value>
   </data>
   <data name="lblUnitArabic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -646,7 +646,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUnitStdPrice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>365, 179</value>
+    <value>375, 189</value>
   </data>
   <data name="lblUnitStdPrice.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -682,7 +682,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUnit1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 242</value>
+    <value>11, 252</value>
   </data>
   <data name="lblUnit1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -715,7 +715,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtUnit1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 242</value>
+    <value>223, 252</value>
   </data>
   <data name="txtUnit1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -742,7 +742,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtUnit1Ara.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 242</value>
+    <value>299, 252</value>
   </data>
   <data name="txtUnit1Ara.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -772,7 +772,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtStdPrice1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>366, 242</value>
+    <value>376, 252</value>
   </data>
   <data name="txtStdPrice1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -802,7 +802,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUnit2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 267</value>
+    <value>11, 277</value>
   </data>
   <data name="lblUnit2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -835,7 +835,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtUnit2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 267</value>
+    <value>223, 277</value>
   </data>
   <data name="txtUnit2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -862,7 +862,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtUnit2Ara.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 267</value>
+    <value>299, 277</value>
   </data>
   <data name="txtUnit2Ara.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -892,7 +892,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtStdPrice2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>366, 267</value>
+    <value>376, 277</value>
   </data>
   <data name="txtStdPrice2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -922,7 +922,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblUnit3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 292</value>
+    <value>11, 302</value>
   </data>
   <data name="lblUnit3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -955,7 +955,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtUnit3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 292</value>
+    <value>223, 302</value>
   </data>
   <data name="txtUnit3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -982,7 +982,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtUnit3Ara.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 292</value>
+    <value>299, 302</value>
   </data>
   <data name="txtUnit3Ara.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1012,7 +1012,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtStdPrice3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>366, 292</value>
+    <value>376, 302</value>
   </data>
   <data name="txtStdPrice3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1042,7 +1042,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 317</value>
+    <value>11, 327</value>
   </data>
   <data name="lblCancelled.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1071,32 +1071,23 @@
   <data name="&gt;&gt;lblCancelled.ZOrder" xml:space="preserve">
     <value>30</value>
   </data>
-  <data name="chkActive.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="chkActive.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
   <data name="chkActive.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="chkActive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkActive.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 317</value>
-  </data>
-  <data name="chkActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+    <value>225, 329</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 21</value>
+    <value>13, 13</value>
   </data>
   <data name="chkActive.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="chkActive.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
+  <data name="chkActive.Text" xml:space="preserve">
+    <value>CCheckBox1</value>
   </data>
   <data name="&gt;&gt;chkActive.Name" xml:space="preserve">
     <value>chkActive</value>
@@ -1117,7 +1108,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 342</value>
+    <value>11, 352</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1150,7 +1141,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 342</value>
+    <value>223, 352</value>
   </data>
   <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1174,13 +1165,16 @@
     <value>33</value>
   </data>
   <data name="CFlowLayout4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
   </data>
   <data name="CFlowLayout4.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 53</value>
   </data>
+  <data name="CFlowLayout4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
   <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>653, 376</value>
+    <value>653, 395</value>
   </data>
   <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
@@ -1201,7 +1195,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtPurchaseItemName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 77</value>
+    <value>223, 87</value>
   </data>
   <data name="txtPurchaseItemName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1228,7 +1222,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtPurchaseItemNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 102</value>
+    <value>223, 112</value>
   </data>
   <data name="txtPurchaseItemNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2415,7 +2409,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>653, 437</value>
+    <value>653, 448</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>669, 444</value>
@@ -2457,6 +2451,6 @@
     <value>PurchaseItemEntry</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>AATM.PresentationLayer.Forms.CFormEntry, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.PresentationLayer.Forms.CFormEntryNew, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

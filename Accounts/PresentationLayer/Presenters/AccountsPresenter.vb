@@ -351,8 +351,9 @@ Namespace PresentationLayer.Presenters
                                 GlobalVariables.Mapper.Map(model, bo)
                                 If Not bo.IsRuleValid(rule) Then
                                     Dim obj As New Object
-                                    dictionary.TryGetValue(rule.Property, obj)
-                                    row.Cells(obj.Name).ErrorText = rule.Error
+                                    If dictionary.TryGetValue(rule.Property, obj) Then
+                                        row.Cells(obj.Name).ErrorText = rule.Error
+                                    End If
                                     errorFound = True
                                 End If
                             End If

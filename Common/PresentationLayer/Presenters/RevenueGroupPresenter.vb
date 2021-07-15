@@ -15,8 +15,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevenueGroupName"
             TreeViewSecondaryField = "RevenueGroupCode"
-            TreeViewParentIdField = "ParentIdNo"
-            ParentViewList = New List(Of TM)
+            ParentFieldName = "ParentIdNo"
         End Sub
 
         Public Function GetLastSortKey(ByVal searchValue As String) As String

@@ -1,6 +1,4 @@
-﻿Imports System.ComponentModel
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
+﻿Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Views.Forms
@@ -13,21 +11,13 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
 
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "User"
-            TvMainFieldName = "FullName"
-            TvSecondaryFieldName = "UserName"
-            SortOrderKey = "FullName"
             FirstControl = TxtUserName
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New UserPresenter(Me)
-
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cacSecurityGroupIdNo.DataSource = PresenterObj.GetLookup("SecurityGroup")
-            cacSecurityLevel.DataSource = PresenterObj.MakeEnumComboList(Of SecurityLevelSelection)
+            CreateDataSource("SecurityGroup", cacSecurityGroupIdNo)
+            CreateEnumDataSource(Of SecurityLevelSelection)(cacSecurityLevel)
         End Sub
 
 #Region "Fields"

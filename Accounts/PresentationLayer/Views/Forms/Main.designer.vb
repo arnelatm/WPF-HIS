@@ -3,7 +3,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     Partial Public Class Main
-        Inherits BfMain
+        Inherits BFMainNew
         ''' <summary>
         ''' Required designer variable.
         ''' </summary>

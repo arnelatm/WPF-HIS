@@ -96,6 +96,7 @@
     <Compile Include="Services\ITblColPropService.vb" />
     <Compile Include="Services\Service.vb" />
     <Compile Include="Services\TblColPropService.vb" />
+    <Compile Include="Services\ServiceLogin.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -140,6 +141,10 @@
     <ProjectReference Include="..\Libraries\HelperLibraries\HelperLibraries.vbproj">
       <Project>{a7ee826e-e3b4-40a7-8754-285b373f4321}</Project>
       <Name>HelperLibraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\MessagingLibrary\MessagingLibrary.vbproj">
+      <Project>{84437202-3E38-4F75-B8C1-4125852FC4FF}</Project>
+      <Name>MessagingLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

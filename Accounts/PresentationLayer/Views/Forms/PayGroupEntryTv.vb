@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -8,22 +7,10 @@ Namespace PresentationLayer.Views.Forms
         Implements IPayGroupView
 
         Public Sub New()
-
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "PayGroup"
-            TvMainFieldName = "PayGroupName"
-            TvSecondaryFieldName = "PayGroupCode"
-            SortOrderKey = "PayGroupName"
-            ParentFieldName = "ParentIdNo"
             FirstControl = txtPayGroupCode
-            PresenterObj = New PayGroupPresenter(Me)
-
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-
         End Sub
 
 #Region "Fields"
@@ -91,19 +78,10 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property SortKey As String Implements IPayGroupView.SortKey
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As String)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboParentIdNo.DataSource = PresenterObj.GetLookup("PayGroup")
+            CreateDataSource("PayGroup", cboParentIdNo)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()

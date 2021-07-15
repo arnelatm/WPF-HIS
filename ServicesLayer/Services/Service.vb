@@ -6,6 +6,7 @@ Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace Services
     ' implementation of IService interface. It can handle different data providers.
@@ -541,6 +542,21 @@ Namespace Services
         'Public Function HashEncryptStringWithSalt(s As String, salt As String) As String
         '    Return HashEncryptString(salt + s)
         'End Function
+
+        Public Function UsePayGroups()
+            Dim retValue = GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
+            If retValue Is Nothing Then
+                Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
+                Dim groupSetting As String = "Payroll"
+                Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+                Return Nothing
+            End If
+            If retValue = "1" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Function
 
 #End Region
 

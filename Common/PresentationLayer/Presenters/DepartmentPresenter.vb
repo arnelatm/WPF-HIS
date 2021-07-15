@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
             TableName = "Department_View"
             ParentFieldName = "ParentIdNo"
             TreeViewMainField = "DepartmentName"
-            TreeViewParentIdField = "ParentIdNo"
+            ParentFieldName = "ParentIdNo"
             TreeViewSecondaryField = "DepartmentCode"
             SortOrderKey = "SortKey"
         End Sub
