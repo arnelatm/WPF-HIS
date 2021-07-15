@@ -22,8 +22,10 @@ Public Class BFMainNew
     Private _parentSecurityObjectIdNo As Int32
     Private _sw As Int16 = 0
     Private _parentIdNo As Int32 = 0
-    Private _myPresenter As UserPresenter
+
+    'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
+
     Protected InitializationMode As Boolean = True
     Protected LtrCultureInfoStr = GlobalVariables.DefaultUnmirroredCultureInfoStr
     Protected RtlCultureInfoStr = GlobalVariables.DefaultMirroredCultureInfoStr

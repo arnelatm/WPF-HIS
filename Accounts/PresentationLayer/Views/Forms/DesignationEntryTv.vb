@@ -10,16 +10,8 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "Designation"
-            TvMainFieldName = "DesignationName"
-            TvSecondaryFieldName = "DesignationCode"
-            SortOrderKey = "DesignationName"
             FirstControl = txtDesignationCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New DesignationPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"
@@ -70,6 +62,17 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #End Region
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"DesignationCode", txtDesignationCode},
+                {"DesignationName", txtDesignationName},
+                {"DesignationNameAra", txtDesignationNameAra},
+                {"IdNo", TxtIdNo},
+                {"Notes", txtNotes}
+                }
+        End Sub
 
     End Class
 

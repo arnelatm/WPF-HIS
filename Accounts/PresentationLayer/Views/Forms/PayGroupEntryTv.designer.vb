@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class PayGroupEntryTv
-        Inherits CFormEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -26,47 +26,51 @@ Namespace PresentationLayer.Views.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayGroupEntryTv))
-        Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPayGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.txtPayGroupName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPayGroupCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.floDataDisplay.SuspendLayout
-        Me.TableLayoutPanel1.SuspendLayout
-        Me.SuspendLayout
-        '
-        'TreeViewTableName
-        '
-        Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-        resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayGroupEntryTv))
+            Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.txtPayGroupName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayGroupCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floDataDisplay.SuspendLayout()
+            Me.TableLayoutPanel1.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'SplitContainer1
+            '
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
             '
             'ImageListTreeView
             '
             Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
             Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
             Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
-            '
-            'TranslatorDAC
-            '
-            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-            '
-            'AppDataDAC
-            '
-            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
             'floDataDisplay
             '
@@ -98,12 +102,17 @@ Namespace PresentationLayer.Views.Forms
             'txtLevelNumber
             '
             Me.txtLevelNumber.BackColor = System.Drawing.Color.White
+            Me.txtLevelNumber.BegFindValue = Nothing
             Me.txtLevelNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtLevelNumber.ComputedValue = False
             Me.txtLevelNumber.CustomFormat = Nothing
             Me.txtLevelNumber.DataBoundControl = True
             Me.txtLevelNumber.DisplayOnly = True
             Me.txtLevelNumber.EditingMode = True
+            Me.txtLevelNumber.EndFindValue = Nothing
+            Me.txtLevelNumber.FieldDescription = Nothing
+            Me.txtLevelNumber.FieldName = Nothing
+            Me.txtLevelNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtLevelNumber.FindEnabled = True
             resources.ApplyResources(Me.txtLevelNumber, "txtLevelNumber")
             Me.txtLevelNumber.ForeColor = System.Drawing.Color.Black
@@ -113,6 +122,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLevelNumber.Name = "txtLevelNumber"
             Me.txtLevelNumber.OldValue = Nothing
             Me.txtLevelNumber.ReadOnly = True
+            Me.txtLevelNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtLevelNumber.Translatable = False
             Me.txtLevelNumber.ValueIsMandatory = True
             '
             'CLabel1
@@ -121,10 +132,12 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Translatable = True
             '
             'txtPayGroupNameAra
             '
             Me.txtPayGroupNameAra.BackColor = System.Drawing.Color.White
+            Me.txtPayGroupNameAra.BegFindValue = Nothing
             Me.txtPayGroupNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayGroupNameAra, 2)
             Me.txtPayGroupNameAra.ComputedValue = False
@@ -132,7 +145,11 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayGroupNameAra.DataBoundControl = True
             resources.ApplyResources(Me.txtPayGroupNameAra, "txtPayGroupNameAra")
             Me.txtPayGroupNameAra.EditingMode = False
+            Me.txtPayGroupNameAra.EndFindValue = Nothing
             Me.txtPayGroupNameAra.EnglishControl = Me.txtPayGroupName
+            Me.txtPayGroupNameAra.FieldDescription = Nothing
+            Me.txtPayGroupNameAra.FieldName = Nothing
+            Me.txtPayGroupNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPayGroupNameAra.FindEnabled = True
             Me.txtPayGroupNameAra.ForeColor = System.Drawing.Color.Black
             Me.txtPayGroupNameAra.LinkedLabel = Nothing
@@ -141,10 +158,13 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayGroupNameAra.Name = "txtPayGroupNameAra"
             Me.txtPayGroupNameAra.OldValue = Nothing
             Me.txtPayGroupNameAra.ReadOnly = True
+            Me.txtPayGroupNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPayGroupNameAra.Translatable = False
             '
             'txtPayGroupName
             '
             Me.txtPayGroupName.BackColor = System.Drawing.Color.White
+            Me.txtPayGroupName.BegFindValue = Nothing
             Me.txtPayGroupName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayGroupName, 2)
             Me.txtPayGroupName.ComputedValue = False
@@ -152,6 +172,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayGroupName.DataBoundControl = True
             resources.ApplyResources(Me.txtPayGroupName, "txtPayGroupName")
             Me.txtPayGroupName.EditingMode = False
+            Me.txtPayGroupName.EndFindValue = Nothing
+            Me.txtPayGroupName.FieldDescription = Nothing
+            Me.txtPayGroupName.FieldName = Nothing
+            Me.txtPayGroupName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPayGroupName.FindEnabled = True
             Me.txtPayGroupName.ForeColor = System.Drawing.Color.Black
             Me.txtPayGroupName.LinkedLabel = Nothing
@@ -160,6 +184,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayGroupName.Name = "txtPayGroupName"
             Me.txtPayGroupName.OldValue = Nothing
             Me.txtPayGroupName.ReadOnly = True
+            Me.txtPayGroupName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPayGroupName.Translatable = False
             Me.txtPayGroupName.ValueIsMandatory = True
             '
             'lblNote
@@ -168,6 +194,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNote.DisplayOnly = True
             Me.lblNote.EditingMode = False
             Me.lblNote.Name = "lblNote"
+            Me.lblNote.Translatable = True
             '
             'lblParentIdNo
             '
@@ -175,6 +202,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblParentIdNo.DisplayOnly = True
             Me.lblParentIdNo.EditingMode = False
             Me.lblParentIdNo.Name = "lblParentIdNo"
+            Me.lblParentIdNo.Translatable = True
             '
             'lblNameAra
             '
@@ -183,6 +211,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNameAra.DisplayOnly = True
             Me.lblNameAra.EditingMode = False
             Me.lblNameAra.Name = "lblNameAra"
+            Me.lblNameAra.Translatable = True
             '
             'lblName
             '
@@ -191,15 +220,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblName.DisplayOnly = True
             Me.lblName.EditingMode = False
             Me.lblName.Name = "lblName"
+            Me.lblName.Translatable = True
             '
             'txtPayGroupCode
             '
             Me.txtPayGroupCode.BackColor = System.Drawing.Color.White
+            Me.txtPayGroupCode.BegFindValue = Nothing
             Me.txtPayGroupCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPayGroupCode.ComputedValue = False
             Me.txtPayGroupCode.CustomFormat = Nothing
             Me.txtPayGroupCode.DataBoundControl = True
             Me.txtPayGroupCode.EditingMode = True
+            Me.txtPayGroupCode.EndFindValue = Nothing
+            Me.txtPayGroupCode.FieldDescription = Nothing
+            Me.txtPayGroupCode.FieldName = Nothing
+            Me.txtPayGroupCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPayGroupCode.FindEnabled = True
             resources.ApplyResources(Me.txtPayGroupCode, "txtPayGroupCode")
             Me.txtPayGroupCode.ForeColor = System.Drawing.Color.Black
@@ -209,17 +244,24 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayGroupCode.Name = "txtPayGroupCode"
             Me.txtPayGroupCode.OldValue = Nothing
             Me.txtPayGroupCode.ReadOnly = True
+            Me.txtPayGroupCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPayGroupCode.Translatable = False
             Me.txtPayGroupCode.ValueIsMandatory = True
             '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
@@ -229,7 +271,9 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'lblIdNo
@@ -238,6 +282,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Translatable = True
             '
             'lblCode
             '
@@ -245,10 +290,12 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode.DisplayOnly = True
             Me.lblCode.EditingMode = False
             Me.lblCode.Name = "lblCode"
+            Me.lblCode.Translatable = True
             '
             'cboParentIdNo
             '
             Me.cboParentIdNo.BackColor = System.Drawing.Color.White
+            Me.cboParentIdNo.BegFindValue = Nothing
             Me.cboParentIdNo.ChangingSearchValueOnly = False
             Me.TableLayoutPanel1.SetColumnSpan(Me.cboParentIdNo, 2)
             Me.cboParentIdNo.CurrentSearchTerm = ""
@@ -256,10 +303,16 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboParentIdNo, "cboParentIdNo")
             Me.cboParentIdNo.EditingMode = True
+            Me.cboParentIdNo.EndFindValue = Nothing
+            Me.cboParentIdNo.FieldDescription = Nothing
+            Me.cboParentIdNo.FieldName = Nothing
             Me.cboParentIdNo.FilterRule = Nothing
+            Me.cboParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboParentIdNo.FindEnabled = False
             Me.cboParentIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboParentIdNo.FormattingEnabled = True
             Me.cboParentIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboParentIdNo.IgnoreCase = False
             Me.cboParentIdNo.LinkedLabel = Me.lblParentIdNo
             Me.cboParentIdNo.Name = "cboParentIdNo"
             Me.cboParentIdNo.OldValue = 0
@@ -272,6 +325,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboParentIdNo.SuggestBoxHeight = 200
             Me.cboParentIdNo.SuggestListOrderRule = Nothing
             Me.cboParentIdNo.TextToSearch = Nothing
+            Me.cboParentIdNo.Translatable = False
             Me.cboParentIdNo.ValueIsMandatory = False
             Me.cboParentIdNo.ValueIsNullable = False
             Me.cboParentIdNo.ValueIsNumeric = False
@@ -280,6 +334,7 @@ Namespace PresentationLayer.Views.Forms
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
             Me.txtNotes.ComputedValue = False
@@ -287,6 +342,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.DataBoundControl = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.EditingMode = True
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Me.lblNote
@@ -294,22 +353,25 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Translatable = False
             '
             'PayGroupEntryTv
             '
             resources.ApplyResources(Me, "$this")
-            Me.Controls.Add(Me.floDataDisplay)
             Me.Name = "PayGroupEntryTv"
-            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
-        Me.TableLayoutPanel1.ResumeLayout(false)
-        Me.TableLayoutPanel1.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.TableLayoutPanel1.ResumeLayout(False)
+            Me.TableLayoutPanel1.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
 
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel

@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -19,16 +18,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "DepositType"
-            TvMainFieldName = "DepositTypeName"
-            TvSecondaryFieldName = "DepositTypeCode"
-            SortOrderKey = "DepositTypeName"
             FirstControl = txtDepositTypeCode
-            PresenterObj = New DepositTypePresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-
         End Sub
 
 #Region "Fields"
@@ -126,9 +116,13 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
-            cboBankChargesAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
-            cboBankChargesVatAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
+            CreateDetailAccountList(cboAccountIdNo)
+            CreateDetailAccountList(cboBankChargesAccountIdNo)
+            CreateDetailAccountList(cboBankChargesVatAccountIdNo)
+        End Sub
+
+        Protected Sub CreateDetailAccountList(cControl As Control)
+            CreateDataSource("Account", cControl, "Detail=1")
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -147,7 +141,7 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Private Sub ChkWithBankCharges_CheckedChanged(sender As Object, e As EventArgs) Handles chkWithBankCharges.CheckedChanged
+        Private Sub ChkWithBankCharges_CheckedChanged(sender As Object, e As EventArgs)
             tlpPaymentType.Visible = False
             If chkWithBankCharges.Checked Then
                 cboBankChargesAccountIdNo.Visible = True

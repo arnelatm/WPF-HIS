@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevCostCenterName"
             TreeViewSecondaryField = "RevCostCenterCode"
-            TreeViewParentIdField = "ParentIdNo"
+            ParentFieldName = "ParentIdNo"
             ParentViewList = New List(Of TM)
         End Sub
 

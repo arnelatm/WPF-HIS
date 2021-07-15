@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class PurchaseItemEntry
-        Inherits CFormEntry
+        Inherits CFormEntryNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _
@@ -60,21 +60,26 @@ Namespace PresentationLayer.Views.Forms
         Me.txtUnit3Ara = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtStdPrice3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout4.SuspendLayout
-        Me.SuspendLayout
-        '
-        'txtPurchaseItemNameAra
-        '
-        Me.txtPurchaseItemNameAra.BackColor = System.Drawing.Color.White
-        Me.txtPurchaseItemNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPurchaseItemNameAra.ComputedValue = false
-        Me.txtPurchaseItemNameAra.CustomFormat = Nothing
-        Me.txtPurchaseItemNameAra.DataBoundControl = true
-        Me.txtPurchaseItemNameAra.EditingMode = false
-        Me.txtPurchaseItemNameAra.EnglishControl = Me.txtPurchaseItemName
+            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout4.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'txtPurchaseItemNameAra
+            '
+            Me.txtPurchaseItemNameAra.BackColor = System.Drawing.Color.White
+            Me.txtPurchaseItemNameAra.BegFindValue = Nothing
+            Me.txtPurchaseItemNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPurchaseItemNameAra.ComputedValue = False
+            Me.txtPurchaseItemNameAra.CustomFormat = Nothing
+            Me.txtPurchaseItemNameAra.DataBoundControl = True
+            Me.txtPurchaseItemNameAra.EditingMode = False
+            Me.txtPurchaseItemNameAra.EndFindValue = Nothing
+            Me.txtPurchaseItemNameAra.EnglishControl = Me.txtPurchaseItemName
+            Me.txtPurchaseItemNameAra.FieldDescription = Nothing
+            Me.txtPurchaseItemNameAra.FieldName = Nothing
+            Me.txtPurchaseItemNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPurchaseItemNameAra.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtPurchaseItemNameAra, True)
             resources.ApplyResources(Me.txtPurchaseItemNameAra, "txtPurchaseItemNameAra")
@@ -85,15 +90,23 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPurchaseItemNameAra.Name = "txtPurchaseItemNameAra"
             Me.txtPurchaseItemNameAra.OldValue = Nothing
             Me.txtPurchaseItemNameAra.ReadOnly = True
+            Me.txtPurchaseItemNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPurchaseItemNameAra.Translatable = False
+            Me.txtPurchaseItemNameAra.ValueIsUnique = True
             '
             'txtPurchaseItemName
             '
             Me.txtPurchaseItemName.BackColor = System.Drawing.Color.White
+            Me.txtPurchaseItemName.BegFindValue = Nothing
             Me.txtPurchaseItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPurchaseItemName.ComputedValue = False
             Me.txtPurchaseItemName.CustomFormat = Nothing
             Me.txtPurchaseItemName.DataBoundControl = True
             Me.txtPurchaseItemName.EditingMode = False
+            Me.txtPurchaseItemName.EndFindValue = Nothing
+            Me.txtPurchaseItemName.FieldDescription = Nothing
+            Me.txtPurchaseItemName.FieldName = Nothing
+            Me.txtPurchaseItemName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPurchaseItemName.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtPurchaseItemName, True)
             resources.ApplyResources(Me.txtPurchaseItemName, "txtPurchaseItemName")
@@ -104,7 +117,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPurchaseItemName.Name = "txtPurchaseItemName"
             Me.txtPurchaseItemName.OldValue = Nothing
             Me.txtPurchaseItemName.ReadOnly = True
+            Me.txtPurchaseItemName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPurchaseItemName.Translatable = False
             Me.txtPurchaseItemName.ValueIsMandatory = True
+            Me.txtPurchaseItemName.ValueIsUnique = True
             '
             'lblPurchaseItemName
             '
@@ -112,6 +128,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPurchaseItemName.EditingMode = False
             resources.ApplyResources(Me.lblPurchaseItemName, "lblPurchaseItemName")
             Me.lblPurchaseItemName.Name = "lblPurchaseItemName"
+            Me.lblPurchaseItemName.Translatable = True
             '
             'lblPurchaseItemNameAra
             '
@@ -119,15 +136,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPurchaseItemNameAra.EditingMode = False
             resources.ApplyResources(Me.lblPurchaseItemNameAra, "lblPurchaseItemNameAra")
             Me.lblPurchaseItemNameAra.Name = "lblPurchaseItemNameAra"
+            Me.lblPurchaseItemNameAra.Translatable = True
             '
             'txtPurchaseItemCode
             '
             Me.txtPurchaseItemCode.BackColor = System.Drawing.Color.White
+            Me.txtPurchaseItemCode.BegFindValue = Nothing
             Me.txtPurchaseItemCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPurchaseItemCode.ComputedValue = False
             Me.txtPurchaseItemCode.CustomFormat = Nothing
             Me.txtPurchaseItemCode.DataBoundControl = True
             Me.txtPurchaseItemCode.EditingMode = True
+            Me.txtPurchaseItemCode.EndFindValue = Nothing
+            Me.txtPurchaseItemCode.FieldDescription = Nothing
+            Me.txtPurchaseItemCode.FieldName = Nothing
+            Me.txtPurchaseItemCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPurchaseItemCode.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtPurchaseItemCode, True)
             resources.ApplyResources(Me.txtPurchaseItemCode, "txtPurchaseItemCode")
@@ -138,7 +161,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPurchaseItemCode.Name = "txtPurchaseItemCode"
             Me.txtPurchaseItemCode.OldValue = Nothing
             Me.txtPurchaseItemCode.ReadOnly = True
+            Me.txtPurchaseItemCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPurchaseItemCode.Translatable = False
             Me.txtPurchaseItemCode.ValueIsMandatory = True
+            Me.txtPurchaseItemCode.ValueIsUnique = True
             '
             'lblPurchaseItemCode
             '
@@ -146,15 +172,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPurchaseItemCode.EditingMode = False
             resources.ApplyResources(Me.lblPurchaseItemCode, "lblPurchaseItemCode")
             Me.lblPurchaseItemCode.Name = "lblPurchaseItemCode"
+            Me.lblPurchaseItemCode.Translatable = True
             '
             'txtDateCreated
             '
             Me.txtDateCreated.BackColor = System.Drawing.Color.White
+            Me.txtDateCreated.BegFindValue = Nothing
             Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtDateCreated.ComputedValue = False
             Me.txtDateCreated.CustomFormat = Nothing
             Me.txtDateCreated.DataBoundControl = True
             Me.txtDateCreated.EditingMode = False
+            Me.txtDateCreated.EndFindValue = Nothing
+            Me.txtDateCreated.FieldDescription = Nothing
+            Me.txtDateCreated.FieldName = Nothing
+            Me.txtDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtDateCreated.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtDateCreated, True)
             resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
@@ -165,6 +197,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.Name = "txtDateCreated"
             Me.txtDateCreated.OldValue = Nothing
             Me.txtDateCreated.ReadOnly = True
+            Me.txtDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDateCreated.Translatable = False
             Me.txtDateCreated.ValueIsMandatory = True
             '
             'lblDateCreated
@@ -174,6 +208,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated.EditingMode = False
             resources.ApplyResources(Me.lblDateCreated, "lblDateCreated")
             Me.lblDateCreated.Name = "lblDateCreated"
+            Me.lblDateCreated.Translatable = True
             '
             'CFlowLayout4
             '
@@ -222,16 +257,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.EditingMode = False
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Translatable = True
             '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = True
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
@@ -242,6 +283,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'lblCategoryIdNo
@@ -250,19 +293,27 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCategoryIdNo.EditingMode = False
             resources.ApplyResources(Me.lblCategoryIdNo, "lblCategoryIdNo")
             Me.lblCategoryIdNo.Name = "lblCategoryIdNo"
+            Me.lblCategoryIdNo.Translatable = True
             '
             'cboProductCategoryIdNo
             '
             Me.cboProductCategoryIdNo.BackColor = System.Drawing.Color.White
+            Me.cboProductCategoryIdNo.BegFindValue = Nothing
             Me.cboProductCategoryIdNo.ChangingSearchValueOnly = False
             Me.cboProductCategoryIdNo.CurrentSearchTerm = ""
             Me.cboProductCategoryIdNo.DefaultValue = ""
             Me.cboProductCategoryIdNo.DisplayMember = "Name"
             Me.cboProductCategoryIdNo.EditingMode = False
+            Me.cboProductCategoryIdNo.EndFindValue = Nothing
+            Me.cboProductCategoryIdNo.FieldDescription = Nothing
+            Me.cboProductCategoryIdNo.FieldName = Nothing
             Me.cboProductCategoryIdNo.FilterRule = Nothing
+            Me.cboProductCategoryIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboProductCategoryIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboProductCategoryIdNo, "cboProductCategoryIdNo")
             Me.cboProductCategoryIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboProductCategoryIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboProductCategoryIdNo.IgnoreCase = False
             Me.cboProductCategoryIdNo.LinkedLabel = Me.lblCategoryIdNo
             Me.cboProductCategoryIdNo.Name = "cboProductCategoryIdNo"
             Me.cboProductCategoryIdNo.OldValue = 0
@@ -275,6 +326,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboProductCategoryIdNo.SuggestBoxHeight = 200
             Me.cboProductCategoryIdNo.SuggestListOrderRule = Nothing
             Me.cboProductCategoryIdNo.TextToSearch = Nothing
+            Me.cboProductCategoryIdNo.Translatable = False
             Me.cboProductCategoryIdNo.ValueIsMandatory = False
             Me.cboProductCategoryIdNo.ValueIsNullable = False
             Me.cboProductCategoryIdNo.ValueIsNumeric = False
@@ -286,19 +338,27 @@ Namespace PresentationLayer.Views.Forms
             Me.lblGlAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.lblGlAccountIdNo, "lblGlAccountIdNo")
             Me.lblGlAccountIdNo.Name = "lblGlAccountIdNo"
+            Me.lblGlAccountIdNo.Translatable = True
             '
             'cboGlAccountIdNo
             '
             Me.cboGlAccountIdNo.BackColor = System.Drawing.Color.White
+            Me.cboGlAccountIdNo.BegFindValue = Nothing
             Me.cboGlAccountIdNo.ChangingSearchValueOnly = False
             Me.cboGlAccountIdNo.CurrentSearchTerm = ""
             Me.cboGlAccountIdNo.DefaultValue = ""
             Me.cboGlAccountIdNo.DisplayMember = "Name"
             Me.cboGlAccountIdNo.EditingMode = False
+            Me.cboGlAccountIdNo.EndFindValue = Nothing
+            Me.cboGlAccountIdNo.FieldDescription = Nothing
+            Me.cboGlAccountIdNo.FieldName = Nothing
             Me.cboGlAccountIdNo.FilterRule = Nothing
+            Me.cboGlAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboGlAccountIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboGlAccountIdNo, "cboGlAccountIdNo")
             Me.cboGlAccountIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboGlAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboGlAccountIdNo.IgnoreCase = False
             Me.cboGlAccountIdNo.LinkedLabel = Me.lblGlAccountIdNo
             Me.cboGlAccountIdNo.Name = "cboGlAccountIdNo"
             Me.cboGlAccountIdNo.OldValue = 0
@@ -311,6 +371,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGlAccountIdNo.SuggestBoxHeight = 200
             Me.cboGlAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboGlAccountIdNo.TextToSearch = Nothing
+            Me.cboGlAccountIdNo.Translatable = False
             Me.cboGlAccountIdNo.ValueIsMandatory = False
             Me.cboGlAccountIdNo.ValueIsNullable = False
             Me.cboGlAccountIdNo.ValueIsNumeric = False
@@ -322,19 +383,27 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatAccountIdNo.EditingMode = False
             resources.ApplyResources(Me.lblVatAccountIdNo, "lblVatAccountIdNo")
             Me.lblVatAccountIdNo.Name = "lblVatAccountIdNo"
+            Me.lblVatAccountIdNo.Translatable = True
             '
             'cboVatAccountIdNo
             '
             Me.cboVatAccountIdNo.BackColor = System.Drawing.Color.White
+            Me.cboVatAccountIdNo.BegFindValue = Nothing
             Me.cboVatAccountIdNo.ChangingSearchValueOnly = False
             Me.cboVatAccountIdNo.CurrentSearchTerm = ""
             Me.cboVatAccountIdNo.DefaultValue = ""
             Me.cboVatAccountIdNo.DisplayMember = "Name"
             Me.cboVatAccountIdNo.EditingMode = False
+            Me.cboVatAccountIdNo.EndFindValue = Nothing
+            Me.cboVatAccountIdNo.FieldDescription = Nothing
+            Me.cboVatAccountIdNo.FieldName = Nothing
             Me.cboVatAccountIdNo.FilterRule = Nothing
+            Me.cboVatAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboVatAccountIdNo.FindEnabled = False
             resources.ApplyResources(Me.cboVatAccountIdNo, "cboVatAccountIdNo")
             Me.cboVatAccountIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboVatAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboVatAccountIdNo.IgnoreCase = False
             Me.cboVatAccountIdNo.LinkedLabel = Me.lblVatAccountIdNo
             Me.cboVatAccountIdNo.Name = "cboVatAccountIdNo"
             Me.cboVatAccountIdNo.OldValue = 0
@@ -347,6 +416,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatAccountIdNo.SuggestBoxHeight = 200
             Me.cboVatAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboVatAccountIdNo.TextToSearch = Nothing
+            Me.cboVatAccountIdNo.Translatable = False
             Me.cboVatAccountIdNo.ValueIsMandatory = False
             Me.cboVatAccountIdNo.ValueIsNullable = False
             Me.cboVatAccountIdNo.ValueIsNumeric = False
@@ -358,6 +428,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel4.EditingMode = False
             resources.ApplyResources(Me.CLabel4, "CLabel4")
             Me.CLabel4.Name = "CLabel4"
+            Me.CLabel4.Translatable = True
             '
             'lblUnit
             '
@@ -365,6 +436,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUnit.EditingMode = False
             resources.ApplyResources(Me.lblUnit, "lblUnit")
             Me.lblUnit.Name = "lblUnit"
+            Me.lblUnit.Translatable = True
             '
             'lblUnitArabic
             '
@@ -372,6 +444,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUnitArabic.EditingMode = False
             resources.ApplyResources(Me.lblUnitArabic, "lblUnitArabic")
             Me.lblUnitArabic.Name = "lblUnitArabic"
+            Me.lblUnitArabic.Translatable = True
             '
             'lblUnitStdPrice
             '
@@ -380,6 +453,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.SetFlowBreak(Me.lblUnitStdPrice, True)
             resources.ApplyResources(Me.lblUnitStdPrice, "lblUnitStdPrice")
             Me.lblUnitStdPrice.Name = "lblUnitStdPrice"
+            Me.lblUnitStdPrice.Translatable = True
             '
             'lblUnit1
             '
@@ -387,15 +461,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUnit1.EditingMode = False
             resources.ApplyResources(Me.lblUnit1, "lblUnit1")
             Me.lblUnit1.Name = "lblUnit1"
+            Me.lblUnit1.Translatable = True
             '
             'txtUnit1
             '
             Me.txtUnit1.BackColor = System.Drawing.Color.White
+            Me.txtUnit1.BegFindValue = Nothing
             Me.txtUnit1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtUnit1.ComputedValue = False
             Me.txtUnit1.CustomFormat = Nothing
             Me.txtUnit1.DataBoundControl = True
             Me.txtUnit1.EditingMode = True
+            Me.txtUnit1.EndFindValue = Nothing
+            Me.txtUnit1.FieldDescription = Nothing
+            Me.txtUnit1.FieldName = Nothing
+            Me.txtUnit1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtUnit1.FindEnabled = True
             resources.ApplyResources(Me.txtUnit1, "txtUnit1")
             Me.txtUnit1.ForeColor = System.Drawing.Color.Black
@@ -405,17 +485,24 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnit1.Name = "txtUnit1"
             Me.txtUnit1.OldValue = Nothing
             Me.txtUnit1.ReadOnly = True
+            Me.txtUnit1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtUnit1.Translatable = False
             Me.txtUnit1.ValueIsMandatory = True
             '
             'txtUnit1Ara
             '
             Me.txtUnit1Ara.BackColor = System.Drawing.Color.White
+            Me.txtUnit1Ara.BegFindValue = Nothing
             Me.txtUnit1Ara.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtUnit1Ara.ComputedValue = False
             Me.txtUnit1Ara.CustomFormat = Nothing
             Me.txtUnit1Ara.DataBoundControl = True
             Me.txtUnit1Ara.EditingMode = False
+            Me.txtUnit1Ara.EndFindValue = Nothing
             Me.txtUnit1Ara.EnglishControl = Me.txtUnit1
+            Me.txtUnit1Ara.FieldDescription = Nothing
+            Me.txtUnit1Ara.FieldName = Nothing
+            Me.txtUnit1Ara.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtUnit1Ara.FindEnabled = True
             resources.ApplyResources(Me.txtUnit1Ara, "txtUnit1Ara")
             Me.txtUnit1Ara.ForeColor = System.Drawing.Color.Black
@@ -425,15 +512,22 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnit1Ara.Name = "txtUnit1Ara"
             Me.txtUnit1Ara.OldValue = Nothing
             Me.txtUnit1Ara.ReadOnly = True
+            Me.txtUnit1Ara.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtUnit1Ara.Translatable = False
             '
             'txtStdPrice1
             '
             Me.txtStdPrice1.BackColor = System.Drawing.Color.White
+            Me.txtStdPrice1.BegFindValue = Nothing
             Me.txtStdPrice1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtStdPrice1.ComputedValue = False
             Me.txtStdPrice1.CustomFormat = Nothing
             Me.txtStdPrice1.DataBoundControl = True
             Me.txtStdPrice1.EditingMode = True
+            Me.txtStdPrice1.EndFindValue = Nothing
+            Me.txtStdPrice1.FieldDescription = Nothing
+            Me.txtStdPrice1.FieldName = Nothing
+            Me.txtStdPrice1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtStdPrice1.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtStdPrice1, True)
             resources.ApplyResources(Me.txtStdPrice1, "txtStdPrice1")
@@ -444,6 +538,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtStdPrice1.Name = "txtStdPrice1"
             Me.txtStdPrice1.OldValue = Nothing
             Me.txtStdPrice1.ReadOnly = True
+            Me.txtStdPrice1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtStdPrice1.Translatable = False
             Me.txtStdPrice1.ValueIsMandatory = True
             Me.txtStdPrice1.ValueIsNumeric = True
             '
@@ -453,15 +549,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUnit2.EditingMode = False
             resources.ApplyResources(Me.lblUnit2, "lblUnit2")
             Me.lblUnit2.Name = "lblUnit2"
+            Me.lblUnit2.Translatable = True
             '
             'txtUnit2
             '
             Me.txtUnit2.BackColor = System.Drawing.Color.White
+            Me.txtUnit2.BegFindValue = Nothing
             Me.txtUnit2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtUnit2.ComputedValue = False
             Me.txtUnit2.CustomFormat = Nothing
             Me.txtUnit2.DataBoundControl = True
             Me.txtUnit2.EditingMode = True
+            Me.txtUnit2.EndFindValue = Nothing
+            Me.txtUnit2.FieldDescription = Nothing
+            Me.txtUnit2.FieldName = Nothing
+            Me.txtUnit2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtUnit2.FindEnabled = True
             resources.ApplyResources(Me.txtUnit2, "txtUnit2")
             Me.txtUnit2.ForeColor = System.Drawing.Color.Black
@@ -471,17 +573,24 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnit2.Name = "txtUnit2"
             Me.txtUnit2.OldValue = Nothing
             Me.txtUnit2.ReadOnly = True
+            Me.txtUnit2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtUnit2.Translatable = False
             Me.txtUnit2.ValueIsMandatory = True
             '
             'txtUnit2Ara
             '
             Me.txtUnit2Ara.BackColor = System.Drawing.Color.White
+            Me.txtUnit2Ara.BegFindValue = Nothing
             Me.txtUnit2Ara.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtUnit2Ara.ComputedValue = False
             Me.txtUnit2Ara.CustomFormat = Nothing
             Me.txtUnit2Ara.DataBoundControl = True
             Me.txtUnit2Ara.EditingMode = False
+            Me.txtUnit2Ara.EndFindValue = Nothing
             Me.txtUnit2Ara.EnglishControl = Me.txtUnit2
+            Me.txtUnit2Ara.FieldDescription = Nothing
+            Me.txtUnit2Ara.FieldName = Nothing
+            Me.txtUnit2Ara.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtUnit2Ara.FindEnabled = True
             resources.ApplyResources(Me.txtUnit2Ara, "txtUnit2Ara")
             Me.txtUnit2Ara.ForeColor = System.Drawing.Color.Black
@@ -491,15 +600,22 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnit2Ara.Name = "txtUnit2Ara"
             Me.txtUnit2Ara.OldValue = Nothing
             Me.txtUnit2Ara.ReadOnly = True
+            Me.txtUnit2Ara.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtUnit2Ara.Translatable = False
             '
             'txtStdPrice2
             '
             Me.txtStdPrice2.BackColor = System.Drawing.Color.White
+            Me.txtStdPrice2.BegFindValue = Nothing
             Me.txtStdPrice2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtStdPrice2.ComputedValue = False
             Me.txtStdPrice2.CustomFormat = Nothing
             Me.txtStdPrice2.DataBoundControl = True
             Me.txtStdPrice2.EditingMode = True
+            Me.txtStdPrice2.EndFindValue = Nothing
+            Me.txtStdPrice2.FieldDescription = Nothing
+            Me.txtStdPrice2.FieldName = Nothing
+            Me.txtStdPrice2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtStdPrice2.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtStdPrice2, True)
             resources.ApplyResources(Me.txtStdPrice2, "txtStdPrice2")
@@ -510,6 +626,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtStdPrice2.Name = "txtStdPrice2"
             Me.txtStdPrice2.OldValue = Nothing
             Me.txtStdPrice2.ReadOnly = True
+            Me.txtStdPrice2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtStdPrice2.Translatable = False
             Me.txtStdPrice2.ValueIsMandatory = True
             Me.txtStdPrice2.ValueIsNumeric = True
             '
@@ -519,15 +637,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUnit3.EditingMode = False
             resources.ApplyResources(Me.lblUnit3, "lblUnit3")
             Me.lblUnit3.Name = "lblUnit3"
+            Me.lblUnit3.Translatable = True
             '
             'txtUnit3
             '
             Me.txtUnit3.BackColor = System.Drawing.Color.White
+            Me.txtUnit3.BegFindValue = Nothing
             Me.txtUnit3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtUnit3.ComputedValue = False
             Me.txtUnit3.CustomFormat = Nothing
             Me.txtUnit3.DataBoundControl = True
             Me.txtUnit3.EditingMode = True
+            Me.txtUnit3.EndFindValue = Nothing
+            Me.txtUnit3.FieldDescription = Nothing
+            Me.txtUnit3.FieldName = Nothing
+            Me.txtUnit3.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtUnit3.FindEnabled = True
             resources.ApplyResources(Me.txtUnit3, "txtUnit3")
             Me.txtUnit3.ForeColor = System.Drawing.Color.Black
@@ -537,17 +661,24 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnit3.Name = "txtUnit3"
             Me.txtUnit3.OldValue = Nothing
             Me.txtUnit3.ReadOnly = True
+            Me.txtUnit3.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtUnit3.Translatable = False
             Me.txtUnit3.ValueIsMandatory = True
             '
             'txtUnit3Ara
             '
             Me.txtUnit3Ara.BackColor = System.Drawing.Color.White
+            Me.txtUnit3Ara.BegFindValue = Nothing
             Me.txtUnit3Ara.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtUnit3Ara.ComputedValue = False
             Me.txtUnit3Ara.CustomFormat = Nothing
             Me.txtUnit3Ara.DataBoundControl = True
             Me.txtUnit3Ara.EditingMode = False
+            Me.txtUnit3Ara.EndFindValue = Nothing
             Me.txtUnit3Ara.EnglishControl = Me.txtUnit3
+            Me.txtUnit3Ara.FieldDescription = Nothing
+            Me.txtUnit3Ara.FieldName = Nothing
+            Me.txtUnit3Ara.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtUnit3Ara.FindEnabled = True
             resources.ApplyResources(Me.txtUnit3Ara, "txtUnit3Ara")
             Me.txtUnit3Ara.ForeColor = System.Drawing.Color.Black
@@ -557,15 +688,22 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnit3Ara.Name = "txtUnit3Ara"
             Me.txtUnit3Ara.OldValue = Nothing
             Me.txtUnit3Ara.ReadOnly = True
+            Me.txtUnit3Ara.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtUnit3Ara.Translatable = False
             '
             'txtStdPrice3
             '
             Me.txtStdPrice3.BackColor = System.Drawing.Color.White
+            Me.txtStdPrice3.BegFindValue = Nothing
             Me.txtStdPrice3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtStdPrice3.ComputedValue = False
             Me.txtStdPrice3.CustomFormat = Nothing
             Me.txtStdPrice3.DataBoundControl = True
             Me.txtStdPrice3.EditingMode = True
+            Me.txtStdPrice3.EndFindValue = Nothing
+            Me.txtStdPrice3.FieldDescription = Nothing
+            Me.txtStdPrice3.FieldName = Nothing
+            Me.txtStdPrice3.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtStdPrice3.FindEnabled = True
             Me.CFlowLayout4.SetFlowBreak(Me.txtStdPrice3, True)
             resources.ApplyResources(Me.txtStdPrice3, "txtStdPrice3")
@@ -576,6 +714,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtStdPrice3.Name = "txtStdPrice3"
             Me.txtStdPrice3.OldValue = Nothing
             Me.txtStdPrice3.ReadOnly = True
+            Me.txtStdPrice3.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtStdPrice3.Translatable = False
             Me.txtStdPrice3.ValueIsMandatory = True
             Me.txtStdPrice3.ValueIsNumeric = True
             '
@@ -585,29 +725,37 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCancelled.EditingMode = False
             resources.ApplyResources(Me.lblCancelled, "lblCancelled")
             Me.lblCancelled.Name = "lblCancelled"
+            Me.lblCancelled.Translatable = True
             '
             'chkActive
             '
-            resources.ApplyResources(Me.chkActive, "chkActive")
-            Me.chkActive.BackColor = System.Drawing.Color.White
-            Me.chkActive.Checked = True
-            Me.chkActive.CheckState = System.Windows.Forms.CheckState.Checked
+            Me.chkActive.BackColor = System.Drawing.Color.Transparent
+            Me.chkActive.BegFindValue = Nothing
             Me.chkActive.DisplayOnly = False
             Me.chkActive.EditingMode = True
+            Me.chkActive.EndFindValue = Nothing
+            Me.chkActive.FieldDescription = Nothing
+            Me.chkActive.FieldName = Nothing
+            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkActive.FindEnabled = False
+            resources.ApplyResources(Me.chkActive, "chkActive")
             Me.CFlowLayout4.SetFlowBreak(Me.chkActive, True)
-            Me.chkActive.ForeColor = System.Drawing.Color.Black
-            Me.chkActive.LinkedLabel = Me.lblCancelled
+            Me.chkActive.IFindableControl_FindEnabled = False
+            Me.chkActive.IgnoreCase = False
+            Me.chkActive.LinkedLabel = Nothing
             Me.chkActive.Name = "chkActive"
             Me.chkActive.NoLabel = True
             Me.chkActive.OldValue = Nothing
-            Me.chkActive.UseVisualStyleBackColor = false
-        '
-        'PurchaseItemEntry
-        '
-        resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.CFlowLayout4)
-        Me.Name = "PurchaseItemEntry"
-        Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
+            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkActive.Translatable = False
+            Me.chkActive.UseVisualStyleBackColor = False
+            '
+            'PurchaseItemEntry
+            '
+            resources.ApplyResources(Me, "$this")
+            Me.Controls.Add(Me.CFlowLayout4)
+            Me.Name = "PurchaseItemEntry"
+            Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout4.ResumeLayout(false)
@@ -648,9 +796,9 @@ End Sub
         Friend WithEvents txtUnit2Ara As CTextBoxArabic
         Friend WithEvents txtUnit3Ara As CTextBoxArabic
         Friend WithEvents lblCancelled As CLabel
-        Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblUnit1 As CLabel
         Friend WithEvents txtUnit1 As CTextBox
         Friend WithEvents cboProductCategoryIdNo As CaComboBox
+        Friend WithEvents chkActive As CCheckBox
     End Class
 End NameSpace

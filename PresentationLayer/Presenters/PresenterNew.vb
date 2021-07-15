@@ -1135,8 +1135,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         For Each rule In rules
             Dim control As Control = Nothing
             If Not rule.Valid Then
-                MainFieldsDictionary.TryGetValue(rule.Property, control)
-                FormatError(control, rule.Error)
+                If MainFieldsDictionary.TryGetValue(rule.Property, control) Then
+                    FormatError(control, rule.Error)
+                End If
             End If
         Next
         Return retValue
@@ -1400,8 +1401,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Dim rules = GetBizObjectRules()
         For Each rule In rules
             Dim control As Control = Nothing
-            MainFieldsDictionary.TryGetValue(rule.Property, control)
-            MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
+            If MainFieldsDictionary.TryGetValue(rule.Property, control) Then
+                MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
+            End If
         Next
         Dim tableColumnPropertyList As List(Of TblColPropModel)
         tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
@@ -1985,13 +1987,21 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     'End Sub
 
     Public Sub OnGetDataSourceHandler(ByRef eventType As GetDataSource) Implements ISubscriber(Of GetDataSource).OnEventHandler
+        SetDataSource(eventType.TableName, eventType.Control, eventType.Fields, eventType.SortKey, eventType.Filter)
+    End Sub
+
+    Protected Sub SetDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
         Dim data As List(Of ClassesLibrary.LookupData)
-        If eventType.Fields Is Nothing Then
-            data = GetLookup(eventType.TableName)
+        If dataFields Is Nothing Then
+            data = GetLookup(dataTableName)
         Else
-            data = GetLookup(eventType.TableName, eventType.SortKey, eventType.Fields, eventType.Filter)
+            data = GetLookup(dataTableName, sortKey, dataFields, filter)
         End If
-        LateBinding.SetProperty(eventType.Control, "DataSource", {data})
+        SetControlDataSource(control, data)
+    End Sub
+
+    Protected Sub SetControlDataSource(cControl As Control, data As List(Of ClassesLibrary.LookupData))
+        LateBinding.SetProperty(cControl, "DataSource", {data})
     End Sub
 
     Public Sub OnGetLookupDataRequestedHandler(ByRef eventType As GetLookupDataRequested) Implements ISubscriber(Of GetLookupDataRequested).OnEventHandler
@@ -2089,7 +2099,6 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Protected TreeViewList
     Protected TreeViewMainField As String
-    Protected TreeViewParentIdField As String
     Protected TreeViewSecondaryField As String
     Protected ParentFieldName As String = ""
     Protected WithEvents FormTreeView As TreeView
@@ -2125,7 +2134,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Dim cModel As TM = Activator.CreateInstance(GetType(TM))
         Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
-        If TreeViewParentIdField Is Nothing OrElse TreeViewParentIdField = "" Then
+        If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
                 Return Service.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
             Else
@@ -2134,9 +2143,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Else
             newSortOrderKey = "SortKey"
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Service.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField})
+                Return Service.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, ParentFieldName})
             Else
-                Return Service.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewParentIdField, TreeViewSecondaryField})
+                Return Service.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, ParentFieldName, TreeViewSecondaryField})
             End If
         End If
     End Function

@@ -4,6 +4,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
+Imports AATM.ServicesLayer.Services
 
 Public Class LoginEntry
     Implements IUserView
@@ -20,12 +21,13 @@ Public Class LoginEntry
     ' The Presenter
     Private _loginOk As Boolean
 
-    Private ReadOnly _myPresenter
+    Private _service As Object
 
     Public Sub New(changePassword As Boolean)
 
         ' This call is required by the designer.
         InitializeComponent()
+        _service = New Service("User")
         MainTableName = "User"
         If changePassword Then
             _changingPassword = True
@@ -46,7 +48,6 @@ Public Class LoginEntry
             textBoxUserName.Text = UserName
         End If
         chkSaveUserNameAndPassword.Checked = _rememberPassword
-        _myPresenter = New UserPresenter(Me)
         If _changingPassword Then
             textNewPassword.Visible = True
             textConfirmation.Visible = True
@@ -112,12 +113,13 @@ Public Class LoginEntry
     Private Sub Btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
         Try
             _oterkis = textBoxPassword.Text
-            If _myPresenter.Login() Then
+            Dim serviceLogin As New ServiceLogin
+            If serviceLogin.Login(UserName, Password) Then
                 _loginOk = True
                 If Not _changingPassword Then
                     AfterSuccessfulLogin()
                 Else
-                    If _myPresenter.SaveNewPassword(GlobalVariables.UserIdNo, textNewPassword.Text, textConfirmation.Text) > 0 Then
+                    If _service.SaveNewPassword(GlobalVariables.UserIdNo, textNewPassword.Text, textConfirmation.Text) > 0 Then
                         textBoxPassword = textNewPassword
                         AfterSuccessfulLogin()
                     End If

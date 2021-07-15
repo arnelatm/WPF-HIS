@@ -24,7 +24,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
         SortOrderKey = "SecurityGroupName"
         TreeViewMainField = "SecurityGroupName"
         TreeViewSecondaryField = "SecurityGroupCode"
-        TreeViewParentIdField = "ParentIdNo"
+        ParentFieldName = "ParentIdNo"
 
         DtInsertTable.Columns.Add("Editable", GetType(Boolean))
         DtInsertTable.Columns.Add("SecurityGroupIdNo", GetType(Int16))
@@ -63,7 +63,6 @@ Public Class SecurityGroupPresenter(Of TM As New)
             End If
         Next
     End Sub
-
 
     Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
         Dim passedValue As Int32 = retVal

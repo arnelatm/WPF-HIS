@@ -7,9 +7,9 @@ Namespace PresentationLayer.Views.Forms
         Implements IRevenueGroupView
 
         Public Sub New()
+            MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            ParentFieldName = "ParentIdNo"
             FirstControl = txtRevenueGroupCode
             ' Add any initialization after the InitializeComponent() call.
         End Sub

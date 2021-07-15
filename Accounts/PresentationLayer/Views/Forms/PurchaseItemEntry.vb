@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -16,13 +15,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "PurchaseItem"
-            SortOrderKey = "IdNo"
             FirstControl = cboProductCategoryIdNo
-            PresenterObj = New PurchaseItemPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-
         End Sub
 
         Public Property DateCreated As DateTime? Implements IPurchaseItemView.DateCreated
@@ -44,11 +37,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int32 Implements IPurchaseItemView.IdNo
             Get
-                If TxtIdNo.Text <> "" Then
-                    Return Convert.ToInt16(TxtIdNo.Text)
-                Else
-                    Return 0
-                End If
+                Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)

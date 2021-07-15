@@ -1,47 +1,41 @@
-﻿Imports AATM.Libraries
-Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views.Interfaces
+Imports AATM.ServicesLayer.Services
 
-Public Class UserPresenter
-    Inherits Presenter(Of IUserView, UserModel)
+Public Class UserPresenter(Of TM As New)
+    Inherits PresenterNew(Of IUserView, TM)
 
-    Public ParentViewList As List(Of UserModel)
+    Public ParentViewList As List(Of TM)
 
     Public Sub New(view As IUserView)
         MyBase.New(view)
-        ModelOfPresenter = New Model("User")
+        Service = New Service("User")
         TableName = "User"
         SortOrderKey = "FullName"
         TreeViewMainField = "FullName"
         TreeViewSecondaryField = "UserName"
-        OriginalModel = New UserModel()
-        DataModel = New UserModel
-        TreeViewList = New List(Of UserModel)
-        ParentViewList = New List(Of UserModel)
-        Ea = New EventAggregator()
-        Ea.SubscribeEvent(Me)
     End Sub
 
     Public Function Login() As Boolean
         Dim loginOk As Boolean
-        GlobalVariables.Mapper.Map(View, DataModel)
-        loginOk = DataModel.Login()
-        GlobalVariables.Mapper.Map(DataModel, View)
+        Dim userModel = New TM
+        GlobalVariables.Mapper.Map(View, userModel)
+        loginOk = Service.Login()
+        GlobalVariables.Mapper.Map(userModel, View)
         Return loginOk
     End Function
 
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-        View.Password = DataModel.EncryptPassword(View.IdNo, View.Password)
+        View.Password = Service.EncryptPassword(View.IdNo, View.Password)
     End Sub
 
     Private Sub OnSuccessfulAdd(ByRef newIdNo As Int32) Handles MyBase.RecordAddedSuccessfully
         Dim ePassword As String
-        ePassword = DataModel.EncryptPassword(newIdNo, View.Password)
+        ePassword = Service.EncryptPassword(newIdNo, View.Password)
         If ePassword IsNot Nothing Then
             View.Password = ePassword
-            Dim userModel As New UserModel
+            Dim userModel As New TM
             GlobalVariables.Mapper.Map(View, userModel)
             If UpdateRecord(userModel) <= 0 Then
                 Messaging.Show(True, "MsgPasswordNotSaved", "Password not saved")

@@ -1,19 +1,21 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PayGroupPresenter
-        Inherits AccountsPresenter(Of IPayGroupView, PayGroupModel)
+    Public Class PayGroupPresenter(Of TM As New)
+        Inherits PresenterNew(Of IPayGroupView, TM)
 
-        Public Sub New(view As IPayGroupView)
-            MyBase.New(view)
-            TreeViewParentIdField = "ParentIdNo"
-            InitializerWithTv("PayGroup")
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+        Public Sub New(itemView As IPayGroupView)
+            MyBase.New(itemView)
+            Service = New ServiceAccounts("PayGroup")
+            TableName = "PayGroup_View"
+            TreeViewMainField = "PayGroupName"
+            TreeViewSecondaryField = "PayGroupCode"
+            SortOrderKey = "SortKey"
+            ParentFieldName = "ParentIdNo"
         End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean

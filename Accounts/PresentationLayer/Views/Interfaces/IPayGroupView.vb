@@ -10,7 +10,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayGroupCode As String
         Property PayGroupName As String
         Property PayGroupNameAra As String
-        Property SortKey As String
         Property Notes As String
     End Interface
 

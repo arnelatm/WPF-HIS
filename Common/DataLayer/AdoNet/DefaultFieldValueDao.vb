@@ -14,7 +14,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As DefaultFieldValue Implements IDaoAll(Of DefaultFieldValue).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, SystemViewIdNo, SystemViewName, SystemViewNameAra, FieldName, DataType, Length, DecimalPart, LinkedTable, LinkedField, DefaultValue" &
+                    " SELECT IdNo, SystemViewIdNo, FieldName, DataType, Length, DecimalPart, LinkedTable, LinkedField, DefaultValue" &
                     "   FROM [DefaultFieldValue_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "FieldName"
             End If
             Dim sql As String =
-                    " SELECT IdNo, SystemViewIdNo, SystemViewName, SystemViewNameAra, FieldName, DataType, Length" &
+                    " SELECT IdNo, SystemViewIdNo, ViewName, FieldName, DataType, Length" &
                     "   FROM [DefaultFieldValue_View] " & "order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
         End Function
@@ -61,8 +61,6 @@ Namespace DataLayer.AdoNet
             New DefaultFieldValue() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .SystemViewIdNo = Extensions.AsInt(Of Int16)(reader("SystemViewIdNo")),
-            .SystemViewName = Extensions.AsString(reader("SystemViewName")),
-            .SystemViewNameAra = Extensions.AsString(reader("SystemViewNameAra")),
             .FieldName = Extensions.AsString(reader("FieldName")),
             .DataType = Extensions.AsInt(Of Byte)(reader("DataType")),
             .Length = Extensions.AsInt(Of Byte)(reader("Length")),

@@ -1,19 +1,18 @@
 ﻿Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 
 Public Class SecurityObjectPresenter(Of TM As New)
-    Inherits PresenterNew(Of ISecurityObjectView, SecurityObjectModel)
+    Inherits PresenterNew(Of ISecurityObjectView, TM)
 
     Public Sub New(view As ISecurityObjectView)
         MyBase.New(view)
         Service = New Service("SecurityObject")
         TableName = "SecurityObject_View"
-        SortOrderKey = "SecurityObjectName"
+        SortOrderKey = "SortKey"
         TreeViewMainField = "SecurityObjectName"
         TreeViewSecondaryField = "IdNo"
-        TreeViewParentIdField = "ParentIdNo"
+        ParentFieldName = "ParentIdNo"
     End Sub
 
     Protected Overrides Function IsBizDataValid() As Boolean
@@ -31,6 +30,5 @@ Public Class SecurityObjectPresenter(Of TM As New)
     Protected Sub OnAfterSave() Handles MyBase.AfterSave
         CallByName(View, "UpdateParentIdData", CallType.Method)
     End Sub
-
 
 End Class

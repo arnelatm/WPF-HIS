@@ -8,9 +8,9 @@ Namespace PresentationLayer.Views.Forms
         Implements IPayGroupView
 
         Public Sub New()
+            MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
             MainTableName = "PayGroup_View"
             TvMainFieldName = "PayGroupName"
             TvSecondaryFieldName = "PayGroupCode"
@@ -18,9 +18,7 @@ Namespace PresentationLayer.Views.Forms
             ParentFieldName = "ParentIdNo"
             FirstControl = txtPayGroupCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New PayGroupPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
+
         End Sub
 
         Protected Overrides Sub CreateDataSources()

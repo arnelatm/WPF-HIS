@@ -4,7 +4,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class LeaveEntry
+    Public Class LeaveEntryTv
         Implements ILeaveView
 
         Public Sub New()
@@ -12,16 +12,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "Leave"
-            TvMainFieldName = "LeaveName"
-            TvSecondaryFieldName = "LeaveCode"
-            SortOrderKey = "LeaveName"
             FirstControl = txtLeaveCode
-            PresenterObj = New LeavePresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-
         End Sub
 
 #Region "Fields"

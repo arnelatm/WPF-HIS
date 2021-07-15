@@ -1,44 +1,19 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Libraries
-Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class DepositTypePresenter
-        Inherits AccountsPresenter(Of IDepositTypeView, DepositTypeModel)
+    Public Class DepositTypePresenter(Of TM As New)
+        Inherits PresenterNew(Of IDepositTypeView, TM)
 
         Public Sub New(view As IDepositTypeView)
             MyBase.New(view)
-            InitializerWithTv("DepositType")
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
-        End Sub
-
-        Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If Not View.WithBankCharges Then
-                View.Rate = 0
-                View.BankChargesAccountIdNo = Nothing
-                View.BankChargesVatAccountIdNo = Nothing
-            End If
-        End Sub
-
-    End Class
-
-    Public Class DepositTypePresenterNew(Of TV As IDepositTypeView, TM As New)
-        Inherits PresenterNew(Of IDepositTypeView, TM)
-
-        Public Sub New(view As IView)
-            MyBase.New(view)
             Service = New ServiceAccounts("DepositType")
-            TableName = "SalaryLoanSchedule"
-            SortOrderKey = "IdNo"
-            'OriginalModel = New DepositTypeModel()
-            'DataModel = New DepositTypeModel()
-            QuitOnSave = False
+            TableName = "DepositType"
+            TreeViewMainField = "DepositTypeName"
+            TreeViewSecondaryField = "DepositTypeCode"
+            SortOrderKey = "DepositTypeName"
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave

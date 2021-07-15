@@ -3,8 +3,8 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class LeaveEntry
-        Inherits CFormEntryTv
+    Partial Class LeaveEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LeaveEntry))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LeaveEntryTv))
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -50,29 +50,33 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TreeViewTableName
+            'SplitContainer1
             '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
             '
             'ImageListTreeView
             '
             Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
             Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
             Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
-            '
-            'TranslatorDAC
-            '
-            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-            '
-            'AppDataDAC
-            '
-            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
             'floDataDisplay
             '
@@ -113,16 +117,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.DisplayOnly = True
             Me.lblNotes.EditingMode = False
             Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Translatable = True
             '
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
@@ -132,16 +142,23 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
             'txtMaxLimit
             '
             Me.txtMaxLimit.BackColor = System.Drawing.Color.White
+            Me.txtMaxLimit.BegFindValue = Nothing
             Me.txtMaxLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtMaxLimit.ComputedValue = False
             Me.txtMaxLimit.CustomFormat = Nothing
             Me.txtMaxLimit.DataBoundControl = True
             Me.txtMaxLimit.EditingMode = True
+            Me.txtMaxLimit.EndFindValue = Nothing
+            Me.txtMaxLimit.FieldDescription = Nothing
+            Me.txtMaxLimit.FieldName = Nothing
+            Me.txtMaxLimit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtMaxLimit.FindEnabled = True
             resources.ApplyResources(Me.txtMaxLimit, "txtMaxLimit")
             Me.txtMaxLimit.ForeColor = System.Drawing.Color.Black
@@ -151,6 +168,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMaxLimit.Name = "txtMaxLimit"
             Me.txtMaxLimit.OldValue = Nothing
             Me.txtMaxLimit.ReadOnly = True
+            Me.txtMaxLimit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtMaxLimit.Translatable = False
             Me.txtMaxLimit.ValueIsMandatory = True
             '
             'lblMaxLimit
@@ -159,15 +178,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblMaxLimit.DisplayOnly = True
             Me.lblMaxLimit.EditingMode = False
             Me.lblMaxLimit.Name = "lblMaxLimit"
+            Me.lblMaxLimit.Translatable = True
             '
             'txtMaxCarryOver
             '
             Me.txtMaxCarryOver.BackColor = System.Drawing.Color.White
+            Me.txtMaxCarryOver.BegFindValue = Nothing
             Me.txtMaxCarryOver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtMaxCarryOver.ComputedValue = False
             Me.txtMaxCarryOver.CustomFormat = Nothing
             Me.txtMaxCarryOver.DataBoundControl = True
             Me.txtMaxCarryOver.EditingMode = True
+            Me.txtMaxCarryOver.EndFindValue = Nothing
+            Me.txtMaxCarryOver.FieldDescription = Nothing
+            Me.txtMaxCarryOver.FieldName = Nothing
+            Me.txtMaxCarryOver.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtMaxCarryOver.FindEnabled = True
             resources.ApplyResources(Me.txtMaxCarryOver, "txtMaxCarryOver")
             Me.txtMaxCarryOver.ForeColor = System.Drawing.Color.Black
@@ -177,6 +202,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtMaxCarryOver.Name = "txtMaxCarryOver"
             Me.txtMaxCarryOver.OldValue = Nothing
             Me.txtMaxCarryOver.ReadOnly = True
+            Me.txtMaxCarryOver.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtMaxCarryOver.Translatable = False
             Me.txtMaxCarryOver.ValueIsMandatory = True
             '
             'lblMaxCarryOver
@@ -185,19 +212,30 @@ Namespace PresentationLayer.Views.Forms
             Me.lblMaxCarryOver.DisplayOnly = True
             Me.lblMaxCarryOver.EditingMode = False
             Me.lblMaxCarryOver.Name = "lblMaxCarryOver"
+            Me.lblMaxCarryOver.Translatable = True
             '
             'chkCumulative
             '
             resources.ApplyResources(Me.chkCumulative, "chkCumulative")
             Me.chkCumulative.BackColor = System.Drawing.Color.White
+            Me.chkCumulative.BegFindValue = Nothing
             Me.chkCumulative.DisplayOnly = False
             Me.chkCumulative.EditingMode = True
+            Me.chkCumulative.EndFindValue = Nothing
+            Me.chkCumulative.FieldDescription = Nothing
+            Me.chkCumulative.FieldName = Nothing
+            Me.chkCumulative.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkCumulative.FindEnabled = False
             Me.chkCumulative.FlatAppearance.BorderSize = 0
             Me.chkCumulative.ForeColor = System.Drawing.Color.Black
+            Me.chkCumulative.IFindableControl_FindEnabled = False
+            Me.chkCumulative.IgnoreCase = False
             Me.chkCumulative.LinkedLabel = Nothing
             Me.chkCumulative.Name = "chkCumulative"
             Me.chkCumulative.NoLabel = True
             Me.chkCumulative.OldValue = Nothing
+            Me.chkCumulative.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkCumulative.Translatable = False
             Me.chkCumulative.UseVisualStyleBackColor = False
             '
             'lblCumulative
@@ -206,15 +244,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCumulative.DisplayOnly = True
             Me.lblCumulative.EditingMode = False
             Me.lblCumulative.Name = "lblCumulative"
+            Me.lblCumulative.Translatable = True
             '
             'txtPaidPercent
             '
             Me.txtPaidPercent.BackColor = System.Drawing.Color.White
+            Me.txtPaidPercent.BegFindValue = Nothing
             Me.txtPaidPercent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPaidPercent.ComputedValue = False
             Me.txtPaidPercent.CustomFormat = Nothing
             Me.txtPaidPercent.DataBoundControl = True
             Me.txtPaidPercent.EditingMode = True
+            Me.txtPaidPercent.EndFindValue = Nothing
+            Me.txtPaidPercent.FieldDescription = Nothing
+            Me.txtPaidPercent.FieldName = Nothing
+            Me.txtPaidPercent.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPaidPercent.FindEnabled = True
             resources.ApplyResources(Me.txtPaidPercent, "txtPaidPercent")
             Me.txtPaidPercent.ForeColor = System.Drawing.Color.Black
@@ -224,6 +268,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPaidPercent.Name = "txtPaidPercent"
             Me.txtPaidPercent.OldValue = Nothing
             Me.txtPaidPercent.ReadOnly = True
+            Me.txtPaidPercent.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPaidPercent.Translatable = False
             Me.txtPaidPercent.ValueIsMandatory = True
             '
             'lblPaidPercent
@@ -232,15 +278,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPaidPercent.DisplayOnly = True
             Me.lblPaidPercent.EditingMode = False
             Me.lblPaidPercent.Name = "lblPaidPercent"
+            Me.lblPaidPercent.Translatable = True
             '
             'txtLeaveAllowed
             '
             Me.txtLeaveAllowed.BackColor = System.Drawing.Color.White
+            Me.txtLeaveAllowed.BegFindValue = Nothing
             Me.txtLeaveAllowed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtLeaveAllowed.ComputedValue = False
             Me.txtLeaveAllowed.CustomFormat = Nothing
             Me.txtLeaveAllowed.DataBoundControl = True
             Me.txtLeaveAllowed.EditingMode = True
+            Me.txtLeaveAllowed.EndFindValue = Nothing
+            Me.txtLeaveAllowed.FieldDescription = Nothing
+            Me.txtLeaveAllowed.FieldName = Nothing
+            Me.txtLeaveAllowed.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtLeaveAllowed.FindEnabled = True
             resources.ApplyResources(Me.txtLeaveAllowed, "txtLeaveAllowed")
             Me.txtLeaveAllowed.ForeColor = System.Drawing.Color.Black
@@ -250,6 +302,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLeaveAllowed.Name = "txtLeaveAllowed"
             Me.txtLeaveAllowed.OldValue = Nothing
             Me.txtLeaveAllowed.ReadOnly = True
+            Me.txtLeaveAllowed.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtLeaveAllowed.Translatable = False
             Me.txtLeaveAllowed.ValueIsMandatory = True
             '
             'lblLeaveAllowed
@@ -258,17 +312,23 @@ Namespace PresentationLayer.Views.Forms
             Me.lblLeaveAllowed.DisplayOnly = True
             Me.lblLeaveAllowed.EditingMode = False
             Me.lblLeaveAllowed.Name = "lblLeaveAllowed"
+            Me.lblLeaveAllowed.Translatable = True
             '
             'txtLeaveNameAra
             '
             Me.txtLeaveNameAra.BackColor = System.Drawing.Color.White
+            Me.txtLeaveNameAra.BegFindValue = Nothing
             Me.txtLeaveNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtLeaveNameAra, 2)
             Me.txtLeaveNameAra.ComputedValue = False
             Me.txtLeaveNameAra.CustomFormat = Nothing
             Me.txtLeaveNameAra.DataBoundControl = True
             Me.txtLeaveNameAra.EditingMode = False
+            Me.txtLeaveNameAra.EndFindValue = Nothing
             Me.txtLeaveNameAra.EnglishControl = Me.txtLeaveName
+            Me.txtLeaveNameAra.FieldDescription = Nothing
+            Me.txtLeaveNameAra.FieldName = Nothing
+            Me.txtLeaveNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtLeaveNameAra.FindEnabled = True
             resources.ApplyResources(Me.txtLeaveNameAra, "txtLeaveNameAra")
             Me.txtLeaveNameAra.ForeColor = System.Drawing.Color.Black
@@ -278,16 +338,23 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLeaveNameAra.Name = "txtLeaveNameAra"
             Me.txtLeaveNameAra.OldValue = Nothing
             Me.txtLeaveNameAra.ReadOnly = True
+            Me.txtLeaveNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtLeaveNameAra.Translatable = False
             '
             'txtLeaveName
             '
             Me.txtLeaveName.BackColor = System.Drawing.Color.White
+            Me.txtLeaveName.BegFindValue = Nothing
             Me.txtLeaveName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtLeaveName, 2)
             Me.txtLeaveName.ComputedValue = False
             Me.txtLeaveName.CustomFormat = Nothing
             Me.txtLeaveName.DataBoundControl = True
             Me.txtLeaveName.EditingMode = False
+            Me.txtLeaveName.EndFindValue = Nothing
+            Me.txtLeaveName.FieldDescription = Nothing
+            Me.txtLeaveName.FieldName = Nothing
+            Me.txtLeaveName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtLeaveName.FindEnabled = True
             resources.ApplyResources(Me.txtLeaveName, "txtLeaveName")
             Me.txtLeaveName.ForeColor = System.Drawing.Color.Black
@@ -297,6 +364,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLeaveName.Name = "txtLeaveName"
             Me.txtLeaveName.OldValue = Nothing
             Me.txtLeaveName.ReadOnly = True
+            Me.txtLeaveName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtLeaveName.Translatable = False
             Me.txtLeaveName.ValueIsMandatory = True
             '
             'lblNameAra
@@ -306,6 +375,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNameAra.DisplayOnly = True
             Me.lblNameAra.EditingMode = False
             Me.lblNameAra.Name = "lblNameAra"
+            Me.lblNameAra.Translatable = True
             '
             'lblName
             '
@@ -314,15 +384,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblName.DisplayOnly = True
             Me.lblName.EditingMode = False
             Me.lblName.Name = "lblName"
+            Me.lblName.Translatable = True
             '
             'txtLeaveCode
             '
             Me.txtLeaveCode.BackColor = System.Drawing.Color.White
+            Me.txtLeaveCode.BegFindValue = Nothing
             Me.txtLeaveCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtLeaveCode.ComputedValue = False
             Me.txtLeaveCode.CustomFormat = Nothing
             Me.txtLeaveCode.DataBoundControl = True
             Me.txtLeaveCode.EditingMode = True
+            Me.txtLeaveCode.EndFindValue = Nothing
+            Me.txtLeaveCode.FieldDescription = Nothing
+            Me.txtLeaveCode.FieldName = Nothing
+            Me.txtLeaveCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtLeaveCode.FindEnabled = True
             resources.ApplyResources(Me.txtLeaveCode, "txtLeaveCode")
             Me.txtLeaveCode.ForeColor = System.Drawing.Color.Black
@@ -332,17 +408,24 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLeaveCode.Name = "txtLeaveCode"
             Me.txtLeaveCode.OldValue = Nothing
             Me.txtLeaveCode.ReadOnly = True
+            Me.txtLeaveCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtLeaveCode.Translatable = False
             Me.txtLeaveCode.ValueIsMandatory = True
             '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
@@ -352,7 +435,9 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'lblIdNo
@@ -361,6 +446,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Translatable = True
             '
             'lblCode
             '
@@ -368,14 +454,16 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode.DisplayOnly = True
             Me.lblCode.EditingMode = False
             Me.lblCode.Name = "lblCode"
+            Me.lblCode.Translatable = True
             '
-            'LeaveEntry
+            'LeaveEntryTv
             '
             resources.ApplyResources(Me, "$this")
-            Me.Controls.Add(Me.floDataDisplay)
-            Me.Name = "LeaveEntry"
-            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+            Me.Name = "LeaveEntryTv"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
             Me.TableLayoutPanel1.ResumeLayout(False)

@@ -61,7 +61,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>AATM.Accounts.PresentationLayer.Views.Forms.MainNew</StartupObject>
+    <StartupObject>AATM.Accounts.PresentationLayer.Views.Forms.Main</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -393,10 +393,10 @@
     <Compile Include="PresentationLayer\Views\Forms\JournalPrefixEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\MainNew.designer.vb">
-      <DependentUpon>MainNew.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\Main.designer.vb">
+      <DependentUpon>Main.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\MainNew.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Main.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.designer.vb">
@@ -568,12 +568,6 @@
     <Compile Include="PresentationLayer\Views\Forms\DepositTypeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.designer.vb">
-      <DependentUpon>PayGroupEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.designer.vb">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>
     </Compile>
@@ -592,10 +586,10 @@
     <Compile Include="PresentationLayer\Views\Forms\PayGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\LeaveEntry.designer.vb">
-      <DependentUpon>LeaveEntry.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\LeaveEntryTv.designer.vb">
+      <DependentUpon>LeaveEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\LeaveEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\LeaveEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayrollEntryTv.designer.vb">
@@ -1082,11 +1076,11 @@
       <DependentUpon>JournalPrefixEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\MainNew.en-GB.resx">
-      <DependentUpon>MainNew.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Main.en-GB.resx">
+      <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\MainNew.resx">
-      <DependentUpon>MainNew.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Main.resx">
+      <DependentUpon>Main.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.resx">
@@ -1109,9 +1103,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Test.resx">
       <DependentUpon>Test.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
-      <DependentUpon>PayGroupEntry.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollDetailEntry.resx">
       <DependentUpon>PayrollDetailEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -1126,8 +1117,8 @@
       <DependentUpon>PayGroupEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\LeaveEntry.resx">
-      <DependentUpon>LeaveEntry.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\LeaveEntryTv.resx">
+      <DependentUpon>LeaveEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollEntryTv.resx">

@@ -780,12 +780,9 @@ Public Class CFormEntry
             Dim rules = PresenterObj.GetBizObjectRules()
             For Each rule In rules
                 Dim control As Control = Nothing
-                MainFieldsDictionary.TryGetValue(rule.Property, control)
-                'If control.GetType() Is DataGridView Then
-
-                'Else
-                MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
-                'End If
+                If MainFieldsDictionary.TryGetValue(rule.Property, control) Then
+                    MyErrorProvider.Controls.AddValidation(control, rule.Property, rule.Error)
+                End If
             Next
 
             SetAllControlsDynamicProperties()
