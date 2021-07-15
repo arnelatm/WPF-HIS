@@ -23,20 +23,11 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
-
             ' Set KeyPreview object to true to allow the form to process
             ' the key before the control with focus processes it.
-            KeyPreview = True
-
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "DistributionScheme"
-            SortOrderKey = "IdNo"
             FirstControl = txtDistributionSchemeCode
             _nfi.NumberDecimalDigits = 2
-            PresenterObj = New DistributionSchemePresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-
         End Sub
 
 #Region "DistributionSchemeView"
@@ -138,23 +129,23 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
+            CreateLookupData("PhoneType", NameOf(_revCostCenterByCode))
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
-        {
-         {"DistributionSchemeCode", txtDistributionSchemeCode},
-         {"DistributionSchemeName", txtDistributionSchemeName},
-         {"DistributionSchemeNameAra", txtDistributionSchemeNameAra},
-         {"IdNo", TxtIdNo},
-         {"Notes", txtNotes},
-         {"ValidityEndDate", dtpValidityEndDate},
-         {"ValidityStartDate", dtpValidityStartDate}
-        }
+            {
+            {"DistributionSchemeCode", txtDistributionSchemeCode},
+            {"DistributionSchemeName", txtDistributionSchemeName},
+            {"DistributionSchemeNameAra", txtDistributionSchemeNameAra},
+            {"IdNo", TxtIdNo},
+            {"Notes", txtNotes},
+            {"ValidityEndDate", dtpValidityEndDate},
+            {"ValidityStartDate", dtpValidityStartDate}
+            }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+        Protected Sub OnAfterUpdate() Handles MyBase.AfterUpdateView
             UpdateTotals()
         End Sub
 
@@ -188,15 +179,6 @@ Namespace PresentationLayer.Views.Forms
             _footer.Dispose()
         End Sub
 
-        Protected Overrides Sub InputsTurnedOn()
-            If PresenterObj.AddMode Then
-                dtpValidityStartDate.Value = Date.Now()
-                dtpValidityEndDate.Value = Date.Now()
-                bsDistributionSchemeItems.Clear()
-                DataGridViewDistributionSchemeItems.Refresh()
-            End If
-        End Sub
-
         Private Sub txtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             If DataGridViewDistributionSchemeItems IsNot Nothing Then
                 DataGridViewDistributionSchemeItems.Focus()
@@ -208,6 +190,13 @@ Namespace PresentationLayer.Views.Forms
                 _footer.CalculateTotals()
                 TotalPercentage = _footer.Value("dgvPercentage")
             End If
+        End Sub
+
+        Protected Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
+            dtpValidityStartDate.Value = Date.Now()
+            dtpValidityEndDate.Value = Date.Now()
+            bsDistributionSchemeItems.Clear()
+            DataGridViewDistributionSchemeItems.Refresh()
         End Sub
 
     End Class

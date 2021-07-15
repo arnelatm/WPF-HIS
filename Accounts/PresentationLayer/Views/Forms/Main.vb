@@ -336,13 +336,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DistributionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDistributionSchemes.Click
-            Dim childMdiForm As DistributionSchemeEntry
-            'Set the Parent Form of the Child window.
-            childMdiForm = New DistributionSchemeEntry() With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of DistributionSchemeEntry, DistributionSchemePresenter(Of DistributionSchemeModel))()
         End Sub
 
         Private Sub EarningsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayElement.Click
@@ -448,11 +442,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PayCyclesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayCycles.Click
-            Dim childMdiForm As PayCycleEntryTv
-            childMdiForm = New PayCycleEntryTv With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            RunForm(Of PayCycleEntryTv, PayCyclePresenter(Of PayCycleModel))()
         End Sub
 
         Private Sub PayGroupsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayGroups.Click
@@ -476,19 +466,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PensionProvidersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPensionProviders.Click
-            Dim childMdiForm As PensionProviderEntryTv
-            childMdiForm = New PensionProviderEntryTv With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            RunForm(Of PensionProviderEntryTv, PensionProviderPresenter(Of PensionProviderModel))()
         End Sub
 
         Private Sub PensionSchemesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPensionSchemes.Click
-            Dim childMdiForm As PensionSchemeEntryTv
-            childMdiForm = New PensionSchemeEntryTv With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            RunForm(Of PensionSchemeEntryTv, PensionSchemePresenter(Of PensionSchemeModel))()
         End Sub
 
         Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPettyCash.Click
@@ -501,8 +483,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub PhoneTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemPhoneTypes.Click
+        Private Sub PhoneTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPhoneTypes.Click
             RunForm(Of PhoneTypeEntryTv, PhoneTypePresenter(Of PhoneTypeModel))()
         End Sub
 
@@ -633,8 +614,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemSupplierVendors.Click
+        Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSupplierVendors.Click
             RunForm(Of SupplierEntryTv, SupplierPresenter(Of SupplierModel))()
         End Sub
 
@@ -693,9 +673,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemUsers_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
-            Dim childMdiForm As UserEntryTv
-            childMdiForm = New UserEntryTv With {.MdiParent = Me}
-            childMdiForm.Show()
+            RunForm(Of UserEntryTv, UserPresenter(Of UserModel))()
         End Sub
 
         Private Sub TranslationFormToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -776,7 +754,7 @@ Namespace PresentationLayer.Views.Forms
             Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
                     .SystemViewIdNo = VSystemViewIdNo,
                     .ParentIdNo = parentIdNo}
-            parentIdNo = PresenterObj.AddSecurityObject(securityObject)
+            parentIdNo = Service.AddSecurityObject(securityObject)
             Return parentIdNo
         End Function
 
@@ -900,12 +878,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub RecreateSecurityObjectMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRecreateSecurityObjectMenu.Click
             Dim allControls As New List(Of Control)
-            Dim nRecCount = PresenterObj.GetRecordCount("SecurityObject")
+            Dim nRecCount = Service.GetRecordCount("SecurityObject")
             If GlobalVariables.UserName.ToLower() = $"arnel" Then
                 Dim addSecurityObject As Boolean = False
                 If nRecCount <= 10 Then
                     If nRecCount = 0 Then
-                        If PresenterObj.InitializeSecurityObject() > 0 Then
+                        If Service.InitializeSecurityObject() > 0 Then
                             addSecurityObject = True
                         End If
                     Else
@@ -1105,11 +1083,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemTransactionJournalCodes_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransactionJournalCodes.Click
-            Dim childMdiForm As JournalPrefixEntry
-            childMdiForm = New JournalPrefixEntry With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            RunForm(Of JournalPrefixEntry, JournalPrefixPresenter(Of JournalPrefixModel))()
         End Sub
 
         Private Sub TransactionNotesTranslatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransactionNotesTranslator.Click

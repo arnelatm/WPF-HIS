@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class PensionSchemeEntryTv
-        Inherits CFormEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -26,33 +26,33 @@ Namespace PresentationLayer.Views.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PensionSchemeEntryTv))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.bsPensionRates = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.tlpPensionScheme = New System.Windows.Forms.TableLayoutPanel()
-        Me.tbcPensionScheme = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
-        Me.tbpMain = New System.Windows.Forms.TabPage()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.tlpMainTab = New System.Windows.Forms.TableLayoutPanel()
-        Me.cboPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.tbpPensionRates = New System.Windows.Forms.TabPage()
-        Me.tlpPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
-        Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.DataGridViewPensionRates = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.components = New System.ComponentModel.Container()
+            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PensionSchemeEntryTv))
+            Me.bsPensionRates = New System.Windows.Forms.BindingSource(Me.components)
+            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.tlpPensionScheme = New System.Windows.Forms.TableLayoutPanel()
+            Me.tbcPensionScheme = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
+            Me.tbpMain = New System.Windows.Forms.TabPage()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.tlpMainTab = New System.Windows.Forms.TableLayoutPanel()
+            Me.cboPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.tbpPensionRates = New System.Windows.Forms.TabPage()
+            Me.tlpPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
+            Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.DataGridViewPensionRates = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvLowRange = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvHighRange = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
@@ -70,6 +70,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPensionRates, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
@@ -84,20 +88,24 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TreeViewTableName
+            'SplitContainer1
             '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            resources.ApplyResources(Me.TreeViewTableName, "TreeViewTableName")
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
             '
             'ImageListTreeView
             '
             Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
             Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
             Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
-            '
-            'TranslatorDAC
-            '
-            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
             'bsPensionRates
             '
@@ -163,6 +171,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.cboPensionProviderIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboPensionProviderIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPensionProviderIdNo.BegFindValue = Nothing
             Me.cboPensionProviderIdNo.ChangingSearchValueOnly = False
             Me.tlpMainTab.SetColumnSpan(Me.cboPensionProviderIdNo, 2)
             Me.cboPensionProviderIdNo.CurrentSearchTerm = ""
@@ -170,10 +179,16 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPensionProviderIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboPensionProviderIdNo, "cboPensionProviderIdNo")
             Me.cboPensionProviderIdNo.EditingMode = False
+            Me.cboPensionProviderIdNo.EndFindValue = Nothing
+            Me.cboPensionProviderIdNo.FieldDescription = Nothing
+            Me.cboPensionProviderIdNo.FieldName = Nothing
             Me.cboPensionProviderIdNo.FilterRule = Nothing
+            Me.cboPensionProviderIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPensionProviderIdNo.FindEnabled = False
             Me.cboPensionProviderIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboPensionProviderIdNo.FormattingEnabled = True
             Me.cboPensionProviderIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPensionProviderIdNo.IgnoreCase = False
             Me.cboPensionProviderIdNo.LinkedLabel = Nothing
             Me.cboPensionProviderIdNo.Name = "cboPensionProviderIdNo"
             Me.cboPensionProviderIdNo.OldValue = 0
@@ -186,6 +201,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPensionProviderIdNo.SuggestBoxHeight = 200
             Me.cboPensionProviderIdNo.SuggestListOrderRule = Nothing
             Me.cboPensionProviderIdNo.TextToSearch = Nothing
+            Me.cboPensionProviderIdNo.Translatable = False
             Me.cboPensionProviderIdNo.ValueIsMandatory = False
             Me.cboPensionProviderIdNo.ValueIsNullable = False
             Me.cboPensionProviderIdNo.ValueIsNumeric = False
@@ -197,10 +213,12 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPensionProviderIdNo.EditingMode = False
             resources.ApplyResources(Me.lblPensionProviderIdNo, "lblPensionProviderIdNo")
             Me.lblPensionProviderIdNo.Name = "lblPensionProviderIdNo"
+            Me.lblPensionProviderIdNo.Translatable = True
             '
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.tlpMainTab.SetColumnSpan(Me.txtNotes, 2)
             Me.txtNotes.ComputedValue = False
@@ -208,6 +226,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.DataBoundControl = True
             resources.ApplyResources(Me.txtNotes, "txtNotes")
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
@@ -216,6 +238,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
             'lblNotes
@@ -224,6 +248,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.EditingMode = False
             resources.ApplyResources(Me.lblNotes, "lblNotes")
             Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Translatable = True
             '
             'tbpPensionRates
             '
@@ -247,11 +272,13 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
             Me.lblAccountIdNo.EditingMode = False
             Me.lblAccountIdNo.Name = "lblAccountIdNo"
+            Me.lblAccountIdNo.Translatable = True
             '
             'cboAccountIdNo
             '
             Me.cboAccountIdNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
             Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
+            Me.cboAccountIdNo.BegFindValue = Nothing
             Me.cboAccountIdNo.ChangingSearchValueOnly = False
             Me.tlpPostingAccounts.SetColumnSpan(Me.cboAccountIdNo, 2)
             Me.cboAccountIdNo.CurrentSearchTerm = ""
@@ -259,10 +286,16 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DisplayMember = "Name"
             resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
             Me.cboAccountIdNo.EditingMode = False
+            Me.cboAccountIdNo.EndFindValue = Nothing
+            Me.cboAccountIdNo.FieldDescription = Nothing
+            Me.cboAccountIdNo.FieldName = Nothing
             Me.cboAccountIdNo.FilterRule = Nothing
+            Me.cboAccountIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboAccountIdNo.FindEnabled = False
             Me.cboAccountIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboAccountIdNo.FormattingEnabled = True
             Me.cboAccountIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboAccountIdNo.IgnoreCase = False
             Me.cboAccountIdNo.LinkedLabel = Nothing
             Me.cboAccountIdNo.Name = "cboAccountIdNo"
             Me.cboAccountIdNo.OldValue = 0
@@ -275,6 +308,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
+            Me.cboAccountIdNo.Translatable = False
             Me.cboAccountIdNo.ValueIsMandatory = False
             Me.cboAccountIdNo.ValueIsNullable = False
             Me.cboAccountIdNo.ValueIsNumeric = False
@@ -286,6 +320,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPensionRates.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewPensionRates.AutoGenerateColumns = False
             Me.DataGridViewPensionRates.BackgroundColor = System.Drawing.SystemColors.Window
+            Me.DataGridViewPensionRates.BegFindValue = Nothing
             Me.DataGridViewPensionRates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewPensionRates.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvLowRange, Me.dgvHighRange, Me.dgvEmployeeShare, Me.dgvEmployerShare, Me.dgvMaxAmount, Me.DataGridViewTextBoxColumn1, Me.IdNoDataGridViewTextBoxColumn})
             Me.tlpPostingAccounts.SetColumnSpan(Me.DataGridViewPensionRates, 3)
@@ -304,31 +339,49 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPensionRates.Ea = EventAggregator1
             Me.DataGridViewPensionRates.EditingMode = False
             Me.DataGridViewPensionRates.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPensionRates.EndFindValue = Nothing
+            Me.DataGridViewPensionRates.FieldDescription = Nothing
+            Me.DataGridViewPensionRates.FieldName = Nothing
             Me.DataGridViewPensionRates.FieldsDictionary = Nothing
+            Me.DataGridViewPensionRates.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewPensionRates.FindEnabled = False
             Me.DataGridViewPensionRates.FirstRowDeletionEnabled = True
             Me.DataGridViewPensionRates.FirstRowInsertionEnabled = True
+            Me.DataGridViewPensionRates.IgnoreCase = False
             Me.DataGridViewPensionRates.Name = "DataGridViewPensionRates"
             Me.DataGridViewPensionRates.ReadOnly = True
+            Me.DataGridViewPensionRates.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewPensionRates.SequenceColumn = "dgvSequence"
             Me.DataGridViewPensionRates.SequenceFieldName = "Sequence"
             Me.DataGridViewPensionRates.ShowFooter = False
             Me.DataGridViewPensionRates.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewPensionRates.Translatable = True
             '
             'dgvSequence
             '
+            Me.dgvSequence.BegFindValue = Nothing
             Me.dgvSequence.DataPropertyName = "Sequence"
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
+            Me.dgvSequence.EndFindValue = Nothing
+            Me.dgvSequence.FieldDescription = Nothing
+            Me.dgvSequence.FieldName = Nothing
+            Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequence.FindEnabled = False
             resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+            Me.dgvSequence.IgnoreCase = False
             Me.dgvSequence.Name = "dgvSequence"
             Me.dgvSequence.ReadOnly = True
             Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequence.Translatable = False
             '
             'dgvLowRange
             '
+            Me.dgvLowRange.BegFindValue = Nothing
             Me.dgvLowRange.DataPropertyName = "LowRange"
             DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
@@ -336,14 +389,22 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle3.Format = "###,##0.00"
             Me.dgvLowRange.DefaultCellStyle = DataGridViewCellStyle3
             Me.dgvLowRange.EditingMode = False
+            Me.dgvLowRange.EndFindValue = Nothing
+            Me.dgvLowRange.FieldDescription = Nothing
+            Me.dgvLowRange.FieldName = Nothing
+            Me.dgvLowRange.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvLowRange.FindEnabled = False
             resources.ApplyResources(Me.dgvLowRange, "dgvLowRange")
             Me.dgvLowRange.Name = "dgvLowRange"
             Me.dgvLowRange.ReadOnly = True
             Me.dgvLowRange.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvLowRange.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvLowRange.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvLowRange.Translatable = False
             '
             'dgvHighRange
             '
+            Me.dgvHighRange.BegFindValue = Nothing
             Me.dgvHighRange.DataPropertyName = "HighRange"
             DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
@@ -351,14 +412,22 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle4.Format = "###,##0.00"
             Me.dgvHighRange.DefaultCellStyle = DataGridViewCellStyle4
             Me.dgvHighRange.EditingMode = False
+            Me.dgvHighRange.EndFindValue = Nothing
+            Me.dgvHighRange.FieldDescription = Nothing
+            Me.dgvHighRange.FieldName = Nothing
+            Me.dgvHighRange.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvHighRange.FindEnabled = False
             resources.ApplyResources(Me.dgvHighRange, "dgvHighRange")
             Me.dgvHighRange.Name = "dgvHighRange"
             Me.dgvHighRange.ReadOnly = True
             Me.dgvHighRange.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvHighRange.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvHighRange.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvHighRange.Translatable = False
             '
             'dgvEmployeeShare
             '
+            Me.dgvEmployeeShare.BegFindValue = Nothing
             Me.dgvEmployeeShare.DataPropertyName = "EmployeeShare"
             DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
@@ -366,14 +435,22 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle5.Format = "###,##0.00"
             Me.dgvEmployeeShare.DefaultCellStyle = DataGridViewCellStyle5
             Me.dgvEmployeeShare.EditingMode = False
+            Me.dgvEmployeeShare.EndFindValue = Nothing
+            Me.dgvEmployeeShare.FieldDescription = Nothing
+            Me.dgvEmployeeShare.FieldName = Nothing
+            Me.dgvEmployeeShare.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvEmployeeShare.FindEnabled = False
             resources.ApplyResources(Me.dgvEmployeeShare, "dgvEmployeeShare")
             Me.dgvEmployeeShare.Name = "dgvEmployeeShare"
             Me.dgvEmployeeShare.ReadOnly = True
             Me.dgvEmployeeShare.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEmployeeShare.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvEmployeeShare.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEmployeeShare.Translatable = False
             '
             'dgvEmployerShare
             '
+            Me.dgvEmployerShare.BegFindValue = Nothing
             Me.dgvEmployerShare.DataPropertyName = "EmployerShare"
             DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
@@ -381,14 +458,22 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle6.Format = "###,##0.00"
             Me.dgvEmployerShare.DefaultCellStyle = DataGridViewCellStyle6
             Me.dgvEmployerShare.EditingMode = False
+            Me.dgvEmployerShare.EndFindValue = Nothing
+            Me.dgvEmployerShare.FieldDescription = Nothing
+            Me.dgvEmployerShare.FieldName = Nothing
+            Me.dgvEmployerShare.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvEmployerShare.FindEnabled = False
             resources.ApplyResources(Me.dgvEmployerShare, "dgvEmployerShare")
             Me.dgvEmployerShare.Name = "dgvEmployerShare"
             Me.dgvEmployerShare.ReadOnly = True
             Me.dgvEmployerShare.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvEmployerShare.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvEmployerShare.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEmployerShare.Translatable = False
             '
             'dgvMaxAmount
             '
+            Me.dgvMaxAmount.BegFindValue = Nothing
             Me.dgvMaxAmount.DataPropertyName = "MaxAmount"
             DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
@@ -396,11 +481,18 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle7.Format = "###,##0.00"
             Me.dgvMaxAmount.DefaultCellStyle = DataGridViewCellStyle7
             Me.dgvMaxAmount.EditingMode = False
+            Me.dgvMaxAmount.EndFindValue = Nothing
+            Me.dgvMaxAmount.FieldDescription = Nothing
+            Me.dgvMaxAmount.FieldName = Nothing
+            Me.dgvMaxAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvMaxAmount.FindEnabled = False
             resources.ApplyResources(Me.dgvMaxAmount, "dgvMaxAmount")
             Me.dgvMaxAmount.Name = "dgvMaxAmount"
             Me.dgvMaxAmount.ReadOnly = True
             Me.dgvMaxAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvMaxAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvMaxAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvMaxAmount.Translatable = False
             '
             'DataGridViewTextBoxColumn1
             '
@@ -419,6 +511,7 @@ Namespace PresentationLayer.Views.Forms
             'txtPensionSchemeNameAra
             '
             Me.txtPensionSchemeNameAra.BackColor = System.Drawing.Color.White
+            Me.txtPensionSchemeNameAra.BegFindValue = Nothing
             Me.txtPensionSchemeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.tlpPensionScheme.SetColumnSpan(Me.txtPensionSchemeNameAra, 3)
             Me.txtPensionSchemeNameAra.ComputedValue = False
@@ -426,7 +519,11 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPensionSchemeNameAra.DataBoundControl = True
             resources.ApplyResources(Me.txtPensionSchemeNameAra, "txtPensionSchemeNameAra")
             Me.txtPensionSchemeNameAra.EditingMode = False
+            Me.txtPensionSchemeNameAra.EndFindValue = Nothing
             Me.txtPensionSchemeNameAra.EnglishControl = Me.txtPensionSchemeName
+            Me.txtPensionSchemeNameAra.FieldDescription = Nothing
+            Me.txtPensionSchemeNameAra.FieldName = Nothing
+            Me.txtPensionSchemeNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPensionSchemeNameAra.FindEnabled = True
             Me.txtPensionSchemeNameAra.ForeColor = System.Drawing.Color.Black
             Me.txtPensionSchemeNameAra.LinkedLabel = Nothing
@@ -435,10 +532,13 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPensionSchemeNameAra.Name = "txtPensionSchemeNameAra"
             Me.txtPensionSchemeNameAra.OldValue = Nothing
             Me.txtPensionSchemeNameAra.ReadOnly = True
+            Me.txtPensionSchemeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPensionSchemeNameAra.Translatable = False
             '
             'txtPensionSchemeName
             '
             Me.txtPensionSchemeName.BackColor = System.Drawing.Color.White
+            Me.txtPensionSchemeName.BegFindValue = Nothing
             Me.txtPensionSchemeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.tlpPensionScheme.SetColumnSpan(Me.txtPensionSchemeName, 3)
             Me.txtPensionSchemeName.ComputedValue = False
@@ -446,6 +546,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPensionSchemeName.DataBoundControl = True
             resources.ApplyResources(Me.txtPensionSchemeName, "txtPensionSchemeName")
             Me.txtPensionSchemeName.EditingMode = False
+            Me.txtPensionSchemeName.EndFindValue = Nothing
+            Me.txtPensionSchemeName.FieldDescription = Nothing
+            Me.txtPensionSchemeName.FieldName = Nothing
+            Me.txtPensionSchemeName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPensionSchemeName.FindEnabled = True
             Me.txtPensionSchemeName.ForeColor = System.Drawing.Color.Black
             Me.MyErrorProvider.SetIconAlignment(Me.txtPensionSchemeName, CType(resources.GetObject("txtPensionSchemeName.IconAlignment"), System.Windows.Forms.ErrorIconAlignment))
@@ -455,6 +559,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPensionSchemeName.Name = "txtPensionSchemeName"
             Me.txtPensionSchemeName.OldValue = Nothing
             Me.txtPensionSchemeName.ReadOnly = True
+            Me.txtPensionSchemeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPensionSchemeName.Translatable = False
             Me.txtPensionSchemeName.ValueIsMandatory = True
             '
             'lblName
@@ -463,15 +569,21 @@ Namespace PresentationLayer.Views.Forms
             Me.lblName.EditingMode = False
             resources.ApplyResources(Me.lblName, "lblName")
             Me.lblName.Name = "lblName"
+            Me.lblName.Translatable = True
             '
             'txtPensionSchemeCode
             '
             Me.txtPensionSchemeCode.BackColor = System.Drawing.Color.White
+            Me.txtPensionSchemeCode.BegFindValue = Nothing
             Me.txtPensionSchemeCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPensionSchemeCode.ComputedValue = False
             Me.txtPensionSchemeCode.CustomFormat = Nothing
             Me.txtPensionSchemeCode.DataBoundControl = True
             Me.txtPensionSchemeCode.EditingMode = True
+            Me.txtPensionSchemeCode.EndFindValue = Nothing
+            Me.txtPensionSchemeCode.FieldDescription = Nothing
+            Me.txtPensionSchemeCode.FieldName = Nothing
+            Me.txtPensionSchemeCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPensionSchemeCode.FindEnabled = True
             resources.ApplyResources(Me.txtPensionSchemeCode, "txtPensionSchemeCode")
             Me.txtPensionSchemeCode.ForeColor = System.Drawing.Color.Black
@@ -482,6 +594,8 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPensionSchemeCode.Name = "txtPensionSchemeCode"
             Me.txtPensionSchemeCode.OldValue = Nothing
             Me.txtPensionSchemeCode.ReadOnly = True
+            Me.txtPensionSchemeCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPensionSchemeCode.Translatable = False
             Me.txtPensionSchemeCode.ValueIsMandatory = True
             '
             'lblCode
@@ -490,16 +604,22 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode.EditingMode = False
             resources.ApplyResources(Me.lblCode, "lblCode")
             Me.lblCode.Name = "lblCode"
+            Me.lblCode.Translatable = True
             '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
@@ -509,7 +629,9 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'CLabel1
@@ -518,6 +640,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.EditingMode = False
             resources.ApplyResources(Me.CLabel1, "CLabel1")
             Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Translatable = True
             '
             'lblNameAra
             '
@@ -525,6 +648,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblNameAra, "lblNameAra")
             Me.lblNameAra.EditingMode = False
             Me.lblNameAra.Name = "lblNameAra"
+            Me.lblNameAra.Translatable = True
             '
             'floDataDisplay
             '
@@ -537,30 +661,31 @@ Namespace PresentationLayer.Views.Forms
             'PensionSchemeEntryTv
             '
             resources.ApplyResources(Me, "$this")
-            Me.Controls.Add(Me.floDataDisplay)
-        Me.Name = "PensionSchemeEntryTv"
-        Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsPensionRates,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout4.ResumeLayout(false)
-        Me.tlpPensionScheme.ResumeLayout(false)
-        Me.tlpPensionScheme.PerformLayout
-        Me.tbcPensionScheme.ResumeLayout(false)
-        Me.tbpMain.ResumeLayout(false)
-        Me.CFlowLayout1.ResumeLayout(false)
-        Me.CFlowLayout1.PerformLayout
-        Me.tlpMainTab.ResumeLayout(false)
-        Me.tlpMainTab.PerformLayout
-        Me.tbpPensionRates.ResumeLayout(false)
-        Me.tbpPensionRates.PerformLayout
-        Me.tlpPostingAccounts.ResumeLayout(false)
-        CType(Me.DataGridViewPensionRates,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.Name = "PensionSchemeEntryTv"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPensionRates, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout4.ResumeLayout(False)
+            Me.tlpPensionScheme.ResumeLayout(False)
+            Me.tlpPensionScheme.PerformLayout()
+            Me.tbcPensionScheme.ResumeLayout(False)
+            Me.tbpMain.ResumeLayout(False)
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout()
+            Me.tlpMainTab.ResumeLayout(False)
+            Me.tlpMainTab.PerformLayout()
+            Me.tbpPensionRates.ResumeLayout(False)
+            Me.tbpPensionRates.PerformLayout()
+            Me.tlpPostingAccounts.ResumeLayout(False)
+            CType(Me.DataGridViewPensionRates, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(False)
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents bsPensionRates As BindingSource
         Friend WithEvents CFlowLayout4 As CFlowLayout
         Friend WithEvents tlpPensionScheme As TableLayoutPanel

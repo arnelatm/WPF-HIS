@@ -55,6 +55,17 @@ Namespace PresentationLayer.Views.Forms
             Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
             resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
             '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
+            Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            '
             'CFlowLayout1
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
