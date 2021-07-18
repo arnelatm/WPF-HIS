@@ -10,20 +10,10 @@ Namespace PresentationLayer.Views.Forms
         Private _pensionRates As List(Of PensionRateView)
 
         Public Sub New()
-
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "PensionScheme"
-            TvMainFieldName = "PensionSchemeName"
-            TvSecondaryFieldName = "PensionSchemeCode"
-            SortOrderKey = "PensionSchemeName"
             FirstControl = txtPensionSchemeCode
-            PresenterObj = New PensionSchemePresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-
         End Sub
 
 #Region "Fields"
@@ -104,9 +94,10 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
-            cboPensionProviderIdNo.DataSource = PresenterObj.GetLookup("PensionProvider")
+            CreateDataSource("PensionProvider", cboPensionProviderIdNo)
+            CreateDataSource("Account", cboAccountIdNo, "Detail=1")
         End Sub
+
 
         Private Sub BindPensionRates()
             SuspendLayout()

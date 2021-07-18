@@ -1,17 +1,18 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PayCyclePresenter
-        Inherits AccountsPresenter(Of IPayCycleView, PayCycleModel)
+    Public Class PayCyclePresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IPayCycleView, TM)
 
         Public Sub New(view As IPayCycleView)
             MyBase.New(view)
-            InitializerWithTv("PayCycle")
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            Service = New ServiceAccounts("PayCycle")
+            TableName = "PayCycle"
+            TreeViewMainField = "PayCycleName"
+            TreeViewSecondaryField = "PayCycleCode"
+            SortOrderKey = "PayCycleName"
         End Sub
 
     End Class

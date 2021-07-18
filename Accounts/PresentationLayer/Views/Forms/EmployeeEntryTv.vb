@@ -419,7 +419,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CountryTelCodes As List(Of Lookup.LookupData)
             Get
-                CreateLookupData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
+                MyBase.CreateLookupData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
                 Return _countryTelCodes
             End Get
             Set
@@ -441,12 +441,16 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("Religion", cacReligionIdNo)
             CreateDataSource("PayCycle", cboPayCycleidNo)
             CreateDataSource("PayGroup", cboPayGroupIdNo)
-            _phoneTypes = GetLookupData("PhoneType", NameOf(_phoneTypes))
+            CreateLookupData("PhoneType")
             _deductionsByName = GetLookupData("PayElement", NameOf(_deductionsByName),
                           "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
             _earningsByName = GetLookupData("PayElement", NameOf(_earningsByName),
                           "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
             _unit = GetEnumData(Of PayRateUnitSelection)()
+        End Sub
+
+        Private Sub CreateLookupData(tableName As String, cVariableName As String)
+            _phoneTypes = GetLookupData(tableName, cVariableName)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()

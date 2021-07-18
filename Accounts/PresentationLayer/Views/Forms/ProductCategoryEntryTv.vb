@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -11,27 +10,11 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "ProductCategory"
-            TvMainFieldName = "ProductCategoryName"
-            TvSecondaryFieldName = "ProductCategoryCode"
-            SortOrderKey = "ProductCategoryName"
             FirstControl = txtProductCategoryCode
-
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New ProductCategoryPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-            'CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("CategoryTypeSelection", GetType(CategoryTypeSelection))
         End Sub
 
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("CategoryTypeSelection", GetType(CategoryTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        End Sub
-
+#Region "Fields"
         Public Property IdNo As Int16 Implements IProductCategoryView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int16)(TxtIdNo.Text)
@@ -76,6 +59,7 @@ Namespace PresentationLayer.Views.Forms
                 txtNotes.Text = If(Value, "")
             End Set
         End Property
+#End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
