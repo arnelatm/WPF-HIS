@@ -10,16 +10,8 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "PayCycle"
-            TvMainFieldName = "PayCycleName"
-            TvSecondaryFieldName = "PayCycleCode"
-            SortOrderKey = "SortKey"
             FirstControl = txtPayCycleCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New PayCyclePresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"
@@ -99,7 +91,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboPayFrequency.DataSource = PresenterObj.MakeEnumComboList(Of PayFrequencySelection)
+            CreateEnumDataSource(Of PayFrequencySelection)(cboPayFrequency)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()

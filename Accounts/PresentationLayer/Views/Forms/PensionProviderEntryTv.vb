@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Views.Forms
@@ -14,15 +13,8 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             _nfi.NumberDecimalDigits = 2
-            MainTableName = "PensionProvider"
-            TvMainFieldName = "PensionProviderName"
-            TvSecondaryFieldName = "PensionProviderCode"
-            SortOrderKey = "PensionProviderName"
             FirstControl = txtPensionProviderCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New PensionProviderPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Fields"
@@ -259,9 +251,9 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cacCountryCode.DataSource = PresenterObj.GetLookup("Country")
-            cacBankIdNo.DataSource = PresenterObj.GetLookup("Bank")
-            cacPaymentMethod.DataSource = PresenterObj.MakeEnumComboList(Of PaymentMethodSelection)
+            CreateDataSource("Country", cacCountryCode)
+            CreateDataSource("Bank", cacBankIdNo)
+            CreateEnumDataSource(Of PaymentMethodSelection)(cacPaymentMethod)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()

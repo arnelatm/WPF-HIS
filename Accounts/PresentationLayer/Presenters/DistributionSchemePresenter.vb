@@ -1,27 +1,21 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
-    Public Class DistributionSchemePresenter
-        Inherits AccountsPresenter(Of IDistributionSchemeView, DistributionSchemeModel)
+    Public Class DistributionSchemePresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IDistributionSchemeView, TM)
 
-        Public ParentViewList As List(Of DistributionSchemeModel)
+        Public ParentViewList As List(Of TM)
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _distributionSchemeItemModel As New ModelAccounts("DistributionSchemeItem")
+        Private ReadOnly _distributionSchemeItemService As New ServiceAccounts("DistributionSchemeItem")
 
         Public Sub New(view As IDistributionSchemeView)
             MyBase.New(view)
             TableName = "DistributionScheme"
             SortOrderKey = "DistributionSchemeName"
-            ModelOfPresenter = New ModelAccounts("DistributionScheme")
-            OriginalModel = New DistributionSchemeModel()
-            DataModel = New DistributionSchemeModel
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
 
             DtInsertTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
@@ -66,7 +60,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Int32 = retVal
-            retVal = UpdateChildData(_distributionSchemeItemModel, DtUpdateTable, DtInsertTable, passedValue, "DistributionSchemeIdNo")
+            retVal = UpdateChildData(_distributionSchemeItemService, DtUpdateTable, DtInsertTable, passedValue, "DistributionSchemeIdNo")
         End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean

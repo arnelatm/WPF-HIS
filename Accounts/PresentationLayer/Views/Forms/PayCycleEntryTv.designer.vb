@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class PayCycleEntryTv
-        Inherits CFormEntryTv
+        Inherits CFormEntryTvNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -39,16 +39,27 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblPayCycleNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floDataDisplay.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TreeViewTableName
+            'SplitContainer1
             '
-            Me.TreeViewTableName.LineColor = System.Drawing.Color.Black
-            Me.TreeViewTableName.MinimumSize = New System.Drawing.Size(300, 258)
-            Me.TreeViewTableName.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.TreeViewTableName.Size = New System.Drawing.Size(300, 258)
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            Me.SplitContainer1.Size = New System.Drawing.Size(995, 410)
+            Me.SplitContainer1.SplitterDistance = 330
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            Me.FormTreeView.Size = New System.Drawing.Size(330, 410)
             '
             'ImageListTreeView
             '
@@ -56,23 +67,20 @@ Namespace PresentationLayer.Views.Forms
             Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
             Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
             '
-            'TranslatorDAC
-            '
-            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-            '
-            'AppDataDAC
-            '
-            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-            '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
             Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
             Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -85,19 +93,26 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
             Me.TxtIdNo.TabIndex = 0
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
             'txtPayCycleCode
             '
             Me.txtPayCycleCode.BackColor = System.Drawing.Color.White
+            Me.txtPayCycleCode.BegFindValue = Nothing
             Me.txtPayCycleCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPayCycleCode.ComputedValue = False
             Me.txtPayCycleCode.CustomFormat = Nothing
             Me.txtPayCycleCode.DataBoundControl = True
             Me.txtPayCycleCode.EditingMode = False
+            Me.txtPayCycleCode.EndFindValue = Nothing
+            Me.txtPayCycleCode.FieldDescription = Nothing
+            Me.txtPayCycleCode.FieldName = Nothing
+            Me.txtPayCycleCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPayCycleCode.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtPayCycleCode, True)
             Me.txtPayCycleCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -110,18 +125,25 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayCycleCode.Name = "txtPayCycleCode"
             Me.txtPayCycleCode.OldValue = Nothing
             Me.txtPayCycleCode.ReadOnly = True
+            Me.txtPayCycleCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayCycleCode.Size = New System.Drawing.Size(62, 23)
             Me.txtPayCycleCode.TabIndex = 1
+            Me.txtPayCycleCode.Translatable = False
             Me.txtPayCycleCode.ValueIsMandatory = True
             '
             'txtPayCycleName
             '
             Me.txtPayCycleName.BackColor = System.Drawing.Color.White
+            Me.txtPayCycleName.BegFindValue = Nothing
             Me.txtPayCycleName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPayCycleName.ComputedValue = False
             Me.txtPayCycleName.CustomFormat = Nothing
             Me.txtPayCycleName.DataBoundControl = True
             Me.txtPayCycleName.EditingMode = False
+            Me.txtPayCycleName.EndFindValue = Nothing
+            Me.txtPayCycleName.FieldDescription = Nothing
+            Me.txtPayCycleName.FieldName = Nothing
+            Me.txtPayCycleName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPayCycleName.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtPayCycleName, True)
             Me.txtPayCycleName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -134,19 +156,26 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayCycleName.Name = "txtPayCycleName"
             Me.txtPayCycleName.OldValue = Nothing
             Me.txtPayCycleName.ReadOnly = True
+            Me.txtPayCycleName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayCycleName.Size = New System.Drawing.Size(418, 23)
             Me.txtPayCycleName.TabIndex = 2
+            Me.txtPayCycleName.Translatable = False
             Me.txtPayCycleName.ValueIsMandatory = True
             '
             'txtPayCycleNameAra
             '
             Me.txtPayCycleNameAra.BackColor = System.Drawing.Color.White
+            Me.txtPayCycleNameAra.BegFindValue = Nothing
             Me.txtPayCycleNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtPayCycleNameAra.ComputedValue = False
             Me.txtPayCycleNameAra.CustomFormat = Nothing
             Me.txtPayCycleNameAra.DataBoundControl = True
             Me.txtPayCycleNameAra.EditingMode = False
+            Me.txtPayCycleNameAra.EndFindValue = Nothing
             Me.txtPayCycleNameAra.EnglishControl = Me.txtPayCycleName
+            Me.txtPayCycleNameAra.FieldDescription = Nothing
+            Me.txtPayCycleNameAra.FieldName = Nothing
+            Me.txtPayCycleNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPayCycleNameAra.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtPayCycleNameAra, True)
             Me.txtPayCycleNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -160,17 +189,24 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayCycleNameAra.OldValue = Nothing
             Me.txtPayCycleNameAra.ReadOnly = True
             Me.txtPayCycleNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtPayCycleNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayCycleNameAra.Size = New System.Drawing.Size(418, 23)
             Me.txtPayCycleNameAra.TabIndex = 4
+            Me.txtPayCycleNameAra.Translatable = False
             '
             'txtNotes
             '
             Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
             Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtNotes.FindEnabled = True
             Me.floDataDisplay.SetFlowBreak(Me.txtNotes, True)
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -184,8 +220,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
             Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Size = New System.Drawing.Size(418, 60)
             Me.txtNotes.TabIndex = 5
+            Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
             'floDataDisplay
@@ -204,12 +242,12 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtPayCycleNameAra)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
-            Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Left
-            Me.floDataDisplay.Location = New System.Drawing.Point(300, 53)
+            Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.floDataDisplay.Location = New System.Drawing.Point(0, 0)
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(430, 180)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(654, 207)
+            Me.floDataDisplay.Size = New System.Drawing.Size(655, 410)
             Me.floDataDisplay.TabIndex = 147
             '
             'lblIdNo
@@ -224,6 +262,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.TabIndex = 150
             Me.lblIdNo.Text = "ID No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblIdNo.Translatable = True
             '
             'lblPayCycleCode
             '
@@ -237,6 +276,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleCode.TabIndex = 156
             Me.lblPayCycleCode.Text = "Code"
             Me.lblPayCycleCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayCycleCode.Translatable = True
             '
             'lblPayCycleName
             '
@@ -250,6 +290,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleName.TabIndex = 157
             Me.lblPayCycleName.Text = "Name"
             Me.lblPayCycleName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayCycleName.Translatable = True
             '
             'lblPayFrequency
             '
@@ -264,21 +305,29 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayFrequency.TabIndex = 288
             Me.lblPayFrequency.Text = "Pay Frequency"
             Me.lblPayFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayFrequency.Translatable = True
             '
             'cboPayFrequency
             '
             Me.cboPayFrequency.BackColor = System.Drawing.Color.White
+            Me.cboPayFrequency.BegFindValue = Nothing
             Me.cboPayFrequency.ChangingSearchValueOnly = False
             Me.cboPayFrequency.CurrentSearchTerm = ""
             Me.cboPayFrequency.DefaultValue = Nothing
             Me.cboPayFrequency.DisplayMember = "Name"
             Me.cboPayFrequency.EditingMode = False
+            Me.cboPayFrequency.EndFindValue = Nothing
+            Me.cboPayFrequency.FieldDescription = Nothing
+            Me.cboPayFrequency.FieldName = Nothing
             Me.cboPayFrequency.FilterRule = Nothing
+            Me.cboPayFrequency.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPayFrequency.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboPayFrequency, True)
             Me.cboPayFrequency.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboPayFrequency.ForeColor = System.Drawing.Color.Black
             Me.cboPayFrequency.FormattingEnabled = True
             Me.cboPayFrequency.HideWhenNotEditingOrAdding = False
+            Me.cboPayFrequency.IgnoreCase = False
             Me.cboPayFrequency.IntegralHeight = False
             Me.cboPayFrequency.LinkedLabel = Me.lblPayFrequency
             Me.cboPayFrequency.Location = New System.Drawing.Point(212, 86)
@@ -296,6 +345,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayFrequency.SuggestListOrderRule = Nothing
             Me.cboPayFrequency.TabIndex = 3
             Me.cboPayFrequency.TextToSearch = Nothing
+            Me.cboPayFrequency.Translatable = False
             Me.cboPayFrequency.ValueIsMandatory = False
             Me.cboPayFrequency.ValueIsNullable = False
             Me.cboPayFrequency.ValueIsNumeric = False
@@ -313,6 +363,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleNameAra.TabIndex = 158
             Me.lblPayCycleNameAra.Text = "Name (Arabic)"
             Me.lblPayCycleNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPayCycleNameAra.Translatable = True
             '
             'lblNotes
             '
@@ -326,16 +377,18 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.TabIndex = 159
             Me.lblNotes.Text = "Notes"
             Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblNotes.Translatable = True
             '
             'PayCycleEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(955, 260)
-            Me.Controls.Add(Me.floDataDisplay)
+            Me.ClientSize = New System.Drawing.Size(995, 463)
             Me.Name = "PayCycleEntryTv"
             Me.Text = "Pay Cycles Maintenance Form"
-            Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-            Me.Controls.SetChildIndex(Me.floDataDisplay, 0)
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
             Me.floDataDisplay.PerformLayout()

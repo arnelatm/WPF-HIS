@@ -1,19 +1,19 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PensionProviderPresenter
-        Inherits AccountsPresenter(Of IPensionProviderView, PensionProviderModel)
-
-        Public ParentViewList As List(Of PensionProviderModel)
+    Public Class PensionProviderPresenter(Of TM As New)
+        Inherits PresenterNew(Of IPensionProviderView, TM)
 
         Public Sub New(view As IPensionProviderView)
             MyBase.New(view)
-            InitializerWithTv("PensionProvider")
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            Service = New ServiceAccounts("PensionProvider")
+            TableName = "PensionProvider"
+            TreeViewMainField = "PensionProviderName"
+            TreeViewSecondaryField = "PensionProviderCode"
+            SortOrderKey = "PensionProviderName"
         End Sub
 
     End Class
