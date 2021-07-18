@@ -33,7 +33,7 @@ Public Class CFormEntryNew
     'Private _recordPositionNumber As Int32 = 0
     Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
-    Public Ea As EventAggregator
+
     Private _editingMode As Boolean = False
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
@@ -490,26 +490,11 @@ Public Class CFormEntryNew
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             CreateDataSources()
             CreateMainFieldsDictionary()
-            PublishClickedButton(ButtonClicked.Last)
-            Inputs(False)
-
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New EntryFormLoaded(Me))
             End If
-
-            If GlobalVariables.RightToLeftLayout Then
-                btnArabic.Visible = False
-                btnOriginal.Visible = True
-            Else
-                btnArabic.Visible = True
-                btnOriginal.Visible = False
-            End If
-            If FirstControl IsNot Nothing Then
-                FirstControl.Focus()
-            End If
-            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
-                HideButton(btnDebug)
-            End If
+            PublishClickedButton(ButtonClicked.Last)
+            Inputs(False)
             If SingleData Or HideNavigatorButtons Then
                 btnFirst.Visible = False
                 btnNext.Visible = False
@@ -520,6 +505,21 @@ Public Class CFormEntryNew
                 tssNavigator2.Visible = False
                 tssnavigator1.Visible = False
                 btnOf.Visible = False
+            End If
+            If GlobalVariables.RightToLeftLayout Then
+                btnArabic.Visible = False
+                btnOriginal.Visible = True
+                btnOriginal.Enabled = True
+            Else
+                btnArabic.Visible = True
+                btnOriginal.Visible = False
+                btnArabic.Enabled = True
+            End If
+            If FirstControl IsNot Nothing Then
+                FirstControl.Focus()
+            End If
+            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
+                HideButton(btnDebug)
             End If
             'UpdateNavigationButtonDisplay(False, False)
         End If
@@ -586,6 +586,8 @@ Public Class CFormEntryNew
         TranslateForm()
         btnArabic.Visible = originalUi
         btnOriginal.Visible = Not originalUi
+        btnArabic.Enabled = originalUi
+        btnOriginal.Enabled = Not originalUi
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New LanguageChanged(Me))
         End If
@@ -654,11 +656,11 @@ Public Class CFormEntryNew
 
     ' ReSharper disable once UnassignedField.Local
 
-    Protected Function GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) As List(Of Lookup.LookupData)
-        Dim dataLookupFunctionVariable As New List(Of Lookup.LookupData)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, "dataLookupFunctionVariable", filter))
-        Return dataLookupFunctionVariable
-    End Function
+    Protected Sub GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) 'As List(Of Lookup.LookupData)
+        'Dim dataLookupFunctionVariable As New List(Of Lookup.LookupData)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, filter))
+        'Return dataLookupFunctionVariable
+    End Sub
 
     Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String)
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
@@ -680,11 +682,15 @@ Public Class CFormEntryNew
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
     End Sub
 
-    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox, Optional dataSource As Boolean = True)
+    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
         comboControl.DataSource = GetEnumData(Of TE)()
     End Sub
 
-    Public Function GetEnumData(Of TE)()
+    Public Sub CreateEnumData(Of TE)(ByRef dataTarget As Object)
+        dataTarget = GetEnumData(Of TE)()
+    End Sub
+
+    Private Function GetEnumData(Of TE)()
         Dim dataList As New List(Of Lookup.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
             Dim data As New Lookup.LookupData With {

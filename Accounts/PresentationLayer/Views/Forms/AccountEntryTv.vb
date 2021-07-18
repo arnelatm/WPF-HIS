@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
@@ -9,25 +10,14 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "Account_View"
-            TvMainFieldName = "AccountName"
-            TvSecondaryFieldName = "AccountCode"
-            SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
             FirstControl = txtAccountCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New AccountPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
-
-            'CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("ActiveSelection", GetType(ActiveSelection))
-            'ResourceEnumConverter.MakeResource("AccountGroupSelection", GetType(AccountGroupSelection))
-            'ResourceEnumConverter.MakeResource("DebitCreditSelection", GetType(DebitCreditSelection))
-            'ResourceEnumConverter.MakeResource("PayeeTypeSelection", GetType(PayeeTypeSelection))
         End Sub
 
+
+
+#Region "Fields"
         Public Property AccountCode As String Implements IAccountView.AccountCode
             Get
                 Return txtAccountCode.Text
@@ -84,11 +74,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int16 Implements IAccountView.IdNo
             Get
-                If txtIdNo.Text <> "" Then
-                    Return Convert.ToInt16(txtIdNo.Text)
-                Else
-                    Return 0
-                End If
+                Return GlobalFunctions.NumParser(Of Int16)(txtIdNo.Text)
             End Get
             Set
                 txtIdNo.Text = Convert.ToString(Value)
@@ -169,6 +155,9 @@ Namespace PresentationLayer.Views.Forms
                 cboSpecialAccount.SetValue(Value)
             End Set
         End Property
+#End Region
+        Public Event ParentIdUpdated(ByRef accountGroupEditable As Boolean) Implements IAccountView.ParentIdUpdated
+
 
         'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
         '    If String.IsNullOrEmpty(txtLevelNumber.Text) OrElse CInt(txtLevelNumber.Text) = 0 Then
@@ -177,18 +166,12 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-        Public Sub CreateEnumResourceFile()
-            'ResourceEnumConverter.MakeResource("YesNoSelection", GetType(YesNoSelection))
-            'ResourceEnumConverter.MakeResource("AccountTypeSelection", GetType(AccountTypeSelection))
-            'ResourceEnumConverter.MakeResource("ImageTypeSelection", GetType(ImageTypeSelection))
-        End Sub
-
         Protected Overrides Sub CreateDataSources()
-            cboParentIdNo.DataSource = PresenterObj.GetLookup("Account")
-            cboAccountGroup.DataSource = PresenterObj.MakeEnumComboList(Of AccountGroupSelection)
-            cboPayeeType.DataSource = PresenterObj.MakeEnumComboList(Of PayeeTypeSelection)
-            cboNormalBalance.DataSource = PresenterObj.MakeEnumComboList(Of DebitCreditSelection)
-            cboSpecialAccount.DataSource = PresenterObj.MakeEnumComboList(Of SpecialAccountSelection)
+            CreateDataSource("Account", cboParentIdNo)
+            CreateEnumDataSource(Of AccountGroupSelection)(cboAccountGroup)
+            CreateEnumDataSource(Of PayeeTypeSelection)(cboPayeeType)
+            CreateEnumDataSource(Of DebitCreditSelection)(cboNormalBalance)
+            CreateEnumDataSource(Of SpecialAccountSelection)(cboSpecialAccount)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -212,7 +195,7 @@ Namespace PresentationLayer.Views.Forms
                     }
         End Sub
 
-        Protected Overrides Sub InputsTurnedOn()
+        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             If PresenterObj.AccountHasChildren(IdNo) Then
                 cboParentIdNo.DisplayOnly = True
                 cboNormalBalance.DisplayOnly = True
@@ -242,12 +225,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboParentIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboParentIdNo.SelectedIndexChanged
-            If PresenterObj.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
+            Dim editable As Boolean
+            RaiseEvent ParentIdUpdated(editable)
+            If editable Then
                 cboAccountGroup.DisplayOnly = False
             Else
                 cboAccountGroup.DisplayOnly = True
             End If
-            PresenterObj.ParentIdUpdated()
         End Sub
 
     End Class

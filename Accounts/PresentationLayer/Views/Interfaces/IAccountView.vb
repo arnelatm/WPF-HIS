@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property SortKey As String
         Property SpecialAccount As String
         Property WithReconciliation As Boolean
+        Event ParentIdUpdated(ByRef accountGroupEditable As Boolean)
     End Interface
 
 End Namespace

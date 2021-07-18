@@ -433,6 +433,7 @@ Namespace PresentationLayer.Views.Forms
             CreateEnumDataSource(Of MaleFemaleSelection)(cacGender)
             CreateEnumDataSource(Of MaritalStatusSelection)(cacMaritalStatus)
             CreateEnumDataSource(Of PayrollPaymentMethodSelection)(cboPaymentMethod)
+            CreateEnumData(Of PayRateUnitSelection)(_unit)
             CreateDataSource("Bank", cacBankIdNo)
             CreateDataSource("Country", cacCountryCode)
             CreateDataSource("Department", cacDepartmentIdNo)
@@ -442,13 +443,8 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("PayCycle", cboPayCycleidNo)
             CreateDataSource("PayGroup", cboPayGroupIdNo)
             CreateLookupData("PhoneType", NameOf(_phoneTypes))
-
-            'CreateLookupData()
-            _deductionsByName = GetLookupData("PayElement", NameOf(_deductionsByName),
-                          "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            _earningsByName = GetLookupData("PayElement", NameOf(_earningsByName),
-                          "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            _unit = GetEnumData(Of PayRateUnitSelection)()
+            CreateLookupData("PayElement", NameOf(_deductionsByName), "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            CreateLookupData("PayElement", NameOf(_earningsByName), "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
         End Sub
 
         'Private Sub CreateLookupData(tableName As String, cVariableName As String)
