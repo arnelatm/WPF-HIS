@@ -441,7 +441,9 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("Religion", cacReligionIdNo)
             CreateDataSource("PayCycle", cboPayCycleidNo)
             CreateDataSource("PayGroup", cboPayGroupIdNo)
-            CreateLookupData("PhoneType")
+            CreateLookupData("PhoneType", NameOf(_phoneTypes))
+
+            'CreateLookupData()
             _deductionsByName = GetLookupData("PayElement", NameOf(_deductionsByName),
                           "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
             _earningsByName = GetLookupData("PayElement", NameOf(_earningsByName),
@@ -449,9 +451,9 @@ Namespace PresentationLayer.Views.Forms
             _unit = GetEnumData(Of PayRateUnitSelection)()
         End Sub
 
-        Private Sub CreateLookupData(tableName As String, cVariableName As String)
-            _phoneTypes = GetLookupData(tableName, cVariableName)
-        End Sub
+        'Private Sub CreateLookupData(tableName As String, cVariableName As String)
+        '    _phoneTypes = GetLookupData(tableName, cVariableName)
+        'End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From

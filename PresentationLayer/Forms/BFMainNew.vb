@@ -9,7 +9,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views
 
-Public Class BFMainNew
+Public Class BfMainNew
     Implements IView
 
     Dim _originalText As String
@@ -570,16 +570,16 @@ Public Class BFMainNew
         End If
     End Sub
 
-    Private Sub ApplyMenuSecurityNew(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String)
-        Dim toolStripMenuItem As ToolStripMenuItem = obj
-        Dim controlSecurityKey = subMenuName + " > " + Mid(toolStripMenuItem.Name, 18)
-        If GlobalVariables.IsUserLoggedIn Then
-            SetMenuSecurity(toolStripMenuItem, controlSecurityKey)
-        Else
-            toolStripMenuItem.Enabled = False
-            toolStripMenuItem.Visible = True
-        End If
-    End Sub
+    'Private Sub ApplyMenuSecurityNew(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String)
+    '    Dim toolStripMenuItem As ToolStripMenuItem = obj
+    '    Dim controlSecurityKey = subMenuName + " > " + Mid(toolStripMenuItem.Name, 18)
+    '    If GlobalVariables.IsUserLoggedIn Then
+    '        SetMenuSecurity(toolStripMenuItem, controlSecurityKey)
+    '    Else
+    '        toolStripMenuItem.Enabled = False
+    '        toolStripMenuItem.Visible = True
+    '    End If
+    'End Sub
 
     'Private Function ApplyMenuSecurity(ByRef obj As ToolStripMenuItem, ByRef subMenuName As String, ByVal parentIdNo As Int32) As Int32
     '    Dim toolStripMenuItem As ToolStripMenuItem = obj
@@ -618,9 +618,9 @@ Public Class BFMainNew
             Dim isVisible As Boolean
 
             securityIdNo = GetControlSecurityIdNo(controlSecurityKey, True)
+
             If securityIdNo <> 0 Then
-                controlSecurityValues = PresenterObj.GetUserSecurity(Convert.ToInt16(securityIdNo),
-                                                                     GlobalVariables.SecurityGroupIdNo)
+                controlSecurityValues = SetControlSecurityValue(securityIdNo)
                 If controlSecurityValues.Count > 0 Then
                     ' Visible property stored in first element of the array
                     isVisible = controlSecurityValues(0)
@@ -640,6 +640,14 @@ Public Class BFMainNew
             End If
         End If
     End Sub
+
+    Private Function SetControlSecurityValue(securityIdNo As Integer) As ArrayList
+        Dim controlSecurityValues As ArrayList
+
+        controlSecurityValues = PresenterObj.GetUserSecurity(Convert.ToInt16(securityIdNo),
+                                                             GlobalVariables.SecurityGroupIdNo)
+        Return controlSecurityValues
+    End Function
 
     Private Sub BFMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
@@ -673,43 +681,7 @@ Public Class BFMainNew
         End If
     End Function
 
-    'Public Sub SetObjectSecurityNew(ByRef cCtrl As Control)
-    '    Dim objectSecurityKey As String
-    '    If TypeOf cCtrl Is MenuStrip Then
-    '        ' check for MenuStrip first because MenuStrip is also a ToolStrip
-    '        Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
-    '        Dim menuStrip As MenuStrip = cCtrl
-    '        SetMenuSecurity(menuStrip, subMenuName)
-    '        SetMenuStripItemsNew(menuStrip.Items, subMenuName)
-    '    ElseIf TypeOf cCtrl Is ToolStrip Then
-    '        Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
-    '        Dim toolStrip As ToolStrip = cCtrl
-    '        SetMenuSecurity(toolStrip, subMenuName)
-    '        SetToolStripItemsNew(toolStrip.Items, subMenuName)
-    '    Else
-    '        objectSecurityKey = GetControlSecurityKey(cCtrl)
-    '        If objectSecurityKey Is Nothing OrElse objectSecurityKey = "" Then
-    '            'cCtrl.Visible = True
-    '            'cCtrl.Enabled = True
-    '        Else
-    '            Dim controlSecurityValues As ArrayList
-    '            Dim isEditable As Boolean
-    '            Dim isVisible As Boolean
-    '            controlSecurityValues = GetControlSecurityValues(objectSecurityKey)
-    '            If controlSecurityValues.Count > 0 Then
-    '                isVisible = controlSecurityValues(0)
-    '                isEditable = controlSecurityValues(1)
-    '            Else
-    '                isVisible = False
-    '                isEditable = False
-    '            End If
-    '            SetControlVisibility(cCtrl, isVisible)
-    '            SetControlEditability(cCtrl, isEditable)
-    '        End If
-    '    End If
-    'End Sub
-
-    Private Sub InitializeSecurityObject(ByRef cCtrl As Control)
+    Public Sub SetObjectSecurityNew(ByRef cCtrl As Control)
         Dim objectSecurityKey As String
         If TypeOf cCtrl Is MenuStrip Then
             ' check for MenuStrip first because MenuStrip is also a ToolStrip
@@ -724,9 +696,9 @@ Public Class BFMainNew
             SetToolStripItemsNew(toolStrip.Items, subMenuName)
         Else
             objectSecurityKey = GetControlSecurityKey(cCtrl)
-            If objectSecurityKey Is Nothing Or objectSecurityKey = "" Then
-                cCtrl.Visible = True
-                cCtrl.Enabled = True
+            If objectSecurityKey Is Nothing OrElse objectSecurityKey = "" Then
+                'cCtrl.Visible = True
+                'cCtrl.Enabled = True
             Else
                 Dim controlSecurityValues As ArrayList
                 Dim isEditable As Boolean
@@ -745,6 +717,42 @@ Public Class BFMainNew
         End If
     End Sub
 
+    'Private Sub InitializeSecurityObject(ByRef cCtrl As Control)
+    '    Dim objectSecurityKey As String
+    '    If TypeOf cCtrl Is MenuStrip Then
+    '        ' check for MenuStrip first because MenuStrip is also a ToolStrip
+    '        Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
+    '        Dim menuStrip As MenuStrip = cCtrl
+    '        SetMenuSecurity(menuStrip, subMenuName)
+    '        SetMenuStripItemsNew(menuStrip.Items, subMenuName)
+    '    ElseIf TypeOf cCtrl Is ToolStrip Then
+    '        Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
+    '        Dim toolStrip As ToolStrip = cCtrl
+    '        SetMenuSecurity(toolStrip, subMenuName)
+    '        SetToolStripItemsNew(toolStrip.Items, subMenuName)
+    '    Else
+    '        objectSecurityKey = GetControlSecurityKey(cCtrl)
+    '        If objectSecurityKey Is Nothing Or objectSecurityKey = "" Then
+    '            cCtrl.Visible = True
+    '            cCtrl.Enabled = True
+    '        Else
+    '            Dim controlSecurityValues As ArrayList
+    '            Dim isEditable As Boolean
+    '            Dim isVisible As Boolean
+    '            controlSecurityValues = GetControlSecurityValues(objectSecurityKey)
+    '            If controlSecurityValues.Count > 0 Then
+    '                isVisible = controlSecurityValues(0)
+    '                isEditable = controlSecurityValues(1)
+    '            Else
+    '                isVisible = False
+    '                isEditable = False
+    '            End If
+    '            SetControlVisibility(cCtrl, isVisible)
+    '            SetControlEditability(cCtrl, isEditable)
+    '        End If
+    '    End If
+    'End Sub
+
     Private Function GetControlSecurityKey(ByRef cCtrl As Control)
         If cCtrl.GetType().GetProperty("SecurityKey") IsNot Nothing Then
             Return GetPropertyValue(cCtrl, "SecurityKey")
@@ -753,11 +761,11 @@ Public Class BFMainNew
         End If
     End Function
 
-    Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
-        Dim controlSecurityObjectIdNo As Int32
-        controlSecurityObjectIdNo = PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
-        Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
-    End Function
+    'Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
+    '    Dim controlSecurityObjectIdNo As Int32
+    '    controlSecurityObjectIdNo = PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
+    '    Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+    'End Function
 
     Private Sub SetControlEditability(ByRef cCtrl As Control, ByRef editable As Boolean)
         ' if Editable is False, make the control readonly property so that it can't be edited
@@ -766,19 +774,19 @@ Public Class BFMainNew
         End If
     End Sub
 
-    Private Sub SetMenuStripItemsNew(dropDownItems As ToolStripItemCollection, pParentMenuName As String)
-        For Each dropDownItem As Object In dropDownItems
-            Dim subMenu = TryCast(dropDownItem, ToolStripMenuItem)
-            If subMenu IsNot Nothing Then
-                Dim parentMenuName = pParentMenuName
-                ApplyMenuSecurityNew(dropDownItem, parentMenuName)
-                If subMenu.HasDropDown Then
-                    Dim childSubMenuName As String = pParentMenuName + " > " + Mid(dropDownItem.Name, 18)
-                    SetMenuStripItemsNew(subMenu.DropDownItems, childSubMenuName)
-                End If
-            End If
-        Next
-    End Sub
+    'Private Sub SetMenuStripItemsNew(dropDownItems As ToolStripItemCollection, pParentMenuName As String)
+    '    For Each dropDownItem As Object In dropDownItems
+    '        Dim subMenu = TryCast(dropDownItem, ToolStripMenuItem)
+    '        If subMenu IsNot Nothing Then
+    '            Dim parentMenuName = pParentMenuName
+    '            ApplyMenuSecurityNew(dropDownItem, parentMenuName)
+    '            If subMenu.HasDropDown Then
+    '                Dim childSubMenuName As String = pParentMenuName + " > " + Mid(dropDownItem.Name, 18)
+    '                SetMenuStripItemsNew(subMenu.DropDownItems, childSubMenuName)
+    '            End If
+    '        End If
+    '    Next
+    'End Sub
 
     'Private Sub SetMenuStripItems(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
     '    Dim parentIdNo As Int32
@@ -796,126 +804,126 @@ Public Class BFMainNew
     '    Next
     'End Sub
 
-    Private Sub SetToolStripItemsNew(dropDownItems As ToolStripItemCollection, subMenuName As String)
-        For Each obj As Object In dropDownItems
-            ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-            If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
-                Dim toolStripButton As ToolStripButton = obj
-                Dim controlSecurityKey = Mid(toolStripButton.Name, 16).TrimEnd()
-                If GlobalVariables.IsUserLoggedIn Then
-                    Dim controlSecurityValues As ArrayList
-                    Dim isSelectable As Boolean
-                    Dim isVisible As Boolean
-                    Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
-                    If securityIdNo <> 0 Then
-                        If GlobalVariables.SecurityGroupIdNo <> 0 Then
-                            controlSecurityValues = PresenterObj.GetUserSecurity(securityIdNo,
-                                                                            GlobalVariables.SecurityGroupIdNo)
-                            If controlSecurityValues.Count > 0 Then
-                                ' Visible property stored in first element of the array
-                                isVisible = controlSecurityValues(0)
-                                ' Editable property stored in third element of the array
-                                isSelectable = controlSecurityValues(1)
-                            Else
-                                isVisible = False
-                                isSelectable = False
-                            End If
-                        Else
-                            isVisible = True
-                            isSelectable = False
-                        End If
-                    Else
-                        isVisible = True
-                        isSelectable = True
-                    End If
-                    toolStripButton.Enabled = isSelectable
-                    toolStripButton.Visible = isVisible
-                Else
-                    If obj.Name = "ToolStripButtonLogin" Then
-                        toolStripButton.Enabled = True
-                        toolStripButton.Visible = True
-                    Else
-                        toolStripButton.Enabled = False
-                        toolStripButton.Visible = True
-                    End If
-                End If
-            Else
-                obj.Enabled = True
-                obj.Visible = True
-            End If
-        Next
-    End Sub
+    'Private Sub SetToolStripItemsNew(dropDownItems As ToolStripItemCollection, subMenuName As String)
+    '    For Each obj As Object In dropDownItems
+    '        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+    '        If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then
+    '            Dim toolStripButton As ToolStripButton = obj
+    '            Dim controlSecurityKey = Mid(toolStripButton.Name, 16).TrimEnd()
+    '            If GlobalVariables.IsUserLoggedIn Then
+    '                Dim controlSecurityValues As ArrayList
+    '                Dim isSelectable As Boolean
+    '                Dim isVisible As Boolean
+    '                Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
+    '                If securityIdNo <> 0 Then
+    '                    If GlobalVariables.SecurityGroupIdNo <> 0 Then
+    '                        controlSecurityValues = PresenterObj.GetUserSecurity(securityIdNo,
+    '                                                                        GlobalVariables.SecurityGroupIdNo)
+    '                        If controlSecurityValues.Count > 0 Then
+    '                            ' Visible property stored in first element of the array
+    '                            isVisible = controlSecurityValues(0)
+    '                            ' Editable property stored in third element of the array
+    '                            isSelectable = controlSecurityValues(1)
+    '                        Else
+    '                            isVisible = False
+    '                            isSelectable = False
+    '                        End If
+    '                    Else
+    '                        isVisible = True
+    '                        isSelectable = False
+    '                    End If
+    '                Else
+    '                    isVisible = True
+    '                    isSelectable = True
+    '                End If
+    '                toolStripButton.Enabled = isSelectable
+    '                toolStripButton.Visible = isVisible
+    '            Else
+    '                If obj.Name = "ToolStripButtonLogin" Then
+    '                    toolStripButton.Enabled = True
+    '                    toolStripButton.Visible = True
+    '                Else
+    '                    toolStripButton.Enabled = False
+    '                    toolStripButton.Visible = True
+    '                End If
+    '            End If
+    '        Else
+    '            obj.Enabled = True
+    '            obj.Visible = True
+    '        End If
+    '    Next
+    'End Sub
 
-    Private Sub SetToolStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, parentIdNo As Int32)
-        Try
-            Dim systemViewIdNo = VSystemViewIdNo
-            For Each obj As Object In dropDownItems
-                ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-                If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then ' And GlobalVariables.SecurityGroupIdNo > 0 Then
-                    Dim toolStripButton As ToolStripButton = obj
-                    'Dim controlSecurityKey = pParentMenuName + "." + Mid(toolStripButton.Name, 16).TrimEnd()
-                    Dim controlSecurityKey = Mid(toolStripButton.Name, 16).TrimEnd()
-                    If GlobalVariables.IsUserLoggedIn Then
-                        Dim controlSecurityValues As ArrayList
-                        Dim isSelectable As Boolean
-                        Dim isVisible As Boolean
-                        'Dim service As New Service
-                        Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
+    'Private Sub SetToolStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String, parentIdNo As Int32)
+    '    Try
+    '        Dim systemViewIdNo = VSystemViewIdNo
+    '        For Each obj As Object In dropDownItems
+    '            ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+    '            If obj.GetType().ToString() = "System.Windows.Forms.ToolStripButton" Then ' And GlobalVariables.SecurityGroupIdNo > 0 Then
+    '                Dim toolStripButton As ToolStripButton = obj
+    '                'Dim controlSecurityKey = pParentMenuName + "." + Mid(toolStripButton.Name, 16).TrimEnd()
+    '                Dim controlSecurityKey = Mid(toolStripButton.Name, 16).TrimEnd()
+    '                If GlobalVariables.IsUserLoggedIn Then
+    '                    Dim controlSecurityValues As ArrayList
+    '                    Dim isSelectable As Boolean
+    '                    Dim isVisible As Boolean
+    '                    'Dim service As New Service
+    '                    Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
 
-                        If securityIdNo <> 0 Then
-                            If GlobalVariables.SecurityGroupIdNo <> 0 Then
-                                controlSecurityValues = PresenterObj.GetUserSecurity(securityIdNo,
-                                                                                GlobalVariables.SecurityGroupIdNo)
-                                If controlSecurityValues.Count > 0 Then
-                                    ' Visible property stored in first element of the array
-                                    isVisible = controlSecurityValues(0)
-                                    ' Editable property stored in third element of the array
-                                    isSelectable = controlSecurityValues(1)
-                                Else
-                                    isVisible = False
-                                    isSelectable = False
-                                End If
-                            Else
-                                isVisible = True
-                                isSelectable = False
-                            End If
-                        Else
-                            isVisible = True
-                            isSelectable = True
-                        End If
-                        toolStripButton.Enabled = isSelectable
-                        toolStripButton.Visible = isVisible
-                    Else
-                        If obj.Name = "ToolStripButtonLogin" Then
-                            toolStripButton.Enabled = True
-                            toolStripButton.Visible = True
-                        Else
-                            toolStripButton.Enabled = False
-                            toolStripButton.Visible = True
-                        End If
-                    End If
-                    If _addSecurityObject Then
-                        Dim securityObject As New SecurityObject With {.SecurityObjectName = controlSecurityKey,
-                                                                       .SystemViewIdNo = systemViewIdNo,
-                                                                       .ParentIdNo = parentIdNo}
-                        PresenterObj.AddSecurityObject(securityObject)
-                    End If
-                Else
-                    obj.Enabled = True
-                    obj.Visible = True
-                End If
-            Next
-            If GlobalVariables.UserName = $"Arnel" Then
-                ' override values regardless of security values
-                For Each obj As Object In dropDownItems
-                    obj.Enabled = True
-                    obj.Visible = True
-                Next
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, $"SetToolStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])
-        End Try
-    End Sub
+    '                    If securityIdNo <> 0 Then
+    '                        If GlobalVariables.SecurityGroupIdNo <> 0 Then
+    '                            controlSecurityValues = PresenterObj.GetUserSecurity(securityIdNo,
+    '                                                                            GlobalVariables.SecurityGroupIdNo)
+    '                            If controlSecurityValues.Count > 0 Then
+    '                                ' Visible property stored in first element of the array
+    '                                isVisible = controlSecurityValues(0)
+    '                                ' Editable property stored in third element of the array
+    '                                isSelectable = controlSecurityValues(1)
+    '                            Else
+    '                                isVisible = False
+    '                                isSelectable = False
+    '                            End If
+    '                        Else
+    '                            isVisible = True
+    '                            isSelectable = False
+    '                        End If
+    '                    Else
+    '                        isVisible = True
+    '                        isSelectable = True
+    '                    End If
+    '                    toolStripButton.Enabled = isSelectable
+    '                    toolStripButton.Visible = isVisible
+    '                Else
+    '                    If obj.Name = "ToolStripButtonLogin" Then
+    '                        toolStripButton.Enabled = True
+    '                        toolStripButton.Visible = True
+    '                    Else
+    '                        toolStripButton.Enabled = False
+    '                        toolStripButton.Visible = True
+    '                    End If
+    '                End If
+    '                If _addSecurityObject Then
+    '                    Dim securityObject As New SecurityObject With {.SecurityObjectName = controlSecurityKey,
+    '                                                                   .SystemViewIdNo = systemViewIdNo,
+    '                                                                   .ParentIdNo = parentIdNo}
+    '                    PresenterObj.AddSecurityObject(securityObject)
+    '                End If
+    '            Else
+    '                obj.Enabled = True
+    '                obj.Visible = True
+    '            End If
+    '        Next
+    '        If GlobalVariables.UserName = $"Arnel" Then
+    '            ' override values regardless of security values
+    '            For Each obj As Object In dropDownItems
+    '                obj.Enabled = True
+    '                obj.Visible = True
+    '            Next
+    '        End If
+    '    Catch ex As Exception
+    '        MessageBox.Show(ex.Message, $"SetToolStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+    '    End Try
+    'End Sub
 
     Private Sub TranslateMenuStripItems(dropDownItems As ToolStripItemCollection, subMenuName As String)
         Try

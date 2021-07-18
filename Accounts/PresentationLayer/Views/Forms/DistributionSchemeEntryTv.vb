@@ -34,9 +34,6 @@ Namespace PresentationLayer.Views.Forms
             SortOrderKey = "DistributionSchemeName"
             FirstControl = txtDistributionSchemeCode
             ' Add any initialization after the InitializeComponent() call.
-            PresenterObj = New DistributionSchemePresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
 
             _distributionSchemeItemsPresenter = New DistributionSchemeItemsPresenter(Me)
 

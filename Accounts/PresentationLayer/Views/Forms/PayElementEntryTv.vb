@@ -639,7 +639,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Protected Overrides Sub InputsTurnedON()
+        Protected Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             tbpSummaryDetail.ImageIndex = -1
             UpdateCalculationTabDisplay()
         End Sub

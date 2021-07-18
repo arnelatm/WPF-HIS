@@ -43,6 +43,8 @@ Namespace PresentationLayer.Views.Forms
         Private _logStatus As LoginStatus
         Private _salaryLoanSchedulePresenter As ISalaryLoanSchedulePresenter
 
+        Public Event UserLoggedIn(sender As Object, controls As List(Of Control))
+
         ''' <summary>
         '''     Default form constructor.
         ''' </summary>
@@ -50,6 +52,7 @@ Namespace PresentationLayer.Views.Forms
 
             AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
             AddHandler Application.ThreadException, AddressOf ThreadExceptionHandler
+
             Dim mySettings = AppSettings.Load()
             GlobalVariables.TranslationMode = mySettings.TranslationInitializer
             _logStatus = LoginStatus.LoggedOut
@@ -99,19 +102,22 @@ Namespace PresentationLayer.Views.Forms
                 _logStatus = Value
                 If _logStatus = LoginStatus.LoggedIn Then
                     Dim allControls As New List(Of Control)
-                    GlobalVariables.IsUserLoggedIn = True
-                    If GlobalVariables.UserName.ToLower() = $"arnel" Then
-                        GlobalSubs.ShowAndEnableMenuItems(AccountsMenu)
-                        If _addSecurityObject Then
-                            For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-                                SetObjectSecurityNew(cCtrl)
-                            Next
-                        End If
-                    Else
-                        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-                            SetObjectSecurityNew(cCtrl)
-                        Next
-                    End If
+                    allControls = FindControlRecursive(allControls, Me)
+                    'GlobalVariables.IsUserLoggedIn = True
+                    'If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                    '    GlobalSubs.ShowAndEnableMenuItems(AccountsMenu)
+                    '    If _addSecurityObject Then
+
+                    '        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+                    '            SetObjectSecurityNew(cCtrl)
+                    '        Next
+                    '    End If
+                    'Else
+                    '    For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+                    '        SetObjectSecurityNew(cCtrl)
+                    '    Next
+                    'End If
+                    RaiseEvent UserLoggedIn(Me, allControls)
                     DisableLogin()
                 Else
                     GlobalVariables.IsUserLoggedIn = False

@@ -40,7 +40,9 @@ Public Class CFormEntryNew
     Private _firstLoadSwitch As UInt16 = 0
 
     Public Event AfterUpdateView()
+
     Public Event InputsTurnedOn()
+
     Public Event InputsTurnedOff()
 
     Public Sub New()
@@ -651,11 +653,11 @@ Public Class CFormEntryNew
     'End Function
 
     ' ReSharper disable once UnassignedField.Local
-    Public DataLookupFunctionVariable As List(Of Lookup.LookupData)
 
     Protected Function GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) As List(Of Lookup.LookupData)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, "DataLookupFunctionVariable", filter))
-        Return DataLookupFunctionVariable
+        Dim dataLookupFunctionVariable As New List(Of Lookup.LookupData)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, "dataLookupFunctionVariable", filter))
+        Return dataLookupFunctionVariable
     End Function
 
     Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String)
