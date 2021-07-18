@@ -214,6 +214,19 @@ Namespace Services
             Return GetLookup(lookupObj)
         End Function
 
+        Public Function GetLookup(tableName As String, sortKey As String, Optional filter As String = Nothing) As List(Of Lookup.LookupData)
+            Dim lookupObj As New Lookup(tableName, filter)
+            lookupObj.SortKey = sortKey
+            Return GetLookup(lookupObj)
+        End Function
+
+        Public Function GetLookup(tableName As String, sortKey As String, fieldsToShow As String(), Optional filter As String = Nothing) As List(Of Lookup.LookupData)
+            Dim lookupObj As New Lookup(tableName, filter)
+            lookupObj.FieldsToShow = fieldsToShow
+            lookupObj.SortKey = sortKey
+            Return GetLookup(lookupObj)
+        End Function
+
         Public Function GetHRecords(lookupObj As Lookup) As List(Of Lookup.HLookupData)
             Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
             Dim tlData = New List(Of Lookup.HLookupData)

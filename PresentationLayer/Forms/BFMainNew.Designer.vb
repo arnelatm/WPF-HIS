@@ -7,7 +7,7 @@ Imports AATM.Libraries.MessagingLibrary
 Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()>
-Partial Class BFMainNew
+Partial Class BfMainNew
     Inherits CForm
 
     'Form overrides dispose to clean up the component list.

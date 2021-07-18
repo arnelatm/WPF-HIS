@@ -201,15 +201,9 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Protected Overrides Sub CreateDataSources()
-            cboProductCategoryIdNo.BeginUpdate()
-            cboProductCategoryIdNo.DataSource = PresenterObj.GetLookup("ProductCategory")
-            cboProductCategoryIdNo.EndUpdate()
-            cboGlAccountIdNo.BeginUpdate()
-            cboGlAccountIdNo.DataSource = PresenterObj.GetDetailAccountList()
-            cboGlAccountIdNo.EndUpdate()
-            cboVatAccountIdNo.BeginUpdate()
-            cboVatAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(EnumToCode(SpecialAccountSelection.VatInput))
-            cboVatAccountIdNo.EndUpdate()
+            CreateDataSource("ProductCategory", cboProductCategoryIdNo)
+            CreateDataSource("Account", cboGlAccountIdNo, "DetailAccount=1")
+            CreateDataSource("Account", cboVatAccountIdNo, "SpecialAccount=" & EnumToCode(SpecialAccountSelection.VatInput))
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()

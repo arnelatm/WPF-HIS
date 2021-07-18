@@ -151,6 +151,16 @@ Public Class ViewButtonClicked
 
 End Class
 
+Public Class LogStatusChanged
+
+    Public Sub New(ByVal controlSecurityKey As String)
+        Me.ControlSecurityKey = controlSecurityKey
+    End Sub
+
+    Public Property ControlSecurityKey As String
+
+End Class
+
 Public Class GetDataSource
 
     Public Sub New(ByVal tableName As String, ByRef control As Control, Optional ByVal filter As String = Nothing)

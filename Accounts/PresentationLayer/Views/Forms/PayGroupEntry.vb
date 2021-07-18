@@ -81,14 +81,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property SortKey As String Implements IPayGroupView.SortKey
-            Get
-                Return txtSortKey.Text
-            End Get
-            Set
-                txtSortKey.Text = Value
-            End Set
-        End Property
+        'Public Property SortKey As String Implements IPayGroupView.SortKey
+        '    Get
+        '        Return txtSortKey.Text
+        '    End Get
+        '    Set
+        '        txtSortKey.Text = Value
+        '    End Set
+        'End Property
 
         Public Property LevelNumber As Int16 Implements IPayGroupView.LevelNumber
             Get
