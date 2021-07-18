@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Globalization
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Transactions
@@ -84,7 +83,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Sub
 
     Private Function GetErrorProvider() As Object
-        Return LateBinding.GetField(View, "MyErrorProvider")
+        Return Invoker.GetField(View, "MyErrorProvider")
     End Function
 
     Protected Sub New()
@@ -137,20 +136,20 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Protected ReadOnly Property MenuFormName As String
         Get
-            Return LateBinding.GetProperty(View, "MenuFormName")
+            Return Invoker.GetProperty(View, "MenuFormName")
         End Get
     End Property
 
     Protected ReadOnly Property ViewName As String
         Get
-            Return LateBinding.GetProperty(View, "Name")
+            Return Invoker.GetProperty(View, "Name")
         End Get
     End Property
 
     Protected ReadOnly Property MainFieldsDictionary As Dictionary(Of String, Object)
         Get
             'Return CallByName(View, "MainFieldsDictionary", CallType.Get)
-            Return LateBinding.GetField(View, "MainFieldsDictionary")
+            Return Invoker.GetField(View, "MainFieldsDictionary")
         End Get
     End Property
 
@@ -170,7 +169,8 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Public Property Ea As EventAggregator
         Get
             'Return CallByName(View, "Ea", CallType.Get)
-            Return LateBinding.GetField(View, "Ea")
+            Return Invoker.GetField(View, "Ea")
+
         End Get
         Set(value As EventAggregator)
             _ea = value
@@ -179,10 +179,10 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Protected Property QuitOnSave As Boolean
         Get
-            Return LateBinding.GetProperty(View, "QuitOnSave")
+            Return Invoker.GetProperty(View, "QuitOnSave")
         End Get
         Set(value As Boolean)
-            LateBinding.SetProperty(View, "QuitOnSave")
+            Invoker.SetProperty(View, "QuitOnSave")
         End Set
     End Property
 
@@ -283,13 +283,6 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Property
 
     Public Property View As TV
-    Protected Property LookUpDisplayCode As String
-    Protected Property LookUpDisplayName As String
-    Protected Property LookUpDisplayNameArabic As String
-    Protected Property LookUpFieldsToShow As String()
-    Protected Property LookUpFilterKey As String = Nothing
-    Protected Property LookUpSortExpression As String
-    Protected Property LookUpTableToGet As String
 
     'Protected Property Service As IModel
     Protected Shared Property ModelTblColProp As IModelTblColProp = New ModelTblColProp
@@ -415,8 +408,8 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                 retValue = Service.DeleteRecord(idNo, TableName)
                 If retValue > 0 Then
-                    If GlobalVariables.EventAggregator IsNot Nothing Then
-                        'GlobalVariables.EventAggregator.PublishEvent(New RecordDeleted(idNo))
+                    If Ea IsNot Nothing Then
+                        Ea.PublishEvent(New RecordDeleted(idNo))
                     End If
                     RaiseEvent SuccessfulDelete(idNo)
                 End If
@@ -531,48 +524,29 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         End Try
     End Function
 
-    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData) Implements IPresenter.GetLookup
-        ComposeLookupParameters(listName)
-        ProcessLookupFields()
-        Return Service.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
+    Public Overloads Function GetLookup(lookupObj As Lookup) As List(Of Lookup.LookupData)
+        Return Service.GetLookup(lookupObj)
     End Function
 
-    Public Overloads Function GetLookup(lLookupTableToGet As String, lLookUpSortExpression As String, lLookupFieldsToShow As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData) Implements IPresenter.GetLookup
-        Dim dFieldName As String
-        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If Service.FieldExistInTable(LookUpTableToGet, lLookUpSortExpression.Trim() + "Ara") Then
-                lLookUpSortExpression = lLookUpSortExpression.Trim() + "Ara"
-            End If
-            If Service.FieldExistInTable(lLookupFieldsToShow(1), lLookupFieldsToShow(1).Trim() + "Ara") Then
-                dFieldName = lLookupFieldsToShow(1).Trim() + "Ara"
-            Else
-                dFieldName = lLookupFieldsToShow(1)
-            End If
-            lLookupFieldsToShow = {lLookupFieldsToShow(0), dFieldName, lLookupFieldsToShow(2)}
-        End If
-        Return Service.GetLookup(lLookupTableToGet, lLookUpSortExpression, lLookupFieldsToShow, filter)
+    Public Overloads Function GetLookup(pTableName As String, Optional pFilter As String = Nothing) As List(Of Lookup.LookupData)
+        Dim lookupObj As New Lookup(pTableName, pFilter)
+        Return Service.GetLookup(lookupObj)
     End Function
 
-    Protected Sub ComposeLookupParameters(listName As String)
-        LookUpTableToGet = listName
-        LookUpDisplayName = listName + "Name"
-        LookUpSortExpression = LookUpDisplayName
-        LookUpDisplayNameArabic = LookUpDisplayName + "Ara"
-        LookUpDisplayCode = listName + "Code"
-    End Sub
+    Public Overloads Function GetLookup(pTableName As String, pSortKey As String, Optional pFilter As String = Nothing) As List(Of Lookup.LookupData)
+        Dim lookupObj As New Lookup(pTableName, pFilter)
+        lookupObj.SortKey = pSortKey
+        lookupObj.FilterKey = pFilter
+        Return Service.GetLookup(lookupObj)
+    End Function
 
-    Private Sub ProcessLookupFields()
-        Dim dFieldName As String
-        If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-            If LookUpSortExpression = LookUpDisplayName Then
-                LookUpSortExpression = LookUpDisplayNameArabic
-            End If
-            dFieldName = LookUpDisplayNameArabic
-        Else
-            dFieldName = LookUpDisplayName
-        End If
-        LookUpFieldsToShow = {"IdNo", dFieldName, LookUpDisplayCode}
-    End Sub
+    Public Overloads Function GetLookup(pTableName As String, pSortKey As String, pFieldsToShow As String(), Optional pFilter As String = Nothing) As List(Of Lookup.LookupData)
+        Dim lookupObj As New Lookup(pTableName, pFilter)
+        lookupObj.SortKey = pSortKey
+        lookupObj.FilterKey = pFilter
+        lookupObj.FieldsToShow = pFieldsToShow
+        Return Service.GetLookup(lookupObj)
+    End Function
 
     Public Function GetOriginalModel() As TM
         Return OriginalModel
@@ -700,7 +674,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Function
 
     Public Overridable Sub GoAddRecord()
-        LastIdNo = LateBinding.GetProperty(View, IdFieldName)
+        LastIdNo = Invoker.GetProperty(View, IdFieldName)
         Try
             Model = New TM
             GlobalVariables.Mapper.Map(Model, View)
@@ -717,7 +691,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Dim record As TM = Activator.CreateInstance(GetType(TM))
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retValue = 0
-        Dim currentIdNo = LateBinding.GetProperty(View, IdFieldName)
+        Dim currentIdNo = Invoker.GetProperty(View, IdFieldName)
         If IsOkToDeleteRecord() Then
             If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 RaiseEvent BeforeDelete()
@@ -809,7 +783,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Sub
 
     Public Sub GoQuit()
-        LateBinding.SetProperty(View, "CancelClose", {False})
+        Invoker.SetProperty(View, "CancelClose", {False})
     End Sub
 
     Public Overridable Function MessageBeforeSave() As Boolean
@@ -1009,8 +983,8 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
             modelData = Service.GetRecordByIdNo(Of TM)(idNo)
             RaiseEvent AfterRecordRetrieval(modelData)
-            If GlobalVariables.EventAggregator IsNot Nothing Then
-                GlobalVariables.EventAggregator.PublishEvent(New BeforeAssignment(modelData))
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New BeforeAssignment(modelData))
             End If
             GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
             For Each child In ChildPresenters
@@ -1026,7 +1000,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Protected Overridable Sub UpdateViewDisplay()
         'CallByName(View, "CurrentRecordChanged", CallType.Method, {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
-        LateBinding.InvokeFunction(View, "UpdateViewDisplay", {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
+        Invoker.InvokeFunction(View, "UpdateViewDisplay", {EditMode, AddMode, RecordPositionNumber, TargetIdNo, RecordCount})
     End Sub
 
     Public Function UsePayGroups()
@@ -1053,36 +1027,36 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         NewlyAddedRecordIdNo = Service.AddRecord(record)
         retVal = NewlyAddedRecordIdNo
         CallByName(View, IdFieldName, CallType.Set, retVal)
-        'LateBinding.SetProperty(View, IdFieldName, retVal)
+        'Invoker.SetProperty(View, IdFieldName, retVal)
         Return retVal
     End Function
 
-    Protected Sub ComposeLookupParametersNew(listName As String)
-        LookUpTableToGet = listName
-        LookUpDisplayName = "Name"
-        LookUpSortExpression = LookUpDisplayName
-        LookUpDisplayNameArabic = "NameAra"
-        LookUpDisplayCode = "Code"
-    End Sub
+    'Protected Sub ComposeLookupParametersNew(listName As String)
+    '    TableToGet = listName
+    '    DisplayName = "Name"
+    '    SortKey = DisplayName
+    '    DisplayNameArabic = "NameAra"
+    '    DisplayCode = "Code"
+    'End Sub
 
     Protected Overridable Function DependentRecordsExist() As Boolean
         Return False
     End Function
 
-    Protected Function GetLookupByCodeName()
-        ProcessLookupFields()
-        Return Service.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
-    End Function
+    'Protected Function GetLookupByCodeName()
+    '    ProcessLookupFields()
+    '    Return Service.GetLookupByCodeName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
+    'End Function
 
-    Protected Function GetLookupByName()
-        ProcessLookupFields()
-        Return Service.GetLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
-    End Function
+    'Protected Function GetLookupByName()
+    '    ProcessLookupFields()
+    '    Return Service.GetLookupByName(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
+    'End Function
 
-    Protected Function GetLookupByNameCode()
-        ProcessLookupFields()
-        Return Service.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
-    End Function
+    'Protected Function GetLookupByNameCode()
+    '    ProcessLookupFields()
+    '    Return Service.GetLookupByNameCode(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, LookUpFilterKey)
+    'End Function
 
     Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
         Dim translatedSortOrder As String = dataSortOrder
@@ -1183,7 +1157,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         If AddMode Then
             parentIdNo = passedValue
         Else
-            parentIdNo = LateBinding.GetProperty(View, IdFieldName)
+            parentIdNo = Invoker.GetProperty(View, IdFieldName)
         End If
         updateReturnValue = childDataService.DelUpdateTvp(updateTable, parentIdNo)
         If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
@@ -1244,7 +1218,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Dim workRow As DataRow = Nothing
         For Each dataView In dataViews
             If includeFilter.Invoke(dataView) Then
-                Dim idNo As Integer = LateBinding.GetProperty(dataView, dataViewIdNoFieldName)
+                Dim idNo As Integer = Invoker.GetProperty(dataView, dataViewIdNoFieldName)
                 If idNo <= 0 Then
                     workRow = insertTable.NewRow()
                 Else
@@ -1337,9 +1311,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Function
 
     Public Function MakeEnumComboList(Of TE)() Implements IPresenter.MakeEnumComboList
-        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        Dim dataList As New List(Of Lookup.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData With {
+            Dim data As New Lookup.LookupData With {
                 .IdNo = CInt(c),
                 .Code = EnumToCode(c),
                 .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
@@ -1953,7 +1927,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Sub
 
     Public Function GetFieldType(fieldName As String) As Type
-        Return LateBinding.GetProperty(Me, fieldName, CallType.Get).GetType
+        Return Invoker.GetProperty(Me, fieldName, CallType.Get).GetType
     End Function
 
     Public Function ControlDescription(control As Control)
@@ -1991,28 +1965,30 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Sub
 
     Protected Sub SetDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
-        Dim data As List(Of ClassesLibrary.LookupData)
-        If dataFields Is Nothing Then
-            data = GetLookup(dataTableName)
-        Else
-            data = GetLookup(dataTableName, sortKey, dataFields, filter)
+        Dim data As List(Of Lookup.LookupData)
+        Dim lookupObj As New Lookup(dataTableName)
+        If dataFields IsNot Nothing Then
+            lookupObj.SortKey = sortKey
+            lookupObj.FieldsToShow = dataFields
+            lookupObj.FilterKey = filter
         End If
+        data = GetLookup(lookupObj)
         SetControlDataSource(control, data)
     End Sub
 
-    Protected Sub SetControlDataSource(cControl As Control, data As List(Of ClassesLibrary.LookupData))
-        LateBinding.SetProperty(cControl, "DataSource", {data})
+    Protected Sub SetControlDataSource(cControl As Control, data As List(Of Lookup.LookupData))
+        Invoker.SetProperty(cControl, "DataSource", {data})
     End Sub
 
     Public Sub OnGetLookupDataRequestedHandler(ByRef eventType As GetLookupDataRequested) Implements ISubscriber(Of GetLookupDataRequested).OnEventHandler
         If eventType.View IsNot Nothing Then
-            Dim data As List(Of ClassesLibrary.LookupData)
+            Dim data As List(Of Lookup.LookupData)
             If eventType.Fields Is Nothing Then
                 data = GetLookup(eventType.TableName, eventType.Filter)
             Else
                 data = GetLookup(eventType.TableName, eventType.SortKey, eventType.Fields, eventType.Filter)
             End If
-            LateBinding.SetProperty(eventType.View, eventType.TargetProperty, {data})
+            Invoker.SetProperty(eventType.View, eventType.TargetProperty, {data})
         End If
     End Sub
 
@@ -2070,9 +2046,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     'End Function
 
     'Public Sub OnGetEnumListHandler(Of TE)(ByRef eventType As GetEnumListRequested) Implements ISubscriber(Of GetEnumListRequested).OnEventHandler
-    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
+    '    Dim dataList As New List(Of Lookup.LookupData)
     '    For Each c In [Enum].GetValues(GetType(TE))
-    '        Dim data As New ClassesLibrary.LookupData With {
+    '        Dim data As New Lookup.LookupData With {
     '                .IdNo = CInt(c),
     '                .Code = EnumToCode(c),
     '                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
@@ -2083,9 +2059,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     'End Sub
 
     'Public Sub OnEventHandler(Of TE)(ByRef eventType As GetEnumListRequested) Implements ISubscriber(Of GetEnumListRequestedNew).OnEventHandler
-    '    Dim dataList As New List(Of ClassesLibrary.LookupData)
+    '    Dim dataList As New List(Of Lookup.LookupData)
     '    For Each c In [Enum].GetValues(GetType(TE))
-    '        Dim data As New ClassesLibrary.LookupData With {
+    '        Dim data As New Lookup.LookupData With {
     '                .IdNo = CInt(c),
     '                .Code = EnumToCode(c),
     '                .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
@@ -2132,22 +2108,24 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Public Function GetTreeViewData()
         Dim cModel As TM = Activator.CreateInstance(GetType(TM))
-        Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
+        'Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
+        Dim lookupObj As New Lookup(TableName, DataFilter)
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Service.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName}, DataFilter)
+                lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName}
             Else
-                Return Service.GetLookup(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, TreeViewSecondaryField}, DataFilter)
+                lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName, TreeViewSecondaryField}
             End If
         Else
-            newSortOrderKey = "SortKey"
+            lookupObj.SortKey = "SortKey"
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                Return Service.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, ParentFieldName})
+                lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName, ParentFieldName}
             Else
-                Return Service.GetHRecords(TableName, newSortOrderKey, {IdFieldName, treeMainFieldName, ParentFieldName, TreeViewSecondaryField})
+                lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName, TreeViewSecondaryField, ParentFieldName}
             End If
         End If
+        Return Service.GetLookup(lookupObj)
     End Function
 
     Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean, treeViewTableName As TreeView)
@@ -2219,10 +2197,10 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Dim cText As String
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-            cText = LateBinding.GetProperty(View, treeMainFieldName).Trim() + " | " + CType(LateBinding.GetProperty(View, IdFieldName), String).Trim()
+            cText = Invoker.GetProperty(View, treeMainFieldName).Trim() + " | " + CType(Invoker.GetProperty(View, IdFieldName), String).Trim()
         Else
-            Dim addText = LateBinding.GetProperty(View, TreeViewSecondaryField)
-            cText = LateBinding.GetProperty(View, treeMainFieldName).Trim() + " | " + CType(LateBinding.GetProperty(View, IdFieldName), String).Trim() +
+            Dim addText = Invoker.GetProperty(View, TreeViewSecondaryField)
+            cText = Invoker.GetProperty(View, treeMainFieldName).Trim() + " | " + CType(Invoker.GetProperty(View, IdFieldName), String).Trim() +
                     If(String.IsNullOrEmpty(addText), "", " (" + addText.ToString().Trim() + ")")
         End If
         Return cText
@@ -2290,6 +2268,10 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         End If
         UpdateViewDisplay()
     End Sub
+
+    'Public Function GetLookup(lookupTableToGet As String, lookUpSortExpression As String, lookupFieldsToShow() As String, Optional filter As String = Nothing) As List(Of Lookup.LookupData) Implements IPresenter.GetLookup
+    '    Throw New NotImplementedException()
+    'End Function
 
 #End Region
 

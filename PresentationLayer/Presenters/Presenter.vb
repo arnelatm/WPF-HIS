@@ -501,7 +501,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
         End Try
     End Function
 
-    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    Public Overloads Function GetLookup(listName As String, Optional filter As String = Nothing) As List(Of Lookup.LookupData)
         ComposeLookupParameters(listName)
         ProcessLookupFields()
         Return Model.GetLookup(LookUpTableToGet, LookUpSortExpression, LookUpFieldsToShow, filter)
@@ -1438,9 +1438,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Public Function MakeEnumComboList(Of TE)()
-        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        Dim dataList As New List(Of Lookup.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData With {
+            Dim data As New Lookup.LookupData With {
                 .IdNo = CInt(c),
                 .Code = EnumToCode(c),
                 .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
@@ -1451,9 +1451,9 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     End Function
 
     Public Function MakeEnumComboList2(Of TE)()
-        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        Dim dataList As New List(Of Lookup.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData With {
+            Dim data As New Lookup.LookupData With {
                     .IdNo = CInt(c),
                     .Code = CInt(c),
                     .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())

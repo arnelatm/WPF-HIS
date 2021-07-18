@@ -187,7 +187,7 @@ Namespace PresentationLayer.Presenters
             Dim i As Integer = 0
             Dim x As T2
             For Each item As T1 In items
-                x = LateBinding.GetProperty(item, fieldName)
+                x = Invoker.GetProperty(item, fieldName)
                 If [set].Contains(x) Then
                     Return i
                 End If

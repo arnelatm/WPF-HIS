@@ -164,10 +164,6 @@
       <Project>{8BF1BE35-27DC-4B2F-B7DB-A2CF182BBC7C}</Project>
       <Name>AatmInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HelperLibraries\HelperLibraries.vbproj">
-      <Project>{A7EE826E-E3B4-40A7-8754-285B373F4321}</Project>
-      <Name>HelperLibraries</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

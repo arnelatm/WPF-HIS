@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="AccessTypeEventArgs.vb" />
     <Compile Include="BackgroundWorker.vb" />
-    <Compile Include="ClassesLibrary.vb" />
+    <Compile Include="Lookup.vb" />
     <Compile Include="CompareLogic.vb" />
     <Compile Include="Consultant.vb" />
     <Compile Include="Delegates.vb" />
@@ -84,7 +84,7 @@
     <Compile Include="IEventAggregator.vb" />
     <Compile Include="ISelfDuplicating.vb" />
     <Compile Include="ISubscriber.vb" />
-    <Compile Include="LateBinding.vb" />
+    <Compile Include="Invoker.vb" />
     <Compile Include="LoadingForm.Designer.vb">
       <DependentUpon>LoadingForm.vb</DependentUpon>
     </Compile>
@@ -177,6 +177,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{b56fdcd3-8b48-4859-983b-07ffa242673d}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

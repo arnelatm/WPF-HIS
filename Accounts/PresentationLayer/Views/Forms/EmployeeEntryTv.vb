@@ -10,20 +10,20 @@ Namespace PresentationLayer.Views.Forms
     Public Class EmployeeEntryTv
         Implements IEmployeeView
 
-        Private _countryTelCodes As List(Of ClassesLibrary.LookupData)
+        Private _countryTelCodes As List(Of Lookup.LookupData)
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _employeePhones As List(Of EmployeePhoneView)
-        Private _unit As List(Of ClassesLibrary.LookupData)
+        Private _unit As List(Of Lookup.LookupData)
 
         ' ReSharper disable once UnassignedField.Local
-        Private _phoneTypes As List(Of ClassesLibrary.LookupData)
+        Private _phoneTypes As List(Of Lookup.LookupData)
 
         ' ReSharper disable once UnassignedField.Local
-        Private _deductionsByName As List(Of ClassesLibrary.LookupData)
+        Private _deductionsByName As List(Of Lookup.LookupData)
 
         ' ReSharper disable once UnassignedField.Local
-        Private _earningsByName As List(Of ClassesLibrary.LookupData)
+        Private _earningsByName As List(Of Lookup.LookupData)
 
         Private ReadOnly _nfi As NumberFormatInfo
 
@@ -383,7 +383,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property EarningsByName As List(Of ClassesLibrary.LookupData)
+        'Public Property EarningsByName As List(Of Lookup.LookupData)
         '    Get
         '        CreateLookupData("PayElement",
         '                      "EarningsByName",
@@ -395,7 +395,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        'Public Property DeductionsByName As List(Of ClassesLibrary.LookupData)
+        'Public Property DeductionsByName As List(Of Lookup.LookupData)
         '    Get
         '        CreateLookupData("PayElement",
         '                      "DeductionsByName",
@@ -407,7 +407,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        'Public Property PhoneTypes As List(Of ClassesLibrary.LookupData)
+        'Public Property PhoneTypes As List(Of Lookup.LookupData)
         '    Get
         '        CreateLookupData("PhoneType", "PhoneTypes")
         '        Return _phoneTypes
@@ -417,7 +417,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        Public Property CountryTelCodes As List(Of ClassesLibrary.LookupData)
+        Public Property CountryTelCodes As List(Of Lookup.LookupData)
             Get
                 CreateLookupData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
                 Return _countryTelCodes

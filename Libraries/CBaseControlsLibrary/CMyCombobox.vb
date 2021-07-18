@@ -103,7 +103,7 @@ Public Class CMyComboBox
     End Sub
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of ClassesLibrary.LookupData)().[Select](Function(p) p.Name)
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of Lookup.LookupData)().[Select](Function(p) p.Name)
     End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)

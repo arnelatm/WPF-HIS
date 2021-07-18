@@ -48,7 +48,7 @@ Namespace PresentationLayer.Presenters
                         record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
                         NewlyAddedRecordIdNo = Service.AddRecord(record)
                         retVal = NewlyAddedRecordIdNo
-                        LateBinding.SetProperty(View, "IdNo", {retVal})
+                        Invoker.SetProperty(View, "IdNo", {retVal})
                     End If
                 End If
             End If

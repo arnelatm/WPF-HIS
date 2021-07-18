@@ -32,7 +32,7 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data As AccountReconciliation = _db.Read(sql, Make, params).FirstOrDefault()
-            'Dim accounts As List(Of ClassesLibrary.LookupData) = GetLookupData("Account", "AccountCode", "SpecialAccount = 'BA' or SpecialAccount = 'CK' or SpecialAccount = 'CS'")
+            'Dim accounts As List(Of Lookup.LookupData) = GetLookupData("Account", "AccountCode", "SpecialAccount = 'BA' or SpecialAccount = 'CK' or SpecialAccount = 'CS'")
             'data.Accounts = accounts
             data.AccountReconciliationItems = GetRecordsWithGroupIdNo(idNo, "Sequence")
             data.ComputeCalculatedProperties()
@@ -255,11 +255,11 @@ Namespace DataLayer.AdoNet
             Return ProcessLookupByCodeName(data, lookupFieldsToShow.Count())
         End Function
 
-        Private Function ProcessLookupByCodeName(data As Object, fieldCount As UInt16) As List(Of ClassesLibrary.LookupData)
-            Dim tlData As New List(Of ClassesLibrary.LookupData)
+        Private Function ProcessLookupByCodeName(data As Object, fieldCount As UInt16) As List(Of Lookup.LookupData)
+            Dim tlData As New List(Of Lookup.LookupData)
             If fieldCount = 3 Then
                 For i = 1 To Int(data.Count / 3)
-                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 3 - 3),
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
                             .Name = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)) & " | " & data(i * 3 - 2),
                             .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
                             }
@@ -267,7 +267,7 @@ Namespace DataLayer.AdoNet
                 Next
             Else
                 For i = 1 To Int(data.Count / 2)
-                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 2 - 2),
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
                             .Name = If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1)) & " | " & data(i * 2 - 2)
                             }
                     tlData.Add(tData)
@@ -277,12 +277,12 @@ Namespace DataLayer.AdoNet
         End Function
 
         'Dim values = accountType.Split(",")
-        'LookUpFilterKey = ""
+        'FilterKey = ""
         'For Each account In values
-        'If LookUpFilterKey <> "" Then
-        'LookUpFilterKey = LookUpFilterKey + " Or "
+        'If FilterKey <> "" Then
+        'FilterKey = FilterKey + " Or "
         'End If
-        'LookUpFilterKey = LookUpFilterKey + "SpecialAccount = '" & account & "'"
+        'FilterKey = FilterKey + "SpecialAccount = '" & account & "'"
         'Next
 
     End Class

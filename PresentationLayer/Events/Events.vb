@@ -213,7 +213,7 @@ End Class
 
 Public Class GetLookupDataRequested
 
-    'Public Sub New(ByVal tableName As String, ByRef view As Control, ByRef targetLookup As List(Of ClassesLibrary.LookupData), ByVal Optional filter As String = Nothing)
+    'Public Sub New(ByVal tableName As String, ByRef view As Control, ByRef targetLookup As List(Of Lookup.LookupData), ByVal Optional filter As String = Nothing)
     '    Me.TableName = tableName
     '    Me.TargetProperty = TargetProperty
     '    Me.Filter = filter
@@ -264,29 +264,29 @@ Public Class GetLookupDataRequested
     Public Property Filter As String
     Public Property SortKey As String
     Public Property TargetSourceName As String
-    'Public Property TargetLookup As List(Of ClassesLibrary.LookupData)
+    'Public Property TargetLookup As List(Of Lookup.LookupData)
 End Class
 
 Public Class GetEnumListRequested
 
-    Public Sub New(ByRef enumList As Object, ByRef target As List(Of ClassesLibrary.LookupData))
+    Public Sub New(ByRef enumList As Object, ByRef target As List(Of Lookup.LookupData))
         Me.Target = target
         Me.EnumList = enumList
     End Sub
 
-    Public Property Target As List(Of ClassesLibrary.LookupData)
+    Public Property Target As List(Of Lookup.LookupData)
     Public Property EnumList As Object
 
 End Class
 
 Public Class GetEnumListRequestedNew(Of TE)
 
-    Public Sub New(ByRef enumList As TE, ByRef target As List(Of ClassesLibrary.LookupData))
+    Public Sub New(ByRef enumList As TE, ByRef target As List(Of Lookup.LookupData))
         Me.Target = target
         Me.EnumList = enumList
     End Sub
 
-    Public Property Target As List(Of ClassesLibrary.LookupData)
+    Public Property Target As List(Of Lookup.LookupData)
     Public Property EnumList As TE
 
 End Class

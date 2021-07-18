@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New ApJournalModel()
             DataModel = New ApJournalModel
-            GlobalVariables.EventAggregator.SubscribeEvent(Me)
+            'GlobalVariables.EventAggregator.SubscribeEvent(Me)
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
 

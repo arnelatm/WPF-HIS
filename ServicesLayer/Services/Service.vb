@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Globalization
 Imports System.Reflection
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer
@@ -162,25 +163,77 @@ Namespace Services
             Return externalService.InvokeMember("Get" + tableName, BindingFlags.InvokeMethod, Nothing, Me, New Object() {idNo})
         End Function
 
-        Public Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
-            Dim data = GetRecords(tableName, sortKey, fields, filter)
+        Public Function GetLookup(lookupObj As Lookup) As List(Of Lookup.LookupData)
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                Dim nameFieldArabic = lookupObj.NameField + "Ara"
+                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
+                    If lookupObj.SortKey = lookupObj.NameField Then
+                        lookupObj.SortKey = nameFieldArabic
+                        For Each field In lookupObj.FieldsToShow
+                            If field = lookupObj.NameField Then
+                                field = nameFieldArabic
+                            End If
+                        Next
+                        lookupObj.NameField = nameFieldArabic
+                    End If
+                End If
+            End If
+            Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
             Dim lookupSetting = GlobalVariables.LookupSetting()
-            If lookupSetting = "CodeAndName" Then
-                Return ProcessLookupByCodeName(data, fields.Count())
-            ElseIf lookupSetting = "NameAndCode" Then
-                Return ProcessLookupByNameCode(data, fields.Count())
+            If lookupSetting = "NameAndCode" Then
+                Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
+            ElseIf lookupSetting = "CodeAndName" Then
+                Return ProcessLookupByCodeName(data, lookupObj.FieldsToShow.Count())
             ElseIf lookupSetting = "Name" Then
-                Return ProcessLookupByName(data, fields.Count())
+                Return ProcessLookupByName(data, lookupObj.FieldsToShow.Count())
             Else
-                Return ProcessLookupByCodeName(data, fields.Count())
+                Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
             End If
         End Function
 
-        Private Function ProcessLookupByNameCode(data As Object, fieldCount As UInt16) As List(Of ClassesLibrary.LookupData)
-            Dim tlData = New List(Of ClassesLibrary.LookupData)
+        Public Function GetHLookup(lookupObj As Lookup) As List(Of Lookup.HLookupData)
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                Dim nameFieldArabic = lookupObj.NameField + "Ara"
+                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
+                    If lookupObj.SortKey = lookupObj.NameField Then
+                        lookupObj.SortKey = nameFieldArabic
+                        For Each field In lookupObj.FieldsToShow
+                            If field = lookupObj.NameField Then
+                                field = nameFieldArabic
+                            End If
+                        Next
+                        lookupObj.NameField = nameFieldArabic
+                    End If
+                End If
+            End If
+            Return GetHRecords(lookupObj)
+        End Function
+
+        Public Function GetLookup(tableName As String, Optional filter As String = Nothing) As List(Of Lookup.LookupData)
+            Dim lookupObj As New Lookup(tableName, filter)
+            Return GetLookup(lookupObj)
+        End Function
+
+        Public Function GetHRecords(lookupObj As Lookup) As List(Of Lookup.HLookupData)
+            Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+            Dim tlData = New List(Of Lookup.HLookupData)
+            For i = 1 To Int(data.Count / 4)
+                Dim tData As New Lookup.HLookupData With {
+                        .IdNo = data(i * 4 - 4),
+                        .Name = data(i * 4 - 3),
+                        .ParentIdNo = CInt(If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 2))),
+                        .Code = If(data(i * 4 - 1) Is DBNull.Value, "", data(i * 4 - 1))
+                        }
+                tlData.Add(tData)
+            Next
+            Return tlData
+        End Function
+
+        Private Function ProcessLookupByNameCode(data As Object, fieldCount As UInt16) As List(Of Lookup.LookupData)
+            Dim tlData = New List(Of Lookup.LookupData)
             If fieldCount = 3 Then
                 For i = 1 To Int(data.Count / 3)
-                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 3 - 3),
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
                             .Name = data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)),
                             .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
                             }
@@ -188,7 +241,7 @@ Namespace Services
                 Next
             Else
                 For i = 1 To Int(data.Count / 2)
-                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 2 - 2),
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
                             .Name = data(i * 2 - 1) & " | " & data(i * 2 - 2)
                             }
                     tlData.Add(tData)
@@ -197,11 +250,11 @@ Namespace Services
             Return tlData
         End Function
 
-        Private Function ProcessLookupByCodeName(data As Object, fieldCount As UInt16) As List(Of ClassesLibrary.LookupData)
-            Dim tlData As New List(Of ClassesLibrary.LookupData)
+        Private Function ProcessLookupByCodeName(data As Object, fieldCount As UInt16) As List(Of Lookup.LookupData)
+            Dim tlData As New List(Of Lookup.LookupData)
             If fieldCount = 3 Then
                 For i = 1 To Int(data.Count / 3)
-                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 3 - 3),
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
                             .Name = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)) & " | " & data(i * 3 - 2),
                             .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
                             }
@@ -209,7 +262,7 @@ Namespace Services
                 Next
             Else
                 For i = 1 To Int(data.Count / 2)
-                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 2 - 2),
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
                             .Name = If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1)) & " | " & data(i * 2 - 2)
                             }
                     tlData.Add(tData)
@@ -218,11 +271,11 @@ Namespace Services
             Return tlData
         End Function
 
-        Private Function ProcessLookupByName(data As Object, fieldCount As UInt16) As List(Of ClassesLibrary.LookupData)
-            Dim tlData = New List(Of ClassesLibrary.LookupData)
+        Private Function ProcessLookupByName(data As Object, fieldCount As UInt16) As List(Of Lookup.LookupData)
+            Dim tlData = New List(Of Lookup.LookupData)
             If fieldCount = 3 Then
                 For i = 1 To Int(data.Count / 3)
-                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 3 - 3),
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
                             .Name = data(i * 3 - 2),
                             .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
                             }
@@ -230,27 +283,12 @@ Namespace Services
                 Next
             Else
                 For i = 1 To Int(data.Count / 2)
-                    Dim tData As New ClassesLibrary.LookupData With {.IdNo = data(i * 2 - 2),
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
                             .Name = data(i * 2 - 1)
                             }
                     tlData.Add(tData)
                 Next
             End If
-            Return tlData
-        End Function
-
-        Public Function GetHRecords(tableName As String, sortKey As String, fields As String(), Optional Filter As String = Nothing) As List(Of ClassesLibrary.HLookupData)
-            Dim data = DataDao.GetRecords(tableName, sortKey, fields, Filter)
-            Dim tlData = New List(Of ClassesLibrary.HLookupData)
-            For i = 1 To Int(data.Count / 4)
-                Dim tData As New ClassesLibrary.HLookupData With {
-                        .IdNo = data(i * 4 - 4),
-                        .Name = data(i * 4 - 3),
-                        .ParentIdNo = CInt(If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 2))),
-                        .Code = If(data(i * 4 - 1) Is DBNull.Value, "", data(i * 4 - 1))
-                        }
-                tlData.Add(tData)
-            Next
             Return tlData
         End Function
 

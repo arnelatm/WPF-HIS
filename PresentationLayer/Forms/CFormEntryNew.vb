@@ -643,21 +643,21 @@ Public Class CFormEntryNew
         End If
     End Sub
 
-    'Protected Overloads Sub CreateLookupData(tableName As String, ByRef targetLookup As List(Of ClassesLibrary.LookupData), Optional filter As String = Nothing)
+    'Protected Overloads Sub CreateLookupData(tableName As String, ByRef targetLookup As List(Of Lookup.LookupData), Optional filter As String = Nothing)
     '    Dim varName = NameOf(targetLookup)
     '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, varName, filter))
     'End Sub
 
-    'Protected Function CreateLookupData(tableName As String, targetProperty As String) As List(Of ClassesLibrary.LookupData)
-    '    Dim data As List(Of ClassesLibrary.LookupData)
+    'Protected Function CreateLookupData(tableName As String, targetProperty As String) As List(Of Lookup.LookupData)
+    '    Dim data As List(Of Lookup.LookupData)
     '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
     '    Return data
     'End Function
 
     ' ReSharper disable once UnassignedField.Local
-    Public DataLookupFunctionVariable As List(Of ClassesLibrary.LookupData)
+    Public DataLookupFunctionVariable As List(Of Lookup.LookupData)
 
-    Protected Function GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    Protected Function GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) As List(Of Lookup.LookupData)
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, "DataLookupFunctionVariable", filter))
         Return DataLookupFunctionVariable
     End Function
@@ -687,9 +687,9 @@ Public Class CFormEntryNew
     End Sub
 
     Public Function GetEnumData(Of TE)()
-        Dim dataList As New List(Of ClassesLibrary.LookupData)
+        Dim dataList As New List(Of Lookup.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New ClassesLibrary.LookupData With {
+            Dim data As New Lookup.LookupData With {
                     .IdNo = CInt(c),
                     .Code = EnumToCode(c),
                     .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
@@ -700,7 +700,7 @@ Public Class CFormEntryNew
     End Function
 
     Public Function GetFieldType(fieldName As String) As Type
-        Return LateBinding.GetProperty(Me, fieldName).GetType
+        Return Invoker.GetProperty(Me, fieldName).GetType
     End Function
 
     Protected Sub ProcessCellEndEdit(dataGridView As DataGridView, bindingSource As BindingSource)

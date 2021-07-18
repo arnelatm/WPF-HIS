@@ -437,7 +437,7 @@ Public Class CaComboBox
     End Sub
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of ClassesLibrary.LookupData)().[Select](Function(p) p.Name)
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of Lookup.LookupData)().[Select](Function(p) p.Name)
     End Sub
 
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
@@ -478,13 +478,13 @@ Public Class CaComboBox
     Public Function GetValue()
         If SelectedItem IsNot Nothing Then
             If ValueMember.ToLower() = "idno" Then
-                Return CType(SelectedItem, ClassesLibrary.LookupData).IdNo
+                Return CType(SelectedItem, Lookup.LookupData).IdNo
             ElseIf ValueMember.ToLower() = "name" Then
-                Return CType(SelectedItem, ClassesLibrary.LookupData).Name
+                Return CType(SelectedItem, Lookup.LookupData).Name
             ElseIf ValueMember.ToLower() = "code" Then
-                Return CType(SelectedItem, ClassesLibrary.LookupData).Code
+                Return CType(SelectedItem, Lookup.LookupData).Code
             ElseIf ValueMember.ToLower() = "index" Then
-                Return CType(SelectedItem, ClassesLibrary.LookupData).Index
+                Return CType(SelectedItem, Lookup.LookupData).Index
             Else
                 Return Text
             End If
@@ -744,11 +744,11 @@ Public Class CaComboBox
             searchForm.SetFieldDescription(FieldName)
         End If
         'Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
-        Dim x = LateBinding.InvokeFunction(myForm, "GetFieldType", CallType.Method, {FieldName})
+        Dim x = Invoker.InvokeFunction(myForm, "GetFieldType", CallType.Method, {FieldName})
         FindDataType = GetObjectDataType(x)
         searchForm.ShowDialog()
         'CallByName(myForm, "FindFieldNew", CallType.Method, Me)
-        LateBinding.InvokeFunction(myForm, "FindFieldNew", {Me})
+        Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})
     End Sub
 
     Private Sub MenuItemSelectAll_Click()

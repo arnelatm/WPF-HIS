@@ -60,7 +60,7 @@ Public Class CDataGridView
     Private Sub DataGridView_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
         If Columns(SequenceColumn) IsNot Nothing Then
             'CallByName(Columns(SequenceColumn), "DisplayOnly", CallType.Set, True)
-            LateBinding.SetProperty(Columns(SequenceColumn), "DisplayOnly", True)
+            Invoker.SetProperty(Columns(SequenceColumn), "DisplayOnly", True)
         End If
         If ShowFooter Then
             DgvFooter = New DgvFooter(Me) With {
@@ -237,13 +237,13 @@ Public Class CDataGridView
             Dim myBindingSource = CType(DataSource, BindingSource)
             Try
                 'If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
-                If LateBinding.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
+                If Invoker.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                     For Each record In myBindingSource
                         'Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
-                        Dim sequence = LateBinding.GetProperty(record, SequenceFieldName)
+                        Dim sequence = Invoker.GetProperty(record, SequenceFieldName)
                         If sequence > i + 1 Then
                             'CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
-                            LateBinding.SetProperty(record, SequenceFieldName, {sequence - 1})
+                            Invoker.SetProperty(record, SequenceFieldName, {sequence - 1})
                         End If
                     Next
                 End If
@@ -259,17 +259,17 @@ Public Class CDataGridView
         Dim myBindingSource = CType(DataSource, BindingSource)
         Try
             'If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
-            If LateBinding.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
+            If Invoker.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                 For Each o In myBindingSource
                     If o IsNot Nothing Then
                         'Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
-                        Dim sequence = LateBinding.GetProperty(o, SequenceFieldName)
+                        Dim sequence = Invoker.GetProperty(o, SequenceFieldName)
                         If sequence = 0 Then
                             'CallByName(o, SequenceFieldName, CallType.Set, i)
-                            LateBinding.SetProperty(o, SequenceFieldName, {i})
+                            Invoker.SetProperty(o, SequenceFieldName, {i})
                         ElseIf sequence >= i Then
                             'CallByName(o, SequenceFieldName, CallType.Set, sequence + 1)
-                            LateBinding.SetProperty(o, SequenceFieldName, {sequence + 1})
+                            Invoker.SetProperty(o, SequenceFieldName, {sequence + 1})
                         End If
                     End If
                 Next
@@ -521,11 +521,11 @@ Public Class CDataGridView
     '            If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
     '                Select Case field.ToLower()
     '                    Case $"code"
-    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
+    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Code
     '                    Case $"name"
-    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Name
     '                    Case $"idno"
-    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
+    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).IdNo
     '                    Case Else
     '                        Return cCurrentCell.Value
     '                End Select
@@ -545,11 +545,11 @@ Public Class CDataGridView
                 If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
                     Select Case field.ToLower()
                         Case $"code"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Code
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Code
                         Case $"name"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).Name
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Name
                         Case $"idno"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.ClassesLibrary.LookupData).IdNo
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).IdNo
                         Case Else
                             Return CurrentCell.Value
                     End Select
