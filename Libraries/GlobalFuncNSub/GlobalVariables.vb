@@ -41,8 +41,8 @@ Public Class GlobalVariables
 
     Public Shared ReadOnly Property OriginalAppTextLanguageIdNo As Int16 = 0
 
-    Public Shared EventAggregator As New EventAggregator()
-    Public Shared EaEmployee As New EventAggregator()
+    'Public Shared EventAggregator As New EventAggregator()
+    'Public Shared EaEmployee As New EventAggregator()
 
     'Private _ltrCultureInfo As CultureInfo
     'Private _rtlCultureINfo As CultureInfo

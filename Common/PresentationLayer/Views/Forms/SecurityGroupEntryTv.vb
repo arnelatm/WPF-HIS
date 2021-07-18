@@ -88,7 +88,7 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = SecurityGroupView.bsGroupAccesses
-                LateBinding.SetProperty(SecurityGroupView.DataGridViewGroupAccesses.Columns("DGVSecurityObjectName"), "DisplayOnly", {True})
+                Invoker.SetProperty(SecurityGroupView.DataGridViewGroupAccesses.Columns("DGVSecurityObjectName"), "DisplayOnly", {True})
                 .AutoResizeColumns()
                 .Refresh()
             End With

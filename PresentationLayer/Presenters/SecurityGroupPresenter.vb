@@ -83,7 +83,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
 
     Public Sub ProcessRows(propertyName As String, value As Boolean)
         For Each groupAccessView In View.GroupAccesses
-            LateBinding.SetProperty(groupAccessView, propertyName, {value})
+            Invoker.SetProperty(groupAccessView, propertyName, {value})
         Next
     End Sub
 

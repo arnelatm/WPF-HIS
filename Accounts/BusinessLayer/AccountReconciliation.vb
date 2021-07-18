@@ -18,7 +18,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        'Public Property Accounts As List(Of ClassesLibrary.LookupData)
+        'Public Property Accounts As List(Of Lookup.LookupData)
         Public Property AccountReconciliationItems As List(Of AccountReconciliationItem)
 
         Public Property AccountIdNo As Int16?

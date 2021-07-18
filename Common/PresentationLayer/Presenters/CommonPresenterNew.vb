@@ -41,26 +41,27 @@ Namespace PresentationLayer.Presenters
         Private Shared Shadows Property CommonModel As IModelCommon
 
         Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
-            ComposeLookupParameters("Account")
+            Dim lookupObj As New Lookup("Account")
             If sortKey IsNot Nothing Then
-                LookUpSortExpression = sortKey
+                lookupObj.SortKey = sortKey
             End If
             Dim values = accountType.Split(",")
-            LookUpFilterKey = ""
+            Dim lookUpFilterKey = ""
             For Each account In values
-                If LookUpFilterKey <> "" Then
-                    LookUpFilterKey = LookUpFilterKey + " Or "
+                If lookUpFilterKey <> "" Then
+                    lookUpFilterKey = lookUpFilterKey + " Or "
                 End If
-                LookUpFilterKey = LookUpFilterKey + "SpecialAccount = '" & account & "'"
+                lookUpFilterKey = lookUpFilterKey + "SpecialAccount = '" & account & "'"
             Next
-            Return GetLookupByCodeName()
+            lookupObj.FilterKey = lookUpFilterKey
+            Return GetLookup(lookupObj)
         End Function
 
-        Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountCode")
-            ComposeLookupParameters("Account")
-            LookUpSortExpression = sortKey
-            LookUpFilterKey = "DetailAccount=1"
-            Return GetLookupByCodeName()
+        Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountName")
+            Dim lookupObj As New Lookup("Account")
+            lookupObj.SortKey = sortKey
+            lookupObj.FilterKey = "DetailAccount=1"
+            Return GetLookup(lookupObj)
         End Function
 
         Public Overrides Sub GoAddRecord()
@@ -68,61 +69,60 @@ Namespace PresentationLayer.Presenters
             MakeDefaultValues()
         End Sub
 
-        Public Overridable Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
-            Dim className = $"AATM.Common.PresentationLayer.Models.ModelCommon"
-            TableName = objectName
-            SortOrderKey = objectName + "Name"
-            Dim ModelOfPresenter As Object
-            Dim tType As Type = Type.GetType(className)
-            If tType Is Nothing Then
-                MessageBox.Show("Missing Data Access Object " + className + "!")
-            End If
-            If bizParams Is Nothing AndAlso daoParams Is Nothing Then
-                ModelOfPresenter = Activator.CreateInstance(tType, {objectName, bizParams, daoParams})
-            Else
-                ModelOfPresenter = Activator.CreateInstance(tType, {objectName})
-            End If
-            'OriginalModel = Model.Clone().Clear()
-            'Model = Model.Clear()
-        End Sub
+        'Public Overridable Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
+        '    Dim className = $"AATM.Common.PresentationLayer.Models.ModelCommon"
+        '    TableName = objectName
+        '    SortOrderKey = objectName + "Name"
+        '    Dim tType As Type = Type.GetType(className)
+        '    If tType Is Nothing Then
+        '        MessageBox.Show("Missing Data Access Object " + className + "!")
+        '    End If
+        '    If bizParams Is Nothing AndAlso daoParams Is Nothing Then
+        '        ModelOfPresenter = Activator.CreateInstance(tType, {objectName, bizParams, daoParams})
+        '    Else
+        '        ModelOfPresenter = Activator.CreateInstance(tType, {objectName})
+        '    End If
+        '    'OriginalModel = Model.Clone().Clear()
+        '    'Model = Model.Clear()
+        'End Sub
 
         Public Sub MakeDefaultValues()
             For Each item In ViewDefaultFieldValues
                 Select Case item.DataType
                     Case DataTypeSelection.StringType
-                        LateBinding.SetProperty(View, item.FieldName, item.DefaultValue)
+                        Invoker.SetProperty(View, item.FieldName, item.DefaultValue)
                     Case DataTypeSelection.Accountype
-                        LateBinding.SetProperty(View, item.FieldName, item.DefaultValue)
+                        Invoker.SetProperty(View, item.FieldName, item.DefaultValue)
                     Case DataTypeSelection.IntegerType
-                        LateBinding.SetProperty(View, item.FieldName, CInt(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CInt(item.DefaultValue))
                     Case DataTypeSelection.BooleanType
-                        LateBinding.SetProperty(View, item.FieldName, CBool(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CBool(item.DefaultValue))
                     Case DataTypeSelection.SingleType
-                        LateBinding.SetProperty(View, item.FieldName, CSng(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CSng(item.DefaultValue))
                     Case DataTypeSelection.DoubleType
-                        LateBinding.SetProperty(View, item.FieldName, CDbl(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CDbl(item.DefaultValue))
                     Case DataTypeSelection.DecimalType
-                        LateBinding.SetProperty(View, item.FieldName, CDec(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CDec(item.DefaultValue))
                     Case DataTypeSelection.LongType
-                        LateBinding.SetProperty(View, item.FieldName, CLng(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CLng(item.DefaultValue))
                     Case DataTypeSelection.DateType
                         If item.DefaultValue = "today" Then
-                            LateBinding.SetProperty(View, item.FieldName, Today())
+                            Invoker.SetProperty(View, item.FieldName, Today())
                         ElseIf item.DefaultValue = "yesterday" Then
-                            LateBinding.SetProperty(View, item.FieldName, DateTime.Now.AddDays(-1))
+                            Invoker.SetProperty(View, item.FieldName, DateTime.Now.AddDays(-1))
                         ElseIf item.DefaultValue = "tomorrow" Then
-                            LateBinding.SetProperty(View, item.FieldName, DateTime.Now.AddDays(1))
+                            Invoker.SetProperty(View, item.FieldName, DateTime.Now.AddDays(1))
                         Else
-                            LateBinding.SetProperty(View, item.FieldName, CDate(item.DefaultValue))
+                            Invoker.SetProperty(View, item.FieldName, CDate(item.DefaultValue))
                         End If
                     Case DataTypeSelection.ShortType
-                        LateBinding.SetProperty(View, item.FieldName, CShort(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CShort(item.DefaultValue))
                     Case DataTypeSelection.UIntegerType
-                        LateBinding.SetProperty(View, item.FieldName, CUInt(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CUInt(item.DefaultValue))
                     Case DataTypeSelection.ULongType
-                        LateBinding.SetProperty(View, item.FieldName, CULng(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CULng(item.DefaultValue))
                     Case DataTypeSelection.UShortType
-                        LateBinding.SetProperty(View, item.FieldName, CUShort(item.DefaultValue))
+                        Invoker.SetProperty(View, item.FieldName, CUShort(item.DefaultValue))
                     Case Else
                         MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in form/view " & item.SystemViewName & " conversion not handled")
                 End Select

@@ -1034,7 +1034,7 @@ Public Module GlobalFunctions
         End Select
     End Sub
 
-    Public Function MoveToGridView(ByVal dgv As DataGridView, ByVal columnName As String)
+    Public Sub MoveToGridView(ByVal dgv As DataGridView, ByVal columnName As String)
         If dgv IsNot Nothing AndAlso dgv.Visible Then
             If dgv.CurrentCell Is Nothing Then
                 dgv.Focus()
@@ -1052,7 +1052,7 @@ Public Module GlobalFunctions
             End If
         End If
 
-    End Function
+    End Sub
 
     'Public Function CompareValues(source, Target) As Boolean
     '    Dim retVal As Boolean = False

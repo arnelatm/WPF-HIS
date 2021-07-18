@@ -50,21 +50,21 @@ Public Interface IModelNew
 
     'Function GetFieldType(tableName As String, fieldName As String) As Object
 
-    'Function GetLookupByCodeName(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetLookupByCodeName(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of Lookup.LookupData)
 
-    'Function GetLookupByName(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetLookupByName(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of Lookup.LookupData)
 
-    'Function GetLookupByNameCode(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetLookupByNameCode(tableName As String, sortKey As String, fields As String(), Optional filterKey As String = Nothing) As List(Of Lookup.LookupData)
 
-    'Function GetHRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.HLookupData)
+    'Function GetHRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of Lookup.HLookupData)
 
     'Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
     'Function GetLastSortKey(searchValue As String, tableName As String) As String
 
-    'Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetLookup(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of Lookup.LookupData)
 
-    'Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of ClassesLibrary.LookupData)
+    'Function GetLookupRecords(tableName As String, sortKey As String, fields As String(), Optional filter As String = Nothing) As List(Of Lookup.LookupData)
 
     'Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
 

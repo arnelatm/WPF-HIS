@@ -74,7 +74,7 @@ Namespace PresentationLayer.Views.Forms
             'builder.RegisterType(Of SalaryLoanSchedulePresenter)().[As](Of ISalaryLoanSchedulePresenter)()
             'Dim x = builder.Build()
             '_salaryLoanSchedulePresenter = x.Resolve(Of ISalaryLoanSchedulePresenter)
-            GlobalVariables.EventAggregator = New EventAggregator
+            'GlobalVariables.EventAggregator = New EventAggregator
 
         End Sub
 
@@ -772,7 +772,7 @@ Namespace PresentationLayer.Views.Forms
         Private Function AddSecurityObject(Of T)(ByRef obj As T, ByRef subMenuName As String, ByVal parentIdNo As Int32, loc As Int16) As Int32
             Dim toolStripMenuItem As T = obj
             'Dim objName = CallByName(obj, "Name", CallType.Get)
-            Dim objName = LateBinding.GetProperty(obj, "Name")
+            Dim objName = Invoker.GetProperty(obj, "Name")
             Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
                     .SystemViewIdNo = VSystemViewIdNo,
                     .ParentIdNo = parentIdNo}
@@ -960,8 +960,8 @@ Namespace PresentationLayer.Views.Forms
             Else
                 'CallByName(formEntry, "MdiParent", CallType.Set, Me)
                 'CallByName(formEntry, "Show", CallType.Method)
-                LateBinding.SetProperty(formEntry, "MdiParent", {Me})
-                LateBinding.InvokeFunction(formEntry, "Show")
+                Invoker.SetProperty(formEntry, "MdiParent", {Me})
+                Invoker.InvokeFunction(formEntry, "Show")
             End If
         End Sub
 

@@ -2,7 +2,7 @@
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.BusinessLayer.BusinessRules
 Imports AATM.Libraries
-Imports AATM.Libraries.ClassesLibrary
+Imports AATM.Libraries.Lookup
 
 Namespace BusinessLayer
 

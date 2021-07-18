@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
         Private _previousEndValueSearch As Decimal?
         Private _previousColumnSearch As Int16
         Private _progressDisplayForm As Form1
-        'Private _accounts As List(Of ClassesLibrary.LookupData)
+        'Private _accounts As List(Of Lookup.LookupData)
 
         Public Sub New()
             MyBase.New()
@@ -110,11 +110,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property Accounts As List(Of ClassesLibrary.LookupData) Implements IAccountReconciliationView.Accounts
+        'Public Property Accounts As List(Of Lookup.LookupData) Implements IAccountReconciliationView.Accounts
         '    Get
         '        Return _accounts
         '    End Get
-        '    Set(value As List(Of ClassesLibrary.LookupData))
+        '    Set(value As List(Of Lookup.LookupData))
         '        _accounts = value
         '        cboAccountIdNo.DataSource = Nothing
         '        cboAccountIdNo.DataSource = value

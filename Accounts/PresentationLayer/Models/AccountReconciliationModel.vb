@@ -7,7 +7,7 @@
     Public Class AccountReconciliationModel
         'Inherits ModelNew
 
-        'Public Property Accounts As List(Of ClassesLibrary.LookupData)
+        'Public Property Accounts As List(Of Lookup.LookupData)
         Public Property AccountReconciliationItems As List(Of AccountReconciliationItemModel)
 
         Public Property Errors As List(Of String)
