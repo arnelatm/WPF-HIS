@@ -70,8 +70,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 SetLanguageChangeButtons()
             End If
-
-            'PresenterObj = New UserPresenter(Me)
+            PresenterObj = New UserPresenter(Of UserModel)(Me)
             SetupMapper()
             'Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
             'builder.RegisterType(Of SalaryLoanSchedulePresenter)().[As](Of ISalaryLoanSchedulePresenter)()
@@ -271,9 +270,8 @@ Namespace PresentationLayer.Views.Forms
             RunBasicForm("Category", "Categories Maintenance Form")
         End Sub
 
-        Private Sub ChartOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-                                                                                                            Handles ToolStripMenuItemChartOfAccounts.Click
-            ShowEntryForm(AccountEntryTv)
+        Private Sub ChartOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChartOfAccounts.Click
+            RunForm(Of AccountEntryTv, AccountPresenter(Of AccountModel))()
         End Sub
 
         Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCheckPrinting.Click

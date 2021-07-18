@@ -61,7 +61,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>AATM.Accounts.PresentationLayer.Views.Forms.MainNew</StartupObject>
+    <StartupObject>AATM.Accounts.PresentationLayer.Views.Forms.Main</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>

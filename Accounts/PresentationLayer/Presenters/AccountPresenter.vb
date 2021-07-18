@@ -1,29 +1,25 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AccountPresenter
-        Inherits AccountsPresenter(Of IAccountView, AccountModel)
+    Public Class AccountPresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IAccountView, TM)
 
-        Public ParentViewList As List(Of AccountModel)
+        Public ParentViewList As List(Of TM)
 
-        Public Sub New(view As IAccountView)
-            MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("Account")
-            'TableName = "Account_View"
+        Public Sub New(itemView As IAccountView)
+            MyBase.New(itemView)
+            AddHandler View.ParentIdUpdated, AddressOf OnParentIdUpdated
+            Service = New ServiceAccounts("Account")
+            TableName = "Account_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "AccountName"
             TreeViewSecondaryField = "AccountCode"
-            TreeViewParentIdField = "ParentIdNo"
-            OriginalModel = New AccountModel()
-            DataModel = New AccountModel
-            TreeViewList = New List(Of AccountModel)
-            ParentViewList = New List(Of AccountModel)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            ParentFieldName = "ParentIdNo"
         End Sub
 
         Public Function EditableAccountGroup(ByVal idNo As Int32?, ByVal parentIdNo As Int32?) As Boolean
@@ -31,7 +27,7 @@ Namespace PresentationLayer.Presenters
                 Return False
             Else
                 Dim parentAccount As AccountModel
-                parentAccount = ModelOfPresenter.GetRecordByIdNo(Of AccountModel)(parentIdNo)
+                parentAccount = Service.GetRecordByIdNo(Of AccountModel)(parentIdNo)
                 If parentAccount.AccountGroup Is Nothing Then
                     Return False
                 Else
@@ -57,11 +53,11 @@ Namespace PresentationLayer.Presenters
             If idNo Is Nothing Then
                 Return True
             End If
-            Return Model.CountRecordWithKey(idNo, "Account", "ParentIdNo") > 0
+            Return Service.CountRecordWithKey(idNo, "Account", "ParentIdNo") > 0
         End Function
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
-            Return Model.GetField(Of Int32, String)(idNoToSearch, "Account", "ParentIdNo", "AccountName")
+            Return Service.GetField(Of Int32, String)(idNoToSearch, "Account", "ParentIdNo", "AccountName")
             'Return Model.GetRecordFieldWithKey(idNoToSearch, "Account", "ParentIdNo", "AccountName")
         End Function
 
@@ -77,7 +73,13 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Public Sub ParentIdUpdated()
+
+        Private Sub OnParentIdUpdated(ByRef pEditableAccountGroup As Boolean)
+            If EditableAccountGroup(View.IdNo, View.ParentIdNo) Then
+                pEditableAccountGroup = False
+            Else
+                pEditableAccountGroup = True
+            End If
             If View.ParentIdNo IsNot Nothing Then
                 View.AccountGroup = GetFieldWithIdNo(View.ParentIdNo, "Account", "AccountGroup")
                 View.LevelNumber = GetRecordFieldWithKeyG(Of Integer)(View.ParentIdNo, "Account_View", "IdNo", "LevelNumber") + 1

@@ -350,13 +350,13 @@ Namespace PresentationLayer.Views.Forms
             CreateEnumDataSource(Of PayElementTypeSelection)(cboPayElementType)
             CreateDataSource("PayElement", cboBasePaymentIdNo)
             CreateDataSource("Account", cboAccountIdNo, "AccountName", "DetailAccount=1")
-            _factorTypeByCode = GetEnumData(Of FactorTypeSelection)()
-            _calculationTypeByCode = GetEnumData(Of CalculationTypeSelection)()
+            CreateEnumData(Of FactorTypeSelection)(_factorTypeByCode)
+            CreateEnumData(Of CalculationTypeSelection)(_calculationTypeByCode)
             CreateLookupData("PayElementGroup", "_earnReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
             CreateLookupData("PayElementGroup", "_dedReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
-            _payGroupsByCode = GetLookupData("PayGroup", NameOf(_payGroupsByCode))
-            _payElementsByCode = GetLookupData("PayElement", NameOf(_payElementsByCode))
-            _accountsByCode = GetLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
+            '_payGroupsByCode = GetLookupData("PayGroup", NameOf(_payGroupsByCode))
+            '_payElementsByCode = GetLookupData("PayElement", NameOf(_payElementsByCode))
+            '_accountsByCode = GetLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
             UpdateReportGroup()
         End Sub
 

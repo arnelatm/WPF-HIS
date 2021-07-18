@@ -68,7 +68,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
             Me.View = itemView
             'Me.Model = New TM
             MyErrorProvider = GetErrorProvider()
-            Ea.SubscribeEvent(Me)
+            If Ea IsNot Nothing Then
+                Ea.SubscribeEvent(Me)
+            End If
             InitializeTreeViewIfPresent()
             OriginalModel = Activator.CreateInstance(GetType(TM))
         End If
