@@ -254,7 +254,7 @@ Namespace AdoNet
             If menu Then
                 sql = "Select Top 1 IdNo FROM SecurityObject_View1 Where FullPathName = @SearchValue"
             Else
-                sql = "Select Top 1 IdNo FROM SecurityObject_View1 Where SecurityObjectName = @SearchValue"
+                sql = "Select Top 1 IdNo FROM SecurityObject_View1 Where SecurityObjectCode = @SearchValue"
             End If
             Dim params() As Object = {"@SearchValue", searchValue}
             Dim retVal = _db.Scalar(sql, params)

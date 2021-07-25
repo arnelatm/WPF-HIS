@@ -110,7 +110,7 @@
             Me.lblEmail = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblStreet = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.tbpEmployment = New System.Windows.Forms.TabPage()
+            Me.tbpEmployment = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.floEmployment = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblHiredDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpHiredDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -142,7 +142,7 @@
             Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblDutyHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.tbpEarnings = New System.Windows.Forms.TabPage()
+            Me.tbpEarnings = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
@@ -151,7 +151,7 @@
             Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.EmployeeIdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.tbpDeductions = New System.Windows.Forms.TabPage()
+            Me.tbpDeductions = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequenceDeduction = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
@@ -160,7 +160,7 @@
             Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.EmployeeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.tbpPhones = New System.Windows.Forms.TabPage()
+            Me.tbpPhones = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
             Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
@@ -1501,6 +1501,8 @@
             '
             'tbpEmployment
             '
+            Me.tbpEmployment.BackgroundImage = CType(resources.GetObject("tbpEmployment.BackgroundImage"), System.Drawing.Image)
+            Me.tbpEmployment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpEmployment.Controls.Add(Me.floEmployment)
             Me.tbpEmployment.Location = New System.Drawing.Point(4, 22)
             Me.tbpEmployment.Name = "tbpEmployment"
@@ -1792,6 +1794,7 @@
             Me.tbpPayroll.Location = New System.Drawing.Point(4, 22)
             Me.tbpPayroll.Name = "tbpPayroll"
             Me.tbpPayroll.Padding = New System.Windows.Forms.Padding(3)
+            Me.tbpPayroll.SecurityKey = "NPYA"
             Me.tbpPayroll.Size = New System.Drawing.Size(669, 330)
             Me.tbpPayroll.TabIndex = 2
             Me.tbpPayroll.Text = "Payroll Information"
@@ -1834,6 +1837,7 @@
             Me.lblPaymentMethod.Location = New System.Drawing.Point(4, 4)
             Me.lblPaymentMethod.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPaymentMethod.Name = "lblPaymentMethod"
+            Me.lblPaymentMethod.SecurityKey = "EPI"
             Me.lblPaymentMethod.Size = New System.Drawing.Size(185, 23)
             Me.lblPaymentMethod.TabIndex = 288
             Me.lblPaymentMethod.Text = "Payment Method"
@@ -1873,7 +1877,7 @@
             Me.cboPaymentMethod.PreviousSearchTerm = Nothing
             Me.cboPaymentMethod.PropertySelector = Nothing
             Me.cboPaymentMethod.ReadOnlyCombo = False
-            Me.cboPaymentMethod.SecurityKey = ""
+            Me.cboPaymentMethod.SecurityKey = "EPI"
             Me.cboPaymentMethod.Size = New System.Drawing.Size(402, 24)
             Me.cboPaymentMethod.SuggestBoxHeight = 200
             Me.cboPaymentMethod.SuggestListOrderRule = Nothing
@@ -1894,6 +1898,7 @@
             Me.lblBankIdNo.Location = New System.Drawing.Point(4, 30)
             Me.lblBankIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBankIdNo.Name = "lblBankIdNo"
+            Me.lblBankIdNo.SecurityKey = "EPI"
             Me.lblBankIdNo.Size = New System.Drawing.Size(185, 23)
             Me.lblBankIdNo.TabIndex = 216
             Me.lblBankIdNo.Text = "Bank Name"
@@ -1933,7 +1938,7 @@
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
             Me.cacBankIdNo.PropertySelector = Nothing
             Me.cacBankIdNo.ReadOnlyCombo = False
-            Me.cacBankIdNo.SecurityKey = ""
+            Me.cacBankIdNo.SecurityKey = "EPI"
             Me.cacBankIdNo.Size = New System.Drawing.Size(402, 24)
             Me.cacBankIdNo.SuggestBoxHeight = 200
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
@@ -1986,7 +1991,7 @@
             Me.txtBankAccountNo.OldValue = Nothing
             Me.txtBankAccountNo.ReadOnly = True
             Me.txtBankAccountNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBankAccountNo.SecurityKey = ""
+            Me.txtBankAccountNo.SecurityKey = "EPI"
             Me.txtBankAccountNo.Size = New System.Drawing.Size(200, 23)
             Me.txtBankAccountNo.TabIndex = 3
             Me.txtBankAccountNo.Translatable = False
@@ -2033,7 +2038,7 @@
             Me.txtOpeningBalance.OldValue = Nothing
             Me.txtOpeningBalance.ReadOnly = True
             Me.txtOpeningBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtOpeningBalance.SecurityKey = ""
+            Me.txtOpeningBalance.SecurityKey = "EPI"
             Me.txtOpeningBalance.Size = New System.Drawing.Size(93, 23)
             Me.txtOpeningBalance.TabIndex = 4
             Me.txtOpeningBalance.Translatable = False
@@ -2081,7 +2086,7 @@
             Me.txtBalance.OldValue = Nothing
             Me.txtBalance.ReadOnly = True
             Me.txtBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBalance.SecurityKey = ""
+            Me.txtBalance.SecurityKey = "EPI"
             Me.txtBalance.Size = New System.Drawing.Size(93, 23)
             Me.txtBalance.TabIndex = 5
             Me.txtBalance.Translatable = False
@@ -2128,7 +2133,7 @@
             Me.txtIban.OldValue = Nothing
             Me.txtIban.ReadOnly = True
             Me.txtIban.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtIban.SecurityKey = ""
+            Me.txtIban.SecurityKey = "EPI"
             Me.txtIban.Size = New System.Drawing.Size(200, 23)
             Me.txtIban.TabIndex = 6
             Me.txtIban.Translatable = False
@@ -2142,6 +2147,7 @@
             Me.lblPayCycleIdNo.Location = New System.Drawing.Point(4, 156)
             Me.lblPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayCycleIdNo.Name = "lblPayCycleIdNo"
+            Me.lblPayCycleIdNo.SecurityKey = "EPI"
             Me.lblPayCycleIdNo.Size = New System.Drawing.Size(185, 23)
             Me.lblPayCycleIdNo.TabIndex = 286
             Me.lblPayCycleIdNo.Text = "Pay Cycle"
@@ -2181,7 +2187,7 @@
             Me.cboPayCycleidNo.PreviousSearchTerm = Nothing
             Me.cboPayCycleidNo.PropertySelector = Nothing
             Me.cboPayCycleidNo.ReadOnlyCombo = False
-            Me.cboPayCycleidNo.SecurityKey = ""
+            Me.cboPayCycleidNo.SecurityKey = "EPI"
             Me.cboPayCycleidNo.Size = New System.Drawing.Size(201, 24)
             Me.cboPayCycleidNo.SuggestBoxHeight = 200
             Me.cboPayCycleidNo.SuggestListOrderRule = Nothing
@@ -2202,6 +2208,7 @@
             Me.lblPayGroupIdNo.Location = New System.Drawing.Point(4, 182)
             Me.lblPayGroupIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayGroupIdNo.Name = "lblPayGroupIdNo"
+            Me.lblPayGroupIdNo.SecurityKey = "EPI"
             Me.lblPayGroupIdNo.Size = New System.Drawing.Size(185, 23)
             Me.lblPayGroupIdNo.TabIndex = 290
             Me.lblPayGroupIdNo.Text = "Pay Group"
@@ -2241,7 +2248,7 @@
             Me.cboPayGroupIdNo.PreviousSearchTerm = Nothing
             Me.cboPayGroupIdNo.PropertySelector = Nothing
             Me.cboPayGroupIdNo.ReadOnlyCombo = False
-            Me.cboPayGroupIdNo.SecurityKey = ""
+            Me.cboPayGroupIdNo.SecurityKey = "EPI"
             Me.cboPayGroupIdNo.Size = New System.Drawing.Size(201, 24)
             Me.cboPayGroupIdNo.SuggestBoxHeight = 200
             Me.cboPayGroupIdNo.SuggestListOrderRule = Nothing
@@ -2294,7 +2301,7 @@
             Me.txtDutyHours.OldValue = Nothing
             Me.txtDutyHours.ReadOnly = True
             Me.txtDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDutyHours.SecurityKey = ""
+            Me.txtDutyHours.SecurityKey = "EPI"
             Me.txtDutyHours.Size = New System.Drawing.Size(93, 23)
             Me.txtDutyHours.TabIndex = 291
             Me.txtDutyHours.Translatable = False
@@ -2302,10 +2309,12 @@
             '
             'tbpEarnings
             '
+            Me.tbpEarnings.BackgroundImage = CType(resources.GetObject("tbpEarnings.BackgroundImage"), System.Drawing.Image)
             Me.tbpEarnings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpEarnings.Controls.Add(Me.DataGridViewEarnings)
             Me.tbpEarnings.Location = New System.Drawing.Point(4, 22)
             Me.tbpEarnings.Name = "tbpEarnings"
+            Me.tbpEarnings.SecurityKey = "EPI"
             Me.tbpEarnings.Size = New System.Drawing.Size(669, 330)
             Me.tbpEarnings.TabIndex = 4
             Me.tbpEarnings.Text = "Earnings"
@@ -2465,12 +2474,16 @@
             '
             'tbpDeductions
             '
+            Me.tbpDeductions.BackgroundImage = CType(resources.GetObject("tbpDeductions.BackgroundImage"), System.Drawing.Image)
+            Me.tbpDeductions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpDeductions.Controls.Add(Me.DataGridViewDeductions)
             Me.tbpDeductions.Location = New System.Drawing.Point(4, 22)
             Me.tbpDeductions.Name = "tbpDeductions"
             Me.tbpDeductions.Padding = New System.Windows.Forms.Padding(3)
+            Me.tbpDeductions.SecurityKey = "EPI"
             Me.tbpDeductions.Size = New System.Drawing.Size(669, 330)
             Me.tbpDeductions.TabIndex = 6
+            Me.tbpDeductions.Tag = ""
             Me.tbpDeductions.Text = "Deductions"
             Me.tbpDeductions.UseVisualStyleBackColor = True
             '
@@ -2635,6 +2648,7 @@
             '
             'tbpPhones
             '
+            Me.tbpPhones.BackgroundImage = CType(resources.GetObject("tbpPhones.BackgroundImage"), System.Drawing.Image)
             Me.tbpPhones.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.tbpPhones.Controls.Add(Me.DataGridViewPhones)
             Me.tbpPhones.Location = New System.Drawing.Point(4, 22)
@@ -2823,11 +2837,11 @@
             Me.IdNoDataGridViewTextBoxColumn4.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn4.Visible = False
             '
-            'EmployeeEntryTv2
+            'EmployeeEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1078, 555)
-            Me.Name = "EmployeeEntryTv2"
+            Me.Name = "EmployeeEntryTv"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Employee Maintenance Form"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -2926,7 +2940,6 @@
         Friend WithEvents lblEmail As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblStreet As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents tbpEmployment As TabPage
         Friend WithEvents floEmployment As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents lblHiredDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpHiredDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
@@ -2958,7 +2971,6 @@
         Friend WithEvents cboPayGroupIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblDutyHours As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtDutyHours As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents tbpEarnings As TabPage
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
@@ -2967,7 +2979,6 @@
         Friend WithEvents dgvEarningAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
         Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-        Friend WithEvents tbpDeductions As TabPage
         Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents dgvSequenceDeduction As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
@@ -2976,7 +2987,6 @@
         Friend WithEvents dgvDeductionAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
         Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents tbpPhones As TabPage
         Friend WithEvents DataGridViewPhones As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents dgvSequence As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
@@ -2988,5 +2998,9 @@
         Friend WithEvents CountryTelCode As DataGridViewTextBoxColumn
         Friend WithEvents EmployeeIdNo As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+        Friend WithEvents tbpEmployment As Libraries.CBaseControlsLibrary.CTabPage
+        Friend WithEvents tbpEarnings As Libraries.CBaseControlsLibrary.CTabPage
+        Friend WithEvents tbpDeductions As Libraries.CBaseControlsLibrary.CTabPage
+        Friend WithEvents tbpPhones As Libraries.CBaseControlsLibrary.CTabPage
     End Class
 End NameSpace

@@ -574,12 +574,6 @@
     <Compile Include="PresentationLayer\Views\Forms\DepositTypeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.designer.vb">
-      <DependentUpon>PayGroupEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PayGroupEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PensionSchemeEntryTv.designer.vb">
       <DependentUpon>PensionSchemeEntryTv.vb</DependentUpon>
     </Compile>
@@ -1111,9 +1105,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Test.resx">
       <DependentUpon>Test.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PayGroupEntry.resx">
-      <DependentUpon>PayGroupEntry.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollDetailEntry.resx">
       <DependentUpon>PayrollDetailEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -1362,10 +1353,10 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="appIbnserver.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Marcelo.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />

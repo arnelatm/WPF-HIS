@@ -21,7 +21,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
         MyBase.New(itemView)
         Service = New Service("SecurityGroup")
         TableName = "SecurityGroup_View"
-        SortOrderKey = "SecurityGroupName"
+        SortOrderKey = "SortKey"
         TreeViewMainField = "SecurityGroupName"
         TreeViewSecondaryField = "SecurityGroupCode"
         ParentFieldName = "ParentIdNo"

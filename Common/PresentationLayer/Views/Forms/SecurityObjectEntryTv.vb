@@ -1,6 +1,4 @@
 ﻿Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Views.Forms
@@ -88,11 +86,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            UpdateParentIdData()
             CreateDataSource("SystemView", cboSystemViewIdNo)
-        End Sub
-
-        Private Sub UpdateParentIdData()
             CreateDataSource("SecurityObject", cacParentIdNo)
         End Sub
 

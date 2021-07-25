@@ -7,6 +7,7 @@ Public Class UserPresenter(Of TM As New)
     Inherits PresenterNew(Of IUserView, TM)
 
     Public ParentViewList As List(Of TM)
+    Private serviceLogin As New ServiceLogin
 
     Public Sub New(view As IUserView)
         MyBase.New(view)
@@ -27,12 +28,12 @@ Public Class UserPresenter(Of TM As New)
     End Function
 
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-        View.Password = Service.EncryptPassword(View.IdNo, View.Password)
+        View.Password = serviceLogin.EncryptPassword(View.IdNo, View.Password)
     End Sub
 
     Private Sub OnSuccessfulAdd(ByRef newIdNo As Int32) Handles MyBase.RecordAddedSuccessfully
         Dim ePassword As String
-        ePassword = Service.EncryptPassword(newIdNo, View.Password)
+        ePassword = serviceLogin.EncryptPassword(newIdNo, View.Password)
         If ePassword IsNot Nothing Then
             View.Password = ePassword
             Dim userModel As New TM

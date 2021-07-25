@@ -90,8 +90,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property FullName As String Implements IUserView.FullName
         Public Property FullNameAra As String Implements IUserView.FullNameAra
-        Public Property IUserView_IdNo As Int32 Implements IUserView.IdNo
-        Public Property IUserView_UserName As String Implements IUserView.UserName
+        Public Property IdNo As Int32 Implements IUserView.IdNo
+        Public Property SecurityGroupIdNo As Int16 Implements IUserView.SecurityGroupIdNo
+        Public Property UserName As String Implements IUserView.UserName
 
         Public Property LogStatus As LoginStatus
             Get
@@ -102,20 +103,20 @@ Namespace PresentationLayer.Views.Forms
                 If _logStatus = LoginStatus.LoggedIn Then
                     Dim allControls As New List(Of Control)
                     allControls = FindControlRecursive(allControls, Me)
-                    'GlobalVariables.IsUserLoggedIn = True
-                    'If GlobalVariables.UserName.ToLower() = $"arnel" Then
-                    '    GlobalSubs.ShowAndEnableMenuItems(AccountsMenu)
-                    '    If _addSecurityObject Then
-
-                    '        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-                    '            SetObjectSecurityNew(cCtrl)
-                    '        Next
-                    '    End If
-                    'Else
-                    '    For Each cCtrl As Control In FindControlRecursive(allControls, Me)
-                    '        SetObjectSecurityNew(cCtrl)
-                    '    Next
-                    'End If
+                    GlobalVariables.IsUserLoggedIn = True
+                    SecurityGroupIdNo = GlobalVariables.SecurityGroupIdNo
+                    If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                        GlobalSubs.ShowAndEnableMenuItems(AccountsMenu)
+                        If _addSecurityObject Then
+                            For Each cCtrl As Control In allControls
+                                SetObjectSecurityNew(cCtrl)
+                            Next
+                        End If
+                    Else
+                        For Each cCtrl As Control In allControls
+                            SetObjectSecurityNew(cCtrl)
+                        Next
+                    End If
                     RaiseEvent UserLoggedIn(Me, allControls)
                     DisableLogin()
                 Else
@@ -129,7 +130,6 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property MainTableName As String
         Public Property Password As String Implements IUserView.Password
-        Public Property SecurityGroupIdNo As Int16 Implements IUserView.SecurityGroupIdNo
         Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
         Protected Shared Property Service As New Service
 

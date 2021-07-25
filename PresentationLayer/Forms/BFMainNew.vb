@@ -39,7 +39,6 @@ Public Class BfMainNew
 
     Public Event BeforeLoad()
 
-
     Public Sub New()
 
         ' This call is required by the designer.
@@ -637,9 +636,7 @@ Public Class BfMainNew
                 isSelectable = True
             End If
             cControl.Enabled = isSelectable
-            If cControl.Visible Then
-                cControl.Visible = isVisible
-            End If
+            cControl.Visible = isVisible
         End If
     End Sub
 

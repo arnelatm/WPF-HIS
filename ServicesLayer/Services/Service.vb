@@ -163,7 +163,7 @@ Namespace Services
             Return externalService.InvokeMember("Get" + tableName, BindingFlags.InvokeMethod, Nothing, Me, New Object() {idNo})
         End Function
 
-        Public Function GetLookup(lookupObj As Lookup) As List(Of Lookup.LookupData)
+        Public Function GetLookup(lookupObj As Lookup, Optional hierarchical As Boolean = False) As List(Of Lookup.LookupData)
             If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
                 Dim nameFieldArabic = lookupObj.NameField + "Ara"
                 If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
@@ -178,16 +178,18 @@ Namespace Services
                     End If
                 End If
             End If
-            Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
-            Dim lookupSetting = GlobalVariables.LookupSetting()
-            If lookupSetting = "NameAndCode" Then
-                Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
-            ElseIf lookupSetting = "CodeAndName" Then
-                Return ProcessLookupByCodeName(data, lookupObj.FieldsToShow.Count())
-            ElseIf lookupSetting = "Name" Then
-                Return ProcessLookupByName(data, lookupObj.FieldsToShow.Count())
-            Else
-                Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
+            If Not hierarchical Then
+                Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+                Dim lookupSetting = GlobalVariables.LookupSetting()
+                If lookupSetting = "NameAndCode" Then
+                    Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
+                ElseIf lookupSetting = "CodeAndName" Then
+                    Return ProcessLookupByCodeName(data, lookupObj.FieldsToShow.Count())
+                ElseIf lookupSetting = "Name" Then
+                    Return ProcessLookupByName(data, lookupObj.FieldsToShow.Count())
+                Else
+                    Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
+                End If
             End If
         End Function
 
@@ -234,8 +236,8 @@ Namespace Services
                 Dim tData As New Lookup.HLookupData With {
                         .IdNo = data(i * 4 - 4),
                         .Name = data(i * 4 - 3),
-                        .ParentIdNo = CInt(If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 2))),
-                        .Code = If(data(i * 4 - 1) Is DBNull.Value, "", data(i * 4 - 1))
+                        .Code = If(data(i * 4 - 2) Is DBNull.Value, "", data(i * 4 - 2)),
+                        .ParentIdNo = CInt(If(data(i * 4 - 1) Is DBNull.Value, Nothing, data(i * 4 - 1)))
                         }
                 tlData.Add(tData)
             Next
@@ -244,12 +246,24 @@ Namespace Services
 
         Private Function ProcessLookupByNameCode(data As Object, fieldCount As UInt16) As List(Of Lookup.LookupData)
             Dim tlData = New List(Of Lookup.LookupData)
-            If fieldCount = 3 Then
+            If fieldCount = 4 Then
+                'Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+                'Dim tlData = New List(Of Lookup.HLookupData)
+                'For i = 1 To Int(data.Count / 4)
+                '    Dim tData As New Lookup.HLookupData With {
+                '            .IdNo = data(i * 4 - 4),
+                '            .Name = data(i * 4 - 3),
+                '            .ParentIdNo = CInt(If(data(i * 4 - 2) Is DBNull.Value, Nothing, data(i * 4 - 2))),
+                '            .Code = If(data(i * 4 - 1) Is DBNull.Value, "", data(i * 4 - 1))
+                '            }
+                '    tlData.Add(tData)
+                'Next
+            ElseIf fieldCount = 3 Then
                 For i = 1 To Int(data.Count / 3)
                     Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
-                            .Name = data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)),
-                            .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
-                            }
+                        .Name = data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)),
+                        .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+                        }
                     tlData.Add(tData)
                 Next
             Else
@@ -325,12 +339,12 @@ Namespace Services
         End Function
 
         Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordByIdNo
-            Dim ModelOfPresenter As New TM
+            Dim modelOfPresenter As New TM
             Dim record = DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
             If record IsNot Nothing Then
-                GlobalVariables.Mapper.Map(record, ModelOfPresenter)
+                GlobalVariables.Mapper.Map(record, modelOfPresenter)
             End If
-            Return ModelOfPresenter
+            Return modelOfPresenter
         End Function
 
         Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo

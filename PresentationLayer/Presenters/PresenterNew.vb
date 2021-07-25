@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Transactions
@@ -1637,7 +1638,8 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Dim validationsPassed As Boolean
         validationsPassed = True
         Dim allControls As New List(Of Control)
-        For Each cCtrl As Control In FindControlRecursive(allControls, sender)
+        allControls = FindControlRecursive(allControls, sender)
+        For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is IEntryControl Then
                 If TypeOf cCtrl Is CTextBox Then
                     Dim thisControl As CTextBox = cCtrl
@@ -1655,8 +1657,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Private Sub SetAllControlsDynamicProperties(viewControl As Control)
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             Dim allControls As New List(Of Control)
+            allControls = FindControlRecursive(allControls, viewControl)
             Dim resources = New ComponentResourceManager(Me.GetType())
-            For Each cCtrl As Control In FindControlRecursive(allControls, viewControl)
+            For Each cCtrl As Control In allControls
                 'If cCtrl.Name = "txtCreditLimit" Then
                 '    Debugger.Break()
                 'End If
@@ -1784,8 +1787,8 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
                     isVisible = False
                     isEditable = False
                 End If
-                SetControlVisibility(cCtrl, isVisible)
                 SetControlEditability(cCtrl, isEditable)
+                SetControlVisibility(cCtrl, isVisible)
             End If
         End If
     End Sub
@@ -1793,7 +1796,17 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Private Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
         ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
         If Not controlVisible Then
-            SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
+            If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is TextBox Then
+                SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
+            ElseIf TypeOf cCtrl Is CTabPage Then
+                Dim tabControlObj As CTabControl
+                Dim tabPageObj As CTabPage
+                tabControlObj = cCtrl.Parent
+                tabPageObj = cCtrl
+                tabControlObj.TabPages.Remove(cCtrl)
+            Else
+                SetPropertyValue(cCtrl, "Visible", False)
+            End If
         End If
     End Sub
 
@@ -1805,6 +1818,12 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Sub
 
     Private Function GetControlSecurityValues(ByRef controlSecurityKey As String, Optional menu As Boolean = False) As ArrayList
+        Dim controlSecurityObjectIdNo As Int32
+        controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey, menu)
+        Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+    End Function
+
+    Private Function GetCdControlSecurityValues(ByRef controlSecurityKey As String, Optional menu As Boolean = False) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
         controlSecurityObjectIdNo = GetControlSecurityIdNo(controlSecurityKey, menu)
         Return GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
@@ -2093,8 +2112,8 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Protected Sub DisplayTree()
         Dim root As TreeNode = FormTreeView.Nodes(0)
         root.Nodes.Clear()
-        root.Text = Messaging.TranslateCaption(TableName)
         Dim treeViewData As Object = GetTreeViewData()
+        root.Text = Messaging.TranslateCaption(TableName)
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             For Each dataNode In treeViewData
                 AddRecordToTree(dataNode)
@@ -2119,6 +2138,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
             Else
                 lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName, TreeViewSecondaryField}
             End If
+            Return Service.GetLookup(lookupObj)
         Else
             lookupObj.SortKey = "SortKey"
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
@@ -2126,8 +2146,8 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
             Else
                 lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName, TreeViewSecondaryField, ParentFieldName}
             End If
+            Return Service.GetHLookup(lookupObj)
         End If
-        Return Service.GetLookup(lookupObj)
     End Function
 
     Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean, treeViewTableName As TreeView)

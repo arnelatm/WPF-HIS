@@ -1033,6 +1033,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
                         'Else
                         '    Messaging.Show(true,"MsgRecordHasBeenSaved", "Record has been successfully saved!")
                     Else
+                        CallByName(View, "CreateDataSources", CallType.Method)
                         RaiseEvent AfterSave()
                         If Ea IsNot Nothing Then
                             Ea.PublishEvent(New RecordSaved(DataModel))
