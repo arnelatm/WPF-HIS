@@ -27,8 +27,4 @@ Public Class SecurityObjectPresenter(Of TM As New)
         Return retValue
     End Function
 
-    Protected Sub OnAfterSave() Handles MyBase.AfterSave
-        CallByName(View, "UpdateParentIdData", CallType.Method)
-    End Sub
-
 End Class

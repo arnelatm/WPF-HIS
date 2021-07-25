@@ -33,7 +33,6 @@ Public Class CFormEntryNew
     'Private _recordPositionNumber As Int32 = 0
     Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
-
     Private _editingMode As Boolean = False
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
@@ -269,12 +268,15 @@ Public Class CFormEntryNew
         End If
     End Sub
 
-    Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
-        ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
-        If Not controlVisible Then
-            SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
-        End If
-    End Sub
+    'Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
+    '    ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
+    '    If Not controlVisible Then
+    '        If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is TextBox Then
+
+    '        End If
+    '        SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
+    '    End If
+    'End Sub
 
     Protected Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If _debugSwitch = 1 Then
@@ -378,7 +380,8 @@ Public Class CFormEntryNew
             Debugger.Break()
         End If
         Dim allControls As New List(Of Control)
-        For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+        allControls = FindControlRecursive(allControls, Me)
+        For Each cCtrl As Control In allControls
             If TypeOf cCtrl Is DataGridView Then
                 Dim cGrid As DataGridView = cCtrl
                 cGrid.EndEdit()
@@ -550,7 +553,11 @@ Public Class CFormEntryNew
         Dim ctrl As Control
         For Each ctrl In FindControlRecursive(allCtrl, Me)
             If TypeOf ctrl Is IEntryControl Then
+                'If ctrl.Name = "cboPaymentMethod" Then
+                '    Debugger.Break()
+                'End If
                 SetPropertyValue(ctrl, "EditingMode", onOff)
+
             End If
         Next
         If onOff Then

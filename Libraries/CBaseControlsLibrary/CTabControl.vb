@@ -1,4 +1,5 @@
-﻿Imports System.Drawing
+﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Globalization
 Imports System.Windows.Forms
 
@@ -12,6 +13,12 @@ Public Class CTabControl
         Width = 200
         Height = 100
     End Sub
+
+    <Category("Custom Properties")>
+    <DefaultValue(CType(Nothing, String))>
+    <Description("Security Key to use for this control.")>
+    <Browsable(True)>
+    Public Property SecurityKey As String
 
     Private Sub CTabControl_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft And BackgroundImage IsNot Nothing Then

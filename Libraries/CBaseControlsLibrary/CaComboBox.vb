@@ -83,6 +83,11 @@ Public Class CaComboBox
         End Set
     End Property
 
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control value is hidden (used for secured controls)")>
+    Public Property Hidden As Boolean
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
@@ -177,14 +182,24 @@ Public Class CaComboBox
             If Value Then
                 DropDownStyle = ComboBoxStyle.Simple
                 MaxDropDownItems = 1
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                If Hidden Then
+                    ForeColor = Color.Black
+                    BackColor = Color.Black
+                Else
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                End If
                 DropDownHeight = Height
             Else
                 MaxDropDownItems = _defaultMaxDropDownItems
                 DropDownStyle = _defaultDropdownStyle
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                If Hidden Then
+                    ForeColor = Color.Black
+                    BackColor = Color.Black
+                Else
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
                 DropDownHeight = _defaultDropDownHeight
             End If
         End Set
@@ -299,22 +314,32 @@ Public Class CaComboBox
     'Private _findDataType As IFindableControl.DataTypeEnum
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If EditingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+        If Hidden Then
+            ForeColor = Color.Black
+            BackColor = Color.Black
         Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If EditingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        If Hidden Then
+            ForeColor = Color.Black
+            BackColor = Color.Black
         Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 
@@ -378,14 +403,24 @@ Public Class CaComboBox
         If hide Then
             DropDownStyle = ComboBoxStyle.Simple
             MaxDropDownItems = 1
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
             DropDownHeight = Height
         Else
             MaxDropDownItems = _defaultMaxDropDownItems
             DropDownStyle = _defaultDropdownStyle
-            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
             DropDownHeight = _defaultDropDownHeight
         End If
     End Sub
