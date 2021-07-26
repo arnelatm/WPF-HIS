@@ -36,8 +36,13 @@ Public Class Lookup
     End Class
 
     Private Sub ComposeDefaultLookupValues(Optional filter As String = Nothing)
-        NameField = TableName + "Name"
-        CodeField = TableName + "Code"
+        If Right(TableName, 5) = "_View" Then
+            NameField = Left(TableName, TableName.Length - 5) + "Name"
+            CodeField = Left(TableName, TableName.Length - 5) + "Code"
+        Else
+            NameField = TableName + "Name"
+            CodeField = TableName + "Code"
+        End If
         SortKey = NameField
         FieldsToShow = {"IdNo", NameField, CodeField}
         FilterKey = filter

@@ -20,6 +20,15 @@ Namespace PresentationLayer.Views.Forms
         Private _earningFooter
         Private _deductionFooter
 
+        Public Sub New()
+
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            ' Add any initialization after the InitializeComponent() call.
+
+        End Sub
+
         Public Sub New(ByVal payrollIdNo As Int16)
 
             ' This call is required by the designer.
@@ -119,6 +128,45 @@ Namespace PresentationLayer.Views.Forms
                 BindPayrollDeductions()
             End Set
         End Property
+
+        Public Property StartDate As Date Implements IPayrollDetailView.StartDate
+            Get
+                Return dtpStartDate.Value
+            End Get
+            Set
+                dtpStartDate.Value = Value
+            End Set
+        End Property
+
+        Public Property EndDate As Date Implements IPayrollDetailView.EndDate
+            Get
+                Return dtpEndDate.Value
+            End Get
+            Set
+                dtpEndDate.Value = Value
+            End Set
+        End Property
+
+        Public Property PayPeriodName As String Implements IPayrollDetailView.PayPeriodName
+        Public Property PayPeriodNameAra As String Implements IPayrollDetailView.PayPeriodNameAra
+
+        Public Property PayPeriodDescription
+            Get
+                If GlobalVariables.RightToLeftLayout Then
+                    Return PayPeriodNameAra
+                Else
+                    Return PayPeriodName
+                End If
+            End Get
+            Set
+                If GlobalVariables.RightToLeftLayout Then
+                    txtPayPeriodDescription.Text = PayPeriodNameAra
+                Else
+                    txtPayPeriodDescription.Text = PayPeriodName
+                End If
+            End Set
+        End Property
+
 
 #End Region
 

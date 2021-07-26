@@ -54,7 +54,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayPeriodName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtPayPeriodDescription = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtTotalEarnings = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -131,7 +131,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.dtpStartDate, 3, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.lblEndDate, 4, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 0, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodName, 1, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodDescription, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.lblEmployeeName, 0, 2)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel9, 0, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.txtTotalEarnings, 1, 6)
@@ -531,7 +531,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dtpStartDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpStartDate.DefaultValue = Nothing
-            Me.dtpStartDate.DisplayOnly = False
+            Me.dtpStartDate.DisplayOnly = True
             Me.dtpStartDate.DtpDefaultValue = Nothing
             Me.dtpStartDate.EditingMode = True
             Me.dtpStartDate.EditsAllowed = False
@@ -583,37 +583,39 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel3.Translatable = True
             '
-            'txtPayPeriodName
+            'txtPayPeriodDescription
             '
-            Me.txtPayPeriodName.BackColor = System.Drawing.Color.White
-            Me.txtPayPeriodName.BegFindValue = Nothing
-            Me.txtPayPeriodName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayPeriodName, 5)
-            Me.txtPayPeriodName.ComputedValue = False
-            Me.txtPayPeriodName.CustomFormat = Nothing
-            Me.txtPayPeriodName.DataBoundControl = True
-            Me.txtPayPeriodName.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtPayPeriodName.EditingMode = True
-            Me.txtPayPeriodName.EndFindValue = Nothing
-            Me.txtPayPeriodName.FieldDescription = Nothing
-            Me.txtPayPeriodName.FieldName = Nothing
-            Me.txtPayPeriodName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtPayPeriodName.FindEnabled = False
-            Me.txtPayPeriodName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPayPeriodName.ForeColor = System.Drawing.Color.Black
-            Me.txtPayPeriodName.LinkedLabel = Nothing
-            Me.txtPayPeriodName.Location = New System.Drawing.Point(125, 26)
-            Me.txtPayPeriodName.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPayPeriodName.MaximumValue = Nothing
-            Me.txtPayPeriodName.MinimumValue = Nothing
-            Me.txtPayPeriodName.Name = "txtPayPeriodName"
-            Me.txtPayPeriodName.OldValue = Nothing
-            Me.txtPayPeriodName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayPeriodName.Size = New System.Drawing.Size(524, 23)
-            Me.txtPayPeriodName.TabIndex = 3
-            Me.txtPayPeriodName.TabStop = False
-            Me.txtPayPeriodName.Translatable = False
-            Me.txtPayPeriodName.ValueIsMandatory = True
+            Me.txtPayPeriodDescription.BackColor = System.Drawing.Color.White
+            Me.txtPayPeriodDescription.BegFindValue = Nothing
+            Me.txtPayPeriodDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayPeriodDescription, 5)
+            Me.txtPayPeriodDescription.ComputedValue = False
+            Me.txtPayPeriodDescription.CustomFormat = Nothing
+            Me.txtPayPeriodDescription.DataBoundControl = True
+            Me.txtPayPeriodDescription.DisplayOnly = True
+            Me.txtPayPeriodDescription.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtPayPeriodDescription.EditingMode = True
+            Me.txtPayPeriodDescription.EndFindValue = Nothing
+            Me.txtPayPeriodDescription.FieldDescription = Nothing
+            Me.txtPayPeriodDescription.FieldName = Nothing
+            Me.txtPayPeriodDescription.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPayPeriodDescription.FindEnabled = False
+            Me.txtPayPeriodDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPayPeriodDescription.ForeColor = System.Drawing.Color.Black
+            Me.txtPayPeriodDescription.LinkedLabel = Nothing
+            Me.txtPayPeriodDescription.Location = New System.Drawing.Point(125, 26)
+            Me.txtPayPeriodDescription.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPayPeriodDescription.MaximumValue = Nothing
+            Me.txtPayPeriodDescription.MinimumValue = Nothing
+            Me.txtPayPeriodDescription.Name = "txtPayPeriodDescription"
+            Me.txtPayPeriodDescription.OldValue = Nothing
+            Me.txtPayPeriodDescription.ReadOnly = True
+            Me.txtPayPeriodDescription.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPayPeriodDescription.Size = New System.Drawing.Size(524, 23)
+            Me.txtPayPeriodDescription.TabIndex = 3
+            Me.txtPayPeriodDescription.TabStop = False
+            Me.txtPayPeriodDescription.Translatable = False
+            Me.txtPayPeriodDescription.ValueIsMandatory = True
             '
             'lblEmployeeName
             '
@@ -653,6 +655,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalEarnings.ComputedValue = False
             Me.txtTotalEarnings.CustomFormat = "N2"
             Me.txtTotalEarnings.DataBoundControl = True
+            Me.txtTotalEarnings.DisplayOnly = True
             Me.txtTotalEarnings.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtTotalEarnings.EditingMode = True
             Me.txtTotalEarnings.EndFindValue = Nothing
@@ -669,6 +672,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalEarnings.MinimumValue = Nothing
             Me.txtTotalEarnings.Name = "txtTotalEarnings"
             Me.txtTotalEarnings.OldValue = Nothing
+            Me.txtTotalEarnings.ReadOnly = True
             Me.txtTotalEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtTotalEarnings.Size = New System.Drawing.Size(122, 23)
             Me.txtTotalEarnings.TabIndex = 5
@@ -696,7 +700,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpEndDate.DefaultValue = Nothing
-            Me.dtpEndDate.DisplayOnly = False
+            Me.dtpEndDate.DisplayOnly = True
             Me.dtpEndDate.DtpDefaultValue = Nothing
             Me.dtpEndDate.EditingMode = True
             Me.dtpEndDate.EditsAllowed = False
@@ -726,6 +730,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDeductions.ComputedValue = False
             Me.txtTotalDeductions.CustomFormat = "N2"
             Me.txtTotalDeductions.DataBoundControl = True
+            Me.txtTotalDeductions.DisplayOnly = True
             Me.txtTotalDeductions.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtTotalDeductions.EditingMode = True
             Me.txtTotalDeductions.EndFindValue = Nothing
@@ -742,6 +747,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDeductions.MinimumValue = Nothing
             Me.txtTotalDeductions.Name = "txtTotalDeductions"
             Me.txtTotalDeductions.OldValue = Nothing
+            Me.txtTotalDeductions.ReadOnly = True
             Me.txtTotalDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtTotalDeductions.Size = New System.Drawing.Size(117, 23)
             Me.txtTotalDeductions.TabIndex = 6
@@ -757,6 +763,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNetPay.ComputedValue = False
             Me.txtNetPay.CustomFormat = "N2"
             Me.txtNetPay.DataBoundControl = True
+            Me.txtNetPay.DisplayOnly = True
             Me.txtNetPay.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtNetPay.EditingMode = True
             Me.txtNetPay.EndFindValue = Nothing
@@ -773,6 +780,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNetPay.MinimumValue = Nothing
             Me.txtNetPay.Name = "txtNetPay"
             Me.txtNetPay.OldValue = Nothing
+            Me.txtNetPay.ReadOnly = True
             Me.txtNetPay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNetPay.Size = New System.Drawing.Size(117, 23)
             Me.txtNetPay.TabIndex = 7
@@ -821,7 +829,10 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.CurrentSearchTerm = ""
             Me.cboEmployeeIdNo.DefaultValue = Nothing
             Me.cboEmployeeIdNo.DisplayMember = "Name"
+            Me.cboEmployeeIdNo.DisplayOnly = True
             Me.cboEmployeeIdNo.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboEmployeeIdNo.DropDownHeight = 24
+            Me.cboEmployeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboEmployeeIdNo.EditingMode = True
             Me.cboEmployeeIdNo.EndFindValue = Nothing
             Me.cboEmployeeIdNo.FieldDescription = Nothing
@@ -838,6 +849,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.LinkedLabel = Nothing
             Me.cboEmployeeIdNo.Location = New System.Drawing.Point(125, 51)
             Me.cboEmployeeIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboEmployeeIdNo.MaxDropDownItems = 1
             Me.cboEmployeeIdNo.Name = "cboEmployeeIdNo"
             Me.cboEmployeeIdNo.OldValue = 0
             Me.cboEmployeeIdNo.OriginalDataSource = Nothing
@@ -845,7 +857,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.OverrideDropDownStyleList = False
             Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
             Me.cboEmployeeIdNo.PropertySelector = Nothing
-            Me.cboEmployeeIdNo.ReadOnlyCombo = False
+            Me.cboEmployeeIdNo.ReadOnlyCombo = True
             Me.cboEmployeeIdNo.Size = New System.Drawing.Size(524, 24)
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
@@ -869,11 +881,11 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.SplitContainer1.ResumeLayout(False)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.CFlowLayout1.ResumeLayout(false)
-        Me.TableLayoutPanel1.ResumeLayout(false)
-        Me.TableLayoutPanel1.PerformLayout
-        Me.tbcPayroll.ResumeLayout(false)
-        Me.tpgEarnings.ResumeLayout(false)
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.TableLayoutPanel1.ResumeLayout(False)
+            Me.TableLayoutPanel1.PerformLayout()
+            Me.tbcPayroll.ResumeLayout(False)
+            Me.tpgEarnings.ResumeLayout(false)
         CType(Me.DataGridViewEarnings,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).EndInit
         Me.tpgDeductions.ResumeLayout(false)
@@ -901,7 +913,7 @@ End Sub
         Friend WithEvents tbcPayroll As Libraries.CBaseControlsLibrary.CTabControl
         Friend WithEvents tpgEarnings As TabPage
         Friend WithEvents tpgDeductions As TabPage
-        Friend WithEvents txtPayPeriodName As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtPayPeriodDescription As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtPayrollIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents txtEmployeeNameAra As Libraries.CBaseControlsLibrary.CTextBox
