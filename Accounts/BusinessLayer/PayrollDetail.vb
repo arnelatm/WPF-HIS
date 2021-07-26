@@ -20,6 +20,10 @@
         Public Property EmployeeNameAra As String
         Public Property PayrollEarnings As List(Of PayrollPayElement)
         Public Property PayrollDeductions As List(Of PayrollPayElement)
+        Public Property StartDate As Date
+        Public Property EndDate As Date
+        Public Property PayPeriodName As String
+        Public Property PayPeriodNameAra As String
     End Class
 
 End Namespace

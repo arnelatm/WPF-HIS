@@ -543,7 +543,6 @@ Namespace AdoNet
                     sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
                 Else
                     sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
-
                 End If
             End If
             Return _db.SqlRead(sql)

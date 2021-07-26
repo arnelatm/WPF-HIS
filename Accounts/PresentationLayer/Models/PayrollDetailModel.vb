@@ -15,6 +15,10 @@
         Public Property EmployeeCode As String
         Public Property PayrollEarnings As List(Of PayrollPayElementModel)
         Public Property PayrollDeductions As List(Of PayrollPayElementModel)
+        Public Property StartDate As Date
+        Public Property EndDate As Date
+        Public Property PayPeriodName As String
+        Public Property PayPeriodNameAra As String
 
     End Class
 

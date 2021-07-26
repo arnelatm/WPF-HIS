@@ -2132,6 +2132,14 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         'Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         Dim lookupObj As New Lookup(TableName, DataFilter)
+        lookupObj.NameField = treeMainFieldName
+        If TreeViewSecondaryField IsNot Nothing Then
+            lookupObj.CodeField = TreeViewSecondaryField
+        End If
+        If SortOrderKey IsNot Nothing Then
+            lookupObj.SortKey = SortOrderKey
+        End If
+        'lookupObj.FieldsToShow = {"IdNo", lookupObj.NameField, lookupObj.CodeField}
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
                 lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName}

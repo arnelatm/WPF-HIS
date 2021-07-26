@@ -11,7 +11,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeeCode As String
         Property EmployeeName As String
         Property EmployeeNameAra As String
-
+        Property StartDate As Date
+        Property EndDate As Date
+        Property PayPeriodName As String
+        Property PayPeriodNameAra As String
         Property PayrollEarnings As List(Of PayrollPayElementView)
         Property PayrollDeductions As List(Of PayrollPayElementView)
 

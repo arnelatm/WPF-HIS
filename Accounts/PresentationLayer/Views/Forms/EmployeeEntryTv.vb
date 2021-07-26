@@ -79,11 +79,7 @@ Namespace PresentationLayer.Views.Forms
                 Return dtpBirthDate.Value
             End Get
             Set
-                'If Value Is Nothing Then
-                '    dtpBirthDate.Value = Date.Now()
-                'Else
                 dtpBirthDate.Value = Value
-                'End If
             End Set
         End Property
 

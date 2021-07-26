@@ -72,7 +72,11 @@ Namespace PresentationLayer.Presenters
             payroll = Service.GetFieldsWithIdNo(View.PayrollIdNo, "Payroll", "StartDate,EndDate,PayrollName")
             startDate = CType(payroll.StartDate, Date)
             endDate = CType(payroll.EndDate, Date)
-            payDescription = payroll.PayrollName
+            If GlobalVariables.RightToLeftLayout Then
+                payDescription = payroll.PayrollNameAra
+            Else
+                payDescription = payroll.PayrollName
+            End If
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -125,7 +129,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnUpdateDataFilterHandler(idNo As Int16)
-            DisplayPayrollDetails(View.StartDate, View.EndDate, View.PayPeriodName)
+            Dim payrollService As New AccountsService("Payroll")
+            Dim payroll As New PayrollModel
+            payroll = payrollService.GetRecordByIdNo(Of PayrollModel)(View.PayrollIdNo)
+            If payroll IsNot Nothing Then
+                DisplayPayrollDetails(payroll.StartDate, payroll.EndDate, payroll.PayrollName)
+            End If
         End Sub
 
     End Class
