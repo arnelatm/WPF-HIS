@@ -26,6 +26,7 @@ Namespace BusinessLayer
         Public Property StartDate As Date
         Public Property PayrollAttendance As List(Of AttendanceItem)
         Public Property PayrollOvertime As List(Of OtWorkHour)
+        Public Property PayFrequency As String
     End Class
 
 End Namespace

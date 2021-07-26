@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As ILeaveView)
             MyBase.New(view)
 
-            Service = New ServiceAccounts("Leave")
+            Service = New AccountsService("Leave")
             TableName = "Leave"
             TreeViewMainField = "LeaveName"
             TreeViewSecondaryField = "LeaveCode"

@@ -1246,7 +1246,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Private Function InitiateSave() As Integer
         Dim retValue As Integer
         Try
-            Dim record As TM = Activator.CreateInstance(GetType(TM))
+            Dim record As New TM
             GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
                 If AddMode Then

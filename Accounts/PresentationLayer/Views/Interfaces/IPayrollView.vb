@@ -13,6 +13,16 @@ Namespace PresentationLayer.Views.Interfaces
         Property StartDate As Date
         Property PayrollAttendance As List(Of AttendanceItemView)
         Property PayrollOvertime As List(Of OtWorkHourView)
+        Property PayFrequency As Char
+
+        Event InitializeAttendance(sender As Object)
+
+        Event InitializeOvertime(sender As Object)
+
+        Event GenerateRegularPayElements(sender As Object)
+
+        Event InitializePayroll(sender As Object)
+
     End Interface
 
 End Namespace

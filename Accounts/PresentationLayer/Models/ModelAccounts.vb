@@ -12,7 +12,7 @@ Namespace PresentationLayer.Models
         End Sub
 
         Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
-            DataService = New ServiceAccounts(objectName, bizParam, daoParam)
+            DataService = New AccountsService(objectName, bizParam, daoParam)
         End Sub
 
         Public Function UpdateGlReferenceNumber(Of TM)(ByRef model As TM) As Integer Implements IModelAccounts.UpdateGlReferenceNumber

@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As IRevCostCenterView)
             MyBase.New(itemView)
-            Service = New ServiceCommon("RevCostCenter")
+            Service = New CommonService("RevCostCenter")
             TableName = "RevCostCenter_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevCostCenterName"

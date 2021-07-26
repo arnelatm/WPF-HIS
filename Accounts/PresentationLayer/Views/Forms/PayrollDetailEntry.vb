@@ -12,7 +12,6 @@ Namespace PresentationLayer.Views.Forms
         'Private _bypassSelectedChange As Boolean = False
         'Private _employees
         'Private _payGroups
-        Private Property MyPresenter As PayrollDetailPresenter
 
         Private _payrollEarnings As List(Of PayrollPayElementView)
         Private _payrollDeductions As List(Of PayrollPayElementView)
@@ -28,17 +27,11 @@ Namespace PresentationLayer.Views.Forms
             ' GlobalVariables.EventAggregator.SubscribeEvent(Me)
             ' Add any initialization after the InitializeComponent() call.
             Me.PayrollIdNo = payrollIdNo
-            MainTableName = "PayrollDetail_View"
-            TvMainFieldName = "EmployeeName"
-            TvSecondaryFieldName = "EmployeeCode"
-            SortOrderKey = "SortKey"
             FirstControl = cboEmployeeIdNo
             ' Add any initialization after the InitializeComponent() call.
-            MyPresenter = New PayrollDetailPresenter(Me)
-            PresenterObj = MyPresenter
-            MyPresenter.UpdateDataFilter(payrollIdNo)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
+
+            RaiseEvent UpdateDataFilterEvent(payrollIdNo)
+
             _earningFooter = New DgvFooter(DataGridViewEarnings) With {.AutoCalc = True}
             _earningFooter.ColumnToSum("dgvEarningAmount") = True
             _earningFooter.SetText("dgvEarningIdNo", "Totals ->")
@@ -129,12 +122,12 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
+        Public Event UpdateDataFilterEvent(pPayrollIdNo As Int16) Implements IPayrollDetailView.UpdateDataFilterEvent
+
         Protected Overrides Sub CreateDataSources()
-            _payEarningsByCode = MyPresenter.GetLookup("PayElement", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "' and Summary = 0")
-            _payDeductionsByCode = MyPresenter.GetLookup("PayElement", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "' and Summary = 0")
-            cboEmployeeIdNo.BeginUpdate()
-            cboEmployeeIdNo.DataSource = MyPresenter.GetLookup("Employee")
-            cboEmployeeIdNo.EndUpdate()
+            CreateLookupData("PayElement", NameOf(_payEarningsByCode), "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "' and Summary = 0")
+            CreateLookupData("PayElement", NameOf(_payDeductionsByCode), "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "' and Summary = 0")
+            CreateDataSource("Employee", cboEmployeeIdNo)
         End Sub
 
         Private Sub BindPayrollEarnings()
@@ -153,7 +146,6 @@ Namespace PresentationLayer.Views.Forms
                 .DataSource = bsEarnings
                 .Refresh()
             End With
-
         End Sub
 
         Private Sub BindPayrollDeductions()
@@ -176,11 +168,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PayrollDetailEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            MyPresenter.DisplayPayrollDetails(dtpStartDate.Value, dtpEndDate.Value, txtPayPeriodName.Text)
+            RaiseEvent UpdateDataFilterEvent(PayrollIdNo)
+            'MyPresenter.DisplayPayrollDetails(dtpStartDate.Value, dtpEndDate.Value, txtPayPeriodName.Text)
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
-            MyBase.RecordPositionChanged(e)
+        Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateTotals()
         End Sub
 

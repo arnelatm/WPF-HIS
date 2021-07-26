@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As ICustomerView)
             MyBase.New(view)
             TableName = "Customer"
-            Service = New ServiceAccounts("Customer")
+            Service = New AccountsService("Customer")
             TreeViewMainField = "CustomerName"
             TreeViewSecondaryField = "CustomerCode"
             SortOrderKey = "CustomerName"

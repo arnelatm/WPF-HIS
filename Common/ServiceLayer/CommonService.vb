@@ -3,7 +3,7 @@ Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer
 
-    Public Class ServiceCommon
+    Public Class CommonService
         Inherits Service
         Implements IServiceCommon
 

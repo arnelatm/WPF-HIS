@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ITranslatedCaptionView)
             MyBase.New(view)
-            Service = New ServiceCommon("TranslatedCaption")
+            Service = New CommonService("TranslatedCaption")
             TableName = "TranslatedCaption"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"

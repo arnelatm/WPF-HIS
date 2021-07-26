@@ -164,6 +164,18 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="Telerik.WinControls, Version=2020.1.218.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2020.1.218.40\Telerik.WinControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2020.1.218.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2020.1.218.40\Telerik.WinControls.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2020.1.218.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2020.1.218.40\TelerikCommon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -1007,8 +1019,9 @@
       <DependentUpon>Trial Balance.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ServiceLayer\ActionService\AccountsModule.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
-    <Compile Include="ServiceLayer\ActionService\ServiceAccounts.vb" />
+    <Compile Include="ServiceLayer\ActionService\AccountsService.vb" />
     <Compile Include="MappingProfileAccounts.vb" />
     <Compile Include="SetSettings.Designer.vb">
       <DependentUpon>SetSettings.vb</DependentUpon>

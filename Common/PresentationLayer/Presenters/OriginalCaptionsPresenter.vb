@@ -9,7 +9,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IOriginalCaptionsView)
             MyBase.New(view)
-            Service = New ServiceCommon("OriginalCaptions")
+            Service = New CommonService("OriginalCaptions")
             TableName = "OriginalCaptions"
             SortOrderKey = "Caption"
             TreeViewMainField = "Caption"

@@ -19,12 +19,12 @@ Namespace PresentationLayer.Presenters
         Protected DtEmpPayElementUpdateTable As New DataTable
         Protected DtPhoneInsertTable As New DataTable
         Protected DtPhoneUpdateTable As New DataTable
-        Private ReadOnly _employeePayElementService As New ServiceAccounts("EmployeePayElement")
-        Private ReadOnly _employeePhoneService As New ServiceAccounts("EmployeePhone")
+        Private ReadOnly _employeePayElementService As New AccountsService("EmployeePayElement")
+        Private ReadOnly _employeePhoneService As New AccountsService("EmployeePhone")
 
         Public Sub New(itemView As IEmployeeView)
             MyBase.New(itemView)
-            Service = New ServiceAccounts("Employee")
+            Service = New AccountsService("Employee")
             TableName = "Employee"
             TreeViewMainField = "EmployeeName"
             TreeViewSecondaryField = "EmployeeCode"

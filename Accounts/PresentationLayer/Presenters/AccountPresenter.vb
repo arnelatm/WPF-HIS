@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(itemView As IAccountView)
             MyBase.New(itemView)
             AddHandler View.ParentIdUpdated, AddressOf OnParentIdUpdated
-            Service = New ServiceAccounts("Account")
+            Service = New AccountsService("Account")
             TableName = "Account_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "AccountName"
@@ -72,7 +72,6 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
-
 
         Private Sub OnParentIdUpdated(ByRef pEditableAccountGroup As Boolean)
             If EditableAccountGroup(View.IdNo, View.ParentIdNo) Then

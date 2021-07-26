@@ -6,8 +6,8 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace ServiceLayer.ActionService
 
-    Public Class ServiceAccounts
-        Inherits ServiceCommon
+    Public Class AccountsService
+        Inherits CommonService
         Implements IServiceAccounts
 
         Protected Shared ReadOnly DaoFactoryAccounts As IDaoFactoryAccounts = DaoFactoriesAccounts.GetAccountsFactory(Provider)
@@ -263,43 +263,5 @@ Namespace ServiceLayer.ActionService
         '    Return DataDao.RemoveInvoicePayment(idNo, amount, discountTaken)
         'End Function
     End Class
-
-    'Public MustInherit Class ServiceOpenInvoice
-    '    Inherits ServiceAccounts
-    '    Implements IOpenInvoiceService
-
-    '    Public  AddInvoicePayment(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
-    '        Implements IOpenInvoiceService.AddInvoicePayment
-    '        Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
-    '    End Function
-
-    '    Public Function RemoveInvoiceCollection(ByVal idNo As Int32, ByVal amount As Decimal, ByVal discountTaken As Decimal) _
-    '        Implements IOpenInvoiceService.RemoveInvoiceCollection
-    '        Return DataDao.RemoveInvoiceCollection(idNo, amount, discountTaken)
-    '    End Function
-
-    'End Class
-
-    'Public Class ServiceApOpenInvoice
-    '    Inherits ServiceOpenInvoice
-    '    Implements IOpenInvoiceService
-
-    '    Public Sub New()
-    '        DataDao = AdoNet.DaoFactoryAccounts.ApOpenInvoiceDao
-    '        DataBo = New ApOpenInvoice
-    '    End Sub
-
-    'End Class
-
-    'Public Class ServiceArOpenInvoice
-    '    Inherits ServiceOpenInvoice
-    '    Implements IOpenInvoiceService
-
-    '    Public Sub New()
-    '        DataDao = AdoNet.DaoFactoryAccounts.ArOpenInvoiceDao
-    '        DataBo = New ArOpenInvoice
-    '    End Sub
-
-    'End Class
 
 End Namespace

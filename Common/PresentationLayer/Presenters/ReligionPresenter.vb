@@ -8,7 +8,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IReligionView)
             MyBase.New(view)
-            Service = New ServiceCommon("Religion")
+            Service = New CommonService("Religion")
             TableName = "Religion"
             TreeViewMainField = "ReligionName"
             TreeViewSecondaryField = "ReligionCode"

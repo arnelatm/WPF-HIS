@@ -11,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPurchaseItemView)
             MyBase.New(view)
-            Service = New ServiceAccounts("PurchaseItem")
+            Service = New AccountsService("PurchaseItem")
             TableName = "PurchaseItem"
             TreeViewMainField = "PurchaseItemName"
             TreeViewSecondaryField = "PurchaseItemCode"

@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -11,26 +12,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private _payrollAttendance As New List(Of AttendanceItemView)
         Private _payrollOvertime As New List(Of OtWorkHourView)
-
-        'Private _payrollEarning As New List(Of PayrollEarningView)
-        Private Property MyPresenter As PayrollPresenter
-
         Private _employees
 
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-
-            MainTableName = "Payroll"
-            TvMainFieldName = "PayrollName"
-            TvSecondaryFieldName = "PayrollCode"
-            SortOrderKey = "EndDate"
             FirstControl = txtPayrollName
             ' Add any initialization after the InitializeComponent() call.
-            MyPresenter = New PayrollPresenter(Me)
-            PresenterObj = MyPresenter
-            Ea = MyPresenter.Ea
-            Ea.SubscribeEvent(Me)
             dgvDaysPresent.SetFormat(7, 4)
             dgvDaysAbsentWithPay.SetFormat(7, 4)
             dgvDaysOff.SetFormat(7, 4)
@@ -42,8 +30,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cboPayCycleIdNo.DataSource = MyPresenter.GetLookup("PayCycle")
-            _employees = MyPresenter.GetLookup("Employee")
+            CreateDataSource("PayCycle", cboPayCycleIdNo)
+            CreateLookupData("Employee", NameOf(_employees))
             dgvEmployeeIdNo.DataSource = _employees
             dgvEmployeeIdNoOt.DataSource = _employees
             dgvEmployeeIdNo.DisplayMember = "Name"
@@ -131,6 +119,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PayFrequency As Char Implements IPayrollView.PayFrequency
+        '    Get
+        '        Return _payFrequency
+        '    End Get
+        '    Set(value As PayFrequencySelection)
+        '        _payFrequency = value
+        '    End Set
+        'End Property
+
         Public Property PayrollAttendance As List(Of AttendanceItemView) Implements IPayrollView.PayrollAttendance
             Get
                 Return _payrollAttendance
@@ -142,6 +139,14 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #End Region
+
+        Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance
+
+        Public Event InitializeOvertime(sender As Object) Implements IPayrollView.InitializeOvertime
+
+        Public Event GenerateRegularPayElements(sender As Object) Implements IPayrollView.GenerateRegularPayElements
+
+        Public Event InitializePayroll(sender As Object) Implements IPayrollView.InitializePayroll
 
         Private Sub BindPayrollAttendance()
             SuspendLayout()
@@ -185,26 +190,16 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayCycleIdNo.SelectedIndexChanged
-            Dim payFrequency As PayFrequencySelection
-            Dim payCycleDaoObject As New PayCycleDao
-            Dim payCycleRecord = payCycleDaoObject.GetRecordByIdNo(PayCycleIdNo)
-            If payCycleRecord IsNot Nothing Then
-                payFrequency = CodeToEnum(Of PayFrequencySelection)(payCycleRecord.PayFrequency)
-                If MyPresenter.AddMode Then
-                    If PayFrequencySelection.Monthly Then
-                        MyPresenter.InitializeMonthlyPayroll(payCycleRecord)
-                    End If
-                End If
-                If payFrequency = PayFrequencySelection.Monthly Then
-                    dtpStartDate.DisplayOnly = True
-                    dtpEndDate.DisplayOnly = True
-                Else
-                    dtpStartDate.DisplayOnly = False
-                    dtpEndDate.DisplayOnly = False
-                End If
-                dtpStartDate.Refresh()
-                dtpEndDate.Refresh()
+            RaiseEvent InitializePayroll(Me)
+            If CodeToEnum(Of PayFrequencySelection)(PayFrequency) = PayFrequencySelection.Monthly Then
+                dtpStartDate.DisplayOnly = True
+                dtpEndDate.DisplayOnly = True
+            Else
+                dtpStartDate.DisplayOnly = False
+                dtpEndDate.DisplayOnly = False
             End If
+            dtpStartDate.Refresh()
+            dtpEndDate.Refresh()
         End Sub
 
         'Private Class ActiveEmployee
@@ -228,7 +223,7 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Protected Overrides Sub InputsTurnedOn()
+        Protected Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             UpdateButtonText()
             btnInitializeAttendance.Enabled = True
             btnInitializeOvertime.Enabled = True
@@ -244,31 +239,28 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Protected Overrides Sub InputsTurnedOff()
+        Protected Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
             UpdateButtonText()
             btnInitializeAttendance.Enabled = False
             btnInitializeOvertime.Enabled = False
         End Sub
 
-        Private Sub btnInitializeAttendance_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnInitializeAttendance.ClickButtonArea
-            MyPresenter.InitializeAttendance()
+        Private Sub OnInitializeAttendance_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitializeAttendance.ClickButtonArea
+            RaiseEvent InitializeAttendance(Me)
             bsPayrollAttendance.ResetBindings(False)
         End Sub
 
-        Private Sub btnInitialize_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitializeOvertime.ClickButtonArea
-            MyPresenter.InitializeOvertime()
+        Private Sub InitializeOvertime_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitializeOvertime.ClickButtonArea
+            RaiseEvent InitializeOvertime(Me)
             bsPayrollOvertime.ResetBindings(True)
-            'DataGridViewPayrollOvertime.Refresh()
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-            MyPresenter.GeneratePayroll()
+        Private Sub BtnGeneratePayElements_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnGenerateRegularPayElements.ClickButtonArea
+            RaiseEvent GenerateRegularPayElements(Me)
         End Sub
 
-        Private Sub CButton3_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton3.ClickButtonArea
-            Dim form As PayrollDetailEntry
-            form = New PayrollDetailEntry(IdNo)
-            form.Show()
+        Private Sub BtnViewPayrollReport_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewPayrollReport.ClickButtonArea
+            RunModalForm(Of PayrollDetailEntry, PayrollDetailPresenter(Of PayrollDetailModel))()
         End Sub
 
     End Class

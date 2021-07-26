@@ -20,12 +20,13 @@ Namespace DataLayer.AdoNet
                                       "PayrollCode," &
                                       "PayrollName," &
                                       "PayrollNameAra," &
+                                      "PayFrequency," &
                                       "StartDate"
 
         Public Function GetRecordByIdNo(idNo) As Payroll Implements IDaoAll(Of Payroll).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " & FieldList &
-                    " FROM [Payroll]" &
+                    " FROM [Payroll_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
@@ -79,6 +80,7 @@ Namespace DataLayer.AdoNet
             .EndDate = Extensions.AsDate(reader("EndDate")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .PayCycleIdNo = Extensions.AsInt(Of Int16)(reader("PayCycleIdNo")),
+            .PayFrequency = Extensions.AsChar(reader("PayFrequency")),
             .PayrollCode = Extensions.AsString(reader("PayrollCode")),
             .PayrollName = Extensions.AsString(reader("PayrollName")),
             .PayrollNameAra = Extensions.AsString(reader("PayrollNameAra")),

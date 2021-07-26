@@ -8,16 +8,15 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _pensionRateService As New ServiceAccounts("PensionRate")
+        Private ReadOnly _pensionRateService As New AccountsService("PensionRate")
 
         Public Sub New(view As IPensionSchemeView)
             MyBase.New(view)
-            Service = New ServiceAccounts("PensionScheme")
+            Service = New AccountsService("PensionScheme")
             TableName = "PensionScheme"
             TreeViewMainField = "PensionSchemeName"
             TreeViewSecondaryField = "PensionSchemeCode"
             SortOrderKey = "PensionSchemeName"
-
 
             DtInsertTable.Columns.Add("EmployeeShare", GetType(Decimal))
             DtInsertTable.Columns.Add("EmployerShare", GetType(Decimal))

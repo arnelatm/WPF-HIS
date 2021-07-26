@@ -8,7 +8,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As IPhoneTypeView)
             MyBase.New(itemView)
-            Service = New ServiceCommon("PhoneType")
+            Service = New CommonService("PhoneType")
             TableName = "PhoneType"
             SortOrderKey = "PhoneTypeCode"
             TreeViewMainField = "PhoneTypeName"
