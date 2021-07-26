@@ -14,13 +14,13 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
         Protected DtEarnInsertTable As New DataTable
         Protected DtEarnUpdateTable As New DataTable
-        Private ReadOnly _payElementAccountService As New ServiceAccounts("PayElementAccount")
-        Private ReadOnly _payElementItemService As New ServiceAccounts("PayElementItem")
+        Private ReadOnly _payElementAccountService As New AccountsService("PayElementAccount")
+        Private ReadOnly _payElementItemService As New AccountsService("PayElementItem")
 
         Public Sub New(view As IPayElementView)
             MyBase.New(view)
             If view IsNot Nothing Then
-                Service = New ServiceAccounts("PayElement")
+                Service = New AccountsService("PayElement")
                 TableName = "PayElement"
                 TreeViewMainField = "PayElementName"
                 TreeViewSecondaryField = "PayElementCode"

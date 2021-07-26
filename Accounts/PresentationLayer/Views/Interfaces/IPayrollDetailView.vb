@@ -15,6 +15,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayrollEarnings As List(Of PayrollPayElementView)
         Property PayrollDeductions As List(Of PayrollPayElementView)
 
+        Event UpdateDataFilterEvent(pPayrollIdNo As Int16)
+
     End Interface
 
 End Namespace

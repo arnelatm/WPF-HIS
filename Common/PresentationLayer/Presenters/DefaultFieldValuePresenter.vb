@@ -8,7 +8,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDefaultFieldValueView)
             MyBase.New(view)
-            Service = New ServiceCommon("DefaultFieldValue")
+            Service = New CommonService("DefaultFieldValue")
             TableName = "DefaultFieldValue"
             SortOrderKey = "ViewName + FieldName"
             TreeViewMainField = "ViewName"

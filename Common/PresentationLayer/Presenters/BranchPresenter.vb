@@ -8,7 +8,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IBranchView)
             MyBase.New(view)
-            Service = New ServiceCommon("Branch")
+            Service = New CommonService("Branch")
             TableName = "Branch"
             TreeViewMainField = "BranchName"
             TreeViewSecondaryField = "BranchCode"

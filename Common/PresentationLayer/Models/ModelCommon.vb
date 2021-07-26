@@ -8,7 +8,7 @@ Namespace PresentationLayer.Models
         Implements IModelCommon
 
         Public Sub New(accountName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
-            DataService = New ServiceCommon(accountName, bizParam, daoParam)
+            DataService = New CommonService(accountName, bizParam, daoParam)
         End Sub
 
         Public Sub New()

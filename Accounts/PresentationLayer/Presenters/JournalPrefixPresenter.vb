@@ -9,7 +9,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IJournalPrefixView)
             MyBase.New(view)
-            Service = New ServiceAccounts("JournalPrefix")
+            Service = New AccountsService("JournalPrefix")
             TableName = "JournalPrefix"
             TreeViewMainField = "JournalName"
             TreeViewSecondaryField = "JournalCode"

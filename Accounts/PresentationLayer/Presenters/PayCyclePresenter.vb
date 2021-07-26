@@ -8,7 +8,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPayCycleView)
             MyBase.New(view)
-            Service = New ServiceAccounts("PayCycle")
+            Service = New AccountsService("PayCycle")
             TableName = "PayCycle"
             TreeViewMainField = "PayCycleName"
             TreeViewSecondaryField = "PayCycleCode"

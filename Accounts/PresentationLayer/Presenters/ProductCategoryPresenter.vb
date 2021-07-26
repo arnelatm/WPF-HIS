@@ -8,7 +8,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IProductCategoryView)
             MyBase.New(view)
-            Service = New ServiceAccounts("ProductCategory")
+            Service = New AccountsService("ProductCategory")
             TableName = "ProductCategory"
             TreeViewMainField = "ProductCategoryName"
             TreeViewSecondaryField = "ProductCategoryCode"

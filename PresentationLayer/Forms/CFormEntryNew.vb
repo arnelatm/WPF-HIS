@@ -724,4 +724,11 @@ Public Class CFormEntryNew
 
     End Sub
 
+    Public Sub RunModalForm(Of TF, TP)()
+        Dim childForm = Activator.CreateInstance(GetType(TF))
+        Dim pType As Type = GetType(TP)
+        Activator.CreateInstance(GetType(TP), {childForm})
+        childForm.Show()
+    End Sub
+
 End Class

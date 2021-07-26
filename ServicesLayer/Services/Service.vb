@@ -354,6 +354,14 @@ Namespace Services
             Return dataModel
         End Function
 
+        Public Function GetDaoRecords(filter As String)
+            Return DataDao.GetDaoRecords(filter)
+        End Function
+
+        Public Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal groupIdNo As Integer) As Integer Implements IService.UpdateInsertTvp
+            Return DataDao.UpdateInsertTvp(updateTvpTable, insertTvpTable, groupIdNo)
+        End Function
+
         Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList Implements IService.GetUserSecurity
             Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
         End Function

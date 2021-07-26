@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDepartmentView)
             MyBase.New(view)
-            Service = New ServiceCommon("Department")
+            Service = New CommonService("Department")
             TableName = "Department_View"
             ParentFieldName = "ParentIdNo"
             TreeViewMainField = "DepartmentName"

@@ -9,7 +9,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDepositTypeView)
             MyBase.New(view)
-            Service = New ServiceAccounts("DepositType")
+            Service = New AccountsService("DepositType")
             TableName = "DepositType"
             TreeViewMainField = "DepositTypeName"
             TreeViewSecondaryField = "DepositTypeCode"

@@ -11,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ICountryView)
             MyBase.New(view)
-            Service = New ServiceCommon("Country")
+            Service = New CommonService("Country")
             TableName = "Country"
             SortOrderKey = "CountryName"
             TreeViewMainField = "CountryName"

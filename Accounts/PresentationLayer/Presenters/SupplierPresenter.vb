@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             If view IsNot Nothing Then
                 TableName = "Supplier"
-                Service = New ServiceAccounts("Supplier")
+                Service = New AccountsService("Supplier")
                 TreeViewMainField = "SupplierName"
                 TreeViewSecondaryField = "SupplierCode"
                 SortOrderKey = "SupplierName"

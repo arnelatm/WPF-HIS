@@ -9,7 +9,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As IBankView)
             MyBase.New(itemView)
-            Service = New ServiceAccounts("Bank")
+            Service = New AccountsService("Bank")
             TableName = "Bank"
             TreeViewMainField = "BankName"
             TreeViewSecondaryField = "BankCode"

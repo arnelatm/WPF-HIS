@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ISalaryLoanScheduleView)
             MyBase.New(view)
-            Service = New ServiceAccounts("SalaryLoanSchedule")
+            Service = New AccountsService("SalaryLoanSchedule")
             TableName = "SalaryLoanSchedule"
             SortOrderKey = "IdNo"
             'OriginalModel = New SalaryLoanScheduleModel()

@@ -266,7 +266,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\ITranslatedCaptionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ITranslatedMessagesView.vb" />
     <Compile Include="ServiceLayer\IServiceCommon.vb" />
-    <Compile Include="ServiceLayer\ServiceCommon.vb" />
+    <Compile Include="ServiceLayer\CommonService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
         Public ParentViewList As List(Of TM)
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _distributionSchemeItemService As New ServiceAccounts("DistributionSchemeItem")
+        Private ReadOnly _distributionSchemeItemService As New AccountsService("DistributionSchemeItem")
 
         Public Sub New(view As IDistributionSchemeView)
             MyBase.New(view)

@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IRevenueGroupView)
             MyBase.New(view)
-            Service = New ServiceCommon("RevenueGroup")
+            Service = New CommonService("RevenueGroup")
             TableName = "RevenueGroup_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevenueGroupName"

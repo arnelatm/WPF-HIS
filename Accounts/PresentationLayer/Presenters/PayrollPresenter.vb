@@ -4,14 +4,17 @@ Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Presenters
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PayrollPresenter
-        Inherits AccountsPresenter(Of IPayrollView, PayrollModel)
+    Public Class PayrollPresenter(Of TM As New)
+        Inherits PresenterNew(Of IPayrollView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -19,8 +22,8 @@ Namespace PresentationLayer.Presenters
         Protected DtOtUpdateTable As New DataTable
         Protected DtEarnInsertTable As New DataTable
         Protected DtEarnUpdateTable As New DataTable
-        Private _attendanceItemModel
-        Private _otWorkHourModel
+        Private _attendanceItemService As New AccountsService("AttendanceItem")
+        Private _otWorkHourService As New AccountsService("OtWorkHour")
         Private _reinitialize As Boolean = False
         Private _payrollEarning
         Private _payrollPayElements As New List(Of PayrollPayElementModel)
@@ -38,16 +41,11 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _dtPayrollDetailInsertTable As New DataTable
         Private ReadOnly _dtPayrollDetailUpdateTable As New DataTable
 
-        Private ReadOnly _attendanceItemDao = New AttendanceItemDao
-
-        Private ReadOnly _employeePayElementsDao = New EmployeePayElementDao
-        Private ReadOnly _otWorkHoursDao = New OtWorkHourDao
-        Private ReadOnly _payCycleDao = New PayCycleDao
-        Private ReadOnly _payElementsDao = New PayElementDao
-        Private ReadOnly _payElementItemsDao = New PayElementItemDao
-        Private ReadOnly _payrollDao = New PayrollDao
-        Private ReadOnly _payrollDetailsDao = New PayrollDetailDao
-        Private ReadOnly _payrollPayElementsDao = New PayrollPayElementDao
+        Private ReadOnly _payCycleService As New AccountsService("PayCycle")
+        Private ReadOnly _payElementsService As New AccountsService("PayElement")
+        Private ReadOnly _payElementItemsService As New AccountsService("PayElementItem")
+        Private ReadOnly _payrollDetailsService As New AccountsService("PayrollDetail")
+        Private ReadOnly _payrollPayElementsService As New AccountsService("PayrollPayElement")
 
         Private ReadOnly _computedPayElementType = EnumToCode(PayElementTypeSelection.Computed)
 
@@ -68,39 +66,26 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _overTimeSpecialType = EnumToCode(QuantityTypeSelection.OvertimeSpecial)
         Private ReadOnly _hoursWorkedType = EnumToCode(QuantityTypeSelection.HoursWorked)
         Private ReadOnly _daysLeaveWithPayType = EnumToCode(QuantityTypeSelection.DaysLeaveWithPay)
-        Private ReadOnly _PayElementType = EnumToCode(PayElementKindSelection.Earning)
+        Private ReadOnly _payElementType = EnumToCode(PayElementKindSelection.Earning)
         Private ReadOnly _deductionType = EnumToCode(PayElementKindSelection.Deduction)
         Private ReadOnly _factorPercentType = EnumToCode(FactorTypeSelection.PercentOfBasePaymentRate)
         Private ReadOnly _factorMultiplyType = EnumToCode(FactorTypeSelection.MultiplyBasePaymentRate)
         Private ReadOnly _factorDivideType = EnumToCode(FactorTypeSelection.DivideBasePaymentRate)
-        Private ReadOnly _monthType = EnumToCode(PayRateUnitSelection.Month)
-        Private ReadOnly _semiMonthType = EnumToCode(PayRateUnitSelection.SemiMonth)
-        Private ReadOnly _yearType = EnumToCode(PayRateUnitSelection.Year)
-        Private ReadOnly _semiYearType = EnumToCode(PayRateUnitSelection.SemiYear)
-        Private ReadOnly _quarterType = EnumToCode(PayRateUnitSelection.Quarter)
-        Private ReadOnly _weekType = EnumToCode(PayRateUnitSelection.Week)
-        Private ReadOnly _dayType = EnumToCode(PayRateUnitSelection.Day)
-        Private ReadOnly _biWeekType = EnumToCode(PayRateUnitSelection.BiWeek)
+        Private ReadOnly ServiceAccounts
 
         Public Sub New(view As IPayrollView)
             MyBase.New(view)
+            Service = New AccountsService("Payroll")
             TreeViewMainField = "PayrollName"
             TreeViewSecondaryField = "PayrollCode"
-            TreeViewList = New List(Of Payroll)
-
             TableName = "Payroll"
             SortOrderKey = "EndDate"
-            ModelOfPresenter = New ModelAccounts("Payroll")
-            OriginalModel = New PayrollModel
-            DataModel = New PayrollModel
-            If TreeViewParentIdField IsNot Nothing Then
-                SortOrderKey = "EndDate"
-            End If
+            '_attendanceItemService = New AccountsService("AttendanceItem", Nothing, Nothing)
+            '_otWorkHourService = New AccountsService("OtWorkHour", Nothing, Nothing)
 
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
-            _attendanceItemModel = New ModelAccounts("AttendanceItem", Nothing, Nothing)
-            _otWorkHourModel = New ModelAccounts("OtWorkHour", Nothing, Nothing)
+            AddHandler view.InitializeAttendance, AddressOf InitializeAttendance
+            AddHandler view.InitializeOvertime, AddressOf InitializeOvertime
+            AddHandler view.GenerateRegularPayElements, AddressOf GenerateRegularPayElements
 
             CreateDataTable(DtInsertTable, {{"DaysAbsentWithoutPay", GetType(Decimal)},
                                             {"DaysAbsentWithPay", GetType(Decimal)},
@@ -155,15 +140,15 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycle)
+        Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycleModel)
             If View.StartDate = Nothing And View.EndDate = Nothing Then
                 If payCycleRecord.PayCycleCode = "Month" Then
                     Dim nIdNoMax As Int32
                     Dim maxRecord As PayrollModel
                     Dim payMonthText As String = "Payroll for the Month of"
                     Dim PayrollText As String = "Payroll for the Period"
-                    nIdNoMax = ModelOfPresenter.GetFieldOnMaxField("EndDate", "Payroll", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
-                    maxRecord = ModelOfPresenter.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
+                    nIdNoMax = Service.GetFieldOnMaxField("EndDate", "Payroll", "IdNo", "PayCycleIdNo = " + payCycleRecord.IdNo.ToString())
+                    maxRecord = Service.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
                     View.StartDate = maxRecord.EndDate.AddDays(1)
                     Dim arabicCulture As New CultureInfo("ar-ae", False)
                     If View.StartDate.Day = 1 Then
@@ -181,36 +166,34 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
-
-            'Dim nIdNoMax As Int32
-            'Dim maxRecord As PayrollModel
-            'Dim payMonthText As String = "Payroll for the Month of"
-            'Dim PayrollText As String = "Payroll for the Period"
-            'nIdNoMax = ModelOfPresenter.GetFieldOnMaxField("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
-            'If nIdNoMax = 0 Then
-            '    Dim now As Date = Today()
-            '    View.EndDate = DateAdd(DateInterval.Day, DateAndTime.Day(now) * -1, now)
-            '    View.StartDate = DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate)
-            'Else
-            '    maxRecord = ModelOfPresenter.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
-            '    View.StartDate = maxRecord.EndDate.AddDays(1)
-            '    If View.StartDate.Day = 1 Then
-            '        View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
-            '    Else
-            '        View.EndDate = maxRecord.EndDate.AddMonths(1)
-            '    End If
-            'End If
-            'View.PayCycleIdNo = 1
-            'Dim arabicCulture As New CultureInfo("ar-ae", False)
-            'If View.StartDate.Day = 1 AndAlso DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate) = View.StartDate Then
-            '    View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
-            '    View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
-            'Else
-            '    View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
-            '    View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
-            'End If
-            'View.PayrollCode = "M" + View.EndDate.ToString("yyMM")
-
+            Dim nIdNoMax As Int32
+            Dim maxRecord As PayrollModel
+            Dim payMonthText As String = "Payroll for the Month of"
+            Dim PayrollText As String = "Payroll for the Period"
+            nIdNoMax = Service.GetFieldOnMaxField("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
+            If nIdNoMax = 0 Then
+                Dim now As Date = Today()
+                View.EndDate = DateAdd(DateInterval.Day, DateAndTime.Day(now) * -1, now)
+                View.StartDate = DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate)
+            Else
+                maxRecord = Service.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
+                View.StartDate = maxRecord.EndDate.AddDays(1)
+                If View.StartDate.Day = 1 Then
+                    View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
+                Else
+                    View.EndDate = maxRecord.EndDate.AddMonths(1)
+                End If
+            End If
+            View.PayCycleIdNo = 1
+            Dim arabicCulture As New CultureInfo("ar-ae", False)
+            If View.StartDate.Day = 1 AndAlso DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate) = View.StartDate Then
+                View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+                View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
+            Else
+                View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
+                View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
+            End If
+            View.PayrollCode = "M" + View.EndDate.ToString("yyMM")
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -229,7 +212,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub InitializeAttendance()
-            Dim payFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
+            View.PayFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString() & " And Active = 1"
             Dim activeEmployees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"}, employeeFilter)
             'Dim earningDao = New EarningDao
@@ -304,7 +287,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub InitializeOvertime()
-            Dim payFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
+            View.PayFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString()
             Dim matchedEmployees = GetRecords("Employee", "EmployeeName", {"IdNo", "HiredDate", "ReleasedDate"}, employeeFilter)
             Dim numberOfEmployees = Int(matchedEmployees.Count() / 3)
@@ -413,9 +396,9 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_attendanceItemModel, DtUpdateTable, DtInsertTable, passedValue, "PayrollIdNo")
+            retVal = UpdateChildData(_attendanceItemService, DtUpdateTable, DtInsertTable, passedValue, "PayrollIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_otWorkHourModel, DtOtUpdateTable, DtOtInsertTable, passedValue, "PayrollIdNo")
+                retVal = UpdateChildData(_otWorkHourService, DtOtUpdateTable, DtOtInsertTable, passedValue, "PayrollIdNo")
             End If
         End Sub
 
@@ -499,19 +482,19 @@ Namespace PresentationLayer.Presenters
 
         'End Sub
 
-        Public Sub GeneratePayroll()
-
+        Public Sub GenerateRegularPayElements()
             _payrollIdNo = View.IdNo
             If View.PayrollAttendance.Count() = 0 And View.PayrollOvertime.Count() = 0 Then
                 Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
             Else
-                Dim payroll As Payroll = _payrollDao.GetRecordByIdNo(View.IdNo)
-                Dim payFrequency = _payCycleDao.GetRecordByIdNo(payroll.PayCycleIdNo).PayFrequency
+                Dim payrollService As New AccountsService("Payroll")
+                Dim payroll As PayrollModel = payrollService.GetRecordByIdNo(Of PayrollModel)(View.IdNo)
+                View.PayFrequency = _payCycleService.GetRecordByIdNo(Of PayCycleModel)(payroll.PayCycleIdNo).PayFrequency
                 Dim payrollPayElements As List(Of PayrollPayElement)
-                _payFrequency = CodeToEnum(Of PayFrequencySelection)(payFrequency)
+                _payFrequency = CodeToEnum(Of PayFrequencySelection)(View.PayFrequency)
                 If _payFrequency = PayFrequencySelection.Monthly Then
                     _daysInTheMonth = DateTime.DaysInMonth(Year(View.EndDate), Month(View.EndDate))
-                    payrollPayElements = _payrollPayElementsDao.GetRecordsWithGroupIdNo(View.IdNo)
+                    payrollPayElements = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElement)(View.IdNo)
                     'GlobalVariables.Mapper.Map(payrollPayElements, _payrollPayElements)
                     If payrollPayElements.Count() = 0 Then
                         ProcessPayroll(False)
@@ -556,20 +539,21 @@ Namespace PresentationLayer.Presenters
             Dim payrollDetailsModel As List(Of PayrollDetailModel)
             payrollDetailsModel = CreatePayrollDetails()
             Dim computedEarnings As List(Of PayElement)
-            computedEarnings = _payElementsDao.GetDaoRecords("PayElementType = '" & _computedType & "' and Summary=0")
+            computedEarnings = _payElementsService.GetDaoRecords("PayElementType = '" & _computedType & "' and Summary=0")
             GlobalVariables.Mapper.Map(computedEarnings, _computedPayElements)
             Dim globalEarnings As List(Of PayElement)
-            globalEarnings = _payElementsDao.GetDaoRecords("CalculationType = '" & _globalType & "' and not Summary=0")
+            globalEarnings = _payElementsService.GetDaoRecords("CalculationType = '" & _globalType & "' and not Summary=0")
             GlobalVariables.Mapper.Map(globalEarnings, _globalEarnings)
             Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
             Dim counter As Integer = 0
             progressDisplayForm.Show()
             progressDisplayForm.InitializeDisplay(payrollDetailsModel.Count() + 2)
             If regenerate Then
-                Dim savedPayrollPayElements As List(Of PayrollPayElement) = _payrollPayElementsDao.GetRecordsWithGroupIdNo(_payrollIdNo)
+                Dim savedPayrollPayElements As List(Of PayrollPayElement) = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElement)(_payrollIdNo)
                 GlobalVariables.Mapper.Map(savedPayrollPayElements, _savedPayrollPayElements)
             End If
-            Dim otWorkHours As List(Of OtWorkHour) = _otWorkHoursDao.GetRecordsWithGroupIdNo(_payrollIdNo)
+            Dim otWorkHoursService As New AccountsService("OtWorkHour")
+            Dim otWorkHours As List(Of OtWorkHour) = otWorkHoursService.GetRecordsWithGroupIdNo(Of OtWorkHour)(_payrollIdNo)
             GlobalVariables.Mapper.Map(otWorkHours, _otWorkHoursModel)
             Dim payrollDetailIdNo As Int32
             For Each payrollDetail In payrollDetailsModel
@@ -588,15 +572,15 @@ Namespace PresentationLayer.Presenters
                     dtPayrollDetailUpdateTable.Rows.Add(dataRow)
                 End If
             Next
-            _payrollDetailsDao.UpdateInsertTvp(dtPayrollDetailUpdateTable, dtPayrollDetailInsertTable, View.IdNo)
+            _payrollDetailsService.UpdateInsertTvp(dtPayrollDetailUpdateTable, dtPayrollDetailInsertTable, View.IdNo)
             Dim payrollDetails As List(Of PayrollDetail)
-            payrollDetails = _payrollDetailsDao.GetRecordsWithGroupIdNo(View.IdNo)
+            payrollDetails = _payrollDetailsService.GetRecordsWithGroupIdNo(Of PayrollDetail)(View.IdNo)
             GlobalVariables.Mapper.Map(payrollDetails, payrollDetailsModel)
             For Each payrollDetailModel In payrollDetailsModel
                 Dim payrollDetail As New PayrollDetail
                 GlobalVariables.Mapper.Map(payrollDetailModel, payrollDetail)
                 If payrollDetail.IdNo = 0 Then
-                    payrollDetailIdNo = _payrollDetailsDao.AddRecord(payrollDetail)
+                    payrollDetailIdNo = _payrollDetailsService.AddRecord(payrollDetail)
                 Else
                     payrollDetailIdNo = payrollDetail.IdNo
                 End If
@@ -640,10 +624,10 @@ Namespace PresentationLayer.Presenters
             End If
             counter = counter + 1
             If regenerate Then
-                _payrollPayElementsDao.UpdateInsertTvp(dtPayrollPayElementUpdateTable, dtPayrollPayElementInsertTable, _payrollIdNo)
+                _payrollPayElementsService.UpdateInsertTvp(dtPayrollPayElementUpdateTable, dtPayrollPayElementInsertTable, _payrollIdNo)
                 dtPayrollPayElementUpdateTable.Clear()
             Else
-                _payrollPayElementsDao.InsertTvp(dtPayrollPayElementInsertTable)
+                _payrollPayElementsService.InsertTvp(dtPayrollPayElementInsertTable)
                 dtPayrollPayElementInsertTable.Clear()
             End If
             _payrollPayElements.Clear()
@@ -654,13 +638,14 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GenerateRegularPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             Dim empPayElements As New List(Of EmployeePayElement)
-            empPayElements = _employeePayElementsDao.GetRecordsWithGroupIdNo(employeeIdNo)
+            Dim employeePayElementsService As New AccountsService("EmployeePayElement")
+            empPayElements = employeePayElementsService.GetRecordsWithGroupIdNo(Of EmployeePayElement)(employeeIdNo)
             Dim empPayElementsModel As New List(Of EmployeePayElementModel)
             GlobalVariables.Mapper.Map(empPayElements, empPayElementsModel)
             Dim amount As Decimal
             For Each empPayElement As EmployeePayElementModel In empPayElementsModel
-                Dim payElement As New PayElement
-                payElement = _payElementsDao.GetRecordByIdNo(empPayElement.PayElementIdNo)
+                Dim payElement As New PayElementModel
+                payElement = _payElementsService.GetRecordByIdNo(Of PayElementModel)(empPayElement.PayElementIdNo)
                 If payElement.Active Then
                     Dim payElementModel As New PayElementModel
                     GlobalVariables.Mapper.Map(payElement, payElementModel)
@@ -695,9 +680,21 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
+        Public Sub InitializePayroll(sender As Object)
+            Dim payCycleRecord As PayCycleModel = _payCycleService.GetRecordByIdNo(Of PayCycleModel)(View.PayCycleIdNo)
+            If payCycleRecord IsNot Nothing Then
+                'View.PayFrequency = CodeToEnum(Of PayFrequencySelection)(payCycleRecord.PayFrequency)
+                If AddMode Then
+                    If CodeToEnum(Of PayFrequencySelection)(View.PayFrequency) = PayFrequencySelection.Monthly Then
+                        InitializeMonthlyPayroll(payCycleRecord)
+                    End If
+                End If
+            End If
+        End Sub
+
         'Private Sub GenerateRegularDeductions(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
         '    Dim empDeductions As New List(Of EmployeePayElement)
-        '    empDeductions = _employeePayElementsDao.GetRecordsWithGroupIdNo(employeeIdNo)
+        '    empDeductions = _employeePayElementsService.GetRecordsWithGroupIdNo(employeeIdNo)
         '    Dim EmpDeductionsModel As New List(Of EmployeePayElementModel)
         '    GlobalVariables.Mapper.Map(empDeductions, EmpDeductionsModel)
         '    Dim amount As Decimal
@@ -769,17 +766,17 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub AddToGeneratedPayroll(employeeIdNo As Int32, amount As Decimal, earningIdNo As Short, earning As PayrollPayElementModel)
-            Dim payrollPayElement As New PayrollPayElementModel
-            payrollPayElement.Amount = Math.Round(amount, 2)
-            payrollPayElement.PayrollIdNo = _payrollIdNo
-            payrollPayElement.PayElementIdNo = earningIdNo
-            payrollPayElement.EmployeeIdNo = employeeIdNo
-            If earning IsNot Nothing Then
-                payrollPayElement.IdNo = earning.IdNo
-            End If
-            _payrollPayElements.Add(payrollPayElement)
-        End Sub
+        'Private Sub AddToGeneratedPayroll(employeeIdNo As Int32, amount As Decimal, earningIdNo As Short, earning As PayrollPayElementModel)
+        '    Dim payrollPayElement As New PayrollPayElementModel
+        '    payrollPayElement.Amount = Math.Round(amount, 2)
+        '    payrollPayElement.PayrollIdNo = _payrollIdNo
+        '    payrollPayElement.PayElementIdNo = earningIdNo
+        '    payrollPayElement.EmployeeIdNo = employeeIdNo
+        '    If earning IsNot Nothing Then
+        '        payrollPayElement.IdNo = earning.IdNo
+        '    End If
+        '    _payrollPayElements.Add(payrollPayElement)
+        'End Sub
 
         Private Sub GenerateComputedPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             For Each earning As PayElementModel In _computedPayElements
@@ -823,7 +820,7 @@ Namespace PresentationLayer.Presenters
                     amount = 0
                 End If
             ElseIf earning.CalculationType = _factorType Then
-                Dim bpEarning = _payElementsDao.GetRecordByIdNo(earning.BasePaymentIdNo)
+                Dim bpEarning As PayElementModel = _payElementsService.GetRecordByIdNo(Of PayElementModel)(earning.BasePaymentIdNo)
                 If bpEarning.Summary Then
                     Dim bpAmount As Decimal
                     bpAmount = ComputeSummaryAmount(employeeIdNo, earning.BasePaymentIdNo)
@@ -858,9 +855,9 @@ Namespace PresentationLayer.Presenters
 
         Private Function ComputeSummaryAmount(employeeIdNo As Int32, earningIdNo As Int16) As Decimal
             Dim summaryAmount As Decimal
-            Dim payElementItems As List(Of PayElementItem) = _payElementItemsDao.GetRecordsWithGroupIdNo(earningIdNo)
+            Dim payElementItems As List(Of PayElementItem) = _payElementItemsService.GetRecordsWithGroupIdNo(Of PayElementItem)(earningIdNo)
             For Each payElementItem As PayElementItem In payElementItems
-                Dim payElement As PayElement = _payElementsDao.GetRecordByIdNo(payElementItem.PayElementIdNo)
+                Dim payElement As PayElementModel = _payElementsService.GetRecordByIdNo(Of PayElementModel)(payElementItem.PayElementIdNo)
                 Dim amount As Decimal = 0
                 If Not payElement.Summary Then
                     Dim empEarning As PayrollPayElementModel
@@ -912,7 +909,7 @@ Namespace PresentationLayer.Presenters
             Dim payrollDetailsModel As New List(Of PayrollDetailModel)
             Dim savedPayrollDetails As New List(Of PayrollDetail)
             Dim savedPayrollDetailsModel As New List(Of PayrollDetailModel)
-            savedPayrollDetails = _payrollDetailsDao.GetRecordsWithGroupIdNo(_payrollIdNo)
+            savedPayrollDetails = _payrollDetailsService.GetRecordsWithGroupIdNo(Of PayrollDetail)(_payrollIdNo)
             GlobalVariables.Mapper.Map(savedPayrollDetails, savedPayrollDetailsModel)
             savedPayrollDetails = Nothing
             If savedPayrollDetailsModel.Count() = 0 Then
@@ -947,140 +944,6 @@ Namespace PresentationLayer.Presenters
                 End If
             Next
             Return payrollDetailsModel
-        End Function
-
-        Private Function ComputeFixedRateEarning(amount As Decimal, unit As String) As Decimal
-            Dim factor As Decimal
-            Select Case _payFrequency
-                Case PayFrequencySelection.Monthly
-                    If unit = _monthType Then
-                        factor = 1D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 2D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 12D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 6D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D / 3D
-                    ElseIf unit = _weekType Then
-                        factor = 13D / 2D
-                    ElseIf unit = _dayType Then
-                        factor = 30D
-                    ElseIf unit = _biWeekType Then
-                        factor = 13D / 6D
-                    End If
-                Case PayFrequencySelection.Yearly
-                    If unit = _monthType Then
-                        factor = 12D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 24D
-                    ElseIf unit = _yearType Then
-                        factor = 1D
-                    ElseIf unit = _semiYearType Then
-                        factor = 2D
-                    ElseIf unit = _quarterType Then
-                        factor = 4D
-                    ElseIf unit = _weekType Then
-                        factor = 52D
-                    ElseIf unit = _dayType Then
-                        factor = 365D
-                    ElseIf unit = _biWeekType Then
-                        factor = 26D
-                    End If
-                Case PayFrequencySelection.SemiYearly
-                    If unit = _monthType Then
-                        factor = 6D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 12D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 2D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D
-                    ElseIf unit = _quarterType Then
-                        factor = 2D
-                    ElseIf unit = _weekType Then
-                        factor = 26D
-                    ElseIf unit = _dayType Then
-                        factor = 365D / 2D
-                    ElseIf unit = _biWeekType Then
-                        factor = 13D
-                    End If
-                Case PayFrequencySelection.Quarterly
-                    If unit = _monthType Then
-                        factor = 3D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 6D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 4D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 2D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D
-                    ElseIf unit = _weekType Then
-                        factor = 13D
-                    ElseIf unit = _dayType Then
-                        factor = 365D / 4D
-                    ElseIf unit = _biWeekType Then
-                        factor = 13D / 2D
-                    End If
-                Case PayFrequencySelection.SemiMonthly
-                    If unit = _monthType Then
-                        factor = 1D / 2D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 1D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 24D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 12D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D / 6D
-                    ElseIf unit = _weekType Then
-                        factor = 13D / 4D
-                    ElseIf unit = _dayType Then
-                        factor = 15D
-                    ElseIf unit = _biWeekType Then
-                        factor = 13D / 12D
-                    End If
-                Case PayFrequencySelection.Weekly
-                    If unit = _monthType Then
-                        factor = 12D / 52D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 24D / 52D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 52D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 26D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D / 13D
-                    ElseIf unit = _weekType Then
-                        factor = 1D
-                    ElseIf unit = _dayType Then
-                        factor = 7D
-                    ElseIf unit = _biWeekType Then
-                        factor = 1D / 2D
-                    End If
-                Case PayFrequencySelection.Daily
-                    If unit = _monthType Then
-                        factor = 1D / 30D
-                    ElseIf unit = _semiMonthType Then
-                        factor = 1D / 15D
-                    ElseIf unit = _yearType Then
-                        factor = 1D / 360D
-                    ElseIf unit = _semiYearType Then
-                        factor = 1D / 180D
-                    ElseIf unit = _quarterType Then
-                        factor = 1D / 90D
-                    ElseIf unit = _weekType Then
-                        factor = 1D / 7D
-                    ElseIf unit = _dayType Then
-                        factor = 1D
-                    ElseIf unit = _biWeekType Then
-                        factor = 1D / 14D
-                    End If
-
-            End Select
-            Return amount * factor
         End Function
 
         'Private Function ComputePayAMount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
@@ -1230,7 +1093,7 @@ Namespace PresentationLayer.Presenters
             ElseIf quantityType = _daysLeaveWithoutPayType Then
                 quantity = GetAttendanceValues(employeeIdNo, "DaysAbsentWithoutPay")
             ElseIf quantityType = _daysPaidType Then
-                Dim attendanceItem As AttendanceItem = _attendanceItemDao.GetRecordByIdNo(employeeIdNo)
+                Dim attendanceItem As AttendanceItemModel = _attendanceItemService.GetRecordByIdNo(Of AttendanceItemModel)(employeeIdNo)
                 quantity = attendanceItem.DaysPresent + attendanceItem.DaysAbsentWithPay + attendanceItem.DaysOff
             ElseIf quantityType = _overtimeRegularType Then
                 quantity = GetOtWorkHourValues(employeeIdNo, "OvertimeRegular")
@@ -1245,7 +1108,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GetAttendanceValues(employeeIdNo As Int32, fieldName As String) As Decimal
-            Return ModelOfPresenter.GetFieldValue(Of Decimal)(fieldName, "AttendanceItem", "EmployeeIdNo = " & employeeIdNo.ToString() & " and PayrollIdNo = " & _payrollIdNo)
+            Return Service.GetFieldValue(Of Decimal)(fieldName, "AttendanceItem", "EmployeeIdNo = " & employeeIdNo.ToString() & " and PayrollIdNo = " & _payrollIdNo)
         End Function
 
         Private Function GetOtWorkHourValues(employeeIdNo As Int32, fieldName As String) As Decimal
@@ -1278,15 +1141,15 @@ Namespace PresentationLayer.Presenters
         '    AddEarning(employeeIdNo, otAmount, payrollIdNo, otEarning.IdNo)
         'End Sub
 
-        Private Shared Function ComputeOtAmount(otEarning As PayElement, otHours As Decimal, otRate As Decimal) As Decimal
-            Dim otAmount As Decimal
-            If otEarning IsNot Nothing Then
-                otAmount = otHours * IIf(IsDBNull(otRate), 0, otRate)
-            Else
-                otAmount = otHours * IIf(IsDBNull(otEarning.Rate), 0, otEarning.Rate)
-            End If
-            Return otAmount
-        End Function
+        'Private Shared Function ComputeOtAmount(otEarning As PayElement, otHours As Decimal, otRate As Decimal) As Decimal
+        '    Dim otAmount As Decimal
+        '    If otEarning IsNot Nothing Then
+        '        otAmount = otHours * IIf(IsDBNull(otRate), 0, otRate)
+        '    Else
+        '        otAmount = otHours * IIf(IsDBNull(otEarning.Rate), 0, otEarning.Rate)
+        '    End If
+        '    Return otAmount
+        'End Function
 
     End Class
 

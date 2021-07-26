@@ -9,7 +9,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPensionProviderView)
             MyBase.New(view)
-            Service = New ServiceAccounts("PensionProvider")
+            Service = New AccountsService("PensionProvider")
             TableName = "PensionProvider"
             TreeViewMainField = "PensionProviderName"
             TreeViewSecondaryField = "PensionProviderCode"

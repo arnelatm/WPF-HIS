@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IOriginalMessagesView)
             MyBase.New(view)
-            Service = New ServiceCommon("OriginalMessages")
+            Service = New CommonService("OriginalMessages")
             TableName = "OriginalMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
