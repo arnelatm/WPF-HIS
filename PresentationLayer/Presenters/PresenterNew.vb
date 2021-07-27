@@ -640,7 +640,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Public Function GetSortedRecordPosition(idNo As Int32) As Integer
         Try
-            Dim cModel As TM = Activator.CreateInstance(GetType(TM))
+            Dim cModel As New TM
             Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
             Return Service.GetSortedRecordPosition(idNo, TableName, newSortOrderKey, DataFilter)
         Catch ex As Exception
@@ -691,7 +691,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Sub
 
     Public Overridable Function GoDeleteRecord() As Integer
-        Dim record As TM = Activator.CreateInstance(GetType(TM))
+        Dim record As New TM
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retValue = 0
         Dim currentIdNo = Invoker.GetProperty(View, IdFieldName)
@@ -890,7 +890,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Public Overridable Function Save(ByRef viewControl As Control)
         RaiseEvent BeforeSave()
-        Dim record As TM = Activator.CreateInstance(GetType(TM))
+        Dim record As New TM
         GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
         Dim retVal As Integer = InitiateSave()
         If retVal < 0 Then
@@ -2128,11 +2128,11 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Sub
 
     Public Function GetTreeViewData()
-        Dim cModel As TM = Activator.CreateInstance(GetType(TM))
+        Dim cModel As New TM
         'Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
-        Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
+        'Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         Dim lookupObj As New Lookup(TableName, DataFilter)
-        lookupObj.NameField = treeMainFieldName
+        lookupObj.NameField = TreeViewMainField
         If TreeViewSecondaryField IsNot Nothing Then
             lookupObj.CodeField = TreeViewSecondaryField
         End If
@@ -2142,17 +2142,17 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         'lookupObj.FieldsToShow = {"IdNo", lookupObj.NameField, lookupObj.CodeField}
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName}
+                lookupObj.FieldsToShow = {IdFieldName, TreeViewMainField}
             Else
-                lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName, TreeViewSecondaryField}
+                lookupObj.FieldsToShow = {IdFieldName, TreeViewMainField, TreeViewSecondaryField}
             End If
             Return Service.GetLookup(lookupObj)
         Else
             lookupObj.SortKey = "SortKey"
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
-                lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName, ParentFieldName}
+                lookupObj.FieldsToShow = {IdFieldName, TreeViewMainField, ParentFieldName}
             Else
-                lookupObj.FieldsToShow = {IdFieldName, treeMainFieldName, TreeViewSecondaryField, ParentFieldName}
+                lookupObj.FieldsToShow = {IdFieldName, TreeViewMainField, TreeViewSecondaryField, ParentFieldName}
             End If
             Return Service.GetHLookup(lookupObj)
         End If
@@ -2223,7 +2223,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Sub
 
     Public Function GetTreeNodeText()
-        Dim cModel As TM = Activator.CreateInstance(GetType(TM))
+        Dim cModel As New TM
         Dim cText As String
         Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         If String.IsNullOrEmpty(TreeViewSecondaryField) Then
@@ -2296,6 +2296,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         If _withTreeView Then
             DisplayTree()
         End If
+        Dim idNo = CallByName(View, IdFieldName, CallType.Get)
+        TargetIdNo = idNo
+        RecordPositionNumber = GetSortedRecordPosition(idNo)
         UpdateViewDisplay()
     End Sub
 

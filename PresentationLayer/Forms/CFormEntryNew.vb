@@ -579,6 +579,7 @@ Public Class CFormEntryNew
     End Sub
 
     Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
+        Parent.SuspendDrawing()
         Dim sw As Integer = 0
         If originalUi Then
             If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
@@ -607,6 +608,7 @@ Public Class CFormEntryNew
                 Ea.PublishEvent(New LanguageChanged(Me))
             End If
         End If
+        Parent.ResumeDrawing()
     End Sub
 
     'Protected Overridable Function DataIsValid() As Boolean
