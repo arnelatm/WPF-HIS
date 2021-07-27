@@ -85,13 +85,13 @@ Namespace PresentationLayer.Views.Forms
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1011, 519)
-            Me.SplitContainer1.SplitterDistance = 336
+            Me.SplitContainer1.Size = New System.Drawing.Size(1036, 528)
+            Me.SplitContainer1.SplitterDistance = 351
             '
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
-            Me.FormTreeView.Size = New System.Drawing.Size(336, 519)
+            Me.FormTreeView.Size = New System.Drawing.Size(351, 528)
             '
             'ImageListTreeView
             '
@@ -106,7 +106,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(665, 519)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(675, 528)
             Me.CFlowLayout1.TabIndex = 4
             '
             'TableLayoutPanel1
@@ -813,7 +813,7 @@ Namespace PresentationLayer.Views.Forms
             'PayrollDetailEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(1011, 572)
+            Me.ClientSize = New System.Drawing.Size(1036, 581)
             Me.Name = "PayrollDetailEntry"
             Me.Text = " "
             Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -827,8 +827,8 @@ Namespace PresentationLayer.Views.Forms
             Me.tbcPayroll.ResumeLayout(False)
             Me.tpgEarnings.ResumeLayout(False)
             CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tpgDeductions.ResumeLayout(false)
+            CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.tpgDeductions.ResumeLayout(false)
         CType(Me.DataGridViewDeductions,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsDeductions,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
