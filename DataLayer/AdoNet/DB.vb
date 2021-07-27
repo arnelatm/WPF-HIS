@@ -1145,42 +1145,50 @@ Namespace AdoNet
                     Using connection = CreateConnection()
                         Using command As New SqlCommand("spFieldExistInTable")
                             Try
+                                tableName = "Employee"
+                                fieldName = "EmployeeNameAra"
                                 command.CommandType = CommandType.StoredProcedure
                                 command.Connection = connection
                                 command.Parameters.AddWithValue("TableName", tableName)
                                 command.Parameters.AddWithValue("FieldName", fieldName)
+                                Dim sqp As SqlParameter = New SqlParameter("retValue", SqlDbType.Int)
+                                sqp.Direction = ParameterDirection.ReturnValue
+                                command.Parameters.Add(sqp)
+                                command.ExecuteScalar()
+                                Dim identity = Convert.ToInt32(sqp.Value)
+                                Dim x = 1
 
-                                'Dim carYearParameter As IDbDataParameter = command.CreateParameter()
-                                'carYearParameter.Direction = ParameterDirection.ReturnValue
-
-                                'command.Parameters.Add("@retValue", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.ReturnValue
-                                'connection.Open()
-                                Dim x = command.ExecuteNonQuery()
-                                retValue = x
-                                'connection.Close()
-                                Exit Do
+                                'command.Connection = connection
+                                'command.Parameters.AddWithValue("TableName", tableName)
+                                'command.Parameters.AddWithValue("FieldName", fieldName)
+                                ''Create a SqlParameter object to hold the output parameter value
+                                'Dim retValParam As New SqlParameter("@retValue", SqlDbType.Int)
+                                ''IMPORTANT - must set Direction as ReturnValue
+                                'retValParam.Direction = ParameterDirection.ReturnValue
+                                ''Now you can grab the output parameter's value...
+                                ''Call the proc...
+                                'Dim y = command.ExecuteNonQuery()
+                                'Dim x = Convert.ToInt32(retValParam.Value)
+                                'Exit Do
                             Catch ex As Exception
-                                retValue = -1
+                                retValue = 0
                                 MessageBox.Show(ex.Message)
                                 Throw
                             End Try
                         End Using
                     End Using
                 Catch ex As Exception
-                    '_waitForm.Close()
                     Select Case TryToCatchError(ex)
                         Case DialogResult.Cancel
-                            'Exit Do
                             retValue = -1
                         Case DialogResult.Retry
-                            '_waitForm.Show()
                             tryAgain = True
                         Case Else
                             MessageBox.Show(ex.Message)
                             Throw
                     End Select
                 Finally
-                    '_waitForm.Close()
+                    ' nothing
                 End Try
                 If Not tryAgain Then
                     Exit Do
