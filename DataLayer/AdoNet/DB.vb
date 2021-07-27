@@ -1145,8 +1145,6 @@ Namespace AdoNet
                     Using connection = CreateConnection()
                         Using command As New SqlCommand("spFieldExistInTable")
                             Try
-                                tableName = "Employee"
-                                fieldName = "EmployeeNameAra"
                                 command.CommandType = CommandType.StoredProcedure
                                 command.Connection = connection
                                 command.Parameters.AddWithValue("TableName", tableName)
@@ -1155,9 +1153,7 @@ Namespace AdoNet
                                 sqp.Direction = ParameterDirection.ReturnValue
                                 command.Parameters.Add(sqp)
                                 command.ExecuteScalar()
-                                Dim identity = Convert.ToInt32(sqp.Value)
-                                Dim x = 1
-
+                                retValue = Convert.ToBoolean(sqp.Value)
                                 'command.Connection = connection
                                 'command.Parameters.AddWithValue("TableName", tableName)
                                 'command.Parameters.AddWithValue("FieldName", fieldName)

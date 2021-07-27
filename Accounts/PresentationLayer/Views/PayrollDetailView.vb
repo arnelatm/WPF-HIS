@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views
         Public Property EndDate As Date Implements IPayrollDetailView.EndDate
         Public Property PayPeriodName As String Implements IPayrollDetailView.PayPeriodName
         Public Property PayPeriodNameAra As String Implements IPayrollDetailView.PayPeriodNameAra
-        Public Event UpdateDataFilterEvent(pPayrollIdNo As Short) Implements IPayrollDetailView.UpdateDataFilterEvent
+        'Public Event UpdateDataFilterEvent(pPayrollIdNo As Short) Implements IPayrollDetailView.UpdateDataFilterEvent
     End Class
 
 End Namespace

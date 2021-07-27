@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Public Sub New(ByVal payrollIdNo As Int16)
+        Public Sub New(ByVal payrollIdNo As Object)
 
             ' This call is required by the designer.
             InitializeComponent()
@@ -38,8 +38,6 @@ Namespace PresentationLayer.Views.Forms
             Me.PayrollIdNo = payrollIdNo
             FirstControl = cboEmployeeIdNo
             ' Add any initialization after the InitializeComponent() call.
-
-            RaiseEvent UpdateDataFilterEvent(payrollIdNo)
 
             _earningFooter = New DgvFooter(DataGridViewEarnings) With {.AutoCalc = True}
             _earningFooter.ColumnToSum("dgvEarningAmount") = True
@@ -82,23 +80,32 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeName As String Implements IPayrollDetailView.EmployeeName
-            Get
-                Return txtEmployeeName.Text
-            End Get
-            Set
-                txtEmployeeName.Text = Value
-            End Set
-        End Property
+        Private _employeeName As String
+        Private _employeeNameAra As String
 
-        Public Property EmployeeNameAra As String Implements IPayrollDetailView.EmployeeNameAra
-            Get
-                Return txtEmployeeNameAra.Text
-            End Get
-            Set
-                txtEmployeeNameAra.Text = Value
-            End Set
-        End Property
+        'Public Property EmployeeName As String Implements IPayrollDetailView.EmployeeName
+        '    Get
+        '        Return _employeeName
+        '    End Get
+        '    Set
+        '        _employeeName = Value
+        '        If Not GlobalVariables.RightToLeftLayout Then
+        '            txtEmployeeName.Text = Value
+        '        End If
+        '    End Set
+        'End Property
+
+        'Public Property EmployeeNameAra As String Implements IPayrollDetailView.EmployeeNameAra
+        '    Get
+        '        Return _employeeNameAra
+        '    End Get
+        '    Set
+        '        _employeeNameAra = Value
+        '        If GlobalVariables.RightToLeftLayout Then
+        '            txtEmployeeNameAra.Text = Value
+        '        End If
+        '    End Set
+        'End Property
 
         Public Property PayrollIdNo As Int16 Implements IPayrollDetailView.PayrollIdNo
             Get
@@ -147,32 +154,41 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayPeriodName As String Implements IPayrollDetailView.PayPeriodName
-        Public Property PayPeriodNameAra As String Implements IPayrollDetailView.PayPeriodNameAra
+        Private _payPeriodName As String
+        Private _payPeriodNameAra As String
 
-        Public Property PayPeriodDescription
+        Public Property PayPeriodName As String Implements IPayrollDetailView.PayPeriodName
             Get
-                If GlobalVariables.RightToLeftLayout Then
-                    Return PayPeriodNameAra
-                Else
-                    Return PayPeriodName
-                End If
+                Return _payPeriodName
             End Get
-            Set
-                If GlobalVariables.RightToLeftLayout Then
-                    txtPayPeriodDescription.Text = PayPeriodNameAra
-                Else
-                    txtPayPeriodDescription.Text = PayPeriodName
+            Set(value As String)
+                _payPeriodName = value
+                If Not GlobalVariables.RightToLeftLayout Then
+                    txtPayPeriodDescription.Text = value
                 End If
             End Set
         End Property
 
+        Public Property PayPeriodNameAra As String Implements IPayrollDetailView.PayPeriodNameAra
+            Get
+                Return _payPeriodNameAra
+            End Get
+            Set(value As String)
+                _payPeriodNameAra = value
+                If GlobalVariables.RightToLeftLayout Then
+                    txtPayPeriodDescription.Text = value
+                End If
+            End Set
+        End Property
+
+        'Public Property PayPeriodDescription As String
 
 #End Region
 
-        Public Event UpdateDataFilterEvent(pPayrollIdNo As Int16) Implements IPayrollDetailView.UpdateDataFilterEvent
+        'Public Event UpdateDataFilterEvent(pPayrollIdNo As Int16) Implements IPayrollDetailView.UpdateDataFilterEvent
 
         Protected Overrides Sub CreateDataSources()
+            'RaiseEvent UpdateDataFilterEvent(PayrollIdNo)
             CreateLookupData("PayElement", NameOf(_payEarningsByCode), "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "' and Summary = 0")
             CreateLookupData("PayElement", NameOf(_payDeductionsByCode), "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "' and Summary = 0")
             CreateDataSource("Employee", cboEmployeeIdNo)
@@ -215,23 +231,35 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Private Sub PayrollDetailEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            RaiseEvent UpdateDataFilterEvent(PayrollIdNo)
-            'MyPresenter.DisplayPayrollDetails(dtpStartDate.Value, dtpEndDate.Value, txtPayPeriodName.Text)
-        End Sub
+        'Private Sub PayrollDetailEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    RaiseEvent UpdateDataFilterEvent(PayrollIdNo)
+        '    'MyPresenter.DisplayPayrollDetails(dtpStartDate.Value, dtpEndDate.Value, txtPayPeriodName.Text)
+        'End Sub
 
         Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateTotals()
         End Sub
 
         Private Sub UpdateTotals()
-            _earningFooter.SumColumn("dgvEarningAmount")
-            _deductionFooter.SumColumn("dgvDeductionAmount")
-            Dim earning = _earningFooter.GetColumnTotal("dgvEarningAmount")
-            Dim deduction = _deductionFooter.GetColumnTotal("dgvDeductionAmount")
-            txtTotalEarnings.Text = String.Format("{0:#,##0.00}", Double.Parse(earning))
-            txtTotalDeductions.Text = String.Format("{0:#,##0.00}", Double.Parse(deduction))
-            txtNetPay.Text = String.Format("{0:#,##0.00}", Double.Parse(earning - deduction))
+            If _earningFooter IsNot Nothing Then
+                _earningFooter.SumColumn("dgvEarningAmount")
+                _deductionFooter.SumColumn("dgvDeductionAmount")
+                Dim earning = _earningFooter.GetColumnTotal("dgvEarningAmount")
+                Dim deduction = _deductionFooter.GetColumnTotal("dgvDeductionAmount")
+                txtTotalEarnings.Text = String.Format("{0:#,##0.00}", Double.Parse(earning))
+                txtTotalDeductions.Text = String.Format("{0:#,##0.00}", Double.Parse(deduction))
+                txtNetPay.Text = String.Format("{0:#,##0.00}", Double.Parse(earning - deduction))
+            End If
+        End Sub
+
+        Protected Sub OnTextDisplayLanguageChangedHere() Handles MyBase.TextDisplayLanguageChanged
+            'MyBase.OnTextDisplayLanguageChanged()
+            If GlobalVariables.RightToLeftLayout Then
+                txtPayPeriodDescription.Text = PayPeriodNameAra
+            Else
+                txtPayPeriodDescription.Text = PayPeriodName
+            End If
+            cboEmployeeIdNo.Refresh()
         End Sub
 
     End Class

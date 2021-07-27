@@ -169,10 +169,12 @@ Namespace Services
                 If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
                     If lookupObj.SortKey = lookupObj.NameField Then
                         lookupObj.SortKey = nameFieldArabic
+                        Dim i As Integer = 0
                         For Each field In lookupObj.FieldsToShow
                             If field = lookupObj.NameField Then
-                                field = nameFieldArabic
+                                lookupObj.FieldsToShow(i) = nameFieldArabic
                             End If
+                            i = i + 1
                         Next
                         lookupObj.NameField = nameFieldArabic
                     End If

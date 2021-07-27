@@ -846,7 +846,6 @@
     <Compile Include="PresentationLayer\Views\LeaveView.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\PayrollDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PayrollPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\PensionRateView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />

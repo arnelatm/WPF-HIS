@@ -579,24 +579,33 @@ Public Class CFormEntryNew
     End Sub
 
     Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
+        Dim sw As Integer = 0
         If originalUi Then
-            TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+            If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
+                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+                sw = 1
+            End If
         Else
-            TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+            If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
+                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+                sw = 1
+            End If
         End If
-        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-        '    GlobalVariables.RightToLeftLayout = True
-        'Else
-        '    GlobalVariables.RightToLeftLayout = False
-        'End If
-        TranslateForm()
-        btnArabic.Visible = originalUi
-        btnOriginal.Visible = Not originalUi
-        btnArabic.Enabled = originalUi
-        btnOriginal.Enabled = Not originalUi
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New LanguageChanged(Me))
+        If sw = 1 Then
+            CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
+            'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+            '    GlobalVariables.RightToLeftLayout = True
+            'Else
+            '    GlobalVariables.RightToLeftLayout = False
+            'End If
+            TranslateForm()
+            btnArabic.Visible = originalUi
+            btnOriginal.Visible = Not originalUi
+            btnArabic.Enabled = originalUi
+            btnOriginal.Enabled = Not originalUi
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New LanguageChanged(Me))
+            End If
         End If
     End Sub
 
@@ -724,8 +733,8 @@ Public Class CFormEntryNew
 
     End Sub
 
-    Public Sub RunModalForm(Of TF, TP)()
-        Dim childForm = Activator.CreateInstance(GetType(TF))
+    Public Sub RunModalForm(Of TF, TP)(data As Object)
+        Dim childForm = Activator.CreateInstance(GetType(TF), data)
         Dim pType As Type = GetType(TP)
         Activator.CreateInstance(GetType(TP), {childForm})
         childForm.Show()

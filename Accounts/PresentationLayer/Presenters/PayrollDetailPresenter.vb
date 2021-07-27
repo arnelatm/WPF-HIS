@@ -16,14 +16,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtPayElementInsertTable As New DataTable
         Protected DtPayElementUpdateTable As New DataTable
-
-        'Protected DtDedInsertTable As New DataTable
-        'Protected DtDedUpdateTable As New DataTable
         Private ReadOnly _payrollPayElementModel As New ModelAccounts("PayrollPayElement")
-
-        Private _attendanceItemModel
-        Private _reinitialize As Boolean = False
-        Private _PayrollDetailEarning
 
         Public Sub New(itemView As IPayrollDetailView)
             MyBase.New(itemView)
@@ -32,7 +25,7 @@ Namespace PresentationLayer.Presenters
             TableName = "PayrollDetail_View"
             SortOrderKey = "EmployeeName"
 
-            Service = New AccountsService("AttendanceItem")
+            Service = New AccountsService("PayrollDetail")
 
             CreateDataTable(DtPayElementInsertTable, {{"Amount", GetType(Decimal)},
                                             {"PayElementIdNo", GetType(Int16)},
@@ -45,26 +38,11 @@ Namespace PresentationLayer.Presenters
                                             {"PayrollDetailIdNo", GetType(Int32)}
                                            })
 
-            AddHandler View.UpdateDataFilterEvent, AddressOf OnUpdateDataFilterHandler
-
-            'CreateDataTable(DtDedInsertTable, {{"Amount", GetType(Decimal)},
-            '                    {"PayElementIdNo", GetType(Int16)},
-            '                    {"PayrollDetailIdNo", GetType(Int32)}
-            '                   })
-
-            'CreateDataTable(DtDedUpdateTable, {{"Amount", GetType(Decimal)},
-            '                                {"IdNo", GetType(Int32)},
-            '                                {"PayElementIdNo", GetType(Int16)},
-            '                                {"PayrollDetailIdNo", GetType(Int32)}
-            '                               })
-
-        End Sub
-
-        Public Sub UpdateDataFilter(payrollIdNo As Int16)
-            If payrollIdNo = 0 Then
-                payrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
+            If View.PayrollIdNo = 0 Then
+                View.PayrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
             End If
-            DataFilter = "PayrollIdNo = " & payrollIdNo.ToString()
+            DataFilter = "PayrollIdNo = " & View.PayrollIdNo.ToString()
+
         End Sub
 
         Public Sub DisplayPayrollDetails(ByRef startDate As Date?, ByRef endDate As Date?, ByRef payDescription As String)
@@ -85,8 +63,6 @@ Namespace PresentationLayer.Presenters
                 data.AddRange(View.PayrollEarnings)
                 data.AddRange(View.PayrollDeductions)
                 ViewToDataTables(data, DtPayElementInsertTable, DtPayElementUpdateTable, AddressOf FillData, AddressOf PayrollPayElementFilter, "IdNo", "")
-                'ViewToDataTables(View.PayrollEarnings, DtEarnInsertTable, DtEarnUpdateTable, AddressOf FillData, AddressOf PayrollPayElementFilter, "IdNo", "")
-                'ViewToDataTables(View.PayrollDeductions, DtDedInsertTable, DtDedUpdateTable, AddressOf FillData, AddressOf PayrollPayElementFilter, "IdNo", "")
             End If
         End Sub
 
@@ -106,9 +82,6 @@ Namespace PresentationLayer.Presenters
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
             retVal = UpdateEmpPayElements(DtPayElementUpdateTable, DtPayElementInsertTable)
-            'If retVal >= 0 Then
-            '    ' retVal = UpdateEmpPayElements(DtDedUpdateTable, DtDedInsertTable)
-            'End If
         End Sub
 
         Protected Function UpdateEmpPayElements(updateTable As DataTable, insertTable As DataTable) As Integer
@@ -126,15 +99,6 @@ Namespace PresentationLayer.Presenters
             Dim reportTitle As String = Service.GetField(Of String, Int32)(View.PayrollIdNo, "Payroll", "IdNo", "PayrollName")
             Dim cForm As New ReportFormNew(reportName, reportTitle, curCulture, {View.PayrollIdNo, "PayrollIdNo"})
             cForm.Show()
-        End Sub
-
-        Private Sub OnUpdateDataFilterHandler(idNo As Int16)
-            Dim payrollService As New AccountsService("Payroll")
-            Dim payroll As New PayrollModel
-            payroll = payrollService.GetRecordByIdNo(Of PayrollModel)(View.PayrollIdNo)
-            If payroll IsNot Nothing Then
-                DisplayPayrollDetails(payroll.StartDate, payroll.EndDate, payroll.PayrollName)
-            End If
         End Sub
 
     End Class

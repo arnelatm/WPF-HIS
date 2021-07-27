@@ -597,11 +597,11 @@ Namespace AdoNet
             If filter Is Nothing Or filter = "" Then
                 filterKey = ""
             Else
-                filterKey = filter & " and "
+                filterKey = filter
             End If
             Dim sql As String = " Select count(*) From [" & tableName &
-                    "] where " & filterKey & " " & sortOrder & " <= (Select " & sortOrder &
-                    " from [" & tableName & "] where " & filterKey & " IdNo = " & idNo & ") "
+                    "] where " & IIf(filterKey = "", "", filterKey & " and ") & " " & sortOrder & " <= (Select " & sortOrder &
+                    " from [" & tableName & "] where " & IIf(filterKey = "", "", filterKey & " and ") & " IdNo = " & idNo & ") "
             Dim recordPosition = _db.Scalar(sql) ' + 1
             Dim recCount = GetRecordCount(tableName, filterKey)
             If recordPosition > recCount Then
