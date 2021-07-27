@@ -35,8 +35,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.tbcPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tpgEarnings = New System.Windows.Forms.TabPage()
@@ -87,13 +85,13 @@ Namespace PresentationLayer.Views.Forms
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1011, 499)
+            Me.SplitContainer1.Size = New System.Drawing.Size(1011, 519)
             Me.SplitContainer1.SplitterDistance = 336
             '
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
-            Me.FormTreeView.Size = New System.Drawing.Size(336, 499)
+            Me.FormTreeView.Size = New System.Drawing.Size(336, 519)
             '
             'ImageListTreeView
             '
@@ -108,7 +106,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(665, 499)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(665, 519)
             Me.CFlowLayout1.TabIndex = 4
             '
             'TableLayoutPanel1
@@ -122,8 +120,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.Controls.Add(Me.txtIdNo, 0, 7)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtEmployeeNameAra, 0, 7)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtEmployeeName, 0, 7)
             Me.TableLayoutPanel1.Controls.Add(Me.txtEmployeeCode, 0, 7)
             Me.TableLayoutPanel1.Controls.Add(Me.tbcPayroll, 0, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPayrollIdNo, 1, 0)
@@ -133,18 +129,18 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodDescription, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.lblEmployeeName, 0, 2)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel9, 0, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtTotalEarnings, 1, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel10, 4, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.CLabel9, 3, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtTotalEarnings, 5, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.CLabel10, 4, 8)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpEndDate, 5, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtTotalDeductions, 5, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtNetPay, 5, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtTotalDeductions, 5, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtNetPay, 5, 8)
             Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel11, 3, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.CLabel11, 3, 7)
             Me.TableLayoutPanel1.Controls.Add(Me.cboEmployeeIdNo, 1, 2)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-            Me.TableLayoutPanel1.RowCount = 8
+            Me.TableLayoutPanel1.RowCount = 9
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -153,7 +149,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(666, 481)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(666, 513)
             Me.TableLayoutPanel1.TabIndex = 0
             '
             'txtIdNo
@@ -174,7 +171,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtIdNo.LinkedLabel = Nothing
-            Me.txtIdNo.Location = New System.Drawing.Point(1, 456)
+            Me.txtIdNo.Location = New System.Drawing.Point(114, 456)
             Me.txtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtIdNo.MaximumValue = Nothing
             Me.txtIdNo.MinimumValue = Nothing
@@ -185,66 +182,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIdNo.TabIndex = 43
             Me.txtIdNo.Translatable = False
             Me.txtIdNo.Visible = False
-            '
-            'txtEmployeeNameAra
-            '
-            Me.txtEmployeeNameAra.BackColor = System.Drawing.Color.White
-            Me.txtEmployeeNameAra.BegFindValue = Nothing
-            Me.txtEmployeeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtEmployeeNameAra.ComputedValue = False
-            Me.txtEmployeeNameAra.CustomFormat = Nothing
-            Me.txtEmployeeNameAra.DataBoundControl = True
-            Me.txtEmployeeNameAra.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtEmployeeNameAra.EditingMode = True
-            Me.txtEmployeeNameAra.EndFindValue = Nothing
-            Me.txtEmployeeNameAra.FieldDescription = Nothing
-            Me.txtEmployeeNameAra.FieldName = Nothing
-            Me.txtEmployeeNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtEmployeeNameAra.FindEnabled = True
-            Me.txtEmployeeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtEmployeeNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtEmployeeNameAra.LinkedLabel = Nothing
-            Me.txtEmployeeNameAra.Location = New System.Drawing.Point(125, 456)
-            Me.txtEmployeeNameAra.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtEmployeeNameAra.MaximumValue = Nothing
-            Me.txtEmployeeNameAra.MinimumValue = Nothing
-            Me.txtEmployeeNameAra.Name = "txtEmployeeNameAra"
-            Me.txtEmployeeNameAra.OldValue = Nothing
-            Me.txtEmployeeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtEmployeeNameAra.Size = New System.Drawing.Size(122, 23)
-            Me.txtEmployeeNameAra.TabIndex = 42
-            Me.txtEmployeeNameAra.Translatable = False
-            Me.txtEmployeeNameAra.Visible = False
-            '
-            'txtEmployeeName
-            '
-            Me.txtEmployeeName.BackColor = System.Drawing.Color.White
-            Me.txtEmployeeName.BegFindValue = Nothing
-            Me.txtEmployeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtEmployeeName.ComputedValue = False
-            Me.txtEmployeeName.CustomFormat = Nothing
-            Me.txtEmployeeName.DataBoundControl = True
-            Me.txtEmployeeName.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtEmployeeName.EditingMode = True
-            Me.txtEmployeeName.EndFindValue = Nothing
-            Me.txtEmployeeName.FieldDescription = Nothing
-            Me.txtEmployeeName.FieldName = Nothing
-            Me.txtEmployeeName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtEmployeeName.FindEnabled = True
-            Me.txtEmployeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtEmployeeName.ForeColor = System.Drawing.Color.Black
-            Me.txtEmployeeName.LinkedLabel = Nothing
-            Me.txtEmployeeName.Location = New System.Drawing.Point(339, 456)
-            Me.txtEmployeeName.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtEmployeeName.MaximumValue = Nothing
-            Me.txtEmployeeName.MinimumValue = Nothing
-            Me.txtEmployeeName.Name = "txtEmployeeName"
-            Me.txtEmployeeName.OldValue = Nothing
-            Me.txtEmployeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtEmployeeName.Size = New System.Drawing.Size(122, 23)
-            Me.txtEmployeeName.TabIndex = 41
-            Me.txtEmployeeName.Translatable = False
-            Me.txtEmployeeName.Visible = False
             '
             'txtEmployeeCode
             '
@@ -264,14 +201,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtEmployeeCode.ForeColor = System.Drawing.Color.Black
             Me.txtEmployeeCode.LinkedLabel = Nothing
-            Me.txtEmployeeCode.Location = New System.Drawing.Point(249, 456)
+            Me.txtEmployeeCode.Location = New System.Drawing.Point(1, 456)
             Me.txtEmployeeCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtEmployeeCode.MaximumValue = Nothing
             Me.txtEmployeeCode.MinimumValue = Nothing
             Me.txtEmployeeCode.Name = "txtEmployeeCode"
             Me.txtEmployeeCode.OldValue = Nothing
             Me.txtEmployeeCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtEmployeeCode.Size = New System.Drawing.Size(88, 23)
+            Me.txtEmployeeCode.Size = New System.Drawing.Size(111, 23)
             Me.txtEmployeeCode.TabIndex = 40
             Me.txtEmployeeCode.Translatable = False
             Me.txtEmployeeCode.Visible = False
@@ -500,7 +437,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayrollIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtPayrollIdNo.LinkedLabel = Nothing
-            Me.txtPayrollIdNo.Location = New System.Drawing.Point(125, 1)
+            Me.txtPayrollIdNo.Location = New System.Drawing.Point(114, 1)
             Me.txtPayrollIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayrollIdNo.MaximumValue = Nothing
             Me.txtPayrollIdNo.MinimumValue = Nothing
@@ -518,7 +455,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(249, 1)
+            Me.CLabel1.Location = New System.Drawing.Point(238, 1)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
             Me.CLabel1.Size = New System.Drawing.Size(72, 17)
@@ -537,7 +474,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpStartDate.EditsAllowed = False
             Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
             Me.dtpStartDate.LinkedLabel = Nothing
-            Me.dtpStartDate.Location = New System.Drawing.Point(339, 1)
+            Me.dtpStartDate.Location = New System.Drawing.Point(312, 1)
             Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpStartDate.Name = "dtpStartDate"
             Me.dtpStartDate.ReadOnlyDp = False
@@ -559,7 +496,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEndDate.DisplayOnly = True
             Me.lblEndDate.EditingMode = False
             Me.lblEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblEndDate.Location = New System.Drawing.Point(463, 1)
+            Me.lblEndDate.Location = New System.Drawing.Point(429, 1)
             Me.lblEndDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblEndDate.Name = "lblEndDate"
             Me.lblEndDate.Size = New System.Drawing.Size(67, 17)
@@ -603,7 +540,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayPeriodDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayPeriodDescription.ForeColor = System.Drawing.Color.Black
             Me.txtPayPeriodDescription.LinkedLabel = Nothing
-            Me.txtPayPeriodDescription.Location = New System.Drawing.Point(125, 26)
+            Me.txtPayPeriodDescription.Location = New System.Drawing.Point(114, 26)
             Me.txtPayPeriodDescription.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayPeriodDescription.MaximumValue = Nothing
             Me.txtPayPeriodDescription.MinimumValue = Nothing
@@ -611,7 +548,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayPeriodDescription.OldValue = Nothing
             Me.txtPayPeriodDescription.ReadOnly = True
             Me.txtPayPeriodDescription.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayPeriodDescription.Size = New System.Drawing.Size(524, 23)
+            Me.txtPayPeriodDescription.Size = New System.Drawing.Size(535, 23)
             Me.txtPayPeriodDescription.TabIndex = 3
             Me.txtPayPeriodDescription.TabStop = False
             Me.txtPayPeriodDescription.Translatable = False
@@ -635,13 +572,15 @@ Namespace PresentationLayer.Views.Forms
             'CLabel9
             '
             Me.CLabel9.AutoSize = True
+            Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel9, 2)
             Me.CLabel9.DisplayOnly = True
+            Me.CLabel9.Dock = System.Windows.Forms.DockStyle.Right
             Me.CLabel9.EditingMode = False
             Me.CLabel9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel9.Location = New System.Drawing.Point(1, 431)
+            Me.CLabel9.Location = New System.Drawing.Point(396, 431)
             Me.CLabel9.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel9.Name = "CLabel9"
-            Me.CLabel9.Size = New System.Drawing.Size(100, 17)
+            Me.CLabel9.Size = New System.Drawing.Size(100, 23)
             Me.CLabel9.TabIndex = 27
             Me.CLabel9.Text = "Total Earnings"
             Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -666,7 +605,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalEarnings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtTotalEarnings.ForeColor = System.Drawing.Color.Black
             Me.txtTotalEarnings.LinkedLabel = Nothing
-            Me.txtTotalEarnings.Location = New System.Drawing.Point(125, 431)
+            Me.txtTotalEarnings.Location = New System.Drawing.Point(498, 431)
             Me.txtTotalEarnings.Margin = New System.Windows.Forms.Padding(1)
             Me.txtTotalEarnings.MaximumValue = Nothing
             Me.txtTotalEarnings.MinimumValue = Nothing
@@ -674,7 +613,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalEarnings.OldValue = Nothing
             Me.txtTotalEarnings.ReadOnly = True
             Me.txtTotalEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalEarnings.Size = New System.Drawing.Size(122, 23)
+            Me.txtTotalEarnings.Size = New System.Drawing.Size(151, 23)
             Me.txtTotalEarnings.TabIndex = 5
             Me.txtTotalEarnings.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtTotalEarnings.Translatable = False
@@ -687,10 +626,11 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel10.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel10.EditingMode = False
             Me.CLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel10.Location = New System.Drawing.Point(463, 456)
+            Me.CLabel10.Location = New System.Drawing.Point(429, 481)
             Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel10.Name = "CLabel10"
-            Me.CLabel10.Size = New System.Drawing.Size(67, 24)
+            Me.CLabel10.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.CLabel10.Size = New System.Drawing.Size(67, 31)
             Me.CLabel10.TabIndex = 29
             Me.CLabel10.Text = "Net Pay"
             Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -706,7 +646,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpEndDate.EditsAllowed = False
             Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
             Me.dtpEndDate.LinkedLabel = Nothing
-            Me.dtpEndDate.Location = New System.Drawing.Point(532, 1)
+            Me.dtpEndDate.Location = New System.Drawing.Point(498, 1)
             Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpEndDate.Name = "dtpEndDate"
             Me.dtpEndDate.ReadOnlyDp = False
@@ -741,7 +681,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDeductions.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtTotalDeductions.ForeColor = System.Drawing.Color.Black
             Me.txtTotalDeductions.LinkedLabel = Nothing
-            Me.txtTotalDeductions.Location = New System.Drawing.Point(532, 431)
+            Me.txtTotalDeductions.Location = New System.Drawing.Point(498, 456)
             Me.txtTotalDeductions.Margin = New System.Windows.Forms.Padding(1)
             Me.txtTotalDeductions.MaximumValue = Nothing
             Me.txtTotalDeductions.MinimumValue = Nothing
@@ -749,7 +689,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDeductions.OldValue = Nothing
             Me.txtTotalDeductions.ReadOnly = True
             Me.txtTotalDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalDeductions.Size = New System.Drawing.Size(117, 23)
+            Me.txtTotalDeductions.Size = New System.Drawing.Size(151, 23)
             Me.txtTotalDeductions.TabIndex = 6
             Me.txtTotalDeductions.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtTotalDeductions.Translatable = False
@@ -774,7 +714,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNetPay.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNetPay.ForeColor = System.Drawing.Color.Black
             Me.txtNetPay.LinkedLabel = Nothing
-            Me.txtNetPay.Location = New System.Drawing.Point(532, 456)
+            Me.txtNetPay.Location = New System.Drawing.Point(498, 481)
             Me.txtNetPay.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNetPay.MaximumValue = Nothing
             Me.txtNetPay.MinimumValue = Nothing
@@ -782,7 +722,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNetPay.OldValue = Nothing
             Me.txtNetPay.ReadOnly = True
             Me.txtNetPay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNetPay.Size = New System.Drawing.Size(117, 23)
+            Me.txtNetPay.Size = New System.Drawing.Size(151, 23)
             Me.txtNetPay.TabIndex = 7
             Me.txtNetPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtNetPay.Translatable = False
@@ -811,10 +751,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel11.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel11.EditingMode = False
             Me.CLabel11.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel11.Location = New System.Drawing.Point(339, 431)
+            Me.CLabel11.Location = New System.Drawing.Point(312, 456)
             Me.CLabel11.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel11.Name = "CLabel11"
-            Me.CLabel11.Size = New System.Drawing.Size(191, 23)
+            Me.CLabel11.Size = New System.Drawing.Size(184, 23)
             Me.CLabel11.TabIndex = 32
             Me.CLabel11.Text = "Total Deductions"
             Me.CLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -831,7 +771,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.DisplayMember = "Name"
             Me.cboEmployeeIdNo.DisplayOnly = True
             Me.cboEmployeeIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboEmployeeIdNo.DropDownHeight = 24
+            Me.cboEmployeeIdNo.DropDownHeight = 21
             Me.cboEmployeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboEmployeeIdNo.EditingMode = True
             Me.cboEmployeeIdNo.EndFindValue = Nothing
@@ -847,7 +787,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.IgnoreCase = False
             Me.cboEmployeeIdNo.IntegralHeight = False
             Me.cboEmployeeIdNo.LinkedLabel = Nothing
-            Me.cboEmployeeIdNo.Location = New System.Drawing.Point(125, 51)
+            Me.cboEmployeeIdNo.Location = New System.Drawing.Point(114, 51)
             Me.cboEmployeeIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboEmployeeIdNo.MaxDropDownItems = 1
             Me.cboEmployeeIdNo.Name = "cboEmployeeIdNo"
@@ -858,7 +798,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
             Me.cboEmployeeIdNo.PropertySelector = Nothing
             Me.cboEmployeeIdNo.ReadOnlyCombo = True
-            Me.cboEmployeeIdNo.Size = New System.Drawing.Size(524, 24)
+            Me.cboEmployeeIdNo.Size = New System.Drawing.Size(535, 24)
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
             Me.cboEmployeeIdNo.TabIndex = 4
@@ -873,7 +813,7 @@ Namespace PresentationLayer.Views.Forms
             'PayrollDetailEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(1011, 552)
+            Me.ClientSize = New System.Drawing.Size(1011, 572)
             Me.Name = "PayrollDetailEntry"
             Me.Text = " "
             Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -885,9 +825,9 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
             Me.tbcPayroll.ResumeLayout(False)
-            Me.tpgEarnings.ResumeLayout(false)
-        CType(Me.DataGridViewEarnings,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).EndInit
+            Me.tpgEarnings.ResumeLayout(False)
+            CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).EndInit
         Me.tpgDeductions.ResumeLayout(false)
         CType(Me.DataGridViewDeductions,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsDeductions,System.ComponentModel.ISupportInitialize).EndInit
@@ -916,8 +856,6 @@ End Sub
         Friend WithEvents txtPayPeriodDescription As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtPayrollIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents dtpEndDate As CCustomDateTimePicker
-        Friend WithEvents txtEmployeeNameAra As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents txtEmployeeName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtEmployeeCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CaComboBox

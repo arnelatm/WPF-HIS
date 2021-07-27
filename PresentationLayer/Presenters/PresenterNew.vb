@@ -519,7 +519,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer) As Integer
         Try
-            Dim cModel As TM = Activator.CreateInstance(GetType(TM))
+            Dim cModel As New TM
             Dim newSortOrder As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
             Return Service.GetIdNoOfSortedPositionNumber(recordNo, TableName, newSortOrder, DataFilter)
         Catch ex As Exception

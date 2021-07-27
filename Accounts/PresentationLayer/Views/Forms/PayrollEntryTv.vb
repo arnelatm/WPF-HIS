@@ -260,7 +260,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BtnViewPayrollReport_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewPayrollReport.ClickButtonArea
-            RunModalForm(Of PayrollDetailEntry, PayrollDetailPresenter(Of PayrollDetailModel))()
+            RunModalForm(Of PayrollDetailEntry, PayrollDetailPresenter(Of PayrollDetailModel))(IdNo)
         End Sub
 
     End Class
