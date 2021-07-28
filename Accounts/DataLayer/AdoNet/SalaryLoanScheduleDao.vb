@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As SalaryLoanSchedule Implements IDaoAll(Of SalaryLoanSchedule).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, EmployeeIdNo, Amount, StartDate, PeriodicPayment" &
+                    " SELECT IdNo, EmployeeIdNo, Amount, StartDate, PeriodicPayment, DateCreated" &
                     "   FROM [SalaryLoanSchedule]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -60,7 +60,8 @@ Namespace DataLayer.AdoNet
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .StartDate = Extensions.AsDate(reader("StartDate")),
-            .PeriodicPayment = Extensions.AsDecimal(reader("PeriodicPayment"))
+            .PeriodicPayment = Extensions.AsDecimal(reader("PeriodicPayment")),
+            .DateCreated = Extensions.AsDate(reader("DateCreated"))
             }
 
         Public Sub New()

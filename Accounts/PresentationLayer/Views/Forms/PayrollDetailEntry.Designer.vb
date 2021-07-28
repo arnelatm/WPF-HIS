@@ -828,8 +828,8 @@ Namespace PresentationLayer.Views.Forms
             Me.tpgEarnings.ResumeLayout(False)
             CType(Me.DataGridViewEarnings, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.tpgDeductions.ResumeLayout(false)
-        CType(Me.DataGridViewDeductions,System.ComponentModel.ISupportInitialize).EndInit
+            Me.tpgDeductions.ResumeLayout(False)
+            CType(Me.DataGridViewDeductions,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsDeductions,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout

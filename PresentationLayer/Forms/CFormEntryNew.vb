@@ -524,8 +524,23 @@ Public Class CFormEntryNew
             If GlobalVariables.UserName.ToLower() <> $"arnel" Then
                 HideButton(btnDebug)
             End If
+            CenterForm(Me)
             'UpdateNavigationButtonDisplay(False, False)
         End If
+    End Sub
+
+    Public Shared Sub CenterForm(ByVal frm As Form, Optional ByVal parent As Form = Nothing)
+        '' Note: call this from frm's Load event!
+        Dim r As Rectangle
+        If parent IsNot Nothing Then
+            r = parent.RectangleToScreen(parent.ClientRectangle)
+        Else
+            r = Screen.FromPoint(frm.Location).WorkingArea
+        End If
+
+        Dim x = r.Left + (r.Width - frm.Width) \ 2
+        Dim y = r.Top + (r.Height - frm.Height) \ 2
+        frm.Location = New Point(x, y)
     End Sub
 
     Private Sub CloseForm()
@@ -579,7 +594,7 @@ Public Class CFormEntryNew
     End Sub
 
     Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
-        Parent.SuspendDrawing()
+        SuspendDrawing()
         Dim sw As Integer = 0
         If originalUi Then
             If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
@@ -608,7 +623,7 @@ Public Class CFormEntryNew
                 Ea.PublishEvent(New LanguageChanged(Me))
             End If
         End If
-        Parent.ResumeDrawing()
+        ResumeDrawing()
     End Sub
 
     'Protected Overridable Function DataIsValid() As Boolean
@@ -735,10 +750,11 @@ Public Class CFormEntryNew
 
     End Sub
 
-    Public Sub RunModalForm(Of TF, TP)(data As Object)
+    Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)
         Dim childForm = Activator.CreateInstance(GetType(TF), data)
         Dim pType As Type = GetType(TP)
         Activator.CreateInstance(GetType(TP), {childForm})
+        childForm.MdiParent = subFormParent
         childForm.Show()
     End Sub
 

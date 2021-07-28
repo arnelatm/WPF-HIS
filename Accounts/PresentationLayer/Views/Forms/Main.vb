@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
-Imports AATM.Accounts.Interfaces
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -41,9 +40,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Shared AccountsMapper As IMapper
         Private _logStatus As LoginStatus
-        Private _salaryLoanSchedulePresenter As ISalaryLoanSchedulePresenter
 
-        Public Event UserLoggedIn(sender As Object, controls As List(Of Control))
+        Public Event UserLoggedIn(sender As Object, formControls As List(Of Control))
 
         ''' <summary>
         '''     Default form constructor.
@@ -902,19 +900,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SalaryLoanScheduleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalaryLoanScheduleToolStripMenuItem.Click
-            Dim childMdiForm As SalaryLoanScheduleEntry
-            'Dim presenter 'As ISalaryLoanSchedulePresenter
-            'Dim builder As ContainerBuilder = GlobalVariables.Container
-            'builder.RegisterType(Of SalaryLoanScheduleEntry)().As(Of ISalaryLoanScheduleView)()
-            'builder.Build()
-            'presenter = builder.Resolve(Of ISalaryLoanSchedulePresenter)()'
-
-            'Set the Parent Form of the Child window.
-            childMdiForm = New SalaryLoanScheduleEntry() With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of SalaryLoanScheduleEntry, SalaryLoanSchedulePresenter(Of SalaryLoanScheduleModel))()
         End Sub
 
         Private Sub SetLanguageChangeButtons()
