@@ -1,13 +1,6 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.Interfaces
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views
-Imports Autofac
 
 Namespace PresentationLayer.Views.Forms
 
@@ -21,6 +14,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            FirstControl = cboEmployeeIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             '_presenter = New SalaryLoanSchedulePresenter(Me)
         End Sub
@@ -29,48 +23,55 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Amount As Decimal Implements ISalaryLoanScheduleView.Amount
             Get
-                Return NumParser(Of Decimal)(SalaryLoanScheduleView.txtAmount.Text)
+                Return NumParser(Of Decimal)(txtAmount.Text)
             End Get
             Set
-                SalaryLoanScheduleView.txtAmount.Text = Value
+                txtAmount.Text = Value
             End Set
         End Property
 
         Public Property DateCreated As Date? Implements ISalaryLoanScheduleView.DateCreated
+            Get
+                Return txtDateCreated.Text
+            End Get
+            Set
+                txtDateCreated.Text = Value
+            End Set
+        End Property
 
         Public Property EmployeeIdNo As Integer Implements ISalaryLoanScheduleView.EmployeeIdNo
             Get
-                Return SalaryLoanScheduleView.cboEmployeeIdNo.GetNullableValue(Of Int32)
+                Return cboEmployeeIdNo.GetNullableValue(Of Int32)
             End Get
             Set
-                SalaryLoanScheduleView.cboEmployeeIdNo.SetValue(Value)
+                cboEmployeeIdNo.SetValue(Value)
             End Set
         End Property
 
         Public Property IdNo As Integer Implements ISalaryLoanScheduleView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int16)(SalaryLoanScheduleView.TxtIdNo.Text)
+                Return GlobalFunctions.NumParser(Of Int16)(TxtIdNo.Text)
             End Get
             Set
-                SalaryLoanScheduleView.TxtIdNo.Text = Convert.ToString(Value)
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
         Public Property PeriodicPayment As Decimal Implements ISalaryLoanScheduleView.PeriodicPayment
             Get
-                Return GlobalFunctions.NumParser(Of Decimal)(SalaryLoanScheduleView.txtPeriodicPayment.Text)
+                Return GlobalFunctions.NumParser(Of Decimal)(txtPeriodicPayment.Text)
             End Get
             Set
-                SalaryLoanScheduleView.txtPeriodicPayment.Text = Value
+                txtPeriodicPayment.Text = Value
             End Set
         End Property
 
         Public Property StartDate As Date? Implements ISalaryLoanScheduleView.StartDate
             Get
-                Return SalaryLoanScheduleView.dtpStartDate.Value
+                Return dtpStartDate.Value
             End Get
             Set
-                SalaryLoanScheduleView.dtpStartDate.Value = Value
+                dtpStartDate.Value = Value
             End Set
         End Property
 
@@ -79,18 +80,20 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"Amount", SalaryLoanScheduleView.txtAmount},
-                {"EmployeeIdNo", SalaryLoanScheduleView.cboEmployeeIdNo},
-                {"IdNo", SalaryLoanScheduleView.TxtIdNo},
-                {"PeriodicPayment", SalaryLoanScheduleView.txtPeriodicPayment},
-                {"StartDate", SalaryLoanScheduleView.dtpStartDate}
+                {"Amount", txtAmount},
+                {"EmployeeIdNo", cboEmployeeIdNo},
+                {"IdNo", TxtIdNo},
+                {"PeriodicPayment", txtPeriodicPayment},
+                {"StartDate", dtpStartDate}
                 }
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New GetDataSource("Employee", SalaryLoanScheduleView.cboEmployeeIdNo))
-            End If
+            CreateDataSource("Employee", cboEmployeeIdNo)
+        End Sub
+
+        Private Sub SalaryLoanScheduleEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         End Sub
 
     End Class

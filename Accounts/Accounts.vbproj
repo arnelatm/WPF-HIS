@@ -310,7 +310,6 @@
     <Compile Include="Form2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interfaces\ISalaryLoanSchedulePresenter.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -849,12 +848,6 @@
     <Compile Include="PresentationLayer\Views\PayrollPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\PensionRateView.vb" />
     <Compile Include="PresentationLayer\Views\JournalItemView.vb" />
-    <Compile Include="PresentationLayer\Views\SalaryLoanScheduleView.Designer.vb">
-      <DependentUpon>SalaryLoanScheduleView.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\SalaryLoanScheduleView.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\SalesDepositView.vb" />
     <Compile Include="Reports\Account Activity Report.vb">
       <AutoGen>True</AutoGen>
@@ -1246,9 +1239,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
       <DependentUpon>LeaveView.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\SalaryLoanScheduleView.resx">
-      <DependentUpon>SalaryLoanScheduleView.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Account Activity Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Account Activity Report.vb</LastGenOutput>
@@ -1365,8 +1355,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="appIbnserver.config" />
     <None Include="app.config" />
+    <None Include="appIbnserver.config" />
     <None Include="app-Marcelo.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
@@ -1522,6 +1512,8 @@
   <ItemGroup>
     <None Include="Resources\GreenGradientBackgroundLarge.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

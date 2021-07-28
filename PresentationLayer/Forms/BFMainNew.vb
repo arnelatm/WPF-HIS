@@ -1050,12 +1050,14 @@ Public Class SettingsSaver
     Private _left As UInt16
     Private _width As UInt16
     Private _height As UInt16
+    Private _visible As Boolean
 
     Public Sub SaveSetting(control As Control)
         _top = Math.Max(control.Top, 0)
         _left = Math.Max(control.Left, 0)
         _width = control.Width
         _height = control.Height
+        _visible = control.Visible
     End Sub
 
     Public Sub RestoreSetting(control As Control)
@@ -1063,6 +1065,7 @@ Public Class SettingsSaver
         control.Left = _left
         control.Width = _width
         control.Height = _height
+        control.Visible = _visible
     End Sub
 
 End Class
