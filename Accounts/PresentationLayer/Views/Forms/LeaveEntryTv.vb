@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Sub New()
 
-            MyBase.New()
+            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = txtLeaveCode

@@ -45,7 +45,7 @@ Public Class CFormEntryNew
     Public Event InputsTurnedOff()
 
     Public Sub New()
-        MyBase.New()
+        'MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
         KeyPreview = True

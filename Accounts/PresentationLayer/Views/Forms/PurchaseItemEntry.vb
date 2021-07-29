@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views.Forms
         'Private _inputVatAccounts
 
         Public Sub New()
-            MyBase.New()
+            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.

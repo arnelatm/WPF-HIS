@@ -34,7 +34,7 @@ Namespace PresentationLayer.Views.Forms
         Private cellPosUnitSave As TableLayoutPanelCellPosition = New TableLayoutPanelCellPosition(0, 8)
 
         Public Sub New()
-            MyBase.New()
+            'MyBase.New()
             SuspendLayout()
             DoubleBuffered = True
             FirstControl = txtPayElementCode

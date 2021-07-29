@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IPayGroupView
 
         Public Sub New()
-            MyBase.New()
+            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = txtPayGroupCode
