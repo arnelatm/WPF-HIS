@@ -8,10 +8,9 @@ Namespace PresentationLayer.Views.Forms
         Implements ISalaryLoanScheduleView
 
         Private ReadOnly _nfi As NumberFormatInfo
-        'Private _presenter
 
         Public Sub New()
-            MyBase.New()
+            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = cboEmployeeIdNo
@@ -90,10 +89,6 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("Employee", cboEmployeeIdNo)
-        End Sub
-
-        Private Sub SalaryLoanScheduleEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         End Sub
 
     End Class

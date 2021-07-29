@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
         Private _pensionRates As List(Of PensionRateView)
 
         Public Sub New()
-            MyBase.New()
+            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = txtPensionSchemeCode
@@ -97,7 +97,6 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("PensionProvider", cboPensionProviderIdNo)
             CreateDataSource("Account", cboAccountIdNo, "Detail=1")
         End Sub
-
 
         Private Sub BindPensionRates()
             SuspendLayout()

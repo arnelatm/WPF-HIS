@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IProductCategoryView
 
         Public Sub New()
-            MyBase.New()
+            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = txtProductCategoryCode
@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #Region "Fields"
+
         Public Property IdNo As Int16 Implements IProductCategoryView.IdNo
             Get
                 Return GlobalFunctions.NumParser(Of Int16)(TxtIdNo.Text)
@@ -59,6 +60,7 @@ Namespace PresentationLayer.Views.Forms
                 txtNotes.Text = If(Value, "")
             End Set
         End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()

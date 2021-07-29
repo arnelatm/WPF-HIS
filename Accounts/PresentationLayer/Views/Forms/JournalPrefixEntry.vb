@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views.Forms
         'Private _presenter As JournalPrefixPresenter
 
         Public Sub New()
-            MyBase.New()
+            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             _nfi = GlobalVariables.DefaultNumberFormatInfo

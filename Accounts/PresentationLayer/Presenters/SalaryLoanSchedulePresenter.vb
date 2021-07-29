@@ -7,11 +7,12 @@ Namespace PresentationLayer.Presenters
     Public Class SalaryLoanSchedulePresenter(Of TM As New)
         Inherits PresenterNew(Of ISalaryLoanScheduleView, TM)
 
-        Public Sub New(view As ISalaryLoanScheduleView)
-            MyBase.New(view)
+        Public Sub New(itemView As ISalaryLoanScheduleView)
+            MyBase.New(itemView)
             Service = New AccountsService("SalaryLoanSchedule")
             TableName = "SalaryLoanSchedule"
             SortOrderKey = "IdNo"
+            WithTreeView = False
         End Sub
 
     End Class
