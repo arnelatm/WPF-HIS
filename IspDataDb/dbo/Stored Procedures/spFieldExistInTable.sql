@@ -1,4 +1,4 @@
-﻿CREATE Procedure spFieldExistInTable
+﻿CREATE Procedure [dbo].[spFieldExistInTable]
 @tableName as nVarChar(50),
 @fieldName as nVarChar(50)
 as
@@ -10,7 +10,3 @@ begin
 		set @retValue = 0
 	return @retValue
 end
-
-declare @x as nVarChar(20)
-Execute @x = spFieldExistInTable @TableName = 'Employee', @fieldName = 'EmployeeName'
-print @x
