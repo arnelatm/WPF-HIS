@@ -107,7 +107,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPayrollAttendance = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGeneratePayroll = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
-            Me.SalaryLoanScheduleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.RecurringPayrollEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
             Me.ToolStripMenuItemClosePettyCashFund = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
@@ -175,7 +175,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.SalaryLoanScheduleTvToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -584,7 +583,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPayrollMenu
             '
-            Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.SalaryLoanScheduleToolStripMenuItem, Me.SalaryLoanScheduleTvToolStripMenuItem})
+            Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.RecurringPayrollEntryToolStripMenuItem})
             Me.ToolStripMenuItemPayrollMenu.Name = "ToolStripMenuItemPayrollMenu"
             resources.ApplyResources(Me.ToolStripMenuItemPayrollMenu, "ToolStripMenuItemPayrollMenu")
             '
@@ -603,10 +602,10 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPayrollEntry.Name = "ToolStripMenuItemPayrollEntry"
             resources.ApplyResources(Me.ToolStripMenuItemPayrollEntry, "ToolStripMenuItemPayrollEntry")
             '
-            'SalaryLoanScheduleToolStripMenuItem
+            'RecurringPayrollEntryToolStripMenuItem
             '
-            Me.SalaryLoanScheduleToolStripMenuItem.Name = "SalaryLoanScheduleToolStripMenuItem"
-            resources.ApplyResources(Me.SalaryLoanScheduleToolStripMenuItem, "SalaryLoanScheduleToolStripMenuItem")
+            Me.RecurringPayrollEntryToolStripMenuItem.Name = "RecurringPayrollEntryToolStripMenuItem"
+            resources.ApplyResources(Me.RecurringPayrollEntryToolStripMenuItem, "RecurringPayrollEntryToolStripMenuItem")
             '
             'ToolStripSeparator2
             '
@@ -958,11 +957,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'SalaryLoanScheduleTvToolStripMenuItem
-            '
-            Me.SalaryLoanScheduleTvToolStripMenuItem.Name = "SalaryLoanScheduleTvToolStripMenuItem"
-            resources.ApplyResources(Me.SalaryLoanScheduleTvToolStripMenuItem, "SalaryLoanScheduleTvToolStripMenuItem")
-            '
             'Main
             '
             Me.AllowDrop = True
@@ -1129,11 +1123,10 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemTransactionNotesTranslator As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPayrollReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPeriodicPayroll As ToolStripMenuItem
-        Friend WithEvents SalaryLoanScheduleToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents RecurringPayrollEntryToolStripMenuItem As ToolStripMenuItem
         Friend WithEvents ToolStripButton1 As ToolStripButton
         Friend WithEvents ToolStripMenuItemAccountActivity As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemJournalTransactionSummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTransactionJournalCodes As ToolStripMenuItem
-        Friend WithEvents SalaryLoanScheduleTvToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

@@ -23,7 +23,7 @@ Public Class CFormEntryNew
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
     Protected SingleData As Boolean = False
-    Protected Presenter As Object
+    Public Presenter As Object
 
     Private _debugSwitch As Byte = 0
 

@@ -71,7 +71,7 @@ Namespace PresentationLayer.Views.Forms
             PresenterObj = New UserPresenter(Of UserModel)(Me)
             SetupMapper()
             'Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
-            'builder.RegisterType(Of SalaryLoanSchedulePresenter)().[As](Of ISalaryLoanSchedulePresenter)()
+            'builder.RegisterType(Of RecurringPayElementPresenter)().[As](Of ISalaryLoanSchedulePresenter)()
             'Dim x = builder.Build()
             '_salaryLoanSchedulePresenter = x.Resolve(Of ISalaryLoanSchedulePresenter)
             'GlobalVariables.EventAggregator = New EventAggregator
@@ -534,7 +534,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub RunForm(Of TV, TP)()
             Dim childMdiForm = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
-            Activator.CreateInstance(GetType(TP), {childMdiForm})
+            childMdiForm.presenter = Activator.CreateInstance(pType, {childMdiForm})
             childMdiForm.MdiParent = Me
             childMdiForm.Show()
         End Sub
@@ -899,8 +899,8 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub SalaryLoanScheduleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalaryLoanScheduleToolStripMenuItem.Click
-            RunForm(Of SalaryLoanScheduleEntry, SalaryLoanSchedulePresenter(Of SalaryLoanScheduleModel))()
+        Private Sub RecurringPayElementToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecurringPayrollEntryToolStripMenuItem.Click
+            RunForm(Of RecurringPayElementEntry, RecurringPayElementPresenter(Of RecurringPayElementModel))()
         End Sub
 
         Private Sub SetLanguageChangeButtons()
