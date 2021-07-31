@@ -6,7 +6,7 @@ Imports AATM.Libraries.Lookup
 
 Namespace BusinessLayer
 
-    Public Class SalaryLoanSchedule
+    Public Class RecurringPayElement
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -27,6 +27,7 @@ Namespace BusinessLayer
         Public Property DateCreated As DateTime?
         Public Property EmployeeIdNo As Int32
         Public Property IdNo As Int32
+        Public Property PayElementIdNo As Int16
         Public Property PeriodicPayment As Decimal
         Public Property StartDate As Date?
 

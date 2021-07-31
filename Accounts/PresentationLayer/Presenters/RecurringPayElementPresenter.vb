@@ -4,13 +4,13 @@ Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
-    Public Class SalaryLoanSchedulePresenter(Of TM As New)
-        Inherits PresenterNew(Of ISalaryLoanScheduleView, TM)
+    Public Class RecurringPayElementPresenter(Of TM As New)
+        Inherits PresenterNew(Of IRecurringPayElementView, TM)
 
-        Public Sub New(itemView As ISalaryLoanScheduleView)
+        Public Sub New(itemView As IRecurringPayElementView)
             MyBase.New(itemView)
-            Service = New AccountsService("SalaryLoanSchedule")
-            TableName = "SalaryLoanSchedule"
+            Service = New AccountsService("RecurringPayElement")
+            TableName = "RecurringPayElement"
             SortOrderKey = "IdNo"
             WithTreeView = False
         End Sub

@@ -3,8 +3,8 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class SalaryLoanScheduleEntry
-        Inherits CFormEntryTvNew
+    Partial Class RecurringPayElementEntry
+        Inherits CFormEntryNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SalaryLoanScheduleEntry))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(RecurringPayElementEntry))
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -40,28 +40,20 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPeriodicPayment = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.SplitContainer1.Panel1.SuspendLayout()
-            Me.SplitContainer1.SuspendLayout()
+            Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.cboPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblPayElementName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.CFlowLayout1.SuspendLayout()
+            Me.CFlowLayout2.SuspendLayout()
             Me.SuspendLayout()
             '
-            'SplitContainer1
+            'TranslatorDAC
             '
-            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
-            'FormTreeView
+            'AppDataDAC
             '
-            Me.FormTreeView.LineColor = System.Drawing.Color.Black
-            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
-            '
-            'ImageListTreeView
-            '
-            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
-            Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
-            Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
             'lblIdNo
             '
@@ -87,7 +79,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.FieldName = Nothing
             Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = False
-            Me.CFlowLayout1.SetFlowBreak(Me.TxtIdNo, True)
+            Me.CFlowLayout2.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
@@ -125,7 +117,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.FilterRule = Nothing
             Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboEmployeeIdNo.FindEnabled = False
-            Me.CFlowLayout1.SetFlowBreak(Me.cboEmployeeIdNo, True)
+            Me.CFlowLayout2.SetFlowBreak(Me.cboEmployeeIdNo, True)
             resources.ApplyResources(Me.cboEmployeeIdNo, "cboEmployeeIdNo")
             Me.cboEmployeeIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboEmployeeIdNo.FormattingEnabled = True
@@ -172,7 +164,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.FieldName = Nothing
             Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtAmount.FindEnabled = False
-            Me.CFlowLayout1.SetFlowBreak(Me.txtAmount, True)
+            Me.CFlowLayout2.SetFlowBreak(Me.txtAmount, True)
             resources.ApplyResources(Me.txtAmount, "txtAmount")
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
             Me.txtAmount.LinkedLabel = Me.lblAmount
@@ -203,7 +195,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpStartDate.DtpDefaultValue = Nothing
             Me.dtpStartDate.EditingMode = True
             Me.dtpStartDate.EditsAllowed = False
-            Me.CFlowLayout1.SetFlowBreak(Me.dtpStartDate, True)
+            Me.CFlowLayout2.SetFlowBreak(Me.dtpStartDate, True)
             Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
             Me.dtpStartDate.LinkedLabel = Me.lblStartDate
             resources.ApplyResources(Me.dtpStartDate, "dtpStartDate")
@@ -212,7 +204,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpStartDate.SecurityKey = Nothing
             Me.dtpStartDate.ShowLongDate = False
             Me.dtpStartDate.ShowTime = False
-            Me.dtpStartDate.TargetCalendar = CType(resources.GetObject("dtpStartDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpStartDate.TargetCalendar = Nothing
             Me.dtpStartDate.Translatable = False
             Me.dtpStartDate.Value = Nothing
             Me.dtpStartDate.ValueIsMandatory = False
@@ -241,7 +233,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPeriodicPayment.FieldName = Nothing
             Me.txtPeriodicPayment.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtPeriodicPayment.FindEnabled = False
-            Me.CFlowLayout1.SetFlowBreak(Me.txtPeriodicPayment, True)
+            Me.CFlowLayout2.SetFlowBreak(Me.txtPeriodicPayment, True)
             resources.ApplyResources(Me.txtPeriodicPayment, "txtPeriodicPayment")
             Me.txtPeriodicPayment.ForeColor = System.Drawing.Color.Black
             Me.txtPeriodicPayment.LinkedLabel = Me.lblPeriodicPayment
@@ -278,7 +270,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.FieldName = Nothing
             Me.txtDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtDateCreated.FindEnabled = False
-            Me.CFlowLayout1.SetFlowBreak(Me.txtDateCreated, True)
+            Me.CFlowLayout2.SetFlowBreak(Me.txtDateCreated, True)
             resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
             Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
             Me.txtDateCreated.LinkedLabel = Me.lblDateCreated
@@ -291,38 +283,84 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.Translatable = False
             Me.txtDateCreated.ValueIsMandatory = True
             '
-            'CFlowLayout1
+            'CFlowLayout2
             '
-            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
-            Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
-            Me.CFlowLayout1.Controls.Add(Me.lblEmployeeIdNo)
-            Me.CFlowLayout1.Controls.Add(Me.cboEmployeeIdNo)
-            Me.CFlowLayout1.Controls.Add(Me.lblAmount)
-            Me.CFlowLayout1.Controls.Add(Me.txtAmount)
-            Me.CFlowLayout1.Controls.Add(Me.lblStartDate)
-            Me.CFlowLayout1.Controls.Add(Me.dtpStartDate)
-            Me.CFlowLayout1.Controls.Add(Me.lblPeriodicPayment)
-            Me.CFlowLayout1.Controls.Add(Me.txtPeriodicPayment)
-            Me.CFlowLayout1.Controls.Add(Me.lblDateCreated)
-            Me.CFlowLayout1.Controls.Add(Me.txtDateCreated)
-            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-            Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout2.Controls.Add(Me.lblIdNo)
+            Me.CFlowLayout2.Controls.Add(Me.TxtIdNo)
+            Me.CFlowLayout2.Controls.Add(Me.lblEmployeeIdNo)
+            Me.CFlowLayout2.Controls.Add(Me.cboEmployeeIdNo)
+            Me.CFlowLayout2.Controls.Add(Me.lblPayElementName)
+            Me.CFlowLayout2.Controls.Add(Me.cboPayElementIdNo)
+            Me.CFlowLayout2.Controls.Add(Me.lblAmount)
+            Me.CFlowLayout2.Controls.Add(Me.txtAmount)
+            Me.CFlowLayout2.Controls.Add(Me.lblPeriodicPayment)
+            Me.CFlowLayout2.Controls.Add(Me.txtPeriodicPayment)
+            Me.CFlowLayout2.Controls.Add(Me.lblStartDate)
+            Me.CFlowLayout2.Controls.Add(Me.dtpStartDate)
+            Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
+            Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
+            resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
+            Me.CFlowLayout2.Name = "CFlowLayout2"
             '
-            'SalaryLoanScheduleEntry
+            'cboPayElementIdNo
+            '
+            Me.cboPayElementIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPayElementIdNo.BegFindValue = Nothing
+            Me.cboPayElementIdNo.ChangingSearchValueOnly = False
+            Me.cboPayElementIdNo.CurrentSearchTerm = ""
+            Me.cboPayElementIdNo.DefaultValue = Nothing
+            Me.cboPayElementIdNo.DisplayMember = "Name"
+            Me.cboPayElementIdNo.EditingMode = True
+            Me.cboPayElementIdNo.EndFindValue = Nothing
+            Me.cboPayElementIdNo.FieldDescription = Nothing
+            Me.cboPayElementIdNo.FieldName = Nothing
+            Me.cboPayElementIdNo.FilterRule = Nothing
+            Me.cboPayElementIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPayElementIdNo.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.cboPayElementIdNo, True)
+            resources.ApplyResources(Me.cboPayElementIdNo, "cboPayElementIdNo")
+            Me.cboPayElementIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboPayElementIdNo.FormattingEnabled = True
+            Me.cboPayElementIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPayElementIdNo.IgnoreCase = False
+            Me.cboPayElementIdNo.LinkedLabel = Me.lblEmployeeIdNo
+            Me.cboPayElementIdNo.Name = "cboPayElementIdNo"
+            Me.cboPayElementIdNo.OldValue = 0
+            Me.cboPayElementIdNo.OriginalDataSource = Nothing
+            Me.cboPayElementIdNo.OriginalList = Nothing
+            Me.cboPayElementIdNo.OverrideDropDownStyleList = False
+            Me.cboPayElementIdNo.PreviousSearchTerm = Nothing
+            Me.cboPayElementIdNo.PropertySelector = Nothing
+            Me.cboPayElementIdNo.ReadOnlyCombo = False
+            Me.cboPayElementIdNo.SuggestBoxHeight = 200
+            Me.cboPayElementIdNo.SuggestListOrderRule = Nothing
+            Me.cboPayElementIdNo.TextToSearch = Nothing
+            Me.cboPayElementIdNo.Translatable = False
+            Me.cboPayElementIdNo.ValueIsMandatory = False
+            Me.cboPayElementIdNo.ValueIsNullable = False
+            Me.cboPayElementIdNo.ValueIsNumeric = False
+            Me.cboPayElementIdNo.ValueMember = "IdNo"
+            '
+            'lblPayElementName
+            '
+            Me.lblPayElementName.BackColor = System.Drawing.Color.Transparent
+            Me.lblPayElementName.DisplayOnly = True
+            Me.lblPayElementName.EditingMode = False
+            resources.ApplyResources(Me.lblPayElementName, "lblPayElementName")
+            Me.lblPayElementName.Name = "lblPayElementName"
+            Me.lblPayElementName.Translatable = True
+            '
+            'RecurringPayElementEntry
             '
             resources.ApplyResources(Me, "$this")
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.Controls.Add(Me.CFlowLayout1)
-            Me.Name = "SalaryLoanScheduleEntry"
-            Me.Controls.SetChildIndex(Me.SplitContainer1, 0)
-            Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
-            Me.SplitContainer1.Panel1.ResumeLayout(False)
-            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.SplitContainer1.ResumeLayout(False)
+            Me.Controls.Add(Me.CFlowLayout2)
+            Me.Name = "RecurringPayElementEntry"
+            Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.CFlowLayout1.ResumeLayout(False)
-            Me.CFlowLayout1.PerformLayout()
+            Me.CFlowLayout2.ResumeLayout(False)
+            Me.CFlowLayout2.PerformLayout()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -340,6 +378,8 @@ Namespace PresentationLayer.Views.Forms
         Public WithEvents txtPeriodicPayment As CTextBox
         Friend WithEvents lblDateCreated As CLabel
         Public WithEvents txtDateCreated As CTextBox
-        Friend WithEvents CFlowLayout1 As CFlowLayout
+        Friend WithEvents CFlowLayout2 As CFlowLayout
+        Friend WithEvents lblPayElementName As CLabel
+        Public WithEvents cboPayElementIdNo As CaComboBox
     End Class
 End Namespace

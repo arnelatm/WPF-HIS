@@ -4,24 +4,22 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class SalaryLoanScheduleEntry
-        Implements ISalaryLoanScheduleView
+    Public Class RecurringPayElementEntry
+        Implements IRecurringPayElementView
 
         Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New()
-            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = cboEmployeeIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            '_presenter = New SalaryLoanSchedulePresenter(Me)
-            FormTreeView.Visible = False
+            'FormTreeView.Visible = False
         End Sub
 
 #Region "Fields"
 
-        Public Property Amount As Decimal Implements ISalaryLoanScheduleView.Amount
+        Public Property Amount As Decimal Implements IRecurringPayElementView.Amount
             Get
                 Return NumParser(Of Decimal)(txtAmount.Text)
             End Get
@@ -30,7 +28,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DateCreated As Date? Implements ISalaryLoanScheduleView.DateCreated
+        Public Property DateCreated As Date? Implements IRecurringPayElementView.DateCreated
             Get
                 Return txtDateCreated.Text
             End Get
@@ -39,7 +37,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeIdNo As Integer Implements ISalaryLoanScheduleView.EmployeeIdNo
+        Public Property EmployeeIdNo As Integer Implements IRecurringPayElementView.EmployeeIdNo
             Get
                 Return cboEmployeeIdNo.GetNullableValue(Of Int32)
             End Get
@@ -48,30 +46,39 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements ISalaryLoanScheduleView.IdNo
+        Public Property IdNo As Integer Implements IRecurringPayElementView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int16)(TxtIdNo.Text)
+                Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
-        Public Property PeriodicPayment As Decimal Implements ISalaryLoanScheduleView.PeriodicPayment
+        Public Property PeriodicPayment As Decimal Implements IRecurringPayElementView.PeriodicPayment
             Get
-                Return GlobalFunctions.NumParser(Of Decimal)(txtPeriodicPayment.Text)
+                Return NumParser(Of Decimal)(txtPeriodicPayment.Text)
             End Get
             Set
                 txtPeriodicPayment.Text = Value
             End Set
         End Property
 
-        Public Property StartDate As Date? Implements ISalaryLoanScheduleView.StartDate
+        Public Property StartDate As Date? Implements IRecurringPayElementView.StartDate
             Get
                 Return dtpStartDate.Value
             End Get
             Set
                 dtpStartDate.Value = Value
+            End Set
+        End Property
+
+        Public Property PayElementIdNo As Int16 Implements IRecurringPayElementView.PayElementIdNo
+            Get
+                Return cboPayElementIdNo.GetNullableValue(Of Int32)
+            End Get
+            Set
+                cboPayElementIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -83,6 +90,7 @@ Namespace PresentationLayer.Views.Forms
                 {"Amount", txtAmount},
                 {"EmployeeIdNo", cboEmployeeIdNo},
                 {"IdNo", TxtIdNo},
+                {"PayElementIdNo", cboPayElementIdNo},
                 {"PeriodicPayment", txtPeriodicPayment},
                 {"StartDate", dtpStartDate}
                 }
@@ -90,6 +98,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("Employee", cboEmployeeIdNo)
+            CreateDataSource("PayElement", cboPayElementIdNo)
         End Sub
 
     End Class

@@ -198,7 +198,7 @@
     <Compile Include="BusinessLayer\Customer1.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
-    <Compile Include="BusinessLayer\SalaryLoanSchedule.vb" />
+    <Compile Include="BusinessLayer\RecurringPayElement.vb" />
     <Compile Include="BusinessLayer\PayElementItem.vb" />
     <Compile Include="BusinessLayer\PayElement.vb" />
     <Compile Include="BusinessLayer\OtWorkHour.vb" />
@@ -252,7 +252,7 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeePayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\JournalPrefix.vb" />
-    <Compile Include="DataLayer\AdoNet\SalaryLoanScheduleDao.vb" />
+    <Compile Include="DataLayer\AdoNet\RecurringPayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayElementItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\OtWorkHourDao.vb" />
@@ -334,7 +334,7 @@
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\JournalPrefixModel.vb" />
-    <Compile Include="PresentationLayer\Models\SalaryLoanScheduleModel.vb" />
+    <Compile Include="PresentationLayer\Models\RecurringPayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\TransactionNotes.vb" />
     <Compile Include="PresentationLayer\Models\PayElementItemModel.vb" />
     <Compile Include="PresentationLayer\Models\PayElementModel.vb" />
@@ -365,7 +365,7 @@
     <Compile Include="PresentationLayer\Presenters\PayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\JournalPrefixPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\SalaryLoanSchedulePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\RecurringPayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TransactionsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
@@ -422,10 +422,10 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SalaryLoanScheduleEntry.designer.vb">
-      <DependentUpon>SalaryLoanScheduleEntry.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.designer.vb">
+      <DependentUpon>RecurringPayElementEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SalaryLoanScheduleEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\NotesTranslator.Designer.vb">
@@ -448,7 +448,7 @@
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalPrefixView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\ISalaryLoanScheduleView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IRecurringPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
@@ -1090,12 +1090,11 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.resx">
+      <DependentUpon>RecurringPayElementEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.resx">
       <DependentUpon>TransactionSummary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\SalaryLoanScheduleEntry.resx">
-      <DependentUpon>SalaryLoanScheduleEntry.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\NotesTranslator.resx">
       <DependentUpon>NotesTranslator.vb</DependentUpon>
