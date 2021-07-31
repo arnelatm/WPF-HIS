@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = cboEmployeeIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             '_presenter = New SalaryLoanSchedulePresenter(Me)
+            FormTreeView.Visible = False
         End Sub
 
 #Region "Fields"

@@ -830,8 +830,8 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.bsEarnings, System.ComponentModel.ISupportInitialize).EndInit()
             Me.tpgDeductions.ResumeLayout(False)
             CType(Me.DataGridViewDeductions, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsDeductions,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
+            CType(Me.bsDeductions, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.ResumeLayout(false)
         Me.PerformLayout
 
 End Sub
