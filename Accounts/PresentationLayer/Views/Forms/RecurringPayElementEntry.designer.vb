@@ -41,8 +41,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cboPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblPayElementName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblTotalAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtTotalAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.SuspendLayout()
@@ -298,10 +300,21 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.txtPeriodicPayment)
             Me.CFlowLayout2.Controls.Add(Me.lblStartDate)
             Me.CFlowLayout2.Controls.Add(Me.dtpStartDate)
+            Me.CFlowLayout2.Controls.Add(Me.lblTotalAmount)
+            Me.CFlowLayout2.Controls.Add(Me.txtTotalAmount)
             Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
             Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
             resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
             Me.CFlowLayout2.Name = "CFlowLayout2"
+            '
+            'lblPayElementName
+            '
+            Me.lblPayElementName.BackColor = System.Drawing.Color.Transparent
+            Me.lblPayElementName.DisplayOnly = True
+            Me.lblPayElementName.EditingMode = False
+            resources.ApplyResources(Me.lblPayElementName, "lblPayElementName")
+            Me.lblPayElementName.Name = "lblPayElementName"
+            Me.lblPayElementName.Translatable = True
             '
             'cboPayElementIdNo
             '
@@ -342,14 +355,43 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementIdNo.ValueIsNumeric = False
             Me.cboPayElementIdNo.ValueMember = "IdNo"
             '
-            'lblPayElementName
+            'lblTotalAmount
             '
-            Me.lblPayElementName.BackColor = System.Drawing.Color.Transparent
-            Me.lblPayElementName.DisplayOnly = True
-            Me.lblPayElementName.EditingMode = False
-            resources.ApplyResources(Me.lblPayElementName, "lblPayElementName")
-            Me.lblPayElementName.Name = "lblPayElementName"
-            Me.lblPayElementName.Translatable = True
+            Me.lblTotalAmount.BackColor = System.Drawing.Color.Transparent
+            Me.lblTotalAmount.DisplayOnly = True
+            Me.lblTotalAmount.EditingMode = False
+            resources.ApplyResources(Me.lblTotalAmount, "lblTotalAmount")
+            Me.lblTotalAmount.Name = "lblTotalAmount"
+            Me.lblTotalAmount.Translatable = True
+            '
+            'txtTotalAmount
+            '
+            Me.txtTotalAmount.BackColor = System.Drawing.Color.White
+            Me.txtTotalAmount.BegFindValue = Nothing
+            Me.txtTotalAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalAmount.ComputedValue = False
+            Me.txtTotalAmount.CustomFormat = Nothing
+            Me.txtTotalAmount.DataBoundControl = True
+            Me.txtTotalAmount.DisplayOnly = True
+            Me.txtTotalAmount.EditingMode = True
+            Me.txtTotalAmount.EndFindValue = Nothing
+            Me.txtTotalAmount.FieldDescription = Nothing
+            Me.txtTotalAmount.FieldName = Nothing
+            Me.txtTotalAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalAmount.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.txtTotalAmount, True)
+            resources.ApplyResources(Me.txtTotalAmount, "txtTotalAmount")
+            Me.txtTotalAmount.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalAmount.LinkedLabel = Me.lblTotalAmount
+            Me.txtTotalAmount.MaximumValue = Nothing
+            Me.txtTotalAmount.MinimumValue = Nothing
+            Me.txtTotalAmount.Name = "txtTotalAmount"
+            Me.txtTotalAmount.OldValue = Nothing
+            Me.txtTotalAmount.ReadOnly = True
+            Me.txtTotalAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalAmount.Translatable = False
+            Me.txtTotalAmount.ValueIsMandatory = True
+            Me.txtTotalAmount.ValueIsNumeric = True
             '
             'RecurringPayElementEntry
             '
@@ -381,5 +423,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblPayElementName As CLabel
         Public WithEvents cboPayElementIdNo As CaComboBox
+        Friend WithEvents lblTotalAmount As CLabel
+        Public WithEvents txtTotalAmount As CTextBox
     End Class
 End Namespace

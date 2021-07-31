@@ -15,6 +15,7 @@ Namespace PresentationLayer.Models
         Public Property PayElementIdNo As Int16
         Public Property PeriodicPayment As Decimal
         Public Property StartDate As Date?
+        Public Property TotalAmount As Decimal
 
     End Class
 
