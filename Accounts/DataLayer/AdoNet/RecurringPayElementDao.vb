@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordByIdNo(idNo) As RecurringPayElement Implements IDaoAll(Of RecurringPayElement).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, EmployeeIdNo, Amount, StartDate, PeriodicPayment, PayElementIdNo, DateCreated" &
-                    "   FROM [RecurringPayElement]" &
+                    "   FROM [RecurringPayElement_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
@@ -62,7 +62,7 @@ Namespace DataLayer.AdoNet
             .StartDate = Extensions.AsDate(reader("StartDate")),
             .PayElementIdNo = Extensions.AsInt(Of Int16)(reader("PayElementIdNo")),
             .PeriodicPayment = Extensions.AsDecimal(reader("PeriodicPayment")),
-            .DateCreated = Extensions.AsDate(reader("DateCreated"))
+            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated"))
             }
 
         Public Sub New()

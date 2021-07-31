@@ -253,7 +253,11 @@ Public Class CFormEntryNew
                 btnFind.Enabled = False
                 btnPrint.Enabled = False
                 btnUndo.Enabled = False
-                btnSave.Enabled = False
+                If adding Or editing Then
+                    btnSave.Enabled = True
+                Else
+                    btnSave.Enabled = False
+                End If
             ElseIf recordPositionNumber = 1 Then
                 btnFirst.Enabled = False
                 btnPrev.Enabled = False

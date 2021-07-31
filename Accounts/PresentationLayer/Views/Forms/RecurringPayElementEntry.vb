@@ -28,12 +28,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DateCreated As Date? Implements IRecurringPayElementView.DateCreated
+        Public Property DateCreated As DateTime? Implements IRecurringPayElementView.DateCreated
             Get
-                Return txtDateCreated.Text
+                Return Convert.ToDateTime(txtDateCreated.Text)
             End Get
             Set
-                txtDateCreated.Text = Value
+                If Value.HasValue Then
+                    txtDateCreated.Text = Value
+                Else
+                    txtDateCreated.Text = Date.Now().ToString()
+                End If
             End Set
         End Property
 
@@ -79,6 +83,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboPayElementIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property TotalAmount As Decimal Implements IRecurringPayElementView.TotalAmount
+            Get
+                Return NumParser(Of Decimal)(txtTotalAmount.Text)
+            End Get
+            Set
+                txtTotalAmount.Text = Value
             End Set
         End Property
 

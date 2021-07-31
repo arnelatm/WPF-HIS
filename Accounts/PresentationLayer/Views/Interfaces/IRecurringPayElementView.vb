@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayElementIdNo As Int16
         Property PeriodicPayment As Decimal
         Property StartDate As Date?
+        Property TotalAmount As Decimal
 
     End Interface
 
