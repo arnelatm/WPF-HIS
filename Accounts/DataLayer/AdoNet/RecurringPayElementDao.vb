@@ -9,13 +9,22 @@ Namespace DataLayer.AdoNet
 
     Public Class RecurringPayElementDao
         Inherits CommonDao
-        Implements IDaoAll(Of RecurringPayElement)
+        Implements IDaoAll(Of RecurringPayElement), IDaoGetRecords(Of RecurringPayElement)
 
         Private ReadOnly Db As New Db()
 
+        Private Const FieldList = "IdNo," &
+                                  "EmployeeIdNo," &
+                                  "Amount," &
+                                  "StartDate," &
+                                  "PeriodicPayment," &
+                                  "PayElementIdNo," &
+                                  "TotalAmount," &
+                                  "DateCreated"
+
         Public Function GetRecordByIdNo(idNo) As RecurringPayElement Implements IDaoAll(Of RecurringPayElement).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, EmployeeIdNo, Amount, StartDate, PeriodicPayment, PayElementIdNo, DateCreated" &
+                    " SELECT " & FieldList &
                     "   FROM [RecurringPayElement_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -53,6 +62,14 @@ Namespace DataLayer.AdoNet
             Return Db.Insert(sql, Take(recurringPayElement))
         End Function
 
+        Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of RecurringPayElement) Implements IDaoGetRecords(Of RecurringPayElement).GetDaoRecords
+            Dim sql As String = "SELECT " &
+                                FieldList &
+                                " FROM [RecurringPayElement_View]" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return Db.Read(sql, Make).ToList()
+        End Function
+
         Private Shared ReadOnly Make As Func(Of IDataReader, RecurringPayElement) =
                                     Function(reader) _
             New RecurringPayElement() With {
@@ -62,6 +79,7 @@ Namespace DataLayer.AdoNet
             .StartDate = Extensions.AsDate(reader("StartDate")),
             .PayElementIdNo = Extensions.AsInt(Of Int16)(reader("PayElementIdNo")),
             .PeriodicPayment = Extensions.AsDecimal(reader("PeriodicPayment")),
+            .TotalAmount = Extensions.AsDecimal(reader("TotalAmount")),
             .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated"))
             }
 

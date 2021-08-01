@@ -1,7 +1,6 @@
 ﻿Imports System.Dynamic
 Imports System.Globalization
 Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -16,7 +15,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtPayElementInsertTable As New DataTable
         Protected DtPayElementUpdateTable As New DataTable
-        Private ReadOnly _payrollPayElementModel As New ModelAccounts("PayrollPayElement")
+        'Private ReadOnly _payrollPayElementModel As New ModelAccounts("PayrollPayElement")
 
         Public Sub New(itemView As IPayrollDetailView)
             MyBase.New(itemView)
@@ -29,13 +28,15 @@ Namespace PresentationLayer.Presenters
 
             CreateDataTable(DtPayElementInsertTable, {{"Amount", GetType(Decimal)},
                                             {"PayElementIdNo", GetType(Int16)},
-                                            {"PayrollDetailIdNo", GetType(Int32)}
+                                            {"PayrollDetailIdNo", GetType(Int32)},
+                                            {"RecurringPayElementIdNo", GetType(Int32)}
                                            })
 
             CreateDataTable(DtPayElementUpdateTable, {{"Amount", GetType(Decimal)},
                                             {"IdNo", GetType(Int32)},
                                             {"PayElementIdNo", GetType(Int16)},
-                                            {"PayrollDetailIdNo", GetType(Int32)}
+                                            {"PayrollDetailIdNo", GetType(Int32)},
+                                            {"RecurringPayElementIdNo", GetType(Int32)}
                                            })
 
             If View.PayrollIdNo = 0 Then
@@ -70,6 +71,7 @@ Namespace PresentationLayer.Presenters
             workRow("Amount") = itemDataView.Amount
             workRow("PayElementIdNo") = itemDataView.PayElementIdNo
             workRow("PayrollDetailIdNo") = View.IdNo
+            workRow("RecurringPayElementIdNo") = itemDataView.RecurringPayElementIdNo
         End Sub
 
         Public Function PayrollPayElementFilter(ByVal obj As Object) As Boolean
@@ -80,19 +82,18 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim passedValue As Integer = retVal
+            'Dim passedValue As Integer = retVal
             retVal = UpdateEmpPayElements(DtPayElementUpdateTable, DtPayElementInsertTable)
         End Sub
 
         Protected Function UpdateEmpPayElements(updateTable As DataTable, insertTable As DataTable) As Integer
             Dim retVal As Integer
-            Dim _payrollPayElementsDao = New PayrollPayElementDao
-            retVal = _payrollPayElementsDao.UpdInsEmpPayElementTvp(updateTable, insertTable, View.IdNo, View.EmployeeIdNo)
+            Dim payrollPayElementsDao = New PayrollPayElementDao
+            retVal = payrollPayElementsDao.UpdInsEmpPayElementTvp(updateTable, insertTable, View.IdNo, View.EmployeeIdNo)
             Return retVal
         End Function
 
         Public Overrides Sub GoPrintRecord()
-            Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim reportName As String = "Payroll Report.Rpt"
