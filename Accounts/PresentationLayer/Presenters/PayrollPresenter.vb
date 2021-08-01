@@ -517,13 +517,15 @@ Namespace PresentationLayer.Presenters
             Dim dtPayrollPayElementUpdateTable As New DataTable
             _payrollPayElements.Clear()
             CreateDataTable(dtPayrollPayElementInsertTable, {{"Amount", GetType(Decimal)},
-                                             {"PayElementIdNo", GetType(Int16)},
-                                             {"PayrollDetailIdNo", GetType(Int32)}
-                                            })
+                                                             {"PayElementIdNo", GetType(Int16)},
+                                                             {"PayrollDetailIdNo", GetType(Int32)},
+                                                             {"RecurringPayElementIdNo", GetType(Int32)}
+                                                            })
             CreateDataTable(dtPayrollPayElementUpdateTable, {{"Amount", GetType(Decimal)},
                                              {"IdNo", GetType(Int32)},
                                              {"PayElementIdNo", GetType(Int16)},
-                                             {"PayrollDetailIdNo", GetType(Int32)}
+                                             {"PayrollDetailIdNo", GetType(Int32)},
+                                             {"RecurringPayElementIdNo", GetType(Int32)}
                                             })
             Dim dtPayrollDetailInsertTable As New DataTable
             Dim dtPayrollDetailUpdateTable As New DataTable
@@ -599,6 +601,7 @@ Namespace PresentationLayer.Presenters
                         dataRow("Amount") = item.Amount
                         dataRow("PayElementIdNo") = item.PayElementIdNo
                         dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
+                        dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
                         dtPayrollPayElementInsertTable.Rows.Add(dataRow)
                     Else
                         'If item.PayrollDetailIdNo = 1745 Then
@@ -610,6 +613,7 @@ Namespace PresentationLayer.Presenters
                         dataRow("IdNo") = item.IdNo
                         dataRow("PayElementIdNo") = item.PayElementIdNo
                         dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
+                        dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
                         dtPayrollPayElementUpdateTable.Rows.Add(dataRow)
                     End If
                 Next
@@ -620,6 +624,7 @@ Namespace PresentationLayer.Presenters
                     dataRow("Amount") = item.Amount
                     dataRow("PayElementIdNo") = item.PayElementIdNo
                     dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
+                    dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
                     dtPayrollPayElementInsertTable.Rows.Add(dataRow)
                 Next
             End If
@@ -653,9 +658,9 @@ Namespace PresentationLayer.Presenters
                     If payElement.CalculationType = _fixedAmountType Then
                         amount = ComputePayAmount(_payFrequency, empPayElement.Amount, empPayElement.Unit)
                         If Not regenerate Then
-                            AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo)
+                            AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo, Nothing)
                         Else
-                            UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo)
+                            UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo, Nothing)
                         End If
                     ElseIf payElement.CalculationType = _fixedRateType Then
                         Dim rate As Decimal = empPayElement.Rate
@@ -671,9 +676,9 @@ Namespace PresentationLayer.Presenters
                             End If
                             amount = rate * qty
                             If Not regenerate Then
-                                AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo)
+                                AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo, Nothing)
                             Else
-                                UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo)
+                                UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo, Nothing)
                             End If
                         End If
                     End If
@@ -681,47 +686,24 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
+        Private _recurringPayElements As New List(Of RecurringPayElement)
+        Private ReadOnly _recurringPayElementService As New AccountsService("RecurringPayElement")
+
         Private Sub GenerateRecurringPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
-            Dim recurringPayElements As New List(Of RecurringPayElement)
-            Dim recurringPayElementService As New AccountsService("RecurringPayElement")
-            recurringPayElements = recurringPayElementService.GetRecords("RecurringPayElement_View", "IdNo", {"IdNo", "EmployeeIdNo", "Amount", "TotalAmount", "PayElementIdNo", "PeriodicPayment"}, "TotalAmount < Amount ")
-            Dim amount As Decimal
-            For Each recurringPayElement As RecurringPayElement In recurringPayElements
-                'Dim payElement As New PayElementModel
-                'payElement = _payElementsService.GetRecordByIdNo(Of PayElementModel)(recurringPayElement.PayElementIdNo)
-                'If payElement.Active Then
-                '    Dim payElementModel As New PayElementModel
-                '    GlobalVariables.Mapper.Map(payElement, payElementModel)
-                '    Dim balance = Math.Min(recurringPayElement.Amount, recurringPayElement.
-                '    If payElement.CalculationType = _fixedAmountType Then
-                '        amount = ComputePayAmount(_payFrequency, empPayElement.Amount, empPayElement.Unit)
-                '    If Not regenerate Then
-                '        AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo)
-                '    Else
-                '        UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo)
-                '    End If
-                'ElseIf payElement.CalculationType = _fixedRateType Then
-                '    Dim rate As Decimal = empPayElement.Rate
-                '    If rate <> 0 Then
-                '        Dim qty As Decimal
-                '        If payElement.QuantityType = _overtimeRegularType OrElse
-                '            payElement.QuantityType = _overtimeHolidayType OrElse
-                '            payElement.QuantityType = _overTimeSpecialType OrElse
-                '            payElement.QuantityType = _hoursWorkedType Then
-                '            qty = ComputeQuantity(empPayElement.EmployeeIdNo, payElement.QuantityType)
-                '        Else
-                '            qty = ComputeQuantity(empPayElement.EmployeeIdNo, payElement.QuantityType)
-                '        End If
-                '        amount = rate * qty
-                '        If Not regenerate Then
-                '            AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo)
-                '        Else
-                '            UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo)
-                '        End If
-                '    End If
-                'End If
-                'End If
-            Next
+            _recurringPayElements = _recurringPayElementService.GetDaoRecords("TotalAmount < Amount and StartDate <= '" + View.StartDate.ToString() + "' and EmployeeIdNo = " & employeeIdNo.ToString())
+            If _recurringPayElements.Any Then
+                Dim amount As Decimal
+                For Each recurringPayElement As RecurringPayElement In _recurringPayElements
+                    If recurringPayElement.TotalAmount < recurringPayElement.Amount Then
+                        amount = Math.Min(recurringPayElement.Amount - recurringPayElement.TotalAmount, recurringPayElement.PeriodicPayment)
+                        If Not regenerate Then
+                            AddPayElement(employeeIdNo, amount, recurringPayElement.PayElementIdNo, 0, payrollDetailIdNo, recurringPayElement.IdNo)
+                        Else
+                            UpdatePayElement(employeeIdNo, amount, recurringPayElement.PayElementIdNo, payrollDetailIdNo, recurringPayElement.IdNo)
+                        End If
+                    End If
+                Next
+            End If
         End Sub
 
         Public Sub InitializePayroll(sender As Object)
@@ -780,7 +762,7 @@ Namespace PresentationLayer.Presenters
         '    Next
         'End Sub
 
-        Private Sub AddPayElement(employeeIdNo As Int32, amount As Decimal, payElementIdNo As Short, payrollPayElementIdNo As Int16, payrollDetailIdNo As Int32)
+        Private Sub AddPayElement(employeeIdNo As Int32, amount As Decimal, payElementIdNo As Short, payrollPayElementIdNo As Int16, payrollDetailIdNo As Int32, recurringPayElementIdNo As Int32)
             If amount <> 0 Then
                 'If payElementIdNo = 32 Then
                 '    Debugger.Break()
@@ -792,20 +774,21 @@ Namespace PresentationLayer.Presenters
                 payrollPayElement.EmployeeIdNo = employeeIdNo
                 payrollPayElement.IdNo = payrollPayElementIdNo
                 payrollPayElement.PayrollDetailIdNo = payrollDetailIdNo
+                payrollPayElement.RecurringPayElementIdNo = recurringPayElementIdNo
                 _payrollPayElements.Add(payrollPayElement)
             End If
         End Sub
 
-        Private Sub UpdatePayElement(employeeIdNo As Int32, amount As Decimal, payElementIdNo As Int16, payrollDetailIdNo As Int32)
+        Private Sub UpdatePayElement(employeeIdNo As Int32, amount As Decimal, payElementIdNo As Int16, payrollDetailIdNo As Int32, recurringPayElementIdNo As Int32)
             If amount <> 0 Then
                 Dim payrollPayElement As PayrollPayElementModel = _savedPayrollPayElements.Find(Function(value As PayrollPayElementModel)
                                                                                                     Return value.EmployeeIdNo = employeeIdNo And value.PayElementIdNo = payElementIdNo
                                                                                                 End Function)
 
                 If payrollPayElement Is Nothing Then
-                    AddPayElement(employeeIdNo, amount, payElementIdNo, 0, payrollDetailIdNo)
+                    AddPayElement(employeeIdNo, amount, payElementIdNo, 0, payrollDetailIdNo, recurringPayElementIdNo)
                 Else
-                    AddPayElement(employeeIdNo, amount, payElementIdNo, payrollPayElement.IdNo, payrollPayElement.PayrollDetailIdNo)
+                    AddPayElement(employeeIdNo, amount, payElementIdNo, payrollPayElement.IdNo, payrollPayElement.PayrollDetailIdNo, recurringPayElementIdNo)
                 End If
             End If
         End Sub
@@ -831,9 +814,9 @@ Namespace PresentationLayer.Presenters
                     Dim amount As Decimal
                     amount = CalculateComputedPayElement(employeeIdNo, earning)
                     If Not regenerate Then
-                        AddPayElement(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo)
+                        AddPayElement(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo, Nothing)
                     Else
-                        UpdatePayElement(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo)
+                        UpdatePayElement(employeeIdNo, amount, earning.IdNo, payrollDetailIdNo, Nothing)
                     End If
                 End If
             Next
@@ -843,9 +826,9 @@ Namespace PresentationLayer.Presenters
             For Each earning As PayElementModel In _globalEarnings
                 If earning.Active Then
                     If Not regenerate Then
-                        AddPayElement(employeeIdNo, earning.Rate, earning.IdNo, 0, payrollDetailIdNo)
+                        AddPayElement(employeeIdNo, earning.Rate, earning.IdNo, 0, payrollDetailIdNo, Nothing)
                     Else
-                        UpdatePayElement(employeeIdNo, earning.Rate, earning.IdNo, payrollDetailIdNo)
+                        UpdatePayElement(employeeIdNo, earning.Rate, earning.IdNo, payrollDetailIdNo, Nothing)
                     End If
                 End If
             Next

@@ -451,6 +451,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IRecurringPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPayrollPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.Designer.vb">
       <DependentUpon>CustomerEntryBound.vb</DependentUpon>

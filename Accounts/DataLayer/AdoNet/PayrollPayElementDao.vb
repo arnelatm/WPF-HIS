@@ -17,7 +17,8 @@ Namespace DataLayer.AdoNet
                                   "IdNo," &
                                   "PayElementIdNo," &
                                   "PayrollDetailIdNo," &
-                                  "PayrollIdNo"
+                                  "PayrollIdNo," &
+                                  "RecurringPayElementIdNo"
 
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PayrollPayElement) Implements IDaoChild(Of PayrollPayElement).GetRecordsWithGroupIdNo
             Dim sql As String =
@@ -69,7 +70,8 @@ Namespace DataLayer.AdoNet
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .PayrollDetailIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("PayrollDetailIdNo")),
-            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("PayrollIdNo"))
+            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("PayrollIdNo")),
+            .RecurringPayElementIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("RecurringPayElementIdNo"))
            }
 
     End Class
