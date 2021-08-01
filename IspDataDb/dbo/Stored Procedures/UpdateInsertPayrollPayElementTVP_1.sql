@@ -8,6 +8,8 @@
 
 
 
+
+
 CREATE PROCEDURE  [dbo].[UpdateInsertPayrollPayElementTVP]
   @MParam1 PayrollPayElementUpdate READONLY, @MParam2 PayrollPayElementInsert READONLY, @GroupIdNo as INT
 AS 
@@ -25,7 +27,8 @@ WHERE (payrollIdNo is Null) or (D.PayrollIdNo = @GroupIdNo and NOT EXISTS (SELEC
 UPDATE a 
 SET a.Amount = B.Amount,
 	a.PayElementIdNo = B.PayElementIdNo,
-	a.PayrollDetailIdNo = b.PayrollDetailIdNo
+	a.PayrollDetailIdNo = b.PayrollDetailIdNo,
+	a.RecurringPayElementIdNo = b.RecurringPayElementIdNo
 from PayrollPayElement a INNER JOIN @MParam1 As b
 on a.IdNo = b.IdNo
 
