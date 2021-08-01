@@ -1,7 +1,8 @@
-﻿CREATE VIEW dbo.PayrollPayElement_View
+﻿
+CREATE VIEW [dbo].[PayrollPayElement_View]
 AS
 SELECT        dbo.PayrollPayElement.IdNo, dbo.PayrollPayElement.PayrollDetailIdNo, dbo.PayrollPayElement.PayElementIdNo, dbo.PayrollPayElement.Amount, dbo.PayrollDetail.PayrollIdNo, dbo.PayrollDetail.EmployeeIdNo, 
-                         dbo.PayElement.PayElementKind
+                         dbo.PayElement.PayElementKind,dbo.PayrollPayElement.RecurringPayElementIdNo
 FROM            dbo.PayrollPayElement INNER JOIN
                          dbo.PayrollDetail ON dbo.PayrollPayElement.PayrollDetailIdNo = dbo.PayrollDetail.IdNo INNER JOIN
                          dbo.PayElement ON dbo.PayrollPayElement.PayElementIdNo = dbo.PayElement.IdNo
