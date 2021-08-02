@@ -61,7 +61,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>AATM.Accounts.PresentationLayer.Views.Forms.Main</StartupObject>
+    <StartupObject>AATM.Accounts.PresentationLayer.Views.Forms.Payroll</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -408,6 +408,12 @@
       <DependentUpon>LeaveEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\LeaveEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Payroll.designer.vb">
+      <DependentUpon>Payroll.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Payroll.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Main.designer.vb">
@@ -1084,6 +1090,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\LeaveEntryTv.resx">
       <DependentUpon>LeaveEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Payroll.en-GB.resx">
+      <DependentUpon>Payroll.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Payroll.resx">
+      <DependentUpon>Payroll.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Main.en-GB.resx">
       <DependentUpon>Main.vb</DependentUpon>

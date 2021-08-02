@@ -15,6 +15,7 @@
 
 
 
+
 CREATE VIEW [dbo].[ARDetails_View]	
   AS
 With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting where TransactionName = 'First Record')
@@ -48,42 +49,19 @@ UNION
       ,[Debit]
       ,[Credit]
 	  ,[RevCostCenterIdNo]
-      ,LTrim(a.[Notes])+IIf([CheckNumber]='','',' Chk#'+[CheckNumber])
+      ,Concat(LTrim(a.[Notes]),IIf([CheckNumber]='','',' Chk#'+[CheckNumber]))
 	  ,a.[Posted]
 	  ,[PayorIdNo]
 	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,'P'
-	  ,LTrim(b.Notes)+IIf([CheckNumber]='','',' Chk#'+[CheckNumber]) AS 'MainNote'
+	  ,Concat(LTrim(b.Notes),IIf([CheckNumber]='','',' Chk#'+[CheckNumber])) AS 'MainNote'
 	  ,[TransactionDate]
   FROM [dbo].[CashReceiptJournalItem] A
   RIGHT OUTER JOIN dbo.CashReceiptJournal b
   on a.JournalIdNo = b.IDNo
   WHERE PayorType='A'
-)
-UNION
-(SELECT 'CK'
-	  ,a.[IdNo]
-      ,[Sequence]
-	  ,[JournalIdNo]
-      ,a.[AccountIdNo]
-      ,[Debit]
-      ,[Credit]
-	  ,[RevCostCenterIdNo]
-      ,LTrim(a.[Notes])+IIf([CheckNumber]='','',' Chk#'+[CheckNumber])
-	  ,a.[Posted]
-	  ,[PayeeIdNo]
-	  ,[ORNumber]
-	  ,[TransactionDate]
-      ,[ReferenceNo]
-	  ,'R'
-	  ,LTrim(b.Notes)+IIf([CheckNumber]='','',' Chk#'+[CheckNumber])
-	  ,[TransactionDate]
-  FROM [dbo].[CkJournalItem] A
-  LEFT OUTER JOIN dbo.CkJournal b
-  on a.JournalIdNo = b.IDNo
-  WHERE PaymentType='R'
 )
 UNION
 (SELECT 'CD'

@@ -1794,7 +1794,7 @@
             Me.tbpPayroll.Location = New System.Drawing.Point(4, 22)
             Me.tbpPayroll.Name = "tbpPayroll"
             Me.tbpPayroll.Padding = New System.Windows.Forms.Padding(3)
-            Me.tbpPayroll.SecurityKey = "NPYA"
+            Me.tbpPayroll.SecurityKey = "EPI"
             Me.tbpPayroll.Size = New System.Drawing.Size(669, 330)
             Me.tbpPayroll.TabIndex = 2
             Me.tbpPayroll.Text = "Payroll Information"
