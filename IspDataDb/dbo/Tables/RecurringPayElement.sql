@@ -5,8 +5,8 @@
     [StartDate]       DATE       NULL,
     [PayElementIdNo]  SMALLINT   NULL,
     [PeriodicPayment] MONEY      NULL,
-    [DateCreated]     DATETIME   CONSTRAINT [DF_SalaryLoanSchedule_DateCreated] DEFAULT (getdate()) NULL,
+    [DateCreated]     DATETIME   CONSTRAINT [DF_RecurringPayElement_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]   ROWVERSION NULL,
-    CONSTRAINT [PK_SalaryLoan] PRIMARY KEY CLUSTERED ([IdNo] ASC)
+    CONSTRAINT [PK_RecurringPayElement] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
 

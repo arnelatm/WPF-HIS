@@ -20,6 +20,7 @@
     [Active]             BIT           NULL,
     [SpecialAccount]     CHAR (2)      NULL,
     [GroupSortOrder]     SMALLINT      NULL,
+    [PurchaseAccount]    BIT           NULL,
     [CreateDate]         DATETIME2 (7) NULL,
     [DateTimeStamp]      ROWVERSION    NULL,
     CONSTRAINT [PK__AccountIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
@@ -28,6 +29,8 @@
     CONSTRAINT [IX_AccountName] UNIQUE NONCLUSTERED ([AccountName] ASC),
     CONSTRAINT [IX_AccountNameAra] UNIQUE NONCLUSTERED ([AccountNameAra] ASC)
 );
+
+
 
 
 

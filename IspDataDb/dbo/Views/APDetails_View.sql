@@ -1,4 +1,27 @@
-﻿CREATE VIEW [dbo].[APDetails_View]	
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE VIEW [dbo].[APDetails_View]	
   AS
 With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting where TransactionName = 'First Record')
 (SELECT 'AP' AS 'JournalCode'
@@ -22,30 +45,6 @@ With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting wh
   FROM [ApJournalItem] aS ai
   LEFT OUTER JOIN ApJournal AS b
   on ai.JournalIdNo = b.IDNo 
-)
-UNION
-(SELECT 'CK'
-	  ,ai.[IdNo]
-      ,[Sequence]
-	  ,[JournalIdNo]
-      ,ai.[AccountIdNo]
-      ,ai.[Debit]
-      ,ai.[Credit]
-	  ,[RevCostCenterIdNo]
-      ,LTrim(ai.[Notes])+' Chk#'+[CheckNumber] 
-	  ,ai.[Posted]
-	  ,[PayeeIdNo]
-	  ,[ORNumber]
-	  ,[TransactionDate]
-      ,[ReferenceNo]
-	  ,'P'
-	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
-	  ,b.DiscountTaken
-	  ,[TransactionDate]
-  FROM [CkJournalItem] ai
-  LEFT OUTER JOIN CkJournal b
-  on ai.JournalIdNo = b.IDNo
-  WHERE PaymentType='A'
 )
 UNION
 (SELECT 'CD'
@@ -104,14 +103,14 @@ UNION
       ,[Debit]
       ,[Credit]
 	  ,[RevCostCenterIdNo]
-      ,LTrim(ai.[Notes])+' Chk#'+[CheckNumber] 
+      ,Concat(LTrim(ai.[Notes]),IIf(CheckNumber='','',' Chk#'+[CheckNumber]))
 	  ,ai.[Posted]
 	  ,[PayorIdNo]
 	  ,[ORNumber]
 	  ,[TransactionDate]
       ,[ReferenceNo]
 	  ,'R'
-	  ,LTrim(b.Notes)+' Chk#'+[CheckNumber] AS 'MainNote'
+	  ,Concat(LTrim(b.Notes),IIf(CheckNumber='','',' Chk#'+[CheckNumber])) AS 'MainNote'
 	  ,b.[DiscountTaken]
 	  ,[TransactionDate]
   FROM [CashReceiptJournalItem] as ai

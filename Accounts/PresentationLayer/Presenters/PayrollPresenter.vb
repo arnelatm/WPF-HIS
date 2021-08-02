@@ -807,9 +807,9 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GenerateComputedPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             For Each earning As PayElementModel In _computedPayElements
-                'If employeeIdNo = 397 And earning.IdNo = 36 Then
-                '    Debugger.Break()
-                'End If
+                If employeeIdNo = 6 And (earning.IdNo = 51 Or earning.IdNo = 31) Then '  = 397 And earning.IdNo = 36 Then
+                    Debugger.Break()
+                End If
                 If earning.Active Then
                     Dim amount As Decimal
                     amount = CalculateComputedPayElement(employeeIdNo, earning)
@@ -915,6 +915,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function ComputeDeductionAmount(deduction As PayElement, daysAbsentWithoutPay As Decimal, basePayment As EmployeePayElement) As Decimal
+            Debugger.Break()
             Dim daysToCompute As Decimal
             Dim amount As Decimal
             If _deductionComputationMethod = "DaysInMonth" Then
