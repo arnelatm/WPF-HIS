@@ -31,6 +31,8 @@ Public Interface IBaseDao
 
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject
 
+    Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String) As Object
+
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
     Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject

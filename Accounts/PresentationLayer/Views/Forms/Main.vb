@@ -1081,6 +1081,10 @@ Namespace PresentationLayer.Views.Forms
             ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         End Sub
 
+        Private Sub BankTransferReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BankTransferReportToolStripMenuItem.Click
+            RunForm(Of GeneratePayrollBankCsv, PayrollPresenter(Of PayrollModel))()
+        End Sub
+
     End Class
 
 End Namespace

@@ -458,6 +458,10 @@ Namespace Services
             Return BaseDao.GetFieldsWithIdNo(idNo, tableName, fields)
         End Function
 
+        Public Function GetSpRecords(spName As String, fields As String, sortKey As String, filter As String) As Object Implements IService.GetSpRecords
+            Return BaseDao.GetSpRecords(spName, fields, sortKey, filter)
+        End Function
+
         Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal fields As String(), Optional filterKey As String = Nothing) As Object Implements IService.GetRecords
             Return BaseDao.GetRecords(tableName, sortKey, fields, filterKey)
         End Function
