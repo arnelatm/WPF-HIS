@@ -72,6 +72,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _factorMultiplyType = EnumToCode(FactorTypeSelection.MultiplyBasePaymentRate)
         Private ReadOnly _factorDivideType = EnumToCode(FactorTypeSelection.DivideBasePaymentRate)
         Private ReadOnly ServiceAccounts
+        Private _roundToWholeNumber As Boolean = True
 
         Public Sub New(view As IPayrollView)
             MyBase.New(view)
@@ -80,6 +81,7 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = "PayrollCode"
             TableName = "Payroll"
             SortOrderKey = "EndDate"
+
             '_attendanceItemService = New AccountsService("AttendanceItem", Nothing, Nothing)
             '_otWorkHourService = New AccountsService("OtWorkHour", Nothing, Nothing)
 
@@ -768,7 +770,7 @@ Namespace PresentationLayer.Presenters
                 '    Debugger.Break()
                 'End If
                 Dim payrollPayElement As New PayrollPayElementModel
-                payrollPayElement.Amount = Math.Round(amount, 2)
+                payrollPayElement.Amount = Math.Round(amount, 0)
                 payrollPayElement.PayrollIdNo = _payrollIdNo
                 payrollPayElement.PayElementIdNo = payElementIdNo
                 payrollPayElement.EmployeeIdNo = employeeIdNo
@@ -807,7 +809,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GenerateComputedPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             For Each earning As PayElementModel In _computedPayElements
-                If employeeIdNo = 6 And (earning.IdNo = 51 Or earning.IdNo = 31) Then '  = 397 And earning.IdNo = 36 Then
+                If employeeIdNo = 405 And (earning.IdNo = 51 Or earning.IdNo = 31) Then '  = 397 And earning.IdNo = 36 Then
                     Debugger.Break()
                 End If
                 If earning.Active Then

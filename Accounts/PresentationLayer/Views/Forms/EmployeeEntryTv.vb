@@ -422,6 +422,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Sponsor As Boolean Implements IEmployeeView.Sponsor
+            Get
+                Return chkSponsor.Checked
+            End Get
+            Set
+                chkSponsor.Checked = Value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
@@ -478,6 +487,7 @@ Namespace PresentationLayer.Views.Forms
          {"ProvinceState", txtProvinceState},
          {"ReleasedDate", dtpReleasedDate},
          {"ReligionIdNo", cacReligionIdNo},
+         {"Sponsor", chkSponsor},
          {"Street", txtStreet},
          {"TownCity", txtTownCity},
          {"ZipCode", txtZipCode},

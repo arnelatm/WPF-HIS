@@ -1,16 +1,5 @@
 ﻿
 
-
-
-
-
-
-
-
-
-
-
-
 -- Declare @MParam As PayElementItem;
 
 CREATE PROCEDURE  [dbo].[UpdatePayElementItemTVP] 
@@ -25,10 +14,10 @@ FROM [DBO].PayElementItem A WHERE A.ParentIdNo = @GroupIdNo and NOT EXISTS (SELE
 
 -- Update existing PayElementItems
 UPDATE A
-SET a.ParentIdNo = @GroupIdNo,
-	a.PayElementIdNo = b.PayElementIdNo,
-	a.FactorType = B.FactorType,
+SET a.FactorType = B.FactorType,
 	a.FactorValue = B.FactorValue,
+	a.ParentIdNo = @GroupIdNo,
+	a.PayElementIdNo = b.PayElementIdNo,
 	a.Sequence = B.Sequence
 from [dbo].PayElementItem A INNER JOIN @MParam As B
 	ON A.IDNo = B.IDNo

@@ -19,7 +19,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, DutyHours, HiredDate, ReleasedDate, " &
-                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active" &
+                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Sponsor, Active" &
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -92,6 +92,7 @@ Namespace DataLayer.AdoNet
                     " ProvinceState = @ProvinceState," &
                     " ReleasedDate = @ReleasedDate," &
                     " ReligionIdNo = @ReligionIdNo," &
+                    " Sponsor = @Sponsor," &
                     " Street = @Street," &
                     " Title = @Title," &
                     " TownCity = @TownCity," &
@@ -105,10 +106,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Active)" &
+                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, Sponsor, Active)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod,  @Active)"
+                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod, @Sponsor, @Active)"
             Return _db.Insert(sql, Take(employee))
         End Function
 
@@ -147,6 +148,7 @@ Namespace DataLayer.AdoNet
             .ProvinceState = Extensions.AsString(reader("ProvinceState")),
             .ReleasedDate = Extensions.AsNullable(Of Date?)(reader("ReleasedDate")),
             .ReligionIdNo = Extensions.AsNullable(Of Int16?)(reader("ReligionIdNo")),
+            .Sponsor = Extensions.AsBool(reader("Sponsor")),
             .Street = Extensions.AsString(reader("Street")),
             .Title = Extensions.AsString(reader("Title")),
             .TownCity = Extensions.AsString(reader("TownCity")),
@@ -187,6 +189,7 @@ Namespace DataLayer.AdoNet
                                     "@ProvinceState", employee.ProvinceState,
                                     "@ReleasedDate", employee.ReleasedDate,
                                     "@ReligionIdNo", employee.ReligionIdNo,
+                                    "@Sponsor", employee.Sponsor,
                                     "@Street", employee.Street,
                                     "@Title", employee.Title,
                                     "@TownCity", employee.TownCity,

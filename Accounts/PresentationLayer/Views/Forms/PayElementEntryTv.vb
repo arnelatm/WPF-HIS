@@ -354,6 +354,7 @@ Namespace PresentationLayer.Views.Forms
             CreateEnumData(Of CalculationTypeSelection)(_calculationTypeByCode)
             CreateLookupData("PayElementGroup", "_earnReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
             CreateLookupData("PayElementGroup", "_dedReportGroupsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
+            CreateLookupData("PayElement", "_payElementsByCode")
             '_payGroupsByCode = GetLookupData("PayGroup", NameOf(_payGroupsByCode))
             '_payElementsByCode = GetLookupData("PayElement", NameOf(_payElementsByCode))
             '_accountsByCode = GetLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
