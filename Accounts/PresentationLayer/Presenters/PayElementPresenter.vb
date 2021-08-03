@@ -42,17 +42,17 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("PayGroupIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtEarnInsertTable.Columns.Add("PayElementItemIdNo", GetType(Int16))
-            DtEarnInsertTable.Columns.Add("PayElementIdNo", GetType(Int16))
             DtEarnInsertTable.Columns.Add("FactorType", GetType(String))
             DtEarnInsertTable.Columns.Add("FactorValue", GetType(Decimal))
+            DtEarnInsertTable.Columns.Add("ParentIdNo", GetType(Int16))
+            DtEarnInsertTable.Columns.Add("PayElementIdNo", GetType(Int16))
             DtEarnInsertTable.Columns.Add("Sequence", GetType(Int16))
 
-            DtEarnUpdateTable.Columns.Add("PayElementItemIdNo", GetType(Int16))
-            DtEarnUpdateTable.Columns.Add("PayElementIdNo", GetType(Int16))
-            DtEarnUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtEarnUpdateTable.Columns.Add("FactorType", GetType(String))
             DtEarnUpdateTable.Columns.Add("FactorValue", GetType(Decimal))
+            DtEarnUpdateTable.Columns.Add("IdNo", GetType(Int32))
+            DtEarnUpdateTable.Columns.Add("ParentIdNo", GetType(Int16))
+            DtEarnUpdateTable.Columns.Add("PayElementIdNo", GetType(Int16))
             DtEarnUpdateTable.Columns.Add("Sequence", GetType(Int16))
         End Sub
 
@@ -77,10 +77,10 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub FillEsData(ByRef itemDataView As Object, ByRef workRow As DataRow)
-            workRow("PayElementItemIdNo") = View.IdNo
-            workRow("PayElementIdNo") = itemDataView.PayElementIdNo
             workRow("FactorType") = itemDataView.FactorType
             workRow("FactorValue") = itemDataView.FactorValue
+            workRow("ParentIdNo") = View.IdNo
+            workRow("PayElementIdNo") = itemDataView.PayElementIdNo
         End Sub
 
         Public Function EarnSummaryFilter(ByVal obj As Object) As Boolean
@@ -94,7 +94,7 @@ Namespace PresentationLayer.Presenters
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_payElementAccountService, DtUpdateTable, DtInsertTable, passedValue, "PayGroupIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_payElementItemService, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "PayElementItemIdNo")
+                retVal = UpdateChildData(_payElementItemService, DtEarnUpdateTable, DtEarnInsertTable, passedValue, "ParentIdNo")
             End If
         End Sub
 

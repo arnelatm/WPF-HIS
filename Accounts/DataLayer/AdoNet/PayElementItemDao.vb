@@ -15,11 +15,12 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PayElementItem) Implements IDaoChild(Of PayElementItem).GetRecordsWithGroupIdNo
             Dim sql As String =
                     "SELECT " &
+                    "FactorType," &
+                    "FactorValue," &
+                    "IdNo," &
                     "ParentIdNo," &
                     "PayElementIdNo," &
-                    "IdNo," &
-                    "FactorValue," &
-                    "FactorType" &
+                    "Sequence" &
                     " FROM [PayElementItem]" &
                     " WHERE ParentIdNo = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
@@ -41,12 +42,13 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PayElementItem) =
                                     Function(reader) _
             New PayElementItem() With {
+            .FactorType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("FactorType")),
+            .FactorValue = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("FactorValue")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .ParentIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("ParentIdNo")),
             .PayElementIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayElementIdNo")),
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .FactorType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("FactorType")),
-            .FactorValue = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("FactorValue"))
-           }
+            .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence"))
+            }
 
     End Class
 

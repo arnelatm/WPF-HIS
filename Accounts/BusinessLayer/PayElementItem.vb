@@ -16,11 +16,11 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property ParentIdNo As Int16
-        Public Property PayElementIdNo As Int16
-        Public Property IdNo As Int16
         Public Property FactorValue As Decimal
         Public Property FactorType As String
+        Public Property IdNo As Int16
+        Public Property ParentIdNo As Int16
+        Public Property PayElementIdNo As Int16
         Public Property Sequence As Int16
 
     End Class

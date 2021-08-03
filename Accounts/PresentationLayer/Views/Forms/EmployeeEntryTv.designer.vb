@@ -118,7 +118,7 @@
             Me.dtpReleasedDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacDepartmentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblSponsor = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
@@ -172,6 +172,8 @@
             Me.CountryTelCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.EmployeeIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkSponsor = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -1523,8 +1525,10 @@
             Me.floEmployment.Controls.Add(Me.dtpReleasedDate)
             Me.floEmployment.Controls.Add(Me.lblDepartmentIdNo)
             Me.floEmployment.Controls.Add(Me.cacDepartmentIdNo)
-            Me.floEmployment.Controls.Add(Me.lblDesignationIdNo)
+            Me.floEmployment.Controls.Add(Me.CLabel2)
             Me.floEmployment.Controls.Add(Me.cacDesignationIdNo)
+            Me.floEmployment.Controls.Add(Me.lblSponsor)
+            Me.floEmployment.Controls.Add(Me.chkSponsor)
             Me.floEmployment.Controls.Add(Me.lblActive)
             Me.floEmployment.Controls.Add(Me.chkActive)
             Me.floEmployment.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1677,20 +1681,20 @@
             Me.cacDepartmentIdNo.ValueIsNumeric = False
             Me.cacDepartmentIdNo.ValueMember = "IdNo"
             '
-            'lblDesignationIdNo
+            'lblSponsor
             '
-            Me.lblDesignationIdNo.DisplayOnly = True
-            Me.lblDesignationIdNo.EditingMode = False
-            Me.lblDesignationIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblDesignationIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDesignationIdNo.Location = New System.Drawing.Point(4, 82)
-            Me.lblDesignationIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblDesignationIdNo.Name = "lblDesignationIdNo"
-            Me.lblDesignationIdNo.Size = New System.Drawing.Size(175, 24)
-            Me.lblDesignationIdNo.TabIndex = 285
-            Me.lblDesignationIdNo.Text = "Designation"
-            Me.lblDesignationIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblDesignationIdNo.Translatable = True
+            Me.lblSponsor.DisplayOnly = True
+            Me.lblSponsor.EditingMode = False
+            Me.lblSponsor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblSponsor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblSponsor.Location = New System.Drawing.Point(4, 108)
+            Me.lblSponsor.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblSponsor.Name = "lblSponsor"
+            Me.lblSponsor.Size = New System.Drawing.Size(175, 24)
+            Me.lblSponsor.TabIndex = 285
+            Me.lblSponsor.Text = "Sponsor?"
+            Me.lblSponsor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblSponsor.Translatable = True
             '
             'cacDesignationIdNo
             '
@@ -1714,7 +1718,7 @@
             Me.cacDesignationIdNo.HideWhenNotEditingOrAdding = False
             Me.cacDesignationIdNo.IgnoreCase = False
             Me.cacDesignationIdNo.IntegralHeight = False
-            Me.cacDesignationIdNo.LinkedLabel = Me.lblDesignationIdNo
+            Me.cacDesignationIdNo.LinkedLabel = Me.lblSponsor
             Me.cacDesignationIdNo.Location = New System.Drawing.Point(180, 82)
             Me.cacDesignationIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cacDesignationIdNo.Name = "cacDesignationIdNo"
@@ -1742,7 +1746,7 @@
             Me.lblActive.EditingMode = False
             Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblActive.Location = New System.Drawing.Point(4, 108)
+            Me.lblActive.Location = New System.Drawing.Point(4, 134)
             Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
             Me.lblActive.Name = "lblActive"
             Me.lblActive.Size = New System.Drawing.Size(175, 24)
@@ -1773,14 +1777,14 @@
             Me.chkActive.IgnoreCase = False
             Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkActive.LinkedLabel = Me.lblActive
-            Me.chkActive.Location = New System.Drawing.Point(181, 108)
+            Me.chkActive.Location = New System.Drawing.Point(181, 134)
             Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
             Me.chkActive.Name = "chkActive"
             Me.chkActive.NoLabel = False
             Me.chkActive.OldValue = ""
             Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.chkActive.Size = New System.Drawing.Size(13, 13)
-            Me.chkActive.TabIndex = 5
+            Me.chkActive.TabIndex = 6
             Me.chkActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.chkActive.Translatable = False
             Me.chkActive.UseVisualStyleBackColor = False
@@ -2837,6 +2841,55 @@
             Me.IdNoDataGridViewTextBoxColumn4.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn4.Visible = False
             '
+            'CLabel2
+            '
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.CLabel2.Location = New System.Drawing.Point(4, 82)
+            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel2.Name = "CLabel2"
+            Me.CLabel2.Size = New System.Drawing.Size(175, 24)
+            Me.CLabel2.TabIndex = 290
+            Me.CLabel2.Text = "Designation"
+            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel2.Translatable = True
+            '
+            'chkSponsor
+            '
+            Me.chkSponsor.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkSponsor.AutoCheck = False
+            Me.chkSponsor.BackColor = System.Drawing.Color.White
+            Me.chkSponsor.BegFindValue = Nothing
+            Me.chkSponsor.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkSponsor.DisplayOnly = False
+            Me.chkSponsor.EditingMode = False
+            Me.chkSponsor.EndFindValue = Nothing
+            Me.chkSponsor.FieldDescription = Nothing
+            Me.chkSponsor.FieldName = Nothing
+            Me.chkSponsor.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkSponsor.FindEnabled = True
+            Me.chkSponsor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.floEmployment.SetFlowBreak(Me.chkSponsor, True)
+            Me.chkSponsor.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+            Me.chkSponsor.ForeColor = System.Drawing.Color.Black
+            Me.chkSponsor.IFindableControl_FindEnabled = False
+            Me.chkSponsor.IgnoreCase = False
+            Me.chkSponsor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.chkSponsor.LinkedLabel = Me.lblActive
+            Me.chkSponsor.Location = New System.Drawing.Point(181, 108)
+            Me.chkSponsor.Margin = New System.Windows.Forms.Padding(1)
+            Me.chkSponsor.Name = "chkSponsor"
+            Me.chkSponsor.NoLabel = False
+            Me.chkSponsor.OldValue = ""
+            Me.chkSponsor.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkSponsor.Size = New System.Drawing.Size(13, 13)
+            Me.chkSponsor.TabIndex = 5
+            Me.chkSponsor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkSponsor.Translatable = False
+            Me.chkSponsor.UseVisualStyleBackColor = False
+            '
             'EmployeeEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2947,7 +3000,7 @@
         Friend WithEvents dtpReleasedDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblDepartmentIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacDepartmentIdNo As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents lblDesignationIdNo As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents lblSponsor As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacDesignationIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblActive As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents chkActive As Libraries.CBaseControlsLibrary.CCheckBox
@@ -3002,5 +3055,7 @@
         Friend WithEvents tbpEarnings As Libraries.CBaseControlsLibrary.CTabPage
         Friend WithEvents tbpDeductions As Libraries.CBaseControlsLibrary.CTabPage
         Friend WithEvents tbpPhones As Libraries.CBaseControlsLibrary.CTabPage
+        Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents chkSponsor As Libraries.CBaseControlsLibrary.CCheckBox
     End Class
 End NameSpace

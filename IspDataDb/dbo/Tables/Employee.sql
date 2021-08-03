@@ -39,6 +39,7 @@
     [PaySalariedOrHourly] CHAR (1)       NULL,
     [PayRateType]         CHAR (1)       NULL,
     [PayRateAmount]       MONEY          NULL,
+    [Sponsor]             BIT            NULL,
     [OTRateRegular]       DECIMAL (7, 2) NULL,
     [OTRateHoliday]       DECIMAL (7, 2) NULL,
     [OTRateSpecial]       DECIMAL (7, 2) NULL,
@@ -48,6 +49,8 @@
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_EmployeeIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

@@ -4,11 +4,13 @@
 
 
 
+
 CREATE View [dbo].[SecurityObject_View] as 
 with cte as
 (
 select IDNo
       ,SecurityObjectName
+	  ,SecurityObjectCode
       ,SecurityObjectNameAra
       ,ParentIdNo
       ,Notes
@@ -22,6 +24,7 @@ where ParentIdNo IS NULL
 union all
 select t.IDNo
       ,t.SecurityObjectName
+  	  ,t.SecurityObjectCode
       ,t.SecurityObjectNameAra
       ,t.ParentIdNo
       ,t.Notes
@@ -37,6 +40,7 @@ join SecurityObject t on cte.IdNo = t.ParentIdNo
    
 select IDNo
       ,SecurityObjectName
+  	  ,SecurityObjectCode
       ,SecurityObjectNameAra
       ,ParentIdNo
       ,Notes
