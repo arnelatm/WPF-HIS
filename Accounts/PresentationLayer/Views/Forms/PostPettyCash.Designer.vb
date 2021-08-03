@@ -48,6 +48,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.TabIndex = 1
             Me.CLabel1.Text = "Start Reference Number"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
             '
             'cboStartIdNo
             '
@@ -75,6 +76,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboStartIdNo.ReadOnlyCombo = False
             Me.cboStartIdNo.Size = New System.Drawing.Size(332, 24)
             Me.cboStartIdNo.TabIndex = 2
+            Me.cboStartIdNo.Translatable = False
             Me.cboStartIdNo.ValueIsMandatory = False
             Me.cboStartIdNo.ValueIsNullable = False
             Me.cboStartIdNo.ValueIsNumeric = False
@@ -92,6 +94,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.TabIndex = 3
             Me.CLabel2.Text = "End Reference Number"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel2.Translatable = True
             '
             'CFlowLayout1
             '
@@ -133,6 +136,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEndIdNo.ReadOnlyCombo = False
             Me.cboEndIdNo.Size = New System.Drawing.Size(332, 24)
             Me.cboEndIdNo.TabIndex = 4
+            Me.cboEndIdNo.Translatable = False
             Me.cboEndIdNo.ValueIsMandatory = False
             Me.cboEndIdNo.ValueIsNullable = False
             Me.cboEndIdNo.ValueIsNumeric = False
@@ -150,6 +154,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel3.TabIndex = 5
             Me.CLabel3.Text = "Posting Account"
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel3.Translatable = True
             '
             'cboAccountIdNo
             '
@@ -176,6 +181,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.Size = New System.Drawing.Size(332, 24)
             Me.cboAccountIdNo.TabIndex = 6
+            Me.cboAccountIdNo.Translatable = False
             Me.cboAccountIdNo.ValueIsMandatory = False
             Me.cboAccountIdNo.ValueIsNullable = False
             Me.cboAccountIdNo.ValueIsNumeric = False
@@ -194,6 +200,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel4.TabIndex = 7
             Me.CLabel4.Text = "Petty Cash Posting"
             Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.CLabel4.Translatable = True
             '
             'btnOk
             '

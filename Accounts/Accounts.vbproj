@@ -365,6 +365,7 @@
     <Compile Include="PresentationLayer\Presenters\PayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\JournalPrefixPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\GeneratePayrollBankCsvPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\RecurringPayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TransactionsPresenter.vb" />
@@ -421,6 +422,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Main.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\GeneratePayrollBankCsv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\GeneratePayrollBankCsv.Designer.vb">
+      <DependentUpon>GeneratePayrollBankCsv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.designer.vb">
       <DependentUpon>TransactionSummary.vb</DependentUpon>
@@ -1102,6 +1109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\GeneratePayrollBankCsv.resx">
+      <DependentUpon>GeneratePayrollBankCsv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.resx">
       <DependentUpon>RecurringPayElementEntry.vb</DependentUpon>

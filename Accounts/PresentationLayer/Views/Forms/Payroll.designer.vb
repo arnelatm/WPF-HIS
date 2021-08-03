@@ -163,6 +163,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.GenerateCSVFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -723,7 +724,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPayrollReport
             '
-            Me.ToolStripMenuItemPayrollReport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPeriodicPayroll})
+            Me.ToolStripMenuItemPayrollReport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPeriodicPayroll, Me.GenerateCSVFileToolStripMenuItem})
             Me.ToolStripMenuItemPayrollReport.Name = "ToolStripMenuItemPayrollReport"
             resources.ApplyResources(Me.ToolStripMenuItemPayrollReport, "ToolStripMenuItemPayrollReport")
             '
@@ -885,6 +886,11 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'GenerateCSVFileToolStripMenuItem
+            '
+            Me.GenerateCSVFileToolStripMenuItem.Name = "GenerateCSVFileToolStripMenuItem"
+            resources.ApplyResources(Me.GenerateCSVFileToolStripMenuItem, "GenerateCSVFileToolStripMenuItem")
+            '
             'Payroll
             '
             Me.AllowDrop = True
@@ -1044,5 +1050,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemAccountActivity As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemJournalTransactionSummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTransactionJournalCodes As ToolStripMenuItem
+        Friend WithEvents GenerateCSVFileToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

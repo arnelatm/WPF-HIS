@@ -148,6 +148,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event InitializePayroll(sender As Object) Implements IPayrollView.InitializePayroll
 
+        Public Event GenerateCsvFile(payrollIdNo As Integer) Implements IPayrollView.GenerateCsvFile
+
         Private Sub BindPayrollAttendance()
             SuspendLayout()
             bsPayrollAttendance.DataSource = Nothing

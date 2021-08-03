@@ -182,7 +182,7 @@ Namespace PresentationLayer.Views.Forms
             form.ShowDialog()
         End Sub
 
-        Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm As AccountReconciliationEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New AccountReconciliationEntry With {
@@ -192,7 +192,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub AccountsPayableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub AccountsPayableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm As ApJournalEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New ApJournalEntry With {
@@ -202,7 +202,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm As ArJournalEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New ArJournalEntry With {
@@ -242,8 +242,8 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of BranchEntryTv, BranchPresenter(Of BranchModel))()
         End Sub
 
-        Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            
+        Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
             Dim childMdiForm
             childMdiForm = New DisbursementJournalEntry("CdJournal") With {
                 .MdiParent = Me
@@ -259,8 +259,8 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            
+        Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
             ShowEntryForm(CashReceiptJournalEntry)
         End Sub
 
@@ -280,7 +280,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm
             childMdiForm = New PettyCashClosingEntry() With {
                 .MdiParent = Me
@@ -288,7 +288,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim myForm = New GeneralJournalEntry(True)
             myForm.Show()
         End Sub
@@ -363,7 +363,7 @@ Namespace PresentationLayer.Views.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm As ErJournalEntry
             childMdiForm = New ErJournalEntry With {
                 .MdiParent = Me
@@ -384,8 +384,8 @@ Namespace PresentationLayer.Views.Forms
         '    childMdiForm.Show()
         'End Sub
 
-        Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            
+        Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
             Dim myForm = New GeneralJournalEntry(False)
             myForm.Show()
         End Sub
@@ -471,7 +471,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of PensionSchemeEntryTv, PensionSchemePresenter(Of PensionSchemeModel))()
         End Sub
 
-        Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm ' As New DisbursementJournalEntry("PcJournal")
             'Set the Parent Form of the Child window.
             childMdiForm = New DisbursementJournalEntry("PcJournal") With {
@@ -550,7 +550,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DepositTypeEntryTv, DepositTypePresenter(Of DepositTypeModel))()
         End Sub
 
-        Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim childMdiForm As SalesJournalEntry
             'Set the Parent Form of the Child window.
             childMdiForm = New SalesJournalEntry With {
@@ -1079,6 +1079,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UnhandledExceptionHandler(sender As Object, e As UnhandledExceptionEventArgs)
             ErrLogger.LogError(CType(e.ExceptionObject, Exception))
+        End Sub
+
+        Private Sub GenerateCSVFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateCSVFileToolStripMenuItem.Click
+            RunForm(Of GeneratePayrollBankCsv, GeneratePayrollBankCsvPresenter(Of PayrollModel))()
         End Sub
 
     End Class

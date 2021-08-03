@@ -60,6 +60,8 @@ Namespace Services
 
         Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object
 
+        Function GetSpRecords(spName As String, fields As String, sortKey As String, filter As String) As Object
+
         Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
         Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
@@ -99,7 +101,9 @@ Namespace Services
         Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 
         Function GetField(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String, Optional filter As String = Nothing) As TR
+
         Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, groupIdNo As Integer) As Integer
+
     End Interface
 
 End Namespace

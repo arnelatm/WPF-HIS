@@ -352,6 +352,17 @@ Namespace AdoNet
             Return obj
         End Function
 
+        Public Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String) As Object Implements IBaseDao.GetSpRecords
+            'Dim fields as String = fieldList.Split(",")
+            Dim sql As String = " Select " & fieldList & " From " & spName & "(" & filter & ") Order By " & sortKey
+            If sortKey Is Nothing Or sortKey = "" Then
+                sql = " Select " & fieldList & " From " & spName & "(" & filter & ")"
+            Else
+                sql = " Select " & fieldList & " From " & spName & "(" & filter & ") Order By " & sortKey
+            End If
+            Return _db.SqlRead(sql)
+        End Function
+
         Public Sub CreateDynamicObject(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As Object)
             CType(obj, IDictionary(Of String, Object))(propertyName) = propertyValue
         End Sub

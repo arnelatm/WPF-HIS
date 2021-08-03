@@ -21,6 +21,8 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event GenerateRegularPayElements(sender As Object)
 
+        Event GenerateCsvFile(payrollIdNo As Int32)
+
         Event InitializePayroll(sender As Object)
 
     End Interface
