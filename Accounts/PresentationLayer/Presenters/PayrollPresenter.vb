@@ -130,14 +130,14 @@ Namespace PresentationLayer.Presenters
             'CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
             '                                {"EarningIdNo", GetType(Int16)},
             '                                {"EmployeeIdNo", GetType(Int32)},
-            '                                {"PayrollIdNo", GetType(Int32)}
+            '                                {"PayrollIdNo", GetType(Int16)}
             '                               })
 
             'CreateDataTable(DtEarnInsertTable, {{"Amount", GetType(Decimal)},
             '                                {"EarningIdNo", GetType(Int16)},
             '                                {"EmployeeIdNo", GetType(Int32)},
             '                                {"IdNo", GetType(Int32)},
-            '                                {"PayrollIdNo", GetType(Int32)}
+            '                                {"PayrollIdNo", GetType(Int16)}
             '                               })
 
         End Sub

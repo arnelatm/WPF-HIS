@@ -18,7 +18,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property EndDate As Date
-        Public Property IdNo As Int32
+        Public Property IdNo As Int16
         Public Property PayCycleIdNo As Int16
         Public Property PayrollCode As String
         Public Property PayrollName As String

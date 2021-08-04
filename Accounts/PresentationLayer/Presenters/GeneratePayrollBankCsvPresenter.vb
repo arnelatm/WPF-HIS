@@ -1,15 +1,11 @@
 ﻿' GeneralJournal business object as seen by the Service client.
-Imports System.Dynamic
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Presenters
-Imports Excel = Microsoft.Office.Interop.Excel
-Imports Microsoft.Office
+Imports Microsoft.Office.Interop
 
 Namespace PresentationLayer.Presenters
 
@@ -105,7 +101,7 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Private Sub OnSelectedPayrollChanged(payrollIdNo As Int32)
+        Private Sub OnSelectedPayrollChanged(payrollIdNo As Int16)
             Dim payroll As PayrollModel
             payroll = Service.GetRecordByIdNo(Of PayrollModel)(payrollIdNo)
             View.EndDate = payroll.EndDate

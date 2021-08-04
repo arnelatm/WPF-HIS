@@ -74,6 +74,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of IEmployeePhoneView, EmployeePhoneModel)()
         CreateMap(Of EmployeePhone, EmployeePhoneModel)().ReverseMap()
         CreateMap(Of EmployeePhoneModel, EmployeePhoneView)()
+        CreateMap(Of EmployeeLeave, EmployeeLeaveModel)().ReverseMap()
+        CreateMap(Of EmployeeLeaveModel, IEmployeeLeaveView)().ReverseMap()
 
         CreateMap(Of ErJournal, ErJournalModel)().ReverseMap()
         CreateMap(Of ErJournalModel, IErJournalView)().ReverseMap()
