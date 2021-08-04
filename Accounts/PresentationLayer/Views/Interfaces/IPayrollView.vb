@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IPayrollView
         Inherits IView
         Property EndDate As Date
-        Property IdNo As Int32
+        Property IdNo As Int16
         Property PayCycleIdNo As Int16
         Property PayrollCode As String
         Property PayrollName As String
@@ -21,9 +21,11 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event GenerateRegularPayElements(sender As Object)
 
-        Event GenerateCsvFile(payrollIdNo As Int32)
+        Event GenerateCsvFile(payrollIdNo As Int16)
 
         Event InitializePayroll(sender As Object)
+
+        Event SelectedPayrollChanged(payrollIdNo As Int16)
 
     End Interface
 

@@ -46,7 +46,7 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property IdNo As Int32 Implements IPayrollView.IdNo
+        Public Property IdNo As Int16 Implements IPayrollView.IdNo
             Get
                 Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
@@ -148,7 +148,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event InitializePayroll(sender As Object) Implements IPayrollView.InitializePayroll
 
-        Public Event GenerateCsvFile(payrollIdNo As Integer) Implements IPayrollView.GenerateCsvFile
+        Public Event GenerateCsvFile(payrollIdNo As Int16) Implements IPayrollView.GenerateCsvFile
+
+        Public Event SelectedPayrollChanged(payrollIdNo As Int16) Implements IPayrollView.SelectedPayrollChanged
 
         Private Sub BindPayrollAttendance()
             SuspendLayout()
