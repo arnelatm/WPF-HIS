@@ -73,7 +73,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, RecurringPayElement) =
                                     Function(reader) _
             New RecurringPayElement() With {
-            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .StartDate = Extensions.AsDate(reader("StartDate")),

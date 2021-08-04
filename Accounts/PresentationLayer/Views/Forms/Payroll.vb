@@ -1085,6 +1085,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of GeneratePayrollBankCsv, GeneratePayrollBankCsvPresenter(Of PayrollModel))()
         End Sub
 
+        Private Sub EmployeeLeaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeLeaveToolStripMenuItem.Click
+            RunForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel))()
+        End Sub
+
     End Class
 
 End Namespace

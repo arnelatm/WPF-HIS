@@ -345,3 +345,11 @@ Public Enum TransactionTypeSelection
     <EnumCode("D")> Debit
     <EnumCode("C")> Credit
 End Enum
+
+Public Enum LeaveStatusSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("1")> Submitted
+    <EnumCode("2")> ForApproval
+    <EnumCode("3")> Disapproved
+    <EnumCode("4")> Approved
+End Enum

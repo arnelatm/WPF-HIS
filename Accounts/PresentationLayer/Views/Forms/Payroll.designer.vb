@@ -134,6 +134,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemCheckPrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPeriodicPayroll = New System.Windows.Forms.ToolStripMenuItem()
+            Me.GenerateCSVFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTransactionNotesTranslator = New System.Windows.Forms.ToolStripMenuItem()
@@ -163,7 +164,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.GenerateCSVFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.EmployeeLeaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -517,7 +518,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPayrollMenu
             '
-            Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.RecurringPayrollEntryToolStripMenuItem})
+            Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.RecurringPayrollEntryToolStripMenuItem, Me.EmployeeLeaveToolStripMenuItem})
             Me.ToolStripMenuItemPayrollMenu.Name = "ToolStripMenuItemPayrollMenu"
             resources.ApplyResources(Me.ToolStripMenuItemPayrollMenu, "ToolStripMenuItemPayrollMenu")
             '
@@ -733,6 +734,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPeriodicPayroll.Name = "ToolStripMenuItemPeriodicPayroll"
             resources.ApplyResources(Me.ToolStripMenuItemPeriodicPayroll, "ToolStripMenuItemPeriodicPayroll")
             '
+            'GenerateCSVFileToolStripMenuItem
+            '
+            Me.GenerateCSVFileToolStripMenuItem.Name = "GenerateCSVFileToolStripMenuItem"
+            resources.ApplyResources(Me.GenerateCSVFileToolStripMenuItem, "GenerateCSVFileToolStripMenuItem")
+            '
             'ToolStripMenuItemUtilities
             '
             Me.ToolStripMenuItemUtilities.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemRecreateSecurityObjectMenu, Me.ToolStripMenuItemTransactionNotesTranslator})
@@ -886,10 +892,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'GenerateCSVFileToolStripMenuItem
+            'EmployeeLeaveToolStripMenuItem
             '
-            Me.GenerateCSVFileToolStripMenuItem.Name = "GenerateCSVFileToolStripMenuItem"
-            resources.ApplyResources(Me.GenerateCSVFileToolStripMenuItem, "GenerateCSVFileToolStripMenuItem")
+            Me.EmployeeLeaveToolStripMenuItem.Name = "EmployeeLeaveToolStripMenuItem"
+            resources.ApplyResources(Me.EmployeeLeaveToolStripMenuItem, "EmployeeLeaveToolStripMenuItem")
             '
             'Payroll
             '
@@ -1051,5 +1057,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemJournalTransactionSummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTransactionJournalCodes As ToolStripMenuItem
         Friend WithEvents GenerateCSVFileToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents EmployeeLeaveToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace
