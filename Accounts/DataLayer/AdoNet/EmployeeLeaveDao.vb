@@ -47,12 +47,12 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " UPDATE [EmployeeLeave]" &
                     " SET EmployeeIdNo = @EmployeeIdNo," &
-                    " EndDate = @EndDate" &
+                    " EndDate = @EndDate," &
                     " FullDay = @FullDay," &
                     " LeaveIdNo = @LeaveIdNo," &
                     " LeaveReason = @LeaveReason," &
                     " LeaveStatus = @LeaveStatus," &
-                    " StartDate = @StartDate," &
+                    " StartDate = @StartDate" &
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(EmployeeLeave))
         End Function
@@ -84,7 +84,7 @@ Namespace DataLayer.AdoNet
             .LeaveIdNo = Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .LeaveReason = Extensions.AsString(reader("LeaveReason")),
             .LeaveStatus = Extensions.AsChar(reader("LeaveStatus")),
-            .StartDate = Extensions.AsDateTime(reader("StartDate")),
+            .StartDate = Extensions.AsDateTime(reader("StartDate"))
             }
 
         Public Sub New()
@@ -93,12 +93,14 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(EmployeeLeave As EmployeeLeave) As Object()
             Return New Object() {
-                                    "@IdNo", EmployeeLeave.IdNo,
-                                    "@EndDate", EmployeeLeave.EndDate,
                                     "@EmployeeIdNo", EmployeeLeave.EmployeeIdNo,
-                                    "@StartDate", EmployeeLeave.StartDate,
+                                    "@EndDate", EmployeeLeave.EndDate,
+                                    "@FullDay", EmployeeLeave.FullDay,
+                                    "@IdNo", EmployeeLeave.IdNo,
                                     "@LeaveIdNo", EmployeeLeave.LeaveIdNo,
-                                    "@EndDate", EmployeeLeave.EndDate
+                                    "@LeaveReason", EmployeeLeave.LeaveReason,
+                                    "@LeaveStatus", EmployeeLeave.LeaveStatus,
+                                    "@StartDate", EmployeeLeave.StartDate
                                 }
         End Function
 

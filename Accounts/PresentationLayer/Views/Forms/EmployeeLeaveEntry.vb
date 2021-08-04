@@ -43,10 +43,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property EndDate As DateTime Implements IEmployeeLeaveView.EndDate
             Get
-                Return dtpStartDate.Value
+                Return dtpEndDate.Value
             End Get
             Set
-                dtpStartDate.Value = Value
+                dtpEndDate.Value = Value
             End Set
         End Property
 
@@ -59,9 +59,9 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements IEmployeeLeaveView.IdNo
+        Public Property IdNo As Int32 Implements IEmployeeLeaveView.IdNo
             Get
-                Return NumParser(Of Int16)(TxtIdNo.Text)
+                Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
@@ -78,6 +78,13 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property LeaveStatus As Char Implements IEmployeeLeaveView.LeaveStatus
+            Get
+                Return cboLeaveStatus.GetValue()
+            End Get
+            Set
+                cboLeaveStatus.SetValue(Value)
+            End Set
+        End Property
 
         Public Property StartDate As DateTime Implements IEmployeeLeaveView.StartDate
             Get
@@ -90,7 +97,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property LeaveIdNo As Int16 Implements IEmployeeLeaveView.LeaveIdNo
             Get
-                Return cboLeaveIdNo.GetNullableValue(Of Int32)
+                Return cboLeaveIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboLeaveIdNo.SetValue(Value)
@@ -103,13 +110,13 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"EmployeeIdNo", cboEmployeeIdNo},
+                {"EndDate", dtpEndDate},
+                {"FullDay", chkFullDay},
                 {"IdNo", TxtIdNo},
                 {"LeaveIdNo", cboLeaveIdNo},
                 {"LeaveReason", txtLeaveReason},
                 {"LeaveStatus", cboLeaveStatus},
-                {"FullDay", chkFullDay},
-                {"StartDate", dtpStartDate},
-                {"EndDate", dtpEndDate}
+                {"StartDate", dtpStartDate}
                 }
         End Sub
 
@@ -117,6 +124,18 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("Employee", cboEmployeeIdNo)
             CreateDataSource("Leave", cboLeaveIdNo)
             CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
+        End Sub
+
+        Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged
+            If dtpEndDate.Value Is Nothing OrElse dtpEndDate.Value < dtpStartDate.Value Then
+                dtpEndDate.Value = dtpStartDate.Value
+            End If
+        End Sub
+
+        Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.ValueChanged
+            If dtpStartDate.Value Is Nothing OrElse dtpStartDate.Value > dtpEndDate.Value Then
+                dtpStartDate.Value = dtpEndDate.Value
+            End If
         End Sub
 
     End Class

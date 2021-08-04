@@ -472,7 +472,7 @@
     <value>5</value>
   </data>
   <data name="chkFullDay.Text" xml:space="preserve">
-    <value>CCheckBox1</value>
+    <value> </value>
   </data>
   <data name="&gt;&gt;chkFullDay.Name" xml:space="preserve">
     <value>chkFullDay</value>

@@ -41,10 +41,10 @@ Namespace PresentationLayer.Views.Forms
             Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.chkFullDay = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblFullDay = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.chkFullDay = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -194,6 +194,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.ComputedValue = False
             Me.txtDateCreated.CustomFormat = Nothing
             Me.txtDateCreated.DataBoundControl = True
+            Me.txtDateCreated.DisplayOnly = True
             Me.txtDateCreated.EditingMode = True
             Me.txtDateCreated.EndFindValue = Nothing
             Me.txtDateCreated.FieldDescription = Nothing
@@ -317,9 +318,18 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpEndDate.ValueIsMandatory = False
             Me.dtpEndDate.ValueIsNullable = False
             '
+            'lblFullDay
+            '
+            Me.lblFullDay.BackColor = System.Drawing.Color.Transparent
+            Me.lblFullDay.DisplayOnly = True
+            Me.lblFullDay.EditingMode = False
+            resources.ApplyResources(Me.lblFullDay, "lblFullDay")
+            Me.lblFullDay.Name = "lblFullDay"
+            Me.lblFullDay.Translatable = True
+            '
             'chkFullDay
             '
-            Me.chkFullDay.BackColor = System.Drawing.Color.Transparent
+            Me.chkFullDay.BackColor = System.Drawing.Color.White
             Me.chkFullDay.BegFindValue = Nothing
             Me.chkFullDay.DisplayOnly = False
             Me.chkFullDay.EditingMode = True
@@ -330,6 +340,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkFullDay.FindEnabled = False
             resources.ApplyResources(Me.chkFullDay, "chkFullDay")
             Me.CFlowLayout2.SetFlowBreak(Me.chkFullDay, True)
+            Me.chkFullDay.ForeColor = System.Drawing.Color.Black
             Me.chkFullDay.IFindableControl_FindEnabled = False
             Me.chkFullDay.IgnoreCase = False
             Me.chkFullDay.LinkedLabel = Me.lblFullDay
@@ -340,14 +351,14 @@ Namespace PresentationLayer.Views.Forms
             Me.chkFullDay.Translatable = False
             Me.chkFullDay.UseVisualStyleBackColor = False
             '
-            'lblFullDay
+            'lblLeaveReason
             '
-            Me.lblFullDay.BackColor = System.Drawing.Color.Transparent
-            Me.lblFullDay.DisplayOnly = True
-            Me.lblFullDay.EditingMode = False
-            resources.ApplyResources(Me.lblFullDay, "lblFullDay")
-            Me.lblFullDay.Name = "lblFullDay"
-            Me.lblFullDay.Translatable = True
+            Me.lblLeaveReason.BackColor = System.Drawing.Color.Transparent
+            Me.lblLeaveReason.DisplayOnly = True
+            Me.lblLeaveReason.EditingMode = False
+            resources.ApplyResources(Me.lblLeaveReason, "lblLeaveReason")
+            Me.lblLeaveReason.Name = "lblLeaveReason"
+            Me.lblLeaveReason.Translatable = True
             '
             'txtLeaveReason
             '
@@ -375,15 +386,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtLeaveReason.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtLeaveReason.Translatable = False
             Me.txtLeaveReason.ValueIsMandatory = True
-            '
-            'lblLeaveReason
-            '
-            Me.lblLeaveReason.BackColor = System.Drawing.Color.Transparent
-            Me.lblLeaveReason.DisplayOnly = True
-            Me.lblLeaveReason.EditingMode = False
-            resources.ApplyResources(Me.lblLeaveReason, "lblLeaveReason")
-            Me.lblLeaveReason.Name = "lblLeaveReason"
-            Me.lblLeaveReason.Translatable = True
             '
             'lblLeaveStatus
             '
@@ -431,7 +433,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboLeaveStatus.ValueIsMandatory = False
             Me.cboLeaveStatus.ValueIsNullable = False
             Me.cboLeaveStatus.ValueIsNumeric = False
-            Me.cboLeaveStatus.ValueMember = "IdNo"
+            Me.cboLeaveStatus.ValueMember = "Code"
             '
             'EmployeeLeaveEntry
             '
