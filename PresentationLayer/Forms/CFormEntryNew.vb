@@ -635,8 +635,8 @@ Public Class CFormEntryNew
     '    Return False
     'End Function
 
-    Public Shared Sub EnableDoubleBuff(ByVal cont As System.Windows.Forms.Control)
-        Dim DemoProp As System.Reflection.PropertyInfo = GetType(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Instance)
+    Public Shared Sub EnableDoubleBuff(ByVal cont As Windows.Forms.Control)
+        Dim DemoProp As Reflection.PropertyInfo = GetType(System.Windows.Forms.Control).GetProperty("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
         DemoProp.SetValue(cont, True, Nothing)
     End Sub
 

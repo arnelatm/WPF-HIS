@@ -15,6 +15,10 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
         End Sub
 
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.FullDay = True
+        End Sub
+
     End Class
 
 End Namespace

@@ -148,6 +148,15 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayFrequency As PayFrequencySelection Implements IEmployeeView.PayFrequency
 
+        Public Property SponsorType As Char Implements IEmployeeView.SponsorType
+            Get
+                Return cboSponsorType.GetValue()
+            End Get
+            Set
+                cboSponsorType.SetValue(Value)
+            End Set
+        End Property
+
         Public Property RegularEmployeeDeductions As List(Of EmployeePayElementView) Implements IEmployeeView.RegularEmployeeDeductions
             Get
                 Return _regularEmployeeDeductions
@@ -422,21 +431,13 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Sponsor As Boolean Implements IEmployeeView.Sponsor
-            Get
-                Return chkSponsor.Checked
-            End Get
-            Set
-                chkSponsor.Checked = Value
-            End Set
-        End Property
-
 #End Region
 
         Protected Overrides Sub CreateDataSources()
             CreateEnumDataSource(Of MaleFemaleSelection)(cacGender)
             CreateEnumDataSource(Of MaritalStatusSelection)(cacMaritalStatus)
             CreateEnumDataSource(Of PayrollPaymentMethodSelection)(cboPaymentMethod)
+            CreateEnumDataSource(Of SponsorTypeSelection)(cboSponsorType)
             CreateEnumData(Of PayRateUnitSelection)(_unit)
             CreateDataSource("Bank", cacBankIdNo)
             CreateDataSource("Country", cacCountryCode)
@@ -487,7 +488,7 @@ Namespace PresentationLayer.Views.Forms
          {"ProvinceState", txtProvinceState},
          {"ReleasedDate", dtpReleasedDate},
          {"ReligionIdNo", cacReligionIdNo},
-         {"Sponsor", chkSponsor},
+         {"SponsorType", cboSponsorType},
          {"Street", txtStreet},
          {"TownCity", txtTownCity},
          {"ZipCode", txtZipCode},

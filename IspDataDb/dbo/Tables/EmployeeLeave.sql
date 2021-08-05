@@ -4,13 +4,15 @@
     [LeaveIdNo]     SMALLINT       NOT NULL,
     [StartDate]     DATETIME       NULL,
     [EndDate]       DATETIME       NULL,
-    [FullDayLeave]  BIT            NULL,
+    [FullDay]       BIT            NULL,
     [LeaveStatus]   CHAR (1)       NULL,
     [LeaveReason]   NVARCHAR (200) NULL,
-    [DateCreated]   NCHAR (10)     NULL,
+    [DateCreated]   DATETIME       CONSTRAINT [DF_EmployeeLeave_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp] ROWVERSION     NULL,
     CONSTRAINT [PK_EmployeeLeave] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
