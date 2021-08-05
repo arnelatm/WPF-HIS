@@ -33,24 +33,24 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblEquivalentHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtEquivalentHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAddedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAddedBy = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtStartDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEndDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtStartDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEndDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.SuspendLayout()
@@ -158,33 +158,33 @@ Namespace PresentationLayer.Views.Forms
             Me.lblEquivalentHours.Name = "lblEquivalentHours"
             Me.lblEquivalentHours.Translatable = True
             '
-            'txtAmount
+            'txtEquivalentHours
             '
-            Me.txtAmount.BackColor = System.Drawing.Color.White
-            Me.txtAmount.BegFindValue = Nothing
-            Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtAmount.ComputedValue = False
-            Me.txtAmount.CustomFormat = Nothing
-            Me.txtAmount.DataBoundControl = True
-            Me.txtAmount.EditingMode = True
-            Me.txtAmount.EndFindValue = Nothing
-            Me.txtAmount.FieldDescription = Nothing
-            Me.txtAmount.FieldName = Nothing
-            Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtAmount.FindEnabled = False
-            Me.CFlowLayout2.SetFlowBreak(Me.txtAmount, True)
-            resources.ApplyResources(Me.txtAmount, "txtAmount")
-            Me.txtAmount.ForeColor = System.Drawing.Color.Black
-            Me.txtAmount.LinkedLabel = Me.lblEquivalentHours
-            Me.txtAmount.MaximumValue = Nothing
-            Me.txtAmount.MinimumValue = Nothing
-            Me.txtAmount.Name = "txtAmount"
-            Me.txtAmount.OldValue = Nothing
-            Me.txtAmount.ReadOnly = True
-            Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAmount.Translatable = False
-            Me.txtAmount.ValueIsMandatory = True
-            Me.txtAmount.ValueIsNumeric = True
+            Me.txtEquivalentHours.BackColor = System.Drawing.Color.White
+            Me.txtEquivalentHours.BegFindValue = Nothing
+            Me.txtEquivalentHours.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtEquivalentHours.ComputedValue = False
+            Me.txtEquivalentHours.CustomFormat = Nothing
+            Me.txtEquivalentHours.DataBoundControl = True
+            Me.txtEquivalentHours.EditingMode = True
+            Me.txtEquivalentHours.EndFindValue = Nothing
+            Me.txtEquivalentHours.FieldDescription = Nothing
+            Me.txtEquivalentHours.FieldName = Nothing
+            Me.txtEquivalentHours.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtEquivalentHours.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.txtEquivalentHours, True)
+            resources.ApplyResources(Me.txtEquivalentHours, "txtEquivalentHours")
+            Me.txtEquivalentHours.ForeColor = System.Drawing.Color.Black
+            Me.txtEquivalentHours.LinkedLabel = Me.lblEquivalentHours
+            Me.txtEquivalentHours.MaximumValue = Nothing
+            Me.txtEquivalentHours.MinimumValue = Nothing
+            Me.txtEquivalentHours.Name = "txtEquivalentHours"
+            Me.txtEquivalentHours.OldValue = Nothing
+            Me.txtEquivalentHours.ReadOnly = True
+            Me.txtEquivalentHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtEquivalentHours.Translatable = False
+            Me.txtEquivalentHours.ValueIsMandatory = True
+            Me.txtEquivalentHours.ValueIsNumeric = True
             '
             'lblAddedBy
             '
@@ -203,6 +203,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAddedBy.ComputedValue = False
             Me.txtAddedBy.CustomFormat = Nothing
             Me.txtAddedBy.DataBoundControl = True
+            Me.txtAddedBy.DisplayOnly = True
             Me.txtAddedBy.EditingMode = True
             Me.txtAddedBy.EndFindValue = Nothing
             Me.txtAddedBy.FieldDescription = Nothing
@@ -240,7 +241,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.lblAbsenceType)
             Me.CFlowLayout2.Controls.Add(Me.cboAbsenceType)
             Me.CFlowLayout2.Controls.Add(Me.lblEquivalentHours)
-            Me.CFlowLayout2.Controls.Add(Me.txtAmount)
+            Me.CFlowLayout2.Controls.Add(Me.txtEquivalentHours)
             Me.CFlowLayout2.Controls.Add(Me.lblAbsenceReason)
             Me.CFlowLayout2.Controls.Add(Me.txtAbsenceReason)
             Me.CFlowLayout2.Controls.Add(Me.lblAddedBy)
@@ -249,6 +250,149 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.CTextBox1)
             resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
             Me.CFlowLayout2.Name = "CFlowLayout2"
+            '
+            'lblPayrollIdNo
+            '
+            Me.lblPayrollIdNo.DisplayOnly = True
+            Me.lblPayrollIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblPayrollIdNo, "lblPayrollIdNo")
+            Me.lblPayrollIdNo.Name = "lblPayrollIdNo"
+            Me.lblPayrollIdNo.Translatable = True
+            '
+            'txtPayrollIdNo
+            '
+            Me.txtPayrollIdNo.BackColor = System.Drawing.Color.White
+            Me.txtPayrollIdNo.BegFindValue = Nothing
+            Me.txtPayrollIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPayrollIdNo.ComputedValue = False
+            Me.txtPayrollIdNo.CustomFormat = Nothing
+            Me.txtPayrollIdNo.DataBoundControl = True
+            Me.txtPayrollIdNo.DisplayOnly = True
+            Me.txtPayrollIdNo.EditingMode = True
+            Me.txtPayrollIdNo.EndFindValue = Nothing
+            Me.txtPayrollIdNo.FieldDescription = Nothing
+            Me.txtPayrollIdNo.FieldName = Nothing
+            Me.txtPayrollIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPayrollIdNo.FindEnabled = False
+            resources.ApplyResources(Me.txtPayrollIdNo, "txtPayrollIdNo")
+            Me.txtPayrollIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtPayrollIdNo.LinkedLabel = Nothing
+            Me.txtPayrollIdNo.MaximumValue = Nothing
+            Me.txtPayrollIdNo.MinimumValue = Nothing
+            Me.txtPayrollIdNo.Name = "txtPayrollIdNo"
+            Me.txtPayrollIdNo.OldValue = Nothing
+            Me.txtPayrollIdNo.ReadOnly = True
+            Me.txtPayrollIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPayrollIdNo.TabStop = False
+            Me.txtPayrollIdNo.Translatable = False
+            '
+            'lblStartDate
+            '
+            Me.lblStartDate.DisplayOnly = True
+            Me.lblStartDate.EditingMode = False
+            resources.ApplyResources(Me.lblStartDate, "lblStartDate")
+            Me.lblStartDate.Name = "lblStartDate"
+            Me.lblStartDate.Translatable = True
+            '
+            'txtStartDate
+            '
+            Me.txtStartDate.BackColor = System.Drawing.Color.White
+            Me.txtStartDate.BegFindValue = Nothing
+            Me.txtStartDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtStartDate.ComputedValue = False
+            Me.txtStartDate.CustomFormat = Nothing
+            Me.txtStartDate.DataBoundControl = True
+            Me.txtStartDate.DisplayOnly = True
+            Me.txtStartDate.EditingMode = True
+            Me.txtStartDate.EndFindValue = Nothing
+            Me.txtStartDate.FieldDescription = Nothing
+            Me.txtStartDate.FieldName = Nothing
+            Me.txtStartDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtStartDate.FindEnabled = False
+            resources.ApplyResources(Me.txtStartDate, "txtStartDate")
+            Me.txtStartDate.ForeColor = System.Drawing.Color.Black
+            Me.txtStartDate.LinkedLabel = Me.lblStartDate
+            Me.txtStartDate.MaximumValue = Nothing
+            Me.txtStartDate.MinimumValue = Nothing
+            Me.txtStartDate.Name = "txtStartDate"
+            Me.txtStartDate.OldValue = Nothing
+            Me.txtStartDate.ReadOnly = True
+            Me.txtStartDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtStartDate.Translatable = False
+            Me.txtStartDate.ValueIsMandatory = True
+            '
+            'lblEndDate
+            '
+            Me.lblEndDate.DisplayOnly = True
+            Me.lblEndDate.EditingMode = False
+            resources.ApplyResources(Me.lblEndDate, "lblEndDate")
+            Me.lblEndDate.Name = "lblEndDate"
+            Me.lblEndDate.Translatable = True
+            '
+            'txtEndDate
+            '
+            Me.txtEndDate.BackColor = System.Drawing.Color.White
+            Me.txtEndDate.BegFindValue = Nothing
+            Me.txtEndDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtEndDate.ComputedValue = False
+            Me.txtEndDate.CustomFormat = Nothing
+            Me.txtEndDate.DataBoundControl = True
+            Me.txtEndDate.DisplayOnly = True
+            Me.txtEndDate.EditingMode = True
+            Me.txtEndDate.EndFindValue = Nothing
+            Me.txtEndDate.FieldDescription = Nothing
+            Me.txtEndDate.FieldName = Nothing
+            Me.txtEndDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtEndDate.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.txtEndDate, True)
+            resources.ApplyResources(Me.txtEndDate, "txtEndDate")
+            Me.txtEndDate.ForeColor = System.Drawing.Color.Black
+            Me.txtEndDate.LinkedLabel = Me.lblEndDate
+            Me.txtEndDate.MaximumValue = Nothing
+            Me.txtEndDate.MinimumValue = Nothing
+            Me.txtEndDate.Name = "txtEndDate"
+            Me.txtEndDate.OldValue = Nothing
+            Me.txtEndDate.ReadOnly = True
+            Me.txtEndDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtEndDate.Translatable = False
+            Me.txtEndDate.ValueIsMandatory = True
+            '
+            'lblPayrollName
+            '
+            Me.lblPayrollName.DisplayOnly = True
+            Me.lblPayrollName.EditingMode = False
+            resources.ApplyResources(Me.lblPayrollName, "lblPayrollName")
+            Me.lblPayrollName.Name = "lblPayrollName"
+            Me.lblPayrollName.Translatable = True
+            '
+            'txtPayrollName
+            '
+            Me.txtPayrollName.BackColor = System.Drawing.Color.White
+            Me.txtPayrollName.BegFindValue = Nothing
+            Me.txtPayrollName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPayrollName.ComputedValue = False
+            Me.txtPayrollName.CustomFormat = Nothing
+            Me.txtPayrollName.DataBoundControl = True
+            Me.txtPayrollName.DisplayOnly = True
+            Me.txtPayrollName.EditingMode = True
+            Me.txtPayrollName.EndFindValue = Nothing
+            Me.txtPayrollName.FieldDescription = Nothing
+            Me.txtPayrollName.FieldName = Nothing
+            Me.txtPayrollName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPayrollName.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.txtPayrollName, True)
+            resources.ApplyResources(Me.txtPayrollName, "txtPayrollName")
+            Me.txtPayrollName.ForeColor = System.Drawing.Color.Black
+            Me.txtPayrollName.LinkedLabel = Nothing
+            Me.txtPayrollName.MaximumValue = Nothing
+            Me.txtPayrollName.MinimumValue = Nothing
+            Me.txtPayrollName.Name = "txtPayrollName"
+            Me.txtPayrollName.OldValue = Nothing
+            Me.txtPayrollName.ReadOnly = True
+            Me.txtPayrollName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPayrollName.TabStop = False
+            Me.txtPayrollName.Translatable = False
+            Me.txtPayrollName.ValueIsMandatory = True
             '
             'lblAbsenceType
             '
@@ -351,6 +495,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CTextBox1.ComputedValue = False
             Me.CTextBox1.CustomFormat = Nothing
             Me.CTextBox1.DataBoundControl = True
+            Me.CTextBox1.DisplayOnly = True
             Me.CTextBox1.EditingMode = True
             Me.CTextBox1.EndFindValue = Nothing
             Me.CTextBox1.FieldDescription = Nothing
@@ -369,145 +514,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CTextBox1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.CTextBox1.Translatable = False
             Me.CTextBox1.ValueIsMandatory = True
-            '
-            'lblStartDate
-            '
-            Me.lblStartDate.DisplayOnly = True
-            Me.lblStartDate.EditingMode = False
-            resources.ApplyResources(Me.lblStartDate, "lblStartDate")
-            Me.lblStartDate.Name = "lblStartDate"
-            Me.lblStartDate.Translatable = True
-            '
-            'lblEndDate
-            '
-            Me.lblEndDate.DisplayOnly = True
-            Me.lblEndDate.EditingMode = False
-            resources.ApplyResources(Me.lblEndDate, "lblEndDate")
-            Me.lblEndDate.Name = "lblEndDate"
-            Me.lblEndDate.Translatable = True
-            '
-            'lblPayrollName
-            '
-            Me.lblPayrollName.DisplayOnly = True
-            Me.lblPayrollName.EditingMode = False
-            resources.ApplyResources(Me.lblPayrollName, "lblPayrollName")
-            Me.lblPayrollName.Name = "lblPayrollName"
-            Me.lblPayrollName.Translatable = True
-            '
-            'lblPayrollIdNo
-            '
-            Me.lblPayrollIdNo.DisplayOnly = True
-            Me.lblPayrollIdNo.EditingMode = False
-            resources.ApplyResources(Me.lblPayrollIdNo, "lblPayrollIdNo")
-            Me.lblPayrollIdNo.Name = "lblPayrollIdNo"
-            Me.lblPayrollIdNo.Translatable = True
-            '
-            'txtPayrollIdNo
-            '
-            Me.txtPayrollIdNo.BackColor = System.Drawing.Color.White
-            Me.txtPayrollIdNo.BegFindValue = Nothing
-            Me.txtPayrollIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayrollIdNo.ComputedValue = False
-            Me.txtPayrollIdNo.CustomFormat = Nothing
-            Me.txtPayrollIdNo.DataBoundControl = True
-            Me.txtPayrollIdNo.EditingMode = True
-            Me.txtPayrollIdNo.EndFindValue = Nothing
-            Me.txtPayrollIdNo.FieldDescription = Nothing
-            Me.txtPayrollIdNo.FieldName = Nothing
-            Me.txtPayrollIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtPayrollIdNo.FindEnabled = False
-            resources.ApplyResources(Me.txtPayrollIdNo, "txtPayrollIdNo")
-            Me.txtPayrollIdNo.ForeColor = System.Drawing.Color.Black
-            Me.txtPayrollIdNo.LinkedLabel = Nothing
-            Me.txtPayrollIdNo.MaximumValue = Nothing
-            Me.txtPayrollIdNo.MinimumValue = Nothing
-            Me.txtPayrollIdNo.Name = "txtPayrollIdNo"
-            Me.txtPayrollIdNo.OldValue = Nothing
-            Me.txtPayrollIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayrollIdNo.TabStop = False
-            Me.txtPayrollIdNo.Translatable = False
-            '
-            'txtPayrollName
-            '
-            Me.txtPayrollName.BackColor = System.Drawing.Color.White
-            Me.txtPayrollName.BegFindValue = Nothing
-            Me.txtPayrollName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPayrollName.ComputedValue = False
-            Me.txtPayrollName.CustomFormat = Nothing
-            Me.txtPayrollName.DataBoundControl = True
-            Me.txtPayrollName.DisplayOnly = True
-            Me.txtPayrollName.EditingMode = True
-            Me.txtPayrollName.EndFindValue = Nothing
-            Me.txtPayrollName.FieldDescription = Nothing
-            Me.txtPayrollName.FieldName = Nothing
-            Me.txtPayrollName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtPayrollName.FindEnabled = False
-            Me.CFlowLayout2.SetFlowBreak(Me.txtPayrollName, True)
-            resources.ApplyResources(Me.txtPayrollName, "txtPayrollName")
-            Me.txtPayrollName.ForeColor = System.Drawing.Color.Black
-            Me.txtPayrollName.LinkedLabel = Nothing
-            Me.txtPayrollName.MaximumValue = Nothing
-            Me.txtPayrollName.MinimumValue = Nothing
-            Me.txtPayrollName.Name = "txtPayrollName"
-            Me.txtPayrollName.OldValue = Nothing
-            Me.txtPayrollName.ReadOnly = True
-            Me.txtPayrollName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayrollName.TabStop = False
-            Me.txtPayrollName.Translatable = False
-            Me.txtPayrollName.ValueIsMandatory = True
-            '
-            'txtStartDate
-            '
-            Me.txtStartDate.BackColor = System.Drawing.Color.White
-            Me.txtStartDate.BegFindValue = Nothing
-            Me.txtStartDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtStartDate.ComputedValue = False
-            Me.txtStartDate.CustomFormat = Nothing
-            Me.txtStartDate.DataBoundControl = True
-            Me.txtStartDate.EditingMode = True
-            Me.txtStartDate.EndFindValue = Nothing
-            Me.txtStartDate.FieldDescription = Nothing
-            Me.txtStartDate.FieldName = Nothing
-            Me.txtStartDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtStartDate.FindEnabled = False
-            resources.ApplyResources(Me.txtStartDate, "txtStartDate")
-            Me.txtStartDate.ForeColor = System.Drawing.Color.Black
-            Me.txtStartDate.LinkedLabel = Me.lblStartDate
-            Me.txtStartDate.MaximumValue = Nothing
-            Me.txtStartDate.MinimumValue = Nothing
-            Me.txtStartDate.Name = "txtStartDate"
-            Me.txtStartDate.OldValue = Nothing
-            Me.txtStartDate.ReadOnly = True
-            Me.txtStartDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtStartDate.Translatable = False
-            Me.txtStartDate.ValueIsMandatory = True
-            '
-            'txtEndDate
-            '
-            Me.txtEndDate.BackColor = System.Drawing.Color.White
-            Me.txtEndDate.BegFindValue = Nothing
-            Me.txtEndDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtEndDate.ComputedValue = False
-            Me.txtEndDate.CustomFormat = Nothing
-            Me.txtEndDate.DataBoundControl = True
-            Me.txtEndDate.EditingMode = True
-            Me.txtEndDate.EndFindValue = Nothing
-            Me.txtEndDate.FieldDescription = Nothing
-            Me.txtEndDate.FieldName = Nothing
-            Me.txtEndDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtEndDate.FindEnabled = False
-            Me.CFlowLayout2.SetFlowBreak(Me.txtEndDate, True)
-            resources.ApplyResources(Me.txtEndDate, "txtEndDate")
-            Me.txtEndDate.ForeColor = System.Drawing.Color.Black
-            Me.txtEndDate.LinkedLabel = Me.lblEndDate
-            Me.txtEndDate.MaximumValue = Nothing
-            Me.txtEndDate.MinimumValue = Nothing
-            Me.txtEndDate.Name = "txtEndDate"
-            Me.txtEndDate.OldValue = Nothing
-            Me.txtEndDate.ReadOnly = True
-            Me.txtEndDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtEndDate.Translatable = False
-            Me.txtEndDate.ValueIsMandatory = True
             '
             'EmployeeAbsenceEntry
             '
@@ -529,7 +535,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblEmployeeIdNo As CLabel
         Public WithEvents cboEmployeeIdNo As CaComboBox
         Friend WithEvents lblEquivalentHours As CLabel
-        Public WithEvents txtAmount As CTextBox
+        Public WithEvents txtEquivalentHours As CTextBox
         Friend WithEvents lblAddedBy As CLabel
         Public WithEvents txtAddedBy As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout

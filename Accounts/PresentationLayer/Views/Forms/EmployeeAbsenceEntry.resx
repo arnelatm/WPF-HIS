@@ -576,34 +576,34 @@
   <data name="&gt;&gt;lblEquivalentHours.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="txtAmount.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtEquivalentHours.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtAmount.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtEquivalentHours.Location" type="System.Drawing.Point, System.Drawing">
     <value>203, 138</value>
   </data>
-  <data name="txtAmount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtEquivalentHours.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtAmount.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtEquivalentHours.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
   </data>
-  <data name="txtAmount.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtEquivalentHours.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="txtAmount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="txtEquivalentHours.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;txtAmount.Name" xml:space="preserve">
-    <value>txtAmount</value>
+  <data name="&gt;&gt;txtEquivalentHours.Name" xml:space="preserve">
+    <value>txtEquivalentHours</value>
   </data>
-  <data name="&gt;&gt;txtAmount.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtEquivalentHours.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtAmount.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtEquivalentHours.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;txtAmount.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtEquivalentHours.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="lblAbsenceReason.Font" type="System.Drawing.Font, System.Drawing">

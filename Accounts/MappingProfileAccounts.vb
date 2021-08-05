@@ -8,8 +8,8 @@ Public Class MappingProfileAccounts
     Inherits Profile
 
     Public Sub New()
-        CreateMap(Of Absence, AbsenceModel)().ReverseMap()
-        CreateMap(Of AbsenceModel, IAbsenceView)().ReverseMap()
+        CreateMap(Of EmployeeAbsence, EmployeeAbsenceModel)().ReverseMap()
+        CreateMap(Of EmployeeAbsenceModel, IEmployeeAbsenceView)().ReverseMap()
         CreateMap(Of Account, AccountModel)().ReverseMap()
         CreateMap(Of AccountModel, IAccountView)().ReverseMap()
         CreateMap(Of AccountReconciliation, AccountReconciliationModel)().ReverseMap()

@@ -199,7 +199,7 @@
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
     <Compile Include="BusinessLayer\EmployeeLeave.vb" />
-    <Compile Include="BusinessLayer\Absence.vb" />
+    <Compile Include="BusinessLayer\EmployeeAbsence.vb" />
     <Compile Include="BusinessLayer\RecurringPayElement.vb" />
     <Compile Include="BusinessLayer\PayElementItem.vb" />
     <Compile Include="BusinessLayer\PayElement.vb" />
@@ -252,6 +252,7 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeAbsenceDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeePayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\JournalPrefix.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
@@ -338,7 +339,7 @@
     <Compile Include="PresentationLayer\Models\EmployeePayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\JournalPrefixModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveModel.vb" />
-    <Compile Include="PresentationLayer\Models\AbsencesModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeAbsencesModel.vb" />
     <Compile Include="PresentationLayer\Models\RecurringPayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\TransactionNotes.vb" />
     <Compile Include="PresentationLayer\Models\PayElementItemModel.vb" />
@@ -366,6 +367,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\Class1.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
@@ -480,7 +482,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalPrefixView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IAbsenceView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeAbsenceView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IRecurringPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
