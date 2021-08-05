@@ -353,3 +353,19 @@ Public Enum LeaveStatusSelection
     <EnumCode("3")> Disapproved
     <EnumCode("4")> Approved
 End Enum
+
+Public Enum SponsorTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("1")> Sponsored
+    <EnumCode("2")> Citizen
+    <EnumCode("3")> Sponsor
+    <EnumCode("4")> Others
+End Enum
+
+Public Enum AbsenceTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("1")> Absent
+    <EnumCode("2")> Late
+    <EnumCode("3")> Penalty
+    <EnumCode("4")> Others
+End Enum

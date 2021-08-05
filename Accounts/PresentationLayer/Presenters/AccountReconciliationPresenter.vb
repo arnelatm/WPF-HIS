@@ -61,11 +61,11 @@ Namespace PresentationLayer.Presenters
 
         Public Property MessageBox As Object
 
-        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.AccountReconciliationItems.Clear()
         End Sub
 
-        'Public Sub OnBeforeEditd() Handles MyBase.BeforeAdd
+        'Public Sub OnBeforeEditd() Handles MyBase.NewRecordInitialized
         '    View.AccountReconciliationItems.Clear()
         'End Sub
 

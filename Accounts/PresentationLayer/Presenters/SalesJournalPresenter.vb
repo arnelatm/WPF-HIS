@@ -86,7 +86,7 @@ Namespace PresentationLayer.Presenters
             Return _salesDepositModel.GetRecordsWithGroupIdNo(Of SalesDepositModel)(salesDepositTypeIdNo, "Sequence")
         End Function
 
-        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.TransactionDate = Date.Now()
             If View.JournalItems IsNot Nothing Then
                 View.JournalItems.Clear()

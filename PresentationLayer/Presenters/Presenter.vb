@@ -86,7 +86,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
 
     Public Event AfterSave()
 
-    Public Event BeforeAdd()
+    Public Event NewRecordInitialized()
 
     Public Event BeforeCompare()
 
@@ -722,7 +722,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
             DataModel = New TM
             GlobalVariables.Mapper.Map(DataModel, View)
             AddMode = True
-            RaiseEvent BeforeAdd()
+            RaiseEvent NewRecordInitialized()
         Catch oEx As Exception
             MsgBox("Error:   " + oEx.Message)
             AddMode = False

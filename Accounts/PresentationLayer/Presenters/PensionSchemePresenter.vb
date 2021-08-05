@@ -81,7 +81,7 @@ Namespace PresentationLayer.Presenters
         '    Return _pensionRateModel.GetRecordsWithGroupIdNo(Of PensionRateModel)(pensionSchemeIdNo, "Sequence")
         'End Function
 
-        'Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
+        'Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
         '    If View.PensionRates IsNot Nothing Then
         '        View.PensionRates.Clear()
         '    Else

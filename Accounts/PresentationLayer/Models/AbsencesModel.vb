@@ -1,0 +1,22 @@
+﻿Imports AATM.Libraries
+
+Namespace PresentationLayer.Models
+
+    ''' <summary>
+    '''     The Model in MVP design pattern.
+    '''     Implements IModel and communicates with WCF Service.
+    ''' </summary>
+    Public Class AbsenceModel
+
+        Public Property AbsenceReason As String
+        Public Property AbsenceType As Char
+        Public Property AddedBy As Int16
+        Public Property DateCreated As DateTime?
+        Public Property EmployeeIdNo As Int32
+        Public Property EquivalentHours As Decimal
+        Public Property IdNo As Int32
+        Public Property PayrollIdNo As Int16
+
+    End Class
+
+End Namespace

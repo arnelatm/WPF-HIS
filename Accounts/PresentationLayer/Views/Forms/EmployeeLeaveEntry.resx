@@ -127,7 +127,7 @@
     <value>411, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>535, 17</value>
+    <value>17, 56</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -300,126 +300,6 @@
   <data name="&gt;&gt;cboLeaveIdNo.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="lblStartDate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblStartDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 88</value>
-  </data>
-  <data name="lblStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblStartDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 23</value>
-  </data>
-  <data name="lblStartDate.TabIndex" type="System.Int32, mscorlib">
-    <value>281</value>
-  </data>
-  <data name="lblStartDate.Text" xml:space="preserve">
-    <value>Start Date</value>
-  </data>
-  <data name="lblStartDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblStartDate.Name" xml:space="preserve">
-    <value>lblStartDate</value>
-  </data>
-  <data name="&gt;&gt;lblStartDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblStartDate.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="dtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 88</value>
-  </data>
-  <data name="dtpStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="dtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 25</value>
-  </data>
-  <data name="dtpStartDate.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;dtpStartDate.Name" xml:space="preserve">
-    <value>dtpStartDate</value>
-  </data>
-  <data name="&gt;&gt;dtpStartDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dtpStartDate.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;dtpStartDate.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="lblEndDate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblEndDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 115</value>
-  </data>
-  <data name="lblEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblEndDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 23</value>
-  </data>
-  <data name="lblEndDate.TabIndex" type="System.Int32, mscorlib">
-    <value>293</value>
-  </data>
-  <data name="lblEndDate.Text" xml:space="preserve">
-    <value>End Date</value>
-  </data>
-  <data name="lblEndDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblEndDate.Name" xml:space="preserve">
-    <value>lblEndDate</value>
-  </data>
-  <data name="&gt;&gt;lblEndDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblEndDate.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="dtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 115</value>
-  </data>
-  <data name="dtpEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="dtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 25</value>
-  </data>
-  <data name="dtpEndDate.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;dtpEndDate.Name" xml:space="preserve">
-    <value>dtpEndDate</value>
-  </data>
-  <data name="&gt;&gt;dtpEndDate.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dtpEndDate.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;dtpEndDate.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="lblFullDay.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -427,7 +307,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFullDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 142</value>
+    <value>11, 88</value>
   </data>
   <data name="lblFullDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -454,7 +334,7 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;lblFullDay.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>6</value>
   </data>
   <data name="chkFullDay.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -463,13 +343,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="chkFullDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 144</value>
+    <value>205, 90</value>
   </data>
   <data name="chkFullDay.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
   </data>
   <data name="chkFullDay.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="chkFullDay.Text" xml:space="preserve">
     <value> </value>
@@ -484,6 +364,126 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;chkFullDay.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblStartDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblStartDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblStartDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 113</value>
+  </data>
+  <data name="lblStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblStartDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
+  </data>
+  <data name="lblStartDate.TabIndex" type="System.Int32, mscorlib">
+    <value>281</value>
+  </data>
+  <data name="lblStartDate.Text" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="lblStartDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblStartDate.Name" xml:space="preserve">
+    <value>lblStartDate</value>
+  </data>
+  <data name="&gt;&gt;lblStartDate.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblStartDate.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="dtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 113</value>
+  </data>
+  <data name="dtpStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="dtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 25</value>
+  </data>
+  <data name="dtpStartDate.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;dtpStartDate.Name" xml:space="preserve">
+    <value>dtpStartDate</value>
+  </data>
+  <data name="&gt;&gt;dtpStartDate.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dtpStartDate.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;dtpStartDate.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblEndDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblEndDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblEndDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 140</value>
+  </data>
+  <data name="lblEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblEndDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
+  </data>
+  <data name="lblEndDate.TabIndex" type="System.Int32, mscorlib">
+    <value>293</value>
+  </data>
+  <data name="lblEndDate.Text" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="lblEndDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.Name" xml:space="preserve">
+    <value>lblEndDate</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="dtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 140</value>
+  </data>
+  <data name="dtpEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="dtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 25</value>
+  </data>
+  <data name="dtpEndDate.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;dtpEndDate.Name" xml:space="preserve">
+    <value>dtpEndDate</value>
+  </data>
+  <data name="&gt;&gt;dtpEndDate.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dtpEndDate.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;dtpEndDate.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="lblLeaveReason.Font" type="System.Drawing.Font, System.Drawing">

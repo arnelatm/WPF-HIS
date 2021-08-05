@@ -167,7 +167,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnBeforeAdd() Handles MyBase.BeforeAdd
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             Dim nIdNoMax As Int32
             Dim maxRecord As PayrollModel
             Dim payMonthText As String = "Payroll for the Month of"

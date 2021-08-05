@@ -1,8 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
-
-Public Class CFormEntryTvNew
+﻿Public Class CFormEntryTvNew
 
     Public Sub New()
 

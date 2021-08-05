@@ -39,10 +39,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblLeaveName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblFullDay = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkFullDay = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -223,12 +223,12 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.cboEmployeeIdNo)
             Me.CFlowLayout2.Controls.Add(Me.lblLeaveName)
             Me.CFlowLayout2.Controls.Add(Me.cboLeaveIdNo)
+            Me.CFlowLayout2.Controls.Add(Me.lblFullDay)
+            Me.CFlowLayout2.Controls.Add(Me.chkFullDay)
             Me.CFlowLayout2.Controls.Add(Me.lblStartDate)
             Me.CFlowLayout2.Controls.Add(Me.dtpStartDate)
             Me.CFlowLayout2.Controls.Add(Me.lblEndDate)
             Me.CFlowLayout2.Controls.Add(Me.dtpEndDate)
-            Me.CFlowLayout2.Controls.Add(Me.lblFullDay)
-            Me.CFlowLayout2.Controls.Add(Me.chkFullDay)
             Me.CFlowLayout2.Controls.Add(Me.lblLeaveReason)
             Me.CFlowLayout2.Controls.Add(Me.txtLeaveReason)
             Me.CFlowLayout2.Controls.Add(Me.lblLeaveStatus)
@@ -286,38 +286,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboLeaveIdNo.ValueIsNumeric = False
             Me.cboLeaveIdNo.ValueMember = "IdNo"
             '
-            'lblEndDate
-            '
-            Me.lblEndDate.BackColor = System.Drawing.Color.Transparent
-            Me.lblEndDate.DisplayOnly = True
-            Me.lblEndDate.EditingMode = False
-            resources.ApplyResources(Me.lblEndDate, "lblEndDate")
-            Me.lblEndDate.Name = "lblEndDate"
-            Me.lblEndDate.Translatable = True
-            '
-            'dtpEndDate
-            '
-            Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpEndDate.DefaultValue = Nothing
-            Me.dtpEndDate.DisplayOnly = False
-            Me.dtpEndDate.DtpDefaultValue = Nothing
-            Me.dtpEndDate.EditingMode = True
-            Me.dtpEndDate.EditsAllowed = False
-            Me.CFlowLayout2.SetFlowBreak(Me.dtpEndDate, True)
-            Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpEndDate.LinkedLabel = Me.lblEndDate
-            resources.ApplyResources(Me.dtpEndDate, "dtpEndDate")
-            Me.dtpEndDate.Name = "dtpEndDate"
-            Me.dtpEndDate.ReadOnlyDp = False
-            Me.dtpEndDate.SecurityKey = Nothing
-            Me.dtpEndDate.ShowLongDate = False
-            Me.dtpEndDate.ShowTime = False
-            Me.dtpEndDate.TargetCalendar = Nothing
-            Me.dtpEndDate.Translatable = False
-            Me.dtpEndDate.Value = Nothing
-            Me.dtpEndDate.ValueIsMandatory = False
-            Me.dtpEndDate.ValueIsNullable = False
-            '
             'lblFullDay
             '
             Me.lblFullDay.BackColor = System.Drawing.Color.Transparent
@@ -350,6 +318,38 @@ Namespace PresentationLayer.Views.Forms
             Me.chkFullDay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.chkFullDay.Translatable = False
             Me.chkFullDay.UseVisualStyleBackColor = False
+            '
+            'lblEndDate
+            '
+            Me.lblEndDate.BackColor = System.Drawing.Color.Transparent
+            Me.lblEndDate.DisplayOnly = True
+            Me.lblEndDate.EditingMode = False
+            resources.ApplyResources(Me.lblEndDate, "lblEndDate")
+            Me.lblEndDate.Name = "lblEndDate"
+            Me.lblEndDate.Translatable = True
+            '
+            'dtpEndDate
+            '
+            Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpEndDate.DefaultValue = Nothing
+            Me.dtpEndDate.DisplayOnly = False
+            Me.dtpEndDate.DtpDefaultValue = Nothing
+            Me.dtpEndDate.EditingMode = True
+            Me.dtpEndDate.EditsAllowed = False
+            Me.CFlowLayout2.SetFlowBreak(Me.dtpEndDate, True)
+            Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpEndDate.LinkedLabel = Me.lblEndDate
+            resources.ApplyResources(Me.dtpEndDate, "dtpEndDate")
+            Me.dtpEndDate.Name = "dtpEndDate"
+            Me.dtpEndDate.ReadOnlyDp = False
+            Me.dtpEndDate.SecurityKey = Nothing
+            Me.dtpEndDate.ShowLongDate = False
+            Me.dtpEndDate.ShowTime = False
+            Me.dtpEndDate.TargetCalendar = Nothing
+            Me.dtpEndDate.Translatable = False
+            Me.dtpEndDate.Value = Nothing
+            Me.dtpEndDate.ValueIsMandatory = False
+            Me.dtpEndDate.ValueIsNullable = False
             '
             'lblLeaveReason
             '

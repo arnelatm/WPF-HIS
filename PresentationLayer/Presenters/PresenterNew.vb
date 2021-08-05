@@ -113,7 +113,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Public Event AfterSave()
 
-    Public Event BeforeAdd()
+    Public Event NewRecordInitialized()
 
     Public Event BeforeCompare()
 
@@ -683,15 +683,19 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Public Overridable Sub GoAddRecord()
         LastIdNo = Invoker.GetProperty(View, IdFieldName)
         Try
-            Model = New TM
-            GlobalVariables.Mapper.Map(Model, View)
+            AddRecordInitializer()
             AddMode = True
-            RaiseEvent BeforeAdd()
         Catch oEx As Exception
             MsgBox("Error:   " + oEx.Message)
             AddMode = False
             'CallByName(View, "AddMode", CallType.Set, False)
         End Try
+    End Sub
+
+    Private Sub AddRecordInitializer()
+        Model = New TM
+        GlobalVariables.Mapper.Map(Model, View)
+        RaiseEvent NewRecordInitialized()
     End Sub
 
     Public Overridable Function GoDeleteRecord() As Integer

@@ -34,12 +34,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProvinceState As String
         Property ReleasedDate As Date?
         Property ReligionIdNo As Int16?
-        Property Sponsor As Boolean
         Property Street As String
         Property Title As String
         Property TownCity As String
         Property ZipCode As String
         Property PayFrequency As PayFrequencySelection
+        Property SponsorType As Char
         Property RegularEmployeeDeductions As List(Of EmployeePayElementView)
         Property RegularEmployeeEarnings As List(Of EmployeePayElementView)
         Property EmployeePhones As List(Of EmployeePhoneView)
