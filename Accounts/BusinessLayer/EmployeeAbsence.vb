@@ -4,7 +4,7 @@ Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class Absence
+    Public Class EmployeeAbsence
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -20,7 +20,7 @@ Namespace BusinessLayer
 
         Public Property AbsenceReason As String
         Public Property AbsenceType As Char
-        Public Property AddedBy As Int16
+        Public Property AddedByUser As Int16
         Public Property DateCreated As DateTime?
         Public Property EmployeeIdNo As Int32
         Public Property EquivalentHours As Decimal

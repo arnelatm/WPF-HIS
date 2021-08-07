@@ -879,7 +879,7 @@ Namespace PresentationLayer.Views.Forms
             Dim nRecCount = Service.GetRecordCount("SecurityObject")
             If GlobalVariables.UserName.ToLower() = $"arnel" Then
                 Dim addSecurityObject As Boolean = False
-                If nRecCount <= 10 Then
+                If nRecCount <= 12 Then
                     If nRecCount = 0 Then
                         If Service.InitializeSecurityObject() > 0 Then
                             addSecurityObject = True
@@ -888,7 +888,7 @@ Namespace PresentationLayer.Views.Forms
                         addSecurityObject = True
                     End If
                 Else
-                    MessageBox.Show("Security Objects not changed there already exists security objects. You must delete them (except the basic 10 security groups) before you can Initialize the security objects.")
+                    MessageBox.Show("Security Objects not changed there already exists security objects. You must delete them (except the basic 12 security groups) before you can Initialize the security objects.")
                     addSecurityObject = False
                 End If
                 If addSecurityObject Then
@@ -899,7 +899,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub RecurringPayElementToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecurringPayrollEntryToolStripMenuItem.Click
+        Private Sub RecurringPayElementToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRecurringPayrollEntry.Click
             RunForm(Of RecurringPayElementEntry, RecurringPayElementPresenter(Of RecurringPayElementModel))()
         End Sub
 
@@ -1085,8 +1085,12 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of GeneratePayrollBankCsv, GeneratePayrollBankCsvPresenter(Of PayrollModel))()
         End Sub
 
-        Private Sub EmployeeLeaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeLeaveToolStripMenuItem.Click
+        Private Sub EmployeeLeaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeave.Click
             RunForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel))()
+        End Sub
+
+        Private Sub EmployeeAbsencesLateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeAbsencesLate.Click
+            RunForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))()
         End Sub
 
     End Class

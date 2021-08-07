@@ -6,11 +6,11 @@ Namespace PresentationLayer.Models
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class AbsenceModel
+    Public Class EmployeeAbsenceModel
 
         Public Property AbsenceReason As String
         Public Property AbsenceType As Char
-        Public Property AddedBy As Int16
+        Public Property AddedByUser As Int16
         Public Property DateCreated As DateTime?
         Public Property EmployeeIdNo As Int32
         Public Property EquivalentHours As Decimal
