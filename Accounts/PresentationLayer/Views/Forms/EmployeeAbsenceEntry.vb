@@ -76,7 +76,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property EquivalentHours As Decimal Implements IEmployeeAbsenceView.EquivalentHours
             Get
-                Return txtEquivalentHours.Text
+                Return NumParser(Of Decimal)(txtEquivalentHours.Text)
             End Get
             Set(value As Decimal)
                 txtEquivalentHours.Text = Convert.ToString(value)
@@ -121,13 +121,17 @@ Namespace PresentationLayer.Views.Forms
                 {"DateCreated", txtDateCreated},
                 {"EmployeeIdNo", cboEmployeeIdNo},
                 {"IdNo", TxtIdNo},
-                {"PayrollIdNo", txtPayrollIdNo}
+                {"PayElementIdNo", cboAbsenceType},
+                {"PeriodicPayment", txtPeriodicPayment},
+                {"StartDate", dtpStartDate}
+                {"PeriodicPayment", txtPeriodicPayment},
+                {"StartDate", dtpStartDate}
                 }
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Employee", cboEmployeeIdNo)
             CreateEnumDataSource(Of AbsenceTypeSelection)(cboAbsenceType)
+            CreateDataSource("Employee", cboEmployeeIdNo)
+            CreateDataSource("PayElement", cboAbsenceType)
         End Sub
 
     End Class
