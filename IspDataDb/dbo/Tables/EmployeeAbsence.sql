@@ -6,8 +6,10 @@
     [AbsenceType]     CHAR (1)       NULL,
     [AbsenceReason]   NVARCHAR (100) NULL,
     [AddedByUser]     SMALLINT       NULL,
-    [DateCreated]     DATETIME       CONSTRAINT [DF_EmployeeAbsenceAndLate_DateCreated] DEFAULT (getdate()) NULL,
+    [DateCreated]     DATETIME       CONSTRAINT [DF_EmployeeAbsence_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]   ROWVERSION     NULL,
-    CONSTRAINT [PK_EmployeeAbsenceAndLate] PRIMARY KEY CLUSTERED ([IdNo] ASC)
+    CONSTRAINT [PK_EmployeeAbsence] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

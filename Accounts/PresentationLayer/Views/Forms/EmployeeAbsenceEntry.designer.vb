@@ -22,7 +22,7 @@ Namespace PresentationLayer.Views.Forms
         Private components As System.ComponentModel.IContainer
 
         'NOTE: The following procedure is required by the Windows Form Designer
-        'It can be modified using the Windows Form Designer.  
+        'It can be modified using the Windows Form Designer.
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
@@ -37,21 +37,20 @@ Namespace PresentationLayer.Views.Forms
             Me.lblAddedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtUserName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.lblPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtStartDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtEndDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtAddedByUser = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtStartDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtEndDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.SuspendLayout()

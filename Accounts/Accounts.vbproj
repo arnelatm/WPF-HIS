@@ -339,7 +339,7 @@
     <Compile Include="PresentationLayer\Models\EmployeePayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\JournalPrefixModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveModel.vb" />
-    <Compile Include="PresentationLayer\Models\AbsencesModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeAbsencesModel.vb" />
     <Compile Include="PresentationLayer\Models\RecurringPayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\TransactionNotes.vb" />
     <Compile Include="PresentationLayer\Models\PayElementItemModel.vb" />
