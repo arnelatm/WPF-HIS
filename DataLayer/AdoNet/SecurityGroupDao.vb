@@ -109,7 +109,7 @@ Namespace AdoNet
             New GroupAccess() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .SecurityGroupIdNo = Extensions.AsInt(Of Int16?)(reader("SecurityGroupIdNo")),
-            .SecurityObjectIdNo = Extensions.AsInt(Of Int32?)(reader("SecurityObjectIdNo")),
+            .SecurityObjectIdNo = Extensions.AsInt(Of Int16?)(reader("SecurityObjectIdNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .Visible = Extensions.AsBool(reader("Visible")),
             .Editable = Extensions.AsBool(reader("Editable"))

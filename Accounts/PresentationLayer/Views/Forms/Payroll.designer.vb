@@ -96,7 +96,9 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPayrollAttendance = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGeneratePayroll = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
-            Me.RecurringPayrollEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemRecurringPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemEmployeeLeave = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemEmployeeAbsencesLate = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
             Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemStatementOfAccountsPayable = New System.Windows.Forms.ToolStripMenuItem()
@@ -164,7 +166,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.EmployeeLeaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -518,7 +519,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPayrollMenu
             '
-            Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.RecurringPayrollEntryToolStripMenuItem, Me.EmployeeLeaveToolStripMenuItem})
+            Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.ToolStripMenuItemRecurringPayrollEntry, Me.ToolStripMenuItemEmployeeLeave, Me.ToolStripMenuItemEmployeeAbsencesLate})
             Me.ToolStripMenuItemPayrollMenu.Name = "ToolStripMenuItemPayrollMenu"
             resources.ApplyResources(Me.ToolStripMenuItemPayrollMenu, "ToolStripMenuItemPayrollMenu")
             '
@@ -537,10 +538,20 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPayrollEntry.Name = "ToolStripMenuItemPayrollEntry"
             resources.ApplyResources(Me.ToolStripMenuItemPayrollEntry, "ToolStripMenuItemPayrollEntry")
             '
-            'RecurringPayrollEntryToolStripMenuItem
+            'ToolStripMenuItemRecurringPayrollEntry
             '
-            Me.RecurringPayrollEntryToolStripMenuItem.Name = "RecurringPayrollEntryToolStripMenuItem"
-            resources.ApplyResources(Me.RecurringPayrollEntryToolStripMenuItem, "RecurringPayrollEntryToolStripMenuItem")
+            Me.ToolStripMenuItemRecurringPayrollEntry.Name = "ToolStripMenuItemRecurringPayrollEntry"
+            resources.ApplyResources(Me.ToolStripMenuItemRecurringPayrollEntry, "ToolStripMenuItemRecurringPayrollEntry")
+            '
+            'ToolStripMenuItemEmployeeLeave
+            '
+            Me.ToolStripMenuItemEmployeeLeave.Name = "ToolStripMenuItemEmployeeLeave"
+            resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeave, "ToolStripMenuItemEmployeeLeave")
+            '
+            'ToolStripMenuItemEmployeeAbsencesLate
+            '
+            Me.ToolStripMenuItemEmployeeAbsencesLate.Name = "ToolStripMenuItemEmployeeAbsencesLate"
+            resources.ApplyResources(Me.ToolStripMenuItemEmployeeAbsencesLate, "ToolStripMenuItemEmployeeAbsencesLate")
             '
             'ToolStripSeparator2
             '
@@ -892,11 +903,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'EmployeeLeaveToolStripMenuItem
-            '
-            Me.EmployeeLeaveToolStripMenuItem.Name = "EmployeeLeaveToolStripMenuItem"
-            resources.ApplyResources(Me.EmployeeLeaveToolStripMenuItem, "EmployeeLeaveToolStripMenuItem")
-            '
             'Payroll
             '
             Me.AllowDrop = True
@@ -1051,12 +1057,13 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemTransactionNotesTranslator As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPayrollReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPeriodicPayroll As ToolStripMenuItem
-        Friend WithEvents RecurringPayrollEntryToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemRecurringPayrollEntry As ToolStripMenuItem
         Friend WithEvents ToolStripButton1 As ToolStripButton
         Friend WithEvents ToolStripMenuItemAccountActivity As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemJournalTransactionSummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTransactionJournalCodes As ToolStripMenuItem
         Friend WithEvents GenerateCSVFileToolStripMenuItem As ToolStripMenuItem
-        Friend WithEvents EmployeeLeaveToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemEmployeeLeave As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemEmployeeAbsencesLate As ToolStripMenuItem
     End Class
 End NameSpace

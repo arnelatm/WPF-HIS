@@ -41,7 +41,6 @@ Namespace DataLayer.AdoNet
                     "        BankNameAra = @BankNameAra," &
                     "        Notes = @Notes " &
                     "  WHERE IdNo = @IdNo"
-
             Return Db.Update(sql, Take(bank))
         End Function
 
@@ -65,10 +64,10 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(bank As Bank) As Object()
             Return New Object() {
-                                    "@IdNo", bank.IdNo,
                                     "@BankCode", bank.BankCode,
                                     "@BankName", bank.BankName,
                                     "@BankNameAra", bank.BankNameAra,
+                                    "@IdNo", bank.IdNo,
                                     "@Notes", bank.Notes
                                 }
         End Function
