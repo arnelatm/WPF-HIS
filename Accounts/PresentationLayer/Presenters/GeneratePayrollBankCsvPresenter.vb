@@ -83,6 +83,7 @@ Namespace PresentationLayer.Presenters
                     End Select
                     i += 1
                 Next
+                outFile.WriteLine(lineText)
                 outFile.Close()
                 Console.WriteLine(My.Computer.FileSystem.ReadAllText(csvFilePath))
                 If IO.File.Exists(csvFilePath) Then

@@ -81,7 +81,6 @@ Namespace PresentationLayer.Views.Forms
             MainTableName = "Payroll"
             SortOrderKey = "IdNo"
             SingleData = True
-
         End Sub
 
         Private Sub GeneratePayrollBankCsv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
