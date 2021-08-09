@@ -37,20 +37,23 @@ Namespace PresentationLayer.Views.Forms
             Me.lblAddedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtUserName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.lblPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtStartDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtEndDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtStartDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtEndDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtAddedByUser = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.SuspendLayout()
@@ -87,7 +90,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.FieldName = Nothing
             Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = False
-            Me.CFlowLayout2.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
@@ -229,6 +231,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.TxtIdNo)
             Me.CFlowLayout2.Controls.Add(Me.lblPayrollIdNo)
             Me.CFlowLayout2.Controls.Add(Me.txtPayrollIdNo)
+            Me.CFlowLayout2.Controls.Add(Me.lblPayrollCode)
+            Me.CFlowLayout2.Controls.Add(Me.txtPayrollCode)
             Me.CFlowLayout2.Controls.Add(Me.lblStartDate)
             Me.CFlowLayout2.Controls.Add(Me.txtStartDate)
             Me.CFlowLayout2.Controls.Add(Me.lblEndDate)
@@ -244,10 +248,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.lblAbsenceReason)
             Me.CFlowLayout2.Controls.Add(Me.txtAbsenceReason)
             Me.CFlowLayout2.Controls.Add(Me.lblAddedBy)
-            Me.CFlowLayout2.Controls.Add(Me.txtAddedByUser)
             Me.CFlowLayout2.Controls.Add(Me.txtUserName)
             Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
             Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
+            Me.CFlowLayout2.Controls.Add(Me.txtAddedByUser)
             resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
             Me.CFlowLayout2.Name = "CFlowLayout2"
             '
@@ -267,6 +271,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollIdNo.ComputedValue = False
             Me.txtPayrollIdNo.CustomFormat = Nothing
             Me.txtPayrollIdNo.DataBoundControl = True
+            Me.txtPayrollIdNo.DisplayOnly = True
             Me.txtPayrollIdNo.EditingMode = True
             Me.txtPayrollIdNo.EndFindValue = Nothing
             Me.txtPayrollIdNo.FieldDescription = Nothing
@@ -280,9 +285,46 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayrollIdNo.MinimumValue = Nothing
             Me.txtPayrollIdNo.Name = "txtPayrollIdNo"
             Me.txtPayrollIdNo.OldValue = Nothing
+            Me.txtPayrollIdNo.ReadOnly = True
             Me.txtPayrollIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtPayrollIdNo.TabStop = False
             Me.txtPayrollIdNo.Translatable = False
+            '
+            'lblPayrollCode
+            '
+            Me.lblPayrollCode.DisplayOnly = True
+            Me.lblPayrollCode.EditingMode = False
+            resources.ApplyResources(Me.lblPayrollCode, "lblPayrollCode")
+            Me.lblPayrollCode.Name = "lblPayrollCode"
+            Me.lblPayrollCode.Translatable = True
+            '
+            'txtPayrollCode
+            '
+            Me.txtPayrollCode.BackColor = System.Drawing.Color.White
+            Me.txtPayrollCode.BegFindValue = Nothing
+            Me.txtPayrollCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPayrollCode.ComputedValue = False
+            Me.txtPayrollCode.CustomFormat = Nothing
+            Me.txtPayrollCode.DataBoundControl = True
+            Me.txtPayrollCode.DisplayOnly = True
+            Me.txtPayrollCode.EditingMode = True
+            Me.txtPayrollCode.EndFindValue = Nothing
+            Me.txtPayrollCode.FieldDescription = Nothing
+            Me.txtPayrollCode.FieldName = Nothing
+            Me.txtPayrollCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPayrollCode.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.txtPayrollCode, True)
+            resources.ApplyResources(Me.txtPayrollCode, "txtPayrollCode")
+            Me.txtPayrollCode.ForeColor = System.Drawing.Color.Black
+            Me.txtPayrollCode.LinkedLabel = Nothing
+            Me.txtPayrollCode.MaximumValue = Nothing
+            Me.txtPayrollCode.MinimumValue = Nothing
+            Me.txtPayrollCode.Name = "txtPayrollCode"
+            Me.txtPayrollCode.OldValue = Nothing
+            Me.txtPayrollCode.ReadOnly = True
+            Me.txtPayrollCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPayrollCode.TabStop = False
+            Me.txtPayrollCode.Translatable = False
             '
             'lblStartDate
             '
@@ -300,6 +342,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtStartDate.ComputedValue = False
             Me.txtStartDate.CustomFormat = Nothing
             Me.txtStartDate.DataBoundControl = True
+            Me.txtStartDate.DisplayOnly = True
             Me.txtStartDate.EditingMode = True
             Me.txtStartDate.EndFindValue = Nothing
             Me.txtStartDate.FieldDescription = Nothing
@@ -334,6 +377,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEndDate.ComputedValue = False
             Me.txtEndDate.CustomFormat = Nothing
             Me.txtEndDate.DataBoundControl = True
+            Me.txtEndDate.DisplayOnly = True
             Me.txtEndDate.EditingMode = True
             Me.txtEndDate.EndFindValue = Nothing
             Me.txtEndDate.FieldDescription = Nothing
@@ -500,7 +544,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.SetFlowBreak(Me.txtDateCreated, True)
             resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
             Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.txtDateCreated.LinkedLabel = Me.lblDateCreated
+            Me.txtDateCreated.LinkedLabel = Me.lblAddedBy
             Me.txtDateCreated.MaximumValue = Nothing
             Me.txtDateCreated.MinimumValue = Nothing
             Me.txtDateCreated.Name = "txtDateCreated"
@@ -524,6 +568,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAddedByUser.FieldName = Nothing
             Me.txtAddedByUser.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtAddedByUser.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.txtAddedByUser, True)
             resources.ApplyResources(Me.txtAddedByUser, "txtAddedByUser")
             Me.txtAddedByUser.ForeColor = System.Drawing.Color.Black
             Me.txtAddedByUser.LinkedLabel = Me.lblAddedBy
@@ -564,8 +609,6 @@ Namespace PresentationLayer.Views.Forms
         Public WithEvents cboAbsenceType As CaComboBox
         Friend WithEvents lblAbsenceReason As CLabel
         Public WithEvents txtAbsenceReason As CTextBox
-        Friend WithEvents lblDateCreated As CLabel
-        Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblPayrollIdNo As CLabel
         Friend WithEvents txtPayrollIdNo As CTextBox
         Friend WithEvents lblStartDate As CLabel
@@ -574,6 +617,10 @@ Namespace PresentationLayer.Views.Forms
         Public WithEvents txtEndDate As CTextBox
         Friend WithEvents lblPayrollName As CLabel
         Friend WithEvents txtPayrollName As CTextBox
+        Friend WithEvents lblPayrollCode As CLabel
+        Friend WithEvents txtPayrollCode As CTextBox
         Public WithEvents txtAddedByUser As CTextBox
+        Public WithEvents txtDateCreated As CTextBox
+        Friend WithEvents lblDateCreated As CLabel
     End Class
 End Namespace

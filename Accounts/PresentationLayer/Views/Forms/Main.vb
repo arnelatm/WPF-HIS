@@ -1090,7 +1090,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub EmployeeAbsencesLateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeAbsencesLate.Click
-            RunForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeLeaveModel))()
+            RunForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))()
         End Sub
 
     End Class

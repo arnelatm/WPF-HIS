@@ -33,7 +33,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AbsenceType As Char Implements IEmployeeAbsenceView.AbsenceType
+        Public Property AbsenceType As String Implements IEmployeeAbsenceView.AbsenceType
             Get
                 Return cboAbsenceType.GetValue()
             End Get
@@ -44,23 +44,25 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property AddedByUser As Short Implements IEmployeeAbsenceView.AddedByUser
             Get
-                Return txtAddedByUser.Text
+                Return NumParser(Of Int16)(txtAddedByUser.Text)
             End Get
             Set(value As Short)
                 txtAddedByUser.Text = value
                 RaiseEvent AddedByUserChanged()
             End Set
         End Property
-
         Public Property DateCreated As DateTime? Implements IEmployeeAbsenceView.DateCreated
             Get
-                Return Convert.ToDateTime(txtUserName.Text)
+                If String.IsNullOrEmpty(txtDateCreated.Text) Then
+                    Return Now()
+                End If
+                Return Convert.ToDateTime(txtDateCreated.Text)
             End Get
-            Set
-                If Value.HasValue Then
-                    txtUserName.Text = Value
+            Set(value As DateTime?)
+                If value Is Nothing Then
+                    txtDateCreated.Text = Nothing
                 Else
-                    txtUserName.Text = Date.Now().ToString()
+                    txtDateCreated.Text = String.Format(CultureInfo.CurrentCulture, "{0:g}", value)
                 End If
             End Set
         End Property
@@ -101,12 +103,48 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PayrollName As String Implements IEmployeeAbsenceView.PayrollName
+            Get
+                Return txtPayrollName.Text
+            End Get
+            Set(value As String)
+                txtPayrollName.Text = value
+            End Set
+        End Property
+
+        Public Property PayrollCode As String Implements IEmployeeAbsenceView.PayrollCode
+            Get
+                Return txtPayrollCode.Text
+            End Get
+            Set(value As String)
+                txtPayrollCode.Text = value
+            End Set
+        End Property
+
         Public Property UserName As String Implements IEmployeeAbsenceView.UserName
             Get
                 Return txtUserName.Text
             End Get
             Set(value As String)
                 txtUserName.Text = value
+            End Set
+        End Property
+
+        Public Property EndDate As Date Implements IEmployeeAbsenceView.EndDate
+            Get
+                Return Convert.ToDateTime(txtEndDate.Text)
+            End Get
+            Set(value As Date)
+                txtEndDate.Text = value.ToString()
+            End Set
+        End Property
+
+        Public Property StartDate As Date Implements IEmployeeAbsenceView.StartDate
+            Get
+                Return Convert.ToDateTime(txtStartDate.Text)
+            End Get
+            Set(value As Date)
+                txtStartDate.Text = value.ToString()
             End Set
         End Property
 
@@ -117,21 +155,18 @@ Namespace PresentationLayer.Views.Forms
                 {
                 {"AbsenceReason", txtAbsenceReason},
                 {"AbsenceType", cboAbsenceType},
-                {"AddedByUser", txtUserName},
-                {"DateCreated", txtDateCreated},
+                {"AddedByUser", txtAddedByUser},
                 {"EmployeeIdNo", cboEmployeeIdNo},
+                {"EquivalentHours", txtEquivalentHours},
                 {"IdNo", TxtIdNo},
-                {"PayElementIdNo", cboAbsenceType},
-                {"PeriodicPayment", txtPeriodicPayment},
-                {"StartDate", dtpStartDate}
-                {"PeriodicPayment", txtPeriodicPayment},
-                {"StartDate", dtpStartDate}
+                {"PayrollIdNo", txtPayrollIdNo},
+                {"UserName", txtUserName}
                 }
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
             CreateEnumDataSource(Of AbsenceTypeSelection)(cboAbsenceType)
             CreateDataSource("Employee", cboEmployeeIdNo)
-            CreateDataSource("PayElement", cboAbsenceType)
         End Sub
 
     End Class
