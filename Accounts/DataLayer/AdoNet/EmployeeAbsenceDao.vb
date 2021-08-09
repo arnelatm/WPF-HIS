@@ -17,13 +17,9 @@ Namespace DataLayer.AdoNet
                                       "AddedByUser," &
                                       "DateCreated," &
                                       "EmployeeIdNo," &
-                                      "EndDate," &
                                       "EquivalentHours," &
                                       "IdNo," &
                                       "PayrollIdNo," &
-                                      "PayrollName," &
-                                      "PayrollNameAra," &
-                                      "StartDate," &
                                       "UserName"
 
         Public Function GetRecordByIdNo(idNo) As EmployeeAbsence Implements IDaoAll(Of EmployeeAbsence).GetRecordByIdNo
@@ -39,10 +35,9 @@ Namespace DataLayer.AdoNet
             Implements IDaoAll(Of EmployeeAbsence).GetAll
             If sortExpression = Nothing Then
                 sortExpression = "StartDate ASC"
-                sortExpression = "StartDate ASC"
-                Dim sql As String = "SELECT IdNo, EmployeeIdNo" &
-                    " FROM [EmployeeAbsence] " & "order by " & sortExpression
             End If
+            Dim sql As String = "SELECT IdNo, EmployeeIdNo" &
+                " FROM [EmployeeAbsence] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
         Public Function UpdateRecord(ByRef EmployeeAbsence As EmployeeAbsence) As Integer Implements IDaoAll(Of EmployeeAbsence).UpdateRecord
@@ -54,57 +49,43 @@ Namespace DataLayer.AdoNet
                     " EmployeeIdNo = @EmployeeIdNo," &
                     " EquivalentHours = @EquivalentHours," &
                     " PayrollIdNo = @PayrollIdNo" &
-
-            Return Db.Update(sql, Take(EmployeeAbsence))
                     " WHERE IdNo = @IdNo"
+            Return Db.Update(sql, Take(EmployeeAbsence))
         End Function
         Public Function AddRecord(ByRef EmployeeAbsence As EmployeeAbsence) As Integer Implements IDaoAll(Of EmployeeAbsence).AddRecord
-
-            Dim sql As String =
+            Dim sql As String = " INSERT INTO [EmployeeAbsence] " &
                     " (AbsenceReason,AbsenceType,AddedByUser,EmployeeIdNo,EquivalentHours,PayrollIdNo)" &
-                    " VALUES (@EmployeeAbsenceCode,@EmployeeAbsenceName,@EmployeeAbsenceNameAra,@StartDate,@EndDate,@PayCycleIdNo) "
+                    " VALUES (@AbsenceReason,@AbsenceType,@AddedByUser,@EmployeeIdNo,@EquivalentHours,@PayrollIdNo) "
             Return Db.Insert(sql, Take(EmployeeAbsence))
-                    " INSERT INTO [EmployeeAbsence] " &
+
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeAbsence) =
                                     Function(reader) _
             New EmployeeAbsence() With {
             .AbsenceReason = Extensions.AsString(reader("AbsenceReason")),
-            .AddedByUser = Extensions.AsInt(Of Int16)(reader("AddedByUser")),
-            .AddedByUser = Extensions.AsInt(Of Int16)(reader("AddedByUser")),
             .AbsenceType = Extensions.AsChar(reader("AbsenceType")),
+            .AddedByUser = Extensions.AsInt(Of Int16)(reader("AddedByUser")),
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
             .EmployeeIdNo = Extensions.AsInt(Of Int32)(reader("EmployeeIdNo")),
+            .EquivalentHours = Extensions.AsDecimal(reader("EquivalentHours")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .PayrollIdNo = Extensions.AsId(Of Int16)(reader("PayrollIdNo")),
-            .PayrollName = Extensions.AsString(reader("PayrollName")),
-            .PayrollNameAra = Extensions.AsId(Of Int16)(reader("PayrollNameAra")),
-            .StartDate = Extensions.AsDateTime(reader("StartDate")),
             .UserName = Extensions.AsString(reader("UserName"))
-            .EndDate = Extensions.AsDateTime(reader("EndDate")),
-            .EquivalentHours = Extensions.AsDecimal(reader("EquivalentHours")),
-        Private Function Take(EmployeeAbsence As EmployeeAbsence) As Object()
-            Return New Object() {
-                                 "@EndDate", EmployeeAbsence.EndDate,
-                                 "@IdNo", EmployeeAbsence.IdNo,
-                                 "@PayCycleIdNo", EmployeeAbsence.PayCycleIdNo,
-                                 "@EmployeeAbsenceCode", EmployeeAbsence.EmployeeAbsenceCode,
-                                 "@EmployeeAbsenceName", EmployeeAbsence.EmployeeAbsenceName,
-                                 "@EmployeeAbsenceNameAra", EmployeeAbsence.EmployeeAbsenceNameAra,
-                                 "@StartDate", EmployeeAbsence.StartDate
-        Private Function Take(EmployeeAbsence As EmployeeAbsence) As Object()
-            Return New Object() {
-                                 "@EndDate", EmployeeAbsence.EndDate,
-                                 "@IdNo", EmployeeAbsence.IdNo,
-                                 "@PayCycleIdNo", EmployeeAbsence.PayCycleIdNo,
-                                 "@EmployeeAbsenceCode", EmployeeAbsence.EmployeeAbsenceCode,
-                                 "@EmployeeAbsenceName", EmployeeAbsence.EmployeeAbsenceName,
-                                 "@EmployeeAbsenceNameAra", EmployeeAbsence.EmployeeAbsenceNameAra,
-                                 "@StartDate", EmployeeAbsence.StartDate
             }
 
-                                 }
+        Private Function Take(EmployeeAbsence As EmployeeAbsence) As Object()
+            Return New Object() {
+                            "AbsenceReason", EmployeeAbsence.AbsenceReason,
+                            "AbsenceType", EmployeeAbsence.AbsenceType,
+                            "AddedByUser", EmployeeAbsence.AddedByUser,
+                            "DateCreated", EmployeeAbsence.DateCreated,
+                            "EmployeeIdNo", EmployeeAbsence.EmployeeIdNo,
+                            "EquivalentHours", EmployeeAbsence.EquivalentHours,
+                            "IdNo", EmployeeAbsence.IdNo,
+                            "PayrollIdNo", EmployeeAbsence.PayrollIdNo,
+                            "UserName", EmployeeAbsence.UserName
+                            }
         End Function
 
     End Class
