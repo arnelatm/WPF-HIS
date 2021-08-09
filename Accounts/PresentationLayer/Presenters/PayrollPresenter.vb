@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿
+Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
@@ -809,9 +810,6 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GenerateComputedPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
             For Each earning As PayElementModel In _computedPayElements
-                If employeeIdNo = 405 And (earning.IdNo = 51 Or earning.IdNo = 31) Then '  = 397 And earning.IdNo = 36 Then
-                    Debugger.Break()
-                End If
                 If earning.Active Then
                     Dim amount As Decimal
                     amount = CalculateComputedPayElement(employeeIdNo, earning)
@@ -856,12 +854,18 @@ Namespace PresentationLayer.Presenters
                     rate = ComputeFactoredAmount(bpAmount, earning.FactorValue, earning.FactorType)
                     Dim qty = ComputeQuantity(employeeIdNo, earning.QuantityType)
                     amount = qty * rate
+                    If amount > bpAmount Then
+                        amount = bpAmount
+                    End If
                 Else
                     Dim bpPayElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = earning.BasePaymentIdNo)
                     If bpPayElementModel IsNot Nothing Then
                         Dim qty = ComputeQuantity(employeeIdNo, earning.QuantityType)
                         Dim bpAmount = ComputeFactoredAmount(bpPayElementModel.Amount, earning.FactorValue, earning.FactorType)
                         amount = qty * bpAmount
+                        If amount > bpPayElementModel.Amount Then
+                            amount = bpPayElementModel.Amount
+                        End If
                     End If
                 End If
             End If

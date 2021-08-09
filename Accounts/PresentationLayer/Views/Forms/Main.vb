@@ -1082,7 +1082,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BankTransferReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBankTransferReport.Click
-            RunForm(Of GeneratePayrollBankCsv, PayrollPresenter(Of PayrollModel))()
+            RunForm(Of GeneratePayrollBankCsv, GeneratePayrollBankCsvPresenter(Of PayrollModel))()
         End Sub
 
         Private Sub EmployeeLeaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeave.Click

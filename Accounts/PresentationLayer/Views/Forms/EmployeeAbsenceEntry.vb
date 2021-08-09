@@ -14,7 +14,6 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             FirstControl = cboEmployeeIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-
             'FormTreeView.Visible = False
         End Sub
 
