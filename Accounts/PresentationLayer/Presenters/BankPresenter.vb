@@ -1,11 +1,12 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
     Public Class BankPresenter(Of TM As New)
-        Inherits PresenterNew(Of IBankView, TM)
+        Inherits CommonPresenterNew(Of IBankView, TM)
 
         Public Sub New(itemView As IBankView)
             MyBase.New(itemView)

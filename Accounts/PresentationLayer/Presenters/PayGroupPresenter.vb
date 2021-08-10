@@ -1,12 +1,12 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
     Public Class PayGroupPresenter(Of TM As New)
-        Inherits PresenterNew(Of IPayGroupView, TM)
+        Inherits CommonPresenterNew(Of IPayGroupView, TM)
 
         Public Sub New(itemView As IPayGroupView)
             MyBase.New(itemView)

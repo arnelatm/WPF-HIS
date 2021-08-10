@@ -5,13 +5,13 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
     Public Class PayrollDetailPresenter(Of TM As New)
-        Inherits PresenterNew(Of IPayrollDetailView, TM)
+        Inherits CommonPresenterNew(Of IPayrollDetailView, TM)
 
         Protected DtPayElementInsertTable As New DataTable
         Protected DtPayElementUpdateTable As New DataTable

@@ -1,21 +1,18 @@
-﻿
-Imports System.Globalization
+﻿Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Presenters
-Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
     Public Class PayrollPresenter(Of TM As New)
-        Inherits PresenterNew(Of IPayrollView, TM)
+        Inherits CommonPresenterNew(Of IPayrollView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -26,15 +23,15 @@ Namespace PresentationLayer.Presenters
         Private _attendanceItemService As New AccountsService("AttendanceItem")
         Private _otWorkHourService As New AccountsService("OtWorkHour")
         Private _reinitialize As Boolean = False
-        Private _payrollEarning
-        Private _payrollPayElements As New List(Of PayrollPayElementModel)
-        Private _savedPayrollPayElements As New List(Of PayrollPayElementModel)
-        Private _computedPayElements As New List(Of PayElementModel)
-        Private _globalEarnings As New List(Of PayElementModel)
-        Private _otWorkHoursModel As New List(Of OtWorkHour)
+        Private ReadOnly _payrollEarning
+        Private ReadOnly _payrollPayElements As New List(Of PayrollPayElementModel)
+        Private ReadOnly _savedPayrollPayElements As New List(Of PayrollPayElementModel)
+        Private ReadOnly _computedPayElements As New List(Of PayElementModel)
+        Private ReadOnly _globalEarnings As New List(Of PayElementModel)
+        Private ReadOnly _otWorkHoursModel As New List(Of OtWorkHour)
 
         Private _daysInTheMonth As Int16
-        Private _endDate As Date
+        Private ReadOnly _endDate As Date
         Private _payFrequency As PayFrequencySelection
         Private _payrollIdNo As Int16
 
@@ -72,7 +69,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _factorPercentType = EnumToCode(FactorTypeSelection.PercentOfBasePaymentRate)
         Private ReadOnly _factorMultiplyType = EnumToCode(FactorTypeSelection.MultiplyBasePaymentRate)
         Private ReadOnly _factorDivideType = EnumToCode(FactorTypeSelection.DivideBasePaymentRate)
-        Private ReadOnly ServiceAccounts
+        Private ReadOnly _serviceAccounts
         Private _roundToWholeNumber As Boolean = True
 
         Public Sub New(view As IPayrollView)
@@ -390,7 +387,7 @@ Namespace PresentationLayer.Presenters
                 Else
                     Dim dDate As Date ' need to do this because Date? type is not accepted by DateAdd function
                     dDate = dateReleased
-                    eDate = DateAndTime.DateAdd(DateInterval.Day, -1, dDate)
+                    eDate = DateAdd(DateInterval.Day, -1, dDate)
                 End If
                 daysTotal = DateDiff(DateInterval.Day, dateHired, eDate) + 1
                 daysOff = FridaysInPeriod(dateHired, eDate)
@@ -872,15 +869,15 @@ Namespace PresentationLayer.Presenters
             Return amount
         End Function
 
-        Private Function ComputeFactoredAmount(amount As Decimal, FactorValue As Decimal, FactorType As String)
+        Private Function ComputeFactoredAmount(amount As Decimal, factorValue As Decimal, factorType As String)
             Dim factoredAmount As Decimal
-            If FactorType = _factorPercentType Then
-                factoredAmount = amount * FactorValue * 0.01D
-            ElseIf FactorType = _factorMultiplyType Then
-                factoredAmount = amount * FactorValue
-            ElseIf FactorType = _factorDivideType Then
-                If FactorValue <> 0 Then
-                    factoredAmount = amount / FactorValue
+            If factorType = _factorPercentType Then
+                factoredAmount = amount * factorValue * 0.01D
+            ElseIf factorType = _factorMultiplyType Then
+                factoredAmount = amount * factorValue
+            ElseIf factorType = _factorDivideType Then
+                If factorValue <> 0 Then
+                    factoredAmount = amount / factorValue
                 End If
             End If
             Return factoredAmount
@@ -906,15 +903,15 @@ Namespace PresentationLayer.Presenters
             Return summaryAmount
         End Function
 
-        Private Function ComputeSummaryItemAmount(amount As Decimal, FactorValue As Decimal, FactorType As String)
+        Private Function ComputeSummaryItemAmount(amount As Decimal, factorValue As Decimal, factorType As String)
             Dim factoredAmount As Decimal
-            If FactorType = _factorPercentType Then
-                factoredAmount = amount * FactorValue * 0.01D
-            ElseIf FactorType = _factorMultiplyType Then
-                factoredAmount = amount * FactorValue
-            ElseIf FactorType = _factorDivideType Then
-                If FactorValue <> 0 Then
-                    factoredAmount = amount / FactorValue
+            If factorType = _factorPercentType Then
+                factoredAmount = amount * factorValue * 0.01D
+            ElseIf factorType = _factorMultiplyType Then
+                factoredAmount = amount * factorValue
+            ElseIf factorType = _factorDivideType Then
+                If factorValue <> 0 Then
+                    factoredAmount = amount / factorValue
                 End If
             End If
             Return factoredAmount
@@ -939,7 +936,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function CreatePayrollDetails()
-            Dim payrollDetails As New List(Of PayrollDetail)
+            Dim payrollDetail As New PayrollDetailModel
             Dim payrollDetailsModel As New List(Of PayrollDetailModel)
             Dim savedPayrollDetails As New List(Of PayrollDetail)
             Dim savedPayrollDetailsModel As New List(Of PayrollDetailModel)
@@ -947,18 +944,16 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(savedPayrollDetails, savedPayrollDetailsModel)
             savedPayrollDetails = Nothing
             If savedPayrollDetailsModel.Count() = 0 Then
+
                 For Each employeeAttendance In View.PayrollAttendance
-                    Dim payrollDetail As New PayrollDetailModel
                     payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
                     payrollDetail.PayrollIdNo = View.IdNo
                     payrollDetailsModel.Add(payrollDetail)
                 Next
             Else
                 For Each employeeAttendance In View.PayrollAttendance
-                    Dim payrollDetail As New PayrollDetailModel
                     payrollDetail = savedPayrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
                     If payrollDetail Is Nothing Then
-                        payrollDetail = New PayrollDetailModel
                         payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
                         payrollDetail.PayrollIdNo = View.IdNo
                     End If
@@ -966,7 +961,7 @@ Namespace PresentationLayer.Presenters
                 Next
             End If
             For Each employeeAttendance In View.PayrollOvertime
-                Dim payrollDetail As PayrollDetailModel = payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
+                payrollDetail = payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
                 If payrollDetail Is Nothing Then
                     payrollDetail = savedPayrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
                     If payrollDetail Is Nothing Then

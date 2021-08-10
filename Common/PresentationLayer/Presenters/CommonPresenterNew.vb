@@ -69,23 +69,6 @@ Namespace PresentationLayer.Presenters
             MakeDefaultValues()
         End Sub
 
-        'Public Overridable Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
-        '    Dim className = $"AATM.Common.PresentationLayer.Models.ModelCommon"
-        '    TableName = objectName
-        '    SortOrderKey = objectName + "Name"
-        '    Dim tType As Type = Type.GetType(className)
-        '    If tType Is Nothing Then
-        '        MessageBox.Show("Missing Data Access Object " + className + "!")
-        '    End If
-        '    If bizParams Is Nothing AndAlso daoParams Is Nothing Then
-        '        ModelOfPresenter = Activator.CreateInstance(tType, {objectName, bizParams, daoParams})
-        '    Else
-        '        ModelOfPresenter = Activator.CreateInstance(tType, {objectName})
-        '    End If
-        '    'OriginalModel = Model.Clone().Clear()
-        '    'Model = Model.Clear()
-        'End Sub
-
         Public Sub MakeDefaultValues()
             For Each item In ViewDefaultFieldValues
                 Select Case item.DataType
