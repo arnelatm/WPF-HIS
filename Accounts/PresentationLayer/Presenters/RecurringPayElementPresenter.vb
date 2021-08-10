@@ -1,11 +1,11 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
     Public Class RecurringPayElementPresenter(Of TM As New)
-        Inherits PresenterNew(Of IRecurringPayElementView, TM)
+        Inherits CommonPresenterNew(Of IRecurringPayElementView, TM)
 
         Public Sub New(itemView As IRecurringPayElementView)
             MyBase.New(itemView)
