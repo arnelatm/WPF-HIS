@@ -1,11 +1,11 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
     Public Class PensionProviderPresenter(Of TM As New)
-        Inherits PresenterNew(Of IPensionProviderView, TM)
+        Inherits CommonPresenterNew(Of IPensionProviderView, TM)
 
         Public Sub New(view As IPensionProviderView)
             MyBase.New(view)
