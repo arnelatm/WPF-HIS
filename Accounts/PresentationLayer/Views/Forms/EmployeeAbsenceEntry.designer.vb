@@ -205,6 +205,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUserName.ComputedValue = False
             Me.txtUserName.CustomFormat = Nothing
             Me.txtUserName.DataBoundControl = True
+            Me.txtUserName.DisplayOnly = True
             Me.txtUserName.EditingMode = True
             Me.txtUserName.EndFindValue = Nothing
             Me.txtUserName.FieldDescription = Nothing
@@ -535,6 +536,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.ComputedValue = False
             Me.txtDateCreated.CustomFormat = Nothing
             Me.txtDateCreated.DataBoundControl = True
+            Me.txtDateCreated.DisplayOnly = True
             Me.txtDateCreated.EditingMode = True
             Me.txtDateCreated.EndFindValue = Nothing
             Me.txtDateCreated.FieldDescription = Nothing
