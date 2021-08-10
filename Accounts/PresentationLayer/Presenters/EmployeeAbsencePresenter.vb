@@ -1,23 +1,21 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeAbsencePresenter(Of TM As New)
-        Inherits PresenterNew(Of IEmployeeAbsenceView, TM)
+        Inherits CommonPresenterNew(Of IEmployeeAbsenceView, TM)
 
-        Private _payrollService As New AccountsService("Payroll")
-        Private _payrollIdNo As Int16 = 0
-        Private _endDate As Date
-        Private _startDate As Date
-        Private _payrollName As String
-        Private _payrollNameAra As String
-        Private _payrollCode As String
+        Private ReadOnly _payrollService As New AccountsService("Payroll")
+        Private ReadOnly _payrollIdNo As Int16 = 0
+        Private ReadOnly _endDate As Date
+        Private ReadOnly _startDate As Date
+        Private ReadOnly _payrollName As String
+        Private ReadOnly _payrollNameAra As String
+        Private ReadOnly _payrollCode As String
 
         Public Sub New(itemView As IEmployeeAbsenceView)
             MyBase.New(itemView)
@@ -28,7 +26,7 @@ Namespace PresentationLayer.Presenters
             If _payrollIdNo = 0 Then
                 _payrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
             End If
-            Dim payroll As New PayrollModel
+            Dim payroll As PayrollModel
             payroll = _payrollService.GetRecordByIdNo(Of PayrollModel)(_payrollIdNo)
             _payrollCode = payroll.PayrollCode
             _payrollNameAra = payroll.PayrollNameAra

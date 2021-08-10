@@ -1,11 +1,11 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
     Public Class JournalPrefixPresenter(Of TM As New)
-        Inherits PresenterNew(Of IJournalPrefixView, TM)
+        Inherits CommonPresenterNew(Of IJournalPrefixView, TM)
 
         Public Sub New(view As IJournalPrefixView)
             MyBase.New(view)

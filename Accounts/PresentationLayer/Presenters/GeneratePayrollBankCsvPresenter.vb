@@ -3,16 +3,16 @@ Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Presenters
 Imports Microsoft.Office.Interop
 
 Namespace PresentationLayer.Presenters
 
     Public Class GeneratePayrollBankCsvPresenter(Of TM As New)
-        Inherits PresenterNew(Of IPayrollView, TM)
+        Inherits CommonPresenterNew(Of IPayrollView, TM)
 
-        Private _nfi As NumberFormatInfo
+        Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New(view As IPayrollView)
             MyBase.New(view)
@@ -35,7 +35,7 @@ Namespace PresentationLayer.Presenters
                 Dim fieldList As String = $"BankName,AcctNo,NetPay,Notes,EmpName,IqamaNo,Address,SalaryEr,Housing,OtherWage,Deductions"
                 Dim payroll As Object = Service.GetSpRecords("fnGetBankPayrollCsv", fieldList, sortKey, idNo.ToString())
                 outFile.WriteLine($"bankname,acctno,netpay,notes,empname,iqamano,address,salaryer,housing,otherwage,deductions")
-                Dim fieldCount As Int32 = 11
+                Dim fieldCount As Integer = 11
                 Dim i As Int32 = 0
                 Dim lineText As String = ""
                 Dim lineNumber As Int32 = 2
@@ -91,7 +91,6 @@ Namespace PresentationLayer.Presenters
                 End If
                 If errors <> "" Then
                     Dim message = " -oOo- " & errorNumber.ToString() + " errors found in output file see list below. -oOo-" + Environment.NewLine + Environment.NewLine + errors
-                    Dim window = DirectCast(View, Form)
                     MessageBox.Show(message, $"Errors Found", MessageBoxButtons.OK,
                                     MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly)
 
