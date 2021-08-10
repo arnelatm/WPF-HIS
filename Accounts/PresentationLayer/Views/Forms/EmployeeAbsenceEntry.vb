@@ -50,6 +50,7 @@ Namespace PresentationLayer.Views.Forms
                 RaiseEvent AddedByUserChanged()
             End Set
         End Property
+
         Public Property DateCreated As DateTime? Implements IEmployeeAbsenceView.DateCreated
             Get
                 If String.IsNullOrEmpty(txtDateCreated.Text) Then
