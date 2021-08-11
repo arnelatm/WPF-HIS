@@ -388,6 +388,7 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\AccountHelpers.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.Designer.vb">
       <DependentUpon>CustomerEntryTv.vb</DependentUpon>

@@ -373,8 +373,8 @@ Namespace PresentationLayer.Views.Forms
             CreateEnumDataSource(Of PaymentMethodSelection)(cacPaymentMethod)
             CreateDataSource("Bank", cacBankIdNo)
             CreateDataSource("Country", cacCountryCode)
-            'cacApAccountIdNo.DataSource = _presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsPayable))
-            'cacExpAccountIdNo.DataSource = _presenter.GetDetailAccountList()
+            CreateDataSource("Account", cacExpAccountIdNo, "DetailAccount=1")
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.AccountsPayable)}, cacApAccountIdNo)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
