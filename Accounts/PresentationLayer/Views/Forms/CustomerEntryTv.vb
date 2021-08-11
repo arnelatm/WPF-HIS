@@ -374,12 +374,36 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("Country", cacCountryCode)
             CreateDataSource("Bank", cacCountryCode)
             CreateDataSource("DiscountScheme", cacDiscountSchemeIdNo)
-            'cacRevAccountIdNo.DataSource = GetLookupSpecial()
-            cacArAccountIdNo.DataSource = GetArAccounts()
+            CreateArDataSource()
         End Sub
 
-        Private Function GetArAccounts()
-            Return Nothing 'Presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsReceivable))
+        Private Sub CreateArDataSource()
+            Dim commaDelimitedSpecialAccountCodes As String = EnumToCode(SpecialAccountSelection.AccountsReceivable)
+            Dim lookupFilterKey = CreateSpecialAccountFilterKey(commaDelimitedSpecialAccountCodes)
+            CreateDataSource("Account", cacArAccountIdNo, lookupFilterKey)
+        End Sub
+
+        Public Function CreateSpecialAccountFilterKey(specialAccountArray As List(Of SpecialAccountSelection)) As String
+            Dim lookUpFilterKey = ""
+            For Each specialAccountCode In specialAccountArray
+                If lookUpFilterKey <> "" Then
+                    lookUpFilterKey = lookUpFilterKey + " Or "
+                End If
+                lookUpFilterKey = lookUpFilterKey + "SpecialAccount = '" & EnumToCode(SpecialAccountSelection.AccountsReceivable) & "'"
+            Next
+            Return lookUpFilterKey
+        End Function
+
+        Public Function CreateSpecialAccountFilterKey(commaDelimitedSpecialAccountCodes As String) As String
+            Dim specialAccountArray = commaDelimitedSpecialAccountCodes.Split(",")
+            Dim lookUpFilterKey = ""
+            For Each specialAccountCode In specialAccountArray
+                If lookUpFilterKey <> "" Then
+                    lookUpFilterKey = lookUpFilterKey + " Or "
+                End If
+                lookUpFilterKey = lookUpFilterKey + "SpecialAccount = '" & specialAccountCode & "'"
+            Next
+            Return lookUpFilterKey
         End Function
 
         'Private Sub lblContactDesignation_Click(sender As Object, e As EventArgs) Handles lblContactDesignation.Click
