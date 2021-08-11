@@ -5,7 +5,6 @@ Namespace PresentationLayer.Presenters
 
     Public Class AccountsPresenterNew(Of TV As IView, TM As New)
         Inherits CommonPresenterNew(Of TV, TM)
-        'Implements IAccountsPresenter
 
         Public Sub New(itemView As IView)
             MyBase.New(itemView)
@@ -276,10 +275,6 @@ Namespace PresentationLayer.Presenters
         '    End If
         '    Return 0
         'End Function
-
-        Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")
-            Return GetLookup("Country", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
-        End Function
 
         'Public Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
         '    Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)

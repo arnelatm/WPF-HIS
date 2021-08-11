@@ -1,13 +1,13 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Libraries
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
     Public Class AccountPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IAccountView, TM)
+        Inherits CommonPresenterNew(Of IAccountView, TM)
 
         Public ParentViewList As List(Of TM)
 

@@ -5,7 +5,8 @@
 Namespace PresentationLayer.Models
 
     Public Class DefaultFieldValueModel
-        Inherits CommonModel
+
+        Public Property Errors As List(Of String)
         Public Property IdNo As Int16
         Public Property SystemViewIdNo As Int16
         Public Property SystemViewName As String

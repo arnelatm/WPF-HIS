@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
@@ -11,7 +12,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeePresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IEmployeeView, TM)
+        Inherits CommonPresenterNew(Of IEmployeeView, TM)
         Implements ISubscriber(Of PayCycleIdNoChanged),
                    ISubscriber(Of DataChanged)
 

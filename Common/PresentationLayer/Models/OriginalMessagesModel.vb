@@ -1,8 +1,8 @@
 ﻿Namespace PresentationLayer.Models
 
     Public Class OriginalMessagesModel
-        Inherits CommonModel
 
+        Public Property Errors As List(Of String)
         Public Property IdNo As Int32
         Public Property Caption As String
         Public Property IdNoTranslated As Integer

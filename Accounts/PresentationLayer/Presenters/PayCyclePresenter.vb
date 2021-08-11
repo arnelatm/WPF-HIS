@@ -1,10 +1,11 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
     Public Class PayCyclePresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IPayCycleView, TM)
+        Inherits CommonPresenterNew(Of IPayCycleView, TM)
 
         Public Sub New(view As IPayCycleView)
             MyBase.New(view)

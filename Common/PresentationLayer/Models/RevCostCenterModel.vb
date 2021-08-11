@@ -1,8 +1,8 @@
 ﻿Namespace PresentationLayer.Models
 
     Public Class RevCostCenterModel
-        Inherits CommonModel
 
+        Public Property Errors As List(Of String)
         Public Property IdNo As Int16
         Public Property ParentIdNo As Int16?
         Public Property RevCostCenterCode As String
