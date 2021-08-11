@@ -40,30 +40,6 @@ Namespace PresentationLayer.Presenters
 
         Private Shared Shadows Property CommonModel As IModelCommon
 
-        Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
-            Dim lookupObj As New Lookup("Account")
-            If sortKey IsNot Nothing Then
-                lookupObj.SortKey = sortKey
-            End If
-            Dim values = accountType.Split(",")
-            Dim lookUpFilterKey = ""
-            For Each account In values
-                If lookUpFilterKey <> "" Then
-                    lookUpFilterKey = lookUpFilterKey + " Or "
-                End If
-                lookUpFilterKey = lookUpFilterKey + "SpecialAccount = '" & account & "'"
-            Next
-            lookupObj.FilterKey = lookUpFilterKey
-            Return GetLookup(lookupObj)
-        End Function
-
-        Public Function GetDetailAccountList(Optional ByVal sortKey As String = "AccountName")
-            Dim lookupObj As New Lookup("Account")
-            lookupObj.SortKey = sortKey
-            lookupObj.FilterKey = "DetailAccount=1"
-            Return GetLookup(lookupObj)
-        End Function
-
         Public Overrides Sub GoAddRecord()
             MyBase.GoAddRecord()
             MakeDefaultValues()

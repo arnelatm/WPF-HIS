@@ -45,3 +45,7 @@ RETURN
 	WHERE        (dbo.Account.SpecialAccount = 'EL') and 
 )
 GO
+
+
+Account for Customer Advances
+Account for Supplier Advances

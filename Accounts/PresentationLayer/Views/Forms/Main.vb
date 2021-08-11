@@ -534,7 +534,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub RunForm(Of TV, TP)()
             Dim childMdiForm = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
-            childMdiForm.presenter = Activator.CreateInstance(pType, {childMdiForm})
+            childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
             childMdiForm.MdiParent = Me
             childMdiForm.Show()
         End Sub

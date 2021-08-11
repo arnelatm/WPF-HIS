@@ -196,13 +196,13 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
-            If PresenterObj.AccountHasChildren(IdNo) Then
+            If Presenter.AccountHasChildren(IdNo) Then
                 cboParentIdNo.DisplayOnly = True
                 cboNormalBalance.DisplayOnly = True
             Else
                 cboParentIdNo.DisplayOnly = False
             End If
-            If PresenterObj.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
+            If Presenter.EditableAccountGroup(IdNo, cboParentIdNo.SelectedValue) Then
                 cboAccountGroup.DisplayOnly = False
             Else
                 cboAccountGroup.DisplayOnly = True

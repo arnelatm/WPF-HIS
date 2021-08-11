@@ -1997,8 +1997,12 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Dim data As List(Of Lookup.LookupData)
         Dim lookupObj As New Lookup(dataTableName)
         If dataFields IsNot Nothing Then
-            lookupObj.SortKey = sortKey
             lookupObj.FieldsToShow = dataFields
+        End If
+        If Not (sortKey Is Nothing OrElse sortKey = "") Then
+            lookupObj.SortKey = sortKey
+        End If
+        If Not (filter Is Nothing OrElse filter = "") Then
             lookupObj.FilterKey = filter
         End If
         data = GetLookup(lookupObj)
