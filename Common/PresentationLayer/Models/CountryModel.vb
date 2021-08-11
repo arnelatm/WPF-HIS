@@ -1,11 +1,11 @@
 ﻿Namespace PresentationLayer.Models
 
     Public Class CountryModel
-        Inherits CommonModel
 
         ' Country business object as seen by the Service client.
-        Public Property CountryCode As String
+        Public Property Errors As List(Of String)
 
+        Public Property CountryCode As String
         Public Property IdNo As Int16
         Public Property CountryName As String
         Public Property CountryNameAra As String

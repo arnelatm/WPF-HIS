@@ -1,10 +1,11 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
     Public Class PensionSchemePresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IPensionSchemeView, TM)
+        Inherits CommonPresenterNew(Of IPensionSchemeView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable

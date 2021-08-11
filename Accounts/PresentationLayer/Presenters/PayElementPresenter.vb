@@ -1,11 +1,12 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
     Public Class PayElementPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IPayElementView, TM)
+        Inherits CommonPresenterNew(Of IPayElementView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable

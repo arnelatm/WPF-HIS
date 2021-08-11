@@ -214,7 +214,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Models\DefaultFieldValueModel.vb" />
     <Compile Include="PresentationLayer\Models\BranchModel.vb" />
-    <Compile Include="PresentationLayer\Models\CommonModel.vb" />
     <Compile Include="PresentationLayer\Models\RevCostCenterModel.vb" />
     <Compile Include="PresentationLayer\Models\CountryModel.vb" />
     <Compile Include="PresentationLayer\Models\DepartmentModel.vb" />

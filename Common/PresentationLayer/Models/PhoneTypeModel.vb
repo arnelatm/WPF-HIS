@@ -1,7 +1,8 @@
 ﻿Namespace PresentationLayer.Models
 
     Public Class PhoneTypeModel
-        Inherits CommonModel
+
+        Public Property Errors As List(Of String)
         Public Property IdNo As Byte
         Public Property PhoneTypeCode As String
         Public Property PhoneTypeName As String

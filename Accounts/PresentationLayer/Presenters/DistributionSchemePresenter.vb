@@ -1,11 +1,12 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
     Public Class DistributionSchemePresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IDistributionSchemeView, TM)
+        Inherits CommonPresenterNew(Of IDistributionSchemeView, TM)
 
         Public ParentViewList As List(Of TM)
         Protected DtInsertTable As New DataTable

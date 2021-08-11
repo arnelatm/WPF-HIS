@@ -1,7 +1,8 @@
 ﻿Namespace PresentationLayer.Models
 
     Public Class DepartmentModel
-        Inherits CommonModel
+
+        Public Property Errors As List(Of String)
         Public Property IdNo As Int16
         Public Property DepartmentCode() As String
         Public Property DepartmentName() As String

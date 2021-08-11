@@ -1,13 +1,13 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Presenters
 
     Public Class SupplierPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of ISupplierView, TM)
+        Inherits CommonPresenterNew(Of ISupplierView, TM)
 
         Public ParentViewList As List(Of SupplierModel)
 

@@ -14,7 +14,6 @@ Namespace PresentationLayer.Presenters
         Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
 
         Shared Sub New()
-            CommonModel = New ModelCommon()
             ModelDefaultFieldValue = New ModelDefaultFieldValue
         End Sub
 
@@ -37,8 +36,6 @@ Namespace PresentationLayer.Presenters
 
         Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
         Public Shared Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
-
-        Private Shared Shadows Property CommonModel As IModelCommon
 
         Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
             ComposeLookupParameters("Account")

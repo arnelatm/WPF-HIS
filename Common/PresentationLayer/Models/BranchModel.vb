@@ -5,8 +5,8 @@
 Namespace PresentationLayer.Models
 
     Public Class BranchModel
-        Inherits CommonModel
 
+        Public Property Errors As List(Of String)
         Public Property IdNo As Int16
         Public Property BranchCode As String
         Public Property BranchName As String
