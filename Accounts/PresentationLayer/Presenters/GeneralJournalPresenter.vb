@@ -8,7 +8,7 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
-    Public Class GeneralJournalPresenter
+    Public Class GeneralJournalPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IGeneralJournalView, GeneralJournalModel)
 
         Protected DtInsertTable As New DataTable
@@ -29,8 +29,8 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             OriginalModel = New GeneralJournalModel()
             DataModel = New GeneralJournalModel
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            'Ea = New EventAggregator()
+            'Ea.SubscribeEvent(Me)
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
@@ -81,7 +81,6 @@ Namespace PresentationLayer.Presenters
                 _gjJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
-
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then

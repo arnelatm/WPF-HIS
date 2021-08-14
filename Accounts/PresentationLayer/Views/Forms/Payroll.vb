@@ -289,8 +289,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs)
-            Dim myForm = New GeneralJournalEntry(True)
-            myForm.Show()
+            RunForm2(Of GeneralJournalEntry, GeneralJournalPresenter(Of GeneralJournalModel))(True)
+            RunForm2(Of GeneralJournalEntry, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(True)
         End Sub
 
         Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCountries.Click
