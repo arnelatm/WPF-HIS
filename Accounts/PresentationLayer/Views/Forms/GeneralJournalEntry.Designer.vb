@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class GeneralJournalEntry
-        Inherits CFormEntry
+        Inherits CFormEntryNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _
@@ -37,6 +37,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -61,10 +62,8 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floJournalHeader.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -108,6 +107,30 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
             Me.lblIdNo.Name = "lblIdNo"
             Me.lblIdNo.Translatable = True
+            '
+            'txtJournalCode
+            '
+            Me.txtJournalCode.BackColor = System.Drawing.Color.White
+            Me.txtJournalCode.BegFindValue = Nothing
+            Me.txtJournalCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtJournalCode.ComputedValue = False
+            Me.txtJournalCode.CustomFormat = Nothing
+            Me.txtJournalCode.DataBoundControl = True
+            Me.txtJournalCode.EditingMode = True
+            Me.txtJournalCode.EndFindValue = Nothing
+            Me.txtJournalCode.FieldDescription = Nothing
+            Me.txtJournalCode.FieldName = Nothing
+            Me.txtJournalCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtJournalCode.FindEnabled = False
+            resources.ApplyResources(Me.txtJournalCode, "txtJournalCode")
+            Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
+            Me.txtJournalCode.LinkedLabel = Nothing
+            Me.txtJournalCode.MaximumValue = Nothing
+            Me.txtJournalCode.MinimumValue = Nothing
+            Me.txtJournalCode.Name = "txtJournalCode"
+            Me.txtJournalCode.OldValue = Nothing
+            Me.txtJournalCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtJournalCode.Translatable = False
             '
             'TxtIdNo
             '
@@ -375,7 +398,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.BackgroundColor = System.Drawing.SystemColors.Window
             Me.DataGridViewJournalItems.BegFindValue = Nothing
             Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.AccountIdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount})
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
             DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
@@ -543,16 +566,8 @@ Namespace PresentationLayer.Views.Forms
             Me.SpecialAccount.Name = "SpecialAccount"
             Me.SpecialAccount.ReadOnly = True
             '
-            'AccountIdNoDataGridViewTextBoxColumn
-            '
-            Me.AccountIdNoDataGridViewTextBoxColumn.DataPropertyName = "AccountIdNo"
-            resources.ApplyResources(Me.AccountIdNoDataGridViewTextBoxColumn, "AccountIdNoDataGridViewTextBoxColumn")
-            Me.AccountIdNoDataGridViewTextBoxColumn.Name = "AccountIdNoDataGridViewTextBoxColumn"
-            Me.AccountIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            '
             'bsJournalItems
             '
-            Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
             '
             'CFlowLayout4
             '
@@ -561,29 +576,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
             resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
             Me.CFlowLayout4.Name = "CFlowLayout4"
-            '
-            'txtJournalCode
-            '
-            Me.txtJournalCode.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.txtJournalCode.BegFindValue = Nothing
-            Me.txtJournalCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtJournalCode.ComputedValue = False
-            Me.txtJournalCode.CustomFormat = Nothing
-            Me.txtJournalCode.DataBoundControl = True
-            Me.txtJournalCode.EditingMode = True
-            Me.txtJournalCode.EndFindValue = Nothing
-            Me.txtJournalCode.FieldDescription = Nothing
-            Me.txtJournalCode.FieldName = Nothing
-            Me.txtJournalCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtJournalCode.FindEnabled = False
-            resources.ApplyResources(Me.txtJournalCode, "txtJournalCode")
-            Me.txtJournalCode.LinkedLabel = Nothing
-            Me.txtJournalCode.MaximumValue = Nothing
-            Me.txtJournalCode.MinimumValue = Nothing
-            Me.txtJournalCode.Name = "txtJournalCode"
-            Me.txtJournalCode.OldValue = Nothing
-            Me.txtJournalCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtJournalCode.Translatable = False
             '
             'GeneralJournalEntry
             '
@@ -627,7 +619,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvNotes As CDgvTextColumn
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn
-        Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
         Friend WithEvents chkPosted As UcCheckBox
         Friend WithEvents chkCancelled As UcCheckBox

@@ -289,8 +289,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosing.Click
-            Dim myForm = New GeneralJournalEntry(True)
-            myForm.Show()
+            RunForm2(Of GeneralJournalEntry, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(True)
         End Sub
 
         Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCountries.Click
@@ -386,8 +385,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemGeneralJournalEntry.Click
-            Dim myForm = New GeneralJournalEntry(False)
-            myForm.Show()
+            RunForm2(Of GeneralJournalEntry, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(False)
         End Sub
 
         ''' <summary>
@@ -535,6 +533,14 @@ Namespace PresentationLayer.Views.Forms
             Dim childMdiForm = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
             childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
+            childMdiForm.MdiParent = Me
+            childMdiForm.Show()
+        End Sub
+
+        Private Sub RunForm2(Of TV, TP, TX)(param As TX)
+            Dim childMdiForm = Activator.CreateInstance(GetType(TV), param)
+            Dim pType As Type = GetType(TP)
+            childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm, param})
             childMdiForm.MdiParent = Me
             childMdiForm.Show()
         End Sub

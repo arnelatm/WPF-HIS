@@ -5,8 +5,6 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -22,27 +20,27 @@ Namespace PresentationLayer.Views.Forms
         Private _revCostCenterByCode
         Private ReadOnly _closingEntry As Boolean
 
-        Public Sub New(ByVal closingEntry As Boolean)
+        Public Sub New(closingEntry As Boolean)
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             _closingEntry = closingEntry
             ClosingJournal = _closingEntry
-            If Not closingEntry Then
-                Text = Messaging.TranslateCaption("General Journal Entry")
-                MainTableName = "GeneralJournalNormal_View"
-            Else
-                Text = Messaging.TranslateCaption("Closing Entry")
-                MainTableName = "GeneralJournalClosing_View"
-            End If
+            'If Not closingEntry Then
+            '    Text = Messaging.TranslateCaption("General Journal Entry")
+            '    MainTableName = "GeneralJournalNormal_View"
+            'Else
+            '    Text = Messaging.TranslateCaption("Closing Entry")
+            '    MainTableName = "GeneralJournalClosing_View"
+            'End If
 
-            SortOrderKey = "IdNo"
+            'SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
-            PresenterObj = New GeneralJournalPresenter(Me, _closingEntry)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
+            'PresenterObj = New GeneralJournalPresenter(Me, _closingEntry)
+            'Ea = PresenterObj.Ea
+            'Ea.SubscribeEvent(Me)
             If GlobalVariables.RightToLeftLayout Then
                 txtJournalCode.Text = PresenterObj.GetLocalizedPrefix("GJ")
             Else
@@ -51,6 +49,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         ' This event handler provides custom item-creation behavior.
+        Public ReadOnly Property ClosingEntry As Boolean
+            Get
+                Return _closingEntry
+            End Get
+        End Property
+
         Private Sub journalItemsBindingSource_AddingNew(
                                                      ByVal sender As Object,
                                                      ByVal e As AddingNewEventArgs) _
@@ -200,8 +204,10 @@ Namespace PresentationLayer.Views.Forms
 #Region "Methods"
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = PresenterObj.GetDetailAccountList()
-            _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
+            CreateDataSource("Account", _accountsByCode, "DetailAccount=1")
+            CreateDataSource("RevCostCenter", _revCostCenterByCode)
+            '_accountsByCode = PresenterObj.GetDetailAccountList()
+            '_revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -217,7 +223,7 @@ Namespace PresentationLayer.Views.Forms
         }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+        Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateTotals()
         End Sub
 
@@ -288,7 +294,7 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Protected Overrides Sub InputsTurnedOn()
+        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             chkClosingJournal.Checked = _closingEntry
         End Sub
 
