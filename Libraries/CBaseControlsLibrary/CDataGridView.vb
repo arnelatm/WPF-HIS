@@ -262,14 +262,14 @@ Public Class CDataGridView
             If Invoker.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                 For Each o In myBindingSource
                     If o IsNot Nothing Then
-                        'Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
-                        Dim sequence = Invoker.GetProperty(o, SequenceFieldName)
+                        Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
+                        'Dim sequence = Invoker.GetProperty(o, SequenceFieldName)
                         If sequence = 0 Then
-                            'CallByName(o, SequenceFieldName, CallType.Set, i)
-                            Invoker.SetProperty(o, SequenceFieldName, {i})
+                            CallByName(o, SequenceFieldName, CallType.Set, i)
+                            'Invoker.SetProperty(o, SequenceFieldName, {i})
                         ElseIf sequence >= i Then
-                            'CallByName(o, SequenceFieldName, CallType.Set, sequence + 1)
-                            Invoker.SetProperty(o, SequenceFieldName, {sequence + 1})
+                            CallByName(o, SequenceFieldName, CallType.Set, sequence + 1)
+                            'Invoker.SetProperty(o, SequenceFieldName, {sequence + 1})
                         End If
                     End If
                 Next

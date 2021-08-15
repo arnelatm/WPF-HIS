@@ -2,12 +2,12 @@
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
-    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class GeneralJournalEntry
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+    Partial Class GeneralJournalEntryNew
         Inherits CFormEntryNew
 
         'Form overrides dispose to clean up the component list.
-        <System.Diagnostics.DebuggerNonUserCode()> _
+        <System.Diagnostics.DebuggerNonUserCode()>
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -21,10 +21,10 @@ Namespace PresentationLayer.Views.Forms
         'NOTE: The following procedure is required by the Windows Form Designer
         'It can be modified using the Windows Form Designer.  
         'Do not modify it using the code editor.
-        <System.Diagnostics.DebuggerStepThrough()> _
+        <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GeneralJournalEntry))
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GeneralJournalEntryNew))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
@@ -44,13 +44,17 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkClosingJournal = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkClosingJournal = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblClosing = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblApproved = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
@@ -64,6 +68,8 @@ Namespace PresentationLayer.Views.Forms
             Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floJournalHeader.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -72,6 +78,14 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.SuspendLayout()
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
             'floJournalHeader
             '
@@ -94,6 +108,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.dtpTransactionDate)
             Me.CFlowLayout1.Controls.Add(Me.CLabel2)
             Me.CFlowLayout1.Controls.Add(Me.chkClosingJournal)
+            Me.CFlowLayout1.Controls.Add(Me.lblClosing)
             Me.CFlowLayout1.Controls.Add(Me.lblNotes)
             Me.CFlowLayout1.Controls.Add(Me.txtNotes)
             resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
@@ -236,22 +251,36 @@ Namespace PresentationLayer.Views.Forms
             '
             'chkClosingJournal
             '
-            resources.ApplyResources(Me.chkClosingJournal, "chkClosingJournal")
-            Me.chkClosingJournal.BackColor = System.Drawing.Color.Transparent
+            Me.chkClosingJournal.AutoCheck = False
+            Me.chkClosingJournal.BackColor = System.Drawing.Color.White
             Me.chkClosingJournal.BegFindValue = Nothing
-            Me.chkClosingJournal.Checked = False
             Me.chkClosingJournal.DisplayOnly = True
-            Me.chkClosingJournal.EditingMode = False
+            Me.chkClosingJournal.EditingMode = True
             Me.chkClosingJournal.EndFindValue = Nothing
             Me.chkClosingJournal.FieldDescription = Nothing
             Me.chkClosingJournal.FieldName = Nothing
             Me.chkClosingJournal.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.chkClosingJournal.FindEnabled = False
+            resources.ApplyResources(Me.chkClosingJournal, "chkClosingJournal")
+            Me.chkClosingJournal.ForeColor = System.Drawing.Color.Black
+            Me.chkClosingJournal.IFindableControl_FindEnabled = False
             Me.chkClosingJournal.IgnoreCase = False
             Me.chkClosingJournal.LinkedLabel = Nothing
             Me.chkClosingJournal.Name = "chkClosingJournal"
+            Me.chkClosingJournal.NoLabel = True
+            Me.chkClosingJournal.OldValue = Nothing
             Me.chkClosingJournal.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkClosingJournal.Translatable = True
+            Me.chkClosingJournal.Translatable = False
+            Me.chkClosingJournal.UseVisualStyleBackColor = False
+            '
+            'lblClosing
+            '
+            resources.ApplyResources(Me.lblClosing, "lblClosing")
+            Me.lblClosing.DisplayOnly = True
+            Me.lblClosing.EditingMode = False
+            Me.CFlowLayout1.SetFlowBreak(Me.lblClosing, True)
+            Me.lblClosing.Name = "lblClosing"
+            Me.lblClosing.Translatable = True
             '
             'lblNotes
             '
@@ -292,8 +321,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout2.Controls.Add(Me.chkPosted)
+            Me.CFlowLayout2.Controls.Add(Me.CLabel3)
             Me.CFlowLayout2.Controls.Add(Me.chkCancelled)
+            Me.CFlowLayout2.Controls.Add(Me.lblCancelled)
             Me.CFlowLayout2.Controls.Add(Me.chkApproved)
+            Me.CFlowLayout2.Controls.Add(Me.lblApproved)
             Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
             Me.CFlowLayout2.Controls.Add(Me.dtpDateCreated)
             resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
@@ -301,63 +333,101 @@ Namespace PresentationLayer.Views.Forms
             '
             'chkPosted
             '
-            resources.ApplyResources(Me.chkPosted, "chkPosted")
-            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
+            Me.chkPosted.AutoCheck = False
+            Me.chkPosted.BackColor = System.Drawing.Color.White
             Me.chkPosted.BegFindValue = Nothing
-            Me.chkPosted.Checked = False
             Me.chkPosted.DisplayOnly = True
-            Me.chkPosted.EditingMode = False
+            Me.chkPosted.EditingMode = True
             Me.chkPosted.EndFindValue = Nothing
             Me.chkPosted.FieldDescription = Nothing
             Me.chkPosted.FieldName = Nothing
             Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkPosted.FindEnabled = True
-            Me.CFlowLayout2.SetFlowBreak(Me.chkPosted, True)
+            Me.chkPosted.FindEnabled = False
+            resources.ApplyResources(Me.chkPosted, "chkPosted")
+            Me.chkPosted.ForeColor = System.Drawing.Color.Black
+            Me.chkPosted.IFindableControl_FindEnabled = False
             Me.chkPosted.IgnoreCase = False
             Me.chkPosted.LinkedLabel = Nothing
             Me.chkPosted.Name = "chkPosted"
+            Me.chkPosted.NoLabel = True
+            Me.chkPosted.OldValue = Nothing
             Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkPosted.TabStop = False
-            Me.chkPosted.Translatable = True
+            Me.chkPosted.Translatable = False
+            Me.chkPosted.UseVisualStyleBackColor = False
+            '
+            'CLabel3
+            '
+            resources.ApplyResources(Me.CLabel3, "CLabel3")
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.EditingMode = False
+            Me.CFlowLayout2.SetFlowBreak(Me.CLabel3, True)
+            Me.CLabel3.Name = "CLabel3"
+            Me.CLabel3.Translatable = True
             '
             'chkCancelled
             '
-            resources.ApplyResources(Me.chkCancelled, "chkCancelled")
-            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
+            Me.chkCancelled.AutoCheck = False
+            Me.chkCancelled.BackColor = System.Drawing.Color.White
             Me.chkCancelled.BegFindValue = Nothing
-            Me.chkCancelled.Checked = False
             Me.chkCancelled.DisplayOnly = True
-            Me.chkCancelled.EditingMode = False
+            Me.chkCancelled.EditingMode = True
             Me.chkCancelled.EndFindValue = Nothing
             Me.chkCancelled.FieldDescription = Nothing
             Me.chkCancelled.FieldName = Nothing
             Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkCancelled.FindEnabled = True
+            Me.chkCancelled.FindEnabled = False
+            resources.ApplyResources(Me.chkCancelled, "chkCancelled")
+            Me.chkCancelled.ForeColor = System.Drawing.Color.Black
+            Me.chkCancelled.IFindableControl_FindEnabled = False
             Me.chkCancelled.IgnoreCase = False
             Me.chkCancelled.LinkedLabel = Nothing
             Me.chkCancelled.Name = "chkCancelled"
+            Me.chkCancelled.NoLabel = True
+            Me.chkCancelled.OldValue = Nothing
             Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkCancelled.TabStop = False
-            Me.chkCancelled.Translatable = True
+            Me.chkCancelled.Translatable = False
+            Me.chkCancelled.UseVisualStyleBackColor = False
+            '
+            'lblCancelled
+            '
+            resources.ApplyResources(Me.lblCancelled, "lblCancelled")
+            Me.lblCancelled.DisplayOnly = True
+            Me.lblCancelled.EditingMode = False
+            Me.CFlowLayout2.SetFlowBreak(Me.lblCancelled, True)
+            Me.lblCancelled.Name = "lblCancelled"
+            Me.lblCancelled.Translatable = True
             '
             'chkApproved
             '
-            resources.ApplyResources(Me.chkApproved, "chkApproved")
-            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkApproved.BackColor = System.Drawing.Color.White
             Me.chkApproved.BegFindValue = Nothing
-            Me.chkApproved.Checked = False
-            Me.chkApproved.EditingMode = False
+            Me.chkApproved.DisplayOnly = False
+            Me.chkApproved.EditingMode = True
             Me.chkApproved.EndFindValue = Nothing
             Me.chkApproved.FieldDescription = Nothing
             Me.chkApproved.FieldName = Nothing
             Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkApproved.FindEnabled = True
-            Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
+            Me.chkApproved.FindEnabled = False
+            resources.ApplyResources(Me.chkApproved, "chkApproved")
+            Me.chkApproved.ForeColor = System.Drawing.Color.Black
+            Me.chkApproved.IFindableControl_FindEnabled = False
             Me.chkApproved.IgnoreCase = False
             Me.chkApproved.LinkedLabel = Nothing
             Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.NoLabel = True
+            Me.chkApproved.OldValue = Nothing
             Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkApproved.Translatable = True
+            Me.chkApproved.Translatable = False
+            Me.chkApproved.UseVisualStyleBackColor = False
+            '
+            'lblApproved
+            '
+            resources.ApplyResources(Me.lblApproved, "lblApproved")
+            Me.lblApproved.DisplayOnly = True
+            Me.lblApproved.EditingMode = False
+            Me.CFlowLayout2.SetFlowBreak(Me.lblApproved, True)
+            Me.lblApproved.Name = "lblApproved"
+            Me.lblApproved.Translatable = True
             '
             'lblDateCreated
             '
@@ -566,9 +636,6 @@ Namespace PresentationLayer.Views.Forms
             Me.SpecialAccount.Name = "SpecialAccount"
             Me.SpecialAccount.ReadOnly = True
             '
-            'bsJournalItems
-            '
-            '
             'CFlowLayout4
             '
             Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
@@ -577,17 +644,70 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
             Me.CFlowLayout4.Name = "CFlowLayout4"
             '
-            'GeneralJournalEntry
+            'txtTotalDebits
+            '
+            Me.txtTotalDebits.BackColor = System.Drawing.Color.White
+            Me.txtTotalDebits.BegFindValue = Nothing
+            Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalDebits.ComputedValue = False
+            Me.txtTotalDebits.CustomFormat = Nothing
+            Me.txtTotalDebits.DataBoundControl = True
+            Me.txtTotalDebits.EditingMode = True
+            Me.txtTotalDebits.EndFindValue = Nothing
+            Me.txtTotalDebits.FieldDescription = Nothing
+            Me.txtTotalDebits.FieldName = Nothing
+            Me.txtTotalDebits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalDebits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
+            Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalDebits.LinkedLabel = Nothing
+            Me.txtTotalDebits.MaximumValue = Nothing
+            Me.txtTotalDebits.MinimumValue = Nothing
+            Me.txtTotalDebits.Name = "txtTotalDebits"
+            Me.txtTotalDebits.OldValue = Nothing
+            Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalDebits.Translatable = False
+            '
+            'txtTotalCredits
+            '
+            Me.txtTotalCredits.BackColor = System.Drawing.Color.White
+            Me.txtTotalCredits.BegFindValue = Nothing
+            Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalCredits.ComputedValue = False
+            Me.txtTotalCredits.CustomFormat = Nothing
+            Me.txtTotalCredits.DataBoundControl = True
+            Me.txtTotalCredits.EditingMode = True
+            Me.txtTotalCredits.EndFindValue = Nothing
+            Me.txtTotalCredits.FieldDescription = Nothing
+            Me.txtTotalCredits.FieldName = Nothing
+            Me.txtTotalCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalCredits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
+            Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalCredits.LinkedLabel = Nothing
+            Me.txtTotalCredits.MaximumValue = Nothing
+            Me.txtTotalCredits.MinimumValue = Nothing
+            Me.txtTotalCredits.Name = "txtTotalCredits"
+            Me.txtTotalCredits.OldValue = Nothing
+            Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalCredits.Translatable = False
+            '
+            'GeneralJournalEntryNew
             '
             resources.ApplyResources(Me, "$this")
+            Me.Controls.Add(Me.txtTotalCredits)
+            Me.Controls.Add(Me.txtTotalDebits)
             Me.Controls.Add(Me.CFlowLayout4)
-            Me.Name = "GeneralJournalEntry"
+            Me.Name = "GeneralJournalEntryNew"
             Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
+            Me.Controls.SetChildIndex(Me.txtTotalDebits, 0)
+            Me.Controls.SetChildIndex(Me.txtTotalCredits, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floJournalHeader.ResumeLayout(False)
             Me.CFlowLayout1.ResumeLayout(False)
             Me.CFlowLayout1.PerformLayout()
             Me.CFlowLayout2.ResumeLayout(False)
+            Me.CFlowLayout2.PerformLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout4.ResumeLayout(False)
@@ -620,11 +740,17 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
-        Friend WithEvents chkPosted As UcCheckBox
-        Friend WithEvents chkCancelled As UcCheckBox
-        Friend WithEvents chkApproved As UcCheckBox
         Friend WithEvents CLabel2 As CLabel
-        Friend WithEvents chkClosingJournal As UcCheckBox
         Friend WithEvents txtJournalCode As CTextBox
+        Friend WithEvents chkPosted As CCheckBox
+        Friend WithEvents CLabel3 As CLabel
+        Friend WithEvents chkCancelled As CCheckBox
+        Friend WithEvents lblCancelled As CLabel
+        Friend WithEvents chkApproved As CCheckBox
+        Friend WithEvents lblApproved As CLabel
+        Friend WithEvents chkClosingJournal As CCheckBox
+        Friend WithEvents lblClosing As CLabel
+        Friend WithEvents txtTotalDebits As CTextBox
+        Friend WithEvents txtTotalCredits As CTextBox
     End Class
 End NameSpace

@@ -66,7 +66,7 @@ Namespace DataLayer.AdoNet
                     "ReferenceNo," &
                     "TransactionDate" &
                     ") VALUES (" &
-                    "Approved," &
+                    "@Approved," &
                     "@Cancelled," &
                     "@ClosingJournal," &
                     "@Notes," &

@@ -289,7 +289,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosing.Click
-            RunForm2(Of GeneralJournalEntry, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(True)
+            RunForm2(Of GeneralJournalEntryNew, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(True)
         End Sub
 
         Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCountries.Click
@@ -385,7 +385,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemGeneralJournalEntry.Click
-            RunForm2(Of GeneralJournalEntry, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(False)
+            RunForm2(Of GeneralJournalEntryNew, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(False)
         End Sub
 
         ''' <summary>

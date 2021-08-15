@@ -1,4 +1,6 @@
-﻿Imports AATM.Common.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
@@ -15,10 +17,10 @@ Namespace PresentationLayer.Presenters
         '    Return modelDepositType.GetAll(Of DepositTypeModel)("DepositTypeName")
         'End Function
 
-        'Public Function GetAccount(idNo As String) Implements IAccountsPresenter.GetAccount
-        '    Dim accountModel As New ModelAccounts("Account")
-        '    Return accountModel.GetRecordByIdNo(Of AccountModel)(idNo)
-        'End Function
+        Public Function GetAccount(idNo As String) 'Implements IAccountsPresenter.GetAccount
+            Dim accountService As New AccountsService("Account")
+            Return accountService.GetRecordByIdNo(Of AccountModel)(idNo)
+        End Function
 
         'Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer Implements IAccountsPresenter.AddArOpenInvoice
         '    Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
