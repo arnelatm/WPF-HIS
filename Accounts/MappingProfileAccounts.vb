@@ -84,7 +84,7 @@ Public Class MappingProfileAccounts
         CreateMap(Of GeneralJournal, GeneralJournalModel)().ReverseMap()
         CreateMap(Of GeneralJournalModel, IGeneralJournalView)().ReverseMap()
         CreateMap(Of JournalItem, JournalItemModel)().ReverseMap()
-        CreateMap(Of JournalItemModel, IJournalItemView)().ReverseMap()
+        CreateMap(Of JournalItemModel, JournalItemView)().ReverseMap()
         CreateMap(Of JournalPrefix, JournalPrefixModel)().ReverseMap()
         CreateMap(Of JournalPrefixModel, IJournalPrefixView)().ReverseMap()
         CreateMap(Of Leave, LeaveModel)().ReverseMap()

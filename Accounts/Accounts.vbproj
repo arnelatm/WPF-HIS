@@ -377,6 +377,7 @@
     <Compile Include="PresentationLayer\Presenters\RecurringPayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TransactionsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\TransactionsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AttendancePresenter.vb" />
@@ -406,6 +407,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntryNew.designer.vb">
+      <DependentUpon>GeneralJournalEntryNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntryNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\JournalPrefixEntry.designer.vb">
@@ -680,12 +687,6 @@
       <DependentUpon>ErJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ErJournalEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.Designer.vb">
-      <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PostPettyCash.Designer.vb">
@@ -1108,6 +1109,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\GeneralJournalEntryNew.resx">
+      <DependentUpon>GeneralJournalEntryNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\JournalPrefixEntry.resx">
       <DependentUpon>JournalPrefixEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1209,10 +1213,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ErJournalEntry.resx">
       <DependentUpon>ErJournalEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\GeneralJournalEntry.resx">
-      <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PostPettyCash.resx">
       <DependentUpon>PostPettyCash.vb</DependentUpon>
@@ -1423,6 +1423,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.GeneralJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.OvertimeItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayElementAccountModel.datasource" />

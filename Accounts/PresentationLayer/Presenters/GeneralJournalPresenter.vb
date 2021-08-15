@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -9,28 +10,25 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class GeneralJournalPresenter(Of TM As New)
-        Inherits TransactionsPresenter(Of IGeneralJournalView, GeneralJournalModel)
+        Inherits TransactionsPresenterNew(Of IGeneralJournalView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _gjJournalItemModel As New ModelAccounts("JournalItem", Nothing, {"GeneralJournalItem_View", "UpdateGeneralJournalItemTVP", "InsertGeneralJournalItemTVP"})
+        Private ReadOnly _gjJournalItemService As New AccountsService("JournalItem", Nothing, {"GeneralJournalItem_View", "UpdateGeneralJournalItemTVP", "InsertGeneralJournalItemTVP"})
         Private ReadOnly _closingEntry As Boolean
 
         Public Sub New(view As IGeneralJournalView, closingEntry As Boolean)
             MyBase.New(view)
+            WithTreeView = False
             _closingEntry = closingEntry
-            ModelOfPresenter = New ModelAccounts("GeneralJournal")
-            ActualTableName = "GeneralJournal"
+            Service = New AccountsService("GeneralJournal")
+            'ActualTableName = "GeneralJournal"
             If Not view.ClosingJournal Then
                 TableName = "GeneralJournalNormal_View"
             Else
                 TableName = "GeneralJournalClosing_View"
             End If
             SortOrderKey = "IdNo"
-            OriginalModel = New GeneralJournalModel()
-            DataModel = New GeneralJournalModel
-            'Ea = New EventAggregator()
-            'Ea.SubscribeEvent(Me)
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
@@ -60,10 +58,10 @@ Namespace PresentationLayer.Presenters
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
 
             currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            View.TotalCredits = 0
-            For Each item In View.JournalItems
-                View.TotalCredits = View.TotalCredits + item.Credit
-            Next
+            'View.TotalCredits = 0
+            'For Each item In View.JournalItems
+            '    View.TotalCredits = View.TotalCredits + item.Credit
+            'Next
             If language = "ar" Then
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
@@ -78,7 +76,7 @@ Namespace PresentationLayer.Presenters
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
             If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
                 DtUpdateTable.Clear()
-                _gjJournalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+                _gjJournalItemService.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 
@@ -106,10 +104,11 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_gjJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            retVal = UpdateChildData(_gjJournalItemService, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
-                GlobalVariables.Mapper.Map(View, DataModel)
-                retVal = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
+                Dim dataModel = New TM
+                GlobalVariables.Mapper.Map(View, dataModel)
+                retVal = Service.UpdateGlReferenceNumber(dataModel)
             End If
         End Sub
 
@@ -124,7 +123,7 @@ Namespace PresentationLayer.Presenters
                 Dim account As AccountModel
                 Dim dateToday As DateTime = Now()
                 retValue = True
-                Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("General Journal", "LastPosting", "TransactionName", "LastPostingDate")
+                Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("General Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If View.JournalItems Is Nothing OrElse View.JournalItems.Count() = 0 Then
                     Messaging.Show(True, "MsgCannotSaveAnEmptyTransaction", "Sorry, cannot save an empty transaction!", "Error")
                     retValue = False

@@ -29,7 +29,7 @@ Public Class CDataGvBs
         AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite
     End Sub
 
-    Public Event ChangesMade As EventHandler
+    'Public Event ChangesMade As EventHandler
 
     Public Event DeletingRow(ByVal cancel As Boolean)
 
@@ -233,7 +233,7 @@ Public Class CDataGvBs
 
     Private Sub CDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
         ReSequenceDgvAfterDelete()
-        RaiseEvent ChangesMade(Me, EventArgs.Empty)
+        'RaiseEvent ChangesMade(Me, EventArgs.Empty)
     End Sub
 
     Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
@@ -275,7 +275,7 @@ Public Class CDataGvBs
     End Sub
 
     Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
-        RaiseEvent ChangesMade(Me, EventArgs.Empty)
+        'RaiseEvent ChangesMade(Me, EventArgs.Empty)
         'CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
         Invoker.SetProperty(CurrentRow.Cells("dgvInsColumn"), "Image", {Images.InsertRowImage})
     End Sub

@@ -13,10 +13,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property Notes As String
         Property Posted As Boolean
         Property ReferenceNo As String
-        Property TotalDebits As Decimal
-        Property TotalCredits As Decimal
+        ReadOnly Property TotalDebits As Decimal
+        ReadOnly Property TotalCredits As Decimal
         Property TransactionDate As Date?
-        Property JournalItems As List(Of IJournalItemView)
+        Property JournalItems As List(Of JournalItemView)
     End Interface
 
 End Namespace

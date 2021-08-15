@@ -8,20 +8,18 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class GeneralJournalEntry
+    Public Class GeneralJournalEntryNew
         Implements IGeneralJournalView
 
-        Public TxtTotalCredits As Decimal
-        Public TxtTotalDebits As Decimal
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _footer As DgvFooter
-        Private _journalItems As List(Of IJournalItemView)
+        Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
         Private ReadOnly _closingEntry As Boolean
 
         Public Sub New(closingEntry As Boolean)
-            MyBase.New()
+            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
@@ -55,12 +53,12 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
-        Private Sub journalItemsBindingSource_AddingNew(
-                                                     ByVal sender As Object,
-                                                     ByVal e As AddingNewEventArgs) _
-            Handles bsJournalItems.AddingNew
-            e.NewObject = New JournalItemView
-        End Sub
+        'Private Sub journalItemsBindingSource_AddingNew(
+        '                                             ByVal sender As Object,
+        '                                             ByVal e As AddingNewEventArgs) _
+        '    Handles bsJournalItems.AddingNew
+        '    e.NewObject = New JournalItemView
+        'End Sub
 
 #Region "Fields"
 
@@ -95,7 +93,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property GeneralJournalItemsDataSource As List(Of JournalItemModel)
+        'Public Property GeneralJournalItemsDataSource As List(Of JournalItemModel)
 
         Public Property IdNo As Int32 Implements IGeneralJournalView.IdNo
             Get
@@ -110,7 +108,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of IJournalItemView) Implements IGeneralJournalView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements IGeneralJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
@@ -147,27 +145,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property TotalCredits As Decimal Implements IGeneralJournalView.TotalCredits
+        Public ReadOnly Property TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
             Get
-                Return TxtTotalCredits
+                Return NumParser(Of Decimal)(txtTotalDebits.Text)
             End Get
-            Set(value As Decimal)
-                TxtTotalCredits = value
-            End Set
         End Property
 
-        Public Property TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
+        Public ReadOnly Property TotalCredits As Decimal Implements IGeneralJournalView.TotalCredits
             Get
-                Return TxtTotalDebits
+                Return NumParser(Of Decimal)(_footer.Value("dgvCredit"))
             End Get
-            Set(value As Decimal)
-                TxtTotalDebits = value
-            End Set
         End Property
 
         'Public TotalCredits As Decimal Implements IGeneralJournalView.TotalCredits
         '    Get
-        '        Return _footer.Value("dgvCredit")
+        '        Return c
         '    End Get
         'End Property
 
@@ -204,10 +196,8 @@ Namespace PresentationLayer.Views.Forms
 #Region "Methods"
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Account", _accountsByCode, "DetailAccount=1")
-            CreateDataSource("RevCostCenter", _revCostCenterByCode)
-            '_accountsByCode = PresenterObj.GetDetailAccountList()
-            '_revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
+            CreateLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
+            CreateLookupData("RevCostCenter", NameOf(_revCostCenterByCode))
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -219,8 +209,10 @@ Namespace PresentationLayer.Views.Forms
          {"Notes", txtNotes},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
-         {"TransactionDate", dtpTransactionDate}
-        }
+         {"TransactionDate", dtpTransactionDate},
+         {"TotalDebits", txtTotalDebits},
+         {"TotalCredits", txtTotalCredits}
+         }
         End Sub
 
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
@@ -228,7 +220,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BindJournalItem()
-            SuspendLayout()
+            'SuspendLayout()
             bsJournalItems.DataSource = Nothing
             DataGridViewJournalItems.Refresh()
             bsJournalItems.DataSource = JournalItems
@@ -253,7 +245,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
-            ResumeLayout()
+            'ResumeLayout()
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
@@ -307,8 +299,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                TotalDebits = _footer.Value("dgvDebit")
-                TotalCredits = _footer.Value("dgvCredit")
+                txtTotalDebits.Text = _footer.Value("dgvDebit")
+                txtTotalCredits.Text = _footer.Value("dgvCredit")
             End If
         End Sub
 
