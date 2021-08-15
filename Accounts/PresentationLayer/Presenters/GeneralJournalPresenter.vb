@@ -3,7 +3,6 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -22,7 +21,7 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             _closingEntry = closingEntry
             Service = New AccountsService("GeneralJournal")
-            'ActualTableName = "GeneralJournal"
+
             If Not view.ClosingJournal Then
                 TableName = "GeneralJournalNormal_View"
             Else

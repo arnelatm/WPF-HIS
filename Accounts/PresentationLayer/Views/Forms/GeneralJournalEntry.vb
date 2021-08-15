@@ -1,14 +1,11 @@
-﻿Imports System.ComponentModel
-Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class GeneralJournalEntryNew
+    Public Class GeneralJournalEntry
         Implements IGeneralJournalView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
@@ -19,26 +16,13 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _closingEntry As Boolean
 
         Public Sub New(closingEntry As Boolean)
-            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             _closingEntry = closingEntry
             ClosingJournal = _closingEntry
-            'If Not closingEntry Then
-            '    Text = Messaging.TranslateCaption("General Journal Entry")
-            '    MainTableName = "GeneralJournalNormal_View"
-            'Else
-            '    Text = Messaging.TranslateCaption("Closing Entry")
-            '    MainTableName = "GeneralJournalClosing_View"
-            'End If
-
-            'SortOrderKey = "IdNo"
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
-            'PresenterObj = New GeneralJournalPresenter(Me, _closingEntry)
-            'Ea = PresenterObj.Ea
-            'Ea.SubscribeEvent(Me)
             If GlobalVariables.RightToLeftLayout Then
                 txtJournalCode.Text = PresenterObj.GetLocalizedPrefix("GJ")
             Else
@@ -52,13 +36,6 @@ Namespace PresentationLayer.Views.Forms
                 Return _closingEntry
             End Get
         End Property
-
-        'Private Sub journalItemsBindingSource_AddingNew(
-        '                                             ByVal sender As Object,
-        '                                             ByVal e As AddingNewEventArgs) _
-        '    Handles bsJournalItems.AddingNew
-        '    e.NewObject = New JournalItemView
-        'End Sub
 
 #Region "Fields"
 

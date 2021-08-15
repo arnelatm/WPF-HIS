@@ -288,10 +288,6 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosing.Click
-            RunForm2(Of GeneralJournalEntryNew, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(True)
-        End Sub
-
         Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCountries.Click
             RunForm(Of CountryEntryTv, CountryPresenter(Of CountryModel))()
         End Sub
@@ -385,7 +381,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub GeneralJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemGeneralJournalEntry.Click
-            RunForm2(Of GeneralJournalEntryNew, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(False)
+            RunForm2(Of GeneralJournalEntry, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(False)
         End Sub
 
         ''' <summary>
@@ -556,14 +552,12 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DepositTypeEntryTv, DepositTypePresenter(Of DepositTypeModel))()
         End Sub
 
+        Private Sub ClosingEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosing.Click
+            RunForm2(Of GeneralJournalEntry, GeneralJournalPresenter(Of GeneralJournalModel), Boolean)(True)
+        End Sub
+
         Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesJournalEntry.Click
-            Dim childMdiForm As SalesJournalEntry
-            'Set the Parent Form of the Child window.
-            childMdiForm = New SalesJournalEntry With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of SalesJournalEntryNew, SalesJournalPresenter(Of SalesJournalModel))()
         End Sub
 
         Private Sub SecurityObjectsToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ToolStripMenuItemSecurityObjects.Click
