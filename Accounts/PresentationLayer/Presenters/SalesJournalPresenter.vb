@@ -3,22 +3,23 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
-    Public Class SalesJournalPresenter
-        Inherits TransactionsPresenter(Of ISalesJournalView, SalesJournalModel)
+    Public Class SalesJournalPresenter(Of TM As New)
+        Inherits TransactionsPresenterNew(Of ISalesJournalView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtSalesDepositInsertTable As New DataTable
         Protected DtSalesDepositUpdateTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
-        Private ReadOnly _salesDepositModel As New ModelAccounts("SalesDeposit")
-        Private ReadOnly _salesJournalItemModel As New ModelAccounts("JournalItem", Nothing, {"SalesJournalItem_View", "dbo.UpdateSalesJournalItemTVP", "dbo.InsertSalesJournalItemTVP"})
+        Private ReadOnly _salesDepositService As New AccountsService("SalesDeposit")
+        Private ReadOnly _salesJournalItemService As New AccountsService("JournalItem", Nothing, {"SalesJournalItem_View", "dbo.UpdateSalesJournalItemTVP", "dbo.InsertSalesJournalItemTVP"})
 
         Private _depositTypesModel As List(Of DepositTypeModel)
         Private ReadOnly _oldSalesDepositTypeItem As List(Of SalesDepositModel)
@@ -26,13 +27,10 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ISalesJournalView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("SalesJournal")
+            Service = New AccountsService("SalesJournal")
             TableName = "SalesJournal"
             SortOrderKey = "IdNo"
-            OriginalModel = New SalesJournalModel()
-            DataModel = New SalesJournalModel
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+
             DepositTypesModel = GetDepositTypeModel()
 
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
@@ -79,11 +77,11 @@ Namespace PresentationLayer.Presenters
         End Property
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return _salesJournalItemModel.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _salesJournalItemService.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetSalesDeposits(salesDepositTypeIdNo As Int32) As List(Of SalesDepositModel)
-            Return _salesDepositModel.GetRecordsWithGroupIdNo(Of SalesDepositModel)(salesDepositTypeIdNo, "Sequence")
+            Return _salesDepositService.GetRecordsWithGroupIdNo(Of SalesDepositModel)(salesDepositTypeIdNo, "Sequence")
         End Function
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
@@ -143,13 +141,14 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_salesJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            retVal = UpdateChildData(_salesJournalItemService, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal > 0 Then
-                retVal = UpdateChildData(_salesDepositModel, DtSalesDepositUpdateTable, DtSalesDepositInsertTable, passedValue, "SalesJournalIdNo")
+                retVal = UpdateChildData(_salesDepositService, DtSalesDepositUpdateTable, DtSalesDepositInsertTable, passedValue, "SalesJournalIdNo")
             End If
             If retVal >= 0 Then
-                GlobalVariables.Mapper.Map(View, DataModel)
-                retVal = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
+                Dim dataModel = New TM
+                GlobalVariables.Mapper.Map(View, dataModel)
+                retVal = Service.UpdateGlReferenceNumber(dataModel)
             End If
         End Sub
 
@@ -158,7 +157,7 @@ Namespace PresentationLayer.Presenters
             If MyBase.IsBizDataValid() Then
                 Dim dateToday As DateTime = Now()
                 retValue = True
-                Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Sales Journal", "LastPosting", "TransactionName", "LastPostingDate")
+                Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("Sales Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Sales Journal", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 End If
@@ -254,10 +253,6 @@ Namespace PresentationLayer.Presenters
                 nRowCount += 1
             Next
         End Sub
-
-        Public Function GetSupplierOpenInvoices(ByVal supplierIdNo As Int32) As List(Of SalesDepositModel)
-            Return ModelOfPresenter.GetSupplierOpenInvoices(supplierIdNo)
-        End Function
 
         Public Overrides Sub GoPrintRecord()
             Dim totalCreditAmount As String

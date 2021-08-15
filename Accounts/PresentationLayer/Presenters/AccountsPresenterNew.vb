@@ -12,12 +12,14 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
         End Sub
 
-        'Public Function GetDepositTypeModel() As List(Of DepositTypeModel) Implements IAccountsPresenter.GetDepositTypeModel
-        '    Dim modelDepositType As New ModelAccounts("DepositType")
-        '    Return modelDepositType.GetAll(Of DepositTypeModel)("DepositTypeName")
-        'End Function
+        Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
+            Dim cModel As New DepositTypeModel
+            Dim depositTypeService As New AccountsService("DepositType")
+            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepositTypeModel)("DepositTypeName", cModel)
+            Return depositTypeService.GetAll(newSortOrderKey)
+        End Function
 
-        Public Function GetAccount(idNo As String) 'Implements IAccountsPresenter.GetAccount
+        Public Function GetAccount(idNo As String)
             Dim accountService As New AccountsService("Account")
             Return accountService.GetRecordByIdNo(Of AccountModel)(idNo)
         End Function

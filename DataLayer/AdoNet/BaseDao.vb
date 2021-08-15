@@ -54,13 +54,19 @@ Namespace AdoNet
 
         Public Function DeleteRecord(idNo As Int32, tableName As String) As Int32 _
             Implements IBaseDao.DeleteRecord
-            If Strings.Right(tableName, 5).ToLower() = "_view" Then
-                tableName = Strings.Left(tableName, Strings.Len(tableName) - 5)
-            End If
+            Dim cTableName = GetPhysicalTableName(tableName)
             Dim sql As String =
-                    " Delete FROM [" & tableName & "] " &
+                    " Delete FROM [" & cTableName & "] " &
                     " Where IdNo = " & idNo
             Return _db.Delete(sql)
+        End Function
+
+        Private Shared Function GetPhysicalTableName(pTableName As String) As String
+            Dim physicalTableName As String = pTableName
+            If Strings.Right(pTableName, 5).ToLower() = "_view" Then
+                physicalTableName = Strings.Left(pTableName, Strings.Len(pTableName) - 5)
+            End If
+            Return physicalTableName
         End Function
 
         'Public Function FindField(tableName As String, fieldName As String, searchString As String, Optional searchPlace As Char = "A", Optional filter As String = Nothing) As Integer Implements IBaseDao.FindField
