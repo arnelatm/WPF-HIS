@@ -8,7 +8,7 @@ Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class SalesJournalEntryNew
+    Public Class SalesJournalEntry
         Implements ISalesJournalView
 
         'Public TxtTotalCredits As Decimal
@@ -312,31 +312,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SalesDepositDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesDeposits.CellEndEdit
             ProcessCellEndEdit(DataGridViewSalesDeposits, bsSalesDeposits)
-            'UpdateTotals()
+            UpdateTotals()
         End Sub
-
-        'Private Sub SalesDepositDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesDeposits.CellEndEdit
-        '    With DataGridViewSalesDeposits
-        '        If .CurrentRow() IsNot Nothing Then
-        '            Dim selectedRow As DataGridViewRow
-        '            Dim updateTotalNeeded As Boolean = True
-        '            selectedRow = .Rows(.CurrentCell.RowIndex)
-        '            Select Case .CurrentCell.OwningColumn.Name.ToLower()
-        '                Case $"dgvdeposittypeidno"
-        '                    Dim value = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-        '                    Presenter.RecomputeBankCharges(value, selectedRow.Index)
-        '                Case $"dgvsaleamount"
-        '                    Dim pDepositTypeIdNo = selectedRow.Cells("dgvDepositTypeIdNo").Value
-        '                    Presenter.RecomputeBankCharges(pDepositTypeIdNo, selectedRow.Index)
-        '                Case Else
-        '                    updateTotalNeeded = False
-        '            End Select
-        '            If updateTotalNeeded Then
-        '                UpdateTotals()
-        '            End If
-        '        End If
-        '    End With
-        'End Sub
 
         Private Sub SalesJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True

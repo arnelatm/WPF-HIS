@@ -557,7 +557,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SalesJournalEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesJournalEntry.Click
-            RunForm(Of SalesJournalEntryNew, SalesJournalPresenter(Of SalesJournalModel))()
+            RunForm(Of SalesJournalEntry, SalesJournalPresenter(Of SalesJournalModel))()
         End Sub
 
         Private Sub SecurityObjectsToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ToolStripMenuItemSecurityObjects.Click

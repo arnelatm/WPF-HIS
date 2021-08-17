@@ -3,7 +3,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class SalesJournalEntryNew
+    Partial Class SalesJournalEntry
         Inherits CFormEntryNew
 
         'Form overrides dispose to clean up the component list.
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SalesJournalEntryNew))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SalesJournalEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
@@ -1205,7 +1205,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalBankCharges.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtTotalBankCharges.Translatable = False
             '
-            'SalesJournalEntryNew
+            'SalesJournalEntry
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.txtTotalBankChargesVat)
@@ -1215,7 +1215,7 @@ Namespace PresentationLayer.Views.Forms
             Me.Controls.Add(Me.txtTotalCredits)
             Me.Controls.Add(Me.txtTotalDebits)
             Me.Controls.Add(Me.floFullEntryArea)
-            Me.Name = "SalesJournalEntryNew"
+            Me.Name = "SalesJournalEntry"
             Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
             Me.Controls.SetChildIndex(Me.txtTotalDebits, 0)
             Me.Controls.SetChildIndex(Me.txtTotalCredits, 0)

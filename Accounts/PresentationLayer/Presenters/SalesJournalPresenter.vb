@@ -270,33 +270,14 @@ Namespace PresentationLayer.Presenters
             Else
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            'View.TotalCredits = 0
-            'For Each item In View.JournalItems
-            '    View.TotalCredits = View.TotalCredits + item.Credit
-            'Next
             Dim cForm As New ReportForm("Sales Journal.Rpt", View.IdNo, "SalesJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
-
-        'Public Sub RecomputeBankCharges(ByVal pDepositTypeIdNo As Int16, ByVal index As Integer)
-        '    If pDepositTypeIdNo <> 0 Then
-        '        Dim depositType As New DepositTypeModel
-        '        depositType = GetDepositType(pDepositTypeIdNo)
-        '        Dim item As SalesDepositView = View.SalesDeposits(index)
-        '        With item
-        '            .Rate = depositType.Rate
-        '            .DepositAmount = .SaleAmount - .ComputedBankCharge - .ComputedBankChargeVat
-        '            .ActualBankCharge = .ComputedBankCharge
-        '            .VatAmount = .ComputedBankChargeVat
-        '        End With
-        '    End If
-        'End Sub
 
         Public Sub RecomputeBankCharges(salesDeposit As SalesDepositView)
             If salesDeposit.DepositTypeIdNo <> 0 Then
                 Dim depositType As New DepositTypeModel
                 depositType = GetDepositType(salesDeposit.DepositTypeIdNo)
-                'Dim item As SalesDepositView = View.SalesDeposits(Index)
                 With salesDeposit
                     .Rate = depositType.Rate
                     .DepositAmount = .SaleAmount - .ComputedBankCharge - .ComputedBankChargeVat
@@ -323,15 +304,8 @@ Namespace PresentationLayer.Presenters
                     Select Case eventType.PropertyName
                         Case $"DepositTypeIdNo"
                             RecomputeBankCharges(eventType.BindingSource.Current)
-                            'Dim value = eventType.EnteredValue
-                            'RecomputeBankCharges(value, eventType.Row)
                         Case $"SaleAmount"
                             RecomputeBankCharges(eventType.BindingSource.Current)
-                            'Dim value = eventType.EnteredValue
-                            'Dim depositTypeIdNo = eventType.BindingSource.Current.DepositTypeIdNo
-                            'RecomputeBankCharges(value, eventType.Row)
-                            ''Dim value = eventType.EnteredValue
-                            'eventType.BindingSource.ResetBindings(False)
                     End Select
                     eventType.BindingSource.ResetBindings(False)
                 End If
