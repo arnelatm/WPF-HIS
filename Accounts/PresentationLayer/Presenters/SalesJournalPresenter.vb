@@ -331,7 +331,7 @@ Namespace PresentationLayer.Presenters
                             'Dim depositTypeIdNo = eventType.BindingSource.Current.DepositTypeIdNo
                             'RecomputeBankCharges(value, eventType.Row)
                             ''Dim value = eventType.EnteredValue
-                            eventType.BindingSource.ResetBindings(False)
+                            'eventType.BindingSource.ResetBindings(False)
                     End Select
                     eventType.BindingSource.ResetBindings(False)
                 End If
