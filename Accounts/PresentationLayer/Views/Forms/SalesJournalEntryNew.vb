@@ -11,12 +11,12 @@ Namespace PresentationLayer.Views.Forms
     Public Class SalesJournalEntryNew
         Implements ISalesJournalView
 
-        Public TxtTotalCredits As Decimal
-        Public TxtTotalDebits As Decimal
-        Public TxtTotalBankCharges As Decimal
-        Public TxtTotalBankChargesVat As Decimal
-        Public TxtTotalDeposits As Decimal
-        Public TxtTotalSales As Decimal
+        'Public TxtTotalCredits As Decimal
+        'Public TxtTotalDebits As Decimal
+        'Public TxtTotalBankCharges As Decimal
+        'Public TxtTotalBankChargesVat As Decimal
+        'Public TxtTotalDeposits As Decimal
+        'Public TxtTotalSales As Decimal
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
         Private _slFooter As DgvFooter
         Private _salesDeposits As List(Of SalesDepositView)
         Private _jiFooter As DgvFooter
-        Private _journalItems As List(Of IJournalItemView)
+        Private _journalItems As List(Of JournalItemView)
         Private _revCostCenterByCode
         Private _journalMode As Boolean = False
 
@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = dtpTransactionDate
             _nfi.NumberDecimalDigits = 2
             If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = PresenterObj.GetLocalizedPrefix("SJ")
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("SJ")
             Else
                 txtJournalCode.Text = "SJ"
             End If
@@ -96,7 +96,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of IJournalItemView) Implements ISalesJournalView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements ISalesJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
@@ -143,58 +143,46 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property TotalBankCharges As Decimal Implements ISalesJournalView.TotalBankCharges
+        Public ReadOnly Property TotalBankCharges As Decimal Implements ISalesJournalView.TotalBankCharges
             Get
-                Return TxtTotalBankCharges
+                Return NumParser(Of Decimal)(txtTotalBankCharges.Text)
             End Get
-            Set
-                TxtTotalBankCharges = Value
-            End Set
         End Property
 
-        Public Property TotalBankChargesVat As Decimal Implements ISalesJournalView.TotalBankChargesVat
+        Public ReadOnly Property TotalBankChargesVat As Decimal Implements ISalesJournalView.TotalBankChargesVat
             Get
-                Return TxtTotalBankChargesVat
+                Return NumParser(Of Decimal)(txtTotalBankChargesVat.Text)
             End Get
-            Set
-                TxtTotalBankChargesVat = Value
-            End Set
         End Property
 
         Public Property TotalCredits As Decimal Implements ISalesJournalView.TotalCredits
             Get
-                Return TxtTotalCredits
+                Return NumParser(Of Decimal)(txtTotalCredits.Text)
             End Get
             Set(value As Decimal)
-                TxtTotalCredits = value
+                txtTotalCredits.Text = value
             End Set
         End Property
 
         Public Property TotalDebits As Decimal Implements ISalesJournalView.TotalDebits
             Get
-                Return TxtTotalDebits
+                Return NumParser(Of Decimal)(txtTotalDebits.Text)
             End Get
             Set(value As Decimal)
-                TxtTotalDebits = value
+                txtTotalDebits.Text = value
             End Set
         End Property
 
-        Public Property TotalDeposits As Decimal Implements ISalesJournalView.TotalDeposits
+        Public ReadOnly Property TotalDeposits As Decimal Implements ISalesJournalView.TotalDeposits
             Get
-                Return TxtTotalDeposits
+                Return NumParser(Of Decimal)(txtTotalDeposits.Text)
             End Get
-            Set
-                TxtTotalDeposits = Value
-            End Set
         End Property
 
-        Public Property TotalSales As Decimal Implements ISalesJournalView.TotalSales
+        Public ReadOnly Property TotalSales As Decimal Implements ISalesJournalView.TotalSales
             Get
-                Return TxtTotalSales
+                Return NumParser(Of Decimal)(txtTotalSales.Text)
             End Get
-            Set
-                TxtTotalSales = Value
-            End Set
         End Property
 
         Public Property TransactionDate As Date? Implements ISalesJournalView.TransactionDate
@@ -213,12 +201,10 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = PresenterObj.GetDetailAccountList()
-            _depositTypesByCode = PresenterObj.GetLookup("DepositType")
-            _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
-            cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList(GlobalFunctions.EnumToCode(SpecialAccountSelection.Sales))
-            cboAccountIdNo.EndUpdate()
+            CreateLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
+            CreateLookupData("DepositType", NameOf(_depositTypesByCode))
+            CreateLookupData("RevCostCenter", NameOf(_revCostCenterByCode))
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Sales)}, cboAccountIdNo)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -231,12 +217,12 @@ Namespace PresentationLayer.Views.Forms
                 {"Notes", txtNotes},
                 {"Posted", chkPosted},
                 {"ReferenceNo", txtReferenceNo},
-                {"TotalBankCharges", TxtTotalBankCharges},
-                {"TotalBankChargesVat", TxtTotalBankChargesVat},
-                {"TotalDeposits", TxtTotalDeposits},
-                {"TotalCredit", TxtTotalCredits},
-                {"TotalDebit", TxtTotalDebits},
-                {"TotalSalesAmount", TxtTotalSales},
+                {"TotalBankCharges", txtTotalBankCharges},
+                {"TotalBankChargesVat", txtTotalBankChargesVat},
+                {"TotalDeposits", txtTotalDeposits},
+                {"TotalCredit", txtTotalCredits},
+                {"TotalDebit", txtTotalDebits},
+                {"TotalSalesAmount", txtTotalSales},
                 {"TransactionDate", dtpTransactionDate}
                 }
         End Sub
@@ -325,27 +311,32 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SalesDepositDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesDeposits.CellEndEdit
-            With DataGridViewSalesDeposits
-                If .CurrentRow() IsNot Nothing Then
-                    Dim selectedRow As DataGridViewRow
-                    Dim updateTotalNeeded As Boolean = True
-                    selectedRow = .Rows(.CurrentCell.RowIndex)
-                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                        Case $"dgvdeposittypeidno"
-                            Dim value = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-                            PresenterObj.RecomputeBankCharges(value, selectedRow.Index)
-                        Case $"dgvsaleamount"
-                            Dim pDepositTypeIdNo = selectedRow.Cells("dgvDepositTypeIdNo").Value
-                            PresenterObj.RecomputeBankCharges(pDepositTypeIdNo, selectedRow.Index)
-                        Case Else
-                            updateTotalNeeded = False
-                    End Select
-                    If updateTotalNeeded Then
-                        UpdateTotals()
-                    End If
-                End If
-            End With
+            ProcessCellEndEdit(DataGridViewSalesDeposits, bsSalesDeposits)
+            'UpdateTotals()
         End Sub
+
+        'Private Sub SalesDepositDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSalesDeposits.CellEndEdit
+        '    With DataGridViewSalesDeposits
+        '        If .CurrentRow() IsNot Nothing Then
+        '            Dim selectedRow As DataGridViewRow
+        '            Dim updateTotalNeeded As Boolean = True
+        '            selectedRow = .Rows(.CurrentCell.RowIndex)
+        '            Select Case .CurrentCell.OwningColumn.Name.ToLower()
+        '                Case $"dgvdeposittypeidno"
+        '                    Dim value = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
+        '                    Presenter.RecomputeBankCharges(value, selectedRow.Index)
+        '                Case $"dgvsaleamount"
+        '                    Dim pDepositTypeIdNo = selectedRow.Cells("dgvDepositTypeIdNo").Value
+        '                    Presenter.RecomputeBankCharges(pDepositTypeIdNo, selectedRow.Index)
+        '                Case Else
+        '                    updateTotalNeeded = False
+        '            End Select
+        '            If updateTotalNeeded Then
+        '                UpdateTotals()
+        '            End If
+        '        End If
+        '    End With
+        'End Sub
 
         Private Sub SalesJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             KeyPreview = True
@@ -395,15 +386,15 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
                 _jiFooter.CalculateTotals()
-                TotalDebits = _jiFooter.Value("dgvDebit")
-                TotalCredits = _jiFooter.Value("dgvCredit")
+                txtTotalDebits.Text = _jiFooter.Value("dgvDebit")
+                txtTotalCredits.Text = _jiFooter.Value("dgvCredit")
             End If
         End Sub
 
         Private Sub UpdateSlTotals()
             If _slFooter IsNot Nothing Then
                 _slFooter.CalculateTotals()
-                TotalSales = _slFooter.Value("DgvSaleAmount")
+                txtTotalSales.Text = _slFooter.Value("DgvSaleAmount")
             End If
         End Sub
 

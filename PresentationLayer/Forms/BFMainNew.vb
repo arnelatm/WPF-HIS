@@ -33,7 +33,7 @@ Public Class BfMainNew
     Public Dv As DataView
     Public MyErrorProvider As New ErrorProviderExtended
     Public Ea As EventAggregator
-    Public PresenterObj As Object
+    'Public PresenterObj As Object
 
     Public Event AfterTranslateForm()
 

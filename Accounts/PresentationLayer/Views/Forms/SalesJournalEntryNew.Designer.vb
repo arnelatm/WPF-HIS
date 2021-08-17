@@ -64,6 +64,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floHeader2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -100,9 +103,12 @@ Namespace PresentationLayer.Views.Forms
             Me.floSalesDepositsFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnHideJournalEntries = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalSales = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalDeposits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalBankChargesVat = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalBankCharges = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floFullEntryArea.SuspendLayout()
             Me.floPurchaseJournalHeader.SuspendLayout()
@@ -411,6 +417,65 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.floHeader2, "floHeader2")
             Me.floHeader2.Name = "floHeader2"
             Me.floHeader2.TabStop = True
+            '
+            'chkCancelled
+            '
+            resources.ApplyResources(Me.chkCancelled, "chkCancelled")
+            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
+            Me.chkCancelled.BegFindValue = Nothing
+            Me.chkCancelled.Checked = False
+            Me.chkCancelled.DisplayOnly = True
+            Me.chkCancelled.EditingMode = False
+            Me.chkCancelled.EndFindValue = Nothing
+            Me.chkCancelled.FieldDescription = Nothing
+            Me.chkCancelled.FieldName = Nothing
+            Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkCancelled.FindEnabled = False
+            Me.chkCancelled.IgnoreCase = False
+            Me.chkCancelled.LinkedLabel = Nothing
+            Me.chkCancelled.Name = "chkCancelled"
+            Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkCancelled.TabStop = False
+            Me.chkCancelled.Translatable = True
+            '
+            'chkPosted
+            '
+            resources.ApplyResources(Me.chkPosted, "chkPosted")
+            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
+            Me.chkPosted.BegFindValue = Nothing
+            Me.chkPosted.Checked = False
+            Me.chkPosted.DisplayOnly = True
+            Me.chkPosted.EditingMode = False
+            Me.chkPosted.EndFindValue = Nothing
+            Me.chkPosted.FieldDescription = Nothing
+            Me.chkPosted.FieldName = Nothing
+            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkPosted.FindEnabled = False
+            Me.chkPosted.IgnoreCase = False
+            Me.chkPosted.LinkedLabel = Nothing
+            Me.chkPosted.Name = "chkPosted"
+            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkPosted.TabStop = False
+            Me.chkPosted.Translatable = True
+            '
+            'chkApproved
+            '
+            resources.ApplyResources(Me.chkApproved, "chkApproved")
+            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkApproved.BegFindValue = Nothing
+            Me.chkApproved.Checked = False
+            Me.chkApproved.EditingMode = False
+            Me.chkApproved.EndFindValue = Nothing
+            Me.chkApproved.FieldDescription = Nothing
+            Me.chkApproved.FieldName = Nothing
+            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkApproved.FindEnabled = False
+            Me.floHeader2.SetFlowBreak(Me.chkApproved, True)
+            Me.chkApproved.IgnoreCase = False
+            Me.chkApproved.LinkedLabel = Nothing
+            Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkApproved.Translatable = True
             '
             'lblDateCreated
             '
@@ -996,71 +1061,168 @@ Namespace PresentationLayer.Views.Forms
             Me.btnHideJournalEntries.OriginalImageName = Nothing
             Me.btnHideJournalEntries.SecurityKey = ""
             '
-            'chkCancelled
+            'txtTotalDebits
             '
-            resources.ApplyResources(Me.chkCancelled, "chkCancelled")
-            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
-            Me.chkCancelled.BegFindValue = Nothing
-            Me.chkCancelled.Checked = False
-            Me.chkCancelled.DisplayOnly = True
-            Me.chkCancelled.EditingMode = False
-            Me.chkCancelled.EndFindValue = Nothing
-            Me.chkCancelled.FieldDescription = Nothing
-            Me.chkCancelled.FieldName = Nothing
-            Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkCancelled.FindEnabled = False
-            Me.chkCancelled.IgnoreCase = False
-            Me.chkCancelled.LinkedLabel = Nothing
-            Me.chkCancelled.Name = "chkCancelled"
-            Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkCancelled.TabStop = False
-            Me.chkCancelled.Translatable = True
+            Me.txtTotalDebits.BackColor = System.Drawing.Color.White
+            Me.txtTotalDebits.BegFindValue = Nothing
+            Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalDebits.ComputedValue = False
+            Me.txtTotalDebits.CustomFormat = Nothing
+            Me.txtTotalDebits.DataBoundControl = True
+            Me.txtTotalDebits.EditingMode = True
+            Me.txtTotalDebits.EndFindValue = Nothing
+            Me.txtTotalDebits.FieldDescription = Nothing
+            Me.txtTotalDebits.FieldName = Nothing
+            Me.txtTotalDebits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalDebits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
+            Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalDebits.LinkedLabel = Nothing
+            Me.txtTotalDebits.MaximumValue = Nothing
+            Me.txtTotalDebits.MinimumValue = Nothing
+            Me.txtTotalDebits.Name = "txtTotalDebits"
+            Me.txtTotalDebits.OldValue = Nothing
+            Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalDebits.Translatable = False
             '
-            'chkPosted
+            'txtTotalCredits
             '
-            resources.ApplyResources(Me.chkPosted, "chkPosted")
-            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
-            Me.chkPosted.BegFindValue = Nothing
-            Me.chkPosted.Checked = False
-            Me.chkPosted.DisplayOnly = True
-            Me.chkPosted.EditingMode = False
-            Me.chkPosted.EndFindValue = Nothing
-            Me.chkPosted.FieldDescription = Nothing
-            Me.chkPosted.FieldName = Nothing
-            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkPosted.FindEnabled = False
-            Me.chkPosted.IgnoreCase = False
-            Me.chkPosted.LinkedLabel = Nothing
-            Me.chkPosted.Name = "chkPosted"
-            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkPosted.TabStop = False
-            Me.chkPosted.Translatable = True
+            Me.txtTotalCredits.BackColor = System.Drawing.Color.White
+            Me.txtTotalCredits.BegFindValue = Nothing
+            Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalCredits.ComputedValue = False
+            Me.txtTotalCredits.CustomFormat = Nothing
+            Me.txtTotalCredits.DataBoundControl = True
+            Me.txtTotalCredits.EditingMode = True
+            Me.txtTotalCredits.EndFindValue = Nothing
+            Me.txtTotalCredits.FieldDescription = Nothing
+            Me.txtTotalCredits.FieldName = Nothing
+            Me.txtTotalCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalCredits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
+            Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalCredits.LinkedLabel = Nothing
+            Me.txtTotalCredits.MaximumValue = Nothing
+            Me.txtTotalCredits.MinimumValue = Nothing
+            Me.txtTotalCredits.Name = "txtTotalCredits"
+            Me.txtTotalCredits.OldValue = Nothing
+            Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalCredits.Translatable = False
             '
-            'chkApproved
+            'txtTotalSales
             '
-            resources.ApplyResources(Me.chkApproved, "chkApproved")
-            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
-            Me.chkApproved.BegFindValue = Nothing
-            Me.chkApproved.Checked = False
-            Me.chkApproved.EditingMode = False
-            Me.chkApproved.EndFindValue = Nothing
-            Me.chkApproved.FieldDescription = Nothing
-            Me.chkApproved.FieldName = Nothing
-            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkApproved.FindEnabled = False
-            Me.floHeader2.SetFlowBreak(Me.chkApproved, True)
-            Me.chkApproved.IgnoreCase = False
-            Me.chkApproved.LinkedLabel = Nothing
-            Me.chkApproved.Name = "chkApproved"
-            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkApproved.Translatable = True
+            Me.txtTotalSales.BackColor = System.Drawing.Color.White
+            Me.txtTotalSales.BegFindValue = Nothing
+            Me.txtTotalSales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalSales.ComputedValue = False
+            Me.txtTotalSales.CustomFormat = Nothing
+            Me.txtTotalSales.DataBoundControl = True
+            Me.txtTotalSales.EditingMode = True
+            Me.txtTotalSales.EndFindValue = Nothing
+            Me.txtTotalSales.FieldDescription = Nothing
+            Me.txtTotalSales.FieldName = Nothing
+            Me.txtTotalSales.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalSales.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalSales, "txtTotalSales")
+            Me.txtTotalSales.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalSales.LinkedLabel = Nothing
+            Me.txtTotalSales.MaximumValue = Nothing
+            Me.txtTotalSales.MinimumValue = Nothing
+            Me.txtTotalSales.Name = "txtTotalSales"
+            Me.txtTotalSales.OldValue = Nothing
+            Me.txtTotalSales.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalSales.Translatable = False
             '
-            'SalesJournalEntry
+            'txtTotalDeposits
+            '
+            Me.txtTotalDeposits.BackColor = System.Drawing.Color.White
+            Me.txtTotalDeposits.BegFindValue = Nothing
+            Me.txtTotalDeposits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalDeposits.ComputedValue = False
+            Me.txtTotalDeposits.CustomFormat = Nothing
+            Me.txtTotalDeposits.DataBoundControl = True
+            Me.txtTotalDeposits.EditingMode = True
+            Me.txtTotalDeposits.EndFindValue = Nothing
+            Me.txtTotalDeposits.FieldDescription = Nothing
+            Me.txtTotalDeposits.FieldName = Nothing
+            Me.txtTotalDeposits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalDeposits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalDeposits, "txtTotalDeposits")
+            Me.txtTotalDeposits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalDeposits.LinkedLabel = Nothing
+            Me.txtTotalDeposits.MaximumValue = Nothing
+            Me.txtTotalDeposits.MinimumValue = Nothing
+            Me.txtTotalDeposits.Name = "txtTotalDeposits"
+            Me.txtTotalDeposits.OldValue = Nothing
+            Me.txtTotalDeposits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalDeposits.Translatable = False
+            '
+            'txtTotalBankChargesVat
+            '
+            Me.txtTotalBankChargesVat.BackColor = System.Drawing.Color.White
+            Me.txtTotalBankChargesVat.BegFindValue = Nothing
+            Me.txtTotalBankChargesVat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalBankChargesVat.ComputedValue = False
+            Me.txtTotalBankChargesVat.CustomFormat = Nothing
+            Me.txtTotalBankChargesVat.DataBoundControl = True
+            Me.txtTotalBankChargesVat.EditingMode = True
+            Me.txtTotalBankChargesVat.EndFindValue = Nothing
+            Me.txtTotalBankChargesVat.FieldDescription = Nothing
+            Me.txtTotalBankChargesVat.FieldName = Nothing
+            Me.txtTotalBankChargesVat.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalBankChargesVat.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalBankChargesVat, "txtTotalBankChargesVat")
+            Me.txtTotalBankChargesVat.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalBankChargesVat.LinkedLabel = Nothing
+            Me.txtTotalBankChargesVat.MaximumValue = Nothing
+            Me.txtTotalBankChargesVat.MinimumValue = Nothing
+            Me.txtTotalBankChargesVat.Name = "txtTotalBankChargesVat"
+            Me.txtTotalBankChargesVat.OldValue = Nothing
+            Me.txtTotalBankChargesVat.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalBankChargesVat.Translatable = False
+            '
+            'txtTotalBankCharges
+            '
+            Me.txtTotalBankCharges.BackColor = System.Drawing.Color.White
+            Me.txtTotalBankCharges.BegFindValue = Nothing
+            Me.txtTotalBankCharges.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalBankCharges.ComputedValue = False
+            Me.txtTotalBankCharges.CustomFormat = Nothing
+            Me.txtTotalBankCharges.DataBoundControl = True
+            Me.txtTotalBankCharges.EditingMode = True
+            Me.txtTotalBankCharges.EndFindValue = Nothing
+            Me.txtTotalBankCharges.FieldDescription = Nothing
+            Me.txtTotalBankCharges.FieldName = Nothing
+            Me.txtTotalBankCharges.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalBankCharges.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalBankCharges, "txtTotalBankCharges")
+            Me.txtTotalBankCharges.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalBankCharges.LinkedLabel = Nothing
+            Me.txtTotalBankCharges.MaximumValue = Nothing
+            Me.txtTotalBankCharges.MinimumValue = Nothing
+            Me.txtTotalBankCharges.Name = "txtTotalBankCharges"
+            Me.txtTotalBankCharges.OldValue = Nothing
+            Me.txtTotalBankCharges.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalBankCharges.Translatable = False
+            '
+            'SalesJournalEntryNew
             '
             resources.ApplyResources(Me, "$this")
+            Me.Controls.Add(Me.txtTotalBankChargesVat)
+            Me.Controls.Add(Me.txtTotalBankCharges)
+            Me.Controls.Add(Me.txtTotalSales)
+            Me.Controls.Add(Me.txtTotalDeposits)
+            Me.Controls.Add(Me.txtTotalCredits)
+            Me.Controls.Add(Me.txtTotalDebits)
             Me.Controls.Add(Me.floFullEntryArea)
-            Me.Name = "SalesJournalEntry"
+            Me.Name = "SalesJournalEntryNew"
             Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
+            Me.Controls.SetChildIndex(Me.txtTotalDebits, 0)
+            Me.Controls.SetChildIndex(Me.txtTotalCredits, 0)
+            Me.Controls.SetChildIndex(Me.txtTotalDeposits, 0)
+            Me.Controls.SetChildIndex(Me.txtTotalSales, 0)
+            Me.Controls.SetChildIndex(Me.txtTotalBankCharges, 0)
+            Me.Controls.SetChildIndex(Me.txtTotalBankChargesVat, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floFullEntryArea.ResumeLayout(False)
             Me.floPurchaseJournalHeader.ResumeLayout(False)
@@ -1154,5 +1316,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkCancelled As UcCheckBox
         Friend WithEvents chkPosted As UcCheckBox
         Friend WithEvents chkApproved As UcCheckBox
+        Friend WithEvents txtTotalDebits As CTextBox
+        Friend WithEvents txtTotalCredits As CTextBox
+        Friend WithEvents txtTotalSales As CTextBox
+        Friend WithEvents txtTotalDeposits As CTextBox
+        Friend WithEvents txtTotalBankChargesVat As CTextBox
+        Friend WithEvents txtTotalBankCharges As CTextBox
     End Class
 End Namespace

@@ -1,22 +1,29 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AutoMapper
+Imports Telerik.WinControls.UI
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AccountsPresenterNew(Of TV As IView, TM As New)
+    Public Class AccountsPresenterNew(Of TV As AATM.PresentationLayer.Views.IView, TM As New)
         Inherits CommonPresenterNew(Of TV, TM)
 
-        Public Sub New(itemView As IView)
+        Public Sub New(itemView As AATM.PresentationLayer.Views.IView)
             MyBase.New(itemView)
         End Sub
 
         Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
             Dim cModel As New DepositTypeModel
+            Dim cModelList As New List(Of DepositTypeModel)
             Dim depositTypeService As New AccountsService("DepositType")
             Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepositTypeModel)("DepositTypeName", cModel)
-            Return depositTypeService.GetAll(newSortOrderKey)
+            Dim depositType As List(Of DepositType)
+            depositType = depositTypeService.GetAll(newSortOrderKey)
+            GlobalVariables.Mapper.Map(depositType, cModelList)
+            Return cModelList
         End Function
 
         Public Function GetAccount(idNo As String)

@@ -11,17 +11,17 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property Notes As String
         Property ReferenceNo As String
-        Property TotalBankCharges As Decimal
-        Property TotalBankChargesVat As Decimal
+        ReadOnly Property TotalBankCharges As Decimal
+        ReadOnly Property TotalBankChargesVat As Decimal
         Property TotalCredits As Decimal
         Property TotalDebits As Decimal
-        Property TotalSales As Decimal
+        ReadOnly Property TotalSales As Decimal
         Property TransactionDate As Date?
-        Property TotalDeposits As Decimal
+        ReadOnly Property TotalDeposits As Decimal
         Property DateCreated As DateTime?
         Property Posted As Boolean
         Property SalesDeposits As List(Of SalesDepositView)
-        Property JournalItems As List(Of IJournalItemView)
+        Property JournalItems As List(Of JournalItemView)
 
     End Interface
 

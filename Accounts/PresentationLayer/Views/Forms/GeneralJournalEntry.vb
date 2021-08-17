@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
             If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = PresenterObj.GetLocalizedPrefix("GJ")
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("GJ")
             Else
                 txtJournalCode.Text = "GJ"
             End If
