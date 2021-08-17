@@ -7,11 +7,13 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
     Public Class SalesJournalPresenter(Of TM As New)
         Inherits TransactionsPresenterNew(Of ISalesJournalView, TM)
+        Implements ISubscriber(Of DataChanged)
 
         Protected DtInsertTable As New DataTable
         Protected DtSalesDepositInsertTable As New DataTable
@@ -22,11 +24,12 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _salesJournalItemService As New AccountsService("JournalItem", Nothing, {"SalesJournalItem_View", "dbo.UpdateSalesJournalItemTVP", "dbo.InsertSalesJournalItemTVP"})
 
         Private _depositTypesModel As List(Of DepositTypeModel)
-        Private ReadOnly _oldSalesDepositTypeItem As List(Of SalesDepositModel)
+        Private ReadOnly _oldSalesDepositTypeItem As List(Of TM)
         Private ReadOnly _vatRate As Decimal = GlobalVariables.VatRate() / 100D
 
         Public Sub New(view As ISalesJournalView)
             MyBase.New(view)
+            WithTreeView = False
             Service = New AccountsService("SalesJournal")
             TableName = "SalesJournal"
             SortOrderKey = "IdNo"
@@ -89,7 +92,7 @@ Namespace PresentationLayer.Presenters
             If View.JournalItems IsNot Nothing Then
                 View.JournalItems.Clear()
             Else
-                View.JournalItems = New List(Of IJournalItemView)
+                View.JournalItems = New List(Of JournalItemView)
             End If
             If View.SalesDeposits IsNot Nothing Then
                 View.SalesDeposits.Clear()
@@ -124,10 +127,10 @@ Namespace PresentationLayer.Presenters
                         DtSalesDepositUpdateTable.Rows.Add(workRow)
                     End If
                     nRowCount += 1
-                    View.TotalDebits += sc.SaleAmount
+                    'View.TotalDebits += sc.SaleAmount
                 End If
             Next
-            View.TotalCredits = View.TotalDebits
+            'View.TotalCredits = View.TotalDebits
         End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
@@ -168,10 +171,10 @@ Namespace PresentationLayer.Presenters
         Private Sub MakeJournalItems()
             Dim oldJournalItems = GetJournalItems(View.IdNo)
             Dim counter As Integer = 0
-            View.TotalSales = 0
-            For Each item In View.SalesDeposits
-                View.TotalSales = View.TotalSales + item.SaleAmount
-            Next
+            'View.TotalSales = 0
+            'For Each item In View.SalesDeposits
+            '    View.TotalSales = View.TotalSales + item.SaleAmount
+            'Next
             MakeSalesJournal(oldJournalItems, counter, View.AccountIdNo, 0, View.TotalSales, "Sales", Messaging.TranslateCaption("Sales"))
             For Each item As SalesDepositView In View.SalesDeposits
                 If item.DepositTypeIdNo <> 0 Then
@@ -191,7 +194,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub MakeSalesJournal(ByRef oldJournalItems As List(Of JournalItemModel), ByRef counter As Integer,
-                                     pAccountIdNo As Int16, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
+                                     pAccountIdNo As Int16?, debitAmount As Decimal, creditAmount As Decimal, note As String, noteAra As String)
             If debitAmount <> 0 Or creditAmount <> 0 Then
                 counter += 1
                 If counter <= oldJournalItems.Count() Then
@@ -267,20 +270,34 @@ Namespace PresentationLayer.Presenters
             Else
                 totalCreditAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            View.TotalCredits = 0
-            For Each item In View.JournalItems
-                View.TotalCredits = View.TotalCredits + item.Credit
-            Next
+            'View.TotalCredits = 0
+            'For Each item In View.JournalItems
+            '    View.TotalCredits = View.TotalCredits + item.Credit
+            'Next
             Dim cForm As New ReportForm("Sales Journal.Rpt", View.IdNo, "SalesJournalIdNo", totalCreditAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
         End Sub
 
-        Public Sub RecomputeBankCharges(ByVal pDepositTypeIdNo As Int16, ByVal index As Integer)
-            If pDepositTypeIdNo <> 0 Then
+        'Public Sub RecomputeBankCharges(ByVal pDepositTypeIdNo As Int16, ByVal index As Integer)
+        '    If pDepositTypeIdNo <> 0 Then
+        '        Dim depositType As New DepositTypeModel
+        '        depositType = GetDepositType(pDepositTypeIdNo)
+        '        Dim item As SalesDepositView = View.SalesDeposits(index)
+        '        With item
+        '            .Rate = depositType.Rate
+        '            .DepositAmount = .SaleAmount - .ComputedBankCharge - .ComputedBankChargeVat
+        '            .ActualBankCharge = .ComputedBankCharge
+        '            .VatAmount = .ComputedBankChargeVat
+        '        End With
+        '    End If
+        'End Sub
+
+        Public Sub RecomputeBankCharges(salesDeposit As SalesDepositView)
+            If salesDeposit.DepositTypeIdNo <> 0 Then
                 Dim depositType As New DepositTypeModel
-                depositType = GetDepositType(pDepositTypeIdNo)
-                Dim item As SalesDepositView = View.SalesDeposits(index)
-                With item
+                depositType = GetDepositType(salesDeposit.DepositTypeIdNo)
+                'Dim item As SalesDepositView = View.SalesDeposits(Index)
+                With salesDeposit
                     .Rate = depositType.Rate
                     .DepositAmount = .SaleAmount - .ComputedBankCharge - .ComputedBankChargeVat
                     .ActualBankCharge = .ComputedBankCharge
@@ -299,6 +316,27 @@ Namespace PresentationLayer.Presenters
             Next
             Return depositType
         End Function
+
+        Public Sub OnPayElementDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+            With eventType.BindingSource
+                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+                    Select Case eventType.PropertyName
+                        Case $"DepositTypeIdNo"
+                            RecomputeBankCharges(eventType.BindingSource.Current)
+                            'Dim value = eventType.EnteredValue
+                            'RecomputeBankCharges(value, eventType.Row)
+                        Case $"SaleAmount"
+                            RecomputeBankCharges(eventType.BindingSource.Current)
+                            'Dim value = eventType.EnteredValue
+                            'Dim depositTypeIdNo = eventType.BindingSource.Current.DepositTypeIdNo
+                            'RecomputeBankCharges(value, eventType.Row)
+                            ''Dim value = eventType.EnteredValue
+                            eventType.BindingSource.ResetBindings(False)
+                    End Select
+                    eventType.BindingSource.ResetBindings(False)
+                End If
+            End With
+        End Sub
 
     End Class
 
