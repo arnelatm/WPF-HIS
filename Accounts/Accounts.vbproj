@@ -391,6 +391,12 @@
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\AccountHelpers.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ApJournalEntryNew.designer.vb">
+      <DependentUpon>ApJournalEntryNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ApJournalEntryNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.Designer.vb">
       <DependentUpon>CustomerEntryTv.vb</DependentUpon>
     </Compile>
@@ -806,7 +812,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountReconciliationItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountReconciliationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ApJournalPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\ErJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ArJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BankPresenter.vb" />
@@ -1065,6 +1071,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.resx">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ApJournalEntryNew.resx">
+      <DependentUpon>ApJournalEntryNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ApJournalEntry.resx">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
@@ -1395,8 +1404,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Marcelo.config" />
+    <None Include="app.config" />
+    <None Include="appIspadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />

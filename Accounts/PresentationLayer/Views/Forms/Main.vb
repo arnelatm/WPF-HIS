@@ -42,6 +42,7 @@ Namespace PresentationLayer.Views.Forms
         Private _logStatus As LoginStatus
 
         Public Event UserLoggedIn(sender As Object, formControls As List(Of Control))
+        Private ReadOnly PresenterObj
 
         ''' <summary>
         '''     Default form constructor.
@@ -193,13 +194,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub AccountsPayableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsPayableEntry.Click
-            Dim childMdiForm As ApJournalEntry
-            'Set the Parent Form of the Child window.
-            childMdiForm = New ApJournalEntry With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of ApJournalEntryNew, ApJournalPresenterNew(Of ApJournalModel))()
         End Sub
 
         Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsReceivableEntry.Click
@@ -273,11 +268,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCheckPrinting.Click
-            Dim childMdiForm As CheckPrinter
-            childMdiForm = New CheckPrinter("S") With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            'Dim childMdiForm As CheckPrinter
+            'childMdiForm = New CheckPrinter("S") With {
+            '    .MdiParent = Me
+            '    }
+            'childMdiForm.Show()
+            RunForm(Of CheckPrinter, AccountPresenter(Of DisbursementJournalModel))()
         End Sub
 
         Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosePettyCashFund.Click
