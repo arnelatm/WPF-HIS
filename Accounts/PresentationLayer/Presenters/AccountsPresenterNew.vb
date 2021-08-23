@@ -1,5 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
@@ -41,24 +43,15 @@ Namespace PresentationLayer.Presenters
         '    Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
         'End Function
 
-        'Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer Implements IAccountsPresenter.AddApOpenInvoice
-        '    Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-        '    Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
-        '            .JournalCode = journalCode,
-        '            .JournalIdNo = journalItem.JournalIdNo,
-        '            .JournalItemIdNo = journalItem.IdNo
-        '            }
-        '    Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
-        'End Function
-
-        'Public Function DeleteApOpenInvoice(ByRef idNo As Int32) Implements IAccountsPresenter.DeleteApOpenInvoice
-        '    Dim retVal As Integer = 0
-        '    If idNo <> 0 Then
-        '        Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-        '        retVal = modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
-        '    End If
-        '    Return retVal
-        'End Function
+        Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+            Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
+            Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
+                    .JournalCode = journalCode,
+                    .JournalIdNo = journalItem.JournalIdNo,
+                    .JournalItemIdNo = journalItem.IdNo
+                    }
+            Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
+        End Function
 
         'Public Function UpdateInputVatAmount(journalItems As List(Of IJournalItemView)) Implements IAccountsPresenter.UpdateInputVatAmount
         '    Dim tiVatAmount As Decimal = 0
@@ -100,19 +93,19 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Sub
 
-        'Public Sub MakePayTypeAndSpecialAccount(journalItem As IJournalItemView, accountIdNo As Int16?) Implements IAccountsPresenter.MakePayTypeAndSpecialAccount
-        '    Dim account As AccountModel
-        '    If accountIdNo Is Nothing Or accountIdNo <= 0 Then
-        '        journalItem.JournalIdNo = 0
-        '        journalItem.SpecialAccount = Nothing
-        '        journalItem.PayeeType = Nothing
-        '    Else
-        '        account = GetAccount(accountIdNo)
-        '        journalItem.AccountIdNo = accountIdNo
-        '        journalItem.SpecialAccount = account.SpecialAccount
-        '        journalItem.PayeeType = account.PayeeType
-        '    End If
-        'End Sub
+        Public Sub MakePayTypeAndSpecialAccount(journalItem As JournalItemView, accountIdNo As Int16?)
+            Dim account As AccountModel
+            If accountIdNo Is Nothing Or accountIdNo <= 0 Then
+                journalItem.JournalIdNo = 0
+                journalItem.SpecialAccount = Nothing
+                journalItem.PayeeType = Nothing
+            Else
+                account = GetAccount(accountIdNo)
+                journalItem.AccountIdNo = accountIdNo
+                journalItem.SpecialAccount = account.SpecialAccount
+                journalItem.PayeeType = account.PayeeType
+            End If
+        End Sub
 
         'Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView) Implements IAccountsPresenter.AddNewItemOnBindingSource
         '    e.NewObject = New TS
@@ -210,18 +203,6 @@ Namespace PresentationLayer.Presenters
         '    End If
         'End Sub
 
-        'Public Function GetSupplierPaymentDueDays(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
-        'End Function
-
-        'Public Function GetSupplierSettlementDiscount(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDiscount")
-        'End Function
-
-        'Public Function GetSupplierSettlementDueDays(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDueDays")
-        'End Function
-
         'Public Function GetCustomerPaymentDueDays(idNo As String)
         '    Return GetRecordFieldWithKey(idNo, "Customer", "IdNo", "PaymentDueDays")
         'End Function
@@ -232,10 +213,6 @@ Namespace PresentationLayer.Presenters
 
         'Public Function GetCustomerSettlementDueDays(idNo As String)
         '    Return GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDueDays")
-        'End Function
-
-        'Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int16)
-        '    Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "AP"
         'End Function
 
         'Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int16)

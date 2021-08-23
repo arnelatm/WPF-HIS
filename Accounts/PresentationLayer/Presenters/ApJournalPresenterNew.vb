@@ -3,30 +3,26 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
     Public Class ApJournalPresenterNew(Of TM As New)
-        Inherits TransactionsPresenter(Of IApJournalView, TM)
+        Inherits TransactionsPresenterNew(Of IApJournalView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _apJournalItemModel As New ModelAccounts("JournalItem", Nothing, {"ApJournalItem_View", "dbo.UpdateApJournalItemTVP", "dbo.InsertApJournalItemTVP"})
-        Private ReadOnly _apOpenInvoiceModel As New ModelAccounts("ApOpenInvoice")
+        Private ReadOnly _apJournalItemService As New AccountsService("JournalItem", Nothing, {"GeneralJournalItem_View", "UpdateGeneralJournalItemTVP", "InsertGeneralJournalItemTVP"})
+        Private ReadOnly _apOpenInvoiceService As New AccountsService("ApOpenInvoice")
 
         Public Sub New(view As IApJournalView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("ApJournal")
+            WithTreeView = False
+            Service = New AccountsService("ApJournal")
             SortOrderKey = "IdNo"
-            OriginalModel = New TM
-            DataModel = New TM
-            'GlobalVariables.EventAggregator.SubscribeEvent(Me)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
-
+            TableName = "APJournal"
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
@@ -47,40 +43,26 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If DtInsertTable IsNot Nothing Then
-                DtInsertTable.Clear()
+            If Not CancelSave Then
+                ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf JournalItemFilter)
             End If
-            If DtUpdateTable IsNot Nothing Then
-                DtUpdateTable.Clear()
-            End If
-            Dim nRowCount = 1
-            For Each ji In View.JournalItems
-                If ji.AccountIdNo = 0 AndAlso ji.Debit = 0 AndAlso ji.Credit = 0 Then
-                    ' ignore these records (no amount no account)
-                Else
-                    Dim workRow As DataRow
-                    If ji.IdNo <= 0 Then
-                        workRow = DtInsertTable.NewRow()
-                    Else
-                        workRow = DtUpdateTable.NewRow()
-                        workRow("IdNo") = ji.IdNo
-                    End If
-                    workRow("JournalIdNo") = View.IdNo
-                    workRow("Sequence") = nRowCount
-                    workRow("AccountIdNo") = ji.AccountIdNo
-                    workRow("Debit") = ji.Debit
-                    workRow("Credit") = ji.Credit
-                    workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
-                    workRow("Notes") = If(ji.Notes, "")
-                    If ji.IdNo <= 0 Then
-                        DtInsertTable.Rows.Add(workRow)
-                    Else
-                        DtUpdateTable.Rows.Add(workRow)
-                    End If
-                    nRowCount += 1
-                End If
-            Next
         End Sub
+
+        Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("JournalIdNo") = View.IdNo
+            workRow("AccountIdNo") = itemDataView.AccountIdNo
+            workRow("Debit") = itemDataView.Debit
+            workRow("Credit") = itemDataView.Credit
+            workRow("RevCostCenterIdNo") = itemDataView.RevCostCenterIdNo
+            workRow("Notes") = If(itemDataView.Notes, "")
+        End Sub
+
+        Public Function JournalItemFilter(ByVal obj As Object) As Boolean
+            If (obj.AccountIdNo Is Nothing Or obj.AccountIdNo = 0) AndAlso obj.Debit = 0 AndAlso obj.Credit = 0 Then
+                Return False
+            End If
+            Return True
+        End Function
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
             UpdateTotals()
@@ -88,10 +70,10 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_apJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            retVal = UpdateChildData(_apJournalItemService, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
                 Dim newJournalItem As List(Of JournalItemModel)
-                newJournalItem = _apJournalItemModel.GetRecordsWithGroupIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
+                newJournalItem = _apJournalItemService.GetRecordsWithGroupIdNo(Of JournalItemModel)(View.IdNo, "Sequence")
                 If AddMode Then
                     For Each item In newJournalItem
                         If IsAccountsPayableAccount(item.AccountIdNo) Then
@@ -114,9 +96,13 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
             If retVal >= 0 AndAlso Not IsEmpty(View.VatNumber) Then
-                ModelOfPresenter.UpdateVatNumber(View.VatNumber, View.SupplierIdNo)
+                Service.UpdateVatNumber(View.VatNumber, View.SupplierIdNo)
             End If
         End Sub
+
+        Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int16)
+            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsPayable)
+        End Function
 
         Private Function RemoveDeletedApOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
             Dim deletedRecord As Boolean
@@ -139,6 +125,15 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
             Next
+            Return retVal
+        End Function
+
+        Public Function DeleteApOpenInvoice(ByRef idNo As Int32)
+            Dim retVal As Integer = 0
+            If idNo <> 0 Then
+                Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
+                retVal = modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
+            End If
             Return retVal
         End Function
 
@@ -199,8 +194,9 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
+            Dim dataModel As New TM
+            GlobalVariables.Mapper.Map(View, dataModel)
+            retValue = Service.UpdateGlReferenceNumber(dataModel)
             Return retValue
         End Function
 
@@ -219,7 +215,7 @@ Namespace PresentationLayer.Presenters
                 Dim cashAccounts As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount) + "|" + EnumToCode(SpecialAccountSelection.CheckingAccount)
                 Dim dateToday As DateTime = Now()
                 retValue = True
-                Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("AP Journal", "LastPosting", "TransactionName", "LastPostingDate")
+                Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("AP Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Accounts Payable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
@@ -310,6 +306,10 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Function GetSupplierPaymentDueDays(idNo As String)
+            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
+        End Function
+
         Public Sub UpdateEarlySettlementValues()
             If View.SupplierIdNo IsNot Nothing Then
                 Dim supplierSettlementDueDays As Integer
@@ -323,6 +323,14 @@ Namespace PresentationLayer.Presenters
                 View.SettlementDiscount = 0
             End If
         End Sub
+
+        Public Function GetSupplierSettlementDueDays(idNo As String)
+            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDueDays")
+        End Function
+
+        Public Function GetSupplierSettlementDiscount(idNo As String)
+            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDiscount")
+        End Function
 
         Public Sub UpdateSupplierDate()
             If View.TransactionDate IsNot Nothing Then
