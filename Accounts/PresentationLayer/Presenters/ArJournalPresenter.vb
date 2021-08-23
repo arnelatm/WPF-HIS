@@ -21,9 +21,9 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IArJournalView)
             MyBase.New(view)
-            Service = New ModelAccounts("ArJournal")
+            WithTreeView = False
+            Service = New AccountsService("ArJournal")
             SortOrderKey = "IdNo"
-            OriginalModel = New ArJournalModel()
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
