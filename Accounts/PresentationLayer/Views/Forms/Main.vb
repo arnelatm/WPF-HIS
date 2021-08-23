@@ -42,7 +42,8 @@ Namespace PresentationLayer.Views.Forms
         Private _logStatus As LoginStatus
 
         Public Event UserLoggedIn(sender As Object, formControls As List(Of Control))
-        Private ReadOnly PresenterObj
+
+        Private ReadOnly _presenterObj
 
         ''' <summary>
         '''     Default form constructor.
@@ -69,7 +70,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 SetLanguageChangeButtons()
             End If
-            PresenterObj = New UserPresenter(Of UserModel)(Me)
+            _presenterObj = New UserPresenter(Of UserModel)(Me)
             SetupMapper()
             'Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
             'builder.RegisterType(Of RecurringPayElementPresenter)().[As](Of ISalaryLoanSchedulePresenter)()
@@ -139,7 +140,7 @@ Namespace PresentationLayer.Views.Forms
                 Dim securityObject As New SecurityObject With {.SecurityObjectName = MenuFormName,
                         .SystemViewIdNo = VSystemViewIdNo,
                         .ParentIdNo = Nothing}
-                mainParentIdNo = PresenterObj.AddSecurityObject(securityObject)
+                mainParentIdNo = _presenterObj.AddSecurityObject(securityObject)
                 sw = 1
             End If
             If TypeOf cCtrl Is MenuStrip Then
@@ -150,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
                         .SystemViewIdNo = VSystemViewIdNo,
                         .ParentIdNo = mainParentIdNo}
                 Dim parentIdNo As Int32
-                parentIdNo = PresenterObj.AddSecurityObject(securityObject)
+                parentIdNo = _presenterObj.AddSecurityObject(securityObject)
                 AddChildMenuSecurityObjects(menuStripMain.Items, subMenuName, parentIdNo)
             ElseIf TypeOf cCtrl Is ToolStrip Then
                 Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
@@ -159,7 +160,7 @@ Namespace PresentationLayer.Views.Forms
                         .SystemViewIdNo = VSystemViewIdNo,
                         .ParentIdNo = mainParentIdNo}
                 Dim parentIdNo As Int32
-                parentIdNo = PresenterObj.AddSecurityObject(securityObject)
+                parentIdNo = _presenterObj.AddSecurityObject(securityObject)
                 AddChildMenuSecurityObjects(toolStripMain.Items, subMenuName, parentIdNo)
             End If
         End Sub
@@ -194,17 +195,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub AccountsPayableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsPayableEntry.Click
-            RunForm(Of ApJournalEntryNew, ApJournalPresenterNew(Of ApJournalModel))()
+            RunForm(Of ApJournalEntry, ApJournalPresenter(Of ApJournalModel))()
         End Sub
 
         Private Sub AccountsReceivableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsReceivableEntry.Click
-            Dim childMdiForm As ArJournalEntry
-            'Set the Parent Form of the Child window.
-            childMdiForm = New ArJournalEntry With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of ArJournalEntry, ArJournalPresenter(Of ArJournalModel))()
         End Sub
 
         Private Sub AccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemARAging.Click

@@ -19,12 +19,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property SettlementDiscount As Decimal
         Property SettlementDueDate As Date?
         Property CustomerIdNo As Int32?
-        Property TotalCredits As Decimal
-        Property TotalDebits As Decimal
+        ReadOnly Property TotalCredits As Decimal
+        ReadOnly Property TotalDebits As Decimal
         Property TransactionDate As Date?
         Property TransactionType As String
         Property VatAmount As Decimal
-        Property JournalItems As List(Of IJournalItemView)
+        Property JournalItems As List(Of JournalItemView)
 
     End Interface
 

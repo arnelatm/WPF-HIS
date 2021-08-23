@@ -26,7 +26,7 @@
         Public Property TransactionDate As Date?
         Public Property TransactionType As String
         Public Property VatAmount As Decimal
-        Public Property JournalItems As IList(Of JournalItemModel)
+        Public Property JournalItems As List(Of JournalItemModel)
     End Class
 
 End Namespace

@@ -33,65 +33,65 @@ Namespace PresentationLayer.Presenters
             Return accountService.GetRecordByIdNo(Of AccountModel)(idNo)
         End Function
 
-        'Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer Implements IAccountsPresenter.AddArOpenInvoice
-        '    Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
-        '    Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
-        '            .JournalCode = journalCode,
-        '            .JournalIdNo = journalItem.JournalIdNo,
-        '            .JournalItemIdNo = journalItem.IdNo
-        '            }
-        '    Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
-        'End Function
+        Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
+            Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
+                    .JournalCode = journalCode,
+                    .JournalIdNo = journalItem.JournalIdNo,
+                    .JournalItemIdNo = journalItem.IdNo
+                    }
+            Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
+        End Function
 
         Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
+            Dim apOpenInvoiceService As New AccountsService("ApOpenInvoice")
             Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
                     .JournalCode = journalCode,
                     .JournalIdNo = journalItem.JournalIdNo,
                     .JournalItemIdNo = journalItem.IdNo
                     }
-            Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
+            Return apOpenInvoiceService.AddRecord(apOpenInvoiceModel)
         End Function
 
-        'Public Function UpdateInputVatAmount(journalItems As List(Of IJournalItemView)) Implements IAccountsPresenter.UpdateInputVatAmount
-        '    Dim tiVatAmount As Decimal = 0
-        '    Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
-        '    For Each item In journalItems
-        '        If item.SpecialAccount = inputVatAccount Then
-        '            tiVatAmount = tiVatAmount + item.Debit - item.Credit
-        '        End If
-        '    Next
-        '    Return tiVatAmount
-        'End Function
+        Public Function UpdateInputVatAmount(journalItems As List(Of JournalItemView)) As Decimal
+            Dim tiVatAmount As Decimal = 0
+            Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
+            For Each item In journalItems
+                If item.SpecialAccount = inputVatAccount Then
+                    tiVatAmount = tiVatAmount + item.Debit - item.Credit
+                End If
+            Next
+            Return tiVatAmount
+        End Function
 
-        'Public Function UpdateOutputVatAmount(journalItems As List(Of IJournalItemView)) Implements IAccountsPresenter.UpdateOutputVatAmount
-        '    Dim toVatAmount As Decimal = 0
-        '    Dim outputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
-        '    For Each item In journalItems
-        '        If item.SpecialAccount = outputVatAccount Then
-        '            toVatAmount = toVatAmount + item.Credit - item.Debit
-        '        End If
-        '    Next
-        '    Return toVatAmount
-        'End Function
+        Public Function UpdateOutputVatAmount(journalItems As List(Of JournalItemView))
+            Dim toVatAmount As Decimal = 0
+            Dim outputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
+            For Each item In journalItems
+                If item.SpecialAccount = outputVatAccount Then
+                    toVatAmount = toVatAmount + item.Credit - item.Debit
+                End If
+            Next
+            Return toVatAmount
+        End Function
 
-        'Public Sub MakeDebitAmount(journalItem As IJournalItemView, amount As Decimal?) Implements IAccountsPresenter.MakeDebitAmount
-        '    If amount Is Nothing OrElse amount >= 0 Then
-        '        journalItem.Credit = 0
-        '    ElseIf amount < 0 Then
-        '        journalItem.Credit = amount * -1
-        '        journalItem.Debit = 0
-        '    End If
-        'End Sub
+        Public Sub MakeDebitAmount(journalItem As JournalItemView, amount As Decimal?)
+            If amount Is Nothing OrElse amount >= 0 Then
+                journalItem.Credit = 0
+            ElseIf amount < 0 Then
+                journalItem.Credit = amount * -1
+                journalItem.Debit = 0
+            End If
+        End Sub
 
-        'Public Sub MakeCreditAmount(journalItem As IJournalItemView, amount As Decimal?) Implements IAccountsPresenter.MakeCreditAmount
-        '    If amount Is Nothing OrElse amount >= 0 Then
-        '        journalItem.Debit = 0
-        '    ElseIf amount < 0 Then
-        '        journalItem.Debit = amount * -1
-        '        journalItem.Credit = 0
-        '    End If
-        'End Sub
+        Public Sub MakeCreditAmount(journalItem As JournalItemView, amount As Decimal?)
+            If amount Is Nothing OrElse amount >= 0 Then
+                journalItem.Debit = 0
+            ElseIf amount < 0 Then
+                journalItem.Debit = amount * -1
+                journalItem.Credit = 0
+            End If
+        End Sub
 
         Public Sub MakePayTypeAndSpecialAccount(journalItem As JournalItemView, accountIdNo As Int16?)
             Dim account As AccountModel
@@ -192,28 +192,16 @@ Namespace PresentationLayer.Presenters
         '    Return retValue
         'End Function
 
-        'Public Sub SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
-        '    If IsEmpty(currentVatNumber) Or override Then
-        '        If idNo IsNot Nothing Then
-        '            Dim supplierVatNumber = GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")
-        '            currentVatNumber = supplierVatNumber
-        '        Else
-        '            currentVatNumber = Nothing
-        '        End If
-        '    End If
-        'End Sub
-
-        'Public Function GetCustomerPaymentDueDays(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Customer", "IdNo", "PaymentDueDays")
-        'End Function
-
-        'Public Function GetCustomerSettlementDiscount(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDiscount")
-        'End Function
-
-        'Public Function GetCustomerSettlementDueDays(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDueDays")
-        'End Function
+        Public Sub SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
+            If IsEmpty(currentVatNumber) Or override Then
+                If idNo IsNot Nothing Then
+                    Dim supplierVatNumber = GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "VatNumber")
+                    currentVatNumber = supplierVatNumber
+                Else
+                    currentVatNumber = Nothing
+                End If
+            End If
+        End Sub
 
         'Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int16)
         '    Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "AR"
@@ -240,28 +228,6 @@ Namespace PresentationLayer.Presenters
         '    arOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
         '                                                     "JournalItemIdNo", "IdNo")
         '    Return Model.CountRecordWithKey(arOpenInvoiceIdNo, "CsrOiItem", "ArOpenInvoiceIdNo") > 0
-        'End Function
-
-        'Public Function ApPaymentExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
-        '    Dim apOpenInvoiceIdNo As Integer
-        '    apOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
-        '                                                     "JournalItemIdNo", "IdNo")
-        '    If Model.CountRecordWithKey(apOpenInvoiceIdNo, "CdOiItem", "ApOpenInvoiceIdNo") > 0 Then
-        '        Return True
-        '    ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "CkOiItem", "ApOpenInvoiceIdNo") > 0 Then
-        '        Return True
-        '    ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "PcOiItem", "ApOpenInvoiceIdNo") > 0 Then
-        '        Return True
-        '    End If
-        '    Return False
-        'End Function
-
-        'Public Function DeleteArOpenInvoice(ByRef idNo As Int32) As String
-        '    Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
-        '    If Model.CountRecordWithKey(idNo, "CsrOiItem", "ArOpenInvoiceIdNo") = 0 Then
-        '        Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
-        '    End If
-        '    Return 0
         'End Function
 
         'Public Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal

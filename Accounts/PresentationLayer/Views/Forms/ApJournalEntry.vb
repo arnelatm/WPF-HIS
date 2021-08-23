@@ -1,43 +1,30 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class ApJournalEntry
         Implements IApJournalView
 
-        Public TxtTotalCredits As Decimal
-        Public TxtTotalDebits As Decimal
-
-        Private Property MyPresenter As ApJournalPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _footer As DgvFooter
-        Private _journalItems As List(Of IJournalItemView)
+        Private _journalItems As List(Of JournalItemView)
         Private _revCostCentersByCode
-        Private _journalCodeLocal As String
 
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "ApJournal"
-            SortOrderKey = "IdNo"
             FirstControl = dtpTransactionDate
             _nfi.NumberDecimalDigits = 2
-            MyPresenter = New ApJournalPresenter(Me)
-            PresenterObj = MyPresenter
-            Ea = MyPresenter.Ea
-            Ea.SubscribeEvent(Me)
             If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = MyPresenter.GetLocalizedPrefix("AP")
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("AP")
             Else
                 txtJournalCode.Text = "AP"
             End If
@@ -146,7 +133,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of IJournalItemView) Implements IApJournalView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements IApJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
@@ -214,22 +201,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property TotalCredits As Decimal Implements IApJournalView.TotalCredits
+        Public ReadOnly Property TotalCredits As Decimal Implements IApJournalView.TotalCredits
             Get
-                Return TxtTotalCredits
+                Return NumParser(Of Decimal)(txtTotalDebits.Text)
             End Get
-            Set(value As Decimal)
-                TxtTotalCredits = value
-            End Set
         End Property
 
-        Public Property TotalDebits As Decimal Implements IApJournalView.TotalDebits
+        Public ReadOnly Property TotalDebits As Decimal Implements IApJournalView.TotalDebits
             Get
-                Return TxtTotalDebits
+                Return NumParser(Of Decimal)(txtTotalDebits.Text)
             End Get
-            Set(value As Decimal)
-                TxtTotalDebits = value
-            End Set
         End Property
 
         Public Property TransactionDate As Date? Implements IApJournalView.TransactionDate
@@ -275,17 +256,11 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = MyPresenter.GetDetailAccountList()
-            _revCostCentersByCode = MyPresenter.GetLookup("RevCostCenter")
-            cboSupplierIdNo.BeginUpdate()
-            cboSupplierIdNo.DataSource = MyPresenter.GetLookup("Supplier")
-            cboSupplierIdNo.EndUpdate()
-            cboTransactionType.BeginUpdate()
-            cboTransactionType.DataSource = MyPresenter.MakeEnumComboList(Of TransactionTypeSelection)
-            cboTransactionType.EndUpdate()
-            cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.AccountsPayable))
-            cboAccountIdNo.EndUpdate()
+            CreateLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
+            CreateLookupData("RevCostCenter", NameOf(_revCostCentersByCode))
+            CreateDataSource("Supplier", cboSupplierIdNo)
+            CreateEnumDataSource(Of TransactionTypeSelection)(cboTransactionType)
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.AccountsPayable)}, cboAccountIdNo)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -307,11 +282,13 @@ Namespace PresentationLayer.Views.Forms
          {"TransactionDate", dtpTransactionDate},
          {"TransactionType", cboTransactionType},
          {"VatAmount", txtVatAmount},
-         {"VatNumber", txtVatNumber}
+         {"VatNumber", txtVatNumber},
+         {"TotalDebits", txtTotalDebits},
+         {"TotalCredits", txtTotalCredits}
         }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+        Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateTotals()
         End Sub
 
@@ -364,10 +341,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
-            MyPresenter.UpdateDueDate()
-            MyPresenter.UpdateEarlySettlementValues()
+            Presenter.UpdateDueDate()
+            Presenter.UpdateEarlySettlementValues()
             If SupplierIdNo IsNot Nothing Then
-                MyPresenter.SetSupplierVatNumber(VatNumber, SupplierIdNo, True)
+                Presenter.SetSupplierVatNumber(VatNumber, SupplierIdNo, True)
             End If
         End Sub
 
@@ -384,7 +361,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateInputVatAmount()
-            VatAmount = MyPresenter.UpdateInputVatAmount(JournalItems)
+            VatAmount = Presenter.UpdateInputVatAmount(JournalItems)
         End Sub
 
         Private Overloads Sub Dispose()
@@ -393,7 +370,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated, cboTransactionType.SelectionChangeCommitted, cboAccountIdNo.SelectionChangeCommitted
-            MyPresenter.UpdateFirstLine()
+            Presenter.UpdateFirstLine()
             UpdateTotals()
             DataGridViewJournalItems.Refresh()
         End Sub
@@ -404,7 +381,7 @@ Namespace PresentationLayer.Views.Forms
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
                     ' don't allow edits for first line entries account id no and amounts if only single AP
-                    If cColumnName = $"dgvaccountidno" Or ((cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit") AndAlso MyPresenter.CountApItems() <= 1) Then
+                    If cColumnName = $"dgvaccountidno" Or ((cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit") AndAlso Presenter.CountApItems() <= 1) Then
                         Beep()
                         e.Cancel = True
                         DataGridViewJournalItems.EndEdit()
@@ -419,48 +396,15 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
-            Handles DataGridViewJournalItems.CellEndEdit
-            With DataGridViewJournalItems
-                If .CurrentRow IsNot Nothing Then
-                    Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
-                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                        Case $"dgvaccountidno"
-                            'Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                            Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-                            If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
-                                bsJournalItems.AddNew()
-                                JournalItems(nIndex).AccountIdNo = accountId
-                                ' adding a new row to the bindingsource adds a new empty row at the end with null values
-                                ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-                            End If
-                            MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
-                            UpdateInputVatAmount()
-                            bsJournalItems.ResetItem(nIndex)
-                            DataGridViewJournalItems.Refresh()
-                        Case $"dgvdebit"
-                            MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
-                            UpdateTotals()
-                            UpdateInputVatAmount()
-                            bsJournalItems.ResetItem(nIndex)
-                            SendKeys.Send("{TAB}")
-                        Case $"dgvcredit"
-                            MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
-                            UpdateTotals()
-                            UpdateInputVatAmount()
-                            bsJournalItems.ResetItem(nIndex)
-                        Case $"dgvnotes"
-                            SendKeys.Send("{DOWN}")
-                    End Select
-                End If
-            End With
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
+            ProcessCellEndEdit(DataGridViewJournalItems, bsJournalItems)
+            UpdateTotals()
         End Sub
 
         Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
-            MyPresenter.UpdateDueDate()
-            MyPresenter.UpdateEarlySettlementValues()
-            MyPresenter.UpdateSupplierDate()
+            Presenter.UpdateDueDate()
+            Presenter.UpdateEarlySettlementValues()
+            Presenter.UpdateSupplierDate()
         End Sub
 
         Private Function PaymentOrDiscountMade()
@@ -479,6 +423,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
+                txtTotalDebits.Text = _footer.Value("dgvDebit")
+                txtTotalCredits.Text = _footer.Value("dgvCredit")
             End If
         End Sub
 
@@ -490,10 +436,10 @@ Namespace PresentationLayer.Views.Forms
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
-            ElseIf MyPresenter.EditMode Then
+            ElseIf Presenter.EditMode Then
                 Dim jiIdNo As Integer
                 jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
-                If MyPresenter.ApPaymentExists("AP", jiIdNo) Then
+                If Presenter.ApPaymentExists("AP", jiIdNo) Then
                     'ElseIf
                     ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
                     Messaging.Show(True, "MsgDeletePaidEntryNotAllowed")
