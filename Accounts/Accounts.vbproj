@@ -365,6 +365,7 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
+    <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\Class1.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
@@ -1404,8 +1405,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-Marcelo.config" />
     <None Include="app.config" />
+    <None Include="app-Marcelo.config" />
     <None Include="appIspadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
