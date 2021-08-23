@@ -134,18 +134,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
-        'Public TotalCredits As Decimal Implements IGeneralJournalView.TotalCredits
-        '    Get
-        '        Return c
-        '    End Get
-        'End Property
-
-        'Public ReadOnly TotalDebits As Decimal Implements IGeneralJournalView.TotalDebits
-        '    Get
-        '        Return _footer.Value("dgvDebit")
-        '    End Get
-        'End Property
-
         Public Property TransactionDate As Date? Implements IGeneralJournalView.TransactionDate
             Get
                 Return dtpTransactionDate.Value

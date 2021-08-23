@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class ArJournalEntry
-        Inherits CFormEntry
+        Inherits CFormEntryNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _
@@ -25,15 +25,15 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim LocalizableContent1 As AATM.Libraries.LocalizationUtilities.LocalizableContent
-            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
-            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim EventAggregator2 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ArJournalEntry))
             Me.floArJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
@@ -87,11 +87,13 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floArJournalItems.SuspendLayout()
@@ -117,25 +119,25 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewJournalItems
             '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewJournalItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
             Me.DataGridViewJournalItems.AutoGenerateColumns = False
             Me.DataGridViewJournalItems.BegFindValue = Nothing
             Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvPaidAmount, Me.dgvDiscountTaken, Me.AccountNameDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.dgvIdNo, Me.JournalIdNoDataGridViewTextBoxColumn, Me.OpenInvoiceIdNoDataGridViewTextBoxColumn, Me.OriginalAmountDataGridViewTextBoxColumn, Me.PayeeTypeDataGridViewTextBoxColumn, Me.SpecialAccountDataGridViewTextBoxColumn})
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
-            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle16
             Me.DataGridViewJournalItems.DgvFooter = Nothing
             Me.DataGridViewJournalItems.DisplayOnly = False
             Me.DataGridViewJournalItems.Dock = System.Windows.Forms.DockStyle.Left
-            Me.DataGridViewJournalItems.Ea = EventAggregator1
+            Me.DataGridViewJournalItems.Ea = EventAggregator2
             Me.DataGridViewJournalItems.EditingMode = False
             Me.DataGridViewJournalItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewJournalItems.EndFindValue = Nothing
@@ -163,9 +165,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvSequence.BegFindValue = Nothing
             Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             Me.dgvSequence.EndFindValue = Nothing
@@ -185,9 +187,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvAccountIdNo
             '
             Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
             Me.dgvAccountIdNo.EditingMode = False
             Me.dgvAccountIdNo.HeaderText = "Account Code-Name"
@@ -202,11 +204,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvDebit.BegFindValue = Nothing
             Me.dgvDebit.DataPropertyName = "Debit"
-            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle4.Format = "###,##0.00"
-            Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle12.Format = "###,##0.00"
+            Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle12
             Me.dgvDebit.EditingMode = False
             Me.dgvDebit.EndFindValue = Nothing
             Me.dgvDebit.FieldDescription = Nothing
@@ -225,11 +227,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvCredit.BegFindValue = Nothing
             Me.dgvCredit.DataPropertyName = "Credit"
-            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle5.Format = "###,##0.00"
-            Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle5
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.Format = "###,##0.00"
+            Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvCredit.EditingMode = False
             Me.dgvCredit.EndFindValue = Nothing
             Me.dgvCredit.FieldDescription = Nothing
@@ -247,9 +249,9 @@ Namespace PresentationLayer.Views.Forms
             'dgvRevCostCenterIdNo
             '
             Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle14
             Me.dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             Me.dgvRevCostCenterIdNo.EditingMode = False
             Me.dgvRevCostCenterIdNo.HeaderText = "Revenue/Cost Center Code-Name"
@@ -265,9 +267,9 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvNotes.BegFindValue = Nothing
             Me.dgvNotes.DataPropertyName = "Notes"
-            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-            Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle7
+            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+            Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle15
             Me.dgvNotes.EditingMode = False
             Me.dgvNotes.EndFindValue = Nothing
             Me.dgvNotes.FieldDescription = Nothing
@@ -1149,30 +1151,6 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.Text = "Cancelled?"
             Me.chkCancelled.Translatable = True
             '
-            'chkApproved
-            '
-            Me.chkApproved.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
-            Me.chkApproved.BegFindValue = Nothing
-            Me.chkApproved.Checked = False
-            Me.chkApproved.EditingMode = False
-            Me.chkApproved.EndFindValue = Nothing
-            Me.chkApproved.FieldDescription = Nothing
-            Me.chkApproved.FieldName = Nothing
-            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkApproved.FindEnabled = False
-            Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
-            Me.chkApproved.IgnoreCase = False
-            Me.chkApproved.LinkedLabel = Nothing
-            Me.chkApproved.Location = New System.Drawing.Point(13, 115)
-            Me.chkApproved.Name = "chkApproved"
-            Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkApproved.Size = New System.Drawing.Size(113, 21)
-            Me.chkApproved.TabIndex = 288
-            Me.chkApproved.Text = "Approved?"
-            Me.chkApproved.Translatable = True
-            '
             'chkPosted
             '
             Me.chkPosted.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -1199,6 +1177,30 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.Text = "Posted?"
             Me.chkPosted.Translatable = True
             '
+            'chkApproved
+            '
+            Me.chkApproved.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkApproved.BegFindValue = Nothing
+            Me.chkApproved.Checked = False
+            Me.chkApproved.EditingMode = False
+            Me.chkApproved.EndFindValue = Nothing
+            Me.chkApproved.FieldDescription = Nothing
+            Me.chkApproved.FieldName = Nothing
+            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkApproved.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
+            Me.chkApproved.IgnoreCase = False
+            Me.chkApproved.LinkedLabel = Nothing
+            Me.chkApproved.Location = New System.Drawing.Point(13, 115)
+            Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkApproved.Size = New System.Drawing.Size(113, 21)
+            Me.chkApproved.TabIndex = 288
+            Me.chkApproved.Text = "Approved?"
+            Me.chkApproved.Translatable = True
+            '
             'lblDateAdded
             '
             Me.lblDateAdded.DisplayOnly = True
@@ -1213,19 +1215,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateAdded.Text = "Date Added:"
             Me.lblDateAdded.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblDateAdded.Translatable = True
-            '
-            'floFullEntryArea
-            '
-            Me.floFullEntryArea.BackColor = System.Drawing.Color.Transparent
-            Me.floFullEntryArea.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.floFullEntryArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            Me.floFullEntryArea.Controls.Add(Me.floArJournalHeader)
-            Me.floFullEntryArea.Controls.Add(Me.floArJournalItems)
-            Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
-            Me.floFullEntryArea.Location = New System.Drawing.Point(0, 53)
-            Me.floFullEntryArea.Name = "floFullEntryArea"
-            Me.floFullEntryArea.Size = New System.Drawing.Size(1045, 514)
-            Me.floFullEntryArea.TabIndex = 0
             '
             'dtpDateCreated
             '
@@ -1253,15 +1242,90 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated.ValueIsMandatory = False
             Me.dtpDateCreated.ValueIsNullable = False
             '
+            'floFullEntryArea
+            '
+            Me.floFullEntryArea.BackColor = System.Drawing.Color.Transparent
+            Me.floFullEntryArea.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
+            Me.floFullEntryArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            Me.floFullEntryArea.Controls.Add(Me.floArJournalHeader)
+            Me.floFullEntryArea.Controls.Add(Me.floArJournalItems)
+            Me.floFullEntryArea.Dock = System.Windows.Forms.DockStyle.Top
+            Me.floFullEntryArea.Location = New System.Drawing.Point(0, 53)
+            Me.floFullEntryArea.Name = "floFullEntryArea"
+            Me.floFullEntryArea.Size = New System.Drawing.Size(1045, 514)
+            Me.floFullEntryArea.TabIndex = 0
+            '
+            'txtTotalDebits
+            '
+            Me.txtTotalDebits.BackColor = System.Drawing.Color.White
+            Me.txtTotalDebits.BegFindValue = Nothing
+            Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalDebits.ComputedValue = False
+            Me.txtTotalDebits.CustomFormat = Nothing
+            Me.txtTotalDebits.DataBoundControl = True
+            Me.txtTotalDebits.EditingMode = True
+            Me.txtTotalDebits.EndFindValue = Nothing
+            Me.txtTotalDebits.FieldDescription = Nothing
+            Me.txtTotalDebits.FieldName = Nothing
+            Me.txtTotalDebits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalDebits.FindEnabled = False
+            Me.txtTotalDebits.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalDebits.LinkedLabel = Nothing
+            Me.txtTotalDebits.Location = New System.Drawing.Point(3, 569)
+            Me.txtTotalDebits.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtTotalDebits.MaximumValue = Nothing
+            Me.txtTotalDebits.MinimumValue = Nothing
+            Me.txtTotalDebits.Name = "txtTotalDebits"
+            Me.txtTotalDebits.OldValue = Nothing
+            Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalDebits.Size = New System.Drawing.Size(100, 23)
+            Me.txtTotalDebits.TabIndex = 251
+            Me.txtTotalDebits.Translatable = False
+            Me.txtTotalDebits.Visible = False
+            '
+            'txtTotalCredits
+            '
+            Me.txtTotalCredits.BackColor = System.Drawing.Color.White
+            Me.txtTotalCredits.BegFindValue = Nothing
+            Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalCredits.ComputedValue = False
+            Me.txtTotalCredits.CustomFormat = Nothing
+            Me.txtTotalCredits.DataBoundControl = True
+            Me.txtTotalCredits.EditingMode = True
+            Me.txtTotalCredits.EndFindValue = Nothing
+            Me.txtTotalCredits.FieldDescription = Nothing
+            Me.txtTotalCredits.FieldName = Nothing
+            Me.txtTotalCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalCredits.FindEnabled = False
+            Me.txtTotalCredits.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalCredits.LinkedLabel = Nothing
+            Me.txtTotalCredits.Location = New System.Drawing.Point(121, 571)
+            Me.txtTotalCredits.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtTotalCredits.MaximumValue = Nothing
+            Me.txtTotalCredits.MinimumValue = Nothing
+            Me.txtTotalCredits.Name = "txtTotalCredits"
+            Me.txtTotalCredits.OldValue = Nothing
+            Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalCredits.Size = New System.Drawing.Size(100, 23)
+            Me.txtTotalCredits.TabIndex = 252
+            Me.txtTotalCredits.Translatable = False
+            Me.txtTotalCredits.Visible = False
+            '
             'ArJournalEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(1045, 572)
+            Me.ClientSize = New System.Drawing.Size(1045, 586)
+            Me.Controls.Add(Me.txtTotalCredits)
             Me.Controls.Add(Me.floFullEntryArea)
+            Me.Controls.Add(Me.txtTotalDebits)
             Me.MinimumSize = New System.Drawing.Size(1059, 611)
             Me.Name = "ArJournalEntry"
             Me.Text = "Accounts Receivable Journal Entry"
+            Me.Controls.SetChildIndex(Me.txtTotalDebits, 0)
             Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
+            Me.Controls.SetChildIndex(Me.txtTotalCredits, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floArJournalItems.ResumeLayout(False)
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1334,5 +1398,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkApproved As UcCheckBox
         Friend WithEvents chkPosted As UcCheckBox
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
+        Friend WithEvents txtTotalDebits As CTextBox
+        Friend WithEvents txtTotalCredits As CTextBox
     End Class
 End NameSpace
