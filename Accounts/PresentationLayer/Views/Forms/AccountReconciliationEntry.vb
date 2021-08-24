@@ -37,13 +37,8 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "AccountReconciliation"
-            SortOrderKey = "IdNo"
             FirstControl = dtpReconciliationDate
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            PresenterObj = New AccountReconciliationPresenter(Me)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
             PublishEvent(New ReconciliationRefreshRequestEvent(Me))
 
         End Sub
@@ -257,10 +252,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("BA,CK,CS")
-            'cboAccountIdNo.BeginUpdate()
-            'cboAccountIdNo.DataSource = Accounts ' PresenterObj.GetAccountTypesList("BA,CK,CS")
-            'cboAccountIdNo.EndUpdate()
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank), SpecialAccountSelection.CheckingAccount, SpecialAccountSelection.Cash, SpecialAccountSelection.PettyCashAccount}, cboAccountIdNo)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -272,11 +264,6 @@ Namespace PresentationLayer.Views.Forms
                 {"ReconciliationDate", dtpReconciliationDate}
                 }
         End Sub
-
-        'Protected Overrides Sub UpdateViewDisplay(idNo As Int32)
-        '    MyBase.RecordPositionChanged()
-        '    UpdateTotals()
-        'End Sub
 
         Private Sub BindAccountReconciliation()
             SuspendLayout()
@@ -307,7 +294,7 @@ Namespace PresentationLayer.Views.Forms
 #Region "FindValues"
 
         Private Sub DataGridViewReconciliationItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReconciliationItems.CellContentClick
-            If DataGridViewReconciliationItems.CurrentCell IsNot Nothing And (PresenterObj.EditMode Or PresenterObj.AddMode) Then
+            If DataGridViewReconciliationItems.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
                 With DataGridViewReconciliationItems.CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvcleared"
@@ -890,6 +877,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub cboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
             If Not btnEdit.Enabled Then
                 'If cboAccountIdNo.ValueChanged() Then
+                RaiseEvent ReconciliationAccountChangedEvent()
                 PublishEvent(New ReconciliationAccountChangedEvent(Me, bsAccountReconciliationItems))
                 'bsAccountReconciliationItems.ResetBindings(False)
                 'End If
@@ -916,7 +904,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Public Sub OnAcReconEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler
-            MyBase.OnEventHandlerEditModeChanged(e)
+            'MyBase.OnEventHandlerEditModeChanged(e)
             If e.EditMode Then
                 btnClearAll.Enabled = True
                 btnUnClearAll.Enabled = True
@@ -934,7 +922,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Public Sub OnAcReconAddModeChanged(ByRef e As AddModeChanged) Implements ISubscriber(Of AddModeChanged).OnEventHandler
-            MyBase.OnEventHandlerAddModeChanged(e)
+            'MyBase.OnEventHandlerAddModeChanged(e)
             If e.AddMode Then
                 btnPost.Enabled = False
                 btnClearAll.Enabled = True

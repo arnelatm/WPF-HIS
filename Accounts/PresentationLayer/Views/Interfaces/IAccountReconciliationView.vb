@@ -27,6 +27,9 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property OutstandingCredits As Decimal
         Property OutstandingDeposits As Decimal
+
+        Event ReconciliationAccountChangedEvent()
+
     End Interface
 
 End Namespace

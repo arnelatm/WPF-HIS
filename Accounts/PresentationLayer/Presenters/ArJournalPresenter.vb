@@ -21,6 +21,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IArJournalView)
             MyBase.New(view)
+            TableName = "ArJournal"
             WithTreeView = False
             Service = New AccountsService("ArJournal")
             SortOrderKey = "IdNo"
@@ -200,6 +201,9 @@ Namespace PresentationLayer.Presenters
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 Dim cashAccount As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount)
+                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.EmployeeLoan) + "|" + EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" +
+                                                EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" +
+                                                EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|"
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("AR Journal", "LastPosting", "TransactionName", "LastPostingDate")
@@ -215,7 +219,7 @@ Namespace PresentationLayer.Presenters
                                 nTotalAr = nTotalAr + item.Credit - item.Debit
                             End If
                         End If
-                        If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                        If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
                             Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
@@ -224,13 +228,11 @@ Namespace PresentationLayer.Presenters
                             Dim lineNumber As String = item.Sequence.ToString()
                             Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
-                        Else
-                            If Not String.IsNullOrEmpty(item.PayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(item.PayeeType) <> PayeeTypeSelection.Customer Then
-                                Dim lineNumber = Format(item.Sequence, "0")
-                                Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")
-                                Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
-                                retValue = False
-                            End If
+                        ElseIf item.SpecialAccount IsNot Nothing AndAlso invalidAccounts.Contains(item.SpecialAccount) Then
+                            Dim lineNumber = Format(item.Sequence, "0")
+                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Employee Loans")
+                            Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
+                            retValue = False
                         End If
                     Next
                     If nTotalAr <> View.Amount Then
@@ -271,10 +273,6 @@ Namespace PresentationLayer.Presenters
             Else
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            'View.TotalCredits = 0
-            'For Each item In View.JournalItems
-            '    View.TotalCredits = View.TotalCredits + item.Credit
-            'Next
             If language = "ar" Then
                 totalArAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
@@ -338,11 +336,11 @@ Namespace PresentationLayer.Presenters
                         Case $"Debit"
                             MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
                             eventType.BindingSource.ResetItem(eventType.Row)
-                            UpdateInputVatAmount(View.JournalItems)
+                            View.VatAmount = UpdateOutputVatAmount(View.JournalItems)
                         Case $"Credit"
                             MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
                             eventType.BindingSource.ResetItem(eventType.Row)
-                            UpdateInputVatAmount(View.JournalItems)
+                            View.VatAmount = UpdateOutputVatAmount(View.JournalItems)
                     End Select
                 End If
             End With

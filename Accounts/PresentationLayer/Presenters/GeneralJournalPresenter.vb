@@ -114,10 +114,10 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue As Boolean = False
             If MyBase.IsBizDataValid() Then
-                Dim cashAccount As String = EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivable) +
-                                            "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" + EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) +
-                                            "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AdvancesToSupplier) +
-                                            "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" + EnumToCode(SpecialAccountSelection.EmployeeLoan)
+                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivable) + "|" +
+                                                EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" +
+                                                EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" +
+                                                EnumToCode(SpecialAccountSelection.EmployeeLoan)
                 Dim specialAccount As String
                 Dim account As AccountModel
                 Dim dateToday As DateTime = Now()
@@ -136,11 +136,11 @@ Namespace PresentationLayer.Presenters
                             account = GetAccount(item.AccountIdNo)
                             specialAccount = account.SpecialAccount
                         End If
-                        If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                        If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             MessageBox.Show(String.Format("Error in line {0:N0}. Cannot save entries with blank account id.", item.Sequence.ToString()))
                             retValue = False
                             Exit For
-                        ElseIf specialAccount IsNot Nothing AndAlso cashAccount.Contains(specialAccount) Then
+                        ElseIf specialAccount IsNot Nothing AndAlso invalidAccounts.Contains(specialAccount) Then
                             Dim lineNumber As String = item.Sequence.ToString()
                             Dim entryNames As String = Messaging.TranslateCaption("Accounts Payable") + "/" + Messaging.TranslateCaption("Accounts Receivable") + "/" + Messaging.TranslateCaption("Employee Accounts")
                             Dim variables = {"lineNumber", lineNumber, "entryNames", entryNames}

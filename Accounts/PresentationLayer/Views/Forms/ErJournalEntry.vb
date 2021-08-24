@@ -12,14 +12,10 @@ Namespace PresentationLayer.Views.Forms
     Public Class ErJournalEntry
         Implements IErJournalView
 
-        Public TxtTotalCredits As Decimal
-        Public TxtTotalDebits As Decimal
-
-        Private Property MyPresenter As ErJournalPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
         Private _footer As DgvFooter
-        Private _journalItems As List(Of IJournalItemView)
+        Private _journalItems As List(Of JournalItemView)
         Private _revCostCentersByCode
 
         Public Sub New()
@@ -27,32 +23,26 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "ErJournal"
-            SortOrderKey = "IdNo"
             FirstControl = dtpTransactionDate
             _nfi.NumberDecimalDigits = 2
-            MyPresenter = New ErJournalPresenter(Me)
-            PresenterObj = MyPresenter
-            Ea = MyPresenter.Ea
-            Ea.SubscribeEvent(Me)
             If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = MyPresenter.GetLocalizedPrefix("ER")
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("ER")
             Else
                 txtJournalCode.Text = "ER"
             End If
         End Sub
 
-        ' This event handler provides custom item-creation behavior.
-        Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
-            e.NewObject = New JournalItemView
-            ' work around for error on datagrid entry on lastrow please do not remove.
-            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
-            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
-            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
-                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-            End If
-        End Sub
+        '' This event handler provides custom item-creation behavior.
+        'Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+        '    e.NewObject = New JournalItemView
+        '    ' work around for error on datagrid entry on lastrow please do not remove.
+        '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+        '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+        '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+        '    If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
+        '        bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+        '    End If
+        'End Sub
 
 #Region "Fields"
 
@@ -127,7 +117,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of IJournalItemView) Implements IErJournalView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements IErJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
@@ -164,22 +154,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property TotalCredits As Decimal Implements IErJournalView.TotalCredits
+        Public ReadOnly Property TotalCredits As Decimal Implements IErJournalView.TotalCredits
             Get
-                Return TxtTotalCredits
+                Return NumParser(Of Decimal)(txtTotalCredits.Text)
             End Get
-            Set(value As Decimal)
-                TxtTotalCredits = value
-            End Set
         End Property
 
-        Public Property TotalDebits As Decimal Implements IErJournalView.TotalDebits
+        Public ReadOnly Property TotalDebits As Decimal Implements IErJournalView.TotalDebits
             Get
-                Return TxtTotalDebits
+                Return NumParser(Of Decimal)(txtTotalDebits.Text)
             End Get
-            Set(value As Decimal)
-                TxtTotalDebits = value
-            End Set
         End Property
 
         Public Property TransactionDate As Date? Implements IErJournalView.TransactionDate
@@ -207,17 +191,11 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = MyPresenter.GetDetailAccountList()
-            _revCostCentersByCode = MyPresenter.GetLookup("RevCostCenter")
-            cboEmployeeIdNo.BeginUpdate()
-            cboEmployeeIdNo.DataSource = MyPresenter.GetLookup("Employee")
-            cboEmployeeIdNo.EndUpdate()
-            cboTransactionType.BeginUpdate()
-            cboTransactionType.DataSource = MyPresenter.MakeEnumComboList(Of TransactionTypeSelection)
-            cboTransactionType.EndUpdate()
-            cboAccountIdNo.BeginUpdate()
-            cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.EmployeeLoan))
-            cboAccountIdNo.EndUpdate()
+            CreateLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
+            CreateLookupData("RevCostCenter", NameOf(_revCostCentersByCode))
+            CreateDataSource("Employee", cboEmployeeIdNo)
+            CreateEnumDataSource(Of TransactionTypeSelection)(cboTransactionType)
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.EmployeeLoan)}, cboAccountIdNo)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -233,11 +211,13 @@ Namespace PresentationLayer.Views.Forms
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
          {"TransactionDate", dtpTransactionDate},
-         {"TransactionType", cboTransactionType}
+         {"TransactionType", cboTransactionType},
+         {"TotalDebits", txtTotalDebits},
+         {"TotalCredits", txtTotalCredits}
         }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+        Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateTotals()
         End Sub
 
@@ -281,26 +261,26 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Private Sub CboAccountIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboAccountIdNo.Validating
-            If PaymentOrDiscountMade() Then
-                ' revert to previous value
-                cboAccountIdNo.RevertValue()
-            End If
-        End Sub
+        'Private Sub CboAccountIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboAccountIdNo.Validating
+        '    If PaymentOrDiscountMade() Then
+        '        ' revert to previous value
+        '        cboAccountIdNo.RevertValue()
+        '    End If
+        'End Sub
 
-        Private Sub CboEmployeeIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboEmployeeIdNo.Validating
-            If PaymentOrDiscountMade() Then
-                ' revert to previous value
-                cboEmployeeIdNo.RevertValue()
-            End If
-        End Sub
+        'Private Sub CboEmployeeIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboEmployeeIdNo.Validating
+        '    If PaymentOrDiscountMade() Then
+        '        ' revert to previous value
+        '        cboEmployeeIdNo.RevertValue()
+        '    End If
+        'End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
             UpdateTotals()
         End Sub
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated
-            MyPresenter.UpdateFirstLine()
+            Presenter.UpdateFirstLine()
             UpdateTotals()
             DataGridViewJournalItems.Refresh()
         End Sub
@@ -311,7 +291,7 @@ Namespace PresentationLayer.Views.Forms
                 With DataGridViewJournalItems.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
                     ' don't allow edits for first line entries account id no and amounts if only single ER
-                    If cColumnName = $"dgvaccountidno" Or ((cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit") AndAlso MyPresenter.CountErItems() <= 1) Then
+                    If cColumnName = $"dgvaccountidno" Or ((cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit") AndAlso Presenter.CountErItems() <= 1) Then
                         Beep()
                         e.Cancel = True
                         DataGridViewJournalItems.EndEdit()
@@ -326,48 +306,19 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) _
-            Handles DataGridViewJournalItems.CellEndEdit
-            With DataGridViewJournalItems
-                If .CurrentRow IsNot Nothing Then
-                    Dim nIndex = .CurrentRow.Index
-                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                        Case $"dgvaccountidno"
-                            Dim accountId = DirectCast(.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-                            If .CurrentRow.Index = .NewRowIndex Then
-                                bsJournalItems.AddNew()
-                                JournalItems(nIndex).AccountIdNo = accountId
-                                ' adding a new row to the BindingSource adds a new empty row at the end with null values
-                                ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-                            End If
-                            MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
-                            bsJournalItems.ResetItem(nIndex)
-                            .Refresh()
-                        Case $"dgvdebit"
-                            MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
-                            UpdateTotals()
-                            bsJournalItems.ResetItem(nIndex)
-                            SendKeys.Send("{TAB}")
-                        Case $"dgvcredit"
-                            MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
-                            UpdateTotals()
-                            bsJournalItems.ResetItem(nIndex)
-                        Case $"dgvnotes"
-                            SendKeys.Send("{DOWN}")
-                    End Select
-                End If
-            End With
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
+            ProcessCellEndEdit(DataGridViewJournalItems, bsJournalItems)
+            UpdateTotals()
         End Sub
 
-        Private Function PaymentOrDiscountMade()
-            Dim retVal As Boolean = False
-            If (DataGridViewJournalItems.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewJournalItems.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
-                Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
-                retVal = True
-            End If
-            Return retVal
-        End Function
+        'Private Function PaymentOrDiscountMade()
+        '    Dim retVal As Boolean = False
+        '    If (DataGridViewJournalItems.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewJournalItems.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
+        '        Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
+        '        retVal = True
+        '    End If
+        '    Return retVal
+        'End Function
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
             MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
@@ -387,15 +338,6 @@ Namespace PresentationLayer.Views.Forms
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
-            ElseIf MyPresenter.EditMode Then
-                Dim jiIdNo As Integer
-                jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
-                If MyPresenter.ArCollectionExists("ER", jiIdNo) Then
-                    ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
-                    Messaging.Show(True, "MsgDeleteCollEntryNotAllowed")
-                    ' Cancel the deletion
-                    e.Cancel = True
-                End If
             End If
         End Sub
 

@@ -21,7 +21,7 @@
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
         Public Property TransactionType As String
-        Public Property JournalItems As IList(Of JournalItemModel)
+        Public Property JournalItems As List(Of JournalItemModel)
     End Class
 
 End Namespace

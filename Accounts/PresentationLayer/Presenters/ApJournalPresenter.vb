@@ -21,6 +21,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IApJournalView)
             MyBase.New(view)
+            TableName = "ApJournal"
             WithTreeView = False
             Service = New AccountsService("ApJournal")
             SortOrderKey = "IdNo"
@@ -205,6 +206,9 @@ Namespace PresentationLayer.Presenters
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 Dim cashAccounts As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount) + "|" + EnumToCode(SpecialAccountSelection.CheckingAccount)
+                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.EmployeeLoan) + "|" +
+                                                EnumToCode(SpecialAccountSelection.AccountsReceivable) + "|" +
+                                                EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|"
                 Dim dateToday As DateTime = Now()
                 retValue = True
                 Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("AP Journal", "LastPosting", "TransactionName", "LastPostingDate")
@@ -220,7 +224,7 @@ Namespace PresentationLayer.Presenters
                                 nTotalAp = nTotalAp + item.Debit - item.Credit
                             End If
                         End If
-                        If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                        If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
                             Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
@@ -229,13 +233,11 @@ Namespace PresentationLayer.Presenters
                             Dim lineNumber As String = item.Sequence.ToString()
                             Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
-                        Else
-                            If Not String.IsNullOrEmpty(item.PayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(item.PayeeType) <> PayeeTypeSelection.Supplier Then
-                                Dim lineNumber = Format(item.Sequence, "0")
-                                Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee Loans")
-                                Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
-                                retValue = False
-                            End If
+                        ElseIf item.SpecialAccount IsNot Nothing AndAlso invalidAccounts.Contains(item.SpecialAccount) Then
+                            Dim lineNumber = Format(item.Sequence, "0")
+                            Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee Loans")
+                            Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
+                            retValue = False
                         End If
                     Next
                     If nTotalAp <> View.Amount Then
@@ -371,11 +373,11 @@ Namespace PresentationLayer.Presenters
                         Case $"Debit"
                             MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
                             eventType.BindingSource.ResetItem(eventType.Row)
-                            UpdateInputVatAmount(View.JournalItems)
+                            View.VatAmount = UpdateInputVatAmount(View.JournalItems)
                         Case $"Credit"
                             MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
                             eventType.BindingSource.ResetItem(eventType.Row)
-                            UpdateInputVatAmount(View.JournalItems)
+                            View.VatAmount = UpdateInputVatAmount(View.JournalItems)
                     End Select
                 End If
             End With

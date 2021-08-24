@@ -30,17 +30,17 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        ' This event handler provides custom item-creation behavior.
-        Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
-            e.NewObject = New JournalItemView
-            ' work around for error on datagrid entry on lastrow please do not remove.
-            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
-            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
-            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
-                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-            End If
-        End Sub
+        '' This event handler provides custom item-creation behavior.
+        'Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+        '    e.NewObject = New JournalItemView
+        '    ' work around for error on datagrid entry on lastrow please do not remove.
+        '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+        '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+        '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+        '    If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
+        '        bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+        '    End If
+        'End Sub
 
 #Region "Fields"
 
@@ -194,7 +194,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public ReadOnly Property TotalCredits As Decimal Implements IArJournalView.TotalCredits
             Get
-                Return NumParser(Of Decimal)(txtTotalDebits.Text)
+                Return NumParser(Of Decimal)(txtTotalCredits.Text)
             End Get
         End Property
 
@@ -378,45 +378,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
             ProcessCellEndEdit(DataGridViewJournalItems, bsJournalItems)
             UpdateTotals()
-            'With DataGridViewJournalItems
-            '    If .CurrentRow IsNot Nothing Then
-            '        Dim nIndex = DataGridViewJournalItems.CurrentRow.Index
-            '        Select Case .CurrentCell.OwningColumn.Name.ToLower()
-            '            Case $"dgvaccountidno"
-            '                Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-            '                If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
-            '                    bsJournalItems.AddNew()
-            '                    JournalItems(nIndex).AccountIdNo = accountId
-            '                    ' adding a new row to the bindingsource adds a new empty row at the end with null values
-            '                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-            '                    bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-            '                End If
-            '                MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
-            '                UpdateOutputVatAmount()
-            '                bsJournalItems.ResetItem(nIndex)
-            '                DataGridViewJournalItems.Refresh()
-            '            Case $"dgvdebit"
-            '                MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
-            '                UpdateTotals()
-            '                UpdateOutputVatAmount()
-            '                bsJournalItems.ResetItem(nIndex)
-            '                SendKeys.Send("{TAB}")
-            '            Case $"dgvcredit"
-            '                MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
-            '                UpdateTotals()
-            '                UpdateOutputVatAmount()
-            '                bsJournalItems.ResetItem(nIndex)
-            '            Case $"dgvnotes"
-            '                SendKeys.Send("{DOWN}")
-            '        End Select
-            '    End If
-            'End With
         End Sub
 
         Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
             Presenter.UpdateDueDate()
             Presenter.UpdateEarlySettlementValues()
-            Presenter.UpdateSupplierDate()
+            'Presenter.UpdateSupplierDate()
         End Sub
 
         Private Function PaymentOrDiscountMade()
