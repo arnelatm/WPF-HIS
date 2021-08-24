@@ -99,17 +99,11 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Delegate Sub FillDataFunc(ByRef dataView As Object, ByRef workRow As DataRow)
 
-    Public Event AddingRecordChanged(adding As Boolean)
-
-    Public Event AfterAdd(retVal As Integer)
-
     Public Event AfterDelete(retVal As Integer)
 
-    Public Event AfterDisplayView()
-
-    Public Event AfterEdit(retVal As Integer)
-
     Public Event AfterRecordRetrieval(values As TM)
+
+    Public Event AfterUpdateView()
 
     Public Event AfterSave()
 
@@ -276,6 +270,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Protected Sub UpdateView(value As Integer)
         UpdateViewData(value)
         UpdateViewDisplay()
+        RaiseEvent AfterUpdateView()
     End Sub
 
     Public Property UndoMode As Boolean
@@ -1753,13 +1748,13 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
                         End If
                         Exit For
                     End If
-                    If TypeOf cCtrl Is IFindableControl And Not (TypeOf cCtrl Is CForm) Then
-                        Dim thisControl As IFindableControl = cCtrl
-                        If thisControl.FindEnabled Then
-                            thisControl = cCtrl
-                            thisControl.FindDataType = GetObjectDataType(GetFieldType(ViewName.Substring(3)))
-                        End If
-                    End If
+                    'If TypeOf cCtrl Is IFindableControl And Not (TypeOf cCtrl Is CForm) Then
+                    '    Dim thisControl As IFindableControl = cCtrl
+                    '    If thisControl.FindEnabled Then
+                    '        thisControl = cCtrl
+                    '        thisControl.FindDataType = GetObjectDataType(GetFieldType(cCtrl.Name.Substring(3)))
+                    '    End If
+                    'End If
                 End If
             Next
         End If

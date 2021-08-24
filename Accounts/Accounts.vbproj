@@ -1396,8 +1396,8 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app-Marcelo.config" />
-    <None Include="app.config" />
     <None Include="appIspadmin2.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />
@@ -1553,9 +1553,7 @@
   <ItemGroup>
     <None Include="Resources\GreenGradientBackgroundLarge.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>

@@ -3,30 +3,28 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
-    Public Class ErJournalPresenter
-        Inherits TransactionsPresenter(Of IErJournalView, ErJournalModel)
+    Public Class ErJournalPresenter(Of TM As New)
+        Inherits TransactionsPresenterNew(Of IErJournalView, TM)
+        Implements ISubscriber(Of DataChanged)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _erJournalItemModel As New ModelAccounts("JournalItem", Nothing, {"ErJournalItem_View", "dbo.UpdateErJournalItemTVP", "dbo.InsertErJournalItemTVP"})
+        Private ReadOnly _erJournalItemService As New AccountsService("JournalItem", Nothing, {"ErJournalItem_View", "dbo.UpdateErJournalItemTVP", "dbo.InsertErJournalItemTVP"})
 
         Public Sub New(view As IErJournalView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("ErJournal")
             TableName = "ErJournal"
+            WithTreeView = False
+            Service = New AccountsService("ErJournal")
             SortOrderKey = "IdNo"
-            OriginalModel = New ErJournalModel()
-            DataModel = New ErJournalModel
-            ' GlobalVariables.EventAggregator.SubscribeEvent(Me)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
-
             DtInsertTable.Columns.Add("AccountIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Credit", GetType(Decimal))
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
@@ -47,48 +45,30 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If DtInsertTable IsNot Nothing Then
-                DtInsertTable.Clear()
+            If Not CancelSave Then
+                ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf JournalItemFilter)
             End If
-            If DtUpdateTable IsNot Nothing Then
-                DtUpdateTable.Clear()
-            End If
-            Dim nRowCount = 1
-            For Each ji In View.JournalItems
-                If ji.AccountIdNo = 0 AndAlso ji.Debit = 0 AndAlso ji.Credit = 0 Then
-                    ' ignore these records (no amount no account)
-                Else
-                    Dim workRow As DataRow
-                    If ji.IdNo <= 0 Then
-                        workRow = DtInsertTable.NewRow()
-                    Else
-                        workRow = DtUpdateTable.NewRow()
-                        workRow("IdNo") = ji.IdNo
-                    End If
-                    workRow("JournalIdNo") = View.IdNo
-                    workRow("Sequence") = nRowCount
-                    workRow("AccountIdNo") = ji.AccountIdNo
-                    workRow("Debit") = ji.Debit
-                    workRow("Credit") = ji.Credit
-                    workRow("RevCostCenterIdNo") = ji.RevCostCenterIdNo
-                    workRow("Notes") = If(ji.Notes, "")
-                    If ji.IdNo <= 0 Then
-                        DtInsertTable.Rows.Add(workRow)
-                    Else
-                        DtUpdateTable.Rows.Add(workRow)
-                    End If
-                    nRowCount += 1
-                End If
-            Next
         End Sub
 
-        Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
-            UpdateTotals()
+        Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("JournalIdNo") = View.IdNo
+            workRow("AccountIdNo") = itemDataView.AccountIdNo
+            workRow("Debit") = itemDataView.Debit
+            workRow("Credit") = itemDataView.Credit
+            workRow("RevCostCenterIdNo") = itemDataView.RevCostCenterIdNo
+            workRow("Notes") = If(itemDataView.Notes, "")
         End Sub
+
+        Public Function JournalItemFilter(ByVal obj As Object) As Boolean
+            If (obj.AccountIdNo Is Nothing Or obj.AccountIdNo = 0) AndAlso obj.Debit = 0 AndAlso obj.Credit = 0 Then
+                Return False
+            End If
+            Return True
+        End Function
 
         Public Function SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_erJournalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            retVal = UpdateChildData(_erJournalItemService, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
                 If IsEmpty(View.ReferenceNo) Then
                     retVal = UpdateGlReferenceNumber()
@@ -100,7 +80,7 @@ Namespace PresentationLayer.Presenters
         Public Sub UpdateFirstLine()
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
-                    View.JournalItems = New List(Of IJournalItemView) From {
+                    View.JournalItems = New List(Of JournalItemView) From {
                         FirstJournalItem()
                     }
                 End If
@@ -139,27 +119,22 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
+            Dim dataModel As New TM
+            GlobalVariables.Mapper.Map(View, dataModel)
+            retValue = Service.UpdateGlReferenceNumber(dataModel)
             Return retValue
         End Function
-
-        Public Sub UpdateTotals()
-            View.TotalDebits = 0
-            View.TotalCredits = 0
-            For Each item In View.JournalItems
-                View.TotalDebits += item.Debit
-                View.TotalCredits += item.Credit
-            Next
-        End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
-                Dim cashAccount As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount)
+                Dim cashAccount As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.CheckingAccount) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount)
+                Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.AccountsReceivable) + "|" + EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" +
+                                                EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|" + EnumToCode(SpecialAccountSelection.CustomerAdvances) + "|" +
+                                                EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|"
                 Dim dateToday As DateTime = Now()
                 retValue = True
-                Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("ER Journal", "LastPosting", "TransactionName", "LastPostingDate")
+                Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("ER Journal", "LastPosting", "TransactionName", "LastPostingDate")
                 If IsDateRangeValid("Employee Receivable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
                 Else
@@ -172,7 +147,7 @@ Namespace PresentationLayer.Presenters
                                 nTotalEr = nTotalEr + item.Credit - item.Debit
                             End If
                         End If
-                        If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                        If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
                             Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
@@ -181,13 +156,11 @@ Namespace PresentationLayer.Presenters
                             Dim lineNumber As String = item.Sequence.ToString()
                             Messaging.ShowParametrizedMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
-                        Else
-                            If Not String.IsNullOrEmpty(item.PayeeType) AndAlso CodeToEnum(Of PayeeTypeSelection)(item.PayeeType) <> PayeeTypeSelection.Employee Then
-                                Dim lineNumber = Format(item.Sequence, "0")
-                                Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivable")
-                                Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
-                                retValue = False
-                            End If
+                        ElseIf item.SpecialAccount IsNot Nothing AndAlso invalidAccounts.Contains(item.SpecialAccount) Then
+                            Dim lineNumber = Format(item.Sequence, "0")
+                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivable")
+                            Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
+                            retValue = False
                         End If
                     Next
                     If nTotalEr <> View.Amount Then
@@ -203,7 +176,7 @@ Namespace PresentationLayer.Presenters
             Dim item As New JournalItemView With {
                     .JournalIdNo = View.IdNo,
                     .Sequence = 0,
-                    .AccountIdNo = Nothing,
+                    .AccountIdNo = View.AccountIdNo,
                     .Debit = View.Amount,
                     .Credit = 0,
                     .RevCostCenterIdNo = 0,
@@ -228,10 +201,6 @@ Namespace PresentationLayer.Presenters
             Else
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            View.TotalCredits = 0
-            For Each item In View.JournalItems
-                View.TotalCredits = View.TotalCredits + item.Credit
-            Next
             If language = "ar" Then
                 totalErAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
@@ -239,6 +208,25 @@ Namespace PresentationLayer.Presenters
             End If
             Dim cForm As New ReportForm("Employee Receivable Journal.Rpt", View.IdNo, "ErJournalIdNo", transactionAmount, "ERAmountInWords", totalErAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
+        End Sub
+
+        Public Sub OnApJournalDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+            With eventType.BindingSource
+                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+                    Dim accountId = eventType.BindingSource.Current.AccountIdNo
+                    Select Case eventType.PropertyName
+                        Case $"AccountIdNo"
+                            MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
+                            eventType.BindingSource.ResetItem(eventType.Row)
+                        Case $"Debit"
+                            MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
+                            eventType.BindingSource.ResetItem(eventType.Row)
+                        Case $"Credit"
+                            MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
+                            eventType.BindingSource.ResetItem(eventType.Row)
+                    End Select
+                End If
+            End With
         End Sub
 
     End Class

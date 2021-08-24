@@ -203,7 +203,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public ReadOnly Property TotalCredits As Decimal Implements IApJournalView.TotalCredits
             Get
-                Return NumParser(Of Decimal)(txtTotalDebits.Text)
+                Return NumParser(Of Decimal)(txtTotalCredits.Text)
             End Get
         End Property
 

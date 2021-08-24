@@ -655,6 +655,9 @@ Namespace PresentationLayer.Views.Forms
             ProcessCellEndEdit(DataGridViewDeductions, bsDeductions)
         End Sub
 
+        Private Sub dtpBirthDate_Load(sender As Object, e As EventArgs) Handles dtpBirthDate.Load
+
+        End Sub
     End Class
 
 End Namespace

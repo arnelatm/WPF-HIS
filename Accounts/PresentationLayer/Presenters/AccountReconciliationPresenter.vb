@@ -1,18 +1,19 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Transactions
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AccountReconciliationPresenter
-        Inherits TransactionsPresenter(Of IAccountReconciliationView, AccountReconciliationModel)
+    Public Class AccountReconciliationPresenter(Of TM As New)
+        Inherits TransactionsPresenterNew(Of IAccountReconciliationView, TM)
         Implements ISubscriber(Of ReconciliationClearEvent),
                    ISubscriber(Of ReconciliationPostingRequestEvent),
                    ISubscriber(Of ReconciliationRefreshRequestEvent),
@@ -27,15 +28,10 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("AccountReconciliation")
             TableName = "AccountReconciliation"
+            WithTreeView = False
+            Service = New AccountsService("AccountReconciliation")
             SortOrderKey = "IdNo"
-            OriginalModel = New AccountReconciliationModel()
-            DataModel = New AccountReconciliationModel
-
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
-
             DtInsertTable.Columns.Add("AccountReconciliationIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Cleared", GetType(Boolean))
             DtInsertTable.Columns.Add("JournalCode", GetType(String))
@@ -48,15 +44,11 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("JournalCode", GetType(String))
             DtUpdateTable.Columns.Add("JournalItemIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
-
-            SubscribeEvent(Me)
-
             '_backgroundWorker.WorkerReportsProgress = True
             '_backgroundWorker.WorkerSupportsCancellation = True
             'AddHandler _backgroundworker.DoWork, AddressOf BackgroundWorker_DoWork
             'AddHandler _backgroundworker.ProgressChanged, AddressOf BackgroundWorker_ProgressChanged
             'AddHandler _backgroundworker.RunWorkerCompleted, AddressOf BackgroundWorker_RunWorkerCompleted
-
         End Sub
 
         Public Property MessageBox As Object
@@ -69,10 +61,10 @@ Namespace PresentationLayer.Presenters
         '    View.AccountReconciliationItems.Clear()
         'End Sub
 
-        Public Sub OnReconciliationItemCheckedChangeEvent(sender, pView)
-            Dim x = sender
-            Dim y = pView
-        End Sub
+        'Public Sub OnReconciliationItemCheckedChangeEvent(sender, pView)
+        '    Dim x = sender
+        '    Dim y = pView
+        'End Sub
 
         'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
         '    If Posted Then
@@ -139,10 +131,10 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                     SaveReconciliation(dtInsertReconciledTable, idNo)
-                    Model.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
+                    Service.UpdateRecordWithIdNo(Of Boolean)(idNo, "AccountReconciliation", "Posted", True)
                     scope.Complete()
                 End Using
-                MessagingLibrary.Messaging.Show(True, "MsgRecordSuccessfullyPosted")
+                Messaging.Show(True, "MsgRecordSuccessfullyPosted")
                 View.Posted = True
             Catch ex As TransactionAbortedException
                 MessageBox.Show(ex.Message, "Transaction Aborted")
@@ -188,7 +180,7 @@ Namespace PresentationLayer.Presenters
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
-            Dim allAcctReconItems As List(Of AccountReconciliationItemModel) = ModelOfPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems As List(Of AccountReconciliationItemModel) = Service.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
             Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
             Dim counter As Int16 = 1
             Dim nCount = allAcctReconItems.Count()
@@ -212,7 +204,7 @@ Namespace PresentationLayer.Presenters
                 'oldReconciliationItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
                 progressDisplayForm.Show()
                 progressDisplayForm.DisplayProgress(nCount)
-                Dim caption = MessagingLibrary.Messaging.TranslateCaption("Please wait getting account transactions ...")
+                Dim caption = Messaging.TranslateCaption("Please wait getting account transactions ...")
                 progressDisplayForm.InitializeDisplay(nCount, caption)
                 For Each acctReconItem In allAcctReconItems
                     'Dim found As Boolean = False
@@ -266,18 +258,13 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Sub GoPrintRecord()
-            Dim currencies As New List(Of CurrencyInfo) From {
-                New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia)
-            }
             Dim reportTitle As String
             Dim cForm
             Dim previousDate As Date
             Dim beginningDate As Date
-            Dim endingDate As Date
             beginningDate = GregorianDateSerial(GregorianYear(View.ReconciliationDate), GregorianMonth(View.ReconciliationDate), 1)
             previousDate = DateAdd(DateInterval.Day, -1, beginningDate)
-            endingDate = View.ReconciliationDate
-            reportTitle = MessagingLibrary.Messaging.TranslateCaption("Account Reconciliation")
+            reportTitle = Messaging.TranslateCaption("Account Reconciliation")
             cForm = New ReportFormNew("Account Reconciliation Report.Rpt", reportTitle, CultureInfo.CurrentCulture, View.IdNo, "ReconciliationNumber", View.AccountIdNo, "AccountIdNo", previousDate, "PreviousDate", beginningDate, "BeginningDate", View.ReconciliationDate, "EndingDate")
             cForm.Show()
         End Sub
@@ -355,8 +342,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Overrides Sub UpdateViewDisplay(idNo As Int32)
-            MyBase.UpdateViewDisplay(idNo)
+        Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateTotals()
         End Sub
 
@@ -374,7 +360,7 @@ Namespace PresentationLayer.Presenters
                 progressDisplayForm.Show()
                 Dim nCount = View.AccountReconciliationItems.Count()
                 progressDisplayForm.DisplayProgress(nCount)
-                Dim caption = MessagingLibrary.Messaging.TranslateCaption("Please wait computing reconciliation totals...")
+                Dim caption = Messaging.TranslateCaption("Please wait computing reconciliation totals...")
                 progressDisplayForm.InitializeDisplay(nCount, caption)
                 Dim counter As Int32 = 1
                 For Each accountReconciliationItem In View.AccountReconciliationItems
@@ -398,7 +384,7 @@ Namespace PresentationLayer.Presenters
                     progressDisplayForm.UpdateProgressBar(counter)
                     counter = counter + 1
                 Next
-                View.GlSystemBalance = ModelOfPresenter.GetAccountBalance(View.ReconciliationDate, View.AccountIdNo)
+                View.GlSystemBalance = Service.GetAccountBalance(View.ReconciliationDate, View.AccountIdNo)
                 ReComputeDifference()
                 progressDisplayForm.Close()
             End If
@@ -432,17 +418,16 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnReconciliationPostingRequestEvent(ByRef e As ReconciliationPostingRequestEvent) Implements ISubscriber(Of ReconciliationPostingRequestEvent).OnEventHandler
             If e.UnreconciledDifference = 0 Then
-                Dim message = "Are you sure you want to {action} this {itemName} entry?"
-                Dim caption = "Please confirm."
-                Dim action As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("post")
-                Dim itemName As String = AATM.Libraries.MessagingLibrary.Messaging.TranslateCaption("account reconciliation transaction")
-                Dim msg = AATM.Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
-                If AATM.Libraries.MessagingLibrary.Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                Dim caption = Messaging.TranslateCaption("Please confirm.")
+                Dim action As String = Messaging.TranslateCaption("post")
+                Dim itemName As String = Messaging.TranslateCaption("account reconciliation transaction")
+                Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+                If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     PostReconciliation(e.IdNo, e.BsAccountReconciliationItem)
                 End If
             Else
-                Dim err = AATM.Libraries.MessagingLibrary.Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
-                AATM.Libraries.MessagingLibrary.Messaging.Show(False, "MsgCannotPostUnreconciledEntry")
+                'Dim err = Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
+                Messaging.Show(False, "MsgCannotPostUnreconciledEntry")
             End If
         End Sub
 
@@ -535,7 +520,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(sender As IAccountReconciliationView, bsAccountReconciliationItem As BindingSource)
             Me.Sender = sender
-            Me.BsAccountReconciliation = bsAccountReconciliationItem
+            BsAccountReconciliation = bsAccountReconciliationItem
         End Sub
 
         Public Property Sender As IAccountReconciliationView

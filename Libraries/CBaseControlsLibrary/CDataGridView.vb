@@ -343,7 +343,7 @@ Public Class CDataGridView
 
     Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
         Try
-            If EditingMode Then
+            If EditingMode And CurrentCell IsNot Nothing Then
                 With CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvinsertcolumn"

@@ -269,7 +269,7 @@ Namespace PresentationLayer.Presenters
                 End If
                 If retValue >= 0 Then
                     For Each item In View.JournalItems
-                        If item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
+                        If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
                             Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False

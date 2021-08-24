@@ -185,13 +185,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub AccountReconciliationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountReconciliation.Click
-            Dim childMdiForm As AccountReconciliationEntry
-            'Set the Parent Form of the Child window.
-            childMdiForm = New AccountReconciliationEntry With {
-                .MdiParent = Me
-                }
-            'Display the new form.
-            childMdiForm.Show()
+            RunForm(Of AccountReconciliationEntry, AccountReconciliationPresenter(Of AccountReconciliationModel))()
         End Sub
 
         Private Sub AccountsPayableEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountsPayableEntry.Click
@@ -263,11 +257,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCheckPrinting.Click
-            'Dim childMdiForm As CheckPrinter
-            'childMdiForm = New CheckPrinter("S") With {
-            '    .MdiParent = Me
-            '    }
-            'childMdiForm.Show()
             RunForm(Of CheckPrinter, AccountPresenter(Of DisbursementJournalModel))()
         End Sub
 
@@ -350,11 +339,7 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub EmployeeReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeReceivable.Click
-            Dim childMdiForm As ErJournalEntry
-            childMdiForm = New ErJournalEntry With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            RunForm(Of ErJournalEntry, ErJournalPresenter(Of ErJournalModel))()
         End Sub
 
         Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployees.Click
