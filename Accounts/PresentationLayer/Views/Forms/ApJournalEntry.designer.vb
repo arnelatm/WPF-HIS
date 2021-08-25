@@ -84,6 +84,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblVatAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpSettlementDueDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -97,7 +98,6 @@ Namespace PresentationLayer.Views.Forms
             Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floApJournalItems.SuspendLayout()
@@ -1079,6 +1079,40 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblVatAmount.Translatable = True
             '
+            'txtVatAmount
+            '
+            Me.txtVatAmount.BackColor = System.Drawing.Color.White
+            Me.txtVatAmount.BegFindValue = Nothing
+            Me.txtVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtVatAmount.ComputedValue = False
+            Me.txtVatAmount.CustomFormat = Nothing
+            Me.txtVatAmount.DataBoundControl = True
+            Me.txtVatAmount.EditingMode = False
+            Me.txtVatAmount.EndFindValue = Nothing
+            Me.txtVatAmount.FieldDescription = Nothing
+            Me.txtVatAmount.FieldName = Nothing
+            Me.txtVatAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtVatAmount.FindEnabled = True
+            Me.CFlowLayout2.SetFlowBreak(Me.txtVatAmount, True)
+            Me.txtVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
+            Me.txtVatAmount.LinkedLabel = Me.lblAmount
+            Me.txtVatAmount.Location = New System.Drawing.Point(115, 16)
+            Me.txtVatAmount.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtVatAmount.MaximumValue = Nothing
+            Me.txtVatAmount.MinimumValue = Nothing
+            Me.txtVatAmount.Name = "txtVatAmount"
+            Me.txtVatAmount.OldValue = Nothing
+            Me.txtVatAmount.ReadOnly = True
+            Me.txtVatAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtVatAmount.Size = New System.Drawing.Size(122, 23)
+            Me.txtVatAmount.TabIndex = 2
+            Me.txtVatAmount.TabStop = False
+            Me.txtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtVatAmount.Translatable = False
+            Me.txtVatAmount.ValueIsMandatory = True
+            Me.txtVatAmount.ValueIsNumeric = True
+            '
             'CLabel2
             '
             Me.CLabel2.DisplayOnly = True
@@ -1373,40 +1407,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDebits.TabIndex = 249
             Me.txtTotalDebits.Translatable = False
             Me.txtTotalDebits.Visible = False
-            '
-            'txtVatAmount
-            '
-            Me.txtVatAmount.BackColor = System.Drawing.Color.White
-            Me.txtVatAmount.BegFindValue = Nothing
-            Me.txtVatAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtVatAmount.ComputedValue = False
-            Me.txtVatAmount.CustomFormat = Nothing
-            Me.txtVatAmount.DataBoundControl = True
-            Me.txtVatAmount.EditingMode = False
-            Me.txtVatAmount.EndFindValue = Nothing
-            Me.txtVatAmount.FieldDescription = Nothing
-            Me.txtVatAmount.FieldName = Nothing
-            Me.txtVatAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtVatAmount.FindEnabled = True
-            Me.CFlowLayout2.SetFlowBreak(Me.txtVatAmount, True)
-            Me.txtVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
-            Me.txtVatAmount.LinkedLabel = Me.lblAmount
-            Me.txtVatAmount.Location = New System.Drawing.Point(115, 16)
-            Me.txtVatAmount.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtVatAmount.MaximumValue = Nothing
-            Me.txtVatAmount.MinimumValue = Nothing
-            Me.txtVatAmount.Name = "txtVatAmount"
-            Me.txtVatAmount.OldValue = Nothing
-            Me.txtVatAmount.ReadOnly = True
-            Me.txtVatAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtVatAmount.Size = New System.Drawing.Size(122, 23)
-            Me.txtVatAmount.TabIndex = 2
-            Me.txtVatAmount.TabStop = False
-            Me.txtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-            Me.txtVatAmount.Translatable = False
-            Me.txtVatAmount.ValueIsMandatory = True
-            Me.txtVatAmount.ValueIsNumeric = True
             '
             'ApJournalEntry
             '

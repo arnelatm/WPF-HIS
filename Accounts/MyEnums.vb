@@ -335,6 +335,7 @@ Public Enum SpecialAccountSelection
     <EnumCode("SL")> Sales
     <EnumCode("RD")> AccountsReceivableDiscount
     <EnumCode("PC")> PettyCashAccount
+    <EnumCode("PD")> PurchaseDiscount
     <EnumCode("VI")> VatInput
     <EnumCode("VO")> VatOutput
 End Enum

@@ -3,14 +3,15 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
-    Public Class DisbursementJournalPresenter
-        Inherits TransactionsPresenter(Of IDisbursementJournalView, DisbursementJournalModel)
+    Public Class DisbursementJournalPresenter(Of TM As New)
+        Inherits TransactionsPresenterNew(Of IDisbursementJournalView, TM)
 
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
         Protected DtInsertTable As New DataTable
@@ -23,6 +24,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDisbursementJournalView, ByVal tableOrViewName As String)
             MyBase.New(view)
+            WithTreeView = False
             Dim args As Object
             Dim djArgs As Object
             Dim oiArgs As Object
@@ -32,11 +34,6 @@ Namespace PresentationLayer.Presenters
                 oiArgs = {"CdOiItem_View", "UpdateCdOiItemTVP", "InsertCdOiItemTVP"}
                 args = {"CdJournal", "CD", djArgs, oiArgs}
                 JournalCode = "CD"
-                'ElseIf tableOrViewName = "CkJournal" Then
-                '    djArgs = {"CkJournalItem_View", "UpdateCkJournalItemTVP", "InsertCkJournalItemTVP"}
-                '    oiArgs = {"CkOiItem_View", "UpdateCkOiItemTVP", "InsertCkOiItemTVP"}
-                '    args = {"CkJournal", "CK", djArgs, oiArgs}
-                '    JournalCode = "CK"
             Else
                 djArgs = {"PcJournalItem_View", "UpdatePcJournalItemTVP", "InsertPcJournalItemTVP"}
                 oiArgs = {"PcOiItem_View", "UpdatePcOiItemTVP", "InsertPcOiItemTVP"}
@@ -45,13 +42,8 @@ Namespace PresentationLayer.Presenters
             End If
             _journalItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
             OiItemModel = New ModelAccounts("DjOiItem", Nothing, oiArgs)
-            ModelOfPresenter = New ModelAccounts("DisbursementJournal", JournalCode, args)
+            Service = New AccountsService("DisbursementJournal", JournalCode, args)
             TableName = tableOrViewName
-            OriginalModel = New DisbursementJournalModel()
-            DataModel = New DisbursementJournalModel
-
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
 
             _advancesToSupplierAccountIdNo = GetAdvancesToSupplierAccountIdNo()
 
@@ -91,6 +83,11 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Public Function GetAdvancesToSupplierAccountIdNo()
+            Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
+        End Function
+
+
         Public Property JournalCode As String
 
         Public ReadOnly Property CdAccountCount As Int16
@@ -105,7 +102,7 @@ Namespace PresentationLayer.Presenters
                     Dim cdAccounts = GetAccountTypesList(accounts)
                     Return cdAccounts.Count()
                 End If
-                Return ModelOfPresenter.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
+                Return Service.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
             End Get
         End Property
 
@@ -148,11 +145,11 @@ Namespace PresentationLayer.Presenters
                         DtOiUpdateTable.Clear()
                     End If
                 Else
-                    View.TotalDebits = 0
+                    'View.TotalDebits = 0
                     MakeJournalItem()
                     ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
                     ViewToDataTables(View.DjOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf DjOiFillData, AddressOf DjOiItemFilter)
-                    View.TotalCredits = View.TotalDebits
+                    'View.TotalCredits = View.TotalDebits
                 End If
             End If
             For Each item In View.JournalItems
@@ -175,14 +172,14 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
-            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
-                View.TotalDebits = 0
-                View.TotalCredits = 0
-                For Each ji In View.DjOiItems
-                    View.TotalDebits += ji.Amount + ji.DiscountTaken
-                Next
-                View.TotalCredits = View.TotalDebits
-            End If
+            'If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+            '    View.TotalDebits = 0
+            '    View.TotalCredits = 0
+            '    For Each ji In View.DjOiItems
+            '        View.TotalDebits += ji.Amount + ji.DiscountTaken
+            '    Next
+            '    View.TotalCredits = View.TotalDebits
+            'End If
             View.UnApplied = View.Amount - View.Applied
         End Sub
 
@@ -201,14 +198,14 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 AndAlso
                (View.PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Or View.PaymentType = EnumToCode(PaymentTypeSelection.Supplier)) AndAlso
                Not IsEmpty(View.VatNumber) Then
-                ModelOfPresenter.UpdateVatNumber(View.VatNumber, View.PayeeIdNo)
+                Service.UpdateVatNumber(View.VatNumber, View.PayeeIdNo)
             End If
         End Sub
 
         Public Sub UpdateFirstLine()
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
-                    View.JournalItems = New List(Of IJournalItemView) From {
+                    View.JournalItems = New List(Of JournalItemView) From {
                             FirstJournalItem()
                             }
                 End If
@@ -227,8 +224,9 @@ Namespace PresentationLayer.Presenters
 
         Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
+            Dim dataModel As New TM
+            GlobalVariables.Mapper.Map(View, dataModel)
+            retValue = Service.UpdateGlReferenceNumber(dataModel)
             Return retValue
         End Function
 
@@ -237,7 +235,7 @@ Namespace PresentationLayer.Presenters
             If MyBase.IsBizDataValid() Then
                 Dim dateToday As DateTime = Now()
                 retValue = True
-                Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Petty Cash Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
+                Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("Petty Cash Disbursement", "LastPosting", "TransactionName", "LastPostingDate")
                 Dim dateFieldName = Messaging.TranslateCaption("Transaction Date")
                 If IsDateRangeValid(dateFieldName, View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
@@ -310,10 +308,10 @@ Namespace PresentationLayer.Presenters
             Else
                 transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            View.TotalCredits = 0
-            For Each item In View.JournalItems
-                View.TotalCredits = View.TotalCredits + item.Credit
-            Next
+            'View.TotalCredits = 0
+            'For Each item In View.JournalItems
+            '    View.TotalCredits = View.TotalCredits + item.Credit
+            'Next
             If language = "ar" Then
                 totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
@@ -601,9 +599,13 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
+        Public Function GetAdvancePaymentOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
+            Return Service.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
+        End Function
+
         Private Function DeleteAdvancePaymentOpenInvoice(ByRef idNo As Int32) As String
             Dim modelArOpenInvoice As New ModelAccounts("ApOpenInvoice")
-            If Model.CountRecordWithKey(idNo, "ApOpenInvoice", "IdNo") > 0 Then
+            If Service.CountRecordWithKey(idNo, "ApOpenInvoice", "IdNo") > 0 Then
                 Return modelArOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
             End If
             Return 0
@@ -727,7 +729,7 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetAdvancePaymentOpenIdNo(ByVal pJournalCode As String, ByVal idNo As Int32) As Integer
             Dim retVal As String
-            retVal = Model.GetRecordFieldWith2Key(idNo, pJournalCode, "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
+            retVal = Service.GetRecordFieldWith2Key(idNo, pJournalCode, "ApOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
@@ -762,7 +764,7 @@ Namespace PresentationLayer.Presenters
             If supplierIdNo Is Nothing Then
                 Return New List(Of DjOiItemModel)
             Else
-                Return ModelOfPresenter.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
+                Return Service.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
             End If
         End Function
 
@@ -771,7 +773,7 @@ Namespace PresentationLayer.Presenters
             If View.JournalItems IsNot Nothing Then
                 View.JournalItems.Clear()
             Else
-                View.JournalItems = New List(Of IJournalItemView)
+                View.JournalItems = New List(Of JournalItemView)
             End If
             Dim item As New JournalItemView With {
                     .JournalIdNo = View.IdNo,
@@ -815,7 +817,7 @@ Namespace PresentationLayer.Presenters
             workRow("ApOpenInvoiceIdNo") = itemDataView.ApOpenInvoiceIdNo
             workRow("DjIdNo") = View.IdNo
             workRow("DiscountTaken") = itemDataView.DiscountTaken
-            View.TotalDebits += itemDataView.Amount + itemDataView.DiscountTaken
+            'View.TotalDebits += itemDataView.Amount + itemDataView.DiscountTaken
         End Sub
 
         Public Function DjOiItemFilter(ByVal obj As Object) As Boolean
@@ -997,6 +999,17 @@ Namespace PresentationLayer.Presenters
             End If
             Return retVal
         End Function
+
+        'Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
+        Public Sub OnBeforeAssignment(ByVal paymentType As PaymentTypeSelection)
+            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
+            ' the DepositType so in order to override this part we need to retrieve the DepositType first
+            ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
+            ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
+            View.PaymentType = eventType.Model.PaymentType
+            SetPayeeDataSource(View.PaymentType)
+            View.PaymentType = IIf(paymentType = Nothing, 0, paymentType)
+        End Sub
 
     End Class
 

@@ -25,13 +25,13 @@ Namespace PresentationLayer.Views.Interfaces
         Property PcClosed As Boolean
         Property Posted As Boolean
         Property ReferenceNo As String
-        Property TotalCredits As Decimal
-        Property TotalDebits As Decimal
+        ReadOnly Property TotalCredits As Decimal
+        ReadOnly Property TotalDebits As Decimal
         Property TransactionDate As Date?
         Property UnApplied As Decimal
         Property VatAmount As Decimal
         Property VatNumber As String
-        Property JournalItems As List(Of IJournalItemView)
+        Property JournalItems As List(Of JournalItemView)
         Property DjOiItems As List(Of DjOiItemView)
     End Interface
 

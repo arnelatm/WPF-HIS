@@ -215,10 +215,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
-            Dim childMdiForm
-            childMdiForm = New DisbursementJournalEntry("CdJournal") With {
-                .MdiParent = Me
-                }
+            Dim childMdiForm = New DisbursementJournalEntry("CdJournal")
+            childMdiForm.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(childMdiForm, "CdJournal")
+            childMdiForm.MdiParent = Me
             childMdiForm.Show()
         End Sub
 
@@ -226,12 +225,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of BranchEntryTv, BranchPresenter(Of BranchModel))()
         End Sub
 
-        Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemCashDisbursementEntry.Click
-            Dim childMdiForm
-            childMdiForm = New DisbursementJournalEntry("CdJournal") With {
-                .MdiParent = Me
-                }
+        Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCashDisbursementEntry.Click
+            Dim childMdiForm = New DisbursementJournalEntry("CdJournal")
+            childMdiForm.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(childMdiForm, "CdJournal")
+            childMdiForm.MdiParent = Me
             childMdiForm.Show()
         End Sub
 
@@ -442,12 +439,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPettyCash.Click
-            Dim childMdiForm ' As New DisbursementJournalEntry("PcJournal")
-            'Set the Parent Form of the Child window.
-            childMdiForm = New DisbursementJournalEntry("PcJournal") With {
-                .MdiParent = Me
-                }
-            'Display the new form.
+            Dim childMdiForm = New DisbursementJournalEntry("PcJournal")
+            childMdiForm.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(childMdiForm, "PcJournal")
+            childMdiForm.MdiParent = Me
             childMdiForm.Show()
         End Sub
 

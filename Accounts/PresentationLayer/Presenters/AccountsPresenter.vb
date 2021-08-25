@@ -98,9 +98,9 @@ Namespace PresentationLayer.Presenters
             Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "VI"
         End Function
 
-        Public Function GetAdvancesToSupplierAccountIdNo()
-            Return GetRecordFieldWithKey("AS", "Account", "SpecialAccount", "IdNo")
-        End Function
+        'Public Function GetAdvancesToSupplierAccountIdNo()
+        '    Return GetRecordFieldWithKey("AS", "Account", "SpecialAccount", "IdNo")
+        'End Function
 
         Public Function GetCustomerAdvancesAccountIdNo()
             Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
