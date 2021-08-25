@@ -33,8 +33,6 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             EnableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = tableName
-            SortOrderKey = "IdNo"
             If tableName = "CdJournal" Then
                 ViewDisplayName = "CdJournalEntry"
                 MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
