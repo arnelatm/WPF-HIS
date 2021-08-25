@@ -15,7 +15,6 @@ Namespace PresentationLayer.Views.Forms
         Public TxtTotalCredits As Decimal
         Public TxtTotalDebits As Decimal
 
-        Private Property MyPresenter As DisbursementJournalPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
 
@@ -26,17 +25,15 @@ Namespace PresentationLayer.Views.Forms
             EnableDoubleBuff(tlpDisbursement)
             ' Add any initialization after the InitializeComponent() call.
             HideNavigatorButtons = True
-            MainTableName = tableName
-            MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
-            MyPresenter.JournalCode = "CD"
+            'MainTableName = tableName
+            'MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
+            'MyPresenter.JournalCode = "CD"
             Me.Text = Messaging.TranslateCaption("Check Disbursement Journal")
             btnPrintCheck.Visible = True
-            PresenterObj = MyPresenter
-            SortOrderKey = "IdNo"
+            'PresenterObj = MyPresenter
+            'SortOrderKey = "IdNo"
             FirstControl = cboPaymentType
             _nfi.NumberDecimalDigits = 2
-            Ea = MyPresenter.Ea
-            Ea.SubscribeEvent(Me)
         End Sub
 
 #Region "Field Items"
@@ -88,7 +85,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int32 Implements IDisbursementJournalView.IdNo
 
-        Public Property JournalItems As List(Of IJournalItemView) Implements IDisbursementJournalView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements IDisbursementJournalView.JournalItems
 
         Public Property Notes As String Implements IDisbursementJournalView.Notes
             Get
@@ -170,7 +167,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            cboPaymentType.DataSource = MyPresenter.MakeEnumComboList(Of PaymentTypeSelection)
+            cboPaymentType.DataSource = Presenter.MakeEnumComboList(Of PaymentTypeSelection)
         End Sub
 
         Private Sub DjJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -247,11 +244,11 @@ Namespace PresentationLayer.Views.Forms
             cboPayeeIdNo.DataSource = cbDataSource
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
             If paymentTypeEnum = PaymentTypeSelection.Supplier Or paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
-                cbDataSource = MyPresenter.GetLookup("Supplier")
+                cbDataSource = Presenter.GetLookup("Supplier")
             ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                cbDataSource = MyPresenter.GetLookup("Employee")
+                cbDataSource = Presenter.GetLookup("Employee")
             ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                cbDataSource = MyPresenter.GetLookup("Customer")
+                cbDataSource = Presenter.GetLookup("Customer")
             End If
             cboPayeeIdNo.DataSource = cbDataSource
             If curValue IsNot Nothing Then

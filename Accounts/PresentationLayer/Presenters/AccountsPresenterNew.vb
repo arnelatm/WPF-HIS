@@ -211,9 +211,21 @@ Namespace PresentationLayer.Presenters
         '    Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "VI"
         'End Function
 
-        'Public Function GetAdvancesToSupplierAccountIdNo()
-        '    Return GetRecordFieldWithKey("AS", "Account", "SpecialAccount", "IdNo")
-        'End Function
+        Public Function GetAdvancesToSupplierAccountIdNo()
+            Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
+        End Function
+
+        Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
+            Dim values = accountType.Split(",")
+            Dim lookupFilterKey = ""
+            For Each account In values
+                If lookupFilterKey <> "" Then
+                    lookupFilterKey = lookupFilterKey + " Or "
+                End If
+                lookupFilterKey = lookupFilterKey + "SpecialAccount = '" & account & "'"
+            Next
+            Return GetLookup("Account", sortKey, lookupFilterKey)
+        End Function
 
         'Public Function GetCustomerAdvancesAccountIdNo()
         '    Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
@@ -232,12 +244,6 @@ Namespace PresentationLayer.Presenters
 
         'Public Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
         '    Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
-        'End Function
-
-        'Public Function GetAdvancePaymentOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
-        '    Return _
-        '        Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalItemIdNo", "JournalCode",
-        '                                     "IdNo")
         'End Function
 
         'Public Function GetAdvanceCollectionOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
