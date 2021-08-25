@@ -28,7 +28,17 @@ Namespace PresentationLayer.Views.Interfaces
         Property OutstandingCredits As Decimal
         Property OutstandingDeposits As Decimal
 
-        Event ReconciliationAccountChangedEvent()
+        Event ReconciliationAccountChangedEvent(sender As Object, bindingSource As BindingSource)
+
+        Event ReconciliationClearEvent(sender As Object, all As Boolean, clear As Boolean, bindingSource As BindingSource)
+
+        Event ReconciliationPostingRequestEvent(sender As Object, bsAccountReconciliationItem As BindingSource)
+
+        Event EndingBankBalanceEntryChangedEvent()
+
+        Event ReconciliationRefreshRequestEvent()
+
+        Event EndingReconciliationDateChangedEvent()
 
     End Interface
 

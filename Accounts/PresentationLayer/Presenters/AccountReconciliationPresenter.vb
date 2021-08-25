@@ -14,12 +14,6 @@ Namespace PresentationLayer.Presenters
 
     Public Class AccountReconciliationPresenter(Of TM As New)
         Inherits TransactionsPresenterNew(Of IAccountReconciliationView, TM)
-        Implements ISubscriber(Of ReconciliationClearEvent),
-                   ISubscriber(Of ReconciliationPostingRequestEvent),
-                   ISubscriber(Of ReconciliationRefreshRequestEvent),
-                   ISubscriber(Of EndingBankBalanceEntryChangedEvent),
-                   ISubscriber(Of EndingReconciliationDateChangedEvent),
-                   ISubscriber(Of ReconciliationAccountChangedEvent)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -44,6 +38,14 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("JournalCode", GetType(String))
             DtUpdateTable.Columns.Add("JournalItemIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
+
+            AddHandler view.ReconciliationAccountChangedEvent, AddressOf OnReconciliationAccountChangedEvent
+            AddHandler view.ReconciliationClearEvent, AddressOf OnReconciliationClearEvent
+            AddHandler view.ReconciliationPostingRequestEvent, AddressOf OnReconciliationPostingRequestEvent
+            AddHandler view.ReconciliationRefreshRequestEvent, AddressOf OnReconciliationRefreshRequestEvent
+            AddHandler view.EndingBankBalanceEntryChangedEvent, AddressOf OnEndingBankBalanceEntryChangedEvent
+            AddHandler view.EndingReconciliationDateChangedEvent, AddressOf OnEndingReconciliationDateChangedEvent
+
             '_backgroundWorker.WorkerReportsProgress = True
             '_backgroundWorker.WorkerSupportsCancellation = True
             'AddHandler _backgroundworker.DoWork, AddressOf BackgroundWorker_DoWork
@@ -269,43 +271,43 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
-        Public Sub ProcessReconciliationRequest(eEvent As ReconciliationClearEvent)
-            If eEvent.All Then
-                For Each accountReconciliationItem In eEvent.DataBindingSource
-                    If eEvent.Clear Then
+        Public Sub ProcessReconciliationRequest(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource)
+            If all Then
+                For Each accountReconciliationItem In dataBindingSource
+                    If clear Then
                         accountReconciliationItem.Cleared = True
                     Else
                         accountReconciliationItem.Cleared = False
                     End If
                 Next
-                eEvent.DataBindingSource.ResetBindings(False)
+                dataBindingSource.ResetBindings(False)
             Else
-                If eEvent.Sender.Cleared Then
-                    If eEvent.Sender.Debit > 0 Then
-                        View.TotalDebitsCleared -= eEvent.Sender.Debit
+                If sender.Cleared Then
+                    If sender.Debit > 0 Then
+                        View.TotalDebitsCleared -= sender.Debit
                         View.TotalQtyDebitsCleared -= 1
-                        View.TotalDebitsNotCleared += eEvent.Sender.Debit
+                        View.TotalDebitsNotCleared += sender.Debit
                         View.TotalQtyDebitsNotCleared += 1
                     Else
-                        View.TotalCreditsCleared -= eEvent.Sender.Credit
+                        View.TotalCreditsCleared -= sender.Credit
                         View.TotalQtyCreditsCleared -= 1
-                        View.TotalCreditsNotCleared += eEvent.Sender.Credit
+                        View.TotalCreditsNotCleared += sender.Credit
                         View.TotalQtyCreditsNotCleared += 1
                     End If
                 Else
-                    If eEvent.Sender.Debit > 0 Then
-                        View.TotalDebitsCleared += eEvent.Sender.Debit
+                    If sender.Debit > 0 Then
+                        View.TotalDebitsCleared += sender.Debit
                         View.TotalQtyDebitsCleared += 1
-                        View.TotalDebitsNotCleared -= eEvent.Sender.Debit
+                        View.TotalDebitsNotCleared -= sender.Debit
                         View.TotalQtyDebitsNotCleared -= 1
                     Else
-                        View.TotalCreditsCleared += eEvent.Sender.Credit
+                        View.TotalCreditsCleared += sender.Credit
                         View.TotalQtyCreditsCleared += 1
-                        View.TotalCreditsNotCleared -= eEvent.Sender.Credit
+                        View.TotalCreditsNotCleared -= sender.Credit
                         View.TotalQtyCreditsNotCleared -= 1
                     End If
                 End If
-                eEvent.Sender.Cleared = Not eEvent.Sender.Cleared
+                sender.Cleared = Not sender.Cleared
             End If
             ReComputeDifference()
         End Sub
@@ -331,14 +333,13 @@ Namespace PresentationLayer.Presenters
             Return table
         End Function
 
-        Public Sub OnReconciliationClearEvent(ByRef e As ReconciliationClearEvent) Implements ISubscriber(Of ReconciliationClearEvent).OnEventHandler
+        Public Sub OnReconciliationClearEvent(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource)
             If EditMode Or AddMode Then
-                ProcessReconciliationRequest(e)
-                If e.All Then
+                ProcessReconciliationRequest(sender, all, clear, dataBindingSource)
+                If all Then
                     UpdateTotals()
-                    e.DataBindingSource.ResetBindings(False)
+                    dataBindingSource.ResetBindings(False)
                 End If
-
             End If
         End Sub
 
@@ -416,14 +417,14 @@ Namespace PresentationLayer.Presenters
             View.UnreconciledDifference = View.Balance + View.OutstandingDeposits - View.OutstandingCredits - View.GlSystemBalance
         End Sub
 
-        Private Sub OnReconciliationPostingRequestEvent(ByRef e As ReconciliationPostingRequestEvent) Implements ISubscriber(Of ReconciliationPostingRequestEvent).OnEventHandler
-            If e.UnreconciledDifference = 0 Then
+        Private Sub OnReconciliationPostingRequestEvent(sender As Object, bsAccountReconciliationItem As BindingSource)
+            If View.UnreconciledDifference = 0 Then
                 Dim caption = Messaging.TranslateCaption("Please confirm.")
                 Dim action As String = Messaging.TranslateCaption("post")
                 Dim itemName As String = Messaging.TranslateCaption("account reconciliation transaction")
                 Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
                 If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    PostReconciliation(e.IdNo, e.BsAccountReconciliationItem)
+                    PostReconciliation(View.IdNo, bsAccountReconciliationItem)
                 End If
             Else
                 'Dim err = Messaging.GetMessage(True, "MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "")
@@ -431,11 +432,11 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnEndingBankBalanceEntryChangedEvent(ByRef eventType As EndingBankBalanceEntryChangedEvent) Implements ISubscriber(Of EndingBankBalanceEntryChangedEvent).OnEventHandler
+        Public Sub OnEndingBankBalanceEntryChangedEvent()
             ReComputeDifference()
         End Sub
 
-        Private Sub OnEndingReconciliationDateChangedEvent(ByRef eventType As EndingReconciliationDateChangedEvent) Implements ISubscriber(Of EndingReconciliationDateChangedEvent).OnEventHandler
+        Private Sub OnEndingReconciliationDateChangedEvent()
             If EditMode Or AddMode Then
                 If View.AccountIdNo <> 0 And View.ReconciliationDate IsNot Nothing Then
                     View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
@@ -446,95 +447,96 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnReconciliationRefreshRequestEvent(ByRef eventType As ReconciliationRefreshRequestEvent) Implements ISubscriber(Of ReconciliationRefreshRequestEvent).OnEventHandler
+        Public Sub OnReconciliationRefreshRequestEvent()
             If EditMode Or AddMode Then
                 UpdateTotals()
             End If
         End Sub
 
-        Public Sub OnReconciliationAccountChangedEvent(ByRef e As ReconciliationAccountChangedEvent) Implements ISubscriber(Of ReconciliationAccountChangedEvent).OnEventHandler
+        Public Sub OnReconciliationAccountChangedEvent(sender As Object, bindingSource As BindingSource)
             If EditMode Or AddMode Then
-                If e.Sender.AccountIdNo IsNot Nothing And e.Sender.ReconciliationDate IsNot Nothing Then
-                    e.Sender.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
+                If View.AccountIdNo IsNot Nothing And View.ReconciliationDate IsNot Nothing Then
+                    View.AccountReconciliationItems = GetAcctReconItems(View.AccountIdNo, View.ReconciliationDate, TargetIdNo, "TransactionDate")
                     UpdateTotals()
                 Else
-                    e.Sender.AccountReconciliationItems.Clear()
+                    View.AccountReconciliationItems.Clear()
                 End If
-                e.BsAccountReconciliation.ResetBindings(False)
+                bindingSource.ResetBindings(False)
             End If
         End Sub
 
     End Class
 
-    Public Class ReconciliationClearEvent
+    'Public Class ReconciliationClearEvent
 
-        Public Sub New(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource)
-            'all - set to true to clear/unclear all, false to clear single value
-            'clear - set to true to clear , false to unClear
-            Me.Sender = sender
-            Me.All = all
-            Me.Clear = clear
-            Me.DataBindingSource = dataBindingSource
-        End Sub
+    '    Public Sub New(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource)
+    '        'all - set to true to clear/unclear all, false to clear single value
+    '        'clear - set to true to clear , false to unClear
+    '        Me.Sender = sender
+    '        Me.All = all
+    '        Me.Clear = clear
+    '        Me.DataBindingSource = dataBindingSource
+    '    End Sub
 
-        Public Property Sender As Object
-        Public Property All As Boolean
-        Public Property Clear As Boolean
-        Public Property DataBindingSource As BindingSource
-    End Class
+    '    Public Property Sender As Object
+    '    Public Property All As Boolean
+    '    Public Property Clear As Boolean
+    '    Public Property DataBindingSource As BindingSource
+    'End Class
 
-    Public Class ReconciliationPostingRequestEvent
+    'Public Class ReconciliationPostingRequestEvent
 
-        Public Sub New(sender As Object, idNo As Integer, unreconciledDifference As Decimal, bsAccountReconciliationItem As BindingSource)
-            Me.Sender = sender
-            Me.IdNo = idNo
-            Me.UnreconciledDifference = unreconciledDifference
-            Me.BsAccountReconciliationItem = bsAccountReconciliationItem
-        End Sub
+    '    Public Sub New(sender As Object, idNo As Integer, unreconciledDifference As Decimal, bsAccountReconciliationItem As BindingSource)
+    '        Me.Sender = sender
+    '        Me.IdNo = idNo
+    '        Me.UnreconciledDifference = unreconciledDifference
+    '        Me.BsAccountReconciliationItem = bsAccountReconciliationItem
+    '    End Sub
 
-        Public Property Sender As Object
-        Public Property IdNo As Integer
-        Public Property UnreconciledDifference As Decimal
-        Public Property BsAccountReconciliationItem As BindingSource
-    End Class
+    '    Public Property Sender As Object
+    '    Public Property IdNo As Integer
+    '    Public Property UnreconciledDifference As Decimal
+    '    Public Property BsAccountReconciliationItem As BindingSource
+    'End Class
 
-    Public Class EndingBankBalanceEntryChangedEvent
+    'Public Class EndingBankBalanceEntryChangedEvent
 
-        Public Sub New(sender As Object)
-            Me.Sender = sender
-        End Sub
+    '    Public Sub New(sender As Object)
+    '        Me.Sender = sender
+    '    End Sub
 
-        Public Property Sender As Object
-    End Class
+    '    Public Property Sender As Object
+    'End Class
 
-    Public Class EndingReconciliationDateChangedEvent
+    'Public Class EndingReconciliationDateChangedEvent
 
-        Public Sub New(sender As Object)
-            Me.Sender = sender
-        End Sub
+    '    Public Sub New(sender As Object)
+    '        Me.Sender = sender
+    '    End Sub
 
-        Public Property Sender As Object
-    End Class
+    '    Public Property Sender As Object
+    'End Class
 
-    Public Class ReconciliationAccountChangedEvent
+    'Public Class ReconciliationAccountChangedEventArgs
+    '    Inherits EventArgs
 
-        Public Sub New(sender As IAccountReconciliationView, bsAccountReconciliationItem As BindingSource)
-            Me.Sender = sender
-            BsAccountReconciliation = bsAccountReconciliationItem
-        End Sub
+    '    Public Sub New(sender As IAccountReconciliationView, bsAccountReconciliationItem As BindingSource)
+    '        Me.Sender = sender
+    '        BsAccountReconciliation = bsAccountReconciliationItem
+    '    End Sub
 
-        Public Property Sender As IAccountReconciliationView
-        Public Property BsAccountReconciliation As BindingSource
-    End Class
+    '    Public Property Sender As IAccountReconciliationView
+    '    Public Property BsAccountReconciliation As BindingSource
+    'End Class
 
-    Public Class ReconciliationRefreshRequestEvent
+    'Public Class ReconciliationRefreshRequestEvent
 
-        Public Sub New(sender As Object)
-            Me.Sender = sender
-        End Sub
+    '    Public Sub New(sender As Object)
+    '        Me.Sender = sender
+    '    End Sub
 
-        Public Property Sender As Object
-    End Class
+    '    Public Property Sender As Object
+    'End Class
 
     'Public Class CreateDataSourcesEvent
 

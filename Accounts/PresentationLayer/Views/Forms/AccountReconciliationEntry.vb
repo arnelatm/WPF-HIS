@@ -30,7 +30,18 @@ Namespace PresentationLayer.Views.Forms
         Private _previousEndValueSearch As Decimal?
         Private _previousColumnSearch As Int16
         Private _progressDisplayForm As Form1
-        'Private _accounts As List(Of Lookup.LookupData)
+
+        Public Event ReconciliationAccountChangedEvent(sender As Object, bindingSource As BindingSource) Implements IAccountReconciliationView.ReconciliationAccountChangedEvent
+
+        Public Event ReconciliationClearEvent(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource) Implements IAccountReconciliationView.ReconciliationClearEvent
+
+        Public Event ReconciliationPostingRequestEvent(sender As Object, bindingSource As BindingSource) Implements IAccountReconciliationView.ReconciliationPostingRequestEvent
+
+        Public Event ReconciliationRefreshRequestEvent() Implements IAccountReconciliationView.ReconciliationRefreshRequestEvent
+
+        Public Event EndingBankBalanceEntryChangedEvent() Implements IAccountReconciliationView.EndingBankBalanceEntryChangedEvent
+
+        Public Event EndingReconciliationDateChangedEvent() Implements IAccountReconciliationView.EndingReconciliationDateChangedEvent
 
         Public Sub New()
             MyBase.New()
@@ -39,8 +50,7 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = dtpReconciliationDate
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            PublishEvent(New ReconciliationRefreshRequestEvent(Me))
-
+            RaiseEvent ReconciliationAccountChangedEvent(Me, bsAccountReconciliationItems)
         End Sub
 
 #Region "Fields"
@@ -299,7 +309,7 @@ Namespace PresentationLayer.Views.Forms
                     Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvcleared"
                             Dim selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
-                            PublishEvent(New ReconciliationClearEvent(selectedRow, False, .Value, bsAccountReconciliationItems))
+                            RaiseEvent ReconciliationClearEvent(selectedRow, False, .Value, bsAccountReconciliationItems)
                     End Select
                 End With
             End If
@@ -347,7 +357,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub txtBalance_TextChanged(sender As Object, e As EventArgs) Handles txtBalance.Validated, txtBalance.TextChanged
             txtBalance2.Text = txtBalance.Text
-            PublishEvent(New EndingBankBalanceEntryChangedEvent(sender))
+            RaiseEvent EndingBankBalanceEntryChangedEvent()
         End Sub
 
         Private Sub DataGridViewReconciliationItems_MouseUp(sender As Object, e As MouseEventArgs) Handles DataGridViewReconciliationItems.MouseUp
@@ -869,7 +879,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub dtpReconciliationDate_Validated(sender As Object, e As EventArgs) Handles dtpReconciliationDate.Validated
             If Not btnEdit.Enabled Then 'And dtpReconciliationDate.DateChanged Then
-                PublishEvent(New EndingReconciliationDateChangedEvent(sender))
+                RaiseEvent EndingReconciliationDateChangedEvent()
                 bsAccountReconciliationItems.ResetBindings(False)
             End If
         End Sub
@@ -877,8 +887,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub cboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectionChangeCommitted
             If Not btnEdit.Enabled Then
                 'If cboAccountIdNo.ValueChanged() Then
-                RaiseEvent ReconciliationAccountChangedEvent()
-                PublishEvent(New ReconciliationAccountChangedEvent(Me, bsAccountReconciliationItems))
+                RaiseEvent ReconciliationAccountChangedEvent(sender, bsAccountReconciliationItems)
+                'PublishEvent(New ReconciliationAccountChangedEvent(Me, bsAccountReconciliationItems))
                 'bsAccountReconciliationItems.ResetBindings(False)
                 'End If
             End If
@@ -892,15 +902,15 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub btnPost_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
-            PublishEvent(New ReconciliationPostingRequestEvent(Me, IdNo, UnreconciledDifference, bsAccountReconciliationItems))
+            RaiseEvent ReconciliationPostingRequestEvent(Me, bsAccountReconciliationItems)
         End Sub
 
         Private Sub btnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnClearAll.ClickButtonArea
-            PublishEvent(New ReconciliationClearEvent(sender, True, True, bsAccountReconciliationItems))
+            RaiseEvent ReconciliationClearEvent(sender, True, True, bsAccountReconciliationItems)
         End Sub
 
         Private Sub btnUnClearAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnUnClearAll.ClickButtonArea
-            PublishEvent(New ReconciliationClearEvent(sender, True, False, bsAccountReconciliationItems))
+            RaiseEvent ReconciliationClearEvent(sender, True, False, bsAccountReconciliationItems)
         End Sub
 
         Public Sub OnAcReconEditModeChanged(ByRef e As EditModeChanged) Implements ISubscriber(Of EditModeChanged).OnEventHandler

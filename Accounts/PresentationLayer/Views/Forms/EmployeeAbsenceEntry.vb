@@ -17,9 +17,7 @@ Namespace PresentationLayer.Views.Forms
             'FormTreeView.Visible = False
         End Sub
 
-        Public Event AddedByUserChanged()
-
-        Private Event IEmployeeAbsenceView_AddedByUserChanged() Implements IEmployeeAbsenceView.AddedByUserChanged
+        Public Event AddedByUserChanged() Implements IEmployeeAbsenceView.AddedByUserChanged
 
 #Region "Fields"
 
