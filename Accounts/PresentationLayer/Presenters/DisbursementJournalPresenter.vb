@@ -87,7 +87,6 @@ Namespace PresentationLayer.Presenters
             Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
         End Function
 
-
         Public Property JournalCode As String
 
         Public ReadOnly Property CdAccountCount As Int16
@@ -1000,15 +999,13 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        'Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
-        Public Sub OnBeforeAssignment(ByVal paymentType As PaymentTypeSelection)
+        Private Sub OnBeforeAssignment(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
             ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
             ' the DepositType so in order to override this part we need to retrieve the DepositType first
             ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
             ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
-            View.PaymentType = eventType.Model.PaymentType
-            SetPayeeDataSource(View.PaymentType)
-            View.PaymentType = IIf(paymentType = Nothing, 0, paymentType)
+            View.PaymentType = dataModel.PaymentType
+            CallByName(View, "setPayeeDataSource", CallType.Method, View.PaymentType)
         End Sub
 
     End Class

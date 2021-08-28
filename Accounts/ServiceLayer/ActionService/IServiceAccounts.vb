@@ -27,7 +27,7 @@ Namespace ServiceLayer.ActionService
 
         Function GetAccountBalance(endDate As Date, accountIdNo As Short) As Decimal
 
-        'Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
+        Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
     End Interface
 

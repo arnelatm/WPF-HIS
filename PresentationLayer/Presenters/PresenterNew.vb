@@ -101,13 +101,15 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     Public Event AfterDelete(retVal As Integer)
 
-    Public Event AfterRecordRetrieval(values As TM)
+    'Public Event AfterRecordRetrieval(values As TM)
 
     Public Event AfterUpdateView()
 
     Public Event AfterSave()
 
     Public Event NewRecordInitialized()
+
+    Public Event BeforeMappingData(dataModel As TM)
 
     Public Event BeforeCompare()
 
@@ -985,13 +987,10 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Public Overridable Sub UpdateViewData(idNo As Int32)
         If idNo <> 0 Then
             Dim modelData As TM
-            'RecordCount = GetRecordCount()
             RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
             modelData = Service.GetRecordByIdNo(Of TM)(idNo)
-            RaiseEvent AfterRecordRetrieval(modelData)
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New BeforeAssignment(modelData))
-            End If
+            'RaiseEvent AfterRecordRetrieval(modelData)
+            RaiseEvent BeforeMappingData(modelData)
             GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
             For Each child In ChildPresenters
                 child.UpdateViewDisplay(idNo)
@@ -999,7 +998,6 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
             If _WithTreeView Then
                 TreeViewUpdateViewDisplay(idNo)
             End If
-            'UpdateViewDisplay()
             ClearAllErrorMessages()
         End If
     End Sub
