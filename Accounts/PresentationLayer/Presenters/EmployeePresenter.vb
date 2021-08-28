@@ -216,9 +216,9 @@ Namespace PresentationLayer.Presenters
             GoFirstRecord()
         End Sub
 
-        Private Sub OnAfterRecordRetrieval() Handles MyBase.AfterRecordRetrieval
+        Private Sub OnBeforeMapping(dataModel As Object) Handles MyBase.BeforeMappingData
             Dim value As Double
-            value = Convert.ToDecimal(GetEmployeeBalance(View.IdNo))
+            value = Convert.ToDecimal(GetEmployeeBalance(dataModel.IdNo))
             View.Balance = value
         End Sub
 

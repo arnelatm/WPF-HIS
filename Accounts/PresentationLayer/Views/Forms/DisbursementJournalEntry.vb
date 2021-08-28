@@ -9,10 +9,13 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Views.Forms
 
     Public Class DisbursementJournalEntry
-        Implements IDisbursementJournalView, ISubscriber(Of BeforeAssignment)
+        Implements IDisbursementJournalView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
+        Private _employeesByName
+        Private _suppliersByName
+        Private _customersByName
         Private _apFooter As DgvFooter
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
@@ -53,7 +56,7 @@ Namespace PresentationLayer.Views.Forms
 
         'Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
         '    e.NewObject = New JournalItemView
-        '    ' work arround for error on datagrid entry on lastrow please do not remove.
+        '    ' work around for error on datagrid entry on lastrow please do not remove.
         '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
         '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
         '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
@@ -361,19 +364,12 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
-            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
-            ' the DepositType so in order to override this part we need to retrieve the DepositType first
-            ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
-            ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
-            PaymentType = eventType.Model.PaymentType
-            SetPayeeDataSource(PaymentType)
-            cboPaymentType.SelectedValue = IIf(PaymentType = Nothing, 0, PaymentType)
-        End Sub
-
         Protected Overrides Sub CreateDataSources()
             CreateLookupData("Account", NameOf(_accountsByCode))
             CreateLookupData("RevCostCenter", NameOf(_revCostCentersByCode))
+            CreateLookupData("Employee", NameOf(_employeesByName))
+            CreateLookupData("Customer", NameOf(_customersByName))
+            CreateLookupData("Supplier", NameOf(_suppliersByName))
             CreateEnumDataSource(Of PaymentTypeSelection)(cboPaymentType)
             CreateEnumDataSource(Of PayTypeSelection)(cboPayType)
             If _tableName = "CdJournal" Then
@@ -885,20 +881,20 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub SetPayeeDataSource(ByVal cPaymentType As String)
+        Public Sub SetPayeeDataSource(ByVal cPaymentType As String)
             Dim cbDataSource = Nothing
             Dim curValue As Int32? = cboPayeeIdNo.SelectedValue
             cboPayeeIdNo.DataSource = cbDataSource
             If OpenInvoiceMode Then
-                cbDataSource = Presenter.GetLookup("Supplier")
+                cbDataSource = _suppliersByName
             Else
                 Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
                 If paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    cbDataSource = Presenter.GetLookup("Supplier")
+                    cbDataSource = _suppliersByName
                 ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    cbDataSource = Presenter.GetLookup("Employee")
+                    cbDataSource = _employeesByName
                 ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                    cbDataSource = Presenter.GetLookup("Customer")
+                    cbDataSource = _customersByName
                 End If
             End If
             cboPayeeIdNo.DataSource = cbDataSource
@@ -907,6 +903,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboPayeeIdNo.SelectedValue = -1
             End If
+            cboPaymentType.SelectedValue = IIf(PaymentType = Nothing, 0, PaymentType)
         End Sub
 
         Private Sub UpdateFirstLine()
