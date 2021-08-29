@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPensionRatesView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("PensionRate")
+            Service = New ModelAccounts("PensionRate")
             TableName = "PensionRate"
             SortOrderKey = "Sequence"
             DataModel = New PensionRateModel

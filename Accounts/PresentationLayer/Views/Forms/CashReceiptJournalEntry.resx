@@ -1809,6 +1809,66 @@
   <data name="&gt;&gt;btnAutoApply.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="txtTotalCredits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtTotalCredits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 525</value>
+  </data>
+  <data name="txtTotalCredits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalCredits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="txtTotalCredits.TabIndex" type="System.Int32, mscorlib">
+    <value>253</value>
+  </data>
+  <data name="txtTotalCredits.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCredits.Name" xml:space="preserve">
+    <value>txtTotalCredits</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCredits.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCredits.Parent" xml:space="preserve">
+    <value>floFullEntryArea</value>
+  </data>
+  <data name="&gt;&gt;txtTotalCredits.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtTotalDebits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtTotalDebits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>390, 525</value>
+  </data>
+  <data name="txtTotalDebits.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtTotalDebits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="txtTotalDebits.TabIndex" type="System.Int32, mscorlib">
+    <value>252</value>
+  </data>
+  <data name="txtTotalDebits.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebits.Name" xml:space="preserve">
+    <value>txtTotalDebits</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebits.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebits.Parent" xml:space="preserve">
+    <value>floFullEntryArea</value>
+  </data>
+  <data name="&gt;&gt;txtTotalDebits.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="floFullEntryArea.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -90054,7 +90114,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>986, 629</value>
+    <value>986, 626</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>1002, 668</value>
@@ -90267,6 +90327,6 @@
     <value>CashReceiptJournalEntry</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>AATM.PresentationLayer.Forms.CFormEntry, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.PresentationLayer.Forms.CFormEntryNew, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

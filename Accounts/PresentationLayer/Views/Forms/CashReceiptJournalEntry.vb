@@ -11,12 +11,8 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Views.Forms
 
     Public Class CashReceiptJournalEntry
-        Implements ICashReceiptJournalView, ISubscriber(Of BeforeAssignment)
+        Implements ICashReceiptJournalView
 
-        Public TxtTotalCredits As Decimal
-        Public TxtTotalDebits As Decimal
-
-        Private Property MyPresenter As CashReceiptJournalPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private ReadOnly _payorOrigWidth As Integer
         Private _accountsByCode
@@ -27,40 +23,35 @@ Namespace PresentationLayer.Views.Forms
         Private _journalItems As List(Of IJournalItemView)
         Private _revCostCentersByCode
         Private _defaultAccount As Int16
+        Private _employeesByName
+        Private _suppliersByName
+        Private _customersByName
 
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "CashReceiptJournal"
-            SortOrderKey = "IdNo"
-
-            MyPresenter = New CashReceiptJournalPresenter(Me)
-            PresenterObj = MyPresenter
-            '_defaultAccount = MyPresenter.DefaultReceiptAccount
             FirstControl = cboPayorType
             _payorOrigWidth = cboPayorIdNo.Width
             _nfi.NumberDecimalDigits = 2
-            Ea = MyPresenter.Ea
-            Ea.SubscribeEvent(Me)
             If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = MyPresenter.GetLocalizedPrefix("CR")
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("CR")
             Else
                 txtJournalCode.Text = "CR"
             End If
         End Sub
 
-        Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
-            e.NewObject = New JournalItemView
-            ' work arround for error on datagrid entry on lastrow please do not remove.
-            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
-            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
-            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
-                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-            End If
-        End Sub
+        'Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
+        '    e.NewObject = New JournalItemView
+        '    ' work arround for error on datagrid entry on lastrow please do not remove.
+        '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+        '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+        '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+        '    If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
+        '        bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+        '    End If
+        'End Sub
 
         Private ReadOnly Property OpenInvoiceMode As Boolean
             Get
@@ -274,22 +265,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property TotalCredits As Decimal Implements ICashReceiptJournalView.TotalCredits
+        Public ReadOnly Property TotalCredits As Decimal Implements ICashReceiptJournalView.TotalCredits
             Get
-                Return TxtTotalCredits
+                Return NumParser(Of Decimal)(txtTotalCredits.Text)
             End Get
-            Set(value As Decimal)
-                TxtTotalCredits = value
-            End Set
         End Property
 
-        Public Property TotalDebits As Decimal Implements ICashReceiptJournalView.TotalDebits
+        Public ReadOnly Property TotalDebits As Decimal Implements ICashReceiptJournalView.TotalDebits
             Get
-                Return TxtTotalDebits
+                Return NumParser(Of Decimal)(txtTotalDebits.Text)
             End Get
-            Set(value As Decimal)
-                TxtTotalDebits = value
-            End Set
         End Property
 
         Public Property TransactionDate As Date? Implements ICashReceiptJournalView.TransactionDate
@@ -334,23 +319,16 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
-            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
-            ' the ReceiptType so in order to override this part we need to retrieve the ReceiptType first
-            ' because when assigning the cboPayorIdNo the datasource must be correct that is why
-            ' we need to set the DataSource part of the cboPayorIdNo before we can assign the PayorIdNo
-            PayorType = eventType.Model.PayorType
-            SetPayorDataSource(PayorType)
-            cboPayorType.SelectedValue = IIf(PayorType = Nothing, 0, PayorType)
-        End Sub
 
         Protected Overrides Sub CreateDataSources()
-            _accountsByCode = MyPresenter.GetDetailAccountList()
-            _revCostCentersByCode = MyPresenter.GetLookup("RevCostCenter")
-            cboPayorType.DataSource = MyPresenter.MakeEnumComboList(Of ReceiptTypeSelection)
-            cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.Cash) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount), "AccountName")
-
-            cboDiscountAccountIdNo.DataSource = MyPresenter.GetAccountTypesList("RD")
+            CreateLookupData("Account", NameOf(_accountsByCode))
+            CreateLookupData("RevCostCenter", NameOf(_revCostCentersByCode))
+            CreateLookupData("Employee", NameOf(_employeesByName))
+            CreateLookupData("Customer", NameOf(_customersByName))
+            CreateLookupData("Supplier", NameOf(_suppliersByName))
+            CreateEnumDataSource(Of ReceiptTypeSelection)(cboPayorType)
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.CheckingAccount)}, cboAccountIdNo)
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount)}, cboDiscountAccountIdNo)
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -380,7 +358,17 @@ Namespace PresentationLayer.Views.Forms
         }
         End Sub
 
-        Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
+        'Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
+        '    ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
+        '    ' the ReceiptType so in order to override this part we need to retrieve the ReceiptType first
+        '    ' because when assigning the cboPayorIdNo the datasource must be correct that is why
+        '    ' we need to set the DataSource part of the cboPayorIdNo before we can assign the PayorIdNo
+        '    PayorType = eventType.Model.PayorType
+        '    SetPayorDataSource(PayorType)
+        '    cboPayorType.SelectedValue = IIf(PayorType = Nothing, 0, PayorType)
+        'End Sub
+
+        Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             UpdateDisplay()
         End Sub
 
@@ -402,18 +390,18 @@ Namespace PresentationLayer.Views.Forms
             _arFooter.ColumnToSum("dgvPreviousBalance") = True
             _arFooter.SetText("dgvJournalIdNoAp", "Totals")
 
-            If MyPresenter.CrAccountCount = 1 Then
+            If Presenter.CrAccountCount = 1 Then
                 cboAccountIdNo.DisplayOnly = True
                 cboAccountIdNo.TabStop = False
             End If
             If cboAccountIdNo.SelectedValue <= 0 Then
                 cboAccountIdNo.SelectedValue = _defaultAccount
             End If
-            If MyPresenter.CrAccountCount = 0 Then
+            If Presenter.CrAccountCount = 0 Then
                 Dim accountName As String
                 accountName = Messaging.TranslateCaption("Cash")
                 Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
-                MyPresenter.GoQuit()
+                Presenter.GoQuit()
             End If
             BindCsrOiItem()
             BindJournalItem()
@@ -481,10 +469,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateOpenInvoicesDisplay()
             If OpenInvoiceMode Then
-                If MyPresenter.AddMode Or cboPayorIdNo.ValueChanged() Then
+                If Presenter.AddMode Or cboPayorIdNo.ValueChanged() Then
                     CsrOiItems.Clear()
                 End If
-                bsCsrOiItems.DataSource = MyPresenter.GetCustomerOpenInvoices(CsrOiItems)
+                bsCsrOiItems.DataSource = Presenter.GetCustomerOpenInvoices(CsrOiItems)
                 bsCsrOiItems.ResetBindings(True)
                 UpdateOiTotals()
                 'UpdateVatNumber()
@@ -503,7 +491,7 @@ Namespace PresentationLayer.Views.Forms
                 UpdateOpenInvoicesDisplay()
             Else
                 If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.SupplierRefund Then
-                    MyPresenter.SetSupplierVatNumber(VatNumber, PayorIdNo, True)
+                    Presenter.SetSupplierVatNumber(VatNumber, PayorIdNo, True)
                 Else
                     VatNumber = ""
                 End If
@@ -563,18 +551,18 @@ Namespace PresentationLayer.Views.Forms
                                 ' therefore there is a need to remove that row because it causes errors when moving to that empty row
                                 bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
                             End If
-                            MyPresenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
+                            Presenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
                             UpdateInputVatAmount()
                             bsJournalItems.ResetItem(nIndex)
                             DataGridViewJournalItems.Refresh()
                         Case $"dgvdebit"
-                            MyPresenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            Presenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
                             UpdateJiTotals()
                             UpdateInputVatAmount()
                             bsJournalItems.ResetItem(nIndex)
                             SendKeys.Send("{TAB}")
                         Case $"dgvcredit"
-                            MyPresenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
+                            Presenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
                             UpdateJiTotals()
                             UpdateInputVatAmount()
                             bsJournalItems.ResetItem(nIndex)
@@ -609,11 +597,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateInputVatAmount()
-            VatAmount = MyPresenter.UpdateInputVatAmount(JournalItems)
+            VatAmount = Presenter.UpdateInputVatAmount(JournalItems)
         End Sub
 
         Private Sub UpdateOutputVatAmount()
-            VatAmount = MyPresenter.UpdateOutputVatAmount(JournalItems)
+            VatAmount = Presenter.UpdateOutputVatAmount(JournalItems)
         End Sub
 
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
@@ -699,7 +687,7 @@ Namespace PresentationLayer.Views.Forms
             End If
             ShowPayor()
             UpdateTotals()
-            If MyPresenter.EditMode Or MyPresenter.AddMode Then
+            If Presenter.EditMode Or Presenter.AddMode Then
                 If OpenInvoiceMode Then
                     btnAutoApply.Visible = True
                 Else
@@ -725,7 +713,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Protected Overrides Sub InputsTurnedOff()
+        Private Sub OnInputsTurnedOff() Handles MyBase.InputsTurnedOff
             If OpenInvoiceMode Then
                 btnViewGL.Visible = True
                 btnViewGL.Text = Messaging.TranslateCaption("View Journal Entry")
@@ -735,10 +723,10 @@ Namespace PresentationLayer.Views.Forms
             btnAutoApply.Visible = False
         End Sub
 
-        Protected Overrides Sub InputsTurnedOn()
+        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             bsJournalItems.ResetBindings(False)
             btnViewGL.Visible = False
-            MyPresenter.AddCustomerOpenInvoices()
+            Presenter.AddCustomerOpenInvoices()
             bsCsrOiItems.ResetBindings(False)
             UpdateDisplay()
             If OpenInvoiceMode Then
@@ -761,20 +749,20 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCsrOiItems.Visible = True
         End Sub
 
-        Private Sub SetPayorDataSource(cPayorType As String)
+        Public Sub SetPayorDataSource(cPayorType As String)
             Dim cbDataSource = Nothing
             Dim curValue As Int32? = cboPayorIdNo.SelectedValue
             cboPayorIdNo.DataSource = cbDataSource
             If OpenInvoiceMode Then
-                cbDataSource = MyPresenter.GetLookup("Customer")
+                cbDataSource = Presenter.GetLookup("Customer")
             Else
                 Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cPayorType)
                 If payorTypeEnum = ReceiptTypeSelection.Customer Then
-                    cbDataSource = MyPresenter.GetLookup("Customer")
+                    cbDataSource = Presenter.GetLookup("Customer")
                 ElseIf payorTypeEnum = ReceiptTypeSelection.Employee Then
-                    cbDataSource = MyPresenter.GetLookup("Employee")
+                    cbDataSource = Presenter.GetLookup("Employee")
                 ElseIf payorTypeEnum = ReceiptTypeSelection.SupplierRefund Then
-                    cbDataSource = MyPresenter.GetLookup("Supplier")
+                    cbDataSource = Presenter.GetLookup("Supplier")
                 End If
             End If
             cboPayorIdNo.DataSource = cbDataSource
@@ -786,7 +774,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateFirstLine()
-            MyPresenter.UpdateFirstLine()
+            Presenter.UpdateFirstLine()
             If Not OpenInvoiceMode Then
                 bsJournalItems.ResetBindings(True)
                 UpdateJiTotals()
@@ -794,7 +782,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnAutoApply_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
-            MyPresenter.AutoApplyAmount()
+            Presenter.AutoApplyAmount()
             DataGridViewCsrOiItems.Refresh()
             UpdateOiTotals()
         End Sub

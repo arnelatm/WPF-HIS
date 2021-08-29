@@ -19,7 +19,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("PettyCashClosing")
+            Service = New ModelAccounts("PettyCashClosing")
             TableName = "PettyCashClosing"
             SortOrderKey = "IdNo"
             OriginalModel = New PettyCashClosingModel()
@@ -50,7 +50,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub GetOpenPettyCash()
             Dim modelData As List(Of PcJournalModel)
-            modelData = ModelOfPresenter.GetOpenPettyCash()
+            modelData = Service.GetOpenPettyCash()
             View.PcJournals = New List(Of IPcJournalView)
             GlobalVariables.Mapper.Map(modelData, View.PcJournals)
         End Sub
@@ -182,7 +182,7 @@ Namespace PresentationLayer.Presenters
             Dim retValue As String
             GlobalVariables.Mapper.Map(View, DataModel)
             DataModel.IdNo = pcIdNo
-            retValue = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
+            retValue = Service.UpdateGlReferenceNumber(DataModel)
             Return retValue
         End Function
 
@@ -190,7 +190,7 @@ Namespace PresentationLayer.Presenters
             Get
                 Dim specialAccount As String
                 specialAccount = EnumToCode(SpecialAccountSelection.PettyCashAccount)
-                Return ModelOfPresenter.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
+                Return Service.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
             End Get
         End Property
 

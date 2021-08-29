@@ -22,9 +22,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayorType As String
         Property Posted As Boolean
         Property ReferenceNo As String
-        Property TotalCredits As Decimal
-        Property TotalDebits As Decimal
         Property TransactionDate As Date?
+        ReadOnly Property TotalCredits As Decimal
+        ReadOnly Property TotalDebits As Decimal
         Property UnApplied As Decimal
         Property VatAmount As Decimal
         Property VatNumber As String

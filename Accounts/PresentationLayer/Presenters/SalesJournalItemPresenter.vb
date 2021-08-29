@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("JournalItem")
+            Service = New ModelAccounts("JournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
             DataModel = New JournalItemModel
@@ -65,7 +65,7 @@ Namespace PresentationLayer.Presenters
         ''' </summary>
         ''' <param name="journalIdNo">JournalIdNo id to display.</param>
         Public Shadows Sub Display(journalIdNo As Int32)
-            View.JournalItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            View.JournalItems = Service.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
         'Public Sub MakeJournalItems(ByVal idNo As Int32, ByVal AccountIdNo As Int16, ByVal totalSales As Decimal)

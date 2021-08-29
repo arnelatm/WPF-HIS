@@ -227,9 +227,6 @@ Namespace PresentationLayer.Presenters
             Return GetLookup("Account", sortKey, lookupFilterKey)
         End Function
 
-        'Public Function GetCustomerAdvancesAccountIdNo()
-        '    Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
-        'End Function
 
         'Public Function ArOpenInvoiceExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
         '    Return Model.CountRecordWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo")
@@ -246,11 +243,7 @@ Namespace PresentationLayer.Presenters
         '    Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
         'End Function
 
-        'Public Function GetAdvanceCollectionOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
-        '    Return _
-        '        Model.GetRecordFieldWith2Key(idNo, journalCode, "ArOpenInvoice", "JournalItemIdNo", "JournalCode",
-        '                                     "IdNo")
-        'End Function
+
 
         'Protected Function IsChildValid(Of Tcm)(childProperty) As Boolean
         '    Dim retValue As Boolean = True

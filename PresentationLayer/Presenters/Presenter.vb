@@ -163,7 +163,7 @@ Public MustInherit Class Presenter(Of T As IView, TM As New)
     ' when refferred to in this module this will be the current model
     ' while if reffered in the Inheriting Presenter it will be the
     ' model assigned to that presenter.
-    Public Property ModelOfPresenter
+    Public Property Service
         Get
             Return Model
         End Get
