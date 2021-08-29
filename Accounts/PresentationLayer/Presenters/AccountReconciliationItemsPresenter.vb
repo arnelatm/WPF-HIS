@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IAccountReconciliationItemsView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("AccountReconciliationItem")
+            Service = New ModelAccounts("AccountReconciliationItem")
             TableName = "AccountReconciliationItem"
             SortOrderKey = "Sequence"
             DataModel = New AccountReconciliationItemModel
@@ -82,14 +82,14 @@ Namespace PresentationLayer.Presenters
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
             'If PresenterObj.AddMode Or PresenterObj.EditMode Then
-            Dim allAcctReconItems = ModelOfPresenter.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
+            Dim allAcctReconItems = Service.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
             If AddMode Then
                 For Each acctReconItem In allAcctReconItems
                     AddNewItem(acctReconItem, acctReconItems, nSeq)
                 Next
             Else
                 Dim oldReconciliationItems As New List(Of AccountReconciliationItemModel)
-                oldReconciliationItems = ModelOfPresenter.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
+                oldReconciliationItems = Service.GetRecordsWithGroupIdNo(Of AccountReconciliationItemModel)(idNo, "TransactionDate")
                 For Each acctReconItem In allAcctReconItems
                     Dim found As Boolean = False
                     For Each item As AccountReconciliationItemModel In oldReconciliationItems

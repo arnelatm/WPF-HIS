@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As ITranslatedMessagesView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelCommon("TranslatedMessages")
+            Service = New ModelCommon("TranslatedMessages")
             TableName = "TranslatedMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
@@ -52,7 +52,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function AddRecord(record As TranslatedMessagesModel) As Integer
             Dim retVal As Integer
             If Not String.IsNullOrEmpty(record.TranslatedMessage) Then
-                NewlyAddedRecordIdNo = ModelOfPresenter.AddRecord(record)
+                NewlyAddedRecordIdNo = Service.AddRecord(record)
                 retVal = NewlyAddedRecordIdNo
             End If
             Return retVal
@@ -75,7 +75,7 @@ Namespace PresentationLayer.Presenters
                         (String.IsNullOrEmpty(record.TranslatedMessage) And
                          String.IsNullOrEmpty(record.TranslatedCaption)) Then
                         record.LanguageIdNo = Dac.DefaultMirroredLanguageIdNo
-                        NewlyAddedRecordIdNo = ModelOfPresenter.AddRecord(record)
+                        NewlyAddedRecordIdNo = Service.AddRecord(record)
                         retVal = NewlyAddedRecordIdNo
                         Invoker.SetProperty(View, "IdNo", {retVal})
                     End If

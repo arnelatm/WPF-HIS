@@ -11,7 +11,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDistributionSchemeItemsView)
             MyBase.New(view)
-            ModelOfPresenter = New ModelAccounts("DistributionSchemeItem")
+            Service = New ModelAccounts("DistributionSchemeItem")
             TableName = "DistributionSchemeItem"
             SortOrderKey = "Sequence"
             DataModel = New DistributionSchemeItemModel

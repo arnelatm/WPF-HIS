@@ -998,7 +998,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Private Sub OnBeforeAssignment(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
+        Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
             ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
             ' the DepositType so in order to override this part we need to retrieve the DepositType first
             ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why

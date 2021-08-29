@@ -4,7 +4,7 @@ Imports AATM.PresentationLayer.Forms
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class CashReceiptJournalEntry
-        Inherits CFormEntry
+        Inherits CFormEntryNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -126,6 +126,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floFooter = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.btnViewGL = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnAutoApply = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.floFullEntryArea.SuspendLayout()
             Me.floPurchaseJournalHeader.SuspendLayout()
@@ -155,6 +157,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floFullEntryArea.Controls.Add(Me.floPurchaseJournalItems)
             Me.floFullEntryArea.Controls.Add(Me.floFooter)
             Me.floFullEntryArea.Controls.Add(Me.btnAutoApply)
+            Me.floFullEntryArea.Controls.Add(Me.txtTotalCredits)
+            Me.floFullEntryArea.Controls.Add(Me.txtTotalDebits)
             resources.ApplyResources(Me.floFullEntryArea, "floFullEntryArea")
             Me.floFullEntryArea.Name = "floFullEntryArea"
             '
@@ -1525,7 +1529,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'btnAutoApply
             '
-            Me.btnAutoApply.DesignerSelected = True
+            Me.btnAutoApply.DesignerSelected = False
             Me.btnAutoApply.DisplayOnly = True
             resources.ApplyResources(Me.btnAutoApply, "btnAutoApply")
             Me.btnAutoApply.ImageIndex = 0
@@ -1533,6 +1537,54 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply.OriginalImageName = Nothing
             Me.btnAutoApply.SecurityKey = ""
             Me.btnAutoApply.TabStop = False
+            '
+            'txtTotalCredits
+            '
+            Me.txtTotalCredits.BackColor = System.Drawing.Color.White
+            Me.txtTotalCredits.BegFindValue = Nothing
+            Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalCredits.ComputedValue = False
+            Me.txtTotalCredits.CustomFormat = Nothing
+            Me.txtTotalCredits.DataBoundControl = True
+            Me.txtTotalCredits.EditingMode = True
+            Me.txtTotalCredits.EndFindValue = Nothing
+            Me.txtTotalCredits.FieldDescription = Nothing
+            Me.txtTotalCredits.FieldName = Nothing
+            Me.txtTotalCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalCredits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalCredits, "txtTotalCredits")
+            Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalCredits.LinkedLabel = Nothing
+            Me.txtTotalCredits.MaximumValue = Nothing
+            Me.txtTotalCredits.MinimumValue = Nothing
+            Me.txtTotalCredits.Name = "txtTotalCredits"
+            Me.txtTotalCredits.OldValue = Nothing
+            Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalCredits.Translatable = False
+            '
+            'txtTotalDebits
+            '
+            Me.txtTotalDebits.BackColor = System.Drawing.Color.White
+            Me.txtTotalDebits.BegFindValue = Nothing
+            Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtTotalDebits.ComputedValue = False
+            Me.txtTotalDebits.CustomFormat = Nothing
+            Me.txtTotalDebits.DataBoundControl = True
+            Me.txtTotalDebits.EditingMode = True
+            Me.txtTotalDebits.EndFindValue = Nothing
+            Me.txtTotalDebits.FieldDescription = Nothing
+            Me.txtTotalDebits.FieldName = Nothing
+            Me.txtTotalDebits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtTotalDebits.FindEnabled = False
+            resources.ApplyResources(Me.txtTotalDebits, "txtTotalDebits")
+            Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
+            Me.txtTotalDebits.LinkedLabel = Nothing
+            Me.txtTotalDebits.MaximumValue = Nothing
+            Me.txtTotalDebits.MinimumValue = Nothing
+            Me.txtTotalDebits.Name = "txtTotalDebits"
+            Me.txtTotalDebits.OldValue = Nothing
+            Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtTotalDebits.Translatable = False
             '
             'CashReceiptJournalEntry
             '
@@ -1542,6 +1594,7 @@ Namespace PresentationLayer.Views.Forms
             Me.Controls.SetChildIndex(Me.floFullEntryArea, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floFullEntryArea.ResumeLayout(False)
+            Me.floFullEntryArea.PerformLayout()
             Me.floPurchaseJournalHeader.ResumeLayout(False)
             Me.floHeader1.ResumeLayout(False)
             Me.floHeader1.PerformLayout()
@@ -1640,5 +1693,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkCancelled As UcCheckBox
         Friend WithEvents chkPosted As UcCheckBox
         Friend WithEvents chkApproved As UcCheckBox
+        Friend WithEvents txtTotalCredits As CTextBox
+        Friend WithEvents txtTotalDebits As CTextBox
     End Class
 End Namespace

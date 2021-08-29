@@ -25,7 +25,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
             TableName = objectName
             SortOrderKey = objectName + "Name"
-            ModelOfPresenter = New ModelAccounts(objectName, bizParams, daoParams)
+            Service = New ModelAccounts(objectName, bizParams, daoParams)
             OriginalModel = New TM
             DataModel = New TM
         End Sub

@@ -3,14 +3,14 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
-    Public Class CashReceiptJournalPresenter
-        Inherits TransactionsPresenter(Of ICashReceiptJournalView, CashReceiptJournalModel)
+    Public Class CashReceiptJournalPresenter(Of TM As New)
+        Inherits TransactionsPresenterNew(Of ICashReceiptJournalView, TM)
 
         Private ReadOnly _advancesToCustomerAccountIdNo As Int16
         Protected DtInsertTable As New DataTable
@@ -20,21 +20,15 @@ Namespace PresentationLayer.Presenters
         Protected ReportName As String
 
         Private ReadOnly _djArgs = {"CashReceiptJournalItem_View", "UpdateCashReceiptJournalItemTVP", "InsertCashReceiptJournalItemTVP"}
-        Private ReadOnly _openInvItemModel As New ModelAccounts("CsrOiItem")
-        Private ReadOnly _journalItemModel As New ModelAccounts("JournalItem", Nothing, _djArgs)
+        Private ReadOnly _openInvItemService As New AccountsService("CsrOiItem")
+        Private ReadOnly _journalItemService As New AccountsService("JournalItem", Nothing, _djArgs)
 
         Public Sub New(view As ICashReceiptJournalView)
             MyBase.New(view)
             SortOrderKey = "IdNo"
             ReportName = "Cash Receipt Journal.Rpt"
-            ModelOfPresenter = New ModelAccounts("CashReceiptJournal")
+            Service = New AccountsService("CashReceiptJournal")
             TableName = "CashReceiptJournal"
-
-            OriginalModel = New CashReceiptJournalModel()
-            DataModel = New CashReceiptJournalModel
-
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
 
             _advancesToCustomerAccountIdNo = GetCustomerAdvancesAccountIdNo()
 
@@ -69,6 +63,11 @@ Namespace PresentationLayer.Presenters
                                                  {"Sequence", GetType(Int16)}})
 
         End Sub
+
+
+        Public Function GetCustomerAdvancesAccountIdNo()
+            Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
+        End Function
 
         Public Property JournalCode As String
 
@@ -144,15 +143,17 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_journalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            retVal = UpdateChildData(_journalItemService, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_openInvItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "CsrIdNo")
+                retVal = UpdateChildData(_openInvItemService, DtOiUpdateTable, DtOiInsertTable, passedValue, "CsrIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
             End If
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
-                retVal = UpdateGlReferenceNumber()
+                Dim dataModel = New TM
+                GlobalVariables.Mapper.Map(View, DataModel)
+                retVal = Service.UpdateGlReferenceNumber(dataModel)
             End If
         End Sub
 
@@ -176,19 +177,12 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function UpdateGlReferenceNumber() As String
-            Dim retValue As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            retValue = ModelOfPresenter.UpdateGlReferenceNumber(DataModel)
-            Return retValue
-        End Function
-
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 Dim dateToday As DateTime = Now()
                 retValue = True
-                Dim lastPostingDate As DateTime? = Model.GetRecordFieldWithKeyG(Of DateTime?)("Cash Receipt", "LastPosting", "TransactionName", "LastPostingDate")
+                Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("Cash Receipt", "LastPosting", "TransactionName", "LastPostingDate")
                 Dim dateFieldName = Messaging.TranslateCaption("Transacton Date")
                 If IsDateRangeValid(dateFieldName, View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
                     retValue = False
@@ -279,12 +273,12 @@ Namespace PresentationLayer.Presenters
             ' ReSharper disable once VBUseMethodAny.1
             If View.CsrOiItems IsNot Nothing And View.CsrOiItems.Count() > 0 Then
                 DtOiUpdateTable.Clear()
-                _openInvItemModel.DelUpdateTvp(DtOiUpdateTable, idNo)
+                _openInvItemService.DelUpdateTvp(DtOiUpdateTable, idNo)
             End If
             ' ReSharper disable once VBUseMethodAny.1
             If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
                 DtUpdateTable.Clear()
-                _journalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+                _journalItemService.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 
@@ -542,10 +536,14 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
+        Public Function GetAdvanceCollectionOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
+            Return Service.GetRecordFieldWith2Key(idNo, journalCode, "ArOpenInvoice", "JournalItemIdNo", "JournalCode", "IdNo")
+        End Function
+
         Private Function DeleteAdvanceCollectionOpenInvoice(ByRef idNo As Int32) As String
-            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
-            If Model.CountRecordWithKey(idNo, "ArOpenInvoice", "IdNo") > 0 Then
-                Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
+            Dim arOpenInvoiceService As New AccountsService("ArOpenInvoice")
+            If Service.CountRecordWithKey(idNo, "ArOpenInvoice", "IdNo") > 0 Then
+                Return arOpenInvoiceService.DeleteRecord(idNo, "ArOpenInvoice")
             End If
             Return 0
         End Function
@@ -668,16 +666,16 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetAdvanceCollectionOpenIdNo(ByVal pJournalCode As String, ByVal idNo As Int32) As Integer
             Dim retVal As String
-            retVal = Model.GetRecordFieldWith2Key(idNo, pJournalCode, "ArOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
+            retVal = Service.GetRecordFieldWith2Key(idNo, pJournalCode, "ArOpenInvoice", "JournalIdNo", "JournalCode", "IdNo")
             Return retVal
         End Function
 
         Public Function GetCsrOiItems(csrOiIdNo As Int32) As List(Of CsrOiItemModel)
-            Return _openInvItemModel.GetRecordsWithGroupIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
+            Return _openInvItemService.GetRecordsWithGroupIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return _journalItemModel.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _journalItemService.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)
@@ -703,7 +701,7 @@ Namespace PresentationLayer.Presenters
             If customerIdNo Is Nothing Then
                 Return New List(Of CsrOiItemModel)
             Else
-                Return ModelOfPresenter.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
+                Return Service.GetCustomerOpenInvoices(Of CsrOiItemModel)(customerIdNo)
             End If
         End Function
 
@@ -855,6 +853,15 @@ Namespace PresentationLayer.Presenters
                 }
             Return item
         End Function
+
+        Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
+            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
+            ' the ReceiptType so in order to override this part we need to retrieve the ReceiptType first
+            ' because when assigning the cboPayorIdNo the datasource must be correct that is why
+            ' we need to set the DataSource part of the cboPayorIdNo before we can assign the PayorIdNo
+            View.PayorType = dataModel.PayorType
+            CallByName(View, "SetPayorDataSource", CallType.Method, View.PayorType)
+        End Sub
 
         'Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)
         '    Dim dModel As New List(Of CsrOiItemModel)

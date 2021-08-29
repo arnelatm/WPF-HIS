@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
             Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
             TableName = tableOrViewName
             SortOrderKey = "Name"
-            ModelOfPresenter = New ModelAccounts("Basic", tableOrViewName)
+            Service = New ModelAccounts("Basic", tableOrViewName)
             OriginalModel = New BasicModel
             DataModel = New BasicModel
             Ea = New EventAggregator()
