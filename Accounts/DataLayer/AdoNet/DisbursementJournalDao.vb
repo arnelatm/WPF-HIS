@@ -389,7 +389,6 @@ Namespace DataLayer.AdoNet
                 Dim maxlength As Int16
                 Dim prefix As String
                 If _db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
-                    seriesName = "GJ"
                     maxlength = 3
                     prefix = Right("00" + GlobalFunctions.GregorianMonth(transactionDate).ToString, 2) & "-"
                     Dim sql As String = "INSERT INTO [Series] " &
@@ -417,13 +416,13 @@ Namespace DataLayer.AdoNet
             Else
                 seriesName = $"PCJOURNAL"
                 Dim transactionDate As Date = bizObj.TransactionDate
-                Dim referenceNo As String = ""
+
                 Dim prefix As String
                 If _db.Scalar("Select Count(*) from Series where SeriesName = '" & seriesName & "'") < 1 Then
                     MessageBox.Show($"No series format found for PCJournal. Please notify System Administrator.")
                     retVal = -1
                 Else
-                    Dim format As String = ""
+                    Dim format As String
                     format = _db.Scalar("select prefix from series where seriesName = '" & seriesName & "'")
                     prefix = transactionDate.ToString(format, CultureInfo.InvariantCulture)
                     sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & seriesName & "'"

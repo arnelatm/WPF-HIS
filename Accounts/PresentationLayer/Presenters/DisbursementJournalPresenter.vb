@@ -19,8 +19,8 @@ Namespace PresentationLayer.Presenters
         Protected DtOiUpdateTable As New DataTable
         Protected DtUpdateTable As New DataTable
 
-        Private OiItemModel
-        Private _journalItemModel
+        Private _oiItemService
+        Private _journalItemService
 
         Public Sub New(view As IDisbursementJournalView, ByVal tableOrViewName As String)
             MyBase.New(view)
@@ -40,8 +40,8 @@ Namespace PresentationLayer.Presenters
                 args = {"PcJournal", "PC", djArgs, oiArgs}
                 JournalCode = "PC"
             End If
-            _journalItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
-            OiItemModel = New ModelAccounts("DjOiItem", Nothing, oiArgs)
+            _journalItemService = New AccountsService("JournalItem", Nothing, djArgs)
+            _oiItemService = New AccountsService("DjOiItem", Nothing, oiArgs)
             Service = New AccountsService("DisbursementJournal", JournalCode, args)
             TableName = tableOrViewName
 
@@ -83,7 +83,7 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Function GetAdvancesToSupplierAccountIdNo()
+        Private Function GetAdvancesToSupplierAccountIdNo()
             Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
         End Function
 
@@ -184,9 +184,9 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_journalItemModel, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
+            retVal = UpdateChildData(_journalItemService, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(OiItemModel, DtOiUpdateTable, DtOiInsertTable, passedValue, "DjIdNo")
+                retVal = UpdateChildData(_oiItemService, DtOiUpdateTable, DtOiInsertTable, passedValue, "DjIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
@@ -316,7 +316,7 @@ Namespace PresentationLayer.Presenters
             Else
                 totalLineAmountInWords = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
             End If
-            Dim reportName As String = ""
+            Dim reportName As String
             If TableName = "PcJournal" Then
                 reportName = "Petty Cash Disbursement Journal.Rpt"
             Else
@@ -336,12 +336,12 @@ Namespace PresentationLayer.Presenters
             ' ReSharper disable once VBUseMethodAny.1
             If View.DjOiItems IsNot Nothing And View.DjOiItems.Count() > 0 Then
                 DtOiUpdateTable.Clear()
-                OiItemModel.DelUpdateTvp(DtOiUpdateTable, idNo)
+                _oiItemService.DelUpdateTvp(DtOiUpdateTable, idNo)
             End If
             ' ReSharper disable once VBUseMethodAny.1
             If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
                 DtUpdateTable.Clear()
-                _journalItemModel.DelUpdateTvp(DtUpdateTable, idNo)
+                _journalItemService.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 
@@ -733,11 +733,11 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetDjOiItems(djOiIdNo As Int32) As List(Of DjOiItemModel)
-            Return OiItemModel.GetRecordsWithGroupIdNo(Of DjOiItemModel)(djOiIdNo, "Sequence")
+            Return _oiItemService.GetRecordsWithGroupIdNo(Of DjOiItemModel)(djOiIdNo, "Sequence")
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
-            Return _journalItemModel.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            Return _journalItemService.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Function
 
         Public Function GetSupplierOpenInvoices(dView As List(Of DjOiItemView)) As List(Of DjOiItemView)
@@ -753,7 +753,7 @@ Namespace PresentationLayer.Presenters
                     nSeq = dModel.Count()
                 End If
             End If
-            Dim unpaidInvoices = GetSupplierOpenInvoices(View.PayeeIdNo)
+            Dim unpaidInvoices = Service.GetOpenInvoices(Of DjOiItemModel)(View.PayeeIdNo)
             AddOpenInvoices(False, unpaidInvoices, dModel, nSeq)
             GlobalVariables.Mapper.Map(dModel, dView)
             Return dView
@@ -763,7 +763,7 @@ Namespace PresentationLayer.Presenters
             If supplierIdNo Is Nothing Then
                 Return New List(Of DjOiItemModel)
             Else
-                Return Service.GetSupplierOpenInvoices(Of DjOiItemModel)(supplierIdNo)
+                Return Service.GetOpenInvoices(Of DjOiItemModel)(supplierIdNo)
             End If
         End Function
 
@@ -951,28 +951,27 @@ Namespace PresentationLayer.Presenters
 
         Private Function GetPayeeName(ByVal payeeIdNo? As Int32)
             Dim payee As String
-            Dim cbDataSource = Nothing
             Dim curCulture = CultureInfo.CurrentCulture
             Dim language As String
             language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
             If paymentTypeEnum = PaymentTypeSelection.AccountsPayable OrElse paymentTypeEnum = PaymentTypeSelection.Supplier Then
                 If language = "ar" Then
-                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Supplier", "SupplierNameAra")
+                    payee = GetFieldWithIdNo(payeeIdNo, "Supplier", "SupplierNameAra")
                 Else
-                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Supplier", "SupplierName")
+                    payee = GetFieldWithIdNo(payeeIdNo, "Supplier", "SupplierName")
                 End If
             ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
                 If language = "ar" Then
-                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Employee", "EmployeeNameAra")
+                    payee = GetFieldWithIdNo(payeeIdNo, "Employee", "EmployeeNameAra")
                 Else
-                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Employee", "EmployeeName")
+                    payee = GetFieldWithIdNo(payeeIdNo, "Employee", "EmployeeName")
                 End If
             ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
                 If language = "ar" Then
-                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Customer", "CustomerNameAra")
+                    payee = GetFieldWithIdNo(payeeIdNo, "Customer", "CustomerNameAra")
                 Else
-                    payee = GetFieldWithIdNo(View.PayeeIdNo, "Customer", "CustomerName")
+                    payee = GetFieldWithIdNo(payeeIdNo, "Customer", "CustomerName")
                 End If
             Else
                 payee = View.PayeeName
