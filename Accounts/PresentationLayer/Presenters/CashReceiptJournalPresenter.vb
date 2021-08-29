@@ -19,9 +19,9 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
         Protected ReportName As String
 
-        Private djArgs = {"CashReceiptJournalItem_View", "UpdateCashReceiptJournalItemTVP", "InsertCashReceiptJournalItemTVP"}
+        Private ReadOnly _djArgs = {"CashReceiptJournalItem_View", "UpdateCashReceiptJournalItemTVP", "InsertCashReceiptJournalItemTVP"}
         Private ReadOnly _openInvItemModel As New ModelAccounts("CsrOiItem")
-        Private ReadOnly _journalItemModel As New ModelAccounts("JournalItem", Nothing, djArgs)
+        Private ReadOnly _journalItemModel As New ModelAccounts("JournalItem", Nothing, _djArgs)
 
         Public Sub New(view As ICashReceiptJournalView)
             MyBase.New(view)

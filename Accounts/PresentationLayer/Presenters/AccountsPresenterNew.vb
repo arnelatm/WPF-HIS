@@ -211,9 +211,9 @@ Namespace PresentationLayer.Presenters
         '    Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "VI"
         'End Function
 
-        Public Function GetAdvancesToSupplierAccountIdNo()
-            Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
-        End Function
+        'Public Function GetAdvancesToSupplierAccountIdNo()
+        '    Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
+        'End Function
 
         Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
             Dim values = accountType.Split(",")

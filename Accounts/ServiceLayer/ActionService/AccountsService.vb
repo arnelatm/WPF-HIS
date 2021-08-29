@@ -111,6 +111,13 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
+        Public Function GetSupplierOpenInvoices(Of TM)(idNo As Integer) As List(Of TM) Implements IServiceAccounts.GetSupplierOpenInvoices
+            Dim records = DataDao.GetSupplierOpenInvoices(idNo)
+            Dim model As New List(Of TM)
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
+
         Private Function ComputeFixedRateEarning(payFrequency As Char, amount As Decimal, payRateUnit As Char) As Decimal
             Dim factor As Decimal
             Dim payFrequencySel = CodeToEnum(Of PayFrequencySelection)(payFrequency)
@@ -249,6 +256,10 @@ Namespace ServiceLayer.ActionService
             Return amount * factor
         End Function
 
+        'Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
+        '    Return GetOpenInvoices(Of TM)(idNo)
+        'End Function
+
         'Public Function AddInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.AddInvoicePayment
         '    Return DataDao.AddInvoicePayment(idNo, amount, discountTaken)
         'End Function
@@ -259,6 +270,7 @@ Namespace ServiceLayer.ActionService
         '    GlobalVariables.Mapper.Map(records, model)
         '    Return model
         'End Function
+
         'Public Function RemoveInvoicePayment(idNo As Int32, amount As Decimal, discountTaken As Decimal) As Object Implements IServiceAccounts.RemoveInvoicePayment
         '    Return DataDao.RemoveInvoicePayment(idNo, amount, discountTaken)
         'End Function
