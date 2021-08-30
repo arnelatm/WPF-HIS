@@ -129,7 +129,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            CreateLookupData("PhoneType", NameOf(_revCostCenterByCode))
+            CreateLookupData("RevCostCenter", NameOf(_revCostCenterByCode))
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
