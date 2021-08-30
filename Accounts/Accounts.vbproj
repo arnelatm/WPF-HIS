@@ -507,6 +507,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollPayElementView.vb" />
+    <Compile Include="PresentationLayer\Views\PcJournalView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.Designer.vb">
       <DependentUpon>CustomerEntryBound.vb</DependentUpon>
@@ -1191,6 +1192,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\AccountEntryTv.resx">
       <DependentUpon>AccountEntryTv.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DesignationEntryTv.resx">
       <DependentUpon>DesignationEntryTv.vb</DependentUpon>
@@ -1395,8 +1397,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-Marcelo.config" />
     <None Include="app.config" />
+    <None Include="app-Marcelo.config" />
     <None Include="appIspadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />

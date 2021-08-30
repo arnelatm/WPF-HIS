@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -8,28 +9,25 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PettyCashClosingPresenter
-        Inherits AccountsPresenter(Of IPettyCashClosingView, PettyCashClosingModel)
+    Public Class PettyCashClosingPresenter(Of TM As New)
+        Inherits TransactionsPresenterNew(Of IPettyCashClosingView, TM)
 
         Private _jiFooter As DgvFooter
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private _journalItemModel
-        Private _pcJournalsModel
+        Private ReadOnly _journalItemService
+        Private ReadOnly _pcJournalsService
 
-        Public Sub New(view As IView)
+        Public Sub New(view As IPettyCashClosingView)
             MyBase.New(view)
+            WithTreeView = False
             Service = New ModelAccounts("PettyCashClosing")
             TableName = "PettyCashClosing"
             SortOrderKey = "IdNo"
-            OriginalModel = New PettyCashClosingModel()
-            DataModel = New PettyCashClosingModel()
             Dim djArgs = {"CdJournalItem_View", "", "InsertCdJournalItemTVP"}
-            _journalItemModel = New ModelAccounts("JournalItem", Nothing, djArgs)
+            _journalItemService = New AccountsService("JournalItem", Nothing, djArgs)
             djArgs = {"CdJournalItem_View", "UpdatePcJournalsTVP", ""}
-            _pcJournalsModel = New ModelAccounts("PcJournals", Nothing, djArgs)
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
+            _pcJournalsService = New AccountsService("PcJournals", Nothing, djArgs)
 
             CreateDataTable(DtInsertTable, {{"AccountIdNo", GetType(Int16)},
                                             {"Credit", GetType(Decimal)},
@@ -51,7 +49,7 @@ Namespace PresentationLayer.Presenters
         Public Sub GetOpenPettyCash()
             Dim modelData As List(Of PcJournalModel)
             modelData = Service.GetOpenPettyCash()
-            View.PcJournals = New List(Of IPcJournalView)
+            View.PcJournals = New List(Of PcJournalView)
             GlobalVariables.Mapper.Map(modelData, View.PcJournals)
         End Sub
 
@@ -59,11 +57,11 @@ Namespace PresentationLayer.Presenters
         '    'GlobalVariables.Mapper.Map(Of T, TM)(Me.View, Me.OriginalModel)
         'End Sub
 
-        Public Sub SelectChoice(ByVal SelectAll As Boolean)
+        Public Sub SelectChoice(ByVal selectAll As Boolean)
             Dim total As Decimal = 0
             For Each item In View.PcJournals
-                item.PcClosed = SelectAll
-                If SelectAll Then
+                item.PcClosed = selectAll
+                If selectAll Then
                     total += item.Amount
                 End If
             Next item
@@ -86,8 +84,8 @@ Namespace PresentationLayer.Presenters
                 DtInsertTable.Clear()
             End If
             Dim nRowCount As Int16 = 1
-            Dim workRow As DataRow = Nothing
             CreateJournalItems()
+            Dim workRow As DataRow
             For Each dataView In View.JournalItems
                 Dim idNo As Integer = dataView.IdNo
                 workRow = DtInsertTable.NewRow()
@@ -116,7 +114,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub CreateJournalItems()
-            View.JournalItems = New List(Of IJournalItemView)
+            View.JournalItems = New List(Of JournalItemView)
             Dim x = New JournalItemView
             x.AccountIdNo = View.AccountIdNo
             x.Credit = View.Amount
@@ -168,21 +166,22 @@ Namespace PresentationLayer.Presenters
             For Each row As DataRow In DtInsertTable.Rows
                 row.Item("JournalIdNo") = passedValue
             Next
-            retVal = _journalItemModel.InsertTvp(DtInsertTable)
+            retVal = _journalItemService.InsertTvp(DtInsertTable)
             If retVal >= 0 Then
-                retVal = _pcJournalsModel.DelUpdateTvp(DtUpdateTable, passedValue)
+                retVal = _pcJournalsService.DelUpdateTvp(DtUpdateTable, passedValue)
             End If
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
                 View.IdNo = passedValue
-                retVal = UpdateGlReferenceNumber(passedValue)
+                retVal = UpdateGlReferenceNumber()
             End If
         End Sub
 
-        Public Function UpdateGlReferenceNumber(pcIdNo As Integer) As String
+        Public Function UpdateGlReferenceNumber() As String
             Dim retValue As String
-            GlobalVariables.Mapper.Map(View, DataModel)
-            DataModel.IdNo = pcIdNo
-            retValue = Service.UpdateGlReferenceNumber(DataModel)
+            Dim dataModel As New TM
+            GlobalVariables.Mapper.Map(View, dataModel)
+            'dataModel.IdNo = pcIdNo
+            retValue = Service.UpdateGlReferenceNumber(dataModel)
             Return retValue
         End Function
 

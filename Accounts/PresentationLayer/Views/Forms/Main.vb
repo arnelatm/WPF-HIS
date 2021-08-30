@@ -242,7 +242,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CashReceiptEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemCashReceiptEntry.Click
-            ShowEntryForm(CashReceiptJournalEntry)
+            RunForm(Of CashReceiptJournalEntry, CashReceiptJournalPresenter(Of CashReceiptJournalModel))()
         End Sub
 
         Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCategories.Click
@@ -258,11 +258,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosePettyCashFund.Click
-            Dim childMdiForm
-            childMdiForm = New PettyCashClosingEntry() With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            RunForm(Of PettyCashClosingEntry, PettyCashClosingPresenter(Of PettyCashClosingModel))()
         End Sub
 
         Private Sub CountriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCountries.Click
@@ -1061,6 +1057,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EmployeeAbsencesLateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeAbsencesLate.Click
             RunForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemPostPettyCashAccount_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPostPettyCashAccount.Click
+            RunForm(Of PettyCashClosingEntry, PettyCashClosingPresenter(Of PettyCashClosingModel))()
         End Sub
 
     End Class

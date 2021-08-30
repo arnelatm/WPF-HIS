@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Views.Forms
 
@@ -14,7 +15,7 @@ Namespace PresentationLayer.Views.Forms
 
             MainTableName = "PcJournal"
             SortOrderKey = "IdNo"
-            PresenterObj = New PettyCashClosingPresenter(Me)
+            PresenterObj = New PettyCashClosingPresenter(Of PettyCashClosingModel)(Me)
             cboAccountIdNo.DataSource = PresenterObj.GetAccountTypesList("BA,CS,CK")
             cboStartIdNo.DataSource = PresenterObj.GetLookup("PcJournal", "Reference", {"IdNo", "ReferenceNo", "TransactionDate"}, "Posted=0")
         End Sub
