@@ -529,7 +529,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     End Function
 
     Public Overloads Function GetLookup(lookupObj As Lookup) As List(Of Lookup.LookupData)
-        Return Service.GetLookup(lookupObj)
+        Return Service.GetLookup(lookupObj, False)
     End Function
 
     Public Overloads Function GetLookup(pTableName As String, Optional pFilter As String = Nothing) As List(Of Lookup.LookupData)

@@ -365,7 +365,7 @@ Partial Class CFormEntryNew
         Me.Controls.Add(Me.lblFormDescription)
         Me.Controls.Add(Me.FormToolStrip)
         Me.Name = "CFormEntryNew"
-        Me.Text = "CFormEntry"
+        Me.Text = "CFormEntryNew"
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FormToolStrip.ResumeLayout(False)
         Me.FormToolStrip.PerformLayout()

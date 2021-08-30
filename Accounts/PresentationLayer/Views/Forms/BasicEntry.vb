@@ -12,12 +12,8 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
-            MainTableName = "Basic"
             FirstControl = TxtCode
             Me.Text = Messaging.TranslateCaption(formCaption)
-            PresenterObj = New BasicPresenter(Me, tableOrViewName)
-            Ea = PresenterObj.Ea
-            Ea.SubscribeEvent(Me)
 
         End Sub
 

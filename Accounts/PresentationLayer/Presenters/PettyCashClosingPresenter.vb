@@ -21,7 +21,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IPettyCashClosingView)
             MyBase.New(view)
             WithTreeView = False
-            Service = New ModelAccounts("PettyCashClosing")
+            Service = New AccountsService("PettyCashClosing")
             TableName = "PettyCashClosing"
             SortOrderKey = "IdNo"
             Dim djArgs = {"CdJournalItem_View", "", "InsertCdJournalItemTVP"}
@@ -42,7 +42,6 @@ Namespace PresentationLayer.Presenters
                                             {"IdNo", GetType(Int32)},
                                             {"PcClosed", GetType(Boolean)}
                                             })
-            QuitOnSave = True
             AskBeforeSave = True
         End Sub
 
