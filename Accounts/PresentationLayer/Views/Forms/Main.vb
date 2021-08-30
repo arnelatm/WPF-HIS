@@ -482,13 +482,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String)
-            Dim childMdiForm As BasicEntry
-            ''Set the Parent Form of the Child window.
-            childMdiForm = New BasicEntry(tableOrViewName, formCaption) With {
-                .MdiParent = Me
-                }
-            ''Display the new form.
-            childMdiForm.Show()
+            'Dim childMdiForm As BasicEntry
+            '''Set the Parent Form of the Child window.
+            'childMdiForm = New BasicEntry(tableOrViewName, formCaption) With {
+            '    .MdiParent = Me
+            '    }
+            '''Display the new form.
+            'childMdiForm.Show()
+            RunForm(Of BasicEntry, BasicPresenter(Of BasicModel))()
         End Sub
 
         Private Sub RunForm(Of TV, TP)()

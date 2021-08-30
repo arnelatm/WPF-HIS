@@ -26,6 +26,7 @@ Namespace PresentationLayer.Views.Forms
             _nfi.NumberDecimalDigits = 2
             FirstControl = dtpTransactionDate
             SingleData = True
+            QuitOnSave = True
         End Sub
 
 #Region "Field Items"
