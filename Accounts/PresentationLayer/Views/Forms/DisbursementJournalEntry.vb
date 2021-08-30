@@ -48,8 +48,6 @@ Namespace PresentationLayer.Views.Forms
                 txtCheckNumber.Visible = False
                 dtpCheckDate.Visible = False
             End If
-            'PresenterObj = Presenter
-
             FirstControl = cboPaymentType
             Height = 655
         End Sub

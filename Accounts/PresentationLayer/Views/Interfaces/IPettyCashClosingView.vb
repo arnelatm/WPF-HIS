@@ -22,8 +22,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property Posted As Boolean
         Property ReferenceNo As String
         Property TransactionDate As Date?
-        Property PcJournals As List(Of IPcJournalView)
-        Property JournalItems As List(Of IJournalItemView)
+        Property PcJournals As List(Of PcJournalView)
+        Property JournalItems As List(Of JournalItemView)
 
     End Interface
 

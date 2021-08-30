@@ -20,7 +20,7 @@ Namespace PresentationLayer.Views.Forms
         Private _arFooter As DgvFooter
         Private _csrOiItems As List(Of CsrOiItemView)
         Private _jiFooter As DgvFooter
-        Private _journalItems As List(Of IJournalItemView)
+        Private _journalItems As List(Of JournalItemView)
         Private _revCostCentersByCode
         Private _defaultAccount As Int16
         Private _employeesByName
@@ -178,7 +178,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of IJournalItemView) Implements ICashReceiptJournalView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements ICashReceiptJournalView.JournalItems
             Get
                 Return _journalItems
             End Get
@@ -318,7 +318,6 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #End Region
-
 
         Protected Overrides Sub CreateDataSources()
             CreateLookupData("Account", NameOf(_accountsByCode))
@@ -634,8 +633,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
                 _jiFooter.CalculateTotals()
-                TotalDebits = _jiFooter.Value("dgvDebit")
-                TotalCredits = _jiFooter.Value("dgvCredit")
+                txtTotalDebits.Text = _jiFooter.Value("dgvDebit")
+                txtTotalCredits.Text = _jiFooter.Value("dgvCredit")
             End If
             Applied = Amount
             UnApplied = 0
@@ -659,7 +658,6 @@ Namespace PresentationLayer.Views.Forms
                 e.Cancel = True
             End If
         End Sub
-
 
         Private Sub BtnViewGL_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewGL.ClickButtonArea
             If DataGridViewJournalItems.Visible Then

@@ -10,10 +10,9 @@ Namespace PresentationLayer.Views.Forms
     Public Class PettyCashClosingEntry
         Implements IPettyCashClosingView
 
-        Private Property MyPresenter As PettyCashClosingPresenter
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private _pcJournals As New List(Of IPcJournalView)
-        Private _journalItems As New List(Of IJournalItemView)
+        Private _pcJournals As New List(Of PcJournalView)
+        Private _journalItems As New List(Of JournalItemView)
         Private _defaultAccount As Int16
         Private _pcFooter As DgvFooter
         Private _pcClosed As Boolean = True
@@ -23,16 +22,9 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            MainTableName = "PettyCashClosing"
-            SortOrderKey = "IdNo"
             Me.Text = Messaging.TranslateCaption("Petty Cash Closing Journal")
-            MyPresenter = New PettyCashClosingPresenter(Me)
-            PresenterObj = MyPresenter
             _nfi.NumberDecimalDigits = 2
-            Ea = MyPresenter.Ea
-            Ea.SubscribeEvent(Me)
             FirstControl = dtpTransactionDate
-            _defaultAccount = MyPresenter.DefaultPcAccount()
             SingleData = True
         End Sub
 
@@ -202,7 +194,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of IJournalItemView) Implements IPettyCashClosingView.JournalItems
+        Public Property JournalItems As List(Of JournalItemView) Implements IPettyCashClosingView.JournalItems
             Get
                 Return _journalItems
             End Get
@@ -215,12 +207,13 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            cboAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
-            cboPcAccountIdNo.DataSource = MyPresenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.PettyCashAccount))
-            cboPayType.DataSource = MyPresenter.MakeEnumComboList(Of PayTypeSelection)
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.CheckingAccount)}, cboAccountIdNo)
+            cboAccountIdNo.DataSource = Presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank)}, cboPcAccountIdNo)
+            CreateEnumDataSource(Of PayTypeSelection)(cboPayType)
         End Sub
 
-        Private Property PcJournals As List(Of IPcJournalView) Implements IPettyCashClosingView.PcJournals
+        Private Property PcJournals As List(Of PcJournalView) Implements IPettyCashClosingView.PcJournals
             Get
                 Return _pcJournals
             End Get
@@ -256,7 +249,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PcClosing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            MyPresenter.UpdateViewDisplay(0)
+            _defaultAccount = Presenter.DefaultPcAccount()
+            Presenter.UpdateViewDisplay(0)
             DataGridViewPcJournals.Refresh()
             BindPcJournals()
             _pcFooter = New DgvFooter(DataGridViewPcJournals) With {
@@ -268,12 +262,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PettyCashClosing_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            MyPresenter.GoAddRecord()
-            MyPresenter.GetOpenPettyCash()
+            Presenter.GoAddRecord()
+            Presenter.GetOpenPettyCash()
             If cboPcAccountIdNo.SelectedValue Is Nothing Or cboPcAccountIdNo.SelectedValue <= 0 Then
                 cboPcAccountIdNo.SelectedValue = _defaultAccount
             End If
-            If MyPresenter.PcAccountCount = 1 Then
+            If Presenter.PcAccountCount = 1 Then
                 cboPcAccountIdNo.DisplayOnly = True
                 cboPcAccountIdNo.TabStop = False
             End If
@@ -283,12 +277,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
-            MyPresenter.SelectChoice(True)
+            Presenter.SelectChoice(True)
             bsPcJournals.ResetBindings(False)
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-            MyPresenter.SelectChoice(False)
+            Presenter.SelectChoice(False)
             bsPcJournals.ResetBindings(False)
         End Sub
 
@@ -298,7 +292,7 @@ Namespace PresentationLayer.Views.Forms
                     Dim nIndex = .CurrentRow.Index
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvpcclosed"
-                            txtAmount.Text = MyPresenter.TotalSelection()
+                            txtAmount.Text = Presenter.TotalSelection()
                             txtAmount.Refresh()
                     End Select
                 End If
