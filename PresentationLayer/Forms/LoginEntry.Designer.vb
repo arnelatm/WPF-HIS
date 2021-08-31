@@ -4,7 +4,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class LoginEntry
-    Inherits BfMain
+    Inherits BfMainNew
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>

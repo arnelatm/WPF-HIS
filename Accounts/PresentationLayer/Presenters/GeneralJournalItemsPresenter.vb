@@ -1,18 +1,18 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class GeneralJournalItemsPresenter
-        Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
+    Public Class GeneralJournalItemsPresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IJournalItemsView, JournalItemModel)
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            Service = New ModelAccounts("JournalItem")
+            Service = New AccountsService("JournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
-            DataModel = New JournalItemModel
         End Sub
 
         Public Property ChangesMadeInJournalItem As Boolean = False
@@ -44,7 +44,7 @@ Namespace PresentationLayer.Presenters
         ''' </summary>
         ''' <param name="journalIdNo">JournalIdNo id to display.</param>
         Public Overloads Sub Display(journalIdNo As Int32)
-            View.JournalItems = Model.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+            View.JournalItems = Service.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
         Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
@@ -52,9 +52,9 @@ Namespace PresentationLayer.Presenters
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal
-            updateReturnValue = Model.DelUpdateTvp(dtUpdate, journalIdNo)
+            updateReturnValue = Service.DelUpdateTvp(dtUpdate, journalIdNo)
             If updateReturnValue >= 0 AndAlso dtInsert.Rows.Count > 0 Then
-                insertReturnValue = Model.InsertTvp(dtInsert)
+                insertReturnValue = Service.InsertTvp(dtInsert)
                 If insertReturnValue >= 0 Then
                     retVal = updateReturnValue + insertReturnValue
                 Else

@@ -1,21 +1,19 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class SalesJournalItemsPresenter
-        Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
+    Public Class SalesJournalItemsPresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IJournalItemsView, JournalItemModel)
 
         Public Sub New(view As IJournalItemsView)
             MyBase.New(view)
-            Service = New ModelAccounts("JournalItem")
+            Service = New AccountsService("JournalItem")
             TableName = "JournalItem"
             SortOrderKey = "Sequence"
-            DataModel = New JournalItemModel
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
         End Sub
 
         'Public Overloads Function DataIsValid(ByRef journalItems As List(Of JournalItemModel), ByVal paymentType As String)

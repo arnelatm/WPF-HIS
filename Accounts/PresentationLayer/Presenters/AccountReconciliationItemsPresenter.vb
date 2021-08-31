@@ -1,12 +1,13 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class AccountReconciliationItemsPresenter
-        Inherits AccountsPresenter(Of IAccountReconciliationItemsView, AccountReconciliationItemModel)
+        Inherits AccountsPresenterNew(Of IAccountReconciliationItemsView, AccountReconciliationItemModel)
 
         Public ParentViewList As List(Of AccountReconciliationItemModel)
         Private ReadOnly _vatRate As Decimal = GlobalVariables.VatRate() / 100D
@@ -14,12 +15,11 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IAccountReconciliationItemsView)
             MyBase.New(view)
-            Service = New ModelAccounts("AccountReconciliationItem")
+            Service = New AccountsService("AccountReconciliationItem")
             TableName = "AccountReconciliationItem"
             SortOrderKey = "Sequence"
-            DataModel = New AccountReconciliationItemModel
             '_paymentTypesModel = GetPaymentTypesModel()
-            _modelReconciled = New ModelAccounts("Reconciled")
+            _modelReconciled = New AccountsService("Reconciled")
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
@@ -137,10 +137,10 @@ Namespace PresentationLayer.Presenters
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal
-            updateReturnValue = Model.DelUpdateTvp(dtUpdate, accountReconciliationIdNo)
+            updateReturnValue = Service.DelUpdateTvp(dtUpdate, accountReconciliationIdNo)
             If updateReturnValue >= 0 Then
                 If dtInsert.Rows.Count > 0 Then
-                    insertReturnValue = Model.InsertTvp(dtInsert)
+                    insertReturnValue = Service.InsertTvp(dtInsert)
                     If insertReturnValue >= 0 Then
                         retVal = updateReturnValue + insertReturnValue
                     Else

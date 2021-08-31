@@ -5,7 +5,7 @@ Imports AATM.Libraries
 Namespace PresentationLayer.Presenters
 
     Public Class DesignationPresenter(Of TM As New)
-        Inherits AccountsPresenter(Of IDesignationView, TM)
+        Inherits AccountsPresenterNew(Of IDesignationView, TM)
 
         Public ParentViewList As List(Of DesignationModel)
 

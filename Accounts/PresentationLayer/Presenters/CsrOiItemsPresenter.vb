@@ -1,17 +1,17 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 
 Namespace PresentationLayer.Presenters
 
-    Public Class CsrOiItemsPresenter
-        Inherits AccountsPresenter(Of ICsrOiItemsView, CsrOiItemModel)
+    Public Class CsrOiItemsPresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of ICsrOiItemsView, CsrOiItemModel)
 
         Public Sub New(view As ICsrOiItemsView)
             MyBase.New(view)
-            Service = New ModelAccounts("CsrOiItem")
+            Service = New AccountsService("CsrOiItem")
             TableName = "CsrOiItem"
             SortOrderKey = "Sequence"
-            DataModel = New CsrOiItemModel
         End Sub
 
         Public Property ChangesMadeInCsrOiItem As Boolean = False
@@ -21,7 +21,7 @@ Namespace PresentationLayer.Presenters
         '''' </summary>
         '''' <param name="csrOiIdNo">CsrOiIdNo id to display.</param>
         Public Shadows Sub Display(csrOiIdNo As Int32)
-            View.CsrOiItems = Model.GetRecordsWithGroupIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
+            View.CsrOiItems = Service.GetRecordsWithGroupIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
         End Sub
 
         Public Function GetCustomerOpenInvoices(ByVal customerIdNo As Int32) As List(Of CsrOiItemModel)

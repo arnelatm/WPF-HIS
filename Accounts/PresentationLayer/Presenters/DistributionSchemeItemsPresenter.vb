@@ -1,22 +1,20 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
     Public Class DistributionSchemeItemsPresenter
-        Inherits AccountsPresenter(Of IDistributionSchemeItemsView, DistributionSchemeItemModel)
+        Inherits AccountsPresenterNew(Of IDistributionSchemeItemsView, DistributionSchemeItemModel)
 
         Private Shared _changesMadeInDataGrid As Boolean = False
 
         Public Sub New(view As IDistributionSchemeItemsView)
             MyBase.New(view)
-            Service = New ModelAccounts("DistributionSchemeItem")
+            Service = New AccountsService("DistributionSchemeItem")
             TableName = "DistributionSchemeItem"
             SortOrderKey = "Sequence"
-            DataModel = New DistributionSchemeItemModel
-            Ea = New EventAggregator()
-            Ea.SubscribeEvent(Me)
         End Sub
 
         ''' <summary>
@@ -24,7 +22,7 @@ Namespace PresentationLayer.Presenters
         ''' </summary>
         ''' <param name="DistributionSchemeIdNo">DistributionSchemeIdNo id to display.</param>
         Public Shadows Sub Display(distributionSchemeIdNo As Int32)
-            View.DistributionSchemeItems = Model.GetRecordsWithGroupIdNo(Of DistributionSchemeItemModel)(distributionSchemeIdNo, "Sequence")
+            View.DistributionSchemeItems = Service.GetRecordsWithGroupIdNo(Of DistributionSchemeItemModel)(distributionSchemeIdNo, "Sequence")
         End Sub
 
         'Public Overrides Function ChangesMade() As Boolean
@@ -59,9 +57,9 @@ Namespace PresentationLayer.Presenters
             Dim insertReturnValue = 0
             Dim updateReturnValue = 0
             Dim retVal = 0
-            updateReturnValue = Model.DelUpdateTvp(dtUpdate, distributionSchemeIdNo)
+            updateReturnValue = Service.DelUpdateTvp(dtUpdate, distributionSchemeIdNo)
             If updateReturnValue >= 0 AndAlso dtInsert.Rows.Count > 0 Then
-                insertReturnValue = Model.InsertTvp(dtInsert)
+                insertReturnValue = Service.InsertTvp(dtInsert)
                 If insertReturnValue >= 0 Then
                     retVal = updateReturnValue + insertReturnValue
                 Else

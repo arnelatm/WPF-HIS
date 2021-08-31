@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "EmployeeName"
             TreeViewSecondaryField = "EmployeeCode"
             SortOrderKey = "EmployeeName"
-            CreateDataTables()
+            'CreateDataTables()
         End Sub
 
         Private Sub CreateDataTables()

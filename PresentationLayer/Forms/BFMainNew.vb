@@ -21,7 +21,7 @@ Public Class BfMainNew
     Private _parentSecurityObjectIdNo As Int32
     Private _sw As Int16 = 0
     Private _parentIdNo As Int32 = 0
-
+    Private _formCulture As CultureInfo
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
 
@@ -100,6 +100,17 @@ Public Class BfMainNew
     End Sub
 
     Protected Property FormCulture As CultureInfo
+        Get
+            If _formCulture Is Nothing Then
+                Return CultureInfo.CurrentCulture
+            Else
+                Return _formCulture
+            End If
+        End Get
+        Set(value As CultureInfo)
+            _formCulture = value
+        End Set
+    End Property
 
     Protected Property VSystemViewIdNo As Short
 

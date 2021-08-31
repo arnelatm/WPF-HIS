@@ -7,7 +7,7 @@ Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()>
 Partial Class CrReportViewer
-    Inherits BfMain
+    Inherits BfMainNew
 
     'Form overrides dispose to clean up the component list.
     <DebuggerNonUserCode()>

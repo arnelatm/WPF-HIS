@@ -805,7 +805,6 @@
     <Compile Include="PresentationLayer\Models\SupplierModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountReconciliationItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountReconciliationPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ErJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ArJournalPresenter.vb" />

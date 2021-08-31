@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
-            PresenterObj = New ReportPresenter(Me)
+            'PresenterObj = New ReportPresenter(Me)
             Dim currentDate = Now()
             ' returns previous month last day
             Dim endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, currentDate.Month, 0)

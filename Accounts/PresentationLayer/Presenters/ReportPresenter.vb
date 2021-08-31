@@ -1,20 +1,18 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
     Public Class ReportPresenter
-        Inherits AccountsPresenter(Of IView, AccountModel)
+        Inherits AccountsPresenterNew(Of IView, AccountModel)
 
         Public Sub New(view As IView)
             MyBase.New(view)
             TableName = "Account"
-            Service = New ModelAccounts("Account")
+            Service = New AccountsService("Account")
             TableName = "Account"
             SortOrderKey = "IdNo"
-            OriginalModel = New AccountModel()
-            DataModel = New AccountModel()
-
         End Sub
 
     End Class
