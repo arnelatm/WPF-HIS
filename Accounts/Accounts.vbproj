@@ -376,7 +376,6 @@
     <Compile Include="PresentationLayer\Presenters\EmployeeLeavePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\RecurringPayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SupplierPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\TransactionsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\TransactionsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepositTypePresenter.vb" />

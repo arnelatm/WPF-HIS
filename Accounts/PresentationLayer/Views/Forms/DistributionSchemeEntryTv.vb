@@ -28,10 +28,10 @@ Namespace PresentationLayer.Views.Forms
             ' the key before the control with focus processes it.
             KeyPreview = True
 
-            MainTableName = "DistributionScheme"
-            TvMainFieldName = "DistributionSchemeName"
-            TvSecondaryFieldName = "DistributionSchemeCode"
-            SortOrderKey = "DistributionSchemeName"
+            'MainTableName = "DistributionScheme"
+            'TvMainFieldName = "DistributionSchemeName"
+            'TvSecondaryFieldName = "DistributionSchemeCode"
+            'SortOrderKey = "DistributionSchemeName"
             FirstControl = txtDistributionSchemeCode
             ' Add any initialization after the InitializeComponent() call.
 
@@ -185,7 +185,7 @@ Namespace PresentationLayer.Views.Forms
         '    MyErrorProvider.SummaryMessage = "Following fields are mandatory,"
         'End Sub
 
-        Protected Overrides Sub InputsTurnedOn()
+        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             If PresenterObj.AddMode Then
                 dtpValidityStartDate.Value = Date.Now()
                 dtpValidityEndDate.Value = Date.Now()
@@ -270,12 +270,12 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
-            MyBase.RecordSaved(e)
-            If PresenterObj.AddMode Then
-                btnLast.PerformClick()
-            End If
-        End Sub
+        'Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
+        '    MyBase.RecordSaved(e)
+        '    If PresenterObj.AddMode Then
+        '        btnLast.PerformClick()
+        '    End If
+        'End Sub
 
     End Class
 
