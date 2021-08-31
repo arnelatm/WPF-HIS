@@ -200,7 +200,7 @@ Public Class TranslationTableManager
 
     Private Sub cmbLanguagePicker_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbLanguagePicker.SelectedIndexChanged
         'If cmbLanguagePicker.SelectedValue <> "_Original" Then
-        TranslateCaptions(cmbLanguagePicker.SelectedValue)
+        '   TranslateCaptions(cmbLanguagePicker.SelectedValue)
         'End If
         'Cmd = "Select Caption, translated from TranslatedCaption" _
         '  + " where CultureInfoCode = '" + cmbLanguagePicker.Text + "'"

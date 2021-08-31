@@ -3,7 +3,7 @@
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class BalanceSheet
-        Inherits AATM.PresentationLayer.Forms.BfMain
+        Inherits AATM.PresentationLayer.Forms.BfMainNew
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _

@@ -164,7 +164,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cmbLanguagePicker_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbLanguagePicker.SelectedIndexChanged
-            TranslateCaptions(cmbLanguagePicker.SelectedValue)
+            'TranslateCaptions(cmbLanguagePicker.SelectedValue)
         End Sub
 
 #End Region

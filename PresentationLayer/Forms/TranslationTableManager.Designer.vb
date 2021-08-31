@@ -6,7 +6,7 @@ Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()>
 Partial Class TranslationTableManager
-    Inherits BfMain
+    Inherits BfMainNew
 
     'Form overrides dispose to clean up the component list.
     <DebuggerNonUserCode()>

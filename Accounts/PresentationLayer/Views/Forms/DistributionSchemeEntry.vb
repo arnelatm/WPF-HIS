@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -9,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class DistributionSchemeEntry
         Implements IDistributionSchemeView
 
-        Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
+        Private ReadOnly _distributionSchemeItemsPresenter As New DistributionSchemeItemsPresenter(Me)
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _revCostCenterByCode
         Private _footer As DgvFooter

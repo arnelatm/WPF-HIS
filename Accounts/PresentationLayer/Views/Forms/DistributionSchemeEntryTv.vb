@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class DistributionSchemeEntryTv
         Implements IDistributionSchemeView, IDistributionSchemeItemsView
 
-        Private ReadOnly _distributionSchemeItemsPresenter As DistributionSchemeItemsPresenter
+        Private ReadOnly _distributionSchemeItemsPresenter As New DistributionSchemeItemsPresenter(Me)
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private ReadOnly _revCostCenterByCode

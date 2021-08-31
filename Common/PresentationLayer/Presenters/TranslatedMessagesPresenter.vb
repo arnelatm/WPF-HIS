@@ -6,7 +6,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class TranslatedMessagesPresenter
-        Inherits CommonPresenter(Of ITranslatedMessagesView, TranslatedMessagesModel)
+        Inherits CommonPresenterNew(Of ITranslatedMessagesView, TranslatedMessagesModel)
 
         Private Property Dac
 
@@ -17,8 +17,6 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
             TreeViewSecondaryField = Nothing
-            OriginalModel = New TranslatedMessagesModel()
-            DataModel = New TranslatedMessagesModel
             TreeViewList = New List(Of TranslatedMessagesModel)
             Dac = New Dac
             Ea = New EventAggregator()
@@ -49,26 +47,26 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
-        Protected Overrides Function AddRecord(record As TranslatedMessagesModel) As Integer
-            Dim retVal As Integer
-            If Not String.IsNullOrEmpty(record.TranslatedMessage) Then
-                NewlyAddedRecordIdNo = Service.AddRecord(record)
-                retVal = NewlyAddedRecordIdNo
-            End If
-            Return retVal
-        End Function
+        'Protected Function AddRecord(record As TranslatedMessagesModel) As Integer
+        '    Dim retVal As Integer
+        '    If Not String.IsNullOrEmpty(record.TranslatedMessage) Then
+        '        NewlyAddedRecordIdNo = Service.AddRecord(record)
+        '        retVal = NewlyAddedRecordIdNo
+        '    End If
+        '    Return retVal
+        'End Function
 
         Protected Overrides Function UpDateRecord(record As TranslatedMessagesModel) As Integer
             Dim retVal As Integer
             If String.IsNullOrEmpty(record.TranslatedMessage) And String.IsNullOrEmpty(record.TranslatedCaption) Then
-                retVal = Model.DeleteRecord(record.IdNo, "TranslatedMessages")
+                retVal = Service.DeleteRecord(record.IdNo, "TranslatedMessages")
             Else
                 If String.IsNullOrEmpty(record.TranslatedMessage) Then
                     record.TranslatedMessage = ""
                 ElseIf String.IsNullOrEmpty(record.TranslatedCaption) Then
                     record.TranslatedCaption = ""
                 End If
-                retVal = Model.UpdateRecord(record)
+                retVal = Service.UpdateRecord(record)
                 If retVal = 0 Then
                     If _
                         Not _

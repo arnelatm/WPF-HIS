@@ -241,7 +241,6 @@
     <Compile Include="PresentationLayer\Models\TranslatedMessagesModel.vb" />
     <Compile Include="PresentationLayer\Presenters\DefaultFieldValuePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BranchPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\RevCostCenterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CountryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DepartmentPresenter.vb" />
