@@ -1,73 +1,108 @@
-﻿Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Windows.Forms
-Imports Microsoft.VisualBasic.CompilerServices
-
-<DesignerGenerated()>
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class CFormEntryTv
     Inherits CFormEntry
 
     'Form overrides dispose to clean up the component list.
-    <DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        If disposing AndAlso components IsNot Nothing Then
-            components.Dispose()
-        End If
-        MyBase.Dispose(disposing)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
     End Sub
 
     'Required by the Windows Form Designer
-    Private components As IContainer
+    Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("TableName")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFormEntryTv))
-        Me.TreeViewTableName = New System.Windows.Forms.TreeView()
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("root")
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.FormTreeView = New System.Windows.Forms.TreeView()
         Me.ImageListTreeView = New System.Windows.Forms.ImageList(Me.components)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer1.Panel1.SuspendLayout()
+        Me.SplitContainer1.SuspendLayout()
+        Me.SuspendLayout()
         '
-        'TreeViewTableName
+        'TranslatorDAC
         '
-        Me.TreeViewTableName.BackColor = System.Drawing.Color.Honeydew
-        Me.TreeViewTableName.Dock = System.Windows.Forms.DockStyle.Left
-        Me.TreeViewTableName.ImageKey = "TreeNode.ico"
-        Me.TreeViewTableName.ImageList = Me.ImageListTreeView
-        Me.TreeViewTableName.Location = New System.Drawing.Point(0, 53)
-        Me.TreeViewTableName.Name = "TreeViewTableName"
+        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+        '
+        'SplitContainer1
+        '
+        Me.SplitContainer1.BackgroundImage = CType(resources.GetObject("SplitContainer1.BackgroundImage"), System.Drawing.Image)
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 53)
+        Me.SplitContainer1.Name = "SplitContainer1"
+        '
+        'SplitContainer1.Panel1
+        '
+        Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.Transparent
+        Me.SplitContainer1.Panel1.Controls.Add(Me.FormTreeView)
+        Me.SplitContainer1.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent
+        Me.SplitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.SplitContainer1.Size = New System.Drawing.Size(800, 494)
+        Me.SplitContainer1.SplitterDistance = 266
+        Me.SplitContainer1.SplitterWidth = 10
+        Me.SplitContainer1.TabIndex = 4
+        '
+        'FormTreeView
+        '
+        Me.FormTreeView.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.FormTreeView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FormTreeView.HotTracking = True
+        Me.FormTreeView.Location = New System.Drawing.Point(0, 0)
+        Me.FormTreeView.Name = "FormTreeView"
         TreeNode1.Name = "Node0"
-        TreeNode1.Tag = "root"
-        TreeNode1.Text = "TableName"
-        Me.TreeViewTableName.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
-        Me.TreeViewTableName.SelectedImageKey = "openbriefcase.png"
-        Me.TreeViewTableName.Size = New System.Drawing.Size(300, 255)
-        Me.TreeViewTableName.TabIndex = 2
+        TreeNode1.Text = "root"
+        Me.FormTreeView.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1})
+        Me.FormTreeView.Size = New System.Drawing.Size(266, 494)
+        Me.FormTreeView.TabIndex = 0
+        Me.FormTreeView.Tag = "root"
         '
         'ImageListTreeView
         '
-        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
+        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageListTreeView.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
-        Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+        Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
+        Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
         '
         'CFormEntryTv
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.ClientSize = New System.Drawing.Size(852, 308)
-        Me.Controls.Add(Me.TreeViewTableName)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(800, 547)
+        Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "CFormEntryTv"
-        Me.Controls.SetChildIndex(Me.TreeViewTableName, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        Me.Text = "CFormEntryNewTv"
+        Me.Controls.SetChildIndex(Me.SplitContainer1, 0)
+        CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.ResumeLayout(False)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
-
-    Public WithEvents TreeViewTableName As TreeView
-    Public WithEvents ImageListTreeView As ImageList
+    End Sub
+    Public WithEvents SplitContainer1 As Windows.Forms.SplitContainer
+    Public WithEvents FormTreeView As Windows.Forms.TreeView
+    Public WithEvents ImageListTreeView As Windows.Forms.ImageList
 End Class

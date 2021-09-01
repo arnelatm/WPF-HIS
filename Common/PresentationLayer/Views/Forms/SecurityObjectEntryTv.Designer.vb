@@ -6,7 +6,7 @@ Namespace PresentationLayer.Views.Forms
 
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class SecurityObjectEntryTv
-        Inherits CFormEntryTvNew
+        Inherits CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
