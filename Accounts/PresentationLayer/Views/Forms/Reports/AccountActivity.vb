@@ -19,9 +19,9 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "Account"
             SortOrderKey = "IdNo"
-            PresenterObj = New ReportPresenter(Me)
-            cboStartAccountCode.DataSource = PresenterObj.GetDetailAccountList()
-            cboEndAccountCode.DataSource = PresenterObj.GetDetailAccountList()
+            Presenter = New ReportPresenter(Me)
+            CreateDataSource("Account", cboEndAccountCode, "DetailAccount=1")
+            CreateDataSource("Account", cboStartAccountCode, "DetailAccount=1")
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
 
@@ -38,7 +38,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim cTemp As String
             Dim dDate As Date
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
-            lastFiscalYearDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
+            lastFiscalYearDate = Presenter.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
 
             beginningDate = dtpBeginningDate.Value
             'dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 12, 31)

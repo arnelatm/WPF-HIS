@@ -71,7 +71,7 @@ Namespace PresentationLayer.Presenters
         'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
         '    If Posted Then
         '        Messaging.Show(True, "MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
-        '        PresenterObj.CancelEdit = True
+        '        Presenter.CancelEdit = True
         '    End If
         'End Sub
 
@@ -181,7 +181,7 @@ Namespace PresentationLayer.Presenters
         Public Function GetAcctReconItems(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemView)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
-            'If PresenterObj.AddMode Or PresenterObj.EditMode Then
+            'If Presenter.AddMode Or Presenter.EditMode Then
             Dim allAcctReconItems As List(Of AccountReconciliationItemModel) = Service.GetAcctReconItems(Of AccountReconciliationItemModel)(accountIdNo, reconciliationDate, sortOrder)
             Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
             Dim counter As Int16 = 1

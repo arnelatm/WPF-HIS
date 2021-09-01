@@ -15,8 +15,8 @@ Namespace BusinessLayer.BusinessRules
             MyBase.New(propertyName)
             _idNo = idNo
             _tableName = tableName
-            'If PresenterObj.EditMode Then
-            '    Dim cOldParentId As String = PresenterObj.GetOriginalValue(tcbParentIdNo)
+            'If Presenter.EditMode Then
+            '    Dim cOldParentId As String = Presenter.GetOriginalValue(tcbParentIdNo)
             '    If cOldParentId <> tcbParentIdNo.Text Then
             '        ParentID Is changed by the user so
             '         check for records which have this record as parent.

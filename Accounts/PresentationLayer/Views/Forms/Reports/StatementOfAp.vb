@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -19,8 +20,8 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
-            PresenterObj = New ReportPresenter(Me)
-            cboSupplierIdNo.DataSource = PresenterObj.GetLookup("Supplier")
+            Presenter = New ReportPresenter(Me)
+            CreateDataSource("Supplier", cboSupplierIdNo)
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)

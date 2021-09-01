@@ -122,7 +122,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Sub CreateDetailAccountList(cControl As Control)
-            CreateDataSource("Account", cControl, "Detail=1")
+            CreateDataSource("Account", cControl, "DetailAccount=1")
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()

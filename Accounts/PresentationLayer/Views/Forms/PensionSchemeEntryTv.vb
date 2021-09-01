@@ -95,7 +95,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("PensionProvider", cboPensionProviderIdNo)
-            CreateDataSource("Account", cboAccountIdNo, "Detail=1")
+            CreateDataSource("Account", cboAccountIdNo, "DetailAccount=1")
         End Sub
 
         Private Sub BindPensionRates()

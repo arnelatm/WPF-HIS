@@ -1966,7 +1966,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     '        e.Cancel = True
     '        Return
     '    End If
-    '    e.Result = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
+    '    e.Result = Presenter.GetIdNoOfSortedPositionNumber(Presenter.RecordPositionNumber)
     'End Sub
 
     'Public Sub GotoTargetRecordWorker_DoWorkHandler(sender As Object, e As DoWorkEventArgs(Of String))
@@ -1974,10 +1974,10 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     '        e.Cancel = True
     '        Return
     '    End If
-    '    PresenterObj.TargetIdNo = e.Argument
-    '    PresenterObj.RecordPositionNumber = PresenterObj.GetSortedRecordPosition(PresenterObj.TargetIdNo)
-    '    PresenterObj.TargetIdNo = PresenterObj.GetIdNoOfSortedPositionNumber(PresenterObj.RecordPositionNumber)
-    '    PresenterObj.UpdateViewDisplay(PresenterObj.TargetIdNo)
+    '    Presenter.TargetIdNo = e.Argument
+    '    Presenter.RecordPositionNumber = Presenter.GetSortedRecordPosition(Presenter.TargetIdNo)
+    '    Presenter.TargetIdNo = Presenter.GetIdNoOfSortedPositionNumber(Presenter.RecordPositionNumber)
+    '    Presenter.UpdateViewDisplay(Presenter.TargetIdNo)
     '    DoPaintEvents()
     'End Sub
 
@@ -2066,7 +2066,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 
     '        End If
     '    Next
-    '    PresenterObj.AutoValidationsPassed = validationsPassed
+    '    Presenter.AutoValidationsPassed = validationsPassed
     '    Return validationsPassed
     'End Function
 

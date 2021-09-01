@@ -18,12 +18,12 @@ Namespace PresentationLayer.Views.Forms.Reports
             GetReportProperties()
             Dim language As String
             Dim establishmentName As String
-            PresenterObj = New ReportPresenter(Me)
+            Presenter = New ReportPresenter(Me)
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
             If language <> "ar" Then
-                establishmentName = PresenterObj.GetRecordField("Establishment", "EstablishmentName")
+                establishmentName = Presenter.GetRecordField("Establishment", "EstablishmentName")
             Else
-                establishmentName = PresenterObj.GetRecordField("Establishment", "EstablishmentNameAra")
+                establishmentName = Presenter.GetRecordField("Establishment", "EstablishmentNameAra")
             End If
 
             For i = 0 To args.Length - 1 Step 2

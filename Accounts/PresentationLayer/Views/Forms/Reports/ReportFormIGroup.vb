@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             GetIgroupReportProperties()
             Dim language As String
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            PresenterObj = New ReportPresenter(Me)
+            Presenter = New ReportPresenter(Me)
             'Dim companyName =
             'Dim companyNameAra =
             For i = 0 To args.Length - 1 Step 2
@@ -27,8 +27,8 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Report.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
             Next
             Report.SetParameterValue("Language", language)
-            Report.SetParameterValue("EstablishmentName", PresenterObj.GetRecordField("Establishment", "EstablishmentName"))
-            Report.SetParameterValue("EstablishmentNameAra", PresenterObj.GetRecordField("Establishment", "EstablishmentNameAra"))
+            Report.SetParameterValue("EstablishmentName", Presenter.GetRecordField("Establishment", "EstablishmentName"))
+            Report.SetParameterValue("EstablishmentNameAra", Presenter.GetRecordField("Establishment", "EstablishmentNameAra"))
             Report.DataSourceConnections.Clear()
             ProcessReport()
 

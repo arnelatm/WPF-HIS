@@ -47,8 +47,8 @@ Namespace PresentationLayer.Views.Forms
             _deductionFooter.ColumnToSum("dgvDeductionAmount") = True
             _deductionFooter.SetText("dgvDeductionIdNo", "Totals")
 
-            '_employees = PresenterObj.GetLookup("Employee")
-            '_payGroups = PresenterObj.GetLookup("PayGroups")
+            '_employees = Presenter.GetLookup("Employee")
+            '_payGroups = Presenter.GetLookup("PayGroups")
         End Sub
 
 #Region "Fields"

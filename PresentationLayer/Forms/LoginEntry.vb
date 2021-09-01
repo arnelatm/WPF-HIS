@@ -60,7 +60,7 @@ Public Class LoginEntry
             textConfirmation.Text = Space(20)
             textNewPassword.Editable = True
             textConfirmation.Editable = True
-            PresenterObj.EnableEdit()
+            Presenter.EnableEdit()
             Height = 388
             floPasswordEntry.Height = 134
         Else
@@ -220,13 +220,13 @@ Public Class LoginEntry
     'End Sub
 
     Private Sub SaveNewPassword()
-        Dim userIdNo = Convert.ToInt16(PresenterObj.GetRecordFieldWithKey(textBoxUserName.Text.Trim(), "User", "UserName", "IdNo"))
-        Dim encryptedPassword As String = PresenterObj.EncryptPassword(userIdNo, textNewPassword.Text.Trim())
-        PresenterObj.SavePassword(userIdNo, encryptedPassword)
+        Dim userIdNo = Convert.ToInt16(Presenter.GetRecordFieldWithKey(textBoxUserName.Text.Trim(), "User", "UserName", "IdNo"))
+        Dim encryptedPassword As String = Presenter.EncryptPassword(userIdNo, textNewPassword.Text.Trim())
+        Presenter.SavePassword(userIdNo, encryptedPassword)
     End Sub
 
     Protected Sub EnableEdit()
-        PresenterObj.EditMode = True
+        Presenter.EditMode = True
     End Sub
 
 End Class

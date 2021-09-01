@@ -23,7 +23,6 @@ Public Class CFormEntry
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
     Protected SingleData As Boolean = False
-    Public Presenter As Object
 
     Private _debugSwitch As Byte = 0
 
@@ -50,7 +49,6 @@ Public Class CFormEntry
         InitializeComponent()
         KeyPreview = True
         DoubleBuffered = True
-        Ea = New EventAggregator
 
         ' Add any initialization after the InitializeComponent() call.
     End Sub
@@ -634,132 +632,5 @@ Public Class CFormEntry
     '    Debugger.Break()
     '    Return False
     'End Function
-
-    Public Shared Sub EnableDoubleBuff(ByVal cont As Windows.Forms.Control)
-        Dim DemoProp As Reflection.PropertyInfo = GetType(System.Windows.Forms.Control).GetProperty("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
-        DemoProp.SetValue(cont, True, Nothing)
-    End Sub
-
-    Public Property HideNavigatorButtons As Boolean
-    Public Property IgnoreTextBoxNumParserMessage As Boolean
-
-    Protected Function TextBoxNumParser(Of T As Structure)(ByRef control As CTextBox) As T
-        Dim retValue As T
-        Try
-            retValue = Parser(Of T).Parser(control.Text)
-            Text = retValue.ToString()
-        Catch ex As Exception
-            If Not IgnoreTextBoxNumParserMessage Then
-                Dim description As String
-                If TypeOf control Is ILinkedLabel Then
-                    description = DirectCast(control, ILinkedLabel).GetControlDescription()
-                Else
-                    description = control.Name
-                End If
-            End If
-            retValue = Parser(Of T).Parser("0")
-        End Try
-        Return retValue
-    End Function
-
-    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New GetDataSource(tableName, control))
-        End If
-    End Sub
-
-    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, filter As String)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New GetDataSource(tableName, control, filter))
-        End If
-    End Sub
-
-    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, sortKey As String, filter As String)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New GetDataSource(tableName, control, sortKey, filter))
-        End If
-    End Sub
-
-    'Protected Overloads Sub CreateLookupData(tableName As String, ByRef targetLookup As List(Of Lookup.LookupData), Optional filter As String = Nothing)
-    '    Dim varName = NameOf(targetLookup)
-    '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, varName, filter))
-    'End Sub
-
-    'Protected Function CreateLookupData(tableName As String, targetProperty As String) As List(Of Lookup.LookupData)
-    '    Dim data As List(Of Lookup.LookupData)
-    '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
-    '    Return data
-    'End Function
-
-    ' ReSharper disable once UnassignedField.Local
-
-    Protected Sub GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) 'As List(Of Lookup.LookupData)
-        'Dim dataLookupFunctionVariable As New List(Of Lookup.LookupData)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, filter))
-        'Return dataLookupFunctionVariable
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, filter As String)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, filter))
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortKey As String, filter As String)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortKey, filter))
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, fields, filter))
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
-    End Sub
-
-    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
-        comboControl.DataSource = GetEnumData(Of TE)()
-    End Sub
-
-    Public Sub CreateEnumData(Of TE)(ByRef dataTarget As Object)
-        dataTarget = GetEnumData(Of TE)()
-    End Sub
-
-    Private Function GetEnumData(Of TE)()
-        Dim dataList As New List(Of Lookup.LookupData)
-        For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New Lookup.LookupData With {
-                    .IdNo = CInt(c),
-                    .Code = EnumToCode(c),
-                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-                    }
-            dataList.Add(data)
-        Next
-        Return dataList
-    End Function
-
-    Public Function GetFieldType(fieldName As String) As Type
-        Return Invoker.GetProperty(Me, fieldName).GetType
-    End Function
-
-    Protected Sub ProcessCellEndEdit(dataGridView As DataGridView, bindingSource As BindingSource)
-        Dim firstDisplayedRow = dataGridView.FirstDisplayedScrollingRowIndex
-        Ea.PublishEvent(New DataChanged(bindingSource,
-                                                dataGridView.CurrentRow.Index,
-                                                dataGridView.CurrentCell.OwningColumn.DataPropertyName,
-                                                dataGridView.CurrentCell.OwningColumn.Name,
-                                                dataGridView.CurrentCell.Value))
-
-    End Sub
-
-    Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)
-        Dim childForm = Activator.CreateInstance(GetType(TF), data)
-        Dim pType As Type = GetType(TP)
-        Activator.CreateInstance(GetType(TP), {childForm})
-        childForm.MdiParent = subFormParent
-        childForm.Show()
-    End Sub
 
 End Class
