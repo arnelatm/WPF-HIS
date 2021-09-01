@@ -19,8 +19,8 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "ArJournal"
             SortOrderKey = "IdNo"
-            PresenterObj = New ReportPresenter(Me)
-            cboCustomerIdNo.DataSource = PresenterObj.GetLookup("Customer")
+            Presenter = New ReportPresenter(Me)
+            CreateDataSource("Customer", cboCustomerIdNo)
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)

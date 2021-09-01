@@ -111,12 +111,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BFMain.Designer.vb">
-      <DependentUpon>BFMain.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BFMain.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="BFMainNew.designer.vb">
       <DependentUpon>BFMainNew.vb</DependentUpon>
     </Compile>
@@ -135,14 +129,12 @@
     <Compile Include="CFormEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CFormEntryTvNew.Designer.vb">
-      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
+    <Compile Include="CFormEntryTv.Designer.vb">
+      <DependentUpon>CFormEntryTv.vb</DependentUpon>
     </Compile>
-    <Compile Include="CFormEntryTvNew.vb" />
-    <Compile Include="CFormTvEntry.designer.vb">
-      <DependentUpon>CFormTvEntry.vb</DependentUpon>
+    <Compile Include="CFormEntryTv.vb">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CFormTvEntry.vb" />
     <Compile Include="CModalForm.Designer.vb">
       <DependentUpon>CModalForm.vb</DependentUpon>
     </Compile>
@@ -196,10 +188,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BFMain.resx">
-      <DependentUpon>BFMain.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="BFMainNew.resx">
       <DependentUpon>BFMainNew.vb</DependentUpon>
     </EmbeddedResource>
@@ -209,11 +197,8 @@
     <EmbeddedResource Include="CFormEntry.resx">
       <DependentUpon>CFormEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CFormEntryTvNew.resx">
-      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CFormTvEntry.resx">
-      <DependentUpon>CFormTvEntry.vb</DependentUpon>
+    <EmbeddedResource Include="CFormEntryTv.resx">
+      <DependentUpon>CFormEntryTv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CrReportViewer.resx">
       <DependentUpon>CrReportViewer.vb</DependentUpon>

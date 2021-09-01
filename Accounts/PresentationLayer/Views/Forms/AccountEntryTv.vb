@@ -15,9 +15,8 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
-
-
 #Region "Fields"
+
         Public Property AccountCode As String Implements IAccountView.AccountCode
             Get
                 Return txtAccountCode.Text
@@ -155,14 +154,15 @@ Namespace PresentationLayer.Views.Forms
                 cboSpecialAccount.SetValue(Value)
             End Set
         End Property
-#End Region
-        Public Event ParentIdUpdated(ByRef accountGroupEditable As Boolean) Implements IAccountView.ParentIdUpdated
 
+#End Region
+
+        Public Event ParentIdUpdated(ByRef accountGroupEditable As Boolean) Implements IAccountView.ParentIdUpdated
 
         'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
         '    If String.IsNullOrEmpty(txtLevelNumber.Text) OrElse CInt(txtLevelNumber.Text) = 0 Then
         '        _MBMainAccountNotEditable.Show(Me)
-        '        PresenterObj.CancelEdit = True
+        '        Presenter.CancelEdit = True
         '    End If
         'End Sub
 

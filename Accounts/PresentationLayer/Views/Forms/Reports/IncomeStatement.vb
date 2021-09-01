@@ -20,7 +20,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "Account"
             SortOrderKey = "IdNo"
-            PresenterObj = New ReportPresenter(Me)
+            Presenter = New ReportPresenter(Me)
             _period = period
 
         End Sub
@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim begDataDate As Date
             Dim language As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
-            lastFiscalYearDate = PresenterObj.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
+            lastFiscalYearDate = Presenter.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
             beginningDate = IIf(dtpBeginningDate.Value Is Nothing, dtpEndingDate.Value, dtpBeginningDate.Value)
             endingDate = dtpEndingDate.Value
             AdjustBeginningEndDates(_period, beginningDate, endingDate)

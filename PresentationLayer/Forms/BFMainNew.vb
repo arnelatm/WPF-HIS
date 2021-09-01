@@ -7,6 +7,7 @@ Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
 
 Public Class BfMainNew
@@ -22,6 +23,7 @@ Public Class BfMainNew
     Private _sw As Int16 = 0
     Private _parentIdNo As Int32 = 0
     Private _formCulture As CultureInfo
+
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
 
@@ -33,7 +35,7 @@ Public Class BfMainNew
     Public Dv As DataView
     Public MyErrorProvider As New ErrorProviderExtended
     Public Ea As EventAggregator
-    Public PresenterObj As Object
+    Public Presenter As Object
 
     Public Event AfterTranslateForm()
 
@@ -43,7 +45,7 @@ Public Class BfMainNew
 
         ' This call is required by the designer.
         InitializeComponent()
-
+        Ea = New EventAggregator
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
         End If
@@ -604,7 +606,7 @@ Public Class BfMainNew
     '            Dim securityObject As New SecurityObject With {.SecurityObjectName = Mid(toolStripMenuItem.Name, 18),
     '                    .SystemViewIdNo = _VSystemViewIdNo,
     '                    .ParentIdNo = parentIdNo}
-    '            parentIdNo = PresenterObj.AddSecurityObject(securityObject)
+    '            parentIdNo = Presenter.AddSecurityObject(securityObject)
     '        End If
     '    Else
     '        toolStripMenuItem.Enabled = False
@@ -654,7 +656,7 @@ Public Class BfMainNew
     Private Function SetControlSecurityValue(securityIdNo As Integer) As ArrayList
         Dim controlSecurityValues As ArrayList
 
-        controlSecurityValues = PresenterObj.GetUserSecurity(Convert.ToInt16(securityIdNo),
+        controlSecurityValues = Presenter.GetUserSecurity(Convert.ToInt16(securityIdNo),
                                                              GlobalVariables.SecurityGroupIdNo)
         Return controlSecurityValues
     End Function
@@ -679,9 +681,9 @@ Public Class BfMainNew
 
     Private Function GetControlSecurityIdNo(ByRef controlSecurityKey As String, Optional objIsMenu As Boolean = False) As Int64
         If objIsMenu Then
-            Return PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject_View1", "FullPathName", "IdNo")
+            Return Presenter.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject_View1", "FullPathName", "IdNo")
         Else
-            Dim idNo As Int32 = PresenterObj.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
+            Dim idNo As Int32 = Presenter.GetRecordFieldWithKey(controlSecurityKey, "SecurityObject", "SecurityObjectName", "IdNo")
             Dim retVal As Integer
             If Not Integer.TryParse(idNo, retVal) Then
                 Return retVal
@@ -773,8 +775,8 @@ Public Class BfMainNew
 
     Private Function GetControlSecurityValues(ByRef controlSecurityKey As String) As ArrayList
         Dim controlSecurityObjectIdNo As Int32
-        controlSecurityObjectIdNo = PresenterObj.GetControlSecurityIdNo(controlSecurityKey)
-        Return PresenterObj.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+        controlSecurityObjectIdNo = Presenter.GetControlSecurityIdNo(controlSecurityKey)
+        Return Presenter.GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
     End Function
 
     Private Sub SetControlEditability(ByRef cCtrl As Control, ByRef editable As Boolean)
@@ -827,7 +829,7 @@ Public Class BfMainNew
                     Dim securityIdNo As Int32 = GetControlSecurityIdNo(subMenuName + " > " + controlSecurityKey, True)
                     If securityIdNo <> 0 Then
                         If GlobalVariables.SecurityGroupIdNo <> 0 Then
-                            controlSecurityValues = PresenterObj.GetUserSecurity(securityIdNo,
+                            controlSecurityValues = Presenter.GetUserSecurity(securityIdNo,
                                                                             GlobalVariables.SecurityGroupIdNo)
                             If controlSecurityValues.Count > 0 Then
                                 ' Visible property stored in first element of the array
@@ -882,7 +884,7 @@ Public Class BfMainNew
 
     '                    If securityIdNo <> 0 Then
     '                        If GlobalVariables.SecurityGroupIdNo <> 0 Then
-    '                            controlSecurityValues = PresenterObj.GetUserSecurity(securityIdNo,
+    '                            controlSecurityValues = Presenter.GetUserSecurity(securityIdNo,
     '                                                                            GlobalVariables.SecurityGroupIdNo)
     '                            If controlSecurityValues.Count > 0 Then
     '                                ' Visible property stored in first element of the array
@@ -916,7 +918,7 @@ Public Class BfMainNew
     '                    Dim securityObject As New SecurityObject With {.SecurityObjectName = controlSecurityKey,
     '                                                                   .SystemViewIdNo = systemViewIdNo,
     '                                                                   .ParentIdNo = parentIdNo}
-    '                    PresenterObj.AddSecurityObject(securityObject)
+    '                    Presenter.AddSecurityObject(securityObject)
     '                End If
     '            Else
     '                obj.Enabled = True
@@ -1053,6 +1055,132 @@ Public Class BfMainNew
     '        End If
     '    Next
     'End Sub
+
+    Public Shared Sub EnableDoubleBuff(ByVal cont As Control)
+        Dim demoProp As Reflection.PropertyInfo = GetType(Control).GetProperty("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
+        demoProp.SetValue(cont, True, Nothing)
+    End Sub
+
+    Public Property HideNavigatorButtons As Boolean
+    Public Property IgnoreTextBoxNumParserMessage As Boolean
+
+    Protected Function TextBoxNumParser(Of T As Structure)(ByRef control As CTextBox) As T
+        Dim retValue As T
+        Try
+            retValue = Parser(Of T).Parser(control.Text)
+            Text = retValue.ToString()
+        Catch ex As Exception
+            If Not IgnoreTextBoxNumParserMessage Then
+                Dim description As String
+                If TypeOf control Is ILinkedLabel Then
+                    description = DirectCast(control, ILinkedLabel).GetControlDescription()
+                Else
+                    description = control.Name
+                End If
+            End If
+            retValue = Parser(Of T).Parser("0")
+        End Try
+        Return retValue
+    End Function
+
+    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(tableName, control))
+        End If
+    End Sub
+
+    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, filter As String)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(tableName, control, filter))
+        End If
+    End Sub
+
+    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, sortKey As String, filter As String)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(tableName, control, sortKey, filter))
+        End If
+    End Sub
+
+    'Protected Overloads Sub CreateLookupData(tableName As String, ByRef targetLookup As List(Of Lookup.LookupData), Optional filter As String = Nothing)
+    '    Dim varName = NameOf(targetLookup)
+    '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, varName, filter))
+    'End Sub
+
+    'Protected Function CreateLookupData(tableName As String, targetProperty As String) As List(Of Lookup.LookupData)
+    '    Dim data As List(Of Lookup.LookupData)
+    '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
+    '    Return data
+    'End Function
+
+    ' ReSharper disable once UnassignedField.Local
+
+    Protected Sub GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) 'As List(Of Lookup.LookupData)
+        'Dim dataLookupFunctionVariable As New List(Of Lookup.LookupData)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, filter))
+        'Return dataLookupFunctionVariable
+    End Sub
+
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
+    End Sub
+
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, filter As String)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, filter))
+    End Sub
+
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortKey As String, filter As String)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortKey, filter))
+    End Sub
+
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, fields, filter))
+    End Sub
+
+    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
+        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
+    End Sub
+
+    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
+        comboControl.DataSource = GetEnumData(Of TE)()
+    End Sub
+
+    Public Sub CreateEnumData(Of TE)(ByRef dataTarget As Object)
+        dataTarget = GetEnumData(Of TE)()
+    End Sub
+
+    Private Function GetEnumData(Of TE)()
+        Dim dataList As New List(Of Lookup.LookupData)
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim data As New Lookup.LookupData With {
+                    .IdNo = CInt(c),
+                    .Code = EnumToCode(c),
+                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+                    }
+            dataList.Add(data)
+        Next
+        Return dataList
+    End Function
+
+    Public Function GetFieldType(fieldName As String) As Type
+        Return Invoker.GetProperty(Me, fieldName).GetType
+    End Function
+
+    Protected Sub ProcessCellEndEdit(dataGridView As DataGridView, bindingSource As BindingSource)
+        Dim firstDisplayedRow = dataGridView.FirstDisplayedScrollingRowIndex
+        Ea.PublishEvent(New DataChanged(bindingSource,
+                                                dataGridView.CurrentRow.Index,
+                                                dataGridView.CurrentCell.OwningColumn.DataPropertyName,
+                                                dataGridView.CurrentCell.OwningColumn.Name,
+                                                dataGridView.CurrentCell.Value))
+
+    End Sub
+
+    Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)
+        Dim childForm = Activator.CreateInstance(GetType(TF), data)
+        Activator.CreateInstance(GetType(TP), {childForm})
+        childForm.MdiParent = subFormParent
+        childForm.Show()
+    End Sub
 
 End Class
 

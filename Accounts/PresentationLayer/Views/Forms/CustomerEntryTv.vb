@@ -472,9 +472,9 @@ Namespace PresentationLayer.Views.Forms
         'Protected Overrides Sub RecordPositionChanged(ByRef e As RecordPositionChanged)
         '    MyBase.RecordPositionChanged(e)
         '    Dim value As Double
-        '    value = Convert.ToDouble(PresenterObj.GetCustomerBalance(IdNo))
+        '    value = Convert.ToDouble(Presenter.GetCustomerBalance(IdNo))
         '    txtBalance.Text = value.ToString("N", _nfi)
-        '    If Not PresenterObj.AddMode Then
+        '    If Not Presenter.AddMode Then
         '        txtOpeningBalance.DisplayOnly = True
         '    Else
         '        txtOpeningBalance.DisplayOnly = False

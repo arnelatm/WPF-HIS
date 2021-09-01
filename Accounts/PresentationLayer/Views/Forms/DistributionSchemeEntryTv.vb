@@ -37,7 +37,7 @@ Namespace PresentationLayer.Views.Forms
 
             _distributionSchemeItemsPresenter = New DistributionSchemeItemsPresenter(Me)
 
-            PresenterObj.DistributionSchemeItemsPresenter = _distributionSchemeItemsPresenter
+            Presenter.DistributionSchemeItemsPresenter = _distributionSchemeItemsPresenter
 
             DtInsertTable.Columns.Add("DistributionSchemeIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
@@ -50,7 +50,7 @@ Namespace PresentationLayer.Views.Forms
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Percentage", GetType(Decimal))
 
-            _revCostCenterByCode = PresenterObj.GetLookup("RevCostCenter")
+            _revCostCenterByCode = Presenter.GetLookup("RevCostCenter")
 
         End Sub
 
@@ -186,7 +186,7 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
-            If PresenterObj.AddMode Then
+            If Presenter.AddMode Then
                 dtpValidityStartDate.Value = Date.Now()
                 dtpValidityEndDate.Value = Date.Now()
                 bsDistributionSchemeItems.Clear()
@@ -195,7 +195,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         'Public Sub OnParentRecordUpdatedSuccessfully(ByVal passedValue As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully
-        '    If PresenterObj.AddMode Then
+        '    If Presenter.AddMode Then
         '        IdNo = passedValue
         '    End If
         '    If DtInsertTable IsNot Nothing Then
@@ -272,7 +272,7 @@ Namespace PresentationLayer.Views.Forms
 
         'Protected Overrides Sub RecordSaved(ByRef e As RecordSaved)
         '    MyBase.RecordSaved(e)
-        '    If PresenterObj.AddMode Then
+        '    If Presenter.AddMode Then
         '        btnLast.PerformClick()
         '    End If
         'End Sub

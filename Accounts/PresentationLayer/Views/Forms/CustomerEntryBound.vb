@@ -15,9 +15,9 @@ Public Class CustomerEntryBound
         'SortOrderKey = "CustomerName"
         'FirstControl = txtCustomerName
         ' Add any initialization after the InitializeComponent() call.
-        'PresenterObj = New CustomerPresenter(Me)
-        'PresenterObj = New CustomerPresenter
-        'Ea = PresenterObj.Ea
+        'Presenter = New CustomerPresenter(Me)
+        'Presenter = New CustomerPresenter
+        'Ea = Presenter.Ea
         'Ea.SubscribeEvent(Me)
 
     End Sub

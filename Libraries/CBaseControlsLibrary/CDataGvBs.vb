@@ -389,7 +389,7 @@ Public Class CDataGvBs
     'Public Sub AddDeleteColumn()
     '    With Columns
     '        Dim parentForm = FindForm()
-    '        If GetPropertyValue(parentForm, "PresenterObj.EditMode") Or GetPropertyValue(parentForm, "PresenterObj.AddMode") Then
+    '        If GetPropertyValue(parentForm, "Presenter.EditMode") Or GetPropertyValue(parentForm, "Presenter.AddMode") Then
     '            Dim dgvDelColumn As New DataGridViewImageColumn
     '            .Insert(.Count, dgvDelColumn)
     '            dgvDelColumn.Name = "dgvDeleteColumn"

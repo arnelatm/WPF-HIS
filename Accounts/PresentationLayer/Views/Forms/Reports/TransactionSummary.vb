@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "Account"
             SortOrderKey = "IdNo"
-            PresenterObj = New ReportPresenter(Me)
+            Presenter = New ReportPresenter(Me)
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
 

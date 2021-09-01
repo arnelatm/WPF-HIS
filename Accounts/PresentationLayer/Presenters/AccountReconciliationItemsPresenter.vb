@@ -81,7 +81,7 @@ Namespace PresentationLayer.Presenters
         Public Function GetAcctReconItems(ByVal AccountIdNo As Int16, ByVal reconciliationDate As Date, ByVal idNo As Int32, ByVal Optional sortOrder As String = Nothing) As List(Of AccountReconciliationItemModel)
             Dim acctReconItems As New List(Of AccountReconciliationItemModel)
             Dim nSeq As Integer = 0
-            'If PresenterObj.AddMode Or PresenterObj.EditMode Then
+            'If Presenter.AddMode Or Presenter.EditMode Then
             Dim allAcctReconItems = Service.GetAcctReconItems(Of AccountReconciliationItemModel)(AccountIdNo, reconciliationDate, sortOrder)
             If AddMode Then
                 For Each acctReconItem In allAcctReconItems

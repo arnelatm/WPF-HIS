@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
             'MyPresenter.JournalCode = "CD"
             Me.Text = Messaging.TranslateCaption("Check Disbursement Journal")
             btnPrintCheck.Visible = True
-            'PresenterObj = MyPresenter
+            'Presenter = MyPresenter
             'SortOrderKey = "IdNo"
             FirstControl = cboPaymentType
             _nfi.NumberDecimalDigits = 2
