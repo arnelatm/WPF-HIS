@@ -25,8 +25,7 @@ Imports KellermanSoftware.CompareNetObjects
 ''' </remarks>
 ''' <typeparam name="TV">Type of itemView.</typeparam>
 Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
-    Implements IPresenter,
-               ISubscriber(Of ViewButtonClicked),
+    Implements ISubscriber(Of ViewButtonClicked),
                ISubscriber(Of FindFieldRequested),
                ISubscriber(Of EntryFormLoaded),
                ISubscriber(Of SaveDataRequested),
@@ -510,7 +509,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         End If
     End Function
 
-    Public Function GetFieldWithIdNo(idNo As Object, pTableName As String, returnFieldName As String) Implements IPresenter.GetFieldWithIdNo
+    Public Function GetFieldWithIdNo(idNo As Object, pTableName As String, returnFieldName As String)
         Try
             Return Service.GetFieldWithIdNo(idNo, pTableName, returnFieldName)
         Catch ex As Exception
@@ -1314,7 +1313,7 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         Return retValue
     End Function
 
-    Public Function MakeEnumComboList(Of TE)() Implements IPresenter.MakeEnumComboList
+    Public Function MakeEnumComboList(Of TE)()
         Dim dataList As New List(Of Lookup.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
             Dim data As New Lookup.LookupData With {
@@ -2306,10 +2305,6 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
         RecordPositionNumber = GetSortedRecordPosition(idNo)
         UpdateViewDisplay()
     End Sub
-
-    'Public Function GetLookup(lookupTableToGet As String, lookUpSortExpression As String, lookupFieldsToShow() As String, Optional filter As String = Nothing) As List(Of Lookup.LookupData) Implements IPresenter.GetLookup
-    '    Throw New NotImplementedException()
-    'End Function
 
 #End Region
 
