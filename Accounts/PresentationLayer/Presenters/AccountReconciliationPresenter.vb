@@ -148,10 +148,10 @@ Namespace PresentationLayer.Presenters
 
         Public Overloads Function SaveReconciliation(ByRef dtInsert As DataTable, ByVal accountReconciliationIdNo As Int32)
             Dim insertReturnValue
-            Dim modelReconciled = New ModelAccounts("Reconciled")
+            Dim reconciledService = New AccountsService("Reconciled")
             Dim retVal As Integer
             If dtInsert.Rows.Count > 0 Then
-                insertReturnValue = modelReconciled.InsertTvp(dtInsert)
+                insertReturnValue = reconciledService.InsertTvp(dtInsert)
                 retVal = insertReturnValue
             Else
                 Return 0

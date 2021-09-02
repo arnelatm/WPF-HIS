@@ -1,5 +1,5 @@
 ﻿Public Class SecurityObjectModel
-    Inherits Model
+    'Inherits Model
 
     Public Property IdNo As Int32
     Public Property SystemViewIdNo As Int16

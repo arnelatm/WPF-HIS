@@ -793,10 +793,8 @@
     <Compile Include="PresentationLayer\Models\EmployeeModel.vb" />
     <Compile Include="PresentationLayer\Models\GeneralJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\GlLedgerItemModel.vb" />
-    <Compile Include="PresentationLayer\Models\IModelAccounts.vb" />
     <Compile Include="PresentationLayer\Models\JournalItemModel.vb" />
     <Compile Include="PresentationLayer\Models\MainModel.vb" />
-    <Compile Include="PresentationLayer\Models\ModelAccounts.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseItemModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ReconciledModel.vb" />

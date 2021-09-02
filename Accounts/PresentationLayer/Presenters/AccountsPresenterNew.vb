@@ -34,13 +34,13 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
+            Dim arOpenInvoiceService As New AccountsService("ArOpenInvoice")
             Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
                     .JournalCode = journalCode,
                     .JournalIdNo = journalItem.JournalIdNo,
                     .JournalItemIdNo = journalItem.IdNo
                     }
-            Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
+            Return arOpenInvoiceService.AddRecord(arOpenInvoiceModel)
         End Function
 
         Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
@@ -227,7 +227,6 @@ Namespace PresentationLayer.Presenters
             Return GetLookup("Account", sortKey, lookupFilterKey)
         End Function
 
-
         'Public Function ArOpenInvoiceExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
         '    Return Model.CountRecordWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo")
         'End Function
@@ -242,8 +241,6 @@ Namespace PresentationLayer.Presenters
         'Public Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
         '    Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
         'End Function
-
-
 
         'Protected Function IsChildValid(Of Tcm)(childProperty) As Boolean
         '    Dim retValue As Boolean = True
