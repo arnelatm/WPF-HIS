@@ -111,10 +111,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BFMainNew.designer.vb">
-      <DependentUpon>BFMainNew.vb</DependentUpon>
+    <Compile Include="BFMain.designer.vb">
+      <DependentUpon>BFMain.vb</DependentUpon>
     </Compile>
-    <Compile Include="BFMainNew.vb">
+    <Compile Include="BFMain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BFModalForm.Designer.vb">
@@ -188,8 +188,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BFMainNew.resx">
-      <DependentUpon>BFMainNew.vb</DependentUpon>
+    <EmbeddedResource Include="BFMain.resx">
+      <DependentUpon>BFMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BFModalForm.resx">
       <DependentUpon>BFModalForm.vb</DependentUpon>

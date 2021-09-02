@@ -43,7 +43,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event UserLoggedIn(sender As Object, formControls As List(Of Control))
 
-        Private ReadOnly _presenterObj
+        'Private ReadOnly _presenterObj
 
         ''' <summary>
         '''     Default form constructor.
@@ -70,7 +70,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 SetLanguageChangeButtons()
             End If
-            _presenterObj = New UserPresenter(Of UserModel)(Me)
+            Presenter = New UserPresenter(Of UserModel)(Me)
             SetupMapper()
             'Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
             'builder.RegisterType(Of RecurringPayElementPresenter)().[As](Of ISalaryLoanSchedulePresenter)()
@@ -140,7 +140,7 @@ Namespace PresentationLayer.Views.Forms
                 Dim securityObject As New SecurityObject With {.SecurityObjectName = MenuFormName,
                         .SystemViewIdNo = VSystemViewIdNo,
                         .ParentIdNo = Nothing}
-                mainParentIdNo = _presenterObj.AddSecurityObject(securityObject)
+                mainParentIdNo = Presenter.AddSecurityObject(securityObject)
                 sw = 1
             End If
             If TypeOf cCtrl Is MenuStrip Then
@@ -151,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
                         .SystemViewIdNo = VSystemViewIdNo,
                         .ParentIdNo = mainParentIdNo}
                 Dim parentIdNo As Int32
-                parentIdNo = _presenterObj.AddSecurityObject(securityObject)
+                parentIdNo = Presenter.AddSecurityObject(securityObject)
                 AddChildMenuSecurityObjects(menuStripMain.Items, subMenuName, parentIdNo)
             ElseIf TypeOf cCtrl Is ToolStrip Then
                 Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
@@ -160,7 +160,7 @@ Namespace PresentationLayer.Views.Forms
                         .SystemViewIdNo = VSystemViewIdNo,
                         .ParentIdNo = mainParentIdNo}
                 Dim parentIdNo As Int32
-                parentIdNo = _presenterObj.AddSecurityObject(securityObject)
+                parentIdNo = Presenter.AddSecurityObject(securityObject)
                 AddChildMenuSecurityObjects(toolStripMain.Items, subMenuName, parentIdNo)
             End If
         End Sub
@@ -583,9 +583,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of PettyCashClosingEntry, PettyCashClosingPresenter(Of PettyCashClosingModel))()
         End Sub
 
-
-
-
 #End Region
 
         Protected Sub SwitchUiLanguage(originalUi As Boolean)
@@ -696,7 +693,6 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-
         ''' <summary>
         '''     Displays login dialog box and loads member list in treeview.
         ''' </summary>
@@ -762,7 +758,6 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End If
         End Sub
-
 
         Private Sub SetLanguageChangeButtons()
             If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
@@ -920,10 +915,10 @@ Namespace PresentationLayer.Views.Forms
                 End Try
             End Using
         End Sub
+
         Private Sub UnhandledExceptionHandler(sender As Object, e As UnhandledExceptionEventArgs)
             ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         End Sub
-
 
         Private Sub ToolStripMenuItemPayrollAttendance_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayrollAttendance.Click
 
