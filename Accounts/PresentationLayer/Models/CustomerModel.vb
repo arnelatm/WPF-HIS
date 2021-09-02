@@ -7,7 +7,7 @@ Namespace PresentationLayer.Models
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class CustomerModel
-        Implements IModelNew
+        'Implements IModelNew
 
         Public Property Errors As List(Of String)
         Public Property Balance As Decimal

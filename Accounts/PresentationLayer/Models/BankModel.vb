@@ -7,7 +7,7 @@ Namespace PresentationLayer.Models
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class BankModel
-        Implements IModelNew
+        'Implements IModelNew
 
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32

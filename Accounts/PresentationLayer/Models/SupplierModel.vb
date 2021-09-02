@@ -7,7 +7,7 @@ Namespace PresentationLayer.Models
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class SupplierModel
-        Implements IModelNew
+        'Implements IModelNew
 
         Public Property AccountStatus As String
         Public Property Active As Boolean
