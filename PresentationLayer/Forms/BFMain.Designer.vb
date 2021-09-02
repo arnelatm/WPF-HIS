@@ -28,7 +28,7 @@ Partial Class BfMain
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BfMain))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BFMain))
         Me.LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
         Me._MBDeletionNotAllowed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
         Me._MBAddRecordFailed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
@@ -56,8 +56,6 @@ Partial Class BfMain
         Me.TranslatorDAC = New AATM.Libraries.MessagingLibrary.Dac()
         Me.AppDataDAC = New AATM.Libraries.MessagingLibrary.Dac()
         Me.StoreCaptions1 = New AATM.Libraries.MessagingLibrary.StoreCaptions()
-        Me.BackgroundWorker2 = New System.ComponentModel.BackgroundWorker()
-        Me.BackgroundWorker3 = New System.ComponentModel.BackgroundWorker()
         Me.SuspendLayout()
         '
         'LocalizableContent1
@@ -219,11 +217,12 @@ Partial Class BfMain
         '
         Me.AppDataDAC.Cs = ""
         '
-        'BfMain
+        'BFMain
         '
         Me.ClientSize = New System.Drawing.Size(1114, 709)
-        Me.Name = "BfMain"
+        Me.Name = "BFMain"
         Me.Text = "Base Form"
+        Me.ViewDisplayName = "Main"
         Me.ResumeLayout(False)
 
     End Sub
@@ -254,6 +253,4 @@ Partial Class BfMain
     Protected WithEvents StoreCaptions1 As StoreCaptions
     Public WithEvents TranslatorDAC As Dac
     Public WithEvents AppDataDAC As Dac
-    Friend WithEvents BackgroundWorker2 As BackgroundWorker
-    Friend WithEvents BackgroundWorker3 As BackgroundWorker
 End Class

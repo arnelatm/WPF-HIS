@@ -1,7 +1,7 @@
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class PostPettyCash
-        Inherits AATM.PresentationLayer.Forms.BfMainNew
+        Inherits AATM.PresentationLayer.Forms.BFMain
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()> _

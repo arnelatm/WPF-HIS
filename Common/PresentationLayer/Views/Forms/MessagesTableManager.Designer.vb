@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views.Forms
 
     <DesignerGenerated()>
     Partial Class MessagesTableManager
-        Inherits BfMainNew
+        Inherits BFMain
 
         'Form overrides dispose to clean up the component list.
         <DebuggerNonUserCode()>
