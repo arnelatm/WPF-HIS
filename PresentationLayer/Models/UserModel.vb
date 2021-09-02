@@ -7,7 +7,7 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.ServicesLayer.Services
 
 Public Class UserModel
-    Inherits Model
+    'Inherits Model
 
     Public Property IdNo As Int32
     Public Property UserName As String

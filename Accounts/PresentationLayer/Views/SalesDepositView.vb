@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 
@@ -16,7 +17,7 @@ Namespace PresentationLayer.Views
         Private _actualBankCharge As Decimal = 0D
 
         'Private _saleAmount As Decimal = 0D
-        Private ReadOnly _modelDepositType As New ModelAccounts("DepositType")
+        Private ReadOnly _modelDepositType As New AccountsService("DepositType")
 
         Public Property ActualBankCharge As Decimal Implements ISalesDepositView.ActualBankCharge
             Get
