@@ -14,6 +14,10 @@ Namespace Services
             DataDao = DefaultFieldValueDao
         End Sub
 
+        Public Function GetDefaultFieldValues(systemViewName As String) 'As List(Of DefaultFieldValueModel)
+            Return DefaultFieldValueDao.GetTableDefaultValues(systemViewName)
+        End Function
+
     End Class
 
 End Namespace

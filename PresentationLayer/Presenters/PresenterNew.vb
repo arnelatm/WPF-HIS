@@ -14,6 +14,7 @@ Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 Imports AATM.ServicesLayer.Services
+Imports AutoMapper
 Imports KellermanSoftware.CompareNetObjects
 
 ''' <summary>
@@ -47,6 +48,9 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
     Protected OriginalModel
     Protected SortOrderKey As String = "IdNo"
     Protected DataFilter As String = Nothing
+    Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
+    Protected DefaultFieldValueService As New DefaultFieldValueService
+    Public Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
     Private ReadOnly _debugSwitch As Byte = 0
     Private ReadOnly _tableColumnPropertyList As List(Of TblColPropModel)
     Private _addMode As Boolean = False
@@ -74,8 +78,64 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
             End If
             InitializeTreeViewIfPresent()
             OriginalModel = Activator.CreateInstance(GetType(TM))
+            Dim systemViewName As String
+            If DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName IsNot Nothing Then
+                systemViewName = DirectCast(itemView, AATM.Libraries.CBaseControlsLibrary.CForm).ViewDisplayName.Trim()
+                If systemViewName Is Nothing Or systemViewName = "" Then
+                    systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+                End If
+            Else
+                systemViewName = DirectCast(itemView, System.Windows.Forms.Control).Name.Trim()
+            End If
+            Dim data As List(Of DefaultFieldValue) = DefaultFieldValueService.GetDefaultFieldValues(systemViewName)
+            ViewDefaultFieldValues = New List(Of DefaultFieldValueModel)
+            GlobalVariables.Mapper.Map(data, ViewDefaultFieldValues)
         End If
         WithTreeView = True
+    End Sub
+
+    Public Sub MakeDefaultValues()
+        For Each item In ViewDefaultFieldValues
+            Select Case item.DataType
+                Case DataTypeSelection.StringType
+                    Invoker.SetProperty(View, item.FieldName, item.DefaultValue)
+                Case DataTypeSelection.AccountType
+                    Invoker.SetProperty(View, item.FieldName, item.DefaultValue)
+                Case DataTypeSelection.IntegerType
+                    Invoker.SetProperty(View, item.FieldName, CInt(item.DefaultValue))
+                Case DataTypeSelection.BooleanType
+                    Invoker.SetProperty(View, item.FieldName, CBool(item.DefaultValue))
+                Case DataTypeSelection.SingleType
+                    Invoker.SetProperty(View, item.FieldName, CSng(item.DefaultValue))
+                Case DataTypeSelection.DoubleType
+                    Invoker.SetProperty(View, item.FieldName, CDbl(item.DefaultValue))
+                Case DataTypeSelection.DecimalType
+                    Invoker.SetProperty(View, item.FieldName, CDec(item.DefaultValue))
+                Case DataTypeSelection.LongType
+                    Invoker.SetProperty(View, item.FieldName, CLng(item.DefaultValue))
+                Case DataTypeSelection.DateType
+                    If item.DefaultValue = "today" Then
+                        Invoker.SetProperty(View, item.FieldName, Today())
+                    ElseIf item.DefaultValue = "yesterday" Then
+                        Invoker.SetProperty(View, item.FieldName, DateTime.Now.AddDays(-1))
+                    ElseIf item.DefaultValue = "tomorrow" Then
+                        Invoker.SetProperty(View, item.FieldName, DateTime.Now.AddDays(1))
+                    Else
+                        Invoker.SetProperty(View, item.FieldName, CDate(item.DefaultValue))
+                    End If
+                Case DataTypeSelection.ShortType
+                    Invoker.SetProperty(View, item.FieldName, CShort(item.DefaultValue))
+                Case DataTypeSelection.UIntegerType
+                    Invoker.SetProperty(View, item.FieldName, CUInt(item.DefaultValue))
+                Case DataTypeSelection.ULongType
+                    Invoker.SetProperty(View, item.FieldName, CULng(item.DefaultValue))
+                Case DataTypeSelection.UShortType
+                    Invoker.SetProperty(View, item.FieldName, CUShort(item.DefaultValue))
+                Case Else
+                    MessageBox.Show($"Default Value Datatype Conversion for Field " & item.FieldName & " in form/view " & item.SystemViewName & " conversion not handled")
+            End Select
+        Next item
+        Return
     End Sub
 
     Private Sub InitializeTreeViewIfPresent()
@@ -2309,6 +2369,26 @@ Public MustInherit Class PresenterNew(Of TV As IView, TM As New)
 #End Region
 
 End Class
+
+Public Enum DataTypeSelection
+    BooleanType = 0
+    ByteType = 1
+    AccountType = 2
+    DateType = 3
+    DecimalType = 4
+    DoubleType = 5
+    IntegerType = 6
+    LongType = 7
+    ObjectType = 8
+    SByteType = 9
+    ShortType = 10
+    SingleType = 11
+    StringType = 12
+    UIntegerType = 13
+    ULongType = 14
+    UserDefinedType = 15
+    UShortType = 16
+End Enum
 
 'Public Class X
 '    Public str As String

@@ -70,8 +70,9 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 SetLanguageChangeButtons()
             End If
-            Presenter = New UserPresenter(Of UserModel)(Me)
             SetupMapper()
+            Presenter = New UserPresenter(Of UserModel)(Me)
+
             'Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
             'builder.RegisterType(Of RecurringPayElementPresenter)().[As](Of ISalaryLoanSchedulePresenter)()
             'Dim x = builder.Build()

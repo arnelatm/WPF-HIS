@@ -42,8 +42,7 @@ Namespace AdoNet
             Return Db.Update(sql, Take(defaultFieldValue))
         End Function
 
-        Public Function GetDefaultFieldValues(systemViewName As String) As List(Of DefaultFieldValue) _
-            Implements IDefaultFieldValueDao.GetTableDefaultValues
+        Public Function GetDefaultFieldValues(systemViewName As String) As List(Of DefaultFieldValue) Implements IDefaultFieldValueDao.GetTableDefaultValues
             Dim sql As String =
                     " SELECT IdNo, SystemViewName, SystemViewNameAra , FieldName, DataType, Length, DecimalPart, DefaultValue, LinkedTable, LinkedField " &
                     "   FROM [DefaultFieldValue_View] where SystemViewName = '" & systemViewName & "'"

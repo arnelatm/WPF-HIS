@@ -28,7 +28,7 @@ Namespace Services
 
         Function GetAll(ByRef Optional sortKey As String = Nothing) As Object
 
-        Function GetDefaultFieldValues(ByVal tableName As String)
+        'Function GetDefaultFieldValues(ByVal tableName As String)
 
         Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String
 
