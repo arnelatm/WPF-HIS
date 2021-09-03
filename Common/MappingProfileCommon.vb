@@ -6,7 +6,6 @@ Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AutoMapper
-Imports DefaultFieldValue = AATM.Common.BusinessLayer.DefaultFieldValue
 
 Public Class MappingProfileCommon
     Inherits Profile
@@ -16,8 +15,6 @@ Public Class MappingProfileCommon
         CreateMap(Of BranchModel, IBranchView).ReverseMap()
         CreateMap(Of Country, CountryModel).ReverseMap()
         CreateMap(Of CountryModel, ICountryView).ReverseMap()
-        CreateMap(Of DefaultFieldValue, DefaultFieldValueModel).ReverseMap()
-        CreateMap(Of DefaultFieldValueModel, IDefaultFieldValueView).ReverseMap()
         CreateMap(Of Department, DepartmentModel).ReverseMap()
         CreateMap(Of DepartmentModel, IDepartmentView).ReverseMap()
         CreateMap(Of GroupAccess, GroupAccessModel).ReverseMap()
@@ -52,6 +49,8 @@ Public Class MappingProfileCommon
         CreateMap(Of TranslatedMessagesModel, ITranslatedMessagesView)().ForMember(Function(dest) dest.IdNo, Sub(opt) opt.MapFrom(Function(src) src.IdNo))
         CreateMap(Of User, UserModel)().ReverseMap()
         CreateMap(Of UserModel, IUserView).ReverseMap()
+        CreateMap(Of DefaultFieldValue, DefaultFieldValueModel).ReverseMap()
+        CreateMap(Of DefaultFieldValueModel, IDefaultFieldValueView).ReverseMap()
 
         'destination >= destination.Value, opt >= opt.NullSubstitute("Other Value")));;
 

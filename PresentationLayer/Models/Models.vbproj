@@ -67,6 +67,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultFieldValueModel.vb" />
     <Compile Include="GroupAccessModel.vb" />
     <Compile Include="IModelTblColProp.vb" />
     <Compile Include="ModelTblColProp.vb" />

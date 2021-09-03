@@ -135,9 +135,9 @@ Namespace Services
             Return DataBo
         End Function
 
-        Public Function GetDefaultFieldValues(ByVal systemViewName As String) Implements IService.GetDefaultFieldValues
-            Return DefaultFieldValueDao.GetTableDefaultValues(systemViewName)
-        End Function
+        'Public Function GetDefaultFieldValues(ByVal systemViewName As String) Implements IService.GetDefaultFieldValues
+        '    Return DefaultFieldValueDao.GetTableDefaultValues(systemViewName)
+        'End Function
 
         Public Function CreateInstance(ByVal strFullyQualifiedName As String, Optional instanceParameters As Object = Nothing) As Object
             Dim type As Type = Type.[GetType](strFullyQualifiedName)

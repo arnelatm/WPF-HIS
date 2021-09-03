@@ -57,9 +57,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("BooleanType")>  _
-        Public Property PayrollComputation() As Global.AATM.Common.DataTypeSelection
+        Public Property PayrollComputation() As AATM.PresentationLayer.Presenters.DataTypeSelection
             Get
-                Return CType(Me("PayrollComputation"),Global.AATM.Common.DataTypeSelection)
+                Return CType(Me("PayrollComputation"), AATM.PresentationLayer.Presenters.DataTypeSelection)
             End Get
             Set
                 Me("PayrollComputation") = value

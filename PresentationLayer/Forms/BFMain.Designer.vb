@@ -28,7 +28,7 @@ Partial Class BfMain
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BFMain))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BfMain))
         Me.LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
         Me._MBDeletionNotAllowed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
         Me._MBAddRecordFailed = New AATM.Libraries.LocalizationUtilities.LocalizableMessageBox()
@@ -56,7 +56,7 @@ Partial Class BfMain
         Me.TranslatorDAC = New AATM.Libraries.MessagingLibrary.Dac()
         Me.AppDataDAC = New AATM.Libraries.MessagingLibrary.Dac()
         Me.StoreCaptions1 = New AATM.Libraries.MessagingLibrary.StoreCaptions()
-        Me.SuspendLayout()
+        Me.SuspendLayout
         '
         'LocalizableContent1
         '
@@ -126,7 +126,7 @@ Partial Class BfMain
         '
         Me._MBFoundLastRecStartOnFirst.Buttons = System.Windows.Forms.MessageBoxButtons.YesNo
         Me._MBFoundLastRecStartOnFirst.Caption = "Last Record Found."
-        Me._MBFoundLastRecStartOnFirst.Text = "This is already the last matching record! Do you want to start search from the fi" &
+        Me._MBFoundLastRecStartOnFirst.Text = "This is already the last matching record! Do you want to start search from the fi"& _ 
     "rst record?"
         '
         '_MBSaveChangesBeforeMoving
@@ -134,8 +134,8 @@ Partial Class BfMain
         Me._MBSaveChangesBeforeMoving.Buttons = System.Windows.Forms.MessageBoxButtons.YesNoCancel
         Me._MBSaveChangesBeforeMoving.Caption = "Changes Made"
         Me._MBSaveChangesBeforeMoving.DefaultButton = System.Windows.Forms.MessageBoxDefaultButton.Button2
-        Me._MBSaveChangesBeforeMoving.Text = "Changes have been made to this record.  Press [Yes] to save changes before moving" &
-    ", press [No] to Abandon changes, or press [Cancel] to continue editing record? S" &
+        Me._MBSaveChangesBeforeMoving.Text = "Changes have been made to this record.  Press [Yes] to save changes before moving"& _ 
+    ", press [No] to Abandon changes, or press [Cancel] to continue editing record? S"& _ 
     "ave Changes ?"
         '
         '_MBFirstRecordAlready
@@ -153,7 +153,7 @@ Partial Class BfMain
         '
         Me._MBLastRecordReachedStartFromBeginning.Buttons = System.Windows.Forms.MessageBoxButtons.YesNo
         Me._MBLastRecordReachedStartFromBeginning.Caption = "Last Record Found."
-        Me._MBLastRecordReachedStartFromBeginning.Text = "This is already the last matching record. Do you want to search again from the st" &
+        Me._MBLastRecordReachedStartFromBeginning.Text = "This is already the last matching record. Do you want to search again from the st"& _ 
     "art?"
         '
         '_MBDeleteRecordFailed
@@ -186,7 +186,7 @@ Partial Class BfMain
         '_MBUniqueConstraintViolated
         '
         Me._MBUniqueConstraintViolated.Caption = "Duplicate Entries."
-        Me._MBUniqueConstraintViolated.Text = "A record with the value <{0}> entered in field <{1}> already exists on file. Dupl" &
+        Me._MBUniqueConstraintViolated.Text = "A record with the value <{0}> entered in field <{1}> already exists on file. Dupl"& _ 
     "icates not allowed!"
         Me._MBUniqueConstraintViolated.Type = AATM.Libraries.LocalizationUtilities.MessageBoxType.[Error]
         '
@@ -204,7 +204,7 @@ Partial Class BfMain
         '
         'ImageList1
         '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"),System.Windows.Forms.ImageListStreamer)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageList1.Images.SetKeyName(0, "openbriefcase.png")
         Me.ImageList1.Images.SetKeyName(1, "TreeNode.ico")
@@ -217,15 +217,15 @@ Partial Class BfMain
         '
         Me.AppDataDAC.Cs = ""
         '
-        'BFMain
+        'BfMain
         '
         Me.ClientSize = New System.Drawing.Size(1114, 709)
-        Me.Name = "BFMain"
+        Me.Name = "BfMain"
         Me.Text = "Base Form"
-        Me.ViewDisplayName = "Main"
-        Me.ResumeLayout(False)
+        Me.ViewDisplayName = ""
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
     Friend WithEvents ImageList1 As ImageList
     Friend WithEvents _MBDeletionNotAllowed As LocalizableMessageBox
     Friend WithEvents _MBAddRecordFailed As LocalizableMessageBox
