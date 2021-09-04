@@ -89,9 +89,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Services\DefaultFieldValueService.vb" />
-    <Compile Include="Services\IDataService.vb" />
     <Compile Include="Services\IRepositories.vb" />
-    <Compile Include="Services\IServiceNew.vb" />
     <Compile Include="Services\IService.vb" />
     <Compile Include="Services\ITblColPropService.vb" />
     <Compile Include="Services\Service.vb" />

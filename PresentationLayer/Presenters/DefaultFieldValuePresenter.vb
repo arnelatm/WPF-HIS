@@ -2,7 +2,7 @@
 Imports AATM.ServicesLayer.Services
 
 Public Class DefaultFieldValuePresenter(Of TM As New)
-    Inherits PresenterNew(Of IDefaultFieldValueView, TM)
+    Inherits Presenter(Of IDefaultFieldValueView, TM)
 
     Public Sub New(view As IDefaultFieldValueView)
         MyBase.New(view)

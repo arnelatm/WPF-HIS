@@ -8,7 +8,7 @@ Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 
 Public Class UserPresenter(Of TM As New)
-    Inherits PresenterNew(Of IUserView, TM)
+    Inherits Presenter(Of IUserView, TM)
 
     Public ParentViewList As List(Of TM)
     Private serviceLogin As New ServiceLogin

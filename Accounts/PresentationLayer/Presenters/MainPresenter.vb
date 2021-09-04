@@ -6,7 +6,7 @@ Imports AATM.ServicesLayer.Services
 Namespace PresentationLayer.Presenters
 
     Public Class MainPresenter(Of TM As New)
-        Inherits PresenterNew(Of IUserView, TM)
+        Inherits Presenter(Of IUserView, TM)
 
         '''' <summary>
         ''''     Constructor.

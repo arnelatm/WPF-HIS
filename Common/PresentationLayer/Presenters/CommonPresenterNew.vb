@@ -10,7 +10,7 @@ Imports AutoMapper
 Namespace PresentationLayer.Presenters
 
     Public MustInherit Class CommonPresenterNew(Of TV As IView, TM As New)
-        Inherits PresenterNew(Of TV, TM)
+        Inherits Presenter(Of TV, TM)
 
         'Shared Sub New()
         '    DefaultFieldValueService = New Service("DefaultFieldValue")
