@@ -195,7 +195,6 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
-    <Compile Include="BusinessLayer\Customer1.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
     <Compile Include="BusinessLayer\EmployeeLeave.vb" />
@@ -1393,9 +1392,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Marcelo.config" />
-    <None Include="appIspadmin2.config" />
+    <None Include="app.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />
