@@ -372,9 +372,10 @@ Namespace PresentationLayer.Views.Forms
             CreateEnumDataSource(Of PaymentMethodSelection)(cacPaymentMethod)
             CreateEnumDataSource(Of AccountStatusSelection)(cacAccountStatus)
             CreateDataSource("Country", cacCountryCode)
-            CreateDataSource("Bank", cacCountryCode)
+            CreateDataSource("Bank", cacBankIdNo)
             CreateDataSource("DiscountScheme", cacDiscountSchemeIdNo)
             CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.AccountsReceivable)}, cacArAccountIdNo)
+            CreateDataSource("Account", cacRevAccountIdNo, "DetailAccount=1")
         End Sub
 
         'Private Sub CreateArDataSource()

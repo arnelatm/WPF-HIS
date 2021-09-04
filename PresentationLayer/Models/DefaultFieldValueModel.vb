@@ -1,10 +1,9 @@
 ﻿' DefaultFieldValue business object as seen by the Service client.
 Public Class DefaultFieldValueModel
-
-    Public Property Errors As List(Of String)
     Public Property DataType As Byte
     Public Property DecimalPart As Byte
     Public Property DefaultValue As String
+    Public Property Errors As List(Of String)
     Public Property FieldName As String
     Public Property IdNo As Int16
     Public Property Length As Byte

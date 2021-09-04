@@ -32,7 +32,6 @@ Public NotInheritable Class Invoker
     Public Shared Function SetProperty(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
         ' ReSharper disable once VBPossibleMistakenCallToGetType.2
         Return oObject.GetType().InvokeMember(sName, SetPublicNonPublicPropertyFieldFlags, Nothing, oObject, yArguments)
-
     End Function
 
     Public Shared Function SetField(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object

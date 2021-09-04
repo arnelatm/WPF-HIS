@@ -7,9 +7,9 @@ Public Class DefaultFieldValuePresenter(Of TM As New)
     Public Sub New(view As IDefaultFieldValueView)
         MyBase.New(view)
         Service = New Service("DefaultFieldValue")
-        TableName = "DefaultFieldValue"
-        SortOrderKey = "ViewName + FieldName"
-        TreeViewMainField = "ViewName"
+        TableName = "DefaultFieldValue_View"
+        SortOrderKey = "SystemViewName + FieldName"
+        TreeViewMainField = "SystemViewName"
         TreeViewSecondaryField = "FieldName"
     End Sub
 
