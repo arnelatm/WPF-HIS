@@ -3,7 +3,7 @@ Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 
 Public Class SecurityObjectPresenter(Of TM As New)
-    Inherits PresenterNew(Of ISecurityObjectView, TM)
+    Inherits Presenter(Of ISecurityObjectView, TM)
 
     Public Sub New(view As ISecurityObjectView)
         MyBase.New(view)

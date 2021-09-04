@@ -9,7 +9,7 @@ Imports AATM.PresentationLayer.Views.Interfaces
 Imports AATM.ServicesLayer.Services
 
 Public Class SecurityGroupPresenter(Of TM As New)
-    Inherits PresenterNew(Of ISecurityGroupView, TM)
+    Inherits Presenter(Of ISecurityGroupView, TM)
     Implements ISubscriber(Of DataChanged)
 
     Protected DtInsertTable As New DataTable

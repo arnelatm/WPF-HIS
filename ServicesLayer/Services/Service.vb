@@ -21,7 +21,8 @@ Namespace Services
         Protected Shared ReadOnly Provider As String = ConfigurationManager.AppSettings.Get("DataProvider")
         Protected Shared ReadOnly Factory As IDaoFactory = DaoFactories.GetFactory(Provider)
         Protected Shared ReadOnly BaseDao As IBaseDao = Factory.BaseDao
-        Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
+
+        'Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
 
         'Protected Shared ReadOnly DaoFactory As IDaoFactory = DaoFactories.GetFactory(Provider)
