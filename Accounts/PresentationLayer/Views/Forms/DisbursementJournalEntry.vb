@@ -25,6 +25,10 @@ Namespace PresentationLayer.Views.Forms
         Private _bankTransfer As Boolean
         Private _tableName As String = ""
 
+        Public Event PrintCheck() Implements IDisbursementJournalView.PrintCheck
+
+        Public Event AutoApplyAmount(bsDjOiItem As BindingSource) Implements IDisbursementJournalView.AutoApplyAmount
+
         Public Sub New(ByVal tableName As String)
             MyBase.New()
             ' This call is required by the designer.
@@ -525,14 +529,16 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateOpenInvoicesDisplay()
-            If OpenInvoiceMode Then
-                If Presenter.AddMode Or cboPayeeIdNo.ValueChanged() Then
-                    DjOiItems.Clear()
+            If Presenter.EditMode Or Presenter.AddMode Then
+                If OpenInvoiceMode Then
+                    If Presenter.AddMode Or cboPayeeIdNo.ValueChanged() Then
+                        DjOiItems.Clear()
+                    End If
+                    bsDjOiItems.DataSource = Presenter.GetSupplierOpenInvoices(DjOiItems)
+                    bsDjOiItems.ResetBindings(True)
+                    UpdateOiTotals()
+                    'UpdateVatNumber()
                 End If
-                bsDjOiItems.DataSource = Presenter.GetSupplierOpenInvoices(DjOiItems)
-                bsDjOiItems.ResetBindings(True)
-                UpdateOiTotals()
-                'UpdateVatNumber()
             End If
         End Sub
 
@@ -564,7 +570,9 @@ Namespace PresentationLayer.Views.Forms
                     bsDjOiItems.Clear()
                 End If
             Else
-                cboPayeeIdNo.SelectedIndex = -1
+                If cboPaymentType.Text = $"Other" Then
+                    cboPayeeIdNo.SelectedIndex = -1
+                End If
             End If
             UpdateFirstLine()
             UpdateDisplay()
@@ -630,67 +638,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DgvJi_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
-            With DataGridViewJournalItems
-                If .CurrentRow IsNot Nothing Then
-                    Dim nIndex = .CurrentRow.Index
-                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                        Case $"dgvaccountidno"
-                            If DirectCast(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell).CellEditingControl IsNot Nothing Then
-                                'Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CaDgvComboboxCell).CellEditingControl.GetValue()
-                                Dim accountId = DirectCast(DataGridViewJournalItems.CurrentCell, CDgvComboBoxCell).CellEditingControl.GetValue()
-                                If DataGridViewJournalItems.CurrentRow.Index = DataGridViewJournalItems.NewRowIndex Then
-                                    bsJournalItems.AddNew()
-                                    JournalItems(nIndex).AccountIdNo = accountId
-                                    ' adding a new row to the bindingsource adds a new empty row at the end with null values
-                                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                                    bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
-                                End If
-                                If JournalItems.Count() - 1 <= nIndex Then
-                                    Presenter.MakePayTypeAndSpecialAccount(JournalItems(nIndex), accountId)
-                                    UpdateInputVatAmount()
-                                    bsJournalItems.ResetItem(nIndex)
-                                End If
-                                DataGridViewJournalItems.Refresh()
-                            End If
-                        Case $"dgvdebit"
-                            Presenter.MakeDebitAmount(JournalItems(nIndex), .CurrentCell.Value)
-                            UpdateJiTotals()
-                            UpdateInputVatAmount()
-                            bsJournalItems.ResetItem(nIndex)
-                            SendKeys.Send("{TAB}")
-                        Case $"dgvcredit"
-                            Presenter.MakeCreditAmount(JournalItems(nIndex), .CurrentCell.Value)
-                            UpdateJiTotals()
-                            UpdateInputVatAmount()
-                            bsJournalItems.ResetItem(nIndex)
-                        Case $"dgvnotes"
-                            SendKeys.Send("{DOWN}")
-                    End Select
-                End If
-            End With
+            ProcessCellEndEdit(DataGridViewJournalItems, bsJournalItems)
         End Sub
 
         Private Sub DjOiItemDgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDjOiItems.CellEndEdit
-            With DataGridViewDjOiItems
-                If .CurrentRow IsNot Nothing Then
-                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
-                        Case $"dgvamount"
-                            Dim selectedRow As DjOiItemView
-                            Dim amt = .CurrentCell.Value
-                            selectedRow = DataGridViewDjOiItems.Rows(.CurrentCell.RowIndex).DataBoundItem
-                            selectedRow.Balance = selectedRow.PreviousBalance - amt - selectedRow.DiscountTaken
-                            UpdateOiTotals()
-                        Case $"dgvdiscounttaken"
-                            Dim selectedRow As DjOiItemView
-                            Dim amt = .CurrentCell.Value
-                            selectedRow = DataGridViewDjOiItems.Rows(.CurrentCell.RowIndex).DataBoundItem
-                            selectedRow.Balance = selectedRow.PreviousBalance - selectedRow.Amount - amt
-                            UpdateOiTotals()
-                        Case $"dgvbalance"
-                            SendKeys.Send("{DOWN}")
-                    End Select
-                End If
-            End With
+            ProcessCellEndEdit(DataGridViewDjOiItems, bsDjOiItems)
         End Sub
 
         Private Sub UpdateInputVatAmount()
@@ -728,7 +680,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UpdateJiTotals()
+        Public Sub UpdateJiTotals()
             If _jiFooter IsNot Nothing Then
                 _jiFooter.CalculateTotals()
                 txtTotalDebits.Text = _jiFooter.Value("dgvDebit")
@@ -758,7 +710,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
-            Presenter.PrintCheck()
+            RaiseEvent PrintCheck()
         End Sub
 
         Private Sub btnPrintPcReplenishment_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintPcReplenishment.ClickButtonArea
@@ -766,8 +718,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
-            Presenter.AutoApplyAmount()
-            DataGridViewDjOiItems.Refresh()
+            RaiseEvent AutoApplyAmount(bsDjOiItems)
+            bsDjOiItems.ResetBindings(False)
+            'DataGridViewDjOiItems.Refresh()
             UpdateOiTotals()
         End Sub
 

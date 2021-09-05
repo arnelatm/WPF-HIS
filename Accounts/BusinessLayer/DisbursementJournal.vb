@@ -64,6 +64,13 @@ Namespace BusinessLayer
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
 
+        Public Event PrintCheck()
+
+        'Public Event PrintPcReplenishment()
+        'Public Event AutoApplyAmount()
+        'Public Event UpdateFirstLine()
+        'Public Event AddSupplierOpenInvoices()
+
     End Class
 
 End Namespace

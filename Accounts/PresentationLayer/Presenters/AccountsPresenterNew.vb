@@ -99,11 +99,13 @@ Namespace PresentationLayer.Presenters
                 journalItem.JournalIdNo = 0
                 journalItem.SpecialAccount = Nothing
                 journalItem.PayeeType = Nothing
+                journalItem.AccountName = ""
             Else
                 account = GetAccount(accountIdNo)
                 journalItem.AccountIdNo = accountIdNo
                 journalItem.SpecialAccount = account.SpecialAccount
                 journalItem.PayeeType = account.PayeeType
+                journalItem.AccountName = account.AccountName
             End If
         End Sub
 
