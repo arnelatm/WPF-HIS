@@ -35,9 +35,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property DjOiItems As List(Of DjOiItemView)
 
         Event PrintCheck()
-
         Event AutoApplyAmount(bsDjOiItem As BindingSource)
-
+        Event AddSupplierOpenInvoices()
+        Event UserDeletedRow()
+        Event PrintPcReplenishment()
+        Event FirstLineUpdateNeeded()
+        Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
     End Interface
 
 End Namespace
