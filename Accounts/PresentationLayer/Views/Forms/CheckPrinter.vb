@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
@@ -18,6 +17,10 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _accountsByCode
 
+        Public Event PrintCheck() Implements IDisbursementJournalView.PrintCheck
+
+        Public Event AutoApplyAmount(bsDjOiItem As BindingSource) Implements IDisbursementJournalView.AutoApplyAmount
+
         Public Sub New(ByVal tableName As String)
             MyBase.New()
             ' This call is required by the designer.
@@ -28,12 +31,13 @@ Namespace PresentationLayer.Views.Forms
             'MainTableName = tableName
             'MyPresenter = New DisbursementJournalPresenter(Me, "CdJournal")
             'MyPresenter.JournalCode = "CD"
-            Me.Text = Messaging.TranslateCaption("Check Disbursement Journal")
+            Text = Messaging.TranslateCaption("Check Disbursement Journal")
             btnPrintCheck.Visible = True
             'Presenter = MyPresenter
             'SortOrderKey = "IdNo"
             FirstControl = cboPaymentType
             _nfi.NumberDecimalDigits = 2
+
         End Sub
 
 #Region "Field Items"
@@ -190,14 +194,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.SelectionChangeCommitted, cboPaymentType.Validated
-            If cboPaymentType.SelectedValue <> cboPaymentType.SelectedValue Then
-                SetPayeeDataSource(PaymentType)
-            End If
+            SetPayeeDataSource(PaymentType)
             txtPayeeName.Text = cboPayeeIdNo.Text
             ShowPayee()
         End Sub
 
-        Private Sub btnPrintCheck_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
+        Private Sub btnPrintCheck_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
             Dim checkAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture

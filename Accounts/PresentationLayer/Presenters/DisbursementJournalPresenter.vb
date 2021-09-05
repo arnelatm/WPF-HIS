@@ -7,11 +7,13 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
 
     Public Class DisbursementJournalPresenter(Of TM As New)
         Inherits TransactionsPresenterNew(Of IDisbursementJournalView, TM)
+        Implements ISubscriber(Of DataChanged)
 
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
         Protected DtInsertTable As New DataTable
@@ -80,6 +82,9 @@ Namespace PresentationLayer.Presenters
                                              {"IdNo", GetType(Int32)},
                                              {"Sequence", GetType(Int16)}
                                              })
+
+            AddHandler view.PrintCheck, AddressOf OnPrintCheck
+            AddHandler view.AutoApplyAmount, AddressOf OnAutoApplyAmount
 
         End Sub
 
@@ -345,24 +350,24 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub AutoApplyAmount()
+        Public Sub OnAutoApplyAmount(bsDjOiItems As BindingSource)
             Dim amountToApply = View.Amount
             'apply the negative values first
-            For Each item In View.DjOiItems
+            For Each item In bsDjOiItems
                 If item.PreviousBalance <= 0 Then
                     amountToApply += item.PreviousBalance * -1
                     item.Amount = item.PreviousBalance
                     item.DiscountTaken = 0D
                     item.Balance = 0D
-                End If
-            Next item
-            For Each item In View.DjOiItems
-                If amountToApply = 0D Then
+                Else
                     item.Amount = 0D
                     item.DiscountTaken = 0D
                     item.Balance = item.PreviousBalance
-                Else
-                    If item.PreviousBalance <= amountToApply Then
+                End If
+            Next item
+            For Each item In bsDjOiItems
+                If item.Balance > 0D Then
+                    If item.Balance <= amountToApply Then
                         amountToApply -= item.PreviousBalance
                         item.Amount = item.PreviousBalance
                         item.DiscountTaken = 0D
@@ -924,7 +929,7 @@ Namespace PresentationLayer.Presenters
             Return item
         End Function
 
-        Public Sub PrintCheck()
+        Public Sub OnPrintCheck()
             Dim checkAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
@@ -1013,6 +1018,39 @@ Namespace PresentationLayer.Presenters
             ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
             View.PaymentType = dataModel.PaymentType
             CallByName(View, "setPayeeDataSource", CallType.Method, View.PaymentType)
+        End Sub
+
+        Public Sub OnDisbursementJournalChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+            With eventType.BindingSource
+                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+                    'Dim nIndex = eventType.BindingSource.Current.Index
+                    Select Case eventType.PropertyName
+                        Case $"AccountIdNo"
+                            Dim accountId = eventType.BindingSource.Current.AccountIdNo
+                            MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
+                            UpdateInputVatAmount(eventType.BindingSource.DataSource)
+                        Case $"Debit"
+                            MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
+                            CallByName(View, "UpdateJiTotals", CallType.Method)
+                            UpdateInputVatAmount(eventType.BindingSource.DataSource)
+                            SendKeys.Send("{TAB}")
+                        Case $"Credit"
+                            MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
+                            CallByName(View, "UpdateJiTotals", CallType.Method)
+                            UpdateInputVatAmount(eventType.BindingSource.DataSource)
+                        Case $"Notes"
+                            SendKeys.Send("{DOWN}")
+                        Case $"Amount"
+                            eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.DiscountTaken
+                            CallByName(View, "UpdateOiTotals", CallType.Method)
+                        Case $"DiscountTaken"
+                            eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.Amount
+                            CallByName(View, "UpdateOiTotals", CallType.Method)
+                        Case $"Balance"
+                            SendKeys.Send("{DOWN}")
+                    End Select
+                End If
+            End With
         End Sub
 
     End Class

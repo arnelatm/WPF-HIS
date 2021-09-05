@@ -33,6 +33,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property VatNumber As String
         Property JournalItems As List(Of JournalItemView)
         Property DjOiItems As List(Of DjOiItemView)
+
+        Event PrintCheck()
+
+        Event AutoApplyAmount(bsDjOiItem As BindingSource)
+
     End Interface
 
 End Namespace
