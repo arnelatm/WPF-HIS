@@ -49,7 +49,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo As Object) As List(Of EmployeePayElement) Implements IDaoGetRecordByIdNo(Of EmployeePayElement).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT Top 1 " & FieldList &
+                    "SELECT Top 1 " & FieldList &
                     " FROM [EmployeePayElement_View]" &
                     " WHERE IdNo = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
@@ -81,8 +81,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetDaoRecord(Optional filter As String = Nothing) As EmployeePayElement Implements IDaoGetRecord(Of EmployeePayElement).GetDaoRecord
-            Dim sql As String = "SELECT " &
-                                FieldList &
+            Dim sql As String = "SELECT " & FieldList &
                                 " FROM [EmployeePayElement_View]" &
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
             Dim x As EmployeePayElement = Db.Read(sql, Make).FirstOrDefault()

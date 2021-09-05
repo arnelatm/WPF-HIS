@@ -347,7 +347,15 @@ Namespace PresentationLayer.Presenters
 
         Public Sub AutoApplyAmount()
             Dim amountToApply = View.Amount
-            'Dim appliedAmount As Decimal = 0D
+            'apply the negative values first
+            For Each item In View.DjOiItems
+                If item.PreviousBalance <= 0 Then
+                    amountToApply += item.PreviousBalance * -1
+                    item.Amount = item.PreviousBalance
+                    item.DiscountTaken = 0D
+                    item.Balance = 0D
+                End If
+            Next item
             For Each item In View.DjOiItems
                 If amountToApply = 0D Then
                     item.Amount = 0D

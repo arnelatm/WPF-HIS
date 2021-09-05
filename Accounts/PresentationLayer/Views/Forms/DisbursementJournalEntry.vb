@@ -49,7 +49,7 @@ Namespace PresentationLayer.Views.Forms
                 dtpCheckDate.Visible = False
             End If
             FirstControl = cboPaymentType
-            Height = 655
+            Height = 710
         End Sub
 
         'Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
