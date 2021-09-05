@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -85,7 +86,11 @@ Namespace PresentationLayer.Presenters
 
             AddHandler view.PrintCheck, AddressOf OnPrintCheck
             AddHandler view.AutoApplyAmount, AddressOf OnAutoApplyAmount
-
+            AddHandler view.AddSupplierOpenInvoices, AddressOf OnAddSupplierOpenInvoices
+            AddHandler view.UserDeletedRow, AddressOf OnUserDeletedRow
+            AddHandler view.PrintPcReplenishment, AddressOf OnPrintPcReplenishment
+            AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
+            AddHandler view.SetSupplierVatNumber, AddressOf SetSupplierVatNumber
         End Sub
 
         Private Function GetAdvancesToSupplierAccountIdNo()
@@ -199,14 +204,13 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 And IsEmpty(View.ReferenceNo) Then
                 retVal = UpdateGlReferenceNumber()
             End If
-            If retVal >= 0 AndAlso
-               (View.PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Or View.PaymentType = EnumToCode(PaymentTypeSelection.Supplier)) AndAlso
-               Not IsEmpty(View.VatNumber) Then
+            If retVal >= 0 AndAlso (View.PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Or View.PaymentType = EnumToCode(PaymentTypeSelection.Supplier)) _
+                           AndAlso Not IsEmpty(View.VatNumber) Then
                 Service.UpdateVatNumber(View.VatNumber, View.PayeeIdNo)
             End If
         End Sub
 
-        Public Sub UpdateFirstLine()
+        Private Sub OnFirstLineUpdateNeeded()
             If EditMode Or AddMode Then
                 If View.JournalItems.Count() = 0 Then
                     View.JournalItems = New List(Of JournalItemView) From {
@@ -350,7 +354,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnAutoApplyAmount(bsDjOiItems As BindingSource)
+        Private Sub OnAutoApplyAmount(bsDjOiItems As BindingSource)
             Dim amountToApply = View.Amount
             'apply the negative values first
             For Each item In bsDjOiItems
@@ -839,7 +843,7 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
-        Public Sub AddSupplierOpenInvoices()
+        Private Sub OnAddSupplierOpenInvoices()
             If View.PayeeIdNo <> 0 Then
                 Dim unpaidInvoices = GetSupplierOpenInvoices(View.PayeeIdNo)
                 Dim nSeq As Integer
@@ -929,7 +933,7 @@ Namespace PresentationLayer.Presenters
             Return item
         End Function
 
-        Public Sub OnPrintCheck()
+        Private Sub OnPrintCheck()
             Dim checkAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
@@ -945,7 +949,7 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
-        Public Sub PrintPcReplenishment()
+        Private Sub OnPrintPcReplenishment()
             Dim transactionAmountInWords As String
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
@@ -1020,7 +1024,7 @@ Namespace PresentationLayer.Presenters
             CallByName(View, "setPayeeDataSource", CallType.Method, View.PaymentType)
         End Sub
 
-        Public Sub OnDisbursementJournalChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+        Private Sub OnDisbursementJournalChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
                     'Dim nIndex = eventType.BindingSource.Current.Index
@@ -1028,16 +1032,16 @@ Namespace PresentationLayer.Presenters
                         Case $"AccountIdNo"
                             Dim accountId = eventType.BindingSource.Current.AccountIdNo
                             MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
-                            UpdateInputVatAmount(eventType.BindingSource.DataSource)
+                            UpdateVatAmount(eventType.BindingSource.DataSource)
                         Case $"Debit"
                             MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
                             CallByName(View, "UpdateJiTotals", CallType.Method)
-                            UpdateInputVatAmount(eventType.BindingSource.DataSource)
+                            UpdateVatAmount(eventType.BindingSource.DataSource)
                             SendKeys.Send("{TAB}")
                         Case $"Credit"
                             MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
                             CallByName(View, "UpdateJiTotals", CallType.Method)
-                            UpdateInputVatAmount(eventType.BindingSource.DataSource)
+                            UpdateVatAmount(eventType.BindingSource.DataSource)
                         Case $"Notes"
                             SendKeys.Send("{DOWN}")
                         Case $"Amount"
@@ -1051,6 +1055,15 @@ Namespace PresentationLayer.Presenters
                     End Select
                 End If
             End With
+        End Sub
+
+        Private Sub OnUserDeletedRow()
+            Dim payeeTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
+            UpdateVatAmount(View.JournalItems)
+        End Sub
+
+        Private Sub UpdateVatAmount(data As List(Of JournalItemView))
+            View.VatAmount = UpdateInputVatAmount(data)            
         End Sub
 
     End Class

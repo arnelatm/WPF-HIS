@@ -26,8 +26,12 @@ Namespace PresentationLayer.Views.Forms
         Private _tableName As String = ""
 
         Public Event PrintCheck() Implements IDisbursementJournalView.PrintCheck
-
         Public Event AutoApplyAmount(bsDjOiItem As BindingSource) Implements IDisbursementJournalView.AutoApplyAmount
+        Public Event AddSupplierOpenInvoices() Implements IDisbursementJournalView.AddSupplierOpenInvoices
+        Public Event UserDeletedRow() Implements IDisbursementJournalView.UserDeletedRow
+        Public Event PrintPcReplenishment() Implements IDisbursementJournalView.PrintPcReplenishment
+        Public Event FirstLineUpdateNeeded() Implements IDisbursementJournalView.FirstLineUpdateNeeded
+        Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, ByVal idNo As String, ByVal override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
 
         Public Sub New(ByVal tableName As String)
             MyBase.New()
@@ -38,12 +42,10 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             If tableName = "CdJournal" Then
                 ViewDisplayName = "CdJournalEntry"
-                'Presenter = New DisbursementJournalPresenter(Me, "CdJournal")
                 DisplayPrintCheckButton(PayType)
                 Me.Text = Messaging.TranslateCaption("Cash Disbursement Journal")
             Else
                 ViewDisplayName = "PcJournalEntry"
-                'Presenter = New DisbursementJournalPresenter(Me, "PcJournal")
                 Me.Text = Messaging.TranslateCaption("Petty Cash Disbursement Journal")
                 btnPrintCheck.Visible = False
                 btnPrintPcReplenishment.Visible = False
@@ -413,7 +415,9 @@ Namespace PresentationLayer.Views.Forms
          {"TransactionDate", dtpTransactionDate},
          {"UnApplied", txtUnapplied},
          {"VatAmount", txtVatAmount},
-         {"VatNumber", txtVatNumber}
+         {"VatNumber", txtVatNumber},
+         {"TotalDebits", txtTotalDebits},
+         {"TotalCredits", txtTotalCredits}
         }
         End Sub
 
@@ -555,7 +559,7 @@ Namespace PresentationLayer.Views.Forms
             End If
             If CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.Supplier Or CodeToEnum(Of PaymentTypeSelection)(PaymentType) = PaymentTypeSelection.AccountsPayable Then
                 If PayeeIdNo IsNot Nothing Then
-                    Presenter.SetSupplierVatNumber(VatNumber, PayeeIdNo, True)
+                    RaiseEvent SetSupplierVatNumber(VatNumber, PayeeIdNo.ToString(), True)
                 End If
             Else
                 VatNumber = ""
@@ -645,22 +649,9 @@ Namespace PresentationLayer.Views.Forms
             ProcessCellEndEdit(DataGridViewDjOiItems, bsDjOiItems)
         End Sub
 
-        Private Sub UpdateInputVatAmount()
-            VatAmount = Presenter.UpdateInputVatAmount(JournalItems)
-        End Sub
-
-        Private Sub UpdateOutputVatAmount()
-            VatAmount = Presenter.UpdateOutputVatAmount(JournalItems)
-        End Sub
-
         Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+            RaiseEvent UserDeletedRow()
             UpdateTotals()
-            Dim payeeTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cboPaymentType.SelectedIndex)
-            If payeeTypeEnum = PaymentTypeSelection.AccountsPayable Or payeeTypeEnum = PaymentTypeSelection.Supplier Then
-                UpdateInputVatAmount()
-            ElseIf payeeTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                UpdateOutputVatAmount()
-            End If
         End Sub
 
         Private Sub UpdateTotals()
@@ -691,14 +682,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewJournalItems.Refresh()
         End Sub
 
-        'Private Sub UpdateVatNumber()
-        '    If cboPayeeIdNo.Text IsNot Nothing Then
-        '        VatNumber = Presenter.GetSupplierVatNumber(cboPayeeIdNo.SelectedValue)
-        '    Else
-        '        VatNumber = ""
-        '    End Ifbtn
-        'End Sub
-
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewJournalItems.UserDeletingRow
             Dim cdJournalRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
             If DataGridViewJournalItems.SelectedRows.Contains(cdJournalRow) Then
@@ -714,7 +697,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnPrintPcReplenishment_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintPcReplenishment.ClickButtonArea
-            Presenter.PrintPcReplenishment()
+            RaiseEvent PrintPcReplenishment()
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnAutoApply.ClickButtonArea
@@ -793,7 +776,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             bsJournalItems.ResetBindings(False)
             btnViewGL.Visible = False
-            Presenter.AddSupplierOpenInvoices()
+            RaiseEvent AddSupplierOpenInvoices()
             bsDjOiItems.ResetBindings(False)
             UpdateDisplay()
             If OpenInvoiceMode Then
@@ -858,7 +841,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateFirstLine()
-            Presenter.UpdateFirstLine()
+            RaiseEvent FirstLineUpdateNeeded
             If Not OpenInvoiceMode Then
                 bsJournalItems.ResetBindings(True)
                 UpdateJiTotals()
