@@ -417,14 +417,15 @@ Namespace DataLayer.AdoNet
                 seriesName = $"PCJOURNAL"
                 Dim transactionDate As Date = bizObj.TransactionDate
 
-                Dim prefix As String
+                Dim prefix As String = ""
                 If _db.Scalar("Select Count(*) from Series where SeriesName = '" & seriesName & "'") < 1 Then
                     MessageBox.Show($"No series format found for PCJournal. Please notify System Administrator.")
                     retVal = -1
                 Else
-                    Dim format As String
-                    format = _db.Scalar("select prefix from series where seriesName = '" & seriesName & "'")
-                    prefix = transactionDate.ToString(format, CultureInfo.InvariantCulture)
+                    Dim format = _db.Scalar("select prefix from series where seriesName = '" & seriesName & "'")
+                    If Not IsDBNull(format) Then
+                        prefix = transactionDate.ToString(format, CultureInfo.InvariantCulture)
+                    End If
                     sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & seriesName & "'"
                     sql2 = "Update [PCJournal] set ReferenceNo = Concat( '" & prefix & "', (select value from series where seriesName = '" & seriesName & "')) where IdNo = " & bizObj.IdNo
                     retVal = _db.ExecuteSqlTransaction("UpdateGlReferenceNumber", sql1, sql2)
