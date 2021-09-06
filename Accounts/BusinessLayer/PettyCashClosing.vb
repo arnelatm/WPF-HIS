@@ -46,7 +46,7 @@ Namespace BusinessLayer
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
         Public Property TransactionDate As Date?
-        Public Property PcJournals As List(Of PcJournal)
+        Public Property PcClosingJournals As List(Of PcClosingJournal)
 
     End Class
 

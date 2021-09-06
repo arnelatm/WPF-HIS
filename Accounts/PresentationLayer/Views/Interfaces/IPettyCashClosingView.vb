@@ -22,10 +22,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property Posted As Boolean
         Property ReferenceNo As String
         Property TransactionDate As Date?
-        Property PcJournals As List(Of PcJournalView)
-        Property JournalItems As List(Of JournalItemView)
-        ReadOnly Property TotalCredits As Decimal
-        ReadOnly Property TotalDebits As Decimal
+        Property PcClosingJournals As List(Of PcClosingJournalView)
+        'Property JournalItems As List(Of JournalItemView)
+        'ReadOnly Property TotalCredits As Decimal
+        'ReadOnly Property TotalDebits As Decimal
     End Interface
 
 End Namespace

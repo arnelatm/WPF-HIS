@@ -3,12 +3,12 @@ Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
 Namespace DataLayer.AdoNet
-    ' Data access object for PcJournal
+    ' Data access object for PcClosingJournal
     ' ** DAO Pattern
 
-    Public Class PcJournalsDao
+    Public Class PcClosingJournalDao
         Inherits AccountsDao
-        Implements IDaoChild(Of PcJournal)
+        Implements IDaoChild(Of PcClosingJournal)
 
         Private ReadOnly _db As New Db()
         Protected TableOrViewName As String = ""
@@ -22,7 +22,7 @@ Namespace DataLayer.AdoNet
         Public Sub New()
         End Sub
 
-        Public Function GetRecordsWithGroupIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of PcJournal) Implements IDaoChild(Of PcJournal).GetRecordsWithGroupIdNo
+        Public Function GetRecordsWithGroupIdNo(journalIdNo, Optional sortKey = Nothing) As List(Of PcClosingJournal) Implements IDaoChild(Of PcClosingJournal).GetRecordsWithGroupIdNo
             If sortKey Is Nothing Then
                 sortKey = "Sequence"
             End If
@@ -30,13 +30,13 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "Amount," &
                     "CdJournalIdNo," &
-                    "PcClosed," &
                     "IdNo," &
                     "Notes," &
                     "PayeeName," &
                     "PayeeNameAra," &
                     "PaymentType," &
                     "PayType," &
+                    "PcClosed," &
                     "ReferenceNo," &
                     "TransactionDate" &
                     " FROM PcJournal_View" &
@@ -45,26 +45,26 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make).ToList()
         End Function
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, cdJournalIdNo As Integer) As Integer Implements IDaoChild(Of PcJournal).DelUpdateTvp
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, cdJournalIdNo As Integer) As Integer Implements IDaoChild(Of PcClosingJournal).DelUpdateTvp
             Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", cdJournalIdNo)
         End Function
 
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of PcJournal).InsertTvp
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of PcClosingJournal).InsertTvp
             Return 0
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, PcJournal) =
+        Private Shared ReadOnly Make As Func(Of IDataReader, PcClosingJournal) =
                                     Function(reader) _
-            New PcJournal() With {
+            New PcClosingJournal() With {
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .CdJournalIdNo = Extensions.AsInt(Of Int32)(reader("CdJournalIdNo")),
-            .PcClosed = Extensions.AsBool(reader("PcClosed")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .PayeeName = Extensions.AsString(reader("PayeeName")),
             .PayeeNameAra = Extensions.AsString(reader("PayeeNameAra")),
             .PaymentType = Extensions.AsString(reader("PaymentType")),
             .PayType = Extensions.AsString(reader("PayType")),
+            .PcClosed = Extensions.AsBool(reader("PcClosed")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
             }

@@ -1063,7 +1063,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub UpdateVatAmount(data As List(Of JournalItemView))
-            View.VatAmount = UpdateInputVatAmount(data)            
+            View.VatAmount = UpdateInputVatAmount(data)
         End Sub
 
     End Class
