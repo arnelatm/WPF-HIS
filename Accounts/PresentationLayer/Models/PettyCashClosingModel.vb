@@ -24,8 +24,6 @@
         Public Property PcClosed As Boolean
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
-        Public Property TotalCredits As Decimal
-        Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
         Public Property PcClosingJournals As List(Of PcClosingJournalModel)
 

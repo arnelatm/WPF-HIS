@@ -118,7 +118,7 @@ Public Class MappingProfileAccounts
         CreateMap(Of PayrollPayElementModel, IPayrollPayElementView)().ReverseMap()
         CreateMap(Of PayrollPayElementModel, PayrollPayElementView)().ReverseMap()
         CreateMap(Of PcClosingJournal, PcClosingJournalModel)().ReverseMap()
-        CreateMap(Of PcClosingJournalModel, IPcClosingJournalView)().ReverseMap()
+        CreateMap(Of PcClosingJournalModel, PcClosingJournalView)().ReverseMap()
         CreateMap(Of PettyCashClosing, PettyCashClosingModel)().ReverseMap()
         CreateMap(Of PettyCashClosingModel, IPettyCashClosingView)().ReverseMap()
 

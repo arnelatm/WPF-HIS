@@ -11,7 +11,6 @@ Namespace PresentationLayer.Views
 
         'Public Property Ea As EventAggregator
         Public Property Amount As Decimal Implements IPcClosingJournalView.Amount
-
         Public Property CdJournalIdNo As Int32 Implements IPcClosingJournalView.CdJournalIdNo
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Integer Implements IPcClosingJournalView.IdNo
