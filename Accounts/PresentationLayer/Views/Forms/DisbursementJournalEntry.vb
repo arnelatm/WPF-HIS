@@ -26,11 +26,17 @@ Namespace PresentationLayer.Views.Forms
         Private _tableName As String = ""
 
         Public Event PrintCheck() Implements IDisbursementJournalView.PrintCheck
+
         Public Event AutoApplyAmount(bsDjOiItem As BindingSource) Implements IDisbursementJournalView.AutoApplyAmount
+
         Public Event AddSupplierOpenInvoices() Implements IDisbursementJournalView.AddSupplierOpenInvoices
+
         Public Event UserDeletedRow() Implements IDisbursementJournalView.UserDeletedRow
+
         Public Event PrintPcReplenishment() Implements IDisbursementJournalView.PrintPcReplenishment
+
         Public Event FirstLineUpdateNeeded() Implements IDisbursementJournalView.FirstLineUpdateNeeded
+
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, ByVal idNo As String, ByVal override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
 
         Public Sub New(ByVal tableName As String)
@@ -841,7 +847,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub UpdateFirstLine()
-            RaiseEvent FirstLineUpdateNeeded
+            RaiseEvent FirstLineUpdateNeeded()
+
             If Not OpenInvoiceMode Then
                 bsJournalItems.ResetBindings(True)
                 UpdateJiTotals()

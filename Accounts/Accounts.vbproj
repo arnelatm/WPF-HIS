@@ -213,8 +213,8 @@
     <Compile Include="BusinessLayer\DjOiItem.vb" />
     <Compile Include="BusinessLayer\DisbursementJournal.vb" />
     <Compile Include="BusinessLayer\AttendanceItem.vb" />
-    <Compile Include="BusinessLayer\PcJournals.vb" />
-    <Compile Include="BusinessLayer\PcJournal.vb" />
+    <Compile Include="BusinessLayer\PcClosingJournals.vb" />
+    <Compile Include="BusinessLayer\PcClosingJournal.vb" />
     <Compile Include="BusinessLayer\PensionRate.vb" />
     <Compile Include="BusinessLayer\PensionScheme.vb" />
     <Compile Include="BusinessLayer\EmployeePhone.vb" />
@@ -255,6 +255,7 @@
     <Compile Include="DataLayer\AdoNet\EmployeePayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\JournalPrefix.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PettyCashClosingDao.vb" />
     <Compile Include="DataLayer\AdoNet\RecurringPayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayElementItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayElementDao.vb" />
@@ -266,7 +267,7 @@
     <Compile Include="DataLayer\AdoNet\PayElementAccountDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollPayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayrollDetailDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PcJournalsDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PcClosingJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\PensionRateDao.vb" />
     <Compile Include="DataLayer\AdoNet\PensionSchemeDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeePhoneDao.vb" />
@@ -289,7 +290,6 @@
     <Compile Include="DataLayer\AdoNet\DistributionSchemeDao.vb" />
     <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PettyCashClosingDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReconciledDao.vb" />
@@ -354,7 +354,7 @@
     <Compile Include="PresentationLayer\Models\AttendanceItemModel.vb" />
     <Compile Include="PresentationLayer\Models\OpInvItemModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePhoneModel.vb" />
-    <Compile Include="PresentationLayer\Models\PcJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\PcClosingJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionRateModel.vb" />
     <Compile Include="PresentationLayer\Models\PayCycle.vb" />
     <Compile Include="PresentationLayer\Models\PayGroupModel.vb" />
@@ -833,7 +833,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IAttendanceItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePhoneView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPettyCashClosingView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPcJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPcClosingJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPensionRatesView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPensionRateView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollView.vb" />

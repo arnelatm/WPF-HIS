@@ -49,8 +49,8 @@ Namespace DataLayer.AdoNet
             If data Is Nothing Then
                 Debugger.Break()
             Else
-                Dim pcDao = New PcJournalsDao()
-                data.PcJournals = pcDao.GetRecordsWithGroupIdNo(0)
+                Dim pcDao = New PcClosingJournalDao()
+                data.PcClosingJournals = pcDao.GetRecordsWithGroupIdNo(0)
             End If
             Return data
         End Function
@@ -198,9 +198,9 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, MakeOpenPc).ToList()
         End Function
 
-        Private Shared ReadOnly MakeOpenPc As Func(Of IDataReader, PcJournal) =
+        Private Shared ReadOnly MakeOpenPc As Func(Of IDataReader, PcClosingJournal) =
                                     Function(reader) _
-            New PcJournal() With {
+            New PcClosingJournal() With {
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .CdJournalIdNo = Extensions.AsInt(Of Int32)(reader("CdJournalIdNo")),
             .PcClosed = Extensions.AsBool(reader("PcClosed")),

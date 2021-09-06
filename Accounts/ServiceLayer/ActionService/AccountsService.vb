@@ -106,7 +106,7 @@ Namespace ServiceLayer.ActionService
 
         Public Function GetOpenPettyCash() Implements IServiceAccounts.GetOpenPettyCash
             Dim records = DataDao.GetOpenPettyCash()
-            Dim model As New List(Of PcJournalModel)
+            Dim model As New List(Of PcClosingJournalModel)
             GlobalVariables.Mapper.Map(records, model)
             Return model
         End Function

@@ -27,7 +27,7 @@
         Public Property TotalCredits As Decimal
         Public Property TotalDebits As Decimal
         Public Property TransactionDate As Date?
-        Public Property PcJournals As List(Of PcJournalModel)
+        Public Property PcClosingJournals As List(Of PcClosingJournalModel)
 
     End Class
 

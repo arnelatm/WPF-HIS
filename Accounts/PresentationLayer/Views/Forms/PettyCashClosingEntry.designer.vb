@@ -320,7 +320,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'bsPcJournals
         '
-        Me.bsPcJournals.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PcJournalModel)
+        Me.bsPcJournals.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PcClosingJournalModel)
         '
         'TableLayoutPanel1
         '

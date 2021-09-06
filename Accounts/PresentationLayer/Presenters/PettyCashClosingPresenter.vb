@@ -27,7 +27,7 @@ Namespace PresentationLayer.Presenters
             Dim djArgs = {"CdJournalItem_View", "", "InsertCdJournalItemTVP"}
             _journalItemService = New AccountsService("JournalItem", Nothing, djArgs)
             djArgs = {"CdJournalItem_View", "UpdatePcJournalsTVP", ""}
-            _pcJournalsService = New AccountsService("PcJournals", Nothing, djArgs)
+            _pcJournalsService = New AccountsService("PcClosingJournal", Nothing, djArgs)
 
             CreateDataTable(DtInsertTable, {{"AccountIdNo", GetType(Int16)},
                                             {"Credit", GetType(Decimal)},
@@ -46,10 +46,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub GetOpenPettyCash()
-            Dim modelData As List(Of PcJournalModel)
+            Dim modelData As List(Of PcClosingJournalModel)
             modelData = Service.GetOpenPettyCash()
-            View.PcJournals = New List(Of PcJournalView)
-            GlobalVariables.Mapper.Map(modelData, View.PcJournals)
+            View.PcClosingJournals = New List(Of PcClosingJournalView)
+            GlobalVariables.Mapper.Map(modelData, View.PcClosingJournals)
         End Sub
 
         'Public Overrides Sub SaveOriginalValues()
@@ -58,7 +58,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SelectChoice(ByVal selectAll As Boolean)
             Dim total As Decimal = 0
-            For Each item In View.PcJournals
+            For Each item In View.PcClosingJournals
                 item.PcClosed = selectAll
                 If selectAll Then
                     total += item.Amount
@@ -70,7 +70,7 @@ Namespace PresentationLayer.Presenters
 
         Public Function TotalSelection()
             Dim total As Decimal = 0D
-            For Each item In View.PcJournals
+            For Each item In View.PcClosingJournals
                 If item.PcClosed Then
                     total += item.Amount
                 End If
@@ -99,7 +99,7 @@ Namespace PresentationLayer.Presenters
                 nRowCount += 1
             Next
             workRow = Nothing
-            For Each dataView In View.PcJournals
+            For Each dataView In View.PcClosingJournals
                 If dataView.PcClosed Then
                     Dim idNo As Integer = dataView.IdNo
                     workRow = DtUpdateTable.NewRow()

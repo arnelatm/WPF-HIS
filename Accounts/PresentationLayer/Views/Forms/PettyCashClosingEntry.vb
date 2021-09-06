@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IPettyCashClosingView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private _pcJournals As New List(Of PcJournalView)
+        Private _pcClosingJournals As New List(Of PcClosingJournalView)
         Private _journalItems As New List(Of JournalItemView)
         Private _defaultAccount As Int16
         Private _pcFooter As DgvFooter
@@ -207,7 +207,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
-
         Public Property JournalItems As List(Of JournalItemView) Implements IPettyCashClosingView.JournalItems
             Get
                 Return _journalItems
@@ -243,12 +242,12 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Private Property PcJournals As List(Of PcJournalView) Implements IPettyCashClosingView.PcJournals
+        Private Property PcClosingJournals As List(Of PcClosingJournalView) Implements IPettyCashClosingView.PcClosingJournals
             Get
-                Return _pcJournals
+                Return _pcClosingJournals
             End Get
             Set
-                _pcJournals = Value
+                _pcClosingJournals = Value
                 BindPcJournals()
             End Set
         End Property
@@ -257,7 +256,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsPcJournals.DataSource = Nothing
             DataGridViewPcJournals.Refresh()
-            bsPcJournals.DataSource = PcJournals
+            bsPcJournals.DataSource = PcClosingJournals
             bsPcJournals.AllowNew = True
             With DataGridViewPcJournals
                 '.Refresh()

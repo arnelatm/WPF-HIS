@@ -3,7 +3,7 @@
 
 Namespace BusinessLayer
 
-    Public Class PcJournals
+    Public Class PcClosingJournals
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -12,7 +12,7 @@ Namespace BusinessLayer
             'If createRules Then
         End Sub
 
-        Public Property PcJournals As List(Of PcJournal)
+        Public Property PcClosingJournals As List(Of PcClosingJournal)
 
     End Class
 
