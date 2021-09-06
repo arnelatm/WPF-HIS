@@ -277,7 +277,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub PcClosing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             _defaultAccount = Presenter.DefaultPcAccount()
-            Presenter.UpdateViewDisplay(0)
+            'Presenter.UpdateViewData(0)
             DataGridViewPcJournals.Refresh()
             BindPcJournals()
             _pcFooter = New DgvFooter(DataGridViewPcJournals) With {
@@ -285,7 +285,6 @@ Namespace PresentationLayer.Views.Forms
             }
             _pcFooter.ColumnToSum("dgvAmount") = True
             _pcFooter.SetText("DgvPayeeName", "Totals ->")
-
         End Sub
 
         Private Sub PettyCashClosing_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
