@@ -24,7 +24,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property TransactionDate As Date?
         Property PcJournals As List(Of PcJournalView)
         Property JournalItems As List(Of JournalItemView)
-
+        ReadOnly Property TotalCredits As Decimal
+        ReadOnly Property TotalDebits As Decimal
     End Interface
 
 End Namespace

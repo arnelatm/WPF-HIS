@@ -53,16 +53,6 @@ Namespace DataLayer.AdoNet
             Return 0
         End Function
 
-        'Public Function DelUpdateTvp(ByRef tvpTable As DataTable, PcJournalIdNo As Int32) As Integer _
-        '    Implements IDaoChild(Of PcJournal).DelUpdateTvp
-        '    Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", PcJournalIdNo)
-        'End Function
-
-        'Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer _
-        '    Implements IDaoChild(Of PcJournal).InsertTvp
-        '    Return _db.InsertTvp(DboTvpInsertName, tvpTable)
-        'End Function
-
         Private Shared ReadOnly Make As Func(Of IDataReader, PcJournal) =
                                     Function(reader) _
             New PcJournal() With {

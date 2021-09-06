@@ -195,6 +195,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public ReadOnly Property TotalCredits As Decimal Implements IPettyCashClosingView.TotalCredits
+            Get
+                Return NumParser(Of Decimal)(txtTotalCredits.Text)
+            End Get
+        End Property
+
+        Public ReadOnly Property TotalDebits As Decimal Implements IPettyCashClosingView.TotalDebits
+            Get
+                Return NumParser(Of Decimal)(txtTotalDebits.Text)
+            End Get
+        End Property
+
+
         Public Property JournalItems As List(Of JournalItemView) Implements IPettyCashClosingView.JournalItems
             Get
                 Return _journalItems
@@ -212,6 +225,22 @@ Namespace PresentationLayer.Views.Forms
             cboAccountIdNo.DataSource = Presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
             CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank)}, cboPcAccountIdNo)
             CreateEnumDataSource(Of PayTypeSelection)(cboPayType)
+        End Sub
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"AccountIdNo", cboAccountIdNo},
+                {"Amount", txtAmount},
+                {"CheckNumber", txtCheckNumber},
+                {"PayType", cboPayType},
+                {"Notes", txtNotes},
+                {"PayeeName", txtPayeeName},
+                {"ReferenceNo", txtReferenceNo},
+                {"TransactionDate", dtpTransactionDate},
+                {"TotalDebits", txtTotalDebits},
+                {"TotalCredits", txtTotalCredits}
+                }
         End Sub
 
         Private Property PcJournals As List(Of PcJournalView) Implements IPettyCashClosingView.PcJournals
