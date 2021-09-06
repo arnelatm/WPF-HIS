@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ReferenceNo As String
         Property TransactionDate As Date?
         Property PcClosingJournals As List(Of PcClosingJournalView)
-        'Property JournalItems As List(Of JournalItemView)
+        Property JournalItems As List(Of JournalItemView)
         'ReadOnly Property TotalCredits As Decimal
         'ReadOnly Property TotalDebits As Decimal
     End Interface
