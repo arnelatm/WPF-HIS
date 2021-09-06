@@ -30,8 +30,6 @@ Public Class MappingProfileAccounts
         CreateMap(Of BasicModel, IBasicView)().ReverseMap()
         CreateMap(Of CashReceiptJournal, CashReceiptJournalModel)().ReverseMap()
         CreateMap(Of CashReceiptJournalModel, ICashReceiptJournalView)().ReverseMap()
-        CreateMap(Of IPettyCashClosingView, PettyCashClosingModel)().ReverseMap()
-        CreateMap(Of PettyCashClosing, PettyCashClosingModel)().ReverseMap()
         CreateMap(Of CsrOiItem, CsrOiItemModel)().ReverseMap()
         CreateMap(Of CsrOiItemModel, CsrOiItemView)().ReverseMap()
         CreateMap(Of Customer, CustomerModel)().ReverseMap()
@@ -121,6 +119,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of PayrollPayElementModel, PayrollPayElementView)().ReverseMap()
         CreateMap(Of PcJournal, PcJournalModel)().ReverseMap()
         CreateMap(Of PcJournalModel, IPcJournalView)().ReverseMap()
+        CreateMap(Of PettyCashClosing, PettyCashClosingModel)().ReverseMap()
+        CreateMap(Of PettyCashClosingModel, IPettyCashClosingView)().ReverseMap()
+
         CreateMap(Of PensionProvider, PensionProviderModel)().ReverseMap()
         CreateMap(Of PensionProviderModel, IPensionProviderView)().ReverseMap()
         CreateMap(Of IPensionRateView, PensionRateModel)()

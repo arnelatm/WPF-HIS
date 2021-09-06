@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             WithTreeView = False
             Service = New AccountsService("PettyCashClosing")
-            TableName = "PettyCashClosing"
+            TableName = "PcJournal"
             SortOrderKey = "IdNo"
             Dim djArgs = {"CdJournalItem_View", "", "InsertCdJournalItemTVP"}
             _journalItemService = New AccountsService("JournalItem", Nothing, djArgs)
