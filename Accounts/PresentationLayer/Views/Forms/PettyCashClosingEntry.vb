@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -220,9 +221,8 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.CheckingAccount)}, cboAccountIdNo)
-            cboAccountIdNo.DataSource = Presenter.GetAccountTypesList(EnumToCode(SpecialAccountSelection.Bank) + "," + EnumToCode(SpecialAccountSelection.CheckingAccount))
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank)}, cboPcAccountIdNo)
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.CheckingAccount), EnumToCode(SpecialAccountSelection.CheckingAccount)}, cboAccountIdNo)
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.PettyCashAccount)}, cboPcAccountIdNo)
             CreateEnumDataSource(Of PayTypeSelection)(cboPayType)
         End Sub
 
@@ -235,8 +235,9 @@ Namespace PresentationLayer.Views.Forms
                 {"PayType", cboPayType},
                 {"Notes", txtNotes},
                 {"PayeeName", txtPayeeName},
+                {"PcAccountIdNo", cboPcAccountIdNo},
                 {"ReferenceNo", txtReferenceNo},
-                {"TransactionDate", dtpTransactionDate}                
+                {"TransactionDate", dtpTransactionDate}
                 }
         End Sub
 

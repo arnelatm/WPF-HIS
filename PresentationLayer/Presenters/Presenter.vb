@@ -1182,7 +1182,11 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     Private Sub FormatError(ctrl As Object, ctrlError As String)
         If DirectCast(ctrl, Control).Dock = DockStyle.Fill Then
-            MyErrorProvider.SetIconPadding(ctrl, -18)
+            If TypeOf ctrl Is CaComboBox Then
+                MyErrorProvider.SetIconPadding(ctrl, -27)
+            Else
+                MyErrorProvider.SetIconPadding(ctrl, -16)
+            End If
         End If
         If GlobalVariables.RightToLeftLayout Then
             MyErrorProvider.SetIconAlignment(ctrl, ErrorIconAlignment.TopLeft)
@@ -1455,6 +1459,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         ' Validate record first for errors before saving
         Dim validated As Boolean = True
         Dim noChanges As Boolean = False
+        eventType.ValidData = False
         RaiseEvent BeforeValidate()
         PreValidate()
         ClearAllErrorMessages()
@@ -1475,6 +1480,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         Else
             If validated Then
                 Save(eventType.ViewControl)
+                eventType.ValidData = True
             Else
                 Beep()
                 Messaging.MessageKey = "ValidationErrors"

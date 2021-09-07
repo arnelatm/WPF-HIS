@@ -10,7 +10,6 @@ Namespace DataLayer.AdoNet
     Public Class PettyCashClosingDao
         Implements IDao(Of PettyCashClosing), IDaoJournals(Of PettyCashClosing)
 
-        Public ReadOnly Property Args As Object()
         Private ReadOnly _db As New Db()
         Protected TableOrViewName As String
         Protected JournalCode As String
@@ -24,28 +23,21 @@ Namespace DataLayer.AdoNet
                 "AccountIdNo," &
                 "Amount," &
                 "Applied," &
-                "Cancelled," &
                 "CheckDate," &
                 "CheckNumber," &
-                "DateCreated," &
-                "PayType," &
-                "DiscountAccountIdNo," &
-                "DiscountTaken," &
                 "IdNo," &
                 "Notes," &
-                "ORNumber," &
                 "PayeeIdNo," &
                 "PayeeName," &
                 "PaymentType," &
+                "PayType," &
+                "PcClosed," &
                 "Posted," &
                 "ReferenceNo," &
-                "TransactionDate," &
-                "UnApplied," &
-                "VatAmount," &
-                "VatNumber" &
+                "TransactionDate" &
                 " FROM PcJournal " &
                 " WHERE IdNo = @IdNo"
-            data = _db.Read(sql, CdMake, params).FirstOrDefault()
+            data = _db.Read(sql, _cdMake, params).FirstOrDefault()
             If data Is Nothing Then
                 Debugger.Break()
             Else
@@ -55,32 +47,26 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-        Public Function UpdateRecord(ByRef pettyCashClosing As PettyCashClosing) As Integer Implements IDao(Of PettyCashClosing).UpdateRecord
-            Dim sql As String
-            sql = " UPDATE CdJournal SET " &
-                    "AccountIdNo   = @AccountIdNo," &
-                    "Amount        = @Amount," &
-                    "Applied       = @Applied," &
-                    "Cancelled     = @Cancelled," &
-                    "CheckDate     = @CheckDate," &
-                    "CheckNumber   = @CheckNumber," &
-                    "PayType       = @PayType," &
-                    "DiscountAccountIdNo = @DiscountAccountIdNo," &
-                    "DiscountTaken = @DiscountTaken," &
-                    "Notes         = @Notes," &
-                    "ORNumber      = @ORNumber," &
-                    "PayeeIdNo     = @PayeeIdNo," &
-                    "PayeeName     = @PayeeName," &
-                    "PaymentType   = @PaymentType," &
-                    "Posted        = @Posted," &
-                    "ReferenceNo   = @ReferenceNo," &
-                    "TransactionDate = @TransactionDate," &
-                    "UnApplied     = @UnApplied," &
-                    "VatAmount     = @VatAmount," &
-                    "VatNumber     = @VatNumber" &
-                    " WHERE IdNo = @IdNo"
-            Return _db.Update(sql, CdTake(pettyCashClosing))
-        End Function
+        'Public Function UpdateRecord(ByRef pettyCashClosing As PettyCashClosing) As Integer Implements IDao(Of PettyCashClosing).UpdateRecord
+        '    Dim sql As String
+        '    sql = " UPDATE CdJournal SET " &
+        '            "AccountIdNo   = @AccountIdNo," &
+        '            "Amount        = @Amount," &
+        '            "Applied       = @Applied," &
+        '            "CheckDate     = @CheckDate," &
+        '            "CheckNumber   = @CheckNumber," &
+        '            "PayType       = @PayType," &
+        '            "PcClosed      = @PcClosed," &
+        '            "Notes         = @Notes," &
+        '            "PayeeIdNo     = @PayeeIdNo," &
+        '            "PayeeName     = @PayeeName," &
+        '            "PaymentType   = @PaymentType," &
+        '            "Posted        = @Posted," &
+        '            "ReferenceNo   = @ReferenceNo," &
+        '            "TransactionDate = @TransactionDate" &
+        '            " WHERE IdNo = @IdNo"
+        '    Return _db.Update(sql, CdTake(pettyCashClosing))
+        'End Function
 
         Public Function AddRecord(ByRef pettyCashClosing As PettyCashClosing) As Integer Implements IDao(Of PettyCashClosing).AddRecord
             Dim sql As String
@@ -88,16 +74,14 @@ Namespace DataLayer.AdoNet
                         "AccountIdNo," &
                         "Amount," &
                         "Applied," &
-                        "Cancelled," &
                         "CheckDate," &
                         "CheckNumber," &
-                        "PayType," &
-                        "PcClosed," &
                         "Notes," &
-                        "ORNumber," &
                         "PayeeIdNo," &
                         "PayeeName," &
                         "PaymentType," &
+                        "PayType," &
+                        "PcClosed," &
                         "Posted," &
                         "ReferenceNo," &
                         "TransactionDate" &
@@ -105,16 +89,14 @@ Namespace DataLayer.AdoNet
                         "@AccountIdNo," &
                         "@Amount," &
                         "@Applied," &
-                        "@Cancelled," &
                         "@CheckDate," &
                         "@CheckNumber," &
-                        "@PayType," &
-                        "@PcClosed," &
                         "@Notes," &
-                        "@ORNumber," &
                         "@PayeeIdNo," &
                         "@PayeeName," &
                         "@PaymentType," &
+                        "@PayType," &
+                        "@PcClosed," &
                         "@Posted," &
                         "@ReferenceNo," &
                         "@TransactionDate" &
@@ -122,23 +104,21 @@ Namespace DataLayer.AdoNet
             Return _db.Insert(sql, CdTake(pettyCashClosing))
         End Function
 
-        Private ReadOnly CdMake As Func(Of IDataReader, PettyCashClosing) =
+        Private ReadOnly _cdMake As Func(Of IDataReader, PettyCashClosing) =
                             Function(reader) _
             New PettyCashClosing() With {
             .AccountIdNo = Extensions.AsNullable(Of Int16?)(reader("AccountIdNo")),
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .Applied = Extensions.AsDecimal(reader("Applied")),
-            .Cancelled = Extensions.AsBool(reader("Cancelled")),
             .CheckDate = Extensions.AsNullable(Of Date?)(reader("CheckDate")),
             .CheckNumber = Extensions.AsString(reader("CheckNumber")),
-            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
-            .PayType = Extensions.AsString(reader("PayType")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
-            .OrNumber = Extensions.AsString(reader("ORNumber")),
             .PayeeIdNo = Extensions.AsNullable(Of Int32?)(reader("PayeeIdNo")),
             .PayeeName = Extensions.AsString(reader("PayeeName")),
             .PaymentType = Extensions.AsString(reader("PaymentType")),
+            .PayType = Extensions.AsString(reader("PayType")),
+            .PcClosed = Extensions.AsBool(reader("PcClosed")),
             .Posted = Extensions.AsBool(reader("Posted")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
@@ -149,18 +129,15 @@ Namespace DataLayer.AdoNet
                                     "@AccountIdNo", pettyCashClosing.AccountIdNo,
                                     "@Amount", pettyCashClosing.Amount,
                                     "@Applied", pettyCashClosing.Applied,
-                                    "@Cancelled", pettyCashClosing.Cancelled,
                                     "@CheckDate", pettyCashClosing.CheckDate,
                                     "@CheckNumber", pettyCashClosing.CheckNumber,
-                                    "@DateCreated", pettyCashClosing.DateCreated,
-                                    "@PayType", pettyCashClosing.PayType,
-                                    "@PcClosed", pettyCashClosing.PcClosed,
                                     "@IdNo", pettyCashClosing.IdNo,
                                     "@Notes", pettyCashClosing.Notes,
-                                    "@ORNumber", pettyCashClosing.OrNumber,
                                     "@PayeeIdNo", pettyCashClosing.PayeeIdNo,
                                     "@PayeeName", pettyCashClosing.PayeeName,
                                     "@PaymentType", pettyCashClosing.PaymentType,
+                                    "@PayType", pettyCashClosing.PayType,
+                                    "@PcClosed", pettyCashClosing.PcClosed,
                                     "@Posted", pettyCashClosing.Posted,
                                     "@ReferenceNo", pettyCashClosing.ReferenceNo,
                                     "@TransactionDate", pettyCashClosing.TransactionDate
@@ -184,18 +161,22 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "Amount," &
                     "CdJournalIdNo," &
-                    "PcClosed," &
                     "IdNo," &
                     "Notes," &
                     "PayeeName," &
                     "PayeeNameAra," &
                     "PaymentType," &
+                    "PcClosed," &
                     "ReferenceNo," &
                     "TransactionDate" &
                     " FROM PcJournal_View" &
-                    " WHERE IsNull(PcClosed,0) = 0 " &
+                    " WHERE IsNull(PcClosed,0) = 0 and Cancelled = 0" &
                     " ORDER BY IdNo"
             Return _db.Read(sql, MakeOpenPc).ToList()
+        End Function
+
+        Public Function UpdateRecord(ByRef recordData As PettyCashClosing) As Integer Implements IDao(Of PettyCashClosing).UpdateRecord
+            Throw New NotImplementedException()
         End Function
 
         Private Shared ReadOnly MakeOpenPc As Func(Of IDataReader, PcClosingJournal) =
@@ -203,12 +184,12 @@ Namespace DataLayer.AdoNet
             New PcClosingJournal() With {
             .Amount = Extensions.AsDecimal(reader("Amount")),
             .CdJournalIdNo = Extensions.AsInt(Of Int32)(reader("CdJournalIdNo")),
-            .PcClosed = Extensions.AsBool(reader("PcClosed")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
             .PayeeName = Extensions.AsString(reader("PayeeName")),
             .PayeeNameAra = Extensions.AsString(reader("PayeeNameAra")),
             .PaymentType = Extensions.AsString(reader("PaymentType")),
+            .PcClosed = Extensions.AsBool(reader("PcClosed")),
             .ReferenceNo = Extensions.AsString(reader("ReferenceNo")),
             .TransactionDate = Extensions.AsDate(reader("TransactionDate"))
             }

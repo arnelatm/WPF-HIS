@@ -390,8 +390,10 @@ Public Class CFormEntry
                 GridValidator()
             End If
         Next
+        Dim saveData As New SaveDataRequested(Me)
         If Ea IsNot Nothing Then
-            Ea.PublishEvent(New SaveDataRequested(Me))
+            Ea.PublishEvent(saveData)
+            'Ea.PublishEvent(New SaveDataRequested(Me))
         End If
         'If EditMode Or AddMode Then
         '    TurnOnInputs()
@@ -409,7 +411,7 @@ Public Class CFormEntry
         '        End If
         '    End If
         'End If
-        If QuitOnSave Then
+        If saveData.ValidData And QuitOnSave Then
             Close()
         End If
     End Sub
