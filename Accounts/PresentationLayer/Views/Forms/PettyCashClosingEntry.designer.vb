@@ -67,8 +67,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridViewPcJournals,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsPcJournals,System.ComponentModel.ISupportInitialize).BeginInit
@@ -355,8 +354,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Controls.Add(Me.cboPayType, 6, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel4, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.cboPcAccountIdNo, 1, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtTotalDebits, 4, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtTotalCredits, 5, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtIdNo, 4, 6)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 58)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 7
@@ -840,63 +838,34 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPcAccountIdNo.ValueIsNumeric = false
         Me.cboPcAccountIdNo.ValueMember = "IdNo"
         '
-        'txtTotalDebits
+        'txtIdNo
         '
-        Me.txtTotalDebits.BackColor = System.Drawing.Color.White
-        Me.txtTotalDebits.BegFindValue = Nothing
-        Me.txtTotalDebits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalDebits.ComputedValue = false
-        Me.txtTotalDebits.CustomFormat = Nothing
-        Me.txtTotalDebits.DataBoundControl = true
-        Me.txtTotalDebits.EditingMode = true
-        Me.txtTotalDebits.EndFindValue = Nothing
-        Me.txtTotalDebits.FieldDescription = Nothing
-        Me.txtTotalDebits.FieldName = Nothing
-        Me.txtTotalDebits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtTotalDebits.FindEnabled = false
-        Me.txtTotalDebits.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalDebits.LinkedLabel = Nothing
-        Me.txtTotalDebits.Location = New System.Drawing.Point(424, 561)
-        Me.txtTotalDebits.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtTotalDebits.MaximumValue = Nothing
-        Me.txtTotalDebits.MinimumValue = Nothing
-        Me.txtTotalDebits.Name = "txtTotalDebits"
-        Me.txtTotalDebits.OldValue = Nothing
-        Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtTotalDebits.Size = New System.Drawing.Size(100, 23)
-        Me.txtTotalDebits.TabIndex = 295
-        Me.txtTotalDebits.Translatable = false
-        Me.txtTotalDebits.Visible = false
-        '
-        'txtTotalCredits
-        '
-        Me.txtTotalCredits.BackColor = System.Drawing.Color.White
-        Me.txtTotalCredits.BegFindValue = Nothing
-        Me.txtTotalCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalCredits.ComputedValue = false
-        Me.txtTotalCredits.CustomFormat = Nothing
-        Me.txtTotalCredits.DataBoundControl = true
-        Me.txtTotalCredits.EditingMode = true
-        Me.txtTotalCredits.EndFindValue = Nothing
-        Me.txtTotalCredits.FieldDescription = Nothing
-        Me.txtTotalCredits.FieldName = Nothing
-        Me.txtTotalCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtTotalCredits.FindEnabled = false
-        Me.txtTotalCredits.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalCredits.LinkedLabel = Nothing
-        Me.txtTotalCredits.Location = New System.Drawing.Point(527, 561)
-        Me.txtTotalCredits.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtTotalCredits.MaximumValue = Nothing
-        Me.txtTotalCredits.MinimumValue = Nothing
-        Me.txtTotalCredits.Name = "txtTotalCredits"
-        Me.txtTotalCredits.OldValue = Nothing
-        Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtTotalCredits.Size = New System.Drawing.Size(100, 23)
-        Me.txtTotalCredits.TabIndex = 296
-        Me.txtTotalCredits.Translatable = false
-        Me.txtTotalCredits.Visible = false
+        Me.txtIdNo.BackColor = System.Drawing.Color.White
+        Me.txtIdNo.BegFindValue = Nothing
+        Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtIdNo.ComputedValue = false
+        Me.txtIdNo.CustomFormat = Nothing
+        Me.txtIdNo.DataBoundControl = true
+        Me.txtIdNo.EditingMode = true
+        Me.txtIdNo.EndFindValue = Nothing
+        Me.txtIdNo.FieldDescription = Nothing
+        Me.txtIdNo.FieldName = Nothing
+        Me.txtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtIdNo.FindEnabled = false
+        Me.txtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.txtIdNo.LinkedLabel = Nothing
+        Me.txtIdNo.Location = New System.Drawing.Point(424, 561)
+        Me.txtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtIdNo.MaximumValue = Nothing
+        Me.txtIdNo.MinimumValue = Nothing
+        Me.txtIdNo.Name = "txtIdNo"
+        Me.txtIdNo.OldValue = Nothing
+        Me.txtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtIdNo.Size = New System.Drawing.Size(100, 23)
+        Me.txtIdNo.TabIndex = 295
+        Me.txtIdNo.Translatable = false
+        Me.txtIdNo.Visible = false
         '
         'PettyCashClosingEntry
         '
@@ -961,7 +930,6 @@ End Sub
         Friend WithEvents cboPayType As CaComboBox
         Friend WithEvents CLabel4 As CLabel
         Friend WithEvents cboPcAccountIdNo As CaComboBox
-        Friend WithEvents txtTotalDebits As CTextBox
-        Friend WithEvents txtTotalCredits As CTextBox
+        Friend WithEvents txtIdNo As CTextBox
     End Class
 End Namespace
