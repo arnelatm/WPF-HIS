@@ -79,6 +79,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+            AddMode = True
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()
             End If
