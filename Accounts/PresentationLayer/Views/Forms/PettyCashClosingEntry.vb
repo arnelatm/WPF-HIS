@@ -18,6 +18,9 @@ Namespace PresentationLayer.Views.Forms
         Private _pcFooter As DgvFooter
         Private _pcClosed As Boolean = True
 
+        Public Event PcJournalCheckedEvent(sender As Object) Implements IPettyCashClosingView.PcJournalCheckedEvent
+        Public Event ClearAllPcJournal(sender As Object, clear As Boolean) Implements IPettyCashClosingView.ClearAllPcJournal
+
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -115,10 +118,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int32 Implements IPettyCashClosingView.IdNo
             Get
-                Return 0
+                Return NumParser(Of Int32)(txtIdNo.Text)
             End Get
             Set
-
+                txtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -195,18 +198,6 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End Set
         End Property
-
-        'Public ReadOnly Property TotalCredits As Decimal Implements IPettyCashClosingView.TotalCredits
-        '    Get
-        '        Return NumParser(Of Decimal)(txtTotalCredits.Text)
-        '    End Get
-        'End Property
-
-        'Public ReadOnly Property TotalDebits As Decimal Implements IPettyCashClosingView.TotalDebits
-        '    Get
-        '        Return NumParser(Of Decimal)(txtTotalDebits.Text)
-        '    End Get
-        'End Property
 
         Public Property JournalItems As List(Of JournalItemView) Implements IPettyCashClosingView.JournalItems
             Get
@@ -304,31 +295,26 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
-            Presenter.SelectChoice(True)
+            RaiseEvent ClearAllPcJournal(bsPcJournals, True)
             bsPcJournals.ResetBindings(False)
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-            Presenter.SelectChoice(False)
+            RaiseEvent ClearAllPcJournal(bsPcJournals, False)
             bsPcJournals.ResetBindings(False)
         End Sub
 
-        Private Sub Dgv_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcJournals.CellValueChanged
-            With DataGridViewPcJournals
-                If .CurrentRow IsNot Nothing Then
-                    Dim nIndex = .CurrentRow.Index
-                    Select Case .CurrentCell.OwningColumn.Name.ToLower()
+        Private Sub DataGridViewPcJournalsCellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcJournals.CellContentClick
+            If DataGridViewPcJournals.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
+                With DataGridViewPcJournals.CurrentCell
+                    Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvpcclosed"
-                            txtAmount.Text = Presenter.TotalSelection()
-                            txtAmount.Refresh()
+                            Dim selectedRow = DataGridViewPcJournals.Rows(.RowIndex).DataBoundItem
+                            RaiseEvent PcJournalCheckedEvent(selectedRow)
                     End Select
-                End If
-            End With
+                End With
+            End If
         End Sub
-
-        'Private Sub cboPcAccountIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPcAccountIdNo.SelectedIndexChanged
-        '    _pcAccountIdNo = cboPcAccountIdNo.SelectedValue
-        'End Sub
 
     End Class
 

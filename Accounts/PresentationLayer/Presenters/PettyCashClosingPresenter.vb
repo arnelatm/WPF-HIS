@@ -2,10 +2,8 @@
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
@@ -43,6 +41,21 @@ Namespace PresentationLayer.Presenters
                                             {"PcClosed", GetType(Boolean)}
                                             })
             AskBeforeSave = True
+
+            AddHandler view.PcJournalCheckedEvent, AddressOf OnPcJournalCheckedEvent
+            AddHandler view.ClearAllPcJournal, AddressOf OnClearAllPcJournal
+
+        End Sub
+
+        Private Sub OnPcJournalCheckedEvent(sender As Object)
+            If EditMode Or AddMode Then
+                If sender.PcClosed Then
+                    View.Amount -= sender.Amount
+                Else
+                    View.Amount += sender.Amount
+                End If
+                sender.PcClosed = Not sender.PcClosed
+            End If
         End Sub
 
         Public Sub GetOpenPettyCash()
@@ -52,31 +65,17 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(modelData, View.PcClosingJournals)
         End Sub
 
-        'Public Overrides Sub SaveOriginalValues()
-        '    'GlobalVariables.Mapper.Map(Of T, TM)(Me.View, Me.OriginalModel)
-        'End Sub
-
-        Public Sub SelectChoice(ByVal selectAll As Boolean)
+        Private Sub OnClearAllPcJournal(ByVal bsPcClosingJournal as BindingSource, clear As Boolean)
             Dim total As Decimal = 0
-            For Each item In View.PcClosingJournals
-                item.PcClosed = selectAll
-                If selectAll Then
+            For Each item In bsPcClosingJournal
+                item.PcClosed = clear
+                If clear Then
                     total += item.Amount
                 End If
             Next item
             View.Amount = total
             View.Applied = total
         End Sub
-
-        Public Function TotalSelection()
-            Dim total As Decimal = 0D
-            For Each item In View.PcClosingJournals
-                If item.PcClosed Then
-                    total += item.Amount
-                End If
-            Next item
-            Return total
-        End Function
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             AddMode = True
@@ -133,33 +132,6 @@ Namespace PresentationLayer.Presenters
             View.JournalItems.Add(x)
         End Sub
 
-        'Private Sub MakeJournalItem()
-        '    Dim aAccountIdNo As Int16() = {}
-        '    Dim aAmount() As Decimal = {}
-        '    Dim aAdded() As Boolean = {}
-        '    View.JournalItems.Clear()
-        '    Dim item As New JournalItemView With {
-        '            .JournalIdNo = View.IdNo,
-        '            .Sequence = 1,
-        '            .AccountIdNo = View.AccountIdNo,
-        '            .Credit = If(View.Amount < 0, 0, View.Amount),
-        '            .Debit = If(View.Amount < 0, View.Amount * -1, 0),
-        '            .RevCostCenterIdNo = 0,
-        '            .Notes = ""
-        '            }
-        '    View.JournalItems.Add(item)
-        '    item = New JournalItemView With {
-        '            .JournalIdNo = View.IdNo,
-        '            .Sequence = 1,
-        '            .AccountIdNo = 113,
-        '            .Credit = If(View.Amount < 0, View.Amount * -1, 0),
-        '            .Debit = If(View.Amount < 0, 0, View.Amount),
-        '            .RevCostCenterIdNo = 0,
-        '            .Notes = ""
-        '            }
-        '    View.JournalItems.Add(item)
-        'End Sub
-
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer
             passedValue = retVal
@@ -180,7 +152,6 @@ Namespace PresentationLayer.Presenters
             Dim retValue As String
             Dim dataModel As New TM
             GlobalVariables.Mapper.Map(View, dataModel)
-            'dataModel.IdNo = pcIdNo
             retValue = Service.UpdateGlReferenceNumber(dataModel)
             Return retValue
         End Function
