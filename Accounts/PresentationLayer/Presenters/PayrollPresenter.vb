@@ -954,6 +954,7 @@ Namespace PresentationLayer.Presenters
                 For Each employeeAttendance In View.PayrollAttendance
                     payrollDetail = savedPayrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
                     If payrollDetail Is Nothing Then
+                        payrollDetail = New PayrollDetailModel
                         payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
                         payrollDetail.PayrollIdNo = View.IdNo
                     End If
