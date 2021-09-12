@@ -484,10 +484,10 @@
     <Compile Include="PresentationLayer\Views\Forms\PayElementEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SalesJournalEntryNew.Designer.vb">
-      <DependentUpon>SalesJournalEntryNew.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\SalesJournalEntry.Designer.vb">
+      <DependentUpon>SalesJournalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\SalesJournalEntryNew.vb">
+    <Compile Include="PresentationLayer\Views\Forms\SalesJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.Designer.vb">
@@ -1143,8 +1143,8 @@
       <DependentUpon>PayElementEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\SalesJournalEntryNew.resx">
-      <DependentUpon>SalesJournalEntryNew.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SalesJournalEntry.resx">
+      <DependentUpon>SalesJournalEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.resx">
@@ -1391,8 +1391,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-Marcelo.config" />
     <None Include="app.config" />
+    <None Include="app-Marcelo.config" />
     <None Include="appIspadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
