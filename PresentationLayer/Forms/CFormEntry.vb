@@ -66,8 +66,6 @@ Public Class CFormEntry
     <Browsable(True)>
     Public Property ChildTableName As String = ""
 
-    'Public Property Presenter
-
     Public Property TableProperties As Array
 
     Protected Property FormTitleCaption As String = ""

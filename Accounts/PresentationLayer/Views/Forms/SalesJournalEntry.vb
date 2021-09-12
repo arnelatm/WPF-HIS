@@ -34,11 +34,6 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = dtpTransactionDate
             _nfi.NumberDecimalDigits = 2
-            If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = Presenter.GetLocalizedPrefix("SJ")
-            Else
-                txtJournalCode.Text = "SJ"
-            End If
         End Sub
 
 #Region "Fields"
@@ -316,6 +311,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SalesJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("SJ")
+            Else
+                txtJournalCode.Text = "SJ"
+            End If
             KeyPreview = True
             _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
                 .AutoCalc = True
