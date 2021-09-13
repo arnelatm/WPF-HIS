@@ -35,11 +35,6 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = cboPayorType
             _payorOrigWidth = cboPayorIdNo.Width
             _nfi.NumberDecimalDigits = 2
-            If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = Presenter.GetLocalizedPrefix("CR")
-            Else
-                txtJournalCode.Text = "CR"
-            End If
         End Sub
 
         'Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
@@ -372,6 +367,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CashReceiptJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("CR")
+            Else
+                txtJournalCode.Text = "CR"
+            End If
             KeyPreview = True
             _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
                 .AutoCalc = True
