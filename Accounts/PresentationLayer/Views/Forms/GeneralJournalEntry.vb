@@ -23,11 +23,6 @@ Namespace PresentationLayer.Views.Forms
             ClosingJournal = _closingEntry
             FirstControl = txtReferenceNo
             _nfi.NumberDecimalDigits = 2
-            If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = Presenter.GetLocalizedPrefix("GJ")
-            Else
-                txtJournalCode.Text = "GJ"
-            End If
         End Sub
 
         ' This event handler provides custom item-creation behavior.
@@ -222,6 +217,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub GeneralJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("GJ")
+            Else
+                txtJournalCode.Text = "GJ"
+            End If
             _footer = New DgvFooter(DataGridViewJournalItems) With {
                 .AutoCalc = True
             }

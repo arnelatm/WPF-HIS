@@ -23,11 +23,6 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = dtpTransactionDate
             _nfi.NumberDecimalDigits = 2
-            If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = Presenter.GetLocalizedPrefix("AR")
-            Else
-                txtJournalCode.Text = "AR"
-            End If
         End Sub
 
         '' This event handler provides custom item-creation behavior.
@@ -275,6 +270,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ArJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            If GlobalVariables.RightToLeftLayout Then
+                txtJournalCode.Text = Presenter.GetLocalizedPrefix("AR")
+            Else
+                txtJournalCode.Text = "AR"
+            End If
             _footer = New DgvFooter(DataGridViewJournalItems) With {
                 .AutoCalc = True
             }
