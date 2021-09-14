@@ -53,8 +53,22 @@ Public Class AppSettings
         Get
             Return _translationInitializer
         End Get
-        Set(ByVal Value As Boolean)
-            _translationInitializer = Value
+        Set(ByVal value As Boolean)
+            _translationInitializer = value
+        End Set
+    End Property
+
+    Private _preferredLanguage As String
+
+    <TypeConverter(GetType(PreferredLanguage)),
+        CategoryAttribute("General Settings"), DefaultValueAttribute(""),
+        DescriptionAttribute("Select a language from the list")>
+    Public Property PreferredLanguage() As String
+        Get
+            Return _preferredLanguage
+        End Get
+        Set(ByVal value As String)
+            _preferredLanguage = value
         End Set
     End Property
 
@@ -142,6 +156,25 @@ Public Class TranslateInitializerMode : Inherits System.ComponentModel.BooleanCo
 
     Public Overloads Overrides Function GetStandardValues(ByVal context As ITypeDescriptorContext) As StandardValuesCollection
         Return New StandardValuesCollection(_translationInitializer)
+    End Function
+
+    Public Overloads Overrides Function GetStandardValuesSupported(ByVal context As ITypeDescriptorContext) As Boolean
+        Return True
+    End Function
+
+    Public Overloads Overrides Function GetStandardValuesExclusive(ByVal context As ITypeDescriptorContext) As Boolean
+        Return True
+    End Function
+
+End Class
+
+Public Class PreferredLanguage : Inherits System.ComponentModel.StringConverter
+
+    '''
+    ReadOnly _preferredLanguage As String() = New String() {$"English (إنجليزي)", $"Arabic (عربي)"}
+
+    Public Overloads Overrides Function GetStandardValues(ByVal context As ITypeDescriptorContext) As StandardValuesCollection
+        Return New StandardValuesCollection(_preferredLanguage)
     End Function
 
     Public Overloads Overrides Function GetStandardValuesSupported(ByVal context As ITypeDescriptorContext) As Boolean
