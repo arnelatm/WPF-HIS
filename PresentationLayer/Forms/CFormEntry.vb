@@ -74,11 +74,13 @@ Public Class CFormEntry
         Parent.SuspendDrawing()
         If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
             If btnArabic.Enabled Then
-                btnOriginal.PerformClick()
+                'btnArabic.PerformClick()
+                SwitchUiLanguage(False)
             End If
         Else
             If Not btnArabic.Enabled Then
-                btnOriginal.PerformClick()
+                'btnOriginal.PerformClick()
+                SwitchUiLanguage(True)
             End If
         End If
         Parent.ResumeDrawing()
@@ -603,12 +605,17 @@ Public Class CFormEntry
                 TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
                 sw = 1
             End If
+            GlobalVariables.RightToLeftLayout = True
+            RightToLeft = RightToLeft.No               
         Else
             If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
                 TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
                 sw = 1
             End If
+            GlobalVariables.RightToLeftLayout = False
+            RightToLeft = RightToLeft.Yes           
         End If
+        TranslateForm()
         If sw = 1 Then
             CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
             'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
@@ -616,7 +623,7 @@ Public Class CFormEntry
             'Else
             '    GlobalVariables.RightToLeftLayout = False
             'End If
-            TranslateForm()
+            'TranslateForm()
             btnArabic.Visible = originalUi
             btnOriginal.Visible = Not originalUi
             btnArabic.Enabled = originalUi
