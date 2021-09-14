@@ -55,6 +55,7 @@ Namespace PresentationLayer.Views.Forms
 
             Dim mySettings = AppSettings.Load()
             GlobalVariables.TranslationMode = mySettings.TranslationInitializer
+            GlobalVariables.PreferredLanguage = mySettings.PreferredLanguage
             _logStatus = LoginStatus.LoggedOut
             InitializeComponent()
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
@@ -62,13 +63,25 @@ Namespace PresentationLayer.Views.Forms
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture
                 GlobalVariables.AppCurrentCultureInfo = CultureInfo.CurrentCulture
-
+                'If GlobalVariables.PreferredLanguage = $"English (إنجليزي)" Then
+                '    GlobalVariables.RightToLeftLayout = False
+                'ElseIf GlobalVariables.PreferredLanguage = $"Arabic (عربي)" Then
+                '    GlobalVariables.RightToLeftLayout = True
+                'Else
                 If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
                     GlobalVariables.RightToLeftLayout = True
                 Else
                     GlobalVariables.RightToLeftLayout = False
                 End If
+                'End If
                 SetLanguageChangeButtons()
+                'Else
+                '    If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+                '        GlobalVariables.RightToLeftLayout = True
+                '    Else
+                '        GlobalVariables.RightToLeftLayout = False
+                '    End If
+                '    SetLanguageChangeButtons()
             End If
             SetupMapper()
             Presenter = New UserPresenter(Of UserModel)(Me)
@@ -711,6 +724,14 @@ Namespace PresentationLayer.Views.Forms
                     Else
                         LogStatus = LoginStatus.LoggedOut
                     End If
+                    If LogStatus = LoginStatus.LoggedIn Then
+                        Dim mirroredLanguage = My.Settings.MirroredLanguage
+                        If mirroredLanguage Then
+                            GlobalFunctions.SetCulture(GlobalVariables.DefaultMirroredCultureInfoStr)
+                            SetLanguageChangeButtons()
+                            SwitchUiLanguage(False)
+                        End If
+                    End If
                 Catch ex As TypeInitializationException
                     MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
                                     "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -728,7 +749,15 @@ Namespace PresentationLayer.Views.Forms
         ''' </summary>
         Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) _
             Handles ToolStripMenuItemLogout.Click
+            If LogStatus = LoginStatus.LoggedIn Then
+                SaveLanguagePreference()
+            End If
             LogStatus = LoginStatus.LoggedOut
+        End Sub
+
+        Private Sub SaveLanguagePreference()
+            My.Settings.PreferredLanguage = GlobalVariables.PreferredLanguage
+            My.Settings.Save()
         End Sub
 
         Private Sub PayrollReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPeriodicPayroll.Click
@@ -816,6 +845,17 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripButtonLogout_Click(sender As Object, e As EventArgs) Handles ToolStripButtonLogout.Click
             LogoutToolStripMenuItem_Click(Me, Nothing)
             SetLanguageChangeButtons()
+            If GlobalVariables.RightToLeftLayout Then
+                If Not My.Settings.MirroredLanguage Then
+                    My.Settings.MirroredLanguage = True
+                    My.Settings.Save()
+                End If
+            Else
+                If My.Settings.MirroredLanguage Then
+                    My.Settings.MirroredLanguage = False
+                    My.Settings.Save()
+                End If
+            End If
             Refresh()
         End Sub
 
