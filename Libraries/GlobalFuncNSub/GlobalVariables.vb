@@ -697,6 +697,8 @@ Public Class GlobalVariables
 
     Public Shared Property TranslationMode As Boolean = False
 
+    Public Shared Property PreferredLanguage As String = $"English (إنجليزي)"
+
     'Private Shared Sub GetAppCultureInfo()
     '    If _AppLanguage = "" Then
     '        Try
