@@ -57,9 +57,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("BooleanType")>  _
-        Public Property PayrollComputation() As  AATM.PresentationLayer.Presenters.DataTypeSelection
+        Public Property PayrollComputation() As Global.AATM.PresentationLayer.Presenters.DataTypeSelection
             Get
-                Return CType(Me("PayrollComputation"), AATM.PresentationLayer.Presenters.DataTypeSelection)
+                Return CType(Me("PayrollComputation"),Global.AATM.PresentationLayer.Presenters.DataTypeSelection)
             End Get
             Set
                 Me("PayrollComputation") = value
@@ -123,6 +123,18 @@ Namespace My
             End Get
             Set
                 Me("MirroredLanguage") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property UserName() As String
+            Get
+                Return CType(Me("UserName"),String)
+            End Get
+            Set
+                Me("UserName") = value
             End Set
         End Property
     End Class

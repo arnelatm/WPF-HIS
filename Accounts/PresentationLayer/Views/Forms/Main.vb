@@ -679,6 +679,9 @@ Namespace PresentationLayer.Views.Forms
         '''     Exits application.
         ''' </summary>
         Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemExit.Click
+            If LogStatus = LoginStatus.LoggedIn Then
+                SaveLanguagePreference()
+            End If
             Close()
         End Sub
 
@@ -845,6 +848,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripButtonLogout_Click(sender As Object, e As EventArgs) Handles ToolStripButtonLogout.Click
             LogoutToolStripMenuItem_Click(Me, Nothing)
             SetLanguageChangeButtons()
+            SaveMirroredLanguageSetting()
+            Refresh()
+        End Sub
+
+        Private Sub SaveMirroredLanguageSetting()
             If GlobalVariables.RightToLeftLayout Then
                 If Not My.Settings.MirroredLanguage Then
                     My.Settings.MirroredLanguage = True
@@ -856,7 +864,6 @@ Namespace PresentationLayer.Views.Forms
                     My.Settings.Save()
                 End If
             End If
-            Refresh()
         End Sub
 
         Private Sub ToolStripButtonLTR_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnglish.Click
