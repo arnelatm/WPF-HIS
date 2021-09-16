@@ -63,6 +63,14 @@ Namespace PresentationLayer.Views.Forms
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture
                 GlobalVariables.AppCurrentCultureInfo = CultureInfo.CurrentCulture
+
+                'Dim mirroredLanguage = My.Settings.MirroredLanguage
+                'If mirroredLanguage Then
+                '    GlobalFunctions.SetCulture(GlobalVariables.DefaultMirroredCultureInfoStr)
+                '    SetLanguageChangeButtons()
+                '    SwitchUiLanguage(False)
+                'End If
+
                 'If GlobalVariables.PreferredLanguage = $"English (إنجليزي)" Then
                 '    GlobalVariables.RightToLeftLayout = False
                 'ElseIf GlobalVariables.PreferredLanguage = $"Arabic (عربي)" Then
@@ -679,9 +687,7 @@ Namespace PresentationLayer.Views.Forms
         '''     Exits application.
         ''' </summary>
         Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemExit.Click
-            If LogStatus = LoginStatus.LoggedIn Then
-                SaveLanguagePreference()
-            End If
+            SaveMirroredLanguageSetting()
             Close()
         End Sub
 
@@ -704,7 +710,12 @@ Namespace PresentationLayer.Views.Forms
             End If
             ' Add any initialization after the InitializeComponent() call.
             Dim mySettings = AppSettings.Load()
-
+            Dim mirroredLanguage = My.Settings.MirroredLanguage
+            If mirroredLanguage Then
+                GlobalFunctions.SetCulture(GlobalVariables.DefaultMirroredCultureInfoStr)
+                SetLanguageChangeButtons()
+                SwitchUiLanguage(False)
+            End If
             '_appSettings = PropertyGrid.SelectedObject
             ' Attribute for the user-scope settings.
 
@@ -823,6 +834,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButtonExit.Click
+            SaveMirroredLanguageSetting()
             Close()
         End Sub
 
@@ -853,15 +865,17 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SaveMirroredLanguageSetting()
-            If GlobalVariables.RightToLeftLayout Then
-                If Not My.Settings.MirroredLanguage Then
-                    My.Settings.MirroredLanguage = True
-                    My.Settings.Save()
-                End If
-            Else
-                If My.Settings.MirroredLanguage Then
-                    My.Settings.MirroredLanguage = False
-                    My.Settings.Save()
+            If LogStatus = LoginStatus.LoggedIn Then
+                If GlobalVariables.RightToLeftLayout Then
+                    If Not My.Settings.MirroredLanguage Then
+                        My.Settings.MirroredLanguage = True
+                        My.Settings.Save()
+                    End If
+                Else
+                    If My.Settings.MirroredLanguage Then
+                        My.Settings.MirroredLanguage = False
+                        My.Settings.Save()
+                    End If
                 End If
             End If
         End Sub
