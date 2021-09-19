@@ -374,6 +374,7 @@ Namespace PresentationLayer.Presenters
             ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
             empAttendance.DaysTotal = daysTotal
             empAttendance.DaysOff = daysOff
+
         End Sub
 
         Private Sub ComputeTotalDaysNOff(ByRef daysTotal As Int16, ByRef daysOff As Int16, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)

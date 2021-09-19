@@ -133,7 +133,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDateTime(txtEndDate.Text)
             End Get
             Set(value As Date)
-                txtEndDate.Text = value.ToString()
+                txtEndDate.Text = value.ToShortDateString()
             End Set
         End Property
 
@@ -142,7 +142,7 @@ Namespace PresentationLayer.Views.Forms
                 Return Convert.ToDateTime(txtStartDate.Text)
             End Get
             Set(value As Date)
-                txtStartDate.Text = value.ToString()
+                txtStartDate.Text = value.ToShortDateString()
             End Set
         End Property
 
