@@ -199,6 +199,7 @@
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
     <Compile Include="BusinessLayer\EmployeeLeave.vb" />
     <Compile Include="BusinessLayer\EmployeeAbsence.vb" />
+    <Compile Include="BusinessLayer\EmployeeLeaveCredit.vb" />
     <Compile Include="BusinessLayer\RecurringPayElement.vb" />
     <Compile Include="BusinessLayer\PayElementItem.vb" />
     <Compile Include="BusinessLayer\PayElement.vb" />
@@ -338,6 +339,7 @@
     <Compile Include="PresentationLayer\Models\JournalPrefixModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeAbsencesModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeLeaveCreditModel.vb" />
     <Compile Include="PresentationLayer\Models\RecurringPayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\TransactionNotes.vb" />
     <Compile Include="PresentationLayer\Models\PayElementItemModel.vb" />
@@ -1391,8 +1393,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Marcelo.config" />
+    <None Include="app.config" />
     <None Include="appIspadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
