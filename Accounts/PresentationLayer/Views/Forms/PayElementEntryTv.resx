@@ -1269,6 +1269,10 @@
         iiigAooo70AFLSUooAWiiigApKWkoAKWkpaACiiigD//2Q==
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SplitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.Name" xml:space="preserve">
     <value>SplitContainer1.Panel1</value>
   </data>
@@ -1281,7 +1285,6 @@
   <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="floDataDisplay.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -2898,7 +2901,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 27</value>
+    <value>1, 20</value>
   </data>
   <data name="lblAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2907,7 +2910,7 @@
     <value>No</value>
   </data>
   <data name="lblAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 24</value>
+    <value>186, 24</value>
   </data>
   <data name="lblAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>275</value>
@@ -2930,6 +2933,39 @@
   <data name="&gt;&gt;lblAccountIdNo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="chkUsePayGroups.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="chkUsePayGroups.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="chkUsePayGroups.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkUsePayGroups.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 3</value>
+  </data>
+  <data name="chkUsePayGroups.Size" type="System.Drawing.Size, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="chkUsePayGroups.TabIndex" type="System.Int32, mscorlib">
+    <value>283</value>
+  </data>
+  <data name="chkUsePayGroups.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;chkUsePayGroups.Name" xml:space="preserve">
+    <value>chkUsePayGroups</value>
+  </data>
+  <data name="&gt;&gt;chkUsePayGroups.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkUsePayGroups.Parent" xml:space="preserve">
+    <value>tlpPostingAccounts</value>
+  </data>
+  <data name="&gt;&gt;chkUsePayGroups.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="cboAccountIdNo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -2943,13 +2979,13 @@
     <value>False</value>
   </data>
   <data name="cboAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 27</value>
+    <value>189, 20</value>
   </data>
   <data name="cboAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 24</value>
+    <value>383, 24</value>
   </data>
   <data name="cboAccountIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>274</value>
@@ -2964,7 +3000,7 @@
     <value>tlpPostingAccounts</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblUsePayGroups.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2985,7 +3021,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblUsePayGroups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 24</value>
+    <value>293, 17</value>
   </data>
   <data name="lblUsePayGroups.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3006,48 +3042,6 @@
     <value>tlpPostingAccounts</value>
   </data>
   <data name="&gt;&gt;lblUsePayGroups.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="chkUsePayGroups.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="chkUsePayGroups.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkUsePayGroups.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="chkUsePayGroups.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="chkUsePayGroups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 1</value>
-  </data>
-  <data name="chkUsePayGroups.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="chkUsePayGroups.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
-  </data>
-  <data name="chkUsePayGroups.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="chkUsePayGroups.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="chkUsePayGroups.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;chkUsePayGroups.Name" xml:space="preserve">
-    <value>chkUsePayGroups</value>
-  </data>
-  <data name="&gt;&gt;chkUsePayGroups.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkUsePayGroups.Parent" xml:space="preserve">
-    <value>tlpPostingAccounts</value>
-  </data>
-  <data name="&gt;&gt;chkUsePayGroups.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="dgvSequence.HeaderText" xml:space="preserve">
@@ -3099,10 +3093,10 @@
     <value>Fill</value>
   </data>
   <data name="DataGridViewPayElementAccounts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 55</value>
+    <value>3, 48</value>
   </data>
   <data name="DataGridViewPayElementAccounts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 244</value>
+    <value>567, 251</value>
   </data>
   <data name="DataGridViewPayElementAccounts.TabIndex" type="System.Int32, mscorlib">
     <value>276</value>
@@ -3144,7 +3138,7 @@
     <value>0</value>
   </data>
   <data name="tlpPostingAccounts.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblAccountIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboAccountIdNo" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="lblUsePayGroups" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="chkUsePayGroups" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="DataGridViewPayElementAccounts" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,63.6656,Percent,36.3344,Absolute,274" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblAccountIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="chkUsePayGroups" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cboAccountIdNo" Row="1" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="lblUsePayGroups" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="DataGridViewPayElementAccounts" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,63.6656,Percent,36.3344,Absolute,277" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="floPostingAccounts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -3231,7 +3225,7 @@
     <value>False</value>
   </data>
   <metadata name="bsPayElementItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>1140, 17</value>
   </metadata>
   <data name="DataGridViewPayElementItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -3445,7 +3439,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
-        BwAAAk1TRnQBSQFMAwEBAAHYAQMB2AEDARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
+        BwAAAk1TRnQBSQFMAwEBAAEQAQQBEAEEARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMA
         AUADAAEQAwABAQEAAQgGAAEEGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEA
         AfABygGmAQABMwUAATMBAAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEA
         AYABfAH/AQACUAH/AQABkwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFm
@@ -3577,7 +3571,7 @@
     <value>0, 15, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 518</value>
+    <value>638, 518</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -3612,6 +3606,9 @@
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>389</value>
   </data>
+  <data name="SplitContainer1.SplitterWidth" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
   <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
     <value>SplitContainer1</value>
   </data>
@@ -3623,6 +3620,9 @@
   </data>
   <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="FormTreeView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="FormTreeView.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -3650,7 +3650,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACa
-        CQAAAk1TRnQBSQFMAgEBAgEAAaABAAHgAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAaABAAEYAQEBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -3720,9 +3720,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1031, 571</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>918, 288</value>
