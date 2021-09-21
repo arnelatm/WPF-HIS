@@ -600,6 +600,39 @@ Namespace PresentationLayer.Views.Forms
             'ResumeLayout()
         End Sub
 
+        Private Sub BindLeaveCredits()
+            bsPhones.DataSource = Nothing
+            DataGridViewPhones.Refresh()
+            bsPhones.DataSource = EmployeePhones
+            bsPhones.AllowNew = True
+            With DataGridViewPhones
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsPhones
+                .Refresh()
+            End With
+            With DataGridViewPhones.Columns
+                dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvPhoneTypeIdNo.DataSource = _phoneTypes
+                dgvPhoneTypeIdNo.DisplayMember = "Name"
+                dgvPhoneTypeIdNo.ValueMember = "IdNo"
+                dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvCountryTelIdNo.DataSource = CountryTelCodes
+                dgvCountryTelIdNo.DisplayMember = "Name"
+                dgvCountryTelIdNo.ValueMember = "IdNo"
+                dgvCountryTelIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+            If GlobalVariables.RightToLeftLayout Then
+                dgvFullPhone.Visible = False
+                dgvFullPhoneAra.Visible = True
+            Else
+                dgvFullPhoneAra.Visible = False
+                dgvFullPhone.Visible = True
+            End If
+        End Sub
+
         Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
             DisplayPhoneTab()
         End Sub
@@ -658,6 +691,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub dtpBirthDate_Load(sender As Object, e As EventArgs) Handles dtpBirthDate.Load
 
         End Sub
+
     End Class
 
 End Namespace
