@@ -57,6 +57,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblSummary = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.tbcPayElement = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
         Me.tbpCalculation = New System.Windows.Forms.TabPage()
         Me.floCalculation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -88,9 +89,9 @@ Namespace PresentationLayer.Views.Forms
         Me.floPostingAccounts = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.tlpPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
         Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.DataGridViewPayElementAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.tbpSummaryDetail = New System.Windows.Forms.TabPage()
         Me.DataGridViewPayElementItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
@@ -102,7 +103,6 @@ Namespace PresentationLayer.Views.Forms
         Me.tabPageImages = New System.Windows.Forms.ImageList(Me.components)
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
@@ -153,8 +153,8 @@ Namespace PresentationLayer.Views.Forms
         '
         'FormTreeView
         '
-        Me.FormTreeView.LineColor = System.Drawing.Color.Black
         resources.ApplyResources(Me.FormTreeView, "FormTreeView")
+        Me.FormTreeView.LineColor = System.Drawing.Color.Black
         '
         'ImageListTreeView
         '
@@ -493,6 +493,14 @@ Namespace PresentationLayer.Views.Forms
         Me.lblActive.EditingMode = false
         Me.lblActive.Name = "lblActive"
         Me.lblActive.Translatable = true
+        '
+        'lblIdNo
+        '
+        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
+        Me.lblIdNo.Name = "lblIdNo"
+        Me.lblIdNo.Translatable = true
         '
         'tbcPayElement
         '
@@ -1019,9 +1027,9 @@ Namespace PresentationLayer.Views.Forms
         '
         resources.ApplyResources(Me.tlpPostingAccounts, "tlpPostingAccounts")
         Me.tlpPostingAccounts.Controls.Add(Me.lblAccountIdNo, 0, 1)
+        Me.tlpPostingAccounts.Controls.Add(Me.chkUsePayGroups, 2, 0)
         Me.tlpPostingAccounts.Controls.Add(Me.cboAccountIdNo, 1, 1)
         Me.tlpPostingAccounts.Controls.Add(Me.lblUsePayGroups, 0, 0)
-        Me.tlpPostingAccounts.Controls.Add(Me.chkUsePayGroups, 2, 0)
         Me.tlpPostingAccounts.Controls.Add(Me.DataGridViewPayElementAccounts, 0, 2)
         Me.tlpPostingAccounts.Name = "tlpPostingAccounts"
         '
@@ -1032,6 +1040,29 @@ Namespace PresentationLayer.Views.Forms
         Me.lblAccountIdNo.EditingMode = false
         Me.lblAccountIdNo.Name = "lblAccountIdNo"
         Me.lblAccountIdNo.Translatable = true
+        '
+        'chkUsePayGroups
+        '
+        Me.chkUsePayGroups.BackColor = System.Drawing.Color.White
+        Me.chkUsePayGroups.BegFindValue = Nothing
+        Me.chkUsePayGroups.DisplayOnly = false
+        Me.chkUsePayGroups.EditingMode = true
+        Me.chkUsePayGroups.EndFindValue = Nothing
+        Me.chkUsePayGroups.FieldDescription = Nothing
+        Me.chkUsePayGroups.FieldName = Nothing
+        Me.chkUsePayGroups.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkUsePayGroups.FindEnabled = false
+        resources.ApplyResources(Me.chkUsePayGroups, "chkUsePayGroups")
+        Me.chkUsePayGroups.ForeColor = System.Drawing.Color.Black
+        Me.chkUsePayGroups.IFindableControl_FindEnabled = false
+        Me.chkUsePayGroups.IgnoreCase = false
+        Me.chkUsePayGroups.LinkedLabel = Nothing
+        Me.chkUsePayGroups.Name = "chkUsePayGroups"
+        Me.chkUsePayGroups.NoLabel = true
+        Me.chkUsePayGroups.OldValue = Nothing
+        Me.chkUsePayGroups.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkUsePayGroups.Translatable = false
+        Me.chkUsePayGroups.UseVisualStyleBackColor = false
         '
         'cboAccountIdNo
         '
@@ -1081,30 +1112,6 @@ Namespace PresentationLayer.Views.Forms
         Me.lblUsePayGroups.EditingMode = false
         Me.lblUsePayGroups.Name = "lblUsePayGroups"
         Me.lblUsePayGroups.Translatable = true
-        '
-        'chkUsePayGroups
-        '
-        Me.chkUsePayGroups.BackColor = System.Drawing.Color.White
-        Me.chkUsePayGroups.BegFindValue = Nothing
-        resources.ApplyResources(Me.chkUsePayGroups, "chkUsePayGroups")
-        Me.chkUsePayGroups.DisplayOnly = false
-        Me.chkUsePayGroups.EditingMode = true
-        Me.chkUsePayGroups.EndFindValue = Nothing
-        Me.chkUsePayGroups.FieldDescription = Nothing
-        Me.chkUsePayGroups.FieldName = Nothing
-        Me.chkUsePayGroups.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.chkUsePayGroups.FindEnabled = false
-        Me.chkUsePayGroups.FlatAppearance.BorderSize = 0
-        Me.chkUsePayGroups.ForeColor = System.Drawing.Color.Black
-        Me.chkUsePayGroups.IFindableControl_FindEnabled = false
-        Me.chkUsePayGroups.IgnoreCase = false
-        Me.chkUsePayGroups.LinkedLabel = Me.lblUsePayGroups
-        Me.chkUsePayGroups.Name = "chkUsePayGroups"
-        Me.chkUsePayGroups.NoLabel = true
-        Me.chkUsePayGroups.OldValue = Nothing
-        Me.chkUsePayGroups.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkUsePayGroups.Translatable = false
-        Me.chkUsePayGroups.UseVisualStyleBackColor = true
         '
         'DataGridViewPayElementAccounts
         '
@@ -1276,14 +1283,6 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.YellowGradientBackgroundLarge
         Me.floDataDisplay.Controls.Add(Me.floPayElement)
         Me.floDataDisplay.Name = "floDataDisplay"
-        '
-        'lblIdNo
-        '
-        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-        Me.lblIdNo.DisplayOnly = true
-        Me.lblIdNo.EditingMode = false
-        Me.lblIdNo.Name = "lblIdNo"
-        Me.lblIdNo.Translatable = true
         '
         'dgvSequence
         '
@@ -1533,7 +1532,6 @@ End Sub
         Friend WithEvents lblTaxable As CLabel
         Friend WithEvents tlpPostingAccounts As TableLayoutPanel
         Friend WithEvents lblUsePayGroups As CLabel
-        Friend WithEvents chkUsePayGroups As CCheckBox
         Friend WithEvents lblPayElementType As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
         Friend WithEvents cboAccountIdNo As CaComboBox
@@ -1572,5 +1570,6 @@ End Sub
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
         Friend WithEvents PayGroupNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents lblIdNo As CLabel
+        Friend WithEvents chkUsePayGroups As CCheckBox
     End Class
 End Namespace
