@@ -506,6 +506,12 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollPayElementView.vb" />
+    <Compile Include="PresentationLayer\Views\LeaveView - Copy.Designer.vb">
+      <DependentUpon>LeaveView - Copy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\LeaveView - Copy.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\PcJournalView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.Designer.vb">
@@ -1273,6 +1279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.resx">
       <DependentUpon>StatementOfAp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\LeaveView - Copy.resx">
+      <DependentUpon>LeaveView - Copy.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
       <DependentUpon>LeaveView.vb</DependentUpon>
