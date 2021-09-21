@@ -1,6 +1,6 @@
 ﻿Namespace PresentationLayer.Views
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class LeaveView
+    Partial Class EmployeeLeaveCreditView
         Inherits System.Windows.Forms.UserControl
 
         'UserControl overrides dispose to clean up the component list.
@@ -28,13 +28,13 @@
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtLeaveCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtEmployeeLeaveCreditCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtLeaveName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtEmployeeLeaveCreditName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtLeaveNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.txtEmployeeLeaveCreditNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtLeaveAllowed = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtEmployeeLeaveCreditAllowed = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPaidPercent = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPercent = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -55,13 +55,13 @@
             Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
             Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
             Me.CFlowLayout1.Controls.Add(Me.lblCode)
-            Me.CFlowLayout1.Controls.Add(Me.txtLeaveCode)
+            Me.CFlowLayout1.Controls.Add(Me.txtEmployeeLeaveCreditCode)
             Me.CFlowLayout1.Controls.Add(Me.lblName)
-            Me.CFlowLayout1.Controls.Add(Me.txtLeaveName)
+            Me.CFlowLayout1.Controls.Add(Me.txtEmployeeLeaveCreditName)
             Me.CFlowLayout1.Controls.Add(Me.lblNameAra)
-            Me.CFlowLayout1.Controls.Add(Me.txtLeaveNameAra)
+            Me.CFlowLayout1.Controls.Add(Me.txtEmployeeLeaveCreditNameAra)
             Me.CFlowLayout1.Controls.Add(Me.CLabel1)
-            Me.CFlowLayout1.Controls.Add(Me.txtLeaveAllowed)
+            Me.CFlowLayout1.Controls.Add(Me.txtEmployeeLeaveCreditAllowed)
             Me.CFlowLayout1.Controls.Add(Me.CLabel2)
             Me.CFlowLayout1.Controls.Add(Me.txtPaidPercent)
             Me.CFlowLayout1.Controls.Add(Me.lblPercent)
@@ -132,28 +132,28 @@
             Me.lblCode.Text = "Code"
             Me.lblCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtLeaveCode
+            'txtEmployeeLeaveCreditCode
             '
-            Me.txtLeaveCode.BackColor = System.Drawing.Color.White
-            Me.txtLeaveCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtLeaveCode.ComputedValue = False
-            Me.txtLeaveCode.CustomFormat = Nothing
-            Me.txtLeaveCode.DataBoundControl = True
-            Me.txtLeaveCode.EditingMode = True
-            Me.CFlowLayout1.SetFlowBreak(Me.txtLeaveCode, True)
-            Me.txtLeaveCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtLeaveCode.ForeColor = System.Drawing.Color.Black
-            Me.txtLeaveCode.LinkedLabel = Nothing
-            Me.txtLeaveCode.Location = New System.Drawing.Point(168, 36)
-            Me.txtLeaveCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtLeaveCode.MaximumValue = Nothing
-            Me.txtLeaveCode.MinimumValue = Nothing
-            Me.txtLeaveCode.Name = "txtLeaveCode"
-            Me.txtLeaveCode.OldValue = Nothing
-            Me.txtLeaveCode.ReadOnly = True
-            Me.txtLeaveCode.Size = New System.Drawing.Size(62, 23)
-            Me.txtLeaveCode.TabIndex = 160
-            Me.txtLeaveCode.ValueIsMandatory = True
+            Me.txtEmployeeLeaveCreditCode.BackColor = System.Drawing.Color.White
+            Me.txtEmployeeLeaveCreditCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtEmployeeLeaveCreditCode.ComputedValue = False
+            Me.txtEmployeeLeaveCreditCode.CustomFormat = Nothing
+            Me.txtEmployeeLeaveCreditCode.DataBoundControl = True
+            Me.txtEmployeeLeaveCreditCode.EditingMode = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtEmployeeLeaveCreditCode, True)
+            Me.txtEmployeeLeaveCreditCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtEmployeeLeaveCreditCode.ForeColor = System.Drawing.Color.Black
+            Me.txtEmployeeLeaveCreditCode.LinkedLabel = Nothing
+            Me.txtEmployeeLeaveCreditCode.Location = New System.Drawing.Point(168, 36)
+            Me.txtEmployeeLeaveCreditCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtEmployeeLeaveCreditCode.MaximumValue = Nothing
+            Me.txtEmployeeLeaveCreditCode.MinimumValue = Nothing
+            Me.txtEmployeeLeaveCreditCode.Name = "txtEmployeeLeaveCreditCode"
+            Me.txtEmployeeLeaveCreditCode.OldValue = Nothing
+            Me.txtEmployeeLeaveCreditCode.ReadOnly = True
+            Me.txtEmployeeLeaveCreditCode.Size = New System.Drawing.Size(62, 23)
+            Me.txtEmployeeLeaveCreditCode.TabIndex = 160
+            Me.txtEmployeeLeaveCreditCode.ValueIsMandatory = True
             '
             'lblName
             '
@@ -169,27 +169,27 @@
             Me.lblName.Text = "Name"
             Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtLeaveName
+            'txtEmployeeLeaveCreditName
             '
-            Me.txtLeaveName.BackColor = System.Drawing.Color.White
-            Me.txtLeaveName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtLeaveName.ComputedValue = False
-            Me.txtLeaveName.CustomFormat = Nothing
-            Me.txtLeaveName.DataBoundControl = True
-            Me.txtLeaveName.EditingMode = False
-            Me.txtLeaveName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtLeaveName.ForeColor = System.Drawing.Color.Black
-            Me.txtLeaveName.LinkedLabel = Nothing
-            Me.txtLeaveName.Location = New System.Drawing.Point(168, 61)
-            Me.txtLeaveName.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtLeaveName.MaximumValue = Nothing
-            Me.txtLeaveName.MinimumValue = Nothing
-            Me.txtLeaveName.Name = "txtLeaveName"
-            Me.txtLeaveName.OldValue = Nothing
-            Me.txtLeaveName.ReadOnly = True
-            Me.txtLeaveName.Size = New System.Drawing.Size(418, 23)
-            Me.txtLeaveName.TabIndex = 161
-            Me.txtLeaveName.ValueIsMandatory = True
+            Me.txtEmployeeLeaveCreditName.BackColor = System.Drawing.Color.White
+            Me.txtEmployeeLeaveCreditName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtEmployeeLeaveCreditName.ComputedValue = False
+            Me.txtEmployeeLeaveCreditName.CustomFormat = Nothing
+            Me.txtEmployeeLeaveCreditName.DataBoundControl = True
+            Me.txtEmployeeLeaveCreditName.EditingMode = False
+            Me.txtEmployeeLeaveCreditName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtEmployeeLeaveCreditName.ForeColor = System.Drawing.Color.Black
+            Me.txtEmployeeLeaveCreditName.LinkedLabel = Nothing
+            Me.txtEmployeeLeaveCreditName.Location = New System.Drawing.Point(168, 61)
+            Me.txtEmployeeLeaveCreditName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtEmployeeLeaveCreditName.MaximumValue = Nothing
+            Me.txtEmployeeLeaveCreditName.MinimumValue = Nothing
+            Me.txtEmployeeLeaveCreditName.Name = "txtEmployeeLeaveCreditName"
+            Me.txtEmployeeLeaveCreditName.OldValue = Nothing
+            Me.txtEmployeeLeaveCreditName.ReadOnly = True
+            Me.txtEmployeeLeaveCreditName.Size = New System.Drawing.Size(418, 23)
+            Me.txtEmployeeLeaveCreditName.TabIndex = 161
+            Me.txtEmployeeLeaveCreditName.ValueIsMandatory = True
             '
             'lblNameAra
             '
@@ -205,28 +205,28 @@
             Me.lblNameAra.Text = "Name (Arabic)"
             Me.lblNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtLeaveNameAra
+            'txtEmployeeLeaveCreditNameAra
             '
-            Me.txtLeaveNameAra.BackColor = System.Drawing.Color.White
-            Me.txtLeaveNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtLeaveNameAra.ComputedValue = False
-            Me.txtLeaveNameAra.CustomFormat = Nothing
-            Me.txtLeaveNameAra.DataBoundControl = True
-            Me.txtLeaveNameAra.EditingMode = False
-            Me.txtLeaveNameAra.EnglishControl = Me.txtLeaveName
-            Me.txtLeaveNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtLeaveNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtLeaveNameAra.LinkedLabel = Nothing
-            Me.txtLeaveNameAra.Location = New System.Drawing.Point(168, 86)
-            Me.txtLeaveNameAra.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtLeaveNameAra.MaximumValue = Nothing
-            Me.txtLeaveNameAra.MinimumValue = Nothing
-            Me.txtLeaveNameAra.Name = "txtLeaveNameAra"
-            Me.txtLeaveNameAra.OldValue = Nothing
-            Me.txtLeaveNameAra.ReadOnly = True
-            Me.txtLeaveNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-            Me.txtLeaveNameAra.Size = New System.Drawing.Size(418, 23)
-            Me.txtLeaveNameAra.TabIndex = 162
+            Me.txtEmployeeLeaveCreditNameAra.BackColor = System.Drawing.Color.White
+            Me.txtEmployeeLeaveCreditNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtEmployeeLeaveCreditNameAra.ComputedValue = False
+            Me.txtEmployeeLeaveCreditNameAra.CustomFormat = Nothing
+            Me.txtEmployeeLeaveCreditNameAra.DataBoundControl = True
+            Me.txtEmployeeLeaveCreditNameAra.EditingMode = False
+            Me.txtEmployeeLeaveCreditNameAra.EnglishControl = Me.txtEmployeeLeaveCreditName
+            Me.txtEmployeeLeaveCreditNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtEmployeeLeaveCreditNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtEmployeeLeaveCreditNameAra.LinkedLabel = Nothing
+            Me.txtEmployeeLeaveCreditNameAra.Location = New System.Drawing.Point(168, 86)
+            Me.txtEmployeeLeaveCreditNameAra.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtEmployeeLeaveCreditNameAra.MaximumValue = Nothing
+            Me.txtEmployeeLeaveCreditNameAra.MinimumValue = Nothing
+            Me.txtEmployeeLeaveCreditNameAra.Name = "txtEmployeeLeaveCreditNameAra"
+            Me.txtEmployeeLeaveCreditNameAra.OldValue = Nothing
+            Me.txtEmployeeLeaveCreditNameAra.ReadOnly = True
+            Me.txtEmployeeLeaveCreditNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtEmployeeLeaveCreditNameAra.Size = New System.Drawing.Size(418, 23)
+            Me.txtEmployeeLeaveCreditNameAra.TabIndex = 162
             '
             'CLabel1
             '
@@ -239,31 +239,31 @@
             Me.CLabel1.Name = "CLabel1"
             Me.CLabel1.Size = New System.Drawing.Size(155, 23)
             Me.CLabel1.TabIndex = 168
-            Me.CLabel1.Text = "Number of Leaves Allowed"
+            Me.CLabel1.Text = "Number of EmployeeLeaveCredits Allowed"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
-            'txtLeaveAllowed
+            'txtEmployeeLeaveCreditAllowed
             '
-            Me.txtLeaveAllowed.BackColor = System.Drawing.Color.White
-            Me.txtLeaveAllowed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtLeaveAllowed.ComputedValue = False
-            Me.txtLeaveAllowed.CustomFormat = Nothing
-            Me.txtLeaveAllowed.DataBoundControl = True
-            Me.txtLeaveAllowed.EditingMode = True
-            Me.CFlowLayout1.SetFlowBreak(Me.txtLeaveAllowed, True)
-            Me.txtLeaveAllowed.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtLeaveAllowed.ForeColor = System.Drawing.Color.Black
-            Me.txtLeaveAllowed.LinkedLabel = Nothing
-            Me.txtLeaveAllowed.Location = New System.Drawing.Point(168, 111)
-            Me.txtLeaveAllowed.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtLeaveAllowed.MaximumValue = Nothing
-            Me.txtLeaveAllowed.MinimumValue = Nothing
-            Me.txtLeaveAllowed.Name = "txtLeaveAllowed"
-            Me.txtLeaveAllowed.OldValue = Nothing
-            Me.txtLeaveAllowed.ReadOnly = True
-            Me.txtLeaveAllowed.Size = New System.Drawing.Size(62, 23)
-            Me.txtLeaveAllowed.TabIndex = 167
-            Me.txtLeaveAllowed.ValueIsMandatory = True
+            Me.txtEmployeeLeaveCreditAllowed.BackColor = System.Drawing.Color.White
+            Me.txtEmployeeLeaveCreditAllowed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtEmployeeLeaveCreditAllowed.ComputedValue = False
+            Me.txtEmployeeLeaveCreditAllowed.CustomFormat = Nothing
+            Me.txtEmployeeLeaveCreditAllowed.DataBoundControl = True
+            Me.txtEmployeeLeaveCreditAllowed.EditingMode = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtEmployeeLeaveCreditAllowed, True)
+            Me.txtEmployeeLeaveCreditAllowed.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtEmployeeLeaveCreditAllowed.ForeColor = System.Drawing.Color.Black
+            Me.txtEmployeeLeaveCreditAllowed.LinkedLabel = Nothing
+            Me.txtEmployeeLeaveCreditAllowed.Location = New System.Drawing.Point(168, 111)
+            Me.txtEmployeeLeaveCreditAllowed.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtEmployeeLeaveCreditAllowed.MaximumValue = Nothing
+            Me.txtEmployeeLeaveCreditAllowed.MinimumValue = Nothing
+            Me.txtEmployeeLeaveCreditAllowed.Name = "txtEmployeeLeaveCreditAllowed"
+            Me.txtEmployeeLeaveCreditAllowed.OldValue = Nothing
+            Me.txtEmployeeLeaveCreditAllowed.ReadOnly = True
+            Me.txtEmployeeLeaveCreditAllowed.Size = New System.Drawing.Size(62, 23)
+            Me.txtEmployeeLeaveCreditAllowed.TabIndex = 167
+            Me.txtEmployeeLeaveCreditAllowed.ValueIsMandatory = True
             '
             'CLabel2
             '
@@ -463,12 +463,12 @@
             Me.txtNotes.TabIndex = 177
             Me.txtNotes.ValueIsMandatory = True
             '
-            'LeaveView
+            'EmployeeLeaveCreditView
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.Controls.Add(Me.CFlowLayout1)
-            Me.Name = "LeaveView"
+            Me.Name = "EmployeeLeaveCreditView"
             Me.Size = New System.Drawing.Size(634, 346)
             Me.CFlowLayout1.ResumeLayout(False)
             Me.CFlowLayout1.PerformLayout()
@@ -480,13 +480,13 @@
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblCode As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtLeaveCode As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtEmployeeLeaveCreditCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblName As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtLeaveName As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtEmployeeLeaveCreditName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblNameAra As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtLeaveNameAra As Libraries.CBaseControlsLibrary.CTextBoxArabic
+        Friend WithEvents txtEmployeeLeaveCreditNameAra As Libraries.CBaseControlsLibrary.CTextBoxArabic
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtLeaveAllowed As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtEmployeeLeaveCreditAllowed As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPaidPercent As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel

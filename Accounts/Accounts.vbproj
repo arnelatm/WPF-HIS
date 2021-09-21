@@ -502,16 +502,11 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalPrefixView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeAbsenceView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IRecurringPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollPayElementView.vb" />
-    <Compile Include="PresentationLayer\Views\LeaveView - Copy.Designer.vb">
-      <DependentUpon>LeaveView - Copy.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\LeaveView - Copy.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\PcJournalView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.Designer.vb">
@@ -1280,9 +1275,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.resx">
       <DependentUpon>StatementOfAp.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\LeaveView - Copy.resx">
-      <DependentUpon>LeaveView - Copy.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
       <DependentUpon>LeaveView.vb</DependentUpon>
     </EmbeddedResource>
@@ -1427,6 +1419,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EarningSummaryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeDeductionModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeEarningModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel.datasource" />
