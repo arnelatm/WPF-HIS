@@ -262,6 +262,14 @@ Namespace PresentationLayer.Views.Forms
             cboEmployeeIdNo.Refresh()
         End Sub
 
+        Private Sub DataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit, DataGridViewDeductions.CellEndEdit
+            UpdateTotals()
+        End Sub
+
+        Private Sub DataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewEarnings.UserDeletedRow, DataGridViewDeductions.UserDeletedRow
+            UpdateTotals()
+        End Sub
+
     End Class
 
 End Namespace
