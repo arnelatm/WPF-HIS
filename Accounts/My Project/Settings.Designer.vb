@@ -55,16 +55,13 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("BooleanType")>  _
-        Public Property PayrollComputation() As DataTypeSelection
+        Public ReadOnly Property PayrollComputation() As DataTypeSelection
             Get
                 Return CType(Me("PayrollComputation"),DataTypeSelection)
             End Get
-            Set
-                Me("PayrollComputation") = value
-            End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
