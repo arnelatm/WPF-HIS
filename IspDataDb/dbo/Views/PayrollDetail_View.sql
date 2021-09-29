@@ -1,7 +1,7 @@
 ﻿CREATE VIEW dbo.PayrollDetail_View
 AS
-SELECT        dbo.PayrollDetail.PayrollIdNo, dbo.PayrollDetail.EmployeeIdNo, dbo.PayrollDetail.IdNo, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.EmployeeCode, 
-                         dbo.PayrollDetail.DateTimeStamp
+SELECT        dbo.PayrollDetail.PayrollIdNo, dbo.PayrollDetail.EmployeeIdNo, dbo.PayrollDetail.IdNo, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.EmployeeCode, dbo.PayrollDetail.DateTimeStamp, 
+                         dbo.PayrollDetail.BankTransfer, dbo.Employee.PaymentMethod, dbo.Employee.SponsorType
 FROM            dbo.PayrollDetail INNER JOIN
                          dbo.Employee ON dbo.PayrollDetail.EmployeeIdNo = dbo.Employee.IdNo
 GO
@@ -98,7 +98,7 @@ Begin DesignProperties =
                Right = 657
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 33
          End
       End
    End
@@ -127,4 +127,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollDetail_View';
+
+
 
