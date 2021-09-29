@@ -945,10 +945,14 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(savedPayrollDetails, savedPayrollDetailsModel)
             savedPayrollDetails = Nothing
             If savedPayrollDetailsModel.Count() = 0 Then
-
                 For Each employeeAttendance In View.PayrollAttendance
                     payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
                     payrollDetail.PayrollIdNo = View.IdNo
+                    If payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And payrollDetail.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
+                        payrollDetail.BankTransfer = True
+                    Else
+                        payrollDetail.BankTransfer = False
+                    End If
                     payrollDetailsModel.Add(payrollDetail)
                 Next
             Else
@@ -958,6 +962,11 @@ Namespace PresentationLayer.Presenters
                         payrollDetail = New PayrollDetailModel
                         payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
                         payrollDetail.PayrollIdNo = View.IdNo
+                    End If
+                    If payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And payrollDetail.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
+                        payrollDetail.BankTransfer = True
+                    Else
+                        payrollDetail.BankTransfer = False
                     End If
                     payrollDetailsModel.Add(payrollDetail)
                 Next

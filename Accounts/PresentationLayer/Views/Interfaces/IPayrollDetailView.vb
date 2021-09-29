@@ -5,22 +5,19 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IPayrollDetailView
         Inherits IView
 
-        Property IdNo As Int32
-        Property PayrollIdNo As Int16
-        Property EmployeeIdNo As Int32
+        Property BankTransfer as Boolean
         Property EmployeeCode As String
-
-        'Property EmployeeName As String
-        'Property EmployeeNameAra As String
-        Property StartDate As Date
-
+        Property EmployeeIdNo As Int32
         Property EndDate As Date
+        Property IdNo As Int32
         Property PayPeriodName As String
         Property PayPeriodNameAra As String
-        Property PayrollEarnings As List(Of PayrollPayElementView)
         Property PayrollDeductions As List(Of PayrollPayElementView)
-
-        'Event UpdateDataFilterEvent(pPayrollIdNo As Int16)
+        Property PayrollEarnings As List(Of PayrollPayElementView)
+        Property PaymentMethod as String
+        Property SponsorType as String
+        Property PayrollIdNo As Int16
+        Property StartDate As Date
 
     End Interface
 
