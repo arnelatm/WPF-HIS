@@ -53,6 +53,15 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
+        Public Property BankTransfer As Boolean Implements IPayrollDetailView.BankTransfer
+            Get
+                Return chkBankTransfer.Checked
+            End Get
+            Set
+                chkBankTransfer.Checked = Value
+            End Set
+        End Property
+
         Public Property IdNo As Int32 Implements IPayrollDetailView.IdNo
             Get
                 Return NumParser(Of Int16)(txtIdNo.Text)
@@ -180,6 +189,10 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End Set
         End Property
+
+        Public Property PaymentMethod As String Implements IPayrollDetailView.PaymentMethod
+
+        Public Property SponsorType As String Implements IPayrollDetailView.SponsorType
 
         'Public Property PayPeriodDescription As String
 

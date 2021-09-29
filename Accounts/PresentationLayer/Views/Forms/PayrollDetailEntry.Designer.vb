@@ -25,13 +25,13 @@ Namespace PresentationLayer.Views.Forms
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayrollDetailEntry))
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayrollDetailEntry))
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -39,19 +39,13 @@ Namespace PresentationLayer.Views.Forms
         Me.tbcPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
         Me.tpgEarnings = New System.Windows.Forms.TabPage()
         Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-        Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
         Me.tpgDeductions = New System.Windows.Forms.TabPage()
         Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-        Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
         Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblPayDescription = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPayPeriodDescription = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -60,9 +54,17 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.txtTotalDeductions = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtNetPay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblBankTransfer = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+        Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
+        Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+        Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
+        Me.chkBankTransfer = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -73,9 +75,9 @@ Namespace PresentationLayer.Views.Forms
         Me.tbcPayroll.SuspendLayout
         Me.tpgEarnings.SuspendLayout
         CType(Me.DataGridViewEarnings,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).BeginInit
         Me.tpgDeductions.SuspendLayout
         CType(Me.DataGridViewDeductions,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsDeductions,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
@@ -123,10 +125,10 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Controls.Add(Me.txtEmployeeCode, 0, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.tbcPayroll, 0, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.txtPayrollIdNo, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblStartDate, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.dtpStartDate, 3, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblEndDate, 4, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblPayDescription, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.txtPayPeriodDescription, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblEmployeeName, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel9, 3, 6)
@@ -135,9 +137,11 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Controls.Add(Me.dtpEndDate, 5, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.txtTotalDeductions, 5, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.txtNetPay, 5, 8)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblPayrollIdNo, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel11, 3, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.cboEmployeeIdNo, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblBankTransfer, 4, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkBankTransfer, 5, 2)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 9
@@ -150,6 +154,8 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(666, 513)
         Me.TableLayoutPanel1.TabIndex = 0
         '
@@ -222,7 +228,7 @@ Namespace PresentationLayer.Views.Forms
         Me.tbcPayroll.Location = New System.Drawing.Point(3, 79)
         Me.tbcPayroll.Name = "tbcPayroll"
         Me.tbcPayroll.SelectedIndex = 0
-        Me.tbcPayroll.Size = New System.Drawing.Size(644, 348)
+        Me.tbcPayroll.Size = New System.Drawing.Size(647, 348)
         Me.tbcPayroll.TabIndex = 34
         '
         'tpgEarnings
@@ -231,7 +237,7 @@ Namespace PresentationLayer.Views.Forms
         Me.tpgEarnings.Location = New System.Drawing.Point(4, 22)
         Me.tpgEarnings.Name = "tpgEarnings"
         Me.tpgEarnings.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpgEarnings.Size = New System.Drawing.Size(636, 322)
+        Me.tpgEarnings.Size = New System.Drawing.Size(639, 322)
         Me.tpgEarnings.TabIndex = 0
         Me.tpgEarnings.Text = "Earnings"
         Me.tpgEarnings.UseVisualStyleBackColor = true
@@ -276,51 +282,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
         Me.DataGridViewEarnings.ShowFooter = false
         Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewEarnings.Size = New System.Drawing.Size(630, 316)
+        Me.DataGridViewEarnings.Size = New System.Drawing.Size(633, 316)
         Me.DataGridViewEarnings.TabIndex = 0
         Me.DataGridViewEarnings.Translatable = true
-        '
-        'dgvEarningIdNo
-        '
-        Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvEarningIdNo.EditingMode = false
-        Me.dgvEarningIdNo.HeaderText = "Earning Name - Code"
-        Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
-        Me.dgvEarningIdNo.ReadOnly = true
-        Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvEarningIdNo.Translatable = false
-        '
-        'dgvEarningAmount
-        '
-        Me.dgvEarningAmount.BegFindValue = Nothing
-        Me.dgvEarningAmount.DataPropertyName = "Amount"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.Format = "###,##0.00"
-        Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvEarningAmount.EditingMode = false
-        Me.dgvEarningAmount.EndFindValue = Nothing
-        Me.dgvEarningAmount.FieldDescription = Nothing
-        Me.dgvEarningAmount.FieldName = Nothing
-        Me.dgvEarningAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvEarningAmount.FindEnabled = false
-        Me.dgvEarningAmount.HeaderText = "Amount"
-        Me.dgvEarningAmount.Name = "dgvEarningAmount"
-        Me.dgvEarningAmount.ReadOnly = true
-        Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEarningAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvEarningAmount.Translatable = false
-        '
-        'bsEarnings
-        '
-        Me.bsEarnings.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollPayElementModel)
         '
         'tpgDeductions
         '
@@ -328,7 +292,7 @@ Namespace PresentationLayer.Views.Forms
         Me.tpgDeductions.Location = New System.Drawing.Point(4, 22)
         Me.tpgDeductions.Name = "tpgDeductions"
         Me.tpgDeductions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpgDeductions.Size = New System.Drawing.Size(636, 322)
+        Me.tpgDeductions.Size = New System.Drawing.Size(639, 322)
         Me.tpgDeductions.TabIndex = 2
         Me.tpgDeductions.Text = "Deductions"
         Me.tpgDeductions.UseVisualStyleBackColor = true
@@ -373,9 +337,455 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDeductions.SequenceFieldName = "Sequence"
         Me.DataGridViewDeductions.ShowFooter = false
         Me.DataGridViewDeductions.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewDeductions.Size = New System.Drawing.Size(630, 316)
+        Me.DataGridViewDeductions.Size = New System.Drawing.Size(633, 316)
         Me.DataGridViewDeductions.TabIndex = 0
         Me.DataGridViewDeductions.Translatable = true
+        '
+        'txtPayrollIdNo
+        '
+        Me.txtPayrollIdNo.BackColor = System.Drawing.Color.White
+        Me.txtPayrollIdNo.BegFindValue = Nothing
+        Me.txtPayrollIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtPayrollIdNo.ComputedValue = false
+        Me.txtPayrollIdNo.CustomFormat = Nothing
+        Me.txtPayrollIdNo.DataBoundControl = true
+        Me.txtPayrollIdNo.DisplayOnly = true
+        Me.txtPayrollIdNo.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPayrollIdNo.EditingMode = true
+        Me.txtPayrollIdNo.EndFindValue = Nothing
+        Me.txtPayrollIdNo.FieldDescription = Nothing
+        Me.txtPayrollIdNo.FieldName = Nothing
+        Me.txtPayrollIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtPayrollIdNo.FindEnabled = false
+        Me.txtPayrollIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtPayrollIdNo.ForeColor = System.Drawing.Color.Black
+        Me.txtPayrollIdNo.LinkedLabel = Me.lblPayrollIdNo
+        Me.txtPayrollIdNo.Location = New System.Drawing.Point(114, 1)
+        Me.txtPayrollIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtPayrollIdNo.MaximumValue = Nothing
+        Me.txtPayrollIdNo.MinimumValue = Nothing
+        Me.txtPayrollIdNo.Name = "txtPayrollIdNo"
+        Me.txtPayrollIdNo.OldValue = Nothing
+        Me.txtPayrollIdNo.ReadOnly = true
+        Me.txtPayrollIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtPayrollIdNo.Size = New System.Drawing.Size(122, 23)
+        Me.txtPayrollIdNo.TabIndex = 0
+        Me.txtPayrollIdNo.TabStop = false
+        Me.txtPayrollIdNo.Translatable = false
+        '
+        'lblStartDate
+        '
+        Me.lblStartDate.AutoSize = true
+        Me.lblStartDate.DisplayOnly = true
+        Me.lblStartDate.EditingMode = false
+        Me.lblStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblStartDate.Location = New System.Drawing.Point(238, 1)
+        Me.lblStartDate.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblStartDate.Name = "lblStartDate"
+        Me.lblStartDate.Size = New System.Drawing.Size(72, 17)
+        Me.lblStartDate.TabIndex = 6
+        Me.lblStartDate.Text = "Start Date"
+        Me.lblStartDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblStartDate.Translatable = true
+        '
+        'dtpStartDate
+        '
+        Me.dtpStartDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpStartDate.DefaultValue = Nothing
+        Me.dtpStartDate.DisplayOnly = true
+        Me.dtpStartDate.DtpDefaultValue = Nothing
+        Me.dtpStartDate.EditingMode = true
+        Me.dtpStartDate.EditsAllowed = false
+        Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
+        Me.dtpStartDate.LinkedLabel = Me.lblStartDate
+        Me.dtpStartDate.Location = New System.Drawing.Point(312, 1)
+        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(1)
+        Me.dtpStartDate.Name = "dtpStartDate"
+        Me.dtpStartDate.ReadOnlyDp = false
+        Me.dtpStartDate.SecurityKey = Nothing
+        Me.dtpStartDate.ShowLongDate = false
+        Me.dtpStartDate.ShowTime = false
+        Me.dtpStartDate.Size = New System.Drawing.Size(115, 23)
+        Me.dtpStartDate.TabIndex = 1
+        Me.dtpStartDate.TabStop = false
+        Me.dtpStartDate.TargetCalendar = CType(resources.GetObject("dtpStartDate.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpStartDate.Translatable = false
+        Me.dtpStartDate.Value = Nothing
+        Me.dtpStartDate.ValueIsMandatory = false
+        Me.dtpStartDate.ValueIsNullable = false
+        '
+        'lblEndDate
+        '
+        Me.lblEndDate.AutoSize = true
+        Me.lblEndDate.DisplayOnly = true
+        Me.lblEndDate.EditingMode = false
+        Me.lblEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblEndDate.Location = New System.Drawing.Point(429, 1)
+        Me.lblEndDate.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblEndDate.Name = "lblEndDate"
+        Me.lblEndDate.Size = New System.Drawing.Size(67, 17)
+        Me.lblEndDate.TabIndex = 7
+        Me.lblEndDate.Text = "End Date"
+        Me.lblEndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblEndDate.Translatable = true
+        '
+        'lblPayDescription
+        '
+        Me.lblPayDescription.AutoSize = true
+        Me.lblPayDescription.DisplayOnly = true
+        Me.lblPayDescription.EditingMode = false
+        Me.lblPayDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPayDescription.Location = New System.Drawing.Point(1, 26)
+        Me.lblPayDescription.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPayDescription.Name = "lblPayDescription"
+        Me.lblPayDescription.Size = New System.Drawing.Size(107, 17)
+        Me.lblPayDescription.TabIndex = 8
+        Me.lblPayDescription.Text = "Pay Description"
+        Me.lblPayDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPayDescription.Translatable = true
+        '
+        'txtPayPeriodDescription
+        '
+        Me.txtPayPeriodDescription.BackColor = System.Drawing.Color.White
+        Me.txtPayPeriodDescription.BegFindValue = Nothing
+        Me.txtPayPeriodDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayPeriodDescription, 5)
+        Me.txtPayPeriodDescription.ComputedValue = false
+        Me.txtPayPeriodDescription.CustomFormat = Nothing
+        Me.txtPayPeriodDescription.DataBoundControl = true
+        Me.txtPayPeriodDescription.DisplayOnly = true
+        Me.txtPayPeriodDescription.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPayPeriodDescription.EditingMode = true
+        Me.txtPayPeriodDescription.EndFindValue = Nothing
+        Me.txtPayPeriodDescription.FieldDescription = Nothing
+        Me.txtPayPeriodDescription.FieldName = Nothing
+        Me.txtPayPeriodDescription.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtPayPeriodDescription.FindEnabled = false
+        Me.txtPayPeriodDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtPayPeriodDescription.ForeColor = System.Drawing.Color.Black
+        Me.txtPayPeriodDescription.LinkedLabel = Me.lblPayDescription
+        Me.txtPayPeriodDescription.Location = New System.Drawing.Point(114, 26)
+        Me.txtPayPeriodDescription.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtPayPeriodDescription.MaximumValue = Nothing
+        Me.txtPayPeriodDescription.MinimumValue = Nothing
+        Me.txtPayPeriodDescription.Name = "txtPayPeriodDescription"
+        Me.txtPayPeriodDescription.OldValue = Nothing
+        Me.txtPayPeriodDescription.ReadOnly = true
+        Me.txtPayPeriodDescription.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtPayPeriodDescription.Size = New System.Drawing.Size(538, 23)
+        Me.txtPayPeriodDescription.TabIndex = 3
+        Me.txtPayPeriodDescription.TabStop = false
+        Me.txtPayPeriodDescription.Translatable = false
+        Me.txtPayPeriodDescription.ValueIsMandatory = true
+        '
+        'lblEmployeeName
+        '
+        Me.lblEmployeeName.AutoSize = true
+        Me.lblEmployeeName.DisplayOnly = true
+        Me.lblEmployeeName.EditingMode = false
+        Me.lblEmployeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblEmployeeName.Location = New System.Drawing.Point(1, 51)
+        Me.lblEmployeeName.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblEmployeeName.Name = "lblEmployeeName"
+        Me.lblEmployeeName.Size = New System.Drawing.Size(111, 17)
+        Me.lblEmployeeName.TabIndex = 11
+        Me.lblEmployeeName.Text = "Employee Name"
+        Me.lblEmployeeName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblEmployeeName.Translatable = true
+        '
+        'CLabel9
+        '
+        Me.CLabel9.AutoSize = true
+        Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel9, 2)
+        Me.CLabel9.DisplayOnly = true
+        Me.CLabel9.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CLabel9.EditingMode = false
+        Me.CLabel9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel9.Location = New System.Drawing.Point(435, 431)
+        Me.CLabel9.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel9.Name = "CLabel9"
+        Me.CLabel9.Size = New System.Drawing.Size(100, 23)
+        Me.CLabel9.TabIndex = 27
+        Me.CLabel9.Text = "Total Earnings"
+        Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel9.Translatable = true
+        '
+        'txtTotalEarnings
+        '
+        Me.txtTotalEarnings.BackColor = System.Drawing.Color.White
+        Me.txtTotalEarnings.BegFindValue = Nothing
+        Me.txtTotalEarnings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalEarnings.ComputedValue = false
+        Me.txtTotalEarnings.CustomFormat = "N2"
+        Me.txtTotalEarnings.DataBoundControl = true
+        Me.txtTotalEarnings.DisplayOnly = true
+        Me.txtTotalEarnings.EditingMode = true
+        Me.txtTotalEarnings.EndFindValue = Nothing
+        Me.txtTotalEarnings.FieldDescription = Nothing
+        Me.txtTotalEarnings.FieldName = Nothing
+        Me.txtTotalEarnings.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtTotalEarnings.FindEnabled = false
+        Me.txtTotalEarnings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtTotalEarnings.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalEarnings.LinkedLabel = Nothing
+        Me.txtTotalEarnings.Location = New System.Drawing.Point(537, 431)
+        Me.txtTotalEarnings.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtTotalEarnings.MaximumValue = Nothing
+        Me.txtTotalEarnings.MinimumValue = Nothing
+        Me.txtTotalEarnings.Name = "txtTotalEarnings"
+        Me.txtTotalEarnings.OldValue = Nothing
+        Me.txtTotalEarnings.ReadOnly = true
+        Me.txtTotalEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtTotalEarnings.Size = New System.Drawing.Size(115, 23)
+        Me.txtTotalEarnings.TabIndex = 6
+        Me.txtTotalEarnings.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtTotalEarnings.Translatable = false
+        Me.txtTotalEarnings.ValueIsNumeric = true
+        '
+        'CLabel10
+        '
+        Me.CLabel10.AutoSize = true
+        Me.CLabel10.DisplayOnly = true
+        Me.CLabel10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CLabel10.EditingMode = false
+        Me.CLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel10.Location = New System.Drawing.Point(429, 481)
+        Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel10.Name = "CLabel10"
+        Me.CLabel10.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.CLabel10.Size = New System.Drawing.Size(106, 31)
+        Me.CLabel10.TabIndex = 29
+        Me.CLabel10.Text = "Net Pay"
+        Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.CLabel10.Translatable = true
+        '
+        'dtpEndDate
+        '
+        Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpEndDate.DefaultValue = Nothing
+        Me.dtpEndDate.DisplayOnly = true
+        Me.dtpEndDate.DtpDefaultValue = Nothing
+        Me.dtpEndDate.EditingMode = true
+        Me.dtpEndDate.EditsAllowed = false
+        Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
+        Me.dtpEndDate.LinkedLabel = Me.lblEndDate
+        Me.dtpEndDate.Location = New System.Drawing.Point(537, 1)
+        Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(1)
+        Me.dtpEndDate.Name = "dtpEndDate"
+        Me.dtpEndDate.ReadOnlyDp = false
+        Me.dtpEndDate.SecurityKey = Nothing
+        Me.dtpEndDate.ShowLongDate = false
+        Me.dtpEndDate.ShowTime = false
+        Me.dtpEndDate.Size = New System.Drawing.Size(115, 23)
+        Me.dtpEndDate.TabIndex = 2
+        Me.dtpEndDate.TabStop = false
+        Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpEndDate.Translatable = false
+        Me.dtpEndDate.Value = Nothing
+        Me.dtpEndDate.ValueIsMandatory = false
+        Me.dtpEndDate.ValueIsNullable = false
+        '
+        'txtTotalDeductions
+        '
+        Me.txtTotalDeductions.BackColor = System.Drawing.Color.White
+        Me.txtTotalDeductions.BegFindValue = Nothing
+        Me.txtTotalDeductions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalDeductions.ComputedValue = false
+        Me.txtTotalDeductions.CustomFormat = "N2"
+        Me.txtTotalDeductions.DataBoundControl = true
+        Me.txtTotalDeductions.DisplayOnly = true
+        Me.txtTotalDeductions.EditingMode = true
+        Me.txtTotalDeductions.EndFindValue = Nothing
+        Me.txtTotalDeductions.FieldDescription = Nothing
+        Me.txtTotalDeductions.FieldName = Nothing
+        Me.txtTotalDeductions.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtTotalDeductions.FindEnabled = false
+        Me.txtTotalDeductions.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtTotalDeductions.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalDeductions.LinkedLabel = Nothing
+        Me.txtTotalDeductions.Location = New System.Drawing.Point(537, 456)
+        Me.txtTotalDeductions.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtTotalDeductions.MaximumValue = Nothing
+        Me.txtTotalDeductions.MinimumValue = Nothing
+        Me.txtTotalDeductions.Name = "txtTotalDeductions"
+        Me.txtTotalDeductions.OldValue = Nothing
+        Me.txtTotalDeductions.ReadOnly = true
+        Me.txtTotalDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtTotalDeductions.Size = New System.Drawing.Size(115, 23)
+        Me.txtTotalDeductions.TabIndex = 7
+        Me.txtTotalDeductions.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtTotalDeductions.Translatable = false
+        Me.txtTotalDeductions.ValueIsNumeric = true
+        '
+        'txtNetPay
+        '
+        Me.txtNetPay.BackColor = System.Drawing.Color.White
+        Me.txtNetPay.BegFindValue = Nothing
+        Me.txtNetPay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtNetPay.ComputedValue = false
+        Me.txtNetPay.CustomFormat = "N2"
+        Me.txtNetPay.DataBoundControl = true
+        Me.txtNetPay.DisplayOnly = true
+        Me.txtNetPay.EditingMode = true
+        Me.txtNetPay.EndFindValue = Nothing
+        Me.txtNetPay.FieldDescription = Nothing
+        Me.txtNetPay.FieldName = Nothing
+        Me.txtNetPay.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtNetPay.FindEnabled = false
+        Me.txtNetPay.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtNetPay.ForeColor = System.Drawing.Color.Black
+        Me.txtNetPay.LinkedLabel = Nothing
+        Me.txtNetPay.Location = New System.Drawing.Point(537, 481)
+        Me.txtNetPay.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNetPay.MaximumValue = Nothing
+        Me.txtNetPay.MinimumValue = Nothing
+        Me.txtNetPay.Name = "txtNetPay"
+        Me.txtNetPay.OldValue = Nothing
+        Me.txtNetPay.ReadOnly = true
+        Me.txtNetPay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtNetPay.Size = New System.Drawing.Size(115, 23)
+        Me.txtNetPay.TabIndex = 8
+        Me.txtNetPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtNetPay.Translatable = false
+        Me.txtNetPay.ValueIsNumeric = true
+        '
+        'lblPayrollIdNo
+        '
+        Me.lblPayrollIdNo.AutoSize = true
+        Me.lblPayrollIdNo.DisplayOnly = true
+        Me.lblPayrollIdNo.EditingMode = false
+        Me.lblPayrollIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPayrollIdNo.Location = New System.Drawing.Point(1, 1)
+        Me.lblPayrollIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPayrollIdNo.Name = "lblPayrollIdNo"
+        Me.lblPayrollIdNo.Size = New System.Drawing.Size(105, 17)
+        Me.lblPayrollIdNo.TabIndex = 4
+        Me.lblPayrollIdNo.Text = "Payroll Number"
+        Me.lblPayrollIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPayrollIdNo.Translatable = true
+        '
+        'CLabel11
+        '
+        Me.CLabel11.AutoSize = true
+        Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel11, 2)
+        Me.CLabel11.DisplayOnly = true
+        Me.CLabel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CLabel11.EditingMode = false
+        Me.CLabel11.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel11.Location = New System.Drawing.Point(312, 456)
+        Me.CLabel11.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel11.Name = "CLabel11"
+        Me.CLabel11.Size = New System.Drawing.Size(223, 23)
+        Me.CLabel11.TabIndex = 32
+        Me.CLabel11.Text = "Total Deductions"
+        Me.CLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.CLabel11.Translatable = true
+        '
+        'cboEmployeeIdNo
+        '
+        Me.cboEmployeeIdNo.BackColor = System.Drawing.Color.White
+        Me.cboEmployeeIdNo.BegFindValue = Nothing
+        Me.cboEmployeeIdNo.ChangingSearchValueOnly = false
+        Me.TableLayoutPanel1.SetColumnSpan(Me.cboEmployeeIdNo, 3)
+        Me.cboEmployeeIdNo.CurrentSearchTerm = ""
+        Me.cboEmployeeIdNo.DefaultValue = Nothing
+        Me.cboEmployeeIdNo.DisplayMember = "Name"
+        Me.cboEmployeeIdNo.DisplayOnly = true
+        Me.cboEmployeeIdNo.DropDownHeight = 24
+        Me.cboEmployeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+        Me.cboEmployeeIdNo.EditingMode = true
+        Me.cboEmployeeIdNo.EndFindValue = Nothing
+        Me.cboEmployeeIdNo.FieldDescription = Nothing
+        Me.cboEmployeeIdNo.FieldName = Nothing
+        Me.cboEmployeeIdNo.FilterRule = Nothing
+        Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboEmployeeIdNo.FindEnabled = false
+        Me.cboEmployeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboEmployeeIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboEmployeeIdNo.FormattingEnabled = true
+        Me.cboEmployeeIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboEmployeeIdNo.IgnoreCase = false
+        Me.cboEmployeeIdNo.IntegralHeight = false
+        Me.cboEmployeeIdNo.LinkedLabel = Nothing
+        Me.cboEmployeeIdNo.Location = New System.Drawing.Point(114, 51)
+        Me.cboEmployeeIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboEmployeeIdNo.MaxDropDownItems = 1
+        Me.cboEmployeeIdNo.Name = "cboEmployeeIdNo"
+        Me.cboEmployeeIdNo.OldValue = 0
+        Me.cboEmployeeIdNo.OriginalDataSource = Nothing
+        Me.cboEmployeeIdNo.OriginalList = Nothing
+        Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
+        Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
+        Me.cboEmployeeIdNo.PropertySelector = Nothing
+        Me.cboEmployeeIdNo.ReadOnlyCombo = true
+        Me.cboEmployeeIdNo.Size = New System.Drawing.Size(313, 24)
+        Me.cboEmployeeIdNo.SuggestBoxHeight = 200
+        Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
+        Me.cboEmployeeIdNo.TabIndex = 4
+        Me.cboEmployeeIdNo.TabStop = false
+        Me.cboEmployeeIdNo.TextToSearch = Nothing
+        Me.cboEmployeeIdNo.Translatable = false
+        Me.cboEmployeeIdNo.ValueIsMandatory = false
+        Me.cboEmployeeIdNo.ValueIsNullable = false
+        Me.cboEmployeeIdNo.ValueIsNumeric = false
+        Me.cboEmployeeIdNo.ValueMember = "IdNo"
+        '
+        'lblBankTransfer
+        '
+        Me.lblBankTransfer.AutoSize = true
+        Me.lblBankTransfer.DisplayOnly = true
+        Me.lblBankTransfer.EditingMode = false
+        Me.lblBankTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblBankTransfer.Location = New System.Drawing.Point(429, 51)
+        Me.lblBankTransfer.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblBankTransfer.Name = "lblBankTransfer"
+        Me.lblBankTransfer.Size = New System.Drawing.Size(106, 17)
+        Me.lblBankTransfer.TabIndex = 44
+        Me.lblBankTransfer.Text = "Bank Transfer?"
+        Me.lblBankTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblBankTransfer.Translatable = true
+        '
+        'dgvEarningIdNo
+        '
+        Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        Me.dgvEarningIdNo.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvEarningIdNo.EditingMode = false
+        Me.dgvEarningIdNo.HeaderText = "Earning Name - Code"
+        Me.dgvEarningIdNo.Name = "dgvEarningIdNo"
+        Me.dgvEarningIdNo.ReadOnly = true
+        Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvEarningIdNo.Translatable = false
+        '
+        'dgvEarningAmount
+        '
+        Me.dgvEarningAmount.BegFindValue = Nothing
+        Me.dgvEarningAmount.DataPropertyName = "Amount"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.Format = "###,##0.00"
+        Me.dgvEarningAmount.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvEarningAmount.EditingMode = false
+        Me.dgvEarningAmount.EndFindValue = Nothing
+        Me.dgvEarningAmount.FieldDescription = Nothing
+        Me.dgvEarningAmount.FieldName = Nothing
+        Me.dgvEarningAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvEarningAmount.FindEnabled = false
+        Me.dgvEarningAmount.HeaderText = "Amount"
+        Me.dgvEarningAmount.Name = "dgvEarningAmount"
+        Me.dgvEarningAmount.ReadOnly = true
+        Me.dgvEarningAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEarningAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvEarningAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvEarningAmount.Translatable = false
+        '
+        'bsEarnings
+        '
+        Me.bsEarnings.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollPayElementModel)
         '
         'dgvDeductionIdNo
         '
@@ -419,398 +829,38 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.bsDeductions.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PayrollPayElementModel)
         '
-        'txtPayrollIdNo
+        'chkBankTransfer
         '
-        Me.txtPayrollIdNo.BackColor = System.Drawing.Color.White
-        Me.txtPayrollIdNo.BegFindValue = Nothing
-        Me.txtPayrollIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPayrollIdNo.ComputedValue = false
-        Me.txtPayrollIdNo.CustomFormat = Nothing
-        Me.txtPayrollIdNo.DataBoundControl = true
-        Me.txtPayrollIdNo.DisplayOnly = true
-        Me.txtPayrollIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPayrollIdNo.EditingMode = true
-        Me.txtPayrollIdNo.EndFindValue = Nothing
-        Me.txtPayrollIdNo.FieldDescription = Nothing
-        Me.txtPayrollIdNo.FieldName = Nothing
-        Me.txtPayrollIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtPayrollIdNo.FindEnabled = false
-        Me.txtPayrollIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtPayrollIdNo.ForeColor = System.Drawing.Color.Black
-        Me.txtPayrollIdNo.LinkedLabel = Nothing
-        Me.txtPayrollIdNo.Location = New System.Drawing.Point(114, 1)
-        Me.txtPayrollIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtPayrollIdNo.MaximumValue = Nothing
-        Me.txtPayrollIdNo.MinimumValue = Nothing
-        Me.txtPayrollIdNo.Name = "txtPayrollIdNo"
-        Me.txtPayrollIdNo.OldValue = Nothing
-        Me.txtPayrollIdNo.ReadOnly = true
-        Me.txtPayrollIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtPayrollIdNo.Size = New System.Drawing.Size(122, 23)
-        Me.txtPayrollIdNo.TabIndex = 0
-        Me.txtPayrollIdNo.TabStop = false
-        Me.txtPayrollIdNo.Translatable = false
-        '
-        'CLabel1
-        '
-        Me.CLabel1.AutoSize = true
-        Me.CLabel1.DisplayOnly = true
-        Me.CLabel1.EditingMode = false
-        Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel1.Location = New System.Drawing.Point(238, 1)
-        Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(72, 17)
-        Me.CLabel1.TabIndex = 6
-        Me.CLabel1.Text = "Start Date"
-        Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel1.Translatable = true
-        '
-        'dtpStartDate
-        '
-        Me.dtpStartDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpStartDate.DefaultValue = Nothing
-        Me.dtpStartDate.DisplayOnly = true
-        Me.dtpStartDate.DtpDefaultValue = Nothing
-        Me.dtpStartDate.EditingMode = true
-        Me.dtpStartDate.EditsAllowed = false
-        Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpStartDate.LinkedLabel = Nothing
-        Me.dtpStartDate.Location = New System.Drawing.Point(312, 1)
-        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.dtpStartDate.Name = "dtpStartDate"
-        Me.dtpStartDate.ReadOnlyDp = false
-        Me.dtpStartDate.SecurityKey = Nothing
-        Me.dtpStartDate.ShowLongDate = false
-        Me.dtpStartDate.ShowTime = false
-        Me.dtpStartDate.Size = New System.Drawing.Size(115, 23)
-        Me.dtpStartDate.TabIndex = 1
-        Me.dtpStartDate.TabStop = false
-        Me.dtpStartDate.TargetCalendar = CType(resources.GetObject("dtpStartDate.TargetCalendar"),System.Globalization.Calendar)
-        Me.dtpStartDate.Translatable = false
-        Me.dtpStartDate.Value = Nothing
-        Me.dtpStartDate.ValueIsMandatory = false
-        Me.dtpStartDate.ValueIsNullable = false
-        '
-        'lblEndDate
-        '
-        Me.lblEndDate.AutoSize = true
-        Me.lblEndDate.DisplayOnly = true
-        Me.lblEndDate.EditingMode = false
-        Me.lblEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblEndDate.Location = New System.Drawing.Point(429, 1)
-        Me.lblEndDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblEndDate.Name = "lblEndDate"
-        Me.lblEndDate.Size = New System.Drawing.Size(67, 17)
-        Me.lblEndDate.TabIndex = 7
-        Me.lblEndDate.Text = "End Date"
-        Me.lblEndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblEndDate.Translatable = true
-        '
-        'CLabel3
-        '
-        Me.CLabel3.AutoSize = true
-        Me.CLabel3.DisplayOnly = true
-        Me.CLabel3.EditingMode = false
-        Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel3.Location = New System.Drawing.Point(1, 26)
-        Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel3.Name = "CLabel3"
-        Me.CLabel3.Size = New System.Drawing.Size(107, 17)
-        Me.CLabel3.TabIndex = 8
-        Me.CLabel3.Text = "Pay Description"
-        Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel3.Translatable = true
-        '
-        'txtPayPeriodDescription
-        '
-        Me.txtPayPeriodDescription.BackColor = System.Drawing.Color.White
-        Me.txtPayPeriodDescription.BegFindValue = Nothing
-        Me.txtPayPeriodDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TableLayoutPanel1.SetColumnSpan(Me.txtPayPeriodDescription, 5)
-        Me.txtPayPeriodDescription.ComputedValue = false
-        Me.txtPayPeriodDescription.CustomFormat = Nothing
-        Me.txtPayPeriodDescription.DataBoundControl = true
-        Me.txtPayPeriodDescription.DisplayOnly = true
-        Me.txtPayPeriodDescription.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPayPeriodDescription.EditingMode = true
-        Me.txtPayPeriodDescription.EndFindValue = Nothing
-        Me.txtPayPeriodDescription.FieldDescription = Nothing
-        Me.txtPayPeriodDescription.FieldName = Nothing
-        Me.txtPayPeriodDescription.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtPayPeriodDescription.FindEnabled = false
-        Me.txtPayPeriodDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtPayPeriodDescription.ForeColor = System.Drawing.Color.Black
-        Me.txtPayPeriodDescription.LinkedLabel = Nothing
-        Me.txtPayPeriodDescription.Location = New System.Drawing.Point(114, 26)
-        Me.txtPayPeriodDescription.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtPayPeriodDescription.MaximumValue = Nothing
-        Me.txtPayPeriodDescription.MinimumValue = Nothing
-        Me.txtPayPeriodDescription.Name = "txtPayPeriodDescription"
-        Me.txtPayPeriodDescription.OldValue = Nothing
-        Me.txtPayPeriodDescription.ReadOnly = true
-        Me.txtPayPeriodDescription.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtPayPeriodDescription.Size = New System.Drawing.Size(535, 23)
-        Me.txtPayPeriodDescription.TabIndex = 3
-        Me.txtPayPeriodDescription.TabStop = false
-        Me.txtPayPeriodDescription.Translatable = false
-        Me.txtPayPeriodDescription.ValueIsMandatory = true
-        '
-        'lblEmployeeName
-        '
-        Me.lblEmployeeName.AutoSize = true
-        Me.lblEmployeeName.DisplayOnly = true
-        Me.lblEmployeeName.EditingMode = false
-        Me.lblEmployeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblEmployeeName.Location = New System.Drawing.Point(1, 51)
-        Me.lblEmployeeName.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblEmployeeName.Name = "lblEmployeeName"
-        Me.lblEmployeeName.Size = New System.Drawing.Size(111, 17)
-        Me.lblEmployeeName.TabIndex = 11
-        Me.lblEmployeeName.Text = "Employee Name"
-        Me.lblEmployeeName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblEmployeeName.Translatable = true
-        '
-        'CLabel9
-        '
-        Me.CLabel9.AutoSize = true
-        Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel9, 2)
-        Me.CLabel9.DisplayOnly = true
-        Me.CLabel9.Dock = System.Windows.Forms.DockStyle.Right
-        Me.CLabel9.EditingMode = false
-        Me.CLabel9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel9.Location = New System.Drawing.Point(396, 431)
-        Me.CLabel9.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel9.Name = "CLabel9"
-        Me.CLabel9.Size = New System.Drawing.Size(100, 23)
-        Me.CLabel9.TabIndex = 27
-        Me.CLabel9.Text = "Total Earnings"
-        Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel9.Translatable = true
-        '
-        'txtTotalEarnings
-        '
-        Me.txtTotalEarnings.BackColor = System.Drawing.Color.White
-        Me.txtTotalEarnings.BegFindValue = Nothing
-        Me.txtTotalEarnings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalEarnings.ComputedValue = false
-        Me.txtTotalEarnings.CustomFormat = "N2"
-        Me.txtTotalEarnings.DataBoundControl = true
-        Me.txtTotalEarnings.DisplayOnly = true
-        Me.txtTotalEarnings.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtTotalEarnings.EditingMode = true
-        Me.txtTotalEarnings.EndFindValue = Nothing
-        Me.txtTotalEarnings.FieldDescription = Nothing
-        Me.txtTotalEarnings.FieldName = Nothing
-        Me.txtTotalEarnings.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtTotalEarnings.FindEnabled = false
-        Me.txtTotalEarnings.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtTotalEarnings.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalEarnings.LinkedLabel = Nothing
-        Me.txtTotalEarnings.Location = New System.Drawing.Point(498, 431)
-        Me.txtTotalEarnings.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtTotalEarnings.MaximumValue = Nothing
-        Me.txtTotalEarnings.MinimumValue = Nothing
-        Me.txtTotalEarnings.Name = "txtTotalEarnings"
-        Me.txtTotalEarnings.OldValue = Nothing
-        Me.txtTotalEarnings.ReadOnly = true
-        Me.txtTotalEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtTotalEarnings.Size = New System.Drawing.Size(151, 23)
-        Me.txtTotalEarnings.TabIndex = 5
-        Me.txtTotalEarnings.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtTotalEarnings.Translatable = false
-        Me.txtTotalEarnings.ValueIsNumeric = true
-        '
-        'CLabel10
-        '
-        Me.CLabel10.AutoSize = true
-        Me.CLabel10.DisplayOnly = true
-        Me.CLabel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CLabel10.EditingMode = false
-        Me.CLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel10.Location = New System.Drawing.Point(429, 481)
-        Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel10.Name = "CLabel10"
-        Me.CLabel10.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.CLabel10.Size = New System.Drawing.Size(67, 31)
-        Me.CLabel10.TabIndex = 29
-        Me.CLabel10.Text = "Net Pay"
-        Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.CLabel10.Translatable = true
-        '
-        'dtpEndDate
-        '
-        Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpEndDate.DefaultValue = Nothing
-        Me.dtpEndDate.DisplayOnly = true
-        Me.dtpEndDate.DtpDefaultValue = Nothing
-        Me.dtpEndDate.EditingMode = true
-        Me.dtpEndDate.EditsAllowed = false
-        Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpEndDate.LinkedLabel = Nothing
-        Me.dtpEndDate.Location = New System.Drawing.Point(498, 1)
-        Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.dtpEndDate.Name = "dtpEndDate"
-        Me.dtpEndDate.ReadOnlyDp = false
-        Me.dtpEndDate.SecurityKey = Nothing
-        Me.dtpEndDate.ShowLongDate = false
-        Me.dtpEndDate.ShowTime = false
-        Me.dtpEndDate.Size = New System.Drawing.Size(115, 23)
-        Me.dtpEndDate.TabIndex = 2
-        Me.dtpEndDate.TabStop = false
-        Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"),System.Globalization.Calendar)
-        Me.dtpEndDate.Translatable = false
-        Me.dtpEndDate.Value = Nothing
-        Me.dtpEndDate.ValueIsMandatory = false
-        Me.dtpEndDate.ValueIsNullable = false
-        '
-        'txtTotalDeductions
-        '
-        Me.txtTotalDeductions.BackColor = System.Drawing.Color.White
-        Me.txtTotalDeductions.BegFindValue = Nothing
-        Me.txtTotalDeductions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalDeductions.ComputedValue = false
-        Me.txtTotalDeductions.CustomFormat = "N2"
-        Me.txtTotalDeductions.DataBoundControl = true
-        Me.txtTotalDeductions.DisplayOnly = true
-        Me.txtTotalDeductions.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtTotalDeductions.EditingMode = true
-        Me.txtTotalDeductions.EndFindValue = Nothing
-        Me.txtTotalDeductions.FieldDescription = Nothing
-        Me.txtTotalDeductions.FieldName = Nothing
-        Me.txtTotalDeductions.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtTotalDeductions.FindEnabled = false
-        Me.txtTotalDeductions.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtTotalDeductions.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalDeductions.LinkedLabel = Nothing
-        Me.txtTotalDeductions.Location = New System.Drawing.Point(498, 456)
-        Me.txtTotalDeductions.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtTotalDeductions.MaximumValue = Nothing
-        Me.txtTotalDeductions.MinimumValue = Nothing
-        Me.txtTotalDeductions.Name = "txtTotalDeductions"
-        Me.txtTotalDeductions.OldValue = Nothing
-        Me.txtTotalDeductions.ReadOnly = true
-        Me.txtTotalDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtTotalDeductions.Size = New System.Drawing.Size(151, 23)
-        Me.txtTotalDeductions.TabIndex = 6
-        Me.txtTotalDeductions.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtTotalDeductions.Translatable = false
-        Me.txtTotalDeductions.ValueIsNumeric = true
-        '
-        'txtNetPay
-        '
-        Me.txtNetPay.BackColor = System.Drawing.Color.White
-        Me.txtNetPay.BegFindValue = Nothing
-        Me.txtNetPay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNetPay.ComputedValue = false
-        Me.txtNetPay.CustomFormat = "N2"
-        Me.txtNetPay.DataBoundControl = true
-        Me.txtNetPay.DisplayOnly = true
-        Me.txtNetPay.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtNetPay.EditingMode = true
-        Me.txtNetPay.EndFindValue = Nothing
-        Me.txtNetPay.FieldDescription = Nothing
-        Me.txtNetPay.FieldName = Nothing
-        Me.txtNetPay.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtNetPay.FindEnabled = false
-        Me.txtNetPay.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtNetPay.ForeColor = System.Drawing.Color.Black
-        Me.txtNetPay.LinkedLabel = Nothing
-        Me.txtNetPay.Location = New System.Drawing.Point(498, 481)
-        Me.txtNetPay.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtNetPay.MaximumValue = Nothing
-        Me.txtNetPay.MinimumValue = Nothing
-        Me.txtNetPay.Name = "txtNetPay"
-        Me.txtNetPay.OldValue = Nothing
-        Me.txtNetPay.ReadOnly = true
-        Me.txtNetPay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtNetPay.Size = New System.Drawing.Size(151, 23)
-        Me.txtNetPay.TabIndex = 7
-        Me.txtNetPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtNetPay.Translatable = false
-        Me.txtNetPay.ValueIsNumeric = true
-        '
-        'lblNotes
-        '
-        Me.lblNotes.AutoSize = true
-        Me.lblNotes.DisplayOnly = true
-        Me.lblNotes.EditingMode = false
-        Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblNotes.Location = New System.Drawing.Point(1, 1)
-        Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblNotes.Name = "lblNotes"
-        Me.lblNotes.Size = New System.Drawing.Size(105, 17)
-        Me.lblNotes.TabIndex = 4
-        Me.lblNotes.Text = "Payroll Number"
-        Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblNotes.Translatable = true
-        '
-        'CLabel11
-        '
-        Me.CLabel11.AutoSize = true
-        Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel11, 2)
-        Me.CLabel11.DisplayOnly = true
-        Me.CLabel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CLabel11.EditingMode = false
-        Me.CLabel11.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel11.Location = New System.Drawing.Point(312, 456)
-        Me.CLabel11.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel11.Name = "CLabel11"
-        Me.CLabel11.Size = New System.Drawing.Size(184, 23)
-        Me.CLabel11.TabIndex = 32
-        Me.CLabel11.Text = "Total Deductions"
-        Me.CLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.CLabel11.Translatable = true
-        '
-        'cboEmployeeIdNo
-        '
-        Me.cboEmployeeIdNo.BackColor = System.Drawing.Color.White
-        Me.cboEmployeeIdNo.BegFindValue = Nothing
-        Me.cboEmployeeIdNo.ChangingSearchValueOnly = false
-        Me.TableLayoutPanel1.SetColumnSpan(Me.cboEmployeeIdNo, 5)
-        Me.cboEmployeeIdNo.CurrentSearchTerm = ""
-        Me.cboEmployeeIdNo.DefaultValue = Nothing
-        Me.cboEmployeeIdNo.DisplayMember = "Name"
-        Me.cboEmployeeIdNo.DisplayOnly = true
-        Me.cboEmployeeIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cboEmployeeIdNo.DropDownHeight = 21
-        Me.cboEmployeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.cboEmployeeIdNo.EditingMode = true
-        Me.cboEmployeeIdNo.EndFindValue = Nothing
-        Me.cboEmployeeIdNo.FieldDescription = Nothing
-        Me.cboEmployeeIdNo.FieldName = Nothing
-        Me.cboEmployeeIdNo.FilterRule = Nothing
-        Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboEmployeeIdNo.FindEnabled = false
-        Me.cboEmployeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboEmployeeIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboEmployeeIdNo.FormattingEnabled = true
-        Me.cboEmployeeIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboEmployeeIdNo.IgnoreCase = false
-        Me.cboEmployeeIdNo.IntegralHeight = false
-        Me.cboEmployeeIdNo.LinkedLabel = Nothing
-        Me.cboEmployeeIdNo.Location = New System.Drawing.Point(114, 51)
-        Me.cboEmployeeIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.cboEmployeeIdNo.MaxDropDownItems = 1
-        Me.cboEmployeeIdNo.Name = "cboEmployeeIdNo"
-        Me.cboEmployeeIdNo.OldValue = 0
-        Me.cboEmployeeIdNo.OriginalDataSource = Nothing
-        Me.cboEmployeeIdNo.OriginalList = Nothing
-        Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
-        Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
-        Me.cboEmployeeIdNo.PropertySelector = Nothing
-        Me.cboEmployeeIdNo.ReadOnlyCombo = true
-        Me.cboEmployeeIdNo.Size = New System.Drawing.Size(535, 24)
-        Me.cboEmployeeIdNo.SuggestBoxHeight = 200
-        Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
-        Me.cboEmployeeIdNo.TabIndex = 4
-        Me.cboEmployeeIdNo.TabStop = false
-        Me.cboEmployeeIdNo.TextToSearch = Nothing
-        Me.cboEmployeeIdNo.Translatable = false
-        Me.cboEmployeeIdNo.ValueIsMandatory = false
-        Me.cboEmployeeIdNo.ValueIsNullable = false
-        Me.cboEmployeeIdNo.ValueIsNumeric = false
-        Me.cboEmployeeIdNo.ValueMember = "IdNo"
+        Me.chkBankTransfer.Appearance = System.Windows.Forms.Appearance.Button
+        Me.chkBankTransfer.AutoCheck = false
+        Me.chkBankTransfer.BackColor = System.Drawing.Color.White
+        Me.chkBankTransfer.BegFindValue = Nothing
+        Me.chkBankTransfer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkBankTransfer.DisplayOnly = false
+        Me.chkBankTransfer.EditingMode = false
+        Me.chkBankTransfer.EndFindValue = Nothing
+        Me.chkBankTransfer.FieldDescription = Nothing
+        Me.chkBankTransfer.FieldName = Nothing
+        Me.chkBankTransfer.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkBankTransfer.FindEnabled = true
+        Me.chkBankTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.chkBankTransfer.Font = New System.Drawing.Font("Segoe UI", 9!)
+        Me.chkBankTransfer.ForeColor = System.Drawing.Color.Black
+        Me.chkBankTransfer.IFindableControl_FindEnabled = false
+        Me.chkBankTransfer.IgnoreCase = false
+        Me.chkBankTransfer.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.chkBankTransfer.LinkedLabel = Nothing
+        Me.chkBankTransfer.Location = New System.Drawing.Point(537, 51)
+        Me.chkBankTransfer.Margin = New System.Windows.Forms.Padding(1)
+        Me.chkBankTransfer.Name = "chkBankTransfer"
+        Me.chkBankTransfer.NoLabel = false
+        Me.chkBankTransfer.OldValue = ""
+        Me.chkBankTransfer.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkBankTransfer.Size = New System.Drawing.Size(13, 13)
+        Me.chkBankTransfer.TabIndex = 5
+        Me.chkBankTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkBankTransfer.Translatable = false
+        Me.chkBankTransfer.UseVisualStyleBackColor = false
         '
         'PayrollDetailEntry
         '
@@ -829,9 +879,9 @@ Namespace PresentationLayer.Views.Forms
         Me.tbcPayroll.ResumeLayout(false)
         Me.tpgEarnings.ResumeLayout(false)
         CType(Me.DataGridViewEarnings,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).EndInit
         Me.tpgDeductions.ResumeLayout(false)
         CType(Me.DataGridViewDeductions,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsEarnings,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsDeductions,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
@@ -841,11 +891,11 @@ End Sub
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents lblEmployeeName As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents lblNotes As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents lblPayrollIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpStartDate As CCustomDateTimePicker
-        Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents lblStartDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblEndDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents lblPayDescription As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel9 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtNetPay As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtTotalEarnings As Libraries.CBaseControlsLibrary.CTextBox
@@ -869,5 +919,7 @@ End Sub
         Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvDeductionAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
+        Friend WithEvents lblBankTransfer As CLabel
+        Friend WithEvents chkBankTransfer As CCheckBox
     End Class
 End Namespace

@@ -5,21 +5,22 @@
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class PayrollDetailModel
-
-        Public Property Errors As List(Of String)
-        Public Property IdNo As Int32
-        Public Property PayrollIdNo As Int16
+        Public Property BankTransfer As Boolean
+        Public Property EmployeeCode As String
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String
         Public Property EmployeeNameAra As String
-        Public Property EmployeeCode As String
-        Public Property PayrollEarnings As List(Of PayrollPayElementModel)
-        Public Property PayrollDeductions As List(Of PayrollPayElementModel)
-        Public Property StartDate As Date
         Public Property EndDate As Date
+        Public Property Errors As List(Of String)
+        Public Property IdNo As Int32
         Public Property PayPeriodName As String
         Public Property PayPeriodNameAra As String
-
+        Public Property PayrollDeductions As List(Of PayrollPayElementModel)
+        Public Property PayrollEarnings As List(Of PayrollPayElementModel)
+        Public Property PayrollIdNo As Int16
+        Public Property PaymentMethod as String
+        Public Property SponsorType as String
+        Public Property StartDate As Date
     End Class
 
 End Namespace

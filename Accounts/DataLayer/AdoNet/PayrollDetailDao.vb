@@ -12,22 +12,28 @@ Namespace DataLayer.AdoNet
         Implements IDao(Of PayrollDetail), IDaoTvp(Of PayrollDetail), IDaoGetRecord(Of PayrollDetail), IDaoGetRecords(Of PayrollDetail), IGetRecordsWithGroupIdNo(Of PayrollDetail)
         Private ReadOnly _db As New Db()
 
-        Private Const FieldList = "EmployeeCode," &
+        Private Const FieldList = "BankTransfer," &
+                                  "EmployeeCode," &
                                   "EmployeeIdNo," &
                                   "EmployeeName," &
                                   "EmployeeNameAra," &
                                   "IdNo," &
-                                  "PayrollIdNo"
+                                  "PaymentMethod," &
+                                  "PayrollIdNo," &
+                                  "SponsorType"
 
         Public Function GetRecordByIdNo(idNo) As PayrollDetail Implements IDao(Of PayrollDetail).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " &
+                    "BankTransfer," &
                     "EmployeeCode," &
                     "EmployeeIdNo," &
                     "EmployeeName," &
                     "EmployeeNameAra," &
                     "IdNo," &
-                    "PayrollIdNo" &
+                    "PaymentMethod," &
+                    "PayrollIdNo," &
+                    "SponsorType" &
                     " FROM [PayrollDetail_View]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -46,6 +52,7 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef PayrollDetail As PayrollDetail) As Integer Implements IDao(Of PayrollDetail).UpdateRecord
             Dim sql As String = " UPDATE [PayrollDetail] Set" &
+                    " BankTransfer = @BankTransfer," &
                     " EmployeeIdNo = @EmployeeIdNo," &
                     " PayrollIdNo = @PayrollIdNo" &
                     " WHERE IdNo = @IdNo"
@@ -55,13 +62,14 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef PayrollDetail As PayrollDetail) As Integer Implements IDao(Of PayrollDetail).AddRecord
             Dim sql As String =
                     " INSERT INTO [PayrollDetail] " &
-                    " (EmployeeIdNo,PayrollIdNo) " &
-                    " VALUES (@EmployeeIdNo,@PayrollIdNo) "
+                    " (BankTransfer, EmployeeIdNo,PayrollIdNo) " &
+                    " VALUES (@BankTransfer,@EmployeeIdNo,@PayrollIdNo) "
             Return _db.Insert(sql, Take(PayrollDetail))
         End Function
 
         Private Function Take(PayrollDetail As PayrollDetail) As Object()
-            Return New Object() {
+            Return New Object() {   
+                                    "@BankTransfer", PayrollDetail.BankTransfer,
                                     "@EmployeeIdNo", PayrollDetail.EmployeeIdNo,
                                     "@PayrollIdNo", PayrollDetail.PayrollIdNo,
                                     "@IdNo", PayrollDetail.IdNo
@@ -101,12 +109,15 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PayrollDetail) =
                                     Function(reader) _
             New PayrollDetail() With {
+            .BankTransfer = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("BankTransfer")),
             .EmployeeCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeCode")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("EmployeeIdNo")),
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("PayrollIdNo"))
+            .PaymentMethod = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PaymentMethod")),
+            .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("PayrollIdNo")),
+            .SponsorType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SponsorType"))
             }
 
     End Class
