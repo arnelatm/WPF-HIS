@@ -60,7 +60,7 @@ Namespace My
          Global.System.Configuration.DefaultSettingValueAttribute("BooleanType")>  _
         Public ReadOnly Property PayrollComputation() As DataTypeSelection
             Get
-                Return CType(Me("PayrollComputation"),DataTypeSelection)
+                Return CType(Me("PayrollComputation"), DataTypeSelection)
             End Get
         End Property
         
@@ -124,16 +124,13 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("Arnel")>  _
-        Public Property UserName() As String
+        Public ReadOnly Property UserName() As String
             Get
                 Return CType(Me("UserName"),String)
             End Get
-            Set
-                Me("UserName") = value
-            End Set
         End Property
     End Class
 End Namespace

@@ -96,7 +96,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Payroll", cboIdNo)
+            CreateDataSource("Payroll", cboIdNo, "StartDate", Nothing)
             CreateDataSource("PayCycle", cboPayCycleIdNo)
         End Sub
 
