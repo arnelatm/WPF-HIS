@@ -531,10 +531,12 @@ Namespace PresentationLayer.Presenters
             Dim dtPayrollDetailInsertTable As New DataTable
             Dim dtPayrollDetailUpdateTable As New DataTable
             CreateDataTable(dtPayrollDetailInsertTable, {
+                                             {"BankTransfer", GetType(Boolean)},
                                              {"EmployeeIdNo", GetType(Int32)},
                                              {"PayrollIdNo", GetType(Int16)}
                                             })
             CreateDataTable(dtPayrollDetailUpdateTable, {
+                                             {"BankTransfer", GetType(Boolean)},
                                              {"EmployeeIdNo", GetType(Int32)},
                                              {"IdNo", GetType(Int32)},
                                              {"PayrollIdNo", GetType(Int16)}
@@ -563,12 +565,14 @@ Namespace PresentationLayer.Presenters
                 If payrollDetail.IdNo = 0 Then
                     Dim dataRow As DataRow
                     dataRow = dtPayrollDetailInsertTable.NewRow()
+                    dataRow("BankTransfer") = payrollDetail.BankTransfer
                     dataRow("EmployeeIdNo") = payrollDetail.EmployeeIdNo
                     dataRow("PayrollIdNo") = View.IdNo
                     dtPayrollDetailInsertTable.Rows.Add(dataRow)
                 Else
                     Dim dataRow As DataRow
                     dataRow = dtPayrollDetailUpdateTable.NewRow()
+                    dataRow("BankTransfer") = payrollDetail.BankTransfer
                     dataRow("IdNo") = payrollDetail.IdNo
                     dataRow("EmployeeIdNo") = payrollDetail.EmployeeIdNo
                     dataRow("PayrollIdNo") = payrollDetail.PayrollIdNo
@@ -948,7 +952,7 @@ Namespace PresentationLayer.Presenters
                 For Each employeeAttendance In View.PayrollAttendance
                     payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
                     payrollDetail.PayrollIdNo = View.IdNo
-                    If payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And payrollDetail.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
+                    If payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And payrollDetail.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
                         payrollDetail.BankTransfer = True
                     Else
                         payrollDetail.BankTransfer = False
@@ -963,7 +967,7 @@ Namespace PresentationLayer.Presenters
                         payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
                         payrollDetail.PayrollIdNo = View.IdNo
                     End If
-                    If payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And payrollDetail.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
+                    If payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And payrollDetail.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
                         payrollDetail.BankTransfer = True
                     Else
                         payrollDetail.BankTransfer = False

@@ -6,6 +6,7 @@
 
 
 
+
 CREATE VIEW [dbo].[PayrollCsvReport_View]
 AS
 SELECT      dbo.PayrollDetail.PayrollIdNo as 'PayrollIdNo',
@@ -31,5 +32,5 @@ FROM        dbo.PayrollPayElement
 			On dbo.Employee.BankIdNo = dbo.Bank.IdNo
 			LEFT JOIN dbo.PayElementGroup
 			on dbo.PayElement.ReportGroupIdNo = dbo.PayElementGroup.IdNo
-			where dbo.Employee.SponsorType='1' or dbo.Employee.SponsorType = '2'
+			where dbo.PayrollDetail.BankTransfer = 1
 Group by dbo.PayrollDetail.PayrollIdNo,payrollIdNo,EmployeeIdNo,IBAN,ReportGroupIdNo,dbo.Bank.BankCode,dbo.Employee.BankAccountNo,dbo.Employee.EmployeeName,dbo.Employee.NationalIdNo
