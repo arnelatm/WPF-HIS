@@ -16,7 +16,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccumulatedLeaves As Int16
+        Public Property AccumulatedLeave As Int16
         Public Property Cumulative As Boolean
         Public Property EmployeeIdNo As Int32
         Public Property IdNo As Int16

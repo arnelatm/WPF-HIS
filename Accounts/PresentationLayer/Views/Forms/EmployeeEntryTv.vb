@@ -12,11 +12,13 @@ Namespace PresentationLayer.Views.Forms
         Private _countryTelCodes As List(Of Lookup.LookupData)
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
+        Private _employeeLeaveCredits As List(Of EmployeeLeaveCreditView)
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _unit As List(Of Lookup.LookupData)
 
         ' ReSharper disable once UnassignedField.Local
         Private _phoneTypes As List(Of Lookup.LookupData)
+
 
         ' ReSharper disable once UnassignedField.Local
         Private _deductionsByName As List(Of Lookup.LookupData)
@@ -431,6 +433,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView) Implements IEmployeeView.EmployeeLeaveCredits
+            Get
+                Return _employeeLeaveCredits
+            End Get
+            Set
+                _employeeLeaveCredits = Value
+                BindEmployeeLeaveCredits()
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateDataSources()
@@ -448,6 +460,7 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("PayCycle", cboPayCycleidNo)
             CreateDataSource("PayGroup", cboPayGroupIdNo)
             CreateLookupData("PhoneType", NameOf(_phoneTypes))
+            CreateLookupData("Leave", NameOf(_employeeLeaveCredits))
             CreateLookupData("PayElement", NameOf(_deductionsByName), "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
             CreateLookupData("PayElement", NameOf(_earningsByName), "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
         End Sub
@@ -600,7 +613,7 @@ Namespace PresentationLayer.Views.Forms
             'ResumeLayout()
         End Sub
 
-        Private Sub BindLeaveCredits()
+        Private Sub BindEmployeeLeaveCredits()
             bsPhones.DataSource = Nothing
             DataGridViewPhones.Refresh()
             bsPhones.DataSource = EmployeePhones
@@ -612,17 +625,11 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewPhones.Columns
-                dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvPhoneTypeIdNo.DataSource = _phoneTypes
-                dgvPhoneTypeIdNo.DisplayMember = "Name"
-                dgvPhoneTypeIdNo.ValueMember = "IdNo"
-                dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvCountryTelIdNo.DataSource = CountryTelCodes
-                dgvCountryTelIdNo.DisplayMember = "Name"
-                dgvCountryTelIdNo.ValueMember = "IdNo"
-                dgvCountryTelIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvLeaveIdNo.DataSource = _employeeLeaveCredits
+                dgvLeaveIdNo.DisplayMember = "Name"
+                dgvLeaveIdNo.ValueMember = "IdNo"
+                dgvLeaveIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
             End With
             If GlobalVariables.RightToLeftLayout Then
                 dgvFullPhone.Visible = False

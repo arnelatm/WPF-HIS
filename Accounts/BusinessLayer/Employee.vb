@@ -67,6 +67,7 @@ Namespace BusinessLayer
         Public Property RegularEmployeeDeductions As List(Of EmployeePayElement)
         Public Property RegularEmployeeEarnings As List(Of EmployeePayElement)
         Public Property EmployeePhones As List(Of EmployeePhone)
+        Public Property EmployeeLeaveCredits As List(Of EmployeeLeaveCredit)
         Public Property PayFrequency As PayFrequencySelection
 
     End Class
