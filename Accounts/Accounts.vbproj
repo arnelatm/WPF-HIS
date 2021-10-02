@@ -389,6 +389,12 @@
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\AccountHelpers.vb" />
+    <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.Designer.vb">
+      <DependentUpon>EmployeeLeaveCreditView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
@@ -1059,6 +1065,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\EmployeeLeaveCreditView.resx">
+      <DependentUpon>EmployeeLeaveCreditView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.resx">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
