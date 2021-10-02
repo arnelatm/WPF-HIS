@@ -177,20 +177,18 @@
         Me.EmployeeIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdNoDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.dataGridViewLeaveCredits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
-        Me.AmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayElementCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayElementIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayElementKindDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayElementNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayElementNameAraDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayElementTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.LeaveIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LeaveAllowedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PaidPercentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CumulativeDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.MaxCarryOverDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MaxLimitDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NoMaxLimitDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.AccumulatedLeavesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EmployeeIdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SequenceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -218,8 +216,8 @@
         Me.tbpPhones.SuspendLayout
         CType(Me.DataGridViewPhones,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabPage1.SuspendLayout
-        CType(Me.dataGridViewLeaveCredits,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsLeaveCredits,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'SplitContainer1
@@ -2925,7 +2923,7 @@
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.dataGridViewLeaveCredits)
+        Me.TabPage1.Controls.Add(Me.CDataGridView1)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -2934,15 +2932,19 @@
         Me.TabPage1.Text = "Leave Credits"
         Me.TabPage1.UseVisualStyleBackColor = true
         '
-        'dataGridViewLeaveCredits
+        'bsLeaveCredits
+        '
+        Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
+        '
+        'CDataGridView1
         '
         DataGridViewCellStyle27.BackColor = System.Drawing.Color.FloralWhite
-        Me.dataGridViewLeaveCredits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle27
-        Me.dataGridViewLeaveCredits.AutoGenerateColumns = false
-        Me.dataGridViewLeaveCredits.BegFindValue = Nothing
-        Me.dataGridViewLeaveCredits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridViewLeaveCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.AmountDataGridViewTextBoxColumn, Me.PayElementCodeDataGridViewTextBoxColumn, Me.PayElementIdNoDataGridViewTextBoxColumn, Me.PayElementKindDataGridViewTextBoxColumn, Me.PayElementNameDataGridViewTextBoxColumn, Me.PayElementNameAraDataGridViewTextBoxColumn, Me.PayElementTypeDataGridViewTextBoxColumn, Me.EmployeeIdNoDataGridViewTextBoxColumn1, Me.IdNoDataGridViewTextBoxColumn1, Me.RateDataGridViewTextBoxColumn, Me.SequenceDataGridViewTextBoxColumn, Me.UnitDataGridViewTextBoxColumn})
-        Me.dataGridViewLeaveCredits.DataSource = Me.bsLeaveCredits
+        Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle27
+        Me.CDataGridView1.AutoGenerateColumns = false
+        Me.CDataGridView1.BegFindValue = Nothing
+        Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.LeaveIdNoDataGridViewTextBoxColumn, Me.LeaveAllowedDataGridViewTextBoxColumn, Me.PaidPercentDataGridViewTextBoxColumn, Me.CumulativeDataGridViewCheckBoxColumn, Me.MaxCarryOverDataGridViewTextBoxColumn, Me.MaxLimitDataGridViewTextBoxColumn, Me.NoMaxLimitDataGridViewCheckBoxColumn, Me.AccumulatedLeavesDataGridViewTextBoxColumn, Me.EmployeeIdNoDataGridViewTextBoxColumn1, Me.IdNoDataGridViewTextBoxColumn1})
+        Me.CDataGridView1.DataSource = Me.bsLeaveCredits
         DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle28.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
@@ -2950,121 +2952,104 @@
         DataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dataGridViewLeaveCredits.DefaultCellStyle = DataGridViewCellStyle28
-        Me.dataGridViewLeaveCredits.DgvFooter = Nothing
-        Me.dataGridViewLeaveCredits.DisplayOnly = false
-        Me.dataGridViewLeaveCredits.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dataGridViewLeaveCredits.Ea = Nothing
-        Me.dataGridViewLeaveCredits.EditingMode = false
-        Me.dataGridViewLeaveCredits.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.dataGridViewLeaveCredits.EndFindValue = Nothing
-        Me.dataGridViewLeaveCredits.FieldDescription = Nothing
-        Me.dataGridViewLeaveCredits.FieldName = Nothing
-        Me.dataGridViewLeaveCredits.FieldsDictionary = Nothing
-        Me.dataGridViewLeaveCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dataGridViewLeaveCredits.FindEnabled = false
-        Me.dataGridViewLeaveCredits.FirstRowDeletionEnabled = true
-        Me.dataGridViewLeaveCredits.FirstRowInsertionEnabled = true
-        Me.dataGridViewLeaveCredits.IgnoreCase = false
-        Me.dataGridViewLeaveCredits.Location = New System.Drawing.Point(3, 3)
-        Me.dataGridViewLeaveCredits.Name = "dataGridViewLeaveCredits"
-        Me.dataGridViewLeaveCredits.ReadOnly = true
-        Me.dataGridViewLeaveCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dataGridViewLeaveCredits.SequenceColumn = "dgvSequence"
-        Me.dataGridViewLeaveCredits.SequenceFieldName = "Sequence"
-        Me.dataGridViewLeaveCredits.ShowFooter = false
-        Me.dataGridViewLeaveCredits.ShowInsertColumnWhenEditing = true
-        Me.dataGridViewLeaveCredits.Size = New System.Drawing.Size(663, 324)
-        Me.dataGridViewLeaveCredits.TabIndex = 274
-        Me.dataGridViewLeaveCredits.Translatable = true
+        Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle28
+        Me.CDataGridView1.DgvFooter = Nothing
+        Me.CDataGridView1.DisplayOnly = false
+        Me.CDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CDataGridView1.Ea = Nothing
+        Me.CDataGridView1.EditingMode = false
+        Me.CDataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.CDataGridView1.EndFindValue = Nothing
+        Me.CDataGridView1.FieldDescription = Nothing
+        Me.CDataGridView1.FieldName = Nothing
+        Me.CDataGridView1.FieldsDictionary = Nothing
+        Me.CDataGridView1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.CDataGridView1.FindEnabled = false
+        Me.CDataGridView1.FirstRowDeletionEnabled = true
+        Me.CDataGridView1.FirstRowInsertionEnabled = true
+        Me.CDataGridView1.IgnoreCase = false
+        Me.CDataGridView1.Location = New System.Drawing.Point(3, 3)
+        Me.CDataGridView1.Name = "CDataGridView1"
+        Me.CDataGridView1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.CDataGridView1.SequenceColumn = "dgvSequence"
+        Me.CDataGridView1.SequenceFieldName = "Sequence"
+        Me.CDataGridView1.ShowFooter = false
+        Me.CDataGridView1.ShowInsertColumnWhenEditing = true
+        Me.CDataGridView1.Size = New System.Drawing.Size(663, 324)
+        Me.CDataGridView1.TabIndex = 0
+        Me.CDataGridView1.Translatable = true
         '
-        'bsLeaveCredits
+        'LeaveIdNoDataGridViewTextBoxColumn
         '
-        Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel)
+        Me.LeaveIdNoDataGridViewTextBoxColumn.DataPropertyName = "LeaveIdNo"
+        Me.LeaveIdNoDataGridViewTextBoxColumn.HeaderText = "Leave Code/Name"
+        Me.LeaveIdNoDataGridViewTextBoxColumn.Name = "LeaveIdNoDataGridViewTextBoxColumn"
         '
-        'AmountDataGridViewTextBoxColumn
+        'LeaveAllowedDataGridViewTextBoxColumn
         '
-        Me.AmountDataGridViewTextBoxColumn.DataPropertyName = "Amount"
-        Me.AmountDataGridViewTextBoxColumn.HeaderText = "Amount"
-        Me.AmountDataGridViewTextBoxColumn.Name = "AmountDataGridViewTextBoxColumn"
-        Me.AmountDataGridViewTextBoxColumn.ReadOnly = true
+        Me.LeaveAllowedDataGridViewTextBoxColumn.DataPropertyName = "LeaveAllowed"
+        Me.LeaveAllowedDataGridViewTextBoxColumn.HeaderText = "Leaves Allowed"
+        Me.LeaveAllowedDataGridViewTextBoxColumn.Name = "LeaveAllowedDataGridViewTextBoxColumn"
+        Me.LeaveAllowedDataGridViewTextBoxColumn.Width = 50
         '
-        'PayElementCodeDataGridViewTextBoxColumn
+        'PaidPercentDataGridViewTextBoxColumn
         '
-        Me.PayElementCodeDataGridViewTextBoxColumn.DataPropertyName = "PayElementCode"
-        Me.PayElementCodeDataGridViewTextBoxColumn.HeaderText = "PayElementCode"
-        Me.PayElementCodeDataGridViewTextBoxColumn.Name = "PayElementCodeDataGridViewTextBoxColumn"
-        Me.PayElementCodeDataGridViewTextBoxColumn.ReadOnly = true
+        Me.PaidPercentDataGridViewTextBoxColumn.DataPropertyName = "PaidPercent"
+        Me.PaidPercentDataGridViewTextBoxColumn.HeaderText = "Paid Percent"
+        Me.PaidPercentDataGridViewTextBoxColumn.Name = "PaidPercentDataGridViewTextBoxColumn"
+        Me.PaidPercentDataGridViewTextBoxColumn.Width = 50
         '
-        'PayElementIdNoDataGridViewTextBoxColumn
+        'CumulativeDataGridViewCheckBoxColumn
         '
-        Me.PayElementIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayElementIdNo"
-        Me.PayElementIdNoDataGridViewTextBoxColumn.HeaderText = "PayElementIdNo"
-        Me.PayElementIdNoDataGridViewTextBoxColumn.Name = "PayElementIdNoDataGridViewTextBoxColumn"
-        Me.PayElementIdNoDataGridViewTextBoxColumn.ReadOnly = true
+        Me.CumulativeDataGridViewCheckBoxColumn.DataPropertyName = "Cumulative"
+        Me.CumulativeDataGridViewCheckBoxColumn.HeaderText = "Cumulative"
+        Me.CumulativeDataGridViewCheckBoxColumn.MinimumWidth = 40
+        Me.CumulativeDataGridViewCheckBoxColumn.Name = "CumulativeDataGridViewCheckBoxColumn"
+        Me.CumulativeDataGridViewCheckBoxColumn.Width = 40
         '
-        'PayElementKindDataGridViewTextBoxColumn
+        'MaxCarryOverDataGridViewTextBoxColumn
         '
-        Me.PayElementKindDataGridViewTextBoxColumn.DataPropertyName = "PayElementKind"
-        Me.PayElementKindDataGridViewTextBoxColumn.HeaderText = "PayElementKind"
-        Me.PayElementKindDataGridViewTextBoxColumn.Name = "PayElementKindDataGridViewTextBoxColumn"
-        Me.PayElementKindDataGridViewTextBoxColumn.ReadOnly = true
+        Me.MaxCarryOverDataGridViewTextBoxColumn.DataPropertyName = "MaxCarryOver"
+        Me.MaxCarryOverDataGridViewTextBoxColumn.HeaderText = "Max Carry Over"
+        Me.MaxCarryOverDataGridViewTextBoxColumn.Name = "MaxCarryOverDataGridViewTextBoxColumn"
+        Me.MaxCarryOverDataGridViewTextBoxColumn.Width = 50
         '
-        'PayElementNameDataGridViewTextBoxColumn
+        'MaxLimitDataGridViewTextBoxColumn
         '
-        Me.PayElementNameDataGridViewTextBoxColumn.DataPropertyName = "PayElementName"
-        Me.PayElementNameDataGridViewTextBoxColumn.HeaderText = "PayElementName"
-        Me.PayElementNameDataGridViewTextBoxColumn.Name = "PayElementNameDataGridViewTextBoxColumn"
-        Me.PayElementNameDataGridViewTextBoxColumn.ReadOnly = true
+        Me.MaxLimitDataGridViewTextBoxColumn.DataPropertyName = "MaxLimit"
+        Me.MaxLimitDataGridViewTextBoxColumn.HeaderText = "Max Limit"
+        Me.MaxLimitDataGridViewTextBoxColumn.MinimumWidth = 50
+        Me.MaxLimitDataGridViewTextBoxColumn.Name = "MaxLimitDataGridViewTextBoxColumn"
+        Me.MaxLimitDataGridViewTextBoxColumn.Width = 50
         '
-        'PayElementNameAraDataGridViewTextBoxColumn
+        'NoMaxLimitDataGridViewCheckBoxColumn
         '
-        Me.PayElementNameAraDataGridViewTextBoxColumn.DataPropertyName = "PayElementNameAra"
-        Me.PayElementNameAraDataGridViewTextBoxColumn.HeaderText = "PayElementNameAra"
-        Me.PayElementNameAraDataGridViewTextBoxColumn.Name = "PayElementNameAraDataGridViewTextBoxColumn"
-        Me.PayElementNameAraDataGridViewTextBoxColumn.ReadOnly = true
+        Me.NoMaxLimitDataGridViewCheckBoxColumn.DataPropertyName = "NoMaxLimit"
+        Me.NoMaxLimitDataGridViewCheckBoxColumn.HeaderText = "No Max Limit"
+        Me.NoMaxLimitDataGridViewCheckBoxColumn.MinimumWidth = 50
+        Me.NoMaxLimitDataGridViewCheckBoxColumn.Name = "NoMaxLimitDataGridViewCheckBoxColumn"
+        Me.NoMaxLimitDataGridViewCheckBoxColumn.Width = 50
         '
-        'PayElementTypeDataGridViewTextBoxColumn
+        'AccumulatedLeavesDataGridViewTextBoxColumn
         '
-        Me.PayElementTypeDataGridViewTextBoxColumn.DataPropertyName = "PayElementType"
-        Me.PayElementTypeDataGridViewTextBoxColumn.HeaderText = "PayElementType"
-        Me.PayElementTypeDataGridViewTextBoxColumn.Name = "PayElementTypeDataGridViewTextBoxColumn"
-        Me.PayElementTypeDataGridViewTextBoxColumn.ReadOnly = true
+        Me.AccumulatedLeavesDataGridViewTextBoxColumn.DataPropertyName = "AccumulatedLeaves"
+        Me.AccumulatedLeavesDataGridViewTextBoxColumn.HeaderText = "Accumulated Leaves"
+        Me.AccumulatedLeavesDataGridViewTextBoxColumn.MinimumWidth = 50
+        Me.AccumulatedLeavesDataGridViewTextBoxColumn.Name = "AccumulatedLeavesDataGridViewTextBoxColumn"
         '
         'EmployeeIdNoDataGridViewTextBoxColumn1
         '
         Me.EmployeeIdNoDataGridViewTextBoxColumn1.DataPropertyName = "EmployeeIdNo"
         Me.EmployeeIdNoDataGridViewTextBoxColumn1.HeaderText = "EmployeeIdNo"
         Me.EmployeeIdNoDataGridViewTextBoxColumn1.Name = "EmployeeIdNoDataGridViewTextBoxColumn1"
-        Me.EmployeeIdNoDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.EmployeeIdNoDataGridViewTextBoxColumn1.Visible = false
         '
         'IdNoDataGridViewTextBoxColumn1
         '
         Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
         Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
         Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
-        Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = true
-        '
-        'RateDataGridViewTextBoxColumn
-        '
-        Me.RateDataGridViewTextBoxColumn.DataPropertyName = "Rate"
-        Me.RateDataGridViewTextBoxColumn.HeaderText = "Rate"
-        Me.RateDataGridViewTextBoxColumn.Name = "RateDataGridViewTextBoxColumn"
-        Me.RateDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'SequenceDataGridViewTextBoxColumn
-        '
-        Me.SequenceDataGridViewTextBoxColumn.DataPropertyName = "Sequence"
-        Me.SequenceDataGridViewTextBoxColumn.HeaderText = "Sequence"
-        Me.SequenceDataGridViewTextBoxColumn.Name = "SequenceDataGridViewTextBoxColumn"
-        Me.SequenceDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'UnitDataGridViewTextBoxColumn
-        '
-        Me.UnitDataGridViewTextBoxColumn.DataPropertyName = "Unit"
-        Me.UnitDataGridViewTextBoxColumn.HeaderText = "Unit"
-        Me.UnitDataGridViewTextBoxColumn.Name = "UnitDataGridViewTextBoxColumn"
-        Me.UnitDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IdNoDataGridViewTextBoxColumn1.Visible = false
         '
         'EmployeeEntryTv
         '
@@ -3105,8 +3090,8 @@
         Me.tbpPhones.ResumeLayout(false)
         CType(Me.DataGridViewPhones,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage1.ResumeLayout(false)
-        CType(Me.dataGridViewLeaveCredits,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsLeaveCredits,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -3237,19 +3222,17 @@ End Sub
         Friend WithEvents lblSponsorType As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents TabPage1 As TabPage
-        Friend WithEvents dataGridViewLeaveCredits As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents bsLeaveCredits As BindingSource
-        Friend WithEvents AmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementKindDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementNameAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayElementTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents CDataGridView1 As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents LeaveIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents LeaveAllowedDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PaidPercentDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents CumulativeDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
+        Friend WithEvents MaxCarryOverDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents MaxLimitDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents NoMaxLimitDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
+        Friend WithEvents AccumulatedLeavesDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents EmployeeIdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents RateDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents SequenceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents UnitDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End NameSpace

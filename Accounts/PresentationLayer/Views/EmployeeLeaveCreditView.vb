@@ -78,8 +78,6 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
-
-
         Public Property LeaveIdNo As Short Implements IEmployeeLeaveCreditView.LeaveIdNo
             Get
                 Throw New NotImplementedException()
