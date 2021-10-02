@@ -52,6 +52,7 @@ Namespace PresentationLayer.Models
         Public Property RegularEmployeeDeductions As List(Of EmployeePayElementModel)
         Public Property RegularEmployeeEarnings As List(Of EmployeePayElementModel)
         Public Property EmployeePhones As List(Of EmployeePhoneModel)
+        Public Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditModel)
     End Class
 
 End Namespace

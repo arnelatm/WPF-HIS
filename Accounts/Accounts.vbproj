@@ -389,12 +389,7 @@
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
     <Compile Include="PresentationLayer\AccountHelpers.vb" />
-    <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.Designer.vb">
-      <DependentUpon>EmployeeLeaveCreditView.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
@@ -1066,9 +1061,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\EmployeeLeaveCreditView.resx">
-      <DependentUpon>EmployeeLeaveCreditView.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.resx">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1403,10 +1395,10 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Marcelo.config" />
     <None Include="app-MarceloNew.config" />
     <None Include="app222.config" />
+    <None Include="app.config" />
     <None Include="appIspadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />

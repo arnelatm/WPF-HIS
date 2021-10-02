@@ -10,7 +10,7 @@
         Public Property Cumulative As Boolean
         Public Property EmployeeIdNo As Int32
         Public Property Errors As List(Of String)
-        Public Property IdNo As Int16
+        Public Property IdNo As Int32
         Public Property LeaveAllowed As Int16
         Public Property LeaveIdNo As Int16
         Public Property MaxCarryOver As Int16
