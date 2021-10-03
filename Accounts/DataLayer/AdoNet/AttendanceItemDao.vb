@@ -18,6 +18,7 @@ Namespace DataLayer.AdoNet
                                                "DaysOff," &
                                                "DaysPresent," &
                                                "DaysTotal," &
+                                               "DaysVacationLeave," &
                                                "EmployeeIdNo," &
                                                "EmployeeName," &
                                                "EmployeeNameAra," &
@@ -68,6 +69,7 @@ Namespace DataLayer.AdoNet
             .DaysOff = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysOff")),
             .DaysPresent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysPresent")),
             .DaysTotal = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysTotal")),
+            .DaysVacationLeave = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DaysVacationLeave")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),

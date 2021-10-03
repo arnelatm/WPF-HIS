@@ -1,11 +1,6 @@
-﻿
-
-
-
-
-CREATE PROC [dbo].[InsertAttendanceItemTVP]
+﻿CREATE PROC [dbo].[InsertAttendanceItemTVP]
   @MParam AttendanceItemInsert READONLY
 AS 
-INSERT  INTO AttendanceItem (DaysAbsentWithoutPay,DaysAbsentWithPay,DaysOff,DaysPresent,EmployeeIdNo,PayrollIdNo,[Sequence])
-        SELECT  DaysAbsentWithoutPay, DaysAbsentWithPay, DaysOff, DaysPresent, EmployeeIdNo, PayrollIdNo, [Sequence] FROM @MParam
+INSERT  INTO AttendanceItem (DaysAbsentWithoutPay,DaysAbsentWithPay,DaysOff,DaysPresent,DaysVacationLeave,EmployeeIdNo,PayrollIdNo,[Sequence])
+        SELECT  DaysAbsentWithoutPay, DaysAbsentWithPay, DaysOff, DaysPresent, DaysVacationLeave, EmployeeIdNo, PayrollIdNo, [Sequence] FROM @MParam
 SET IDENTITY_INSERT DBO.AttendanceItem ON;

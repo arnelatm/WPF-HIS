@@ -61,6 +61,8 @@ Namespace PresentationLayer.Views
         '    End Set
         'End Property
 
+        Public Property DaysVacationLeave As Decimal Implements IAttendanceItemView.DaysVacationLeave
+
         Public Property EmployeeIdNo As Int32 Implements IAttendanceItemView.EmployeeIdNo
         Public Property EmployeeName As String Implements IAttendanceItemView.EmployeeName
         Public Property EmployeeNameAra As String Implements IAttendanceItemView.EmployeeNameAra
