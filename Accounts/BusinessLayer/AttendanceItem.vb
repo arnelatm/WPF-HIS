@@ -19,6 +19,7 @@ Namespace BusinessLayer
         Public Property DaysAbsentWithoutPay As Decimal
         Public Property DaysOff As Decimal
         Public Property DaysTotal As Decimal
+        Public Property DaysVacationLeave As Decimal
         Public Property PayrollIdNo As Int16
         Public Property Sequence As Int16
     End Class
