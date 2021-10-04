@@ -316,7 +316,7 @@ Public Enum QuantityTypeSelection
     <EnumCode("T")> OvertimeHoliday
     <EnumCode("S")> OvertimeSpecial
     <EnumCode("V")> Variable
-    <EnumCode("X")> VacationLeave
+    <EnumCode("X")> DaysVacationLeave
 End Enum
 
 Public Enum SpecialAccountSelection
