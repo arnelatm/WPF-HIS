@@ -2,15 +2,16 @@
     [IdNo]             INT            IDENTITY (1, 1) NOT NULL,
     [EmployeeIdNo]     INT            NULL,
     [LeaveIdNo]        SMALLINT       NOT NULL,
-    [LeaveAllowed]     SMALLINT       NULL,
+    [LeaveAllowed]     DECIMAL (6, 2) NULL,
     [PaidPercent]      DECIMAL (5, 2) NULL,
-    [MaxCarryOver]     SMALLINT       NULL,
+    [MaxCarryOver]     DECIMAL (6, 2) NULL,
     [Cumulative]       BIT            NULL,
-    [MaxLimit]         SMALLINT       NULL,
-    [NoMaxLimit]       BIT            NULL,
-    [AccumulatedLeave] DECIMAL (8, 2) NULL,
+    [MaxLimit]         DECIMAL (7, 2) NULL,
+    [AccumulatedLeave] DECIMAL (7, 2) NULL,
     [DateCreated]      DATETIME       CONSTRAINT [DF_EmployeeLeaveCredit_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]    ROWVERSION     NULL,
     CONSTRAINT [PK_EmployeeLeaveCreditIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
