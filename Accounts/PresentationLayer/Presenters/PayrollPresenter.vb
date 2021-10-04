@@ -59,6 +59,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _daysPresentType = EnumToCode(QuantityTypeSelection.DaysPresent)
         Private ReadOnly _daysLeaveWithoutPayType = EnumToCode(QuantityTypeSelection.DaysLeaveWithoutPay)
         Private ReadOnly _daysPaidType = EnumToCode(QuantityTypeSelection.DaysPaid)
+        Private ReadOnly _daysVacationType = EnumToCode(QuantityTypeSelection.DaysVacationLeave)
         Private ReadOnly _overtimeRegularType = EnumToCode(QuantityTypeSelection.OvertimeRegular)
         Private ReadOnly _overtimeHolidayType = EnumToCode(QuantityTypeSelection.OvertimeHoliday)
         Private ReadOnly _overTimeSpecialType = EnumToCode(QuantityTypeSelection.OvertimeSpecial)
@@ -91,6 +92,7 @@ Namespace PresentationLayer.Presenters
                                             {"DaysAbsentWithPay", GetType(Decimal)},
                                             {"DaysOff", GetType(Decimal)},
                                             {"DaysPresent", GetType(Decimal)},
+                                            {"DaysVacationLeave", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"PayrollIdNo", GetType(Int16)},
                                             {"Sequence", GetType(Int16)}
@@ -100,6 +102,7 @@ Namespace PresentationLayer.Presenters
                                             {"DaysAbsentWithPay", GetType(Decimal)},
                                             {"DaysOff", GetType(Decimal)},
                                             {"DaysPresent", GetType(Decimal)},
+                                            {"DaysVacationLeave", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
                                             {"PayrollIdNo", GetType(Int16)},
@@ -256,8 +259,8 @@ Namespace PresentationLayer.Presenters
                         empFound = True
                         If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
                             UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
-                            If empAttendance.DaysAbsentWithoutPay <> empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent Then
-                                empAttendance.DaysAbsentWithoutPay = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent
+                            If empAttendance.DaysAbsentWithoutPay <> empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent - empAttendance.DaysVacationLeave Then
+                                empAttendance.DaysAbsentWithoutPay = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent - empAttendance.DaysVacationLeave
                             End If
                         Else
                             View.PayrollAttendance.Remove(empAttendance)
@@ -408,6 +411,7 @@ Namespace PresentationLayer.Presenters
             workRow("DaysAbsentWithPay") = itemDataView.DaysAbsentWithPay
             workRow("DaysOff") = itemDataView.DaysOff
             workRow("DaysPresent") = itemDataView.DaysPresent
+            workRow("DaysVacationLeave") = itemDataView.DaysVacationLeave
             workRow("EmployeeIdNo") = itemDataView.EmployeeIdNo
             workRow("PayrollIdNo") = View.IdNo
         End Sub
@@ -1136,9 +1140,11 @@ Namespace PresentationLayer.Presenters
                 quantity = GetAttendanceValues(employeeIdNo, "DaysPresent")
             ElseIf quantityType = _daysLeaveWithoutPayType Then
                 quantity = GetAttendanceValues(employeeIdNo, "DaysAbsentWithoutPay")
+            ElseIf quantityType = _daysVacationType Then
+                quantity = GetAttendanceValues(employeeIdNo, "DaysVacationLeave")
             ElseIf quantityType = _daysPaidType Then
                 Dim attendanceItem As AttendanceItemModel = _attendanceItemService.GetRecordByIdNo(Of AttendanceItemModel)(employeeIdNo)
-                quantity = attendanceItem.DaysPresent + attendanceItem.DaysAbsentWithPay + attendanceItem.DaysOff
+                quantity = attendanceItem.DaysPresent + attendanceItem.DaysAbsentWithPay + attendanceItem.DaysOff + attendanceItem.DaysVacationLeave
             ElseIf quantityType = _overtimeRegularType Then
                 quantity = GetOtWorkHourValues(employeeIdNo, "OvertimeRegular")
             ElseIf quantityType = _overtimeHolidayType Then

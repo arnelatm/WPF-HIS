@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views.Forms
             dgvDaysAbsentWoPay.SetFormat(7, 4)
             dgvDaysTotal.SetFormat(7, 4)
             dgvDaysTotal.DisplayOnly = True
+            dgvDaysVacationLeave.SetFormat(7, 4)
             dgvEmployeeIdNo.DisplayOnly = True
             dgvDaysAbsentWoPay.DisplayOnly = True
         End Sub
@@ -221,7 +222,7 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewPayrollAttendance
                 If .CurrentRow() IsNot Nothing Then
                     Dim nIndex = .CurrentRow.Index
-                    PayrollAttendance(nIndex).DaysPresent = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysAbsentWithoutPay
+                    PayrollAttendance(nIndex).DaysPresent = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysAbsentWithoutPay - PayrollAttendance(nIndex).DaysVacationLeave
                     'PayrollAttendance(nIndex).DaysAbsentWithoutPay = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysPresent
                 End If
             End With
