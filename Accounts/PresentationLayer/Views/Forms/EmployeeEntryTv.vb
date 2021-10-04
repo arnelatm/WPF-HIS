@@ -13,15 +13,15 @@ Namespace PresentationLayer.Views.Forms
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _employeeLeaveCredits As List(Of EmployeeLeaveCreditView)
+
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _unit As List(Of Lookup.LookupData)
 
         ' ReSharper disable once UnassignedField.Local
         Private _phoneTypes As List(Of Lookup.LookupData)
-
-
         ' ReSharper disable once UnassignedField.Local
         Private _deductionsByName As List(Of Lookup.LookupData)
+        Private _leaves As List(Of Lookup.LookupData)
 
         ' ReSharper disable once UnassignedField.Local
         Private _earningsByName As List(Of Lookup.LookupData)
@@ -460,7 +460,7 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("PayCycle", cboPayCycleidNo)
             CreateDataSource("PayGroup", cboPayGroupIdNo)
             CreateLookupData("PhoneType", NameOf(_phoneTypes))
-            CreateLookupData("Leave", NameOf(_employeeLeaveCredits))
+            CreateLookupData("Leave", NameOf(_leaves))
             CreateLookupData("PayElement", NameOf(_deductionsByName), "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
             CreateLookupData("PayElement", NameOf(_earningsByName), "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
         End Sub
@@ -626,7 +626,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewPhones.Columns
                 dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvLeaveIdNo.DataSource = _employeeLeaveCredits
+                dgvLeaveIdNo.DataSource = _leaves
                 dgvLeaveIdNo.DisplayMember = "Name"
                 dgvLeaveIdNo.ValueMember = "IdNo"
                 dgvLeaveIdNo.AutoComplete = AutoCompleteMode.SuggestAppend

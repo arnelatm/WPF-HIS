@@ -252,6 +252,7 @@
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeAbsenceDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeLeaveCreditDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeePayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\JournalPrefix.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
@@ -1398,8 +1399,8 @@
     <None Include="app-Marcelo.config" />
     <None Include="app-MarceloNew.config" />
     <None Include="app222.config" />
-    <None Include="appIspadmin2.config" />
     <None Include="app.config" />
+    <None Include="appIspadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />

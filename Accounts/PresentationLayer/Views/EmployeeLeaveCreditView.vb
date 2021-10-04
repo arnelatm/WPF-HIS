@@ -11,11 +11,10 @@ Namespace PresentationLayer.Views
         Public Property EmployeeIdNo As Int32 Implements IEmployeeLeaveCreditView.EmployeeIdNo
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Int32 Implements IEmployeeLeaveCreditView.IdNo
-        Public Property LeaveAllowed As Int16 Implements IEmployeeLeaveCreditView.LeaveAllowed
+        Public Property LeaveAllowed As Decimal Implements IEmployeeLeaveCreditView.LeaveAllowed
         Public Property LeaveIdNo As Int16 Implements IEmployeeLeaveCreditView.LeaveIdNo
-        Public Property MaxCarryOver As Int16 Implements IEmployeeLeaveCreditView.MaxCarryOver
-        Public Property MaxLimit As Int16 Implements IEmployeeLeaveCreditView.MaxLimit
-        Public Property NoMaxLimit As Boolean Implements IEmployeeLeaveCreditView.NoMaxLimit
+        Public Property MaxCarryOver As Decimal Implements IEmployeeLeaveCreditView.MaxCarryOver
+        Public Property MaxLimit As Decimal Implements IEmployeeLeaveCreditView.MaxLimit
         Public Property PaidPercent As Decimal Implements IEmployeeLeaveCreditView.PaidPercent
         Public Property Sequence As Int16 Implements IEmployeeLeaveCreditView.Sequence
 

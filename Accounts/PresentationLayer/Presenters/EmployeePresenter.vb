@@ -18,10 +18,13 @@ Namespace PresentationLayer.Presenters
 
         Protected DtEmpPayElementInsertTable As New DataTable
         Protected DtEmpPayElementUpdateTable As New DataTable
+        Protected DtEmpLeaveCreditInsertTable As New DataTable
+        Protected DtEmpLeaveCreditUpdateTable As New DataTable
         Protected DtPhoneInsertTable As New DataTable
         Protected DtPhoneUpdateTable As New DataTable
         Private ReadOnly _employeePayElementService As New AccountsService("EmployeePayElement")
         Private ReadOnly _employeePhoneService As New AccountsService("EmployeePhone")
+        Private ReadOnly _employeeLeaveCreditService As New AccountsService("EmployeeLeaveCredit")
 
         Public Sub New(itemView As IEmployeeView)
             MyBase.New(itemView)
@@ -50,6 +53,17 @@ Namespace PresentationLayer.Presenters
                                              {"PhoneTypeIdNo", GetType(Int16)},
                                              {"Sequence", GetType(Int16)}})
 
+            CreateDataTable(DtEmpLeaveCreditInsertTable, {{"AccumulatedLeave", GetType(String)},
+                                            {"EmployeeIdNo", GetType(Int32)},
+                                            {"LeaveAllowed", GetType(Decimal)},
+                                            {"LeaveIdNo", GetType(Int16)},
+                                            {"MaxCarryOver", GetType(Decimal)},
+                                            {"MaxLimit", GetType(Decimal)},
+                                            {"PaidPercent", GetType(Decimal)},
+                                            {"Sequence", GetType(Int16)},
+                                            {"Unit", GetType(String)}})
+
+
             CreateDataTable(DtEmpPayElementUpdateTable, {{"Amount", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
@@ -67,31 +81,44 @@ Namespace PresentationLayer.Presenters
                                              {"Sequence", GetType(Int16)}
                                             })
 
+            CreateDataTable(DtEmpLeaveCreditUpdateTable, {{"AccumulatedLeave", GetType(String)},
+                                            {"EmployeeIdNo", GetType(Int32)},
+                                            {"IdNo", GetType(Int32)},
+                                            {"LeaveAllowed", GetType(Decimal)},
+                                            {"LeaveIdNo", GetType(Int16)},
+                                            {"MaxCarryOver", GetType(Decimal)},
+                                            {"MaxLimit", GetType(Decimal)},
+                                            {"PaidPercent", GetType(Decimal)},
+                                            {"Sequence", GetType(Int16)},
+                                            {"Unit", GetType(String)}})
+
+
+
         End Sub
 
         Public Function GetEmployeeBalance(idNo As Integer)
             Return Service.GetFieldValue(Of Decimal)("Sum(Debit-Credit)", "ErStatement_View", "EmployeeIdNo = " & idNo.ToString())
         End Function
 
-        Public Function GetEmployeeDeductions(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
-            Dim employeePayElementDao As New EmployeePayElementDao
-            Dim employeeDeductionModel As New List(Of EmployeePayElementModel)
-            Dim employeeDeduction As List(Of EmployeePayElement) = employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Deduction & "' and EmployeeIdNo = " & View.IdNo)
-            GlobalVariables.Mapper.Map(employeeDeduction, employeeDeductionModel)
-            Return employeeDeductionModel
-        End Function
+        'Public Function GetEmployeeDeductions(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
+        '    Dim employeePayElementDao As New EmployeePayElementDao
+        '    Dim employeeDeductionModel As New List(Of EmployeePayElementModel)
+        '    Dim employeeDeduction As List(Of EmployeePayElement) = employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Deduction & "' and EmployeeIdNo = " & View.IdNo)
+        '    GlobalVariables.Mapper.Map(employeeDeduction, employeeDeductionModel)
+        '    Return employeeDeductionModel
+        'End Function
 
-        Public Function GetEmployeeEarnings(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
-            Dim employeePayElementDao As New EmployeePayElementDao
-            Dim employeeEarningModel As New List(Of EmployeePayElementModel)
-            Dim employeeEarning As List(Of EmployeePayElement) = employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Earning & "' and EmployeeIdNo = " & View.IdNo)
-            GlobalVariables.Mapper.Map(employeeEarning, employeeEarningModel)
-            Return employeeEarningModel
-        End Function
+        'Public Function GetEmployeeEarnings(ByVal idNo As Int32) As List(Of EmployeePayElementModel)
+        '    Dim employeePayElementDao As New EmployeePayElementDao
+        '    Dim employeeEarningModel As New List(Of EmployeePayElementModel)
+        '    Dim employeeEarning As List(Of EmployeePayElement) = employeePayElementDao.GetDaoRecords("PayElementKind = '" & PayElementKindSelection.Earning & "' and EmployeeIdNo = " & View.IdNo)
+        '    GlobalVariables.Mapper.Map(employeeEarning, employeeEarningModel)
+        '    Return employeeEarningModel
+        'End Function
 
-        Public Function GetEmployeePhones(ByVal idNo As Int16) As List(Of EmployeePhoneModel)
-            Return _employeePhoneService.GetRecordsWithGroupIdNo(Of EmployeePhoneModel)(idNo, "Sequence")
-        End Function
+        'Public Function GetEmployeePhones(ByVal idNo As Int16) As List(Of EmployeePhoneModel)
+        '    Return _employeePhoneService.GetRecordsWithGroupIdNo(Of EmployeePhoneModel)(idNo, "Sequence")
+        'End Function
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
@@ -100,6 +127,7 @@ Namespace PresentationLayer.Presenters
                 employeePayElements.AddRange(View.RegularEmployeeDeductions)
                 ViewToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
                 ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
+                ViewToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
                 If IsEmpty(View.HiredDate) Then
                     View.HiredDate = Today()
                 End If
@@ -123,6 +151,17 @@ Namespace PresentationLayer.Presenters
             workRow("PhoneTypeIdNo") = itemDataView.PhoneTypeIdNo
         End Sub
 
+        Private Sub EmpLeaveCreditFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("AccmulatedLeave") = itemDataView.AccumulatedLeave
+            workRow("Cumulative") = itemDataView.Cumulative
+            workRow("EmployeeIdNo") = View.IdNo
+            workRow("LeaveIdNo") = itemDataView.LeaveIdNo
+            workRow("MaxCarryOver") = itemDataView.MaxCarryOver
+            workRow("MaxLimit") = itemDataView.MaxLimit
+            workRow("PaidPercent") = itemDataView.PaidPercent
+            workRow("Sequence") = itemDataView.Sequence
+        End Sub
+
         Public Function EmpPayElementFilter(ByVal obj As EmployeePayElementView) As Boolean
             If obj.Amount <> 0 Or obj.Rate <> 0 Then
                 Return True
@@ -137,11 +176,21 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
+        Public Function EmpLeaveCreditFilter(ByVal obj As EmployeeLeaveCreditView) As Boolean
+            If obj.LeaveAllowed <> 0 Then
+                Return True
+            End If
+            Return False
+        End Function
+
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_employeePayElementService, DtEmpPayElementUpdateTable, DtEmpPayElementInsertTable, passedValue, "EmployeeIdNo")
             If retVal >= 0 Then
                 retVal = UpdateChildData(_employeePhoneService, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
+                If retVal >= 0 Then
+                    retVal = UpdateChildData(_employeePhoneService, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
+                End If
             End If
         End Sub
 
@@ -158,6 +207,12 @@ Namespace PresentationLayer.Presenters
                         MessageBox.Show("Duplicate earning value found in Employee Deductions. See line <" + (duplicate + 1).ToString() + ">.")
                     Else
                         retValue = True
+                        duplicate = FirstFieldDuplicate(Of EmployeeLeaveCreditView, Int16)(View.EmployeeLeaveCredits, "LeaveIdNo")
+                        If duplicate IsNot Nothing Then
+                            MessageBox.Show("Duplicate leave value found in Employee Leave Credits. See line <" + (duplicate + 1).ToString() + ">.")
+                        Else
+                            retValue = True
+                        End If
                     End If
                 End If
             End If
