@@ -51,12 +51,13 @@
         Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.bsPhones = New System.Windows.Forms.BindingSource(Me.components)
         Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
         Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
@@ -182,7 +183,7 @@
         Me.EmployeeIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdNoDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewLeaveCredits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequenceLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
@@ -191,7 +192,6 @@
         Me.dgvCumulative = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgvMaxCarryOver = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-        Me.dgvNoMaxLimit = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgvAccumulatedLeaves = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvEmployeeIdNoLeaveCredts = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -222,7 +222,7 @@
         Me.tbpPhones.SuspendLayout
         CType(Me.DataGridViewPhones,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabPage1.SuspendLayout
-        CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.DataGridViewLeaveCredits,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsLeaveCredits,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
@@ -2929,7 +2929,7 @@
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.CDataGridView1)
+        Me.TabPage1.Controls.Add(Me.DataGridViewLeaveCredits)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -2938,49 +2938,50 @@
         Me.TabPage1.Text = "Leave Credits"
         Me.TabPage1.UseVisualStyleBackColor = true
         '
-        'CDataGridView1
+        'DataGridViewLeaveCredits
         '
         DataGridViewCellStyle27.BackColor = System.Drawing.Color.FloralWhite
-        Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle27
-        Me.CDataGridView1.AutoGenerateColumns = false
-        Me.CDataGridView1.BegFindValue = Nothing
-        Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.CDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceLeaveCredits, Me.dgvLeaveIdNo, Me.dgvLeaveAllowed, Me.dgvPaidPercent, Me.dgvCumulative, Me.dgvMaxCarryOver, Me.dgvMaxLimit, Me.dgvNoMaxLimit, Me.dgvAccumulatedLeaves, Me.dgvEmployeeIdNoLeaveCredts, Me.dgvIdNoLeaveCredits})
-        Me.CDataGridView1.DataSource = Me.bsLeaveCredits
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle33.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle33.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle33
-        Me.CDataGridView1.DgvFooter = Nothing
-        Me.CDataGridView1.DisplayOnly = false
-        Me.CDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CDataGridView1.Ea = Nothing
-        Me.CDataGridView1.EditingMode = false
-        Me.CDataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.CDataGridView1.EndFindValue = Nothing
-        Me.CDataGridView1.FieldDescription = Nothing
-        Me.CDataGridView1.FieldName = Nothing
-        Me.CDataGridView1.FieldsDictionary = Nothing
-        Me.CDataGridView1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.CDataGridView1.FindEnabled = false
-        Me.CDataGridView1.FirstRowDeletionEnabled = true
-        Me.CDataGridView1.FirstRowInsertionEnabled = true
-        Me.CDataGridView1.IgnoreCase = false
-        Me.CDataGridView1.Location = New System.Drawing.Point(3, 3)
-        Me.CDataGridView1.Name = "CDataGridView1"
-        Me.CDataGridView1.ReadOnly = true
-        Me.CDataGridView1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.CDataGridView1.SequenceColumn = "dgvSequence"
-        Me.CDataGridView1.SequenceFieldName = "Sequence"
-        Me.CDataGridView1.ShowFooter = false
-        Me.CDataGridView1.ShowInsertColumnWhenEditing = true
-        Me.CDataGridView1.Size = New System.Drawing.Size(663, 324)
-        Me.CDataGridView1.TabIndex = 0
-        Me.CDataGridView1.Translatable = true
+        Me.DataGridViewLeaveCredits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle27
+        Me.DataGridViewLeaveCredits.AutoGenerateColumns = false
+        Me.DataGridViewLeaveCredits.BegFindValue = Nothing
+        Me.DataGridViewLeaveCredits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewLeaveCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceLeaveCredits, Me.dgvLeaveIdNo, Me.dgvLeaveAllowed, Me.dgvPaidPercent, Me.dgvCumulative, Me.dgvMaxCarryOver, Me.dgvMaxLimit, Me.dgvAccumulatedLeaves, Me.dgvEmployeeIdNoLeaveCredts, Me.dgvIdNoLeaveCredits})
+        Me.DataGridViewLeaveCredits.DataSource = Me.bsLeaveCredits
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle34.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle34.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewLeaveCredits.DefaultCellStyle = DataGridViewCellStyle34
+        Me.DataGridViewLeaveCredits.DgvFooter = Nothing
+        Me.DataGridViewLeaveCredits.DisplayOnly = false
+        Me.DataGridViewLeaveCredits.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridViewLeaveCredits.Ea = Nothing
+        Me.DataGridViewLeaveCredits.EditingMode = false
+        Me.DataGridViewLeaveCredits.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.DataGridViewLeaveCredits.EndFindValue = Nothing
+        Me.DataGridViewLeaveCredits.FieldDescription = Nothing
+        Me.DataGridViewLeaveCredits.FieldName = Nothing
+        Me.DataGridViewLeaveCredits.FieldsDictionary = Nothing
+        Me.DataGridViewLeaveCredits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DataGridViewLeaveCredits.FindEnabled = false
+        Me.DataGridViewLeaveCredits.FirstRowDeletionEnabled = true
+        Me.DataGridViewLeaveCredits.FirstRowInsertionEnabled = true
+        Me.DataGridViewLeaveCredits.IgnoreCase = false
+        Me.DataGridViewLeaveCredits.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridViewLeaveCredits.Name = "DataGridViewLeaveCredits"
+        Me.DataGridViewLeaveCredits.ReadOnly = true
+        Me.DataGridViewLeaveCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewLeaveCredits.SequenceColumn = "dgvSequenceLeaveCredits"
+        Me.DataGridViewLeaveCredits.SequenceFieldName = "Sequence"
+        Me.DataGridViewLeaveCredits.ShowCellErrors = false
+        Me.DataGridViewLeaveCredits.ShowFooter = false
+        Me.DataGridViewLeaveCredits.ShowInsertColumnWhenEditing = true
+        Me.DataGridViewLeaveCredits.Size = New System.Drawing.Size(663, 324)
+        Me.DataGridViewLeaveCredits.TabIndex = 0
+        Me.DataGridViewLeaveCredits.Translatable = true
         '
         'bsLeaveCredits
         '
@@ -2998,6 +2999,9 @@
         '
         Me.dgvLeaveIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvLeaveIdNo.DataPropertyName = "LeaveIdNo"
+        DataGridViewCellStyle28.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black
+        Me.dgvLeaveIdNo.DefaultCellStyle = DataGridViewCellStyle28
         Me.dgvLeaveIdNo.EditingMode = false
         Me.dgvLeaveIdNo.HeaderText = "Leave Credit Code/Name"
         Me.dgvLeaveIdNo.MinimumWidth = 200
@@ -3010,8 +3014,10 @@
         'dgvLeaveAllowed
         '
         Me.dgvLeaveAllowed.DataPropertyName = "LeaveAllowed"
-        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.dgvLeaveAllowed.DefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle29.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle29.ForeColor = System.Drawing.Color.Black
+        Me.dgvLeaveAllowed.DefaultCellStyle = DataGridViewCellStyle29
         Me.dgvLeaveAllowed.EditingMode = false
         Me.dgvLeaveAllowed.HeaderText = "Leaves Allowed"
         Me.dgvLeaveAllowed.Name = "dgvLeaveAllowed"
@@ -3024,8 +3030,10 @@
         'dgvPaidPercent
         '
         Me.dgvPaidPercent.DataPropertyName = "PaidPercent"
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.dgvPaidPercent.DefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle30.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black
+        Me.dgvPaidPercent.DefaultCellStyle = DataGridViewCellStyle30
         Me.dgvPaidPercent.EditingMode = false
         Me.dgvPaidPercent.HeaderText = "Paid Percent"
         Me.dgvPaidPercent.Name = "dgvPaidPercent"
@@ -3048,8 +3056,10 @@
         'dgvMaxCarryOver
         '
         Me.dgvMaxCarryOver.DataPropertyName = "MaxCarryOver"
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.dgvMaxCarryOver.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle31.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle31.ForeColor = System.Drawing.Color.Black
+        Me.dgvMaxCarryOver.DefaultCellStyle = DataGridViewCellStyle31
         Me.dgvMaxCarryOver.EditingMode = false
         Me.dgvMaxCarryOver.HeaderText = "Max Carry Over"
         Me.dgvMaxCarryOver.Name = "dgvMaxCarryOver"
@@ -3062,8 +3072,10 @@
         'dgvMaxLimit
         '
         Me.dgvMaxLimit.DataPropertyName = "MaxLimit"
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.dgvMaxLimit.DefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle32.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle32.ForeColor = System.Drawing.Color.Black
+        Me.dgvMaxLimit.DefaultCellStyle = DataGridViewCellStyle32
         Me.dgvMaxLimit.EditingMode = false
         Me.dgvMaxLimit.HeaderText = "Max Limit"
         Me.dgvMaxLimit.MinimumWidth = 50
@@ -3074,20 +3086,13 @@
         Me.dgvMaxLimit.Translatable = false
         Me.dgvMaxLimit.Width = 50
         '
-        'dgvNoMaxLimit
-        '
-        Me.dgvNoMaxLimit.DataPropertyName = "NoMaxLimit"
-        Me.dgvNoMaxLimit.HeaderText = "No Max Limit"
-        Me.dgvNoMaxLimit.MinimumWidth = 50
-        Me.dgvNoMaxLimit.Name = "dgvNoMaxLimit"
-        Me.dgvNoMaxLimit.ReadOnly = true
-        Me.dgvNoMaxLimit.Width = 50
-        '
         'dgvAccumulatedLeaves
         '
         Me.dgvAccumulatedLeaves.DataPropertyName = "AccumulatedLeaves"
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.dgvAccumulatedLeaves.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle33.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle33.ForeColor = System.Drawing.Color.Black
+        Me.dgvAccumulatedLeaves.DefaultCellStyle = DataGridViewCellStyle33
         Me.dgvAccumulatedLeaves.EditingMode = false
         Me.dgvAccumulatedLeaves.HeaderText = "Accum. Leaves"
         Me.dgvAccumulatedLeaves.MinimumWidth = 50
@@ -3096,6 +3101,7 @@
         Me.dgvAccumulatedLeaves.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvAccumulatedLeaves.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgvAccumulatedLeaves.Translatable = false
+        Me.dgvAccumulatedLeaves.Width = 50
         '
         'dgvEmployeeIdNoLeaveCredts
         '
@@ -3152,7 +3158,7 @@
         Me.tbpPhones.ResumeLayout(false)
         CType(Me.DataGridViewPhones,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage1.ResumeLayout(false)
-        CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.DataGridViewLeaveCredits,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsLeaveCredits,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
@@ -3285,7 +3291,7 @@ End Sub
         Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents TabPage1 As TabPage
         Friend WithEvents bsLeaveCredits As BindingSource
-        Friend WithEvents CDataGridView1 As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents DataGridViewLeaveCredits As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents dgvSequenceLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvLeaveAllowed As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
@@ -3293,7 +3299,6 @@ End Sub
         Friend WithEvents dgvCumulative As DataGridViewCheckBoxColumn
         Friend WithEvents dgvMaxCarryOver As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvMaxLimit As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvNoMaxLimit As DataGridViewCheckBoxColumn
         Friend WithEvents dgvAccumulatedLeaves As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvEmployeeIdNoLeaveCredts As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNoLeaveCredits As DataGridViewTextBoxColumn

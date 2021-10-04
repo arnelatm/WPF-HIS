@@ -6,16 +6,15 @@
     ''' </summary>
     Public Class EmployeeLeaveCreditModel
 
-        Public Property AccumulatedLeaves As Int16
+        Public Property AccumulatedLeaves As Decimal
         Public Property Cumulative As Boolean
         Public Property EmployeeIdNo As Int32
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
-        Public Property LeaveAllowed As Int16
+        Public Property LeaveAllowed As Decimal
         Public Property LeaveIdNo As Int16
-        Public Property MaxCarryOver As Int16
-        Public Property MaxLimit As Int16
-        Public Property NoMaxLimit As Boolean
+        Public Property MaxCarryOver As Decimal
+        Public Property MaxLimit As Decimal
         Public Property PaidPercent As Decimal
         Public Property Sequence As Int16
 
