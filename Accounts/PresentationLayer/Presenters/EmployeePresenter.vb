@@ -63,7 +63,6 @@ Namespace PresentationLayer.Presenters
                                             {"Sequence", GetType(Int16)},
                                             {"Unit", GetType(String)}})
 
-
             CreateDataTable(DtEmpPayElementUpdateTable, {{"Amount", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
@@ -91,8 +90,6 @@ Namespace PresentationLayer.Presenters
                                             {"PaidPercent", GetType(Decimal)},
                                             {"Sequence", GetType(Int16)},
                                             {"Unit", GetType(String)}})
-
-
 
         End Sub
 
@@ -206,7 +203,6 @@ Namespace PresentationLayer.Presenters
                     If duplicate IsNot Nothing Then
                         MessageBox.Show("Duplicate earning value found in Employee Deductions. See line <" + (duplicate + 1).ToString() + ">.")
                     Else
-                        retValue = True
                         duplicate = FirstFieldDuplicate(Of EmployeeLeaveCreditView, Int16)(View.EmployeeLeaveCredits, "LeaveIdNo")
                         If duplicate IsNot Nothing Then
                             MessageBox.Show("Duplicate leave value found in Employee Leave Credits. See line <" + (duplicate + 1).ToString() + ">.")
@@ -284,12 +280,12 @@ Namespace PresentationLayer.Presenters
         Public Sub OnPayElementDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
-                    Dim earnIdNo = eventType.BindingSource.Current.PayElementIdNo
-                    Dim calcType = GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-                    Dim amount As Decimal
-                    Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
                     Select Case eventType.PropertyName
                         Case $"PayElementIdNo"
+                            Dim amount As Decimal
+                            Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
+                            Dim earnIdNo = eventType.BindingSource.Current.PayElementIdNo
+                            Dim calcType = GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
                             earnIdNo = eventType.EnteredValue
                             calcType = GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
                             If IsEmpty(employeePayElement.Unit) Then
@@ -303,16 +299,25 @@ Namespace PresentationLayer.Presenters
                             ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
                                 amount = ComputePayAmount(View.PayFrequency, employeePayElement.Rate, employeePayElement.Unit)
                             End If
+                            employeePayElement.Amount = amount
                         Case $"Rate"
+                            Dim amount As Decimal
+                            Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
+
+                            Dim earnIdNo = eventType.BindingSource.Current.PayElementIdNo
+                            Dim calcType = GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
                             If calcType = EnumToCode(CalculationTypeSelection.FixedRate) Then
                                 amount = 0
                             ElseIf calcType = EnumToCode(CalculationTypeSelection.FixedAmount) Then
                                 amount = ComputePayAmount(View.PayFrequency, eventType.EnteredValue, employeePayElement.Unit)
                             End If
+                            employeePayElement.Amount = amount
                         Case $"Unit"
+                            Dim amount As Decimal
+                            Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
                             amount = ComputePayAmount(View.PayFrequency, employeePayElement.Rate, eventType.EnteredValue)
+                            employeePayElement.Amount = amount
                     End Select
-                    employeePayElement.Amount = amount
                 End If
             End With
         End Sub
@@ -331,29 +336,29 @@ Public Class PayCycleIdNoChanged
 
 End Class
 
-Public Class EmployeePayElementChanged
+'Public Class EmployeePayElementChanged
 
-    Public Sub New(payElements As List(Of EmployeePayElementView), row As Int32, propertyName As String, elementName As String, enteredValue As Object)
-        Me.PayElements = payElements
-        Me.Row = row
-        Me.PropertyName = propertyName
-        Me.ElementName = elementName
-        Me.EnteredValue = enteredValue
-    End Sub
+'    Public Sub New(payElements As List(Of EmployeePayElementView), row As Int32, propertyName As String, elementName As String, enteredValue As Object)
+'        Me.PayElements = payElements
+'        Me.Row = row
+'        Me.PropertyName = propertyName
+'        Me.ElementName = elementName
+'        Me.EnteredValue = enteredValue
+'    End Sub
 
-    Public Sub New(bindingSource As BindingSource, row As Int32, propertyName As String, elementName As String, enteredValue As Object)
-        Me.BindingSource = bindingSource
-        Me.Row = row
-        Me.PropertyName = propertyName
-        Me.ElementName = elementName
-        Me.EnteredValue = enteredValue
-    End Sub
+'    Public Sub New(bindingSource As BindingSource, row As Int32, propertyName As String, elementName As String, enteredValue As Object)
+'        Me.BindingSource = bindingSource
+'        Me.Row = row
+'        Me.PropertyName = propertyName
+'        Me.ElementName = elementName
+'        Me.EnteredValue = enteredValue
+'    End Sub
 
-    Public Property BindingSource As BindingSource
-    Public Property PayElements As List(Of EmployeePayElementView)
-    Public Property Row As Int32
-    Public Property PropertyName As String
-    Public Property ElementName As String
-    Public Property EnteredValue As Object
+'    Public Property BindingSource As BindingSource
+'    Public Property PayElements As List(Of EmployeePayElementView)
+'    Public Property Row As Int32
+'    Public Property PropertyName As String
+'    Public Property ElementName As String
+'    Public Property EnteredValue As Object
 
-End Class
+'End Class

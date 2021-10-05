@@ -19,8 +19,10 @@ Namespace PresentationLayer.Views.Forms
 
         ' ReSharper disable once UnassignedField.Local
         Private _phoneTypes As List(Of Lookup.LookupData)
+
         ' ReSharper disable once UnassignedField.Local
         Private _deductionsByName As List(Of Lookup.LookupData)
+
         Private _leaves As List(Of Lookup.LookupData)
 
         ' ReSharper disable once UnassignedField.Local
@@ -389,40 +391,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property EarningsByName As List(Of Lookup.LookupData)
-        '    Get
-        '        CreateLookupData("PayElement",
-        '                      "EarningsByName",
-        '                      "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-        '        Return _earningsByName
-        '    End Get
-        '    Set
-        '        _earningsByName = Value
-        '    End Set
-        'End Property
-
-        'Public Property DeductionsByName As List(Of Lookup.LookupData)
-        '    Get
-        '        CreateLookupData("PayElement",
-        '                      "DeductionsByName",
-        '                      "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-        '        Return _deductionsByName
-        '    End Get
-        '    Set
-        '        _countryTelCodes = Value
-        '    End Set
-        'End Property
-
-        'Public Property PhoneTypes As List(Of Lookup.LookupData)
-        '    Get
-        '        CreateLookupData("PhoneType", "PhoneTypes")
-        '        Return _phoneTypes
-        '    End Get
-        '    Set
-        '        _phoneTypes = Value
-        '    End Set
-        'End Property
-
         Public Property CountryTelCodes As List(Of Lookup.LookupData)
             Get
                 MyBase.CreateLookupData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
@@ -631,13 +599,6 @@ Namespace PresentationLayer.Views.Forms
                 dgvLeaveIdNo.ValueMember = "IdNo"
                 dgvLeaveIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
             End With
-            If GlobalVariables.RightToLeftLayout Then
-                dgvFullPhone.Visible = False
-                dgvFullPhoneAra.Visible = True
-            Else
-                dgvFullPhoneAra.Visible = False
-                dgvFullPhone.Visible = True
-            End If
         End Sub
 
         Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
@@ -695,8 +656,8 @@ Namespace PresentationLayer.Views.Forms
             ProcessCellEndEdit(DataGridViewDeductions, bsDeductions)
         End Sub
 
-        Private Sub dtpBirthDate_Load(sender As Object, e As EventArgs) Handles dtpBirthDate.Load
-
+        Private Sub DgvLeaveCredits_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewLeaveCredits.CellEndEdit
+            ProcessCellEndEdit(DataGridViewLeaveCredits, bsLeaveCredits)
         End Sub
 
     End Class
