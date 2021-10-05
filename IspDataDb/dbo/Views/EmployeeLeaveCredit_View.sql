@@ -3,7 +3,7 @@ AS
 SELECT        dbo.EmployeeLeaveCredit.LeaveIdNo, dbo.EmployeeLeaveCredit.IdNo, dbo.EmployeeLeaveCredit.EmployeeIdNo, dbo.EmployeeLeaveCredit.LeaveAllowed, dbo.EmployeeLeaveCredit.PaidPercent, 
                          dbo.EmployeeLeaveCredit.MaxCarryOver, dbo.EmployeeLeaveCredit.Cumulative, dbo.EmployeeLeaveCredit.MaxLimit, dbo.EmployeeLeaveCredit.AccumulatedLeave, dbo.Leave.LeaveCode, dbo.Leave.LeaveNameAra, 
                          dbo.Leave.LeaveName, dbo.Leave.LeaveAllowed AS DefaultLeaveAllowed, dbo.Leave.PaidPercent AS DefaultPaidPercent, dbo.Leave.MaxCarryOver AS DefaultMaxCarryOver, dbo.Leave.Cumulative AS DefaultCumulative, 
-                         dbo.Leave.MaxLimit AS DefaultMaxLimit
+                         dbo.Leave.MaxLimit AS DefaultMaxLimit, dbo.EmployeeLeaveCredit.Sequence
 FROM            dbo.EmployeeLeaveCredit INNER JOIN
                          dbo.Leave ON dbo.EmployeeLeaveCredit.LeaveIdNo = dbo.Leave.IdNo
 GO
@@ -16,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[41] 4[36] 2[5] 3) )"
+         Configuration = "(H (1[74] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -82,22 +82,22 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "EmployeeLeaveCredit"
-            Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 335
-               Right = 228
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "Leave"
             Begin Extent = 
                Top = 6
                Left = 266
                Bottom = 314
                Right = 439
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "EmployeeLeaveCredit"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 335
+               Right = 228
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -129,4 +129,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveCredit_View';
+
+
 

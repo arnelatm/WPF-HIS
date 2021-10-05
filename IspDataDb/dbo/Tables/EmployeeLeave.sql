@@ -7,10 +7,13 @@
     [FullDay]       BIT            NULL,
     [LeaveStatus]   CHAR (1)       NULL,
     [LeaveReason]   NVARCHAR (200) NULL,
+    [Sequence]      INT            NULL,
     [DateCreated]   DATETIME       CONSTRAINT [DF_EmployeeLeave_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp] ROWVERSION     NULL,
     CONSTRAINT [PK_EmployeeLeave] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
