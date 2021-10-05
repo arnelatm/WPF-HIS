@@ -8,10 +8,13 @@
     [Cumulative]       BIT            NULL,
     [MaxLimit]         DECIMAL (7, 2) NULL,
     [AccumulatedLeave] DECIMAL (7, 2) NULL,
+    [Sequence]         SMALLINT       NULL,
     [DateCreated]      DATETIME       CONSTRAINT [DF_EmployeeLeaveCredit_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]    ROWVERSION     NULL,
     CONSTRAINT [PK_EmployeeLeaveCreditIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
