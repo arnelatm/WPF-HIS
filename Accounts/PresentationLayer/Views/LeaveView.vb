@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Views
 
@@ -45,9 +46,9 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
-        Public Property LeaveAllowed As Int16 Implements ILeaveView.LeaveAllowed
+        Public Property LeaveAllowed As Decimal Implements ILeaveView.LeaveAllowed
             Get
-                Return txtLeaveAllowed.Text
+                Return txtLeaveAllowed.GetDecimalValue()
             End Get
             Set
                 txtLeaveAllowed.Text = Value
@@ -56,11 +57,7 @@ Namespace PresentationLayer.Views
 
         Public Property PaidPercent As Decimal Implements ILeaveView.PaidPercent
             Get
-                If txtPaidPercent.Text <> "" Then
-                    Return Convert.ToDecimal(txtPaidPercent.Text)
-                Else
-                    Return 0D
-                End If
+                Return txtPaidPercent.GetDecimalValue()
             End Get
             Set
                 txtPaidPercent.Text = Value
@@ -76,18 +73,18 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
-        Public Property MaxCarryOver As Short Implements ILeaveView.MaxCarryOver
+        Public Property MaxCarryOver As Decimal Implements ILeaveView.MaxCarryOver
             Get
-                Return txtMaxCarryOver.Text
+                Return txtMaxCarryOver.GetDecimalValue()
             End Get
             Set
                 txtMaxCarryOver.Text = Value
             End Set
         End Property
 
-        Public Property MaxLimit As Short Implements ILeaveView.MaxLimit
+        Public Property MaxLimit As Decimal Implements ILeaveView.MaxLimit
             Get
-                Return txtMaxLimit.Text
+                Return txtMaxLimit.GetDecimalValue()
             End Get
             Set
                 txtMaxLimit.Text = Value

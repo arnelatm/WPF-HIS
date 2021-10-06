@@ -13,10 +13,22 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
+        Private Const FieldList = 
+                    "Cumulative," &
+                    "IdNo," &
+                    "LeaveAllowed," &
+                    "LeaveCode," &
+                    "LeaveName," &
+                    "LeaveNameAra," &
+                    "MaxCarryOver," &
+                    "MaxLimit," &
+                    "Notes," &
+                    "PaidPercent" 
+
         Public Function GetRecordByIdNo(idNo) As Leave Implements IDaoAll(Of Leave).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, LeaveCode, LeaveName, LeaveNameAra, LeaveAllowed, PaidPercent, Cumulative, MaxCarryOver, MaxLimit, NoMaxLimit, Notes " &
-                    "   FROM [Leave]" &
+                    " SELECT " & FieldList & 
+                    " FROM [Leave]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
@@ -27,25 +39,22 @@ Namespace DataLayer.AdoNet
             If sortExpression = Nothing Then
                 sortExpression = "LeaveName ASC"
             End If
-            Dim sql As String =
-                    " SELECT IdNo, LeaveCode, LeaveName, LeaveNameAra" &
-                    "   FROM [Leave] " & "order by " & sortExpression
+            Dim sql As String = "Select " & FieldList & " FROM [Leave] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
         Public Function UpdateRecord(ByRef Leave As Leave) As Integer Implements IDaoAll(Of Leave).UpdateRecord
             Dim sql As String =
-                    " UPDATE [Leave]" &
-                    " SET LeaveCode = @LeaveCode," &
+                    " UPDATE [Leave] SET " &
+                    " Cumulative = @Cumulative," &
+                    " LeaveAllowed = @LeaveAllowed," &
+                    " LeaveCode = @LeaveCode," &
                     " LeaveName = @LeaveName," &
                     " LeaveNameAra = @LeaveNameAra," &
-                    " LeaveAllowed = @LeaveAllowed," &
-                    " PaidPercent = @PaidPercent," &
-                    " Cumulative = @Cumulative," &
                     " MaxCarryOver = @MaxCarryOver," &
                     " MaxLimit = @MaxLimit," &
-                    " NoMaxLimit = @NoMaxLimit," &
-                    " Notes = @Notes" &
+                    " Notes = @Notes," &
+                    " PaidPercent = @PaidPercent" &
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(Leave))
         End Function
@@ -53,40 +62,37 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Leave As Leave) As Integer Implements IDaoAll(Of Leave).AddRecord
             Dim sql As String =
                     " INSERT INTO [Leave] " &
-                    " (LeaveCode,LeaveName,LeaveNameAra,LeaveAllowed,PaidPercent,Cumulative,MaxCarryOver,MaxLimit,NoMaxLimit,Notes) " &
-                    " VALUES (@LeaveCode,@LeaveName,@LeaveNameAra,@LeaveAllowed,@PaidPercent,@Cumulative,@MaxCarryOver,@MaxLimit,@NoMaxLimit,@Notes) "
+                    " (Cumulative,LeaveAllowed,LeaveCode,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,Notes,PaidPercent)" &
+                    " VALUES (@Cumulative,@LeaveAllowed,@LeaveCode,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@Notes,@PaidPercent)"
             Return Db.Insert(sql, Take(Leave))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Leave) =
                                     Function(reader) _
             New Leave() With {
+            .Cumulative = Extensions.AsBool(reader("Cumulative")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .LeaveAllowed = Extensions.AsDecimal(reader("LeaveAllowed")),
             .LeaveCode = Extensions.AsString(reader("LeaveCode")),
             .LeaveName = Extensions.AsString(reader("LeaveName")),
             .LeaveNameAra = Extensions.AsString(reader("LeaveNameAra")),
-            .LeaveAllowed = Extensions.AsString(reader("LeaveAllowed")),
-            .PaidPercent = Extensions.AsDecimal(reader("PaidPercent")),
-            .Cumulative = Extensions.AsBool(reader("Cumulative")),
-            .MaxCarryOver = Extensions.AsInt(Of Int16)(reader("MaxCarryOver")),
-            .MaxLimit = Extensions.AsInt(Of Int16)(reader("MaxLimit")),
-            .NoMaxLimit = Extensions.AsBool(reader("NoMaxLimit")),
-            .Notes = Extensions.AsString(reader("Notes"))
+            .MaxCarryOver = Extensions.AsDecimal(reader("MaxCarryOver")),
+            .Notes = Extensions.AsString(reader("Notes")),
+            .PaidPercent = Extensions.AsDecimal(reader("PaidPercent"))
             }
 
         Private Function Take(Leave As Leave) As Object()
             Return New Object() {
+                                    "@Cumulative", Leave.Cumulative,
                                     "@IdNo", Leave.IdNo,
+                                    "@LeaveAllowed", Leave.LeaveAllowed,
                                     "@LeaveCode", Leave.LeaveCode,
                                     "@LeaveName", Leave.LeaveName,
                                     "@LeaveNameAra", Leave.LeaveNameAra,
-                                    "@LeaveAllowed", Leave.LeaveAllowed,
-                                    "@PaidPercent", Leave.PaidPercent,
-                                    "@Cumulative", Leave.Cumulative,
                                     "@MaxCarryOver", Leave.MaxCarryOver,
                                     "@MaxLimit", Leave.MaxLimit,
-                                    "@NoMaxLimit", Leave.NoMaxLimit,
-                                    "@Notes", Leave.Notes
+                                    "@Notes", Leave.Notes,
+                                    "@PaidPercent", Leave.PaidPercent
                                 }
         End Function
 

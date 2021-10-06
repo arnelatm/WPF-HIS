@@ -542,4 +542,12 @@ Public Class CTextBox
         Return True
     End Function
 
+    Public Function GetDecimalValue As Decimal
+        If Text <> "" Then
+            Return Convert.ToDecimal(Text)
+        Else
+            Return 0D
+        End If
+    End Function
+
 End Class
