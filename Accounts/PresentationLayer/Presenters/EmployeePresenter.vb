@@ -186,7 +186,7 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 Then
                 retVal = UpdateChildData(_employeePhoneService, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
                 If retVal >= 0 Then
-                    retVal = UpdateChildData(_employeePhoneService, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
+                    retVal = UpdateChildData(_employeeLeaveCreditService, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditInsertTable, passedValue, "EmployeeIdNo")
                 End If
             End If
         End Sub

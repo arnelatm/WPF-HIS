@@ -582,17 +582,17 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BindEmployeeLeaveCredits()
-            bsPhones.DataSource = Nothing
-            DataGridViewPhones.Refresh()
-            bsPhones.DataSource = EmployeePhones
-            bsPhones.AllowNew = True
-            With DataGridViewPhones
+            bsLeaveCredits.DataSource = Nothing
+            DataGridViewLeaveCredits.Refresh()
+            bsLeaveCredits.DataSource = EmployeeLeaveCredits
+            bsLeaveCredits.AllowNew = True
+            With DataGridViewLeaveCredits
                 .Refresh()
                 .AutoGenerateColumns = False
-                .DataSource = bsPhones
+                .DataSource = bsLeaveCredits
                 .Refresh()
             End With
-            With DataGridViewPhones.Columns
+            With DataGridViewLeaveCredits.Columns
                 dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvLeaveIdNo.DataSource = _leaves
                 dgvLeaveIdNo.DisplayMember = "Name"
