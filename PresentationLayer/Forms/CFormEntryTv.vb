@@ -1,4 +1,6 @@
-﻿Public Class CFormEntryTv
+﻿Imports AATM.Libraries.CBaseControlsLibrary
+
+Public Class CFormEntryTv
 
     Public Sub New()
 

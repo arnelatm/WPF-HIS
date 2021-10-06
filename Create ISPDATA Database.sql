@@ -6513,11 +6513,10 @@ CREATE TABLE [dbo].[Leave](
 	[LeaveName] [varchar](100) NOT NULL,
 	[LeaveNameAra] [nvarchar](100) NOT NULL,
 	[NumberOfDays] [smallint] NULL,
-	[PaidPercent] [decimal](5, 2) NULL,
+	[PaidPercent] [decimal](6, 2) NULL,
 	[MaxCarryOver] [smallint] NULL,
 	[Cumulative] [bit] NULL,
-	[MaxLimit] [smallint] NULL,
-	[NoMaxLimit] [bit] NULL,
+	[MaxLimit] [decimal](7, 2) NULL,
 	[Notes] [nvarchar](200) NULL,
 	[DateTimeStamp] [timestamp] NULL,
  CONSTRAINT [PK_AbsenceLeave] PRIMARY KEY CLUSTERED 

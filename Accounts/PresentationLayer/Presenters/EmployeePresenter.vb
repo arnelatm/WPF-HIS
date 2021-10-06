@@ -53,15 +53,17 @@ Namespace PresentationLayer.Presenters
                                              {"PhoneTypeIdNo", GetType(Int16)},
                                              {"Sequence", GetType(Int16)}})
 
-            CreateDataTable(DtEmpLeaveCreditInsertTable, {{"AccumulatedLeave", GetType(String)},
+            CreateDataTable(DtEmpLeaveCreditInsertTable, {
+                                            {"AccumulatedLeave", GetType(Decimal)},
+                                            {"Cumulative", GetType(Boolean)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"LeaveAllowed", GetType(Decimal)},
                                             {"LeaveIdNo", GetType(Int16)},
                                             {"MaxCarryOver", GetType(Decimal)},
                                             {"MaxLimit", GetType(Decimal)},
                                             {"PaidPercent", GetType(Decimal)},
-                                            {"Sequence", GetType(Int16)},
-                                            {"Unit", GetType(String)}})
+                                            {"Sequence", GetType(Int16)}
+                                                         })
 
             CreateDataTable(DtEmpPayElementUpdateTable, {{"Amount", GetType(Decimal)},
                                             {"EmployeeIdNo", GetType(Int32)},
@@ -80,7 +82,9 @@ Namespace PresentationLayer.Presenters
                                              {"Sequence", GetType(Int16)}
                                             })
 
-            CreateDataTable(DtEmpLeaveCreditUpdateTable, {{"AccumulatedLeave", GetType(String)},
+            CreateDataTable(DtEmpLeaveCreditUpdateTable, {
+                                            {"AccumulatedLeave", GetType(Decimal)},
+                                            {"Cumulative", GetType(Boolean)},
                                             {"EmployeeIdNo", GetType(Int32)},
                                             {"IdNo", GetType(Int32)},
                                             {"LeaveAllowed", GetType(Decimal)},
@@ -88,8 +92,7 @@ Namespace PresentationLayer.Presenters
                                             {"MaxCarryOver", GetType(Decimal)},
                                             {"MaxLimit", GetType(Decimal)},
                                             {"PaidPercent", GetType(Decimal)},
-                                            {"Sequence", GetType(Int16)},
-                                            {"Unit", GetType(String)}})
+                                            {"Sequence", GetType(Int16)}})
 
         End Sub
 
@@ -124,7 +127,7 @@ Namespace PresentationLayer.Presenters
                 employeePayElements.AddRange(View.RegularEmployeeDeductions)
                 ViewToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
                 ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
-                ViewToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
+                ViewToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditInsertTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
                 If IsEmpty(View.HiredDate) Then
                     View.HiredDate = Today()
                 End If
@@ -149,9 +152,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub EmpLeaveCreditFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
-            workRow("AccmulatedLeave") = itemDataView.AccumulatedLeave
+            workRow("AccumulatedLeave") = itemDataView.AccumulatedLeave
             workRow("Cumulative") = itemDataView.Cumulative
             workRow("EmployeeIdNo") = View.IdNo
+            workRow("LeaveAllowed") = itemDataView.LeaveAllowed
             workRow("LeaveIdNo") = itemDataView.LeaveIdNo
             workRow("MaxCarryOver") = itemDataView.MaxCarryOver
             workRow("MaxLimit") = itemDataView.MaxLimit

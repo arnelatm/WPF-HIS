@@ -23,9 +23,8 @@ Namespace BusinessLayer
         Public Property LeaveAllowed As Int16
         Public Property PaidPercent As Decimal
         Public Property Cumulative As Boolean
-        Public Property MaxCarryOver As Int16
-        Public Property MaxLimit As Int16
-        Public Property NoMaxLimit As Boolean
+        Public Property MaxCarryOver As Decimal
+        Public Property MaxLimit As Decimal
         Public Property Notes As String
     End Class
 

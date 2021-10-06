@@ -3,7 +3,7 @@
     [EmployeeIdNo]     INT            NULL,
     [LeaveIdNo]        SMALLINT       NOT NULL,
     [LeaveAllowed]     DECIMAL (6, 2) NULL,
-    [PaidPercent]      DECIMAL (5, 2) NULL,
+    [PaidPercent]      DECIMAL (6, 2) NULL,
     [MaxCarryOver]     DECIMAL (6, 2) NULL,
     [Cumulative]       BIT            NULL,
     [MaxLimit]         DECIMAL (7, 2) NULL,

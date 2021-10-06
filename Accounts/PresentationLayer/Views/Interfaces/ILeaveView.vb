@@ -8,11 +8,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveCode As String
         Property LeaveName As String
         Property LeaveNameAra As String
-        Property LeaveAllowed As Int16
+        Property LeaveAllowed As Decimal
         Property PaidPercent As Decimal
         Property Cumulative As Boolean
-        Property MaxCarryOver As Int16
-        Property MaxLimit As Int16
+        Property MaxCarryOver As Decimal
+        Property MaxLimit As Decimal
         Property Notes As String
     End Interface
 

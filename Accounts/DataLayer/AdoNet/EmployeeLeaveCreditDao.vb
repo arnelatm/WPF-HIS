@@ -64,8 +64,9 @@ Namespace DataLayer.AdoNet
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveAllowed = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("LeaveAllowed")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
-            .MaxCarryOver = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("MaxCarryOver ")),
+            .MaxCarryOver = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("MaxCarryOver")),
             .MaxLimit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("MaxLimit")),
+            .PaidPercent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("PaidPercent")),
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence"))
            }
 
