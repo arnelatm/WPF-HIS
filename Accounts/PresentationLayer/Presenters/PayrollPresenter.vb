@@ -229,7 +229,9 @@ Namespace PresentationLayer.Presenters
             Dim empId As Int32
             Dim empName As String
             Dim empFound As Boolean = False
-            seq = View.PayrollAttendance.Count() + 1
+            Dim absenceService As New AccountsService("EmployeeAbsence")
+            Dim absences As List(Of EmployeeAbsenceModel) = absenceService.GetRecordsWithGroupIdNo(Of EmployeeAbsenceModel)(View.IdNo, "EmployeeAbsence")
+            seq = View.PayrollAttendance.Count() + absences.Count() + 1
             daysInPeriod = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
             daysOffInPeriod = FridaysInPeriod(View.StartDate, View.EndDate)
             If View.PayrollAttendance.Any() Then
@@ -249,7 +251,6 @@ Namespace PresentationLayer.Presenters
                 'If empId = 498 Then
                 '    Debugger.Break()
                 'End If
-
                 If _reinitialize Then
                     Dim empAttendance As AttendanceItemView
                     empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empId)
@@ -284,6 +285,16 @@ Namespace PresentationLayer.Presenters
                     i = i + 1
                 Next
             End If
+            For Each absence In absences
+                Dim empIdNo = absence.EmployeeIdNo
+                Dim empAttendance As AttendanceItemView
+                empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empId)
+                If empAttendance Is Nothing Then
+                    empAttendance.DaysAbsentWithoutPay = empAttendance.DaysAbsentWithoutPay + absence.EquivalentHours/8
+                End If
+                counter = counter + 1
+                progressDisplayForm.UpdateProgressBar(counter)
+            Next
             progressDisplayForm.UpdateProgressBar(counter)
             progressDisplayForm.Close()
             Messaging.Show(True, "MsgAttendanceInitializationCompleted")
@@ -377,7 +388,6 @@ Namespace PresentationLayer.Presenters
             ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
             empAttendance.DaysTotal = daysTotal
             empAttendance.DaysOff = daysOff
-
         End Sub
 
         Private Sub ComputeTotalDaysNOff(ByRef daysTotal As Int16, ByRef daysOff As Int16, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)

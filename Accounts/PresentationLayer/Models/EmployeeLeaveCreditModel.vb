@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class EmployeeLeaveCreditModel
 
-        Public Property AccumulatedLeaves As Decimal
+        Public Property AccumulatedLeave As Decimal
         Public Property Cumulative As Boolean
         Public Property EmployeeIdNo As Int32
         Public Property Errors As List(Of String)
