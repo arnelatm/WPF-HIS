@@ -465,6 +465,10 @@
     <Build Include="dbo\Views\EmployeeAbsence_View.sql" />
     <Build Include="dbo\Tables\EmployeeLeaveCredit.sql" />
     <Build Include="dbo\Views\EmployeeLeaveCredit_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateEmployeeLeaveCreditTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertEmployeeLeaveCreditTVP.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeLeaveCreditUpdate.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeLeaveCreditInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

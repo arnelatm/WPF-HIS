@@ -9,7 +9,7 @@
         Public Property Cumulative As Boolean
         Public Property Errors As List(Of String)
         Public Property IdNo As Int16
-        Public Property LeaveAllowed As Int16
+        Public Property LeaveAllowed As Decimal
         Public Property LeaveCode As String
         Public Property LeaveName As String
         Public Property LeaveNameAra As String

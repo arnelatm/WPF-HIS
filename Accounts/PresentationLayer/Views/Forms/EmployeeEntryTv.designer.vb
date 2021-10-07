@@ -192,8 +192,8 @@
         Me.dgvCumulative = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgvMaxCarryOver = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-        Me.dgvAccumulatedLeaves = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-        Me.dgvEmployeeIdNoLeaveCredts = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvAccumulatedLeave = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+        Me.dgvEmployeeIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
@@ -2945,7 +2945,7 @@
         Me.DataGridViewLeaveCredits.AutoGenerateColumns = false
         Me.DataGridViewLeaveCredits.BegFindValue = Nothing
         Me.DataGridViewLeaveCredits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewLeaveCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceLeaveCredits, Me.dgvLeaveIdNo, Me.dgvLeaveAllowed, Me.dgvPaidPercent, Me.dgvCumulative, Me.dgvMaxCarryOver, Me.dgvMaxLimit, Me.dgvAccumulatedLeaves, Me.dgvEmployeeIdNoLeaveCredts, Me.dgvIdNoLeaveCredits})
+        Me.DataGridViewLeaveCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceLeaveCredits, Me.dgvLeaveIdNo, Me.dgvLeaveAllowed, Me.dgvPaidPercent, Me.dgvCumulative, Me.dgvMaxCarryOver, Me.dgvMaxLimit, Me.dgvAccumulatedLeave, Me.dgvEmployeeIdNoLeaveCredits, Me.dgvIdNoLeaveCredits})
         Me.DataGridViewLeaveCredits.DataSource = Me.bsLeaveCredits
         DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle34.BackColor = System.Drawing.Color.White
@@ -3086,30 +3086,30 @@
         Me.dgvMaxLimit.Translatable = false
         Me.dgvMaxLimit.Width = 50
         '
-        'dgvAccumulatedLeaves
+        'dgvAccumulatedLeave
         '
-        Me.dgvAccumulatedLeaves.DataPropertyName = "AccumulatedLeaves"
+        Me.dgvAccumulatedLeave.DataPropertyName = "AccumulatedLeave"
         DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle33.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle33.ForeColor = System.Drawing.Color.Black
-        Me.dgvAccumulatedLeaves.DefaultCellStyle = DataGridViewCellStyle33
-        Me.dgvAccumulatedLeaves.EditingMode = false
-        Me.dgvAccumulatedLeaves.HeaderText = "Accum. Leaves"
-        Me.dgvAccumulatedLeaves.MinimumWidth = 50
-        Me.dgvAccumulatedLeaves.Name = "dgvAccumulatedLeaves"
-        Me.dgvAccumulatedLeaves.ReadOnly = true
-        Me.dgvAccumulatedLeaves.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvAccumulatedLeaves.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvAccumulatedLeaves.Translatable = false
-        Me.dgvAccumulatedLeaves.Width = 50
+        Me.dgvAccumulatedLeave.DefaultCellStyle = DataGridViewCellStyle33
+        Me.dgvAccumulatedLeave.EditingMode = false
+        Me.dgvAccumulatedLeave.HeaderText = "Accum. Leaves"
+        Me.dgvAccumulatedLeave.MinimumWidth = 50
+        Me.dgvAccumulatedLeave.Name = "dgvAccumulatedLeave"
+        Me.dgvAccumulatedLeave.ReadOnly = true
+        Me.dgvAccumulatedLeave.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvAccumulatedLeave.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvAccumulatedLeave.Translatable = false
+        Me.dgvAccumulatedLeave.Width = 50
         '
-        'dgvEmployeeIdNoLeaveCredts
+        'dgvEmployeeIdNoLeaveCredits
         '
-        Me.dgvEmployeeIdNoLeaveCredts.DataPropertyName = "EmployeeIdNo"
-        Me.dgvEmployeeIdNoLeaveCredts.HeaderText = "EmployeeIdNo"
-        Me.dgvEmployeeIdNoLeaveCredts.Name = "dgvEmployeeIdNoLeaveCredts"
-        Me.dgvEmployeeIdNoLeaveCredts.ReadOnly = true
-        Me.dgvEmployeeIdNoLeaveCredts.Visible = false
+        Me.dgvEmployeeIdNoLeaveCredits.DataPropertyName = "EmployeeIdNo"
+        Me.dgvEmployeeIdNoLeaveCredits.HeaderText = "EmployeeIdNo"
+        Me.dgvEmployeeIdNoLeaveCredits.Name = "dgvEmployeeIdNoLeaveCredits"
+        Me.dgvEmployeeIdNoLeaveCredits.ReadOnly = true
+        Me.dgvEmployeeIdNoLeaveCredits.Visible = false
         '
         'dgvIdNoLeaveCredits
         '
@@ -3299,8 +3299,8 @@ End Sub
         Friend WithEvents dgvCumulative As DataGridViewCheckBoxColumn
         Friend WithEvents dgvMaxCarryOver As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvMaxLimit As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvAccumulatedLeaves As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvEmployeeIdNoLeaveCredts As DataGridViewTextBoxColumn
+        Friend WithEvents dgvAccumulatedLeave As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
+        Friend WithEvents dgvEmployeeIdNoLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNoLeaveCredits As DataGridViewTextBoxColumn
     End Class
 End NameSpace

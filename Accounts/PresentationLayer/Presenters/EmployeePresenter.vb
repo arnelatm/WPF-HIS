@@ -321,6 +321,12 @@ Namespace PresentationLayer.Presenters
                             Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
                             amount = ComputePayAmount(View.PayFrequency, employeePayElement.Rate, eventType.EnteredValue)
                             employeePayElement.Amount = amount
+                        Case $"Cumulative"
+                            Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
+                            If Not empLeaveCredit.Cumulative Then
+                                empLeaveCredit.MaxCarryOver = 0
+                                empLeaveCredit.MaxLimit = 0
+                            End If                            
                     End Select
                 End If
             End With
