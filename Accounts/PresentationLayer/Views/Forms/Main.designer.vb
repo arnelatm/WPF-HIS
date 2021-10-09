@@ -178,6 +178,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HolidayEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -586,7 +587,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemPayrollMenu
         '
-        Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.ToolStripMenuItemRecurringPayrollEntry, Me.ToolStripMenuItemEmployeeLeave, Me.ToolStripMenuItemEmployeeAbsencesLate})
+        Me.ToolStripMenuItemPayrollMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPayrollAttendance, Me.ToolStripMenuItemGeneratePayroll, Me.ToolStripMenuItemPayrollEntry, Me.ToolStripMenuItemRecurringPayrollEntry, Me.ToolStripMenuItemEmployeeLeave, Me.ToolStripMenuItemEmployeeAbsencesLate, Me.HolidayEntryToolStripMenuItem})
         Me.ToolStripMenuItemPayrollMenu.Name = "ToolStripMenuItemPayrollMenu"
         resources.ApplyResources(Me.ToolStripMenuItemPayrollMenu, "ToolStripMenuItemPayrollMenu")
         '
@@ -975,6 +976,11 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
+        'HolidayEntryToolStripMenuItem
+        '
+        Me.HolidayEntryToolStripMenuItem.Name = "HolidayEntryToolStripMenuItem"
+        resources.ApplyResources(Me.HolidayEntryToolStripMenuItem, "HolidayEntryToolStripMenuItem")
+        '
         'Main
         '
         Me.AllowDrop = true
@@ -1149,5 +1155,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemBankTransferReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeLeave As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeAbsencesLate As ToolStripMenuItem
+        Friend WithEvents HolidayEntryToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

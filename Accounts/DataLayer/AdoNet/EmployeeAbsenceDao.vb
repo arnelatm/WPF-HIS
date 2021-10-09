@@ -9,9 +9,10 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeAbsenceDao
         Inherits CommonDao
-        Implements IDaoAll(Of EmployeeAbsence)
+        Implements IDaoAll(Of EmployeeAbsence), IDaoChild(Of EmployeeAbsence)
 
         Private ReadOnly Db As New Db()
+
         Private FieldList As String = "AbsenceReason," &
                                       "AbsenceType," &
                                       "AddedByUser," &
@@ -40,6 +41,7 @@ Namespace DataLayer.AdoNet
                 " FROM [EmployeeAbsence] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
+
         Public Function UpdateRecord(ByRef EmployeeAbsence As EmployeeAbsence) As Integer Implements IDaoAll(Of EmployeeAbsence).UpdateRecord
             Dim sql As String =
                     " UPDATE [EmployeeAbsence] SET " &
@@ -52,6 +54,7 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(EmployeeAbsence))
         End Function
+
         Public Function AddRecord(ByRef EmployeeAbsence As EmployeeAbsence) As Integer Implements IDaoAll(Of EmployeeAbsence).AddRecord
             Dim sql As String = " INSERT INTO [EmployeeAbsence] " &
                     " (AbsenceReason,AbsenceType,AddedByUser,EmployeeIdNo,EquivalentHours,PayrollIdNo)" &
@@ -86,6 +89,27 @@ Namespace DataLayer.AdoNet
                             "PayrollIdNo", EmployeeAbsence.PayrollIdNo,
                             "UserName", EmployeeAbsence.UserName
                             }
+        End Function
+
+        Public Function GetRecordsWithGroupIdNo(payrollIdNo, Optional sortExpression = Nothing) As List(Of EmployeeAbsence) Implements IDaoChild(Of EmployeeAbsence).GetRecordsWithGroupIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "Sequence"
+            End If
+            Dim sql As String =
+                    "SELECT " & FieldList &
+                    " FROM EmployeeAbsence_View" &
+                    " WHERE PayrollIdNo = @PayrollIdNo" &
+                    " ORDER BY " & sortExpression.ToString()
+            Dim params() As Object = {"@PayrollIdNo", payrollIdNo}
+            Return Db.Read(sql, Make, params).ToList()
+        End Function
+
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of EmployeeAbsence).DelUpdateTvp
+            Throw New NotImplementedException()
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of EmployeeAbsence).InsertTvp
+            Throw New NotImplementedException()
         End Function
 
     End Class

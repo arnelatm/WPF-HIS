@@ -16,6 +16,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayrollIdNo As Int16
         Property PayrollCode As String
         Property PayrollName As String
+        Property PayrollEndDate As Date
+        Property PayrollStartDate As Date
         Property StartDate As Date
         Property UserName As String
 

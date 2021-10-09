@@ -368,6 +368,4 @@ Public Enum AbsenceTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("1")> Absent
     <EnumCode("2")> Late
-    <EnumCode("3")> Penalty
-    <EnumCode("4")> Others
 End Enum

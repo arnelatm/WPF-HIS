@@ -1014,6 +1014,10 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
+        Private Sub HolidayEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HolidayEntryToolStripMenuItem.Click
+            RunForm(Of HolidayEntry, HolidayPresenter(Of HolidayModel))()
+        End Sub
+
     End Class
 
 End Namespace

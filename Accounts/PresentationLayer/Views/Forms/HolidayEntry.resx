@@ -195,41 +195,41 @@
   <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblEmployeeIdNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblLeaveIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblEmployeeIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblLeaveIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblEmployeeIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 86</value>
+  <data name="lblLeaveIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 136</value>
   </data>
-  <data name="lblEmployeeIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblLeaveIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblEmployeeIdNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblLeaveIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
   </data>
-  <data name="lblEmployeeIdNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblLeaveIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>280</value>
   </data>
-  <data name="lblEmployeeIdNo.Text" xml:space="preserve">
-    <value>Employee Name</value>
+  <data name="lblLeaveIdNo.Text" xml:space="preserve">
+    <value>Leave Name</value>
   </data>
-  <data name="lblEmployeeIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblLeaveIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblEmployeeIdNo.Name" xml:space="preserve">
-    <value>lblEmployeeIdNo</value>
+  <data name="&gt;&gt;lblLeaveIdNo.Name" xml:space="preserve">
+    <value>lblLeaveIdNo</value>
   </data>
-  <data name="&gt;&gt;lblEmployeeIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblLeaveIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblEmployeeIdNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblLeaveIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;lblEmployeeIdNo.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="&gt;&gt;lblLeaveIdNo.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="lblPayrollIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -354,124 +354,124 @@
   <data name="&gt;&gt;txtPayrollCode.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="lblStartDate.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblPayrollStartDate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblStartDate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblPayrollStartDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 36</value>
   </data>
-  <data name="lblStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblPayrollStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblStartDate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblPayrollStartDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
   </data>
-  <data name="lblStartDate.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblPayrollStartDate.TabIndex" type="System.Int32, mscorlib">
     <value>307</value>
   </data>
-  <data name="lblStartDate.Text" xml:space="preserve">
+  <data name="lblPayrollStartDate.Text" xml:space="preserve">
     <value>Start Date</value>
   </data>
-  <data name="lblStartDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblPayrollStartDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblStartDate.Name" xml:space="preserve">
-    <value>lblStartDate</value>
+  <data name="&gt;&gt;lblPayrollStartDate.Name" xml:space="preserve">
+    <value>lblPayrollStartDate</value>
   </data>
-  <data name="&gt;&gt;lblStartDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblPayrollStartDate.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblStartDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblPayrollStartDate.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblPayrollStartDate.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="txtStartDate.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtPayrollStartDate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtStartDate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtPayrollStartDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>203, 36</value>
   </data>
-  <data name="txtStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtPayrollStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtStartDate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtPayrollStartDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
   </data>
-  <data name="txtStartDate.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtPayrollStartDate.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;txtStartDate.Name" xml:space="preserve">
-    <value>txtStartDate</value>
+  <data name="&gt;&gt;txtPayrollStartDate.Name" xml:space="preserve">
+    <value>txtPayrollStartDate</value>
   </data>
-  <data name="&gt;&gt;txtStartDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtPayrollStartDate.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtStartDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtPayrollStartDate.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;txtStartDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtPayrollStartDate.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="lblEndDate.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblPayrollEndDate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblEndDate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblPayrollEndDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 36</value>
   </data>
-  <data name="lblEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblPayrollEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblEndDate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblPayrollEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 23</value>
   </data>
-  <data name="lblEndDate.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblPayrollEndDate.TabIndex" type="System.Int32, mscorlib">
     <value>308</value>
   </data>
-  <data name="lblEndDate.Text" xml:space="preserve">
+  <data name="lblPayrollEndDate.Text" xml:space="preserve">
     <value>End Date</value>
   </data>
-  <data name="lblEndDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblPayrollEndDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;lblEndDate.Name" xml:space="preserve">
-    <value>lblEndDate</value>
+  <data name="&gt;&gt;lblPayrollEndDate.Name" xml:space="preserve">
+    <value>lblPayrollEndDate</value>
   </data>
-  <data name="&gt;&gt;lblEndDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblPayrollEndDate.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblEndDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblPayrollEndDate.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblPayrollEndDate.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="txtEndDate.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtPayrollEndDate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtEndDate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtPayrollEndDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>578, 36</value>
   </data>
-  <data name="txtEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtPayrollEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtEndDate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtPayrollEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
-  <data name="txtEndDate.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtPayrollEndDate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;txtEndDate.Name" xml:space="preserve">
-    <value>txtEndDate</value>
+  <data name="&gt;&gt;txtPayrollEndDate.Name" xml:space="preserve">
+    <value>txtPayrollEndDate</value>
   </data>
-  <data name="&gt;&gt;txtEndDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtPayrollEndDate.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtEndDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtPayrollEndDate.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;txtEndDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtPayrollEndDate.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="lblPayrollName.Font" type="System.Drawing.Font, System.Drawing">
@@ -534,266 +534,191 @@
   <data name="&gt;&gt;txtPayrollName.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="lblAbsenceType.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblNote.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblAbsenceType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblNote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblAbsenceType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 112</value>
+  <data name="lblNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 86</value>
   </data>
-  <data name="lblAbsenceType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblNote.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblAbsenceType.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
   </data>
-  <data name="lblAbsenceType.TabIndex" type="System.Int32, mscorlib">
-    <value>291</value>
-  </data>
-  <data name="lblAbsenceType.Text" xml:space="preserve">
-    <value>Employee Absence/Late Type</value>
-  </data>
-  <data name="lblAbsenceType.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblAbsenceType.Name" xml:space="preserve">
-    <value>lblAbsenceType</value>
-  </data>
-  <data name="&gt;&gt;lblAbsenceType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblAbsenceType.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;lblAbsenceType.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="cboAbsenceType.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="cboAbsenceType.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="cboAbsenceType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 112</value>
-  </data>
-  <data name="cboAbsenceType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="cboAbsenceType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 24</value>
-  </data>
-  <data name="cboAbsenceType.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cboAbsenceType.Name" xml:space="preserve">
-    <value>cboAbsenceType</value>
-  </data>
-  <data name="&gt;&gt;cboAbsenceType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cboAbsenceType.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;cboAbsenceType.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="lblEquivalentHours.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblEquivalentHours.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblEquivalentHours.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 138</value>
-  </data>
-  <data name="lblEquivalentHours.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblEquivalentHours.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 23</value>
-  </data>
-  <data name="lblEquivalentHours.TabIndex" type="System.Int32, mscorlib">
-    <value>288</value>
-  </data>
-  <data name="lblEquivalentHours.Text" xml:space="preserve">
-    <value>Equivalent Hours</value>
-  </data>
-  <data name="lblEquivalentHours.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblEquivalentHours.Name" xml:space="preserve">
-    <value>lblEquivalentHours</value>
-  </data>
-  <data name="&gt;&gt;lblEquivalentHours.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblEquivalentHours.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;lblEquivalentHours.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="txtEquivalentHours.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtEquivalentHours.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 138</value>
-  </data>
-  <data name="txtEquivalentHours.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtEquivalentHours.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
-  </data>
-  <data name="txtEquivalentHours.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="txtEquivalentHours.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;txtEquivalentHours.Name" xml:space="preserve">
-    <value>txtEquivalentHours</value>
-  </data>
-  <data name="&gt;&gt;txtEquivalentHours.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtEquivalentHours.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtEquivalentHours.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="lblAbsenceReason.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="lblAbsenceReason.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblAbsenceReason.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 163</value>
-  </data>
-  <data name="lblAbsenceReason.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="lblAbsenceReason.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 23</value>
-  </data>
-  <data name="lblAbsenceReason.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblNote.TabIndex" type="System.Int32, mscorlib">
     <value>299</value>
   </data>
-  <data name="lblAbsenceReason.Text" xml:space="preserve">
-    <value>Reason </value>
+  <data name="lblNote.Text" xml:space="preserve">
+    <value>Holiday Name/Description</value>
   </data>
-  <data name="lblAbsenceReason.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblNote.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblAbsenceReason.Name" xml:space="preserve">
-    <value>lblAbsenceReason</value>
+  <data name="&gt;&gt;lblNote.Name" xml:space="preserve">
+    <value>lblNote</value>
   </data>
-  <data name="&gt;&gt;lblAbsenceReason.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblNote.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblAbsenceReason.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblNote.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;lblAbsenceReason.ZOrder" xml:space="preserve">
-    <value>18</value>
+  <data name="&gt;&gt;lblNote.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
-  <data name="txtAbsenceReason.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtDescription.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtAbsenceReason.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 163</value>
+  <data name="txtDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 86</value>
   </data>
-  <data name="txtAbsenceReason.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtDescription.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtAbsenceReason.Multiline" type="System.Boolean, mscorlib">
+  <data name="txtDescription.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="txtAbsenceReason.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>475, 48</value>
   </data>
-  <data name="txtAbsenceReason.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtDescription.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;txtAbsenceReason.Name" xml:space="preserve">
-    <value>txtAbsenceReason</value>
+  <data name="&gt;&gt;txtDescription.Name" xml:space="preserve">
+    <value>txtDescription</value>
   </data>
-  <data name="&gt;&gt;txtAbsenceReason.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtDescription.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtAbsenceReason.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtDescription.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;txtAbsenceReason.ZOrder" xml:space="preserve">
-    <value>19</value>
+  <data name="&gt;&gt;txtDescription.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
-  <data name="lblAddedBy.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblStartDate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblAddedBy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblStartDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblAddedBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 213</value>
+  <data name="lblStartDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 162</value>
   </data>
-  <data name="lblAddedBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblAddedBy.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStartDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
   </data>
-  <data name="lblAddedBy.TabIndex" type="System.Int32, mscorlib">
-    <value>286</value>
+  <data name="lblStartDate.TabIndex" type="System.Int32, mscorlib">
+    <value>326</value>
   </data>
-  <data name="lblAddedBy.Text" xml:space="preserve">
-    <value>Added By User</value>
+  <data name="lblStartDate.Text" xml:space="preserve">
+    <value>Start Date</value>
   </data>
-  <data name="lblAddedBy.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblStartDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblAddedBy.Name" xml:space="preserve">
-    <value>lblAddedBy</value>
+  <data name="&gt;&gt;lblStartDate.Name" xml:space="preserve">
+    <value>lblStartDate</value>
   </data>
-  <data name="&gt;&gt;lblAddedBy.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStartDate.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblAddedBy.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStartDate.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;lblAddedBy.ZOrder" xml:space="preserve">
-    <value>20</value>
+  <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
+    <value>16</value>
   </data>
-  <data name="txtUserName.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
+  <data name="dtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 162</value>
   </data>
-  <data name="txtUserName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 213</value>
-  </data>
-  <data name="txtUserName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="dtpStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtUserName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 23</value>
+  <data name="dtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 25</value>
   </data>
-  <data name="txtUserName.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="dtpStartDate.TabIndex" type="System.Int32, mscorlib">
+    <value>324</value>
   </data>
-  <data name="&gt;&gt;txtUserName.Name" xml:space="preserve">
-    <value>txtUserName</value>
+  <data name="&gt;&gt;dtpStartDate.Name" xml:space="preserve">
+    <value>dtpStartDate</value>
   </data>
-  <data name="&gt;&gt;txtUserName.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;dtpStartDate.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtUserName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dtpStartDate.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;txtUserName.ZOrder" xml:space="preserve">
-    <value>21</value>
+  <data name="&gt;&gt;dtpStartDate.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="lblEndDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblEndDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblEndDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 189</value>
+  </data>
+  <data name="lblEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblEndDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
+  </data>
+  <data name="lblEndDate.TabIndex" type="System.Int32, mscorlib">
+    <value>327</value>
+  </data>
+  <data name="lblEndDate.Text" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="lblEndDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.Name" xml:space="preserve">
+    <value>lblEndDate</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="dtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 189</value>
+  </data>
+  <data name="dtpEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="dtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 25</value>
+  </data>
+  <data name="dtpEndDate.TabIndex" type="System.Int32, mscorlib">
+    <value>325</value>
+  </data>
+  <data name="&gt;&gt;dtpEndDate.Name" xml:space="preserve">
+    <value>dtpEndDate</value>
+  </data>
+  <data name="&gt;&gt;dtpEndDate.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dtpEndDate.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;dtpEndDate.ZOrder" xml:space="preserve">
+    <value>19</value>
   </data>
   <data name="lblDateCreated.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -802,7 +727,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 238</value>
+    <value>11, 216</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -829,13 +754,13 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>20</value>
   </data>
   <data name="txtDateCreated.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 238</value>
+    <value>203, 216</value>
   </data>
   <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -856,37 +781,7 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="txtAddedByUser.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="txtAddedByUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 263</value>
-  </data>
-  <data name="txtAddedByUser.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="txtAddedByUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 23</value>
-  </data>
-  <data name="txtAddedByUser.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="txtAddedByUser.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;txtAddedByUser.Name" xml:space="preserve">
-    <value>txtAddedByUser</value>
-  </data>
-  <data name="&gt;&gt;txtAddedByUser.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtAddedByUser.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;txtAddedByUser.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>21</value>
   </data>
   <data name="CFlowLayout2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -898,7 +793,7 @@
     <value>10, 10, 10, 10</value>
   </data>
   <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 275</value>
+    <value>697, 252</value>
   </data>
   <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
     <value>290</value>
@@ -915,35 +810,35 @@
   <data name="&gt;&gt;CFlowLayout2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cboEmployeeIdNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboLeaveIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboEmployeeIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cboLeaveIdNo.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cboEmployeeIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 86</value>
+  <data name="cboLeaveIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 136</value>
   </data>
-  <data name="cboEmployeeIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboLeaveIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboEmployeeIdNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboLeaveIdNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>475, 24</value>
   </data>
-  <data name="cboEmployeeIdNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboLeaveIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;cboEmployeeIdNo.Name" xml:space="preserve">
-    <value>cboEmployeeIdNo</value>
+  <data name="&gt;&gt;cboLeaveIdNo.Name" xml:space="preserve">
+    <value>cboLeaveIdNo</value>
   </data>
-  <data name="&gt;&gt;cboEmployeeIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboLeaveIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboEmployeeIdNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboLeaveIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;cboEmployeeIdNo.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;cboLeaveIdNo.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -955,7 +850,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>697, 328</value>
+    <value>697, 305</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>16, 268</value>
@@ -988,7 +883,7 @@
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>EmployeeAbsenceEntry</value>
+    <value>HolidayEntry</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>AATM.PresentationLayer.Forms.CFormEntry, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>

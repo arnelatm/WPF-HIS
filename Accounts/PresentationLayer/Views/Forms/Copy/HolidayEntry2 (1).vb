@@ -4,33 +4,60 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class EmployeeAbsenceEntry
-        Implements IEmployeeAbsenceView
+    Public Class HolidayEntry
+        Implements IHolidayView
 
         Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = cboEmployeeIdNo
+            FirstControl = cboHolidayIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             'FormTreeView.Visible = False
         End Sub
 
-        Public Event AddedByUserChanged() Implements IEmployeeAbsenceView.AddedByUserChanged
+        Public Event AddedByUserChanged() Implements IHolidayView.AddedByUserChanged
 
 #Region "Fields"
 
-        Public Property AbsenceReason As String Implements IEmployeeAbsenceView.AbsenceReason
+        Public Property HolidayCode As String Implements IHolidayView.HolidayCode
             Get
-                Return txtAbsenceReason.Text
+                Return txtHolidayCode.Text
             End Get
-            Set(value As String)
-                txtAbsenceReason.Text = value
+            Set
+                txtHolidayCode.Text = Value
             End Set
         End Property
 
-        Public Property AbsenceType As String Implements IEmployeeAbsenceView.AbsenceType
+        Public Property HolidayName As String Implements IHolidayView.HolidayName
+            Get
+                Return txtHolidayName.Text
+            End Get
+            Set
+                txtHolidayName.Text = Value
+            End Set
+        End Property
+
+        Public Property HolidayNameAra As String Implements IHolidayView.HolidayNameAra
+            Get
+                Return txtHolidayNameAra.Text
+            End Get
+            Set
+                txtHolidayNameAra.Text = Value
+            End Set
+        End Property
+
+        Public Property Note As String Implements IHolidayView.Note
+            Get
+                Return txtNote.Text
+            End Get
+            Set(value As String)
+                txtNote.Text = value
+            End Set
+        End Property
+
+        Public Property AbsenceType As String Implements IHolidayView.AbsenceType
             Get
                 Return cboAbsenceType.GetValue()
             End Get
@@ -39,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AddedByUser As Short Implements IEmployeeAbsenceView.AddedByUser
+        Public Property AddedByUser As Short Implements IHolidayView.AddedByUser
             Get
                 Return NumParser(Of Int16)(txtAddedByUser.Text)
             End Get
@@ -49,7 +76,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DateCreated As DateTime? Implements IEmployeeAbsenceView.DateCreated
+        Public Property DateCreated As DateTime? Implements IHolidayView.DateCreated
             Get
                 If String.IsNullOrEmpty(txtDateCreated.Text) Then
                     Return Now()
@@ -65,16 +92,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeIdNo As Integer Implements IEmployeeAbsenceView.EmployeeIdNo
+        Public Property HolidayIdNo As Integer Implements IHolidayView.HolidayIdNo
             Get
-                Return cboEmployeeIdNo.GetNullableValue(Of Int32)
+                Return cboHolidayIdNo.GetNullableValue(Of Int32)
             End Get
             Set
-                cboEmployeeIdNo.SetValue(Value)
+                cboHolidayIdNo.SetValue(Value)
             End Set
         End Property
 
-        Public Property EquivalentHours As Decimal Implements IEmployeeAbsenceView.EquivalentHours
+        Public Property EquivalentHours As Decimal Implements IHolidayView.EquivalentHours
             Get
                 Return NumParser(Of Decimal)(txtEquivalentHours.Text)
             End Get
@@ -83,7 +110,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Integer Implements IEmployeeAbsenceView.IdNo
+        Public Property IdNo As Integer Implements IHolidayView.IdNo
             Get
                 Return NumParser(Of Int16)(TxtIdNo.Text)
             End Get
@@ -92,7 +119,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayrollIdNo As Short Implements IEmployeeAbsenceView.PayrollIdNo
+        Public Property PayrollIdNo As Short Implements IHolidayView.PayrollIdNo
             Get
                 Return NumParser(Of Int32)(txtPayrollIdNo.Text)
             End Get
@@ -101,7 +128,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayrollName As String Implements IEmployeeAbsenceView.PayrollName
+        Public Property PayrollName As String Implements IHolidayView.PayrollName
             Get
                 Return txtPayrollName.Text
             End Get
@@ -110,7 +137,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayrollCode As String Implements IEmployeeAbsenceView.PayrollCode
+        Public Property PayrollCode As String Implements IHolidayView.PayrollCode
             Get
                 Return txtPayrollCode.Text
             End Get
@@ -119,16 +146,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property UserName As String Implements IEmployeeAbsenceView.UserName
-            Get
-                Return txtUserName.Text
-            End Get
-            Set(value As String)
-                txtUserName.Text = value
-            End Set
-        End Property
-
-        Public Property EndDate As Date Implements IEmployeeAbsenceView.EndDate
+        Public Property DateEnd As Date Implements IHolidayView.DateEnd
             Get
                 Return Convert.ToDateTime(txtEndDate.Text)
             End Get
@@ -137,7 +155,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property StartDate As Date Implements IEmployeeAbsenceView.StartDate
+        Public Property DateStart As Date Implements IHolidayView.DateStart
             Get
                 Return Convert.ToDateTime(txtStartDate.Text)
             End Get
@@ -146,19 +164,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayrollEndDate As Date Implements IEmployeeAbsenceView.PayrollEndDate
-
-        Public Property PayrollStartDate As Date Implements IEmployeeAbsenceView.PayrollStartDate
-
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"AbsenceReason", txtAbsenceReason},
+                {"Note", txtNote},
                 {"AbsenceType", cboAbsenceType},
                 {"AddedByUser", txtAddedByUser},
-                {"EmployeeIdNo", cboEmployeeIdNo},
+                {"HolidayIdNo", cboHolidayIdNo},
                 {"EquivalentHours", txtEquivalentHours},
                 {"IdNo", TxtIdNo},
                 {"PayrollIdNo", txtPayrollIdNo},
@@ -168,7 +182,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             CreateEnumDataSource(Of AbsenceTypeSelection)(cboAbsenceType)
-            CreateDataSource("Employee", cboEmployeeIdNo)
+            CreateDataSource("Holiday", cboHolidayIdNo)
         End Sub
 
     End Class
