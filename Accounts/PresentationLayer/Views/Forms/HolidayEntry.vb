@@ -91,23 +91,37 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateEnd As Date Implements IHolidayView.DateEnd
             Get
-                Return dtpEndDate.Value
+                Return Convert.ToDateTime(dtpDateEnd.Text)
             End Get
             Set
-                dtpEndDate.Value = Value
+                dtpDateEnd.Text = Value.ToShortDateString()
             End Set
         End Property
 
         Public Property PayrollStartDate As Date Implements IHolidayView.PayrollStartDate
-
-        Public Property PayrollEndDate As Date Implements IHolidayView.PayrollEndDate
-
-        Public Property DateStart As Date Implements IHolidayView.DateStart
             Get
                 Return Convert.ToDateTime(txtPayrollStartDate.Text)
             End Get
+            Set
+                txtPayrollStartDate.Text = Value.ToShortDateString()
+            End Set
+        End Property
+
+        Public Property PayrollEndDate As Date Implements IHolidayView.PayrollEndDate
+            Get
+                Return Convert.ToDateTime(txtPayrollEndDate.Text)
+            End Get
+            Set
+                txtPayrollEndDate.Text = Value.ToShortDateString()
+            End Set
+        End Property
+
+        Public Property DateStart As Date Implements IHolidayView.DateStart
+            Get
+                Return Convert.ToDateTime(dtpDateStart.Text)
+            End Get
             Set(value As Date)
-                txtPayrollStartDate.Text = value.ToShortDateString()
+                dtpDateStart.Text = value.ToShortDateString()
             End Set
         End Property
 
@@ -116,12 +130,12 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
+                {"DateEnd", dtpDateEnd},
+                {"DateStart", dtpDateStart},
                 {"Description", txtDescription},
-                {"EndDate", dtpEndDate},
                 {"IdNo", TxtIdNo},
                 {"LeaveIdNo", cboLeaveIdNo},
-                {"PayrollIdNo", txtPayrollIdNo},
-                {"StartDate", dtpStartDate}
+                {"PayrollIdNo", txtPayrollIdNo}
                 }
         End Sub
 

@@ -627,8 +627,7 @@ Namespace PresentationLayer.Presenters
                             CodeToEnum(Of SpecialAccountSelection)(item.SpecialAccount) =
                             SpecialAccountSelection.EmployeeLoan Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Dim entryNames =
-                                    Messaging.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
+                            Dim entryNames = Messaging.TranslateCaption("Accounts Payables/Accounts Receivables/Employee")
                             Dim caption = "Invalid Entry"
                             Dim variables As String() = {"lineNumber", lineNumber, "entryNames", entryNames}
                             Dim message = Messaging.GetMessage(True, "MsgAccountsNotAllowed")

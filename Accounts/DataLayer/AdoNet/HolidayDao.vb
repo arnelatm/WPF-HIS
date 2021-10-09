@@ -12,14 +12,13 @@ Namespace DataLayer.AdoNet
         Implements IDaoAll(Of Holiday)
 
         Private ReadOnly Db As New Db()
-
-        Private FieldList As String = "DateCreated," &
-                                      "DateEnd," &
-                                      "DateStart," &
-                                      "Description," &
-                                      "IdNo," &
-                                      "LeaveIdNo," &
-                                      "PayrollIdNo"
+            Private FieldList As String = "DateCreated," &
+                                          "DateEnd," &
+                                          "DateStart," &
+                                          "Description," &
+                                          "IdNo," &
+                                          "LeaveIdNo," &
+                                          "PayrollIdNo"
 
         Public Function GetRecordByIdNo(idNo) As Holiday Implements IDaoAll(Of Holiday).GetRecordByIdNo
             Dim sql As String =
@@ -43,32 +42,31 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef holiday As Holiday) As Integer Implements IDaoAll(Of Holiday).UpdateRecord
             Dim sql As String =
                     " UPDATE [Holiday] SET " &
-                    " Description = @Description," &
                     " DateEnd = @DateEnd," &
                     " DateStart = @DateStart," &
+                    " Description = @Description," &
                     " LeaveIdNo = @LeaveIdNo," &
-                    " PayrollIdNo = @PayrollIdNo," &
+                    " PayrollIdNo = @PayrollIdNo" &
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(holiday))
         End Function
 
         Public Function AddRecord(ByRef holiday As Holiday) As Integer Implements IDaoAll(Of Holiday).AddRecord
             Dim sql As String = " INSERT INTO [Holiday] " &
-                    " (Description,DateEnd,DateStart,LeaveIdNo,PayrollIdNo)" &
-                    " VALUES (@Description,@DateEnd,@DateStart,@LeaveIdNo,@PayrollIdNo) "
+                    " (DateEnd,DateStart,Description,LeaveIdNo,PayrollIdNo)" &
+                    " VALUES (@DateEnd,@DateStart,@Description,@LeaveIdNo,@PayrollIdNo)"
             Return Db.Insert(sql, Take(holiday))
-
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Holiday) =
                                     Function(reader) _
             New Holiday() With {
-            .Description = Extensions.AsString(reader("Description")),
+            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
             .DateEnd = Extensions.AsDate(reader("DateEnd")),
             .DateStart = Extensions.AsDate(reader("DateStart")),
-            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
-            .LeaveIdNo = Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
+            .Description = Extensions.AsString(reader("Description")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .LeaveIdNo = Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .PayrollIdNo = Extensions.AsId(Of Int32)(reader("PayrollIdNo"))
             }
 
