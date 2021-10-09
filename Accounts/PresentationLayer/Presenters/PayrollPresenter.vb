@@ -230,19 +230,19 @@ Namespace PresentationLayer.Presenters
             Dim empName As String
             Dim empFound As Boolean = False
             Dim absenceService As New AccountsService("EmployeeAbsence")
-            Dim absences As List(Of EmployeeAbsenceModel) = absenceService.GetRecordsWithGroupIdNo(Of EmployeeAbsenceModel)(View.IdNo, "EmployeeAbsence")
+            Dim absences As List(Of EmployeeAbsenceModel) = absenceService.GetRecordsWithGroupIdNo(Of EmployeeAbsenceModel)(View.IdNo, "IdNo")
             seq = View.PayrollAttendance.Count() + absences.Count() + 1
             daysInPeriod = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
             daysOffInPeriod = FridaysInPeriod(View.StartDate, View.EndDate)
             If View.PayrollAttendance.Any() Then
-                _reinitialize = True
-            Else
                 _reinitialize = False
+            Else
+                _reinitialize = True
             End If
             Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
             Dim counter As Integer = 0
             progressDisplayForm.Show()
-            progressDisplayForm.InitializeDisplay(numberOfEmployees)
+            progressDisplayForm.InitializeDisplay(numberOfEmployees + absences.Count)
             For i = 1 To numberOfEmployees
                 empId = activeEmployees(i * 4 - 4)
                 empName = activeEmployees(i * 4 - 3)
@@ -251,30 +251,37 @@ Namespace PresentationLayer.Presenters
                 'If empId = 498 Then
                 '    Debugger.Break()
                 'End If
-                If _reinitialize Then
-                    Dim empAttendance As AttendanceItemView
+                Dim empAttendance As AttendanceItemView
+                If Not _reinitialize Then
                     empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empId)
                     If empAttendance Is Nothing Then
                         empFound = False
-                    Else
-                        empFound = True
                         If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
-                            UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
-                            If empAttendance.DaysAbsentWithoutPay <> empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent - empAttendance.DaysVacationLeave Then
-                                empAttendance.DaysAbsentWithoutPay = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent - empAttendance.DaysVacationLeave
-                            End If
+                            AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
+                            seq = seq + 1
                         Else
                             View.PayrollAttendance.Remove(empAttendance)
                         End If
+                    Else
+                        empFound = True
+                        UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
+                    End If
+                Else
+                    If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
+                        AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
+                        seq = seq + 1
                     End If
                 End If
-                If empFound Then
-                    Continue For
-                End If
-                If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
-                    AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
-                    seq = seq + 1
-                End If
+                'If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
+                '    UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
+                '    If empAttendance.DaysAbsentWithoutPay <> empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent - empAttendance.DaysVacationLeave Then
+                '        empAttendance.DaysAbsentWithoutPay = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent - empAttendance.DaysVacationLeave
+                '    End If
+                'Else
+                '    If empFound Then
+                '        View.PayrollAttendance.Remove(empAttendance)
+                '    End If
+                'End If
                 counter = counter + 1
                 progressDisplayForm.UpdateProgressBar(counter)
             Next
@@ -288,9 +295,10 @@ Namespace PresentationLayer.Presenters
             For Each absence In absences
                 Dim empIdNo = absence.EmployeeIdNo
                 Dim empAttendance As AttendanceItemView
-                empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empId)
-                If empAttendance Is Nothing Then
-                    empAttendance.DaysAbsentWithoutPay = empAttendance.DaysAbsentWithoutPay + absence.EquivalentHours/8
+                empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empIdNo)
+                If empAttendance IsNot Nothing Then
+                    empAttendance.DaysAbsentWithoutPay += Math.Round(absence.EquivalentHours / 8, 4)
+                    empAttendance.DaysPresent -= Math.Round(absence.EquivalentHours / 8, 4)
                 End If
                 counter = counter + 1
                 progressDisplayForm.UpdateProgressBar(counter)
@@ -367,11 +375,14 @@ Namespace PresentationLayer.Presenters
             ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
             empAttendance.DaysTotal = daysTotal
             empAttendance.DaysOff = daysOff
-            empAttendance.DaysPresent = daysTotal - daysOff
             empAttendance.PayrollIdNo = View.IdNo
             empAttendance.EmployeeIdNo = empId
             empAttendance.EmployeeName = empName
             empAttendance.Sequence = seq
+            empAttendance.DaysAbsentWithoutPay = 0
+            empAttendance.DaysAbsentWithPay = 0
+            empAttendance.DaysVacationLeave = 0
+            empAttendance.DaysPresent = daysTotal - daysOff
             View.PayrollAttendance.Add(empAttendance)
         End Sub
 
@@ -388,6 +399,7 @@ Namespace PresentationLayer.Presenters
             ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
             empAttendance.DaysTotal = daysTotal
             empAttendance.DaysOff = daysOff
+            empAttendance.DaysPresent = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysAbsentWithoutPay - empAttendance.DaysVacationLeave
         End Sub
 
         Private Sub ComputeTotalDaysNOff(ByRef daysTotal As Int16, ByRef daysOff As Int16, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
