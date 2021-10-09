@@ -43,12 +43,12 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPayrollEndDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDescription = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.dtpDateStart = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+        Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.dtpDateEnd = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
@@ -168,9 +168,9 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout2.Controls.Add(Me.lblLeaveIdNo)
         Me.CFlowLayout2.Controls.Add(Me.cboLeaveIdNo)
         Me.CFlowLayout2.Controls.Add(Me.lblStartDate)
-        Me.CFlowLayout2.Controls.Add(Me.dtpStartDate)
+        Me.CFlowLayout2.Controls.Add(Me.dtpDateStart)
         Me.CFlowLayout2.Controls.Add(Me.lblEndDate)
-        Me.CFlowLayout2.Controls.Add(Me.dtpEndDate)
+        Me.CFlowLayout2.Controls.Add(Me.dtpDateEnd)
         Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
         Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
         resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
@@ -355,70 +355,6 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPayrollName.Translatable = false
         Me.txtPayrollName.ValueIsMandatory = true
         '
-        'lblStartDate
-        '
-        Me.lblStartDate.BackColor = System.Drawing.Color.Transparent
-        Me.lblStartDate.DisplayOnly = true
-        Me.lblStartDate.EditingMode = false
-        resources.ApplyResources(Me.lblStartDate, "lblStartDate")
-        Me.lblStartDate.Name = "lblStartDate"
-        Me.lblStartDate.Translatable = true
-        '
-        'dtpStartDate
-        '
-        Me.dtpStartDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpStartDate.DefaultValue = Nothing
-        Me.dtpStartDate.DisplayOnly = false
-        Me.dtpStartDate.DtpDefaultValue = Nothing
-        Me.dtpStartDate.EditingMode = true
-        Me.dtpStartDate.EditsAllowed = false
-        Me.CFlowLayout2.SetFlowBreak(Me.dtpStartDate, true)
-        Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpStartDate.LinkedLabel = Me.lblStartDate
-        resources.ApplyResources(Me.dtpStartDate, "dtpStartDate")
-        Me.dtpStartDate.Name = "dtpStartDate"
-        Me.dtpStartDate.ReadOnlyDp = false
-        Me.dtpStartDate.SecurityKey = Nothing
-        Me.dtpStartDate.ShowLongDate = false
-        Me.dtpStartDate.ShowTime = false
-        Me.dtpStartDate.TargetCalendar = Nothing
-        Me.dtpStartDate.Translatable = false
-        Me.dtpStartDate.Value = Nothing
-        Me.dtpStartDate.ValueIsMandatory = false
-        Me.dtpStartDate.ValueIsNullable = false
-        '
-        'lblEndDate
-        '
-        Me.lblEndDate.BackColor = System.Drawing.Color.Transparent
-        Me.lblEndDate.DisplayOnly = true
-        Me.lblEndDate.EditingMode = false
-        resources.ApplyResources(Me.lblEndDate, "lblEndDate")
-        Me.lblEndDate.Name = "lblEndDate"
-        Me.lblEndDate.Translatable = true
-        '
-        'dtpEndDate
-        '
-        Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpEndDate.DefaultValue = Nothing
-        Me.dtpEndDate.DisplayOnly = false
-        Me.dtpEndDate.DtpDefaultValue = Nothing
-        Me.dtpEndDate.EditingMode = true
-        Me.dtpEndDate.EditsAllowed = false
-        Me.CFlowLayout2.SetFlowBreak(Me.dtpEndDate, true)
-        Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpEndDate.LinkedLabel = Me.lblEndDate
-        resources.ApplyResources(Me.dtpEndDate, "dtpEndDate")
-        Me.dtpEndDate.Name = "dtpEndDate"
-        Me.dtpEndDate.ReadOnlyDp = false
-        Me.dtpEndDate.SecurityKey = Nothing
-        Me.dtpEndDate.ShowLongDate = false
-        Me.dtpEndDate.ShowTime = false
-        Me.dtpEndDate.TargetCalendar = Nothing
-        Me.dtpEndDate.Translatable = false
-        Me.dtpEndDate.Value = Nothing
-        Me.dtpEndDate.ValueIsMandatory = false
-        Me.dtpEndDate.ValueIsNullable = false
-        '
         'lblNote
         '
         Me.lblNote.BackColor = System.Drawing.Color.Transparent
@@ -454,6 +390,70 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDescription.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDescription.Translatable = false
         Me.txtDescription.ValueIsMandatory = true
+        '
+        'lblStartDate
+        '
+        Me.lblStartDate.BackColor = System.Drawing.Color.Transparent
+        Me.lblStartDate.DisplayOnly = true
+        Me.lblStartDate.EditingMode = false
+        resources.ApplyResources(Me.lblStartDate, "lblStartDate")
+        Me.lblStartDate.Name = "lblStartDate"
+        Me.lblStartDate.Translatable = true
+        '
+        'dtpDateStart
+        '
+        Me.dtpDateStart.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpDateStart.DefaultValue = Nothing
+        Me.dtpDateStart.DisplayOnly = false
+        Me.dtpDateStart.DtpDefaultValue = Nothing
+        Me.dtpDateStart.EditingMode = true
+        Me.dtpDateStart.EditsAllowed = false
+        Me.CFlowLayout2.SetFlowBreak(Me.dtpDateStart, true)
+        Me.dtpDateStart.ForeColor = System.Drawing.Color.Black
+        Me.dtpDateStart.LinkedLabel = Me.lblStartDate
+        resources.ApplyResources(Me.dtpDateStart, "dtpDateStart")
+        Me.dtpDateStart.Name = "dtpDateStart"
+        Me.dtpDateStart.ReadOnlyDp = false
+        Me.dtpDateStart.SecurityKey = Nothing
+        Me.dtpDateStart.ShowLongDate = false
+        Me.dtpDateStart.ShowTime = false
+        Me.dtpDateStart.TargetCalendar = Nothing
+        Me.dtpDateStart.Translatable = false
+        Me.dtpDateStart.Value = Nothing
+        Me.dtpDateStart.ValueIsMandatory = false
+        Me.dtpDateStart.ValueIsNullable = false
+        '
+        'lblEndDate
+        '
+        Me.lblEndDate.BackColor = System.Drawing.Color.Transparent
+        Me.lblEndDate.DisplayOnly = true
+        Me.lblEndDate.EditingMode = false
+        resources.ApplyResources(Me.lblEndDate, "lblEndDate")
+        Me.lblEndDate.Name = "lblEndDate"
+        Me.lblEndDate.Translatable = true
+        '
+        'dtpDateEnd
+        '
+        Me.dtpDateEnd.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpDateEnd.DefaultValue = Nothing
+        Me.dtpDateEnd.DisplayOnly = false
+        Me.dtpDateEnd.DtpDefaultValue = Nothing
+        Me.dtpDateEnd.EditingMode = true
+        Me.dtpDateEnd.EditsAllowed = false
+        Me.CFlowLayout2.SetFlowBreak(Me.dtpDateEnd, true)
+        Me.dtpDateEnd.ForeColor = System.Drawing.Color.Black
+        Me.dtpDateEnd.LinkedLabel = Me.lblEndDate
+        resources.ApplyResources(Me.dtpDateEnd, "dtpDateEnd")
+        Me.dtpDateEnd.Name = "dtpDateEnd"
+        Me.dtpDateEnd.ReadOnlyDp = false
+        Me.dtpDateEnd.SecurityKey = Nothing
+        Me.dtpDateEnd.ShowLongDate = false
+        Me.dtpDateEnd.ShowTime = false
+        Me.dtpDateEnd.TargetCalendar = Nothing
+        Me.dtpDateEnd.Translatable = false
+        Me.dtpDateEnd.Value = Nothing
+        Me.dtpDateEnd.ValueIsMandatory = false
+        Me.dtpDateEnd.ValueIsNullable = false
         '
         'lblDateCreated
         '
@@ -527,8 +527,8 @@ End Sub
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents lblStartDate As CLabel
-        Public WithEvents dtpStartDate As CCustomDateTimePicker
+        Public WithEvents dtpDateStart As CCustomDateTimePicker
         Friend WithEvents lblEndDate As CLabel
-        Public WithEvents dtpEndDate As CCustomDateTimePicker
+        Public WithEvents dtpDateEnd As CCustomDateTimePicker
     End Class
 End Namespace

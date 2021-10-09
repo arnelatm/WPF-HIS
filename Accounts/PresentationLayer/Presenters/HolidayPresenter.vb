@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
@@ -11,8 +12,8 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _payrollService As New AccountsService("Payroll")
         Private ReadOnly _payrollIdNo As Int16 = 0
-        Private ReadOnly _endDate As Date
-        Private ReadOnly _startDate As Date
+        Private ReadOnly _payrollEndDate As Date
+        Private ReadOnly _payrollStartDate As Date
         Private ReadOnly _payrollName As String
         Private ReadOnly _payrollNameAra As String
         Private ReadOnly _payrollCode As String
@@ -31,8 +32,8 @@ Namespace PresentationLayer.Presenters
             _payrollCode = payroll.PayrollCode
             _payrollNameAra = payroll.PayrollNameAra
             _payrollName = payroll.PayrollName
-            _startDate = payroll.StartDate
-            _endDate = payroll.EndDate
+            _payrollStartDate = payroll.StartDate
+            _payrollEndDate = payroll.EndDate
             SetPayroll()
             DataFilter = "PayrollIdNo = " & _payrollIdNo.ToString()
         End Sub
@@ -49,10 +50,22 @@ Namespace PresentationLayer.Presenters
             Else
                 View.PayrollName = _payrollName
             End If
-            View.DateStart = _startDate
-            View.DateEnd = _endDate
+            View.PayrollStartDate = _payrollStartDate
+            View.PayrollEndDate = _payrollEndDate
             View.PayrollCode = _payrollCode
         End Sub
+
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue = True
+            If MyBase.IsBizDataValid() Then
+                If View.DateStart < View.PayrollStartDate Or View.DateEnd > View.PayrollEndDate Then
+                    Dim fieldName As String = Messaging.TranslateCaption("Start Date")
+                    Messaging.ShowParametrizedMessage(True, "MsgInvalidRange", {"fieldName", fieldName, "minimumValue", View.PayrollStartDate.ToShortDateString, "maximumValue", View.PayrollEndDate.ToShortDateString})
+                    retValue = False
+                End If
+            End If
+            Return retValue
+        End Function
 
     End Class
 

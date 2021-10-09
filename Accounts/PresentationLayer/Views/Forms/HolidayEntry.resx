@@ -370,7 +370,7 @@
     <value>307</value>
   </data>
   <data name="lblPayrollStartDate.Text" xml:space="preserve">
-    <value>Start Date</value>
+    <value>Payroll Start Date</value>
   </data>
   <data name="lblPayrollStartDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -430,7 +430,7 @@
     <value>308</value>
   </data>
   <data name="lblPayrollEndDate.Text" xml:space="preserve">
-    <value>End Date</value>
+    <value>Payroll End Date</value>
   </data>
   <data name="lblPayrollEndDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -586,7 +586,7 @@
     <value>475, 48</value>
   </data>
   <data name="txtDescription.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;txtDescription.Name" xml:space="preserve">
     <value>txtDescription</value>
@@ -636,28 +636,28 @@
   <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="dtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="dtpDateStart.Location" type="System.Drawing.Point, System.Drawing">
     <value>203, 162</value>
   </data>
-  <data name="dtpStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="dtpDateStart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="dtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dtpDateStart.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 25</value>
   </data>
-  <data name="dtpStartDate.TabIndex" type="System.Int32, mscorlib">
-    <value>324</value>
+  <data name="dtpDateStart.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
-  <data name="&gt;&gt;dtpStartDate.Name" xml:space="preserve">
-    <value>dtpStartDate</value>
+  <data name="&gt;&gt;dtpDateStart.Name" xml:space="preserve">
+    <value>dtpDateStart</value>
   </data>
-  <data name="&gt;&gt;dtpStartDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateStart.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dtpStartDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateStart.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;dtpStartDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateStart.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="lblEndDate.Font" type="System.Drawing.Font, System.Drawing">
@@ -696,28 +696,28 @@
   <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="dtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="dtpDateEnd.Location" type="System.Drawing.Point, System.Drawing">
     <value>203, 189</value>
   </data>
-  <data name="dtpEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="dtpDateEnd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="dtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dtpDateEnd.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 25</value>
   </data>
-  <data name="dtpEndDate.TabIndex" type="System.Int32, mscorlib">
-    <value>325</value>
+  <data name="dtpDateEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="&gt;&gt;dtpEndDate.Name" xml:space="preserve">
-    <value>dtpEndDate</value>
+  <data name="&gt;&gt;dtpDateEnd.Name" xml:space="preserve">
+    <value>dtpDateEnd</value>
   </data>
-  <data name="&gt;&gt;dtpEndDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateEnd.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dtpEndDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateEnd.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;dtpEndDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dtpDateEnd.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="lblDateCreated.Font" type="System.Drawing.Font, System.Drawing">
@@ -769,7 +769,7 @@
     <value>129, 23</value>
   </data>
   <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
-    <value>322</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;txtDateCreated.Name" xml:space="preserve">
     <value>txtDateCreated</value>
@@ -826,7 +826,7 @@
     <value>475, 24</value>
   </data>
   <data name="cboLeaveIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;cboLeaveIdNo.Name" xml:space="preserve">
     <value>cboLeaveIdNo</value>
