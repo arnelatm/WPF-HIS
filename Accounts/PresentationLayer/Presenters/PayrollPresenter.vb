@@ -248,9 +248,9 @@ Namespace PresentationLayer.Presenters
                 empName = activeEmployees(i * 4 - 3)
                 dateHired = activeEmployees(i * 4 - 2)
                 dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), Nothing, activeEmployees(i * 4 - 1))
-                'If empId = 498 Then
-                '    Debugger.Break()
-                'End If
+                If empId = 291 Then
+                    Debugger.Break()
+                End If
                 Dim empAttendance As AttendanceItemView
                 If Not _reinitialize Then
                     empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empId)
@@ -264,7 +264,7 @@ Namespace PresentationLayer.Presenters
                         End If
                     Else
                         empFound = True
-                        UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
+                        InitializeEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
                     End If
                 Else
                     If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
@@ -393,12 +393,15 @@ Namespace PresentationLayer.Presenters
             View.PayrollOvertime.Add(empOvertime)
         End Sub
 
-        Public Sub UpdateEmployeeAttendance(ByRef empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
+        Public Sub InitializeEmployeeAttendance(ByRef empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
             Dim daysOff As Int16
             Dim daysTotal As Int16
             ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
             empAttendance.DaysTotal = daysTotal
             empAttendance.DaysOff = daysOff
+            empAttendance.DaysAbsentWithoutPay = 0
+            empAttendance.DaysAbsentWithPay = 0
+            'empAttendance.DaysVacationLeave = 0
             empAttendance.DaysPresent = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysAbsentWithoutPay - empAttendance.DaysVacationLeave
         End Sub
 
