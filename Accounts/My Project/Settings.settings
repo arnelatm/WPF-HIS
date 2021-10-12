@@ -20,7 +20,7 @@
     <Setting Name="MirroredLanguage" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="UserName" Type="System.String" Scope="Application">
+    <Setting Name="UserName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Arnel</Value>
     </Setting>
   </Settings>
