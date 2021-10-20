@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
@@ -24,6 +25,15 @@ Namespace PresentationLayer.Views.Forms
         Public Event PrintPcReplenishment() Implements IDisbursementJournalView.PrintPcReplenishment
         Public Event FirstLineUpdateNeeded() Implements IDisbursementJournalView.FirstLineUpdateNeeded
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
+
+        Public Sub New()
+
+            ' This call is required by the designer.
+            InitializeComponent()
+            Presenter = New ReportPresenter(Me)
+            ' Add any initialization after the InitializeComponent() call.
+
+        End Sub
 
         Public Sub New(ByVal tableName As String)
             MyBase.New()

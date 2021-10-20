@@ -150,7 +150,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         Return Invoker.GetField(View, "MyErrorProvider")
     End Function
 
-    Protected Property WithTreeView As Boolean
+    Public Property WithTreeView As Boolean
 
     Protected Sub New()
         Service = New Service()
