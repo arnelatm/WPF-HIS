@@ -547,11 +547,13 @@ Namespace PresentationLayer.Presenters
             Dim dtPayrollPayElementUpdateTable As New DataTable
             _payrollPayElements.Clear()
             CreateDataTable(dtPayrollPayElementInsertTable, {{"Amount", GetType(Decimal)},
+                                                             {"Generated", GetType(Boolean)},
                                                              {"PayElementIdNo", GetType(Int16)},
                                                              {"PayrollDetailIdNo", GetType(Int32)},
                                                              {"RecurringPayElementIdNo", GetType(Int32)}
                                                             })
             CreateDataTable(dtPayrollPayElementUpdateTable, {{"Amount", GetType(Decimal)},
+                                             {"Generated", GetType(Boolean)},
                                              {"IdNo", GetType(Int32)},
                                              {"PayElementIdNo", GetType(Int16)},
                                              {"PayrollDetailIdNo", GetType(Int32)},
@@ -629,21 +631,33 @@ Namespace PresentationLayer.Presenters
             Next
             If regenerate Then
                 For Each item In _payrollPayElements
+                    Dim dataRow As DataRow
                     If item.IdNo = 0 Then
-                        Dim dataRow As DataRow
                         dataRow = dtPayrollPayElementInsertTable.NewRow()
                         dataRow("Amount") = item.Amount
+                        dataRow("Generated") = True
                         dataRow("PayElementIdNo") = item.PayElementIdNo
                         dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
                         dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
                         dtPayrollPayElementInsertTable.Rows.Add(dataRow)
                     Else
-                        'If item.PayrollDetailIdNo = 1745 Then
-                        '    Debugger.Break()
-                        'End If
-                        Dim dataRow As DataRow
+                        dataRow = dtPayrollPayElementUpdateTable.NewRow()
                         dataRow = dtPayrollPayElementUpdateTable.NewRow()
                         dataRow("Amount") = item.Amount
+                        dataRow("Generated") = True
+                        dataRow("IdNo") = item.IdNo
+                        dataRow("PayElementIdNo") = item.PayElementIdNo
+                        dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
+                        dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
+                        dtPayrollPayElementUpdateTable.Rows.Add(dataRow)
+                    End If
+                Next
+                For Each item In _savedPayrollPayElements
+                    Dim dataRow As DataRow
+                    If Not item.Generated Then
+                        dataRow = dtPayrollPayElementUpdateTable.NewRow()
+                        dataRow("Amount") = item.Amount
+                        dataRow("Generated") = False
                         dataRow("IdNo") = item.IdNo
                         dataRow("PayElementIdNo") = item.PayElementIdNo
                         dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
@@ -656,6 +670,7 @@ Namespace PresentationLayer.Presenters
                     Dim dataRow As DataRow
                     dataRow = dtPayrollPayElementInsertTable.NewRow()
                     dataRow("Amount") = item.Amount
+                    dataRow("Generated") = True
                     dataRow("PayElementIdNo") = item.PayElementIdNo
                     dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
                     dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
@@ -803,6 +818,7 @@ Namespace PresentationLayer.Presenters
                 'End If
                 Dim payrollPayElement As New PayrollPayElementModel
                 payrollPayElement.Amount = Math.Round(amount, 0)
+                payrollPayElement.Generated = True
                 payrollPayElement.PayrollIdNo = _payrollIdNo
                 payrollPayElement.PayElementIdNo = payElementIdNo
                 payrollPayElement.EmployeeIdNo = employeeIdNo

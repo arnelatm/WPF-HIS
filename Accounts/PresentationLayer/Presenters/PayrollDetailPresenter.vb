@@ -27,12 +27,14 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("PayrollDetail")
 
             CreateDataTable(DtPayElementInsertTable, {{"Amount", GetType(Decimal)},
+                                            {"Generated", GetType(Boolean)},
                                             {"PayElementIdNo", GetType(Int16)},
                                             {"PayrollDetailIdNo", GetType(Int32)},
                                             {"RecurringPayElementIdNo", GetType(Int32)}
                                            })
 
             CreateDataTable(DtPayElementUpdateTable, {{"Amount", GetType(Decimal)},
+                                            {"Generated", GetType(Boolean)},
                                             {"IdNo", GetType(Int32)},
                                             {"PayElementIdNo", GetType(Int16)},
                                             {"PayrollDetailIdNo", GetType(Int32)},
@@ -69,6 +71,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("Amount") = itemDataView.Amount
+            workRow("Generated") = itemDataView.Generated
             workRow("PayElementIdNo") = itemDataView.PayElementIdNo
             workRow("PayrollDetailIdNo") = View.IdNo
             workRow("RecurringPayElementIdNo") = itemDataView.RecurringPayElementIdNo

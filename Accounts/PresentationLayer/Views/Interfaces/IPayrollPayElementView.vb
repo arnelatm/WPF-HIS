@@ -4,6 +4,7 @@
         Property Amount As Decimal
         Property EmployeeIdNo As Int32
         Property Errors As List(Of String)
+        Property Generated As Boolean
         Property IdNo As Int32
         Property PayElementIdNo As Int16
         Property PayrollDetailIdNo As Int32
