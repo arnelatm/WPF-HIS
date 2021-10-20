@@ -3,8 +3,11 @@
     [PayrollDetailIdNo]       INT      NULL,
     [PayElementIdNo]          SMALLINT NULL,
     [Amount]                  MONEY    NULL,
-    [RecurringPayElementIdNo] INT      NULL
+    [RecurringPayElementIdNo] INT      NULL,
+    [Generated]               BIT      NULL
 );
+
+
 
 
 

@@ -18,7 +18,7 @@ Namespace BusinessLayer
         Public Property PayrollDetailIdNo As Int32
         Public Property PayrollIdNo As Int16
         Public Property RecurringPayElementIdNo As Int32
-
+        Public Property Generated As Boolean
     End Class
 
 End Namespace

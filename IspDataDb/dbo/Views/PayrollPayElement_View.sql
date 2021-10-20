@@ -1,8 +1,7 @@
-﻿
-CREATE VIEW [dbo].[PayrollPayElement_View]
+﻿CREATE VIEW dbo.PayrollPayElement_View
 AS
 SELECT        dbo.PayrollPayElement.IdNo, dbo.PayrollPayElement.PayrollDetailIdNo, dbo.PayrollPayElement.PayElementIdNo, dbo.PayrollPayElement.Amount, dbo.PayrollDetail.PayrollIdNo, dbo.PayrollDetail.EmployeeIdNo, 
-                         dbo.PayElement.PayElementKind,dbo.PayrollPayElement.RecurringPayElementIdNo
+                         dbo.PayElement.PayElementKind, dbo.PayrollPayElement.RecurringPayElementIdNo, dbo.PayrollPayElement.Generated
 FROM            dbo.PayrollPayElement INNER JOIN
                          dbo.PayrollDetail ON dbo.PayrollPayElement.PayrollDetailIdNo = dbo.PayrollDetail.IdNo INNER JOIN
                          dbo.PayElement ON dbo.PayrollPayElement.PayElementIdNo = dbo.PayElement.IdNo
@@ -16,7 +15,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[41] 4[38] 2[3] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -94,10 +93,10 @@ Begin DesignProperties =
          End
          Begin Table = "PayrollDetail"
             Begin Extent = 
-               Top = 35
-               Left = 313
-               Bottom = 335
-               Right = 486
+               Top = 115
+               Left = 257
+               Bottom = 307
+               Right = 430
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -122,7 +121,7 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
+         Column = 3405
          Alias = 900
          Table = 1170
          Output = 720
@@ -139,6 +138,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PayrollPayElement_View';
+
+
 
 
 

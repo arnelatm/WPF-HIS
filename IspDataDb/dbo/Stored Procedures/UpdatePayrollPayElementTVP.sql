@@ -8,6 +8,7 @@
 
 
 
+
 CREATE PROCEDURE  [dbo].[UpdatePayrollPayElementTVP]
   @MParam PayrollPayElementUpdate READONLY, @GroupIdNo as INT
 AS 
@@ -24,6 +25,7 @@ WHERE (D.PayrollIdNo = @GroupIdNo and D.IdNo is Null) or (D.PayrollIdNo = @Group
 -- Update existing PayElements
 UPDATE a 
 SET a.Amount = B.Amount,
+    a.[Generated] = b.[Generated],
 	a.PayElementIdNo = B.PayElementIdNo,
 	a.PayrollDetailIdNo = b.PayrollDetailIdNo,
 	a.RecurringPayElementIdNo = b.RecurringPayElementIdNo

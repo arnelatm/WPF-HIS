@@ -280,7 +280,6 @@
     <Build Include="dbo\Tables\Payroll.sql" />
     <Build Include="dbo\Tables\PayGroup.sql" />
     <Build Include="dbo\Views\PayGroup_View.sql" />
-    <Build Include="dbo\Tables\PayrollEarnAccount.sql" />
     <Build Include="dbo\Views\PayrollEarnAccount_View.sql" />
     <Build Include="dbo\Stored Procedures\UpdatePayrollEarnAccountTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertPayrollEarnAccountTVP.sql" />

@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views
         Public Property Amount As Decimal Implements IPayrollPayElementView.Amount
         Public Property EmployeeIdNo As Integer Implements IPayrollPayElementView.EmployeeIdNo
         Public Property Errors As List(Of String) Implements IPayrollPayElementView.Errors
+        Public Property Generated As Boolean Implements IPayrollPayElementView.Generated
         Public Property IdNo As Integer Implements IPayrollPayElementView.IdNo
         Public Property PayElementIdNo As Short Implements IPayrollPayElementView.PayElementIdNo
         Public Property PayrollDetailIdNo As Integer Implements IPayrollPayElementView.PayrollDetailIdNo

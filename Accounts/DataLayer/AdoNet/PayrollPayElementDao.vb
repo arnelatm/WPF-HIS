@@ -14,6 +14,7 @@ Namespace DataLayer.AdoNet
 
         Private Const FieldList = "Amount," &
                                   "EmployeeIdNo," &
+                                  "Generated," &
                                   "IdNo," &
                                   "PayElementIdNo," &
                                   "PayrollDetailIdNo," &
@@ -66,9 +67,10 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New PayrollPayElement() With {
             .Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
-            .PayElementIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayElementIdNo")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
+            .Generated = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Generated")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .PayElementIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayElementIdNo")),
             .PayrollDetailIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("PayrollDetailIdNo")),
             .PayrollIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("PayrollIdNo")),
             .RecurringPayElementIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("RecurringPayElementIdNo"))
