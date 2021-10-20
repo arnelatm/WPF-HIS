@@ -13,6 +13,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("Account")
             TableName = "Account"
             SortOrderKey = "IdNo"
+            WithTreeView = False
         End Sub
 
     End Class

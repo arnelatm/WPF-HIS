@@ -1002,6 +1002,12 @@
       <DependentUpon>Sales Journal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\SampleQrCodeGeneration.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleQrCodeGeneration.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Statement of Accounts Payable.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1368,6 +1374,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Sales Journal.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SampleQrCodeGeneration.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SampleQrCodeGeneration.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Statement of Accounts Payable.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Statement of Accounts Payable.vb</LastGenOutput>
@@ -1412,10 +1422,10 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Marcelo.config" />
     <None Include="app-MarceloNew.config" />
     <None Include="app222.config" />
+    <None Include="app.config" />
     <None Include="appIspadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />

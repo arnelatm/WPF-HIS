@@ -272,7 +272,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCheckPrinting.Click
-            RunForm(Of CheckPrinter, AccountPresenter(Of DisbursementJournalModel))()
+            'RunForm(Of CheckPrinter, DisbursementJournalPresenter(Of DisbursementJournalModel))()
+            Dim childMdiForm As CheckPrinter
+            childMdiForm = New CheckPrinter() With {
+                .MdiParent = Me
+                }
+            childMdiForm.Show()
         End Sub
 
         Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosePettyCashFund.Click
