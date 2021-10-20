@@ -655,14 +655,18 @@ Namespace PresentationLayer.Presenters
                 For Each item In _savedPayrollPayElements
                     Dim dataRow As DataRow
                     If Not item.Generated Then
-                        dataRow = dtPayrollPayElementUpdateTable.NewRow()
-                        dataRow("Amount") = item.Amount
-                        dataRow("Generated") = False
-                        dataRow("IdNo") = item.IdNo
-                        dataRow("PayElementIdNo") = item.PayElementIdNo
-                        dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
-                        dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
-                        dtPayrollPayElementUpdateTable.Rows.Add(dataRow)
+                        Dim payrollDetail As PayrollDetailModel
+                        payrollDetail = payrollDetailsModel.Find(Function(c) c.EmployeeIdNo = item.PayrollDetailIdNo) 
+                        If payrollDetail IsNot Nothing then
+                            dataRow = dtPayrollPayElementUpdateTable.NewRow()
+                            dataRow("Amount") = item.Amount
+                            dataRow("Generated") = False
+                            dataRow("IdNo") = item.IdNo
+                            dataRow("PayElementIdNo") = item.PayElementIdNo
+                            dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
+                            dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
+                            dtPayrollPayElementUpdateTable.Rows.Add(dataRow)
+                        End If
                     End If
                 Next
             Else
