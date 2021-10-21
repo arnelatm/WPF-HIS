@@ -235,9 +235,9 @@ Namespace PresentationLayer.Presenters
             daysInPeriod = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
             daysOffInPeriod = FridaysInPeriod(View.StartDate, View.EndDate)
             If View.PayrollAttendance.Any() Then
-                _reinitialize = False
-            Else
                 _reinitialize = True
+            Else
+                _reinitialize = False
             End If
             Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
             Dim counter As Integer = 0
@@ -248,30 +248,32 @@ Namespace PresentationLayer.Presenters
                 empName = activeEmployees(i * 4 - 3)
                 dateHired = activeEmployees(i * 4 - 2)
                 dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), Nothing, activeEmployees(i * 4 - 1))
-                If empId = 291 Then
+                If empId = 331 Then
                     Debugger.Break()
                 End If
-                Dim empAttendance As AttendanceItemView
-                If Not _reinitialize Then
-                    empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empId)
-                    If empAttendance Is Nothing Then
-                        empFound = False
-                        If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
-                            AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
-                            seq = seq + 1
+                If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
+                    If _reinitialize Then
+                        Dim empAttendance As AttendanceItemView
+                        empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empId)
+                        If empAttendance IsNot Nothing Then
+                            UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
                         Else
-                            View.PayrollAttendance.Remove(empAttendance)
+                            AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
                         End If
                     Else
-                        empFound = True
-                        InitializeEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
-                    End If
-                Else
-                    If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
                         AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
-                        seq = seq + 1
+                    End If
+                    seq = seq + 1
+                Else
+                    If _reinitialize Then
+                        Dim empAttendance As AttendanceItemView
+                        empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empId)
+                        If empAttendance IsNot Nothing Then
+                            View.PayrollAttendance.Remove(empAttendance)
+                        End If
                     End If
                 End If
+
                 'If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
                 '    UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
                 '    If empAttendance.DaysAbsentWithoutPay <> empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent - empAttendance.DaysVacationLeave Then
@@ -384,6 +386,22 @@ Namespace PresentationLayer.Presenters
             empAttendance.DaysVacationLeave = 0
             empAttendance.DaysPresent = daysTotal - daysOff
             View.PayrollAttendance.Add(empAttendance)
+        End Sub
+
+        Public Sub UpdateEmployeeAttendance(empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal empName As String, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16, ByVal seq As Int16)
+            Dim daysOff As Int16
+            Dim daysTotal As Int16
+            ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
+            empAttendance.DaysTotal = daysTotal
+            empAttendance.DaysOff = daysOff
+            empAttendance.PayrollIdNo = View.IdNo
+            empAttendance.EmployeeIdNo = empId
+            empAttendance.EmployeeName = empName
+            empAttendance.Sequence = seq
+            empAttendance.DaysAbsentWithoutPay = 0
+            empAttendance.DaysAbsentWithPay = 0
+            empAttendance.DaysVacationLeave = 0
+            empAttendance.DaysPresent = daysTotal - daysOff
         End Sub
 
         Public Sub AddEmployeeOvertime(ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal empId As Int16, ByVal seq As Int16)
@@ -656,8 +674,8 @@ Namespace PresentationLayer.Presenters
                     Dim dataRow As DataRow
                     If Not item.Generated Then
                         Dim payrollDetail As PayrollDetailModel
-                        payrollDetail = payrollDetailsModel.Find(Function(c) c.EmployeeIdNo = item.PayrollDetailIdNo) 
-                        If payrollDetail IsNot Nothing then
+                        payrollDetail = payrollDetailsModel.Find(Function(c) c.EmployeeIdNo = item.EmployeeIdNo)
+                        If payrollDetail IsNot Nothing Then
                             dataRow = dtPayrollPayElementUpdateTable.NewRow()
                             dataRow("Amount") = item.Amount
                             dataRow("Generated") = False
