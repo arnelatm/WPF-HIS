@@ -273,22 +273,12 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                 End If
-
-                'If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
-                '    UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
-                '    If empAttendance.DaysAbsentWithoutPay <> empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent - empAttendance.DaysVacationLeave Then
-                '        empAttendance.DaysAbsentWithoutPay = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysPresent - empAttendance.DaysVacationLeave
-                '    End If
-                'Else
-                '    If empFound Then
-                '        View.PayrollAttendance.Remove(empAttendance)
-                '    End If
-                'End If
                 counter = counter + 1
                 progressDisplayForm.UpdateProgressBar(counter)
             Next
             If _reinitialize Then
                 Dim i As Int16 = 1
+                View.PayrollAttendance.Sort(Function(p1, p2) p1.EmployeeName.CompareTo(p2.EmployeeName))
                 For Each item In View.PayrollAttendance
                     item.Sequence = i
                     i = i + 1
