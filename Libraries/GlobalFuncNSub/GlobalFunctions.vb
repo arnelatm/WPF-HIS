@@ -620,6 +620,52 @@ Public Module GlobalFunctions
         End Try
     End Function
 
+    '''<summary>
+    '''Converts a given number in string format to the desired number format.
+    '''<para>returns zero(0) if not convertible to number.</para>
+    '''</summary>
+    Public Function DateParser(ByRef dateString As String) As DateTime
+        Try
+            Return Parser(Of DateTime).Parser(dateString)
+        Catch ex As Exception
+            Dim z As New DateTime
+            Dim x As Type = z.GetType()
+            Dim u As Type = Nullable.GetUnderlyingType(x)
+            Dim typeCode As TypeCode = Type.GetTypeCode(x)
+            Dim underlyingTypeCode As TypeCode = Type.GetTypeCode(u)
+            If u Is Nothing Then
+                If NumTypeIsInteger(typeCode) Then
+                    Dim num As Double
+                    Dim isNumeric As Boolean = Decimal.TryParse(dateString, num)
+                    If Not isNumeric Then
+                        Return Parser(Of DateTime).Parser(0)
+                    End If
+                    If Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
+                        ' remove trailing zeroes
+                        dateString = Strings.Left(dateString, dateString.IndexOf(".", StringComparison.Ordinal))
+                        Return Parser(Of DateTime).Parser(dateString)
+                    End If
+                ElseIf typeCode = TypeCode.Decimal Then
+                    Return Parser(Of DateTime).Parser(0)
+                End If
+            Else
+                If NumTypeIsInteger(underlyingTypeCode) Then
+                    Dim num As Double
+                    Dim isNumeric As Boolean = Decimal.TryParse(dateString, num)
+                    If Not isNumeric Then
+                        Return Parser(Of DateTime).Parser(0)
+                    End If
+                    If Math.Abs(num Mod 1) <= (Double.Epsilon * 100) Then
+                        ' remove trailing zeroes
+                        dateString = Strings.Left(dateString, dateString.IndexOf(".", StringComparison.Ordinal) - 1)
+                        Return Parser(Of DateTime).Parser(dateString)
+                    End If
+                End If
+            End If
+            Return Parser(Of DateTime).Parser("")
+        End Try
+    End Function
+
     ''''<summary>
     ''''Checks two objects if they are the same (no changes)
     ''''</summary>

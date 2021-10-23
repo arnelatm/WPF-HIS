@@ -126,15 +126,36 @@ Namespace PresentationLayer.Views.Forms
             CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
         End Sub
 
-        Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged
+        Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.Validated
             If dtpEndDate.Value Is Nothing OrElse dtpEndDate.Value < dtpStartDate.Value Then
                 dtpEndDate.Value = dtpStartDate.Value
             End If
         End Sub
 
-        Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.ValueChanged
+        Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.Validated
             If dtpStartDate.Value Is Nothing OrElse dtpStartDate.Value > dtpEndDate.Value Then
                 dtpStartDate.Value = dtpEndDate.Value
+            End If
+        End Sub
+
+        Private Sub chkFullDay_CheckedChanged(sender As Object, e As EventArgs) Handles chkFullDay.CheckedChanged
+            If chkFullDay.Checked Then
+                dtpStartDate.ShowTime = False
+                dtpEndDate.ShowTime = False
+            Else
+                dtpStartDate.ShowTime = True
+                dtpEndDate.ShowTime = True
+            End If
+        End Sub
+
+        'Public Overrides Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
+        Public Sub OnBeforeLoad() Handles MyBase.BeforeLoad
+            If FullDay Then
+                dtpEndDate.ShowTime = False
+                dtpStartDate.ShowTime = False
+            Else
+                dtpEndDate.ShowTime = True
+                dtpStartDate.ShowTime = True
             End If
         End Sub
 
