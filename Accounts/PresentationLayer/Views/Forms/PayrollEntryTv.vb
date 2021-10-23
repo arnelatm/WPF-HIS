@@ -268,6 +268,10 @@ Namespace PresentationLayer.Views.Forms
             RunSubForm(Of PayrollDetailEntry, PayrollDetailPresenter(Of PayrollDetailModel))(IdNo, ParentForm)
         End Sub
 
+        Private Sub DataGridViewPayrollAttendance_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayrollAttendance.CellContentClick
+
+        End Sub
+
     End Class
 
 End Namespace

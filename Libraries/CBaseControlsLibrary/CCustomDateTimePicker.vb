@@ -372,6 +372,9 @@ Public Class CCustomDateTimePicker
             txtTime.TabStop = True
             txtTime.Width = _timeWidth
             txtTime.Visible = True
+            If Value IsNot Nothing Then
+                txtTime.Text = String.Format("{0:HH:mm:ss}", CType(Value, DateTime).TimeOfDay.ToString)
+            End If
         Else
             'padWidth = padWidth + 2
             txtTime.TabStop = False
@@ -440,17 +443,8 @@ Public Class CCustomDateTimePicker
         Set(dValue As DateTime?)
             Try
                 If Not IsNothing(dValue) Then
-                    If dValue Is Nothing Then
-                        ''dtp.Value = Nothing
-                    Else
-                        txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(dValue, _targetCulture))
-                        If txtTime.Visible Then
-                            txtTime.Text = String.Format("{0:HH:mm:ss}", CType(dValue, DateTime).TimeOfDay.ToString)
-                        Else
-                            txtTime.Text = ""
-                        End If
-                        ''dtp.Value = dValue
-                    End If
+                    txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(dValue, _targetCulture))
+                    txtTime.Text = String.Format("{0:HH:mm:ss}", CType(dValue, DateTime).TimeOfDay.ToString)
                 Else
                     txtDate.Text = ""
                     txtTime.Text = ""
@@ -548,7 +542,7 @@ Public Class CCustomDateTimePicker
                 Exit Sub
             End If
             Dim dDate As DateTime
-            Dim sTime As String
+            'Dim sTime As String
             dDate = Convert.ToDateTime(txtDate.Text, _targetCulture)
             'Try
             '    'dtp.Value = dDate
@@ -556,8 +550,8 @@ Public Class CCustomDateTimePicker
             '    'dtp.Value = dtp.MinDate
             'End Try
             txtLongDate.Text = dDate.ToLongDateString
-            sTime = dDate.TimeOfDay.ToString
-            txtTime.Text = String.Format("{0:HH:mm:ss}", sTime)
+            'sTime = dDate.TimeOfDay.ToString
+            'txtTime.Text = String.Format("{0:HH:mm:ss}", sTime)
         End If
     End Sub
 
