@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("SecurityGroup", cacSecurityGroupIdNo)
+            CreateDataSource("Employee", cacEmployeeIdNo)
             CreateEnumDataSource(Of SecurityLevelSelection)(cacSecurityLevel)
         End Sub
 
@@ -40,30 +41,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property EmployeeIdNo As Int32? Implements IUserView.EmployeeIdNo
+            Get
+                Return cacEmployeeIdNo.GetValue()
+            End Get
+            Set
+                cacEmployeeIdNo.SetValue(Value)
+            End Set
+        End Property
+
         Public Property Password As String Implements IUserView.Password
             Get
                 Return TxtPassword.Text
             End Get
             Set
                 TxtPassword.Text = Value
-            End Set
-        End Property
-
-        Public Property FullName As String Implements IUserView.FullName
-            Get
-                Return TxtFullName.Text
-            End Get
-            Set
-                TxtFullName.Text = Value
-            End Set
-        End Property
-
-        Public Property FullNameAra As String Implements IUserView.FullNameAra
-            Get
-                Return txtFullNameAra.Text
-            End Get
-            Set
-                txtFullNameAra.Text = Value
             End Set
         End Property
 

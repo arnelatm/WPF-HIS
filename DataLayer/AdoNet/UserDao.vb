@@ -16,7 +16,7 @@ Namespace AdoNet
 
         Public Function GetRecordByIdNo(idNo) As User Implements IDao(Of User).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, UserName, Password, FullName, SecurityGroupIdNo " &
+                    " SELECT IdNo, UserName, EmployeeIdNo, Password, SecurityGroupIdNo " &
                     "   FROM [User]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -30,10 +30,10 @@ Namespace AdoNet
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of User) _
             Implements IDaoAll(Of User).GetAll
             If sortExpression Is Nothing Then
-                sortExpression = "FullName ASC"
+                sortExpression = "UserName ASC"
             End If
             Dim sql As String =
-                    " SELECT IdNo, UserName, Password, FullName, SecurityGroupIdNo " &
+                    " SELECT IdNo, UserName, EmployeeIdNo, Password, SecurityGroupIdNo " &
                     "   FROM [User] order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -41,8 +41,8 @@ Namespace AdoNet
         Public Function AddRecord(ByRef user As User) As Integer Implements IDao(Of User).AddRecord
             Dim sql As String =
                     " INSERT INTO [User] " &
-                    " (UserName,Password,FullName,SecurityGroupIdNo) " &
-                    " VALUES (@UserName,@Password,@FullName,@SecurityGroupIdNo)"
+                    " (UserName,Password,EmployeeIdNo,SecurityGroupIdNo) " &
+                    " VALUES (@UserName,@Password,@EmployeeIdNo,@SecurityGroupIdNo)"
             Return Db.Insert(sql, Take(user))
         End Function
 
@@ -50,8 +50,8 @@ Namespace AdoNet
             Dim sql As String =
                     " UPDATE [User]" &
                     "    SET UserName = @UserName," &
+                    "        EmployeeIdNo = @EmployeeIdNo," &
                     "        Password = @Password," &
-                    "        FullName = @FullName," &
                     "        SecurityGroupIdNo = @SecurityGroupIdNo" &
                     "  WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(user))
@@ -61,16 +61,16 @@ Namespace AdoNet
             New User() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .UserName = Extensions.AsString(reader("UserName")),
+            .EmployeeIdNo = Extensions.AsNullable(Of Int32)(reader("EmployeeIdNo")),
             .Password = Extensions.AsString(reader("Password")),
-            .FullName = Extensions.AsString(reader("FullName")),
             .SecurityGroupIdNo = Extensions.AsInt(Of Int16)(reader("SecurityGroupIdNo"))}
 
         Private Function Take(user As User) As Object()
             Return New Object() {
                                     "@IdNo", user.IdNo,
                                     "@UserName", user.UserName,
+                                    "@EmployeeIdNo", user.EmployeeIdNo,
                                     "@Password", user.Password,
-                                    "@FullName", user.FullName,
                                     "@SecurityGroupIdNo", user.SecurityGroupIdNo}
         End Function
 

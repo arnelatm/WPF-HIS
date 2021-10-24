@@ -64,9 +64,9 @@ Namespace AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, SecurityGroup) =
                                     Function(reader) _
             New SecurityGroup() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .Notes = Extensions.AsString(reader("Notes")),
-            .ParentIdNo = Extensions.AsNullable(Of Int32?)(reader("ParentIdNo")),
+            .ParentIdNo = Extensions.AsNullable(Of Int16?)(reader("ParentIdNo")),
             .SecurityGroupCode = Extensions.AsString(reader("SecurityGroupCode")),
             .SecurityGroupName = Extensions.AsString(reader("SecurityGroupName")),
             .SecurityGroupNameAra = Extensions.AsString(reader("SecurityGroupNameAra"))}
@@ -108,8 +108,8 @@ Namespace AdoNet
                                     Function(reader) _
             New GroupAccess() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .SecurityGroupIdNo = Extensions.AsInt(Of Int16?)(reader("SecurityGroupIdNo")),
-            .SecurityObjectIdNo = Extensions.AsInt(Of Int16?)(reader("SecurityObjectIdNo")),
+            .SecurityGroupIdNo = Extensions.AsInt(Of Int16)(reader("SecurityGroupIdNo")),
+            .SecurityObjectIdNo = Extensions.AsInt(Of Int32)(reader("SecurityObjectIdNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .Visible = Extensions.AsBool(reader("Visible")),
             .Editable = Extensions.AsBool(reader("Editable"))
@@ -118,7 +118,7 @@ Namespace AdoNet
         Private ReadOnly _makeSecurityObject As Func(Of IDataReader, SecurityObject) =
                              Function(reader) _
             New SecurityObject() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .SecurityObjectName = Extensions.AsString(reader("SecurityObjectName")),
             .SecurityObjectNameAra = Extensions.AsString(reader("SecurityObjectNameAra"))
             }

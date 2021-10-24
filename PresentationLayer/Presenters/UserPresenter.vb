@@ -17,9 +17,9 @@ Public Class UserPresenter(Of TM As New)
         MyBase.New(view)
         Service = New Service("User")
         TableName = "User"
-        SortOrderKey = "FullName"
-        TreeViewMainField = "FullName"
-        TreeViewSecondaryField = "UserName"
+        SortOrderKey = "UserName"
+        TreeViewMainField = "UserName"
+        TreeViewSecondaryField = "EmployeeIdNo"
     End Sub
 
     'Public Function Login() As Boolean
