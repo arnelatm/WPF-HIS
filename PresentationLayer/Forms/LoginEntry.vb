@@ -72,6 +72,8 @@ Public Class LoginEntry
 
     Public Property MainTableName As String = "User"
 
+    Public Property EmployeeIdNo As Int32? Implements IUserView.EmployeeIdNo
+
     ''' <summary>
     '''     Gets the password.
     ''' </summary>
@@ -94,10 +96,6 @@ Public Class LoginEntry
     End Property
 
     Public Property IdNo As Int32 Implements IUserView.IdNo
-
-    Public Property FullName As String Implements IUserView.FullName
-
-    Public Property FullNameAra As String Implements IUserView.FullNameAra
 
     Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
 

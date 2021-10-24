@@ -6,12 +6,12 @@ Public Interface IUserDao
     ' ** DAO Pattern
 
     ' gets a sorted list of all Users
-    Function GetAll(Optional ByVal sortExpression As String = "FullName ASC") As List(Of User)
+    Function GetAll(Optional ByVal sortExpression As String = "UserName ASC") As List(Of User)
 
     ' gets a specific User
     Function GetRecordByIdNo(idNo) As User
 
-    Function GetUserByName(fullName As String) As User
+    Function GetUserByName(userName As String) As User
 
     ' gets User given an order
     Function AddRecord(user As User) As Integer

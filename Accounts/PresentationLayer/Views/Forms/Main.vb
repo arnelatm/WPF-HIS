@@ -110,10 +110,9 @@ Namespace PresentationLayer.Views.Forms
             LoggedOut
         End Enum
 
-        Public Property FullName As String Implements IUserView.FullName
-        Public Property FullNameAra As String Implements IUserView.FullNameAra
         Public Property IdNo As Int32 Implements IUserView.IdNo
         Public Property SecurityGroupIdNo As Int16 Implements IUserView.SecurityGroupIdNo
+        Public Property EmployeeIdNo As Int32? Implements IUserView.EmployeeIdNo
         Public Property UserName As String Implements IUserView.UserName
 
         Public Property LogStatus As LoginStatus
