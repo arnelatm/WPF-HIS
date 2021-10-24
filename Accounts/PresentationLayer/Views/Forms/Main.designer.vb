@@ -110,6 +110,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemRecurringPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployeeLeave = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployeeAbsencesLate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HolidayEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItemClosePettyCashFund = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
@@ -178,7 +179,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HolidayEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemShiftSummaryEntry = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -526,7 +527,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemTransactions
         '
-        Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollMenu, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund})
+        Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollMenu, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund})
         Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
         resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
         '
@@ -620,6 +621,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemEmployeeAbsencesLate.Name = "ToolStripMenuItemEmployeeAbsencesLate"
         resources.ApplyResources(Me.ToolStripMenuItemEmployeeAbsencesLate, "ToolStripMenuItemEmployeeAbsencesLate")
+        '
+        'HolidayEntryToolStripMenuItem
+        '
+        Me.HolidayEntryToolStripMenuItem.Name = "HolidayEntryToolStripMenuItem"
+        resources.ApplyResources(Me.HolidayEntryToolStripMenuItem, "HolidayEntryToolStripMenuItem")
         '
         'ToolStripSeparator2
         '
@@ -976,10 +982,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'HolidayEntryToolStripMenuItem
+        'ToolStripMenuItemShiftSummaryEntry
         '
-        Me.HolidayEntryToolStripMenuItem.Name = "HolidayEntryToolStripMenuItem"
-        resources.ApplyResources(Me.HolidayEntryToolStripMenuItem, "HolidayEntryToolStripMenuItem")
+        Me.ToolStripMenuItemShiftSummaryEntry.Name = "ToolStripMenuItemShiftSummaryEntry"
+        resources.ApplyResources(Me.ToolStripMenuItemShiftSummaryEntry, "ToolStripMenuItemShiftSummaryEntry")
         '
         'Main
         '
@@ -1156,5 +1162,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemEmployeeLeave As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeAbsencesLate As ToolStripMenuItem
         Friend WithEvents HolidayEntryToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemShiftSummaryEntry As ToolStripMenuItem
     End Class
 End NameSpace
