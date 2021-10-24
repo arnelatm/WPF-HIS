@@ -609,6 +609,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of PettyCashClosingEntry, PettyCashClosingPresenter(Of PettyCashClosingModel))()
         End Sub
 
+        Private Sub ShiftSummaryEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemShiftSummaryEntry.Click
+            RunForm(Of ShiftSummaryEntry, ShiftSummaryPresenter(Of ShiftSummaryModel))()
+        End Sub
+
 #End Region
 
         Protected Sub SwitchUiLanguage(originalUi As Boolean)
@@ -1021,6 +1025,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub HolidayEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HolidayEntryToolStripMenuItem.Click
             RunForm(Of HolidayEntry, HolidayPresenter(Of HolidayModel))()
         End Sub
+
 
     End Class
 
