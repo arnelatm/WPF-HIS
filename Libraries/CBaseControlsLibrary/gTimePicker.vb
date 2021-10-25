@@ -4,6 +4,7 @@ Imports System.Drawing
 Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
 Imports System.Windows.Forms
+Imports AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl
 
 'Version 1.0 8-09
 'version 1.1 8-09 Fixed 24 hour time
@@ -64,6 +65,7 @@ Public Class gTimePicker
         Clear.Items.Add("Clear Time")
         ContextMenuStrip = Clear
         txbTime.ContextMenuStrip = Clear
+        oldTimeAmPM = TimeAMPM
     End Sub
 
 #End Region
@@ -164,13 +166,28 @@ Public Class gTimePicker
         gTime.Time = lTime
         tTime = lTime
         txbTime.Text = Time
+        oldTimeAmPM = gTime.TimeAMPM
     End Sub
+
+    Public Function GetMilitaryTime() As String
+        Dim cText As String
+        If gTime.TimeAMPM = eTimeAMPM.PM Then
+            Dim mHour As Int16
+            mHour = gTime.Hour + 12
+            cText = mHour.ToString().Trim().PadLeft(2, "0") + ":" + gTime.Minute.ToString().Trim().PadLeft(2, "0")
+        Else
+            cText = gTime.Time
+        End If
+        Return cText
+    End Function
 
     Public Sub SetAmPm(lAmPm As gTimePickerCntrl.eTimeAMPM)
         If txbTime.EditingMode Then
             gTime.TimeAMPM = lAmPm
         End If
     End Sub
+
+    Public Property oldTimeAmPM As gTimePickerCntrl.eTimeAMPM
 
     <Category("Appearance gTime")>
     <Description("Get or Set Time as AM or PM")>
@@ -730,11 +747,13 @@ Public Class gTimePicker
             g.DrawPath(New Pen(bcolor), gpButton)
             g.DrawPath(New Pen(bcolor), gpAMPM)
             Dim cAmPm As String
+            cAmPm = TimeAMPM.ToString()
             If txbTime.EditingMode Then
                 cAmPm = TimeAMPM.ToString()
             Else
-                cAmPm = OldTimeAmPm
+                cAmPm = oldTimeAmPM.ToString()
             End If
+            'oldTimeAmPM = TimeAMPM
             DrawRotatedText(g, IIf(_Font.Size < 10, cAmPm.Chars(0),
                 cAmPm.ToString).ToString,
                 New Rectangle(1, rectAMPM.Height, rectAMPM.Height, rectAMPM.Width),
