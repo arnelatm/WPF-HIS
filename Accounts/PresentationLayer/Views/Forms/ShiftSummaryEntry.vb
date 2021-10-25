@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = cboUserIdNo
-            _nfi = GlobalVariables.DefaultNumberFormatInfo            
+            _nfi = GlobalVariables.DefaultNumberFormatInfo
         End Sub
 
 #Region "Fields"
@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property UserIdNo As Integer Implements IShiftSummaryView.UserIdNo
+        Public Property UserIdNo As Int32 Implements IShiftSummaryView.UserIdNo
             Get
                 Return cboUserIdNo.GetNullableValue(Of Int32)
             End Get
@@ -87,7 +87,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Total As Decimal 
+        Public Property Total As Decimal
 
 #End Region
 
@@ -95,7 +95,7 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"Cash", txtCash},
-                {"Card", txtCard},
+                {"Cards", txtCard},
                 {"UserIdNo", cboUserIdNo},
                 {"DateEnd", dtpDateEnd},
                 {"IdNo", TxtIdNo},
@@ -104,7 +104,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("User", cboUserIdNo)
+            CreateDataSource("VUser", cboUserIdNo)
         End Sub
 
         Private Sub dtpDateStart_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateStart.Validated

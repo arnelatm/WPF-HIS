@@ -42,7 +42,7 @@ Public Class CCustomDateTimePicker
     Private _totalWidth As Integer = 0
     Private _buttonWidth As Integer = 21
     Private _btnCalendarTypeWidth As Integer = 15
-    Private _timeWidth As Integer = 70
+    Private _timeWidth As Integer = 90
     Private _showTime As Boolean = False
     Private _showLongDate As Boolean = False
     Private _editsAllowed As Boolean = False
@@ -197,7 +197,7 @@ Public Class CCustomDateTimePicker
         End Get
         Set
             _displayOnly = Value
-            txtTime.DisplayOnly = Value
+            'txtTime.DisplayOnly = Value
             txtDate.DisplayOnly = Value
             txtLongDate.DisplayOnly = Value
             If _displayOnly Then
@@ -223,7 +223,7 @@ Public Class CCustomDateTimePicker
             _readOnlyDp = Value
             txtDate.DisplayOnly = Value
             txtLongDate.DisplayOnly = Value
-            txtTime.DisplayOnly = Value
+            'txtTime.DisplayOnly = Value
         End Set
     End Property
 
@@ -233,7 +233,7 @@ Public Class CCustomDateTimePicker
         End Get
         Set
             _editingMode = Value
-            txtTime.EditingMode = Value
+            'txtTime.EditingMode = Value
             txtDate.EditingMode = Value
             txtLongDate.EditingMode = Value
             If Value Then
@@ -469,7 +469,7 @@ Public Class CCustomDateTimePicker
     '    txtTime.SelectionLength = 8
     'End Sub
 
-    Private Sub TxtTime_Validating(sender As Object, e As CancelEventArgs) Handles txtTime.Validating
+    Private Sub TxtTime_Validating(sender As Object, e As CancelEventArgs)
         If _
             (txtDate.Text = "" Or txtDate.Text.TrimEnd = EmptyMask) AndAlso
             (txtTime.Text = "  :  :" Or txtTime.Text = "") Then Exit Sub
@@ -477,8 +477,8 @@ Public Class CCustomDateTimePicker
         Dim match As New Regex(sPattern)
         Dim bIsMatch As Boolean = match.IsMatch(sender.text)
         If bIsMatch = False Then
-            txtTime.SelectionStart = 0
-            txtTime.SelectionLength = 8
+            'txtTime.SelectionStart = 0
+            'txtTime.SelectionLength = 8
             e.Cancel = True
         End If
     End Sub
@@ -686,7 +686,7 @@ Public Class CCustomDateTimePicker
         ToggleTargetCulture()
     End Sub
 
-    Private Sub OnValueChanged(sender As Object, e As EventArgs) Handles txtDate.TextChanged, txtTime.TextChanged, txtLongDate.TextChanged
+    Private Sub OnValueChanged(sender As Object, e As EventArgs) Handles txtDate.TextChanged, txtLongDate.TextChanged
         RaiseEvent ValueChanged(sender, e)
     End Sub
 

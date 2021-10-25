@@ -10,8 +10,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property DateCreated As DateTime?
         Property DateEnd As DateTime
         Property DateStart As DateTime
-        Property IdNo As Int32       
-        Property UserIdNo As Integer
+        Property IdNo As Int32
+        Property UserIdNo As Int32
 
     End Interface
 

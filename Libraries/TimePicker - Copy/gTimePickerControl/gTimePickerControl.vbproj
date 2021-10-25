@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0D580C02-7F61-4418-ACAB-A61A537B85CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>gTimePickerControl</RootNamespace>
+    <AssemblyName>gTimePickerControl</AssemblyName>
+    <MyType>Windows</MyType>
+    <OptionStrict>On</OptionStrict>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>gTimePickerControl.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>gTimePickerControl.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ColorComboBox.Designer.vb">
+      <DependentUpon>ColorComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ColorComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="gDateTimePicker.Designer.vb" />
+    <Compile Include="gDateTimePicker.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="gTimeBox.Designer.vb">
+      <DependentUpon>gTimeBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="gTimeBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="gTimePicker.Designer.vb">
+      <DependentUpon>gTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="gTimePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDowngTimeEditor.Designer.vb">
+      <DependentUpon>DropDowngTimeEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DropDowngTimeEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HatchStyleEditor.vb" />
+    <Compile Include="HatchStyleListBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="gTimePickerCntrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gTimePickerCntrl.Designer.vb">
+      <DependentUpon>gTimePickerCntrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="dlgTimeColors.Designer.vb">
+      <DependentUpon>dlgTimeColors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTimeColors.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NullableDateTimeDropDown.Designer.vb">
+      <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
+    </Compile>
+    <Compile Include="NullableDateTimeDropDown.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NullableDateTimeTypeEditor.vb" />
+    <Compile Include="TimeColors.vb" />
+    <Compile Include="TimeColorsUIEditor.vb" />
+    <Compile Include="TimeUIEditor.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gTimePicker.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>gTimePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gTimePickerCntrl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>gTimePickerCntrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropDowngTimeEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DropDowngTimeEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTimeColors.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>dlgTimeColors.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gTimePicker.bmp" />
+    <EmbeddedResource Include="gTimePickerCntrl.bmp" />
+    <EmbeddedResource Include="NullableDateTimeDropDown.resx">
+      <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
