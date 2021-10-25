@@ -571,7 +571,7 @@ Public Class CFormEntry
         Dim ctrl As Control
         For Each ctrl In FindControlRecursive(allCtrl, Me)
             If TypeOf ctrl Is IEntryControl Then
-                'If ctrl.Name = "cboPaymentMethod" Then
+                'If ctrl.Name = "dtpDateStart" Then
                 '    Debugger.Break()
                 'End If
                 SetPropertyValue(ctrl, "EditingMode", onOff)
@@ -605,14 +605,14 @@ Public Class CFormEntry
                 sw = 1
             End If
             GlobalVariables.RightToLeftLayout = True
-            RightToLeft = RightToLeft.No               
+            RightToLeft = RightToLeft.No
         Else
             If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
                 TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
                 sw = 1
             End If
             GlobalVariables.RightToLeftLayout = False
-            RightToLeft = RightToLeft.Yes           
+            RightToLeft = RightToLeft.Yes
         End If
         TranslateForm()
         If sw = 1 Then

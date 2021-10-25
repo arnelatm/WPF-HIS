@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1DF45376-8B34-40E8-9E01-8C4D83B3E56D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>gTimePickerTestForm.My.MyApplication</StartupObject>
-    <RootNamespace>gTimePickerTestForm</RootNamespace>
+    <StartupObject>AATM.Libraries.gTimePickerTestForm.My.MyApplication</StartupObject>
+    <RootNamespace>AATM.Libraries.gTimePickerTestForm</RootNamespace>
     <AssemblyName>gTimePickerTestForm</AssemblyName>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
@@ -73,6 +73,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>

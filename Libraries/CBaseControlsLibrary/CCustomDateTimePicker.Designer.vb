@@ -25,15 +25,15 @@ Partial Class CCustomDateTimePicker
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim TimeColors1 As AATM.Libraries.CBaseControlsLibrary.TimeColors = New AATM.Libraries.CBaseControlsLibrary.TimeColors()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.floDatePicker = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.txtLongDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtDate = New AATM.Libraries.CBaseControlsLibrary.CMaskedTextBox()
         Me.dtp = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.txtTime = New Telerik.WinControls.UI.RadTimePicker()
+        Me.txtTime = New AATM.Libraries.CBaseControlsLibrary.gTimePicker()
         Me.btnCalendarType = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.floDatePicker.SuspendLayout
-        CType(Me.txtTime,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'floDatePicker
@@ -47,7 +47,7 @@ Partial Class CCustomDateTimePicker
         Me.floDatePicker.Location = New System.Drawing.Point(0, 0)
         Me.floDatePicker.Margin = New System.Windows.Forms.Padding(0)
         Me.floDatePicker.Name = "floDatePicker"
-        Me.floDatePicker.Size = New System.Drawing.Size(448, 26)
+        Me.floDatePicker.Size = New System.Drawing.Size(326, 30)
         Me.floDatePicker.TabIndex = 21
         '
         'txtLongDate
@@ -135,14 +135,41 @@ Partial Class CCustomDateTimePicker
         '
         'txtTime
         '
-        Me.txtTime.Location = New System.Drawing.Point(209, 3)
-        Me.txtTime.MaxValue = New Date(9999, 12, 31, 23, 59, 59, 0)
-        Me.txtTime.MinValue = New Date(CType(0,Long))
+        Me.txtTime.ButtonForeColor = System.Drawing.Color.DarkSlateBlue
+        Me.txtTime.Hr24 = true
+        Me.txtTime.Location = New System.Drawing.Point(209, 0)
+        Me.txtTime.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
         Me.txtTime.Name = "txtTime"
-        Me.txtTime.Size = New System.Drawing.Size(90, 20)
-        Me.txtTime.TabIndex = 23
-        Me.txtTime.TabStop = false
-        Me.txtTime.Value = New Date(2021, 10, 25, 0, 0, 0, 0)
+        Me.txtTime.NullColorA = System.Drawing.Color.LightSteelBlue
+        Me.txtTime.NullColorB = System.Drawing.Color.White
+        Me.txtTime.NullHatchStyle = System.Drawing.Drawing2D.HatchStyle.WideDownwardDiagonal
+        Me.txtTime.NullTextColor = System.Drawing.Color.Black
+        Me.txtTime.NullTextInFront = false
+        Me.txtTime.ShowMidMins = true
+        Me.txtTime.Size = New System.Drawing.Size(75, 23)
+        Me.txtTime.TabIndex = 22
+        Me.txtTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.txtTime.TextBackColor = System.Drawing.Color.White
+        Me.txtTime.TextFont = New System.Drawing.Font("Arial", 10!)
+        Me.txtTime.TextForeColor = System.Drawing.Color.Black
+        Me.txtTime.Time = "07:00"
+        Me.txtTime.TimeAMPM = AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl.eTimeAMPM.AM
+        TimeColors1.BackGround = System.Drawing.Color.White
+        TimeColors1.Box = System.Drawing.Color.White
+        TimeColors1.DisplayTime = System.Drawing.Color.Red
+        TimeColors1.FaceInner = System.Drawing.Color.White
+        TimeColors1.FaceOuter = System.Drawing.Color.LightGoldenrodYellow
+        TimeColors1.FrameInner = System.Drawing.Color.AliceBlue
+        TimeColors1.FrameOuter = System.Drawing.Color.CornflowerBlue
+        TimeColors1.Hour = System.Drawing.Color.DarkBlue
+        TimeColors1.HourHand = System.Drawing.Color.DarkBlue
+        TimeColors1.Minute = System.Drawing.Color.Blue
+        TimeColors1.MinuteHand = System.Drawing.Color.OrangeRed
+        TimeColors1.MinutePlus = System.Drawing.Color.LightSlateGray
+        TimeColors1.TimeAMPM_OFF = System.Drawing.Color.LightSteelBlue
+        TimeColors1.TimeAMPM_ON = System.Drawing.Color.MediumBlue
+        Me.txtTime.TimeColors = TimeColors1
+        Me.txtTime.TrueHour = true
         '
         'btnCalendarType
         '
@@ -152,7 +179,7 @@ Partial Class CCustomDateTimePicker
         Me.btnCalendarType.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.btnCalendarType.ImageIndex = 0
         Me.btnCalendarType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCalendarType.Location = New System.Drawing.Point(302, 0)
+        Me.btnCalendarType.Location = New System.Drawing.Point(287, 0)
         Me.btnCalendarType.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCalendarType.Name = "btnCalendarType"
         Me.btnCalendarType.OriginalImageName = Nothing
@@ -169,10 +196,9 @@ Partial Class CCustomDateTimePicker
         Me.Controls.Add(Me.floDatePicker)
         Me.Margin = New System.Windows.Forms.Padding(1)
         Me.Name = "CCustomDateTimePicker"
-        Me.Size = New System.Drawing.Size(479, 100)
+        Me.Size = New System.Drawing.Size(326, 30)
         Me.floDatePicker.ResumeLayout(false)
         Me.floDatePicker.PerformLayout
-        CType(Me.txtTime,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub
@@ -183,5 +209,5 @@ End Sub
     Friend WithEvents txtDate As CMaskedTextBox
     Friend WithEvents floDatePicker As CFlowLayout
     Friend WithEvents btnCalendarType As CButton
-    Friend WithEvents txtTime As Telerik.WinControls.UI.RadTimePicker
+    Friend WithEvents txtTime As gTimePicker
 End Class

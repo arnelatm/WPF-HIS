@@ -1,13 +1,15 @@
 Imports System.Drawing.Drawing2D
 Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Drawing.Design
+Imports System.Windows.Forms
 
 'Version 1.0 9-09
 
 <System.Diagnostics.DebuggerStepThrough()>
 <ToolboxItem(False)>
 Public Class gTimeBox
-    Inherits TextBox
+    Inherits CTextBox
 
 #Region "NULL"
 
@@ -156,14 +158,5 @@ Public Class gTimeBox
     Private Sub gTimeBox_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.TextChanged
         If Text = "" Or Text.Length = 1 Then Invalidate()
     End Sub
-
-    Public Property currentAmPm As gTimePickerCntrl.eTimeAMPM
-        Get
-
-        End Get
-        Set(value As gTimePickerCntrl.eTimeAMPM)
-
-        End Set
-    End Property
 
 End Class

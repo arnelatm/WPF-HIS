@@ -22,7 +22,7 @@ Partial Class dlgTimeColors
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim TimeColors1 As gTimePickerControl.TimeColors = New gTimePickerControl.TimeColors
+        Dim TimeColors1 As TimeColors = New TimeColors
         Me.Label1 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.Label3 = New System.Windows.Forms.Label
@@ -39,23 +39,23 @@ Partial Class dlgTimeColors
         Me.Label13 = New System.Windows.Forms.Label
         Me.Label14 = New System.Windows.Forms.Label
         Me.Panel1 = New System.Windows.Forms.Panel
-        Me.gTimePickerColors = New gTimePickerControl.gTimePickerCntrl
+        Me.gTimePickerColors = New gTimePickerCntrl
         Me.Label15 = New System.Windows.Forms.Label
         Me.butExit = New System.Windows.Forms.Button
-        Me.ccbBackColor = New gTimePickerControl.ColorComboBox
-        Me.ccbMinuteNum = New gTimePickerControl.ColorComboBox
-        Me.ccbTimeAMPMOff = New gTimePickerControl.ColorComboBox
-        Me.ccbClockFrameInner = New gTimePickerControl.ColorComboBox
-        Me.ccbMinuteHand = New gTimePickerControl.ColorComboBox
-        Me.ccbTimeAMPMOn = New gTimePickerControl.ColorComboBox
-        Me.ccbClockFrameOuter = New gTimePickerControl.ColorComboBox
-        Me.ccbHourNum = New gTimePickerControl.ColorComboBox
-        Me.ccbDisplayTime = New gTimePickerControl.ColorComboBox
-        Me.ccbClockFaceInner = New gTimePickerControl.ColorComboBox
-        Me.ccbMinutePlus = New gTimePickerControl.ColorComboBox
-        Me.ccbHourHand = New gTimePickerControl.ColorComboBox
-        Me.ccbBox = New gTimePickerControl.ColorComboBox
-        Me.ccbClockFaceOuter = New gTimePickerControl.ColorComboBox
+        Me.ccbBackColor = New ColorComboBox
+        Me.ccbMinuteNum = New ColorComboBox
+        Me.ccbTimeAMPMOff = New ColorComboBox
+        Me.ccbClockFrameInner = New ColorComboBox
+        Me.ccbMinuteHand = New ColorComboBox
+        Me.ccbTimeAMPMOn = New ColorComboBox
+        Me.ccbClockFrameOuter = New ColorComboBox
+        Me.ccbHourNum = New ColorComboBox
+        Me.ccbDisplayTime = New ColorComboBox
+        Me.ccbClockFaceInner = New ColorComboBox
+        Me.ccbMinutePlus = New ColorComboBox
+        Me.ccbHourHand = New ColorComboBox
+        Me.ccbBox = New ColorComboBox
+        Me.ccbClockFaceOuter = New ColorComboBox
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -214,7 +214,7 @@ Partial Class dlgTimeColors
         Me.gTimePickerColors.Size = New System.Drawing.Size(214, 210)
         Me.gTimePickerColors.TabIndex = 0
         Me.gTimePickerColors.Time = "07:00"
-        Me.gTimePickerColors.TimeAMPM = gTimePickerControl.gTimePickerCntrl.eTimeAMPM.AM
+        Me.gTimePickerColors.TimeAMPM = gTimePickerCntrl.eTimeAMPM.AM
         TimeColors1.BackGround = System.Drawing.Color.White
         TimeColors1.Box = System.Drawing.Color.White
         TimeColors1.DisplayTime = System.Drawing.Color.Red
@@ -479,35 +479,35 @@ Partial Class dlgTimeColors
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents gTimePickerColors As gTimePickerControl.gTimePickerCntrl
-    Friend WithEvents ccbClockFaceOuter As gTimePickerControl.ColorComboBox
-    Friend WithEvents ccbClockFaceInner As gTimePickerControl.ColorComboBox
-    Friend WithEvents ccbClockFrameOuter As gTimePickerControl.ColorComboBox
-    Friend WithEvents ccbClockFrameInner As gTimePickerControl.ColorComboBox
+    Friend WithEvents gTimePickerColors As gTimePickerCntrl
+    Friend WithEvents ccbClockFaceOuter As ColorComboBox
+    Friend WithEvents ccbClockFaceInner As ColorComboBox
+    Friend WithEvents ccbClockFrameOuter As ColorComboBox
+    Friend WithEvents ccbClockFrameInner As ColorComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents ccbBox As gTimePickerControl.ColorComboBox
-    Friend WithEvents ccbDisplayTime As gTimePickerControl.ColorComboBox
-    Friend WithEvents ccbTimeAMPMOn As gTimePickerControl.ColorComboBox
-    Friend WithEvents ccbTimeAMPMOff As gTimePickerControl.ColorComboBox
+    Friend WithEvents ccbBox As ColorComboBox
+    Friend WithEvents ccbDisplayTime As ColorComboBox
+    Friend WithEvents ccbTimeAMPMOn As ColorComboBox
+    Friend WithEvents ccbTimeAMPMOff As ColorComboBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents ccbHourHand As gTimePickerControl.ColorComboBox
-    Friend WithEvents ccbHourNum As gTimePickerControl.ColorComboBox
-    Friend WithEvents ccbMinuteHand As gTimePickerControl.ColorComboBox
-    Friend WithEvents ccbMinuteNum As gTimePickerControl.ColorComboBox
+    Friend WithEvents ccbHourHand As ColorComboBox
+    Friend WithEvents ccbHourNum As ColorComboBox
+    Friend WithEvents ccbMinuteHand As ColorComboBox
+    Friend WithEvents ccbMinuteNum As ColorComboBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents cboColorTheme As System.Windows.Forms.ComboBox
-    Friend WithEvents ccbMinutePlus As gTimePickerControl.ColorComboBox
+    Friend WithEvents ccbMinutePlus As ColorComboBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents ccbBackColor As gTimePickerControl.ColorComboBox
+    Friend WithEvents ccbBackColor As ColorComboBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label15 As System.Windows.Forms.Label
