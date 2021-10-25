@@ -42,7 +42,7 @@ Public Class gTimePickerCntrl
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         sf.Alignment = StringAlignment.Center
         sf.LineAlignment = StringAlignment.Center
-        FaceRect = New Rectangle(14, 16, Width - 28, Width - 28)
+        FaceRect = New Rectangle(26, 26, Width - 52, Width - 52)
         Center = New Point(CInt((Width) / 2) + 1, CInt(Width / 2) + 1)
     End Sub
 
@@ -461,7 +461,7 @@ Public Property ShowMidMins() As Boolean
         e.Graphics.Clear(_TimeColors.BackGround)
 
         'Now
-        DrawRect(e.Graphics, New Rectangle(88, 2, 36, 20), _
+        DrawRect(e.Graphics, New Rectangle(lklNow.Left - 2, lklNow.Top - 5, lklNow.Width + 2, lklNow.Height + 6), _
              New PointF(0.2, 0), _
             New Single() { _
             0, _
@@ -471,7 +471,11 @@ Public Property ShowMidMins() As Boolean
             1})
 
         'Time
-        DrawRect(e.Graphics, New Rectangle(3, 2, 69, 30), _
+        'DrawRect(e.Graphics, New Rectangle(lklNull.Left - 2, _
+        '                         lklNull.Top - 3, _
+        '                         lklNull.Width + 2, _
+        '                         lklNull.Height + 6), _
+        DrawRect(e.Graphics, New Rectangle(1, 1, 69, 30), _
             New PointF(0.5, 0), _
             New Single() { _
             0, _
@@ -480,12 +484,8 @@ Public Property ShowMidMins() As Boolean
             0.35, _
             1})
 
-        'AMPM
-        DrawRect(e.Graphics, New Rectangle(Width - 74, _
-                                 2, _
-                                 68 + CInt(IIf(BorderStyle = _
-                                    Windows.Forms.BorderStyle.None, 2, 0)), _
-                                 30), _
+        'AM
+        DrawRect(e.Graphics, New Rectangle(lklAM.Left - 2, lklAM.Top - 5, lklAM.Width + 2, lklAM.Height + 6), _
             New PointF(0.5, 0), _
             New Single() { _
             0, _
@@ -493,16 +493,50 @@ Public Property ShowMidMins() As Boolean
             0.32, _
             0.35, _
             1})
+
+        'PM
+        DrawRect(e.Graphics, New Rectangle(lklPM.Left - 2, lklPM.Top - 5, lklPM.Width + 2, lklPM.Height + 6), _
+            New PointF(0.5, 0), _
+            New Single() { _
+            0, _
+            0.1, _
+            0.32, _
+            0.35, _
+            1})
+
+         'DrawRect(e.Graphics, New Rectangle(lklAM.Left -2, _
+         '                        lklAM.Top - 5, _
+         '                        lklPM.Right - lklAM.Left + 10, _
+         '                        lklAM.Height + 6), _
+         '   New PointF(0.5, 0), _
+         '   New Single() { _
+         '   0, _
+         '   0.1, _
+         '   0.32, _
+         '   0.35, _
+         '   1})
 
         'Null
         DrawRect(e.Graphics, New Rectangle(lklNull.Left - 2, _
-                                 lklNull.Top - 3, _
+                                 lklNull.Top - 5, _
                                  lklNull.Width + 2, _
                                  lklNull.Height + 6), _
              New PointF(0.4, 0), _
             New Single() { _
             0, _
             0.15, _
+            0.32, _
+            0.35, _
+            1})
+
+        DrawRect(e.Graphics, New Rectangle(lklOK.Left - 2, _
+                                 lklOK.Top - 5, _
+                                 lklOK.Width + 2, _
+                                 lklOK.Height + 6), _
+            New PointF(0.5, 0), _
+            New Single() { _
+            0, _
+            0.1, _
             0.32, _
             0.35, _
             1})
@@ -690,7 +724,7 @@ Public Property ShowMidMins() As Boolean
 
 #End Region
 
-#Region "LinkLables"
+#Region "LinkLabels"
 
     Private Sub lklNow_LinkClicked(ByVal sender As Object, ByVal e As LinkLabelLinkClickedEventArgs) Handles lklNow.LinkClicked
 
