@@ -13,13 +13,13 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Private Const FieldList = "Card," &
+        Private Const FieldList = "Cards," &
                                   "Cash," &
                                   "DateCreated," &
                                   "DateEnd," &
                                   "DateStart," &
                                   "IdNo," &
-                                  "UserIdNo"  
+                                  "UserIdNo"
 
         Public Function GetRecordByIdNo(idNo) As ShiftSummary Implements IDaoAll(Of ShiftSummary).GetRecordByIdNo
             Dim sql As String =
@@ -44,7 +44,7 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef ShiftSummary As ShiftSummary) As Integer Implements IDaoAll(Of ShiftSummary).UpdateRecord
             Dim sql As String =
                     "UPDATE [ShiftSummary] Set " &
-                    "Card = @Card, " &
+                    "Cards = @Cards, " &
                     "Cash = @Cash, " &
                     "DateEnd = @DateEnd, " &
                     "DateStart = @DateStart, " &
@@ -56,8 +56,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef ShiftSummary As ShiftSummary) As Integer Implements IDaoAll(Of ShiftSummary).AddRecord
             Dim sql As String =
                     "INSERT INTO [ShiftSummary] " &
-                    "(Cash,Card,DateEnd,DateStart,UserIdNo,) " &
-                    "VALUES (@Cash,@Card,@DateEnd,@DateStart,@UserIdNo)"
+                    "(Cash,Cards,DateEnd,DateStart,UserIdNo) " &
+                    "VALUES (@Cash,@Cards,@DateEnd,@DateStart,@UserIdNo)"
             Return Db.Insert(sql, Take(ShiftSummary))
         End Function
 
@@ -72,27 +72,27 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, ShiftSummary) =
                                     Function(reader) _
             New ShiftSummary() With {
-            .Card = Extensions.AsDecimal(reader("Card")),
+            .Cards = Extensions.AsDecimal(reader("Cards")),
             .Cash = Extensions.AsDecimal(reader("Cash")),
-            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
+            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
             .DateEnd = Extensions.AsDateTime(reader("DateEnd")),
             .DateStart = Extensions.AsDateTime(reader("DateStart")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .UserIdNo = Extensions.AsId(Of Int32)(reader("UserIdNo"))
+            .UserIdNo = Extensions.AsInt(Of Int32)(reader("UserIdNo"))
             }
 
         Public Sub New()
 
         End Sub
 
-        Private Function Take(ShiftSummary As ShiftSummary) As Object()
+        Private Function Take(shiftSummary As ShiftSummary) As Object()
             Return New Object() {
-                                    "@Card", ShiftSummary.Card,
-                                    "@Cash", ShiftSummary.Cash,
-                                    "@DateEnd", ShiftSummary.DateEnd,
-                                    "@DateStart", ShiftSummary.DateStart,
-                                    "@IdNo", ShiftSummary.IdNo,
-                                    "@UserIdNo", ShiftSummary.UserIdNo
+                                    "@Cards", shiftSummary.Cards,
+                                    "@Cash", shiftSummary.Cash,
+                                    "@DateEnd", shiftSummary.DateEnd,
+                                    "@DateStart", shiftSummary.DateStart,
+                                    "@IdNo", shiftSummary.IdNo,
+                                    "@UserIdNo", shiftSummary.UserIdNo
                                 }
         End Function
 

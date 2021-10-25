@@ -15,14 +15,14 @@ Namespace BusinessLayer
             'If createRules Then
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("UserIdNo"))
-                AddRule(New ValidateRequired("StartDate"))
-                AddRule(New ValidateRequired("EndDate"))
-                AddRule(New ValidateCompare("StartDate", "EndDate", ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
+                AddRule(New ValidateRequired("DateStart"))
+                AddRule(New ValidateRequired("DateEnd"))
+                AddRule(New ValidateCompare("DateStart", "DateEnd", ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
             End If
 
         End Sub
 
-        Public Property Card As Decimal
+        Public Property Cards As Decimal
         Public Property Cash As Decimal
         Public Property DateCreated As DateTime?
         Public Property DateEnd As DateTime

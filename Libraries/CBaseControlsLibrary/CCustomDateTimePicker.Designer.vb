@@ -30,9 +30,10 @@ Partial Class CCustomDateTimePicker
         Me.txtLongDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtDate = New AATM.Libraries.CBaseControlsLibrary.CMaskedTextBox()
         Me.dtp = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.txtTime = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtTime = New Telerik.WinControls.UI.RadTimePicker()
         Me.btnCalendarType = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.floDatePicker.SuspendLayout
+        CType(Me.txtTime,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'floDatePicker
@@ -46,7 +47,7 @@ Partial Class CCustomDateTimePicker
         Me.floDatePicker.Location = New System.Drawing.Point(0, 0)
         Me.floDatePicker.Margin = New System.Windows.Forms.Padding(0)
         Me.floDatePicker.Name = "floDatePicker"
-        Me.floDatePicker.Size = New System.Drawing.Size(296, 24)
+        Me.floDatePicker.Size = New System.Drawing.Size(448, 26)
         Me.floDatePicker.TabIndex = 21
         '
         'txtLongDate
@@ -76,12 +77,14 @@ Partial Class CCustomDateTimePicker
         Me.txtLongDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtLongDate.Size = New System.Drawing.Size(110, 23)
         Me.txtLongDate.TabIndex = 16
+        Me.txtLongDate.Translatable = false
         '
         'txtDate
         '
         Me.txtDate.BackColor = System.Drawing.Color.White
         Me.txtDate.BegFindValue = Nothing
         Me.txtDate.DateField = false
+        Me.txtDate.DateTimePickerParent = Nothing
         Me.txtDate.DefaultValue = Nothing
         Me.txtDate.DisplayOnly = false
         Me.txtDate.EditingMode = true
@@ -94,6 +97,7 @@ Partial Class CCustomDateTimePicker
         Me.txtDate.FindEnabled = false
         Me.txtDate.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtDate.ForeColor = System.Drawing.Color.Black
+        Me.txtDate.LinkedLabel = Nothing
         Me.txtDate.Location = New System.Drawing.Point(110, 0)
         Me.txtDate.Margin = New System.Windows.Forms.Padding(0)
         Me.txtDate.MaximumValue = Nothing
@@ -104,6 +108,7 @@ Partial Class CCustomDateTimePicker
         Me.txtDate.SecurityKey = Nothing
         Me.txtDate.Size = New System.Drawing.Size(75, 23)
         Me.txtDate.TabIndex = 15
+        Me.txtDate.Translatable = false
         Me.txtDate.ValueIsMandatory = false
         Me.txtDate.ValueIsNullable = true
         Me.txtDate.ValueIsNumeric = false
@@ -130,32 +135,14 @@ Partial Class CCustomDateTimePicker
         '
         'txtTime
         '
-        Me.txtTime.BackColor = System.Drawing.Color.White
-        Me.txtTime.BegFindValue = Nothing
-        Me.txtTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTime.ComputedValue = false
-        Me.txtTime.CustomFormat = Nothing
-        Me.txtTime.DataBoundControl = true
-        Me.txtTime.EditingMode = true
-        Me.txtTime.EndFindValue = Nothing
-        Me.txtTime.FieldDescription = Nothing
-        Me.txtTime.FieldName = Nothing
-        Me.txtTime.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtTime.FindEnabled = true
-        Me.txtTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtTime.ForeColor = System.Drawing.Color.Black
-        Me.txtTime.LinkedLabel = Nothing
-        Me.txtTime.Location = New System.Drawing.Point(206, 0)
-        Me.txtTime.Margin = New System.Windows.Forms.Padding(0)
-        Me.txtTime.MaximumValue = Nothing
-        Me.txtTime.MinimumValue = Nothing
+        Me.txtTime.Location = New System.Drawing.Point(209, 3)
+        Me.txtTime.MaxValue = New Date(9999, 12, 31, 23, 59, 59, 0)
+        Me.txtTime.MinValue = New Date(CType(0,Long))
         Me.txtTime.Name = "txtTime"
-        Me.txtTime.OldValue = Nothing
-        Me.txtTime.ReadOnly = true
-        Me.txtTime.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtTime.Size = New System.Drawing.Size(70, 23)
-        Me.txtTime.TabIndex = 17
-        Me.txtTime.ValueIsNullable = true
+        Me.txtTime.Size = New System.Drawing.Size(90, 20)
+        Me.txtTime.TabIndex = 23
+        Me.txtTime.TabStop = false
+        Me.txtTime.Value = New Date(2021, 10, 25, 0, 0, 0, 0)
         '
         'btnCalendarType
         '
@@ -165,7 +152,7 @@ Partial Class CCustomDateTimePicker
         Me.btnCalendarType.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.btnCalendarType.ImageIndex = 0
         Me.btnCalendarType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCalendarType.Location = New System.Drawing.Point(276, 0)
+        Me.btnCalendarType.Location = New System.Drawing.Point(302, 0)
         Me.btnCalendarType.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCalendarType.Name = "btnCalendarType"
         Me.btnCalendarType.OriginalImageName = Nothing
@@ -182,9 +169,10 @@ Partial Class CCustomDateTimePicker
         Me.Controls.Add(Me.floDatePicker)
         Me.Margin = New System.Windows.Forms.Padding(1)
         Me.Name = "CCustomDateTimePicker"
-        Me.Size = New System.Drawing.Size(293, 25)
+        Me.Size = New System.Drawing.Size(479, 100)
         Me.floDatePicker.ResumeLayout(false)
         Me.floDatePicker.PerformLayout
+        CType(Me.txtTime,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub
@@ -193,7 +181,7 @@ End Sub
     Friend WithEvents ToolTip1 As Windows.Forms.ToolTip
     Friend WithEvents txtLongDate As CTextBox
     Friend WithEvents txtDate As CMaskedTextBox
-    Friend WithEvents txtTime As CTextBox
     Friend WithEvents floDatePicker As CFlowLayout
     Friend WithEvents btnCalendarType As CButton
+    Friend WithEvents txtTime As Telerik.WinControls.UI.RadTimePicker
 End Class
