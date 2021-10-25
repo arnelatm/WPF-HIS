@@ -1,8 +1,9 @@
-Imports gTimePickerControl.gTimePickerCntrl
 Imports System.Drawing.Drawing2D
 Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
+Imports System.Windows.Forms
 
 'Version 1.0 8-09
 'version 1.1 8-09 Fixed 24 hour time
@@ -63,7 +64,6 @@ Public Class gTimePicker
         Clear.Items.Add("Clear Time")
         ContextMenuStrip = Clear
         txbTime.ContextMenuStrip = Clear
-        oldTimeAmPM = TimeAMPM
     End Sub
 
 #End Region
@@ -160,7 +160,17 @@ Public Class gTimePicker
         End Set
     End Property
 
-    Public Property oldTimeAmPM As gTimePickerCntrl.eTimeAMPM
+    Public Sub SetTime(lTime As String)
+        gTime.Time = lTime
+        tTime = lTime
+        txbTime.Text = Time
+    End Sub
+
+    Public Sub SetAmPm(lAmPm As gTimePickerCntrl.eTimeAMPM)
+        If txbTime.EditingMode Then
+            gTime.TimeAMPM = lAmPm
+        End If
+    End Sub
 
     <Category("Appearance gTime")>
     <Description("Get or Set Time as AM or PM")>
@@ -578,8 +588,10 @@ Public Class gTimePicker
 
     Private Sub popup_Closed(ByVal sender As Object,
   ByVal e As ToolStripDropDownClosedEventArgs)
-        txbTime.Text = Time
-        If tTime <> gTime.Time Then RaiseEvent TimePicked(Me)
+        If txbTime.EditingMode Then
+            txbTime.Text = Time
+            If tTime <> gTime.Time Then RaiseEvent TimePicked(Me)
+        End If
         Invalidate()
     End Sub
 
@@ -717,8 +729,14 @@ Public Class gTimePicker
             g.DrawPath(pn, gp)
             g.DrawPath(New Pen(bcolor), gpButton)
             g.DrawPath(New Pen(bcolor), gpAMPM)
-            DrawRotatedText(g, IIf(_Font.Size < 10, TimeAMPM.ToString.Chars(0),
-                TimeAMPM.ToString).ToString,
+            Dim cAmPm As String
+            If txbTime.EditingMode Then
+                cAmPm = TimeAMPM.ToString()
+            Else
+                cAmPm = OldTimeAmPm
+            End If
+            DrawRotatedText(g, IIf(_Font.Size < 10, cAmPm.Chars(0),
+                cAmPm.ToString).ToString,
                 New Rectangle(1, rectAMPM.Height, rectAMPM.Height, rectAMPM.Width),
                 -90, New Font("Arial", 10, FontStyle.Bold), fcolor)
 

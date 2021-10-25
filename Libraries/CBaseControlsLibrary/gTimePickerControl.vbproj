@@ -179,6 +179,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
+      <Project>{f991561a-78f8-487c-a873-e6436b41d801}</Project>
+      <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

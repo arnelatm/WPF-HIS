@@ -42,7 +42,7 @@ Public Class CCustomDateTimePicker
     Private _totalWidth As Integer = 0
     Private _buttonWidth As Integer = 21
     Private _btnCalendarTypeWidth As Integer = 15
-    Private _timeWidth As Integer = 90
+    Private _timeWidth As Integer = 70
     Private _showTime As Boolean = False
     Private _showLongDate As Boolean = False
     Private _editsAllowed As Boolean = False
@@ -197,7 +197,7 @@ Public Class CCustomDateTimePicker
         End Get
         Set
             _displayOnly = Value
-            'txtTime.DisplayOnly = Value
+            txtTime.txbTime.DisplayOnly = Value
             txtDate.DisplayOnly = Value
             txtLongDate.DisplayOnly = Value
             If _displayOnly Then
@@ -373,7 +373,7 @@ Public Class CCustomDateTimePicker
             txtTime.Width = _timeWidth
             txtTime.Visible = True
             If Value IsNot Nothing Then
-                txtTime.Text = String.Format("{0:HH:mm:ss}", CType(Value, DateTime).TimeOfDay.ToString)
+                txtTime.Text = String.Format("{0:HH:mm}", Value)
             End If
         Else
             'padWidth = padWidth + 2
@@ -428,7 +428,7 @@ Public Class CCustomDateTimePicker
             Try
                 If txtDate.Text <> "" And txtDate.Text.TrimEnd() <> EmptyMask Then
                     If txtTime.Visible Then
-                        retVal = Convert.ToDateTime(txtDate.Text + " " + txtTime.Text, _targetCulture)
+                        retVal = Convert.ToDateTime(txtDate.Text + " " + txtTime.Time, _targetCulture)
                     Else
                         retVal = Convert.ToDateTime(txtDate.Text, _targetCulture)
                     End If
@@ -444,11 +444,11 @@ Public Class CCustomDateTimePicker
             Try
                 If Not IsNothing(dValue) Then
                     txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(dValue, _targetCulture))
-                    txtTime.Text = String.Format("{0:HH:mm:ss}", CType(dValue, DateTime).TimeOfDay.ToString)
+                    Dim cTime As String = String.Format("{0:HH:mm}", dValue)
+                    txtTime.SetTime(cTime)
                 Else
                     txtDate.Text = ""
                     txtTime.Text = ""
-                    ''dtp.Value = dValue
                 End If
                 Refresh()
             Catch ex As Exception

@@ -268,6 +268,12 @@
     <Compile Include="CNewTabControl.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ColorComboBox.designer.vb">
+      <DependentUpon>ColorComboBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ColorComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ComboIcon.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -314,10 +320,22 @@
     <Compile Include="dgvfooter.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="dlgTimeColors.designer.vb">
+      <DependentUpon>dlgTimeColors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTimeColors.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DropdownColorBlender.designer.vb">
       <DependentUpon>DropdownColorBlender.vb</DependentUpon>
     </Compile>
     <Compile Include="DropdownColorBlender.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDowngTimeEditor.designer.vb">
+      <DependentUpon>DropDowngTimeEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DropDowngTimeEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="EcbComboBoxCell.vb" />
@@ -337,7 +355,35 @@
     <Compile Include="DisplayProgressForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="gDateTimePicker.designer.vb">
+      <DependentUpon>gDateTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="gDateTimePicker.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GregorianDates.vb" />
+    <Compile Include="gTimeBox.designer.vb">
+      <DependentUpon>gTimeBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="gTimeBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="gTimePicker.designer.vb">
+      <DependentUpon>gTimePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="gTimePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gTimePickerCntrl.designer.vb">
+      <DependentUpon>gTimePickerCntrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="gTimePickerCntrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HatchStyleEditor.vb" />
+    <Compile Include="HatchStyleListBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="HijriDates.vb" />
     <Compile Include="ICDataGridView.vb" />
     <Compile Include="ISequencedData.vb" />
@@ -357,6 +403,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="NullableDateTimeDropDown.designer.vb">
+      <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
+    </Compile>
+    <Compile Include="NullableDateTimeDropDown.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NullableDateTimeTypeEditor.vb" />
     <Compile Include="PadGlyph.vb" />
     <Compile Include="SplashScreen1.Designer.vb">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
@@ -393,6 +446,9 @@
     <Compile Include="tdpGregorian.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="TimeColors.vb" />
+    <Compile Include="TimeColorsUIEditor.vb" />
+    <Compile Include="TimeUIEditor.vb" />
     <Compile Include="TxtComboBox.Designer.vb">
       <DependentUpon>TxtComboBox.vb</DependentUpon>
     </Compile>
@@ -486,6 +542,9 @@
     <EmbeddedResource Include="CTreeViewOld.resx">
       <DependentUpon>CTreeViewOld.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTimeColors.resx">
+      <DependentUpon>dlgTimeColors.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DropdownColorBlender.resx">
       <DependentUpon>DropdownColorBlender.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -493,12 +552,24 @@
     <EmbeddedResource Include="DisplayProgressForm.resx">
       <DependentUpon>DisplayProgressForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DropDowngTimeEditor.resx">
+      <DependentUpon>DropDowngTimeEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gTimePicker.resx">
+      <DependentUpon>gTimePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gTimePickerCntrl.resx">
+      <DependentUpon>gTimePickerCntrl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NullableDateTimeDropDown.resx">
+      <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SplashScreen1.resx">
       <DependentUpon>SplashScreen1.vb</DependentUpon>

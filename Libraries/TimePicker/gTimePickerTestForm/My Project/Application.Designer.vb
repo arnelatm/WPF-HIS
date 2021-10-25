@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.gTimePickerTestForm.Form1
+            Me.MainForm = Global.AATM.Libraries.gTimePickerTestForm.Form1
         End Sub
     End Class
 End Namespace
