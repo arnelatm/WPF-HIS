@@ -202,10 +202,10 @@ Public Class CCustomDateTimePicker
             txtLongDate.DisplayOnly = Value
             If _displayOnly Then
                 dtp.Visible = False
-                btnCalendarType.Visible = False
+                'btnCalendarType.Visible = False
             Else
                 dtp.Visible = True
-                btnCalendarType.Visible = True
+                'btnCalendarType.Visible = True
             End If
         End Set
     End Property
@@ -246,10 +246,12 @@ Public Class CCustomDateTimePicker
                     ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
+                'btnCalendarType.Visible = True
             Else
                 ReadOnlyDp = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                'btnCalendarType.Visible = False
             End If
         End Set
     End Property
@@ -381,7 +383,7 @@ Public Class CCustomDateTimePicker
             txtTime.Width = 0
             txtTime.Visible = False
         End If
-        Dim totalWidth As Integer = txtLongDate.Width + txtDate.Width + IIf(DisplayOnly, 0, dtp.Width) + txtTime.Width + IIf(DisplayOnly, 0, btnCalendarType.Width)
+        Dim totalWidth As Integer = 10 + txtLongDate.Width + txtDate.Width + IIf(DisplayOnly, 0, dtp.Width) + txtTime.Width + IIf(DisplayOnly, 0, btnCalendarType.Width)
         Width = totalWidth
         floDatePicker.Width = totalWidth
     End Sub
@@ -428,7 +430,7 @@ Public Class CCustomDateTimePicker
             Try
                 If txtDate.Text <> "" And txtDate.Text.TrimEnd() <> EmptyMask Then
                     If txtTime.Visible Then
-                        retVal = Convert.ToDateTime(txtDate.Text + " " + txtTime.Time, _targetCulture)
+                        retVal = Convert.ToDateTime(txtDate.Text + " " + txtTime.GetMilitaryTime() , _targetCulture)
                     Else
                         retVal = Convert.ToDateTime(txtDate.Text, _targetCulture)
                     End If

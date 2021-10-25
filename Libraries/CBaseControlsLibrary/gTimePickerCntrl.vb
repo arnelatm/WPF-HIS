@@ -220,6 +220,9 @@ Public Shadows Property BackgroundImageLayout() As Boolean
     End Enum
 
     Private _TimeAMPM As eTimeAMPM = eTimeAMPM.AM
+
+    Private _OldTimeAMPM As eTimeAMPM = eTimeAMPM.AM
+
     <Category("Appearance gTime")> _
     <Description("Get or Set The AM PM value")> _
     Public Property TimeAMPM() As eTimeAMPM

@@ -136,7 +136,7 @@ Partial Class CCustomDateTimePicker
         'txtTime
         '
         Me.txtTime.ButtonForeColor = System.Drawing.Color.DarkSlateBlue
-        Me.txtTime.Hr24 = true
+        Me.txtTime.Hr24 = false
         Me.txtTime.Location = New System.Drawing.Point(209, 0)
         Me.txtTime.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
         Me.txtTime.Name = "txtTime"
@@ -145,6 +145,7 @@ Partial Class CCustomDateTimePicker
         Me.txtTime.NullHatchStyle = System.Drawing.Drawing2D.HatchStyle.WideDownwardDiagonal
         Me.txtTime.NullTextColor = System.Drawing.Color.Black
         Me.txtTime.NullTextInFront = false
+        Me.txtTime.oldTimeAmPM = AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl.eTimeAMPM.AM
         Me.txtTime.ShowMidMins = true
         Me.txtTime.Size = New System.Drawing.Size(75, 23)
         Me.txtTime.TabIndex = 22

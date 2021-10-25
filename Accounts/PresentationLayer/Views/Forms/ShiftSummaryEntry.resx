@@ -277,7 +277,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpDateStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 25</value>
+    <value>353, 25</value>
   </data>
   <data name="dtpDateStart.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -337,7 +337,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpDateEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 25</value>
+    <value>353, 25</value>
   </data>
   <data name="dtpDateEnd.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -405,6 +405,9 @@
   <data name="txtCash.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
+  <data name="txtCash.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="&gt;&gt;txtCash.Name" xml:space="preserve">
     <value>txtCash</value>
   </data>
@@ -468,6 +471,9 @@
   <data name="txtCard.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
+  <data name="txtCard.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="&gt;&gt;txtCard.Name" xml:space="preserve">
     <value>txtCard</value>
   </data>
@@ -530,6 +536,9 @@
   </data>
   <data name="txtTotal.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="txtTotal.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;txtTotal.Name" xml:space="preserve">
     <value>txtTotal</value>
