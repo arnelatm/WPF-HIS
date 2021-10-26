@@ -113,12 +113,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\gTimePickerControl\gTimePickerControl.vbproj">
-      <Project>{0D580C02-7F61-4418-ACAB-A61A537B85CA}</Project>
-      <Name>gTimePickerControl</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
