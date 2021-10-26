@@ -32,11 +32,11 @@ Partial Class gTimePickerCntrl
         'lklAM
         '
         Me.lklAM.BackColor = System.Drawing.Color.Transparent
-        Me.lklAM.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lklAM.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.lklAM.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.lklAM.Location = New System.Drawing.Point(102, 219)
+        Me.lklAM.Location = New System.Drawing.Point(67, 4)
         Me.lklAM.Name = "lklAM"
-        Me.lklAM.Size = New System.Drawing.Size(30, 14)
+        Me.lklAM.Size = New System.Drawing.Size(25, 14)
         Me.lklAM.TabIndex = 13
         Me.lklAM.TabStop = true
         Me.lklAM.Text = "AM"
@@ -45,12 +45,12 @@ Partial Class gTimePickerCntrl
         'lklPM
         '
         Me.lklPM.BackColor = System.Drawing.Color.Transparent
-        Me.lklPM.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lklPM.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.lklPM.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.lklPM.LinkColor = System.Drawing.Color.LightSteelBlue
-        Me.lklPM.Location = New System.Drawing.Point(138, 219)
+        Me.lklPM.Location = New System.Drawing.Point(68, 17)
         Me.lklPM.Name = "lklPM"
-        Me.lklPM.Size = New System.Drawing.Size(30, 14)
+        Me.lklPM.Size = New System.Drawing.Size(25, 14)
         Me.lklPM.TabIndex = 14
         Me.lklPM.TabStop = true
         Me.lklPM.Text = "PM"
@@ -59,10 +59,10 @@ Partial Class gTimePickerCntrl
         'lklNow
         '
         Me.lklNow.BackColor = System.Drawing.Color.Transparent
-        Me.lklNow.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lklNow.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.lklNow.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.lklNow.LinkColor = System.Drawing.Color.Blue
-        Me.lklNow.Location = New System.Drawing.Point(55, 219)
+        Me.lklNow.Location = New System.Drawing.Point(96, 219)
         Me.lklNow.Name = "lklNow"
         Me.lklNow.Size = New System.Drawing.Size(41, 14)
         Me.lklNow.TabIndex = 15
@@ -73,7 +73,7 @@ Partial Class gTimePickerCntrl
         'lklNull
         '
         Me.lklNull.BackColor = System.Drawing.Color.Transparent
-        Me.lklNull.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lklNull.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.lklNull.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.lklNull.LinkColor = System.Drawing.Color.Blue
         Me.lklNull.Location = New System.Drawing.Point(14, 219)
@@ -87,10 +87,10 @@ Partial Class gTimePickerCntrl
         'lklOK
         '
         Me.lklOK.BackColor = System.Drawing.Color.Transparent
-        Me.lklOK.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lklOK.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.lklOK.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.lklOK.LinkColor = System.Drawing.Color.Blue
-        Me.lklOK.Location = New System.Drawing.Point(186, 219)
+        Me.lklOK.Location = New System.Drawing.Point(195, 219)
         Me.lklOK.Name = "lklOK"
         Me.lklOK.Size = New System.Drawing.Size(29, 14)
         Me.lklOK.TabIndex = 17

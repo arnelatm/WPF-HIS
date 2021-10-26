@@ -119,6 +119,10 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub txtCash_TextChanged(sender As Object, e As EventArgs) Handles txtCash.TextChanged, txtCard.TextChanged
+            txtTotal.Text = FormatMoney(Cash + Cards)
+        End Sub
+
     End Class
 
 End Namespace

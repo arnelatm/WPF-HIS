@@ -6,12 +6,13 @@ Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
 
-<ToolboxItem(True), ToolboxBitmap(GetType(gTimePickerCntrl), "gTimePickerControl.gTimePickerCntrl.bmp")> _
-<Designer(GetType(gTimePickerCtrlDesigner))> _
-<DefaultEvent("TimePicked")> _
+<ToolboxItem(True), ToolboxBitmap(GetType(gTimePickerCntrl), "gTimePickerControl.gTimePickerCntrl.bmp")>
+<Designer(GetType(gTimePickerCtrlDesigner))>
+<DefaultEvent("TimePicked")>
 Public Class gTimePickerCntrl
 
 #Region "Initialize"
+
     Public Event TimePicked(ByVal sender As Object)
 
     Private ReadOnly sf As New StringFormat()
@@ -19,17 +20,20 @@ Public Class gTimePickerCntrl
     Private ReadOnly FaceRect As Rectangle
     Private IsHourRadius As Boolean
 
-    Public cBlue As TimeColors = New TimeColors("RoyalBlue", "LightBlue", "DarkBlue", "SkyBlue", _
-                "AliceBlue", "Gold", "PaleGoldenrod", "Lavender", "LightGray", "CornflowerBlue", _
+    Public cBlue As TimeColors = New TimeColors("RoyalBlue", "LightBlue", "DarkBlue", "SkyBlue",
+                "AliceBlue", "Gold", "PaleGoldenrod", "Lavender", "LightGray", "CornflowerBlue",
                  "DarkBlue", "CornflowerBlue", "RoyalBlue", "LightCyan")
-    Public cRed As TimeColors = New TimeColors("Red", "LightCoral", "Coral", "MistyRose", "Brown", _
-                "Maroon", "Red", "Brown", "Firebrick", "IndianRed", "MistyRose", "RosyBrown", _
+
+    Public cRed As TimeColors = New TimeColors("Red", "LightCoral", "Coral", "MistyRose", "Brown",
+                "Maroon", "Red", "Brown", "Firebrick", "IndianRed", "MistyRose", "RosyBrown",
                 "MistyRose", "MistyRose")
-    Public cGreen As TimeColors = New TimeColors("DarkGreen", "PaleGreen", "PaleGreen", "Honeydew", _
-                "Honeydew", "SeaGreen", "DarkGreen", "Green", "ForestGreen", "DarkSeaGreen", _
+
+    Public cGreen As TimeColors = New TimeColors("DarkGreen", "PaleGreen", "PaleGreen", "Honeydew",
+                "Honeydew", "SeaGreen", "DarkGreen", "Green", "ForestGreen", "DarkSeaGreen",
                  "DarkGreen", "DarkSeaGreen", "ForestGreen", "DarkSeaGreen")
-    Public cYellow As TimeColors = New TimeColors("DarkGoldenrod", "LemonChiffon", "Khaki", "Ivory", _
-                "LemonChiffon", "Sienna", "Sienna", "DarkGoldenrod", "DarkGoldenrod", "BurlyWood", _
+
+    Public cYellow As TimeColors = New TimeColors("DarkGoldenrod", "LemonChiffon", "Khaki", "Ivory",
+                "LemonChiffon", "Sienna", "Sienna", "DarkGoldenrod", "DarkGoldenrod", "BurlyWood",
                 "Sienna", "Tan", "Sienna", "Ivory")
 
     Public Sub New()
@@ -42,7 +46,8 @@ Public Class gTimePickerCntrl
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         sf.Alignment = StringAlignment.Center
         sf.LineAlignment = StringAlignment.Center
-        FaceRect = New Rectangle(26, 26, Width - 52, Width - 52)
+        FaceRect = New Rectangle(30, 30, Width - 60, Width - 60)
+        'FaceRect = New Rectangle(26, 26, Width - 52, Width - 52)
         Center = New Point(CInt((Width) / 2) + 1, CInt(Width / 2) + 1)
     End Sub
 
@@ -52,53 +57,53 @@ Public Class gTimePickerCntrl
 
 #Region "Hidden"
 
-    <Browsable(False)> _
-<DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-Public Shadows Property BackColor() As Boolean
+    <Browsable(False)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+    Public Shadows Property BackColor() As Boolean
         Get
-            Return False 'always false 
+            Return False 'always false
         End Get
-        Set(ByVal value As Boolean) 'empty 
+        Set(ByVal value As Boolean) 'empty
         End Set
     End Property
 
-    <Browsable(False)> _
-<DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-Public Shadows Property ForeColor() As Boolean
+    <Browsable(False)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+    Public Shadows Property ForeColor() As Boolean
         Get
-            Return False 'always false 
+            Return False 'always false
         End Get
-        Set(ByVal value As Boolean) 'empty 
+        Set(ByVal value As Boolean) 'empty
         End Set
     End Property
 
-    <Browsable(False)> _
-<DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-Public Shadows Property Font() As Boolean
+    <Browsable(False)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+    Public Shadows Property Font() As Boolean
         Get
-            Return False 'always false 
+            Return False 'always false
         End Get
-        Set(ByVal value As Boolean) 'empty 
+        Set(ByVal value As Boolean) 'empty
         End Set
     End Property
 
-    <Browsable(False)> _
-<DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-Public Shadows Property BackgroundImage() As Boolean
+    <Browsable(False)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+    Public Shadows Property BackgroundImage() As Boolean
         Get
-            Return False 'always false 
+            Return False 'always false
         End Get
-        Set(ByVal value As Boolean) 'empty 
+        Set(ByVal value As Boolean) 'empty
         End Set
     End Property
 
-    <Browsable(False)> _
-<DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-Public Shadows Property BackgroundImageLayout() As Boolean
+    <Browsable(False)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+    Public Shadows Property BackgroundImageLayout() As Boolean
         Get
-            Return False 'always false 
+            Return False 'always false
         End Get
-        Set(ByVal value As Boolean) 'empty 
+        Set(ByVal value As Boolean) 'empty
         End Set
     End Property
 
@@ -107,11 +112,12 @@ Public Shadows Property BackgroundImageLayout() As Boolean
 #Region "Time"
 
     Private _Time As String = "07:00"
-    <Editor(GetType(TimeUIEditor), GetType(UITypeEditor))> _
-    <Category("Appearance gTime")> _
-    <Description("Get or Set The Time value")> _
-    <RefreshProperties(RefreshProperties.All)> _
-   Public Property Time() As String
+
+    <Editor(GetType(TimeUIEditor), GetType(UITypeEditor))>
+    <Category("Appearance gTime")>
+    <Description("Get or Set The Time value")>
+    <RefreshProperties(RefreshProperties.All)>
+    Public Property Time() As String
         Get
             Return _Time
         End Get
@@ -120,7 +126,7 @@ Public Shadows Property BackgroundImageLayout() As Boolean
 
             If Not IsNothing(value) And value <> String.Empty Then
 
-                'Check if value is just the hour 
+                'Check if value is just the hour
                 If Regex.IsMatch(value, "^[0-9]{1}$|^[0-1]{1}[0-9]{1}$|^[2]{1}[0-3]{1}$") Then
                     value = value & ":00"
                 End If
@@ -137,7 +143,7 @@ Public Shadows Property BackgroundImageLayout() As Boolean
                 Else
                     ap = _TimeAMPM
 
-                    'Check if a P, PM, A or AM is on the End 
+                    'Check if a P, PM, A or AM is on the End
                     'Update TimeAMPM Prop and remove from value
                     If value.ToUpper.EndsWith("P") Or value.ToUpper.EndsWith("PM") Then
                         value = value.ToUpper.Trim(CChar("M")).Trim(CChar("P")).Trim
@@ -148,13 +154,13 @@ Public Shadows Property BackgroundImageLayout() As Boolean
                     End If
                 End If
 
-                'Check if value is a valid time with or without a colon 
+                'Check if value is a valid time with or without a colon
                 If Regex.IsMatch(value, "^(([0-9])|([0-1][0-9])|([2][0-3])):?([0-5][0-9])$") Then
                     'Check and add leading '0'
                     If Regex.IsMatch(value, "^(([0-9])):?([0-5][0-9])$") Then value = "0" & value
                     'Add a Colon if missing
                     If Regex.IsMatch(value, "^(([0-1][0-9])|([2][0-3]))([0-5][0-9])$") Then
-                        _Time = String.Format("{0}:{1}", value.Substring(0, 2), _
+                        _Time = String.Format("{0}:{1}", value.Substring(0, 2),
                             value.Substring(2, 2))
                     Else
                         _Time = value
@@ -171,7 +177,7 @@ Public Shadows Property BackgroundImageLayout() As Boolean
                         End If
                     Else
                         If Hour() > 12 Then
-                            _Time = String.Format("{0:0#}:{1:0#}", _
+                            _Time = String.Format("{0:0#}:{1:0#}",
                                 Hour() - 12, Minute)
                             TimeAMPM = eTimeAMPM.PM
                         ElseIf Hour() = 0 Then
@@ -181,7 +187,6 @@ Public Shadows Property BackgroundImageLayout() As Boolean
 
                     End If
                 End If
-
             Else
                 _Time = String.Empty
 
@@ -223,8 +228,8 @@ Public Shadows Property BackgroundImageLayout() As Boolean
 
     Private _OldTimeAMPM As eTimeAMPM = eTimeAMPM.AM
 
-    <Category("Appearance gTime")> _
-    <Description("Get or Set The AM PM value")> _
+    <Category("Appearance gTime")>
+    <Description("Get or Set The AM PM value")>
     Public Property TimeAMPM() As eTimeAMPM
         Get
             Return _TimeAMPM
@@ -252,8 +257,9 @@ Public Shadows Property BackgroundImageLayout() As Boolean
     End Property
 
     Private _Hr24 As Boolean = True
-    <Category("Appearance gTime")> _
-   <Description("Get or Set Time as 12 or 24 hour")> _
+
+    <Category("Appearance gTime")>
+    <Description("Get or Set Time as 12 or 24 hour")>
     Public Property Hr24() As Boolean
         Get
             Return _Hr24
@@ -286,9 +292,10 @@ Public Shadows Property BackgroundImageLayout() As Boolean
     End Property
 
     Private _TrueHour As Boolean = True
-    <Category("Appearance gTime")> _
-   <Description("Get or Set if the Hour hand shows true clock position or stays pointing at the chosen hour regardless of the minute.")> _
-   Public Property TrueHour() As Boolean
+
+    <Category("Appearance gTime")>
+    <Description("Get or Set if the Hour hand shows true clock position or stays pointing at the chosen hour regardless of the minute.")>
+    Public Property TrueHour() As Boolean
         Get
             Return _TrueHour
         End Get
@@ -297,7 +304,6 @@ Public Shadows Property BackgroundImageLayout() As Boolean
             Invalidate()
         End Set
     End Property
-
 
     Public Function ToStringAMPM() As String
         If _Time = "" Then
@@ -316,9 +322,10 @@ Public Shadows Property BackgroundImageLayout() As Boolean
     End Function
 
     Private _showMidMins As Boolean = True
-    <Category("Appearance gTime")> _
-    <Description("Get or Set if the dots between fifth minutes show")> _
-Public Property ShowMidMins() As Boolean
+
+    <Category("Appearance gTime")>
+    <Description("Get or Set if the dots between fifth minutes show")>
+    Public Property ShowMidMins() As Boolean
         Get
             Return _showMidMins
         End Get
@@ -327,15 +334,17 @@ Public Property ShowMidMins() As Boolean
             Invalidate()
         End Set
     End Property
+
 #End Region
 
 #Region "TimeColors"
 
     Private _TimeColors As TimeColors = New TimeColors
-    <Editor(GetType(TimeColorsUIEditor), GetType(UITypeEditor))> _
-    <Category("Appearance Color")> _
-    <Description("Get or Set Color Scheme for the control")> _
-    <RefreshProperties(RefreshProperties.Repaint)> _
+
+    <Editor(GetType(TimeColorsUIEditor), GetType(UITypeEditor))>
+    <Category("Appearance Color")>
+    <Description("Get or Set Color Scheme for the control")>
+    <RefreshProperties(RefreshProperties.Repaint)>
     Public Property TimeColors() As TimeColors
         Get
             Return _TimeColors
@@ -360,14 +369,14 @@ Public Property ShowMidMins() As Boolean
 
 #Region "Mouse"
 
-    Private Sub gTimePickerCntrl_MouseDown(ByVal sender As Object, _
+    Private Sub gTimePickerCntrl_MouseDown(ByVal sender As Object,
       ByVal e As MouseEventArgs) Handles Me.MouseDown
 
         'Determine how far from center
-        Dim radius As Integer = CInt( _
-            Math.Round( _
-            Math.Sqrt( _
-                Math.Pow(CDbl(Center.X - e.Location.X), 2) + _
+        Dim radius As Integer = CInt(
+            Math.Round(
+            Math.Sqrt(
+                Math.Pow(CDbl(Center.X - e.Location.X), 2) +
                 Math.Pow(CDbl(Center.Y - e.Location.Y), 2)) _
                 , 2))
         If radius <= 55 Then
@@ -423,11 +432,11 @@ Public Property ShowMidMins() As Boolean
 
 #Region "Position Helpers"
 
-    Private Shared Function GetAngle(ByVal Origin As PointF, _
+    Private Shared Function GetAngle(ByVal Origin As PointF,
                                 ByVal XYPoint As PointF) As Integer
 
-        Dim angleRadians As Double = Math.Atan2( _
-                                        (-(XYPoint.Y - Origin.Y)), _
+        Dim angleRadians As Double = Math.Atan2(
+                                        (-(XYPoint.Y - Origin.Y)),
                                         ((XYPoint.X - Origin.X)))
         Dim translatedAngle As Integer
         Dim angle As Integer = CInt(Math.Round(angleRadians * (180 / Math.PI)))
@@ -443,7 +452,7 @@ Public Property ShowMidMins() As Boolean
 
     End Function
 
-    Public Shared Function GetPoint(ByVal ptCenter As Point, _
+    Public Shared Function GetPoint(ByVal ptCenter As Point,
         ByVal nRadius As Integer, ByVal fAngle As Single) As Point
 
         Dim x As Single = CSng(Math.Cos(2 * Math.PI * fAngle / 360)) * nRadius + ptCenter.X
@@ -451,6 +460,7 @@ Public Property ShowMidMins() As Boolean
         Return New Point(CInt(Fix(x)), CInt(Fix(y)))
 
     End Function
+
 #End Region
 
 #Region "Paint"
@@ -461,84 +471,81 @@ Public Property ShowMidMins() As Boolean
         e.Graphics.Clear(_TimeColors.BackGround)
 
         'Now
-        DrawRect(e.Graphics, New Rectangle(lklNow.Left - 2, lklNow.Top - 5, lklNow.Width + 2, lklNow.Height + 6), _
-             New PointF(0.2, 0), _
-            New Single() { _
-            0, _
-            0.15, _
-            0.32, _
-            0.35, _
+        DrawRect(e.Graphics, New Rectangle(lklNow.Left - 2, lklNow.Top - 5, lklNow.Width + 2, lklNow.Height + 6),
+             New PointF(0.1, 0),
+            New Single() {
+            0,
+            0.1,
+            0.1,
+            0.1,
             1})
 
         'Time
-        'DrawRect(e.Graphics, New Rectangle(lklNull.Left - 2, _
-        '                         lklNull.Top - 3, _
-        '                         lklNull.Width + 2, _
-        '                         lklNull.Height + 6), _
-        DrawRect(e.Graphics, New Rectangle(1, 1, 69, 30), _
-            New PointF(0.5, 0), _
-            New Single() { _
-            0, _
-            0.1, _
-            0.32, _
-            0.35, _
+        DrawRect(e.Graphics, New Rectangle(1, 1, 65, 30),
+            New PointF(0.1, 0),
+            New Single() {
+            0,
+            0.1,
+            0.1,
+            0.1,
             1})
 
-        'AM
-        DrawRect(e.Graphics, New Rectangle(lklAM.Left - 2, lklAM.Top - 5, lklAM.Width + 2, lklAM.Height + 6), _
-            New PointF(0.5, 0), _
-            New Single() { _
-            0, _
-            0.1, _
-            0.32, _
-            0.35, _
+        'AM PM
+        DrawRect(e.Graphics, New Rectangle(lklAM.Left - 1, lklAM.Top - 3, lklAM.Width + 2, lklAM.Height + lklPM.Height + 2),
+            New PointF(0.1, 0),
+            New Single() {
+            0,
+            0.1,
+            0.1,
+            0.1,
             1})
 
-        'PM
-        DrawRect(e.Graphics, New Rectangle(lklPM.Left - 2, lklPM.Top - 5, lklPM.Width + 2, lklPM.Height + 6), _
-            New PointF(0.5, 0), _
-            New Single() { _
-            0, _
-            0.1, _
-            0.32, _
-            0.35, _
-            1})
+        ''PM
+        'DrawRect(e.Graphics, New Rectangle(lklPM.Left - 2, lklPM.Top - 5, lklPM.Width + 2, lklPM.Height + 6), _
+        '    New PointF(0.5, 0), _
+        '    New Single() { _
+        '    0, _
+        '    0.1, _
+        '    0.32, _
+        '    0.35, _
+        '    1})
 
-         'DrawRect(e.Graphics, New Rectangle(lklAM.Left -2, _
-         '                        lklAM.Top - 5, _
-         '                        lklPM.Right - lklAM.Left + 10, _
-         '                        lklAM.Height + 6), _
-         '   New PointF(0.5, 0), _
-         '   New Single() { _
-         '   0, _
-         '   0.1, _
-         '   0.32, _
-         '   0.35, _
-         '   1})
+        'DrawRect(e.Graphics, New Rectangle(lklAM.Left -2, _
+        '                        lklAM.Top - 5, _
+        '                        lklPM.Right - lklAM.Left + 10, _
+        '                        lklAM.Height + 6), _
+        '   New PointF(0.5, 0), _
+        '   New Single() { _
+        '   0, _
+        '   0.1, _
+        '   0.32, _
+        '   0.35, _
+        '   1})
 
         'Null
-        DrawRect(e.Graphics, New Rectangle(lklNull.Left - 2, _
-                                 lklNull.Top - 5, _
-                                 lklNull.Width + 2, _
-                                 lklNull.Height + 6), _
-             New PointF(0.4, 0), _
-            New Single() { _
-            0, _
-            0.15, _
-            0.32, _
-            0.35, _
+        DrawRect(e.Graphics, New Rectangle(lklNull.Left - 2,
+                                 lklNull.Top - 5,
+                                 lklNull.Width + 2,
+                                 lklNull.Height + 6),
+             New PointF(0.4, 0),
+            New Single() {
+            0,
+            0.1,
+            0.1,
+            0.1,
             1})
 
-        DrawRect(e.Graphics, New Rectangle(lklOK.Left - 2, _
-                                 lklOK.Top - 5, _
-                                 lklOK.Width + 2, _
-                                 lklOK.Height + 6), _
-            New PointF(0.5, 0), _
-            New Single() { _
-            0, _
-            0.1, _
-            0.32, _
-            0.35, _
+        'OK
+        DrawRect(e.Graphics, New Rectangle(lklOK.Left - 2,
+                                 lklOK.Top - 5,
+                                 lklOK.Width + 2,
+                                 lklOK.Height + 6),
+            New PointF(0.5, 0),
+            New Single() {
+            0,
+            0.1,
+            0.1,
+            0.1,
             1})
 
         DrawClockFace(e.Graphics, FaceRect)
@@ -548,7 +555,7 @@ Public Property ShowMidMins() As Boolean
         DrawMinutes(e.Graphics)
 
         'Draw Hands
-        Using HrPen As New Pen(TimeColors.HourHand, 4), _
+        Using HrPen As New Pen(TimeColors.HourHand, 4),
             MinPen As New Pen(TimeColors.MinuteHand, 2)
 
             HrPen.StartCap = Drawing2D.LineCap.RoundAnchor
@@ -561,14 +568,14 @@ Public Property ShowMidMins() As Boolean
                 e.Graphics.FillEllipse(New SolidBrush(MinPen.Color), Center.X - 2, Center.Y - 2, 4, 4)
             Else
 
-                Dim HourAngle As Single = 90 - (CSng(30 * (Val(_Time.Substring(0, 2))) + _
+                Dim HourAngle As Single = 90 - (CSng(30 * (Val(_Time.Substring(0, 2))) +
                     CSng(IIf(TrueHour, Val(_Time.Substring(3, 2)) / 2, 0))))
                 Dim MinAngle As Single = 90 - CSng(6 * Val(_Time.Substring(3, 2)))
 
                 e.Graphics.DrawLine(HrPen, Center, GetPoint(Center, 35, HourAngle))
                 e.Graphics.DrawLine(MinPen, Center, GetPoint(Center, 60, MinAngle))
 
-                e.Graphics.DrawString(_Time, New Font("Arial", 14, FontStyle.Bold), _
+                e.Graphics.DrawString(_Time, New Font("Arial", 14, FontStyle.Bold),
                     New SolidBrush(TimeColors.DisplayTime), New Rectangle(7, 8, 59, 21), sf)
             End If
 
@@ -589,10 +596,10 @@ Public Property ShowMidMins() As Boolean
                 hText = CStr(Val(hText) - 12)
             End If
 
-            DrawClockNumber(g, _
-                hText, _
-                47, _
-                HourAngle, _
+            DrawClockNumber(g,
+                hText,
+                47,
+                HourAngle,
                 TimeColors.Hour, 10)
         Next
     End Sub
@@ -601,11 +608,11 @@ Public Property ShowMidMins() As Boolean
 
         If _showMidMins Then
 
-            For Each i As Integer In New Integer() { _
-                1, 2, 3, 4, 6, 7, 8, 9, 11, 12, _
-                13, 14, 16, 17, 18, 19, 21, 22, 23, 24, _
-                26, 27, 28, 29, 31, 32, 33, 34, 36, 37, _
-                38, 39, 41, 42, 43, 44, 46, 47, 48, 49, _
+            For Each i As Integer In New Integer() {
+                1, 2, 3, 4, 6, 7, 8, 9, 11, 12,
+                13, 14, 16, 17, 18, 19, 21, 22, 23, 24,
+                26, 27, 28, 29, 31, 32, 33, 34, 36, 37,
+                38, 39, 41, 42, 43, 44, 46, 47, 48, 49,
                 51, 52, 53, 54, 56, 57, 58, 59}
 
                 Dim pt As Point = GetPoint(Center, 70, 90 - CSng(6 * i))
@@ -618,28 +625,27 @@ Public Property ShowMidMins() As Boolean
         End If
 
         For Each i As Integer In New Integer() {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
-            DrawClockNumber(g, _
-                CStr(i * 5), _
-                70, _
-                90 - CSng(30 * i), _
+            DrawClockNumber(g,
+                CStr(i * 5),
+                70,
+                90 - CSng(30 * i),
                 TimeColors.Minute, 10)
         Next
-
 
     End Sub
 
     Public Sub DrawClockNumber(ByRef g As Graphics, ByVal NumberText As String, ByVal radius As Integer, ByVal nAngle As Single, ByVal nColor As Color, ByVal FontSize As Integer)
         Using fn As New Font("Arial", FontSize, FontStyle.Bold)
             Dim pt As Point = GetPoint(Center, radius, nAngle)
-            TextRenderer.DrawText(g, _
-                NumberText, _
-                fn, _
-                New Rectangle( _
-                    CInt(pt.X - 8), _
-                    CInt(pt.Y - 7), _
-                    18, _
-                    16), _
-                nColor, _
+            TextRenderer.DrawText(g,
+                NumberText,
+                fn,
+                New Rectangle(
+                    CInt(pt.X - 8),
+                    CInt(pt.Y - 7),
+                    18,
+                    16),
+                nColor,
                 TextFormatFlags.HorizontalCenter)
 
         End Using
@@ -653,20 +659,20 @@ Public Property ShowMidMins() As Boolean
         Dim blend As ColorBlend = New ColorBlend()
 
         'Add the Array of Color
-        Dim bColors As Color() = New Color() { _
-            TimeColors.FrameOuter, _
-            TimeColors.FrameInner, _
-            TimeColors.FrameOuter, _
-            TimeColors.FaceOuter, _
+        Dim bColors As Color() = New Color() {
+            TimeColors.FrameOuter,
+            TimeColors.FrameInner,
+            TimeColors.FrameOuter,
+            TimeColors.FaceOuter,
             TimeColors.FaceInner}
         blend.Colors = bColors
 
         'Add the Array Single (0-1) colorpoints to place each Color
-        Dim bPts As Single() = New Single() { _
-            0, _
-            0.0408, _
-            0.082, _
-            0.109, _
+        Dim bPts As Single() = New Single() {
+            0,
+            0.0408,
+            0.082,
+            0.109,
             1}
         blend.Positions = bPts
 
@@ -693,11 +699,11 @@ Public Property ShowMidMins() As Boolean
         Dim blend As ColorBlend = New ColorBlend()
 
         'Add the Array of Color
-        Dim bColors As Color() = New Color() { _
-            TimeColors.FrameOuter, _
-            TimeColors.FrameInner, _
-            TimeColors.FrameOuter, _
-            TimeColors.Box, _
+        Dim bColors As Color() = New Color() {
+            TimeColors.FrameOuter,
+            TimeColors.FrameInner,
+            TimeColors.FrameOuter,
+            TimeColors.Box,
             TimeColors.Box}
         blend.Colors = bColors
 
@@ -760,6 +766,7 @@ Public Property ShowMidMins() As Boolean
         lklAM.LinkColor = TimeColors.TimeAMPM_OFF
         lklPM.LinkColor = TimeColors.TimeAMPM_ON
     End Sub
+
 #End Region
 
 End Class
@@ -776,4 +783,3 @@ Class gTimePickerCtrlDesigner
     End Property
 
 End Class
-
