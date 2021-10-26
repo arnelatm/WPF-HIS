@@ -199,15 +199,15 @@ Namespace PresentationLayer.Presenters
                 counter += 1
                 If counter <= oldJournalItems.Count() Then
                     View.JournalItems.Item(counter - 1).AccountIdNo = pAccountIdNo
-                    View.JournalItems.Item(counter - 1).Debit = debitAmount
-                    View.JournalItems.Item(counter - 1).Credit = creditAmount
+                    View.JournalItems.Item(counter - 1).Debit = If(debitAmount-creditAmount < 0,0,debitAmount-creditAmount)
+                    View.JournalItems.Item(counter - 1).Credit = If(creditAmount-debitAmount > 0,creditAmount-debitAmount,0)
                     View.JournalItems.Item(counter - 1).Sequence = counter
                     View.JournalItems.Item(counter - 1).Notes = RTrim(LTrim(note)) + IIf(note = noteAra, "", "-" + noteAra)
                 Else
                     Dim ji As New JournalItemView With {
                             .AccountIdNo = pAccountIdNo,
-                            .Credit = creditAmount,
-                            .Debit = debitAmount,
+                            .Credit = If(creditAmount-debitAmount > 0,creditAmount-debitAmount,0),
+                            .Debit = If(debitAmount-creditAmount < 0,0,debitAmount-creditAmount),
                             .IdNo = 0,
                             .JournalIdNo = View.IdNo,
                             .Notes = Trim(note + IIf(note = noteAra, "", "-" + noteAra)),

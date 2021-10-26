@@ -277,7 +277,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpDateStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 25</value>
+    <value>196, 25</value>
   </data>
   <data name="dtpDateStart.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -337,7 +337,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpDateEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 25</value>
+    <value>196, 25</value>
   </data>
   <data name="dtpDateEnd.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
