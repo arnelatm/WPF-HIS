@@ -203,7 +203,7 @@ Public Class CCustomDateTimePicker
             If _displayOnly Then
                 dtp.Visible = False
             Else
-                dtp.Visible = True
+                dtp.Visible = True                
             End If
             If ShowTime Then
                 txtTime.Visible = True
@@ -394,9 +394,9 @@ Public Class CCustomDateTimePicker
             txtTime.Width = 0
             txtTime.Visible = False
         End If
-        Dim totalWidth As Integer = 11 + If(ShowLongDate, _longDateWidth, 0) + txtDate.Width + IIf(DisplayOnly, 0, dtp.Width) + If(ShowTime, _timeWidth, 0) + btnCalendarType.Width
-        Width = totalWidth 
-        floDatePicker.Width = totalWidth 
+        Dim totalWidth As Integer = If(ShowLongDate,txtLongDate.Width,0) + txtDate.Width + IIf(DisplayOnly, 0, dtp.Width) + if(ShowTime,_timeWidth,0) + IIf(DisplayOnly, 0, btnCalendarType.Width)
+        Width = totalWidth
+        'Size = New Size(totalWidth, Size.Height)
     End Sub
 
     Public Property TargetCalendar As Calendar
@@ -703,7 +703,7 @@ Public Class CCustomDateTimePicker
         RaiseEvent ValueChanged(sender, e)
     End Sub
 
-    Private Sub dtpReconciliationDate_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged
+    Private Sub dtp_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged
         txtDate.Enabled = Me.Enabled
         txtLongDate.Enabled = Me.Enabled
         txtTime.Enabled = Me.Enabled
@@ -734,6 +734,10 @@ Public Class CCustomDateTimePicker
         txtDate.FieldName = Name.Substring(3)
         txtDate.DateField = True
     End Sub
+
+    'Private Sub floDatePicker_Resize(sender As Object, e As EventArgs) 
+    '    SetupDisplayWidths()
+    'End Sub
 
     'Protected Sub ContextHandler(sender As Object, e As EventArgs)
 
