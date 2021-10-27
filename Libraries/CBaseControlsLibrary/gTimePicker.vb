@@ -164,14 +164,14 @@ Public Class gTimePicker
         End Set
     End Property
 
-    Public Sub SetTime(lTime As String)
-        gTime.Time = lTime
-        tTime = lTime
+    Public Sub SetTime(lMilitaryTime As String)
+        gTime.Time = lMilitaryTime
+        tTime = lMilitaryTime
         txbTime.Text = Time
-        If gTime.Hour() >= 12 Then
-            SetAmPm(eTimeAMPM.pm)
-        Else
+        If lMilitaryTime < "12:00" Then
             SetAmPm(eTimeAMPM.am)
+        Else
+            SetAmPm(eTimeAMPM.pm)
         End If
         oldTimeAmPM = gTime.TimeAMPM
     End Sub
