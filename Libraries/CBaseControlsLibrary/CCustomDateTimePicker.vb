@@ -11,6 +11,7 @@ Public Class CCustomDateTimePicker
 
     Private _dropDownClicked = False
     Public EmptyMask As String
+    Private _value As DateTime?
     Private ReadOnly _origCulture As CultureInfo
     Private _ltrCulture As CultureInfo
     Public MaxLength As Integer
@@ -459,11 +460,18 @@ Public Class CCustomDateTimePicker
                     txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(dValue, _targetCulture))
                     Dim cTime As String = String.Format("{0:HH:mm}", dValue)
                     txtTime.SetTime(cTime)
+                    If cTime < "12:00" Then
+                        txtTime.Text = IIf(cTime.Substring(0,2)="00","12"+cTime.Substring(2),cTime)
+                    else
+                        Dim cPmTime = (Int(cTime.Substring(0,2))-12).ToString().PadLeft(2,"0") + cTime.Substring(2)  
+                        txtTime.Text = IIf(cPmTime.Substring(0,2)="00","12"+cPmTime.Substring(2),cPmTime)
+                    End If   
+                    
                 Else
                     txtDate.Text = ""
-                    txtTime.Text = ""
-                End If
-                Refresh()
+                    txtTime.Text = "00:00"
+                End If               
+                _value = dValue
             Catch ex As Exception
                 Beep()
                 ''dtp.Value = dtp.MinDate

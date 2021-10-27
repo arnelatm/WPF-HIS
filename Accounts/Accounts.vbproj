@@ -1437,8 +1437,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="appMarcelo.config" />
     <None Include="app.config" />
+    <None Include="appMarcelo.config" />
+    <None Include="appOkMarceloPC.config" />
     <None Include="app222.config" />
     <None Include="appIspadmin2.config" />
     <None Include="appMarcelo-Dell.config" />
