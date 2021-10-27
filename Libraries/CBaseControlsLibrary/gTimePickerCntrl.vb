@@ -135,9 +135,9 @@ Public Class gTimePickerCntrl
 
                 If Hr24 Then
                     If Val(value.Replace(":", String.Empty)) >= 1200 Then
-                        ap = eTimeAMPM.PM
+                        ap = eTimeAMPM.pm
                     Else
-                        ap = eTimeAMPM.AM
+                        ap = eTimeAMPM.am
                     End If
                     value = Format(Val(value.Replace(":", String.Empty)), "0000")
                 Else
@@ -147,10 +147,10 @@ Public Class gTimePickerCntrl
                     'Update TimeAMPM Prop and remove from value
                     If value.ToUpper.EndsWith("P") Or value.ToUpper.EndsWith("PM") Then
                         value = value.ToUpper.Trim(CChar("M")).Trim(CChar("P")).Trim
-                        ap = eTimeAMPM.PM
+                        ap = eTimeAMPM.pm
                     ElseIf value.ToUpper.EndsWith("A") Or value.ToUpper.EndsWith("AM") Then
                         value = value.ToUpper.Trim(CChar("M")).Trim(CChar("A")).Trim
-                        ap = eTimeAMPM.AM
+                        ap = eTimeAMPM.am
                     End If
                 End If
 
@@ -171,15 +171,15 @@ Public Class gTimePickerCntrl
                     'Adjust for 12 or 24 hour time
                     If Hr24 Then
                         If Hour() >= 12 Then
-                            TimeAMPM = eTimeAMPM.PM
+                            TimeAMPM = eTimeAMPM.pm
                         Else
-                            TimeAMPM = eTimeAMPM.AM
+                            TimeAMPM = eTimeAMPM.am
                         End If
                     Else
                         If Hour() > 12 Then
                             _Time = String.Format("{0:0#}:{1:0#}",
                                 Hour() - 12, Minute)
-                            TimeAMPM = eTimeAMPM.PM
+                            TimeAMPM = eTimeAMPM.pm
                         ElseIf Hour() = 0 Then
                             _Time = String.Format("12:{0:0#}", Minute)
 
@@ -205,6 +205,14 @@ Public Class gTimePickerCntrl
         End Try
     End Function
 
+    Public Function MilitaryHour() As Integer
+        Try
+            Return CInt(_Time.Substring(0, 2))
+        Catch ex As Exception
+            Return 0
+        End Try
+    End Function
+
     Public Function Minute() As Integer
         Try
             Return CInt(_Time.Substring(3, 2))
@@ -220,13 +228,13 @@ Public Class gTimePickerCntrl
     End Sub
 
     Enum eTimeAMPM
-        AM
-        PM
+        am
+        pm
     End Enum
 
-    Private _TimeAMPM As eTimeAMPM = eTimeAMPM.AM
+    Private _TimeAMPM As eTimeAMPM = eTimeAMPM.am
 
-    Private _OldTimeAMPM As eTimeAMPM = eTimeAMPM.AM
+    Private _OldTimeAMPM As eTimeAMPM = eTimeAMPM.am
 
     <Category("Appearance gTime")>
     <Description("Get or Set The AM PM value")>
@@ -239,13 +247,13 @@ Public Class gTimePickerCntrl
 
             _TimeAMPM = value
             If _Hr24 Then
-                If _TimeAMPM = eTimeAMPM.AM AndAlso Hour() >= 12 Then
+                If _TimeAMPM = eTimeAMPM.am AndAlso Hour() >= 12 Then
                     _Time = String.Format("{0:0#}:{1:0#}", Hour() - 12, Minute)
-                ElseIf _TimeAMPM = eTimeAMPM.PM AndAlso Hour() < 12 Then
+                ElseIf _TimeAMPM = eTimeAMPM.pm AndAlso Hour() < 12 Then
                     _Time = String.Format("{0:0#}:{1:0#}", Hour() + 12, Minute)
                 End If
             End If
-            If _TimeAMPM = eTimeAMPM.AM Then
+            If _TimeAMPM = eTimeAMPM.am Then
                 AM()
             Else
                 PM()
@@ -268,20 +276,20 @@ Public Class gTimePickerCntrl
             Dim tTime As String = _Time
             _Hr24 = value
             If _Hr24 Then
-                If _TimeAMPM = eTimeAMPM.AM AndAlso Hour() >= 12 Then
+                If _TimeAMPM = eTimeAMPM.am AndAlso Hour() >= 12 Then
                     _Time = String.Format("{0:0#}:{1:0#}", Hour() - 12, Minute)
-                ElseIf _TimeAMPM = eTimeAMPM.PM AndAlso Hour() < 12 Then
+                ElseIf _TimeAMPM = eTimeAMPM.pm AndAlso Hour() < 12 Then
                     _Time = String.Format("{0:0#}:{1:0#}", Hour() + 12, Minute)
                 End If
             Else
                 If Hour() > 12 Then
                     _Time = String.Format("{0:0#}:{1:0#}", Hour() - 12, Minute)
-                    _TimeAMPM = eTimeAMPM.PM
+                    _TimeAMPM = eTimeAMPM.pm
                 ElseIf Hour() = 0 Then
                     _Time = String.Format("12:{0:0#}", Minute)
                 End If
             End If
-            If _TimeAMPM = eTimeAMPM.AM Then
+            If _TimeAMPM = eTimeAMPM.am Then
                 AM()
             Else
                 PM()
@@ -354,7 +362,7 @@ Public Class gTimePickerCntrl
             lklNow.LinkColor = _TimeColors.TimeAMPM_ON
             lklNull.LinkColor = _TimeColors.TimeAMPM_ON
 
-            If _TimeAMPM = eTimeAMPM.AM Then
+            If _TimeAMPM = eTimeAMPM.am Then
                 AM()
             Else
                 PM()
@@ -410,7 +418,7 @@ Public Class gTimePickerCntrl
                 Dim hr As Integer = CInt(ang / 30)
                 If hr = 12 Then hr = 0
                 If Hr24 Then
-                    hr += (CInt(TimeAMPM = eTimeAMPM.PM) * -12)
+                    hr += (CInt(TimeAMPM = eTimeAMPM.pm) * -12)
                 End If
                 Time = String.Format("{0:0#}:{1:0#}", hr, mn)
             End If
@@ -589,7 +597,7 @@ Public Class gTimePickerCntrl
 
     Sub DrawHours(ByRef g As Graphics)
         For h As Integer = 1 To 12
-            Dim hText As String = CStr(h + (CInt(Hr24 And TimeAMPM = eTimeAMPM.PM) * -12))
+            Dim hText As String = CStr(h + (CInt(Hr24 And TimeAMPM = eTimeAMPM.pm) * -12))
             Dim HourAngle As Single = 90 - CSng(30 * h)
 
             If Hr24 And h = 12 Then
@@ -736,9 +744,9 @@ Public Class gTimePickerCntrl
 
         Time = String.Format("{0:0#}:{1:0#}", Now.Hour, Now.Minute)
         If Now.Hour < 12 Then
-            TimeAMPM = eTimeAMPM.AM
+            TimeAMPM = eTimeAMPM.am
         Else
-            TimeAMPM = eTimeAMPM.PM
+            TimeAMPM = eTimeAMPM.pm
         End If
 
     End Sub
@@ -750,11 +758,11 @@ Public Class gTimePickerCntrl
     End Sub
 
     Private Sub lklAM_LinkClicked(ByVal sender As Object, ByVal e As LinkLabelLinkClickedEventArgs) Handles lklAM.LinkClicked
-        TimeAMPM = eTimeAMPM.AM
+        TimeAMPM = eTimeAMPM.am
     End Sub
 
     Private Sub lklPM_LinkClicked(ByVal sender As Object, ByVal e As LinkLabelLinkClickedEventArgs) Handles lklPM.LinkClicked
-        TimeAMPM = eTimeAMPM.PM
+        TimeAMPM = eTimeAMPM.pm
     End Sub
 
     Private Sub AM()

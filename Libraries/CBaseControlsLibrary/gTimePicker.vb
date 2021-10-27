@@ -27,8 +27,10 @@ Public Class gTimePicker
 
 #Region "Declarations"
 
-    Private rectDropDownButton As Rectangle = New Rectangle(Me.Width - 20, 0, 20, Me.Height)
-    Private rectAMPM As Rectangle = New Rectangle(0, 0, 10, Me.Height)
+    Private ReadOnly _rectDropDownButtonWidth = 16
+    Private rectDropDownButton As Rectangle = New Rectangle(Me.Width - _rectDropDownButtonWidth + 4, 0, _rectDropDownButtonWidth + 4, Me.Height)
+    Private ReadOnly _rectAmPmWidth = 20
+    Private rectAMPM As Rectangle = New Rectangle(0, 0, _rectAmPmWidth, Me.Height)
     Private ReadOnly popup As New ToolStripDropDown()
     Private host As ToolStripControlHost
     Private IsPopupOpen As Boolean
@@ -166,12 +168,17 @@ Public Class gTimePicker
         gTime.Time = lTime
         tTime = lTime
         txbTime.Text = Time
+        If gTime.Hour() >= 12 Then
+            SetAmPm(eTimeAMPM.pm)
+        Else
+            SetAmPm(eTimeAMPM.am)
+        End If
         oldTimeAmPM = gTime.TimeAMPM
     End Sub
 
     Public Function GetMilitaryTime() As String
         Dim cText As String
-        If gTime.TimeAMPM = eTimeAMPM.PM Then
+        If gTime.TimeAMPM = eTimeAMPM.pm Then
             Dim mHour As Int16
             mHour = gTime.Hour + 12
             cText = mHour.ToString().Trim().PadLeft(2, "0") + ":" + gTime.Minute.ToString().Trim().PadLeft(2, "0")
@@ -181,8 +188,8 @@ Public Class gTimePicker
         Return cText
     End Function
 
-    Public Sub SetAmPm(lAmPm As gTimePickerCntrl.eTimeAMPM)
-        If txbTime.EditingMode Then
+    Public Sub SetAmPm(lAmPm As gTimePickerCntrl.eTimeAMPM, Optional force As Boolean = True)
+        If txbTime.EditingMode Or force Then
             gTime.TimeAMPM = lAmPm
         End If
     End Sub
@@ -190,7 +197,7 @@ Public Class gTimePicker
     Public Property oldTimeAmPM As gTimePickerCntrl.eTimeAMPM
 
     <Category("Appearance gTime")>
-    <Description("Get or Set Time as AM or PM")>
+    <Description("Get or Set Time as am or pm")>
     Public Property TimeAMPM() As gTimePickerCntrl.eTimeAMPM
         Get
             Return gTime.TimeAMPM
@@ -558,10 +565,10 @@ Public Class gTimePicker
             ElseIf rectAMPM.Contains(e.Location) Then
                 AMPMHighlightAdjust.X = rectAMPM.Width - 4
                 AMPMHighlightAdjust.Y = rectAMPM.Height - 5
-                If TimeAMPM = gTimePickerCntrl.eTimeAMPM.AM Then
-                    TimeAMPM = gTimePickerCntrl.eTimeAMPM.PM
+                If TimeAMPM = gTimePickerCntrl.eTimeAMPM.am Then
+                    TimeAMPM = gTimePickerCntrl.eTimeAMPM.pm
                 Else
-                    TimeAMPM = gTimePickerCntrl.eTimeAMPM.AM
+                    TimeAMPM = gTimePickerCntrl.eTimeAMPM.am
                 End If
 
                 Invalidate(rectAMPM)
@@ -646,10 +653,10 @@ Public Class gTimePicker
         Dim maxhour As Integer = CInt(IIf(Hr24, 23, 12))
         If tm > maxhour Then
             tm = CInt(IIf(Hr24, 0, 1))
-            If Hr24 Then TimeAMPM = gTimePickerCntrl.eTimeAMPM.AM
+            If Hr24 Then TimeAMPM = gTimePickerCntrl.eTimeAMPM.am
         ElseIf tm < CInt(IIf(Hr24, 0, 1)) Then
             tm = maxhour
-            If Hr24 Then TimeAMPM = gTimePickerCntrl.eTimeAMPM.PM
+            If Hr24 Then TimeAMPM = gTimePickerCntrl.eTimeAMPM.pm
         End If
 
         Time = String.Concat(Format(tm, "00").ToString, Time.Remove(0, 2))
@@ -755,9 +762,15 @@ Public Class gTimePicker
             End If
             'oldTimeAmPM = TimeAMPM
             DrawRotatedText(g, IIf(_Font.Size < 10, cAmPm.Chars(0),
-                cAmPm.ToString).ToString,
-                New Rectangle(1, rectAMPM.Height, rectAMPM.Height, rectAMPM.Width),
-                -90, New Font("Arial", 10, FontStyle.Bold), fcolor)
+                                   cAmPm.ToString).ToString,
+                            New Rectangle(Width - _rectDropDownButtonWidth - _rectAmPmWidth - 2, 0, rectAMPM.Height, rectAMPM.Width),
+                            0, New Font("Arial", 10, FontStyle.Bold), fcolor)
+            'DrawRotatedText(g, IIf(_Font.Size < 10, cAmPm.Chars(0),
+            '    cAmPm.ToString).ToString,
+            '    New Rectangle(0, 0, rectAMPM.Height, rectAMPM.Width),
+            '    0, New Font("Arial", 10, FontStyle.Bold), fcolor)
+            'New Rectangle(1, rectAMPM.Height, rectAMPM.Height, rectAMPM.Width),
+            '-50, New Font("Arial", 10, FontStyle.Bold), fcolor)
 
             gpButton.Dispose()
             gpAMPM.Dispose()
@@ -818,15 +831,27 @@ Public Class gTimePicker
     Private Sub ResizeMe()
         Dim g As Graphics = CreateGraphics()
         Dim tsz As SizeF = g.MeasureString(txbTime.Text, txbTime.Font)
-        If Width < 12 + 16 + tsz.Width + 8 Then
-            Width = CInt(12 + 16 + tsz.Width + 8)
+        If Width < (_rectAmPmWidth + _rectDropDownButtonWidth + tsz.Width + 2) Then
+            Width = CInt(_rectAmPmWidth + _rectDropDownButtonWidth + tsz.Width + 2)
         End If
         Height = txbTime.Height
-        txbTime.Left = 14
-        txbTime.Width = Width - 32
-        rectDropDownButton = New Rectangle(Width - 17, 0, 16, Height - 1)
-        rectAMPM = New Rectangle(0, 0, 12, Height - 1)
+        txbTime.Left = 1
+        txbTime.Width = Width - _rectAmPmWidth - _rectDropDownButtonWidth
+        rectDropDownButton = New Rectangle(Width - _rectDropDownButtonWidth - 1, 0, _rectDropDownButtonWidth, Height - 1)
+        rectAMPM = New Rectangle(Width - _rectDropDownButtonWidth - _rectAmPmWidth, 0, _rectAmPmWidth, Height - 1)
         Invalidate()
+
+        'Dim g As Graphics = CreateGraphics()
+        'Dim tsz As SizeF = g.MeasureString(txbTime.Text, txbTime.Font)
+        'If Width < (_rectAmPmWidth + _rectDropDownButtonWidth + tsz.Width + 8) Then
+        '    Width = CInt(_rectAmPmWidth + _rectDropDownButtonWidth + tsz.Width + 8)
+        'End If
+        'Height = txbTime.Height
+        'txbTime.Left = _rectAmPmWidth + 1
+        'txbTime.Width = Width - _rectAmPmWidth - _rectDropDownButtonWidth
+        'rectDropDownButton = New Rectangle(Width - _rectDropDownButtonWidth - 1, 0, _rectDropDownButtonWidth, Height - 1)
+        'rectAMPM = New Rectangle(0, 0, _rectAmPmWidth, Height - 1)
+        'Invalidate()
     End Sub
 
 #End Region
