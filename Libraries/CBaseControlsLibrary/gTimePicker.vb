@@ -165,14 +165,14 @@ Public Class gTimePicker
     End Property
 
     Public Sub SetTime(lMilitaryTime As String)
-        gTime.Time = lMilitaryTime
-        tTime = lMilitaryTime
-        txbTime.Text = Time
         If lMilitaryTime < "12:00" Then
             SetAmPm(eTimeAMPM.am)
         Else
             SetAmPm(eTimeAMPM.pm)
         End If
+        gTime.Time = lMilitaryTime
+        tTime = lMilitaryTime
+        txbTime.Text = Time
         oldTimeAmPM = gTime.TimeAMPM
     End Sub
 
@@ -180,10 +180,19 @@ Public Class gTimePicker
         Dim cText As String
         If gTime.TimeAMPM = eTimeAMPM.pm Then
             Dim mHour As Int16
-            mHour = gTime.Hour + 12
-            cText = mHour.ToString().Trim().PadLeft(2, "0") + ":" + gTime.Minute.ToString().Trim().PadLeft(2, "0")
+            mHour = gTime.Hour()
+            If mHour < 12 Then
+                mHour = gTime.Hour + 12
+            End If
+            cText = mHour.ToString().Trim().PadLeft(2, "0") + gTime.Time.Substring(2)
         Else
-            cText = gTime.Time
+            Dim mHour As Int16
+            mHour = gTime.Hour()
+            If mHour = 12 Then
+                cText = "00" + gTime.Time.Substring(2)
+            Else
+                cText = gTime.Time
+            End If
         End If
         Return cText
     End Function
@@ -191,6 +200,7 @@ Public Class gTimePicker
     Public Sub SetAmPm(lAmPm As gTimePickerCntrl.eTimeAMPM, Optional force As Boolean = True)
         If txbTime.EditingMode Or force Then
             gTime.TimeAMPM = lAmPm
+            Invalidate()
         End If
     End Sub
 
@@ -685,13 +695,13 @@ Public Class gTimePicker
 #Region "Paint"
 
     Private Sub gTimePicker_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles Me.Paint
-        DrawDropDownButton(e.Graphics)
+        DrawDropDownAndAmPmButton(e.Graphics)
     End Sub
 
     Private ButtonHighlightAdjust As Point = New Point(4, 4)
     Private AMPMHighlightAdjust As Point = New Point(4, 4)
 
-    Sub DrawDropDownButton(ByRef g As Graphics)
+    Public Sub DrawDropDownAndAmPmButton(ByRef g As Graphics)
         g.SmoothingMode = SmoothingMode.AntiAlias
         g.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
         Dim sColor, hColor, bcolor, fcolor As Color

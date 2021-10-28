@@ -39,7 +39,7 @@ Partial Class gTimePickerCntrl
         Me.lklAM.Size = New System.Drawing.Size(25, 14)
         Me.lklAM.TabIndex = 13
         Me.lklAM.TabStop = true
-        Me.lklAM.Text = "AM"
+        Me.lklAM.Text = "am"
         Me.lklAM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lklPM

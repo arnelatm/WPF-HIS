@@ -6,7 +6,7 @@ Imports System.Windows.Forms
 
 'Version 1.0 9-09
 
-<System.Diagnostics.DebuggerStepThrough()>
+'<System.Diagnostics.DebuggerStepThrough()>
 <ToolboxItem(False)>
 Public Class gTimeBox
     Inherits CTextBox

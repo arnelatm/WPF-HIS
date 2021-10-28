@@ -442,7 +442,8 @@ Public Class CCustomDateTimePicker
             Try
                 If txtDate.Text <> "" And txtDate.Text.TrimEnd() <> EmptyMask Then
                     If txtTime.Visible Then
-                        retVal = Convert.ToDateTime(txtDate.Text + " " + txtTime.GetMilitaryTime(), _targetCulture)
+                        Dim cText As String = txtDate.Text + " " + txtTime.GetMilitaryTime()
+                        retVal = Convert.ToDateTime(cText, _targetCulture)
                     Else
                         retVal = Convert.ToDateTime(txtDate.Text, _targetCulture)
                     End If
@@ -461,21 +462,21 @@ Public Class CCustomDateTimePicker
                     Dim cTime As String = String.Format("{0:HH:mm}", dValue)
                     txtTime.SetTime(cTime)
                     If cTime < "12:00" Then
-                        txtTime.Text = IIf(cTime.Substring(0,2)="00","12"+cTime.Substring(2),cTime)
-                    else
-                        Dim cPmTime = (Int(cTime.Substring(0,2))-12).ToString().PadLeft(2,"0") + cTime.Substring(2)  
-                        txtTime.Text = IIf(cPmTime.Substring(0,2)="00","12"+cPmTime.Substring(2),cPmTime)
-                    End If   
-                    
+                        txtTime.Text = IIf(cTime.Substring(0, 2) = "00", "12" + cTime.Substring(2), cTime)
+                    Else
+                        Dim cPmTime = (Int(cTime.Substring(0, 2)) - 12).ToString().PadLeft(2, "0") + cTime.Substring(2)
+                        txtTime.Text = IIf(cPmTime.Substring(0, 2) = "00", "12" + cPmTime.Substring(2), cPmTime)
+                    End If
                 Else
                     txtDate.Text = ""
                     txtTime.Text = "00:00"
-                End If               
+                End If
                 _value = dValue
             Catch ex As Exception
                 Beep()
                 ''dtp.Value = dtp.MinDate
                 txtDate.Text = Nothing
+                _value = Nothing
             End Try
         End Set
     End Property
