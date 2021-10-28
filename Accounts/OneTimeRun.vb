@@ -112,6 +112,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgExactTextLength", "Field {fieldName} must be exactly {minimumLength} characters long.", "Invalid Entry")
         Messaging.AddMessage("MsgInvalidRange", "Field {fieldName} must be between {minimumValue} and {maximumValue}.", "Invalid Entry")
         Messaging.AddMessage("MsgShowCsvOutputFile", "CSV Bank Transfer File created on your documents folder with a file name of CSV.csv", "")          
+        Messaging.AddMessage("MsgSecurityError","Sorry, you don't have the proper security credentials to execute that command!","Error")
 
     End Sub
 

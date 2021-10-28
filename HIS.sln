@@ -61,6 +61,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		DO THIS NOW.txt = DO THIS NOW.txt
 		HomeSqlDataStructures.sql = HomeSqlDataStructures.sql
 		HomeSqlIspdata.sql = HomeSqlIspdata.sql
+		OldSecurityObjects.sql = OldSecurityObjects.sql
 		Sample Timer.txt = Sample Timer.txt
 		ToDo.txt = ToDo.txt
 		Translations.txt = Translations.txt

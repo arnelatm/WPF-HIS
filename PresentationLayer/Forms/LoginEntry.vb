@@ -60,7 +60,7 @@ Public Class LoginEntry
             textConfirmation.Text = Space(20)
             textNewPassword.Editable = True
             textConfirmation.Editable = True
-            Presenter.EnableEdit()
+           ' Presenter.EnableEdit()
             Height = 388
             floPasswordEntry.Height = 134
         Else

@@ -735,6 +735,7 @@ Namespace PresentationLayer.Views.Forms
         ''' <param name="sender"></param>
         ''' <param name="e"></param>
         Private Sub LoginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLogin.Click
+            'RunForm(Of UserEntryTv, UserPresenter(Of UserModel))()
             Using form As New LoginEntry(False)
                 Try
                     If form.ShowDialog() = DialogResult.OK Then
@@ -963,7 +964,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
-            Using form As New LoginEntry(True)
+             Using form As New LoginEntry(True)
                 Try
                     If form.ShowDialog() = DialogResult.OK Then
                         If form.LoginOk Then
@@ -971,19 +972,50 @@ Namespace PresentationLayer.Views.Forms
                         Else
                             Messaging.Show(True, "MsgOldPasswordError")
                             LogStatus = LoginStatus.LoggedOut
+                            LogStatus = LoginStatus.LoggedOut
                         End If
                     Else
                         LogStatus = LoginStatus.LoggedOut
                     End If
                     ToolStripButtonExit.Enabled = True
+                    'If LogStatus = LoginStatus.LoggedIn Then
+                    '    Dim mirroredLanguage = My.Settings.MirroredLanguage
+                    '    If mirroredLanguage Then
+                    '        GlobalFunctions.SetCulture(GlobalVariables.DefaultMirroredCultureInfoStr)
+                    '        SetLanguageChangeButtons()
+                    '        SwitchUiLanguage(False)
+                    '    End If
+                    'End If
                 Catch ex As TypeInitializationException
-                    MessageBox.Show("Invalid Connection String, specified connection string doesn't exist.",
+                    MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
                                     "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ErrLogger.LogError(ex, True)
+                    LogStatus = LoginStatus.LoggedOut
                 Catch ex As Exception
                     LogStatus = LoginStatus.LoggedIn
                 End Try
             End Using
+            'Using form As New LoginEntry(True)
+            '    Try
+            '        If form.ShowDialog() = DialogResult.OK Then
+            '            If form.LoginOk Then
+            '                LogStatus = LoginStatus.LoggedIn
+            '            Else
+            '                Messaging.Show(True, "MsgOldPasswordError")
+            '                LogStatus = LoginStatus.LoggedOut
+            '            End If
+            '        Else
+            '            LogStatus = LoginStatus.LoggedOut
+            '        End If
+            '        ToolStripButtonExit.Enabled = True
+            '    Catch ex As TypeInitializationException
+            '        MessageBox.Show("Invalid Connection String, specified connection string doesn't exist.",
+            '                        "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '        ErrLogger.LogError(ex, True)
+            '    Catch ex As Exception
+            '        LogStatus = LoginStatus.LoggedIn
+            '    End Try
+            'End Using
         End Sub
 
         Private Sub UnhandledExceptionHandler(sender As Object, e As UnhandledExceptionEventArgs)

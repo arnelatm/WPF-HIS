@@ -263,6 +263,9 @@ Namespace PresentationLayer.Views.Forms
                 dgvTransactionDate.DisplayOnly = True
                 dgvAmount.DisplayOnly = True
                 dgvPayeeType.DisplayOnly = True
+                If DataGridViewPcJournals.DisplayOnly Then
+                    dgvPcClosed.DisplayOnly = True
+                End If
             End With
             ResumeLayout()
         End Sub
@@ -309,8 +312,10 @@ Namespace PresentationLayer.Views.Forms
                 With DataGridViewPcJournals.CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvpcclosed"
-                            Dim selectedRow = DataGridViewPcJournals.Rows(.RowIndex).DataBoundItem
-                            RaiseEvent PcJournalCheckedEvent(selectedRow)
+                            If Not DataGridViewPcJournals.DisplayOnly Then
+                                Dim selectedRow = DataGridViewPcJournals.Rows(.RowIndex).DataBoundItem
+                                RaiseEvent PcJournalCheckedEvent(selectedRow)
+                            End If
                     End Select
                 End With
             End If

@@ -109,13 +109,20 @@ Public Class CButton
                 FindForm.DialogResult = m_DialogResult
             End If
         End If
-        RaiseEvent ClickButtonArea(Sender, e)
+        If Not DisplayOnly Then
+            RaiseEvent ClickButtonArea(Sender, e)
+        Else
+            Beep()
+            MessagingLibrary.Messaging.Show(True, "MsgSecurityError")
+
+        End If
     End Sub
 
 #End Region
 
 #Region "Declarations"
 
+    Private _displayOnly As Boolean
     Private MouseDrawState As eMouseDrawState = eMouseDrawState.Up
     Private PressedOffset As Integer
     Private Imagept As PointF
@@ -289,9 +296,17 @@ Public Class CButton
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
-    <Description("Set to True to specify that this control value will be shown.")>
+    <Description("Set to True to specify that this control is Read Only .")>
     <Browsable(True)>
-    Public Property DisplayOnly As Boolean = True
+    Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set(value As Boolean)
+            If _displayOnly = value Then Exit Property
+            _displayOnly = value
+        End Set
+    End Property
 
     '<Category("Custom Properties")>
     '<DefaultValue(False)>

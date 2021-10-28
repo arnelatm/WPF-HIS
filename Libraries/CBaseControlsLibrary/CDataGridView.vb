@@ -11,6 +11,7 @@ Public Class CDataGridView
     Inherits DataGridView
     Implements IEntryControl, IFindableControl
 
+    Private _displayOnly As Boolean
     Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
     Private _translatable As Boolean = True
@@ -53,7 +54,14 @@ Public Class CDataGridView
     <DefaultValue(GetType(Boolean))>
     <Description("Set to True to specify that this control is readonly.")>
     <Browsable(True)>
-    Public Property DisplayOnly As Boolean = False
+    Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set(value As Boolean)
+            _displayOnly = value
+        End Set
+    End Property
 
     Public Property Ea As EventAggregator
 
@@ -826,6 +834,14 @@ Public Class CDataGridView
             End If
         End If
     End Sub
+
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    <Description("Security Key to use for this control.")>
+    <Browsable(True)>
+    Public Property SecurityKey As String = ""
 
     'Private Sub Dgv_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles Me.CellFormatting
     '    If e.Value IsNot Nothing AndAlso TypeOf Columns(e.ColumnIndex).CellTemplate Is DataGridViewCheckBoxCell Then
