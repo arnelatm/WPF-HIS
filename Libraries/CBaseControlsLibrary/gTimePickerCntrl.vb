@@ -5,6 +5,7 @@ Imports System.Windows.Forms.Design
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports System.Windows.Forms.VisualStyles
 
 <ToolboxItem(True), ToolboxBitmap(GetType(gTimePickerCntrl), "gTimePickerControl.gTimePickerCntrl.bmp")>
 <Designer(GetType(gTimePickerCtrlDesigner))>
@@ -773,6 +774,11 @@ Public Class gTimePickerCntrl
     Private Sub PM()
         lklAM.LinkColor = TimeColors.TimeAMPM_OFF
         lklPM.LinkColor = TimeColors.TimeAMPM_ON
+    End Sub
+
+    Private Sub lklOk_LinkClicked(ByVal sender As Object, ByVal e As LinkLabelLinkClickedEventArgs) Handles lklOK.LinkClicked
+        'My.Computer.Keyboard.SendKeys(Chr(27), False)
+        SendKeys.Send("{ESC}")
     End Sub
 
 #End Region

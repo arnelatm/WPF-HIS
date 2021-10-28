@@ -137,6 +137,7 @@ Public Class StoreCaptions
                     If TypeOf cCtrl Is TextBox OrElse
                        TypeOf cCtrl Is ComboBox OrElse
                        TypeOf cCtrl Is MaskedTextBox OrElse
+                       cCtrl.GetType().Name = "CCustomDateTimePicker" OrElse
                        TypeOf cCtrl Is FlowLayoutPanel Then
                     Else
                         'TypeOf cCtrl Is Button OrElse
@@ -331,6 +332,7 @@ Public Class StoreCaptions
                     If TypeOf cCtrl Is TextBox OrElse
                        TypeOf cCtrl Is ComboBox OrElse
                        TypeOf cCtrl Is MaskedTextBox OrElse
+                       cCtrl.GetType().Name = "CCustomDateTimePicker" OrElse
                        TypeOf cCtrl Is FlowLayoutPanel Then
                         'Debugger.Break()
                     Else
