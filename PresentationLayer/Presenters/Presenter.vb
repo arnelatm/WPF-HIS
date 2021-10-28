@@ -1726,11 +1726,11 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
             allControls = FindControlRecursive(allControls, viewControl)
             Dim resources = New ComponentResourceManager(Me.GetType())
             For Each cCtrl As Control In allControls
-                'If cCtrl.Name = "txtCreditLimit" Then
+                'If cCtrl.Name = "dgvPcClosed" Then
                 '    Debugger.Break()
                 'End If
                 SetControlDynamicProperties(cCtrl)
-                SetObjectSecurityNew(cCtrl)
+                SetObjectSecurity(cCtrl)
             Next
         End If
     End Sub
@@ -1823,7 +1823,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         End If
     End Sub
 
-    Public Sub SetObjectSecurityNew(ByRef cCtrl As Control)
+    Public Sub SetObjectSecurity(ByRef cCtrl As Control)
         Dim objectSecurityKey As String
         If TypeOf cCtrl Is MenuStrip Then
             ' check for MenuStrip first because MenuStrip is also a ToolStrip

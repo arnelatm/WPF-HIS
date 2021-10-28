@@ -248,9 +248,9 @@ Namespace PresentationLayer.Presenters
                 empName = activeEmployees(i * 4 - 3)
                 dateHired = activeEmployees(i * 4 - 2)
                 dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), Nothing, activeEmployees(i * 4 - 1))
-                If empId = 331 Then
-                    Debugger.Break()
-                End If
+                'If empId = 331 Then
+                '    Debugger.Break()
+                'End If
                 If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
                     If _reinitialize Then
                         Dim empAttendance As AttendanceItemView
@@ -980,7 +980,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function ComputeDeductionAmount(deduction As PayElement, daysAbsentWithoutPay As Decimal, basePayment As EmployeePayElement) As Decimal
-            Debugger.Break()
+            'Debugger.Break()
             Dim daysToCompute As Decimal
             Dim amount As Decimal
             If _deductionComputationMethod = "DaysInMonth" Then

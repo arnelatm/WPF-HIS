@@ -187,7 +187,7 @@
     <value>280</value>
   </data>
   <data name="lblUserIdNo.Text" xml:space="preserve">
-    <value>Name</value>
+    <value>Employee Name</value>
   </data>
   <data name="lblUserIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -277,7 +277,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpDateStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 25</value>
+    <value>195, 25</value>
   </data>
   <data name="dtpDateStart.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -337,7 +337,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpDateEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 25</value>
+    <value>195, 25</value>
   </data>
   <data name="dtpDateEnd.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -685,7 +685,7 @@
     <value>16, 268</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Employee Leave Maintenance Form</value>
+    <value>Shift Summary Maintenance Form</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
     <value>StoreCaptions1</value>

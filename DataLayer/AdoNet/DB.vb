@@ -41,9 +41,9 @@ Namespace AdoNet
                     ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
                 End If
             Else
-                If conn = "TRANSLATIONS" Then
-                    Debugger.Break()
-                End If
+                'If conn = "TRANSLATIONS" Then
+                '    Debugger.Break()
+                'End If
                 ConnectionString = ConfigurationManager.ConnectionStrings(conn).ConnectionString
                 Dim x = ConnectionString
                 MessageBox.Show(x)

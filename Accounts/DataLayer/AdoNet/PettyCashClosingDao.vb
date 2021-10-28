@@ -44,6 +44,7 @@ Namespace DataLayer.AdoNet
                 Dim pcDao = New PcClosingJournalDao()
                 data.PcClosingJournals = pcDao.GetRecordsWithGroupIdNo(0)
             End If
+            
             Return data
         End Function
 

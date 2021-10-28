@@ -111,4 +111,10 @@ Public Class CDgvCheckBoxColumn
 
     Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
 
+    <Category("Custom Properties")>
+    <DefaultValue(CType(Nothing, String))>
+    <Description("Security Key to use for this control.")>
+    <Browsable(True)>
+    Public Property SecurityKey As String
+
 End Class
