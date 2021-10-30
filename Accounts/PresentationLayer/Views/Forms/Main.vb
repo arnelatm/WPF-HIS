@@ -59,7 +59,6 @@ Namespace PresentationLayer.Views.Forms
             _logStatus = LoginStatus.LoggedOut
             InitializeComponent()
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-                MenuFormName = "Main"
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture
                 GlobalVariables.AppCurrentCultureInfo = CultureInfo.CurrentCulture
@@ -964,7 +963,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
-             Using form As New LoginEntry(True)
+            Using form As New LoginEntry(True)
                 Try
                     If form.ShowDialog() = DialogResult.OK Then
                         If form.LoginOk Then
@@ -1057,7 +1056,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub HolidayEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HolidayEntryToolStripMenuItem.Click
             RunForm(Of HolidayEntry, HolidayPresenter(Of HolidayModel))()
         End Sub
-
 
     End Class
 

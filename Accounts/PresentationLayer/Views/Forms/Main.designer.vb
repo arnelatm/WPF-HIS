@@ -111,6 +111,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemEmployeeLeave = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployeeAbsencesLate = New System.Windows.Forms.ToolStripMenuItem()
         Me.HolidayEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemShiftSummaryEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItemClosePettyCashFund = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
@@ -179,7 +180,6 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemShiftSummaryEntry = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -627,6 +627,11 @@ Namespace PresentationLayer.Views.Forms
         Me.HolidayEntryToolStripMenuItem.Name = "HolidayEntryToolStripMenuItem"
         resources.ApplyResources(Me.HolidayEntryToolStripMenuItem, "HolidayEntryToolStripMenuItem")
         '
+        'ToolStripMenuItemShiftSummaryEntry
+        '
+        Me.ToolStripMenuItemShiftSummaryEntry.Name = "ToolStripMenuItemShiftSummaryEntry"
+        resources.ApplyResources(Me.ToolStripMenuItemShiftSummaryEntry, "ToolStripMenuItemShiftSummaryEntry")
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
@@ -982,11 +987,6 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'ToolStripMenuItemShiftSummaryEntry
-        '
-        Me.ToolStripMenuItemShiftSummaryEntry.Name = "ToolStripMenuItemShiftSummaryEntry"
-        resources.ApplyResources(Me.ToolStripMenuItemShiftSummaryEntry, "ToolStripMenuItemShiftSummaryEntry")
-        '
         'Main
         '
         Me.AllowDrop = true
@@ -996,6 +996,7 @@ Namespace PresentationLayer.Views.Forms
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.AccountsMenu)
         Me.IsMdiContainer = true
+        Me.MenuFormName = "Menu"
         Me.Name = "Main"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
