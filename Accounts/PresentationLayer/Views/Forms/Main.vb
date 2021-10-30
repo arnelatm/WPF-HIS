@@ -754,6 +754,8 @@ Namespace PresentationLayer.Views.Forms
                             SwitchUiLanguage(False)
                         End If
                     End If
+
+                    'Presenter.ResetMenuSecurity(Me)
                 Catch ex As TypeInitializationException
                     MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
                                     "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)

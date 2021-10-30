@@ -2,9 +2,9 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
-Imports AATM.ServicesLayer.Services
 
 Public Class LoginEntry
     Implements IUserView
@@ -21,13 +21,10 @@ Public Class LoginEntry
     ' The Presenter
     Private _loginOk As Boolean
 
-    Private _service As Object
-
     Public Sub New(changePassword As Boolean)
 
         ' This call is required by the designer.
         InitializeComponent()
-        _service = New Service("User")
         MainTableName = "User"
         If changePassword Then
             _changingPassword = True
@@ -48,6 +45,7 @@ Public Class LoginEntry
             textBoxUserName.Text = UserName
         End If
         chkSaveUserNameAndPassword.Checked = _rememberPassword
+        Presenter = New UserPresenter(Of UserModel)(Me)
         If _changingPassword Then
             textNewPassword.Visible = True
             textConfirmation.Visible = True
@@ -111,13 +109,11 @@ Public Class LoginEntry
     Private Sub Btn_Login_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
         Try
             _oterkis = textBoxPassword.Text
-            Dim serviceLogin As New ServiceLogin
-            If serviceLogin.Login(UserName, Password) Then
+            If Presenter.Login(UserName, Password) Then
                 _loginOk = True
                 If Not _changingPassword Then
                     AfterSuccessfulLogin()
                 Else
-                    'If SaveNewPassword(GlobalVariables.UserIdNo, textNewPassword.Text, textConfirmation.Text) > 0 Then
                     If SaveNewPassword() > 0 Then
                         textBoxPassword = textNewPassword
                         AfterSuccessfulLogin()
@@ -129,7 +125,7 @@ Public Class LoginEntry
                 _loginOk = False
             End If
         Catch ex As ApplicationException
-            MessageBox.Show(ex.Message, "Login failed")
+            MessageBox.Show(ex.Message, $"Login failed")
             _cancelClose = True
         Catch ex As Exception
             Throw ex
@@ -219,12 +215,7 @@ Public Class LoginEntry
     'End Sub
 
     Private Function SaveNewPassword()
-        Dim userIdNo = Convert.ToInt16(_service.GetRecordFieldWithKey(textBoxUserName.Text.Trim(), "User", "UserName", "IdNo"))
-        Dim serviceLogin = New ServiceLogin
-        Dim cNewPassword As String = textNewPassword.Text.Trim()
-        Return serviceLogin.SavePassword(userIdNo, cNewPassword)
-        'Dim encryptedPassword As String = serviceLogin.EncryptPassword(userIdNo, textNewPassword.Text.Trim())
-        'Return serviceLogin.SavePassword(userIdNo, encryptedPassword)
+        Return Presenter.SavePassword(textNewPassword.Text)
     End Function
 
     Protected Sub EnableEdit()
