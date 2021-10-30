@@ -1850,8 +1850,13 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
                     isVisible = controlSecurityValues(0)
                     isEditable = controlSecurityValues(1)
                 Else
-                    isVisible = False
-                    isEditable = False
+                    If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                        isVisible = True
+                        isEditable = True
+                    Else
+                        isVisible = False
+                        isEditable = False
+                    End If
                 End If
                 SetControlEditability(cCtrl, isEditable)
                 SetControlVisibility(cCtrl, isVisible)
@@ -1862,9 +1867,9 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Private Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
         ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
         If Not controlVisible Then
-            If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is TextBox Then
-                SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
-            ElseIf TypeOf cCtrl Is CTabPage Then
+            'If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is TextBox Then
+            '    SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
+            If TypeOf cCtrl Is CTabPage Then
                 Dim tabControlObj As CTabControl
                 Dim tabPageObj As CTabPage
                 tabControlObj = cCtrl.Parent

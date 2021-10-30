@@ -644,8 +644,8 @@ Public Class BfMain
                     isSelectable = False
                 End If
             Else
-                isVisible = True
-                isSelectable = True
+                isVisible = False
+                isSelectable = False
             End If
             cControl.Enabled = isSelectable
             cControl.Visible = isVisible

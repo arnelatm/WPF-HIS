@@ -60,7 +60,7 @@ Public Class LoginEntry
             textConfirmation.Text = Space(20)
             textNewPassword.Editable = True
             textConfirmation.Editable = True
-           ' Presenter.EnableEdit()
+            ' Presenter.EnableEdit()
             Height = 388
             floPasswordEntry.Height = 134
         Else
@@ -117,7 +117,8 @@ Public Class LoginEntry
                 If Not _changingPassword Then
                     AfterSuccessfulLogin()
                 Else
-                    If _service.SaveNewPassword(GlobalVariables.UserIdNo, textNewPassword.Text, textConfirmation.Text) > 0 Then
+                    'If SaveNewPassword(GlobalVariables.UserIdNo, textNewPassword.Text, textConfirmation.Text) > 0 Then
+                    If SaveNewPassword() > 0 Then
                         textBoxPassword = textNewPassword
                         AfterSuccessfulLogin()
                     End If
@@ -217,11 +218,14 @@ Public Class LoginEntry
     '    _changingPassword = True
     'End Sub
 
-    Private Sub SaveNewPassword()
-        Dim userIdNo = Convert.ToInt16(Presenter.GetRecordFieldWithKey(textBoxUserName.Text.Trim(), "User", "UserName", "IdNo"))
-        Dim encryptedPassword As String = Presenter.EncryptPassword(userIdNo, textNewPassword.Text.Trim())
-        Presenter.SavePassword(userIdNo, encryptedPassword)
-    End Sub
+    Private Function SaveNewPassword()
+        Dim userIdNo = Convert.ToInt16(_service.GetRecordFieldWithKey(textBoxUserName.Text.Trim(), "User", "UserName", "IdNo"))
+        Dim serviceLogin = New ServiceLogin
+        Dim cNewPassword As String = textNewPassword.Text.Trim()
+        Return serviceLogin.SavePassword(userIdNo, cNewPassword)
+        'Dim encryptedPassword As String = serviceLogin.EncryptPassword(userIdNo, textNewPassword.Text.Trim())
+        'Return serviceLogin.SavePassword(userIdNo, encryptedPassword)
+    End Function
 
     Protected Sub EnableEdit()
         Presenter.EditMode = True
