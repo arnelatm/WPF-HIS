@@ -1722,17 +1722,22 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     Private Sub SetAllControlsDynamicProperties(viewControl As Control)
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
-            Dim allControls As New List(Of Control)
-            allControls = FindControlRecursive(allControls, viewControl)
-            Dim resources = New ComponentResourceManager(Me.GetType())
-            For Each cCtrl As Control In allControls
-                'If cCtrl.Name = "dgvPcClosed" Then
-                '    Debugger.Break()
-                'End If
-                SetControlDynamicProperties(cCtrl)
-                SetObjectSecurity(cCtrl)
-            Next
+            ResetMenuSecurity(viewControl)
         End If
+    End Sub
+
+    Public Sub ResetMenuSecurity(viewControl As Control)
+
+        Dim allControls As New List(Of Control)
+        allControls = FindControlRecursive(allControls, viewControl)
+        Dim resources = New ComponentResourceManager(Me.GetType())
+        For Each cCtrl As Control In allControls
+            'If cCtrl.Name = "dgvPcClosed" Then
+            '    Debugger.Break()
+            'End If
+            SetControlDynamicProperties(cCtrl)
+            SetObjectSecurity(cCtrl)
+        Next
     End Sub
 
     Private Sub ClearAllErrorMessages()

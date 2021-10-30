@@ -39,4 +39,14 @@ Public Class UserPresenter(Of TM As New)
         End If
     End Sub
 
+    Public Function Login(userName As String, password As String) As Boolean
+        Dim serviceLogin As New ServiceLogin
+        Return serviceLogin.Login(userName, password)
+    End Function
+
+    Public Function SaveNewPassword(newPassword As String)
+        Dim userIdNo = Convert.ToInt16(Service.GetRecordFieldWithKey(newPassword.Trim(), "User", "UserName", "IdNo"))
+        Return _serviceLogin.SavePassword(userIdNo, newPassword.Trim())
+    End Function
+
 End Class
