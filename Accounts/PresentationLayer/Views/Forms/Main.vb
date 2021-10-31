@@ -151,7 +151,6 @@ Namespace PresentationLayer.Views.Forms
         Public Property MainTableName As String
         Public Property Password As String Implements IUserView.Password
         Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
-        Protected Shared Property Service As New Service
 
         Public Sub ResetMenuSecurity(ByRef cCtrl As Control)
             Static sw = 0
@@ -389,10 +388,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PayrollEntryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayrollEntry.Click
-            RunForm(Of PayrollEntryTv, PayrollPresenter(Of PayrollModel))()
-        End Sub
-
-        Private Sub PayrollsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayrolls.Click
             RunForm(Of PayrollEntryTv, PayrollPresenter(Of PayrollModel))()
         End Sub
 
@@ -649,7 +644,7 @@ Namespace PresentationLayer.Views.Forms
             Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
                     .SystemViewIdNo = VSystemViewIdNo,
                     .ParentIdNo = parentIdNo}
-            parentIdNo = Service.AddSecurityObject(securityObject)
+            parentIdNo = Presenter.AddSecurityObject(securityObject)
             Return parentIdNo
         End Function
 
@@ -710,7 +705,7 @@ Namespace PresentationLayer.Views.Forms
             ToolStripButtonLogin.Enabled = True
             ToolStripButtonLogin.PerformClick()
             ToolStripButtonExit.Enabled = True
-            If Service.UsePayGroups() Then
+            If Presenter.UsePayGroups() Then
                 ToolStripMenuItemPayGroups.Visible = True
             Else
                 ToolStripMenuItemPayGroups.Visible = False
@@ -784,18 +779,14 @@ Namespace PresentationLayer.Views.Forms
             My.Settings.Save()
         End Sub
 
-        Private Sub PayrollReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPeriodicPayroll.Click
-
-        End Sub
-
         Private Sub RecreateSecurityObjectMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRecreateSecurityObjectMenu.Click
             Dim allControls As New List(Of Control)
-            Dim nRecCount = Service.GetRecordCount("SecurityObject")
+            Dim nRecCount = Presenter.GetRecordCount("SecurityObject")
             If GlobalVariables.UserName.ToLower() = $"arnel" Then
                 Dim addSecurityObject As Boolean = False
                 If nRecCount <= 12 Then
                     If nRecCount = 0 Then
-                        If Service.InitializeSecurityObject() > 0 Then
+                        If Presenter.InitializeSecurityObject() > 0 Then
                             addSecurityObject = True
                         End If
                     Else
@@ -848,7 +839,7 @@ Namespace PresentationLayer.Views.Forms
             Close()
         End Sub
 
-        Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButtonDebug.Click
             Debugger.Break()
         End Sub
 
@@ -1023,7 +1014,7 @@ Namespace PresentationLayer.Views.Forms
             ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         End Sub
 
-        Private Sub ToolStripMenuItemPayrollAttendance_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPayrollAttendance.Click
+        Private Sub ToolStripMenuItemPayrollAttendance_Click(sender As Object, e As EventArgs)
 
         End Sub
 
@@ -1055,9 +1046,84 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub HolidayEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HolidayEntryToolStripMenuItem.Click
+        Private Sub HolidayEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemHolidayEntry.Click
             RunForm(Of HolidayEntry, HolidayPresenter(Of HolidayModel))()
         End Sub
+
+        Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
+            Dim allControls As New List(Of Control)
+            'Dim nRecCount = Presenter.GetRecordCount("SecurityObject")
+            If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                'Dim addSecurityObject As Boolean = False
+                For Each cCtrl As Control In FindControlRecursive(allControls, Me)
+                    UpdateMenuSecurity(cCtrl)
+                Next
+            End If
+        End Sub
+
+        Public Sub UpdateMenuSecurity(ByRef cCtrl As Control)
+            Static sw = 0
+            Static mainParentIdNo As Int32
+            If sw = 0 Then
+                mainParentIdNo = Presenter.GetRecordFieldWithKey(MenuFormName, "SecurityObject", "SecurityObjectName", "IdNo")
+                sw = 1
+            End If
+            If TypeOf cCtrl Is MenuStrip Then
+                ' check for MenuStrip first because MenuStrip is also a ToolStrip
+                Dim subMenuName = MenuFormName + " > " + cCtrl.Name.Trim()
+                Dim menuStripMain As MenuStrip = cCtrl
+                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.Trim(),
+                        .SystemViewIdNo = VSystemViewIdNo,
+                        .ParentIdNo = mainParentIdNo}
+                Dim parentIdNo As Int32
+                parentIdNo = Presenter.UpdateSecurityObject(securityObject)
+                UpdateChildMenuSecurityObjects(menuStripMain.Items, subMenuName, parentIdNo)
+            ElseIf TypeOf cCtrl Is ToolStrip Then
+                Dim subMenuName = MenuFormName + " > " + cCtrl.Name.TrimEnd()
+                Dim toolStripMain As ToolStrip = cCtrl
+                Dim securityObject As New SecurityObject With {.SecurityObjectName = cCtrl.Name.TrimEnd(),
+                        .SystemViewIdNo = VSystemViewIdNo,
+                        .ParentIdNo = mainParentIdNo}
+                Dim parentIdNo As Int32
+                parentIdNo = Presenter.UpdateSecurityObject(securityObject)
+                UpdateChildMenuSecurityObjects(toolStripMain.Items, subMenuName, parentIdNo)
+            End If
+        End Sub
+
+        Private Sub UpdateChildMenuSecurityObjects(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
+            Dim parentIdNo As Int32
+            For Each dropDownItem As Object In dropDownItems
+                If TypeOf dropDownItem Is ToolStripMenuItem Then
+                    Dim parentMenuName = pParentMenuName
+                    If dropDownItem.Name.SubString(0, 17) <> "ToolStripMenuItem" Then
+                        Debugger.Break()
+                        MessageBox.Show($"Invalid ToolStripMenuItem Name <" + dropDownItem.Name.SubString(0, 17) + ">!")
+                    End If
+                    parentIdNo = UpdateSecurityObject(Of ToolStripMenuItem)(dropDownItem, parentMenuName, pParentIdNo, 17)
+                    If dropDownItem.HasDropDown Then
+                        'Dim childSubMenuName As String = pParentMenuName + " > " + Mid(dropDownItem.Name, 18)
+                        UpdateChildMenuSecurityObjects(dropDownItem.DropDownItems, pParentMenuName, parentIdNo)
+                    End If
+                ElseIf TypeOf dropDownItem Is ToolStripButton Then
+                    'Dim childSubMenuName = pParentMenuName + " > " + Mid(dropDownItem.Name, 16)
+                    If dropDownItem.Name.SubString(0, 15) <> "ToolStripButton" Then
+                        Debugger.Break()
+                        MessageBox.Show($"Invalid ToolStripButton Name <" + dropDownItem.Name.SubString(0, 15) + ">!")
+                    End If
+                    UpdateSecurityObject(Of ToolStripButton)(dropDownItem, pParentMenuName, pParentIdNo, 15)
+                End If
+            Next
+        End Sub
+
+        Private Function UpdateSecurityObject(Of T)(ByRef obj As T, ByRef subMenuName As String, ByVal parentIdNo As Int32, loc As Int16) As Int32
+            Dim toolStripMenuItem As T = obj
+            Dim objName = Invoker.GetProperty(obj, "Name")
+            Dim securityObject As New SecurityObject With {.SecurityObjectName = objName.SubString(loc),
+                    .SystemViewIdNo = VSystemViewIdNo,
+                    .ParentIdNo = parentIdNo}
+            parentIdNo = Presenter.UpdateSecurityObject(securityObject)
+            Return parentIdNo
+        End Function
 
     End Class
 

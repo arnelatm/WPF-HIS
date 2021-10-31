@@ -98,6 +98,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Table", "Table", "{6FD94599
 		DataBaseTable.sql = DataBaseTable.sql
 		Earning-Deduction-Leave.sql = Earning-Deduction-Leave.sql
 		Earning.sql = Earning.sql
+		SecurityObjects.sql = SecurityObjects.sql
 		Settings.sql = Settings.sql
 	EndProjectSection
 EndProject

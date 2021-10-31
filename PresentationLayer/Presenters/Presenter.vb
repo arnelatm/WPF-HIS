@@ -732,6 +732,14 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         Return Service.AddSecurityObject(securityObject)
     End Function
 
+    Public Function UpdateSecurityObject(securityObject As SecurityObject) As Int32
+        If Service.CountRecordWithKey(securityObject.SecurityObjectName, "SecurityObject", "SecurityObjectName") = 0 Then
+            Return Service.AddSecurityObject(securityObject)
+        Else
+            Return Service.GetRecordFieldWithKeyG(Of Int32)(securityObject.SecurityObjectName, "SecurityObject", "SecurityObjectName", "IdNo")
+        End If
+    End Function
+
     Public Function InitializeSecurityObject() As Integer
         Return Service.InitializeSecurityObject()
     End Function
@@ -1067,18 +1075,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     End Sub
 
     Public Function UsePayGroups()
-        Dim retValue = Service.GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
-        If retValue Is Nothing Then
-            Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
-            Dim groupSetting As String = "Payroll"
-            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
-            Return Nothing
-        End If
-        If retValue = "1" Then
-            Return True
-        Else
-            Return False
-        End If
+        Return Service.UsePayGroups()
     End Function
 
     Protected Overridable Function AdditionalChangesMadeCheck()
