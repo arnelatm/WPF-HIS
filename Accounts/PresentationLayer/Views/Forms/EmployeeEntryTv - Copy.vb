@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class EmployeeEntryTv
+    Public Class EmployeeEntryTv2
         Implements IEmployeeView
 
         Private _countryTelCodes As List(Of Lookup.LookupData)
@@ -394,13 +394,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private ReadOnly _blankImage As Image = GlobalFuncNSub.CreateTextImage("Click" & Environment.NewLine & "to Change" & Environment.NewLine & "Photo", Nothing, Nothing, Nothing, Nothing, Nothing)
-
         Public Property Picture As Image Implements IEmployeeView.Picture
             Get
                 If imgPicture.Image Is Nothing Then
                     Return Nothing
-                ElseIf imgPicture.Image.Equals(_blankImage) Then
+                ElseIf imgPicture.Image.Equals(GetBlankImage()) Then
                     Return Nothing
                 End If
                 Return imgPicture.Image
@@ -409,7 +407,7 @@ Namespace PresentationLayer.Views.Forms
                 If Value IsNot Nothing Then
                     imgPicture.Image = Value
                 Else
-                    imgPicture.Image = _blankImage
+                    imgPicture.Image = GetBlankImage()
                 End If
             End Set
         End Property
@@ -683,6 +681,104 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DgvLeaveCredits_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewLeaveCredits.CellEndEdit
             ProcessCellEndEdit(DataGridViewLeaveCredits, bsLeaveCredits)
         End Sub
+
+        Private Sub imgPicture_Click(sender As Object, e As EventArgs) Handles imgPicture.Click
+            'Dim fd As OpenFileDialog = New OpenFileDialog()
+            Dim strFileName As String = Nothing
+            Dim oldImage = imgPicture.Image
+            Using fd As OpenFileDialog = New OpenFileDialog()
+                fd.Title = "Open File Dialog"
+                fd.InitialDirectory = "C:\"
+                fd.Filter = $"Image Files(*.BMP;*.JPG;*.GIF;*.JPEG;*.TIFF;*.PNG)|*.BMP;*.JPG;*.JPEG;*.GIF;*.TIFF;*.PNG"
+                fd.FilterIndex = 1
+                fd.RestoreDirectory = True
+                If fd.ShowDialog() = DialogResult.OK Then
+                    strFileName = fd.FileName
+                    imgPicture.Image = Image.FromFile(strFileName)
+                    Dim fileInfo As New FileInfo(strFileName)
+                    Dim length As Long = fileInfo.Length
+                    If fileInfo.Length > 307200 Then
+                        imgPicture.Image.Dispose()
+                        imgPicture.Image = Nothing
+                        Dim fileExtension = fileInfo.Extension
+                        Dim path As String = GetTempFileName(fileExtension)
+                        Dim resizer As ImageResizer = New ImageResizer(307200, strFileName, path)
+                        If Not resizer.ScaleImage() Then
+                            MessageBox.Show("Cannot scale image to 1 Megabyte size. Either select a smaller file size or resize the image manually to less than or equal to 1 Megabyte.")
+                            _fileSizeTooLarge = True
+                            imgPicture.Image = Image.FromFile(path)
+                        Else
+                            imgPicture.Image = Image.FromFile(path)
+                            _fileSizeTooLarge = False
+                        End If
+                    End If
+                End If
+            End Using
+            'imgPicture.Dispose()
+        End Sub
+
+        Public Function GetBlankImage()
+            Dim img As Image
+            img = ConvertTextToImage(
+            "Click" & Environment.NewLine & "to Change" & Environment.NewLine & "Photo",
+            "Courier", 30,
+            Color.AntiqueWhite, Color.Black,
+            300, 200)
+            Return img
+        End Function
+
+        Public Shared Function GetTempFileName(ByVal extension As String) As String
+            Dim attempt As Integer = 0
+
+            While True
+                Dim fileName As String = Path.GetRandomFileName()
+                fileName = Path.ChangeExtension(fileName, extension)
+                fileName = Path.Combine(Path.GetTempPath(), fileName)
+
+                Try
+
+                    Using New FileStream(fileName, FileMode.CreateNew)
+                    End Using
+
+                    Return fileName
+                Catch ex As IOException
+                    If System.Threading.Interlocked.Increment(attempt) = 10 Then Throw New IOException("No unique temporary file name is available.", ex)
+                End Try
+            End While
+        End Function
+
+        ''' <summary>
+        ''' Responsive for creating a error image
+        ''' </summary>
+        ''' <param name="pMessageText"></param>
+        ''' <param name="pFontName"></param>
+        ''' <param name="pFontSize"></param>
+        ''' <param name="pBackColor"></param>
+        ''' <param name="pForeColor"></param>
+        ''' <param name="pWidth"></param>
+        ''' <param name="pHeight"></param>
+        ''' <returns></returns>
+        Private Function ConvertTextToImage(pMessageText As String,
+                                            pFontName As String, pFontSize As Integer,
+                                            pBackColor As Color,
+                                            pForeColor As Color,
+                                            pWidth As Integer,
+                                            pHeight As Integer) As Bitmap
+
+            Dim bmp As New Bitmap(pWidth, pHeight)
+
+            Using graphics As Graphics = Graphics.FromImage(bmp)
+                Dim font As New Font(pFontName, pFontSize)
+                graphics.FillRectangle(New SolidBrush(pBackColor), 0, 0, bmp.Width, bmp.Height)
+                graphics.DrawString(pMessageText, font, New SolidBrush(pForeColor), 0, 0)
+                graphics.Flush()
+                font.Dispose()
+                graphics.Dispose()
+            End Using
+
+            Return bmp
+
+        End Function
 
     End Class
 

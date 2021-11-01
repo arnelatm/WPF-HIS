@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="AccessTypeEventArgs.vb" />
     <Compile Include="BackgroundWorker.vb" />
+    <Compile Include="ImageResizer.vb" />
     <Compile Include="Lookup.vb" />
     <Compile Include="CompareLogic.vb" />
     <Compile Include="Consultant.vb" />

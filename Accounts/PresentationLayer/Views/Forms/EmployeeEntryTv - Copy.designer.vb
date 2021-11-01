@@ -1,6 +1,6 @@
 ﻿Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class EmployeeEntryTv
+    Partial Class EmployeeEntryTv2
         Inherits AATM.PresentationLayer.Forms.CFormEntryTv
 
         'Form overrides dispose to clean up the component list.
@@ -73,8 +73,7 @@
         Me.tbcEmployee = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
         Me.tbpPersonal = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
         Me.floPersonal = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblPicture = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.imgPicture = New AATM.Libraries.CBaseControlsLibrary.CPictureBox()
+        Me.imgPicture = New System.Windows.Forms.PictureBox()
         Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cacGender = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -197,6 +196,7 @@
         Me.dgvEmployeeIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
+        Me.lblPicture = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -530,35 +530,16 @@
         Me.floPersonal.Size = New System.Drawing.Size(659, 320)
         Me.floPersonal.TabIndex = 4
         '
-        'lblPicture
-        '
-        Me.lblPicture.DisplayOnly = true
-        Me.lblPicture.EditingMode = false
-        Me.lblPicture.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPicture.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPicture.Location = New System.Drawing.Point(1, 1)
-        Me.lblPicture.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblPicture.Name = "lblPicture"
-        Me.lblPicture.Size = New System.Drawing.Size(174, 23)
-        Me.lblPicture.TabIndex = 273
-        Me.lblPicture.Text = "Picture"
-        Me.lblPicture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblPicture.Translatable = true
-        '
         'imgPicture
         '
         Me.imgPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.imgPicture.DisplayOnly = false
-        Me.imgPicture.EditingMode = false
         Me.floPersonal.SetFlowBreak(Me.imgPicture, true)
         Me.imgPicture.Location = New System.Drawing.Point(179, 3)
-        Me.imgPicture.MaxImageSize = 300000
         Me.imgPicture.Name = "imgPicture"
         Me.imgPicture.Size = New System.Drawing.Size(99, 84)
         Me.imgPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.imgPicture.TabIndex = 272
         Me.imgPicture.TabStop = false
-        Me.imgPicture.Translatable = false
         '
         'lblGender
         '
@@ -3159,6 +3140,21 @@
         '
         Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
         '
+        'lblPicture
+        '
+        Me.lblPicture.DisplayOnly = true
+        Me.lblPicture.EditingMode = false
+        Me.lblPicture.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblPicture.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPicture.Location = New System.Drawing.Point(1, 1)
+        Me.lblPicture.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblPicture.Name = "lblPicture"
+        Me.lblPicture.Size = New System.Drawing.Size(174, 23)
+        Me.lblPicture.TabIndex = 273
+        Me.lblPicture.Text = "Picture"
+        Me.lblPicture.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPicture.Translatable = true
+        '
         'EmployeeEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -3343,7 +3339,7 @@ End Sub
         Friend WithEvents dgvAccumulatedLeave As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvEmployeeIdNoLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNoLeaveCredits As DataGridViewTextBoxColumn
+        Friend WithEvents imgPicture As PictureBox
         Friend WithEvents lblPicture As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents imgPicture As Libraries.CBaseControlsLibrary.CPictureBox
     End Class
 End NameSpace

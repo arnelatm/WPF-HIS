@@ -103,6 +103,12 @@
     <Compile Include="CaDgvComboBoxColumn.vb" />
     <Compile Include="cBlendItems.vb" />
     <Compile Include="cblPointer.vb" />
+    <Compile Include="CPictureBox.Designer.vb">
+      <DependentUpon>CPictureBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CPictureBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CButton.Designer.vb">
       <DependentUpon>CButton.vb</DependentUpon>
     </Compile>
@@ -485,6 +491,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CaDgvComboBox.resx">
       <DependentUpon>CaDgvComboBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPictureBox.resx">
+      <DependentUpon>CPictureBox.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CButton.resx">
       <DependentUpon>CButton.vb</DependentUpon>
