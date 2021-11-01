@@ -41,7 +41,7 @@ Partial Class CrReportViewer
         Me.btnOk.BackColor = System.Drawing.Color.Transparent
         Me.btnOk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnOk.DesignerSelected = True
-        Me.btnOk.DisplayOnly = True
+        Me.btnOk.DisplayOnly = false
         Me.btnOk.ImageIndex = 0
         Me.btnOk.Location = New System.Drawing.Point(106, 187)
         Me.btnOk.Name = "btnOk"
@@ -58,7 +58,7 @@ Partial Class CrReportViewer
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCancel.DesignerSelected = False
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.DisplayOnly = True
+        Me.btnCancel.DisplayOnly = false
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.Location = New System.Drawing.Point(187, 187)
         Me.btnCancel.Name = "btnCancel"
@@ -90,7 +90,7 @@ Partial Class CrReportViewer
         Me.btnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnQuit.DesignerSelected = False
         Me.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnQuit.DisplayOnly = True
+        Me.btnQuit.DisplayOnly = false
         Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"), System.Drawing.Image)
         Me.btnQuit.ImageIndex = 0
         Me.btnQuit.Location = New System.Drawing.Point(353, 0)

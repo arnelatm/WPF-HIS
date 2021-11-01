@@ -28,8 +28,8 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.dtpEndingDate = New CCustomDateTimePicker()
-        Me.dtpBeginningDate = New CCustomDateTimePicker()
+        Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+        Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -51,6 +51,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblEmployeeCode.TabIndex = 22
         Me.lblEmployeeCode.Text = "Employee Code:"
         Me.lblEmployeeCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblEmployeeCode.Translatable = true
         '
         'CLabel3
         '
@@ -64,6 +65,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel3.TabIndex = 21
         Me.CLabel3.Text = "Ending Date:"
         Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel3.Translatable = true
         '
         'lblBeginningDate
         '
@@ -77,22 +79,28 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblBeginningDate.TabIndex = 20
         Me.lblBeginningDate.Text = "Beginning Date :"
         Me.lblBeginningDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblBeginningDate.Translatable = true
         '
         'cboEmployeeIdNo
         '
         Me.cboEmployeeIdNo.BackColor = System.Drawing.Color.White
+        Me.cboEmployeeIdNo.BegFindValue = Nothing
         Me.cboEmployeeIdNo.ChangingSearchValueOnly = false
         Me.cboEmployeeIdNo.CurrentSearchTerm = ""
         Me.cboEmployeeIdNo.DefaultValue = Nothing
         Me.cboEmployeeIdNo.DisplayMember = "Name"
-        Me.cboEmployeeIdNo.DropDownHeight = 200
-        Me.cboEmployeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboEmployeeIdNo.EditingMode = true
+        Me.cboEmployeeIdNo.EndFindValue = Nothing
+        Me.cboEmployeeIdNo.FieldDescription = Nothing
+        Me.cboEmployeeIdNo.FieldName = Nothing
         Me.cboEmployeeIdNo.FilterRule = Nothing
+        Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboEmployeeIdNo.FindEnabled = false
         Me.cboEmployeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.cboEmployeeIdNo.ForeColor = System.Drawing.Color.Black
         Me.cboEmployeeIdNo.FormattingEnabled = true
         Me.cboEmployeeIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboEmployeeIdNo.IgnoreCase = false
         Me.cboEmployeeIdNo.IntegralHeight = false
         Me.cboEmployeeIdNo.LinkedLabel = Nothing
         Me.cboEmployeeIdNo.Location = New System.Drawing.Point(153, 82)
@@ -104,12 +112,13 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
         Me.cboEmployeeIdNo.PropertySelector = Nothing
-        Me.cboEmployeeIdNo.ReadOnlyCombo = False
-            Me.cboEmployeeIdNo.Size = New System.Drawing.Size(520, 24)
-            Me.cboEmployeeIdNo.SuggestBoxHeight = 200
+        Me.cboEmployeeIdNo.ReadOnlyCombo = false
+        Me.cboEmployeeIdNo.Size = New System.Drawing.Size(520, 24)
+        Me.cboEmployeeIdNo.SuggestBoxHeight = 200
         Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
         Me.cboEmployeeIdNo.TabIndex = 25
         Me.cboEmployeeIdNo.TextToSearch = Nothing
+        Me.cboEmployeeIdNo.Translatable = false
         Me.cboEmployeeIdNo.ValueIsMandatory = false
         Me.cboEmployeeIdNo.ValueIsNullable = false
         Me.cboEmployeeIdNo.ValueIsNumeric = false
@@ -132,35 +141,37 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.dtpEndingDate.ReadOnlyDp = false
         Me.dtpEndingDate.SecurityKey = Nothing
         Me.dtpEndingDate.ShowLongDate = false
-        Me.dtpEndingDate.ShowTime = False
-            Me.dtpEndingDate.Size = New System.Drawing.Size(112, 25)
-            Me.dtpEndingDate.TabIndex = 24
-            Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpEndingDate.Value = Nothing
-            Me.dtpEndingDate.ValueIsMandatory = False
-            Me.dtpEndingDate.ValueIsNullable = False
-            '
-            'dtpBeginningDate
-            '
-            Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpBeginningDate.DefaultValue = Nothing
-            Me.dtpBeginningDate.DisplayOnly = False
-            Me.dtpBeginningDate.DtpDefaultValue = Nothing
-            Me.dtpBeginningDate.EditingMode = True
-            Me.dtpBeginningDate.EditsAllowed = False
-            Me.CFlowLayout1.SetFlowBreak(Me.dtpBeginningDate, True)
-            Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpBeginningDate.LinkedLabel = Nothing
-            Me.dtpBeginningDate.Location = New System.Drawing.Point(153, 28)
-            Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(1)
-            Me.dtpBeginningDate.Name = "dtpBeginningDate"
-            Me.dtpBeginningDate.ReadOnlyDp = False
-            Me.dtpBeginningDate.SecurityKey = Nothing
-            Me.dtpBeginningDate.ShowLongDate = False
-            Me.dtpBeginningDate.ShowTime = False
-            Me.dtpBeginningDate.Size = New System.Drawing.Size(112, 25)
-            Me.dtpBeginningDate.TabIndex = 23
+        Me.dtpEndingDate.ShowTime = false
+        Me.dtpEndingDate.Size = New System.Drawing.Size(112, 25)
+        Me.dtpEndingDate.TabIndex = 24
+        Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpEndingDate.Translatable = false
+        Me.dtpEndingDate.Value = Nothing
+        Me.dtpEndingDate.ValueIsMandatory = false
+        Me.dtpEndingDate.ValueIsNullable = false
+        '
+        'dtpBeginningDate
+        '
+        Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpBeginningDate.DefaultValue = Nothing
+        Me.dtpBeginningDate.DisplayOnly = false
+        Me.dtpBeginningDate.DtpDefaultValue = Nothing
+        Me.dtpBeginningDate.EditingMode = true
+        Me.dtpBeginningDate.EditsAllowed = false
+        Me.CFlowLayout1.SetFlowBreak(Me.dtpBeginningDate, true)
+        Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
+        Me.dtpBeginningDate.LinkedLabel = Nothing
+        Me.dtpBeginningDate.Location = New System.Drawing.Point(153, 28)
+        Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(1)
+        Me.dtpBeginningDate.Name = "dtpBeginningDate"
+        Me.dtpBeginningDate.ReadOnlyDp = false
+        Me.dtpBeginningDate.SecurityKey = Nothing
+        Me.dtpBeginningDate.ShowLongDate = false
+        Me.dtpBeginningDate.ShowTime = false
+        Me.dtpBeginningDate.Size = New System.Drawing.Size(112, 25)
+        Me.dtpBeginningDate.TabIndex = 23
         Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpBeginningDate.Translatable = false
         Me.dtpBeginningDate.Value = Nothing
         Me.dtpBeginningDate.ValueIsMandatory = false
         Me.dtpBeginningDate.ValueIsNullable = false
@@ -194,6 +205,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel2.TabIndex = 26
         Me.CLabel2.Text = "Statement of Employee Loans"
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.CLabel2.Translatable = true
         '
         'CLabel1
         '
@@ -207,11 +219,11 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel1.TabIndex = 26
         Me.CLabel1.Text = "Beginning Date :"
         Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel1.Translatable = true
         '
         'btnOk
         '
         Me.btnOk.DesignerSelected = false
-        Me.btnOk.DisplayOnly = true
         Me.btnOk.ImageIndex = 0
         Me.btnOk.Location = New System.Drawing.Point(238, 139)
         Me.btnOk.Name = "btnOk"
@@ -223,8 +235,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         'btnCancel
         '
-        Me.btnCancel.DesignerSelected = false
-        Me.btnCancel.DisplayOnly = true
+        Me.btnCancel.DesignerSelected = true
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.Location = New System.Drawing.Point(360, 139)
         Me.btnCancel.Name = "btnCancel"

@@ -393,6 +393,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.ReadOnly = true
         Me.DataGridViewJournalItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewJournalItems.SecurityKey = ""
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
         Me.DataGridViewJournalItems.ShowFooter = false
@@ -1206,6 +1207,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDjOiItems.Name = "DataGridViewDjOiItems"
         Me.DataGridViewDjOiItems.ReadOnly = true
         Me.DataGridViewDjOiItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewDjOiItems.SecurityKey = ""
         Me.DataGridViewDjOiItems.SequenceColumn = "dgvSequencePcsOi"
         Me.DataGridViewDjOiItems.SequenceFieldName = "Sequence"
         Me.DataGridViewDjOiItems.ShowFooter = false
@@ -1953,7 +1955,6 @@ Namespace PresentationLayer.Views.Forms
         'btnViewGL
         '
         Me.btnViewGL.DesignerSelected = false
-        Me.btnViewGL.DisplayOnly = true
         Me.btnViewGL.Font = New System.Drawing.Font("Tahoma", 8!)
         Me.btnViewGL.ImageIndex = 0
         Me.btnViewGL.Location = New System.Drawing.Point(3, 3)
@@ -1968,7 +1969,6 @@ Namespace PresentationLayer.Views.Forms
         'btnAutoApply
         '
         Me.btnAutoApply.DesignerSelected = false
-        Me.btnAutoApply.DisplayOnly = true
         Me.btnAutoApply.Font = New System.Drawing.Font("Tahoma", 8!)
         Me.btnAutoApply.ImageIndex = 0
         Me.btnAutoApply.Location = New System.Drawing.Point(150, 3)
@@ -1983,7 +1983,6 @@ Namespace PresentationLayer.Views.Forms
         'btnPrintCheck
         '
         Me.btnPrintCheck.DesignerSelected = false
-        Me.btnPrintCheck.DisplayOnly = true
         Me.btnPrintCheck.ImageIndex = 0
         Me.btnPrintCheck.Location = New System.Drawing.Point(288, 3)
         Me.btnPrintCheck.Name = "btnPrintCheck"
@@ -2011,8 +2010,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'btnPrintPcReplenishment
         '
-        Me.btnPrintPcReplenishment.DesignerSelected = false
-        Me.btnPrintPcReplenishment.DisplayOnly = true
+        Me.btnPrintPcReplenishment.DesignerSelected = true
         Me.btnPrintPcReplenishment.ImageIndex = 0
         Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(445, 3)
         Me.btnPrintPcReplenishment.Name = "btnPrintPcReplenishment"

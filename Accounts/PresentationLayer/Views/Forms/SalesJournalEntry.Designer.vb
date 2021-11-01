@@ -553,6 +553,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.ReadOnly = true
         Me.DataGridViewJournalItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewJournalItems.SecurityKey = ""
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
         Me.DataGridViewJournalItems.ShowFooter = false
@@ -753,6 +754,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewSalesDeposits.Name = "DataGridViewSalesDeposits"
         Me.DataGridViewSalesDeposits.ReadOnly = true
         Me.DataGridViewSalesDeposits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewSalesDeposits.SecurityKey = ""
         Me.DataGridViewSalesDeposits.SequenceColumn = "dgvSequenceSc"
         Me.DataGridViewSalesDeposits.SequenceFieldName = "Sequence"
         Me.DataGridViewSalesDeposits.ShowFooter = false
@@ -1028,7 +1030,6 @@ Namespace PresentationLayer.Views.Forms
         'btnViewGL
         '
         Me.btnViewGL.DesignerSelected = false
-        Me.btnViewGL.DisplayOnly = true
         resources.ApplyResources(Me.btnViewGL, "btnViewGL")
         Me.btnViewGL.ImageIndex = 0
         Me.btnViewGL.Name = "btnViewGL"
@@ -1054,7 +1055,7 @@ Namespace PresentationLayer.Views.Forms
         'btnHideJournalEntries
         '
         Me.btnHideJournalEntries.DesignerSelected = false
-        Me.btnHideJournalEntries.DisplayOnly = true
+        Me.btnHideJournalEntries.DisplayOnly = false
         resources.ApplyResources(Me.btnHideJournalEntries, "btnHideJournalEntries")
         Me.btnHideJournalEntries.ImageIndex = 0
         Me.btnHideJournalEntries.Name = "btnHideJournalEntries"

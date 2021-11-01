@@ -73,7 +73,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnCheckAllVisible.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnCheckAllVisible.DesignerSelected = False
-            Me.btnCheckAllVisible.DisplayOnly = True
+            Me.btnCheckAllVisible.DisplayOnly = false
             Me.btnCheckAllVisible.ImageIndex = 0
             Me.btnCheckAllVisible.Location = New System.Drawing.Point(3, 3)
             Me.btnCheckAllVisible.Name = "btnCheckAllVisible"
@@ -87,7 +87,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnCheckAllEditable.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnCheckAllEditable.DesignerSelected = False
-            Me.btnCheckAllEditable.DisplayOnly = True
+            Me.btnCheckAllEditable.DisplayOnly = false
             Me.btnCheckAllEditable.ImageIndex = 0
             Me.btnCheckAllEditable.Location = New System.Drawing.Point(150, 3)
             Me.btnCheckAllEditable.Name = "btnCheckAllEditable"
@@ -101,7 +101,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnUncheckAllEditable.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnUncheckAllEditable.DesignerSelected = False
-            Me.btnUncheckAllEditable.DisplayOnly = True
+            Me.btnUncheckAllEditable.DisplayOnly = false
             Me.btnUncheckAllEditable.ImageIndex = 0
             Me.btnUncheckAllEditable.Location = New System.Drawing.Point(481, 3)
             Me.btnUncheckAllEditable.Name = "btnUncheckAllEditable"
@@ -115,7 +115,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnUncheckAllVisible.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnUncheckAllVisible.DesignerSelected = False
-            Me.btnUncheckAllVisible.DisplayOnly = True
+            Me.btnUncheckAllVisible.DisplayOnly = false
             Me.btnUncheckAllVisible.ImageIndex = 0
             Me.btnUncheckAllVisible.Location = New System.Drawing.Point(311, 3)
             Me.btnUncheckAllVisible.Name = "btnUncheckAllVisible"

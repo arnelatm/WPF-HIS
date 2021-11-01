@@ -114,7 +114,7 @@ Partial Class Form1
         '
         Me.btnQuit.DesignerSelected = false
         Me.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnQuit.DisplayOnly = true
+        Me.btnQuit.DisplayOnly = false
         Me.btnQuit.ImageIndex = 0
         Me.btnQuit.Location = New System.Drawing.Point(252, 83)
         Me.btnQuit.Name = "btnQuit"
@@ -127,7 +127,7 @@ Partial Class Form1
         'btnTranslate
         '
         Me.btnTranslate.DesignerSelected = true
-        Me.btnTranslate.DisplayOnly = true
+        Me.btnTranslate.DisplayOnly = false
         Me.btnTranslate.ImageIndex = 0
         Me.btnTranslate.Location = New System.Drawing.Point(363, 83)
         Me.btnTranslate.Name = "btnTranslate"

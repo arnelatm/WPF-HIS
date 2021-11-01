@@ -30,8 +30,8 @@ Partial Class CCustomDateTimePicker
         Me.floDatePicker = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.txtLongDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtDate = New AATM.Libraries.CBaseControlsLibrary.CMaskedTextBox()
-        Me.dtp = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCalendarType = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.dtp = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.txtTime = New AATM.Libraries.CBaseControlsLibrary.gTimePicker()
         Me.floDatePicker.SuspendLayout
         Me.SuspendLayout
@@ -113,11 +113,27 @@ Partial Class CCustomDateTimePicker
         Me.txtDate.ValueIsNullable = true
         Me.txtDate.ValueIsNumeric = false
         '
+        'btnCalendarType
+        '
+        Me.btnCalendarType.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.btnCalendarType.DesignerSelected = false
+        Me.btnCalendarType.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.btnCalendarType.ImageIndex = 0
+        Me.btnCalendarType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnCalendarType.Location = New System.Drawing.Point(185, 0)
+        Me.btnCalendarType.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnCalendarType.Name = "btnCalendarType"
+        Me.btnCalendarType.OriginalImageName = Nothing
+        Me.btnCalendarType.SecurityKey = ""
+        Me.btnCalendarType.Size = New System.Drawing.Size(18, 19)
+        Me.btnCalendarType.TabIndex = 21
+        Me.btnCalendarType.TabStop = false
+        Me.btnCalendarType.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
         'dtp
         '
         Me.dtp.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.dtp.DesignerSelected = false
-        Me.dtp.DisplayOnly = true
         Me.dtp.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.dtp.Image = Global.AATM.Libraries.CBaseControlsLibrary.My.Resources.Resources.Calendar18x18
         Me.dtp.ImageIndex = 0
@@ -133,24 +149,6 @@ Partial Class CCustomDateTimePicker
         Me.dtp.Text = ""
         Me.dtp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
-        'btnCalendarType
-        '
-        Me.btnCalendarType.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.btnCalendarType.DesignerSelected = false
-        Me.btnCalendarType.DisplayOnly = true
-        Me.btnCalendarType.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.btnCalendarType.ImageIndex = 0
-        Me.btnCalendarType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCalendarType.Location = New System.Drawing.Point(185, 0)
-        Me.btnCalendarType.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnCalendarType.Name = "btnCalendarType"
-        Me.btnCalendarType.OriginalImageName = Nothing
-        Me.btnCalendarType.SecurityKey = ""
-        Me.btnCalendarType.Size = New System.Drawing.Size(18, 19)
-        Me.btnCalendarType.TabIndex = 21
-        Me.btnCalendarType.TabStop = false
-        Me.btnCalendarType.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
         'txtTime
         '
         Me.txtTime.ButtonForeColor = System.Drawing.Color.DarkSlateBlue
@@ -163,16 +161,16 @@ Partial Class CCustomDateTimePicker
         Me.txtTime.NullHatchStyle = System.Drawing.Drawing2D.HatchStyle.WideDownwardDiagonal
         Me.txtTime.NullTextColor = System.Drawing.Color.Black
         Me.txtTime.NullTextInFront = false
-        Me.txtTime.oldTimeAmPM = AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl.eTimeAMPM.AM
+        Me.txtTime.oldTimeAmPM = AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl.eTimeAMPM.am
         Me.txtTime.ShowMidMins = true
-        Me.txtTime.Size = New System.Drawing.Size(75, 23)
+        Me.txtTime.Size = New System.Drawing.Size(77, 23)
         Me.txtTime.TabIndex = 22
         Me.txtTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.txtTime.TextBackColor = System.Drawing.Color.White
         Me.txtTime.TextFont = New System.Drawing.Font("Arial", 10!)
         Me.txtTime.TextForeColor = System.Drawing.Color.Black
         Me.txtTime.Time = "07:00"
-        Me.txtTime.TimeAMPM = AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl.eTimeAMPM.AM
+        Me.txtTime.TimeAMPM = AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl.eTimeAMPM.am
         TimeColors1.BackGround = System.Drawing.Color.White
         TimeColors1.Box = System.Drawing.Color.White
         TimeColors1.DisplayTime = System.Drawing.Color.Red

@@ -107,7 +107,7 @@ Partial Class CCalendar
         Me.btnCalendarOk.BackColor = System.Drawing.Color.Lime
         Me.btnCalendarOk.DesignerSelected = False
         Me.btnCalendarOk.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnCalendarOk.DisplayOnly = True
+        Me.btnCalendarOk.DisplayOnly = false
         Me.btnCalendarOk.ImageIndex = 0
         resources.ApplyResources(Me.btnCalendarOk, "btnCalendarOk")
         Me.btnCalendarOk.Name = "btnCalendarOk"
@@ -119,7 +119,7 @@ Partial Class CCalendar
         Me.btnCalendarCancel.BackColor = System.Drawing.Color.Lime
         Me.btnCalendarCancel.DesignerSelected = False
         Me.btnCalendarCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCalendarCancel.DisplayOnly = True
+        Me.btnCalendarCancel.DisplayOnly = false
         resources.ApplyResources(Me.btnCalendarCancel, "btnCalendarCancel")
         Me.btnCalendarCancel.ImageIndex = 0
         Me.btnCalendarCancel.Name = "btnCalendarCancel"

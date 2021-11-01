@@ -29,15 +29,15 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -63,23 +63,17 @@ Namespace PresentationLayer.Views.Forms
         Me.tbpAttendance = New System.Windows.Forms.TabPage()
         Me.DataGridViewPayrollAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvDaysVacationLeave = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-        Me.dgvDaysTotal = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-        Me.tbpOvertime = New System.Windows.Forms.TabPage()
-        Me.DataGridViewPayrollOvertime = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.btnInitializeOvertime = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnInitializeAttendance = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnGenerateRegularPayElements = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnViewPayrollReport = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvDaysAbsentWoPay = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvDaysAbsentWithPay = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+        Me.dgvDaysVacationLeave = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvDaysOff = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvDaysPresent = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+        Me.dgvDaysTotal = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsPayrollAttendance = New System.Windows.Forms.BindingSource(Me.components)
+        Me.tbpOvertime = New System.Windows.Forms.TabPage()
+        Me.DataGridViewPayrollOvertime = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequenceOvertime = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEmployeeIdNoOt = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.OvertimeRegularDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -88,6 +82,12 @@ Namespace PresentationLayer.Views.Forms
         Me.PayrollIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsPayrollOvertime = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.btnInitializeOvertime = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnInitializeAttendance = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnGenerateRegularPayElements = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnViewPayrollReport = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -98,11 +98,11 @@ Namespace PresentationLayer.Views.Forms
         Me.tbcPayroll.SuspendLayout
         Me.tbpAttendance.SuspendLayout
         CType(Me.DataGridViewPayrollAttendance,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsPayrollAttendance,System.ComponentModel.ISupportInitialize).BeginInit
         Me.tbpOvertime.SuspendLayout
         CType(Me.DataGridViewPayrollOvertime,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout1.SuspendLayout
-        CType(Me.bsPayrollAttendance,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsPayrollOvertime,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
         '
         'SplitContainer1
@@ -555,6 +555,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPayrollAttendance.Name = "DataGridViewPayrollAttendance"
         Me.DataGridViewPayrollAttendance.ReadOnly = true
         Me.DataGridViewPayrollAttendance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewPayrollAttendance.SecurityKey = ""
         Me.DataGridViewPayrollAttendance.SequenceColumn = "dgvSequence"
         Me.DataGridViewPayrollAttendance.SequenceFieldName = "Sequence"
         Me.DataGridViewPayrollAttendance.ShowFooter = false
@@ -585,165 +586,6 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvSequence.Translatable = false
         Me.dgvSequence.Width = 30
-        '
-        'dgvDaysVacationLeave
-        '
-        Me.dgvDaysVacationLeave.DataPropertyName = "DaysVacationLeave"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        Me.dgvDaysVacationLeave.DefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvDaysVacationLeave.EditingMode = false
-        Me.dgvDaysVacationLeave.HeaderText = "Days Vacation Leave"
-        Me.dgvDaysVacationLeave.Name = "dgvDaysVacationLeave"
-        Me.dgvDaysVacationLeave.ReadOnly = true
-        Me.dgvDaysVacationLeave.Translatable = false
-        Me.dgvDaysVacationLeave.Width = 60
-        '
-        'dgvDaysTotal
-        '
-        Me.dgvDaysTotal.DataPropertyName = "DaysTotal"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-        Me.dgvDaysTotal.DefaultCellStyle = DataGridViewCellStyle9
-        Me.dgvDaysTotal.EditingMode = false
-        Me.dgvDaysTotal.HeaderText = "Days Total"
-        Me.dgvDaysTotal.Name = "dgvDaysTotal"
-        Me.dgvDaysTotal.ReadOnly = true
-        Me.dgvDaysTotal.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDaysTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvDaysTotal.Translatable = false
-        Me.dgvDaysTotal.Width = 60
-        '
-        'tbpOvertime
-        '
-        Me.tbpOvertime.Controls.Add(Me.DataGridViewPayrollOvertime)
-        Me.tbpOvertime.Location = New System.Drawing.Point(4, 22)
-        Me.tbpOvertime.Name = "tbpOvertime"
-        Me.tbpOvertime.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpOvertime.Size = New System.Drawing.Size(760, 364)
-        Me.tbpOvertime.TabIndex = 1
-        Me.tbpOvertime.Text = "Overtime"
-        Me.tbpOvertime.UseVisualStyleBackColor = true
-        '
-        'DataGridViewPayrollOvertime
-        '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewPayrollOvertime.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
-        Me.DataGridViewPayrollOvertime.AutoGenerateColumns = false
-        Me.DataGridViewPayrollOvertime.BegFindValue = Nothing
-        Me.DataGridViewPayrollOvertime.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewPayrollOvertime.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceOvertime, Me.dgvEmployeeIdNoOt, Me.OvertimeRegularDataGridViewTextBoxColumn, Me.OvertimeHolidayDataGridViewTextBoxColumn, Me.OvertimeSpecialDataGridViewTextBoxColumn, Me.PayrollIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn1})
-        Me.DataGridViewPayrollOvertime.DataSource = Me.bsPayrollOvertime
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewPayrollOvertime.DefaultCellStyle = DataGridViewCellStyle17
-        Me.DataGridViewPayrollOvertime.DgvFooter = Nothing
-        Me.DataGridViewPayrollOvertime.DisplayOnly = false
-        Me.DataGridViewPayrollOvertime.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridViewPayrollOvertime.Ea = Nothing
-        Me.DataGridViewPayrollOvertime.EditingMode = false
-        Me.DataGridViewPayrollOvertime.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewPayrollOvertime.EndFindValue = Nothing
-        Me.DataGridViewPayrollOvertime.FieldDescription = Nothing
-        Me.DataGridViewPayrollOvertime.FieldName = Nothing
-        Me.DataGridViewPayrollOvertime.FieldsDictionary = Nothing
-        Me.DataGridViewPayrollOvertime.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.DataGridViewPayrollOvertime.FindEnabled = false
-        Me.DataGridViewPayrollOvertime.FirstRowDeletionEnabled = true
-        Me.DataGridViewPayrollOvertime.FirstRowInsertionEnabled = true
-        Me.DataGridViewPayrollOvertime.IgnoreCase = false
-        Me.DataGridViewPayrollOvertime.Location = New System.Drawing.Point(3, 3)
-        Me.DataGridViewPayrollOvertime.Name = "DataGridViewPayrollOvertime"
-        Me.DataGridViewPayrollOvertime.ReadOnly = true
-        Me.DataGridViewPayrollOvertime.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.DataGridViewPayrollOvertime.SequenceColumn = "dgvSequence"
-        Me.DataGridViewPayrollOvertime.SequenceFieldName = "Sequence"
-        Me.DataGridViewPayrollOvertime.ShowFooter = false
-        Me.DataGridViewPayrollOvertime.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 358)
-        Me.DataGridViewPayrollOvertime.TabIndex = 0
-        Me.DataGridViewPayrollOvertime.Translatable = true
-        '
-        'CFlowLayout1
-        '
-        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout1.Controls.Add(Me.btnInitializeOvertime)
-        Me.CFlowLayout1.Controls.Add(Me.btnInitializeAttendance)
-        Me.CFlowLayout1.Controls.Add(Me.btnGenerateRegularPayElements)
-        Me.CFlowLayout1.Controls.Add(Me.btnViewPayrollReport)
-        Me.CFlowLayout1.Controls.Add(Me.ProgressBar)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(13, 543)
-        Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(773, 75)
-        Me.CFlowLayout1.TabIndex = 175
-        '
-        'btnInitializeOvertime
-        '
-        Me.btnInitializeOvertime.DesignerSelected = false
-        Me.btnInitializeOvertime.DisplayOnly = true
-        Me.btnInitializeOvertime.ImageIndex = 0
-        Me.btnInitializeOvertime.Location = New System.Drawing.Point(3, 3)
-        Me.btnInitializeOvertime.Name = "btnInitializeOvertime"
-        Me.btnInitializeOvertime.OriginalImageName = Nothing
-        Me.btnInitializeOvertime.SecurityKey = ""
-        Me.btnInitializeOvertime.Size = New System.Drawing.Size(90, 40)
-        Me.btnInitializeOvertime.TabIndex = 169
-        Me.btnInitializeOvertime.Text = "Initialize Overtime"
-        '
-        'btnInitializeAttendance
-        '
-        Me.btnInitializeAttendance.DesignerSelected = false
-        Me.btnInitializeAttendance.DisplayOnly = true
-        Me.btnInitializeAttendance.ImageIndex = 0
-        Me.btnInitializeAttendance.Location = New System.Drawing.Point(99, 3)
-        Me.btnInitializeAttendance.Name = "btnInitializeAttendance"
-        Me.btnInitializeAttendance.OriginalImageName = Nothing
-        Me.btnInitializeAttendance.SecurityKey = ""
-        Me.btnInitializeAttendance.Size = New System.Drawing.Size(95, 40)
-        Me.btnInitializeAttendance.TabIndex = 173
-        Me.btnInitializeAttendance.Text = "Initialize Attendance"
-        '
-        'btnGenerateRegularPayElements
-        '
-        Me.btnGenerateRegularPayElements.DesignerSelected = false
-        Me.btnGenerateRegularPayElements.DisplayOnly = true
-        Me.btnGenerateRegularPayElements.ImageIndex = 0
-        Me.btnGenerateRegularPayElements.Location = New System.Drawing.Point(200, 3)
-        Me.btnGenerateRegularPayElements.Name = "btnGenerateRegularPayElements"
-        Me.btnGenerateRegularPayElements.OriginalImageName = Nothing
-        Me.btnGenerateRegularPayElements.SecurityKey = ""
-        Me.btnGenerateRegularPayElements.Size = New System.Drawing.Size(154, 40)
-        Me.btnGenerateRegularPayElements.TabIndex = 174
-        Me.btnGenerateRegularPayElements.Text = "Generate Employee Earnings/Deductions"
-        '
-        'btnViewPayrollReport
-        '
-        Me.btnViewPayrollReport.DesignerSelected = false
-        Me.btnViewPayrollReport.DisplayOnly = true
-        Me.btnViewPayrollReport.ImageIndex = 0
-        Me.btnViewPayrollReport.Location = New System.Drawing.Point(360, 3)
-        Me.btnViewPayrollReport.Name = "btnViewPayrollReport"
-        Me.btnViewPayrollReport.OriginalImageName = Nothing
-        Me.btnViewPayrollReport.SecurityKey = ""
-        Me.btnViewPayrollReport.Size = New System.Drawing.Size(189, 40)
-        Me.btnViewPayrollReport.TabIndex = 171
-        Me.btnViewPayrollReport.Text = "View/Edit Payroll Details"
-        '
-        'ProgressBar
-        '
-        Me.ProgressBar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.ProgressBar.Location = New System.Drawing.Point(3, 49)
-        Me.ProgressBar.Name = "ProgressBar"
-        Me.ProgressBar.Size = New System.Drawing.Size(764, 23)
-        Me.ProgressBar.TabIndex = 148
-        Me.ProgressBar.Visible = false
         '
         'dgvEmployeeIdNo
         '
@@ -792,6 +634,20 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvDaysAbsentWithPay.Translatable = false
         Me.dgvDaysAbsentWithPay.Width = 60
         '
+        'dgvDaysVacationLeave
+        '
+        Me.dgvDaysVacationLeave.DataPropertyName = "DaysVacationLeave"
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        Me.dgvDaysVacationLeave.DefaultCellStyle = DataGridViewCellStyle6
+        Me.dgvDaysVacationLeave.EditingMode = false
+        Me.dgvDaysVacationLeave.HeaderText = "Days Vacation Leave"
+        Me.dgvDaysVacationLeave.Name = "dgvDaysVacationLeave"
+        Me.dgvDaysVacationLeave.ReadOnly = true
+        Me.dgvDaysVacationLeave.Translatable = false
+        Me.dgvDaysVacationLeave.Width = 60
+        '
         'dgvDaysOff
         '
         Me.dgvDaysOff.DataPropertyName = "DaysOff"
@@ -825,6 +681,22 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvDaysPresent.Translatable = false
         Me.dgvDaysPresent.Width = 60
         '
+        'dgvDaysTotal
+        '
+        Me.dgvDaysTotal.DataPropertyName = "DaysTotal"
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+        Me.dgvDaysTotal.DefaultCellStyle = DataGridViewCellStyle9
+        Me.dgvDaysTotal.EditingMode = false
+        Me.dgvDaysTotal.HeaderText = "Days Total"
+        Me.dgvDaysTotal.Name = "dgvDaysTotal"
+        Me.dgvDaysTotal.ReadOnly = true
+        Me.dgvDaysTotal.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDaysTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvDaysTotal.Translatable = false
+        Me.dgvDaysTotal.Width = 60
+        '
         'IdNoDataGridViewTextBoxColumn
         '
         Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
@@ -836,6 +708,62 @@ Namespace PresentationLayer.Views.Forms
         'bsPayrollAttendance
         '
         Me.bsPayrollAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
+        '
+        'tbpOvertime
+        '
+        Me.tbpOvertime.Controls.Add(Me.DataGridViewPayrollOvertime)
+        Me.tbpOvertime.Location = New System.Drawing.Point(4, 22)
+        Me.tbpOvertime.Name = "tbpOvertime"
+        Me.tbpOvertime.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpOvertime.Size = New System.Drawing.Size(760, 364)
+        Me.tbpOvertime.TabIndex = 1
+        Me.tbpOvertime.Text = "Overtime"
+        Me.tbpOvertime.UseVisualStyleBackColor = true
+        '
+        'DataGridViewPayrollOvertime
+        '
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewPayrollOvertime.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
+        Me.DataGridViewPayrollOvertime.AutoGenerateColumns = false
+        Me.DataGridViewPayrollOvertime.BegFindValue = Nothing
+        Me.DataGridViewPayrollOvertime.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewPayrollOvertime.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceOvertime, Me.dgvEmployeeIdNoOt, Me.OvertimeRegularDataGridViewTextBoxColumn, Me.OvertimeHolidayDataGridViewTextBoxColumn, Me.OvertimeSpecialDataGridViewTextBoxColumn, Me.PayrollIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn1})
+        Me.DataGridViewPayrollOvertime.DataSource = Me.bsPayrollOvertime
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewPayrollOvertime.DefaultCellStyle = DataGridViewCellStyle17
+        Me.DataGridViewPayrollOvertime.DgvFooter = Nothing
+        Me.DataGridViewPayrollOvertime.DisplayOnly = false
+        Me.DataGridViewPayrollOvertime.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridViewPayrollOvertime.Ea = Nothing
+        Me.DataGridViewPayrollOvertime.EditingMode = false
+        Me.DataGridViewPayrollOvertime.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.DataGridViewPayrollOvertime.EndFindValue = Nothing
+        Me.DataGridViewPayrollOvertime.FieldDescription = Nothing
+        Me.DataGridViewPayrollOvertime.FieldName = Nothing
+        Me.DataGridViewPayrollOvertime.FieldsDictionary = Nothing
+        Me.DataGridViewPayrollOvertime.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DataGridViewPayrollOvertime.FindEnabled = false
+        Me.DataGridViewPayrollOvertime.FirstRowDeletionEnabled = true
+        Me.DataGridViewPayrollOvertime.FirstRowInsertionEnabled = true
+        Me.DataGridViewPayrollOvertime.IgnoreCase = false
+        Me.DataGridViewPayrollOvertime.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridViewPayrollOvertime.Name = "DataGridViewPayrollOvertime"
+        Me.DataGridViewPayrollOvertime.ReadOnly = true
+        Me.DataGridViewPayrollOvertime.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewPayrollOvertime.SecurityKey = ""
+        Me.DataGridViewPayrollOvertime.SequenceColumn = "dgvSequence"
+        Me.DataGridViewPayrollOvertime.SequenceFieldName = "Sequence"
+        Me.DataGridViewPayrollOvertime.ShowFooter = false
+        Me.DataGridViewPayrollOvertime.ShowInsertColumnWhenEditing = true
+        Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 358)
+        Me.DataGridViewPayrollOvertime.TabIndex = 0
+        Me.DataGridViewPayrollOvertime.Translatable = true
         '
         'dgvSequenceOvertime
         '
@@ -938,6 +866,76 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.bsPayrollOvertime.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.OtWorkHourModel)
         '
+        'CFlowLayout1
+        '
+        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout1.Controls.Add(Me.btnInitializeOvertime)
+        Me.CFlowLayout1.Controls.Add(Me.btnInitializeAttendance)
+        Me.CFlowLayout1.Controls.Add(Me.btnGenerateRegularPayElements)
+        Me.CFlowLayout1.Controls.Add(Me.btnViewPayrollReport)
+        Me.CFlowLayout1.Controls.Add(Me.ProgressBar)
+        Me.CFlowLayout1.Location = New System.Drawing.Point(13, 543)
+        Me.CFlowLayout1.Name = "CFlowLayout1"
+        Me.CFlowLayout1.Size = New System.Drawing.Size(773, 75)
+        Me.CFlowLayout1.TabIndex = 175
+        '
+        'btnInitializeOvertime
+        '
+        Me.btnInitializeOvertime.DesignerSelected = false
+        Me.btnInitializeOvertime.ImageIndex = 0
+        Me.btnInitializeOvertime.Location = New System.Drawing.Point(3, 3)
+        Me.btnInitializeOvertime.Name = "btnInitializeOvertime"
+        Me.btnInitializeOvertime.OriginalImageName = Nothing
+        Me.btnInitializeOvertime.SecurityKey = ""
+        Me.btnInitializeOvertime.Size = New System.Drawing.Size(90, 40)
+        Me.btnInitializeOvertime.TabIndex = 169
+        Me.btnInitializeOvertime.Text = "Initialize Overtime"
+        '
+        'btnInitializeAttendance
+        '
+        Me.btnInitializeAttendance.DesignerSelected = false
+        Me.btnInitializeAttendance.ImageIndex = 0
+        Me.btnInitializeAttendance.Location = New System.Drawing.Point(99, 3)
+        Me.btnInitializeAttendance.Name = "btnInitializeAttendance"
+        Me.btnInitializeAttendance.OriginalImageName = Nothing
+        Me.btnInitializeAttendance.SecurityKey = ""
+        Me.btnInitializeAttendance.Size = New System.Drawing.Size(95, 40)
+        Me.btnInitializeAttendance.TabIndex = 173
+        Me.btnInitializeAttendance.Text = "Initialize Attendance"
+        '
+        'btnGenerateRegularPayElements
+        '
+        Me.btnGenerateRegularPayElements.DesignerSelected = false
+        Me.btnGenerateRegularPayElements.ImageIndex = 0
+        Me.btnGenerateRegularPayElements.Location = New System.Drawing.Point(200, 3)
+        Me.btnGenerateRegularPayElements.Name = "btnGenerateRegularPayElements"
+        Me.btnGenerateRegularPayElements.OriginalImageName = Nothing
+        Me.btnGenerateRegularPayElements.SecurityKey = ""
+        Me.btnGenerateRegularPayElements.Size = New System.Drawing.Size(154, 40)
+        Me.btnGenerateRegularPayElements.TabIndex = 174
+        Me.btnGenerateRegularPayElements.Text = "Generate Employee Earnings/Deductions"
+        '
+        'btnViewPayrollReport
+        '
+        Me.btnViewPayrollReport.DesignerSelected = true
+        Me.btnViewPayrollReport.ImageIndex = 0
+        Me.btnViewPayrollReport.Location = New System.Drawing.Point(360, 3)
+        Me.btnViewPayrollReport.Name = "btnViewPayrollReport"
+        Me.btnViewPayrollReport.OriginalImageName = Nothing
+        Me.btnViewPayrollReport.SecurityKey = ""
+        Me.btnViewPayrollReport.Size = New System.Drawing.Size(189, 40)
+        Me.btnViewPayrollReport.TabIndex = 171
+        Me.btnViewPayrollReport.Text = "View/Edit Payroll Details"
+        '
+        'ProgressBar
+        '
+        Me.ProgressBar.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.ProgressBar.Location = New System.Drawing.Point(3, 49)
+        Me.ProgressBar.Name = "ProgressBar"
+        Me.ProgressBar.Size = New System.Drawing.Size(764, 23)
+        Me.ProgressBar.TabIndex = 148
+        Me.ProgressBar.Visible = false
+        '
         'PayrollEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -955,11 +953,11 @@ Namespace PresentationLayer.Views.Forms
         Me.tbcPayroll.ResumeLayout(false)
         Me.tbpAttendance.ResumeLayout(false)
         CType(Me.DataGridViewPayrollAttendance,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsPayrollAttendance,System.ComponentModel.ISupportInitialize).EndInit
         Me.tbpOvertime.ResumeLayout(false)
         CType(Me.DataGridViewPayrollOvertime,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
-        CType(Me.bsPayrollAttendance,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsPayrollOvertime,System.ComponentModel.ISupportInitialize).EndInit
+        Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
 
