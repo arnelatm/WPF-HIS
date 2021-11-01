@@ -1125,6 +1125,9 @@ Namespace PresentationLayer.Views.Forms
             Return parentIdNo
         End Function
 
+        Private Sub EmployeeIDPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeIDPrintingToolStripMenuItem.Click
+
+        End Sub
     End Class
 
 End Namespace
