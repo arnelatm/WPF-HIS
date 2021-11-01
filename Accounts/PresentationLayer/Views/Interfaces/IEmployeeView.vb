@@ -44,6 +44,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property RegularEmployeeEarnings As List(Of EmployeePayElementView)
         Property EmployeePhones As List(Of EmployeePhoneView)
         Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView)
+        Property Picture As Image
 
     End Interface
 

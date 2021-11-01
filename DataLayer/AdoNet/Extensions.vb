@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.IO
 Imports System.Runtime.CompilerServices
 Imports AATM.Libraries.MessagingLibrary
 
@@ -307,10 +308,27 @@ Namespace AdoNet
 
         ' takes an enumerable source and returns a comma separate string.
         ' handy for building SQL Statements (for example with IN () statements) from object collections
-
         <Extension>
         Public Function CommaSeparate(Of T, TU)(source As IEnumerable(Of T), func As Func(Of T, TU)) As String
             Return String.Join(",", source.Select(Function(s) func(s).ToString()).ToArray())
+        End Function
+
+        ' takes a picture object and convert it to an image.
+        <Extension>
+        Public Function AsImage(cPicture As Object) As Image
+            If cPicture.Equals(DBNull.Value) Or cPicture Is Nothing Then
+                Return Nothing
+            Else
+                Dim imageData = CType(cPicture, Byte())
+                Dim img As Image = Nothing
+                If imageData IsNot Nothing Then
+                    Using ms As New MemoryStream(imageData, 0, imageData.Length)
+                        ms.Write(imageData, 0, imageData.Length)
+                        img = Image.FromStream(ms, True)
+                    End Using
+                End If
+                Return img
+            End If
         End Function
 
     End Module

@@ -69,6 +69,7 @@ Namespace BusinessLayer
         Public Property EmployeePhones As List(Of EmployeePhone)
         Public Property EmployeeLeaveCredits As List(Of EmployeeLeaveCredit)
         Public Property PayFrequency As PayFrequencySelection
+        Public Property Picture As Image
 
     End Class
 

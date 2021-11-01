@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{987A10E4-3B9F-4343-B5B8-01B139C85BCE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>ReadingImagesFromSqlServer.My.MyApplication</StartupObject>
-    <RootNamespace>ReadingImagesFromSqlServer</RootNamespace>
+    <StartupObject>AATM.Libraries.ReadingImagesFromSqlServer.My.MyApplication</StartupObject>
+    <RootNamespace>AATM.Libraries.ReadingImagesFromSqlServer</RootNamespace>
     <AssemblyName>ReadingImagesFromSqlServer</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
@@ -87,6 +87,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>

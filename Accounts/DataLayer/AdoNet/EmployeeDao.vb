@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.IO
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
@@ -19,7 +20,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, DutyHours, HiredDate, ReleasedDate, " &
-                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Active" &
+                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Active, Picture" &
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -99,7 +100,8 @@ Namespace DataLayer.AdoNet
                     " Street = @Street," &
                     " Title = @Title," &
                     " TownCity = @TownCity," &
-                    " ZipCode = @ZipCode" &
+                    " ZipCode = @ZipCode," &
+                    " Picture = @Picture" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(employee))
         End Function
@@ -109,10 +111,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Active)" &
+                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Active, Picture)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod, @SponsorType, @Active)"
+                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod, @SponsorType, @Active, @Picture)"
             Return _db.Insert(sql, Take(employee))
         End Function
 
@@ -155,7 +157,8 @@ Namespace DataLayer.AdoNet
             .Street = Extensions.AsString(reader("Street")),
             .Title = Extensions.AsString(reader("Title")),
             .TownCity = Extensions.AsString(reader("TownCity")),
-            .ZipCode = Extensions.AsString(reader("ZipCode"))
+            .ZipCode = Extensions.AsString(reader("ZipCode")),
+            .Picture = Extensions.AsImage(reader("Picture"))
             }
 
         Private Function Take(ByRef employee As Employee) As Object()
@@ -196,12 +199,20 @@ Namespace DataLayer.AdoNet
                                     "@Street", employee.Street,
                                     "@Title", employee.Title,
                                     "@TownCity", employee.TownCity,
-                                    "@ZipCode", employee.ZipCode
+                                    "@ZipCode", employee.ZipCode,
+                                    "@Picture", ToSqlImage(employee.Picture)
                                 }
         End Function
 
         Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
             Return UpdateCode(_db, "Employee", "EmployeeCode", "IdNo", idNo)
+        End Function
+
+        Public Function ToSqlImage(ByVal imageIn As System.Drawing.Image) As Byte()
+            Using ms = New MemoryStream()
+                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif)
+                Return ms.ToArray()
+            End Using
         End Function
 
     End Class

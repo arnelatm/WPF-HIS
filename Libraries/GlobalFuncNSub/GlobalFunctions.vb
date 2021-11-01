@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing
 Imports System.Globalization
+Imports System.IO
 Imports System.Linq.Expressions
 Imports System.Net.Mail
 Imports System.Reflection
@@ -1215,4 +1217,81 @@ Public Module GlobalFunctions
 
     '    Return defDesc
     'End Function
+
+    Public Function CreateTextImage(cText As String, pFontSize As Int16?, pBgColor As Color?, pFgColor As Color?, pLength As Int16?, pWidth As Int16?)
+        Dim img As Image
+        If pFontSize Is Nothing Then
+            pFontSize = 30
+        End If
+        If pBgColor Is Nothing Then
+            pBgColor = Color.AntiqueWhite
+        End If
+        If pFgColor Is Nothing Then
+            pFgColor = Color.Black
+        End If
+        If pLength Is Nothing Then
+            pLength = 300
+        End If
+        If pWidth Is Nothing Then
+            pWidth = 200
+        End If
+        img = ConvertTextToImage(cText, "Courier", pFontSize, pBgColor, pFgColor, pWidth, pLength)
+        Return img
+        'img = ConvertTextToImage(
+        '    "Click" & Environment.NewLine & "to Change" & Environment.NewLine & "Photo",
+        '    "Courier", 30,
+        '    Color.AntiqueWhite, Color.Black,
+        '    300, 200)
+        'Return img
+    End Function
+
+    ''' <summary>
+    ''' Responsive for creating a error image
+    ''' </summary>
+    ''' <param name="pMessageText"></param>
+    ''' <param name="pFontName"></param>
+    ''' <param name="pFontSize"></param>
+    ''' <param name="pBackColor"></param>
+    ''' <param name="pForeColor"></param>
+    ''' <param name="pWidth"></param>
+    ''' <param name="pHeight"></param>
+    ''' <returns></returns>
+    Private Function ConvertTextToImage(pMessageText As String,
+                                        pFontName As String, pFontSize As Integer,
+                                        pBackColor As Color,
+                                        pForeColor As Color,
+                                        pWidth As Integer,
+                                        pHeight As Integer) As Bitmap
+
+        Dim bmp As New Bitmap(pWidth, pHeight)
+
+        Using graphics As Graphics = Graphics.FromImage(bmp)
+            Dim font As New Font(pFontName, pFontSize)
+            graphics.FillRectangle(New SolidBrush(pBackColor), 0, 0, bmp.Width, bmp.Height)
+            graphics.DrawString(pMessageText, font, New SolidBrush(pForeColor), 0, 0)
+            graphics.Flush()
+            font.Dispose()
+            graphics.Dispose()
+        End Using
+
+        Return bmp
+
+    End Function
+
+    Public Function GetTempFileName(ByVal extension As String) As String
+        Dim attempt As Integer = 0
+        While True
+            Dim fileName As String = Path.GetRandomFileName()
+            fileName = Path.ChangeExtension(fileName, extension)
+            fileName = Path.Combine(Path.GetTempPath(), fileName)
+            Try
+                Using New FileStream(fileName, FileMode.CreateNew)
+                End Using
+                Return fileName
+            Catch ex As IOException
+                If System.Threading.Interlocked.Increment(attempt) = 10 Then Throw New IOException("No unique temporary file name is available.", ex)
+            End Try
+        End While
+    End Function
+
 End Module
