@@ -53,6 +53,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblEndDateCaption.TabIndex = 21
         Me.lblEndDateCaption.Text = "Ending Date:"
         Me.lblEndDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblEndDateCaption.Translatable = true
         '
         'dtpEndingDate
         '
@@ -75,6 +76,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.dtpEndingDate.Size = New System.Drawing.Size(112, 25)
         Me.dtpEndingDate.TabIndex = 1
         Me.dtpEndingDate.TargetCalendar = Nothing
+        Me.dtpEndingDate.Translatable = false
         Me.dtpEndingDate.Value = Nothing
         Me.dtpEndingDate.ValueIsMandatory = false
         Me.dtpEndingDate.ValueIsNullable = false
@@ -108,6 +110,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblBegDateCaption.TabIndex = 25
         Me.lblBegDateCaption.Text = "Start Date:"
         Me.lblBegDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblBegDateCaption.Translatable = true
         '
         'dtpBeginningDate
         '
@@ -130,6 +133,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.dtpBeginningDate.Size = New System.Drawing.Size(112, 25)
         Me.dtpBeginningDate.TabIndex = 0
         Me.dtpBeginningDate.TargetCalendar = Nothing
+        Me.dtpBeginningDate.Translatable = false
         Me.dtpBeginningDate.Value = Nothing
         Me.dtpBeginningDate.ValueIsMandatory = false
         Me.dtpBeginningDate.ValueIsNullable = false
@@ -146,6 +150,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel2.TabIndex = 27
         Me.CLabel2.Text = "Starting Account"
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel2.Translatable = true
         '
         'cboStartAccountCode
         '
@@ -157,6 +162,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboStartAccountCode.DisplayMember = "Name"
         Me.cboStartAccountCode.EditingMode = true
         Me.cboStartAccountCode.EndFindValue = Nothing
+        Me.cboStartAccountCode.FieldDescription = Nothing
         Me.cboStartAccountCode.FieldName = Nothing
         Me.cboStartAccountCode.FilterRule = Nothing
         Me.cboStartAccountCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -165,6 +171,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboStartAccountCode.ForeColor = System.Drawing.Color.Black
         Me.cboStartAccountCode.FormattingEnabled = true
         Me.cboStartAccountCode.HideWhenNotEditingOrAdding = false
+        Me.cboStartAccountCode.IgnoreCase = false
         Me.cboStartAccountCode.IntegralHeight = false
         Me.cboStartAccountCode.LinkedLabel = Nothing
         Me.cboStartAccountCode.Location = New System.Drawing.Point(184, 65)
@@ -182,6 +189,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboStartAccountCode.SuggestListOrderRule = Nothing
         Me.cboStartAccountCode.TabIndex = 2
         Me.cboStartAccountCode.TextToSearch = Nothing
+        Me.cboStartAccountCode.Translatable = false
         Me.cboStartAccountCode.ValueIsMandatory = false
         Me.cboStartAccountCode.ValueIsNullable = false
         Me.cboStartAccountCode.ValueIsNumeric = false
@@ -199,6 +207,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel3.TabIndex = 28
         Me.CLabel3.Text = "Ending Account"
         Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel3.Translatable = true
         '
         'cboEndAccountCode
         '
@@ -210,6 +219,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboEndAccountCode.DisplayMember = "Name"
         Me.cboEndAccountCode.EditingMode = true
         Me.cboEndAccountCode.EndFindValue = Nothing
+        Me.cboEndAccountCode.FieldDescription = Nothing
         Me.cboEndAccountCode.FieldName = Nothing
         Me.cboEndAccountCode.FilterRule = Nothing
         Me.cboEndAccountCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
@@ -218,6 +228,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboEndAccountCode.ForeColor = System.Drawing.Color.Black
         Me.cboEndAccountCode.FormattingEnabled = true
         Me.cboEndAccountCode.HideWhenNotEditingOrAdding = false
+        Me.cboEndAccountCode.IgnoreCase = false
         Me.cboEndAccountCode.IntegralHeight = false
         Me.cboEndAccountCode.LinkedLabel = Nothing
         Me.cboEndAccountCode.Location = New System.Drawing.Point(184, 92)
@@ -235,6 +246,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.cboEndAccountCode.SuggestListOrderRule = Nothing
         Me.cboEndAccountCode.TabIndex = 3
         Me.cboEndAccountCode.TextToSearch = Nothing
+        Me.cboEndAccountCode.Translatable = false
         Me.cboEndAccountCode.ValueIsMandatory = false
         Me.cboEndAccountCode.ValueIsNullable = false
         Me.cboEndAccountCode.ValueIsNumeric = false
@@ -254,6 +266,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblTitle.TabIndex = 26
         Me.lblTitle.Text = "Account Activity Report"
         Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblTitle.Translatable = true
         '
         'CLabel1
         '
@@ -267,11 +280,11 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel1.TabIndex = 26
         Me.CLabel1.Text = "Beginning Date :"
         Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel1.Translatable = true
         '
         'btnOk
         '
         Me.btnOk.DesignerSelected = false
-        Me.btnOk.DisplayOnly = true
         Me.btnOk.ImageIndex = 0
         Me.btnOk.Location = New System.Drawing.Point(316, 189)
         Me.btnOk.Name = "btnOk"
@@ -283,8 +296,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         'btnCancel
         '
-        Me.btnCancel.DesignerSelected = false
-        Me.btnCancel.DisplayOnly = true
+        Me.btnCancel.DesignerSelected = true
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.Location = New System.Drawing.Point(425, 189)
         Me.btnCancel.Name = "btnCancel"
@@ -297,7 +309,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         'btnTranslate
         '
         Me.btnTranslate.DesignerSelected = false
-        Me.btnTranslate.DisplayOnly = true
         Me.btnTranslate.ImageIndex = 0
         Me.btnTranslate.Location = New System.Drawing.Point(206, 189)
         Me.btnTranslate.Name = "btnTranslate"

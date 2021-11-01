@@ -429,8 +429,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'btnPrintCheck
         '
-        Me.btnPrintCheck.DesignerSelected = false
-        Me.btnPrintCheck.DisplayOnly = true
+        Me.btnPrintCheck.DesignerSelected = true
         Me.btnPrintCheck.ImageIndex = 0
         Me.btnPrintCheck.Location = New System.Drawing.Point(553, 109)
         Me.btnPrintCheck.Name = "btnPrintCheck"

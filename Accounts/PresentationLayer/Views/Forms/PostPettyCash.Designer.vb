@@ -205,7 +205,7 @@ Namespace PresentationLayer.Views.Forms
             'btnOk
             '
             Me.btnOk.DesignerSelected = False
-            Me.btnOk.DisplayOnly = True
+            Me.btnOk.DisplayOnly = false
             Me.btnOk.ImageIndex = 0
             Me.btnOk.Location = New System.Drawing.Point(184, 132)
             Me.btnOk.Name = "btnOk"
@@ -219,7 +219,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnCancel.DesignerSelected = False
             Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-            Me.btnCancel.DisplayOnly = True
+            Me.btnCancel.DisplayOnly = false
             Me.btnCancel.ImageIndex = 0
             Me.btnCancel.Location = New System.Drawing.Point(280, 132)
             Me.btnCancel.Name = "btnCancel"
