@@ -514,6 +514,9 @@
   <data name="chkPosted.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="chkPosted.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chkPosted.Location" type="System.Drawing.Point, System.Drawing">
     <value>819, 26</value>
   </data>
@@ -842,7 +845,7 @@
     <value>0, 10, 0, 0</value>
   </data>
   <data name="CLabel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 2</value>
+    <value>0, 2</value>
   </data>
   <data name="CLabel7.TabIndex" type="System.Int32, mscorlib">
     <value>257</value>
@@ -1495,6 +1498,9 @@
   <data name="&gt;&gt;txtTotalDebitsNotCleared.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="btnPost.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
   <data name="btnPost.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
@@ -1583,7 +1589,7 @@
     <value>2</value>
   </data>
   <metadata name="CsrOiItemModelBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>890, 17</value>
+    <value>675, 17</value>
   </metadata>
   <metadata name="dgvSequence.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1678,50 +1684,23 @@
   <data name="AccountIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>AccountIdNo</value>
   </data>
+  <data name="AccountIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="AccountReconciliationIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>AccountReconciliationIdNo</value>
   </data>
-  <data name="ClearedDataGridViewCheckBoxColumn.HeaderText" xml:space="preserve">
-    <value>Cleared</value>
-  </data>
-  <data name="CreditDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>Credit</value>
-  </data>
-  <data name="DebitDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>Debit</value>
-  </data>
-  <data name="DocumentNumberDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>DocumentNumber</value>
+  <data name="AccountReconciliationIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>IdNo</value>
   </data>
-  <data name="JournalCodeDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>JournalCode</value>
-  </data>
-  <data name="JournalIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>JournalIdNo</value>
-  </data>
-  <data name="JournalItemIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>JournalItemIdNo</value>
-  </data>
-  <data name="PayDescriptionDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>PayDescription</value>
-  </data>
-  <data name="PayDescriptionAraDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>PayDescriptionAra</value>
-  </data>
-  <data name="ReferenceNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>ReferenceNo</value>
-  </data>
-  <data name="TransactionDateDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>TransactionDate</value>
-  </data>
-  <data name="SequenceDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>Sequence</value>
+  <data name="IdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <metadata name="bsAccountReconciliationItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>675, 17</value>
+    <value>895, 17</value>
   </metadata>
   <data name="DataGridViewReconciliationItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 86</value>
@@ -2934,6 +2913,9 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>997, 581</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1013, 620</value>
   </data>
@@ -2968,6 +2950,12 @@
     <value>CsrOiItemModelBindingSource</value>
   </data>
   <data name="&gt;&gt;CsrOiItemModelBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsAccountReconciliationItems.Name" xml:space="preserve">
+    <value>bsAccountReconciliationItems</value>
+  </data>
+  <data name="&gt;&gt;bsAccountReconciliationItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
@@ -3030,12 +3018,6 @@
   <data name="&gt;&gt;dgvPayDescription.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;bsAccountReconciliationItems.Name" xml:space="preserve">
-    <value>bsAccountReconciliationItems</value>
-  </data>
-  <data name="&gt;&gt;bsAccountReconciliationItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;AccountIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>AccountIdNoDataGridViewTextBoxColumn</value>
   </data>
@@ -3048,82 +3030,10 @@
   <data name="&gt;&gt;AccountReconciliationIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ClearedDataGridViewCheckBoxColumn.Name" xml:space="preserve">
-    <value>ClearedDataGridViewCheckBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;ClearedDataGridViewCheckBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CreditDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>CreditDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;CreditDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DebitDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>DebitDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;DebitDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DocumentNumberDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>DocumentNumberDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;DocumentNumberDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>IdNoDataGridViewTextBoxColumn</value>
   </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;JournalCodeDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>JournalCodeDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;JournalCodeDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;JournalIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>JournalIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;JournalIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;JournalItemIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>JournalItemIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;JournalItemIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PayDescriptionDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>PayDescriptionDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;PayDescriptionDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PayDescriptionAraDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>PayDescriptionAraDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;PayDescriptionAraDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ReferenceNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>ReferenceNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;ReferenceNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TransactionDateDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>TransactionDateDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;TransactionDateDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SequenceDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>SequenceDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;SequenceDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

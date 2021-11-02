@@ -58,6 +58,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Sub GoPrintRecord()
             Dim retVal As Int32
             Dim nTransactionNumber = Service.GetLastSeriesNumber("IdPrinting")
+            Dim saveImagePath = "C:\temp\"
             DtInsertTable.Clear()
             If nTransactionNumber > 0 Then
                 For Each item In View.EmployeeIdList

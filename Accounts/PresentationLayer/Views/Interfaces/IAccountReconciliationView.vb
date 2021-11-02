@@ -13,6 +13,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property DateCreated As DateTime?
         Property GlSystemBalance As Decimal
         Property IdNo As Int32
+        Property OutstandingCredits As Decimal
+        Property OutstandingDeposits As Decimal
         Property Posted As Boolean
         Property ReconciliationDate As Date?
         Property TotalCreditsCleared As Decimal
@@ -24,9 +26,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property TotalQtyDebitsCleared As Integer
         Property TotalQtyDebitsNotCleared As Integer
         Property UnreconciledDifference As Decimal
-
-        Property OutstandingCredits As Decimal
-        Property OutstandingDeposits As Decimal
 
         Event ReconciliationAccountChangedEvent(sender As Object, bindingSource As BindingSource)
 

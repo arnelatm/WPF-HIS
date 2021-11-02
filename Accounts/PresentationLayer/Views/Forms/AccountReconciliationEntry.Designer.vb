@@ -90,6 +90,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CsrOiItemModelBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.DataGridViewReconciliationItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsAccountReconciliationItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvJournalCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -100,22 +101,9 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvCleared = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvPayDescription = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.bsAccountReconciliationItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.AccountIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AccountReconciliationIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClearedDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.CreditDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DebitDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DocumentNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JournalCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JournalItemIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayDescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayDescriptionAraDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ReferenceNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TransactionDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SequenceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floHeader.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
@@ -777,9 +765,9 @@ Namespace PresentationLayer.Views.Forms
         CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(192,Byte),Integer)), System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(128,Byte),Integer), CType(CType(0,Byte),Integer)), System.Drawing.Color.White}
         CBlendItems3.iPoint = New Single() {0!, 1.006211!, 1!}
         Me.btnPost.ColorFillBlend = CBlendItems3
-        Me.btnPost.DesignerSelected = true
-        Me.btnPost.ImageIndex = 0
+        Me.btnPost.DesignerSelected = false
         resources.ApplyResources(Me.btnPost, "btnPost")
+        Me.btnPost.ImageIndex = 0
         Me.btnPost.Name = "btnPost"
         Me.btnPost.OriginalImageName = Nothing
         Me.btnPost.SecurityKey = ""
@@ -995,7 +983,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewReconciliationItems.BackgroundColor = System.Drawing.SystemColors.Window
         Me.DataGridViewReconciliationItems.BegFindValue = Nothing
         Me.DataGridViewReconciliationItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewReconciliationItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvReferenceNo, Me.dgvJournalIdNo, Me.dgvDocumentNumber, Me.dgvDebit, Me.dgvCredit, Me.dgvCleared, Me.dgvPayDescription, Me.AccountIdNoDataGridViewTextBoxColumn, Me.AccountReconciliationIdNoDataGridViewTextBoxColumn, Me.ClearedDataGridViewCheckBoxColumn, Me.CreditDataGridViewTextBoxColumn, Me.DebitDataGridViewTextBoxColumn, Me.DocumentNumberDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn, Me.JournalCodeDataGridViewTextBoxColumn, Me.JournalIdNoDataGridViewTextBoxColumn, Me.JournalItemIdNoDataGridViewTextBoxColumn, Me.PayDescriptionDataGridViewTextBoxColumn, Me.PayDescriptionAraDataGridViewTextBoxColumn, Me.ReferenceNoDataGridViewTextBoxColumn, Me.TransactionDateDataGridViewTextBoxColumn, Me.SequenceDataGridViewTextBoxColumn})
+        Me.DataGridViewReconciliationItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvTransactionDate, Me.dgvJournalCode, Me.dgvReferenceNo, Me.dgvJournalIdNo, Me.dgvDocumentNumber, Me.dgvDebit, Me.dgvCredit, Me.dgvCleared, Me.dgvPayDescription, Me.AccountIdNoDataGridViewTextBoxColumn, Me.AccountReconciliationIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
         Me.DataGridViewReconciliationItems.DataSource = Me.bsAccountReconciliationItems
         DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
@@ -1029,6 +1017,10 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewReconciliationItems.ShowFooter = false
         Me.DataGridViewReconciliationItems.ShowInsertColumnWhenEditing = false
         Me.DataGridViewReconciliationItems.Translatable = true
+        '
+        'bsAccountReconciliationItems
+        '
+        Me.bsAccountReconciliationItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AccountReconciliationItemModel)
         '
         'dgvSequence
         '
@@ -1248,10 +1240,6 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPayDescription.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvPayDescription.Translatable = false
         '
-        'bsAccountReconciliationItems
-        '
-        Me.bsAccountReconciliationItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AccountReconciliationItemModel)
-        '
         'AccountIdNoDataGridViewTextBoxColumn
         '
         Me.AccountIdNoDataGridViewTextBoxColumn.DataPropertyName = "AccountIdNo"
@@ -1266,96 +1254,12 @@ Namespace PresentationLayer.Views.Forms
         Me.AccountReconciliationIdNoDataGridViewTextBoxColumn.Name = "AccountReconciliationIdNoDataGridViewTextBoxColumn"
         Me.AccountReconciliationIdNoDataGridViewTextBoxColumn.ReadOnly = true
         '
-        'ClearedDataGridViewCheckBoxColumn
-        '
-        Me.ClearedDataGridViewCheckBoxColumn.DataPropertyName = "Cleared"
-        resources.ApplyResources(Me.ClearedDataGridViewCheckBoxColumn, "ClearedDataGridViewCheckBoxColumn")
-        Me.ClearedDataGridViewCheckBoxColumn.Name = "ClearedDataGridViewCheckBoxColumn"
-        Me.ClearedDataGridViewCheckBoxColumn.ReadOnly = true
-        '
-        'CreditDataGridViewTextBoxColumn
-        '
-        Me.CreditDataGridViewTextBoxColumn.DataPropertyName = "Credit"
-        resources.ApplyResources(Me.CreditDataGridViewTextBoxColumn, "CreditDataGridViewTextBoxColumn")
-        Me.CreditDataGridViewTextBoxColumn.Name = "CreditDataGridViewTextBoxColumn"
-        Me.CreditDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'DebitDataGridViewTextBoxColumn
-        '
-        Me.DebitDataGridViewTextBoxColumn.DataPropertyName = "Debit"
-        resources.ApplyResources(Me.DebitDataGridViewTextBoxColumn, "DebitDataGridViewTextBoxColumn")
-        Me.DebitDataGridViewTextBoxColumn.Name = "DebitDataGridViewTextBoxColumn"
-        Me.DebitDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'DocumentNumberDataGridViewTextBoxColumn
-        '
-        Me.DocumentNumberDataGridViewTextBoxColumn.DataPropertyName = "DocumentNumber"
-        resources.ApplyResources(Me.DocumentNumberDataGridViewTextBoxColumn, "DocumentNumberDataGridViewTextBoxColumn")
-        Me.DocumentNumberDataGridViewTextBoxColumn.Name = "DocumentNumberDataGridViewTextBoxColumn"
-        Me.DocumentNumberDataGridViewTextBoxColumn.ReadOnly = true
-        '
         'IdNoDataGridViewTextBoxColumn
         '
         Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
         resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn, "IdNoDataGridViewTextBoxColumn")
         Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
         Me.IdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'JournalCodeDataGridViewTextBoxColumn
-        '
-        Me.JournalCodeDataGridViewTextBoxColumn.DataPropertyName = "JournalCode"
-        resources.ApplyResources(Me.JournalCodeDataGridViewTextBoxColumn, "JournalCodeDataGridViewTextBoxColumn")
-        Me.JournalCodeDataGridViewTextBoxColumn.Name = "JournalCodeDataGridViewTextBoxColumn"
-        Me.JournalCodeDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'JournalIdNoDataGridViewTextBoxColumn
-        '
-        Me.JournalIdNoDataGridViewTextBoxColumn.DataPropertyName = "JournalIdNo"
-        resources.ApplyResources(Me.JournalIdNoDataGridViewTextBoxColumn, "JournalIdNoDataGridViewTextBoxColumn")
-        Me.JournalIdNoDataGridViewTextBoxColumn.Name = "JournalIdNoDataGridViewTextBoxColumn"
-        Me.JournalIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'JournalItemIdNoDataGridViewTextBoxColumn
-        '
-        Me.JournalItemIdNoDataGridViewTextBoxColumn.DataPropertyName = "JournalItemIdNo"
-        resources.ApplyResources(Me.JournalItemIdNoDataGridViewTextBoxColumn, "JournalItemIdNoDataGridViewTextBoxColumn")
-        Me.JournalItemIdNoDataGridViewTextBoxColumn.Name = "JournalItemIdNoDataGridViewTextBoxColumn"
-        Me.JournalItemIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'PayDescriptionDataGridViewTextBoxColumn
-        '
-        Me.PayDescriptionDataGridViewTextBoxColumn.DataPropertyName = "PayDescription"
-        resources.ApplyResources(Me.PayDescriptionDataGridViewTextBoxColumn, "PayDescriptionDataGridViewTextBoxColumn")
-        Me.PayDescriptionDataGridViewTextBoxColumn.Name = "PayDescriptionDataGridViewTextBoxColumn"
-        Me.PayDescriptionDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'PayDescriptionAraDataGridViewTextBoxColumn
-        '
-        Me.PayDescriptionAraDataGridViewTextBoxColumn.DataPropertyName = "PayDescriptionAra"
-        resources.ApplyResources(Me.PayDescriptionAraDataGridViewTextBoxColumn, "PayDescriptionAraDataGridViewTextBoxColumn")
-        Me.PayDescriptionAraDataGridViewTextBoxColumn.Name = "PayDescriptionAraDataGridViewTextBoxColumn"
-        Me.PayDescriptionAraDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'ReferenceNoDataGridViewTextBoxColumn
-        '
-        Me.ReferenceNoDataGridViewTextBoxColumn.DataPropertyName = "ReferenceNo"
-        resources.ApplyResources(Me.ReferenceNoDataGridViewTextBoxColumn, "ReferenceNoDataGridViewTextBoxColumn")
-        Me.ReferenceNoDataGridViewTextBoxColumn.Name = "ReferenceNoDataGridViewTextBoxColumn"
-        Me.ReferenceNoDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'TransactionDateDataGridViewTextBoxColumn
-        '
-        Me.TransactionDateDataGridViewTextBoxColumn.DataPropertyName = "TransactionDate"
-        resources.ApplyResources(Me.TransactionDateDataGridViewTextBoxColumn, "TransactionDateDataGridViewTextBoxColumn")
-        Me.TransactionDateDataGridViewTextBoxColumn.Name = "TransactionDateDataGridViewTextBoxColumn"
-        Me.TransactionDateDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'SequenceDataGridViewTextBoxColumn
-        '
-        Me.SequenceDataGridViewTextBoxColumn.DataPropertyName = "Sequence"
-        resources.ApplyResources(Me.SequenceDataGridViewTextBoxColumn, "SequenceDataGridViewTextBoxColumn")
-        Me.SequenceDataGridViewTextBoxColumn.Name = "SequenceDataGridViewTextBoxColumn"
-        Me.SequenceDataGridViewTextBoxColumn.ReadOnly = true
         '
         'AccountReconciliationEntry
         '
@@ -1437,12 +1341,12 @@ End Sub
         Friend WithEvents CFlowLayout8 As CFlowLayout
         Friend WithEvents btnClearAll As CButton
         Friend WithEvents btnUnClearAll As CButton
+        Friend WithEvents dgvJournalItemIdNo As CDgvTextColumn
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvTransactionDate As CDgvTextColumn
         Friend WithEvents dgvJournalCode As CDgvTextColumn
         Friend WithEvents dgvReferenceNo As CDgvTextColumn
         Friend WithEvents dgvJournalIdNo As CDgvTextColumn
-        Friend WithEvents dgvJournalItemIdNo As CDgvTextColumn
         Friend WithEvents dgvDocumentNumber As CDgvTextColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
         Friend WithEvents dgvCredit As CdgvMoneyColumn
@@ -1450,18 +1354,6 @@ End Sub
         Friend WithEvents dgvPayDescription As CDgvTextColumn
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents AccountReconciliationIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ClearedDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
-        Friend WithEvents CreditDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DebitDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DocumentNumberDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents JournalCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents JournalIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents JournalItemIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayDescriptionDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PayDescriptionAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents ReferenceNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents TransactionDateDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents SequenceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End NameSpace
