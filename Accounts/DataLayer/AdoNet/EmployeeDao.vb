@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeDao
         Inherits CommonDao
-        Implements IDaoAll(Of Employee), IDaoAutoCode
+        Implements IDaoAll(Of Employee), IDaoAutoCode, IDaoList(Of EmployeeId)
 
         Private ReadOnly _db As New Db()
 
@@ -41,8 +41,7 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Employee) _
-            Implements IDaoAll(Of Employee).GetAll
+        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Employee) Implements IDaoAll(Of Employee).GetAll
             If sortExpression Is Nothing Then
                 sortExpression = "EmployeeName ASC"
             End If
@@ -50,6 +49,16 @@ Namespace DataLayer.AdoNet
                     " SELECT IdNo, EmployeeCode, EmployeeName, EmployeeNameAra " &
                     "   FROM [Employee] order by " & sortExpression
             Return _db.Read(sql, Make).ToList()
+        End Function
+
+        Public Function GetEmployeeIdList(Optional sortExpression As String = Nothing) As List(Of EmployeeId) Implements IDaoList(Of EmployeeId).GetList
+            If sortExpression Is Nothing Then
+                sortExpression = "EmployeeName ASC"
+            End If
+            Dim sql As String =
+                    " SELECT IdNo, EmployeeName, NationalIdNo, Picture" &
+                    " FROM [Employee] order by " & sortExpression
+            Return _db.Read(sql, MakeIdList).ToList()
         End Function
 
         Public Function GetEmployeesInPayGroup(Optional sortExpression As String = Nothing) As List(Of Employee)
@@ -160,6 +169,13 @@ Namespace DataLayer.AdoNet
             .ZipCode = Extensions.AsString(reader("ZipCode")),
             .Picture = Extensions.AsImage(reader("Picture"))
             }
+
+        Private Shared ReadOnly MakeIdList As Func(Of IDataReader, EmployeeId) = Function(reader) New EmployeeId() With {
+            .EmployeeName = Extensions.AsString(reader("EmployeeName")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .NationalIdNo = Extensions.AsString(reader("NationalIdNo")),
+            .Picture = Extensions.AsImage(reader("Picture"))
+        }
 
         Private Function Take(ByRef employee As Employee) As Object()
             Return New Object() {

@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -9,154 +10,140 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Views.Forms
 
     Public Class EmployeeIdPrinting
-        Implements IEmployeePrinting
+        Implements IEmployeeView
 
-        Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private _pcClosingJournals As New List(Of PcClosingJournalView)
-        Private _journalItems As New List(Of JournalItemView)
-        Private _defaultAccount As Int16
-        Private _pcFooter As DgvFooter
-        Private _pcClosed As Boolean = True
+        Private _employeeIdList As New List(Of EmployeeIdModel)
 
-        Public Event PcJournalCheckedEvent(sender As Object) Implements IEMployeeIdPrintingView.PcJournalCheckedEvent
-        Public Event ClearAllPcJournal(sender As Object, clear As Boolean) Implements IEMployeeIdPrintingView.ClearAllPcJournal
+        Public Event EmployeeCheckedEvent(sender As Object) 'Implements IEmployeeIdPrintingView.EmployeeCheckedEvent
+
+        Public Event ClearAllEmployeeID(sender As Object, clear As Boolean) 'Implements IEmployeeIdPrintingView.ClearAllEmployee
 
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            Me.Text = Messaging.TranslateCaption("Petty Cash Closing Journal")
-            _nfi.NumberDecimalDigits = 2
-            FirstControl = dtpTransactionDate
-            SingleData = True
-            QuitOnSave = True
+            Me.Text = Messaging.TranslateCaption("Employee I.D. Printing")
         End Sub
 
 #Region "Field Items"
 
-        Public Property JournalItems As List(Of JournalItemView) Implements IEMployeeIdPrintingView.JournalItems
+        Private Property EmployeeIdList As List(Of EmployeeIdModel) 'Implements IEmployeeIdPrintingView.EmployeeIdListView
             Get
-                Return _journalItems
+                Return _employeeIdList
             End Get
             Set
-                'bsJournalItems.ResetBindings(True)
-                'BindJournalItem()
+                _employeeIdList = Value
+                BindEmployeeIdList()
             End Set
         End Property
 
 #End Region
 
         Protected Overrides Sub CreateDataSources()
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.CheckingAccount), EnumToCode(SpecialAccountSelection.CheckingAccount)}, cboAccountIdNo)
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.PettyCashAccount)}, cboPcAccountIdNo)
-            CreateEnumDataSource(Of PayTypeSelection)(cboPayType)
+            EmployeeIdList = Presenter.GetEmployeeIdList()
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
-                {
-                {"AccountIdNo", cboAccountIdNo},
-                {"Amount", txtAmount},
-                {"CheckNumber", txtCheckNumber},
-                {"PayType", cboPayType},
-                {"Notes", txtNotes},
-                {"PayeeName", txtPayeeName},
-                {"PcAccountIdNo", cboPcAccountIdNo},
-                {"ReferenceNo", txtReferenceNo},
-                {"TransactionDate", dtpTransactionDate}
-                }
+                {}
         End Sub
 
-        Private Property PcClosingJournals As List(Of PcClosingJournalView) Implements IEMployeeIdPrintingView.PcClosingJournals
-            Get
-                Return _pcClosingJournals
-            End Get
-            Set
-                _pcClosingJournals = Value
-                BindPcJournals()
-            End Set
-        End Property
-
-        Private Sub BindPcJournals()
+        Private Sub BindEmployeeIdList()
             SuspendLayout()
-            bsPcJournals.DataSource = Nothing
-            DataGridViewPcJournals.Refresh()
-            bsPcJournals.DataSource = PcClosingJournals
-            bsPcJournals.AllowNew = True
-            With DataGridViewPcJournals
+            bsEmployeeIdList.DataSource = Nothing
+            DataGridViewEmployeeIdList.Refresh()
+            bsEmployeeIdList.DataSource = EmployeeIdList
+            bsEmployeeIdList.AllowNew = True
+            With DataGridViewEmployeeIdList
                 '.Refresh()
                 .AutoGenerateColumns = False
-                .DataSource = bsPcJournals
+                .DataSource = bsEmployeeIdList
                 '.Refresh()
             End With
-            With DataGridViewPcJournals.Columns
+            With DataGridViewEmployeeIdList.Columns
                 dgvIdNo.DisplayOnly = True
-                dgvNotes.DisplayOnly = True
-                dgvPayeeName.DisplayOnly = True
-                dgvPayeeNameAra.DisplayOnly = True
-                dgvReference.DisplayOnly = True
-                dgvTransactionDate.DisplayOnly = True
-                dgvAmount.DisplayOnly = True
-                dgvPayeeType.DisplayOnly = True
-                If DataGridViewPcJournals.DisplayOnly Then
-                    dgvPcClosed.DisplayOnly = True
-                End If
+                dgvEmployeeName.DisplayOnly = True
+                dgvNationalIdNo.DisplayOnly = True
+                dgvPicture.ImageLayout = DataGridViewImageCellLayout.Stretch
             End With
             ResumeLayout()
         End Sub
 
-        Private Sub PcClosing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _defaultAccount = Presenter.DefaultPcAccount()
-            'Presenter.UpdateViewData(0)
-            DataGridViewPcJournals.Refresh()
-            BindPcJournals()
-            _pcFooter = New DgvFooter(DataGridViewPcJournals) With {
-                .AutoCalc = True
-            }
-            _pcFooter.ColumnToSum("dgvAmount") = True
-            _pcFooter.SetText("DgvPayeeName", "Totals ->")
+        Private Sub EmployeeIdPrinting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            DataGridViewEmployeeIdList.Refresh()
+            BindEmployeeIdList()
         End Sub
 
         Private Sub EmployeeIdPrinting_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            Presenter.GoAddRecord()
-            Presenter.GetOpenPettyCash()
-            If cboPcAccountIdNo.SelectedValue Is Nothing Or cboPcAccountIdNo.SelectedValue <= 0 Then
-                cboPcAccountIdNo.SelectedValue = _defaultAccount
-            End If
-            If Presenter.PcAccountCount = 1 Then
-                cboPcAccountIdNo.DisplayOnly = True
-                cboPcAccountIdNo.TabStop = False
-            End If
-            bsPcJournals.ResetBindings(True)
-            cboPcAccountIdNo.Refresh()
-            _pcFooter.CalculateTotals()
+            bsEmployeeIdList.ResetBindings(True)
         End Sub
 
-        Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
-            RaiseEvent ClearAllPcJournal(bsPcJournals, True)
-            bsPcJournals.ResetBindings(False)
+        Private Sub SelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
+            RaiseEvent ClearAllEmployeeID(bsEmployeeIdList, True)
+            bsEmployeeIdList.ResetBindings(False)
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-            RaiseEvent ClearAllPcJournal(bsPcJournals, False)
-            bsPcJournals.ResetBindings(False)
+        Private Sub UnselectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnUnSelectAll.ClickButtonArea
+            RaiseEvent ClearAllEmployeeID(bsEmployeeIdList, False)
+            bsEmployeeIdList.ResetBindings(False)
         End Sub
 
-        Private Sub DataGridViewPcJournalsCellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcJournals.CellContentClick
-            If DataGridViewPcJournals.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
-                With DataGridViewPcJournals.CurrentCell
+        Private Sub DataGridViewEmployeeIdListCellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeIdList.CellContentClick
+            If DataGridViewEmployeeIdList.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
+                With DataGridViewEmployeeIdList.CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
-                        Case $"dgvpcclosed"
-                            If Not DataGridViewPcJournals.DisplayOnly Then
-                                Dim selectedRow = DataGridViewPcJournals.Rows(.RowIndex).DataBoundItem
-                                RaiseEvent PcJournalCheckedEvent(selectedRow)
-                            End If
+                        'Case $"dgvpcclosed"
+                        '    If Not DataGridViewEmployeeIdList.DisplayOnly Then
+                        '        Dim selectedRow = DataGridViewEmployeeIdList.Rows(.RowIndex).DataBoundItem
+                        '        RaiseEvent PcJournalCheckedEvent(selectedRow)
+                        '    End If
                     End Select
                 End With
             End If
         End Sub
 
+        Public Property Active As Boolean Implements IEmployeeView.Active
+        Public Property BankAccountNo As String Implements IEmployeeView.BankAccountNo
+        Public Property BankIdNo As Short? Implements IEmployeeView.BankIdNo
+        Public Property Balance As Decimal Implements IEmployeeView.Balance
+        Public Property BirthDate As Date? Implements IEmployeeView.BirthDate
+        Public Property CountryCode As String Implements IEmployeeView.CountryCode
+        Public Property DepartmentIdNo As Short? Implements IEmployeeView.DepartmentIdNo
+        Public Property DesignationIdNo As Short? Implements IEmployeeView.DesignationIdNo
+        Public Property District As String Implements IEmployeeView.District
+        Public Property DutyHours As Decimal Implements IEmployeeView.DutyHours
+        Public Property Email As String Implements IEmployeeView.Email
+        Public Property EmployeeCode As String Implements IEmployeeView.EmployeeCode
+        Public Property EmployeeName As String Implements IEmployeeView.EmployeeName
+        Public Property EmployeeNameAra As String Implements IEmployeeView.EmployeeNameAra
+        Public Property Gender As String Implements IEmployeeView.Gender
+        Public Property HiredDate As Date? Implements IEmployeeView.HiredDate
+        Public Property Iban As String Implements IEmployeeView.Iban
+        Public Property IdNo As Integer Implements IEmployeeView.IdNo
+        Public Property MaritalStatus As String Implements IEmployeeView.MaritalStatus
+        Public Property NationalIdNo As String Implements IEmployeeView.NationalIdNo
+        Public Property NationalityCode As String Implements IEmployeeView.NationalityCode
+        Public Property Notes As String Implements IEmployeeView.Notes
+        Public Property OpeningBalance As Decimal Implements IEmployeeView.OpeningBalance
+        Public Property PayCycleIdNo As Short? Implements IEmployeeView.PayCycleIdNo
+        Public Property PayGroupIdNo As Short? Implements IEmployeeView.PayGroupIdNo
+        Public Property PaymentMethod As Char Implements IEmployeeView.PaymentMethod
+        Public Property PoBox As String Implements IEmployeeView.PoBox
+        Public Property ProvinceState As String Implements IEmployeeView.ProvinceState
+        Public Property ReleasedDate As Date? Implements IEmployeeView.ReleasedDate
+        Public Property ReligionIdNo As Short? Implements IEmployeeView.ReligionIdNo
+        Public Property Street As String Implements IEmployeeView.Street
+        Public Property Title As String Implements IEmployeeView.Title
+        Public Property TownCity As String Implements IEmployeeView.TownCity
+        Public Property ZipCode As String Implements IEmployeeView.ZipCode
+        Public Property PayFrequency As PayFrequencySelection Implements IEmployeeView.PayFrequency
+        Public Property SponsorType As Char Implements IEmployeeView.SponsorType
+        Public Property RegularEmployeeDeductions As List(Of EmployeePayElementView) Implements IEmployeeView.RegularEmployeeDeductions
+        Public Property RegularEmployeeEarnings As List(Of EmployeePayElementView) Implements IEmployeeView.RegularEmployeeEarnings
+        Public Property EmployeePhones As List(Of EmployeePhoneView) Implements IEmployeeView.EmployeePhones
+        Public Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView) Implements IEmployeeView.EmployeeLeaveCredits
+        Public Property Picture As Image Implements IEmployeeView.Picture
     End Class
 
 End Namespace

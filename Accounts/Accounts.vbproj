@@ -202,6 +202,7 @@
     <Compile Include="BusinessLayer\EmployeeAbsence.vb" />
     <Compile Include="BusinessLayer\EmployeeLeaveCredit.vb" />
     <Compile Include="BusinessLayer\Holiday.vb" />
+    <Compile Include="BusinessLayer\EmployeeId.vb" />
     <Compile Include="BusinessLayer\RecurringPayElement.vb" />
     <Compile Include="BusinessLayer\PayElementItem.vb" />
     <Compile Include="BusinessLayer\PayElement.vb" />
@@ -342,6 +343,7 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeIdModel.vb" />
     <Compile Include="PresentationLayer\Models\ShiftSummaryModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayModel.vb" />
@@ -376,6 +378,8 @@
     <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\Class1.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeeIdPrintingPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeeIdPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ShiftSummaryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HolidayPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
@@ -528,7 +532,8 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdListView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdPrintingView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IShiftSummaryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalPrefixView.vb" />
@@ -540,7 +545,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAccountsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementAcountView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayrollPayElementView.vb" />
-    <Compile Include="PresentationLayer\Views\EmployeeIdListView.vb" />
+    <Compile Include="PresentationLayer\Views\EmployeeIdView.vb" />
     <Compile Include="PresentationLayer\Views\PcJournalView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.Designer.vb">
@@ -1454,7 +1459,6 @@
     <None Include="appOkMarceloPC.config" />
     <None Include="app222.config" />
     <None Include="appIspadmin2.config" />
-    <None Include="appMarcelo-Dell.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\app.manifest" />
@@ -1476,6 +1480,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EarningSummaryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeDeductionModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeEarningModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeIdModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel.datasource" />
@@ -1524,7 +1529,7 @@
       <Name>DataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
-      <Project>{8bf1be35-27dc-4b2f-b7db-a2cf182bbc7c}</Project>
+      <Project>{DA82FB86-4F87-4E6E-B460-6141FE79AC23}</Project>
       <Name>AatmInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">

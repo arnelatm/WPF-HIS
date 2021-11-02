@@ -174,9 +174,9 @@ Namespace PresentationLayer.Presenters
         '    Return Not errorFound
         'End Function
 
-        Protected Sub New()
-            MyBase.New()
-        End Sub
+        'Protected Sub New()
+        '    MyBase.New()
+        'End Sub
 
         'Protected Function IsChildValid2(Of Tcm)(bizName, childProperty) As Boolean
         '    Dim retValue As Boolean = True

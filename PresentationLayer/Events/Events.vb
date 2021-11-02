@@ -1,5 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports AATM.Libraries
+﻿Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
 
 Public Enum ButtonClicked
