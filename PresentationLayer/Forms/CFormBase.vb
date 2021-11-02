@@ -225,7 +225,7 @@ Public Class CFormBase
         End If
     End Sub
 
-    Private Sub PublishClickedButton(buttonClicked As ButtonClicked)
+    Protected Sub PublishClickedButton(buttonClicked As ButtonClicked)
 
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New ViewButtonClicked(buttonClicked))

@@ -7,6 +7,10 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property EmployeeIdList As List(Of EmployeeIdView)
 
+        Event ClearAllEmployee(sender As Object, clear As Boolean)
+
+        Event EmployeeIdCheckedEvent(sender As Object)
+
     End Interface
 
 End Namespace

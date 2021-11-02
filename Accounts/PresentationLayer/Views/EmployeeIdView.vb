@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views
         Public Property Errors As List(Of String) Implements IView.Errors
 
         Public Property Picture As Image Implements IEmployeeIdView.Picture
+        Public Property Print As Boolean Implements IEmployeeIdView.Print
 
     End Class
 

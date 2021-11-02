@@ -29,6 +29,10 @@ Namespace ServiceLayer.ActionService
 
         Function GetSupplierOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
 
+        Function GetLastSeriesNumber(seriesName As String) As Integer
+
+        Function EmployeeIdInsertTvp(tvpTable As DataTable) As Integer
+
     End Interface
 
     'Friend Interface IOpenInvoiceService

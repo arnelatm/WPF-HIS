@@ -57,7 +57,7 @@ Namespace DataLayer.AdoNet
             End If
             Dim sql As String =
                     " SELECT IdNo, EmployeeName, NationalIdNo, Picture" &
-                    " FROM [Employee] order by " & sortExpression
+                    " FROM [Employee] where Active = 1 order by " & sortExpression
             Return _db.Read(sql, MakeIdList).ToList()
         End Function
 
@@ -229,6 +229,10 @@ Namespace DataLayer.AdoNet
                 imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif)
                 Return ms.ToArray()
             End Using
+        End Function
+
+        Public Function EmployeeIdInsertTvp(ByRef tvpTable As DataTable) As Integer
+            Return _db.InsertTvp("InsertEmployeeIdPrintingTvp", tvpTable)
         End Function
 
     End Class

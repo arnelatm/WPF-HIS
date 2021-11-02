@@ -25,16 +25,18 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeIdPrinting))
         Me.bsEmployeeIdList = New System.Windows.Forms.BindingSource(Me.components)
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnUnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.DataGridViewEmployeeIdList = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.PrintThis = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -105,17 +107,17 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewEmployeeIdList.AutoGenerateColumns = false
         Me.DataGridViewEmployeeIdList.BegFindValue = Nothing
         Me.DataGridViewEmployeeIdList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewEmployeeIdList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvIdNo, Me.dgvEmployeeName, Me.dgvNationalIdNo, Me.dgvPicture})
+        Me.DataGridViewEmployeeIdList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PrintThis, Me.dgvIdNo, Me.dgvEmployeeName, Me.dgvNationalIdNo, Me.dgvPicture})
         Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewEmployeeIdList, 2)
         Me.DataGridViewEmployeeIdList.DataSource = Me.bsEmployeeIdList
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewEmployeeIdList.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewEmployeeIdList.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewEmployeeIdList.DgvFooter = Nothing
         Me.DataGridViewEmployeeIdList.DisplayOnly = false
         Me.DataGridViewEmployeeIdList.Dock = System.Windows.Forms.DockStyle.Fill
@@ -156,13 +158,36 @@ Namespace PresentationLayer.Views.Forms
         Me.btnSelectAll.TabIndex = 14
         Me.btnSelectAll.Text = "Select All"
         '
+        'PrintThis
+        '
+        Me.PrintThis.BegFindValue = Nothing
+        Me.PrintThis.DataPropertyName = "Print"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Orange
+        DataGridViewCellStyle2.NullValue = false
+        Me.PrintThis.DefaultCellStyle = DataGridViewCellStyle2
+        Me.PrintThis.EditingMode = false
+        Me.PrintThis.EndFindValue = Nothing
+        Me.PrintThis.FieldDescription = Nothing
+        Me.PrintThis.FieldName = Nothing
+        Me.PrintThis.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.PrintThis.FindEnabled = false
+        Me.PrintThis.HeaderText = "Print?"
+        Me.PrintThis.IgnoreCase = false
+        Me.PrintThis.Name = "PrintThis"
+        Me.PrintThis.ReadOnly = true
+        Me.PrintThis.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.PrintThis.Translatable = false
+        Me.PrintThis.Width = 40
+        '
         'dgvIdNo
         '
         Me.dgvIdNo.BegFindValue = Nothing
         Me.dgvIdNo.DataPropertyName = "IdNo"
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        Me.dgvIdNo.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        Me.dgvIdNo.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvIdNo.EditingMode = false
         Me.dgvIdNo.EndFindValue = Nothing
         Me.dgvIdNo.FieldDescription = Nothing
@@ -183,9 +208,9 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvEmployeeName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvEmployeeName.BegFindValue = Nothing
         Me.dgvEmployeeName.DataPropertyName = "EmployeeName"
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        Me.dgvEmployeeName.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        Me.dgvEmployeeName.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvEmployeeName.EditingMode = false
         Me.dgvEmployeeName.EndFindValue = Nothing
         Me.dgvEmployeeName.FieldDescription = Nothing
@@ -204,9 +229,9 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.dgvNationalIdNo.BegFindValue = Nothing
         Me.dgvNationalIdNo.DataPropertyName = "NationalIdNo"
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        Me.dgvNationalIdNo.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        Me.dgvNationalIdNo.DefaultCellStyle = DataGridViewCellStyle5
         Me.dgvNationalIdNo.EditingMode = false
         Me.dgvNationalIdNo.EndFindValue = Nothing
         Me.dgvNationalIdNo.FieldDescription = Nothing
@@ -272,6 +297,7 @@ End Sub
         Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewImageColumn2 As DataGridViewImageColumn
+        Friend WithEvents PrintThis As CDgvCheckBoxColumn
         Friend WithEvents dgvIdNo As CDgvTextColumn
         Friend WithEvents dgvEmployeeName As CDgvTextColumn
         Friend WithEvents dgvNationalIdNo As CDgvTextColumn

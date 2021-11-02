@@ -4,6 +4,7 @@ Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer.ActionService
 
@@ -262,6 +263,14 @@ Namespace ServiceLayer.ActionService
 
             End Select
             Return amount * factor
+        End Function
+
+        Public Function GetLastSeriesNumber(seriesName As String) As Integer Implements IServiceAccounts.GetLastSeriesNumber
+            Return DataDao.GetLastSeriesNumber(seriesName)
+        End Function
+
+        Public Function EmployeeIdInsertTvp(ByVal tvpTable As DataTable) As Integer Implements IServiceAccounts.EmployeeIdInsertTvp
+            Return DataDao.EmployeeIdInsertTvp(tvpTable)
         End Function
 
         'Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
