@@ -10,9 +10,9 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Views.Forms
 
     Public Class EmployeeIdPrinting
-        Implements IEmployeeView
+        Implements IEmployeeIdListView
 
-        Private _employeeIdList As New List(Of EmployeeIdModel)
+        Private _employeeIdList As New List(Of EmployeeIdView)
 
         Public Event EmployeeCheckedEvent(sender As Object) 'Implements IEmployeeIdPrintingView.EmployeeCheckedEvent
 
@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Field Items"
 
-        Private Property EmployeeIdList As List(Of EmployeeIdModel) 'Implements IEmployeeIdPrintingView.EmployeeIdListView
+        Private Property EmployeeIdList As List(Of EmployeeIdView) Implements IEmployeeIdListView.EmployeeIdList
             Get
                 Return _employeeIdList
             End Get
@@ -103,47 +103,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Public Property Active As Boolean Implements IEmployeeView.Active
-        Public Property BankAccountNo As String Implements IEmployeeView.BankAccountNo
-        Public Property BankIdNo As Short? Implements IEmployeeView.BankIdNo
-        Public Property Balance As Decimal Implements IEmployeeView.Balance
-        Public Property BirthDate As Date? Implements IEmployeeView.BirthDate
-        Public Property CountryCode As String Implements IEmployeeView.CountryCode
-        Public Property DepartmentIdNo As Short? Implements IEmployeeView.DepartmentIdNo
-        Public Property DesignationIdNo As Short? Implements IEmployeeView.DesignationIdNo
-        Public Property District As String Implements IEmployeeView.District
-        Public Property DutyHours As Decimal Implements IEmployeeView.DutyHours
-        Public Property Email As String Implements IEmployeeView.Email
-        Public Property EmployeeCode As String Implements IEmployeeView.EmployeeCode
-        Public Property EmployeeName As String Implements IEmployeeView.EmployeeName
-        Public Property EmployeeNameAra As String Implements IEmployeeView.EmployeeNameAra
-        Public Property Gender As String Implements IEmployeeView.Gender
-        Public Property HiredDate As Date? Implements IEmployeeView.HiredDate
-        Public Property Iban As String Implements IEmployeeView.Iban
-        Public Property IdNo As Integer Implements IEmployeeView.IdNo
-        Public Property MaritalStatus As String Implements IEmployeeView.MaritalStatus
-        Public Property NationalIdNo As String Implements IEmployeeView.NationalIdNo
-        Public Property NationalityCode As String Implements IEmployeeView.NationalityCode
-        Public Property Notes As String Implements IEmployeeView.Notes
-        Public Property OpeningBalance As Decimal Implements IEmployeeView.OpeningBalance
-        Public Property PayCycleIdNo As Short? Implements IEmployeeView.PayCycleIdNo
-        Public Property PayGroupIdNo As Short? Implements IEmployeeView.PayGroupIdNo
-        Public Property PaymentMethod As Char Implements IEmployeeView.PaymentMethod
-        Public Property PoBox As String Implements IEmployeeView.PoBox
-        Public Property ProvinceState As String Implements IEmployeeView.ProvinceState
-        Public Property ReleasedDate As Date? Implements IEmployeeView.ReleasedDate
-        Public Property ReligionIdNo As Short? Implements IEmployeeView.ReligionIdNo
-        Public Property Street As String Implements IEmployeeView.Street
-        Public Property Title As String Implements IEmployeeView.Title
-        Public Property TownCity As String Implements IEmployeeView.TownCity
-        Public Property ZipCode As String Implements IEmployeeView.ZipCode
-        Public Property PayFrequency As PayFrequencySelection Implements IEmployeeView.PayFrequency
-        Public Property SponsorType As Char Implements IEmployeeView.SponsorType
-        Public Property RegularEmployeeDeductions As List(Of EmployeePayElementView) Implements IEmployeeView.RegularEmployeeDeductions
-        Public Property RegularEmployeeEarnings As List(Of EmployeePayElementView) Implements IEmployeeView.RegularEmployeeEarnings
-        Public Property EmployeePhones As List(Of EmployeePhoneView) Implements IEmployeeView.EmployeePhones
-        Public Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView) Implements IEmployeeView.EmployeeLeaveCredits
-        Public Property Picture As Image Implements IEmployeeView.Picture
     End Class
 
 End Namespace
