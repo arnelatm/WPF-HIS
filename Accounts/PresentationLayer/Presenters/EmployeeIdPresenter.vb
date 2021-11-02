@@ -12,9 +12,9 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeIdPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IEmployeeView, TM)
+        Inherits CommonPresenterNew(Of IEmployeeIdListView, TM)
 
-        Public Sub New(itemView As IEmployeeView)
+        Public Sub New(itemView As IEmployeeIdListView)
             MyBase.New(itemView)
             Service = New AccountsService("Employee")
             TableName = "Employee"
@@ -24,8 +24,11 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
         End Sub
 
-        Public Function GetEmployeeIdList() As List(Of EmployeeIdModel)
-            Return Service.GetEmployeeIdList()
+        Public Function GetEmployeeIdList() As List(Of EmployeeIdView)
+            Dim records As List(Of EmployeeIdModel) = Service.GetEmployeeIdList()
+            Dim data As New List(Of EmployeeIdView)
+            GlobalVariables.Mapper.Map(records, data)
+            Return data
         End Function
 
     End Class

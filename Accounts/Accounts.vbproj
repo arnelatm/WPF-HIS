@@ -532,6 +532,7 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdListView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdPrintingView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IShiftSummaryView.vb" />

@@ -176,9 +176,11 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvIdNo.Translatable = false
+        Me.dgvIdNo.Width = 50
         '
         'dgvEmployeeName
         '
+        Me.dgvEmployeeName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvEmployeeName.BegFindValue = Nothing
         Me.dgvEmployeeName.DataPropertyName = "EmployeeName"
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
@@ -225,6 +227,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPicture.HeaderText = "Picture"
         Me.dgvPicture.Name = "dgvPicture"
         Me.dgvPicture.ReadOnly = true
+        Me.dgvPicture.Width = 50
         '
         'EmployeeIdPrinting
         '

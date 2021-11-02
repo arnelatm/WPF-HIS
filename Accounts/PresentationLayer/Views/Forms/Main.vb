@@ -1120,7 +1120,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EmployeeIDPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeIDPrintingToolStripMenuItem.Click
             'RunForm(Of EmployeeIdPrinting, EmployeeIdPrintingPresenter(Of EmployeeModel))()
-            RunForm(Of EmployeeIdPrinting, EmployeeIdPresenter(Of EmployeeModel))()
+            RunForm(Of EmployeeIdPrinting, EmployeeIdPresenter(Of EmployeeIdModel))()
         End Sub
 
     End Class

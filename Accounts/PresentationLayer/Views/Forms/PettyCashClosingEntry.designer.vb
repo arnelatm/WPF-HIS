@@ -389,7 +389,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'CButton1
         '
-        Me.CButton1.DesignerSelected = true
+        Me.CButton1.DesignerSelected = false
         Me.CButton1.ImageIndex = 0
         Me.CButton1.Location = New System.Drawing.Point(122, 563)
         Me.CButton1.Name = "CButton1"
