@@ -326,7 +326,7 @@ Namespace PresentationLayer.Presenters
                             If Not empLeaveCredit.Cumulative Then
                                 empLeaveCredit.MaxCarryOver = 0
                                 empLeaveCredit.MaxLimit = 0
-                            End If                            
+                            End If
                     End Select
                 End If
             End With

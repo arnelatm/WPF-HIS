@@ -161,7 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AatmInterfaces\AatmInterfaces.vbproj">
-      <Project>{8BF1BE35-27DC-4B2F-B7DB-A2CF182BBC7C}</Project>
+      <Project>{DA82FB86-4F87-4E6E-B460-6141FE79AC23}</Project>
       <Name>AatmInterfaces</Name>
     </ProjectReference>
   </ItemGroup>

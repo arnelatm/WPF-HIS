@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.DataLayer
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
@@ -55,6 +56,13 @@ Namespace ServiceLayer.ActionService
         Protected Overrides Sub Finalize()
             MyBase.Finalize()
         End Sub
+
+        Public Function GetEmployeeIdList()
+            Dim model As New List(Of EmployeeIdModel)
+            Dim records As List(Of EmployeeId) = DataDao.GetEmployeeIdList()
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
 
         Public Function GetAcctReconItems(Of TM)(accountIdNo As Int16, reconciliationDate As Date,
                                                   Optional sortOrder As String = Nothing) As List(Of TM) _

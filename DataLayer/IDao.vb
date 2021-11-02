@@ -42,6 +42,13 @@ Public Interface IDaoAll(Of TBiz)
 
 End Interface
 
+Public Interface IDaoList(Of TBiz)
+
+    ' gets a specific record data
+    Function GetList(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+
+End Interface
+
 Public Interface IDaoChild(Of TBiz)
     ' gets a specific record data
 

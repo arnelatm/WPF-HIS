@@ -1,10 +1,8 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -19,6 +17,7 @@ Namespace PresentationLayer.Views.Forms
         Private _pcClosed As Boolean = True
 
         Public Event PcJournalCheckedEvent(sender As Object) Implements IPettyCashClosingView.PcJournalCheckedEvent
+
         Public Event ClearAllPcJournal(sender As Object, clear As Boolean) Implements IPettyCashClosingView.ClearAllPcJournal
 
         Public Sub New()

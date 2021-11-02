@@ -123,6 +123,12 @@
     <Compile Include="BFModalForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CFormBase.Designer.vb">
+      <DependentUpon>CFormBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CFormBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CFormEntry.Designer.vb">
       <DependentUpon>CFormEntry.vb</DependentUpon>
     </Compile>
@@ -194,6 +200,9 @@
     <EmbeddedResource Include="BFModalForm.resx">
       <DependentUpon>BFModalForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CFormBase.resx">
+      <DependentUpon>CFormBase.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CFormEntry.resx">
       <DependentUpon>CFormEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -244,7 +253,7 @@
       <Name>BusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
-      <Project>{8bf1be35-27dc-4b2f-b7db-a2cf182bbc7c}</Project>
+      <Project>{DA82FB86-4F87-4E6E-B460-6141FE79AC23}</Project>
       <Name>AatmInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\BaseControlslibrary\BaseControlsLibrary.vbproj">

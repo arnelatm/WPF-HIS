@@ -21,9 +21,9 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Protected Sub New()
-            MyBase.New()
-        End Sub
+        'Protected Sub New()
+        '    MyBase.New()
+        'End Sub
 
         'Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
 

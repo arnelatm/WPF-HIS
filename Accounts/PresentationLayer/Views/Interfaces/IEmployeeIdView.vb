@@ -2,14 +2,13 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IEmployeeIdListView
+    Public Interface IEmployeeIdView
         Inherits IView
-
         Property EmployeeName As String
+        Property IdNo As Int32
         Property NationalIdNo As String
         Property Picture As Image
-        Property IdNo As Int32
-        
+
     End Interface
 
 End Namespace

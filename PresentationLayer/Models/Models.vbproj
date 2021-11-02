@@ -117,10 +117,6 @@
       <Project>{F1004885-D468-41ED-8572-5BA952B9C39E}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
-      <Project>{8bf1be35-27dc-4b2f-b7db-a2cf182bbc7c}</Project>
-      <Name>AatmInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{3F360FF6-9EFF-4F94-9C21-38D9667646AC}</Project>
       <Name>GlobalFuncNSub</Name>

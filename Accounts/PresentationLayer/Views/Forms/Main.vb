@@ -435,13 +435,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String)
-            'Dim childMdiForm As BasicEntry
-            '''Set the Parent Form of the Child window.
-            'childMdiForm = New BasicEntry(tableOrViewName, formCaption) With {
-            '    .MdiParent = Me
-            '    }
-            '''Display the new form.
-            'childMdiForm.Show()
             RunForm(Of BasicEntry, BasicPresenter(Of BasicModel))()
         End Sub
 
@@ -1126,8 +1119,10 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Private Sub EmployeeIDPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeIDPrintingToolStripMenuItem.Click
-
+            'RunForm(Of EmployeeIdPrinting, EmployeeIdPrintingPresenter(Of EmployeeModel))()
+            RunForm(Of EmployeeIdPrinting, EmployeeIdPresenter(Of EmployeeModel))()
         End Sub
+
     End Class
 
 End Namespace
