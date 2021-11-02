@@ -292,7 +292,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvJournalIdNo.DisplayOnly = True
                 dgvCredit.DisplayOnly = True
                 dgvDebit.DisplayOnly = True
-                dgvJournalItemIdNo.DisplayOnly = True
+                'dgvJournalItemIdNo.DisplayOnly = True
                 dgvReferenceNo.DisplayOnly = True
                 dgvTransactionDate.DisplayOnly = True
                 Dim englishDateTimeFormat As DateTimeFormatInfo = New CultureInfo("en-GB").DateTimeFormat

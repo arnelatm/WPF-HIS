@@ -10,12 +10,14 @@
         'Public Property Accounts As List(Of Lookup.LookupData)
         Public Property AccountReconciliationItems As List(Of AccountReconciliationItemModel)
 
-        Public Property Errors As List(Of String)
         Public Property AccountIdNo As Int16?
         Public Property Balance As Decimal
         Public Property DateCreated As DateTime?
+        Public Property Errors As List(Of String)
         Public Property GlSystemBalance As Decimal
         Public Property IdNo As Int32
+        Public Property OutstandingCredits As Decimal
+        Public Property OutstandingDeposits As Decimal
         Public Property Posted As Boolean
         Public Property ReconciliationDate As Date?
         Public Property TotalCreditsCleared As Decimal
