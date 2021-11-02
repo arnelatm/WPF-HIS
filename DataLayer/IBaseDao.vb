@@ -92,4 +92,6 @@ Public Interface IBaseDao
 
     Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) As Integer
 
+    Function GetLastSeriesNumber(ByVal seriesName As String) As Integer
+
 End Interface

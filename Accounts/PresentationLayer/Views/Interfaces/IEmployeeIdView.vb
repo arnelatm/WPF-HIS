@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property NationalIdNo As String
         Property Picture As Image
+        Property Print As Boolean
 
     End Interface
 

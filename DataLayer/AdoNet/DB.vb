@@ -50,6 +50,10 @@ Namespace AdoNet
             End If
         End Sub
 
+        Public Function GetConnectionString()
+            Return ConnectionString
+        End Function
+
         Public Function SqlRead(sql As String, ParamArray ByVal params() As Object)
             Dim arrayResult As New ArrayList
             Dim tryAgain As Boolean

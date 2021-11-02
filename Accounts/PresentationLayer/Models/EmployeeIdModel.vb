@@ -10,6 +10,7 @@
         Public Property NationalIdNo As String
         Public Property Errors As List(Of String)
         Public Property Picture As Image
+        Public Property Print As Boolean
 
     End Class
 

@@ -1,9 +1,4 @@
-﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.GlobalFuncNSub
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
@@ -14,9 +9,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private _employeeIdList As New List(Of EmployeeIdView)
 
-        Public Event EmployeeCheckedEvent(sender As Object) 'Implements IEmployeeIdPrintingView.EmployeeCheckedEvent
+        Public Event ClearAllEmployee(sender As Object, clear As Boolean) Implements IEmployeeIdListView.ClearAllEmployee
 
-        Public Event ClearAllEmployeeID(sender As Object, clear As Boolean) 'Implements IEmployeeIdPrintingView.ClearAllEmployee
+        Public Event EmployeeIdCheckedEvent(sender As Object) Implements IEmployeeIdListView.EmployeeIdCheckedEvent
 
         Public Sub New()
             MyBase.New()
@@ -24,6 +19,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             Me.Text = Messaging.TranslateCaption("Employee I.D. Printing")
+            btnEdit.Visible = False
         End Sub
 
 #Region "Field Items"
@@ -77,15 +73,16 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EmployeeIdPrinting_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             bsEmployeeIdList.ResetBindings(True)
+            PublishClickedButton(ButtonClicked.Edit)
         End Sub
 
         Private Sub SelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
-            RaiseEvent ClearAllEmployeeID(bsEmployeeIdList, True)
+            RaiseEvent ClearAllEmployee(bsEmployeeIdList, True)
             bsEmployeeIdList.ResetBindings(False)
         End Sub
 
         Private Sub UnselectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnUnSelectAll.ClickButtonArea
-            RaiseEvent ClearAllEmployeeID(bsEmployeeIdList, False)
+            RaiseEvent ClearAllEmployee(bsEmployeeIdList, False)
             bsEmployeeIdList.ResetBindings(False)
         End Sub
 
@@ -93,11 +90,11 @@ Namespace PresentationLayer.Views.Forms
             If DataGridViewEmployeeIdList.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
                 With DataGridViewEmployeeIdList.CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
-                        'Case $"dgvpcclosed"
-                        '    If Not DataGridViewEmployeeIdList.DisplayOnly Then
-                        '        Dim selectedRow = DataGridViewEmployeeIdList.Rows(.RowIndex).DataBoundItem
-                        '        RaiseEvent PcJournalCheckedEvent(selectedRow)
-                        '    End If
+                        Case $"dgvprint"
+                            If Not DataGridViewEmployeeIdList.DisplayOnly Then
+                                Dim selectedRow = DataGridViewEmployeeIdList.Rows(.RowIndex).DataBoundItem
+                                RaiseEvent EmployeeIdCheckedEvent(selectedRow)
+                            End If
                     End Select
                 End With
             End If

@@ -638,6 +638,10 @@ Namespace Services
             End If
         End Function
 
+        'Public Function GetLastSeriesNumber(seriesName As String) As Integer Implements IService.GetLastSeriesNumber
+        '    Return BaseDao.GetLastSeriesNumber(seriesName)
+        'End Function
+
 #End Region
 
     End Class

@@ -1,4 +1,5 @@
-﻿Imports System.Dynamic
+﻿Imports System.Data.SqlClient
+Imports System.Dynamic
 Imports System.Globalization
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
@@ -851,6 +852,54 @@ Namespace AdoNet
             Return New Object() {"@SecurityObjectName", securityObject.SecurityObjectName,
                                  "@SystemViewIdNo", securityObject.SystemViewIdNo,
                                  "@ParentIdNo", securityObject.ParentIdNo}
+        End Function
+
+        Public Function GetLastSeriesNumber(seriesName As String) As Integer Implements IBaseDao.GetLastSeriesNumber
+            Dim retValue As Integer
+            retValue = 0
+            Dim transactionName = seriesName
+            Using connection As New SqlConnection(_db.GetConnectionString)
+                connection.Open()
+
+                Dim command As SqlCommand = connection.CreateCommand()
+                Dim transaction As SqlTransaction
+
+                ' Start a local transaction
+                transaction = connection.BeginTransaction(transactionName)
+
+                ' Must assign both transaction object and connection
+                ' to Command object for a pending local transaction.
+                command.Connection = connection
+                command.Transaction = transaction
+
+                Try
+                    Dim sqlText1 As String = "Update [Series] set Value = Value + 1 where SeriesName = '" & seriesName & "'"
+                    command.CommandText = sqlText1
+                    Dim sqlText2 As String = "Select Value from Series where SeriesName = '" & seriesName & "'"
+                    command.ExecuteNonQuery()
+                    command.CommandText = sqlText2
+                    retValue = command.ExecuteScalar()
+
+                    ' Attempt to commit the transaction.
+                    transaction.Commit()
+                Catch ex As Exception
+                    MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
+                    MessageBox.Show("  Message: {0}", ex.Message)
+
+                    ' Attempt to roll back the transaction.
+                    Try
+                        transaction.Rollback()
+                    Catch ex2 As Exception
+                        ' This catch block will handle any errors that may have occurred
+                        ' on the server that would cause the rollback to fail, such as
+                        ' a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
+                        Console.WriteLine("  Message: {0}", ex2.Message)
+                    End Try
+                    retValue = -1
+                End Try
+            End Using
+            Return retValue
         End Function
 
     End Class
