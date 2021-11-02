@@ -70,10 +70,12 @@ Namespace PresentationLayer.Presenters
                         DtInsertTable.Rows.Add(workRow)
 
                         Using ms As MemoryStream = New MemoryStream()
-                            Dim saveImage As New Bitmap(item.Picture)
-                            Dim saveImageName As String = "Employee" + item.IdNo.ToString.Trim()
-                            saveImage.Save(SaveImagePath + saveImageName, Imaging.ImageFormat.Jpeg)
-                            saveImage.Dispose()
+                            If item.Picture IsNot Nothing Then
+                                Dim saveImage As New Bitmap(item.Picture)
+                                Dim saveImageName As String = "Employee" + item.IdNo.ToString.Trim() + ".jpg"
+                                saveImage.Save(saveImagePath + saveImageName, Imaging.ImageFormat.Jpeg)
+                                saveImage.Dispose()
+                            End If
                         End Using
 
                     End If
