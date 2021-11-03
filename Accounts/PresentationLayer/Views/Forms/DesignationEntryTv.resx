@@ -144,7 +144,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>240, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
@@ -172,7 +172,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 11</value>
+    <value>243, 11</value>
   </data>
   <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -205,7 +205,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblDesignationCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>240, 23</value>
   </data>
   <data name="lblDesignationCode.TabIndex" type="System.Int32, mscorlib">
     <value>156</value>
@@ -232,7 +232,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDesignationCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 36</value>
+    <value>243, 36</value>
   </data>
   <data name="txtDesignationCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -241,7 +241,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtDesignationCode.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;txtDesignationCode.Name" xml:space="preserve">
     <value>txtDesignationCode</value>
@@ -265,13 +265,13 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblDesignationName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>240, 23</value>
   </data>
   <data name="lblDesignationName.TabIndex" type="System.Int32, mscorlib">
     <value>157</value>
   </data>
   <data name="lblDesignationName.Text" xml:space="preserve">
-    <value>Designation Name</value>
+    <value>Designation Name (Male)</value>
   </data>
   <data name="lblDesignationName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -292,7 +292,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDesignationName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 61</value>
+    <value>243, 61</value>
   </data>
   <data name="txtDesignationName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -301,7 +301,7 @@
     <value>418, 23</value>
   </data>
   <data name="txtDesignationName.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txtDesignationName.Name" xml:space="preserve">
     <value>txtDesignationName</value>
@@ -315,23 +315,86 @@
   <data name="&gt;&gt;txtDesignationName.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="lblDesignationNameFemale.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblDesignationNameFemale.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDesignationNameFemale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 86</value>
+  </data>
+  <data name="lblDesignationNameFemale.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblDesignationNameFemale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 23</value>
+  </data>
+  <data name="lblDesignationNameFemale.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="lblDesignationNameFemale.Text" xml:space="preserve">
+    <value>Designation Name (Female)</value>
+  </data>
+  <data name="lblDesignationNameFemale.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblDesignationNameFemale.Name" xml:space="preserve">
+    <value>lblDesignationNameFemale</value>
+  </data>
+  <data name="&gt;&gt;lblDesignationNameFemale.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblDesignationNameFemale.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblDesignationNameFemale.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="txtDesignationNameFemale.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtDesignationNameFemale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 86</value>
+  </data>
+  <data name="txtDesignationNameFemale.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtDesignationNameFemale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtDesignationNameFemale.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtDesignationNameFemale.Name" xml:space="preserve">
+    <value>txtDesignationNameFemale</value>
+  </data>
+  <data name="&gt;&gt;txtDesignationNameFemale.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtDesignationNameFemale.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtDesignationNameFemale.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="lblDesignationNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblDesignationNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 86</value>
+    <value>1, 111</value>
   </data>
   <data name="lblDesignationNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblDesignationNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>240, 23</value>
   </data>
   <data name="lblDesignationNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
   </data>
   <data name="lblDesignationNameAra.Text" xml:space="preserve">
-    <value>Designation Name (Arabic)</value>
+    <value>Designation Name (Male Arabic)</value>
   </data>
   <data name="lblDesignationNameAra.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -346,13 +409,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblDesignationNameAra.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="txtDesignationNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDesignationNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 86</value>
+    <value>243, 111</value>
   </data>
   <data name="txtDesignationNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -364,7 +427,7 @@
     <value>418, 23</value>
   </data>
   <data name="txtDesignationNameAra.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;txtDesignationNameAra.Name" xml:space="preserve">
     <value>txtDesignationNameAra</value>
@@ -376,19 +439,85 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtDesignationNameAra.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
+  </data>
+  <data name="lblDesignationNameFemaleAra.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblDesignationNameFemaleAra.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDesignationNameFemaleAra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 136</value>
+  </data>
+  <data name="lblDesignationNameFemaleAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblDesignationNameFemaleAra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 23</value>
+  </data>
+  <data name="lblDesignationNameFemaleAra.TabIndex" type="System.Int32, mscorlib">
+    <value>162</value>
+  </data>
+  <data name="lblDesignationNameFemaleAra.Text" xml:space="preserve">
+    <value>Designation Name (Female Arabic)</value>
+  </data>
+  <data name="lblDesignationNameFemaleAra.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblDesignationNameFemaleAra.Name" xml:space="preserve">
+    <value>lblDesignationNameFemaleAra</value>
+  </data>
+  <data name="&gt;&gt;lblDesignationNameFemaleAra.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblDesignationNameFemaleAra.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblDesignationNameFemaleAra.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="txtDesignationNameFemaleAra.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtDesignationNameFemaleAra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 136</value>
+  </data>
+  <data name="txtDesignationNameFemaleAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtDesignationNameFemaleAra.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txtDesignationNameFemaleAra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 23</value>
+  </data>
+  <data name="txtDesignationNameFemaleAra.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;txtDesignationNameFemaleAra.Name" xml:space="preserve">
+    <value>txtDesignationNameFemaleAra</value>
+  </data>
+  <data name="&gt;&gt;txtDesignationNameFemaleAra.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtDesignationNameFemaleAra.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtDesignationNameFemaleAra.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 111</value>
+    <value>1, 161</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 23</value>
+    <value>240, 23</value>
   </data>
   <data name="lblNotes.TabIndex" type="System.Int32, mscorlib">
     <value>159</value>
@@ -409,13 +538,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>12</value>
   </data>
   <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 111</value>
+    <value>243, 161</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -427,7 +556,7 @@
     <value>418, 60</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
     <value>txtNotes</value>
@@ -439,7 +568,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>13</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -454,10 +583,10 @@
     <value>0, 10, 0, 0</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>653, 351</value>
+    <value>687, 351</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
-    <value>147</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;floDataDisplay.Name" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -487,7 +616,7 @@
     <value>993, 351</value>
   </data>
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>330</value>
+    <value>296</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
     <value>SplitContainer1</value>
@@ -502,7 +631,7 @@
     <value>0</value>
   </data>
   <data name="FormTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 351</value>
+    <value>296, 351</value>
   </data>
   <data name="&gt;&gt;FormTreeView.Name" xml:space="preserve">
     <value>FormTreeView</value>
@@ -524,7 +653,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFIAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFgAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA

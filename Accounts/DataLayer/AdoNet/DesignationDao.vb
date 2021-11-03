@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Designation Implements IDaoAll(Of Designation).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, DesignationCode, DesignationName, DesignationNameAra, Notes" &
+                    " SELECT IdNo, DesignationCode, DesignationName, DesignationNameFemale, DesignationNameAra, DesignationNameFemaleAra, Notes" &
                     "   FROM [Designation]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -37,7 +37,9 @@ Namespace DataLayer.AdoNet
                     " UPDATE [Designation]" &
                     "    SET DesignationCode = @DesignationCode," &
                     "        DesignationName = @DesignationName," &
+                    "        DesignationNameFemale = @DesignationNameFemale," &
                     "        DesignationNameAra = @DesignationNameAra," &
+                    "        DesignationNameFemaleAra = @DesignationNameFemaleAra," &
                     "        Notes = @Notes" &
                     "  WHERE IdNo = @IdNo"
 
@@ -47,8 +49,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef designation As Designation) As Integer Implements IDaoAll(Of Designation).AddRecord
             Dim sql As String =
                     " INSERT INTO [Designation] " &
-                    " (DesignationCode,DesignationName,DesignationNameAra,Notes) " &
-                    " VALUES (@DesignationCode,@DesignationName,@DesignationNameAra,@Notes) "
+                    " (DesignationCode,DesignationName,DesignationNameFemale,DesignationNameAra,DesignationNameFemaleAra,Notes) " &
+                    " VALUES (@DesignationCode,@DesignationName,@DesignationNameFemale,@DesignationNameAra,@DesignationNameFemaleAra,@Notes) "
             Return Db.Insert(sql, Take(designation))
         End Function
 
@@ -58,7 +60,9 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .DesignationCode = Extensions.AsString(reader("DesignationCode")),
             .DesignationName = Extensions.AsString(reader("DesignationName")),
+            .DesignationNameFemale = Extensions.AsString(reader("DesignationNameFemale")),
             .DesignationNameAra = Extensions.AsString(reader("DesignationNameAra")),
+            .DesignationNameFemaleAra = Extensions.AsString(reader("DesignationNameFemaleAra")),
             .Notes = Extensions.AsString(reader("Notes"))
             }
 
@@ -67,7 +71,9 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", designation.IdNo,
                                     "@DesignationCode", designation.DesignationCode,
                                     "@DesignationName", designation.DesignationName,
+                                    "@DesignationNameFemale", designation.DesignationNameFemale,
                                     "@DesignationNameAra", designation.DesignationNameAra,
+                                    "@DesignationNameFemaleAra", designation.DesignationNameFemaleAra,
                                     "@Notes", designation.Notes
                                 }
         End Function
