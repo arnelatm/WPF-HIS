@@ -226,9 +226,13 @@ Namespace DataLayer.AdoNet
 
         Public Function ToSqlImage(ByVal imageIn As System.Drawing.Image) As Byte()
             Using ms = New MemoryStream()
-                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif)
-                Return ms.ToArray()
-            End Using
+                If imageIn IsNot Nothing Then
+                    imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    Return ms.ToArray()
+                Else
+                    Return Nothing  
+                End If
+            End Using           
         End Function
 
         Public Function EmployeeIdInsertTvp(ByRef tvpTable As DataTable) As Integer

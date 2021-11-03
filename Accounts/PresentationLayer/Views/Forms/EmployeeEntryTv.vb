@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿
+Imports System.Globalization
 Imports System.IO
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common

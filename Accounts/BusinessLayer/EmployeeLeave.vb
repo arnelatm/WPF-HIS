@@ -31,9 +31,9 @@ Namespace BusinessLayer
         Public Property IdNo As Int32
         Public Property LeaveIdNo As Int16
         Public Property LeaveReason As String
-        Public Property LeaveStatus As Char
+        Public Property LeaveStatus As String
         Public Property StartDate As DateTime
-
+        Public Property LeaveStatuses As List(Of EmployeeLeaveStatus)
     End Class
 
 End Namespace

@@ -6,15 +6,12 @@ Namespace PresentationLayer.Models
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class EmployeeLeaveModel
+    Public Class EmployeeLeaveStatusModel
         Public Property DateCreated As DateTime?
-        Public Property EmployeeIdNo As Int32
-        Public Property EndDate As DateTime
-        Public Property FullDay As Boolean
+        Public Property EmployeeLeaveIdNo As Int32
         Public Property IdNo As Int32
-        Public Property LeaveIdNo As Int16
         Public Property LeaveReason As String
-        Public Property LeaveStatus As String
+        Public Property LeaveStatus As Char
         Public Property StartDate As DateTime
 
     End Class

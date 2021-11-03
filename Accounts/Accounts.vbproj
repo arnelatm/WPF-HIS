@@ -203,6 +203,7 @@
     <Compile Include="BusinessLayer\EmployeeLeaveCredit.vb" />
     <Compile Include="BusinessLayer\Holiday.vb" />
     <Compile Include="BusinessLayer\EmployeeId.vb" />
+    <Compile Include="BusinessLayer\EmployeeLeaveStatus.vb" />
     <Compile Include="BusinessLayer\RecurringPayElement.vb" />
     <Compile Include="BusinessLayer\PayElementItem.vb" />
     <Compile Include="BusinessLayer\PayElement.vb" />
@@ -255,13 +256,13 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\ShiftSummaryDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeAbsenceDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveCreditDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeePayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\JournalPrefix.vb" />
-    <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\PettyCashClosingDao.vb" />
     <Compile Include="DataLayer\AdoNet\RecurringPayElementDao.vb" />
     <Compile Include="DataLayer\AdoNet\PayElementItemDao.vb" />
@@ -344,6 +345,7 @@
     </Compile>
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeIdModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeLeaveStatusModel.vb" />
     <Compile Include="PresentationLayer\Models\ShiftSummaryModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayModel.vb" />
@@ -535,6 +537,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdListView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdPrintingView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveStatusView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IShiftSummaryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalPrefixView.vb" />
