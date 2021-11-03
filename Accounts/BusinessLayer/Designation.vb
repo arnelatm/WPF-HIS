@@ -17,7 +17,9 @@ Namespace BusinessLayer
         Public Property IdNo As Int16
         Public Property DesignationCode As String
         Public Property DesignationName As String
+        Public Property DesignationNameFemale As String
         Public Property DesignationNameAra As String
+        Public Property DesignationNameFemaleAra As String
         Public Property Notes As String
     End Class
 

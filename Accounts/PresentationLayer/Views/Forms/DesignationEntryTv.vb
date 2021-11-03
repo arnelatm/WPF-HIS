@@ -43,12 +43,30 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property DesignationNameFemale As String Implements IDesignationView.DesignationNameFemale
+            Get
+                Return txtDesignationNameFemale.Text
+            End Get
+            Set
+                txtDesignationNameFemale.Text = Value
+            End Set
+        End Property
+
         Public Property DesignationNameAra As String Implements IDesignationView.DesignationNameAra
             Get
                 Return txtDesignationNameAra.Text
             End Get
             Set
                 txtDesignationNameAra.Text = Value
+            End Set
+        End Property
+
+        Public Property DesignationNameFemaleAra As String Implements IDesignationView.DesignationNameFemaleAra
+            Get
+                Return txtDesignationNameFemaleAra.Text
+            End Get
+            Set
+                txtDesignationNameFemaleAra.Text = Value
             End Set
         End Property
 
@@ -68,7 +86,9 @@ Namespace PresentationLayer.Views.Forms
                 {
                 {"DesignationCode", txtDesignationCode},
                 {"DesignationName", txtDesignationName},
+                {"DesignationNameFemale", txtDesignationNameFemale},
                 {"DesignationNameAra", txtDesignationNameAra},
+                {"DesignationNameFemaleAra", txtDesignationNameFemaleAra},
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }
