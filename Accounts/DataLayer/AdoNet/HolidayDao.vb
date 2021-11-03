@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
         Implements IDaoAll(Of Holiday)
 
         Private ReadOnly Db As New Db()
-            Private FieldList As String = "DateCreated," &
+        Private FieldList As String = "DateCreated," &
                                           "DateEnd," &
                                           "DateStart," &
                                           "Description," &

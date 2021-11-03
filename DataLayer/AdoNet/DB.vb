@@ -1223,15 +1223,19 @@ Namespace AdoNet
 
                     ' if null, set to DbNull
 
-                    Dim value As Object = If(parms(i + 1), DBNull.Value)
+                    If TypeOf parms(i + 1) Is Image Then
+                        Dim imageParameter As SqlParameter = New SqlParameter("@imgdata", SqlDbType.Image)
+                        imageParameter.Value = DBNull.Value
+                        command.Parameters.Add(imageParameter)
+                    Else
+                        Dim value As Object = If(parms(i + 1), DBNull.Value)
+                        ' ** Factory pattern
+                        Dim dbParameter = command.CreateParameter()
+                        dbParameter.ParameterName = name
+                        dbParameter.Value = value
+                        command.Parameters.Add(dbParameter)
+                    End If
 
-                    ' ** Factory pattern
-
-                    Dim dbParameter = command.CreateParameter()
-                    dbParameter.ParameterName = name
-                    dbParameter.Value = value
-
-                    command.Parameters.Add(dbParameter)
                 Next i
             End If
         End Sub
