@@ -316,7 +316,7 @@ Namespace AdoNet
         ' takes a picture object and convert it to an image.
         <Extension>
         Public Function AsImage(cPicture As Object) As Image
-            If cPicture.Equals(DBNull.Value) Or cPicture Is Nothing Then
+            If cPicture.Equals(DBNull.Value) Or cPicture Is Nothing Or (cPicture.GetType().ToString() = "System.Byte[]" AndAlso cPicture.Length = 0) Then
                 Return Nothing
             Else
                 Dim imageData = CType(cPicture, Byte())

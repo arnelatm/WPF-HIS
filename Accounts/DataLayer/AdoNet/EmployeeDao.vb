@@ -230,9 +230,10 @@ Namespace DataLayer.AdoNet
                     imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
                     Return ms.ToArray()
                 Else
-                    Return Nothing  
+                    Dim data As Byte() = {}
+                    Return data
                 End If
-            End Using           
+            End Using
         End Function
 
         Public Function EmployeeIdInsertTvp(ByRef tvpTable As DataTable) As Integer
