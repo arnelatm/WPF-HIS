@@ -197,6 +197,8 @@
         Me.dgvEmployeeIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboBloodType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -485,7 +487,7 @@
         Me.tbcEmployee.Location = New System.Drawing.Point(3, 78)
         Me.tbcEmployee.Name = "tbcEmployee"
         Me.tbcEmployee.SelectedIndex = 0
-        Me.tbcEmployee.Size = New System.Drawing.Size(677, 356)
+        Me.tbcEmployee.Size = New System.Drawing.Size(677, 387)
         Me.tbcEmployee.TabIndex = 215
         '
         'tbpPersonal
@@ -497,7 +499,7 @@
         Me.tbpPersonal.Location = New System.Drawing.Point(4, 22)
         Me.tbpPersonal.Name = "tbpPersonal"
         Me.tbpPersonal.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpPersonal.Size = New System.Drawing.Size(669, 330)
+        Me.tbpPersonal.Size = New System.Drawing.Size(669, 361)
         Me.tbpPersonal.TabIndex = 0
         Me.tbpPersonal.Text = "Personal Information"
         Me.tbpPersonal.UseVisualStyleBackColor = true
@@ -520,6 +522,8 @@
         Me.floPersonal.Controls.Add(Me.dtpBirthDate)
         Me.floPersonal.Controls.Add(Me.lblNationalIdNo)
         Me.floPersonal.Controls.Add(Me.txtNationalIdNo)
+        Me.floPersonal.Controls.Add(Me.CLabel4)
+        Me.floPersonal.Controls.Add(Me.cboBloodType)
         Me.floPersonal.Controls.Add(Me.lblNotes)
         Me.floPersonal.Controls.Add(Me.txtNotes)
         Me.floPersonal.Dock = System.Windows.Forms.DockStyle.Fill
@@ -527,7 +531,7 @@
         Me.floPersonal.Margin = New System.Windows.Forms.Padding(0)
         Me.floPersonal.MinimumSize = New System.Drawing.Size(430, 180)
         Me.floPersonal.Name = "floPersonal"
-        Me.floPersonal.Size = New System.Drawing.Size(659, 320)
+        Me.floPersonal.Size = New System.Drawing.Size(659, 351)
         Me.floPersonal.TabIndex = 4
         '
         'lblPicture
@@ -891,7 +895,7 @@
         Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNotes.Location = New System.Drawing.Point(1, 245)
+        Me.lblNotes.Location = New System.Drawing.Point(1, 271)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
         Me.lblNotes.Size = New System.Drawing.Size(174, 23)
@@ -918,7 +922,7 @@
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Me.lblNotes
-        Me.txtNotes.Location = New System.Drawing.Point(177, 245)
+        Me.txtNotes.Location = New System.Drawing.Point(177, 271)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.MaximumValue = Nothing
         Me.txtNotes.MinimumValue = Nothing
@@ -3159,6 +3163,65 @@
         '
         Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
         '
+        'CLabel4
+        '
+        Me.CLabel4.DisplayOnly = true
+        Me.CLabel4.EditingMode = false
+        Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel4.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.CLabel4.Location = New System.Drawing.Point(1, 245)
+        Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel4.Name = "CLabel4"
+        Me.CLabel4.Size = New System.Drawing.Size(174, 23)
+        Me.CLabel4.TabIndex = 274
+        Me.CLabel4.Text = "Blood Type"
+        Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel4.Translatable = true
+        '
+        'cboBloodType
+        '
+        Me.cboBloodType.BackColor = System.Drawing.Color.White
+        Me.cboBloodType.BegFindValue = Nothing
+        Me.cboBloodType.ChangingSearchValueOnly = false
+        Me.cboBloodType.CurrentSearchTerm = ""
+        Me.cboBloodType.DefaultValue = Nothing
+        Me.cboBloodType.DisplayMember = "Name"
+        Me.cboBloodType.EditingMode = false
+        Me.cboBloodType.EndFindValue = Nothing
+        Me.cboBloodType.FieldDescription = Nothing
+        Me.cboBloodType.FieldName = Nothing
+        Me.cboBloodType.FilterRule = Nothing
+        Me.cboBloodType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboBloodType.FindEnabled = false
+        Me.floPersonal.SetFlowBreak(Me.cboBloodType, true)
+        Me.cboBloodType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboBloodType.ForeColor = System.Drawing.Color.Black
+        Me.cboBloodType.FormattingEnabled = true
+        Me.cboBloodType.HideWhenNotEditingOrAdding = false
+        Me.cboBloodType.IgnoreCase = false
+        Me.cboBloodType.IntegralHeight = false
+        Me.cboBloodType.LinkedLabel = Me.lblMaritalStatus
+        Me.cboBloodType.Location = New System.Drawing.Point(176, 245)
+        Me.cboBloodType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+        Me.cboBloodType.Name = "cboBloodType"
+        Me.cboBloodType.OldValue = 0
+        Me.cboBloodType.OriginalDataSource = Nothing
+        Me.cboBloodType.OriginalList = Nothing
+        Me.cboBloodType.OverrideDropDownStyleList = false
+        Me.cboBloodType.PreviousSearchTerm = Nothing
+        Me.cboBloodType.PropertySelector = Nothing
+        Me.cboBloodType.ReadOnlyCombo = false
+        Me.cboBloodType.Size = New System.Drawing.Size(278, 24)
+        Me.cboBloodType.SuggestBoxHeight = 200
+        Me.cboBloodType.SuggestListOrderRule = Nothing
+        Me.cboBloodType.TabIndex = 275
+        Me.cboBloodType.TextToSearch = Nothing
+        Me.cboBloodType.Translatable = false
+        Me.cboBloodType.ValueIsMandatory = false
+        Me.cboBloodType.ValueIsNullable = false
+        Me.cboBloodType.ValueIsNumeric = false
+        Me.cboBloodType.ValueMember = "Code"
+        '
         'EmployeeEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -3345,5 +3408,7 @@ End Sub
         Friend WithEvents dgvIdNoLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents lblPicture As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents imgPicture As Libraries.CBaseControlsLibrary.CPictureBox
+        Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents cboBloodType As Libraries.CBaseControlsLibrary.CaComboBox
     End Class
 End NameSpace

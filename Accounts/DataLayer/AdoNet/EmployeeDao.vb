@@ -18,7 +18,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Employee Implements IDaoAll(Of Employee).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
+                    " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, BloodType, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, DutyHours, HiredDate, ReleasedDate, " &
                     " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Active, Picture" &
                     "   FROM [Employee]" &
@@ -79,6 +79,7 @@ Namespace DataLayer.AdoNet
                     " BankAccountNo = @BankAccountNo," &
                     " BankIdNo = @BankIdNo," &
                     " BirthDate = @BirthDate," &
+                    " BloodType = @BloodType," &
                     " CountryCode = @CountryCode," &
                     " DepartmentIdNo = @DepartmentIdNo," &
                     " DesignationIdNo = @DesignationIdNo," &
@@ -118,10 +119,10 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef employee As Employee) As Integer Implements IDaoAll(Of Employee).AddRecord
             Dim sql As String =
                     " INSERT INTO [Employee] " &
-                    "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
+                    "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, BloodType, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
                     "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Active, Picture)" &
-                    " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
+                    " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @BloodType, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
                     "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod, @SponsorType, @Active, @Picture)"
             Return _db.Insert(sql, Take(employee))
@@ -135,6 +136,7 @@ Namespace DataLayer.AdoNet
             .BankAccountNo = Extensions.AsString(reader("BankAccountNo")),
             .BankIdNo = Extensions.AsNullable(Of Int16?)(reader("BankIdNo")),
             .BirthDate = Extensions.AsNullable(Of Date?)(reader("BirthDate")),
+            .BloodType = Extensions.AsString(reader("BloodType")),
             .CountryCode = Extensions.AsString(reader("CountryCode")),
             .DepartmentIdNo = Extensions.AsNullable(Of Int16?)(reader("DepartmentIdNo")),
             .DesignationIdNo = Extensions.AsNullable(Of Int16?)(reader("DesignationIdNo")),
@@ -184,6 +186,7 @@ Namespace DataLayer.AdoNet
                                     "@BankAccountNo", employee.BankAccountNo,
                                     "@BankIdNo", employee.BankIdNo,
                                     "@BirthDate", employee.BirthDate,
+                                    "@BloodType", employee.BloodType,
                                     "@CountryCode", employee.CountryCode,
                                     "@DepartmentIdNo", employee.DepartmentIdNo,
                                     "@DesignationIdNo", employee.DesignationIdNo,

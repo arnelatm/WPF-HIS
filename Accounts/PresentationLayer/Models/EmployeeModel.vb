@@ -16,6 +16,7 @@ Namespace PresentationLayer.Models
         Public Property Balance As Decimal
         Public Property BankIdNo As Int16?
         Public Property BirthDate As Date?
+        Public Property BloodType As String
         Public Property CountryCode As String
         Public Property DepartmentIdNo As Int16?
         Public Property DesignationIdNo As Int16?
