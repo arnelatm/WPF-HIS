@@ -7,9 +7,15 @@ Public Enum YearMonthDaySelection
     <EnumCode("D")> Day
 End Enum
 
-Public Enum YesNoSelection
-    <EnumCode("N")> No = False
-    <EnumCode("Y")> Yes = True
+Public Enum BloodTypeSelection
+    <EnumCode("O-")> [On]
+    <EnumCode("O+")> [Op]
+    <EnumCode("A-")> [An]
+    <EnumCode("A+")> [Ap]
+    <EnumCode("B-")> [Bn]
+    <EnumCode("B+")> [Bp]
+    <EnumCode("AB-")> [ABn]
+    <EnumCode("AB+")> [ABp]
 End Enum
 
 Public Enum MaleFemaleSelection
@@ -34,6 +40,13 @@ Public Enum ImageTypeSelection
 End Enum
 
 Public Enum RevCostTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("R")> Revenue
+    <EnumCode("C")> Cost
+    <EnumCode("B")> RevenueAndCost
+End Enum
+
+Public Enum BloodType
     <EnumCode("")> NotSpecified
     <EnumCode("R")> Revenue
     <EnumCode("C")> Cost
