@@ -272,6 +272,14 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnEmployeeAbsenceEntry.ClickButtonArea
+            RunSubForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))(IdNo, ParentForm)            
+        End Sub
+
+        Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea
+            RunSubForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel))(IdNo, ParentForm)
+
+        End Sub
     End Class
 
 End Namespace

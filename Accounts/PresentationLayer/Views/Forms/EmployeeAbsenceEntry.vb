@@ -8,12 +8,24 @@ Namespace PresentationLayer.Views.Forms
         Implements IEmployeeAbsenceView
 
         Private ReadOnly _nfi As NumberFormatInfo
+        'Private _payrollIdNo As Int32
+
 
         Public Sub New()
+
+            ' This call is required by the designer.
+            InitializeComponent()
+
+            ' Add any initialization after the InitializeComponent() call.
+
+        End Sub
+
+        Public Sub New(Optional ByVal nPayrollIdNo As Int32 = 0)
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = cboEmployeeIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
+            PayrollIdNo = nPayrollIdNo
             'FormTreeView.Visible = False
         End Sub
 
@@ -170,6 +182,12 @@ Namespace PresentationLayer.Views.Forms
             CreateEnumDataSource(Of AbsenceTypeSelection)(cboAbsenceType)
             CreateDataSource("Employee", cboEmployeeIdNo)
         End Sub
+
+        'Private Sub EmployeeAbsenceEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    If PayrollIdNo = 0 Then
+        '        PayrollIdNo = nPayrollIdNo
+        '    End If
+        'End Sub
 
     End Class
 
