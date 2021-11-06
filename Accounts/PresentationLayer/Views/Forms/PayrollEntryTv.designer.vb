@@ -85,6 +85,8 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.btnInitializeOvertime = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnInitializeAttendance = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnEmployeeAbsenceEntry = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnGenerateRegularPayElements = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnViewPayrollReport = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
@@ -871,6 +873,8 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.btnInitializeOvertime)
         Me.CFlowLayout1.Controls.Add(Me.btnInitializeAttendance)
+        Me.CFlowLayout1.Controls.Add(Me.btnEmployeeAbsenceEntry)
+        Me.CFlowLayout1.Controls.Add(Me.CButton2)
         Me.CFlowLayout1.Controls.Add(Me.btnGenerateRegularPayElements)
         Me.CFlowLayout1.Controls.Add(Me.btnViewPayrollReport)
         Me.CFlowLayout1.Controls.Add(Me.ProgressBar)
@@ -887,7 +891,7 @@ Namespace PresentationLayer.Views.Forms
         Me.btnInitializeOvertime.Name = "btnInitializeOvertime"
         Me.btnInitializeOvertime.OriginalImageName = Nothing
         Me.btnInitializeOvertime.SecurityKey = ""
-        Me.btnInitializeOvertime.Size = New System.Drawing.Size(90, 40)
+        Me.btnInitializeOvertime.Size = New System.Drawing.Size(77, 54)
         Me.btnInitializeOvertime.TabIndex = 169
         Me.btnInitializeOvertime.Text = "Initialize Overtime"
         '
@@ -895,42 +899,66 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.btnInitializeAttendance.DesignerSelected = false
         Me.btnInitializeAttendance.ImageIndex = 0
-        Me.btnInitializeAttendance.Location = New System.Drawing.Point(99, 3)
+        Me.btnInitializeAttendance.Location = New System.Drawing.Point(86, 3)
         Me.btnInitializeAttendance.Name = "btnInitializeAttendance"
         Me.btnInitializeAttendance.OriginalImageName = Nothing
         Me.btnInitializeAttendance.SecurityKey = ""
-        Me.btnInitializeAttendance.Size = New System.Drawing.Size(95, 40)
+        Me.btnInitializeAttendance.Size = New System.Drawing.Size(93, 54)
         Me.btnInitializeAttendance.TabIndex = 173
         Me.btnInitializeAttendance.Text = "Initialize Attendance"
+        '
+        'btnEmployeeAbsenceEntry
+        '
+        Me.btnEmployeeAbsenceEntry.DesignerSelected = false
+        Me.btnEmployeeAbsenceEntry.ImageIndex = 0
+        Me.btnEmployeeAbsenceEntry.Location = New System.Drawing.Point(185, 3)
+        Me.btnEmployeeAbsenceEntry.Name = "btnEmployeeAbsenceEntry"
+        Me.btnEmployeeAbsenceEntry.OriginalImageName = Nothing
+        Me.btnEmployeeAbsenceEntry.SecurityKey = ""
+        Me.btnEmployeeAbsenceEntry.Size = New System.Drawing.Size(122, 54)
+        Me.btnEmployeeAbsenceEntry.TabIndex = 175
+        Me.btnEmployeeAbsenceEntry.Text = "Enter Employee Absences/Lates"
+        '
+        'CButton2
+        '
+        Me.CButton2.DesignerSelected = true
+        Me.CButton2.ImageIndex = 0
+        Me.CButton2.Location = New System.Drawing.Point(313, 3)
+        Me.CButton2.Name = "CButton2"
+        Me.CButton2.OriginalImageName = Nothing
+        Me.CButton2.SecurityKey = ""
+        Me.CButton2.Size = New System.Drawing.Size(124, 54)
+        Me.CButton2.TabIndex = 176
+        Me.CButton2.Text = "Enter Employee Leaves"
         '
         'btnGenerateRegularPayElements
         '
         Me.btnGenerateRegularPayElements.DesignerSelected = false
         Me.btnGenerateRegularPayElements.ImageIndex = 0
-        Me.btnGenerateRegularPayElements.Location = New System.Drawing.Point(200, 3)
+        Me.btnGenerateRegularPayElements.Location = New System.Drawing.Point(443, 3)
         Me.btnGenerateRegularPayElements.Name = "btnGenerateRegularPayElements"
         Me.btnGenerateRegularPayElements.OriginalImageName = Nothing
         Me.btnGenerateRegularPayElements.SecurityKey = ""
-        Me.btnGenerateRegularPayElements.Size = New System.Drawing.Size(154, 40)
+        Me.btnGenerateRegularPayElements.Size = New System.Drawing.Size(146, 54)
         Me.btnGenerateRegularPayElements.TabIndex = 174
-        Me.btnGenerateRegularPayElements.Text = "Generate Employee Earnings/Deductions"
+        Me.btnGenerateRegularPayElements.Text = "Generate Employee Earnings / Deductions"
         '
         'btnViewPayrollReport
         '
-        Me.btnViewPayrollReport.DesignerSelected = true
+        Me.btnViewPayrollReport.DesignerSelected = false
         Me.btnViewPayrollReport.ImageIndex = 0
-        Me.btnViewPayrollReport.Location = New System.Drawing.Point(360, 3)
+        Me.btnViewPayrollReport.Location = New System.Drawing.Point(595, 3)
         Me.btnViewPayrollReport.Name = "btnViewPayrollReport"
         Me.btnViewPayrollReport.OriginalImageName = Nothing
         Me.btnViewPayrollReport.SecurityKey = ""
-        Me.btnViewPayrollReport.Size = New System.Drawing.Size(189, 40)
+        Me.btnViewPayrollReport.Size = New System.Drawing.Size(109, 54)
         Me.btnViewPayrollReport.TabIndex = 171
         Me.btnViewPayrollReport.Text = "View/Edit Payroll Details"
         '
         'ProgressBar
         '
         Me.ProgressBar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.ProgressBar.Location = New System.Drawing.Point(3, 49)
+        Me.ProgressBar.Location = New System.Drawing.Point(3, 63)
         Me.ProgressBar.Name = "ProgressBar"
         Me.ProgressBar.Size = New System.Drawing.Size(764, 23)
         Me.ProgressBar.TabIndex = 148
@@ -1010,5 +1038,7 @@ End Sub
         Friend WithEvents dgvDaysPresent As CDgvDecimalColumn
         Friend WithEvents dgvDaysTotal As CDgvDecimalColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents btnEmployeeAbsenceEntry As CButton
+        Friend WithEvents CButton2 As CButton
     End Class
 End Namespace

@@ -10,12 +10,12 @@ Namespace PresentationLayer.Presenters
         Inherits CommonPresenterNew(Of IEmployeeAbsenceView, TM)
 
         Private ReadOnly _payrollService As New AccountsService("Payroll")
-        Private ReadOnly _payrollIdNo As Int16 = 0
         Private ReadOnly _endDate As Date
         Private ReadOnly _startDate As Date
         Private ReadOnly _payrollName As String
         Private ReadOnly _payrollNameAra As String
         Private ReadOnly _payrollCode As String
+        Private _payrollIdNo As Int32 = 0
 
         Public Sub New(itemView As IEmployeeAbsenceView)
             MyBase.New(itemView)
@@ -23,43 +23,45 @@ Namespace PresentationLayer.Presenters
             TableName = "EmployeeAbsence"
             SortOrderKey = "IdNo"
             WithTreeView = False
-            If _payrollIdNo = 0 Then
-                _payrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
+            If View.PayrollIdNo = 0 Then
+                View.PayrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
+                _payrollIdNo = View.PayrollIdNo
             End If
-            Dim payroll As PayrollModel
-            payroll = _payrollService.GetRecordByIdNo(Of PayrollModel)(_payrollIdNo)
-            _payrollCode = payroll.PayrollCode
-            _payrollNameAra = payroll.PayrollNameAra
-            _payrollName = payroll.PayrollName
-            _startDate = payroll.StartDate
-            _endDate = payroll.EndDate
             SetPayroll()
-            DataFilter = "PayrollIdNo = " & _payrollIdNo.ToString()
-            AddHandler View.AddedByUserChanged, AddressOf OnAddedByUserChanged
+            'AddHandler View.AddedByUserChanged, AddressOf OnAddedByUserChanged
         End Sub
 
         Protected Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
-            SetPayroll()
+            'SetPayroll()
+            'DataFilter = "PayrollIdNo = " & View.PayrollIdNo.ToString()
+            View.PayrollIdNo = _payrollIdNo
             View.AddedByUser = GlobalVariables.UserIdNo
             View.UserName = Service.GetFieldWithIdNo(GlobalVariables.UserIdNo, "User", "UserName")
         End Sub
 
-        Private Sub SetPayroll()
-            View.PayrollIdNo = _payrollIdNo
-            View.PayrollCode = _payrollCode
-            If GlobalVariables.RightToLeftLayout Then
-                View.PayrollName = _payrollNameAra
-            Else
-                View.PayrollName = _payrollName
+        Public Sub SetPayroll()
+            Dim payroll As PayrollModel
+            If View.PayrollIdNo = 0 Then
+                View.PayrollIdNo = Service.GetFieldOnMaxField("PayrollIdNo", "PayrollDetail", "PayrollIdNo")
             End If
-            View.StartDate = _startDate
-            View.EndDate = _endDate
-            View.PayrollCode = _payrollCode
+            payroll = _payrollService.GetRecordByIdNo(Of PayrollModel)(View.PayrollIdNo)
+            View.PayrollCode = payroll.PayrollCode
+            View.StartDate = payroll.StartDate
+            View.EndDate = payroll.EndDate
+            If GlobalVariables.RightToLeftLayout Then
+                View.PayrollName = payroll.PayrollNameAra
+            Else
+                View.PayrollName = payroll.PayrollName
+            End If
+            View.StartDate = payroll.StartDate
+            View.EndDate = payroll.EndDate
+            View.PayrollCode = payroll.PayrollCode
+            DataFilter = "PayrollIdNo = " & View.PayrollIdNo.ToString()
         End Sub
 
-        Protected Sub OnAddedByUserChanged()
+        'Protected Sub OnAddedByUserChanged()
 
-        End Sub
+        'End Sub
 
     End Class
 

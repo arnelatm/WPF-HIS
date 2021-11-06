@@ -1177,6 +1177,8 @@ Public Class BfMain
     Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)
         Dim childForm = Activator.CreateInstance(GetType(TF), data)
         Activator.CreateInstance(GetType(TP), {childForm})
+        Dim pType As Type = GetType(TP)
+        childForm.Presenter = Activator.CreateInstance(pType, {childForm})
         childForm.MdiParent = subFormParent
         childForm.Show()
     End Sub
