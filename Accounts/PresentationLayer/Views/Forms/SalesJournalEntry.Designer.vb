@@ -1055,7 +1055,6 @@ Namespace PresentationLayer.Views.Forms
         'btnHideJournalEntries
         '
         Me.btnHideJournalEntries.DesignerSelected = false
-        Me.btnHideJournalEntries.DisplayOnly = false
         resources.ApplyResources(Me.btnHideJournalEntries, "btnHideJournalEntries")
         Me.btnHideJournalEntries.ImageIndex = 0
         Me.btnHideJournalEntries.Name = "btnHideJournalEntries"

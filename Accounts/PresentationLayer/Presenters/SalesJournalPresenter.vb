@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -199,15 +200,15 @@ Namespace PresentationLayer.Presenters
                 counter += 1
                 If counter <= oldJournalItems.Count() Then
                     View.JournalItems.Item(counter - 1).AccountIdNo = pAccountIdNo
-                    View.JournalItems.Item(counter - 1).Debit = If(debitAmount-creditAmount < 0,0,debitAmount-creditAmount)
-                    View.JournalItems.Item(counter - 1).Credit = If(creditAmount-debitAmount > 0,creditAmount-debitAmount,0)
+                    View.JournalItems.Item(counter - 1).Debit = If(debitAmount - creditAmount < 0, 0, debitAmount - creditAmount)
+                    View.JournalItems.Item(counter - 1).Credit = If(creditAmount - debitAmount > 0, creditAmount - debitAmount, 0)
                     View.JournalItems.Item(counter - 1).Sequence = counter
                     View.JournalItems.Item(counter - 1).Notes = RTrim(LTrim(note)) + IIf(note = noteAra, "", "-" + noteAra)
                 Else
                     Dim ji As New JournalItemView With {
                             .AccountIdNo = pAccountIdNo,
-                            .Credit = If(creditAmount-debitAmount > 0,creditAmount-debitAmount,0),
-                            .Debit = If(debitAmount-creditAmount < 0,0,debitAmount-creditAmount),
+                            .Credit = If(creditAmount - debitAmount > 0, creditAmount - debitAmount, 0),
+                            .Debit = If(debitAmount - creditAmount < 0, 0, debitAmount - creditAmount),
                             .IdNo = 0,
                             .JournalIdNo = View.IdNo,
                             .Notes = Trim(note + IIf(note = noteAra, "", "-" + noteAra)),
@@ -311,6 +312,19 @@ Namespace PresentationLayer.Presenters
                 End If
             End With
         End Sub
+
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
+            Dim reconciledDao = New ReconciledDao
+            For Each item In View.JournalItems
+                If reconciledDao.IsItemReconciled("SJ", item.IdNo) Then
+                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                    result = False
+                    Exit For
+                End If
+            Next
+            Return result
+        End Function
 
     End Class
 

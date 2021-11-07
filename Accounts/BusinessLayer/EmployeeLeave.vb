@@ -33,7 +33,7 @@ Namespace BusinessLayer
         Public Property LeaveReason As String
         Public Property LeaveStatus As String
         Public Property StartDate As DateTime
-        Public Property LeaveStatuses As List(Of EmployeeLeaveStatus)
+
     End Class
 
 End Namespace

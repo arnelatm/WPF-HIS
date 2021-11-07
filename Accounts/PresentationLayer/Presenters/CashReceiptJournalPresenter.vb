@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -923,6 +924,20 @@ Namespace PresentationLayer.Presenters
         '    GlobalVariables.Mapper.Map(dModel, dView)
         '    Return dView
         'End Function
+
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
+            Dim reconciledDao = New ReconciledDao
+            For Each item In View.JournalItems
+                If reconciledDao.IsItemReconciled("CR", item.IdNo) Then
+                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                    result = False
+                    Exit For
+                End If
+            Next
+            Return result
+        End Function
+
     End Class
 
 End Namespace
