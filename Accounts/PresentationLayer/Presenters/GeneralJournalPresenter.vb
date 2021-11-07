@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -152,6 +153,20 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
+
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
+            Dim reconciledDao = New ReconciledDao
+            For Each item In View.JournalItems
+                If reconciledDao.IsItemReconciled("GJ", item.IdNo) Then
+                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                    result = False
+                    Exit For
+                End If
+            Next
+            Return result
+        End Function
+
 
     End Class
 

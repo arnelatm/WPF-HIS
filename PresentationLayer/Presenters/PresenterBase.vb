@@ -135,7 +135,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return
     End Sub
 
-    Private Function GetErrorProvider() As Object
+    Protected Function GetErrorProvider() As Object
         Return Invoker.GetField(View, "MyErrorProvider")
     End Function
 

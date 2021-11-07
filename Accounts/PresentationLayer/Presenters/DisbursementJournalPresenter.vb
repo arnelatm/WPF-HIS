@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -171,14 +172,52 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
+
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
             Dim type As Type = View.GetType
             Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
             If cPcClosed Then
-                Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed", $"This record has already been closed. Edits not allowed!", "Closed Petty Cash")
-                CancelEdit = True
+                Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed")
+                result = False
+            Else
+                Dim reconciledDao = New ReconciledDao
+                For Each item In View.JournalItems
+                    'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
+                    if reconciledDao.IsItemReconciled(JournalCode, item.IdNo) THEN
+                        Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                        result = false
+                        exit For
+                    End If
+                Next               
             End If
-        End Sub
+            Return result
+        End Function
+
+
+
+
+        'Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
+        '    Dim type As Type = View.GetType
+        '    Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
+        '    If cPcClosed Then
+        '        Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed")
+        '        CancelEdit = True
+        '    Else
+        '        Dim reconciledDao = New ReconciledDao
+        '        For Each item In View.JournalItems
+        '            'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
+        '            if reconciledDao.IsItemReconciled(JournalCode, item.IdNo) THEN
+        '                cancelEdit = True
+        '                exit For
+        '            End If                    
+        '        Next
+        '        If cancelEdit Then
+        '            Messaging.Show(True, "MsgEditingOfReconciledItemsNotAllowed")
+        '            CancelEdit = True
+        '        End If
+        '    End If
+        'End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
             'If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then

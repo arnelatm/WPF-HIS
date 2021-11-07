@@ -1819,7 +1819,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpDateCreated.SecurityKey = Nothing
         Me.dtpDateCreated.ShowLongDate = false
         Me.dtpDateCreated.ShowTime = true
-        Me.dtpDateCreated.Size = New System.Drawing.Size(146, 25)
+        Me.dtpDateCreated.Size = New System.Drawing.Size(157, 25)
         Me.dtpDateCreated.TabIndex = 24
         Me.dtpDateCreated.TabStop = false
         Me.dtpDateCreated.TargetCalendar = Nothing
@@ -2010,7 +2010,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'btnPrintPcReplenishment
         '
-        Me.btnPrintPcReplenishment.DesignerSelected = true
+        Me.btnPrintPcReplenishment.DesignerSelected = false
         Me.btnPrintPcReplenishment.ImageIndex = 0
         Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(445, 3)
         Me.btnPrintPcReplenishment.Name = "btnPrintPcReplenishment"

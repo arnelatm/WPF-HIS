@@ -1,12 +1,8 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
 Imports System.Reflection
-Imports System.Reflection.Emit
-Imports System.Transactions
 Imports System.Windows.Forms
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
-Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -14,8 +10,6 @@ Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
 Imports AATM.ServicesLayer.Services
-Imports AutoMapper
-Imports KellermanSoftware.CompareNetObjects
 
 ''' <summary>
 '''     Base class for all presenter classes. Keeps track of Service and View classes.
@@ -87,10 +81,6 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         End If
     End Sub
 
-    Private Function GetErrorProvider() As Object
-        Return Invoker.GetField(View, "MyErrorProvider")
-    End Function
-
     Public Property WithTreeView As Boolean
 
     Public Shadows Event BeforeDelete()
@@ -98,40 +88,6 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Public Shadows Event BeforeEdit()
 
     Public Shadows Event AfterDelete(retVal As Integer)
-
-    Public Overridable Shadows Function GoDeleteRecord() As Integer
-        Dim record As New TM
-        GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
-        Dim retValue = 0
-        Dim currentIdNo = Invoker.GetProperty(View, IdFieldName)
-        If IsOkToDeleteRecord() Then
-            If Messaging.Show(True, "AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                RaiseEvent BeforeDelete()
-                If _WithTreeView Then
-                    TreeViewBeforeDelete()
-                End If
-                retValue = DeleteRecord(currentIdNo)
-                If retValue <= 0 Then
-                    Messaging.Show(True, "MsgDeleteRecordFailed", "This record was not deleted because of an error. Please try again later or ask Database Administrator for help.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Else
-                    Messaging.Show(True, "MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
-                    ' if deleted stay on that given RecordPositionNumber
-                    ' which in this case will be the next record after the deleted record
-                    TargetIdNo = GetIdNoOfSortedPositionNumber(RecordPositionNumber)
-                    If TargetIdNo = 0 Then
-                        ' last record deleted
-                        GoLastRecord()
-                    End If
-                End If
-                RaiseEvent AfterDelete(retValue)
-                If _WithTreeView Then
-                    TreeViewAfterDelete(retValue)
-                End If
-                'UpdateViewDisplay(TargetIdNo)
-            End If
-        End If
-        Return retValue
-    End Function
 
     Private Sub GoEditRecord()
         If IsOkToEditRecord() Then
@@ -144,37 +100,23 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         End If
     End Sub
 
-    Public Shadows Event BeforeSave()
-
-    Public Shadows Event AfterSave()
-
-    Public Overridable Shadows Function Save(ByRef viewControl As Control)
-        RaiseEvent BeforeSave()
-        Dim record As New TM
-        GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
-        Dim retVal As Integer = InitiateSave()
-        If retVal < 0 Then
-            Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Else
-            If _WithTreeView Then
-                TreeViewAfterSave()
-            End If
-            RaiseEvent AfterSave()
+    Public Function OnAfterSave() Handles Me.AfterSave
+        If _WithTreeView Then
+            TreeViewAfterSave()
         End If
-        If retVal < 0 Then
-        Else
-            Messaging.Show(True, "MsgRecordSuccessfullySaved")
-            If AddMode Then
-                RecordPositionNumber = GetSortedRecordPosition(retVal)
-            Else
-                RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
-            End If
-            AddMode = False
-            EditMode = False
-            UpdateViewData(TargetIdNo)
-            ClearAllErrorMessages()
+    End Function
+
+    Public Function OnBeforeDelete() Handles Me.BeforeDelete
+        If _WithTreeView Then
+            TreeViewBeforeDelete()
         End If
-        Return retVal
+    End Function
+
+    Public Function OnAfterDelete(retValue) Handles Me.AfterDelete
+        If _WithTreeView Then
+            TreeViewAfterDelete(retValue)
+        End If
+
     End Function
 
     Public Shadows Event BeforeMappingData(dataModel As TM)
@@ -220,59 +162,6 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         MyErrorProvider.SetError(ctrl, controlError)
         _dataErrors += Environment.NewLine + ctrlError
     End Sub
-
-    Public Shadows Event RecordAddedSuccessfully(ByRef idNoOfRecord As Integer)
-
-    Public Shadows Event RecordUpdatedSuccessfully(ByRef idNoOfRecord As Integer)
-
-    Private Function InitiateSave() As Integer
-        Dim retValue As Integer
-        Try
-            Dim record As New TM
-            GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
-            Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
-                If AddMode Then
-                    retValue = SaveAddedRecord(record)
-                    If retValue > 0 Then
-                        Dim retVal As Integer = retValue
-                        RaiseEvent RecordAddedSuccessfully(retVal)
-                        If retVal < 0 Then
-                            retValue = retVal
-                        End If
-                    End If
-                Else
-                    retValue = UpdateRecord(record)
-                    If retValue >= 0 Then
-                        Dim retVal As Integer = retValue
-                        RaiseEvent RecordUpdatedSuccessfully(retVal)
-                        If retVal < 0 Then
-                            retValue = retVal
-                        Else
-                            retValue += retVal
-                        End If
-                    End If
-                End If
-                If retValue >= 0 Then
-                    scope.Complete()
-                End If
-            End Using
-        Catch ex As TransactionAbortedException
-            retValue = -1
-            MessageBox.Show(ex.Message, $"Transaction Aborted")
-        Catch oEx As Exception
-
-            If oEx.Message.Contains("Timeout Expired") Then
-                retValue = -1
-            Else
-                MsgBox("Error:   " + oEx.Message)
-                retValue = -1
-            End If
-            Debugger.Break()
-
-        End Try
-
-        Return retValue
-    End Function
 
     Private Function RecordHasChanged(idNo As Int32, timeStampedValue As Object) As Boolean
         Dim retValue = False
@@ -395,54 +284,6 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         End If
     End Sub
 
-    'Public Sub OnEventHandler(ByRef eventType As ValidateViewRequested) Implements ISubscriber(Of ValidateViewRequested).OnEventHandler
-    '    Dim validationsPassed As Boolean
-    '    validationsPassed = True
-    '    Dim allControls As New List(Of Control)
-    '    Dim originalValue As String
-    '    Dim cForm As Control
-    '    cForm = eventType.ViewControl
-    '    For Each cCtrl As Control In FindControlRecursive(allControls, cForm)
-    '        If TypeOf cCtrl Is IEntryControl Then
-    '            If TypeOf cCtrl Is CTextBoxIdNo Then
-    '                ' no validations for this type of control. These are Identity Columns and are filled automatically
-    '                ' by the Data Server.
-    '            ElseIf TypeOf cCtrl Is CTextBox AndAlso GetPropertyValue(cCtrl, "ComputedValue") Then
-    '                ' ignore this also computed values don't need to be validated for empty values
-    '            ElseIf TypeOf cCtrl Is CTextBoxArabic Then
-    '                Dim thisControl As CTextBoxArabic
-    '                thisControl = cCtrl
-    '                If thisControl.EnglishControl Is Nothing Then
-    '                    MessageBox.Show($"EnglishControl for  CTextBoxArabic control <{thisControl.Name}> not set.")
-    '                End If
-    '                originalValue = GetOriginalValue(thisControl.EnglishControl)
-    '                Dim englishText As String = GetPropertyValue(thisControl.EnglishControl, "Text")
-    '                If thisControl.AutoFill And String.IsNullOrEmpty(cCtrl.Text) OrElse cCtrl.Text.Trim() = originalValue Then
-    '                    thisControl.Text = englishText
-    '                End If
-    '            ElseIf TypeOf cCtrl Is CTextBox Then 'OrElse TypeOf cCtrl Is CTextBoxArabic Then
-    '                ' check for duplicate values
-    '                Dim thisControl As CTextBox = cCtrl
-    '                If thisControl.ValueIsNumeric Then
-    '                    If Not IsNumberValid(eventType.ViewControl, cCtrl) Then
-    '                        validationsPassed = False
-    '                    End If
-    '                End If
-    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUnique") Then
-    '                    validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
-    '                End If
-    '                If validationsPassed AndAlso GetPropertyValue(cCtrl, "ValueIsUniqueBlanksAllowed") Then
-    '                    If cCtrl IsNot Nothing AndAlso cCtrl.Text <> "" Then
-    '                        validationsPassed = ValueIsUnique(cCtrl, validationsPassed)
-    '                    End If
-    '                End If
-    '            End If
-
-    '        End If
-    '    Next
-    '    'AutoValidationsPassed = validationsPassed
-    '    eventType.ValidView = validationsPassed
-    'End Sub
 
     Private Function ValueIsUnique(cCtrl As Control) As Boolean
         Dim fldName As String = cCtrl.Name.Substring(3)
