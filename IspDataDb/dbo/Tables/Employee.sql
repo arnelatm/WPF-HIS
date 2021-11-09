@@ -44,12 +44,15 @@
     [OTRateHoliday]       DECIMAL (7, 2) NULL,
     [OTRateSpecial]       DECIMAL (7, 2) NULL,
     [DutyHours]           DECIMAL (5, 2) NULL,
+    [BloodType]           CHAR (2)       NULL,
     [Active]              BIT            NULL,
     [Picture]             IMAGE          NULL,
     [Create_Date]         DATETIME       NULL,
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_EmployeeIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
