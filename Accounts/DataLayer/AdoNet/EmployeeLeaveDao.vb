@@ -20,7 +20,6 @@ Namespace DataLayer.AdoNet
                                   "IdNo," &
                                   "LeaveIdNo," &
                                   "LeaveReason," &
-                                  "LeaveStatus," &
                                   "StartDate"
 
         Public Function GetRecordByIdNo(idNo) As EmployeeLeave Implements IDaoAll(Of EmployeeLeave).GetRecordByIdNo
@@ -29,8 +28,15 @@ Namespace DataLayer.AdoNet
                     "   FROM EmployeeLeave" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Dim employeeLeaveStatusDao - New EmployeeLeaveStatusDao
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim employeeLeaveStatusDao = New EmployeeLeaveStatusDao
+            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
+            Dim leaveStatus As EmployeeLeaveStatus = employeeLeaveStatusDao.GetRecordByIdNo(data.IdNo)
+            If leaveStatus IsNot Nothing Then
+                data.LeaveStatus = leaveStatus.Status
+            Else
+                data.LeaveStatus = ""
+            End If
+            Return data
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave) _
@@ -52,7 +58,6 @@ Namespace DataLayer.AdoNet
                     " FullDay = @FullDay," &
                     " LeaveIdNo = @LeaveIdNo," &
                     " LeaveReason = @LeaveReason," &
-                    " LeaveStatus = @LeaveStatus," &
                     " StartDate = @StartDate" &
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(EmployeeLeave))
@@ -61,8 +66,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef EmployeeLeave As EmployeeLeave) As Integer Implements IDaoAll(Of EmployeeLeave).AddRecord
             Dim sql As String =
                     " INSERT INTO [EmployeeLeave] " &
-                    " (EmployeeIdNo,EndDate,FullDay,LeaveIdNo,LeaveReason,LeaveStatus,StartDate) " &
-                    " VALUES (@EmployeeIdNo,@EndDate,@FullDay,@LeaveIdNo,@LeaveReason,@LeaveStatus,@StartDate)"
+                    " (EmployeeIdNo,EndDate,FullDay,LeaveIdNo,LeaveReason,StartDate) " &
+                    " VALUES (@EmployeeIdNo,@EndDate,@FullDay,@LeaveIdNo,@LeaveReason,@StartDate)"
             Return Db.Insert(sql, Take(EmployeeLeave))
         End Function
 
@@ -84,7 +89,6 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .LeaveReason = Extensions.AsString(reader("LeaveReason")),
-            .LeaveStatus = Extensions.AsChar(reader("LeaveStatus")),
             .StartDate = Extensions.AsDateTime(reader("StartDate"))
             }
 
@@ -100,7 +104,6 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", EmployeeLeave.IdNo,
                                     "@LeaveIdNo", EmployeeLeave.LeaveIdNo,
                                     "@LeaveReason", EmployeeLeave.LeaveReason,
-                                    "@LeaveStatus", EmployeeLeave.LeaveStatus,
                                     "@StartDate", EmployeeLeave.StartDate
                                 }
         End Function

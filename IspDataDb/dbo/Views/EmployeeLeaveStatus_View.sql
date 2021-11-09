@@ -1,10 +1,12 @@
-﻿CREATE VIEW dbo.[EmployeeLeaveStatus_View]
+﻿CREATE View EmployeeLeaveStatus_View 
 AS
-SELECT        dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.AppliedBy, 
-                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.LeaveStatus.EnteredBy, dbo.LeaveStatus.Status AS LeaveStatus, dbo.LeaveStatus.Note, dbo.LeaveStatus.DateAdded AS LeaveStatusDateAdded, 
-                         dbo.LeaveStatus.IdNo AS LeaveStatusIdNo, dbo.LeaveStatus.EmployeeLeaveIdNo AS EmploeeLeaveIdNo
-FROM            dbo.EmployeeLeave INNER JOIN
-                         dbo.LeaveStatus ON dbo.EmployeeLeave.IdNo = dbo.LeaveStatus.EmployeeLeaveIdNo
+SELECT *
+FROM EmployeeLeaveStatusList_View a
+INNER JOIN
+    (SELECT EmployeeLeaveIdNo, MAX(DateCreated) AS LatestUpdate
+    FROM EmployeeLeaveStatus s
+    GROUP BY EmployeeLeaveIdNo) b
+ON a.IdNo = b.EmployeeLeaveIdNo AND a.DateCreated = b.LatestUpdate
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveStatus_View';
 
