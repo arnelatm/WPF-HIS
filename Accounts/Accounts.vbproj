@@ -257,6 +257,7 @@
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeLeaveStatusDao.vb" />
     <Compile Include="DataLayer\AdoNet\ShiftSummaryDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeAbsenceDao.vb" />

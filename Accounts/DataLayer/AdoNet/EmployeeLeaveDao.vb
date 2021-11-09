@@ -29,6 +29,7 @@ Namespace DataLayer.AdoNet
                     "   FROM EmployeeLeave" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
+            Dim employeeLeaveStatusDao - New EmployeeLeaveStatusDao
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
