@@ -4,9 +4,10 @@
 
 
 
+
 CREATE VIEW [dbo].[JournalDetails_View]	
   AS
-(SELECT 'AP' AS 'JournalCode'
+(SELECT 'AP' Collate SQL_Latin1_General_CP1_CI_AS as 'JournalCode' 
 	  ,ai.[IdNo]
       ,ai.[Sequence]
       ,ai.[JournalIdNo]
@@ -27,7 +28,7 @@ CREATE VIEW [dbo].[JournalDetails_View]
   on ai.JournalIdNo = b.IDNo 
 )
 UNION
-(SELECT 'CK'
+(SELECT 'CK' Collate SQL_Latin1_General_CP1_CI_AS 
 	  ,ai.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
@@ -49,7 +50,7 @@ UNION
   WHERE PaymentType='A'
 )
 UNION
-(SELECT 'CD'
+(SELECT 'CD' Collate SQL_Latin1_General_CP1_CI_AS 
 	  ,ai.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
@@ -71,7 +72,7 @@ UNION
   WHERE PaymentType='A'
 )
 UNION
-(SELECT 'PC'
+(SELECT 'PC' Collate SQL_Latin1_General_CP1_CI_AS 
 	  ,ai.[IdNo]
       ,ai.[Sequence]
 	  ,ai.[JournalIdNo]
@@ -93,7 +94,7 @@ UNION
   WHERE PaymentType='A'
 )
 UNION
-(SELECT 'CR'
+(SELECT 'CR' Collate SQL_Latin1_General_CP1_CI_AS 
 	  ,ai.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
