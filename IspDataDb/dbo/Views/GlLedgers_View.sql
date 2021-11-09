@@ -8,9 +8,10 @@
 
 
 
+
 CREATE VIEW [dbo].[GlLedgers_View]	
   AS
-(SELECT 'GJ' AS 'JournalCode'
+(SELECT 'GJ' Collate SQL_Latin1_General_CP1_CI_AS AS 'JournalCode'
 	  ,a.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
@@ -34,7 +35,7 @@ CREATE VIEW [dbo].[GlLedgers_View]
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
-(SELECT 'AP' 
+(SELECT 'AP' Collate SQL_Latin1_General_CP1_CI_AS
 	  ,a.[IdNo]
       ,[Sequence]
       ,[JournalIdNo]
@@ -60,7 +61,7 @@ UNION
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
-(SELECT 'AR' AS 'JournalCode'
+(SELECT 'AR' Collate SQL_Latin1_General_CP1_CI_AS
 	  ,a.[IdNo]
       ,[Sequence]
       ,[JournalIdNo]
@@ -86,7 +87,7 @@ UNION
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
-(SELECT 'ER' 
+(SELECT 'ER' Collate SQL_Latin1_General_CP1_CI_AS
 	  ,a.[IdNo]
       ,[Sequence]
       ,[JournalIdNo]
@@ -112,7 +113,7 @@ UNION
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
-(SELECT 'CK'
+(SELECT 'CK' Collate SQL_Latin1_General_CP1_CI_AS
 	  ,a.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
@@ -156,7 +157,7 @@ UNION
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
-(SELECT 'CD'
+(SELECT 'CD' Collate SQL_Latin1_General_CP1_CI_AS
 	  ,a.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
@@ -200,7 +201,7 @@ UNION
   ON a.AccountIdNo = ch.IdNo
 )
 UNION
-(SELECT 'CR'
+(SELECT 'CR' Collate SQL_Latin1_General_CP1_CI_AS
 	  ,a.[IdNo]
       ,[Sequence]
 	  ,[JournalIdNo]
