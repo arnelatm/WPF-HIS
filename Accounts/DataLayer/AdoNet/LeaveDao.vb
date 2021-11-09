@@ -13,7 +13,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Private Const FieldList = 
+        Private Const FieldList =
                     "Cumulative," &
                     "IdNo," &
                     "LeaveAllowed," &
@@ -23,11 +23,11 @@ Namespace DataLayer.AdoNet
                     "MaxCarryOver," &
                     "MaxLimit," &
                     "Notes," &
-                    "PaidPercent" 
+                    "PaidPercent"
 
         Public Function GetRecordByIdNo(idNo) As Leave Implements IDaoAll(Of Leave).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT " & FieldList & 
+                    " SELECT " & FieldList &
                     " FROM [Leave]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -43,7 +43,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function UpdateRecord(ByRef Leave As Leave) As Integer Implements IDaoAll(Of Leave).UpdateRecord
+        Public Function UpdateRecord(ByRef leave As Leave) As Integer Implements IDaoAll(Of Leave).UpdateRecord
             Dim sql As String =
                     " UPDATE [Leave] SET " &
                     " Cumulative = @Cumulative," &
@@ -56,15 +56,15 @@ Namespace DataLayer.AdoNet
                     " Notes = @Notes," &
                     " PaidPercent = @PaidPercent" &
                     " WHERE IdNo = @IdNo"
-            Return Db.Update(sql, Take(Leave))
+            Return Db.Update(sql, Take(leave))
         End Function
 
-        Public Function AddRecord(ByRef Leave As Leave) As Integer Implements IDaoAll(Of Leave).AddRecord
+        Public Function AddRecord(ByRef leave As Leave) As Integer Implements IDaoAll(Of Leave).AddRecord
             Dim sql As String =
                     " INSERT INTO [Leave] " &
                     " (Cumulative,LeaveAllowed,LeaveCode,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,Notes,PaidPercent)" &
                     " VALUES (@Cumulative,@LeaveAllowed,@LeaveCode,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@Notes,@PaidPercent)"
-            Return Db.Insert(sql, Take(Leave))
+            Return Db.Insert(sql, Take(leave))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Leave) =
@@ -81,18 +81,18 @@ Namespace DataLayer.AdoNet
             .PaidPercent = Extensions.AsDecimal(reader("PaidPercent"))
             }
 
-        Private Function Take(Leave As Leave) As Object()
+        Private Function Take(leave As Leave) As Object()
             Return New Object() {
-                                    "@Cumulative", Leave.Cumulative,
-                                    "@IdNo", Leave.IdNo,
-                                    "@LeaveAllowed", Leave.LeaveAllowed,
-                                    "@LeaveCode", Leave.LeaveCode,
-                                    "@LeaveName", Leave.LeaveName,
-                                    "@LeaveNameAra", Leave.LeaveNameAra,
-                                    "@MaxCarryOver", Leave.MaxCarryOver,
-                                    "@MaxLimit", Leave.MaxLimit,
-                                    "@Notes", Leave.Notes,
-                                    "@PaidPercent", Leave.PaidPercent
+                                    "@Cumulative", leave.Cumulative,
+                                    "@IdNo", leave.IdNo,
+                                    "@LeaveAllowed", leave.LeaveAllowed,
+                                    "@LeaveCode", leave.LeaveCode,
+                                    "@LeaveName", leave.LeaveName,
+                                    "@LeaveNameAra", leave.LeaveNameAra,
+                                    "@MaxCarryOver", leave.MaxCarryOver,
+                                    "@MaxLimit", leave.MaxLimit,
+                                    "@Notes", leave.Notes,
+                                    "@PaidPercent", leave.PaidPercent
                                 }
         End Function
 
