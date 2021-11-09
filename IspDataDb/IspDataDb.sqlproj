@@ -478,6 +478,8 @@
     <Build Include="dbo\Tables\EmployeeLeaveStatus.sql" />
     <Build Include="dbo\Views\EmployeeLeaveStatus_View.sql" />
     <Build Include="dbo\Views\EmployeeLeave_View.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveStatusList_View2.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveStatusList_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
