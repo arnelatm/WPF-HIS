@@ -474,7 +474,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo.FieldDescription = Nothing
         Me.TxtIdNo.FieldName = Nothing
         Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.TxtIdNo.FindEnabled = false
+        Me.TxtIdNo.FindEnabled = true
         Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Me.lblIdNo
