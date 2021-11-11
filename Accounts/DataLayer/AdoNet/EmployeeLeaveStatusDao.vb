@@ -48,6 +48,14 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
+        Public Function GetLeaveStatus(idNo As Object) As String
+            Dim sql As String =
+                    " SELECT [Status] from [EmployeeLeaveStatus_view]" &
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
+            Return _db.Scalar(sql, params)
+        End Function
+
         Public Function AddRecord(ByRef employeeLeaveStatus As EmployeeLeaveStatus) As Integer Implements IDao(Of EmployeeLeaveStatus).AddRecord
             Dim sql As String =
                     " INSERT INTO [Leave] " &

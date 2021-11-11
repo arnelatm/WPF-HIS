@@ -134,9 +134,9 @@ Public Class LoginEntry
 
     Private Sub AfterSuccessfulLogin()
         SaveUserPasswordSetting()
-        'GlobalVariables.UserName = UserName
-        'GlobalVariables.UserIdNo = IdNo
-        'GlobalVariables.SecurityGroupIdNo = SecurityGroupIdNo
+        GlobalVariables.UserName = UserName
+        GlobalVariables.UserIdNo = IdNo
+        GlobalVariables.SecurityGroupIdNo = SecurityGroupIdNo
     End Sub
 
     Private Sub SaveUserPasswordSetting()

@@ -20,7 +20,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, BloodType, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, DutyHours, HiredDate, ReleasedDate, " &
-                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Active, Picture" &
+                    " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Supervisor, SupervisorIdNo, Active, Picture" &
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -108,6 +108,8 @@ Namespace DataLayer.AdoNet
                     " ReligionIdNo = @ReligionIdNo," &
                     " SponsorType = @SponsorType," &
                     " Street = @Street," &
+                    " Supervisor = @Supervisor," &
+                    " SupervisorIdNo = @SupervisorIdNo," &
                     " Title = @Title," &
                     " TownCity = @TownCity," &
                     " ZipCode = @ZipCode," &
@@ -121,10 +123,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, BloodType, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Active, Picture)" &
+                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Supervisor, SupervisorIdNo, Active, Picture)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @BloodType, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod, @SponsorType, @Active, @Picture)"
+                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod, @SponsorType, @Supervisor, @SupervisorIdNo, @Active, @Picture)"
             Return _db.Insert(sql, Take(employee))
         End Function
 
@@ -166,6 +168,8 @@ Namespace DataLayer.AdoNet
             .ReligionIdNo = Extensions.AsNullable(Of Int16?)(reader("ReligionIdNo")),
             .SponsorType = Extensions.AsChar(reader("SponsorType")),
             .Street = Extensions.AsString(reader("Street")),
+            .Supervisor = Extensions.AsBool(reader("Supervisor")),
+            .SupervisorIdNo = Extensions.AsInt(Of Int32)(reader("SupervisorIdNo")),
             .Title = Extensions.AsString(reader("Title")),
             .TownCity = Extensions.AsString(reader("TownCity")),
             .ZipCode = Extensions.AsString(reader("ZipCode")),
@@ -216,6 +220,8 @@ Namespace DataLayer.AdoNet
                                     "@ReligionIdNo", employee.ReligionIdNo,
                                     "@SponsorType", employee.SponsorType,
                                     "@Street", employee.Street,
+                                    "@Supervisor", employee.Supervisor,
+                                    "@SupervisorIdNo", employee.SupervisorIdNo,
                                     "@Title", employee.Title,
                                     "@TownCity", employee.TownCity,
                                     "@ZipCode", employee.ZipCode,

@@ -7,6 +7,8 @@ Namespace PresentationLayer.Models
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class EmployeeLeaveModel
+
+        Public Property AppliedBy As Int32
         Public Property DateCreated As DateTime?
         Public Property EmployeeIdNo As Int32
         Public Property EndDate As DateTime

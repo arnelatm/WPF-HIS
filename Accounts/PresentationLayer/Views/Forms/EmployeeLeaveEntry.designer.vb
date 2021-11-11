@@ -47,6 +47,8 @@ Namespace PresentationLayer.Views.Forms
         Me.txtLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblAppliedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboAppliedBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout2.SuspendLayout
         Me.SuspendLayout
@@ -233,6 +235,8 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout2.Controls.Add(Me.txtLeaveReason)
         Me.CFlowLayout2.Controls.Add(Me.lblLeaveStatus)
         Me.CFlowLayout2.Controls.Add(Me.cboLeaveStatus)
+        Me.CFlowLayout2.Controls.Add(Me.lblAppliedBy)
+        Me.CFlowLayout2.Controls.Add(Me.cboAppliedBy)
         Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
         Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
         resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
@@ -435,6 +439,57 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveStatus.ValueIsNumeric = false
         Me.cboLeaveStatus.ValueMember = "Code"
         '
+        'lblAppliedBy
+        '
+        Me.lblAppliedBy.BackColor = System.Drawing.Color.Transparent
+        Me.lblAppliedBy.DisplayOnly = true
+        Me.lblAppliedBy.EditingMode = false
+        resources.ApplyResources(Me.lblAppliedBy, "lblAppliedBy")
+        Me.lblAppliedBy.Name = "lblAppliedBy"
+        Me.lblAppliedBy.Translatable = true
+        '
+        'cboAppliedBy
+        '
+        Me.cboAppliedBy.BackColor = System.Drawing.Color.White
+        Me.cboAppliedBy.BegFindValue = Nothing
+        Me.cboAppliedBy.ChangingSearchValueOnly = false
+        Me.cboAppliedBy.CurrentSearchTerm = ""
+        Me.cboAppliedBy.DefaultValue = Nothing
+        Me.cboAppliedBy.DisplayMember = "Name"
+        Me.cboAppliedBy.DisplayOnly = true
+        Me.cboAppliedBy.DropDownHeight = 24
+        Me.cboAppliedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+        Me.cboAppliedBy.EditingMode = true
+        Me.cboAppliedBy.EndFindValue = Nothing
+        Me.cboAppliedBy.FieldDescription = Nothing
+        Me.cboAppliedBy.FieldName = Nothing
+        Me.cboAppliedBy.FilterRule = Nothing
+        Me.cboAppliedBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboAppliedBy.FindEnabled = false
+        Me.CFlowLayout2.SetFlowBreak(Me.cboAppliedBy, true)
+        resources.ApplyResources(Me.cboAppliedBy, "cboAppliedBy")
+        Me.cboAppliedBy.ForeColor = System.Drawing.Color.Black
+        Me.cboAppliedBy.FormattingEnabled = true
+        Me.cboAppliedBy.HideWhenNotEditingOrAdding = false
+        Me.cboAppliedBy.IgnoreCase = false
+        Me.cboAppliedBy.LinkedLabel = Me.lblEmployeeIdNo
+        Me.cboAppliedBy.Name = "cboAppliedBy"
+        Me.cboAppliedBy.OldValue = 0
+        Me.cboAppliedBy.OriginalDataSource = Nothing
+        Me.cboAppliedBy.OriginalList = Nothing
+        Me.cboAppliedBy.OverrideDropDownStyleList = false
+        Me.cboAppliedBy.PreviousSearchTerm = Nothing
+        Me.cboAppliedBy.PropertySelector = Nothing
+        Me.cboAppliedBy.ReadOnlyCombo = true
+        Me.cboAppliedBy.SuggestBoxHeight = 200
+        Me.cboAppliedBy.SuggestListOrderRule = Nothing
+        Me.cboAppliedBy.TextToSearch = Nothing
+        Me.cboAppliedBy.Translatable = false
+        Me.cboAppliedBy.ValueIsMandatory = false
+        Me.cboAppliedBy.ValueIsNullable = false
+        Me.cboAppliedBy.ValueIsNumeric = false
+        Me.cboAppliedBy.ValueMember = "IdNo"
+        '
         'EmployeeLeaveEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -469,5 +524,7 @@ End Sub
         Public WithEvents txtLeaveReason As CTextBox
         Friend WithEvents lblLeaveStatus As CLabel
         Public WithEvents cboLeaveStatus As CaComboBox
+        Friend WithEvents lblAppliedBy As CLabel
+        Public WithEvents cboAppliedBy As CaComboBox
     End Class
 End Namespace

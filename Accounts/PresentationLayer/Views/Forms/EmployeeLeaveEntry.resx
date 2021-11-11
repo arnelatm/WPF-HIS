@@ -409,7 +409,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 25</value>
+    <value>119, 25</value>
   </data>
   <data name="dtpStartDate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -469,7 +469,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 25</value>
+    <value>119, 25</value>
   </data>
   <data name="dtpEndDate.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -601,7 +601,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboLeaveStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 24</value>
+    <value>129, 24</value>
   </data>
   <data name="cboLeaveStatus.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -618,6 +618,75 @@
   <data name="&gt;&gt;cboLeaveStatus.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="lblAppliedBy.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblAppliedBy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAppliedBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 243</value>
+  </data>
+  <data name="lblAppliedBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblAppliedBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
+  </data>
+  <data name="lblAppliedBy.TabIndex" type="System.Int32, mscorlib">
+    <value>299</value>
+  </data>
+  <data name="lblAppliedBy.Text" xml:space="preserve">
+    <value>Applied By</value>
+  </data>
+  <data name="lblAppliedBy.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblAppliedBy.Name" xml:space="preserve">
+    <value>lblAppliedBy</value>
+  </data>
+  <data name="&gt;&gt;lblAppliedBy.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblAppliedBy.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;lblAppliedBy.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="cboAppliedBy.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboAppliedBy.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cboAppliedBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 243</value>
+  </data>
+  <data name="cboAppliedBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="cboAppliedBy.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="cboAppliedBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 24</value>
+  </data>
+  <data name="cboAppliedBy.TabIndex" type="System.Int32, mscorlib">
+    <value>300</value>
+  </data>
+  <data name="&gt;&gt;cboAppliedBy.Name" xml:space="preserve">
+    <value>cboAppliedBy</value>
+  </data>
+  <data name="&gt;&gt;cboAppliedBy.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboAppliedBy.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;cboAppliedBy.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
   <data name="lblDateCreated.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -625,7 +694,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 243</value>
+    <value>11, 269</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -652,13 +721,13 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="txtDateCreated.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 243</value>
+    <value>203, 269</value>
   </data>
   <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -667,7 +736,7 @@
     <value>129, 23</value>
   </data>
   <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;txtDateCreated.Name" xml:space="preserve">
     <value>txtDateCreated</value>
@@ -679,7 +748,7 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="CFlowLayout2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -691,7 +760,7 @@
     <value>10, 10, 10, 10</value>
   </data>
   <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>642, 284</value>
+    <value>642, 305</value>
   </data>
   <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
     <value>290</value>
@@ -745,7 +814,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>642, 337</value>
+    <value>642, 358</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>16, 268</value>

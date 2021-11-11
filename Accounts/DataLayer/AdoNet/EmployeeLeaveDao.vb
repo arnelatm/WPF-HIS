@@ -2,6 +2,7 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for EmployeeLeave
@@ -13,7 +14,8 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Private Const FieldList = "DateCreated," &
+        Private Const FieldList = "AppliedBy," &
+                                  "DateCreated," &
                                   "EmployeeIdNo," &
                                   "EndDate," &
                                   "FullDay," &
@@ -30,11 +32,11 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim employeeLeaveStatusDao = New EmployeeLeaveStatusDao
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            Dim leaveStatus As EmployeeLeaveStatus = employeeLeaveStatusDao.GetRecordByIdNo(data.IdNo)
+            Dim leaveStatus As String = employeeLeaveStatusDao.GetLeaveStatus(data.IdNo)
             If leaveStatus IsNot Nothing Then
-                data.LeaveStatus = leaveStatus.Status
+                data.LeaveStatus = leaveStatus
             Else
-                data.LeaveStatus = ""
+                data.LeaveStatus = GlobalFunctions.EnumToCode(LeaveStatusSelection.Submitted)
             End If
             Return data
         End Function
@@ -53,7 +55,8 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef EmployeeLeave As EmployeeLeave) As Integer Implements IDaoAll(Of EmployeeLeave).UpdateRecord
             Dim sql As String =
                     " UPDATE [EmployeeLeave]" &
-                    " SET EmployeeIdNo = @EmployeeIdNo," &
+                    " SET AppliedBy = @AppliedBy," &
+                    " EmployeeIdNo = @EmployeeIdNo," &
                     " EndDate = @EndDate," &
                     " FullDay = @FullDay," &
                     " LeaveIdNo = @LeaveIdNo," &
@@ -66,8 +69,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef EmployeeLeave As EmployeeLeave) As Integer Implements IDaoAll(Of EmployeeLeave).AddRecord
             Dim sql As String =
                     " INSERT INTO [EmployeeLeave] " &
-                    " (EmployeeIdNo,EndDate,FullDay,LeaveIdNo,LeaveReason,StartDate) " &
-                    " VALUES (@EmployeeIdNo,@EndDate,@FullDay,@LeaveIdNo,@LeaveReason,@StartDate)"
+                    " (AppliedBy,EmployeeIdNo,EndDate,FullDay,LeaveIdNo,LeaveReason,StartDate) " &
+                    " VALUES (@AppliedBy,@EmployeeIdNo,@EndDate,@FullDay,@LeaveIdNo,@LeaveReason,@StartDate)"
             Return Db.Insert(sql, Take(EmployeeLeave))
         End Function
 
@@ -82,29 +85,31 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeLeave) =
                                     Function(reader) _
             New EmployeeLeave() With {
-            .DateCreated = Extensions.AsNullableDateTime(reader("DateCreated")),
-            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .EndDate = Extensions.AsDateTime(reader("EndDate")),
-            .FullDay = Extensions.AsBool(reader("FullDay")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .LeaveIdNo = Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
-            .LeaveReason = Extensions.AsString(reader("LeaveReason")),
-            .StartDate = Extensions.AsDateTime(reader("StartDate"))
+            .AppliedBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("AppliedBy")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
+            .EndDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("EndDate")),
+            .FullDay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("FullDay")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
+            .LeaveReason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveReason")),
+            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate"))
             }
 
         Public Sub New()
 
         End Sub
 
-        Private Function Take(EmployeeLeave As EmployeeLeave) As Object()
+        Private Function Take(employeeLeave As EmployeeLeave) As Object()
             Return New Object() {
-                                    "@EmployeeIdNo", EmployeeLeave.EmployeeIdNo,
-                                    "@EndDate", EmployeeLeave.EndDate,
-                                    "@FullDay", EmployeeLeave.FullDay,
-                                    "@IdNo", EmployeeLeave.IdNo,
-                                    "@LeaveIdNo", EmployeeLeave.LeaveIdNo,
-                                    "@LeaveReason", EmployeeLeave.LeaveReason,
-                                    "@StartDate", EmployeeLeave.StartDate
+                                    "@AppliedBy", employeeLeave.AppliedBy,
+                                    "@EmployeeIdNo", employeeLeave.EmployeeIdNo,
+                                    "@EndDate", employeeLeave.EndDate,
+                                    "@FullDay", employeeLeave.FullDay,
+                                    "@IdNo", employeeLeave.IdNo,
+                                    "@LeaveIdNo", employeeLeave.LeaveIdNo,
+                                    "@LeaveReason", employeeLeave.LeaveReason,
+                                    "@StartDate", employeeLeave.StartDate
                                 }
         End Function
 

@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -17,6 +18,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.FullDay = True
+            View.AppliedBy = GlobalVariables.UserIdNo
         End Sub
 
     End Class
