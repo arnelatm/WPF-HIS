@@ -374,6 +374,24 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Supervisor As Boolean Implements IEmployeeView.Supervisor
+            Get
+                Return chkSupervisor.Checked
+            End Get
+            Set
+                chkSupervisor.Checked = Value
+            End Set
+        End Property
+
+        Public Property SupervisorIdNo As Int32 Implements IEmployeeView.SupervisorIdNo
+            Get
+                Return cboSupervisorIdNo.GetNullableValue(Of Int32)
+            End Get
+            Set
+                cboSupervisorIdNo.SetValue(Value)
+            End Set
+        End Property
+
         Public Property Title As String Implements IEmployeeView.Title
 
         Public Property TownCity As String Implements IEmployeeView.TownCity
@@ -441,6 +459,7 @@ Namespace PresentationLayer.Views.Forms
             CreateEnumDataSource(Of MaritalStatusSelection)(cacMaritalStatus)
             CreateEnumDataSource(Of PayrollPaymentMethodSelection)(cboPaymentMethod)
             CreateEnumDataSource(Of SponsorTypeSelection)(cboSponsorType)
+            CreateEnumDataSource(Of BloodTypeSelection)(cboBloodType)
             CreateEnumData(Of PayRateUnitSelection)(_unit)
             CreateDataSource("Bank", cacBankIdNo)
             CreateDataSource("Country", cacCountryCode)
@@ -450,6 +469,7 @@ Namespace PresentationLayer.Views.Forms
             CreateDataSource("Religion", cacReligionIdNo)
             CreateDataSource("PayCycle", cboPayCycleidNo)
             CreateDataSource("PayGroup", cboPayGroupIdNo)
+            CreateDataSource("Employee", cboSupervisorIdNo, "Supervisor=1")
             CreateLookupData("PhoneType", NameOf(_phoneTypes))
             CreateLookupData("Leave", NameOf(_leaves))
             CreateLookupData("PayElement", NameOf(_deductionsByName), "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
@@ -480,6 +500,7 @@ Namespace PresentationLayer.Views.Forms
          {"Gender", cacGender},
          {"HiredDate", dtpHiredDate},
          {"Iban", txtIban},
+         {"IdNo", TxtIdNo},
          {"MaritalStatus", cacMaritalStatus},
          {"NationalIdNo", txtNationalIdNo},
          {"NationalityCode", cacNationalityCode},
@@ -488,16 +509,17 @@ Namespace PresentationLayer.Views.Forms
          {"PayCycleIdNo", cboPayCycleidNo},
          {"PayGroupIdNo", cboPayGroupIdNo},
          {"PaymentMethod", cboPaymentMethod},
+         {"Picture", imgPicture},
          {"PoBox", txtPoBox},
          {"ProvinceState", txtProvinceState},
          {"ReleasedDate", dtpReleasedDate},
          {"ReligionIdNo", cacReligionIdNo},
          {"SponsorType", cboSponsorType},
          {"Street", txtStreet},
+         {"Supervisor", chkSupervisor},
+         {"SupervisorIdNo", cboSupervisorIdNo},
          {"TownCity", txtTownCity},
-         {"ZipCode", txtZipCode},
-         {"Picture", imgPicture},
-         {"IdNo", TxtIdNo}
+         {"ZipCode", txtZipCode}
         }
         End Sub
 

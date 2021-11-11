@@ -46,6 +46,8 @@ Namespace PresentationLayer.Models
         Public Property ReligionIdNo As Int16?
         Public Property SponsorType As Char
         Public Property Street As String
+        Public Property Supervisor As Boolean
+        Public Property SupervisorIdNo As Int32
         Public Property Title As String
         Public Property TownCity As String
         Public Property ZipCode As String

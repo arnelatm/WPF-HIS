@@ -19,6 +19,15 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
+        Public Property AppliedBy As Integer Implements IEmployeeLeaveView.AppliedBy
+            Get
+                Return cboAppliedBy.GetNullableValue(Of Int32)
+            End Get
+            Set
+                cboAppliedBy.SetValue(Value)
+            End Set
+        End Property
+
         Public Property DateCreated As DateTime? Implements IEmployeeLeaveView.DateCreated
             Get
                 Return Convert.ToDateTime(txtDateCreated.Text)
@@ -109,6 +118,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
+                {"AppliedBy", cboAppliedBy},
                 {"EmployeeIdNo", cboEmployeeIdNo},
                 {"EndDate", dtpEndDate},
                 {"FullDay", chkFullDay},
@@ -122,6 +132,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("Employee", cboEmployeeIdNo)
+            CreateDataSource("Employee", cboAppliedBy)
             CreateDataSource("Leave", cboLeaveIdNo)
             CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
         End Sub

@@ -5,6 +5,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IEmployeeLeaveView
         Inherits IView
 
+        Property AppliedBy As Int32
         Property DateCreated As DateTime?
         Property EmployeeIdNo As Integer
         Property EndDate As DateTime
