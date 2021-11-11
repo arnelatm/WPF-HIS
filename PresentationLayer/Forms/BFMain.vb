@@ -1100,6 +1100,12 @@ Public Class BfMain
         End If
     End Sub
 
+    Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, fields As String(), optional sortKey As String = "", Optional filter As String = "")
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(tableName, control, fields, sortKey, filter))
+        End If
+    End Sub
+
     'Protected Overloads Sub CreateLookupData(tableName As String, ByRef targetLookup As List(Of Lookup.LookupData), Optional filter As String = Nothing)
     '    Dim varName = NameOf(targetLookup)
     '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, varName, filter))

@@ -600,6 +600,9 @@
   <data name="cboLeaveStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
+  <data name="cboLeaveStatus.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="cboLeaveStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 24</value>
   </data>

@@ -408,6 +408,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveStatus.CurrentSearchTerm = ""
         Me.cboLeaveStatus.DefaultValue = Nothing
         Me.cboLeaveStatus.DisplayMember = "Name"
+        Me.cboLeaveStatus.DisplayOnly = true
+        Me.cboLeaveStatus.DropDownHeight = 24
+        Me.cboLeaveStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cboLeaveStatus.EditingMode = true
         Me.cboLeaveStatus.EndFindValue = Nothing
         Me.cboLeaveStatus.FieldDescription = Nothing
@@ -429,7 +432,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveStatus.OverrideDropDownStyleList = false
         Me.cboLeaveStatus.PreviousSearchTerm = Nothing
         Me.cboLeaveStatus.PropertySelector = Nothing
-        Me.cboLeaveStatus.ReadOnlyCombo = false
+        Me.cboLeaveStatus.ReadOnlyCombo = true
         Me.cboLeaveStatus.SuggestBoxHeight = 200
         Me.cboLeaveStatus.SuggestListOrderRule = Nothing
         Me.cboLeaveStatus.TextToSearch = Nothing

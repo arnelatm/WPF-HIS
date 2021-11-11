@@ -132,7 +132,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("Employee", cboEmployeeIdNo)
-            CreateDataSource("Employee", cboAppliedBy)
+            CreateDataSource("User", cboAppliedBy, {"IdNo","UserName"})
             CreateDataSource("Leave", cboLeaveIdNo)
             CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
         End Sub

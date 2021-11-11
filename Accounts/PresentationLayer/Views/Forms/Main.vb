@@ -584,13 +584,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of GeneratePayrollBankCsv, GeneratePayrollBankCsvPresenter(Of PayrollModel))()
         End Sub
 
-        Private Sub EmployeeLeaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeave.Click
-            RunForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel))()
-        End Sub
 
-        Private Sub EmployeeAbsencesLateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeAbsencesLate.Click
-            RunForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))()
-        End Sub
+        'Private Sub EmployeeAbsencesLateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeAbsencesLate.Click
+        '    RunForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))()
+        'End Sub
 
         Private Sub ToolStripMenuItemPostPettyCashAccount_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPostPettyCashAccount.Click
             RunForm(Of PettyCashClosingEntry, PettyCashClosingPresenter(Of PettyCashClosingModel))()
@@ -1003,6 +1000,18 @@ Namespace PresentationLayer.Views.Forms
             'End Using
         End Sub
 
+        Private Sub ToolStripMenuItemEmployeeLeave_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeave.Click
+            RunForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemHolidayEntry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemHolidayEntry.Click
+            RunForm(Of HolidayEntry, HolidayPresenter(Of HolidayModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemEmployeeAbsenceLate_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeAbsenceLate.Click
+            RunForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))()
+        End Sub
+
         Private Sub UnhandledExceptionHandler(sender As Object, e As UnhandledExceptionEventArgs)
             ErrLogger.LogError(CType(e.ExceptionObject, Exception))
         End Sub
@@ -1039,9 +1048,8 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub HolidayEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemHolidayEntry.Click
-            RunForm(Of HolidayEntry, HolidayPresenter(Of HolidayModel))()
-        End Sub
+
+
 
         Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
             Dim allControls As New List(Of Control)
@@ -1099,7 +1107,7 @@ Namespace PresentationLayer.Views.Forms
                     End If
                 ElseIf TypeOf dropDownItem Is ToolStripButton Then
                     'Dim childSubMenuName = pParentMenuName + " > " + Mid(dropDownItem.Name, 16)
-                    If dropDownItem.Name.SubString(0, 15) <> "ToolStripButton" Then
+                    If dropDownItem.Name.Length > 15 And dropDownItem.Name.SubString(0, 15) <> "ToolStripButton" Then
                         Debugger.Break()
                         MessageBox.Show($"Invalid ToolStripButton Name <" + dropDownItem.Name.SubString(0, 15) + ">!")
                     End If
@@ -1118,10 +1126,6 @@ Namespace PresentationLayer.Views.Forms
             Return parentIdNo
         End Function
 
-        Private Sub EmployeeIDPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeIDPrintingToolStripMenuItem.Click
-            'RunForm(Of EmployeeIdPrinting, EmployeeIdPrintingPresenter(Of EmployeeModel))()
-            RunForm(Of EmployeeIdPrinting, EmployeeIdPresenter(Of EmployeeIdModel))()
-        End Sub
 
     End Class
 

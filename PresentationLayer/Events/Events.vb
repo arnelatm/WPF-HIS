@@ -182,6 +182,14 @@ Public Class GetDataSource
         Me.Fields = fields
     End Sub
 
+    Public Sub New(ByVal tableName As String, ByRef control As Control, ByVal fields As String(), Optional ByVal sortKey As String = Nothing, Optional ByVal filter As String = Nothing)
+        Me.TableName = tableName
+        Me.Control = control
+        Me.Filter = filter
+        Me.Fields = fields
+        Me.SortKey = sortKey
+    End Sub
+
     Public Property TableName As String
     Public Property Control As Control
     Public Property Fields As String()
