@@ -35,12 +35,12 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnUnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.DataGridViewEmployeeIdList = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.PrintThis = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvNationalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvPicture = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsEmployeeIdList,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TableLayoutPanel1.SuspendLayout
@@ -94,7 +94,7 @@ Namespace PresentationLayer.Views.Forms
         Me.btnUnSelectAll.Location = New System.Drawing.Point(99, 459)
         Me.btnUnSelectAll.Name = "btnUnSelectAll"
         Me.btnUnSelectAll.OriginalImageName = Nothing
-        Me.btnUnSelectAll.SecurityKey = "ClosePettyCash"
+        Me.btnUnSelectAll.SecurityKey = ""
         Me.btnUnSelectAll.Size = New System.Drawing.Size(90, 23)
         Me.btnUnSelectAll.TabIndex = 15
         Me.btnUnSelectAll.Text = "Unselect All"
@@ -137,7 +137,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewEmployeeIdList.Name = "DataGridViewEmployeeIdList"
         Me.DataGridViewEmployeeIdList.ReadOnly = true
         Me.DataGridViewEmployeeIdList.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.DataGridViewEmployeeIdList.SecurityKey = "ClosePettyCash"
+        Me.DataGridViewEmployeeIdList.SecurityKey = ""
         Me.DataGridViewEmployeeIdList.SequenceColumn = "dgvSequence"
         Me.DataGridViewEmployeeIdList.SequenceFieldName = "Sequence"
         Me.DataGridViewEmployeeIdList.ShowFooter = false
@@ -145,18 +145,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewEmployeeIdList.Size = New System.Drawing.Size(978, 450)
         Me.DataGridViewEmployeeIdList.TabIndex = 10
         Me.DataGridViewEmployeeIdList.Translatable = true
-        '
-        'btnSelectAll
-        '
-        Me.btnSelectAll.DesignerSelected = false
-        Me.btnSelectAll.ImageIndex = 0
-        Me.btnSelectAll.Location = New System.Drawing.Point(3, 459)
-        Me.btnSelectAll.Name = "btnSelectAll"
-        Me.btnSelectAll.OriginalImageName = Nothing
-        Me.btnSelectAll.SecurityKey = "ClosePettyCash"
-        Me.btnSelectAll.Size = New System.Drawing.Size(90, 23)
-        Me.btnSelectAll.TabIndex = 14
-        Me.btnSelectAll.Text = "Select All"
         '
         'PrintThis
         '
@@ -253,6 +241,18 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPicture.Name = "dgvPicture"
         Me.dgvPicture.ReadOnly = true
         Me.dgvPicture.Width = 50
+        '
+        'btnSelectAll
+        '
+        Me.btnSelectAll.DesignerSelected = false
+        Me.btnSelectAll.ImageIndex = 0
+        Me.btnSelectAll.Location = New System.Drawing.Point(3, 459)
+        Me.btnSelectAll.Name = "btnSelectAll"
+        Me.btnSelectAll.OriginalImageName = Nothing
+        Me.btnSelectAll.SecurityKey = ""
+        Me.btnSelectAll.Size = New System.Drawing.Size(90, 23)
+        Me.btnSelectAll.TabIndex = 14
+        Me.btnSelectAll.Text = "Select All"
         '
         'EmployeeIdPrinting
         '

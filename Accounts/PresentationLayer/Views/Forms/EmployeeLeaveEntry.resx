@@ -187,7 +187,7 @@
     <value>280</value>
   </data>
   <data name="lblEmployeeIdNo.Text" xml:space="preserve">
-    <value>Name</value>
+    <value>Employee Name</value>
   </data>
   <data name="lblEmployeeIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -823,7 +823,7 @@
     <value>16, 268</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Shift Summary Sales Maintenance Form</value>
+    <value>Employee Leave Maintenance Form</value>
   </data>
   <data name="&gt;&gt;StoreCaptions1.Name" xml:space="preserve">
     <value>StoreCaptions1</value>
