@@ -1856,19 +1856,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Else
             hasAccess = False
         End If
-        If hasAccess Then
-            ' user has editing options for approved transactions
-        Else
-            Dim message = Messaging.GetParametrizedMessage(True, securityKey, {"securityKey", securityKey})
-            Dim curCulture = CultureInfo.CurrentCulture
-            Dim language As String = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            If language = "ar" Then
-                CForm = New ReportFormNew("Statement of Accounts Receivable Arabic.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
-            Else
-                CForm = New ReportFormNew("Statement of Accounts Receivable.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
-            End If
-
-            Messaging.Show(True, "MsgNoAccessToSecurity")
+        If inform Then
+            Dim securityKeyMessage = Messaging.TranslateCaption(securityKey)
+            Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
+            'Dim curCulture = CultureInfo.CurrentCulture
+            'Dim language As String = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            Messaging.Show(False, message)
         End If
         Return hasAccess
     End Function
