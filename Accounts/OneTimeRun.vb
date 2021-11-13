@@ -111,11 +111,11 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgInvalidTextLength", "Field {fieldName} must be between {minimumLength} and {maximumLength} characters long.", "Invalid Entry")
         Messaging.AddMessage("MsgExactTextLength", "Field {fieldName} must be exactly {minimumLength} characters long.", "Invalid Entry")
         Messaging.AddMessage("MsgInvalidRange", "Field {fieldName} must be between {minimumValue} and {maximumValue}.", "Invalid Entry")
-        Messaging.AddMessage("MsgShowCsvOutputFile", "CSV Bank Transfer File created on your documents folder with a file name of CSV.csv", "")          
-        Messaging.AddMessage("MsgSecurityError","Sorry, you don't have the proper security credentials to execute that command!","Error")
-        Messaging.AddMessage("MsgEditingOfClosedPcRecordNotAllowed","This record has already been closed. Edits not allowed!", "Error")
-        Messaging.AddMessage("MsgEditingOfReconciledNotAllowed","Editing of transaction with reconciled account entries not allowed!","Error")
-
+        Messaging.AddMessage("MsgShowCsvOutputFile", "CSV Bank Transfer File created on your documents folder with a file name of CSV.csv", "")
+        Messaging.AddMessage("MsgSecurityError", "Sorry, you don't have the proper security credentials to execute that command!", "Error")
+        Messaging.AddMessage("MsgEditingOfClosedPcRecordNotAllowed", "This record has already been closed. Edits not allowed!", "Error")
+        Messaging.AddMessage("MsgEditingOfReconciledNotAllowed", "Editing of transaction with reconciled account entries not allowed!", "Error")
+        Messaging.AddMessage("MsgNoAccessToSecurity", "Sorry you have no '{securityName}' access.", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

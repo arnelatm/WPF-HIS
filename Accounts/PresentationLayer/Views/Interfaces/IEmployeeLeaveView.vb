@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property LeaveIdNo As Int16
         Property LeaveReason As String
-        Property LeaveStatus As Char
+        Property LeaveStatus As String
         Property StartDate As DateTime
 
     End Interface

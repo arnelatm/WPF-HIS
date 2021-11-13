@@ -86,7 +86,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LeaveStatus As Char Implements IEmployeeLeaveView.LeaveStatus
+        Public Property LeaveStatus As String Implements IEmployeeLeaveView.LeaveStatus
             Get
                 Return cboLeaveStatus.GetValue()
             End Get
@@ -132,7 +132,7 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("Employee", cboEmployeeIdNo)
-            CreateDataSource("User", cboAppliedBy, {"IdNo","UserName"})
+            CreateDataSource("User", cboAppliedBy, {"IdNo", "UserName"})
             CreateDataSource("Leave", cboLeaveIdNo)
             CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
         End Sub

@@ -584,7 +584,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of GeneratePayrollBankCsv, GeneratePayrollBankCsvPresenter(Of PayrollModel))()
         End Sub
 
-
         'Private Sub EmployeeAbsencesLateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeAbsencesLate.Click
         '    RunForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))()
         'End Sub
@@ -1048,9 +1047,6 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-
-
-
         Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
             Dim allControls As New List(Of Control)
             'Dim nRecCount = Presenter.GetRecordCount("SecurityObject")
@@ -1107,7 +1103,7 @@ Namespace PresentationLayer.Views.Forms
                     End If
                 ElseIf TypeOf dropDownItem Is ToolStripButton Then
                     'Dim childSubMenuName = pParentMenuName + " > " + Mid(dropDownItem.Name, 16)
-                    If dropDownItem.Name.Length > 15 And dropDownItem.Name.SubString(0, 15) <> "ToolStripButton" Then
+                    If dropDownItem.Name.Length > 15 AndAlso dropDownItem.Name.SubString(0, 15) <> "ToolStripButton" Then
                         Debugger.Break()
                         MessageBox.Show($"Invalid ToolStripButton Name <" + dropDownItem.Name.SubString(0, 15) + ">!")
                     End If
@@ -1125,7 +1121,6 @@ Namespace PresentationLayer.Views.Forms
             parentIdNo = Presenter.UpdateSecurityObject(securityObject)
             Return parentIdNo
         End Function
-
 
     End Class
 

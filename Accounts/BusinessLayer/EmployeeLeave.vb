@@ -17,6 +17,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("EmployeeIdNo"))
                 AddRule(New ValidateRequired("StartDate"))
                 AddRule(New ValidateRequired("EndDate"))
+                AddRule(New ValidateRequired("LeaveIdNo"))
                 AddRule(New ValidateRequired("LeaveReason"))
                 AddRule(New ValidateCompare("StartDate", "EndDate", ValidationOperator.LessThanOrEqual, ValidationDataType.Date))
             End If

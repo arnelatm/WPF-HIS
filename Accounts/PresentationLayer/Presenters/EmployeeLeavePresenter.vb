@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -18,7 +19,10 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.FullDay = True
+            View.EmployeeIdNo = Service.GetField(Of Int32, Int32)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
             View.AppliedBy = GlobalVariables.UserIdNo
+            View.StartDate = Today()
+            View.EndDate = Today()
         End Sub
 
     End Class

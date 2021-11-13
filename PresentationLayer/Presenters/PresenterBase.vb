@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Globalization
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Transactions
@@ -1843,6 +1844,34 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Invoker.SetProperty(eventType.View, eventType.TargetProperty, {data})
         End If
     End Sub
+
+    Public Function UserHasAccess(securityKey As String, Optional inform As Boolean = False) As Boolean
+        Dim controlSecurityValues As ArrayList
+        Dim hasAccess As Boolean
+        Dim controlSecurityObjectIdNo As Int32
+        controlSecurityObjectIdNo = GetControlSecurityIdNo(securityKey)
+        controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+        If controlSecurityValues.Count > 0 Then
+            hasAccess = controlSecurityValues(1)
+        Else
+            hasAccess = False
+        End If
+        If hasAccess Then
+            ' user has editing options for approved transactions
+        Else
+            Dim message = Messaging.GetParametrizedMessage(True, securityKey, {"securityKey", securityKey})
+            Dim curCulture = CultureInfo.CurrentCulture
+            Dim language As String = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            If language = "ar" Then
+                CForm = New ReportFormNew("Statement of Accounts Receivable Arabic.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
+            Else
+                CForm = New ReportFormNew("Statement of Accounts Receivable.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
+            End If
+
+            Messaging.Show(True, "MsgNoAccessToSecurity")
+        End If
+        Return hasAccess
+    End Function
 
     Public Sub OnLanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
         UpdateViewDisplay()
