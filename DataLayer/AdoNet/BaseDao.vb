@@ -109,7 +109,7 @@ Namespace AdoNet
                     sql &= " (" & findableControl.FieldName & " Is Null or " & findableControl.FieldName & " = '') "
                 Else
                     If Not (filter Is Nothing OrElse filter = "") Then
-                        sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
+                        sql &= "(" & filter.Trim() & ")" & " and " & findableControl.FieldName.Trim() & " "
                     Else
                         sql &= findableControl.FieldName.Trim()
                     End If
@@ -127,7 +127,7 @@ Namespace AdoNet
                 End If
             ElseIf findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
                 If Not (filter Is Nothing OrElse filter = "") Then
-                    sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
+                    sql &= "(" & filter.Trim() & ") and " & findableControl.FieldName.Trim() & " "
                 End If
                 sql &= findableControl.FieldName.Trim()
                 retVal = FindDateField(tableName, findableControl, sortOrderKey, filter)
@@ -135,7 +135,7 @@ Namespace AdoNet
             ElseIf findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Or
                    findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Then
                 If Not (filter Is Nothing OrElse filter = "") Then
-                    sql &= filter.Trim() & " and " & findableControl.FieldName.Trim() & " "
+                    sql &= "(" & filter.Trim() & ") and " & findableControl.FieldName.Trim() & " "
                 End If
                 If findableControl.BegFindValue Is Nothing Or findableControl.BegFindValue = "" Then
                     sql &= " " & findableControl.FieldName & " Is Null or "
@@ -169,7 +169,7 @@ Namespace AdoNet
             Dim searchString As String
             Dim sql As String = " SELECT IdNo FROM [" & tableName & "] Where "
             If Not (filter Is Nothing OrElse filter = "") Then
-                sql = sql & filter.Trim() & " and "
+                sql = sql & "(" & filter.Trim() & ") and "
             End If
             Dim dBegDate As Date? = findableControl.BegFindValue
             Dim dEndDate As Date? = findableControl.EndFindValue
@@ -310,7 +310,7 @@ Namespace AdoNet
                 params = {"@SearchValue", searchValue}
             End If
             If filter IsNot Nothing Then
-                sql = sql & " and " & filter
+                sql = sql & " and (" & filter & ")"
             End If
             Dim retVal = _db.Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
@@ -361,11 +361,11 @@ Namespace AdoNet
 
         Public Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String) As Object Implements IBaseDao.GetSpRecords
             'Dim fields as String = fieldList.Split(",")
-            Dim sql As String = " Select " & fieldList & " From " & spName & "(" & filter & ") Order By " & sortKey
+            Dim sql As String = " Select " & fieldList & " From " & spName & " (" & filter & ") Order By " & sortKey
             If sortKey Is Nothing Or sortKey = "" Then
-                sql = " Select " & fieldList & " From " & spName & "(" & filter & ")"
+                sql = " Select " & fieldList & " From " & spName & " (" & filter & ")"
             Else
-                sql = " Select " & fieldList & " From " & spName & "(" & filter & ") Order By " & sortKey
+                sql = " Select " & fieldList & " From " & spName & " (" & filter & ") Order By " & sortKey
             End If
             Return _db.SqlRead(sql)
         End Function
@@ -617,9 +617,9 @@ Namespace AdoNet
             Else
                 filterKey = filter
             End If
-            Dim sql As String = " Select count(*) From [" & tableName &
-                    "] where " & IIf(filterKey = "", "", filterKey & " and ") & " " & sortOrder & " <= (Select " & sortOrder &
-                    " from [" & tableName & "] where " & IIf(filterKey = "", "", filterKey & " and ") & " IdNo = " & idNo & ") "
+            Dim sql As String = " Select count(*) From [" & tableName & "] where " & IIf(filterKey = "", "", "(" & filterKey & ") and ") _
+                                                & " " & sortOrder & " <= (Select " & sortOrder & " from [" & tableName & "] where " &
+                                                IIf(filterKey = "", "", "(" & filterKey & ") and ") & " IdNo = " & idNo & ") "
             Dim recordPosition = _db.Scalar(sql) ' + 1
             Dim recCount = GetRecordCount(tableName, filterKey)
             If recordPosition > recCount Then
