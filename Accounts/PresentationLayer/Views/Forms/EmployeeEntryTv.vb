@@ -14,23 +14,13 @@ Namespace PresentationLayer.Views.Forms
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _employeeLeaveCredits As List(Of EmployeeLeaveCreditView)
-
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _unit As List(Of Lookup.LookupData)
-
-        ' ReSharper disable once UnassignedField.Local
         Private _phoneTypes As List(Of Lookup.LookupData)
-
-        ' ReSharper disable once UnassignedField.Local
         Private _deductionsByName As List(Of Lookup.LookupData)
-
         Private _leaves As List(Of Lookup.LookupData)
-
-        ' ReSharper disable once UnassignedField.Local
         Private _earningsByName As List(Of Lookup.LookupData)
-
         Private _fileSizeTooLarge As Boolean = False
-
         Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New()

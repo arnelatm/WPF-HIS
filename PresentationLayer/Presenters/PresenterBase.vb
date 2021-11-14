@@ -38,7 +38,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public ChildServices As New List(Of Service)
     Public IdFieldName As String = "IdNo"
     Public MyErrorProvider As New ErrorProviderExtended
-
     Friend DateTimeStampField As String = "DateTimeStamp"
     Friend RecordDateTimeStampValue As Object
     Protected CompareDifferences As String
@@ -58,15 +57,50 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Private _errorList As String = ""
     Private _recordPositionNumber As Integer = 0
     Private _targetIdNo As Int32 = 0
-
-    'Private _recordCount As Int32 = 0
     Private _undoMode As Boolean = False
-
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
-
-    'Private _withTreeView As Boolean = False
     Protected Service As Object
+
+    Public Event AfterDelete(retVal As Integer)
+
+    Public Event AfterSave()
+
+    Public Event AfterUpdateView()
+
+    Public Event BeforeCompare()
+
+    Public Event BeforeDelete()
+
+    Public Event BeforeDisplayView()
+
+    Public Event BeforeEdit()
+
+    Public Event BeforeMappingData(dataModel As TM)
+
+    Public Event BeforeSave()
+
+    Public Event BeforeValidate()
+
+    Public Event CancelChanges()
+
+    Public Event EditingRecordChanged(editing As Boolean)
+
+    Public Event LanguageChanged()
+
+    Public Event NewRecordInitialized()
+
+    Public Event RecordAddedSuccessfully(ByRef idNoOfRecord As Integer)
+
+    Public Event RecordUpdatedSuccessfully(ByRef idNoOfRecord As Integer)
+
+    Public Event SuccessfulDelete(idNoOfRecord As Integer)
+
+    Public Event TextDisplayChanged()
+
+    Public Event UndoEdits(addingRec As Boolean)
+
+    Delegate Sub FillDataFunc(ByRef dataView As Object, ByRef workRow As DataRow)
 
     Public Sub New(itemView As IView)
         If itemView IsNot Nothing Then
@@ -143,46 +177,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Protected Sub New()
         Service = New Service()
     End Sub
-
-    Delegate Sub FillDataFunc(ByRef dataView As Object, ByRef workRow As DataRow)
-
-    Public Event AfterDelete(retVal As Integer)
-
-    'Public Event AfterRecordRetrieval(values As TM)
-
-    Public Event AfterUpdateView()
-
-    Public Event AfterSave()
-
-    Public Event NewRecordInitialized()
-
-    Public Event BeforeMappingData(dataModel As TM)
-
-    Public Event BeforeCompare()
-
-    Public Event BeforeDelete()
-
-    Public Event BeforeDisplayView()
-
-    Public Event BeforeEdit()
-
-    Public Event BeforeSave()
-
-    Public Event BeforeValidate()
-
-    Public Event CancelChanges()
-
-    Public Event EditingRecordChanged(editing As Boolean)
-
-    Public Event RecordAddedSuccessfully(ByRef idNoOfRecord As Integer)
-
-    Public Event RecordUpdatedSuccessfully(ByRef idNoOfRecord As Integer)
-
-    Public Event SuccessfulDelete(idNoOfRecord As Integer)
-
-    Public Event TextDisplayChanged()
-
-    Public Event UndoEdits(addingRec As Boolean)
 
     Protected ReadOnly Property MenuFormName As String
         Get
@@ -729,7 +723,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return retValue
     End Function
 
-    Private Sub GoEditRecord()
+    Protected Sub GoEditRecord()
         If IsOkToEditRecord() Then
             RaiseEvent BeforeEdit()
             If CancelEdit Then
@@ -824,11 +818,21 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Overridable Function IsOkToDeleteRecord() As Boolean
-        Dim retValue As Boolean = False
-        If Not DependentRecordsExist() Then
-            retValue = True
+        Dim retValue As Boolean = True
+        If ChildRecordExist() Then
+            retValue = False
+        ElseIf DependentRecordExist() Then
+            retValue = False
         End If
         Return retValue
+    End Function
+
+    Protected Overridable Function ChildRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+        Return False
+    End Function
+
+    Protected Overridable Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+        Return False
     End Function
 
     Public Function IsRecordNotUnique(cCtrl As Control, fldName As String) As Boolean
@@ -958,10 +962,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         retVal = NewlyAddedRecordIdNo
         CallByName(View, IdFieldName, CallType.Set, retVal)
         Return retVal
-    End Function
-
-    Protected Overridable Function DependentRecordsExist() As Boolean
-        Return False
     End Function
 
     Protected Function GetTranslatedField(Of TX)(dataSortOrder As String, ByRef dModel As TX) As String
@@ -1254,7 +1254,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 GoTranslate()
             Case ButtonClicked.Filter
                 GoFilter()
+            Case Else
+                ViewButtonClicked(eventType)
         End Select
+    End Sub
+
+    Public Overridable Sub ViewButtonClicked(ByRef eventType As ViewButtonClicked)
+
     End Sub
 
     Public Sub OnEntryFormLoaded_EventHandler(ByRef eventType As EntryFormLoaded) Implements ISubscriber(Of EntryFormLoaded).OnEventHandler
@@ -1269,6 +1275,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         tableColumnPropertyList = ModelTblColProp.GetMainTableColumnProperties(TableName)
         TableProperties = tableColumnPropertyList.ToArray
         SetAllControlsDynamicProperties(eventType.ViewControl)
+        CreateDataSources()
+        EntryFormLoaded()
+    End Sub
+
+    Public Overridable Sub CreateDataSources()
+    End Sub
+
+    Public Overridable Sub EntryFormLoaded()
     End Sub
 
     Public Sub OnEventHandler(ByRef eventType As SaveDataRequested) Implements ISubscriber(Of SaveDataRequested).OnEventHandler
@@ -1492,7 +1506,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Next
     End Sub
 
-    Private Sub ClearAllErrorMessages()
+    Protected Sub ClearAllErrorMessages()
         Dim myDict = MainFieldsDictionary
         For Each cCtrl As Control In myDict.Values
             MyErrorProvider.SetError(cCtrl, "")
@@ -1866,9 +1880,87 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return hasAccess
     End Function
 
-    Public Sub OnLanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
+    Public Sub OnPresenterBase_LanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
         UpdateViewDisplay()
+        RaiseEvent LanguageChanged()
     End Sub
+
+    Public Sub CreateControlEnumDataSource(Of TE)(ByVal fieldName As String)
+        Dim control As CaComboBox = Nothing
+        Dim x = MainFieldsDictionary
+        If MainFieldsDictionary.TryGetValue(fieldName, control) Then
+            control.DataSource = GetEnumData(Of TE)()
+        End If
+    End Sub
+
+    Public Sub CreateControlDataSource(ByVal sourceTableName As String, ByVal fieldName As String)
+        Dim control As Control = Nothing
+        Dim x = MainFieldsDictionary
+        If MainFieldsDictionary.TryGetValue(fieldName, control) Then
+            CreateDataSource(sourceTableName, control)
+        End If
+    End Sub
+
+    Public Sub CreateControlDataSource(ByVal sourceTableName As String, ByVal fieldName As String, Optional filter As String = Nothing)
+        Dim control As Control = Nothing
+        Dim x = MainFieldsDictionary
+        If MainFieldsDictionary.TryGetValue(fieldName, control) Then
+            CreateDataSource(sourceTableName, control, filter)
+        End If
+    End Sub
+
+    Public Sub CreateControlDataSource(ByVal sourceTableName As String, ByVal fieldName As String, fieldsArray As String())
+        Dim control As Control = Nothing
+        Dim x = MainFieldsDictionary
+        If MainFieldsDictionary.TryGetValue(fieldName, control) Then
+            CreateDataSource(sourceTableName, control, fieldsArray)
+        End If
+    End Sub
+
+    Protected Overloads Sub CreateDataSource(sourceTableName As String, ByRef control As Control)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(sourceTableName, control))
+        End If
+    End Sub
+
+    Protected Overloads Sub CreateDataSource(sourceTableName As String, ByRef control As Control, filter As String)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(sourceTableName, control, filter))
+        End If
+    End Sub
+
+    Protected Overloads Sub CreateDataSource(sourceTableName As String, ByRef control As Control, sortKey As String, filter As String)
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(sourceTableName, control, sortKey, filter))
+        End If
+    End Sub
+
+    Protected Overloads Sub CreateDataSource(sourceTableName As String, ByRef control As Control, fields As String(), Optional sortKey As String = "", Optional filter As String = "")
+        If Ea IsNot Nothing Then
+            Ea.PublishEvent(New GetDataSource(sourceTableName, control, fields, sortKey, filter))
+        End If
+    End Sub
+
+    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
+        comboControl.DataSource = GetEnumData(Of TE)()
+    End Sub
+
+    Public Sub CreateEnumData(Of TE)(ByRef dataTarget As Object)
+        dataTarget = GetEnumData(Of TE)()
+    End Sub
+
+    Private Function GetEnumData(Of TE)()
+        Dim dataList As New List(Of Lookup.LookupData)
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim data As New Lookup.LookupData With {
+                    .IdNo = CInt(c),
+                    .Code = EnumToCode(c),
+                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+                    }
+            dataList.Add(data)
+        Next
+        Return dataList
+    End Function
 
 End Class
 

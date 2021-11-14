@@ -116,6 +116,10 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgEditingOfClosedPcRecordNotAllowed", "This record has already been closed. Edits not allowed!", "Error")
         Messaging.AddMessage("MsgEditingOfReconciledNotAllowed", "Editing of transaction with reconciled account entries not allowed!", "Error")
         Messaging.AddMessage("MsgNoAccessToSecurity", "Sorry you have no '{securityName}' access.", "Error")
+        Messaging.AddMessage("MsgDependentRecordExists", "Sorry dependent records exists on other tables. Deletion not allowed!  {additionalMessage}", "Error")
+        Messaging.AddMessage("MsgChildRecordsExists", "Sorry child records exist for this parent record. Deletion not allowed!", "Error")
+        Messaging.AddMessage("MsgSeeTransactionNumber", "See {transactionName} Number #{transactionNumber}", "Error")
+
     End Sub
 
     'Public Shared Sub CreateEnums()

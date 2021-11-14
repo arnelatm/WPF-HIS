@@ -83,9 +83,9 @@ Public Class CFormBase
     Public Sub CheckDataChanges()
     End Sub
 
-    Public Sub FindFieldNew(findableControl As IFindableControl)
-        Ea.PublishEvent(New FindFieldRequested(findableControl))
-    End Sub
+    'Public Sub FindFieldNew(findableControl As IFindableControl)
+    '    Ea.PublishEvent(New FindFieldRequested(findableControl))
+    'End Sub
 
     Public Function GetMainFieldsDictionary()
         Return MainFieldsDictionary
@@ -226,7 +226,6 @@ Public Class CFormBase
     End Sub
 
     Protected Sub PublishClickedButton(buttonClicked As ButtonClicked)
-
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
         End If

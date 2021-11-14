@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveReason As String
         Property LeaveStatus As String
         Property StartDate As DateTime
+        Property SupervisorIdNo As Int32
 
     End Interface
 

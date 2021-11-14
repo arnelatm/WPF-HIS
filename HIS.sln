@@ -95,6 +95,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Table", "Table", "{6FD94599-A0DF-448F-BF82-CAB5948D5F53}"
 	ProjectSection(SolutionItems) = preProject
 		ChartAndChartBalance.sql = ChartAndChartBalance.sql
+		CreateDepartment.sql = CreateDepartment.sql
 		DataBaseTable.sql = DataBaseTable.sql
 		Earning-Deduction-Leave.sql = Earning-Deduction-Leave.sql
 		Earning.sql = Earning.sql
@@ -121,6 +122,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
 		QueryWrongAccountsInReconciliation.sql = QueryWrongAccountsInReconciliation.sql
 		Reverse bit values.sql = Reverse bit values.sql
+		SearchDatabaseForASpecificColumnName.sql = SearchDatabaseForASpecificColumnName.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspdata", "{D0B2F203-4601-4F73-89C4-C5A6FF4D4B99}"

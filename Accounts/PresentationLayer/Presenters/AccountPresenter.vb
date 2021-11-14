@@ -38,15 +38,6 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
             End If
-            'Dim accountGroup As String
-            'If idNo Is Nothing Then
-            '    Return True
-            'End If
-            'accountGroup = Model.GetRecordFieldWithKeyG(Of String)(idNo, "Account", "IdNo", "AccountGroup")
-            'If accountGroup = "S" Then
-            '    Return True
-            'End If
-            'Return False
         End Function
 
         Public Function AccountHasChildren(ByVal idNo As Int32?) As Boolean
@@ -58,7 +49,6 @@ Namespace PresentationLayer.Presenters
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
             Return Service.GetField(Of Int32, String)(idNoToSearch, "Account", "ParentIdNo", "AccountName")
-            'Return Model.GetRecordFieldWithKey(idNoToSearch, "Account", "ParentIdNo", "AccountName")
         End Function
 
         Protected Overrides Function IsBizDataValid() As Boolean
@@ -89,6 +79,42 @@ Namespace PresentationLayer.Presenters
                 View.DetailAccount = True
             End If
         End Sub
+
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords("CdJournalItem", "Cash Disbursement") Then
+                Return True
+            ElseIf CheckDependentRecords("PcJournalItem", "Petty Cash Disbursement") Then
+                Return True
+            ElseIf CheckDependentRecords("CashReceiptJournalItem", "Cash Receipt") Then
+                Return True
+            ElseIf CheckDependentRecords("ApJournalItem", "Accounts Payable") Then
+                Return True
+            ElseIf CheckDependentRecords("ArJournalItem", "Accounts Receivable") Then
+                Return True
+            ElseIf CheckDependentRecords("SalesJournalItem", "Sales Journal") Then
+                Return True
+            ElseIf CheckDependentRecords("GeneralJournalItem", "General Journal") Then
+                Return True
+            ElseIf CheckDependentRecords("ErJournalItem", "Employee Loans Journal") Then
+                Return True
+            ElseIf CheckDependentRecords("PayElementAccount", "Pay Element Account", "PayElementIdNo") Then
+                Return True
+            End If
+            Return False
+        End Function
+
+        Private Function CheckDependentRecords(ByVal journalName As String, ByVal journalDescription As String, Optional returnFieldName As String = "JournalIdNo") As Boolean
+            Dim transactionIdNo = Service.GetRecordFieldWithKeyG(Of Integer)(View.IdNo, journalName, "AccountIdNo", returnFieldName)
+            If transactionIdNo > 0 Then
+                Dim jdMessage = Messaging.TranslateCaption(journalDescription)
+                Dim additionalMessage = Messaging.GetParametrizedMessage(True, "MsgSeeTransactionNumber", {"transactionName", jdMessage, "transactionNumber", transactionIdNo})
+                Dim message = Messaging.GetParametrizedMessage(True, "MsgDependentRecordExists", {"additionalMessage", additionalMessage})
+                Messaging.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return True
+            End If
+            Return False
+        End Function
 
     End Class
 

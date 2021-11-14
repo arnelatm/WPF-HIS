@@ -22,12 +22,13 @@ Namespace DataLayer.AdoNet
                                   "IdNo," &
                                   "LeaveIdNo," &
                                   "LeaveReason," &
-                                  "StartDate"
+                                  "StartDate," &
+                                  "SupervisorIdNo"
 
         Public Function GetRecordByIdNo(idNo) As EmployeeLeave Implements IDaoAll(Of EmployeeLeave).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " & FieldList &
-                    "   FROM EmployeeLeave" &
+                    "   FROM EmployeeLeave_View" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim employeeLeaveStatusDao = New EmployeeLeaveStatusDao
@@ -48,7 +49,7 @@ Namespace DataLayer.AdoNet
             End If
             Dim sql As String =
                     " SELECT IdNo, EmployeeIdNo" &
-                    "   FROM [EmployeeLeave] " & "order by " & sortExpression
+                    "   FROM [EmployeeLeave_View] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
 
@@ -77,7 +78,7 @@ Namespace DataLayer.AdoNet
         Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of EmployeeLeave) Implements IDaoGetRecords(Of EmployeeLeave).GetDaoRecords
             Dim sql As String = "SELECT " &
                                 FieldList &
-                                " FROM EmployeeLeave" &
+                                " FROM EmployeeLeave_View" &
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -93,7 +94,8 @@ Namespace DataLayer.AdoNet
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .LeaveReason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveReason")),
-            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate"))
+            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
+            .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupervisorIdNo"))
             }
 
         Public Sub New()
