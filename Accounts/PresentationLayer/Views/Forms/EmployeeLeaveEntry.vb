@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IEmployeeLeaveView
 
         Private ReadOnly _nfi As NumberFormatInfo
+        Private _humanResourceUser As Boolean
 
         Public Sub New()
             ' This call is required by the designer.
@@ -113,6 +114,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property SupervisorIdNo As Int32 Implements IEmployeeLeaveView.SupervisorIdNo
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -130,12 +133,12 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Employee", cboEmployeeIdNo)
-            CreateDataSource("User", cboAppliedBy, {"IdNo", "UserName"})
-            CreateDataSource("Leave", cboLeaveIdNo)
-            CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
-        End Sub
+        'Protected Overrides Sub CreateDataSources()
+        '    CreateDataSource("Employee", cboEmployeeIdNo)
+        '    CreateDataSource("User", cboAppliedBy, {"IdNo", "UserName"})
+        '    CreateDataSource("Leave", cboLeaveIdNo)
+        '    CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
+        'End Sub
 
         Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.Validated
             If dtpEndDate.Value Is Nothing OrElse dtpEndDate.Value < dtpStartDate.Value Then

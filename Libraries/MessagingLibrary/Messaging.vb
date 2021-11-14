@@ -116,6 +116,10 @@ Public Class Messaging
         Return MessagingForm.Show(message, caption + " [" + MessageKey + "]", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Function
 
+    Public Overloads Shared Function Show(ByVal message As String, Optional messageBoxButton As MessageBoxButtons = MessageBoxButtons.OK, Optional messageBoxIcon As MessageBoxIcon = MessageBoxIcon.Information) As DialogResult
+        Return MessagingForm.Show(message, MessageCaption, messageBoxButton, messageBoxIcon)
+    End Function
+
     '-------------------------------------------------------------------------------------------------------------------------------
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String, ByVal buttons As MessageBoxButtons, ByVal icon As MessageBoxIcon, ByVal Optional defaultButton As MessageBoxDefaultButton = MessageBoxDefaultButton.Button1) As DialogResult
         MessageKey = key

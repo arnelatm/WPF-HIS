@@ -1,18 +1,20 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeLeavePresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IEmployeeLeaveView, TM)
+        Inherits AccountsPresenterNew(Of IEmployeeLeaveView, TM)
+        'Implements ISubscriber(Of EntryFormLoaded)
+
+        Private _userHasAccess As Boolean = False
+        Private _userIsASupervisor As Boolean = False
 
         Public Sub New(itemView As IEmployeeLeaveView)
             MyBase.New(itemView)
             Service = New AccountsService("EmployeeLeave")
-            TableName = "EmployeeLeave"
+            TableName = "EmployeeLeave_View"
             SortOrderKey = "IdNo"
             WithTreeView = False
         End Sub
@@ -23,6 +25,41 @@ Namespace PresentationLayer.Presenters
             View.AppliedBy = GlobalVariables.UserIdNo
             View.StartDate = Today()
             View.EndDate = Today()
+        End Sub
+
+        Public Overrides Sub EntryFormLoaded()
+            If UserHasAccess("HumanResources") Then
+                _userHasAccess = True
+            Else
+                Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
+                If Not IsUserASupervisor() Then
+                    _userIsASupervisor = False
+                    Dim control As Control = Nothing
+                    Dim x = MainFieldsDictionary
+                    If MainFieldsDictionary.TryGetValue("EmployeeIdNo", control) Then
+                        CallByName(control, "DisplayOnly", CallType.Set, True)
+                    End If
+                    DataFilter = "EmployeeIdNo = " & employeeIdNo.ToString()
+                Else
+                    DataFilter = "SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString()
+                End If
+            End If
+        End Sub
+
+        Public Overrides Sub CreateDataSources()
+            If UserHasAccess("HumanResources") Then
+                CreateControlDataSource("Employee", "EmployeeIdNo")
+            ElseIf IsUserASupervisor() Then
+                Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
+                Dim filter As String = "IdNo = " + employeeIdNo.ToString() + " or SupervisorIdNo = " + employeeIdNo.ToString()
+                CreateControlDataSource("Employee", "EmployeeIdNo", filter)
+            Else
+                Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
+                CreateControlDataSource("Employee", "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString())
+            End If
+            CreateControlDataSource("User", "AppliedBy", {"IdNo", "UserName"})
+            CreateControlDataSource("Leave", "LeaveIdNo")
+            CreateControlEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
         End Sub
 
     End Class

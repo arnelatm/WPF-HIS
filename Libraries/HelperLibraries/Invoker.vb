@@ -14,6 +14,11 @@ Public NotInheritable Class Invoker
         Return oObject.GetType().InvokeMember(sName, InvokePublicMethodFlags, Nothing, oObject, yArguments)
     End Function
 
+    Public Shared Function InvokeProperty(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
+        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+        Return oObject.GetType().InvokeMember(sName, GetPublicPropertyFlags, Nothing, oObject, yArguments)
+    End Function
+
     Public Shared Function GetProperty(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
         ' ReSharper disable once VBPossibleMistakenCallToGetType.2
         Return oObject.GetType().InvokeMember(sName, GetPublicPropertyFlags, Nothing, oObject, yArguments)

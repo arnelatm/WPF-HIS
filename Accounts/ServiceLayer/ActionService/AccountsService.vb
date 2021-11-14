@@ -273,6 +273,11 @@ Namespace ServiceLayer.ActionService
             Return DataDao.EmployeeIdInsertTvp(tvpTable)
         End Function
 
+        Public Function GetUserEmployeeIdNo()
+            Dim employeeIdNo As Int32 = GetField(Of Integer, Integer)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
+            Return employeeIdNo
+        End Function
+
         'Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
         '    Return GetOpenInvoices(Of TM)(idNo)
         'End Function

@@ -1,12 +1,9 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AutoMapper
-Imports Telerik.WinControls.UI
 
 Namespace PresentationLayer.Presenters
 
@@ -108,6 +105,14 @@ Namespace PresentationLayer.Presenters
                 journalItem.AccountName = account.AccountName
             End If
         End Sub
+
+        Public Function IsUserASupervisor()
+            Dim employeeIdNo As Int32 = Service.GetField(Of Integer, Integer)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
+            If employeeIdNo > 0 Then
+                Return Service.GetField(Of Boolean, Int32)(employeeIdNo, "Employee", "IdNo", "Supervisor")
+            End If
+            Return False
+        End Function
 
         'Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView) Implements IAccountsPresenter.AddNewItemOnBindingSource
         '    e.NewObject = New TS
