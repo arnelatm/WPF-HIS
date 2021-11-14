@@ -1,11 +1,10 @@
-﻿
-
-CREATE VIEW [dbo].[EmployeeLeave_View]
+﻿CREATE VIEW dbo.EmployeeLeave_View
 AS
 SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.AppliedBy, 
-                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeaveStatus.IdNo AS LeaveStatusIdNo, dbo.EmployeeLeaveStatus.EnteredBy, dbo.EmployeeLeaveStatus.Status, dbo.EmployeeLeaveStatus.Note, 
-                         dbo.EmployeeLeaveStatus.DateCreated AS LeaveStatusDate
-FROM            dbo.EmployeeLeave LEFT JOIN
+                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeaveStatus.IdNo AS LeaveStatusIdNo, dbo.EmployeeLeaveStatus.EnteredBy, dbo.EmployeeLeaveStatus.Status, 
+                         dbo.EmployeeLeaveStatus.Note, dbo.EmployeeLeaveStatus.DateCreated AS LeaveStatusDate, dbo.Employee.SupervisorIdNo, dbo.EmployeeLeave.DateTimeStamp
+FROM            dbo.EmployeeLeave INNER JOIN
+                         dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo LEFT OUTER JOIN
                          dbo.EmployeeLeaveStatus ON dbo.EmployeeLeave.IdNo = dbo.EmployeeLeaveStatus.EmployeeLeaveIdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
@@ -93,11 +92,21 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "LeaveStatus"
+         Begin Table = "Employee"
+            Begin Extent = 
+               Top = 6
+               Left = 484
+               Bottom = 248
+               Right = 682
+            End
+            DisplayFlags = 280
+            TopColumn = 42
+         End
+         Begin Table = "EmployeeLeaveStatus"
             Begin Extent = 
                Top = 6
                Left = 249
-               Bottom = 272
+               Bottom = 251
                Right = 446
             End
             DisplayFlags = 280
@@ -130,4 +139,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+
+
 

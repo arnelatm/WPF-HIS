@@ -1,7 +1,7 @@
 ﻿
 
 CREATE View [dbo].[EmployeeLeaveLatestUpdate_View] As
-SELECT TOP (1000) [IdNo]
+SELECT [IdNo]
       ,[AppliedBy]
       ,[LeaveIdNo]
       ,[StartDate]

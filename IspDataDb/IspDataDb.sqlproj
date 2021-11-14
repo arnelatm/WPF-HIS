@@ -121,7 +121,6 @@
     <Build Include="dbo\Tables\Country.sql" />
     <Build Include="dbo\Tables\OriginalMessages.sql" />
     <Build Include="dbo\Tables\Salt.sql" />
-    <Build Include="dbo\Tables\EmployeeLoanJournalItem.sql" />
     <Build Include="dbo\Tables\SecurityGroup.sql" />
     <Build Include="dbo\Tables\SecurityObject.sql" />
     <Build Include="dbo\Tables\SalesDeposit.sql" />
@@ -137,7 +136,6 @@
     <Build Include="dbo\Tables\GroupAccess.sql" />
     <Build Include="dbo\Tables\SalesJournalItem.sql" />
     <Build Include="dbo\Tables\EmployeeDetails.sql" />
-    <Build Include="dbo\Tables\EmployeeLoanJournal.sql" />
     <Build Include="dbo\Tables\ReceiptDetails.sql" />
     <Build Include="dbo\Views\Account_View.sql" />
     <Build Include="dbo\Views\SalesDeposit_View.sql" />
@@ -169,7 +167,6 @@
     <Build Include="dbo\Views\Department_View.sql" />
     <Build Include="dbo\Views\GroupAccess_View.sql" />
     <Build Include="dbo\Views\SalesJournalItem_View.sql" />
-    <Build Include="dbo\Views\EmployeeJournalItem_View.sql" />
     <Build Include="dbo\Views\CsrOiItem_View.sql" />
     <Build Include="Security\Arnel.sql" />
     <Build Include="Security\RoleMemberships.sql" />
@@ -189,7 +186,6 @@
     <Build Include="dbo\Stored Procedures\InsertCashReceiptJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertCsrOiItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertDistributionSchemeItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\InsertEmployeeLoanJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertGeneralJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertPurchaseJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertSalesJournalItemTVP.sql" />
@@ -199,7 +195,6 @@
     <Build Include="dbo\Stored Procedures\UpdateCsrOiItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateDistributionSchemeItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertGroupAccessTVP.sql" />
-    <Build Include="dbo\Stored Procedures\UpdateEmployeeLoanJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateGroupAccessTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateGeneralJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdatePurchaseJournalItemTVP.sql" />
