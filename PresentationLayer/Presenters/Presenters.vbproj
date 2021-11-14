@@ -122,7 +122,7 @@
       <Name>BusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\AatmInterfaces\AatmInterfaces.vbproj">
-      <Project>{DA82FB86-4F87-4E6E-B460-6141FE79AC23}</Project>
+      <Project>{da82fb86-4f87-4e6e-b460-6141fe79ac23}</Project>
       <Name>AatmInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj">

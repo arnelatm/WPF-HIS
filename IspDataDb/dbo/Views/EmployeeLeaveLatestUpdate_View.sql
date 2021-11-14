@@ -12,7 +12,7 @@ SELECT [IdNo]
       ,[Note]
       ,[LeaveStatusDate]
 	  ,[LatestStatusUpdate]
-  FROM [ISPDATA].[dbo].[EmployeeLeaveStatus_View]
+  FROM [EmployeeLeaveStatus_View]
   Union
   SELECT [IdNo]
       ,[AppliedBy]

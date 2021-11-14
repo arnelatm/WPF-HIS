@@ -4,6 +4,7 @@ Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Models
@@ -1122,6 +1123,11 @@ Namespace PresentationLayer.Views.Forms
             Return parentIdNo
         End Function
 
+        Private Sub ToolStripMenuItemEmployeeIDPrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeIDPrinting.Click
+            RunForm(Of EmployeeIdPrinting, EmployeeIdPrintingPresenter(Of EmployeeIdModel))
+            'Dim childMdiForm = Activator.CreateInstance(GetType(EmployeeIdPrinting))
+            'childMdiForm.Show()
+        End Sub
     End Class
 
 End Namespace

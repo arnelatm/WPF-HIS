@@ -23,7 +23,9 @@ Public Class UserPresenter(Of TM As New)
     End Sub
 
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-        View.Password = _serviceLogin.EncryptPassword(View.IdNo, View.Password)
+        If View.Password <> OriginalModel.Password Then
+            View.Password = _serviceLogin.EncryptPassword(View.IdNo, View.Password)
+        End If
     End Sub
 
     Private Sub OnSuccessfulAdd(ByRef newIdNo As Int32) Handles MyBase.RecordAddedSuccessfully

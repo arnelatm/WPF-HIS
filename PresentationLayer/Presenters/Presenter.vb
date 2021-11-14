@@ -1,14 +1,12 @@
 ﻿Imports System.Reflection
 Imports System.Windows.Forms
-Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
-Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Views
-Imports AATM.ServicesLayer.Services
 
 ''' <summary>
 '''     Base class for all presenter classes. Keeps track of Service and View classes.
@@ -333,6 +331,51 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         Dim idNo = CallByName(View, IdFieldName, CallType.Get)
         TargetIdNo = idNo
         RecordPositionNumber = GetSortedRecordPosition(idNo)
+    End Sub
+
+    Public Sub FindFieldNew(findableControl As IFindableControl)
+        Dim idNo = Service.FindFieldNew(TableName, findableControl, SortOrderKey, DataFilter)
+        If idNo <> 0 Then
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
+        Else
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+        End If
+    End Sub
+
+    Public Sub FindDateField(fieldName As String, findableControl As IFindableControl)
+        Dim idNo = Service.FindDateField(TableName, findableControl, DataFilter)
+        If idNo <> 0 Then
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
+        Else
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+        End If
+    End Sub
+
+    Public Function FindFieldContinue(idNo As Int32) As Integer
+        Return Service.FindFieldContinue(TableName, idNo, SortOrderKey)
+    End Function
+
+    Public Function FindRecord() As Integer
+        Dim idNoOfFoundRecord As Integer = FindFieldContinue(TargetIdNo)
+        Return idNoOfFoundRecord
+    End Function
+
+    Public Sub GoFindRecord()
+        Dim idNoOfFoundRecord = FindRecord()
+        If idNoOfFoundRecord = 0 Then
+            If Messaging.Show(True, "AskLastRecordReachStartBeg", "This is the last matching record for the given text. Do you want to start search from the first record?", "Last Record Found.",
+                              MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                idNoOfFoundRecord = FindFieldContinue(0)
+                RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
+            Else
+                '' stay on the current record
+            End If
+        Else
+            RecordPositionNumber = GetSortedRecordPosition(idNoOfFoundRecord)
+        End If
+        If EditMode Then
+            EditMode = False
+        End If
     End Sub
 
 End Class
