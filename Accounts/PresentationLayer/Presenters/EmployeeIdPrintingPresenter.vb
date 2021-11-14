@@ -2,18 +2,19 @@
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeIdPrintingPresenter(Of TM As New)
-        Inherits TransactionsPresenterNew(Of IEmployeeView, TM)
+        Inherits CommonPresenterNew(Of IEmployeeIdListView, TM)
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
-
-        Public Sub New(view As IEmployeeIdPrintingView)
+        
+        Public Sub New(view As IEmployeeIdListView)
             MyBase.New(view)
             WithTreeView = False
             Service = New AccountsService("Employee")

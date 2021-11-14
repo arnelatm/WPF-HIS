@@ -1,4 +1,6 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
@@ -17,6 +19,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            Presenter = New EmployeeIdPrintingPresenter(Of EmployeeIdModel)(Me)
             ' Add any initialization after the InitializeComponent() call.
             Me.Text = Messaging.TranslateCaption("Employee I.D. Printing")
             btnEdit.Visible = False
@@ -36,9 +39,9 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            EmployeeIdList = Presenter.GetEmployeeIdList()
-        End Sub
+        'Protected Overrides Sub CreateDataSources()
+        '    EmployeeIdList = Presenter.GetEmployeeIdList()
+        'End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From

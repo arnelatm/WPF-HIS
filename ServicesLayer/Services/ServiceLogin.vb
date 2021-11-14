@@ -115,32 +115,36 @@ Namespace Services
             Return ePassword
         End Function
 
-        'Public Function DecryptPassword(userName As String, password As String) As String
-        '    Dim ePassword As String = ""
-        '    If String.IsNullOrWhiteSpace(userName) Then
-        '        Return ""
-        '    End If
-        '    If String.IsNullOrWhiteSpace(password) Then
-        '        Return ""
-        '    End If
-        '    Dim nLoginIdNo As Int32
-        '    nLoginIdNo = GetLoginByUserName(userName).IdNo
-        '    If nLoginIdNo <> 0 Then
-        '        'Get the salt value for this username
-        '        Dim salt As String
-        '        Try
-        '            salt = GetSalt(nLoginIdNo)
-        '            If Not IsDBNull(salt) Then
-        '                'Hash the user entered password with the salt value stored in the Salt table
-        '                ePassword = HashEncryptStringWithSalt(password, salt)
-        '            End If
-        '        Catch ex As Exception
-        '            MsgBox(ex.ToString)
-        '            Return False
-        '        End Try
-        '    End If
-        '    Return ePassword
-        'End Function
+        Public Function DecryptPassword(userName As String, password As String) As String
+            Dim ePassword As String = ""
+            If String.IsNullOrWhiteSpace(userName) Then
+                Return ""
+            End If
+            If String.IsNullOrWhiteSpace(password) Then
+                Return ""
+            End If
+            Dim nLoginIdNo As Int32
+            nLoginIdNo = GetLoginByUserName(userName).IdNo
+            If nLoginIdNo <> 0 Then
+                'Get the salt value for this username
+                Dim salt As String
+                Try
+                    salt = GetSalt(nLoginIdNo)
+                    If Not IsDBNull(salt) Then
+                        'Hash the user entered password with the salt value stored in the Salt table
+                        ePassword = HashEncryptStringWithSalt(password, salt)
+                    End If
+                Catch ex As Exception
+                    MsgBox(ex.ToString)
+                    Return False
+                End Try
+            End If
+            Return ePassword
+        End Function
+
+        Private Function GetLoginByUserName(ByRef userName As String)
+            Service.GetRecordFieldWithKeyG(Of Int32)(userName, "User", "UserName", "IdNo") 
+        End Function
 
         Public Function HashEncryptStringWithSalt(s As String, salt As String) As String
             Return HashEncryptString(salt + s)
