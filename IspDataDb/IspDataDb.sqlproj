@@ -67,6 +67,8 @@
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\User Defined Types\" />
     <Folder Include="Snapshots" />
+    <Folder Include="IdPrintingSeries\" />
+    <Folder Include="IdPrintingSeries\Sequences\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\SJPrefix.sql" />
@@ -477,6 +479,9 @@
     <Build Include="dbo\Views\EmployeeLeaveStatusList_View.sql" />
     <Build Include="dbo\Views\EmployeeLeaveStatusUpdate_View.sql" />
     <Build Include="dbo\Views\EmployeeLeaveLatestUpdate_View.sql" />
+    <Build Include="dbo\Views\EmployeeIdPrinting_View.sql" />
+    <Build Include="Security\IdPrintingSeries.sql" />
+    <Build Include="IdPrintingSeries\Sequences\CountBy1.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

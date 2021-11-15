@@ -104,6 +104,10 @@ Namespace Services
 
         Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, groupIdNo As Integer) As Integer
 
+        Function GetNextSeries(seriesName As String) As Integer
+
+        Function InsertUserTvp(ByRef userProcedureName As String, dtTable As DataTable) As Integer
+
     End Interface
 
 End Namespace

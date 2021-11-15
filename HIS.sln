@@ -118,11 +118,13 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IspDataDb", "IspDataDb\IspD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQueries", "{E0336D98-67DC-4134-9508-7F5598295FEC}"
 	ProjectSection(SolutionItems) = preProject
+		CreateEditReset Sequence.sql = CreateEditReset Sequence.sql
 		DeleteDuplicates.sql = DeleteDuplicates.sql
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
 		QueryWrongAccountsInReconciliation.sql = QueryWrongAccountsInReconciliation.sql
 		Reverse bit values.sql = Reverse bit values.sql
 		SearchDatabaseForASpecificColumnName.sql = SearchDatabaseForASpecificColumnName.sql
+		TextFile1.txt = TextFile1.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspdata", "{D0B2F203-4601-4F73-89C4-C5A6FF4D4B99}"

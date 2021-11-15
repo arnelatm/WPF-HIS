@@ -1,0 +1,5 @@
+﻿CREATE SEQUENCE [IdPrintingSeries].[CountBy1]
+    AS BIGINT
+    START WITH 1
+    INCREMENT BY 1;
+

@@ -82,19 +82,19 @@ Namespace PresentationLayer.Views.Forms
             bsEmployeeIdList.ResetBindings(False)
         End Sub
 
-        'Private Sub DataGridViewEmployeeIdListCellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeIdList.CellContentClick
-        '    If DataGridViewEmployeeIdList.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
-        '        With DataGridViewEmployeeIdList.CurrentCell
-        '            Select Case .OwningColumn.Name.ToLower()
-        '                Case $"dgvprint"
-        '                    If Not DataGridViewEmployeeIdList.DisplayOnly Then
-        '                        Dim selectedRow = DataGridViewEmployeeIdList.Rows(.RowIndex).DataBoundItem
-        '                        RaiseEvent EmployeeIdCheckedEvent(selectedRow)
-        '                    End If
-        '            End Select
-        '        End With
-        '    End If
-        'End Sub
+        Private Sub DataGridViewEmployeeIdListCellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeIdList.CellContentClick
+            If DataGridViewEmployeeIdList.CurrentCell IsNot Nothing Then
+                With DataGridViewEmployeeIdList.CurrentCell
+                    Select Case .OwningColumn.Name
+                        Case $"PrintThis"
+                            If Not DataGridViewEmployeeIdList.DisplayOnly Then
+                                Dim selectedRow = DataGridViewEmployeeIdList.Rows(.RowIndex).DataBoundItem
+                                RaiseEvent EmployeeIdCheckedEvent(selectedRow)
+                            End If
+                    End Select
+                End With
+            End If
+        End Sub
 
     End Class
 

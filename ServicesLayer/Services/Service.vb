@@ -384,6 +384,10 @@ Namespace Services
             Return DataDao.InsertTvp(dtTable)
         End Function
 
+        Public Function InsertUserTvp(ByRef userProcedureName As String, dtTable As DataTable) As Integer Implements IService.InsertUserTvp
+            Return DataDao.InsertUserTvp(userProcedureName, dtTable)
+        End Function
+
         Public Function IsValid(model) As Boolean Implements IService.IsValid
             GlobalVariables.Mapper.Map(model, DataBo)
             Return DataBo.IsValid()
@@ -638,9 +642,9 @@ Namespace Services
             End If
         End Function
 
-        'Public Function GetLastSeriesNumber(seriesName As String) As Integer Implements IService.GetLastSeriesNumber
-        '    Return BaseDao.GetLastSeriesNumber(seriesName)
-        'End Function
+        Public Function GetNextSeries(seriesName As String) As Integer Implements IService.GetNextSeries
+            Return BaseDao.GetNextSeries(seriesName)
+        End Function
 
 #End Region
 
