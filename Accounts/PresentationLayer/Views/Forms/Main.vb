@@ -1124,10 +1124,9 @@ Namespace PresentationLayer.Views.Forms
         End Function
 
         Private Sub ToolStripMenuItemEmployeeIDPrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeIDPrinting.Click
-            RunForm(Of EmployeeIdPrinting, EmployeeIdPrintingPresenter(Of EmployeeIdModel))
-            'Dim childMdiForm = Activator.CreateInstance(GetType(EmployeeIdPrinting))
-            'childMdiForm.Show()
+            RunForm(Of EmployeeIdPrinting, EmployeeIdPrintingPresenter(Of EmployeeIdModel))()
         End Sub
+
     End Class
 
 End Namespace

@@ -234,15 +234,19 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function ToSqlImage(ByVal imageIn As System.Drawing.Image) As Byte()
+            Dim data As Byte() = {}
+            Dim saveImage As New Bitmap(imageIn)
+            saveImage.Save("C:\temp\Picture.jpg", Imaging.ImageFormat.Jpeg)
+            saveImage.Dispose()
+            Dim cPictureBox As New PictureBox
+            cPictureBox.Image = Image.FromFile("c:\temp\Picture.jpg")
             Using ms = New MemoryStream()
                 If imageIn IsNot Nothing Then
-                    imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
-                    Return ms.ToArray()
-                Else
-                    Dim data As Byte() = {}
-                    Return data
+                    cPictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    data = ms.ToArray()
                 End If
             End Using
+            Return data
         End Function
 
         Public Function EmployeeIdInsertTvp(ByRef tvpTable As DataTable) As Integer

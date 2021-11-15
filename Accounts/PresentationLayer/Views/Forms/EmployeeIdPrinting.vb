@@ -19,7 +19,6 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            Presenter = New EmployeeIdPrintingPresenter(Of EmployeeIdModel)(Me)
             ' Add any initialization after the InitializeComponent() call.
             Me.Text = Messaging.TranslateCaption("Employee I.D. Printing")
             btnEdit.Visible = False
@@ -39,10 +38,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        'Protected Overrides Sub CreateDataSources()
-        '    EmployeeIdList = Presenter.GetEmployeeIdList()
-        'End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {}
@@ -55,10 +50,8 @@ Namespace PresentationLayer.Views.Forms
             bsEmployeeIdList.DataSource = EmployeeIdList
             bsEmployeeIdList.AllowNew = True
             With DataGridViewEmployeeIdList
-                '.Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsEmployeeIdList
-                '.Refresh()
             End With
             With DataGridViewEmployeeIdList.Columns
                 dgvIdNo.DisplayOnly = True
@@ -79,7 +72,7 @@ Namespace PresentationLayer.Views.Forms
             PublishClickedButton(ButtonClicked.Edit)
         End Sub
 
-        Private Sub SelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
+        Private Sub SelectAll_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
             RaiseEvent ClearAllEmployee(bsEmployeeIdList, True)
             bsEmployeeIdList.ResetBindings(False)
         End Sub
@@ -89,19 +82,19 @@ Namespace PresentationLayer.Views.Forms
             bsEmployeeIdList.ResetBindings(False)
         End Sub
 
-        Private Sub DataGridViewEmployeeIdListCellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeIdList.CellContentClick
-            If DataGridViewEmployeeIdList.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
-                With DataGridViewEmployeeIdList.CurrentCell
-                    Select Case .OwningColumn.Name.ToLower()
-                        Case $"dgvprint"
-                            If Not DataGridViewEmployeeIdList.DisplayOnly Then
-                                Dim selectedRow = DataGridViewEmployeeIdList.Rows(.RowIndex).DataBoundItem
-                                RaiseEvent EmployeeIdCheckedEvent(selectedRow)
-                            End If
-                    End Select
-                End With
-            End If
-        End Sub
+        'Private Sub DataGridViewEmployeeIdListCellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeIdList.CellContentClick
+        '    If DataGridViewEmployeeIdList.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
+        '        With DataGridViewEmployeeIdList.CurrentCell
+        '            Select Case .OwningColumn.Name.ToLower()
+        '                Case $"dgvprint"
+        '                    If Not DataGridViewEmployeeIdList.DisplayOnly Then
+        '                        Dim selectedRow = DataGridViewEmployeeIdList.Rows(.RowIndex).DataBoundItem
+        '                        RaiseEvent EmployeeIdCheckedEvent(selectedRow)
+        '                    End If
+        '            End Select
+        '        End With
+        '    End If
+        'End Sub
 
     End Class
 

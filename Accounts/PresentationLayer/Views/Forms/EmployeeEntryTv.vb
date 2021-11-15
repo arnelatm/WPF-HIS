@@ -80,6 +80,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property BloodType As String Implements IEmployeeView.BloodType
+            Get
+                Return cboBloodType.GetValue()
+            End Get
+            Set
+                cboBloodType.SetValue(Value)
+            End Set
+        End Property
+
         Public Property CountryCode As String Implements IEmployeeView.CountryCode
             Get
                 Return cacCountryCode.GetValue()
