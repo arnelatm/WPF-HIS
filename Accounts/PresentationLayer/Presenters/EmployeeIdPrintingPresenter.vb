@@ -11,8 +11,8 @@ Namespace PresentationLayer.Presenters
     Public Class EmployeeIdPrintingPresenter(Of TM As New)
         Inherits CommonPresenterNew(Of IEmployeeIdListView, TM)
 
-        Private ReadOnly _journalItemService
-        Private ReadOnly _EmployeeIdsService
+        'Private ReadOnly _journalItemService
+        'Private ReadOnly _EmployeeIdsService
 
         Public Sub New(view As IEmployeeIdListView)
             MyBase.New(view)
@@ -43,16 +43,16 @@ Namespace PresentationLayer.Presenters
             CreateDataTable(dtIdPrinting, {{"EmployeeIdNo", GetType(Int32)},
                                            {"TransactionNumber", GetType(Int32)}
                                            })
-            For Each item As EmployeeIdView In View.EmployeeIdList
-                If item.Print Then
+            For Each employeeId As EmployeeIdView In View.EmployeeIdList
+                If employeeId.Print Then
                     Dim workRow As DataRow
                     workRow = dtIdPrinting.NewRow()
-                    workRow("EmployeeIdNo") = item.IdNo
+                    workRow("EmployeeIdNo") = employeeId.IdNo
                     workRow("TransactionNumber") = transactionNumber
                     dtIdPrinting.Rows.Add(workRow)
                 End If
             Next
-            Dim retVal = Service.InsertUserTvp("InsertEmployeeIdPrintingTvp", dtIdPrinting)
+            Dim retVal = Service.ExecuteTvpSp("InsertEmployeeIdPrintingTvp", dtIdPrinting)
             Dim cForm
             cForm = New ReportForm("HR Id Printing.Rpt", transactionNumber, "TransactionNumber")
             cForm.Show()

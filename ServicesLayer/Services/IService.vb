@@ -106,7 +106,7 @@ Namespace Services
 
         Function GetNextSeries(seriesName As String) As Integer
 
-        Function InsertUserTvp(ByRef userProcedureName As String, dtTable As DataTable) As Integer
+        Function ExecuteTvpSp(ByRef userProcedureName As String, dtTable As DataTable) As Integer
 
     End Interface
 
