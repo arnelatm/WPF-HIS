@@ -65,6 +65,13 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
+        Public Function GetEmployeeLeaveList()
+            Dim model As New List(Of EmployeeLeaveModel)
+            Dim records As List(Of EmployeeLeave) = DataDao.GetEmployeeLeaveList()
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
+
         Public Function GetAcctReconItems(Of TM)(accountIdNo As Int16, reconciliationDate As Date,
                                                   Optional sortOrder As String = Nothing) As List(Of TM) _
             Implements IServiceAccounts.GetAcctReconItems

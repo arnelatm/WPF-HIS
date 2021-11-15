@@ -181,6 +181,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemEmployeeLeaveApproval = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -584,7 +585,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemHR
         '
-        Me.ToolStripMenuItemHR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeLeave, Me.ToolStripMenuItemEmployeeAbsenceLate, Me.ToolStripMenuItemHolidayEntry})
+        Me.ToolStripMenuItemHR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeLeave, Me.ToolStripMenuItemEmployeeAbsenceLate, Me.ToolStripMenuItemHolidayEntry, Me.ToolStripMenuItemEmployeeLeaveApproval})
         Me.ToolStripMenuItemHR.Name = "ToolStripMenuItemHR"
         resources.ApplyResources(Me.ToolStripMenuItemHR, "ToolStripMenuItemHR")
         '
@@ -995,6 +996,11 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
+        'ToolStripMenuItemEmployeeLeaveApproval
+        '
+        Me.ToolStripMenuItemEmployeeLeaveApproval.Name = "ToolStripMenuItemEmployeeLeaveApproval"
+        resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeaveApproval, "ToolStripMenuItemEmployeeLeaveApproval")
+        '
         'Main
         '
         Me.AllowDrop = true
@@ -1173,5 +1179,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemEmployeeLeave As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeAbsenceLate As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemHolidayEntry As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemEmployeeLeaveApproval As ToolStripMenuItem
     End Class
 End NameSpace

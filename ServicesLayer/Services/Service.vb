@@ -357,7 +357,7 @@ Namespace Services
             Return dataModel
         End Function
 
-        Public Function GetDaoRecords(filter As String)
+        Public Function GetDaoRecords(Optional filter As String = Nothing)
             Return DataDao.GetDaoRecords(filter)
         End Function
 
@@ -384,8 +384,8 @@ Namespace Services
             Return DataDao.InsertTvp(dtTable)
         End Function
 
-        Public Function InsertUserTvp(ByRef userProcedureName As String, dtTable As DataTable) As Integer Implements IService.InsertUserTvp
-            Return DataDao.InsertUserTvp(userProcedureName, dtTable)
+        Public Function ExecuteTvpSp(ByRef userProcedureName As String, dtTable As DataTable) As Integer Implements IService.ExecuteTvpSp
+            Return DataDao.ExecuteTvpSp(userProcedureName, dtTable)
         End Function
 
         Public Function IsValid(model) As Boolean Implements IService.IsValid

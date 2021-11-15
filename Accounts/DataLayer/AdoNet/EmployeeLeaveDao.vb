@@ -115,6 +115,14 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
+         Public Function GetEmployeeLeaveList(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave) 
+            If sortExpression Is Nothing Then
+                sortExpression = "EmployeeName ASC"
+            End If
+            Dim sql As String = " SELECT " & FieldList & " From EmployeeLeave Order by " & sortExpression
+            Return db.Read(sql, Make).ToList()
+        End Function
+
     End Class
 
 End Namespace
