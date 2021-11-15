@@ -902,6 +902,19 @@ Namespace AdoNet
             Return retValue
         End Function
 
+        Public Function GetNextSeries(ByRef seriesName As String) As Int32 Implements IBaseDao.GetNextSeries
+            Dim retVal As Integer
+            Dim sql As String
+            sql = "SELECT NEXT VALUE FOR " & seriesName.Trim() & ".CountBy1"
+            retVal = _db.Scalar(sql)
+            Return retVal
+        End Function
+
+        'Execute a Table Valued Parameter Stored Procedure
+        Public Function ExecuteTvpSp(ByRef procedureName As String, dataTable As DataTable) As Int32 Implements IBaseDao.ExecuteTvpSp
+            Return _db.InsertTvp(procedureName, dataTable)
+        End Function
+
     End Class
 
 End Namespace
