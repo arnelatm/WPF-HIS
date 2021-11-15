@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property BankAccountNo As String
         Property BankIdNo As Int16?
         Property Balance As Decimal
+        Property BloodType As String
         Property BirthDate As Date?
         Property CountryCode As String
         Property DepartmentIdNo As Int16?

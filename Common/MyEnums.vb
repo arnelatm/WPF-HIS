@@ -8,14 +8,14 @@ Public Enum YearMonthDaySelection
 End Enum
 
 Public Enum BloodTypeSelection
-    <EnumCode("O-")> [On]
-    <EnumCode("O+")> [Op]
-    <EnumCode("A-")> [An]
-    <EnumCode("A+")> [Ap]
-    <EnumCode("B-")> [Bn]
-    <EnumCode("B+")> [Bp]
-    <EnumCode("AB-")> [ABn]
-    <EnumCode("AB+")> [ABp]
+    <EnumCode("O-")> [ONegative]
+    <EnumCode("O+")> [OPositive]
+    <EnumCode("A-")> [ANegative]
+    <EnumCode("A+")> [APositive]
+    <EnumCode("B-")> [BNegative]
+    <EnumCode("B+")> [BPositive]
+    <EnumCode("AB-")> [ABNegative]
+    <EnumCode("AB+")> [ABPositive]
 End Enum
 
 Public Enum MaleFemaleSelection

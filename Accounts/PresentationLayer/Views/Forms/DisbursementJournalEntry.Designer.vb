@@ -2010,7 +2010,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'btnPrintPcReplenishment
         '
-        Me.btnPrintPcReplenishment.DesignerSelected = false
+        Me.btnPrintPcReplenishment.DesignerSelected = true
         Me.btnPrintPcReplenishment.ImageIndex = 0
         Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(445, 3)
         Me.btnPrintPcReplenishment.Name = "btnPrintPcReplenishment"
