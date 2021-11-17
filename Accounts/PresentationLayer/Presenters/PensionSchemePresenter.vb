@@ -37,6 +37,12 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
         End Sub
 
+        
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("PensionProvider", "PensionProviderIdNo")
+            CreateDataSource("Account", "AccountIdNo", "DetailAccount=1")
+        End Sub
+
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 ViewToDataTables(View.PensionRates, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PensionRateFilter)

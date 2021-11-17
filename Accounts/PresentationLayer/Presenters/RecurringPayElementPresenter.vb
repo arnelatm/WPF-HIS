@@ -15,6 +15,11 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("Employee", "EmployeeIdNo")
+            CreateDataSource("PayElement", "PayElementIdNo")
+        End Sub
+
     End Class
 
 End Namespace

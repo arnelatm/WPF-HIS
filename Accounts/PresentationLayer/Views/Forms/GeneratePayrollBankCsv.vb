@@ -61,6 +61,9 @@ Namespace PresentationLayer.Views.Forms
         Public Property PayrollOvertime As List(Of OtWorkHourView) Implements IPayrollView.PayrollOvertime
         Public Property PayFrequency As Char Implements IPayrollView.PayFrequency
 
+        Public Property Employees As Object Implements IPayrollView.Employees
+
+
         Protected SortOrderKey As String
 
         Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance
@@ -93,11 +96,6 @@ Namespace PresentationLayer.Views.Forms
             btnNew.Visible = False
             btnOpen.Visible = False
             TurnOnInputs()
-        End Sub
-
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Payroll", cboIdNo, "StartDate", Nothing)
-            CreateDataSource("PayCycle", cboPayCycleIdNo)
         End Sub
 
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea

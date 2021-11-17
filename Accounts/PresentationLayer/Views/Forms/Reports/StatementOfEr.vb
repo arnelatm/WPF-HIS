@@ -20,7 +20,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             MainTableName = "ErJournal"
             SortOrderKey = "IdNo"
             Presenter = New ReportPresenter(Me)
-            CreateDataSource("Employee", cboEmployeeIdNo)
+            Presenter.CreateDataSource("Employee", cboEmployeeIdNo)
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)

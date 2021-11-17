@@ -29,6 +29,13 @@ Namespace PresentationLayer.Views.Interfaces
         Property UsePayGroupSetting As Boolean
         Property PayElementAccounts As List(Of PayElementAccountView)
         Property PayElementItems As List(Of PayElementItemView)
+        Property FactorTypeByCode
+        Property CalculationTypeByCode
+        Property EarnReportGroupsByCode
+        Property DedReportGroupsByCode
+        Property PayElementsByCode
+        Property PayGroupsByCode
+        Property AccountsByCode
     End Interface
 
 End Namespace

@@ -109,11 +109,6 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Employee", cboEmployeeIdNo)
-            CreateDataSource("PayElement", cboPayElementIdNo)
-        End Sub
-
     End Class
 
 End Namespace

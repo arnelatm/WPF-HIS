@@ -11,21 +11,13 @@ Namespace PresentationLayer.Views.Forms
     Public Class SalesJournalEntry
         Implements ISalesJournalView
 
-        'Public TxtTotalCredits As Decimal
-        'Public TxtTotalDebits As Decimal
-        'Public TxtTotalBankCharges As Decimal
-        'Public TxtTotalBankChargesVat As Decimal
-        'Public TxtTotalDeposits As Decimal
-        'Public TxtTotalSales As Decimal
-
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private _accountsByCode
-        Private _depositTypesByCode
+
         Private _slFooter As DgvFooter
         Private _salesDeposits As List(Of SalesDepositView)
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _revCostCenterByCode
+
         Private _journalMode As Boolean = False
 
         Public Sub New()
@@ -37,6 +29,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #Region "Fields"
+
+        
+        Public Property AccountsByCode As Object Implements ISalesJournalView.AccountsByCode
+        Public Property DepositTypesByCode As Object Implements ISalesJournalView.DepositTypesByCode
+        Public Property RevCostCenterByCode As Object Implements ISalesJournalView.RevCostCenterByCode
+
 
         Public Property AccountIdNo As Int16? Implements ISalesJournalView.AccountIdNo
             Get
@@ -195,12 +193,7 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
-            CreateLookupData("DepositType", NameOf(_depositTypesByCode))
-            CreateLookupData("RevCostCenter", NameOf(_revCostCenterByCode))
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Sales)}, cboAccountIdNo)
-        End Sub
+
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -241,13 +234,13 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewJournalItems.Columns
                 If dgvSequence IsNot Nothing Then
                     dgvSequence.DisplayOnly = True
-                    dgvAccountIdNo.DataSource = _accountsByCode
+                    dgvAccountIdNo.DataSource = AccountsByCode
                     dgvAccountIdNo.DisplayMember = "Name"
                     dgvAccountIdNo.ValueMember = "IdNo"
                     dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                     dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                     dgvAccountIdNo.AutoComplete = True
-                    dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                    dgvRevCostCenterIdNo.DataSource = RevCostCenterByCode
                     dgvRevCostCenterIdNo.DisplayMember = "Name"
                     dgvRevCostCenterIdNo.ValueMember = "idNo"
                     dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -271,7 +264,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewSalesDeposits.Columns
                 If dgvDepositTypeIdNo IsNot Nothing Then
-                    dgvDepositTypeIdNo.DataSource = _depositTypesByCode
+                    dgvDepositTypeIdNo.DataSource = DepositTypesByCode
                     dgvDepositTypeIdNo.DisplayMember = "Name"
                     dgvDepositTypeIdNo.ValueMember = "IdNo"
                     dgvDepositTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend

@@ -47,6 +47,13 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.CheckingAccount), EnumToCode(SpecialAccountSelection.CheckingAccount)})
+            CreateSpecialAccountDataSource("PcAccountIdNo", {EnumToCode(SpecialAccountSelection.PettyCashAccount)})
+            CreateEnumDataSource(Of PayTypeSelection)("PayType")
+        End Sub
+
+
         Private Sub OnPcJournalCheckedEvent(sender As Object)
             If EditMode Or AddMode Then
                 If sender.PcClosed Then
@@ -65,7 +72,7 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(modelData, View.PcClosingJournals)
         End Sub
 
-        Private Sub OnClearAllPcJournal(ByVal bsPcClosingJournal as BindingSource, clear As Boolean)
+        Private Sub OnClearAllPcJournal(ByVal bsPcClosingJournal As BindingSource, clear As Boolean)
             Dim total As Decimal = 0
             For Each item In bsPcClosingJournal
                 item.PcClosed = clear

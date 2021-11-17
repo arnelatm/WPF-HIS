@@ -177,6 +177,60 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PcClosed As Boolean Implements IDisbursementJournalView.PcClosed
 
+        Public Property AccountsByCode As Object Implements IDisbursementJournalView.AccountsByCode
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Object)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property EmployeesByName As Object Implements IDisbursementJournalView.EmployeesByName
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Object)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property SuppliersByName As Object Implements IDisbursementJournalView.SuppliersByName
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Object)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property CustomersByName As Object Implements IDisbursementJournalView.CustomersByName
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Object)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property RevCostCentersByCode As Object Implements IDisbursementJournalView.RevCostCentersByCode
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Object)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property BankTransfer As Boolean Implements IDisbursementJournalView.BankTransfer
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 #End Region
 
         Public Sub OnEventHandler(ByRef eventType As BeforeAssignment) Implements ISubscriber(Of BeforeAssignment).OnEventHandler
@@ -190,9 +244,9 @@ Namespace PresentationLayer.Views.Forms
             ShowPayee()
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            cboPaymentType.DataSource = Presenter.MakeEnumComboList(Of PaymentTypeSelection)
-        End Sub
+        'Protected Overrides Sub CreateDataSources()
+        '    cboPaymentType.DataSource = Presenter.MakeEnumComboList(Of PaymentTypeSelection)
+        'End Sub
 
         Private Sub DjJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             dtpCheckDate.Visible = True
@@ -207,6 +261,7 @@ Namespace PresentationLayer.Views.Forms
             dtpCheckDate.Value = Today
             TurnOnInputs()
             ShowPayee()
+            Presenter.MakeEnumComboList(Of PaymentTypeSelection)("PaymentType")
         End Sub
 
         Public Overloads Sub Dispose()

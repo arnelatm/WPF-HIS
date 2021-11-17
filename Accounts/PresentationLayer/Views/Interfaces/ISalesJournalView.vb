@@ -22,6 +22,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property Posted As Boolean
         Property SalesDeposits As List(Of SalesDepositView)
         Property JournalItems As List(Of JournalItemView)
+        Property AccountsByCode
+        Property DepositTypesByCode
+        Property RevCostCenterByCode
 
     End Interface
 

@@ -20,8 +20,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             MainTableName = "Account"
             SortOrderKey = "IdNo"
             Presenter = New ReportPresenter(Me)
-            CreateDataSource("Account", cboEndAccountCode, "DetailAccount=1")
-            CreateDataSource("Account", cboStartAccountCode, "DetailAccount=1")
+            Presenter.CreateDataSource("Account", "EndAccountCode", "DetailAccount=1")
+            Presenter.CreateDataSource("Account", "StartAccountCode", "DetailAccount=1")
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
 

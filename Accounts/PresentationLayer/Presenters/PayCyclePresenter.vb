@@ -16,6 +16,12 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "PayCycleName"
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateEnumDataSource(Of PayFrequencySelection)("PayFrequency")
+        End Sub
+
     End Class
+
+
 
 End Namespace

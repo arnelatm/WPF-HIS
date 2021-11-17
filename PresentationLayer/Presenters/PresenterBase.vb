@@ -1825,6 +1825,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Sub OnPresenterBase_LanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
         UpdateViewDisplay()
+        CreateDataSources()
         RaiseEvent LanguageChanged()
     End Sub
 
@@ -1842,6 +1843,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
         SetDataSource(sourceTableName, GetControlName(fieldName), fieldsArray, sortKey, filter)
+    End Sub
+
+    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
+        SetDataSource(sourceTableName, control, fieldsArray, sortKey, filter)
+    End Sub
+
+    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control)
+        SetDataSource(sourceTableName, control, Nothing, Nothing, Nothing)
     End Sub
 
     Protected Function GetControlName(ByVal fieldName As String) As CaComboBox

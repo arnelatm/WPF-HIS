@@ -199,12 +199,18 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         'Public Event UpdateDataFilterEvent(pPayrollIdNo As Int16) Implements IPayrollDetailView.UpdateDataFilterEvent
-
-        Protected Overrides Sub CreateDataSources()
-            'RaiseEvent UpdateDataFilterEvent(PayrollIdNo)
-            CreateLookupData("PayElement", NameOf(_payEarningsByCode), "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "' and Summary = 0")
-            CreateLookupData("PayElement", NameOf(_payDeductionsByCode), "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "' and Summary = 0")
-            CreateDataSource("Employee", cboEmployeeIdNo)
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"BankTransfer", chkBankTransfer},
+                {"EmployeeCode", txtEmployeeCode},
+                {"EmployeeIdNo", cboEmployeeIdNo},
+                {"EndDate", dtpEndDate},
+                {"IdNo", txtIdNo},
+                {"PayrollIdNo", txtPayrollIdNo},
+                {"SponsorType", SponsorType},
+                {"StartDate", dtpStartDate}
+                }
         End Sub
 
         Private Sub BindPayrollEarnings()

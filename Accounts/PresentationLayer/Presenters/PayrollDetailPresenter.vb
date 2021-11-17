@@ -48,6 +48,15 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        
+        Protected Overrides Sub CreateDataSources()
+            'RaiseEvent UpdateDataFilterEvent(PayrollIdNo)
+            CreateLookupData("PayElement", "PayEarningsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "' and Summary = 0")
+            CreateLookupData("PayElement", "PayDeductionsByCode", "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "' and Summary = 0")
+            CreateDataSource("Employee", "EmployeeIdNo")
+        End Sub
+
+
         Public Sub DisplayPayrollDetails(ByRef startDate As Date?, ByRef endDate As Date?, ByRef payDescription As String)
             Dim payroll As Object = New ExpandoObject
             payroll = Service.GetFieldsWithIdNo(View.PayrollIdNo, "Payroll", "StartDate,EndDate,PayrollName")

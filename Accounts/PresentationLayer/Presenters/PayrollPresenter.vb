@@ -168,6 +168,12 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("PayCycle", "PayCycleIdNo")
+            CreateLookupData("Employee", "Employees")
+        End Sub
+
+
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             Dim nIdNoMax As Int32
             Dim maxRecord As PayrollModel
