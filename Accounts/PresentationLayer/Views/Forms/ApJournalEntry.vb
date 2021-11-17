@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IApJournalView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private _accountsByCode
+        'Private _accountsByCode
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _revCostCentersByCode
@@ -248,15 +248,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property AccountsByCode Implements IApJournalView.AccountsByCode
+
+
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
-            CreateLookupData("RevCostCenter", NameOf(_revCostCentersByCode))
-            CreateDataSource("Supplier", cboSupplierIdNo)
-            CreateEnumDataSource(Of TransactionTypeSelection)(cboTransactionType)
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.AccountsPayable)}, cboAccountIdNo)
-        End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -318,7 +314,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
-                dgvAccountIdNo.DataSource = _accountsByCode
+                dgvAccountIdNo.DataSource = AccountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend

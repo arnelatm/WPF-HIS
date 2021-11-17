@@ -53,6 +53,10 @@ Namespace PresentationLayer.Presenters
             'AddHandler _backgroundworker.RunWorkerCompleted, AddressOf BackgroundWorker_RunWorkerCompleted
         End Sub
 
+        Public Overrides Sub CreateDataSources()
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.CheckingAccount), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.PettyCashAccount)}, cboAccountIdNo)
+        End Sub
+
         Public Property MessageBox As Object
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized

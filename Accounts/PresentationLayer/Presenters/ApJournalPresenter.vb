@@ -44,6 +44,14 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
+            CreateLookupData("RevCostCenter", NameOf(_revCostCentersByCode))
+            CreateControlDataSource("Supplier", "SupplierIdNo")
+            CreateControlEnumDataSource(Of TransactionTypeSelection)("TransactionType")
+            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.AccountsPayable)}, cboAccountIdNo)
+        End Sub
+
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf JournalItemFilter)

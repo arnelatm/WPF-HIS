@@ -13,6 +13,11 @@ Public Class DefaultFieldValuePresenter(Of TM As New)
         TreeViewSecondaryField = "FieldName"
     End Sub
 
+    Public Overrides Sub CreateDataSources()
+        CreateControlEnumDataSource(Of DataTypeSelection)("DataType")
+        CreateControlDataSource("SystemView", "SystemViewIdNo")
+    End Sub
+
     'Public Function GetDefaultFieldValueList(Optional ByVal sortKey As String = "") As List(Of DefaultFieldValueModel)
     '    Dim xModel As New DefaultFieldValueModel
     '    Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DefaultFieldValueModel)(sortKey, xModel)
