@@ -368,14 +368,7 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of AccountStatusSelection)(cacAccountStatus)
-            CreateEnumDataSource(Of PaymentMethodSelection)(cacPaymentMethod)
-            CreateDataSource("Bank", cacBankIdNo)
-            CreateDataSource("Country", cacCountryCode)
-            CreateDataSource("Account", cacExpAccountIdNo, "DetailAccount=1")
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.AccountsPayable)}, cacApAccountIdNo)
-        End Sub
+
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From

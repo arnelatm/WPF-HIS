@@ -18,6 +18,10 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("VUser", "UserIdNo")
+        End Sub
+
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             Dim time = Today
             View.DateStart = time
@@ -28,7 +32,7 @@ Namespace PresentationLayer.Presenters
             Dim reportTitle = Messaging.TranslateCaption("Shift Summary Report")
             Dim language As String
             Dim curCulture = CultureInfo.CurrentCulture
-            Dim establishmentName As String 
+            Dim establishmentName As String
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
 
@@ -38,7 +42,7 @@ Namespace PresentationLayer.Presenters
                 establishmentName = GetRecordField("Establishment", "EstablishmentNameAra")
             End If
 
-            Dim cForm As New ReportForm("Shift Summary Report.Rpt", View.IdNo.ToString(), "TransactionIdNo", reportTitle, "ReportTitle", language, "Language", establishmentName, "EstablishmentName", reportTitle, "ReportTitle") 
+            Dim cForm As New ReportForm("Shift Summary Report.Rpt", View.IdNo.ToString(), "TransactionIdNo", reportTitle, "ReportTitle", language, "Language", establishmentName, "EstablishmentName", reportTitle, "ReportTitle")
             cForm.Show()
         End Sub
 

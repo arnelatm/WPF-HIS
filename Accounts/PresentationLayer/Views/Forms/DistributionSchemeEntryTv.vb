@@ -13,7 +13,6 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _distributionSchemeItemsPresenter As New DistributionSchemeItemsPresenter(Me)
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _revCostCenterByCode
 
         'Private ReadOnly _revCostCenterByName
         Private _distributionSchemeItems As List(Of DistributionSchemeItemModel)
@@ -143,6 +142,8 @@ Namespace PresentationLayer.Views.Forms
 #Region "DistributionSchemeItemsView"
 
         Public Property DistributionSchemeItemsDataSource As List(Of DistributionSchemeItemModel)
+        Public Property RevCostCenterByCode As Object Implements IDistributionSchemeView.RevCostCenterByCode
+
 
         Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemsView.DistributionSchemeItems
             Get
@@ -152,6 +153,7 @@ Namespace PresentationLayer.Views.Forms
                 _distributionSchemeItems = value
             End Set
         End Property
+
 
         Private Sub BindDistributionSchemeItem()
             bsDistributionSchemeItems.DataSource = DistributionSchemeItems

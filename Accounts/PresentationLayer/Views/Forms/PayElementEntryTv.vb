@@ -11,21 +11,9 @@ Namespace PresentationLayer.Views.Forms
     Public Class PayElementEntryTv
         Implements IPayElementView
 
-        Private _accountsByCode
-        Private _payGroupsByCode
-        Private _payElementsByCode
-        Private _earnReportGroupsByCode
-        Private _dedReportGroupsByCode
-        Private _factorTypeByCode
-        Private _calculationTypeByCode
         Private _payElementAccounts As List(Of PayElementAccountView)
         Private _payElementItems As List(Of PayElementItemView)
-        Private _useRevCostCenters As Nullable(Of Boolean)
-        Private _useDepartments As Nullable(Of Boolean)
-
-        'Private _unitPosition As TableLayoutPanelCellPosition
         Private _eSumFieldsDict As Dictionary(Of String, Object)
-
         Private _eAccFieldsDict As Dictionary(Of String, Object)
         Private ReadOnly _nfi As NumberFormatInfo = GlobalVariables.DefaultNumberFormatInfo
         Private _esService = New AccountsService("PayElementItem")
@@ -272,6 +260,13 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property UsePayGroupSetting As Boolean Implements IPayElementView.UsePayGroupSetting
+        Public Property FactorTypeByCode As Object Implements IPayElementView.FactorTypeByCode
+        Public Property CalculationTypeByCode As Object Implements IPayElementView.CalculationTypeByCode
+        Public Property EarnReportGroupsByCode As Object Implements IPayElementView.EarnReportGroupsByCode
+        Public Property DedReportGroupsByCode As Object Implements IPayElementView.DedReportGroupsByCode
+        Public Property PayElementsByCode As Object Implements IPayElementView.PayElementsByCode
+        Public Property PayGroupsByCode As Object Implements IPayElementView.PayGroupsByCode
+        Public Property AccountsByCode As Object Implements IPayElementView.AccountsByCode
 
 #End Region
 
@@ -342,43 +337,21 @@ Namespace PresentationLayer.Views.Forms
             Return False
         End Function
 
-        Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of PayElementKindSelection)(cboPayElementKind)
-            CreateEnumDataSource(Of CalculationTypeSelection)(cboCalculationType)
-            CreateEnumDataSource(Of FactorTypeSelection)(cboFactorType)
-            CreateEnumDataSource(Of PayRateUnitSelection)(cboUnit)
-            CreateEnumDataSource(Of QuantityTypeSelection)(cboQuantityType)
-            CreateEnumDataSource(Of PayElementTypeSelection)(cboPayElementType)
-            CreateDataSource("PayElement", cboBasePaymentIdNo)
-            CreateDataSource("Account", cboAccountIdNo, "AccountName", "DetailAccount=1")
-            CreateEnumData(Of FactorTypeSelection)(_factorTypeByCode)
-            CreateEnumData(Of CalculationTypeSelection)(_calculationTypeByCode)
-            CreateLookupData("PayElementGroup", NameOf(_earnReportGroupsByCode), "PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
-            CreateLookupData("PayElementGroup", NameOf(_dedReportGroupsByCode), "PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
-            CreateLookupData("PayElement", NameOf(_payElementsByCode))
-            CreateLookupData("PayGroup", NameOf(_payGroupsByCode))
-            CreateLookupData("Account", NameOf(_accountsByCode), "detailAccount=1")
-            '_payGroupsByCode = GetLookupData("PayGroup", NameOf(_payGroupsByCode))
-            '_payElementsByCode = GetLookupData("PayElement", NameOf(_payElementsByCode))
-            '_accountsByCode = GetLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
-            UpdateReportGroup()
-        End Sub
+
 
         Private Sub UpdateReportGroup()
             cboReportGroupIdNo.DataSource = Nothing
             If cboPayElementKind.SelectedValue = EnumToCode(PayElementKindSelection.Deduction) Then
-                cboReportGroupIdNo.DataSource = _dedReportGroupsByCode
+                cboReportGroupIdNo.DataSource = DedReportGroupsByCode
             Else
-                cboReportGroupIdNo.DataSource = _earnReportGroupsByCode
+                cboReportGroupIdNo.DataSource = EarnReportGroupsByCode
             End If
         End Sub
 
         Private Sub BindPayElementAccounts()
-            'SuspendLayout()
             bsPayElementAccounts.DataSource = Nothing
             DataGridViewPayElementAccounts.Refresh()
             bsPayElementAccounts.DataSource = PayElementAccounts
-            'bsPayElementAccounts.AllowNew = True
             With DataGridViewPayElementAccounts
                 .Refresh()
                 .AutoGenerateColumns = False
@@ -387,17 +360,16 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewPayElementAccounts.Columns
-                dgvPayGroupIdNo.DataSource = _payGroupsByCode
+                dgvPayGroupIdNo.DataSource = PayGroupsByCode
                 dgvPayGroupIdNo.DisplayMember = "Name"
                 dgvPayGroupIdNo.ValueMember = "IdNo"
                 dgvPayGroupIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvAccountIdNo.DataSource = _accountsByCode
+                dgvAccountIdNo.DataSource = AccountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
             End With
-            'ResumeLayout()
         End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -456,12 +428,12 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewPayElementItems.Columns
-                dgvPayElementIdNo.DataSource = _payElementsByCode
+                dgvPayElementIdNo.DataSource = PayElementsByCode
                 dgvPayElementIdNo.DisplayMember = "Name"
                 dgvPayElementIdNo.ValueMember = "IdNo"
                 dgvPayElementIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvPayElementIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvFactorType.DataSource = _factorTypeByCode
+                dgvFactorType.DataSource = FactorTypeByCode
                 dgvFactorType.ValueMember = "Code"
                 dgvFactorType.DisplayMember = "Name"
                 dgvFactorType.DisplayStyleForCurrentCellOnly = True
@@ -578,11 +550,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PayElementEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            'SuspendLayout()
             ImageListTreeView.Images.Add(Image.FromFile("Images\Deduction.png"))
             ImageListTreeView.Images.Add(Image.FromFile("Images\Earning.png"))
             FormTreeView.ImageList = ImageListTreeView
-            'ResumeLayout()
+            UpdateReportGroup()
         End Sub
 
         Private Sub ChkUsePayGroups_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsePayGroups.CheckedChanged

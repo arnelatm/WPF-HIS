@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -14,6 +15,12 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "PurchaseItemName"
             TreeViewSecondaryField = "PurchaseItemCode"
             SortOrderKey = "PurchaseItemName"
+        End Sub
+
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("ProductCategory", "ProductCategoryIdNo")
+            CreateDataSource("Account", "GlAccountIdNo", "DetailAccount=1")
+            CreateDataSource("Account", "VatAccountIdNo", "SpecialAccount=" & GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput))
         End Sub
 
     End Class

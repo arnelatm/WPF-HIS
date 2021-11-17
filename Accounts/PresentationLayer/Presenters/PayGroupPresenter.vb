@@ -18,6 +18,10 @@ Namespace PresentationLayer.Presenters
             ParentFieldName = "ParentIdNo"
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("PayGroup", "ParentIdNo")
+        End Sub
+
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then

@@ -93,10 +93,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("PensionProvider", cboPensionProviderIdNo)
-            CreateDataSource("Account", cboAccountIdNo, "DetailAccount=1")
-        End Sub
 
         Private Sub BindPensionRates()
             SuspendLayout()

@@ -200,12 +200,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("ProductCategory", cboProductCategoryIdNo)
-            CreateDataSource("Account", cboGlAccountIdNo, "DetailAccount=1")
-            CreateDataSource("Account", cboVatAccountIdNo, "SpecialAccount=" & EnumToCode(SpecialAccountSelection.VatInput))
-        End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {

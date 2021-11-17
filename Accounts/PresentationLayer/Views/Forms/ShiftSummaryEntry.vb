@@ -103,9 +103,6 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("VUser", cboUserIdNo)
-        End Sub
 
         Private Sub dtpDateStart_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateStart.Validated
             If dtpDateEnd.Value Is Nothing OrElse dtpDateEnd.Value < dtpDateStart.Value Then

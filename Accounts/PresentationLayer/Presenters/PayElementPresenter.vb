@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
@@ -28,6 +29,24 @@ Namespace PresentationLayer.Presenters
             End If
             CreateDataTables()
             ChildServices.Add(_payElementItemService)
+        End Sub
+
+        Protected Overrides Sub CreateDataSources()
+            CreateEnumDataSource(Of PayElementKindSelection)("PayElementKind")
+            CreateEnumDataSource(Of CalculationTypeSelection)("CalculationType")
+            CreateEnumDataSource(Of FactorTypeSelection)("FactorType")
+            CreateEnumDataSource(Of PayRateUnitSelection)("Unit")
+            CreateEnumDataSource(Of QuantityTypeSelection)("QuantityType")
+            CreateEnumDataSource(Of PayElementTypeSelection)("PayElementType")
+            CreateDataSource("PayElement", "BasePaymentIdNo")
+            CreateDataSource("Account", "AccountIdNo", "AccountName", "DetailAccount=1")
+            CreateEnumData(Of FactorTypeSelection)("FactorTypeByCode")
+            CreateEnumData(Of CalculationTypeSelection)("CalculationTypeByCode")
+            CreateLookupData("PayElementGroup", "EarnReportGroupsByCode", "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'")
+            CreateLookupData("PayElementGroup", "DedReportGroupsByCode", "PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'")
+            CreateLookupData("PayElement", "PayElementsByCode")
+            CreateLookupData("PayGroup", "PayGroupsByCode")
+            CreateLookupData("Account", "AccountsByCode", "DetailAccount=1")
         End Sub
 
         Private Sub CreateDataTables()

@@ -16,6 +16,12 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "PensionProviderName"
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("Country", "CountryCode")
+            CreateDataSource("Bank", "BankIdNo")
+            CreateEnumDataSource(Of PaymentMethodSelection)("PaymentMethod")
+        End Sub
+
     End Class
 
 End Namespace

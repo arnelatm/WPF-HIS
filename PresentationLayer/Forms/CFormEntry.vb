@@ -200,7 +200,7 @@ Public Class CFormEntry
 
     Protected Overridable Sub OnTextDisplayLanguageChanged() Handles Me.TextDisplayLanguageChanged
         CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
-        CreateDataSources()
+        'CreateDataSources()
         PublishEvent(New LanguageChanged(Me))
     End Sub
 
@@ -493,7 +493,7 @@ Public Class CFormEntry
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             'AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
-            CreateDataSources()
+            'CreateDataSources()
             CreateMainFieldsDictionary()
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New EntryFormLoaded(Me))

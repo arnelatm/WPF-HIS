@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class SupplierPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of ISupplierView, TM)
+        Inherits AccountsPresenterNew(Of ISupplierView, TM)
 
         Public ParentViewList As List(Of SupplierModel)
 
@@ -23,6 +23,16 @@ Namespace PresentationLayer.Presenters
                 'DataModel = New SupplierModel
             End If
         End Sub
+
+        Protected Overrides Sub CreateDataSources()
+            CreateEnumDataSource(Of AccountStatusSelection)("AccountStatus")
+            CreateEnumDataSource(Of PaymentMethodSelection)("PaymentMethod")
+            CreateDataSource("Bank", "BankIdNo")
+            CreateDataSource("Country", "CountryCode")
+            CreateDataSource("Account", "ExpAccountIdNo", "DetailAccount=1")
+            CreateSpecialAccountDataSource("ApAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsPayable)})
+        End Sub
+
 
         Public Function GetSupplierBalance(idNo As Integer)
             Return Service.GetFieldValue(Of Decimal)("Sum(Credit-Debit)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString() & " and SpecialAccount = 'AP'")

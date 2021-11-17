@@ -12,7 +12,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private _payrollAttendance As New List(Of AttendanceItemView)
         Private _payrollOvertime As New List(Of OtWorkHourView)
-        Private _employees
 
         Public Sub New()
             ' This call is required by the designer.
@@ -30,11 +29,9 @@ Namespace PresentationLayer.Views.Forms
             dgvDaysAbsentWoPay.DisplayOnly = True
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("PayCycle", cboPayCycleIdNo)
-            CreateLookupData("Employee", NameOf(_employees))
-            dgvEmployeeIdNo.DataSource = _employees
-            dgvEmployeeIdNoOt.DataSource = _employees
+        Protected Sub OnPayrollLoad() Handles MyBase.Load
+            dgvEmployeeIdNo.DataSource = Employees
+            dgvEmployeeIdNoOt.DataSource = Employees
             dgvEmployeeIdNo.DisplayMember = "Name"
             dgvEmployeeIdNoOt.DisplayMember = "Name"
             dgvEmployeeIdNo.ValueMember = "IdNo"
@@ -46,6 +43,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #Region "Fields"
+
+        Public Property Employees As Object Implements IPayrollView.Employees
 
         Public Property IdNo As Int16 Implements IPayrollView.IdNo
             Get
@@ -138,6 +137,9 @@ Namespace PresentationLayer.Views.Forms
                 BindPayrollAttendance()
             End Set
         End Property
+
+
+
 
 #End Region
 
@@ -273,7 +275,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnEmployeeAbsenceEntry.ClickButtonArea
-            RunSubForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))(IdNo, ParentForm)            
+            RunSubForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))(IdNo, ParentForm)
         End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea

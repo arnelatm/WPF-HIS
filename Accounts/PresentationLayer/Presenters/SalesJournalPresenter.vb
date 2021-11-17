@@ -71,6 +71,13 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateLookupData("Account", "AccountsByCode", "DetailAccount=1")
+            CreateLookupData("DepositType", "DepositTypesByCode")
+            CreateLookupData("RevCostCenter", "RevCostCenterByCode")
+            CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Sales)})
+        End Sub
+
         Public Property DepositTypesModel As List(Of DepositTypeModel)
             Get
                 Return _depositTypesModel
