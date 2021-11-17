@@ -27,7 +27,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Implements ISubscriber(Of ViewButtonClicked),
                ISubscriber(Of EntryFormLoaded),
                ISubscriber(Of SaveDataRequested),
-               ISubscriber(Of GetDataSource),
                ISubscriber(Of GetLookupDataRequested),
                ISubscriber(Of LanguageChanged)
 
@@ -1232,7 +1231,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         EntryFormLoaded()
     End Sub
 
-    Public Overridable Sub CreateDataSources()
+    Protected Overridable Sub CreateDataSources()
     End Sub
 
     Public Overridable Sub EntryFormLoaded()
@@ -1776,29 +1775,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     '    DoPaintEvents()
     'End Sub
 
-    Public Sub OnGetDataSourceHandler(ByRef eventType As GetDataSource) Implements ISubscriber(Of GetDataSource).OnEventHandler
-        SetDataSource(eventType.TableName, eventType.Control, eventType.Fields, eventType.SortKey, eventType.Filter)
-    End Sub
-
-    Protected Sub SetDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
-        Dim data As List(Of Lookup.LookupData)
-        Dim lookupObj As New Lookup(dataTableName)
-        If dataFields IsNot Nothing Then
-            lookupObj.FieldsToShow = dataFields
-        End If
-        If Not (sortKey Is Nothing OrElse sortKey = "") Then
-            lookupObj.SortKey = sortKey
-        End If
-        If Not (filter Is Nothing OrElse filter = "") Then
-            lookupObj.FilterKey = filter
-        End If
-        data = GetLookup(lookupObj)
-        SetControlDataSource(control, data)
-    End Sub
-
-    Protected Sub SetControlDataSource(cControl As Control, data As List(Of Lookup.LookupData))
-        Invoker.SetProperty(cControl, "DataSource", {data})
-    End Sub
+    'Public Sub OnGetDataSourceHandler(ByRef eventType As GetDataSource) Implements ISubscriber(Of GetDataSource).OnEventHandler
+    '    SetDataSource(eventType.TableName, eventType.Control, eventType.Fields, eventType.SortKey, eventType.Filter)
+    'End Sub
 
     Public Sub OnGetLookupDataRequestedHandler(ByRef eventType As GetLookupDataRequested) Implements ISubscriber(Of GetLookupDataRequested).OnEventHandler
         If eventType.View IsNot Nothing Then
@@ -1875,28 +1854,42 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
     Protected Overloads Sub CreateDataSource(sourceTableName As String, ByRef control As Control)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New GetDataSource(sourceTableName, control))
-        End If
+        SetDataSource(sourceTableName, control)
     End Sub
 
     Protected Overloads Sub CreateDataSource(sourceTableName As String, ByRef control As Control, filter As String)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New GetDataSource(sourceTableName, control, filter))
-        End If
+        SetDataSource(sourceTableName, control,,, filter)
     End Sub
 
     Protected Overloads Sub CreateDataSource(sourceTableName As String, ByRef control As Control, sortKey As String, filter As String)
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New GetDataSource(sourceTableName, control, sortKey, filter))
-        End If
+        SetDataSource(sourceTableName, control,, sortKey, filter)
     End Sub
 
     Protected Overloads Sub CreateDataSource(sourceTableName As String, ByRef control As Control, fields As String(), Optional sortKey As String = "", Optional filter As String = "")
-        If Ea IsNot Nothing Then
-            Ea.PublishEvent(New GetDataSource(sourceTableName, control, fields, sortKey, filter))
-        End If
+        SetDataSource(sourceTableName, control, fields, sortKey, filter)
     End Sub
+
+    Protected Sub SetDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
+        Dim data As List(Of Lookup.LookupData)
+        Dim lookupObj
+        lookupObj = SetLookupObject(dataTableName, control, dataFields, sortKey, filter)
+        data = GetLookup(lookupObj)
+        Invoker.SetProperty(control, "DataSource", {data})
+    End Sub
+
+    Protected Function SetLookupObject(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing) As Lookup
+        Dim lookupObj As New Lookup(dataTableName)
+        If dataFields IsNot Nothing Then
+            lookupObj.FieldsToShow = dataFields
+        End If
+        If Not (sortKey Is Nothing OrElse sortKey = "") Then
+            lookupObj.SortKey = sortKey
+        End If
+        If Not (filter Is Nothing OrElse filter = "") Then
+            lookupObj.FilterKey = filter
+        End If
+        Return lookupObj
+    End Function
 
     Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
         comboControl.DataSource = GetEnumData(Of TE)()

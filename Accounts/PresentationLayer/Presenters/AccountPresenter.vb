@@ -22,6 +22,14 @@ Namespace PresentationLayer.Presenters
             ParentFieldName = "ParentIdNo"
         End Sub
 
+        Public Overrides Sub CreateDataSources()
+            CreateControlDataSource("Account", "ParentIdNo")
+            CreateControlEnumDataSource(Of AccountGroupSelection)("AccountGroup")
+            CreateControlEnumDataSource(Of PayeeTypeSelection)("PayeeType")
+            CreateControlEnumDataSource(Of DebitCreditSelection)("NormalBalance")
+            CreateControlEnumDataSource(Of SpecialAccountSelection)("SpecialAccount")
+        End Sub
+
         Public Function EditableAccountGroup(ByVal idNo As Int32?, ByVal parentIdNo As Int32?) As Boolean
             If AccountHasChildren(idNo) Then
                 Return False
