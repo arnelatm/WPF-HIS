@@ -38,6 +38,10 @@ Namespace PresentationLayer.Presenters
             DataFilter = "PayrollIdNo = " & _payrollIdNo.ToString()
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("Leave", "LeaveIdNo")
+        End Sub
+
         Protected Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             SetPayroll()
         End Sub

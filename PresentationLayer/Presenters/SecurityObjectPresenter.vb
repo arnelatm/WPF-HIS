@@ -15,6 +15,11 @@ Public Class SecurityObjectPresenter(Of TM As New)
         ParentFieldName = "ParentIdNo"
     End Sub
 
+    Protected Overrides Sub CreateDataSources()
+        CreateDataSource("SystemView", "SystemViewIdNo")
+        CreateDataSource("SecurityObject", "ParentIdNo")
+    End Sub
+
     Protected Overrides Function IsBizDataValid() As Boolean
         Dim retValue = False
         If MyBase.IsBizDataValid() Then

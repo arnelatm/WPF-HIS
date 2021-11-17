@@ -131,11 +131,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("SecurityGroup", SecurityGroupView.cacParentIdNo)
-            SecurityGroupView.cacParentIdNo.Refresh()
-        End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             With SecurityGroupView
                 MainFieldsDictionary = New Dictionary(Of String, Object) From

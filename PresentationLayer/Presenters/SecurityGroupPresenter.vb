@@ -44,6 +44,12 @@ Public Class SecurityGroupPresenter(Of TM As New)
 
     End Sub
 
+    Protected Overrides Sub CreateDataSources()
+        CreateDataSource("SecurityGroup", "ParentIdNo")
+        Dim control = GetControlName("ParentIdNo")
+        control.Refresh()
+    End Sub
+
     Private Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
         Dim gaModel = Service.GetRecordsWithGroupIdNo(Of GroupAccessModel)(0, "SecurityObjectName")
         Dim gaView = New List(Of GroupAccessView)

@@ -235,11 +235,11 @@ Namespace DataLayer.AdoNet
 
         Public Function ToSqlImage(ByVal imageIn As System.Drawing.Image) As Byte()
             Dim data As Byte() = {}
-            'Dim saveImage As New Bitmap(imageIn)
-            'saveImage.Save("C:\temp\Picture.jpg", Imaging.ImageFormat.Jpeg)
-            'saveImage.Dispose()
+            Dim saveImage As New Bitmap(imageIn)
+            saveImage.Save("C:\temp\Picture.jpg", Imaging.ImageFormat.Jpeg)
+            saveImage.Dispose()
             Dim cPictureBox As New PictureBox
-            cPictureBox.Image = imageIn 'Image.FromFile("c:\temp\Picture.jpg")
+            cPictureBox.Image = Image.FromFile("c:\temp\Picture.jpg")
             Using ms = New MemoryStream()
                 If imageIn IsNot Nothing Then
                     cPictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)

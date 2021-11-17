@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -48,7 +49,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeePhones As List(Of EmployeePhoneView)
         Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView)
         Property Picture As Image
-
+        Property PhoneTypes As List(Of Lookup.LookupData)
+        Property Leaves As List(Of Lookup.LookupData)
+        Property DeductionsByName As List(Of Lookup.LookupData)
+        Property EarningsByName As List(Of Lookup.LookupData)
+        Property Unit As List(Of Lookup.LookupData)
     End Interface
 
 End Namespace

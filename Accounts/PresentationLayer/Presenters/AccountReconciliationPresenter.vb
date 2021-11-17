@@ -7,6 +7,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -18,7 +19,6 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private _progressDisplayForm As CBaseControlsLibrary.DisplayProgressForm
-        'Private _backgroundWorker As BackgroundWorker
 
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)
@@ -53,27 +53,19 @@ Namespace PresentationLayer.Presenters
             'AddHandler _backgroundworker.RunWorkerCompleted, AddressOf BackgroundWorker_RunWorkerCompleted
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Bank),
+                                                           EnumToCode(SpecialAccountSelection.CheckingAccount),
+                                                           EnumToCode(SpecialAccountSelection.Cash),
+                                                           EnumToCode(SpecialAccountSelection.PettyCashAccount)
+                                                          })
+        End Sub
+
         Public Property MessageBox As Object
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.AccountReconciliationItems.Clear()
         End Sub
-
-        'Public Sub OnBeforeEditd() Handles MyBase.NewRecordInitialized
-        '    View.AccountReconciliationItems.Clear()
-        'End Sub
-
-        'Public Sub OnReconciliationItemCheckedChangeEvent(sender, pView)
-        '    Dim x = sender
-        '    Dim y = pView
-        'End Sub
-
-        'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
-        '    If Posted Then
-        '        Messaging.Show(True, "MsgReconciliationAlreadyPosted", $"This Reconciliation entry has already been posted. Edits not allowed!", "Posted Reconciliation")
-        '        Presenter.CancelEdit = True
-        '    End If
-        'End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim parentIdNo As Integer

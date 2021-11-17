@@ -16,11 +16,6 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("RevCostCenter", cacParentIdNo)
-            CreateEnumDataSource(Of RevCostTypeSelection)(cacRcType)
-        End Sub
-
 #Region "Fields"
 
         Public Property IdNo As Int16 Implements IRevCostCenterView.IdNo

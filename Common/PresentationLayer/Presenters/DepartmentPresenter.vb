@@ -20,6 +20,11 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "SortKey"
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("Department", "ParentIdNo")
+            CreateDataSource("RevCostCenter", "RevCostCenterIdNo")
+        End Sub
+
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
             Return Service.GetRecordFieldWithKey(idNoToSearch, "Department", "ParentIdNo", "DepartmentName")
         End Function

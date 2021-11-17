@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -94,6 +95,28 @@ Namespace PresentationLayer.Presenters
                                             {"PaidPercent", GetType(Decimal)},
                                             {"Sequence", GetType(Int16)}})
 
+        End Sub
+
+        Protected Overrides Sub CreateDataSources()
+            CreateEnumDataSource(Of MaleFemaleSelection)("Gender")
+            CreateEnumDataSource(Of MaritalStatusSelection)("MaritalStatus")
+            CreateEnumDataSource(Of PayrollPaymentMethodSelection)("PaymentMethod")
+            CreateEnumDataSource(Of SponsorTypeSelection)("SponsorType")
+            CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
+            CreateDataSource("Bank", "BankIdNo")
+            CreateDataSource("Country", "CountryCode")
+            CreateDataSource("Department", "DepartmentIdNo")
+            CreateDataSource("Designation", "DesignationIdNo")
+            CreateDataSource("Country", "NationalityCode")
+            CreateDataSource("Religion", "ReligionIdNo")
+            CreateDataSource("PayCycle", "PayCycleIdNo")
+            CreateDataSource("PayGroup", "PayGroupIdNo")
+            CreateDataSource("Employee", "SupervisorIdNo", "Supervisor=1")
+            CreateEnumData(Of PayRateUnitSelection)(View.Unit)
+            CreateLookupData("PhoneType", "PhoneTypes")
+            CreateLookupData("Leave", "Leaves")
+            CreateLookupData("PayElement", "DeductionsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            CreateLookupData("PayElement", "EarningsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
         End Sub
 
         Public Function GetEmployeeBalance(idNo As Integer)

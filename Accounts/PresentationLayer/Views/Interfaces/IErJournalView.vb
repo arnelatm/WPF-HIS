@@ -20,6 +20,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property TransactionDate As Date?
         Property TransactionType As String
         Property JournalItems As List(Of JournalItemView)
+        Property RevCostCentersByCode
+        Property AccountsByCode
 
     End Interface
 

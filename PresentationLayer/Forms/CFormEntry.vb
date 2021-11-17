@@ -190,9 +190,9 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Protected Overridable Sub CreateDataSources()
-        '
-    End Sub
+    'Protected Overridable Sub CreateDataSources()
+    '    '
+    'End Sub
 
     Protected Overridable Sub CreateMainFieldsDictionary()
         '

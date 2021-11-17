@@ -15,11 +15,6 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Department", cacParentIdNo)
-            CreateDataSource("RevCostCenter", cacRevCostCenterIdNo)
-        End Sub
-
 #Region "Fields"
 
         Public Property IdNo As Int16 Implements IDepartmentView.IdNo

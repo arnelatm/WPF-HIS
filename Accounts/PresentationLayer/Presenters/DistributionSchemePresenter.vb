@@ -31,6 +31,10 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateLookupData("RevCostCenter", "RevCostCenterByCode")
+        End Sub
+
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
             If DtInsertTable IsNot Nothing Then
                 DtInsertTable.Clear()

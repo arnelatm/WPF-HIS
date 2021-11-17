@@ -30,6 +30,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property VatNumber As String
         Property JournalItems As List(Of JournalItemView)
         Property CsrOiItems As List(Of CsrOiItemView)
+        Property AccountsByCode As Object
+        Property RevCostCentersByCode As Object
+        Property EmployeesByName As Object
+        Property CustomersByName As Object
+        Property SuppliersByName As Object
     End Interface
 
 End Namespace

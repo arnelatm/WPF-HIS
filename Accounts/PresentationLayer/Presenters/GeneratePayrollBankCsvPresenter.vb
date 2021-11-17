@@ -25,6 +25,11 @@ Namespace PresentationLayer.Presenters
             AddHandler view.SelectedPayrollChanged, AddressOf OnSelectedPayrollChanged
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("Payroll", "IdNo", "StartDate", Nothing)
+            CreateDataSource("PayCycle", "PayCycleIdNo")
+        End Sub
+
         Public Sub OnGenerateCsvFile(idNo As Int32)
             Dim fileName = "Payroll for " + Year(View.EndDate).ToString() + Month(View.EndDate).ToString().Trim() + ".csv"
             Dim csvFilePath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\" & fileName 'Path to create or existing file

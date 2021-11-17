@@ -134,6 +134,10 @@
         Me.cacDesignationIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblSponsorType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboSponsorType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkSupervisor = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.tbpPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
@@ -199,10 +203,6 @@
         Me.dgvEmployeeIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
-        Me.lblSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboSupervisorIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkSupervisor = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -560,7 +560,7 @@
         Me.imgPicture.EditingMode = false
         Me.floPersonal.SetFlowBreak(Me.imgPicture, true)
         Me.imgPicture.Location = New System.Drawing.Point(179, 3)
-        Me.imgPicture.MaxImageSize = 300000
+        Me.imgPicture.MaxImageSize = 240000
         Me.imgPicture.Name = "imgPicture"
         Me.imgPicture.Size = New System.Drawing.Size(99, 84)
         Me.imgPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -1933,6 +1933,114 @@
         Me.cboSponsorType.ValueIsNumeric = false
         Me.cboSponsorType.ValueMember = "Code"
         '
+        'lblSupervisorIdNo
+        '
+        Me.lblSupervisorIdNo.DisplayOnly = true
+        Me.lblSupervisorIdNo.EditingMode = false
+        Me.lblSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblSupervisorIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSupervisorIdNo.Location = New System.Drawing.Point(4, 134)
+        Me.lblSupervisorIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblSupervisorIdNo.Name = "lblSupervisorIdNo"
+        Me.lblSupervisorIdNo.Size = New System.Drawing.Size(175, 24)
+        Me.lblSupervisorIdNo.TabIndex = 294
+        Me.lblSupervisorIdNo.Text = "Immediate Supervisor"
+        Me.lblSupervisorIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblSupervisorIdNo.Translatable = true
+        '
+        'cboSupervisorIdNo
+        '
+        Me.cboSupervisorIdNo.BackColor = System.Drawing.Color.White
+        Me.cboSupervisorIdNo.BegFindValue = Nothing
+        Me.cboSupervisorIdNo.ChangingSearchValueOnly = false
+        Me.cboSupervisorIdNo.CurrentSearchTerm = ""
+        Me.cboSupervisorIdNo.DefaultValue = Nothing
+        Me.cboSupervisorIdNo.DisplayMember = "Name"
+        Me.cboSupervisorIdNo.EditingMode = false
+        Me.cboSupervisorIdNo.EndFindValue = Nothing
+        Me.cboSupervisorIdNo.FieldDescription = Nothing
+        Me.cboSupervisorIdNo.FieldName = Nothing
+        Me.cboSupervisorIdNo.FilterRule = Nothing
+        Me.cboSupervisorIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboSupervisorIdNo.FindEnabled = false
+        Me.floEmployment.SetFlowBreak(Me.cboSupervisorIdNo, true)
+        Me.cboSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboSupervisorIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboSupervisorIdNo.FormattingEnabled = true
+        Me.cboSupervisorIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboSupervisorIdNo.IgnoreCase = false
+        Me.cboSupervisorIdNo.IntegralHeight = false
+        Me.cboSupervisorIdNo.LinkedLabel = Nothing
+        Me.cboSupervisorIdNo.Location = New System.Drawing.Point(180, 134)
+        Me.cboSupervisorIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+        Me.cboSupervisorIdNo.Name = "cboSupervisorIdNo"
+        Me.cboSupervisorIdNo.OldValue = 0
+        Me.cboSupervisorIdNo.OriginalDataSource = Nothing
+        Me.cboSupervisorIdNo.OriginalList = Nothing
+        Me.cboSupervisorIdNo.OverrideDropDownStyleList = false
+        Me.cboSupervisorIdNo.PreviousSearchTerm = Nothing
+        Me.cboSupervisorIdNo.PropertySelector = Nothing
+        Me.cboSupervisorIdNo.ReadOnlyCombo = false
+        Me.cboSupervisorIdNo.Size = New System.Drawing.Size(278, 24)
+        Me.cboSupervisorIdNo.SuggestBoxHeight = 200
+        Me.cboSupervisorIdNo.SuggestListOrderRule = Nothing
+        Me.cboSupervisorIdNo.TabIndex = 5
+        Me.cboSupervisorIdNo.TextToSearch = Nothing
+        Me.cboSupervisorIdNo.Translatable = false
+        Me.cboSupervisorIdNo.ValueIsMandatory = false
+        Me.cboSupervisorIdNo.ValueIsNullable = false
+        Me.cboSupervisorIdNo.ValueIsNumeric = false
+        Me.cboSupervisorIdNo.ValueMember = "IdNo"
+        '
+        'CLabel5
+        '
+        Me.CLabel5.DisplayOnly = true
+        Me.CLabel5.EditingMode = false
+        Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.CLabel5.Location = New System.Drawing.Point(4, 160)
+        Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel5.Name = "CLabel5"
+        Me.CLabel5.Size = New System.Drawing.Size(175, 24)
+        Me.CLabel5.TabIndex = 296
+        Me.CLabel5.Text = "Supervisor?"
+        Me.CLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel5.Translatable = true
+        '
+        'chkSupervisor
+        '
+        Me.chkSupervisor.Appearance = System.Windows.Forms.Appearance.Button
+        Me.chkSupervisor.AutoCheck = false
+        Me.chkSupervisor.BackColor = System.Drawing.Color.White
+        Me.chkSupervisor.BegFindValue = Nothing
+        Me.chkSupervisor.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkSupervisor.DisplayOnly = false
+        Me.chkSupervisor.EditingMode = false
+        Me.chkSupervisor.EndFindValue = Nothing
+        Me.chkSupervisor.FieldDescription = Nothing
+        Me.chkSupervisor.FieldName = Nothing
+        Me.chkSupervisor.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkSupervisor.FindEnabled = true
+        Me.chkSupervisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.floEmployment.SetFlowBreak(Me.chkSupervisor, true)
+        Me.chkSupervisor.Font = New System.Drawing.Font("Segoe UI", 9!)
+        Me.chkSupervisor.ForeColor = System.Drawing.Color.Black
+        Me.chkSupervisor.IFindableControl_FindEnabled = false
+        Me.chkSupervisor.IgnoreCase = false
+        Me.chkSupervisor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.chkSupervisor.LinkedLabel = Me.CLabel5
+        Me.chkSupervisor.Location = New System.Drawing.Point(181, 160)
+        Me.chkSupervisor.Margin = New System.Windows.Forms.Padding(1)
+        Me.chkSupervisor.Name = "chkSupervisor"
+        Me.chkSupervisor.NoLabel = false
+        Me.chkSupervisor.OldValue = ""
+        Me.chkSupervisor.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkSupervisor.Size = New System.Drawing.Size(13, 13)
+        Me.chkSupervisor.TabIndex = 6
+        Me.chkSupervisor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkSupervisor.Translatable = false
+        Me.chkSupervisor.UseVisualStyleBackColor = false
+        '
         'lblActive
         '
         Me.lblActive.DisplayOnly = true
@@ -3229,114 +3337,6 @@
         'bsLeaveCredits
         '
         Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
-        '
-        'lblSupervisorIdNo
-        '
-        Me.lblSupervisorIdNo.DisplayOnly = true
-        Me.lblSupervisorIdNo.EditingMode = false
-        Me.lblSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblSupervisorIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSupervisorIdNo.Location = New System.Drawing.Point(4, 134)
-        Me.lblSupervisorIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblSupervisorIdNo.Name = "lblSupervisorIdNo"
-        Me.lblSupervisorIdNo.Size = New System.Drawing.Size(175, 24)
-        Me.lblSupervisorIdNo.TabIndex = 294
-        Me.lblSupervisorIdNo.Text = "Immediate Supervisor"
-        Me.lblSupervisorIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblSupervisorIdNo.Translatable = true
-        '
-        'cboSupervisorIdNo
-        '
-        Me.cboSupervisorIdNo.BackColor = System.Drawing.Color.White
-        Me.cboSupervisorIdNo.BegFindValue = Nothing
-        Me.cboSupervisorIdNo.ChangingSearchValueOnly = false
-        Me.cboSupervisorIdNo.CurrentSearchTerm = ""
-        Me.cboSupervisorIdNo.DefaultValue = Nothing
-        Me.cboSupervisorIdNo.DisplayMember = "Name"
-        Me.cboSupervisorIdNo.EditingMode = false
-        Me.cboSupervisorIdNo.EndFindValue = Nothing
-        Me.cboSupervisorIdNo.FieldDescription = Nothing
-        Me.cboSupervisorIdNo.FieldName = Nothing
-        Me.cboSupervisorIdNo.FilterRule = Nothing
-        Me.cboSupervisorIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboSupervisorIdNo.FindEnabled = false
-        Me.floEmployment.SetFlowBreak(Me.cboSupervisorIdNo, true)
-        Me.cboSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboSupervisorIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboSupervisorIdNo.FormattingEnabled = true
-        Me.cboSupervisorIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboSupervisorIdNo.IgnoreCase = false
-        Me.cboSupervisorIdNo.IntegralHeight = false
-        Me.cboSupervisorIdNo.LinkedLabel = Nothing
-        Me.cboSupervisorIdNo.Location = New System.Drawing.Point(180, 134)
-        Me.cboSupervisorIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-        Me.cboSupervisorIdNo.Name = "cboSupervisorIdNo"
-        Me.cboSupervisorIdNo.OldValue = 0
-        Me.cboSupervisorIdNo.OriginalDataSource = Nothing
-        Me.cboSupervisorIdNo.OriginalList = Nothing
-        Me.cboSupervisorIdNo.OverrideDropDownStyleList = false
-        Me.cboSupervisorIdNo.PreviousSearchTerm = Nothing
-        Me.cboSupervisorIdNo.PropertySelector = Nothing
-        Me.cboSupervisorIdNo.ReadOnlyCombo = false
-        Me.cboSupervisorIdNo.Size = New System.Drawing.Size(278, 24)
-        Me.cboSupervisorIdNo.SuggestBoxHeight = 200
-        Me.cboSupervisorIdNo.SuggestListOrderRule = Nothing
-        Me.cboSupervisorIdNo.TabIndex = 5
-        Me.cboSupervisorIdNo.TextToSearch = Nothing
-        Me.cboSupervisorIdNo.Translatable = false
-        Me.cboSupervisorIdNo.ValueIsMandatory = false
-        Me.cboSupervisorIdNo.ValueIsNullable = false
-        Me.cboSupervisorIdNo.ValueIsNumeric = false
-        Me.cboSupervisorIdNo.ValueMember = "IdNo"
-        '
-        'CLabel5
-        '
-        Me.CLabel5.DisplayOnly = true
-        Me.CLabel5.EditingMode = false
-        Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.CLabel5.Location = New System.Drawing.Point(4, 160)
-        Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel5.Name = "CLabel5"
-        Me.CLabel5.Size = New System.Drawing.Size(175, 24)
-        Me.CLabel5.TabIndex = 296
-        Me.CLabel5.Text = "Supervisor?"
-        Me.CLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel5.Translatable = true
-        '
-        'chkSupervisor
-        '
-        Me.chkSupervisor.Appearance = System.Windows.Forms.Appearance.Button
-        Me.chkSupervisor.AutoCheck = false
-        Me.chkSupervisor.BackColor = System.Drawing.Color.White
-        Me.chkSupervisor.BegFindValue = Nothing
-        Me.chkSupervisor.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkSupervisor.DisplayOnly = false
-        Me.chkSupervisor.EditingMode = false
-        Me.chkSupervisor.EndFindValue = Nothing
-        Me.chkSupervisor.FieldDescription = Nothing
-        Me.chkSupervisor.FieldName = Nothing
-        Me.chkSupervisor.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.chkSupervisor.FindEnabled = true
-        Me.chkSupervisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.floEmployment.SetFlowBreak(Me.chkSupervisor, true)
-        Me.chkSupervisor.Font = New System.Drawing.Font("Segoe UI", 9!)
-        Me.chkSupervisor.ForeColor = System.Drawing.Color.Black
-        Me.chkSupervisor.IFindableControl_FindEnabled = false
-        Me.chkSupervisor.IgnoreCase = false
-        Me.chkSupervisor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSupervisor.LinkedLabel = Me.CLabel5
-        Me.chkSupervisor.Location = New System.Drawing.Point(181, 160)
-        Me.chkSupervisor.Margin = New System.Windows.Forms.Padding(1)
-        Me.chkSupervisor.Name = "chkSupervisor"
-        Me.chkSupervisor.NoLabel = false
-        Me.chkSupervisor.OldValue = ""
-        Me.chkSupervisor.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkSupervisor.Size = New System.Drawing.Size(13, 13)
-        Me.chkSupervisor.TabIndex = 6
-        Me.chkSupervisor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkSupervisor.Translatable = false
-        Me.chkSupervisor.UseVisualStyleBackColor = false
         '
         'EmployeeEntryTv
         '

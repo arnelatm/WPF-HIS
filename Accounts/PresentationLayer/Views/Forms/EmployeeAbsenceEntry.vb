@@ -10,7 +10,6 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo
         'Private _payrollIdNo As Int32
 
-
         Public Sub New()
 
             ' This call is required by the designer.
@@ -176,11 +175,6 @@ Namespace PresentationLayer.Views.Forms
                 {"PayrollIdNo", txtPayrollIdNo},
                 {"UserName", txtUserName}
                 }
-        End Sub
-
-        Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of AbsenceTypeSelection)(cboAbsenceType)
-            CreateDataSource("Employee", cboEmployeeIdNo)
         End Sub
 
         'Private Sub EmployeeAbsenceEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load

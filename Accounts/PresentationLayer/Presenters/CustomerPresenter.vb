@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class CustomerPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of ICustomerView, TM)
+        Inherits AccountsPresenterNew(Of ICustomerView, TM)
 
         Public ParentViewList As List(Of TM)
 
@@ -19,6 +19,16 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "CustomerName"
             'OriginalModel = New CustomerModel()
             'DataModel = New CustomerModel
+        End Sub
+
+        Protected Overrides Sub CreateDataSources()
+            CreateEnumDataSource(Of PaymentMethodSelection)("PaymentMethod")
+            CreateEnumDataSource(Of AccountStatusSelection)("AccountStatus")
+            CreateDataSource("Country", "CountryCode")
+            CreateDataSource("Bank", "BankIdNo")
+            CreateDataSource("DiscountScheme", "DiscountSchemeIdNo")
+            CreateSpecialAccountDataSource("ArAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivable)})
+            CreateDataSource("Account", "RevAccountIdNo", "DetailAccount=1")
         End Sub
 
         Private Sub OnSuccessfulUpdate(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully

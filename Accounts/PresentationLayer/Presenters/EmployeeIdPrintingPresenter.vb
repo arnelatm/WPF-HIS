@@ -27,7 +27,7 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Overrides Sub CreateDataSources()
+        Protected Overrides Sub CreateDataSources()
             Dim employeeIdListModel As List(Of EmployeeIdModel) = Service.GetEmployeeIdList()
             GlobalVariables.Mapper.Map(employeeIdListModel, View.EmployeeIdList)
         End Sub

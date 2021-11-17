@@ -94,6 +94,28 @@ Namespace PresentationLayer.Presenters
             AddHandler view.SetSupplierVatNumber, AddressOf SetSupplierVatNumber
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateLookupData("Account", "AccountsByCode")
+            CreateLookupData("RevCostCenter", "RevCostCentersByCode")
+            CreateLookupData("Employee", "EmployeesByName")
+            CreateLookupData("Customer", "CustomersByName")
+            CreateLookupData("Supplier", "SuppliersByName")
+            CreateEnumDataSource(Of PaymentTypeSelection)("PaymentType")
+            CreateEnumDataSource(Of PayTypeSelection)("PayType")
+            If TableName = "CdJournal" Then
+                If View.BankTransfer Then
+                    CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.CheckingAccount)})
+                Else
+                    CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.CheckingAccount)})
+                End If
+            ElseIf TableName = "PcJournal" Then
+                CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.PettyCashAccount)})
+            Else
+                CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.CheckingAccount)})
+            End If
+            CreateSpecialAccountDataSource("DiscountAccountIdNo", {EnumToCode(SpecialAccountSelection.PurchaseDiscount)})
+        End Sub
+
         Private Function GetAdvancesToSupplierAccountIdNo()
             Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
         End Function
@@ -172,7 +194,6 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-
         Public Overrides Function IsOkToEditRecord() As Boolean
             Dim result As Boolean = True
             Dim type As Type = View.GetType
@@ -184,18 +205,15 @@ Namespace PresentationLayer.Presenters
                 Dim reconciledDao = New ReconciledDao
                 For Each item In View.JournalItems
                     'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
-                    if reconciledDao.IsItemReconciled(JournalCode, item.IdNo) THEN
+                    If reconciledDao.IsItemReconciled(JournalCode, item.IdNo) Then
                         Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
-                        result = false
-                        exit For
+                        result = False
+                        Exit For
                     End If
-                Next               
+                Next
             End If
             Return result
         End Function
-
-
-
 
         'Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
         '    Dim type As Type = View.GetType
@@ -210,7 +228,7 @@ Namespace PresentationLayer.Presenters
         '            if reconciledDao.IsItemReconciled(JournalCode, item.IdNo) THEN
         '                cancelEdit = True
         '                exit For
-        '            End If                    
+        '            End If
         '        Next
         '        If cancelEdit Then
         '            Messaging.Show(True, "MsgEditingOfReconciledItemsNotAllowed")
